@@ -1,0 +1,89 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/outfit';
+
+/* Memphis palette for the landing site: cream base, five brights, charcoal ink. */
+@theme {
+  --color-cream: #fff6e5;
+  --color-paper: #fffdf8;
+  --color-ink: #1f1d2b;
+  --color-ink-soft: #4a4658;
+  --color-coral: #ff6b5b;
+  --color-mustard: #ffc23c;
+  --color-teal: #1fb5a6;
+  --color-blue: #3d6cf2;
+  --color-pink: #ff8fc7;
+  /* Error text: coral is too light for small text on cream. */
+  --color-danger: #b42318;
+
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-sticker: 6px 6px 0 0 var(--color-ink);
+  --shadow-sticker-sm: 3px 3px 0 0 var(--color-ink);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(var(--color-ink) 1.6px, transparent 1.6px);
+  background-size: 18px 18px;
+}
+
+/* Sprite strips: frames side by side, stepped through with jump-none so each frame shows once. */
+@keyframes sprite-play {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 100%;
+  }
+}
+.chibi-sprite {
+  animation: sprite-play var(--sprite-duration) steps(var(--sprite-frames), jump-none) infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.45);
+    opacity: 0.55;
+  }
+}
+.breathe {
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .chibi-sprite,
+  .breathe {
+    animation: none;
+  }
+}

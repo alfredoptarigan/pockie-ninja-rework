@@ -43,6 +43,7 @@ export const publicUserSchema = z.object({
 
 export type RegisterInput = z.input<typeof registerSchema>
 export type LoginInput = z.input<typeof loginSchema>
+export type LoginValues = z.output<typeof loginSchema>
 export type UserRole = z.infer<typeof userRoleSchema>
 export type PublicUser = z.infer<typeof publicUserSchema>
 
