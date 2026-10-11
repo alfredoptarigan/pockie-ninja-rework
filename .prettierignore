@@ -7,3 +7,4 @@ server/drizzle
 client/public/assets
 .claude
 tools/i18n/*.json
+server/data/game
