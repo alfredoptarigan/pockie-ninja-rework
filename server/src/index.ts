@@ -12,7 +12,7 @@ for (const signal of ['SIGINT', 'SIGTERM'] as const) {
   process.once(signal, () => void app.close())
 }
 
-app.listen({ port: env.PORT, host: env.HOST }).catch((error: unknown) => {
+app.listen({ port: env.API_PORT, host: env.HOST }).catch((error: unknown) => {
   console.error(error)
   process.exit(1)
 })
