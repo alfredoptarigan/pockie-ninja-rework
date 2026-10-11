@@ -22,7 +22,7 @@ lore, FAQ, server status) with account registration, login, an account panel and
     `app/code/props/serv/game/Resource/`, decoded client tables in `apache/source/binary/`.
   - `~/Privates/game-pockieninja/local-run/README.md` runs the original game locally.
   - `~/Privates/game-pockieninja/docs/reborn-comparison.md` compares the original with Pockie Ninja Reborn.
-- Do **not** copy assets or code from pockieninjareborn.com. Original 2011 game assets may be used.
+- Original 2011 game assets may be used.
 - Only exported/optimized assets go in this repo (PNG/WebP + JSON); raw SWFs stay in the backup
   repo. Keep the export script in `tools/` so exports are reproducible.
 
@@ -156,4 +156,3 @@ pnpm e2e
 - [ ] All tasks complete, every change committed and pushed
 - [ ] Validation commands pass
 - [ ] All user-facing text in English
-- [ ] No assets or code from pockieninjareborn.com
