@@ -3,7 +3,7 @@
 **Project**: Pockie Ninja Remastered (`~/Privates/pockie-ninja-reborn`, remote `github.com/alfredoptarigan/pockie-ninja-rework`, private)
 **Selected Milestone**: 1 — public landing site with accounts
 **Complexity**: Medium
-**Status**: approved by the user on 2026-10-11 (after a grilling session)
+**Status**: approved by the user on 2026-10-11 (after a grilling session); implemented 2026-10-11
 
 ## Summary
 
@@ -153,6 +153,6 @@ pnpm e2e
 
 ## Acceptance
 
-- [ ] All tasks complete, every change committed and pushed
-- [ ] Validation commands pass
-- [ ] All user-facing text in English
+- [x] All tasks complete, every change committed and pushed
+- [x] Validation commands pass
+- [x] All user-facing text in English
