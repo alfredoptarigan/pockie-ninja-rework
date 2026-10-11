@@ -46,12 +46,12 @@ pnpm e2e                  # starts pnpm dev if it is not running
 
 ## Database scripts
 
-| Script | What it does |
-|---|---|
-| `pnpm db:generate` | Generate a migration from `server/src/db/schema.ts` |
-| `pnpm db:migrate` | Apply migrations |
-| `pnpm db:reset` | Drop everything and re-apply migrations (refused in production) |
-| `pnpm db:seed` | Replace site content with `server/scripts/seed-data.ts` |
+| Script             | What it does                                                    |
+| ------------------ | --------------------------------------------------------------- |
+| `pnpm db:generate` | Generate a migration from `server/src/db/schema.ts`             |
+| `pnpm db:migrate`  | Apply migrations                                                |
+| `pnpm db:reset`    | Drop everything and re-apply migrations (refused in production) |
+| `pnpm db:seed`     | Replace site content with `server/scripts/seed-data.ts`         |
 
 ## Assets
 
@@ -61,17 +61,17 @@ Set `GAME_BACKUP_DIR` if the backup lives elsewhere.
 
 ## API
 
-| Method | Path | Notes |
-|---|---|---|
-| GET | `/api/auth/csrf` | CSRF token; send it as `x-csrf-token` on every POST |
-| POST | `/api/auth/register` | `{ username, email, password }` |
-| POST | `/api/auth/login` | `{ login, password, rememberMe }`; `login` is username or email |
-| POST | `/api/auth/logout` | |
-| GET | `/api/auth/me` | Current user or 401 |
-| GET | `/api/posts?kind=&cursor=&limit=` | News, updates and events, newest first |
-| GET | `/api/lore` | Lore chapters in order |
-| GET | `/api/faq` | FAQ in order |
-| GET | `/api/status` | `{ online, playersActiveNow }` (sessions seen in the last 5 minutes) |
+| Method | Path                              | Notes                                                                |
+| ------ | --------------------------------- | -------------------------------------------------------------------- |
+| GET    | `/api/auth/csrf`                  | CSRF token; send it as `x-csrf-token` on every POST                  |
+| POST   | `/api/auth/register`              | `{ username, email, password }`                                      |
+| POST   | `/api/auth/login`                 | `{ login, password, rememberMe }`; `login` is username or email      |
+| POST   | `/api/auth/logout`                |                                                                      |
+| GET    | `/api/auth/me`                    | Current user or 401                                                  |
+| GET    | `/api/posts?kind=&cursor=&limit=` | News, updates and events, newest first                               |
+| GET    | `/api/lore`                       | Lore chapters in order                                               |
+| GET    | `/api/faq`                        | FAQ in order                                                         |
+| GET    | `/api/status`                     | `{ online, playersActiveNow }` (sessions seen in the last 5 minutes) |
 
 Errors always look like `{ "error": { "code", "message", "fields"? } }`.
 
