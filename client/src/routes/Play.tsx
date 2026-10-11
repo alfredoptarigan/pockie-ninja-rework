@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Navigate } from 'react-router'
 import { AccountPanel } from '../components/AccountPanel'
 import { ChibiSprite } from '../components/ChibiSprite'
@@ -9,6 +10,10 @@ import { useMe } from '../lib/auth'
 
 export function Play() {
   const me = useMe()
+  // Logging out from here clears the user before the router commits the move to "/"; a player
+  // who was signed in goes home instead of being bounced to the login page.
+  const [wasSignedIn, setWasSignedIn] = useState(false)
+  if (me.data && !wasSignedIn) setWasSignedIn(true)
 
   if (me.isPending) {
     return (
@@ -24,7 +29,13 @@ export function Play() {
       </div>
     )
   }
-  if (!me.data) return <Navigate to="/login" replace state={{ from: '/play' }} />
+  if (!me.data) {
+    return wasSignedIn ? (
+      <Navigate to="/" replace />
+    ) : (
+      <Navigate to="/login" replace state={{ from: '/play' }} />
+    )
+  }
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
