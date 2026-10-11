@@ -6,6 +6,8 @@ import type { Env } from './env.js'
 import { errorHandler } from './http.js'
 import { csrfPlugin } from './modules/auth/csrf.js'
 import { authRoutes, sessionPlugin } from './modules/auth/routes.js'
+import { contentRoutes } from './modules/content/routes.js'
+import { statusRoutes } from './modules/status/routes.js'
 
 interface AppOptions {
   env: Env
@@ -31,6 +33,8 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
 
   app.get('/api/health', async () => ({ ok: true }))
   app.register(authRoutes, { db, env, prefix: '/api/auth' })
+  app.register(contentRoutes, { db, prefix: '/api' })
+  app.register(statusRoutes, { db, prefix: '/api' })
 
   return app
 }
