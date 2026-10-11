@@ -8,6 +8,7 @@ const source = {
   lg_name_n11001: 'Ketua Desa Api dalam aula',
   lg_HP1_itemname: 'Healing Powder',
   lg_avatar45: 'Uzumaki Naruto ＋0',
+  lg_avatar145: 'Uzumaki Naruto ＋1',
   lg_name_avatar45: 'Uzumaki Naruto',
   lg_SkillName_101802: 'Sandki No Jutsu',
   lg_Task_10001: 'Latihan Ninjutsu',
@@ -59,7 +60,9 @@ describe('buildCandidates', () => {
   it('maps items by trimmed id and outfits through the 2900NN item id', () => {
     expect(byKey.lg_HP1_itemname).toMatchObject({ kind: 'item', id: 'i160006' })
     expect(byKey.lg_name_avatar45).toMatchObject({ kind: 'outfit', reborn: 'Naruto Uzumaki' })
-    expect(byKey.lg_avatar45).toBeUndefined()
+    expect(byKey.lg_avatar45).toMatchObject({ kind: 'outfit', reborn: 'Naruto Uzumaki' })
+    // Higher tiers are derived from the +0 name, not translated one by one.
+    expect(byKey.lg_avatar145).toBeUndefined()
   })
 
   it('covers skills, quests and titles, and keeps names without a suggestion', () => {
