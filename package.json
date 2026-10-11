@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "pnpm --parallel --filter @pockie/client --filter @pockie/server dev",
     "build": "pnpm -r build",
-    "typecheck": "pnpm -r typecheck && tsc -p tools && tsc -p e2e",
+    "typecheck": "pnpm -r typecheck && tsc -p e2e",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "test": "pnpm -r test",

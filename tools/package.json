@@ -1,0 +1,10 @@
+{
+  "name": "@pockie/tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  }
+}
