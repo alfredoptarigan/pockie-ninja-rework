@@ -7,3 +7,6 @@ dist/
 coverage/
 playwright-report/
 test-results/
+
+# Raw third-party reference data (local only; glossary extracts live in tools/i18n)
+data/reborn-raw/
