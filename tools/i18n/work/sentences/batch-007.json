@@ -1,0 +1,1582 @@
+{
+ "terms": {
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Sasuke": "Sasuke Uchiha",
+  "low level Inscription Talisman": "Low Level Inscription Talisman",
+  "Serangan": "Attack",
+  "Pilih": "Choose",
+  "Mengawal": "Escort",
+  "Menukar": "Trade",
+  "Pemurnian": "Purification",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Berlatih": "Training"
+ },
+ "units": [
+  {
+   "n": 3065,
+   "text": "<font color='#8e8e8e'>Kostum Hokage Kedua＋⟨0⟩</font>"
+  },
+  {
+   "n": 3066,
+   "text": "<font color='#ff8a00'>Kostum Orochimaru＋⟨0⟩</font>"
+  },
+  {
+   "n": 3067,
+   "text": "<font color='#00aeff'>Kostum Zangetsu＋⟨0⟩</font>"
+  },
+  {
+   "n": 3068,
+   "text": "<font color='#8e8e8e'>Kostum Hokage Ketiga＋⟨0⟩</font>"
+  },
+  {
+   "n": 3069,
+   "text": "<font color='#00aeff'>Kostum Hollow Grimmjow＋⟨0⟩</font>"
+  },
+  {
+   "n": 3070,
+   "text": "<font color='#ff8a00'>Kostum Aizen＋⟨0⟩</font>"
+  },
+  {
+   "n": 3071,
+   "text": "<font color='#ff8a00'>Kostum Hokage Keempat＋⟨0⟩</font>"
+  },
+  {
+   "n": 3072,
+   "text": "<font color='#8e8e8e'>Kostum Jiraiya＋⟨0⟩</font>"
+  },
+  {
+   "n": 3073,
+   "text": "<font color='#ff8a00'>Kostum Sakura Haruno＋⟨0⟩</font>"
+  },
+  {
+   "n": 3074,
+   "text": "<font color='#8e8e8e'>Kostum Arale＋⟨0⟩</font>"
+  },
+  {
+   "n": 3075,
+   "text": "<font color='#00aeff'>Kostum Yamanaka Ino＋⟨0⟩</font>"
+  },
+  {
+   "n": 3076,
+   "text": "<font color='#8e8e8e'>Kostum Mitarashi Anko＋⟨0⟩</font>"
+  },
+  {
+   "n": 3077,
+   "text": "<font color='#00aeff'>Kostum Temari＋⟨0⟩</font>"
+  },
+  {
+   "n": 3078,
+   "text": "<font color='#8e8e8e'>Kostum Tenten＋⟨0⟩</font>"
+  },
+  {
+   "n": 3079,
+   "text": "<font color='#00aeff'>Kostum Haku＋⟨0⟩</font>"
+  },
+  {
+   "n": 3080,
+   "text": "<font color='#8e8e8e'>Kostum Kurotsuchi Nemu＋⟨0⟩</font>"
+  },
+  {
+   "n": 3081,
+   "text": "<font color='#00aeff'>Kusajishi Yachiru Outfit＋⟨0⟩</font>"
+  },
+  {
+   "n": 3082,
+   "text": "<font color='#8e8e8e'>Kostum Kotetsu Isane＋⟨0⟩</font>"
+  },
+  {
+   "n": 3083,
+   "text": "<font color='#8e8e8e'>Kostum Konan＋⟨0⟩</font>"
+  },
+  {
+   "n": 3084,
+   "text": "<font color='#00aeff'>Kostum Yadomaru Sasha＋⟨0⟩</font>"
+  },
+  {
+   "n": 3085,
+   "text": "<font color='#8e8e8e'>Kostum Arisawa Tatsuki＋⟨0⟩</font>"
+  },
+  {
+   "n": 3086,
+   "text": "<font color='#8e8e8e'>Kostum Bomb Rukia＋⟨0⟩</font>"
+  },
+  {
+   "n": 3087,
+   "text": "<font color='#ff8a00'>Kostum Tsunade＋⟨0⟩</font>"
+  },
+  {
+   "n": 3088,
+   "text": "<font color='#ff8a00'>Kostum Kuchiki Rukia＋⟨0⟩</font>"
+  },
+  {
+   "n": 3089,
+   "text": "<font color='#00aeff'>Kostum Momochi Zabuza＋⟨0⟩</font>"
+  },
+  {
+   "n": 3090,
+   "text": "<font color='#ff8a00'>Kostum Kuchiki Byakuya＋⟨0⟩</font>"
+  },
+  {
+   "n": 3091,
+   "text": "<font color='#ff8a00'>Kostum Nelliel＋⟨0⟩</font>"
+  },
+  {
+   "n": 3092,
+   "text": "<font color='#ff8a00'>Kostum Little Meng＋⟨0⟩</font>"
+  },
+  {
+   "n": 3093,
+   "text": "<font color='#ff8a00'>Kostum Little Jun＋⟨0⟩</font>"
+  },
+  {
+   "n": 3094,
+   "text": "Tanaman : Diproduksi dari rumah. Segala macam kegiatan akan mengkonsumsi tanaman."
+  },
+  {
+   "n": 3095,
+   "text": "Berhasil mengaktifkan gudang, mengeluarkan {@1:value} {@0:type}."
+  },
+  {
+   "n": 3096,
+   "text": "Dana tidak mencukupi, mengaktifkan gudang membutuhkan biaya {@1:value} {@0:type}!"
+  },
+  {
+   "n": 3097,
+   "text": "Kamu mendepositkan gold telah melebihi kapasitas gudang."
+  },
+  {
+   "n": 3098,
+   "text": "Action gagal"
+  },
+  {
+   "n": 3099,
+   "text": "Tas tidak cukup, aturlah sebelum mengklaim hadiah!"
+  },
+  {
+   "n": 3100,
+   "text": "Tas penuh, aturlah sebelum melakukan tindakan lagi!"
+  },
+  {
+   "n": 3101,
+   "text": "Secara acak mendapatkan item berikut: <br>⟨0⟩-day VIP, HP/Chakra Carrier Bag, healing medicine, Arcanum, Fresh Beer, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3102,
+   "text": "Secara acak mendapatkan item berikut: <br>HP/Chakra Carrier Bag<br>healing medicine, Arcanum, Fresh Beer, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3103,
+   "text": "Secara acak mendapatkan item berikut: <br>healing medicine<br>food, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3104,
+   "text": "Secara acak mendapatkan item berikut: <br>Orange, blue equipment, enhancement and synthesis items, skill reset stone, pet food, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3105,
+   "text": "Secara acak mendapatkan item berikut: <br>blue equipment, enhancement and synthesis items, skill reset stone, pet food, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3106,
+   "text": "Secara acak mendapatkan item berikut: <br>blue equipment, enhancement and synthesis items, skill reset stone, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3107,
+   "text": "Secara random mendapatkan lv.⟨0⟩ gem,Proof of Demon Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3108,
+   "text": "Secara acak mendapatkan item berikut: <br>Lv.⟨0⟩ Enhancement Talisman, Lv.⟨1⟩ Refining Talisman, Lv.⟨2⟩ Enchantment Talisman<br>skill reset stone, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3109,
+   "text": "Secara acak mendapatkan item berikut: <br>Lv.⟨0⟩ Enhancement Talisman, Lv.⟨1⟩ Refining Talisman, Lv.⟨2⟩ Enchantment Talisman<br>skill reset stone, attribute related food, bonus EXP food, Demon Proof of Suppression, low level Inscription Talisman"
+  },
+  {
+   "n": 3110,
+   "text": "Secara Acak mendapatkan Kostum Biru atau Orange."
+  },
+  {
+   "n": 3111,
+   "text": "Mendapatkan ⟨0⟩-hari Kartu VIP"
+  },
+  {
+   "n": 3112,
+   "text": "Gunakan dua karakter yang sama +⟨0⟩ Kostum sebagai bahan untuk meningkatkan Kostum level.<br>Catalysts akan hilang jika sintesis gagal."
+  },
+  {
+   "n": 3113,
+   "text": "Gem Level ⟨0⟩ ＋ Gem Level ⟨1⟩ ＋ Gem Level ⟨2⟩ ＝ Gem Level ⟨3⟩.<br>Gem yang disintesiskan harus sejenis.<br>Gem yang disintesiskan harus sejenis."
+  },
+  {
+   "n": 3114,
+   "text": "Gem Level ⟨0⟩ ＋ Gem Level ⟨1⟩ ＋ Gem Level ⟨2⟩ ＝ Gem Level ⟨3⟩.<br>Gem yang disintesiskan harus sejenis.<br>Catalysts akan hilang jika sintesis gagal."
+  },
+  {
+   "n": 3115,
+   "text": "Anonymous Namecard + Anonymous Namecard + Anonymous Namecard = Anonymous Namecard Folder"
+  },
+  {
+   "n": 3116,
+   "text": "Lv.⟨0⟩ gem＋Lv.⟨1⟩ gem＋ Lv.⟨2⟩ gem＝Lv.⟨3⟩ gem.<br>Gem yang disintesiskan harus dengan jenis yang sama."
+  },
+  {
+   "n": 3117,
+   "text": "Hasil Cleromancy：<font color='#00aeff'>{@0:}</font>，total <font color='#00aeff'>{@1:}</font> point. <br>Belum beruntung. Silahkan coba lagi."
+  },
+  {
+   "n": 3118,
+   "text": "Hasil Cleromancy：<font color='#00aeff'>{@0:}</font>，total<font color='#00aeff'>{@1:}</font>points.<br>Selamat kamu beruntung dan mendapatkan <font color='#00aeff'>Low-level Blessing</font>!"
+  },
+  {
+   "n": 3119,
+   "text": "Hasil Cleromancy : <font color='#00aeff'>{@0:}</font>，total <font color='#00aeff'>{@1:}</font> point.<br>Selamat kamu sangat beruntung dan mendapatkan <font color='#00aeff'>Angelic Blessing</font>!"
+  },
+  {
+   "n": 3120,
+   "text": "Hasil Cleromancy : <font color='#00aeff'>{@0:}</font>，total <font color='#00aeff'>{@1:}</font> point.<br>Hari yang buruk. Maaf kamu mendapatkan <font color='#00aeff'>Low-level Curse</font>!"
+  },
+  {
+   "n": 3121,
+   "text": "Hasil Cleromancy : <font color='#00aeff'>{@0:}</font>，total <font color='#00aeff'>{@1:}</font> point.<br>Hari yang buruk. Maaf, kamu mendapatkan <font color='#00aeff'>Demonic Curse</font>!"
+  },
+  {
+   "n": 3122,
+   "text": "Constitution, Meningkatkan Armor Break ⟨0⟩<br>Dodge, Block, Meningkatkan Critical Strike ⟨1⟩<br>Hit, Pierce, Meningkatkan Defense ⟨2⟩"
+  },
+  {
+   "n": 3123,
+   "text": "Meningkatkan Critical Strike ⟨0⟩<br>Dodge, Meningkatkan Block ⟨1⟩<br>Constitution, Meningkatkan Armor Break ⟨2⟩<br>Hit, Pierce, Meningkatkan Defense ⟨3⟩"
+  },
+  {
+   "n": 3124,
+   "text": "Menurunkan Constitution, Armor Break  ⟨0⟩<br>Menurunkan Dodge, Block, Critical Strike ⟨1⟩<br>Menurunkan Hit, Pierce, Defense ⟨2⟩"
+  },
+  {
+   "n": 3125,
+   "text": "Menurunkan Critical Strike decrease ⟨0⟩<br>Menurunkan Dodge, Block ⟨1⟩<br>menurunkan Constitution, Armor Break ⟨2⟩<br>Menurunkan Hit, Pierce, Defense ⟨3⟩"
+  },
+  {
+   "n": 3126,
+   "text": "Low-level Blessing"
+  },
+  {
+   "n": 3127,
+   "text": "Angelic Blessing"
+  },
+  {
+   "n": 3128,
+   "text": "Low-level Curse"
+  },
+  {
+   "n": 3129,
+   "text": "Demonic Curse"
+  },
+  {
+   "n": 3130,
+   "text": "DodgeMulMulEquip%"
+  },
+  {
+   "n": 3131,
+   "text": "Dodge Enhance"
+  },
+  {
+   "n": 3132,
+   "text": "DodgeMulMulEquip%Ex"
+  },
+  {
+   "n": 3133,
+   "text": "Equipment"
+  },
+  {
+   "n": 3134,
+   "text": "Redeem Dragon Soul"
+  },
+  {
+   "n": 3135,
+   "text": "Character level harus lebih tinggi dari equipment!"
+  },
+  {
+   "n": 3136,
+   "text": "Tidak dapat melakukan redeem pada item ini!"
+  },
+  {
+   "n": 3137,
+   "text": "Equip ini cocok dengan level kamu atau bukan Dragon Soul equipment, tidak dapat di redeem."
+  },
+  {
+   "n": 3138,
+   "text": "Redeemed! Silahkan ambil Dragon Soul equipment!"
+  },
+  {
+   "n": 3139,
+   "text": "<font color='#ff0000'>Semua attributes tambahan akan di hapus setelah upgrade Dragon Soul!(Enhance, Inscription, Embed， Enchant, Engrave, dll )</font> Lanjutkan untuk redeem? Klik Batal untuk keluar."
+  },
+  {
+   "n": 3140,
+   "text": "DropMulEquip%"
+  },
+  {
+   "n": 3141,
+   "text": "Treasure Drop Rate"
+  },
+  {
+   "n": 3142,
+   "text": "DropMulEquip%Ex"
+  },
+  {
+   "n": 3143,
+   "text": "Skill Level"
+  },
+  {
+   "n": 3144,
+   "text": "Level Skill"
+  },
+  {
+   "n": 3145,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a></font> Telah berhasil menyelesaikan semua ujian, Mencapai<font color='#00aeff'>【{@1:}】</font>! Selamat!"
+  },
+  {
+   "n": 3146,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a></font> Telah menyelesaikan semua ujian, Mencapai<font color='#00aeff'>【{@1:}】</font>dan memperoleh gelar <font color='#00aeff'>{@2:}</font> ! Selamat!"
+  },
+  {
+   "n": 3147,
+   "text": "<font color='#6a6e70'><b>   Ruang penetasan   </b></font>"
+  },
+  {
+   "n": 3148,
+   "text": "Ruang penetasan"
+  },
+  {
+   "n": 3149,
+   "text": "The egg broke..."
+  },
+  {
+   "n": 3150,
+   "text": "Setelah menetas akan mendapatkan"
+  },
+  {
+   "n": 3151,
+   "text": "Sisa Waktu {@0: } Menit"
+  },
+  {
+   "n": 3152,
+   "text": "Kekurangan Tanaman. Kamu membutuhkan {@0: } tanaman untuk menetas! "
+  },
+  {
+   "n": 3153,
+   "text": "Waktu refresh selanjutnya: {@0: } menit kemudian"
+  },
+  {
+   "n": 3154,
+   "text": "Penetasan belum dimulai"
+  },
+  {
+   "n": 3155,
+   "text": "<font color='#789532'><a href='event:home|{@0:}'> <u>Menunggu panen. Ambil telur</u></a></font>"
+  },
+  {
+   "n": 3156,
+   "text": "<font color='#789532'><a href='event:home|{@0:}'><u>Menetas, pergi lindungi</u></a></font>"
+  },
+  {
+   "n": 3157,
+   "text": "<font color='#789532'><a href='event:home|{@0:}'><u>Mendapat pekerjaan, membuang telur busuk</u></a></font>"
+  },
+  {
+   "n": 3158,
+   "text": "Menunggu untuk panen"
+  },
+  {
+   "n": 3159,
+   "text": "Panen sekarang"
+  },
+  {
+   "n": 3160,
+   "text": "Telur Busuk"
+  },
+  {
+   "n": 3161,
+   "text": "Peti Telur Lv⟨0⟩"
+  },
+  {
+   "n": 3162,
+   "text": "Telur EXP Lv⟨0⟩"
+  },
+  {
+   "n": 3163,
+   "text": "Telur Medal Lv⟨0⟩"
+  },
+  {
+   "n": 3164,
+   "text": "Telur Batu Lv⟨0⟩"
+  },
+  {
+   "n": 3165,
+   "text": "Telur BatuLv⟨0⟩"
+  },
+  {
+   "n": 3166,
+   "text": "Nama Kostum"
+  },
+  {
+   "n": 3167,
+   "text": "Nama Pemain"
+  },
+  {
+   "n": 3168,
+   "text": "Gender"
+  },
+  {
+   "n": 3169,
+   "text": "Berhasil menanam {@0:}."
+  },
+  {
+   "n": 3170,
+   "text": "<font color='#ff0000'> {@0:} </font>di wilayah yang sama dengan kamu!"
+  },
+  {
+   "n": 3171,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> Sedang tidak online, tidak dapat Menambahkan musuh"
+  },
+  {
+   "n": 3172,
+   "text": "Mengukir atribut :"
+  },
+  {
+   "n": 3173,
+   "text": "Kamu memperoleh {@0:} !"
+  },
+  {
+   "n": 3174,
+   "text": "Catalyst"
+  },
+  {
+   "n": 3175,
+   "text": "⟨0⟩. Beberapa barang langka membutuhkan metode sintesis khusus. Terkadang kamu akan mendapatkan resep di dalam game.<br>⟨1⟩. Jika kamu tidak mengikuti metode penempatan Item, sintesis yang akan kamu dapatkan kemungkinan random<br>⟨2⟩. Pro dan kontra dari item yang didapat secara acak dari disintesis terkait dengan nilai rata-rata dari item yang disintesiskan."
+  },
+  {
+   "n": 3176,
+   "text": "Item Utama"
+  },
+  {
+   "n": 3177,
+   "text": "Resep sinthesis mungkin gagal, dan bagian dari peralatan kamu bisa hilang!<br>Sintesis membutuhkan Batu, konfirmasi sintesis?"
+  },
+  {
+   "n": 3178,
+   "text": "Tidak ada item pada panel sintesis, tidak dapat mengkombinasi!"
+  },
+  {
+   "n": 3179,
+   "text": "Hasil Sintesis"
+  },
+  {
+   "n": 3180,
+   "text": "Lihat Resep"
+  },
+  {
+   "n": 3181,
+   "text": "Instruksi Enhancement : <br>⟨0⟩. Mengeluarkan gold atau kupon berhadiah untuk enchance senjata dan armor.<br>⟨1⟩. Atribut (%) Attack dan max HP dari peralatan akan meningkat ketika sukses.<br>⟨2⟩. Level enhanced peralatan tidak akan berkurang jika gagal."
+  },
+  {
+   "n": 3182,
+   "text": "Penjelasan Pemurnian :<br>⟨0⟩. Tarik item dari tas kamu ke interface pemurnian untuk dilakukan pemurnian.<br>⟨1⟩. Tingkat peralatan tidak akan berubah setelah pemurnian, atribut tetap menjadi appraised.<br>⟨2⟩. Peralatan abu-abu tidak dapat dilakukan pemurnian."
+  },
+  {
+   "n": 3183,
+   "text": "Instruksi Penghapusan :<br>⟨0⟩. Tarik item dari tas ke interface penghapusan untuk mencopot gem.<br>⟨1⟩. Slot gem pada peralatan akan terhapus untuk sekali konfirmasi.<br>⟨2⟩. Peralatan yang tidak memiliki slot tidak dapat menggunakan fungsi."
+  },
+  {
+   "n": 3184,
+   "text": "Penjelasan Membuat Slot :<br>⟨0⟩. Tarik peralatan ke interface pembuatan slot untuk di buatkan slot.<br>⟨1⟩. Slot item akan terbuka setelah dilakukan pembuatan slot.<br>⟨2⟩. Jumlah slot tidak bisa melebihi dari slot yang ada didalam peralatan.<br>⟨3⟩. Item yang tidak memiliki slot tidak dapat di buatkan slot."
+  },
+  {
+   "n": 3185,
+   "text": "Pilihan Pembayaran"
+  },
+  {
+   "n": 3186,
+   "text": "Portable Function"
+  },
+  {
+   "n": 3187,
+   "text": "{@0:} Pembuatan slot sukses."
+  },
+  {
+   "n": 3188,
+   "text": "{@0:} Tempa sukses."
+  },
+  {
+   "n": 3189,
+   "text": "Equip unappraised pada ransel telah sukses diperiksa."
+  },
+  {
+   "n": 3190,
+   "text": "Newbie Belt"
+  },
+  {
+   "n": 3191,
+   "text": "Thundering Hammer"
+  },
+  {
+   "n": 3192,
+   "text": "Ettin Hammer"
+  },
+  {
+   "n": 3193,
+   "text": "Kage Hammer"
+  },
+  {
+   "n": 3194,
+   "text": "Child's Girdle"
+  },
+  {
+   "n": 3195,
+   "text": "Balanced Girdle"
+  },
+  {
+   "n": 3196,
+   "text": "Veiled Girdle"
+  },
+  {
+   "n": 3197,
+   "text": "Tengu Girdle"
+  },
+  {
+   "n": 3198,
+   "text": "Deity's Girdle"
+  },
+  {
+   "n": 3199,
+   "text": "Child's Gloves"
+  },
+  {
+   "n": 3200,
+   "text": "Balanced Gloves"
+  },
+  {
+   "n": 3201,
+   "text": "Veiled Gloves"
+  },
+  {
+   "n": 3202,
+   "text": "Tengu Gloves"
+  },
+  {
+   "n": 3203,
+   "text": "Deity's Gloves"
+  },
+  {
+   "n": 3204,
+   "text": "Enhancement gagal."
+  },
+  {
+   "n": 3205,
+   "text": "{@0:} sukses menempa ke level {@1:}."
+  },
+  {
+   "n": 3206,
+   "text": "Sukses menghilangkan slot gem dari {@0:} ."
+  },
+  {
+   "n": 3207,
+   "text": "{@0:} Sukses membuat slot {@1:}. "
+  },
+  {
+   "n": 3208,
+   "text": "Pembuatan slot seesai, bisa kembali atau terus membuat slot peralatan!"
+  },
+  {
+   "n": 3209,
+   "text": "Gold tidak mencukupi, tidak dapat membuat slot di <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3210,
+   "text": "<font color='#00aeff'> {@0:} </font>Semua slot telah terbuka, tidak dapat membuat slot lebih banyak."
+  },
+  {
+   "n": 3211,
+   "text": "Tempa gagal!"
+  },
+  {
+   "n": 3212,
+   "text": "Gold tidak mencukupi, tidak bisa menyempurnakan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3213,
+   "text": "Level tidak mencukupi, tidak dapat menggunakan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3214,
+   "text": "Gender yang tidak kompatibel, tidak dapat menggunakan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3215,
+   "text": "Agility tidak mencukupi, tidak dapat digunakan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3216,
+   "text": "Bukan Kelas yang sejenis, tidak dapat digunakan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3217,
+   "text": "Great Strength tidak mencukupi, tidak dapat menggunakan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3218,
+   "text": "<font color='#00aeff'> {@0:} </font> belum dinilai, hanya dapat melakukan ini setelah penilaian."
+  },
+  {
+   "n": 3219,
+   "text": "Refining selesai, dapat mengambil kembali peralatan atau menyempurnakan lagi!"
+  },
+  {
+   "n": 3220,
+   "text": "<font color='#00aeff'> {@0:} </font>Telah dinilai, tidak bisa dinilai lagi."
+  },
+  {
+   "n": 3221,
+   "text": "Batu tidak cukup, tidak dapat menilai <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3222,
+   "text": "Gold tidak mencukupi, tidak dapat memurnikan <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3223,
+   "text": "<font color='#00aeff'> {@0:} </font>Atribut tidak mempunyai nilai, tidak dapat menilai"
+  },
+  {
+   "n": 3224,
+   "text": "Appraisal peralatan berhasil!"
+  },
+  {
+   "n": 3225,
+   "text": "<font color='#00aeff'> {@0:} </font> bukan barang peralatan, tidak dapat dimasukkan ke panel peralatan."
+  },
+  {
+   "n": 3226,
+   "text": "<font color='#00aeff'> {@0:} </font> tidak memiliki slot."
+  },
+  {
+   "n": 3227,
+   "text": "Berhasil memperbaiki semua, menghabiskan <font color='#ffffff'> {@0:} </font> Batu!"
+  },
+  {
+   "n": 3228,
+   "text": "Berhasil memperbaiki, menghabiskan <font color='#ffffff'> {@0:} </font> Batu!"
+  },
+  {
+   "n": 3229,
+   "text": "Batu tidak cukup, tidak dapat memperbaiki semua."
+  },
+  {
+   "n": 3230,
+   "text": "Batu tidak cukup, tidak dapat memperbaiki <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 3231,
+   "text": "Iron Belt"
+  },
+  {
+   "n": 3232,
+   "text": "Oni Belt"
+  },
+  {
+   "n": 3233,
+   "text": "Flamecloud Belt"
+  },
+  {
+   "n": 3234,
+   "text": "Beastlord Belt"
+  },
+  {
+   "n": 3235,
+   "text": "Gilded Belt"
+  },
+  {
+   "n": 3236,
+   "text": "Ferocious Belt"
+  },
+  {
+   "n": 3237,
+   "text": "Iron Gloves"
+  },
+  {
+   "n": 3238,
+   "text": "Oni Gloves"
+  },
+  {
+   "n": 3239,
+   "text": "Flamecloud Gloves"
+  },
+  {
+   "n": 3240,
+   "text": "Beastlord Gloves"
+  },
+  {
+   "n": 3241,
+   "text": "Gilded Gloves"
+  },
+  {
+   "n": 3242,
+   "text": "Ferocious Gloves"
+  },
+  {
+   "n": 3243,
+   "text": "Tortoise Warboots"
+  },
+  {
+   "n": 3244,
+   "text": "Billowing Claw"
+  },
+  {
+   "n": 3245,
+   "text": "Kage Claw"
+  },
+  {
+   "n": 3246,
+   "text": "{@0:} Refine sukses."
+  },
+  {
+   "n": 3247,
+   "text": "Sukses Menilai {@0:}."
+  },
+  {
+   "n": 3248,
+   "text": "Newbie Gloves"
+  },
+  {
+   "n": 3249,
+   "text": "Cosmic Belt"
+  },
+  {
+   "n": 3250,
+   "text": "Light Leather Belt"
+  },
+  {
+   "n": 3251,
+   "text": "Catspring Belt"
+  },
+  {
+   "n": 3252,
+   "text": "Quicksilver Belt"
+  },
+  {
+   "n": 3253,
+   "text": "Cosmic Gloves"
+  },
+  {
+   "n": 3254,
+   "text": "Light Leather Gloves"
+  },
+  {
+   "n": 3255,
+   "text": "Catspring Gloves"
+  },
+  {
+   "n": 3256,
+   "text": "Quicksilver Gloves"
+  },
+  {
+   "n": 3257,
+   "text": "Sukses memperbaiki equip yang digunakan saat ini."
+  },
+  {
+   "n": 3258,
+   "text": "Sukses memperbaiki {@0:}."
+  },
+  {
+   "n": 3259,
+   "text": "Violet Jade Ring"
+  },
+  {
+   "n": 3260,
+   "text": "Darkfeather Ring"
+  },
+  {
+   "n": 3261,
+   "text": "Deep Blue Ring"
+  },
+  {
+   "n": 3262,
+   "text": "Majestic Ring"
+  },
+  {
+   "n": 3263,
+   "text": "Ragefire Ring"
+  },
+  {
+   "n": 3264,
+   "text": "Brightburn Ring"
+  },
+  {
+   "n": 3265,
+   "text": "Turquoise Ring"
+  },
+  {
+   "n": 3266,
+   "text": "Rose Ring"
+  },
+  {
+   "n": 3267,
+   "text": "Yamabuki Ring"
+  },
+  {
+   "n": 3268,
+   "text": "Darkborn Ring"
+  },
+  {
+   "n": 3269,
+   "text": "Roren Ring"
+  },
+  {
+   "n": 3270,
+   "text": "Newbie Ring"
+  },
+  {
+   "n": 3271,
+   "text": "Frostron Ring"
+  },
+  {
+   "n": 3272,
+   "text": "Amaterasu Ring"
+  },
+  {
+   "n": 3273,
+   "text": "Earthen Ring"
+  },
+  {
+   "n": 3274,
+   "text": "Dragonscale Cleaver"
+  },
+  {
+   "n": 3275,
+   "text": "Mystical Sword"
+  },
+  {
+   "n": 3276,
+   "text": "Kage Sword "
+  },
+  {
+   "n": 3277,
+   "text": "Gamuza"
+  },
+  {
+   "n": 3278,
+   "text": "Menebus  Lover's Ring level ⟨0⟩"
+  },
+  {
+   "n": 3279,
+   "text": "Sisi lainnya"
+  },
+  {
+   "n": 3280,
+   "text": "Sisiku"
+  },
+  {
+   "n": 3281,
+   "text": "<font color='#801a1a'> Tukarkan enchantment stone langka</font>"
+  },
+  {
+   "n": 3282,
+   "text": "Pilih barang yang ingin kamu tukarkan?<br><font color='#801a1a'> Valhalla Crystal didapat pada  abyss taha level multiplayer . </font>"
+  },
+  {
+   "n": 3283,
+   "text": "<font color='#801a1a'> Tukarkan untuk mendapatkan Enchantment stone box（Membutuhkan level ⟨0⟩ Valhalla Crystal×⟨1⟩）</font>"
+  },
+  {
+   "n": 3284,
+   "text": "<font color='#801a1a'> Tukarkan exquisite Enchantment stone box（Membutuhkan level ⟨0⟩ Valhalla Crystal×⟨1⟩）</font>"
+  },
+  {
+   "n": 3285,
+   "text": "<font color='#801a1a'> Tukarkan perfect Enchantment stone box（Membutuhkan level ⟨0⟩ Valhalla Crystal×⟨1⟩）</font>"
+  },
+  {
+   "n": 3286,
+   "text": "<font color='#801a1a'> Tukarkan pet skill book box（Membutuhkan level ⟨0⟩ Valhalla Crystal×⟨1⟩）</font>"
+  },
+  {
+   "n": 3287,
+   "text": "<font color='#801a1a'>Tukarkan pet skill book box（Membutuhkan level ⟨0⟩ Valhalla Crystal×⟨1⟩）</font>"
+  },
+  {
+   "n": 3288,
+   "text": "Menukar<font color='#0098FF'> {@0:} </font>Berhasil!"
+  },
+  {
+   "n": 3289,
+   "text": "<font color='#801a1a'> Tukarkan pet skill book</font>"
+  },
+  {
+   "n": 3290,
+   "text": "Gunakan{@0:}untuk menebus<font color='#ff0000'>Lover's Ring</font>？<br>Cincin pada level ini hanya dapat ditebus sekali.<br> Cicnin akan menjadi bound setelah ini.<br><font color='#ff0000'>Perhatian</font>： Enchantment attribut cincin akan hilang setelah pertukaran!"
+  },
+  {
+   "n": 3291,
+   "text": "aku telah memiliki Cincin. Ambil ini!"
+  },
+  {
+   "n": 3292,
+   "text": "Aku hanya membutuhkan cincin, bukan item yang lain!"
+  },
+  {
+   "n": 3293,
+   "text": "Cincin harus sudah memiliki nilai atribut!"
+  },
+  {
+   "n": 3294,
+   "text": "The item you place is not what I want. Exchange failed!"
+  },
+  {
+   "n": 3295,
+   "text": "Kamu salah meletakan Cincin, level belum memadai. Aku membutuhkan cincin level<font color='#00aeff'>{@0:}</font>!"
+  },
+  {
+   "n": 3296,
+   "text": "Level kamu belum cukup tinggi untuk memakai Cincin di Level ini!<br>Level<font color='#00aeff'>{@0:}</font>level yang dibutuhkan untuk cincin."
+  },
+  {
+   "n": 3297,
+   "text": "Silahkan ambil cincin di level <font color='#00aeff'>{@0:}</font>"
+  },
+  {
+   "n": 3298,
+   "text": "Waktu pembebasan: "
+  },
+  {
+   "n": 3299,
+   "text": "Hai ini  liveness tidak mencapai<font color='#00aefe'> ⟨0⟩ </font>. Konfimasi keluar dari game?"
+  },
+  {
+   "n": 3300,
+   "text": "Cek di sini hal-hal yang belum selesai:"
+  },
+  {
+   "n": 3301,
+   "text": "ExpMulEquip%"
+  },
+  {
+   "n": 3302,
+   "text": "EXP Increase"
+  },
+  {
+   "n": 3303,
+   "text": "ExpMulEquip%Ex"
+  },
+  {
+   "n": 3304,
+   "text": "Lemari kamu telah melebihi kapasias!"
+  },
+  {
+   "n": 3305,
+   "text": "Total Pengeluaran :"
+  },
+  {
+   "n": 3306,
+   "text": "Level:"
+  },
+  {
+   "n": 3307,
+   "text": "Nama:"
+  },
+  {
+   "n": 3308,
+   "text": "Look up player"
+  },
+  {
+   "n": 3309,
+   "text": "Total gold dikeluarkan oleh pemohon:"
+  },
+  {
+   "n": 3310,
+   "text": "Profound Affection"
+  },
+  {
+   "n": 3311,
+   "text": "Intimate Friendship"
+  },
+  {
+   "n": 3312,
+   "text": "Bosom Buddy"
+  },
+  {
+   "n": 3313,
+   "text": "Band Over Backward"
+  },
+  {
+   "n": 3314,
+   "text": "Share Weal and Woe "
+  },
+  {
+   "n": 3315,
+   "text": "All in the same boat"
+  },
+  {
+   "n": 3316,
+   "text": "Reward Condition："
+  },
+  {
+   "n": 3317,
+   "text": "Reward Content："
+  },
+  {
+   "n": 3318,
+   "text": "Copy informasi untuk rekomendasi"
+  },
+  {
+   "n": 3319,
+   "text": "Pemohon saat ini:"
+  },
+  {
+   "n": 3320,
+   "text": "EXP reward"
+  },
+  {
+   "n": 3321,
+   "text": "<font color='#ff0000'> ⟨0⟩ </font>EXP"
+  },
+  {
+   "n": 3322,
+   "text": "EXP Reward："
+  },
+  {
+   "n": 3323,
+   "text": "Calon yang mencapai level<font color='#ff0000'> ⟨0⟩ </font>"
+  },
+  {
+   "n": 3324,
+   "text": "Klik <font color='#00aeff'>“Copy untuk merekomendasikan”</font> untuk copy semua text, kamu dapat mengirimkannya melalui FB, MSN, YM, forum atau yang lainnya. Ajak teman kamu untuk bermain<font color='#00aeff'>《NinjaKita</font> bersama dengan kamu!"
+  },
+  {
+   "n": 3325,
+   "text": "<b>Prosedur rekomendasi：</b><br>    ⟨0⟩. Klik <font color='#00aeff'>“aku ingin merekomendasikan”</font> untuk generate link yang kamu punya<br>    ⟨1⟩. Klik<font color='#ff0000'>copy informasi untuk direkomendasikan</font>untuk menyalin informasi dan link tersebut sehingga kamu dapat mengirim ke teman kamu.<br>    ⟨2⟩. Pemain lain dapat menggunakan<font color='#ff0000'>Fitur pendaftaran link</font>and<font color='#ff0000'>membuat karakter</font>di game，setelah itu<font color='#ff0000'>lihat video pertarungan</font>dan ambil <font color='#ff0000'>⟨3⟩</font> misi，rekomendasi akan berhasil<br><br><b>Deskripsi hadiah：</b><br>    ⟨4⟩. Ketika kamu dan orang dianjurkan kamu telah mencapai  level<font color='#ff0000'> ⟨5⟩，⟨6⟩，⟨7⟩，⟨8⟩，⟨9⟩ </font>, Keduanya akan mendapatkan hadiah.<br>    ⟨10⟩. Temukan <font color='#00aeff'>Referrer Reward</font> dan klik<font color='#ff0000'> Klaim </font>untuk mendapatkan <font color='#00aeff'>EXP</font> dan <font color='#00aeff'>gift coupon</font> .<br>    ⟨11⟩. Rekomendasi dapat pergi ke<font color='#00aeff'>“Reward for recommended person”</font> dan klik<font color='#ff0000'> Klaim </font>untuk memperoleh<font color='#00aeff'>EXP</font> dan <font color='#00aeff'>item</font> reward.<br><br><b>Special Notice：</b><br>    ⟨12⟩. Jika<font color='#ff0000'> Rekomendasi </font>tidak login dalam<font color='#ff0000'>⟨13⟩</font>hari, sistem akan menghapus pemain dari daftar <font color='#ff0000'> Recommended </font>, dan kontribusi pemain tidak akan dihitung dalam hadiah kamu.<br>    ⟨14⟩. Setiap bulannya, kamu hanya dapat mengklaim hadiah yang lama sebanyak<font color='#ff0000'> ⟨15⟩ </font>pemain recommended，penghargaan dari yang lain dianjurkan pemain tidak akan dihitung. <br>    ⟨16⟩. etiap pemain dapat mengklaim hadiah setelah mencapai kebutuhan yang ditunjuk."
+  },
+  {
+   "n": 3326,
+   "text": "Gift coupon reward：<br>    ⟨0⟩.Semua gold yang dikeluarkan oleh pemohon dihitung real-time.<br>    ⟨1⟩. <font color='#ff0000'>⟨2⟩%</font> dari gold yang dikeluarkan oleh pemohon akan mengirimkan kepadamu dalam bentuk gift coupon.<br>    ⟨3⟩.Gift coupon kurang dari<font color='#ff0000'>⟨4⟩</font> tidak dapat diambil sampai telah diakumulasikan jadi <font color='#ff0000'>⟨5⟩</font>.<br>    ⟨6⟩. Jika gift coupon tidak diklaim, maka kamu bisa mengklaim nanti<br>    ⟨7⟩. Ketika pemohon telah mempunyai hubungan dengan kamu, gold yang dikeluarkan oleh pemohon tidak akan lagi dihitung dalam penghargaan kamu."
+  },
+  {
+   "n": 3327,
+   "text": "Kamu masih dapat mengklaim gift coupon："
+  },
+  {
+   "n": 3328,
+   "text": "Klaim Level："
+  },
+  {
+   "n": 3329,
+   "text": "Klaim level:  <font color='#ff0000'>LV. ⟨0⟩</font>"
+  },
+  {
+   "n": 3330,
+   "text": "Mutual Aid"
+  },
+  {
+   "n": 3331,
+   "text": "Buat sendiri referrer dan mengirimkan informasi rekomendasi ke teman kamu!"
+  },
+  {
+   "n": 3332,
+   "text": "referrer ini mencapai tingkat<font color='#ff0000'> ⟨0⟩ </font>"
+  },
+  {
+   "n": 3333,
+   "text": "Jumlah sisa teman:"
+  },
+  {
+   "n": 3334,
+   "text": "Item Reward："
+  },
+  {
+   "n": 3335,
+   "text": "Profound Affection Bag，dapat memperoleh level ⟨0⟩ HP Carrier Bag dan Chakra Carrier Bag <font color='#ff0000'>⟨1⟩</font> "
+  },
+  {
+   "n": 3336,
+   "text": "Intimate Friendship Bag，dapat memperoleh level ⟨0⟩ HP Carrier Bag dan Chakra Carrier Bag <font color='#ff0000'>⟨1⟩</font> "
+  },
+  {
+   "n": 3337,
+   "text": "Bosom Buddy Bag，dapat memperoleh level ⟨0⟩ HP Carrier Bag dan Chakra Carrier Bag <font color='#ff0000'>⟨1⟩</font> "
+  },
+  {
+   "n": 3338,
+   "text": "Bdan Over Backward Bag，dapat memperoleh level ⟨0⟩ HP Carrier Bag dan Chakra Carrier Bag <font color='#ff0000'>⟨1⟩</font> "
+  },
+  {
+   "n": 3339,
+   "text": "Share Weal dan Woe Bag，dapat memperoleh level ⟨0⟩ HP Carrier Bag dan Chakra Carrier Bag <font color='#ff0000'>⟨1⟩</font> "
+  },
+  {
+   "n": 3340,
+   "text": "All in the same boat Bag，dapat memperoleh level ⟨0⟩ HP Carrier Bag dan Chakra Carrier Bag <font color='#ff0000'>⟨1⟩</font> "
+  },
+  {
+   "n": 3341,
+   "text": "Sisa gift coupons yang dapat diklaim:"
+  },
+  {
+   "n": 3342,
+   "text": "orang yang direkomendasikan bulan ini："
+  },
+  {
+   "n": 3343,
+   "text": "Lihat data referer"
+  },
+  {
+   "n": 3344,
+   "text": "Kamu berkata ke <font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a></font>: {@1:}"
+  },
+  {
+   "n": 3345,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a></font> berkata kepada kamu: {@1:}"
+  },
+  {
+   "n": 3346,
+   "text": "Ha, Kamu sudah sampai pada batasnya? Kamu tidak bisa memuaskan nafsu ku untuk pertarungan di akhir!"
+  },
+  {
+   "n": 3347,
+   "text": "Aku akan membagi kamu menjadi setenga setengah!!"
+  },
+  {
+   "n": 3348,
+   "text": "Serangga Sialan, Aku tidak akan mengampuni kamu!"
+  },
+  {
+   "n": 3349,
+   "text": "Maafkan aku, Raja Aizen, sepertinya aku tidak bisa membayar utangku!"
+  },
+  {
+   "n": 3350,
+   "text": "Apakah tidak ada hal seperti kemenangan tanpa pengorbanan?"
+  },
+  {
+   "n": 3351,
+   "text": "Pertempuran nyata ada di depan, jangan terlalu cemas. Aku akan mengambil cuti ku sekarang, selamat tinggal!"
+  },
+  {
+   "n": 3352,
+   "text": "Kekuatan yang besar ditambah teknik skill yang baik, hmmm, cukup mengesankan. Tapi kamu tidak dapat pergi jauh untuk menghadapi kegilaannya?"
+  },
+  {
+   "n": 3353,
+   "text": "Kamu tidak dapat mengalahkan kegilaanku. Pria yang haus darah, aku akan menghitung kamu. "
+  },
+  {
+   "n": 3354,
+   "text": "Ketekunanku tidak membandingkan dengan kecepatan. Tapi akan berubah ketika kamu tidak bisa menggunakan kecepatan."
+  },
+  {
+   "n": 3355,
+   "text": "Kamu benar-benar orang yang tangguh. Aku akan tetap diam. Sekarang, mempersiapkan diri untuk datangnya badai."
+  },
+  {
+   "n": 3356,
+   "text": "Menakjubkan, manusia bisa membalikan kekuatan alam. Kamu memang berhak menantangnya."
+  },
+  {
+   "n": 3357,
+   "text": "Tidak ada tombak terbaik namun perisai yang lebih baik. Pertempuran antara kamu dan dia akan sangat menarik."
+  },
+  {
+   "n": 3358,
+   "text": "Perang tanpa kekerasan apakah sebuah dunia yang ideal? Hanya melawan rasa putus asa hanya latihan?"
+  },
+  {
+   "n": 3359,
+   "text": "Aku masih hilang bahkan ketika aku memutuskan untuk menanggung resiko hidup aku! Tapi dia akan memberimu pelajaran."
+  },
+  {
+   "n": 3360,
+   "text": "Pertahanan terbaik adalah pelanggaran yang selalu benar. Meskipun kamu memukulku, kamu akan mempelajari ketakutan yang sebenarnya"
+  },
+  {
+   "n": 3361,
+   "text": "Aku harus mengakui bahwa kamu memang seorang pahlawan sejati. Di sini, kamu dapat mengambil EXP dan keluar segera. Beraninya kau menghancurkan kacamata fashion aku, tembak!"
+  },
+  {
+   "n": 3362,
+   "text": "Bahkan jika aku menjadi bagian dari tubuh kamu, aku akan membuat kamu suatu hari nanti! "
+  },
+  {
+   "n": 3363,
+   "text": "Tidak mengherankan kamu dapat mengalahkanku. Ini sangat mengagumkan kekuatan diwaktu usia muda! "
+  },
+  {
+   "n": 3364,
+   "text": "Aku tidak bisa menang bahkan jika aku memiliki five hearts?"
+  },
+  {
+   "n": 3365,
+   "text": "…………Kau menghancurkan ritualku! Kamu akan dihukum!! "
+  },
+  {
+   "n": 3366,
+   "text": "Kamu tidak akan mengerti arti kesenianku! "
+  },
+  {
+   "n": 3367,
+   "text": "Jika kamu dapat menghentikan Nagato, mengapa aku harus mencegahnya? "
+  },
+  {
+   "n": 3368,
+   "text": "Mungkin kamu dapat menghentikan Sasuke! "
+  },
+  {
+   "n": 3369,
+   "text": "Aku tidak percaya Samehada menyamai chakramu!"
+  },
+  {
+   "n": 3370,
+   "text": "Seperti yang terjadi, aku harus mempercayaimu! "
+  },
+  {
+   "n": 3371,
+   "text": "Kamu dan aku terpisah jauh meskipun kamu memiliki kemungkinan kecil untuk dapat mengalahkan saya!"
+  },
+  {
+   "n": 3372,
+   "text": "Hoho, Tidak terlalu buruk, Tapi langkahmu masih panjang!"
+  },
+  {
+   "n": 3373,
+   "text": "Ini hanya permulaan, aku akan kembali membunuh kamu, Jangan terlalu sombong!"
+  },
+  {
+   "n": 3374,
+   "text": "Aku hidup hanya untuk berperang, Aku masih bisa melawan! Aku tidak akan kalah!"
+  },
+  {
+   "n": 3375,
+   "text": "Sial, mengapa hal itu menjadi seperti ini?! sayang, sepertinya kamu tidak akan meninggalkan biara dalam keadaan hidup!"
+  },
+  {
+   "n": 3376,
+   "text": "Untuk berpikir ada keberadaan kegilaan seseorang dari pada aku ..."
+  },
+  {
+   "n": 3377,
+   "text": "Jadi ini yang dinamakan putus asa..."
+  },
+  {
+   "n": 3378,
+   "text": "Kamu memang kuat! Tetapi jika ini penuh dengan kekuatan besar, maka kamu tidak cocok untukku!"
+  },
+  {
+   "n": 3379,
+   "text": "Untuk berpikir kamu berhasil sejauh ini, aku akan memberikan rasa putus asa yang nyata!"
+  },
+  {
+   "n": 3380,
+   "text": "<font color='#6a6e70'><b>    Kebun    </b></font>"
+  },
+  {
+   "n": 3381,
+   "text": "Kebun"
+  },
+  {
+   "n": 3382,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> telah memperoleh<font color='#ffffff'> {@0:} </font>kemenangan berturut-turut di arena, dan berkata : Aku hanya main-main, ini terlalu mudah!</font>"
+  },
+  {
+   "n": 3383,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>ini tampaknya hampir tak terkalahkan di arena, mudah dibersihkan<font color='#ffffff'> {@0:} </font> kemenangan berturut-turut!</font>"
+  },
+  {
+   "n": 3384,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> memperoleh<font color='#ffffff'> {@0:} </font>kemenangan berturut-turut di arena dengan mudah, menyerang dengan gaya yang sombong, dan berkata : Aku akan menjadi bagian dari rumor ninja terkuat!</font>"
+  },
+  {
+   "n": 3385,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> memperoleh<font color='#ffffff'> {@0:} </font>kemenangan berturut-turut di arena dengan mudah, menyatakan bahwa mustahil untuk dikalahkan, hal itu belum ada yang mampu untuk melakukannya.</font>"
+  },
+  {
+   "n": 3386,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> melakukan pembantaian beruntun di arena, memperoleh <font color='#ffffff'> {@0:} </font>kemenangan berturut-turut dengan tidak ada lawan yang cocok. Dengan keras dia : aku adalah raja dalam kemenangan berturut-turut, siapa yang berani melangkah maju dan menantang aku!</font>"
+  },
+  {
+   "n": 3387,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:expression} memecah {@2:jar name} dan mendapatkan<font color='#00aeff'> <a href= 'event:ItemLink|{@3:config}*{@4:Uid}*{@5:type}'><u>{@6:item name}</u></a></font>. Sangat beruntung!</font>"
+  },
+  {
+   "n": 3388,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memperoleh<font color='#ff0000'> {@1:} </font>kemenangan berturut-turut di arena, dan berkata : Aku hanya main-main, ini terlalu mudah."
+  },
+  {
+   "n": 3389,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>ini tampaknya hampir tak terkalahkan di arena, mudah disingkirkan<font color='#ff0000'> {@1:} </font>kemenangan berturut-turut!"
+  },
+  {
+   "n": 3390,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>memperoleh<font color='#ff0000'> {@1:} </font>kemenangan berturut-turut di arena dengan mudah, menyerang dengan gaya yang sombong, dan berkata : Aku akan menjadi bagian dari rumor ninja terkuat!</font>"
+  },
+  {
+   "n": 3391,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>sedang melakukan pembantaian beruntun di arena, memperoleh <font color='#ff0000'> {@1:} </font>kemenangan berturut-turut dengan tidak ada lawan yang cocok. dengan keras dia : aku adalah raja dalam kemenangan berturut-turut, siapa yang berani melangkah maju dan menantang aku!"
+  },
+  {
+   "n": 3392,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>dengan mudah mengakhiri kemenangan beruntun pemain<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> <font color='#ff0000'> {@2:} </font>, suatu prestasi yang tidak mudah dilakukan!"
+  },
+  {
+   "n": 3393,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>dengam mudah mengakhiri kemenangan beruntun pemain<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font><font color='#ff0000'> {@2:} </font>, menyatakan pecundang sombong yang bodoh telah takluk!"
+  },
+  {
+   "n": 3394,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>dengan mudah mengakhiri kemenangan beruntun pemain<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> <font color='#ff0000'> {@2:} </font>, tersenyum dingin atas kekalahan pecundang yang telah kalah dalam bertarung."
+  },
+  {
+   "n": 3395,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>dengan mudah mengakhiri kemenangan beruntun pemain <font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> <font color='#ff0000'> {@2:} </font>, menyatakan : Kamu telah bertanya kepada pedang aku apakah setuju mengakhiri kemenangan beruntun kamu!"
+  },
+  {
+   "n": 3396,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>dengan mudah mengakhiri kemenangan beruntun pemain<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> <font color='#ff0000'> {@2:} </font>, dengan keras menyatakan : aku adalah rumor terakhir, semua list pemenang akan aku kalahkan di jalan aku."
+  },
+  {
+   "n": 3397,
+   "text": "Pemain<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>menunjukkan bakat dan keahliannya sebagai nomor<font color='#ff0000'> {@1:} </font>dalam persaingan tingkat arena, dan sulit dipercaya akhirnya membawa<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@2:}</u></a> </font>ke posisi puncak menjadi juara arena, suatu prestasi yang layak mendapat pujian!"
+  },
+  {
+   "n": 3398,
+   "text": "{@0:} Pemain<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>di posisi {@2:}, menempati posisi puncak rank, pada akhirnya melampaui {@3:} {@4:} pemain<font color='#ff0000'> <a href= 'event:player|{@5:}'><u>{@5:}</u></a> </font> dan naik pada nomor satu di arena, menjadi penguasa arena!"
+  },
+  {
+   "n": 3399,
+   "text": "Kamu menghabiskan {@0:time} jam {@1:} menit menyelesaikan latihan ini, mendapatkan {@2:number} EXP!"
+  },
+  {
+   "n": 3400,
+   "text": "Kamu telah menghentikan latihan, waktu latihan saat ini {@0:time} jam {@1:} menit, memperoleh {@2:number} EXP!"
+  },
+  {
+   "n": 3401,
+   "text": "Kamu menghabiskan {@0:time} Jam {@1:} menit untuk menyelesaikan pekerjaan ini, memperoleh {@2:number} Batu!"
+  },
+  {
+   "n": 3402,
+   "text": "Kamu telah menghentikan pekerjaan ini, waktu bekerja saat ini {@0:time} Jam {@1:} menit, memperoleh {@2:number} Batu!"
+  },
+  {
+   "n": 3403,
+   "text": "Kamu sibuk sekarang, tidak dapat menjalankan ini!"
+  },
+  {
+   "n": 3404,
+   "text": "Batu tidak mencukupi, tidak dapat  menjalankan ini!"
+  },
+  {
+   "n": 3405,
+   "text": "Gold tidak mencukupi, tidak dapat menjalankan ini!"
+  },
+  {
+   "n": 3406,
+   "text": "Kamu bukan bangsa asli sini, dan dilarang masuk!"
+  },
+  {
+   "n": 3407,
+   "text": "Berlatih lebih keras, ketika kamu mencapai lvl {@0:}, kamu dapat memasuki area ini!"
+  },
+  {
+   "n": 3408,
+   "text": "Batu Tidak mencukupi , tidak bisa teleport ke area yang di pilih!"
+  },
+  {
+   "n": 3409,
+   "text": "Kamu mengeluarkan {@0:} {@1:} untuk teleport ke <font color='#00b034'>{@2:}</font>"
+  },
+  {
+   "n": 3410,
+   "text": "Kamu menjual {@0:}, memperoleh {@1:} Batu"
+  },
+  {
+   "n": 3411,
+   "text": "Level kamu di bawah {@0:} , tidak dapat menjelajah!"
+  },
+  {
+   "n": 3412,
+   "text": "{@0:} kamu kurang dari {@1:} , penjelajahan gagal!"
+  },
+  {
+   "n": 3413,
+   "text": "Kamu tidak menemukan {@1:} buah {@0:}, tolong kembali lagi setelah kamu menemukannya!"
+  },
+  {
+   "n": 3414,
+   "text": "Kamu hanya dapat melanjutkan penjelajahan setelah {@0:} detik!"
+  },
+  {
+   "n": 3415,
+   "text": "Kamu telah menggunakan semua penjelajahan kamu hari ini!"
+  },
+  {
+   "n": 3416,
+   "text": "Kamu menjelajah misteri harta karun {@0:} kali, tidak dapat melanjutkan penjelajahan!"
+  },
+  {
+   "n": 3417,
+   "text": "Beruntung, kamu telah memperoleh {@0:} dari hasil penjelajahan misteri harta karun!"
+  },
+  {
+   "n": 3418,
+   "text": "Tas kamu penuh, tidak mendapatkan {@0:} yang ditemukan dalam pencarian ini."
+  },
+  {
+   "n": 3419,
+   "text": "Beruntung, Kamu telah memperoleh {@0:} {@1:} dari penjelajahan misteri harta karun!"
+  },
+  {
+   "n": 3420,
+   "text": "Kamu telah terbina untuk Mengawal Tim dalam misteri harta karun, dan di paksa untuk bertarung!"
+  },
+  {
+   "n": 3421,
+   "text": "Movement power kamu sudah  ⟨0⟩, tidak memperoleh hadiah dari serangan berantai, hanya dapat menyelesaikan misi!"
+  },
+  {
+   "n": 3422,
+   "text": "Kamu tetap memiliki {@0:} percobaan penjelajahan, dan mungkin masih dapat menari {@1:} kali."
+  },
+  {
+   "n": 3423,
+   "text": "Tidak cukup {@0:}, action gagal!"
+  },
+  {
+   "n": 3424,
+   "text": "Serangan beruntun berhasil, mengalahkan {@0:} kali<font color='#ff6565'> {@1:} </font>, memperoleh {@2:} EXP. Rampasan hasil kemenangan ada di tas kamu."
+  },
+  {
+   "n": 3425,
+   "text": "Serangan Combo terputus, mengalahkan {@0:} x<font color='#ff6565'> {@1:} </font> sebelum serangan terputus, memperoleh {@2:} EXP. Rampasan hasil kemenangan ada di tas kamu"
+  },
+  {
+   "n": 3426,
+   "text": "<font color='#ff0000'> {@0:} </font> telah menolak permintaan transaksi kamu!"
+  },
+  {
+   "n": 3427,
+   "text": "Maaf, pihak lain telah membatalkan perdagangan!"
+  },
+  {
+   "n": 3428,
+   "text": "Mitra dagang tidak di area ini, tidak dapat bertransaksi!"
+  },
+  {
+   "n": 3429,
+   "text": "Pihak lain sibuk, kamu tidak dapat melakukan perdagangan sekarang!"
+  },
+  {
+   "n": 3430,
+   "text": "Kamu tidak cukup memiliki Batu, perdagangan gagal!"
+  },
+  {
+   "n": 3431,
+   "text": "Pihak lain tidak memiliki cukup Batu, perdagangan gagal!"
+  },
+  {
+   "n": 3432,
+   "text": "Kamu tidak cukup memiliki gold, perdagangan gagal!"
+  },
+  {
+   "n": 3433,
+   "text": "Pihak lain tidak cukup memiliki gold, perdagangan gagal!"
+  },
+  {
+   "n": 3434,
+   "text": "Kamu telah mencapai batas maximal Batu, perdagangan gagal!"
+  },
+  {
+   "n": 3435,
+   "text": "Pihak lain telah mencapai batas maximal Batu, perdagangan gagal!"
+  },
+  {
+   "n": 3436,
+   "text": "Kamu telah mencapai batas maksimal Gold, perdagangan gagal!"
+  },
+  {
+   "n": 3437,
+   "text": "Pihak lain telah mencapai batas maksimal Gold, perdagangan gagal!"
+  },
+  {
+   "n": 3438,
+   "text": "Kamu tidak cukup memiliki ruang dalam tas, perdagangan gagal!"
+  },
+  {
+   "n": 3439,
+   "text": "Pihak lain tidak cukup memiliki ruang dalam tas, perdagangan gagal!"
+  },
+  {
+   "n": 3440,
+   "text": "Pihak lain offline, perdagangan gagal!"
+  },
+  {
+   "n": 3441,
+   "text": "Kamu telah membatalkan transaksi, perdagangan gagal!"
+  },
+  {
+   "n": 3442,
+   "text": "Pihak lain telah membatalkan transaksi, perdagangan gagal!"
+  },
+  {
+   "n": 3443,
+   "text": "Item ini terikat, tidak dapat di transaksikan!"
+  },
+  {
+   "n": 3444,
+   "text": "Item misi tidak dapat di transaksikan!"
+  },
+  {
+   "n": 3445,
+   "text": "Item sintesis tidak mencukupi, tidak dapat sintesis!"
+  },
+  {
+   "n": 3446,
+   "text": "Slot barang sintesis kamu penuh, periksa barang sintesis di tas kamu!"
+  },
+  {
+   "n": 3447,
+   "text": "Maaf, slot sintesis dan tas kamu penuh, sintesis barang gagal!"
+  },
+  {
+   "n": 3448,
+   "text": "Sintesis berhasil, biaya {@0:} {@1:}."
+  },
+  {
+   "n": 3449,
+   "text": "Sintesis gagal, biaya {@0:} {@1:}."
+  },
+  {
+   "n": 3450,
+   "text": "barang misi tidak dapat di sintesis!"
+  },
+  {
+   "n": 3451,
+   "text": "Kamu telah menggunakan {@0:} {@1:} dalam sintesis ini."
+  },
+  {
+   "n": 3452,
+   "text": "Kamu menghabiskan {@0:number} movement power dan {@1:number} {@2:gold type} untuk memulai serangan combo!"
+  },
+  {
+   "n": 3453,
+   "text": "Kamu dalam kondisi serangan combo!"
+  }
+ ]
+}

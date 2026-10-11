@@ -1,0 +1,562 @@
+{
+ "terms": {
+  "Desa Api": "Fire Village",
+  "Desa Angin": "Wind Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Jembatan Api": "Fiery Ridge",
+  "Lembah Angin": "Typhoon Plateau",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lintasan Setapak": "Eerie Passage",
+  "Kota yang Hilang": "Abandoned Evernight City",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Cairan": "Liquid",
+  "Laporan": "Report",
+  "Berangkat": "Set Off",
+  "Iblis Api": "Fire Demon",
+  "Dukun Sesat": "Rogue Shaman",
+  "Ninja Pulau Kuno": "Ancient Island Ninja",
+  "Kembali": "Return",
+  "Ninja Hutan": "Forest Ninja",
+  "Rumput": "Grass",
+  "Pedagang Keliling": "Traveling Merchant",
+  "Lady Feng": "Feng",
+  "Ahli Agama": "Priest",
+  "Penyihir": "Sorcerer",
+  "Perampok": "Bandit",
+  "Berserker Demondog": "Furious Dog",
+  "Demoneye Bloom": "Demon Eye Demon"
+ },
+ "units": [
+  {
+   "n": 8587,
+   "text": "Rupanya iblis telah muncul dekat<font color='#00b034'> Kota Malaikat </font>, pergilah untuk menyelidiki hal ini.<br>Kabar pertama berasal dari<font color='#00b034'> Bos Toko Barang </font>. Temukan dia dan tanya tentang detailnya."
+  },
+  {
+   "n": 8588,
+   "text": "Iblis berakup suara menakutkan, hal yang baik aku belum menemukan itu."
+  },
+  {
+   "n": 8589,
+   "text": "Akhir-akhir ini, suara-suara aneh sering terdengar di daerah utara bukit<font color='#00b034'> Simpang Jalan </font>. Pergi kesana dan lihat. Kamu mungkin menemukan sesuatu disana."
+  },
+  {
+   "n": 8590,
+   "text": "Untung kami menghancurkan setan demi waktu, jika tidak konsekuensi akan tak terduga!"
+  },
+  {
+   "n": 8591,
+   "text": "Kamu sudah tahu tentang [Perang Iblis Segel] yang mengguncang ⟨0⟩ tahun yang lalu. Akhirnya, demonIeyasu dan antek-anteknya disegel di<font color='#00b034'> Kota Iblis </font>, dan<font color='#00b034'> Kota Malaikat </font>dan ninja dari berbagai desa ditugaskan untuk menjaga segel aura suppressing<font color='#00b034'> Kota Iblis </font>.<br>Semua yang kamu hadapi mungkin iblis yang melarikan diri dari<font color='#00b034'> Kota Demon </font>. Kamu pergilah ke<font color='#00b034'> Lintasan Setapak </font>sekarang dan mengetahui lebih lanjut tentang aktivitas para iblis dari<font color='#00b034'> Penjaga Terowongan Rahasia </font>garrisoned disana."
+  },
+  {
+   "n": 8592,
+   "text": "Jadi<font color='#00b034'> Ketua Ninja </font>mengirim kamu untuk menyelidiki aktivitas iblis. Aku malu untuk mengakui bahwa hiruk pikuk iblis baru pada segel telah mengakibatkan keluarnya banyak iblis. iblis yang ditemukan di<font color='#00b034'> Kota Malaikat </font>bisa jadi salah satu yang melarikan diri."
+  },
+  {
+   "n": 8593,
+   "text": "Berpikir untuk memberikan kelonggaran sejenak akan membuat banyak iblis yang keluar, tidak tau berapa banyak orang akan terluka nantinya.<br>Rupanya sekelompok<font color='#00b034'> Wildhaired Banshees </font>kabur ke arah<font color='#00b034'> Desa Api </font>. Dapatkah kamu menolong saya mengalahkan kelompok iblis ini? Dan ingat untuk mengambil jepit rambut kayu mereka, atau orang biasa akan dilecehkan oleh permusuhan para banshee."
+  },
+  {
+   "n": 8594,
+   "text": "Terima kasih untuk kamu tepat waktu memberantasan<font color='#00b034'> Wildhaired Banshees </font>, jadi banyak korban dihindari. Itu bagus."
+  },
+  {
+   "n": 8595,
+   "text": "Alasan kejadian menjadi terang, didalam<font color='#00b034'> Lintasan Setapak </font>, hidup iblis yang dipanggil<font color='#00b034'> Ghost Grannies </font>. ini yang dilakukan iblis yang terkunci di<font color='#00b034'> Kota Iblis </font>memiliki kesempatan untuk kabur. Kita tidak dapat membiarkan iblis ini lolos. Berangkat sekarang, mereka harus dimusnahkan. Kamu harus ikut juga."
+  },
+  {
+   "n": 8596,
+   "text": "Setiap iblis yang bersekongkol dengan<font color='#00b034'> Kota Iblis </font>harus hancur!"
+  },
+  {
+   "n": 8597,
+   "text": "Iblis yang kabur tyelah dibasmi, tapi segel<font color='#00b034'> Kota Iblis </font>secara bertahap melemah. Kamu harus melaporkan hal ini kepada<font color='#00b034'> Ketua Ninja </font>untuk dia datang dengan melawan balik."
+  },
+  {
+   "n": 8598,
+   "text": "Kamu sudah bekerja keras dengan semua tugas. Istirahat sebentar, misi berikut ini akan lebih sulit."
+  },
+  {
+   "n": 8599,
+   "text": "Dengan keadaan segel<font color='#00b034'> Kota Iblis </font>yang memburuk, Aku khawatir dengan segel lainnya juga. Pergilah ke<font color='#00b034'> Desa Api </font>daerah<font color='#00b034'> Jembatan Api </font>dan intai situasi disana, kemudian laporkan ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8600,
+   "text": "Jika dipikir susunan segel memunculkan begitu banyak iblis yang unik. Kita harus kembali mempertimbangkan di bagaimana untuk menangani mereka."
+  },
+  {
+   "n": 8601,
+   "text": "Aku akan melaporkan masalah<font color='#00b034'> Iblis Panas </font>ke<font color='#00b034'> Ketua Ninja </font>. Aku punya sesuatu yang saya mau kamu menyelidikinya, yang meru[akan desas desus aneh disekitar permukaan<font color='#00b034'> Kota Malaikat </font>. Untuk detailnya, cari<font color='#00b034'> Lady Feng </font>."
+  },
+  {
+   "n": 8602,
+   "text": "Music misterius ... desas-desus ini telah sekitar untuk sementara waktu. Jumlah yang hilang baru-baru ini telah meningkat juga. Kami melaporkan ini ke<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8603,
+   "text": "Menurut mitra orang-orang yang hilang, mereka mendengar irama drum sebelum mereka menghilang. Hanya saja tak seorang pun pernah mendengar itu sebelumnya, jadi mereka pikir itu merupakan kesalahan yang hilang. Ini harus menjadi petunjuk penting. Laporkan ini ke<font color='#00b034'> Ketua Yuan </font>secepatnya. Kami juga akan melindungi para pelancong di dekatnya dengan ketat."
+  },
+  {
+   "n": 8604,
+   "text": "Musik drum yang aneh! Orang hilang! Laporan kamu penting bagi kami, aku harus memikirkannya."
+  },
+  {
+   "n": 8605,
+   "text": "Aku ingat sekarang. ⟨0⟩ tahun yang lalu, demonIeyasu adalah iblis setan ke tujuh di bawah dia - [Tujuh Demons]. Salah satunya, yang <font color='#00b034'> Demon of Souls </ font>, yang mahir dalam menggunakan pesona drum ke hati."
+  },
+  {
+   "n": 8606,
+   "text": "Segel Kekuatan Besar telah melemah ke keadaan seperti itu. Jika Iblis telah benar-benar melarikan diri, kita harus segera menghancurkan mereka, jika tidak akibatnya akan mengerikan."
+  },
+  {
+   "n": 8607,
+   "text": "Untuk pencegahan, pertama-tama kita harus mempersiapkan langkah-langkah untuk melawan iblis drum. Dalam sejarah kuno, <font color='#00b034'> Demon of Souls </ font> dikatakan membenci aroma lilin dibentuk dari <font color='#00b034'> Minyak Iblis Katak </ font>.<font color='#00b034'> Minyak Iblis Katak </font>dapat dicari di<font color='#00b034'> Simpang Jalan' </font><font color='#00b034'> Greenskin Frogs </font>, pergilah untuk mencari itu sekarang."
+  },
+  {
+   "n": 8608,
+   "text": "Benar, ini adalah<font color='#00b034'> Minyak Iblis Katak </font>, identik dengan Sarjana Han."
+  },
+  {
+   "n": 8609,
+   "text": "Sekarang kita mempunyai beberapa<font color='#00b034'> Minyak Iblis Katak </font>, Sekarang saya bisa mencetak lilin.<br>Tunggu sebentar"
+  },
+  {
+   "n": 8610,
+   "text": "Ini adalah<font color='#00b034'> Demon of Souls </font>, musuh bebuyutan<font color='#00b034'> Lilin Pembebasan </font>. Jaga agar tetap aman."
+  },
+  {
+   "n": 8611,
+   "text": "Jika benar gosip iblis Ieyasu adalah<font color='#00b034'> Demon of Souls </font>, Maka dengan menggunakan lilin ini seharusnya kekuatan dia akan hilang."
+  },
+  {
+   "n": 8612,
+   "text": "Apakah iblis telah dikalahkan? aku di sini karena aku mendeteksi energi jahat, tampak seperti aku terlambat."
+  },
+  {
+   "n": 8613,
+   "text": "Aku berasal dari<font color='#00b034'> Tanah Cahaya </font>seberang lautan. Aku datang untuk mencari inspirasi dari Terang dengan berjalan di tanah untuk memerangi iblis sebagai bentuk budidaya."
+  },
+  {
+   "n": 8614,
+   "text": "Untuk tetap setia pada iman aku sendiri, aku mulai memburu kejahatan."
+  },
+  {
+   "n": 8615,
+   "text": "Aku bisa merasakan sumber baru dari kejahatan yang berasal dari selatan daratan, dan telah memutuskan untuk menyelidiki.. Kamu dapat menyampaikan salam kepada<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8616,
+   "text": "Informasi kamu sangat penting, kita harus tetap waspada dalam menghadapi krisis."
+  },
+  {
+   "n": 8617,
+   "text": "Berpikir <font color='#00b034'> Kota Iblis </font>. Sepertinya mereka berpencar dan mencoba untuk menghancurkan segel yang ada di seluruh<font color='#00b034'> Daratan Sakura </font>.<br>Program belajar yang paling penting sekarang adalah memberitahukan setiap desa ninja. Kembali ke<font color='#00b034'> Desa Api </font>sekarang dan informasikan ke<font color='#00b034'> Ketua Desa </font>."
+  },
+  {
+   "n": 8618,
+   "text": "Segel iblis dijaga oleh lima ninja<font color='#00b034'> Kota Malaikat </font>. Jika Iblis berarti untuk membuka segel, kita harus melihat beberapa kejadian aneh berlangsung."
+  },
+  {
+   "n": 8619,
+   "text": "<font color='#00b034'> Pedagang Keliling </ font> yang secara teratur memberikan pasokan telah berkelana di seluruh daratan. Informasinya yang paling akurat. Kamu dapat bertanya apakah dia tahu apa-apa tentang gosip."
+  },
+  {
+   "n": 8620,
+   "text": "Aku tahu peristiwa baru-baru ini di daratan. Jika kamu ingin tahu juga, kamu harus menunjukkan seberapa tulus."
+  },
+  {
+   "n": 8621,
+   "text": "Apa ketulusan? Pedagang kami hanya termotivasi pada keuntungan. Jika kamu ingin informasi, maka kamu harus menyerahkan sesuatu yang bernilai setara.<br>Kamu mendengar tentang<font color='#00b034'>Sungai Mutiara Tuhan </font>? Ini adalah artifak berharga, namun dijaga ketat oleh<font color='#00b034'> Kappa </font>. Bawakan saya<font color='#00b034'> Sungai Mutiara Tuhan </font>, dan saya akan memberitahu kamu apa yang ingin kamu ketahui. Terdengar adil?"
+  },
+  {
+   "n": 8622,
+   "text": "Oh, mutiara! Mutiara berharga! aku bisa membuat keberuntungan dengan ini.<br>Karena kamu telah membawa mutiara, Aku akan mengatakan kepadamu seperti yang dijanjikan."
+  },
+  {
+   "n": 8623,
+   "text": "Daratan baru-baru ini terganggu oleh penampakan banyak iblis. Iblis ini memancarkan aura pengamuk; suatu tanda yang jelas dari orang lain mengendalikan mereka.<br>Dan ada berita dari mereka berkumpul di tempat tertentu. Tempat ini pasti adalah<font color='#00b034'> Desa Api </font>wilayah<font color='#00b034'> Punggung Api </font>."
+  },
+  {
+   "n": 8624,
+   "text": "Ah, sejumlah besar iblis yang dikontrol berkumpul di<font color='#00b034'> Punggung Api </font>! Mungkinkah mereka berencana untuk membuka segel pertama<font color='#00b034'> segel api </font>?"
+  },
+  {
+   "n": 8625,
+   "text": "Lebih baik terlambat daripada tidak sama sekali. Pergilah ke<font color='#00b034'> Punggung Api </font>dan selidiki tempat itu. Jika kamu melihat iblis, jangan gegabah. Kembalilah sebelum kamu bergerak."
+  },
+  {
+   "n": 8626,
+   "text": "<font color='#00b034'> Petir Prajurit </font>, subjek hanya layak untuk ninja terhormat yang mencapai sebuah negara maju warriorship. Untuk berpikir seperti juara akan menjadi mangsa iblis kontrol juga."
+  },
+  {
+   "n": 8627,
+   "text": "Setiap<font color='#00b034'> Prajurit Petir </font>adalah ninja kebanggaan kami. Pahlawan ini tidak akan pernah mudah menyerah. kembali ke<font color='#00b034'> Kota Malaikat </font>segera dan melaporkan kepada<font color='#00b034'> Ketua Ninja </font>untuk melihat apa dai memiliki solusi."
+  },
+  {
+   "n": 8628,
+   "text": "Aku tidak punya solusi untuk mengatasi kebingungan tersebut dalam waktu sesingkat itu!"
+  },
+  {
+   "n": 8629,
+   "text": "Oh ya, kamu ingat<font color='#00b034'> Ahli Agama </font>kamu hadapi sebelumnya? Aku kemudian membayar dia untuk datang, dan belajar dari dia yang mengenal kebiasaan iblis dan karakternya. Kamu seharusnya mencari dia keluar dan melihat apakah dia memiliki solusi untuk masalah ini."
+  },
+  {
+   "n": 8630,
+   "text": "<font color='#00b034'> Savory Grass </font>, bagaimana mungkin aku tidak tahu itu? Ini adalah bahan utama untuk keperluan memasak!"
+  },
+  {
+   "n": 8631,
+   "text": "<font color='#00b034'> Rumput Lezat </font>memiliki aroma yang unik, menarik monster aneh untuk menjaganya.<br><font color='#00b034'> Rumput Lezat </font>di sini dilindungi oleh sekelompok Monster Bun. Anda harus mengusir Monster Bun untuk mendapatkan<font color='#00b034'> Rumput Lezat </font>."
+  },
+  {
+   "n": 8632,
+   "text": "Karena kita telah memperoleh<font color='#00b034'> Savory Grass </font>, aku akan mulai menciptakan<font color='#00b034'> Obat Lembut </font>."
+  },
+  {
+   "n": 8633,
+   "text": "<font color='#00b034'> Delicate Medicine </font>telah siap, tapi perlu diuji terlebih dahulu. Rupanya ada seorang ninja dengan nama<font color='#00b034'> Hongo Batai </font>yang dikendalikan oleh setan.<br>Sekarang kamu perlu menantangnya, dan ketika kamu berdua terlibat, saya akan menyebarkan<font color='#00b034'> Delicate Medicine </font>ke udara. ketika dia menghisap obat dalam-dalam, maka kekuatan besarnya akan melemahdan kamu dapat mengalahkannya dengan mudah. ketika dia sadar dan terbebas dari pengaruh iblis, kita akan tau obatnya telah bekerja."
+  },
+  {
+   "n": 8634,
+   "text": "Kami telah berhasil mendapatkan<font color='#00b034'> Hongo Batai </font>untuk memulihkan kesadarannya. Obat tampaknya telah bekerja. Ambil botol<font color='#00b034'> Obat Halus</font>ini untuk kamu."
+  },
+  {
+   "n": 8635,
+   "text": "Setelah selesai persiapannya, kamu sekarang dapat pergi ke<font color='#00b034'> Punggung Api </font>dan selamatkan ninja itu."
+  },
+  {
+   "n": 8636,
+   "text": "Kamu berhasil menyimpan<font color='#00b034'> Prajurit Petir </font>, kamu seorang juru selamat!"
+  },
+  {
+   "n": 8637,
+   "text": "Situasi terakhir di<font color='#00b034'> Punggung Api </font>telah memburuk. Para<font color='#00b034'> Iblis Panas </font>sudah mulai berkeliaran dari sisi gunung dan menyerang penduduk desa. Cepat dan pergi melenyapkan<font color='#00b034'> Iblis panas </font>ini dan kumpulkan informasi terbaru dari<font color='#00b034'> Punggung Api </font>, lalu kembali ke saya."
+  },
+  {
+   "n": 8638,
+   "text": "Untuk berpikir dataran<font color='#00b034'> Punggung Api </font>bisa sangat ketat. Menurut informasi terbaru kami, yang bertanggung jawab untuk merusak segel adalah<font color='#00b034'> Iblis Api </font>."
+  },
+  {
+   "n": 8639,
+   "text": "Mengalahkan<font color='#00b034'> Iblis Api </font>ada prestasi yang berarti. Gosip mengatakan selama perang Iblis Seal, ketika<font color='#00b034'> Ketua Ninja </font>dan murid-muridnya melawan sekelompok iblis, sekelompok ninja yang disebut[<font color='#00b034'> Ninja Pulau Kuno </font>]maju ke final dan berdiri menantang<font color='#00b034'> Iblis Api </font>yang mengamuk.<br>Tentu saja saat waktu belalu orang-orang hanya ingat<font color='#00b034'> Ketua Ninja </font>dan murid-murid ninja di desanya. Dalam pertempuran terakhir, yang menderita kerugian paling banyak dan teritori adalah<font color='#00b034'> Ninja Pulau Kuno </font>, dan berbagai pengorbanan lainnya, mereka dimakamkan dan dalam kalangan Kabut Bersejarah, menghibur dengan tidak ada di cerita dongeng mereka.<br>Untuk mengatasi<font color='#00b034'> Iblis Api </font>, kamu harus mencari<font color='#00b034'> Ninja Pulau Kuno </font>. Jika ada yang tau lokasi mereka, hanya<font color='#00b034'> Kabuki, </font>seorang anggota suku dengan garis keturunan yang sama. Sebagai penulis sejarah dan aktor sejarah kuno, semua yang telah berlalu di<font color='#00b034'> Daratan Sakura </font>dicatat oleh mereka."
+  },
+  {
+   "n": 8640,
+   "text": "Jadi<font color='#00b034'> Iblis Api </font>keluar dari segel<font color='#00b034'> Kota Iblis </font>,bagaimana hal seperti itu bisa terjadi!"
+  },
+  {
+   "n": 8641,
+   "text": "Untuk mengetahui lokasi<font color='#00b034'> Ninja Pulau Kuno </font>, kamu harus lewat ujian dahulu<br>Dengarkan dengan baik. Hilangkan, dekat<font color='#00b034'> Desa Matahari terbit </font>, penjahat<font color='#00b034'> Dukun Sesat </font>, dan ambil Cairan labu yang mereka bawa."
+  },
+  {
+   "n": 8642,
+   "text": "Kelompok<font color='#00b034'> Dukun Sesat </font>tahu ninjutsu. Mereka mungkin telah berpaling sebaliknya, tetapi mereka harus lebih patuh setelah mengajarkan mereka sebuah pelajaran."
+  },
+  {
+   "n": 8643,
+   "text": "Karena kamu lulus tes, aku akan memberitahu kamu seperti yang dijanjikan.<br>Setelah<font color='#00b034'> Ninja Pulau Kuno </font>kehilangan tanah air nenek moyang mereka, mereka tinggal dengan suku-suku di wilayah yang sekarang<font color='#00b034'> Kota Malaikat </font>. Namun mereka tidak setuju dengan pandangan<font color='#00b034'> Ketua Ninja </font>, dan sejalan dengan suku-suku lain yang tidak puas, akhirnya mereka menetap di sebidang tanah subur. Seiring waktu berlalu, tanah tidak dapat memenuhi permintaan pasokan suku itu, dan<font color='#00b034'> Ninja Pulau Kuno </font>mendadak pergi, menghilang dari jejak-jejak sejarah. Suku kami hanya tahu bahwa lokasi terakhir mereka berada di daerah tertentu di<font color='#00b034'> Alam Liar </font>. Kamu bisa menuju ke<font color='#00b034'> Alam Liar </font>dan mengejar jejak mereka."
+  },
+  {
+   "n": 8644,
+   "text": "Aku baru saja mengalami masalah. Jika kamu ingin membantu aku meringankan pikiran aku, aku dapat membantu kamu mengetahui<font color='#00b034'> Ninja Pulau Kuno </font>sebagai balasannya."
+  },
+  {
+   "n": 8645,
+   "text": "Jadi kemudian. Baru-baru ini, ada sekelompok Bandit Muka Setan yang menyebabkan kekacauan di<font color='#00b034'> Alam Liar </font>.Baik itu penduduk di sana atau wisatawan, semua tertindas oleh mereka. Misi kamu adalah untuk menghilangkan penjahat itu."
+  },
+  {
+   "n": 8646,
+   "text": "Setelah menghancurkan bandit,<font color='#00b034'> Alam Liar </font>dapat mengembalikan kedamaian masa lalunya.<br>aku telah menemukan Ninja Pulau Kuno, mereka sekarang tinggal di sebelah timur<font color='#00b034'> Alam Liar </font>."
+  },
+  {
+   "n": 8647,
+   "text": "Tetapi banyak yang tidak dapat remehkan. Hanya yang kuat bisa mendapatkan rasa hormat mereka. Jika kamu ingin menghubungi mereka, kamu pasti mengalahkan prajurit yang mereka pilih. Maukah kau berdiri menantang?"
+  },
+  {
+   "n": 8648,
+   "text": "Untuk mengalahkan pejuang terpilih mereka jadi mudah, kamu telah mendapatkan rasa hormat<font color='#00b034'> Ninja Pulau Kuno </font>."
+  },
+  {
+   "n": 8649,
+   "text": "Tujuan kamu adalah kamu harapkan<font color='#00b034'> Ninja Pulau Kuno </font>akan membantu<font color='#00b034'> Kota Malaikat </font>mengalahkan<font color='#00b034'> Iblis Api </font>siapa yang memecahkan formasi segel. Ah, sayang sekali bahwa kita kekurangan sumber daya. <font color='#00b034'> Ninja Pulau Kuno </font>adalah bayangan semata dibandingkan dengan<font color='#00b034'> Ninja Pulau Kuno </font>masa lalu. Dan mereka sangat kurang dalam bertarung, jadi mereka menolak.<br>Maaf saya tidak bisa banyak membantu. Aku dengar<font color='#00b034'> Kabuki </font>adalah ahli dalam kekuatan persuasi. Mungkin kamu dapat meminta bantuan padanya."
+  },
+  {
+   "n": 8650,
+   "text": "Tetapi jika iblis yang lolos dari segel<font color='#00b034'> Kota Iblis</font>,<font color='#00b034'> Daratan Sakura </font>akan jatuh hidup di dalam neraka , seperti kerajaan kuno masa lalu itu. Semua akan hangus menjadi abu, menjadi tanah tandus di mana tidak ada seorangpun yang dapat melangkah. Hal semacam ini tidak boleh terjadi lagi."
+  },
+  {
+   "n": 8651,
+   "text": "Dekat<font color='#00b034'> Desa Matahari </font>dan<font color='#00b034'> Alam Liar </font>, sekelompok bandit keliling telah muncul. Mereka secara teratur merampok suku-suku yang menetap di<font color='#00b034'> Alam Liar </font>. Aku percaya<font color='#00b034'> Ninja Pulau Kuno </font>adalah salah satu korban.<br>Hancurkan para bandit dan mengambil barang jarahan mereka bagi para korban. Ini pasti akan mendapatkan kepercayaan<font color='#00b034'> Ninja Pulau Kuno </font>."
+  },
+  {
+   "n": 8652,
+   "text": "Mungkin ini menjadi barang jarahan suku<font color='#00b034'> Bandit Babi Gunung </font>? Kamu telah melakukan perbuatan yang hebat!"
+  },
+  {
+   "n": 8653,
+   "text": "Karena untuk membantu kamu dalam mengambil barang-barang berharga mereka,<font color='#00b034'> Ninja Pulau Kuno </font>telah memutuskan untuk membantu kamu melawan<font color='#00b034'> Iblis Api </font>, tetapi kamu harus mengalahkan ninja terkuat mereka, <font color='#00b034'> Jam Malam Pulau Kuno </font>. Setelah itu kamu akan dikenal sebagai salah satu yang bisa menahan kekuatan dari<font color='#00b034'> Iblis Api </font>. Sebaliknya mereka baru saja akan mengirimkan ninjas kecil mereka untuk kematian mereka."
+  },
+  {
+   "n": 8654,
+   "text": "Karena kamu telah mengalahkan<font color='#00b034'> Ancient Isle Nightwatch </font>, <font color='#00b034'> Ninja Pulau Kuno </font>akan menjaga janji mereka membantu kamu dalam mengalahkan<font color='#00b034'> Iblis Api </font>."
+  },
+  {
+   "n": 8655,
+   "text": "Kamu sudah memperoleh janji dari<font color='#00b034'>ninja Pulau Kuno </font>,saatnya untuk menghadapi<font color='#00b034'> Iblis Api </font>!"
+  },
+  {
+   "n": 8656,
+   "text": "Untuk dapat mengalahkan<font color='#00b034'> Iblis Api </font>, kamu harus tumbuh lebih cepat dari yang aku harapkan!<br>Ah, ini adalah hasil jarahan dari mengalahkan<font color='#00b034'> Iblis Api </font>, biarkan aku memeriksanya."
+  },
+  {
+   "n": 8657,
+   "text": "<font color='#00b034'> Ketua Ninja </font>masih menunggu balasan kamu. Cepat dan laporkan ke<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8658,
+   "text": "<font color='#00b034'> Invasi Api Liar </font>, ini adalah sumber kekuatan dari iblis leyasu. Salah satu bab dari peninggalan bangsawan kuno, [⟨0⟩ Lintasan Benar]. Untuk mendapat ini dari<font color='#00b034'> Iblis Api </font>, terlihat seperti iblis yang dianugerahkan kekuasaan kepada iblis. Ini adalah berita serius."
+  },
+  {
+   "n": 8659,
+   "text": "Pertunjukan kamu  baru-baru ini luar biasa, dan harapan kamu yang tinggi.<font color='#00b034'> Ketua Yuan </font>mencari kamu, pergi temui dia sekarang."
+  },
+  {
+   "n": 8660,
+   "text": "Setelah menilai kepopuleran kamu, <font color='#00b034'> Ketua Ninja </font>merekomendasikan kamu bergabung menjadi pasukan ninja special di<font color='#00b034'> Kota Malaikat </font>. Hanya yang terbaik yang dapat begabung, untuk berfikir<font color='#00b034'> Ketua Ninja </font>menganggap kamu begitu tinggi. Kamu harus bekerja keras dari sekarang."
+  },
+  {
+   "n": 8661,
+   "text": "Hilangannya orang-orang telah dilaporkan ke<font color='#00b034'> Desa Matahari </font>lagi, pergi kesana dan cari<font color='#00b034'> Kabuki </font>untuk detailnya.."
+  },
+  {
+   "n": 8662,
+   "text": "Croak! Katak kita adalah sahabat setia Ninja!"
+  },
+  {
+   "n": 8663,
+   "text": "Kehilangan wisatawan? Tentu saja<font color='#00b034'> Katak Penguasa </font>mengetahui hal ini. Ini adalah kerjaan<font color='#00b034'> Demon Flute Succubi </font>lagi. Suara merdu mereka senjata mematikan dalam hati orang-orang yang menawan itu."
+  },
+  {
+   "n": 8664,
+   "text": "Setelah mengalahkan<font color='#00b034'> Iblis Suling Perayu </font>, orang-orang tidak ada yang hilang lagi."
+  },
+  {
+   "n": 8665,
+   "text": "<font color='#00b034'> Hutan Cahaya </font><font color='#00b034'> Craftsman </font>tampaknya telah mendapatkan beberapa masalah. Pergi membantunya ketika kamu punya waktu."
+  },
+  {
+   "n": 8666,
+   "text": "Kamu telah setuju untuk menolong aku, itu sangat baik."
+  },
+  {
+   "n": 8667,
+   "text": "<font color='#00b034'> Hutan Cahaya </font>digunakan untuk menjadi tempat yang damai. Sekarang dikotori oleh iblis, terutama yang<font color='#00b034'> Vultures </font>; <font color='#00b034'> Vultures </font>menukik ke bawah tiba-tiba dan menyerang orang tak berdosa. Maukah Anda membantu saya menghilangkan mereka?"
+  },
+  {
+   "n": 8668,
+   "text": "Selesai, burung-burung itu tidak membahayakan kami sekarang."
+  },
+  {
+   "n": 8669,
+   "text": "Mengapa tiba-tiba ada begitu banyak penampakan iblis? Bantu saya meminta pertolongan<font color='#00b034'> Ahli Agama </font>."
+  },
+  {
+   "n": 8670,
+   "text": "Kelompok iblis lainnya telah keluar dari<font color='#00b034'> Kota Iblis </font>. <font color='#00b034'> Kelelawar Berdarah </font>dikalangan iblis melarikan diri harus mengungsi ke<font color='#00b034'> Hutan Cahaya </font>."
+  },
+  {
+   "n": 8671,
+   "text": "Hanya dengan menghancurkan mereka<font color='#00b034'> Bloodbats </font><font color='#00b034'> Hutan Cahaya </font>akan kembali tenang."
+  },
+  {
+   "n": 8672,
+   "text": "Jadi kelelawar ini adalah biang keladinya. Sekarang yang mereka miliki hanya gurun."
+  },
+  {
+   "n": 8673,
+   "text": "Terima kasih telah membantu saya membersihkan hutan dari monster, kamu memang seorang anggota pasukan khusus!"
+  },
+  {
+   "n": 8674,
+   "text": "Perubahan<font color='#00b034'> Hutan Cahaya </font>juga dikarenakan kaburnya para iblis. Mungkinkah segel mempunyai kelemahan begitu besar?"
+  },
+  {
+   "n": 8675,
+   "text": "Informasi terbaru<font color='#00b034'> Kabuki </font>menyatakan bahwa<font color='#00b034'> Desa Matahari </font>telah disandera oleh sekelompok perampok. Mereka tidak boleh dibiarkan, pergi dan tangani mereka sekarang."
+  },
+  {
+   "n": 8676,
+   "text": "Untuk melenyapkan para bandit secara efisien,naikkan ninjutsu kamu menjadi lebih baik."
+  },
+  {
+   "n": 8677,
+   "text": "Bandit ini dipimpin oleh seorang kepala. Jika kita tidak bisa mengalahkan dia, semua usaha kita akan sia-sia."
+  },
+  {
+   "n": 8678,
+   "text": "Bahkan<font color='#00b034'> Perampok Pelat Api </font>begitu mudah ditumbangkan olehmu, pertumbuhan kamu sangat mengejutkan."
+  },
+  {
+   "n": 8679,
+   "text": "Angin telah meningkat, tapi angin hari ini membawa kabar tentang pemahaman. Koki dari<font color='#00b034'> Alam Liar </font>sering berkomunikasi dengan alam, kenapa kamu tidak bertanya padanya?"
+  },
+  {
+   "n": 8680,
+   "text": "Dari mendengar suara angin hari ini, aku dapat mendengar tangisan alam. Siapa yang membuatnya sampai menangis?"
+  },
+  {
+   "n": 8681,
+   "text": "Kami tidak punya waktu untuk kalah. Pergi mencari<font color='#00b034'> Ketua Ninja </font>sekarang, dan jelaskan situasi saat ini."
+  },
+  {
+   "n": 8682,
+   "text": "Mungkinkah iblis akan berniat menghancurkan<font color='#00b034'> segel angin </font><font color='#00b034'> Dataran Topan </font>? Itu bisa saja, kita tidak boleh membiarkan itu terjadi."
+  },
+  {
+   "n": 8683,
+   "text": "Lokasi<font color='#00b034'> segel angin </font>ada di wilayan Desa Angin di<font color='#00b034'> Lembah Angin </font>. Pergi ke sana sekarang dan intai daerah tersebut."
+  },
+  {
+   "n": 8684,
+   "text": "Sepertinya target memang<font color='#00b034'> segel angin </font>. Aku yang akan melakukan pembalasan untuk ini."
+  },
+  {
+   "n": 8685,
+   "text": "Menurut catatan kuno, jika kita bisa mendapatkan<font color='#00b034'> Galepeace Flute </font>, kita bisa menekan<font color='#00b034'> Iblis Angin </font>. Pergilah sekarang dan kumpulkan beberapa<font color='#00b034'> Suling Cemara Hijau </font>dan mengubahnya ke<font color='#00b034'> Craftsman </font>."
+  },
+  {
+   "n": 8686,
+   "text": "Untuk membuat<font color='#00b034'> Suling Angin Kedamaian </font>, hanya memiliki<font color='#00b034'> Suling Pohon Cemara </font>tidak berguna. Kita butuh juara bulu dilangit juga."
+  },
+  {
+   "n": 8687,
+   "text": "Didalam<font color='#00b034'> Hutan Cahaya </font>, hanya bulu dari<font color='#00b034'> Egrets </font>tersebut yang dikembangbiakkan oleh ninja hutan sesuai kriteria. Tapi, untuk bisa dekat dengan<font color='#00b034'> Egrets </font>, kamu harus terlebih dahulu mengalahkan<font color='#00b034'> Ninja Hutan </font>,pengawal<font color='#00b034'> Egrets' </font>."
+  },
+  {
+   "n": 8688,
+   "text": "To think you have defeated the ninja Escort Teams of the<font color='#00b034'> Egrets </font>, now you need to get near the<font color='#00b034'> Egrets </font>and obtain their<font color='#00b034'> Goldfeather Plumes </font>."
+  },
+  {
+   "n": 8689,
+   "text": "Ini adalah kesempatan besar. Cepat dan dapatkan dari<font color='#00b034'> Egrets </font>sebuah<font color='#00b034'> Bulu-bulu Emas </font>."
+  },
+  {
+   "n": 8690,
+   "text": "The<font color='#00b034'> Suling Cemara Hijau </font>dan<font color='#00b034'> Bulu-bulu Emas </font>sudah ditangan kita. Kualitas suling harus lebih baik."
+  },
+  {
+   "n": 8691,
+   "text": "Suling telah dibuat, cepat dan melaporkan kepada<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8692,
+   "text": "Sejak<font color='#00b034'> Ketua Ninja </font>percaya kepada aku, aku akan memberikan yang terbaik."
+  },
+  {
+   "n": 8693,
+   "text": "Bersiaplah untuk pindah ke<font color='#00b034'> Lembah Angin </font>,"
+  },
+  {
+   "n": 8694,
+   "text": "Akhirnya kamu disini. Situasi di<font color='#00b034'> Lembah Angin </font>yang menegerikan. Aku berharap kita dapat mengalahkan<font color='#00b034'> Iblis Angin </font>dengan cepat."
+  },
+  {
+   "n": 8695,
+   "text": "Pertama mengalahkan mereka<font color='#00b034'> Iblis Angin Puyuh </font>. Hanya dengan kematian mereka, apakah kekuatan<font color='#00b034'> Iblis Angin </font>terkuras."
+  },
+  {
+   "n": 8696,
+   "text": "Suara angin dari jauh sudah terdengar melemah. Tampaknya<font color='#00b034'> Iblis Angin </font>telah terluka parah."
+  },
+  {
+   "n": 8697,
+   "text": "Sekarang pergilah menantang<font color='#00b034'> Iblis Angin </font>. Kita harus membiarkan skema mereka terpenuhi."
+  },
+  {
+   "n": 8698,
+   "text": "Iblis mencoba untuk menghancurkan<font color='#00b034'> segel angin </font>akhirnya didorong kembali. Aku ingin tau dimana target mereka selanjutnya!"
+  },
+  {
+   "n": 8699,
+   "text": "Laporkan kekalahan dari<font color='#00b034'> Iblis Angin </font>kepada<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8700,
+   "text": "Terima kasih telah berpartisipasi, krisis<font color='#00b034'> segel angin </font>telah diatasi."
+  },
+  {
+   "n": 8701,
+   "text": "Melakukan perjalanan ke<font color='#00b034'> Hutan Cahaya </font>. <font color='#00b034'> Craftsman </font>mengalami kesulitan yang dihadapi."
+  },
+  {
+   "n": 8702,
+   "text": "Kita harus mengekang aktifitas tersebut."
+  },
+  {
+   "n": 8703,
+   "text": "<font color='#00b034'> Senyo of the Forest </font>pemimpin Ninja Hutan meskipun kuat adalah orang kecil. Kekalahan dia, dan<font color='#00b034'> Ninja Hutan </font>tidak akan melanjutkan perjuangan."
+  },
+  {
+   "n": 8704,
+   "text": "Dengan mengalahkan<font color='#00b034'> Senyo dari Hutan </font>menandai akhir dari malapetaka ninja."
+  },
+  {
+   "n": 8705,
+   "text": "<font color='#00b034'> Senyo of the Forest </font>adalah orang yang menjaga janjinya. Dia tidak pernah menarik kata-katanya. Aku bisa memotong kayu dalam damai dari sekarang.<br>Ah ya, beberapa peristiwa telah terjadi di<font color='#00b034'> Kota Malaikat </font>.<font color='#00b034'> Ketua Yuan </font>telah memanggil semua ninja, kamu harus melaporkan kepadanya secepat mungkin."
+  },
+  {
+   "n": 8706,
+   "text": "Panggilan mendesak ini untuk kalian semua karena ada peristiwa besar yang menimpa<font color='#00b034'> Kota Malaikat </font>. Jika kita tidak menyelesaikan ini, para iblis dapat kabur dari<font color='#00b034'> Kota Iblis </font>."
+  },
+  {
+   "n": 8707,
+   "text": "Karena kerusakan terus menerus segel penjaga dari lima desa, untuk mencegah kerusakan lebih jauh, <font color='#00b034'> Ketua Ninja </font>mengirim<font color='#00b034'> Penyihir </font>belum lama ke Barrons dystopic yang pernah menjadi ibukota kerajaan kuno selama<font color='#00b034'> Perang Iblis Segel </font>, serta saat ini<font color='#00b034'> Kota yang Hilang </font>untuk menemukan peninggalan kerajaan kuno yang tersembunyi.<br>Siapa yang tahu tanah tandus ini akan menjadi taman bermain para iblis. Tidak lama setelah tim<font color='#00b034'> Penyihir </font>memasuki<font color='#00b034'> Kota yang Hilang </font>, mereka kehilangan kontak dengan<font color='#00b034'> Kota Malaikat </font>. Kamu sebagai ninja elite akan naik perahu pergi ke<font color='#00b034'> Kota yang Hilang </font>dan menemukan<font color='#00b034'> penyihir </font>yang hilang."
+  },
+  {
+   "n": 8708,
+   "text": "Kamu adalah bala bantuan dari<font color='#00b034'> Kota Malaikat </font>. Terima kasih telah menyelamatkan hidup aku. Aduh, orang-orang yang telah menjaga aku tidak dapat melihat hari ini."
+  },
+  {
+   "n": 8709,
+   "text": "Teman-teman kami telah jatuh ke dalam masa buruk. Untuk mencegah iblis dari mendatangkan malapetaka di<font color='#00b034'> Daratan Sakura </font>, kamu harus membantu aku menyelesaikan misi aku."
+  },
+  {
+   "n": 8710,
+   "text": "Untuk mencegah rumah kami menjadi seperti<font color='#00b034'> Kota yang Hilang </font>, tidak perduli seberapa berat jalan ke reruntuhan, aku harus aktif mencari harta karun"
+  },
+  {
+   "n": 8711,
+   "text": "Ini adalah pintu masuk relik. Tapi untuk masuk, kamu harus melepaskan segel pelindung itu. Menurut<font color='#00b034'> Ketua Ninja </font>, untuk membuat item yang bisa melepas segel, kamu harus mengumpulkan hati<font color='#00b034'> Berserker Demondog </font>di<font color='#00b034'> Kota yang Hilang </font>dan mata<font color='#00b034'> Demoneye Bloom </font>di<font color='#00b034'> Lembah Kesunyian </font>. Kumpulkan kedua bahan tersebut dan kirimkan ke<font color='#00b034'> Bos Penempa </font><font color='#00b034'> Kota Malaikat </font>. Dia akan menyempurnakan itu menjadi itempelepas segel."
+  },
+  {
+   "n": 8712,
+   "text": "<font color='#00b034'> Ketua Ninja </font>sudah menginstruksikan bahwa aku menunggu dengan sabar. Aku akan memulai sekarang kerajinan."
+  },
+  {
+   "n": 8713,
+   "text": "Ini memang teknik kerajaan kuno. Ini hal yang baik aku berhasil craft satu berhasil, untuk beberapa kali aku telah gagal. Setidaknya aku tidak akan mengecewakan<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8714,
+   "text": "Apa ini<font color='#00b034'> Bos Penempa </font><font color='#00b034'> Segel Rusak </font>? Itu sangat berat untuk kamu. Sekarang biarkan aku buka segel pintu masuk reruntuhan."
+  },
+  {
+   "n": 8715,
+   "text": "Meskipun peninggalan itu berhasil dibuka, tetapi tempat ini adalah monumen kuno yang telah lama ditutup, sehingga sangat berbahaya untuk bergegas ke dalam bergerak.<br><font color='#00b034'> Ketua Ninja </font>pernah berkata bahwa dalam<font color='#00b034'> Lintasan Setapak </font>ada didekatnya<font color='#00b034'> Ahli Agama </font>yang mahir dalam memerangi iblis kegelapan. Jika kita dapat merekrut bantuannya, aku yakin misi ini akan dapat dipastikan keberhasilannya."
+  },
+  {
+   "n": 8716,
+   "text": "Aku berharap bahwa bantuan aku di penjelajahan kamu untuk menginstal salah satu perangkat untuk menekan iblis di daratan akan berjalan dengan lancar. Demonslaying selalu menjadi misi aku, dalam hal apapun."
+  },
+  {
+   "n": 8717,
+   "text": "Sebelum menuju ke relik tersebut, Aku harus terlebih dahulu mempersiapkan beberapa alat pengusiran iblis. Dekat Kota Kegelapan hidup spesies<font color='#00b034'> Blackhawks </font>. Burung-burung yang kuat menangkap dan melahap setan, aura gelap terpancar dari tubuh mereka. <font color='#00b034'> Bulu-bulu </font>mereka dapat digunakan untuk membuat item yang dapat menahan energi iblis. Pergi sekarang dan bantu aku mendapatkan beberapa<font color='#00b034'> Feathers </font><font color='#00b034'> Blackhawks </font>."
+  },
+  {
+   "n": 8718,
+   "text": "Kamu juga telah merasakan kekuatan besar dari<font color='#00b034'> Bulu-bulu </font>? Berikan itu pada aku, nanti aku buatkan item yang kamu butuhkan."
+  }
+ ]
+}

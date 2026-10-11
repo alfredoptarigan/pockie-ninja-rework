@@ -1,0 +1,673 @@
+{
+ "terms": {},
+ "units": [
+  {
+   "n": 11164,
+   "text": "<font color='#5df9ff'>Top grade cookies. Meningkatkan HP ⟨0⟩ point, Selama ⟨1⟩ jam.<br>Efektif setelah digunakan!<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11165,
+   "text": "<font color='#5df9ff'>Fresh dan tasty pineapple. Meningkatkan Chakra ⟨0⟩ point, Selama ⟨1⟩ jam.<br>Efektif setelah digunakan!<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Vegetables<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11166,
+   "text": "<font color='#5df9ff'>SakMiniature roti yang terbuat dari tepung premium dan daging isi，Setelah memakan, meningkatkan max HP sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11167,
+   "text": "<font color='#5df9ff'>Gold hammer dengan kekuatan magic. Untu dapat mencoba memukul mystic jar.</font>"
+  },
+  {
+   "n": 11168,
+   "text": "<font color='#5df9ff'>Magical bag, berisikan ⟨0⟩ gift coupon.</font>"
+  },
+  {
+   "n": 11169,
+   "text": "<font color='#5df9ff'>Void Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11170,
+   "text": "<font color='#5df9ff'>Divinity Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11171,
+   "text": "<font color='#5df9ff'>Refining Gem bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11172,
+   "text": "<font color='#5df9ff'>Starlight Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11173,
+   "text": "<font color='#5df9ff'>x stone shard</font>"
+  },
+  {
+   "n": 11174,
+   "text": "<font color='#5df9ff'>Flawed x stone</font>"
+  },
+  {
+   "n": 11175,
+   "text": "<font color='#5df9ff'>x stone</font>"
+  },
+  {
+   "n": 11176,
+   "text": "<font color='#5df9ff'>Flawless x stone</font>"
+  },
+  {
+   "n": 11177,
+   "text": "<font color='#5df9ff'>Gem pembuat slot bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11178,
+   "text": "<font color='#5df9ff'>Perfect x stone</font>"
+  },
+  {
+   "n": 11179,
+   "text": "<font color='#5df9ff'>Dapat digunakan pada semua level<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu. <br><br>⟨0⟩ rubies Level  ⟨1⟩ dapat disynthesiskan Menjadi Ruby Level ⟨2⟩ pada interface synthesis secara cepat.  <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11180,
+   "text": "<font color='#5df9ff'>Hanya bisa digunakan di equipment di atas level ⟨0⟩.<br><br>Gunakan di senjata atau armor untuk meningkatkan kekuatannya.<br><br>Pergi ke panel sintesis cepat, kombinasikan lv.⟨1⟩ Ruby dengan ⟨2⟩ lv.⟨3⟩ Ruby, dan kamu bisa mendapatkan lv.⟨4⟩ Ruby. <br>Katalis akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11181,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Ruby Level  ⟨1⟩ dan ⟨2⟩ Rubies lvl ⟨3⟩ dapat disynthesiskan Menjadi Ruby Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11182,
+   "text": "<font color='#5df9ff'>Dapat digunakan pada semua level<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>⟨0⟩  Sapphires Level ⟨1⟩ dapat disynthesiskan Menjadi Sapphire Level ⟨2⟩  pada interface synthesis secara cepat.  <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11183,
+   "text": "<font color='#5df9ff'>Hanya bisa digunakan di equipment di atas level ⟨0⟩.<br><br>Gunakan di senjata atau armor untuk meningkatkan kekuatannya.<br><br>Pergi ke panel sintesis cepat, kombinasikan lv.⟨1⟩ Sapphire dengan⟨2⟩ lv.⟨3⟩ Sapphire, dan kamu bisa mendapatkan lv.⟨4⟩ Sapphire. <br>Katalis akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11184,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Sapphire Level ⟨1⟩ dan ⟨2⟩ Sapphire Level ⟨3⟩ dapat disynthesiskan Menjadi Sapphire Level  ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11185,
+   "text": "<font color='#5df9ff'>Dapat digunakan pada semua level<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>⟨0⟩ Topazs Level ⟨1⟩ dapat disynthesiskan Menjadi Topazs Level ⟨2⟩ pada interface synthesis secara cepat.  <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11186,
+   "text": "<font color='#5df9ff'>Hanya bisa digunakan di equipment di atas level ⟨0⟩.<br><br>Gunakan di senjata atau armor untuk meningkatkan kekuatannya.<br><br>Pergi ke panel sintesis cepat, kombinasikan lv.⟨1⟩ Sapphire dan ⟨2⟩ lv.⟨3⟩ Sapphire, dan kamu bisa mendapatkan lv.⟨4⟩. <br>Katalis akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11187,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Topaz Level ⟨1⟩ Topaz dan ⟨2⟩ Topazs Level ⟨3⟩ dapat disynthesiskan Menjadi Topaz Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11188,
+   "text": "<font color='#5df9ff'>Dapat digunakan pada semua level<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>⟨0⟩ Emeralds Level ⟨1⟩ dapat disynthesiskan Menjadi Emerald Level ⟨2⟩ pada interface synthesis secara cepat.  <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11189,
+   "text": "<font color='#5df9ff'>Hanya bisa digunakan di equipment di atas level ⟨0⟩.<br><br>Gunakan di senjata atau armor untuk meningkatkan kekuatannya.<br><br>Pergi ke panel sintesis cepat, kombinasikan lv.⟨1⟩ Emerald dan ⟨2⟩ lv.⟨3⟩ Emerald, dan kamu bisa mendapatkan lv.⟨4⟩ Emerald. <br>Katalis akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11190,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Emerald Level ⟨1⟩ dan ⟨2⟩ Emerald Level ⟨3⟩ dapat disynthesiskan Menjadi Emerald Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11191,
+   "text": "<font color='#5df9ff'>Dapat digunakan pada semua level<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>⟨0⟩ Diamonds Level ⟨1⟩ dapat disynthesiskan Menjadi Diamond Level ⟨2⟩ pada interface synthesis secara cepat.  <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11192,
+   "text": "<font color='#5df9ff'>Hanya bisa digunakan di equipment di atas level ⟨0⟩.<br><br>Gunakan di senjata atau armor untuk meningkatkan kekuatannya.<br><br>Pergi ke panel sintesis cepat, kombinasikan lv.⟨1⟩ Diamond dan ⟨2⟩ lv.⟨3⟩ Diamond, dan kamu bisa mendapatkan lv.⟨4⟩ Diamond. <br>Katalis akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11193,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Diamond Level ⟨1⟩ dan ⟨2⟩ Diamond Level ⟨3⟩ dapat disynthesiskan Menjadi Diamond Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11194,
+   "text": "<font color='#5df9ff'>Dapat digunakan pada semua level<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>⟨0⟩ Agates Level ⟨1⟩ dapat disynthesiskan Menjadi Agate Level ⟨2⟩ pada interface synthesis secara cepat.  <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11195,
+   "text": "<font color='#5df9ff'>Hanya bisa digunakan di equipment di atas level ⟨0⟩.<br><br>Gunakan di senjata atau armor untuk meningkatkan kekuatannya.<br><br>Pergi ke panel sintesis cepat, kombinasikan lv.⟨1⟩ Agate dan ⟨2⟩ lv.⟨3⟩ Agate, dan kamu bisa mendapatkan lv.⟨4⟩ Agate<br>Katalis akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11196,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Agate Level ⟨1⟩ dan ⟨2⟩ Agate Level ⟨3⟩  dapat disynthesiskan Menjadi Agate Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11197,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Rubies Level ⟨1⟩ dan ⟨2⟩ Rubies lvl ⟨3⟩ dapat disynthesiskan Menjadi Rubies Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11198,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Gems Level sudah Max tidak dapat di synthesis lagi.</font>"
+  },
+  {
+   "n": 11199,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Ruby Lv.⟨1⟩ Ditambah ⟨2⟩  rubie lv.⟨3⟩ dapat dikombinasikan menjadi ruby lv.⟨4⟩ dari sinstesis cepat. <br>Catalys akan hilang jika gagal.</font>"
+  },
+  {
+   "n": 11200,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Gem level tertinggi tidak dapat disintesiskan lagi.</font>"
+  },
+  {
+   "n": 11201,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Sapphire Level  ⟨1⟩ dan ⟨2⟩ Sapphire Level ⟨3⟩ dapat disynthesiskan Menjadi Sapphire Level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11202,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Sapphire Lv.⟨1⟩ Ditambah ⟨2⟩  Sapphire lv.⟨3⟩ dapat dikombinasikan menjadi Sapphire lv.⟨4⟩ dari sinstesis cepat. <br>Catalys akan hilang jika gagal.</font>"
+  },
+  {
+   "n": 11203,
+   "text": "<font color='#5df9ff'>Digunakan untuk level diatas：⟨0⟩<br><br>Slotted pada weapon atau armor akan mengupgrade equipment kamu.<br><br>Topaz Level ⟨1⟩ dan ⟨2⟩ Topazs Level ⟨3⟩ dapat disynthesiskan Menjadi Topaz  level ⟨4⟩ pada interface synthesis secara cepat. <br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 11204,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Topaz Lv.⟨1⟩ Ditambah ⟨2⟩  Topaz lv.⟨3⟩ dapat dikombinasikan menjadi Topaz lv.⟨4⟩ dari sinstesis cepat. <br>Catalys akan hilang jika gagal.</font>"
+  },
+  {
+   "n": 11205,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Emerald Lv.⟨1⟩ Ditambah ⟨2⟩  Emerald lv.⟨3⟩ dapat dikombinasikan menjadi Emerald lv.⟨4⟩ dari sinstesis cepat. <br>Catalys akan hilang jika gagal.</font>"
+  },
+  {
+   "n": 11206,
+   "text": "<font color='#5df9ff'>Sunfire Gem Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11207,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Diamond Lv.⟨1⟩ Ditambah ⟨2⟩  Diamond lv.⟨3⟩ dapat dikombinasikan menjadi Diamond lv.⟨4⟩ dari sinstesis cepat. <br>Catalys akan hilang jika gagal.</font>"
+  },
+  {
+   "n": 11208,
+   "text": "<font color='#5df9ff'>Menaruh pada equipment yang lebih besar dari lv.⟨0⟩<br><br>Menaruh pada weapon atau armor Dapat meningkatkan equipment.<br><br>Agate Lv.⟨1⟩ Ditambah ⟨2⟩  Agate lv.⟨3⟩ dapat dikombinasikan menjadi Agate lv.⟨4⟩ dari sinstesis cepat. <br>Catalys akan hilang jika gagal.</font>"
+  },
+  {
+   "n": 11209,
+   "text": "<font color='#5df9ff'>Hanya Equipment yang lebih besar dari lv.⟨0⟩ yang dapat di gabungkan <br><br>Penggabungan terhadap senjata atau armor akan meningkatkan kekuatan equipment tersebut.<br><br>Gem ini tidak dapat di sintesiskan.</font>"
+  },
+  {
+   "n": 11210,
+   "text": "<font color='#5df9ff'>Enhancement Gem bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11211,
+   "text": "<font color='#5df9ff'>Silvermoon Gem Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11212,
+   "text": "<font color='#5df9ff'>Flamefire Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11213,
+   "text": "<font color='#5df9ff'>Earthen Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11214,
+   "text": "<font color='#5df9ff'>Windstorm Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11215,
+   "text": "<font color='#5df9ff'>Thunderwail Jade Bintang ⟨0⟩</font> "
+  },
+  {
+   "n": 11216,
+   "text": "<font color='#5df9ff'>Abyssal Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11217,
+   "text": "<font color='#5df9ff'>Glittering Jade Bintang ⟨0⟩</font>"
+  },
+  {
+   "n": 11218,
+   "text": "<font color='#5df9ff'>Item yang di hasilkan dari  villain. Gunakan ⟨0⟩ untuk menggabungkan.</font>"
+  },
+  {
+   "n": 11219,
+   "text": "<font color='#5df9ff'>Item yang di hasilkan dari  villain. Sudah mencapai Level yang maksimal. Congratulations untuk menjadi master villain Felix!</font>"
+  },
+  {
+   "n": 11220,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh Level ⟨0⟩ gift coupon Gift Box dan ⟨1⟩ gift coupon.</font>"
+  },
+  {
+   "n": 11221,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ gift coupon.</font>"
+  },
+  {
+   "n": 11222,
+   "text": "<font color='#5df9ff'>Restore ⟨0⟩ HP.<br>Dapat memberi makan  pet.<br>[line]Tipe Makanan: Medication<br> Tingkat kekenyangan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11223,
+   "text": "<font color='#5df9ff'>Dapat memulihkan ⟨0⟩ HP.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11224,
+   "text": "<font color='#5df9ff'>Dapat memperluas tempat penyimpanan dari HP carrier bag sebesar ⟨0⟩,⟨1⟩ points.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11225,
+   "text": "<font color='#5df9ff'>Dapat meningkatkan kapasitas HP Carrier bag ini dengan ⟨0⟩ poin.<br>Bisa menjadi makanan pet.<br>[line]Tipe makanan : Obat<br>Tingkat kenyang : ⟨1⟩</font>"
+  },
+  {
+   "n": 11226,
+   "text": "<font color='#5df9ff'>Restore ⟨0⟩ HP and ⟨1⟩ Chakra.<br>Dapat memberi makan  pet.<br>[line]Tipe Makanan: Medication<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11227,
+   "text": "<font color='#5df9ff'>Dapat memulihkan ⟨0⟩ HP dan ⟨1⟩ Chakra.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11228,
+   "text": "<font color='#5df9ff'>Meningkatkan tingkat keberhasilan selama inskripsi.</font>"
+  },
+  {
+   "n": 11229,
+   "text": "<font color='#5df9ff'>Material yang digunakan untuk meningkatkan equipment. Hanya equipment diabwah lv.⟨0⟩(termasuk ⟨1⟩) dapat ditingkatkan</font>"
+  },
+  {
+   "n": 11230,
+   "text": "<font color='#5df9ff'>Setiap engrave crystal dapat meningkatkan tingkat kesuksesan sebesar ⟨0⟩%. Hanya dapat digunakan untuk equipment dibawah lv.⟨1⟩(termasuk ⟨2⟩)</font>"
+  },
+  {
+   "n": 11231,
+   "text": "<font color='#5df9ff'>Meningkatkan kapasitas penyimpanan Chakra Carrier Bag sebesar ⟨0⟩,⟨1⟩.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11232,
+   "text": "<font color='#5df9ff'>Dapat meningkatkan kapasitas Chakra Carrier Bag ⟨0⟩ poin.<br>Bisa menjadi makanan pet.<br>[line]Tipe Makanan : Obat<br>Tingkat Kenyang : ⟨1⟩</font>"
+  },
+  {
+   "n": 11233,
+   "text": "<font color='#5df9ff'>Kumpulan batu magic dengan kekuatan besar, dapat digunakan untuk meningkatkan tingkat senjata.</font>"
+  },
+  {
+   "n": 11234,
+   "text": "<font color='#5df9ff'>Kumpulan batu magic dengan kekuatan besar, dapat digunakan untuk meningkatkan tingkat Armor.</font>"
+  },
+  {
+   "n": 11235,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Batu enchantment Helm dan Sarung tangan yang meningkatkan peralatan Block dan Dodge sebesar ⟨1⟩ poin.</font>"
+  },
+  {
+   "n": 11236,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩ dan dodge sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11237,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩, dodge sebesar ⟨2⟩ dan constitution sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11238,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩, dodge sebesar ⟨2⟩ dan defense sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11239,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩, dodge sebesar ⟨2⟩ dan max HP sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11240,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩ dan dodge sebesar ⟨2⟩ .</font>"
+  },
+  {
+   "n": 11241,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan max HP pada peralatan sebesar ⟨1⟩.</font>"
+  },
+  {
+   "n": 11242,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan armor break pada peralatan sebesar ⟨1⟩ dan defense sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11243,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan stamina pada peralatan sebesar ⟨1⟩, max HP sebesar ⟨2⟩% dan dodge sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11244,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩, Great Strength Sebesar ⟨2⟩ dan max HP sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11245,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan critical strike rata rata pada peralatan sebesar ⟨1⟩ and agility by ⟨2⟩.</font>"
+  },
+  {
+   "n": 11246,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Coat enchantment stone akan meningkatkan stamina pada peralatan sebesar ⟨1⟩,max HP sebesar ⟨2⟩% dan dodge sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11247,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Ring dan talisman enchantment stone dapat meningkatkan Agility pada peralatan sebesar ⟨1⟩ point，Armor Break ⟨2⟩ point dan Defense sebesar ⟨3⟩ point.</font>"
+  },
+  {
+   "n": 11248,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Ring dan talisman enchantment stone dapat meningkatkan Max Attack sebesar ⟨1⟩ point dan Critical Strike sebesar ⟨2⟩ point.</font>"
+  },
+  {
+   "n": 11249,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk cloth，Meningkatkan Max HP sebesar ⟨1⟩ poin, Speed sebesar ⟨2⟩% dan Block sebesar ⟨3⟩ poin.</font>"
+  },
+  {
+   "n": 11250,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk cloth，meningkatkan Strength sebesar ⟨1⟩ poin, Dodge sebesar ⟨2⟩ poin.</font>"
+  },
+  {
+   "n": 11251,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan  block pada peralatan sebesar ⟨1⟩.</font>"
+  },
+  {
+   "n": 11252,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan  block pada peralatan sebesar ⟨1⟩ dan dodge sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11253,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan  block pada peralatan sebesar ⟨1⟩ dan constitution sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11254,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan  block pada peralatan sebesar ⟨1⟩ dan defense sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11255,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan  block pada peralatan sebesar ⟨1⟩ .</font>"
+  },
+  {
+   "n": 11256,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan dodge pada peralatan sebesar ⟨1⟩ dan block sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11257,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan agility pada peralatan sebesar ⟨1⟩， Great Strength Sebesar ⟨2⟩ dan constitution sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11258,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan max attack pada peralatan sebesar ⟨1⟩ dan dodge sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11259,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Helm dan wrist enchantment stone meningkatkan max HP pada peralatan sebesar ⟨1⟩ dan block sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11260,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Helm dan Gloves enchantment stone dapat meningkatkan Dodge pada peralatan sebesar ⟨1⟩ point dan Block sebesar ⟨2⟩ point.</font>"
+  },
+  {
+   "n": 11261,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Helm dan Gloves enchantment stone dapat meningkatkan Stamina pada peralatan sebesar ⟨1⟩ point, Constitution ⟨2⟩ point dan Armor Break ⟨3⟩ point.</font>"
+  },
+  {
+   "n": 11262,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk helm dan glove，meningkatkan Dodge sebesar ⟨1⟩ poin, Block sebesar ⟨2⟩ poin.</font>"
+  },
+  {
+   "n": 11263,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk helm dan gloves，increases Stamina sebesar ⟨1⟩ poin, Constitution sebesar ⟨2⟩ dan Armor Break sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11264,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan dodge pada peralatan sebesar ⟨1⟩.</font>"
+  },
+  {
+   "n": 11265,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan dodge pada peralatan sebesar ⟨1⟩ dan block sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11266,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan dodge pada peralatan sebesar ⟨1⟩ dan constitution sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11267,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan dodge pada peralatan sebesar ⟨1⟩ dan defense sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11268,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan constitution pada peralatan sebesar ⟨1⟩ dan block sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11269,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan critical strike rata rata pada peralatan sebesar ⟨1⟩,dodge sebesar ⟨2⟩ dan attack sebesar ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11270,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan piercing pada peralatan sebesar ⟨1⟩，hit sebesar ⟨2⟩ dan max HP sebesar ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11271,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan max attack pada peralatan sebesar ⟨1⟩,armor break sebesar ⟨2⟩ dan dodge sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11272,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan critical strike rata rata pada peralatan sebesar ⟨1⟩ dan defense sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11273,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan critical strike rata rata pada peralatan sebesar ⟨1⟩,dodge sebesar ⟨2⟩ and attack by ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11274,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Belt dan shoes enchantment stone akan meningkatkan piercing pada peralatan sebesar ⟨1⟩,hit sebesar ⟨2⟩ dan max HP sebesar ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11275,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Batu enchantment belt dan sepatu yang meningkatkan peralatan Hit sebesar ⟨1⟩ poin dan Pierce sebesar ⟨2⟩ poin.</font>"
+  },
+  {
+   "n": 11276,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Batu enchantment belt dan sepatu yang meningkatkan peralatan Attack sebesar ⟨1⟩%, Constitution sebesar ⟨2⟩ poin dan Armor Break sebesar ⟨3⟩ poin.</font>"
+  },
+  {
+   "n": 11277,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br> Enchantment stone untuk belt dan boots，meningkatkan Hit sebesar ⟨1⟩ poin dan Pierce sebesar ⟨2⟩ poin.</font>"
+  },
+  {
+   "n": 11278,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br> Enchantment stone untuk belt dan boots，meningkat sebesar Attack sebesar ⟨1⟩%, Constitution sebesar ⟨2⟩ points dan Armor Break sebesar ⟨3⟩ poin.</font>"
+  },
+  {
+   "n": 11279,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Belt dan shoes enchantment stone yang meningkatkan Defense sebesar ⟨1⟩ dan max HP by ⟨2⟩% pada equipment .</font>"
+  },
+  {
+   "n": 11280,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Belt dan shoes enchantment stone yang meningkatkan Defense sebesar ⟨1⟩ dan max HP sebesar ⟨2⟩% pada equipment.</font>"
+  },
+  {
+   "n": 11281,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Belt dan shoes enchantment stone yang meningkatkan Defense sebesar ⟨1⟩ danmax HP sebesar ⟨2⟩% pada equipment.</font>"
+  },
+  {
+   "n": 11282,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Belt dan shoes enchantment stone dapat meningkatkan Constitution sebesar ⟨1⟩ dan menurunkan damage sebesar ⟨2⟩% pada equipment.</font>"
+  },
+  {
+   "n": 11283,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan rata-rata critical strike sebesar ⟨1⟩, Armor Break by ⟨2⟩ dan Luck sebesar ⟨3⟩ pada equipment.</font>"
+  },
+  {
+   "n": 11284,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Ring dan talisman enchantment stone dapat meningkatkan bonus EXP sebesar ⟨1⟩% Bonus alat ninja sebesar ⟨2⟩% dan max Chakra sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11285,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Weapon dan cloth enchantment stone dapat meningkatkan Hit sebesar ⟨1⟩, Pierce sebesar ⟨2⟩ dan max attack sebesar ⟨3⟩ pada equipment.</font>"
+  },
+  {
+   "n": 11286,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Helm dan wrist enchantment stone dapat meningkatkan max HP sebesar ⟨1⟩, Block sebesar ⟨2⟩ dan enhance water release skill sebesar ⟨3⟩% pada equipment.</font>"
+  },
+  {
+   "n": 11287,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Helm dan wrist enchantment stone dapat meningkatkan Dodge sebesar ⟨1⟩ dan enhance illusion sebesar ⟨2⟩% pada equipment.</font>"
+  },
+  {
+   "n": 11288,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Weapon dan cloth enchantment stone akan meningkatkan Speed sebesar ⟨1⟩% dan enhance Critical Strike bsebesar ⟨2⟩% pada equipment.</font>"
+  },
+  {
+   "n": 11289,
+   "text": "<font color='#5df9ff'>Dibutuhkan level: ⟨0⟩<br><br>Helm and Gloves enchantment stone yang meningkatkan Armor Break sebesar ⟨1⟩ and Attack sebesar ⟨2⟩%.</font>"
+  },
+  {
+   "n": 11290,
+   "text": "<font color='#5df9ff'>Dibutuhkan level: ⟨0⟩<br><br>Weapon and clothes enchantment stone yang meningkatkan ⟨1⟩ max HP and ⟨2⟩ defence.</font>"
+  },
+  {
+   "n": 11291,
+   "text": "<font color='#5df9ff'>Dibutuhkan level: ⟨0⟩<br><br>Belt and shoes enchantment stone yang meningkatkan ⟨1⟩% speed and ⟨2⟩ dodge.</font>"
+  },
+  {
+   "n": 11292,
+   "text": "<font color='#5df9ff'>Membutuhkan Level: ⟨0⟩<br><br>Rind dan talisman enchantment stone akan meningkatkan ⟨1⟩ Hit dan ⟨2⟩ Stamina.</font>"
+  },
+  {
+   "n": 11293,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Helm dan wrist enchantment stone akan meningkatka Armor Break ⟨1⟩ point dan Attack ⟨2⟩% dari equipment .</font>"
+  },
+  {
+   "n": 11294,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Weapon dan cloth enchantment stone dapat meningkatkan max HP ⟨1⟩ point dan Defence ⟨2⟩ point dari equipment .</font>"
+  },
+  {
+   "n": 11295,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Belt dan shoes enchantment stone meningkatkan Speed ⟨1⟩% dan Dodge ⟨2⟩ point dari equipment .</font>"
+  },
+  {
+   "n": 11296,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Ring dan talisman enchantment stone dapat meningkatkan Hit ⟨1⟩ point dan Stamina ⟨2⟩ point pada equipment .</font>"
+  },
+  {
+   "n": 11297,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Helm dan glove enchantment stone Hit ⟨1⟩ point, Max Attack ⟨2⟩ point, Meningkatkan pengeluaran skill petir ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11298,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Weapon dan armor enchantment stone Agility ⟨1⟩ point dan Critical Strike ⟨2⟩ point.</font>"
+  },
+  {
+   "n": 11299,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Boots dan belt enchantment stone Hit ⟨1⟩ point, Min Attack ⟨2⟩ point dan Luck ⟨3⟩ point.</font>"
+  },
+  {
+   "n": 11300,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：⟨0⟩<br><br>Ring dan talisman enchantment stone that increase equipment max HP ⟨1⟩ point, Constitution ⟨2⟩ point, Meningkatkan pengeluaran Skill Healing ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11301,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan critical strike pada peralatan rata rata sebesar ⟨1⟩.</font>"
+  },
+  {
+   "n": 11302,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan critical strike pada peralatan rata rata sebesar ⟨1⟩ dan hit sebesar ⟨2⟩ .</font>"
+  },
+  {
+   "n": 11303,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan critical strike pada peralatan rata rata sebesar ⟨1⟩ dan piercing sebesar ⟨2⟩ .</font>"
+  },
+  {
+   "n": 11304,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan critical strike pada peralatan rata rata sebesar ⟨1⟩ dan armor break sebesar ⟨2⟩ .</font>"
+  },
+  {
+   "n": 11305,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan armor break pada peralatan sebesar ⟨1⟩ .</font>"
+  },
+  {
+   "n": 11306,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan max attack pada peralatan sebesar ⟨1⟩ dan critical strike rata rata sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11307,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan constitution pada peralatan sebesar ⟨1⟩, stamina sebesar ⟨2⟩ dan defense sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11308,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Ring dan talisman enchantment stone akan meningkatkan block pada peralatan sebesar ⟨1⟩, hit sebesar ⟨2⟩ dan speed sebesar ⟨3⟩%.</font>"
+  },
+  {
+   "n": 11309,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>>Ring dan talisman enchantment stone dapat meningkatkan Agility pada peralatan sebesar ⟨1⟩ point, Armor Break ⟨2⟩ point dan Defense ⟨3⟩ point.</font>"
+  },
+  {
+   "n": 11310,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Ring dan talisman enchantment stone dapat meningkatkan max attack pada peralatan sebesar ⟨1⟩ point dan Critical Strike sebesar ⟨2⟩ point.</font>"
+  },
+  {
+   "n": 11311,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk ring dan talisman，meningkatkan Agility sebesar ⟨1⟩ poin, Armor Break sebesar ⟨2⟩ poin dan Defence sebesar ⟨3⟩ poin.</font>"
+  },
+  {
+   "n": 11312,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk ring dan talisman，meningkatkan Max Attack sebesar ⟨1⟩ poin dan Critical Strike sebesar ⟨2⟩ poin.</font>"
+  },
+  {
+   "n": 11313,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩.</font>"
+  },
+  {
+   "n": 11314,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩ dan pukulan sebesar  ⟨2⟩.</font>"
+  },
+  {
+   "n": 11315,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩ dan piercing sebesar  ⟨2⟩.</font>"
+  },
+  {
+   "n": 11316,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩ dan armor break sebesar  ⟨2⟩.</font>"
+  },
+  {
+   "n": 11317,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩ dan Max serangan sebesar  ⟨2⟩.</font>"
+  },
+  {
+   "n": 11318,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩ .</font>"
+  },
+  {
+   "n": 11319,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical senjata sebesar ⟨1⟩, armor break sebesar ⟨2⟩ dan dodge sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11320,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan pukulan senjata sebesar ⟨1⟩ dan critical strike rata-rata sebesar ⟨2⟩.</font>"
+  },
+  {
+   "n": 11321,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan kekuatan senjata sebesar ⟨1⟩ dan Max serangan sebesar  ⟨2⟩.</font>"
+  },
+  {
+   "n": 11322,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan agility senjata sebesar ⟨1⟩, critical strike rate by ⟨2⟩ dan piercing sebesar  ⟨3⟩.</font>"
+  },
+  {
+   "n": 11323,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan rata rata pukulan critical pada senjata sebesar ⟨1⟩, armor break sebesar ⟨2⟩ dan dodge sebesar ⟨3⟩.</font>"
+  },
+  {
+   "n": 11324,
+   "text": "<font color='#5df9ff'>Level Penggunaan：⟨0⟩<br><br>Weapon enchantment stone meningkatkan agility senjata sebesar ⟨1⟩, critical strike rata-rata sebesar ⟨2⟩ dan piercing sebesar  ⟨3⟩.</font>"
+  },
+  {
+   "n": 11325,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Enchantment stone meningkatkan Hit senjata sebesar ⟨1⟩ dan Critical Strike sebesar ⟨2⟩ point. </font>"
+  },
+  {
+   "n": 11326,
+   "text": "<font color='#5df9ff'>Level Penggunaan: ⟨0⟩<br><br>Enchantment stone meningkatkan Strength senjata sebesar ⟨1⟩, Critical Strike sebesar ⟨2⟩ dan Pierce sebesar ⟨3⟩ poiont. </font>"
+  },
+  {
+   "n": 11327,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk weapon，meningkatkan Hit sebesar ⟨1⟩ poin dan Critical Strike sebesar ⟨2⟩ poin.</font>"
+  },
+  {
+   "n": 11328,
+   "text": "<font color='#5df9ff'>Dibutuhkan lvl: ⟨0⟩<br><br>Enchantment stone untuk weapons，meningkatkan Strength sebesar ⟨1⟩ poin，Critical Strike sebesar ⟨2⟩ poin dan Pierce sebesar ⟨3⟩ poin.</font>"
+  },
+  {
+   "n": 11329,
+   "text": "<font color='#5df9ff'>Level ：⟨0⟩<br><br>Weapon enchantment stone yang di berikan oleh bos tempa. Meningkatkan max serangan senjata ⟨1⟩ setelah enchantment.</font>"
+  },
+  {
+   "n": 11330,
+   "text": "<font color='#5df9ff'>dark wing dragon, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  }
+ ]
+}

@@ -1,0 +1,1053 @@
+{
+ "terms": {
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Soifon": "Soi Fon",
+  "Unohana Retsu": "Retsu Unohana",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Kantung Batu": "Stone Pouch",
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Jembatan Api": "Fiery Ridge",
+  "Sungai ketenangan": "Verdant Alley",
+  "Sungai Sakura": "Slowflower River",
+  "Dataran Subur": "Greenwaves Plain",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Tapak Petir": "Thundering Steps",
+  "Tebing Keramat": "Holywood Range",
+  "Lembah awan": "Windscent Pass",
+  "Padang Berangin": "Ashvoid Gully",
+  "Lembah Angin": "Typhoon Plateau",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Pantai Naga": "Dragontame Coast",
+  "Amegakure": "Hidden Rain Village",
+  "Stinger Bee": "Bee Stingers",
+  "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Hyuga Neji": "Neji Hyuga",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Inoue Orihime": "Orihime Inoue",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Maneater Blossom": "Man-Eater",
+  "Treant": "Tree Ent",
+  "Sweet Potato Demon": "Potato",
+  "Sushi Monster": "Sushi",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 9827,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Shizune</font>"
+  },
+  {
+   "n": 9828,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Alice</font>"
+  },
+  {
+   "n": 9829,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Priest</font>"
+  },
+  {
+   "n": 9830,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Ghost Lady</font>"
+  },
+  {
+   "n": 9831,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Zombie Lady</font>"
+  },
+  {
+   "n": 9832,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Mizukage</font>"
+  },
+  {
+   "n": 9833,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Uzumaki Naruto</font>"
+  },
+  {
+   "n": 9834,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Gaara</font>"
+  },
+  {
+   "n": 9835,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hatake Kakashi</font>"
+  },
+  {
+   "n": 9836,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Uchiha Sasuke</font>"
+  },
+  {
+   "n": 9837,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Uchiha Itachi</font>"
+  },
+  {
+   "n": 9838,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan ⟨0⟩nd Hokage</font>"
+  },
+  {
+   "n": 9839,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Orochimaru</font>"
+  },
+  {
+   "n": 9840,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Zangetsu</font>"
+  },
+  {
+   "n": 9841,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan ⟨0⟩rd Hokage</font>"
+  },
+  {
+   "n": 9842,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hollowfied Grimmjow</font>"
+  },
+  {
+   "n": 9843,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Aizen</font>"
+  },
+  {
+   "n": 9844,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan ⟨0⟩th Hokage</font>"
+  },
+  {
+   "n": 9845,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Jiraiya</font>"
+  },
+  {
+   "n": 9846,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Sakura Haruno</font>"
+  },
+  {
+   "n": 9847,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Arale</font>"
+  },
+  {
+   "n": 9848,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Yamanaka Ino</font>"
+  },
+  {
+   "n": 9849,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Mitarashi Anko</font>"
+  },
+  {
+   "n": 9850,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Temari</font>"
+  },
+  {
+   "n": 9851,
+   "text": "<font color='#5df9ff'>Box</font>"
+  },
+  {
+   "n": 9852,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Tenten</font>"
+  },
+  {
+   "n": 9853,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Haku</font>"
+  },
+  {
+   "n": 9854,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Kurotsuchi Nemu</font>"
+  },
+  {
+   "n": 9855,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Kusajishi Yachiru</font>"
+  },
+  {
+   "n": 9856,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Kotetsu Isane</font>"
+  },
+  {
+   "n": 9857,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Konan</font>"
+  },
+  {
+   "n": 9858,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Yadomaru Sasha</font>"
+  },
+  {
+   "n": 9859,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Arisawa Tatsuki</font>"
+  },
+  {
+   "n": 9860,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Bomb Rukia</font>"
+  },
+  {
+   "n": 9861,
+   "text": "<font color='#5df9ff'>Kartu nama tanpa nama, tidak dimengerti cara penggunaannya</font>"
+  },
+  {
+   "n": 9862,
+   "text": "<font color='#5df9ff'>Mendapatkan Kartu nama karakter secara acak setelah menggunakan tas misteri, semakin tinggi level, semakin tinggi nilai kartu nama yang diperoleh.</font>"
+  },
+  {
+   "n": 9863,
+   "text": "<font color='#5df9ff'>Memperoleh ⟨0⟩-hari VIP privilege Ketika digunakan. Pengguna VIP menikmati berbagai keuntungan dalam permainan!<br><br>Untuk memahami rincian keistimewaan VIP, klik pada bagian atas layar<font color='#FF6565'> VIP icon </font>！</font>"
+  },
+  {
+   "n": 9864,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Rubies Level ⟨1⟩ .</font>"
+  },
+  {
+   "n": 9865,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Rubies Level ⟨1⟩ </font>"
+  },
+  {
+   "n": 9866,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Sapphires Level ⟨1⟩ .</font>"
+  },
+  {
+   "n": 9867,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Topazes Level ⟨1⟩ .</font>"
+  },
+  {
+   "n": 9868,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Diamond Level ⟨1⟩ .</font>"
+  },
+  {
+   "n": 9869,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Emeralds Level ⟨1⟩ .</font>"
+  },
+  {
+   "n": 9870,
+   "text": "<font color='#5df9ff'>Sebuah tas penuh dengan gems, membuka untuk mendapatkan ⟨0⟩ Agates Level  ⟨1⟩ .</font>"
+  },
+  {
+   "n": 9871,
+   "text": "<font color='#5df9ff'>Brick</font>"
+  },
+  {
+   "n": 9872,
+   "text": "<font color='#5df9ff'>Waterdrop Crystal</font>"
+  },
+  {
+   "n": 9873,
+   "text": "<font color='#5df9ff'>Berbahaya! ! </font>\nUse bag's<font color='#ff0000'> Sintesis cepat </font>untuk memperoleh<font color='#5df9ff'>Demon Proof of Suppression</font>[line]\n<font color='#5df9ff'>Anonymous Namecard</font>+<font color='#5df9ff'>blue attribute equipment*⟨0⟩</font>=<font color='#5df9ff'>Hand Grenade</font>(High probability) \n<font color='#5df9ff'>Hand Grenade</font>+<font color='#5df9ff'>blue attribute equipment*⟨1⟩</font>=<font color='#5df9ff'>Demon Proof of Suppression\n</font>(Kemungkinan besar) \n<font color='#5df9ff'>Hand Grenade</font>+<font color='#5df9ff'>Enchantment Stone*⟨2⟩</font>=<font color='#5df9ff'>Demon Proof of Suppression</font>\n(Kemungkinan besar) \n<font color='#5df9ff'>Hand Grenade</font>+<font color='#5df9ff'>Gem of Justice*⟨3⟩</font>=<font color='#5df9ff'>Demon Proof of Suppression</font>"
+  },
+  {
+   "n": 9874,
+   "text": "<font color='#5df9ff'> Ini adalah gem yang dapat membawa keberuntungan dan meningkatkan kemungkinan barang langka! </ Font>"
+  },
+  {
+   "n": 9875,
+   "text": "<font color='#5df9ff'>⟨0⟩ Pemain khusus mendapat Gift Box, berisi hadiah berharga dari ⟨1⟩ kepada semua pengguna. Terima kasih atas dukungan kamu kepada ⟨2⟩!</font>"
+  },
+  {
+   "n": 9876,
+   "text": "<font color='#5df9ff'>Sina Pemain khusus mendapat Gift Box, berisi hadiah berharga dari Sina kepada semua pengguna. Terima kasih atas dukungan kamu kepada Sina!</font>"
+  },
+  {
+   "n": 9877,
+   "text": "<font color='#5df9ff'>Duowan Pemain khusus mendapat Gift Box, berisi hadiah berharga dari Duowan kepada semua pengguna. Terima kasih atas dukungan kamu kepada Duowan!</font>"
+  },
+  {
+   "n": 9878,
+   "text": "<font color='#5df9ff'>⟨0⟩g Pemain khusus mendapat Gift Box, berisi hadiah berharga dari ⟨1⟩g kepada semua pengguna. Terima kasih atas dukungan kamu kepada ⟨2⟩g!</font>"
+  },
+  {
+   "n": 9879,
+   "text": "<font color='#5df9ff'>UUUU⟨0⟩ Pemain khusus mendapat Gift Box, berisi hadiah berharga dari UUUU⟨1⟩ kepada semua pengguna. Terima kasih atas dukungan kamu kepada UUUU⟨2⟩！</font>"
+  },
+  {
+   "n": 9880,
+   "text": "<font color='#5df9ff'>YZZ Pemain khusus mendapat Gift Box, berisi hadiah berharga dari YZZ kepada semua pengguna. Terima kasih atas dukungan kamu kepada YZZ！</font>"
+  },
+  {
+   "n": 9881,
+   "text": "<font color='#5df9ff'>Gift Box berharga dari member guild. ini adalah bukti dari konsentrasi. Mari berdiri tegak, baik hujan maupun terang！</font>"
+  },
+  {
+   "n": 9882,
+   "text": "<font color='#5df9ff'>Anime yang ekslusif dari anggota komunitas mendapatkan  Gift Box, berisi hadiah-hadiah berharga Steed Pemimpi untuk komunitas. Terima kasih atas dukungan Anda dalam komunitas anime!！</font>"
+  },
+  {
+   "n": 9883,
+   "text": "<font color='#5df9ff'>Ini adalah kotak kayu seukuran telapak tangan yang mungkin berisi barang yang berharga ... ... </ font>"
+  },
+  {
+   "n": 9884,
+   "text": "<font color='#5df9ff'> Ini dibuat dengan baik kotak kayu kecil yang mungkin berisi sesuatu </ Font>"
+  },
+  {
+   "n": 9885,
+   "text": "<font color='#5df9ff'> Ini adalah Treasure Chest yang berat dengan hati-hati dicat dengan warna merah</ Font>"
+  },
+  {
+   "n": 9886,
+   "text": "<font color='#5df9ff'> ini adalah ebony Treasure Chest yang indah berisikan barang berharga di dalamnya. </ Font>"
+  },
+  {
+   "n": 9887,
+   "text": "<font color='#5df9ff'>Glittering Treasure Chest yang di buat dengan baik, terdapat barang berharga di dalamnya! </ Font>"
+  },
+  {
+   "n": 9888,
+   "text": "<font color='#5df9ff'> Walaupun glitters, itu sebenarnya merupakan hasil dari sebuah sintesis gagal. Jadi mungkin tidak berguna. </ Font>"
+  },
+  {
+   "n": 9889,
+   "text": "<font color='#5df9ff'>mendapatkan secara acak Kostum mystery bag Ketika digunakan.</font>"
+  },
+  {
+   "n": 9890,
+   "text": "<font color='#5df9ff'>NinjaKita official Flameshadow Gift Box, beisikan hadiah resmi dari NinjaKitauntuk semua penggunanya, terima kasih atas dukungan abadi Anda di NinjaKita!!!</font>"
+  },
+  {
+   "n": 9891,
+   "text": "<font color='#5df9ff'> Ini adalah tas kecil yang berisi beberapa senjata pada Level ⟨0⟩. </ Font>"
+  },
+  {
+   "n": 9892,
+   "text": "<font color='#5df9ff'> Ini kotak kado indah yang mungkin berisi beberapa potions atau foods, Konoha arcanums atau bahkan Stone Bag Level ⟨0⟩ tergantung pada keberuntungan pemain. Pemain akan mendapatkan Gift Box setelah menyelesaikan misi mengunjugi warga. </ Font>"
+  },
+  {
+   "n": 9893,
+   "text": "<font color='#5df9ff'> Ini kotak kado indah yang mungkin berisi beberapa potions atau foods, Toad arcanums atau bahkan Lucky Gem tergantung pada keberuntungan pemain. Pemain akan mendapatkan Gift Box setelah menyelesaikan misi mengunjugi warga. </ Font>"
+  },
+  {
+   "n": 9894,
+   "text": "<font color='#5df9ff'> Ini adalah tambahan yang dapat digunakan bersama dengan grenades dan weapons untuk sintesis dan Menyelesaikan weapons menjadi bijih besi. </ Font>"
+  },
+  {
+   "n": 9895,
+   "text": "<font color='#5df9ff'> Ini adalah tambahan yang dapat digunakan bersama dengan grenades dan armors untuk sintesis dan Menyelesaikan armors menjadi bijih besi. </ Font>"
+  },
+  {
+   "n": 9896,
+   "text": "<font color='#5df9ff'> Ini adalah tambahan yang dapat digunakan bersama dengan grenades dan accessories untuk sintesis dan Menyelesaikan accessories menjadi bijih besi. </ Font>"
+  },
+  {
+   "n": 9897,
+   "text": "<font color='#5df9ff'> Gunakan ini sebagai katalis dengan granade dapat digunakan bersama dengan grenades, weapons, armors dan accessories untuk sintesis dan Menyelesaikan weapons, armors dan accessories menjadi bijih besi. </ Font>"
+  },
+  {
+   "n": 9898,
+   "text": "<font color='#5df9ff'> Ini adalah Talisman yang dapat mencegah tempat latihan kamu tidak diambil oleh pemain lain  selama ⟨0⟩ jam. </ Font>"
+  },
+  {
+   "n": 9899,
+   "text": "<font color='#5df9ff'> Ini adalah Talisman yang dapat mencegah tempat latihan kamu tidak ambil oleh pemain lain  selama ⟨0⟩ jam. </ Font>"
+  },
+  {
+   "n": 9900,
+   "text": "<font color='#5df9ff'>Masukkan item ini saat melengkapi enchantment menjalani free enchantment. Hanya digunakan pada Level ⟨0⟩ dan level Equpment dibawahnya</font>"
+  },
+  {
+   "n": 9901,
+   "text": "<font color='#5df9ff'>Masukkan item ini saat melengkapi refinement menjalani free refinement. Hanya digunakan pada Level ⟨0⟩ dan level Equpment dibawahnya</font>"
+  },
+  {
+   "n": 9902,
+   "text": "<font color='#5df9ff'>Masukkan item ini saat melengkapi enhancement menjalani free enhancement. Hanya digunakan pada Level ⟨0⟩ dan level Equpment dibawahnya</font>"
+  },
+  {
+   "n": 9903,
+   "text": "<font color='#5df9ff'>Masukkan item ini saat melengkapi slot creation menjalani free slot creation. Hanya digunakan pada Level ⟨0⟩ dan level Equpment dibawahnya</font>"
+  },
+  {
+   "n": 9904,
+   "text": "<font color='#5df9ff'>Windstorm Crystal</font>"
+  },
+  {
+   "n": 9905,
+   "text": "<font color='#5df9ff'>Magical box, berisikan kostum abu-abu atau biru.</font>"
+  },
+  {
+   "n": 9906,
+   "text": "<font color='#5df9ff'>Magical box, berisikan kostum orange atau brru.</font>"
+  },
+  {
+   "n": 9907,
+   "text": "<font color='#5df9ff'>Elegant giftbox, buka untuk mendapatkan Enhancement Talisman, Grenades atau Anonymous Namecard. </font>"
+  },
+  {
+   "n": 9908,
+   "text": "<font color='#5df9ff'>gift box untuk pemula, berisikan beberapa item!</font>"
+  },
+  {
+   "n": 9909,
+   "text": "<font color='#5df9ff'>Luxury gift box untuk pemula, berisikan beberapa item!</font>"
+  },
+  {
+   "n": 9910,
+   "text": "<font color='#5df9ff'>Carnival gift box sebagai rasa terima kasih untuk para pemain NinjaKita!<br>Buka untuk mendapatkan satu dari beberapa item: <br>Toad Arcanum<br>Level ⟨0⟩ Stone Bag<br>Level ⟨1⟩ EXP Bag<br>Level ⟨2⟩ Medal Bag<br>Level ⟨3⟩ Gift Coupon Bag<br>Watermelon<br>Demon suppression proof<br>Lucky Gem<br>Random kostum orange+⟨4⟩<br>⟨5⟩ hari VIP card<br>⟨6⟩ hari VIP card</font>"
+  },
+  {
+   "n": 9911,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Ulquiorra +⟨1⟩!</font>"
+  },
+  {
+   "n": 9912,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum HakuUlquiorra +⟨1⟩!</font>"
+  },
+  {
+   "n": 9913,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Grimmjow +⟨1⟩!</font>"
+  },
+  {
+   "n": 9914,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hitsugaya Toushiro +⟨1⟩!</font>"
+  },
+  {
+   "n": 9915,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hollowfied Hirako Shinji +⟨1⟩!</font>"
+  },
+  {
+   "n": 9916,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Gin Ichimaru +⟨1⟩!</font>"
+  },
+  {
+   "n": 9917,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Rock Lee +⟨1⟩!</font>"
+  },
+  {
+   "n": 9918,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hyuga Neji +⟨1⟩!</font>"
+  },
+  {
+   "n": 9919,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Scorpion +⟨1⟩!</font>"
+  },
+  {
+   "n": 9920,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Soifon +⟨1⟩!</font>"
+  },
+  {
+   "n": 9921,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Zangetsu +⟨1⟩!</font>"
+  },
+  {
+   "n": 9922,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hollowfied Grimmjow +⟨1⟩!</font>"
+  },
+  {
+   "n": 9923,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Yamanaka Ino +⟨1⟩!</font>"
+  },
+  {
+   "n": 9924,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Temari +⟨1⟩!</font>"
+  },
+  {
+   "n": 9925,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Haku +⟨1⟩!</font>"
+  },
+  {
+   "n": 9926,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Kusajishi Yachiru +⟨1⟩!</font>"
+  },
+  {
+   "n": 9927,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Yadomaru Sasha +⟨1⟩!</font>"
+  },
+  {
+   "n": 9928,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Momochi Zabuza +⟨1⟩!</font>"
+  },
+  {
+   "n": 9929,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Kurosaki Ichigo +⟨1⟩!</font>"
+  },
+  {
+   "n": 9930,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum White Ichigo +⟨1⟩!</font>"
+  },
+  {
+   "n": 9931,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Bomb Ichigo +⟨1⟩!</font>"
+  },
+  {
+   "n": 9932,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hollowfied Ulquiorra +⟨1⟩!</font>"
+  },
+  {
+   "n": 9933,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Shihouin Yoruichi +⟨1⟩!</font>"
+  },
+  {
+   "n": 9934,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Halibel +⟨1⟩!</font>"
+  },
+  {
+   "n": 9935,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Inoue Orihime +⟨1⟩!</font>"
+  },
+  {
+   "n": 9936,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hyuga Hinata +⟨1⟩!</font>"
+  },
+  {
+   "n": 9937,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Uzumaki Naruto +⟨1⟩!</font>"
+  },
+  {
+   "n": 9938,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Gaara +⟨1⟩!</font>"
+  },
+  {
+   "n": 9939,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Hatake Kakashi +⟨1⟩!</font>"
+  },
+  {
+   "n": 9940,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Uchiha Sasuke +⟨1⟩!</font>"
+  },
+  {
+   "n": 9941,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Uchiha Itachi +⟨1⟩!</font>"
+  },
+  {
+   "n": 9942,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Orochimaru +⟨1⟩!</font>"
+  },
+  {
+   "n": 9943,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Aizen +⟨1⟩!</font>"
+  },
+  {
+   "n": 9944,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum ⟨1⟩th Hokage +⟨2⟩!</font>"
+  },
+  {
+   "n": 9945,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Sakura Haruno +⟨1⟩!</font>"
+  },
+  {
+   "n": 9946,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Tsunade +⟨1⟩!</font>"
+  },
+  {
+   "n": 9947,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Kuchiki Rukia  +⟨1⟩!</font>"
+  },
+  {
+   "n": 9948,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Kuchiki Byakuya +⟨1⟩!</font>"
+  },
+  {
+   "n": 9949,
+   "text": "<font color='#5df9ff'>Precious Gift Box，buka untuk mendapatkan ⟨0⟩ kostum Nelliel +⟨1⟩!</font>"
+  },
+  {
+   "n": 9950,
+   "text": "<font color='#5df9ff'>Ini adalah talisman dimana dapat membantu latihan kamu dari ancaman pemain lain selama ⟨0⟩ jam.<br>kamu dapat menggunakan Talisman setiap ⟨1⟩ jam.</font>"
+  },
+  {
+   "n": 9951,
+   "text": "<font color='#5df9ff'>Sealing mark simbol semangat dari latihan khusus. kamu dapat meningkatkan  ⟨0⟩% dari EXP selama latihan di aula, selama ⟨1⟩ Jam.</font>"
+  },
+  {
+   "n": 9952,
+   "text": "<font color='#5df9ff'>Exclusive gift bag untuk media, Pemain NinjaKita, Terima kasih untuk dukunganmu!</font>"
+  },
+  {
+   "n": 9953,
+   "text": "<font color='#5df9ff'>Exclusive gift bag untuk guild, Pemain NinjaKita, Terima kasih untuk dukunganmu!</font>"
+  },
+  {
+   "n": 9954,
+   "text": "<font color='#5df9ff'>Telur dalam satu tempat, berisikan pet secara acak.</font>"
+  },
+  {
+   "n": 9955,
+   "text": "<font color='#5df9ff'>Fungsi: mengunci satu skill pet sehingga tidak dapat tertiban melalui proses pembelajaran.<br>Penggunaan: Dalam kandang pet, klick ikon skill untuk mengunci.<br>Satu penguncian membutuhkan penguncian pertama, dua penguncian membutuhkan skill kedua. Kamu dapat mengunci setidaknya dua skill!</font>"
+  },
+  {
+   "n": 9956,
+   "text": "<font color='#5df9ff'>Box Besar, Buka untuk mendapatkan ⟨0⟩ telur pet.</font>"
+  },
+  {
+   "n": 9957,
+   "text": "<font color='#5df9ff'>Festive telur pet, berisikan pet secara acak atau kejutan lain! </font>"
+  },
+  {
+   "n": 9958,
+   "text": "<font color='#5df9ff'>Pet Gift Box persiapan untuk berterimakasih untuk dukungan pemain NinjaKita!Buka untuk mendapatkan: <br>Spring Festival Pet EggX⟨0⟩<br>Pet Skill Lock X⟨1⟩<br>Little Bean X⟨2⟩</font>"
+  },
+  {
+   "n": 9959,
+   "text": "<font color='#5df9ff'>Horn of Sound</font>"
+  },
+  {
+   "n": 9960,
+   "text": "<font color='#5df9ff'>Setelah kematian dari sage ke ⟨0⟩, kalung nya yang berisi kekuatan besar juga pecah. Setiap potongan kalung memiliki kemampuan untuk muncul dalam setiap makhluk di dunia dengan bantuan yang berisi Chakra besar. </font>"
+  },
+  {
+   "n": 9961,
+   "text": "<font color='#5df9ff'>Aku harap Ninjakita dapat memberikanmu kesenangan. Lucky Money Gift Box berisikan gift coupons mungkin lebih dari ⟨0⟩ . Smoga menjadi liburan yang indah, terimakasih atas dukungannya!</font>"
+  },
+  {
+   "n": 9962,
+   "text": "<font color='#5df9ff'>Flat red paket, buka untuk mendapatkan ⟨0⟩ gift coupons</font>"
+  },
+  {
+   "n": 9963,
+   "text": "<font color='#5df9ff'>Ordinary red paket, buka untuk mendapatkan ⟨0⟩ gift coupons</font>"
+  },
+  {
+   "n": 9964,
+   "text": "<font color='#5df9ff'>Bulging red paket, buka untuk mendapatkan ⟨0⟩ gift coupons!</font>"
+  },
+  {
+   "n": 9965,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Tambang Batu yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9966,
+   "text": "<font color='#5df9ff'>Gift Box Berisikan persembahan untuk pemain NinjaKita. Semoga liburanmu menjadi lebih indah, terimakasih atas dukungannya! </font>"
+  },
+  {
+   "n": 9967,
+   "text": "<font color='#5df9ff'>NinjaKita telah memnyiapkan kejutan untuk kamu dari Top-up Gift Box!</font>"
+  },
+  {
+   "n": 9968,
+   "text": "<font color='#5df9ff'>Lavish gifts untuk semua pemain di musim panas! Gunakan untuk memilih hadiah.</font>"
+  },
+  {
+   "n": 9969,
+   "text": "<font color='#5df9ff'>Bookpage, kumpulan buku mungkin kamu dapatkan dari sintesis.</font>"
+  },
+  {
+   "n": 9970,
+   "text": "<font color='#5df9ff'>Musim panas yang indah! Buka untuk medapatkan luxury EXP bag!</font>"
+  },
+  {
+   "n": 9971,
+   "text": "<font color='#5df9ff'>Exclusive EXP gift box untuk pemain hebat! Buka untuk mendapatkan EXP! </font>"
+  },
+  {
+   "n": 9972,
+   "text": "<font color='#5df9ff'>Exclusive EXP gift box pemain mewah! Buka untuk memperbesar EXP!</font>\n<font color='#ff0000'>Items dengan efek yang sama dapat menggunakan ⟨0⟩ kali sehari</font>"
+  },
+  {
+   "n": 9973,
+   "text": "<font color='#5df9ff'>Exclusive EXP gift box pemain mewah! Buka untuk lebih banyak lagi EXP!</font>\n<font color='#ff0000'>Items dengan efek yang sama dapat menggunakan ⟨0⟩ kali sehari</font>"
+  },
+  {
+   "n": 9974,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Jalan Senja yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9975,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Jembatan Api yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9976,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Sungai ketenangan yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9977,
+   "text": "<font color='#5df9ff'>Earthen Crystal</font>"
+  },
+  {
+   "n": 9978,
+   "text": "<font color='#5df9ff'>Treasure box berisikan peralatan gold, buka untuk mendapatkan peralatan gold antara level ⟨0⟩～⟨1⟩.</font>"
+  },
+  {
+   "n": 9979,
+   "text": "<font color='#5df9ff'>Treasure box berisikan peralatan orange, buka untuk mendapatkan peralatan orange antara level⟨0⟩～⟨1⟩.</font>"
+  },
+  {
+   "n": 9980,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Sungai Sakura yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9981,
+   "text": "<font color='#5df9ff'>Treasure box berisikan peralatan biru, buka untuk mendapatkan peralatan biru antara level ⟨0⟩～⟨1⟩.</font>"
+  },
+  {
+   "n": 9982,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Dataran Subur yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9983,
+   "text": "<font color='#5df9ff'>Magic bag, buka untuk mendapatkan ⟨0⟩ EXP.</font>"
+  },
+  {
+   "n": 9984,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Puncak Bebatuan yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9985,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan ⟨0⟩,⟨1⟩ EXP.</font>"
+  },
+  {
+   "n": 9986,
+   "text": "<font color='#5df9ff'>Magic bag, buka untuk mendapatkan ⟨0⟩ batu.</font>"
+  },
+  {
+   "n": 9987,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Tapak Petir yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9988,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan ⟨0⟩,⟨1⟩ Batu.</font>"
+  },
+  {
+   "n": 9989,
+   "text": "<font color='#5df9ff'>Lunch Box</font>"
+  },
+  {
+   "n": 9990,
+   "text": "<font color='#5df9ff'>Luxury box, buka untuk mendapatkan secara acak kostum orange.</font>"
+  },
+  {
+   "n": 9991,
+   "text": "<font color='#5df9ff'>Luxury box, buka untuk mendapatkan secara acak peralatan Gold.</font>"
+  },
+  {
+   "n": 9992,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Tebing Keramat yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9993,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Jiraiya +⟨1⟩!</font>"
+  },
+  {
+   "n": 9994,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ kostum Unohana Retsu +⟨1⟩!</font>"
+  },
+  {
+   "n": 9995,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan kue level ⟨0⟩ dapat meningkatkan kekuatan serangan beberapa saat</font>"
+  },
+  {
+   "n": 9996,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Vulture Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 9997,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Bloodbat Fledgling+⟨1⟩!</font>"
+  },
+  {
+   "n": 9998,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Lembah awan yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 9999,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Stinger Bee Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10000,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Maneater Blossom Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10001,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Treant Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10002,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Sunflower Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10003,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Sweet Potato Demon Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10004,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Corn Demon Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10005,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Bun Monster Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10006,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Sushi Monster Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10007,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Riceball Monster Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10008,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Frostbore Dragonling+⟨1⟩!</font>"
+  },
+  {
+   "n": 10009,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Padang Berangin yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10010,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Toadling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10011,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Akamaru Young +⟨1⟩!</font>"
+  },
+  {
+   "n": 10012,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Soul Fledgling +⟨1⟩!</font>"
+  },
+  {
+   "n": 10013,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Lily Young +⟨1⟩!</font>"
+  },
+  {
+   "n": 10014,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Baby Snowman+⟨1⟩!</font>"
+  },
+  {
+   "n": 10015,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Baby Reindeer+⟨1⟩!</font>"
+  },
+  {
+   "n": 10016,
+   "text": "<font color='#5df9ff'>Precious gift box, buka untuk mendapatkan ⟨0⟩ Bunny Rabbit+⟨1⟩!</font>"
+  },
+  {
+   "n": 10017,
+   "text": "<font color='#5df9ff'>Gift untuk tahun kelinci! Buka untuk mendapatkan ⟨0⟩ kostum orange secara acak!</font>"
+  },
+  {
+   "n": 10018,
+   "text": "<font color='#5df9ff'>Gift untuk tahun kelinci! Buka untuk mendapatkan peralatan gold!</font>"
+  },
+  {
+   "n": 10019,
+   "text": "<font color='#5df9ff'>Gift untuk tahun kelinci! Buka untuk mendapatkan ⟨0⟩ pet secara acak!</font>"
+  },
+  {
+   "n": 10020,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Lembah Angin yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10021,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan kue level ⟨0⟩ , dapat meningkatkan kekuatan serangan</font>"
+  },
+  {
+   "n": 10022,
+   "text": "<font color='#5df9ff'>Kunci Misteri ditemukan di Dragontame Valley, mungkin kamu harus melihat hasilnya. <br>hanya di zona luar.</font>"
+  },
+  {
+   "n": 10023,
+   "text": "<font color='#5df9ff'>Kunci Misteri ditemukan di Dragontame Forest, mungkin kamu harus melihat hasilnya. <br>hanya di zona luar.</font>"
+  },
+  {
+   "n": 10024,
+   "text": "<font color='#5df9ff'>Mystery key didapat dari penjelajahan Pantai Naga. Ini mungkin berisikan harta yang berharga.<br>Hanya dapat digunakan di luar area.</font>"
+  },
+  {
+   "n": 10025,
+   "text": "<font color='#5df9ff'>Mystery key didapat dari penjelajahan Amegakure. Ini mungkin berisikan harta yang berharga.<br>Hanya dapat digunakan di luar area.</font>"
+  },
+  {
+   "n": 10026,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Gerbang Naga Tersembunyi yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10027,
+   "text": "<font color='#5df9ff'>Membutuhkan ⟨0⟩ Segel pembongkar atau ⟨1⟩ gold utnuk membukanya. Disamping untuk mendapatkan gold, Batu dan item, Kamu akan berkesempatan untuk mendapatkan Item dan equipment langka. Semoga beruntung!</font>"
+  },
+  {
+   "n": 10028,
+   "text": "<font color='#5df9ff'>Membutuhkan ⟨0⟩ Segel pembongkar atau ⟨1⟩gold utnuk membukanya. Disamping untuk mendapatkan gold, Batu dan item, Kamu akan berkesempatan untuk mendapatkan Item dan equipment langka. Semoga beruntung!</font>"
+  },
+  {
+   "n": 10029,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩ gift coupons!</font>"
+  },
+  {
+   "n": 10030,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩,⟨1⟩ Batu!</font>"
+  },
+  {
+   "n": 10031,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan⟨0⟩,⟨1⟩ EXP!</font>"
+  },
+  {
+   "n": 10032,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan senjata Blunt yang langka!</font>"
+  },
+  {
+   "n": 10033,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan senjata Sharp yang langka!</font>"
+  },
+  {
+   "n": 10034,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan senjata Fist yang langka!</font>"
+  },
+  {
+   "n": 10035,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Ring yang langka!</font>"
+  },
+  {
+   "n": 10036,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ segel pembongkar!</font>"
+  },
+  {
+   "n": 10037,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩  Engrave Blade Lv.⟨1⟩!</font>"
+  },
+  {
+   "n": 10038,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Engrave Crystal Lv.⟨1⟩!</font>"
+  },
+  {
+   "n": 10039,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Midsized Beans!</font>"
+  },
+  {
+   "n": 10040,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Segel pembongkar!</font>"
+  },
+  {
+   "n": 10041,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ juta batu!</font>"
+  },
+  {
+   "n": 10042,
+   "text": "<font color='#5df9ff'>Open it to obtain a Kantung Batu with ⟨0⟩ million stones!</font>"
+  },
+  {
+   "n": 10043,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan VIP ⟨0⟩ Hari*⟨1⟩, HP Carrier Bag Lv.⟨2⟩*⟨3⟩, Chakra Carrier Bag Lv.⟨4⟩*⟨5⟩, Pet Egg*⟨6⟩, Sakura's Special Potion*⟨7⟩, Orange Wishing Pot*⟨8⟩, Refining Lv.⟨9⟩ Talisman*⟨10⟩, Enhancement Talisman Lv.⟨11⟩*⟨12⟩!</font>"
+  },
+  {
+   "n": 10044,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan VIP ⟨0⟩-Hari*⟨1⟩, HP Carrier Bag Lv.⟨2⟩*⟨3⟩, Chakra Carrier Bag Lv.⟨4⟩*⟨5⟩, Pet Egg*⟨6⟩, Toad Arcanum*⟨7⟩, Blue Wishing Pot*⟨8⟩!</font>"
+  },
+  {
+   "n": 10045,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan VIP ⟨0⟩-Hari*⟨1⟩, HP Carrier Bag Lv.⟨2⟩*⟨3⟩, Chakra Carrier Bag Lv.⟨4⟩*⟨5⟩, Gray Wishing Pot*⟨6⟩</font>"
+  },
+  {
+   "n": 10046,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh secara acak gold equipment.</font>"
+  },
+  {
+   "n": 10047,
+   "text": "<font color='#5df9ff'>Proof of Suppression yang diperoleh dari penjelajahan. Kamu hanya dapat menantang iblis yang berbeda di dalam map setelah menggunakan Proof of Suppression.</font>"
+  },
+  {
+   "n": 10048,
+   "text": "<font color='#5df9ff'>Gem Yang berasal dari rasa keadilan.</font>"
+  },
+  {
+   "n": 10049,
+   "text": "<font color='#5df9ff'>Gem Yang berasal dari rasa keadilan.</font>\nBahan utama yang digunakan untuk melakukan <font color='#5df9ff'>Demon Proof of Suppression</font>."
+  },
+  {
+   "n": 10050,
+   "text": "<font color='#5df9ff'>Bahaya! ! </font>"
+  },
+  {
+   "n": 10051,
+   "text": "Hidden Land Collection"
+  },
+  {
+   "n": 10052,
+   "text": "Spirit Beast Collection"
+  },
+  {
+   "n": 10053,
+   "text": "Village Secret Collection"
+  },
+  {
+   "n": 10054,
+   "text": "Konoha Eight Collection"
+  },
+  {
+   "n": 10055,
+   "text": "Palace Captain Collection"
+  },
+  {
+   "n": 10056,
+   "text": "Akatsuki Collection"
+  },
+  {
+   "n": 10057,
+   "text": "Kage Shinobi Collection"
+  },
+  {
+   "n": 10058,
+   "text": "Bloodline Limit Collection"
+  },
+  {
+   "n": 10059,
+   "text": "Rookie of Card Collection"
+  },
+  {
+   "n": 10060,
+   "text": "Card Expert Collection"
+  },
+  {
+   "n": 10061,
+   "text": "Card Master Collection"
+  },
+  {
+   "n": 10062,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan cake Lv.⟨0⟩, Akan meningkatkan kekuatan bertarung beberapa waktu</font>"
+  },
+  {
+   "n": 10063,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩ Demon Proof of Suppression! </font>"
+  },
+  {
+   "n": 10064,
+   "text": "<font color='#5df9ff'>NinjaKita akan membuat harimu menyenangkan. Buka gift box Akan mendapatkan ⟨0⟩ gift coupon. Terimakasih telah bermain! </font>"
+  },
+  {
+   "n": 10065,
+   "text": "<font color='#5df9ff'>Precious gift box. Buka untuk mendapatkan Enhancement Talisman*⟨0⟩, Refining Talisman*⟨1⟩, Recast Talisman*⟨2⟩, Enchantment Talisman*⟨3⟩! </font>"
+  },
+  {
+   "n": 10066,
+   "text": "<font color='#5df9ff'>Pure stone full of energy\nGunakan ⟨0⟩ dari </font><font color='#ff0000'>Catalyst</font><font color='#5df9ff'> untuk mendapatkan ⟨1⟩% kostum upgrade.\n<font color='#ff0000'>Berlaku: +⟨2⟩ ke +⟨3⟩</font>[line]\ndapat di upgrade ke</font><font color='#ff0000'>+⟨4⟩</font> .\n<font color='#ff0000'>Warning: </font><font color='#5df9ff'>Low, medium dan high Purify Stone<font color='#5df9ff'><font color='#ff0000'> hanya dapat digunakan untuk meng-upgrade kostum sesuai dengan item ini. Jika tidak, kamu akan mendapatkan barang berkualitas rendah!</font>"
+  },
+  {
+   "n": 10067,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Lv.⟨0⟩ Enhancement Talisman*⟨1⟩, Lv.⟨2⟩ Refining Talisman*⟨3⟩, Gold Treasure Jar*⟨4⟩, Lv.⟨5⟩ Slot Talisman*⟨6⟩, Lv.⟨7⟩ Engrave Blade*⟨8⟩, Common Valhalla Crystal*⟨9⟩, Orange Outfit Wishing Pot*⟨10⟩, Lv.⟨11⟩ Enchantment Talisman*⟨12⟩, Seal Breaker*⟨13⟩, Advanced Inscription Talisman*⟨14⟩, Recast Talisman*⟨15⟩</font>"
+  },
+  {
+   "n": 10068,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Advanced Sage Panacea*⟨0⟩, Proof of Demon Suppression*⟨1⟩, Sakura Special Potion*⟨2⟩, ⟨3⟩-day VIP*⟨4⟩, Pet Skill Lock*⟨5⟩, Mid-sized Bean*⟨6⟩, Pet Egg*⟨7⟩, Seal Breaker*⟨8⟩, Advanced Inscription Talisman*⟨9⟩, Recast Talisman*⟨10⟩</font>"
+  },
+  {
+   "n": 10069,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Advanced Sage Panacea*⟨0⟩, Proof of Demon Suppression*⟨1⟩, Sakura Special Potion*⟨2⟩, ⟨3⟩-day VIP*⟨4⟩, Seal Breaker*⟨5⟩, ⟨6⟩-Hour Talisman*⟨7⟩, Stamp of Special Training*⟨8⟩, Advanced Inscription Talisman*⟨9⟩, Recast Talisman*⟨10⟩</font>"
+  },
+  {
+   "n": 10070,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Lv.⟨0⟩ Engrave Blade*⟨1⟩, Lv.⟨2⟩ Gold Equipment Chest*⟨3⟩, Lv.⟨4⟩ Refining Talisman*⟨5⟩, Lv.⟨6⟩ Enhancement Talisman*⟨7⟩, Lv.⟨8⟩ Slot Talisman*⟨9⟩, Common Valhalla Crystal*⟨10⟩, Lv.⟨11⟩ Enchantment Talisman*⟨12⟩, Gold Treasure Jar*⟨13⟩, Diamond Treasure Jar*⟨14⟩, Luxury Treasure Jar*⟨15⟩, Seal Breaker*⟨16⟩, Advanced Inscription Talisman*⟨17⟩, Recast Talisman*⟨18⟩</font>"
+  },
+  {
+   "n": 10071,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Lv.⟨0⟩ Enhancement Talisman*⟨1⟩, Lv.⟨2⟩ Refining Talisman*⟨3⟩, Gold Treasure Jar*⟨4⟩, Lv.⟨5⟩ Slot Talisman*⟨6⟩, Lv.⟨7⟩ Engrave Crystal*⟨8⟩, Lv.⟨9⟩ Enchantment Talisman*⟨10⟩, Common Valhalla Crystal*⟨11⟩, Seal Breaker*⟨12⟩, Orange Outfit Wishing Pot*⟨13⟩, Pet Skill Lock*⟨14⟩, Mid-sized Bean*⟨15⟩, Pet Egg Gift Box*⟨16⟩, Advanced Inscription Talisman*⟨17⟩, Recast Talisman*⟨18⟩, Shippuden Wishing Pot*⟨19⟩, S-rank Ninja Wishing Pot*⟨20⟩</font>"
+  },
+  {
+   "n": 10072,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩-day VIP*⟨1⟩, Lv.⟨2⟩ Luxury EXP Bag*⟨3⟩, Proof of Demon Suppression*⟨4⟩, Orange Outfit Wishing Pot*⟨5⟩, Sakura Special Potion*⟨6⟩, Seal Breaker*⟨7⟩, Skip Card*⟨8⟩, ⟨9⟩-Hour Talisman*⟨10⟩, Stamp of Special Training*⟨11⟩, Apprentice Panel Opening Book*⟨12⟩, Advanced Inscription Talisman*⟨13⟩, Recast Talisman*⟨14⟩, Shippuden Wishing Pot*⟨15⟩, S-rank Ninja Wishing Pot*⟨16⟩</font>"
+  },
+  {
+   "n": 10073,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Lv.⟨0⟩ Luxury EXP Bag*⟨1⟩, Proof of Demon Suppression*⟨2⟩, Sakura Special Potion*⟨3⟩, Seal Breaker*⟨4⟩, ⟨5⟩-Hour Talisman*⟨6⟩, Stamp of Special Training*⟨7⟩, Skip Card*⟨8⟩, Advanced Inscription Talisman*⟨9⟩, Recast Talisman*⟨10⟩, Shippuden Wishing Pot*⟨11⟩, S-rank Ninja Wishing Pot*⟨12⟩</font>"
+  },
+  {
+   "n": 10074,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Lv.⟨0⟩ Engrave Blade*⟨1⟩, Lv.⟨2⟩ Engrave Crystal*⟨3⟩, Lv.⟨4⟩ Gold Equipment Chest*⟨5⟩, Lv.⟨6⟩ Refining Talisman*⟨7⟩, Lv.⟨8⟩ Enhancement Talisman*⟨9⟩, Lv.⟨10⟩ Slot Talisman*⟨11⟩, Common Valhalla Crystal*⟨12⟩, Lv.⟨13⟩ Enchantment Talisman*⟨14⟩, Seal Breaker*⟨15⟩, Gold Treasure Jar*⟨16⟩, Luxury Gem Jar*⟨17⟩, Mystic Jar*⟨18⟩, Luxury Treasure Jar*⟨19⟩, Advanced Inscription Talisman*⟨20⟩, Recast Talisman*⟨21⟩, Shippuden Wishing Pot*⟨22⟩, S-rank Ninja Wishing Pot*⟨23⟩</font>"
+  }
+ ]
+}

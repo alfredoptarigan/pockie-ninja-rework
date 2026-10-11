@@ -1,0 +1,652 @@
+{
+ "terms": {
+  "Blok": "Block",
+  "Uzumaki Naruto": "Naruto Uzumaki"
+ },
+ "units": [
+  {
+   "n": 11003,
+   "text": "<font color='#5df9ff'>Sebuah alat makan halus yang berfungsi sebagai senjata.</font>"
+  },
+  {
+   "n": 11004,
+   "text": "<font color='#5df9ff'>Blade dapat membelah angin yang lewat di setengah.</font>"
+  },
+  {
+   "n": 11005,
+   "text": "<font color='#5df9ff'>Magic Sword digunakan untuk memutuskan persahabatan dan pihak yang mengkhianati. Kabar angin mengatakan kutukan dijiwai oleh pisau tersebut.</font>"
+  },
+  {
+   "n": 11006,
+   "text": "<font color='#5df9ff'>Dibuat dari tulang belakang naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 11007,
+   "text": "<font color='#5df9ff'>Deklarasikan, Gamuza! Cero Doble: </font>"
+  },
+  {
+   "n": 11008,
+   "text": "<font color='#5df9ff'>Permukaan yang bercahaya dapat menusuk sinar dan membuat semua tampak seperti irisan sampai hancur.</font>"
+  },
+  {
+   "n": 11009,
+   "text": "<font color='#5df9ff'>Pola Blossom menghiasi bilah pedang, merupakan artefak langka.</font>"
+  },
+  {
+   "n": 11010,
+   "text": "<font color='#5df9ff'>Seakan matahari menutupi ketika Sunset Pierce dipegang dalam kepanikan.</font>"
+  },
+  {
+   "n": 11011,
+   "text": "<font color='#5df9ff'>Tipe-pertama Item yang digunakan oleh  ninjakita di Sekolah Ninja.</font>"
+  },
+  {
+   "n": 11012,
+   "text": "<font color='#5df71ff'>Sinar emas yang mempesona dari  Warboot pierce  menembus auranya bahkan lebih mencolok, mengejutkan musuh dengan kagum dan teror.</font>"
+  },
+  {
+   "n": 11013,
+   "text": "<font color='#5df66ff'>Warboot is  ditempa dari froststeel, dan memancarkan aura mengerikan.</font>"
+  },
+  {
+   "n": 11014,
+   "text": "<font color='#5df66ff'>Warboot disempurnakan dengan chakra petir selama pembuatannya.</font>"
+  },
+  {
+   "n": 11015,
+   "text": "<font color='#5df66ff'>Hanya mereka yang memiliki slayed dengan jumlah besar iblis akan menerima Glorious Warboot protection.</font>"
+  },
+  {
+   "n": 11016,
+   "text": "<font color='#5df66ff'>Ditinggalkan oleh generasi Para veteran battleworn yang mengenakan ini dalam perang, Warboot sunset shadedari kegelapan berwarna merah tua merupakan bukti untuk menyaksikan melalui era</font>"
+  },
+  {
+   "n": 11017,
+   "text": "<font color='#5df66ff'>Bloody Warboot will plunge wearer ke dalam pertempuran abadi. Hanya yang berkemauan keras dan tidak terpengaruh oleh trik-nya yang dapat memakainya.</font>"
+  },
+  {
+   "n": 11018,
+   "text": "<font color='#5df9ff'>Dapat melihat tekanan spiritual mengalir samar pada boot. Hal ini ditinggalkan oleh seseorang yang memiliki energi spiritual dalam jumlah besar . </font>"
+  },
+  {
+   "n": 11019,
+   "text": "<font color='#5df9ff'>Sepatu yang dibuat oleh shards dari meteor ungu. Ini akan melindungi pemakai dan meningkatkan potensi bertarung. </font>\n"
+  },
+  {
+   "n": 11020,
+   "text": "<font color='#5df77ff'>Netherchill Warboot dengan aura yang dipancarkan netherfrost tidak diterima dengan sebagian. Hanya mereka yang berkonstitusiyang bisa melakukan ini..</font>"
+  },
+  {
+   "n": 11021,
+   "text": "<font color='#5df9ff'>Sepatu yang diberkati oleh dewa. Dikatakan bahwa pemakainya dapat menguasai angin.</font>"
+  },
+  {
+   "n": 11022,
+   "text": "<font color='#5df9ff'>Shoes Dikenakan oleh pemula dari ninjutsu.</font>"
+  },
+  {
+   "n": 11023,
+   "text": "<font color='#5df9ff'>Dibuat dari buntut naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 11024,
+   "text": "<font color='#5df9ff'>Boots digunakan oleh malaikat di masa lalu. Pemakainya akan menguasai kecepatan angin. </font>"
+  },
+  {
+   "n": 11025,
+   "text": "<font color='#5df9ff'>Boots dengan kecepatan luar biasa dan kemampuan pertahanan, mengandung kekuatan Naga Tuhan. </font>"
+  },
+  {
+   "n": 11026,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan Tentara Suci. Dimanapun pemakainya melewati, semua kekuatan gelap akan memudar.</font>"
+  },
+  {
+   "n": 11027,
+   "text": "<font color='#5df9ff'> Sepatu yang digunakan oleh malaikat di masa lalu. Pemakainya akan menguasai kecepatan angin. </font>"
+  },
+  {
+   "n": 11028,
+   "text": "<font color='#5df9ff'>Sepatu yang mempunyai kemampuan kecepatan dan defense yang luar biasa baiknya, berisi kekuatan dari Dragon Lord.</font>"
+  },
+  {
+   "n": 11029,
+   "text": "<font color='#5df9ff'>Salah satu bagian dari Sacred Army. Di manapun si pemakai berada, semua pasukan jahat akan pergi menghilang.</font>"
+  },
+  {
+   "n": 11030,
+   "text": "<font color='#5df9ff'>Talisman yang mengandung kekuatan api. Gunakan dengan Fire Ring dapat meningkatkan kekuatan skill api. </font>"
+  },
+  {
+   "n": 11031,
+   "text": "<font color='#5df9ff'>Talisman yang mengandung kekuatan air. Gunakan dengan Water Ring dapat meningkatkan kekuatan skill air. </font>"
+  },
+  {
+   "n": 11032,
+   "text": "<font color='#5df9ff'>Talisman yang mengandung kekuatan tanah. Gunakan dengan Earth Ring dapat meningkatkan kekuatan skill tanah. </font>"
+  },
+  {
+   "n": 11033,
+   "text": "<font color='#5df9ff'>Talisman yang mengandung kekuatan petir. Gunakan dengan Lightning Ring dapat meningkatkan kekuatan skill petir. </font>"
+  },
+  {
+   "n": 11034,
+   "text": "<font color='#5df9ff'>Talisman yang mengandung kekuatan angin. Gunakan dengan Wind Ring dapat meningkatkan kekuatan skill angin. </font>"
+  },
+  {
+   "n": 11035,
+   "text": "<font color='#5df9ff'>Cincin yang mengandung kekuatan api. Gunakan dengan Fire Talisman dapat meningkatkan kekuatan skill api.</font>"
+  },
+  {
+   "n": 11036,
+   "text": "<font color='#5df9ff'>Cincin yang mengandung kekuatan air. Gunakan dengan Water Talisman dapat meningkatkan kekuatan skill air.</font>"
+  },
+  {
+   "n": 11037,
+   "text": "<font color='#5df9ff'>Cincin yang mengandung kekuatan tanah. Gunakan dengan Earth Talisman dapat meningkatkan kekuatan skill tanah.</font>"
+  },
+  {
+   "n": 11038,
+   "text": "<font color='#5df9ff'>Cincin yang mengandung kekuatan petir. Gunakan dengan Lightning Talisman dapat meningkatkan kekuatan skill petir.</font>"
+  },
+  {
+   "n": 11039,
+   "text": "<font color='#5df9ff'>Cincin yang mengandung kekuatan angin. Gunakan dengan Wind Talisman dapat meningkatkan kekuatan skill angin.</font>"
+  },
+  {
+   "n": 11040,
+   "text": "<font color='#5df9ff'>Digunakan oleh pemula dari ninjutsu. Dasarnya kurang dalam kekuatan serang.</font>"
+  },
+  {
+   "n": 11041,
+   "text": "<font color='#5df9ff'>Star merupakan simbol pertumbuhan. Memperoleh ⟨0⟩x EXP saat mengalahkan monster setelah menggunakan. Tidak efektif dalam monster di Las Noches. Hanya ⟨1⟩ jam.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Others<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11042,
+   "text": "<font color='#5df9ff'>Dust merupakan simbol pertumbuhan. Memperoleh ⟨0⟩x EXP saat mengalahkan monster setelah menggunakan. Tidak efektif dalam monster di Las Noches. Hanya ⟨1⟩ jam.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Others<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11043,
+   "text": "<font color='#5df9ff'>Beras premium dengan lapisan rumput laut. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam，<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11044,
+   "text": "<font color='#5df9ff'>Handrolled sushi dibuat dari ikan tuna segar dan beras，Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11045,
+   "text": "<font color='#5df9ff'>Berbagai macam sayur dengan nasi yang utama. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam.<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11046,
+   "text": "<font color='#5df9ff'>Bread Slice</font>"
+  },
+  {
+   "n": 11047,
+   "text": "<font color='#5df9ff'>Toasted bread yang harum dan halus. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11048,
+   "text": "<font color='#5df9ff'>Selai buah yang berlapis di atas roti. Satu gigitan sudah cukup untuk memicu inspirasi. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11049,
+   "text": "<font color='#5df9ff'>Makanan pet, digunakan di kandang pet untuk mengurangi tingkat kelaparan yang kecil<br>[line]Food Type: Grain<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 11050,
+   "text": "<font color='#5df9ff'>Hamburger</font>"
+  },
+  {
+   "n": 11051,
+   "text": "<font color='#5df9ff'>Big Mac</font>"
+  },
+  {
+   "n": 11052,
+   "text": "<font color='#5df9ff'>Fried rice yang di campur dengan telur, dihidangkan dengan kecap. dapat meningkatkan max HP sebesar ⟨0⟩ point, Setelah ⟨1⟩ jam. <br>Hanya satu makanan yang berefek meningkatkan statistik dapat digunakan pada satu waktu !<br>Dapat memberi makan pet.<br>[line]Tipe makanan: Grain<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11053,
+   "text": "<font color='#5df9ff'>Daging panggang yang diolah dengan cara yg kurang baik. Jangan berharap rasanya akan enak. Setelah memakan, akan meningkatkan kekuatan serangan sebesar ⟨0⟩ point，selama ⟨1⟩ jam.<br>Hanya satu efek makanan yang berlaku dalam suatu waktu !<br>Dapat dijadikan makanan pet.<br>[line]Jenis makanan: Meat<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11054,
+   "text": "<font color='#5df9ff'>Fragrant curry dengan nasi salju-putih yang menggoda nafsu makan seseorang. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11055,
+   "text": "<font color='#5df9ff'>Fresh Prawn Rice</font>"
+  },
+  {
+   "n": 11056,
+   "text": "<font color='#5df9ff'>Porkchop Rice</font>"
+  },
+  {
+   "n": 11057,
+   "text": "<font color='#5df9ff'>Eel Rice</font>"
+  },
+  {
+   "n": 11058,
+   "text": "<font color='#5df9ff'>Assorted Seafood Rice</font>"
+  },
+  {
+   "n": 11059,
+   "text": "<font color='#5df9ff'>Kue kering tradisional daratan sakura. Dikatakan bahwa ini adalah makanan favorit Uzumaki Naruto. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11060,
+   "text": "<font color='#5df9ff'>Miso Soup</font>"
+  },
+  {
+   "n": 11061,
+   "text": "<font color='#5df9ff'>Assorted Ramen</font>"
+  },
+  {
+   "n": 11062,
+   "text": "<font color='#5df9ff'>Soup diseduh dengan berbagai macam makanan laut segar. Sebuah aroma tebal dilengkapi melalui rasa yang luar biasa. Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Meat<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11063,
+   "text": "<font color='#5df9ff'>Makanan Khusus daratan sakura, segar, harum dan kenyal. Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Meat<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11064,
+   "text": "<font color='#5df9ff'>Roasted premium beef，Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Meat<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11065,
+   "text": "<font color='#5df9ff'>Spicy Dragonprawn</font>"
+  },
+  {
+   "n": 11066,
+   "text": "<font color='#5df9ff'>Bersama buah yang manis dan berair. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Vegetable<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11067,
+   "text": "<font color='#5df9ff'>Sebuah apel besar dan merah, jangan tertidur setelah mengkonsumsi itu! Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Vegetable<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11068,
+   "text": "<font color='#5df9ff'>Sebuah buah yang manis. Berhati-hatilah untuk tidak menginjak kulit pisang sendiri. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Vegetable<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11069,
+   "text": "<font color='#5df9ff'>Anggur matang yang di juss dan beraroma segar. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Vegetable<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11070,
+   "text": "<font color='#5df9ff'>terdapat penhilang dahaga setelah meminum jus kelapa, dan tempurung yang keras dapat digunakan sebagai senjata. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Vegetable<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11071,
+   "text": "<font color='#5df9ff'>Pineapple</font>"
+  },
+  {
+   "n": 11072,
+   "text": "<font color='#5df9ff'>Permen yang dibungkus dengan pembungkus merah. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Dessert<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11073,
+   "text": "<font color='#5df9ff'>Permen yang dibungkus dengan pembungkus biru. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Dessert<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11074,
+   "text": "<font color='#5df9ff'>Candy Floss</font>"
+  },
+  {
+   "n": 11075,
+   "text": "<font color='#5df9ff'>Fried Chicken<br>[line]Food Type: Meat<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 11076,
+   "text": "<font color='#5df9ff'>Lollipop</font>"
+  },
+  {
+   "n": 11077,
+   "text": "<font color='#5df9ff'>Chocolate</font>"
+  },
+  {
+   "n": 11078,
+   "text": "<font color='#5df9ff'>Ice Cream</font>"
+  },
+  {
+   "n": 11079,
+   "text": "<font color='#5df9ff'>Sebuah minuman menyegarkan yang tidak cocok untuk anak-anak. Setelah minum, rata rata EXP meningkat selama ⟨0⟩ kali setiap membunuh minster. Tidak efektif terhadap monster Las Noches. selama ⟨1⟩ jam.<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Others<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11080,
+   "text": "<font color='#5df9ff'>Draft Beer</font>"
+  },
+  {
+   "n": 11081,
+   "text": "<font color='#5df9ff'>Cocktail</font>"
+  },
+  {
+   "n": 11082,
+   "text": "<font color='#5df9ff'>Whiskey</font>"
+  },
+  {
+   "n": 11083,
+   "text": "<font color='#5df9ff'>Vodka</font>"
+  },
+  {
+   "n": 11084,
+   "text": "<font color='#5df9ff'>Brandy</font>"
+  },
+  {
+   "n": 11085,
+   "text": "<font color='#5df9ff'>Sebuah minuman menyegarkan yang bergelembung dapat meningkatkan max Chackra sebesar ⟨0⟩%.<br>[line]Food Type: Dessert<br> Tingkat kekenyangan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11086,
+   "text": "<font color='#5df9ff'>Sausages rolled dari daging terbaik，Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Meat<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11087,
+   "text": "<font color='#5df9ff'>Watermelon Juice</font>"
+  },
+  {
+   "n": 11088,
+   "text": "<font color='#5df9ff'>Orange Juice</font>"
+  },
+  {
+   "n": 11089,
+   "text": "<font color='#5df9ff'>Rainbow Juice</font>"
+  },
+  {
+   "n": 11090,
+   "text": "<font color='#5df9ff'>Freshly Squeezed Juice</font>"
+  },
+  {
+   "n": 11091,
+   "text": "<font color='#5df9ff'>Crystal Fruit Juice</font>"
+  },
+  {
+   "n": 11092,
+   "text": "<font color='#5df9ff'>Hawstick</font>"
+  },
+  {
+   "n": 11093,
+   "text": "<font color='#5df9ff'>Sebuah makanan praktis yang mengherankan. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11094,
+   "text": "<font color='#5df9ff'>Makanan ringan yang enak. Dapat meningkatkan max HP sebesar ⟨0⟩ point，Selama ⟨1⟩ jam. <br>Cukup sekali makan untuk meningkatkan status pada waktu yang sama !<br>dapat sebagai makanan pet.<br>[line]Tipe makanan: Grain<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11095,
+   "text": "<font color='#5df9ff'>Peanut Biscuit</font>"
+  },
+  {
+   "n": 11096,
+   "text": "<font color='#5df9ff'>Sponge Cake</font>"
+  },
+  {
+   "n": 11097,
+   "text": "<font color='#5df9ff'>Makanan yang paling banyak dicari di luar daratan sakura，Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Meat<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11098,
+   "text": "<font color='#5df9ff'>Chocolate Puff</font>"
+  },
+  {
+   "n": 11099,
+   "text": "<font color='#5df9ff'>Dumpling</font>"
+  },
+  {
+   "n": 11100,
+   "text": "<font color='#5df9ff'>Meat Pie</font>"
+  },
+  {
+   "n": 11101,
+   "text": "<font color='#5df9ff'>Colored Puff</font>"
+  },
+  {
+   "n": 11102,
+   "text": "<font color='#5df9ff'>Pizza</font>"
+  },
+  {
+   "n": 11103,
+   "text": "<font color='#5df9ff'>Chocolate Cake</font>"
+  },
+  {
+   "n": 11104,
+   "text": "<font color='#5df9ff'>Strawberry Cake</font>"
+  },
+  {
+   "n": 11105,
+   "text": "<font color='#5df9ff'>Gin</font>"
+  },
+  {
+   "n": 11106,
+   "text": "<font color='#5df9ff'>Milk</font>"
+  },
+  {
+   "n": 11107,
+   "text": "<font color='#5df9ff'>Green Tea</font>"
+  },
+  {
+   "n": 11108,
+   "text": "<font color='#5df9ff'>Sebuah kelezatan babi panggang dari keseluruhan. Tender daging terbungkus kulit renyah, lezat，Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!</font>"
+  },
+  {
+   "n": 11109,
+   "text": "<font color='#5df9ff'>Coffee</font>"
+  },
+  {
+   "n": 11110,
+   "text": "<font color='#5df9ff'>Premium Milk</font>"
+  },
+  {
+   "n": 11111,
+   "text": "<font color='#5df9ff'>Premium Green Tea</font>"
+  },
+  {
+   "n": 11112,
+   "text": "<font color='#5df9ff'>Premium Coffee</font>"
+  },
+  {
+   "n": 11113,
+   "text": "<font color='#5df9ff'>Fragrant Pork Bun. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11114,
+   "text": "<font color='#5df9ff'>Permen yang dibungkus dengan pembungkus biru. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Dessert<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11115,
+   "text": "<font color='#5df9ff'>Permen yang dibungkus dengan pembungkus merah. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Dessert<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11116,
+   "text": "<font color='#5df9ff'>Handrolled sushiterbuat dari ikan tuna segar dan beras. Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>[line]Food Type: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11117,
+   "text": "<font color='#5df9ff'>Semua bahan yang susah payah dipilih, kemudian dibuat menjadi daging panggang premi melalui salah satu keterampilan kuliner yang luar biasa，Setelah memakan, Meningkatkan Attack sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Meat<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11118,
+   "text": "<font color='#5df9ff'>Makanan tradisional daratan sakura, ini tidak ada hubunganya dengan monster bola nasi. Setelah memakan, meningkatkan max HP sebesar ⟨0⟩，selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11119,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Mengalahkan monster dapat memperoleh ⟨0⟩ kali EXP, selama ⟨1⟩ jam.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨2⟩</font>"
+  },
+  {
+   "n": 11120,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan HP sebesar ⟨0⟩ poin, Blok ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11121,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan Attack sebesar ⟨0⟩ poin, Critical Strike ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11122,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan HP sebesar ⟨0⟩ poin, Dodge ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11123,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan Attack sebesar ⟨0⟩ poin, Armor Break ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11124,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan HP sebesar ⟨0⟩, Block sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11125,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan Attack sebesar ⟨0⟩, Critical Strike sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11126,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. Meningkatkan HP sebesar ⟨0⟩, Dodge sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11127,
+   "text": "<font color='#5df9ff'>Sweet Christmas candy. meningkatkan Attack sebesar ⟨0⟩, Armor Break sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11128,
+   "text": "<font color='#5df9ff'>Terbuat dari gandum bergizi. Setelah memakan, meningkatkan max chakra sebanyak ⟨0⟩, selama ⟨1⟩ jam.<br>Hanya dapat ⟨2⟩ atribut meningkatkan efek makanan setiap saat!<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11129,
+   "text": "<font color='#5df9ff'>simbol pertumbuhan, saat digunakan, monster dikalahkan akan menghasilkan ⟨0⟩ kali EXP, tetapi tidak efektif terhadap monster Las Noches. selama ⟨1⟩ jam.<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Others<br> Tingkat kekenyangan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11130,
+   "text": "<font color='#5df9ff'>Symbol pertumbuhan. Saat digunakan, monster dikalahkan akan menghasilkan ⟨0⟩,⟨1⟩ kali EXP, tetapi tidak efektif terhadap monster Las Noches. selama ⟨2⟩ jam.<br>Dapat menjadi makanan pet.<br>[line]Tipe Makanan: Others<br> Tingkat kekenyangan: ⟨3⟩</font>"
+  },
+  {
+   "n": 11131,
+   "text": "<font color='#5df9ff'>Vegetable Rice</font>"
+  },
+  {
+   "n": 11132,
+   "text": "<font color='#5df9ff'>Blueberry flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Armor Break ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11133,
+   "text": "<font color='#5df9ff'>Matcha flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Pierce ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11134,
+   "text": "<font color='#5df9ff'>Coffe flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Hit ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11135,
+   "text": "<font color='#5df9ff'>Strawberry flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Critical Strike ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11136,
+   "text": "<font color='#5df9ff'>Jelly flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Constitution ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11137,
+   "text": "<font color='#5df9ff'>Chocolate flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Block ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11138,
+   "text": "<font color='#5df9ff'>Cream flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Defense ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11139,
+   "text": "<font color='#5df9ff'>Caramel flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Dodge ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11140,
+   "text": "<font color='#5df9ff'>Yummy cake, Blueberry flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Armor Break ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11141,
+   "text": "<font color='#5df9ff'>Yummy cake, Matcha flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Pierce ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11142,
+   "text": "<font color='#5df9ff'>Yummy cake, Coffe flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Hit ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11143,
+   "text": "<font color='#5df9ff'>Yummy cake, Strawberry flavoured cake. Meningkatkan Attack sebesar ⟨0⟩ poin, Critical Strike ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11144,
+   "text": "<font color='#5df9ff'>Yummy cake, Jelly flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Constitution ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11145,
+   "text": "<font color='#5df9ff'>Yummy cake, Chocolate flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Block ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11146,
+   "text": "<font color='#5df9ff'>Yummy cake, Cream flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Defense ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11147,
+   "text": "<font color='#5df9ff'>Yummy cake, Caramel flavoured cake. Meningkatkan HP sebesar ⟨0⟩ poin, Dodge ⟨1⟩ poin, selama ⟨2⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Dessert<br>Tingkat kenyang : ⟨3⟩</font>"
+  },
+  {
+   "n": 11148,
+   "text": "<font color='#5df9ff'>Blueberry flavoured cake.Meningkatkan Attack sebesar ⟨0⟩, Armor Break sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11149,
+   "text": "<font color='#5df9ff'>Matcha flavoured cake. Meningkatkan Attack sebesar ⟨0⟩, Pierce sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11150,
+   "text": "<font color='#5df9ff'>Coffee flavoured cake. Meningkatkan Attack sebesar ⟨0⟩, Hit sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11151,
+   "text": "<font color='#5df9ff'>Strawberry flavoured cake. Meningkatkan Attack sebesar ⟨0⟩, Critical Strike sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11152,
+   "text": "<font color='#5df9ff'>Jelly flavoured cake. Meningkatkan HP sebesar ⟨0⟩, Constitution sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11153,
+   "text": "<font color='#5df9ff'>Chocolate flavoured cake. Meningkatkan HP sebesar ⟨0⟩, Block sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11154,
+   "text": "<font color='#5df9ff'>Cream flavoured cake. Meningkatkan HP sebesar ⟨0⟩, defence sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11155,
+   "text": "<font color='#5df9ff'>Caramel flavoured cake. Meningkatkan HP sebesar ⟨0⟩, Dodge sebesar ⟨1⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Dessert<br>mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11156,
+   "text": "<font color='#5df9ff'>Daging kaleng enak dengan sedikit minyak cabe. Dapat meningkatkan serangan untuk ⟨0⟩ point, berlangsung ⟨1⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Meat<br> Tingkat kenyang : ⟨2⟩</font>"
+  },
+  {
+   "n": 11157,
+   "text": "<font color='#5df9ff'>Ham and egg cake dibuat dari daging ham dan telur terbaik! Dapat meningkatkan max Chakra sebesar ⟨0⟩ poin, selama ⟨1⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Grain<br>Tingkat kekenyangan : ⟨2⟩</font>"
+  },
+  {
+   "n": 11158,
+   "text": "<font color='#5df9ff'>Buah enak tinggi vitamin C. Dapat meningkatkan max Chakra sebesar ⟨0⟩ poin, selama ⟨1⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Vegetable<br>Tingkat kenyang : ⟨2⟩</font>"
+  },
+  {
+   "n": 11159,
+   "text": "<font color='#5df9ff'>berwarna keemasan, di dalam pelelangan. Dapat meningkatkan serangan sebesar ⟨0⟩ poin, selama ⟨1⟩ jam.<br>Hanya efek satu makanan yang meningkatkan statistik dapat digunakan pada satu waktu.<br>Dapat digunakan untuk makanan pet.<br>[line]Tipe makanan : Meat<br>Tingkat kenyang : ⟨2⟩</font>"
+  },
+  {
+   "n": 11160,
+   "text": "<font color='#5df9ff'>Uzumaki Naruto favourite ramen. Meningkatkan Attack sebesar ⟨0⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Meet<br>mengurangi tingkat kelaparan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11161,
+   "text": "<font color='#5df9ff'>Yummy Shrimp Fried Rice. Meningkatkan HP sebesar ⟨0⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Meet<br>mengurangi tingkat kelaparan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11162,
+   "text": "<font color='#5df9ff'>Chicken burger made from high quality sea urchins. Meningkatkan Max Chakra sebesar ⟨0⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Meet<br>mengurangi tingkat kelaparan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11163,
+   "text": "<font color='#5df9ff'>Bento that contains salmon. Meningkatkan Attack sebesar ⟨0⟩. Efek selama satu jam.<br>Hanya satu makanan yang dapat memberikan efek setelah digunakan! <br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Meet<br>mengurangi tingkat kelaparan: ⟨1⟩</font>"
+  }
+ ]
+}

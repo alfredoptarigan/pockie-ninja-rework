@@ -1,0 +1,2876 @@
+{
+ "terms": {
+  "Sasuke": "Sasuke Uchiha",
+  "Tambang Batu": "Smelting Mountains",
+  "Sungai ketenangan": "Verdant Alley",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Lembah awan": "Windscent Pass",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Serangan": "Attack",
+  "Rampage[E]": "Rampage [E]",
+  "Nimble[E]": "Nimble [E]",
+  "Rampage[卍]": "Rampage [卍]",
+  "Nimble[卍]": "Nimble [卍]",
+  "Sandki No Jutsu": "Thunderfall",
+  "Kurisutaruburedo": "Crystal Blade",
+  "Rōtasusukiru No Jutsu": "Lotus",
+  "Katon no Jutsu": "Fireball",
+  "Geirupamu  No Jutsu": "Gale Palm",
+  "Shi no tenshi Jutsu": "Angel of Death",
+  "Dai kyōdo": "Great Strength",
+  "seishitsu henka": "Nature Transformation",
+  "Chidori No Jutsu": "Chidori",
+  "Seiteki firudo No Jutsu": "Static Field",
+  "Ketsueki futto": "Bloodboil",
+  "En Katon no Jutsu": "Flame Fireball",
+  "Sabaki no Genki No Jutsu": "Windstorm Array",
+  "Kibaku nendo No Jutsu": "Detonating Clay",
+  "Ten no noroi": "Cursed Seal of Heaven",
+  "Inori": "Prayer",
+  "O-juu hāto": "Tailed Beast Heart",
+  "Doryuuheki": "Earth Prison",
+  "Doroku Gaeshi": "Great Mud River",
+  "Jinnikuken": "Quickstep",
+  "pamu gijutsu": "Mystical Palm Technique",
+  "Chakura Katana": "Chakra Blade",
+  "Sexy No Jutsu": "Sexy Technique",
+  "Doro kabe No Jutsu": "Mud Wall",
+  "Jeratan": "Snared",
+  "Kiri ga hi hyoji": "Mist-Hide",
+  "Sansetto": "Sunset",
+  "Furaingu raijin No Jutsu": "Flying Thunder God",
+  "Kawarimi no jutsu": "Substitution Technique",
+  "Mangekyou sharingan": "Mangekyo Sharingan",
+  "Katon": "Fire Release",
+  "Doton": "Earth Release",
+  "Kaminari": "Thunder Release",
+  "Kaze": "Wind Release",
+  "Alat Ninja": "Ninja Tool",
+  "Teknik Penyegelan": "Sealing Technique",
+  "Teknik ilusi": "Illusion Technique",
+  "Pilih": "Choose",
+  "Tambah Teman": "Add Friend"
+ },
+ "units": [
+  {
+   "n": 3454,
+   "text": "HP Carrier bag telah mencapai lvl max, tidak dapat di upgrade!"
+  },
+  {
+   "n": 3455,
+   "text": "HP Carrier Bag hanya dapat diperluas kapasitasnya dengan menaikkan lvl lebih tinggi!"
+  },
+  {
+   "n": 3456,
+   "text": "Chakra Carrier Bag telah mencapai batas Level Max, tidak dapat diupgrade!"
+  },
+  {
+   "n": 3457,
+   "text": "Chakra Carrier Bag hanya dapat diperluas kapasitasnya dengan menaikkan lvl lebih tinggi!"
+  },
+  {
+   "n": 3458,
+   "text": "HP Carrier bag telah penuh, tidak dapat di isi!"
+  },
+  {
+   "n": 3459,
+   "text": "Kamu tidak memiliki barang pemulihan HP di tas kamu!"
+  },
+  {
+   "n": 3460,
+   "text": "Kamu memulihkan<font color='#ffffff'> {@0:} </font> HP, HP Carrier bag penuh!"
+  },
+  {
+   "n": 3461,
+   "text": "Kamu Memulihkan <font color='#ffffff'> {@0:} </font> HP!"
+  },
+  {
+   "n": 3462,
+   "text": "Kapasitas chakra carrier bag penuh, tidak dapat mengisi!"
+  },
+  {
+   "n": 3463,
+   "text": "Kamu tidak memiliki barang pemulihan chakra di tas kamu!"
+  },
+  {
+   "n": 3464,
+   "text": "Kamu memulihkan<font color='#ffffff'> {@0:} </font> chakra, chakra carrier bag penuh!"
+  },
+  {
+   "n": 3465,
+   "text": "Kamu memulihkan<font color='#ffffff'> {@0:} </font> chakra!"
+  },
+  {
+   "n": 3466,
+   "text": "HP kamu penuh, tidak dapat memulihkan!"
+  },
+  {
+   "n": 3467,
+   "text": "Chakra kamu penuh, tidak dapat memulihkan!"
+  },
+  {
+   "n": 3468,
+   "text": "HP dan Chakra kamu penuh, tidak dapat memulihkan!"
+  },
+  {
+   "n": 3469,
+   "text": "Movement power kamu sudah  penuh!"
+  },
+  {
+   "n": 3470,
+   "text": "Level kamu terlalu rendah, tidak dapat mengklaim imbalan!"
+  },
+  {
+   "n": 3471,
+   "text": "Kamu tidak cukup memiliki medali!"
+  },
+  {
+   "n": 3472,
+   "text": "Kamu sudah cukup klaim hadiah untuk hari ini, kembali lagi besok!"
+  },
+  {
+   "n": 3473,
+   "text": "Tas kamu penuh, tidak dapat memulai undian!"
+  },
+  {
+   "n": 3474,
+   "text": "Klaim berhasil!"
+  },
+  {
+   "n": 3475,
+   "text": "Kamu berbicara terlalu cepat!"
+  },
+  {
+   "n": 3476,
+   "text": "Kamu belum mencapai Level <font color='#ffffff'> ⟨0⟩ </font>, tidak dapat mengirim pesan di chat dunia!"
+  },
+  {
+   "n": 3477,
+   "text": "kamu berbicara terlalu cepat, hanya dapat berbicara setelah <font color='#ffffff'> {@0:} </font> detik!"
+  },
+  {
+   "n": 3478,
+   "text": "Pihak lain dalam tim, tidak bisa bertransaksi!"
+  },
+  {
+   "n": 3479,
+   "text": "kamu berada di tim, tidak dapat berlatih atau bekerja!"
+  },
+  {
+   "n": 3480,
+   "text": "kamu dalam tim, tidak dapat bertransaksi!"
+  },
+  {
+   "n": 3481,
+   "text": "Kamu berada dalam tim tidak dapat melakukan serangan combo!"
+  },
+  {
+   "n": 3482,
+   "text": "Hanya dapat melakukan transaksi pada level <font color='#ffffff'> ⟨0⟩ </font>!"
+  },
+  {
+   "n": 3483,
+   "text": "Hanya dapat bertransaksi pada pemain lain pada level <font color='#ffffff'> ⟨0⟩ </font>!"
+  },
+  {
+   "n": 3484,
+   "text": "Transaksi dimulai, masukan item atau gold yang ingin kamu transaksikan!"
+  },
+  {
+   "n": 3485,
+   "text": "Tim telah mengunci transaksi, menunggu kamu mengunci!"
+  },
+  {
+   "n": 3486,
+   "text": "Pihak lain telah mengkonfirmasi, menunggu konfirmasi dari kamu untuk menyelesaikan transaksi!"
+  },
+  {
+   "n": 3487,
+   "text": "Kedua belah pihak telah mengunci transaksi, segera konfirmasi!"
+  },
+  {
+   "n": 3488,
+   "text": "Transaksi berhasil!"
+  },
+  {
+   "n": 3489,
+   "text": "Kamu memiliki permohonan transaksi dengan <font color='#ff0000'> {@0:} </font>, harap tunggu!"
+  },
+  {
+   "n": 3490,
+   "text": "kamu dalam tim, tidak dapat melakukan penjelajahan!"
+  },
+  {
+   "n": 3491,
+   "text": "Tidak<font color='#00aeff'> {@0:} </font>, tidak dapat menantang<font color='#ff6565'> {@1:} </font>.<br><font color='#00aeff'>{@0:} </font>Bagaimana memperoleh :<br>⟨0⟩. Mendapatkan langsung melalui penjelajahan<font color='#00aeff'> {@0:} </font>.<br>⟨1⟩. Melalui penjelajahan di zona luar untuk mendapatkan<font color='#00aeff'> {@0:} </font>barang utama untuk kebutuhan sintesis.<br>⟨2⟩.<font color='#00aeff'>When grenade</font>digunakan sebagai barang utama untuk sintesis, kamu mempunyai kesempatan utnuk mendapatkan<font color='#00aeff'> {@0:}</font>.<br>⟨3⟩.<font color='#00aeff'> Ketika Anonymous Namecard </font>digunakan sebagai barang utama untuk sintesis, kamu mempunyai kesempatan utnuk mendapatkan<font color='#00aeff'> grenade</font>."
+  },
+  {
+   "n": 3492,
+   "text": "<font color='#00b034'>{@0:} </font>Di daratan Sakura muncul Boss yang menakutkan<font color='#ff6565'> {@1:}</font>, dan akan hilang dalam<font color='#ffffff'> {@2:} </font>menit!"
+  },
+  {
+   "n": 3493,
+   "text": "<font color='#00b034'>{@0:} </font>Di daratan Sakura telah muncul Boss yang menakutkan<font color='#ff6565'> {@1:}</font>."
+  },
+  {
+   "n": 3494,
+   "text": "Hanya dapat mengintip ⟨0⟩ kartu setiap penjelajahan!"
+  },
+  {
+   "n": 3495,
+   "text": "Tidak bisa mengintip, gold tidak mencukupi!"
+  },
+  {
+   "n": 3496,
+   "text": "Tidak bisa mengintip, Batu tidak mencukupi!"
+  },
+  {
+   "n": 3497,
+   "text": "Kamu menghabiskan<font color='#ffffff'> {@0:} </font>Batu, untuk mengintip harta karun itu!"
+  },
+  {
+   "n": 3498,
+   "text": "Kamu menghabiskan<font color='#ffffff'> {@0:} </font>gold, untuk mengintip harta karun itu!"
+  },
+  {
+   "n": 3499,
+   "text": "Penjelajahan dari<font color='#00b034'> {@0:} </font>Berhasil mencapai bintang<font color='#ffffff'> {@1:} </font>, memperoleh hadiah bonus<font color='#ffffff'> {@2:} </font>!"
+  },
+  {
+   "n": 3500,
+   "text": "Penjelajahan dari<font color='#00b034'> {@0:} </font>berhasil, tas penuh, tidak memperoleh hadiah bonus<font color='#00aeff'> {@1:} </font>!"
+  },
+  {
+   "n": 3501,
+   "text": "Penjelajahan dari<font color='#00b034'> {@0:} </font>berhasil mecapai bintang<font color='#ffffff'> {@1:} </font>, memperoleh hadiah bonus<font color='#ffffff'> {@2:} </font>EXP!"
+  },
+  {
+   "n": 3502,
+   "text": "Selamat telah berhasil menangkap<font color='#00aeff'> {@0:} </font>"
+  },
+  {
+   "n": 3503,
+   "text": "Maaf,<font color='#00aeff'> {@0:} </font> telah melarikan diri!"
+  },
+  {
+   "n": 3504,
+   "text": "Batu kamu telah mencapai jumlah yang max, Batu yang diperoleh dari bekerja yang melebihi jumlah maksimal akan dipotong!"
+  },
+  {
+   "n": 3505,
+   "text": "Kamu memperoleh {@0:}!"
+  },
+  {
+   "n": 3506,
+   "text": "Gold tidak cukup, tidak dapat membuka Guci untuk menarik hadiah!"
+  },
+  {
+   "n": 3507,
+   "text": "Ruang di tas tidak cukup untuk memasukan item ⟨0⟩-slot, penjelajahan tidak dapat dimulai!"
+  },
+  {
+   "n": 3508,
+   "text": "Kamu memperoleh {@0:} Batu!"
+  },
+  {
+   "n": 3509,
+   "text": "Kamu menemukan sebuah harta karun dalam pengawalan Tim selama penjelajahan, pertarungan dimulai!"
+  },
+  {
+   "n": 3510,
+   "text": "Folder penyimpan pertarungan penuh, hapus beberapa file dahulu sebelum menyimpan yang baru!"
+  },
+  {
+   "n": 3511,
+   "text": "Maaf, resep sintesis gagal, katalis hancur."
+  },
+  {
+   "n": 3512,
+   "text": "Maaf, sintesis secara acak gagal, item yang disinthesiskan rusak!"
+  },
+  {
+   "n": 3513,
+   "text": "Kamu sibuk sekarang!"
+  },
+  {
+   "n": 3514,
+   "text": "Pertarungan arena kamu untuk hari ini telah digunakan!"
+  },
+  {
+   "n": 3515,
+   "text": "Setelah menyelesaikan satu pertandingan arena, silahkan beristirahat sejenak sebelum melanjutkan!"
+  },
+  {
+   "n": 3516,
+   "text": "Rank kamu terlalu rendah!"
+  },
+  {
+   "n": 3517,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font> medali!"
+  },
+  {
+   "n": 3518,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font> poin!"
+  },
+  {
+   "n": 3519,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font>!"
+  },
+  {
+   "n": 3520,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font> Batu!"
+  },
+  {
+   "n": 3521,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font> Gift Coupon!"
+  },
+  {
+   "n": 3522,
+   "text": "Saat ini tidak perlu menggunakan obat-obatan!"
+  },
+  {
+   "n": 3523,
+   "text": "Kamu tidak memiliki cukup gold, tidak dapat membalas dendam pada pemain yang sama!"
+  },
+  {
+   "n": 3524,
+   "text": "Kamu ingin menantang aku? Dapatkan misi sebelum melakukan!"
+  },
+  {
+   "n": 3525,
+   "text": "Saat ini bukan waktu pendaftaran!"
+  },
+  {
+   "n": 3526,
+   "text": "Kamu telah mendaftar hari ini!"
+  },
+  {
+   "n": 3527,
+   "text": "Pendaftaran berhasil!"
+  },
+  {
+   "n": 3528,
+   "text": "Kamu tidak memiliki dana yang cukup!"
+  },
+  {
+   "n": 3529,
+   "text": "Memulihkan HP dan chakra ke batas maksimal!"
+  },
+  {
+   "n": 3530,
+   "text": "HP dan chakra kamu sudah penuh, tidak perlu dipulihkan!"
+  },
+  {
+   "n": 3531,
+   "text": "Tidak dapat bertaruh sekarang!"
+  },
+  {
+   "n": 3532,
+   "text": "Movement power kamu sudah penuh, tidak perlu dipulihkan!"
+  },
+  {
+   "n": 3533,
+   "text": "Menghabiskan <font color='#ff0000'>{@0:} </font>gold untuk memulihkan<font color='#ff0000'> {@1:} </font>movement power!"
+  },
+  {
+   "n": 3534,
+   "text": "Hanya dapat memulihkan movement power<font color='#ff0000'> {@0:} </font>kali setiap hari. Masa pemulihan kamu telah habis, kamu tidak dapat memulihkan movement power!"
+  },
+  {
+   "n": 3535,
+   "text": "Kombinasi level barang sudah maksimal, tidak dapat dikombinasikan lag!"
+  },
+  {
+   "n": 3536,
+   "text": "Kamu sibuk, tidak dapat memasuki arena!"
+  },
+  {
+   "n": 3537,
+   "text": "Level kamu terlalu rendah, tidak dapat berpartisipasi dalam Turnamen Beladiri Dunia!"
+  },
+  {
+   "n": 3538,
+   "text": "Sistem saat ini sedang tidak normal, silahkan mencoba mengklaim nanti!"
+  },
+  {
+   "n": 3539,
+   "text": "Kode aktivasi yang kamu masukan salah, konfirmasi sebelum mencoba kembali!"
+  },
+  {
+   "n": 3540,
+   "text": "Kode aktivasi yang kamu masukan telah digunakan, tidak bisa mengklaim lagi!"
+  },
+  {
+   "n": 3541,
+   "text": "Tas kamu penuh, tidak bisa mengklaim gift box!"
+  },
+  {
+   "n": 3542,
+   "text": "Gift Box telah berhasil di klaim!"
+  },
+  {
+   "n": 3543,
+   "text": "<font color='#ff0000'>{@0:} </font>telah memulai pembantaian di dalam<font color='#00b034'> {@1:} </font>, membuat penjaga kabur, dan kehilangan<font color='#00aeff'> {@2:} </font>dalam pertarungan!"
+  },
+  {
+   "n": 3544,
+   "text": "Setelah berhasil menantang<font color='#ff0000'> {@0:} </font>pada<font color='#00b034'> {@1:} </font>, kebetulan menemukan<font color='#00aeff'> {@2:} </font> di dekat monster!"
+  },
+  {
+   "n": 3545,
+   "text": "Kamu telah menjalani {@0:} Jam {@1:} Menit pelatihan normal di aula, memperoleh {@2:} EXP!"
+  },
+  {
+   "n": 3546,
+   "text": "Kamu telah menjalani {@0:} Jam {@1:} Menit bekerja normal di aula, memperoleh {@1:} batu!"
+  },
+  {
+   "n": 3547,
+   "text": "Serangan combo ini berlangsung {@0:} Jam {@1:} min, membunuh {@2:} monster<font color='#ff6565'> {@3:} </font>, memperoleh {@4:} EXP. Hasil jarahan dari kemenangan berada di tas kamu!"
+  },
+  {
+   "n": 3548,
+   "text": "<font color='#ff0000'>{@0:} </font>menantang kamu di arena, sayangnya kamu kalah, kehilangan {@1:} point!"
+  },
+  {
+   "n": 3549,
+   "text": "<font color='#ff0000'>{@0:} </font>menantangan kamu di arena, dan kamu begitu mudah menang darinya, memperoleh {@1:} point!"
+  },
+  {
+   "n": 3550,
+   "text": "<font color='#ff0000'> {@0:} </font>Telah menambahkan kamu sebagai teman!"
+  },
+  {
+   "n": 3551,
+   "text": "<font color='#ff0000'> {@0:} </font> Telah menghapus pertemanan dengan kamu!"
+  },
+  {
+   "n": 3552,
+   "text": "Gold tidak mencukupi, tidak dapat hidup kembali di tempat!"
+  },
+  {
+   "n": 3553,
+   "text": "Kamu tidak dapat hidup kembali di area ini!"
+  },
+  {
+   "n": 3554,
+   "text": "Item ini tidak ada, silahkan update ke klien terbaru!"
+  },
+  {
+   "n": 3555,
+   "text": "Kapasitas gudang tidak mencukupi!"
+  },
+  {
+   "n": 3556,
+   "text": "Harga item telah berubah, silahkan update ke klien terbaru!"
+  },
+  {
+   "n": 3557,
+   "text": "Tas sudah penuh, tidak dapat membeli!"
+  },
+  {
+   "n": 3558,
+   "text": "Pembelian dari<font color='#0098FF'> {@0:} </font>x<font color='#FF6565'> {@1:} </font>berhasil!"
+  },
+  {
+   "n": 3559,
+   "text": "Biaya tidak mencukupi!"
+  },
+  {
+   "n": 3560,
+   "text": "Kamu telah mengklaim gift box!"
+  },
+  {
+   "n": 3561,
+   "text": "Peta ini belum terbuka, harap bersabar!"
+  },
+  {
+   "n": 3562,
+   "text": "Kamu telah dinonaktifkan, tidak bisa mengirim pesan di channel ini!"
+  },
+  {
+   "n": 3563,
+   "text": "<font color='#ffffff'>{@0:} </font>kamu telah mencapai batas!"
+  },
+  {
+   "n": 3564,
+   "text": "Kamu memperoleh <font color='#ff0000'>{@1:}</font> <font color='#ff0000'>{@0:}</font>!"
+  },
+  {
+   "n": 3565,
+   "text": "Kamu telah memasang taruhan kamu, hanya dapat melanjutkan taruhan di babak berikutnya!"
+  },
+  {
+   "n": 3566,
+   "text": "Taruhan berhasil!"
+  },
+  {
+   "n": 3567,
+   "text": "Rank yang ditantang terlalu rendah, tidak dapat duel."
+  },
+  {
+   "n": 3568,
+   "text": "Kamu membuka kartu medali di arena, memperoleh<font color='#0098FF'> {@0:} </font>!"
+  },
+  {
+   "n": 3569,
+   "text": "Hanya dapat menggunakan kunci di zona luar!"
+  },
+  {
+   "n": 3570,
+   "text": "Serangan combo berhasil, mengalahkan {@0:}<font color='#ff6565'> {@1:} </font>, memperoleh {@2:} EXP, bonus EXP {@3:}. Hasil rampasan berada di tas kamu."
+  },
+  {
+   "n": 3571,
+   "text": "Serangan combo terputus, mengalahkan {@0:} <font color='#ff6565'>{@1:} </font>sebelum serangan terhenti, memperoleh {@2:} EXP, bonus EXP {@3:}. Hasil rampasan berada di tas kamu."
+  },
+  {
+   "n": 3572,
+   "text": "Ini serangan combo yang terakhir {@0:} Jam {@1:} min, membunuh {@2:} monster<font color='#ff6565'> {@3:} </font>, memperoleh {@4:} EXP, bonus EXP {@3:}. Hasil rampasan berada di tas kamu!"
+  },
+  {
+   "n": 3573,
+   "text": "Kamu membayar<font color='#ff0000'> {@0: number} </font>{@1: money type} untuk memulai serangan combo!"
+  },
+  {
+   "n": 3574,
+   "text": "<font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> Telah menjelajahi <font color='#00b034'> {@1: } </font> dan menemukan <font color='#00aeff'> {@2: } </font>. Seseorang yang beruntung! </font>"
+  },
+  {
+   "n": 3575,
+   "text": "Tas kamu penuh, atur dahulu sebelum klaim hadiah."
+  },
+  {
+   "n": 3576,
+   "text": "Kamu sedang menjalankan auto-completion. Harus menunggu misi ini selesai sebelum memilih auto-complete lagi."
+  },
+  {
+   "n": 3577,
+   "text": "Kamu telah menyelesaikan ⟨0⟩ misi harian berhadiah, dapat mengambil kembali besok."
+  },
+  {
+   "n": 3578,
+   "text": "Kamu kamu telah berada di area tujuan, tidak dapat teleport."
+  },
+  {
+   "n": 3579,
+   "text": "Demon Sickle"
+  },
+  {
+   "n": 3580,
+   "text": "Bowling Bullet"
+  },
+  {
+   "n": 3581,
+   "text": "Earth Dragon Bullet"
+  },
+  {
+   "n": 3582,
+   "text": "Iron Swell"
+  },
+  {
+   "n": 3583,
+   "text": "Raging Sky"
+  },
+  {
+   "n": 3584,
+   "text": "Hand Grenade"
+  },
+  {
+   "n": 3585,
+   "text": "Double Kick"
+  },
+  {
+   "n": 3586,
+   "text": "Heavensound"
+  },
+  {
+   "n": 3587,
+   "text": "Caltrop Bullet"
+  },
+  {
+   "n": 3588,
+   "text": "Sinister Bullet"
+  },
+  {
+   "n": 3589,
+   "text": "Wind Demon's Sword"
+  },
+  {
+   "n": 3590,
+   "text": "Demon Bullet"
+  },
+  {
+   "n": 3591,
+   "text": "Dart"
+  },
+  {
+   "n": 3592,
+   "text": "Crucifix Dart"
+  },
+  {
+   "n": 3593,
+   "text": "Plum Blossom Dart"
+  },
+  {
+   "n": 3594,
+   "text": "Rasenshuriken"
+  },
+  {
+   "n": 3595,
+   "text": "Konohashuriken"
+  },
+  {
+   "n": 3596,
+   "text": "Poisonleaf Dart"
+  },
+  {
+   "n": 3597,
+   "text": "Dualedged Blade"
+  },
+  {
+   "n": 3598,
+   "text": "Triple Slash"
+  },
+  {
+   "n": 3599,
+   "text": "Kamu terlalu lemah. Pulihkan HP sebelum memulai pertarungan kembali!"
+  },
+  {
+   "n": 3600,
+   "text": "Analisis Pertarungan"
+  },
+  {
+   "n": 3601,
+   "text": "Meningkatkan kemampuan"
+  },
+  {
+   "n": 3602,
+   "text": "Lanjutkan Pertarungan"
+  },
+  {
+   "n": 3603,
+   "text": "Simpan Pertarungan"
+  },
+  {
+   "n": 3604,
+   "text": "Meninggalkan Pesan"
+  },
+  {
+   "n": 3605,
+   "text": "Ulangi Pertarungan"
+  },
+  {
+   "n": 3606,
+   "text": "Berbagi Pertarungan"
+  },
+  {
+   "n": 3607,
+   "text": "dan"
+  },
+  {
+   "n": 3608,
+   "text": ", menyerap"
+  },
+  {
+   "n": 3609,
+   "text": "tambahan"
+  },
+  {
+   "n": 3610,
+   "text": "menyerang"
+  },
+  {
+   "n": 3611,
+   "text": "mengeluarkan"
+  },
+  {
+   "n": 3612,
+   "text": "Mengembalikan Bomb"
+  },
+  {
+   "n": 3613,
+   "text": ",  Musuh tidak dapat bergerak"
+  },
+  {
+   "n": 3614,
+   "text": ",  Ketahanan musuh berkurang kecepatan meningkat"
+  },
+  {
+   "n": 3615,
+   "text": ",  Musuh mulai terbakar"
+  },
+  {
+   "n": 3616,
+   "text": ",  Pukulan musuh berkurang dan kritikal meningkat"
+  },
+  {
+   "n": 3617,
+   "text": ",  Ketahanan musuh melemah"
+  },
+  {
+   "n": 3618,
+   "text": ",  Serangan musuh melemah"
+  },
+  {
+   "n": 3619,
+   "text": ",  Kecepatan musuh berkurang"
+  },
+  {
+   "n": 3620,
+   "text": ",  Musuh keracunan"
+  },
+  {
+   "n": 3621,
+   "text": ",  Musuh tidak dapat mengeluarkan skill"
+  },
+  {
+   "n": 3622,
+   "text": ",  Serangan diri sendiri meningkat"
+  },
+  {
+   "n": 3623,
+   "text": "， Hindaran musuh berkurang"
+  },
+  {
+   "n": 3624,
+   "text": ",  Melindungi diri"
+  },
+  {
+   "n": 3625,
+   "text": "   Membuka gerbang, Serangan dan kecepatan meningkat"
+  },
+  {
+   "n": 3626,
+   "text": ",  Kecepatan mendekati lawan yang berbahaya"
+  },
+  {
+   "n": 3627,
+   "text": "， Mudah untuk diserang balik"
+  },
+  {
+   "n": 3628,
+   "text": "，'Lima element' meningkatkan kritikal"
+  },
+  {
+   "n": 3629,
+   "text": "， Kekuatan penuh dengan biaya HP"
+  },
+  {
+   "n": 3630,
+   "text": ",  Kecepatan diri meningkat"
+  },
+  {
+   "n": 3631,
+   "text": ",  Sementara musuh tidak dapat bergerak"
+  },
+  {
+   "n": 3632,
+   "text": ",  Musuh mengeluarkan awan hitam di kepala"
+  },
+  {
+   "n": 3633,
+   "text": ",  Tusukan musuh mengurang dan gerakan terganggu"
+  },
+  {
+   "n": 3634,
+   "text": "， Terluka sementara"
+  },
+  {
+   "n": 3635,
+   "text": ",  Tidak dapat begerak"
+  },
+  {
+   "n": 3636,
+   "text": ",  Menyembuhkan diri"
+  },
+  {
+   "n": 3637,
+   "text": ",  Mengurangi pengeluaran skill musuh"
+  },
+  {
+   "n": 3638,
+   "text": ",  Musuh terjebak ilusi"
+  },
+  {
+   "n": 3639,
+   "text": ",  Musuh mengalami pendarahan"
+  },
+  {
+   "n": 3640,
+   "text": ",  Penggunaan chakra musuh meningkat"
+  },
+  {
+   "n": 3641,
+   "text": ",  Pukulan musuh berkurang"
+  },
+  {
+   "n": 3642,
+   "text": " Membuka gerbang peristirahatan, kecepatan meningkat"
+  },
+  {
+   "n": 3643,
+   "text": " Membuka gerbang kehidupan,  Kecepatan meningkat"
+  },
+  {
+   "n": 3644,
+   "text": " Membuka gerbang kepedihan,  Kecepatan meningkat"
+  },
+  {
+   "n": 3645,
+   "text": " Membuka gerbang tertutup, kecepatan meningkat"
+  },
+  {
+   "n": 3646,
+   "text": " Membuka gerbang kesenangan, kecepatan meningkat"
+  },
+  {
+   "n": 3647,
+   "text": " Membuka gerbang kejutan, kecepatan meningkat"
+  },
+  {
+   "n": 3648,
+   "text": " Membuka gerbang kematian, kecepatan meningkat"
+  },
+  {
+   "n": 3649,
+   "text": ", Mengunci lokasi musuh"
+  },
+  {
+   "n": 3650,
+   "text": "，Mempunyai kesempatai Serangan, pertahanan dan kritikal yang baik"
+  },
+  {
+   "n": 3651,
+   "text": "，Musuh mengalami kerusakan, kemampuan menurun"
+  },
+  {
+   "n": 3652,
+   "text": "，ketahan musuh menurun"
+  },
+  {
+   "n": 3653,
+   "text": "，Pergerakan musuh menurun"
+  },
+  {
+   "n": 3654,
+   "text": ", speed meningkat"
+  },
+  {
+   "n": 3655,
+   "text": ", penurunan attack ⟨0⟩%"
+  },
+  {
+   "n": 3656,
+   "text": ", Menjadi kebal"
+  },
+  {
+   "n": 3657,
+   "text": ", speed dan attack meningkat"
+  },
+  {
+   "n": 3658,
+   "text": "Dodge turun ⟨0⟩ point"
+  },
+  {
+   "n": 3659,
+   "text": "Penurunan attack dan defence ⟨0⟩%"
+  },
+  {
+   "n": 3660,
+   "text": "Meningkatkan damage dari lima skill ⟨0⟩%"
+  },
+  {
+   "n": 3661,
+   "text": "Meningkatkan defence ⟨0⟩ point"
+  },
+  {
+   "n": 3662,
+   "text": "Sebelum bergerak selanjutnya, kehilangan ⟨0⟩% dari HP dan Chakra"
+  },
+  {
+   "n": 3663,
+   "text": "Speed menurun ⟨0⟩%"
+  },
+  {
+   "n": 3664,
+   "text": "Meningkatkan damage dari Chidori ⟨0⟩%"
+  },
+  {
+   "n": 3665,
+   "text": ",  Serangan musuh berkurang"
+  },
+  {
+   "n": 3666,
+   "text": "status telah memicu"
+  },
+  {
+   "n": 3667,
+   "text": "serangan balik"
+  },
+  {
+   "n": 3668,
+   "text": ", Sepakat dengan lawan"
+  },
+  {
+   "n": 3669,
+   "text": "kerusakan"
+  },
+  {
+   "n": 3670,
+   "text": "kerusakan chakra"
+  },
+  {
+   "n": 3671,
+   "text": ", sendiri"
+  },
+  {
+   "n": 3672,
+   "text": "status telah habis"
+  },
+  {
+   "n": 3673,
+   "text": "Kalah, "
+  },
+  {
+   "n": 3674,
+   "text": ", tapi diblok oleh lawan"
+  },
+  {
+   "n": 3675,
+   "text": ", tapi gagal"
+  },
+  {
+   "n": 3676,
+   "text": ", mengembalikan"
+  },
+  {
+   "n": 3677,
+   "text": ", menerima"
+  },
+  {
+   "n": 3678,
+   "text": "Mulai bergerak"
+  },
+  {
+   "n": 3679,
+   "text": "memicu"
+  },
+  {
+   "n": 3680,
+   "text": "<font color='#fff67c'>[Combat Start]</font>"
+  },
+  {
+   "n": 3681,
+   "text": "mulai menangkap"
+  },
+  {
+   "n": 3682,
+   "text": "Teknik Rahasia "
+  },
+  {
+   "n": 3683,
+   "text": "Marah"
+  },
+  {
+   "n": 3684,
+   "text": "Membakar"
+  },
+  {
+   "n": 3685,
+   "text": "Minyak"
+  },
+  {
+   "n": 3686,
+   "text": "Segel Tubuh"
+  },
+  {
+   "n": 3687,
+   "text": "Teracuni"
+  },
+  {
+   "n": 3688,
+   "text": "Bloodboil"
+  },
+  {
+   "n": 3689,
+   "text": "Bahagia"
+  },
+  {
+   "n": 3690,
+   "text": "Terjerat"
+  },
+  {
+   "n": 3691,
+   "text": "Ditusuk"
+  },
+  {
+   "n": 3692,
+   "text": "Api burung phonik"
+  },
+  {
+   "n": 3693,
+   "text": "Buka Gerbang"
+  },
+  {
+   "n": 3694,
+   "text": "Bom Waktu"
+  },
+  {
+   "n": 3695,
+   "text": "Kabut"
+  },
+  {
+   "n": 3696,
+   "text": "Sunset"
+  },
+  {
+   "n": 3697,
+   "text": "Kutukan dari surga"
+  },
+  {
+   "n": 3698,
+   "text": "Dinding Pasir"
+  },
+  {
+   "n": 3699,
+   "text": "Seperti Angin"
+  },
+  {
+   "n": 3700,
+   "text": "Awan Gelap"
+  },
+  {
+   "n": 3701,
+   "text": "Asap"
+  },
+  {
+   "n": 3702,
+   "text": "Ketakutan"
+  },
+  {
+   "n": 3703,
+   "text": "Memutuskan"
+  },
+  {
+   "n": 3704,
+   "text": "Medan statis"
+  },
+  {
+   "n": 3705,
+   "text": "Doa"
+  },
+  {
+   "n": 3706,
+   "text": "Penyembuhan"
+  },
+  {
+   "n": 3707,
+   "text": "Sesak"
+  },
+  {
+   "n": 3708,
+   "text": "Kerusakan saluran"
+  },
+  {
+   "n": 3709,
+   "text": "Merubah teknik"
+  },
+  {
+   "n": 3710,
+   "text": "Pre-Healing Jutsu "
+  },
+  {
+   "n": 3711,
+   "text": "Aura Penyembuhan"
+  },
+  {
+   "n": 3712,
+   "text": "Pemulihan Aura Penyembuhan"
+  },
+  {
+   "n": 3713,
+   "text": "Jalur Cacing"
+  },
+  {
+   "n": 3714,
+   "text": "Tekanan Semangat"
+  },
+  {
+   "n": 3715,
+   "text": "Teknik penyegelan iblis"
+  },
+  {
+   "n": 3716,
+   "text": "Kabut bracun"
+  },
+  {
+   "n": 3717,
+   "text": "Pemulihan sesaat sebelum kematian"
+  },
+  {
+   "n": 3718,
+   "text": "Exorcism"
+  },
+  {
+   "n": 3719,
+   "text": "Water Dragon Wave"
+  },
+  {
+   "n": 3720,
+   "text": "lemah"
+  },
+  {
+   "n": 3721,
+   "text": "Mengembalikan segel"
+  },
+  {
+   "n": 3722,
+   "text": "Berdarah"
+  },
+  {
+   "n": 3723,
+   "text": "Bloodsaber"
+  },
+  {
+   "n": 3724,
+   "text": ", hapus"
+  },
+  {
+   "n": 3725,
+   "text": "telah mencapai tingkat"
+  },
+  {
+   "n": 3726,
+   "text": ", trik tidak dapat direalisasikan"
+  },
+  {
+   "n": 3727,
+   "text": "(pukulan kritikal)"
+  },
+  {
+   "n": 3728,
+   "text": "(pukulan kritikal dan armor break)"
+  },
+  {
+   "n": 3729,
+   "text": "(pukulan kritikal, armor break dan blok)"
+  },
+  {
+   "n": 3730,
+   "text": "(pukulan kritikal dan blok)"
+  },
+  {
+   "n": 3731,
+   "text": "terlepas"
+  },
+  {
+   "n": 3732,
+   "text": ", akurasi menjerat lawan"
+  },
+  {
+   "n": 3733,
+   "text": ", tapi lawan menghindar"
+  },
+  {
+   "n": 3734,
+   "text": "(armor break)"
+  },
+  {
+   "n": 3735,
+   "text": "(armor break dan blok)"
+  },
+  {
+   "n": 3736,
+   "text": "(blok)"
+  },
+  {
+   "n": 3737,
+   "text": "pada tubuh"
+  },
+  {
+   "n": 3738,
+   "text": "Lawan"
+  },
+  {
+   "n": 3739,
+   "text": "Bibit"
+  },
+  {
+   "n": 3740,
+   "text": "serangan pet s pada waktu yang bersamaan"
+  },
+  {
+   "n": 3741,
+   "text": ", pet lawan memblok kerusakan"
+  },
+  {
+   "n": 3742,
+   "text": "Pre-emptive team"
+  },
+  {
+   "n": 3743,
+   "text": ", terjebak"
+  },
+  {
+   "n": 3744,
+   "text": "Sandki No Jutsu"
+  },
+  {
+   "n": 3745,
+   "text": "Kurisutaruburedo"
+  },
+  {
+   "n": 3746,
+   "text": "O-juu hāto"
+  },
+  {
+   "n": 3747,
+   "text": "Rōtasusukiru No Jutsu"
+  },
+  {
+   "n": 3748,
+   "text": "Katon no Jutsu"
+  },
+  {
+   "n": 3749,
+   "text": "Rasengan"
+  },
+  {
+   "n": 3750,
+   "text": "Geirupamu  No Jutsu"
+  },
+  {
+   "n": 3751,
+   "text": "Shi no tenshi Jutsu"
+  },
+  {
+   "n": 3752,
+   "text": "Doryuuheki"
+  },
+  {
+   "n": 3753,
+   "text": "Doroku Gaeshi"
+  },
+  {
+   "n": 3754,
+   "text": "Dai kyōdo"
+  },
+  {
+   "n": 3755,
+   "text": "seishitsu henka"
+  },
+  {
+   "n": 3756,
+   "text": "Chidori No Jutsu"
+  },
+  {
+   "n": 3757,
+   "text": "Jinnikuken"
+  },
+  {
+   "n": 3758,
+   "text": "Bomb"
+  },
+  {
+   "n": 3759,
+   "text": "pamu gijutsu"
+  },
+  {
+   "n": 3760,
+   "text": "Chakura Katana"
+  },
+  {
+   "n": 3761,
+   "text": "Shikon no Jutsu"
+  },
+  {
+   "n": 3762,
+   "text": "Seiteki firudo No Jutsu"
+  },
+  {
+   "n": 3763,
+   "text": "Shinsei no Jutsu"
+  },
+  {
+   "n": 3764,
+   "text": "Ketsueki futto"
+  },
+  {
+   "n": 3765,
+   "text": "Sexy No Jutsu"
+  },
+  {
+   "n": 3766,
+   "text": "Doro kabe No Jutsu"
+  },
+  {
+   "n": 3767,
+   "text": "Jeratan"
+  },
+  {
+   "n": 3768,
+   "text": "En Katon no Jutsu"
+  },
+  {
+   "n": 3769,
+   "text": "Shintenshin no Jutsu"
+  },
+  {
+   "n": 3770,
+   "text": "Sabaki no Genki No Jutsu"
+  },
+  {
+   "n": 3771,
+   "text": "Kibaku nendo No Jutsu"
+  },
+  {
+   "n": 3772,
+   "text": "Kiri ga hi hyoji"
+  },
+  {
+   "n": 3773,
+   "text": "Sansetto"
+  },
+  {
+   "n": 3774,
+   "text": "Ten no noroi"
+  },
+  {
+   "n": 3775,
+   "text": "Suiton Suijinheki"
+  },
+  {
+   "n": 3776,
+   "text": "Inori"
+  },
+  {
+   "n": 3777,
+   "text": "Furaingu raijin No Jutsu"
+  },
+  {
+   "n": 3778,
+   "text": "Puppet"
+  },
+  {
+   "n": 3779,
+   "text": "Kawarimi no jutsu"
+  },
+  {
+   "n": 3780,
+   "text": "Mangekyou sharingan"
+  },
+  {
+   "n": 3781,
+   "text": "Pukulan keras"
+  },
+  {
+   "n": 3782,
+   "text": "Teknik Rahasia"
+  },
+  {
+   "n": 3783,
+   "text": "Katon"
+  },
+  {
+   "n": 3784,
+   "text": "Suiton"
+  },
+  {
+   "n": 3785,
+   "text": "Doton"
+  },
+  {
+   "n": 3786,
+   "text": "Kaminari"
+  },
+  {
+   "n": 3787,
+   "text": "Kaze"
+  },
+  {
+   "n": 3788,
+   "text": "Body Technique"
+  },
+  {
+   "n": 3789,
+   "text": "Alat Ninja"
+  },
+  {
+   "n": 3790,
+   "text": "Teknik Penyegelan"
+  },
+  {
+   "n": 3791,
+   "text": "Teknik ilusi"
+  },
+  {
+   "n": 3792,
+   "text": "Healing Jutsu"
+  },
+  {
+   "n": 3793,
+   "text": "Serangan keras"
+  },
+  {
+   "n": 3794,
+   "text": "Metode penyegelan iblis"
+  },
+  {
+   "n": 3795,
+   "text": "Normal Pet Attack"
+  },
+  {
+   "n": 3796,
+   "text": "Pet HP Restore"
+  },
+  {
+   "n": 3797,
+   "text": "Pet MP Restore"
+  },
+  {
+   "n": 3798,
+   "text": "Pet Cleanse"
+  },
+  {
+   "n": 3799,
+   "text": "Pet Devour"
+  },
+  {
+   "n": 3800,
+   "text": "Pet Block"
+  },
+  {
+   "n": 3801,
+   "text": "Pet Feeding"
+  },
+  {
+   "n": 3802,
+   "text": "Pet HP Absorb Attack"
+  },
+  {
+   "n": 3803,
+   "text": "Pet Bite"
+  },
+  {
+   "n": 3804,
+   "text": "Pet Combo"
+  },
+  {
+   "n": 3805,
+   "text": "Pet Counterattack"
+  },
+  {
+   "n": 3806,
+   "text": "Pet Pollen"
+  },
+  {
+   "n": 3807,
+   "text": "Pet Snare"
+  },
+  {
+   "n": 3808,
+   "text": "Pet Solar Strike"
+  },
+  {
+   "n": 3809,
+   "text": "Pet Suppression"
+  },
+  {
+   "n": 3810,
+   "text": "Pet Drill"
+  },
+  {
+   "n": 3811,
+   "text": "Pet Dash"
+  },
+  {
+   "n": 3812,
+   "text": "Devour"
+  },
+  {
+   "n": 3813,
+   "text": "Heal"
+  },
+  {
+   "n": 3814,
+   "text": "Peck"
+  },
+  {
+   "n": 3815,
+   "text": "HP Absorb"
+  },
+  {
+   "n": 3816,
+   "text": "Bite"
+  },
+  {
+   "n": 3817,
+   "text": "Pollen"
+  },
+  {
+   "n": 3818,
+   "text": "Rooted"
+  },
+  {
+   "n": 3819,
+   "text": "Solar Strike"
+  },
+  {
+   "n": 3820,
+   "text": "Suppression"
+  },
+  {
+   "n": 3821,
+   "text": "Drill"
+  },
+  {
+   "n": 3822,
+   "text": "Counterbite"
+  },
+  {
+   "n": 3823,
+   "text": "Bladeflash"
+  },
+  {
+   "n": 3824,
+   "text": "Chain Slash"
+  },
+  {
+   "n": 3825,
+   "text": "Fly"
+  },
+  {
+   "n": 3826,
+   "text": "Dash"
+  },
+  {
+   "n": 3827,
+   "text": "Enrage"
+  },
+  {
+   "n": 3828,
+   "text": "Elementary Slaughter Aura"
+  },
+  {
+   "n": 3829,
+   "text": "Advanced Slaughter Aura"
+  },
+  {
+   "n": 3830,
+   "text": "Expert Slaughter Aura"
+  },
+  {
+   "n": 3831,
+   "text": "Elementary Bramble Aura"
+  },
+  {
+   "n": 3832,
+   "text": "Advanced Bramble Aura"
+  },
+  {
+   "n": 3833,
+   "text": "Expert Bramble Aura"
+  },
+  {
+   "n": 3834,
+   "text": "Elementary Rebirth Aura"
+  },
+  {
+   "n": 3835,
+   "text": "Advanced Rebirth Aura"
+  },
+  {
+   "n": 3836,
+   "text": "Expert Rebirth Aura"
+  },
+  {
+   "n": 3837,
+   "text": "Elementary Holy Aura"
+  },
+  {
+   "n": 3838,
+   "text": "Advanced Holy Aura"
+  },
+  {
+   "n": 3839,
+   "text": "Expert Holy Aura"
+  },
+  {
+   "n": 3840,
+   "text": "Elementary Intelligence Aura"
+  },
+  {
+   "n": 3841,
+   "text": "Advanced Intelligence Aura"
+  },
+  {
+   "n": 3842,
+   "text": "Expert Intelligence Aura"
+  },
+  {
+   "n": 3843,
+   "text": "Blood Curse"
+  },
+  {
+   "n": 3844,
+   "text": "Melee"
+  },
+  {
+   "n": 3845,
+   "text": "Excited"
+  },
+  {
+   "n": 3846,
+   "text": "Spine Protection"
+  },
+  {
+   "n": 3847,
+   "text": "Photosynthesis"
+  },
+  {
+   "n": 3848,
+   "text": "Chill Ripple"
+  },
+  {
+   "n": 3849,
+   "text": "Sacrifice"
+  },
+  {
+   "n": 3850,
+   "text": "Puppeteer"
+  },
+  {
+   "n": 3851,
+   "text": "Dragon Blood"
+  },
+  {
+   "n": 3852,
+   "text": "Inviolable"
+  },
+  {
+   "n": 3853,
+   "text": "Divine Mark"
+  },
+  {
+   "n": 3854,
+   "text": "Mysterious Technique"
+  },
+  {
+   "n": 3855,
+   "text": "Perception"
+  },
+  {
+   "n": 3856,
+   "text": "Momentary Recovery Before Death"
+  },
+  {
+   "n": 3857,
+   "text": "Absolute Loyalty"
+  },
+  {
+   "n": 3858,
+   "text": "Repress"
+  },
+  {
+   "n": 3859,
+   "text": "Fortune"
+  },
+  {
+   "n": 3860,
+   "text": "Misfortune"
+  },
+  {
+   "n": 3861,
+   "text": "Antibody"
+  },
+  {
+   "n": 3862,
+   "text": "Sober"
+  },
+  {
+   "n": 3863,
+   "text": "Remove seal"
+  },
+  {
+   "n": 3864,
+   "text": "Bless"
+  },
+  {
+   "n": 3865,
+   "text": "Icy Breath"
+  },
+  {
+   "n": 3866,
+   "text": "Dragon's Breath"
+  },
+  {
+   "n": 3867,
+   "text": "Tailed Beast Cannon"
+  },
+  {
+   "n": 3868,
+   "text": "Cambukan dari Tailed Beast"
+  },
+  {
+   "n": 3869,
+   "text": "Basic Lofty Aura"
+  },
+  {
+   "n": 3870,
+   "text": "Advanced Lofty Aura"
+  },
+  {
+   "n": 3871,
+   "text": "Expert Lofty Aura"
+  },
+  {
+   "n": 3872,
+   "text": "Seething Beast Blood "
+  },
+  {
+   "n": 3873,
+   "text": "Guardian of Sand"
+  },
+  {
+   "n": 3874,
+   "text": "Kabut beracun"
+  },
+  {
+   "n": 3875,
+   "text": "Barks Armor"
+  },
+  {
+   "n": 3876,
+   "text": "Fence Sitter"
+  },
+  {
+   "n": 3877,
+   "text": "Armor Corrosion"
+  },
+  {
+   "n": 3878,
+   "text": "Mystic Energy"
+  },
+  {
+   "n": 3879,
+   "text": "Dragon Wing"
+  },
+  {
+   "n": 3880,
+   "text": "False Tooth"
+  },
+  {
+   "n": 3881,
+   "text": "Natural Enemy"
+  },
+  {
+   "n": 3882,
+   "text": "Aiming Device"
+  },
+  {
+   "n": 3883,
+   "text": "Kostum Copy"
+  },
+  {
+   "n": 3884,
+   "text": "Nihility"
+  },
+  {
+   "n": 3885,
+   "text": "X-ray Vision"
+  },
+  {
+   "n": 3886,
+   "text": "Vivacious"
+  },
+  {
+   "n": 3887,
+   "text": "Sandbag"
+  },
+  {
+   "n": 3888,
+   "text": "Nimble"
+  },
+  {
+   "n": 3889,
+   "text": "Withstand"
+  },
+  {
+   "n": 3890,
+   "text": "Calm"
+  },
+  {
+   "n": 3891,
+   "text": "Thick skin"
+  },
+  {
+   "n": 3892,
+   "text": "Disarm"
+  },
+  {
+   "n": 3893,
+   "text": "Strong"
+  },
+  {
+   "n": 3894,
+   "text": "Sharp Claws[E]"
+  },
+  {
+   "n": 3895,
+   "text": "Sharpness[E]"
+  },
+  {
+   "n": 3896,
+   "text": "Vision[E]"
+  },
+  {
+   "n": 3897,
+   "text": "Rampage[E]"
+  },
+  {
+   "n": 3898,
+   "text": "Vivacious[E]"
+  },
+  {
+   "n": 3899,
+   "text": "Sandbag[E]"
+  },
+  {
+   "n": 3900,
+   "text": "Nimble[E]"
+  },
+  {
+   "n": 3901,
+   "text": "Withstand[E]"
+  },
+  {
+   "n": 3902,
+   "text": "Calm[E]"
+  },
+  {
+   "n": 3903,
+   "text": "Thick Skin[E]"
+  },
+  {
+   "n": 3904,
+   "text": "Disarm[E]"
+  },
+  {
+   "n": 3905,
+   "text": "Strong[E]"
+  },
+  {
+   "n": 3906,
+   "text": "Ferocious"
+  },
+  {
+   "n": 3907,
+   "text": "Sagacity"
+  },
+  {
+   "n": 3908,
+   "text": "Divine Speed"
+  },
+  {
+   "n": 3909,
+   "text": "Greedy"
+  },
+  {
+   "n": 3910,
+   "text": "Dragon's Wrath"
+  },
+  {
+   "n": 3911,
+   "text": "Sharp Claws[卍]"
+  },
+  {
+   "n": 3912,
+   "text": "Sharpness[卍]"
+  },
+  {
+   "n": 3913,
+   "text": "Vision[卍]"
+  },
+  {
+   "n": 3914,
+   "text": "Rampage[卍]"
+  },
+  {
+   "n": 3915,
+   "text": "Vivacious[卍]"
+  },
+  {
+   "n": 3916,
+   "text": "Sandbag[卍]"
+  },
+  {
+   "n": 3917,
+   "text": "Nimble[卍]"
+  },
+  {
+   "n": 3918,
+   "text": "Withstand[卍]"
+  },
+  {
+   "n": 3919,
+   "text": "Calm[卍]"
+  },
+  {
+   "n": 3920,
+   "text": "Thick Skin[卍]"
+  },
+  {
+   "n": 3921,
+   "text": "Disarm[卍]"
+  },
+  {
+   "n": 3922,
+   "text": "Strong[卍]"
+  },
+  {
+   "n": 3923,
+   "text": "Ferocious[卍]"
+  },
+  {
+   "n": 3924,
+   "text": "Sagacity[卍]"
+  },
+  {
+   "n": 3925,
+   "text": "Ancient Rampage"
+  },
+  {
+   "n": 3926,
+   "text": "Ancient Swiftshadow"
+  },
+  {
+   "n": 3927,
+   "text": "Ancient Royal Armor"
+  },
+  {
+   "n": 3928,
+   "text": "Ancient Thick Skin"
+  },
+  {
+   "n": 3929,
+   "text": "Ancient Vision"
+  },
+  {
+   "n": 3930,
+   "text": "Jurus kegelapan"
+  },
+  {
+   "n": 3931,
+   "text": "Worm Tracking"
+  },
+  {
+   "n": 3932,
+   "text": "Frenzy Spirit Pressure"
+  },
+  {
+   "n": 3933,
+   "text": "Earth Prison"
+  },
+  {
+   "n": 3934,
+   "text": "Chakra Blade"
+  },
+  {
+   "n": 3935,
+   "text": "Rasengan Besar "
+  },
+  {
+   "n": 3936,
+   "text": "berhasil menangkap"
+  },
+  {
+   "n": 3937,
+   "text": "<font color='#fff67c'>[number {@X} round]</font>"
+  },
+  {
+   "n": 3938,
+   "text": "Pertarungan dimulai"
+  },
+  {
+   "n": 3939,
+   "text": ", tapi saat ini, sesuatu sedang terjadi di arena."
+  },
+  {
+   "n": 3940,
+   "text": "mendapatkan kemenangan"
+  },
+  {
+   "n": 3941,
+   "text": ", lawan menggunakan <font color = '#ff8a00'> Pergantian Teknik </font>"
+  },
+  {
+   "n": 3942,
+   "text": "，Lawan menggunakan<font color = '#ff8a00'> Doro kabe No Jutsu</font>"
+  },
+  {
+   "n": 3943,
+   "text": "Pemohon {@0:}Tidak login selama<font color='#ff0000'> ⟨0⟩ </font>hari. Silakan kirim pemohon pemberitahuan. Jika pemohon tidak log in dalam<font color='#ff0000'> ⟨1⟩ </font>hari, hubungan kamu akan bubar!"
+  },
+  {
+   "n": 3944,
+   "text": "Referrer Mail"
+  },
+  {
+   "n": 3945,
+   "text": "Pemohon {@0:}tidak log in selama<font color='#ff0000'> ⟨0⟩ </font>hari. Sistem telah membubarkan hubungan rekomendasi kamu!"
+  },
+  {
+   "n": 3946,
+   "text": "Aku senang kamu bersedia berbagi barbecue flavoured potato chips dengan ku!"
+  },
+  {
+   "n": 3947,
+   "text": "Kamu memiliki barbecue flavoured potato chips? GokiLL! Mau berbagi denganku? "
+  },
+  {
+   "n": 3948,
+   "text": "Apakah kamu membawa ANBU mask?"
+  },
+  {
+   "n": 3949,
+   "text": "Aku bosan memakai kacamata sehari-hari dan ingin mengubah gaya. Orang-orang ANBU terlihat mengagumkan dengan topeng mereka. Apakah kamu berani untuk membawa satu topeng dari mereka?"
+  },
+  {
+   "n": 3950,
+   "text": "Aku bukan orang yang banyak bicara, tapi aku harus mengakui bahwa IQ kamu setinggi ⟨0⟩."
+  },
+  {
+   "n": 3951,
+   "text": "Shogi dapat membantu menajamkan pikiranmu. Dan itu cara yang baik untuk menghabiskan sore ini."
+  },
+  {
+   "n": 3952,
+   "text": "Sebagai anggota Klan Hyuga, saya harus membantu adik saya untuk mengambil lambang keluarga. Tapi aku tidak bisa melakukan ini sendirian. Bisakah kamu membantu saya dengan ini?"
+  },
+  {
+   "n": 3953,
+   "text": "Ini bagus untuk melihat kamu di sini. Dapatkah kamu berikan kepada saya sehingga saya dapat membuktikan bahwa rumah cabang tidak pernah kalah dengan rumah utama!"
+  },
+  {
+   "n": 3954,
+   "text": "Super! Sekarang setelah kamu mengirim surat rahasia kepada Tsunade, desa kami akan menjadi status bertahan segera."
+  },
+  {
+   "n": 3955,
+   "text": "Kamu mengirimkan surat untuk Asuma? Mantab! Ini sangat melegakan."
+  },
+  {
+   "n": 3956,
+   "text": "Sasuke begitu menawan dan menggemaskan! Aku dengar Sasuke jatuh sakit. Kalau saja aku di sisinya!"
+  },
+  {
+   "n": 3957,
+   "text": "Dimana Aku? Siapa ini? Kamu menolongku...Aku tidak tahu kau membawa tas medis. Jadi, aku akan mengucapkan terima kasih kepadamu!!"
+  },
+  {
+   "n": 3958,
+   "text": "Pain Sangatlah kuat. Aku tidak dapat menggunakan tas medisku sendiri untuk menyembuhkan semua orang. Harapanku bisa mendapatkan tas lebih dari suatu tempat."
+  },
+  {
+   "n": 3959,
+   "text": "Untuk mengatasi perasaan gelisah, aku bisa menggunakan item boneka untuk membuat Ayah dan Ibu. Item boneka dapat digunakan berulang-ulang. Jadi saya tidak perlu khawatir di mana untuk menemukannya."
+  },
+  {
+   "n": 3960,
+   "text": "Bagus! Apakah ini boneka Kankuro Anda atau itu? Tidak apa. Ini adalah miliku setelah kamu berikan itu padaku."
+  },
+  {
+   "n": 3961,
+   "text": "Puppet item yang cukup berharga. Tidak perlu khawatir tentang dana jika kita bisa mendapatkan lebih."
+  },
+  {
+   "n": 3962,
+   "text": "Untuk melindungi apa yang aku cintai, aku harus menjadi kuat! Aku perlu Kunai lebih untuk latihanku!"
+  },
+  {
+   "n": 3963,
+   "text": "Kunai akan habis segera. Dimana kita bisa mendapatkannya?"
+  },
+  {
+   "n": 3964,
+   "text": "Aku mendengar bahwa desa-desa membutuhkan kunai dalam jumlah besar, tapi aku tidak memiliki banyak yang tersisa."
+  },
+  {
+   "n": 3965,
+   "text": "Untuk keamanan desa, kita perlu banyak Tags Exploding. Namun jumlah tag yang diperlukan sekarang di luar kemampuanku."
+  },
+  {
+   "n": 3966,
+   "text": "Uang! Uang! Hahahah! OMG,   Aku sedang bermimpi!"
+  },
+  {
+   "n": 3967,
+   "text": "Aku khawatir dengan kematian. Bagaimana aku bisa mengumpulkan dana dalam waktu singkat?"
+  },
+  {
+   "n": 3968,
+   "text": "Ini bukan tugas yang mudah. Sepertinya kelompok itu akan membuat langkah besar dengan uang begitu banyak."
+  },
+  {
+   "n": 3969,
+   "text": "Dataran Air adalah suatu tempat yang damai. Orang bisa mengumpulkan lukisan lanskap bebas di waktu luang mereka."
+  },
+  {
+   "n": 3970,
+   "text": "Lukisan tidak hanya gaya bertarung, itu juga merupakan cara untuk memurnikan pikiran. Kumpulkan lukisan pemandangan ini adalah hobiku."
+  },
+  {
+   "n": 3971,
+   "text": "Kalau bukan karena perang itu,aku juga bisa hidup bebas dan membuat beberapa lukisan."
+  },
+  {
+   "n": 3972,
+   "text": "Desa ini telah menderita kerugian besar! Sekarang aku merasa lelah karena kita telah memperpendek waktu rekonstruksi. Aku hampir makan semua Pasokan Pill."
+  },
+  {
+   "n": 3973,
+   "text": "Tujuan hari ini adalah untuk berjalan terbalik untuk ⟨0⟩ putaran! Aku butuh Pasokan pill!"
+  },
+  {
+   "n": 3974,
+   "text": "Aku akan keluar untuk bertarung seperti waktu yang lalu"
+  },
+  {
+   "n": 3975,
+   "text": "Dalam rangka membantu Sasuke dan orang lain, aku harus mengembalikan pasokan pil untuk kebutuhan nantinya."
+  },
+  {
+   "n": 3976,
+   "text": "Untuk weapon,   pertama kamu harus menggunakan scroll. Bahkan Sharingan tidak dapat meniru tulisan pada weapon channeling scroll. Oleh karena itu,   weapon channeling scroll merupakan hal penting untuk keselamatan desa."
+  },
+  {
+   "n": 3977,
+   "text": "Dapatkan beberapa Weapon Channeling  Scrolls untuk Sasuke. Itu akan sangat membantunya. "
+  },
+  {
+   "n": 3978,
+   "text": "Dikatakan bahwa Scroll of Seals bisa menyegel orang ke dalamnya. Saya benar-benar ingin mendapatkan satu\\. "
+  },
+  {
+   "n": 3979,
+   "text": "Aku ingin melepaskan semua hal yang disegel dalam scroll untuk membunuh orang itu."
+  },
+  {
+   "n": 3980,
+   "text": "Orochimaru Juinjutsu dapat meningkatkan kemampuan seseorang sangat baik. Sehingga patut untuk mencoba meninggalkan konoha."
+  },
+  {
+   "n": 3981,
+   "text": "Melakukan percobaan hampir tidak cukup bagi seseorang untuk mengembangkan Juinjutsu baru. Cara terbaik adalah untuk mencari Juinjutsu baru."
+  },
+  {
+   "n": 3982,
+   "text": "Kekuasaan untuk menghancurkan seluruh negeri dalam sekejap dan kesakitan pada dunia ini terasa sangat penting bagi orang untuk menahan diri dari perang."
+  },
+  {
+   "n": 3983,
+   "text": "Cobalah untuk menyelinap ke setiap desa di setiap negara untuk dapat melihat surat rahasia tentang Jinchūriki. Dengan cara ini, kamu dapat memahami Jinchūriki lebih cepat dari Akatsuki."
+  },
+  {
+   "n": 3984,
+   "text": "Awww ... yang lain kalah! Aku tidak bisa membayar hutangku. Apa yang harus aku lakukan? Setiap negara ini mengumpulkan Bag weapon Misterius. Mungkin aku harus mengirimkan Jiraiya untuk mendapatkan beberapa sehingga aku bisa menjualnya dengan harga yang baik ..."
+  },
+  {
+   "n": 3985,
+   "text": "Penduduk desa perlu memiliki beberapa Bags weapon Misterius sehingga mereka dapat melindungi diri mereka sendiri ketika aku pergi. Tapi itu mungkin bagiku untuk menemukan tas sendirian."
+  },
+  {
+   "n": 3986,
+   "text": "Sudah belajar mode Sage dari                         Toad Sage di Gunung Myoboku. Tetapi untuk mengetahui bagaimana kontrak dan channel Toad Sage lebih penting …"
+  },
+  {
+   "n": 3987,
+   "text": "Saya ingin merekam lebih channeling skills untuk scroll ku sehingga tidak ada yang bisa belajar secara diam-diam."
+  },
+  {
+   "n": 3988,
+   "text": "<font color='#6a6e70'><b>    Lubang Api    </b></font>"
+  },
+  {
+   "n": 3989,
+   "text": "Lubang Api"
+  },
+  {
+   "n": 3990,
+   "text": "<font color='#d7e286'>{@0:}</font>"
+  },
+  {
+   "n": 3991,
+   "text": "Menemukan Proof of Suppression"
+  },
+  {
+   "n": 3992,
+   "text": "Menemukan monster"
+  },
+  {
+   "n": 3993,
+   "text": "Mendapatkan barang"
+  },
+  {
+   "n": 3994,
+   "text": "Menemukan kunci"
+  },
+  {
+   "n": 3995,
+   "text": "Mengambil kantong uang"
+  },
+  {
+   "n": 3996,
+   "text": "Menemukan pet"
+  },
+  {
+   "n": 3997,
+   "text": "Bread Slice"
+  },
+  {
+   "n": 3998,
+   "text": "Sandwich"
+  },
+  {
+   "n": 3999,
+   "text": "Hamburger"
+  },
+  {
+   "n": 4000,
+   "text": "Big Mac"
+  },
+  {
+   "n": 4001,
+   "text": "Fresh Prawn Rice"
+  },
+  {
+   "n": 4002,
+   "text": "Porkchop Rice"
+  },
+  {
+   "n": 4003,
+   "text": "Eel Rice"
+  },
+  {
+   "n": 4004,
+   "text": "Assorted Seafood Rice"
+  },
+  {
+   "n": 4005,
+   "text": "Miso Soup"
+  },
+  {
+   "n": 4006,
+   "text": "Assorted Ramen"
+  },
+  {
+   "n": 4007,
+   "text": "Spicy Dragonprawn"
+  },
+  {
+   "n": 4008,
+   "text": "Pineapple"
+  },
+  {
+   "n": 4009,
+   "text": "Candy Floss"
+  },
+  {
+   "n": 4010,
+   "text": "Fried Chicken"
+  },
+  {
+   "n": 4011,
+   "text": "Lollipop"
+  },
+  {
+   "n": 4012,
+   "text": "Chocolate"
+  },
+  {
+   "n": 4013,
+   "text": "Ice Cream"
+  },
+  {
+   "n": 4014,
+   "text": "Draft Beer"
+  },
+  {
+   "n": 4015,
+   "text": "Cocktail"
+  },
+  {
+   "n": 4016,
+   "text": "Whiskey"
+  },
+  {
+   "n": 4017,
+   "text": "Vodka"
+  },
+  {
+   "n": 4018,
+   "text": "Brandy"
+  },
+  {
+   "n": 4019,
+   "text": "Cola"
+  },
+  {
+   "n": 4020,
+   "text": "Watermelon Juice"
+  },
+  {
+   "n": 4021,
+   "text": "Orange Juice"
+  },
+  {
+   "n": 4022,
+   "text": "Rainbow Juice"
+  },
+  {
+   "n": 4023,
+   "text": "Freshly Squeezed Juice"
+  },
+  {
+   "n": 4024,
+   "text": "Crystal Fruit Juice"
+  },
+  {
+   "n": 4025,
+   "text": "Hawstick"
+  },
+  {
+   "n": 4026,
+   "text": "Peanut Biscuit"
+  },
+  {
+   "n": 4027,
+   "text": "Sponge Cake"
+  },
+  {
+   "n": 4028,
+   "text": "Chocolate Puff"
+  },
+  {
+   "n": 4029,
+   "text": "Dumpling"
+  },
+  {
+   "n": 4030,
+   "text": "Meat Pie"
+  },
+  {
+   "n": 4031,
+   "text": "Colored Puff"
+  },
+  {
+   "n": 4032,
+   "text": "Pizza"
+  },
+  {
+   "n": 4033,
+   "text": "Chocolate Cake"
+  },
+  {
+   "n": 4034,
+   "text": "Strawberry Cake"
+  },
+  {
+   "n": 4035,
+   "text": "Gin"
+  },
+  {
+   "n": 4036,
+   "text": "Milk"
+  },
+  {
+   "n": 4037,
+   "text": "Green Tea"
+  },
+  {
+   "n": 4038,
+   "text": "Coffee"
+  },
+  {
+   "n": 4039,
+   "text": "Premium Milk"
+  },
+  {
+   "n": 4040,
+   "text": "Premium Green Tea"
+  },
+  {
+   "n": 4041,
+   "text": "Premium Coffee"
+  },
+  {
+   "n": 4042,
+   "text": "Vegetable Rice"
+  },
+  {
+   "n": 4043,
+   "text": "Meningkatkan Max HP ⟨0⟩"
+  },
+  {
+   "n": 4044,
+   "text": "Meningkatkan Max Chakra ⟨0⟩"
+  },
+  {
+   "n": 4045,
+   "text": "Meningkatkan Kekuatan Serangan ⟨0⟩"
+  },
+  {
+   "n": 4046,
+   "text": "Mendapatkan ⟨0⟩x EXP setelah mengalahkan monster"
+  },
+  {
+   "n": 4047,
+   "text": "Meningkatkan Max HP ⟨0⟩,  Meningkatkan Block ⟨1⟩"
+  },
+  {
+   "n": 4048,
+   "text": "Meningkatkan Attack Power ⟨0⟩,  Meningkatkan Critical Strike ⟨1⟩"
+  },
+  {
+   "n": 4049,
+   "text": "Meningkatkan Max HP ⟨0⟩,  Meningkatkan Dodge ⟨1⟩"
+  },
+  {
+   "n": 4050,
+   "text": "Meningkatkan Max HP ⟨0⟩, Meningkatkan Dodge ⟨1⟩"
+  },
+  {
+   "n": 4051,
+   "text": "Meningkatkan Attack Power ⟨0⟩, Meningkatkan Armor Break ⟨1⟩"
+  },
+  {
+   "n": 4052,
+   "text": "Meningkatkan Attack Power  ⟨0⟩"
+  },
+  {
+   "n": 4053,
+   "text": "Meninghatkan Attack Power ⟨0⟩"
+  },
+  {
+   "n": 4054,
+   "text": "Increase Attack sebesar ⟨0⟩"
+  },
+  {
+   "n": 4055,
+   "text": "Max HP meningkat sebesar ⟨0⟩"
+  },
+  {
+   "n": 4056,
+   "text": "Max Chakra meningkat sebesar ⟨0⟩"
+  },
+  {
+   "n": 4057,
+   "text": "Attack meningkat sebesar ⟨0⟩"
+  },
+  {
+   "n": 4058,
+   "text": "Max Hp meningkat sebesar ⟨0⟩, Block meningkat sebesar ⟨1⟩"
+  },
+  {
+   "n": 4059,
+   "text": "Attack meningkat sebesar ⟨0⟩，Critical Strike meningkat sebesar ⟨1⟩"
+  },
+  {
+   "n": 4060,
+   "text": "Max Hp meningkat sebesar ⟨0⟩，Dodge meningkat sebesar ⟨1⟩"
+  },
+  {
+   "n": 4061,
+   "text": "Attack meningkat sebesar ⟨0⟩，Armor Break meningkat sebesar ⟨1⟩"
+  },
+  {
+   "n": 4062,
+   "text": "Kalahkan monster akan mendapatkan ⟨0⟩x EXP"
+  },
+  {
+   "n": 4063,
+   "text": "Meningkatkan Attack power ⟨0⟩, Meningkatkan Armor Break  ⟨1⟩."
+  },
+  {
+   "n": 4064,
+   "text": "Meningkatkan Attack power ⟨0⟩, meningkatkan Pierce ⟨1⟩."
+  },
+  {
+   "n": 4065,
+   "text": "Meningkatkan Attack power ⟨0⟩, Meningkatkan Hit ⟨1⟩."
+  },
+  {
+   "n": 4066,
+   "text": "Meningkatkan Attack power ⟨0⟩, Meningkatkan Critical Strike ⟨1⟩."
+  },
+  {
+   "n": 4067,
+   "text": "Meningkatkan HP ⟨0⟩, Meningkatkan Constitution ⟨1⟩."
+  },
+  {
+   "n": 4068,
+   "text": "Meningkatkan HP ⟨0⟩, Meningkatkan Block ⟨1⟩."
+  },
+  {
+   "n": 4069,
+   "text": "Meningkatkan HP ⟨0⟩, Meningkatkan Defence ⟨1⟩."
+  },
+  {
+   "n": 4070,
+   "text": "Meningkatkan HP ⟨0⟩, Meningkatkan Dodge ⟨1⟩."
+  },
+  {
+   "n": 4071,
+   "text": "Meningkatkan Attack power ⟨0⟩, Meningkatkan Armor Break ⟨1⟩."
+  },
+  {
+   "n": 4072,
+   "text": "Meningkatkan Attack power ⟨0⟩, Meningkatkan Pierce ⟨1⟩."
+  },
+  {
+   "n": 4073,
+   "text": "meningkatkan Attack power ⟨0⟩, Meningkatkan Hit ⟨1⟩."
+  },
+  {
+   "n": 4074,
+   "text": "Meningkatkan HP ⟨0⟩, Block Meningkatkan ⟨1⟩."
+  },
+  {
+   "n": 4075,
+   "text": "Attack meningkat sebesar ⟨0⟩，Armor Break meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4076,
+   "text": "Attack meningkat sebesar ⟨0⟩，Pierce meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4077,
+   "text": "Attack meningkat sebesar ⟨0⟩，Hit meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4078,
+   "text": "Attack meningkat sebesar ⟨0⟩, Critical Strike meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4079,
+   "text": "HP meningkat sebesar ⟨0⟩, Constitution meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4080,
+   "text": "HP meningkat sebesar ⟨0⟩, Block meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4081,
+   "text": "HP meningkat sebesar ⟨0⟩, Defence meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4082,
+   "text": "HP meningkat sebesar ⟨0⟩, Dodge meningkat sebesar ⟨1⟩."
+  },
+  {
+   "n": 4083,
+   "text": "Meningkatkan HP"
+  },
+  {
+   "n": 4084,
+   "text": "Red Blessing Natal"
+  },
+  {
+   "n": 4085,
+   "text": "Blue Blessing Natal"
+  },
+  {
+   "n": 4086,
+   "text": "Cyan Blessing Natal"
+  },
+  {
+   "n": 4087,
+   "text": "Green Blessing Natal"
+  },
+  {
+   "n": 4088,
+   "text": "Multiple EXP Natal"
+  },
+  {
+   "n": 4089,
+   "text": "Meningkatkan Serangan"
+  },
+  {
+   "n": 4090,
+   "text": "Meningkatkan Chakra"
+  },
+  {
+   "n": 4091,
+   "text": "Meningkatkan EXP"
+  },
+  {
+   "n": 4092,
+   "text": "Raise Attack dan Armor Break "
+  },
+  {
+   "n": 4093,
+   "text": "Raise Attack dan Pierce"
+  },
+  {
+   "n": 4094,
+   "text": "Raise Attack dan Hit"
+  },
+  {
+   "n": 4095,
+   "text": "Raise Attack dan Critical Strike"
+  },
+  {
+   "n": 4096,
+   "text": "Raise HP dan Constitution"
+  },
+  {
+   "n": 4097,
+   "text": "Raise HP dan Block"
+  },
+  {
+   "n": 4098,
+   "text": "Raise HP dan Defense"
+  },
+  {
+   "n": 4099,
+   "text": "Raise HP dan Dodge"
+  },
+  {
+   "n": 4100,
+   "text": "<font color='#6a6e70'><b>   Fortune Cat   </b></font>"
+  },
+  {
+   "n": 4101,
+   "text": "Membuat slot"
+  },
+  {
+   "n": 4102,
+   "text": "Meningkatkan"
+  },
+  {
+   "n": 4103,
+   "text": "Reset skill"
+  },
+  {
+   "n": 4104,
+   "text": "Free Enchantment Stone"
+  },
+  {
+   "n": 4105,
+   "text": "Free Slot Creation Stone"
+  },
+  {
+   "n": 4106,
+   "text": "Free Enhancement Stone"
+  },
+  {
+   "n": 4107,
+   "text": "Free Refining Stone"
+  },
+  {
+   "n": 4108,
+   "text": "Gem attribute telah di update!"
+  },
+  {
+   "n": 4109,
+   "text": "Gem attribute refresh berhasil!"
+  },
+  {
+   "n": 4110,
+   "text": "Tidak dapat membuka leveling navigasi selama misi pemula berjalan."
+  },
+  {
+   "n": 4111,
+   "text": "<font color='#000000'>Konfirmasi </font><font color='#00b034'>Tambah teman.</font>"
+  },
+  {
+   "n": 4112,
+   "text": "<font color='#000000'>Klik</font> untuk menjalankan fungsi<font color='#00b034'> Tambah Teman </font>."
+  },
+  {
+   "n": 4113,
+   "text": "<font color='#000000'>Masukan<font color='#00b034'> nama dari teman </font>kamu berharap untuk menambahkan.</font>"
+  },
+  {
+   "n": 4114,
+   "text": "<font color='#000000'>Klik</font> untuk membuka interface<font color='#00b034'> Teman </font>."
+  },
+  {
+   "n": 4115,
+   "text": "<font color='#000000'>Klik dan Pilih<font color='#00b034'> Buat Slot </font>interface.</font>"
+  },
+  {
+   "n": 4116,
+   "text": "<font color='#000000'>Klik</font> untuk masuk<font color='#00b034'> Tempat tempa </font>."
+  },
+  {
+   "n": 4117,
+   "text": "<font color='#000000'>Klik untuk memasuki<font color='#00b034'> arena </font>.</font>"
+  },
+  {
+   "n": 4118,
+   "text": "<font color='#000000'>Klik untuk<font color='#00b034'> pilihan acak </font> lawan.</font>"
+  },
+  {
+   "n": 4119,
+   "text": "<font color='#000000'>Pilih jumlah<font color='#00b034'> combo </font><font color='#00b034'> kali</font>.</font>"
+  },
+  {
+   "n": 4120,
+   "text": "<font color='#000000'>Klik pada monster dan pilih<font color='#00b034'> Combo</font>.</font>"
+  },
+  {
+   "n": 4121,
+   "text": "<font color='#000000'>Dapat menggunakan<font color='#00b034'> gold </font>untuk secara langsung menyelesaikan<font color='#00b034'> combo </font>.</font>"
+  },
+  {
+   "n": 4122,
+   "text": "<font color='#000000'>Klik</font> untuk memberikan waktu<font color='#00b034'> latihan </font><font color='#00b034'></font>."
+  },
+  {
+   "n": 4123,
+   "text": "<font color='#000000'>Klik</font> untuk memulai<font color='#00b034'> latihan </font>."
+  },
+  {
+   "n": 4124,
+   "text": "<font color='#000000'>Klik dan pilih</font> untuk memasuki <font color='#00b034'>aula</font>."
+  },
+  {
+   "n": 4125,
+   "text": "<font color='#000000'>Klik</font> untuk memasuki<font color='#00b034'> latihan </font>interface."
+  },
+  {
+   "n": 4126,
+   "text": "<font color='#000000'>Klik untuk berhenti<font color='#00b034'> latihan</font> saat ini.</font>"
+  },
+  {
+   "n": 4127,
+   "text": "<font color='#000000'>Memahami tuntutan<font color='#00b034'> Valhalla </font></font>"
+  },
+  {
+   "n": 4128,
+   "text": "<font color='#000000'>Memakai<font color='#00b034'> pet </font>kamu disini</font>"
+  },
+  {
+   "n": 4129,
+   "text": "<font color='#000000'>Klik untuk mengambil</font><font color='#00b034'> pet </font>kamu"
+  },
+  {
+   "n": 4130,
+   "text": "<font color='#000000'>Klik disini untuk membuka </font><font color='#00b034'> Tas </font>kamu."
+  },
+  {
+   "n": 4131,
+   "text": "<font color='#000000'>peralatan<font color='#00b034'> refining </font></font>"
+  },
+  {
+   "n": 4132,
+   "text": "<font color='#000000'>Klik untuk membuka <font color='#00b034'> Tas </font> kamu.</font>"
+  },
+  {
+   "n": 4133,
+   "text": "<font color='#000000'>Slot <font color='#00b034'> gem </font>ke item peralatan yang<font color='#00b034'> telah memiliki slot </font>.</font>"
+  },
+  {
+   "n": 4134,
+   "text": "<font color='#000000'>Klik disini untuk menutup</font><font color='#00b034'> arahan misi </font>."
+  },
+  {
+   "n": 4135,
+   "text": "<font color='#000000'>Klik disini untuk membuka<font color='#00b034'>leveling </font>untuk melihat keadaan game yang kamu berhak lakukan saat ini. Panel navigasi monster akan menampilkan monster yang cocok untuk level kamu. Panel Navigation peralatan menampilkan peralatan yang sesuai untuk level kamu saat ini.</font>"
+  },
+  {
+   "n": 4136,
+   "text": "<font color='#000000'>Klik untuk memasuki<font color='#00b034'>Toko Misteri </font></font>"
+  },
+  {
+   "n": 4137,
+   "text": "<font color='#000000'>Menutup<font color='#00b034'> Toko Misteri </font>.</font>"
+  },
+  {
+   "n": 4138,
+   "text": "<font color='#000000'>Klik untuk<font color='#00b034'> Konfirmasi </font>pembelanjaan.</font>"
+  },
+  {
+   "n": 4139,
+   "text": "<font color='#000000'>Klik disini untuk memulai<font color='#00b034'> penjelajahan </font></font>"
+  },
+  {
+   "n": 4140,
+   "text": "<font color='#000000'>Pilih beberapa<font color='#00b034'> kartu </font></font>"
+  },
+  {
+   "n": 4141,
+   "text": "<font color='#000000'>Setiap<font color='#00b034'> penjalahan </font>, kamu memiliki dua kesempatan untuk mengintip isi<font color='#00b034'> kartu </font>. Biaya pertama kali<font color='#00b034'> Batu</font>, Untuk biaya berikutnya<font color='#00b034'> gold </font>.</font>"
+  },
+  {
+   "n": 4142,
+   "text": "<font color='#000000'>Klik untuk masuk<font color='#00b034'> Zone penjelajahan </font></font>"
+  },
+  {
+   "n": 4143,
+   "text": "<font color='#000000'> Ketika<font color='#00b034'> penjelajahan</font>mencapai <font color='#00b034'> ⟨0⟩% </font> , Bintang Emas akan ditambahkan disini!</font>"
+  },
+  {
+   "n": 4144,
+   "text": "<font color='#000000'>Klik untuk memasuki<font color='#00b034'> Daerah penjelajahan </font></font>"
+  },
+  {
+   "n": 4145,
+   "text": "<font color='#000000'>Buka pada</font><font color='#00b034'> peta dunia </font>, dan kamu akan melihat seluruh<font color='#00b034'> Dataran Sakura </font>."
+  },
+  {
+   "n": 4146,
+   "text": "<font color='#000000'>Klik untuk membuka<font color='#00b034'> Misi </font>interface.</font>"
+  },
+  {
+   "n": 4147,
+   "text": "<font color='#000000'>Beralih ke<font color='#00b034'> Misi Harian </font>interface.</font>"
+  },
+  {
+   "n": 4148,
+   "text": "<font color='#000000'><font color='#00b034'> Klik </font>untuk memindahkan ke<font color='#00b034'> Tambang Batu </font></font>"
+  },
+  {
+   "n": 4149,
+   "text": "<font color='#000000'><font color='#00b034'> Klik </font>untuk memindahkan ke<font color='#00b034'> Sungai ketenangan </font></font>"
+  },
+  {
+   "n": 4150,
+   "text": "<font color='#000000'><font color='#00b034'> Klik </font>Untuk berpindah ke<font color='#00b034'> Gerbang Naga Tersembunyi </font>.</font>"
+  },
+  {
+   "n": 4151,
+   "text": "<font color='#000000'><font color='#00b034'> Klik </font>Untuk berpindah ke<font color='#00b034'> Lembah awan </font></font>"
+  },
+  {
+   "n": 4152,
+   "text": "<font color='#000000'><font color='#00b034'> Klik </font>Untuk berpindah ke<font color='#00b034'> Puncak Bebatuan </font></font>"
+  },
+  {
+   "n": 4153,
+   "text": "Klik untuk memasuki<font color='#00b034'> Toko Guci </font>untuk menarik keberuntungan!"
+  },
+  {
+   "n": 4154,
+   "text": "Membuka telur berwarna"
+  },
+  {
+   "n": 4155,
+   "text": "Silahkan memilih Slot Machine masing-masing sesuai dengan peringkat kamu. Semakin tinggi peringkat, Semakin baik hadiah dari machine. Menggunakan mystery lucky draw machine tidak terbatas oleh peringkat. Beberapa item langka dapat kamu peroleh dari mystery lucky draw machine."
+  },
+  {
+   "n": 4156,
+   "text": "Klik untuk menutup<font color='#00b034'> arena </font>"
+  },
+  {
+   "n": 4157,
+   "text": "Klik untuk<font color='#00b034'> menutup </font>interface."
+  },
+  {
+   "n": 4158,
+   "text": "Setelah mengklik tanda<font color='#00b034'>  \"?\" </font>, sistem akan<font color='#00b034'> mengacak </font>pilihan lawan kamu. Hanya kemenangan yang di lakukan dari pertarungan dengan <font color='#00b034'> Kemenangan berturut-turut </font>yang dihitung."
+  }
+ ]
+}

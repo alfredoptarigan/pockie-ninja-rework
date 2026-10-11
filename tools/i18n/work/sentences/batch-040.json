@@ -1,0 +1,839 @@
+{
+ "terms": {
+  "Sasuke": "Sasuke Uchiha",
+  "Gudian of Sand": "Guardian of Sand",
+  "Come Come Paradise": "Make Out Paradise",
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "Kota Malaikat": "Angel City",
+  "Kota yang Hilang": "Abandoned Evernight City",
+  "Rumah": "Home",
+  "Rampage[卍]": "Rampage [卍]",
+  "Nimble[卍]": "Nimble [卍]",
+  "Iblis Chuuji": "Chuuji Demon",
+  "Bukti": "Proof",
+  "Rumput": "Grass",
+  "Kue bulan": "Mooncake",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Suigetsu": "Suigetsu Hozuki",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Perampok": "Bandit",
+  "Blackhawk": "Black Eagle"
+ },
+ "units": [
+  {
+   "n": 11457,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Max HP pemilik sebesar  <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11458,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Max HP pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11459,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Dodge pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11460,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Block pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11461,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Constitution pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11462,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Defence pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11463,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Armor Break pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11464,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Max Attack pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11465,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Attack pemilik sebesar  <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11466,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Max Chakra pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11467,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩,⟨1⟩ Batu.<br><font color='#ff0000'>Item berlaku selama ⟨2⟩ hari. Barang kadaluarsa tidak dapat digunakan dan perlu dihapus secara manual.</font>"
+  },
+  {
+   "n": 11468,
+   "text": "<font color='#5df9ff'>Secara acak mendapatkan pet yang bernilai ⟨0⟩.<br><font color='#ff0000'>Item berlaku sampai ⟨1⟩ hari. Perlu dihapus secara manual ketika masa berlaku item ini sudah habis..</font>"
+  },
+  {
+   "n": 11469,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩ gem lv ⟨1⟩ secara random.<br><font color='#ff0000'>Item berlaku selama ⟨2⟩ hari. Barang kadaluarsa tidak dapat digunakan dan perlu dihapus secara manual.</font>"
+  },
+  {
+   "n": 11470,
+   "text": "<font color='#5df9ff'>Open it to randomly obtain ⟨0⟩~⟨1⟩gift coupons.<br><font color='#ff0000'>Item is valid for ⟨2⟩ days. Expired item cannot be used and need to be manually deleted.</font>"
+  },
+  {
+   "n": 11471,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩~⟨1⟩gift coupon secara random.<br><font color='#ff0000'>Item berlaku selama ⟨2⟩ hari. Barang kadaluarsa tidak dapat digunakan dan perlu dihapus secara manual.</font>"
+  },
+  {
+   "n": 11472,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩ orange outfit secara random.<br><font color='#ff0000'>Item berlaku selama ⟨1⟩ hari. Barang kadaluarsa tidak dapat digunakan dan perlu dihapus secara manual.</font>"
+  },
+  {
+   "n": 11473,
+   "text": "<font color='#5df9ff'>Secara acak akan mendapatkan Lv.⟨0⟩ Enhancement Talisman*⟨1⟩, Lv.⟨2⟩ Refining Talisman*⟨3⟩, Recast Talisman*⟨4⟩, Advanced Inscription Talisman*⟨5⟩, Lv.⟨6⟩ Slot Talisman, Lv.⟨7⟩ Engrave Crystal*⟨8⟩.<br><font color='#ff0000'>Item berlaku sampai ⟨9⟩ hari. Perlu dihapus secara manual ketika masa berlaku item ini sudah habis..</font>"
+  },
+  {
+   "n": 11474,
+   "text": "Barang Misi<br><font color='#5df9ff'>small bag berisikan namecards. Beberapa bersedia membayar harga yang hebat untuk ini.</font>"
+  },
+  {
+   "n": 11475,
+   "text": "Barang Misi<br><font color='#5df9ff'>namecard Ninja dari desa  Api untuk identifikasi, siapa nama kamu tidak mengetahui yang tertulis di atasnya.</font>"
+  },
+  {
+   "n": 11476,
+   "text": "Barang Misi<br><font color='#5df9ff'>namecard Ninja dari desa Angin untuk identifikasi, siapa nama kamu tidak mengetahui yang tertulis di atasnya.</font>"
+  },
+  {
+   "n": 11477,
+   "text": "Barang Misi<br><font color='#5df9ff'>namecard Ninja dari desa Air untuk identifikasi, siapa nama kamu tidak mengetahui yang tertulis di atasnya.</font>"
+  },
+  {
+   "n": 11478,
+   "text": "Barang Misi<br><font color='#5df9ff'>namecard Ninja dari desa Tanah untuk identifikasi, siapa nama kamu tidak mengetahui yang tertulis di atasnya.</font>"
+  },
+  {
+   "n": 11479,
+   "text": "Barang Misi<br><font color='#5df9ff'>namecard Ninja dari desa Petir untuk identifikasi, siapa nama kamu tidak mengetahui yang tertulis di atasnya.</font>"
+  },
+  {
+   "n": 11480,
+   "text": "Barang Misi<br><font color='#5df9ff'>Kepala iblis. Masih terlihat menakutkan bahkan setelah dihapus dari tubuhnya.</font>"
+  },
+  {
+   "n": 11481,
+   "text": "Barang Misi<br><font color='#5df9ff'>Darah yang diperoleh setelah mengalahkan iblis. Mengandung zat beracun.</font>"
+  },
+  {
+   "n": 11482,
+   "text": "Barang Misi<br><font color='#5df9ff'>Diperoleh atas kematian iblis. Berisi Kekuatan yang besar.</font>"
+  },
+  {
+   "n": 11483,
+   "text": "Barang Misi<br><font color='#5df9ff'>hanya iblis yang paling kuat dapat mengkristal chakra soulBatu.</font>"
+  },
+  {
+   "n": 11484,
+   "text": "Barang Misi<br><font color='#5df9ff'>Memimpin Genin adalah suatu hak istimewa dan tanggung jawab seorang ninja hebat! <br> Hanya setelah menggunakan Slave Panel Opening Book bisa Anda membuka slot panel murid baru di Hut Slave.</font>"
+  },
+  {
+   "n": 11485,
+   "text": "Barang Misi<br><font color='#5df9ff'> Ore yang mengandung kadar besi yang tinggi.<br>Seseorang menawarkan harga tinggi untuk jenis ini.</font>"
+  },
+  {
+   "n": 11486,
+   "text": "Barang Misi<br><font color='#5df9ff'> Precious ore dengan kristal biru.<br>Kamu akan mendapatkan hadiah mewah jika kamu memberikannya untuk persembahan.</font>"
+  },
+  {
+   "n": 11487,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sisik terkelupas dari naga. </font>"
+  },
+  {
+   "n": 11488,
+   "text": "Barang Misi<br><font color='#5df9ff'>Cakar tajam eksklusif untuk naga.</font>"
+  },
+  {
+   "n": 11489,
+   "text": "Barang Misi<br><font color='#5df9ff'>Ekor naga, sama berharganya seperti sirip hiu.</font>"
+  },
+  {
+   "n": 11490,
+   "text": "Barang Misi<br><font color='#5df9ff'>Tendon Naga dapat digunakan dalam berbagai cara.</font>"
+  },
+  {
+   "n": 11491,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah kunai rusak telah menjadi saksi banyak perubahan dalam sejarah.</font>"
+  },
+  {
+   "n": 11492,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah belt melambangkan kemuliaan samurai.</font>"
+  },
+  {
+   "n": 11493,
+   "text": "Barang Misi<br><font color='#5df9ff'>Topi Badut warna warni.</font>"
+  },
+  {
+   "n": 11494,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sepatu terbuat dari kayu, dapat menyebabkan suara.</font>"
+  },
+  {
+   "n": 11495,
+   "text": "Barang Misi<br><font color='#5df9ff'>Hantu wanita dengan kesombongannya sebagai mahluk yang tidak terlihat. Sekarang dia mencari jepit rambutnya...</font>"
+  },
+  {
+   "n": 11496,
+   "text": "Barang Misi<br><font color='#5df9ff'>Dewa sungai mempunyai kesalahan terbesar dengan menempatkan kappa untuk bertugas menjaga hartanya.</font>"
+  },
+  {
+   "n": 11497,
+   "text": "Barang Misi<br><font color='#5df9ff'>Biksu hedonistik yang akan minum dan mengemudi jika mobil diciptakan.</font>"
+  },
+  {
+   "n": 11498,
+   "text": "Barang Misi<br><font color='#5df9ff'>Suka berkumpul dari danau dan bermain seruling nya.</font>"
+  },
+  {
+   "n": 11499,
+   "text": "Barang Misi<br><font color='#5df9ff'>Ghost Granny tidak dapat melihat dengan baik dengan matanya yang tidak baik, maka lentera untuk menerangi jalan.</font>"
+  },
+  {
+   "n": 11500,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bloom sprites membawa setumpuk topeng bersama mereka untuk liburan.</font>"
+  },
+  {
+   "n": 11501,
+   "text": "Barang Misi<br><font color='#5df9ff'>Treants selalu mencabik dari asap asap menyebabkan kebakaran hutan, sehingga mereka selalu membawa obat tetes mata.</font>"
+  },
+  {
+   "n": 11502,
+   "text": "Barang Misi<br><font color='#5df9ff'>Rahasia mengapa Bunga Matahari tidak takut matahari terletak pada brollies mereka.</font>"
+  },
+  {
+   "n": 11503,
+   "text": "Barang Misi<br><font color='#5df9ff'>Tidak takut untuk kekurangan air bersama Vines dan bor untuk menggali sumber air.</font>"
+  },
+  {
+   "n": 11504,
+   "text": "Barang Misi<br><font color='#5df9ff'>Monster jagung membungkus diri kuat sebelum meninggalkan rumah, jika terjadi badai hujan.</font>"
+  },
+  {
+   "n": 11505,
+   "text": "Barang Misi<br><font color='#5df9ff'>Goldfeather Plumes adalah sebuah simbol Egret tentang keagungannya sebagai raja langit.</font>"
+  },
+  {
+   "n": 11506,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah kristal berisi Energi Api yang padat.</font>"
+  },
+  {
+   "n": 11507,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah kristal berisi Energi Air yang padat.</font>"
+  },
+  {
+   "n": 11508,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah kristal berisi Energi Tanah yang padat.</font>"
+  },
+  {
+   "n": 11509,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah kristal berisi Energi Petir yang padat.</font>"
+  },
+  {
+   "n": 11510,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah kristal berisi Energi Angin yang padat.</font>"
+  },
+  {
+   "n": 11511,
+   "text": "Barang Misi<br><font color='#5df9ff'>Iblis bun terus memamerkan topi tenunan dan bel yang terpasang bersama tali merah.</font>"
+  },
+  {
+   "n": 11512,
+   "text": "Barang Misi<br><font color='#5df9ff'>Monster Susi benci lomba berjalan karena harus terus-menerus berhenti untuk menarik celana nya.</font>"
+  },
+  {
+   "n": 11513,
+   "text": "Barang Misi<br><font color='#5df9ff'>monster bola nasi suka membuka mulut lebar-lebar dan tertawa, sehingga anak-anak mengatakan itu lelucon ketika mereka ingin makan beberapa pasta kacang merah.</font>"
+  },
+  {
+   "n": 11514,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah gulungan sushi lezat dengan banyak wasabi. Salah satu makanan favorit penghuni daratan Sakura.</font>"
+  },
+  {
+   "n": 11515,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah Scroll rekaman pergerakan makhluk yang rusak dari kegelapan. Kirim ini ke desa tua cepat.</font>"
+  },
+  {
+   "n": 11516,
+   "text": "Barang Misi<br><font color='#5df9ff'>Inti keseluruhannya dari adanya sebuah Vulture adalah untuk pesta, maka kebiasaan yang memiliki makanan pada dirinya sendiri bahkan setelah makan lezat dari bangkai hewan.</font>"
+  },
+  {
+   "n": 11517,
+   "text": "Barang Misi<br><font color='#5df9ff'>digunakan oleh Ryu Hayabusa,bendahara desa ninja untuk menyembunyikan wajahnya sendiri. Sebuah simbol dari asosiasi dengan kegelapan.</font>"
+  },
+  {
+   "n": 11518,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bibit yang digunakan untuk tanaman ubi jalar lezat. Diperoleh dengan mengalahkan Monster Kentang.</font>"
+  },
+  {
+   "n": 11519,
+   "text": "Barang Misi<br><font color='#5df9ff'>Elit ninja memberikan dokumen untuk membuktikan rekomendasi kepada Kota Malaikat. Tidak berlaku tanpa cap Ketua Desa.</font>"
+  },
+  {
+   "n": 11520,
+   "text": "Barang Misi<br><font color='#5df9ff'>Kualitas madu yang memancarkan cahaya keemasan. Tidak mengandung kotoran, dan bau manis.</font>"
+  },
+  {
+   "n": 11521,
+   "text": "Barang Misi<br><font color='#5df9ff'>Setiap butir beras telah direbus menjadi mutiara berkilau. Sebuah riceball bahwa meninggalkan air mulut seseorang.</font>"
+  },
+  {
+   "n": 11522,
+   "text": "Barang Misi<br><font color='#5df9ff'>Nasi Belut yang memiliki satu pemikiran dari rumah ketika dikonsumsi.</font>"
+  },
+  {
+   "n": 11523,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bukti melewati persidangan Master Ninja untuk ninja baru. Harus berhasil membantu penduduk A untuk mendapatkan persetujuan.</font>"
+  },
+  {
+   "n": 11524,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bukti melewati persidangan Master Ninja untuk ninja baru. Harus berhasil membantu penduduk B untuk mendapatkan persetujuan.</font>"
+  },
+  {
+   "n": 11525,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bukti melewati persidangan Master Ninja untuk ninja baru. Harus berhasil membantu penduduk C untuk mendapatkan persetujuan.</font>"
+  },
+  {
+   "n": 11526,
+   "text": "Barang Misi<br><font color='#5df9ff'>Toad oil dengan sifat khusus. Produk yang dibuat dengan ini dapat memerangi kekuatan jahat.</font>"
+  },
+  {
+   "n": 11527,
+   "text": "Barang Misi<br><font color='#5df9ff'>bloodbats kecemburuan dokter digambarkan dengan darah, sehingga jarum akan beroprasi di Kostum mereka.</font>"
+  },
+  {
+   "n": 11528,
+   "text": "Barang Misi<br><font color='#5df9ff'>Candle dibuat dari monster Toad Oil. Kesepakatan yang unik kerusakan pada Iblis Chuuji, salah satu Iblis dari iblis.</font>"
+  },
+  {
+   "n": 11529,
+   "text": "Barang Misi<br><font color='#5df9ff'>Salah satu buku-buku tebal dari  [Six True Paths], sumber kekuatan Ieyasu. Bahkan daya yang terkandung dalam satu bab usang tidak dapat diremehkan.</font>"
+  },
+  {
+   "n": 11530,
+   "text": "Barang Misi<br><font color='#5df9ff'>Roti isi daging  tersembunyi dalam tubuh monster roti.Koki perlu untuk meningkatkan keterampilan kuliner.</font>"
+  },
+  {
+   "n": 11531,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sepotong besi berkarat. Sebagian masih tajam.Perampok merah tua menggunakan ini untuk melarikan diri ketika menghadapi musuh yang lebih besar.</font>"
+  },
+  {
+   "n": 11532,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah anak panah yang tajam, hati-hati atau akan memotong kamu.</font>"
+  },
+  {
+   "n": 11533,
+   "text": "Barang Misi<br><font color='#5df9ff'>Clawed glove dibuat dari baja terpesona. Memancarkan sinar dingin.</font>"
+  },
+  {
+   "n": 11534,
+   "text": "Barang Misi<br><font color='#5df9ff'>Perampok berencana untuk merampok rombongan pedagang. Seorang yang benar benar bandit adalah yang mmpunyai rencana!</font>"
+  },
+  {
+   "n": 11535,
+   "text": "Barang Misi<br>"
+  },
+  {
+   "n": 11536,
+   "text": "Barang Misi<br><font color='#5df9ff'>Menjarah barang berharga dari Chevaliers. Digrats digunakan untuk menguburkan mereka di bawah tanah.</font>"
+  },
+  {
+   "n": 11537,
+   "text": "Barang Misi<br><font color='#5df9ff'>Sebuah tanaman yang memancarkan aroma yang unik. Digunakan sebagai bumbu atau menyeduh obat.</font>"
+  },
+  {
+   "n": 11538,
+   "text": "Barang Misi<br><font color='#5df9ff'>Iblis juga memiliki kebiasaan membawa belt tokens sebagai identifikasi.</font>"
+  },
+  {
+   "n": 11539,
+   "text": "Barang Misi<br><font color='#5df9ff'>Para pusaka dari suku Isle Kuno. Dicuri oleh bandit menetap di dekat Desa Sunrise.</font>"
+  },
+  {
+   "n": 11540,
+   "text": "Barang Misi<br><font color='#5df9ff'>Medicine dibuat oleh Pendeta menggunakan Rumput gurih. Orang terbangun pikiran-dikendalikan oleh Iblis ketika digunakan.</font>"
+  },
+  {
+   "n": 11541,
+   "text": "Barang Misi<br><font color='#5df9ff'>Treasure painstakingly dibuat oleh Pengrajin. Seorang yang berbakat dalam musik dapat menghentikan bahkan menciptakan badai dengan bermain ini.</font>"
+  },
+  {
+   "n": 11542,
+   "text": "Barang Misi<br><font color='#5df9ff'>Ancient book diperoleh setelah mengalahkan Iblis tersebut. Siapa yang tahu apa rahasia tersembunyi di antara teks.</font>"
+  },
+  {
+   "n": 11543,
+   "text": "Barang Misi<br><font color='#5df9ff'>Resin didapatkan dari Treants. Hebat untuk mengobati mineral.</font>"
+  },
+  {
+   "n": 11544,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bandit bertopeng mengenakan ini sementara melakukan perbuatan busuk. Memperoleh topeng adalah bukti dari kematian mereka.</font>"
+  },
+  {
+   "n": 11545,
+   "text": "Barang Misi<br><font color='#5df9ff'>Barang berharga dijarah oleh bandit. mereka memulihkan ke pemiliknya yang sah !</font>"
+  },
+  {
+   "n": 11546,
+   "text": "Barang Misi<br><font color='#5df9ff'>Shuriken digunakan di Pulau Ninja Kuno. Tersihir dengan ninjutsu air dari Pulau Ninja Kuno. Memiliki kehebatan yang mematikan.</font>"
+  },
+  {
+   "n": 11547,
+   "text": "Barang Misi<br><font color='#5df9ff'>Shuriken biasanya digunakan di Hutan Ninjas. Dalam pertempuran dihutan dapat mematikan.</font>"
+  },
+  {
+   "n": 11548,
+   "text": "Barang Misi<br><font color='#5df9ff'>untuk melewati pesta serangga, kodok berlatih untuk melompat setiap hari.</font>"
+  },
+  {
+   "n": 11549,
+   "text": "Barang Misi<br><font color='#5df9ff'>Burung pemakan bangkai yang berada di melakukan kejahatan besar kepada masyarakat. Untuk menghentikan tingkah laku mereka, prajurit yang diperlukan untuk memotong kuku mereka</font>"
+  },
+  {
+   "n": 11550,
+   "text": "Barang Misi<br><font color='#5df9ff'>Terbuat dari Golden Honey dan Pearly Riceballs. Berisi emosi penghargaan dari Genin kepada Guru Yuan.</font>"
+  },
+  {
+   "n": 11551,
+   "text": "Barang Misi<br><font color='#5df9ff'>Kepala Bloom Demoneye mungkin akan menakutkan, tapi itu bagus untuk Alchemy.</font>"
+  },
+  {
+   "n": 11552,
+   "text": "Barang Misi<br><font color='#5df9ff'>Diperoleh pada Demondog Berserker yang sekarat. Terbungkus dalam energi yang kuat.</font>"
+  },
+  {
+   "n": 11553,
+   "text": "Barang Misi<br><font color='#5df9ff'>Bulu Blackhawk memancarkan aura jahat.</font>"
+  },
+  {
+   "n": 11554,
+   "text": "Barang Misi<br><font color='#5df9ff'>Surat dari Iblis untuk Monks dekaden air. Bukti untuk kerjasama Monks dekaden 'dengan setan.</font>"
+  },
+  {
+   "n": 11555,
+   "text": "Barang Misi<br><font color='#5df9ff'>Odd Batu diekstrak dari Carcass Rats, dan sumber korupsi monster dalam Kota yang Hilang.</font>"
+  },
+  {
+   "n": 11556,
+   "text": "Barang Misi<br><font color='#5df9ff'>corrupted stone digunakan oleh Skeleton Soldiers untuk mencapai kekuatan yang lebih besar dan bermutasi.</font>"
+  },
+  {
+   "n": 11557,
+   "text": "Barang Misi<br><font color='#5df9ff'>Dijaga oleh Roaring Demon Apes. Bagus untuk pembuatan Bir dengan cairan buah.</font>"
+  },
+  {
+   "n": 11558,
+   "text": "Barang Misi<br><font color='#5df9ff'>sebagai asassin yang profesional, lebah penyengat mengikuti mantra dari \"menembak satu,membunuh satu\".</font>"
+  },
+  {
+   "n": 11559,
+   "text": "Barang Misi<br><font color='#5df9ff'>Digunakan di lembah chevaliers. Memiliki kekuatan besar.</font>"
+  },
+  {
+   "n": 11560,
+   "text": "Barang Misi<br><font color='#5df9ff'>tanaman parasit yang di temukan di Bloodblooms, yang menghubungkan Bloodblooms' dengan berserker state.</font>"
+  },
+  {
+   "n": 11561,
+   "text": "Barang Misi<br><font color='#5df9ff'>Obat bubuk ditemukan di Barrens Vultures, bukti agen terlarang mengendalikan mereka..</font>"
+  },
+  {
+   "n": 11562,
+   "text": "Item Misi<br><font color='#5df9ff'>Yummy grass carp. Makanan Favorit kura-kura.</font>"
+  },
+  {
+   "n": 11563,
+   "text": "Item Misi<br><font color='#5df9ff'>Sweat of Nurari, memiliki nilai penelitian besar.</font>"
+  },
+  {
+   "n": 11564,
+   "text": "Item Misi<br><font color='#5df9ff'>Rare Fishbone Dari Grass Carp，dapat menyerap chakra lain.</font>"
+  },
+  {
+   "n": 11565,
+   "text": "Item Misi<br><font color='#5df9ff'>Mutiara yang dicuri memiliki harga yang tinggi.</font>"
+  },
+  {
+   "n": 11566,
+   "text": "Item Misi<br><font color='#5df9ff'>Nine-Headed Dragon's sharp teeth. Tampak mengerikan.</font>"
+  },
+  {
+   "n": 11567,
+   "text": "Item Misi<br><font color='#5df9ff'>Deadly venom. Orang akan mati walaupun hanya menyentuh sedikit.</font>"
+  },
+  {
+   "n": 11568,
+   "text": "Barang Misi<br><font color='#5df9ff'>Tikus ini terus-menerus mencari-cari melalui kotoran untuk pernak-pernik, biasanya mencari koin tembaga saja.</font>"
+  },
+  {
+   "n": 11569,
+   "text": "Barang Misi<br><font color='#5df9ff'>Kartu Natal halus.<br>Kamu punya kesempatan untuk menebus satu baju Chirstmas dengan satu kartu Natal.</font>"
+  },
+  {
+   "n": 11570,
+   "text": "Barang Misi<br><font color='#5df9ff'>Kaos kaki putih.<br>Koleksi ⟨0⟩ pasang kaos kaki putih, merah dan biru secara terpisah yang dapat ditukarkan dengan batu yang berlebihan atau pet manusia salju.</font>"
+  },
+  {
+   "n": 11571,
+   "text": "Barang Misi<br><font color='#5df9ff'>Rumah kecil dibuat dari roti jahe.<br>Kumpulkan ⟨0⟩ rumah kue jahe yang bisa ditukarkan permen Natal.</font>"
+  },
+  {
+   "n": 11572,
+   "text": "Barang Misi<br><font color='#5df9ff'>Pohon Natal kecil yang penuh dengan hiasan.<br>Kumpulkan ⟨0⟩ pohon Natal kecil dapat ditukarkan dengan EXP atau hadiah pet rusa.</font>"
+  },
+  {
+   "n": 11573,
+   "text": "Barang Misi<br>[line]<font color='#5df9ff'>Naskah asli dari Come Come Paradise!<br>Pemain yang sudah level ⟨0⟩ dapat pergi ke tempat tempa di Kota Malaikat<br>Dan menyelesaikan misi Come Come Paradise Volume I.</font><br>[line]<font color='#5df9ff'>Pergi ke Toko Barang dan beli : buku halaman ⟨1⟩<br>dan sintesis dengan halaman ⟨2⟩, ⟨3⟩ and ⟨4⟩.</font>"
+  },
+  {
+   "n": 11574,
+   "text": "Barang Misi<br>[line]<font color='#5df9ff'>Naskah asli dari Come Come Paradise!<br>Pemain yang sudah level ⟨0⟩ dapat pergi ke tempat tempa di Kota Malaikat<br>Dan menyelesaikan misi Come Come Paradise Volume II.</font><br>[line]<font color='#5df9ff'>Pergi ke Toko Barang dan beli : buku halaman ⟨1⟩<br>dan sintesis dengan halaman ⟨2⟩, ⟨3⟩ and ⟨4⟩.</font>"
+  },
+  {
+   "n": 11575,
+   "text": "Barang Misi<br>[line]<font color='#5df9ff'>Naskah asli dari Come Come Paradise!<br>Pemain yang sudah level ⟨0⟩ dapat pergi ke tempat tempa di Kota Malaikat<br>Dan menyelesaikan misi Come Come Paradise Volume III.</font><br>[line]<font color='#5df9ff'>Pergi ke Toko Barang dan beli : buku halaman ⟨1⟩<br>dan sintesis dengan halaman ⟨2⟩, ⟨3⟩ and ⟨4⟩.</font>"
+  },
+  {
+   "n": 11576,
+   "text": "Quest item<br><font color='#5df9ff'>Kotak kue bulan yang kosong. Hanzo berpikir tidak ada kue bulan di dalam kotak ini.</font>"
+  },
+  {
+   "n": 11577,
+   "text": "Quest item<br><font color='#5df9ff'>Kue bulan dari dunia ninja. Kumpulkan ⟨0⟩ untuk mendapatkan sebuah hadiah!</font>"
+  },
+  {
+   "n": 11578,
+   "text": "Quest item<br><font color='#5df9ff'>Bahan untuk membuat kue bulan. Ada ⟨0⟩ tipe bahan untuk membuat kue bulan. Kumpulkan ⟨1⟩ dari setiap jenis bahannya untuk mendapatkan sebuah hadiah Natal!</font>"
+  },
+  {
+   "n": 11579,
+   "text": "Special Item<br><font color='#5df9ff'>Dapat digunakan dalam mempertahankan dari serangan Tailed Beasts untuk meningkatkan penghormatan.</font><br>[line]kemungkinan didapat dari Valhalla monster!"
+  },
+  {
+   "n": 11580,
+   "text": "Kegemaran<br><font color='#5df9ff'>Serahkan kepada ninja yang ada di Rumah Ninja untuk mempererat persahabatan</font>"
+  },
+  {
+   "n": 11581,
+   "text": "Item Misi<br><font color='#5df9ff'>Giant Ox Horn, kan berharga jika dibuat sebagai dekorasi.</font>"
+  },
+  {
+   "n": 11582,
+   "text": "Item Misi<br><font color='#5df9ff'>Chameleon skin，sangat menggairahkan.</font>"
+  },
+  {
+   "n": 11583,
+   "text": "Item Misi<br><font color='#5df9ff'>Besar tapi ringan.</font>"
+  },
+  {
+   "n": 11584,
+   "text": "Item Misi<br><font color='#5df9ff'>Satu kepala dari Inferno Dog. Ini masih hidup walau sudah di potong dari tubuhnya.</font>"
+  },
+  {
+   "n": 11585,
+   "text": "Item Misi<br><font color='#5df9ff'>Informasi penting tentang Guren.</font>"
+  },
+  {
+   "n": 11586,
+   "text": "Item Misi<br><font color='#5df9ff'>Kulit Nurari. Ini merupakan cairan terpenting.</font>"
+  },
+  {
+   "n": 11587,
+   "text": "Item Misi<br><font color='#5df9ff'>Samehada's bone dapat digunakan sebagai penyerap chakra.</font>"
+  },
+  {
+   "n": 11588,
+   "text": "Item Misi<br><font color='#5df9ff'>Pink pearl，Sangat mengesankan.</font>"
+  },
+  {
+   "n": 11589,
+   "text": "Item Misi<br><font color='#5df9ff'>Highly toxic saliva, Ini merupakan bahan penyembuhan yang sangat mengesankan.</font>"
+  },
+  {
+   "n": 11590,
+   "text": "Item Misi<br><font color='#5df9ff'>Tidak semua ox horns merupakan hasil yang bagus.</font>"
+  },
+  {
+   "n": 11591,
+   "text": "Barang Misi<br><font color='#5df9ff'>Monyet cinta mencuri topi jerami. Nenek moyang mereka jelas lupa untuk mendidik mereka untuk mengatakan 'monyet lihat, monyet melakukan'.</font>"
+  },
+  {
+   "n": 11592,
+   "text": "Item Misi<br><font color='#5df9ff'>Busuk tetapi dapat digunakan untuk penelitian.</font>"
+  },
+  {
+   "n": 11593,
+   "text": "Item Misi<br><font color='#5df9ff'>bulu hitam yang langka dari burung raksaksa.</font>"
+  },
+  {
+   "n": 11594,
+   "text": "Barang Misi<br><font color='#5df9ff'>Anjing hilang tidak dikenal untuk kebersihan yang mereka, sehingga mereka ditinggalkan oleh pemiliknya. Mereka juga dikenal karena mengotori tempat.</font>"
+  },
+  {
+   "n": 11595,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Ninja Hero】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11596,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Brave Aries】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11597,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Steady Taurus】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11598,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Witty Gemini】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11599,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Tender Cancer】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11600,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Passionate Leo】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11601,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Faultless Virgo】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11602,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Impartial Libra】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11603,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Mysterious Scorpio】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11604,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Optimistic Sagittarius】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11605,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【King of Login】</font><br>[line]<font color='#5df9ff'>Dapat meningkatkan Armor Break sebesar ⟨0⟩ poin, Critical Strike sebesar ⟨1⟩ point, Dodge sebesar ⟨2⟩ point dan Block sebesar ⟨3⟩ poin.</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨4⟩ minggu.</font>"
+  },
+  {
+   "n": 11606,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Resolute Capricorn】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11607,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Independent Aquarius】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11608,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【Artistic pisces】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk <font color='#ff0000'>⟨0⟩ hari</font>.</font>"
+  },
+  {
+   "n": 11609,
+   "text": "<font color='#5df9ff'>Item untuk tujuan pengujian, akan mendapatkan Gelar【Domba gemuk Legendaris】.Silakan menguji orang-orang yang tidak punya gelar ini, jika terjadi kesalahan </font>"
+  },
+  {
+   "n": 11610,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eBlue Beast】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11611,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eYellow Flash】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11612,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eGudian of Sand】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11613,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eNight Dancer】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11614,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eBlade of Chaos】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11615,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Blue Beast】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11616,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eRed Sunset】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11617,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eWhite Fang】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11618,
+   "text": "<font color='#5df9ff'>Dapatkan gelar 【eNinja Hero】setelah menggunakan</font><br>[line]<font color='#5df9ff'>Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11619,
+   "text": "<font color='#5df9ff'>Memperoleh Gelar dari【Special Jounin】</font><br>[line]<font color='#5df9ff'>Gelar akan bertahan selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11620,
+   "text": "<font color='#5df9ff'>Memperoleh Gelar dari【Jounin Summoner】</font><br>[line]<font color='#5df9ff'>Gelar akan bertahan selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11621,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan gelar [Kage]</font><br>[line]<font color='#5df9ff'>Gelar berlaku selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11622,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan gelar [Tailed Beast Killer]</font><br>[line]<font color='#5df9ff'>Gelar berlaku selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11623,
+   "text": "<font color='#5df9ff'>Buka ini untuk mendapatkan gelar dari [Emperor of Login]</font><br>[line]<font color='#5df9ff'>gelar berlaku selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11624,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan  Gelar dari [Tailed Beast Defender]</font><br>[line]<font color='#5df9ff'>Gelar bertahan selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11625,
+   "text": "Adventurer"
+  },
+  {
+   "n": 11626,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Yellow Flash】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11627,
+   "text": "Young Hero"
+  },
+  {
+   "n": 11628,
+   "text": "Mysterious Organization"
+  },
+  {
+   "n": 11629,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Gudian of Sand】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11630,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Night Dancer】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11631,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Blade of Chaos】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11632,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【Red Sunset】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11633,
+   "text": "<font color='#5df9ff'>Mendapatkan Gelar【White Fang】</font><br>[line]<font color='#5df9ff'>Aktiv selama ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 11634,
+   "text": "<font color='#5df9ff'>Dapat digunakan untuk membuka scroll teknik rahasia Rank S, Rank A, Rank B and Rank C. Jumlah Segel yang dibutuhkan akan meningkat sesuai dengan level scroll !</font>"
+  },
+  {
+   "n": 11635,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Gunakan ini untuk mendapatkan sebuah kostum orange +⟨0⟩.<br>Pilihan: Kakuzu, Hidan, Deidara, Kisame Hoshigaki, Suigetsu, Karin, Shiba Kuukaku, Kotetsu Isane, Yamato, Arisawa Tatsuki.</font>"
+  },
+  {
+   "n": 11636,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Gunakan ini untuk mendapatkan sebuah kostum orange +⟨0⟩.<br>Pilihan: Pain, Konan, Sage Naruto, Hebi Sasuke, Third Hokage, Mizukage, Mashiro Kuna, Second Hokage.</font>"
+  },
+  {
+   "n": 11637,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Gunakan ini untuk mendapatkan sebuah kostum orange +⟨0⟩<br>Pilihan: Pain, Konan, Sage Naruto, Hebi Sasuke, ⟨1⟩rd Hokage, Mizukage, Mashiro Kuna, ⟨2⟩nd Hokage.</font>"
+  },
+  {
+   "n": 11638,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Gunakan ini untuk mendapatkan sebuah kostum orange +⟨0⟩.<br>Pilihan: Pain, Konan, Sage Naruto, Hebi Sasuke, ⟨1⟩rdHokage, Mizukage, Mashiro Kuna, ⟨2⟩nd Hokage.</font>"
+  },
+  {
+   "n": 11639,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Dapat memilih satu pet skill book dari panel.<br>Termasuk: Fire Release Enhance, Water Release Enhance, Earth Release Enhance, Wind Release Enhance, Lightning Release Enhance, Dash, Ferocious[E].</font>"
+  },
+  {
+   "n": 11640,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Dapat memilih satu enchantment stone dari panel.<br>Termasuk: Azure Dragon Soul, Black Tortoise Vigor, Vermilion Bird Vigor, White Tiger Vigor, Sunstone, Moonstone, Aerolite Stone, Dawn Stone.</font>"
+  },
+  {
+   "n": 11641,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>Gunakan untuk memilih salah satu set dari interface.<br>Range: ⟨0⟩ Lv.⟨1⟩ Dragon Soul Sets, Lv.⟨2⟩ Release skill sets, Lv.⟨3⟩ Spirit Creature Sets, Angelic Union Sets, Sacred Army Sets, Dragon Lord Sets.</font>"
+  },
+  {
+   "n": 11642,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br> Gunakan untuk memilih salah satu pet skill books dari interface.<br>Range: Sharp Claws[卍], Sharpness[卍], Vision[卍], Rampage[卍], Vivacious[卍], Sandbag[卍], Nimble[卍], Withstand[卍], Calm[卍], Thick Skin[卍], Disarm[卍], Strong[卍], Ferocious[卍], Sagacity[卍].</font>"
+  },
+  {
+   "n": 11643,
+   "text": "<font color='#5df9ff'>Magic Wishing Box<br>Gunakan untuk memilih salah satu dari Tailed Beast Hearts.<br>Range: Heart of Shukaku, Gunakan untuk memilih salah satu dari Tailed Beast Heart.<br>Range: Heart of Nekomata, Gunakan untuk memilih salah satu dari Tailed Beast Heart.<br>Range: Heart of Isonade, Gunakan untuk memilih salah satu dari Tailed Beast Heart.<br>Range: Heart of Sokou, Gunakan untuk memilih salah satu dari Tailed Beast Heart.<br>Range: Heart of Houkou, Gunakan untuk memilih salah satu dari Tailed Beast Heart.<br>Range: Heart of Raijuu.</font>"
+  },
+  {
+   "n": 11644,
+   "text": "<font color='#5df9ff'>Exotic wishing pot<br>akan menghasilkan kostum Abu-abu secara random setelah digunakan.</font>"
+  },
+  {
+   "n": 11645,
+   "text": "<font color='#5df9ff'>Magic Wishing Box<br>Gunakan untuk memilih salah satu dari Gelar.<br>Range: eBlue Beast, eYellow Flash, eGuardian of Sand, eNight Dancer, eBlade of Chaos, eRed Sunset, eWhite Fang, eNinja Hero</font>"
+  },
+  {
+   "n": 11646,
+   "text": "<font color='#5df9ff'>Mystic Wishing Box<br>Gunakan ini untuk mendapatkan sebuah tailed beast +⟨0⟩<br>Pilihan:  Shukaku+⟨1⟩, Isonade+⟨2⟩, Sokou+⟨3⟩, Houkou+⟨4⟩, Raijuu+⟨5⟩, Mujina+⟨6⟩.</font>"
+  },
+  {
+   "n": 11647,
+   "text": "<font color='#5df9ff'>Mystic Wishing Box<br>Gunakan ini untuk mendapatkan sebuah tailed beast +⟨0⟩.<br>Pilihan:  Nekomata+⟨1⟩, Giant Ox+⟨2⟩, Demon Fox+⟨3⟩, .</font>"
+  },
+  {
+   "n": 11648,
+   "text": "<font color='#5df9ff'>Mystic Wishing Box<br>Gunakan ini untuk mendapatkan sebuah tailed beast +⟨0⟩.<br>Pilihan:  Shukaku+⟨1⟩, Isonade+⟨2⟩, Sokou+⟨3⟩, Houkou+⟨4⟩, Raijuu+⟨5⟩, Mujina+⟨6⟩.</font>"
+  },
+  {
+   "n": 11649,
+   "text": "<font color='#5df9ff'>Mystic Wishing Box<br>Gunakan ini untuk mendapatkan sebuah tailed beast +⟨0⟩.<br>Range:  Nekomata+⟨1⟩, Giant Ox+⟨2⟩, Demon Fox+⟨3⟩.</font>"
+  },
+  {
+   "n": 11650,
+   "text": "<font color='#5df9ff'>Exotic wishing pot<br>akan menghasilkan kostum Biru secara random setelah digunakan.</font>"
+  },
+  {
+   "n": 11651,
+   "text": "<font color='#5df9ff'>Exotic wishing pot<br>akan menghasilkan kostum Orange secara random setelah digunakan.</font>"
+  },
+  {
+   "n": 11652,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br> Kamu bisa mendapatkan a Little Jun, Little Meng atau Christmas Outfit secara acak.</font>"
+  },
+  {
+   "n": 11653,
+   "text": "<font color='#5df9ff'>Exotic wishing pot<br>Gunakan untuk memilih salah satu baju orange +⟨0⟩ dari interface. </font>"
+  },
+  {
+   "n": 11654,
+   "text": "<font color='#5df9ff'>Exotic wishing pot<br>Gunakan untuk memilih salah satu pet +⟨0⟩ dari interface. </font>"
+  },
+  {
+   "n": 11655,
+   "text": "<font color='#5df9ff'>Magic Wishing Pot<br>gunakan ini untuk mendapatkan sebuah kostum orange +⟨0⟩.<br>Pilihan:  Kakuzu, Hidan, Deidara, Kisame Hoshigaki, Suigetsu, Karin, Shiba Kuukaku, Kotetsu Isane, Yamato, Arisawa Tatsuki.</font>"
+  },
+  {
+   "n": 11656,
+   "text": "<font color='#5df9ff'>EXP meningkat ⟨0⟩,⟨1⟩.</font>"
+  },
+  {
+   "n": 11657,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kurosaki Ichigo.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kurosaki Ichigo +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kurosaki Ichigo +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11658,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Grimmjow.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Grimmjow +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Grimmjow +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11659,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kurosaki Ichigo.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kurosaki Ichigo +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kurosaki Ichigo +⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  }
+ ]
+}

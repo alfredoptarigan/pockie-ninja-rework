@@ -1,0 +1,518 @@
+{
+ "terms": {
+  "Stinger Bee": "Bee Stingers",
+  "Earthwing Dragon": "Earth Pterosaur",
+  "Frostwing Dragon": "Ice Pterosaur",
+  "Greenskin Frog": "Green Frog",
+  "Grinning Monkey": "Monkey",
+  "Treant": "Tree Ent",
+  "Sweet Potato Demon": "Potato",
+  "Sushi Monster": "Sushi"
+ },
+ "units": [
+  {
+   "n": 11331,
+   "text": "<font color='#5df9ff'>Azure Dragon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Azure Dragonling +⟨1⟩ dan mendapatkan Azure Dragonling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11332,
+   "text": "<font color='#5df9ff'>Azure Dragon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Tingkat tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11333,
+   "text": "<font color='#5df9ff'>Shukaku, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Shukaku＋⟨1⟩ berkesempatan mendapatkan Shukaku＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11334,
+   "text": "<font color='#5df9ff'>Shukaku, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11335,
+   "text": "<font color='#5df9ff'>Nekomata, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Nekomata＋⟨1⟩ berkesempatan mendapatkan  Nekomata＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11336,
+   "text": "<font color='#5df9ff'>Nekomata, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11337,
+   "text": "<font color='#5df9ff'>Isonade, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Isonade＋⟨1⟩ berkesempatan mendapatkan  Isonade＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11338,
+   "text": "<font color='#5df9ff'>Isonade, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11339,
+   "text": "<font color='#5df9ff'>Sokou, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Sokou＋⟨1⟩ berkesempatan mendapatkan  Sokou＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11340,
+   "text": "<font color='#5df9ff'>Sokou, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11341,
+   "text": "<font color='#5df9ff'>Houkou, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Houkou＋⟨1⟩ berkesempatan mendapatkan  Houkou＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11342,
+   "text": "<font color='#5df9ff'>Houkou, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11343,
+   "text": "<font color='#5df9ff'>Raijuu, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Raijuu＋⟨1⟩ berkesempatan mendapatkan  Raijuu＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11344,
+   "text": "<font color='#5df9ff'>Raijuu, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11345,
+   "text": "<font color='#5df9ff'>Mujina, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Mujina＋⟨1⟩ berkesempatan mendapatkan  Mujina＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11346,
+   "text": "<font color='#5df9ff'>Mujina, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11347,
+   "text": "<font color='#5df9ff'>Giant Ox, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Giant Ox＋⟨1⟩ berkesempatan mendapatkan Giant Ox＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11348,
+   "text": "<font color='#5df9ff'>Giant Ox, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11349,
+   "text": "<font color='#5df9ff'>Demon Fox, dapat bertarung dengan pemilik.<br>Gunakan sebagai item utama dan sintesiskan dengan ⟨0⟩ Demon Fox＋⟨1⟩ berkesempatan mendapatkan Demon Fox＋⟨2⟩.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11350,
+   "text": "<font color='#5df9ff'>Demon Fox, dapat bertarung dengan pemilik.<br>Level pet lebih tinggi tidak dapat di synthesiskan lagi.<font color='#FF6565'>Pet skill akan di pertahankan setelah sintesis, Tingkat kelaparan akan meningkat.</font><br>skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11351,
+   "text": "<font color='#5df9ff'>Seekor Babi Liar , dapat berperang bersama pemiliknya.</font>"
+  },
+  {
+   "n": 11352,
+   "text": "<font color='#5df9ff'>Seekor Naga Api , dapat berperang bersama pemiliknya.</font>"
+  },
+  {
+   "n": 11353,
+   "text": "<font color='#5df9ff'>Seekor Naga Air , dapat berperang bersama pemiliknya.</font>"
+  },
+  {
+   "n": 11354,
+   "text": "<font color='#5df9ff'>Seekor Naga Tanah , dapat berperang bersama pemiliknya.</font>"
+  },
+  {
+   "n": 11355,
+   "text": "<font color='#5df9ff'>Seekor Naga Angin , dapat berperang bersama pemiliknya.</font>"
+  },
+  {
+   "n": 11356,
+   "text": "<font color='#5df9ff'>Seekor Naga Petir , dapat berperang bersama pemiliknya.</font>"
+  },
+  {
+   "n": 11357,
+   "text": "<font color='#5df9ff'>Frostbore Dragon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Frostbore Dragonling +⟨1⟩ dan mendapatkan Frostbore Dragonling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11358,
+   "text": "<font color='#5df9ff'>Frostbore Dragon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Tingkat tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11359,
+   "text": "<font color='#5df9ff'>Seekor Earthbore Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11360,
+   "text": "<font color='#5df9ff'>Seekor Windbore Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11361,
+   "text": "<font color='#5df9ff'>Seekor Thunderbore Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11362,
+   "text": "<font color='#5df9ff'>Seekor Firewing Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11363,
+   "text": "<font color='#5df9ff'>Seekor Frostwing Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11364,
+   "text": "<font color='#5df9ff'>Seekor Earthwing Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11365,
+   "text": "<font color='#5df9ff'>Seekor Windwing Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11366,
+   "text": "<font color='#5df9ff'>Seekor Thunderwing Dragon, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11367,
+   "text": "<font color='#5df9ff'>Seekor Egret, dapat bertarung disamping pemiliknya</font>"
+  },
+  {
+   "n": 11368,
+   "text": "<font color='#5df9ff'>Vulture yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Vulture Fledgling +⟨1⟩ dan mendapatkan Vulture Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11369,
+   "text": "<font color='#5df9ff'>Vulture yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Tingkat tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11370,
+   "text": "<font color='#5df9ff'>Bloodbat yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Bloodbat Fledgling +⟨1⟩ dan mendapatkan Bloodbat Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11371,
+   "text": "<font color='#5df9ff'>Bloodbat yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Tingkat tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11372,
+   "text": "<font color='#5df9ff'> Greenskin Frog yang telah dijinakkan, dapat bertarung dengan pemiliknya.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level. </font>"
+  },
+  {
+   "n": 11373,
+   "text": "<font color='#5df9ff'>Stinger Bee yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Stinger Bee Fledgling +⟨1⟩ dan mendapatkan Stinger Bee Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11374,
+   "text": "<font color='#5df9ff'>Stinger Bee yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Stinger Bee Fledgling +⟨1⟩ dan mendapatkan Stinger Bee Fledgling + ⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11375,
+   "text": "<font color='#5df9ff'>Stinger Bee yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Stinger Bee Fledgling +⟨1⟩ dan mendapatkan Stinger Bee Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level.</font>"
+  },
+  {
+   "n": 11376,
+   "text": "<font color='#5df9ff'>Stinger Bee yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11377,
+   "text": "<font color='#5df9ff'>Dig Rat yang telah dijinakkan, dapat bertarung dengan pemiliknya.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level. </font>"
+  },
+  {
+   "n": 11378,
+   "text": "<font color='#5df9ff'>Grinning Monkey yang telah dijinakkan, dapat bertarung dengan pemiliknya.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level. </font>"
+  },
+  {
+   "n": 11379,
+   "text": "<font color='#5df9ff'>Lost Dog yang telah dijinakkan, dapat bertarung dengan pemiliknya.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level. </font>"
+  },
+  {
+   "n": 11380,
+   "text": "<font color='#5df9ff'>Meneater Blossom yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Menetear Blossom Fledgling +⟨1⟩ dan mendapatkan Menetear Blossom Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11381,
+   "text": "<font color='#5df9ff'>Seekor Meneater Blossom yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Menetear Blossom Fledgling +⟨1⟩ dan mendapatkan Menetear Blossom Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11382,
+   "text": "<font color='#5df9ff'>Menetear Blossom yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11383,
+   "text": "<font color='#5df9ff'>Treant yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Treant Fledgling +⟨1⟩ dan mendapatkan Treant Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11384,
+   "text": "<font color='#5df9ff'>Treant yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11385,
+   "text": "<font color='#5df9ff'>Sunflower yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Sunflower Fledgling +⟨1⟩ dan mendapatkan Sunflower Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11386,
+   "text": "<font color='#5df9ff'>Sunflower yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Sunflower +⟨1⟩ dan mendapatkan Sunflower Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11387,
+   "text": "<font color='#5df9ff'>Seekor Sunflower yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Sunflower Fledgling +⟨1⟩ dan mendapatkan Sunflower Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11388,
+   "text": "<font color='#5df9ff'>Sunflower yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11389,
+   "text": "<font color='#5df9ff'>Sweet Potato Demon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Sweet Potato Demon Fledgling +⟨1⟩ dan mendapatkan Sweet Potato Demon Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11390,
+   "text": "<font color='#5df9ff'>Sweet Potato Demon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11391,
+   "text": "<font color='#5df9ff'>Corn Demon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Corn Demon Fledgling +⟨1⟩ dan mendapatkan Corn Demon Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11392,
+   "text": "<font color='#5df9ff'>Seekor Corn Demon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Corn Demon Fledgling +⟨1⟩ dan mendapatkan Corn Demon Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11393,
+   "text": "<font color='#5df9ff'>Corn Demon yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11394,
+   "text": "<font color='#5df9ff'>Seekor Scorching Demon, dapat bertarung disamping pemiliknya.</font>"
+  },
+  {
+   "n": 11395,
+   "text": "<font color='#5df9ff'>Seekor Rippling Demon, dapat bertarung disamping pemiliknya.</font>"
+  },
+  {
+   "n": 11396,
+   "text": "<font color='#5df9ff'>Seekor Earthbind Demon, dapat bertarung disamping pemiliknya.</font>"
+  },
+  {
+   "n": 11397,
+   "text": "<font color='#5df9ff'>Seekor Thundering Demon, dapat bertarung disamping pemiliknya.</font>"
+  },
+  {
+   "n": 11398,
+   "text": "<font color='#5df9ff'>Seekor Whirlwind Demon, dapat bertarung disamping pemiliknya.</font>"
+  },
+  {
+   "n": 11399,
+   "text": "<font color='#5df9ff'>Bun Monster yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Bun Monster Fledgling +⟨1⟩ dan mendapatkan Bun Monster Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11400,
+   "text": "<font color='#5df9ff'>Bun Monster yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11401,
+   "text": "<font color='#5df9ff'>Sushi Monster yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Sushi Monster Fledgling +⟨1⟩ dan mendapatkan Sushi Monster Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11402,
+   "text": "<font color='#5df9ff'>Sushi Monster yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11403,
+   "text": "<font color='#5df9ff'>Riceball Monster yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Riceball Monster Fledgling +⟨1⟩ dan mendapatkan Riceball Monster Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11404,
+   "text": "<font color='#5df9ff'>Riceball Monster yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11405,
+   "text": "<font color='#5df9ff'>Snowman yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Baby Snowman +⟨1⟩ dan mendapatkan Baby Snowman +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11406,
+   "text": "<font color='#5df9ff'>Snowman yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11407,
+   "text": "<font color='#5df9ff'>Reindeer yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Baby Reindeer +⟨1⟩ dan mendapatkan Baby Reindeer +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11408,
+   "text": "<font color='#5df9ff'>Reindeer yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11409,
+   "text": "<font color='#5df9ff'>Rabbit yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Baby Rabbit +⟨1⟩ dan mendapatkan Baby Rabbit +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11410,
+   "text": "<font color='#5df9ff'>Rabbit yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11411,
+   "text": "<font color='#5df9ff'>Negiyama's Toad yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Toadling +⟨1⟩ dan mendapatkan Toadling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11412,
+   "text": "<font color='#5df9ff'>Negiyama's Toad yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11413,
+   "text": "<font color='#5df9ff'>Kiba's Ninja Dog yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Akamaru Young +⟨1⟩ dan mendapatkan Akamaru Young +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11414,
+   "text": "<font color='#5df9ff'>Kiba's Ninja Dog yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11415,
+   "text": "<font color='#5df9ff'>Modified Soul \"Kon\" yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Kon Fledgling +⟨1⟩ dan mendapatkan Kon Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11416,
+   "text": "<font color='#5df9ff'>Modified Soul \"Kon\" yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩  Kon Fledgling +⟨1⟩ dan mendapatkan Kon Fledgling +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11417,
+   "text": "<font color='#5df9ff'>Modified Soul \"Kon\" yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11418,
+   "text": "<font color='#5df9ff'>Modified Soul \"Lily\" yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Digunakan sebagai item untuk disintesiskan dengan ⟨0⟩ Lily Young +⟨1⟩ dan mendapatkan Lily Young +⟨2⟩. <font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨3⟩ level. </font>"
+  },
+  {
+   "n": 11419,
+   "text": "<font color='#5df9ff'>Modified Soul \"Lily\" yang telah dijinakkan, dapat bertarung dengan pemiliknya.<br>Level tertinggi tercapai, tidak dapat di sintesis lagi.<font color='#FF6565'>Skill pet akan tetap setelah ter-upgrade, tingkat kekenyangan akan meningkat.</font><br>Sebuah slot skill baru akan terbuka setiap ⟨0⟩ level.</font>"
+  },
+  {
+   "n": 11420,
+   "text": "<font color='#00ffff'>Barang khusus untuk mencari pet, menggunakan Spanner dapat memperbaiki panah yang rusak!</font><font color='#FF6565'>Spanner yang belum digunakan akan dihapus pada ⟨0⟩:⟨1⟩ setiap hari! Harap menggunakan sebelum waktunya.</font>"
+  },
+  {
+   "n": 11421,
+   "text": "<font color='#00ffff'>Barang khusus untuk mencari pet, menggunakan Knob dapat mengubah arah panah!</font><font color='#FF6565'>Knob yang belum digunakan akan dihapus pada ⟨0⟩:⟨1⟩ setiap hari! Harap menggunakan sebelum waktunya.</font>"
+  },
+  {
+   "n": 11422,
+   "text": "<font color='#00ffff'>Barang khusus untuk mencari pet, menggunakan Magnifier bisa lihat panah yang tak terlihat di bawah kartu dengan tanda tanya!</font><font color='#FF6565'>Magnifier yang belum digunakan akan dihapus pada ⟨0⟩:⟨1⟩ setiap hari! Harap menggunakan sebelum waktunya.</font>"
+  },
+  {
+   "n": 11423,
+   "text": "<font color='#5df9ff'>Gunakan item ini untuk membongkar kostum secara gratis</font>"
+  },
+  {
+   "n": 11424,
+   "text": "<font color='#5df9ff'>Restore ⟨0⟩ Chakra.<br>Dapat memberi makan  pet.<br>[line]Tipe Makanan: Medication<br> Tingkat kekenyangan: ⟨1⟩</font>"
+  },
+  {
+   "n": 11425,
+   "text": "<font color='#5df9ff'>memulihkan ⟨0⟩,⟨1⟩ Chakra.<br>Dapat dipakai sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨2⟩</font>"
+  },
+  {
+   "n": 11426,
+   "text": "Tipe skill : Pendukung<br>Efek Skill : Ketika pemilik menyerang, pet memiliki <font color='#5df9ff'>⟨0⟩%</font> kesempatan untuk menyerang dan menyebabkan kerusakan sebesar <font color='#5df9ff'>⟨1⟩%</font> dari kerusakan pemiliknya."
+  },
+  {
+   "n": 11427,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Defense pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11428,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Constitution pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11429,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Armor Break pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11430,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan max Chakra pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11431,
+   "text": "Tipe skill : Pendukung<br>Efek skill : Ketika pemilik menerima serangan, pet memiliki <font color='#5df9ff'>⟨0⟩%</font> kesempatan untuk Block serangan."
+  },
+  {
+   "n": 11432,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Block pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11433,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan min Attack pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11434,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Critical Strike pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11435,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Hit pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11436,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Strength, Agility dan Stamina pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11437,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Dodge pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11438,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Pierce pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11439,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Attack pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11440,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Speed pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11441,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan Chakra pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11442,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan HP pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11443,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan kekuatan skill api pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11444,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan kekuatan skill air pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11445,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan kekuatan skill tanah pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11446,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan kekuatan skill angin pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11447,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan kekuatan skill petir pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11448,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan max HP pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11449,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan max HP pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> poin."
+  },
+  {
+   "n": 11450,
+   "text": "Tipe skill : Pasif<br>Efek skill : Meningkatkan max Attack pemilik sebesar <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11451,
+   "text": "Jenis Skill: Pasif<br>Efek skill: Meningkatkan kecepatan pemilik sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11452,
+   "text": "Jenis skill: Pasif<br>Efek skill: Meningkatkan tingkat mendapatkan barang sebesar <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11453,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Pierce pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11454,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Speed pemilik sebesar  <font color='#5df9ff'>⟨0⟩%</font>."
+  },
+  {
+   "n": 11455,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Hit pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  },
+  {
+   "n": 11456,
+   "text": "Tipe Skill: Passive<br>effek skill: Meningkatkan Critical Strike pemilik sebesar  <font color='#5df9ff'>⟨0⟩</font> point."
+  }
+ ]
+}

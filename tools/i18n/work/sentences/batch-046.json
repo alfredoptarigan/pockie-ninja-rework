@@ -1,0 +1,564 @@
+{
+ "terms": {
+  "Haruno Sakura": "Sakura Haruno",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Unohana Retsu": "Retsu Unohana",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Suigetsu": "Suigetsu Hozuki",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi"
+ },
+ "units": [
+  {
+   "n": 12131,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi  Zangetsu.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12132,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi ⟨0⟩rd Hokage.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12133,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hollowfied Grimmjow.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12134,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Aizen.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12135,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi ⟨0⟩th Hokage.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12136,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Jiraiya.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12137,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Haruno Sakura.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12138,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Arale.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12139,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Yamanaka Ino.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12140,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Mitarashi Anko.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12141,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Temari.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12142,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Tenten.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12143,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Haku.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12144,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kurotsuchi Nemu.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12145,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kusajishi Yachiru.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12146,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kotetsu Isane. yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12147,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Konan.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12148,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Yadomaru Sasha.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12149,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Arisawa Tatsuki.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12150,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hollowfied Rukia.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12151,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Tsunade.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12152,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kuchiki Rukia.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12153,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Momochi Zabuza.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12154,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kuchiki Byakuya.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12155,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Nelliel.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12156,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Little Meng.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12157,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Little Jun.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12158,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Christmas Ninja.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12159,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Unohana Retsu.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12160,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kyuubi Naruto.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12161,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nanao Ise.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Nanao Ise +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Nanao Ise +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12162,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Momo Hinamori.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Momo Hinamori +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Momo Hinamori +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12163,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Rangiku Matsumoto.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Rangiku Matsumoto +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Rangiku Matsumoto +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12164,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Inoue Orihime.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Inoue Orihime +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Inoue Orihime +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12165,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kurenai Yuuhi.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kurenai Yuuhi +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kurenai Yuuhi +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12166,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hyuga Hinata.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Hyuga Hinata +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Hyuga Hinata +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12167,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Chi.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Chi +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Chi +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12168,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Shizune.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Shizune +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Shizune +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12169,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi White Ichigo.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum White Ichigo +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum White Ichigo +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12170,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Alice.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Alice +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Alice +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12171,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kakuzu.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Kakuzu ＋⟨1⟩ Mungkin akan mendapatkan Kakuzu +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12172,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hidan.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Hidan＋⟨1⟩ Mungkin akan mendapatkan Hidan +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12173,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Deidara.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Deidara＋⟨1⟩ Mungkin akan mendapatkan Deidara +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12174,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Pain.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Pain＋⟨1⟩ Mungkin akan mendapatkan Pain +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12175,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kisame Hoshigaki.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Kisame Hoshigaki＋⟨1⟩ Mungkin akan mendapatkan Kisame Hoshigaki +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12176,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Konan.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Konani＋⟨1⟩ Mungkin akan mendapatkan Konan +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12177,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Sage Naruto.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Sage Naruto＋⟨1⟩ Mungkin akan mendapatkan Sage Naruto +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12178,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hebi Sasuke.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Hebi Sasuke＋⟨1⟩ Mungkin akan mendapatkan Hebi Sasuke +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12179,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Suigetsu.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Suigetsu＋⟨1⟩ Mungkin akan mendapatkan Suigetsu +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12180,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Karin.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Karin＋⟨1⟩ Mungkin akan mendapatkan Karin +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12181,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Priest.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Priest +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Priest +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12182,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Ghost Lady.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Ghost Lady +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Ghost Lady +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12183,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Zombie Lady.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Zombie Lady +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Zombie Lady +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12184,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Mizukage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Mizukage +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Mizukage +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12185,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Uzumaki Naruto.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Uzumaki Naruto +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Uzumaki Naruto +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12186,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kakuzu.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Kakuzu＋⟨1⟩ Mungkin akan mendapatkan Kakuzu +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12187,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Gaara.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Gaara +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Gaara +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12188,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kakuzu.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12189,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hidan.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12190,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Deidara.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12191,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Pain.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12192,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kisame Hoshigaki.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12193,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Sage Naruto.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12194,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hebi Sasuke.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12195,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Suigetsu.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12196,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Karin.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12197,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hatake Kakashi.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Hatake Kakashi +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Hatake Kakashi +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12198,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Uchiha Sasuke.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Uchiha Sasuke +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Uchiha Sasuke +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12199,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Uchiha Itachi.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Uchiha Itachi +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Uchiha Itachi +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12200,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Bomb Ichigo.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Bomb Ichigo +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Bomb Ichigo +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12201,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi ⟨0⟩nd Hokage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨1⟩ kostum ⟨2⟩nd Hokage +⟨3⟩ untuk berkesempatan mendapatkan ⟨4⟩ kostum ⟨5⟩nd Hokage +⟨6⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12202,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Orochimaru.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Orochimaru +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Orochimaru +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12203,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Zangetsu.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Zangetsu +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Zangetsu +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12204,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi ⟨0⟩rd Hokage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨1⟩ kostum ⟨2⟩rd Hokage +⟨3⟩ untuk berkesempatan mendapatkan ⟨4⟩ kostum ⟨5⟩rd Hokage +⟨6⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12205,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hollowfied Grimmjow.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Hollowfied Grimmjow +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Hollowfied Grimmjow +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12206,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Aizen.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Aizen +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Aizen +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12207,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi ⟨0⟩th Hokage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨1⟩ kostum ⟨2⟩th Hokage +⟨3⟩ untuk berkesempatan mendapatkan ⟨4⟩ kostum ⟨5⟩th Hokage +⟨6⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12208,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Jiraiya.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Jiraiya +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Jiraiya +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12209,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Sakura Haruno.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Sakura Haruno +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Sakura Haruno +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12210,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Arale.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Arale +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Arale +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12211,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Ulquiorra.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Ulquiorra +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Ulquiorra +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12212,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Yamanaka Ino.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Yamanaka Ino +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Yamanaka Ino +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12213,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Mitarashi Anko.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Mitarashi Anko +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Mitarashi Anko +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12214,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Temari.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Temari +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Temari +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12215,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Tenten.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Tenten +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Tenten +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12216,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Haku.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Haku +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Haku +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12217,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kusajishi Yachiru.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kusajishi Yachiru +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kusajishi Yachiru +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12218,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kotetsu Isane.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kotetsu Isane +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kotetsu Isane +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12219,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Konan.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Konan +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Konan +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12220,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Yadomaru Sasha.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Yadomaru Sasha +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Yadomaru Sasha +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12221,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi White Ulquiorra.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum White Ulquiorra +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum White Ulquiorra +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12222,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Arisawa Tatsuki.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Arisawa Tatsuki +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Arisawa Tatsuki +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12223,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Bomb Rukia.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Bomb Rukia +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Bomb Rukia +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12224,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Tsunade.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Tsunade +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Tsunade +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12225,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kuchiki Rukia.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kuchiki Rukia +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kuchiki Rukia +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12226,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Momochi Zabuza.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Momochi Zabuza +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Momochi Zabuza +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12227,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hollowfied Ulquiorra.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Hollowfied Ulquiorra +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Hollowfied Ulquiorra +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12228,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kuchiki Byakuya.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kuchiki Byakuya +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kuchiki Byakuya +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12229,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nelliel.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Nelliel +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Nelliel +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12230,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Little Meng.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Little Meng +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Little Meng +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12231,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Little Jun.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Little Jun +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Little Jun +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12232,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Christmas Ninja.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Christmas Ninja +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Christmas Ninja +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12233,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Love Aikawa.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Love Aikawa +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Love Aikawa +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12234,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Unohana Retsu.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Unohana Retsu +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Unohana Retsu +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 12235,
+   "text": "<font color='#5df9ff'>Gunakan untuk Transfer kostum lanjutan. Kostum tidak akan hilang jika kamu menggunakan talisman pelindung. Talisman pelindung akan hilang setelah digunakan</font>"
+  },
+  {
+   "n": 12236,
+   "text": "<font color='#5df9ff'>Weeds yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12237,
+   "text": "<font color='#5df9ff'>Eggplant yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12238,
+   "text": "<font color='#5df9ff'>Corn yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12239,
+   "text": "<font color='#5df9ff'>Pepper yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12240,
+   "text": "<font color='#5df9ff'>Watermelon yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12241,
+   "text": "<font color='#5df9ff'>Pineapple yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12242,
+   "text": "<font color='#5df9ff'>Nut Fruit yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12243,
+   "text": "<font color='#5df9ff'>Pumpkin yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12244,
+   "text": "<font color='#5df9ff'>Mushroom yang telah dirawat pada bengkel.</font>"
+  },
+  {
+   "n": 12245,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang kecil<br>[line]Tipe Makanan: Others<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12246,
+   "text": "<font color='#5df9ff'>Makanan Pet digunakan di kandang pet untuk memberi makan pet, <br>[line]Tipe makanan: Sayuran<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12247,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang besar.<br>[line]Tipe Makanan: Random<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12248,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang kecil<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12249,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang kecil<br>[line]Tipe Makanan: Meat<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12250,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang kecil<br>[line]Tipe Makanan: Dessert<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12251,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang kecil<br>[line]Tipe Makanan: Vegetable<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12252,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang besar.<br>[line]Tipe Makanan: Others<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12253,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang besar.<br>[line]Tipe Makanan: Meat<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12254,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang besar.<br>[line]Tipe Makanan: Grain<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12255,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang besar.<br>[line]Tipe Makanan: Dessert<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12256,
+   "text": "<font color='#5df9ff'>Makanan pet, digunakan dalam kandang pet untuk memenuhkan taraf kekenyangan pet dalam skala besar.<br>[line]Jenis Makanan: Random<br>Peningkatan kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12257,
+   "text": "<font color='#5df9ff'>Makanan Pet, digunakan di kandang pet untuk mengurangi  tingkat kelaparan yang besar.<br>[line]Tipe Makanan: Vegetable<br> Tingkat kekenyangan: ⟨0⟩</font>"
+  },
+  {
+   "n": 12258,
+   "text": "Weapon"
+  },
+  {
+   "n": 12259,
+   "text": "Talisman"
+  },
+  {
+   "n": 12260,
+   "text": "Enhanced Level       ({@0:}／{@1:})"
+  },
+  {
+   "n": 12261,
+   "text": "Khusus"
+  },
+  {
+   "n": 12262,
+   "text": "Semua Senjata"
+  },
+  {
+   "n": 12263,
+   "text": "Gem Box"
+  }
+ ]
+}

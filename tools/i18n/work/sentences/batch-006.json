@@ -1,0 +1,1514 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "Rumah": "Home",
+  "Pilih": "Choose",
+  "Peringatan": "Warning",
+  "Bukti": "Proof",
+  "Mengunjungi Penduduk": "Visit the Residents",
+  "Bukti Keberanian": "Proof of Courage",
+  "Masuk Rumah": "Enter the House",
+  "Ambil Hadiah": "Claim the Reward",
+  "Liga Nasional": "National League",
+  "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Suigetsu": "Suigetsu Hozuki",
+  "Hirako Shinji": "Shinji Hirako",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Aizen": "Sosuke Aizen",
+  "Sweet Potato Demon": "Potato",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 2698,
+   "text": "Meningkatkan strength, agility dan stamina（Besar）"
+  },
+  {
+   "n": 2699,
+   "text": "Meningkatkan Speed"
+  },
+  {
+   "n": 2700,
+   "text": "Meningkatkan Batu"
+  },
+  {
+   "n": 2701,
+   "text": "<font color='#ff0000'>Kamu berada pada waktu lelah!</font>"
+  },
+  {
+   "n": 2702,
+   "text": "Kamu telah online selama {@0:} Jam"
+  },
+  {
+   "n": 2703,
+   "text": "kamu telah online selama {@0:} jam. Silahkan istirahat."
+  },
+  {
+   "n": 2704,
+   "text": "Kamu telah bermain terlalu lama. Keutungan kamu di dalam game akan berkurang ⟨0⟩%. Untuk kesehatan kamu, silahkan istirahat "
+  },
+  {
+   "n": 2705,
+   "text": "kamu telah online terlalu lama. Keuntungan kamu akan menjadi ⟨0⟩ dan akan normal kembali setelah istirahat selama ⟨1⟩ jam."
+  },
+  {
+   "n": 2706,
+   "text": "Peringatan:<br>Kamu telah waktu tidak sehat.<font color='#ff0000'>EXP dan gold adalah nol dalam permainan.</font>. Status akan hilang setelah ⟨0⟩ jam istirahat offline. Untuk gameplay normal kamu, klik pada tombol di bawah ini untuk verifikasi identitas kamu."
+  },
+  {
+   "n": 2707,
+   "text": "Mengajarkan"
+  },
+  {
+   "n": 2708,
+   "text": "Menghukum"
+  },
+  {
+   "n": 2709,
+   "text": "Menggoda"
+  },
+  {
+   "n": 2710,
+   "text": "Tidak dapat duel tahap ini"
+  },
+  {
+   "n": 2711,
+   "text": "Tingkat pembelajaran tidak dapat dilakukan sebuah tim."
+  },
+  {
+   "n": 2712,
+   "text": "Perkembangan saat ini ( {@0:} )"
+  },
+  {
+   "n": 2713,
+   "text": "Gagal menantang<font color='#00b034'> {@0:} </font>."
+  },
+  {
+   "n": 2714,
+   "text": "Kamu dan<font color='#ff0000'> {@0:} </font> telah memperoleh kekalahan melawan elit dari skuad monster!"
+  },
+  {
+   "n": 2715,
+   "text": "Kamu dan<font color='#ff0000'> {@0:} </font> telah memperoleh kemenangan melawan elit dari skuad monster!"
+  },
+  {
+   "n": 2716,
+   "text": "<br>Level Monster : Kuat<br>Hadiah Utama : top kostum, engrave blade（Lv.⟨0⟩～⟨1⟩ instance）"
+  },
+  {
+   "n": 2717,
+   "text": "Pesan Stage"
+  },
+  {
+   "n": 2718,
+   "text": "Menggunakan energy: {@0:}"
+  },
+  {
+   "n": 2719,
+   "text": "Syarat level pemain: {@0:}"
+  },
+  {
+   "n": 2720,
+   "text": "<br>Level Monster: Biasa<br>Hadiah: Pakaian Biasa, EXP"
+  },
+  {
+   "n": 2721,
+   "text": "Kemajuan tingkat sekarang : {@0:} "
+  },
+  {
+   "n": 2722,
+   "text": "⟨0⟩. Ranking akan dihitung setiap minggunya. hanya menurut perhitungan statistik minggu ini . Refresh setiap hari minggu pukul ⟨1⟩:⟨2⟩ dan ranking akan direset.<br>⟨3⟩. setiap tingkatan di ranking pribadi. Peringkat ditentukan oleh tingkat penyelesaian tahap saat ini.<br>⟨4⟩. Jika kelompok memiliki anggota yang melebihi tingkat lanatai dengan ⟨5⟩ tingkat, hasil tidak dicatat dalam peringkat."
+  },
+  {
+   "n": 2723,
+   "text": "Kamu tidak di peringkat<font color='#ffffff'> ⟨0⟩ </font>besar, bekerja lebih keras minggu depan!"
+  },
+  {
+   "n": 2724,
+   "text": "Setiap pemain yang berada di peringkat ⟨0⟩ terbesar akan mendapatkan EXP dan Batu<br>Posisi ke ⟨1⟩: ⟨2⟩ EXP， ⟨3⟩ Stones；<br>Posisi ke ⟨4⟩: ⟨5⟩ EXP， ⟨6⟩ Stones；<br>Posisi ke ⟨7⟩: ⟨8⟩ EXP， ⟨9⟩ Stones；<br>Posisi ke ⟨10⟩: ⟨11⟩ EXP， ⟨12⟩ Stones；<br>Posisi ke ⟨13⟩: ⟨14⟩ EXP， ⟨15⟩ Stones；<br>Pemain yang berada di ⟨16⟩ besar akan mendapatkan imbalan!"
+  },
+  {
+   "n": 2725,
+   "text": "Setiap Minggu, ⟨0⟩ Pemain teratas pada rangking arena akan mendapatkan EXP dan Batu. <br>Peringkat pertama:   ⟨1⟩ EXP， ⟨2⟩ Batu <br>Peringkat kedua:   ⟨3⟩ EXP， ⟨4⟩ Batu <br>Peringkat Ketiga:   ⟨5⟩ EXP， ⟨6⟩ Batu; <br>Peringkat keempat:   ⟨7⟩ EXP， ⟨8⟩ Batu <br>Peringkat kelima:  ⟨9⟩ EXP， ⟨10⟩ Batu <br>Setiap ⟨11⟩ pemain teratas dapat menerima hadiah yang besar! "
+  },
+  {
+   "n": 2726,
+   "text": "Kamu tidak memiliki<font color='#801a1a'> {@0:} </font>, tidak dapat menantang level lebih dalam.<br><font color='#801a1a'> {@0:} </font>hanya dapat diperoleh di level yang sulit."
+  },
+  {
+   "n": 2727,
+   "text": "Syarat level murid: {@0:}"
+  },
+  {
+   "n": 2728,
+   "text": "Level Monster: Sangat Kuat<br>Hadiah utama: Valhalla Crystal, Engrave Blade, Shippuden Wishing Pot, S-rank Ninja Wishing Pot<br><font color='#801a1a'>Condition: ⟨0⟩ Abyss Pass of corresponding level</font>"
+  },
+  {
+   "n": 2729,
+   "text": "Tantangan mencoba habis untuk hari ini, tidak bisa menantang stadium!"
+  },
+  {
+   "n": 2730,
+   "text": "<font color='#00ffff'>Sejak waktu yang tidak diketahui oleh semua, pengkhianat ninja sudah melarikan diri berbondong-bondong ke kota Iblis. Para ninja korup dari kegelapan ini telah membentuk benteng mereka sendiri di Valhalla, dan bantuan kamu diperlukan dalam menghancurkan basis mereka.</font>"
+  },
+  {
+   "n": 2731,
+   "text": "<font color='#00ffff'>Satu-satunya jalan ke Valhalla, dengan jalan diblokade oleh pasukan iblis, sumber daya yang berasal dari iblis. Orang yang ingin masuk Valhalla harus memecahkan lapisan tersegel di sini.</font>"
+  },
+  {
+   "n": 2732,
+   "text": "<font color='#00ffff'>Sebuah lautan penghijauan yang pernah bersikap sebagai penyangga alami defensif Valhalla, sekarang berkembang dengan iblis. Tiga prajurit babi yang berani, rusa dan kupu-kupu juga telah dipenjarakan di sini oleh kekuasaan iblis , mereka menunggu penyelamatan kamu!</font>"
+  },
+  {
+   "n": 2733,
+   "text": "<font color='#00ffff'>Bagian akhir antara pasukan ninja dan tentara iblis. Para Bloodgrass bertebaran di seluruh tanah memperoleh warna dari tumpahan darah dari kedua belah pihak. Sebuah kelompok dari Younglings menolak iblis di sini.</font>"
+  },
+  {
+   "n": 2734,
+   "text": "<font color='#00ffff'>Desa tempat liburan dari royalti Deadwood kuno. Tempat anak-anak dari kelompok murid perempuan yang telah sejak terbelenggu ke desa ini agar berusaha mempertahankannya melawan iblis.</font>"
+  },
+  {
+   "n": 2735,
+   "text": "<font color='#00ffff'>Ketika malam turun, para prajurit yang gugur pernah dikuasai oleh iblis jahat di Valhalla. Satu-satunya cara bagi mereka untuk bertobat adalah dengan mengalahkan mereka!</font>"
+  },
+  {
+   "n": 2736,
+   "text": "<font color='#00ffff'>Mahir dalam ninjutsu angin, prajurit pemberani membela Temari dan Gaara mempertahankan desa yang begitu mereka cintai, tetapi pada akhirnya menyerah juga pada iblis. Mereka sekarang dipenjarakan di Aula Sandwind, dan kamu dapat menyelamatkan mereka dengan permainan sihir!</font>"
+  },
+  {
+   "n": 2737,
+   "text": "<font color='#00ffff'>Ini adalah hutan besar dengan kabut tebal, tidak ada yang pernah keluar dari sini. Dapatkah kamu mengubah sejarah dan melewati hutan ini?</font>"
+  },
+  {
+   "n": 2738,
+   "text": "<font color='#00ffff'>Tidak ada yang diharapkan untuk melihat Aizen disini. Dia bahkan menggunakan Kyouka Suigetsu untuk menguji kemampuan penyerang itu. Karena lawan yang masuk semuanya kuat, pertempuran keras akan karena datang.</font>"
+  },
+  {
+   "n": 2739,
+   "text": "Channelling"
+  },
+  {
+   "n": 2740,
+   "text": "Pass"
+  },
+  {
+   "n": 2741,
+   "text": "Tooth"
+  },
+  {
+   "n": 2742,
+   "text": "<font color='#00ffff'>Kupon hadiah : Dapat digunakan sebagai pengganti gold di beberapa tempat. Didapatkan dengan partisipasi dalam event resmi</font>"
+  },
+  {
+   "n": 2743,
+   "text": "<font color='#00ffff'>Klik untuk melihat Gift Box yang dapat kamu klaim</font>"
+  },
+  {
+   "n": 2744,
+   "text": "<font color='#00ffff'>Bisa mendapatkan gold untuk membeli barang yang kuat melalui situs resmi top-up!</font>"
+  },
+  {
+   "n": 2745,
+   "text": "<font color='#00ffff'>Gold : Mata uang eksklusif untuk membeli barang kualitas baik, didapatkan melalui top-up</font>"
+  },
+  {
+   "n": 2746,
+   "text": "<font color='#00ffff'>Klik disini untuk mendapatkan bantuan permainan!</font>"
+  },
+  {
+   "n": 2747,
+   "text": "<font color='#00ffff'>Kunjungi website resmi NinjaKita</font>"
+  },
+  {
+   "n": 2748,
+   "text": "Toggle Sound"
+  },
+  {
+   "n": 2749,
+   "text": "<font color='#00ffff'>Batu : Mata uang dasar game, mudah didapatkan dibanyak tempat</font>"
+  },
+  {
+   "n": 2750,
+   "text": "<font color='#00ffff'>Kunjungi forum resmi NinjaKita</font>"
+  },
+  {
+   "n": 2751,
+   "text": "<font color='#00ffff'>Mengurangi {@0:} poin Critical Strike lawan dalam pertarungan</font>"
+  },
+  {
+   "n": 2752,
+   "text": "Latihan"
+  },
+  {
+   "n": 2753,
+   "text": "Memerlukan biaya batu untuk pelatihan ini."
+  },
+  {
+   "n": 2754,
+   "text": "EXP akan diperoleh saat latihan selesai!<br>Tidak dapat kemana-mana saat latihan.<br>Latihan tidak berpengaruh dengan status offline.<br>Pilih<font color='#00b035'> enhanced training </font>untuk mendapatkan double EXP!"
+  },
+  {
+   "n": 2755,
+   "text": "EXP yang diperoleh untuk menyelesaikan latihan ini"
+  },
+  {
+   "n": 2756,
+   "text": "Batal latihan"
+  },
+  {
+   "n": 2757,
+   "text": "Mulai latihan normal"
+  },
+  {
+   "n": 2758,
+   "text": "Konfirmasi mulai {@0:time} latihan normal?"
+  },
+  {
+   "n": 2759,
+   "text": "Mulai latihan lanjutan"
+  },
+  {
+   "n": 2760,
+   "text": "Konfirmasi pembayaran {@0:gold} gold untuk memulai {@1:time} latihan lanjutan?"
+  },
+  {
+   "n": 2761,
+   "text": "Selesai latihan"
+  },
+  {
+   "n": 2762,
+   "text": "Pilih waktu latihan"
+  },
+  {
+   "n": 2763,
+   "text": "Tipe item dan tingkat target item tidak sesuai. Transfer gagal."
+  },
+  {
+   "n": 2764,
+   "text": "Kamu yakin untuk memulai transfer otomatis? Ini akan menjadi item lain dengan tipe yang sama. Kamu dapat klik tombol Stop untuk menghentikan transfer."
+  },
+  {
+   "n": 2765,
+   "text": "Silahkan tarik kostum +⟨0⟩ atau pet +⟨1⟩ yang ingin di transfer!"
+  },
+  {
+   "n": 2766,
+   "text": "Silahkan pilih target yang ingin di transfer."
+  },
+  {
+   "n": 2767,
+   "text": "Target item dan item aslinya sama. Transfer gagal!"
+  },
+  {
+   "n": 2768,
+   "text": "⟨0⟩. Tarik <font color='#00b034'>kostum+⟨1⟩</font> atau <font color='#00b034'>pet+⟨2⟩</font> dari tas ke kotak.\n⟨3⟩. Klik Transfer untuk transfer kostum(pet) <font color='#00b034'>secara random</font>\n    dan menerima kostum(pet) dengan nilai sintesis yang sama.\n⟨4⟩. Biaya batu bervariasi tergantung barang.\n⟨5⟩. Batu akan dipotong langsung dari inventori kamu.\n⟨6⟩. Jika jumlah batu <font color='#00b034'>dalam inventori</font> ⟨7⟩, semua batu akan diambil.\n⟨8⟩. Setelah transfer, kostum dan pet akan menjadi <font color='#00b034'>bound</font>."
+  },
+  {
+   "n": 2769,
+   "text": "⟨0⟩. Tarik<font color='#00b034'>kostum+⟨1⟩</font> atau <font color='#00b034'>pet+⟨2⟩</font> dari tas kedalam kotak.\n⟨3⟩. Klik Transfer maka sistem akan dapat<font color='#00b034'> auto-transfer </font>kostum.\n    Transfer akan berhenti ketika salah satu dari <font color='#00b034'>kondisi berikut dipenuhi</font>:\n    Transfer item berhasil;\n    Menggunakan batu;\n    Tombol \"Berhenti\" di klik.\n⟨4⟩. Biaya batu bervariasi berdasarkan item.\n⟨5⟩. Batu akan diambil langsung dari inventory kamu.\n⟨6⟩. Jika batu dalam<font color='#00b034'>Inventory Setup</font> is ⟨7⟩, semua batu akan diambil.\n⟨8⟩. Setelah transfer, kostum and pet akan menjadi <font color='#00b034'>bound</font>."
+  },
+  {
+   "n": 2770,
+   "text": "Tentang Penukaran:\n⟨0⟩. Pindahkan Dragon Soul dari tas kedalam box\n⟨1⟩. Dragon Soul kamu akan di tukarkan secara otomatis yang ditampilkan di layar \n⟨2⟩. Klik Transfer dan tingkatkan level dari Dragon Soul kamu. Attribut awal dari equipment akan disesuaikan.\n⟨3⟩. Bukan Dragon Soul equipment tidak dapat di transfer\n⟨4⟩. <font color='#ff0000'>Setelah Dragon Soul equipment di upgrade,  Semua atribut tambahan akan dihapus. (Enhance,  Engrave,  Embed,  Enchantment dan Engrave,  dll.) </font>"
+  },
+  {
+   "n": 2771,
+   "text": "Kamu yakin untuk memulai transfer manual? Ini akan menjadi item lain dengan tipe yang sama."
+  },
+  {
+   "n": 2772,
+   "text": "Tidak cukup batu. Silahkan klik Set Inventory untuk mengisi batu!"
+  },
+  {
+   "n": 2773,
+   "text": "Sweet Potato Demon Fledgling"
+  },
+  {
+   "n": 2774,
+   "text": "Vulture Fledgling +⟨0⟩"
+  },
+  {
+   "n": 2775,
+   "text": "Vulture"
+  },
+  {
+   "n": 2776,
+   "text": "Menggunakan <font color='#ff0000'>percobaan bebas</font> untuk refine akan mengakibatkan peralatan menjadi <font color='#ff0000'>terikat</font>.<br>Pilih [Batal] Untuk menggunakan gold untuk refine."
+  },
+  {
+   "n": 2777,
+   "text": "<font color='#00ffff'>{@0:buff name}<br>{@1:buff desc}<br>Waktu tersisa {@2:}</font>"
+  },
+  {
+   "n": 2778,
+   "text": "Barang unappraised tidak dapat disintesis."
+  },
+  {
+   "n": 2779,
+   "text": "Terbuka"
+  },
+  {
+   "n": 2780,
+   "text": "Level {@0:} kebun sayur dapat di panen"
+  },
+  {
+   "n": 2781,
+   "text": "Waktu permainan tidak sehat: {@0:}"
+  },
+  {
+   "n": 2782,
+   "text": "Peringatan:<br>Account kamu telah terdaftar di  sistem anti-addiction. Saat ini di waktu permainan tidak sehat, <font color='#ff0000'>EXP dan gold keuntungan akan dibagi dua. </ font> Status akan hilang setelah ⟨0⟩ jam istirahat offline. Untuk gameplay normal kamu, klik pada tombol di bawah ini untuk verifikasi identitas kamu."
+  },
+  {
+   "n": 2783,
+   "text": "Unblocked"
+  },
+  {
+   "n": 2784,
+   "text": "Konfirmasi menjual {@0:}?"
+  },
+  {
+   "n": 2785,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> gold untuk Memulihkan movement?"
+  },
+  {
+   "n": 2786,
+   "text": "Kartu VIP"
+  },
+  {
+   "n": 2787,
+   "text": "Nomor"
+  },
+  {
+   "n": 2788,
+   "text": "Cek"
+  },
+  {
+   "n": 2789,
+   "text": "Kamu dapat belajar meningkatkan skill kamu sendiri!"
+  },
+  {
+   "n": 2790,
+   "text": "Kartu VIP ⟨0⟩ hari"
+  },
+  {
+   "n": 2791,
+   "text": "kartu VIP ⟨0⟩ hari"
+  },
+  {
+   "n": 2792,
+   "text": "<font size='16'><b>Waktu Pemain VIP: <font color='#990000'>{@0:}</font></b></font><br><br><font size='12'>Khusus Pemain VIP: <br>⟨0⟩.  Bunuh monster dapat meningkatkan EXP<font color='#FF3333'> ⟨1⟩% </font>(Tidak termasuk Las Noches dan Misi EXP)<br>⟨2⟩. Jika membeli beberapa barang, barang pemulihan HP dan carrier bag maka kapasitas chakra dan HP akan bertambah <font color='#FF3333'> ⟨3⟩% </font>discount<br>⟨4⟩. Pemulihan setiap hari akan meningkat<font color='#FF3333'> ⟨5⟩ </font> point.<br>⟨6⟩. Jumlah tantangan di arena akan meningkat<font color='#FF3333'> ⟨7⟩ </font><br>⟨8⟩. Jumlah menjelajah diluar akan meningkat<font color='#FF3333'> ⟨9⟩ </font>"
+  },
+  {
+   "n": 2793,
+   "text": "Mengunjungi"
+  },
+  {
+   "n": 2794,
+   "text": "Perfect"
+  },
+  {
+   "n": 2795,
+   "text": "Aku ingin merekomendasikan"
+  },
+  {
+   "n": 2796,
+   "text": "Lihat Info"
+  },
+  {
+   "n": 2797,
+   "text": "<font color='#00ffff'>Lihat antrian misi</font>"
+  },
+  {
+   "n": 2798,
+   "text": "<font color='#00ffff'>Lihat penyelesaian misi</font>"
+  },
+  {
+   "n": 2799,
+   "text": "<font color='#00ffff'>Max attack:</font><font color='#00ffff'>{@0:}</font>"
+  },
+  {
+   "n": 2800,
+   "text": "<font color='#00ffff'>Min attack:</font><font color='#00ffff'>{@0:}</font>"
+  },
+  {
+   "n": 2801,
+   "text": "Tailed Beast"
+  },
+  {
+   "n": 2802,
+   "text": "Tailed Beast Heart"
+  },
+  {
+   "n": 2803,
+   "text": "Private Chat"
+  },
+  {
+   "n": 2804,
+   "text": "Abu-Abu"
+  },
+  {
+   "n": 2805,
+   "text": "Syarat penyelesaian : Kalahkan<font color='#ff6565'> {@0:} </font>"
+  },
+  {
+   "n": 2806,
+   "text": "Total kemenangan berturut-turut"
+  },
+  {
+   "n": 2807,
+   "text": "Rata-rata kemenangan  "
+  },
+  {
+   "n": 2808,
+   "text": "bekerja  "
+  },
+  {
+   "n": 2809,
+   "text": "Batu akan diperoleh setelah pekerjaan selesai!<br>Tidak dapat kemana-mana saat bekerja.<br>Bekerja tidak berpengaruh dengan status offline.<br>Pilih<font color='#00b035'> pekerjaan lanjutan </font> untuk mendapatkan double EXP!"
+  },
+  {
+   "n": 2810,
+   "text": "EXP yang diperoleh untuk menyelesaikan pekerjaan ini"
+  },
+  {
+   "n": 2811,
+   "text": "Batal bekerja"
+  },
+  {
+   "n": 2812,
+   "text": "Akan pergi setelah{@0:}"
+  },
+  {
+   "n": 2813,
+   "text": "Kamu dapat menjual hasil panen di bengkel.<br>Semakin tinggi level bengkel, semakin tinggi keuntungan tambahan dari tanaman yang dijual."
+  },
+  {
+   "n": 2814,
+   "text": "Mulai pekerjaan normal"
+  },
+  {
+   "n": 2815,
+   "text": "Konfirmasi mulai {@0:time} pekerjaan normal?"
+  },
+  {
+   "n": 2816,
+   "text": "Mulai pekerjaan lanjutan"
+  },
+  {
+   "n": 2817,
+   "text": "Konfirmasi pembayaran {@0:gold} gold untuk memulai {@1:time} pekerjaan lanjutan?"
+  },
+  {
+   "n": 2818,
+   "text": "Selesai bekerja"
+  },
+  {
+   "n": 2819,
+   "text": "Pilih durasi pekerjaan"
+  },
+  {
+   "n": 2820,
+   "text": "[Terdaftar]"
+  },
+  {
+   "n": 2821,
+   "text": "[Dalam Proses]"
+  },
+  {
+   "n": 2822,
+   "text": "Tidak ada trophy untuk diklaim!"
+  },
+  {
+   "n": 2823,
+   "text": "Liga bangsa ini belum dimulai, silakan mempertajam skill kamu dalam persiapan untuk pertempuran ini!"
+  },
+  {
+   "n": 2824,
+   "text": "Peraturan Liga Nasional :<br>Ranking nasional harus diatas ⟨0⟩ untuk dapat bergabung di C-rank Liga<br>Ranking Nasional harus diatas ⟨1⟩ untuk bergabung di B-rank Liga<br>Ranking nasional harus diatas ⟨2⟩ untuk dapat bergabung pada A-rank Liga<br>Top ⟨3⟩ Ranking nasional dapat bergabung dalam S-rank liga dunia.<br><br>⟨4⟩. Jika kamu ingin menukar peralatan dan skill pada liga, sebelum pukul <font color='#FF6565'>⟨5⟩:⟨6⟩ pagi</font> Harap masuk ke <font color='#FF6565'>arena</font>. Sistem akan mengumpulkan informasi tentang karakter kamu dan diupdate pada liga.<br><br>⟨7⟩. Pemenang Liga mingguan akan mendapatkan level-kehormatan <font color='#FF6565'>Piala Liga</font>!<br><br>⟨8⟩. Peserta akan secara otomatis masuk dalam grup. Berkompetisi dengan pemain lain setiap hari dalam pertarungan round-robin.<font color='#FF6565'>Medal kamu akan meningkat jika kamu menang</font>!<br><br>⟨9⟩. Pada akhir pertarungan di dalam grup setiap harinya,  para ninja dengan hasil teratas masuk pada liga yang sulit dan berkompetisi dengan lawan yang lebih kuat!"
+  },
+  {
+   "n": 2825,
+   "text": "Konfirmasi klaim trophy?"
+  },
+  {
+   "n": 2826,
+   "text": "Tidak ada medal untuk di klaim saat ini!"
+  },
+  {
+   "n": 2827,
+   "text": "Menyetujui klaim akumulasi medali?"
+  },
+  {
+   "n": 2828,
+   "text": "Peringkat arena kamu tidak memenuhi syarat untuk berpartisipasi dalam pertarungan liga, silahkan bekerja lebih keras lagi!"
+  },
+  {
+   "n": 2829,
+   "text": "Selamat datang di Liga Nasional NinjaKita!<br>Kamu tidak dapat berpartisipasi dalam liga tertutup!<br><font color='#ff0000'>Setiap Senin pukul ⟨0⟩:⟨1⟩, </font>Menurut<font color='#ff0000'>Rangking Arena,</font>sistem akan menentukan apakah kamu dapat berpartisipasi dalam liga.<br>Peringkat Arena harus mencapai peringkat<font color='#ff0000'> ⟨2⟩ </font>untuk berpartisipasi dalam liga Rank-B! Tingkatkan kemampuan dan peringkat arena kamu!"
+  },
+  {
+   "n": 2830,
+   "text": "Selamat datang di Liga Nasional NinjaKita!<br>Kamu tidak dapat berpartisipasi dalam liga tertutup!<br><font color='#ff0000'>Setiap Senin pukul ⟨0⟩:⟨1⟩, </font>Menurut<font color='#ff0000'>Rangking Arena,</font>sistem akan menentukan apakah kamu dapat berpartisipasi dalam liga.<br>Peringkat Arena harus mencapai peringkat<font color='#ff0000'> ⟨2⟩</font>untuk berpartisipasi dalam liga Rank-C! Tingkatkan kemampuan dan peringkat arena kamu!"
+  },
+  {
+   "n": 2831,
+   "text": "<a href= 'event:player|{@0:}'><u>{@0:}</u></a>"
+  },
+  {
+   "n": 2832,
+   "text": "Tulis Surat"
+  },
+  {
+   "n": 2833,
+   "text": "Watermelon"
+  },
+  {
+   "n": 2834,
+   "text": "Refining Stone"
+  },
+  {
+   "n": 2835,
+   "text": "Bloodbat Fledgling"
+  },
+  {
+   "n": 2836,
+   "text": "Rare Enchantment Stone"
+  },
+  {
+   "n": 2837,
+   "text": "Sunflower Fledgling +⟨0⟩"
+  },
+  {
+   "n": 2838,
+   "text": "Sunflower"
+  },
+  {
+   "n": 2839,
+   "text": "Starlight Stone"
+  },
+  {
+   "n": 2840,
+   "text": "Lucky Gem"
+  },
+  {
+   "n": 2841,
+   "text": "Baby Snowman +⟨0⟩"
+  },
+  {
+   "n": 2842,
+   "text": "Snowman"
+  },
+  {
+   "n": 2843,
+   "text": "Demon Fox+⟨0⟩"
+  },
+  {
+   "n": 2844,
+   "text": "Beast"
+  },
+  {
+   "n": 2845,
+   "text": "Topaz"
+  },
+  {
+   "n": 2846,
+   "text": "Ya"
+  },
+  {
+   "n": 2847,
+   "text": "Valhalla"
+  },
+  {
+   "n": 2848,
+   "text": "Valhalla Crystal"
+  },
+  {
+   "n": 2849,
+   "text": "Corn Demon Fledgling"
+  },
+  {
+   "n": 2850,
+   "text": "Corn Demon Fledgling +⟨0⟩"
+  },
+  {
+   "n": 2851,
+   "text": "Corn Demon"
+  },
+  {
+   "n": 2852,
+   "text": "Plant"
+  },
+  {
+   "n": 2853,
+   "text": "Plant Series"
+  },
+  {
+   "n": 2854,
+   "text": "Diamond Bag"
+  },
+  {
+   "n": 2855,
+   "text": "Diamond"
+  },
+  {
+   "n": 2856,
+   "text": "Tambahkan sebagai musuh"
+  },
+  {
+   "n": 2857,
+   "text": "<font color='#00ffff'>Tambahkan pemain sebagai teman atau musuh</font>"
+  },
+  {
+   "n": 2858,
+   "text": "Level {@0:}"
+  },
+  {
+   "n": 2859,
+   "text": "Tidak dapat membuat slot pada peralatan"
+  },
+  {
+   "n": 2860,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> Batu untuk Memulihkan {@1:} Pergerakan?"
+  },
+  {
+   "n": 2861,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> Batu untuk melengkapi Pemulihan HP dan chakra?"
+  },
+  {
+   "n": 2862,
+   "text": "Gunakan {@0:} untuk membayar (Current balance: {@1:})"
+  },
+  {
+   "n": 2863,
+   "text": "<font color='#6a6e70'>Menggunakan {@0:} untuk membayar（Sisa:{@1:}）</font>"
+  },
+  {
+   "n": 2864,
+   "text": "<font color='#00ffff'>Masuk Rumah</font>"
+  },
+  {
+   "n": 2865,
+   "text": "Note: masukan gold error, mohon coba lagi!"
+  },
+  {
+   "n": 2866,
+   "text": "Nama Pet tidak dapat memiliki ruang"
+  },
+  {
+   "n": 2867,
+   "text": "Memasukkan nama yang mengandung karakter ilegal!"
+  },
+  {
+   "n": 2868,
+   "text": "<a href= 'event:pageDown'><b>Next</b></a></font>"
+  },
+  {
+   "n": 2869,
+   "text": "<a href= 'event:pageUp'><b>Prev</b></a></font>"
+  },
+  {
+   "n": 2870,
+   "text": "Batu kurang!"
+  },
+  {
+   "n": 2871,
+   "text": "Pekerjaan dihentikan"
+  },
+  {
+   "n": 2872,
+   "text": "Setiap kemenangan pertandingan mendapatkan ⟨0⟩ Medal"
+  },
+  {
+   "n": 2873,
+   "text": "Dapat menukar di Tingkat ⟨0⟩-⟨1⟩, mendapatkan ⟨2⟩ EXP setelah ditukarkan"
+  },
+  {
+   "n": 2874,
+   "text": "Tukar dengan EXP "
+  },
+  {
+   "n": 2875,
+   "text": "Hadiah Arena barang ⟨0⟩"
+  },
+  {
+   "n": 2876,
+   "text": "Guci Pemula"
+  },
+  {
+   "n": 2877,
+   "text": "Guci Kostum"
+  },
+  {
+   "n": 2878,
+   "text": "Guci Akademi"
+  },
+  {
+   "n": 2879,
+   "text": "Guci Genin"
+  },
+  {
+   "n": 2880,
+   "text": "Guci Chunin"
+  },
+  {
+   "n": 2881,
+   "text": "Guci Jounin"
+  },
+  {
+   "n": 2882,
+   "text": "Guci ANBU"
+  },
+  {
+   "n": 2883,
+   "text": "Guci Sannin"
+  },
+  {
+   "n": 2884,
+   "text": "Guci Kage"
+  },
+  {
+   "n": 2885,
+   "text": "Guci Misteri"
+  },
+  {
+   "n": 2886,
+   "text": "<br><font color='#ff0000'>Tidak ada persyaratan peringkat</font>"
+  },
+  {
+   "n": 2887,
+   "text": "Tidak ada persyaratan peringkat<br><font color='#ff0000'>Guci berwarna ini bersifat unbound</font>"
+  },
+  {
+   "n": 2888,
+   "text": "Rank harus lebih tinggi dari Peralihan Akademi untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2889,
+   "text": "Rank harus lebih tinggi dari Genin I untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2890,
+   "text": "Rank harus lebih tinggi dari Chunin I untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2891,
+   "text": "Rank harus lebih tinggi dari Kage I untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2892,
+   "text": "Rank harus lebih tinggi dari Jounin untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2893,
+   "text": "Rank harus lebih tinggi dari ANBU untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2894,
+   "text": "Rank harus lebih tinggi dari Sannin untuk menggunakan<br><font color='#ff0000'>Hadiah dari guci ini bersifat bound</font>"
+  },
+  {
+   "n": 2895,
+   "text": "<font color='#ff0000'>Gratis sekarang {@0: } kali</font><br>Tidak ada persyaratan peringkat<br><font color='#ff0000'>Guci berwarna ini bersifat unbound<br>(menerima talisman gratis)</font>"
+  },
+  {
+   "n": 2896,
+   "text": "Jumlah"
+  },
+  {
+   "n": 2897,
+   "text": "<font color='#ff0000'> {@0:} </font>Berhasil menyelesaikan misi S-rank <font color='#ff6565'> {@1:} </font>Mendapatkan hadiah, Pelindung mata."
+  },
+  {
+   "n": 2898,
+   "text": "resep ini telah didapat!"
+  },
+  {
+   "n": 2899,
+   "text": "Mulai Sintesis"
+  },
+  {
+   "n": 2900,
+   "text": "⟨0⟩. Beberapa item langka membutuhkan beberapa metode spesifik. Resep dapat ditemukan di dalam permainan.<br>⟨1⟩. Jika kamu tidak mengikuti metode penempatan item, sintesi akan menghasilkan barang secara acak.<br>⟨2⟩. Pro dan kontra dari hasil secara acak yang disintesiskan terkait dengan Value sintesis rata-rata dari barang-barang yang disintesiskan."
+  },
+  {
+   "n": 2901,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}mendapatkan<font color='#00aeff'> <a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a></font>Hadiah bonus membuka kartu di arena. Selamat!"
+  },
+  {
+   "n": 2902,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}Berhasil menyelesaikan level<font color='#ff0000'> S </font>pada Misi untuk<font color='#ff0000'> Mengumpulkan barang asing </font> dan mendapatkan<font color='#00aeff'> <a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a></font>. Ini sangat membanggakan!"
+  },
+  {
+   "n": 2903,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}Berhasil menyelesaikan level<font color='#ff0000'> S </font>pada Misi untuk<font color='#ff0000'> Mengunjungi Penduduk </font>dan mendapatkan<font color='#00aeff'> <a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a></font>. Ini sangat membanggakan!!"
+  },
+  {
+   "n": 2904,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}Berhasil menyelesaikan level<font color='#ff0000'> S </font>pada Misi untuk<font color='#ff0000'> Bukti Keberanian </font>dan mendapatkan<font color='#00aeff'> <a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a></font>. Ini sangat membanggakan!!"
+  },
+  {
+   "n": 2905,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}Berhasil menyelesaikan level<font color='#ff0000'> S </font>pada Misi untuk<font color='#ff0000'> Namecard Kumpulkanion </font>dan mendapatkan<font color='#00aeff'> <a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a></font>. Ini sangat membanggakan!!"
+  },
+  {
+   "n": 2906,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:} </u></a></font>{@1:emote}mendapatkan<a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a>selama Pertarungan otomatis di aula, sanagat beruntung!"
+  },
+  {
+   "n": 2907,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}Menantang{@2:stage name}dan memenangkan golden ⟨0⟩ attribute<font color='#00aeff'> <a href= 'event:ItemLink|{@3:config}*{@4:Uid}*{@5:type}'><u>{@6:item name}</u></a></font>.Selamat!</font>"
+  },
+  {
+   "n": 2908,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:} </u></a> </font>{@1:emote}Melakukan tantangan pada slot machine monster elit pada{@2:map name} dan memenangkan golden ⟨0⟩ attributes<font color='#00aeff'> <a href= 'event:ItemLink|{@3:config}*{@4:Uid}*{@5:type}'><u> {@6:item name} </u></a></font>. selamat!</font>"
+  },
+  {
+   "n": 2909,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:} </u></a></font>{@1:emote}gunakan slot machine dan dapatkan<font color='#00aeff'> Advanced Kostum gift box </font>, mendapatkan<a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a>. sangat beruntung!"
+  },
+  {
+   "n": 2910,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>{@1:emote}Menantang{@2:map name}dan mengalahkan BOSS{@3:monster name}, Mendapatkan golden ⟨0⟩ attribute<font color='#00aeff'> <a href= 'event:ItemLink|{@4:config}*{@5:Uid}*{@6:type}'><u>{@7:item name}</u></a></font>. Selamat!</font>"
+  },
+  {
+   "n": 2911,
+   "text": "Pemain<font color='#ff0000'> {@0:} </font>{@1:expression}Telah berhasil mensintesiskan<font color='#00aeff'> <a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a></font>!Sangat Beruntung sekali dia!"
+  },
+  {
+   "n": 2912,
+   "text": "Check Formula"
+  },
+  {
+   "n": 2913,
+   "text": "Hapus papan pesan?"
+  },
+  {
+   "n": 2914,
+   "text": "Hapus semua pesan dibawah kategori ini?"
+  },
+  {
+   "n": 2915,
+   "text": "Hapus semua pesan?"
+  },
+  {
+   "n": 2916,
+   "text": "<font color='#6a6e70'>Setiap {@0:} menit akan membutuhkan biaya {@1:} poin tanaman jika murid membantu konstruksi. Kecepatan akan meningkat ⟨0⟩%. </font>"
+  },
+  {
+   "n": 2917,
+   "text": "<font color='#6a6e70'>Membayar {@0:} tanaman untuk menetas telur?</font>"
+  },
+  {
+   "n": 2918,
+   "text": "<font color='#6a6e70'>Membayar {@0:} tanaman untuk merebut telur?</font>"
+  },
+  {
+   "n": 2919,
+   "text": "<font color='#6a6e70'>Membayar {@0:} tanaman untuk melempar telur yang busuk kedalam ruang penetasan?</font>"
+  },
+  {
+   "n": 2920,
+   "text": "Telah berhasil membuka tas baru, menghabiskan {@1:value} {@0:type}."
+  },
+  {
+   "n": 2921,
+   "text": "Dana tidak mencukupi, mengaktifkan tas membutuhkan {@1:value} {@0:type}!"
+  },
+  {
+   "n": 2922,
+   "text": "Mulai Inscription"
+  },
+  {
+   "n": 2923,
+   "text": "⟨0⟩. Weapon dan armor dapat ditulis.inscription level  ⟨1⟩ yang tertinggi. \n⟨2⟩. Inscription dapat meningkatkan atribut dasar:  minimum dan maximum attack weapon , armor defence.\n⟨3⟩. Inscription membutuhkan Inscription Talisman dan Batu.  Maximum dari ⟨4⟩ Inscription Talisman dapat digunakan. (Jika peluang yang dimiliki lebih dari ⟨5⟩%, sistem akan mengurangi jumlah secara otomatis)\n⟨6⟩. Meningkatkan level setelah inscription berhasil. Klik penjelasan inscription mengecek level jika inscription gagal."
+  },
+  {
+   "n": 2924,
+   "text": "Level Saat ini:  {@0: }"
+  },
+  {
+   "n": 2925,
+   "text": "Defence + {@0: }"
+  },
+  {
+   "n": 2926,
+   "text": "Defence   +   {@0: }"
+  },
+  {
+   "n": 2927,
+   "text": "⟨0⟩. Pindahkan weapon atau armor dari tas kamu kedalam box.\n⟨1⟩. Pilih dari tipe Inscription Talisman. Kamu dapat menggunakan ⟨2⟩ Inscription Talisman. Advanced Inscription Talisman memiliki tingkat kesuksesan lebih tinggi. Low Level Inscription Talisman dapat kamu peroleh dari latihan, hadiah misi dan tantangan slot machine.\n⟨3⟩. Inscription tertinggi level ⟨4⟩. akan meningkatkan atribut dasar dari equipment dan weapon. Meningkatkan Min dan Max pada weapon, dan pada Armor meningkatkan defence.\n⟨5⟩. Inscription level kan bertambah ⟨6⟩ jika berhasil.\n⟨7⟩. <font color='#ff0000'>Jika inscription ini gagal maka level inscription tidak akan turun jika di bawah level ⟨8⟩ (termasuk level ⟨9⟩). Akan menjadi level ⟨10⟩ jika gagal di level ⟨11⟩,⟨12⟩ dan ⟨13⟩. Dan akan turun menjadi level ⟨14⟩ jika gagal di level ⟨15⟩,⟨16⟩,⟨17⟩ dan ⟨18⟩. </font>"
+  },
+  {
+   "n": 2928,
+   "text": "Tentang Inscription"
+  },
+  {
+   "n": 2929,
+   "text": "Opration tidak normal, silahkan ulangi lagi. "
+  },
+  {
+   "n": 2930,
+   "text": "Inscription level + {@0: }"
+  },
+  {
+   "n": 2931,
+   "text": "Max Attack + {@0: }"
+  },
+  {
+   "n": 2932,
+   "text": "Min Attack  +   {@0: }"
+  },
+  {
+   "n": 2933,
+   "text": "<font color='#ff0000'> mencapai level tertinggi! </font>"
+  },
+  {
+   "n": 2934,
+   "text": "Min Attack + {@0: }"
+  },
+  {
+   "n": 2935,
+   "text": "Min Attack   +   {@0: }"
+  },
+  {
+   "n": 2936,
+   "text": "Silahkan truh equipment kamu."
+  },
+  {
+   "n": 2937,
+   "text": "<font color='#ffffff'>{@0: }</font>"
+  },
+  {
+   "n": 2938,
+   "text": "Equipment kamu telah mencapai inscription level tertinggi. Tidak dapat menuliskan lebih lanjut. "
+  },
+  {
+   "n": 2939,
+   "text": "Inscription Talisman tidak mencukupi! "
+  },
+  {
+   "n": 2940,
+   "text": "Item ini tidak dapat dituliskan! "
+  },
+  {
+   "n": 2941,
+   "text": "Keberhasilan rata-rata: <font color='#ff0000'>{@0: }%</font>"
+  },
+  {
+   "n": 2942,
+   "text": "Inscription Berhasil! "
+  },
+  {
+   "n": 2943,
+   "text": "<font color='#ff0000'>Inscription gagal! </font>"
+  },
+  {
+   "n": 2944,
+   "text": "Menggunakan Batu: "
+  },
+  {
+   "n": 2945,
+   "text": "Setelah berhasil: level {@0: }"
+  },
+  {
+   "n": 2946,
+   "text": "Jumlah pemakaian: "
+  },
+  {
+   "n": 2947,
+   "text": "CounterBombMulEquip%"
+  },
+  {
+   "n": 2948,
+   "text": "Mempersingkat waktu debuff"
+  },
+  {
+   "n": 2949,
+   "text": "CounterBombMulEquip%Ex"
+  },
+  {
+   "n": 2950,
+   "text": "CounterMulEquip%"
+  },
+  {
+   "n": 2951,
+   "text": "Counterattack"
+  },
+  {
+   "n": 2952,
+   "text": "CounterMulEquip%Ex"
+  },
+  {
+   "n": 2953,
+   "text": "<font color='#0090ff'>{@0: }</font>Penghormatan nasional minggu ini: {@1: }"
+  },
+  {
+   "n": 2954,
+   "text": "Keormatan Nasional：{@0:}"
+  },
+  {
+   "n": 2955,
+   "text": "Kostum meningkatkan: <font color='#ff0000'>{@0:}</font> ，<br>{@0:} akan mempengaruhi{@1:} dan {@2:} "
+  },
+  {
+   "n": 2956,
+   "text": "Critical Strike Damage"
+  },
+  {
+   "n": 2957,
+   "text": "Kritikal Strike"
+  },
+  {
+   "n": 2958,
+   "text": "CritMulMulEquip% "
+  },
+  {
+   "n": 2959,
+   "text": "Critical Strike Enhance"
+  },
+  {
+   "n": 2960,
+   "text": "CritMulMulEquip%Ex "
+  },
+  {
+   "n": 2961,
+   "text": "Tidak ada pesan yang ingin di hapus"
+  },
+  {
+   "n": 2962,
+   "text": "Ini tidak baik untuk tetap menganggur. Ayo kita lihat ketika kamu bebas, kamu mungkin menemukan beberapa pekerjaan yang menarik!"
+  },
+  {
+   "n": 2963,
+   "text": "<font color='#0000a0'>Ambil Hadiah Misi</font>"
+  },
+  {
+   "n": 2964,
+   "text": "Level kamu tidak cukup untuk mengambil misi!"
+  },
+  {
+   "n": 2965,
+   "text": "Selamat，Ranking kamu kemarin {@0:}. Kamu ingin mengambil hadiah?"
+  },
+  {
+   "n": 2966,
+   "text": "Mencapai<font color='#ff0000'> ⟨0⟩ </font>liveliness dapat mengklaim<font color='#ff0000'> ⟨1⟩ </font>gift coupon <br>Mencapai<font color='#ff0000'> ⟨2⟩ </font>liveliness dapat mengklaim<font color='#ff0000'> ⟨3⟩ </font>gift coupon <br>Mencapai<font color='#ff0000'> ⟨4⟩ </font>liveliness dapat mengklaim<font color='#ff0000'> ⟨5⟩ </font>gift coupon <br>Mencapai<font color='#ff0000'> ⟨6⟩ </font>liveliness dapat mengklaim<font color='#ff0000'> ⟨7⟩ </font>gift coupons <br><br>Jika <font color='#ff0000'> ⟨8⟩ </font>hari dalam seminggu kamu dapat mencapai ⟨9⟩ liveliness, kamu dapat mengklaim<font color='#ff0000'> ⟨10⟩ </font>gift  coupons <br>jika <font color='#ff0000'> ⟨11⟩ </font>hari dalam seminggu kamu dapat mencapai ⟨12⟩ liveliness, kamu dapat mengklaim<font color='#ff0000'> ⟨13⟩ </font>gift  coupons <br>jika <font color='#ff0000'> ⟨14⟩ </font>hari dalam seminggu kamu dapat mencapai ⟨15⟩ liveliness, kamu dapat mengklaim<font color='#ff0000'> ⟨16⟩ </font>gift  coupons <br>jika <font color='#ff0000'> ⟨17⟩ </font>hari dalam seminggu kamu dapat mencapai ⟨18⟩ liveliness, kamu dapat mengklaim<font color='#ff0000'> ⟨19⟩ </font>gift  coupons <br>jika <font color='#ff0000'> ⟨20⟩ </font>hari dalam seminggu kamu dapat mencapai ⟨21⟩ liveliness, kamu dapat mengklaim<font color='#ff0000'> ⟨22⟩ </font>gift  coupons <br>jika <font color='#ff0000'> ⟨23⟩ </font>hari dalam seminggu kamu dapat mencapai ⟨24⟩ liveliness, kamu dapat mengklaim<font color='#ff0000'> ⟨25⟩ </font>gift  coupons <br>"
+  },
+  {
+   "n": 2967,
+   "text": "Klaim penghargaan minggu ini"
+  },
+  {
+   "n": 2968,
+   "text": "Penghargaan hanya dapat diklaim satu kali perminggu. Klaim sekarang？"
+  },
+  {
+   "n": 2969,
+   "text": "Untuk mengklaim penghargaan, liveness harus mencapai ⟨0⟩ setidaknya sekali dalam seminggu"
+  },
+  {
+   "n": 2970,
+   "text": "Mengklaim penghargaan minggu ini"
+  },
+  {
+   "n": 2971,
+   "text": "Klaim hadiah dasar."
+  },
+  {
+   "n": 2972,
+   "text": "Menghabiskan ⟨0⟩ Batu untuk mendapatkan EXP meningkat sebesar ⟨1⟩%."
+  },
+  {
+   "n": 2973,
+   "text": "Menghabiskan ⟨0⟩ gold untuk mendapatkan hadiah EXP meningkat sebesar ⟨1⟩%."
+  },
+  {
+   "n": 2974,
+   "text": "Menghabiskan ⟨0⟩ gift coupon untuk mendapatkan hadiah EXP meningkat sebesar ⟨1⟩%."
+  },
+  {
+   "n": 2975,
+   "text": "Bunuh Monster mendapatkan hadiah<font color='#00b034'>EXP</font>.  Kunjungi Ketua untuk mendapatkan hadiah<font color='#00b034'>barang</font>.<br>Sudah biasa yang didapat dari ore, <font color='#00b034'>batu</font>.  Rare ore juga bisa mendapatkan, <font color='#00b034'>Batu</font>.<br>Proof of Bravery akan mendapatkan hadiah <font color='#00b034'>barang</font>.  Namecard Kumpulkan ion akan mendapatkan hadiah <font color='#00b034'>Kostum</font>.<br>Kumpulkan Foreign Mattercan dapatkan <font color='#00b034'>peralatan</font>, <font color='#00b034'>barang</font> sebagai hadiah."
+  },
+  {
+   "n": 2976,
+   "text": "Misi Permainan"
+  },
+  {
+   "n": 2977,
+   "text": "Pergerakan Status"
+  },
+  {
+   "n": 2978,
+   "text": "Refresh misi langsung"
+  },
+  {
+   "n": 2979,
+   "text": "Sisa waktu  untuk Refresh berikutnya :"
+  },
+  {
+   "n": 2980,
+   "text": "Hadiah Misi"
+  },
+  {
+   "n": 2981,
+   "text": "Tentang poin"
+  },
+  {
+   "n": 2982,
+   "text": "Peti Kostum Api"
+  },
+  {
+   "n": 2983,
+   "text": "Peti Kostum Air"
+  },
+  {
+   "n": 2984,
+   "text": "Peti Kostum Tanah"
+  },
+  {
+   "n": 2985,
+   "text": "Peti Kostum Petir"
+  },
+  {
+   "n": 2986,
+   "text": "Peti Kostum Angin"
+  },
+  {
+   "n": 2987,
+   "text": "Vermilion birdling+⟨0⟩ Pack"
+  },
+  {
+   "n": 2988,
+   "text": "Level ⟨0⟩ Namecard Bag"
+  },
+  {
+   "n": 2989,
+   "text": "Level ⟨0⟩ Ruby Bag"
+  },
+  {
+   "n": 2990,
+   "text": "Level ⟨0⟩ Sapphire Bag"
+  },
+  {
+   "n": 2991,
+   "text": "Level ⟨0⟩ Topaz Bag"
+  },
+  {
+   "n": 2992,
+   "text": "Level ⟨0⟩ Diamond Bag"
+  },
+  {
+   "n": 2993,
+   "text": "Level ⟨0⟩ Reserve Gem Bag"
+  },
+  {
+   "n": 2994,
+   "text": "Bookpage"
+  },
+  {
+   "n": 2995,
+   "text": "XmaPack"
+  },
+  {
+   "n": 2996,
+   "text": "Xmas Super Pack"
+  },
+  {
+   "n": 2997,
+   "text": "Xmas Preminum Pack"
+  },
+  {
+   "n": 2998,
+   "text": "Level ⟨0⟩～⟨1⟩ Orange Christmas Gift Box"
+  },
+  {
+   "n": 2999,
+   "text": "DecDamageEquip%"
+  },
+  {
+   "n": 3000,
+   "text": "Reduce damage"
+  },
+  {
+   "n": 3001,
+   "text": "DecDamageEquip%Ex"
+  },
+  {
+   "n": 3002,
+   "text": "DefenseMulEquip%"
+  },
+  {
+   "n": 3003,
+   "text": "Defense Enhance"
+  },
+  {
+   "n": 3004,
+   "text": "DefenseMulEquip%Ex"
+  },
+  {
+   "n": 3005,
+   "text": "Batal hapus"
+  },
+  {
+   "n": 3006,
+   "text": "Password kedua adalah kosong untuk pertama kalinya. Karakter tidak dapat dihapus sebelum setting password kedua. Silahkan edit password kedua kamu."
+  },
+  {
+   "n": 3007,
+   "text": "Masukkan password kedua:"
+  },
+  {
+   "n": 3008,
+   "text": "<font color='#f82d2d'>Poin Prestasi{@0:}</font>"
+  },
+  {
+   "n": 3009,
+   "text": "Menhabiskan <font color='#f82d2d'>{@0:}</font>Menit"
+  },
+  {
+   "n": 3010,
+   "text": "<font color='#f82d2d'>medal{@0:}</font>"
+  },
+  {
+   "n": 3011,
+   "text": "<font color='#f82d2d'>Batu{@0:}</font>"
+  },
+  {
+   "n": 3012,
+   "text": "<font color='#5c7e01'>Poin Prestasi{@0:}</font>"
+  },
+  {
+   "n": 3013,
+   "text": "Menghabiskan <font color='#5c7e01'>{@0:}</font> menit"
+  },
+  {
+   "n": 3014,
+   "text": "<font color='#5c7e01'>medal{@0:}</font>"
+  },
+  {
+   "n": 3015,
+   "text": "<font color='#5c7e01'>Batu{@0:}</font>"
+  },
+  {
+   "n": 3016,
+   "text": "<font color='#ff8a00'>Kostum Kurosaki Ichigo＋⟨0⟩</font>"
+  },
+  {
+   "n": 3017,
+   "text": "<font color='#00aeff'>Kostum Grimmjow＋⟨0⟩</font>"
+  },
+  {
+   "n": 3018,
+   "text": "<font color='#8e8e8e'>Kostum Witch＋⟨0⟩</font>"
+  },
+  {
+   "n": 3019,
+   "text": "<font color='#8e8e8e'>Kostum Ggio Vega＋⟨0⟩</font>"
+  },
+  {
+   "n": 3020,
+   "text": "<font color='#ff8a00'>Kostum White Ichigo＋⟨0⟩</font>"
+  },
+  {
+   "n": 3021,
+   "text": "<font color='#ff8a00'>Kostum Bomb Ichigo＋⟨0⟩</font>"
+  },
+  {
+   "n": 3022,
+   "text": "<font color='#00aeff'>Kostum Ulquiorra＋⟨0⟩</font>"
+  },
+  {
+   "n": 3023,
+   "text": "<font color='#00aeff'>Kostum White Ulquiorra＋⟨0⟩</font>"
+  },
+  {
+   "n": 3024,
+   "text": "<font color='#ff8a00'>Kostum Hollow Ulquiorra＋⟨0⟩</font>"
+  },
+  {
+   "n": 3025,
+   "text": "<font color='#8e8e8e'>Kostum Love Aikawa＋⟨0⟩</font>"
+  },
+  {
+   "n": 3026,
+   "text": "<font color='#00aeff'>Kostum Hitsugaya Toushiro＋⟨0⟩</font>"
+  },
+  {
+   "n": 3027,
+   "text": "<font color='#8e8e8e'>Kostum Hirako Shinji＋⟨0⟩</font>"
+  },
+  {
+   "n": 3028,
+   "text": "<font color='#00aeff'>Kostum Hollow Hirako Shinji＋⟨0⟩</font>"
+  },
+  {
+   "n": 3029,
+   "text": "<font color='#8e8e8e'>Kostum Abarai Renji＋⟨0⟩</font>"
+  },
+  {
+   "n": 3030,
+   "text": "<font color='#00aeff'>Kostum Gin Ichimaru＋⟨0⟩</font>"
+  },
+  {
+   "n": 3031,
+   "text": "<font color='#8e8e8e'>Kostum Akimichi Choji＋⟨0⟩</font>"
+  },
+  {
+   "n": 3032,
+   "text": "<font color='#8e8e8e'>Kostum Inuzuka Kiba＋⟨0⟩</font>"
+  },
+  {
+   "n": 3033,
+   "text": "<font color='#8e8e8e'>Kostum Aburame Shino＋⟨0⟩</font>"
+  },
+  {
+   "n": 3034,
+   "text": "<font color='#8e8e8e'>Kostum Nara Shikamaru＋⟨0⟩</font>"
+  },
+  {
+   "n": 3035,
+   "text": "<font color='#8e8e8e'>Kostum Asuma Sarutobi＋⟨0⟩</font>"
+  },
+  {
+   "n": 3036,
+   "text": "<font color='#00aeff'>Kostum Rock Lee＋⟨0⟩</font>"
+  },
+  {
+   "n": 3037,
+   "text": "<font color='#00aeff'>Kostum Hyuga Neji＋⟨0⟩</font>"
+  },
+  {
+   "n": 3038,
+   "text": "<font color='#00aeff'>Kostum Scorpion＋⟨0⟩</font>"
+  },
+  {
+   "n": 3039,
+   "text": "<font color='#8e8e8e'>Kostum Yamato＋⟨0⟩</font>"
+  },
+  {
+   "n": 3040,
+   "text": "<font color='#8e8e8e'>Kostum Nel＋⟨0⟩</font>"
+  },
+  {
+   "n": 3041,
+   "text": "<font color='#8e8e8e'>Kostum Sarugaki Hiyori＋⟨0⟩</font>"
+  },
+  {
+   "n": 3042,
+   "text": "<font color='#ff8a00'>Kostum Shihouin Yoruichi＋⟨0⟩</font>"
+  },
+  {
+   "n": 3043,
+   "text": "<font color='#00aeff'>Kostum Soifon＋⟨0⟩</font>"
+  },
+  {
+   "n": 3044,
+   "text": "<font color='#ff8a00'>Kostum Halibel＋⟨0⟩</font>"
+  },
+  {
+   "n": 3045,
+   "text": "<font color='#8e8e8e'>Kostum Mashiro Kuna＋⟨0⟩</font>"
+  },
+  {
+   "n": 3046,
+   "text": "<font color='#8e8e8e'>Kostum Shiba Kuukaku＋⟨0⟩</font>"
+  },
+  {
+   "n": 3047,
+   "text": "<font color='#8e8e8e'>Kostum Nanao Ise＋⟨0⟩</font>"
+  },
+  {
+   "n": 3048,
+   "text": "<font color='#8e8e8e'>Kostum Momo Hinamori＋⟨0⟩</font>"
+  },
+  {
+   "n": 3049,
+   "text": "<font color='#8e8e8e'>Kostum Rangiku Matsumoto＋⟨0⟩</font>"
+  },
+  {
+   "n": 3050,
+   "text": "<font color='#ff8a00'>Kostum Inoue Orihime＋⟨0⟩</font>"
+  },
+  {
+   "n": 3051,
+   "text": "<font color='#8e8e8e'>Kostum Kurenai Yuuhi＋⟨0⟩</font>"
+  },
+  {
+   "n": 3052,
+   "text": "<font color='#ff8a00'>Kostum Hyuga Hinata＋⟨0⟩</font>"
+  },
+  {
+   "n": 3053,
+   "text": "<font color='#8e8e8e'>Kostum Chi＋⟨0⟩</font>"
+  },
+  {
+   "n": 3054,
+   "text": "<font color='#8e8e8e'>Kostum Shizune＋⟨0⟩</font>"
+  },
+  {
+   "n": 3055,
+   "text": "<font color='#8e8e8e'>Kostum Alice＋⟨0⟩</font>"
+  },
+  {
+   "n": 3056,
+   "text": "<font color='#8e8e8e'>Kostum Priest＋⟨0⟩</font>"
+  },
+  {
+   "n": 3057,
+   "text": "<font color='#8e8e8e'>Kostum Ghost Lady＋⟨0⟩</font>"
+  },
+  {
+   "n": 3058,
+   "text": "<font color='#8e8e8e'>Kostum Zombie Lady＋⟨0⟩</font>"
+  },
+  {
+   "n": 3059,
+   "text": "<font color='#8e8e8e'>Kostum Mizukage＋⟨0⟩</font>"
+  },
+  {
+   "n": 3060,
+   "text": "<font color='#ff8a00'>Kostum Uzumaki Naruto＋⟨0⟩</font>"
+  },
+  {
+   "n": 3061,
+   "text": "<font color='#ff8a00'>Kostum Gaara＋⟨0⟩</font>"
+  },
+  {
+   "n": 3062,
+   "text": "<font color='#ff8a00'>Kostum Hatake Kakashi＋⟨0⟩</font>"
+  },
+  {
+   "n": 3063,
+   "text": "<font color='#ff8a00'>Kostum Uchiha Sasuke＋⟨0⟩</font>"
+  },
+  {
+   "n": 3064,
+   "text": "<font color='#ff8a00'>Kostum Uchiha Itachi＋⟨0⟩</font>"
+  }
+ ]
+}

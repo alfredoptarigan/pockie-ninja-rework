@@ -1,0 +1,401 @@
+{
+ "terms": {
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Pantai Naga": "Dragontame Coast",
+  "Amegakure": "Hidden Rain Village",
+  "Rumah": "Home",
+  "Serangan": "Attack",
+  "Cairan": "Liquid",
+  "Mimpi Buruk": "Nightmare",
+  "Penemuan Besar": "Great Discovery",
+  "Giant Centipede": "Huge Centipede"
+ },
+ "units": [
+  {
+   "n": 9058,
+   "text": "Meskipun kami telah menahan pertumbuhan pada<font color='#00b034'> Demoneye Blooms </font>, kita masih harus menemukan cara untuk mengendalikan laju perluasan mereka. Apa yang bisa kita lakukan!"
+  },
+  {
+   "n": 9059,
+   "text": "Aku ingin menggunakan buah-buahan untuk membuat minuman buah-buahan , tapi aku tidak puas dengan hasil aku bereksperimen dengan beberapa buah-buahan. Aku mendengar di<font color='#00b034'> Harsh Barrens </font>di<font color='#00b034'> Lembah Kesunyian </font>, terdapat buah langka yang disebut<font color='#00b034'> Buah Impian </font>. Tetapi buah ini biasanya dijaga sungguh-sungguh oleh<font color='#00b034'> Roaring Demon Apes </font>. Bisakah kamu mendapatkan beberapa<font color='#00b034'> Buah Impian </font>untuk aku?"
+  },
+  {
+   "n": 9060,
+   "text": "Ini sebuah<font color='#00b034'> Dreamfruit </font>, kamu juga dapat mencium aromanya. Harapan aku dapat menggunakannya untuk menyeduh Cairan buah yang enak."
+  },
+  {
+   "n": 9061,
+   "text": "<font color='#00b034'> Decadent Monks </font>...Orang terkutuk, ketua kasihan mereka dan memungkinkan mereka untuk berada dalam<font color='#00b034'> Lembah Kesunyian </font>, dan mereka membayar dia dengan bergaul dengan iblis! ini tidak masuk akal! Dapatkah kamu membantu aku memberi<font color='#00b034'> Decadent Monks </font>pelajaran?"
+  },
+  {
+   "n": 9062,
+   "text": "Meskipun kami perampok sangat dibenci oleh rakyat biasa, kita tidak akan pernah bersekongkol dengan iblis."
+  },
+  {
+   "n": 9063,
+   "text": "Kerusakan semua segel telah menjadi serius. Sekarang tidak hanya iblis bergerak cepat, serta beberapa bandit yang telah dipengaruhi dari kegelapan. Belum lama ini, serta beberapa<font color='#00b034'> Bandit Lembah </font>tiba-tiba menyerang tempat ini untuk membuat mencoba memasuki<font color='#00b034'> Valhalla </font>. Meskipun bandit itu ditolak, kita dapat menderita kerugian yang besar.<br>Rupanya bandit yang bersembunyi dalam<font color='#00b034'> Lembah Kesunyian </font>. Untuk mencegah serangan lebih lanjut, aku harap kamu dapat menyingkirkan<font color='#00b034'> Bandit Lembah </font>. Mereka tidak mungkin sangat kuat, tetapi mereka membawa serta beberapa kekuatan<font color='#00b034'> Bom Tengkorak </font>. Kumpulkan beberapa di perjalanan dan berikan kepada<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 9064,
+   "text": "Ini bandit sangat berani untuk menyerang para penjaga dari<font color='#00b034'> Kota Malaikat </font>!<br>Daya tembak dari<font color='#00b034'> Skull Bombs </font>yang kamu bawa ke aku tidak begitu buruk, aku akan bawa ke Craftsman untuk memeriksa."
+  },
+  {
+   "n": 9065,
+   "text": "Selamat, kamu level<font color='#00b034'> ⟨0⟩ </font>sekarang. Sebagai ninja yang memiliki skill yang sangat baik, kamu akan memiliki rumah sendiri. Ini dapat membantu kamu meningkatkan dengan cepat.<br>??Klik <font color='#00b034'>Navigasi Cepat</font> untuk memasuki<font color='#00b034'>Rumah Ku</font>"
+  },
+  {
+   "n": 9066,
+   "text": "  Sepertinya kamu sudah terbiasa dengan fungsi rumah kamu. Jika kamu merawatnya dengan baik, kamu akan mendapatkan hadiah yang besar."
+  },
+  {
+   "n": 9067,
+   "text": "Kamu datang tepat waktu, nak. Bisakah kamu membantu-ku? Sudah beberapa saat aku terakhir makan ikan. Berharap Anda dapat Pergi ke<font color='#00b034'> Pantai Naga </font> dan menyita beberapa ikan dari seorang pria yang disebut Gozu. Untuk penghormatanmu aku akan memberimu hadiah! "
+  },
+  {
+   "n": 9068,
+   "text": "Wowo! Kamu berhasil melakukannya, terima kasih banyak atas bantuannya! Ambil hadiah ini!"
+  },
+  {
+   "n": 9069,
+   "text": "Heloo! aku fikir kamu dapat membantu saya untuk melakukan serangan kepada<font color='#00b034'> Gozu </font> dan<font color='#00b034'> Nurari </font>. Aku telah bersumpah kepada diriku sendiri bahwa aku akan membalas dendam pada mereka! Sekarang mereka sedang merencanakan sesuatu di Pantai Naga. Ini memalukan bahwa aku tidak bisa meluangkan waktu-ku, itu sebabnya aku memnta bantuan kepadamu!"
+  },
+  {
+   "n": 9070,
+   "text": "Mantabs! Kamu telah melakukannya. Ambil hadiah-mu! "
+  },
+  {
+   "n": 9071,
+   "text": "Whow! Aku berharap ada seseorang yang dapat membantu saya untuk mencari<font color='#00b034'> Nurari </font>! Jangan buat kesalahan. Cairannya kami butuhkan untuk bahan penelitian, dapatkah kamu membantuku?"
+  },
+  {
+   "n": 9072,
+   "text": "Yahoo! Ini dia! Tidak buruk! Aku senag dapat memberikanmu ini! "
+  },
+  {
+   "n": 9073,
+   "text": "Pembicaraan terakhir tentang kunjungan ke Pantai Naga, dimana Mimpi Buruk menjadi kenyataan. Pertama kamu harus menghajar <font color='#00b034'> Samehada </font>, lalu <font color='#00b034'> Nurari </font>. Aku tidak punya waktu untuk peduli tentang mereka ... kamu dapat membantu-ku untuk memberi mereka pelajaran jika kamu mau! "
+  },
+  {
+   "n": 9074,
+   "text": "Oh? Kamu sangat cepat. Sepertinya aku sudah menemukan sesorang yang tepat! Ini hadiahmu! "
+  },
+  {
+   "n": 9075,
+   "text": "Aku sedang mempelajari bagaimana untuk menyerap Chakra. Dan saya inginkan banyak bahan, Curi steel thorn dari<font color='#00b034'> Samehada </font>. Apa kamu dapat membantuku? "
+  },
+  {
+   "n": 9076,
+   "text": "Yaa, ini yang saya inginkan! Sekarang penelitaianku akan selesai, terima kasih. Sekarang ini menjadi milik-mu!"
+  },
+  {
+   "n": 9077,
+   "text": "Perjalanan paling malang dalam hidup-kuadalah perjalanan ke Pantai Naga. Suatu malam saya diganggu oleh<font color='#00b034'> Little Isonade </font>! dan kemudian ada yang menghadang bernama<font color='#00b034'> Gozu </font>, dan aku dirampok oleh mereka, dapatkah kamu memberi mereka pelajaran?"
+  },
+  {
+   "n": 9078,
+   "text": "Gokilll! Kamu tidak mengecewakanku, ini ada hadiah untuk kamu! "
+  },
+  {
+   "n": 9079,
+   "text": "Woii! kamu! iya, kamu! Aku tidak bisa tenang sekarang, bahwa ... Benar! Aku baru saja kembali dari Pantai Naga.  kalung mutiara-ku dimakan oleh sesuatu yang disebut<font color='#00b034'> Little Isonade </font>. ini merupakan peninggalan keluargaku! Kalung itu harus dipatahkan, dan temukan mutiara, aku akan memberikanmu hadiah untuk ini!"
+  },
+  {
+   "n": 9080,
+   "text": "Ah! Mutiara-ku! Kamu benar-benar kembali. Aku akan memenuhi janjiku, jadi termalah ini! "
+  },
+  {
+   "n": 9081,
+   "text": "Aku sedang menjaga keseimbangan di Pantai Naga berapa hari. dan beberapa dari<font color='#00b034'> Little Isonade </font>telah merusak lingungan! Banyaknya pertarunganmembutuhkan chackra kalahkan――<font color='#00b034'> Samehada</font>. Kamu dapat menyelesaikan permasalahan ini jika kamu mau!"
+  },
+  {
+   "n": 9082,
+   "text": "Terimakasih, telah membantu memelihara keseimbangan di Pantai Naga telah dipulihkan! Berikut hadiah kamu! "
+  },
+  {
+   "n": 9083,
+   "text": "Kamu harus menyimpan diri untuk tetap tajam! Aku dapat menawarkan kamu tugas berat! Ada makhluk besar bernama Nine-Headed Dragon di Pantai Naga. Untuk membuktikan keberanianmu ambil ⟨0⟩ gigi naga itu!"
+  },
+  {
+   "n": 9084,
+   "text": "!!! Mungkin aku meremehkan kemampuanmu, kamu cekup berani, terimalah permintaan maaf saya dan ambil ini!"
+  },
+  {
+   "n": 9085,
+   "text": "Aku benci orang aneh, terutama di Pantai Naga, Seperti<font color='#00b034'> Nurari</font>dan<font color='#00b034'> Little Isonade</font>. Bunuh mereka!"
+  },
+  {
+   "n": 9086,
+   "text": "Meskipun tidak semua monster terbunuh, aku bisa sedikit santai sekarang. Berikut hadiahnya\\!"
+  },
+  {
+   "n": 9087,
+   "text": "arghh mereka sangat menjijikan di Pantai Naga . Apakah kamu memiliki kemampuan untuk megalahkan <font color='#00b034'> Gozu</font>, <font color='#00b034'> Nurari</font> dan <font color='#00b034'> Samehada</font>!"
+  },
+  {
+   "n": 9088,
+   "text": "Setidaknya kamu telah memberikan bantuan tepat waktu. Berikut hadiahnya!"
+  },
+  {
+   "n": 9089,
+   "text": "Ambil tur ke Pantai Naga, aku ingin mengambil liburan. Tapi situasi di sana tampaknya tidak baik. Aku tidak akan meminta kamu terlalu banyak, hanya cobalah untuk mengalahkan<font color='#00b034'> Nurari</font>, <font color='#00b034'> Samehada</font>dan<font color='#00b034'> Little Isonade</font>! Semoga berhasil!"
+  },
+  {
+   "n": 9090,
+   "text": "Kamu orang yang tepat untuk melakukan tugas tersebut. Aku terkesan dengan efisiensi Kamu! Aku akan memberimu hadiah lagi!"
+  },
+  {
+   "n": 9091,
+   "text": "Apakah kamu menanyakan dari mana aku mempubnyai banyak ox horns? Aku mengumpulkan mereka dari segala macam adu banteng! Lihat? Mengesankan, ya? ... Apa?! kamu berarti bisa berbuat lebih baik? Baiklah!Tarik keluar tanduk dari<font color='#00b034'> Giant Ox</font> di Amegakure! Aku ingin melihat kenyataannya! "
+  },
+  {
+   "n": 9092,
+   "text": "Yah, kamu benar-benar melakukannya. Ini adalah milikmu sekarang. Luar biasa! (Sulit untuk di percaya !)"
+  },
+  {
+   "n": 9093,
+   "text": "Aku ingin kamu membunuh <font color='#00b034'> Giant Centipede </font>dan<font color='#00b034'> Giant Bird</font> di Amegakure. Jangan bicara! Aku punya alasan khusus mengenai ini! Jadi lakukan dan akan kuberi hadiah! "
+  },
+  {
+   "n": 9094,
+   "text": "Mantabs! Kamu orang yang baik hati! Mari kita bekerjasama lain kali! Semua ini milikmu sekarang! "
+  },
+  {
+   "n": 9095,
+   "text": "Ambilah kulit reptil di Amegakure dan kalahkan <font color='#00b034'> Giant Chameleon</font> untuk mempelajari ninjutsu. Berikan semua hasil dari kuit itu. Aku akan membayarmu dengan harga tinggi! "
+  },
+  {
+   "n": 9096,
+   "text": "Mengesankan! Sekarang kamu sudah mahir untuk menguliti mereka! Terimalah bayaranmu! "
+  },
+  {
+   "n": 9097,
+   "text": "Dengarkan, aku mempunyai permintaan! Rumah istriku di Amegakure telah dihancurkan oleh<font color='#00b034'> Giant Chameleon </font>dan<font color='#00b034'> Giant Bird</font>! Aku tidak dapat menerimanyas! Tolong beri mereka pelajaran dan bunuh mereka! "
+  },
+  {
+   "n": 9098,
+   "text": "Ini Bayaranmu, aku senang melihat mereka semua musnah!"
+  },
+  {
+   "n": 9099,
+   "text": "Aku sangat kesal, aku harus mencari beberapa bulu untuk penemuan besarku, tolong carikan di Amegakure yang ada pada<font color='#00b034'> Giant Bird</font>. Sangat besar tapi ringan! Aku akan sangat berterima kasih jika kamu bisa membawa saya beberapa!"
+  },
+  {
+   "n": 9100,
+   "text": "Ini adalah apa yang saya inginkan! Mengesankan! Penemuan Besar -ku akan segera selesai. Terima kasih atas bantuan-mu. Ambil ini sebagai penghargaan! "
+  },
+  {
+   "n": 9101,
+   "text": "Hey! Jika kamu bosan, kamu dapat mencoba latihan. Menantang <font color='#00b034'> Nurari </font>dan <font color='#00b034'> Giant Ox</font>. Aku yakin kamu akan menjadi lebih kuat! "
+  },
+  {
+   "n": 9102,
+   "text": "Bagaimana rasanya? Apa yang kamu dapatkan! Ini bingkisan kecil untuk kamu! "
+  },
+  {
+   "n": 9103,
+   "text": "Aku menerima berita dari Amegakure. Kegilaan dari<font color='#00b034'> Inferno Dog </font>telah membuat masalah lagi. Kita harus benar-benar menghancurkannya kali ini. Tugas kamu bukan hanya membunuh, tapi juga bawalah tiga kepala dari mereka! Pergilah sekarang! "
+  },
+  {
+   "n": 9104,
+   "text": "Anda pasti seorang ninja yang sangat baik! Terima kasih banyak! Kita harus memberikannya penghargaan!"
+  },
+  {
+   "n": 9105,
+   "text": "Ada berita dari ANBU, ada beberapa serangan di Pantai Naga dan Amegakure. Kita harus membersihkannya! Bunuhlah<font color='#00b034'> Gozu</font>dan<font color='#00b034'> Giant Bird </font>secepatnya! "
+  },
+  {
+   "n": 9106,
+   "text": "Saya tahu kami memiliki banyak ninja hebat. Dan kamu cukup luar biasa!"
+  },
+  {
+   "n": 9107,
+   "text": "Bertarung di Arena adalah kesempatan yang baik untuk melatih diri. Mengapa kamu tidak mencoba? Kamu akan bertemu dengan ninja dari seluruh dunia. "
+  },
+  {
+   "n": 9108,
+   "text": "Kamu menang? Kalah? Bagaimanapun juga, kamu dapat belajar sesuatu dari pertarungan. Lebih giat lain kali!"
+  },
+  {
+   "n": 9109,
+   "text": "Kamu akan mendapatkan sejumlah medal di Arena dan gunakan untuk mencoba menggunakan pada Undian!"
+  },
+  {
+   "n": 9110,
+   "text": "Kamu telah mendapatkan? Apa kamu senang? Kalau begitu, Kembalilah lagi!"
+  },
+  {
+   "n": 9111,
+   "text": "Setelah memasuki dunia permainan, melalui<font color='#00b034'> leveling navigation </font>, kamu dapat melihat acara permainan untuk berpartisipasi di hari ini serta rinciannya. Ini akan membantu kamu pada penjadwalan waktu permainan kamu.<br>Sekarang buka tampilan<font color='#00b034'> quick navigation </font><font color='#00b034'> leveling navigation </font>dan lihat peristiwa apa yang terjadi!"
+  },
+  {
+   "n": 9112,
+   "text": "Gunakan navigasi leveling untuk memudahkan transisi pertumbuhan kamu di [Ninjakita]."
+  },
+  {
+   "n": 9113,
+   "text": "Melalui<font color='#00b034'> world map</font>di kanan atas tampilan permainan, kamu dapat melihat gambaran daerah dari Daratan Sakura. Daratan Sakura dibagi menjadi<font color='#00b034'> Kota Malaikat </font>, <font color='#00b034'> Desa Api </font>, <font color='#00b034'> Desa Air </font>,<font color='#00b034'> Desa Tanah </font>,<font color='#00b034'> Desa Angin </font>,<font color='#00b034'> Desa Petir </font>and<font color='#00b034'> Kota Iblis </font>dimana para iblis disegel, dan wilayah<font color='#00b034'> Dragontame Coast </font>yang misterius. Pada tampilan<font color='#00b034'> world map </font>, klik masing-masing<font color='#00b034'> zone area </font>untuk teleport ke zona, namun jika<font color='#00b034'> level </font>kamu tidak memadai, kamu tidak dapat masuk.<br>Sekarang coba dengan mengakses melalui<font color='#00b034'> world map </font>, menuju<font color='#00b034'> Tambang Batu </font>."
+  },
+  {
+   "n": 9114,
+   "text": "Apakah kamu tidak nyaman dengan perjalanan mengelilingi dunia?"
+  },
+  {
+   "n": 9115,
+   "text": "Woof woof! Ingin mencari harta karun? Didalam<font color='#00b034'> Exploration Zone </font><font color='#00b034'> Tambang Batu </font>, ada banyak harta karun tersembunyi. Pergilah<font color='#00b034'> explore </font>untuk mendapatkan kesempatan untuk mendapatkan berbagai<font color='#00b034'> items </font>langka, dan bahkan mungkin<font color='#00b034'> pets </font>jika kamu beruntung! Tapi hati-hati, kamu bisa memberi sinyal ke<font color='#00b034'> monster </font>yang menjaga harta karun dan memicu pertempuran.<br>Bagaimana? Sekarang coba kamu melakukan<font color='#00b034'> explorasi </font>sekali."
+  },
+  {
+   "n": 9116,
+   "text": "Apakah kamu menemukan harta karun? Wilayah dalam game dapat kamu gali, jadi jangan sia-siakan kesempatan explorasi harian kamu."
+  },
+  {
+   "n": 9117,
+   "text": "Jika kamu harus menggunakan<font color='#00b034'> medicine </font>untuk memulihkan<font color='#00b034'> HP </font>dan<font color='#00b034'> chakra </font>setiap setelah pertempuran, itu akan menjadi kesulitan besar. Permainan memiliki pengaturan cepat<font color='#00b034'> carrier bag </font>; hanya menghabiskan jumlah tertentu<font color='#00b034'> gold </font>atau<font color='#00b034'> Gift Coupon </font>untuk menyimpan sejumlah besar<font color='#00b034'> HP </font>dan<font color='#00b034'> chakra </font>potions, didalam<font color='#00b034'> carrier bag </font>. Setelah pertempuran,<font color='#00b034'> carrier bag </font>akan<font color='#00b034'> otomatis mengembalikan </font><font color='#00b034'> HP </font>dan<font color='#00b034'> chakra </font>yang hilang menjadi penuh kembali. Sekarang klik tampilan di kiri atas game<font color='#00b034'> HP panel </font>ikon di sebelahnya<font color='#00b034'> carrier bag </font>, dan lakukan untuk<font color='#00b034'> carrier bag</font>kamu, <font color='#00b034'> capacity replenishment </font>sekali."
+  },
+  {
+   "n": 9118,
+   "text": "Selama tas pembawa HP dan Chakra memliki kapasitas yang memadai, kamu tidak akan menemukan kesulitan untuk megnisi kembali pada saat sedang bertempur."
+  },
+  {
+   "n": 9119,
+   "text": "Woof woof! Kau datang untuk bertemu Pakkun lagi. Kali ini aku akan membiarkan kamu dalam rahasia lain. Setiap<font color='#00b034'> Zona Explorasi </font>memiliki label<font color='#00b034'> tingkat penyelesaian </font>.Ketika<font color='#00b034'> explorasi </font>mencapai<font color='#00b034'> ⟨0⟩% </font>, <font color='#00b034'> tampilan penjelajahan </font><font color='#00b034'> bintang label tingkat penyelesaian</font>akan<font color='#00b034'> menyala dengan ⟨1⟩ bintang emas </font>dan kamu akan menerima bonus hadiah khusus.<br>Kamu ingin beberapa hadiah bukan? Maka pergi<font color='#00b034'> Zona Eksplorasi Tambang Batu </font>dapatkan<font color='#00b034'> tingkat penyelesaian </font>sampai<font color='#00b034'> ⟨2⟩% </font>!"
+  },
+  {
+   "n": 9120,
+   "text": "Pakkun benar, apakah kamu memperoleh bonus hadiah? Hanya jika telah ⟨0⟩% menyelesaikan di setiap level zona penjelajahan kamu akan mendapat bonus hadiah, jadi ingatlah untuk selalu mengikuti lagi di setiap event penggalian!"
+  },
+  {
+   "n": 9121,
+   "text": "Apakah kamu merasa lelah setelah waktu yang lama dalam pertempuran? Kamu dapat menggunakan<font color='#00b034'> Batu </font>pada<font color='#00b034'> Daftar Monster </font><font color='#00b034'> normal monster </font>untuk masuk latihan<font color='#00b034'> Combo </font>. Selama periode pelatihan, kamu akan<font color='#00b034'> menyerang otomatis </font>monster. Setelah pelatihan berakhir, kamu akan menerima<font color='#00b034'> EXP </font>dan<font color='#00b034'> items </font>perolehan dari pelatihan saat ini.<br>Sekarang pergi mencoba<font color='#00b034'> Combo </font>sekali."
+  },
+  {
+   "n": 9122,
+   "text": "Bukankah ini aman, jika kamu lelah gunakan [Serangan Berantai] untuk menjalankan pertempuran otomatis!"
+  },
+  {
+   "n": 9123,
+   "text": "Dunia permainan di<font color='#00b034'> zona luar ruangan </font>terkadang akan mengeluarkan iblis yang berkuasa. Kamu hanya memerlukan<font color='#00b034'> Demon Proof of Suppression </font>menantang mereka. Baru-baru ini, di<font color='#00b034'> Tambang Batu </font><font color='#00b034'> Demon Brute </font>adalah seperti iblis. Mendapatkan<font color='#00b034'> Demon Proof of Suppression </font>melalui penjelajahan, dan menekan<font color='#00b034'> Demon Brute </font>untuk membuktikan keberanian kamu."
+  },
+  {
+   "n": 9124,
+   "text": "Untuk berfikir mengalahkan Iblis Hewan, kamu harus terlihat seperti seorang Ninja yang sangat hebat."
+  },
+  {
+   "n": 9125,
+   "text": "Meskipun fungsi<font color='#00b034'> Combo </font>mudah digunakan, tetapi kamu memiliki cukup waktu dan energi untuk fokus pada permainan, tapi berada di status<font color='#00b034'> pertarungan otomatis </font>, cukup masuk ke tampilan<font color='#00b034'> Combo </font>dan pilih<font color='#00b034'> instantly complete </font>menghabiskan sedikit<font color='#00b034'> gold </font>atau<font color='#00b034'> gift coupon </font>untuk segera menyelesaikan<font color='#00b034'> Combo </font>, dan memiliki kendali penuh atas permainan."
+  },
+  {
+   "n": 9126,
+   "text": "Dengan cara ini, kamu tidak perlu khawatir tentang keinginan untuk memainkan game ini, tapi tidak bisa karena status pertarungan otomatis. Bukankah ini mudah?"
+  },
+  {
+   "n": 9127,
+   "text": "Ingin mencari pekerjaan untuk melatih diri?<br>Di sini, kamu dapat menerima<font color='#00b034'> hadiah misi </font>, yang terbagi dalam<font color='#00b034'> pertempuran </font>,<font color='#00b034'> pertemuan </font>,<font color='#00b034'> mencari orang </font>,<font color='#00b034'> duel arena </font>dan<font color='#00b034'> menantang bos </font>. Jika kamu punya waktu, kamu dapat menyewa ninja desa untuk membantu kamu menyelesaikan<font color='#00b034'> pertempuran </font>,<font color='#00b034'> pertemuan </font>,<font color='#00b034'> mencari orang </font>dan<font color='#00b034'> hadiah misi </font>.<br><font color='#00b034'> Hadiah misi </font>memiliki tingkat yang berbeda, dibagi menjadi peringkat<font color='#00b034'> S </font>,<font color='#00b034'> A </font>,<font color='#00b034'> B </font>,<font color='#00b034'> C </font>dan<font color='#00b034'> D </font>. Semakin tinggi peringkat, kesulitan lebih berat, tetapi imbalan akan lebih besar juga.<br>Menerima hadiah pencarian dan menemukan aku lagi."
+  },
+  {
+   "n": 9128,
+   "text": "Hanya dapat menerima ⟨0⟩ hadiah misi setiap hari. Misi yang kamu lewatkan tidak akan terakumulasi untuk besok."
+  },
+  {
+   "n": 9129,
+   "text": "Ninja yang dikirim untuk menyelidiki kekacauan iblis telah kembali. <font color='#00b034'> Ninja Hitam </font>mempesona iblis ini telah terpengaruh oleh kuasa-kuasa kegelapan, yang menjadi anggota<font color='#00b034'> Kota Iblis </font>. Sekarang kamu harus pergi ke<font color='#00b034'> Kota Iblis </font>dan melapor ke<font color='#00b034'> Penjaga Kota Iblis </font>, dia akan memberitahumu apa yang harus dilakukan selanjutnya."
+  },
+  {
+   "n": 9130,
+   "text": "Decadents memiliki kepercayaan penuh dari Iblis , hanya membangun markas mereka sendiri di pinggiran Kota Iblis, Valhalla. Untuk meninggalkan jalan yang benar dan beralih ke jalan yang sesat, orang-orang ini sangat menyedihkan!"
+  },
+  {
+   "n": 9131,
+   "text": "Merasa kesepian melintasi dunia sendiri? Cepat dan temukan<font color='#00b034'> teman </font>yang berbagi kasih sayang dengan kamu untuk penjelajahan!"
+  },
+  {
+   "n": 9132,
+   "text": "Kamu telah mendapatkan seorang teman, permainan ini hanaya sekedar untuk bersenang-senang dengan semua orang."
+  },
+  {
+   "n": 9133,
+   "text": "Dalam game<font color='#00b034'> item mall </font>memiliki banyak item langka seperti<font color='#00b034'> food </font>, <font color='#00b034'> gems </font>dan<font color='#00b034'> pet skill book </font>yang dapat meningkatkan kemampuan kamu untuk pengalaman permainan yang lebih baik. Hanya menghabiskan beberapa<font color='#00b034'> gift coupon </font>atau<font color='#00b034'> gold </font>utuk membeli item, dan<font color='#00b034'> item mall </font>memiliki banyak item yang dapat dibeli dengan<font color='#00b034'> gift coupon </font>. sekarang buka<font color='#00b034'> item mall </font>interface dan membeli barang sebelum bertemu denganku."
+  },
+  {
+   "n": 9134,
+   "text": "Gunakan<font color='#00b034'> Item Mall </font>Untuk memudahkan kamu dalam bermain."
+  },
+  {
+   "n": 9135,
+   "text": "Untuk berlatih ninja pemula dalam pertarungan sebenarnya,<font color='#00b034'> Kota malaikat </font>dan<font color='#00b034'> Lima Ketua desa </font>telah membuka<font color='#00b034'> Arena </font>. Dalam<font color='#00b034'> Arena </font>, hanya kemenangan yang mendapatkan<font color='#00b034'> medal </font>, dan dalam<font color='#00b034'> Arena </font>ada<font color='#00b034'> Toko Guci </font>, Melakukan<font color='#00b034'> Undian </font>untuk mendapatkan beberapa item langka. Jika kamu berfikir tidak dapat memperoleh kemenangan di<font color='#00b034'> Arena </font>saat ini, kamu dapat mengeluarkan gold di<font color='#00b034'> toko guci </font>untuk melakukan<font color='#00b034'> undian </font>dan pertukaran item untuk meningkatkan kemampuan kamu.<br>Pergi ke<font color='#00b034'> Toko Guci </font>dan lakukan<font color='#00b034'> ⟨0⟩ undian </font>sebelum menemuiku. Kamu akan mendapatkan hadiah dariku."
+  },
+  {
+   "n": 9136,
+   "text": "Dengan undian <font color='#00b034'>guci berwarna </font>, kamu dapat memperoleh item yang berguna."
+  },
+  {
+   "n": 9137,
+   "text": "Hanya dengan melengkapi itu dalam<font color='#00b034'> skill panel </font>,<font color='#00b034'> skill </font>dapat digunakan dalam pertempuran. Dengan menggabungkan berbagai<font color='#00b034'> skills </font>, kamu bisa mencari tahu gaya kamu sendiri pertempuran, dan menjadi seorang ninja yang sangat baik.<br>Belajar keterampilan yang memadai, dan gunakan pada<font color='#00b034'> skill panel </font>, gunakan semua<font color='#00b034'> skills </font>kamu untuk menciptakan gaya pertempuran kamu sendiri."
+  },
+  {
+   "n": 9138,
+   "text": "Ninja yang hebat memiliki pengalaman pertempuran praktis and mengembangkan gaya pertempuran mereka sendiri. Aku berharap kamu akan segera menjadi seorang Ninja."
+  },
+  {
+   "n": 9139,
+   "text": "Melalui<font color='#00b034'> world map</font>di kanan atas tampilan permainan, kamu dapat melihat gambaran daerah dari Daratan Sakura. Daratan Sakura dibagi menjadi<font color='#00b034'> Kota Malaikat </font>, <font color='#00b034'> Desa Api </font>, <font color='#00b034'> Desa Air </font>,<font color='#00b034'> Desa Tanah </font>,<font color='#00b034'> Desa Angin </font>,<font color='#00b034'> Desa Petir </font>and<font color='#00b034'> Kota Iblis </font>dimana para iblis disegel, dan wilayah<font color='#00b034'> Dragontame Coast </font>yang misterius. Pada tampilan<font color='#00b034'> world map </font>, klik masing-masing<font color='#00b034'> zone area </font>untuk teleport ke zona, namun jika<font color='#00b034'> level </font>kamu tidak memadai, kamu tidak dapat masuk.<br>Sekarang coba dengan mengakses melalui<font color='#00b034'> world map </font>, menuju<font color='#00b034'> Lorong Hijau </font>."
+  },
+  {
+   "n": 9140,
+   "text": "Woof woof! Ingin mencari harta karun? Didalam<font color='#00b034'> Exploration Zone </font><font color='#00b034'> Lorong Hijau </font>, ada banyak harta karun tersembunyi. Pergilah<font color='#00b034'> explore </font>untuk mendapatkan kesempatan untuk mendapatkan berbagai<font color='#00b034'> items </font>langka, dan bahkan mungkin<font color='#00b034'> pets </font>jika kamu beruntung! Tapi hati-hati, kamu bisa memberi sinyal ke<font color='#00b034'> monster </font>yang menjaga harta karun dan memicu pertempuran.<br>Bagaimana? Sekarang coba kamu melakukan<font color='#00b034'> explorasi </font>sekali."
+  },
+  {
+   "n": 9141,
+   "text": "Woof woof! Kau datang untuk bertemu Pakkun lagi. Kali ini aku akan membiarkan kamu dalam rahasia lain. Setiap<font color='#00b034'> Zona Explorasi </font>memiliki label<font color='#00b034'> tingkat penyelesaian </font>.Ketika<font color='#00b034'> explorasi </font>mencapai<font color='#00b034'> ⟨0⟩% </font>, <font color='#00b034'> tampilan penjelajahan </font><font color='#00b034'> bintang label tingkat penyelesaian</font>akan<font color='#00b034'> menyala dengan ⟨1⟩ bintang emas </font>dan kamu akan menerima bonus hadiah khusus.<br>Kamu ingin beberapa hadiah bukan? Maka pergi<font color='#00b034'> Zona Eksplorasi Lorong Hijau </font>dapatkan<font color='#00b034'> tingkat penyelesaian </font>sampai<font color='#00b034'> ⟨2⟩% </font>!"
+  },
+  {
+   "n": 9142,
+   "text": "Dunia permainan di<font color='#00b034'> zona luar ruangan </font>terkadang akan mengeluarkan iblis yang berkuasa. Kamu hanya memerlukan<font color='#00b034'> Demon Proof of Suppression </font>menantang mereka. Baru-baru ini, di<font color='#00b034'> Lorong Hijau </font><font color='#00b034'> Demon Brute </font>adalah seperti iblis. Mendapatkan<font color='#00b034'> Demon Proof of Suppression </font>melalui penjelajahan, dan menekan<font color='#00b034'> Demon Brute </font>untuk membuktikan keberanian kamu."
+  },
+  {
+   "n": 9143,
+   "text": "Melalui<font color='#00b034'> world map</font>di kanan atas tampilan permainan, kamu dapat melihat gambaran daerah dari Daratan Sakura. Daratan Sakura dibagi menjadi<font color='#00b034'> Kota Malaikat </font>, <font color='#00b034'> Desa Api </font>, <font color='#00b034'> Desa Air </font>,<font color='#00b034'> Desa Tanah </font>,<font color='#00b034'> Desa Angin </font>,<font color='#00b034'> Desa Petir </font>and<font color='#00b034'> Kota Iblis </font>dimana para iblis disegel, dan wilayah<font color='#00b034'> Dragontame Coast </font>yang misterius. Pada tampilan<font color='#00b034'> world map </font>, klik masing-masing<font color='#00b034'> zone area </font>untuk teleport ke zona, namun jika<font color='#00b034'> level </font>kamu tidak memadai, kamu tidak dapat masuk.<br>Sekarang coba dengan mengakses melalui<font color='#00b034'> world map </font>, menuju<font color='#00b034'> Puncak Bebatuan </font>."
+  },
+  {
+   "n": 9144,
+   "text": "Woof woof! Ingin mencari harta karun? Didalam<font color='#00b034'> Exploration Zone </font><font color='#00b034'> Puncak Bebatuan </font>, ada banyak harta karun tersembunyi. Pergilah<font color='#00b034'> explore </font>untuk mendapatkan kesempatan untuk mendapatkan berbagai<font color='#00b034'> items </font>langka, dan bahkan mungkin<font color='#00b034'> pets </font>jika kamu beruntung! Tapi hati-hati, kamu bisa memberi sinyal ke<font color='#00b034'> monster </font>yang menjaga harta karun dan memicu pertempuran.<br>Bagaimana? Sekarang coba kamu melakukan<font color='#00b034'> explorasi </font>sekali."
+  },
+  {
+   "n": 9145,
+   "text": "Woof woof! Kau datang untuk bertemu Pakkun lagi. Kali ini aku akan membiarkan kamu dalam rahasia lain. Setiap<font color='#00b034'> Zona Explorasi </font>memiliki label<font color='#00b034'> tingkat penyelesaian </font>.Ketika<font color='#00b034'> explorasi </font>mencapai<font color='#00b034'> ⟨0⟩% </font>, <font color='#00b034'> tampilan penjelajahan </font><font color='#00b034'> bintang label tingkat penyelesaian</font>akan<font color='#00b034'> menyala dengan ⟨1⟩ bintang emas </font>dan kamu akan menerima bonus hadiah khusus.<br>Kamu ingin beberapa hadiah bukan? Maka pergi<font color='#00b034'> Zona Eksplorasi Puncak Bebatuan </font>dapatkan<font color='#00b034'> tingkat penyelesaian </font>sampai<font color='#00b034'> ⟨2⟩% </font>!"
+  },
+  {
+   "n": 9146,
+   "text": "Dunia permainan di<font color='#00b034'> zona luar ruangan </font>terkadang akan mengeluarkan iblis yang berkuasa. Kamu hanya memerlukan<font color='#00b034'> Demon Proof of Suppression </font>menantang mereka. Baru-baru ini, di<font color='#00b034'> Puncak Bebatuan </font><font color='#00b034'> Demon Brute </font>adalah seperti iblis. Mendapatkan<font color='#00b034'> Demon Proof of Suppression </font>melalui penjelajahan, dan menekan<font color='#00b034'> Demon Brute </font>untuk membuktikan keberanian kamu."
+  },
+  {
+   "n": 9147,
+   "text": "Melalui<font color='#00b034'> world map</font>di kanan atas tampilan permainan, kamu dapat melihat gambaran daerah dari Daratan Sakura. Daratan Sakura dibagi menjadi<font color='#00b034'> Kota Malaikat </font>, <font color='#00b034'> Desa Api </font>, <font color='#00b034'> Desa Air </font>,<font color='#00b034'> Desa Tanah </font>,<font color='#00b034'> Desa Angin </font>,<font color='#00b034'> Desa Petir </font>and<font color='#00b034'> Kota Iblis </font>dimana para iblis disegel, dan wilayah<font color='#00b034'> Dragontame Coast </font>yang misterius. Pada tampilan<font color='#00b034'> world map </font>, klik masing-masing<font color='#00b034'> zone area </font>untuk teleport ke zona, namun jika<font color='#00b034'> level </font>kamu tidak memadai, kamu tidak dapat masuk.<br>Sekarang coba dengan mengakses melalui<font color='#00b034'> world map </font>, menuju<font color='#00b034'> Awan Lembut </font>."
+  },
+  {
+   "n": 9148,
+   "text": "Woof woof! Ingin mencari harta karun? Didalam<font color='#00b034'> Exploration Zone </font><font color='#00b034'> Awan Lembut </font>, ada banyak harta karun tersembunyi. Pergilah<font color='#00b034'> explore </font>untuk mendapatkan kesempatan untuk mendapatkan berbagai<font color='#00b034'> items </font>langka, dan bahkan mungkin<font color='#00b034'> pets </font>jika kamu beruntung! Tapi hati-hati, kamu bisa memberi sinyal ke<font color='#00b034'> monster </font>yang menjaga harta karun dan memicu pertempuran.<br>Bagaimana? Sekarang coba kamu melakukan<font color='#00b034'> explorasi </font>sekali."
+  },
+  {
+   "n": 9149,
+   "text": "Woof woof! Kau datang untuk bertemu Pakkun lagi. Kali ini aku akan membiarkan kamu dalam rahasia lain. Setiap<font color='#00b034'> Zona Explorasi </font>memiliki label<font color='#00b034'> tingkat penyelesaian </font>.Ketika<font color='#00b034'> explorasi </font>mencapai<font color='#00b034'> ⟨0⟩% </font>, <font color='#00b034'> tampilan penjelajahan </font><font color='#00b034'> bintang label tingkat penyelesaian</font>akan<font color='#00b034'> menyala dengan ⟨1⟩ bintang emas </font>dan kamu akan menerima bonus hadiah khusus.<br>Kamu ingin beberapa hadiah bukan? Maka pergi<font color='#00b034'> Zona Eksplorasi Awan Lembut </font>dapatkan<font color='#00b034'> tingkat penyelesaian </font>sampai<font color='#00b034'> ⟨2⟩% </font>!"
+  },
+  {
+   "n": 9150,
+   "text": "Dunia permainan di<font color='#00b034'> zona luar ruangan </font>terkadang akan mengeluarkan iblis yang berkuasa. Kamu hanya memerlukan<font color='#00b034'> Demon Proof of Suppression </font>menantang mereka. Baru-baru ini, di<font color='#00b034'> Awan Lembut </font><font color='#00b034'> Demon Brute </font>adalah seperti iblis. Mendapatkan<font color='#00b034'> Demon Proof of Suppression </font>melalui penjelajahan, dan menekan<font color='#00b034'> Demon Brute </font>untuk membuktikan keberanian kamu."
+  },
+  {
+   "n": 9151,
+   "text": "Melalui<font color='#00b034'> world map</font>di kanan atas tampilan permainan, kamu dapat melihat gambaran daerah dari Daratan Sakura. Daratan Sakura dibagi menjadi<font color='#00b034'> Kota Malaikat </font>, <font color='#00b034'> Desa Api </font>, <font color='#00b034'> Desa Air </font>,<font color='#00b034'> Desa Tanah </font>,<font color='#00b034'> Desa Angin </font>,<font color='#00b034'> Desa Petir </font>and<font color='#00b034'> Kota Iblis </font>dimana para iblis disegel, dan wilayah<font color='#00b034'> Dragontame Coast </font>yang misterius. Pada tampilan<font color='#00b034'> world map </font>, klik masing-masing<font color='#00b034'> zone area </font>untuk teleport ke zona, namun jika<font color='#00b034'> level </font>kamu tidak memadai, kamu tidak dapat masuk.<br>Sekarang coba dengan mengakses melalui<font color='#00b034'> world map </font>, menuju<font color='#00b034'> Gerbang Naga Tersembunyi </font>."
+  }
+ ]
+}

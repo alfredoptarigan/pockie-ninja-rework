@@ -1,0 +1,3049 @@
+{
+ "terms": {
+  "Kumogakure": "Lightning Village",
+  "Kirigakure": "Water Village",
+  "Iwagakure": "Earth Village",
+  "Otogakure": "Sound Village",
+  "Kusagakure": "Grass Village",
+  "Haruno Sakura": "Sakura Haruno",
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Unohana Retsu": "Retsu Unohana",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Shunsui Kyōraku": "Shunsui Kyoraku",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Ukitake Jūshiro": "Jushiro Ukitake",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Uchiha Madara": "Madara Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Murid Ninja": "Beginner Ninja",
+  "Ninja Akademi": "Academy Ninja",
+  "Ninja Genin": "Genin",
+  "Ninja Chunin": "Chunin",
+  "Ninja Jounin": "Jounin",
+  "Ninja Genius": "Genius",
+  "Terhormat": "Honored",
+  "Demi Cinta!": "For Love",
+  "Berusaha menang": "Try to Win",
+  "Semangat, anak muda!": "Keep Going, Young One",
+  "Come Come Paradise": "Make Out Paradise",
+  "Amegakure": "Hidden Rain Village",
+  "Cairan": "Liquid",
+  "Pilih": "Choose",
+  "Secepat Angin": "Swift as Wind",
+  "Bukti": "Proof",
+  "Ruang Bimbingan": "Guidance Room",
+  "Pasar": "Market",
+  "Agent of Soul Reaper": "Soul Reaper Agent",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Suigetsu": "Suigetsu Hozuki",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Christmas Boy": "Christmas (Male)",
+  "Christmas Girl": "Christmas (Female)",
+  "Penyihir": "Sorcerer",
+  "Petualang": "Adventurer",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 0,
+   "text": "Attack"
+  },
+  {
+   "n": 1,
+   "text": "AbsAddAtkMulEquip%"
+  },
+  {
+   "n": 2,
+   "text": "AbsAddAtkMulEquip%Ex"
+  },
+  {
+   "n": 3,
+   "text": "AbsorptionDamageEquip%"
+  },
+  {
+   "n": 4,
+   "text": "Meningkatkan attack dan speed ketika HP dibawah ⟨0⟩%"
+  },
+  {
+   "n": 5,
+   "text": "Equip Menyerap Damage%Ex"
+  },
+  {
+   "n": 6,
+   "text": "Tokoh Ninja"
+  },
+  {
+   "n": 7,
+   "text": "Awal peralihan dari Nindo"
+  },
+  {
+   "n": 8,
+   "text": "Ninjutsu Pemula"
+  },
+  {
+   "n": 9,
+   "text": "Batas Ninjutsu"
+  },
+  {
+   "n": 10,
+   "text": "Master Ninjutsu"
+  },
+  {
+   "n": 11,
+   "text": "Ninja Legendaris"
+  },
+  {
+   "n": 12,
+   "text": "Dalam pinjaman"
+  },
+  {
+   "n": 13,
+   "text": "Boros"
+  },
+  {
+   "n": 14,
+   "text": "Crazy Stones"
+  },
+  {
+   "n": 15,
+   "text": "Habiskan Uang Seperti Air"
+  },
+  {
+   "n": 16,
+   "text": "Sangat boros"
+  },
+  {
+   "n": 17,
+   "text": "Perlakukan Uang Seperti debu"
+  },
+  {
+   "n": 18,
+   "text": "Kesibukan Ninja"
+  },
+  {
+   "n": 19,
+   "text": "Mendedikasikan"
+  },
+  {
+   "n": 20,
+   "text": "Tak bisa tidur"
+  },
+  {
+   "n": 21,
+   "text": "S rank silver badge ninja!"
+  },
+  {
+   "n": 22,
+   "text": "A rank silver badge ninja!"
+  },
+  {
+   "n": 23,
+   "text": "B rank silver badge ninja!"
+  },
+  {
+   "n": 24,
+   "text": "C rank silver badge ninja!"
+  },
+  {
+   "n": 25,
+   "text": "D rank silver badge ninja!"
+  },
+  {
+   "n": 26,
+   "text": "Legenda dalam legenda!"
+  },
+  {
+   "n": 27,
+   "text": "Beat Tiger"
+  },
+  {
+   "n": 28,
+   "text": "Sunflower Killer"
+  },
+  {
+   "n": 29,
+   "text": "Demon Hunter"
+  },
+  {
+   "n": 30,
+   "text": "Ingin mencoba?"
+  },
+  {
+   "n": 31,
+   "text": "Seratus Tantangan!"
+  },
+  {
+   "n": 32,
+   "text": "Ribuan Tantangan!"
+  },
+  {
+   "n": 33,
+   "text": "Pemenang Duel"
+  },
+  {
+   "n": 34,
+   "text": "Duel Addict"
+  },
+  {
+   "n": 35,
+   "text": "Raja Duel"
+  },
+  {
+   "n": 36,
+   "text": "⟨0⟩ Ribu Cobalah!"
+  },
+  {
+   "n": 37,
+   "text": "⟨0⟩ kemenangan berturut-turut!"
+  },
+  {
+   "n": 38,
+   "text": "Takterkalahkan!"
+  },
+  {
+   "n": 39,
+   "text": "Akhir! ⟨0⟩ kemenangan berturut-turut!"
+  },
+  {
+   "n": 40,
+   "text": "Akhir! Tak terkalahkan!"
+  },
+  {
+   "n": 41,
+   "text": "Arena Terminator!"
+  },
+  {
+   "n": 42,
+   "text": "Lost Love"
+  },
+  {
+   "n": 43,
+   "text": "Fight for Love"
+  },
+  {
+   "n": 44,
+   "text": "Curry in Life"
+  },
+  {
+   "n": 45,
+   "text": "Tsunade Bet"
+  },
+  {
+   "n": 46,
+   "text": "Teman dalam kelompok"
+  },
+  {
+   "n": 47,
+   "text": "Skill Pemain"
+  },
+  {
+   "n": 48,
+   "text": "Level ahli"
+  },
+  {
+   "n": 49,
+   "text": "Menjadi master"
+  },
+  {
+   "n": 50,
+   "text": "Manusia Hebat"
+  },
+  {
+   "n": 51,
+   "text": "Posisi Tinggi"
+  },
+  {
+   "n": 52,
+   "text": "Kekayaan pemburu yang mahir"
+  },
+  {
+   "n": 53,
+   "text": "Perservance"
+  },
+  {
+   "n": 54,
+   "text": "Jejak Pet"
+  },
+  {
+   "n": 55,
+   "text": "Jejak Guru"
+  },
+  {
+   "n": 56,
+   "text": "Bukti jelas"
+  },
+  {
+   "n": 57,
+   "text": "Esensi Final Release"
+  },
+  {
+   "n": 58,
+   "text": "Bangun dari Sharingan"
+  },
+  {
+   "n": 59,
+   "text": "Invincible Man"
+  },
+  {
+   "n": 60,
+   "text": "The Lionhearted"
+  },
+  {
+   "n": 61,
+   "text": "Jangan Menyerah"
+  },
+  {
+   "n": 62,
+   "text": "Petualang"
+  },
+  {
+   "n": 63,
+   "text": "Angel of Mercy"
+  },
+  {
+   "n": 64,
+   "text": "Band Collector"
+  },
+  {
+   "n": 65,
+   "text": "Jagoan Muda"
+  },
+  {
+   "n": 66,
+   "text": "Agent of Soul Reaper"
+  },
+  {
+   "n": 67,
+   "text": "Organisasi Mistik"
+  },
+  {
+   "n": 68,
+   "text": "Kebanggaan Desa"
+  },
+  {
+   "n": 69,
+   "text": "Dewa Lainnya"
+  },
+  {
+   "n": 70,
+   "text": "Card Rookie"
+  },
+  {
+   "n": 71,
+   "text": "Card Expert"
+  },
+  {
+   "n": 72,
+   "text": "Card Master"
+  },
+  {
+   "n": 73,
+   "text": "Ninja Penyihir"
+  },
+  {
+   "n": 74,
+   "text": "<font color='#6a6e70'><b>   Tower Prestasi   </b></font>"
+  },
+  {
+   "n": 75,
+   "text": "Tower Prestasi"
+  },
+  {
+   "n": 76,
+   "text": "Tampilan Prestasi"
+  },
+  {
+   "n": 77,
+   "text": "Judul tidak ada"
+  },
+  {
+   "n": 78,
+   "text": "Murid Ninja"
+  },
+  {
+   "n": 79,
+   "text": "Come Come Paradise"
+  },
+  {
+   "n": 80,
+   "text": "Semangat, anak muda!"
+  },
+  {
+   "n": 81,
+   "text": "Domba gemuk Legendaris"
+  },
+  {
+   "n": 82,
+   "text": "Ninja Akademi"
+  },
+  {
+   "n": 83,
+   "text": "Ninja Genin"
+  },
+  {
+   "n": 84,
+   "text": "Ninja Chunin"
+  },
+  {
+   "n": 85,
+   "text": "Ninja Jounin"
+  },
+  {
+   "n": 86,
+   "text": "Ninja Genius"
+  },
+  {
+   "n": 87,
+   "text": "Terhormat"
+  },
+  {
+   "n": 88,
+   "text": "Demi Cinta"
+  },
+  {
+   "n": 89,
+   "text": "Berusaha menang"
+  },
+  {
+   "n": 90,
+   "text": "Gelar Prestasi"
+  },
+  {
+   "n": 91,
+   "text": "Gelar"
+  },
+  {
+   "n": 92,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Murid Ninja】!</font>"
+  },
+  {
+   "n": 93,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Ninja Akademi】!</font>"
+  },
+  {
+   "n": 94,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Ninja Genin】!</font>"
+  },
+  {
+   "n": 95,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Ninja Chunin】!</font>"
+  },
+  {
+   "n": 96,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Ninja Jounin】!</font>"
+  },
+  {
+   "n": 97,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Ninja Genius】!</font>"
+  },
+  {
+   "n": 98,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Terhormat】!</font>"
+  },
+  {
+   "n": 99,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Demi Cinta!】!</font>"
+  },
+  {
+   "n": 100,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Come Come Paradise】!</font>"
+  },
+  {
+   "n": 101,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Semangat, anak muda!】!</font>"
+  },
+  {
+   "n": 102,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Domba gemuk Legendaris】!</font>"
+  },
+  {
+   "n": 103,
+   "text": "<font color='#ff0000'>Mendapatkan Gelar【Berusaha menang】!</font>"
+  },
+  {
+   "n": 104,
+   "text": "<font color='#ff8a00'>Mendapatkan Gelar【Essence of Final Release】!</font>"
+  },
+  {
+   "n": 105,
+   "text": "<font color='#ff8a00'>Mendapatkan Gelar【Wake of Sharingan】!</font>"
+  },
+  {
+   "n": 106,
+   "text": "<font color='#ff8a00'>Memperoleh Gelar [Kelulusan Ninja]! </font>"
+  },
+  {
+   "n": 107,
+   "text": "Temukan<font color='#00b034'> Master Yuan </font>, Katakan padanya tentang dragon."
+  },
+  {
+   "n": 108,
+   "text": "Prestasi pada wealth: {@0:}/{@1:}"
+  },
+  {
+   "n": 109,
+   "text": "Prestasi pada bounty: {@0:}/{@1:}"
+  },
+  {
+   "n": 110,
+   "text": "Prestasi pada outdoor: {@0:}/{@1:}"
+  },
+  {
+   "n": 111,
+   "text": "Prestasi pada duel: {@0:}/{@1:}"
+  },
+  {
+   "n": 112,
+   "text": "Prestasi pada victory：{@0:}/{@1:}"
+  },
+  {
+   "n": 113,
+   "text": "Event completion： {@0:}/{@1:}"
+  },
+  {
+   "n": 114,
+   "text": "Prestasi pada VIP：{@0:}/{@1:}"
+  },
+  {
+   "n": 115,
+   "text": "Level"
+  },
+  {
+   "n": 116,
+   "text": "Kekayaan"
+  },
+  {
+   "n": 117,
+   "text": "Hadiah"
+  },
+  {
+   "n": 118,
+   "text": "Luar"
+  },
+  {
+   "n": 119,
+   "text": "Duel "
+  },
+  {
+   "n": 120,
+   "text": "Menang atau kalah"
+  },
+  {
+   "n": 121,
+   "text": "Event"
+  },
+  {
+   "n": 122,
+   "text": "VIP"
+  },
+  {
+   "n": 123,
+   "text": "Kartu"
+  },
+  {
+   "n": 124,
+   "text": "Karakter mencapai level ⟨0⟩"
+  },
+  {
+   "n": 125,
+   "text": "Total pengeluaran ⟨0⟩,⟨1⟩ Batu (Selain Pasar)"
+  },
+  {
+   "n": 126,
+   "text": "Total pengeluaran ⟨0⟩,⟨1⟩,⟨2⟩ Batu (Selain Pasar)"
+  },
+  {
+   "n": 127,
+   "text": "Total pengeluaran ⟨0⟩ gold (Selain Pasar)"
+  },
+  {
+   "n": 128,
+   "text": "Menyelesaikan Misi berhadiah ⟨0⟩ kali"
+  },
+  {
+   "n": 129,
+   "text": "S rank Menyelesaikan Misi berhadiah ⟨0⟩ kali"
+  },
+  {
+   "n": 130,
+   "text": "A rank Menyelesaikan Misi berhadiah ⟨0⟩ kali"
+  },
+  {
+   "n": 131,
+   "text": "B rank Menyelesaikan Misi berhadiah ⟨0⟩ kali"
+  },
+  {
+   "n": 132,
+   "text": "C rank Menyelesaikan Misi berhadiah ⟨0⟩ kali"
+  },
+  {
+   "n": 133,
+   "text": "D rank Menyelesaikan Misi berhadiah ⟨0⟩ kali"
+  },
+  {
+   "n": 134,
+   "text": "Selesaikan semua Prestasi ninja silver badge, mendapatkan prestasi【S rank silver badge ninja!】，mendapatkan prestasi【A rank silver badge ninja!】，Mendapatkan prestasi【B rank silver badge ninja!】，Mendapatkan prestasi【C rank silver badge ninja!】"
+  },
+  {
+   "n": 135,
+   "text": "Tantangan pada slot machine sebanyak ⟨0⟩ kali"
+  },
+  {
+   "n": 136,
+   "text": "Bunuh ⟨0⟩ sunflowers"
+  },
+  {
+   "n": 137,
+   "text": "Hancurkan ⟨0⟩ Boss di luar "
+  },
+  {
+   "n": 138,
+   "text": "Gunakan ⟨0⟩ duel di total"
+  },
+  {
+   "n": 139,
+   "text": "Menang ⟨0⟩ duel acak"
+  },
+  {
+   "n": 140,
+   "text": "Menang ⟨0⟩ kali berturut-turut di arena"
+  },
+  {
+   "n": 141,
+   "text": "Akhir pemain lainnya ⟨0⟩ kemenangan berturut-turut ⟨1⟩ kali"
+  },
+  {
+   "n": 142,
+   "text": "Akhir pemain lainnya ⟨0⟩ kemenangan berturut-turut sekali"
+  },
+  {
+   "n": 143,
+   "text": "Menyelesaikan semua prestasi untuk mengakhiri kemenangan berturut-turut，mendapatkan prestasi【selesai! ⟨0⟩ Kemenangan berturut!】，mendapatkan prestasi【selesai! ⟨1⟩ kemenangan berturut】，mendapatkan prestasi【selesai!Takterkalahkan!】"
+  },
+  {
+   "n": 144,
+   "text": "Gagal ⟨0⟩ kali menantang di arena"
+  },
+  {
+   "n": 145,
+   "text": "Level ⟨0⟩ menyelsaikan misi Come Come Paradise di Tempat tempa pada Kota malaikat"
+  },
+  {
+   "n": 146,
+   "text": "Level ⟨0⟩ MenyelesaikanKare Ketua Desa Dalam misi kehidupan di kota malaikat"
+  },
+  {
+   "n": 147,
+   "text": "Gunakan dadu untuk mendapatkan ⟨0⟩ poin（Diatas level ⟨1⟩ kemunculan monster di luar） "
+  },
+  {
+   "n": 148,
+   "text": "Tambah ⟨0⟩ teman"
+  },
+  {
+   "n": 149,
+   "text": "Waktu online mencapai ⟨0⟩ jam"
+  },
+  {
+   "n": 150,
+   "text": "Melawan guru sekali du ruang bimbingan"
+  },
+  {
+   "n": 151,
+   "text": "Gunakan VIP card untuk mendapatkan identitas"
+  },
+  {
+   "n": 152,
+   "text": "VIP Status berlangsung selama ⟨0⟩ hari"
+  },
+  {
+   "n": 153,
+   "text": "Gunakan gold untuk merefresh sebanyak ⟨0⟩ kali di Toko Misteri"
+  },
+  {
+   "n": 154,
+   "text": "Masuk ke permainan untuk total ⟨0⟩ hari"
+  },
+  {
+   "n": 155,
+   "text": "Gunakan pencarian pet di desa dan dapatkan ⟨0⟩ point"
+  },
+  {
+   "n": 156,
+   "text": "Akumulasi prestasi mencapai ⟨0⟩ poin"
+  },
+  {
+   "n": 157,
+   "text": "Mempertahankan kemenangan ⟨0⟩ kali"
+  },
+  {
+   "n": 158,
+   "text": "Menantang ⟨0⟩ tuan rumah"
+  },
+  {
+   "n": 159,
+   "text": "Menggagalkan ⟨0⟩ Tantangan"
+  },
+  {
+   "n": 160,
+   "text": "Kumpulkan ⟨0⟩ set dari spirit beast dan redeem berhasil"
+  },
+  {
+   "n": 161,
+   "text": "Kumpulkan ⟨0⟩ set dari Village Secret dan redeem berhasil"
+  },
+  {
+   "n": 162,
+   "text": "Kumpulkan ⟨0⟩ set dari Konoha Eight dan redeem berhasil"
+  },
+  {
+   "n": 163,
+   "text": "Kumpulkan ⟨0⟩ Palace Captain dan pembebasan telah Berhasil"
+  },
+  {
+   "n": 164,
+   "text": "Kumpulkan ⟨0⟩ Akatsuki dan pembebasan telah Berhasil"
+  },
+  {
+   "n": 165,
+   "text": "Kumpulkan ⟨0⟩ Kage Shinobi dan Pembebasan telah Berhasil"
+  },
+  {
+   "n": 166,
+   "text": "Kumpulkan ⟨0⟩ set dari Bloodline Limit dan redeem berhasil"
+  },
+  {
+   "n": 167,
+   "text": "Kumpulkan ⟨0⟩ Card Rookie dan Pembebasan telah Berhasil"
+  },
+  {
+   "n": 168,
+   "text": "Kumpulkan ⟨0⟩ Card Expert dan pembebasan telah Berhasil"
+  },
+  {
+   "n": 169,
+   "text": "kumpulkan ⟨0⟩ set dari Card Master dan redeem berhasil"
+  },
+  {
+   "n": 170,
+   "text": "karakter telah mencapai lv.⟨0⟩"
+  },
+  {
+   "n": 171,
+   "text": "Karakter"
+  },
+  {
+   "n": 172,
+   "text": "Misi terkait"
+  },
+  {
+   "n": 173,
+   "text": "Prestasi pertempuran"
+  },
+  {
+   "n": 174,
+   "text": "Arena"
+  },
+  {
+   "n": 175,
+   "text": "Prestasi spesial"
+  },
+  {
+   "n": 176,
+   "text": "Selesai"
+  },
+  {
+   "n": 177,
+   "text": "Perlihatkan prestasi kamu"
+  },
+  {
+   "n": 178,
+   "text": "Penyelesaian:"
+  },
+  {
+   "n": 179,
+   "text": "Pemain <font color='#ff0000'>{@0:}</font> mendapatkan persasi!"
+  },
+  {
+   "n": 180,
+   "text": "Kamu<font color='#ff0000'> belum menyelesaikan </font> Prestasi ini!"
+  },
+  {
+   "n": 181,
+   "text": "Kamu telah menyelesaikan prestasi ini !"
+  },
+  {
+   "n": 182,
+   "text": "Masukan kode aktivasi:"
+  },
+  {
+   "n": 183,
+   "text": "Masukkan kode aktivasi kamu :"
+  },
+  {
+   "n": 184,
+   "text": "Pencatatan berhasil!"
+  },
+  {
+   "n": 185,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah menambahkan kamu sebagai teman!<br>gunakan menu Level ⟨0⟩ yang muncul ketika kamu klik pada nama pemain, kamu dapat menambahkan pemain lain sebagai teman!"
+  },
+  {
+   "n": 186,
+   "text": "Tamabah Teman"
+  },
+  {
+   "n": 187,
+   "text": "lg_AddMPUseOdds%"
+  },
+  {
+   "n": 188,
+   "text": "Kemungkinan tidak menggunakan chakra saat digunakan"
+  },
+  {
+   "n": 189,
+   "text": "lg_AddSkillComeOdds%"
+  },
+  {
+   "n": 190,
+   "text": "Meningkatkan kemungkinan untuk mengeluarkan skill"
+  },
+  {
+   "n": 191,
+   "text": "Skill Tambahan"
+  },
+  {
+   "n": 192,
+   "text": "Agility"
+  },
+  {
+   "n": 193,
+   "text": "<font color='#6a6e70'><b>   Balon gas Udara   </b></font>"
+  },
+  {
+   "n": 194,
+   "text": "Balon gas Udara"
+  },
+  {
+   "n": 195,
+   "text": "<font color='#6a6e70'><b>    Balon Udara    </b></font>"
+  },
+  {
+   "n": 196,
+   "text": "Balon Udara"
+  },
+  {
+   "n": 197,
+   "text": "<font color='#8e8e8e'>Belum dibuka</font>"
+  },
+  {
+   "n": 198,
+   "text": "Online Gift Box"
+  },
+  {
+   "n": 199,
+   "text": "Sign-in Gift Box<font color='#ff0000'>NEW</font>"
+  },
+  {
+   "n": 200,
+   "text": "Tutup"
+  },
+  {
+   "n": 201,
+   "text": "Pukul satu lagi"
+  },
+  {
+   "n": 202,
+   "text": "Akhiri setelah ini"
+  },
+  {
+   "n": 203,
+   "text": "Buka Banyak"
+  },
+  {
+   "n": 204,
+   "text": "Buka Satu"
+  },
+  {
+   "n": 205,
+   "text": "ISI GOLD"
+  },
+  {
+   "n": 206,
+   "text": "Single Price"
+  },
+  {
+   "n": 207,
+   "text": "Lihat Hadiah"
+  },
+  {
+   "n": 208,
+   "text": "<font color='#00ffff'>Mengunakan gold paling banyak dapat mengintip ⟨0⟩ kartu.</font>"
+  },
+  {
+   "n": 209,
+   "text": "Kamu hanya dapat mengintip dua kartu di arena!"
+  },
+  {
+   "n": 210,
+   "text": "Kamu membalas dendam terhadap <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> dan gagal! Score berkurang sebesar<font color='#000000'> {@1:} </font>! Memperoleh<font color='#000000'> {@2:} </font>medali!"
+  },
+  {
+   "n": 211,
+   "text": "Kamu membalas dendam terhadap <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> dan berhasil! Score meningkat sebesar <font color='#000000'> {@1:} </font>, memperoleh <font color='#000000'> {@2:} </font> medali. Balas dendam berhasil, hadiah bonus<font color='#000000'> {@3:} </font> medali!"
+  },
+  {
+   "n": 212,
+   "text": "Kamu membalas dendam pada <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font>, dan berakhir seri!"
+  },
+  {
+   "n": 213,
+   "text": " <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> telah menang dalam pertarungan dengan kamu! Nilai kamu dikurangi sebesar<font color='#000000'> {@1:} </font>!"
+  },
+  {
+   "n": 214,
+   "text": " <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> telah gagal dalam pertarungan dengan kamu! Skor kamu meningkat<font color='#000000'> {@1:} </font>, memperoleh<font color='#000000'> {@2:} </font>medali!"
+  },
+  {
+   "n": 215,
+   "text": " <font color='#ff0000'><a href= 'event:pemain|{@0:}'>{@0:}</a></font> telah menantang kamu, dan seri!"
+  },
+  {
+   "n": 216,
+   "text": "Tantangan kamu pada <font color='#ff0000'>{@0:}</font> BOSS rank level telah gagal! Jangan frustasi, asah kembali skill kamu dan jalani tantangan lagi."
+  },
+  {
+   "n": 217,
+   "text": "Tantangan kamu pada <font color='#ff0000'>{@0:}</font> BOSS rank level berhasil! Rank kamu meningkat menjadi <font color='#ff0000'> {@1:} </font>, Bonus hadiah yaitu <font color='#000000'> {@2:} </font>medali!"
+  },
+  {
+   "n": 218,
+   "text": "Tantangan kamu pada <font color='#ff0000'>{@0:}</font> BOSS level rank telah gagal! Jangan frustasi, asah kembali skill kamu dan jalani tantangan lagi."
+  },
+  {
+   "n": 219,
+   "text": "Tantangan dengan <font color='#ff6565'>Fortune Cat</font> gagal, tidak dapat memperoleh hadiah!"
+  },
+  {
+   "n": 220,
+   "text": "Tantangan dengan <font color='#ff6565'>Fortune Cat</font> Berhasil, memperoleh <font color='#ffffff'> {@0:} </font>medal!"
+  },
+  {
+   "n": 221,
+   "text": "Tantangan dengan <font color='#ff6565'>Fortune Cat</font> berakhir seri, tidak dapat memperoleh hadiah!"
+  },
+  {
+   "n": 222,
+   "text": "Konfirmasi membalas?"
+  },
+  {
+   "n": 223,
+   "text": "Kamu memilih tantangan acak <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font>, namun kalah dalam pertempuran dan mengakhiri kemenangan beruntun kamu! Skor dikurangi sebesar<font color='#000000'> {@1:} </font>, memperoleh<font color='#000000'> {@2:} </font>medali!"
+  },
+  {
+   "n": 224,
+   "text": "Kamu memilih untuk tantangan acak <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font>, memenangkan pertarungan dan meningkatkan kemenangan beruntun pada {@3:} pertandingan! Score meningkat sebesar <font color='#000000'> {@1:} </font>, memperoleh <font color='#000000'> {@2:} </font> medali! Kemenangan berturut-turut dan dapatkan hadiah bonus sebesar<font color='#000000'> {@4:} </font>point!"
+  },
+  {
+   "n": 225,
+   "text": "Kamu memilih untuk tantangan acak <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font>, seri dalam pertarungan! Kemenangan beruntun terhenti!"
+  },
+  {
+   "n": 226,
+   "text": "Kamu telah menantang <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> dan gagal! Skor dikurangi sebesar <font color='#000000'> {@1:} </font>! Memperoleh <font color='#000000'> {@2:} </font> medali!"
+  },
+  {
+   "n": 227,
+   "text": "Kamu telah menantang <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> dan menang! Skor meningkat sebesar<font color='#000000'> {@1:} </font>! memperoleh<font color='#000000'> {@2:} </font>medali!"
+  },
+  {
+   "n": 228,
+   "text": "Kamu telah menantang <font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a></font> dan berakhir seri!"
+  },
+  {
+   "n": 229,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah menantang kamu di arena, dan kamu sayangnya dikalahkan. Kehilangan {@1:} Point!"
+  },
+  {
+   "n": 230,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah menantang kamu di arena, dan kamu terhindar dari kehancuran, mengahsilkan kemenangan dan memperoleh {@1:} points!"
+  },
+  {
+   "n": 231,
+   "text": "Accessories"
+  },
+  {
+   "n": 232,
+   "text": "Kostum"
+  },
+  {
+   "n": 233,
+   "text": "Outfit"
+  },
+  {
+   "n": 234,
+   "text": "Armor"
+  },
+  {
+   "n": 235,
+   "text": "Lainnya"
+  },
+  {
+   "n": 236,
+   "text": "Pet"
+  },
+  {
+   "n": 237,
+   "text": "Kostum Set"
+  },
+  {
+   "n": 238,
+   "text": "Selamat atas membuka tabung berwarna dan memperoleh <font color='#00aeff'> {@0:} </font>!"
+  },
+  {
+   "n": 239,
+   "text": "Konfirmasi membuka telur keberuntungan ini?"
+  },
+  {
+   "n": 240,
+   "text": "Peringkat"
+  },
+  {
+   "n": 241,
+   "text": "Kemenangan berturut-turut"
+  },
+  {
+   "n": 242,
+   "text": "Teman"
+  },
+  {
+   "n": 243,
+   "text": "Kamu tidak memiliki teman di peringkat!"
+  },
+  {
+   "n": 244,
+   "text": "Kamu memiliki kesempatan untuk membalas serangan <font color='#ff0000'> <a href= 'event:player|{@0:}'>{@0:}</a> </font> {@1:}, Konfirmasi pembayaran<font color='0000ff'> {@2:} </font> gold kembali membalas serangan?"
+  },
+  {
+   "n": 245,
+   "text": "[<font color='#000000'>{@0:}</font> Jam yang lalu]"
+  },
+  {
+   "n": 246,
+   "text": "[<font color='#000000'>{@0:}</font> Menit yang lalu]"
+  },
+  {
+   "n": 247,
+   "text": "[<font color='#000000'>{@0:}</font> detik yang lalu]"
+  },
+  {
+   "n": 248,
+   "text": "Mengalahkan BOSS Level Arena, dapat dipromosikan ke peringkat berikutnya!"
+  },
+  {
+   "n": 249,
+   "text": "Bertemu <font color='#ff6565'>Fortune Cat</font>, kalahkan dia untuk mendapatkan medali yang lebih!"
+  },
+  {
+   "n": 250,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'>{@0:}</a> </font> Memperoleh nomor {@1:} kemenangan berturut-turut, memperoleh hadiah bonus sebesar {@2:} point!"
+  },
+  {
+   "n": 251,
+   "text": "Tantangan tersedia<font color='#000000'> ⟨0⟩ </font>. Kamu yakin untuk menggunakan <font color='0000ff'> {@0:} </font> gold untuk melanjutkan? Kamu dapat menantang ⟨1⟩ kali dengan gold!"
+  },
+  {
+   "n": 252,
+   "text": "Speed"
+  },
+  {
+   "n": 253,
+   "text": "AtkTimeMulEquip%"
+  },
+  {
+   "n": 254,
+   "text": "AtkTimeMulEquip%Ex"
+  },
+  {
+   "n": 255,
+   "text": "Maksimal jumlah mencoba"
+  },
+  {
+   "n": 256,
+   "text": "⟨0⟩. Kamudapat menghabiskan gold untuk menjalankan Auto-Challange yang tidak memerlukan restorasi chakra dan HP. <br> ⟨1⟩. Auto-Challenging tidak terpengaruh pada status offline. Kamu dapat melakukannya walaupun setelah mau offline"
+  },
+  {
+   "n": 257,
+   "text": "Auto-Challange ⟨0⟩ kali (⟨1⟩ gold)"
+  },
+  {
+   "n": 258,
+   "text": "Pengisian berhasil, kertersediaan Daftar kostum biru yang kamu miliki telah di perpanjang<font color='#ff0000'> +{@0:} </font>!"
+  },
+  {
+   "n": 259,
+   "text": "Pengisian berhasil, kertersediaan Daftar kostum abu-abu yang kamu miliki telah di perpanjang<font color='#ff0000'> +{@0:} </font>!"
+  },
+  {
+   "n": 260,
+   "text": "Pengisian berhasil, kertersediaan Daftar kostum orange yang kamu miliki telah di perpanjang<font color='#ff0000'> +{@0:} </font>!"
+  },
+  {
+   "n": 261,
+   "text": "Daftar Kostum Biru upgraded ke level<font color='#00aeff'> {@0:} </font>.  kamu mendapatkan Daftar Kostum attributes level<font color='#00aeff'> {@0:} </font>dan  Gelar dari<font color='#00aeff'> {@1:} </font>. Setelah mencapai level<font color='#ff0000'> {@2:} </font>, bonus attribut akan lebih efektif! "
+  },
+  {
+   "n": 262,
+   "text": "Daftar Kostum Abu-abu upgraded ke level<font color='#00aeff'> {@0:} </font>.  kamu mendapatkan Daftar Kostum attributes level<font color='#00aeff'> {@0:} </font>dan  Gelar dari<font color='#00aeff'> {@1:} </font>. Setelah mencapai level<font color='#ff0000'> {@2:} </font>, bonus attribut akan lebih efektif! "
+  },
+  {
+   "n": 263,
+   "text": "Daftar Kostum Orange upgraded ke level<font color='#00aeff'> {@0:} </font>. kamu mendapatkan Daftar Kostum attributes level<font color='#00aeff'> {@0:} </font> dan  Gelar dari<font color='#00aeff'> {@1:} </font>. Setelah mencapai level<font color='#ff0000'> {@2:} </font>, bonus attribut akan lebih efektif! "
+  },
+  {
+   "n": 264,
+   "text": "Menambah"
+  },
+  {
+   "n": 265,
+   "text": "Jumlah pengumpulan："
+  },
+  {
+   "n": 266,
+   "text": "Sisa hari:"
+  },
+  {
+   "n": 267,
+   "text": "Pilih Daftar Kostum"
+  },
+  {
+   "n": 268,
+   "text": "Daftar level Kostum："
+  },
+  {
+   "n": 269,
+   "text": "Level Attribute"
+  },
+  {
+   "n": 270,
+   "text": "Armor Break"
+  },
+  {
+   "n": 271,
+   "text": "Critical Strike"
+  },
+  {
+   "n": 272,
+   "text": "Hit"
+  },
+  {
+   "n": 273,
+   "text": "Constitution"
+  },
+  {
+   "n": 274,
+   "text": "Defense"
+  },
+  {
+   "n": 275,
+   "text": "Block"
+  },
+  {
+   "n": 276,
+   "text": "Strength"
+  },
+  {
+   "n": 277,
+   "text": "Fungsi ini tidak terbuka. Silakan menunggu!"
+  },
+  {
+   "n": 278,
+   "text": "<b> Tip Mengkoleksi kostum :</b>"
+  },
+  {
+   "n": 279,
+   "text": "<font color='#ff0000'><b>⟨0⟩</b></font>"
+  },
+  {
+   "n": 280,
+   "text": "<b> Cara Mengkombinasi kostum：</b>"
+  },
+  {
+   "n": 281,
+   "text": "Fungsi ini tidak tersedia saat ini. Silahkan menunggu!"
+  },
+  {
+   "n": 282,
+   "text": "Total atribut dasar"
+  },
+  {
+   "n": 283,
+   "text": "Stamina"
+  },
+  {
+   "n": 284,
+   "text": "<font color='#ff8a00'>Kurosaki Ichigo</font>"
+  },
+  {
+   "n": 285,
+   "text": "<font color='#8e8e8e'>Ggio Vega</font>"
+  },
+  {
+   "n": 286,
+   "text": "<font color='#ff8a00'>White Ichigo</font>"
+  },
+  {
+   "n": 287,
+   "text": "<font color='#ff8a00'>Bomb Ichigo</font>"
+  },
+  {
+   "n": 288,
+   "text": "<font color='#00aeff'>Ulquiorra</font>"
+  },
+  {
+   "n": 289,
+   "text": "<font color='#00aeff'>White Ulquiorra</font>"
+  },
+  {
+   "n": 290,
+   "text": "<font color='#ff8a00'>Hollowfied Ulquiorra</font>"
+  },
+  {
+   "n": 291,
+   "text": "<font color='#8e8e8e'>Love Aikawa </font>"
+  },
+  {
+   "n": 292,
+   "text": "<font color='#00aeff'>Grimmjow</font>"
+  },
+  {
+   "n": 293,
+   "text": "<font color='#00aeff'>Hitsugaya Toushiro</font>"
+  },
+  {
+   "n": 294,
+   "text": "<font color='#8e8e8e'>Hirako Shinji</font>"
+  },
+  {
+   "n": 295,
+   "text": "<font color='#00aeff'>Hollowfied Hirako Shinji</font>"
+  },
+  {
+   "n": 296,
+   "text": "<font color='#8e8e8e'>Renji</font>"
+  },
+  {
+   "n": 297,
+   "text": "<font color='#00aeff'>Gin Ichimaru</font>"
+  },
+  {
+   "n": 298,
+   "text": "<font color='#8e8e8e'>Akimichi Choji</font>"
+  },
+  {
+   "n": 299,
+   "text": "<font color='#8e8e8e'>Inuzuka Kiba </font>"
+  },
+  {
+   "n": 300,
+   "text": "<font color='#8e8e8e'>Aburame Shino</font>"
+  },
+  {
+   "n": 301,
+   "text": "<font color='#8e8e8e'>Nara Shikamaru</font>"
+  },
+  {
+   "n": 302,
+   "text": "<font color='#8e8e8e'>Asuma</font>"
+  },
+  {
+   "n": 303,
+   "text": "<font color='#00aeff'>Rock Lee</font>"
+  },
+  {
+   "n": 304,
+   "text": "<font color='#00aeff'>Hyuga Neji</font>"
+  },
+  {
+   "n": 305,
+   "text": "<font color='#00aeff'>Scorpion</font>"
+  },
+  {
+   "n": 306,
+   "text": "<font color='#ff8a00'>Yamato</font>"
+  },
+  {
+   "n": 307,
+   "text": "<font color='#8e8e8e'>Sarugaki Hiyori </font>"
+  },
+  {
+   "n": 308,
+   "text": "<font color='#ff8a00'>Shihouin Yoruichi</font>"
+  },
+  {
+   "n": 309,
+   "text": "<font color='#00aeff'>Soifon</font>"
+  },
+  {
+   "n": 310,
+   "text": "<font color='#ff8a00'>Halibel</font>"
+  },
+  {
+   "n": 311,
+   "text": "<font color='#ff8a00'>Mashiro Kuna</font>"
+  },
+  {
+   "n": 312,
+   "text": "<font color='#ff8a00'>Shiba Kuukaku</font>"
+  },
+  {
+   "n": 313,
+   "text": "<font color='#8e8e8e'>Nanao Ise</font>"
+  },
+  {
+   "n": 314,
+   "text": "<font color='#8e8e8e'>Momo Hinamori</font>"
+  },
+  {
+   "n": 315,
+   "text": "<font color='#8e8e8e'>Rangiku Matsumoto </font>"
+  },
+  {
+   "n": 316,
+   "text": "<font color='#ff8a00'>Inoue Orihime</font>"
+  },
+  {
+   "n": 317,
+   "text": "<font color='#8e8e8e'>Kurenai Yuuhi</font>"
+  },
+  {
+   "n": 318,
+   "text": "<font color='#ff8a00'>Hyuga Hinata</font>"
+  },
+  {
+   "n": 319,
+   "text": "<font color='#8e8e8e'>Shizune</font>"
+  },
+  {
+   "n": 320,
+   "text": "<font color='#ff8a00'>Mizukage</font>"
+  },
+  {
+   "n": 321,
+   "text": "<font color='#ff8a00'>Uzumaki Naruto</font>"
+  },
+  {
+   "n": 322,
+   "text": "<font color='#ff8a00'>Gaara</font>"
+  },
+  {
+   "n": 323,
+   "text": "<font color='#ff8a00'>Hatake Kakashi</font>"
+  },
+  {
+   "n": 324,
+   "text": "<font color='#ff8a00'>Uchiha Sasuke</font>"
+  },
+  {
+   "n": 325,
+   "text": "<font color='#ff8a00'>Uchiha Itachi</font>"
+  },
+  {
+   "n": 326,
+   "text": "<font color='#ff8a00'>⟨0⟩nd Hokage</font>"
+  },
+  {
+   "n": 327,
+   "text": "<font color='#ff8a00'>Orochimaru</font>"
+  },
+  {
+   "n": 328,
+   "text": "<font color='#00aeff'>Zangetsu</font>"
+  },
+  {
+   "n": 329,
+   "text": "<font color='#ff8a00'>⟨0⟩rd Hokage</font>"
+  },
+  {
+   "n": 330,
+   "text": "<font color='#00aeff'>Hollowfied Grimmjow</font>"
+  },
+  {
+   "n": 331,
+   "text": "<font color='#ff8a00'>Aizen</font>"
+  },
+  {
+   "n": 332,
+   "text": "<font color='#ff8a00'>⟨0⟩th Hokage</font>"
+  },
+  {
+   "n": 333,
+   "text": "<font color='#ff8a00'>Jiraiya Kostum</font>"
+  },
+  {
+   "n": 334,
+   "text": "<font color='#ff8a00'>Sakura Haruno</font>"
+  },
+  {
+   "n": 335,
+   "text": "<font color='#00aeff'>Yamanaka Ino</font>"
+  },
+  {
+   "n": 336,
+   "text": "<font color='#8e8e8e'>Mitarashi Anko</font>"
+  },
+  {
+   "n": 337,
+   "text": "<font color='#00aeff'>Temari</font>"
+  },
+  {
+   "n": 338,
+   "text": "<font color='#8e8e8e'>Tenten</font>"
+  },
+  {
+   "n": 339,
+   "text": "<font color='#00aeff'>Haku</font>"
+  },
+  {
+   "n": 340,
+   "text": "<font color='#8e8e8e'>Kurotsuchi Nemu</font>"
+  },
+  {
+   "n": 341,
+   "text": "<font color='#00aeff'>Kusajishi Yachiru</font>"
+  },
+  {
+   "n": 342,
+   "text": "<font color='#ff8a00'>Kotetsu Isane</font>"
+  },
+  {
+   "n": 343,
+   "text": "<font color='#00aeff'>Yadomaru Sasha</font>"
+  },
+  {
+   "n": 344,
+   "text": "<font color='#ff8a00'>Arisawa Tatsuki</font>"
+  },
+  {
+   "n": 345,
+   "text": "<font color='#ff8a00'>Tsunade</font>"
+  },
+  {
+   "n": 346,
+   "text": "<font color='#ff8a00'>Kuchiki Rukia </font>"
+  },
+  {
+   "n": 347,
+   "text": "<font color='#00aeff'>Momochi Zabuza</font>"
+  },
+  {
+   "n": 348,
+   "text": "<font color='#ff8a00'>Kuchiki Byakuya</font>"
+  },
+  {
+   "n": 349,
+   "text": "<font color='#ff8a00'>Nelliel</font>"
+  },
+  {
+   "n": 350,
+   "text": "<font color='#ff8a00'>Little Meng</font>"
+  },
+  {
+   "n": 351,
+   "text": "<font color='#ff8a00'>Little Jun</font>"
+  },
+  {
+   "n": 352,
+   "text": "<font color='#00aeff'>Christmas Boy</font>"
+  },
+  {
+   "n": 353,
+   "text": "<font color='#00aeff'>Christmas Girl</font>"
+  },
+  {
+   "n": 354,
+   "text": "<font color='#ff8a00'>Unohana Retsu</font>"
+  },
+  {
+   "n": 355,
+   "text": "<font color='#ff8a00'>Kyuubi Naruto</font>"
+  },
+  {
+   "n": 356,
+   "text": "<font color='#ff8a00'>Kakuzu</font>"
+  },
+  {
+   "n": 357,
+   "text": "<font color='#ff8a00'>Hidan</font>"
+  },
+  {
+   "n": 358,
+   "text": "<font color='#ff8a00'>Deidara</font>"
+  },
+  {
+   "n": 359,
+   "text": "<font color='#ff8a00'>Pain</font>"
+  },
+  {
+   "n": 360,
+   "text": "<font color='#ff8a00'>Kisame Hoshigaki</font>"
+  },
+  {
+   "n": 361,
+   "text": "<font color='#ff8a00'>Konan</font>"
+  },
+  {
+   "n": 362,
+   "text": "<font color='#ff8a00'>Sage Naruto</font>"
+  },
+  {
+   "n": 363,
+   "text": "<font color='#ff8a00'>Hebi Sasuke</font>"
+  },
+  {
+   "n": 364,
+   "text": "<font color='#ff8a00'>Suigetsu</font>"
+  },
+  {
+   "n": 365,
+   "text": "<font color='#ff8a00'>Karin</font>"
+  },
+  {
+   "n": 366,
+   "text": "Lemari kamu penuh, tidak dapat menambahakan lagi,"
+  },
+  {
+   "n": 367,
+   "text": "Pengumpul Orange"
+  },
+  {
+   "n": 368,
+   "text": "Penjaga Orange"
+  },
+  {
+   "n": 369,
+   "text": "Kolektor Orange"
+  },
+  {
+   "n": 370,
+   "text": "Koleksi Orange"
+  },
+  {
+   "n": 371,
+   "text": "Katalog Buku Orange"
+  },
+  {
+   "n": 372,
+   "text": "Mighty Orange Collector"
+  },
+  {
+   "n": 373,
+   "text": "Orange Ruler"
+  },
+  {
+   "n": 374,
+   "text": "Pengumpul Biru"
+  },
+  {
+   "n": 375,
+   "text": "Penjaga Biru"
+  },
+  {
+   "n": 376,
+   "text": "Kolektor Biru"
+  },
+  {
+   "n": 377,
+   "text": "Koleksi Biru"
+  },
+  {
+   "n": 378,
+   "text": "Katalog Buku Biru"
+  },
+  {
+   "n": 379,
+   "text": "Pengumpul Abu-Abu"
+  },
+  {
+   "n": 380,
+   "text": "Penjaga Abu-Abu"
+  },
+  {
+   "n": 381,
+   "text": "Kolektor Abu-Abu"
+  },
+  {
+   "n": 382,
+   "text": "Koleksi Abu-Abu"
+  },
+  {
+   "n": 383,
+   "text": "Katalog Buku Abu-Abu"
+  },
+  {
+   "n": 384,
+   "text": "<font color='#ff8a00'> (Perbedaan transfer atribut kostum adalah berbeda)</font>"
+  },
+  {
+   "n": 385,
+   "text": "<font color='#d5f003'><b>Waktu: </b>{@0:}<br>{@1:}</font>"
+  },
+  {
+   "n": 386,
+   "text": "Movement power kamu sudah maksimum, tidak bisa dikembalikan!"
+  },
+  {
+   "n": 387,
+   "text": "Kamar tidur kamu sudah level maksimum"
+  },
+  {
+   "n": 388,
+   "text": "Kamar tidur kamu sudah level maksimum, harus meng-upgrade level rumah di halaman pertama"
+  },
+  {
+   "n": 389,
+   "text": "Dana tidak mencukupi, ini biaya tindakan {@1:value} {@0:type}"
+  },
+  {
+   "n": 390,
+   "text": "Pemulihan sukses, biaya {@1:value} {@0:type}."
+  },
+  {
+   "n": 391,
+   "text": "Upgrade sukses, biaya {@1:value} {@0:type}"
+  },
+  {
+   "n": 392,
+   "text": "Respon kamu telah mencapai batas waktu maksimun"
+  },
+  {
+   "n": 393,
+   "text": "Respon kamu telah mencapai batas maksimun"
+  },
+  {
+   "n": 394,
+   "text": "HP dan chakra saat ini maksimum, tidak bisa memulihkan!"
+  },
+  {
+   "n": 395,
+   "text": "Loading pertama kali membutuhkan beberapa waktu.Harap bersabar!"
+  },
+  {
+   "n": 396,
+   "text": "Nama kraketer mengandung ilegal"
+  },
+  {
+   "n": 397,
+   "text": "Server Penuh"
+  },
+  {
+   "n": 398,
+   "text": "Nama dapat digunakan"
+  },
+  {
+   "n": 399,
+   "text": "Nama Sudah Ada"
+  },
+  {
+   "n": 400,
+   "text": "Max huruf"
+  },
+  {
+   "n": 401,
+   "text": "⟨0⟩-⟨1⟩ huruf"
+  },
+  {
+   "n": 402,
+   "text": "Buka Forum"
+  },
+  {
+   "n": 403,
+   "text": "Server Penuh Coba lagi"
+  },
+  {
+   "n": 404,
+   "text": "Silahkan Masukan Nama!"
+  },
+  {
+   "n": 405,
+   "text": "Nama karakter sudah dipakai, harap gunakan nama lain"
+  },
+  {
+   "n": 406,
+   "text": "⟨0⟩ Huruf, masukan lagi!"
+  },
+  {
+   "n": 407,
+   "text": "Tidak boleh ada spasi, masukan lagi!"
+  },
+  {
+   "n": 408,
+   "text": "Nama Eror"
+  },
+  {
+   "n": 409,
+   "text": "Bentuk Pengobatan"
+  },
+  {
+   "n": 410,
+   "text": "Aktif"
+  },
+  {
+   "n": 411,
+   "text": "Bloodsoul"
+  },
+  {
+   "n": 412,
+   "text": "Tidak dapat menghilangkan Bloodline Limit. Silahkan hapus Bloodsoul."
+  },
+  {
+   "n": 413,
+   "text": "CD for Discover."
+  },
+  {
+   "n": 414,
+   "text": "Sintesis"
+  },
+  {
+   "n": 415,
+   "text": "Ketiga Bloodsoul yang sama dapat di sintesiskan menjadi Bloodsoul level tinggi"
+  },
+  {
+   "n": 416,
+   "text": "Kamu telah mengirimkan Likings {@0: } kali hari ini. Datang lagi besok."
+  },
+  {
+   "n": 417,
+   "text": "Defence"
+  },
+  {
+   "n": 418,
+   "text": "Dodge"
+  },
+  {
+   "n": 419,
+   "text": "Lupakan"
+  },
+  {
+   "n": 420,
+   "text": "Discover Bloodsoul item tidak cukup"
+  },
+  {
+   "n": 421,
+   "text": "Amity:  "
+  },
+  {
+   "n": 422,
+   "text": "HP"
+  },
+  {
+   "n": 423,
+   "text": "Level dari Soul-Refining Talisman terlalu rendah. Tidak dapat me-refine Bloodsoul."
+  },
+  {
+   "n": 424,
+   "text": "Temukan Bloodsoul"
+  },
+  {
+   "n": 425,
+   "text": "Mencari Bloodsoul"
+  },
+  {
+   "n": 426,
+   "text": "Bloodsoul Berhasil ditemukan"
+  },
+  {
+   "n": 427,
+   "text": "Activated:  "
+  },
+  {
+   "n": 428,
+   "text": "Help"
+  },
+  {
+   "n": 429,
+   "text": "Descripsi"
+  },
+  {
+   "n": 430,
+   "text": "Chakra"
+  },
+  {
+   "n": 431,
+   "text": "Level:  "
+  },
+  {
+   "n": 432,
+   "text": "Liking:  "
+  },
+  {
+   "n": 433,
+   "text": "Bloodline Melebihi Batas"
+  },
+  {
+   "n": 434,
+   "text": "Kondisi penggunaan: Pemain tidak boleh lebih rendah dari lv.⟨0⟩"
+  },
+  {
+   "n": 435,
+   "text": "Teleport"
+  },
+  {
+   "n": 436,
+   "text": "Liking"
+  },
+  {
+   "n": 437,
+   "text": "Grade"
+  },
+  {
+   "n": 438,
+   "text": "Pierce"
+  },
+  {
+   "n": 439,
+   "text": "Refine Bloodsoul"
+  },
+  {
+   "n": 440,
+   "text": "Pakai Soul-Refining Talisman yang sesuai atau gunakan Gold"
+  },
+  {
+   "n": 441,
+   "text": "konversikan ke Bloodsoul yang lain dengan level yang sama"
+  },
+  {
+   "n": 442,
+   "text": "Soul-Refining Talisman"
+  },
+  {
+   "n": 443,
+   "text": "Sintesis Bloodsoul Sukses"
+  },
+  {
+   "n": 444,
+   "text": "Sintesis Bloodsoul "
+  },
+  {
+   "n": 445,
+   "text": "Bloodsoul Melebihi batas"
+  },
+  {
+   "n": 446,
+   "text": "Refine "
+  },
+  {
+   "n": 447,
+   "text": "Persahabatan dengan {@0:  } meningkatkan {@1:  }. Mengkonsumsi {@2:  } {@3:  }."
+  },
+  {
+   "n": 448,
+   "text": "<b><font size='15'>Deskripsi misi:  </font></b>"
+  },
+  {
+   "n": 449,
+   "text": "Persahabatan dengan {@0:  } meningkatkan {@1:  }"
+  },
+  {
+   "n": 450,
+   "text": "{@0:  }X{@1:  }（{@2:  }/{@3:  } hari ini）"
+  },
+  {
+   "n": 451,
+   "text": " [{@0:  }] Misi dari Liking"
+  },
+  {
+   "n": 452,
+   "text": "<b><font size='15'>Hadiah:  </font></b>"
+  },
+  {
+   "n": 453,
+   "text": "{@0:  } transplants kepada kamu."
+  },
+  {
+   "n": 454,
+   "text": "Unlock"
+  },
+  {
+   "n": 455,
+   "text": "Poin kemewahan kamu{@0:}<br> Dekorasi dapat meningkatkan poin kemewahan."
+  },
+  {
+   "n": 456,
+   "text": "Redeem Reward"
+  },
+  {
+   "n": 457,
+   "text": "Masuk toko guci keberuntungan"
+  },
+  {
+   "n": 458,
+   "text": "Masuk arena"
+  },
+  {
+   "n": 459,
+   "text": "Pergi ke kota iblis"
+  },
+  {
+   "n": 460,
+   "text": "Pergi ke Las Noches"
+  },
+  {
+   "n": 461,
+   "text": "Terima hadiah misi"
+  },
+  {
+   "n": 462,
+   "text": "Pergi ke luar"
+  },
+  {
+   "n": 463,
+   "text": "Pergi ke rumah murid"
+  },
+  {
+   "n": 464,
+   "text": "Bergabung kejuaraan dunia bela diri"
+  },
+  {
+   "n": 465,
+   "text": "Melihat pertandingan liga nasional"
+  },
+  {
+   "n": 466,
+   "text": "masuk ke Aula"
+  },
+  {
+   "n": 467,
+   "text": "Reset Reward"
+  },
+  {
+   "n": 468,
+   "text": "<font color='#00ffff'>Daftar Bangunan</font>"
+  },
+  {
+   "n": 469,
+   "text": "<font color='#00ffff'>Gudang</font>"
+  },
+  {
+   "n": 470,
+   "text": "Murid"
+  },
+  {
+   "n": 471,
+   "text": "Info telur"
+  },
+  {
+   "n": 472,
+   "text": "<font color='#00ffff'>Ruang Pemeliharaan</font>"
+  },
+  {
+   "n": 473,
+   "text": "<font color='#00ffff'>Papan Pesan</font>"
+  },
+  {
+   "n": 474,
+   "text": "<font color='#00ffff'>Kandang Pet</font>"
+  },
+  {
+   "n": 475,
+   "text": "<font color='#00ffff'>Papan Misi</font>"
+  },
+  {
+   "n": 476,
+   "text": "<font color='#00ffff'>Ruang Bimbingan</font>"
+  },
+  {
+   "n": 477,
+   "text": "Batal"
+  },
+  {
+   "n": 478,
+   "text": "Pergi ke"
+  },
+  {
+   "n": 479,
+   "text": "Lumpuh"
+  },
+  {
+   "n": 480,
+   "text": "Membeku"
+  },
+  {
+   "n": 481,
+   "text": "Kemarahan"
+  },
+  {
+   "n": 482,
+   "text": "Panas"
+  },
+  {
+   "n": 483,
+   "text": "Menerangi Surga"
+  },
+  {
+   "n": 484,
+   "text": "Cairan"
+  },
+  {
+   "n": 485,
+   "text": "Rusak"
+  },
+  {
+   "n": 486,
+   "text": "Menggunakan segel iblis kematian"
+  },
+  {
+   "n": 487,
+   "text": "Lambat"
+  },
+  {
+   "n": 488,
+   "text": "Meracuni"
+  },
+  {
+   "n": 489,
+   "text": "Segel Lima Elemen"
+  },
+  {
+   "n": 490,
+   "text": "Pusing"
+  },
+  {
+   "n": 491,
+   "text": "Darah Bergolak"
+  },
+  {
+   "n": 492,
+   "text": "Dijerat"
+  },
+  {
+   "n": 493,
+   "text": "Tertusuk"
+  },
+  {
+   "n": 494,
+   "text": "Membuka Pintu"
+  },
+  {
+   "n": 495,
+   "text": "Clay Bomb"
+  },
+  {
+   "n": 496,
+   "text": "Kabut Persembunyian"
+  },
+  {
+   "n": 497,
+   "text": "Matahari Terbenam"
+  },
+  {
+   "n": 498,
+   "text": "Segel Kutukan Surga"
+  },
+  {
+   "n": 499,
+   "text": "Secepat Angin"
+  },
+  {
+   "n": 500,
+   "text": "Tidur"
+  },
+  {
+   "n": 501,
+   "text": "Awan Kegelapan"
+  },
+  {
+   "n": 502,
+   "text": "Static Field"
+  },
+  {
+   "n": 503,
+   "text": "Memberkati"
+  },
+  {
+   "n": 504,
+   "text": "Melemah"
+  },
+  {
+   "n": 505,
+   "text": "Memulihkan"
+  },
+  {
+   "n": 506,
+   "text": "Kutukan"
+  },
+  {
+   "n": 507,
+   "text": "Ilusi"
+  },
+  {
+   "n": 508,
+   "text": "Angin "
+  },
+  {
+   "n": 509,
+   "text": "Pendarahan"
+  },
+  {
+   "n": 510,
+   "text": "Puncak Kehancuran"
+  },
+  {
+   "n": 511,
+   "text": "Buta"
+  },
+  {
+   "n": 512,
+   "text": "Gerbang Kesunyian"
+  },
+  {
+   "n": 513,
+   "text": "Gerbang Kehidupan"
+  },
+  {
+   "n": 514,
+   "text": "Garbang Penderitaan"
+  },
+  {
+   "n": 515,
+   "text": "Gerbang Tertutup"
+  },
+  {
+   "n": 516,
+   "text": "Gerbang Kebahagiaan"
+  },
+  {
+   "n": 517,
+   "text": "Gerbang Goncangan"
+  },
+  {
+   "n": 518,
+   "text": "Gerbang Kematian"
+  },
+  {
+   "n": 519,
+   "text": "Gembira"
+  },
+  {
+   "n": 520,
+   "text": "Mengunci"
+  },
+  {
+   "n": 521,
+   "text": "Mengamuk"
+  },
+  {
+   "n": 522,
+   "text": "Metode Penyegelan Iblis"
+  },
+  {
+   "n": 523,
+   "text": "Racun kodok"
+  },
+  {
+   "n": 524,
+   "text": "Kegelapan"
+  },
+  {
+   "n": 525,
+   "text": "Pemulihan Sesaat Sebelum kematian"
+  },
+  {
+   "n": 526,
+   "text": "Pengusiran Iblis"
+  },
+  {
+   "n": 527,
+   "text": "Keganasan dari Tailed Beast"
+  },
+  {
+   "n": 528,
+   "text": "Menyerap"
+  },
+  {
+   "n": 529,
+   "text": "Jinchūriki"
+  },
+  {
+   "n": 530,
+   "text": "Berserk Beast"
+  },
+  {
+   "n": 531,
+   "text": "Corrosive Acid"
+  },
+  {
+   "n": 532,
+   "text": "Elemental Mastery"
+  },
+  {
+   "n": 533,
+   "text": "Reshape"
+  },
+  {
+   "n": 534,
+   "text": "Dark Dominance"
+  },
+  {
+   "n": 535,
+   "text": "Tailed Beast Ball"
+  },
+  {
+   "n": 536,
+   "text": "Lightning Storm "
+  },
+  {
+   "n": 537,
+   "text": "Lemah"
+  },
+  {
+   "n": 538,
+   "text": "Kami sangat menyesal, karena Client sedang tidak normal, silakan klik [OK] untuk mengulang permainan. Maafkan kami atas masalah ini. <br>Jika tidak bisa mengulang, hubungi customer service, terima kasih!"
+  },
+  {
+   "n": 539,
+   "text": "Kami sangat menyesal, karena masalah sistem tampilan, tampilan permainan akan menutup secara otomatis. Maafkan kami atas ketidaknyamanan ini. <br>Jika tidak bisa masuk lagi, hubungi customer service, terima kasih!"
+  },
+  {
+   "n": 540,
+   "text": "Kami sangat menyesal, karena masalah sistem tampilan, permainan akan menutup secara otomatis. Maafkan kami atas ketidaknyamanan ini. <br>Jika tidak bisa masuk lagi, hubungi customer service, terima kasih!"
+  },
+  {
+   "n": 541,
+   "text": "Kami sangat menyesal, karena permasalahan di zona kamu saat ini, sistem secara otomatis akan memindahkan kamu ke zona lain. Maafkan kami atas ketidaknyamanan ini. <br>Jika tidak bisa pindah zona, hubungi customer service, terima kasih!"
+  },
+  {
+   "n": 542,
+   "text": "Kami sangat menyesal, karena masalah di sistem grafis Flash Player kamu saat ini, sistem akan refresh frame rate grafis kamu. Maafkan kami atas ketidaknyamanan ini. <br> Jika refresh frame rate tidak bekerja, silahkan menghubungi Customer Service, terima kasih!"
+  },
+  {
+   "n": 543,
+   "text": "Kami sangat menyesal, karena ketidaknormalan di mesin permainan kamu saat ini, permainan akan restart. Maafkan kami atas ketidaknyamanan ini. <br>Jika tidak bisa mengulang, hubungi customer service, terima kasih!"
+  },
+  {
+   "n": 544,
+   "text": "Buat"
+  },
+  {
+   "n": 545,
+   "text": "<b>Persyaratan membangun:</b>"
+  },
+  {
+   "n": 546,
+   "text": "<font color='#f72e2e'>Teman{@0:} </font>"
+  },
+  {
+   "n": 547,
+   "text": "<font color='#f72e2e'>karaketer Level{@0:}</font>"
+  },
+  {
+   "n": 548,
+   "text": "<font color='#f72e2e'>Bangun{@0:}</font>"
+  },
+  {
+   "n": 549,
+   "text": "<font color='#f72e2e'>Prestasi{@0:}</font>"
+  },
+  {
+   "n": 550,
+   "text": "<font color='#f72e2e'>Poin Kemewahan{@0:}</font>"
+  },
+  {
+   "n": 551,
+   "text": "<font color='#f72e2e'>Point Prestasi{@0:}</font>"
+  },
+  {
+   "n": 552,
+   "text": "<font color='#618900'>Teman{@0:} </font>"
+  },
+  {
+   "n": 553,
+   "text": "<font color='#618900'>Karakter level{@0:}</font>"
+  },
+  {
+   "n": 554,
+   "text": "<font color='#618900'>Bangun{@0:}</font>"
+  },
+  {
+   "n": 555,
+   "text": "<font color='#618900'>Prestasi{@0:}</font>"
+  },
+  {
+   "n": 556,
+   "text": "<font color='#618900'>Poin Kemewahan{@0:}</font>"
+  },
+  {
+   "n": 557,
+   "text": "<font color='#618900'>Poin Prestasi{@0:}</font>"
+  },
+  {
+   "n": 558,
+   "text": "<font color='#f72e2e'>Gold{@0:}</font>"
+  },
+  {
+   "n": 559,
+   "text": "<font color='#f72e2e'>Batu{@0:}</font>"
+  },
+  {
+   "n": 560,
+   "text": "<font color='#618900'>Gold{@0:}</font>"
+  },
+  {
+   "n": 561,
+   "text": "<font color='#618900'>Batu{@0:}</font>"
+  },
+  {
+   "n": 562,
+   "text": "<font color='#6a6e70'>Waktu <font color='#5c7e01'>{@0:}</font></font>"
+  },
+  {
+   "n": 563,
+   "text": "<b>Total Biaya: </b>"
+  },
+  {
+   "n": 564,
+   "text": "Home"
+  },
+  {
+   "n": 565,
+   "text": "Prestasi pada Tower"
+  },
+  {
+   "n": 566,
+   "text": "Papan Pesan"
+  },
+  {
+   "n": 567,
+   "text": "Papan Misi"
+  },
+  {
+   "n": 568,
+   "text": "Farm"
+  },
+  {
+   "n": 569,
+   "text": "Windmill"
+  },
+  {
+   "n": 570,
+   "text": "Gudang"
+  },
+  {
+   "n": 571,
+   "text": "Kandang Pet"
+  },
+  {
+   "n": 572,
+   "text": "Ruang Bimbingan"
+  },
+  {
+   "n": 573,
+   "text": "Ruang Penetasan"
+  },
+  {
+   "n": 574,
+   "text": "Sumur"
+  },
+  {
+   "n": 575,
+   "text": "Woodpile"
+  },
+  {
+   "n": 576,
+   "text": "Haystack"
+  },
+  {
+   "n": 577,
+   "text": "Scarecrow"
+  },
+  {
+   "n": 578,
+   "text": "Tree"
+  },
+  {
+   "n": 579,
+   "text": "Swing"
+  },
+  {
+   "n": 580,
+   "text": "Big Star"
+  },
+  {
+   "n": 581,
+   "text": "Little Star"
+  },
+  {
+   "n": 582,
+   "text": "Rainbow"
+  },
+  {
+   "n": 583,
+   "text": "Scene +⟨0⟩"
+  },
+  {
+   "n": 584,
+   "text": "Moon"
+  },
+  {
+   "n": 585,
+   "text": "Sakura tree"
+  },
+  {
+   "n": 586,
+   "text": "Fire Pit"
+  },
+  {
+   "n": 587,
+   "text": "Wooden Horse"
+  },
+  {
+   "n": 588,
+   "text": "Fortune Cat"
+  },
+  {
+   "n": 589,
+   "text": "Statue Mountain"
+  },
+  {
+   "n": 590,
+   "text": "Sword in Stone"
+  },
+  {
+   "n": 591,
+   "text": "Cactus"
+  },
+  {
+   "n": 592,
+   "text": "<font color='#6a6e70'>Menggunakan {@0:} gold untuk menyelesaikan bangunan secara langsung?</font>"
+  },
+  {
+   "n": 593,
+   "text": "<font color='#6a6e70'>menggunakan{@0:} gold untuk mempersingkat waktu pembangunan ⟨0⟩ jam？</font>"
+  },
+  {
+   "n": 594,
+   "text": "<font color='#6a6e70'>Menggunakan {@0:} gold untuk mempersingkat waktu pembangunan ⟨0⟩ jam？</font>"
+  },
+  {
+   "n": 595,
+   "text": "Keluar"
+  },
+  {
+   "n": 596,
+   "text": "OK"
+  },
+  {
+   "n": 597,
+   "text": "<font color='#6a6e70'><b>   Cactus   </b></font>"
+  },
+  {
+   "n": 598,
+   "text": "Kamu harus mencapai<font color='#00b034'> lv.⟨0⟩ </font> dan tingkatan diatas<font color='#00b034'> ElementaryII</font>,  lalu masuk ke <font color='#00b034'>Desa</font>menuju<font color='#00b034'> Aula </font>untuk dapat mengambil  misi, silahkan <font color='#00b034'> Masuk Desa </font>."
+  },
+  {
+   "n": 599,
+   "text": "Kamu telah menerima banyak misi. Untuk masuk rumah misi harus kurang dari ⟨0⟩."
+  },
+  {
+   "n": 600,
+   "text": "CapMulEquip%"
+  },
+  {
+   "n": 601,
+   "text": "Stone Drop"
+  },
+  {
+   "n": 602,
+   "text": "CapMulEquip%Ex"
+  },
+  {
+   "n": 603,
+   "text": "Dana tidak mencukupi, {@0:event} memerlukan {@1:value} {@2:type}!"
+  },
+  {
+   "n": 604,
+   "text": "{@0:event} biaya {@1:value} {@2:type}!"
+  },
+  {
+   "n": 605,
+   "text": "Rookie of Card"
+  },
+  {
+   "n": 606,
+   "text": "Village's Pride"
+  },
+  {
+   "n": 607,
+   "text": "Beyond God"
+  },
+  {
+   "n": 608,
+   "text": "<font color='#7d7d7d'>{@0: }</font>"
+  },
+  {
+   "n": 609,
+   "text": "<font color='#da870c'>{@0: }</font>"
+  },
+  {
+   "n": 610,
+   "text": "Buka semua"
+  },
+  {
+   "n": 611,
+   "text": "Menggunakan {@0: } gold dan membuka semua sisa kartu."
+  },
+  {
+   "n": 612,
+   "text": "Semua kartu yang berbeda! "
+  },
+  {
+   "n": 613,
+   "text": "Menyusun Auto"
+  },
+  {
+   "n": 614,
+   "text": "Kamu dapat menggunakan gold untuk mengaktivkan secara permanen slot kartu"
+  },
+  {
+   "n": 615,
+   "text": "My Card Exchange Box"
+  },
+  {
+   "n": 616,
+   "text": "Membebaskan"
+  },
+  {
+   "n": 617,
+   "text": "<font color='#ff0000'>Kotak kartu kamu telah penuh. Silahkan bersihkan Kotak Kartu sekarang.</font>"
+  },
+  {
+   "n": 618,
+   "text": "My Card Box"
+  },
+  {
+   "n": 619,
+   "text": "Membuka kartu ini membutuhkan {@0: } gold. Apa kamu yakin untuk membuka?"
+  },
+  {
+   "n": 620,
+   "text": "membutuhkan {@0: } gold dan membuka slot kartu."
+  },
+  {
+   "n": 621,
+   "text": "Card Exchange Box miliknya"
+  },
+  {
+   "n": 622,
+   "text": "Refresh"
+  },
+  {
+   "n": 623,
+   "text": "Hitung Mundur:  {@0: }"
+  },
+  {
+   "n": 624,
+   "text": "Card House Awal"
+  },
+  {
+   "n": 625,
+   "text": "Peringkat Aku:：{@0:}"
+  },
+  {
+   "n": 626,
+   "text": "Kamu belum mencapai top ⟨0⟩, silakan terus mencoba!"
+  },
+  {
+   "n": 627,
+   "text": "Nama pemain"
+  },
+  {
+   "n": 628,
+   "text": "Tambah hari"
+  },
+  {
+   "n": 629,
+   "text": "Ranking"
+  },
+  {
+   "n": 630,
+   "text": "Nilai tertinggi"
+  },
+  {
+   "n": 631,
+   "text": "Masukan kedalam tas"
+  },
+  {
+   "n": 632,
+   "text": "Kamu lebih rendah dari lv.<font color='#ff0000'> {@0:} </font>, tidak dapat mencari pet sekarang!"
+  },
+  {
+   "n": 633,
+   "text": "Skor Terbesar:"
+  },
+  {
+   "n": 634,
+   "text": "Sisa Waktu"
+  },
+  {
+   "n": 635,
+   "text": "Papan Skor"
+  },
+  {
+   "n": 636,
+   "text": "Paket kontemporer"
+  },
+  {
+   "n": 637,
+   "text": "Total poin hari ini:"
+  },
+  {
+   "n": 638,
+   "text": "Lihat Daftar Rank"
+  },
+  {
+   "n": 639,
+   "text": "Rank Kamu:"
+  },
+  {
+   "n": 640,
+   "text": "Ubah Kartu"
+  },
+  {
+   "n": 641,
+   "text": "Gunakan<font color='#ff0000'> {@0:} </font> gold untuk medals?"
+  },
+  {
+   "n": 642,
+   "text": "Lanjutkan Penelusuran"
+  },
+  {
+   "n": 643,
+   "text": "Tips penelusuran Pet:<br>⟨0⟩.Klik untuk membalik<font color='#00b034'>beberapa</font>kartu dan mulai penelusuran!<br>⟨1⟩. Setelah itu, satu kartu yang ditunjukkan oleh panah pada kartu sebelumnya akan diserahkan juga, sampai arah ab panah poin kartu tidak ada.<br>⟨2⟩.Kamu dapat menelusuri<font color='#00b034'> ⟨3⟩ </font>kali sehari, penelusuran akan diisi kembali pada<font color='#00b034'> ⟨4⟩:⟨5⟩ </font>setiap hari.<br>⟨6⟩.Item yang tidak digunakan juga akan dibersihkan pada<font color='#00b034'> ⟨7⟩:⟨8⟩ </font>. Silakan gunakan secepat mungkin."
+  },
+  {
+   "n": 644,
+   "text": "Ambil paket"
+  },
+  {
+   "n": 645,
+   "text": "<font color='#00ffff'>Gunakan Spanner untuk memperbaiki panah yang rusak.</font><font color='#FF6565'>Spanner yang belum digunakan akan dihapus pada pukul  ⟨0⟩:⟨1⟩ setiap hari! Ayo gunakan sebelum waktu habis.</font>"
+  },
+  {
+   "n": 646,
+   "text": "Kamu harus menemukan<font color='#00aeff'>Magnifier</font>untuk memeriksa!"
+  },
+  {
+   "n": 647,
+   "text": "Gunakan<font color='#00aeff'>Magnifier</font>untuk memeriksa？"
+  },
+  {
+   "n": 648,
+   "text": "Kamu telah mengunakan semua coba penelusuran!<br>Ini akan terisi kembali setelah<font color='#ff0000'> ⟨0⟩:⟨1⟩ </font>Setiap hari!"
+  },
+  {
+   "n": 649,
+   "text": "Tidak ada dalam daftar peringkat"
+  },
+  {
+   "n": 650,
+   "text": "Dimulai dari kartu ini?"
+  },
+  {
+   "n": 651,
+   "text": "Tidak cukup ruang di dalam tas kamu. Silahkan bersihkan satu!"
+  },
+  {
+   "n": 652,
+   "text": "Kamu harus menemukan<font color='#00aeff'>Spanner</font>untuk memperbaikinya!"
+  },
+  {
+   "n": 653,
+   "text": "Memakai<font color='#00aeff'>Spanner</font> untuk memperbaikinya?"
+  },
+  {
+   "n": 654,
+   "text": "Silahkan klik<font color='#00aeff'> Masukan pada tas </font>tombol untuk mengumpulkan barang-barang di dalamnya!"
+  },
+  {
+   "n": 655,
+   "text": "Tidak ada item sementara di dalam tas"
+  },
+  {
+   "n": 656,
+   "text": "Kamu harus menemukan<font color='#00aeff'>Knob</font>untuk memutar!"
+  },
+  {
+   "n": 657,
+   "text": "Apakah kamu yakin untuk menggunakan <font color='#00aeff'>Knob</font> Untuk merubah？"
+  },
+  {
+   "n": 658,
+   "text": "<font color='#00ffff'>Gunakan Knob dapat merubah arah panah.</font><font color='#FF6565'>Knob yang belum terpakai akan di hapus pada pukul ⟨0⟩:⟨1⟩ setiap hari! Ayo gunakan sebelum waktu habis.</font>"
+  },
+  {
+   "n": 659,
+   "text": "<font color='#00ffff'>Gunakan Magnifier dapat melihat panah tak terlihat di bawah kartu tanda tanya.</font><font color='#FF6565'>Magnifier yang belum digunakan akan terhapus pada pukul ⟨0⟩:⟨1⟩ setiap hari! Ayo gunakan sebelum waktu habis.</font>"
+  },
+  {
+   "n": 660,
+   "text": "Card House Info"
+  },
+  {
+   "n": 661,
+   "text": "Card House Tampilan"
+  },
+  {
+   "n": 662,
+   "text": "Temanku"
+  },
+  {
+   "n": 663,
+   "text": "<font color='#006600'>Hidden Land</font>"
+  },
+  {
+   "n": 664,
+   "text": "<font color='#006600'>Valley of the End</font>"
+  },
+  {
+   "n": 665,
+   "text": "<font color='006600'>Mount Myoboku</font>"
+  },
+  {
+   "n": 666,
+   "text": "<font color='006600'>Hokage Monument</font>"
+  },
+  {
+   "n": 667,
+   "text": "<font color='006600'>Granny Cat's Shop</font>"
+  },
+  {
+   "n": 668,
+   "text": "<font color='006600'>Spirit Beast</font>"
+  },
+  {
+   "n": 669,
+   "text": "<font color='006600'>Akamaru</font>"
+  },
+  {
+   "n": 670,
+   "text": "<font color='006600'>Pakkun</font>"
+  },
+  {
+   "n": 671,
+   "text": "<font color='006600'>Bunta</font>"
+  },
+  {
+   "n": 672,
+   "text": "<font color='006600'>Tonton</font>"
+  },
+  {
+   "n": 673,
+   "text": "<font color='006600'>Katsuyu</font>"
+  },
+  {
+   "n": 674,
+   "text": "<font color='006600'>Village Secret</font>"
+  },
+  {
+   "n": 675,
+   "text": "<font color='006600'>Sunagakure</font>"
+  },
+  {
+   "n": 676,
+   "text": "<font color='006600'>Kumogakure</font>"
+  },
+  {
+   "n": 677,
+   "text": "<font color='006600'>Kirigakure</font>"
+  },
+  {
+   "n": 678,
+   "text": "<font color='006600'>Iwagakure </font>"
+  },
+  {
+   "n": 679,
+   "text": "<font color='006600'>Otogakure</font>"
+  },
+  {
+   "n": 680,
+   "text": "<font color='006600'>Amegakure</font>"
+  },
+  {
+   "n": 681,
+   "text": "<font color='006600'>Kusagakure</font>"
+  },
+  {
+   "n": 682,
+   "text": "<font color='006600'>Takigakure</font>"
+  },
+  {
+   "n": 683,
+   "text": "<font color='006600'>Konoha Eight</font>"
+  },
+  {
+   "n": 684,
+   "text": "<font color='006600'>Haruno Sakura</font>"
+  },
+  {
+   "n": 685,
+   "text": "<font color='006600'>Nara Shikamaru </font>"
+  },
+  {
+   "n": 686,
+   "text": "<font color='006600'>Akimichi Choji</font>"
+  },
+  {
+   "n": 687,
+   "text": "<font color='006600'>Yamanaka Ino</font>"
+  },
+  {
+   "n": 688,
+   "text": "<font color='006600'>Inuzuka Kiba</font>"
+  },
+  {
+   "n": 689,
+   "text": "<font color='006600'>Aburame Shino</font>"
+  },
+  {
+   "n": 690,
+   "text": "<font color='006600'>Rock Lee</font>"
+  },
+  {
+   "n": 691,
+   "text": "<font color='006600'>Tenten</font>"
+  },
+  {
+   "n": 692,
+   "text": "<font color='0202e3'>Palace Captain</font>"
+  },
+  {
+   "n": 693,
+   "text": "<font color='0202e3'>Soifon</font>"
+  },
+  {
+   "n": 694,
+   "text": "<font color='0202e3'>Unohana Retsu</font>"
+  },
+  {
+   "n": 695,
+   "text": "<font color='0202e3'>Kuchiki Byakuya</font>"
+  },
+  {
+   "n": 696,
+   "text": "<font color='0202e3'>Sajin Komamura</font>"
+  },
+  {
+   "n": 697,
+   "text": "<font color='0202e3'>Shunsui Kyōraku</font>"
+  },
+  {
+   "n": 698,
+   "text": "<font color='0202e3'>Hitsugaya Toushiro</font>"
+  },
+  {
+   "n": 699,
+   "text": "<font color='0202e3'>Kenpachi Zaraki</font>"
+  },
+  {
+   "n": 700,
+   "text": "<font color='0202e3'>Ukitake Jūshiro</font>"
+  },
+  {
+   "n": 701,
+   "text": "<font color='9800ff'>Akatsuki</font>"
+  },
+  {
+   "n": 702,
+   "text": "<font color='9800ff'>Uchiha Itachi</font>"
+  },
+  {
+   "n": 703,
+   "text": "<font color='9800ff'>Kisame Hoshigaki</font>"
+  },
+  {
+   "n": 704,
+   "text": "<font color='9800ff'>Deidara</font>"
+  },
+  {
+   "n": 705,
+   "text": "<font color='9800ff'>Sasori of the Red Sand</font>"
+  },
+  {
+   "n": 706,
+   "text": "<font color='9800ff'>Kakuzu</font>"
+  },
+  {
+   "n": 707,
+   "text": "<font color='9800ff'>Hidan</font>"
+  },
+  {
+   "n": 708,
+   "text": "<font color='9800ff'>Konan</font>"
+  },
+  {
+   "n": 709,
+   "text": "<font color='9800ff'>Zetsu</font>"
+  },
+  {
+   "n": 710,
+   "text": "<font color='#b9470b'>Kage Shinobi</font>"
+  },
+  {
+   "n": 711,
+   "text": "<font color='b9470b'>Tobirama Senju</font>"
+  },
+  {
+   "n": 712,
+   "text": "<font color='b9470b'>Hiruzen Sarutobi </font>"
+  },
+  {
+   "n": 713,
+   "text": "<font color='b9470b'>Minato Namikaze</font>"
+  },
+  {
+   "n": 714,
+   "text": "<font color='b9470b'>Tsunade Hime</font>"
+  },
+  {
+   "n": 715,
+   "text": "<font color='b9470b'>Danzo Shimura </font>"
+  },
+  {
+   "n": 716,
+   "text": "<font color='b9470b'>Jiraiya</font>"
+  },
+  {
+   "n": 717,
+   "text": "<font color='b9470b'>Uchiha Madara</font>"
+  },
+  {
+   "n": 718,
+   "text": "<font color='b9470b'>Bloodline Limit</font>"
+  },
+  {
+   "n": 719,
+   "text": "<font color='b9470b'>Nagato</font>"
+  },
+  {
+   "n": 720,
+   "text": "<font color='b9470b'>Neji</font>"
+  },
+  {
+   "n": 721,
+   "text": "<font color='b9470b'>Hinata </font>"
+  },
+  {
+   "n": 722,
+   "text": "<font color='b9470b'>Kakashi</font>"
+  },
+  {
+   "n": 723,
+   "text": "<font color='b9470b'>Sasuke</font>"
+  },
+  {
+   "n": 724,
+   "text": "<font color='b9470b'>Ranmaru</font>"
+  },
+  {
+   "n": 725,
+   "text": "<font color='b9470b'>Kimimaro</font>"
+  },
+  {
+   "n": 726,
+   "text": "<font color='b9470b'>Guren</font>"
+  },
+  {
+   "n": 727,
+   "text": "<font color='#da870c'>Card Rookie</font>"
+  },
+  {
+   "n": 728,
+   "text": "<font color='#da870c'>Card Expert</font>"
+  },
+  {
+   "n": 729,
+   "text": "<font color='#da870c'>Card Master</font>"
+  },
+  {
+   "n": 730,
+   "text": "<font color='#da870c'>Hidden Land</font>"
+  },
+  {
+   "n": 731,
+   "text": "<font color='#da870c'>Spirit Beast</font>"
+  },
+  {
+   "n": 732,
+   "text": "<font color='da870c'>Village Secret</font>"
+  },
+  {
+   "n": 733,
+   "text": "<font color='#da870c'>Konoha Eight</font>"
+  },
+  {
+   "n": 734,
+   "text": "<font color='#da870c'>Palace Captain</font>"
+  },
+  {
+   "n": 735,
+   "text": "<font color='#da870c'>Akatsuki</font>"
+  },
+  {
+   "n": 736,
+   "text": "<font color='#da870c'>Kage Shinobi</font>"
+  },
+  {
+   "n": 737,
+   "text": "<font color='da870c'>Bloodline Limit</font>"
+  },
+  {
+   "n": 738,
+   "text": "{@0: }/{@1: }"
+  },
+  {
+   "n": 739,
+   "text": "<font color='#ff0000'>Maaf,  tas membutuhkan ⟨0⟩ slot kosong.</font>"
+  },
+  {
+   "n": 740,
+   "text": "({@0: }/{@1: })"
+  },
+  {
+   "n": 741,
+   "text": "Hadiah Acak"
+  },
+  {
+   "n": 742,
+   "text": "Apakah kamu yakin untuk membuka slot ini?"
+  }
+ ]
+}

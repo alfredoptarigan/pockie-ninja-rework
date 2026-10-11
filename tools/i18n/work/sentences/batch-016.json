@@ -1,0 +1,946 @@
+{
+ "terms": {
+  "Desa Tanah": "Earth Village",
+  "Serangan": "Attack",
+  "Blok": "Block",
+  "Kostum Clone": "Costume Clone",
+  "Kecepatan tidak terbatas": "Unlimited Speed",
+  "Kemurkaan": "Wrath",
+  "Katon": "Fire Release",
+  "Doton": "Earth Release",
+  "Kaminari": "Thunder Release",
+  "Kaze": "Wind Release",
+  "Alat Ninja": "Ninja Tool",
+  "Pilih": "Choose"
+ },
+ "units": [
+  {
+   "n": 7138,
+   "text": "Kategori : Buatan<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'>Efektif setelah belajar Rebirth aura.</font><br>Mengurangi waktu debuff, basic aura<font color='#0098FF'>⟨0⟩%</font>，advanced aura<font color='#0098FF'>⟨1⟩%</font>，expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7139,
+   "text": "Kategori : Buatan<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'>Efektif setelah belajar Rebirth aura.</font><br>Meningkatkan alat ninja sementara mengurangi penyembuhan sebesar <font color='#0098FF'>⟨0⟩</font> kali, basic aura<font color='#0098FF'>⟨1⟩%</font>，advanced aura<font color='#0098FF'>⟨2⟩%</font>，expert aura<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7140,
+   "text": "Kategori : Dragon<br>[line]Tipe : aura<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'> Efektif setelah mempelajari holy aura.</font><br>Mengurangi kerusakan, basic aura<font color='#0098FF'>⟨0⟩%</font>，advanced aura<font color='#0098FF'>⟨1⟩%</font>，expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7141,
+   "text": "Kategori : Dragon<br>[line]Tipe : aura<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'> Efektif setelah mempelajari holy aura.</font><br>Meningkatkan rata-rata serangan balik, basic aura<font color='#0098FF'>⟨0⟩%</font>，advanced aura<font color='#0098FF'>⟨1⟩%</font>，expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7142,
+   "text": "Kategori : Dragon<br>[line]Tipe : aura<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'> Efektif setelah mempelajari holy aura.</font><br>Meningkatkan keterampilan menyegel dengan mengkonsumsi Chakra dan kerusakan HP akan meningkat selama ⟨0⟩ kali, basic aura<font color='#0098FF'>⟨1⟩%</font>，advanced aura<font color='#0098FF'>⟨2⟩%</font>，expert aura<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7143,
+   "text": "Kategori : Channeling<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'>Efektif setelah mempelajari intelligence aura.</font><br>Memiliki kesempatan untuk menggunakan skill tanpa mengkonsumsi chakra atau menghindari kehilangan HP, basic aura<font color='#0098FF'>⟨0⟩%</font>，advanced aura<font color='#0098FF'>⟨1⟩%</font>，expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7144,
+   "text": "Kategori : Channeling<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'>Efektif setelah mempelajari intelligence aura.</font><br>Meningkatkan tingkat kemungkinan pet menggunakan skill, basic aura<font color='#0098FF'>⟨0⟩%</font>，advanced aura<font color='#0098FF'>⟨1⟩%</font>，expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7145,
+   "text": "Kategori : Channeling<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'>Dipicu ketika HP kurang dari ⟨0⟩%.</font><br>Meningkatkan serangan dan kecepatan sampai akhir pertempuran, basic aura<font color='#0098FF'>⟨1⟩%</font>，advanced aura<font color='#0098FF'>⟨2⟩%</font>，expert aura<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7146,
+   "text": "Kategori : Umum<br>[line]Tipe : Mendukung<br>[line]Dipelajari level : tidak ada<br>[line]Meningkatkan tingkat kemungkinan pet menggunakan skill."
+  },
+  {
+   "n": 7147,
+   "text": "Kategori : Umum<br>[line]Tipe : Mendukung<br>[line]Dipelajari level : tidak ada<br>[line]Menurunkan tingkat kemungkinan pet musuh menggunakan skill."
+  },
+  {
+   "n": 7148,
+   "text": "Kategori : Umum<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan kemungkinan menggunakan efek khusus selama pet membantu menyerang."
+  },
+  {
+   "n": 7149,
+   "text": "Kategori : Umum<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Mengurangi kemungkinan menggunakan efek khusus pada lawan selama pet membantu menyerang."
+  },
+  {
+   "n": 7150,
+   "text": "Kategori : Umum<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : Tidak ada<br>[line]<font color='#FF6565'>Efektif setelah mempelajari aura apa saja.</font><br>Mengurangi durasi sakit dari kerusakan."
+  },
+  {
+   "n": 7151,
+   "text": "Kategori : Umum<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : Tidak ada<br>[line]<font color='#FF6565'>Efektif setelah mempelajari aura apa saja.</font><br>Mengurangi durasi kekuatan dari kerusakan."
+  },
+  {
+   "n": 7152,
+   "text": "Kategori : Umum<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : Tidak ada<br>[line]<font color='#FF6565'>Efektif setelah mempelajari aura apa saja.</font><br>Mengurangi durasi segel dari kerusakan."
+  },
+  {
+   "n": 7153,
+   "text": "Kategori : Umum<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : Tidak ada<br>[line]<font color='#FF6565'>Efektif setelah mempelajari aura apa saja.</font><br>Meningkatkan durasi skill blessing."
+  },
+  {
+   "n": 7154,
+   "text": "Kategori : Hanya Frost Dragon<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]<font color='#FF6565'>Efektif setelah pet mempelajari skill menyerang. </font><br>Selama Serangan, <font color='#0098FF'>⟨0⟩%</font> kemungkinan untuk membuat sebuah segel kristal chance to create a crystal seal yang memiliki efek yang sama seperti pisau kristal, juga dipengaruhi oleh pelepasan skill air."
+  },
+  {
+   "n": 7155,
+   "text": "Kategori : Umum<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Extra ⟨0⟩% kemungkinan bagi pemilik untuk memulai serangan balasan saat pet melakukan blok."
+  },
+  {
+   "n": 7156,
+   "text": "kategori: Spesial Azure Dragon <br>[line]Tipe: Pendukung<br>[line]Lvl pembelajaran: None<br>[line]Setelah pemilik menyerang, memiliki <font color='#0098FF'>⟨0⟩%</font> kemungkinan untuk menyerang dua kali pada musuh."
+  },
+  {
+   "n": 7157,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Active<br>[line]Gunakan Tailed Beast Cannon untuk merusak musuh, proc rate <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7158,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Active<br>[line]Kecepatan gerak, menimbulkan kerusakan konsisten pada musuh, proc rate <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7159,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Passive<br>[line]Meningkatkan kecepatan setelah di serang."
+  },
+  {
+   "n": 7160,
+   "text": "Kategori: Nekomata<br>[line]Type: support<br>[line]Level Belajar: None<br>[line]Sebelum musuh bergerak, mengambil <font color='#0098FF'>⟨0⟩%</font> Chakra dari musuh dan memulihkan kepada diri sendiri. Sementara itu, dalam <font color='#0098FF'>⟨1⟩</font> detik, mengurangi serangan musuh sebesar <font color='#0098FF'>⟨2⟩%</font>. menyerap Bloodboil, Static Field, Pre-Healing Jutsu musuh. Proc rate<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7161,
+   "text": "Kategori: Tailed Beast<br>[line]Type: Aura<br>[line]Level Belajar: +⟨0⟩<br>[line]harus mempelajari aura skill sebelum mengaktifkan parasitic skill!<br> Lv.⟨1⟩ Tailed Beast Aura. hanya aura level tinggi yang akan efektif pada beberapa aura."
+  },
+  {
+   "n": 7162,
+   "text": "Category: Tailed Beast<br>[line]Type: Parasitic<br>[line]Learning level: None<br>[line]<font color='#FF6565'> Must learn Lofty Aura first.</font><br> There're <font color='#0098FF'>⟨0⟩%</font> chance to become Invulnerable after injury. It can only be triggered <font color='#0098FF'>⟨1⟩</font> times in one battle. Duration: basic aura<font color='#0098FF'>⟨2⟩</font> seconds; advanced aura <font color='#0098FF'>⟨3⟩</font> seconds; expert aura <font color='#0098FF'>⟨4⟩</font> seconds."
+  },
+  {
+   "n": 7163,
+   "text": "Kategori: Tailed Beast<br>[line]Type: Parasitic<br>[line]Level Belajar: None<br>[line]<font color='#FF6565'>Harus mempelajari Lofty Aura.</font><br>Ketika chakra kurang dari <font color='#0098FF'>⟨0⟩%</font> dari level maximal, ada <font color='#0098FF'>⟨1⟩%</font> kesempatan untuk mengubah Aura ke Chakra dengan persentase tertentu dan menghapus semua status abnormal. Basic Aura<font color='#0098FF'>⟨2⟩%</font>, Advanced Aura<font color='#0098FF'>⟨3⟩%</font>, Expert Aura<font color='#0098FF'>⟨4⟩%</font>."
+  },
+  {
+   "n": 7164,
+   "text": "Kategori: Tailed Beast<br>[line]Type: Parasitic<br>[line]Level Belajar: None<br>[line]<font color='#FF6565'>Harus mempelajari Lofty Aura.</font><br>Ketika sedang diserang, ada kesempatan tertentu untuk mengaktifkan status yang mengamuk, yang meningkatkan kecepatan dan kekuatan serangan dengan persentase. Basic Aura<font color='#0098FF'>⟨0⟩%</font>, Advanced Aura<font color='#0098FF'>⟨1⟩%</font>, Expert Aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7165,
+   "text": "Kategori: Kanya Shukaku<br>[line]Tipe: support<br>[line]Level Belajar: None<br>[line]Menolong tuan untuk hidup kembali, memulihkan <font color='#0098FF'>⟨0⟩%</font> dari max HP dan max Chakra. dapat digunakan <font color='#0098FF'>⟨1⟩</font> kali dalam satu pertandingan. Proc rate<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7166,
+   "text": "Kategori:Hanya Isonade<br>[line]Tipe: support<br>[line]Level Belajar: None<br>[line]Menyerang musuh dengan Water Dragon Wave, menyebabkan <font color='#0098FF'>⟨0⟩%</font> dari kerusakan dasar dan menurunkan Dodge musuh sebesar <font color='#0098FF'>⟨1⟩</font> point. selama <font color='#0098FF'>⟨2⟩</font> detik. Proc rate<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7167,
+   "text": "Kategori: hanyaSokou<br>[line]Tipe: support<br>[line]Level Belajar: None<br>[line]Melepaskan racun ke musuh, menyebabkan<font color='#0098FF'>⟨0⟩%</font> dari kerusakan dasar, Menurunkan attack dan Defence musuh sebesar <font color='#0098FF'>⟨1⟩%</font>. Bertahan <font color='#0098FF'>⟨2⟩</font> detik. Proc rate<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7168,
+   "text": "Kategori: Hanya Houkou<br>[line]Tipe: support<br>[line]Level Belajar: None<br>[line] Meningkatkan <font color='#0098FF'>⟨0⟩%</font> dari kerusakan ⟨1⟩ skill yang dikeluarkan."
+  },
+  {
+   "n": 7169,
+   "text": "Kategori: Hanya Raijuu<br>[line]Type: support<br>[line]Level Belajar: None<br>[line]. Mengaktifkan Static Field sebelum bergerak, meningkatkan damage dari Chidori  <font color='#0098FF'>⟨0⟩%</font>. Proc rate<font color='#0098FF'>⟨1⟩%</font>."
+  },
+  {
+   "n": 7170,
+   "text": "Kategori: Hanya Mujina<br>[line]Type: support<br>[line]Level Belajar: None<br>[line] Ketika menyerang, mengembalikan <font color='#0098FF'>⟨0⟩%</font> dari max HP, Meningkatkan poin defence <font color='#0098FF'>⟨1⟩</font> , Selama <font color='#0098FF'>⟨2⟩</font> detik. Proc rate<font color='#0098FF'>⟨3⟩%</font>."
+  },
+  {
+   "n": 7171,
+   "text": "Kategori: Hanya Giant Ox<br>[line]Type: support<br>[line]Level Belajar: None<br>[line]Menyerang musuh dan menyebabkan <font color='#0098FF'>⟨0⟩%</font> dari kerusakan dasar, musuh akan kehilangan <font color='#0098FF'>⟨1⟩%</font> dari HP saat ini dan Chakra sebelum langkah berikutnya. Proc rate<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7172,
+   "text": "Kategori: Hanya Demon Fox<br>[line]Tipe: support<br>[line]Level Belajar: None<br>[line]Meneyerang Musuh, Menyebabkan <font color='#0098FF'>⟨0⟩%</font> Kerusakan Normal. Jumlah pemulihan HP sama dengan <font color='#0098FF'>⟨1⟩%</font> dari kerusakan yang dikeluarkan. Ada juga <font color='#0098FF'>⟨2⟩%</font> untuk menurunkan tingkat kecepatan musuh <font color='#0098FF'>⟨3⟩%</font>, bertahan selama <font color='#0098FF'>⟨4⟩</font> detik. dapat digunakan <font color='#0098FF'>⟨5⟩</font> kali dalam satu pertandingan. Proc rate<font color='#0098FF'>⟨6⟩%</font>."
+  },
+  {
+   "n": 7173,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan defense pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7174,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Constitution pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7175,
+   "text": "Kategori : Dragon<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Armor Break pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7176,
+   "text": "Kategori : Channeling<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan max Chakra pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7177,
+   "text": "Kategori : Dragon<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Blok pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7178,
+   "text": "Kategori : Binatang<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan minimum Attack pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7179,
+   "text": "Kategori : Binatang<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Serangan Kritikal pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7180,
+   "text": "Kategori : Buatan<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Hit pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7181,
+   "text": "Kategori : Buatan<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Strength, Agility dan Constitution pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7182,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar<br>[line]Waktu penggunaan : Tindakan kamu<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : ⟨2⟩ points<br>[line]<br>Menggunakan Chakra untuk menahan kekuatan penghancur musuh."
+  },
+  {
+   "n": 7183,
+   "text": "Kategori : Channeling<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Dodge pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7184,
+   "text": "Kategori : Channeling<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Pierce pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7185,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan max HP pemilik sebesar<font color='#0098FF'> ⟨0⟩% </font>."
+  },
+  {
+   "n": 7186,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Pierce pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7187,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Dodge pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7188,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Blok pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7189,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Constitution pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7190,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Defense pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7191,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Armor Break pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7192,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Max Attack pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7193,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Speed pemilik sebesar<font color='#0098FF'> ⟨0⟩%</font>."
+  },
+  {
+   "n": 7194,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Hit pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7195,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Critikal Strike pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7196,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan max HP pemilik sebesar<font color='#0098FF'> ⟨0⟩%</font>."
+  },
+  {
+   "n": 7197,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan HP pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7198,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Block pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7199,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Attack pemilik sebesar<font color='#0098FF'> ⟨0⟩%</font>."
+  },
+  {
+   "n": 7200,
+   "text": "Kategori : Umum<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan max Chakra pemilik sebesar<font color='#0098FF'> ⟨0⟩ </font>poin."
+  },
+  {
+   "n": 7201,
+   "text": "Kategori: Dark Wing special<br>[line]Jenis： Pasif<br>[line]Pembelajaran level: None<br>[line]Meningkatkan kecepatan pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7202,
+   "text": "Kategori: Dark Wing special<br>[line]Jenis： Pasif<br>[line]Pembelajaran level: None<br>[line]Meningkatkan kemungkinan mendapatkan barang berharga sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7203,
+   "text": "kategori : Spesial Azure Dragon<br>[line]Tipe: Pasive<br>[line]Lvl pembelajaran: None<br>[line]Meningkatan serangan pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7204,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Pierce dari pemilik sebesar<font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7205,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Speed dari pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7206,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Hit dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7207,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan kritikal strike dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7208,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan max HP dari pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7209,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan max HP dari pemilik <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7210,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Dodge dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7211,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Block  dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7212,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Constitution dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7213,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Defence dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7214,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Armor Break dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7215,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan max attack dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7216,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan attack dari pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7217,
+   "text": "Kategori: General<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan max Chakra dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7218,
+   "text": "Category: Hanya Tailed Beast<br>[line]Type: Passive<br>[line]Learning level: None<br>[line]Meningkatkan Strength dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7219,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Agility dari pemilik sebesar<font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7220,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Stamina dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7221,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Imeningkatkan Defence dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7222,
+   "text": "Kategori: Hanya Tailed Beast<br>[line]Type: Passive<br>[line]Level Belajar: None<br>[line]Meningkatkan Hit dari pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7223,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar<br>[line]Waktu penggunaan : Tindakan kamu<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : ⟨2⟩ points<br>[line]<br>Merubah Chakra untuk dijadikan racun udara dan melemparkan ke musuh."
+  },
+  {
+   "n": 7224,
+   "text": "Waktu penggunaan : Saat diserang<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨0⟩%</font><br>[line]Konsumsi Chakra : ⟨1⟩ point<br>[line]<br>Menempelkan cacing untuk musuh untuk mendapatkan informasi lokasi musuh. "
+  },
+  {
+   "n": 7225,
+   "text": "Waktu penggunaan : Mulai pertarungan<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨0⟩%</font><br><br>[line]<br>Melepaskan semua tekanan untuk meraih kekuasaan yang menghancurkan pada suatu waktu."
+  },
+  {
+   "n": 7226,
+   "text": "Efek Skill : Menyerap <font color='#0098FF'>⟨0⟩%</font> Chakra musuh dan mengurangi pertahanan musuh sebesar <font color='#0098FF'>⟨1⟩</font> point.<br>[line]Waktu penggunaan : Serangan tambahan<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨2⟩%</font><br>[line]<br>Ninjutsu yang dibutuhkan oleh Ninja dari Desa Tanah, biasa digunakan untuk menangkap."
+  },
+  {
+   "n": 7227,
+   "text": "Efek Skill: Menghilangkan buff lawan.<br>[line]Waktu Penggunaan: Sebelum musuh beraksi <br> Kemungkinan Penggunaan: <font color='#0098FF'>⟨0⟩%</font><br>[line]<br>Sebuah ninjutsu kegelapan, dapat menghilangkan buff lawan."
+  },
+  {
+   "n": 7228,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar<br>[line]Waktu penggunaan : Tindakan kamu<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : ⟨2⟩ point<br>[line]<br>Membuat suasana menjadi gelap dengan Chakra untuk menyelimuti musuh. "
+  },
+  {
+   "n": 7229,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar<br>[line]Waktu penggunaan : Tindakan kamu<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : ⟨2⟩ point<br>[line]<br>Mengembunkan Chakra menjadi jarum tajam dan memulai serangan mendadak dari tanah ke musuh."
+  },
+  {
+   "n": 7230,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar<br>[line]Waktu penggunaan : Tindakan kamu<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : ⟨2⟩ point<br>[line]<br>Meningkatkan Rasengan, mengandung daya menakjubkan."
+  },
+  {
+   "n": 7231,
+   "text": "Klik icon untuk menggunakan skill"
+  },
+  {
+   "n": 7232,
+   "text": "Lanjutkan Pelajaran"
+  },
+  {
+   "n": 7233,
+   "text": "Check"
+  },
+  {
+   "n": 7234,
+   "text": "Pemulihan HP"
+  },
+  {
+   "n": 7235,
+   "text": "Pemulihan Chakra"
+  },
+  {
+   "n": 7236,
+   "text": "Life Leech Attack"
+  },
+  {
+   "n": 7237,
+   "text": "Dragonmight (Exclusively for dragon pets)"
+  },
+  {
+   "n": 7238,
+   "text": "Dragonscale (Exclusively for dragon pets)"
+  },
+  {
+   "n": 7239,
+   "text": "Katon Enhance"
+  },
+  {
+   "n": 7240,
+   "text": "Suiton Enhance"
+  },
+  {
+   "n": 7241,
+   "text": "Doton Enhance"
+  },
+  {
+   "n": 7242,
+   "text": "Kaminari Enhance"
+  },
+  {
+   "n": 7243,
+   "text": "Kaze Enhance"
+  },
+  {
+   "n": 7244,
+   "text": "Dragon Breath"
+  },
+  {
+   "n": 7245,
+   "text": "Evil Sealing Method"
+  },
+  {
+   "n": 7246,
+   "text": "Kecepatan tidak terbatas"
+  },
+  {
+   "n": 7247,
+   "text": "Kemurkaan"
+  },
+  {
+   "n": 7248,
+   "text": "Dragon Wrath"
+  },
+  {
+   "n": 7249,
+   "text": "Toxic Fog"
+  },
+  {
+   "n": 7250,
+   "text": "Melahap"
+  },
+  {
+   "n": 7251,
+   "text": "Infinite Darkness Jutsu"
+  },
+  {
+   "n": 7252,
+   "text": "Pricked"
+  },
+  {
+   "n": 7253,
+   "text": "Giant Rasengan "
+  },
+  {
+   "n": 7254,
+   "text": "Semua skill"
+  },
+  {
+   "n": 7255,
+   "text": "Pilih jenis mata uang untuk digunakan."
+  },
+  {
+   "n": 7256,
+   "text": "Skill dipakai"
+  },
+  {
+   "n": 7257,
+   "text": "Reset Skill : {@0:}"
+  },
+  {
+   "n": 7258,
+   "text": "Lepas semua equip"
+  },
+  {
+   "n": 7259,
+   "text": "<font color='#5df9ff'>Dasar Jurus Api<br>Effect dari jurus Api akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7260,
+   "text": "<font color='#5df9ff'>Ahli Jurus Api<br>Efek dari jurus Api akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7261,
+   "text": "<font color='#5df9ff'>Master Jurus Api<br>Efek dari jurus Api akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7262,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Api<br>Efek dari jurus Api akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7263,
+   "text": "<font color='#5df9ff'>Sage Jurus Api<br>Efek dari jurus Api akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7264,
+   "text": "<font color='#5df9ff'>Dasar Jurus Air<br>Effect dari jurus Air akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7265,
+   "text": "<font color='#5df9ff'>Ahli Jurus Air<br>Efek dari jurus Air akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7266,
+   "text": "<font color='#5df9ff'>Master Jurus Air<br>Efek dari jurus Air akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7267,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Air<br>Efek dari jurus Air akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7268,
+   "text": "<font color='#5df9ff'>Sage Jurus Air<br>Efek dari jurus Air akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7269,
+   "text": "<font color='#5df9ff'>Dasar Jurus Tanah<br>Effect dari jurus Tanah akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7270,
+   "text": "<font color='#5df9ff'>Ahli Jurus Tanah<br>Efek dari jurus Tanah akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7271,
+   "text": "<font color='#5df9ff'>Master Jurus Tanah<br>Efek dari jurus Tanah akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7272,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Tanah<br>Efek dari jurus Tanah akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7273,
+   "text": "<font color='#5df9ff'>Sage Jurus Tanah<br>Efek dari jurus Tanah akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7274,
+   "text": "<font color='#5df9ff'>Dasar Jurus Petir<br>Effect dari jurus Petir akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7275,
+   "text": "<font color='#5df9ff'>Ahli Jurus Petir<br>Efek dari jurus Petir akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7276,
+   "text": "<font color='#5df9ff'>Master Jurus Petir<br>Efek dari jurus Petir akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7277,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Petir<br>Efek dari jurus Petir akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7278,
+   "text": "<font color='#5df9ff'>Sage Jurus Petir<br>Efek dari jurus Petir akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7279,
+   "text": "<font color='#5df9ff'>Dasar Jurus Angin<br>Effect dari jurus Angin akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7280,
+   "text": "<font color='#5df9ff'>Ahli Jurus Angin<br>Efek dari jurus Angin akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7281,
+   "text": "<font color='#5df9ff'>Master Jurus Angin<br>Efek dari jurus Angin akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7282,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Angin<br>Efek dari jurus Angin akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7283,
+   "text": "<font color='#5df9ff'>Sage Jurus Angin<br>Efek dari jurus Angin akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7284,
+   "text": "<font color='#5df9ff'>Dasar Jurus Taijutsu<br>Effect dari jurus Taijutsu akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7285,
+   "text": "<font color='#5df9ff'>Ahli Jurus Taijutsu<br>Efek dari jurus Taijutsu akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7286,
+   "text": "<font color='#5df9ff'>Master Jurus Taijutsu<br>Efek dari jurus Taijutsu akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7287,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Taijutsu<br>Efek dari jurus Taijutsu akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7288,
+   "text": "<font color='#5df9ff'>Sage Jurus Taijutsu<br>Efek dari jurus Taijutsu akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7289,
+   "text": "<font color='#5df9ff'>Dasar Jurus Penyegelan<br>Effect dari jurus Penyegelan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7290,
+   "text": "<font color='#5df9ff'>Ahli Jurus Penyegelan<br>Efek dari jurus Penyegelan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7291,
+   "text": "<font color='#5df9ff'>Master Jurus Penyegelan<br>Efek dari jurus Penyegelan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7292,
+   "text": "<font color='#5df9ff'>Pioneer Jurus Penyegelan<br>Efek dari jurus Penyegelan akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7293,
+   "text": "<font color='#5df9ff'>Sage JurusPenyegelan<br>Efek dari jurus Penyegelan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7294,
+   "text": "<font color='#5df9ff'>Dasar Alat Ninja<br>Effect dari Alat Ninja akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7295,
+   "text": "<font color='#5df9ff'>Ahli Alat Ninja<br>Efek dari Alat Ninja akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7296,
+   "text": "<font color='#5df9ff'>Master Alat Ninja<br>Efek dari Alat Ninja akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7297,
+   "text": "<font color='#5df9ff'>Pioneer Alat Ninja<br>Efek dari Alat Ninja akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7298,
+   "text": "<font color='#5df9ff'>Sage Alat Ninja<br>Efek dari Alat Ninja akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7299,
+   "text": "<font color='#5df9ff'>Dasar Teknik ILUSI<br>Effect dari Teknik ILUSI akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7300,
+   "text": "<font color='#5df9ff'>Ahli Teknik ILUSI<br>Efek dari Teknik ILUSI akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7301,
+   "text": "<font color='#5df9ff'>Master Teknik ILUSI<br>Efek dari Teknik ILUSI akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7302,
+   "text": "<font color='#5df9ff'>Pioneer Teknik ILUSI<br>Efek dari Teknik ILUSI akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7303,
+   "text": "<font color='#5df9ff'>Sage Teknik ILUSI<br>Efek dari Teknik ILUSI akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7304,
+   "text": "<font color='#5df9ff'>Dasar Teknik Penyembuhan<br>Effect dari Teknik Penyembuhan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7305,
+   "text": "<font color='#5df9ff'>Ahli Teknik Penyembuhan<br>Efek dari Teknik Penyembuhan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7306,
+   "text": "<font color='#5df9ff'>Master Teknik Penyembuhan<br>Efek dari Teknik Penyembuhan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7307,
+   "text": "<font color='#5df9ff'>Pioneer Teknik Penyembuhan<br>Efek dari Teknik Penyembuhan akan meningkat  ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7308,
+   "text": "<font color='#5df9ff'>Sage Teknik Penyembuhan<br>Efek dari Teknik Penyembuhan akan meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7309,
+   "text": "Pet menghapus buff pemilik"
+  },
+  {
+   "n": 7310,
+   "text": "Serangan Balik pet"
+  },
+  {
+   "n": 7311,
+   "text": "Pet Bosan"
+  },
+  {
+   "n": 7312,
+   "text": "Benturan Pet"
+  },
+  {
+   "n": 7313,
+   "text": "Menyembuhkan"
+  },
+  {
+   "n": 7314,
+   "text": "Mematuk"
+  },
+  {
+   "n": 7315,
+   "text": "Menyerap HP"
+  },
+  {
+   "n": 7316,
+   "text": "Menggigit"
+  },
+  {
+   "n": 7317,
+   "text": "Serbuk"
+  },
+  {
+   "n": 7318,
+   "text": "Berakar"
+  },
+  {
+   "n": 7319,
+   "text": "Sinar Matahari"
+  },
+  {
+   "n": 7320,
+   "text": "Penekanan"
+  },
+  {
+   "n": 7321,
+   "text": "Membosankan"
+  },
+  {
+   "n": 7322,
+   "text": "Gigit Balik"
+  },
+  {
+   "n": 7323,
+   "text": "akutan Pedang"
+  },
+  {
+   "n": 7324,
+   "text": "Tebasan Beturut"
+  },
+  {
+   "n": 7325,
+   "text": "Terbang"
+  },
+  {
+   "n": 7326,
+   "text": "Benturan"
+  },
+  {
+   "n": 7327,
+   "text": "Ferocious[E]"
+  },
+  {
+   "n": 7328,
+   "text": "Pemula Intelligence Aura"
+  },
+  {
+   "n": 7329,
+   "text": "Darah Kutukan"
+  },
+  {
+   "n": 7330,
+   "text": "Pergulatan"
+  },
+  {
+   "n": 7331,
+   "text": "Kegembiraan"
+  },
+  {
+   "n": 7332,
+   "text": "Kostum Clone"
+  },
+  {
+   "n": 7333,
+   "text": "Biaya reset skill {@1:value} {@0:type}."
+  },
+  {
+   "n": 7334,
+   "text": "Mengeluarkan{@1:value} {@0:type} reset skill berhasil."
+  },
+  {
+   "n": 7335,
+   "text": "Selamat kamu telah berhasil menemukan skill<font color='#00aeff'> {@0:}</font>."
+  },
+  {
+   "n": 7336,
+   "text": "level meningkat[{@0:}] ."
+  },
+  {
+   "n": 7337,
+   "text": "<font color='#0000a0'>Mempelajari Ninjutsu</font>"
+  },
+  {
+   "n": 7338,
+   "text": "Ketika belajar, kamu dapat mempelajari skill baru secara random atau mengupgrade skill yang ada. pertama kali kamu mempelajari skill tidak dikenakan biaya. untuk mempelajari skill berikutnya akan dikenakan biaya tergantung dari jumlah skill yg dipelajari.<br>kamu dapat melihat skill yang dapat dipelajari atau dapat mengupgrade skill  yang akan ditampilkan.<br>Konfirmasi membutuhkan <font color='0000ff'> {@0:} </font>{@1:type} untuk mempelajari?"
+  },
+  {
+   "n": 7339,
+   "text": "Tidak ada skill yang dapat dipelajari!"
+  },
+  {
+   "n": 7340,
+   "text": "Gagal mempelajari skill."
+  },
+  {
+   "n": 7341,
+   "text": "Biaya mempelajari skill {@0:value} {@1:type}."
+  },
+  {
+   "n": 7342,
+   "text": "Biaya mempelajari skill <font color='#ffffff'> {@0:} </font>{@1:type}."
+  },
+  {
+   "n": 7343,
+   "text": "Lanjut belajar"
+  },
+  {
+   "n": 7344,
+   "text": "Harus mencapai Level {@0:} untuk mempelajari skill."
+  },
+  {
+   "n": 7345,
+   "text": "Semua skill telah dipelajari, tidak perlu di reset."
+  },
+  {
+   "n": 7346,
+   "text": "Persyaratan level {@0:lev} untuk mempelajari skill level berikutnya"
+  },
+  {
+   "n": 7347,
+   "text": "Berhasil mempelajari skill"
+  },
+  {
+   "n": 7348,
+   "text": "Murid:"
+  },
+  {
+   "n": 7349,
+   "text": "Mengajari"
+  },
+  {
+   "n": 7350,
+   "text": "Setelah mengalahkan musuh Level ⟨0⟩ dan diatasnya di arena, kamu dapat menjadikan mereka budak disini!"
+  },
+  {
+   "n": 7351,
+   "text": "Sisa mencoba menangkap hari ini:"
+  },
+  {
+   "n": 7352,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memberi kamu Onigiri, kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7353,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memberikan beberapa teh Oolong, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7354,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memberikan kamu sebuah patung Hokage, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7355,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memakaikan kamu seperti boneka, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7356,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah membawa kamu ke taman hiburan, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7357,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Bermain Bianglala bersama kamu. Kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7358,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Mengundang kamu makan. Kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7359,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Mengajak kamu jalan-jalan. Kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7360,
+   "text": "Guru Kamu <font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> Mengajak kamu keluar negeri. Kamu mendapatkan {@1: } EXP"
+  },
+  {
+   "n": 7361,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>memuji kebesaran kamu, kamu Memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7362,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memijat punggung kamu, kamu Memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7363,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>membawakan kamu sushi dan sake, kamu Memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7364,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memberikan kipas, kamu Memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7365,
+   "text": "Murid kamu color='#ff⟨0⟩'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>menyucikan baju kamu. Kamu mendapatkan{@1:} EXP"
+  },
+  {
+   "n": 7366,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>membuatkan sarapan untuk kamu. Kamu mendapatkan{@1:} EXP"
+  },
+  {
+   "n": 7367,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Membersihkan ruanganmu. Kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7368,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> Memijat kamu. Kamu mendapatkan {@1: } EXP"
+  },
+  {
+   "n": 7369,
+   "text": "Guru Kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> Mengirim kamu bekerja di Tempat tempa. Kamu mendapatkan{@1:} EXP"
+  }
+ ]
+}

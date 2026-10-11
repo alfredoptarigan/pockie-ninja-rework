@@ -1,0 +1,896 @@
+{
+ "terms": {
+  "EXP Mark": "Exp Mark",
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Sungai ketenangan": "Verdant Alley",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Lembah awan": "Windscent Pass",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Serangan": "Attack",
+  "Blok": "Block",
+  "Memberi": "Gift",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Boss Toko Barang": "Merchant Boss",
+  "Lady Feng": "Feng",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 7370,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Mengirim murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk bekerja di tempat tempa"
+  },
+  {
+   "n": 7371,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah mengirim kamu untuk memberi makan kodok, kamu memperoleh{@1:} EXP"
+  },
+  {
+   "n": 7372,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah mengirim murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk memberi makan katak"
+  },
+  {
+   "n": 7373,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah menyuruh melompat kodok, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7374,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah mendapat murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk meniru kodok sambil memegang model Lady Feng"
+  },
+  {
+   "n": 7375,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah menyuruh kamu menyalin buku, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7376,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah mendapat murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>menyalin buku"
+  },
+  {
+   "n": 7377,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah mengirim kamu ke gunung untuk menambang, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7378,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah mengirim murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>ke atas gunung untuk menambang mineral"
+  },
+  {
+   "n": 7379,
+   "text": "Guru Kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Memberikan kebebasan di bar. Kamu mendapatkan{@1:} EXP"
+  },
+  {
+   "n": 7380,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Menyuruh murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk bersenang - senang di bar"
+  },
+  {
+   "n": 7381,
+   "text": "Guru Kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>menyuruh kamu berlari ⟨0⟩ putaran di taman. Kamu mendapatkan{@1:} EXP"
+  },
+  {
+   "n": 7382,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>menyuruh murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>berlari ⟨0⟩ putaran di taman"
+  },
+  {
+   "n": 7383,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>menyuruh kamu melemparkan dart ⟨0⟩ kali. Kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7384,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>berbicara kepada murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk melemparkan dart ⟨0⟩ kali"
+  },
+  {
+   "n": 7385,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> Menghukum kamu untuk berlutut di papan cuci. Kamu mendapatkan {@1: } EXP"
+  },
+  {
+   "n": 7386,
+   "text": "<font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> berkata pada murid <font color='#ff0000'> <a href= 'event: player|{@1: }'><u>{@1: }</u></a> </font> untuk berlutut di papan cuci selama ⟨0⟩ menit"
+  },
+  {
+   "n": 7387,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> mengajarkanmu bagaimana membaca, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7388,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>bagaimana membaca"
+  },
+  {
+   "n": 7389,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>tbagaimana bermain bola basket, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7390,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk bermain bola basket"
+  },
+  {
+   "n": 7391,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> mengagumi wajah kamu, kamu memperoleh{@1:} EXP"
+  },
+  {
+   "n": 7392,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk bermain papan selancar"
+  },
+  {
+   "n": 7393,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> memberi kamu senyuman malu-malu, kamu memperoleh {@1:} EXP"
+  },
+  {
+   "n": 7394,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk berenang"
+  },
+  {
+   "n": 7395,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> mengaku telah sayang kepada kamu, kamu memperoleh{@1:} EXP"
+  },
+  {
+   "n": 7396,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>untuk belajar bahasa asing"
+  },
+  {
+   "n": 7397,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkanmu berkendara. Kamu mendapatkan{@1:} EXP"
+  },
+  {
+   "n": 7398,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>hbagaimana berkendara"
+  },
+  {
+   "n": 7399,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkanmu menanam rose. Kamu mendapatkan{@1:} EXP"
+  },
+  {
+   "n": 7400,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>bagaimana menanam rose"
+  },
+  {
+   "n": 7401,
+   "text": "Guru kamur<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajarkan kamu bermain tennis. Kamu mendapatkan {@1:} EXP"
+  },
+  {
+   "n": 7402,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengajak murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>bermain tennis"
+  },
+  {
+   "n": 7403,
+   "text": "Guru kamu<font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> menajarkan kamu bermain tenis. Kamu mendapatkan {@1: } EXP"
+  },
+  {
+   "n": 7404,
+   "text": "<font color='#ff0000'> <a href= 'event: player|{@0: }'><u>{@0: }</u></a> </font> Mengajarkan murid<font color='#ff0000'> <a href= 'event: player|{@1: }'><u>{@1: }</u></a> </font>bagaimana bermain tenis"
+  },
+  {
+   "n": 7405,
+   "text": "Sisa mencoba pertolongan hari ini:"
+  },
+  {
+   "n": 7406,
+   "text": "Gurunya:"
+  },
+  {
+   "n": 7407,
+   "text": "Menangkap murid"
+  },
+  {
+   "n": 7408,
+   "text": "Memandu murid"
+  },
+  {
+   "n": 7409,
+   "text": "Buka lain waktu"
+  },
+  {
+   "n": 7410,
+   "text": "Nama murid :"
+  },
+  {
+   "n": 7411,
+   "text": "Menenangkan murid"
+  },
+  {
+   "n": 7412,
+   "text": "Memohon pemilik"
+  },
+  {
+   "n": 7413,
+   "text": "Popularitas:"
+  },
+  {
+   "n": 7414,
+   "text": "Lulus"
+  },
+  {
+   "n": 7415,
+   "text": "Melepas murid"
+  },
+  {
+   "n": 7416,
+   "text": "Menolak pemilik"
+  },
+  {
+   "n": 7417,
+   "text": "Berapa kali diperbudak:"
+  },
+  {
+   "n": 7418,
+   "text": "Peristiwa Sejarah"
+  },
+  {
+   "n": 7419,
+   "text": "Statusku:"
+  },
+  {
+   "n": 7420,
+   "text": "Mencoba perbudak:"
+  },
+  {
+   "n": 7421,
+   "text": "Memiliki Jumlah Murid:"
+  },
+  {
+   "n": 7422,
+   "text": "<font color='#00b035'>Murid aku:<br><br>Melihat info murid saat ini.<br>Mengatur murid untuk bekerja di rumah kamu.</font>"
+  },
+  {
+   "n": 7423,
+   "text": "<font color='#00b035'>Mengambil murid: Kamu yang dapat menangkap orang-orang di bawah ini sebagai murid!<br>Mengalahkan lawan di arena!<br>Orang yang merampok murid kamu! <br> Kamu mantan pemilik!<br><Br>Penangkapan target adalah murid, perlu untuk mengalahkan pemiliknya untuk mengklaim dirinya sebagai milik kamu!<br>Penangkapan target bebas, mengalahkan dia untuk menangkap dia sebagai murid!<br>Penangkapan target adalah pemilik murid, mengalahkannya dan seorang klaim dari murid sebagai milik kamu!</font>"
+  },
+  {
+   "n": 7424,
+   "text": "<font color='#00b035'>Menyelamatkan temanmu:<br><br>ni merupakan teman-teman kamu yang telah menjadi murid.<br>Click \"Selamatkan\" untuk melawan pemiliknya. Kemenangan akan memastikan menyelamatkan mereka!</font>"
+  },
+  {
+   "n": 7425,
+   "text": "<font color='#00b035'>Memilih tanaman dari rumah lain:<br>ada risiko tertentu untuk menanam <br> Jika kamu menemukan pekerja yang ditugaskan untuk bertarung., kamu harus mengalahkan mereka untuk menjalankan penanaman <br> Jika kamu kehilangan pertarungan, kamu akan menjadi murid pemilik rumah itu!! <br> <br> Kamu yang dapat memilih target menanam cepat dari daftar teman rumah kamu. Cobalah! </ font>"
+  },
+  {
+   "n": 7426,
+   "text": "<font color='#00b035'>Pergi kerumah pemain yang sudah ditentukan untuk memanen:<br><br>Untuk membalas dendam pada musuh kamu, masukkan nama di atas untuk memanen di rumahnya!</font>"
+  },
+  {
+   "n": 7427,
+   "text": "<font color='#00b035'>Murid sekarang: kamu saat ini mempunyai seorang murid.<br><br>kamu dapat mengikuti beberapa tindakan:<br>⟨0⟩. Resist: Kamu telah ⟨1⟩ kesempatan setiap hari untuk menolak pemilik murid kamu. Hanya kemenangan pertarungan menjamin kebebasan kamu. <br> ⟨2⟩. Penebusan: Kamu yang dapat membayar pemilik kamu jumlah a membeli emas untuk kebebasan kamu <br> ⟨3⟩.. Bantuan: Jika pemilik kamu memperlakukan kamu dengan baik, kamu dapat membantu dia mengatur rumahnya </ font>."
+  },
+  {
+   "n": 7428,
+   "text": "<font color='#00b035'>Kamu dapat menyewa NPC untuk membantu kamu Mengambil murid!<br>Fungsi ini tidak tersedia.</font>"
+  },
+  {
+   "n": 7429,
+   "text": "Powerful ninja dapat menggunakan layanan ninja lainnya tanpa biaya! Ingin menangkap murid? Kamu telah datang ke orang yang tepat!"
+  },
+  {
+   "n": 7430,
+   "text": "<font color='#0000a0'>Masuk rumah murid</font>"
+  },
+  {
+   "n": 7431,
+   "text": "Harus mencapai level {@0:} untuk masuk kerumah murid!"
+  },
+  {
+   "n": 7432,
+   "text": "Bekerja dalam <a href='event:rumah|{@0:}'>{@0:}</a>"
+  },
+  {
+   "n": 7433,
+   "text": "Bangunan <font color='#789532'><a href='event:rumah|{@0:}'><u>{@0:}</u></a></font>"
+  },
+  {
+   "n": 7434,
+   "text": "Peningkatan <font color='#789532'><a href='event:rumah|{@0:}'><u>{@0:}</u></a></font>"
+  },
+  {
+   "n": 7435,
+   "text": "Dalam rumah teman<font color='#789532'><a href='event:rumah|{@0:}'><u>{@0:}</u></a></font>"
+  },
+  {
+   "n": 7436,
+   "text": "Memberi makan pet <font color='#789532'><a href='event:rumah|{@0:}'><u>{@0:}</u></a></font>"
+  },
+  {
+   "n": 7437,
+   "text": "Membersihkan bermacam-macam barang"
+  },
+  {
+   "n": 7438,
+   "text": "Tambah musuh : Game ini terdiri dari pengikut jahat dari Aizen dan Orochimaru. Jangan ragu, tambahkan mereka sebagai musuh dan kalahkan mereka atas nama kebenaran!"
+  },
+  {
+   "n": 7439,
+   "text": "Nama Karakter : "
+  },
+  {
+   "n": 7440,
+   "text": "Blok pesan pemain ini"
+  },
+  {
+   "n": 7441,
+   "text": "Tambah teman : Dunia ninja membutuhkan persahabatan sejati. Lihatlah Naruto dan Sakura, atau Ichigo dan Rukia, sebuah ikatan setia kawan seperti mereka tanam keberanian dalam diri kamu! Jangan ragu, tambahkan sahabat yang dapat kamu percaya sebagai teman!"
+  },
+  {
+   "n": 7442,
+   "text": "Nama Karakter :"
+  },
+  {
+   "n": 7443,
+   "text": "Biaya penambahan :"
+  },
+  {
+   "n": 7444,
+   "text": "Batas saat ini :"
+  },
+  {
+   "n": 7445,
+   "text": "Batas penambahan :"
+  },
+  {
+   "n": 7446,
+   "text": "Jika kamu memiliki banyak teman, gunakan tambah daftar teman untuk meningkatkan jumlah temanmu! Daftar teman dapat ditambah hingga ⟨0⟩ orang!"
+  },
+  {
+   "n": 7447,
+   "text": "Masukkan jumlah orang yang ingin kamu tambahkan"
+  },
+  {
+   "n": 7448,
+   "text": "Masukkan nama pemain yang ingin kamu cari :"
+  },
+  {
+   "n": 7449,
+   "text": "Tambah Daftar"
+  },
+  {
+   "n": 7450,
+   "text": "Standing"
+  },
+  {
+   "n": 7451,
+   "text": "Wilayah saat ini"
+  },
+  {
+   "n": 7452,
+   "text": "Lihat Teman"
+  },
+  {
+   "n": 7453,
+   "text": "Jenis Kelamin"
+  },
+  {
+   "n": 7454,
+   "text": "Blok Info"
+  },
+  {
+   "n": 7455,
+   "text": "Ruangan Latihan Khusus ⟨0⟩"
+  },
+  {
+   "n": 7456,
+   "text": "Special Training Room⟨0⟩"
+  },
+  {
+   "n": 7457,
+   "text": "<font color='#6a6e70'><b>    Mengayun    </b></font>"
+  },
+  {
+   "n": 7458,
+   "text": "Tanpa<font color='#00aeff'> Mooncake Box</font>, kamu tidak dapat menantang Bloodboil Demon.<br>Kalahkan<font color='#ff0000'> Evil Merchant </font>Kemungkinan kamu akan mendapatkan<font color='#00aeff'> Mooncake Box</font>."
+  },
+  {
+   "n": 7459,
+   "text": "Mengayun"
+  },
+  {
+   "n": 7460,
+   "text": "<font color='#6a6e70'><b>   Bintang Besar   </b></font>"
+  },
+  {
+   "n": 7461,
+   "text": "Bintang Besar"
+  },
+  {
+   "n": 7462,
+   "text": "<font color='#6a6e70'><b>   Bintang Kecil   </b></font>"
+  },
+  {
+   "n": 7463,
+   "text": "Bintang Kecil"
+  },
+  {
+   "n": 7464,
+   "text": "Aku adalah Espada yang sanggup membangkitkan. Aku yakin kamu bisa merasakan perbedaan yang besar antara kemampuan kami. Kamu harus berlutut, manusia!"
+  },
+  {
+   "n": 7465,
+   "text": "Jika kamu berada di sini, itu berarti mereka semua mati. Berfikirlah keberadaan seperti manusia yang kuat. Tapi ini akan berakhir di sini sekarang. Akulah Espada Cero, Llargo Yammy!"
+  },
+  {
+   "n": 7466,
+   "text": "Tidak ada yang bisa menahan waktu ujian, bahkan kamu! Akulah Baraggan Luisenbarn Espada ⟨0⟩, Raja Hueco Mundo!"
+  },
+  {
+   "n": 7467,
+   "text": "Sangat merepotkan, seperti aku tidak bisa bermain-main lagi! Akulah Espada ⟨0⟩, Starrk Coyote!"
+  },
+  {
+   "n": 7468,
+   "text": "Akulah Espada ke⟨0⟩, Halibel Tia. Aku akan memotong kamu dengan setengah pedang! Tak satu pun dari kamu dapat membahayakan Raja Aizen!"
+  },
+  {
+   "n": 7469,
+   "text": "Hoho, itu tidak baik untuk mengalihkan perhatian selama pertempuran. Akulah Gin Ichimaru, mantan kapten divisi ⟨0⟩, senang bertemu dengan kamu!"
+  },
+  {
+   "n": 7470,
+   "text": "Hoho, tidak terlalu buruk, tapi jalan ke depan masih panjang!"
+  },
+  {
+   "n": 7471,
+   "text": "Kamu tidak telalu lemah, hanya itu saja. Kamu tidak akan mengalahkan aku.."
+  },
+  {
+   "n": 7472,
+   "text": "Kamu harus memiliki keyakinan yang kuat untuk berhasil. Tapi apakah kamu bisa mengalahkanku ?"
+  },
+  {
+   "n": 7473,
+   "text": "Seni tidak datang dari kekerasan tetapi datang dari perdamaian. Takut denganku."
+  },
+  {
+   "n": 7474,
+   "text": "Hidup ini begitu lemah di dunia. Apa yang kamu pikirkan?"
+  },
+  {
+   "n": 7475,
+   "text": "Setiap upaya perjuangan akan sia-sia ketika menghadapi tombak tajam ini. Berapa kali aku harus menusukannya pada tubuhmu?"
+  },
+  {
+   "n": 7476,
+   "text": "Antikekerasan adalah bentuk terbaik dari peperangan. Kamu memenuhi syarat untuk menjadi sainganku, hahaha!"
+  },
+  {
+   "n": 7477,
+   "text": "Hanya orang paling berani dapat bertahan! Jika kamu dapat menghadapi kematian tanpa berkedip, kamu bisa menang."
+  },
+  {
+   "n": 7478,
+   "text": "Jangan pernah memulai, kaku kana selalu mengakhirinya!"
+  },
+  {
+   "n": 7479,
+   "text": "Kamu telah membuktikan kekuatanmu. Tetapi bandingkan dengan kekuatanku, kamu masih ... Yah bisa menahan serangan aku?"
+  },
+  {
+   "n": 7480,
+   "text": "Tubuh kita kuat itu yang saya inginkan! Hssss."
+  },
+  {
+   "n": 7481,
+   "text": "Dapatkah kamu mengerti jalan dari seni? Rahasia Boneka tiruan! "
+  },
+  {
+   "n": 7482,
+   "text": "Kehidupan adalah yang paling penting! Datang kesini dan memperpanjang hidupku!"
+  },
+  {
+   "n": 7483,
+   "text": "Mari aku lihat semua darah kamu ! Menembus tubuh kamu dan menerima ritual saya! "
+  },
+  {
+   "n": 7484,
+   "text": "Ini kesenianku! ! ! Hahaha. Aku akan memotong-motong bagian tubuh kamu! "
+  },
+  {
+   "n": 7485,
+   "text": "Aku inginkan perdamaian dan enghentikan perang !"
+  },
+  {
+   "n": 7486,
+   "text": "Aku ada pertanyaan untukmu. Apa opini kamu tentang sasuke? Apa yang kamu akan lakukan untuk mengalahkannya?"
+  },
+  {
+   "n": 7487,
+   "text": "Menakjubkan! Tetapi pedangku tidak cocok untuk membunuh!"
+  },
+  {
+   "n": 7488,
+   "text": "Kamu memiliki keahlian sebelum kamu merasakan kesakitan yang sesungguhnya! Jika aku menjadi kamu, aku lebih baik percaya! "
+  },
+  {
+   "n": 7489,
+   "text": "Hanya kebencian yang dapat membuat kamu kuat! Kamu tidak dapat merubah semua kebencianku walaupun kamu telah mengalahkanku!"
+  },
+  {
+   "n": 7490,
+   "text": "Aku Espada ⟨0⟩, Arruruerie Aaroniero. Kamu harus menjadi manusia di sini untuk menyelamatkan Inoue. Kamu akan mati oleh pedangku!"
+  },
+  {
+   "n": 7491,
+   "text": "Hoho, kau akhirnya di sini. Aku Espada ⟨0⟩, Grimmjow, aku tidak akan menaruh belas kasihan pada kehancuran kamu, kamu hanya menunggu kemtaianmu!"
+  },
+  {
+   "n": 7492,
+   "text": "Ini adalah wujud aku yang sebenarnya, aku akan memberikan kematian yang cepat dan tanpa rasa sakit dengan cakar pantherku!"
+  },
+  {
+   "n": 7493,
+   "text": "Kamu adalah penyusup ? Hoho, aku Espada ⟨0⟩, Rull Zommari. Kagumlah dengan kehebatan pertempuranku!"
+  },
+  {
+   "n": 7494,
+   "text": "Hoho, Kamu harus sudah cukup kuat untuk sampai sejauh ini ke dalam biara. Tapi, aku telah menganalisis kemampuan tempur kamu. Aku Espada ⟨0⟩, Szayel Aporro Granz!"
+  },
+  {
+   "n": 7495,
+   "text": "Apa sekelompok kotoran, aku Espada ⟨0⟩ Nnoitra Gilga. Akulah yang terkuat di antara Espadas,  dan aku algojo kamu!"
+  },
+  {
+   "n": 7496,
+   "text": "Prestasi kamu sudah cukup kuat hingga dapat sampai kesini. Akulah Cifer Espada Ulquiorra ⟨0⟩. Karena Raja Aizen telah memberikanku tugas di Las Noches, Aku akan membuat kamu jatuh di mana kamu berdiri!"
+  },
+  {
+   "n": 7497,
+   "text": "Apakah kamu sudah cukup kuat? Jika tidak, kamu tidak akan dapat menyelamatkan Inoue. Aku akan mengakhiri perjalanan kamu di posisi ini!"
+  },
+  {
+   "n": 7498,
+   "text": "Batu： Mata uang dasar dalam game, bisa di dapat dengan berbagai macam cara."
+  },
+  {
+   "n": 7499,
+   "text": "<font color='#6a6e70'><b>    Gudang    </b></font>"
+  },
+  {
+   "n": 7500,
+   "text": "<font color='#6a6e70'>Gudang telah penuh. Harap kosongkan dahulu.</font>"
+  },
+  {
+   "n": 7501,
+   "text": "<font color='#6a6e70'>Gudang belum dibangun.</font>"
+  },
+  {
+   "n": 7502,
+   "text": "Periksa Strategi"
+  },
+  {
+   "n": 7503,
+   "text": "Occupy"
+  },
+  {
+   "n": 7504,
+   "text": "Recommend"
+  },
+  {
+   "n": 7505,
+   "text": "Food"
+  },
+  {
+   "n": 7506,
+   "text": "Equip"
+  },
+  {
+   "n": 7507,
+   "text": "Auto-combat"
+  },
+  {
+   "n": 7508,
+   "text": "Combat"
+  },
+  {
+   "n": 7509,
+   "text": "Basic Attributes"
+  },
+  {
+   "n": 7510,
+   "text": "Pet Food"
+  },
+  {
+   "n": 7511,
+   "text": "Level ⟨0⟩ Gem"
+  },
+  {
+   "n": 7512,
+   "text": "Engrave Blade"
+  },
+  {
+   "n": 7513,
+   "text": "Pet Item"
+  },
+  {
+   "n": 7514,
+   "text": "Normal Skill Book"
+  },
+  {
+   "n": 7515,
+   "text": "Special Skill Book"
+  },
+  {
+   "n": 7516,
+   "text": "VIP Card"
+  },
+  {
+   "n": 7517,
+   "text": "Lainya"
+  },
+  {
+   "n": 7518,
+   "text": "Namecard Folder"
+  },
+  {
+   "n": 7519,
+   "text": "Pergi ke Desa"
+  },
+  {
+   "n": 7520,
+   "text": "Lakukan sekali pertarungan di<font color='#00b034'> Arena</font>."
+  },
+  {
+   "n": 7521,
+   "text": "Lakukan sekali<font color='#00b034'> Pukul guci medal</font>."
+  },
+  {
+   "n": 7522,
+   "text": "Pergi ke<font color='#00b034'> {@0:zone} </font>dan bunuh<font color='#ff6565'> {@1:monster} </font>.  <b>（{@3:Current number}∕{@2:Total}）</b>"
+  },
+  {
+   "n": 7523,
+   "text": "Pada<font color='#00b034'> {@0:zone} </font> <font color='#00b034'> {@1:Exploration Zone} </font>, menjalankan penjalahan."
+  },
+  {
+   "n": 7524,
+   "text": "Pada<font color='#00b034'> {@0:zone} </font> <font color='#00b034'> {@1:Exploration Zone} </font>, menjalankan penjalahan dan memperleh<font color='#ff6565'> {@2:item} </font>."
+  },
+  {
+   "n": 7525,
+   "text": "Pada<font color='#00b034'> {@0:zone} </font><font color='#00b034'> {@1:Exploration Zone} </font>, menjalankan penjalahan, dan mencapai <font color='#00b034'> ★☆☆☆☆ </font>."
+  },
+  {
+   "n": 7526,
+   "text": "Pada<font color='#00b034'>{@0:zone}</font> <font color='#00b034'>{@1:Exploration Zone}</font>, menjalankan penjalahan dan mencapai<font color='#00b034'>★★☆☆☆</font>."
+  },
+  {
+   "n": 7527,
+   "text": "Pada<font color='#00b034'>{@0:zone}</font><font color='#00b034'>{@1:Exploration Zone}</font>，menjalankan penjalahan, dan mencapai<font color='#00b034'>★★★☆☆</font>。 "
+  },
+  {
+   "n": 7528,
+   "text": "Pada<font color='#00b034'>{@0:zone}</font><font color='#00b034'>{@1:Exploration Zone}</font>，menjalankan penjalahan, dan mencapai<font color='#00b034'>★★★★☆</font>。 "
+  },
+  {
+   "n": 7529,
+   "text": "Pada<font color='#00b034'>{@0:zone}</font><font color='#00b034'>{@1:Exploration Zone}</font>，menjalankan penjalahan, dan mencapai<font color='#00b034'>★★★★★</font>。 "
+  },
+  {
+   "n": 7530,
+   "text": "Kumpulkan<font color='#ff6565'> {@0:item} </font>.  <b>（{@2:current number}∕{@1:total number}）</b><br>iron ore dan<font color='#00b034'>sintesiskan di tas kamu</font>untuk mendapatkannya."
+  },
+  {
+   "n": 7531,
+   "text": "Kumpulkan<font color='#ff6565'> {@0:item} </font>.  <b>（{@2:current number}∕{@1:total number}）</b><br>precious ores: <font color='#00b034'>sintesiskan di tas kamu</font>untuk mendapatkannya."
+  },
+  {
+   "n": 7532,
+   "text": "Pergi ke<font color='#00b034'> {@0:zone} </font>dan bunuh<font color='#ff6565'> {@1:monster} </font>dan kumpulkan<font color='#ff6565'> {@2:item} </font>. <b>（{@4:Current number}∕{@3:Total}）</b>"
+  },
+  {
+   "n": 7533,
+   "text": "Mengalahkan di nomer<font color='#00b034'> {@0:floor} </font> <font color='#ff6565'> {@1:npc} </font> di Las Noches."
+  },
+  {
+   "n": 7534,
+   "text": "Mengalahkan <font color='#ff6565'> {@1:npc} </font>, dan berhasil menantang <font color='#00b034'> {@0:stage name} </font>."
+  },
+  {
+   "n": 7535,
+   "text": "Collect: {@0:} <b>（{@2:}/{@1:}）</b>"
+  },
+  {
+   "n": 7536,
+   "text": "Pergi ke<font color='#00b034'> {@0:zone} </font>dan bicara kepada{@1:NPC}."
+  },
+  {
+   "n": 7537,
+   "text": "Klik ikon Cottage di sudut kanan atas layar kamu untuk masuk desa."
+  },
+  {
+   "n": 7538,
+   "text": "Pergi ke<font color='#00b034'> {@0:zone} </font>dan melakukan transaksi kepada{@1:NPC} untuk mendapatkan<font color='#ff6565'> {@2:item} </font>.<b>（{@4:Current number}∕{@3:Total}）</b>"
+  },
+  {
+   "n": 7539,
+   "text": "menyerahkan<font color='#ff6565'> {@2:item} </font>kepada<font color='#00b034'> {@0:zone} </font> <font color='#ff6565'> {@1:NPC} </font>."
+  },
+  {
+   "n": 7540,
+   "text": "memasuki<font color='#00b034'> Desa Api </font>, klik di sebelah kanan dari Interface permainan, <font color='#00b034'> Petunjuk cepat </font>. pada <font color='#00b034'> Petunjuk Leveling </font>tombol untuk membuka<font color='#00b034'> Petunjuk Leveling </font>Interface untuk memahami kejadian dalam dunia permainan."
+  },
+  {
+   "n": 7541,
+   "text": "Klik pada<font color='#00b034'> Peta Dunia</font> di sebelah kanan dari interface game, buka<font color='#00b034'> Peta Dunia </font>interface, menggerakkan mouse ke daerah sekitar<font color='#00b034'>Tambang Batu  </font>dan<font color='#00b034'> Klik untuk </font>memasuki zona luar<font color='#00b034'> Tambang Batu </font>."
+  },
+  {
+   "n": 7542,
+   "text": "Membuka<font color='#00b034'> carrier bag </font>interface dan melakukan pengisian<font color='#00b034'> carrier bag </font> sekali."
+  },
+  {
+   "n": 7543,
+   "text": "Pergi ke Zone luar dan pilih<font color='#00b034'> daftar monster </font>pada bagian atas inteface permainan, dan klik salah satu<font color='#00b034'> normal monster </font> dan dari<font color='#00b034'> Level ⟨0⟩ menu </font>yang muncul keluar, pilih<font color='#00b034'> Serangan berantai </font>untuk memulai latihan auto-combat."
+  },
+  {
+   "n": 7544,
+   "text": "Gunakan fungsi<font color='#00b034'> langsung menyelesaikan </font>untuk menyelsaikan<font color='#00b034'> Serangan berantai </font> saat ini."
+  },
+  {
+   "n": 7545,
+   "text": "Pergi ke <font color='#00b034'> Desa Api </font>atau<font color='#00b034'> Kota Malaikat </font> <font color='#00b034'> imbalan misi </font>, dan dari<font color='#00b034'> imbalan distributor </font>, menerima<font color='#00b034'> Misi Harian </font>."
+  },
+  {
+   "n": 7546,
+   "text": "Membuka<font color='#00b034'> bagian bawah bar navigasi </font>dari<font color='#00b034'> friends </font>interface, dan dan berhasil menambahkan pemain sebagai<font color='#00b034'> teman kamu </font>."
+  },
+  {
+   "n": 7547,
+   "text": "Gunakan <font color='#00b034'> Gift Coupon </font>atau<font color='#00b034'> gold </font>dalam<font color='#00b034'> Item Mall </font>untuk memebeli<font color='#00b034'> item</font>."
+  },
+  {
+   "n": 7548,
+   "text": "Klik gambar guci pada <font color='#00b034'>Sisi kanan atas</font>, Buka<font color='#00b034'> Toko Guci </font>, gunakan<font color='#00b034'> Medal </font>atau<font color='#00b034'> Gold </font>untuk memencahakan guci sebanyak<font color='#00b034'> ⟨0⟩ </font>kali."
+  },
+  {
+   "n": 7549,
+   "text": "Dengan<font color='#00b034'> menaikan level</font>, mempelajari<font color='#00b034'> ⟨0⟩ </font>skill atau lebih<font color='#00b034'>  </font>, dan melengkapi itu untuk semua<font color='#00b034'> skill panels </font>."
+  },
+  {
+   "n": 7550,
+   "text": "Masuk<font color='#00b034'> Desa Air </font>, klik di sebelah kanan dari Interface permainan,<font color='#00b034'> Petunjuk cepat </font>. pada <font color='#00b034'> Petunjuk Leveling </font>tombol untuk membuka<font color='#00b034'> Petunjuk Leveling </font>Interface untuk memahami kejadian dalam dunia permainan."
+  },
+  {
+   "n": 7551,
+   "text": "Klik pada<font color='#00b034'> Peta Dunia</font> di sebelah kanan dari interface game, buka<font color='#00b034'> Peta Dunia </font>interface, menggerakkan mouse ke daerah sekitar<font color='#00b034'> Sungai ketenangan </font>dan<font color='#00b034'> Klik untuk </font>memasuki zona luar<font color='#00b034'> Sungai ketenangan </font>."
+  },
+  {
+   "n": 7552,
+   "text": "Pergi ke <font color='#00b034'> Desa Air </font>atau<font color='#00b034'> Kota Malaikat </font> <font color='#00b034> imbalan misi </font>, dan dari<font color='#00b034'> imbalan distributor </font>, accept a<font color='#00b034'> daily </font>."
+  },
+  {
+   "n": 7553,
+   "text": "Masuk<font color='#00b034'> Desa Petir </font>, klik di sebelah kanan dari Interface permainan,<font color='#00b034'> Petunjuk cepat </font>. pada <font color='#00b034'> Petunjuk Leveling </font>tombol untuk membuka<font color='#00b034'> Petunjuk Leveling </font>Interface untuk memahami kejadian dalam dunia permainan."
+  },
+  {
+   "n": 7554,
+   "text": "Klik pada<font color='#00b034'> Peta Dunia</font> di sebelah kanan dari interface game, buka<font color='#00b034'> Peta Dunia </font>interface, menggerakkan mouse ke daerah sekitar<font color='#00b034'> Puncak Bebatuan </font>dan<font color='#00b034'> Klik untuk </font>memasuki zona luar<font color='#00b034'> Puncak Bebatuan </font>."
+  },
+  {
+   "n": 7555,
+   "text": "Pergi ke <font color='#00b034'> Desa Petir </font>atau<font color='#00b034'> Kota Malaikat </font> <font color='#00b034> imbalan misi </font>, dan dari<font color='#00b034'> imbalan distributor </font>, accept a<font color='#00b034'> daily </font>."
+  },
+  {
+   "n": 7556,
+   "text": "Masuk<font color='#00b034'> Desa Angin  </font>, klik di sebelah kanan dari Interface permainan,<font color='#00b034'> Petunjuk cepat </font>. pada <font color='#00b034'> Petunjuk Leveling </font>tombol untuk membuka<font color='#00b034'> Petunjuk Leveling </font>Interface untuk memahami kejadian dalam dunia permainan."
+  },
+  {
+   "n": 7557,
+   "text": "Klik pada<font color='#00b034'> Peta Dunia</font> di sebelah kanan dari interface game, buka<font color='#00b034'> Peta Dunia </font>interface, menggerakkan mouse ke daerah sekitar<font color='#00b034'> Lembah awan </font>dan<font color='#00b034'> Klik untuk </font>memasuki zona luar<font color='#00b034'> Lembah awan </font>."
+  },
+  {
+   "n": 7558,
+   "text": "Pergi ke <font color='#00b034'> Desa Angin  </font>atau<font color='#00b034'> Kota Malaikat </font> <font color='#00b034'> Imbalan misi </font>, dan dari<font color='#00b034'> imbalan distributor </font>, menerima<font color='#00b034'> Misi Harian </font>."
+  },
+  {
+   "n": 7559,
+   "text": "Masuk<font color='#00b034'> Desa Tanah  </font>, klik di sebelah kanan dari Interface permainan,<font color='#00b034'> Petunjuk cepat </font>. pada <font color='#00b034'> Petunjuk Leveling </font>tombol untuk membuka<font color='#00b034'> Petunjuk Leveling </font>Interface untuk memahami kejadian dalam dunia permainan."
+  },
+  {
+   "n": 7560,
+   "text": "Klik pada<font color='#00b034'> Peta Dunia</font> di sebelah kanan dari interface game, buka<font color='#00b034'> Peta Dunia </font>interface, menggerakkan mouse ke daerah sekitar<font color='#00b034'> Gerbang Naga Tersembunyi </font>dan<font color='#00b034'> Klik untuk </font>memasuki zona luar<font color='#00b034'> Gerbang Naga Tersembunyi </font>."
+  },
+  {
+   "n": 7561,
+   "text": "Pergi ke <font color='#00b034'> Desa Tanah  </font>atau<font color='#00b034'> Kota Malaikat </font> <font color='#00b034> imbalan misi </font>, dan dari<font color='#00b034'> imbalan distributor </font>, accept a<font color='#00b034'> daily </font>."
+  },
+  {
+   "n": 7562,
+   "text": "Pintu masuk Las Noches </font>mendengarkan penjelasan dari<font color='#00b034'> Kisuke Urahara </font> tantangan dari<font color='#00b034'> Las Noches </font>."
+  },
+  {
+   "n": 7563,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Gillian </font>."
+  },
+  {
+   "n": 7564,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'>Aaroniero</font>."
+  },
+  {
+   "n": 7565,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Grimmjow </font>."
+  },
+  {
+   "n": 7566,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'>Hollowfied Grimmjow</font>."
+  },
+  {
+   "n": 7567,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Rull </font>."
+  },
+  {
+   "n": 7568,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'>Szayel Aporro</font>."
+  },
+  {
+   "n": 7569,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'> pintu masuk Las Noches </font>, dan berbicara kepada <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan pengawal tim dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Nnoitra </font>."
+  },
+  {
+   "n": 7570,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla </font>, berbicara dengan<font color='#00b034'> Penjaga Kota Iblis </font> untuk masuk <font color='#00b034'> Valhalla </font>, mengalahkan<font color='#00b034'> Decadent Nest </font>pemimpin iblis<font color='#00b034'> Decadent Ninja </font>."
+  },
+  {
+   "n": 7571,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla </font>, berbicara dengan<font color='#00b034'> Penjaga Kota Iblis </font> untuk masuk <font color='#00b034'> Valhalla </font>, mengalahkan<font color='#00b034'> Valhalla Camp </font>pemimpin iblis<font color='#00b034'> Lunar Swordsman </font>."
+  },
+  {
+   "n": 7572,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla </font>, berbicara dengan<font color='#00b034'> Penjaga Kota Iblis </font> untuk masuk <font color='#00b034'> Valhalla </font>, mengalahkan<font color='#00b034'> Endless Sea Forests </font>pemimpin iblis<font color='#00b034'> Plague Lich </font>."
+  },
+  {
+   "n": 7573,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla </font>, berbicara dengan<font color='#00b034'> Penjaga Kota Iblis </font> untuk masuk <font color='#00b034'> Valhalla </font>, mengalahkan<font color='#00b034'> Crimson Grassland' </font>pemimpin iblis<font color='#00b034'> Bloody Demonsoul </font>."
+  },
+  {
+   "n": 7574,
+   "text": "Melalui<font color='#00b034'> Peta Dunia </font>, ketua dari<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla </font>, berbicara dengan<font color='#00b034'> Penjaga Kota Iblis </font> untuk masuk <font color='#00b034'> Valhalla </font>, mengalahkan<font color='#00b034'> Decadent Nest </font>pemimpin iblis<font color='#00b034'> Bewitcher </font>."
+  },
+  {
+   "n": 7575,
+   "text": "Masuk<font color='#00b034'> arena </font>, Pergi ke interface<font color='#00b034'> Pertarungan dunia </font>, dan berhasil mendaftarkan diri untuk <font color='#00b034'> pertandinagn dinia </font> hari ini."
+  },
+  {
+   "n": 7576,
+   "text": "Masuk<font color='#00b034'> arena </font>, mengarahkan kepada<font color='#00b034'> liga nasional </font>interface untuk melihat info liga nasional saat ini."
+  },
+  {
+   "n": 7577,
+   "text": "Memenangkan pertarungan pada<font color='#00b034'> arena </font>dan meningkatkan<font color='#00b034'> rank </font>kamu ke<font color='#00b034'> Akademi I </font>."
+  },
+  {
+   "n": 7578,
+   "text": "Memenangkan pertarungan pada<font color='#00b034'> arena </font>dan meningkatkan<font color='#00b034'> rank </font>kamu ke<font color='#00b034'>Genin I</font>."
+  },
+  {
+   "n": 7579,
+   "text": "Memenangkan pertarungan pada<font color='#00b034'> arena </font>dan meningkatkan<font color='#00b034'> rank </font>kamu ke<font color='#00b034'> Chunin I </font>."
+  },
+  {
+   "n": 7580,
+   "text": "Masuk<font color='#00b034'> kota utama </font><font color='#00b034'> rumah murid </font>, gunakan<font color='#00b034'> membuka buku panel murid </font>untuk menambahkan <font color='#00b034'> panel murid </font>."
+  },
+  {
+   "n": 7581,
+   "text": "Memeperoleh kemenangan di<font color='#00b034'> arena </font>, dan menangkap musuh yang kamu kalahkan menjadi<font color='#00b034'> murid </font>, hasil yang kamu miliki sebanyak<font color='#00b034'> ⟨0⟩ </font><font color='#00b034'> murid </font>."
+  },
+  {
+   "n": 7582,
+   "text": "Memeperoleh kemenangan di<font color='#00b034'> arena </font>, dan menangkap musuh yang kamu kalahkan menjadi<font color='#00b034'> Murid </font>hasil yang kamu miliki sebanyak<font color='#00b034'> ⟨0⟩ </font><font color='#00b034'> Murid </font>."
+  },
+  {
+   "n": 7583,
+   "text": "Gunakan<font color='#00b034'> gift coupon </font>atau<font color='#00b034'> gold </font>dan Pergi ke <font color='#00b034'> Item mall </font>permainan untuk membeli<font color='#00b034'> item</font>."
+  },
+  {
+   "n": 7584,
+   "text": "Buka tas kamu, gunakan <font color='#00b034'> EXP Mark </font>yang diberikan oleh<font color='#00b034'> Boss Toko Barang</font>."
+  },
+  {
+   "n": 7585,
+   "text": "Buka tas kamu, dan gunakan beberapa dari<font color='#00b034'> Sunflower Fledgling </font>pada<font color='#00b034'> panel pet equipment kamu</font>."
+  },
+  {
+   "n": 7586,
+   "text": "Pergi ke<font color='#00b034'> Kota Malaikat </font><font color='#00b034'> Kandang pet </font> dan menaruh<font color='#00b034'> pet </font>pada<font color='#00b034'> kandang pet </font>untuk pemeliharaan."
+  }
+ ]
+}

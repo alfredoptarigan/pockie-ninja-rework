@@ -1,0 +1,1127 @@
+{
+ "terms": {
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Jembatan Api": "Fiery Ridge",
+  "Rumah Christmas": "Christmas House",
+  "Sungai ketenangan": "Verdant Alley",
+  "Sungai Sakura": "Slowflower River",
+  "Dataran Subur": "Greenwaves Plain",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Tapak Petir": "Thundering Steps",
+  "Tebing Keramat": "Holywood Range",
+  "Lembah awan": "Windscent Pass",
+  "Padang Berangin": "Ashvoid Gully",
+  "Lembah Angin": "Typhoon Plateau",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Goa Batu": "Boulder Cavern",
+  "Altar Lush": "Lush Altar",
+  "Crossroad": "Crossroads",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lintasan Setapak": "Eerie Passage",
+  "Kota yang Hilang": "Abandoned Evernight City",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "Pantai Naga": "Dragontame Coast",
+  "Amegakure": "Hidden Rain Village",
+  "Rumah": "Home",
+  "Serangan": "Attack",
+  "Blok": "Block",
+  "Kembali": "Return",
+  "Rumahku": "My Home",
+  "Menolong Teman": "Help a Friend",
+  "Suigetsu": "Suigetsu Hozuki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Aizen": "Sosuke Aizen"
+ },
+ "units": [
+  {
+   "n": 6754,
+   "text": "Pihak lain tidak akan mendapatkan EXP dari menggoda. masih ingin melanjutkan?"
+  },
+  {
+   "n": 6755,
+   "text": "Pihak lain tidak akan mendapatkan EXP dari pembelajaran. masih ingin melanjutkan?"
+  },
+  {
+   "n": 6756,
+   "text": "Silahkan tmelakukan selama ⟨0⟩ kali. Kamu akan mendapatkan EXP. masih melanjutkan? "
+  },
+  {
+   "n": 6757,
+   "text": "Gold kurang dari<font color='#ffffff'> {@0:} </font>, tidak bisa menebus."
+  },
+  {
+   "n": 6758,
+   "text": "Level harus mencapai<font color='#ffffff'> {@0:} </font>untuk menyelamatkan teman."
+  },
+  {
+   "n": 6759,
+   "text": "Pemain ini tidak ada dlam daftar."
+  },
+  {
+   "n": 6760,
+   "text": "Dana tidak mencukupi, membutuhkan {@1:} {@0:type}."
+  },
+  {
+   "n": 6761,
+   "text": "Berhasil membuka posisi murid, mengkonsumsi item{@0:type}Quantity:{@1:value},saat ini jumlah maksimal murid kamu adalah {@2:cnt}"
+  },
+  {
+   "n": 6762,
+   "text": "Level harus mencapai<font color='#ffffff'> {@0:} </font>untuk menggunakan fungsi ini."
+  },
+  {
+   "n": 6763,
+   "text": "Kamu telah mencapai pada nomor maksimum dari movements untuk acara hari ini!"
+  },
+  {
+   "n": 6764,
+   "text": "Tidak mencukupi movement power, bergerak mengkonsumsi {@0:pot} movement power"
+  },
+  {
+   "n": 6765,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font>EXP"
+  },
+  {
+   "n": 6766,
+   "text": "Aku mengalahkan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>, menangkap<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>murid, <font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>menjadi milikku"
+  },
+  {
+   "n": 6767,
+   "text": "Mengkonsumsi<font color='#ffffff'> {@1:} </font>{@0:type}"
+  },
+  {
+   "n": 6768,
+   "text": "Pergerakan murid"
+  },
+  {
+   "n": 6769,
+   "text": "Info murid"
+  },
+  {
+   "n": 6770,
+   "text": "Kamu tidak puas dengan <font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>'kualitas pelayanan murid, dan telah membebaskan dia."
+  },
+  {
+   "n": 6771,
+   "text": "Guru kamu yang dermawan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah memecat kamu!"
+  },
+  {
+   "n": 6772,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Telah merampas murid kamu<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>!"
+  },
+  {
+   "n": 6773,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mencoba merampas murid kamu<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>, tapi malah dipukuli, Lalu ditertawakan!"
+  },
+  {
+   "n": 6774,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah merampas dari kamu<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>!"
+  },
+  {
+   "n": 6775,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mencoba merampas dari kamu<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>, tapi malah dipukuli, Lalu ditertawakan!"
+  },
+  {
+   "n": 6776,
+   "text": "Kamu telah menggunakan perlawanan bebas hari ini! Konfirmasi pengeluaran<font color='0000ff'> {@0:} </font>{@1:type}untuk menolak menjalankannya?"
+  },
+  {
+   "n": 6777,
+   "text": "Aku mencoba menantang<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>utnuk menjadi murid, tetapi gagal!"
+  },
+  {
+   "n": 6778,
+   "text": "Gold tidak mencukupi, Biaya perlawanan<font color='#ffffff'> {@0:} </font>{@1:type}"
+  },
+  {
+   "n": 6779,
+   "text": "Menolak biaya pemilik<font color='#ffffff'> {@0:} </font>{@1:type}"
+  },
+  {
+   "n": 6780,
+   "text": "Saat ini kamu tidak dapat bertarung."
+  },
+  {
+   "n": 6781,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'>{@0:}</a> </font> telah berakhir melayani kamu, kamu memperoleh {@1:exp}Akumulasi EXP dari pelayanan murid."
+  },
+  {
+   "n": 6782,
+   "text": "ketika perbedaan level kamu dan pemain lain mencapai {@0:lev}, kamu tidak dapat menyelamatkannya"
+  },
+  {
+   "n": 6783,
+   "text": "Ketika perbedaan level kamu dan\\ pemain lain mencapai{@0:lev}, pemain lain tidak dapat menjadi murid kamu"
+  },
+  {
+   "n": 6784,
+   "text": "Rank kamu di bawah Pemula III, Tidak dapat menyelamatkan teman"
+  },
+  {
+   "n": 6785,
+   "text": "Tidak dapat menangkap jika perbedaan level lebih atau sama dengan ⟨0⟩ level"
+  },
+  {
+   "n": 6786,
+   "text": "aku mengalahkan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>, berhasil menyelamatkan<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>"
+  },
+  {
+   "n": 6787,
+   "text": "Aku mencoba menantang<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>untuk menyelamatkan<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>, tapi gagal"
+  },
+  {
+   "n": 6788,
+   "text": "Server akan ditutup dalam (@CloseTimeMinute) menit. Untuk memastikan bahwa tidak ada masalah yang akan timbul di account kamu, kami menyarankan kamu keluar permainan sekarang!"
+  },
+  {
+   "n": 6789,
+   "text": "Murid :"
+  },
+  {
+   "n": 6790,
+   "text": "Guru:"
+  },
+  {
+   "n": 6791,
+   "text": "Setelah mengalahkan musuh Level ⟨0⟩ dan diatasnya di arena, kamu dapat menjadikan mereka murid disini!"
+  },
+  {
+   "n": 6792,
+   "text": "Sisa mencoba menangkap hari ini :"
+  },
+  {
+   "n": 6793,
+   "text": "Kalahkan mereka untuk menolong temanmu!"
+  },
+  {
+   "n": 6794,
+   "text": "Sisa mencoba pertolongan hari ini :"
+  },
+  {
+   "n": 6795,
+   "text": "Mulai pertolongan"
+  },
+  {
+   "n": 6796,
+   "text": "Berapa kali dijadikan murid :"
+  },
+  {
+   "n": 6797,
+   "text": "Penelusuran event"
+  },
+  {
+   "n": 6798,
+   "text": "Statusku :"
+  },
+  {
+   "n": 6799,
+   "text": "Jumlah percobaan mengambil murid :"
+  },
+  {
+   "n": 6800,
+   "text": "Popularitas :"
+  },
+  {
+   "n": 6801,
+   "text": "Menolong Teman"
+  },
+  {
+   "n": 6802,
+   "text": "Memiliki Jumlah Murid :"
+  },
+  {
+   "n": 6803,
+   "text": "Mencuri barang"
+  },
+  {
+   "n": 6804,
+   "text": "Dataran Sakura yang diselimuti kegelapan. Hanya ninja paling kuat dapat bertahan hidup tantangan berat ini."
+  },
+  {
+   "n": 6805,
+   "text": "Untuk membuktikan Kekuatan Besar sendiri, Pergi kearena terbuaka dengan beberapa luka. Kamu aka mendapatkan pertarungan yang sesungguhnya disana."
+  },
+  {
+   "n": 6806,
+   "text": "Mythical artefak perang adalah ditempa dari tungku ini! Jika kamu dapat memimpikannya, aku dapat membuat itu!"
+  },
+  {
+   "n": 6807,
+   "text": "Membtuhkan gems untuk membuat perlengkapan kamu lebih indah? membutuhkansenjata tersembunyi untuk meningkatkan kemampuan pertarungan kamu? Atau makanan dan potion? Kami punya itu semua."
+  },
+  {
+   "n": 6808,
+   "text": "Jangan lewatkan koleksi weapons dan armor kami. Berbagai perlengkapan tersedia dengan harga terbaik."
+  },
+  {
+   "n": 6809,
+   "text": "Powerful ninjas dapat menggunakan layanan ninja lainnya tanpa biaya! Ingin Mengambil murid? kamu telah datang ke orang yang tepat!"
+  },
+  {
+   "n": 6810,
+   "text": "Pet adalah sahabat kamu yang paling dapat diandalkan dalam pertempuran. Untuk membiarkan kamu menjadi lebih kuat, memberikan itu di kandang pet. Hanya di dalam mereka akan menerima perawatan yang terbaik!"
+  },
+  {
+   "n": 6811,
+   "text": "Ini tidak baik untuk tetap siaga. Ayo kita lihat ketika kamu bebas, kamu mungkin menemukan beberapa pekerjaan yang menarik untuk menentukan!"
+  },
+  {
+   "n": 6812,
+   "text": "Kamu dapat membeli perlengkapan kelas tinggi dengan atribut menggunakan batu di sini. Ingin mencoba keberuntungan kamu?"
+  },
+  {
+   "n": 6813,
+   "text": "Dikatakan Five Kage sedang Meeting ingin melihatnya segera setelahpenyerbuan dari tailed beast. Apakah kamu ingin melihatnya?"
+  },
+  {
+   "n": 6814,
+   "text": "Ingin mencoba keberuntungan kamu? Hal ini mungkin hari keberuntungan kamu!"
+  },
+  {
+   "n": 6815,
+   "text": "Roh-roh kepahlawanan kuno merupakan di bawah kekuasaan iblis. Bisakah kamu mengalahkan pelayan dan kaisar menyelamatkan roh heroik yang memanipulasi?"
+  },
+  {
+   "n": 6816,
+   "text": "Las Noches memiliki lawan yang kuat.Hanya yang mampu dan berani dapat masuk. Kamu dapat mempertajam kemampuan kamu di dalam. Aku dapat membawa kamu, tetapi kamu harus membiayai layanan panduanku sehingga aku dapat melapangkan jalan bagi kamu.<br>Kata nasihat lain: Semakin rendah lantai, semakin besar penghargaan.<br><br><font color='#FF3232'>Perhatikan! Las Noches dipengaruhi oleh Jadebreaker; semua efek buff EXP tidak efektif di sana!</font>"
+  },
+  {
+   "n": 6817,
+   "text": "Intelijen sangat penting untuk penyelesaian misi ninja."
+  },
+  {
+   "n": 6818,
+   "text": "Woof woof! Pakkun merupakan anjing kecil yang pintar."
+  },
+  {
+   "n": 6819,
+   "text": "Sigh, kasihanilah si tua bodoh ini. aku masih harus untuk berjalan dan merawat keluargaku."
+  },
+  {
+   "n": 6820,
+   "text": "Seorang pemburu yang baik harus memiliki mata yang tajam dan fisik yang lentur untuk menangkap mangsa."
+  },
+  {
+   "n": 6821,
+   "text": "Sebagai ninja yang sangat baik, kamu perlu seni bela diri yang kuat, disiplin dan kerja tim untuk menyelesaikan misi dengan sempurna."
+  },
+  {
+   "n": 6822,
+   "text": "Kota Malaikat adalah tempat yang tenang - suatu berkat tersendiri."
+  },
+  {
+   "n": 6823,
+   "text": "Bahan-bahan yang dapat dimakan langka yang tumbuh di dataran merupakan hadiah alam bagi umat manusia. Mereka tidak boleh sembarangan diinjak."
+  },
+  {
+   "n": 6824,
+   "text": "Untuk menampilkan peristiwa dunia melalui ekspresi seni, yang merupakan cara hidup bagi kita."
+  },
+  {
+   "n": 6825,
+   "text": "Croakk! Jangan meremehkan kodok kami. Hanya yang berbakat dapat berjuang bersama kami."
+  },
+  {
+   "n": 6826,
+   "text": "Memilih bahan adalah tugas penting. Sebuah keputusan yang salah dapat mengakibatkan konsekuensi yang mengerikan."
+  },
+  {
+   "n": 6827,
+   "text": "Waspada, tidak meninggalkan setiap entitas yang mencurigakan tak terkendali."
+  },
+  {
+   "n": 6828,
+   "text": "Mengerikan aura gelap di seluruh tanah. Kita harus menghancurkan sumbernya."
+  },
+  {
+   "n": 6829,
+   "text": "Jika monster dan manusia dapat hidup dalam harmoni, dunia akan menjadi tempat yang jauh lebih baik."
+  },
+  {
+   "n": 6830,
+   "text": "Mereka penduduk Kota Malaikat mendapatkan pada saraf ku. aku harus mengajar itu pelajaran jika aku pernah mendapatkan kesempatan."
+  },
+  {
+   "n": 6831,
+   "text": "Dengan hadirnya iblis, terdapat pengumpulan ramuan pada daerah tersebut whittled hingga hampir tidak ada. Kami tidak akan memiliki cukup obat untuk mengobati orang-orang di tingkat ini."
+  },
+  {
+   "n": 6832,
+   "text": "Hanya melalui pelatihan yang sulit, yang dapat seorang menjadi lebih kuat."
+  },
+  {
+   "n": 6833,
+   "text": "Nak, kamu dapat menggunakan rings dari perbedaan kualitas untuk redeem Lover Ring menjadi appraisal level tinggi disini. setelah itu <font color='#00b034'> Jumlah dari atribut ring  akan sama, tetapi tipe dan efek dari atribut akan lebih baik! </font><br>Tetapi silahkan lihat dari ring enchantment attribut dan embedd gems akan dihilangkan!"
+  },
+  {
+   "n": 6834,
+   "text": "Selamat Datang di Pengorganisasian Batu. Kamu dapat menemukan tim yang ideal, memulihkan HP dan Chakra cepat di sini"
+  },
+  {
+   "n": 6835,
+   "text": "Cek rank sebelumnya. Untuk kehormatan dari 'Kage'! "
+  },
+  {
+   "n": 6836,
+   "text": "Tailed beasts menyerang desa kita. bergegas! Kita harus menarik semua pasukan dan mempertahankan desa kita!"
+  },
+  {
+   "n": 6837,
+   "text": "Ini Christmas. Kamu sudah memakan mooncake?"
+  },
+  {
+   "n": 6838,
+   "text": "Aku bersumpah aku akan membuat mooncake yang terbaik―― Shippuden Mooncake!"
+  },
+  {
+   "n": 6839,
+   "text": "Kamu cukup beruntung untuk menemukan saya di sini. Aku memiliki sejumlah barang berharga, sehingga terburu-buru dan memilih beberapa."
+  },
+  {
+   "n": 6840,
+   "text": "Aku yang pertama untuk memasuki mystic Dragon Tame Valley. Apa yang akan kamu ingin tahu?"
+  },
+  {
+   "n": 6841,
+   "text": "Penjelajah datang ke Dragon Tame Valley, membual bahwa ia adalah yang pertama. Jadi kami harus bersembunyi di sini."
+  },
+  {
+   "n": 6842,
+   "text": "Ninja dari semua desa telah berkumpul di Pantai Naga. Terasa seperti ada sesuatu yang akan terjadi."
+  },
+  {
+   "n": 6843,
+   "text": "Setiap tetes hujan terkait dengan kesakitan ninjutsu. Dia bisa mengetahui keberadaan kamu segera setelah kamu menyentuh hujan!"
+  },
+  {
+   "n": 6844,
+   "text": "Ingin membangun desa yang keren? Kamu harus belajar dengan saya!"
+  },
+  {
+   "n": 6845,
+   "text": "Aku tidak gemuk! Tulangku besar!"
+  },
+  {
+   "n": 6846,
+   "text": "Meskipun tetap ramping adalah tujuan saya, saya masih ingin makan keripik barbekyu. Saya heran jika Choji memiliki banyak."
+  },
+  {
+   "n": 6847,
+   "text": "Aku penasaran ingin tahu mengapa memakai topeng ANBU sepanjang waktu. Dapatkah kamu mencoba untuk memberikan saya salah satu topeng ANBU?"
+  },
+  {
+   "n": 6848,
+   "text": "Jangan pernah meremehkan lawan, tidak peduli seberapa kecil mereka mungkin tampak .... Selalu memberikan pukulan terbaik!"
+  },
+  {
+   "n": 6849,
+   "text": "Kamu tahu aku tidak ingin membuat diriku menjadi acar. Apa yang kamu inginkan? Shogi atau menonton awan ?"
+  },
+  {
+   "n": 6850,
+   "text": "Ini adalah latihan yang biasa untuk bermain shogi dengan Shikamaru. Aku harus menang dari dia ..."
+  },
+  {
+   "n": 6851,
+   "text": "Semua orang tinggal di tren yang tak terelakkan ... orang hanya berbagi satu takdir umum ... Dengan kematian"
+  },
+  {
+   "n": 6852,
+   "text": "Mengapa kita merupakan rumah cabang sementara mereka termasuk rumah utama? Aku harus mendapatkan lencana untuk membuktikan kemampuan ku! Aku Tidak yakin berapa banyak Ninja yang ada di rumah utama. Dapatkah kamu pergi dengan ku?"
+  },
+  {
+   "n": 6853,
+   "text": "Surat ini mencatat setiap gerakan Akatsuki. Aku tidak dapat mengirim ke Tsunade. Bisakah kamu membantu saya memberikan surat ini?"
+  },
+  {
+   "n": 6854,
+   "text": "Aku khawatir tentang Asuma. Dapatkah kamu mengirimkan surat rahasia kepada Asuma dariku?"
+  },
+  {
+   "n": 6855,
+   "text": "Jika kamu layu sebelum sepenuhnya mekar ... sangatlah disayangkan! Tidak ada yang berarti bunga yang mekar kecuali blooms..."
+  },
+  {
+   "n": 6856,
+   "text": "Aku terluka parah. Aku masih bisa merasakan bahwa Sasuke akan datang, tetapi hidupku dalam bahaya tanpa Bag Medic!"
+  },
+  {
+   "n": 6857,
+   "text": "Aku sudah dilindungi oleh orang lain di masa lalu ... Kali ini ... Sekarang giliranku untuk melindungi mereka ..."
+  },
+  {
+   "n": 6858,
+   "text": "Tidak ada yang tahu rasa kesepian dan gelisah, tidak ada yang tahu rasa sakit hidup di dunia tanpa orang tua dan teman-teman ...."
+  },
+  {
+   "n": 6859,
+   "text": "Ini agak membosankan untuk menggunakan kipas sebagai senjata. Boneka Kankuro tampaknya menarik. Aku ingin memiliki boneka sendiri."
+  },
+  {
+   "n": 6860,
+   "text": "Aku bekerjasama dengan kamu hanya karena kamu mengatakan kamu dapat membuat uang. Paling tidak yang dapat dilakukan adalah melakukan sesuatu untuk aku, Bendahara Akatsuki."
+  },
+  {
+   "n": 6861,
+   "text": "Apakah kamu memiliki seseorang yang sangat berarti bagi kamu? Bagiku, hal yang paling penting adalah mimpi yang satu itu."
+  },
+  {
+   "n": 6862,
+   "text": "Seberapa cepat anak-anak ini tumbuh!"
+  },
+  {
+   "n": 6863,
+   "text": "Aku tidak pernah kembali pada kata-kata saya! Itu nindo saya!"
+  },
+  {
+   "n": 6864,
+   "text": "Kamu harus melindungi desa ini, mencintai desa dan kepercayaan mereka."
+  },
+  {
+   "n": 6865,
+   "text": "Bahkan jika kamu membunuhku, kamu masih akan gagal. Aku membawa gelar ini dalam kepercayaan untuk Hokage pertama dan kedua! Aku Hokage Ketiga!"
+  },
+  {
+   "n": 6866,
+   "text": "Ninja ada untuk kebutuhan perlindungan"
+  },
+  {
+   "n": 6867,
+   "text": "Sekarang! Meringkuk kagum! Berteriak putus asa! Karena seni saya ... adalah sebuah LEDAKAN!"
+  },
+  {
+   "n": 6868,
+   "text": "Terlalu naif. Sebuah ninjutsu yang berfokus pada bayangan membosankan."
+  },
+  {
+   "n": 6869,
+   "text": "Kamu telah menganalisa ini dengan hanya melawan satu. Kerja yang Bagus."
+  },
+  {
+   "n": 6870,
+   "text": "Jangan berani-berani menyebutkan kata itu lagi!"
+  },
+  {
+   "n": 6871,
+   "text": "Senyum adalah cara termudah keluar dari situasi yang sulit, bahkan jika itu yang palsu."
+  },
+  {
+   "n": 6872,
+   "text": "Kali ini ... Aku harap kamu merupakan bunga harapan yang tidak pernah mati."
+  },
+  {
+   "n": 6873,
+   "text": "Jangan meremehkan hal-hal kecil dalam hidupmu."
+  },
+  {
+   "n": 6874,
+   "text": "Aku ingin menunjukkan aku bisa menjadi ninja yang indah serta bahkan jika Aku tidak punya ninjutsu atau genjutsu ... aku bekerja keras dan aku tidak pernah menyerah! Ini adalah nindo ku."
+  },
+  {
+   "n": 6875,
+   "text": "Aku perlu untuk meningkatkan kemampuan ku dalam cara apa pun."
+  },
+  {
+   "n": 6876,
+   "text": "Sasuke ... Suigetsu ... bangun. Karin sedang dalam perjalanan ke sini. Tetap berpegangan!"
+  },
+  {
+   "n": 6877,
+   "text": "Jangan memainkan ninjutsu yang sama dua kali di hadapanku."
+  },
+  {
+   "n": 6878,
+   "text": "Suatu hari adikku akan datang ke sini. Silahkan memukulinya dengan seluruh kekuatan kamu ketika hari itu tiba. Adikku tidak bisa menang melawan kamu sekarang. Namun pertumbuhan terjadi ketika salah satu melampaui batas seseorang. Menyadari bahwa ini juga bagian dari pelatihan."
+  },
+  {
+   "n": 6879,
+   "text": "Kebencian ... Kebencian ... Tidak ada tapi kebencian."
+  },
+  {
+   "n": 6880,
+   "text": "Aku seorang penuntut balas. Aku lahir untuk membalas dendam. Aku dapat memberikan segalanya untuk membalas dendam. Berikan aku kembali Itachi, orang tua ku dan semua orang di klan ku! Aku akan berhenti balas dendam jika kamu memberikan mereka kembali ke ku!!"
+  },
+  {
+   "n": 6881,
+   "text": "Untuk Itachi, aku lebih penting daripada desa. Dan bagi ku, dia juga lebih penting daripada desa."
+  },
+  {
+   "n": 6882,
+   "text": "Kamu tidak akan tahu bagaimana hal-hal yang akan berubah sampai kamu melakukannya. Tidak ada gunanya untuk spekulasi atau persuasi. Tunjukkan kesetiaanmu."
+  },
+  {
+   "n": 6883,
+   "text": "Tapi suatu hari nanti aku akan mematahkan kutukan itu. Jika ada hal seperti perdamaian, saya akan menemukannya! Keimanan adalah lebih baik dari rencana apapun!"
+  },
+  {
+   "n": 6884,
+   "text": "Hanya ada satu hal yang penting Jika kamu adalah shinobi, dan itu bukan jumlah jurus yang kamu miliki. Semua yang Akamu lakukan , adalah keberanian untuk tidak pernah menyerah."
+  },
+  {
+   "n": 6885,
+   "text": "Hal yang nyata akan lenyap suatu hari nanti, tapi kenangan tidak akan."
+  },
+  {
+   "n": 6886,
+   "text": "Aku akan berperang melawan siapapun untuk melindungi desa."
+  },
+  {
+   "n": 6887,
+   "text": "Jangan menerima nasib jika kamu tidak menyukainya!"
+  },
+  {
+   "n": 6888,
+   "text": "Orang yang akan mengubah dunia belum muncul lagi. Siapa Anak yang dikandung oleh Toad Sage Besar? Aku perlu untuk cadangan kekuatanku sebelum menemukan orang ini."
+  },
+  {
+   "n": 6889,
+   "text": "<font color='#6a6e70'><b>   Scarecrow   </b></font>"
+  },
+  {
+   "n": 6890,
+   "text": "Toko"
+  },
+  {
+   "n": 6891,
+   "text": "Leveling"
+  },
+  {
+   "n": 6892,
+   "text": "Prestasi saya"
+  },
+  {
+   "n": 6893,
+   "text": "Rumahku"
+  },
+  {
+   "n": 6894,
+   "text": "Liga Dunia"
+  },
+  {
+   "n": 6895,
+   "text": "Tantangan"
+  },
+  {
+   "n": 6896,
+   "text": "Kamu tidak dapat meletakan pemain pada zona ini!"
+  },
+  {
+   "n": 6897,
+   "text": "<font color='#5df9ff'>Pergi Ke Desa Api</font>"
+  },
+  {
+   "n": 6898,
+   "text": "<font color='#5df9ff'>Pergi Ke Desa Air</font>"
+  },
+  {
+   "n": 6899,
+   "text": "<font color='#5df9ff'>Pergi Ke Desa Petir</font>"
+  },
+  {
+   "n": 6900,
+   "text": "<font color='#5df9ff'>Pergi Ke Desa Angin</font>"
+  },
+  {
+   "n": 6901,
+   "text": "<font color='#5df9ff'>Pergi Ke Desa Tanah</font>"
+  },
+  {
+   "n": 6902,
+   "text": "<font color='#5df9ff'>Pergi Ke Kota Malaikat</font>"
+  },
+  {
+   "n": 6903,
+   "text": "<font color='#5df9ff'>Pergi Ke Kota Iblis</font>"
+  },
+  {
+   "n": 6904,
+   "text": "<font color='#5df9ff'>Pergi Ke Tambang Batu</font>"
+  },
+  {
+   "n": 6905,
+   "text": "<font color='#5df9ff'>Pergi Ke Jalan Senja</font>"
+  },
+  {
+   "n": 6906,
+   "text": "<font color='#5df9ff'>Pergi Ke Jembatan Api</font>"
+  },
+  {
+   "n": 6907,
+   "text": "<font color='#5df9ff'>Pergi ke Rumah Christmas</font>"
+  },
+  {
+   "n": 6908,
+   "text": "<font color='#5df9ff'>Pergi Ke Sungai ketenangan</font>"
+  },
+  {
+   "n": 6909,
+   "text": "<font color='#5df9ff'>Pergi Ke Sungai Sakura</font>"
+  },
+  {
+   "n": 6910,
+   "text": "<font color='#5df9ff'>Pergi Ke Dataran Subur</font>"
+  },
+  {
+   "n": 6911,
+   "text": "<font color='#5df9ff'>Pergi Ke Puncak Bebatuan</font>"
+  },
+  {
+   "n": 6912,
+   "text": "<font color='#5df9ff'>Pergi Ke Tapak Petir</font>"
+  },
+  {
+   "n": 6913,
+   "text": "<font color='#5df9ff'>Pergi Ke Tebing Keramat</font>"
+  },
+  {
+   "n": 6914,
+   "text": "<font color='#5df9ff'>Pergi Ke Lembah awan</font>"
+  },
+  {
+   "n": 6915,
+   "text": "<font color='#5df9ff'>Pergi Ke Padang Berangin</font>"
+  },
+  {
+   "n": 6916,
+   "text": "<font color='#5df9ff'>Pergi Ke Lembah Angin</font>"
+  },
+  {
+   "n": 6917,
+   "text": "<font color='#5df9ff'>Pergi Ke Gerbang Naga Tersembunyi</font>"
+  },
+  {
+   "n": 6918,
+   "text": "<font color='#5df9ff'>Pergi Ke Goa Batu</font>"
+  },
+  {
+   "n": 6919,
+   "text": "<font color='#5df9ff'>Pergi Ke Altar Lush</font>"
+  },
+  {
+   "n": 6920,
+   "text": "<font color='#5df9ff'>Pergi Ke Crossroad</font>"
+  },
+  {
+   "n": 6921,
+   "text": "<font color='#5df9ff'>Pergi Ke Alam Liar</font>"
+  },
+  {
+   "n": 6922,
+   "text": "<font color='#5df9ff'>Pergi Ke Desa Matahari</font>"
+  },
+  {
+   "n": 6923,
+   "text": "<font color='#5df9ff'>Pergi Ke Hutan Cahaya</font>"
+  },
+  {
+   "n": 6924,
+   "text": "<font color='#5df9ff'>Pergi Ke Lintasan Setapak</font>"
+  },
+  {
+   "n": 6925,
+   "text": "<font color='#5df9ff'>Pergi Ke Kota yang Hilang</font>"
+  },
+  {
+   "n": 6926,
+   "text": "<font color='#5df9ff'>Pergi Ke Lembah Kesunyian</font>"
+  },
+  {
+   "n": 6927,
+   "text": "<font color='#5df9ff'>Pergi Ke Jalan Kematian</font>"
+  },
+  {
+   "n": 6928,
+   "text": "<font color='#5df9ff'>Pergi Ke Daratan Patah Hati</font>"
+  },
+  {
+   "n": 6929,
+   "text": "<font color='#5df9ff'>Pergi Ke Dragontame Valley</font>"
+  },
+  {
+   "n": 6930,
+   "text": "<font color='#5df9ff'>Pergi Ke Dragontame Forest</font>"
+  },
+  {
+   "n": 6931,
+   "text": "<font color='#5df9ff'>Pergi ke Pantai Naga</font>"
+  },
+  {
+   "n": 6932,
+   "text": "<font color='#5df9ff'>Pergi ke Amegakure </font>"
+  },
+  {
+   "n": 6933,
+   "text": "<font color='#5df9ff'>Pada ruang meeting ⟨0⟩ kage</font>"
+  },
+  {
+   "n": 6934,
+   "text": "<font color='#5df9ff'>Pergi Ke Secret Demon Tunnel</font>"
+  },
+  {
+   "n": 6935,
+   "text": "<font color='#5df9ff'>Pergi Ke Valhalla</font>"
+  },
+  {
+   "n": 6936,
+   "text": "<font color='#5df9ff'>Pergi ke Rumah</font>"
+  },
+  {
+   "n": 6937,
+   "text": "Menggunakan {@0:s} medal untuk menukar <font color='#00aeff'>{@1:item}</font>"
+  },
+  {
+   "n": 6938,
+   "text": "Menggunakan {@0:s} medal untuk menukar {@1:exp} EXP"
+  },
+  {
+   "n": 6939,
+   "text": "Kamu mengunakan dadu dan memperoleh nomor berikut:<font color='#00aeff'>{@0:}</font>, total<font color='#00aeff'>{@1:}</font>poin. "
+  },
+  {
+   "n": 6940,
+   "text": "<font color='#6a6e70'><b>   Scene+⟨0⟩   </b></font>"
+  },
+  {
+   "n": 6941,
+   "text": "Scene+⟨0⟩"
+  },
+  {
+   "n": 6942,
+   "text": "Pemain tidak ada atau tidak login selama ⟨0⟩ hari, tidak dapat menerima surat kamu!"
+  },
+  {
+   "n": 6943,
+   "text": "Kirim surat untuk <font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>"
+  },
+  {
+   "n": 6944,
+   "text": "Gagal konek ke server"
+  },
+  {
+   "n": 6945,
+   "text": "koneksi gagal, silahkan masuk kembali kedalam game"
+  },
+  {
+   "n": 6946,
+   "text": "Tips: Klik disini untuk mengisi carrier bag"
+  },
+  {
+   "n": 6947,
+   "text": "Level lebih rendah dari {@0:}, tidak dapat masuk."
+  },
+  {
+   "n": 6948,
+   "text": "Hanya dapat masuk {@0:} kali sehari, selain itu kamu akan ditemui oleh Aizen. Cari aku besok!"
+  },
+  {
+   "n": 6949,
+   "text": "Las Noches yang penuh dengan bahaya, Maukah kamu membantu aku menghancurkan persekongkolan Aizen? Dan aku akan membiarkanmu dalam sebuah rahasia. Semakin kamu menyelidiki tempat itu, semakin besar hadiahnya!<br><br><font color='#FF3232'>Harap perhatikan! Las Noches dipengaruhi oleh kekuatan Jadebreaker. Semua bonus efek EXP tidak berguna!</font>"
+  },
+  {
+   "n": 6950,
+   "text": "Berikan aku {@0:} {@1:type}, dan kamu dapat langsung masuk ke lantai {@2:}."
+  },
+  {
+   "n": 6951,
+   "text": "Item tidak cukup, perlu<font color='#ffffff'> {@0:} </font> x <font color='#00aeff'> {@1:} </font> untuk masuk."
+  },
+  {
+   "n": 6952,
+   "text": "Saat ini menantang lantai nomor {@0:}."
+  },
+  {
+   "n": 6953,
+   "text": "Mengulang"
+  },
+  {
+   "n": 6954,
+   "text": "Dana yang dibutuhkan tidak cukup"
+  },
+  {
+   "n": 6955,
+   "text": "Hanya dapat membeli {@0:} kali dalam setiap tantangan."
+  },
+  {
+   "n": 6956,
+   "text": "Membeli<font color='#00aeff'> badan palsu </font>, mengkonsumsi <font color='#ffffff'> {@0:} </font>{@1:type}."
+  },
+  {
+   "n": 6957,
+   "text": "Menyelesaikan tantangan Las Noches"
+  },
+  {
+   "n": 6958,
+   "text": "Kamu sudah menyelesaikan pertarungan-otomatis untuk<font color='#ffffff'> {@0:} </font>ronde!<br>Mencapai lantai nomor<font color='#ffffff'> {@1:} </font>dalam [⟨0⟩st round], {@2:loose}! Memperoleh<font color='#ffffff'> {@3:} </font> EXP<br>Memperoleh total<font color='#ffffff'> {@4:} </font>EXP, silahkan buka tas untuk memeriksa item kemenangan kamu!"
+  },
+  {
+   "n": 6959,
+   "text": "Kamu sudah menyelesaikan pertarungan-otomatis untuk<font color='#ffffff'> {@0:} </font>ronde!<br>Mencapai lantai nomor<font color='#ffffff'> {@1:} </font>dalam [⟨0⟩st round], {@2:loose}! Memperoleh <font color='#ffffff'> {@3:} </font> EXP<br>Mencapai lantai nomor<font color='#ffffff'> {@4:} </font>dalam [⟨1⟩nd round], {@5:res}! memperoleh<font color='#ffffff'> {@6:} </font> EXP<br>Memperoleh total<font color='#ffffff'> {@7:} </font>EXP, silahkan buka tas untuk memeriksa item kemenangan kamu!"
+  },
+  {
+   "n": 6960,
+   "text": "Kamu sudah menyelesaikan pertempuran-otomatis untuk<font color='#ffffff'> {@0:} </font>ronde!<br>Mencapai lantai nomor<font color='#ffffff'> {@1:} </font>dalam [⟨0⟩st round], {@2:loose}! Memperoleh<font color='#ffffff'> {@3:} </font>EXP<br>Mencapai lantai nomor <font color='#ffffff'> {@4:} </font>dalam [⟨1⟩nd round], {@5:res}! Memperoleh<font color='#ffffff'> {@6:} </font>EXP<br>Mencapai lantai nomor<font color='#ffffff'> {@7:} </font>tantangan [⟨2⟩rd round], {@8:res}! Memperoleh<font color='#ffffff'> {@9:} </font>EXP<br>Memperoleh total<font color='#ffffff'> {@10:} </font>EXP, silahkan buka tas untuk memeriksa item kemenangan kamu!"
+  },
+  {
+   "n": 6961,
+   "text": "Kamu telah berhasil mencapai lantai nomor {@0:} dalam tantangan Las Noches, {@1:loose}! Memperoleh {@2:} EXP!</font>"
+  },
+  {
+   "n": 6962,
+   "text": "Berhasil menembus stadium nomor<font color='#ffffff'> {@0:} </font>, memperoleh<font color='#ffffff'> {@1:} </font>EXP."
+  },
+  {
+   "n": 6963,
+   "text": "Kamu tidak pernah melewati lantai nomor {@0:}, tidak dapat memilih untuk memulai tantangan langsung dari lantai nomor ini!"
+  },
+  {
+   "n": 6964,
+   "text": "<font color='#00b035'>{@0:nation} </font><font color='#ff0000'> {@1:name} </font>telah mengalahkan monster di kota bawah tanah iblis, memperoleh hadiah<font color='#ffffff'> {@2:exp} </font>EXP!"
+  },
+  {
+   "n": 6965,
+   "text": "Konfirmasi memulai kembali"
+  },
+  {
+   "n": 6966,
+   "text": "Akumulasi saat ini {@0:exp} EXP, dapat menarik semua, pastikan penarikan?"
+  },
+  {
+   "n": 6967,
+   "text": "Masuk Las Noches ({@0:} percobaan yang tersisa hari ini)"
+  },
+  {
+   "n": 6968,
+   "text": "Kamu menggunakan tantangan otomatis Las Noches, tidak bisa meninggalkan Iblis kota!"
+  },
+  {
+   "n": 6969,
+   "text": "Maaf, kamu tidak punya tubuh palsu, dan tidak dapat melanjutkan pertempuran. Akan membawa kamu kembali ke Kota Iblis, tetapi kamu hanya akan memperoleh {@0:} EXP."
+  },
+  {
+   "n": 6970,
+   "text": "Cheers. Kamu telah menyelesaikan  ⟨0⟩ tingkat tantangan Las Noches dan mendapatkan  {@0: } EXP."
+  },
+  {
+   "n": 6971,
+   "text": "Kamu sudah mencapai lantai nomor<font color='#ffffff'> {@0:} </font>Las Noches melalui tantangan otomatis."
+  },
+  {
+   "n": 6972,
+   "text": "Pemain<font color='#ff0000'> {@0:} </font>telah berhasil merusak bagian luar Las Noches, membunuh<font color='#ffffff'> ⟨0⟩ </font>dari Espadas dalam prosesnya, suatu prestasi yang layak pujian!"
+  },
+  {
+   "n": 6973,
+   "text": "Pemain<font color='#ff0000'> {@0:} </font>telah berhasil merusak tempat suci Las Noches, membunuh<font color='#ffffff'> ⟨0⟩ </font>dari Espadas dalam prosesnya, suatu prestasi yang layak pujian!"
+  },
+  {
+   "n": 6974,
+   "text": "Kamu telah memulai tantangan otomatis Las Noches, silahkan perhatikan pesan hasil pertandingan tiap lantai didalam panel obrolan!"
+  },
+  {
+   "n": 6975,
+   "text": "Kamu telah memulai tantangan otomatis Las Noches, tidak dapat berdagang!"
+  },
+  {
+   "n": 6976,
+   "text": "Tim lain sedang melakukan tantangan Las Noches, tidak bisa bertransaksi!"
+  },
+  {
+   "n": 6977,
+   "text": "Sukses selesaikan stadium<font color='#ffffff'> {@0:} </font>, mendapatkan<font color='#ffffff'> {@1:} </font>EXP, dan bonus EXP {@2:exp}."
+  },
+  {
+   "n": 6978,
+   "text": "[Jalur Umum] Biaya {@0:} {@1:}, masuk level ⟨0⟩."
+  },
+  {
+   "n": 6979,
+   "text": "[Jalur Expres] Biaya {@0:} {@1:}, masuk level {@2:}."
+  },
+  {
+   "n": 6980,
+   "text": "[Jalur VIP] Biaya {@0:} {@1:}, masuk level {@2:} ."
+  },
+  {
+   "n": 6981,
+   "text": "{@0:} memiliki pertempuran sengit, akhirnya mengalahkan penjaga <font color='#00aeff'> {@1:} </font> di Las Noches."
+  },
+  {
+   "n": 6982,
+   "text": "[Jalur Normal] Biaya {@0:} Batu, masuk level {@1:}."
+  },
+  {
+   "n": 6983,
+   "text": "[Jalur Express] Biaya {@0:} Batu, masuk level {@1:}."
+  },
+  {
+   "n": 6984,
+   "text": "[Jalur VIP] Biaya {@0:} Gold, masuk level {@1:}."
+  },
+  {
+   "n": 6985,
+   "text": "Dikalahkan oleh monster"
+  },
+  {
+   "n": 6986,
+   "text": "Kembali dari kemenangan"
+  },
+  {
+   "n": 6987,
+   "text": "Beli tubuh tiruan"
+  },
+  {
+   "n": 6988,
+   "text": "Akumulasi EXP saat ini"
+  },
+  {
+   "n": 6989,
+   "text": "Klaim Hadiah dan tinggalkan"
+  },
+  {
+   "n": 6990,
+   "text": "Tantangan Manual"
+  },
+  {
+   "n": 6991,
+   "text": "Level berikutnya mendapatkan EXP"
+  },
+  {
+   "n": 6992,
+   "text": "Mulai"
+  },
+  {
+   "n": 6993,
+   "text": "Meninggalkan sekarang"
+  },
+  {
+   "n": 6994,
+   "text": "lg_SkillAdd⟨0⟩Equip%"
+  },
+  {
+   "n": 6995,
+   "text": "Body Technique Enhance"
+  },
+  {
+   "n": 6996,
+   "text": "Ninja item Enhance"
+  },
+  {
+   "n": 6997,
+   "text": "Sealing Technique Enhance"
+  },
+  {
+   "n": 6998,
+   "text": "Illusionary Techniques Enhance"
+  },
+  {
+   "n": 6999,
+   "text": "Healing Jutsu Enhance"
+  },
+  {
+   "n": 7000,
+   "text": "lg_SkillAddAllEquip%"
+  },
+  {
+   "n": 7001,
+   "text": "Meningkatkan Jurus Api, Air, Tanah, Petir dan Angin?"
+  },
+  {
+   "n": 7002,
+   "text": "Kamu tidak dapat mempelajari skill ini, tidak dapat di upgrade!"
+  },
+  {
+   "n": 7003,
+   "text": "Level skill sudah maksimal !"
+  },
+  {
+   "n": 7004,
+   "text": "Upgrade skill membutuhkan pemain yang telah mencapai level {@0:lev}."
+  },
+  {
+   "n": 7005,
+   "text": "<font color='#0098FF'>None</font>"
+  },
+  {
+   "n": 7006,
+   "text": "Efek Skill : Menurunkan kecepatan musuh <font color='#0098FF'>⟨0⟩%</font>.<br>\n[line]Durasi : <font color='#0098FF'>⟨1⟩</font> detik<br>[line]\nWaktu penggunaan : Sebelum musuh bergerak<br>Kesempatan menggunakan : <font color='#0098FF'>⟨2⟩%\n</font><br>Batas penggunaan :  Setiap pertarungan<font color='#0098FF'>⟨3⟩</font> kali\n<br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Menjadikan tanah menjadi sungai lumpur sehingga musuh tidak dapat bergerak. Meskipun keterampilan dasar bumi, masih dapat mempengaruhi pertempuran."
+  },
+  {
+   "n": 7007,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font>Kerusakan Dasar<br>[line]Efek Skill :  \nMelumpuhkan dan memperlambat kecepatan gerak musuh.<br>[line]Durasi : <font color='#0098FF'>⟨1⟩</font> detik<br>[line]Waktu penggunaan : serangan tambahan<br>Kemungkinan penggunaan <fontcolor='#0098FF'>⟨2⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Menimbulkan kerusakan petir ketika menyerang. Mudah digunakan, dan serangan ini besar."
+  },
+  {
+   "n": 7008,
+   "text": "Kerusakan: tidak ada<br>[line]Efek skill: Tidak dapat bergerak setelah di bekukan, tidak dapat melakukan Skill Api, menyebabkan dua kali kerusakan pada serangan berikutnya, pemecahan proses pembekuan dengan pemukulan dapat menyebabkan <font color='#0098FF'>⟨0⟩ kali</font>kerusakan.<br>[line]Durasi: Sampai serangan berikutnya. <br>[line]Waktu penggunaan: saat menyerang<br>Kemungkinan Penggunaan: <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra: {@0:}points<br>[line]<br> Mengubah Chakra menjadi kekuatan Es dan membekukan lawan. "
+  },
+  {
+   "n": 7009,
+   "text": "Efek Skill : Secara acak menghilangkan <font color='#0098FF'>⟨0⟩</font> debuff.<br>\n[line]Waktu penggunaan : Sebelum kamu beraksi<br>Syarat : Diaktifkan bila kamu berada di bawah pengaruh suatu debuff.<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>[line]<br>Gunakan untuk kekuatan ekor untuk mengaktifkan Chakra dan menghapus efek debuff."
+  },
+  {
+   "n": 7010,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font>Kerusakan dasar<br>[line]Efek Skill :  kamu akan status lemah setelah casting dan berhenti bergerak. Blok juga akan melemah.<br>[line]Durasi : <font color='#0098FF'>⟨1⟩</font> detik\n<br>[line]Waktu penggunaan : Sendiri<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%\n</font><br>[line]<br>Memperkuat kekuatan seluruh tubuh dalam sekejap, melancarkan serangan combo cepat. Gerakan daya akan menjarah sementara karena terlalu sering menggunakan kekuasaan."
+  },
+  {
+   "n": 7011,
+   "text": "Kerusakan: <font color='#0098FF'>⟨0⟩%</font>Kerusakan dasar<br>[line]Efek Skill:  Membuat musuh mabuk, membuat <font color='#0098FF'>⟨1⟩%</font> Kerusakan dari skill.<br>[line]Durasi: <fontcolor='#0098FF'>⟨2⟩</font>Detik<br>[line]Waktu pengeluaran: Sendiri<br>Rata-Rata <font color='#0098FF'>⟨3⟩%</font><br>[line]Kosnumsi Chakra: {@0: }point<br>[line]<br>Chakra berkonsentrasi pada mulut untuk membentuk bola api. Keluarga Uchiha baik di ninjutsu ini. "
+  },
+  {
+   "n": 7012,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font>Serangan Dasar<br>[line]Efek :  Membuat lawan mabuk, karena skill <font color='#0098FF'>⟨1⟩%</font> efek sebelum musuh beraksi.<br>[line]Durasi :  <font color='#0098FF'>⟨2⟩</font> detik. <br>[line]Waktu Penggunaan : Saat kamu beraksi\n<br>Kesempatan menggunakan <font color='#0098FF'>⟨3⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Mengumpulkan Chakra di mulut dan menjadikannya bola api. Orang dari keluarga Uchiha yang menguasai baik ninjutsu ini.  "
+  },
+  {
+   "n": 7013,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan Dasar,  kamu akan menerima kerusakan balik ⟨1⟩%<br>[line]Waktu penggunaan : Sendiri<br>Kemungkinan menggunakan : <font color='#0098FF'>⟨2⟩%</font><br>[line]Konsumsi Chakra : {@0: }point\n<br>[line]<br>Memutar Chakra menjadi bola angin mengalir di telapak tangan, menyebabkan kerusakan besar ketika menyentuh musuh. Ini adalah tingkat-A pertama belajar ninjutsu Naruto."
+  },
+  {
+   "n": 7014,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan dasar<br>[line]Waktu penggunaan : Serangan tambahan<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : {@0:} point<br>[line]<br>Swiftwind dibentuk oleh Chakra dikelilingi sekitar bahu, angin puyuh yang tajam bisa sobek musuh terpisah."
+  },
+  {
+   "n": 7015,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar<br>[line]Efek Skill : Mengurangi semua kerusakan dan penyembuhan dari musuh sebesar ⟨1⟩%.<br>[line]Durasi : <font color='#0098FF'>⟨2⟩</font> detik<br>[line]Waktu penggunaan : sendiri<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨3⟩%</font><br>Batasan : Dalam pertempuran setiap, efek penyegelan hanya dapat diterapkan hanya<font color='#0098FF'>⟨4⟩</font> kali[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Memanggil mayat untuk menyerang musuh yang disegel menyebabkan sejumlah besar kerusakan. Semua serangan dari musuh akan sangat berkurang."
+  },
+  {
+   "n": 7016,
+   "text": "Efek Skill :  Menyerab <font color='#0098FF'>⟨0⟩%</font> Chakra dari musuh dan melemahkan pertahanan musuh sebanyak <font color='#0098FF'>⟨1⟩</font> point.<br>[line]Waktu penggunaan : Serangan tambahan<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]\n<br>Ninjutsu diperlukan oleh ninja Desa Tanah, sering digunakan dalam misi penangkapan."
+  },
+  {
+   "n": 7017,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar+kerusakan sama dengan <font \ncolor='#0098FF'>⟨1⟩%</font>HP musuh<br>[line]Efek Skill : Penyebab pusing dan menghentikan musuh dari bergerak <br>[line]Durasi : <font color='#0098FF'>⟨2⟩\n</font> detik<br>[line]Waktu penggunaan : Sendiri<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨3⟩%</font><br>Batas penggunaan :  Efeknya akan berhenti setelah <font color='#0098FF'>⟨4⟩</font> berlaku penggunaan dalam pertempuran masing-masing.<br>[line]<br> Melompat dan melancarkan serangan dengan menggunakan kekuasaan agresif. Hal ini membutuhkan tidak hanya pengetahuan teknik tubuh, tetapi kekuatan yang tidak biasa seperti Sakura dan Tsunade."
+  },
+  {
+   "n": 7018,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan dasar<br>[line]Efek Skill : Melarang musuh dari menggunakan lima ninjutsu elemen.<br>[line]Durasi : <font color='#0098FF'>⟨1⟩</font> detik<br>[line]Waktu penggunaan : sendiri<br>Kemungkinan penggunaan : <fontcolor='#0098FF'>⟨2⟩%</font><br>Batasan :  Setiap pertempuran penyegelan ini akan efektif hanya<font color='#0098FF'>⟨3⟩</font> kali.[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Sebuah ninjutsu digunakan untuk menyegel monster kuat, dan secara bertahap berkembang menjadi suatu keterampilan untuk menutup ninjutsu musuh."
+  },
+  {
+   "n": 7019,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan Dasar<br>[line]Efek Skill :  \nMelumpuhkan dan memperlambat kecepatan gerak musuh.<br>[line]Durasi : <font color='#0098FF'>⟨1⟩</font> detik<br>[line]Waktu penggunaan : Diri sendiri\n<br>Keungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]Konsumsi Chakra : \n{@0: } point<br>[line]<br>Juga dikenal sebagai Lightning Blade, ninjutsu kuat dengan Chakra yang sangat padat. Ini adalah ninjutsu terkenal yang digunakan oleh Hatake Kakashi."
+  },
+  {
+   "n": 7020,
+   "text": "Efek Skill : Melancarkan serangan tambahan, tetapi kekuatan berkurang <font color='#0098FF'>⟨0⟩%</font>.<br>[line]Waktu penggunaan : Sebelum kamu beraksi<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br> Langkah cepat adalah keterampilan yang diperlukan oleh Kematian, maka efek ini akan lebih kuat jika kastor lebih kuat."
+  },
+  {
+   "n": 7021,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan Dasar<br>[line]Efek Skill : membalikkan <font color='#0098FF'>⟨1⟩%</font> kerusakan menjadi HP.<br>[line]Waktu penggunaan : Sendiri<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]Konsumsi Chakra :  {@0: } point<br>[line]<br>Pendekatan musuh dengan cepat, lalu menyerang memutar ke titik lemah musuh. Menyerap HP musuh dan membuatnya menjadi HP sendiri."
+  },
+  {
+   "n": 7022,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan dasar<br>[line]Waktu penggunaan : \nSendiri<br>Kemungkinan penggunaan :<font color='#0098FF'>⟨1⟩%</font><br>Batasan : Memiliki kesempatan untuk menyakiti diri sendiri dengan bom yang dilempar kembali. Semakin lama pertarungan, kemungkinan lebih tinggi.<br>[line]<br>Lempar bom kuat untuk musuh. Tapi kamu juga akan terluka jika musuh melempar bom kembali kepada kamu."
+  }
+ ]
+}

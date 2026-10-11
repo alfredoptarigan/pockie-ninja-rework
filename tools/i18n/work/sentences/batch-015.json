@@ -1,0 +1,479 @@
+{
+ "terms": {
+  "Kakashi": "Kakashi Hatake",
+  "Desa Air": "Water Village",
+  "Serangan": "Attack",
+  "Blok": "Block",
+  "Ten no noroi": "Cursed Seal of Heaven",
+  "Doro kabe No Jutsu": "Mud Wall",
+  "Cairan": "Liquid",
+  "Kawarimi no jutsu": "Substitution Technique",
+  "Stinger Bee": "Bee Stingers",
+  "Maneater Blossom": "Man-Eater",
+  "Treant": "Tree Ent",
+  "Sweet Potato Demon": "Potato",
+  "Sushi Monster": "Sushi"
+ },
+ "units": [
+  {
+   "n": 7023,
+   "text": "Mengembalikan : <font color='#0098FF'>⟨0⟩%</font> HP yang hilang<br>[line]Waktu penggunaan : \n Saat diserang<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>Batasan :  \nAktif dengan Pre-Healing Jutsu oleh total <font color='#0098FF'>⟨2⟩</font> kali<br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Pemikiran itu ninjutsu primer, dapat meningkatkan cedera lebih besar dalam kasus-kasus kerusakan serius."
+  },
+  {
+   "n": 7024,
+   "text": "Kerusakan: <font color='#0098FF'>⟨0⟩%</font>Serangan Dasar<br>[line]Efek Skill: Mengurangi Chakra lawan, pengurangan sebesar <font color='#0098FF'>⟨1⟩%</font> dari max Chakra lawan.<br>[line]Waktu Penggunaan: Sendiri <br>Kemungkinan Penggunaan: <font color='#0098FF'>⟨2⟩%</font><br>[line]Konsumsi Chakra : {@0:}点<br>[line]<br>Membuat pedang tajam dengan chakra dan menghancurkan musuh, menyebabkan kerugian besar untuk chakra lawan. "
+  },
+  {
+   "n": 7025,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Serangan dasar <br>[line]Efek Skill : Konsumsi chakra musuh ⟨1⟩ kali lipat <br>[line]Durasi : <font color='#0098FF'>Selama pertandingan\n</font> detik<br>[line]Waktu penggunaan : Sendiri<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br> Merusak musuh hingga ke meridian chakra, Biasanya dipakai oleh keluarga neiji di desa konoha."
+  },
+  {
+   "n": 7026,
+   "text": "Efek Skill : Membuat perisai untuk memblokir serangan musuh. Untuk setiap <font color='#0098FF'>⟨0⟩</font> point kerusakan dari ninjutsu petir, perisai ini akan mengembalikan <font color='#0098FF'>⟨1⟩</font> point perlindungan kekuatan.<br>[line]\nDurasi :  Terus menerus<br>[line]Waktu penggunaan : Sebelum musuh bergerak<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]Konsumsi Chakra : {@0: } point\n<br>[line]<br>Formulir bidang statis, yang secara efektif dapat memblok serangan dan menyerap energi petir ninjutsu secara otomatis."
+  },
+  {
+   "n": 7027,
+   "text": "<font color='#00ffff'>Dapat berkesempatan membunuh dengan satu pukulan teknik rahasia disaat HP musuh rendah.<br> Dapatkan peluang lebih besar dari perbedaan kostum dengan musuh kamu untuk Mengeluarkan Teknik Rahasia dengan cepat !</font>"
+  },
+  {
+   "n": 7028,
+   "text": "<font color='#00ffff'>Ketika HP lawan berkurang, kamu mempunyai kesempatan untuk melepaskan suatu Teknik Rahasia secara langsung. <br>Teknik Rahasia cast chances increase with Kostum level!</font>"
+  },
+  {
+   "n": 7029,
+   "text": "<font color='#00ffff'>Dapat berkesempatan membunuh dengan satu pukulan teknik rahasia disaat HP musuh rendah.<br>Keluarkan Teknik Rahasia dengan cepat dan dapatkan peluang lebih besar dari perbedaan kostum dengan musuh kamu!</font>"
+  },
+  {
+   "n": 7030,
+   "text": "<font color='#00ffff'>Kemungkinan akan langsung mati jika menggunakan teknik rahasia disaat HP lawan sangat rendah.<br>Teknik Rahasia akan dikeluarkan lebih cepat dengan kostum yang baik dimana selisih level kostum antara kamu dan musuh sangat jauh!</font>"
+  },
+  {
+   "n": 7031,
+   "text": "Skill dasar Api, Meningkatkan efek skill api secara pasif pada saat belajar."
+  },
+  {
+   "n": 7032,
+   "text": "Dasar Jurus Api, meningkatkan efek pasif skill api saat dipelajari."
+  },
+  {
+   "n": 7033,
+   "text": "Dasar Jurus Air, Secara pasif meningkatkan efek skill air saat dipelajari."
+  },
+  {
+   "n": 7034,
+   "text": "Skill Earth School Dasar, pasif meningkatkan efek Keterampilan Skill saat belajar."
+  },
+  {
+   "n": 7035,
+   "text": "Dasar Jurus Tanah, Secara pasif meningkatkan efek skill tanah saat dipelajari."
+  },
+  {
+   "n": 7036,
+   "text": "Dasar Jurus Petir, Secara pasif meningkatkan efek skill Petir pasif saat belajar."
+  },
+  {
+   "n": 7037,
+   "text": "Dasar Jurus Petir,  Secara pasif meningkatkan efek skill air saat dipelajari."
+  },
+  {
+   "n": 7038,
+   "text": "Dasar Jurus Angin, Secara pasif meningkatkan efek skill angin saat dipelajari."
+  },
+  {
+   "n": 7039,
+   "text": "Dasar Body Teknik, meningkatkan efek Body Teknik pasif saat dipelajari."
+  },
+  {
+   "n": 7040,
+   "text": "Dasar alat skill ninja, meningkatkan efek alat skill pasif saat dipelajari."
+  },
+  {
+   "n": 7041,
+   "text": "Dasar Teknik Menyegel, meningkatkan efek Teknik Mengunci pasif saat dipelajari."
+  },
+  {
+   "n": 7042,
+   "text": "Dasar Teknik Ilusi, meningkatkan efek Teknik Ilusi saat dipelajari."
+  },
+  {
+   "n": 7043,
+   "text": "Dasar Jutsu Penyembuhan, meningkatkan efek Jutsu Penyembuhan saat dipelajari."
+  },
+  {
+   "n": 7044,
+   "text": "Mengembalikan :  <font color='#0098FF'>⟨0⟩%</font> dari max HP<br>[line]Efek Skill :  Mengembalikan<font color='#0098FF'>⟨1⟩%</font> dari max HP sebelum bergerak, status beracun bisa terbebas juga.<br>[line]Durasi : Berakhir setelah <font color='#0098FF'>⟨2⟩</font>menyembuhkan<br>[line]Waktu penggunaan : Being injured<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨3⟩%</font><br>Batasan : Dalam setiap pertempuran, diaktifkan dengan Pāmu Gijutsu total<font color='#0098FF'>⟨4⟩</font> kali<br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Tingkat penyembuhan ninjutsu lanjutan, menggabungkan Chakra pada tempat-tempat yang terluka sebelum menyerang. Mulai penyembuhan segera setelah disakiti dan meringankan status beracun."
+  },
+  {
+   "n": 7045,
+   "text": "Efek Skill :  Kelahiran dan mengembalikan <font color='#0098FF'>⟨0⟩%</font> of the max HP.<br>[line]Waktu penggunaan : Setelah kamu mati.<br>Kesempatan menggunakan : Pertama <font color='#0098FF'>⟨1⟩%</font> Pertarungan panjang akan membuat kesempatan menurun.<br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Mengkonsentrasikan Chakra di dahi dan melepaskan semua untuk menyembuhkan cedera serius. Ini adalah skill penyembuhan yang paling efektif yang dikembangkan oleh Tsunade."
+  },
+  {
+   "n": 7046,
+   "text": "Efek Skill : Meningkatkan tingkat melepas skill, tetapi pengguna skill akan terluka saat menggunakan ninjutsu itu.<br>[line]Durasi : <font color='#0098FF'>⟨0⟩</font> detik<br>[line]Waktu penggunaan : Sebelum kamu beraksi<br>Kemungkinan penggunaan :<font color='#0098FF'>⟨1⟩%</font><br>Batasan :  Setiap pertempuran hanya <font color='#0098FF'>⟨2⟩</font>kali<br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Menyalakan dan mengaktifkan Chakra bagian dalam untuk meningkatkan pengendalian atas ninjutsu. Ninja terbaik yang meninggal karena itu tak terhitung jumlahnya."
+  },
+  {
+   "n": 7047,
+   "text": "Efek skill : Meningkatkan rata-rata skill melempar. Pemakai skill juga akan terluka ketika skill ini digunakan.<br>[line]Durasi : \n<font color='#0098FF'>⟨0⟩</font> detik<br>[line]Waktu Penggunaan : Sebelum beraksi<br>Kesempatan menggunakan : <font color='#0098FF'>⟨1⟩%</font>\n<br>Batas penggunaan : <font color='#0098FF'>⟨2⟩</font> kali dalam tiap pertarungan.<br>[line]Konsumsi Chakra : {@0: } point<br>[line]\n<br>Ninjutsu pengorbanan diri. Membakar dan mengaktifkan chakra dalam untuk menaikkan kemampuan mengendalikan Ninjutsu. Tak terhitung banyaknya ninja terbaik yang telah mati karena itu."
+  },
+  {
+   "n": 7048,
+   "text": "Efek Skill : Menggoda musuh sehingga mereka tidak bisa bergerak.<br>[line]Durasi : <font color='#0098FF'>⟨0⟩</font> detik<br>[line]Syarat : Hanya dapat diaktifkan bila musuh telah di buff.<br>Waktu penggunaan : Sendiri<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩% </font><br>Batasan :  Dalam pertempuran setiap, hanya dapat diterapkan <font color='#0098FF'>⟨2⟩</font> kali[line]Konsumsi Chakra : {@0: } point <br>[line]<br>Ninjutsu yang diciptakan oleh Naruto. Gabungan Shadow Clone teknik dengan teknik Transformasi. Dapatkan kesempatan untuk menyerang dengan mengalihkan musuh."
+  },
+  {
+   "n": 7049,
+   "text": "Efek Skill : Memberikan <font color='#0098FF'>⟨0⟩%</font> kerusakan pada musuh.<br>[line]\nWaktu penggunaan : Dalam serangan<br>Kesempatan menggunakan : <font color='#0098FF'>⟨1⟩%</font>\n<br>Batas penggunaan : Tidak dapat digunakan bersamaan dengan Kawarimi no jutsu<br>[line]\n<br>Ninjutsu rahasia keluarga Kakashi, sangat bagus dalam pertahanan dan kuat dalam serangan balik."
+  },
+  {
+   "n": 7050,
+   "text": "Efek Skill : Trapped by enemy, reduce Dodge rate by <font color='#0098FF'>⟨0⟩%</font>.<br>[line]Durasi : <font color='#0098FF'>⟨1⟩</font> ronde <br>[line]Waktu penggunaan : Before your action<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]<br>Sebuah alat ninja yang baik mendukung. Pemain jaring untuk menjerat musuh, membuat diri kamu lebih mudah untuk tujuan."
+  },
+  {
+   "n": 7051,
+   "text": "Kerusakan: <font color='#0098FF'>⟨0⟩%</font>Kerusakan dasar<br>[line]Efek Skill:  Membuat musuh mabuk, menyebabkan<font color='#0098FF'>⟨1⟩%</font>Kerusakan dari skill.<br>[line]Durasi: <font color='#0098FF'>⟨2⟩</font>detik<br>[line]Waktu pengeluaran: Luka<br>rata-rata <font color='#0098FF'>⟨3⟩%</font><br>[line]Konsumsi Chakra: {@0: }point<br>[line]<br>ketika menerima kerusakan, memicu pembakaran musuh. mush yang terbakar kan menerima kerusakan lebih.</font>"
+  },
+  {
+   "n": 7052,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font>Serangan Dasar<br>[line]Efek :  Membuat lawan mabuk, karena skill <font color='#0098FF'>⟨1⟩%</font> efek sebelum musuh beraksi.<br>[line]Durasi :  <font color='#0098FF'>⟨2⟩</font> detik. <br>[line]Waktu Penggunaan : Saat kamu beraksi\n<br>Kesempatan menggunakan <font color='#0098FF'>⟨3⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Saat menerima pukulan, memicu serangkaian pijaran api yang akan menelan musuh. Mabuk akan membuat musuh menerima tambahan kerusakan karena terbakar.  "
+  },
+  {
+   "n": 7053,
+   "text": "Efek Skill : Buka gerbang ini akan menaikkan kecepatan serangan <font color='#0098FF'>⟨0⟩%</font>, paling banyak<font color='#0098FF'>⟨1⟩</font> gerbang bisa dibuka paling banyak.<br>[line]Durasi : Terus menerus<br>[line]Waktu penggunaan : Saat diserang<br>Kemungkinan penggunaan : <fontcolor='#0098FF'>⟨2⟩%</font><br>Batasan :  Hanya satu pintu bisa dibuka setiap <font color='#0098FF'>⟨3⟩</font> detik<br>[line]<br>Buka delapan gerbang yang membatasi Chakra untuk mempercepat. Namun, tidak dapat bertahan terlalu lama sebagai pembukaan semua gerbang ini akan menyebabkan beban besar pada tubuh manusia dan bisa mengakibatkan kematian sebagai konsekuensinya."
+  },
+  {
+   "n": 7054,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan dasar<br>[line]waktu penggunaan : Diserang<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Memanggil badai pasir dan mulai serangan balasan setelah kastor sedang diserang."
+  },
+  {
+   "n": 7055,
+   "text": "Efek Skill : Menyelimuti musuh di tanah liat yang meledak setelah <font color='#0098FF'>⟨0⟩</font> detik. Dijumlahkan total akumulasi kerusakan dalam <font color='#0098FF'>⟨1⟩</font> detik.\n<br>[line]Durasi : <font color='#0098FF'>⟨2⟩</font> detik<br>[line]Waktu penggunaan : Sebelum beraksi<br>Kesempatan menggunakan : <font color='#0098FF'>⟨3⟩%</font><br>Batas penggunaan :  Setiap bertarung <font color='#0098FF'>⟨4⟩</font> kali<br>[line]Konsumsi Chakra : {@0: } point<br>[line]\n<br>Mencampur Chakra dan tanah liat untuk membuat bahan peledak kuat. Ini adalah ninjutsu asli yang dibuat oleh Deidara, mantan anggota Akatsuki."
+  },
+  {
+   "n": 7056,
+   "text": "Efek Skill: Kesempatan untuk memulai serangan balasan Terlebih Dahulu. Kesempatan ini akan meningkat seiring waktu pertarungan mengembang. Kesempatan meningkat seiring dengan waktu, dan kedua belah pihak kebal terhadap efek pembakaran selama durasi Jurus.\n<br>[line]Durasi:  Terus-menerus <br>[line]Waktu Peluncuran: Aktif saat pertarungan\n<br>Kesempatan menggunakan: <font color='#0098FF'>⟨0⟩%</font><br>Pembatasan: Tidak dapat hidup berdampingan dengan efek Sunset.<br>[line]Konsumsi Chakra: {@0: }points<br>\n<br>Transfer Chakra ke dalam kabut tebal untuk menyesatkan musuh. ke denseIt banyak digunakan untuk ninja di Desa Air."
+  },
+  {
+   "n": 7057,
+   "text": "Efek Skill :  Kesempatan untuk memulai serangan balasan terlebih dahulu. Kesempatan akan meningkat sat pertarungan panjang. Kesempatan meningkat seiring dengan waktu, dan kedua belah pihak akan kebal terhadap efek pembakaran selama durasi skill.<br>[line]Durasi :  Terus menerus<br>[line]Waktu Penggunaan : Aktif saat bertarung.<br>Kesempatan menggunakan : <font color='#0098FF'>⟨0⟩%</font><br>Batas penggunaan : Tidak dapat digunakan bersamaan dengan skill Sunsetto.<br>[line]Konsumsi Chakra : {@0: } point.<br>\n<br>Merubah Chakra menjadi kabut tebal untuk menyesatkan musuh. Hal ini banyak digunakan oleh ninja di Desa Air."
+  },
+  {
+   "n": 7058,
+   "text": "<font color='#00ffff'>Melemparkan Cairan kepada musuh, Menyebabkan berlumur minyak<font color='#FF6565'>Akan menimbulkan kerusakan luka bakar bila terkena skill api dalam status ini.</font>efek lumuran minyak masih berjalan.<br><br>Kesempatan Melempar: ⟨0⟩%<br>Skill effect: Hit dikurangi ⟨1⟩%, meningkatkan serangan kritikal ⟨2⟩%</font>"
+  },
+  {
+   "n": 7059,
+   "text": "Kerusakan : Membuat musuh mabuk dan mengurangi tingkat Hit sebesar <font color='#0098FF'>⟨0⟩%</font>, meningkatkan serangan kritikal <font color='#0098FF'>⟨1⟩%</font>. Akan dinyalakan setelah unsur api menimbulkan kerusakan. Efek sedang berlangsung.<br>[line]Durasi : Terus menerus<br>[line]Waktu penggunaan : Aktif saat bertarung<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]<br>Lempar bom kuat untuk musuh. Tapi Anda juga akan terluka jika musuh melempar bom kembali kepada Anda."
+  },
+  {
+   "n": 7060,
+   "text": "Efek skill :  Mempunyai kesempatan untuk melukai ⟨0⟩ kali selama melakukan serangan ⟨1⟩ element. Kesempatan akan meningkat saat melakukan pertarungan panjang.\n<br>[line]Durasi :  Terus-menerus <br>[line]Waktu penggunaan : Aktif saat bertarung.<br>Kesempatan menggunakan : <font color='#0098FF'>⟨2⟩%</font><br>Batas penggunaan : \nTidak dapat digunakan bersamaan dengan Kiri ga hi hyōji.<br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Chakra tersebar di medan pertarungan untuk meningkatkan pengendalian atas lima unsur, dan lebih akurat menyerang kelemahan musuh.</font>"
+  },
+  {
+   "n": 7061,
+   "text": "Efek Skill : Every decrease of HP by<font color='#0098FF'>⟨0⟩%</font> will lead to the increase of attack by <font color='#0098FF'>⟨1⟩%</font>, the effects of other sealing skills will also halve. <br>[line]Durasi : Ongoing<br>[line]Waktu penggunaan : Activated on combat<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>[line]<br>Rahasia teknik yang dikembangkan oleh Orochimaru. Pengguna kutukan itu ini akan memperoleh kekuatan yang luar biasa. Dikatakan bahwa ada segel lain selain dikutuk Ten no noroi."
+  },
+  {
+   "n": 7062,
+   "text": "Efek Skill :  Musuh tidak dapat menyerang dan menyebabkan pusing. Efek ini akan berhenti ketika musuh diserang.<br>[line]Durasi : <font color='#0098FF'>⟨0⟩</font>detik<br>[line]Waktu penggunaan : Sebelum musuh bergerak <br>Syarat : Saat kita berada pada pengaruh efek yang kurang baik.<br>Kesempatan menggunakan : <font color='#0098FF'>⟨1⟩%</font><br>Batas penggunaan :  Efek akan terhenti setelah <font color='#0098FF'>⟨2⟩</font>kali berhasil membuat pusing.<br>[line]Konsumsi Chakra : {@0: } point\n<br>[line]<br>Ketika musuh dalam status yang kurang menguntungkan dan lengah, serangan balik Suiton Suijinheki akan memulai dan akan merubah semua situasi. "
+  },
+  {
+   "n": 7063,
+   "text": "Efek Skill :  Membuat kamu kebal sementara. Kamu akan aman dari serangan apapun kecuali teknik rahasia.<br>[line]Durasi : <font color='#0098FF'>⟨0⟩</font>detik<br>[line]Waktu penggunaan : Saat diserang\n<br>Kesempatan menggunakan <font color='#0098FF'>⟨1⟩%</font><br>Batas menggunakan :  Efektif untuk <font color='#0098FF'>⟨2⟩ kali dalam setiap pertarungan.</font> <br>[line]Konsumsi Chakra : {@0: } point<br><br> Memulai upacara perayaan singkat oleh Tuhan Air dan menjadi kebal sesaat. Ini semacam penyaluran skill air, namun tidak memiliki efek kuat pada ninjutsu."
+  },
+  {
+   "n": 7064,
+   "text": "Kerusakan : HP <font color='#0098FF'>⟨0⟩%</font><br>[line]Efek Skill : Membentuk thundercloud untuk menyerang kedua sisi pertempuran secara acak.<br>[line]\nDurasi : Terus menerus<br>[line]Waktu penggunaan : Aktif dalam pertarungan, memulai kembali ketika efeknya terbebas.<br>Proc-rate <fontcolor='#0098FF'>\n⟨1⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Memanggil Thundercloud untuk menyerang dengan kastor. Kelemahan sebagian besar ninjutsu ini adalah kesulitan dalam mengendalikan guntur meskipun kekuatan yang besar."
+  },
+  {
+   "n": 7065,
+   "text": "Kerusakan : <font color='#0098FF'>⟨0⟩%</font> Kerusakan Dasar<br>[line]Efek Skill :  Racun menimbulkan status pada musuh dan membuat musuh kehilangan HP sebelum bergerak.<br>[line]Durasi :<font color='#0098FF'>⟨1⟩</font> detik<br>[line]Waktu penggunaan : Serangan tambahan<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨2⟩%</font><br>Batasan :  Racun efektif hanya<font color='#0098FF'>⟨3⟩</font> kali<br>[line]<br>Memanipulasi boneka dengan cakar beracun untuk menyerang simultaneously.Requires kontrol yang akurat atas Chakra."
+  },
+  {
+   "n": 7066,
+   "text": "Efek Skill: Blok ⟨0⟩ serangan.<br>[line]Waktu Peluncuran:  Sedang diserang<br>Kesempatan menggunakan: <font color='#0098FF'>⟨1⟩%</font><br>Pembatasan:  Tidak bisa digunakan bersama dengan Mud Wall.<br>[line]<br>Mengganggu serangan musuh dengan mengkloning tubuh dengan Chakra dalam rangka untuk menghindari serangan."
+  },
+  {
+   "n": 7067,
+   "text": "Efek Skill : Blok ⟨0⟩ serangan.<br>[line]Waktu penggunaan : Saat diserang<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>Batasan : Tidak bisa digunakan bersama dengan Doro kabe No Jutsu.<br>[line]<br>Mengganggu menyerang musuh dengan membuat tubuh diklon dengan Chakra dalam rangka untuk menghindari serangan."
+  },
+  {
+   "n": 7068,
+   "text": "Efek Skill :  Musuh akan kehilangan <font color='#0098FF'>⟨0⟩%</font> HP dan Chakra.<br>[line]Durasi : Efek ini akan berlanjut sampai musuh telah habis Chakra.<br>[line]Waktu penggunaan : Additional Attack<br>Kemungkinan penggunaan : <font color='#0098FF'>⟨1⟩%</font><br>[line]Konsumsi Chakra : {@0: } point<br>[line]<br>Teknik Ilusi Lanjutan, membuat musuh untuk melihat ilusi yang paling tidak diinginkan, kehilangan HP dan Chakra terus menerus."
+  },
+  {
+   "n": 7069,
+   "text": "<font color='#00ffff'>Skill aktif. Ketika pemilik menyerang, pet memiliki kesempatan ⟨0⟩% untuk menyerang bersamaan, menghasilkan ⟨1⟩% serangan pemilik saat ini.</font>"
+  },
+  {
+   "n": 7070,
+   "text": "Kategori : Semua<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Ketika pemilik menyerang, pet memiliki kesempatan <font color='#0098FF'>⟨0⟩%</font> untuk ikut menyerang, kerusakan setara dengan <font color='#0098FF'>⟨1⟩%</font> dari serangan pemilik."
+  },
+  {
+   "n": 7071,
+   "text": "<font color='#00ffff'>Skill Pasif. Ketika pemain menerima serangan, kesempatan ⟨0⟩% untuk memulihkan HP sebesar ⟨1⟩% dari maksimum HP Pemain.</font>"
+  },
+  {
+   "n": 7072,
+   "text": "Kategori : Hanya Riceball Monster<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Jika pemain menerima kerusakan, <font color='#0098FF'>⟨0⟩%</font> kesempatan untuk memulihkan HP, maksimal <font color='#0098FF'>⟨1⟩%</font> dari HP pemain."
+  },
+  {
+   "n": 7073,
+   "text": "<font color='#00ffff'>Skill Pasif. Ketika pemain menerima serangan, kesempatan ⟨0⟩% untuk memulihkan Chakra sebesar ⟨1⟩% dari maksimum Chakra Pemain.</font>"
+  },
+  {
+   "n": 7074,
+   "text": "Kategori : Hanya Sushi Monster<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Jika pemain menerima kerusakan, <font color='#0098FF'>⟨0⟩%</font> kesempatan untuk memulihkan Chakra, maksimal <font color='#0098FF'>⟨1⟩%</font> dari Chakra pemain."
+  },
+  {
+   "n": 7075,
+   "text": "<font color='#00ffff'>Skill aktif. Kesempatan ⟨0⟩% untuk blok serangan saat ini untuk pemilik ketika pemilik menerima serangan.</font>"
+  },
+  {
+   "n": 7076,
+   "text": "Kategori : Semua<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Ketika pemilik menyerang, pet memiliki kesempatan <font color='#0098FF'>⟨0⟩%</font> untuk blok serangan yang diterima pemilik."
+  },
+  {
+   "n": 7077,
+   "text": "<font color='#00ffff'>Skill aktif. Kesempatan ⟨0⟩% untuk menghasilkan pendarahan pada musuh setelah serangan dari pemilik.</font>"
+  },
+  {
+   "n": 7078,
+   "text": "Kategori : Hanya Vultures<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Setelah pemillik menyerang, kesempatan <font color='#0098FF'>⟨0⟩%</font> untuk menyerang dan menyebabkan saingan berdarah."
+  },
+  {
+   "n": 7079,
+   "text": "<font color='#00ffff'>Skill aktif. Setelah pemilik menyerang, kesempatan sukses menyerang ⟨0⟩% untuk menyerap setengah serangan dan mengubahnya menjadi HP pemilik.</font>"
+  },
+  {
+   "n": 7080,
+   "text": "Kategori : Hanya Bloodbat<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Setelah pemillik menyerang, kesempatan <font color='#0098FF'>⟨0⟩%</font> untuk menyerang, jika berhasil akan merubah setengah dari kerusakan menjadi HP untuk pemilik."
+  },
+  {
+   "n": 7081,
+   "text": "<font color='#00ffff'>Skill aktif. Setelah pemilik menyerang, ⟨0⟩% untuk menyerang dan meracuni musuh.</font>"
+  },
+  {
+   "n": 7082,
+   "text": "Kategori : Hanya Stinger Bee<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Setelah pemillik menyerang, kesempatan <font color='#0098FF'>⟨0⟩%</font> untuk menyerang dan memberikan racun ke musuh."
+  },
+  {
+   "n": 7083,
+   "text": "<font color='#00ffff'>Skill aktif. Setelah pemilik menyerang, kesempatan ⟨0⟩% untuk menyerang musuh ⟨1⟩ kali.</font>"
+  },
+  {
+   "n": 7084,
+   "text": "Kategori : Hanya Corn Demon<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Menyerang musuh ⟨0⟩ kali setelah pemilik menyerang. Kemungkinan penggunaan <font color='#0098FF'>⟨1⟩%</font>."
+  },
+  {
+   "n": 7085,
+   "text": "<font color='#00ffff'>Diaktifkan saat bertarung, mengurangi serangan musuh sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7086,
+   "text": "Kategori : Hanya Maneater Blossom<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Diaktifkan pada awal pertempuran, menurunkan serangan sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7087,
+   "text": "<font color='#00ffff'>Skill aktif. Setelah pemilik menyerang, kesempatan sukses menyerang ⟨0⟩% untuk menjebak musuh untuk ⟨1⟩ ronde.</font>"
+  },
+  {
+   "n": 7088,
+   "text": "Kategori : Hanya Treant<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Setelah pemilik menyerang <font color='#0098FF'>⟨0⟩%</font> kesempatan untuk menyerang dan menjerat untuk satu putaran jika berhasil.."
+  },
+  {
+   "n": 7089,
+   "text": "<font color='#00ffff'>Diaktifkan saat bertarung, mengurangi akurasi musuh sebesar ⟨0⟩ point.</font>"
+  },
+  {
+   "n": 7090,
+   "text": "Kategori : Hanya Sunflower<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Aktif di awal, mengurangin Hit dari musuh sebesar <font color='#0098FF'>⟨0⟩</font>."
+  },
+  {
+   "n": 7091,
+   "text": "<font color='#00ffff'>Skill aktif. Setelah pemilik menyerang, kesempatan sukses menyerang ⟨0⟩% untuk membuat lawan pusing untuk ⟨1⟩ ronde.</font>"
+  },
+  {
+   "n": 7092,
+   "text": "Kategori : Hanya Sweet Potato Demon<br>[line]Tipe : Pendukung<br>[line]Dipelajari level : Tidak ada<br>[line]Setelah pemilik menyerang,<font color='#0098FF'>⟨0⟩%</font> kesempatan untuk menyerang dan stun lawan jika berhasil, selama <font color='#0098FF'>⟨1⟩</font> detik.<br>[line]Batasan : Hanya berlaku untuk <font color='#0098FF'>⟨2⟩</font> kali stun.<br>"
+  },
+  {
+   "n": 7093,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan serangan pemilik dan dirinya sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7094,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan nilai serangan pet dan pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7095,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan ketajaman pemilik dan dirinya sebesar ⟨0⟩ point.</font>"
+  },
+  {
+   "n": 7096,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan nilai Pierce pet dan pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7097,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan kecepatan pemilik dan dirinya sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7098,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan nilai Speed pet dan pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7099,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan akurasi pemilik dan dirinya sebesar ⟨0⟩ point.</font>"
+  },
+  {
+   "n": 7100,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan nilai Hit pet dan pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7101,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan tingkat kritikal pemilik dan dirinya sebesar ⟨0⟩ point.</font>"
+  },
+  {
+   "n": 7102,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan nilai Kritikal pet dan pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7103,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan armor break pemilik dan dirinya sebesar ⟨0⟩ point.</font>"
+  },
+  {
+   "n": 7104,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan nilai Armor Break pet dan pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7105,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan chakra pemilik sebesar ⟨0⟩.</font>"
+  },
+  {
+   "n": 7106,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Chakra pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7107,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan HP pemilik sebesar ⟨0⟩.</font>"
+  },
+  {
+   "n": 7108,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan HP pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7109,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan pertahanan pemilik sebesar ⟨0⟩.</font>"
+  },
+  {
+   "n": 7110,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Meningkatkan Defence pemilik sebesar <font color='#0098FF'>⟨0⟩</font> point."
+  },
+  {
+   "n": 7111,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan serangan Ninjutsu Api pemilik sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 7112,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Menambah kerusakan dari Ninjutsu Api pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7113,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan serangan Ninjutsu Air pemilik sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 7114,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Menambah kerusakan dari Ninjutsu Air pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7115,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan serangan Ninjutsu Tanah pemilik sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 7116,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Menambah kerusakan dari Ninjutsu Tanah pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7117,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan serangan Ninjutsu Angin pemilik sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 7118,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Menambah kerusakan dari Ninjutsu Angin pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7119,
+   "text": "<font color='#00ffff'>Skill pasif.Meningkatkan serangan Ninjutsu Petir pemilik sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 7120,
+   "text": "Kategori : Semua<br>[line]Tipe : Pasif<br>[line]Dipelajari level : Tidak ada<br>[line]Menambah kerusakan dari Ninjutsu Petir pemilik sebesar <font color='#0098FF'>⟨0⟩%</font>."
+  },
+  {
+   "n": 7121,
+   "text": "Kategori : Binatang<br>[line]Tipe : Aura<br>[line]Dipelajari level : Tidak ada<br>[line]Harus mempelajari skill aura dahulu sebelum mengaktifasi skill!<br>Aura binatang level ⟨0⟩. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7122,
+   "text": "Kategori : Binatang<br>[line]Tipe : Aura<br>[line]Dipelajari level : +⟨0⟩<br>[line]Harus mempelajari skill aura dahulu sebelum mengaktifasi skill!<br>Aura binatang level ⟨1⟩. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7123,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Aura<br>[line]Dipelajari level : tidak ada<br>[line]Harus mempelajari skill aura dahulu sebelum mengaktifasi skill!<br>Aura tanaman level ⟨0⟩. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7124,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Aura<br>[line]Dipelajari level : +⟨0⟩<br>[line]Harus mempelajari skill aura dahulu sebelum mengaktifasi skill!<br>Aura tanaman level ⟨1⟩. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7125,
+   "text": "Kategori : Buatan<br>[line]Tipe : Aura<br>[line]Dipelajari level : tidak ada<br>[line]Harus mempelajari skill aura dahulu sebelum mengaktifasi skill parasit!<br>Aura Rebirth level ⟨0⟩. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7126,
+   "text": "Kategori : Buatan<br>[line]Tipe : Aura<br>[line]Dipelajari level : +⟨0⟩<br>[line]Harus mempelajari skill aura dahulu sebelum mengaktifasi skill parasit!<br>Aura Rebirth level ⟨1⟩. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7127,
+   "text": "Kategori : Dragon<br>[line]Tipe : aura<br>[line]Dipelajari level : tidak ada<br>[line]harus mempelajari skill aura dahulu sebelum mengaktifasi skill parasit!<br> Level ⟨0⟩ holy aura. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7128,
+   "text": "Kategori : Dragon<br>[line]Tipe : aura<br>[line]Dipelajari level : +⟨0⟩<br>[line]harus mempelajari skill aura dahulu sebelum mengaktifasi skill parasit!<br> Level ⟨1⟩ holy aura. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7129,
+   "text": "Kategori : Channeling<br>[line]Tipe : aura<br>[line]Dipelajari level : tidak ada<br>[line]harus mempelajari skill aura dahulu sebelum mengaktifasi skill parasit!<br> Level ⟨0⟩ Intelligence aura. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7130,
+   "text": "Kategori : Channeling<br>[line]Tipe : aura<br>[line]Dipelajari level : +⟨0⟩<br>[line]harus mempelajari skill aura dahulu sebelum mengaktifasi skill parasit!<br> Level ⟨1⟩ Intelligence aura. Hanya aura tingkat tinggi akan efektif bila ada beberapa aura."
+  },
+  {
+   "n": 7131,
+   "text": "Kategori : Binatang<br>[line]Tipe : Efek Parasit<br>[line]Dipelajari level : none<br>[line]<font color='#FF6565'>Efektif setelah belajar aura pembantaian.</font><br>Menyerang dapat menyerap HP berdasarkan besarnya kerusakan, aura dasar <font color='#0098FF'>⟨0⟩%</font>, aura lanjutan <font color='#0098FF'>⟨1⟩%</font>, expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7132,
+   "text": "Kategori : Binatang<br>[line]Tipe : Efek Parasit<br>[line]Dipelajari level : none<br>[line]<font color='#FF6565'>Efektif setelah belajar aura pembantaian.</font><br>Teknik meningkatkan daya tahan tubuh sedangkan penurunan pada ilusi dengan persentase yang sama, aura dasar <font color='#0098FF'>⟨0⟩%</font>, aura lanjutan <font color='#0098FF'>⟨1⟩%</font>, expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7133,
+   "text": "Kategori : Binatang<br>[line]Tipe : Efek Parasit<br>[line]Dipelajari level : none<br>[line]<font color='#FF6565'>Efektif setelah belajar aura pembantaian.</font><br>Memicu semangat dalam status positif dan meningkatkan serangan, aura dasar <font color='#0098FF'>⟨0⟩%</font>, aura lanjutan <font color='#0098FF'>⟨1⟩%</font>, expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7134,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Efek Parasit<br>[line]Dipelajari level : none<br>[line]<font color='#FF6565'>Efektif setelah belajar bramble aura.</font><br>Memberikan kerusakan serangan jarak dekat, aura dasar <font color='#0098FF'>⟨0⟩%</font>, aura lanjutan <font color='#0098FF'>⟨1⟩%</font>, expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7135,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Parasitic effect<br>[line]Dipelajari level : none<br>[line]<font color='#FF6565'>Efektif setelah belajar bramble aura. </font><br><font color='#0098FF'>⟨0⟩%</font> kesempatan untuk memulihkan HP sampai dengan <font color='#0098FF'>⟨1⟩</font> kali，basic aura<font color='#0098FF'>⟨2⟩%</font>，advanced aura<font color='#0098FF'>⟨3⟩%</font>，expert aura<font color='#0098FF'>⟨4⟩%</font>."
+  },
+  {
+   "n": 7136,
+   "text": "Kategori : Tanaman<br>[line]Tipe : Efek Parasit<br>[line]Dipelajari level : none<br>[line]<font color='#FF6565'>Efektif setelah belajar bramble aura.</font><br>Meningkatkan ketrampilan skill air sementara mengurangi daya tahan terhadap skill api dengan presentase yang sama, aura dasar <font color='#0098FF'>⟨0⟩%</font>, aura lanjutan <font color='#0098FF'>⟨1⟩%</font>, expert aura<font color='#0098FF'>⟨2⟩%</font>."
+  },
+  {
+   "n": 7137,
+   "text": "Kategori : Buatan<br>[line]Tipe : Efek parasit<br>[line]Dipelajari level : tidak ada<br>[line]<font color='#FF6565'>Efektif setelah belajar Rebirth aura.</font><br>Ketika sisa HP kurang dari <font color='#0098FF'>⟨0⟩%</font> dari max HP, mengubah aura ke HP dalam jumlah tertentu, basic aura<font color='#0098FF'>⟨1⟩%</font>，advanced aura<font color='#0098FF'>⟨2⟩%</font>，expert aura<font color='#0098FF'>⟨3⟩%</font>."
+  }
+ ]
+}

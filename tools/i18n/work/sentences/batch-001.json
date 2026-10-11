@@ -1,0 +1,976 @@
+{
+ "terms": {
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "Rumah": "Home",
+  "Serangan": "Attack",
+  "Pilih": "Choose",
+  "Kembali": "Return",
+  "Melihat Attributes": "View Attributes",
+  "Membeli Senjata": "Buy Weapons",
+  "Membeli Armor": "Buy Armor",
+  "Undian Guci Keberuntungan": "Lucky Jar Draw",
+  "Menggunakan Potion": "Use Potions",
+  "Peralatan Armor": "Armor Equipment",
+  "Membeli Potion": "Buy Potions",
+  "Menggunakan Senjata": "Use Weapons",
+  "Klaim Gift Box": "Claim Gift Box",
+  "Turnamen Bela Diri Dunia": "World Martial Arts Tournament",
+  "Liga Nasional": "National League",
+  "Rumahku": "My Home",
+  "Kunjungi Ketua Desa": "Visit the Village Elder",
+  "Agent of Soul Reaper": "Soul Reaper Agent",
+  "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
+  "S-rank Tailed Beast Wishing Pot": "S-Rank Tailed Beast Wishing Pot",
+  "Berlatih": "Training"
+ },
+ "units": [
+  {
+   "n": 743,
+   "text": "kartu tidak cukup,  Tidak dapat sintesis."
+  },
+  {
+   "n": 744,
+   "text": "Jumlah dari sistesis kartu telah mencapai batas."
+  },
+  {
+   "n": 745,
+   "text": "Membutuhkan {@0: } gold untuk membuka"
+  },
+  {
+   "n": 746,
+   "text": "Taruh pada Card Exchange Box"
+  },
+  {
+   "n": 747,
+   "text": "Dimasukan kembali ke Kotak Kartu"
+  },
+  {
+   "n": 748,
+   "text": "Jual Kartu"
+  },
+  {
+   "n": 749,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Hidden Land</font> mencatat semua tempat terkenal dari Naruto.<br> Set card ini tersebar di <font color='#0098FF'>Valhalla</font>."
+  },
+  {
+   "n": 750,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Spirit Beast</font> mencatat semua pet chaneling terkenal dari Naruto.<br> Set card ini tersebar di  <font color='#0098FF'>Valhalla</font>."
+  },
+  {
+   "n": 751,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Village Secret</font> mencatat semua simbol desa Naruto.<br> Set card ini tersebar di<font color='#0098FF'>Valhalla</font>."
+  },
+  {
+   "n": 752,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Konoha Eight</font> rcatatan delapan pemula teman dari Honohagakure.<br> Set card ini tersebar di <font color='#0098FF'>Valhalla</font>."
+  },
+  {
+   "n": 753,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Palace Captain</font> mencatat semua kapten terkenal di Bleach.<br> Set card ini tersebar di <font color='#0098FF'>Valhalla</font>."
+  },
+  {
+   "n": 754,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Akatsuki</font> mencatat semua anggota Akatsuki.<br> Set card ini tersebar di <font color='#0098FF'>Valhalla</font>."
+  },
+  {
+   "n": 755,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Rookie of Card</font> berarti kamu sudah tau tentang kartu.<br> Kamu perlu mengumpulkan <font color='#0098FF'>Palace Captain</font> dan <font color='#0098FF'>Akatsuki</font>."
+  },
+  {
+   "n": 756,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Kage Shinobi</font> Mencatat level kage ninja di Naruto.<br> Set card ini tersebar di <font color='#0098FF'> Pertahanan Serangan Tailed Beasts</font>."
+  },
+  {
+   "n": 757,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Bloodline Limit</font> Mencatat beberapa skill Bloodline Limit.<br>Set Card ini dapat diperoleh dari <font color='#0098FF'>shop</font>."
+  },
+  {
+   "n": 758,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Card Expert</font> berarti kamu sudah ahli.<br>Kamu harus mengumpuilkan <font color='#0098FF'>Kage Shinobi</font> dan <font color='#0098FF'>Bloodline Limit</font>."
+  },
+  {
+   "n": 759,
+   "text": "Pengenalan Card:  <font color='#0098FF'>Card Master</font> Berarti kamu sudah menjadi master dari Card.<br> kamu harus mengumpulkan <font color='#0098FF'>semua cards</font>."
+  },
+  {
+   "n": 760,
+   "text": "Special Reward"
+  },
+  {
+   "n": 761,
+   "text": "Buka semua kartu akan membutuhkan {@0: } gold. Apakah kamu yakin untuk membukanya?"
+  },
+  {
+   "n": 762,
+   "text": "Semua slot telah terbuka, tidak dapat membuka lagi."
+  },
+  {
+   "n": 763,
+   "text": "Item telah kadaluarsa, silahkan merefresh slot kartu."
+  },
+  {
+   "n": 764,
+   "text": "Operation tidak normal, silahkan hubungi Admin."
+  },
+  {
+   "n": 765,
+   "text": "Maaf,  Kotak kartu  kamu penuh. Tidak dapat melanjutkan."
+  },
+  {
+   "n": 766,
+   "text": "Kotak kartu kamu penuh. Tidak dapat mendapatkan kartu lagi. Silahkan periksa Rumah Kartu sekarang."
+  },
+  {
+   "n": 767,
+   "text": "Kartu yang kamu pilih tidak tersedia. Silahkan refres dan coba lagi. "
+  },
+  {
+   "n": 768,
+   "text": "<font color='#ff0000'>Kamu telah melakukan pembebasan {@0: } kali</font>"
+  },
+  {
+   "n": 769,
+   "text": "Sintesis membutuhkan ⟨0⟩ batu"
+  },
+  {
+   "n": 770,
+   "text": "Taruh ⟨0⟩ green card<br> dan sintesiskan kartu dari kelas yang lebih tinggi"
+  },
+  {
+   "n": 771,
+   "text": "{@0:  }/{@1:  } page"
+  },
+  {
+   "n": 772,
+   "text": "Batu tidak mencukupi. Tidak dapat sintesis"
+  },
+  {
+   "n": 773,
+   "text": "Gunakan {@0:  } batu,  Berhasil mensintesiskan:  {@1:  }."
+  },
+  {
+   "n": 774,
+   "text": "<font color='#0098FF'>Hanya green card yang dapat disintesiskan</font>"
+  },
+  {
+   "n": 775,
+   "text": "Sintesis kartu"
+  },
+  {
+   "n": 776,
+   "text": "Tidak dapat membebaskan. Silahkan memilih katu yang ingin kamu ganti. "
+  },
+  {
+   "n": 777,
+   "text": "Apa kamu yakin untuk mengganti?"
+  },
+  {
+   "n": 778,
+   "text": "Maaf, kamu telah salah menaruh kartu pada Exchange Box. Silahkan Refresh dan mencoba lagi."
+  },
+  {
+   "n": 779,
+   "text": "Maaf, Exchange Box telah penuh. Peleteakan kartu lebih dinon-aktifkan. "
+  },
+  {
+   "n": 780,
+   "text": "Kartu yang ingin kamu tukarkan di bawah proteksi. Silahkan coba lagi nanti."
+  },
+  {
+   "n": 781,
+   "text": "Maaf. Silahkan memilih kartu dengan tingkatandan jenis yang sama untuk menukar."
+  },
+  {
+   "n": 782,
+   "text": "Maaf, kamu harus memilih kartu dengan jenis yang sama."
+  },
+  {
+   "n": 783,
+   "text": "Maaf, Item yang kamu pilih untuk menukar bukanlah kartu. "
+  },
+  {
+   "n": 784,
+   "text": "Kamu telah menukarkan satu kartu. Silahkan periksa Rumah Kartu sekarang. "
+  },
+  {
+   "n": 785,
+   "text": "Setelah merefresh CD,  kamu dapat mempercepat watu CD untuk menukarkan lagi. Kamu ingin merefresh? (Kamu perlu membayar <font color='#ff0000'>{@0:  }</font> gold）"
+  },
+  {
+   "n": 786,
+   "text": "Menggunakan {@0: } gold dan refresh waktu pemulihan penukaran kartu. "
+  },
+  {
+   "n": 787,
+   "text": "Maaf,  kamu perlu menunggu untuk {@0:  }. Kamu ingin percepat? （Kamu perlu membayar <font color='#ff0000'>⟨0⟩</font> gold）"
+  },
+  {
+   "n": 788,
+   "text": "Maaf,  kamu harus menunggu {@0:  } menit."
+  },
+  {
+   "n": 789,
+   "text": "Maaf,  kamu perlu menunggu {@0:  } detik. Waktu reset CD membutuhkan ⟨0⟩ gold."
+  },
+  {
+   "n": 790,
+   "text": "Oops, kamu tidak memiliki kartu yang cukup. Silahkan kumpulkan semua kartu pada seri ini sebelum membebaskan."
+  },
+  {
+   "n": 791,
+   "text": "Item yang kamu gunakan bukan kartu. Silahkan refresh dan coba lagi. "
+  },
+  {
+   "n": 792,
+   "text": "Tipe kartu yang kamu gunakan belum tersedia."
+  },
+  {
+   "n": 793,
+   "text": "Kartu ini dibawah proteksi dan tidak dapat di tukarkan dalam ⟨0⟩ menit."
+  },
+  {
+   "n": 794,
+   "text": "Kamu menukarkan kartu {@0: } dengan {@1: } untuk {@2: }."
+  },
+  {
+   "n": 795,
+   "text": "{@0: } menukarkan kartu {@1: } dengan kamu untuk {@2: }."
+  },
+  {
+   "n": 796,
+   "text": "Berhasil menebus set dari {@0:  } dan memenangkan <font color='#ff0000'>{@1:  }*{@2:  }</font>."
+  },
+  {
+   "n": 797,
+   "text": "Berhasil menebus set dari {@0:  } dan memenangkan <font color='#ff0000'>{@1:  }*{@2:  }</font>, Ditambah bonus: <font color='#ff0000'>{@3:  }</font>."
+  },
+  {
+   "n": 798,
+   "text": "Selamat untuk {@0:  } menebus kartu dan memperoleh <font color='#ff0000'>{@1:  }*{@2:  }</font>."
+  },
+  {
+   "n": 799,
+   "text": "Berhasil menebus  {@0:  },  memperoleh <font color='#ff0000'>{@1:  }*{@2:  }</font>,  dan membuka <font color='#ff0000'>special reward</font>."
+  },
+  {
+   "n": 800,
+   "text": "Tidak ada data pada My Card House"
+  },
+  {
+   "n": 801,
+   "text": "My Card House"
+  },
+  {
+   "n": 802,
+   "text": "Kartu yang kamu inginkan tidak ada, silahkan refresh dan mencoba lagi."
+  },
+  {
+   "n": 803,
+   "text": "Kartu yang kamu inginkan telah kadaluarsa, silahkan refresh dan mencoba lagi."
+  },
+  {
+   "n": 804,
+   "text": "<font color='#ff0000'>Kamu belum berhasil mengumpulkan</font>"
+  },
+  {
+   "n": 805,
+   "text": "Oops, kamu tidak memiliki cukup gold. Silahkan isi ulang. "
+  },
+  {
+   "n": 806,
+   "text": "<font color='#000000'>Sudah {@0:  } ditebus pemain</font>"
+  },
+  {
+   "n": 807,
+   "text": "Aktivasi tidak normal. Silahkan ulangi."
+  },
+  {
+   "n": 808,
+   "text": "Penempatan yang salah. Silahkan aktivasi pada slot katu depan."
+  },
+  {
+   "n": 809,
+   "text": "Activation gagal."
+  },
+  {
+   "n": 810,
+   "text": "<font color='#006600'>Tingat Hijau</font>"
+  },
+  {
+   "n": 811,
+   "text": "<font color='#0202e3'>Tingkat Biru</font>"
+  },
+  {
+   "n": 812,
+   "text": "<font color='#b9470b'>Orange Grade</font>"
+  },
+  {
+   "n": 813,
+   "text": "<font color='#da870c'>Gold Grade</font>"
+  },
+  {
+   "n": 814,
+   "text": "<font color='#da870c'>Tingkat Emas</font>"
+  },
+  {
+   "n": 815,
+   "text": "Reset hadiah untuk merefresh harga. Setiap reset membutuhkan <font color='#ff0000'>⟨0⟩</font> gold. Yakin untuk melanjutkan?"
+  },
+  {
+   "n": 816,
+   "text": "Menggunakan {@0: } gold dan reset hadiah berhasil,"
+  },
+  {
+   "n": 817,
+   "text": "Harga dari kartu ini adalah {@0: } Batu. Apa kamu yakin untuk menjual?"
+  },
+  {
+   "n": 818,
+   "text": "Penjualan kartu gagal. Silahkan hubungi admin."
+  },
+  {
+   "n": 819,
+   "text": "⟨0⟩ kartu telah berhasil terjual, memperoleh {@0: } Batu."
+  },
+  {
+   "n": 820,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box,  yang berisi <font color='#ff0000'>Hidden Land</font> card! Dan gelar dari <font color='#ff0000'>Adventurer</font>!"
+  },
+  {
+   "n": 821,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini,  yang berisis <font color='#ff0000'>Spirit Beast</font> card! Dan gelar dari <font color='#ff0000'>Angel of Mercy</font>!"
+  },
+  {
+   "n": 822,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini,  yang berisi <font color='#ff0000'>Village Secret</font>card! Dan gelar dari <font color='#ff0000'>Band Collector</font>!"
+  },
+  {
+   "n": 823,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Konoha Eight</font>card! Dan gelar dari <font color='#ff0000'>Young Hero</font>!"
+  },
+  {
+   "n": 824,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Palace Captain</font>card! Dan gelar dari <font color='#ff0000'>Agent of Soul Reaper</font>!"
+  },
+  {
+   "n": 825,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Akatsuki</font>card! Dan gelar dari <font color='#ff0000'>Mysterious Organization</font>!"
+  },
+  {
+   "n": 826,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Rookie of Card</font>card! Dan gelar dari <font color='#ff0000'>Rookie of Card</font>!"
+  },
+  {
+   "n": 827,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Kage Shinobi</font>card! Dan gelar dari <font color='#ff0000'>Village's Pride</font>!"
+  },
+  {
+   "n": 828,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Bloodline Limit</font>card! Dan gelar dari <font color='#ff0000'>Beyond God</font>!"
+  },
+  {
+   "n": 829,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Card Expert</font>card! Dan gelar dari <font color='#ff0000'>Card Expert</font>!"
+  },
+  {
+   "n": 830,
+   "text": "Berhasil menebus ⟨0⟩ kali dapat menerima gift box ini, yang berisi <font color='#ff0000'>Card Master</font>card! Dan gelar dari <font color='#ff0000'>Card Master</font>!"
+  },
+  {
+   "n": 831,
+   "text": "Apa kamu yakin untuk menaruh kartu pada Exchange Box?"
+  },
+  {
+   "n": 832,
+   "text": "Apa kamu yakin untuk menaruh Box kartu?"
+  },
+  {
+   "n": 833,
+   "text": "<font color='#000000'>Sudah ada{@0:  }⟨0⟩ orang yang redeem</font>"
+  },
+  {
+   "n": 834,
+   "text": "Segel Scroll Ranking"
+  },
+  {
+   "n": 835,
+   "text": "Buka S Rank Scroll"
+  },
+  {
+   "n": 836,
+   "text": "Buka A Rank Scroll"
+  },
+  {
+   "n": 837,
+   "text": "Buka B Rank Scroll"
+  },
+  {
+   "n": 838,
+   "text": "Buka C Rank Scroll"
+  },
+  {
+   "n": 839,
+   "text": "Membuka Frequency"
+  },
+  {
+   "n": 840,
+   "text": "Silahkan lepaskan semua equipment sebelum mengganti kostum dari lawan jenis."
+  },
+  {
+   "n": 841,
+   "text": "Desa"
+  },
+  {
+   "n": 842,
+   "text": "Area"
+  },
+  {
+   "n": 843,
+   "text": "Tim"
+  },
+  {
+   "n": 844,
+   "text": "PM"
+  },
+  {
+   "n": 845,
+   "text": "Dunia"
+  },
+  {
+   "n": 846,
+   "text": "Silahkan memilih seseorang pada PM. "
+  },
+  {
+   "n": 847,
+   "text": "<b><font color='#ff0000'>[GM Notice]  </font> {@0:} </b>"
+  },
+  {
+   "n": 848,
+   "text": "<font color='#65ff00'>[Desa]  <a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}: {@2:}</font>"
+  },
+  {
+   "n": 849,
+   "text": "<font color='#000000'><a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}:{@2:}</font>"
+  },
+  {
+   "n": 850,
+   "text": "<font color='#ffffff'>[Area]  <a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}: {@2:}</font>"
+  },
+  {
+   "n": 851,
+   "text": "<font color='#ff0000'>[Sistem]  </font><font color='#ffffff'>{@0:}</font>"
+  },
+  {
+   "n": 852,
+   "text": "<font color='#65ffff'>[Tim]  <a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}: {@2:}</font>"
+  },
+  {
+   "n": 853,
+   "text": "<font color='#ff0000'>[Tim]  </font><font color='#ffffff'>{@0:}</font>"
+  },
+  {
+   "n": 854,
+   "text": "<font color='#65ffff'>[Grup] <a href= 'event:player|{@2:}'><u>{@0:}</u></a>#⟨0⟩#：{@1:}</font>"
+  },
+  {
+   "n": 855,
+   "text": "<font color='#7840c0'>[Khusus]  <a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}to you: {@2:}</font>"
+  },
+  {
+   "n": 856,
+   "text": "<font color='#7840c0'>[Khusus]  To <a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}: {@2:}</font>"
+  },
+  {
+   "n": 857,
+   "text": "<font color='#ffff00'>[Dunia]  <a href= 'event:player|{@3:}'><u>{@0:}</u></a>{@1:}: {@2:}</font>"
+  },
+  {
+   "n": 858,
+   "text": "Christmas event"
+  },
+  {
+   "n": 859,
+   "text": "Mencapai ⟨0⟩ kemenangan di Arena"
+  },
+  {
+   "n": 860,
+   "text": "Kalahkan Mooncake Thief ⟨0⟩ kali"
+  },
+  {
+   "n": 861,
+   "text": "Kalahkan Evil Merchant, kumpulkan ⟨0⟩ Flour,  Egg,  Caster Sugar respectively"
+  },
+  {
+   "n": 862,
+   "text": "Kalahkan Hanzo ⟨0⟩ kali.<br>Tips: Menantang Hanzo membutuhkan Mooncake Box. Kalahkan Evil Merchant maka kamu akan memiliki kesempatan tertentu untuk mendapatkan Mooncake Box."
+  },
+  {
+   "n": 863,
+   "text": "Defeat Hanzo, kumpulkan ⟨0⟩ Shippuden Mooncake.<br>Tips: Menantang Hanzo membutuhkan Mooncake Box. Kalahkan Evil Merchant maka kamu akan memiliki kesempatan tertentu untuk mendapatkan Mooncake Box"
+  },
+  {
+   "n": 864,
+   "text": "Login ⟨0⟩ hari, selama event berlangsung."
+  },
+  {
+   "n": 865,
+   "text": "Mencapai kemenangan di Arena（{@0:}）"
+  },
+  {
+   "n": 866,
+   "text": "Kalahkan Mooncake Thief（{@0:  }）"
+  },
+  {
+   "n": 867,
+   "text": "Flour（{@0:  }）<br>Egg（{@1:  }）<br>Caster Sugar（{@2:  }）"
+  },
+  {
+   "n": 868,
+   "text": "Kalahkan Hanzo（{@0:  }）"
+  },
+  {
+   "n": 869,
+   "text": "Shippuden Mooncake（{@0:  }）"
+  },
+  {
+   "n": 870,
+   "text": "Total Login（{@0:}）"
+  },
+  {
+   "n": 871,
+   "text": "Kung Fu Contest"
+  },
+  {
+   "n": 872,
+   "text": "Protect Mooncake"
+  },
+  {
+   "n": 873,
+   "text": "Collect Material"
+  },
+  {
+   "n": 874,
+   "text": "Annoying Hanzo"
+  },
+  {
+   "n": 875,
+   "text": "Mooncake War"
+  },
+  {
+   "n": 876,
+   "text": "Happy Christmas"
+  },
+  {
+   "n": 877,
+   "text": "Sage Panacea*⟨0⟩"
+  },
+  {
+   "n": 878,
+   "text": "Seal Breaker*⟨0⟩"
+  },
+  {
+   "n": 879,
+   "text": "Ada kesempatan tertentu untuk mendapatkan EXP(Variasikan dengan level)<br> atau sebuah Tailed Beast Wishing Pot"
+  },
+  {
+   "n": 880,
+   "text": "EXP (sesuai dengan lvl karakter)"
+  },
+  {
+   "n": 881,
+   "text": "Menerima Refining Talisman,  Recast Talisman,  Advanced Inscription Talisman secara random"
+  },
+  {
+   "n": 882,
+   "text": "Menerima Shippuden Wishing Pot,  S-rank Ninja Wishing Pot,  Tailed Beast Wishing Pot,  S-rank Tailed Beast Wishing Pot secara random"
+  },
+  {
+   "n": 883,
+   "text": "{@0:} Pembersihan Berhasil."
+  },
+  {
+   "n": 884,
+   "text": "<font size='16'>Klik Aula"
+  },
+  {
+   "n": 885,
+   "text": "Klik untuk ambil misi"
+  },
+  {
+   "n": 886,
+   "text": "Kilk untuk attack"
+  },
+  {
+   "n": 887,
+   "text": "Klik untuk tutup"
+  },
+  {
+   "n": 888,
+   "text": "Klik untuk menyelesaikan"
+  },
+  {
+   "n": 889,
+   "text": "Klik untuk teleport"
+  },
+  {
+   "n": 890,
+   "text": "<font color='#0000a0'>Meninggalkan Aula</font>"
+  },
+  {
+   "n": 891,
+   "text": "Selamat datag di Desa Ninja, Sebagai ninja pemula di sekolah ninja, kamu akan memiliki ketakutan saat berhadapan dengan musuh yang lebih kuat! Ambil ini<font color='#00b034'> potion </font>dan bersiaplah untuk mencoba. Aku melihat langkahmu kedepan akan menjadi ninja sejati!"
+  },
+  {
+   "n": 892,
+   "text": "Terima kasih, saya akan!"
+  },
+  {
+   "n": 893,
+   "text": "Memulai Tutorial Misi: Kunjungi Ketua Desa"
+  },
+  {
+   "n": 894,
+   "text": "Memulai Tutorial Misi: Melihat Attributes"
+  },
+  {
+   "n": 895,
+   "text": "Memulai Tutorial Misi: Kunjungi Toko Barang"
+  },
+  {
+   "n": 896,
+   "text": "Memulai Tutorial Misi: Mengunjungi Toko Barang"
+  },
+  {
+   "n": 897,
+   "text": "Memulai Tutorial Misi: Refresh Item"
+  },
+  {
+   "n": 898,
+   "text": "Akhir Panduan"
+  },
+  {
+   "n": 899,
+   "text": "Memulai Tutorial Misi: Pergi Keluar"
+  },
+  {
+   "n": 900,
+   "text": "Memulai Tutorial Misi: Kembali pergi ke Desa"
+  },
+  {
+   "n": 901,
+   "text": "Memulai Tutorial Misi: Tambahkan ke Koleksi"
+  },
+  {
+   "n": 902,
+   "text": "Memulai Tutorial Misi: Perlengkapan Senjata"
+  },
+  {
+   "n": 903,
+   "text": "Memulai Tutorial Misi: Menggunakan Senjata"
+  },
+  {
+   "n": 904,
+   "text": "Memulai Tutorial Misi: Membeli Armor"
+  },
+  {
+   "n": 905,
+   "text": "Memulai Tutorial Misi: Gratis Poin Tambahan"
+  },
+  {
+   "n": 906,
+   "text": "Memulai Tutorial Misi: Arena Duel"
+  },
+  {
+   "n": 907,
+   "text": "Memulai Tutorial Misi: Undian Guci Keberuntungan "
+  },
+  {
+   "n": 908,
+   "text": "Memulai Tutorial Misi: Tantangan Pada Boss"
+  },
+  {
+   "n": 909,
+   "text": "Memulai Tutorial Misi: Pertarungan diluar"
+  },
+  {
+   "n": 910,
+   "text": "Memulai Tutorial Misi: Menggunakan Potion"
+  },
+  {
+   "n": 911,
+   "text": "Memulai Tutorial Misi: Appraise peralatan"
+  },
+  {
+   "n": 912,
+   "text": "Memulai Tutorial Misi: Peralatan Armor"
+  },
+  {
+   "n": 913,
+   "text": "Memulai Tutorial Misi: Promosikan Rank"
+  },
+  {
+   "n": 914,
+   "text": "Memulai Tutorial Misi: Belajar skill"
+  },
+  {
+   "n": 915,
+   "text": "Memulai Tutorial Misi: Menggunakan skill"
+  },
+  {
+   "n": 916,
+   "text": "Memulai Tutorial Misi: Membeli Potion"
+  },
+  {
+   "n": 917,
+   "text": "Memulai Tutorial Misi: Klaim Gift Box"
+  },
+  {
+   "n": 918,
+   "text": "Memulai Tutorial Misi: Petunjuk Misi"
+  },
+  {
+   "n": 919,
+   "text": "Sejauh ini semua tutorial telah selesai. Kamu telah menjadi Ninja yang baik. Jadi kini saatnya kita berpisah.<br>Jadi kini kamu dapat：<br>  ⟨0⟩.Mengambil misi utama，Tingkatkan level dan mempelajari jurus.<br>  ⟨1⟩.Mengambil misi tutorial untuk mencaritahu lebih banyak informasi tenang game ini.(Recommend)<br>\n"
+  },
+  {
+   "n": 920,
+   "text": "<font color='#00b035'> Ketua Desa </font>telah menunggumu. Pergi dan temui ketua desa di<font color='#00b035'> Aula </font>!"
+  },
+  {
+   "n": 921,
+   "text": "Sangat disayangkan telah dikalahkan oleh <font color='#00b035'> boss </font>. Tingkatkan skill kamu sebelum menantang lagi. pada pertempuran sebelumnya telah meningkatkan level kamu ke <font color='#00b035'> ⟨0⟩ </font>. Sekarang buka interface karakter untuk memahami <font color='#00b035'> attributes </font> kamu sendiri. Dalam permainan, ada ⟨1⟩ <font color='#00b035'> attribut </font>: ini <font color='#00b035'> HP </font> dan <font color='#00b035'> chakra </font> attribute, <font color='#00b035'> stamina </font>, ini <font color='#00b035'> attack </font> dan <font color='#00b035'> block </font> attribute<font color='#00b035'> Great Strength </font> dan <font color='#00b035'> speed </font> dan <font color='#00b035'> dodge </font> attribute <font color='#00b035'> agility </font>.<font color='#00b035'> Attribute </font> pertumbuhan dipengaruhi oleh<font color='#00b035'> Kostum </font> yang digunakan. <font color='#00b035'> Piercing </font>, <font color='#00b035'> hit </font>, <font color='#00b035'> armor break</font>, <font color='#00b035'> defense </font>,<font color='#00b035'> crit strike </font> dan <font color='#00b035'> constitution </font> tergantung pada <font color='#00b035'> peralatan kamu </font>."
+  },
+  {
+   "n": 922,
+   "text": "Tempat bertarung merupakan guru terbaik untuk mencari pengalaman. Di dalam game <font color='#00b035'> zone luar </font>, Kamu akan menghadapi banyak monster, jika kamu tidak siap, maka kamu tidak akan bertanggung jawab terhadap keamanan diri kamu sendiri. Menuju ke<font color='#00b035'> Toko Item </font>untuk mempelajari bagaimana cara untuk membeli <font color='#00b035'> potion </font>."
+  },
+  {
+   "n": 923,
+   "text": "Pertarungan berikutnya membutuhkan peralatan yang lebih baik. Desa <font color='#00b035'>Toko Item</font> adalah tempat mereka membeli peralatan ninja. Menuju ke <font color='#00b035'>Toko Item</font> dan lihat apakah sudah sesuai dengan yang kamu inginkan."
+  },
+  {
+   "n": 924,
+   "text": "<font color='#00b035'> Toko item ninja hitam </font> tidak ada yang terlihat . kamu perlu menunggu sampai item baru muncul kembali. Kamu dapat Klik [<font color='#00b035'>Refresh</font>]Item di Toko. kenapa kamu tidak mencoba [<font color='#00b035'>Refresh</font>] Item sekarang?"
+  },
+  {
+   "n": 925,
+   "text": "Setelah masa latihan, Kamu akan lebih akrab dengan dunia [<font color='#00b035'>NinjaKita</font>]? Banyak petualangan menarik menunggu kamu. Berlatih lebih giat akan menjadikan kamu ninja sejati!"
+  },
+  {
+   "n": 926,
+   "text": "Sekarang <font color='#00b035'> potion </font> kamu telah disiapkan, Klik pada [<font color='#00b035'>Keluar</font>]  pada bagian atas sebelah kanan dan Pergi ke <font color='#00b035'> Zone luar</font>. Kamu akan menerima hadiah dari aku setelah kamu mencapai tujuan kamu."
+  },
+  {
+   "n": 927,
+   "text": "Sangat memukau seperti pemandangan ini, lakukan hal-hal yang lebih penting selain menunggu. Klik pada [<font color='#00b035'>Masuk </font>] di sudut kanan atas untuk kembali ke desa."
+  },
+  {
+   "n": 928,
+   "text": "Sebelum pergi ke <font color='#00b035'> Arena </font>, pertama kali tambahkan <font color='#00b035'> favorit </font>, tambahkan <font color='#00b035'> NinjaKita </font> pada  <font color='#00b035'>folder favorit kamu </font>. lain kali, kamu dapat menggunakan <font color='#00b035'> folder favorit </font> untuk langsung mengakses <font color='#00b035'>login interface NinjaKita </font>."
+  },
+  {
+   "n": 929,
+   "text": "<font color='#00b035'>Senjata pemula </font>tidak lagi cocok untuk pertarungan mendatang. Pergi ke <font color='#00b035'> Toko Item </font>dan beli  <font color='#00b035'> Senjata</font> yang cocok untuk kamu."
+  },
+  {
+   "n": 930,
+   "text": "Membeli Senjata  yang cocok. Sekarang gunakan pada <font color='#00b035'>Panel Senjata</font>."
+  },
+  {
+   "n": 931,
+   "text": "Meskipun kemampuan kamu meningkat, itu masih tidak cukup untuk menantang <font color='#00b035'> boss </font>. pada <font color='#00b035'> Toko Item</font> di dalam game, kamu dapat membeli peralatan <font color='#00b035'> unappraised </font> di <font color='#00b035'> Toko barang </font>. Selanjutnya, ke <font color='#00b035'> Toko item ninja hitam </font> dan beli <font color='#00b035'> armor </font>. Aku akan memberikan kamu beberapa potong  <font color='#00b035'> armor </font> setelah kamu melakukannya."
+  },
+  {
+   "n": 932,
+   "text": "Bagus. Apakah kamu merasa kuat? Sekarang kamu telah meningkatkan level, Perhatikan bahwa ada batas untuk menyimpan EXP di kolom EXP. Setelah kamu melebihi batas, kamu tidak dapat memperoleh EXP lagi, jadi ingatlah untuk meningkatkan level terus menerus!<br>Kamu Memperoleh beberapa poin gratis ketika kamu meningkatkan level, mendistribusikannya ke atribut yang kamu perlukan!"
+  },
+  {
+   "n": 933,
+   "text": "Sebagai seorang ninja, sebuah kesibukan pertarungan dapat meletus kapan saja. Untuk meningkatkan kemampuan tempur kamu, Pergi ke desa atau kota malaikat untuk masuk<font color='#00b035'> arena </font> dan berpartisipasi dalam duel untuk membiasakan diri dengan pertarungan.<br>Klik <font color='#00b035'> Arena </font> untuk menemui bahkan melawan, kemudian pilih salah satu untuk memulai duel!"
+  },
+  {
+   "n": 934,
+   "text": "Kemenangan fantastis! Ini <font color='#00b035'> ⟨0⟩ </font><font color='#00b035'> medal </font> untuk mengambil milik kamu, setelah memperoleh <font color='#00b035'> medal </font>, kamu dapat membuka guci pada <font color='#00b035'> Toko Guci </font>.  sekarang klik pada <font color='#00b035'> [Undian] </font> untuk Pergi ke  <font color='#00b035'> Toko Guci </font>."
+  },
+  {
+   "n": 935,
+   "text": "Dalam <font color='#00b035'> Arena </font>, menang duel akan menghasilkan <font color='#00b035'> point </font>. <font color='#00b035'> point </font> menentukan<font color='#00b035'> Pemain </font> memperoleh <font color='#00b035'> rank </font>. Disaat <font color='#00b035'> rank </font>meningkat, dapat Pergi ke  <font color='#00b035'> Toko Guci </font> untuk mengejar kelas yang lebih tinggi <font color='#00b035'> Guci Keberuntungan </font>. <br> Disaat Poin <font color='#00b035'> Pemain </font> dapat mempromosikan <font color='#00b035'> rank </font> memerlukan <font color='#00b035'> point </font> untuk mempromosikannya, Duel lain akan dimulai. Setelah ini berakhir, sebuah <font color='#00b035'> rank boss </font> akan ditemui. Kalahkan untuk mempromosikan <font color='#00b035'> rank </font>kamu. Sekarang Pergi ke  <font color='#00b035'> arena </font> dan berpartisipasi dalam duel, menantang pada <font color='#00b035'> rank boss </font> sekali!"
+  },
+  {
+   "n": 936,
+   "text": "Pemandangan di sini tidak terlalu buruk, selain dari penampakan Monster biasa.<font color='#00b035'> Daftar Monster </font>di bagian atas interface menampilkan monster yang ada saat ini. Pilih dan berikan mereka pelajaran."
+  },
+  {
+   "n": 937,
+   "text": "Pertempuran yang fantastis, meskipun kamu juga menderita beberapa kerusakan. Buka<font color='#00b035'> Tas </font> kamu dan gunakan Potion yang kamu beli dari <font color='#00b035'> Toko Item </font><font color='#00b035'></font> Untuk memulihkan <font color='#00b035'> HP </font> kamu."
+  },
+  {
+   "n": 938,
+   "text": "Armor dapat dibeli di<font color='#00b035'> Toko item ninja hitam </font>yang menjual barang<font color='#00b035'> tidak terikat </font>. Mereka hanya dapat dipakai setelah <font color='#00b035'> terikat </font>. Klik pada peralatan untuk membuka level ⟨0⟩ menu dan pilih [<font color='#00b035'>Appraisal</font>] untuk melakukan<font color='#00b035'> ikatan </font>. setelah <font color='#00b035'> terikat </font>, kamu akan melihat bonus <font color='#00b035'> attribut</font> dari barang yang telah kamu Apprisal."
+  },
+  {
+   "n": 939,
+   "text": "<font color='#00b035'>Child Armor </font>telah berhasil<font color='#00b035'> terikat </font>. Sekarang gunakan<font color='#00b035'> Child Armor </font>dan <font color='#00b035'> armor </font>yang aku berikan kamu sebelumnya."
+  },
+  {
+   "n": 940,
+   "text": "Bagaimana perasaan kamu mengenai Gear baru yang kamu pakai? Pergi ke  <font color='#00b035'> Arena </font> sekarang dan mencoba melakukan tantangan pada<font color='#00b035'> rank boss </font>. <font color='#00b035'> rank </font>Kamu akan di promosikan menjadi [<font color='#00b035'>Pemula II</font>] ."
+  },
+  {
+   "n": 941,
+   "text": "Ingin menjadi saksi kekuatan <font color='#00b035'> rank boss </font>secara langsung? untuk memastikan<font color='#00b035'> rank boss </font>dapat dikalahkan pada pertandingan berikutnya, kamu harus melatih diri kamu ke tingkat yang lebih tinggi.<br>kamu telah mencapai<font color='#00b035'> level ⟨0⟩</font>, sekarang kamu dapat Pergi ke <font color='#00b035'> Arena </font>dan menemui<font color='#00b035'> Jounin </font>, lalu mempelajari<font color='#00b035'> skill </font>."
+  },
+  {
+   "n": 942,
+   "text": "Kamu dapat mempelajari<font color='#00b035'> skill </font>baru setiap naik level, mempelajari<font color='#00b035'> skill </font>harus dimasukan pada panel skill untuk digunakan dalam pertarungan. sekarang buka<font color='#00b035'> skill interface </font>dan gunakan<font color='#00b035'> skill </font>yang ingin kamu pelajari pada<font color='#00b035'> skill panel</font>."
+  },
+  {
+   "n": 943,
+   "text": "Lapangan pertarungan adalah tempat terbaik dalam belajar, dalam dunia game <font color='#00b035'>zone luar</font>, kamu akan menghadapi banyak monster. Jika kamu tidak siap, maka kamu tidak bertanggung jawab untuk keselamatan kamu sendiri. Menuju ke<font color='#00b035'> Toko Item</font>untuk belajar bagaimana cara untuk membeli <font color='#00b035'> potion </font>."
+  },
+  {
+   "n": 944,
+   "text": "Selamat kamu telah di promosikan menjadi [<font color='#00b035'>Pemula II</font>] . Ini adalah <font color='#00b035'>Pelajaran</font> untuk kamu. Sekarang buka[<font color='#00b035'>Gift Box</font>] interface untuk mengklaim."
+  },
+  {
+   "n": 945,
+   "text": "Dengan perkembangan yang sedang berlangsung di dunia ninja, kamu akan menemui banyak orang di daratan yang luas, banyak peristiwa yang akan menjadi pengalaman, dan membantu orang di dunia ninja ini. Itulah tugas kamu yang paling penting.<br>Sekarang aku akan mengajarkan kamu tentang cara untuk menerima<font color='#00b035'> Misi </font>."
+  },
+  {
+   "n": 946,
+   "text": "Menyelesaikan tutorial dari Rumah"
+  },
+  {
+   "n": 947,
+   "text": "Memulai Tutorial: Rumahku"
+  },
+  {
+   "n": 948,
+   "text": "Memulai Tutorial: Membangun ladang"
+  },
+  {
+   "n": 949,
+   "text": "Mengunjungi rumah yang lain"
+  },
+  {
+   "n": 950,
+   "text": "Apakah kamu mengagumi rumah orang lain? kamu dapat melakukan lebih baik jika kamu mau merawat rumah kamu! <br>Coba untuk memeriksa <font color='#00b034'>Handbook dari Home</font> pada sisi kiri rumah kamu. Ini memiliki beberapa saran yang hebat tentang bagaimana membangun rumah yang lebih baik, dan juga dapat membantu kamu dalam meng-upgrade."
+  },
+  {
+   "n": 951,
+   "text": "Selamat datang di rumah kamu. disini kamu dapat membuat konstruksi bangunan, mendekorasi rumah kamu dan mengunjungi teman.. <br>Kosntruksi akan membutuhkan biaya beberapa batu. kbetulan saya mempunyai beberapa batu, kamu dapat menggunakannya untuk membuat konstruksi."
+  },
+  {
+   "n": 952,
+   "text": "Hal yang terpenting dalam rumah kamu adalah <font color='#00b034'>Kebun</font>. <font color='#00b034'>Kebun</font> akan memproduksi <font color='#00b034'> Tanaman</font>. <font color='#00b034'>Tanaman</font> adalah satu dari berbagai sumberdaya yang ada di rumah kamu."
+  },
+  {
+   "n": 953,
+   "text": "Saat ini kebun kamu sedang dalam masa konstruksi, ini akan memproduksi tanaman sesuai interval setelahnya. Produksi tanaman akan menghasilkan efek pada beberapa oprasi kamu.<br>Ada peternakan cantik dekatmu. Apakah kamu ingin berkunjung?"
+  },
+  {
+   "n": 954,
+   "text": "Mulai pertarungan"
+  },
+  {
+   "n": 955,
+   "text": "Masuk Karakura"
+  },
+  {
+   "n": 956,
+   "text": "memasuki biara di dalam Las Noches"
+  },
+  {
+   "n": 957,
+   "text": "<font color='#00aefe'> Peralatan</font>dapat menjalani berbagai perawatan di<font color='#00aefe'> Tempat Tempa </font>:<font color='#00aefe'> Enhancement </font>, <font color='#00aefe'> refining </font>,<font color='#00aefe'> slot creation </font>, <font color='#00aefe'> slotting </font>,<font color='#00aefe'> enchanting </font>untuk meningkatkan<font color='#00aefe'> attributes </font>menjadi kemampuan pertarungan tinggi."
+  },
+  {
+   "n": 958,
+   "text": "Untuk membuktikan kamu memiliki kekuatan yang besar, Pergi ke <font color='#00aefe'> arena </font>! Bertarung dengan pemain lain menggunakan<font color='#00aefe'> ninjutsu </font>! Dapatkan manfaat sementara mempertajam skill kamu."
+  },
+  {
+   "n": 959,
+   "text": "<font color='#0276C1'>Menolak permainan tidak sehat,  pembajakan game</font><br>             <font color='#0276C1'>Melindungi kepentingan kamu, waspadalah terhadap penipuan</font><br>             <font color='#0276C1'>Mainkan permainan cukup, jangan kecanduan</font><br>             <font color='#0276C1'>Atur waktu dengan bijaksana, hidup sehat</font>"
+  },
+  {
+   "n": 960,
+   "text": "Dataran Sakura padang gurun menyembunyikan banyak rahasia dan harta! Cepat dan pergi  ke setiap <font color='#00aefe'> Daerah penjelajahan </font>Untuk menemukan harta karun! dapat<font color='#00aefe'> explore </font>sejumlah harta sekali sehari, mengambil peluang ini!"
+  },
+  {
+   "n": 961,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩st dari liga </font>turnamen telah berakhir. Silahkan menuju ke<font color='#00aefe'>Liga Nasional </font>interface untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>. <font color='#00aefe'>Ronde selanjutnya </font>dimulai pada ⟨1⟩:⟨2⟩!"
+  },
+  {
+   "n": 962,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩nd dari liga </font>turnamen telah berakhir. Silahkan menuju ke<font color='#00aefe'>Liga Nasional </font>interface untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>. <font color='#00aefe'>Ronde selanjutnya </font>dimulai pada ⟨1⟩:⟨2⟩!"
+  },
+  {
+   "n": 963,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩rd dari liga </font>turnamen telah berakhir. Silahkan menuju ke<font color='#00aefe'>Liga Nasional </font>interface untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>. <font color='#00aefe'>Ronde selanjutnya </font>dimulai pada ⟨1⟩:⟨2⟩!"
+  },
+  {
+   "n": 964,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩th dari liga </font>turnamen telah berakhir. Silahkan menuju ke<font color='#00aefe'>Liga Nasional </font>interface untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>. <font color='#00aefe'>Ronde selanjutnya </font>dimulai pada ⟨1⟩:⟨2⟩!"
+  },
+  {
+   "n": 965,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩th dari liga </font>turnamen telah berakhir. Silahkan menuju ke<font color='#00aefe'>Liga Nasional </font>interface untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>. Besok<font color='#00aefe'> Ronde ⟨1⟩st dari liga </font>tournament akan dimulai pada ⟨2⟩:⟨3⟩, siapkan dirimu!"
+  },
+  {
+   "n": 966,
+   "text": "<font color='#00aefe'> Pet </font>dapat berkembang di<font color='#00aefe'> Kandang Pet </font>. Setelah mencapai tingkat kekenyangan pet dapat<font color='#00aefe'> Mencari skill </font> dan membantu kamu dalam pertarungan. "
+  },
+  {
+   "n": 967,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩st dari W rank league </font>tournament telah berakhir, dapat Pergi ke <font color='#00aefe'>Liga Nasional </font>untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>.<font color='#00aefe'>  ronde selanjutnya </font>dimulai pada ⟨1⟩:⟨2⟩!"
+  },
+  {
+   "n": 968,
+   "text": "Hari ini<font color='#00aefe'> Ronde ⟨0⟩nd dari W rank league </font>tournament telah berakhir, dapat Pergi ke <font color='#00aefe'>Liga Nasional </font>untuk melihat babak pertandingan ini<font color='#00aefe'> Hasil </font>.<font color='#00aefe'> Ronde selanjutnya </font>dimulai pada ⟨1⟩:⟨2⟩!"
+  },
+  {
+   "n": 969,
+   "text": "Hari ini<font color='#00aefe'> W rank league </font>tournament telah berakhir, dapat Pergi ke <font color='#00aefe'> Liga Nasional </font> untuk melihat babak pertandingan ini<font color='#00aefe'> results </font>. besok <font color='#00aefe'> Ronde ⟨0⟩st dari W rank league </font>akan dimulai pada ⟨1⟩:⟨2⟩, persiapkan diri kamu!"
+  },
+  {
+   "n": 970,
+   "text": "Minggu ini<font color='#00aefe'> W rank league </font>tournament telah berakhir, dapat Pergi ke <font color='#00aefe'>  Liga Nasional </font> untuk melihat babak pertandingan ini<font color='#00aefe'> results </font>."
+  },
+  {
+   "n": 971,
+   "text": "Minggu ini<font color='#00aefe'> league </font>tournament telah berakhir, dapat Pergi ke <font color='#00aefe'> Liga Nasional </font> untuk melihat babak pertandingan ini<font color='#00aefe'> results </font>."
+  },
+  {
+   "n": 972,
+   "text": "Dari ⟨0⟩:⟨1⟩-⟨2⟩:⟨3⟩ harian besok <font color='#00aefe'> Waktu pendaftaran </font> turnamen <font color='#00aefe'> Bela diri Dunia </font>, pemain memeperisapkan diri untuk berpartisipasi dalam<font color='#00aefe'> Kejuaraan dunia bela diri </font>tidak boleh melewatkan<font color='#00aefe'> waktu pendaftaran</font>."
+  },
+  {
+   "n": 973,
+   "text": "Hari ini<font color='#00aefe'> Kejuaraan dunia bela diri top ⟨0⟩ pertandingan </font>Telah di buka waktunya<font color='#00aefe'> bertaruh </font>. Pemain dapat mengakses ke<font color='#00aefe'> arena </font>atau<font color='#00aefe'> Petunjuk cepat </font>untuk masuk<font color='#00aefe'> Turnamen Bela Diri Dunia </font> dan berpartisipasi dalam<font color='#00aefe'> taruhan </font>."
+  },
+  {
+   "n": 974,
+   "text": "Hari ini<font color='#00aefe'> Kejuaraan dunia bela diri top ⟨0⟩ pertandingan' </font><font color='#00aefe'> waktunya bertaruh </font>telah di tutup. Pertandingan sedang berlangsung, harap catat<font color='#00aefe'> hasil pertandingan </font>."
+  },
+  {
+   "n": 975,
+   "text": "Hari ini<font color='#00aefe'> Kejuaraan dunia bela diri top ⟨0⟩ pertandingan </font>telah di tutup. akses ke<font color='#00aefe'> arena </font>atau<font color='#00aefe'> Petunjuk cepat </font>untuk masuk<font color='#00aefe'> Turnamen Bela Diri Dunia </font> dan melihat<font color='#00aefe'> hasil pertandingan </font>. Kamu dapat juga berpartisipasi dalam taruhan<font color='#00aefe'> Kejuaraan dunia bela diri top ⟨1⟩ pertandingan </font><font color='#00aefe'> </font>."
+  },
+  {
+   "n": 976,
+   "text": "Hari ini<font color='#00aefe'> Kejuaraan dunia bela diri top ⟨0⟩ pertandingan' </font><font color='#00aefe'> waktunya bertaruh </font>telah berakhir. Pertandingan sedang berlangsung, harap catat<font color='#00aefe'> hasil pertandingan </font>."
+  },
+  {
+   "n": 977,
+   "text": "Perbedaan<font color='#00aefe'> Kostum </font>mempunyai perbedaan<font color='#00aefe'> kemampuan dasar </font>, dan memiliki perbedaan<font color='#00aefe'> skill ninjutsu </font>. pilih<font color='#00aefe'> Kostum </font> kamu dapat mengikuti alur pertarungan"
+  },
+  {
+   "n": 978,
+   "text": "Hari ini<font color='#00aefe'> Kejuaraan dunia bela diri top ⟨0⟩ pertandingan </font>telah di tutup. Akses ke<font color='#00aefe'> arena </font>atau<font color='#00aefe'> Petunjuk cepat </font>untuk masuk<font color='#00aefe'> Turnamen Bela Diri Dunia </font> dan melihat<font color='#00aefe'> hasil pertandingan </font>. Kamu dapat juga berpartisipasi dalam taruhan<font color='#00aefe'> Kejuaraan dunia bela diri semi-final </font><font color='#00aefe'>  </font>."
+  },
+  {
+   "n": 979,
+   "text": "Hari ini<font color='#00aefe'> Kejuaraan dunia bela diri semi-final </font><font color='#00aefe'> waktunya bertaruh </font>telah di tutup. Pertarungan sedang berlangsung, harap dicatat<font color='#00aefe'> hasil pertandingan </font>."
+  }
+ ]
+}

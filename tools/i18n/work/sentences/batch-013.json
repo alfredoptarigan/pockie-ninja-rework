@@ -1,0 +1,1855 @@
+{
+ "terms": {
+  "Adu Nasib": "Gamble of Fate",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Jembatan Api": "Fiery Ridge",
+  "Dataran Subur": "Greenwaves Plain",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Tebing Keramat": "Holywood Range",
+  "Lembah awan": "Windscent Pass",
+  "Padang Berangin": "Ashvoid Gully",
+  "Lembah Angin": "Typhoon Plateau",
+  "Goa Batu": "Boulder Cavern",
+  "Altar Lush": "Lush Altar",
+  "Crossroad": "Crossroads",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lintasan Setapak": "Eerie Passage",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "Pantai Naga": "Dragontame Coast",
+  "Amegakure": "Hidden Rain Village",
+  "Pilih": "Choose",
+  "Pemurnian": "Purification",
+  "Pasar": "Market"
+ },
+ "units": [
+  {
+   "n": 6298,
+   "text": "<font color='#0000a0'>Masuk Kandang</font>"
+  },
+  {
+   "n": 6299,
+   "text": "Masuk ke kandang pet"
+  },
+  {
+   "n": 6300,
+   "text": "mulai menaian posisi pet"
+  },
+  {
+   "n": 6301,
+   "text": "Pet kamu <font color='#00aeff'>{@0:name}</font> tidak menemukan skill apapun."
+  },
+  {
+   "n": 6302,
+   "text": "Pet tidak makan tipe makanan ini"
+  },
+  {
+   "n": 6303,
+   "text": "Skill <font color='#00ffff'>{@0:}</font><font color='#ffffff'> {@1:} </font>telah mencapai level tertinggi, tidak dapat melanjutkan belajar!"
+  },
+  {
+   "n": 6304,
+   "text": "Membuat satu panel skill pet, membutuhkan<font color='#00aeff'> {@0:value} {@1:type}</font>."
+  },
+  {
+   "n": 6305,
+   "text": "Pet kamu<font color='#00aeff'> {@0:name} </font>menemukan Skill<font color='#00aeff'> {@1:skill}</font>."
+  },
+  {
+   "n": 6306,
+   "text": "Pet kamu<font color='#00aeff'> {@0:name} </font>menemukan skill<font color='#00aeff'> {@1:skill}</font>, mengganti<font color='#00aeff'> {@2:skill}</font>."
+  },
+  {
+   "n": 6307,
+   "text": "Pet kamu telah mempelajari skill ini!"
+  },
+  {
+   "n": 6308,
+   "text": "Makanan pet yang kamu masukan salah, silahkan cari lagi."
+  },
+  {
+   "n": 6309,
+   "text": "Pet kamu{@0:name}Tidak bisa belajar skill ini"
+  },
+  {
+   "n": 6310,
+   "text": "Pet kamu {@0:name} telah melupakan skill {@1:skill}."
+  },
+  {
+   "n": 6311,
+   "text": "<font color='#6a6e70'><b> Level selanjutnya : </b>Semua bangunan yang akan di upgrade tidak bisa lebih tinggi dari<font color='#5a8300'>Lv {@0:}</font></font>."
+  },
+  {
+   "n": 6312,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya : </b>Offer<font color='#5a8300'>{@0:}</font> Poin Kemewahan.</font>"
+  },
+  {
+   "n": 6313,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya : </b>Dapat menampilkan misi <font color='#5a8300'>{@0:}</font>，menerima <font color='#5a8300'>{@1:}</font> misi harian.</font>"
+  },
+  {
+   "n": 6314,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya :</b>Setiap <font color='#5a8300'>{@0:}</font> menit memproduksi tanaman <font color='#5a8300'>{@1:}</font></font>."
+  },
+  {
+   "n": 6315,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya : </b>Di hari yang banyak angin, setiap <font color='#5a8300'>{@0:}</font> menit menghasilkan tanaman <font color='#5a8300'>{@1:}</font></font>."
+  },
+  {
+   "n": 6316,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya : </b>Kapasitas maksimal penyimpanan makanan <font color='#5a8300'>{@0:}</font>. Jumlah slot gudang yang dapat dibuka adalah <font color='#5a8300'>{@1:}</font> </font>."
+  },
+  {
+   "n": 6317,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya : </b> Jumlah slot pet yang dapat dibuka adalah <font color='#5a8300'>{@0:}</font> </font>."
+  },
+  {
+   "n": 6318,
+   "text": "<font color='#6a6e70'><b>Level selanjutnya :  </b> Jumlah slot murid yang dapat dibuka adalah <font color='#5a8300'>{@0:}</font> </font>."
+  },
+  {
+   "n": 6319,
+   "text": "<font color='#6a6e70'><b>Level Selanjutnya: </b>Penetasan telur membutuhkan waktu <font color='#5a8300'>{@0:}</font> menit</font>."
+  },
+  {
+   "n": 6320,
+   "text": "Ruangan normal ⟨0⟩"
+  },
+  {
+   "n": 6321,
+   "text": "Event sekarang"
+  },
+  {
+   "n": 6322,
+   "text": "Goal hari ini"
+  },
+  {
+   "n": 6323,
+   "text": "EXP<br><br>tips:<br>⟨0⟩.Hanya pemain<font color='#ff0000'> ⟨1⟩ teratas </font>yang dapat mengklaim penghargaan<br>⟨2⟩.Pemain hanya bisa mengklaim hadiah hari sebelumnya selama<font color='#ff0000'> ⟨3⟩:⟨4⟩—⟨5⟩:⟨6⟩ di hari kedua </font>. Tidak dapat mengklaim penghargaan pada setiap saat."
+  },
+  {
+   "n": 6324,
+   "text": "<b>Event goal：</b><br>       Berhasil menantang pemain lainnya. Kamu dapat memenangkan hadiah besar untuk mengalahkan tiga pemain teratas.<br><font color='#00aefe'> Tips：Pemain dengan peringkat lebih tinggi akan berada di atas jika jumlah kemenangan adalah sama.</font>"
+  },
+  {
+   "n": 6325,
+   "text": "<b>Event goal：</b><br>        Toko Guci, memukul guci berwarna yang memiliki persyaratan peringkat dengan<font color='#ff0000'> medal </font>. Tiga pemain teratas yang menghancurkan sebagian besar guci berwarna akan memenangkan hadiah besar."
+  },
+  {
+   "n": 6326,
+   "text": "<b>Event goal：</b><br>Dengan penjelajahan, dapatkan Proof of Demon Suppression dengan cara mensintesis dan pergi ke peta luar kekalahan boss secara acak. Tiga pemain teratas yang membunuh Bos paling akan memenangkan hadiah besar."
+  },
+  {
+   "n": 6327,
+   "text": "<b>Event goal：</b><br>Pada toko guci, gunakan <font color='#ff0000'> gold </font>untuk memukul<font color='#ff0000'> Guci berwarna misteri </font>atau<font color='#ff0000'> Guci berwarna kostum </font>. Tiga pemain teratas yang menghancurkan paling banyak guci berwarna akan memenangkan hadiah besar."
+  },
+  {
+   "n": 6328,
+   "text": "<b>Event goal：</b><br>Berhasil menantang pemain lain. Kamu dapat memenangkan hadiah besar untuk mengalahkan tiga teratas.<br><font color='#00aefe'> Tips：Pemain dengan peringkat lebih tinggi akan di atas jika jumlah kemenangan adalah sama.</font>"
+  },
+  {
+   "n": 6329,
+   "text": "Kemenangan terbanyak di tantangan arena"
+  },
+  {
+   "n": 6330,
+   "text": "Jumlah pemukul guci berwarna terbanyak dengan ketentuan rank"
+  },
+  {
+   "n": 6331,
+   "text": "Penantang Boss terbanyak"
+  },
+  {
+   "n": 6332,
+   "text": "Pemukul guci  berwarna misteri terbanyak"
+  },
+  {
+   "n": 6333,
+   "text": "Pemurnian:<br>⟨0⟩. Tarik Item atau peralatan dari tas kamu ke tampilan pemurnian.<br>⟨1⟩. Tingkat peralatan tidak berubah setelah pemurnian, penilaian atribut yang dihasilkan lagi.<br>⟨2⟩. Item peralatan putih yang tidak bisa di murnikan."
+  },
+  {
+   "n": 6334,
+   "text": "Pembuatan Slot:<br>⟨0⟩. Tarik barang peralatan dari tas kamu ke tampilan pembuatan slot untuk dibuat.<br>⟨1⟩. Item atau peralatan akan memiliki tambahan slot setelah dibuat.<br>⟨2⟩. Jumlah slot tidak dapat melebihi maksimal jumlah slot yang dimiliki oleh barang.<br>⟨3⟩. Item atau peralatan yang tidak memiliki slot  tidak dapat dibuat slot tambahan."
+  },
+  {
+   "n": 6335,
+   "text": "Penghapusan:<br>⟨0⟩. Tarik barang atau peralatan dari tas ke tampilan penghapusan untuk menghapus.<br>⟨1⟩. Kristal yang ada di barang atau peralatan akan hilang saat di konfirmasi.<br>⟨2⟩. Peralatan atau barang yang tidak memiliki kristal tidak dapat menggunakan fungsi penghapusan."
+  },
+  {
+   "n": 6336,
+   "text": "Tempat Unbind :<br>Tarik Item atau peralatan dari tas ke tampilan pusat unbind untuk di unbind.<br>Unbinding memungkinkan item terikat untuk kembali ke status unbinded.<br>Unbinded item tidak dapat melakukan unbinding."
+  },
+  {
+   "n": 6337,
+   "text": "Tahap berlapis"
+  },
+  {
+   "n": 6338,
+   "text": "Tantangan bebas"
+  },
+  {
+   "n": 6339,
+   "text": "Pukul Guci"
+  },
+  {
+   "n": 6340,
+   "text": "EXP, peralatan etc."
+  },
+  {
+   "n": 6341,
+   "text": "Item, pet dan etc."
+  },
+  {
+   "n": 6342,
+   "text": "EXP,item dan etc."
+  },
+  {
+   "n": 6343,
+   "text": "Kostum dan etc."
+  },
+  {
+   "n": 6344,
+   "text": "Peralatan dan etc."
+  },
+  {
+   "n": 6345,
+   "text": "Kamu yakin untuk menggunakan<font color='#00aeff'> Mooncake Box</font> untuk menantang Bloodboil Demon dam mendapatkan Proof of Bravery?"
+  },
+  {
+   "n": 6346,
+   "text": "Konfirmasi mengkonsumsi ⟨0⟩<font color='#ff0000'> Proof of Demon Suppression </font>untuk menantang bos?"
+  },
+  {
+   "n": 6347,
+   "text": "<font color='#000000'>Appraise</font>"
+  },
+  {
+   "n": 6348,
+   "text": "<font color='#000000'>Buat Slot</font>"
+  },
+  {
+   "n": 6349,
+   "text": "Kamu bisa membeli peralatan kelas tinggi dengan atribut menggunakan batu di sini. Ingin mencoba keberuntungan kamu?"
+  },
+  {
+   "n": 6350,
+   "text": "Untuk membuktikan kekuatan besar kamu,naik ke arena dan buat beberapa luka. Kamu akan mendapat pengalaman bertarung yang sebenarnya disana."
+  },
+  {
+   "n": 6351,
+   "text": "Hanya prajurit sejati dapat melewati uji coba kota iblis dan mengalahkan iblis !<font color='#FF3232'>Ingatlah untuk memperbaiki peralatan kamu dan persediaan pada pasokan sebelum memasukinya!</font>"
+  },
+  {
+   "n": 6352,
+   "text": "Jangan lewatkan koleksi senjata dan baju besi kami. Berbagai peralatan tersedia dengan harga terbaik."
+  },
+  {
+   "n": 6353,
+   "text": "Mythical artifacts of war ditempa dari tungku ini! Jika ini yang kamu impikan, aku dapat membuatkannya!"
+  },
+  {
+   "n": 6354,
+   "text": "Daratan Sakura diselimuti kegelapan. Hanya ninja paling kuat dapat bertahan hidup pada tantangan berat ini."
+  },
+  {
+   "n": 6355,
+   "text": "Kamu pasti lelah setelah perjuangan panjang, datang ke sini dan istirahatkan kaki kamu!"
+  },
+  {
+   "n": 6356,
+   "text": "Ingin mencoba keberuntungan kamu? Mungkin hari ini hari keberuntungan kamu!"
+  },
+  {
+   "n": 6357,
+   "text": "Membutuhkan kristal untuk membuat peralatan kamu menjadi lebih baik? Butuh senjata tersembunyi untuk meningkatkan kemampuan pertempuran kamu? Atau makanan dan ramuan? Kami punya itu semua."
+  },
+  {
+   "n": 6358,
+   "text": "Kami menjual Senjata Bersejarah sini."
+  },
+  {
+   "n": 6359,
+   "text": "Di ruang aula, kamu bisa mengisi HP dan chakra dengan mengeluarkan {@0:} batu untuk memulihkan. Konfirmasi pengisian?"
+  },
+  {
+   "n": 6360,
+   "text": "Mengeluarkan {@0:} {@1:}, mengisi {@2:} movement power?"
+  },
+  {
+   "n": 6361,
+   "text": "<font color='#0000a0'>Masuk Arena</font>"
+  },
+  {
+   "n": 6362,
+   "text": "<font color='#0000a0'>Masuk Pasar Gelap</font>"
+  },
+  {
+   "n": 6363,
+   "text": "Toko Transfer Kostum Lanjutan（NEW）"
+  },
+  {
+   "n": 6364,
+   "text": "Masuk Toko Transfer"
+  },
+  {
+   "n": 6365,
+   "text": "<font color='#0000a0'>Masuk(percobaan hari ini{@0:})</font>"
+  },
+  {
+   "n": 6366,
+   "text": "Masuk Pengorganisasian Batu"
+  },
+  {
+   "n": 6367,
+   "text": "<font color='#0000a0'>Masuk Toko Barang</font>"
+  },
+  {
+   "n": 6368,
+   "text": "Convert Tool"
+  },
+  {
+   "n": 6369,
+   "text": "<font color='#0000a0'>Masuk Tempat Tempa</font>"
+  },
+  {
+   "n": 6370,
+   "text": "<font color='#0000a0'>Redeem Enhancement Talisman（Sisa Kesempatan enhancement : {@0:}）</font>"
+  },
+  {
+   "n": 6371,
+   "text": "<font color='#0000a0'>Redeem Refining Talisman（Sisa Kesempatan refining :{@0:}）</font>"
+  },
+  {
+   "n": 6372,
+   "text": "<font color='#0000a0'>Redeem Enchantment Talisman（Sisa Kesempatan enchantment {@0:}）</font>"
+  },
+  {
+   "n": 6373,
+   "text": "<font color='#0000a0'>Redeem Slot Creation Talisman（Sisa Kesempatan slot creation ：{@0:}）</font>"
+  },
+  {
+   "n": 6374,
+   "text": "<font color='#0000a0'>Masuk Aula</font>"
+  },
+  {
+   "n": 6375,
+   "text": "<font color='#0000a0'>Masuk Lounge</font>"
+  },
+  {
+   "n": 6376,
+   "text": "<font color='#0000a0'>Memulihkan HP dan Chakra</font>"
+  },
+  {
+   "n": 6377,
+   "text": "<font color='#0000a0'>OK</font>"
+  },
+  {
+   "n": 6378,
+   "text": "<font color='#0000a0'>Memulihkan Movement Power</font>"
+  },
+  {
+   "n": 6379,
+   "text": "<font color='#0000a0'>{@0:} Pulihkan</font>"
+  },
+  {
+   "n": 6380,
+   "text": "<font color='#0000a0'>Masuk</font>"
+  },
+  {
+   "n": 6381,
+   "text": "<font color='#0000a0'>Masuk Toko Misteri</font>"
+  },
+  {
+   "n": 6382,
+   "text": "<font color='#0000a0'>Masuk Grosir</font>"
+  },
+  {
+   "n": 6383,
+   "text": "apa yang di maksud mempertahankan serangan tailed beast?"
+  },
+  {
+   "n": 6384,
+   "text": "Bergabung dan bertahan dari serangan Tailed Beasts"
+  },
+  {
+   "n": 6385,
+   "text": "Ninja muda, kenapa tidak bergabung dengan pasukan untuk melawan tailed beasts?  Kita harus mempertahankan desa kita bersama!"
+  },
+  {
+   "n": 6386,
+   "text": "Lihat Kage-level Heroes"
+  },
+  {
+   "n": 6387,
+   "text": "Disini laporan pertarungan. Mari kita lihat! Apa hadiah yang akan di berikan ?"
+  },
+  {
+   "n": 6388,
+   "text": "Masuk Five Kage Meeting Room"
+  },
+  {
+   "n": 6389,
+   "text": "Apa yang kamu ingin ketahui?"
+  },
+  {
+   "n": 6390,
+   "text": "Bagaimana menjadi Kage?"
+  },
+  {
+   "n": 6391,
+   "text": "Bagaimana mengikuti pertahanan dari serangan tailed beast?"
+  },
+  {
+   "n": 6392,
+   "text": "Tailed beast menyerang daratan! Semua ninja diundang untuk hadir di Five Kage Meeting untuk masalah darurat. Pergi dan lihat apa yang dapat kamu lakukan!"
+  },
+  {
+   "n": 6393,
+   "text": "Bagaimana untuk menang?"
+  },
+  {
+   "n": 6394,
+   "text": "<font color='#0000a0'>Masuk Pasar</font>"
+  },
+  {
+   "n": 6395,
+   "text": "Perbaiki semua"
+  },
+  {
+   "n": 6396,
+   "text": "Kamu dapat menggunakan Batu untuk membeli unappraised peralatan disini.<br><br>instruksi pembelian: Kamu can buy via the methods below.<br>⟨0⟩. Gunakan Icon beli untuk memilih item yang akan dibeli.<br>⟨1⟩. Tarik item yang ingin kamu beli ke dalam tas kamu.</font>"
+  },
+  {
+   "n": 6397,
+   "text": "Instant Refresh"
+  },
+  {
+   "n": 6398,
+   "text": "Jual semua"
+  },
+  {
+   "n": 6399,
+   "text": "Sisa waktu untuk waktu refresh berikutnya:"
+  },
+  {
+   "n": 6400,
+   "text": "Toko misteri hanya dapat dibuka di desa, Kota malaikat, dan Kota iblis!"
+  },
+  {
+   "n": 6401,
+   "text": "<font color='#FF0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a></font> mengunakan dadu dan mendapatkan nomor:<font color='#00aeff'>{@1:}</font>, total<font color='#00aeff'>{@2:}</font>poin. "
+  },
+  {
+   "n": 6402,
+   "text": "Zona Penjelajahan Tambang Batu"
+  },
+  {
+   "n": 6403,
+   "text": "Ahli Zona Penjelajahan Tambang Batu"
+  },
+  {
+   "n": 6404,
+   "text": "Zona Penjelajahan Jalan Senja"
+  },
+  {
+   "n": 6405,
+   "text": "Ahli Zona Penjelajahan Jalan Senja"
+  },
+  {
+   "n": 6406,
+   "text": "Zona Penjelajahan Jembatan Api"
+  },
+  {
+   "n": 6407,
+   "text": "Ahli Zona Penjelajahan Jembatan Api"
+  },
+  {
+   "n": 6408,
+   "text": "Zona Penjelajahan Lorong Hijau"
+  },
+  {
+   "n": 6409,
+   "text": "Ahli Zona Penjelajahan Lorong Hijau"
+  },
+  {
+   "n": 6410,
+   "text": "Zona Penjelajahan Sungai Bunga Mengalir"
+  },
+  {
+   "n": 6411,
+   "text": "Ahli Zona Penjelajahan Sungai Bunga Mengalir"
+  },
+  {
+   "n": 6412,
+   "text": "Zona Penjelajahan Dataran Subur"
+  },
+  {
+   "n": 6413,
+   "text": "Ahli Zona Penjelajahan Dataran Subur"
+  },
+  {
+   "n": 6414,
+   "text": "Zona Penjelajahan Puncak Bebatuan"
+  },
+  {
+   "n": 6415,
+   "text": "Ahli Zona Penjelajahan Puncak Bebatuan"
+  },
+  {
+   "n": 6416,
+   "text": "Zona Penjelajahan Langkah Petir"
+  },
+  {
+   "n": 6417,
+   "text": "Ahli Zona Penjelajahan Langkah Petir"
+  },
+  {
+   "n": 6418,
+   "text": "Zona Penjelajahan Tebing Keramat"
+  },
+  {
+   "n": 6419,
+   "text": "Ahli Zona Penjelajahan Tebing Keramat"
+  },
+  {
+   "n": 6420,
+   "text": "Zona Penjelajahan Lembah awan"
+  },
+  {
+   "n": 6421,
+   "text": "Ahli Zona Penjelajahan Lembah awan"
+  },
+  {
+   "n": 6422,
+   "text": "Zona Penjelajahan Padang Berangin"
+  },
+  {
+   "n": 6423,
+   "text": "Ahli Zona Penjelajahan Padang Berangin"
+  },
+  {
+   "n": 6424,
+   "text": "Zona Penjelajahan Lembah Angin"
+  },
+  {
+   "n": 6425,
+   "text": "Ahli Zona Penjelajahan Lembah Angin"
+  },
+  {
+   "n": 6426,
+   "text": "Zona Penjelajahan Lorong Naga Tersembunyi"
+  },
+  {
+   "n": 6427,
+   "text": "Ahli Zona Penjelajahan Lorong Naga Tersembunyi"
+  },
+  {
+   "n": 6428,
+   "text": "Zona Penjelajahan Goa Batu"
+  },
+  {
+   "n": 6429,
+   "text": "Ahli Zona Penjelajahan Goa Batu"
+  },
+  {
+   "n": 6430,
+   "text": "Zona Penjelajahan Altar Lush"
+  },
+  {
+   "n": 6431,
+   "text": "Ahli Zona Penjelajahan Altar Lush"
+  },
+  {
+   "n": 6432,
+   "text": "Zona Penjelajahan Crossroad"
+  },
+  {
+   "n": 6433,
+   "text": "Ahli Zona Penjelajahan Crossroad"
+  },
+  {
+   "n": 6434,
+   "text": "Zona Penjelajahan Alam Liar"
+  },
+  {
+   "n": 6435,
+   "text": "Ahli Zona Penjelajahan Alam Liar"
+  },
+  {
+   "n": 6436,
+   "text": "Zona Penjelajahan Desa Matahari"
+  },
+  {
+   "n": 6437,
+   "text": "Ahli Zona Penjelajahan Desa Matahari"
+  },
+  {
+   "n": 6438,
+   "text": "Zona Penjelajahan Hutan Cahaya"
+  },
+  {
+   "n": 6439,
+   "text": "Ahli Zona penjelajahan Hutan Cahaya"
+  },
+  {
+   "n": 6440,
+   "text": "Zona Penjelajahan Lintasan Setapak"
+  },
+  {
+   "n": 6441,
+   "text": "Ahli Zona Penjelajahan Lintasan Setapak"
+  },
+  {
+   "n": 6442,
+   "text": "Evernight City yang terbengkalai"
+  },
+  {
+   "n": 6443,
+   "text": "Ahli Zona Penjelajahan Evernight City yang terbengkalai"
+  },
+  {
+   "n": 6444,
+   "text": "Zona penjelajahan Lembah Kesunyian"
+  },
+  {
+   "n": 6445,
+   "text": "Ahli Zona penjelajahan Lembah Kesunyian"
+  },
+  {
+   "n": 6446,
+   "text": "Zona penjelajahan Jalan Kematian"
+  },
+  {
+   "n": 6447,
+   "text": "Ahli Zona penjelajahan Jalan Kematian"
+  },
+  {
+   "n": 6448,
+   "text": "Zona Penjelajahan Daratan Patah Hati"
+  },
+  {
+   "n": 6449,
+   "text": "Ahli Zona Penjelajahan Daratan Patah Hati"
+  },
+  {
+   "n": 6450,
+   "text": "Zona Penjelajahan Penjinak Naga"
+  },
+  {
+   "n": 6451,
+   "text": "Ahli Zona Penjelajahan Penjinak Naga"
+  },
+  {
+   "n": 6452,
+   "text": "Zona Penjelajahan Hutan Penjinak Naga"
+  },
+  {
+   "n": 6453,
+   "text": "Ahli Zona Penjelajahan Hutan Penjinak Naga"
+  },
+  {
+   "n": 6454,
+   "text": "Zona Penjelajahan Pantai Naga"
+  },
+  {
+   "n": 6455,
+   "text": "Zona Penjelajahan Pantai Naga  Expert"
+  },
+  {
+   "n": 6456,
+   "text": "Zona penjelajahan Amegakure"
+  },
+  {
+   "n": 6457,
+   "text": "Zona Penjelajahan Amegakure  Expert"
+  },
+  {
+   "n": 6458,
+   "text": "Penyelesaian hadiah: <br>Sekali perkembangan adalah ⟨0⟩%, kamu akan mendapatkan salah satu penghargaan di bawah ini:<br><br><br><font color='#00b035'>{@0:pet}</font><br><br><br> EXP <font color='#00b035'>{@1:} </font> (Star level bonus EXP {@2:} )</font>"
+  },
+  {
+   "n": 6459,
+   "text": "Akan mendapatkan hadiah bonus ketika perkembangan penjelajahan ⟨0⟩%!"
+  },
+  {
+   "n": 6460,
+   "text": "Memperoleh Bonus Hadiah: EXP [{@0:}]!"
+  },
+  {
+   "n": 6461,
+   "text": "Memperoleh Bonus Hadiah: Pet [ {@0:} ]</font>"
+  },
+  {
+   "n": 6462,
+   "text": "Tas Penuh, gagal untuk mendapatkan Bonus Hadiah pet!"
+  },
+  {
+   "n": 6463,
+   "text": "Menjumpai pengawal tim [{@0:}], Bersiap untuk bertarung!"
+  },
+  {
+   "n": 6464,
+   "text": "Memperoleh barang {@0:}"
+  },
+  {
+   "n": 6465,
+   "text": "Memperoleh kunci {@0:}"
+  },
+  {
+   "n": 6466,
+   "text": "Memperoleh gift coupon {@0:} "
+  },
+  {
+   "n": 6467,
+   "text": "Memperoleh pet {@0:}"
+  },
+  {
+   "n": 6468,
+   "text": "Boss"
+  },
+  {
+   "n": 6469,
+   "text": "Klaim ticket untuk mengalahkan itu"
+  },
+  {
+   "n": 6470,
+   "text": "Mencoba menambah"
+  },
+  {
+   "n": 6471,
+   "text": "Tidak ada waktu penjelajahan, tidak dapat melakukan penjelajahan."
+  },
+  {
+   "n": 6472,
+   "text": "Perkembangan zona ini telah meningkat menjadi {@0:}"
+  },
+  {
+   "n": 6473,
+   "text": "Tidak memiliki waktu untuk  percobaan penjelajahan!"
+  },
+  {
+   "n": 6474,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> gold untuk mengisi percobaan penjelajahan?"
+  },
+  {
+   "n": 6475,
+   "text": "Kamu telah menemukan tempat yang dapat menyembunyikan harta mistis, klik untuk memulai penjelajahan!"
+  },
+  {
+   "n": 6476,
+   "text": "Kamu telah mencoba semua penjelajahan di tempat ini, menghabiskan <font color='#ffffff''>{@0:}</font> {@1:} mencoba mengisi kembali?"
+  },
+  {
+   "n": 6477,
+   "text": "Klik untuk sekali penjelajahan"
+  },
+  {
+   "n": 6478,
+   "text": "Exp"
+  },
+  {
+   "n": 6479,
+   "text": "Mendapatkan bintang hasil EXP dasar dan bonus EXP atau satu tipe pet"
+  },
+  {
+   "n": 6480,
+   "text": "Ditemukan"
+  },
+  {
+   "n": 6481,
+   "text": "Pencarian di Zona Penjelajahan Tambang Batu mendapatkan"
+  },
+  {
+   "n": 6482,
+   "text": "Pencarian di Zona Penjelajahan Jalan Senja mendapatkan"
+  },
+  {
+   "n": 6483,
+   "text": "Pencarian di Zona Penjelajahan Jembatan Api mendapatkan"
+  },
+  {
+   "n": 6484,
+   "text": "Pencarian di Zona Penjelajahan Lorong Hijau mendapatkan"
+  },
+  {
+   "n": 6485,
+   "text": "Pencarian di Zona Penjelajahan Sungai Bunga Mengalir mendapatkan"
+  },
+  {
+   "n": 6486,
+   "text": "Pencarian di Zona Penjelajahan Dataran Subur mendapatkan"
+  },
+  {
+   "n": 6487,
+   "text": "Pencarian di Zona Penjelajahan Puncak Bebatuan mendapatkan"
+  },
+  {
+   "n": 6488,
+   "text": "Pencarian di Zona Penjelajahan Langkah Petir mendapatkan"
+  },
+  {
+   "n": 6489,
+   "text": "Pencarian di Zona Penjelajahan Tebing Keramat mendapatkan"
+  },
+  {
+   "n": 6490,
+   "text": "Pencarian di Zona Penjelajahan Lembah awan mendapatkan"
+  },
+  {
+   "n": 6491,
+   "text": "Pencarian di Zona Penjelajahan Selokan Ashvoid mendapatkan"
+  },
+  {
+   "n": 6492,
+   "text": "Pencarian di Zona Penjelajahan Lembah Angin mendapatkan"
+  },
+  {
+   "n": 6493,
+   "text": "Pencarian di Zona Penjelajahan Lorong Naga Tersembunyi mendapatkan"
+  },
+  {
+   "n": 6494,
+   "text": "Pencarian di Zona Penjelajahan Goa Batu mendapatkan"
+  },
+  {
+   "n": 6495,
+   "text": "Pencarian di Zona Penjelajahan Altar Lush mendapatkan"
+  },
+  {
+   "n": 6496,
+   "text": "Pencarian di Zona Penjelajahan Crossroad mendapatkan"
+  },
+  {
+   "n": 6497,
+   "text": "Pencarian di Zona Penjelajahan Alam Liar mendapatkan"
+  },
+  {
+   "n": 6498,
+   "text": "Pencarian di Zona Penjelajahan Desa Matahari mendapatkan"
+  },
+  {
+   "n": 6499,
+   "text": "Pencarian di Zona Penjelajahan Hutan Cahaya mendapatkan"
+  },
+  {
+   "n": 6500,
+   "text": "Pencarian di Zona Penjelajahan Lintasan Setapak mendapatkan"
+  },
+  {
+   "n": 6501,
+   "text": "Pencarian di Zona Penjelajahan Evernight City yang tebengkalai mendapatkan"
+  },
+  {
+   "n": 6502,
+   "text": "Pencarian di Zona Penjelajahan Soulhatter Valley mendapatkan"
+  },
+  {
+   "n": 6503,
+   "text": "Pencarian di Zona Penjelajahan Jalan Kematian mendapatkan"
+  },
+  {
+   "n": 6504,
+   "text": "Pencarian di Zona Penjelajahan Daratan Patah Hati mendapatkan"
+  },
+  {
+   "n": 6505,
+   "text": "Pencarian di Zona Penjelajahan Penjinak Naga mendapatkan"
+  },
+  {
+   "n": 6506,
+   "text": "Pencarian ahli di Zona Penjelajahan Penjinak Naga mendapatkan"
+  },
+  {
+   "n": 6507,
+   "text": "Penjelajahan Pantai Naga dan Menemukan"
+  },
+  {
+   "n": 6508,
+   "text": "Penjelajahan Amegakure dan menemukan"
+  },
+  {
+   "n": 6509,
+   "text": "Pilih"
+  },
+  {
+   "n": 6510,
+   "text": "Dasar"
+  },
+  {
+   "n": 6511,
+   "text": "Pengambilan"
+  },
+  {
+   "n": 6512,
+   "text": "Monster"
+  },
+  {
+   "n": 6513,
+   "text": "Kantong uang"
+  },
+  {
+   "n": 6514,
+   "text": "Kamu telah menggunakan percobaan penjelajahan hari ini!"
+  },
+  {
+   "n": 6515,
+   "text": "Kamu tidak cukup memiliki movement power untuk menjalankan penjelajahan ini!"
+  },
+  {
+   "n": 6516,
+   "text": "Hanya dapat mengisi penjelajahan percobaan sekali sehari,dan telah terpakai untuk hari ini!"
+  },
+  {
+   "n": 6517,
+   "text": "Kamu tidak menemukan cukup {@0:} di zone penjelajahan ini!"
+  },
+  {
+   "n": 6518,
+   "text": "Kamu tidak dapat masuk zona penjelajahan karena level belum mencukupi!"
+  },
+  {
+   "n": 6519,
+   "text": "Kamu tidak cukup memiliki Batu untuk menjalankan penjelajahan ini!"
+  },
+  {
+   "n": 6520,
+   "text": "Menghabiskan gold untuk segera refresh waktu untuk memulai penjelajahan"
+  },
+  {
+   "n": 6521,
+   "text": "Mencoba penjelajahan hari ini :"
+  },
+  {
+   "n": 6522,
+   "text": "Mulai menangkap"
+  },
+  {
+   "n": 6523,
+   "text": "Kamu tidak cukup memiliki <font color='#00aeff'> {@0:} </font>, refresh gagal!"
+  },
+  {
+   "n": 6524,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> gold untuk segera refresh?"
+  },
+  {
+   "n": 6525,
+   "text": "{@0:}"
+  },
+  {
+   "n": 6526,
+   "text": "Kamu akan mendapatkan ⟨0⟩ bintang ketika perkembangan mencapai ⟨1⟩%"
+  },
+  {
+   "n": 6527,
+   "text": "Level Zone bintang sudah max!"
+  },
+  {
+   "n": 6528,
+   "text": "☆☆☆☆☆"
+  },
+  {
+   "n": 6529,
+   "text": "★☆☆☆☆"
+  },
+  {
+   "n": 6530,
+   "text": "★★☆☆☆"
+  },
+  {
+   "n": 6531,
+   "text": "★★★☆☆"
+  },
+  {
+   "n": 6532,
+   "text": "★★★★☆"
+  },
+  {
+   "n": 6533,
+   "text": "★★★★★"
+  },
+  {
+   "n": 6534,
+   "text": "Menghabiskan mata uang permainan untuk melihat isi kartu.<br>Biaya Batu saat pertama kali, dan  biaya gold atau gift coupon untuk berikutnya!"
+  },
+  {
+   "n": 6535,
+   "text": "Kamu Hanya bisa mengintip pada ⟨0⟩ kartu setiap penjelajahan!"
+  },
+  {
+   "n": 6536,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> Batu untuk mengintip?"
+  },
+  {
+   "n": 6537,
+   "text": "Konfirmasi pengeluaran <font color='0000ff'> {@0:} </font> gold untuk mengintip?"
+  },
+  {
+   "n": 6538,
+   "text": "Peristiwa yang dapat ditemui setiap penjelajahan"
+  },
+  {
+   "n": 6539,
+   "text": "Kamu telah mencoba semua penjelajahan di tempat ini, {@0:}  {@1:} mencoba mengisi kembali?"
+  },
+  {
+   "n": 6540,
+   "text": "Tingkat penyelesaian :"
+  },
+  {
+   "n": 6541,
+   "text": "Level Bintang"
+  },
+  {
+   "n": 6542,
+   "text": "Pemeliharaan pet mengikat keterampilan berhasil"
+  },
+  {
+   "n": 6543,
+   "text": "Melupakan keterampilan mengikat"
+  },
+  {
+   "n": 6544,
+   "text": "Pet skill terikat penuh"
+  },
+  {
+   "n": 6545,
+   "text": "Tidak mengikat skill"
+  },
+  {
+   "n": 6546,
+   "text": "Tanpa dilengkapi pet, kamu tidak dapat beroperasi"
+  },
+  {
+   "n": 6547,
+   "text": "Hanya dapat memasukan pet di kandang pet!"
+  },
+  {
+   "n": 6548,
+   "text": "Skill ini ada"
+  },
+  {
+   "n": 6549,
+   "text": "Level pet terlalu tinggi!"
+  },
+  {
+   "n": 6550,
+   "text": "Semua mail"
+  },
+  {
+   "n": 6551,
+   "text": "Menerima Murid"
+  },
+  {
+   "n": 6552,
+   "text": "Meminta tolong untuk menangkap"
+  },
+  {
+   "n": 6553,
+   "text": "Guruku"
+  },
+  {
+   "n": 6554,
+   "text": "Pekerja"
+  },
+  {
+   "n": 6555,
+   "text": "Mail pemain"
+  },
+  {
+   "n": 6556,
+   "text": "Menyelamatkan teman"
+  },
+  {
+   "n": 6557,
+   "text": "Alur Event"
+  },
+  {
+   "n": 6558,
+   "text": "Sistem mail"
+  },
+  {
+   "n": 6559,
+   "text": "Hapus setingan"
+  },
+  {
+   "n": 6560,
+   "text": "﹤⟨0⟩﹥"
+  },
+  {
+   "n": 6561,
+   "text": "Aku bebas"
+  },
+  {
+   "n": 6562,
+   "text": "Efek Zona khusus"
+  },
+  {
+   "n": 6563,
+   "text": "Muridku"
+  },
+  {
+   "n": 6564,
+   "text": "Setingan pribadi"
+  },
+  {
+   "n": 6565,
+   "text": "Sistem Setting"
+  },
+  {
+   "n": 6566,
+   "text": "Mail belum terbaca"
+  },
+  {
+   "n": 6567,
+   "text": "ParryMulMulEquip% "
+  },
+  {
+   "n": 6568,
+   "text": "ParryMulMulEquip%Ex "
+  },
+  {
+   "n": 6569,
+   "text": "Salah password asli, tidak dapat mengubah password kedua"
+  },
+  {
+   "n": 6570,
+   "text": "Password sukses diubah"
+  },
+  {
+   "n": 6571,
+   "text": "Melewatkan pertarungan membutuhkan biaya <font color='#FF0000'>⟨0⟩</font> gold. Melanjutkan? <br> Kartu Skip dijual di Item Mall. Dalam<font color='#FF0000'>⟨1⟩ hari</font> kamu dapat melewatkan pertarungan arena dengan gratis."
+  },
+  {
+   "n": 6572,
+   "text": "sayang sekali, pet <font color='#0276C1'> {@0} </font> kabur!"
+  },
+  {
+   "n": 6573,
+   "text": "Selamat telah berhasil mendapatkan  pet <font color='#0276C1'> {@0} </font>!"
+  },
+  {
+   "n": 6574,
+   "text": "Rubah nama"
+  },
+  {
+   "n": 6575,
+   "text": "Buka"
+  },
+  {
+   "n": 6576,
+   "text": "Apa kamu ingin menggunakan<font color='#ff0000'> {@0:} </font> <font color='#ff0000'> {@1:} </font> untuk menghapus skill ini? Skill lain dapat dipelajari setelah ini. "
+  },
+  {
+   "n": 6577,
+   "text": "Kamu tidak memiliki cukup <font color='#ff0000'> {@0:} </font> di tas. Tidak dapat melepaskan skill!"
+  },
+  {
+   "n": 6578,
+   "text": "Cepat"
+  },
+  {
+   "n": 6579,
+   "text": "Apa kamu ingin menggunakan<font color='#ff0000'> {@0:} </font> <font color='#ff0000'> {@1:} </font> untuk mengunci skill? Mengunci skill membuat skill tidak akan hilang saat didapat skill baru!"
+  },
+  {
+   "n": 6580,
+   "text": "Kamu tidak cukup memiliki<font color='#ff0000'> {@0:} </font> didalam tas kamu, tidak dapat mengunci skill!<br> Kamu dapat menggunakan Gold atau Gift Coupon untuk membeli<font color='#ff0000'> {@0:} </font>!"
+  },
+  {
+   "n": 6581,
+   "text": "Pet Ku"
+  },
+  {
+   "n": 6582,
+   "text": "Kamu yakin untuk membuka skill ini？"
+  },
+  {
+   "n": 6583,
+   "text": "<font color='#6a6e70'><b>  Kandang Pet  </b></font>"
+  },
+  {
+   "n": 6584,
+   "text": "Makanan Favorit:"
+  },
+  {
+   "n": 6585,
+   "text": "Kategori:"
+  },
+  {
+   "n": 6586,
+   "text": "Nama："
+  },
+  {
+   "n": 6587,
+   "text": "Pertumbuhan:"
+  },
+  {
+   "n": 6588,
+   "text": "Lepas skill"
+  },
+  {
+   "n": 6589,
+   "text": "Kandang pet kamu telah mencapai level maksimal"
+  },
+  {
+   "n": 6590,
+   "text": "Kandang pet kamu telah mencapai level maksimal upgrade , harus mengupgrade level rumah"
+  },
+  {
+   "n": 6591,
+   "text": "Batu tidak mencukupi, upgrade Kandang memerlukan <font color='#ffffff'> {@1:value} </font>{@0:}."
+  },
+  {
+   "n": 6592,
+   "text": "Upgrade Kandang berhasil, menghabiskan <font color='#ffffff'> {@1:value} </font>{@0:}."
+  },
+  {
+   "n": 6593,
+   "text": "Seseorang sudah merawat pet"
+  },
+  {
+   "n": 6594,
+   "text": "Gudang Batu pihak lainnya tidak mencukupi"
+  },
+  {
+   "n": 6595,
+   "text": "Memiliki pet dirawat oleh seseorang"
+  },
+  {
+   "n": 6596,
+   "text": "Tidak bisa masuk Kandang jika level lebih rendah dari <font color='#ffffff'> {@0:} </font>"
+  },
+  {
+   "n": 6597,
+   "text": "Memberhentikan pekerja <font color='#ff6565'> {@0:} </font>"
+  },
+  {
+   "n": 6598,
+   "text": "Gudang Batu tidak mencukupi, membutuhkan <font color='#ffffff'> {@1:} </font>{@0:}."
+  },
+  {
+   "n": 6599,
+   "text": "Pemanggilan berhasil, menghabiskan <font color='#ffffff'> {@1:} </font>{@0:}."
+  },
+  {
+   "n": 6600,
+   "text": "Batu tidak mencukupi, membutuhkan <font color='#ffffff'> {@1:} </font>{@0:}."
+  },
+  {
+   "n": 6601,
+   "text": "<font color='#ff0000'> {@0:} </font> telah mulai merawat pet kamu!"
+  },
+  {
+   "n": 6602,
+   "text": "PierceMulEquip% "
+  },
+  {
+   "n": 6603,
+   "text": "PierceMulEquip%Ex "
+  },
+  {
+   "n": 6604,
+   "text": "<font color='#FF0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a></font> menunjukkan pencapaian <font color='#00aeff'>【<a href= 'event:honor|{@0:}*{@1:}'><u>{@2:}</u></a>】</font>"
+  },
+  {
+   "n": 6605,
+   "text": "<font color='#768359'>Pembangunan</font>"
+  },
+  {
+   "n": 6606,
+   "text": "<font color='#7e8f51'>Free</font>"
+  },
+  {
+   "n": 6607,
+   "text": "<font color='#bb736b'>Memiliki bermacam-macam barang</font>"
+  },
+  {
+   "n": 6608,
+   "text": "Info Telur"
+  },
+  {
+   "n": 6609,
+   "text": "Hiasan"
+  },
+  {
+   "n": 6610,
+   "text": "Periksa"
+  },
+  {
+   "n": 6611,
+   "text": "Score Arena :"
+  },
+  {
+   "n": 6612,
+   "text": "Kemenangan acak berturut-turut :"
+  },
+  {
+   "n": 6613,
+   "text": "Ranking Arena"
+  },
+  {
+   "n": 6614,
+   "text": "Rank Arena :"
+  },
+  {
+   "n": 6615,
+   "text": "Menang arena berturut-turut :"
+  },
+  {
+   "n": 6616,
+   "text": "Kemenangan rata-rata Arena :"
+  },
+  {
+   "n": 6617,
+   "text": "Teman aku"
+  },
+  {
+   "n": 6618,
+   "text": "Kamu telah menggunakan ⟨0⟩ kali pertarungan harian! Kamu dapat bertempur sampai tingkat Pemula III!"
+  },
+  {
+   "n": 6619,
+   "text": "Catatan pertarungan"
+  },
+  {
+   "n": 6620,
+   "text": "Pertarungan acak"
+  },
+  {
+   "n": 6621,
+   "text": "<font color='#000000'>Harga : </font><font color='#f82d2d'>{@0:} Gold</font>"
+  },
+  {
+   "n": 6622,
+   "text": "<font color='#000000'>Harga : </font><font color='#f82d2d'>{@0:} batu</font>"
+  },
+  {
+   "n": 6623,
+   "text": "<font color='#000000'>Harga : </font><font color='#f82d2d'>{@0:} Medal</font>"
+  },
+  {
+   "n": 6624,
+   "text": "<font color='#000000'>Membutuhkan : </font><font color='#f82d2d'>{@0:} poin achievement</font>"
+  },
+  {
+   "n": 6625,
+   "text": "<font color='#000000'>Harga : </font><font color='#f82d2d'> level {@0:}</font>"
+  },
+  {
+   "n": 6626,
+   "text": "<font color='#000000'>Harga : </font><font color='#5c7e01'>{@0:} Gold</font>"
+  },
+  {
+   "n": 6627,
+   "text": "<font color='#000000'>Harga : </font><font color='#5c7e01'>{@0:} batu</font>"
+  },
+  {
+   "n": 6628,
+   "text": "<font color='#000000'>Harga : </font><font color='#5c7e01'>{@0:} Medal</font>"
+  },
+  {
+   "n": 6629,
+   "text": "<font color='#000000'>Membutuhkan : </font><font color='#5c7e01'>{@0:} poin achievement </font>"
+  },
+  {
+   "n": 6630,
+   "text": "<font color='#000000'>Harga : </font><font color='#5c7e01'> level {@0:}</font>"
+  },
+  {
+   "n": 6631,
+   "text": "PriorityMulEquip%"
+  },
+  {
+   "n": 6632,
+   "text": "First Strike"
+  },
+  {
+   "n": 6633,
+   "text": "PriorityMulEquip%Ex"
+  },
+  {
+   "n": 6634,
+   "text": "Anggota Party<font color='#ff0000'> {@0:} </font>tidak memiliki cukup movement power, tidak dapat menantang!"
+  },
+  {
+   "n": 6635,
+   "text": "Anggota party<font color='#ff0000'> {@0:} </font>telah menggunakan semua percobaan tantangan hari ini, tidak dapat menantang!"
+  },
+  {
+   "n": 6636,
+   "text": "Kamu tidak memiliki cukup movement power, tidak dapat menantang!"
+  },
+  {
+   "n": 6637,
+   "text": "Kamu telah menggunakan semua tantangan hari ini, tidak dapat menantang!"
+  },
+  {
+   "n": 6638,
+   "text": "【{@0:}jam lalu】"
+  },
+  {
+   "n": 6639,
+   "text": "【{@0:}menit lalu】"
+  },
+  {
+   "n": 6640,
+   "text": "【{@0:}detik lalu】"
+  },
+  {
+   "n": 6641,
+   "text": "<font color='#6a6e70'><b>    Pelangi    </b></font>"
+  },
+  {
+   "n": 6642,
+   "text": "Pelangi"
+  },
+  {
+   "n": 6643,
+   "text": "Mengisi dice"
+  },
+  {
+   "n": 6644,
+   "text": "Angelic Blessing："
+  },
+  {
+   "n": 6645,
+   "text": "Diperoleh setelah mendapatkan ⟨0⟩,⟨1⟩,⟨2⟩,⟨3⟩ di Acak Dadu."
+  },
+  {
+   "n": 6646,
+   "text": "Blessing effect:"
+  },
+  {
+   "n": 6647,
+   "text": "Mengeluarkan <font color='#00aeff'>{@0:}</font> gold untuk membersihkan kutukan?"
+  },
+  {
+   "n": 6648,
+   "text": "kamu tidak dikutuk. Tidak butuh pembersihan."
+  },
+  {
+   "n": 6649,
+   "text": "Kamu dapat melanjutkan Acak Dadu!"
+  },
+  {
+   "n": 6650,
+   "text": "Efek Kutukan:"
+  },
+  {
+   "n": 6651,
+   "text": "Kutukan Iblis:"
+  },
+  {
+   "n": 6652,
+   "text": "Diperoleh setelah mendapatkan ⟨0⟩,⟨1⟩,⟨2⟩ di Acak Dadu."
+  },
+  {
+   "n": 6653,
+   "text": "Apa kamu yakin ingin mengeluarkan <font color='#00aeff'>{@0:}</font> gold untuk mendapatkan<font color='#00aeff'>⟨0⟩</font> kelebihan kesempatan dari Acak Dadu?"
+  },
+  {
+   "n": 6654,
+   "text": "Kamu telah menggunakan semua waktu pengisian!"
+  },
+  {
+   "n": 6655,
+   "text": "Low-level Blessing："
+  },
+  {
+   "n": 6656,
+   "text": "Diperoleh ketika jumlah lebih besar dari ⟨0⟩ dari Acak Dadu (Menerima ⟨1⟩,⟨2⟩)."
+  },
+  {
+   "n": 6657,
+   "text": "Low-level Curse:"
+  },
+  {
+   "n": 6658,
+   "text": "Memperoleh setelah mendapatkan nomor lebih kecil dari ⟨0⟩(Menerima ⟨1⟩)."
+  },
+  {
+   "n": 6659,
+   "text": "Acak Dadu Hari ini :"
+  },
+  {
+   "n": 6660,
+   "text": "Acak Dadu"
+  },
+  {
+   "n": 6661,
+   "text": "Kamu ingin menggunakan Adu Nasib？"
+  },
+  {
+   "n": 6662,
+   "text": "Kamu telah menggunakan semua pengisian ulang!"
+  },
+  {
+   "n": 6663,
+   "text": "Lantai tantangan berhasil"
+  },
+  {
+   "n": 6664,
+   "text": "Mencoba pukulan"
+  },
+  {
+   "n": 6665,
+   "text": "Kemenangan berturut"
+  },
+  {
+   "n": 6666,
+   "text": "Api"
+  },
+  {
+   "n": 6667,
+   "text": "Air"
+  },
+  {
+   "n": 6668,
+   "text": "Tanah"
+  },
+  {
+   "n": 6669,
+   "text": "Angin"
+  },
+  {
+   "n": 6670,
+   "text": "Petir"
+  },
+  {
+   "n": 6671,
+   "text": "Lanjutkan enhancing"
+  },
+  {
+   "n": 6672,
+   "text": "ReboundAttachEquip%"
+  },
+  {
+   "n": 6673,
+   "text": "Reflect Damage"
+  },
+  {
+   "n": 6674,
+   "text": "ReboundAttachEquip%Ex"
+  },
+  {
+   "n": 6675,
+   "text": "Mulai Merombak"
+  },
+  {
+   "n": 6676,
+   "text": "||Max(+{@0:})"
+  },
+  {
+   "n": 6677,
+   "text": "⟨0⟩.Gunakan Recast Talisman atau gold Untuk merombak kostum kamu <br>⟨1⟩.Level kostum dan jumlah tetap tidak berubah setelah melakuakn perombakan seperti Strength, Agility and Stamina Nilai akan buat kembali <font color='#ff0000'>Taruh kostum pada pasar perdagangan atau gunakan transfer kostum, Nilai perombakan akan hilang; </font><br>⟨2⟩. Skill kostum akan meningkat ⟨3⟩ level ketika setiap ⟨4⟩ status meningkat sampai batas max <br>⟨5⟩. Skill kostum akan meningkat ⟨6⟩ level ketika ⟨7⟩ status sudah maksimal."
+  },
+  {
+   "n": 6678,
+   "text": "Apakah kamu yakin untuk menggunakan <font color='0000ff'> {@0:} </font> Gold untuk membongkar kostum? "
+  },
+  {
+   "n": 6679,
+   "text": "Lanjutkan pembongkaran"
+  },
+  {
+   "n": 6680,
+   "text": "Apa kamu yakin menggunakan <font color='0000ff'> {@0:} </font> gold untuk melanjutkan pembongkaran ? "
+  },
+  {
+   "n": 6681,
+   "text": "Kekurangan. membutuhkan {@1:} {@0:type}."
+  },
+  {
+   "n": 6682,
+   "text": "Item ini tidak dapat dibongkar."
+  },
+  {
+   "n": 6683,
+   "text": "Selamat, Kostum kamu telah mencapai nilai maksimal!"
+  },
+  {
+   "n": 6684,
+   "text": "{@0:item} Nilai telah berubah:"
+  },
+  {
+   "n": 6685,
+   "text": "Hasil pembongkaran"
+  },
+  {
+   "n": 6686,
+   "text": "Bongkar"
+  },
+  {
+   "n": 6687,
+   "text": "Silahkan gunakan Recast Talisman（current number:{@0:}）"
+  },
+  {
+   "n": 6688,
+   "text": "Silahkan taruh Recast Talisman!"
+  },
+  {
+   "n": 6689,
+   "text": "Menggunakan Recast Talisman untuk membokar kembali. Apakah kamu yakin untuk menggunakan Recast Talisman？<br>Bound Recast Talisman akan membuat pembongkaran kostum bound!"
+  },
+  {
+   "n": 6690,
+   "text": "<font color='#6a6e70'><b>   Papan Pengumuman   </b></font>"
+  },
+  {
+   "n": 6691,
+   "text": "Papan Pengumuman"
+  },
+  {
+   "n": 6692,
+   "text": "Lanjutkan refining"
+  },
+  {
+   "n": 6693,
+   "text": "Biaya menggunakan gold"
+  },
+  {
+   "n": 6694,
+   "text": "Bayar menggunakan gift coupon"
+  },
+  {
+   "n": 6695,
+   "text": "Kamu yakin untuk meledakkan gedung ini?"
+  },
+  {
+   "n": 6696,
+   "text": "kamu yakin untuk membuang dekorasi?"
+  },
+  {
+   "n": 6697,
+   "text": "Membutuhkan biaya {@0: } gold"
+  },
+  {
+   "n": 6698,
+   "text": "Pilih titik untuk melepas gem: "
+  },
+  {
+   "n": 6699,
+   "text": "Kamu telah melakukan pertukaran cincin di level ini. Tidak dapat melakukan penebusan berulang!"
+  },
+  {
+   "n": 6700,
+   "text": "Movement Power"
+  },
+  {
+   "n": 6701,
+   "text": "Tambah Musuh"
+  },
+  {
+   "n": 6702,
+   "text": "Duel"
+  },
+  {
+   "n": 6703,
+   "text": "Hidup di kota"
+  },
+  {
+   "n": 6704,
+   "text": "Kamu akan kembali ke kota menggunakan pembangkitan gratis, dan HP akan menjadi ⟨0⟩% EXP karakter saat ini dan ⟨1⟩% maksimal daya tahan equip akan hilang!"
+  },
+  {
+   "n": 6705,
+   "text": "Kamu dapat meningkatkan kemampuan kamu melalui refine, menempa equip dan slot gem , dan juga dengan meningkatkan level Kostum kamu!"
+  },
+  {
+   "n": 6706,
+   "text": "Saat ini kamu mati. Pilih cara bangkit atau kamu tidak dapat melakukan tindakan apapun."
+  },
+  {
+   "n": 6707,
+   "text": "Hidup di tempat"
+  },
+  {
+   "n": 6708,
+   "text": "Menggunakan ⟨0⟩ gold, HP dan chakra akan total pulih, dan menghindari penalti mati! Tidak akan kehilangan EXP dan daya tahan equip!"
+  },
+  {
+   "n": 6709,
+   "text": "Kamu dapat tetap menggunakan gold atau gift coupon untuk Memulihkan <font color='#ff0000'> {@0:} </font> movement power hari ini (dapat memulihkan secara max dari <font color='#ff0000'>{@1:}</font> setiap hari)<br>pemulihan movement power di sini tidak akan mempengaruhi setiap hari movement power ditambahkan kembali pada ⟨0⟩:⟨1⟩."
+  },
+  {
+   "n": 6710,
+   "text": "Menambahkan"
+  },
+  {
+   "n": 6711,
+   "text": "Menggunakan gold atau gift coupon untuk menyimpan beberapa item pemulihan HP dan chakra .<br>Setelah bertarung, carrier bags secara otomatis akan Memulihkan kehilangan HP dan chakra."
+  },
+  {
+   "n": 6712,
+   "text": "saat ini sedang menjalani misi pemula, tidak dapat meninggalkan desa sebelum menyelesaikan <font color='#00b035'> [Kunjungi Toko] </font> Misi!"
+  },
+  {
+   "n": 6713,
+   "text": "Terima kasih untuk bantuan kamu. Sekarang Karakura Town dan Soul Society berada dalam kondisi"
+  },
+  {
+   "n": 6714,
+   "text": "EXP tidak dipengaruhi oleh efek bonus!"
+  },
+  {
+   "n": 6715,
+   "text": "<font color='#00ffff'>Skill telah mencapai level maksimal</font>"
+  },
+  {
+   "n": 6716,
+   "text": "<font color='#00ffff'>Perlu untuk mengupgrade prasyarat skill level</font>"
+  },
+  {
+   "n": 6717,
+   "text": "Skill point tidak mencukupi "
+  },
+  {
+   "n": 6718,
+   "text": "Aku telah berhasil mengalahkan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>, dan menangkap<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>sebagai murid aku!"
+  },
+  {
+   "n": 6719,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengalahkanku, aku akan menjadi murid dari<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>"
+  },
+  {
+   "n": 6720,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mencoba untuk menangkapku Sebagai murid, tapi gagal"
+  },
+  {
+   "n": 6721,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengalahkanku, dan mengambil muridku<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>"
+  },
+  {
+   "n": 6722,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mencoba untuk menantang aku dan merebut muridku, tetapi gagal"
+  },
+  {
+   "n": 6723,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mengalahkan aku, dan mengambil muridku<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>"
+  },
+  {
+   "n": 6724,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>mencoba menantang aku dan merampas murid ku, tapi gagal"
+  },
+  {
+   "n": 6725,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah meminta seorang teman<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> untuk menolong. Skill Kamu berada di bawah rata-rata, dan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>memiliki kebebasan kembali!"
+  },
+  {
+   "n": 6726,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah meminta seorang teman<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> untuk menolong, tetapi kamu telah dikalahkanya dengan mudah. Itu adalah tanda seorang pemenang!"
+  },
+  {
+   "n": 6727,
+   "text": "Milik aku<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Telah dikalahkan oleh<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>, aku akan menjadi murid dari<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>"
+  },
+  {
+   "n": 6728,
+   "text": "Milik aku<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah dikalahkan oleh<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>, aku akan menjadi murid dari<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>"
+  },
+  {
+   "n": 6729,
+   "text": "aku mencoba untuk menangkap<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>Sebagai murid, tapi gagal!"
+  },
+  {
+   "n": 6730,
+   "text": "Teman kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>tidak tahan penderitaan kamu, dan menyelamatkan kamu, mengalahkan pemilik kamu<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>. Kamu telah mendapatkan kebebasan!"
+  },
+  {
+   "n": 6731,
+   "text": "Teman kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>tidak tahan penderitaan kamu, dan telah berusaha menyelamatkan kamu, namun dikalahkan oleh pemilik kamu<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>!"
+  },
+  {
+   "n": 6732,
+   "text": "Max resists dicapai pada hari itu"
+  },
+  {
+   "n": 6733,
+   "text": "Max penyelamatan dicapai pada hari itu"
+  },
+  {
+   "n": 6734,
+   "text": "Kamu sekarang bebas"
+  },
+  {
+   "n": 6735,
+   "text": "Kamu pemilik murid sekarang"
+  },
+  {
+   "n": 6736,
+   "text": "Kamu telah menjadi murid"
+  },
+  {
+   "n": 6737,
+   "text": "Semua murid pihak lainnya berada di periode perlindungan mereka: sisa {@0:min} Menit {@1:sec} sec"
+  },
+  {
+   "n": 6738,
+   "text": "Nomor penangkapan sudah maksimal hari ini"
+  },
+  {
+   "n": 6739,
+   "text": "Murid-murid pihak lain berada dalam periode perlindungan, silakan coba lagi nanti. {@0:min} Menit {@1:sec} sec tersisa pada periode perlindungan"
+  },
+  {
+   "n": 6740,
+   "text": "Aku mengalahkan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>, menangkap<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>murid<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>menjadi milikku."
+  },
+  {
+   "n": 6741,
+   "text": "Pemain ini telah menjadi murid kamu!"
+  },
+  {
+   "n": 6742,
+   "text": "Kamu mengangkat lengannya melawan pemilik kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>, akhirnya mengalahkan dia dan mendapatkan kembali kebebasan kamu!"
+  },
+  {
+   "n": 6743,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah meningkat pada tangan dan mengalahkan kamu, mendapatkan kembali kebebasan!"
+  },
+  {
+   "n": 6744,
+   "text": "Kamu bangkit untuk senjata melawan pemilik kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>, tetapi telah mengajarkan pelajaran menyeluruh!"
+  },
+  {
+   "n": 6745,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>meningkat di lengannya, tetapi telah diajarkan seluruh pelajaran oleh kamu!"
+  },
+  {
+   "n": 6746,
+   "text": "Kamu menghabiskan<font color='#ff0000'> {@0:} </font>gold menebus kebebasan kamu!"
+  },
+  {
+   "n": 6747,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>menghabiskan<font color='#ff0000'> ⟨0⟩ </font>gold untuk menebus kebebasan, kamu telah memperoleh<font color='#ff0000'> {@1:} </font>gold, dan menurut perjanjian, harus membebaskan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>!"
+  },
+  {
+   "n": 6748,
+   "text": "{@0:time} <font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font> telah membayar biaya penebusan sebesar<font color='#ffffff'> {@2:} </font>gold."
+  },
+  {
+   "n": 6749,
+   "text": "Kamu telah bekerja untukr<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>selama ⟨0⟩ hari, dan bebas sekarang!"
+  },
+  {
+   "n": 6750,
+   "text": "Murid kamu<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>telah bekerja untuk kamu selama ⟨0⟩ hari, dan menurut perjanjian, kamu harus membebaskan<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>!"
+  },
+  {
+   "n": 6751,
+   "text": "Aku mencoba menantang<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>untuk menangkap<font color='#ff0000'> <a href= 'event:player|{@1:}'><u>{@1:}</u></a> </font>Sebagai murid, tapi gagal"
+  },
+  {
+   "n": 6752,
+   "text": "Pihak lain dalam periode perlindungan, sisa waktu {@0:min} Menit {@1:sec} detik "
+  },
+  {
+   "n": 6753,
+   "text": "Pihak lain tidak akan mendapatkan EXP dari penyiksaan. masih ingin melanjutkan?"
+  }
+ ]
+}

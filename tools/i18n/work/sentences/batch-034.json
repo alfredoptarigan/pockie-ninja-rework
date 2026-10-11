@@ -1,0 +1,629 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 10394,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tenten Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Tenten Kostum untuk berkesempatan medapatkan +⟨2⟩ Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10395,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Konan Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Konan Kostum untuk berkesempatan medapatkan +⟨2⟩ Konan Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10396,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Hirako Shinji Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hollowfied Hirako Shinji Kostum untuk menghasilkan +⟨2⟩ Hollowfied Hirako Shinji Kostum.</font>"
+  },
+  {
+   "n": 10397,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Abarai Renji Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Abarai Renji Kostum untuk menghasilkan +⟨2⟩ Abarai Renji Kostum.</font>"
+  },
+  {
+   "n": 10398,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gin Ichimaru Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Gin Ichimaru Kostum untuk menghasilkan +⟨2⟩ Gin Ichimaru Kostum.</font>"
+  },
+  {
+   "n": 10399,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rock Lee Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Rock Lee Kostum untuk berkesempatan medapatkan +⟨2⟩ Rock Lee* Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10400,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rangiku Matsumoto Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Rangiku Matsumoto Kostum untuk berkesempatan medapatkan +⟨2⟩ Rangiku Matsumoto Kostum.R Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10401,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shizune Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Shizune Kostum untuk berkesempatan medapatkan +⟨2⟩ Shizune Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10402,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uzumaki Naruto Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Uzumaki Naruto* Kostum untuk berkesempatan medapatkan +⟨2⟩ Uzumaki Naruto Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10403,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Haku* Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Haku Kostum untuk berkesempatan medapatkan +⟨2⟩ Haku Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10404,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Akimichi Choji Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Akimichi Choji Kostum untuk menghasilkan +⟨2⟩ Akimichi Choji Kostum.</font>"
+  },
+  {
+   "n": 10405,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Inuzuka Kiba Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Inuzuka Kiba Kostum untuk menghasilkan +⟨2⟩ Inuzuka Kiba Kostum.</font>"
+  },
+  {
+   "n": 10406,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gin Ichimar Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Gin Ichimar Kostum untuk berkesempatan medapatkan +⟨2⟩ Gin Ichimar Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10407,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momo Hinamori Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Momo Hinamori Kostum untuk berkesempatan medapatkan +⟨2⟩ Momo Hinamori* Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10408,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gaara Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Gaara Kostum untuk berkesempatan medapatkan +⟨2⟩ Gaara Kostum.Gaara Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10409,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Konan Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Konan Kostum untuk berkesempatan medapatkan +⟨2⟩ Konan Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10410,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Meng Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Little Meng Kostum untuk berkesempatan medapatkan +⟨2⟩ Little Meng* Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10411,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Aburame Shino Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Aburame Shino Kostum untuk menghasilkan +⟨2⟩ Aburame Shino Kostum.</font>"
+  },
+  {
+   "n": 10412,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Toushiro Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Toushiro Kostum untuk berkesempatan medapatkan +⟨2⟩ Toushiro Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10413,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nara Shikamaru Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Nara Shikamaru Kostum untuk menghasilkan +⟨2⟩ Nara Shikamaru Kostum.</font>"
+  },
+  {
+   "n": 10414,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi enten Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ enten Kostum untuk berkesempatan medapatkan +⟨2⟩ enten Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10415,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kusajishi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kusajishi Kostum untuk berkesempatan medapatkan +⟨2⟩ Kusajishi Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10416,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Witch Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Witch Kostum untuk menghasilkan +⟨2⟩ Witch Kostum.</font>"
+  },
+  {
+   "n": 10417,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Asuma Sarutobi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Asuma Sarutobi Kostum untuk menghasilkan +⟨2⟩ Asuma Sarutobi Kostum.</font>"
+  },
+  {
+   "n": 10418,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Witch Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Witch Kostum untuk berkesempatan medapatkan +⟨2⟩ Witch Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10419,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Ichigo Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Bomb Ichigo Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Bomb Ichigo Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10420,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩nd Hokage Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨1⟩ +⟨2⟩ ⟨3⟩nd Hokage Kostum untuk berkesempatan medapatkan +⟨4⟩ ⟨5⟩nd HokageKostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10421,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tenten Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Tenten Kostum untuk berkesempatan medapatkan +⟨2⟩ Tenten Kostum Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10422,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arisawa Tatsuki Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Arisawa Tatsuki* Kostum untuk berkesempatan medapatkan +⟨2⟩ Arisawa Tatsuki Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10423,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rock Lee Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Rock Lee Kostum untuk menghasilkan +⟨2⟩ Rock Lee Kostum.</font>"
+  },
+  {
+   "n": 10424,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Grimmjow Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Grimmjow Kostum untuk berkesempatan medapatkan +⟨2⟩ Grimmjow* Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10425,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Abarai Renji Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Abarai Renji* Kostum untuk berkesempatan medapatkan +⟨2⟩ Abarai Renji Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10426,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hyuga Nej Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hyuga Nej Kostum untuk berkesempatan medapatkan +⟨2⟩ Hyuga Nej Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10427,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Halibel Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Halibel Kostum untuk berkesempatan medapatkan +⟨2⟩ Halibel Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10428,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Rukia Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Bomb Rukia* Kostum untuk berkesempatan medapatkan +⟨2⟩ Bomb Rukia Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10429,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kuchiki Kostum untuk berkesempatan medapatkan +⟨2⟩ Kuchiki Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10430,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Jun Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Little Jun Kostum untuk berkesempatan medapatkan +⟨2⟩ Little Jun Kostum Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10431,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hyuga Neji Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hyuga Neji Kostum untuk menghasilkan +⟨2⟩ Hyuga Neji Kostum.</font>"
+  },
+  {
+   "n": 10432,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Soifon Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Soifon Kostum untuk berkesempatan medapatkan +⟨2⟩ Soifon Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10433,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Priest Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Priest Kostum untuk berkesempatan medapatkan +⟨2⟩ Priest Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10434,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arale Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Arale Kostum untuk berkesempatan medapatkan +⟨2⟩ Arale Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10435,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Haku Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Haku Kostum untuk berkesempatan medapatkan +⟨2⟩ Haku Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10436,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nelliel Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Nelliel Kostum untuk berkesempatan medapatkan +⟨2⟩ Nelliel Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10437,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Scorpion Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Scorpion Kostum untuk menghasilkan +⟨2⟩ Scorpion Kostum.</font>"
+  },
+  {
+   "n": 10438,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Hirako Shinji Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hollowfied Hirako Shinji Kostum untuk berkesempatan medapatkan +⟨2⟩ Hollowfied Hirako Shinji Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10439,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shihouin Yoruichi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Shihouin Yoruichi Kostum untuk berkesempatan medapatkan +⟨2⟩ Shihouin Yoruichi Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10440,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurotsuchi Nemu Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kurotsuchi Nemu Kostum untuk berkesempatan medapatkan +⟨2⟩ Kurotsuchi Nemu Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10441,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tsunade Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Tsunade Kostum untuk berkesempatan medapatkan +⟨2⟩ Tsunade Kostum.Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10442,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yamato Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Yamato Kostum untuk menghasilkan +⟨2⟩ Yamato Kostum.</font>"
+  },
+  {
+   "n": 10443,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurosaki Ichigo Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10444,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Witch Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10445,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ggio Vega Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10446,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi White Ichigo Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10447,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Ichigo Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10448,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ulquiorra Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10449,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi White Ulquiorra Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10450,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Ulquiorra Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10451,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Love Aikawa Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10452,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Priest Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Priest Kostum untuk berkesempatan medapatkan +⟨2⟩ Priest Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10453,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Grimmjow Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10454,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hitsugaya Toushiro Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10455,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hirako Shinji Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10456,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Hirako Shinji Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10457,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Abarai Renji Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10458,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gin Ichimaru Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10459,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Akimichi Choji Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10460,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Inuzuka Kiba Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10461,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Aburame Shino Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10462,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nara Shikamaru Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10463,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Asuma Sarutobi Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10464,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rock Lee Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10465,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hyuga Neji Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10466,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Scorpion Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10467,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yamato Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10468,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nel Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10469,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Sarugaki Hiyori Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10470,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shihouin Yoruichi Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10471,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Soifon Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10472,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Halibel Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10473,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mashiro Kuna Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10474,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shiba Kuukaku Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10475,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nanao Ise Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10476,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momo Hinamori Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10477,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rangiku Matsumoto Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10478,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Inoue Orihime Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10479,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurenai Yuuhi Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10480,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hyuga Hinata Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10481,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Chi Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10482,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shizune Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10483,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mizukage Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Mizukage Kostum untuk berkesempatan medapatkan +⟨2⟩ Mizukage Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10484,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Alice Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10485,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Priest Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10486,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ghost Lady Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10487,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Zombie Lady Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10488,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mizukage Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10489,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uzumaki Naruto Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10490,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gaara Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10491,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hatake Kakashi Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10492,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uchiha Sasuke Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10493,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uchiha Itachi Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10494,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩nd Hokage Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10495,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Orochimaru Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10496,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Zangetsu Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10497,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩rd Hokage Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10498,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Grimmjow Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10499,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Aizen Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10500,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩th Hokage Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10501,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Jiraiya Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10502,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Sakura Haruno Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10503,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arale Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10504,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yamanaka Ino Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10505,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mitarashi Anko Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10506,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Temari Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10507,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tenten Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10508,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Haku Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10509,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurotsuchi Nemu Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10510,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kusajishi Yachiru Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10511,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kotetsu Isane Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10512,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Konan Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10513,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yadomaru Sasha Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10514,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arisawa Tatsuki Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10515,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Rukia Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10516,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tsunade Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10517,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Rukia Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10518,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momochi Zabuza Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10519,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Byakuya Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10520,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nelliel Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10521,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Meng Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10522,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Jun Ketika dipakai.<br>Kostums tidak dapat di synthesiskan jika sudah mencapai level maksimal.</font>"
+  },
+  {
+   "n": 10523,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nel Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Nel Kostum untuk menghasilkan +⟨2⟩ Nel Kostum.</font>"
+  },
+  {
+   "n": 10524,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Sarugaki Hiyori Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Sarugaki Hiyori Kostum untuk menghasilkan +⟨2⟩ Sarugaki Hiyori Kostum.</font>"
+  },
+  {
+   "n": 10525,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yadomaru Sasha Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Yadomaru Sasha Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Yadomaru Sasha Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10526,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shihouin Yoruichi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Shihouin Yoruichi Kostum untuk menghasilkan +⟨2⟩ Shihouin Yoruichi Kostum.</font>"
+  },
+  {
+   "n": 10527,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arisawa Tatsuki Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Arisawa Tatsuki Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Arisawa Tatsuki Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10528,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Rukia Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Bomb Rukia Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Bomb Rukia Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10529,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tsunade Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Tsunade Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Tsunade Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10530,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Rukia Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Kuchiki Rukia Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Kuchiki Rukia Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10531,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momochi Zabuza Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Momochi Zabuza Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Momochi Zabuza Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10532,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Soifon Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Soifon Kostum untuk menghasilkan +⟨2⟩ Soifon Kostum.</font>"
+  },
+  {
+   "n": 10533,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Byakuya Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Kuchiki Byakuya Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Kuchiki Byakuya Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10534,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nelliel Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Nelliel Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Nelliel Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10535,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Meng Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Little Meng Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Little Meng Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10536,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Jun Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Little Jun Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Little Jun Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10537,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Halibel Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Halibel Kostum untuk menghasilkan +⟨2⟩ Halibel Kostum.</font>"
+  },
+  {
+   "n": 10538,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ggio Vega Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Ggio Vega Kostum untuk menghasilkan +⟨2⟩ Ggio Vega Kostum.</font>"
+  },
+  {
+   "n": 10539,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mashiro Kuna Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Mashiro Kuna Kostum untuk menghasilkan +⟨2⟩ Mashiro Kuna Kostum.</font>"
+  }
+ ]
+}

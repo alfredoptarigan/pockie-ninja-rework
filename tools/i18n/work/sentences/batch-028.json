@@ -1,0 +1,419 @@
+{
+ "terms": {
+  "Come Come Paradise": "Make Out Paradise",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Rumah": "Home",
+  "Tim Pengawal": "Guard Squad",
+  "Turnamen Bela Diri Dunia": "World Martial Arts Tournament",
+  "Liga Nasional": "National League",
+  "Ruang Bimbingan": "Guidance Room",
+  "Pasar": "Market",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Inoue Orihime": "Orihime Inoue",
+  "Aizen": "Sosuke Aizen"
+ },
+ "units": [
+  {
+   "n": 9152,
+   "text": "Woof woof! Ingin mencari harta karun? Didalam<font color='#00b034'> Exploration Zone </font><font color='#00b034'> Gerbang Naga Tersembunyi </font>, ada banyak harta karun tersembunyi. Pergilah<font color='#00b034'> explore </font>untuk mendapatkan kesempatan untuk mendapatkan berbagai<font color='#00b034'> items </font>langka, dan bahkan mungkin<font color='#00b034'> pets </font>jika kamu beruntung! Tapi hati-hati, kamu bisa memberi sinyal ke<font color='#00b034'> monster </font>yang menjaga harta karun dan memicu pertempuran.<br>Bagaimana? Sekarang coba kamu melakukan<font color='#00b034'> explorasi </font>sekali."
+  },
+  {
+   "n": 9153,
+   "text": "Woof woof! Kau datang untuk bertemu Pakkun lagi. Kali ini aku akan membiarkan kamu dalam rahasia lain. Setiap<font color='#00b034'> Zona Explorasi </font>memiliki label<font color='#00b034'> tingkat penyelesaian </font>.Ketika<font color='#00b034'> explorasi </font>mencapai<font color='#00b034'> ⟨0⟩% </font>, <font color='#00b034'> tampilan penjelajahan </font><font color='#00b034'> bintang label tingkat penyelesaian</font>akan<font color='#00b034'> menyala dengan ⟨1⟩ bintang emas </font>dan kamu akan menerima bonus hadiah khusus.<br>Kamu ingin beberapa hadiah bukan? Maka pergi<font color='#00b034'> Zona penjelajahan Gerbang Naga Tersembunyi</font>dapatkan<font color='#00b034'> tingkat penyelesaian </font>sampai<font color='#00b034'> ⟨2⟩% </font>!"
+  },
+  {
+   "n": 9154,
+   "text": "Dunia permainan di<font color='#00b034'> zona luar ruangan </font>terkadang akan mengeluarkan iblis yang berkuasa. Kamu hanya memerlukan<font color='#00b034'> Demon Proof of Suppression </font>menantang mereka. Baru-baru ini, di<font color='#00b034'> Gerbang Naga Tersembunyi </font><font color='#00b034'> Demon Brute </font>adalah seperti iblis. Mendapatkan<font color='#00b034'> Demon Proof of Suppression </font>melalui penjelajahan, dan menekan<font color='#00b034'> Demon Brute </font>untuk membuktikan keberanian kamu."
+  },
+  {
+   "n": 9155,
+   "text": "Sepertinya<font color='#00b034'> Kota Iblis </font>telah membuka jalan rahasia ke<font color='#00b034'> Karakura </font>. Apakah kamu ingin memahami rahasia terowongan ini?"
+  },
+  {
+   "n": 9156,
+   "text": "Pintu disini selalu terbuka untukmu. Kapan saja kamu akan di terima untuk melakukan tantangan di Las Noches."
+  },
+  {
+   "n": 9157,
+   "text": "<font color='#00b034'> Inoue Orihime </font> </font>ini telah ditangkap oleh<font color='#00b034'>  Aizen </font>. Untuk menolong<font color='#00b034'>  Ichigo </font>menyelamatkan<font color='#00b034'> Orihime </font>, apakah kamu mau pergi ke Las Noches dan mengalahkan Tim Pengawal<font color='#00b034'>  Gillian </font>,dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>?"
+  },
+  {
+   "n": 9158,
+   "text": "Selamat telah mengalahkan<font color='#00b034'> Gillian</font>. Bekerjalah lebih keras dimasa depan dan simpanlah<font color='#00b034'> Inoue Orihime </font>."
+  },
+  {
+   "n": 9159,
+   "text": "<font color='#00b034'> Inoue Orihime </font> </font>ini telah ditangkap oleh<font color='#00b034'>  Aizen </font>. Untuk menolong<font color='#00b034'>  Ichigo </font>menyelamatkan<font color='#00b034'> Orihime </font>, apakah kamu mau pergi ke Las Noches dan mengalahkan Tim Pengawal<font color='#00b034'>  Grimmjow </font>,dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>?"
+  },
+  {
+   "n": 9160,
+   "text": "Selamat telah mengalahkan<font color='#00b034'> Grimmjow </font>. Bekerjalah lebih keras dimasa depan dan simpanlah<font color='#00b034'> Inoue Orihime </font>."
+  },
+  {
+   "n": 9161,
+   "text": "<font color='#00b034'> Inoue Orihime </font> </font>ini telah ditangkap oleh<font color='#00b034'>  Aizen </font>. Untuk menolong<font color='#00b034'>  Ichigo </font>menyelamatkan<font color='#00b034'> Orihime </font>, apakah kamu mau pergi ke Las Noches dan mengalahkan Tim Pengawal<font color='#00b034'>  Rull </font>,dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>?"
+  },
+  {
+   "n": 9162,
+   "text": "Semangat kepahlawanan dari ancient braves telah dikendalikan oleh iblis<font color='#00b034'> Kota Iblis </font>yang terikat diluar<font color='#00b034'> Valhalla </font>. Do you wish to accept the challenge, defeat the demon  forces, and rescue the heroic spirits in the<font color='#00b034'>  Endless Sea Forests </font>?"
+  },
+  {
+   "n": 9163,
+   "text": "<font color='#00b034'> Inoue Orihime </font> </font>ini telah ditangkap oleh<font color='#00b034'>  Aizen </font>. Untuk menolong<font color='#00b034'>  Ichigo </font>menyelamatkan<font color='#00b034'> Orihime </font>, apakah kamu mau pergi ke Las Noches dan mengalahkan Tim Pengawal<font color='#00b034'>  Nnoitra </font>,dari lantai nomor <font color='#00b034'> ⟨0⟩ </font>?"
+  },
+  {
+   "n": 9164,
+   "text": "Selamat telah mengalahkan<font color='#00b034'> Nnoitra </font>. Bekerjalah lebih keras dimasa depan dan simpanlah<font color='#00b034'> Inoue Orihime </font>."
+  },
+  {
+   "n": 9165,
+   "text": "Decadent Ninjas yang bersembunyi di Decadent Nest di pinggiran Valhalla. Pergi sekarang dan hancurkan mereka."
+  },
+  {
+   "n": 9166,
+   "text": "Mengikuti aliran sesat dalam mengejar kekuasaan, ini adalah solusi yang paling menyedihkan."
+  },
+  {
+   "n": 9167,
+   "text": "  Arwah dari Roh pejuang yang telah terkunci di luar dan dikendaliakn oleh iblis jahat di<font color='#00b034'> Kota Iblis </font> Pergi ke<font color='#00b034'> Valhalla </font>. Kamu belum lulus gunakan level<font color='#00b034'> Mudah </font>pada<font color='#00b034'> Valhalla Camp</font>. Aku memiliki harapan besar padamu! Setelah berhasil dengan level<font color='#00b034'> Mudah </font> di<font color='#00b034'> Valhalla Camp </font>, Kamu dapat menantang yang level<font color='#00b034'> Sulit </font>di<font color='#00b034'> Valhalla Camp</font>. Jadi pergilah sekarang!"
+  },
+  {
+   "n": 9168,
+   "text": "Semangat kepahlawanan dari The Ancient Braves telah dikendalikan oleh setan dan dibelenggu di<font color='#00b034'> Kota Iblis</font><font color='#00b034'> Valhalla </font>. Kamu telah melewati<font color='#00b034'> Valhalla Camp </font>level<font color='#00b034'> Mudah </font>，ingin mengambil tantangan yang level<font color='#00b034'> Sulit</font>, kalahkan monster dan selamatkan roh-roh yang terpikat dalam<font color='#00b034'>  Valhalla Camp</font>?"
+  },
+  {
+   "n": 9169,
+   "text": "Untuk melatih ninja muda di pertarungan yang sebenarnya di<font color='#00b034'> Kota Malaikat </font>dan<font color='#00b034'> lima besar desa </font>telah membuka<font color='#00b034'> Arena </font>. Didalam<font color='#00b034'> Arena </font>, hanya yang menang yang mendapatkan<font color='#00b034'> medali </font>, dan didalam<font color='#00b034'> Toko Guci </font>di<font color='#00b034'> Arena </font>, bisa bermain<font color='#00b034'> lottery </font>untuk mendapatkan berbagai item langka. Jika kamu berpikir kamu tidak dapat memperoleh kemenangan di<font color='#00b034'> Arena </font>untuk sekarang, kamu juga dapat memakai emas di<font color='#00b034'> Toko Guci </font>untuk melakukan<font color='#00b034'> lottery </font>dan menukarkan item untuk meningkatkan kemampuan kamu.<br>Melalui usaha kamu sendiri, pergilah ke<font color='#00b034'> Toko Guci </font>dan melakukan<font color='#00b034'> ⟨0⟩ lotteries </font>sebelum mencari aku. Kamu akan menerima hadiah dari aku."
+  },
+  {
+   "n": 9170,
+   "text": "Dengan mengundi<font color='#00b034'> Guci Berwarna </font>, kamu dapat memperoleh barang yang berguna."
+  },
+  {
+   "n": 9171,
+   "text": "Permainan akan menyelenggarakan<font color='#00b034'> Turnamen Bela Diri Dunia</font>setiap hari. Ninja dari setiap desa akan bertarung untuk <font color='#00b034'> champion </font>. Dengan ikut partisipasi<font color='#00b034'> Turnamen Bela Diri Dunia </font>dan sukses masuk<font color='#00b034'> ⟨0⟩ </font>besar, kamu akan mendapat bonus hadiah. Sekarang daftar dan ikut partisipasi<font color='#00b034'> Kejuaraan Dunia Beladiri </font>dan melihat bagaimana kamu melakukan pertarungan dengan pesaing lain."
+  },
+  {
+   "n": 9172,
+   "text": "Selamat telah mendaftar di<font color='#00b034'> Turnamen Beladiri Dunia </font>, berharap melihat kamu mencapai hasil yang baik."
+  },
+  {
+   "n": 9173,
+   "text": "Untuk melatih kemampuan ninja muda bertempur, <font color='#00b034'> Kota Malaikat </font>dan<font color='#00b034'> lima besar desa </font>telah mengorganisir liga ninja mingguan. Menurut para ninja<font color='#00b034'> peringkat </font><font color='#00b034'> Arena </font>, <font color='#00b034'> ⟨0⟩ </font>ninja teratas akan bersaing di liga untuk kehormatan dan hadiah. Seorang<font color='#00b034'> juara </font>untuk setiap perkumpulan ditentukan setiap minggu, dan juara setiap bangsa akan berpartisipasi pada<font color='#00b034'> Liga Pemenang </font>minggu berikutnya untuk bersaing demi kehormatan tertinggi<font color='#00b034'> Juara Dunia Liga Pemenang </font>. Sekarang buka tampilan<font color='#00b034'> Liga Nasional </font>dan memahami liga secara detail."
+  },
+  {
+   "n": 9174,
+   "text": "Bagaimana perasaan kamu setelah menyaksikan<font color='#00b034'> Liga Nasional </font>? Semakin tinggi tingkat arena kamu, kelebihan skill kamu, maka hanya dapat berpartisipasi dalam tingkat<font color='#00b034'> liga </font>yang lebih tinggi (untuk hadiah yang lebih menggiurkan)."
+  },
+  {
+   "n": 9175,
+   "text": "Setelah periode pelatihan, kemampuan kamu telah meningkat jauh. Kamu dapat mencoba tantangan<font color='#00b034'> peringkat </font>yang lebih tinggi. Ketika<font color='#00b034'> peringkat </font>kamu naik, kamu bisa pergi ke<font color='#00b034'> Toko Guci </font>untuk mengaktifkan tingkat yang lebih tinggi<font color='#00b034'> Guci Berwarna </font>untuk melakukan<font color='#00b034'> lottery </font>untuk memperoleh barang langka. Sekarang pergi ke<font color='#00b034'> Arena </font>dan menjalani tantangan untuk meningkatkan<font color='#00b034'> peringkat </font>kamu ke<font color='#00b034'> Akademi I </font>."
+  },
+  {
+   "n": 9176,
+   "text": "Peringkat kamu naik menjadi<font color='#00b034'> Akademi I </font>, sekarang kamu dapat menggunakan<font color='#00b034'> Guci Berwarna Akademi </font>untuk melakukan undian. Kerja keraslah dari sekarang!"
+  },
+  {
+   "n": 9177,
+   "text": "Setelah periode pelatihan, kemampuan kamu telah meningkat jauh. Kamu dapat mencoba tantangan<font color='#00b034'> peringkat </font>yang lebih tinggi. Ketika<font color='#00b034'> peringkat </font>kamu naik, kamu bisa pergi ke<font color='#00b034'> Toko Guci </font>untuk mengaktifkan tingkat yang lebih tinggi<font color='#00b034'> Guci Berwarna </font>untuk melakukan<font color='#00b034'> lottery </font>untuk memperoleh barang langka. Sekarang pergi ke<font color='#00b034'> Arena </font>dan menjalani tantangan untuk meningkatkan<font color='#00b034'> peringkat </font>kamu ke<font color='#00b034'> Genin I </font>."
+  },
+  {
+   "n": 9178,
+   "text": "Peringkat kamu naik menjadi<font color='#00b034'> Genin I </font>, sekarang kamu dapat menggunakan<font color='#00b034'> Guci Berwarna Genin </font>untuk melakukan undian. Kerja keraslah dari sekarang!"
+  },
+  {
+   "n": 9179,
+   "text": "Setelah periode pelatihan, kemampuan kamu telah meningkat jauh. Kamu dapat mencoba tantangan<font color='#00b034'> peringkat </font>yang lebih tinggi. Ketika<font color='#00b034'> peringkat </font>kamu naik, kamu bisa pergi ke<font color='#00b034'> Toko Guci </font>untuk mengaktifkan tingkat yang lebih tinggi<font color='#00b034'> Guci Berwarna </font>untuk melakukan<font color='#00b034'> lottery </font>untuk memperoleh barang langka. Sekarang pergi ke<font color='#00b034'> Arena </font>dan menjalani tantangan untuk meningkatkan<font color='#00b034'> peringkat </font>kamu ke<font color='#00b034'> Chunin I </font>."
+  },
+  {
+   "n": 9180,
+   "text": "Peringkat kamu naik menjadi<font color='#00b034'> Chunin I </font>, sekarang kamu dapat menggunakan<font color='#00b034'> Guci Berwarna Chunin </font>untuk melakukan undian. Kerja keraslah dari sekarang!"
+  },
+  {
+   "n": 9181,
+   "text": "Kamu dapat menguasai<font color='#00b034'> Murid </font> dan membuat mereka membantu membangun <font color='#00b034'> Rumah </font>, memperbesar <font color='#00b034'>kandang pet</font><font color='#00b034'>pet </font>, berintraksi dengan<font color='#00b034'> Apprentices </font>agar kamu mendapatkan bonus EXP. setiap pemain dapat memiliki<font color='#00b034'> ⟨0⟩ </font><font color='#00b034'> Murid </font> untuk tahap awal. Dengan berlangsungnya game, kamu dapat mendatangi<font color='#00b034'> Ruang Bimbingan </font>dan membuka<font color='#00b034'> slot </font>untuk menambahkan jumlah<font color='#00b034'> murid </font> yang kamu miliki. Setelah itu<font color='#00b034'> slot murid </font>dapat digunakan, kamu juga dapat menerima<font color='#00b034'>Apprentice Panel Opening Book </font>, untuk dapat membuka<font color='#00b034'> slot</font>. Lalu Jumlah of<font color='#00b034'> jumlah murid akan bertambah menjadi </font>to<font color='#00b034'> ⟨1⟩ </font>."
+  },
+  {
+   "n": 9182,
+   "text": "Hanya dengan mengaktifkan lebih<font color='#00b034'> slot tombol murid </font>kamu dapat menjalankan lebih banyak<font color='#00b034'> murid </font>."
+  },
+  {
+   "n": 9183,
+   "text": "Kamu dapat mengambil<font color='#00b034'> murid </font>didalam game untuk membantu kamu membangun<font color='#00b034'> rumah </font>kamu, menyimpan<font color='#00b034'> kandang pet </font>di belakang<font color='#00b034'> pets </font>dan pekerjaan lain. Kamu juga dapat memperoleh bonus hadiah EXP dengan berinteraksi dengan<font color='#00b034'> murid </font>kamu. Hanya jika mereka kamu kalahkan di<font color='#00b034'> Arena </font>bisa kamu tangkap untuk dijadikan<font color='#00b034'> murid </font>. Sekarang pergilah untuk mencoba menangkap<font color='#00b034'> murid </font>, dan miliki<font color='#00b034'> ⟨0⟩ </font><font color='#00b034'> murid </font>."
+  },
+  {
+   "n": 9184,
+   "text": "Berhasil memiliki ⟨0⟩<font color='#00b034'> murid </font>. Semakin banyak murid yang kamu miliki, semakin cepat pembangunan<font color='#00b034'> rumah </font>kamu dan<font color='#00b034'> pets </font>."
+  },
+  {
+   "n": 9185,
+   "text": "<font color='#00b034'> Item mall </font>didalam game memiliki banyak item langka seperti<font color='#00b034'> makanan </font>, <font color='#00b034'> Gems </font>dan<font color='#00b034'> buku-buku skill pet </font>yang dapat meningkatkan kemampuan kamu untuk menjadi lebih baik dalam bermain. Hanya mengeluarkan beberapa<font color='#00b034'> gift coupon </font>atau<font color='#00b034'> gold </font>untuk membeli item ini, dan<font color='#00b034'> item mall </font>memiliki item yang dapat dibeli dengan<font color='#00b034'> gift coupon </font>. Sekarang bukalah tampilan<font color='#00b034'> item mall </font>dan beli item apa saja sebelum mencari aku."
+  },
+  {
+   "n": 9186,
+   "text": "Gunakan<font color='#00b034'> Barang Mall </font>dengan bijaksana untuk lebih menunjang kamu dalam bermain."
+  },
+  {
+   "n": 9187,
+   "text": "<font color='#00b034'> Makanan </font>dalam game dapat digunakanuntuk meningkatkan<font color='#00b034'> atribut </font>pemain dengan jangka waktu. Aku mempunyai ⟨0⟩<font color='#00b034'> makanan </font>untuk kamu disini. Cari aku dan lihat atribut kamu nanti akan meningkat setelah menggunakan makanan."
+  },
+  {
+   "n": 9188,
+   "text": "Gunakan<font color='#00b034'> makanan </font>dengan bijaksana untuk menaikkan kemampuan kamu jadi kamu dapat menantang lawan yang lebih tangguh."
+  },
+  {
+   "n": 9189,
+   "text": "Kamu akan menemukan<font color='#00b034'> pet kecil </font>selama menjelajahi permainan. Mereka tidak lucu, tapi sahabat setia dalam pertempuran. Tidak kah kamu ingin memiliki<font color='#00b034'> pet </font>sendiri? Aku memiliki sebuah<font color='#00b034'> Bunga Matahari kecil </font>untuk aku berikan kepadamu.<br>Buka ranselmu dan masukkan pet pada masing-masing slot equipment, dan dia akan ikut bertempur dengan kamu. Perlakukan dengan baik!"
+  },
+  {
+   "n": 9190,
+   "text": "Pet sangat dapat membantu kamu dalam pertempuran. Beberapa pet bahkan dapat belajar ketrampilan unik mereka sendiri, sehingga kamu harus memperhatikan perkembangan pet kamu."
+  },
+  {
+   "n": 9191,
+   "text": "Tidak perduli seberapa baik sebuah pet, dia tidak akan berguna jika tidak dilatih.<br><font color='#00b034'> Kandang pet </font>di kota utama adalah tempat untuk membesarkan pet. Pet hanya bisa mendapat EXP disini. Setelah EXP terkumpul dengan jumlah tertentu, kamu dapat menaikkan levelnya serta kesempatan untuk dapat menemukan skill unik.<br>Sekarang simpan pet kedalam<font color='#00b034'> kandang pet </font>."
+  },
+  {
+   "n": 9192,
+   "text": "Dengan perawatan yang lebih dan kasih sayang dalam membesarkan pet kamu, pet kamu akan menjadi sebuah keuntungan besar untukmu."
+  },
+  {
+   "n": 9193,
+   "text": "Ingin tahu perkembangan kamu di dunia game? Kamu bisa melihat dari<font color='#00b034'> peringkat </font>. Dalam game peringkat menyediakan data statistik secara rinci, memungkinkan kamu memahami sedikit permainan sendiri. Sekarang buka tampilan<font color='#00b034'> ikon tombol pengarah </font><font color='#00b034'> peringkat </font>untuk melihat posisi kamu."
+  },
+  {
+   "n": 9194,
+   "text": "Cari tahu perkembangan kamu di game. Perhatikan peringkat dan amati perbedaan kamu dengan pemain lainnya untuk mendapatkan pengalaman dengan mudah."
+  },
+  {
+   "n": 9195,
+   "text": "Kekuatan bergerak dapat digunakan terbatas setiap hari. Sekali semua itu digunakan, kamu dapat menghabiskan baru di aula untuk berpartisipasi dalam pelatihan untuk mendapatkan EXP.<br>ketika menjalankan pertarungan otomatis di aula, jika kamu keluar dari permainan, batu yang dibayarkan tidak akan dikembalikan. EXP yang kamu dapat juga hanya sebatas pada saat sebelum kamu keluar permainan.<br>Sekarang masuklah ke aula, dan lakukan latihan sekali!"
+  },
+  {
+   "n": 9196,
+   "text": "Gunakan fungsi pertarungan aula otomatis dengan bijaksana untuk mempercepat pertumbuhan kamu!"
+  },
+  {
+   "n": 9197,
+   "text": "Permainan ini banyak memiliki<font color='#00b034'> items </font>yang menarik. Kadang kamu akan mendapatkan<font color='#00b034'> equipment </font>atau<font color='#00b034'> item </font>yang tidak cocok untuk kamu. Kamu dapat menjualnya ke pemain lain melalui<font color='#00b034'> pasar perdagangan </font>. Klik pada<font color='#00b034'> ikon tombol pengarah </font><font color='#00b034'> Pasar perdagangan </font>untuk membuka tampilan<font color='#00b034'> pasar perdagangan </font>dan kamu lihat<font color='#00b034'> item </font>yang dijual saat ini."
+  },
+  {
+   "n": 9198,
+   "text": "Menelusuri<font color='#00b034'> Pasar perdagangan </font>? Kamu tidak akan pernah tahu kapan bisa menemukan<font color='#00b034'> equipment </font>dan<font color='#00b034'> item </font>yang cocok untuk kamu."
+  },
+  {
+   "n": 9199,
+   "text": "<font color='#00b034'> Toko </font><font color='#00b034'> equipment </font>mungkin berkualitas baik, tapi dibandingkan<font color='#00b034'> equipment </font>yang<font color='#00b034'> ditingkatkan </font>, itu masih kurang. Didalam permainan<font color='#00b034'> senjata </font>dan<font color='#00b034'> pelindung </font>dapat dibawa ke aku untuk<font color='#00b034'> ditingkatkan </font>untuk meningkatkan<font color='#00b034'> attack </font>dan<font color='#00b034'> defense </font>nya.<font color='#00b034'> Peningkatan Equipment </font>ada kemungkinan untuk gagal, tapi tidak akan mengurangi level equipment yang sudah<font color='#00b034'> ditingkatkan </font>.Aku dapat melakukan peningkatan beberapa kali untuk kamu tanpa biaya, cobalah meningkatkansetiap bagian equipment untuk ke level ⟨0⟩."
+  },
+  {
+   "n": 9200,
+   "text": "Hanya dengan<font color='#00b034'> meningkatkan </font>equipment ke level yang maksimal, dapat diwujudkan potensial maksimal mereka."
+  },
+  {
+   "n": 9201,
+   "text": "Didalam<font color='#00b034'> Toko </font>, untuk membeli<font color='#00b034'> equipment </font><font color='#00b034'> kualitas tingg </font>adalah hal yang sangat beruntung. Tapi kadang equipment ini mempunyai<font color='#00b034'> atribut </font>yang tidak kamu inginkan, tipe<font color='#00b034'> equipment </font>ini  dapat dibawa ke aku untuk<font color='#00b034'> perbaikan </font>.<font color='#00b034'> Perbaikan </font>memungkinkan untuk regenerasi<font color='#00b034'> attributes </font>equipment.<br>Setelah mendengar omongan aku begitu lama,jika kamu memiliki equipment seperti itu, berikan kepada aku sekarang sehingga aku bisa<font color='#00b034'> perbaiki </font>itu untuk kamu secara gratis."
+  },
+  {
+   "n": 9202,
+   "text": "Through<font color='#00b034'> refining </font>, equipment<font color='#00b034'> attributes </font>can be reset to ones suitable for you. You won't have to find another piece of<font color='#00b034'> orange </font>atau<font color='#00b034'> gold </font><font color='#00b034'>equipment this way </font>."
+  },
+  {
+   "n": 9203,
+   "text": "Permainan ini memiliki berbagai macam<font color='#00b034'> Gems </font>, namun dengan tingkat yang berbeda, kamu akan melihat<font color='#00b034'> Gems </font>level rendah tidak cocok untuk equipment kamu saat ini. Saat ini kamu dapat menggunakan fungsi<font color='#00b034'> Sintesis </font>untuk<font color='#00b034'> menggabungkan </font><font color='#00b034'> Gems </font> level rendah menjadi<font color='#00b034'> Gems </font>level tinggi. Ini dia ⟨0⟩<font color='#00b034'> Gems Level ⟨1⟩  </font>; gunakan fungsi<font color='#00b034'> Sintesis </font>dan gabungkan<font color='#00b034'> Gems Level ⟨2⟩ </font>menjadi<font color='#00b034'> Gems Level ⟨3⟩. </font>."
+  },
+  {
+   "n": 9204,
+   "text": "Tidak, hanya dapat kamu gabungkan<font color='#00b034'> Gems </font> level tinggi dengan metode khusus, kadang-kadang kamu juga dapat secara acak menggabungkan<font color='#00b034'> Gems </font> kualitas atas."
+  },
+  {
+   "n": 9205,
+   "text": "Di<font color='#00b034'> equipment </font>kamu, kamu dapat<font color='#00b034'> membuat slot </font>. Hanya<font color='#00b034'> equipment </font>dengan terdapat slot didalamnya yang dapat dimasukkan<font color='#00b034'> Gems </font>untuk meningkatkan. Jika kamu memiliki equipment kamu ingin<font color='#00b034'> membuat slot </font>didalamnya, aku dapat membuatkan kamu dengan gratis."
+  },
+  {
+   "n": 9206,
+   "text": "Sekarang kamu tau harus bagaimana untuk<font color='#00b034'> membuat slot </font>. Temui aku jika kamu telah mendapatkan equipmen yang berharga."
+  },
+  {
+   "n": 9207,
+   "text": "Slot equipment yang dibuat harus dimasukkan dengan<font color='#00b034'> Gems </font>agar menjadi efektif. Sebelum<font color='#00b034'> memasukkan slot </font>, harap diperhatikan bahwa<font color='#00b034'> Gems </font>harus memenuhi syarat level. Harus melampaui tingkat pemakaian peralatan itu ke tempatnya masing-masing<font color='#00b034'> Gems </font>. Ketika memasang<font color='#00b034'> Gems </font>, harap diperhatikan bahwa<font color='#00b034'> Gems </font>yang berhubungan dengan status utama kamu. Berikan aku equipment nanti akan aku buat slot untuk kamu dan<font color='#00b034'> beberapa </font>slot yang cocok dimasukkan<font color='#00b034'> Gems </font>."
+  },
+  {
+   "n": 9208,
+   "text": "Ini sebuah equipmen yang mempunyai slot<font color='#00b034'> Gems </font>. Untuk equipmen kamu agar mendapat bonus kemampuan, kamu hanya cukup memasukkannya ke dalam slot<font color='#00b034'> Gems </font>."
+  },
+  {
+   "n": 9209,
+   "text": "Ada banyak<font color='#00b034'> Kostum </font>yang menarik di dalam game.<font color='#00b034'> Kostum </font>menentukan level kemampuan awal kamu. Sebuah perbedaan kemampuan yang sangat baik ada diantara Kostum<font color='#00b034'> tingkat yang rendah </font>dan<font color='#00b034'> tingkat yang tinggi </font>.<br>Gunakan beberapa<font color='#00b034'> Kostum </font>yang aku berikan untuk digabung menjadi sebuah<font color='#00b034'> Kostum level ⟨0⟩ </font>."
+  },
+  {
+   "n": 9210,
+   "text": "Hanya jika kamu meng-upgrade level<font color='#00b034'> Kostum </font>, kamu dapat meningkatkan atribut dasar milikmu. Level <font color='#00b034'> Kostum </font>meningkat hanya dapat dilakukan dengan melakukan sintesis dengan resep khusus."
+  },
+  {
+   "n": 9211,
+   "text": "Bagian dari<font color='#00b034'> perbaikan </font>dan<font color='#00b034'> memberikan slot kristal </font>, kamu juga mampu menjalani<font color='#00b034'> memikat </font>untuk meningkatkan kemampuan<font color='#00b034'> equipment </font>. Hanya dengan mendapatkan<font color='#00b034'> potongan-potongan dari equipment </font>masing-masing<font color='#00b034'> batu perbaikan </font>dan kamu bisa membawanya ke aku untuk dilakukan<font color='#00b034'> perbaikan </font>.<br>Dengan<font color='#00b034'> Batu Perbaikan Senjata </font>ini adalah untuk kamu memperbaiki<font color='#00b034'> senjata </font>kamu."
+  },
+  {
+   "n": 9212,
+   "text": "Lihatlah<font color='#00b034'> senjata </font><font color='#00b034'> atribut armor break </font>? Ini sebuah efek yang<font color='#00b034'> indah </font>.<br><font color='#00b034'> Menggali </font>di luar ruangan yang akan menghasilkan kesempatan untuk memperoleh berbagai<font color='#00b034'> batu-batu yang indah </font>."
+  },
+  {
+   "n": 9213,
+   "text": "Matchmaker ada di deep secret tunnel. Temui dia dan tebus Lover's Ring untuk meningkatkan atribut yang lebih baik! Jangan lewatkan kesempatan ini~!"
+  },
+  {
+   "n": 9214,
+   "text": "Kamu dapat menggunakan ring of various grade, Dari penembusan Lover's Ring dengan nilai atribut yang lebih tinggi. Cepat, sekarang atau tidak akan pernah."
+  },
+  {
+   "n": 9215,
+   "text": "Selamat atas tercapainya Level<font color='#00b034'> ⟨0⟩ </font>. ASebagai hadiah untuk usaha kamu, ketika kamu mencapai Level<font color='#00b034'> ⟨1⟩ </font>, <font color='#00b034'> ⟨2⟩ </font>, <font color='#00b034'> ⟨3⟩ </font>, <font color='#00b034'> ⟨4⟩ </font>and<font color='#00b034'> ⟨5⟩ </font>, <font color='#00b034'> sistem </font>akan menghadiahkan kamu dengan<font color='#00b034'> Gift Box </font>.<br>Bukalah tampilan<font color='#00b034'> Gift Box </font>dan ambil dengan<font color='#00b034'> Gift Box sesuai level </font>, kotakmu adalah<font color='#00b034'> Gift Box Level ⟨6⟩ </font>."
+  },
+  {
+   "n": 9216,
+   "text": "Ambil item kamu di dalam<font color='#00b034'> Gift Box Level ⟨0⟩  </font> kamu? Setelah diambil<font color='#00b034'> Gift Box </font>dalam game, <font color='#00b034'> Gift Box </font>diberikan<font color='#00b034'> game masih berjalan </font>dan<font color='#00b034'> items </font>akan diberikan ke pemain.<br>didalam game<font color='#00b034'> Gift Box </font>dibagi menjadi<font color='#00b034'> level Gift Box </font>, <font color='#00b034'> Gift Box online </font>, <font color='#00b034'> Gift Box harian </font>dan<font color='#00b034'> Gift Box pemain </font>. Memenuhi<font color='#00b034'> Syarat </font>untuk mengambil."
+  },
+  {
+   "n": 9217,
+   "text": "Selamat atas tercapainya Level<font color='#00b034'> ⟨0⟩ </font>. Sebagai hadiah untuk usaha kamu, ketika kamu mencapai Level<font color='#00b034'> ⟨1⟩ </font>, <font color='#00b034'> ⟨2⟩ </font>, <font color='#00b034'> ⟨3⟩ </font>, <font color='#00b034'> ⟨4⟩ </font>and<font color='#00b034'> ⟨5⟩ </font>, <font color='#00b034'> sistem </font>akan menghadiahkan kamu dengan<font color='#00b034'> Gift Box </font>.<br>Bukalah tampilan<font color='#00b034'> Gift Box </font>dan ambil dengan<font color='#00b034'> Gift Box sesuai level </font>, kotakmu adalah<font color='#00b034'> Gift Box Level ⟨6⟩ </font>."
+  },
+  {
+   "n": 9218,
+   "text": "Jiraiya menerbitkan sebuah buku baru berjudul Come Come Paradise. Banyak bab dari buku ini telah dihapus oleh editor karena berbagai alasan. Jadi versi yang dipublikasikan tidak lengkap ... ... Semoga Kamu dapat menemukan naskah asli!"
+  },
+  {
+   "n": 9219,
+   "text": "Nah, Volume I sepertinya sudah ada sedikit revisi. Tapi masih ada beberapa perbedaan!"
+  },
+  {
+   "n": 9220,
+   "text": "Sekarang aku bisa melihat apa yang terjadi di dalam Jilid II! bagaimana menarik"
+  },
+  {
+   "n": 9221,
+   "text": "Sekarang saya bisa menyelesaikan membaca ~! Terima kasih atas bantuan Kamu. Kini Come Come Paradise sekarang milik kamu!"
+  },
+  {
+   "n": 9222,
+   "text": "Rock Lee menyukai curry, yang dibuat oleh seorang wanita tua. Selain binaraga, dikatakan memiliki kekuatan perjalanan angkasa! Di atas semua, Kamu akan dihormati dengan gelar khusus jika Kamu dapat menyelesaikan percobaan dan mendapat curry di panah sebelah kiri ini!"
+  },
+  {
+   "n": 9223,
+   "text": "Selamat. Kamu telah menyelesaikan ujian pertama dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9224,
+   "text": "Kamu telah menyelesaikan tugas pertama. Pertarungan api untuk para pemuda~!"
+  },
+  {
+   "n": 9225,
+   "text": "Selamat. Kamu telah menyelesaikan ujian kedua dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9226,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas kedua. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9227,
+   "text": "Selamat. Kamu telah menyelesaikan ujian ketiga dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9228,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas ketiga. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9229,
+   "text": "Selamat. Kamu telah menyelesaikan ujian keempat dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9230,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas keempat. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9231,
+   "text": "Selamat. Kamu telah menyelesaikan ujian kelima dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9232,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas kelima. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9233,
+   "text": "Selamat. Kamu telah menyelesaikan ujian keenam dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9234,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas keenam. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9235,
+   "text": "Selamat. Kamu telah menyelesaikan ujian ketujuh dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9236,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas ketujuh. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9237,
+   "text": "Selamat. Kamu telah menyelesaikan ujian kedelapan dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9238,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas Kedelapan. \nKamu akan menerima curry yang tersisa dan akan diberikan dengan gelar jika Anda menyelesaikan semua tugas saya!"
+  },
+  {
+   "n": 9239,
+   "text": "Selamat. Kamu telah menyelesaikan ujian kesembilan dari Curry in Life.<br>Kamu akan menerima Curry in Life jika kamu menyelesaikan ujian ini!"
+  },
+  {
+   "n": 9240,
+   "text": "Selamat. Kamu sudah menyelesaikan tugas kesembilan. Ini adalah. Selesaikan ini dan kamu akan mendapatkan Semangkok kare!"
+  },
+  {
+   "n": 9241,
+   "text": "Selamat. Kamu telah menyelesaikan ujian terakhir!<br>Kamu sangat bergairah seperti Rock Lee, jadi curry milik kamu sekarag!"
+  },
+  {
+   "n": 9242,
+   "text": "  Selain bertani, ada fasilitas yang penting dalam rumah mu, yaitu <font color='#00b034'>Gudang</font>. Gudang dapat menyimpan hasil panen kamu."
+  },
+  {
+   "n": 9243,
+   "text": "Sudah selesai membangun gudang?"
+  },
+  {
+   "n": 9244,
+   "text": "Tarik murid mu ke bangunan yang sedang dibangun untuk mempercepat. Tentu saja hal ini juga akan dikenakan biaya beberapa sumber daya."
+  },
+  {
+   "n": 9245,
+   "text": "Bagaimana kabarmu? Apakah lebih cepat untuk membangun dengan bantuan murid?"
+  },
+  {
+   "n": 9246,
+   "text": "Level semua bangunan tidak dapat melebihi level rumahmu. Jadi, sangat penting untuk meng-upgrade rumahmu."
+  },
+  {
+   "n": 9247,
+   "text": "Selamat! Rumah kamu telah di upgrade! Ingat, fasilitas lain tidak bisa naik level tanpa meng-upgrade rumahmu."
+  },
+  {
+   "n": 9248,
+   "text": "  Sekarang rumahmu terlihat lebih baik, tapi masih tampak kosong. Cobalah untuk membangun <font color='#00b034'>Ruang penetasan</font>. Kamu dapat menetaskan telur setelah memiliki<font color='#00b034'>Ruangan penetasan</font>!"
+  },
+  {
+   "n": 9249,
+   "text": "Kamu dapat menetaskan telur setelah memiliki ruang penetasan. Cukup dengan meletakkan telur ke ruang penetasan untuk memulai penetasan."
+  },
+  {
+   "n": 9250,
+   "text": " Selain Bertani, <font color='#00b034'>Kincir angin</font> juga dapat menghasilkan panen. Meskipun <font color='#00b034'>Kincir angin</font> tidak akan memiliki tanaman dalam keadaan biasa, tetapi pada hari berangin,<font color='#00b034'>Kincir angin</font> dapat menghasilkan panen yang lebih."
+  },
+  {
+   "n": 9251,
+   "text": " Setelah membangun kincir angin, Kamu dapat memperoleh panen bahkan di hari berangin!"
+  }
+ ]
+}

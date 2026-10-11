@@ -1,0 +1,1438 @@
+{
+ "terms": {
+  "Kakashi": "Kakashi Hatake",
+  "Kantung Batu": "Stone Pouch",
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "Kota Malaikat": "Angel City",
+  "Pantai Naga": "Dragontame Coast",
+  "Latihan Ninjutsu": "Ninjutsu Training",
+  "Pilih": "Choose",
+  "Ninja Pulau Kuno": "Ancient Island Ninja",
+  "Kembali": "Return",
+  "Rumahku": "My Home",
+  "Kue bulan": "Mooncake",
+  "Aizen": "Sosuke Aizen",
+  "Earthwing Dragon": "Earth Pterosaur",
+  "Frostwing Dragon": "Ice Pterosaur",
+  "Uesuki Saki": "Saki Uesugi",
+  "Greedy Bandit Chief": "Greedy Bandit",
+  "Twin Head Dragon": "Double Headed Dragon",
+  "Giant Centipede": "Huge Centipede",
+  "Scarlet Bandit": "Scarlet",
+  "Bullheaded Champ": "Bullhead Demon"
+ },
+ "units": [
+  {
+   "n": 4159,
+   "text": "Lawan kamu saat ini dapat tantangan ditampilkan di daerah atas."
+  },
+  {
+   "n": 4160,
+   "text": "<font color='#00b034'>Klik </font>untuk memilih lawan pertarungan!"
+  },
+  {
+   "n": 4161,
+   "text": "<b>Klik<font color='#00b034'>Gambar pemain yang bercahaya</font> untuk menantang BOSS<br></b>"
+  },
+  {
+   "n": 4162,
+   "text": "<font color='#00b034'>Info arena </font>kamu saat ini ditampilkan disini. Saat ini kamu dapat mengkonfirmasi<font color='#00b034'> personal rank </font>, <font color='#00b034'> table ranking </font>, <font color='#00b034'> skor </font>, <font color='#00b034'> medal count </font>dan<font color='#00b034'> Kemenangan berturut-turut </font>."
+  },
+  {
+   "n": 4163,
+   "text": "<b>Klik disini untuk<font color='#00b034'> Mulai Bertanding </font></b>"
+  },
+  {
+   "n": 4164,
+   "text": "<font color='#00b034'> PK </font><font color='#00b034'> rank boss </font>!"
+  },
+  {
+   "n": 4165,
+   "text": "Klik untuk memulai<font color='#00b034'> pemecahan guci untuk mendapatkan hadiah </font>."
+  },
+  {
+   "n": 4166,
+   "text": "<font color='#00b034'> Skor </font>kamu saat ini ditampilkan disini. Kemenangan pertarunagn kamu akan meningkatkan<font color='#00b034'> Skor </font>, dan disaat<font color='#00b034'> skor </font>kamu memasuki<font color='#00b034'> area promosi </font>, kamu dapat menantang <font color='#00b034'>rank boss </font>."
+  },
+  {
+   "n": 4167,
+   "text": "Klik pada [<font color='#00b034'>Masuk Desa</font>] Untuk kembali ke Desa."
+  },
+  {
+   "n": 4168,
+   "text": "<b>Klik untuk membeli<font color='#00b035'> Child Armor </font></b>"
+  },
+  {
+   "n": 4169,
+   "text": "Klik untuk<font color='#00b034'> konfirmasi </font>pembelian"
+  },
+  {
+   "n": 4170,
+   "text": "<b>Klik untuk membeli <font color='#00b034'> Potion </font></b>"
+  },
+  {
+   "n": 4171,
+   "text": "Klik untuk membeli<font color='#00b035'> weapons </font>. Klik untuk menutup<font color='#00b035'> senjata tumpul </font>, <font color='#00b035'> Senjata tajam</font>dan<font color='#00b035'> sarung tinju </font>. hati hati selama membeli; kamu tidak dapat menggunakan senjata yang tidak cocok dengan kamu."
+  },
+  {
+   "n": 4172,
+   "text": "Kamu tidak dapat menggunakan fungsu Gift Box sekarang"
+  },
+  {
+   "n": 4173,
+   "text": "Tidak dapat membuka petunjuk misi selama masih tahap newbie!"
+  },
+  {
+   "n": 4174,
+   "text": "Kamu sedang menjalani<font color='#00b034'> Pendidikan pemula </font>, tidak dapat menggunakan<font color='#00b034'> Peta Dunia </font>untuk<font color='#00b034'> teleport </font>!"
+  },
+  {
+   "n": 4175,
+   "text": "Klik untuk menutup<font color='#00b034'> toko barang </font>dan melanjutkan panduan pendidikan."
+  },
+  {
+   "n": 4176,
+   "text": "Klik untuk menutup interface<font color='#00b034'> Toko </font>dan melanjutkan panduan pendidikan."
+  },
+  {
+   "n": 4177,
+   "text": "Lihat skill jarak dekat"
+  },
+  {
+   "n": 4178,
+   "text": "Klik untuk menutup<font color='#00b034'> skill interface </font>, dan melanjutkan tahap berikutnya."
+  },
+  {
+   "n": 4179,
+   "text": "Jika peralatan saat ini dijual di<font color='#00b034'> Toko item ninja hitam </font>tidak sesuai dengan kamu, gunakan [<font color='#00b034'>instant refresh</font>] untuk me-reset item pada penjualan, dan lihat apakah kamu dapat menemukan sesuatu yang cocok!"
+  },
+  {
+   "n": 4180,
+   "text": "<b>⟨0⟩.Klik<font color='#00b034'> Ikon skil </font>untuk membuka menu operasional<br>⟨1⟩.Pilih<font color='#00b034'>Equip Skill</font> untuk mengkombinasikan skill</b>"
+  },
+  {
+   "n": 4181,
+   "text": "Tampilkan<font color='#00b034'> skill </font> yang kamu gunakan disini. Hanya yang berada pada<font color='#00b034'> Slot skil </font> yang memungkinkan <font color='#00b034'> skill </font>dapat digunakan dalam pertarungan."
+  },
+  {
+   "n": 4182,
+   "text": "Dari pemberian<font color='#00b034'> Angel Guide </font>, menggunakan<font color='#00b034'> armor </font>pada<font color='#00b034'> peralatan panel </font>."
+  },
+  {
+   "n": 4183,
+   "text": "Menggunakan<font color='#00b034'> talisman </font>disini."
+  },
+  {
+   "n": 4184,
+   "text": "Menggunakan<font color='#00b034'> belt </font>disini."
+  },
+  {
+   "n": 4185,
+   "text": "Menggunakan<font color='#00b034'> chest armor </font>disini."
+  },
+  {
+   "n": 4186,
+   "text": "Menggunakan<font color='#00b034'> gloves </font>disini."
+  },
+  {
+   "n": 4187,
+   "text": "Menggunakan<font color='#00b034'> helm </font>disini."
+  },
+  {
+   "n": 4188,
+   "text": "Menggunakan<font color='#00b034'> leg armor </font>disini."
+  },
+  {
+   "n": 4189,
+   "text": "Menggunakan<font color='#00b034'> Senjata </font>disini."
+  },
+  {
+   "n": 4190,
+   "text": "Klik untuk menggunakan<font color='#00b034'> Senjata</font>."
+  },
+  {
+   "n": 4191,
+   "text": "Pindahkan<font color='#00b034'> senjata </font>kedalam<font color='#00b034'> Panel senjata </font>dan klik untuk menyelsaikan pemakaian!"
+  },
+  {
+   "n": 4192,
+   "text": "Klik kiri untuk memakai<font color='#00b034'> Senjata </font>!"
+  },
+  {
+   "n": 4193,
+   "text": "Klik<font color='#00b034'> Panduan Gift Box </font>"
+  },
+  {
+   "n": 4194,
+   "text": "Klik pada<font color='#00b035'> Child Armor </font>dan pilih<font color='#00b035'> Appraisal equip </font>."
+  },
+  {
+   "n": 4195,
+   "text": "Bertemu dengan<font color='#00b034'> Jounin </font>untuk mempelajari<font color='#00b034'> skill </font>."
+  },
+  {
+   "n": 4196,
+   "text": "Klik pada<font color='#00b034'> favorit </font>untuk menambahkan<font color='#00b034'> NinjaKita </font><br>Untuk menjadi<font color='#00b034'> Folder Faforit </font>."
+  },
+  {
+   "n": 4197,
+   "text": "Pergi ke <font color='#00b034'> arena </font>untuk menarik hadiah"
+  },
+  {
+   "n": 4198,
+   "text": "Ini adalah<font color='#00b034'> arena </font>. Kamu dapat duel dengan pemain lain di dunia game saat memasuki arena."
+  },
+  {
+   "n": 4199,
+   "text": "Kamu jangan hanya merasakan Kostum baru ? Sekarang menuju ke<font color='#00b034'> arena </font>dan menantang<font color='#00b034'> rank boss </font>lagi!"
+  },
+  {
+   "n": 4200,
+   "text": "Klik untuk memasuki<font color='#00b034'> Toko Barang </font>."
+  },
+  {
+   "n": 4201,
+   "text": "<b>Klik untuk membuka<font color='#00b034'>【Gift Box】</font>interface</b>"
+  },
+  {
+   "n": 4202,
+   "text": "Ini adalah<font color='#00b034'> Aula </font> di desa. Ada<font color='#00b034'> ketua desa </font>yang sedang menunggu kamu di sana."
+  },
+  {
+   "n": 4203,
+   "text": "Klik di sini untuk membuka tas kamu. Saat ini semua item kamu disimpan disini. Kamu dapat menjalankan pemakaina item dari sini juga"
+  },
+  {
+   "n": 4204,
+   "text": "Klik pada <font color='#00b034'> Foto </font>Karakter untuk membuka interface<font color='#00b034'> Atribut karakater </font>. Semua <font color='#00b034'> info </font> kamu saat ini akan ditampilkan dalam interface<font color='#00b034'> atribut karakter </font>."
+  },
+  {
+   "n": 4205,
+   "text": "Klik untuk memasuki<font color='#00b035'> Toko Barang </font>"
+  },
+  {
+   "n": 4206,
+   "text": "Klik untuk membuka <font color='#00b034'> skill interface </font>untuk melihat<font color='#00b034'> skill </font>yang di pelajari dari kenaikan level, dan gunakan<font color='#00b034'> skill </font>kamu!"
+  },
+  {
+   "n": 4207,
+   "text": "<b>Klik<font color='#00b034'>【Detail】</font>untuk membuka interface misi<br>dan cek detail informasi misiand check detailed quest information</b>"
+  },
+  {
+   "n": 4208,
+   "text": "<b>Klik<font color='#00b034'>【Detail】</font>untuk membuka interface misi<br>dan sek detail informasi misi</b>"
+  },
+  {
+   "n": 4209,
+   "text": "Klik disini untuk meninggalkan Desa dari kota utama dan Pergi ke<font color='#00b034'> Zone luar</font>."
+  },
+  {
+   "n": 4210,
+   "text": "<font color='#00b034'> Daftar Monster </font>di bagian atas yang ada saat ini di kawasan ini. Pilih<font color='#00b034'> Sunflower </font>untuk memulai serangan kamu!"
+  },
+  {
+   "n": 4211,
+   "text": "Setelah memastikan pembagian atribut dasar, klik di sini untuk menyelesaikan penambahan. Setelah mengkonfirmasi distribusi, poin terdistribusi tidak dapat diubah menjadi atribut lainnya."
+  },
+  {
+   "n": 4212,
+   "text": "Klik pada  + icon di sebelah kanan atribut kamu untuk meningkatkan nilai masing-masing. Kekuatan Besar mempengaruhi pertumbuhan dan pertahanan serangan, agility mempengaruhi pertumbuhan kecepatan dan hindaran, stamina mempengaruhi pertumbuhan max HP dan chakra."
+  },
+  {
+   "n": 4213,
+   "text": "<font color='#00b034'> Attribute Info </font>tampilan area"
+  },
+  {
+   "n": 4214,
+   "text": "<font color='#00b034'> Basic Info</font>Tampilan area"
+  },
+  {
+   "n": 4215,
+   "text": "Ketika EXP bar kamu penuh, Klik icon ini untuk meningkatkan level kamu!"
+  },
+  {
+   "n": 4216,
+   "text": "<b>Klik<font color='#00b034'>Ikon Scroll</font>Untuk membuka navigasi</b>"
+  },
+  {
+   "n": 4217,
+   "text": "Disini ditampilkan skill yang kamu pelajari. Pakai untuk memakai pada panel skill kamu untuk memiliki kesempatan menggunakannya dalam pertarungan."
+  },
+  {
+   "n": 4218,
+   "text": "Klik<font color='#00b034'> untuk menerima misi </font>."
+  },
+  {
+   "n": 4219,
+   "text": "<b>Klik tombol<font color='#00b034'>【Teleport 】</font> untuk mengambil misi</b>"
+  },
+  {
+   "n": 4220,
+   "text": "Klik pada<font color='#00b034'> healing powder </font> dan pilih [<font color='#00b034'>menggunakan item</font>]  pada menu."
+  },
+  {
+   "n": 4221,
+   "text": "Dengan healing powder, Klik pada target kamu untuk menyelesaikan tindakan."
+  },
+  {
+   "n": 4222,
+   "text": "Klik pada Gift Box untuk membukanya."
+  },
+  {
+   "n": 4223,
+   "text": "Klik pada<font color='#00b034'> Gift Box </font>, lalu pilih [<font color='#00b034'>Gunakan</font>] pada menu."
+  },
+  {
+   "n": 4224,
+   "text": "Pergi ke<font color='#00b034'> Aula </font>desa."
+  },
+  {
+   "n": 4225,
+   "text": "Membuka<font color='#00b034'> newbie Gift Box  </font>."
+  },
+  {
+   "n": 4226,
+   "text": "Pada interface<font color='#00b034'> Atribut Karakter </font>, melalui interface [<font color='#00b034'>Kenaikan Level</font>] ."
+  },
+  {
+   "n": 4227,
+   "text": "Pada interface<font color='#00b034'> Atribut Karakter </font>, menjalankan fungsi [Tambah Atribut]."
+  },
+  {
+   "n": 4228,
+   "text": "Buka<font color='#00b034'> Panel peralatan</font><font color='#00b034'> skill </font>interface."
+  },
+  {
+   "n": 4229,
+   "text": "Memperoleh ⟨0⟩ kemenangan<font color='#00b034'> duel </font>."
+  },
+  {
+   "n": 4230,
+   "text": "Melakukan<font color='#00b034'> Pemukulan Guci </font> pada undian."
+  },
+  {
+   "n": 4231,
+   "text": "<font color='#00b034'> point </font>setelah memasuki<font color='#00b034'> Area Promosi </font>dan tantangan pada<font color='#00b034'> rank boss</font>."
+  },
+  {
+   "n": 4232,
+   "text": "Masuk ke <font color='#00b034'>Toko Barang </font>."
+  },
+  {
+   "n": 4233,
+   "text": "Bergerak ke <font color='#00b034'>Zone luar</font>."
+  },
+  {
+   "n": 4234,
+   "text": "Kalahkan <font color='#00b034'>Sunflower </font>."
+  },
+  {
+   "n": 4235,
+   "text": "Gunakan<font color='#00b034'> healing powder </font> untuk diri kamu."
+  },
+  {
+   "n": 4236,
+   "text": "Kembali ke desa atau<font color='#00b034'> Kota Utama </font> ."
+  },
+  {
+   "n": 4237,
+   "text": "Masuk ke<font color='#00b034'> Toko Barang </font>."
+  },
+  {
+   "n": 4238,
+   "text": "Menggunakan Fungsi [<font color='#00b034'>langsung Refresh</font>]."
+  },
+  {
+   "n": 4239,
+   "text": "Pada<font color='#00b034'> Panduan Malaikat </font>memberikan kamu<font color='#00b034'> armor </font>, untuk digunakan."
+  },
+  {
+   "n": 4240,
+   "text": "Tingkatkan<font color='#00b034'> rank </font>kamu untuk mencapai[<font color='#00b034'>Pemula II</font>] ."
+  },
+  {
+   "n": 4241,
+   "text": "Menyelesaikan Panduan."
+  },
+  {
+   "n": 4242,
+   "text": "Pelajari<font color='#00b034'> Skill Ninjutsu </font> lainnya."
+  },
+  {
+   "n": 4243,
+   "text": "Belajar menggunakan<font color='#00b034'>Skill Ninjutusu</font>."
+  },
+  {
+   "n": 4244,
+   "text": "belajar untuk memnbeli<font color='#00b034'> potion </font>."
+  },
+  {
+   "n": 4245,
+   "text": "<font color='#00b034'>Panduan malaikat</font> gunakan<font color='#00b034'> Senjata </font>."
+  },
+  {
+   "n": 4246,
+   "text": "Belajar untuk mengklaim<font color='#00b034'> Gift Box</font>."
+  },
+  {
+   "n": 4247,
+   "text": "Belajar menggunakan<font color='#00b034'> Petunjuk Misi </font>."
+  },
+  {
+   "n": 4248,
+   "text": "Masuk Rumahku."
+  },
+  {
+   "n": 4249,
+   "text": "Masuk<font color='#00b034'> Rumahku</font>, Mambangun sebuah <font color='#00b034'>Kebun</font>. <font color='#00b034'> Kebun </font>Dapat menyediakan tanaman."
+  },
+  {
+   "n": 4250,
+   "text": "Pergi ke<font color='#00b034'> Kota Malaikat </font> dan bicara dengan <font color='#00b034'>Ketua Ninja</font>."
+  },
+  {
+   "n": 4251,
+   "text": "Setelah dikalahkan oleh<font color='#00b034'> Gaara </font> , Pergi ke <font color='#00b034'> Aula </font> di desa dan mengunjungi<font color='#00b034'> Ketua desa </font>."
+  },
+  {
+   "n": 4252,
+   "text": "Membuka, baru saja memperoleh<font color='#00b034'> newbie Gift Box </font>."
+  },
+  {
+   "n": 4253,
+   "text": "Kamu telah mencapai Level<font color='#00b035'> ⟨0⟩ </font>."
+  },
+  {
+   "n": 4254,
+   "text": "Meningkatkan basic attribute apapun sebesar ⟨0⟩."
+  },
+  {
+   "n": 4255,
+   "text": "Membuka<font color='#00b034'> skill interface</font> untuk melihat<font color='#00b034'> skill </font> kamu akan belajar saat kamu meningkatkan level."
+  },
+  {
+   "n": 4256,
+   "text": "Pergi ke <font color='#00b034'>Arena </font>dan menangkan pertarungan."
+  },
+  {
+   "n": 4257,
+   "text": "Gunakan<font color='#00b034'> medal </font>pada<font color='#00b034'> Toko Guci</font>untuk melakukan<font color='#00b034'> Undian </font>."
+  },
+  {
+   "n": 4258,
+   "text": "Mencapai kemenangan dalam<font color='#00b034'> Arena </font>, dan meningkatkan<font color='#00b034'> Point </font> kamu untuk dipromosikan melakukan tantangan pada<font color='#00b034'> rank boss </font>yang akan muncul."
+  },
+  {
+   "n": 4259,
+   "text": "Pergi ke <font color='#00b034'> Toko Barang </font>dan melihat barang pada penjualan."
+  },
+  {
+   "n": 4260,
+   "text": "Menjangkau<font color='#00b034'> Zone luar</font>dekat desa."
+  },
+  {
+   "n": 4261,
+   "text": "Telah muncul<font color='#00b034'> Sunflower </font>yang mengganggu perjalanan. Kamu harus mengurusnya."
+  },
+  {
+   "n": 4262,
+   "text": "Gunakan<font color='#00b034'> healing powder </font>untuk memulihkan<font color='#00b034'> HP </font>yang hilang dari pertarungan."
+  },
+  {
+   "n": 4263,
+   "text": "Kembali ke desa asal."
+  },
+  {
+   "n": 4264,
+   "text": "Pergi ke <font color='#00b034'> Toko Barang </font>untuk melihat barang yang saat ini dijual."
+  },
+  {
+   "n": 4265,
+   "text": "Gunakan fungsi<font color='#00b034'> instant refresh </font>untuk merefresh pada<font color='#00b034'> Toko Barang </font>terhadap barang yang dijual saat ini."
+  },
+  {
+   "n": 4266,
+   "text": "<font color='#00b034'> newbie Gift Box </font>, digunakan pada<font color='#00b034'> armor </font>dari itu."
+  },
+  {
+   "n": 4267,
+   "text": "Berhasil menantang<font color='#00b034'> rank boss </font>, <font color='#00b034'> rank </font>kamu mrningkat menjadi [<font color='#00b034'>Pemula II</font>] ."
+  },
+  {
+   "n": 4268,
+   "text": "Panduan Pemula Berakhir , Mulai berpetualang di dalam game."
+  },
+  {
+   "n": 4269,
+   "text": "Pergi ke <font color='#00b034'> Jounin </font>untuk mempelajari<font color='#00b034'> Skill Ninjutsu </font>."
+  },
+  {
+   "n": 4270,
+   "text": "Menggunakan <font color='#00b034'> skill </font>yang kamu pelajari pada<font color='#00b034'> Panel Skill </font>."
+  },
+  {
+   "n": 4271,
+   "text": "Pergi ke <font color='#00b034'>Toko Barang </font>dan membeli<font color='#00b034'> potion </font>."
+  },
+  {
+   "n": 4272,
+   "text": "<font color='#00b034'>Panduan Malaikat </font>, gunakan<font color='#00b034'> Senjata </font>yang diberikan."
+  },
+  {
+   "n": 4273,
+   "text": "<font color='#00b034'>Panduan Malaikat </font>, belajar bagaimanan cara untuk mengklaim<font color='#00b034'> Gift Box </font>."
+  },
+  {
+   "n": 4274,
+   "text": "Menggunakan<font color='#00b034'> Petunjuk Misi </font>untuk menerima misi [<font color='#00b034'>Latihan Ninjutsu</font>]."
+  },
+  {
+   "n": 4275,
+   "text": "<font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> Sedang tidak online, tidak dapat Menambahkan Teman"
+  },
+  {
+   "n": 4276,
+   "text": "<font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font> Menambahkan kamu sebagai teman."
+  },
+  {
+   "n": 4277,
+   "text": "Berhasil menambahkan <font color='#ff0000'> <a href= 'event:player|{@0:}'><u>{@0:}</u></a> </font>sebagai teman."
+  },
+  {
+   "n": 4278,
+   "text": "Perluasan daftar berhasil."
+  },
+  {
+   "n": 4279,
+   "text": "{@0:} menit yang lalu"
+  },
+  {
+   "n": 4280,
+   "text": "<b>Fungsi Bangunan:</b>Semua bangunan tidak bisa lebih tinggi dari <font color='#5a8300'>Lv{@0:}</font>."
+  },
+  {
+   "n": 4281,
+   "text": "<b>Fungsi Bangunan:</b>Dapat memeriksa apa yang pemain lain telah lakukan di rumah kamu."
+  },
+  {
+   "n": 4282,
+   "text": "<b>Fungsi Bangunan:</b>Dapat mengeluarkan<font color='#5a8300'>{@0:}</font> Misi dan menerima<font color='#5a8300'>{@0:}</font> Misi setiap hari."
+  },
+  {
+   "n": 4283,
+   "text": "<b>Fungsi Bangunan:</b>Produksi makanan<font color='#5a8300'>{@0:}</font> per-jam."
+  },
+  {
+   "n": 4284,
+   "text": "<b>Fungsi Bangunan:</b>Pada Hari berangin, produksi makanan<font color='#5a8300'>{@0:}</font> Per-Jam."
+  },
+  {
+   "n": 4285,
+   "text": "<b>Fungsi Bangunan:</b>Kapasitas maksimal tempat penampungan makanan<font color='#5a8300'>{@0:}</font>，Dapat membuka<font color='#5a8300'>{@0:}</font>Slot Gudang."
+  },
+  {
+   "n": 4286,
+   "text": "<b>Fungsi Bangunan:</b>Dapat membuka<font color='#5a8300'>{@0:}</font>slot pet."
+  },
+  {
+   "n": 4287,
+   "text": "<b>Fungsi Bangunan:</b>Dapat membuka<font color='#5a8300'>{@0:}</font>Slot murid."
+  },
+  {
+   "n": 4288,
+   "text": "<b>Fungsi Bangunan:</b>Waktu Penetasan<font color='#5a8300'>{@0:}</font>Menit. Waktu panen<font color='#5a8300'>{@0:}</font>Menit"
+  },
+  {
+   "n": 4289,
+   "text": "<b>Fungsi Bangunan:</b>Memperluas lebar rumah<font color='#5a8300'>{@0:}</font>."
+  },
+  {
+   "n": 4290,
+   "text": "Peringkat Arena"
+  },
+  {
+   "n": 4291,
+   "text": "Achievement Point"
+  },
+  {
+   "n": 4292,
+   "text": "⟨0⟩"
+  },
+  {
+   "n": 4293,
+   "text": "Daratan Api"
+  },
+  {
+   "n": 4294,
+   "text": "Daratan Air"
+  },
+  {
+   "n": 4295,
+   "text": "Daratan Tanah"
+  },
+  {
+   "n": 4296,
+   "text": "Daratan Angin"
+  },
+  {
+   "n": 4297,
+   "text": "Daratan Petir"
+  },
+  {
+   "n": 4298,
+   "text": "Next"
+  },
+  {
+   "n": 4299,
+   "text": "Prev"
+  },
+  {
+   "n": 4300,
+   "text": "Rangking Nasional"
+  },
+  {
+   "n": 4301,
+   "text": "Ninja Kita"
+  },
+  {
+   "n": 4302,
+   "text": "Kebun sayuran kamu telah mencapai level maksimal"
+  },
+  {
+   "n": 4303,
+   "text": "Dana tidak mencukupi, upgrade kebun sayuran membutuhkan <font color='#ffffff'> {@1:} </font>{@0:}."
+  },
+  {
+   "n": 4304,
+   "text": "Kebun sayur telah mencapai level<font color='#ffffff'> {@0:} </font>, menghabiskan<font color='#ffffff'> {@1:capital} </font>Batu."
+  },
+  {
+   "n": 4305,
+   "text": "Sudah memiliki tanaman yang siap di panen, perlu menghancurkan panen saat ini untuk merubah hasil panen."
+  },
+  {
+   "n": 4306,
+   "text": "Batu tidak mencukupi pada gudang tempat penyimpanan."
+  },
+  {
+   "n": 4307,
+   "text": "Berhasil menanam<font color='#00aeff'> {@0:} </font>"
+  },
+  {
+   "n": 4308,
+   "text": "Tidak ada panen, tidak dapat dihancurkan."
+  },
+  {
+   "n": 4309,
+   "text": "Berhasil menghancurkan<font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 4310,
+   "text": "Berhasil mencuri<font color='#ff0000'> {@0:} </font> <font color='#ffffff'> {@2:} </font> x <font color='#00aeff'> {@1:} </font>."
+  },
+  {
+   "n": 4311,
+   "text": "Pekerja ditugaskan untuk menanam <font color='#00aeff'> {@0:} </font>."
+  },
+  {
+   "n": 4312,
+   "text": "Pertumbuhan Tanaman telah melebihi setengah durasi sebelum kamu dapat memanennya,<font color='#ffffff'> {@0:} </font>detik lagi."
+  },
+  {
+   "n": 4313,
+   "text": "Kamu terlalu lambat, tanaman ini telah dipanen."
+  },
+  {
+   "n": 4314,
+   "text": "Kamu dikalahkan<font color='#ff0000'> {@0:} </font> pekerja<font color='#ff6565'> {@1:} </font>"
+  },
+  {
+   "n": 4315,
+   "text": "Kamu telah mengalahkan<font color='#ff0000'> {@0:} </font>pekerja<font color='#ff6565'> {@1:} </font>"
+  },
+  {
+   "n": 4316,
+   "text": "Memperoleh <font color='#ffffff'>{@1:cnt}</font> x <font color='#00aeff'>{@0:}</font> dari pekerja."
+  },
+  {
+   "n": 4317,
+   "text": "Tidak ada tanaman di sini."
+  },
+  {
+   "n": 4318,
+   "text": "Saat ini kamu tidak mempunyai murid, tidak dapat memanen!"
+  },
+  {
+   "n": 4319,
+   "text": "Kamu dan<font color='#ff0000'> {@0:} </font>telah membagi<font color='#ff0000'> {@1:} </font> <font color='#ffffff'> {@3:} </font> x <font color='#00aeff'> {@2:} </font>."
+  },
+  {
+   "n": 4320,
+   "text": "Kamu telah mencapai batas maksimum untuk memiliki pekerja."
+  },
+  {
+   "n": 4321,
+   "text": "Pondok kebun sayur telah mencapai level maksimal,kamu harus mengupgrade rumah kamu untuk mengupgrade pondok kebun sayur."
+  },
+  {
+   "n": 4322,
+   "text": "Sudah ada pekerja yang bekerja di sini."
+  },
+  {
+   "n": 4323,
+   "text": "Memecat pekerja<font color='#ff6565'> {@0:} </font>"
+  },
+  {
+   "n": 4324,
+   "text": "Tidak ada tanaman yang dapat di curi."
+  },
+  {
+   "n": 4325,
+   "text": "Pertumbuhan tanaman telah berhenti."
+  },
+  {
+   "n": 4326,
+   "text": "Tidak ada pemain atau pemain belum membangun rumah."
+  },
+  {
+   "n": 4327,
+   "text": "Masukan nama pemain."
+  },
+  {
+   "n": 4328,
+   "text": "Kamu telah memanen untuk hari ini!"
+  },
+  {
+   "n": 4329,
+   "text": "Saat ini kamu bekerja untuk pemain ini!"
+  },
+  {
+   "n": 4330,
+   "text": "Kamu telah siap bekerja di rumah<font color='#ff0000'> {@0:} </font>!"
+  },
+  {
+   "n": 4331,
+   "text": "Hanya pemain bebas yang dapat bekerja!"
+  },
+  {
+   "n": 4332,
+   "text": "Mulai bekerja pada<font color='#ff0000'> {@0:} </font>!"
+  },
+  {
+   "n": 4333,
+   "text": "Saat ini kamu adalah pemain ini, tidak dapat bekerja!"
+  },
+  {
+   "n": 4334,
+   "text": "Tas kamu penuh!"
+  },
+  {
+   "n": 4335,
+   "text": "Berhasil menukarkan<font color='#ffffff'> {@1:} </font> x <font color='#00aeff'> {@0:} </font>!"
+  },
+  {
+   "n": 4336,
+   "text": "Keterbatasan jumlah item untuk memulai tanaman!"
+  },
+  {
+   "n": 4337,
+   "text": "Berhasil membuka lahan!"
+  },
+  {
+   "n": 4338,
+   "text": "Mengkonsumsi<font color='#00aeff'> {@0:} </font>Jumlah :<font color='#ffffff'> {@1:} </font>!"
+  },
+  {
+   "n": 4339,
+   "text": "Kamu berada di dalam tim, tidak dapat masuk rumah!"
+  },
+  {
+   "n": 4340,
+   "text": "Kamu telah diberhentikan oleh<font color='#ff0000'> {@0:} </font>!"
+  },
+  {
+   "n": 4341,
+   "text": "<font color='#ff0000'>{@0:} </font>telah memulai bekerja di kebun sayur kamu!"
+  },
+  {
+   "n": 4342,
+   "text": "Kamu telah mencapai level<font color='#ffffff'> {@0:} </font>sebelum masuk rumah!"
+  },
+  {
+   "n": 4343,
+   "text": "Tidak ada pemain bebas, tidak dapat mencuri tanaman."
+  },
+  {
+   "n": 4344,
+   "text": "Kamu bekerja di rumah<font color='#ff0000'> {@0:} </font>, tidak dapat mencuri tanaman!"
+  },
+  {
+   "n": 4345,
+   "text": "Tidak dapat mencuri tanaman dari pemain bebas yang berada<font color='#ffffff'> {@0:} </font> Level di bawah kamu."
+  },
+  {
+   "n": 4346,
+   "text": "Memilih kebun yang tidak memiliki tanaman, tidak dapat bekerja!"
+  },
+  {
+   "n": 4347,
+   "text": "Batas panen hari ini sudah maksimal!"
+  },
+  {
+   "n": 4348,
+   "text": "Rank harus mencapai  <font color='#00b034'> {@0: } </font> untuk memasuki Desa! "
+  },
+  {
+   "n": 4349,
+   "text": "Hanya bisa memanen setelah rank mencapai <font color='#00b035'> {@0:rank} </font>!"
+  },
+  {
+   "n": 4350,
+   "text": "Divinity Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4351,
+   "text": "Starlight Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4352,
+   "text": "x stone shard"
+  },
+  {
+   "n": 4353,
+   "text": "Flawed x stone"
+  },
+  {
+   "n": 4354,
+   "text": "x stone"
+  },
+  {
+   "n": 4355,
+   "text": "Flawless x stone"
+  },
+  {
+   "n": 4356,
+   "text": "Perfect x stone"
+  },
+  {
+   "n": 4357,
+   "text": "Saldo kurang dari <font color='#FF0000'>⟨0⟩</font> gold, tidak dapat masuk kedalam pertarungan. Mengisi gold? "
+  },
+  {
+   "n": 4358,
+   "text": "Masukkan kode aktivasi"
+  },
+  {
+   "n": 4359,
+   "text": "Karakter mencapai lv.⟨0⟩"
+  },
+  {
+   "n": 4360,
+   "text": "Online lebih dari ⟨0⟩ menit"
+  },
+  {
+   "n": 4361,
+   "text": "Hanya bisa diambil pada hari Festival Pertengahan Musim Gugur"
+  },
+  {
+   "n": 4362,
+   "text": "Hanya bisa di ambil ⟨0⟩ kali per hari"
+  },
+  {
+   "n": 4363,
+   "text": "Level ⟨0⟩ Paket Gift Coupon (Mendapatkan ⟨1⟩ Gift Coupon pada penggunaan)"
+  },
+  {
+   "n": 4364,
+   "text": "⟨0⟩ batu"
+  },
+  {
+   "n": 4365,
+   "text": "⟨0⟩ Batu"
+  },
+  {
+   "n": 4366,
+   "text": "⟨0⟩ Gift Coupons"
+  },
+  {
+   "n": 4367,
+   "text": "Pet \"Soul\" x ⟨0⟩；<br>Katak Arcanum x ⟨1⟩<br>EXP Segel x ⟨2⟩<br>⟨3⟩-hari VIP Card x ⟨4⟩<br>Batu Sihir x ⟨5⟩<br>Peningkatan Batu Sihir x ⟨6⟩<br>Batu penambah slot x ⟨7⟩<br>Batu pemurnian x ⟨8⟩<br>Sushi x ⟨9⟩<br>Permen HP x ⟨10⟩<br>Permen Chakra x ⟨11⟩<br>"
+  },
+  {
+   "n": 4368,
+   "text": "Pet \"Gamakichi\" x ⟨0⟩；<br>Katak Arcanum x ⟨1⟩<br>EXP Segel x ⟨2⟩<br>⟨3⟩-hari VIP Card x ⟨4⟩<br>Batu Sihir x ⟨5⟩<br>Peningkatan Batu Sihir x ⟨6⟩<br>Batu penambah slot x ⟨7⟩<br>Batu pemurnian x ⟨8⟩<br>Sushi x ⟨9⟩<br>Permen HP x ⟨10⟩<br>Permen Chakra x ⟨11⟩<br>"
+  },
+  {
+   "n": 4369,
+   "text": "Pet \"Akamaru\" x ⟨0⟩；<br>Katak Arcanum x ⟨1⟩<br>EXP Segel x ⟨2⟩<br>⟨3⟩-hari VIP Card x ⟨4⟩<br>Batu Sihir x ⟨5⟩<br>Peningkatan Batu Sihir x ⟨6⟩<br>Batu penambah slot x ⟨7⟩<br>Batu pemurnian x ⟨8⟩<br>Sushi x ⟨9⟩<br>Permen HP x ⟨10⟩<br>Permen Chakra x ⟨11⟩<br>"
+  },
+  {
+   "n": 4370,
+   "text": "Pet \"Lily\" x ⟨0⟩；<br>Katak Arcanum x ⟨1⟩<br>EXP Segel x ⟨2⟩<br>⟨3⟩-hari VIP Card x ⟨4⟩<br>Batu Sihir x ⟨5⟩<br>Peningkatan Batu Sihir x ⟨6⟩<br>Batu penambah slot x ⟨7⟩<br>Batu pemurnian x ⟨8⟩<br>Sushi x ⟨9⟩<br>Permen HP x ⟨10⟩<br>Permen Chakra x ⟨11⟩<br>"
+  },
+  {
+   "n": 4371,
+   "text": "⟨0⟩ Gift Coupon"
+  },
+  {
+   "n": 4372,
+   "text": "Hadiah berharga"
+  },
+  {
+   "n": 4373,
+   "text": "Lucky Bag"
+  },
+  {
+   "n": 4374,
+   "text": "Tailed Beast Legend Chest"
+  },
+  {
+   "n": 4375,
+   "text": "Masukkan kode aktivasi Gift Box yang kamu peroleh untuk mengambil Gift Box dalam berbagai acara kami! Gift Box akan memberikan kejutan untuk kamu yang tiada akhir!"
+  },
+  {
+   "n": 4376,
+   "text": "⟨0⟩ gift coupon；<br>Lv.⟨1⟩ Chakra Carrier Bag*⟨2⟩；<br>Lv.⟨3⟩ HP Carrier Bag*⟨4⟩"
+  },
+  {
+   "n": 4377,
+   "text": "⟨0⟩ gift coupon；<br>Blue Outfit Wishing Pot；<br>Pet Egg"
+  },
+  {
+   "n": 4378,
+   "text": "⟨0⟩ gift coupon；<br>Proof of Demon Suppression*⟨1⟩；<br>Lucky Gem"
+  },
+  {
+   "n": 4379,
+   "text": "⟨0⟩ gift coupon；<br>Mid-sized Bean；<br>Pet Skill Lock"
+  },
+  {
+   "n": 4380,
+   "text": "⟨0⟩ gift coupon；<br>Orange Outfit Wishing Pot；<br>Recast Talisman*⟨1⟩"
+  },
+  {
+   "n": 4381,
+   "text": "⟨0⟩ gift coupon；<br>Lv.⟨1⟩ Slot Talisman；<br>Lv.⟨2⟩ Refining Talisman*⟨3⟩"
+  },
+  {
+   "n": 4382,
+   "text": "⟨0⟩ gift coupon；<br>Lv.⟨1⟩ Engrave Blade*⟨2⟩；<br>Lv.⟨3⟩ Engrave Crystal*⟨4⟩"
+  },
+  {
+   "n": 4383,
+   "text": "⟨0⟩ gift coupon；<br>Lv.⟨1⟩ Stone Bag*⟨2⟩；<br>Advanced Inscription Talisman*⟨3⟩"
+  },
+  {
+   "n": 4384,
+   "text": "Kue bulan x ⟨0⟩"
+  },
+  {
+   "n": 4385,
+   "text": "⟨0⟩ batu<br>⟨1⟩ gold<br>⟨2⟩ Gift Coupon"
+  },
+  {
+   "n": 4386,
+   "text": "Wolf Fang Bat x ⟨0⟩<br>Sharp Bladeclaw x ⟨1⟩<br>Powerful Pierce x ⟨2⟩<br>Village Wear x ⟨3⟩"
+  },
+  {
+   "n": 4387,
+   "text": "⟨0⟩ gold"
+  },
+  {
+   "n": 4388,
+   "text": "Hadiah untuk pemula yang login untuk pertama kalinya, cukup masuk ke kode aktivasi untuk memperoleh ⟨0⟩ Gift Coupon!"
+  },
+  {
+   "n": 4389,
+   "text": "Kesalahan kami telah mengakibatkan kerugian untuk kamu, kami benar-benar menyesal! Gift Box ini adalah tanda permintaan maaf kami, silahkan menerimanya!"
+  },
+  {
+   "n": 4390,
+   "text": "Sahabat Pemain : Hallo!<br>Gift Box ini khusus diberikan kepada kamu oleh tim  《NinjaKita》, tetap bermain bersama kami !"
+  },
+  {
+   "n": 4391,
+   "text": "Pemakai Gift Box Eksklusif ⟨0⟩, berisi hadiah berharga dari ⟨1⟩ untuk semua pemakai. Terima kasih atas dukungan kamu dalam ⟨2⟩!"
+  },
+  {
+   "n": 4392,
+   "text": "Pemakai Gift Box Eksklusif Sina, berisi hadiah berharga dari Sina untuk semua pemakai. Terima kasih atas dukungan kamu dalam Sina!"
+  },
+  {
+   "n": 4393,
+   "text": "Pemakai Gift Box Eksklusif Duowan, berisi hadiah berharga dari Duowan untuk semua pemakai. Terima kasih atas dukungan kamu dalam Duowan!"
+  },
+  {
+   "n": 4394,
+   "text": "Pemakai Gift Box Eksklusif ⟨0⟩g, berisi hadiah berharga dari ⟨1⟩g untuk semua pemakai. Terima kasih atas dukungan kamu dalam ⟨2⟩g!"
+  },
+  {
+   "n": 4395,
+   "text": "Pemakai Gift Box Eksklusif  UUUU⟨0⟩, berisi hadiah berharga dari UUUU⟨1⟩ untuk semua pemakai. Terima kasih atas dukungan kamu dalam UUUU⟨2⟩!"
+  },
+  {
+   "n": 4396,
+   "text": "Pemakai Gift Box Eksklusif YZZ, berisi hadiah berharga dari YZZ untuk semua pemakai. Terima kasih atas dukungan kamu dalam YZZ!"
+  },
+  {
+   "n": 4397,
+   "text": "Sebuah Gift Box eksklusif untuk anggota guild. Ini mungkin adalah bukti fokus . Mari kita diri bersama, baik hujan atau cerah!"
+  },
+  {
+   "n": 4398,
+   "text": "Gift Box anggota Eksklusif Komunitas Animasi, berisi hadiah-hadiah berharga Tunggangan Sang Pemimpi untuk masyarakat. Terima kasih untuk dukungan kamu dalam komunitas animasi!"
+  },
+  {
+   "n": 4399,
+   "text": "《Ninjakita》 Gift Box resmi Bayangan Api, contains 《Ninjakita》 hadiah resmi untuk semua penggunanya, terima kasih atas dukungan abadi kamu 《Ninjakita》!"
+  },
+  {
+   "n": 4400,
+   "text": "Terima kasih untuk berpartisipasi dalam acara Ninjakita, berharap kamu memiliki banyak waktu untuk bermain!"
+  },
+  {
+   "n": 4401,
+   "text": "Gift Box Microblog"
+  },
+  {
+   "n": 4402,
+   "text": "Gift Box pemula"
+  },
+  {
+   "n": 4403,
+   "text": "Gift Box mewah pemula"
+  },
+  {
+   "n": 4404,
+   "text": "Semua Gift Box yang memerlukan kode aktivasi yang kami berikan dalam game dapat diterima di sini!"
+  },
+  {
+   "n": 4405,
+   "text": "Lv.⟨0⟩ Gift Box, berisikan beberapa item gift coupon. Klaim ketika karakter mencapai lv.⟨1⟩!"
+  },
+  {
+   "n": 4406,
+   "text": "Online selama ⟨0⟩ menit untuk klaim batu dan Gift Coupon!"
+  },
+  {
+   "n": 4407,
+   "text": "Berkah Pertengahan Musim Gugur! Kami berharap kamu bahagia pada pertengahan musim gugur, dan kebahagiaan untuk keluarga kamu!"
+  },
+  {
+   "n": 4408,
+   "text": "Hadiah Gift Box CB setiap hari! Klaim sampai dengan ⟨0⟩ batu, ⟨1⟩ gold dan Gift Coupon ⟨2⟩ setiap hari sebagai dana permainan, silakan menggunakannya dengan baik!"
+  },
+  {
+   "n": 4409,
+   "text": "Terima kasih telah berpartisipasi dalam versi close beta! Gift Box ini adalah untuk mengucapkan terima kasih khusus peserta close beta, silahkan menerimanya!"
+  },
+  {
+   "n": 4410,
+   "text": "Memperoleh hadiah Gift Box dari Misi Tutorial"
+  },
+  {
+   "n": 4411,
+   "text": "Karena ketidaknyamanan yang ditimbulkan oleh pemeliharaan server ad hoc pada hari pertama Open Beta, kami memberikan ⟨0⟩ gold sebagai tanda permintaan maaf kami <br> Harap tetap mendukung Ninjakita, permainan kami jauh lebih menarik karena kehadiran kamu!"
+  },
+  {
+   "n": 4412,
+   "text": "Karena ketidaknyamanan yang ditimbulkan oleh pemeliharaan server iklan ad hoc pada tanggal ⟨0⟩, kami memberikan ⟨1⟩ gold sebagai tanda permintaan maaf kami.<br>Silakan terus mendukung Ninjakita, permainan kita jauh lebih menarik karena kehadiran kamu!"
+  },
+  {
+   "n": 4413,
+   "text": "Karena ketidaknyamanan yang ditimbulkan oleh hoc pemeliharaan server iklan pada tanggal ⟨0⟩, kami memberikan ⟨1⟩ gold sebagai tanda permintaan maaf kami.<br>Silakan terus mendukung Ninjakita, permainan kita jauh lebih menarik karena kehadiran kamu!"
+  },
+  {
+   "n": 4414,
+   "text": "Kamu tidak dapat mendapatkan hadiah! "
+  },
+  {
+   "n": 4415,
+   "text": "Kamu telah mengklaim hadiah."
+  },
+  {
+   "n": 4416,
+   "text": "Silahkan mengambil hadiah antara pukul ⟨0⟩:⟨1⟩ dan ⟨2⟩: ⟨3⟩ setiap hari. "
+  },
+  {
+   "n": 4417,
+   "text": "Maaf saat ini kamu tidak dapat mengklaim hadiah"
+  },
+  {
+   "n": 4418,
+   "text": "Untuk mengklaim pemain harus login sesuai durasi"
+  },
+  {
+   "n": 4419,
+   "text": "Time:  ⟨0⟩/⟨1⟩/⟨2⟩-⟨3⟩/⟨4⟩/⟨5⟩ ⟨6⟩:  ⟨7⟩-⟨8⟩:  ⟨9⟩"
+  },
+  {
+   "n": 4420,
+   "text": "Login Rewards! Kamu menerima: <br><center><font color='#0098FF'>{@0: } {@1: }</font></center>"
+  },
+  {
+   "n": 4421,
+   "text": "GM  Gift Box ⟨0⟩"
+  },
+  {
+   "n": 4422,
+   "text": "Gift Box eksklusif"
+  },
+  {
+   "n": 4423,
+   "text": "Gift Box eksklusif Sina"
+  },
+  {
+   "n": 4424,
+   "text": "Gift Box eksklusif Duowan"
+  },
+  {
+   "n": 4425,
+   "text": "⟨0⟩g Gift Box eksklusif"
+  },
+  {
+   "n": 4426,
+   "text": "⟨0⟩ Gift Box eksklusif"
+  },
+  {
+   "n": 4427,
+   "text": "UUUU⟨0⟩ Gift Box eksklusif"
+  },
+  {
+   "n": 4428,
+   "text": "YZZ Gift Box eksklusif"
+  },
+  {
+   "n": 4429,
+   "text": "Gift Box Guild M"
+  },
+  {
+   "n": 4430,
+   "text": "Gift Box Guild S"
+  },
+  {
+   "n": 4431,
+   "text": "Gift Box komunitas animasi"
+  },
+  {
+   "n": 4432,
+   "text": "Gift Box Grand Hokage"
+  },
+  {
+   "n": 4433,
+   "text": "Gift Box perlombaan A"
+  },
+  {
+   "n": 4434,
+   "text": "Gift Box perlombaan B"
+  },
+  {
+   "n": 4435,
+   "text": "Gift Box perlombaan C"
+  },
+  {
+   "n": 4436,
+   "text": "Gift Box perlombaan D"
+  },
+  {
+   "n": 4437,
+   "text": "<font color='#d7e286'>Kotak Zodiak</font>"
+  },
+  {
+   "n": 4438,
+   "text": "<font color='#d7e286'>Kotak Atribut</font>"
+  },
+  {
+   "n": 4439,
+   "text": "<font color='#d7e286'>Tas Perkakas Shikamaru's</font>"
+  },
+  {
+   "n": 4440,
+   "text": "<font color='#d7e286'>Kotak Perkakas Ishida's</font>"
+  },
+  {
+   "n": 4441,
+   "text": "<font color='#d7e286'>Koleksi Kakashi's</font>"
+  },
+  {
+   "n": 4442,
+   "text": "<font color='#d7e286'>Paket Cinta Sakura's</font>"
+  },
+  {
+   "n": 4443,
+   "text": "<font color='#d7e286'>Essense Reruntuhan Orb Aizen's</font>"
+  },
+  {
+   "n": 4444,
+   "text": "<font color='#d7e286'>Kupon Belanja Urahara</font>"
+  },
+  {
+   "n": 4445,
+   "text": "<font color='#d7e286'>Lampu Sihir Ichigo's</font>"
+  },
+  {
+   "n": 4446,
+   "text": "<font color='#d7e286'>Harta Sage Naruto's</font>"
+  },
+  {
+   "n": 4447,
+   "text": "<font color='#d7e286'>Kantung Batu</font>"
+  },
+  {
+   "n": 4448,
+   "text": "Gift Box kartu aktivasi"
+  },
+  {
+   "n": 4449,
+   "text": "Gift Box level ⟨0⟩"
+  },
+  {
+   "n": 4450,
+   "text": "Lv.⟨0⟩ Gift Box"
+  },
+  {
+   "n": 4451,
+   "text": "Gift Box bermain ⟨0⟩ menit"
+  },
+  {
+   "n": 4452,
+   "text": "Gift Box Festival Pertengahan Musim Gugur"
+  },
+  {
+   "n": 4453,
+   "text": "Gift Box harian"
+  },
+  {
+   "n": 4454,
+   "text": "Gift Box CBT"
+  },
+  {
+   "n": 4455,
+   "text": "Gift Box pendidikan"
+  },
+  {
+   "n": 4456,
+   "text": "Gift Box pengganti"
+  },
+  {
+   "n": 4457,
+   "text": "Gift Box permintaan maaf"
+  },
+  {
+   "n": 4458,
+   "text": "Kotak Gift Coupon"
+  },
+  {
+   "n": 4459,
+   "text": "Level ⟨0⟩ Kotak Gift Coupon"
+  },
+  {
+   "n": 4460,
+   "text": "Penghapusan berhasil!"
+  },
+  {
+   "n": 4461,
+   "text": "<b>Penjelasan Gift  </b>"
+  },
+  {
+   "n": 4462,
+   "text": "<b>bersihkan gift Gift Box daftar klaim</b>"
+  },
+  {
+   "n": 4463,
+   "text": "Hapus gift box?"
+  },
+  {
+   "n": 4464,
+   "text": "Lanjutkan"
+  },
+  {
+   "n": 4465,
+   "text": "jumlah"
+  },
+  {
+   "n": 4466,
+   "text": "<font color='#ff0000'>Wildboar King【BOSS】</font>"
+  },
+  {
+   "n": 4467,
+   "text": "<font color='#ff0000'>Fire Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4468,
+   "text": "<font color='#ff0000'>Frost Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4469,
+   "text": "<font color='#ff0000'>Earth Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4470,
+   "text": "<font color='#ff0000'>Wind Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4471,
+   "text": "<font color='#ff0000'>Thunder Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4472,
+   "text": "<font color='#ff0000'>Firebore Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4473,
+   "text": "<font color='#ff0000'>Frostbore Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4474,
+   "text": "<font color='#ff0000'>Earthbore Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4475,
+   "text": "<font color='#ff0000'>Windbore Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4476,
+   "text": "<font color='#ff0000'>Thunderbore Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4477,
+   "text": "<font color='#ff0000'>Firewing Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4478,
+   "text": "<font color='#ff0000'>Frostwing Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4479,
+   "text": "<font color='#ff0000'>Earthwing Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4480,
+   "text": "<font color='#ff0000'>Windwing Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4481,
+   "text": "<font color='#ff0000'>Thunderwing Dragon【BOSS】</font>"
+  },
+  {
+   "n": 4482,
+   "text": "<font color='#00b034'>Earthwing Dragon【Normal】</font><br><font color='#5df9ff'>Earthwing Dragon yang sangat kuat adalah pendamping utama Toad Dragon.</font>"
+  },
+  {
+   "n": 4483,
+   "text": "<font color='#00b034'>Spiralwind Dancer【Normal】</font><br><font color='#5df9ff'>bergetar cepat, dengan gerakan yang indah dapat membunuh dengan cepat.</font>"
+  },
+  {
+   "n": 4484,
+   "text": "<font color='#00b034'>Deer Swordsman【Normal】</font><br><font color='#5df9ff'>memiliki kekuatan ledakan yang besar dari pendekar biasa. Jangan pernah meremehkan kekuatan penghancur.</font>"
+  },
+  {
+   "n": 4485,
+   "text": "<font color='#00b034'>Frostwing Dragon【Normal】</font><br><font color='#5df9ff'>Mengeluarkan angin dingin yang dapat membekukan apa saja. Pendamping utama Twin Head Dragon. </font>"
+  },
+  {
+   "n": 4486,
+   "text": "<font color='#00b034'>Thunderwing Dragon【Normal】</font><br><font color='#5df9ff'>Dapat mengalahkan musuh dengan tumpahan serbuk rahasia. Pendamping utama Twin Head Dragon. </font>"
+  },
+  {
+   "n": 4487,
+   "text": "<font color='#00b034'>Uesuki Saki【Normal】</font><br><font color='#5df9ff'>Digunakan oleh musuh Twin Head Dragon, tapi akhirnya menjadi pengikutnya setelah dikalahkan oleh Twin Head Dragon.</font>"
+  },
+  {
+   "n": 4488,
+   "text": "<font color='#00b034'>Greedy Bandit Chief【Normal】</font><br><font color='#5df9ff'>Bandit yang mengincar harta karun di gua naga tapi di tangkap oleh Twin Head Dragon, dan dan bekerja untuknya agar tetap hidup. </font>"
+  },
+  {
+   "n": 4489,
+   "text": "<font color='#ff0000'>Toad Dragon [BOSS]</font><br><font color='#5df9ff'>ini dikatakan bahwa dragon steals ini memiliki sage chakra di Mount Myoboku.</font>"
+  },
+  {
+   "n": 4490,
+   "text": "<font color='#00b034'>Nurari [Normal]</font><br><font color='#5df9ff'>Anggota dari Team Guren. Bisa meratakan seluruh tubuhnya seperti air. Dia agak penakut dan pemurung.</font>"
+  },
+  {
+   "n": 4491,
+   "text": "<font color='#ff0000'>Twin Head Dragon【BOSS】</font><br><font color='#5df9ff'>Seekor naga diantara sejuta naga, mudah tersinggung dengan berbagai alasan.</font>"
+  },
+  {
+   "n": 4492,
+   "text": "<font color='#00b034'>Samehada [Normal]</font><br><font color='#5df9ff'>Pelayan dari ekor tiga, membantu menyerap chakra</font>"
+  },
+  {
+   "n": 4493,
+   "text": "<font color='#00b034'>Evil Merchant [Normal] </font><br><font color='#5df9ff'>Evil Merchant ingin membawa pergi mooncakedan bahan untuk Christmas. </font>"
+  },
+  {
+   "n": 4494,
+   "text": "<font color='#00b034'>Little Isonade [Normal]</font><br><font color='#5df9ff'>Hidup dalam Isonade. Jumlah yang besar. </font>"
+  },
+  {
+   "n": 4495,
+   "text": "<font color='#00b034'>Mooncake Thief [Normal] </font><br><font color='#5df9ff'>Para pencuri terkutuk rencana untuk mencuri mooncake disaat Christmas.</font>"
+  },
+  {
+   "n": 4496,
+   "text": "<font color='#00b034'>Giant Ox [Normal]</font><br><font color='#5df9ff'>Sebuah sapi besar yang dipanggil dari Rasa sakit pada jalan Hewan.</font>"
+  },
+  {
+   "n": 4497,
+   "text": "<font color='#00b034'>Giant Chameleon [Normal]</font><br><font color='#5df9ff'>Dipanggil dari rasa sakit pada jalan hewan.</font>"
+  },
+  {
+   "n": 4498,
+   "text": "<font color='#00b034'>Giant Bird [Normal]</font><br><font color='#5df9ff'>Burung besar yang di panggil dari rasa sakit pada jalan hewan.</font>"
+  },
+  {
+   "n": 4499,
+   "text": "<font color='#00b034'>Windwing Dragon【Normal】</font><br><font color='#5df9ff'>Menguasai langit, ganas dan tangguh. Pendamping utama Toad Dragon.</font>"
+  },
+  {
+   "n": 4500,
+   "text": "<font color='#00b034'>Gozu [Normal]</font><br><font color='#5df9ff'>Bawahan paling setia dari Guren, berdedikasi tinggi dan kuat. dengan ini Guren menyelamatkan hidupnya dengan memberinya air ketika dia kehausan. </font>"
+  },
+  {
+   "n": 4501,
+   "text": "<font color='#00b034'>Little Isonade [Normal]</font><br><font color='#5df9ff'>Hidup dalam Isonade. Jumlah yang besar.</font>"
+  },
+  {
+   "n": 4502,
+   "text": "<font color='#00b034'>Giant Centipede [Normal]</font><br><font color='#5df9ff'>Dipanggil dari rasa sakit pada jalan hewan.</font>"
+  },
+  {
+   "n": 4503,
+   "text": "<font color='#ff0000'>Nine-Headed Dragon [BOSS]</font><br><font color='#5df9ff'>Sangat mengerikan S rank monster yang berkeliaran di  Pantai Naga</font>"
+  },
+  {
+   "n": 4504,
+   "text": "<font color='#ff0000'>Inferno Dog [BOSS]</font><br><font color='#5df9ff'>Dipanggil dari rasa sakit pada jalan hewan. Ini dapat njadi ⟨0⟩ bagian. Sangat sulit jika berurusan dengannya.</font>"
+  },
+  {
+   "n": 4505,
+   "text": "<font color='#00b034'>Scarlet Bandit【Normal】</font><br><font color='#5df9ff'>Seorang bandit berpakaian merah yang suka berkeliaran. Terlihat menakutkan, tapi sebenarnya tidak cukup berbahaya. Suka menggertak yang lemah.</font>"
+  },
+  {
+   "n": 4506,
+   "text": "<font color='#ff0000'>Warrior of Darkness【BOSS】</font><br><font color='#5df9ff'>Seseorang yang misterius merekayasa iblis dari kegelapan, dikatakan sebagai salah satu bakat yang dibina di desa ninja.</font>"
+  },
+  {
+   "n": 4507,
+   "text": "<font color='#ff0000'>Bullheaded Champ【BOSS】</font><br><font color='#5df9ff'>Seekor banteng kejam dengan kekuatan besar dan suka marah. Suka memukul-mukul palu raksasa di sekitar dan mencari pasangan yang baik. Sang juara beladiri, tapi hanya karena tidak ada seorang pun yang dekat tidak dapat mengalahkan dia.</font>"
+  },
+  {
+   "n": 4508,
+   "text": "<font color='#ff0000'>Thunderbolt Warrior【BOSS】</font><br><font color='#5df9ff'>Seorang prajurit mahir dengan kapak raksasa, pemarah, dan mudah diejek oleh hal sepele.</font>"
+  },
+  {
+   "n": 4509,
+   "text": "<font color='#ff0000'>Shadow Bat【BOSS】</font><br><font color='#5df9ff'>Mengintai dalam kegelapan seperti iblis kelelawar menyerang pejalan kaki. Jadi yang disebut untuk kecenderungan untuk bersembunyi di bayangan korban perusahaan sebelum mencolok.</font>"
+  },
+  {
+   "n": 4510,
+   "text": "<font color='#ff0000'>Ancient Isle Nightwatch【BOSS】</font><br><font color='#5df9ff'>Pemimpin dari Ninja Pulau Kuno. Berlumpur tanah saat berperang sebagai taktik untuk melemahkan kemampuan lawan.</font>"
+  },
+  {
+   "n": 4511,
+   "text": "<font color='#ff0000'>Flameplate Brigand【BOSS】</font><br><font color='#5df9ff'>Seekor babi hutan ganas yang mencintai baju besi pelat merah menyala. Tabrak sebagai langkah pembuka untuk jatuhkan musuhmu sampai pingsan.</font>"
+  }
+ ]
+}

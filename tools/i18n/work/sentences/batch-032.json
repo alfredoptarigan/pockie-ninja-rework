@@ -1,0 +1,870 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Neji": "Neji Hyuga",
+  "Blue Christmas gift boxage": "Blue Christmas Gift Box",
+  "Purple Christmas gift boxage": "Purple Christmas Gift Box",
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "Jalan Senja": "Eventide Barrens",
+  "Jembatan Api": "Fiery Ridge",
+  "Sungai ketenangan": "Verdant Alley",
+  "Sungai Sakura": "Slowflower River",
+  "Dataran Subur": "Greenwaves Plain",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Tapak Petir": "Thundering Steps",
+  "Tebing Keramat": "Holywood Range",
+  "Lembah awan": "Windscent Pass",
+  "Padang Berangin": "Ashvoid Gully",
+  "Lembah Angin": "Typhoon Plateau",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Goa Batu": "Boulder Cavern",
+  "Altar Lush": "Lush Altar",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lintasan Setapak": "Eerie Passage",
+  "Kota yang Hilang": "Abandoned Evernight City",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Frostwing Dragon": "Ice Pterosaur",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 10075,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan Dragon Soul Chest*⟨0⟩, Tailed Beast Essence*⟨1⟩, Pet Skill Wishing Pot*⟨2⟩, Attribute Box*⟨3⟩, Lv.⟨4⟩ Luxury EXP Bag*⟨5⟩, Seal Breaker*⟨6⟩, Advanced Inscription Talisman*⟨7⟩, Recast Talisman*⟨8⟩, Safety Talisman*⟨9⟩</font>"
+  },
+  {
+   "n": 10076,
+   "text": "<font color='#5df9ff'>buka untuk mendapatkan Toad Arcanum*⟨0⟩, Lv.⟨1⟩ Refining Talisman*⟨2⟩, Lv.⟨3⟩ Enhancement Talisman*⟨4⟩, ⟨5⟩-day VIP Card*⟨6⟩</font>"
+  },
+  {
+   "n": 10077,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan ⟨0⟩ Lava Stone Necklace（Memepertahankan dari serangan Tailed Beasts item level tingkat tinggi）</font>"
+  },
+  {
+   "n": 10078,
+   "text": "<font color='#5df9ff'>Dapat digunakan dalam mempertahankan dari serangan Tailed Beasts, meninfgkatkan ⟨0⟩ durability desa dan ⟨1⟩ point kehormatan kemenangan .(Menghilang setelah event)</font><br>[line]kemungkinan drop dari tailed beasts!"
+  },
+  {
+   "n": 10079,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan secara random enchantment stone.<br>termasuk: Azure Dragon Soul, Black Tortoise Vigor, Vermilion Bird Vigor, White Tiger Vigor, Sunstone, Moonstone, Aerolite Stone, Dawn Stone.</font>"
+  },
+  {
+   "n": 10080,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan lv.⟨0⟩ Dragon Soul Sword*⟨1⟩, Dragon Soul Armor*⟨2⟩, Dragon Soul Helm*⟨3⟩, Dragon Soul Boots*⟨4⟩, Dragon Soul Gloves*⟨5⟩, Dragon Soul Belt*⟨6⟩, Dragon Soul Talisman*⟨7⟩, Dragon Soul Ring*⟨8⟩!</font>"
+  },
+  {
+   "n": 10081,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan lv.⟨0⟩ Dragon Soul Claw*⟨1⟩, Dragon Soul Armor*⟨2⟩, Dragon Soul Helm*⟨3⟩, Dragon Soul Boots*⟨4⟩, Dragon Soul Gloves*⟨5⟩, Dragon Soul Belt*⟨6⟩, Dragon Soul Talisman*⟨7⟩, Dragon Soul Ring*⟨8⟩!</font>"
+  },
+  {
+   "n": 10082,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan lv.⟨0⟩ Dragon Soul Hammer*⟨1⟩, Dragon Soul Armor*⟨2⟩, Dragon Soul Helm*⟨3⟩, Dragon Soul Boots*⟨4⟩, Dragon Soul Gloves*⟨5⟩, Dragon Soul Belt*⟨6⟩, Dragon Soul Talisman*⟨7⟩, Dragon Soul Ring*⟨8⟩!</font>"
+  },
+  {
+   "n": 10083,
+   "text": "<font color='#5df9ff'>Dapat memperoleh satu specific symbol</font>"
+  },
+  {
+   "n": 10084,
+   "text": "<font color='#5df9ff'>Probabilitas tinggi untuk mendapatkan: <br>Gelar dari Tailed Beast Killer, Heart of Shukaku, Heart of Nekomata, Heart of Isonade, Heart of Sokou, Heart of Houkou, Heart of Raijuu.</font>"
+  },
+  {
+   "n": 10085,
+   "text": "<font color='#5df9ff'>Probabilitas tinggi untuk mendapatkan: <br>Gelar dari Tailed Beast Killer, Heart of Shukaku, Heart of Nekomata, Heart of Isonade, Heart of Sokou, Heart of Houkou, Heart of Raijuu, etc.</font>"
+  },
+  {
+   "n": 10086,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan S-rank Ninja Wishing Pot*⟨0⟩, Shippuden Wishing Pot*⟨1⟩, Pet Skill Wishing Pot, Advanced Inscription Talisman*⟨2⟩, Lv.⟨3⟩ Engrave Crystal*⟨4⟩, Common Valhalla Crystal*⟨5⟩</font>"
+  },
+  {
+   "n": 10087,
+   "text": "<font color='#5df9ff'>Probabilitas tinggi untuk mendapatkan: <br>title dari Tailed Beast Killer, Heart of Shukaku, Heart of Nekomata, Heart of Isonade, Heart of Sokou, Heart of Houkou, Heart of Raijuu or other gems.</font>"
+  },
+  {
+   "n": 10088,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Fire Talisman, Fire Ring!</font>"
+  },
+  {
+   "n": 10089,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Water Talisman, Water Ring!</font>"
+  },
+  {
+   "n": 10090,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Lightning Talisman, Lightning Ring!</font>"
+  },
+  {
+   "n": 10091,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Wind Talisman, Wind Ring!</font>"
+  },
+  {
+   "n": 10092,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Earth Talisman, Earth Ring!</font>"
+  },
+  {
+   "n": 10093,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Azure Dragon Talisman, Azure Dragon Ring!</font>"
+  },
+  {
+   "n": 10094,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Vermilion Bird Talisman, Vermilion Bird Ring!</font>"
+  },
+  {
+   "n": 10095,
+   "text": "<font color='#5df9ff'>Gunakan untuk menerima Black Tortoise Talisman, Black Tortoise Ring!</font>"
+  },
+  {
+   "n": 10096,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan secara random release skill set.<br>Termasuk: Fire Talisman, Fire Ring, Water Talisman, Water Ring, Lightning Talisman, Lightning Ring, Wind Talisman, Wind Ring, Earth Talisman, Earth Ring.</font>"
+  },
+  {
+   "n": 10097,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan secara random Spirit Creature set.<br>Termasuk: Azure Dragon Talisman, Azure Dragon Ring, Vermilion Bird Talisman, Vermilion Bird Ring, Black Tortoise Talisman, Black Tortoise Ring.</font>"
+  },
+  {
+   "n": 10098,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ random Pet Skill Lock.</font>"
+  },
+  {
+   "n": 10099,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Pepper.</font>"
+  },
+  {
+   "n": 10100,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Milk.</font>"
+  },
+  {
+   "n": 10101,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Chocolate.</font>"
+  },
+  {
+   "n": 10102,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ Lobster.</font>"
+  },
+  {
+   "n": 10103,
+   "text": "<font color='#5df9ff'>Open it to randomly obtain Pet Skill Lock*⟨0⟩ or Food*⟨1⟩.<br>Range: Pet Skill Lock*⟨2⟩, Pepper*⟨3⟩, Milk*⟨4⟩, Chocolate*⟨5⟩, Lobster*⟨6⟩.</font>"
+  },
+  {
+   "n": 10104,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh ⟨0⟩ gift coupons</font>"
+  },
+  {
+   "n": 10105,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh Advanced Inscription Talisman*⟨0⟩</font>"
+  },
+  {
+   "n": 10106,
+   "text": "<font color='#5df9ff'>Buka gift box ini untuk mendapatkan item legendary tailed beast!</font>"
+  },
+  {
+   "n": 10107,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh Lv.⟨0⟩ Enhancement Talisman*⟨1⟩</font>"
+  },
+  {
+   "n": 10108,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Goa Batu yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10109,
+   "text": "<font color='#5df9ff'>Thundering Crystal</font>"
+  },
+  {
+   "n": 10110,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh Level ⟨0⟩ Refining Talisman*⟨1⟩</font>"
+  },
+  {
+   "n": 10111,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh Recast Talisman*⟨0⟩</font>"
+  },
+  {
+   "n": 10112,
+   "text": "<font color='#5df9ff'>Buka untuk memperoleh Lv.⟨0⟩ Slot Talisman*⟨1⟩</font>"
+  },
+  {
+   "n": 10113,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Strength I.</font>"
+  },
+  {
+   "n": 10114,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Strength II.</font>"
+  },
+  {
+   "n": 10115,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Strength III.</font>"
+  },
+  {
+   "n": 10116,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Strength IV.</font>"
+  },
+  {
+   "n": 10117,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Strength V.</font>"
+  },
+  {
+   "n": 10118,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Agility I.</font>"
+  },
+  {
+   "n": 10119,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Agility II.</font>"
+  },
+  {
+   "n": 10120,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Agility III.</font>"
+  },
+  {
+   "n": 10121,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Agility IV.</font>"
+  },
+  {
+   "n": 10122,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Agility V.</font>"
+  },
+  {
+   "n": 10123,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Constitution I.</font>"
+  },
+  {
+   "n": 10124,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Constitution II.</font>"
+  },
+  {
+   "n": 10125,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Constitution III.</font>"
+  },
+  {
+   "n": 10126,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Constitution IV.</font>"
+  },
+  {
+   "n": 10127,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Constitution V.</font>"
+  },
+  {
+   "n": 10128,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Firm I.</font>"
+  },
+  {
+   "n": 10129,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Firm II.</font>"
+  },
+  {
+   "n": 10130,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Firm III.</font>"
+  },
+  {
+   "n": 10131,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Firm IV.</font>"
+  },
+  {
+   "n": 10132,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Firm V.</font>"
+  },
+  {
+   "n": 10133,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Ruin I.</font>"
+  },
+  {
+   "n": 10134,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Ruin II.</font>"
+  },
+  {
+   "n": 10135,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Ruin III.</font>"
+  },
+  {
+   "n": 10136,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Ruin IV.</font>"
+  },
+  {
+   "n": 10137,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Ruin V.</font>"
+  },
+  {
+   "n": 10138,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Deft I.</font>"
+  },
+  {
+   "n": 10139,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Deft II.</font>"
+  },
+  {
+   "n": 10140,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Deft III.</font>"
+  },
+  {
+   "n": 10141,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Deft IV.</font>"
+  },
+  {
+   "n": 10142,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Deft V.</font>"
+  },
+  {
+   "n": 10143,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Aim I.</font>"
+  },
+  {
+   "n": 10144,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Aim II.</font>"
+  },
+  {
+   "n": 10145,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Aim III.</font>"
+  },
+  {
+   "n": 10146,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Aim IV.</font>"
+  },
+  {
+   "n": 10147,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Aim V.</font>"
+  },
+  {
+   "n": 10148,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Life I.</font>"
+  },
+  {
+   "n": 10149,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Life II.</font>"
+  },
+  {
+   "n": 10150,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Life III.</font>"
+  },
+  {
+   "n": 10151,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Life IV.</font>"
+  },
+  {
+   "n": 10152,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Life V.</font>"
+  },
+  {
+   "n": 10153,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Sharp I.</font>"
+  },
+  {
+   "n": 10154,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Sharp II.</font>"
+  },
+  {
+   "n": 10155,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Sharp III.</font>"
+  },
+  {
+   "n": 10156,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Sharp IV.</font>"
+  },
+  {
+   "n": 10157,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Sharp V.</font>"
+  },
+  {
+   "n": 10158,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Speedy I.</font>"
+  },
+  {
+   "n": 10159,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Speedy II.</font>"
+  },
+  {
+   "n": 10160,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Speedy III.</font>"
+  },
+  {
+   "n": 10161,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Speedy IV.</font>"
+  },
+  {
+   "n": 10162,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Speedy V.</font>"
+  },
+  {
+   "n": 10163,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Energy I.</font>"
+  },
+  {
+   "n": 10164,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Energy II.</font>"
+  },
+  {
+   "n": 10165,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Energy III.</font>"
+  },
+  {
+   "n": 10166,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Energy IV.</font>"
+  },
+  {
+   "n": 10167,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Energy V.</font>"
+  },
+  {
+   "n": 10168,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Barbaric I.</font>"
+  },
+  {
+   "n": 10169,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Barbaric II.</font>"
+  },
+  {
+   "n": 10170,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Barbaric III.</font>"
+  },
+  {
+   "n": 10171,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Barbaric IV.</font>"
+  },
+  {
+   "n": 10172,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Barbaric V.</font>"
+  },
+  {
+   "n": 10173,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Flexible I.</font>"
+  },
+  {
+   "n": 10174,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Flexible II.</font>"
+  },
+  {
+   "n": 10175,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Flexible III.</font>"
+  },
+  {
+   "n": 10176,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Flexible IV.</font>"
+  },
+  {
+   "n": 10177,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Flexible V.</font>"
+  },
+  {
+   "n": 10178,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Guard I.</font>"
+  },
+  {
+   "n": 10179,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Guard II.</font>"
+  },
+  {
+   "n": 10180,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Guard III.</font>"
+  },
+  {
+   "n": 10181,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Guard IV.</font>"
+  },
+  {
+   "n": 10182,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Guard V.</font>"
+  },
+  {
+   "n": 10183,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Fatal I.</font>"
+  },
+  {
+   "n": 10184,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Fatal II.</font>"
+  },
+  {
+   "n": 10185,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Fatal III.</font>"
+  },
+  {
+   "n": 10186,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Fatal IV.</font>"
+  },
+  {
+   "n": 10187,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan sebuah  Bloodsoul:Fatal V.</font>"
+  },
+  {
+   "n": 10188,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan  lv.⟨0⟩ Archangel Armor*⟨1⟩, Archangel Helm*⟨2⟩, Archangel Boots*⟨3⟩, Archangel Gloves*⟨4⟩, Archangel Belt*⟨5⟩.</font>"
+  },
+  {
+   "n": 10189,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan  lv.⟨0⟩ Mighty Dragon Lord Armor*⟨1⟩, Mighty Dragon Lord Helm*⟨2⟩, Mighty Dragon Lord Boots*⟨3⟩, Mighty Dragon Lord Gloves*⟨4⟩, Mighty Dragon Lord Belt*⟨5⟩.</font>"
+  },
+  {
+   "n": 10190,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan  lv.⟨0⟩ Super Sacred Armor*⟨1⟩, Super Sacred Helm*⟨2⟩, Super Sacred Boots*⟨3⟩, Super Sacred Gloves*⟨4⟩, Super Sacred Belt*⟨5⟩.</font>"
+  },
+  {
+   "n": 10191,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Altar Lush yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10192,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Simpang Jalan yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10193,
+   "text": "Xmas Pack, Berisikan Limited kostum Xmas dan Pets . Setiap karakter hanya bisa membeli sekali!"
+  },
+  {
+   "n": 10194,
+   "text": "Xmas Super Pack, buka untuk mendapatkan super Xmas item, Middle Beans, Baby Snowman Gift Box, Baby Reindeer Gift Box dan Seal Breakers."
+  },
+  {
+   "n": 10195,
+   "text": "Xmas Preminum Pack, Buka untuk mendapatkan kostum S-Rank dan kostum shipuden*⟨0⟩, Zodiac Box*⟨1⟩, luxury treasure Jar*⟨2⟩, Advanced Sage Panasea*⟨3⟩, Baby Reindeer Gift Box*⟨4⟩, Baby Snowman Gift Box*⟨5⟩, Demon Proof*⟨6⟩"
+  },
+  {
+   "n": 10196,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Alam Liar yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10197,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Desa Matahari yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10198,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Hutan Cahaya yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10199,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Lintasan Setapak yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10200,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Kota yang Hilang yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10201,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Lembah Kesunyian yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10202,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Jalan Kematian yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10203,
+   "text": "<font color='#5df9ff'>Kunci misterius didapatkan dari penjelajahan di  Daratan Patah Hati yang akan menghasilkan kejutan.<br>hanya dapat di gunakan di zone luar.</font>"
+  },
+  {
+   "n": 10204,
+   "text": "<font color='#5df9ff'>Big Horn</font>"
+  },
+  {
+   "n": 10205,
+   "text": "<font color='#5df9ff'>Grindstone</font>"
+  },
+  {
+   "n": 10206,
+   "text": "<font color='#5df9ff'>Parchment</font>"
+  },
+  {
+   "n": 10207,
+   "text": "<font color='#5df9ff'>Astrologer Stone</font>"
+  },
+  {
+   "n": 10208,
+   "text": "<font color='#5df9ff'>Magic-infused Stone</font>"
+  },
+  {
+   "n": 10209,
+   "text": "<font color='#5df9ff'>Pebble Pouch</font>"
+  },
+  {
+   "n": 10210,
+   "text": "<font color='#5df9ff'>Locked Treasure Box</font>"
+  },
+  {
+   "n": 10211,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan. kamu hanya dapat menantang monster dari beberapa map setelah memiliki Proof of Suppression.</font>[line]<font color='#5df9ff'>Max tantangan perhari：</font><font color='#ff0000'>⟨0⟩</font>[line]gunakan fungsi dalam tas <font color='#ff0000'> Sintesis </font>untuk memperoleh<font color='#5df9ff'> Proof of Demon Suppression</font>[line]\n<font color='#5df9ff'>Anonymous Namecard</font>+<font color='#5df9ff'>blue attribute equipment*⟨1⟩</font>=<font color='#5df9ff'>grenade</font>（Kesempatan besar）\n<font color='#5df9ff'>grenade</font>+<font color='#5df9ff'>blue attribute equipment*⟨2⟩</font>=<font color='#5df9ff'>Proof of Demon Suppression\n</font>（Kesempatan besar）\n<font color='#5df9ff'>grenade</font>+<font color='#5df9ff'>Enchantment Stone*⟨3⟩</font>=<font color='#5df9ff'>Proof of Demon Suppression</font>\n（Kesempatan besar）\n<font color='#5df9ff'>grenade</font>+<font color='#5df9ff'>Gem of Justice*⟨4⟩</font>=<font color='#5df9ff'>Proof of Demon Suppression</font>"
+  },
+  {
+   "n": 10212,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Jalan Senja . Dapat menantang di  Jalan Senja' sekali pakai.</font>"
+  },
+  {
+   "n": 10213,
+   "text": "<font color='#5df9ff'>Blue Christmas gift boxage yang sangat indah, buka untuk mendapatkan EXP dan batu.</font>"
+  },
+  {
+   "n": 10214,
+   "text": "<font color='#5df9ff'>Keindahan orange Christmas box, buka untuk menerima salah satu Enhancement Talisman atau Refining Talisman.</font>"
+  },
+  {
+   "n": 10215,
+   "text": "<font color='#5df9ff'>Exquisite orange Christmas box. Buka untuk mendapatkan satu Enhancement Talisman atau Refining Talisman.</font>"
+  },
+  {
+   "n": 10216,
+   "text": "<font color='#5df9ff'>Purple Christmas gift boxage yang sangat indah, buka untuk mendapatkan Christmas EXP candy.</font>"
+  },
+  {
+   "n": 10217,
+   "text": "<font color='#5df9ff'>Gift bag dengan Kostum Christmas, berisikan ⟨0⟩ kostum Christmas （Cowok）+⟨1⟩.</font>"
+  },
+  {
+   "n": 10218,
+   "text": "<font color='#5df9ff'>Gift bag dengan Kostum Christmas, berisikan ⟨0⟩ kostum Christmas （Cewek）+⟨1⟩.</font>"
+  },
+  {
+   "n": 10219,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Jembatan Api . Dapat menantang di Jembatan Api dengan Firebore Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10220,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Sungai ketenangan . Dapat menantang di Sungai ketenangan dengan Demon Brute sekali pakai.</font>"
+  },
+  {
+   "n": 10221,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Sungai Sakura . Dapat menantang di Sungai Sakura dengan Plague Demon sekali pakai.</font>"
+  },
+  {
+   "n": 10222,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Dataran Subur . Dapat menantang di Dataran Subur dengan Frostbore Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10223,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Puncak Bebatuan . Dapat menantang di Puncak Bebatuan dengan Demon Brute sekali pakai.</font>"
+  },
+  {
+   "n": 10224,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Tapak Petir . Dapat menantang di Tapak Petir dengan Plague Demon sekali pakai.</font>"
+  },
+  {
+   "n": 10225,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Tebing Keramat . Dapat menantang di Tebing Keramat dengan Thunderbore Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10226,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Awan Lembut . Dapat menantang di Lembah awan dengan Demon Brute sekali pakai.</font>"
+  },
+  {
+   "n": 10227,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Padang Berangin . Dapat menantang di Padang Berangin dengan Plague Demon sekali pakai.</font>"
+  },
+  {
+   "n": 10228,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Lembah Angin . Dapat menantang di Lembah Angin dengan Windbore Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10229,
+   "text": "Crop Bag. Kamu akan mendapatkan ⟨0⟩ tumbuhan setelah kamu menggunakannya."
+  },
+  {
+   "n": 10230,
+   "text": "Home Chest. Temukan apa di dalamnya!"
+  },
+  {
+   "n": 10231,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Gerbang Naga Tersembunyi . Dapat menantang di Gerbang Naga Tersembunyi dengan Demon Brute sekali pakai.</font>"
+  },
+  {
+   "n": 10232,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Goa Batu . Dapat menantang di Goa Batu dengan Plague Demon sekali pakai.</font>"
+  },
+  {
+   "n": 10233,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Altar Lush . Dapat menantang di Altar Lush dengan Earthbore Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10234,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Simpang Jalan . Dapat menantang di Simpang Jalan dengan Soulender sekali pakai.</font>"
+  },
+  {
+   "n": 10235,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Alam Liar . Dapat menantang di Alam Liar dengan Bereaver sekali pakai.</font>"
+  },
+  {
+   "n": 10236,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Desa Matahari . Dapat menantang di Desa Matahari dengan Frostwing Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10237,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Hutan kerlip . Dapat menantang di Hutan Cahaya dengan Demonic Horror sekali pakai.</font>"
+  },
+  {
+   "n": 10238,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Lintasan Setapak . Dapat menantang di Lintasan Setapak Fang Reaper sekali pakai.</font>"
+  },
+  {
+   "n": 10239,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Kota Kegelapan . Dapat menantang di Kota yang Hilang dengan Soulblade Demon sekali pakai.</font>"
+  },
+  {
+   "n": 10240,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Lembah Kesunyian . Dapat menantang di Lembah Kesunyian dengan Firewing Dragon sekali pakai.</font>"
+  },
+  {
+   "n": 10241,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurosaki Ichigo Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kurosaki Ichigo Kostum untuk menghasilkan +⟨2⟩ Kurosaki Ichigo Kostum.</font>"
+  },
+  {
+   "n": 10242,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Grimmjow Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Grimmjow Kostum untuk menghasilkan +⟨2⟩ Grimmjow Kostum.</font>"
+  },
+  {
+   "n": 10243,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurosaki Ichigo Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Kurosaki Ichigo Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Kurosaki Ichigo Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10244,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Witch Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Witch Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Witch Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10245,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ggio Vega Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Ggio Vega Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Ggio Vega Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10246,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi White Ichigo Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ White Ichigo Kostum untuk berkesempatan medapatkan ＋⟨2⟩ White Ichigo Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10247,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Ichigo Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Bomb Ichigo Kostum untuk berkesempatan medapatkann Bomb Ichigo Kostum ＋⟨2⟩，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10248,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ulquiorra Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Ulquiorra Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Ulquiorra Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10249,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi White Ulquiorra Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ White Ulquiorra Kostum untuk berkesempatan medapatkan ＋⟨2⟩ White Ulquiorra Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10250,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollow Ulquiorra Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Hollow Ulquiorra Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Hollow Ulquiorra Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10251,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Love Aikawa Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Love Aikawa Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Love Aikawa Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10252,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurosaki Ichigo Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kurosaki Ichigo Kostum untuk berkesempatan medapatkan +⟨2⟩ Kurosaki Ichigo Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10253,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Grimmjow Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Grimmjow Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Grimmjow Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10254,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hitsugaya Toushiro Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Hitsugaya Toushiro Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Hitsugaya Toushiro Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10255,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hirako Shinji Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩+⟨1⟩ Hirako Shinji Kostum untuk berkesempatan medapatkan Hirako Shinji Kostum ＋⟨2⟩，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10256,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Hirako Shinji Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Hollowfied Hirako Shinji Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Hollowfied Hirako Shinji Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10257,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Abarai Renji Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Abarai Renji Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Abarai Renji Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10258,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gin Ichimaru Ketika dipakai.。<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Gin Ichimaru Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Gin Ichimaru Kostum，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10259,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Akimichi Choji Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Akimichi Choji Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Akimichi Choji Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10260,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Inuzuka Kiba Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Inuzuka Kiba Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Inuzuka Kiba Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10261,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Aburame Shino Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Aburame Shino Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Aburame Shino Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10262,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nara Shikamaru Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Nara Shikamaru Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Nara Shikamaru Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10263,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Witch Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Witch Kostum untuk berkesempatan medapatkan +⟨2⟩ Witch Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10264,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Asuma Sarutobi Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Asuma Sarutobi Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Asuma Sarutobi Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10265,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rock Lee Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Rock Lee Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Rock Lee Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10266,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hyuga Neji Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Hyuga Neji Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Hyuga Neji Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10267,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Scorpion Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Scorpion Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Scorpion Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10268,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yamato Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Yamato Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Yamato Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10269,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nel Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Nel Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Nel Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10270,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Sarugaki Hiyori Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Sarugaki Hiyori Kostum untuk berkesempatan medapatkan ＋⟨2⟩ Sarugaki Hiyori Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10271,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shihouin Yoruichi Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Shihouin Yoruichi Kostum untuk berkesempatan medapatkan +⟨2⟩ Shihouin Yoruichi Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10272,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Soifon Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Soifon Kostum untuk berkesempatan medapatkan +⟨2⟩ Soifon Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10273,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Halibel Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Halibel Kostum untuk berkesempatan medapatkan +⟨2⟩ Halibel Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10274,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ggio Vega Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Ggio Vega Kostum untuk berkesempatan medapatkan +⟨2⟩ Ggio Vega Kostum. Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10275,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mashiro Kuna Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Mashiro Kuna Kostum untuk berkesempatan medapatkan +⟨2⟩ Mashiro Kuna Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10276,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shiba Kuukaku Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Shiba Kuukaku Kostum untuk berkesempatan medapatkan +⟨2⟩ Shiba Kuukaku Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10277,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nanao Ise Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Nanao Ise Kostum untuk berkesempatan medapatkan +⟨2⟩ Nanao Ise Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10278,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momo Hinamori Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Momo Hinamori Kostum untuk berkesempatan medapatkan +⟨2⟩ Momo Hinamori Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10279,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rangiku Matsumoto Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Rangiku Matsumoto Kostum untuk berkesempatan medapatkan +⟨2⟩ Rangiku Matsumoto Kostum ，Catalysts akan hilang jika sintesis gagal.</font>"
+  }
+ ]
+}

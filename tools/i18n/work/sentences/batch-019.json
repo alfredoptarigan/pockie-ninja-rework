@@ -1,0 +1,942 @@
+{
+ "terms": {
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Dataran Subur": "Greenwaves Plain",
+  "Lembah Angin": "Typhoon Plateau",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Goa Batu": "Boulder Cavern",
+  "Altar Lush": "Lush Altar",
+  "Crossroad": "Crossroads",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lintasan Setapak": "Eerie Passage",
+  "Kota yang Hilang": "Abandoned Evernight City",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "Pantai Naga": "Dragontame Coast",
+  "Amegakure": "Hidden Rain Village",
+  "Rumah": "Home",
+  "Tim Pengawal": "Guard Squad",
+  "Stinger Bee": "Bee Stingers",
+  "Laporan": "Report",
+  "Menyelidiki": "Investigation",
+  "Iblis Api": "Fire Demon",
+  "Dukun Sesat": "Rogue Shaman",
+  "Ninja Pulau Kuno": "Ancient Island Ninja",
+  "Elang Botak": "Bald Eagle",
+  "Kembali": "Return",
+  "Iblis Air": "Water Demon",
+  "Iblis Tanah": "Earth Demon",
+  "Ninja Hutan": "Forest Ninja",
+  "Rumput": "Grass",
+  "Jagung": "Corn",
+  "Boss Toko Barang": "Merchant Boss",
+  "Pedagang Keliling": "Traveling Merchant",
+  "Ahli Agama": "Priest",
+  "Penyihir": "Sorcerer",
+  "Perampok": "Bandit",
+  "Pendekar Pedang": "Swordsman",
+  "Petualang": "Adventurer",
+  "Pemancing": "Fisherman",
+  "Giant Centipede": "Huge Centipede",
+  "Scarlet Bandit": "Scarlet",
+  "Righteous Bandit Saizon": "The Righteous Thief",
+  "Chevalier": "Chevalier Demon"
+ },
+ "units": [
+  {
+   "n": 8003,
+   "text": "Melaporkan apa yang<font color='#00b034'> Ahli Agama </font>ketahui ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8004,
+   "text": "Kembali ke desa dan melaporkan apa rencana iblis untuk menghancurkan segel dari<font color='#00b034'> Ketua Desa </font>."
+  },
+  {
+   "n": 8005,
+   "text": "Temukan<font color='#00b034'> Pedagang Keliling </font>dan menyelidiki peristiwa aneh yang terjadi baru-baru ini di<font color='#00b034'> Dataran Sakura </font>."
+  },
+  {
+   "n": 8006,
+   "text": "Memperoleh<font color='#00b034'> River GodPearl </font>dan pertukaran info dari<font color='#00b034'> Pedagang Keliling </font>."
+  },
+  {
+   "n": 8007,
+   "text": "Hancurkan yang terkena dampak amukan iblis yang menuju ke<font color='#00b034'> Dataran Subur </font>."
+  },
+  {
+   "n": 8008,
+   "text": "Pergilah ke<font color='#00b034'> Dataran Subur </font>untuk menyelidiki segel api."
+  },
+  {
+   "n": 8009,
+   "text": "Laporkan rekayasa prajurit petir oleh iblis kepada<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8010,
+   "text": "Pergilah ke<font color='#00b034'> Alam Liar </font>dan temukan bahan untuk membuat<font color='#00b034'> Obat Lembut </font>, <font color='#00b034'> Rumput Sedap </font>."
+  },
+  {
+   "n": 8011,
+   "text": "Berikan<font color='#00b034'> Rumput Sedap </font>ke<font color='#00b034'> Ahli Agama </font>."
+  },
+  {
+   "n": 8012,
+   "text": "Mencoba khasiat<font color='#00b034'> Obat Lembut </font>effects."
+  },
+  {
+   "n": 8013,
+   "text": "Pergilah ke<font color='#00b034'> Dataran Subur </font>dan selamatkan prajurit petir.."
+  },
+  {
+   "n": 8014,
+   "text": "Hancurkan<font color='#00b034'> Iblis Pembakar </font>yang mengganggu desa."
+  },
+  {
+   "n": 8015,
+   "text": "Menerima permintaan<font color='#00b034'> Ketua Ninja </font>dan mengejar keberadaan Pulau Ninja Kuno."
+  },
+  {
+   "n": 8016,
+   "text": "Menolong<font color='#00b034'> Kabuki </font>dan hancurkan para setan di samping<font color='#00b034'> Desa Matahari </font>, <font color='#00b034'> Dukun Sesat </font>."
+  },
+  {
+   "n": 8017,
+   "text": "Pergi ke<font color='#00b034'> Alam Liar </font>dan mencari informasi tentang Pulau Ninja Kuno.."
+  },
+  {
+   "n": 8018,
+   "text": "Menolong<font color='#00b034'> Juru masak </font>Menghancurkan<font color='#00b034'> Alam Liar </font>pembuat masalah, si <font color='#00b034'> Pengikut Muka Setan </font>."
+  },
+  {
+   "n": 8019,
+   "text": "Menerima tantangan Pulau Ninja Kuno, dan menangkan untuk mendapatkan hormat dari mereka."
+  },
+  {
+   "n": 8020,
+   "text": "Temukan<font color='#00b034'> Kabuki </font>dan meminta bantuan untuk meyakinkan Pulau Ninja Kuno."
+  },
+  {
+   "n": 8021,
+   "text": "Hancurkan<font color='#00b034'> Mountain Boar Bandits </font>dan mengambil harta yang dicuri dari masing-masing suku."
+  },
+  {
+   "n": 8022,
+   "text": "Menerima tantangan dari yang terkuat diantara Pulau Ninja Kuno untuk mendapatkan pengakuan dari mereka."
+  },
+  {
+   "n": 8023,
+   "text": "Hancurkan<font color='#00b034'> Iblis Api</font>yang menghancurkan segel api."
+  },
+  {
+   "n": 8024,
+   "text": "Berikan harta karun yang berisi kekuatan para iblis - dari<font color='#00b034'> Invasi Api liar </font>ke<font color='#00b034'> Kota Ninja </font>."
+  },
+  {
+   "n": 8025,
+   "text": "Disetujui oleh<font color='#00b034'> Ketua Ninja </font>dan<font color='#00b034'> Ketua Yuan </font>, dan menjadi anggota dari pasukan khusus."
+  },
+  {
+   "n": 8026,
+   "text": "Menyelidiki wisatawan yang hilang di<font color='#00b034'> Desa Matahari </font>."
+  },
+  {
+   "n": 8027,
+   "text": "Menghukum<font color='#00b034'> Iblis Suling Perayu </font>yang digunakan untuk memikat wisatawan."
+  },
+  {
+   "n": 8028,
+   "text": "Pergi ke<font color='#00b034'> Hutan Cahaya </font>untuk menolong<font color='#00b034'> Pengrajin </font> yang bermasalah."
+  },
+  {
+   "n": 8029,
+   "text": "Sang<font color='#00b034'> pengrajin </font>mendapat serangan dari<font color='#00b034'> Elang Botak </font>, bunuh dia."
+  },
+  {
+   "n": 8030,
+   "text": "Pergilah ke<font color='#00b034'> Lintasan Setapak </font>untuk menyelidiki sumber penampakan iblis di<font color='#00b034'> Hutan Cahaya </font>."
+  },
+  {
+   "n": 8031,
+   "text": "Hancurkan<font color='#00b034'> Kota Iblis </font>bebaskan<font color='#00b034'> Kelelawar berdarah </font>."
+  },
+  {
+   "n": 8032,
+   "text": "Laporkan hasil menolong sang<font color='#00b034'> pengrajin </font>ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8033,
+   "text": "<font color='#00b034'> Desa Matahari </font>sedang diganggu oleh<font color='#00b034'> Perampok Matahari Terbit </font>, kalahkan mereka."
+  },
+  {
+   "n": 8034,
+   "text": "Kalahkan pemimpin bandit."
+  },
+  {
+   "n": 8035,
+   "text": "Temukan<font color='#00b034'> Juru Masak </font>dan memahami pesan yang dibawa oleh angin."
+  },
+  {
+   "n": 8036,
+   "text": "Melaporkan perubahan aneh di alam ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8037,
+   "text": "Pergi ke<font color='#00b034'> Lembah Angin </font>Untuk menyelidiki segel angin."
+  },
+  {
+   "n": 8038,
+   "text": "Kumpulkan material dan tanyakan ke<font color='#00b034'> pengrajin </font>untuk membuat sebuah item yang dapat menahan para iblis."
+  },
+  {
+   "n": 8039,
+   "text": "Kumpulkan<font color='#00b034'> Bulu-bulu Emas </font>, kalahkan<font color='#00b034'> Egrets </font> pellindung, <font color='#00b034'> Ninjas Hutan </font>."
+  },
+  {
+   "n": 8040,
+   "text": "Bantu<font color='#00b034'> pengrajin </font>mengumpulkan<font color='#00b034'> Bulu-bulu Emas </font>dibutuhkan untuk membuat item."
+  },
+  {
+   "n": 8041,
+   "text": "Setelah melapor ke<font color='#00b034'> Ketua Ninja </font>, temukan<font color='#00b034'> Kabuki </font>untuk membantu mengalahkan setan."
+  },
+  {
+   "n": 8042,
+   "text": "Pergilah ke sumber segel angin,<font color='#00b034'> Lembah Angin </font>."
+  },
+  {
+   "n": 8043,
+   "text": "Hancurkan<font color='#00b034'> Whirlwind Demon </font>dan melemahkan kekuatan<font color='#00b034'> Iblis dari Angin </font>."
+  },
+  {
+   "n": 8044,
+   "text": "Hancurkan<font color='#00b034'> Iblis dari angin </font>yang menghancurkan segel angin."
+  },
+  {
+   "n": 8045,
+   "text": "Laporan mengalahkan<font color='#00b034'> Iblis dari angin </font>dan menyerahkan <font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8046,
+   "text": "Pergi ke<font color='#00b034'> Hutan Cahaya </font>dan mengatur<font color='#00b034'> Ninja Hutan </font>dan mengatur masalah pembalasan dendam terhadap orang-orang."
+  },
+  {
+   "n": 8047,
+   "text": "Kalahkan pemimpin<font color='#00b034'> Ninja Hutan</font>dan memecahkan masalah balas dendam."
+  },
+  {
+   "n": 8048,
+   "text": "Beberapa peristiwa besar yang terjadi di<font color='#00b034'> Kota Malaikat </font>, cepat kembali dan laporkan ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8049,
+   "text": "Pergi ke<font color='#00b034'> Harsh Barrens</font>di<font color='#00b034'> Kota yang Hilang </font> dan temukan <font color='#00b034'> Penyihir </font> yang hilang."
+  },
+  {
+   "n": 8050,
+   "text": "Dengarkan<font color='#00b034'> Penyihir </font>berbicara tentang kerajaan kuno dan harta karun."
+  },
+  {
+   "n": 8051,
+   "text": "Untuk menyegel arca, bahan-bahan yang dibutuhkan drop dari iblis dan diserahkan ke<font color='#00b034'> Bos Tempat Tempa </font><font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8052,
+   "text": "Kirim dari<font color='#00b034'> Bos Tempat Tempa </font>untuk dibuat<font color='#00b034'> Pembuka Segel </font>ke<font color='#00b034'> Penyihir </font>."
+  },
+  {
+   "n": 8053,
+   "text": "Untuk mencegah kemalangan, pergi ke<font color='#00b034'> Lintasan Setapak </font>dan undang<font color='#00b034'> Ahli Agama </font>untuk bergabung dengan tim penjelajah arca."
+  },
+  {
+   "n": 8054,
+   "text": "Berhasil mengundang<font color='#00b034'> Ahli Agama </font>untuk bergabung kedalam tim, kembali ke<font color='#00b034'> Kota yang Hilang </font>dan mengatakan<font color='#00b034'> Penyihir </font> memulai penjelajahan."
+  },
+  {
+   "n": 8055,
+   "text": "Kembali ke<font color='#00b034'> Kota yang Hilang </font>dan bertemu dengan<font color='#00b034'> Penyihir </font>untuk memulai penjelajahan reruntuhan kuno."
+  },
+  {
+   "n": 8056,
+   "text": "Bersihkan para setan<font color='#00b034'> Prajurit Tengkorak </font>didalam reruntuhan kuno."
+  },
+  {
+   "n": 8057,
+   "text": "Kalahkan Iblis yang kuat, <font color='#00b034'> Iblis Kebencian </font>didalam reruntuhan kuno."
+  },
+  {
+   "n": 8058,
+   "text": "Menolong<font color='#00b034'> Penyihir </font>mengaktifkan rahasia harta karun di reruntuhan kuno, kembali ke<font color='#00b034'> Spiralcloud Foot </font>dan melapor ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8059,
+   "text": "Setelah menerima kabar singkat, untuk bertahan melawan iblis yang akan datang, temukan<font color='#00b034'> Kabuki </font>untuk menyelidiki pergerakan para iblis."
+  },
+  {
+   "n": 8060,
+   "text": "Pergi ke<font color='#00b034'> Harsh Barrens </font><font color='#00b034'> Lembah Kesunyian </font>dan hadapi sekelompok<font color='#00b034'> Roaring Demon Apes  </font>. Tolong<font color='#00b034'> Kabuki </font>menyingkirkan mereka."
+  },
+  {
+   "n": 8061,
+   "text": "Bicaralah ke<font color='#00b034'> perampok </font><font color='#00b034'> Lembah Kesunyian </font>dan dapatkan informasi mengenai<font color='#00b034'> Iblis Air </font>."
+  },
+  {
+   "n": 8062,
+   "text": "Pergilah ke<font color='#00b034'> Jalan Kematian </font>dan selidiki<font color='#00b034'> Iblis Air </font>trail."
+  },
+  {
+   "n": 8063,
+   "text": "Memisahkan<font color='#00b034'> Dukun Tak bermoral </font>yang bergaul dengan iblis dan kumpulkan informasi tentang<font color='#00b034'> Iblis Air </font>."
+  },
+  {
+   "n": 8064,
+   "text": "Kembali ke<font color='#00b034'> Spiralcloud Foot </font>dan laporkan hasil penyelidikan iblis ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8065,
+   "text": "Di<font color='#00b034'> Dataran Subur </font>, kalahkan monster yang merusak<font color='#00b034'> segel air, </font><font color='#00b034'> Iblis Tenkai </font>."
+  },
+  {
+   "n": 8066,
+   "text": "Melapor ke<font color='#00b034'> Ketua Ninja </font>tentang kerusakan dari<font color='#00b034'> segel air </font>, dan berikan<font color='#00b034'> Gentle as Forests </font>kepada<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8067,
+   "text": "Pergilah ke<font color='#00b034'> Jalan Kematian </font>dan menyelidiki tentang pergerakan iblis di<font color='#00b034'> Harsh Barrens </font>."
+  },
+  {
+   "n": 8068,
+   "text": "Menolong<font color='#00b034'> Mountain Monk </font>mengenai penampakan sepanjang daerah pinggiran<font color='#00b034'> Jalan Kematian </font>dari<font color='#00b034'> Treants yang ada didalamnya </font>."
+  },
+  {
+   "n": 8069,
+   "text": "Temukan<font color='#00b034'> Pendekar Pedang </font>di<font color='#00b034'> Daratan Patah Hati </font>untuk menyelidiki kebenaran tentang gangguan iblis."
+  },
+  {
+   "n": 8070,
+   "text": "Hancurkan<font color='#00b034'> Bloodblooms </font>di<font color='#00b034'> Daratan Patah Hati </font> dan temukan petunjuk yang berkaitan dengan gangguan iblis."
+  },
+  {
+   "n": 8071,
+   "text": "Melacak jejak bandit yang menyebabkan keadaan<font color='#00b034'> Bloodblooms </font>menjadi mengamuk."
+  },
+  {
+   "n": 8072,
+   "text": "Hancurkan tempat berkumpulnya<font color='#00b034'> Bandit Lembah </font>di<font color='#00b034'> Lembah Kesunyian </font> dan mengejar kebenaran tentang gangguan iblis."
+  },
+  {
+   "n": 8073,
+   "text": "Kalahkan pemimpin rampok<font color='#00b034'> Bandit Saizon Baik </font>di<font color='#00b034'> Lembah Kesunyian </font>dan dapatkan informasi tentang gangguan iblis."
+  },
+  {
+   "n": 8074,
+   "text": "Menurut petunjuk yang diberikan oleh para<font color='#00b034'> perampok </font>, pergilah ke<font color='#00b034'> Kota yang Hilang </font>dan temukan<font color='#00b034'> Penyihir </font>."
+  },
+  {
+   "n": 8075,
+   "text": "Pergilah ke<font color='#00b034'> Jalan Kematian </font>dan cari iblis yang menyerang hewan-hewan di dalam<font color='#00b034'> Kota yang Hilang </font>."
+  },
+  {
+   "n": 8076,
+   "text": "Pergilah ke<font color='#00b034'> Jalan Kematian </font>lagi dan menyelidiki petunjuk dari serangan hewan<font color='#00b034'> Kappa Berbisa</font>."
+  },
+  {
+   "n": 8077,
+   "text": "Carilah<font color='#00b034'> Mountain Monk </font>untuk memahami situasi saat ini di<font color='#00b034'> Jalan Kematian </font>."
+  },
+  {
+   "n": 8078,
+   "text": "Hancurkan iblis terkuat yang ada di<font color='#00b034'> Jalan Kematian </font>, yaitu<font color='#00b034'> Venomfog Demon</font>."
+  },
+  {
+   "n": 8079,
+   "text": "Untuk mengejar dalang gangguan iblis, pergilah ke<font color='#00b034'> Daratan Patah Hati </font>dan mencari bantuan<font color='#00b034'> Pendekar Pedang </font>itu."
+  },
+  {
+   "n": 8080,
+   "text": "Bunuh<font color='#00b034'> Barrens Vultures </font>untuk mendapatkan petunjuk dalang semua itu."
+  },
+  {
+   "n": 8081,
+   "text": "Kembali ke<font color='#00b034'> Kota Malaikat </font>dan carilah<font color='#00b034'> Pegawai Pemeliharaan Pet </font>untuk mengetahui ukuran yang pas serbuk obat untuk mengontrol<font color='#00b034'> Barrens Vultures </font>."
+  },
+  {
+   "n": 8082,
+   "text": "Temukan si pencipta<font color='#00b034'> Black Temptation </font>, <font color='#00b034'> Setan Tua Licik </font>."
+  },
+  {
+   "n": 8083,
+   "text": "Hancurkan pengguna<font color='#00b034'> Black Temptation </font>untuk mengontrol<font color='#00b034'> Barrens Vultures </font>, <font color='#00b034'> Pendekar Harsh Barrens </font>."
+  },
+  {
+   "n": 8084,
+   "text": "Melaporkan dalang dibalik kerusuhan para iblis di<font color='#00b034'> Harsh Barrens </font>yang sebenarnya, siapa sebenarnya<font color='#00b034'> Iblis Tanah </font>, ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8085,
+   "text": "Pergilah ke<font color='#00b034'> Altar Lush </font>untuk menyelidiki situasi<font color='#00b034'> segel tanah </font>."
+  },
+  {
+   "n": 8086,
+   "text": "Dari<font color='#00b034'> Iblis Tanah </font>, mendapatkan<font color='#00b034'> [Kuat seperti Gunung] petunjuk rahasia </font>dan menyerahkannya ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8087,
+   "text": "Temukan<font color='#00b034'> Petualang </font>. Katakan padanya apa yang dia temukan di<font color='#00b034'> Dragontame Valley </font>."
+  },
+  {
+   "n": 8088,
+   "text": "bantu<font color='#00b034'> Petualang </font>untuk menghukum<font color='#00b034'> Spiralwind Dancer </font> yang mengganggu."
+  },
+  {
+   "n": 8089,
+   "text": "Kembali ke Crossroad dan laporkan pada<font color='#00b034'> Master Yuan </font>."
+  },
+  {
+   "n": 8090,
+   "text": "Kembali ke<font color='#00b034'> Dragontame Valley </font>dan mencoba untuk kumpulkan sesuatu informasi tentang naga. "
+  },
+  {
+   "n": 8091,
+   "text": "Katakan pada<font color='#00b034'> Adventurer </font>untuk setiap temuan baru kamu. "
+  },
+  {
+   "n": 8092,
+   "text": "Pergi ke<font color='#00b034'> Dragontame Forest </font>,bicara pada<font color='#00b034'> Aborigine </font> tentang apa yang dihadapi Petualang  dihari lainnya."
+  },
+  {
+   "n": 8093,
+   "text": "Lapor ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8094,
+   "text": "Bicara pada <font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Api</font>"
+  },
+  {
+   "n": 8095,
+   "text": "Bicara pada <font color='#ff0000'> Pemancing</font>di <font color='#00b034'> Pantai Naga</font>"
+  },
+  {
+   "n": 8096,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font> dan bunuh ⟨0⟩<font color='#ff0000'> Gozu</font>"
+  },
+  {
+   "n": 8097,
+   "text": "Bicara pada<font color='#ff0000'> Pemancing</font><font color='#00b034'> Pantai Naga</font>"
+  },
+  {
+   "n": 8098,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font> dan bunuh ⟨0⟩<font color='#ff0000'> Nurari</font>"
+  },
+  {
+   "n": 8099,
+   "text": "Bicara pada<font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Api</font>"
+  },
+  {
+   "n": 8100,
+   "text": "Bicara pada<font color='#ff0000'> Pemancing</font> di<font color='#00b034'> Pantai Naga</font>"
+  },
+  {
+   "n": 8101,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font> dan bunuh ⟨0⟩<font color='#ff0000'> Samehada</font>"
+  },
+  {
+   "n": 8102,
+   "text": "Bicara pada<font color='#ff0000'> Pemancing</font> di <font color='#00b034'> Pantai Naga</font>"
+  },
+  {
+   "n": 8103,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font> dan bunuh ⟨0⟩<font color='#ff0000'> Little Isonade</font>"
+  },
+  {
+   "n": 8104,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font> dan bunuh ⟨0⟩<font color='#ff0000'> Nine-Headed Dragon</font>"
+  },
+  {
+   "n": 8105,
+   "text": "Bicara pada<font color='#ff0000'> Ketua Ninja</font> di <font color='#00b034'> Kota Malaikat</font>"
+  },
+  {
+   "n": 8106,
+   "text": "Bicara pada<font color='#ff0000'> Tsunade </font> di<font color='#00b034'> Amegakure </font>"
+  },
+  {
+   "n": 8107,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font> dan bunuh ⟨0⟩<font color='#ff0000'> Giant Centipede</font>"
+  },
+  {
+   "n": 8108,
+   "text": "dan<font color='#ff0000'> Tsunade </font>di<font color='#00b034'> Amegakure </font>"
+  },
+  {
+   "n": 8109,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font> dan bunuh ⟨0⟩<font color='#ff0000'> Giant Ox</font>"
+  },
+  {
+   "n": 8110,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font> dan bunuh ⟨0⟩<font color='#ff0000'> Giant Chameleon</font>"
+  },
+  {
+   "n": 8111,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font> dan bunuh ⟨0⟩<font color='#ff0000'> Giant Bird</font>"
+  },
+  {
+   "n": 8112,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font> dan bunuh ⟨0⟩<font color='#ff0000'> Inferno Dog</font>"
+  },
+  {
+   "n": 8113,
+   "text": "Setelah memahami dasar-dasara dunia ninja, terimalah tes dari<font color='#00b034'> Ketua Desa </font>."
+  },
+  {
+   "n": 8114,
+   "text": "<font color='#00b034'> Ketua Desa </font>telah mengakui hak kamu suntuk masuk menjadi tim penjaga. Cari<font color='#00b034'> Jounin </font>laporkan padanya."
+  },
+  {
+   "n": 8115,
+   "text": "Pergilah ke<font color='#00b034'> Lorong Hijau </font>untuk memperkuat<font color='#00b034'> Genin </font>garrisoned disana."
+  },
+  {
+   "n": 8116,
+   "text": "Dari<font color='#00b034'> Stinger Bee </font>, dapatkan<font color='#00b034'> Racun Sengatan </font> untuk menyelamatkan wisatawan yang tersengat."
+  },
+  {
+   "n": 8117,
+   "text": "Menolong<font color='#00b034'> pedagang keliling </font>mengambil barang yang di curi<font color='#00b034'> Grinning Monkeys </font>."
+  },
+  {
+   "n": 8118,
+   "text": "Hancurkan<font color='#00b034'> Tambang Batu </font><font color='#00b034'> Scarlet Bandit </font>dan mengawal<font color='#00b034'> Pedagang Keliling </font>menuju desa."
+  },
+  {
+   "n": 8119,
+   "text": "<font color='#00b034'> Boss Toko Barang </font>menemukan reruntuhan dekat<font color='#00b034'> Jalan Senja </font>, dan telah diserang. Bantu dia menyingkirkan dari kekejaman Kappas."
+  },
+  {
+   "n": 8120,
+   "text": "Untuk menyegel Relik, bahan-bahan yang dibutuhkan drop dari iblis dan diserahkan ke<font color='#00b034'> Bos Tempat Tempa </font><font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8121,
+   "text": "Menolong<font color='#00b034'> Petualang </font> Mengajarkan pelajaran ke<font color='#ff0000'> Spiralwind Dancer </font>"
+  },
+  {
+   "n": 8122,
+   "text": "Pergi ke<font color='#00b034'> Hutan Naga </font> dan temukan<font color='#ff0000'> Aborigine </font>, Bicara padanya tentang apa yang dia ketahui."
+  },
+  {
+   "n": 8123,
+   "text": "Bicara pada<font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Air</font>"
+  },
+  {
+   "n": 8124,
+   "text": "Pergi kefont color='#⟨0⟩b⟨1⟩'> Kota Malaikat </font><font color='#00b034'> aula </font>dan salam ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8125,
+   "text": "Segel dari relik, bahan-bahan yang dibutuhkan drop dari iblis dan diserahkan ke<font color='#00b034'> Bos Tempat Tempa </font><font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8126,
+   "text": "Kirim ke<font color='#00b034'> Bos Tempat Tempa </font>untuk dibuat<font color='#00b034'> Pembuka Segel </font>ke<font color='#00b034'> Penyihir </font>."
+  },
+  {
+   "n": 8127,
+   "text": "Bicara pada<font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Petirr</font>"
+  },
+  {
+   "n": 8128,
+   "text": "dan<font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Petir</font>"
+  },
+  {
+   "n": 8129,
+   "text": "Untuk menyegel relic, bahan-bahan yang dibutuhkan drop dari iblis dan diserahkan ke<font color='#00b034'> Bos Tempat Tempa </font>di<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8130,
+   "text": "menurut petunjuk yang diberikan oleh para<font color='#00b034'> perampok </font>, pergilah ke<font color='#00b034'> Kota yang Hilang </font>dan temukan<font color='#00b034'> Penyihir </font>."
+  },
+  {
+   "n": 8131,
+   "text": "Bicara pada<font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Angin</font>"
+  },
+  {
+   "n": 8132,
+   "text": "Pergi ke<font color='#00b034'> Altar Lush </font>dan temukan barang-barang curian."
+  },
+  {
+   "n": 8133,
+   "text": "Pergi ke<font color='#00b034'> Altar Lush </font>dan periksa segelnya."
+  },
+  {
+   "n": 8134,
+   "text": "Bicara pada<font color='#ff0000'> Ketua</font><font color='#00b034'> Desa Tanah</font>"
+  },
+  {
+   "n": 8135,
+   "text": "[Misi Harian]:<br>Sukses usaha ⟨0⟩%, dan ⟨1⟩% bakat.<br>Melakukan misi harian dengan serius akan mendapatkan hadiah besar<br>Misi harian termasuk perkelahian arena, menghancurkan iblis, pengumpulan barang, mengunjungi penduduk, dan bukti dari keberanian."
+  },
+  {
+   "n": 8136,
+   "text": "Hancurkan kejahatan di<font color='#00b034'> Tambang Batu </font>."
+  },
+  {
+   "n": 8137,
+   "text": "Menolong<font color='#00b034'> Pedagang keliling </font>mengajarkan pelajaran tentang seorang yang nakal ."
+  },
+  {
+   "n": 8138,
+   "text": "Menantang<font color='#00b034'> Prajurit Petir </font>dan mendapatkan pengalaman dari medan itu."
+  },
+  {
+   "n": 8139,
+   "text": "Hancurkan kejahatan di<font color='#00b034'> Lorong Hijau </font>."
+  },
+  {
+   "n": 8140,
+   "text": "Hancurkan kejahatan di<font color='#00b034'> Pengasah Batu Tajam </font>."
+  },
+  {
+   "n": 8141,
+   "text": "Hancurkan kejahatan di<font color='#00b034'> Udara Harum </font>."
+  },
+  {
+   "n": 8142,
+   "text": "Hancurkan kejahatan di<font color='#00b034'> Gerbang Naga Tersembunyi</font>."
+  },
+  {
+   "n": 8143,
+   "text": "Cari dan hancurkan iblis kelelawar yang meneror<font color='#00b034'> Crossroad </font>."
+  },
+  {
+   "n": 8144,
+   "text": "Selamatkan setan yang dikendalikan oleh<font color='#00b034'> Hongo Batai </font>."
+  },
+  {
+   "n": 8145,
+   "text": "Menantang<font color='#00b034'> Ancient Isle Nightwatch </font>dan belajar bagaimana mengontrol ninjutsu."
+  },
+  {
+   "n": 8146,
+   "text": "Hancurkan pemimpin bandit yang menteror masyarakat<font color='#00b034'> Desa Matahari </font>."
+  },
+  {
+   "n": 8147,
+   "text": "Menantang<font color='#00b034'> Senyo of the Forest </font>dan mendapat persetujuan untuk mempelajari teknik taktik bertempur di hutan."
+  },
+  {
+   "n": 8148,
+   "text": "Pergilah ke<font color='#00b034'> Kota yang Hilang </font>dan hancurkan kekuatan iblis yang dilahirkan dari kebencian, si<font color='#00b034'> Iblis Kebencian </font>."
+  },
+  {
+   "n": 8149,
+   "text": "Menerima undangan<font color='#00b034'> Kabuki</font>dan memperoleh pengakuan<font color='#00b034'> Righteous Bandit Saizon </font>melalui pertarungan."
+  },
+  {
+   "n": 8150,
+   "text": "Bantulah memperbaiki<font color='#00b034'> Payung Sunblock</font>untuk<font color='#00b034'> Bos Toko Barang</font> dengan mengumpulkan peralatan payung dari<font color='#00b034'> Sunflower </font>."
+  },
+  {
+   "n": 8151,
+   "text": "Menolong<font color='#00b034'> Bos Tempat Tempa </font>menghukum<font color='#00b034'> Stinger Bee </font>karena menyengat anaknya."
+  },
+  {
+   "n": 8152,
+   "text": "Menolong<font color='#00b034'> Pakkun </font>menangani sampah sembarangan<font color='#00b034'> Monster Sushi </font>."
+  },
+  {
+   "n": 8153,
+   "text": "Menolong<font color='#00b034'> Bos Toko Barang</font>merebut kembali alat pertanian dari para bandit."
+  },
+  {
+   "n": 8154,
+   "text": "Mengumpulkan<font color='#00b034'> Vine Drills </font>dan tukarkan dengan sebuah <font color='#00b034'> kristal </font>pada<font color='#00b034'> Pedagang Keliling </font>."
+  },
+  {
+   "n": 8155,
+   "text": "Untuk menggertak <font color='#00b034'> Pakkun </font>, kamu harus menghukum<font color='#00b034'> Grinning Monkeys </font>."
+  },
+  {
+   "n": 8156,
+   "text": "Hancurkan<font color='#00b034'> Monster Bola Nasi </font>yang dibuat dari limbah yang di benci."
+  },
+  {
+   "n": 8157,
+   "text": "Pada pemusnahan<font color='#00b034'> Goa Batu </font>, yang berbahaya<font color='#00b034'> Kappa </font>."
+  },
+  {
+   "n": 8158,
+   "text": "Menghukum<font color='#00b034'> Iblis-iblis Jagung </font>yang serakah dan lindungi ladang-ladang di desa."
+  },
+  {
+   "n": 8159,
+   "text": "Hancurkan<font color='#00b034'> Digrats </font>diam-diam menghancurkan barang-barang pusat grosir di malam hari."
+  },
+  {
+   "n": 8160,
+   "text": "Belajar<font color='#00b034'> Wildhaired Banshees </font>pelajaran untuk menakut-nakuti wisatawan dengan rambut aneh mereka."
+  },
+  {
+   "n": 8161,
+   "text": "Menolong<font color='#00b034'> Bos Tempat Tempa </font>mengumpulkan<font color='#00b034'> Kristal Api </font>mengandung sejumlah elemen energy."
+  },
+  {
+   "n": 8162,
+   "text": "Menolong<font color='#00b034'> Bos Tempat Tempa </font>mengumpulkan<font color='#00b034'> Kristal Air </font>mengandung sejumlah elemen energy."
+  },
+  {
+   "n": 8163,
+   "text": "Menolong<font color='#00b034'> Bos Tempat Tempa </font>mengumpulkan<font color='#00b034'> Kristal Petir </font>mengandung sejumlah elemen energy."
+  },
+  {
+   "n": 8164,
+   "text": "Menolong<font color='#00b034'> Bos Tempat Tempa </font>mengumpulkan<font color='#00b034'> Kristal Angin </font>mengandung sejumlah elemen energy."
+  },
+  {
+   "n": 8165,
+   "text": "Menolong<font color='#00b034'> Bos Toko Barang </font>merebut kembali alat pertanian dari para bandit."
+  },
+  {
+   "n": 8166,
+   "text": "Menolong<font color='#00b034'> Bos Tempat Tempa </font>mengumpulkan<font color='#00b034'> Kristal Bumi </font>mengandung sejumlah elemen energy."
+  },
+  {
+   "n": 8167,
+   "text": "Menolong<font color='#00b034'> gudang senjata Bos </font>dimana membutuhkan larutan yang dapat diperoleh dari getah<font color='#00b034'> Treants </font>."
+  },
+  {
+   "n": 8168,
+   "text": "Lenyapkan<font color='#00b034'> Maneater Blossoms </font>who use their harmless outlooks to lure travelers."
+  },
+  {
+   "n": 8169,
+   "text": "Tolong <font color='#00b034'> Bos Toko Barang</font>dapatkan panah dari para bandit."
+  },
+  {
+   "n": 8170,
+   "text": "Hukum si<font color='#00b034'> Chevalier </font>yang menteror warga dan mengambil barang-barang mereka."
+  },
+  {
+   "n": 8171,
+   "text": "Hancurkan monster yang menggunakan<font color='#00b034'> Lentera Kertas </font>untuk memancing dan membunuh anak-anak dari <font color='#00b034'> Setan Tua </font>."
+  },
+  {
+   "n": 8172,
+   "text": "Menyingkirkan gencarnya<font color='#00b034'> Kodok Kulit Hijau </font>untuk diberikan ke<font color='#00b034'> Penjaga Terowongan Rahasia </font>selamat beristirahat malam."
+  },
+  {
+   "n": 8173,
+   "text": "Hancurkan<font color='#00b034'> Kota Iblis </font>kabur<font color='#00b034'> Imps </font>."
+  },
+  {
+   "n": 8174,
+   "text": "Hancurkan bandit yang merugikan pada<font color='#00b034'> Lorong Menyeramkan </font>."
+  },
+  {
+   "n": 8175,
+   "text": "Di<font color='#00b034'> Bos Tempat Tempa </font>berharap untuk mencoba<font color='#00b034'> Cakar Anjing Liar </font>untuk membuat wenjata. Bantu dia untuk mengumpulkan beberapa."
+  },
+  {
+   "n": 8176,
+   "text": "Hancurkan monster yang mengganggu di<font color='#00b034'> Bos Toko Barang</font>, di<font color='#00b034'> Monster Roti </font>."
+  },
+  {
+   "n": 8177,
+   "text": "Lenyapkan orang-orang yang ingin membebaskan para iblis didalam<font color='#00b034'> Kota Iblis </font>, si<font color='#00b034'> Bandit Wajah Setan. </font>."
+  },
+  {
+   "n": 8178,
+   "text": "Kalahkan<font color='#00b034'> Ninja Pulau Kuno </font>dan dapatkan persahabatan dari mereka."
+  },
+  {
+   "n": 8179,
+   "text": "Hukum penyesatan cinta<font color='#00b034'> Dukun Sesat </font>."
+  },
+  {
+   "n": 8180,
+   "text": "Untuk melindungi iringan pedagang, kumpulkan<font color='#00b034'> Perencanaan Perang </font>dari para bandit."
+  },
+  {
+   "n": 8181,
+   "text": "Hancurkan<font color='#00b034'> Iblis Kotak Seruling </font>gunakan musik dari seruling mereka agar perjalanan menjadi indah."
+  },
+  {
+   "n": 8182,
+   "text": "Hancurkan para bandit di dekat gunung<font color='#00b034'> Desa Matahari </font>."
+  },
+  {
+   "n": 8183,
+   "text": "Hancurkan<font color='#00b034'> Elang Gundul </font>dan selamatkan si katak."
+  },
+  {
+   "n": 8184,
+   "text": "Hancurkan<font color='#00b034'> Kelelawar Berdarah </font>dan dapatkan jarum yang dibawa mereka."
+  },
+  {
+   "n": 8185,
+   "text": "Bantu<font color='#00b034'> sang pengrajin </font>melenyapkan<font color='#00b034'>Burung Bangau</font>yang tinggal dihutan."
+  },
+  {
+   "n": 8186,
+   "text": "Menyingkirkan<font color='#00b034'> Ninja Hutan </font>sehingga<font color='#00b034'>  pengrajin </font>dapat menyelesaikan pekerjaan menebang pohonnya."
+  },
+  {
+   "n": 8187,
+   "text": "Menyelidiki kejadian aneh di<font color='#00b034'> Kota Evernight yang terbengkalai </font>dan mencari tahu sumber korupsi."
+  },
+  {
+   "n": 8188,
+   "text": "Menerima<font color='#00b034'> pekerjaan sebagai pemeliharaan Pet </font>meminta dan melenyapkan Iblis Anjing ngamuk<font color='#00b034'> yang kabur </font>."
+  },
+  {
+   "n": 8189,
+   "text": "Menolong<font color='#00b034'> Penyihir </font>membersihkan korupsi<font color='#00b034'> Blackhawks </font>."
+  },
+  {
+   "n": 8190,
+   "text": "<font color='#00b034'> Kota yang Hilang </font>tiba-tiba menjadi terganggu oleh tentara<font color='#00b034'> Prajurit Kerangka </font>. Tolonglah<font color='#00b034'> Ahli Agama </font>menyelidiki alasan pertemuan mereka."
+  },
+  {
+   "n": 8191,
+   "text": "Mengalahkan<font color='#00b034'> Lembah Kesunyian</font><font color='#00b034'> Demoneye Blooms </font>dan mengatur pertumbuhan dari<font color='#00b034'> Demoneye Blooms </font>."
+  },
+  {
+   "n": 8192,
+   "text": "<font color='#00b034'> Koki </font>berharap mendapatkan<font color='#00b034'> Lembah Kesunyian</font><font color='#00b034'> Dreamfruit </font>untuk bahan memasak. Dia membutuhkan pertolongan kamu untuk menyingkirkan buah Tim Pengawal, <font color='#00b034'> Raungan Iblis Kera </font>."
+  },
+  {
+   "n": 8193,
+   "text": "Menerima permintaan<font color='#00b034'> Perampok </font> dan menghukum<font color='#00b034'> Decadent Monks </font>yang bergaul dengan iblis."
+  },
+  {
+   "n": 8194,
+   "text": "Pergilah ke<font color='#00b034'> Lembah Kesunyian </font>dan mengalahkan para penyerang dari<font color='#00b034'> Pengawal Kota Iblis </font>, si <font color='#00b034'> Bandit Lembah </font>."
+  },
+  {
+   "n": 8195,
+   "text": "Klik ikon Rumah di sudut kanan atas layar kamu untuk masuk desa."
+  },
+  {
+   "n": 8196,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh<font color='#ff0000'> Gozu</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Grass Carp</font>."
+  },
+  {
+   "n": 8197,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh ⟨0⟩<font color='#ff0000'> Gozu</font>dan ⟨1⟩<font color='#ff0000'> Nurari</font>."
+  },
+  {
+   "n": 8198,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh<font color='#ff0000'> Nurari</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Nurari's Sweat</font>."
+  },
+  {
+   "n": 8199,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh ⟨0⟩<font color='#ff0000'> Nurari</font> dan ⟨1⟩<font color='#ff0000'> Samehada</font>."
+  },
+  {
+   "n": 8200,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh<font color='#ff0000'> Samehada</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Rare Fishbone</font>."
+  },
+  {
+   "n": 8201,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh ⟨0⟩<font color='#ff0000'> Gozu</font>dan ⟨1⟩<font color='#ff0000'> Little Isonade</font>."
+  },
+  {
+   "n": 8202,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh<font color='#ff0000'> Little Isonade</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Pearl</font>."
+  },
+  {
+   "n": 8203,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh ⟨0⟩<font color='#ff0000'> Samehada</font> dan ⟨1⟩<font color='#ff0000'> Little Isonade</font>."
+  },
+  {
+   "n": 8204,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh<font color='#ff0000'> Nine-Headed Dragon</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Nine-Headed Dragon's Tooth</font>."
+  },
+  {
+   "n": 8205,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>, bunuh ⟨0⟩<font color='#ff0000'> Nurari</font> dan ⟨1⟩<font color='#ff0000'> Little Isonade</font>."
+  },
+  {
+   "n": 8206,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>, bunuh ⟨0⟩<font color='#ff0000'> Gozu</font>, ⟨1⟩<font color='#ff0000'> Nurari</font>, ⟨2⟩<font color='#ff0000'> Samehada</font>."
+  },
+  {
+   "n": 8207,
+   "text": "Pergi ke <font color='#00b034'> Pantai Naga</font>, bunuh ⟨0⟩<font color='#ff0000'> Nurari</font>, ⟨1⟩<font color='#ff0000'> Samehada</font>, ⟨2⟩<font color='#ff0000'> little Isonade</font>."
+  },
+  {
+   "n": 8208,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font>，bunuh<font color='#ff0000'> Giant Ox</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Ox Horn</font>."
+  },
+  {
+   "n": 8209,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font>，bunuh ⟨0⟩<font color='#ff0000'> Giant Centipede</font> dan ⟨1⟩<font color='#ff0000'> Giant Bird</font>."
+  },
+  {
+   "n": 8210,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font>，bunuh<font color='#ff0000'> Giant Chameleon</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Giant Chameleon's Skin</font>."
+  },
+  {
+   "n": 8211,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font>，bunuh ⟨0⟩<font color='#ff0000'> Giant Chameleon</font> dan ⟨1⟩<font color='#ff0000'> Giant Bird</font>."
+  },
+  {
+   "n": 8212,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font>，bunuh<font color='#ff0000'> Giant Bird</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Giant Bird's Feather</font>."
+  },
+  {
+   "n": 8213,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh ⟨0⟩<font color='#ff0000'> Gozu</font>.Pergi ke<font color='#00b034'> Amegakure </font>bunuh ⟨1⟩<font color='#ff0000'> Giant Bird</font>."
+  },
+  {
+   "n": 8214,
+   "text": "Pergi ke<font color='#00b034'> Amegakure </font>，bunuh<font color='#ff0000'> Inferno Dog</font> dan kumpulkan ⟨0⟩<font color='#00b034'> Inferno Dog's Head</font>."
+  },
+  {
+   "n": 8215,
+   "text": "Pergi ke<font color='#00b034'> Pantai Naga</font>，bunuh ⟨0⟩<font color='#ff0000'> Gozu</font>. Dan Pergi ke<font color='#00b034'> Amegakure </font>bunuh ⟨1⟩<font color='#ff0000'> Giant Bird</font>."
+  },
+  {
+   "n": 8216,
+   "text": "Kamu dalam tahap panduan pemula. Silakan ikuti instruksi Panduan sang malaikat. Semoga Kamu menikmati NinjaKita!"
+  },
+  {
+   "n": 8217,
+   "text": "Pergi ke<font color='#00b034'> Desa atau Kota Malaikat </font>dan menuju<font color='#00b034'> Arena </font> untuk melakukan pertarungan. "
+  },
+  {
+   "n": 8218,
+   "text": "Pergi ke<font color='#00b034'> Arena</font>, klik tombol <font color='#00b034'> Undian </font> di kiri atas, Atau pergi ke<font color='#00b034'> Normal Interface</font>, klik<font color='#00b034'> Icon Guci coklat </font>di kanan atas untuk memukul<font color='#00b034'> Guci Medal</font>."
+  },
+  {
+   "n": 8219,
+   "text": "Masuk<font color='#00b034'> Leveling </font>, untuk melihat event yang ada di game.<br><br>Tips: Masuk ke<font color='#00b034'> Desa Api </font>dan lihat<font color='#00b034'> petunjuk cepat </font>dibagian kanan, kemudian klik pada ikon [<font color='#00b034'>Leveling</font>]untuk membuka tampilan<font color='#00b034'> petunjuk menaikkan level </font>dan melihat event harian yang dapat kamu ikuti."
+  },
+  {
+   "n": 8220,
+   "text": "Pergi dari<font color='#00b034'> peta dunia </font>ke zona luar.<br><br>Tips: Klik pada ikon [<font color='#00b034'>peta dunia</font>] pada pojok kanan atas tampilan game untuk membuka tampilan<font color='#00b034'> peta dunia </font>interface, kemudian cari dan klik pada<font color='#00b034'> Tambang Batu </font>area untuk<font color='#00b034'> Tambang Batu </font>."
+  },
+  {
+   "n": 8221,
+   "text": "Melakukan penjelajahan di<font color='#00b034'> Tambang Batu Exploration Zone </font>.<br><br>Tips: Dalam zona<font color='#00b034'> Tambang Batu </font>, carilah<font color='#00b034'> sparkling </font><font color='#00b034'> Tambang Batu Exploration Zone </font>, dan klik untuk membuka tampilan<font color='#00b034'> exploration </font>. Kemudian pilih ikon [<font color='#00b034'>Klik untuk explore a little</font>] dalam tampilan untuk melakukan<font color='#00b034'> penjelajahan </font>."
+  },
+  {
+   "n": 8222,
+   "text": "Klik pada area<font color='#00b034'> Info pemain </font>pada pojok kiri atas tampilan game, kemudian di kanan dari<font color='#00b034'> Panel HP/Chakra </font>, yang merupakan ikon [<font color='#00b034'>carrier bag</font>], bukalah tampilan<font color='#00b034'> carrier bag </font>dan pilih berapa banyak<font color='#00b034'> HP/Chakra </font>untuk melakukan pengisian<font color='#00b034'> kapasitas carrier bag </font>."
+  },
+  {
+   "n": 8223,
+   "text": "Melakukan<font color='#00b034'> penjelajahan </font>dan meningkatkan tingkat penyelesaian<font color='#00b034'> Tambang Batu Exploration Zone</font>untuk<font color='#00b034'> ⟨0⟩% </font>, berhasil mencapai<font color='#00b034'> Bintang ⟨1⟩ </font>tingkat penjelajahan."
+  }
+ ]
+}

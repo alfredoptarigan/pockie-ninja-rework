@@ -1,0 +1,1530 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Jembatan Api": "Fiery Ridge",
+  "Sungai ketenangan": "Verdant Alley",
+  "Sungai Sakura": "Slowflower River",
+  "Dataran Subur": "Greenwaves Plain",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Stinger Bee": "Bee Stingers",
+  "Pilih": "Choose",
+  "Iblis Naomasa": "Naomasa Demon",
+  "Liga Nasional": "National League",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Scarlet Bandit": "Scarlet",
+  "Bullheaded Champ": "Bullhead Demon",
+  "Grinning Monkey": "Monkey",
+  "Wildhaired Banshee": "Banshee",
+  "Sweet Potato Demon": "Potato",
+  "Sushi Monster": "Sushi",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 12264,
+   "text": "Use Blunt Weapon"
+  },
+  {
+   "n": 12265,
+   "text": "Use Sharp Weapon"
+  },
+  {
+   "n": 12266,
+   "text": "Use Fists"
+  },
+  {
+   "n": 12267,
+   "text": "Belt"
+  },
+  {
+   "n": 12268,
+   "text": "Gloves"
+  },
+  {
+   "n": 12269,
+   "text": "Jelly Cake"
+  },
+  {
+   "n": 12270,
+   "text": "Buku skill"
+  },
+  {
+   "n": 12271,
+   "text": "Caramel Cake"
+  },
+  {
+   "n": 12272,
+   "text": "Coffee Cake"
+  },
+  {
+   "n": 12273,
+   "text": "Blueberry Cake"
+  },
+  {
+   "n": 12274,
+   "text": "Matcha Cake"
+  },
+  {
+   "n": 12275,
+   "text": "Cream Cake"
+  },
+  {
+   "n": 12276,
+   "text": "Ring"
+  },
+  {
+   "n": 12277,
+   "text": "Spirit Creature Stone"
+  },
+  {
+   "n": 12278,
+   "text": "Item Misi"
+  },
+  {
+   "n": 12279,
+   "text": "Semua senjata"
+  },
+  {
+   "n": 12280,
+   "text": "Embed Gem"
+  },
+  {
+   "n": 12281,
+   "text": "Cosmos Stone"
+  },
+  {
+   "n": 12282,
+   "text": "Armory Stones"
+  },
+  {
+   "n": 12283,
+   "text": "Durability            <font color='#ffffff'>{@0:}／{@1:}</font>"
+  },
+  {
+   "n": 12284,
+   "text": "Jumlah slot saat ini <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12285,
+   "text": "<font color='#00aeff'>{@0:Attribute Name}   ＋{@1:Attribute Value}</font>"
+  },
+  {
+   "n": 12286,
+   "text": "<font color='#ffc600'>{@0:Attribute Name}   ＋{@1:Attribute Value}</font>"
+  },
+  {
+   "n": 12287,
+   "text": "<font color='#00aeff'>{@0:Attribute Name}   －{@1:Attribute Value}</font>"
+  },
+  {
+   "n": 12288,
+   "text": "<font color='#ffc600'>{@0:Attribute Name}   －{@1:Attribute Value}</font>"
+  },
+  {
+   "n": 12289,
+   "text": "<font color='#ffc600'>Tidak menerima kerusakan  ketahanan mungkin tidak menurun</font>"
+  },
+  {
+   "n": 12290,
+   "text": "<font color='#00aeff'>‖Max {@0:Max value}</font>"
+  },
+  {
+   "n": 12291,
+   "text": "<font color='#ffc600'>‖Max {@0:Max value}</font>"
+  },
+  {
+   "n": 12292,
+   "text": "<font color='#ffc600'>{@0:Skill Name} increase {@1:Attribute Value} Level</font>"
+  },
+  {
+   "n": 12293,
+   "text": "<font color='#ffc600'>{@0:Skill Name}Decrease {@1:Attribute Value} Level</font>"
+  },
+  {
+   "n": 12294,
+   "text": "<font color='#00aeff'>{@0:Skill Name}Decrease {@1:Attribute Value} Level</font>"
+  },
+  {
+   "n": 12295,
+   "text": "<font color='#00aeff'>{@0:Skill Name} increase {@1:Attribute Value} Level</font>"
+  },
+  {
+   "n": 12296,
+   "text": "Can appraise <font color='#ff0000'>{@0:} kali</font>"
+  },
+  {
+   "n": 12297,
+   "text": "Kualitas Gem {@0:} tingkat"
+  },
+  {
+   "n": 12298,
+   "text": "Nilai Sintesis      <font color='#00aeff'>{@0:}</font>"
+  },
+  {
+   "n": 12299,
+   "text": "Tidak bisa di sintesis"
+  },
+  {
+   "n": 12300,
+   "text": "<font color='#00aeff'>{@0:Gemmed Attribute}   ＋{@1:Value}</font>"
+  },
+  {
+   "n": 12301,
+   "text": "<font color='#00aeff'>{@0:Gemmed Attribute}   －{@1:Value}</font>"
+  },
+  {
+   "n": 12302,
+   "text": "<font color='#ff8a00'>Slot Armor:</font>"
+  },
+  {
+   "n": 12303,
+   "text": "<font color='#ff8a00'>Slot Senjata:</font>"
+  },
+  {
+   "n": 12304,
+   "text": "Equipment Slots       ({@0:}／{@1:})"
+  },
+  {
+   "n": 12305,
+   "text": "number of slots available </font>  <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12306,
+   "text": "Max slots <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12307,
+   "text": "<font color='#999999'>{@0:}</font>"
+  },
+  {
+   "n": 12308,
+   "text": "<font color='#00aeff'>{@0:Adjective}{@1:}</font>"
+  },
+  {
+   "n": 12309,
+   "text": "<font color='#ff8a00'>{@0:Adjective}{@1:}</font>"
+  },
+  {
+   "n": 12310,
+   "text": "<font color='#ffc600'>{@0:Adjective}{@1:}</font>"
+  },
+  {
+   "n": 12311,
+   "text": "<font color='#00a03c'>{@0:Adjective}{@1:}</font>"
+  },
+  {
+   "n": 12312,
+   "text": "<font color='#00a03c'>{@0:}</font>"
+  },
+  {
+   "n": 12313,
+   "text": "<font color='#5df9ff'>Memperoleh pet：</font>{@0:}"
+  },
+  {
+   "n": 12314,
+   "text": "<font color='#5df9ff'>Menjumpai Boss：</font>{@0:}"
+  },
+  {
+   "n": 12315,
+   "text": "<font color='#5df9ff'>Mini-game：</font>{@0:}"
+  },
+  {
+   "n": 12316,
+   "text": "<font color='#5df9ff'>Menjumpai monster：</font>{@0:}"
+  },
+  {
+   "n": 12317,
+   "text": "<font color='#5df9ff'>Memperoleh barang：</font>{@0:}"
+  },
+  {
+   "n": 12318,
+   "text": "<font color='#5df9ff'>Memperoleh Kunci：</font>{@0:}"
+  },
+  {
+   "n": 12319,
+   "text": "<font color='#5df9ff'>Memperoleh gift coupon：</font> {@0:} "
+  },
+  {
+   "n": 12320,
+   "text": "<font color='#5df9ff'>Perkembangan Penjelajahan：</font>{@0:}"
+  },
+  {
+   "n": 12321,
+   "text": "<font color='#5df9ff'>Movement Power：</font>{@0:}"
+  },
+  {
+   "n": 12322,
+   "text": "<font color='#5df9ff'>Dibutuhkan barang：</font>{@0:}"
+  },
+  {
+   "n": 12323,
+   "text": "<font color='#5df9ff'>Dibutuhkan level：</font>{@0:}"
+  },
+  {
+   "n": 12324,
+   "text": "<font color='#5df9ff'>Biaya Batu：</font>{@0:}"
+  },
+  {
+   "n": 12325,
+   "text": "<font color='#ffc600'>Bintang Level：{@0:}</font>"
+  },
+  {
+   "n": 12326,
+   "text": "Attacking               <font color='#00ffff'>＋{@0:}</font>"
+  },
+  {
+   "n": 12327,
+   "text": "Cek disini untuk melihat data pet"
+  },
+  {
+   "n": 12328,
+   "text": "Defending               <font color='#00ffff'>＋{@0:}</font>"
+  },
+  {
+   "n": 12329,
+   "text": "Talent Skills   {@0:} "
+  },
+  {
+   "n": 12330,
+   "text": "Growth Rate             {@0:} "
+  },
+  {
+   "n": 12331,
+   "text": "Hunger Level            <font color='#00ffff'>{@0:}／{@1:}</font>"
+  },
+  {
+   "n": 12332,
+   "text": "Hunger Level            <font color='#ff0000'>{@0:}／{@1:}</font>"
+  },
+  {
+   "n": 12333,
+   "text": "Pet Level <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12334,
+   "text": "<font color='#888888'>{@0:pet name} (Level.{@1:level})</font>"
+  },
+  {
+   "n": 12335,
+   "text": "<font color='#00ffff'>No pet skills</font>"
+  },
+  {
+   "n": 12336,
+   "text": "Proficient               <font color='#00ffff'>＋{@0:}</font>"
+  },
+  {
+   "n": 12337,
+   "text": "<font color='#5df9ff'>Bagaimana cara menggunakan : Didalam kandang pet, memberi makan pet dengan buku skill untuk mempelajari skill nya.</font>"
+  },
+  {
+   "n": 12338,
+   "text": "Untuk semua pet"
+  },
+  {
+   "n": 12339,
+   "text": "Untuk Plant pet"
+  },
+  {
+   "n": 12340,
+   "text": "Hanya pet Dragon"
+  },
+  {
+   "n": 12341,
+   "text": "Hanya pet Channeling"
+  },
+  {
+   "n": 12342,
+   "text": "Hanya pet Binatang"
+  },
+  {
+   "n": 12343,
+   "text": "Hanya pet Artificial"
+  },
+  {
+   "n": 12344,
+   "text": "Dark Wing Baby Special"
+  },
+  {
+   "n": 12345,
+   "text": "Dibutuhkan Pet Level: +⟨0⟩"
+  },
+  {
+   "n": 12346,
+   "text": "Pilih Makanan"
+  },
+  {
+   "n": 12347,
+   "text": "Sale Price         {@0:} "
+  },
+  {
+   "n": 12348,
+   "text": "<font color='#00b035'>{@0:}（{@1:}）</font>"
+  },
+  {
+   "n": 12349,
+   "text": "Pemula I"
+  },
+  {
+   "n": 12350,
+   "text": "Genin I"
+  },
+  {
+   "n": 12351,
+   "text": "Genin II"
+  },
+  {
+   "n": 12352,
+   "text": "Genin III"
+  },
+  {
+   "n": 12353,
+   "text": "Chunin I"
+  },
+  {
+   "n": 12354,
+   "text": "Chunin II"
+  },
+  {
+   "n": 12355,
+   "text": "Chunin III"
+  },
+  {
+   "n": 12356,
+   "text": "Chunin IV"
+  },
+  {
+   "n": 12357,
+   "text": "Jounin I"
+  },
+  {
+   "n": 12358,
+   "text": "Jounin II"
+  },
+  {
+   "n": 12359,
+   "text": "Jounin III"
+  },
+  {
+   "n": 12360,
+   "text": "Pemula II"
+  },
+  {
+   "n": 12361,
+   "text": "ANBU"
+  },
+  {
+   "n": 12362,
+   "text": "Sannin"
+  },
+  {
+   "n": 12363,
+   "text": "Kage"
+  },
+  {
+   "n": 12364,
+   "text": "Jounin"
+  },
+  {
+   "n": 12365,
+   "text": "Pemula III"
+  },
+  {
+   "n": 12366,
+   "text": "Pemula IV"
+  },
+  {
+   "n": 12367,
+   "text": "Pemula V"
+  },
+  {
+   "n": 12368,
+   "text": "Peralihan"
+  },
+  {
+   "n": 12369,
+   "text": "Akademi I"
+  },
+  {
+   "n": 12370,
+   "text": "Akademi II"
+  },
+  {
+   "n": 12371,
+   "text": "Akademi III"
+  },
+  {
+   "n": 12372,
+   "text": "Agility Conditions         {@0:} "
+  },
+  {
+   "n": 12373,
+   "text": "Agility Conditions        <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12374,
+   "text": "Dibutuhkan Level        <font color='#ffffff'>{@0:}Level</font>"
+  },
+  {
+   "n": 12375,
+   "text": "Dibutuhkan Level        <font color='#ff0000'>{@0:}Level</font>"
+  },
+  {
+   "n": 12376,
+   "text": "Dibutuhkan Class         {@0:} "
+  },
+  {
+   "n": 12377,
+   "text": "Dibutuhkan Class        <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12378,
+   "text": "Great Strength Conditions         {@0:} "
+  },
+  {
+   "n": 12379,
+   "text": "Great Strength Conditions        <font color='#ff0000'>{@0:}</font>"
+  },
+  {
+   "n": 12380,
+   "text": "<font color='#ff8a00'>Arena</font>[line]<font color='#00ffff'> Masuk ke arena, bertarung dengan pemain lain untuk mendapatkan hadiah</font>"
+  },
+  {
+   "n": 12381,
+   "text": "<font color='#ff8a00'>Petunjuk</font>[line]<font color='#00ffff'>Gunakan petunjuk untuk mengetahui apa yang harus kamu lakukan</font>"
+  },
+  {
+   "n": 12382,
+   "text": "<font color='#ff8a00'>Liga Nasional</font>[line]<font color='#00ffff'>Ketika kamu telah mencapai peringkat arena diperlukan, kamu akan dapat menghadiri Piala Nasional. Klik untuk memeriksa jadwal pertandingan dan penghargaan</font>"
+  },
+  {
+   "n": 12383,
+   "text": "<font color='#ff8a00'>Tantangan</font>[line]<font color='#00ffff'>Pertarungan persahabatan dengan pemain lain adalah seni dari ninjutsu. Kamu tidak akan kehilangan apapun dari hasil yang di dapat.</font>"
+  },
+  {
+   "n": 12384,
+   "text": "<font color='#ff8a00'>Liga Dunia</font>[line]<font color='#00ffff'>Berpartisipasi di Piala Dunia dan bersaing dengan sesama ninja! Manfaat yang besar menanti Anda!</font>"
+  },
+  {
+   "n": 12385,
+   "text": "<font color='#ff8a00'>Prestasi saya</font>[line]<font color='#00ffff'>Klik untuk membuka daftar prestasi kamu dan memeriksa</font>"
+  },
+  {
+   "n": 12386,
+   "text": "Cowok"
+  },
+  {
+   "n": 12387,
+   "text": "Cewek"
+  },
+  {
+   "n": 12388,
+   "text": "<font color='#00ffff'>Left-Klik untuk learn</font>"
+  },
+  {
+   "n": 12389,
+   "text": "Prereq Skill: [{@0:}]"
+  },
+  {
+   "n": 12390,
+   "text": "<font color='#8e8e8e'>{@0:}／{@1:}</font>"
+  },
+  {
+   "n": 12391,
+   "text": "<font color='#00ffff'>Skill at max level</font>"
+  },
+  {
+   "n": 12392,
+   "text": "<font color='#ff0000'>Left-Klik untuk upgrade skill</font>"
+  },
+  {
+   "n": 12393,
+   "text": "Level Selanjutnya:{@0:}</font>"
+  },
+  {
+   "n": 12394,
+   "text": "Kostum Skill"
+  },
+  {
+   "n": 12395,
+   "text": "Equip Skill"
+  },
+  {
+   "n": 12396,
+   "text": "Pet Skill"
+  },
+  {
+   "n": 12397,
+   "text": "Stamina        {@0:}(+{@1:})"
+  },
+  {
+   "n": 12398,
+   "text": "Great Strength        {@0:}(+{@1:})"
+  },
+  {
+   "n": 12399,
+   "text": "<font color='#00ffff'>{@0:Equipment Name}</font>"
+  },
+  {
+   "n": 12400,
+   "text": "<font color='#8e8e8e'>{@0:Equipment Name}</font>"
+  },
+  {
+   "n": 12401,
+   "text": "<font color='#00b034'><b>Newbie Ninja Set Equipment </b></font>"
+  },
+  {
+   "n": 12402,
+   "text": "<font color='#00ffff'>{@0:Set Equipment Attribute Name}   ＋{@1:Value}</font>"
+  },
+  {
+   "n": 12403,
+   "text": "<font color='#00b035'>⟨0⟩ Efek : </font><font color='#00b035'>{@0:set equipment attribute name}   ＋{@1:value}</font>"
+  },
+  {
+   "n": 12404,
+   "text": "<font color='#00b035'>Efek dari ⟨0⟩ set：</font><font color='#00b035'>{@0:outfit attribute name}   ＋{@1:value}</font>"
+  },
+  {
+   "n": 12405,
+   "text": "<font color='#8e8e8e'>{@0:Set Equipment Attribute Name}   ＋{@1:Value}</font>"
+  },
+  {
+   "n": 12406,
+   "text": "<font color='#00b035'>⟨0⟩ Efek : </font><font color='#8e8e8e'>{@0:set equipment attribute name}   ＋{@1:value}</font>"
+  },
+  {
+   "n": 12407,
+   "text": "<font color='#00b035'>Efek dari ⟨0⟩ set：</font><font color='#8e8e8e'>{@0:outfit attribute name}   ＋{@1:value}</font>"
+  },
+  {
+   "n": 12408,
+   "text": "<font color='#8e8e8e'>{@0:Set Equipment Attribute Name}   －{@1:Value}</font>"
+  },
+  {
+   "n": 12409,
+   "text": "<font color='#00b035'>Efek dari ⟨0⟩ set：</font><font color='#8e8e8e'>{@0:outfit attribute name}   －{@1:value}</font>"
+  },
+  {
+   "n": 12410,
+   "text": "<font color='#00ffff'>{@0:Set Equipment Attribute Name}   －{@1:Value}</font>"
+  },
+  {
+   "n": 12411,
+   "text": "<font color='#00b035'>Efek dari ⟨0⟩ set：</font><font color='#00b035'>{@0:outfit attribute name}   －{@1:value}</font>"
+  },
+  {
+   "n": 12412,
+   "text": "<font color='#ff0000'>Unappraised</font>"
+  },
+  {
+   "n": 12413,
+   "text": "<font color='#00ffff'>Kemampuan : {@0:}</font>"
+  },
+  {
+   "n": 12414,
+   "text": "<font color='#00ffff'>{@0:}（BOSS）</font>"
+  },
+  {
+   "n": 12415,
+   "text": "<font color='#00ffff'>Ranking Arena NO.⟨0⟩</font>"
+  },
+  {
+   "n": 12416,
+   "text": "Low-level Blessing<br>Constitution, Armor Break<font color='#00aeff'> Meningkat </font>⟨0⟩<br>Dodge, Block, Critical Strike<font color='#00aeff'> Meningkat</font>⟨1⟩<br>Hit, Pierce, Defense<font color='#00aeff'>Meningkat</font>⟨2⟩<br>Durasi: <font color='#00aeff'>⟨3⟩ Jam</font>"
+  },
+  {
+   "n": 12417,
+   "text": "Angelic Blessing<br>Critical Strike<font color='#00aeff'>meningkat</font>⟨0⟩<br>Dodge, Block<font color='#00aeff'>meningkat</font>⟨1⟩<br>Constitution, Armor Break<font color='#00aeff'>meningkat</font>⟨2⟩<br>Hit, Pierce, Defense<font color='#00aeff'>meningkat </font>⟨3⟩<br>Durasi: <font color='#00aeff'>⟨4⟩ jam</font>"
+  },
+  {
+   "n": 12418,
+   "text": "Low-level Curse<br>Constitution, Armor Break<font color='#00aeff'> Menurun</font>⟨0⟩<br>Dodge, Block, Critical Strike<font color='#00aeff'> Menurun</font>⟨1⟩<br>Hit, Pierce, Defense<font color='#00aeff'> menurun</font>⟨2⟩<br>Durasi: <font color='#00aeff'>⟨3⟩ jam</font>"
+  },
+  {
+   "n": 12419,
+   "text": "Devil Curse<br>Critical Strike<font color='#00aeff'>Menurun</font>⟨0⟩<br>Dodge, Block<font color='#00aeff'>Menurun</font>⟨1⟩<br>Constitution, Armor Break<font color='#00aeff'>Menurun</font>⟨2⟩<br>Hit, Pierce, Defense<font color='#00aeff'>Menurun </font>⟨3⟩<br>Dursi: <font color='#00aeff'>⟨4⟩ jam</font>"
+  },
+  {
+   "n": 12420,
+   "text": "<font color='#00ffff'>Klik untuk membeli semua barang pada Toko Barang</font>"
+  },
+  {
+   "n": 12421,
+   "text": "<font color='#00ffff'>Switch to ability pane</font>"
+  },
+  {
+   "n": 12422,
+   "text": "<font color='#00ffff'>Switch to appearance pane</font>"
+  },
+  {
+   "n": 12423,
+   "text": "Joy"
+  },
+  {
+   "n": 12424,
+   "text": "Embarrassed Face"
+  },
+  {
+   "n": 12425,
+   "text": "Smirk"
+  },
+  {
+   "n": 12426,
+   "text": "Saliva"
+  },
+  {
+   "n": 12427,
+   "text": "Anger"
+  },
+  {
+   "n": 12428,
+   "text": "Shutup"
+  },
+  {
+   "n": 12429,
+   "text": "Sleep"
+  },
+  {
+   "n": 12430,
+   "text": "Yawn"
+  },
+  {
+   "n": 12431,
+   "text": "Freeze"
+  },
+  {
+   "n": 12432,
+   "text": "Vomit"
+  },
+  {
+   "n": 12433,
+   "text": "Disdain"
+  },
+  {
+   "n": 12434,
+   "text": "Cry"
+  },
+  {
+   "n": 12435,
+   "text": "Sweat"
+  },
+  {
+   "n": 12436,
+   "text": "Top"
+  },
+  {
+   "n": 12437,
+   "text": "Kiss"
+  },
+  {
+   "n": 12438,
+   "text": "Beat"
+  },
+  {
+   "n": 12439,
+   "text": "Byebye"
+  },
+  {
+   "n": 12440,
+   "text": "Heart"
+  },
+  {
+   "n": 12441,
+   "text": "Broken Heart"
+  },
+  {
+   "n": 12442,
+   "text": "Victory"
+  },
+  {
+   "n": 12443,
+   "text": "Eat"
+  },
+  {
+   "n": 12444,
+   "text": "Lightning"
+  },
+  {
+   "n": 12445,
+   "text": "Sad"
+  },
+  {
+   "n": 12446,
+   "text": "Seduce"
+  },
+  {
+   "n": 12447,
+   "text": "Titter"
+  },
+  {
+   "n": 12448,
+   "text": "Crazy"
+  },
+  {
+   "n": 12449,
+   "text": "Surprise"
+  },
+  {
+   "n": 12450,
+   "text": "Puzzled"
+  },
+  {
+   "n": 12451,
+   "text": "Dizzy"
+  },
+  {
+   "n": 12452,
+   "text": "Hesitate"
+  },
+  {
+   "n": 12453,
+   "text": "<font color='#00ffff'>liveness hari ini：{@0:}</font>"
+  },
+  {
+   "n": 12454,
+   "text": "Letakkan barang-barang di Ransel ke dalam Gudang"
+  },
+  {
+   "n": 12455,
+   "text": "<font color='#00ffff'>Temporarily can't move item after locking</font>"
+  },
+  {
+   "n": 12456,
+   "text": "<font color='#00ffff'>Lock trade panel first</font>"
+  },
+  {
+   "n": 12457,
+   "text": "<font color='#00ffff'>Remove lock dan insert item again</font>"
+  },
+  {
+   "n": 12458,
+   "text": "<font color='#00ffff'>Memperluas tampilan baris</font>"
+  },
+  {
+   "n": 12459,
+   "text": "Setiap makanan"
+  },
+  {
+   "n": 12460,
+   "text": "Sereal"
+  },
+  {
+   "n": 12461,
+   "text": "Daging"
+  },
+  {
+   "n": 12462,
+   "text": "Sayur-sayuran"
+  },
+  {
+   "n": 12463,
+   "text": "Pencuci mulut"
+  },
+  {
+   "n": 12464,
+   "text": "Obat"
+  },
+  {
+   "n": 12465,
+   "text": "Puing"
+  },
+  {
+   "n": 12466,
+   "text": "<font color='#00ffff'>Liga ditutup</font>"
+  },
+  {
+   "n": 12467,
+   "text": "<font color='#ffc600'>                  Namecard Bag</font><br><font color='#5df9ff'>Mendapatkan Kartu nama karakter secara acak setelah menggunakan tas misteri.</font>"
+  },
+  {
+   "n": 12468,
+   "text": "<font color='#ff8a00'>            Kurosaki Ichigo Kostum</font><br><font color='#5df9ff'>Kostum mistis akan merubah kamu menjadi Ichigo saat dipakai</font>"
+  },
+  {
+   "n": 12469,
+   "text": "<font color='#8e8e8e'>                Witch Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Witch saat dipakai.</font>"
+  },
+  {
+   "n": 12470,
+   "text": "<font color='#8e8e8e'>            Ggio Vega Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Ggio Vega Ketika dipakai.</font>"
+  },
+  {
+   "n": 12471,
+   "text": "<font color='#ff8a00'>            White Ichigo Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  White Ichigo  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12472,
+   "text": "<font color='#ff8a00'>           Bomb Ichigo Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Bomb Ichigo Ketika dipakai.</font>"
+  },
+  {
+   "n": 12473,
+   "text": "<font color='#00aeff'>         Ulquiorra Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Ulquiorra Ketika dipakai.</font>"
+  },
+  {
+   "n": 12474,
+   "text": "<font color='#00aeff'>        White Ulquiorra Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi White Ulquiorra Ketika dipakai.</font>"
+  },
+  {
+   "n": 12475,
+   "text": "<font color='#ff8a00'>        Hollow Ulquiorra Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hollow Ulquiorra Ketika dipakai.</font>"
+  },
+  {
+   "n": 12476,
+   "text": "<font color='#8e8e8e'>            Love Aikawa Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Love Aikawa  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12477,
+   "text": "<font color='#00aeff'>            Grimmjow Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Grimmjow  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12478,
+   "text": "<font color='#00aeff'>        Hitsugaya Toushiro Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hitsugaya Toushiro Ketika dipakai.</font>"
+  },
+  {
+   "n": 12479,
+   "text": "<font color='#8e8e8e'>            Hirako Shinji Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hirako Shinji  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12480,
+   "text": "<font color='#00aeff'>        Hollowfied Hirako Shinji Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Hollowfied Hirako Shinji  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12481,
+   "text": "<font color='#8e8e8e'>          Abarai Renji Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Abarai Renji  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12482,
+   "text": "<font color='#00aeff'>             Gin Ichimaru Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Gin Ichimaru  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12483,
+   "text": "<font color='#8e8e8e'>            Akimichi Choji Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Akimichi Choji  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12484,
+   "text": "<font color='#8e8e8e'>              Inuzuka Kiba Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Inuzuka Kiba Ketika dipakai.</font>"
+  },
+  {
+   "n": 12485,
+   "text": "<font color='#8e8e8e'>           Aburame Shino Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Aburame Shino  Ketika dipakai./font>"
+  },
+  {
+   "n": 12486,
+   "text": "<font color='#8e8e8e'>           Nara Shikamaru Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Nara Shikamaru  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12487,
+   "text": "<font color='#8e8e8e'>          Asuma Sarutobi Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Asuma Sarutobi Ketika dipakai.</font>"
+  },
+  {
+   "n": 12488,
+   "text": "<font color='#00aeff'>             Rock Lee Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Rock Lee  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12489,
+   "text": "<font color='#00aeff'>            Hyuga Neji Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hyuga Neji  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12490,
+   "text": "<font color='#00aeff'>               Scorpion Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Scorpion  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12491,
+   "text": "<font color='#8e8e8e'>                Yamato Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Yamato  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12492,
+   "text": "<font color='#8e8e8e'>               Nel Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Nel Ketika dipakai.</font>"
+  },
+  {
+   "n": 12493,
+   "text": "<font color='#8e8e8e'>          Sarugaki Hiyori Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Sarugaki Hiyori  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12494,
+   "text": "<font color='#ff8a00'>          Shihouin Yoruichi Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Shihouin Yoruichi  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12495,
+   "text": "<font color='#00aeff'>                Soifon Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Soifon  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12496,
+   "text": "<font color='#ff8a00'>            Halibel Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Halibel  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12497,
+   "text": "<font color='#8e8e8e'>             Mashiro Kuna Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Mashiro Kuna Ketika dipakai.</font>"
+  },
+  {
+   "n": 12498,
+   "text": "<font color='#8e8e8e'>            Shiba Kuukaku Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Shiba Kuukaku  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12499,
+   "text": "<font color='#8e8e8e'>            Nanao Ise Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Nanao Ise  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12500,
+   "text": "<font color='#8e8e8e'>             Momo Hinamori Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Momo Hinamori  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12501,
+   "text": "<font color='#8e8e8e'>           Rangiku Matsumoto Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Rangiku Matsumoto Ketika dipakai.</font>"
+  },
+  {
+   "n": 12502,
+   "text": "<font color='#ff8a00'>            Inoue Orihime Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Inoue Orihime Ketika dipakai.</font>"
+  },
+  {
+   "n": 12503,
+   "text": "<font color='#8e8e8e'>             Kurenai Yuuhi Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Kurenai Yuuhi  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12504,
+   "text": "<font color='#ff8a00'>           Hyuga Hinata Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hyuga Hinata  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12505,
+   "text": "<font color='#8e8e8e'>                Chi Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Chi  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12506,
+   "text": "<font color='#8e8e8e'>               Shizune Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Shizune  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12507,
+   "text": "<font color='#8e8e8e'>              Alice Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Alice  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12508,
+   "text": "<font color='#8e8e8e'>               Priest Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Priest  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12509,
+   "text": "<font color='#8e8e8e'>               Ghost Lady Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Ghost Lady Ketika dipakai.</font>"
+  },
+  {
+   "n": 12510,
+   "text": "<font color='#8e8e8e'>             Zombie Lady Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Zombie Lady Ketika dipakai.</font>"
+  },
+  {
+   "n": 12511,
+   "text": "<font color='#8e8e8e'>               Mizukage Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Mizukage  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12512,
+   "text": "<font color='#ff8a00'>           Uzumaki Naruto Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Uzumaki Naruto  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12513,
+   "text": "<font color='#ff8a00'>             Gaara Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Gaara Ketika dipakai.</font>"
+  },
+  {
+   "n": 12514,
+   "text": "<font color='#ff8a00'>          Hatake Kakashi Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hatake Kakashi  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12515,
+   "text": "<font color='#ff8a00'>        Uchiha Sasuke Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Uchiha Sasuke Ketika dipakai.</font>"
+  },
+  {
+   "n": 12516,
+   "text": "<font color='#ff8a00'>            Uchiha Itachi Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Uchiha Itachi  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12517,
+   "text": "<font color='#8e8e8e'>           ⟨0⟩nd Hokage Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi ⟨1⟩nd Hokageh Ketika dipakai.</font>"
+  },
+  {
+   "n": 12518,
+   "text": "<font color='#ff8a00'>           Orochimaru Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Orochimaru  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12519,
+   "text": "<font color='#00aeff'>              Zangetsu Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Zangetsu  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12520,
+   "text": "<font color='#8e8e8e'>            ⟨0⟩rd Hokage Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi ⟨1⟩rd Hokage  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12521,
+   "text": "<font color='#00aeff'>       Hollowfied Grimmjow Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Hollowfied Grimmjow  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12522,
+   "text": "<font color='#ff8a00'>               Aizen Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Aizen  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12523,
+   "text": "<font color='#ff8a00'>           ⟨0⟩th Hokage Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi ⟨1⟩th Hokage  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12524,
+   "text": "<font color='#8e8e8e'>            Jiraiya Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Jiraiya  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12525,
+   "text": "<font color='#ff8a00'>             Sakura Haruno Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Sakura Haruno  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12526,
+   "text": "<font color='#8e8e8e'>              Arale Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi  Arale  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12527,
+   "text": "<font color='#00aeff'>            Yamanaka Ino Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Yamanaka Ino Ketika dipakai.</font>"
+  },
+  {
+   "n": 12528,
+   "text": "<font color='#8e8e8e'>         Mitarashi Anko Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Mitarashi Anko Ketika dipakai.</font>"
+  },
+  {
+   "n": 12529,
+   "text": "<font color='#00aeff'>               Temari Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Temari Ketika dipakai.</font>"
+  },
+  {
+   "n": 12530,
+   "text": "<font color='#8e8e8e'>                Tenten Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Tenten  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12531,
+   "text": "<font color='#00aeff'>               Haku Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Haku  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12532,
+   "text": "<font color='#8e8e8e'>              Kurotsuchi Nemu Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Kurotsuchi Nemu  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12533,
+   "text": "<font color='#00aeff'>          Kusajishi Yachiru Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Kusajishi Yachiru  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12534,
+   "text": "<font color='#8e8e8e'>            Kotetsu Isane Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Kotetsu Isane  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12535,
+   "text": "<font color='#8e8e8e'>              Konan Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Konan  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12536,
+   "text": "<font color='#00aeff'>        Yadomaru Sasha Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Yadomaru Sasha Ketika dipakai.</font>"
+  },
+  {
+   "n": 12537,
+   "text": "<font color='#8e8e8e'>            Arisawa Tatsuki Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Arisawa Tatsuki  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12538,
+   "text": "<font color='#8e8e8e'>          Bomb Rukia Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Bomb Rukia  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12539,
+   "text": "<font color='#ff8a00'>               Tsunade Kostum</font><br><font color='#5df9ff'>Kostum mistis akan akan merubah kamu menjadi Tsunade  Ketika dipakai.</font>"
+  },
+  {
+   "n": 12540,
+   "text": "<font color='#ffc600'>                  Stone Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan sejumlah Batu saat digunakan.</font>"
+  },
+  {
+   "n": 12541,
+   "text": "<font color='#ffc600'>                  Gift Coupon Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan sejumlah gift coupon saat digunakan.</font>"
+  },
+  {
+   "n": 12542,
+   "text": "<font color='#ffc600'>                  Suit Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan item set equipment yang tidak ternilai secara acak saat digunakan.</font>"
+  },
+  {
+   "n": 12543,
+   "text": "<font color='#ffc600'>                  Pet Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan pet saat digunakan.</font>"
+  },
+  {
+   "n": 12544,
+   "text": "<font color='#ffc600'>                  Medal Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan amount of medals saat digunakan.</font>"
+  },
+  {
+   "n": 12545,
+   "text": "<font color='#ffc600'>                  Point Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan  amount of arena points saat digunakan.</font>"
+  },
+  {
+   "n": 12546,
+   "text": "<font color='#ffc600'>                  EXP Bag</font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan  amount of EXP saat digunakan</font>"
+  },
+  {
+   "n": 12547,
+   "text": "<font color='#ffc600'>                 </font><br><font color='#5df9ff'>Mendapatkan kantong misteri yang berisikan gem secara acak saat digunakan.</font>"
+  },
+  {
+   "n": 12548,
+   "text": "Masuk ke Desa Api untuk mendapatkan prestasi lebih untuk Ninjutsu elemen Api"
+  },
+  {
+   "n": 12549,
+   "text": "Masuk ke Desa Angin untuk mendapatkan prestasi lebih untuk Ninjutsu elemen Angin"
+  },
+  {
+   "n": 12550,
+   "text": "Masuk ke Desa Air untuk mendapatkan prestasi lebih untuk Ninjutsu elemen Air"
+  },
+  {
+   "n": 12551,
+   "text": "Masuk ke Desa Petir untuk mendapatkan prestasi lebih untuk Ninjutsu elemen Petir"
+  },
+  {
+   "n": 12552,
+   "text": "Masuk ke Desa Tanah untuk mendapatkan prestasi lebih untuk Ninjutsu elemen Tanah"
+  },
+  {
+   "n": 12553,
+   "text": "<font color='#00ffff'>Panduan Pemula</font>"
+  },
+  {
+   "n": 12554,
+   "text": "<font color='#00ffff'>Resmi</font>"
+  },
+  {
+   "n": 12555,
+   "text": "<font color='#00ffff'>Ninja level-Kage</font>"
+  },
+  {
+   "n": 12556,
+   "text": "<font color='#5df9ff'>Hadiah dasar Exp： {@0:} </font>"
+  },
+  {
+   "n": 12557,
+   "text": "<font color='#5df9ff'>{@0:}Bonus star level Exp： {@1:} </font>"
+  },
+  {
+   "n": 12558,
+   "text": "<font color='#5df9ff'>{@0:}</font>"
+  },
+  {
+   "n": 12559,
+   "text": "<font color='#00ffff'>Liga dibuka!</font>"
+  },
+  {
+   "n": 12560,
+   "text": "<font color='#00ffff'>Buka toko guci</font>"
+  },
+  {
+   "n": 12561,
+   "text": "<font color='#00ffff'>Melihat keseluruhan map dunia dalam game, disini.</font>"
+  },
+  {
+   "n": 12562,
+   "text": "Kamu dapat memperoleh EXP dan kupon hadiah dari rekomendasi. Hanya level ⟨0⟩ yang dapat menggunakan referrer"
+  },
+  {
+   "n": 12563,
+   "text": "<font color='#00ffff'>Buka catatan ninja</font>"
+  },
+  {
+   "n": 12564,
+   "text": "<font color='#00ffff'>Buka toko misteri</font>"
+  },
+  {
+   "n": 12565,
+   "text": "Ransel"
+  },
+  {
+   "n": 12566,
+   "text": "Mengambil seluruh barang di gudang dan masukkan kedalam Ransel"
+  },
+  {
+   "n": 12567,
+   "text": "<font color='#00ffff'> Skill nomor {@ 0:} </ font>"
+  },
+  {
+   "n": 12568,
+   "text": "Jika kamu bertemu lawan yang kuat, kamu dapat tarik gagang untuk memperbarui lawan!"
+  },
+  {
+   "n": 12569,
+   "text": "<font color='#00ffff'>Refresh Item yang terjual di Toko Barang saat ini</font>"
+  },
+  {
+   "n": 12570,
+   "text": "<font color='#00ffff'>Klik untuk memperbaiki semua Item yang digunakan</font>"
+  },
+  {
+   "n": 12571,
+   "text": "<font color='#00ffff'>Klik untuk memperbaiki satu bagian peralatan di dalam tas atau Panel Peralatan</font>"
+  },
+  {
+   "n": 12572,
+   "text": "<font color='#00ffff'>Gold Terbanyak  NO.⟨0⟩</font>"
+  },
+  {
+   "n": 12573,
+   "text": "<font color='#00ffff'>GM：Membantu pemain untuk mengatasi masalah</font>"
+  },
+  {
+   "n": 12574,
+   "text": "<font color='#00ffff'>Pemimpin</font>"
+  },
+  {
+   "n": 12575,
+   "text": "<font color='#00ffff'>Batu Terbanyak NO.⟨0⟩</font>"
+  },
+  {
+   "n": 12576,
+   "text": "<font color='#00ffff'>{@0:}／{@1:}</font>"
+  },
+  {
+   "n": 12577,
+   "text": "<font color='#00ffff'>Ranking : {@0:}</font>"
+  },
+  {
+   "n": 12578,
+   "text": "<font color='#00ffff'>Kelas : {@0:}</font>"
+  },
+  {
+   "n": 12579,
+   "text": "<font color='#00ffff'>Rank : {@0:}</font>"
+  },
+  {
+   "n": 12580,
+   "text": "<font color='#00ffff'>Score : {@0:}</font>"
+  },
+  {
+   "n": 12581,
+   "text": "<font color='#00ffff'>Menang berurut : {@0:}</font>"
+  },
+  {
+   "n": 12582,
+   "text": "<font color='#00ffff'>Rata-rata menang : {@0:}</font>"
+  },
+  {
+   "n": 12583,
+   "text": "Jual semua item pada page ini"
+  },
+  {
+   "n": 12584,
+   "text": "<font color='#00ffff'>Memperbaiki semua peralatan pada panel peralatan</font>"
+  },
+  {
+   "n": 12585,
+   "text": "Barang Mall"
+  },
+  {
+   "n": 12586,
+   "text": "Skill"
+  },
+  {
+   "n": 12587,
+   "text": "<font color='#00ffff'>Mengurangi tampilan baris</font>"
+  },
+  {
+   "n": 12588,
+   "text": "<font color='#00ffff'>Switch Kostum</font>"
+  },
+  {
+   "n": 12589,
+   "text": "<font color='#00ffff'>Switch Outfits</font>"
+  },
+  {
+   "n": 12590,
+   "text": "Quest"
+  },
+  {
+   "n": 12591,
+   "text": "<font color='#00ffff'>Merubah Pemimpin</font>"
+  },
+  {
+   "n": 12592,
+   "text": "<font color='#00ffff'>Turun</font>"
+  },
+  {
+   "n": 12593,
+   "text": "<font color='#00ffff'>Kick</font>"
+  },
+  {
+   "n": 12594,
+   "text": "<font color='#00ffff'>Keluar Tim</font>"
+  },
+  {
+   "n": 12595,
+   "text": "<font color='#00ffff'>Membubarkan Tim</font>"
+  },
+  {
+   "n": 12596,
+   "text": "<font color='#00ffff'>Naik</font>"
+  },
+  {
+   "n": 12597,
+   "text": "<font color='#00ffff'>VIP：Menambahkan movement power,  EXP,  mengurangi biaya. Ini adalah untuk Ninja terhormat di NinjaKita</font>"
+  },
+  {
+   "n": 12598,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Desa Api</font><br>Sebuah kota dibuat setelah Perang Penyegelan Iblis dan ini adalah rumah dari Ninja Api. </font>"
+  },
+  {
+   "n": 12599,
+   "text": "<font color='#00ffff'>Kamu tidak berasal <font color='#fff67c'>Desa Api</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12600,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Api</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12601,
+   "text": "<font color='#00ffff'>Kamu tidak berasal <font color='#fff67c'>Desa Air</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12602,
+   "text": "<font color='#00ffff'><font color='#fff67c'> Desa Air</font><br>Sebuah kota dibuat setelah Perang Penyegelan Iblis dan ini adalah rumah dari Ninja Air. </font>"
+  },
+  {
+   "n": 12603,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Air</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12604,
+   "text": "<font color='#00ffff'>Kamu tidak berasal <font color='#fff67c'>Desa Petir</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12605,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Petir</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12606,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Desa Petir</font><br>Sebuah kota dibuat setelah Perang Penyegelan Iblis dan ini adalah rumah dari Ninja Petir.</font>"
+  },
+  {
+   "n": 12607,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari <font color='#fff67c'>Desa Angin</font>, tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12608,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Desa Angin</font><br>Sebuah kota dibuat setelah Perang Penyegelan Iblis dan ini adalah rumah dari Ninja Angin.</font>"
+  },
+  {
+   "n": 12609,
+   "text": "<font color='#00ffff'>Kamu tidak berasal <font color='#fff67c'>Desa Tanah</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12610,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Tanah</font>，tidak dapat memasuki desa!</font>"
+  },
+  {
+   "n": 12611,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Desa Tanah</font><br>Sebuah kota dibuat setelah Perang Penyegelan Iblis dan ini adalah rumah dari  Ninja Tanah.</font>"
+  },
+  {
+   "n": 12612,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Kota Malaikat</font><br>Kota dari master ninja.</font>"
+  },
+  {
+   "n": 12613,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Kota Malaikat</font><br>Kota para ninja master.</font>"
+  },
+  {
+   "n": 12614,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Kota Iblis</font><br>Menerobos dan tahap menggulingkan Iblis yang jahat. !</font>"
+  },
+  {
+   "n": 12615,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Kota Iblis</font><br>Menerobos dan tahap menggulingkan Iblis yang jahat !</font>"
+  },
+  {
+   "n": 12616,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Kota Iblis</font><br>Menerobos dan tahap menjatuhkan Iblis yang jahat !</font>"
+  },
+  {
+   "n": 12617,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Dragontame Coast</font><br>Akan segera tersedia</font>"
+  },
+  {
+   "n": 12618,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Tambang Batu</font><br>Level masuk: Level ⟨0⟩<br>Zone monsters：<font color='#06ff00'>Sunflower,Stinger Bee,Sushi Monster,Scarlet Bandit</font><br>Zone boss：<font color='#ff0000'>Warrior of Darkness</font></font>"
+  },
+  {
+   "n": 12619,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Api</font>，hanya dapat masuk ke area ini ketika kamu memiliki misi untuk diterima  dan  memiliki giliran ini.Tidak bisa masuk pada waktu lain!</font>"
+  },
+  {
+   "n": 12620,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Jalan Senja</font><br>Level masuk：Level ⟨0⟩<br>Zone monsters：<font color='#06ff00'>Sweet Potato Demon,Grinning Monkey,Riceball Monster,Kappa</font><br>Zone boss：<font color='#ff0000'>Bullheaded Champ</font></font>"
+  },
+  {
+   "n": 12621,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Jembatan Api</font><br>Level masuk：Level ⟨0⟩<br>Zone monsters：<font color='#06ff00'>Corn Demon,Digrat,Wildhaired Banshee,Scorching Demon</font><br>Zone boss：<font color='#ff0000'>Warrior of Darkness,Iblis Naomasa</font></font>"
+  },
+  {
+   "n": 12622,
+   "text": "<font color='#00ffff'>Kamu tidak berasal <font color='#fff67c'>Desa Air</font>，hanya dapat masuk ke area ini ketika kamu memiliki misi untuk diterima dan memiliki giliran ini.Tidak bisa masuk pada waktu lain!</font>"
+  },
+  {
+   "n": 12623,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Sungai ketenangan</font><br>Level masuk：Level ⟨0⟩ <br>Zone monsters：<font color='#06ff00'>Sunflower,Stinger Bee,Sushi Monster,Scarlet Bandit</font><br>Zone boss：<font color='#ff0000'>Warrior of Darkness</font></font>"
+  },
+  {
+   "n": 12624,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Air</font>，hanya dapat masuk ke area ini ketika kamu memiliki misi untuk diterima  dan  memiliki giliran ini.Tidak bisa masuk pada waktu lain!</font>"
+  },
+  {
+   "n": 12625,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Sungai Sakura</font><br>Level masuk：Level ⟨0⟩ <br>Zone monsters：<font color='#06ff00'>Sweet Potato Demon,Grinning Monkey,Riceball Monster,Kappa</font><br>Zone boss：<font color='#ff0000'>Bullheaded Champ</font></font>"
+  },
+  {
+   "n": 12626,
+   "text": "<font color='#00ffff'><font color='#fff67c'>Dataran Subur</font><br>Level masuk：Level ⟨0⟩ <br>Zone monsters：<font color='#06ff00'>Corn Demon,Digrat,Wildhaired Banshee,Rippling Demon</font><br>Zone boss：<font color='#ff0000'>Pejuang Desa Petir,Demon Tenkai</font></font>"
+  },
+  {
+   "n": 12627,
+   "text": "<font color='#00ffff'>Kamu tidak berasal <font color='#fff67c'>Desa Petir</font>，hanya dapat masuk ke area ini ketika kamu memiliki misi untuk diterima dan memiliki giliran ini.Tidak bisa masuk pada waktu lain!</font>"
+  },
+  {
+   "n": 12628,
+   "text": "<font color='#00ffff'>Kamu tidak berasal dari<font color='#fff67c'>Desa Petir</font>，hanya dapat masuk ke area ini ketika kamu memiliki misi untuk diterima  dan  memiliki giliran ini.Tidak bisa masuk pada waktu lain!</font>"
+  },
+  {
+   "n": 12629,
+   "text": "<font color='#00ffff'><font color='#fff67c'>  Puncak Bebatuan</font><br>Level masuk：Level ⟨0⟩ <br>Zone monsters：<font color='#06ff00'>Sunflower,Stinger Bee,Sushi Monster,Scarlet Bandit</font><br>Zone boss：<font color='#ff0000'>Warrior of Darkness</font></font>"
+  }
+ ]
+}

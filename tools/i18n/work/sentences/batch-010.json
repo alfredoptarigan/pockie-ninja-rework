@@ -1,0 +1,900 @@
+{
+ "terms": {
+  "Kota Malaikat": "Angel City",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "Rumah": "Home",
+  "Stinger Bee": "Bee Stingers",
+  "Pilih": "Choose",
+  "Dukun Sesat": "Rogue Shaman",
+  "Kembali": "Return",
+  "Iblis Air": "Water Demon",
+  "Iblis Tanah": "Earth Demon",
+  "Ninja Hutan": "Forest Ninja",
+  "Ruang Bimbingan": "Guidance Room",
+  "Longfeather Bandit": "Longfeather Demon",
+  "Righteous Bandit Saizon": "The Righteous Thief",
+  "Chevalier": "Chevalier Demon",
+  "Hate Demon": "Resentment",
+  "Drowned Spirit": "Drowning",
+  "Skeleton Soldier": "Skeleton Swordsman",
+  "Greenskin Frog": "Green Frog",
+  "Grinning Monkey": "Monkey",
+  "Wildhaired Banshee": "Banshee",
+  "Maneater Blossom": "Man-Eater",
+  "Treant": "Tree Ent",
+  "Sweet Potato Demon": "Potato",
+  "Sushi Monster": "Sushi",
+  "Blackhawk": "Black Eagle",
+  "Barrens Vulture": "Desert Vulture",
+  "Carcass Rat": "Corpse Mouse",
+  "Roaring Demon Ape": "Roar Demon Ape",
+  "Berserker Demondog": "Furious Dog",
+  "Decadent Monk": "Degenerate Monk",
+  "Demoneye Bloom": "Demon Eye Demon",
+  "Abyssal Treant": "Gloomy Tree",
+  "Bloodbloom": "Bloodthirsty Sunflower"
+ },
+ "units": [
+  {
+   "n": 4512,
+   "text": "<font color='#ff0000'>Hongo Batai【BOSS】</font><br><font color='#5df9ff'>Seorang pengembara yang memiliki kaliber ninjutsu tinggi. Mencari ninja yang kuat diluar untuk lawan latih tanding . sayangnya dikendalikan oleh setan setelah kalah duel.</font>"
+  },
+  {
+   "n": 4513,
+   "text": "<font color='#ff0000'>Demon Tadakatsu【BOSS】</font><br><font color='#5df9ff'>Iblis angin di bawah demonIeyasu tersebut. Memiliki kekuatan besar, terkenal karena gerakan bom-nya.</font>"
+  },
+  {
+   "n": 4514,
+   "text": "<font color='#00b034'>Masked Robber【Normal】</font><br><font color='#5df9ff'>Seorang bandit mengenakan topeng aneh. Pandangannya yang lucu memungkiri kemampuan sebenarnya bela diri.</font>"
+  },
+  {
+   "n": 4515,
+   "text": "<font color='#ff0000'>Demon Chuuji【BOSS】</font><br><font color='#5df9ff'>Demon of Soul dibawah demonleyasu. Mengendalikan musuh dengan menarik suara hati mereka.</font>"
+  },
+  {
+   "n": 4516,
+   "text": "<font color='#00b034'>Ninja Hutan【Normal】</font><br><font color='#5df9ff'>Seorang Ninja yang hidup di Hutan Cahaya. Seorang individu tidak bermoral yang hanya menerima perintah dari bosnya.</font>"
+  },
+  {
+   "n": 4517,
+   "text": "<font color='#00b034'>Kenshin Susumi【Normal】</font>"
+  },
+  {
+   "n": 4518,
+   "text": "<font color='#00b034'>Immortal Shiro【Normal】</font>"
+  },
+  {
+   "n": 4519,
+   "text": "<font color='#00b034'>Longfeather Bandit【Normal】</font><br><font color='#5df9ff'>Seorang bandit gunung memakai topi dihubungkan dengan dua bulu. Setelah sebuah desa jujur, sekarang para bajingan bersedia korupsi karena nafas kegelapan.</font>"
+  },
+  {
+   "n": 4520,
+   "text": "<font color='#00b034'>Ghostfaced Henchman【Normal】</font><br><font color='#5df9ff'>Seorang bandit mengenakan topeng mengerikan dan memancar aura firasat dari pertumpahan darah, melakukan tindak pidana berat di seluruh negeri.</font>"
+  },
+  {
+   "n": 4521,
+   "text": "<font color='#ff0000'>Demon Naomasa【BOSS】</font><br><font color='#5df9ff'>Iblis api di bawah demonIeyasu. Belajar ninjutsu api, dan memilih menyerang di kepala.</font>"
+  },
+  {
+   "n": 4522,
+   "text": "<font color='#00b034'>Mountain Boar Bandit【Normal】</font><br><font color='#5df9ff'>Setelah memburu ksatria, saatnya menjajakan dagangannya di pasar gelap. Kepala babi hutan yang mereka kenakan melambangkan kepahlawanan.</font>"
+  },
+  {
+   "n": 4523,
+   "text": "<font color='#ff0000'>Righteous Bandit Saizon【BOSS】</font><br><font color='#5df9ff'>Pemimpin dari kelompok bandit bersembunyi di Lembah Kesunyian. Sangat bermusuhan terhadap Kota Malaikat, tetapi Revels juga menumpas pasukan iblis.</font>"
+  },
+  {
+   "n": 4524,
+   "text": "<font color='#00b034'>Chevalier【Normal】</font><br><font color='#5df9ff'>Prajurit penghambat jalan utama dengan keahlian perang yang tak tertandingi. Beberapa dari mereka menggunakan kekuatan itu untuk menggertak yang lemah.</font>"
+  },
+  {
+   "n": 4525,
+   "text": "<font color='#ff0000'>Hate Demon【BOSS】</font><br><font color='#5df9ff'>Prajurit Tulang menggunakan soul bladeBatu untuk mengumpulkan iblis dari akhirat. Memiliki kekuatan untuk menyusun Prajurit Tulang.</font>"
+  },
+  {
+   "n": 4526,
+   "text": "<font color='#ff0000'>Senyo of the Forest【BOSS】</font><br><font color='#5df9ff'>Pemimpin Ninja Hutan, memimpin ninja di Hutan Cahaya. Sangat mencintai alam, dan sangat tidak suka dengan orang yang suka merusak alam.</font>"
+  },
+  {
+   "n": 4527,
+   "text": "<font color='#00b034'>Sunrise Brigand【Normal】</font><br><font color='#5df9ff'>. Bandit penjelajah pegunungan dekat Desa Matahari, dan bersekongkol dengan raja zalim di desa.</font>"
+  },
+  {
+   "n": 4528,
+   "text": "<font color='#ff0000'>Venomfog Demon【BOSS】</font><br><font color='#5df9ff'>Iblis penguasa yang ada di Jalan Kematian, dapat mengeluarkan kabut beracun.</font>"
+  },
+  {
+   "n": 4529,
+   "text": "<font color='#ff0000'>Demon Yasumasa【BOSS】</font><br><font color='#5df9ff'>Iblis Petir dibawah demonleyasu. Ahli dalam ninjutsu petir, dan yakin akan kemampuan sendiri. Musuh terlibat dalam perkelahian yang adil.</font>"
+  },
+  {
+   "n": 4530,
+   "text": "<font color='#ff0000'>Demon Tenkai【BOSS】</font><br><font color='#5df9ff'>Iblis Air dibawah demonIeyasu. Mempelajari ninjutsu air, dan membuat beberapa iblis.</font>"
+  },
+  {
+   "n": 4531,
+   "text": "<font color='#00b034'>Ancient Isle Ninja【Normal】</font><br><font color='#5df9ff'>Ninja dari Pulau Kuno yang tinggal di Alam Liar. Hanya yang kuat yang mendapatkan hormat dari mereka.</font>"
+  },
+  {
+   "n": 4532,
+   "text": "<font color='#00b034'>Kei Ichiro【Normal】</font>"
+  },
+  {
+   "n": 4533,
+   "text": "<font color='#ff0000'>Demon Yagyu【BOSS】</font><br><font color='#5df9ff'>Iblis Tanah dibawah demonIeyasu. Ahli dalam ninjutsu tanah, memiliki pertahanan gigih. Kelemahan serangan mereka yang mencoreng dirinya.</font>"
+  },
+  {
+   "n": 4534,
+   "text": "<font color='#ff0000'>Gold Demonblade【BOSS】</font><br><font color='#5df9ff'>Pemimpin yang membangun pengaruhnya atas Daratan Patah Hati dengan tangan kosong. Cahaya iblis memancar dari pedang adalah bukti kekuasaannya.</font>"
+  },
+  {
+   "n": 4535,
+   "text": "<font color='#00b034'>Drowned Spirit【Normal】</font><br><font color='#5df9ff'>Manusia yang tenggelam dalam Jalan Kematian, dikendalikan oleh iblis noxious mist di akhirat mereka.</font>"
+  },
+  {
+   "n": 4536,
+   "text": "<font color='#00b034'>Drowned Spirit【Normal】</font><br><font color='#5df9ff'>Manusia yang tenggelam dalam Jalan Kematian, dikendalikan oleh iblis Noxious Mist di akhirat mereka.</font>"
+  },
+  {
+   "n": 4537,
+   "text": "<font color='#00b034'>Sekeleton Soldier【Normal】</font><br><font color='#5df9ff'>Hanya sisa-sisa kerangka bantalan semata yang berkeinginan berperang. Sebagian besar terdiri dari prajurit yang memberikan hidup mereka dalam kecelakaan yang disengaja.</font>"
+  },
+  {
+   "n": 4538,
+   "text": "<font color='#00b034'>Skeleton Soldier【Normal】</font><br><font color='#5df9ff'>Hanya sisa-sisa kerangka bantalan semata yang berkeinginan berperang. Sebagian besar terdiri dari prajurit yang memberikan hidup mereka dalam kecelakaan yang disengaja.</font>"
+  },
+  {
+   "n": 4539,
+   "text": "<font color='#00b034'>Valley Bandit【Normal】</font><br><font color='#5df9ff'>Vicious bandit konglomerat di Lembah Kesunyian, konon bersekongkol dengan iblis.</font>"
+  },
+  {
+   "n": 4540,
+   "text": "<font color='#00b034'>Harsh Barrens Swordsman【Normal】</font><br><font color='#5df9ff'>Pendekar pedang pengejar nirwana di Harsh Barrens. Satu-satunya ambisi mereka dalam mencapai kekuasaan sebenarnya telah mengakibatkan mereka menjadi taring dan cakar dari Gold Demonblade.</font>"
+  },
+  {
+   "n": 4541,
+   "text": "<font color='#00b034'>Egret【Normal】</font><br><font color='#5df9ff'>Pewaris Air Tuhan. Sementara masih lemah, suatu hari akan melambung melewati awan.</font>"
+  },
+  {
+   "n": 4542,
+   "text": "<font color='#00b034'>Vulture【Normal】</font><br><font color='#5df9ff'>Seekor burung ganas yang egois bersifat bahkan tidak akan membiarkan untuk meninggalkan daging busuk.</font>"
+  },
+  {
+   "n": 4543,
+   "text": "<font color='#00b034'>Bloodbat【Normal】</font><br><font color='#5df9ff'>Merupakan iblis jahat yang suka pesta darah manusia. Lolos dari kota iblis untuk melakukan dosa di Hutan Cahaya.</font>"
+  },
+  {
+   "n": 4544,
+   "text": "<font color='#00b034'>Imp【Normal】</font><br><font color='#5df9ff'>Seekor iblis umum di kota iblis. Salah satu dari mereka akan memiliki kesempatan untuk dipromosikan ke iblis yang lebih tinggi.</font>"
+  },
+  {
+   "n": 4545,
+   "text": "<font color='#00b034'>Greenskin Frog【Normal】</font><br><font color='#5df9ff'>Merupakan katak biasa yang lendirnya bisa menangkal kejahatan.</font>"
+  },
+  {
+   "n": 4546,
+   "text": "<font color='#00b034'>Stinger Bee【Normal】</font><br><font color='#5df9ff'>Stinger Bee cinta ketenangan. Mereka yang berani mengganggu mereka akan menderita badai sengatan beracun.</font>"
+  },
+  {
+   "n": 4547,
+   "text": "<font color='#00b034'>Digrat【Normal】</font><br><font color='#5df9ff'>Digrats melindungi harta yang didambakan mereka dengan memperbaiki tempat persembunyian mereka sepanjang waktu.</font>"
+  },
+  {
+   "n": 4548,
+   "text": "<font color='#00b034'>Grinning Monkey【Normal】</font><br><font color='#5df9ff'>Grinning Monkeys menipu musuh dengan senyum mereka, menyerang ketika mereka membiarkan penjaga mereka turun.</font>"
+  },
+  {
+   "n": 4549,
+   "text": "<font color='#00b034'>Lost Dog【Normal】</font><br><font color='#5df9ff'>Lost Dogs telah sering menggalah sejak muda, sehingga kewaspadaan mereka ketika orang akan dekat.</font>"
+  },
+  {
+   "n": 4550,
+   "text": "<font color='#00b034'>Wildhaired Banshee【Normal】</font><br><font color='#5df9ff'>Wildhaired Banshee adalah seorang gadis cantik, meskipun ditzy. Rambut gilanya selalu takut untuk dilihat untuk pejalan kaki waspada..</font>"
+  },
+  {
+   "n": 4551,
+   "text": "<font color='#00b034'>Kappa【Normal】</font><br><font color='#5df9ff'>Seekor iblis hidup di dalam air yang suka bermain di sepanjang pantai. Setelah tertangkap, ia akan menyerahkan harta karun dengan imbalan kebebasan.</font>"
+  },
+  {
+   "n": 4552,
+   "text": "<font color='#00b034'>Immoral Monk【Normal】</font><br><font color='#5df9ff'>Dukun Sesat yang tidak memperhatikan kesopanan, berkeliaran di negeri dan melakukan tindakan kejahatan.</font>"
+  },
+  {
+   "n": 4553,
+   "text": "<font color='#00b034'>Demon Flute Succubus【Normal】</font><br><font color='#5df9ff'>Iblis yang suka mengandalkan musik suling untuk daya tarik pelancong. Mereka yang disihir tidak pernah terdengar lagi.</font>"
+  },
+  {
+   "n": 4554,
+   "text": "<font color='#00b034'>Ghost Granny【Normal】</font>\n<br><font color='#5df9ff'>Ghost grannies suka menakut-nakuti kaus kaki dari anak-anak lari. Untuk keselamatan orang tykes kecil, nenek-nenek harus diletakkan.</font>"
+  },
+  {
+   "n": 4555,
+   "text": "<font color='#00b034'>Maneater Blossom【Normal】</font><br><font color='#5df9ff'>Maneater blossoms memakai topeng menarik- semua lebih mudah bagi wisatawan yang tidak curiga untuk mengembara cukup dekat bagi mereka ke chomp.</font>"
+  },
+  {
+   "n": 4556,
+   "text": "<font color='#00b034'>Treant【Normal】</font><br><font color='#5df9ff'>Treant adalah monster lambat, kulit kerasnya melindungi dia dari kerusakan yang lebih parah.</font>"
+  },
+  {
+   "n": 4557,
+   "text": "<font color='#00b034'>Treant[Normal]</font><br><font color='#5df9ff'>Treant adalah monster lambat, kulit kerasnya melindungi dia dari kerusakan yang lebih parah.</font>"
+  },
+  {
+   "n": 4558,
+   "text": "<font color='#00b034'>Sunflower【Normal】</font><br><font color='#5df9ff'>Sesuatu yang tampak berbahaya, bunga matahari dilengkapi dengan tanaman rambat berduri yang tamparan akan sakit sekali.</font>"
+  },
+  {
+   "n": 4559,
+   "text": "<font color='#00b034'>Sweet Potato Demon【Normal】</font><br><font color='#5df9ff'>Sweet Potato Demon menghancurkan semua musuh yang berat badannya dibawah mereka.</font>"
+  },
+  {
+   "n": 4560,
+   "text": "<font color='#00b034'>Corn Demon【Normal】</font><br><font color='#5df9ff'>Iblis dengan kecenderungan akan windbreakers, menggunakannya untuk kamuflase dengan lingkungannya sambil menunggu wisatawan tidak curiga.</font>"
+  },
+  {
+   "n": 4561,
+   "text": "<font color='#00b034'>Scorching Demon【Normal】</font><br><font color='#5df9ff'>Iblis yang mendapat rasa percaya diri mereka setelah direbus dengan elemen api. Hanya muncul di lokasi yang diselimuti unsur api.</font>"
+  },
+  {
+   "n": 4562,
+   "text": "<font color='#00b034'>Rippling Demon【Normal】</font><br><font color='#5df9ff'>Iblis yang mendapat rasa percaya diri mereka setelah direbus dengan elemen air. Hanya muncul di lokasi yang diselimuti unsur air.</font>"
+  },
+  {
+   "n": 4563,
+   "text": "<font color='#00b034'>Earthbind Demon【Normal】</font><br><font color='#5df9ff'>Iblis yang mendapat rasa percaya diri mereka setelah direbus dengan elemen tanah. Hanya muncul di lokasi yang diselimuti unsur tanah.</font>"
+  },
+  {
+   "n": 4564,
+   "text": "<font color='#00b034'>Thundering Demon【Normal】</font><br><font color='#5df9ff'>Iblis yang mendapat rasa percaya diri mereka setelah direbus dengan elemen petir. Hanya muncul di lokasi yang diselimuti unsur petir.</font>"
+  },
+  {
+   "n": 4565,
+   "text": "<font color='#00b034'>Whirlwind Demon【Normal】</font><br><font color='#5df9ff'>Iblis yang mendapat rasa percaya diri mereka setelah direbus dengan elemen angin. Hanya muncul di lokasi yang diselimuti unsur angin.</font>"
+  },
+  {
+   "n": 4566,
+   "text": "<font color='#00b034'>Bun Monster【Normal】</font><br><font color='#5df9ff'>Iblis yang menggunakan roti daging sebagai umpan untuk memikat makhluk ke samping sebelum menelan mereka.</font>"
+  },
+  {
+   "n": 4567,
+   "text": "<font color='#00b034'>Sushi Monsters【Normal】</font><br><font color='#5df9ff'>Iblis yang membawa berbagai makanan ringan dengan itu untuk barter atas hidupnya jika tertangkap.</font>"
+  },
+  {
+   "n": 4568,
+   "text": "<font color='#00b034'>Sushi Monster【Normal】</font><br><font color='#5df9ff'>Iblis yang membawa berbagai makanan ringan dengan itu untuk barter atas hidupnya jika tertangkap.</font>"
+  },
+  {
+   "n": 4569,
+   "text": "<font color='#00b034'>Rice Ball Monster【Normal】</font><br><font color='#5df9ff'>Sebutir nasi memiliki kesadaran bahwa memperkuat diri yang baik dengan melahap segala sesuatu yang terlihat.</font>"
+  },
+  {
+   "n": 4570,
+   "text": "<font color='#00b034'>Blackhawk【Normal】</font><br><font color='#5df9ff'>Seekor elang yang dipengaruhi oleh iblis yang korupsi. Tubuhnya memancar dengan kejahatan mengancam.</font>"
+  },
+  {
+   "n": 4571,
+   "text": "<font color='#00b034'>Barrens Vulture【Normal】</font><br><font color='#5df9ff'>Tidak semua elang dapat bertahan hidup di gurun tanpa kenal ampun, mereka adalah pemenang sesungguhnya dari evolusi."
+  },
+  {
+   "n": 4572,
+   "text": "<font color='#00b034'>Barrens Vulture【Normal】</font><br><font color='#5df9ff'>Tidak semua elang botak dapat bertahan hidup di gurun tanpa kenal ampun, mereka adalah pemenang sesungguhnya dari evolusi."
+  },
+  {
+   "n": 4573,
+   "text": "<font color='#00b034'>Sunset Bat【Normal】</font>"
+  },
+  {
+   "n": 4574,
+   "text": "<font color='#00b034'>Marsh Frog【Normal】</font><br><font color='#5df9ff'>Katak yang menetap di Jalan Kematian, memancarkan asap beracun dari tubuh mereka. Bermusuhan dengan manusia.</font>"
+  },
+  {
+   "n": 4575,
+   "text": "<font color='#00b034'>Sunset Bee【Normal】</font>"
+  },
+  {
+   "n": 4576,
+   "text": "<font color='#00b034'>Carcass Rat【Normal】</font><br><font color='#5df9ff'>Tikus raksasa yang utama diet adalah bangkai. Menyebar penyakit menular ke makhluk lain.</font>"
+  },
+  {
+   "n": 4577,
+   "text": "<font color='#00b034'>Cacass Rat【Normal】</font><br><font color='#5df9ff'>Tikus raksasa yang utama diet adalah bangkai. Menyebar penyakit menular ke makhluk lain.</font>"
+  },
+  {
+   "n": 4578,
+   "text": "<font color='#00b034'>Roaring Demon Ape【Normal】</font><br><font color='#5df9ff'>Seekor kera raksasa dengan kesabaran yang singkat yang memusuhi semua makhluk. Menggunakan raungan untuk menakuti musuh."
+  },
+  {
+   "n": 4579,
+   "text": "<font color='#00b034'>Berserker Demondog【Normal】</font><br><font color='#5df9ff'>Iblis anjing dapat membakar darah mereka sendiri ke dalam kemarahan dari anjing sihir, sangat besar kekuatannya. Tidak mudah dijinakkan.</font>"
+  },
+  {
+   "n": 4580,
+   "text": "<font color='#00b034'>Ghastly Temptress【Normal】</font>"
+  },
+  {
+   "n": 4581,
+   "text": "<font color='#00b034'>Noxious Kappa【Normal】</font><br><font color='#5df9ff'>Kappa berada di Jalan Kematian, jelas jauh berbeda dari kappa biasa.</font>"
+  },
+  {
+   "n": 4582,
+   "text": "<font color='#00b034'>Decadent Monk【Normal】</font><br><font color='#5df9ff'>Decadent mountain monks tidak mampu menahan metode sederhana budaya sendiri. Dikabarkan akan bersekongkol dengan iblis.</font>"
+  },
+  {
+   "n": 4583,
+   "text": "<font color='#00b034'>Decadent Monk【Normal】</font><br><font color='#5df9ff'>Decadent mountain monkstidak mampu menahan metode sederhana budaya sendiri. Dikabarkan akan bersekongkol dengan iblis.</font>"
+  },
+  {
+   "n": 4584,
+   "text": "<font color='#00b034'>Decadent Monk【Normal】</font><br><font color='#5df9ff'>Decadent Mountain Monks tidak mampu menahan metode sederhana budaya sendiri. Dikabarkan akan bersekongkol dengan iblis.</font>"
+  },
+  {
+   "n": 4585,
+   "text": "<font color='#00b034'>Bewitching Siren【Normal】</font>"
+  },
+  {
+   "n": 4586,
+   "text": "<font color='#00b034'>Cunning Ghost Granny【Normal】</font><br><font color='#5df9ff'>Iblis terkenal tipu daya, tetapi masih berhasil untuk menipu banyak orang dengan sikapnya yang lembut.</font>"
+  },
+  {
+   "n": 4587,
+   "text": "<font color='#00b034'>Demoneye Bloom【Normal】</font><br><font color='#5df9ff'>Iblis bunga mampu memukau orang dengan visi yang mengancam. Keadaan yang benar-benar mengerikan.</font>"
+  },
+  {
+   "n": 4588,
+   "text": "<font color='#00b034'>Abyssal Treant【Normal】</font><br><font color='#5df9ff'>Treants yang hanya ada di rawa diselimuti oleh asap racun. Asap mereka mengurai apapun yang datang bersentuhan dengan mereka.</font>"
+  },
+  {
+   "n": 4589,
+   "text": "<font color='#00b034'>Bloodbloom【Normal】</font><br><font color='#5df9ff'>Sunflower yang bertahan di gurun kering, memelihara pertumbuhan mereka dengan menyerap mahkluk Lifeforce.</font>"
+  },
+  {
+   "n": 4590,
+   "text": "<font color='#00b034'>Demonic Potato Demon【Normal】</font>"
+  },
+  {
+   "n": 4591,
+   "text": "<font color='#00b034'>Ghastly Corn【Normal】</font>"
+  },
+  {
+   "n": 4592,
+   "text": "<font color='#00b034'>Grimfire Demon【Normal】</font>"
+  },
+  {
+   "n": 4593,
+   "text": "<font color='#00b034'>Grimwater Demon【Normal】</font>"
+  },
+  {
+   "n": 4594,
+   "text": "<font color='#00b034'>Grimearth Demon【Normal】</font>"
+  },
+  {
+   "n": 4595,
+   "text": "<font color='#00b034'>Grimthunder Demon【Normal】</font>"
+  },
+  {
+   "n": 4596,
+   "text": "<font color='#00b034'>Grimwind Demon【Normal】</font>"
+  },
+  {
+   "n": 4597,
+   "text": "<font color='#00b034'>Decayed Meat Bun【Normal】</font>"
+  },
+  {
+   "n": 4598,
+   "text": "<font color='#00b034'>Decayed Sushi【Normal】</font>"
+  },
+  {
+   "n": 4599,
+   "text": "<font color='#00b034'>Decayed Riceball【Normal】</font>"
+  },
+  {
+   "n": 4600,
+   "text": "Membangun<font color='#00b034'> Kebun </font>kamu disini."
+  },
+  {
+   "n": 4601,
+   "text": "Toko Guci hanya bisa dibuka di Desa atau Kota Malaikat!"
+  },
+  {
+   "n": 4602,
+   "text": "Masuk arena dari desa dan kota malaikat!"
+  },
+  {
+   "n": 4603,
+   "text": "Tidak dapat teleport saat ini!"
+  },
+  {
+   "n": 4604,
+   "text": "Kamu telah berada di kota sebelum memasuki rumah murid!"
+  },
+  {
+   "n": 4605,
+   "text": "Kamu telah berada di kota sebelum memasuki Kejuaraan dunia bela diri!"
+  },
+  {
+   "n": 4606,
+   "text": "Kamu harus berada di kota malaikat atau desa sebelum melihat pertandingan liga nasional!"
+  },
+  {
+   "n": 4607,
+   "text": "Kamu harus berada di kota malaikat atau desa sebelum memasuki Aula!"
+  },
+  {
+   "n": 4608,
+   "text": "Guci Keberuntungan"
+  },
+  {
+   "n": 4609,
+   "text": "Tantangan Arena"
+  },
+  {
+   "n": 4610,
+   "text": "Tantangan Valhalla"
+  },
+  {
+   "n": 4611,
+   "text": "Bendungan Las Noches"
+  },
+  {
+   "n": 4612,
+   "text": "Penjelajahan Luar"
+  },
+  {
+   "n": 4613,
+   "text": "Pertarungan murid"
+  },
+  {
+   "n": 4614,
+   "text": "Membunuh monster di luar"
+  },
+  {
+   "n": 4615,
+   "text": "Aula latihan"
+  },
+  {
+   "n": 4616,
+   "text": "Slot Machine"
+  },
+  {
+   "n": 4617,
+   "text": "Tanaman kamu telah mencapai limit teratas. Tidak dapat menggunakan {@0:}."
+  },
+  {
+   "n": 4618,
+   "text": "HP penuh"
+  },
+  {
+   "n": 4619,
+   "text": "Temukan Tempat latihan yang cocok untuk kamu:"
+  },
+  {
+   "n": 4620,
+   "text": "EXP:"
+  },
+  {
+   "n": 4621,
+   "text": "Batu:"
+  },
+  {
+   "n": 4622,
+   "text": "Masuk Ruangan"
+  },
+  {
+   "n": 4623,
+   "text": "Mendapatkan item:"
+  },
+  {
+   "n": 4624,
+   "text": "Membutuhkan Tingkat Latihan:"
+  },
+  {
+   "n": 4625,
+   "text": "Level yang dibutuhkan untuk latihan:"
+  },
+  {
+   "n": 4626,
+   "text": "Ikon Event"
+  },
+  {
+   "n": 4627,
+   "text": "Kembali ke Aula"
+  },
+  {
+   "n": 4628,
+   "text": "Beli talisman"
+  },
+  {
+   "n": 4629,
+   "text": "Status saat ini:"
+  },
+  {
+   "n": 4630,
+   "text": "Kirim"
+  },
+  {
+   "n": 4631,
+   "text": "Cari Ruangan"
+  },
+  {
+   "n": 4632,
+   "text": "Kamu hanya dapat memasuki ruang latihan khusus hanya ada di Kota malaikat!"
+  },
+  {
+   "n": 4633,
+   "text": "Cek EXP diperoleh"
+  },
+  {
+   "n": 4634,
+   "text": "Jumlah Pemain"
+  },
+  {
+   "n": 4635,
+   "text": "Perintah"
+  },
+  {
+   "n": 4636,
+   "text": "Ambil Hadih"
+  },
+  {
+   "n": 4637,
+   "text": "Jumlah Ruangan"
+  },
+  {
+   "n": 4638,
+   "text": "Jumlah Tempat Khusus"
+  },
+  {
+   "n": 4639,
+   "text": "Keuntungan Khusus"
+  },
+  {
+   "n": 4640,
+   "text": "Pilih level:"
+  },
+  {
+   "n": 4641,
+   "text": "<font color='#6a6e70'><b>    Jerami    </b></font>"
+  },
+  {
+   "n": 4642,
+   "text": "Jerami"
+  },
+  {
+   "n": 4643,
+   "text": "HitMulMulEquip%"
+  },
+  {
+   "n": 4644,
+   "text": "Hit Enhance"
+  },
+  {
+   "n": 4645,
+   "text": "HitMulMulEquip%Ex"
+  },
+  {
+   "n": 4646,
+   "text": "Bangunan"
+  },
+  {
+   "n": 4647,
+   "text": "<font color='#6a6e70'> Tips untuk membangun rumah kamu: <br><br>⟨0⟩.  Klik bangunan pada daftar bangunan untuk memulai<br><br>⟨1⟩.  Kunci bangunan akan secara automatis terbuka setelah persyaratan terpenuhi<br><br>⟨2⟩.   Beberapa bangunan dapat memiliki ⟨3⟩ atau lebih <br><br>⟨4⟩.   Level bangunan tidak dapat melebihi level rumah <br><br>⟨5⟩.  Perkebunan dan kincir angin tidak hanya dapat digunakan untuk dekorasi, tapi membawa kamu kaya akan sumber daya; <br><br>⟨6⟩.  Klik tombol edit pada pojok kanan atas untuk mengedit. Kamu dapat mengganti lokasi bangunan pada edit mode; <br><br>⟨7⟩.  Disamping bangunan, kamu dapat juga menggunakan dekorasi dan pemandangan untuk membuat rumah kamu penuh cinta. </font>"
+  },
+  {
+   "n": 4648,
+   "text": "<font color='#6a6e70'>Tips pesan dinding : <br><br>⟨0⟩.   Kamu dapat memeriksa apa yang pemain lain telah dilakukan di rumah kamu melalui pesan dinding; <br><br>⟨1⟩.   Gunakan Hapus Pesan untuk menghapus pesan tertentu， dan menghapus semua pesan dengan kategori yang sama dengan menggunakan Hapus List. </font>"
+  },
+  {
+   "n": 4649,
+   "text": "<font color='#6a6e70'> Tips papan misi : <br><br>⟨0⟩.   Kamu dapat menawarkan beberapa hadiah emas untuk merekrut pemain lain untuk membantu kamu menyelesaikan quest; <br><br>⟨1⟩.   Dibutuhkan sejumlah batu untuk menerbitan pencarian; <br><br>⟨2⟩.   Jika kamu cukup kuat, kamu dapat menerima misi pemain lain untuk memperoleh hadiah; <br><br>⟨3⟩.   Sejumlah pajak akan dipotong dari hadiah saat kamu telah menyelesaikan misi pemain lain; <br><br>⟨4⟩.   Jumlah dari misi kamu yang dapat dipublikasikan dan pajak hadiah tergantung pada tingkat dari papan misi; <br><br>Papan Misi level      Publishable   misi   Diterima   Misi   Rate pajak<br>        Lv⟨5⟩                           ⟨6⟩                          ⟨7⟩                ⟨8⟩%<br>        Lv⟨9⟩                           ⟨10⟩                          ⟨11⟩                ⟨12⟩%<br>        Lv⟨13⟩                           ⟨14⟩                          ⟨15⟩                ⟨16⟩%<br>        Lv⟨17⟩                           ⟨18⟩                          ⟨19⟩                ⟨20⟩%<br>        Lv⟨21⟩                         ⟨22⟩                          ⟨23⟩                  ⟨24⟩%"
+  },
+  {
+   "n": 4650,
+   "text": "<font color='#6a6e70'> Tips di gudang: <br><br>⟨0⟩.  Gudang dapat digunakan untuk tempat penyimpanan hasil kebun dan telur. <br><br>⟨1⟩.   Gudang hanya memiliki ⟨2⟩ slot inisial. kamu dapat membuka slot yang lain untuk mendapatkan lebih banyak ruang.<br><br>⟨3⟩.  Penggunaan kapasitas pengunjung dan tanaman dengan level gudang: <br><br>Lv⟨4⟩: Dapat membuka ⟨5⟩ slot, kapasitas hasil panen ⟨6⟩. <br>Lv⟨7⟩： Lv⟨8⟩:  Dapat membuka ⟨9⟩ slot, kapasitas hasil panen ⟨10⟩. <br>Lv⟨11⟩： Dapat membuka ⟨12⟩ slot, Kapasitas hasil panen ⟨13⟩. <br>Lv⟨14⟩: Dpat membuka ⟨15⟩ slot, hasil panen ⟨16⟩. <br>Lv⟨17⟩： Dapat membuka ⟨18⟩ slot, kapasitas hasil panen ⟨19⟩. </font>"
+  },
+  {
+   "n": 4651,
+   "text": "<font color='#6a6e70'> Tips memelihara pet : <br><br>⟨0⟩.  Harus memberi makan hewan peliharaan dengan jenis makanan yang dibutuhkan seperti tertulis pada set menu; <br><br>⟨1⟩.   Jika jenis yang sama tanaman yang dimasukkan ke dalam slot yang berdekatan, kamu akan mendapatkan bonus kekenyangan: <br>⟨2⟩ slot: ⟨3⟩% <br>⟨4⟩ slot: ⟨5⟩% <br>⟨6⟩ slot: ⟨7⟩% <br>⟨8⟩ slot: ⟨9⟩% <br>⟨10⟩ slot: ⟨11⟩% <br>Jika memiliki ⟨12⟩ slot makanan yang berbeda, kamu tetap akan medapat bonus ⟨13⟩%. <br>Setiap makanan favorit hewan peliharaan akan memperoleh bonus ⟨14⟩% tingkat kekenyangan;<br><br>⟨15⟩.    Makanan pet dapat diperoleh dari Sejarah Pet, penjelajahan, misi harian dan item mall; <br><br>⟨16⟩.   Ketika pet sudah kenyang, kamu bisa memilih salah satu dari tiga skill yang akan diambil dan mempelajari ⟨17⟩ skill; <br><br>⟨18⟩.   Jika slot skill sudah penuh，skill yang lama akan terhapus secara random; <br><br>⟨19⟩.   Klik ikon skill untuk mengunci sehingga tidak akan diganti, tetapi akan memakan biaya satu kunci skill. Setiap skill akan dikenakan biaya untuk mengunci skill, yang dapat dibeli dengan menggunakan Gold atau Gift Coupon di Item Mall. </font>"
+  },
+  {
+   "n": 4652,
+   "text": "<font color='#6a6e70'> Tips di Ruang Bimbingan: <br><br>⟨0⟩.   Ketika kamu mencapai Pemula III di arena dan mengalahkan musuh yang memiliki level lebih dari ⟨1⟩, lalu kamu dapat mengambil pemain tersebut untuk dijadikan murid di ruang bimbingan. <br><br>⟨2⟩.  Jika pemain telah menjadi guru atau murid, kamu tidak dapat menjadi guru.<br><br>⟨3⟩.  Mengajarkan atau menghukum murid akan memberikan kamu bonus EXP.<br><br>⟨4⟩.   Kamu akan mendapatkan bonus EXP dari murid esetiap ⟨5⟩ menit. EXP akan kamu dapatkan ketika pemain berakhir menjadi murid kamu<br><br>⟨6⟩.   Jika kamu menjadi murid atau guru kamu akan mendapatkan bonus EXP dari setiap tindakan pertolongan terhadap murid atau guru.<br><br>⟨7⟩.  Kamu dapat menantang guru kamu atau menyelesaikan menjadi murid jika kamu tidak menyukai guru kamu.<br><br>⟨8⟩.   Melawan guru hanya dapat dilakukan satu kali dalam satu hari.</font>"
+  },
+  {
+   "n": 4653,
+   "text": "Free"
+  },
+  {
+   "n": 4654,
+   "text": "<font color='#ff0000'>Lock</font>"
+  },
+  {
+   "n": 4655,
+   "text": "Tidak membangun"
+  },
+  {
+   "n": 4656,
+   "text": "<font color='#ff0000'>Dalam pembangunan</font>"
+  },
+  {
+   "n": 4657,
+   "text": "<font color='#ff0000'>Upgrading</font>"
+  },
+  {
+   "n": 4658,
+   "text": "Dalam operasi"
+  },
+  {
+   "n": 4659,
+   "text": "Hatching"
+  },
+  {
+   "n": 4660,
+   "text": "Harvesting"
+  },
+  {
+   "n": 4661,
+   "text": "Membangun"
+  },
+  {
+   "n": 4662,
+   "text": "Menghancurkan"
+  },
+  {
+   "n": 4663,
+   "text": "Hasil kebnun telah mencapai batas max, tidak dapat mengambil."
+  },
+  {
+   "n": 4664,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Rumah kamu. Semua bangunan lain kamu tidak bisa melampaui tingkat rumah. Silahkan coba meng-upgrade rumah kamu terlebih dahulu.</font>"
+  },
+  {
+   "n": 4665,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Rumah kamu. Semua bangunan lain kamu tidak bisa melampaui tingkat rumah. Silahkan coba meng-upgrade rumah kamu terlebih dahulu.</font>"
+  },
+  {
+   "n": 4666,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Menara yang menunjukkan prestasi kamu. Ini akan mengubah tampilan saat kamu mencapai poin prestasi tertentu. </font>"
+  },
+  {
+   "n": 4667,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Menara yang menunjukkan prestasi kamu. Ini akan mengubah tampilan saat kamu mencapai poin prestasi tertentu. </font>"
+  },
+  {
+   "n": 4668,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Blackboard yang mencatat pengunjung lainnya. Kamu dapat memeriksa apa yang pemain lain telah dilakukan di rumah kamu. </font>"
+  },
+  {
+   "n": 4669,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Blackboard yang mencatat pengunjung lainnya. Kamu dapat memeriksa apa yang pemain lain telah dilakukan di rumah kamu. </font>"
+  },
+  {
+   "n": 4670,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Kamu dapat mempublikasikan misi dengan menggunakan board ini, atau menerima misi yang di publish orang lain. </font>"
+  },
+  {
+   "n": 4671,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Kamu dapat mempublikasikan misi dengan menggunakan board ini, atau menerima misi yang di publish orang lain. </font>"
+  },
+  {
+   "n": 4672,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Pertanian akan memproduksi tanaman setiap ⟨0⟩ menit, dan akan meningkat seiringin naiknya tingkat pertanian.</font>"
+  },
+  {
+   "n": 4673,
+   "text": "<font color='#d5f003'><b>Deskripsi: </b>Produksi tanaman setiap ⟨0⟩ menit. Volume produksi akan meningkat setelah level meningkat.</font>"
+  },
+  {
+   "n": 4674,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Kincir angin iasanya sedikit digunakan, tapi itu akan membantu menghasilkan panen berlimpah selama hari berangin.</font>"
+  },
+  {
+   "n": 4675,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Kincir angin iasanya sedikit digunakan, tapi itu akan membantu menghasilkan panen berlimpah selama hari berangin.</font>"
+  },
+  {
+   "n": 4676,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Membangun gudan dapat menambah kapasitas maksimal penyimpanan tanaman dan menyimpan beberapa telur. </font>"
+  },
+  {
+   "n": 4677,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Membangun gudan dapat menambah kapasitas maksimal penyimpanan tanaman dan menyimpan beberapa telur. </font>"
+  },
+  {
+   "n": 4678,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Kamu dapat memberi makan pet kamu disini. Pet bisa mendapatkan skill baru setelah diberi makan sampai penuh. </font>"
+  },
+  {
+   "n": 4679,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Kamu dapat memberi makan pet kamu disini. Pet bisa mendapatkan skill baru setelah diberi makan sampai penuh. </font>"
+  },
+  {
+   "n": 4680,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Kamu dapat menerima murid dan berinteraksi dengan berbagai cara. </font>"
+  },
+  {
+   "n": 4681,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Kamu dapat menerima murid dan berinteraksi dengan berbagai cara. </font>"
+  },
+  {
+   "n": 4682,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Kamu dapat menetas telur di sini, atau memilih pemain lain untuk melindungi telur kamu. Kamu akan menerima berbagai hadiah setelahnya.</font>"
+  },
+  {
+   "n": 4683,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Kamu dapat menetas telur di sini, atau memilih pemain lain untuk melindungi telur kamu. Kamu akan menerima berbagai hadiah setelahnya.</font>"
+  },
+  {
+   "n": 4684,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Sebuah batu yang dibuat dengan baik, mungkin terdapat monster didalamnya. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4685,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Sebuah batu yang dibuat dengan baik, mungkin terdapat monster didalamnya. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4686,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Tumpukan kayu kecil, bisa terbakar jika tidak ada yang mengurus hal itu.  Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4687,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Tumpukan kayu kecil, bisa terbakar jika tidak ada yang mengurus hal itu.  Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4688,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Tumpukan jerami. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4689,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Tumpukan jerami. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4690,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Beberapa kasus. Tidak ada yang tahu apa di dalamnya, mungkin beberapa harta karun. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4691,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Beberapa kasus. Tidak ada yang tahu apa di dalamnya, mungkin beberapa harta karun. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4692,
+   "text": "<font color='#6a6e70'><b>Deskripsi: </b>Scarecrow, Cukup menakutkan. Menambahkan ⟨0⟩ poin kemewahan.</font>"
+  },
+  {
+   "n": 4693,
+   "text": "<font color='#d5f003'><b>Deskripsi: </b>Scarecrow, Cukup menakutkan. Menambahkan ⟨0⟩ poin kemewahan.</font>"
+  },
+  {
+   "n": 4694,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Pohon besar, dapat membentuk hutan jika banyak ditanam. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4695,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Pohon besar, dapat membentuk hutan jika banyak ditanam. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4696,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Ayunan biasa, itu terus-menerus bergoyang meskipun tidak ada angin. Kenapa begitu? Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4697,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Ayunan biasa, itu terus-menerus bergoyang meskipun tidak ada angin. Kenapa begitu? Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4698,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Bintang besar kuning, berkilauan sepanjang waktu. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4699,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Bintang besar kuning, berkilauan sepanjang waktu. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4700,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Bintang kecil kuning, yang jauh dari kita. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4701,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Bintang kecil kuning, yang jauh dari kita. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4702,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Sebuah pelangi berkabut setelah hujan. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4703,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Sebuah pelangi berkabut setelah hujan. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4704,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Bulan sabit. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4705,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Bulan sabit. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4706,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Tumpukan kayu yang terbakar. Tidak seorang pun dapat tahu kapan api akan padam. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4707,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Tumpukan kayu yang terbakar. Tidak seorang pun dapat tahu kapan api akan padam. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4708,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Pohon Sakura Pink, sangat indah. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4709,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Pohon Sakura Pink, sangat indah. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4710,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Perluas ruang di rumah kamu untuk membangun banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4711,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Perluas ruang di rumah kamu untuk membangun banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4712,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Perluas ruang di rumah kamu sedikit untuk membangun banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. .</font>"
+  },
+  {
+   "n": 4713,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Perluas ruang di rumah kamu sedikit untuk membangun banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. .</font>"
+  },
+  {
+   "n": 4714,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Perluas ruangan rumah kamu lebih baik untuk membangun banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4715,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Perluas ruangan rumah kamu lebih baik untuk membangun banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4716,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Perluas rumahmu sampai batas yang terbesar untuk membangun lebih banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4717,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Perluas rumahmu sampai batas yang terbesar untuk membangun lebih banyak gedung. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4718,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Ayunan kuda kayu. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4719,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Ayunan kuda kayu. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4720,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Fortune cat, melambaikan tangan ke arah kamu. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4721,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Fortune cat, melambaikan tangan ke arah kamu. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4722,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Gunung Hokage, memiliki wajah orang yang paling terkemuka. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4723,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Gunung Hokage, memiliki wajah orang yang paling terkemuka. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4724,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Pedang raksasa terjebak dalam batu. Tidak ada yang bisa menariknya keluar. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4725,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Pedang raksasa terjebak dalam batu. Tidak ada yang bisa menariknya keluar. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  }
+ ]
+}

@@ -1,0 +1,4205 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Hitsugaya Toushiro Namecard": "Toshiro Hitsugaya Namecard",
+  "Hirako Shinji Namecard": "Shinji Hirako Namecard",
+  "Hollowfied Hirako Shinji Namecard": "Hollowfied Shinji Hirako Namecard",
+  "Abarai Renji Namecard": "Renji Abarai Namecard",
+  "Akimichi Choji Namecard": "Choji Akimichi Namecard",
+  "Inuzuka Kiba Namecard": "Kiba Inuzuka Namecard",
+  "Aburame Shino Namecard": "Shino Aburame Namecard",
+  "Nara Shikamaru Namecard": "Shikamaru Nara Namecard",
+  "Hyuga Neji Namecard": "Neji Hyuga Namecard",
+  "Nel Namecard": "Nelliel Namecard",
+  "Sarugaki Hiyori Namecard": "Hiyori Sarugaki Namecard",
+  "Shihouin Yoruichi Namecard": "Yoruichi Shihoin Namecard",
+  "Soifon Namecard": "Soi Fon Namecard",
+  "Shiba Kuukaku Namecard": "Kukaku Shiba Namecard",
+  "Inoue Orihime Namecard": "Orihime Inoue Namecard",
+  "Kurenai Yuuhi Namecard": "Kurenai Yuhi Namecard",
+  "Hyuga Hinata Namecard": "Hinata Hyuga Namecard",
+  "Uzumaki Naruto Namecard": "Naruto Uzumaki Namecard",
+  "Hatake Kakashi Namecard": "Kakashi Hatake Namecard",
+  "Uchiha Sasuke Namecard": "Sasuke Uchiha Namecard",
+  "Uchiha Itachi Namecard": "Itachi Uchiha Namecard",
+  "Aizen Namecard": "Sosuke Aizen Namecard",
+  "Yamanaka Ino Namecard": "Ino Yamanaka Namecard",
+  "Mitarashi Anko Namecard": "Anko Mitarashi Namecard",
+  "Kurotsuchi Nemu Namecard": "Nemu Kurotsuchi Namecard",
+  "Kusajishi Yachiru Namecard": "Yachiru Kusajishi Namecard",
+  "Kotetsu Isane Namecard": "Isane Kotetsu Namecard",
+  "Yadomaru Sasha Namecard": "Sasha Yadomaru Namecard",
+  "Arisawa Tatsuki Namecard": "Tatsuki Arisawa Namecard",
+  "Kunci Rahasia Tambang Batu": "Stone Mine Secret Key",
+  "Kunci Rahasia Jalan Senja": "Twilight Road Secret Key",
+  "Kunci Rahasia Jembatan Api": "Fire Bridge Secret Key",
+  "Kunci Rahasia Sungai ketenangan": "Tranquil River Secret Key",
+  "Kunci Rahasia Sungai Sakura Secret Key": "Sakura River Secret Key",
+  "Kunci Rahasia Dataran Subur": "Fertile Plains Secret Key",
+  "Kunci Rahasia Puncak Bebatuan": "Rocky Peak Secret Key",
+  "Kunci Rahasia Tapak Petir": "Thunder Trail Secret Key",
+  "Kunci Rahasia Tebing Keramat": "Sacred Cliff Secret Key",
+  "Kunci Rahasia Lembah awan": "Cloud Valley Secret Key",
+  "Kunci Rahasia Padang Berangin": "Windy Plains Secret Key",
+  "Kunci Rahasia Lembah Angin": "Wind Valley Secret Key",
+  "Kunci Rahasia Gerbang Naga Tersembunyi": "Hidden Dragon Gate Secret Key",
+  "Kunci Rahasia Goa Batu": "Stone Cave Secret Key",
+  "Kunci Rahasia Altar Lush": "Lush Altar Secret Key",
+  "Kunci Rahasia Simpang Jalan": "Crossroads Secret Key",
+  "Kunci Rahasia Alam Liar": "Wilderness Secret Key",
+  "Kunci Rahasia Desa Matahari": "Sun Village Secret Key",
+  "Kunci Rahasia Hutan Cahaya": "Light Forest Secret Key",
+  "Kunci Rahasia Lintasan Setapak": "Footpath Secret Key",
+  "Kunci Rahasia Kota yang Hilang Secret Key": "Lost City Secret Key",
+  "Kunci Rahasia Lembah Kesunyian": "Silent Valley Secret Key",
+  "Kunci Rahasia Jalan Kematian": "Death Road Secret Key",
+  "Kunci Rahasia Daratan Patah Hati": "Heartbreak Land Secret Key",
+  "Come Come Paradise": "Make Out Paradise",
+  "Newbie Wood Bat": "Newbie Wooden Stick",
+  "Ironwok Hat": "Iron Wok Hat",
+  "silvershark Claw": "Silvershark Claw",
+  "Newbie Fists": "Newbie Swiping Fists",
+  "Newbie Chopper": "Newbie Kitchen Blade",
+  "Large Healing Potion": "Healing Draught",
+  "Large Healing Bottle": "Superior Healing Potion",
+  "Elemental Focus Slave": "Elemental Focus Salve",
+  "Large Elemental Focus Potion": "Elemental Focus Draught",
+  "Large Elemental Focus Bottle": "Superior Elemental Potion",
+  "Large Tonic Potion": "Chakra Draught",
+  "Large Tonic Bottle": "Chakra Remedy",
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Jembatan Api": "Fiery Ridge",
+  "Sungai ketenangan": "Verdant Alley",
+  "Sungai Sakura": "Slowflower River",
+  "Dataran Subur": "Greenwaves Plain",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Tapak Petir": "Thundering Steps",
+  "Tebing Keramat": "Holywood Range",
+  "Lembah awan": "Windscent Pass",
+  "Padang Berangin": "Ashvoid Gully",
+  "Lembah Angin": "Typhoon Plateau",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Goa Batu": "Boulder Cavern",
+  "Altar Lush": "Lush Altar",
+  "Alam Liar": "Dawning Wilds",
+  "Desa Matahari": "Sun Village",
+  "Hutan Cahaya": "Glowing Forest",
+  "Lintasan Setapak": "Eerie Passage",
+  "Kota yang Hilang": "Abandoned Evernight City",
+  "Lembah Kesunyian": "Soulshatter Valley",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "Rumah": "Home",
+  "Blok": "Block",
+  "Namecard Desa Api": "Namecard of Fire Village Resident",
+  "Namecard Desa Angin": "Namecard of Wind Village Resident",
+  "Namecard Desa Air": "Namecard of Water Village Resident",
+  "Namecard Desa Tanah": "Namecard of Earth Village Resident",
+  "Namecard Desa Petir": "Namecard of Lightning Village Resident",
+  "Testimonial Desa Api": "Fire Village Testimonial",
+  "Spiral Dart": "Spiral Drill",
+  "Steelclaw": "Steel Claw",
+  "[Gentle as Forests] Secret Manual": "[Gentle as Forest] Secret Manual",
+  "[Firmly as mountain] Secret Manual": "[Firm as Mountain] Secret Manual",
+  "Stinger Bee": "Bee Stingers",
+  "Pilih": "Choose",
+  "Kembali": "Return",
+  "Bukti": "Proof",
+  "Rumput": "Grass",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Suigetsu": "Suigetsu Hozuki",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Frostwing Dragon": "Ice Pterosaur",
+  "Grinning Monkey": "Monkey",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 4726,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Balon udara tampak seperti ikan paus. Menambahkan ⟨0⟩ Poin Kemewahan. .</font>"
+  },
+  {
+   "n": 4727,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Balon udara tampak seperti ikan paus. Menambahkan ⟨0⟩ Poin Kemewahan. .</font>"
+  },
+  {
+   "n": 4728,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Balon gas Udara, memiliki sayap dan dapat terbang dengan sendirinya. Menambahkan ⟨0⟩ Poin kemegahan. </font>"
+  },
+  {
+   "n": 4729,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Balon gas Udara, memiliki sayap dan dapat terbang dengan sendirinya. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4730,
+   "text": "<font color='#6a6e70'><b>Penjelasan : </b>Kaktus dalam pot. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4731,
+   "text": "<font color='#d5f003'><b>Penjelasan : </b>Kaktus dalam pot. Menambahkan ⟨0⟩ Poin Kemewahan. </font>"
+  },
+  {
+   "n": 4732,
+   "text": "Klik untuk kembali"
+  },
+  {
+   "n": 4733,
+   "text": "Silahkan melihat<font color='#00b034'> Daftar Bangunan</font>."
+  },
+  {
+   "n": 4734,
+   "text": "Klik <font color='#00b034'>Kebun</font>."
+  },
+  {
+   "n": 4735,
+   "text": "Klik disini untuk membuat Kebun"
+  },
+  {
+   "n": 4736,
+   "text": "Perluasan desa berhasil"
+  },
+  {
+   "n": 4737,
+   "text": "Pet item"
+  },
+  {
+   "n": 4738,
+   "text": "Item Telah kadaluarsa."
+  },
+  {
+   "n": 4739,
+   "text": "Status Murid"
+  },
+  {
+   "n": 4740,
+   "text": "Status ruang netas"
+  },
+  {
+   "n": 4741,
+   "text": "Misi ini akan membatu kamu dalam membangun rumah."
+  },
+  {
+   "n": 4742,
+   "text": "<font color='#5a8300'>{@0:} gold</font>  <font color='#ed4f4f'>（Setelah tax {@1:} gold）</font>"
+  },
+  {
+   "n": 4743,
+   "text": "<font color='#5a8300'>{@0:}gold</font>  <font color='#5c7e01'> (Ketika misi selesai, publisher dapat menerima gold setelah tax)</font>"
+  },
+  {
+   "n": 4744,
+   "text": "<font color='#5a8300'>{@0:} {@1:}</font>"
+  },
+  {
+   "n": 4745,
+   "text": "<font color='#5a8300'>{@0:} Batu</font>"
+  },
+  {
+   "n": 4746,
+   "text": "kumpulkan"
+  },
+  {
+   "n": 4747,
+   "text": "Sedang Berjalan"
+  },
+  {
+   "n": 4748,
+   "text": "Tidak ada yang diterima"
+  },
+  {
+   "n": 4749,
+   "text": "Rumah kamu telah memperoleh {@0:} Tanaman."
+  },
+  {
+   "n": 4750,
+   "text": "Kurangnya ruang di gudang."
+  },
+  {
+   "n": 4751,
+   "text": "Memperoleh {@0:} EXP dari penggunaan telur EXP."
+  },
+  {
+   "n": 4752,
+   "text": "Memperoleh {@0:} medal dari penggunaan telur medal."
+  },
+  {
+   "n": 4753,
+   "text": "Kamu telah memperoleh {@0:}."
+  },
+  {
+   "n": 4754,
+   "text": "Memperoleh {@0:} batu dari penggunaan telur batu."
+  },
+  {
+   "n": 4755,
+   "text": "Kamu tidak memiliki cukup tanaman."
+  },
+  {
+   "n": 4756,
+   "text": "Rumput telah dibersihkan."
+  },
+  {
+   "n": 4757,
+   "text": "Membiarkan pelindung meninggalkan ruang penetasan?"
+  },
+  {
+   "n": 4758,
+   "text": "Membatalkan pekerjaan murid？"
+  },
+  {
+   "n": 4759,
+   "text": "Kamu belum membuat ruang penetasan."
+  },
+  {
+   "n": 4760,
+   "text": "Sisa konstruksi: "
+  },
+  {
+   "n": 4761,
+   "text": "Sisa Upgrade: "
+  },
+  {
+   "n": 4762,
+   "text": "Level rumah sudah maksimal!"
+  },
+  {
+   "n": 4763,
+   "text": "level yang kamu butuhkan {@0:lev} untuk meningkatkan rumah pada level berikutnya"
+  },
+  {
+   "n": 4764,
+   "text": "Dana tidak mencukupi, membutuhkan {@1:} {@0:}."
+  },
+  {
+   "n": 4765,
+   "text": "Level rumah telah mencapai level<font color='#ffffff'> {@0:} </font>, menghabiskan<font color='#ffffff'> {@2:} </font>{@1:type}."
+  },
+  {
+   "n": 4766,
+   "text": "Equipment set satuan:  Talisman"
+  },
+  {
+   "n": 4767,
+   "text": "Tukar Semua"
+  },
+  {
+   "n": 4768,
+   "text": "Equipment set satuan:  Belt"
+  },
+  {
+   "n": 4769,
+   "text": "Equipment set satuan:  Chest Armor"
+  },
+  {
+   "n": 4770,
+   "text": "Tukar"
+  },
+  {
+   "n": 4771,
+   "text": "Tukar EXP"
+  },
+  {
+   "n": 4772,
+   "text": "Equipment set satuan:  Glove"
+  },
+  {
+   "n": 4773,
+   "text": "Equipment set satuan:  Helm"
+  },
+  {
+   "n": 4774,
+   "text": "Berdasarkan peringkat kamu saat ini, kamu dapat menukar<font color='#ff0000'>{@0:}</font>EXP"
+  },
+  {
+   "n": 4775,
+   "text": "Equipment set satuan:  Leg Armor"
+  },
+  {
+   "n": 4776,
+   "text": "Membutuhkan medal: "
+  },
+  {
+   "n": 4777,
+   "text": "Equipment set satuan:  Ring"
+  },
+  {
+   "n": 4778,
+   "text": "Tukar Equipment Set"
+  },
+  {
+   "n": 4779,
+   "text": "Menyembuhkan Murid"
+  },
+  {
+   "n": 4780,
+   "text": "Holy"
+  },
+  {
+   "n": 4781,
+   "text": "Brutal"
+  },
+  {
+   "n": 4782,
+   "text": "Stout"
+  },
+  {
+   "n": 4783,
+   "text": "Cruel"
+  },
+  {
+   "n": 4784,
+   "text": "Healthy"
+  },
+  {
+   "n": 4785,
+   "text": "Wise"
+  },
+  {
+   "n": 4786,
+   "text": "Ongoing"
+  },
+  {
+   "n": 4787,
+   "text": "Devout"
+  },
+  {
+   "n": 4788,
+   "text": "Brave"
+  },
+  {
+   "n": 4789,
+   "text": "Decadent"
+  },
+  {
+   "n": 4790,
+   "text": "Destroyer"
+  },
+  {
+   "n": 4791,
+   "text": "Hero"
+  },
+  {
+   "n": 4792,
+   "text": "Hidden"
+  },
+  {
+   "n": 4793,
+   "text": "Insight"
+  },
+  {
+   "n": 4794,
+   "text": "Quick"
+  },
+  {
+   "n": 4795,
+   "text": "Blitz"
+  },
+  {
+   "n": 4796,
+   "text": "Fanatical"
+  },
+  {
+   "n": 4797,
+   "text": "Thundering"
+  },
+  {
+   "n": 4798,
+   "text": "Absorption"
+  },
+  {
+   "n": 4799,
+   "text": "Anticipative"
+  },
+  {
+   "n": 4800,
+   "text": "Resistant"
+  },
+  {
+   "n": 4801,
+   "text": "Tyrant"
+  },
+  {
+   "n": 4802,
+   "text": "Luck"
+  },
+  {
+   "n": 4803,
+   "text": "Damaged"
+  },
+  {
+   "n": 4804,
+   "text": "Tenacious"
+  },
+  {
+   "n": 4805,
+   "text": "Clumsy"
+  },
+  {
+   "n": 4806,
+   "text": "Deft"
+  },
+  {
+   "n": 4807,
+   "text": "Decay"
+  },
+  {
+   "n": 4808,
+   "text": "Energy"
+  },
+  {
+   "n": 4809,
+   "text": "Great Strength"
+  },
+  {
+   "n": 4810,
+   "text": "Aim"
+  },
+  {
+   "n": 4811,
+   "text": "Barbaric"
+  },
+  {
+   "n": 4812,
+   "text": "Ruined"
+  },
+  {
+   "n": 4813,
+   "text": "Life"
+  },
+  {
+   "n": 4814,
+   "text": "Enchantment"
+  },
+  {
+   "n": 4815,
+   "text": "Savage"
+  },
+  {
+   "n": 4816,
+   "text": "Speedy"
+  },
+  {
+   "n": 4817,
+   "text": "Pneuma"
+  },
+  {
+   "n": 4818,
+   "text": "Flexible"
+  },
+  {
+   "n": 4819,
+   "text": "Guard"
+  },
+  {
+   "n": 4820,
+   "text": "Fatal"
+  },
+  {
+   "n": 4821,
+   "text": "Apprentice"
+  },
+  {
+   "n": 4822,
+   "text": "Treasure Hunt"
+  },
+  {
+   "n": 4823,
+   "text": "Slaughter"
+  },
+  {
+   "n": 4824,
+   "text": "Block Enhance"
+  },
+  {
+   "n": 4825,
+   "text": "Pierce Enhance"
+  },
+  {
+   "n": 4826,
+   "text": "Constitution Enhance"
+  },
+  {
+   "n": 4827,
+   "text": "Armor Break Enhance"
+  },
+  {
+   "n": 4828,
+   "text": "Vajra"
+  },
+  {
+   "n": 4829,
+   "text": "{@0:} Mengukir gagal."
+  },
+  {
+   "n": 4830,
+   "text": "{@0:} Mengukir sukses."
+  },
+  {
+   "n": 4831,
+   "text": "Tak terhentikan"
+  },
+  {
+   "n": 4832,
+   "text": "Unbreakable"
+  },
+  {
+   "n": 4833,
+   "text": "Kamu tidak memenuhi semua persyaratan naik level!"
+  },
+  {
+   "n": 4834,
+   "text": "Dragon Soul Holy Sets"
+  },
+  {
+   "n": 4835,
+   "text": "Angelic Dragon Lord Sets"
+  },
+  {
+   "n": 4836,
+   "text": "Accessory Cover"
+  },
+  {
+   "n": 4837,
+   "text": "Kamu yakin untuk merubah<font color='#ff0000'> {@0:} </font> <font color='#ff0000'> {@1:} </font> dan <font color='#ff0000'> {@2:} </font> <font color='#ff0000'> {@3:} </font> menjadi <font color='#ff0000'> {@4:} </font>?"
+  },
+  {
+   "n": 4838,
+   "text": "Kamu yakin utnuk merubah<font color='#ff0000'> {@0:} </font> <font color='#ff0000'> {@1:} </font> menjadi <font color='#ff0000'> {@2:} </font>？"
+  },
+  {
+   "n": 4839,
+   "text": "Kurang Crystal. Tidak dapat menukar!"
+  },
+  {
+   "n": 4840,
+   "text": "道具兑换"
+  },
+  {
+   "n": 4841,
+   "text": "Lv.⟨0⟩ Crystal "
+  },
+  {
+   "n": 4842,
+   "text": "Enchantment Stone Langka"
+  },
+  {
+   "n": 4843,
+   "text": "Buku Skill Pet"
+  },
+  {
+   "n": 4844,
+   "text": "Lv.⟨0⟩ Crystal"
+  },
+  {
+   "n": 4845,
+   "text": "Lv. ⟨0⟩ Crystal"
+  },
+  {
+   "n": 4846,
+   "text": "Pet Skill Book"
+  },
+  {
+   "n": 4847,
+   "text": "Mengatur persediaan"
+  },
+  {
+   "n": 4848,
+   "text": "Transfer"
+  },
+  {
+   "n": 4849,
+   "text": "Level tidak mencukupi, tidak dapat digunakan {@0:}"
+  },
+  {
+   "n": 4850,
+   "text": "Pakai semua"
+  },
+  {
+   "n": 4851,
+   "text": "Dibutuhkan Level : <font color='#00b035'>{@0:level}</font>"
+  },
+  {
+   "n": 4852,
+   "text": "gift coupon box"
+  },
+  {
+   "n": 4853,
+   "text": "Level ⟨0⟩ gift coupon box"
+  },
+  {
+   "n": 4854,
+   "text": "Enhancement Gem bintang ⟨0⟩"
+  },
+  {
+   "n": 4855,
+   "text": "Refining Gem bintang ⟨0⟩"
+  },
+  {
+   "n": 4856,
+   "text": "Gem pembuat slot bintang ⟨0⟩"
+  },
+  {
+   "n": 4857,
+   "text": "Sunfire Gem Bintang ⟨0⟩"
+  },
+  {
+   "n": 4858,
+   "text": "Silvermoon Gem Bintang ⟨0⟩"
+  },
+  {
+   "n": 4859,
+   "text": "Flamefire Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4860,
+   "text": "Earthen Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4861,
+   "text": "Windstorm Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4862,
+   "text": "Thunderwail Jade Bintang ⟨0⟩ "
+  },
+  {
+   "n": 4863,
+   "text": "Abyssal Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4864,
+   "text": "Glittering Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4865,
+   "text": "Void Jade Bintang ⟨0⟩"
+  },
+  {
+   "n": 4866,
+   "text": "Ruby Level ⟨0⟩"
+  },
+  {
+   "n": 4867,
+   "text": "Sapphire Level ⟨0⟩"
+  },
+  {
+   "n": 4868,
+   "text": "Topaz Level ⟨0⟩"
+  },
+  {
+   "n": 4869,
+   "text": "Emerald Level ⟨0⟩"
+  },
+  {
+   "n": 4870,
+   "text": "Diamond Level ⟨0⟩"
+  },
+  {
+   "n": 4871,
+   "text": "xx's shard of Felix"
+  },
+  {
+   "n": 4872,
+   "text": "Flawed Felix's xx"
+  },
+  {
+   "n": 4873,
+   "text": "Felix's xx"
+  },
+  {
+   "n": 4874,
+   "text": "Flawless Felix's xx"
+  },
+  {
+   "n": 4875,
+   "text": "Perfect Felix's xx"
+  },
+  {
+   "n": 4876,
+   "text": "Kebab"
+  },
+  {
+   "n": 4877,
+   "text": "Ham"
+  },
+  {
+   "n": 4878,
+   "text": "Hot Dog"
+  },
+  {
+   "n": 4879,
+   "text": "Steak"
+  },
+  {
+   "n": 4880,
+   "text": "Roast Pig"
+  },
+  {
+   "n": 4881,
+   "text": "Riceball"
+  },
+  {
+   "n": 4882,
+   "text": "Bun"
+  },
+  {
+   "n": 4883,
+   "text": "Rice Pudding"
+  },
+  {
+   "n": 4884,
+   "text": "Sushi"
+  },
+  {
+   "n": 4885,
+   "text": "Steamed Bowl"
+  },
+  {
+   "n": 4886,
+   "text": "Longbread"
+  },
+  {
+   "n": 4887,
+   "text": "Sandwich Roll"
+  },
+  {
+   "n": 4888,
+   "text": "Bento"
+  },
+  {
+   "n": 4889,
+   "text": "Curry Beef Rice"
+  },
+  {
+   "n": 4890,
+   "text": "Ramen"
+  },
+  {
+   "n": 4891,
+   "text": "Seafood Soup"
+  },
+  {
+   "n": 4892,
+   "text": "Squidball"
+  },
+  {
+   "n": 4893,
+   "text": "Apple"
+  },
+  {
+   "n": 4894,
+   "text": "Banana"
+  },
+  {
+   "n": 4895,
+   "text": "Grape"
+  },
+  {
+   "n": 4896,
+   "text": "Coconut"
+  },
+  {
+   "n": 4897,
+   "text": "Candy"
+  },
+  {
+   "n": 4898,
+   "text": "Fresh Beer"
+  },
+  {
+   "n": 4899,
+   "text": "Crisp Biscuit"
+  },
+  {
+   "n": 4900,
+   "text": "Round Biscuit"
+  },
+  {
+   "n": 4901,
+   "text": "Resep sintesis Kostum"
+  },
+  {
+   "n": 4902,
+   "text": "Resep Gem Level ⟨0⟩"
+  },
+  {
+   "n": 4903,
+   "text": "Goldfeather Plume"
+  },
+  {
+   "n": 4904,
+   "text": "Beastbone Bat"
+  },
+  {
+   "n": 4905,
+   "text": "Operating Needle"
+  },
+  {
+   "n": 4906,
+   "text": "Demon Belt Token"
+  },
+  {
+   "n": 4907,
+   "text": "Short Bamboo Pole"
+  },
+  {
+   "n": 4908,
+   "text": "Venom Stinger"
+  },
+  {
+   "n": 4909,
+   "text": "Coppercoin Chain"
+  },
+  {
+   "n": 4910,
+   "text": "Traveler's Strawhat"
+  },
+  {
+   "n": 4911,
+   "text": "Wild Dog Claw"
+  },
+  {
+   "n": 4912,
+   "text": "Sealing Hairpin"
+  },
+  {
+   "n": 4913,
+   "text": "River God's Pearl"
+  },
+  {
+   "n": 4914,
+   "text": "Liquor Gourd"
+  },
+  {
+   "n": 4915,
+   "text": "Greenwillow Flute"
+  },
+  {
+   "n": 4916,
+   "text": "Paper Lantern"
+  },
+  {
+   "n": 4917,
+   "text": "Blossom Mask"
+  },
+  {
+   "n": 4918,
+   "text": "Eyedrops"
+  },
+  {
+   "n": 4919,
+   "text": "Sunblock Brolly"
+  },
+  {
+   "n": 4920,
+   "text": "Vine Drill"
+  },
+  {
+   "n": 4921,
+   "text": "Greenwind Coat"
+  },
+  {
+   "n": 4922,
+   "text": "Flame Crystal"
+  },
+  {
+   "n": 4923,
+   "text": "Water Crystal"
+  },
+  {
+   "n": 4924,
+   "text": "Earth Crystal"
+  },
+  {
+   "n": 4925,
+   "text": "Thunder Crystal"
+  },
+  {
+   "n": 4926,
+   "text": "Wind Crystal"
+  },
+  {
+   "n": 4927,
+   "text": "Woven Hat"
+  },
+  {
+   "n": 4928,
+   "text": "Red Rope"
+  },
+  {
+   "n": 4929,
+   "text": "Red Bean Paste"
+  },
+  {
+   "n": 4930,
+   "text": "Wasabi Sushi Roll"
+  },
+  {
+   "n": 4931,
+   "text": "Recon Scroll"
+  },
+  {
+   "n": 4932,
+   "text": "Sunset Facemask"
+  },
+  {
+   "n": 4933,
+   "text": "Rice Dumpling"
+  },
+  {
+   "n": 4934,
+   "text": "Testimonial Desa Api"
+  },
+  {
+   "n": 4935,
+   "text": "Golden Honey"
+  },
+  {
+   "n": 4936,
+   "text": "Pearly Riceball"
+  },
+  {
+   "n": 4937,
+   "text": "Lovely Eel Rice"
+  },
+  {
+   "n": 4938,
+   "text": "Resident A Authorization"
+  },
+  {
+   "n": 4939,
+   "text": "Resident B Authorization"
+  },
+  {
+   "n": 4940,
+   "text": "Resident C Authorization"
+  },
+  {
+   "n": 4941,
+   "text": "Demon Toad Oil"
+  },
+  {
+   "n": 4942,
+   "text": "Exorcizing Candle"
+  },
+  {
+   "n": 4943,
+   "text": "[Swift as Wind] Secret Manual"
+  },
+  {
+   "n": 4944,
+   "text": "Meat Bun"
+  },
+  {
+   "n": 4945,
+   "text": "Rusty Drill"
+  },
+  {
+   "n": 4946,
+   "text": "Spiral Dart"
+  },
+  {
+   "n": 4947,
+   "text": "Steelclaw"
+  },
+  {
+   "n": 4948,
+   "text": "Stolen Plan"
+  },
+  {
+   "n": 4949,
+   "text": "Robbed Bento"
+  },
+  {
+   "n": 4950,
+   "text": "Treasure-filled Box"
+  },
+  {
+   "n": 4951,
+   "text": "Savory Grass"
+  },
+  {
+   "n": 4952,
+   "text": "Treasure of the Ancient Isle"
+  },
+  {
+   "n": 4953,
+   "text": "[Wildfire Invasion] Secret Manual"
+  },
+  {
+   "n": 4954,
+   "text": "Delicate Medicine"
+  },
+  {
+   "n": 4955,
+   "text": "Galepeace Flute"
+  },
+  {
+   "n": 4956,
+   "text": "Tattered Ancient Tome"
+  },
+  {
+   "n": 4957,
+   "text": "Resin"
+  },
+  {
+   "n": 4958,
+   "text": "Bandit Facewrap"
+  },
+  {
+   "n": 4959,
+   "text": "Stolen Treasure"
+  },
+  {
+   "n": 4960,
+   "text": "Ancient Isle Shuriken"
+  },
+  {
+   "n": 4961,
+   "text": "Forest Shuriken"
+  },
+  {
+   "n": 4962,
+   "text": "Bald Eagle Claw"
+  },
+  {
+   "n": 4963,
+   "text": "Honeydew Riceball"
+  },
+  {
+   "n": 4964,
+   "text": "Bloom Sprite's Head"
+  },
+  {
+   "n": 4965,
+   "text": "Demondog's Heart"
+  },
+  {
+   "n": 4966,
+   "text": "Plume Feather"
+  },
+  {
+   "n": 4967,
+   "text": "Secret Letter"
+  },
+  {
+   "n": 4968,
+   "text": "[Gentle as Forests] Secret Manual"
+  },
+  {
+   "n": 4969,
+   "text": "Pestilence Stone"
+  },
+  {
+   "n": 4970,
+   "text": "Soulblade Stone"
+  },
+  {
+   "n": 4971,
+   "text": "Dreamfruit"
+  },
+  {
+   "n": 4972,
+   "text": "Skull Bomb"
+  },
+  {
+   "n": 4973,
+   "text": "Parasitic Vine"
+  },
+  {
+   "n": 4974,
+   "text": "Misty Medicinal Powder"
+  },
+  {
+   "n": 4975,
+   "text": "[Firmly as mountain] Secret Manual"
+  },
+  {
+   "n": 4976,
+   "text": "Grass Carp"
+  },
+  {
+   "n": 4977,
+   "text": "Nurari's Sweat"
+  },
+  {
+   "n": 4978,
+   "text": "Rare Fishbone"
+  },
+  {
+   "n": 4979,
+   "text": "Pearl"
+  },
+  {
+   "n": 4980,
+   "text": "Nine-Headed Dragon's Tooth"
+  },
+  {
+   "n": 4981,
+   "text": "Centipede's Venom"
+  },
+  {
+   "n": 4982,
+   "text": "Ox Horn"
+  },
+  {
+   "n": 4983,
+   "text": "Giant Chameleon's Skin"
+  },
+  {
+   "n": 4984,
+   "text": "Giant Bird's Feather"
+  },
+  {
+   "n": 4985,
+   "text": "Inferno Dog's Head"
+  },
+  {
+   "n": 4986,
+   "text": "Guren's Information"
+  },
+  {
+   "n": 4987,
+   "text": "Nurari's Skin"
+  },
+  {
+   "n": 4988,
+   "text": "Exotic Fishbone"
+  },
+  {
+   "n": 4989,
+   "text": "Pink Pearl"
+  },
+  {
+   "n": 4990,
+   "text": "Centipede's Saliva"
+  },
+  {
+   "n": 4991,
+   "text": "Premium Horn"
+  },
+  {
+   "n": 4992,
+   "text": "Rotten Chameleon Skin"
+  },
+  {
+   "n": 4993,
+   "text": "Giant Black Feather"
+  },
+  {
+   "n": 4994,
+   "text": "Anonymous Namecard Folder"
+  },
+  {
+   "n": 4995,
+   "text": "Namecard Desa Api"
+  },
+  {
+   "n": 4996,
+   "text": "Namecard Desa Angin"
+  },
+  {
+   "n": 4997,
+   "text": "Namecard Desa Air"
+  },
+  {
+   "n": 4998,
+   "text": "Namecard Desa Tanah"
+  },
+  {
+   "n": 4999,
+   "text": "Namecard Desa Petir"
+  },
+  {
+   "n": 5000,
+   "text": "Demon Head"
+  },
+  {
+   "n": 5001,
+   "text": "Demon Blood"
+  },
+  {
+   "n": 5002,
+   "text": "Demon Heart"
+  },
+  {
+   "n": 5003,
+   "text": "Demon Soulstone"
+  },
+  {
+   "n": 5004,
+   "text": "Iron Ore"
+  },
+  {
+   "n": 5005,
+   "text": "Rare Ore"
+  },
+  {
+   "n": 5006,
+   "text": "Dragonscale"
+  },
+  {
+   "n": 5007,
+   "text": "Dragon Claw"
+  },
+  {
+   "n": 5008,
+   "text": "Dragon Tail"
+  },
+  {
+   "n": 5009,
+   "text": "Dragon Tendons"
+  },
+  {
+   "n": 5010,
+   "text": "Broken Kunai"
+  },
+  {
+   "n": 5011,
+   "text": "Warrior Belt"
+  },
+  {
+   "n": 5012,
+   "text": "Clown's Hat"
+  },
+  {
+   "n": 5013,
+   "text": "Warrior Clog"
+  },
+  {
+   "n": 5014,
+   "text": "<font color='#00b034'>Come Come Paradise Volume ⟨0⟩</font>"
+  },
+  {
+   "n": 5015,
+   "text": "Fireblast Crystal"
+  },
+  {
+   "n": 5016,
+   "text": "Waterdrop Crystal"
+  },
+  {
+   "n": 5017,
+   "text": "Windstorm Crystal"
+  },
+  {
+   "n": 5018,
+   "text": "Earthen Crystal"
+  },
+  {
+   "n": 5019,
+   "text": "Thundering Crystal"
+  },
+  {
+   "n": 5020,
+   "text": "Envelope"
+  },
+  {
+   "n": 5021,
+   "text": "Treasure Box"
+  },
+  {
+   "n": 5022,
+   "text": "Key"
+  },
+  {
+   "n": 5023,
+   "text": "Gift Box"
+  },
+  {
+   "n": 5024,
+   "text": "Box"
+  },
+  {
+   "n": 5025,
+   "text": "Brick"
+  },
+  {
+   "n": 5026,
+   "text": "Horn of Sound"
+  },
+  {
+   "n": 5027,
+   "text": "Kunci Rahasia Tambang Batu"
+  },
+  {
+   "n": 5028,
+   "text": "Kunci Rahasia Jalan Senja "
+  },
+  {
+   "n": 5029,
+   "text": "Kunci Rahasia Jembatan Api "
+  },
+  {
+   "n": 5030,
+   "text": "Kunci Rahasia Sungai ketenangan"
+  },
+  {
+   "n": 5031,
+   "text": "Kunci Rahasia Sungai Sakura Secret Key"
+  },
+  {
+   "n": 5032,
+   "text": "Kunci Rahasia Dataran Subur"
+  },
+  {
+   "n": 5033,
+   "text": "Kunci Rahasia Puncak Bebatuan"
+  },
+  {
+   "n": 5034,
+   "text": "Kunci Rahasia Tapak Petir"
+  },
+  {
+   "n": 5035,
+   "text": "Kunci Rahasia Tebing Keramat"
+  },
+  {
+   "n": 5036,
+   "text": "Kunci Rahasia Lembah awan"
+  },
+  {
+   "n": 5037,
+   "text": "Kunci Rahasia Padang Berangin"
+  },
+  {
+   "n": 5038,
+   "text": "Kunci Rahasia Lembah Angin"
+  },
+  {
+   "n": 5039,
+   "text": "Kunci Rahasia Gerbang Naga Tersembunyi"
+  },
+  {
+   "n": 5040,
+   "text": "Kunci Rahasia Goa Batu"
+  },
+  {
+   "n": 5041,
+   "text": "Kunci Rahasia Altar Lush"
+  },
+  {
+   "n": 5042,
+   "text": "Kunci Rahasia Simpang Jalan"
+  },
+  {
+   "n": 5043,
+   "text": "Kunci Rahasia Alam Liar"
+  },
+  {
+   "n": 5044,
+   "text": "Kunci Rahasia Desa Matahari"
+  },
+  {
+   "n": 5045,
+   "text": "Kunci Rahasia Hutan Cahaya"
+  },
+  {
+   "n": 5046,
+   "text": "Kunci Rahasia Lintasan Setapak"
+  },
+  {
+   "n": 5047,
+   "text": "Kunci Rahasia Kota yang Hilang Secret Key"
+  },
+  {
+   "n": 5048,
+   "text": "Kunci Rahasia Lembah Kesunyian"
+  },
+  {
+   "n": 5049,
+   "text": "Kunci Rahasia Jalan Kematian"
+  },
+  {
+   "n": 5050,
+   "text": "Kunci Rahasia Daratan Patah Hati"
+  },
+  {
+   "n": 5051,
+   "text": "Big Horn"
+  },
+  {
+   "n": 5052,
+   "text": "Grindstone"
+  },
+  {
+   "n": 5053,
+   "text": "Parchment"
+  },
+  {
+   "n": 5054,
+   "text": "Astrologer's Stone"
+  },
+  {
+   "n": 5055,
+   "text": "Magic-infused Stone"
+  },
+  {
+   "n": 5056,
+   "text": "Pebble Pouch"
+  },
+  {
+   "n": 5057,
+   "text": "Locked Treasure Box"
+  },
+  {
+   "n": 5058,
+   "text": "Demon Proof of Suppression"
+  },
+  {
+   "n": 5059,
+   "text": "Plague Demon Proof of Suppression"
+  },
+  {
+   "n": 5060,
+   "text": "Firebore Dragon Proof of Suppression"
+  },
+  {
+   "n": 5061,
+   "text": "Demon Brute Proof of Suppression"
+  },
+  {
+   "n": 5062,
+   "text": "Frostbore Dragon Proof of Suppression"
+  },
+  {
+   "n": 5063,
+   "text": "Thunderbore Dragon Proof of Suppression"
+  },
+  {
+   "n": 5064,
+   "text": "Windbore Dragon Proof of Suppression"
+  },
+  {
+   "n": 5065,
+   "text": "Earthbore Dragon Proof of Suppression"
+  },
+  {
+   "n": 5066,
+   "text": "Soulender Proof of Suppression"
+  },
+  {
+   "n": 5067,
+   "text": "Bereaver Proof of Suppression"
+  },
+  {
+   "n": 5068,
+   "text": "Frostwing Dragon Proof of Suppression"
+  },
+  {
+   "n": 5069,
+   "text": "Demonic Horror Proof of Suppression"
+  },
+  {
+   "n": 5070,
+   "text": "Fang Reaper Proof of Suppression"
+  },
+  {
+   "n": 5071,
+   "text": "Soulblade Demon Proof of Suppression"
+  },
+  {
+   "n": 5072,
+   "text": "Firewing Proof of Suppression"
+  },
+  {
+   "n": 5073,
+   "text": "Warfrenzy Demon Proof of Suppression"
+  },
+  {
+   "n": 5074,
+   "text": "Bloodboil Demon Proof of Suppression"
+  },
+  {
+   "n": 5075,
+   "text": "World League Champion Trophy"
+  },
+  {
+   "n": 5076,
+   "text": "National Premier League Trophy"
+  },
+  {
+   "n": 5077,
+   "text": "National Elite League Trophy"
+  },
+  {
+   "n": 5078,
+   "text": "National Professional League Trophy"
+  },
+  {
+   "n": 5079,
+   "text": "National Amateur League Trophy"
+  },
+  {
+   "n": 5080,
+   "text": "Glittering Gift Box"
+  },
+  {
+   "n": 5081,
+   "text": "Tas Batu Level ⟨0⟩"
+  },
+  {
+   "n": 5082,
+   "text": "Tas Gift Coupon Level ⟨0⟩ "
+  },
+  {
+   "n": 5083,
+   "text": "Tas Gift Coupon Level ⟨0⟩"
+  },
+  {
+   "n": 5084,
+   "text": "Tas Set Equip Level ⟨0⟩ "
+  },
+  {
+   "n": 5085,
+   "text": "Tas Set Equip Level ⟨0⟩"
+  },
+  {
+   "n": 5086,
+   "text": "Tas Pet Level ⟨0⟩"
+  },
+  {
+   "n": 5087,
+   "text": "Tas Medal Level ⟨0⟩"
+  },
+  {
+   "n": 5088,
+   "text": "Tas Point Level ⟨0⟩"
+  },
+  {
+   "n": 5089,
+   "text": "Tas EXP Level ⟨0⟩"
+  },
+  {
+   "n": 5090,
+   "text": "Tas Gem Level ⟨0⟩ "
+  },
+  {
+   "n": 5091,
+   "text": "Tas Gem Level ⟨0⟩"
+  },
+  {
+   "n": 5092,
+   "text": "Ichigo Kurosaki Namecard"
+  },
+  {
+   "n": 5093,
+   "text": "Witch Namecard"
+  },
+  {
+   "n": 5094,
+   "text": "Ggio Vega Namecard"
+  },
+  {
+   "n": 5095,
+   "text": "White Ichigo Namecard"
+  },
+  {
+   "n": 5096,
+   "text": "Bomb Ichigo Namecard"
+  },
+  {
+   "n": 5097,
+   "text": "Ulquiorra Namecard"
+  },
+  {
+   "n": 5098,
+   "text": "White Ulquiorra Namecard"
+  },
+  {
+   "n": 5099,
+   "text": "Hollow Ulquiorra Namecard"
+  },
+  {
+   "n": 5100,
+   "text": "Love Aikawa Namecard"
+  },
+  {
+   "n": 5101,
+   "text": "Grimmjow Namecard"
+  },
+  {
+   "n": 5102,
+   "text": "Hitsugaya Toushiro Namecard"
+  },
+  {
+   "n": 5103,
+   "text": "Hirako Shinji Namecard"
+  },
+  {
+   "n": 5104,
+   "text": "Hollowfied Hirako Shinji Namecard"
+  },
+  {
+   "n": 5105,
+   "text": "Abarai Renji Namecard"
+  },
+  {
+   "n": 5106,
+   "text": "Gin Ichimaru Namecard"
+  },
+  {
+   "n": 5107,
+   "text": "Akimichi Choji Namecard"
+  },
+  {
+   "n": 5108,
+   "text": "Inuzuka Kiba Namecard"
+  },
+  {
+   "n": 5109,
+   "text": "Aburame Shino Namecard"
+  },
+  {
+   "n": 5110,
+   "text": "Nara Shikamaru Namecard"
+  },
+  {
+   "n": 5111,
+   "text": "Asuma Sarutobi Namecard"
+  },
+  {
+   "n": 5112,
+   "text": "Rock Lee Namecard"
+  },
+  {
+   "n": 5113,
+   "text": "Hyuga Neji Namecard"
+  },
+  {
+   "n": 5114,
+   "text": "Scorpion Namecard"
+  },
+  {
+   "n": 5115,
+   "text": "Yamato Namecard"
+  },
+  {
+   "n": 5116,
+   "text": "Nel Namecard"
+  },
+  {
+   "n": 5117,
+   "text": "Sarugaki Hiyori Namecard"
+  },
+  {
+   "n": 5118,
+   "text": "Shihouin Yoruichi Namecard"
+  },
+  {
+   "n": 5119,
+   "text": "Soifon Namecard"
+  },
+  {
+   "n": 5120,
+   "text": "Halibel Namecard"
+  },
+  {
+   "n": 5121,
+   "text": "Mashiro Kuna Namecard"
+  },
+  {
+   "n": 5122,
+   "text": "Shiba Kuukaku Namecard"
+  },
+  {
+   "n": 5123,
+   "text": "Nanao Ise Namecard"
+  },
+  {
+   "n": 5124,
+   "text": "Momo Hinamori Namecard"
+  },
+  {
+   "n": 5125,
+   "text": "Rangiku Matsumoto Namecard"
+  },
+  {
+   "n": 5126,
+   "text": "Inoue Orihime Namecard"
+  },
+  {
+   "n": 5127,
+   "text": "Kurenai Yuuhi Namecard"
+  },
+  {
+   "n": 5128,
+   "text": "Hyuga Hinata Namecard"
+  },
+  {
+   "n": 5129,
+   "text": "Chi Namecard"
+  },
+  {
+   "n": 5130,
+   "text": "Shizune Namecard"
+  },
+  {
+   "n": 5131,
+   "text": "Alice Namecard"
+  },
+  {
+   "n": 5132,
+   "text": "Priest Namecard"
+  },
+  {
+   "n": 5133,
+   "text": "Ghost Lady Namecard"
+  },
+  {
+   "n": 5134,
+   "text": "Zombie Lady Namecard"
+  },
+  {
+   "n": 5135,
+   "text": "Mizukage Namecard"
+  },
+  {
+   "n": 5136,
+   "text": "Uzumaki Naruto Namecard"
+  },
+  {
+   "n": 5137,
+   "text": "Gaara Namecard"
+  },
+  {
+   "n": 5138,
+   "text": "Hatake Kakashi Namecard"
+  },
+  {
+   "n": 5139,
+   "text": "Uchiha Sasuke Namecard"
+  },
+  {
+   "n": 5140,
+   "text": "Uchiha Itachi Namecard"
+  },
+  {
+   "n": 5141,
+   "text": "⟨0⟩nd Hokage Namecard"
+  },
+  {
+   "n": 5142,
+   "text": "Orochimaru Namecard"
+  },
+  {
+   "n": 5143,
+   "text": "Zangetsu Namecard"
+  },
+  {
+   "n": 5144,
+   "text": "⟨0⟩rd Hokage Namecard"
+  },
+  {
+   "n": 5145,
+   "text": "Hollowfied Grimmjow Namecard"
+  },
+  {
+   "n": 5146,
+   "text": "Aizen Namecard"
+  },
+  {
+   "n": 5147,
+   "text": "⟨0⟩th Hokage Namecard"
+  },
+  {
+   "n": 5148,
+   "text": "Jiraiya Namecard"
+  },
+  {
+   "n": 5149,
+   "text": "Sakura Haruno Namecard"
+  },
+  {
+   "n": 5150,
+   "text": "Arale Namecard"
+  },
+  {
+   "n": 5151,
+   "text": "Yamanaka Ino Namecard"
+  },
+  {
+   "n": 5152,
+   "text": "Mitarashi Anko Namecard"
+  },
+  {
+   "n": 5153,
+   "text": "Temari Namecard"
+  },
+  {
+   "n": 5154,
+   "text": "Tenten Namecard"
+  },
+  {
+   "n": 5155,
+   "text": "Haku Namecard"
+  },
+  {
+   "n": 5156,
+   "text": "Kurotsuchi Nemu Namecard"
+  },
+  {
+   "n": 5157,
+   "text": "Kusajishi Yachiru Namecard"
+  },
+  {
+   "n": 5158,
+   "text": "Kotetsu Isane Namecard"
+  },
+  {
+   "n": 5159,
+   "text": "Konan Namecard"
+  },
+  {
+   "n": 5160,
+   "text": "Yadomaru Sasha Namecard"
+  },
+  {
+   "n": 5161,
+   "text": "Arisawa Tatsuki Namecard"
+  },
+  {
+   "n": 5162,
+   "text": "Bomb Rukia Namecard"
+  },
+  {
+   "n": 5163,
+   "text": "Tsunade Namecard"
+  },
+  {
+   "n": 5164,
+   "text": "Newbie Gift Box"
+  },
+  {
+   "n": 5165,
+   "text": "Level ⟨0⟩ Newbie Gift Box"
+  },
+  {
+   "n": 5166,
+   "text": "Synthesized Demon Proof of Suppression"
+  },
+  {
+   "n": 5167,
+   "text": "Sakura Special Potion"
+  },
+  {
+   "n": 5168,
+   "text": "Shizune Special Potion"
+  },
+  {
+   "n": 5169,
+   "text": "Tsunade Special Potion"
+  },
+  {
+   "n": 5170,
+   "text": "Toad Arcanum"
+  },
+  {
+   "n": 5171,
+   "text": "Konoha Arcanum"
+  },
+  {
+   "n": 5172,
+   "text": "Healing Powder"
+  },
+  {
+   "n": 5173,
+   "text": "Healing Capsule"
+  },
+  {
+   "n": 5174,
+   "text": "Small Healing Potion"
+  },
+  {
+   "n": 5175,
+   "text": "Medium Healing Potion"
+  },
+  {
+   "n": 5176,
+   "text": "Large Healing Potion"
+  },
+  {
+   "n": 5177,
+   "text": "Small Healing Bottle"
+  },
+  {
+   "n": 5178,
+   "text": "Medium Healing Bottle"
+  },
+  {
+   "n": 5179,
+   "text": "Large Healing Bottle"
+  },
+  {
+   "n": 5180,
+   "text": "HP Essence"
+  },
+  {
+   "n": 5181,
+   "text": "HP Source"
+  },
+  {
+   "n": 5182,
+   "text": "Tonic Powder"
+  },
+  {
+   "n": 5183,
+   "text": "Tonic Capsule"
+  },
+  {
+   "n": 5184,
+   "text": "Small Tonic Potion"
+  },
+  {
+   "n": 5185,
+   "text": "Medium Tonic Potion"
+  },
+  {
+   "n": 5186,
+   "text": "Large Tonic Potion"
+  },
+  {
+   "n": 5187,
+   "text": "Small Tonic Bottle"
+  },
+  {
+   "n": 5188,
+   "text": "Medium Tonic Bottle"
+  },
+  {
+   "n": 5189,
+   "text": "Large Tonic Bottle"
+  },
+  {
+   "n": 5190,
+   "text": "Arcane Essence"
+  },
+  {
+   "n": 5191,
+   "text": "Arcane Source"
+  },
+  {
+   "n": 5192,
+   "text": "Elemental Focus Powder"
+  },
+  {
+   "n": 5193,
+   "text": "Elemental Focus Slave"
+  },
+  {
+   "n": 5194,
+   "text": "Small Elemental Focus Potion"
+  },
+  {
+   "n": 5195,
+   "text": "Medium Elemental Focus Potion"
+  },
+  {
+   "n": 5196,
+   "text": "Large Elemental Focus Potion"
+  },
+  {
+   "n": 5197,
+   "text": "Small Elemental Focus Bottle"
+  },
+  {
+   "n": 5198,
+   "text": "Medium Elemental Focus Bottle"
+  },
+  {
+   "n": 5199,
+   "text": "Large Elemental Focus Bottle"
+  },
+  {
+   "n": 5200,
+   "text": "Energy Essence"
+  },
+  {
+   "n": 5201,
+   "text": "Energy Source"
+  },
+  {
+   "n": 5202,
+   "text": "Level ⟨0⟩ HP Carrier Bag"
+  },
+  {
+   "n": 5203,
+   "text": "HP Carrier Bag"
+  },
+  {
+   "n": 5204,
+   "text": "Level ⟨0⟩ Chakra Carrier Bag"
+  },
+  {
+   "n": 5205,
+   "text": "Chakra Carrier Bag"
+  },
+  {
+   "n": 5206,
+   "text": "Weeds"
+  },
+  {
+   "n": 5207,
+   "text": "Eggplant"
+  },
+  {
+   "n": 5208,
+   "text": "Corn"
+  },
+  {
+   "n": 5209,
+   "text": "Pepper"
+  },
+  {
+   "n": 5210,
+   "text": "Nut Fruit"
+  },
+  {
+   "n": 5211,
+   "text": "Pumpkin"
+  },
+  {
+   "n": 5212,
+   "text": "Mushroom"
+  },
+  {
+   "n": 5213,
+   "text": "Premium Weeds"
+  },
+  {
+   "n": 5214,
+   "text": "Premium Eggplant"
+  },
+  {
+   "n": 5215,
+   "text": "Premium Corn"
+  },
+  {
+   "n": 5216,
+   "text": "Premium Pepper"
+  },
+  {
+   "n": 5217,
+   "text": "Premium Watermelon"
+  },
+  {
+   "n": 5218,
+   "text": "Premium Pineapple"
+  },
+  {
+   "n": 5219,
+   "text": "Premium Nut Fruit"
+  },
+  {
+   "n": 5220,
+   "text": "Premium Pumpkin"
+  },
+  {
+   "n": 5221,
+   "text": "Premium Mushroom"
+  },
+  {
+   "n": 5222,
+   "text": "Mooncake"
+  },
+  {
+   "n": 5223,
+   "text": "Sharp Claws"
+  },
+  {
+   "n": 5224,
+   "text": "Sharpness"
+  },
+  {
+   "n": 5225,
+   "text": "Vision"
+  },
+  {
+   "n": 5226,
+   "text": "Rampage"
+  },
+  {
+   "n": 5227,
+   "text": "Charge"
+  },
+  {
+   "n": 5228,
+   "text": "Dragon Great Strength"
+  },
+  {
+   "n": 5229,
+   "text": "Fire Release Enhance"
+  },
+  {
+   "n": 5230,
+   "text": "Water Release Enhance"
+  },
+  {
+   "n": 5231,
+   "text": "Earth Release Enhance"
+  },
+  {
+   "n": 5232,
+   "text": "Lightning Release Enhance"
+  },
+  {
+   "n": 5233,
+   "text": "Wind Release Enhance"
+  },
+  {
+   "n": 5234,
+   "text": "Purple Tourmaline"
+  },
+  {
+   "n": 5235,
+   "text": "Lush Pendant"
+  },
+  {
+   "n": 5236,
+   "text": "Roren Resolve"
+  },
+  {
+   "n": 5237,
+   "text": "Heart of Benevolence"
+  },
+  {
+   "n": 5238,
+   "text": "Amaterasu Order"
+  },
+  {
+   "n": 5239,
+   "text": "Yellow Tourmaline"
+  },
+  {
+   "n": 5240,
+   "text": "Deep Blue Pendant"
+  },
+  {
+   "n": 5241,
+   "text": "Turmeric Resolve"
+  },
+  {
+   "n": 5242,
+   "text": "Majestic Heart"
+  },
+  {
+   "n": 5243,
+   "text": "Tsukuyomi Order"
+  },
+  {
+   "n": 5244,
+   "text": "Blue Tourmaline"
+  },
+  {
+   "n": 5245,
+   "text": "Blazing Pendant"
+  },
+  {
+   "n": 5246,
+   "text": "Rose Resolve"
+  },
+  {
+   "n": 5247,
+   "text": "Prosperous Heart"
+  },
+  {
+   "n": 5248,
+   "text": "Susano Order"
+  },
+  {
+   "n": 5249,
+   "text": "Ironwok Hat"
+  },
+  {
+   "n": 5250,
+   "text": "Tortoise Hat"
+  },
+  {
+   "n": 5251,
+   "text": "Flamecloud Hat"
+  },
+  {
+   "n": 5252,
+   "text": "Adamantine Helm"
+  },
+  {
+   "n": 5253,
+   "text": "Beastlord Helm"
+  },
+  {
+   "n": 5254,
+   "text": "Goldface Helm"
+  },
+  {
+   "n": 5255,
+   "text": "Berserker Helm"
+  },
+  {
+   "n": 5256,
+   "text": "Ferocious Helm"
+  },
+  {
+   "n": 5257,
+   "text": "Ogre Helm"
+  },
+  {
+   "n": 5258,
+   "text": "Oni Helm"
+  },
+  {
+   "n": 5259,
+   "text": "Child Hat"
+  },
+  {
+   "n": 5260,
+   "text": "Baseball Hat"
+  },
+  {
+   "n": 5261,
+   "text": "Veiled Faceguard"
+  },
+  {
+   "n": 5262,
+   "text": "Windstorm Band"
+  },
+  {
+   "n": 5263,
+   "text": "Black Oracle Hat"
+  },
+  {
+   "n": 5264,
+   "text": "Prajna Visage"
+  },
+  {
+   "n": 5265,
+   "text": "Tengu Bamboo Hat"
+  },
+  {
+   "n": 5266,
+   "text": "Kagura Band"
+  },
+  {
+   "n": 5267,
+   "text": "Deity Crown"
+  },
+  {
+   "n": 5268,
+   "text": "Visor of Destruction"
+  },
+  {
+   "n": 5269,
+   "text": "Bamboo Basket Hat"
+  },
+  {
+   "n": 5270,
+   "text": "Light Leather Hat"
+  },
+  {
+   "n": 5271,
+   "text": "Feline Hat"
+  },
+  {
+   "n": 5272,
+   "text": "Catspring Helm"
+  },
+  {
+   "n": 5273,
+   "text": "Tigerfury Helm"
+  },
+  {
+   "n": 5274,
+   "text": "Fiendish Helm"
+  },
+  {
+   "n": 5275,
+   "text": "Nightmare Helm"
+  },
+  {
+   "n": 5276,
+   "text": "Quicksilver Helm"
+  },
+  {
+   "n": 5277,
+   "text": "Beryl Helm"
+  },
+  {
+   "n": 5278,
+   "text": "Cosmic Helm"
+  },
+  {
+   "n": 5279,
+   "text": "Iron Warboots"
+  },
+  {
+   "n": 5280,
+   "text": "Flamecloud Warboots"
+  },
+  {
+   "n": 5281,
+   "text": "Adamantine Warboots"
+  },
+  {
+   "n": 5282,
+   "text": "Beastlord Warboots"
+  },
+  {
+   "n": 5283,
+   "text": "Gilded Warboots"
+  },
+  {
+   "n": 5284,
+   "text": "Berserker Warboots"
+  },
+  {
+   "n": 5285,
+   "text": "Ferocious Warboots"
+  },
+  {
+   "n": 5286,
+   "text": "Ogre Warboots"
+  },
+  {
+   "n": 5287,
+   "text": "Oni Warboots"
+  },
+  {
+   "n": 5288,
+   "text": "Child Shoes"
+  },
+  {
+   "n": 5289,
+   "text": "Athletic Shoes"
+  },
+  {
+   "n": 5290,
+   "text": "Veiled Boots"
+  },
+  {
+   "n": 5291,
+   "text": "Windstorm Boots"
+  },
+  {
+   "n": 5292,
+   "text": "Oracle Boots"
+  },
+  {
+   "n": 5293,
+   "text": "Prajna Boots"
+  },
+  {
+   "n": 5294,
+   "text": "Tengu Boots"
+  },
+  {
+   "n": 5295,
+   "text": "Kagura Boots"
+  },
+  {
+   "n": 5296,
+   "text": "Deity Boots"
+  },
+  {
+   "n": 5297,
+   "text": "Boots of Destruction"
+  },
+  {
+   "n": 5298,
+   "text": "Bamboo Clogs"
+  },
+  {
+   "n": 5299,
+   "text": "Light Leather Boots"
+  },
+  {
+   "n": 5300,
+   "text": "Feline Boots"
+  },
+  {
+   "n": 5301,
+   "text": "Catspring Boots"
+  },
+  {
+   "n": 5302,
+   "text": "Tigerlord Boots"
+  },
+  {
+   "n": 5303,
+   "text": "Fiendish Boots"
+  },
+  {
+   "n": 5304,
+   "text": "Nightmare Boots"
+  },
+  {
+   "n": 5305,
+   "text": "Quicksilver Boots"
+  },
+  {
+   "n": 5306,
+   "text": "Beryl Boots"
+  },
+  {
+   "n": 5307,
+   "text": "Cosmic Boots"
+  },
+  {
+   "n": 5308,
+   "text": "Ironplate Chest"
+  },
+  {
+   "n": 5309,
+   "text": "Tortoise Chest"
+  },
+  {
+   "n": 5310,
+   "text": "Flamecloud Warchest"
+  },
+  {
+   "n": 5311,
+   "text": "Adamantine Warchest"
+  },
+  {
+   "n": 5312,
+   "text": "Beastlord Warchest"
+  },
+  {
+   "n": 5313,
+   "text": "Gilded Warchest"
+  },
+  {
+   "n": 5314,
+   "text": "Berserker Warchest"
+  },
+  {
+   "n": 5315,
+   "text": "Ferocious Warchest"
+  },
+  {
+   "n": 5316,
+   "text": "Ogre Warchest"
+  },
+  {
+   "n": 5317,
+   "text": "Oni Warchest"
+  },
+  {
+   "n": 5318,
+   "text": "Village Wear"
+  },
+  {
+   "n": 5319,
+   "text": "Light Leather Chestguard"
+  },
+  {
+   "n": 5320,
+   "text": "Feline Coat Armor"
+  },
+  {
+   "n": 5321,
+   "text": "Catspring Armor"
+  },
+  {
+   "n": 5322,
+   "text": "Tigerfury Armor"
+  },
+  {
+   "n": 5323,
+   "text": "Fiendish Armor"
+  },
+  {
+   "n": 5324,
+   "text": "Nightmare Armor"
+  },
+  {
+   "n": 5325,
+   "text": "Quicksilver Armor"
+  },
+  {
+   "n": 5326,
+   "text": "Beryl Armor"
+  },
+  {
+   "n": 5327,
+   "text": "Cosmic Armor"
+  },
+  {
+   "n": 5328,
+   "text": "Child Armor"
+  },
+  {
+   "n": 5329,
+   "text": "Vibrant Garment"
+  },
+  {
+   "n": 5330,
+   "text": "Veiled Garb"
+  },
+  {
+   "n": 5331,
+   "text": "Windstorm Clothes"
+  },
+  {
+   "n": 5332,
+   "text": "Oracle Robes"
+  },
+  {
+   "n": 5333,
+   "text": "Prajna Robes"
+  },
+  {
+   "n": 5334,
+   "text": "Tengu Vestment"
+  },
+  {
+   "n": 5335,
+   "text": "Kagura Robes"
+  },
+  {
+   "n": 5336,
+   "text": "Deity Battle Suit"
+  },
+  {
+   "n": 5337,
+   "text": "Battle Suit of Destruction"
+  },
+  {
+   "n": 5338,
+   "text": "Newbie Wood Bat"
+  },
+  {
+   "n": 5339,
+   "text": "Dogsmasher"
+  },
+  {
+   "n": 5340,
+   "text": "Wolf Fang Bat"
+  },
+  {
+   "n": 5341,
+   "text": "Hammer of Blessing"
+  },
+  {
+   "n": 5342,
+   "text": "Mythbeast Bat"
+  },
+  {
+   "n": 5343,
+   "text": "Earthshaker Hammer"
+  },
+  {
+   "n": 5344,
+   "text": "Punching Bat"
+  },
+  {
+   "n": 5345,
+   "text": "Starlight Staff"
+  },
+  {
+   "n": 5346,
+   "text": "Octagon Hammer"
+  },
+  {
+   "n": 5347,
+   "text": "Pumpkin Hammer"
+  },
+  {
+   "n": 5348,
+   "text": "Bramble Bat"
+  },
+  {
+   "n": 5349,
+   "text": "Rhapsody Hammer"
+  },
+  {
+   "n": 5350,
+   "text": "Dragonfang Hammer"
+  },
+  {
+   "n": 5351,
+   "text": "Skyshock Pierce"
+  },
+  {
+   "n": 5352,
+   "text": "Wildhammer"
+  },
+  {
+   "n": 5353,
+   "text": "Beryl Axe"
+  },
+  {
+   "n": 5354,
+   "text": "Gilded Hammer"
+  },
+  {
+   "n": 5355,
+   "text": "Sinsmasher"
+  },
+  {
+   "n": 5356,
+   "text": "Suppression Hammer"
+  },
+  {
+   "n": 5357,
+   "text": "Escort Team Staff"
+  },
+  {
+   "n": 5358,
+   "text": "Newbie Chopper"
+  },
+  {
+   "n": 5359,
+   "text": "Kitchen Blade"
+  },
+  {
+   "n": 5360,
+   "text": "Powerful Pierce"
+  },
+  {
+   "n": 5361,
+   "text": "Bone Piercer"
+  },
+  {
+   "n": 5362,
+   "text": "Trendy Trident"
+  },
+  {
+   "n": 5363,
+   "text": "Windstrike Saber"
+  },
+  {
+   "n": 5364,
+   "text": "Severing Slash"
+  },
+  {
+   "n": 5365,
+   "text": "Swift Slicer"
+  },
+  {
+   "n": 5366,
+   "text": "Cloudflow Sword"
+  },
+  {
+   "n": 5367,
+   "text": "Sunset Pierce"
+  },
+  {
+   "n": 5368,
+   "text": "Kikumon Sword"
+  },
+  {
+   "n": 5369,
+   "text": "Jadeshade Sword"
+  },
+  {
+   "n": 5370,
+   "text": "Nether Slash"
+  },
+  {
+   "n": 5371,
+   "text": "Cloudbreak Blade"
+  },
+  {
+   "n": 5372,
+   "text": "Bloodfield Saber"
+  },
+  {
+   "n": 5373,
+   "text": "Fishbone Sword"
+  },
+  {
+   "n": 5374,
+   "text": "Goldback Saber"
+  },
+  {
+   "n": 5375,
+   "text": "Cloudwing Sword"
+  },
+  {
+   "n": 5376,
+   "text": "Skyfeather Saber"
+  },
+  {
+   "n": 5377,
+   "text": "Deathgaze Blade"
+  },
+  {
+   "n": 5378,
+   "text": "Newbie Fists"
+  },
+  {
+   "n": 5379,
+   "text": "Swiping Fists"
+  },
+  {
+   "n": 5380,
+   "text": "Sharp Bladeclaw"
+  },
+  {
+   "n": 5381,
+   "text": "Ravenous Wolfclaw"
+  },
+  {
+   "n": 5382,
+   "text": "Banana Fists"
+  },
+  {
+   "n": 5383,
+   "text": "Azure Fistblade"
+  },
+  {
+   "n": 5384,
+   "text": "Shadow Claw"
+  },
+  {
+   "n": 5385,
+   "text": "Grizzly Claw"
+  },
+  {
+   "n": 5386,
+   "text": "Red Lotus Claw"
+  },
+  {
+   "n": 5387,
+   "text": "silvershark Claw"
+  },
+  {
+   "n": 5388,
+   "text": "Windling Claw"
+  },
+  {
+   "n": 5389,
+   "text": "Flywing Claw"
+  },
+  {
+   "n": 5390,
+   "text": "Anchor Fists"
+  },
+  {
+   "n": 5391,
+   "text": "Demonrune Claw"
+  },
+  {
+   "n": 5392,
+   "text": "Respected Claw"
+  },
+  {
+   "n": 5393,
+   "text": "Pincer Fists"
+  },
+  {
+   "n": 5394,
+   "text": "Streamray Claw"
+  },
+  {
+   "n": 5395,
+   "text": "Astral Claw"
+  },
+  {
+   "n": 5396,
+   "text": "Visionary Fists"
+  },
+  {
+   "n": 5397,
+   "text": "Shackling Claw"
+  },
+  {
+   "n": 5398,
+   "text": "Wildboar King Fledgling"
+  },
+  {
+   "n": 5399,
+   "text": "Fire Dragonling"
+  },
+  {
+   "n": 5400,
+   "text": "Frost Dragonling"
+  },
+  {
+   "n": 5401,
+   "text": "Earth Dragonling"
+  },
+  {
+   "n": 5402,
+   "text": "Wind Dragonling"
+  },
+  {
+   "n": 5403,
+   "text": "Thunder Dragonling"
+  },
+  {
+   "n": 5404,
+   "text": "Firebore Dragonling"
+  },
+  {
+   "n": 5405,
+   "text": "Frostbore Dragonling"
+  },
+  {
+   "n": 5406,
+   "text": "Earthbore Dragonling"
+  },
+  {
+   "n": 5407,
+   "text": "Windbore Dragonling"
+  },
+  {
+   "n": 5408,
+   "text": "Thunderbore Dragonling"
+  },
+  {
+   "n": 5409,
+   "text": "Firewing Dragonling"
+  },
+  {
+   "n": 5410,
+   "text": "Frostwing Dragonling"
+  },
+  {
+   "n": 5411,
+   "text": "Earthwing Dragonling"
+  },
+  {
+   "n": 5412,
+   "text": "Windwing Dragonling"
+  },
+  {
+   "n": 5413,
+   "text": "Thunderwing Dragonling"
+  },
+  {
+   "n": 5414,
+   "text": "Egret Fledgling"
+  },
+  {
+   "n": 5415,
+   "text": "Vulture Fledgling"
+  },
+  {
+   "n": 5416,
+   "text": "Greenshoe Frog Fledgling"
+  },
+  {
+   "n": 5417,
+   "text": "Stinger Bee Fledgling"
+  },
+  {
+   "n": 5418,
+   "text": "Digrat Fledgling"
+  },
+  {
+   "n": 5419,
+   "text": "Grinning Monkey Fledgling"
+  },
+  {
+   "n": 5420,
+   "text": "Lost Dog Fledgling"
+  },
+  {
+   "n": 5421,
+   "text": "Sunflower Fledgling"
+  },
+  {
+   "n": 5422,
+   "text": "Scorching Demon Fledgling"
+  },
+  {
+   "n": 5423,
+   "text": "Rippling Demon Fledgling"
+  },
+  {
+   "n": 5424,
+   "text": "Earthbind Demon Fledgling"
+  },
+  {
+   "n": 5425,
+   "text": "Thundering Demon Fledgling"
+  },
+  {
+   "n": 5426,
+   "text": "Whirlwind Demon Fledgling"
+  },
+  {
+   "n": 5427,
+   "text": "Bun Monster Fledgling"
+  },
+  {
+   "n": 5428,
+   "text": "Kurosaki Ichigo Kostum"
+  },
+  {
+   "n": 5429,
+   "text": "Witch Kostum"
+  },
+  {
+   "n": 5430,
+   "text": "Ggio Vega Kostum"
+  },
+  {
+   "n": 5431,
+   "text": "White Ichigo Kostum"
+  },
+  {
+   "n": 5432,
+   "text": "Bomb Ichigo Kostum"
+  },
+  {
+   "n": 5433,
+   "text": "Ulquiorra Kostum"
+  },
+  {
+   "n": 5434,
+   "text": "White Ulquiorra Kostum"
+  },
+  {
+   "n": 5435,
+   "text": "Hollow Ulquiorra Kostum"
+  },
+  {
+   "n": 5436,
+   "text": "Love Aikawa Kostum"
+  },
+  {
+   "n": 5437,
+   "text": "Grimmjow Kostum"
+  },
+  {
+   "n": 5438,
+   "text": "Hitsugaya Toushiro Kostum"
+  },
+  {
+   "n": 5439,
+   "text": "Hirako Shinji Kostum"
+  },
+  {
+   "n": 5440,
+   "text": "Hollowfied Hirako Shinji Kostum"
+  },
+  {
+   "n": 5441,
+   "text": "Abarai Renji Kostum"
+  },
+  {
+   "n": 5442,
+   "text": "Gin Ichimaru Kostum"
+  },
+  {
+   "n": 5443,
+   "text": "Akimichi Choji Kostum"
+  },
+  {
+   "n": 5444,
+   "text": "Inuzuka Kiba Kostum"
+  },
+  {
+   "n": 5445,
+   "text": "Aburame Shino Kostum"
+  },
+  {
+   "n": 5446,
+   "text": "Nara Shikamaru Kostum"
+  },
+  {
+   "n": 5447,
+   "text": "Asuma Sarutobi Kostum"
+  },
+  {
+   "n": 5448,
+   "text": "Rock Lee Kostum"
+  },
+  {
+   "n": 5449,
+   "text": "Hyuga Neji Kostum"
+  },
+  {
+   "n": 5450,
+   "text": "Scorpion Kostum"
+  },
+  {
+   "n": 5451,
+   "text": "Yamato Kostum"
+  },
+  {
+   "n": 5452,
+   "text": "Nel Kostum"
+  },
+  {
+   "n": 5453,
+   "text": "Sarugaki Hiyori Kostum"
+  },
+  {
+   "n": 5454,
+   "text": "Shihouin Yoruichi Kostum"
+  },
+  {
+   "n": 5455,
+   "text": "Soifon Kostum"
+  },
+  {
+   "n": 5456,
+   "text": "Halibel Kostum"
+  },
+  {
+   "n": 5457,
+   "text": "Mashiro Kuna Kostum"
+  },
+  {
+   "n": 5458,
+   "text": "Shiba Kuukaku Kostum"
+  },
+  {
+   "n": 5459,
+   "text": "Nanao Ise Kostum"
+  },
+  {
+   "n": 5460,
+   "text": "Momo Hinamori Kostum"
+  },
+  {
+   "n": 5461,
+   "text": "Rangiku Matsumoto Kostum"
+  },
+  {
+   "n": 5462,
+   "text": "Inoue Orihime Kostum"
+  },
+  {
+   "n": 5463,
+   "text": "Kurenai Yuuhi Kostum"
+  },
+  {
+   "n": 5464,
+   "text": "Hyuga Hinata Kostum"
+  },
+  {
+   "n": 5465,
+   "text": "Chi Kostum"
+  },
+  {
+   "n": 5466,
+   "text": "Shizune Kostum"
+  },
+  {
+   "n": 5467,
+   "text": "Alice Kostum"
+  },
+  {
+   "n": 5468,
+   "text": "Priest Kostum"
+  },
+  {
+   "n": 5469,
+   "text": "Ghost Lady Kostum"
+  },
+  {
+   "n": 5470,
+   "text": "Zombie Lady Kostum"
+  },
+  {
+   "n": 5471,
+   "text": "Mizukage Kostum"
+  },
+  {
+   "n": 5472,
+   "text": "Uzumaki Naruto Kostum"
+  },
+  {
+   "n": 5473,
+   "text": "Gaara Kostum"
+  },
+  {
+   "n": 5474,
+   "text": "Hatake Kakashi Kostum"
+  },
+  {
+   "n": 5475,
+   "text": "Uchiha Sasuke Kostum"
+  },
+  {
+   "n": 5476,
+   "text": "Uchiha Itachi Kostum"
+  },
+  {
+   "n": 5477,
+   "text": "⟨0⟩nd Hokage Kostum"
+  },
+  {
+   "n": 5478,
+   "text": "Orochimaru Kostum"
+  },
+  {
+   "n": 5479,
+   "text": "Zangetsu Kostum"
+  },
+  {
+   "n": 5480,
+   "text": "⟨0⟩rd Hokage Kostum"
+  },
+  {
+   "n": 5481,
+   "text": "Hollowfied Grimmjow Kostum"
+  },
+  {
+   "n": 5482,
+   "text": "Aizen Kostum"
+  },
+  {
+   "n": 5483,
+   "text": "⟨0⟩th Hokage Kostum"
+  },
+  {
+   "n": 5484,
+   "text": "Jiraiya Kostum"
+  },
+  {
+   "n": 5485,
+   "text": "Sakura Haruno Kostum"
+  },
+  {
+   "n": 5486,
+   "text": "Arale Kostum"
+  },
+  {
+   "n": 5487,
+   "text": "Yamanaka Ino Kostum"
+  },
+  {
+   "n": 5488,
+   "text": "Mitarashi Anko Kostum"
+  },
+  {
+   "n": 5489,
+   "text": "Temari Kostum"
+  },
+  {
+   "n": 5490,
+   "text": "Tenten Kostum"
+  },
+  {
+   "n": 5491,
+   "text": "Haku Kostum"
+  },
+  {
+   "n": 5492,
+   "text": "Kurotsuchi Nemu Kostum"
+  },
+  {
+   "n": 5493,
+   "text": "Kusajishi Yachiru Kostum"
+  },
+  {
+   "n": 5494,
+   "text": "Kotetsu Isane Kostum"
+  },
+  {
+   "n": 5495,
+   "text": "Konan Kostum"
+  },
+  {
+   "n": 5496,
+   "text": "Yadomaru Sasha Kostum"
+  },
+  {
+   "n": 5497,
+   "text": "Arisawa Tatsuki Kostum"
+  },
+  {
+   "n": 5498,
+   "text": "Bomb Rukia Kostum"
+  },
+  {
+   "n": 5499,
+   "text": "Tsunade Kostum"
+  },
+  {
+   "n": 5500,
+   "text": "Kuchiki Rukia Kostum"
+  },
+  {
+   "n": 5501,
+   "text": "Momochi Zabuza Kostum"
+  },
+  {
+   "n": 5502,
+   "text": "Kuchiki Byakuya Kostum"
+  },
+  {
+   "n": 5503,
+   "text": "Nelliel Kostum"
+  },
+  {
+   "n": 5504,
+   "text": "Little Meng Kostum"
+  },
+  {
+   "n": 5505,
+   "text": "Little Jun Kostum"
+  },
+  {
+   "n": 5506,
+   "text": "Kostum Kyuubi Naruto"
+  },
+  {
+   "n": 5507,
+   "text": "Kakuzu"
+  },
+  {
+   "n": 5508,
+   "text": "Hidan"
+  },
+  {
+   "n": 5509,
+   "text": "Deidara"
+  },
+  {
+   "n": 5510,
+   "text": "Pain"
+  },
+  {
+   "n": 5511,
+   "text": "Kisame Hoshigaki"
+  },
+  {
+   "n": 5512,
+   "text": "Konan"
+  },
+  {
+   "n": 5513,
+   "text": "Sage Naruto"
+  },
+  {
+   "n": 5514,
+   "text": "Hebi Sasuke"
+  },
+  {
+   "n": 5515,
+   "text": "Suigetsu"
+  },
+  {
+   "n": 5516,
+   "text": "Karin"
+  },
+  {
+   "n": 5517,
+   "text": "Kamu memenangkan {@0:} kali dan telah dikalahkan oleh {@1:}. Silahkan melihat aturan hadiah sekarang!"
+  },
+  {
+   "n": 5518,
+   "text": "Zone Tantangan: Pemberitahuan"
+  },
+  {
+   "n": 5519,
+   "text": "Cihuyyy, Kamu telah berhasil mempertahankan kemenangan dan memenangkan {@0:} Gold. Kamu dapat mengklaim hadiah sekarang!"
+  },
+  {
+   "n": 5520,
+   "text": "Cihuyyy, Kamu telah berhasil mempertahankan kemenangan dan memenangkan {@0:} Batu. Kamu dapat mengklaim hadiah sekarang!"
+  },
+  {
+   "n": 5521,
+   "text": "Menerima tantangan"
+  },
+  {
+   "n": 5522,
+   "text": "Zona Tantangan: Gunakan{@0:} Gold untuk menantang tuan rumah."
+  },
+  {
+   "n": 5523,
+   "text": "Zona Tantangan: Gunakan{@0:} Batu untuk menantang tuan rumah."
+  },
+  {
+   "n": 5524,
+   "text": "Zona Tantangan: Kamu telah memenangkan {@0:} Gold atas keberanianmu."
+  },
+  {
+   "n": 5525,
+   "text": "Zona Tantangan: Kamu telah memenangkan {@0:} Batu atas keberanianmu."
+  },
+  {
+   "n": 5526,
+   "text": "Maaf, tuan rumah sedang AFK, silahkan kembali lagi nanti."
+  },
+  {
+   "n": 5527,
+   "text": "Menerima Tantangan"
+  },
+  {
+   "n": 5528,
+   "text": "Kombinasi"
+  },
+  {
+   "n": 5529,
+   "text": "Mengumumkan tantangan"
+  },
+  {
+   "n": 5530,
+   "text": "Pemberitahuan tantangan"
+  },
+  {
+   "n": 5531,
+   "text": "Maaf, seseorang telah menantang tuan rumah, silahkan kembali lagi nanti."
+  },
+  {
+   "n": 5532,
+   "text": "Tantangan kematian lv.{@0:}-{@1:} Kontes berakhir."
+  },
+  {
+   "n": 5533,
+   "text": "Tantangan kematian lv.{@0:}-{@1:} Kontes dimulai sekarang."
+  },
+  {
+   "n": 5534,
+   "text": "Selamat datang di tantangan"
+  },
+  {
+   "n": 5535,
+   "text": "Zona Tantangan: Gunakan {@0:} Gold untuk menerima tantangan."
+  },
+  {
+   "n": 5536,
+   "text": "Zona Tantangan: Gunakan {@0:} Batu untuk menerima tantangan."
+  },
+  {
+   "n": 5537,
+   "text": "Maaf, ⟨0⟩ pemain sedang bertarung saat ini, silahkan kembali lagi nanti."
+  },
+  {
+   "n": 5538,
+   "text": "Maaf, kamu telah menjadi tuan rumah."
+  },
+  {
+   "n": 5539,
+   "text": "Combinasi"
+  },
+  {
+   "n": 5540,
+   "text": "Zona Tantangan: Selamat, kamu menang {@0:} Gold."
+  },
+  {
+   "n": 5541,
+   "text": "Zona Tantangan: Sangat baik, kamu menang {@0:}."
+  },
+  {
+   "n": 5542,
+   "text": "Zona Tantangan: Selamat, kamu menang {@0:} Batu."
+  },
+  {
+   "n": 5543,
+   "text": "Arghh, kamu tidak memiliki cukup gold, silahkan mengisi ulang! "
+  },
+  {
+   "n": 5544,
+   "text": "Biaya pendaftaran:"
+  },
+  {
+   "n": 5545,
+   "text": "Tantangan ketahanan lv.{@0:}-{@1:} Kontes Berakhir."
+  },
+  {
+   "n": 5546,
+   "text": "Tantangan Ketahanan lv.{@0:}-{@1:} Kontes dimulai sekarang."
+  },
+  {
+   "n": 5547,
+   "text": "<font color='0xCC0000'>Pertandingan Terakhir <a href= 'event:News|{@2:}'>{@1:}</a></font>"
+  },
+  {
+   "n": 5548,
+   "text": "Disana ada selisih level dengan kamu dan tuan rumah. Silahkan mencoba untuk memperkuat kekuatan kamu!"
+  },
+  {
+   "n": 5549,
+   "text": "Level kamu terlalu tinggi. Lebih baik kamu menantang dengan level yang lebih tinggi! "
+  },
+  {
+   "n": 5550,
+   "text": "kamu telagh dikalahkan oleh {@0:} dan menangis"
+  },
+  {
+   "n": 5551,
+   "text": "Kamu mendapatkan mata hitam dari {@0:} dan dibawa pergi dengan tandu."
+  },
+  {
+   "n": 5552,
+   "text": "kamu telah ditendang kembali kedesa oleh {@0:}. Berharap kamu dapat mengejarnya di tantangan berikutnya. "
+  },
+  {
+   "n": 5553,
+   "text": "Kamu terluka parah oleh{@0:} Dan pergi ke rumah."
+  },
+  {
+   "n": 5554,
+   "text": "Pemain{@0:} Telah mengakhiri kemenangan berturut dari {@1:} dan akan menjadi tuan rumah baru lv.{@2:}-{@3:}Tantangan kematian."
+  },
+  {
+   "n": 5555,
+   "text": "Pemain{@0:} Telah mengakhiri kemenangan berturut dari {@1:} dan akan menjadi tuan rumah baru lv.{@2:}-{@3:}Tantangan ketahanan."
+  },
+  {
+   "n": 5556,
+   "text": "Pemain {@0:} Telah dikalahkan {@1:} dan akan menjadi tuan rumah baru lv.{@2:}-{@3:} Tantangan Kematian."
+  },
+  {
+   "n": 5557,
+   "text": "Pemain {@0:} Telah dikalahkan {@1:} dan akan menjadi tuan rumah baru lv.{@2:}-{@3:} Tantangan ketahanan."
+  },
+  {
+   "n": 5558,
+   "text": "Pemain {@0:} Telah menaklukan tahta {@1:} dan akan menjadi tuan rumah baru lv.{@2:}-{@3:} Tantangan Kematian."
+  },
+  {
+   "n": 5559,
+   "text": "Pemain {@0:} Telah menaklukan tahta {@1:} dan akan menjadi tuan rumah baru lv.{@2:}-{@3:} Tantangan Ketahanan."
+  },
+  {
+   "n": 5560,
+   "text": "Jackpot"
+  },
+  {
+   "n": 5561,
+   "text": "Lv.{@0:}-{@1:} Hadiah Tantangan kematian telah melebihi ⟨0⟩ gold. Bersegeralah sekarang."
+  },
+  {
+   "n": 5562,
+   "text": "Lv.{@0:}-{@1:} Hadiah Tantangan ketahanan telah melebihi ⟨0⟩ gold. Bersegeralah sekarang."
+  },
+  {
+   "n": 5563,
+   "text": "Lv.{@0:}-{@1:} Hadiah Tantangan kematian telah melebihi ⟨0⟩ Batu. Bersegeralah sekarang."
+  },
+  {
+   "n": 5564,
+   "text": "Lv.{@0:}-{@1:} Hadiah Tantangan ketahanan telah melebihi ⟨0⟩ Batu. Bersegeralah sekarang."
+  },
+  {
+   "n": 5565,
+   "text": "Maaf, Silahkan mencoba lagi nanti."
+  },
+  {
+   "n": 5566,
+   "text": "Aturan Tantangan"
+  },
+  {
+   "n": 5567,
+   "text": "Klaim Hadiah"
+  },
+  {
+   "n": 5568,
+   "text": "Waktu Event: <font color='0xCC0000'><br>Tantangan Kematian：</font>Dari ⟨0⟩:⟨1⟩-⟨2⟩:⟨3⟩ Setiap Selasa, Kamis dan Sabtu.<br><font color='0xCC0000'>Tantangan Ketahanan：</font>Dari ⟨4⟩:⟨5⟩-⟨6⟩:⟨7⟩ Setiap Senin, Rabu, Jumat dan Minggu.<br>Kondisi: Memenuhi tingkat yang diperlukan dan membayar biaya masuk. Pemain yang mengumumkan tantangan bisa mendapatkan bonus yang setara dengan ⟨8⟩% dari biaya masuk. <br>Pengaturan Hadiah: Pemenang terakhir Tantangan Kematian bisa mendapatkan semua hadiah dalam jackpot, pemenang dari masing-masing Tantangan Ketahanan dapat mengklaim hadiah yang setara dengan ⟨9⟩% dari biaya masuk. Hadiah dapat diakumulasikan. Pemenang terakhir juga dapat mengambil dengan semua hadiah dari jackpot.<br>Spesial: Hadiah yang ada dalam paket merupakan hadiah acak. <br>Tantangan kematian：Jika seorang pemain yang memiliki tantangan berhasil bertahan  selama setengah jam, pemain ini akan menjadi pemenang dari tantangan. <br> Ketika tuan rumah off-line, penghargaan juga dapat diklaim dengan menggunakan tombol mengklaim hadiah (tidak akumulasi)."
+  },
+  {
+   "n": 5569,
+   "text": "Lv.{@0:}-{@1:}"
+  },
+  {
+   "n": 5570,
+   "text": "Mempertahankan kemenangan {@0:} kali"
+  },
+  {
+   "n": 5571,
+   "text": "Arghh, Batu tidak cukup!"
+  },
+  {
+   "n": 5572,
+   "text": "Tantangan Kematian"
+  },
+  {
+   "n": 5573,
+   "text": "Tantangan Ketahanan"
+  },
+  {
+   "n": 5574,
+   "text": "maaf, silahkan kembali lagi nanti di waktu yang tepat."
+  },
+  {
+   "n": 5575,
+   "text": "Pemain {@0:} Telah memenangkan {@1:} kali. Siapa yang dapat mengakhiri kemenangannya. "
+  },
+  {
+   "n": 5576,
+   "text": "Info Murid"
+  },
+  {
+   "n": 5577,
+   "text": "Pilih Murid"
+  },
+  {
+   "n": 5578,
+   "text": "Refresh berhasil, menghabiskan<font color='#ffffff'> {@1:} </font>{@0:}."
+  },
+  {
+   "n": 5579,
+   "text": "Pilih kembali"
+  },
+  {
+   "n": 5580,
+   "text": "Silahkan menghapus<font color='#ff0000'>{@0:}</font> dari daftar teman rumah kamu."
+  },
+  {
+   "n": 5581,
+   "text": "<font color='#ff0000'>{@0:}</font> ingin menambahkan kamu sebagai teman ruamh. Menerima ? "
+  },
+  {
+   "n": 5582,
+   "text": "<font color='#ff0000'>{@0:}</font> Menerima permintaan kamu. Sekarang kamu menjadi teman."
+  },
+  {
+   "n": 5583,
+   "text": "Kamu telah menghapus <font color='#ff0000'>{@0:}</font> dari daftar teman kamu."
+  },
+  {
+   "n": 5584,
+   "text": "<font color='#ff0000'>{@0:}</font>Adalah teman rumah."
+  },
+  {
+   "n": 5585,
+   "text": "Gold tidak mencukupi."
+  },
+  {
+   "n": 5586,
+   "text": "Kamu tidak memiliki telur busuk, tidak dapat melempar mereka."
+  },
+  {
+   "n": 5587,
+   "text": "Tidak memiliki hasil panen."
+  },
+  {
+   "n": 5588,
+   "text": "Tidak ada telur busuk, tidak dapat melempar mereka. "
+  },
+  {
+   "n": 5589,
+   "text": "Gift Coupon tidak mencukupi."
+  },
+  {
+   "n": 5590,
+   "text": "kapasitas Gudang tidak mencukupi."
+  },
+  {
+   "n": 5591,
+   "text": "Tidak memiliki gudang."
+  },
+  {
+   "n": 5592,
+   "text": "Kamu tidak memiliki ruang penetasan."
+  },
+  {
+   "n": 5593,
+   "text": "Mendapatkan kotak."
+  },
+  {
+   "n": 5594,
+   "text": "Mendapatkan Tas Panen ."
+  },
+  {
+   "n": 5595,
+   "text": "<font color='#ff0000'>{@0:}</font> telah menjaga telur kamu. "
+  },
+  {
+   "n": 5596,
+   "text": "Telur telah dicuri oleh seseorang."
+  },
+  {
+   "n": 5597,
+   "text": "Ruang penetasan ini telah siap."
+  },
+  {
+   "n": 5598,
+   "text": "Telur busuk kamu telah berhasil ditetaskan, tidka dapat melempar."
+  },
+  {
+   "n": 5599,
+   "text": "Pemain <font color='#ff0000'>{@0:}</font> bukan salah satu dari ⟨0⟩ pemain teratas di arena. Tidak dapat mencuri telur."
+  },
+  {
+   "n": 5600,
+   "text": "Pemain <font color='#ff0000'>{@0:}</font> bukan salah satu dari ⟨0⟩ pemain teratas di arena. Tidak dapat melempar telur."
+  },
+  {
+   "n": 5601,
+   "text": "Hadiah misi telah dikirim ke gudang rumah kamu."
+  },
+  {
+   "n": 5602,
+   "text": "{@0:} Telah memulai untuk melindung ruang penetasan kamu. "
+  },
+  {
+   "n": 5603,
+   "text": "Telur ini telah menetas, tidak dapat dicuri."
+  },
+  {
+   "n": 5604,
+   "text": "<font color='#ff0000'>{@0:}</font> menolak undangan kamu untuk melindungi telur."
+  },
+  {
+   "n": 5605,
+   "text": "Upgrade ruang penetasan."
+  },
+  {
+   "n": 5606,
+   "text": "Tidak dapat mencuri telur yang dijaga oleh kamu."
+  },
+  {
+   "n": 5607,
+   "text": "Seseorang telah mengalahkan <font color='#ff0000'>{@0:}</font>. Silahkan mencoba lagi nanti."
+  },
+  {
+   "n": 5608,
+   "text": "Kamu yakin untuk keluar? Kamu membutuhkan waktu ⟨0⟩ detik untuk kembali."
+  },
+  {
+   "n": 5609,
+   "text": "{@0:}-{@1:}"
+  },
+  {
+   "n": 5610,
+   "text": "Tantangan kematian"
+  },
+  {
+   "n": 5611,
+   "text": "Tantangan ketangguhan"
+  },
+  {
+   "n": 5612,
+   "text": "Semua Desa atau Kota Malaikat"
+  },
+  {
+   "n": 5613,
+   "text": "Arena dapat diikuti di desa atau Kota Malaikat"
+  },
+  {
+   "n": 5614,
+   "text": "Valhalla di kota iblis"
+  },
+  {
+   "n": 5615,
+   "text": "Las Noches di kota iblis"
+  },
+  {
+   "n": 5616,
+   "text": "Hadiah misi di semua desa atau Kota Malaikat"
+  },
+  {
+   "n": 5617,
+   "text": "Peta Luar"
+  },
+  {
+   "n": 5618,
+   "text": "Ruang bimbingan di semua desa atau Kota Malaikat"
+  },
+  {
+   "n": 5619,
+   "text": "Hanya dapat mendaftar kembali di desa atau Kota Malaikat"
+  },
+  {
+   "n": 5620,
+   "text": "Aula pada setiap Desa hanya dapat memberikan Pelatihan normal<br>Pada Aula di Kota Malaikat dapat memberikan Pelatihan normal dan khusus."
+  },
+  {
+   "n": 5621,
+   "text": "peta Luar Umum"
+  },
+  {
+   "n": 5622,
+   "text": "Jumlah dari medal diatas ⟨0⟩ atau lebih dari ⟨1⟩ gold"
+  },
+  {
+   "n": 5623,
+   "text": "Kekuatan adalah segalanya!"
+  },
+  {
+   "n": 5624,
+   "text": "Mencapai Level ⟨0⟩"
+  },
+  {
+   "n": 5625,
+   "text": "Tiak terbatas"
+  },
+  {
+   "n": 5626,
+   "text": "Rank mencapai Pemula III"
+  },
+  {
+   "n": 5627,
+   "text": "Mencapai Level ⟨0⟩ untuk Pendaftaran membutuhkan ⟨1⟩ Batu"
+  },
+  {
+   "n": 5628,
+   "text": "Tidak terbatas"
+  },
+  {
+   "n": 5629,
+   "text": "Tidak ada ketentuan level untuk Ruang pelatihan normal<br> Level harus diatas ⟨0⟩ untuk ketentuan Ruang pelatihan khusus"
+  },
+  {
+   "n": 5630,
+   "text": "Menghabiskan beberapa medal atau gold untuk berkesempatan menarik hadiah misteri dari guci pada pada toko guci! Ingin Kostum yang unik? Buka guci dan mencoba keberuntungan kamu!"
+  },
+  {
+   "n": 5631,
+   "text": "Duel dengan pemain arena lain! Hadiah menarik menunggu pemenang!"
+  },
+  {
+   "n": 5632,
+   "text": "Tantangan di tingkat Valhalla padapeta Kota Iblis dapat dilakukan dengan teman.  EXP dan powerful yang baik pada barang Ninja menunggu kamu! Bahkan hadiah yang lebih besar untukmu jika kamu terdaftar dalam peringkat!"
+  },
+  {
+   "n": 5633,
+   "text": "Aizen dan  Arrancar menjelajahi ⟨0⟩ lantai Las Noches di Kota Iblis! Setiap lantai diambil akan menghasilkan hadiah EXP yang besar! Lantai mana yang akan kamu naiki ?"
+  },
+  {
+   "n": 5634,
+   "text": "Tidak ada kemenangan tanpa kesulitan! Setiap hadiah misi dari desa yang diselesaikan akan membuat kamu menjadi lebih kuat! Kamu hanya dapat menyelesaikan ⟨0⟩ hadiah misi harian, untuk berkesempatan mendapatkannya!"
+  },
+  {
+   "n": 5635,
+   "text": "Pilih peta luar itu cocok untuk tingkat kamu untuk menjelajahi! Jelajahi akan memicu peristiwa acak, seperti menangkap pet, memperoleh barang, pertemuan monster, penjarahan Gem, dll, untuk mendapatkan kesempatan sebuah tantangan bos di luar, kamu harus mendapatkan bukti penindasan di zona penjelajahan!"
+  },
+  {
+   "n": 5636,
+   "text": "Ninja yang kuat dapat memiliki murid melalui pertempuran! Kamu dapat mendapatkan murid untuk melatih pet atau mengelola tugas-tugas lain. Hal ini membuat kamu dengan lebih banyak waktu untuk melatih diri sendiri!"
+  },
+  {
+   "n": 5637,
+   "text": "Pendaftaran pada Kejuaraan dunia bela diri! Mengalahkan lawan dari seluruh daratan dan kemenangan!Jika kamu tidak cukup kuat, kamu juga dapat mencobanya untuk mengukur kedalaman kemampuan kamu. Demikian juga, kamu dapat menempatkan taruhan kecil untuk memprediksi hasil pertandingan - pemenang mendapatkan sejumlah kecil uang!"
+  },
+  {
+   "n": 5638,
+   "text": "Ninja yang telah mencapai rank Pemula III akan dipilih untuk berpartisipasi dalam liga nasional! Setiap hari, ia bangsa akan mengatur putaran pertandingan, dimana Juara mingguan akan menerima hadiah EXP!"
+  },
+  {
+   "n": 5639,
+   "text": "Pilih peta outdoor itu cocok untuk tingkat kamu untuk melatih! Dengan cara ini, keuntungan yang besar akan lebih efektif!"
+  },
+  {
+   "n": 5640,
+   "text": "Latihan otomatis dalam Aula desa atau Kota Malaikat. Hal ini akan menjamin mendapatkan EXP yang besar bahkan ketika kamu offline!"
+  },
+  {
+   "n": 5641,
+   "text": "Kenaikan Grup dan tantangan pada peta luar untuk memperoleh barang langka dan bahkan peralatan gold!"
+  },
+  {
+   "n": 5642,
+   "text": "Batu, arena point, medal, gift coupon, EXP, berbagai barang ninja dan kostum yang unik"
+  },
+  {
+   "n": 5643,
+   "text": "Arena point, Promosi rank, medal"
+  },
+  {
+   "n": 5644,
+   "text": "Batu, EXP, powerful Item Ninja"
+  },
+  {
+   "n": 5645,
+   "text": "Jumlah EXP yang besar"
+  },
+  {
+   "n": 5646,
+   "text": "Batu, EXP, medal, potion, Ragam peti harta, VIP cards"
+  },
+  {
+   "n": 5647,
+   "text": "Bukti penindasan boss outdor, pet, Batu, EXP, kantong gift coupon, gem"
+  },
+  {
+   "n": 5648,
+   "text": "Piala dunia bela diri, tournament point"
+  },
+  {
+   "n": 5649,
+   "text": "Piala liga, medal"
+  },
+  {
+   "n": 5650,
+   "text": "EXP, Batu, Item berbagai ninja"
+  },
+  {
+   "n": 5651,
+   "text": "kartu Nama, peralatan berbagai kelas"
+  },
+  {
+   "n": 5652,
+   "text": "Membuka dan mengambil dari guci untuk mendapatkan hadiah!"
+  },
+  {
+   "n": 5653,
+   "text": "Tantangan arena untuk meningkatkan peringkat kamu!"
+  },
+  {
+   "n": 5654,
+   "text": "Tantangan Valhalla dan memperoleh set peralatan stage!"
+  },
+  {
+   "n": 5655,
+   "text": "Mengisi ke Las Noches untuk harta misteri!"
+  },
+  {
+   "n": 5656,
+   "text": "menyelesaikan hadiah misi untuk hadiah EXP !"
+  },
+  {
+   "n": 5657,
+   "text": "Hasil penjelajahan Outdoor harta misteri !"
+  },
+  {
+   "n": 5658,
+   "text": "Berjuang untuk kepemilikan murid!"
+  },
+  {
+   "n": 5659,
+   "text": "Mendaftar untuk Kejuaraan dunia bela diri!"
+  },
+  {
+   "n": 5660,
+   "text": "Melihat hasil liga nasional!"
+  },
+  {
+   "n": 5661,
+   "text": "ketika kamu harus log off, kamu dapat berlatih di aula!"
+  },
+  {
+   "n": 5662,
+   "text": "Tantangan musuh yang kuat di luar mendapatkan hadiah!"
+  },
+  {
+   "n": 5663,
+   "text": "<b>Gameplay Overview</b>"
+  },
+  {
+   "n": 5664,
+   "text": "<b>Hadiah event</b>"
+  },
+  {
+   "n": 5665,
+   "text": "<font color='#6a6e70'><b>Syarat naik level : </b></font>"
+  },
+  {
+   "n": 5666,
+   "text": "Akumulasi EXP kamu telah mencapai limit"
+  },
+  {
+   "n": 5667,
+   "text": "Sukses upgraded ke Level {@0:lev}"
+  },
+  {
+   "n": 5668,
+   "text": "Mendapat<font color='#ffffff'> {@0:exp} </font>EXP."
+  },
+  {
+   "n": 5669,
+   "text": "Mendapat {@0:exp} x {@1:mul} EXP."
+  },
+  {
+   "n": 5670,
+   "text": "Mendapat {@0:} EXP, dan bonus {@1:} EXP diperoleh karena manfaat pada status."
+  },
+  {
+   "n": 5671,
+   "text": "<font color='#8a8d8f'>Lock: {@0:} Teman</font>"
+  },
+  {
+   "n": 5672,
+   "text": "<font color='#8a8d8f'>Mengunci : Level {@0:}</font>"
+  },
+  {
+   "n": 5673,
+   "text": "<font color='#8a8d8f'>Mengunci : Membangun {@0:}</font>"
+  },
+  {
+   "n": 5674,
+   "text": "<font color='#8a8d8f'>Mengunci : mencapai {@0:}</font>"
+  },
+  {
+   "n": 5675,
+   "text": "<font color='#8a8d8f'>Mengunci : Poin Kemewahan{@0:}</font>"
+  },
+  {
+   "n": 5676,
+   "text": "<font color='{@0:}'>[Berita]<a href= 'event:Berita|{@2:}'>{@1:}</a></font>"
+  },
+  {
+   "n": 5677,
+   "text": "<font color='{@0:}'>[Perhatian]<a href= 'event:Berita|{@2:}'>{@1:}</a></font>"
+  },
+  {
+   "n": 5678,
+   "text": "<font color='{@0:}'>[Event]<a href= 'event:Berita|{@2:}'>{@1:}</a></font>"
+  },
+  {
+   "n": 5679,
+   "text": "<font color='{@0:}'>[Hot]<a href= 'event:Berita|{@2:}'>{@1:}</a></font>"
+  },
+  {
+   "n": 5680,
+   "text": "Karakter ini sedang menggunakan : Senjata Sharp "
+  },
+  {
+   "n": 5681,
+   "text": "Karakter ini sedang menggunakan : Senjata Blunt "
+  },
+  {
+   "n": 5682,
+   "text": "Karakter ini sedang menggunakan : Senjata Fist "
+  },
+  {
+   "n": 5683,
+   "text": "Karakter ini sedang menggunakan : Senjata Sharp"
+  },
+  {
+   "n": 5684,
+   "text": "Karakter ini sedang menggunakan : Senjata Blunt"
+  },
+  {
+   "n": 5685,
+   "text": "Karakter ini sedang menggunakan : Senjata Fist"
+  },
+  {
+   "n": 5686,
+   "text": "<a href= 'event:register'><u>Tarik Pasword</u></a>"
+  },
+  {
+   "n": 5687,
+   "text": "<a href= 'event:register'><u>Daftar Account</u></a>"
+  },
+  {
+   "n": 5688,
+   "text": "Gagal menampilkan, dibutuhkan biaya  {@1:value} {@0:}!"
+  },
+  {
+   "n": 5689,
+   "text": "Biaya Menampilkan Item {@1:value} {@0:type}."
+  },
+  {
+   "n": 5690,
+   "text": "Batu Enchantment Senjata"
+  },
+  {
+   "n": 5691,
+   "text": "Batu Enchantment Armor"
+  },
+  {
+   "n": 5692,
+   "text": "<font color='#00ffff'> {@0:} </font>Penjualan kamu di pasar telah jatuh tempo. Terjual {@1:} , Mendapatkan {@2:}  {@3:}, silahkan masuk pasar perdagangan dari navigasi di bawah ini, dan klaim dari halaman Item!"
+  },
+  {
+   "n": 5693,
+   "text": "Kembali"
+  },
+  {
+   "n": 5694,
+   "text": "Pengirim : "
+  },
+  {
+   "n": 5695,
+   "text": "Inbox : "
+  },
+  {
+   "n": 5696,
+   "text": "Link"
+  },
+  {
+   "n": 5697,
+   "text": "Ulang"
+  },
+  {
+   "n": 5698,
+   "text": "Blok orang ini"
+  },
+  {
+   "n": 5699,
+   "text": "Subjek : "
+  },
+  {
+   "n": 5700,
+   "text": "Waktu : "
+  },
+  {
+   "n": 5701,
+   "text": "Tipe : "
+  },
+  {
+   "n": 5702,
+   "text": "Tandai semua yang sudah di baca"
+  },
+  {
+   "n": 5703,
+   "text": "Klik untuk hapus semua"
+  },
+  {
+   "n": 5704,
+   "text": "Informasi tidak ditemukan."
+  },
+  {
+   "n": 5705,
+   "text": "Klik untuk menyimpan pertarungan"
+  },
+  {
+   "n": 5706,
+   "text": "<a href= 'event:player|{@0:}'><font color='#FC5095'>{@0:}</font></a>telah menantang kamu dalam arena, dan meninggalkan kamu pesan setelah {@1:}: <br>{@2:}"
+  },
+  {
+   "n": 5707,
+   "text": "Info Arena"
+  },
+  {
+   "n": 5708,
+   "text": "Info Combo"
+  },
+  {
+   "n": 5709,
+   "text": "Arena Pertarungan"
+  },
+  {
+   "n": 5710,
+   "text": "Pertarungan lain"
+  },
+  {
+   "n": 5711,
+   "text": "Tingkat pertarungan"
+  },
+  {
+   "n": 5712,
+   "text": "Info Aula"
+  },
+  {
+   "n": 5713,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}"
+  },
+  {
+   "n": 5714,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}"
+  },
+  {
+   "n": 5715,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}<br>⟨2⟩：{@2:name}"
+  },
+  {
+   "n": 5716,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}<br>⟨2⟩：{@2:name}⟨3⟩：{@3:name}"
+  },
+  {
+   "n": 5717,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}<br>⟨2⟩：{@2:name}⟨3⟩：{@3:name}<br>⟨4⟩：{@4:name}"
+  },
+  {
+   "n": 5718,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}<br>⟨2⟩：{@2:name}⟨3⟩：{@3:name}<br>⟨4⟩：{@4:name}⟨5⟩：{@5:name}"
+  },
+  {
+   "n": 5719,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah:  <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}<br>⟨2⟩：{@2:name}⟨3⟩：{@3:name}<br>⟨4⟩：{@4:name}⟨5⟩：{@5:name}⟨6⟩：{@6:name}"
+  },
+  {
+   "n": 5720,
+   "text": "Pertandingan Liga nasional minggu ini telah berakhir, peringkat grup kamu adalah: <br>⟨0⟩: {@0:name}<br>⟨1⟩: {@1:name}<br>⟨2⟩: {@2:name}<br>⟨3⟩: {@3:name}<br>⟨4⟩: {@4:name}<br>⟨5⟩: {@5:name}<br>⟨6⟩: {@6:name}<br>⟨7⟩: {@7:name}"
+  },
+  {
+   "n": 5721,
+   "text": "Kamu tidak memiliki teman yang berpartisipasi dalam liga nasional."
+  },
+  {
+   "n": 5722,
+   "text": "Pertandingan liga hari ini telah berakhir, silakan masukkan interface pertandingan liga untuk melihat hasil"
+  },
+  {
+   "n": 5723,
+   "text": "Info Hadiah Misi"
+  },
+  {
+   "n": 5724,
+   "text": "[Teman Biasa] Kamu telah menghapus."
+  },
+  {
+   "n": 5725,
+   "text": "<font color='#ff0000'>{@0:}</font> menghapus kamu dari daftar teman."
+  },
+  {
+   "n": 5726,
+   "text": "Kamu telah menghapus [Teman Rumah]."
+  },
+  {
+   "n": 5727,
+   "text": "Turnamen dunia ini telah berakhir. Kami minta maaf kamu tidak menang. Silakan periksa hasil di turnamen dunia."
+  },
+  {
+   "n": 5728,
+   "text": "Selamat telah mencapai bagian atas dan menjadi juara turnamen ini dunia. Klaim hadiah di turnamen dunia."
+  },
+  {
+   "n": 5729,
+   "text": "Pada peringkat ⟨0⟩ teratas, taruhan {@0:} medal, {@1:} telah berhasil, memperoleh medal {@2:}"
+  },
+  {
+   "n": 5730,
+   "text": "Pada peringkat ⟨0⟩ teratas, taruhan {@0:} medal, {@1:} tidak berhasil, kehilangan semua gold yang dipetaruhkan!"
+  },
+  {
+   "n": 5731,
+   "text": "Pada peringkat ⟨0⟩ teratas, taruhan terhadap {@0:} medal, {@1:} telah berhasil, memperoleh medal {@2:}"
+  },
+  {
+   "n": 5732,
+   "text": "Pada semi-final, taruhan {@0:} medal, {@1:} telah berhasil, memperoleh medal {@2:}"
+  },
+  {
+   "n": 5733,
+   "text": "Pada semi-final, taruhan {@0:} medal, {@1:} tidak berhasil, kehilangan semua gold yang dipetaruhkan!"
+  },
+  {
+   "n": 5734,
+   "text": "Pada saat final, taruhan {@0:} medal, {@1:} telah berhasil, memperoleh medal {@2:}"
+  },
+  {
+   "n": 5735,
+   "text": "Pada saat final, taruhan {@0:} medal, {@1:} tidak berhasil, kehilangan semua gold yang dipetaruhkan!"
+  },
+  {
+   "n": 5736,
+   "text": "<font color='#000000'>Ini adalah<font color='#00b035'> aula </font> kota. Di<font color='#00b035'> aula </font>ini, kamu dapat menjalani <font color='#00b035'> latihan </font>.<br>Mengikuti pelatihan : Menggunakan<font color='#00b035'> batu </font>guna menjalankan latihan khusus untuk mendapatkan<font color='#00b035'> EXP </font>.<br>Ketika mengikuti latihan, mendapatkan<font color='#00b035'> EXP </font>berdasarkan efek dari<font color='#00b035'> level kamu </font>.<br>Saat pemain mulai<font color='#00b035'>latihan </font>, status<font color='#00b035'> online </font>atau<font color='#00b035'> offline </font>mempengaruhi status pelatihan.</font>"
+  }
+ ]
+}

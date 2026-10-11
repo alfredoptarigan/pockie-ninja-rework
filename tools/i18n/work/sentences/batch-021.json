@@ -1,0 +1,598 @@
+{
+ "terms": {
+  "Come Come Paradise": "Make Out Paradise",
+  "EXP Seal": "Exp Seal",
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Sungai ketenangan": "Verdant Alley",
+  "Sungai Sakura": "Slowflower River",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Tapak Petir": "Thundering Steps",
+  "Padang Berangin": "Ashvoid Gully",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Goa Batu": "Boulder Cavern",
+  "Alam Liar": "Dawning Wilds",
+  "Lintasan Setapak": "Eerie Passage",
+  "Rumah": "Home",
+  "Tim Pengawal": "Guard Squad",
+  "Stinger Bee": "Bee Stingers",
+  "Pilih": "Choose",
+  "Krisis": "Crisis",
+  "Menerima Misi": "Accept a Quest",
+  "Rumahku": "My Home",
+  "Panel Misi": "Quest Panel",
+  "Ketua Desa Air": "Water Village Elder",
+  "Pedagang Keliling": "Traveling Merchant",
+  "Komandan Ninja": "Ninja Commander",
+  "Sushi Monster": "Sushi"
+ },
+ "units": [
+  {
+   "n": 8285,
+   "text": "Gunakan <font color='#00b034'>makanan</font> dari<font color='#00b034'> Bos Toko Barang</font>dan rasakan efek dari<font color='#00b034'> makanan </font>itu.<br><br>Tips: Buka<font color='#00b034'> tas </font>kamu, klik di<font color='#00b034'> HP Permen </font>, <font color='#00b034'> Permen Chakra </font>atau<font color='#00b034'> EXP Seal </font>untuk menampilkan<font color='#00b034'> action menu </font>, kemudian klik [<font color='#00b034'>Gunakan item</font>]untuk menggunakan item itu dan mendapatkan<font color='#00b034'> buff </font>dari<font color='#00b034'> makanan </font>."
+  },
+  {
+   "n": 8286,
+   "text": "<font color='#00b034'> Pemelihara Pet </font>akan memberikan<font color='#00b034'> Sunflower Fledgling </font>ke<font color='#00b034'> panel pet </font>.<br><br>Tips: Bukalah<font color='#00b034'> tas </font>kamu, pilih<font color='#00b034'> Bunga Matahari Muda </font>dan klik untuk membuka menu, kemudian pilih [<font color='#00b034'>Equip Pet</font>] lalu<font color='#00b034'> equip </font>."
+  },
+  {
+   "n": 8287,
+   "text": "Taruh<font color='#00b034'> pet </font>pada<font color='#00b034'> kandang pet </font>, lakukan satu<font color='#00b034'> pencarian </font>.<br><br>Tips: Pergi ke <font color='#00b034'> Kota Malaikat </font>dan masuk ke<font color='#00b034'> Kandang Pet </font>, Buka<font color='#00b034'> Tas </font> untuk menggeser<font color='#00b034'> pet </font>kedalam<font color='#00b034'> Panel Pet </font>, Beri makan hingga tingkat maximal kekenyangan. Setelah kenyang, kamu dapat mencari skill dari tipe yang diinginkan.<br>Gunakan<font color='#00b034'> Cepat </font> untuk menyelesaikannya langsung."
+  },
+  {
+   "n": 8288,
+   "text": "Gunakan<font color='#00b034'> peringkat </font>kamu untuk melihat berbagai<font color='#00b034'> peringkat statistik pemain </font>.<br><br>Tips: Klik pada ikon tampilan game<font color='#00b034'> tombol panel pengarah </font> [<font color='#00b034'>Peringkat</font>], dan buka tampilan<font color='#00b034'> peringkat </font>dan melihat<font color='#00b034'> peringkat statistik pemain </font>pada permainan saat ini."
+  },
+  {
+   "n": 8289,
+   "text": "Didalam<font color='#00b034'> aula </font>, lakukan<font color='#00b034'> latihan pertarungan otomatis </font>untuk mendapatkan<font color='#00b034'> EXP </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Kota Malaikat </font>dan masuk ke<font color='#00b034'> aula </font>, lalu pilih [<font color='#00b034'>Masuk Aula</font>]  dan buka tampilan<font color='#00b034'> ruang latihan </font>. Klik di [<font color='#00b034'>Mulai Latihan</font>] untuk mulai<font color='#00b034'> latihan </font>."
+  },
+  {
+   "n": 8290,
+   "text": "Buka<font color='#00b034'> pasar perdagangan </font>dan melihat<font color='#00b034'> barang-barang </font>yang dijual saat ini.<br><br>Tips: Klik ikon pada tampilan permainan<font color='#00b034'> tombol panel pengarah </font> [<font color='#00b034'>pasar</font>] , buka pada tampilan<font color='#00b034'> perdagangan pasar </font> dan lihat <font color='#00b034'> perdagangan pasar </font><font color='#00b034'> barang-barang </font>dijual saat ini."
+  },
+  {
+   "n": 8291,
+   "text": "Gunakan <font color='#00b034'> perangkat tambahan gratis</font>dari<font color='#00b034'> Gudang Senjata Bos </font>dan di<font color='#00b034'> equipment </font>kamu, lakukan<font color='#00b034'> peningkatan </font>.<br><br>Tips: Pergilah ke<font color='#00b034'> Kota Malaikat </font>dan masuk<font color='#00b034'> Gudang senjata </font>, bukalah tampilan<font color='#00b034'> meningkatkan equipment </font>, kemudian buka<font color='#00b034'> tas </font>kamu dan drag<font color='#00b034'> equipment </font>apa saja ke tampilan<font color='#00b034'> meningkatkan </font>, klik di tampilan ikon[<font color='#00b034'>Enhance</font>] untuk <font color='#00b034'> meningkatkan </font>."
+  },
+  {
+   "n": 8292,
+   "text": "Gunakan<font color='#00b034'>Penghalus gratis </font>dari<font color='#00b034'> Gudang Senjata Bos </font>di<font color='#00b034'> equipment </font>kamu ke<font color='#00b034'> Penghalusan </font>.<br><br>Tips: Pergilah ke<font color='#00b034'> Kota Malaikat </font>, masuk ke<font color='#00b034'> Gudang Senjata </font>dan buka tampilan<font color='#00b034'> penghalusan equipment </font>, kemudian klik pada<font color='#00b034'> penghalusan </font>halaman label  untuk mengganti ke tampilan<font color='#00b034'> refining </font>. Buka<font color='#00b034'> tas </font>kamu, drag <font color='#00b034'> equipment </font>apa saja ke tampilan<font color='#00b034'> penghalusan </font>, klik di ikon [<font color='#00b034'>penghalusan</font>]pada tombol di tampilan dan mulai<font color='#00b034'> penghalusan </font>."
+  },
+  {
+   "n": 8293,
+   "text": "Gunakan<font color='#00b034'> Sintesis Cepat </font>dengan barang dari<font color='#00b034'> Gudang Senjata Bos </font><font color='#00b034'> kristal Level ⟨0⟩ </font>untuk digabungkan menjadi<font color='#00b034'> kristal Level ⟨1⟩ </font>.<br><br>Tips: Buka<font color='#00b034'> tas </font>kamu, dan di kanan<font color='#00b034'> tas </font>, klik ikon [<font color='#00b034'>Sintesis Cepat</font>] untuk membuka tampilan<font color='#00b034'> Sintesis </font>. Drag <font color='#00b034'> Gudang Senjata Bos</font><font color='#00b034'> ⟨2⟩ </font><font color='#00b034'> Bagian Kristal Level ⟨3⟩ </font>ke<font color='#00b034'> item utama </font>dan<font color='#00b034'> catalyst </font>slots, klik di<font color='#00b034'> Mulai Sintesis </font>untuk memulai<font color='#00b034'> penggabungan </font>."
+  },
+  {
+   "n": 8294,
+   "text": "Gunakan<font color='#00b034'> pembuat slot gratis </font>pada<font color='#00b034'> Bos Penempa Armor </font>pada<font color='#00b034'> equipment </font>kamu dan<font color='#00b034'> buatlah slot </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Kota Malaikat </font>, masuk ke<font color='#00b034'> Penempa </font>, kemudian buka tampilan<font color='#00b034'> membuat slot di equipment </font>, klik pada<font color='#00b034'> buat slot </font>label halaman untuk beralih ke tampilan<font color='#00b034'> pembuatan slot </font>. Buka<font color='#00b034'> tas </font>kamu, drag<font color='#00b034'> equipment </font>ke tampilan<font color='#00b034'> pembuatan slot </font>dan klik pada ikon [<font color='#00b034'>pembuatan slot</font>] pada tombol di tampilan untuk<font color='#00b034'> membuat slot </font>."
+  },
+  {
+   "n": 8295,
+   "text": "Pada setiap<font color='#00b034'> equipment </font>yang<font color='#00b034'> dibuat slot </font>, melakukan<font color='#00b034'> pembuatan slot </font>.<br><br>Tips: Buka<font color='#00b034'> tas </font>kamu, dan drag<font color='#00b034'> kristal </font>apa saja dari tas kamu ke sebuah bagian equipment yang sudah<font color='#00b034'> dibuat slot </font>, klik pada<font color='#00b034'> Slot </font>, dan<font color='#00b034'> kristal </font>yang kamu pilih akan <font color='#00b034'> dibuat slot </font>kedalam<font color='#00b034'> equipment </font>, dengan<font color='#00b034'> equipment tooltip </font>menampilkan slot<font color='#00b034'> atribut kristal </font>."
+  },
+  {
+   "n": 8296,
+   "text": "Gunakan<font color='#00b034'> Percepat Sintesis </font>dengan<font color='#00b034'> Bos Penempa </font>berbakat untuk menggabungkan<font color='#00b034'> Kostum </font>menjadi<font color='#00b034'> Kostum Level ⟨0⟩ </font>.<br><br>Tips: Bukalah<font color='#00b034'> tas </font>kamu, dan dikanan<font color='#00b034'> tas </font>, klik pada ikon [<font color='#00b034'>Sintesis Cepat</font>] untuk membuka tampilan<font color='#00b034'> Sintesis </font>. Tarik<font color='#00b034'> ⟨1⟩ </font><font color='#00b034'> bagian Kostum </font><font color='#00b034'> Bos penempa </font>berbakat ke slot<font color='#00b034'> item utama </font>dan<font color='#00b034'> katalis </font>, klik pada<font color='#00b034'> Mulai Sintesis </font>untuk memulai<font color='#00b034'> penggabungan </font>."
+  },
+  {
+   "n": 8297,
+   "text": "Gunakan<font color='#00b034'> enchantments bebas </font>pada<font color='#00b034'> Bos Penempa </font>berbakat dan<font color='#00b034'> batu enchantment </font>pada<font color='#00b034'> equipment </font>kamu untuk<font color='#00b034'> enchant </font>.<br><br>Tips: pergi ke<font color='#00b034'> Kota Malaikat </font>, masuk ke<font color='#00b034'> Penempa </font>, buka tampilan<font color='#00b034'> equipment enhancement </font>, klik pada<font color='#00b034'> enchantment </font>label halaman untuk mengganti tampilan<font color='#00b034'> enchantment </font>. Buka<font color='#00b034'> tas </font>kamu, dan tarik<font color='#00b034'> enchanting </font><font color='#00b034'> equipment </font>ke tampilan<font color='#00b034'> enchantment </font>, klik pada ikon [<font color='#00b034'>Enchant</font>]pada tombol untuk<font color='#00b034'> enchant </font>."
+  },
+  {
+   "n": 8298,
+   "text": "Ketika Karakter mencapai level ⟨0⟩, TemuiMatchmaker di secret tunnel, Tanyakan padanya tentang Lover's Ring."
+  },
+  {
+   "n": 8299,
+   "text": "<font color='#00b034'> sistim </font>Mengambil<font color='#00b034'> Gift Box level ⟨0⟩ </font>.<br><br>Tips: Klik pada tampilan game<font color='#00b034'> kotak petunjuk dibawah </font><font color='#00b034'> Gift Box </font>gambar untuk membuka<font color='#00b034'> Gift Box </font>tampilan.<br>Pilih, dengan<font color='#00b034'> level Gift Box, </font>yang<font color='#00b034'> Gift Box Level ⟨1⟩ </font>, dan klik di tampilan<font color='#00b034'> Klaim </font>gambar disebelah kanan untuk mengakui."
+  },
+  {
+   "n": 8300,
+   "text": "Gunakan Syntesis cepat untuk mendapatkan item dan equipment. <br>Formula sintesis：<br><font color='#00b034'>Page ⟨0⟩,⟨1⟩,⟨2⟩</font>=Page ⟨3⟩（Tersedia di toko item ninja）+ equipment apa saja + equipment apa saja<br><font color='#00b034'>Come Come Paradise Volume ⟨4⟩-⟨5⟩</font>=page mana saja+ page mana saja + page mana saja"
+  },
+  {
+   "n": 8301,
+   "text": "Use Sintesis Cepat to obtain item and equipment. <br>Synthesis Formula：<br><font color='#00b034'>Page⟨0⟩,⟨1⟩,⟨2⟩</font>=Page⟨3⟩（Available at Toko Barang）+ any equipment+any equipment<br><font color='#00b034'>Come Come Paradise Volume ⟨4⟩- ⟨5⟩</font>=Any page+Any page+Any page"
+  },
+  {
+   "n": 8302,
+   "text": "Pemilik dari Curry in Life Haruslah kuat! Pergi ke Las Noches dan kalahkan pejaga di lantai ⟨0⟩ sebanyak tiga kali dengan kekuatanmu!<font color='#00b034'>Kamu tidak dapat menyelesaikan misi dengan menggunakan gold dan teleport langsung ke lantai ⟨1⟩ atau ⟨2⟩</font>"
+  },
+  {
+   "n": 8303,
+   "text": "Pemilik dari Curry in Life harus mempunyai banyak teman. Undang mereka untuk membantu kamu mengalahkan semua iblis di Endless Sea Forest Sebanyak ⟨0⟩ Kali!【Sulit】"
+  },
+  {
+   "n": 8304,
+   "text": "Pemilik dari Curry in Life harus mempunyai banyak teman. Undang mereka untuk membantu kamu mengalahkan semua iblis di Crimson Grassland Sebanyak ⟨0⟩ kali!【Sulit】"
+  },
+  {
+   "n": 8305,
+   "text": "Pemilik dari Curry in Life harus mempunyai banyak teman. Undang mereka untuk membantu kamu mengalahkan semua iblis di Deadwood Villa sebanyak ⟨0⟩ kali!【Sulit】"
+  },
+  {
+   "n": 8306,
+   "text": "Pemilik dari Curry in Life Harus Tekun! Kumpulkan ⟨0⟩ iron ores dan berikan padaku!"
+  },
+  {
+   "n": 8307,
+   "text": "Pemilik dari Curry in Life tidak harus repot-repot dengan hal-hal sepele! Kumpulkan ⟨0⟩ Anonymous Namecard dan berikan padaku!"
+  },
+  {
+   "n": 8308,
+   "text": "Pemilik dari Curry in Life harus cepat tanggap! Kumpulkan ⟨0⟩ rare iron ores dan berikan padaku!"
+  },
+  {
+   "n": 8309,
+   "text": "Pemilik dari Curry in Life harus mempunyai kekuatan besar! Selesaikan ⟨0⟩ Imbalan Misi sekarang apapun misinya!"
+  },
+  {
+   "n": 8310,
+   "text": "Pemilik dari Curry in Life harus luar biasa! Kalahkan semua musuh dan menang ⟨0⟩ kali di arena sekarang!"
+  },
+  {
+   "n": 8311,
+   "text": "Bangun sebuah <font color='#00b034'>Kebun</font>"
+  },
+  {
+   "n": 8312,
+   "text": "Pergi ke<font color='#00b034'> Kota Malaikat</font> dan kunjungi <font color='#00b034'>Ketua Ninja</font>."
+  },
+  {
+   "n": 8313,
+   "text": "Memasuki color='#⟨0⟩b⟨1⟩'> <font Rumahku </ font>, membangun <font color='#00b034'> Gudang </ font> <font color='#00b034'>. Gudang </ span> dapat meningkatkan kapasitas penyimpanan hasil panen dan menyimpan item yang dapat diproduksi di rumah Kamu."
+  },
+  {
+   "n": 8314,
+   "text": "Tarik murid ke tempat konstruksi bangunan yang ada di bawah untuk mempercepat pembangunan."
+  },
+  {
+   "n": 8315,
+   "text": "Ketika karakter ini lebih tinggi dari<font color='#00b034'> lv.⟨0⟩</font>, masuki<font color='#00b034'>Rumah Ku</font> dan upgrade <font color='#00b034'>Rumah</font> ke <font color='#00b034'>lv.⟨1⟩</font>."
+  },
+  {
+   "n": 8316,
+   "text": "Masuki <font color='#00b034'>Rumahku</font>, bangun<font color='#00b034'>Ruang Penetasan</font>.<font color='#00b034'>Ruang Penetasan</font> memberikan fungsi<font color='#00b034'> penetasan telur</font>."
+  },
+  {
+   "n": 8317,
+   "text": "Masuki <font color='#00b034'>Rumah Ku</font>, bangun <font color='#00b034'>Kincir angin</font>. Pada hari yang berangin, <font color='#00b034'>Kincir angin</font> dapat menghasilkan <font color='#00b034'>hasil panen</font> dari pada pertanian."
+  },
+  {
+   "n": 8318,
+   "text": "Ketika poin prestasi naik menjadi <font color='#00b034'>⟨0⟩</font>, <font color='#00b034'>Tower Prestasi</font> Akan upgrade ke <font color='#00b034'>lv.⟨1⟩</font>."
+  },
+  {
+   "n": 8319,
+   "text": "Masuki <font color='#00b034'>Rumah Ku</font>，meningkatakan <font color='#00b034'>Pertanian</font> ke <font color='#00b034'>lv.⟨0⟩</font>."
+  },
+  {
+   "n": 8320,
+   "text": "Masuki <font color='#00b034'>Rumah Ku</font>，Klik<font color='#00b034'> Daftar Bangunan</font>，pilih<font color='#00b034'> Tampilan</font> dan klik<font color='#00b034'> Tampilan+⟨0⟩</font> untuk memperluas."
+  },
+  {
+   "n": 8321,
+   "text": "Dalam Rumah Kamu, tekan <font color='#00b034'>Matahari</font> atau <font color='#00b034'> Awan </font>untuk melepaskan efek cuaca selama ⟨0⟩ detik.<font color='#00b034'> Matahari </font>dan<font color='#00b034'> Awan </font>hanya akan muncul saat<font color='#00b034'> cerah </font>atau<font color='#00b034'> hujan </font>hari."
+  },
+  {
+   "n": 8322,
+   "text": "Mamasuki rumah temanmu, klik <font color='#00b034'> info murid </font>, tarik murid kamu pada layar untuk membantu teman mu membersihkan rumput."
+  },
+  {
+   "n": 8323,
+   "text": "Pindahkan<font color='#00b034'> Telur </font>ke<font color='#00b034'> Ruang Penetasan</font> untuk memulai penetasan."
+  },
+  {
+   "n": 8324,
+   "text": "Klik<font color='#00b034'> info telur</font>, temukan pemain dengan tanda<font color='#00b034'> mencuri </font> untuk merebut telur. Tapi berhati-hatilah biasanya telur tersebut memiliki pelindung."
+  },
+  {
+   "n": 8325,
+   "text": "Klik<font color='#00b034'> info telur</font>, temukan pemain dengan tanda<font color='#00b034'> membuang </font>untuk membuang<font color='#00b034'> telur yang jelek </font> ke rumah pemain. Jangan lupa mempersiapkan kekuatan untuk perlawanan."
+  },
+  {
+   "n": 8326,
+   "text": "Sintesiskan <font color='#ff0000'>Demon Proof of Suppression</font> lalu bicara pada<font color='#ff0000'> Pedagang Keliling</font>di <font color='#00b034'> Jalan Senja</font> \nGunakan <font color='#ff0000'>Cepat</font> pada tas untuk menggunakan fungsi sintesis cepat, Sintesiskan <font color='#00b034'>grenades</font> dengan ⟨0⟩<font color='#00b034'> Gem of Justice</font> untuk mendapatkan<font color='#ff0000'> Demon Proof of Suppression</font>"
+  },
+  {
+   "n": 8327,
+   "text": "Sintesiskan <font color='#ff0000'>Demon Proof of Suppression</font> lalu bicara pada<font color='#ff0000'> Pedagang keliling</font><font color='#00b034'> Sungai Sakura</font>\nGunakan <font color='#ff0000'>Cepat</font> pada tas untuk menggunakan fungsi sintesis cepat, Sintesiskan <font color='#00b034'>grenades</font> dengan ⟨0⟩<font color='#00b034'> Gem of Justice</font> untuk mendapatkan<font color='#ff0000'> Demon Proof of Suppression</font>"
+  },
+  {
+   "n": 8328,
+   "text": "Sintesiskan <font color='#ff0000'>Demon Proof of Suppression</font> lalu Bicara pada<font color='#ff0000'> Pedagang keliling</font>di <font color='#00b034'> Tapak Petir</font>\nGunakan <font color='#ff0000'>Cepat</font> pada tas untuk menggunakan fungsi sintesis cepat, Sintesiskan <font color='#00b034'>grenades</font> dengan ⟨0⟩<font color='#00b034'> Gem of Justice</font> untuk mendapatkan<font color='#ff0000'> Demon Proof of Suppression</font>"
+  },
+  {
+   "n": 8329,
+   "text": "Sintesiskan <font color='#ff0000'>Demon Proof of Suppression</font> lalu bicara pada<font color='#ff0000'> Pedagang keliling</font> di<font color='#00b034'> Padang Berangin</font>\nGunakan <font color='#ff0000'>Cepat</font> pada tas untuk menggunakan fungsi sintesis cepat, Sintesiskan <font color='#00b034'>grenades</font> dengan ⟨0⟩<font color='#00b034'> Gem of Justice</font> untuk mendapatkan<font color='#ff0000'> Demon Proof of Suppression</font>"
+  },
+  {
+   "n": 8330,
+   "text": "Synthesize <font color='#ff0000'>Demon Proof of Suppression</font> lalu bicara pada<font color='#ff0000'> Pedagang keliling</font> di<font color='#00b034'> Goa Batu</font>\nGunakan <font color='#ff0000'>Cepat</font> pada tas untuk menggunakan fungsi sintesis cepat, Sintesiskan <font color='#00b034'>grenades</font> dengan ⟨0⟩<font color='#00b034'> Gem of Justice</font> untuk mendapatkan<font color='#ff0000'> Demon Proof of Suppression</font>"
+  },
+  {
+   "n": 8331,
+   "text": "Pergi ke<font color='#00b034'> Desa Api</font>dan bicara dengan<font color='#00b034'> Komandan Ninja</font>di<font color='#ff0000'> Five Kage Meeting Room </font>."
+  },
+  {
+   "n": 8332,
+   "text": "Pergi ke<font color='#00b034'> Desa Air</font>dan bicara dengan<font color='#00b034'> Komandan Ninja</font>di<font color='#ff0000'> Five Kage Meeting Room </font>."
+  },
+  {
+   "n": 8333,
+   "text": "Pergi ke<font color='#00b034'> Desa Petir</font>dan bicara dengan<font color='#00b034'> Komandan Ninja</font>di<font color='#ff0000'> Five Kage Meeting Room </font>."
+  },
+  {
+   "n": 8334,
+   "text": "Pergi ke<font color='#00b034'> Desa Angin</font>dan bicara dengan<font color='#00b034'> Komandan Ninja</font>di<font color='#ff0000'> Five Kage Meeting Room </font>."
+  },
+  {
+   "n": 8335,
+   "text": "Pergi ke<font color='#00b034'> Desa Tanah</font>dan bicara dengan<font color='#00b034'> Komandan Ninja</font>di<font color='#ff0000'> Five Kage Meeting Room </font>."
+  },
+  {
+   "n": 8336,
+   "text": "Bicara dengan <font color='#ff0000'> Ketua Desa Api</font>di<font color='#00b034'> Desa Api</font>."
+  },
+  {
+   "n": 8337,
+   "text": "Buka<font color='#00b034'> Tas</font>, Lalu buka<font color='#00b034'> Lv.⟨0⟩ Newbie Pack</font>."
+  },
+  {
+   "n": 8338,
+   "text": "Buka<font color='#00b034'> Tas</font>, Pilih<font color='#00b034'> weapon </font>sesuaikan lalu pakai."
+  },
+  {
+   "n": 8339,
+   "text": "Bicara kepada<font color='#ff0000'> Ketua Desa Api </font>di<font color='#00b034'> Desa Api</font> dan baca pada<font color='#00b034'> Panel Misi information</font>."
+  },
+  {
+   "n": 8340,
+   "text": "Pergi ke<font color='#00b034'> Tambang Batu </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sunflower</font>."
+  },
+  {
+   "n": 8341,
+   "text": "Pergi ke<font color='#00b034'> Tambang Batu </font>dan bunuh ⟨0⟩<font color='#ff0000'> Stinger Bee</font>."
+  },
+  {
+   "n": 8342,
+   "text": "Buka<font color='#00b034'> Tas</font> dan Gunakan<font color='#00b034'> Lv.⟨0⟩ HP Carrier Bag</font>. lalu Pergi ke<font color='#00b034'> Tambang Batu </font>dan bicara kepada<font color='#ff0000'> Genin</font>."
+  },
+  {
+   "n": 8343,
+   "text": "Bicara kepada<font color='#ff0000'> Genin</font> di<font color='#00b034'> Tambang Batu</font>."
+  },
+  {
+   "n": 8344,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Api</font> di<font color='#ff0000'> Desa Api</font>."
+  },
+  {
+   "n": 8345,
+   "text": "Pergi ke<font color='#00b034'> Tambang Batu</font>, bunuh ⟨0⟩<font color='#ff0000'> Sushi Monster </font>dan kumpulkan ⟨1⟩<font color='#00b034'> Wasabi Sushi Roll</font>."
+  },
+  {
+   "n": 8346,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa api</font> di<font color='#ff0000'> Desa Api</font>."
+  },
+  {
+   "n": 8347,
+   "text": "Buka<font color='#00b034'> Tas</font>, Lalu Buka<font color='#00b034'> Newbie Quest Pack</font>."
+  },
+  {
+   "n": 8348,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Air</font> di<font color='#ff0000'> Desa Air</font>."
+  },
+  {
+   "n": 8349,
+   "text": "Buka<font color='#00b034'> Tas </font>Lalu Buka<font color='#00b034'> Lv.⟨0⟩ Newbie Pack</font>."
+  },
+  {
+   "n": 8350,
+   "text": "Buka<font color='#00b034'> Tas</font>, pilih<font color='#00b034'> weapon </font>sesuaikan lalu pakai."
+  },
+  {
+   "n": 8351,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Air</font> di<font color='#ff0000'> Desa Air</font>, baca<font color='#00b034'> Panel Misi Information</font>."
+  },
+  {
+   "n": 8352,
+   "text": "Pergi ke<font color='#00b034'> Sungai ketenangan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sunflower</font>."
+  },
+  {
+   "n": 8353,
+   "text": "Pergi ke<font color='#00b034'> Sungai ketenangan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Stinger Bee</font>."
+  },
+  {
+   "n": 8354,
+   "text": "Buka<font color='#00b034'> Tas</font> dan Gunakan<font color='#00b034'> Lv.⟨0⟩ HP Carrier Bag</font>. lalu Pergi ke<font color='#00b034'> Sungai ketenangan </font>dan bicara kepada<font color='#ff0000'> Genin</font>."
+  },
+  {
+   "n": 8355,
+   "text": "Bicara kepada<font color='#ff0000'> Genin</font> di<font color='#00b034'> Sungai ketenangan</font>."
+  },
+  {
+   "n": 8356,
+   "text": "Pergi ke<font color='#00b034'> Sungai ketenangan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sushi Monster </font>dan kumpulkan ⟨1⟩<font color='#00b034'> Wasabi Sushi Roll</font>."
+  },
+  {
+   "n": 8357,
+   "text": "Buka<font color='#00b034'> Tas</font> Lalu Buka<font color='#00b034'> Newbie Quest Pack</font>."
+  },
+  {
+   "n": 8358,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Petir</font> di<font color='#ff0000'> Desa Petir</font>."
+  },
+  {
+   "n": 8359,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Petir</font> di<font color='#ff0000'> Desa Petir</font>, baca<font color='#00b034'> Panel Misi Information</font>."
+  },
+  {
+   "n": 8360,
+   "text": "Pergi ke<font color='#00b034'> Puncak Bebatuan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sunflower</font>."
+  },
+  {
+   "n": 8361,
+   "text": "Pergi ke<font color='#00b034'> Puncak Bebatuan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Stinger Bee</font>."
+  },
+  {
+   "n": 8362,
+   "text": "Buka<font color='#00b034'> Tas</font> dan Gunakan<font color='#00b034'> Lv.⟨0⟩ HP Carrier Bag</font>. lalu Pergi ke<font color='#00b034'> Puncak Bebatuan </font>dan bicara kepada<font color='#ff0000'> Genin</font>."
+  },
+  {
+   "n": 8363,
+   "text": "Bicara kepada<font color='#ff0000'> Genin</font> di<font color='#00b034'> Puncak Bebatuan</font>."
+  },
+  {
+   "n": 8364,
+   "text": "Pergi ke<font color='#00b034'> Puncak Bebatuan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sushi Monster </font>dan kumpulkan ⟨1⟩<font color='#00b034'> Wasabi Sushi Roll</font>."
+  },
+  {
+   "n": 8365,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Angin</font> di<font color='#ff0000'> Desa Angin</font>."
+  },
+  {
+   "n": 8366,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Angin</font> di<font color='#ff0000'> Desa Angin</font>, baca<font color='#00b034'> Panel Misi Information</font>."
+  },
+  {
+   "n": 8367,
+   "text": "Pergi ke<font color='#00b034'> Lembah Awan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sunflower</font>."
+  },
+  {
+   "n": 8368,
+   "text": "Pergi ke<font color='#00b034'> Lembah Awan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Stinger Bee</font>."
+  },
+  {
+   "n": 8369,
+   "text": "Buka<font color='#00b034'> Tas</font> dan Gunakan<font color='#00b034'> Lv.⟨0⟩ HP Carrier Bag</font>.Then Pergi ke<font color='#00b034'> Lembah Awan </font>dan bicara kepada<font color='#ff0000'> Genin</font>."
+  },
+  {
+   "n": 8370,
+   "text": "Bicara kepada<font color='#ff0000'> Genin</font> di<font color='#00b034'> Lembah Awan</font>."
+  },
+  {
+   "n": 8371,
+   "text": "Pergi ke<font color='#00b034'> Lembah Awan </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sushi Monster </font>dan kumpulkan ⟨1⟩<font color='#00b034'> Wasabi Sushi Roll</font>."
+  },
+  {
+   "n": 8372,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Tanah</font> di<font color='#ff0000'> Desa Tanah</font>."
+  },
+  {
+   "n": 8373,
+   "text": "Bicara kepada<font color='#00b034'> Ketua Desa Tanah</font> di<font color='#ff0000'> Desa Tanah</font> and read<font color='#00b034'> Panel Misi Information</font>."
+  },
+  {
+   "n": 8374,
+   "text": "Pergi ke<font color='#00b034'> Gerbang Naga Tersembunyi </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sunflower</font>."
+  },
+  {
+   "n": 8375,
+   "text": "Pergi ke<font color='#00b034'> Gerbang Naga Tersembunyi </font>dan bunuh ⟨0⟩<font color='#ff0000'> Stinger Bee</font>."
+  },
+  {
+   "n": 8376,
+   "text": "Buka<font color='#00b034'> Tas</font> dan Gunakan<font color='#00b034'> Lv.⟨0⟩ HP Carrier Bag</font>. lalu Pergi ke<font color='#00b034'> Gerbang Naga Tersembunyi </font>dan bicara kepada<font color='#ff0000'> Genin</font>."
+  },
+  {
+   "n": 8377,
+   "text": "Bicara kepada<font color='#ff0000'> Genin</font> di<font color='#00b034'> Gerbang Naga Tersembunyi </font>."
+  },
+  {
+   "n": 8378,
+   "text": "Pergi ke<font color='#00b034'> Gerbang Naga Tersembunyi </font>dan bunuh ⟨0⟩<font color='#ff0000'> Sushi Monster </font>dan kumpulkan ⟨1⟩<font color='#00b034'> Wasabi Sushi Roll</font>."
+  },
+  {
+   "n": 8379,
+   "text": "Menerima Misi : Pergi ke<font color='#00b035'> {@0:Zone name} </font>dan temui {@1:NPC name}. "
+  },
+  {
+   "n": 8380,
+   "text": "Misi selesai : Pergi ke<font color='#00b035'> {@0:Zone name} </font>dan temui {@1:NPC name}. "
+  },
+  {
+   "n": 8381,
+   "text": "Tolak"
+  },
+  {
+   "n": 8382,
+   "text": "Progression Status"
+  },
+  {
+   "n": 8383,
+   "text": "Akumulasi{@0:} poin dari imbalan penyelesaian misi minggu lalu, ditukar dengan {@0:} medali yang telah dikirim ke account kamu."
+  },
+  {
+   "n": 8384,
+   "text": "{@0:Quest type}{@1:Quest name}"
+  },
+  {
+   "n": 8385,
+   "text": "Selamat telah melewati uji coba dan menjadi anggota penjaga. Bekerja keraslah!"
+  },
+  {
+   "n": 8386,
+   "text": "Mengapa monster yang biasanya damai tiba-tiba mengamuk? Kita harus selesaikan ini secepatnya. Mengapa bala bantuan desa belum datang?"
+  },
+  {
+   "n": 8387,
+   "text": "Krisis<font color='#00b034'> Gunung Peleburan </font>sudah terselesaikan? Ah, itu memang berita baik."
+  },
+  {
+   "n": 8388,
+   "text": "Dapat, aku akan pergi setelah aku menyelesaikan pemadatan besi ini."
+  },
+  {
+   "n": 8389,
+   "text": "Baiklah, mengatur persediaan ramuan baru."
+  },
+  {
+   "n": 8390,
+   "text": "Harap tunggu sebentar, aku akan kesana setelah aku selesai membereskan barang-barang ini."
+  },
+  {
+   "n": 8391,
+   "text": "Apa<font color='#00b034'> Ketua Desa </font>mengirim kamu? Itu baik sekali!"
+  },
+  {
+   "n": 8392,
+   "text": "Woof woof! Siapa yang terlihat familiar, apa kamu dari<font color='#00b034'> Desa Api </font>juga?"
+  },
+  {
+   "n": 8393,
+   "text": "Ini adalah<font color='#00b034'> Recon Scroll </font>, berikan ini ke<font color='#00b034'> Ketua Desa </font>."
+  },
+  {
+   "n": 8394,
+   "text": "Woof woof!<font color='#00b034'> Pakkun </font>telah menemukan rahasia besar, apakah kamu ingin tau?"
+  },
+  {
+   "n": 8395,
+   "text": "Sebuah topeng, coba aku lihat.<br>Ini terlihat familiar, bisa ini jadi miliknya?"
+  },
+  {
+   "n": 8396,
+   "text": "Aku tidak berpikir dalang itu dia, tampak seperti dia benar-benar hilang di kedalaman kekuasaan."
+  },
+  {
+   "n": 8397,
+   "text": "Kita mulai dari saat [Iblis Lambang Perang], perang yang terjadi ⟨0⟩ tahun yang lalu. Lalu, iblis kekuatan besar muncul di<font color='#00b034'> Daratan Sakura </font>, namanya adalah Ieyasu. Iblis itu menaburkan kekacauan dan perselisihan di seluruh negri, menghanguskan tanah yang subur dan membuat orang-rorang seperti hidup di neraka.<br>Akhirnya seorang<font color='#00b034'> Ketua Ninja </font>maju melawan mereka, memimpin ⟨1⟩ murid melawan iblis. Dibawah pengaruhnya, banyak orang-orang bergabung untuk melakukan perlawanan. Setelah melakukan pertarungan sulit dan pengorbanan, akhirnya leyasu berhasil dikalahkan.<br>Untuk mencegah leyasu dan pengikutnya datang lagi, mereka disegel oleh<font color='#00b034'> Ketua Ninja </font>didalam<font color='#00b034'> Kota Iblis </font>.<br>Untuk mencegah leyasu berbuat licik dan melarikan diri dari<font color='#00b034'> Kota Iblis </font>dan menyebarkan kekacauan lagi, <font color='#00b034'> Ketua Ninja </font>mendirikan<font color='#00b034'> Kota Malaikat </font>dan ⟨2⟩ desa major ninja, kemudian dikirim ⟨3⟩ murid untuk menjadi masing-masing kepala desa, untuk melindungi<font color='#00b034'> Kota Malaikat </font>dan untuk menyegel leyasu.<br>Kami, <font color='#00b034'> Desa Api </font>adalah salah satu dari ⟨4⟩ desa ninja terhebat, dukungan segel Tim Pengawal dan mengirim ninja elite ke<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8398,
+   "text": "Mengapa<font color='#00b034'> Pedagang Keliling </font>tidak ada disini? Aku akan mendapat demo dari warga desa jika barang mereka tidak ada disini tepat waktu!"
+  },
+  {
+   "n": 8399,
+   "text": "Benar sekali, aku akan pergi ke<font color='#00b034'> Desa Api </font>untuk mengantarkan barang kesana. Aku adalah<font color='#00b034'> Pedagang Keliling </font>."
+  },
+  {
+   "n": 8400,
+   "text": "Aku mendengar bahwa kamu telah banyak sekali membantu<font color='#00b034'> Bos Toko Barang </font>, bagus! Membantu rakyat umum dan menjaga hubungan dengan mereka adalah cara ninja benar!<br><font color='#00b034'> Kota Malaikat </font>pesan telah mencapai desa. Bersiap untuk bergerak keluar. <font color='#00b034'> Genin </font>akan memberitahu bagaimana cara pergi ke<font color='#00b034'> Kota Malaikat </font>. Kerja keraslah saat kamu disana. jangan pernah menyimpang dari jalan ninja."
+  },
+  {
+   "n": 8401,
+   "text": "Oh ya, berrpeganglah pada<font color='#00b034'> Honeydew Riceballs </font>. Ingat untuk membantu aku memberikannya kepada<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 8402,
+   "text": "Jadi kamu adalah ninja dari<font color='#00b034'> Desa Api </font>, kesini untuk ikut latihan spesial. Tidak terlalu buruk, muda satu. Kamu tampak waspada. Melihat kamu mengingatkan aku pada hari-hari aku lebih muda."
+  },
+  {
+   "n": 8403,
+   "text": "Kamu harus menjadi ninja baru. Kamu tidak terlihat seperti itu!"
+  },
+  {
+   "n": 8404,
+   "text": "Tidak terlalu buruk, bahkan sangat teliti<font color='#00b034'> Bos Toko Barang </font>telah memuji anda. Kamu seorang yang langka."
+  },
+  {
+   "n": 8405,
+   "text": "Apa<font color='#00b034'> Ketua Yuan </font>mengirim kamu?"
+  },
+  {
+   "n": 8406,
+   "text": "Mengapa aku begitu tidak beruntung untuk menghadapi para bandit!"
+  },
+  {
+   "n": 8407,
+   "text": "Tidak terlalu buruk, tampaknya kamu telah mulai menampilkan Kekuatan Besar kamu."
+  },
+  {
+   "n": 8408,
+   "text": "Orang-orang desa yang kehilangan rumah mereka terlalu menyedihkan!"
+  },
+  {
+   "n": 8409,
+   "text": "<font color='#00b034'> Ksatria </font>, apa kamu berhubungan dengan para bandit terkutuk ini?"
+  },
+  {
+   "n": 8410,
+   "text": "Melalui upaya kamu, masyarakat desa memiliki harapan baru. Merasa baik, bukan?"
+  },
+  {
+   "n": 8411,
+   "text": "Untuk berpikir ada iblis didalam<font color='#00b034'> Kota Malaikat </font>. Para iblis disegel didalam<font color='#00b034'> Kota Iblis </font>sudah mulai bergerak."
+  },
+  {
+   "n": 8412,
+   "text": "Hanya beberapa hari yang lalu, aku melihat, dilangit, makhluk bersayap terbang melalui<font color='#00b034'> Kota Malaikat </font>untuk menuju ke<font color='#00b034'> Simpang Jalan </font>. Darah menetes dari langit ke tanah, itu mengerikan!<br>Kamu dapat bertanya kepada warga<font color='#00b034'> Simpang Jalan </font>dan mungkin  akan mengungkap beberapa petunjuk dari mereka."
+  },
+  {
+   "n": 8413,
+   "text": "Untuk berpikir begitu banyak iblis telah melarikan diri, apa yang harus kita lakukan?!"
+  },
+  {
+   "n": 8414,
+   "text": "Aku tidak pernah membayangkan bahwa segel<font color='#00b034'> Kota Iblis </font>telah melemah beberapa derajat. Aku akan datang membawa solusinya."
+  },
+  {
+   "n": 8415,
+   "text": "Suami aku adalah penjaga garrisoned di terowongan rahasia. Berbicara tentang hal itu terakhir kali dai pergi berlibur, bahwa antara perbatasan<font color='#00b034'> Kota Malaikat </font>dan Harsh Barrens, kadang-kadang orang mendengar music aneh, dan setelah itu lenyap kembali. Sahabat mereka juga tidak dapat menemukan keberadaan mereka. Ada beberapa insiden seperti ini."
+  },
+  {
+   "n": 8416,
+   "text": "Setelah dipikir bahwa begitu banyak yang telah hilang. Aku akan mengirimkan ninja ke<font color='#00b034'> Lintasan Setapak </font>untuk melindungi wisatawan. Kamu harus segera melaporkan hal ini ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 8417,
+   "text": "⟨0⟩ Iblis tidak saja memiliki kekuatan yang sangat besar, tapi juga mendapat sebagian dari kekuatan iblis. Ini sebabnya yang terbaik yang bisa kami lakukan adalah menyegel mereka didalam<font color='#00b034'> Kota Iblis </font>, karena tidak ada cara untuk benar-benar menghancurkan mereka."
+  },
+  {
+   "n": 8418,
+   "text": "Aku berharap iblis itu bukan Iblis yang sedang dibicarakan, jika tidak, masa depan dari<font color='#00b034'> Daratan Sakura </font>akan dalam kesulitan"
+  },
+  {
+   "n": 8419,
+   "text": "Setelah aku kembali dari<font color='#00b034'> Daratan Sakura </font>, aku melihat bahwa Iblis-iblis jahat telah meningkat secara hebat. Aku mendengar bahwa terjadi kekacauan para iblis disini ⟨0⟩ tahun lalu dengan iblis tertutup pergi setelah kekalahannya. Tapi sepertinya segel itu tidak kuat untuk menahan roh-roh jahat lebih lama lagi."
+  },
+  {
+   "n": 8420,
+   "text": "Kita berfikir segel<font color='#00b034'> Kota Iblis </font>telah melemah ke keadaan seperti itu. Dalam masalah ini aku harus mengatur pasukan desa dan bantuan dari<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 8421,
+   "text": "Rumor terbaru eh ... biarkan aku berpikir."
+  },
+  {
+   "n": 8422,
+   "text": "Jejak iblis tersebar di seluruh<font color='#00b034'> Punggung Api </font>. Bahkan satu warga<font color='#00b034'> Thunderbolt Warrior </font>berakhir dibawah kendali mereka. Tidak ada jalan untuk kita berburu disana, bagaimana supaya kita bisa bertahan?"
+  },
+  {
+   "n": 8423,
+   "text": "Meskipun<font color='#00b034'> Thunderbolt Warrior </font>dalam pengaturan iblis, ini luar biasa."
+  },
+  {
+   "n": 8424,
+   "text": "untuk menyadarkan ninja yang dibawah kendali iblis,jika tidak salah, mereka harus dibawa ke tempat ninja yang mempunyai kekuatan besar. Jika kita bisa menyusun<font color='#00b034'> Delicate Medicine </font>itu mungkin bisa bekerja. Hanya saja untuk menyeduh<font color='#00b034'> Delicate Medicine </font>, kita membutuhkan<font color='#00b034'> Savory Grass </font>ramuan langka dan dibedakan dari ramuan lainnya. mereka yang terbiasa dengan obat bisa menemukannya.<br>Aku mendengar ada koki yang sering pergi ke<font color='#00b034'> Alam Liar </font>untuk mencari bahan makanan. mungkin dia bisa mengetahui keberadaan dari<font color='#00b034'> Savory Grass' </font>."
+  }
+ ]
+}

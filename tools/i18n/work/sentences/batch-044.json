@@ -1,0 +1,408 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Unohana Retsu": "Retsu Unohana",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hirako Shinji": "Shinji Hirako",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 11926,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Sarugaki Hiyori.<br>Gunakan sebagai item utama dan mensintesis dengan Sarugaki Hiyori ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Sarugaki Hiyori +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11927,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Shihouin Yoruichi.<br>Gunakan sebagai item utama dan mensintesis dengan Shihouin Yoruichi ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Shihouin Yoruichi +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11928,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Soifon.<br>Gunakan sebagai item utama dan mensintesis dengan Soifon ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Soifon +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11929,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Halibel.<br>Gunakan sebagai item utama dan mensintesis dengan Halibel ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Halibel +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11930,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Mashiro Kuna.<br>Gunakan sebagai item utama dan mensintesis dengan Mashiro Kuna ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Mashiro Kuna +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11931,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Shiba Kuukaku.<br>Gunakan sebagai item utama dan mensintesis dengan Shiba Kuukaku ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Shiba Kuukaku +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11932,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nanao Ise.<br>Gunakan sebagai item utama dan mensintesis dengan Nanao Ise ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Nanao Ise +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11933,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Momo Hinamori.<br>Gunakan sebagai item utama dan mensintesis dengan Momo Hinamori ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Momo Hinamori +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11934,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Rangiku Matsumoto.<br>Gunakan sebagai item utama dan mensintesis dengan Rangiku Matsumoto ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Rangiku Matsumoto +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11935,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Inoue Orihime.<br>Gunakan sebagai item utama dan mensintesis dengan Inoue Orihime ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Inoue Orihime +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11936,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kurenai Yuuhi.<br>Gunakan sebagai item utama dan mensintesis dengan Kurenai Yuuhi ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Kurenai Yuuhi +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11937,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hyuga Hinata.<br>Gunakan sebagai item utama dan mensintesis dengan Hyuga Hinata ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Hyuga Hinata +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11938,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Chi.<br>Gunakan sebagai item utama dan mensintesis dengan Chi ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Chi +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11939,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Shizune.<br>Gunakan sebagai item utama dan mensintesis dengan Shizune ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Shizune +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11940,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kuchiki Byakuya.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Kuchiki Byakuya +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Kuchiki Byakuya＋⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11941,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Alice.<br>Gunakan sebagai item utama dan mensintesis dengan Alice ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Alice +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11942,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Priest.<br>Gunakan sebagai item utama dan mensintesis dengan Priest ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Priest +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11943,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Ghost Lady.<br>Gunakan sebagai item utama dan mensintesis dengan Ghost Lady ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Ghost Lady +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11944,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Zombie Lady.<br>Gunakan sebagai item utama dan mensintesis dengan Zombie Lady ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Zombie Lady +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11945,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Mizukage.<br>Gunakan sebagai item utama dan mensintesis dengan Mizukage ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Mizukage +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11946,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Uzumaki Naruto.<br>Gunakan sebagai item utama dan mensintesis dengan Uzumaki Naruto ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Uzumaki Naruto +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11947,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Gaara.<br>Gunakan sebagai item utama dan mensintesis dengan Gaara ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Gaara +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11948,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hatake Kakashi.<br>Gunakan sebagai item utama dan mensintesis dengan Hatake Kakashi ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Hatake Kakashi +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11949,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Uchiha Sasuke.<br>Gunakan sebagai item utama dan mensintesis dengan Uchiha Sasuke ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Uchiha Sasuke +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11950,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Uchiha Itachi.<br>Gunakan sebagai item utama dan mensintesis dengan Uchiha Itachi ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Uchiha Itachi +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11951,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nelliel.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Nelliel +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Nelliel＋⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11952,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi ⟨0⟩nd Hokage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨1⟩nd Hokage ＋⟨2⟩ untuk berkesempatan mendapatkan ⟨3⟩ kostum ⟨4⟩nd Hokage +⟨5⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11953,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Orochimaru.<br>Gunakan sebagai item utama dan mensintesis dengan Orochimaru ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Orochimaru +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11954,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Zangetsu.<br>Gunakan sebagai item utama dan mensintesis dengan Zangetsu ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Zangetsu +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11955,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi ⟨0⟩rd Hokage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨1⟩rd Hokage ＋⟨2⟩ untuk berkesempatan mendapatkan ⟨3⟩ kostum ⟨4⟩rd Hokage +⟨5⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11956,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hollowfied Grimmjow.<br>Gunakan sebagai item utama dan mensintesis dengan Hollowfied Grimmjow ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Hollowfied Grimmjow +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11957,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Aizen.<br>Gunakan sebagai item utama dan mensintesis dengan Aizen ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Aizen +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11958,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi ⟨0⟩th Hokage.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨1⟩th Hokage  ＋⟨2⟩ untuk berkesempatan mendapatkan ⟨3⟩ kostum ⟨4⟩th Hokage  +⟨5⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11959,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Jiraiya.<br>Gunakan sebagai item utama dan mensintesis dengan Jiraiya ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Jiraiya +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11960,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Sakura Haruno.<br>Gunakan sebagai item utama dan mensintesis dengan Sakura Haruno ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Sakura Haruno +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11961,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Arale.<br>Gunakan sebagai item utama dan mensintesis dengan Arale ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Arale +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11962,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Little Meng.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Little Meng +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Little Meng＋⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11963,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Yamanaka Ino.<br>Gunakan sebagai item utama dan mensintesis dengan Yamanaka Ino ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Yamanaka Ino +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11964,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Mitarashi Anko.<br>Gunakan sebagai item utama dan mensintesis dengan Mitarashi Anko ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Mitarashi Anko +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11965,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Temari.<br>Gunakan sebagai item utama dan mensintesis dengan Temari ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Temari +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11966,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Tenten.<br>Gunakan sebagai item utama dan mensintesis dengan Tenten ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Tenten +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11967,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Haku.<br>Gunakan sebagai item utama dan mensintesis dengan Haku ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Haku +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11968,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kusajishi Yachiru.<br>Gunakan sebagai item utama dan mensintesis dengan Kusajishi Yachiru ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Kusajishi Yachiru +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11969,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kotetsu Isane.<br>Gunakan sebagai item utama dan mensintesis dengan Kotetsu Isane ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Kotetsu Isane +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11970,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Konan.<br>Gunakan sebagai item utama dan mensintesis dengan Konan ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Konan +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11971,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Yadomaru Sasha.<br>Gunakan sebagai item utama dan mensintesis dengan Yadomaru Sasha ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Yadomaru Sasha +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11972,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Little Jun.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Little Jun +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Little Jun＋⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11973,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Arisawa Tatsuki.<br>Gunakan sebagai item utama dan mensintesis dengan Arisawa Tatsuki ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Arisawa Tatsuki +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11974,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Bomb Rukia.<br>Gunakan sebagai item utama dan mensintesis dengan Bomb Rukia ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Bomb Rukia +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11975,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Tsunade.<br>Gunakan sebagai item utama dan mensintesis dengan Tsunade ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Tsunade +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11976,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kuchiki Rukia.<br>Gunakan sebagai item utama dan mensintesis dengan Kuchiki Rukia ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Kuchiki Rukia +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11977,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Momochi Zabuza.<br>Gunakan sebagai item utama dan mensintesis dengan Momochi Zabuza ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Momochi Zabuza +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11978,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Christmas Ninja.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Christmas Ninja +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Christmas Ninja＋⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11979,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Kuchiki Byakuya.<br>Gunakan sebagai item utama dan mensintesis dengan Kuchiki Byakuya ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Kuchiki Byakuya +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11980,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nelliel.<br>Gunakan sebagai item utama dan mensintesis dengan Nelliel ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Nelliel +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11981,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Little Meng.<br>Gunakan sebagai item utama dan mensintesis dengan Little Meng ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Little Meng +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11982,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Little Jun.<br>Gunakan sebagai item utama dan mensintesis dengan Little Jun ＋⟨0⟩ untuk berkesempatan mendapatkan ⟨1⟩ kostum Little Jun +⟨2⟩. Katalis akan hilang jika sintesis gagal. <br> Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11983,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nara Shikamaru.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Nara Shikamaru +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Nara Shikamaru +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11984,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Unohana Retsu.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Unohana Retsu +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Unohana Retsu＋⟨3⟩. Katalis akan hilang jika sintesis gagal. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11985,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Witch.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Witch +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Witch +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11986,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Asuma Sarutobi.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Asuma Sarutobi +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Asuma Sarutobi +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11987,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Rock Lee.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Rock Lee +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Rock Lee +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11988,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Hyuga Neji.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Hyuga Neji +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Hyuga Neji +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11989,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Scorpion.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Scorpion +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Scorpion +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11990,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Yamato.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Yamato +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Yamato +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11991,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Nel.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Nel +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Nel +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11992,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Sarugaki Hiyori.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Sarugaki Hiyori +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Sarugaki Hiyori +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11993,
+   "text": "<font color='#5df9ff'>Sebuah pakaian mistik yang mengubah kamu menjadi Shihouin Yoruichi.<br>Gunakan sebagai item utama dan mensintesis dengan ⟨0⟩ kostum Shihouin Yoruichi +⟨1⟩ untuk berkesempatan mendapatkan ⟨2⟩ kostum Shihouin Yoruichi +⟨3⟩. <br>Semakin tinggi tingkat pakaian, pengeluaran jurus akan lebih mudah!</font>"
+  },
+  {
+   "n": 11994,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Kurosaki Ichigo.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Kurosaki Ichigo ＋⟨1⟩ Mungkin akan mendapatkan Kurosaki Ichigo +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 11995,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Witch.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Witch ＋⟨1⟩ Mungkin akan mendapatkan Witch +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 11996,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Ggio Vega.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Ggio Vega ＋⟨1⟩ Mungkin akan mendapatkan Ggio Vega +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 11997,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi White Ichigo.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ White Ichigo ＋⟨1⟩ Mungkin akan mendapatkan White Ichigo +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 11998,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi hollow Ichigo.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ hollow Ichigo＋⟨1⟩ Mungkin akan mendapatkan hollow Ichigo +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 11999,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Ulquiorra.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Ulquiorra＋⟨1⟩ Mungkin akan mendapatkan Ulquiorra +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12000,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi white Ulquiorra.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ white Ulquiorra＋⟨1⟩ Mungkin akan mendapatkan white Ulquiorra +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12001,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi hollow Ulquiorra.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ hollow Ulquiorra＋⟨1⟩ Mungkin akan mendapatkan hollow Ulquiorra +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12002,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Love Aikawa.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Love Aikawa＋⟨1⟩ Mungkin akan mendapatkan Love Aikawa +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12003,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Grimmjow.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩Grimmjow＋⟨1⟩ Mungkin akan mendapatkan Grimmjow +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12004,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hitsugaya Toushiro.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Hitsugaya Toushiro＋⟨1⟩ Mungkin akan mendapatkan Hitsugaya Toushiro +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12005,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Hirako Shinji.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Hirako Shinji＋⟨1⟩ Mungkin akan mendapatkan Hirako Shinji +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12006,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi hollow Hirako Shinji.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ hollow Hirako Shinji＋⟨1⟩ Mungkin akan mendapatkan hollow Hirako Shinji +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12007,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Abarai Renji.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Abarai Renji＋⟨1⟩ Mungkin akan mendapatkan Abarai Renji +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12008,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Gin Ichimaru.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Gin Ichimaru＋⟨1⟩ Mungkin akan mendapatkan Gin Ichimaru +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12009,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Akimichi Choji.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Akimichi Choji＋⟨1⟩ Mungkin akan mendapatkan Akimichi Choji +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12010,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Inuzuka Kiba.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Inuzuka Kiba＋⟨1⟩ Mungkin akan mendapatkan Inuzuka Kiba +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12011,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Aburame Shino.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Aburame Shino＋⟨1⟩ Mungkin akan mendapatkan Aburame Shino +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12012,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Nara Shikamaru.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Nara Shikamaru＋⟨1⟩ Mungkin akan mendapatkan Nara Shikamaru +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12013,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi  Asuma Sarutobi.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩  Asuma Sarutobi＋⟨1⟩ Mungkin akan mendapatkan  Asuma Sarutobi +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12014,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi  Rock Lee.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩  Rock Lee＋⟨1⟩ Mungkin akan mendapatkan Rock Lee +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12015,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi  Hyuga Neji.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩  Hyuga Neji＋⟨1⟩ Mungkin akan mendapatkan Hyuga Neji +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  },
+  {
+   "n": 12016,
+   "text": "<font color='#5df9ff'>Sebuah kostum mistik yang akan merubah kamu menjadi Sasori.<br>Gunakan ini sebagai item utama dan sintesiskan dengan ⟨0⟩ Sasori＋⟨1⟩ Mungkin akan mendapatkan Sasori +⟨2⟩. Katalis akan hilang jika sintesis gagal.<br> Kostum yang memiliki level tinggi, akan mempermudah pengeluaran Teknik rahasia!</font>"
+  }
+ ]
+}

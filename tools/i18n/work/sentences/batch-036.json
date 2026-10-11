@@ -1,0 +1,1031 @@
+{
+ "terms": {
+  "Bukti": "Proof"
+ },
+ "units": [
+  {
+   "n": 10747,
+   "text": "<font color='#5df53ff'>Windstorm adalah suatu benda kuno dianugerahkan kepada mereka yang mahir dalam Menyelinap dan mengintai. Windstorm Glovedimaksudkan bagi mereka yang layak untuk benda itu.</font>"
+  },
+  {
+   "n": 10748,
+   "text": "<font color='#5df162ff'>Gloves dipakai selama ritual  resmi pendeta. Memiliki kekuatan suci yang besar.</font>"
+  },
+  {
+   "n": 10749,
+   "text": "<font color='#5df55ff'>Gloves dibuat dengan membunuh seorang Prajna memiliki kekuatan iblis yang besar..</font>"
+  },
+  {
+   "n": 10750,
+   "text": "<font color='#5df55ff'>Gloves yang terbuat dari tengu , menyediakan pertahanan yang sangat baik, dan ringan juga.</font>"
+  },
+  {
+   "n": 10751,
+   "text": "<font color='#5df165ff'>Gloves dikenakan oleh high priests merupakan penghambaan yang memiliki kekuatan suci.</font>"
+  },
+  {
+   "n": 10752,
+   "text": "<font color='#5df166ff'>Glove merupakan simbol dari kekuatan deity.Hanya mereka yang layak dapat memakai ini.</font>"
+  },
+  {
+   "n": 10753,
+   "text": "<font color='#5df124ff'>Shoes bermotif dengan gambar yang menggemaskan. Dikenakan oleh anak-anak desa.</font>"
+  },
+  {
+   "n": 10754,
+   "text": "<font color='#5df58ff'>Warboot diselimuti kekuatan destruktif yang besar. Hanya dapat dipakai oleh juara sejati.</font>"
+  },
+  {
+   "n": 10755,
+   "text": "<font color='#5df132ff'>Dihiasi dengan runes berisi keseimbangan sempurna dari energi kosmis, Memungkinkan Warboot defenses untuk mendekat tak bisa ditembus.</font>"
+  },
+  {
+   "n": 10756,
+   "text": "<font color='#5df49ff'>Shoes  memancarkan aura dari musim semi, memberikan semangat dan kegembiraan ke pemakainya.</font>"
+  },
+  {
+   "n": 10757,
+   "text": "<font color='#5df126ff'>namesake adalah suatu benda kuno dianugerahkan kepada mereka yang mahir dalam Menyelinap dan mengintai. Windstorm Bootdimaksudkan bagi mereka yang layak untuk benda itu.</font>"
+  },
+  {
+   "n": 10758,
+   "text": "<font color='#5df55ff'>Warboot dibuat dengan membunuh seorang Prajna memiliki kekuatan iblis yang besar..</font>"
+  },
+  {
+   "n": 10759,
+   "text": "<font color='#5df55ff'>Warboot yang terbuat dari tengu , menyediakan pertahanan yang sangat baik, dan ringan juga.</font>"
+  },
+  {
+   "n": 10760,
+   "text": "<font color='#5df55ff'>Warboot dikenakan oleh high priests merupakan penghambaan yang memiliki kekuatan suci.</font>"
+  },
+  {
+   "n": 10761,
+   "text": "<font color='#5df58ff'>Warboot merupakan simbol dari kekuatan deity.Hanya mereka yang layak dapat memakai ini.</font>"
+  },
+  {
+   "n": 10762,
+   "text": "<font color='#5df9ff'>Vampire Cape</font>"
+  },
+  {
+   "n": 10763,
+   "text": "<font color='#5df9ff'>Silky Coat</font>"
+  },
+  {
+   "n": 10764,
+   "text": "<font color='#5df9ff'>Softspike Armor</font>"
+  },
+  {
+   "n": 10765,
+   "text": "<font color='#5df71ff'>Sinar emas yang mempesona dari Warchest menembus auranya bahkan lebih mencolok, mengejutkan musuh dengan kagum dan teror.</font>"
+  },
+  {
+   "n": 10766,
+   "text": "<font color='#5df66ff'>Warchest ditempa dari froststeel, dan memancarkan aura mengerikan.</font>"
+  },
+  {
+   "n": 10767,
+   "text": "<font color='#5df66ff'>Warchest disempurnakan dengan chakra petir selama pembuatannya.</font>"
+  },
+  {
+   "n": 10768,
+   "text": "<font color='#5df66ff'>Hanya mereka yang memiliki slayed dengan jumlah besar iblis akan menerima Glorious Warchest protection.</font>"
+  },
+  {
+   "n": 10769,
+   "text": "<font color='#5df66ff'>Ditinggalkan oleh generasi Para veteran battleworn yang mengenakan ini dalam perang, Warchest sunset shade dari kegelapan berwarna merah tua merupakan bukti untuk menyaksikan melalui era</font>"
+  },
+  {
+   "n": 10770,
+   "text": "<font color='#5df66ff'>Menjerumuskan Bloody Warchest ke dalam pertempuran abadi. Hanya yang berkemauan keras dan tidak terpengaruh oleh trik-nya yang dapat memakainya.</font>"
+  },
+  {
+   "n": 10771,
+   "text": "<font color='#5df9ff'>Armor yang dibuatoleh Sage ke enam, Meskipun sudah usang, dapat meningkatkan damage dari semua ability.</font>"
+  },
+  {
+   "n": 10772,
+   "text": "<font color='#5df9ff'>Dapat melihat tekanan spiritual mengalir samar pada cloth. Hal ini ditinggalkan oleh seseorang yang memiliki energi spiritual dalam jumlah besar . </font>"
+  },
+  {
+   "n": 10773,
+   "text": "<font color='#5df9ff'>Light armor dibuat dari meteor ungu. Ini akan melindungi pemakai dan meningkatkan potensi bertarung. </font>"
+  },
+  {
+   "n": 10774,
+   "text": "<font color='#5df9ff'>Merupakan salah satu dari sepuluh di Dunia Hollow, sehingga memiliki kekuatan yang besar di dalamnya. </font>"
+  },
+  {
+   "n": 10775,
+   "text": "<font color='#5df9ff'> Ini akan menyimpan semua iblis, bahkan Hollow yang kuat akan menjauh dari kamu karena merasa takut. </font>"
+  },
+  {
+   "n": 10776,
+   "text": "<font color='#5df77ff'>Netherchill Warchest dengan aura yang dipancarkan netherfrost tidak diterima dengan sebagian. Hanya mereka yang berkonstitusiyang bisa melakukan ini..</font>"
+  },
+  {
+   "n": 10777,
+   "text": "<font color='#5df78ff'>Darksoul Warchest bahwa ironisnya kafan pemakainya dengan aura kehidupan, efektif melindungi pemiliknya.</font>"
+  },
+  {
+   "n": 10778,
+   "text": "<font color='#5df9ff'>Sage robe. Pemakainya dapat menerima perlindungan.</font>"
+  },
+  {
+   "n": 10779,
+   "text": "<font color='#5df9ff'>Armor yang terbuat dari sihir naga. Senjata biasa tidak dapat mematahkan pertahanan.</font>"
+  },
+  {
+   "n": 10780,
+   "text": "<font color='#5df9ff'>Clothes Dikenakan oleh pemula dari ninjutsu.</font>"
+  },
+  {
+   "n": 10781,
+   "text": "<font color='#5df9ff'>Dibuat dari sisik naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10782,
+   "text": "<font color='#5df9ff'>Armor yang digunakan oleh malaikat. Hanya kekuatan dewa dapat memecahkannya.</font>"
+  },
+  {
+   "n": 10783,
+   "text": "<font color='#5df9ff'>Armor yang mengandung kekuatan dari Naga Tuhan, memiliki pertahanan yang luar biasa.</font>"
+  },
+  {
+   "n": 10784,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan pasukan Suci, dapat mencegah pemakainya dari kerusakan setan. </font>"
+  },
+  {
+   "n": 10785,
+   "text": "<font color='#5df9ff'> Armor yang dulunya digunakan oleh malaikat. Hanya kekuatan dewa lah yang bisa menghancurkan armor ini.</font>"
+  },
+  {
+   "n": 10786,
+   "text": "<font color='#5df9ff'>Armor yang berisi tenaga Dragon Lord, memiliki defense yang luar biasa kuatnya.</font>"
+  },
+  {
+   "n": 10787,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan Sacred Army, ini bisa melindungi kamu dari serangan demon.</font>"
+  },
+  {
+   "n": 10788,
+   "text": "<font color='#5df9ff'>dibuat dari baja biasa, Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10789,
+   "text": "<font color='#5df9ff'>Belt dikatakan untuk dikenakan oleh iblis dari neraka.</font>"
+  },
+  {
+   "n": 10790,
+   "text": "<font color='#5df9ff'>Martial Belt dari para murid Dewa Tortoise.</font>"
+  },
+  {
+   "n": 10791,
+   "text": "<font color='#5df9ff'>Belt yang dibuat dari bijih flamecloud lava, menyediakan pertahanan yang yang sangat baik.</font>"
+  },
+  {
+   "n": 10792,
+   "text": "<font color='#5df9ff'>Ditempa dari emas murni dan nethersteell, belt impian dari para ksatria yang ingin memiliki.</font>"
+  },
+  {
+   "n": 10793,
+   "text": "<font color='#5df9ff'>Belt tersihir bersama  beastlord essence.Memiliki kekuatan untuk menindas semua binatang.</font>"
+  },
+  {
+   "n": 10794,
+   "text": "<font color='#5df9ff'>Gilded Belt bukan hanya pemandangan yang mulia, tapi juga fungsional.</font>"
+  },
+  {
+   "n": 10795,
+   "text": "<font color='#5df9ff'>Hanya braves yang melakukan peperangan yang tak terhitung jumlahnya akan mendapatkan the recognition of Berserker Belt. </font>"
+  },
+  {
+   "n": 10796,
+   "text": "<font color='#5df9ff'>Ferocious Belt pandangan yang cukup untuk meninggalkan musuh gemetar dalam sepatu bot mereka.</font>"
+  },
+  {
+   "n": 10797,
+   "text": "<font color='#5df9ff'>Ogre Belt dipenuhi dengan kekejaman dan kekerasan.</font>"
+  },
+  {
+   "n": 10798,
+   "text": "<font color='#5df40ff'>Terbuat dari plat besi biasa, tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10799,
+   "text": "<font color='#5df49ff'>Pelat baja yang dikatakan untuk dikenakan oleh iblis dari neraka.</font>"
+  },
+  {
+   "n": 10800,
+   "text": "<font color='#5df41ff'>peralatan bela diri dari murid dewa tortoise.</font>"
+  },
+  {
+   "n": 10801,
+   "text": "<font color='#5df42ff'>Pelindung dada perang dibuat dari bijih flamecloud lava, menyediakan pertahanan yang sangat baik.</font>"
+  },
+  {
+   "n": 10802,
+   "text": "<font color='#5df42ff'>Ditempa dari emas murni dan nethersteel, baju baja yang diimpikan oleh semua ksatria.</font>"
+  },
+  {
+   "n": 10803,
+   "text": "<font color='#5df45ff'>Battle Suit adalah sihir dengan intisari beastlord. Memiliki kekuatan untuk menekan semua binatang.</font>"
+  },
+  {
+   "n": 10804,
+   "text": "<font color='#5df45ff'>Gilded Battle Suit bukan hanya merupakan pemandangan yang mulia, tapi juga fungsional.</font>"
+  },
+  {
+   "n": 10805,
+   "text": "<font color='#5df45ff'>Hanya pertempuran Braves yang tak terhitung jumlahnya akan memperoleh pengakuan Berserker Battle Suit.</font>"
+  },
+  {
+   "n": 10806,
+   "text": "<font color='#5df47ff'>Ferocious Battle Suit pandangan yang cukup untuk membuat musuh gemetar dalam sepatu bot mereka.</font>"
+  },
+  {
+   "n": 10807,
+   "text": "<font color='#5df48ff'>Ogre Battle Suit dipenuhi dengan kekejaman dan kekerasan.</font>"
+  },
+  {
+   "n": 10808,
+   "text": "<font color='#5df79ff'>iron wok digunakan untuk memasak, tidak memberikan pertahanan yang banyak.</font>"
+  },
+  {
+   "n": 10809,
+   "text": "<font color='#5df49ff'>Battle Helm dikatakan untuk dikenakan dengan iblis dari neraka.</font>"
+  },
+  {
+   "n": 10810,
+   "text": "<font color='#5df80ff'>Meditation hat dari para murid Dewa Tortoise..</font>"
+  },
+  {
+   "n": 10811,
+   "text": "<font color='#5df81ff'>Battle Helm yang dibuat dari bijih flamecloud lava, menyediakan pertahanan yang yang sangat baik.</font>"
+  },
+  {
+   "n": 10812,
+   "text": "<font color='#5df42ff'>Ditempa dari emas murni dan nethersteell, helm.</font>"
+  },
+  {
+   "n": 10813,
+   "text": "<font color='#5df45ff'>Helm tersihir bersama  beastlord essence.Memiliki kekuatan untuk menindas semua binatang.</font>"
+  },
+  {
+   "n": 10814,
+   "text": "<font color='#5df84ff'>Goldface Helm bukan hanya pemandangan yang mulia, tapi juga fungsional.</font>"
+  },
+  {
+   "n": 10815,
+   "text": "<font color='#5df45ff'>Hanya braves yang melakukan peperangan yang tak terhitung jumlahnya akan mendapatkan Berserker Helm recognition.</font>"
+  },
+  {
+   "n": 10816,
+   "text": "<font color='#5df86ff'>Ferocious Helm pandangan yang cukup untuk meninggalkan musuh gemetar dalam sepatu bot mereka.</font>"
+  },
+  {
+   "n": 10817,
+   "text": "<font color='#5df87ff'>Ogre Helm dipenuhi dengan kekejaman dan kekerasan.</font>"
+  },
+  {
+   "n": 10818,
+   "text": "<font color='#5df40ff'>dibuat dari baja biasa, Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10819,
+   "text": "<font color='#5df49ff'>Gloves dikatakan untuk dikenakan dengan iblis dari neraka.</font>"
+  },
+  {
+   "n": 10820,
+   "text": "<font color='#5df149ff'>Gloves dari para murid Dewa Tortoise.</font>"
+  },
+  {
+   "n": 10821,
+   "text": "<font color='#5df150ff'>Gloves yang dibuat dari bijih flamecloud lava, menyediakan pertahanan yang yang sangat baik.</font>"
+  },
+  {
+   "n": 10822,
+   "text": "<font color='#5df151ff'>Ditempa dari emas murni dan nethersteell, Glove impian dari para ksatria yang ingin memiliki.</font>"
+  },
+  {
+   "n": 10823,
+   "text": "<font color='#5df152ff'>Gloves yang tersihir dengan esensi beastlord itu memiliki kekuatan untuk menindas semua binatang.</font>"
+  },
+  {
+   "n": 10824,
+   "text": "<font color='#5df153ff'>Gilded Glove bukan hanya pemandangan yang mulia, tapi juga fungsional.</font>"
+  },
+  {
+   "n": 10825,
+   "text": "<font color='#5df45ff'>Hanya braves yang melakukan peperangan yang tak terhitung jumlahnya akan mendapatkan Berserker Glove recognition.</font>"
+  },
+  {
+   "n": 10826,
+   "text": "<font color='#5df155ff'>Ferocious Glove pandangan yang cukup untuk meninggalkan musuh gemetar dalam sepatu bot mereka.</font>"
+  },
+  {
+   "n": 10827,
+   "text": "<font color='#5df156ff'>Ogre Glove dipenuhi dengan kekejaman dan kekerasan.</font>"
+  },
+  {
+   "n": 10828,
+   "text": "<font color='#5df114ff'>Boot ditempa dari baja mentah, selesai dengan kekurangan pengerjaan terbaik.</font>"
+  },
+  {
+   "n": 10829,
+   "text": "<font color='#5df49ff'>Warboot dikatakan untuk dikenakan dengan iblis dari neraka.</font>"
+  },
+  {
+   "n": 10830,
+   "text": "<font color='#5df115ff'>Meditation shoes dari para murid Dewa Tortoise.</font>"
+  },
+  {
+   "n": 10831,
+   "text": "<font color='#5df116ff'>Warboot yang dibuat dari bijih flamecloud lava, menyediakan pertahanan yang yang sangat baik.</font>"
+  },
+  {
+   "n": 10832,
+   "text": "<font color='#5df42ff'>Ditempa dari emas murni dan nethersteell, Warboot impian dari para ksatria yang ingin memiliki.</font>"
+  },
+  {
+   "n": 10833,
+   "text": "<font color='#5df45ff'>Warboot tersihir bersama beastlord essence.Memiliki kekuatan untuk menindas semua binatang.</font>"
+  },
+  {
+   "n": 10834,
+   "text": "<font color='#5df119ff'>Gilded WarBoot bukan hanya pemandangan yang mulia, tapi juga fungsional.</font>"
+  },
+  {
+   "n": 10835,
+   "text": "<font color='#5df45ff'>Hanya braves yang melakukan peperangan yang tak terhitung jumlahnya akan mendapatkan Berserker Warboot recognition.</font>"
+  },
+  {
+   "n": 10836,
+   "text": "<font color='#5df121ff'>Ferocious Warboot pandangan yang cukup untuk meninggalkan musuh gemetar dalam sepatu bot mereka.</font>"
+  },
+  {
+   "n": 10837,
+   "text": "<font color='#5df122ff'>Ogre Warboot dipenuhi dengan kekejaman dan kekerasan.</font>"
+  },
+  {
+   "n": 10838,
+   "text": "<font color='#5df20ff'>Mereka mengayunkan dengan swiping Fists yang akan merasakan gatal terus-menerus.</font>"
+  },
+  {
+   "n": 10839,
+   "text": "<font color='#5df29ff'>Windling Claw dijiwai dengan kekuatan angin, didambakan oleh semua orang yang mengejar keterampilan tak tertandingi.</font>"
+  },
+  {
+   "n": 10840,
+   "text": "<font color='#5df30ff'>Flywing Claw ditempa dari tulang burung ganas tua. Ringan namun tajam.</font>"
+  },
+  {
+   "n": 10841,
+   "text": "<font color='#5df31ff'>Anchor Fists namanya berasal dari kekuatan brutal yang sebanding dengan gelombang memecah laut. Musuh yang di tekan sulit untuk memblokir serangan-serangannya.</font>"
+  },
+  {
+   "n": 10842,
+   "text": "<font color='#5df32ff'>Lambang pada Anchor Fists yang diukir dari darah iblis yang sebelumnya telah mendidih, merendamnya dengan Kekuatan iblis yang Besar.</font>"
+  },
+  {
+   "n": 10843,
+   "text": "<font color='#5df33ff'>Respected Claw ditempa dari bajasihir dan duri beracun.</font>"
+  },
+  {
+   "n": 10844,
+   "text": "<font color='#5df34ff'>Pincer Fists yang dibuat dari kulit kepiting raksaksa, mudah menyusup melalui baja musuh.</font>"
+  },
+  {
+   "n": 10845,
+   "text": "<font color='#5df35ff'>Satu-satunya cara untuk melihat cahaya redup Streamray Claw saat menyerang adalah ketika armor Anda telah terpecah olehnya.</font>"
+  },
+  {
+   "n": 10846,
+   "text": "<font color='#5df36ff'>Astral Claw ditempa dari suatu ritual mistis yang diilhami oleh iblis yang tersiksa tangan sarung tangan bercakar.</font>"
+  },
+  {
+   "n": 10847,
+   "text": "<font color='#5df37ff'>Permata tertanam dalam Visioner Fists memiliki kemampuan untuk memindai kelemahan musuh selama gerakan.</font>"
+  },
+  {
+   "n": 10848,
+   "text": "<font color='#5df38ff'>Lemahnya musuh membuat mereka merasa sulit untuk mempertahankan diri dari Shackling Claw.</font>"
+  },
+  {
+   "n": 10849,
+   "text": "<font color='#5df21ff'>Satu Gambaran darah dari pukulan  Sharp Bladeclaw.</font>"
+  },
+  {
+   "n": 10850,
+   "text": "<font color='#5df39ff'>sarung tangan bercakar memancarkan aura dingin yang cukup untuk membekukan gerakan musuh.</font>"
+  },
+  {
+   "n": 10851,
+   "text": "<font color='#5df22ff'>Wolfclaw Buas memiliki kekuatan yang mematikan.</font>"
+  },
+  {
+   "n": 10852,
+   "text": "<font color='#5df23ff'>Banana Fists mempunyai damage normal,tetapi dapat membuat musuh menjadi pusing.</font>"
+  },
+  {
+   "n": 10853,
+   "text": "<font color='#5df24ff'>Azure Fistblade dijiwai dengan kekuatan air, dikatakan untuk membangkitkan Serbuan tsunami setiap kali serangan.</font>"
+  },
+  {
+   "n": 10854,
+   "text": "<font color='#5df25ff'>Shadow Claw cambukan keluar dari bayangan, menghadapi pukulan fatal bagi korban.</font>"
+  },
+  {
+   "n": 10855,
+   "text": "<font color='#5df9ff'>Dibuat dari Kuku naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10856,
+   "text": "<font color='#5df26ff'>Grizzly Claw memiliki Kekuatan Besar dari beruang. Mereka yang ditampar dengan mudah terjatuh dengan jarak yang jauh.</font>"
+  },
+  {
+   "n": 10857,
+   "text": "<font color='#5df27ff'>Red Lotus Claw memiliki kekuatan api, sama dengan membuat musuh terbakar.</font>"
+  },
+  {
+   "n": 10858,
+   "text": "<font color='#5df28ff'>silvershark dibuat dari taring raja laut. Bahan Yang langka.</font>"
+  },
+  {
+   "n": 10859,
+   "text": "<font color='#5df9ff'>Sharp Ninja Item yang digunakan oleh  ninjakita di Sekolah Ninja.</font>"
+  },
+  {
+   "n": 10860,
+   "text": "<font color='#5df71ff'>Sinar emas yang mempesona dari  Battle Helm pierce  menembus auranya bahkan lebih mencolok, mengejutkan musuh dengan kagum dan teror.</font>"
+  },
+  {
+   "n": 10861,
+   "text": "<font color='#5df66ff'>Battle Helm is  ditempa dari froststeel, dan memancarkan aura mengerikan.</font>"
+  },
+  {
+   "n": 10862,
+   "text": "<font color='#5df66ff'>Battle Helm disempurnakan dengan chakra petir selama pembuatannya.</font>"
+  },
+  {
+   "n": 10863,
+   "text": "<font color='#5df66ff'>Hanya mereka yang memiliki slayed dengan jumlah besar iblis akan menerima Glorious Battle Helm protection.</font>"
+  },
+  {
+   "n": 10864,
+   "text": "<font color='#5df66ff'>Ditinggalkan oleh generasi Para veteran battleworn yang mengenakan ini dalam perang, Battle Helm sunset shadedari kegelapan berwarna merah tua merupakan bukti untuk menyaksikan melalui era</font>"
+  },
+  {
+   "n": 10865,
+   "text": "<font color='#5df66ff'>Bloody Battle Helm will plunge wearer ke dalam pertempuran abadi. Hanya yang berkemauan keras dan tidak terpengaruh oleh trik-nya yang dapat memakainya.</font>"
+  },
+  {
+   "n": 10866,
+   "text": "<font color='#5df9ff'>Dapat melihat tekanan spiritual mengalir samar pada faceguard. Hal ini ditinggalkan oleh seseorang yang memiliki energi spiritual dalam jumlah besar . </font>"
+  },
+  {
+   "n": 10867,
+   "text": "<font color='#5df9ff'>Horn helm dibuat dari meteor ungu. Akan melindungi pemakai dan meningkatkan potensi bertarung.</font>"
+  },
+  {
+   "n": 10868,
+   "text": "<font color='#5df77ff'>Netherchill Battle Helm dengan aura yang dipancarkan netherfrost tidak diterima dengan sebagian. Hanya mereka yang berkonstitusiyang bisa melakukan ini..</font>"
+  },
+  {
+   "n": 10869,
+   "text": "<font color='#5df9ff'>Oda Nobunaga, Raja setan dari helm Surga Keenam, penuh dendam.</font>"
+  },
+  {
+   "n": 10870,
+   "text": "<font color='#5df9ff'>Headband digunakan oleh pemula dari ninjutsu.</font>"
+  },
+  {
+   "n": 10871,
+   "text": "<font color='#5df9ff'>Dibuat dari tulang depan naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10872,
+   "text": "<font color='#5df9ff'>Helm yang digunakan oleh malaikat di masa lalu, dapat menjaga pemakainya berpikiran tenang-di medan perang.</font>"
+  },
+  {
+   "n": 10873,
+   "text": "<font color='#5df9ff'>Deterrent helm yang mengandung kekuatan Naga Tuhan.</font>"
+  },
+  {
+   "n": 10874,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan Pasukan Suci. Pemakainya dapat mengidentifikasi kelemahan musuh dalam sekejap.</font>"
+  },
+  {
+   "n": 10875,
+   "text": "<font color='#5df9ff'> Helm yang digunakan oleh malaikat di masa lalu, bisa membuat si pemakai tetap berpikir jernih dan tenang di medan perang.</font>"
+  },
+  {
+   "n": 10876,
+   "text": "<font color='#5df9ff'>Helm pelindung yang berisi tenaga Dragon Lord.</font>"
+  },
+  {
+   "n": 10877,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan Sacred Army. Si pemakai bisa dengan mudah langsung menemukan kelemahan lawan.</font>"
+  },
+  {
+   "n": 10878,
+   "text": "<font color='#5df9ff'>Dibuat dari bunga. Tidak terlalu mahal tapi sangat indah, ini akan menimbulkan perasaan yang ceria.</font>"
+  },
+  {
+   "n": 10879,
+   "text": "<font color='#5df9ff'>Cincin yang dipenuhi dengan masa kanak-kanak dan manis, seperti cinta yang indah dari pangeran dan putri! </font>"
+  },
+  {
+   "n": 10880,
+   "text": "<font color='#5df9ff'>Ruby disebut juga batu cinta, seperti cinta yang setia! </font>"
+  },
+  {
+   "n": 10881,
+   "text": "<font color='#5df9ff'>Lavender yang samar, lebih lembut dari cinta yang penuh gairah tetapi lebih kuat dari cinta tersembunyi! </font>"
+  },
+  {
+   "n": 10882,
+   "text": "<font color='#5df9ff'>Anak dari iblis meneteskan air mata, dan malaikat mengambil itu untuk dijadikan cincin. Mereka bertekad untuk tinggal dengan satu sama lain sekarang dan selamanya!  "
+  },
+  {
+   "n": 10883,
+   "text": "<font color='#5df9ff'>Simbol dari keabadian. Sinar matahari dipantulkan oleh berlian membuat kita mengingat kegembira dari pecinta.</font>"
+  },
+  {
+   "n": 10884,
+   "text": "<font color='#5df9ff'>Batu yang lambangkan ketenangan cinta. Dikatakan bahwa hal itu dapat membawa inspirasi dan kebijaksanaan untuk pemakainya. </font>"
+  },
+  {
+   "n": 10885,
+   "text": "<font color='#5df9ff'>Gauntlet shinning pandangan yang cukup untuk meninggalkan musuh gemetar dalam sepatu bot mereka.</font>"
+  },
+  {
+   "n": 10886,
+   "text": "<font color='#5df9ff'>Gauntlet ditempa dari froststeel, dan memancarkan aura mengerikan.</font>"
+  },
+  {
+   "n": 10887,
+   "text": "<font color='#5df9ff'>Gauntlet disempurnakan dengan chakra petir selama pembuatannya.</font>"
+  },
+  {
+   "n": 10888,
+   "text": "<font color='#5df9ff'>Hanya mereka yang memiliki slayed dengan jumlah besar iblis akan menerima the protection of Glorious Gloves.</font>"
+  },
+  {
+   "n": 10889,
+   "text": "<font color='#5df9ff'>Ditinggalkan oleh generasi Para veteran battleworn yang mengenakan ini dalam perang, gauntlet sunset shadedari kegelapan berwarna merah tua merupakan bukti untuk menyaksikan melalui era</font>"
+  },
+  {
+   "n": 10890,
+   "text": "<font color='#5df9ff'>Bloody Gloves will plunge its wearer ke dalam pertempuran abadi. Hanya yang berkemauan keras dan tidak terpengaruh oleh trik-nya yang dapat memakainya.</font>"
+  },
+  {
+   "n": 10891,
+   "text": "<font color='#5df9ff'>Dapat melihat tekanan spiritual mengalir samar pada gloves. Hal ini ditinggalkan oleh seseorang yang memiliki energi spiritual dalam jumlah besar . </font>"
+  },
+  {
+   "n": 10892,
+   "text": "<font color='#5df9ff'>Sarung tangan dibuat oleh shards dari meteor ungu. Ini akan melindungi pemakai dan meningkatkan potensi bertarung.</font>"
+  },
+  {
+   "n": 10893,
+   "text": "<font color='#5df9ff'>Sarung tangan Netherchill dengan aura yang dipancarkan netherfrost tidak diterima sepenuhnya. Hanya mereka yang berkonstitusi yang bisa melakukan ini..</font>"
+  },
+  {
+   "n": 10894,
+   "text": "<font color='#5df9ff'>Gloves terbuat dari logam yang tidak diketahui asalnya, dapat mengurangi pengaruh sihir.</font>"
+  },
+  {
+   "n": 10895,
+   "text": "<font color='#5df9ff'>Dibuat dari tulang rusuk naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10896,
+   "text": "<font color='#5df9ff'>Gloves yang digunakan oleh malaikat di masa lalu, memiliki kedua pertahanan yang baik dan kemampuan serangan. </font>"
+  },
+  {
+   "n": 10897,
+   "text": "<font color='#5df9ff'>Gloves yang mengandung kekuatan Naga Tuhan. </font>"
+  },
+  {
+   "n": 10898,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan Tentara Suci, kekuasaan suci yang dapat menghapus kutukan setan. </font>"
+  },
+  {
+   "n": 10899,
+   "text": "<font color='#5df9ff'> Sarung tangan yang digunakan oleh malaikat di masa lalu, mempunyai pertahanan dan serangan yang sama baiknya.</font>"
+  },
+  {
+   "n": 10900,
+   "text": "<font color='#5df9ff'>Sarung tangan yang berisi Dragon Lord.</font>"
+  },
+  {
+   "n": 10901,
+   "text": "<font color='#5df9ff'>Bagian dari peralatan Sacred Army, kekuatan saktinya bisa menghilangkan kutukan devil.</font>"
+  },
+  {
+   "n": 10902,
+   "text": "<font color='#5df9ff'>Belt dikenakan oleh warga desa pada kegiatan di luar ruangan. Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10903,
+   "text": "<font color='#5df9ff'> Belt dijiwai dengan Kekuatan mistis Besar yang tidak diketahui, memiliki pertahanan besar.</font>"
+  },
+  {
+   "n": 10904,
+   "text": "<font color='#5df9ff'>Belt dibuat dari bahan yang biasa, biasa di gunakan oleh pemburu.</font>"
+  },
+  {
+   "n": 10905,
+   "text": "<font color='#5df9ff'>Belt yang meniru gerakan feline itu.. Anda tidak akan merasakan beban dalam pertempuran</font>"
+  },
+  {
+   "n": 10906,
+   "text": "<font color='#5df9ff'>Belt yang dibuat untuk menirukan perburuan panther grace, menganugerahkan pemakainya dengan Agility yang besar.</font>"
+  },
+  {
+   "n": 10907,
+   "text": "<font color='#5df9ff'>Belt yang dibuat dari lord of beasts yang tersembunyi, menganugrahkan begitu alami dengan kekuatan untuk menghilangkan iblis</font>"
+  },
+  {
+   "n": 10908,
+   "text": "<font color='#5df9ff'> Belt dikenakan oleh pasukan Iblis, memancarkan aura yang luar biasa dari bloodshed.</font>"
+  },
+  {
+   "n": 10909,
+   "text": "<font color='#5df9ff'> Belt  berasal dengan aura menyeramkan yang menjadi mimpi buruk, merobek kekuatan dalam hati musuh.</font>"
+  },
+  {
+   "n": 10910,
+   "text": "<font color='#5df9ff'> Belt ditempa dengan penambahan perak mistik, memberikan pertahanan yang luar biasa.</font>"
+  },
+  {
+   "n": 10911,
+   "text": "<font color='#5df69ff'>Beryl hanya diperoleh di sarang iblis yang kuat. Armor ditempa dari Beryl memiliki pertahanan yang luar biasa, maka reputasinya sebagai item yang didambakan.</font>"
+  },
+  {
+   "n": 10912,
+   "text": "<font color='#5df61ff'>Kostum yang dikenakan oleh warga desa pada kegiatan di luar ruangan. Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10913,
+   "text": "<font color='#5df66ff'>Warchest dijiwai dengan Kekuatan mistis Besar yang tidak diketahui, memiliki pertahanan besar.</font>"
+  },
+  {
+   "n": 10914,
+   "text": "<font color='#5df61ff'>Chest Armor  dibuat dari bahan yang biasa, biasa di gunakan oleh pemburu.</font>"
+  },
+  {
+   "n": 10915,
+   "text": "<font color='#5df61ff'>Kostum yang meniru gerakan feline itu. Anda tidak akan merasakan beban dalam pertempuran.</font>"
+  },
+  {
+   "n": 10916,
+   "text": "<font color='#5df64ff'>Steel Armor yang dibuat untuk menirukan perburuan panther grace, menganugerahkan pemakainya dengan Agility yang besar.</font>"
+  },
+  {
+   "n": 10917,
+   "text": "<font color='#5df61ff'>Steel Armor yang dibuat dari lord of beasts yang tersembunyi, menganugrahkan begitu alami dengan kekuatan untuk menghilangkan iblis.</font>"
+  },
+  {
+   "n": 10918,
+   "text": "<font color='#5df66ff'>Steel Armor dikenakan oleh pasukan Iblis, memancarkan aura yang luar biasa dari bloodshed.</font>"
+  },
+  {
+   "n": 10919,
+   "text": "<font color='#5df66ff'>Steel Armor berasal dengan aura menyeramkan yang menjadi mimpi buruk, merobek kekuatan dalam hati musuh '.</font>"
+  },
+  {
+   "n": 10920,
+   "text": "<font color='#5df66ff'>Steel Armor ditempa dengan penambahan perak mistik, memberikan pertahanan yang luar biasa.</font>"
+  },
+  {
+   "n": 10921,
+   "text": "<font color='#5df98ff'>Keranjang bambu untuk menaruh Item, Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10922,
+   "text": "<font color='#5df66ff'>Battle Helm dijiwai dengan Kekuatan mistis Besar yang tidak diketahui, memiliki pertahanan besar.</font>"
+  },
+  {
+   "n": 10923,
+   "text": "<font color='#5df61ff'>Leather Hat dibuat dari bahan yang biasa, biasa di gunakan oleh pemburu.</font>"
+  },
+  {
+   "n": 10924,
+   "text": "<font color='#5df61ff'>hat yang meniru gerakan feline itu.. Anda tidak akan merasakan beban dalam pertempuran</font>"
+  },
+  {
+   "n": 10925,
+   "text": "<font color='#5df64ff'>Helm yang dibuat untuk menirukan perburuan panther grace, menganugerahkan pemakainya dengan Agility yang besar.</font>"
+  },
+  {
+   "n": 10926,
+   "text": "<font color='#5df61ff'>Helm yang dibuat dari lord of beasts yang tersembunyi, menganugrahkan begitu alami dengan kekuatan untuk menghilangkan iblis</font>"
+  },
+  {
+   "n": 10927,
+   "text": "<font color='#5df66ff'>Helm dikenakan oleh pasukan Iblis, memancarkan aura yang luar biasa dari bloodshed.</font>"
+  },
+  {
+   "n": 10928,
+   "text": "<font color='#5df66ff'>Helm berasal dengan aura menyeramkan yang menjadi mimpi buruk, merobek kekuatan dalam hati musuh.</font>"
+  },
+  {
+   "n": 10929,
+   "text": "<font color='#5df66ff'>Helm ditempa dengan penambahan perak mistik, memberikan pertahanan yang luar biasa.</font>"
+  },
+  {
+   "n": 10930,
+   "text": "<font color='#5df61ff'>Sarung tangan dikenakan oleh warga desa pada kegiatan di luar ruangan.Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10931,
+   "text": "<font color='#5df9ff'>Gauntlet dijiwai dengan Kekuatan mistis Besar yang tidak diketahui, memiliki pertahanan besar.</font>"
+  },
+  {
+   "n": 10932,
+   "text": "<font color='#5df170ff'>Sarung tangan dibuat dari bahan yang biasa, biasa di gunakan oleh pemburu.</font>"
+  },
+  {
+   "n": 10933,
+   "text": "<font color='#5df171ff'>Sarung tangan yang meniru gerakan feline itu.. Anda tidak akan merasakan beban dalam pertempuran</font>"
+  },
+  {
+   "n": 10934,
+   "text": "<font color='#5df172ff'>Sarung tangan yang dibuat untuk menirukan perburuan panther grace, menganugerahkan pemakainya dengan Agility yang besar.</font>"
+  },
+  {
+   "n": 10935,
+   "text": "<font color='#5df173ff'>Sarung tangan yang dibuat dari lord of beasts yang tersembunyi, menganugrahkan begitu alami dengan kekuatan untuk menghilangkan iblis</font>"
+  },
+  {
+   "n": 10936,
+   "text": "<font color='#5df66ff'>Sarung tangan dikenakan oleh pasukan Iblis, memancarkan aura yang luar biasa dari bloodshed.</font>"
+  },
+  {
+   "n": 10937,
+   "text": "<font color='#5df66ff'>Sarung tangan  berasal dengan aura menyeramkan yang menjadi mimpi buruk, merobek kekuatan dalam hati musuh.</font>"
+  },
+  {
+   "n": 10938,
+   "text": "<font color='#5df9ff'>Gauntlet ditempa dengan penambahan perak mistik, memberikan pertahanan yang luar biasa.</font>"
+  },
+  {
+   "n": 10939,
+   "text": "<font color='#5df61ff'>Shoes dikenakan oleh warga desa pada kegiatan di luar ruangan. Tidak memberikan pertahanan banyak.</font>"
+  },
+  {
+   "n": 10940,
+   "text": "<font color='#5df66ff'>Warboot dijiwai dengan Kekuatan mistis Besar yang tidak diketahui, memiliki pertahanan besar.</font>"
+  },
+  {
+   "n": 10941,
+   "text": "<font color='#5df61ff'>Boots dibuat dari bahan yang biasa, biasa di gunakan oleh pemburu.</font>"
+  },
+  {
+   "n": 10942,
+   "text": "<font color='#5df61ff'>Boots yang meniru gerakan feline itu.. Anda tidak akan merasakan beban dalam pertempuran</font>"
+  },
+  {
+   "n": 10943,
+   "text": "<font color='#5df64ff'>Boots yang dibuat untuk menirukan perburuan panther grace, menganugerahkan pemakainya dengan Agility yang besar.</font>"
+  },
+  {
+   "n": 10944,
+   "text": "<font color='#5df61ff'>Boots yang dibuat dari lord of beasts yang tersembunyi, menganugrahkan begitu alami dengan kekuatan untuk menghilangkan iblis</font>"
+  },
+  {
+   "n": 10945,
+   "text": "<font color='#5df66ff'>Boots dikenakan oleh pasukan Iblis, memancarkan aura yang luar biasa dari bloodshed.</font>"
+  },
+  {
+   "n": 10946,
+   "text": "<font color='#5df139ff'>Boots  berasal dengan aura menyeramkan yang menjadi mimpi buruk, merobek kekuatan dalam hati musuh.</font>"
+  },
+  {
+   "n": 10947,
+   "text": "<font color='#5df140ff'>Steel Boots ditempa dengan penambahan perak mistik, memberikan pertahanan yang luar biasa.</font>"
+  },
+  {
+   "n": 10948,
+   "text": "<font color='#5df9ff'>Ring dibuat dari Amethyst memiliki efek menguntungkan pada pemakainya.</font>"
+  },
+  {
+   "n": 10949,
+   "text": "<font color='#5df9ff'> Terikat dengan darkfeather gem yang mencurahkan kekuatan besar.</font>"
+  },
+  {
+   "n": 10950,
+   "text": "<font color='#5df9ff'>Ring dibuat dari giok emas memiliki efek menguntungkan pada pemakainya.</font>"
+  },
+  {
+   "n": 10951,
+   "text": "<font color='#5df9ff'> Ring tertanam dengan turmeric buds, melambangkan keanggunan.</font>"
+  },
+  {
+   "n": 10952,
+   "text": "<font color='#5df9ff'> Ring diberkati oleh Fire Angel Michael.</font>"
+  },
+  {
+   "n": 10953,
+   "text": "<font color='#5df9ff'> Ring beruang yang di berkati kekuatan dari Tsukuyomi.</font>"
+  },
+  {
+   "n": 10954,
+   "text": "<font color='#5df9ff'>Permata bertatahkan dengan kilatan sinar musim panas, memberikan pemberkatan bagi pemakainya.</font>"
+  },
+  {
+   "n": 10955,
+   "text": "<font color='#5df9ff'>Sebuah cahaya memancar dari ring seperti phoenix yang bangkit dari abu kematian, saksi bersedia untuk tunduk kepadanya.</font>"
+  },
+  {
+   "n": 10956,
+   "text": "<font color='#5df9ff'>Holy Ring memiliki kekuatan suci Api. Sebuah artefak langka.</font>"
+  },
+  {
+   "n": 10957,
+   "text": "<font color='#5df9ff'>Ring adalah simbol kegigihan dan semangat yang secara aktif melindungi pemiliknya.</font>"
+  },
+  {
+   "n": 10958,
+   "text": "<font color='#5df9ff'>Ring terikat dengan brightburn gem yang mengeluarkan kekuatan yang besar.</font>"
+  },
+  {
+   "n": 10959,
+   "text": "<font color='#5df9ff'>Ring dibuat dari sapphire memiliki efek menguntungkan pada pemakainya.</font>"
+  },
+  {
+   "n": 10960,
+   "text": "<font color='#5df9ff'>Ring terikat dengan kuncup mawar, melambangkan cinta.</font>"
+  },
+  {
+   "n": 10961,
+   "text": "<font color='#5df9ff'>Ring diberkati oleh Earth Angel Uriel.</font>"
+  },
+  {
+   "n": 10962,
+   "text": "<font color='#5df9ff'>Ring beruang yang mempunyai  kekuatan dari Susanoo.</font>"
+  },
+  {
+   "n": 10963,
+   "text": "<font color='#5df9ff'>Holy Ring memiliki kekuatan besar dari Es Bersalju. Sebuah artefak langka.</font>"
+  },
+  {
+   "n": 10964,
+   "text": "<font color='#5df9ff'>Ring yang merupakan simbol keterbukaan dan terus berkembang secara aktif dapat melindungi pemiliknya.</font>"
+  },
+  {
+   "n": 10965,
+   "text": "<font color='#5df9ff'>Ring tertanam dengan sekuncup mawar, melambangkan kemurnian.</font>"
+  },
+  {
+   "n": 10966,
+   "text": "<font color='#5df9ff'>Ring terikat dengan permata Frostwyrm yang mencurahkan kekuatan besar.</font>"
+  },
+  {
+   "n": 10967,
+   "text": "<font color='#5df9ff'>Ring terikat dengan permata Frostron yang mencurahkan kekuatan besar.</font>"
+  },
+  {
+   "n": 10968,
+   "text": "<font color='#5df9ff'>Band brimming dengan kemurnian, memiliki kekuatan untuk menindas iblis.</font>"
+  },
+  {
+   "n": 10969,
+   "text": "<font color='#5df9ff'>Band brimming dengan pengabdian taat kepercayaan yang menawarkan perlindungan suci.</font>"
+  },
+  {
+   "n": 10970,
+   "text": "<font color='#5df9ff'>Band pernah dipakai oleh pemburu Iblis besar. Beberapa pemilik tetap mempunyai kekuatan.</font>"
+  },
+  {
+   "n": 10971,
+   "text": "<font color='#5df9ff'>Ring dibuat dari tulang binatang raksasa tua, hanya yang kuat yang layak membawa ini.</font>"
+  },
+  {
+   "n": 10972,
+   "text": "<font color='#5df9ff'>A ring tengkorak dan tulang, memanggil semua kekuatan.</font>"
+  },
+  {
+   "n": 10973,
+   "text": "<font color='#5df9ff'>Ring dibuat dari taring naga. Bukti yang diperoleh hanya dari juara.</font>"
+  },
+  {
+   "n": 10974,
+   "text": "<font color='#5df9ff'> Ring Air diberkati oleh Angel Gabriel.</font>"
+  },
+  {
+   "n": 10975,
+   "text": "<font color='#5df9ff'>Cincin penuh warna yang menyerap pancaran cahaya dari aurora.</font>"
+  },
+  {
+   "n": 10976,
+   "text": "<font color='#5df9ff'>Semua kekuasaan akan memudar ketika menghadapi Nihility Ring. </font>"
+  },
+  {
+   "n": 10977,
+   "text": "<font color='#5df9ff'>Cincin berisi kekuatan sihir yang dapat menjaga pemiliknya dari segala macam kemalangan. </font>"
+  },
+  {
+   "n": 10978,
+   "text": "<font color='#5df9ff'>Dingin memancarkan cahaya bintang dari ring, memanggil ketenangan batin.</font>"
+  },
+  {
+   "n": 10979,
+   "text": "<font color='#5df9ff'>Ring yang mengandung kekuatan besar. Hanya yang paling kuat dapat mengungkap kekuatan yang sesungguhnya.</font>"
+  },
+  {
+   "n": 10980,
+   "text": "<font color='#5df9ff'> Ring beruang dengan kekuatan dari Amaterasu.</font>"
+  },
+  {
+   "n": 10981,
+   "text": "<font color='#5df9ff'>Dibuat dari mata naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10982,
+   "text": "<font color='#5df9ff'>Kekuatan Azure Dragon disegel di dalam cincin.</font>"
+  },
+  {
+   "n": 10983,
+   "text": "<font color='#5df9ff'>Kekuatan  Vermilion Bird disegel di dalam cincin.</font>"
+  },
+  {
+   "n": 10984,
+   "text": "<font color='#5df9ff'>Kekuatan Black Tortoise disegel di dalam cincin.</font>"
+  },
+  {
+   "n": 10985,
+   "text": "<font color='#5df9ff'>Bright ring dibungkus dalam lembut cahaya fajar, memunculkan kenyamanan bagi semua yang mengatur mata untuknya.</font>"
+  },
+  {
+   "n": 10986,
+   "text": "<font color='#5df9ff'> Holy Ring memiliki kekuatan ilahi dari tanah. Sebuah artefak langka.</font>"
+  },
+  {
+   "n": 10987,
+   "text": "<font color='#5df9ff'>Ring dibungkus dalam lembut cahaya fajar aktif melindungi pemiliknya.</font>"
+  },
+  {
+   "n": 10988,
+   "text": "<font color='#5df9ff'>Sebuah chopper biasa digunakan sebagai alat oleh hantu untuk menakut-nakuti orang.</font>"
+  },
+  {
+   "n": 10989,
+   "text": "<font color='#5df9ff'>Pedang ditempa dari logam sihir dengan lambang bunga, dengan sangat tajam.</font>"
+  },
+  {
+   "n": 10990,
+   "text": "<font color='#5df9ff'>Ditempa dari batu giok dan besi dingin. Pedang adalah jernih seperti refleksi.</font>"
+  },
+  {
+   "n": 10991,
+   "text": "<font color='#5df10ff'>Ditempa dari nethersteel, di mana ia harus membunuh Ibilis sebelum benar-benar lengkap.</font>"
+  },
+  {
+   "n": 10992,
+   "text": "<font color='#5df11ff'>Potongan melalui logam seperti lumpur. Nama Cloudbreak Blade menunjukkan bahwa kemampuan pemotongan adalah serupa dengan mengiris awan menjadi potongan.</font>"
+  },
+  {
+   "n": 10993,
+   "text": "<font color='#5df12ff'>Menggambar darah dari musuh yang tak terhitung jumlahnya ke titik di mana noda darah pada pisau tidak dapat dihapus.</font>"
+  },
+  {
+   "n": 10994,
+   "text": "<font color='#5df13ff'>Terbuat dari tulang belakang dari ikan laut abyssal dan emas murni, dan tempered dengan nethersteel. Sebuah artefak langka. </font>"
+  },
+  {
+   "n": 10995,
+   "text": "<font color='#5df14ff'>Hanya prajurit terampil yang berkenalan dengan Goldback Saber.</font>"
+  },
+  {
+   "n": 10996,
+   "text": "<font color='#5df15ff'>Pedang berakup seperti bulu, tetapi mampu menembus baju besi seperti benang.</font>"
+  },
+  {
+   "n": 10997,
+   "text": "<font color='#5df16ff'>Kabarnya senjata ini dihiasi dengan bulu malaikat.</font>"
+  },
+  {
+   "n": 10998,
+   "text": "<font color='#5df17ff'>Bagian belakang mata pisaunya melekat dengan dragonscales, sehingga mempunyai kemampuan pemotongan pada kedua sisi.</font>"
+  },
+  {
+   "n": 10999,
+   "text": "<font color='#5df9ff'>Sebuah pensil yang digunakan untuk menulis dan menusuk orang.</font>"
+  },
+  {
+   "n": 11000,
+   "text": "<font color='#5df18ff'>Permata tertanam pada Pedang yang didapat dari kumpulan jiwa musuh, menyebabkan mereka tidak dapat fokus.</font>"
+  },
+  {
+   "n": 11001,
+   "text": "<font color='#5df19ff'>Ditempa dari bahan langka, mata pisaunya yang terukir dengan lambang demonslaying .</font>"
+  },
+  {
+   "n": 11002,
+   "text": "<font color='#5df9ff'>Bone Piercer melukai musuh dengan menusuk luka yang tidak akan menghentikan pendarahan.</font>"
+  }
+ ]
+}

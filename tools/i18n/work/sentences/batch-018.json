@@ -1,0 +1,1703 @@
+{
+ "terms": {
+  "Kumogakure": "Lightning Village",
+  "Kirigakure": "Water Village",
+  "Iwagakure": "Earth Village",
+  "Otogakure": "Sound Village",
+  "Kusagakure": "Grass Village",
+  "Sasuke": "Sasuke Uchiha",
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Jalan Senja": "Eventide Barrens",
+  "Dataran Subur": "Greenwaves Plain",
+  "Crossroad": "Crossroads",
+  "Lintasan Setapak": "Eerie Passage",
+  "Amegakure": "Hidden Rain Village",
+  "Rumah": "Home",
+  "Stinger Bee": "Bee Stingers",
+  "Darurat": "Emergency",
+  "Pilih": "Choose",
+  "Menetaskan telur": "Hatch the Egg",
+  "Jagung": "Corn",
+  "Boss Toko Barang": "Merchant Boss",
+  "Pedagang Keliling": "Traveling Merchant",
+  "Lady Feng": "Feng",
+  "Ahli Agama": "Priest",
+  "Scarlet Bandit": "Scarlet",
+  "Grinning Monkey": "Monkey",
+  "Sweet Potato Demon": "Potato",
+  "Iblis Jagung": "Corn"
+ },
+ "units": [
+  {
+   "n": 7587,
+   "text": "Membuka<font color='#00b034'> bagian bawah bar navigasi </font><font color='#00b034'> ranking </font>interface untuk melihat<font color='#00b034'> ranking statistics </font>pemain."
+  },
+  {
+   "n": 7588,
+   "text": "Pergi ke<font color='#00b034'> Kota Malaikat </font>, masuk<font color='#00b034'>aula</font>dan berpartisipasi pada<font color='#00b034'> latihan auto-combat</font>."
+  },
+  {
+   "n": 7589,
+   "text": "Membuka<font color='#00b034'> bagian bawah bar navigasi </font><font color='#00b034'> market </font>interface untuk melihat<font color='#00b034'> item</font>yang dijual."
+  },
+  {
+   "n": 7590,
+   "text": "Menggunakan<font color='#00b034'> Tempat Tempa boss </font>memberikan<font color='#00b034'> free enhancement </font>dan<font color='#00b034'> upgrade </font>Peralatan kamu sekali."
+  },
+  {
+   "n": 7591,
+   "text": "Menggunakan<font color='#00b034'> Tempat Tempa boss </font>memberikan<font color='#00b034'> free refining </font>dan<font color='#00b034'> refine </font>Peralatan kamu sekali."
+  },
+  {
+   "n": 7592,
+   "text": "Menggunakan<font color='#00b034'> Sintesis Cepat </font>untuk mengkombinasikan<font color='#00b034'> Tempat Tempa boss </font>memberikan<font color='#00b034'> Level ⟨0⟩ Diamonds </font>menjadi<font color='#00b034'> Level ⟨1⟩ Diamonds </font>."
+  },
+  {
+   "n": 7593,
+   "text": "Menggunakan<font color='#00b034'> Tempat Tempa boss </font>memberikan<font color='#00b034'> free slot creation </font>dan<font color='#00b034'> create slots</font>in Peralatan kamu sekali."
+  },
+  {
+   "n": 7594,
+   "text": "Setiap<font color='#00b034'> gem </font> slot kke dalam satu item perlengkapan dengan<font color='#00b034'> slots </font>."
+  },
+  {
+   "n": 7595,
+   "text": "Menggunakan<font color='#00b034'> Sintesis Cepat </font>dengan<font color='#00b034'> Tempat Tempa Boss </font>memberikan<font color='#00b034'> Kostum </font>utnuk dikombinasikan menjadi<font color='#00b034'> Level ⟨0⟩ Kostum </font>."
+  },
+  {
+   "n": 7596,
+   "text": "Menggunakan<font color='#00b034'> Tempat Tempa boss </font>memberikan<font color='#00b034'> free enchantment </font>dan<font color='#00b034'> enchantment Batu </font>kamu ke<font color='#00b034'> enchant </font>equipment kamu."
+  },
+  {
+   "n": 7597,
+   "text": "Membuka<font color='#00b034'>  </font>interface untuk mengklaim<font color='#00b034'> Gift Box Level ⟨0⟩  </font>."
+  },
+  {
+   "n": 7598,
+   "text": "Pergi ke Las Noches dan kalahkan penjaga di lantai ⟨0⟩th sebanyak ⟨1⟩ kali!<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7599,
+   "text": "Kalahkan semua iblis di Endless Sea Forest ⟨0⟩ kali!【Sulit】<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7600,
+   "text": "Kalahkan semua iblis di Crimson Grassland ⟨0⟩ kali!【Sulit】<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7601,
+   "text": "Kalahakan semua iblis di Deadwood Villa ⟨0⟩ kali!【Sulit】<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7602,
+   "text": "Pergi ke Las Noches dan kalahkan penjaga di lantai ⟨0⟩ sebanyak ⟨1⟩ kali!<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7603,
+   "text": "Kumpulkan<font color='#ff6565'> {@0:item} </font>.  <b>（{@2:current number}∕{@1:total}）</b><br>Iron ore bisa kamu dapatkan dari<font color='#00b034'>Sintesis Cepat</font>."
+  },
+  {
+   "n": 7604,
+   "text": "Kumpulkan<font color='#ff6565'> {@0:item} </font>.  <b>（{@2:current number}∕{@1:total}）</b><br>Anonymous Namecard bisa kamu dapatkan dari<font color='#00b034'>Sintesis cepat</font>."
+  },
+  {
+   "n": 7605,
+   "text": "Kumpulkan<font color='#ff6565'> {@0:item} </font>.  <b>（{@2:current number}∕{@1:total}）</b><br>Rare Iron Ore：Bisa kamu dapatkan dari<font color='#00b034'>Sintsis Cepat</font>."
+  },
+  {
+   "n": 7606,
+   "text": "Selesaikan Imbalan Misi ⟨0⟩ kali.<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7607,
+   "text": "Kalahkan semua musuh ⟨0⟩ kali di arena.<b>（{@1:}/{@0:}）</b>"
+  },
+  {
+   "n": 7608,
+   "text": "Memperoleh<font color='#000000'><b>（{@1:}∕{@0:}）</b></font> kemenangan di arena."
+  },
+  {
+   "n": 7609,
+   "text": "Bergabung dalam event untuk<font color='#00b034'> mempertahankan serangan Tailed Beasts</font> , Bunuh<font color='#ff0000'> Tailed Beast </font>dan menangkan <font color='#ff0000'>⟨0⟩</font> kehormatan."
+  },
+  {
+   "n": 7610,
+   "text": "Buat Gudang."
+  },
+  {
+   "n": 7611,
+   "text": "Gunakan murid untuk mempercepat konstruksi."
+  },
+  {
+   "n": 7612,
+   "text": "Tingkatkan rumah ke lv.⟨0⟩."
+  },
+  {
+   "n": 7613,
+   "text": "Bangun Ruang Penetasan"
+  },
+  {
+   "n": 7614,
+   "text": "Bangun Kincir Angin"
+  },
+  {
+   "n": 7615,
+   "text": "Tingkatkan tower prestasi ke lv.⟨0⟩."
+  },
+  {
+   "n": 7616,
+   "text": "Tingkatkan kebun lv.⟨0⟩."
+  },
+  {
+   "n": 7617,
+   "text": "Memperluas Rumah."
+  },
+  {
+   "n": 7618,
+   "text": "Gunakan info cuaca untuk sekali keberhasilan"
+  },
+  {
+   "n": 7619,
+   "text": "Gunakan murid untuk membantu teman membersihkan rumput."
+  },
+  {
+   "n": 7620,
+   "text": "Menetaskan telur."
+  },
+  {
+   "n": 7621,
+   "text": "Mencoba mencuri telur dari rumah lain."
+  },
+  {
+   "n": 7622,
+   "text": "Mencoba melempar telur busuk ke rumah orang lain."
+  },
+  {
+   "n": 7623,
+   "text": "Berpartisipasi dalam<font color='#000000'><b>（{@1:}∕{@0:}）</b></font> pertarungan di arena."
+  },
+  {
+   "n": 7624,
+   "text": "Kumpulkan<font color='#ff6565'> {@0: Item} </font>.  <b>（{@2: Current Amount}∕{@1: Total Number}）</b>"
+  },
+  {
+   "n": 7625,
+   "text": "Mengumpulkan <font color='#ff6565'> {@0:item} </font>.  <b>（{@2:Current number}∕{@1:Total}）</b>"
+  },
+  {
+   "n": 7626,
+   "text": "Buka<font color='#00b034'> Tas </font> dan gunakan<font color='#cc0422'> Lv.⟨0⟩ Newbie Pack</font>."
+  },
+  {
+   "n": 7627,
+   "text": "Buka<font color='#00b034'> Tas </font> dan gunakan<font color='#cc0422'> Newbie Quest Pack</font>."
+  },
+  {
+   "n": 7628,
+   "text": "Memakai<font color='#00b034'> senjata yang sesuai dengan karakter kamu</font>."
+  },
+  {
+   "n": 7629,
+   "text": "Gunakan Lv.⟨0⟩ HP Carrier Bag di dalam tas kamu, lalu pergi ke<font color='#00b034'> {@0:scene} </font> dan katakan pada {@1:NPC}."
+  },
+  {
+   "n": 7630,
+   "text": "Tas Penuh!"
+  },
+  {
+   "n": 7631,
+   "text": "Decadent Nest"
+  },
+  {
+   "n": 7632,
+   "text": "Camp Outpost"
+  },
+  {
+   "n": 7633,
+   "text": "Pantheon Entrance"
+  },
+  {
+   "n": 7634,
+   "text": "Nightmare Forest Path"
+  },
+  {
+   "n": 7635,
+   "text": "Lush Depths"
+  },
+  {
+   "n": 7636,
+   "text": "Trio Assembly"
+  },
+  {
+   "n": 7637,
+   "text": "Righteous Warrior"
+  },
+  {
+   "n": 7638,
+   "text": "Trial of Blood"
+  },
+  {
+   "n": 7639,
+   "text": "Bloodstained Plains"
+  },
+  {
+   "n": 7640,
+   "text": "Giant Fist"
+  },
+  {
+   "n": 7641,
+   "text": "Peach Paradise"
+  },
+  {
+   "n": 7642,
+   "text": "Chrysanthemum Hold"
+  },
+  {
+   "n": 7643,
+   "text": "The Death Courtroom"
+  },
+  {
+   "n": 7644,
+   "text": "Divine Assembly Hall"
+  },
+  {
+   "n": 7645,
+   "text": "？？？"
+  },
+  {
+   "n": 7646,
+   "text": "Elegant Nightstalker"
+  },
+  {
+   "n": 7647,
+   "text": "Spirit  Manipulator"
+  },
+  {
+   "n": 7648,
+   "text": "King of Darkness"
+  },
+  {
+   "n": 7649,
+   "text": "Whirlwind Sand Crater"
+  },
+  {
+   "n": 7650,
+   "text": "Mirage Mirror"
+  },
+  {
+   "n": 7651,
+   "text": "Ancient Ruins"
+  },
+  {
+   "n": 7652,
+   "text": "Strong Gale"
+  },
+  {
+   "n": 7653,
+   "text": "Kabut Penghalang"
+  },
+  {
+   "n": 7654,
+   "text": "Hutan Maze"
+  },
+  {
+   "n": 7655,
+   "text": "Medan perang terakhir"
+  },
+  {
+   "n": 7656,
+   "text": "Barisan Iblis"
+  },
+  {
+   "n": 7657,
+   "text": "Kota Berkabut Badai"
+  },
+  {
+   "n": 7658,
+   "text": "Reruntuhan Gory"
+  },
+  {
+   "n": 7659,
+   "text": "Aula Kemarahan "
+  },
+  {
+   "n": 7660,
+   "text": "Grand Magician"
+  },
+  {
+   "n": 7661,
+   "text": "<font color='#00a03c'>Pakaian Oracle </font>"
+  },
+  {
+   "n": 7662,
+   "text": "<font color='#00a03c'>Pakaian Tigerlord </font>"
+  },
+  {
+   "n": 7663,
+   "text": "<font color='#00a03c'>Pakaian Prajna's </font>"
+  },
+  {
+   "n": 7664,
+   "text": "<font color='#00a03c'>Pakaian Fiendish </font>"
+  },
+  {
+   "n": 7665,
+   "text": "<font color='#00a03c'>Pakaian Nightmare </font>"
+  },
+  {
+   "n": 7666,
+   "text": "<font color='#00a03c'>Pakaian Berserker </font>"
+  },
+  {
+   "n": 7667,
+   "text": "<font color='#00a03c'>Pakaian Kagura </font>"
+  },
+  {
+   "n": 7668,
+   "text": "<font color='#00a03c'>Pakaian Beryl </font>"
+  },
+  {
+   "n": 7669,
+   "text": "<font color='#00a03c'>Pakaian Ogre </font>"
+  },
+  {
+   "n": 7670,
+   "text": "<font color='#00a03c'>Pakaian Pakaian of Destruction</font>"
+  },
+  {
+   "n": 7671,
+   "text": "<font color='#00a03c'>Pakaian Radiant </font>"
+  },
+  {
+   "n": 7672,
+   "text": "<font color='#00a03c'>Pakaian Frigid </font>"
+  },
+  {
+   "n": 7673,
+   "text": "<font color='#00a03c'>Pakaian Jadeglow </font>"
+  },
+  {
+   "n": 7674,
+   "text": "<font color='#00a03c'>Pakaian Glorious </font>"
+  },
+  {
+   "n": 7675,
+   "text": "<font color='#00a03c'>Pakaian SunPakaian </font>"
+  },
+  {
+   "n": 7676,
+   "text": "<font color='#00a03c'>Pakaian Bloody </font>"
+  },
+  {
+   "n": 7677,
+   "text": "<font color='#00a03c'>Dragon Soul Sets</font>"
+  },
+  {
+   "n": 7678,
+   "text": "<font color='#00a03c'>Kage Sets</font>"
+  },
+  {
+   "n": 7679,
+   "text": "<font color='#00a03c'>Pakaian Streamray </font>"
+  },
+  {
+   "n": 7680,
+   "text": "<font color='#00a03c'>Pakaian Empty Soul </font>"
+  },
+  {
+   "n": 7681,
+   "text": "<font color='#00a03c'>Pakaian Exorcism </font>"
+  },
+  {
+   "n": 7682,
+   "text": "<font color='#00a03c'>Angelic Union</font>"
+  },
+  {
+   "n": 7683,
+   "text": "<font color='#00a03c'>Dragon King</font>"
+  },
+  {
+   "n": 7684,
+   "text": "<font color='#00a03c'>Sacred Army</font>"
+  },
+  {
+   "n": 7685,
+   "text": "<font color='#00a03c'> Angelic Union</font>"
+  },
+  {
+   "n": 7686,
+   "text": "<font color='#00a03c'>Dragon Lord</font>"
+  },
+  {
+   "n": 7687,
+   "text": "<font color='#00a03c'>Lament Melody</font>"
+  },
+  {
+   "n": 7688,
+   "text": "<font color='#00a03c'>Harvest Bugle</font>"
+  },
+  {
+   "n": 7689,
+   "text": "<font color='#00a03c'>Gods Weep</font>"
+  },
+  {
+   "n": 7690,
+   "text": "<font color='#00a03c'>Thunder Storm</font>"
+  },
+  {
+   "n": 7691,
+   "text": "<font color='#00a03c'>Pakaian Beastlord </font>"
+  },
+  {
+   "n": 7692,
+   "text": "<font color='#00a03c'>Pakaian Gilded </font>"
+  },
+  {
+   "n": 7693,
+   "text": "<font color='#00a03c'>Pakaian Tengu Bamboo Hat</font>"
+  },
+  {
+   "n": 7694,
+   "text": "<font color='#00a03c'>Pakaian Quicksilver </font>"
+  },
+  {
+   "n": 7695,
+   "text": "<font color='#00a03c'>Pakaian Ferocious </font>"
+  },
+  {
+   "n": 7696,
+   "text": "<font color='#00a03c'>Pakaian Deity's </font>"
+  },
+  {
+   "n": 7697,
+   "text": "<font color='#00a03c'>Pakaian Cosmic </font>"
+  },
+  {
+   "n": 7698,
+   "text": "<font color='#00a03c'>Pakaian Oni </font>"
+  },
+  {
+   "n": 7699,
+   "text": "<font color='#00a03c'>Pakaian Balanced </font>"
+  },
+  {
+   "n": 7700,
+   "text": "<font color='#00a03c'>Pakaian Api</font>"
+  },
+  {
+   "n": 7701,
+   "text": "<font color='#00a03c'>Pakaian Air</font>"
+  },
+  {
+   "n": 7702,
+   "text": "<font color='#00a03c'>Pakaian Tanah</font>"
+  },
+  {
+   "n": 7703,
+   "text": "<font color='#00a03c'>Pakaian Petir</font>"
+  },
+  {
+   "n": 7704,
+   "text": "<font color='#00a03c'>Pakaian Angin</font>"
+  },
+  {
+   "n": 7705,
+   "text": "<font color='#00a03c'>Kostum Azure Dragon </font>"
+  },
+  {
+   "n": 7706,
+   "text": "<font color='#00a03c'>Kostum Vermilion Bird</font>"
+  },
+  {
+   "n": 7707,
+   "text": "<font color='#00a03c'>Kostum Black Tortoise</font>"
+  },
+  {
+   "n": 7708,
+   "text": "<font color='#00a03c'>Fire Release Sets</font>"
+  },
+  {
+   "n": 7709,
+   "text": "<font color='#00a03c'>Water Release Sets</font>"
+  },
+  {
+   "n": 7710,
+   "text": "<font color='#00a03c'>Earth Release Sets</font>"
+  },
+  {
+   "n": 7711,
+   "text": "<font color='#00a03c'>Lightning Release Sets</font>"
+  },
+  {
+   "n": 7712,
+   "text": "<font color='#00a03c'>Wind Release Sets</font>"
+  },
+  {
+   "n": 7713,
+   "text": "<font color='#00a03c'>Azure Dragon Sets</font>"
+  },
+  {
+   "n": 7714,
+   "text": "<font color='#00a03c'>Vermilion Bird Sets</font>"
+  },
+  {
+   "n": 7715,
+   "text": "<font color='#00a03c'>Black Tortoise Sets</font>"
+  },
+  {
+   "n": 7716,
+   "text": "Biaya Gold "
+  },
+  {
+   "n": 7717,
+   "text": "Items yang dibeli dengan Gift Coupon akan terikat"
+  },
+  {
+   "n": 7718,
+   "text": "Harga:"
+  },
+  {
+   "n": 7719,
+   "text": "Jumlah pembelian："
+  },
+  {
+   "n": 7720,
+   "text": "Kapasitas gudang"
+  },
+  {
+   "n": 7721,
+   "text": "Harga satuan"
+  },
+  {
+   "n": 7722,
+   "text": "Harga VIP"
+  },
+  {
+   "n": 7723,
+   "text": "Kupon Berhadiah : "
+  },
+  {
+   "n": 7724,
+   "text": "Gold : "
+  },
+  {
+   "n": 7725,
+   "text": "{@0:} Tidak mencukupi, tidak dapat membeli item ini."
+  },
+  {
+   "n": 7726,
+   "text": "Kekurangan barang"
+  },
+  {
+   "n": 7727,
+   "text": "<font color='#ffffff'>Tidak ada item ditemukan, silakan menantikan!</font>"
+  },
+  {
+   "n": 7728,
+   "text": "Top-up"
+  },
+  {
+   "n": 7729,
+   "text": "Urutan standar"
+  },
+  {
+   "n": 7730,
+   "text": "Barang baru yang pertama"
+  },
+  {
+   "n": 7731,
+   "text": "Harga dari terendah ke tertinggi"
+  },
+  {
+   "n": 7732,
+   "text": "Harga dari tertinggi ke terendah"
+  },
+  {
+   "n": 7733,
+   "text": "Perlengkapan"
+  },
+  {
+   "n": 7734,
+   "text": "Barang populer"
+  },
+  {
+   "n": 7735,
+   "text": "Rangking pembelian"
+  },
+  {
+   "n": 7736,
+   "text": "Item telah kadaluwarsa. Silahkan hapus."
+  },
+  {
+   "n": 7737,
+   "text": "<font color='#6a6e70'><b>   Pedang dalam Batu   </b></font>"
+  },
+  {
+   "n": 7738,
+   "text": "Pedang dalam Batu"
+  },
+  {
+   "n": 7739,
+   "text": "Efek suara:"
+  },
+  {
+   "n": 7740,
+   "text": "Mematikan efek suara"
+  },
+  {
+   "n": 7741,
+   "text": "Instruksi pengaturan suara:<br><br>⟨0⟩. Efek suara lingkungan dapat dimatikan disini. Efek tidak akan terdengar setelah dimatikan<br>⟨1⟩. Efek suara lingkungan dapat didengar setelah dinyalakan.<br>⟨2⟩. Semua perubahan akan berasa setelah kamu simpan dan menutup settingan."
+  },
+  {
+   "n": 7742,
+   "text": "Otomatis dihapus"
+  },
+  {
+   "n": 7743,
+   "text": "Masukkan password baru kedua:"
+  },
+  {
+   "n": 7744,
+   "text": "Masukkan password lama kedua:"
+  },
+  {
+   "n": 7745,
+   "text": "Menyalakan efek suara"
+  },
+  {
+   "n": 7746,
+   "text": "Instruksi password kedua:<br><br>⟨0⟩. Hapus karakter membutuhkan<font color='#ff0000'> password kedua </font><br>⟨1⟩.<font color='#ff0000'> password kedua </font>kosong untuk pertama kalinya. Pengaturan awal tidak memerlukan passoword lama<br>⟨2⟩. Panjang password<font color='#ff0000'> ⟨3⟩-⟨4⟩ characters </font>dan harus huruf dan angka.  Capslock berpengaruh, dan tidak boleh ada spasi."
+  },
+  {
+   "n": 7747,
+   "text": "Ulangi password kedua:"
+  },
+  {
+   "n": 7748,
+   "text": "Sistem"
+  },
+  {
+   "n": 7749,
+   "text": "Hot"
+  },
+  {
+   "n": 7750,
+   "text": "Sale"
+  },
+  {
+   "n": 7751,
+   "text": "Tunggu {@0: } sebelum masuk kembali. Bayar ⟨0⟩ gold untuk langsung masuk. "
+  },
+  {
+   "n": 7752,
+   "text": "<font color='#00ffff'>One-Tailed Shukaku</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7753,
+   "text": "<font color='#00ffff'>Two-Tailed Nekomata </font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7754,
+   "text": "<font color='#00ffff'>Three-Tailed Isonade</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7755,
+   "text": "<font color='#00ffff'>Four-Tailed Sokou</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7756,
+   "text": "<font color='#00ffff'>Five-Tailed Houkou</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7757,
+   "text": "<font color='#00ffff'>Six-Tailed Raijuu</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7758,
+   "text": "<font color='#00ffff'>Seven-Tailed Mujina</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7759,
+   "text": "<font color='#00ffff'>Eight-Tailed Giant Ox</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7760,
+   "text": "<font color='#00ffff'>Nine-Tailed Demon Fox</font><br>Strength Ranking:⟨0⟩"
+  },
+  {
+   "n": 7761,
+   "text": "<font color='#ff0000'>{@0:}tails is in {@1:}. Simpan sekarang.</font>"
+  },
+  {
+   "n": 7762,
+   "text": "Drop rate meningkat ⟨0⟩%"
+  },
+  {
+   "n": 7763,
+   "text": "Village Peace"
+  },
+  {
+   "n": 7764,
+   "text": "Village Pride"
+  },
+  {
+   "n": 7765,
+   "text": "Village Shame"
+  },
+  {
+   "n": 7766,
+   "text": "<font color='#ff0000'>{@0:} benar-benar hancur.</font>"
+  },
+  {
+   "n": 7767,
+   "text": "<font color='#00ffff'>Sunagakure</font><br>Ninja Desa dimana Gaara lahir"
+  },
+  {
+   "n": 7768,
+   "text": "<font color='#00ffff'>Amegakure</font><br>Ninja desa yang telah mengembangkan teknik pembunuhan yang tinggi"
+  },
+  {
+   "n": 7769,
+   "text": "<font color='#00ffff'>Otogakure</font><br>Ninja desa dibangun oleh Orochimaru"
+  },
+  {
+   "n": 7770,
+   "text": "<font color='#00ffff'>Iwagakure</font><br>Ninja Village dengan pertahanan sekeras batu"
+  },
+  {
+   "n": 7771,
+   "text": "<font color='#00ffff'>Takigakure</font><br>Desa tersembunyi dibalik air terjun raksasa"
+  },
+  {
+   "n": 7772,
+   "text": "<font color='#00ffff'>Kirigakure </font><br>Desa  Mystic ninja yang tersembunyi dalam kabut tebal"
+  },
+  {
+   "n": 7773,
+   "text": "<font color='#00ffff'>Kusagakure</font><br>Ninja desa yang tidak diketahui kebanyakan orang"
+  },
+  {
+   "n": 7774,
+   "text": "<font color='#00ffff'>Kumogakure</font><br>Ninja desa milik Dataran Petir"
+  },
+  {
+   "n": 7775,
+   "text": "<font color='#00ffff'>Konohagakure</font><br>Ninja Desa dimana Naruto dan Sasuke tinggal"
+  },
+  {
+   "n": 7776,
+   "text": "<font color='#ff0000'>{@0:}mengalami kerusakan dari tailed beasts.</font>"
+  },
+  {
+   "n": 7777,
+   "text": "<font color='#ff0000'>{@0:} hampir mati.</font>"
+  },
+  {
+   "n": 7778,
+   "text": "Arghh, kamu tidak memiliki cukup Big Wood Release Talisman."
+  },
+  {
+   "n": 7779,
+   "text": "Sunagakure"
+  },
+  {
+   "n": 7780,
+   "text": "Amegakure"
+  },
+  {
+   "n": 7781,
+   "text": "Otogakure"
+  },
+  {
+   "n": 7782,
+   "text": "Iwagakure"
+  },
+  {
+   "n": 7783,
+   "text": "Takigakure"
+  },
+  {
+   "n": 7784,
+   "text": "Kirigakure "
+  },
+  {
+   "n": 7785,
+   "text": "Kusagakure"
+  },
+  {
+   "n": 7786,
+   "text": "Kumogakure"
+  },
+  {
+   "n": 7787,
+   "text": "Konohagakure"
+  },
+  {
+   "n": 7788,
+   "text": "kamu tidak memenuhi syarat untuk klaim."
+  },
+  {
+   "n": 7789,
+   "text": "Bunuh lebih banyak tailed beasts untuk mendapatkan EXP yang lebih besar!"
+  },
+  {
+   "n": 7790,
+   "text": "System sibuk. Siahkan kembali lagi nanti. "
+  },
+  {
+   "n": 7791,
+   "text": "Kamu yakin mau menggunakan <font color='#ff0000'>⟨0⟩ gold</font> untuk langsung? "
+  },
+  {
+   "n": 7792,
+   "text": "Hitungan mundur ⟨0⟩. kamu tidak perlu menghapusnya lagi. "
+  },
+  {
+   "n": 7793,
+   "text": "Hitungan mundur: {@0:} Detik"
+  },
+  {
+   "n": 7794,
+   "text": "Memperoleh {@0: } gift coupons."
+  },
+  {
+   "n": 7795,
+   "text": "Bayar {@0: }gold berhasil."
+  },
+  {
+   "n": 7796,
+   "text": "Catatan pertarungan seminggu:<font color='#ff0000'>{@0:}Menang</font>  <font color='#0f9f00'>{@1:}Kalah</font>"
+  },
+  {
+   "n": 7797,
+   "text": "No.⟨0⟩-⟨1⟩ Pada Rank"
+  },
+  {
+   "n": 7798,
+   "text": "⟨0⟩ pemain pertama pada rank <br><font color='#ff0000'>(Membunuh lebih banyak tailed beast mendapatkan EXP）</font>"
+  },
+  {
+   "n": 7799,
+   "text": "Syarat"
+  },
+  {
+   "n": 7800,
+   "text": "Total membunuh tailed beasts minggu ini: <font color='#ff0000'>{@0: }</font>"
+  },
+  {
+   "n": 7801,
+   "text": "Kamu yakinmau pergi? Kamu butuh waktu ⟨0⟩ detik sebelum masuk kembali."
+  },
+  {
+   "n": 7802,
+   "text": "<font color='#ff0000'>{@0:}tails menjadi kuat dan menimbulkan kerusakan.</font>"
+  },
+  {
+   "n": 7803,
+   "text": "<font color='#ff0000'>{@0:}tails telah dihajar oleh ninja!</font>"
+  },
+  {
+   "n": 7804,
+   "text": "<font color='#ff0000'>Sangat buruk. Ninja telah gagal dalam mempertahankan desa dari serangan tailed beasts.</font>"
+  },
+  {
+   "n": 7805,
+   "text": "<font color='#ff0000'>Setelah pertempuran yang sulit, ninja akhirnya memenangkan pertempuran melawan tailed beasts!</font>"
+  },
+  {
+   "n": 7806,
+   "text": "<font color='#ff0000'>Pengingat: Menang minggu ini untuk mempertahankan serangan Tailed Beasts dua kali dan kamu akan mendapatkan hadiah berikut (klaim pada hari Minggu saja)</font>"
+  },
+  {
+   "n": 7807,
+   "text": "Penyembuhan sedang berlangsung. Kamu perlu waktu <font color='#ff0000'>{@0: } detik</font> untuk pulih.<font color='#ff0000'>Bayar ⟨0⟩ gold</font> untuk langsung pulih."
+  },
+  {
+   "n": 7808,
+   "text": "Silahkan pilih salah satu dan pilih untuk klaim."
+  },
+  {
+   "n": 7809,
+   "text": "<font color='#ff0000'>Tangkapan Besar! Tailed beasts menyerang! Datang untuk bergabung mempertahankan dari serangan Tailed Beasts dan menangkan untuk mendapatkan penghormatan Kage!</font>"
+  },
+  {
+   "n": 7810,
+   "text": "<font color='#ff0000'>Tailed beasts akan mulai menyerang dalam ⟨0⟩ menit. Pergi ke Five Kage Meeting Room sekarang dan pertahankan desa dengan ninja yang lainnya.</font>"
+  },
+  {
+   "n": 7811,
+   "text": "Memperoleh {@0: } batu."
+  },
+  {
+   "n": 7812,
+   "text": "<font color='#5df9ff'>Klik untuk menghapus waktu mundur pertarungan.</font>"
+  },
+  {
+   "n": 7813,
+   "text": "<font color='#5df9ff'>Waktu mundur pertarungan: Mengacu pada waktu tunggu setelah satu pertempuran.</font>"
+  },
+  {
+   "n": 7814,
+   "text": "<font color='#5df9ff'>Penyembuhan Darurat: Dapat digunakan setiap ⟨0⟩ detik untuk mengembalikan HP dan Chakra.</font>"
+  },
+  {
+   "n": 7815,
+   "text": "<font color='#ff0000'>{@0:}/{@1:}</font>"
+  },
+  {
+   "n": 7816,
+   "text": "HP kamu kurang, Tidak dapat mengikuti pertahanan dari serangan Tailed Beasts.<font color='#ff0000'> Silahkan kembali kedesa untuk memulihkan HP dan coba lagi.</font>"
+  },
+  {
+   "n": 7817,
+   "text": "System notice: Kapasitas dalam tas <font color='#ff0000'>tidak cukup</font>. Tetap ingin melanjutkan?"
+  },
+  {
+   "n": 7818,
+   "text": "Gunakan{@0:} Big Wood Release Talisman untuk memulihkan ⟨0⟩ point durability dari desa.<br>    Sekarang kamu mempunyai：{@1:} Big Wood Release Talisman."
+  },
+  {
+   "n": 7819,
+   "text": "Desa kita sudah aman kembali. Terima kasih banyak. "
+  },
+  {
+   "n": 7820,
+   "text": "<font color='#0098FF'>{@0: }</font>Stamina dari <font color='#0098FF'>{@1: }</font> telah meningkat {@2: }, memperoleh kehormatan<font color='#ff0000'>{@3: }</font>."
+  },
+  {
+   "n": 7821,
+   "text": "Masih perlu istirahat <font color='#ff0000'>{@0: } detik</font> sebelum bertempur kembali. membutukan <font color='#ff0000'> ⟨0⟩ gold</font>."
+  },
+  {
+   "n": 7822,
+   "text": "<font color='#003cff'>{@0:}</font> membunuh <font color='#003cff'>{@1:}tails</font>. Penghormatan meningkat: <font color='#003cff'>{@2:}</font>."
+  },
+  {
+   "n": 7823,
+   "text": "Pertahanan desa dari serangan Tailed Beasts hari ini telah berakhir."
+  },
+  {
+   "n": 7824,
+   "text": "Bakat"
+  },
+  {
+   "n": 7825,
+   "text": "Ajaib"
+  },
+  {
+   "n": 7826,
+   "text": "Sangat Kuat"
+  },
+  {
+   "n": 7827,
+   "text": "Terpencil"
+  },
+  {
+   "n": 7828,
+   "text": "<font color='#00ffff'>Hokage</font>{@0:} Level:{@1:}<br><font color='#00ffff'> paling kuat di Dataran Api!</font>"
+  },
+  {
+   "n": 7829,
+   "text": "<font color='#00ffff'> Mizukage </font>{@0:} Level:{@1:}<br><font color='#00ffff'>Paling kuat di Dataran Air!</font>"
+  },
+  {
+   "n": 7830,
+   "text": "<font color='#00ffff'>Tsuchikage</font>{@0: } Level:  {@1: }<br><font color='#00ffff'>Terkuat di Dataran Tanah!</font>"
+  },
+  {
+   "n": 7831,
+   "text": "<font color='#00ffff'> Kazekage </font>{@0:} Level:{@1:}<br><font color='#00ffff'>Terkuat di Dataran Angin!</font>"
+  },
+  {
+   "n": 7832,
+   "text": "<font color='#00ffff'> Raikage </font>{@0:} Level:{@1:}<br><font color='#00ffff'>Terkuat di Dataran Petir!</font>"
+  },
+  {
+   "n": 7833,
+   "text": "A.K.A<font color='#ff0000'>{@0: }</font>{@1: }"
+  },
+  {
+   "n": 7834,
+   "text": "Sets Show (mengklaim equipment dapat memiliki ⟨0⟩ atribut tersembunyi)"
+  },
+  {
+   "n": 7835,
+   "text": "{@0: }Hokage Dari Desa Api"
+  },
+  {
+   "n": 7836,
+   "text": "kamu bukan Kage Shinobi. Hanya Kage Shinobi yang dapat mengklaim hadiah ini (Silahkan lihat peraturan)."
+  },
+  {
+   "n": 7837,
+   "text": "Menjadi<font color='#ff0000'>Kage</font>. Kamu akan dapat mengklaim bagian dari set diatas dan memenangkan penghargaan lain.<br>PS: Pemain yang berhasil menang mempertahankan serangan dari Tailed Beasts ⟨0⟩kali dalam minggu ini dan memperoleh urutan pertama dalam penghormatan nasional Rank akan menjadi Kage-level ninja.<font color='#ff0000'> (Refresh pada hari Minggu. Kehormatan Mingguan tidak dapat lebih rendah dari ⟨1⟩)</font>"
+  },
+  {
+   "n": 7838,
+   "text": "Berhasil mengklaim ⟨0⟩<font color='#ff0000'>{@0:}</font> dan item <font color='#ff0000'>{@1:}</font>."
+  },
+  {
+   "n": 7839,
+   "text": "klaim Hadiah"
+  },
+  {
+   "n": 7840,
+   "text": "Hadiah Item"
+  },
+  {
+   "n": 7841,
+   "text": "Tampilkan Item"
+  },
+  {
+   "n": 7842,
+   "text": "{@0: }Tsuchikage Dari Desa Tanah"
+  },
+  {
+   "n": 7843,
+   "text": "<font color='#ff0000'>Baru</font>"
+  },
+  {
+   "n": 7844,
+   "text": "Desa kami membutuhkan pendekar! "
+  },
+  {
+   "n": 7845,
+   "text": "Siapa yang akan menjadi <font color='#ff0000'>Hokage</font>?"
+  },
+  {
+   "n": 7846,
+   "text": "Siapa yang akan menjadi <font color='#ff0000'> Mizukage </font>?"
+  },
+  {
+   "n": 7847,
+   "text": "Siapa yang akan menjadi <font color='#ff0000'> Tsuchikage </font>?"
+  },
+  {
+   "n": 7848,
+   "text": "Siapa yang akan menjadi <font color='#ff0000'> Kazekage </font>?"
+  },
+  {
+   "n": 7849,
+   "text": "Siapa yang akan menjadi <font color='#ff0000'> Raikage </font>?"
+  },
+  {
+   "n": 7850,
+   "text": "maaf, Tetapi hanya dapat mengklaim satu minggu sekali."
+  },
+  {
+   "n": 7851,
+   "text": "<font color='#ff0000'>Terpilih kembali</font>"
+  },
+  {
+   "n": 7852,
+   "text": "Lv.{@0: } {@1: }"
+  },
+  {
+   "n": 7853,
+   "text": "<font color='#ff0000'> \"Kage\"</font>=<font color='#ff0000'> Menang dalam mempertahankan serangan dari Tailed Beasts ⟨0⟩ kali dalam minggu ini</font>+<font color='#ff0000'>Berhasil menempati urutan pertama pada Rank penghormaan nationtional</font><br>Contoh: memperoleh urutan pertama pada minggu ini dari Dataran Api. Selama event ini berhasil mempertahankan ⟨1⟩ kali serangan Tailed Beasts, berhasil mejaga ⟨2⟩ desa ⟨3⟩ kali.<br>PS: <font color='#ff0000'>Hadiah dapat di klaim dan rank akan direset setiap hari minggu</font>"
+  },
+  {
+   "n": 7854,
+   "text": "Aturan hadiah(Klaim setiap senin)"
+  },
+  {
+   "n": 7855,
+   "text": "Pilih Pakaian"
+  },
+  {
+   "n": 7856,
+   "text": "Mempertahankan desa, kalahkan tailed beast, untuk menjadi Kage dan mendapatkan kemenangan!"
+  },
+  {
+   "n": 7857,
+   "text": "{@0: }Raikage dari Desa Petir"
+  },
+  {
+   "n": 7858,
+   "text": "Maaf. Kamu hanya dapat mengklaim Hadiah pada hari minggu."
+  },
+  {
+   "n": 7859,
+   "text": "{@0: }Mizukage dari Desa Air"
+  },
+  {
+   "n": 7860,
+   "text": "{@0: }Kazekage dari Desa Angin"
+  },
+  {
+   "n": 7861,
+   "text": "Periksa daftar kehormatan"
+  },
+  {
+   "n": 7862,
+   "text": "Tampilkan Gem"
+  },
+  {
+   "n": 7863,
+   "text": "Berhasil mengklaim <font color='#ff0000'>{@0:}</font> EXP."
+  },
+  {
+   "n": 7864,
+   "text": "KlaimEXP"
+  },
+  {
+   "n": 7865,
+   "text": "Maaf, kamu tidak tercantum di daftar (Silahkan periksa aturan hadiah)."
+  },
+  {
+   "n": 7866,
+   "text": "Berhasil mengklaim ⟨0⟩ <font color='#ff0000'>{@0:}</font> dan <font color='#ff0000'>{@1:}</font>."
+  },
+  {
+   "n": 7867,
+   "text": "Lihat Rank"
+  },
+  {
+   "n": 7868,
+   "text": "Maaf, kamu hanya dapat mengklaim satu minggu sekali."
+  },
+  {
+   "n": 7869,
+   "text": "Kemenangan semua pertarungan pada minggu ini dalam mempertahankan serangan tailed beast untuk mendapatkan bonus reward.<br>Pemenang ⟨0⟩ Besar dapat memenangkan Gem rate pertama (bebas untuk memilih); Pemain No.⟨1⟩-⟨2⟩ Gem rate pertama (random gift boxes) <br>Pemain No.⟨3⟩-⟨4⟩ dapat memilih gem rate pertama ( gift box) <br>⟨5⟩ pemain pertama pada rank mingguan dapat memperoleh EXP! "
+  },
+  {
+   "n": 7870,
+   "text": "Lihat hadiah"
+  },
+  {
+   "n": 7871,
+   "text": "Jenis"
+  },
+  {
+   "n": 7872,
+   "text": "Maaf. kamuhanya dapat mengklaim Hadiah pada hari minggu."
+  },
+  {
+   "n": 7873,
+   "text": "Total Kehormatan"
+  },
+  {
+   "n": 7874,
+   "text": "Kehormatan Mingguan"
+  },
+  {
+   "n": 7875,
+   "text": "Maaf, kamu belum melindungi desa yang cukup selama minggu ini ⟨0⟩ mempertahankan serangan Tailed Beasts. Jadi kamu tidak dapat mengklaim hadiah mingguan."
+  },
+  {
+   "n": 7876,
+   "text": "Ada ⟨0⟩ serangan dari Tailed Beasts setiap minggunya. Menangkan dan pertahankan dari serangan Tailed Beasts sebanyak ⟨1⟩ kali dan kamu akan dapat mengklaim hadiah dari rank penghormatanand. <br> Jika kamu mencapai urutan pertama dari rank penghormatan national, kamu akan memenangkan hadiah dari Kage!"
+  },
+  {
+   "n": 7877,
+   "text": "Mulai setiap ⟨0⟩PM dari Senin sampai Sabtu.<br> Siapa pun yang di atas Lv.⟨1⟩ dapat bergabung masuk, tidak ada biaya untuk masuk!"
+  },
+  {
+   "n": 7878,
+   "text": "Maaf, kamu tidak meiliki cukup {@0: }. Tidak dapat memulai pertandingan."
+  },
+  {
+   "n": 7879,
+   "text": "Klik untuk bertarung"
+  },
+  {
+   "n": 7880,
+   "text": "Jangan gunakan"
+  },
+  {
+   "n": 7881,
+   "text": "<font color='#a6a6a6'>{@0:}/{@1:}</font>"
+  },
+  {
+   "n": 7882,
+   "text": "{@0:}/{@1:}"
+  },
+  {
+   "n": 7883,
+   "text": "Pakai"
+  },
+  {
+   "n": 7884,
+   "text": "Level Monster: Normal(cocok untuk pemain lvl.⟨0⟩）"
+  },
+  {
+   "n": 7885,
+   "text": "Penghormatan：{@0:}"
+  },
+  {
+   "n": 7886,
+   "text": "Damage：{@0:}"
+  },
+  {
+   "n": 7887,
+   "text": "Hadiah utama:<font color='#ff0000'>EXP</font>, <font color='#ff0000'>equipment</font>"
+  },
+  {
+   "n": 7888,
+   "text": "Special Item: waktu penggunaan {@0:}"
+  },
+  {
+   "n": 7889,
+   "text": "<font color='#ff0000'>+{@0:}</font>"
+  },
+  {
+   "n": 7890,
+   "text": "Monster Level: Strong(cocok untuk pemain lvl.⟨0⟩）"
+  },
+  {
+   "n": 7891,
+   "text": "Hadiah utama: Sejumlah <font color='#ff0000'>EXP</font> yang lumayan besar, mid-level<font color='#ff0000'>equipment</font>"
+  },
+  {
+   "n": 7892,
+   "text": "Special Item：waktu penggunaan{@0:}"
+  },
+  {
+   "n": 7893,
+   "text": "Level Moster: Sangat Kuat（Anjuran: Pakaian lv.⟨0⟩ dan beberapa pemain）"
+  },
+  {
+   "n": 7894,
+   "text": "Hadiah utama: Sejumlah <font color='#ff0000'>EXP</font> yang memukau, high level<font color='#ff0000'>equipment</font>"
+  },
+  {
+   "n": 7895,
+   "text": "Klik kiri untuk memulai"
+  },
+  {
+   "n": 7896,
+   "text": "klik kiri untuk meningkatkan durability"
+  },
+  {
+   "n": 7897,
+   "text": "Bagaimana menjadi Kage"
+  },
+  {
+   "n": 7898,
+   "text": "Kamu harus menyelesaikan pertarungan, perlu waktu <font color='#ff0000'>{@0: } detik </font>sebelum bertarung kembali. <font color='#ff0000'>Atau gunakan ⟨0⟩ gold</font> untuk masuk kembali."
+  },
+  {
+   "n": 7899,
+   "text": "Maaf, Mempertahankan serangan dari Tailed Beast baru dimulai pukul ⟨0⟩PM dari Senin sampai Sabtu. Kamu belum dapat masuk sekarang."
+  },
+  {
+   "n": 7900,
+   "text": "Desa ini benar-benar hancur. Tidak ada durability yang dapat ditambahkan."
+  },
+  {
+   "n": 7901,
+   "text": "Event: mempertahankan serangan Tailed Beasts. Bergabung?"
+  },
+  {
+   "n": 7902,
+   "text": "Tailed beast yang dipilih telah mati."
+  },
+  {
+   "n": 7903,
+   "text": "Desa ini tidak dapat menggunakan talisman untuk mengeluarkan Big Wood lagi."
+  },
+  {
+   "n": 7904,
+   "text": "<font color='#ff0000'>Setelah pertempuran yang sulit, ninja akhirnya memenangkan perang melawan tailed beasts!</font>"
+  },
+  {
+   "n": 7905,
+   "text": "<font color='#ff0000'>Argghh, ninja gagal melindungi desa mereka.</font>"
+  },
+  {
+   "n": 7906,
+   "text": "Maaf, kemenangan mingguan kamu kurang dari ⟨0⟩ hari. Tidak dapat mengklaim hadiah."
+  },
+  {
+   "n": 7907,
+   "text": "Maaf, durability desa telah penuh."
+  },
+  {
+   "n": 7908,
+   "text": "Maaf, Five Kage Meeting Room belum dibuka."
+  },
+  {
+   "n": 7909,
+   "text": "<font color='#ff0000'>Panggilan mendasak!{@0: }tails telah menyerang! Memanggil ninja untuk pergi ke Five Kage Meeting Room Sekarang!</font>"
+  },
+  {
+   "n": 7910,
+   "text": "<font color='#ff0000'>Panggilan mendesak!{@0: } tails, {@1: } tails telah menyerang! Memanggil ninja untuk pergi ke Five Kage Meeting Room sekarang!</font>"
+  },
+  {
+   "n": 7911,
+   "text": "<font color='#ff0000'>Panggilan mendesak!{@0: } tails, {@1: }tails, {@2: } tails telah menyerang!  Memanggil ninja untuk pergi ke Five Kage Meeting Room sekarang!</font>"
+  },
+  {
+   "n": 7912,
+   "text": "{@0:} tails mati. Semua pemain yang berada di Five Kage Meeting Room memperoleh efek {@1:} ."
+  },
+  {
+   "n": 7913,
+   "text": "<font color='#ff0000'>ASejumlah besar dari chakra menyapu seluruh tempat, kemarahan {@0: } tails menjadi lebih kuat!</font>"
+  },
+  {
+   "n": 7914,
+   "text": "Mempertahankan dari serangan Tailed Beasts ada ⟨0⟩ tailed beasts dan ⟨1⟩ desa. setiap tailed beast akan menyerang hanya satu desa.<br>Untuk berhasil melindungi desa, kamu harus Kalahkan tailed beast sebelum HP desa menjadi ⟨2⟩.<br> dalam setiap pertahanan dari serangan Tailed Beasts, kamu perlu melindungi lebih dari ⟨3⟩ desa untuk menang."
+  },
+  {
+   "n": 7915,
+   "text": "<font color='#8e8e8e'>Barbeque Chips</font>"
+  },
+  {
+   "n": 7916,
+   "text": "<font color='#8e8e8e'>ANBU Mask</font>"
+  },
+  {
+   "n": 7917,
+   "text": "<font color='#8e8e8e'>Family Badge</font>"
+  },
+  {
+   "n": 7918,
+   "text": "<font color='#8e8e8e'>Secret Letter</font>"
+  },
+  {
+   "n": 7919,
+   "text": "<font color='#00aeff'>Shogi</font>"
+  },
+  {
+   "n": 7920,
+   "text": "<font color='#00aeff'>Medic Bag</font>"
+  },
+  {
+   "n": 7921,
+   "text": "<font color='#00aeff'>Puppet Item</font>"
+  },
+  {
+   "n": 7922,
+   "text": "<font color='#00aeff'>Kunai</font>"
+  },
+  {
+   "n": 7923,
+   "text": "<font color='#ff8a00'>Exploding Tag</font>"
+  },
+  {
+   "n": 7924,
+   "text": "<font color='#ff8a00'>Organization Fund</font>"
+  },
+  {
+   "n": 7925,
+   "text": "<font color='#ff8a00'>Landscape Painting</font>"
+  },
+  {
+   "n": 7926,
+   "text": "<font color='#ff8a00'>Supply Pill</font>"
+  },
+  {
+   "n": 7927,
+   "text": "<font color='#ffc600'>Scroll of Seals</font>"
+  },
+  {
+   "n": 7928,
+   "text": "<font color='#ffc600'>Mysterious Weapon Bag</font>"
+  },
+  {
+   "n": 7929,
+   "text": "<font color='#ffc600'>Weapon Channeling  Scroll</font>"
+  },
+  {
+   "n": 7930,
+   "text": "<font color='#ff0735'>JinchūrikiSecret Letter</font>"
+  },
+  {
+   "n": 7931,
+   "text": "<font color='#ff0735'>Contract of Channeling Jutsu </font>"
+  },
+  {
+   "n": 7932,
+   "text": "<font color='#ff0735'>Juinjutsu Scroll</font>"
+  },
+  {
+   "n": 7933,
+   "text": "<font color='#6a6e70'><b>   Papan Quest   </b></font>"
+  },
+  {
+   "n": 7934,
+   "text": "Kamu belum menyelesaikan misi. Tidak dapat menghilangkan yang ada di papan misi. "
+  },
+  {
+   "n": 7935,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan EXP bag. Lv.⟨0⟩. </font>"
+  },
+  {
+   "n": 7936,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan EXP bag. Lv.⟨0⟩ .</font>"
+  },
+  {
+   "n": 7937,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan Stone bag. Lv.⟨0⟩ .</font>"
+  },
+  {
+   "n": 7938,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan Medal bag. Lv.⟨0⟩ .</font>"
+  },
+  {
+   "n": 7939,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan EXP bag. Lv.⟨0⟩  .</font>"
+  },
+  {
+   "n": 7940,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan Stone Bag. Lv.⟨0⟩  .</font>"
+  },
+  {
+   "n": 7941,
+   "text": "<font color='#6a6e70'>  Pecahkan guci dalam arena, untuk mendapatkan Stone Bag. Lv.⟨0⟩ .</font>"
+  },
+  {
+   "n": 7942,
+   "text": "<font color='#6a6e70'>Bersihkan berbagai macam barang di Rumah, untuk mendapatkan crop bag. .</font>"
+  },
+  {
+   "n": 7943,
+   "text": "Papan Quest"
+  },
+  {
+   "n": 7944,
+   "text": "<font color='#00b035'><b>{@0:Type}</b>:<b>{@1:Value}</b></font>."
+  },
+  {
+   "n": 7945,
+   "text": "<font color='#00b035'><b>{@0:Item}</b>×<b>{@1:Value}</b></font>."
+  },
+  {
+   "n": 7946,
+   "text": "Setelah mengerti dasar dari dunia Ninja, terimalah sebagai<font color='#00b034'> Ketua Desa </font>test."
+  },
+  {
+   "n": 7947,
+   "text": "Sebagai<font color='#00b034'> Ketua Desa </font>sudah diakui hak anda untuk masuk kedalam tim penjaga. Cari untuk laporan ke<font color='#00b034'> Jounin </font>."
+  },
+  {
+   "n": 7948,
+   "text": "Pergi ke<font color='#00b034'> Tambang Batu </font>dan perkuat<font color='#00b034'> Genin </font>yang ditempatkan disana."
+  },
+  {
+   "n": 7949,
+   "text": "Dari seekor<font color='#00b034'> Stinger Bee </font>, dapatkan<font color='#00b034'> Bisa Sengatan </font> untuk menyelamatkan wisatawan yang tersengat."
+  },
+  {
+   "n": 7950,
+   "text": "Berhasil mengatasi krisis, kembali ke desa dan laporan ke<font color='#00b034'> Jounin </font>."
+  },
+  {
+   "n": 7951,
+   "text": "Pergi ke<font color='#00b034'> Tambang Batu </font> dan temukan<font color='#00b034'> Monster Sushi </font>untuk mendapatkan Wasabi Sushi Roll yang dibutuhkan untuk perjamuan."
+  },
+  {
+   "n": 7952,
+   "text": "Beritahu ke penduduk desa untuk datang ke<font color='#00b034'> aula </font>untuk mengikuti jamuan perayaan."
+  },
+  {
+   "n": 7953,
+   "text": "Para<font color='#00b034'> Genin </font>mengadakan rapat untuk mencari jalan keluar dari kesulitan. Pergi ke<font color='#00b034'> Tambang Batu </font>dan temukan petunjuk dimana para<font color='#00b034'> Genin</font>."
+  },
+  {
+   "n": 7954,
+   "text": "<font color='#00b034'> Genin </font> telah diserang oleh <font color='#00b034'> Scarlet Bandit </font>. Lenyapkan kelompok<font color='#00b034'> Scarlet Bandit </font>."
+  },
+  {
+   "n": 7955,
+   "text": "Temukan anjing ninja pakun yang mencuri<font color='#00b034'> Scroll Pengintaian </font>, <font color='#00b034'></font>."
+  },
+  {
+   "n": 7956,
+   "text": "Para<font color='#00b034'> Genin </font>menemukan<font color='#00b034'> Scroll Pengintaian </font>, berikan itu ke<font color='#00b034'> ketua desa </font>."
+  },
+  {
+   "n": 7957,
+   "text": "Setelah menerima berita bahwa Iblis berencana untuk menyerang desa, <font color='#00b034'> Ketua Desa </font>telah memutuskan untuk menyerang terlebih dahulu."
+  },
+  {
+   "n": 7958,
+   "text": "Menolong<font color='#00b034'> Genin </font>temukan anjing ninja pakkun yang hilang<font color='#00b034'> </font>."
+  },
+  {
+   "n": 7959,
+   "text": "Kalahkan Iblis pengendali dari bayangan, <font color='#00b034'> Warrior of Darkness </font>."
+  },
+  {
+   "n": 7960,
+   "text": "<font color='#00b034'> Pakkun </font>menemukan identitas diri sebenarnya dari<font color='#00b034'> Warrior of Darkness </font>. Laporkan ini ke<font color='#00b034'> Genin </font>."
+  },
+  {
+   "n": 7961,
+   "text": "Laporkan ke<font color='#00b034'> Ketua Desa </font>tentang informasi mengenai<font color='#00b034'> Warrior of Darkness </font>."
+  },
+  {
+   "n": 7962,
+   "text": "Dengar apa yang dikatakan<font color='#00b034'> Ketua Desa </font>berbicara tentang sejarah<font color='#00b034'> Desa Api </font>."
+  },
+  {
+   "n": 7963,
+   "text": "Ikut serta dalam seleksi latihan special di<font color='#00b034'> Kota Malaikat</font>, dan lenyapkan<font color='#00b034'> Sweet Potato Demon </font>mereka yang menghancurkan hasil panen desa."
+  },
+  {
+   "n": 7964,
+   "text": "Rupanya si<font color='#00b034'> Boss Toko Barang </font>telah mengalami sebuah kecelakaan, lihat apa yang bisa kamu lakukan untuk menolong dia."
+  },
+  {
+   "n": 7965,
+   "text": "Si<font color='#00b034'> pedagang keliling </font>yang sedang berbelanja grosir belum tiba di desa pada tanggal yang di tentukan. Tolong<font color='#00b034'> Boss Toko Barang </font>menemukan<font color='#00b034'> pedagang keliling </font>."
+  },
+  {
+   "n": 7966,
+   "text": "Menolong<font color='#00b034'> pedagang keliling </font>mengambil barang yang di curi<font color='#00b034'> Grinning Monkey </font>."
+  },
+  {
+   "n": 7967,
+   "text": "Hancurkan<font color='#00b034'> Scarlet Bandit </font>di<font color='#00b034'> Tambang Batu </font>dan mengawal<font color='#00b034'> Pedagang Keliling </font>menuju desa."
+  },
+  {
+   "n": 7968,
+   "text": "Sangat cepat mendekati hari untuk pergi ke<font color='#00b034'> Kota Malaikat </font>, Lapor ke<font color='#00b034'> Ketua Desa </font>sebelum off."
+  },
+  {
+   "n": 7969,
+   "text": "Menolong<font color='#00b034'> Genin </font>mengumpulkan bahan untuk membuat<font color='#00b034'> Bola Nasi Melon </font>."
+  },
+  {
+   "n": 7970,
+   "text": "Mengirim<font color='#00b034'> Genin</font>ucapan dan hadiah untuk<font color='#00b034'> Master Yuan </font>."
+  },
+  {
+   "n": 7971,
+   "text": "Menerima tes<font color='#00b034'> Ketua Yuan</font> dan hukum<font color='#00b034'> Treants </font>yang mengganggu kedamaian desa."
+  },
+  {
+   "n": 7972,
+   "text": "Pergi ke<font color='#00b034'> Kota Malaikat </font><font color='#00b034'> aula </font>dan salam ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 7973,
+   "text": "Menolong<font color='#00b034'> Boss Toko Barang </font>dari masalah."
+  },
+  {
+   "n": 7974,
+   "text": "Si<font color='#00b034'> Boss Toko Barang </font>menemukan reruntuhan dekat<font color='#00b034'> Jalan Senja </font>, dan telah diserang. Bantu dia menyingkirkan dari kekejaman Kappas."
+  },
+  {
+   "n": 7975,
+   "text": "Laporkan ke<font color='#00b034'> Ketua Yuan </font>tentang masalah<font color='#00b034'> Boss Toko Barang' </font>."
+  },
+  {
+   "n": 7976,
+   "text": "Permintaan<font color='#00b034'> Ketua Yuan</font>, pergi dan bantu<font color='#00b034'> Lady Feng </font>."
+  },
+  {
+   "n": 7977,
+   "text": "Hancurkan setan kejam<font color='#00b034'> Maneater Blossoms </font>."
+  },
+  {
+   "n": 7978,
+   "text": "<font color='#00b034'> Pedagang keliling </font>sedang mengalami kesulitan di<font color='#00b034'> Jalan Senja </font>, pergi selamatkan dia."
+  },
+  {
+   "n": 7979,
+   "text": "Mengalahkan bandit minta ongkos pengganti dari<font color='#00b034'> pedagang keliling </font>."
+  },
+  {
+   "n": 7980,
+   "text": "Laporkan pertolongan anda ke desa pada<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 7981,
+   "text": "Selamatkan warga desa yang terkena serangan energy setan."
+  },
+  {
+   "n": 7982,
+   "text": "Temukan<font color='#00b034'> Lady Feng </font>dan memahami metode untuk membantu penduduk desa membangun kembali ladangnya."
+  },
+  {
+   "n": 7983,
+   "text": "Hancurkan<font color='#00b034'> Iblis Jagung </font>dan kumpulkan<font color='#00b034'> Kue Nasi </font>yang cocok untuk pertumbuhan."
+  },
+  {
+   "n": 7984,
+   "text": "Lenyapkan<font color='#00b034'> Chevaliers </font>yang merampok rumah-rumah di desa"
+  },
+  {
+   "n": 7985,
+   "text": "Pergi ke<font color='#00b034'> Dataran Subur </font>dan temukan barang-barang curian."
+  },
+  {
+   "n": 7986,
+   "text": "Tangkap<font color='#00b034'> Digrats </font>dan ambil barang-barang milik penduduk desa."
+  },
+  {
+   "n": 7987,
+   "text": "Laporkan masalah rumah dibangun kembali ke<font color='#00b034'> Ketua Yuan </font>."
+  },
+  {
+   "n": 7988,
+   "text": "Terima pesanan<font color='#00b034'> Ketua Ninja </font>dan menyelidiki penampakan iblis dekat<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 7989,
+   "text": "Setelah mengumpulkan informasi dari<font color='#00b034'> Boss Toko Barang </font>, temui<font color='#00b034'> Crossroad </font>untuk mengejar jejak iblis."
+  },
+  {
+   "n": 7990,
+   "text": "Di<font color='#00b034'> Crossroad </font>, <font color='#00b034'> Shadow Bats </font> yang ikut campur."
+  },
+  {
+   "n": 7991,
+   "text": "Saat di<font color='#00b034'> Lintasan Setapak </font>, temukan<font color='#00b034'> Secret Tunnel Guard </font>garrisoned disana dan mengerti perjalanan iblis dari<font color='#00b034'> Kota Iblis </font>."
+  },
+  {
+   "n": 7992,
+   "text": "Menolong<font color='#00b034'> Secret Tunnel Guard </font>hancurkan<font color='#00b034'> Kota Iblis </font><font color='#00b034'> Wildhaired Banshees </font>."
+  },
+  {
+   "n": 7993,
+   "text": "<font color='#00b034'> Secret Tunnel Guard </font>telah menemukan bahwat<font color='#00b034'> Ghost Grannies </font>adalah dalang dalam pelarian diri setan-setan lain. Pergi dan bunuh mereka."
+  },
+  {
+   "n": 7994,
+   "text": "Laporkan tentang lemahnya segel<font color='#00b034'> Kota Iblis </font>ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 7995,
+   "text": "Pergi ke<font color='#00b034'> Dataran Subur </font>dan periksa segelnya."
+  },
+  {
+   "n": 7996,
+   "text": "Selidiki gossip aneh dekat permukaan<font color='#00b034'> Kota Malaikat </font>."
+  },
+  {
+   "n": 7997,
+   "text": "Laporkan penyelidikan terakhir ke<font color='#00b034'> Ketua Yuan </font>dan ke<font color='#00b034'> Ketua Ninja </font>."
+  },
+  {
+   "n": 7998,
+   "text": "Dengarkan<font color='#00b034'> Ketua Ninja </font>menjelaskan gossip ⟨0⟩ iblis."
+  },
+  {
+   "n": 7999,
+   "text": "Kumpulkan bahan yang dapat menindas Iblis."
+  },
+  {
+   "n": 8000,
+   "text": "Berikan<font color='#00b034'> Minyak Iblis Katak </font>ke<font color='#00b034'> Ketua Ninja </font>untuk dibuat menjadi<font color='#00b034'> Lilin Pembebasan</font>."
+  },
+  {
+   "n": 8001,
+   "text": "Pergilah ke<font color='#00b034'> Lintasan Setapak </font>dan hancurkan iblis penarik wisatawan."
+  },
+  {
+   "n": 8002,
+   "text": "Bicaralah ke<font color='#00b034'> Ahli Agama </font>yang telah cepat datang kesini untuk menghancurkan iblis."
+  }
+ ]
+}

@@ -26,7 +26,8 @@
     "i18n:extract": "node tools/i18n/extract-source.ts",
     "i18n:candidates": "node tools/i18n/build-glossary-candidates.ts",
     "i18n:names": "node tools/i18n/names.ts",
-    "game-data:import": "node tools/game-data/import.ts"
+    "game-data:import": "node tools/game-data/import.ts",
+    "i18n:sentences": "node tools/i18n/sentences.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

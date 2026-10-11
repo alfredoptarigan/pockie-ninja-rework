@@ -1,0 +1,862 @@
+{
+ "terms": {
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Kuchiki Byakuya": "Byakuya Kuchiki",
+  "Uchiha Itachi": "Itachi Uchiha",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Come Come Paradise": "Make Out Paradise",
+  "Talisman Air": "Water Talisman",
+  "Bukti": "Proof",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Ghost Lady": "Phantom Lady",
+  "Uzumaki Naruto": "Naruto Uzumaki",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Hollowfied Grimmjow": "Hollowified Grimmjow",
+  "Aizen": "Sosuke Aizen",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Kuchiki Rukia": "Rukia Kuchiki",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Penyihir": "Sorcerer"
+ },
+ "units": [
+  {
+   "n": 10540,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ggio Vega Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ +⟨1⟩ Ggio Vega Kostum untuk berkesempatan medapatkan Ggio Vega Kostum ＋⟨2⟩，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10541,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shiba Kuukaku Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Shiba Kuukaku Kostum untuk menghasilkan +⟨2⟩ Shiba Kuukaku Kostum.</font>"
+  },
+  {
+   "n": 10542,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nanao Ise Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Nanao Ise Kostum untuk menghasilkan +⟨2⟩ Nanao Ise Kostum.</font>"
+  },
+  {
+   "n": 10543,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momo Hinamori Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Momo Hinamori Kostum untuk menghasilkan +⟨2⟩ Momo Hinamori Kostum.</font>"
+  },
+  {
+   "n": 10544,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Rangiku Matsumoto Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Rangiku Matsumoto Kostum untuk menghasilkan +⟨2⟩ Rangiku Matsumoto Kostum.</font>"
+  },
+  {
+   "n": 10545,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Inoue Orihime Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Inoue Orihime Kostum untuk menghasilkan +⟨2⟩ Inoue Orihime Kostum.</font>"
+  },
+  {
+   "n": 10546,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurenai Yuuhi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kurenai Yuuhi Kostum untuk menghasilkan +⟨2⟩ Kurenai Yuuhi Kostum.</font>"
+  },
+  {
+   "n": 10547,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hyuga Hinata Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hyuga Hinata Kostum untuk menghasilkan +⟨2⟩ Hyuga Hinata Kostum.</font>"
+  },
+  {
+   "n": 10548,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Chi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Chi Kostum untuk menghasilkan +⟨2⟩ Chi Kostum.</font>"
+  },
+  {
+   "n": 10549,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Shizune Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Shizune Kostum untuk menghasilkan +⟨2⟩ Shizune Kostum.</font>"
+  },
+  {
+   "n": 10550,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi White Ichigo Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ White Ichigo Kostum untuk menghasilkan +⟨2⟩ White Ichigo Kostum.</font>"
+  },
+  {
+   "n": 10551,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Alice Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Alice Kostum untuk menghasilkan +⟨2⟩ Alice Kostum.</font>"
+  },
+  {
+   "n": 10552,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Priest Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Priest Kostum untuk menghasilkan +⟨2⟩ Priest Kostum.</font>"
+  },
+  {
+   "n": 10553,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ghost Lady Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Ghost Lady Kostum untuk menghasilkan +⟨2⟩ Ghost Lady Kostum.</font>"
+  },
+  {
+   "n": 10554,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Zombie Lady Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Zombie Lady Kostum untuk menghasilkan +⟨2⟩ Zombie Lady Kostum.</font>"
+  },
+  {
+   "n": 10555,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mizukage Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Mizukage Kostum untuk menghasilkan +⟨2⟩ Mizukage Kostum.</font>"
+  },
+  {
+   "n": 10556,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uzumaki Naruto Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Uzumaki Naruto Kostum untuk menghasilkan +⟨2⟩ Uzumaki Naruto Kostum.</font>"
+  },
+  {
+   "n": 10557,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Gaara Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Gaara Kostum untuk menghasilkan +⟨2⟩ Gaara Kostum.</font>"
+  },
+  {
+   "n": 10558,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hatake Kakashi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hatake Kakashi Kostum untuk menghasilkan +⟨2⟩ Hatake Kakashi Kostum.</font>"
+  },
+  {
+   "n": 10559,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uchiha Sasuke Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Uchiha Sasuke Kostum untuk menghasilkan +⟨2⟩ Uchiha Sasuke Kostum.</font>"
+  },
+  {
+   "n": 10560,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Uchiha Itachi Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Uchiha Itachi Kostum untuk menghasilkan +⟨2⟩ Uchiha Itachi Kostum.</font>"
+  },
+  {
+   "n": 10561,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Ichigo Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Bomb Ichigo Kostum untuk menghasilkan +⟨2⟩ Bomb Ichigo Kostum.</font>"
+  },
+  {
+   "n": 10562,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩nd Hokage Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨1⟩ +⟨2⟩ ⟨3⟩nd Hokage Kostum untuk menghasilkan +⟨4⟩ ⟨5⟩nd Hokage Kostum.</font>"
+  },
+  {
+   "n": 10563,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Orochimaru Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Orochimaru Kostum untuk menghasilkan +⟨2⟩ Orochimaru Kostum.</font>"
+  },
+  {
+   "n": 10564,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Zangetsu Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Zangetsu Kostum untuk menghasilkan +⟨2⟩ Zangetsu Kostum.</font>"
+  },
+  {
+   "n": 10565,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩rd Hokage Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨1⟩ +⟨2⟩ ⟨3⟩rd Hokage Kostum untuk menghasilkan +⟨4⟩ ⟨5⟩rd Hokage Kostum.</font>"
+  },
+  {
+   "n": 10566,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Grimmjow Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hollowfied Grimmjow Kostum untuk menghasilkan +⟨2⟩ Hollowfied Grimmjow Kostum.</font>"
+  },
+  {
+   "n": 10567,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Aizen Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Aizen Kostum untuk menghasilkan +⟨2⟩ Aizen Kostum.</font>"
+  },
+  {
+   "n": 10568,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi ⟨0⟩th Hokage Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨1⟩ +⟨2⟩ ⟨3⟩th Hokage Kostum untuk menghasilkan +⟨4⟩ ⟨5⟩th Hokage Kostum.</font>"
+  },
+  {
+   "n": 10569,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Jiraiya Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Jiraiya Kostum untuk menghasilkan +⟨2⟩ Jiraiya Kostum.</font>"
+  },
+  {
+   "n": 10570,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Sakura Haruno Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Sakura Haruno Kostum untuk menghasilkan +⟨2⟩ Sakura Haruno Kostum.</font>"
+  },
+  {
+   "n": 10571,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arale Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Arale Kostum untuk menghasilkan +⟨2⟩ Arale Kostum.</font>"
+  },
+  {
+   "n": 10572,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Ulquiorra Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Ulquiorra Kostum untuk menghasilkan +⟨2⟩ Ulquiorra Kostum.</font>"
+  },
+  {
+   "n": 10573,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yamanaka Ino Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Yamanaka Ino Kostum untuk menghasilkan +⟨2⟩ Yamanaka Ino Kostum.</font>"
+  },
+  {
+   "n": 10574,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Mitarashi Anko Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Mitarashi Anko Kostum untuk menghasilkan +⟨2⟩ Mitarashi Anko Kostum.</font>"
+  },
+  {
+   "n": 10575,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Temari Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Temari Kostum untuk menghasilkan +⟨2⟩ Temari Kostum.</font>"
+  },
+  {
+   "n": 10576,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tenten Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Tenten Kostum untuk menghasilkan +⟨2⟩ Tenten Kostum.</font>"
+  },
+  {
+   "n": 10577,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Haku Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Haku Kostum untuk menghasilkan +⟨2⟩ Haku Kostum.</font>"
+  },
+  {
+   "n": 10578,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hatake Kakashi Ketika dipakai.<br>Sebagai item utama, digabungkan dengan ⟨0⟩ ＋⟨1⟩ Hatake Kakashi Kostum untuk berkesempatan medapatkan Hatake Kakashi Kostum＋⟨2⟩，Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 10579,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kurotsuchi Nemu Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kurotsuchi Nemu Kostum untuk menghasilkan +⟨2⟩ Kurotsuchi Nemu Kostum.</font>"
+  },
+  {
+   "n": 10580,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kusajishi Yachiru Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kusajishi Yachiru Kostum untuk menghasilkan +⟨2⟩ Kusajishi Yachiru Kostum.</font>"
+  },
+  {
+   "n": 10581,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kotetsu Isane Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kotetsu Isane Kostum untuk menghasilkan +⟨2⟩ Kotetsu Isane Kostum.</font>"
+  },
+  {
+   "n": 10582,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Konan Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Konan Kostum untuk menghasilkan +⟨2⟩ Konan Kostum.</font>"
+  },
+  {
+   "n": 10583,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Yadomaru Sasha Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Yadomaru Sasha Kostum untuk menghasilkan +⟨2⟩ Yadomaru Sasha Kostum.</font>"
+  },
+  {
+   "n": 10584,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi White Ulquiorra Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ White Ulquiorra Kostum untuk menghasilkan +⟨2⟩ White Ulquiorra Kostum.</font>"
+  },
+  {
+   "n": 10585,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Arisawa Tatsuki Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Arisawa Tatsuki Kostum untuk menghasilkan +⟨2⟩ Arisawa Tatsuki Kostum.</font>"
+  },
+  {
+   "n": 10586,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Bomb Rukia Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Bomb Rukia Kostum untuk menghasilkan +⟨2⟩ Bomb Rukia Kostum.</font>"
+  },
+  {
+   "n": 10587,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Tsunade Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Tsunade Kostum untuk menghasilkan +⟨2⟩ Tsunade Kostum.</font>"
+  },
+  {
+   "n": 10588,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Rukia Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kuchiki Rukia Kostum untuk menghasilkan +⟨2⟩ Kuchiki Rukia Kostum.</font>"
+  },
+  {
+   "n": 10589,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Momochi Zabuza Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Momochi Zabuza Kostum untuk menghasilkan +⟨2⟩ Momochi Zabuza Kostum.</font>"
+  },
+  {
+   "n": 10590,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Hollowfied Ulquiorra Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Hollowfied Ulquiorra Kostum untuk menghasilkan +⟨2⟩ Hollowfied Ulquiorra Kostum.</font>"
+  },
+  {
+   "n": 10591,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Kuchiki Byakuya Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Kuchiki Byakuya Kostum untuk menghasilkan +⟨2⟩ Kuchiki Byakuya Kostum.</font>"
+  },
+  {
+   "n": 10592,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Nelliel Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Nelliel Kostum untuk menghasilkan +⟨2⟩ Nelliel Kostum.</font>"
+  },
+  {
+   "n": 10593,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Meng Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Little Meng Kostum untuk menghasilkan +⟨2⟩ Little Meng Kostum.</font>"
+  },
+  {
+   "n": 10594,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Little Jun Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Little Jun Kostum untuk menghasilkan +⟨2⟩ Little Jun Kostum.</font>"
+  },
+  {
+   "n": 10595,
+   "text": "<font color='#5df9ff'>Kostum Mistis akan merubah kamu menjadi Love Aikawa Ketika dipakai.<br>Sebagai item utama. digabungkan dengan ⟨0⟩ +⟨1⟩ Love Aikawa Kostum untuk menghasilkan +⟨2⟩ Love Aikawa Kostum.</font>"
+  },
+  {
+   "n": 10596,
+   "text": "<font color='#5df9ff'>Mystic dice dapat memberikanmu keberuntungan<br> siapapun yang mendapatkan ⟨0⟩ <br>akan menerima hadiah yang menarik! </font><br>[line]<font color='#5df9ff'>coba dadu keberuntungan di Kota malaikat<br> utnuk mendapatkan restu atau dasar dari dadu yang akan kamu dapatkan.</font>"
+  },
+  {
+   "n": 10597,
+   "text": "<font color='#5df9ff'>Lihat pada original manuscript dari Come Come Paradise<br>Seluruh buku dapat diperoleh melalui sintesis yang benar.</font><br>[line]<font color='#5df9ff'>Tersedia di Toko Ninja<br>Sintesiskan dengan Page ⟨0⟩、⟨1⟩ atau ⟨2⟩ dapat menghasilkan book volume yang spesifik.</font>"
+  },
+  {
+   "n": 10598,
+   "text": "<font color='#5df9ff'>Lihat pada original manuscript dari Come Come Paradise<br>Seluruh buku dapat diperoleh melalui sintesis yang benar.</font><br>[line]<font color='#5df9ff'>Sintesiskan dengan Page ⟨0⟩、⟨1⟩ atau ⟨2⟩ dapat menghasilkan book volume yang spesifik.</font>"
+  },
+  {
+   "n": 10599,
+   "text": "<font color='#5df9ff'>Kakashi's favourite book, ditulis oleh Jiraiya.<br>dapat memperoleh prestasi atau gelar khusus setelah memakainya!</font>"
+  },
+  {
+   "n": 10600,
+   "text": "<font color='#5df9ff'>Makanan favorit Rock Lee, dibuat oleh little old lady.<br>dapat memperoleh prestasi atau gelar khusus setelah memakainya!</font>"
+  },
+  {
+   "n": 10601,
+   "text": "Telur yang buruk"
+  },
+  {
+   "n": 10602,
+   "text": "Chest Egg Lv⟨0⟩"
+  },
+  {
+   "n": 10603,
+   "text": "EXP Egg Lv⟨0⟩，memberikan ⟨1⟩ EXP"
+  },
+  {
+   "n": 10604,
+   "text": "EXP Egg Lv⟨0⟩，Memberikan ⟨1⟩ EXP"
+  },
+  {
+   "n": 10605,
+   "text": "EXP Egg Lv⟨0⟩, memberikan ⟨1⟩ EXP"
+  },
+  {
+   "n": 10606,
+   "text": "Medal Egg Lv⟨0⟩，hadiah medal ⟨1⟩"
+  },
+  {
+   "n": 10607,
+   "text": "Medal Egg Lv⟨0⟩，hadiah medals ⟨1⟩"
+  },
+  {
+   "n": 10608,
+   "text": "Stone Egg Lv⟨0⟩，hadiah batu ⟨1⟩"
+  },
+  {
+   "n": 10609,
+   "text": "<font color='#5df9ff'>Special medicine digunakan oleh Sakura, memulihkan ⟨0⟩ movement power dalam penggunaan.<br>dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨1⟩</font>\n<font color='#ff0000'>penggunaan item yang sama hanya ⟨2⟩ kali sehari</font>[line]<font color='#5df9ff'>Sakura Special Potion=Toad Arcanum+Toad Arcanum+Toad Arcanum.</font>"
+  },
+  {
+   "n": 10610,
+   "text": "<font color='#5df9ff'>Special medicine digunakan oleh Shizune, memulihkan ⟨0⟩ movement power saat digunakan.<br>dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨1⟩</font>\n<font color='#ff0000'>Penggunaan item yang sama hanya ⟨2⟩ kali sehari</font>[line]<font color='#5df9ff'>Shizune Special Potion=Sakura Special Potion+Sakura Special Potion+Sakura Special Potion.</font>"
+  },
+  {
+   "n": 10611,
+   "text": "<font color='#5df9ff'>Obat mujarab digunakan oleh Tsunade. Memulihkan ⟨0⟩ movement power.<br>Dapat digunakan sebagai makanan pet.<br>[line]Food type: Medicine<br>Tingkat kekenyangan:⟨1⟩</font>\n<font color='#ff0000'>Hanya dapat dipakai ⟨2⟩ kali sehari</font>[line]<font color='#5df9ff'>Tsunade's Special Potion=Shizune's Special Potion+Shizune's Special Potion+Shizune's Special Potion.</font>"
+  },
+  {
+   "n": 10612,
+   "text": "<font color='#5df9ff'>Balsem yang digunakan dari toad tribe, memulihkan ⟨0⟩ movement power .<br>dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>mengurangi tingkat kelaparan: ⟨1⟩</font>\n<font color='#ff0000'>Items yang memiliki kesamaan efek dapat digunakan ⟨2⟩ kali sehari</font>"
+  },
+  {
+   "n": 10613,
+   "text": "<font color='#5df9ff'>Balsem spesial dari Desa Konoha, memulihkan ⟨0⟩ movement power.<br>Dapat digunakan sebagai makanan pet.<br>[line]Tipe makanan: Medicine<br>Mengurangi tingkat kelaparan: ⟨1⟩</font>\n<font color='#ff0000'>Items yang memiliki kesamaan efek dapat digunakan ⟨2⟩ kali sehari</font>"
+  },
+  {
+   "n": 10614,
+   "text": "<font color='#5df9ff'>Talisman dibuat dari Amethyst memiliki efek menguntungkan pada pemakainya.</font>"
+  },
+  {
+   "n": 10615,
+   "text": "<font color='#5df9ff'>Sebuah bell terikat dengan darkfeather rune tassels yang mencurahkan kekuatan besar.</font>"
+  },
+  {
+   "n": 10616,
+   "text": "<font color='#5df9ff'>Talisman dibuat dari giok emas memiliki efek menguntungkan pada pemakainya.</font>"
+  },
+  {
+   "n": 10617,
+   "text": "<font color='#5df9ff'>Accessory diselimuti dengan aura tanah yang sanagat tebal.</font>"
+  },
+  {
+   "n": 10618,
+   "text": "<font color='#5df9ff'>Talisman tertanam dengan turmeric buds, melambangkan keanggunan.</font>"
+  },
+  {
+   "n": 10619,
+   "text": "<font color='#5df9ff'>Talisman diberkati oleh Fire Angel Michael.</font>"
+  },
+  {
+   "n": 10620,
+   "text": "<font color='#5df9ff'>Talisman beruang yang di berkati kekuatan dari Tsukuyomi.</font>"
+  },
+  {
+   "n": 10621,
+   "text": "<font color='#5df9ff'>The gleams permata bertatahkan dengan sinar musim panas, memberikan pemakainya berkat suci.with the rays of summer, giving its wearer divine blessings.</font>"
+  },
+  {
+   "n": 10622,
+   "text": "<font color='#5df9ff'>Sebuah cahaya memancar dari jade seperti phoenix yang bangkit dari abu kematian, saksi bersedia untuk tunduk kepadanya.</font>"
+  },
+  {
+   "n": 10623,
+   "text": "<font color='#5df9ff'>Holy Talisman memiliki kekuatan suci Api. Sebuah artefak langka.</font>"
+  },
+  {
+   "n": 10624,
+   "text": "<font color='#5df9ff'>Pendant adalah simbol kegigihan dan semangat yang secara aktif melindungi pemiliknya.</font>"
+  },
+  {
+   "n": 10625,
+   "text": "<font color='#5df9ff'>Aksesori diselimuti oleh aura alam yang sangat tebal .</font>"
+  },
+  {
+   "n": 10626,
+   "text": "<font color='#5df9ff'>sebuah lonceng terikat dengan brightburn rune tassels,mempunyai kekuatan yang besar dalam item ini.</font>"
+  },
+  {
+   "n": 10627,
+   "text": "<font color='#5df9ff'>Talisman dibuat dari sapphire memiliki efek menguntungkan pada pemakainya.</font>"
+  },
+  {
+   "n": 10628,
+   "text": "<font color='#5df9ff'>Accessory diselimuti uap vulkanik yang tebal.</font>"
+  },
+  {
+   "n": 10629,
+   "text": "<font color='#5df9ff'>Talisman terikat dengan kuncup mawar, melambangkan cinta.</font>"
+  },
+  {
+   "n": 10630,
+   "text": "<font color='#5df9ff'>Talisman diberkati oleh Earth Angel Uriel.</font>"
+  },
+  {
+   "n": 10631,
+   "text": "<font color='#5df9ff'>Talisman beruang yang mempunyai  kekuatan dari Susanoo.</font>"
+  },
+  {
+   "n": 10632,
+   "text": "<font color='#5df9ff'>Hiasan Permata ini bertatahkan dengan embun beku musim dingin untuk seseorang dengan wajah hormat.</font>"
+  },
+  {
+   "n": 10633,
+   "text": "<font color='#5df9ff'>Sama seperti angin dingin yang meledakan wajah seseorang dengan matahari musim dingin yang menghadap ke tebing gunung, auranya memanggil semua kekuatan kedalamnya.</font>"
+  },
+  {
+   "n": 10634,
+   "text": "<font color='#5df9ff'>Holy Talisman memiliki kekuatan besar dari Es Bersalju. Sebuah artefak langka.</font>"
+  },
+  {
+   "n": 10635,
+   "text": "<font color='#5df9ff'>Pendant yang merupakan simbol keterbukaan dan terus berkembang secara aktif dapat melindungi pemiliknya.</font>"
+  },
+  {
+   "n": 10636,
+   "text": "<font color='#5df9ff'>Talisman tertanam dengan sekuncup mawar, melambangkan kemurnian.</font>"
+  },
+  {
+   "n": 10637,
+   "text": "<font color='#5df9ff'>A bell Terikat dengan frostwyrm rune tassels, mempunyai kekuatan besar dalam item ini</font>"
+  },
+  {
+   "n": 10638,
+   "text": "<font color='#5df9ff'>A bell Terikat dengan frostron rune tassels, mempunyai kekuatan besar dalam item ini</font>"
+  },
+  {
+   "n": 10639,
+   "text": "<font color='#5df9ff'>A cross brimming dengan kemurnian, memiliki kekuatan untuk menindas iblis.</font>"
+  },
+  {
+   "n": 10640,
+   "text": "<font color='#5df9ff'>A cross brimming dengan pengabdian taat kepercayaan yang menawarkan perlindungan suci.</font>"
+  },
+  {
+   "n": 10641,
+   "text": "<font color='#5df9ff'>A cross pernah dipakai oleh pemburu Iblis besar. Beberapa pemilik tetap mempunyai kekuatan.</font>"
+  },
+  {
+   "n": 10642,
+   "text": "<font color='#5df9ff'>Necklace dibuat dari tulang binatang raksasa tua, hanya yang kuat yang layak membawa ini.</font>"
+  },
+  {
+   "n": 10643,
+   "text": "<font color='#5df9ff'>A necklace tengkorak dan tulang, memanggil semua kekuatan.</font>"
+  },
+  {
+   "n": 10644,
+   "text": "<font color='#5df9ff'>Necklace dibuat dari taring naga. Bukti yang diperoleh hanya dari juara.</font>"
+  },
+  {
+   "n": 10645,
+   "text": "<font color='#5df9ff'>Talisman Air diberkati oleh Angel Gabriel.</font>"
+  },
+  {
+   "n": 10646,
+   "text": "<font color='#5df9ff'>Talisman of shimmering gold. Siapapun yang memegang akan diberkati.  </font>"
+  },
+  {
+   "n": 10647,
+   "text": "<font color='#5df9ff'>Kalung yang dibuat dari taring yang rapuh, tidak dapat dihancurkan. </font>"
+  },
+  {
+   "n": 10648,
+   "text": "<font color='#5df9ff'>Mengalir dengan kekuatan Zero. Pemakainya akan merasa kehilangan rasa takut.  </font>"
+  },
+  {
+   "n": 10649,
+   "text": "<font color='#5df9ff'>Kekuatan misterius Talisman ini akan membuat kamu jauh dari kemalangan.</font>"
+  },
+  {
+   "n": 10650,
+   "text": "<font color='#5df9ff'>Dingin memancarkan cahaya bintang dari Necklace, memanggil ketenangan batin.</font>"
+  },
+  {
+   "n": 10651,
+   "text": "<font color='#5df9ff'>Kalung yang jatuh dari proof of bravery. Hanya orang yang kuat yang dapat memilikinya.</font>"
+  },
+  {
+   "n": 10652,
+   "text": "<font color='#5df9ff'>Talisman beruang dengan kekuatan dari Amaterasu.</font>"
+  },
+  {
+   "n": 10653,
+   "text": "<font color='#5df9ff'>Talisman Dikenakan oleh pemula dari ninjutsu.</font>"
+  },
+  {
+   "n": 10654,
+   "text": "<font color='#5df9ff'>Ini pusaran hiasan Permata seperti Springwater dari surga, memberikan keberuntungan abadi bagi pemakainya.</font>"
+  },
+  {
+   "n": 10655,
+   "text": "<font color='#5df9ff'>Dibuat dari gigi naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10656,
+   "text": "<font color='#5df9ff'>Kekuatan Azure Dragon disegel dalam talisman.</font>"
+  },
+  {
+   "n": 10657,
+   "text": "<font color='#5df9ff'>Kekuatan Vermilion Bird disegel dalam talisman.</font>"
+  },
+  {
+   "n": 10658,
+   "text": "<font color='#5df9ff'>Kekuatan Black Tortoise disegel dalam talisman.</font>"
+  },
+  {
+   "n": 10659,
+   "text": "<font color='#5df9ff'>Satu bagian dari Lament cloth set.</font>"
+  },
+  {
+   "n": 10660,
+   "text": "<font color='#5df9ff'>Satu bagian dari Harvest Bugle cloth set.</font>"
+  },
+  {
+   "n": 10661,
+   "text": "<font color='#5df9ff'>Satu part dari Kage-level Sets.</font>"
+  },
+  {
+   "n": 10662,
+   "text": "<font color='#5df9ff'>Satu bagian dari Windstorm cloth set.</font>"
+  },
+  {
+   "n": 10663,
+   "text": "<font color='#5df9ff'>Bright Jade dibungkus dalam lembut cahaya fajar, memunculkan kenyamanan bagi semua yang mengatur mata untuknya.</font>"
+  },
+  {
+   "n": 10664,
+   "text": "<font color='#5df9ff'>Holy Talisman memiliki kekuatan ilahi dari tanah. Sebuah artefak langka.</font>"
+  },
+  {
+   "n": 10665,
+   "text": "<font color='#5df9ff'>Zanron Pendant dapat melindungi pemiliknya ketika diaktifkan</font>"
+  },
+  {
+   "n": 10666,
+   "text": "<font color='#5df9ff'>GM special</font>"
+  },
+  {
+   "n": 10667,
+   "text": "<font color='#5df9ff'>Sinar emas yang mempesona dari  belt pierce  menembus auranya bahkan lebih mencolok, mengejutkan musuh dengan kagum dan teror.</font>"
+  },
+  {
+   "n": 10668,
+   "text": "<font color='#5df9ff'>Belt ditempa dari froststeel, dan memancarkan aura mengerikan.</font>"
+  },
+  {
+   "n": 10669,
+   "text": "<font color='#5df9ff'>Belt disempurnakan dengan chakra petir selama pembuatannya.</font>"
+  },
+  {
+   "n": 10670,
+   "text": "<font color='#5df9ff'> Hanya braves yang melakukan peperangan yang tak terhitung jumlahnya akan mendapatkan Belt of Honor protection.</font>"
+  },
+  {
+   "n": 10671,
+   "text": "<font color='#5df9ff'>Ditinggalkan oleh generasi Para veteran battleworn yang mengenakan ini dalam perang, bayangan sunset merah gelap merupakan bukti sabuk untuk menyaksikan melalui era.</font>"
+  },
+  {
+   "n": 10672,
+   "text": "<font color='#5df9ff'>Bloody Belt plunges its wearer ke dalam pertempuran abadi. Hanya yang berkemauan keras dan tidak terpengaruh oleh trik-nya yang dapat memakainya.</font>"
+  },
+  {
+   "n": 10673,
+   "text": "<font color='#5df9ff'>Dapat melihat tekanan spiritual mengalir samar pada belt. Hal ini ditinggalkan oleh seseorang yang memiliki energi spiritual dalam jumlah besar . </font>"
+  },
+  {
+   "n": 10674,
+   "text": "<font color='#5df9ff'>Belt dibuat oleh shards dari meteor ungu. Ini akan melindungi pemakai dan meningkatkan potensi berperang. </font>"
+  },
+  {
+   "n": 10675,
+   "text": "<font color='#5df9ff'>Merupakan salah satu dari sepuluh di Dunia Hollow, sehingga memiliki kekuatan yang besar di dalamnya.</font>"
+  },
+  {
+   "n": 10676,
+   "text": "<font color='#5df9ff'>Ini akan menyimpan semua iblis, bahkan Hollow yang kuat akan menjauh dari kamu karena merasa takut.</font>"
+  },
+  {
+   "n": 10677,
+   "text": "<font color='#5df9ff'> Netherchill Belt dengan aura yang dipancarkan netherfrost tidak diterima dengan sebagian. Hanya mereka yang berkonstitusiyang bisa melakukan ini..</font>"
+  },
+  {
+   "n": 10678,
+   "text": "<font color='#5df9ff'>Belt embedded dengan bentuk Oval hijau yang elegan.</font>"
+  },
+  {
+   "n": 10679,
+   "text": "<font color='#5df9ff'>Dibuat dari Urat naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10680,
+   "text": "<font color='#5df9ff'>Elegant beltyang digunakan oleh malaikat sebelumnya. Pemakainya akan lebih menawan dengan menggunakannya.</font>"
+  },
+  {
+   "n": 10681,
+   "text": "<font color='#5df9ff'>Belt yang mengandung kekuatan Naga Tuhan. Hanya yang berani nyata dapat menggunakannya.</font>"
+  },
+  {
+   "n": 10682,
+   "text": "<font color='#5df9ff'>Bagian dari Tentara Suci, saleh dan misterius. </font>"
+  },
+  {
+   "n": 10683,
+   "text": "<font color='#5df9ff'>Sabuk indah yang sebelumnya digunakan oleh malaikat. Pengguna sabuk ini akan terlihat lebih mempesona.</font>"
+  },
+  {
+   "n": 10684,
+   "text": "<font color='#5df9ff'>Sabuk yang berisi tenaga dari Dragon Lord. Hanya pasukan yang gagah berani yang bisa menggunakannya.</font>"
+  },
+  {
+   "n": 10685,
+   "text": "<font color='#5df9ff'>>Bagian dari Sacred Army, sangat religius dan penuh dengan misteri.</font>"
+  },
+  {
+   "n": 10686,
+   "text": "<font color='#5df9ff'>GM Special.</font>"
+  },
+  {
+   "n": 10687,
+   "text": "<font color='#5df9ff'>Mengusir anjing dengan Wooden bat , kerusakan kecil.</font>"
+  },
+  {
+   "n": 10688,
+   "text": "<font color='#5df9ff'>Bramble Bat sangat mematikan cukup untuk membuat lubang di armors terberat.</font>"
+  },
+  {
+   "n": 10689,
+   "text": "<font color='#5df9ff'>Bahkan jika berat  tidak sampai melebihi '⟨0⟩ ton akan 'diberi label di atasnya,lelaki kuat yang berpengalaman masih diperlukan untuk memegang Rhapsody Hammer dengan mudah.</font>"
+  },
+  {
+   "n": 10690,
+   "text": "<font color='#5df9ff'>Pada dasarnya tidak ada senjata yang dapat membuat bahkan sedikit lekukan pada Hammer Dragonfang yang ditempa dari taring naga.</font>"
+  },
+  {
+   "n": 10691,
+   "text": "<font color='#5df9ff'>Skyshock Pierce memancarkan suara lengkingan yang menembus langit saat ada serangan.</font>"
+  },
+  {
+   "n": 10692,
+   "text": "<font color='#5df9ff'>Kabarnya Senjata dikerahkan oleh Demon Wildhammer.</font>"
+  },
+  {
+   "n": 10693,
+   "text": "<font color='#5df9ff'>Ditempa dari es beryl yang ditambang dari rawa yang paling dingin, kapak menyambut ganas musuh dengan kedinginan di punggung mereka.</font>"
+  },
+  {
+   "n": 10694,
+   "text": "<font color='#5df9ff'>Efek samping dari pukulan Hammer Gilded mengakibatkan pusing dan memperlambat gerakan.</font>"
+  },
+  {
+   "n": 10695,
+   "text": "<font color='#5df9ff'>Hammer digunakan oleh Iblis di masa lalu, membawa nasib buruk dengan para pesaingnya..</font>"
+  },
+  {
+   "n": 10696,
+   "text": "<font color='#5df9ff'>Suppression Hammer dikatakan mampu menekan kekuatan sepuluh ribu.</font>"
+  },
+  {
+   "n": 10697,
+   "text": "<font color='#5df9ff'>Thundering Hammer Membuat getaran pada semua hati</font>"
+  },
+  {
+   "n": 10698,
+   "text": "<font color='#5df9ff'>Sebuah pemukul besi berkarat, sangat menjijikan.</font>"
+  },
+  {
+   "n": 10699,
+   "text": "<font color='#5df9ff'>Simbol perang yang menakutkan.</font>"
+  },
+  {
+   "n": 10700,
+   "text": "<font color='#5df9ff'>Senjata yang dikerahkan oleh raksasa tua, orang-orang yang mempunyai pergelangan tangan yang lemah dapat melukai diri sendiri jika berusaha untuk mengangkat dari tanah.</font>"
+  },
+  {
+   "n": 10701,
+   "text": "<font color='#5df9ff'>Dapat digunakan oleh semua, menghapus berbagai jenis kotoran.</font>"
+  },
+  {
+   "n": 10702,
+   "text": "<font color='#5df9ff'>Mereka yang memegang Mythbeast Bat dikatakan memiliki kekuatan tak tertandingi.</font>"
+  },
+  {
+   "n": 10703,
+   "text": "<font color='#5df9ff'>Dengan tekad, bahkan batu palu kecil dapat digunakan untuk membuka jalan sepanjang gunung.</font>"
+  },
+  {
+   "n": 10704,
+   "text": "<font color='#5df9ff'>Pukulan dari tinju berat adalah kekuatan yang harus diperhitungkan.</font>"
+  },
+  {
+   "n": 10705,
+   "text": "<font color='#5df9ff'>Dibuat dari tulang naga besar, berisikan kekuatan naga.</font>"
+  },
+  {
+   "n": 10706,
+   "text": "<font color='#5df9ff'>Penyihir cinta menggunakan staf sihir mereka untuk mengetuk kepala kucing hitam mereka.</font>"
+  },
+  {
+   "n": 10707,
+   "text": "<font color='#5df9ff'>Hanya mereka yang belajar seni bela diri yang akrab dengan Octagon Hammer.</font>"
+  },
+  {
+   "n": 10708,
+   "text": "<font color='#5df9ff'>Labu yang menyeramkan bahkan keluar Jebees seperti monster</font>"
+  },
+  {
+   "n": 10709,
+   "text": "<font color='#5df9ff'>Blunt practice adalah item ninja yang digunakan oleh  ninjakita di Sekolah Ninja.</font>"
+  },
+  {
+   "n": 10710,
+   "text": "<font color='#5df9ff'>Girdles berpola dengan gambar yang menggemaskan. Penduduk desa yang membuat ini untuk anak-anak mereka untuk mencegah cedera berkelanjutan selama bermain.</font>"
+  },
+  {
+   "n": 10711,
+   "text": "<font color='#5df9ff'>Belt diselimuti kekuatan destruktif yang besar. Hanya dapat dipakai oleh juara sejati.</font>"
+  },
+  {
+   "n": 10712,
+   "text": "<font color='#5df9ff'>Dihiasi dengan runes berisi keseimbangan sempurna dari energi kosmis, Memungkinkan belt defenses untuk mendekat tak bisa ditembus.</font>"
+  },
+  {
+   "n": 10713,
+   "text": "<font color='#5df9ff'>Beltmemancarkan aura musim semi, memberikan semangat dan keceriaan ke pemakainya.</font>"
+  },
+  {
+   "n": 10714,
+   "text": "<font color='#5df9ff'>Basic ninja girdle.menyembunyikan langkah dalam gerakan pada saat di pakai</font>"
+  },
+  {
+   "n": 10715,
+   "text": "<font color='#5df9ff'>namesake adalah suatu benda kuno dianugerahkan kepada mereka yang mahir dalam Menyelinap dan mengintai. Windstorm Beltdimaksudkan bagi mereka yang layak untuk benda itu.</font>"
+  },
+  {
+   "n": 10716,
+   "text": "<font color='#5df9ff'>Girdle dipakai selama ritual  resmi pendeta. Memiliki kekuatan suci yang besar.</font>"
+  },
+  {
+   "n": 10717,
+   "text": "<font color='#5df9ff'>Belt dibuat dengan membunuh seorang Prajna memiliki kekuatan iblis yang besar..</font>"
+  },
+  {
+   "n": 10718,
+   "text": "<font color='#5df9ff'>Belt yang terbuat dari tengu , menyediakan pertahanan yang sangat baik, dan ringan juga.</font>"
+  },
+  {
+   "n": 10719,
+   "text": "<font color='#5df9ff'>Girdle dikenakan oleh high priests merupakan penghambaan yang memiliki kekuatan suci.</font>"
+  },
+  {
+   "n": 10720,
+   "text": "<font color='#5df9ff'>merupakan simbol dari kekuatan deity. Hanya mereka yang layak dapat memakai ini.</font>"
+  },
+  {
+   "n": 10721,
+   "text": "<font color='#5df49ff'>Pakaian bermotif dengan gambar yang menggemaskan. Dikenakan oleh anak-anak desa.</font>"
+  },
+  {
+   "n": 10722,
+   "text": "<font color='#5df58ff'>Battle Suit diselimuti kekuatan destruktif yang besar. Hanya dapat dipakai oleh juara sejati.</font>"
+  },
+  {
+   "n": 10723,
+   "text": "<font color='#5df60ff'>Dihiasi dengan runes berisi keseimbangan sempurna dari energi kosmis, sehingga pertahanan Lapisan Armor untuk mendekat tak bisa ditembus.</font>"
+  },
+  {
+   "n": 10724,
+   "text": "<font color='#5df49ff'>Pakaian yang memancarkan aura musim semi, menyuntikkan semangat dan keceriaan ke pemakainya.</font>"
+  },
+  {
+   "n": 10725,
+   "text": "<font color='#5df52ff'>Pakaian dasar ninja.Menyembunyikan pemakainya selama gerakan.</font>"
+  },
+  {
+   "n": 10726,
+   "text": "<font color='#5df53ff'>Windstorm adalah Subject kuno dianugerahkan kepada mereka yang mahir dalam siluman dan pengintaian. Windstorm Clothes Kostum dimaksudkan bagi mereka yang layak.</font>"
+  },
+  {
+   "n": 10727,
+   "text": "<font color='#5df54ff'>Dipakai selama ritual  resmi pendeta. Memiliki kekuatan suci yang besar.</font>"
+  },
+  {
+   "n": 10728,
+   "text": "<font color='#5df55ff'>Sebuah jubah sihir dibuat dengan membunuh seorang Prajna memiliki kekuatan iblis yang besar.</font>"
+  },
+  {
+   "n": 10729,
+   "text": "<font color='#5df55ff'>Sebuah jubah sihir yang terbuat dari tengu , menyediakan pertahanan yang sangat baik, dan ringan juga.</font>"
+  },
+  {
+   "n": 10730,
+   "text": "<font color='#5df55ff'>Sebuah jubah sihir dikenakan oleh high priests merupakan penghambaan yang memiliki kekuatan suci.</font>"
+  },
+  {
+   "n": 10731,
+   "text": "<font color='#5df58ff'>Battle Suit merupakan simbol dari kekuatan deity.Hanya mereka yang layak dapat memakai ini.</font>"
+  },
+  {
+   "n": 10732,
+   "text": "<font color='#5df49ff'>Hat  bermotif dengan gambar yang menggemaskan. Dikenakan oleh anak-anak desa.</font>"
+  },
+  {
+   "n": 10733,
+   "text": "<font color='#5df58ff'>Visor diselimuti kekuatan destruktif yang besar. Hanya dapat dipakai oleh juara sejati.</font>"
+  },
+  {
+   "n": 10734,
+   "text": "<font color='#5df97ff'>Dihiasi dengan runes berisi keseimbangan sempurna dari energi kosmis, Memungkinkan Visor defenses untuk mendekat tak bisa ditembus.</font>"
+  },
+  {
+   "n": 10735,
+   "text": "<font color='#5df49ff'>Hat memancarkan aura musim semi, memberikan semangat dan keceriaan ke pemakainya.</font>"
+  },
+  {
+   "n": 10736,
+   "text": "<font color='#5df52ff'>Basic ninja wear.menyembunyikan langkah dalam gerakan pada saat di pakai</font>"
+  },
+  {
+   "n": 10737,
+   "text": "<font color='#5df91ff'>namesake adalah suatu benda kuno dianugerahkan kepada mereka yang mahir dalam Menyelinap dan mengintai. Windstorm Banddimaksudkan bagi mereka yang layak untuk benda itu.</font>"
+  },
+  {
+   "n": 10738,
+   "text": "<font color='#5df55ff'>A mask dibuat dengan membunuh seorang Prajna memiliki kekuatan iblis yang besar..</font>"
+  },
+  {
+   "n": 10739,
+   "text": "<font color='#5df93ff'>Bamboo Hat yang terbuat dari tengu , menyediakan pertahanan yang sangat baik, dan ringan juga.</font>"
+  },
+  {
+   "n": 10740,
+   "text": "<font color='#5df55ff'>Band dikenakan oleh high priests merupakan penghambaan yang memiliki kekuatan suci.</font>"
+  },
+  {
+   "n": 10741,
+   "text": "<font color='#5df95ff'>merupakan simbol dari kekuatan deity.Hanya mereka yang layak dapat memakai ini.</font>"
+  },
+  {
+   "n": 10742,
+   "text": "<font color='#5df49ff'>Gloves bermotif dengan gambar yang menggemaskan. Dikenakan oleh anak-anak desa.</font>"
+  },
+  {
+   "n": 10743,
+   "text": "<font color='#5df167ff'>Gloves diselimuti kekuatan destruktif yang besar. Hanya dapat dipakai oleh juara sejati.</font>"
+  },
+  {
+   "n": 10744,
+   "text": "<font color='#5df168ff'>Dihiasi dengan runes berisi keseimbangan sempurna dari energi kosmis, Memungkinkan Glove defenses untuk mendekat tak bisa ditembus.</font>"
+  },
+  {
+   "n": 10745,
+   "text": "<font color='#5df49ff'>Gloves  memancarkan aura dari musim semi, memberikan semangat dan kegembiraan ke pemakainya.</font>"
+  },
+  {
+   "n": 10746,
+   "text": "<font color='#5df160ff'>Basic ninja wear Menyembunyikan pemakainya selama gerakan.</font>"
+  }
+ ]
+}

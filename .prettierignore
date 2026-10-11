@@ -8,3 +8,4 @@ client/public/assets
 .claude
 tools/i18n/*.json
 server/data/game
+tools/i18n/work

@@ -1,0 +1,1255 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Soifon": "Soi Fon",
+  "Hitsugaya Toushiro": "Toshiro Hitsugaya",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "EXP Mark": "Exp Mark",
+  "Advanced Inscription Talisman": "High Level Inscription Talisman",
+  "low level Inscription Talisman": "Low Level Inscription Talisman",
+  "Kota Iblis": "Demon City",
+  "Jalan Kematian": "Marsh of Death",
+  "Daratan Patah Hati": "Plains of Despair",
+  "Serangan": "Attack",
+  "Blok": "Block",
+  "Katon": "Fire Release",
+  "Doton": "Earth Release",
+  "Kaminari": "Thunder Release",
+  "Kaze": "Wind Release",
+  "Alat Ninja": "Ninja Tool",
+  "Teknik Penyegelan": "Sealing Technique",
+  "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
+  "Kurosaki Ichigo": "Ichigo Kurosaki",
+  "Grimmjow": "Grimmjow Jaegerjaquez",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Abarai Renji": "Renji Abarai",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shihouin Yoruichi": "Yoruichi Shihoin",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Inoue Orihime": "Orihime Inoue",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Hyuga Hinata": "Hinata Hyuga",
+  "Aizen": "Sosuke Aizen",
+  "Halibel": "Tier Harribel"
+ },
+ "units": [
+  {
+   "n": 9524,
+   "text": "<font color='#5df9ff'>Ninja item Basic<br>Sekolah Item Ninja Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9525,
+   "text": "<font color='#5df9ff'>Illusion Basic<br>ISekolah Ilusi Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9526,
+   "text": "<font color='#5df9ff'>Kaze Master<br>Kaze Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9527,
+   "text": "<font color='#5df9ff'>Kaze Expert<br>Kaze Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9528,
+   "text": "<font color='#5df9ff'>Suiton Master<br>Sekolah Air Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9529,
+   "text": "<font color='#5df9ff'>Suiton Basic<br>Suiton Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9530,
+   "text": "<font color='#5df9ff'>Vitality Master<br>Sekolah Vitality Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9531,
+   "text": "<font color='#5df9ff'>Healing Basic<br>Sekolah Penyembuhan skill  effects increased ⟨0⟩%。</font>"
+  },
+  {
+   "n": 9532,
+   "text": "<font color='#5df9ff'>Doton Master<br>Sekolah Tanah Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9533,
+   "text": "<font color='#5df9ff'>Kaminari Master<br>Sekolah Petir Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9534,
+   "text": "<font color='#5df9ff'>Illusion Master<br>ISekolah Ilusi Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9535,
+   "text": "<font color='#5df9ff'>Seal Master<br>Sekolah Penyegelan Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9536,
+   "text": "<font color='#5df9ff'>Illusion Expert<br>ISekolah Ilusi Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9537,
+   "text": "<font color='#5df9ff'>Teknik Penyegelan Basic<br>Sekolah Penyegelan Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9538,
+   "text": "<font color='#5df9ff'>Kaminari Expert<br>Sekolah Petir Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9539,
+   "text": "<font color='#5df9ff'>Katon Expert<br>Sekolah Api Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9540,
+   "text": "<font color='#5df9ff'>Ninja item Master<br>Sekolah Item Ninja Effek Skill meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9541,
+   "text": "<font color='#5df9ff'>Ninja item Master<br>Sekolah Item Ninja Skills effects increased ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9542,
+   "text": "<font color='#5df9ff'>Seal Master<br>Sekolah Penyegelan Skills effects increased ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9543,
+   "text": "<font color='#5df9ff'>Master Katon<br>Meningkatkan efek skill api sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9544,
+   "text": "<font color='#5df9ff'>Ahli Body Skill<br>Meningkatkan efek skill Body Teknik sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9545,
+   "text": "<font color='#5df9ff'>Master Kaze<br>Meningkatkan efek skill air sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9546,
+   "text": "<font color='#5df9ff'>Ahli Healing Jutsu<br>Meningkatkan efek skill Healing sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9547,
+   "text": "<font color='#5df9ff'>Master Healing Jutsu<br>Meningkatkan efek skill Healing sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9548,
+   "text": "<font color='#5df9ff'>Dasar Katon<br>Meningkatkan efek skill api sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9549,
+   "text": "<font color='#5df9ff'>Ahli Suiton<br>Meningkatkan efek skill Air sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9550,
+   "text": "<font color='#5df9ff'>Dasar Doton<br>Meningkatkan efek skill Air sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9551,
+   "text": "<font color='#5df9ff'>Ahli Doton<br>Meningkatkan efek skill Air sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9552,
+   "text": "<font color='#5df9ff'>Dasar Kaminari Ririsu<br>Meningkatkan efek skill Petir sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9553,
+   "text": "<font color='#5df9ff'>Ahli Alat Ninja<br>Meningkatkan efek skill Alat Ninja sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9554,
+   "text": "<font color='#5df9ff'>Dasar Body Teknik<br>Meningkatkan efek skill Body Technique sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9555,
+   "text": "<font color='#5df9ff'>Dasar Alat Ninja<br>Meningkatkan efek skill Alat Ninja sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9556,
+   "text": "<font color='#5df9ff'>Dasar Ilusi<br>Meningkatkan efek skill Ilusi sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9557,
+   "text": "<font color='#5df9ff'>master Jurus Tanah<br>Pengeluaran Skill Tanah ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9558,
+   "text": "<font color='#5df9ff'>Master Kaze<br>Meningkatkan efek skill Angin sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9559,
+   "text": "<font color='#5df9ff'>Ahli Kaze<br>Meningkatkan efek skill Angin sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9560,
+   "text": "<font color='#5df9ff'>Dasar Kaze<br>Meningkatkan efek skill Angin sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9561,
+   "text": "<font color='#5df9ff'>master Jurus Angin<br>Pengeluaran Skill Angin ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9562,
+   "text": "<font color='#5df9ff'>master Jurus Ilusi<br>Pengeluaran Skill Ilusi ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9563,
+   "text": "<font color='#5df9ff'>Master Body Teknik<br>Meningkatkan efek skill Body Technique sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9564,
+   "text": "<font color='#5df9ff'>Dasar Healing Jutsu<br>Meningkatkan efek skill Healing sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9565,
+   "text": "<font color='#5df9ff'>Master Jurus Air<br>Pengeluaran Skill Air ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9566,
+   "text": "<font color='#5df9ff'>Master Doton<br>Meningkatkan efek skill Air sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9567,
+   "text": "<font color='#5df9ff'>Master Kaminari Ririsu<br>Meningkatkan efek skill Petir sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9568,
+   "text": "<font color='#5df9ff'>Master Ilusi<br>Meningkatkan efek skill Ilusi sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9569,
+   "text": "<font color='#5df9ff'>Master Teknik Penyegelan<br>Meningkatkan efek skill Ilusi sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9570,
+   "text": "<font color='#5df9ff'>Master Jurus Healing<br>Pengeluaran Skill Healing ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9571,
+   "text": "<font color='#5df9ff'>Ahli Ilusi<br>Meningkatkan efek skill Ilusi sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9572,
+   "text": "<font color='#5df9ff'>Dasar Teknik Penyegelan<br>Meningkatkan efek skill Ilusi sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9573,
+   "text": "<font color='#5df9ff'>Ahli Kaminari Ririsu<br>Meningkatkan efek skill Petir sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9574,
+   "text": "<font color='#5df9ff'>Master Jurus Petir<br>Pengeluaran Skill Petir ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9575,
+   "text": "<font color='#5df9ff'>Ahli Katon<br>Meningkatkan efek skill api sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9576,
+   "text": "<font color='#5df9ff'>Master Jurus Taijutsu<br>Pengeluaran Skill Taijutsu ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9577,
+   "text": "<font color='#5df9ff'>Master Alat Ninja<br>Meningkatkan efek skill Alat Ninja sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9578,
+   "text": "<font color='#5df9ff'>Dasar Katon<br>Meningkatkan efek skill api sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9579,
+   "text": "<font color='#5df9ff'>Master Jurus Api<br>Efek skill api meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9580,
+   "text": "<font color='#5df9ff'>Ahli Body Teknik<br>Meningkatkan efek skill Body Technique sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9581,
+   "text": "<font color='#5df9ff'>Basic Katon<br>Meningkatkan efek skill api sebesar ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9582,
+   "text": "<font color='#5df9ff'>Master Katon<br>Meningkatkan efek skill api sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9583,
+   "text": "<font color='#5df9ff'>Menguasai pengeluaran api<br>Efek skill api meningkat ⟨0⟩%.</font>"
+  },
+  {
+   "n": 9584,
+   "text": "<font color='#5df9ff'>Morph Pill</font>"
+  },
+  {
+   "n": 9585,
+   "text": "<font color='#00ffff'>Tubuh kaku, Menunggu waktu bergerak</font>"
+  },
+  {
+   "n": 9586,
+   "text": "<font color='#00ffff'>Tidak dapat bergerak setelah di bekukan, tidak dapat melakukan Skill Api, menyebabkan dua kali kerusakan pada serangan berikutnya. </font>"
+  },
+  {
+   "n": 9587,
+   "text": "<font color='#00ffff'>Gagal mengendalikan emosi, meningkatkan kecepatan dan mengurangi pertahanan</ font>"
+  },
+  {
+   "n": 9588,
+   "text": "<font color='#00ffff'>Menerima serangan api sebelum bergerak, akan terhapus setelah menerima efek air</font>"
+  },
+  {
+   "n": 9589,
+   "text": "<font color='#00ffff'>Terbakar oleh api hitam abadi, menerima serangan api sebelum bergerak</font>"
+  },
+  {
+   "n": 9590,
+   "text": "<font color='#00ffff'>Mengurangi rata-rata hit, meningkatkan rata-rata kritikal strike, Efektif saat status terbakar setelah menerima serangan api\n</font>"
+  },
+  {
+   "n": 9591,
+   "text": "<font color='#00ffff'>Armor rusak, mengurangi pertahanan, efek bisa berlipat</font>"
+  },
+  {
+   "n": 9592,
+   "text": "<font color='#00ffff'>Kedua tangan terikat, vitalitas dan skill membunuh sangat berkurang, efek penyembuhan dikurangi</font>"
+  },
+  {
+   "n": 9593,
+   "text": "<font color='#00ffff'>Mengurangi kecepatan, diakibatkan oleh kecepatan langkah</font>"
+  },
+  {
+   "n": 9594,
+   "text": "<font color='#00ffff'>Menerima serangan racun setiap sebelum bergerak, dihapus dengan Pemulihan</font>"
+  },
+  {
+   "n": 9595,
+   "text": "<font color='#00ffff'>Skill menggunakan lima elemen disegel, tidak dapat menggunakan skill atribut elemental</font>"
+  },
+  {
+   "n": 9596,
+   "text": "<font color='#00ffff'>Stun, tidak dapat bergerak</font>"
+  },
+  {
+   "n": 9597,
+   "text": "<font color='#00ffff'>Menyalurkan chakra akan membuat penyerangan kamu menjadi kuat, skill casting meningkat, tetapi akan menerima kerusakan skill recoil ketika menggunakan chakra</font>"
+  },
+  {
+   "n": 9598,
+   "text": "<font color='#00ffff'>Tergoda oleh kecantikan, tidak dapat bergerak</font>"
+  },
+  {
+   "n": 9599,
+   "text": "<font color='#00ffff'>Dijerat oleh jaring, tidak bisa bergerak atau menghindar</font>"
+  },
+  {
+   "n": 9600,
+   "text": "<font color='#00ffff'>Membentuk jarum chakra tajam untuk merusak penyerang</font>"
+  },
+  {
+   "n": 9601,
+   "text": "<font color='#00ffff'>Membuka pintu pertama gerbang ke delapan ,meningkatkan kecepatan lebih</font>"
+  },
+  {
+   "n": 9602,
+   "text": "<font color='#00ffff'>Akumulasi saat menerima kerusakan ke diri sendiri, dan melepaskan serangan brutal ke target ketika waktu akumulasi berakhir</font>"
+  },
+  {
+   "n": 9603,
+   "text": "<font color='#00ffff'>Bersembunyi dalam kabut, memiliki kesempatan untuk membedakan serangan musuh dan serangan balik</font>"
+  },
+  {
+   "n": 9604,
+   "text": "<font color='#00ffff'>Kesempatan untuk menangani serangan ganda bila menggunakan skill atribut elemental</font>"
+  },
+  {
+   "n": 9605,
+   "text": "<font color='#00ffff'>Dikendalikan oleh kutukan, HP semakin berkurang, Serangan lebih tinggi.</font>"
+  },
+  {
+   "n": 9606,
+   "text": "<font color='#00ffff'>Meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9607,
+   "text": "<font color='#00ffff'>Terhipnotis, tidak bisa berpindah, efek dihapus setelah mendapat serangan</font>"
+  },
+  {
+   "n": 9608,
+   "text": "<font color='#00ffff'>Sebuah awan gelap melayang di atas kepala, memukul target sebelum bergerak</font>"
+  },
+  {
+   "n": 9609,
+   "text": "<font color='#00ffff'>Sebuah bidang energi murni yang kebal terhadap serangan musuh kecuali intensitasnya habis. Mengembalikan intensitas saat menerima serangan petir</font>"
+  },
+  {
+   "n": 9610,
+   "text": "<font color='#00ffff'>Kekuatan Dewa Air, Meningkatkan pertahanan dan hindaran</font>"
+  },
+  {
+   "n": 9611,
+   "text": "<font color='#00ffff'>Tubuh terasa letih. Memerlukan tempat istirahat selama beberapa waktu untuk memulihkan</font>"
+  },
+  {
+   "n": 9612,
+   "text": "<font color='#00ffff'>HP akan dipulihkan sebelum gerakan berpindah, status akan dihilangkan terkena serangan</font>"
+  },
+  {
+   "n": 9613,
+   "text": "<font color='#00ffff'>Diselimuti oleh kutukan jahat, mengurangi kemungkinan mengeluarkan semua skill</font>"
+  },
+  {
+   "n": 9614,
+   "text": "<font color='#00ffff'>Akan tertarik dalam ilusi mengerikan, kehilangan HP dan chakra hingga chakra skill yang terpakai</font>"
+  },
+  {
+   "n": 9615,
+   "text": "<font color='#00ffff'>Terjerat oleh akar, mengurangi HP hingga waktu habis, tidak bisa berpindah</font>"
+  },
+  {
+   "n": 9616,
+   "text": "<font color='#00ffff'>Pendarahan parah, mengurangi HP hingga waktu habis</font>"
+  },
+  {
+   "n": 9617,
+   "text": "<font color='#00ffff'>Chakra Ganda akan meningkatkan kerusakan meridians dan skill kamu</font>"
+  },
+  {
+   "n": 9618,
+   "text": "<font color='#00ffff'>Diserang dengan cara menusuk sinar cahaya, tidak bisa melihat gerakan musuh, hit rate dikurangi</font>"
+  },
+  {
+   "n": 9619,
+   "text": "<font color='#00ffff'>Membuka pintu kedua gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9620,
+   "text": "<font color='#00ffff'>Membuka pintu ketiga gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9621,
+   "text": "<font color='#00ffff'>Membuka pintu keempat gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9622,
+   "text": "<font color='#00ffff'>Membuka pintu kelima gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9623,
+   "text": "<font color='#00ffff'>Membuka pintu keenam gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9624,
+   "text": "<font color='#00ffff'>Membuka pintu ketujuh gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9625,
+   "text": "<font color='#00ffff'>Membuka pintu kedelapan gerbang ke delapan , lebih meningkatkan kecepatan</font>"
+  },
+  {
+   "n": 9626,
+   "text": "<font color='#00ffff'>Status Positif dari semangat triger dan meningkatkan serangan</font>"
+  },
+  {
+   "n": 9627,
+   "text": "<font color='#00ffff'>Musuh mengetahui lokasi kamu</font>"
+  },
+  {
+   "n": 9628,
+   "text": "<font color='#00ffff'>Meningkatkan Serangan, Pertahanan dan Kritikal Strike yang baik</font>"
+  },
+  {
+   "n": 9629,
+   "text": "<font color='#00ffff'>Mengurangi Serangan, Kritikal Strike dan Armor Break yang baik</font>"
+  },
+  {
+   "n": 9630,
+   "text": "<font color='#00ffff'>Mengurangi Pertahanan, Pierce, Blok dan Constitution yang baik</font>"
+  },
+  {
+   "n": 9631,
+   "text": "<font color='#00ffff'>Mengurangi Hit, Dodge dan Kecepatan</font>"
+  },
+  {
+   "n": 9632,
+   "text": "<font color='#00ffff'>Meningkatkan Serangan dan Kecepatan</font>"
+  },
+  {
+   "n": 9633,
+   "text": "<font color='#00ffff'>Mengurangi Waktu dari pengaruh efek negatif</font>"
+  },
+  {
+   "n": 9634,
+   "text": "<font color='#00ffff'>Raungan Tailed beast dan meningkatkan speed</font>"
+  },
+  {
+   "n": 9635,
+   "text": "<font color='#00ffff'>Mengurangi kekuatan serangan ⟨0⟩%, Selama ⟨1⟩ detik</font>"
+  },
+  {
+   "n": 9636,
+   "text": "<font color='#00ffff'>Menjadi Kebal</font>"
+  },
+  {
+   "n": 9637,
+   "text": "<font color='#00ffff'>Akan mengaktifkan status berserk, meningkatkan speed dan attack dari percentasi</font>"
+  },
+  {
+   "n": 9638,
+   "text": "<font color='#00ffff'>Mengurangi ⟨0⟩ dodge, selama ⟨1⟩ detik</font>"
+  },
+  {
+   "n": 9639,
+   "text": "<font color='#00ffff'>Mengurangi attack dan defence sebesar ⟨0⟩%, selama ⟨1⟩ seconds</font>"
+  },
+  {
+   "n": 9640,
+   "text": "<font color='#00ffff'>Meningkatkan damage dari lima skill ⟨0⟩%</font>"
+  },
+  {
+   "n": 9641,
+   "text": "<font color='#00ffff'>Meningkatkan defence sebesar ⟨0⟩ point, selama ⟨1⟩ detik</font>"
+  },
+  {
+   "n": 9642,
+   "text": "<font color='#00ffff'>Sebelum bergerak, kehilangan ⟨0⟩% dari HP dan Chakra</font>"
+  },
+  {
+   "n": 9643,
+   "text": "<font color='#00ffff'>Mengurangi speed sebesar ⟨0⟩%, selama ⟨1⟩ detik</font>"
+  },
+  {
+   "n": 9644,
+   "text": "<font color='#00ffff'>Meningkatkan damage dari Chidori sebesar ⟨0⟩%</font>"
+  },
+  {
+   "n": 9645,
+   "text": "<font color='#00ffff'>Tubuh melemah, Serangan berkurang</font>"
+  },
+  {
+   "n": 9646,
+   "text": "<font color='#5df9ff'>Gunakan dua kostum karakter +⟨0⟩ yang sama sebagai bahan untuk meningkatkan level kostum.<br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 9647,
+   "text": "<font color='#5df9ff'>Gem Level ⟨0⟩ + Gem Level ⟨1⟩ ＋ Gem Level ⟨2⟩ ＝Gem Level ⟨3⟩.<br>Gem yang disintesiskan harus sejenis.</font>"
+  },
+  {
+   "n": 9648,
+   "text": "<font color='#5df9ff'>Gem Level ⟨0⟩ ＋ Gem Level ⟨1⟩ ＋ Gem Level ⟨2⟩ ＝ Gem Level ⟨3⟩.<br>Gem yang disintesiskan harus sejenis.<br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 9649,
+   "text": "<font color='#5df9ff'>Gem Level ⟨0⟩ + Gem Level ⟨1⟩ + Gem Level ⟨2⟩ = Gem Level ⟨3⟩.<br>Catalysts akan hilang jika sintesis gagal.</font>"
+  },
+  {
+   "n": 9650,
+   "text": "<font color='#5df9ff'>Anonymous Namecard + Anonymous Namecard + Anonymous Namecard = Anonymous Namecard Folder</font>"
+  },
+  {
+   "n": 9651,
+   "text": "<font color='#5df9ff'>gem Lv.⟨0⟩ ＋gem Lv.⟨1⟩ ＋gem Lv.⟨2⟩ ＝gem Lv.⟨3⟩ .<br>Gems yang digunakan untuk sintesis harus dari jenis yang sama.</font>"
+  },
+  {
+   "n": 9652,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Rawa Kematian . Dapat menantang di Jalan Kematian dengan Warfrenzy Demon sekali pakai.</font>"
+  },
+  {
+   "n": 9653,
+   "text": "<font color='#5df9ff'>Proof of Suppression didapatkan dari penjelajahan di Daratan patah hati . Dapat menantang di Daratan Patah Hati dengan Bloodboil Demon sekali pakai.</font>"
+  },
+  {
+   "n": 9654,
+   "text": "<font color='#5df9ff'>Membuktikan juara Liga dunia. Hanya diberikan kepada ninja yang berkemampuan luar biasa, merupakan bukti Kekuatan Besar yang tidak ternilai.</font>"
+  },
+  {
+   "n": 9655,
+   "text": "<font color='#5df9ff'>Membuktikan juara Liga premier. Hanya diberikan kepada ninja yang berkemampuan luar biasa, merupakan bukti Kekuatan Besar yang tidak ternilai.</font>"
+  },
+  {
+   "n": 9656,
+   "text": "<font color='#5df9ff'>Membuktikan juara Liga Elit. Hanya diberikan kepada ninja yang berkemampuan luar biasa, merupakan bukti Kekuatan Besar yang tidak ternilai.</font>"
+  },
+  {
+   "n": 9657,
+   "text": "<font color='#5df9ff'>Membuktikan juara Profesional liga . Hanya diberikan kepada ninja yang berkemampuan luar biasa, merupakan bukti Kekuatan Besar yang tidak ternilai.</font>"
+  },
+  {
+   "n": 9658,
+   "text": "<font color='#5df9ff'>Membuktikan juara liga amatir. Hanya diberikan kepada ninja yang berkemampuan luar biasa, merupakan bukti Kekuatan Besar yang tidak ternilai.</font>"
+  },
+  {
+   "n": 9659,
+   "text": "<font color='#5df9ff'>Glittering Gift Box</font>"
+  },
+  {
+   "n": 9660,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi ⟨0⟩ Batu ketika digunakan.</font>"
+  },
+  {
+   "n": 9661,
+   "text": "<font color='#5df9ff'>Envelope</font>"
+  },
+  {
+   "n": 9662,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi ⟨0⟩ gift coupon Ketika digunakan.</font>"
+  },
+  {
+   "n": 9663,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi ⟨0⟩ gifts coupon Ketika digunakan.</font>"
+  },
+  {
+   "n": 9664,
+   "text": "<font color='#5df9ff'>Treasure Box</font>"
+  },
+  {
+   "n": 9665,
+   "text": "<font color='#5df9ff'>Mystery bag, berisikan ⟨0⟩ gift coupon.</font>"
+  },
+  {
+   "n": 9666,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi a Level ⟨0⟩ set equipment Ketika digunakan.</font>"
+  },
+  {
+   "n": 9667,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi a Level ⟨0⟩ pet Ketika digunakan.</font>"
+  },
+  {
+   "n": 9668,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi ⟨0⟩ medals Ketika digunakan.</font>"
+  },
+  {
+   "n": 9669,
+   "text": "<font color='#5df9ff'>Level ⟨0⟩ Profound Affection Bag，berisikan satu Level ⟨1⟩ HP Carrier Bag dan satu level ⟨2⟩ Chakra Carrier Bag!</font>"
+  },
+  {
+   "n": 9670,
+   "text": "<font color='#5df9ff'>Lv.⟨0⟩ Intimate Friendship Bag, berisikan ⟨1⟩ Lv.⟨2⟩ Enchantment Talisman dan ⟨3⟩ Lv.⟨4⟩ Enhancement Talisman!</font>"
+  },
+  {
+   "n": 9671,
+   "text": "<font color='#5df9ff'>Lv.⟨0⟩ Bosom Buddy Bag, berisikan ⟨1⟩ low level Inscription Talisman dan ⟨2⟩ Advanced Inscription Talisman!</font>"
+  },
+  {
+   "n": 9672,
+   "text": "<font color='#5df9ff'>Lv.⟨0⟩ Band Over Backward Bag, berisikan low ⟨1⟩ level Inscription Talisman dan ⟨2⟩ Advanced Inscription Talisman!</font>"
+  },
+  {
+   "n": 9673,
+   "text": "<font color='#5df9ff'>Lv.⟨0⟩ Share Weal dan Woe Bag, berisikan ⟨1⟩ low level Inscription Talisman dan ⟨2⟩ Advanced Inscription Talisman!</font>"
+  },
+  {
+   "n": 9674,
+   "text": "<font color='#5df9ff'>Lv.⟨0⟩ All in the Same Boat Bag， berisikan ⟨1⟩ Gold Treasure Jar dan ⟨2⟩ Luxury Gem Jar!</font>"
+  },
+  {
+   "n": 9675,
+   "text": "<font color='#5df9ff'>Lv.⟨0⟩ Oath Bag, berisikan ⟨1⟩ Luxury Treasure Jar dan ⟨2⟩ Diamond Treasure Jar!</font>"
+  },
+  {
+   "n": 9676,
+   "text": "<font color='#5df9ff'> Gunakan tombol skip selama pertarungan Arena untuk melewati pertempuran. Berlaku untuk ⟨0⟩ hari.</font>"
+  },
+  {
+   "n": 9677,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi ⟨0⟩ arena points Ketika digunakan.</font>"
+  },
+  {
+   "n": 9678,
+   "text": "<font color='#5df9ff'>Buka ini untuk mendapatkan newbie equipment</font>"
+  },
+  {
+   "n": 9679,
+   "text": "<font color='#5df9ff'>Buka ini untuk mendapatkan Newbie equipment dan pasokan</font>"
+  },
+  {
+   "n": 9680,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Kage Claw.</font>"
+  },
+  {
+   "n": 9681,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Kage Sword.</font>"
+  },
+  {
+   "n": 9682,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Kage Hammer.</font>"
+  },
+  {
+   "n": 9683,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Hidden Land gold card.</font>"
+  },
+  {
+   "n": 9684,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Spirit Beast gold card.</font>"
+  },
+  {
+   "n": 9685,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Village Secret gold card.</font>"
+  },
+  {
+   "n": 9686,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Konoha Eight gold card.</font>"
+  },
+  {
+   "n": 9687,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Palace Captain blue card.</font>"
+  },
+  {
+   "n": 9688,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Akatsuki blue card.</font>"
+  },
+  {
+   "n": 9689,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Kage Shinobi orange card.</font>"
+  },
+  {
+   "n": 9690,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Bloodline Limit orange card.</font>"
+  },
+  {
+   "n": 9691,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Rookie of Card gold card.</font>"
+  },
+  {
+   "n": 9692,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Card Expert gold card.</font>"
+  },
+  {
+   "n": 9693,
+   "text": "<font color='#5df9ff'>Gunakan ini untuk mendapatkan Card Master gold card.</font>"
+  },
+  {
+   "n": 9694,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi ⟨0⟩ EXP Ketika digunakan.</font>"
+  },
+  {
+   "n": 9695,
+   "text": "<font color='#5df9ff'>Kunci</font>"
+  },
+  {
+   "n": 9696,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi a Gem Level ⟨0⟩ Ketika digunakan.</font>"
+  },
+  {
+   "n": 9697,
+   "text": "<font color='#5df9ff'>Mendapatkan mystery bag berisi a Level ⟨0⟩ gem Ketika digunakan.</font>"
+  },
+  {
+   "n": 9698,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Kurosaki Ichigo</font>"
+  },
+  {
+   "n": 9699,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Witch</font>"
+  },
+  {
+   "n": 9700,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Ggio Vega</font>"
+  },
+  {
+   "n": 9701,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan White Ichigo</font>"
+  },
+  {
+   "n": 9702,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Bomb Ichigo</font>"
+  },
+  {
+   "n": 9703,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Ulquiorra</font>"
+  },
+  {
+   "n": 9704,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan White Ulquiorra</font>"
+  },
+  {
+   "n": 9705,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hollowfied Ulquiorra</font>"
+  },
+  {
+   "n": 9706,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Love Aikawa</font>"
+  },
+  {
+   "n": 9707,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Grimmjow</font>"
+  },
+  {
+   "n": 9708,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hitsugaya Toushiro</font>"
+  },
+  {
+   "n": 9709,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hirako Shinji</font>"
+  },
+  {
+   "n": 9710,
+   "text": "<font color='#5df9ff'>Fireblast Crystal</font>"
+  },
+  {
+   "n": 9711,
+   "text": "<font color='#5df9ff'>Sertifikat dari tantangan lv.⟨0⟩ Valhalla abyss level.</font>"
+  },
+  {
+   "n": 9712,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hollowfied Hirako Shinji</font>"
+  },
+  {
+   "n": 9713,
+   "text": "<font color='#5df9ff'>Membutuhkan sejumlah  Valhalla Crystal dan beberapa item dari Penjaga Kota Iblis di Valhalla.</font>"
+  },
+  {
+   "n": 9714,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Abarai Renji</font>"
+  },
+  {
+   "n": 9715,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan common enchantment stone secara acak.</font>"
+  },
+  {
+   "n": 9716,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan exquisite enchantment stone secara acak.</font>"
+  },
+  {
+   "n": 9717,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan perfect enchantment stone secara acak.</font>"
+  },
+  {
+   "n": 9718,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan legend enchantment stone secara acak.</font>"
+  },
+  {
+   "n": 9719,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan immortal enchantment stone secara acak.</font>"
+  },
+  {
+   "n": 9720,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan pet skill book secara acak.</font>"
+  },
+  {
+   "n": 9721,
+   "text": "<font color='#5df9ff'>Mendapatkan EXP secara instant. Jumlah EXP yang didapat adalah sama dengan membunuh ⟨0⟩ monster sesuai level kamu.</font>"
+  },
+  {
+   "n": 9722,
+   "text": "<font color='#5df9ff'>Efek: Menghapus salah satu skill yang dimiliki pet. <br>Penggunaan: Masuk dalam kandang pet, lalu klik ikon Forget untuk menghapus skill.<br></font>"
+  },
+  {
+   "n": 9723,
+   "text": "<font color='#5df9ff'>Jumlah dari EXP akan meningkat setelah membunuh ⟨0⟩ monster dari level yang sama denganmu.</font>\n<font color='#ff0000'>Items dari efek yang sama digunakan ⟨1⟩ kali sehari</font>"
+  },
+  {
+   "n": 9724,
+   "text": "<font color='#5df9ff'>Bukalah untuk mendapatkan salah satu gelar Zodiac!</font>"
+  },
+  {
+   "n": 9725,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Gin Ichimaru</font>"
+  },
+  {
+   "n": 9726,
+   "text": "<font color='#5df9ff'>Bukalah untuk mendapatkan satu atribut gelar!</font>"
+  },
+  {
+   "n": 9727,
+   "text": "<font color='#5df9ff'>Shikamaru's Tool Bag, memiliki beberapa peralatan Ninja di dalamnya</font>"
+  },
+  {
+   "n": 9728,
+   "text": "<font color='#5df9ff'>Ishida selalu membawa kotak peralatannya setiap saat. Tidak ada yang tahu apa isi di dalamnya.</font>"
+  },
+  {
+   "n": 9729,
+   "text": "<font color='#5df9ff'>Koleksi rahasia Kakashi. Apakah itu? </font>"
+  },
+  {
+   "n": 9730,
+   "text": "<font color='#5df9ff'>Rangkaian cinta Sakura. Dia membuat itu untuk membantu para temannya dalam peperangan </font>"
+  },
+  {
+   "n": 9731,
+   "text": "<font color='#5df9ff'>Bahkan pecahan Orb pun dapat menjadi barang yang istimewa di tangan Aizen</font>"
+  },
+  {
+   "n": 9732,
+   "text": "<font color='#5df9ff'>Toko Urahara menyembunyikan banyak sekali barang-barang. Namun,kamu bisa mendapatkan sesuatu yang benar-benar kamu butuhkan dengan kupon ini!</font>"
+  },
+  {
+   "n": 9733,
+   "text": "<font color='#5df9ff'>Buatlah permohonanmu dengan Lentera Ajaib ini! Siapapun yang mendapatkan lantern yang pernah digunakan oleh Ichigo ini akan terkejut dengan baik!</font>"
+  },
+  {
+   "n": 9734,
+   "text": "<font color='#5df9ff'>Setelah Naruto selesai dengan latihannya, Katak Sage dari Gunung Myoboku memberikannya sejumlah harta!</font>"
+  },
+  {
+   "n": 9735,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Akimichi Choji</font>"
+  },
+  {
+   "n": 9736,
+   "text": "<font color='#5df9ff'>Guci mistik berada di Item Mall. Buka untuk memenangkan penghargaan rahasia! Ingin mendapatkan outfit yang unik? Coba keberuntungan mu sekarang!</font>"
+  },
+  {
+   "n": 9737,
+   "text": "<font color='#5df9ff'>Magic box, contains a random above +⟨0⟩ orange kostum so that you'll have chances to obtain a +⟨1⟩ kostum.</font>"
+  },
+  {
+   "n": 9738,
+   "text": "<font color='#5df9ff'>Magic box, berisikan secara acak pet pet +⟨0⟩ sehingga kamu berkesempatan untuk memiliki pet +⟨1⟩.</font>"
+  },
+  {
+   "n": 9739,
+   "text": "<font color='#5df9ff'>Magic bag*⟨0⟩, yang berisikan ⟨1⟩ batu </font>"
+  },
+  {
+   "n": 9740,
+   "text": "<font color='#5df9ff'>EXP gift box hanya untuk pemain yang unggul! Kamu akan memperoleh EXP dalam jumlah yang besar!</font>"
+  },
+  {
+   "n": 9741,
+   "text": "<font color='#5df9ff'>Bahan-bahan untuk mencetak peralatan. Hanya peralatan Lv.⟨0⟩(termasuk lv ⟨1⟩) kebawah yang dapat di cetak. </font>"
+  },
+  {
+   "n": 9742,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Inuzuka Kiba</font>"
+  },
+  {
+   "n": 9743,
+   "text": "<font color='#5df9ff'>Setiap engrave crystal dapat meningkatkan tingkat kesuksesan sebesar ⟨0⟩%. Hanya dapat digunakan untuk peralatan lv.⟨1⟩(termasuk lv. ⟨2⟩) kebawah.</font>"
+  },
+  {
+   "n": 9744,
+   "text": "<font color='#5df9ff'>Proof bisa didapatkan melalui eksplorasi. Kamu tidak akan bisa menantang Demons di berbagai tempat tanpa memiliki the Proof of Suppression.</font>"
+  },
+  {
+   "n": 9745,
+   "text": "<font color='#5df9ff'>Ointment digunakan oleh Suku Katak, memberikan ⟨0⟩ movement power.</font>"
+  },
+  {
+   "n": 9746,
+   "text": "<font color='#5df9ff'>Special medicine digunakan oleh sakura, memberikan ⟨0⟩ movement power.</font>"
+  },
+  {
+   "n": 9747,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Fire Ring dan Fire  Talisman</font>"
+  },
+  {
+   "n": 9748,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Water Ring dan Water  Talisman</font>"
+  },
+  {
+   "n": 9749,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Earth Ring dan Earth  Talisman</font>"
+  },
+  {
+   "n": 9750,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Lightning Ring dan Lightning  Talisman</font>"
+  },
+  {
+   "n": 9751,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Wind Ring dan Wind  Talisman</font>"
+  },
+  {
+   "n": 9752,
+   "text": "<font color='#5df9ff'>peti berisi Ksotum Abu-Abu. Buka untuk mendapatkan Kostum +⟨0⟩～+⟨1⟩ abu-abu bound.</font>"
+  },
+  {
+   "n": 9753,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Aburame Shino</font>"
+  },
+  {
+   "n": 9754,
+   "text": "<font color='#5df9ff'>peti berisi Ksotum Biru. Buka untuk mendapatkan Kostum +⟨0⟩～+⟨1⟩ Biru bound.</font>"
+  },
+  {
+   "n": 9755,
+   "text": "<font color='#5df9ff'>peti berisi Ksotum Orange. Buka untuk mendapatkan Kostum +⟨0⟩～+⟨1⟩ Orange bound.</font>"
+  },
+  {
+   "n": 9756,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Fire Ring atas Fire  Talisman secara acak</font>"
+  },
+  {
+   "n": 9757,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Water Ring atau Water  Talisman secara acak</font>"
+  },
+  {
+   "n": 9758,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Earth Ring atau Earth  Talisman secara acak</font>"
+  },
+  {
+   "n": 9759,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Lightning Ring atau Lightning  Talisman secara</font>"
+  },
+  {
+   "n": 9760,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan Wind Ring atau Wind  Talisman secara acak</font>"
+  },
+  {
+   "n": 9761,
+   "text": "<font color='#5df9ff'>Mendapatkan VIP Card ⟨0⟩-hari *⟨1⟩, EXP Mark*⟨2⟩, HP Carrier Bag Lv.⟨3⟩ *⟨4⟩ ,Chakra Carrier Bag Lv.⟨5⟩ *⟨6⟩, HP Candy*⟨7⟩, Chakra Candy*⟨8⟩</font>"
+  },
+  {
+   "n": 9762,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan ⟨0⟩EXP.</font>"
+  },
+  {
+   "n": 9763,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Nara Shikamaru</font>"
+  },
+  {
+   "n": 9764,
+   "text": "<font color='#5df9ff'>Gunakan untuk mendapatkan bayi pet eksklusif!</font>"
+  },
+  {
+   "n": 9765,
+   "text": "<font color='#5df9ff'>Kemungkinan akan mendapatkan Lv.⟨0⟩ Dragon Soul Sword*⟨1⟩, Dragon Soul Armor*⟨2⟩, Dragon Soul Helm*⟨3⟩, Dragon Soul Boots*⟨4⟩, Dragon Soul Gloves*⟨5⟩, Dragon Soul Belt*⟨6⟩, Dragon Soul Talisman*⟨7⟩, Dragon Soul Ring*⟨8⟩ setelah digunakan!</font>"
+  },
+  {
+   "n": 9766,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Asuma Sarutobi</font>"
+  },
+  {
+   "n": 9767,
+   "text": "<font color='#5df9ff'>Kemungkinan akan mendapatkan Lv.⟨0⟩ Dragon Soul Claw*⟨1⟩, Dragon Soul Armor*⟨2⟩, Dragon Soul Helm*⟨3⟩, Dragon Soul Boots*⟨4⟩, Dragon Soul Gloves*⟨5⟩, Dragon Soul Belt*⟨6⟩, Dragon Soul Talisman*⟨7⟩, Dragon Soul Ring*⟨8⟩ setelah digunakan!</font>"
+  },
+  {
+   "n": 9768,
+   "text": "<font color='#5df9ff'>Kemungkinan akan mendapatkan Lv.⟨0⟩ Dragon Soul Hammer*⟨1⟩, Dragon Soul Armor*⟨2⟩, Dragon Soul Helm*⟨3⟩, Dragon Soul Boots*⟨4⟩, Dragon Soul Gloves*⟨5⟩, Dragon Soul Belt*⟨6⟩, Dragon Soul Talisman*⟨7⟩, Dragon Soul Ring*⟨8⟩ setelah digunakan!</font>"
+  },
+  {
+   "n": 9769,
+   "text": "<font color='#5df9ff'>Secara acak mendapatkan Dragon Soul equipment!</font>"
+  },
+  {
+   "n": 9770,
+   "text": "<font color='#5df9ff'>Mendapatkan random skill pelepasan peralatan setelah menggunakan!</font>"
+  },
+  {
+   "n": 9771,
+   "text": "<font color='#5df9ff'>Mendapatkan ⟨0⟩ Common Valhalla Crystal setelah menggunakan</font>"
+  },
+  {
+   "n": 9772,
+   "text": "<font color='#5df9ff'>Memberikan kamu kesempatan untuk mendapatkan Gray Outfit Wishing Pot, Blue Outfit Wishing Pot, Orange Outfit Wishing Pot, Legend Wishing Pot, Shippuden Wishing Pot, Luxury Outfit Box, Attribute Box, Zodiac Box or Luxury Pet Box.</font>"
+  },
+  {
+   "n": 9773,
+   "text": "<font color='#5df9ff'>Mendapat kesempatan untuk memperoleh Luxury EXP Bag LV.⟨0⟩, Engrave Crystal Lv.⟨1⟩, Engrave Blade Lv.⟨2⟩, Pet Skill Book Box, Perfect Enchantment Stone Box, Common Valhalla Crystal</font>"
+  },
+  {
+   "n": 9774,
+   "text": "<font color='#5df9ff'>Mempunyai kesempatan untuk memperoleh Legend Wishing Pot, Shippuden Wishing Pot, S-rank Ninja Wishing Pot, Luxury Outfit Box, Attribute Box, Zodiac Box, Common Valhalla Crystal*⟨0⟩</font>"
+  },
+  {
+   "n": 9775,
+   "text": "<font color='#5df9ff'>Kamu berkesempatan mendapatkan Heart of Shukaku, Heart of Nakomata, Heart of Isonade, Heart of Sokou, Heart of Houkou or Heart of Raijuu</font>"
+  },
+  {
+   "n": 9776,
+   "text": "<font color='#5df9ff'>Kamu akan memiliki kesempatan mendapatkan Heart of Shukaku, Heart of Nakomata, Heart of Isonade, Heart of Sokou, Heart of Houkou or Heart of Raijuu</font>"
+  },
+  {
+   "n": 9777,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Rock Lee</font>"
+  },
+  {
+   "n": 9778,
+   "text": "<font color='#5df9ff'>Mendapatkan ⟨0⟩ Common Valhalla Crystal setelah penggunaan</font>"
+  },
+  {
+   "n": 9779,
+   "text": "<font color='#5df9ff'>Mendapatkan secara acak Konoha Arcanum*⟨0⟩, EXP Mark, Lv.⟨1⟩ HP Carrier Bag*⟨2⟩, Lv.⟨3⟩ Chakra Carrier Bag*⟨4⟩, Sakura's Special Potion, Carnival Pack, Lv.⟨5⟩ Gift Coupon Bag, ⟨6⟩-day VIP*⟨7⟩, Chakra Candy*⟨8⟩, HP Candy*⟨9⟩, Little Beans</font>"
+  },
+  {
+   "n": 9780,
+   "text": "<font color='#5df9ff'>Mendapatkan secara acak Konoha Arcanum*⟨0⟩, EXP Mark*⟨1⟩, Lv.⟨2⟩ HP Carrier Bag*⟨3⟩, Lv.⟨4⟩ Chakra Carrier Bag*⟨5⟩, Sakura's Special Potion*⟨6⟩, Carnival Pack*⟨7⟩, Lv.⟨8⟩ Gift Coupon Bag*⟨9⟩, ⟨10⟩-day VIP*⟨11⟩, Chakra Candy*⟨12⟩, HP Candy*⟨13⟩, Little Beans*⟨14⟩</font>"
+  },
+  {
+   "n": 9781,
+   "text": "<font color='#5df9ff'>Dapat memperoleh King of Login Proof*⟨0⟩, Luxury Pet Box*⟨1⟩</font>"
+  },
+  {
+   "n": 9782,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Konoha Arcanum*⟨0⟩</font>"
+  },
+  {
+   "n": 9783,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Lv.⟨0⟩ HP Carrier Bag*⟨1⟩</font>"
+  },
+  {
+   "n": 9784,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Lv.⟨0⟩ Chakra Carrier Bag*⟨1⟩</font>"
+  },
+  {
+   "n": 9785,
+   "text": "<font color='#5df9ff'>Dapat memperoleh ⟨0⟩-day VIP*⟨1⟩</font>"
+  },
+  {
+   "n": 9786,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Chakra Candy*⟨0⟩</font>"
+  },
+  {
+   "n": 9787,
+   "text": "<font color='#5df9ff'>Dapat memperoleh HP Candy*⟨0⟩</font>"
+  },
+  {
+   "n": 9788,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hyuga Neji</font>"
+  },
+  {
+   "n": 9789,
+   "text": "<font color='#5df9ff'>Dapat memperoleh EXP Mark*⟨0⟩</font>"
+  },
+  {
+   "n": 9790,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Sakura's Special Potion*⟨0⟩</font>"
+  },
+  {
+   "n": 9791,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Carnival Pack*⟨0⟩</font>"
+  },
+  {
+   "n": 9792,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Lv.⟨0⟩ Gift Coupon Bag*⟨1⟩</font>"
+  },
+  {
+   "n": 9793,
+   "text": "font color='#⟨0⟩df⟨1⟩ff'>Dapat memperoleh ⟨2⟩-day VIP*⟨3⟩</font>"
+  },
+  {
+   "n": 9794,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Scorpion</font>"
+  },
+  {
+   "n": 9795,
+   "text": "<font color='#5df9ff'>Dapat memperoleh Little Beans*⟨0⟩</font>"
+  },
+  {
+   "n": 9796,
+   "text": "<font color='#5df9ff'>Magic pack, berisi ⟨0⟩ Azure Dragonling+⟨1⟩</font>"
+  },
+  {
+   "n": 9797,
+   "text": "<font color='#5df9ff'>Magic pack, berisi ⟨0⟩ Vermilion birdling+⟨1⟩</font>"
+  },
+  {
+   "n": 9798,
+   "text": "<font color='#5df9ff'>Buka untuk mendapatkan secara acak equipment Spirit Creature!</font>"
+  },
+  {
+   "n": 9799,
+   "text": "<font color='#5df9ff'>Kumpulkan sejumlah kartu hadiah untuk menukarkan produk Apple! Kartu hadiah tersedia di pasar.<br>⟨0⟩ kartu untuk iPod Nano<br>⟨1⟩ kartu untuk iTouch<br>⟨2⟩ kartu untuk iPad⟨3⟩<br>⟨4⟩ kartu untuk white iPhone⟨5⟩<br>⟨6⟩ kartu untuk Macbook Air</font>"
+  },
+  {
+   "n": 9800,
+   "text": "<font color='#5df9ff'>Kumpulkan ⟨0⟩ kartu untuk menukarkan satu ⟨1⟩G white iPhone⟨2⟩! Kartu hadiah tersedia di pasar.</font>"
+  },
+  {
+   "n": 9801,
+   "text": "<font color='#5df9ff'>Kumpulkan ⟨0⟩ kartu untuk menukarkan satu ipad⟨1⟩! Kartu hadiah tersedia di pasar.</font>"
+  },
+  {
+   "n": 9802,
+   "text": "<font color='#5df9ff'>Kumpulkan ⟨0⟩ kartu untuk menukarkan satu ⟨1⟩g iTouch! Kartu hadiah tersedia di pasar.</font>"
+  },
+  {
+   "n": 9803,
+   "text": "<font color='#5df9ff'>Kumpulkan ⟨0⟩ kartu untuk menukarkan satu ⟨1⟩g iPod Nano! Kartu hadiah tersedia di pasar.</font>"
+  },
+  {
+   "n": 9804,
+   "text": "<font color='#5df9ff'>Magic box yang berisi satu set Angelic Union</font>"
+  },
+  {
+   "n": 9805,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Yamato</font>"
+  },
+  {
+   "n": 9806,
+   "text": "<font color='#5df9ff'>Magic box yang berisi satu set Dragon King</font>"
+  },
+  {
+   "n": 9807,
+   "text": "<font color='#5df9ff'>Magic box yang berisi satu set Sacred Army</font>"
+  },
+  {
+   "n": 9808,
+   "text": "<font color='#5df9ff'>Magic box yang berisi secara acak Angelic Union equipment.</font>"
+  },
+  {
+   "n": 9809,
+   "text": "<font color='#5df9ff'>Magic box yang berisi secara acak Dragon King equipment </font>"
+  },
+  {
+   "n": 9810,
+   "text": "<font color='#5df9ff'>Magic box yang berisi secara acak Sacred Army equipment</font>"
+  },
+  {
+   "n": 9811,
+   "text": "<font color='#5df9ff'>Magic box yang berisi secara acak Soul dari Azure Dragon, Soul of Black Tortoise , Soul of Vermilion Bird, Soul of White Tiger</font>"
+  },
+  {
+   "n": 9812,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Nelliel</font>"
+  },
+  {
+   "n": 9813,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Sarugaki Hiyori</font>"
+  },
+  {
+   "n": 9814,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Shihouin Yoruichi</font>"
+  },
+  {
+   "n": 9815,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Soifon</font>"
+  },
+  {
+   "n": 9816,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Halibel</font>"
+  },
+  {
+   "n": 9817,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Mashiro Kuna</font>"
+  },
+  {
+   "n": 9818,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Shiba Kuukaku</font>"
+  },
+  {
+   "n": 9819,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Nanao Ise</font>"
+  },
+  {
+   "n": 9820,
+   "text": "<font color='#5df9ff'>Gift Box</font>"
+  },
+  {
+   "n": 9821,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Momo Hinamori</font>"
+  },
+  {
+   "n": 9822,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Rangiku Matsumoto</font>"
+  },
+  {
+   "n": 9823,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Inoue Orihime</font>"
+  },
+  {
+   "n": 9824,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Kurenai Yuuhi</font>"
+  },
+  {
+   "n": 9825,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Hyuga Hinata</font>"
+  },
+  {
+   "n": 9826,
+   "text": "<font color='#5df9ff'>Kartu nama dengan tanda tangan Chi</font>"
+  }
+ ]
+}

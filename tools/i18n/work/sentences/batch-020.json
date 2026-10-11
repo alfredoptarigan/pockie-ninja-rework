@@ -1,0 +1,265 @@
+{
+ "terms": {
+  "Desa Api": "Fire Village",
+  "Desa Air": "Water Village",
+  "Desa Petir": "Lightning Village",
+  "Desa Angin": "Wind Village",
+  "Desa Tanah": "Earth Village",
+  "Kota Malaikat": "Angel City",
+  "Kota Iblis": "Demon City",
+  "Tambang Batu": "Smelting Mountains",
+  "Sungai ketenangan": "Verdant Alley",
+  "Puncak Bebatuan": "Peaked Whetstone",
+  "Lembah awan": "Windscent Pass",
+  "Gerbang Naga Tersembunyi": "Hidden Dragon Corridor",
+  "Ambil Hadiah": "Claim the Reward",
+  "Ruang Bimbingan": "Guidance Room",
+  "Grimmjow": "Grimmjow Jaegerjaquez"
+ },
+ "units": [
+  {
+   "n": 8224,
+   "text": "Pergi ke tampilan zona<font color='#00b034'> Tambang Batu</font><font color='#00b034'> daftar monster </font><font color='#00b034'> normal monster </font>dan lakukan sebuah<font color='#00b034'> Combo </font>sekali.<br>Tips: Masuk<font color='#00b034'> Tambang Batu </font>, dan memilih dari<font color='#00b034'> daftar monster </font>, tipe dari<font color='#00b034'> normal monster </font>dan melakukan serangan. Dalam<font color='#00b034'> menu monster, </font>pilih [<font color='#00b034'>Combo</font>] untuk membuka tampilan<font color='#00b034'> Combo </font>. Dalam tampilan, pilih berapa kali kamu ingin untuk<font color='#00b034'> Combo </font>, dan klik [<font color='#00b034'>OK</font>] untuk memulai<font color='#00b034'> Combo </font>."
+  },
+  {
+   "n": 8225,
+   "text": "Melalui<font color='#00b034'> penjelajahan, </font>mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, kalahkan<font color='#00b034'> Tambang Batu</font>bos setan<font color='#00b034'> Demon Brute </font>.<br><br>Tips: Pada zona<font color='#00b034'> Tambang Batu Exploration </font>, lakukan sebuah<font color='#00b034'> penjelajahan </font>untuk mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, tunggu<font color='#00b034'> Tambang Batu</font><font color='#00b034'> Demon Brute </font>muncul dan kalahkan dia.<font color='#00b034'> Demon Brute </font>akan muncul pada waktu tertentu setiap jam<font color='#00b034'></font>di<font color='#00b034'> Tambang Batu </font>. ini akan berhenti untuk<font color='#00b034'> ⟨0⟩ min </font>sebelum meninggalkan, kemudian muncul pada waktu berikutnya."
+  },
+  {
+   "n": 8226,
+   "text": "Penyelesaian cepat<font color='#00b034'> Combo </font>dalam kemajuan.<br><br>Tips: Klik pada<font color='#00b034'> Daftar Monster </font><font color='#00b034'> monster </font>untuk menampilkan<font color='#00b034'> menu aksi </font>, kemudian klik pada tampilan<font color='#00b034'> Attack/Combo </font>untuk membuka informasi<font color='#00b034'> Combo </font>saat ini, dan klik [<font color='#00b034'>Langsung Selesai</font>] untuk menyelesaikan<font color='#00b034'> Combo </font>yang berjalan saat ini."
+  },
+  {
+   "n": 8227,
+   "text": "Memperoleh sebuah<font color='#00b034'> hadiah misi </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Desa Api </font>atau<font color='#00b034'> Kota Malaikat </font>, masuk ke<font color='#00b034'> hadiah misi </font>dan bicara pada<font color='#00b034'> Hadiah </font>untuk membuka tampilan<font color='#00b034'> Ambil Hadiah Misi </font>, kemudian mulai dari sekarang<font color='#00b034'> hadiah misi </font>, pilih sebuah misi dan klik zona<font color='#00b034'> detail misi </font> [<font color='#00b034'>Ambil Hadiah</font>]untuk menerima<font color='#00b034'> hadiah misi </font>pilihan kamu."
+  },
+  {
+   "n": 8228,
+   "text": "Pergilah ke<font color='#00b034'> Kota Iblis </font>dan bicara kepada<font color='#00b034'> Pengawal Kota Iblis </font>untuk menyelidiki jejak dari<font color='#00b034'> Decadent Ninja </font>."
+  },
+  {
+   "n": 8229,
+   "text": "Tambahkan seorang<font color='#00b034'> teman </font>.<br>⟨0⟩. klik untuk membuka tampilan<font color='#00b034'> tombol arahan </font><font color='#00b034'> teman </font>. ⟨1⟩. Klik pada<font color='#00b034'> ikon tambah teman </font>, dan masuk ke<font color='#00b034'> nama-nama teman </font>yang mau kamu tambahkan."
+  },
+  {
+   "n": 8230,
+   "text": "Di dalam game,<font color='#00b034'> Item Mall </font>menjual<font color='#00b034'> item</font>.<br><br>Tips：Klik<font color='#00b034'> Bar petunjuk </font> 【<font color='#00b034'> Item Mall </font>】untuk membuka<font color='#00b034'> interface </font>, Lihat dan <font color='#00b034'> beli </font>beberapa<font color='#00b034'> item. </font><br><font color='#00b034'> Di Mall,</font>banyak<font color='#00b034'> item </font>dapat dibeli dengan <font color='#00b034'> gold </font>atau<font color='#00b034'> Gift Coupon </font>, beberapa<font color='#00b034'> item </font>hanya dapat dibeli dengan<font color='#00b034'> gold </font>."
+  },
+  {
+   "n": 8231,
+   "text": "Klik<font color='#00b034'>ikon guci </font>di sisi kanan atas, masuk<font color='#00b034'> toko guci </font>untuk memukul<font color='#00b034'> ⟨0⟩ </font>kali<font color='#00b034'> guci </font>.<br><br>Tips：Gunakan <font color='#00b034'> medal </font>atau<font color='#00b034'> gold </font>untuk<font color='#00b034'> memukul lebih banyak </font>，<font color='#00b034'> medal </font>dapat kamu peroleh dari<font color='#00b034'> tantangan di arena</font>atau akumulasi<font color='#00b034'> poin dari hadiah misi </font>; kamu dapat menggunakan<font color='#00b034'> pemukulan guci </font>【<font color='#00b034'>Beberapa</font>】."
+  },
+  {
+   "n": 8232,
+   "text": "Didapatkan melalui menaikan<font color='#00b034'> level </font>untuk mempelajari<font color='#00b034'> ⟨0⟩ </font><font color='#00b034'> skill </font>, dan gunakan itu pada<font color='#00b034'> panel skilll </font>, yang menyebabkan semua<font color='#00b034'>panel skill </font>dilengkapi dengan<font color='#00b034'> skill </font>.<br><br>Tips: Performa<font color='#00b034'> membunuh monster zona luar, bertempur otomatis di aula, tantangan di arena, tantangan Las Noches </font>dan event lainnya untuk memperoleh<font color='#00b034'> EXP </font>untuk meninkatkan<font color='#00b034'> level kamu</font>."
+  },
+  {
+   "n": 8233,
+   "text": "Masuk<font color='#00b034'> Leveling </font>, untuk melihat event yang ada di game.<br><br>Tips: Masuk ke<font color='#00b034'> Desa Air </font>dan lihat<font color='#00b034'> petunjuk cepat </font>dibagian kanan, kemudian klik pada ikon [<font color='#00b034'>Leveling</font>]untuk membuka tampilan<font color='#00b034'> petunjuk menaikkan level </font>dan melihat event harian yang dapat kamu ikuti."
+  },
+  {
+   "n": 8234,
+   "text": "Pergi dari<font color='#00b034'> peta dunia </font>ke zona luar.<br><br>Tips: Klik pada ikon [<font color='#00b034'>peta dunia</font>] pada pojok kanan atas tampilan game untuk membuka tampilan<font color='#00b034'> peta dunia </font>, kemudian cari dan klik pada<font color='#00b034'> Sungai ketenangan </font> untuk<font color='#00b034'> Sungai ketenangan </font>."
+  },
+  {
+   "n": 8235,
+   "text": "Melakukan penjelajahan di<font color='#00b034'>Zona Penjelajahan Sungai ketenangan </font>.<br><br>Tips: Dalam zona<font color='#00b034'> Sungai ketenangan </font>, carilah<font color='#00b034'> gemerlap </font><font color='#00b034'> Zona Penjelajahan Sungai ketenangan </font>, dan klik untuk membuka tampilan<font color='#00b034'> penjelajahan </font>. Kemudian pilih ikon [<font color='#00b034'>Klik untuk explore</font>] dalam tampilan untuk melakukan<font color='#00b034'> penjelajahan </font>."
+  },
+  {
+   "n": 8236,
+   "text": "Melakukan<font color='#00b034'> penjelajahan </font>dan meningkatkan tingkat penyelesaian<font color='#00b034'> Zona penjelajahan Sungai ketenangan </font>untuk<font color='#00b034'> ⟨0⟩% </font>, berhasil mencapai<font color='#00b034'> Bintang ⟨1⟩ </font>tingkat penjelajahan."
+  },
+  {
+   "n": 8237,
+   "text": "Pergi ke tampilan zona<font color='#00b034'> Sungai ketenangan </font><font color='#00b034'> daftar monster </font><font color='#00b034'> normal monster </font>dan lakukan sebuah<font color='#00b034'> Combo </font>sekali.<br>Tips: Masuk<font color='#00b034'> Sungai ketenangan </font>, dan memilih dari<font color='#00b034'> daftar monster </font>, tipe dari<font color='#00b034'> normal monster </font>dan melakukan serangan. Dalam<font color='#00b034'> menu monster, </font>pilih [<font color='#00b034'>Combo</font>] untuk membuka tampilan<font color='#00b034'> Combo </font>. Dalam tampilan, pilih berapa kali kamu ingin untuk<font color='#00b034'> Combo </font>, dan klik [<font color='#00b034'>OK</font>] untuk memulai<font color='#00b034'> Combo </font>."
+  },
+  {
+   "n": 8238,
+   "text": "Melalui<font color='#00b034'> penjelajahan, </font>dapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, kalahkan<font color='#00b034'> Sungai ketenangan</font>bos setan<font color='#00b034'> Demon Brute </font>.<br><br>Tips: Pada zona<font color='#00b034'> Sungai ketenanganExploration </font>, lakukan sebuah<font color='#00b034'> penjelajahan </font>untuk mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, tunggu<font color='#00b034'> Sungai ketenangan</font><font color='#00b034'> Demon Brute </font>muncul dan kalahkan dia.<font color='#00b034'> Demon Brute </font>akan muncul pada waktu tertentu setiap jam<font color='#00b034'></font>di<font color='#00b034'> Sungai ketenangan</font>. ini akan berhenti untuk<font color='#00b034'> ⟨0⟩ min </font>sebelum meninggalkan, kemudian muncul pada waktu berikutnya."
+  },
+  {
+   "n": 8239,
+   "text": "Masuk<font color='#00b034'> Leveling </font>, untuk melihat event yang ada di game.<br><br>Tips: Masuk ke<font color='#00b034'> Desa Petir </font>dan lihat<font color='#00b034'> petunjuk cepat </font>dibagian kanan, kemudian klik pada ikon [<font color='#00b034'>Leveling</font>]untuk membuka tampilan<font color='#00b034'> petunjuk menaikkan level </font>dan melihat event harian yang dapat kamu ikuti."
+  },
+  {
+   "n": 8240,
+   "text": "Pergi dari<font color='#00b034'> peta dunia </font>ke zona luar.<br><br>Tips: Klik pada ikon [<font color='#00b034'>peta dunia</font>] pada pojok kanan atas tampilan game untuk membuka tampilan<font color='#00b034'> peta dunia </font>, kemudian cari dan klik pada<font color='#00b034'> Puncak Bebatuan </font>area untuk<font color='#00b034'> Puncak Bebatuan </font>."
+  },
+  {
+   "n": 8241,
+   "text": "Melakukan penjelajahan di<font color='#00b034'> Puncak Bebatuan Exploration Zone </font>.<br><br>Tips: Dalam zona<font color='#00b034'> Puncak Bebatuan </font>, carilah<font color='#00b034'> sparkling </font><font color='#00b034'> Puncak Bebatuan Exploration Zone </font>, dan klik untuk membuka tampilan<font color='#00b034'> exploration </font>. Kemudian pilih ikon [<font color='#00b034'>Klik untuk explore a little</font>] dalam tampilan untuk melakukan<font color='#00b034'> penjelajahan </font>."
+  },
+  {
+   "n": 8242,
+   "text": "Melakukan<font color='#00b034'> penjelajahan </font>dan meningkatkan tingkat penyelesaian<font color='#00b034'> Puncak Bebatuan Exploration Zone</font>untuk<font color='#00b034'> ⟨0⟩% </font>, berhasil mencapai<font color='#00b034'> Bintang ⟨1⟩ </font>tingkat penjelajahan."
+  },
+  {
+   "n": 8243,
+   "text": "Pergi ke tampilan zona<font color='#00b034'> Puncak Bebatuan </font><font color='#00b034'> daftar monster </font><font color='#00b034'> normal monster </font>dan lakukan sebuah<font color='#00b034'> Combo </font>sekali.<br>Tips: Masuk<font color='#00b034'> Puncak Bebatuan </font>, dan memilih dari<font color='#00b034'> daftar monster </font>, tipe dari<font color='#00b034'> normal monster </font>dan melakukan serangan. Dalam<font color='#00b034'> menu monster, </font>pilih [<font color='#00b034'>Combo</font>] untuk membuka tampilan<font color='#00b034'> Combo </font>. Dalam tampilan, pilih berapa kali kamu ingin untuk<font color='#00b034'> Combo </font>, dan klik [<font color='#00b034'>OK</font>] untuk memulai<font color='#00b034'> Combo </font>."
+  },
+  {
+   "n": 8244,
+   "text": "Melalui<font color='#00b034'> penjelajahan, </font>mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, kalahkan<font color='#00b034'> Puncak Bebatuan </font>bos setan<font color='#00b034'> Demon Brute </font>.<br><br>Tips: Pada zona<font color='#00b034'> penjelajahan Puncak Bebatuan </font>, lakukan sebuah<font color='#00b034'> penjelajahan </font>untuk mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, tunggu<font color='#00b034'> Puncak Bebatuan </font><font color='#00b034'> Demon Brute </font>muncul dan kalahkan dia.<font color='#00b034'> Demon Brute </font>akan muncul pada waktu tertentu setiap jam<font color='#00b034'></font>di<font color='#00b034'> Puncak Bebatuan </font>. ini akan berhenti untuk<font color='#00b034'> ⟨0⟩ min </font>sebelum meninggalkan, kemudian muncul pada waktu berikutnya."
+  },
+  {
+   "n": 8245,
+   "text": "Penyelesaian cepat<font color='#00b034'> Combo </font>dalam kemajuan.<br><br>Tips: Klik pada<font color='#00b034'> Daftar Monster </font><font color='#00b034'> monster </font>untuk menampilkan<font color='#00b034'> menu aksi </font>, kemudian klik pada tampilan<font color='#00b034'> Attack/Combo </font>untuk membuka informasi<font color='#00b034'> Combo </font>saat ini, adan klik [<font color='#00b034'>Langsung selesai/font>] untuk menyelesaikan<font color='#00b034'> Combo </font>yang sedang berjalan."
+  },
+  {
+   "n": 8246,
+   "text": "Memperoleh sebuah<font color='#00b034'> hadiah misi </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Desa Petir </font>atau<font color='#00b034'> Kota Malaikat </font>, masuk ke<font color='#00b034'> hadiah misi </font>dan bicara pada<font color='#00b034'> Hadiah </font>untuk membuka tampilan<font color='#00b034'> Ambil Hadiah Misi </font>, kemudian mulai dari sekarang<font color='#00b034'> hadiah misi </font>, pilih sebuah misi dan klik zona<font color='#00b034'> detail misi </font> [<font color='#00b034'>Ambil Hadiah</font>]untuk menerima<font color='#00b034'> hadiah misi </font>pilihan kamu."
+  },
+  {
+   "n": 8247,
+   "text": "Klik<font color='#00b034'> ikon guci </font>di sisi kanan atas, masuk<font color='#00b034'> toko guci </font>untuk memukul<font color='#00b034'> ⟨0⟩ </font>kali<font color='#00b034'> guci </font>.<br><br>Tips：Gunakan <font color='#00b034'> medal </font>atau<font color='#00b034'> gold </font>untuk<font color='#00b034'> memukul lebih banyak </font>，<font color='#00b034'> medal </font>dapat kamu peroleh dari<font color='#00b034'> tantangan di arena</font>atau akumulasi<font color='#00b034'> poin dari hadiah misi </font>; kamu dapat menggunakan<font color='#00b034'> pemukulan guci </font>【<font color='#00b034'>Beberapa</font>】."
+  },
+  {
+   "n": 8248,
+   "text": "Masuk<font color='#00b034'> Leveling </font>, untuk melihat event yang ada di game.<br><br>Tips: Masuk ke<font color='#00b034'> Desa Angin </font>dan lihat<font color='#00b034'> petunjuk cepat </font>dibagian kanan, kemudian klik pada ikon [<font color='#00b034'>Leveling</font>]untuk membuka tampilan<font color='#00b034'> petunjuk menaikkan level </font>dan melihat event harian yang dapat kamu ikuti."
+  },
+  {
+   "n": 8249,
+   "text": "Pergi dari<font color='#00b034'> peta dunia </font>ke zona luar.<br><br>Tips: Klik pada ikon [<font color='#00b034'>peta dunia</font>] pada pojok kanan atas tampilan game untuk membuka tampilan<font color='#00b034'> peta dunia </font>interface, kemudian cari dan klik pada<font color='#00b034'> Lembah awan </font>area untuk masuk ke<font color='#00b034'> Lembah awan </font>."
+  },
+  {
+   "n": 8250,
+   "text": "Melakukan penjelajahan di<font color='#00b034'> Zone penjelajahan Lembah awan </font>.<br><br>Tips: Dalam zona<font color='#00b034'> Lembah awan </font>, carilah<font color='#00b034'> sparkling </font><font color='#00b034'> Zona penjelajahan Lembah awan </font>, dan klik untuk membuka tampilan<font color='#00b034'> penjelajahan </font>. Kemudian pilih ikon [<font color='#00b034'>Klik untuk Jelajah misi</font>] dalam tampilan untuk melakukan<font color='#00b034'> penjelajahan </font>."
+  },
+  {
+   "n": 8251,
+   "text": "Melakukan<font color='#00b034'> penjelajahan </font>dan meningkatkan tingkat penyelesaian<font color='#00b034'> Zona penjelajahan Lembah awan </font>untuk<font color='#00b034'> menjadikan ⟨0⟩% </font>, jika berhasil mencapai akan mendapatkan<font color='#00b034'> Bintang ⟨1⟩ </font>tingkat penjelajahan."
+  },
+  {
+   "n": 8252,
+   "text": "Pergi ke tampilan zona<font color='#00b034'> Lembah awan </font><font color='#00b034'> daftar monster </font><font color='#00b034'> normal monster </font>dan lakukan sebuah<font color='#00b034'> Combo </font>sekali.<br>Tips: Masuk<font color='#00b034'> Lembah awan </font>, dan memilih dari<font color='#00b034'> daftar monster </font>, tipe dari<font color='#00b034'> normal monster </font>dan melakukan serangan. Dalam<font color='#00b034'> menu monster, </font>pilih [<font color='#00b034'>Combo</font>] untuk membuka tampilan<font color='#00b034'> Combo </font>. Dalam tampilan, pilih berapa kali kamu ingin untuk<font color='#00b034'> Combo </font>, dan klik [<font color='#00b034'>OK</font>] untuk memulai<font color='#00b034'> Combo </font>."
+  },
+  {
+   "n": 8253,
+   "text": "Melalui<font color='#00b034'> penjelajahan, </font> kamu bisa mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, kalahkan bos setan <font color='#00b034'> Demon Brute </font>di<font color='#00b034'> Lembah awan </font>.<br><br>Tips: Pada zona<font color='#00b034'> Penjelajahan Lembah awan  </font>, lakukan sebuah<font color='#00b034'> penjelajahan </font>untuk mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, tunggu<font color='#00b034'> Lembah awan </font><font color='#00b034'> Demon Brute </font>muncul dan kalahkan dia.<font color='#00b034'> Demon Brute </font>akan muncul pada waktu tertentu setiap jam<font color='#00b034'></font>di<font color='#00b034'> Lembah awan </font>. ini akan berhenti untuk<font color='#00b034'> ⟨0⟩ min </font>sebelum meninggalkan, kemudian muncul pada waktu berikutnya."
+  },
+  {
+   "n": 8254,
+   "text": "Penyelesaian cepat<font color='#00b034'> Combo </font>dalam kemajuan.<br><br>Tips: Klik pada<font color='#00b034'> Daftar Monster </font><font color='#00b034'> monster </font>untuk menampilkan<font color='#00b034'> menu aksi </font>, kemudian klik pada tampilan<font color='#00b034'> Attack/Combo </font>untuk membuka informasi<font color='#00b034'> Combo </font>saat ini, and Klik [<font color='#00b034'>Langsung</font>] untuk menyelesaikan<font color='#00b034'> Combo </font>yang sedang berlangsung."
+  },
+  {
+   "n": 8255,
+   "text": "Memperoleh sebuah<font color='#00b034'> hadiah misi </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Desa Angin </font>atau<font color='#00b034'> Kota Malaikat </font>, masuk ke<font color='#00b034'> hadiah misi </font>dan masuk ke<font color='#00b034'> Hadiah </font>untuk membuka tampilan<font color='#00b034'> Ambil Hadiah Misi </font>, kemudian mulai dari sekarang<font color='#00b034'> hadiah misi </font>, pilih sebuah misi dan klik zona<font color='#00b034'> detail misi </font> [<font color='#00b034'>Ambil Hadiah</font>]untuk menerima<font color='#00b034'> hadiah misi </font>pilihan kamu."
+  },
+  {
+   "n": 8256,
+   "text": "Masuk<font color='#00b034'> Leveling </font>, untuk melihat event yang ada di game.<br><br>Tips: Masuk ke<font color='#00b034'> Desa Tanah </font>dan lihat<font color='#00b034'> petunjuk cepat </font>dibagian kanan, kemudian klik pada ikon [<font color='#00b034'>Leveling</font>]untuk membuka tampilan<font color='#00b034'> petunjuk menaikkan level </font>dan melihat event harian yang dapat kamu ikuti."
+  },
+  {
+   "n": 8257,
+   "text": "Pergi dari<font color='#00b034'> peta dunia </font>ke zona luar.<br><br>Tips: Klik pada ikon [<font color='#00b034'>peta dunia</font>] pada pojok kanan atas tampilan game untuk membuka tampilan<font color='#00b034'> peta dunia </font>, kemudian cari dan klik pada<font color='#00b034'> Lorong Naga Tersembunyi </font>area untuk<font color='#00b034'> Lorong Naga Tersembunyi </font>."
+  },
+  {
+   "n": 8258,
+   "text": "Melakukan eksplorasi di<font color='#00b034'> Zona penjelajahan Gerbang Naga Tersembunyi</font>.<br><br>Tips: Dalam zona<font color='#00b034'> Lorong Naga Tersembunyi </font>, carilah<font color='#00b034'> gemerlap </font><font color='#00b034'> Zona penjelajahan Gerbang Naga Tersembunyi</font>, dan klik untuk membuka tampilan<font color='#00b034'> explorasi </font>. Kemudian pilih ikon [<font color='#00b034'>Klik untuk explore a little</font>] dalam tampilan untuk melakukan<font color='#00b034'> explorasi </font>."
+  },
+  {
+   "n": 8259,
+   "text": "Melakukan<font color='#00b034'> explorasi </font>dan meningkatkan tingkat penyelesaian<font color='#00b034'> Zona penjelajahan Gerbang Naga Tersembunyi</font>untuk<font color='#00b034'> ⟨0⟩% </font>, berhasil mencapai<font color='#00b034'> Bintang ⟨1⟩ </font>tingkat explorasi."
+  },
+  {
+   "n": 8260,
+   "text": "Pergi ke tampilan zona<font color='#00b034'> Lorong Naga Tersembunyi </font><font color='#00b034'> daftar monster </font><font color='#00b034'> normal monster </font>dan lakukan sebuah<font color='#00b034'> Combo </font>sekali.<br>Tips: Masuk<font color='#00b034'> Lorong Naga Tersembunyi </font>, dan memilih dari<font color='#00b034'> daftar monster </font>, tipe dari<font color='#00b034'> normal monster </font>dan melakukan serangan. Dalam<font color='#00b034'> menu monster, </font>pilih [<font color='#00b034'>Combo</font>] untuk membuka tampilan<font color='#00b034'> Combo </font>. Dalam tampilan, pilih berapa kali kamu ingin untuk<font color='#00b034'> Combo </font>, dan klik [<font color='#00b034'>OK</font>] untuk memulai<font color='#00b034'> Combo </font>."
+  },
+  {
+   "n": 8261,
+   "text": "Melalui<font color='#00b034'> explorasi, </font>mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, kalahkan<font color='#00b034'> Tambang Batu </font>bos setan<font color='#00b034'> Demon Brute </font>.<br><br>Tips: Pada zona<font color='#00b034'> Tambang Batu Exploration </font>, lakukan sebuah<font color='#00b034'> explorasi </font>untuk mendapatkan sebuah<font color='#00b034'> Demon Proof of Suppression </font>, tunggu<font color='#00b034'> Tambang Batu </font><font color='#00b034'> Demon Brute </font>muncul dan kalahkan dia.<font color='#00b034'> Demon Brute </font>akan muncul pada waktu tertentu setiap jam<font color='#00b034'></font>di<font color='#00b034'> Tambang Batu </font>. ini akan berhenti untuk<font color='#00b034'> ⟨0⟩ min </font>sebelum meninggalkan, kemudian muncul pada waktu berikutnya."
+  },
+  {
+   "n": 8262,
+   "text": "Penyelesaian cepat<font color='#00b034'> Combos </font>dalam kemajuan.<br><br>Tips: Klik pada<font color='#00b034'> Daftar Monster </font><font color='#00b034'> monster </font>untuk menampilkan<font color='#00b034'> menu aksi </font>, kemudian klik pada tampilan<font color='#00b034'> Attack/Combo </font>untuk membuka informasi<font color='#00b034'> Combo </font>saat ini, dan klik [<font color='#00b034'>Langsung Selesai</font>] untuk menyelesaikan<font color='#00b034'> Combos </font>yang berjalan saat ini."
+  },
+  {
+   "n": 8263,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font>dan temukan<font color='#00b034'> Kisuke Urahara </font>untuk memahami rahasia<font color='#00b034'> Las Noches' </font>."
+  },
+  {
+   "n": 8264,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font>dan bicara ke<font color='#00b034'> Kisuke Urahara </font>untuk masuk<font color='#00b034'> Las Noches </font>, kemudian kalahkan penjaga di lantai<font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Gillian </font>."
+  },
+  {
+   "n": 8265,
+   "text": "Datang ke<font color='#00b034'> Kota Iblis </font>, dan bicara ke <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan tim pengawal di lantai<font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Grimmjow </font>."
+  },
+  {
+   "n": 8266,
+   "text": "Datang ke<font color='#00b034'> Kota Iblis </font>, dan bicara ke <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan tim pengawal di lantai<font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Rull </font>."
+  },
+  {
+   "n": 8267,
+   "text": "Datang ke<font color='#00b034'> Kota Iblis </font>, dan bicara ke <font color='#00b034'> Kisuke Urahara </font>, lalu masuk<font color='#00b034'> Las Noches </font>, dan kalahkan tim pengawal di lantai<font color='#00b034'> ⟨0⟩ </font>, <font color='#00b034'> Nnoitra </font>."
+  },
+  {
+   "n": 8268,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font>, dan bicara ke<font color='#00b034'> Valhalla </font><font color='#00b034'> Pengawal Kota Iblis </font>untuk masuk ke<font color='#00b034'> Decadent Nest </font>, kemudian kalahkan semua iblis didalam<font color='#00b034'> Decadent Nest </font>."
+  },
+  {
+   "n": 8269,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla</font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Valhalla Camp </font>，pilih level<font color='#00b034'>Sulit</font>kalahkan semua monster di dalam<font color='#00b034'> Valhalla Camp </font>."
+  },
+  {
+   "n": 8270,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla </font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Endless Sea Forests </font>，pilih level<font color='#00b034'>Sulit</font>level, destroy all monsters in all monsters in<font color='#00b034'> Endless Sea Forests </font>."
+  },
+  {
+   "n": 8271,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla</font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Crimson Grassland </font>，pilih level<font color='#00b034'>Sulit</font>kalahkan semua monster di dalam<font color='#00b034'> Crimson Grassland </font>."
+  },
+  {
+   "n": 8272,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla </font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Deadwood Villa </font>，pilih level<font color='#00b034'>Sulit</font>kalahkan semua monster di dalam<font color='#00b034'> Deadwood Villa </font>."
+  },
+  {
+   "n": 8273,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla </font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Valhalla Camp </font>，pilih level<font color='#00b034'>Mudah</font>kalahkan semua monster di dalam<font color='#00b034'> Valhalla Camp </font>."
+  },
+  {
+   "n": 8274,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla </font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Endless Sea Forests </font>，pilih level<font color='#00b034'>Mudah</font>kalahkan semua monster di dalam<font color='#00b034'> Endless Sea Forests </font>."
+  },
+  {
+   "n": 8275,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla </font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Crimson Grassland </font>，pilih level<font color='#00b034'>Mudah</font>kalahkan semua monster di dalam<font color='#00b034'> Crimson Grassland </font>."
+  },
+  {
+   "n": 8276,
+   "text": "Pergi ke<font color='#00b034'> Kota Iblis </font> dan masuk ke<font color='#00b034'> Valhalla </font>bicara pada<font color='#00b034'> Penjaga Kota Iblis </font>untuk masuk<font color='#00b034'> Deadwood Villa </font>，pilih level<font color='#00b034'>Mudah</font>kalahkan semua monster di dalam<font color='#00b034'> Deadwood Villa </font>."
+  },
+  {
+   "n": 8277,
+   "text": "Di dalam Toko Guci<font color='#00b034'> Arena</font> <font color='#00b034'>, </font>melakukan<font color='#00b034'> ⟨0⟩ kali</font><font color='#00b034'> Pukul Guci keberuntungan </font>.<br><br>Tips: Dapat menggunakan<font color='#00b034'> medali </font>atau<font color='#00b034'> gold </font>untuk melakukan<font color='#00b034'> undian </font>, <font color='#00b034'> medali </font>dapat diperoleh melalui<font color='#00b034'> duel arena </font>atau akumulasi<font color='#00b034'> poin hadiah misi </font>. Ketika melakukan beberapa<font color='#00b034'> undian menghancurkan guci, </font>dapat digunakan [<font color='#00b034'>terbuka bebas</font>]."
+  },
+  {
+   "n": 8278,
+   "text": "Memperoleh kemangan di<font color='#00b034'> Arena </font>dan menaikkan<font color='#00b034'> Rank </font>kamu ke<font color='#00b034'> Akademi I </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Arena </font>dan menang dalam duel untuk meningkatkan<font color='#00b034'> Skor </font>kamu. Ketika<font color='#00b034'> skor </font>kamu melebihi kondisi nilai<font color='#00b034'> promosi </font>, kalahkan<font color='#00b034'> Fortune Cat </font>yang muncul setelah kamu memenangkan pertarungan untuk mempromosikan<font color='#00b034'> Rank </font>kamu."
+  },
+  {
+   "n": 8279,
+   "text": "Memperoleh kemangan di<font color='#00b034'> Arena </font>dan menaikkan<font color='#00b034'> Rank </font>kamu ke<font color='#00b034'> Genin I </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Arena </font>dan menang dalam duel untuk meningkatkan<font color='#00b034'> Skor </font>kamu. Ketika<font color='#00b034'> skor </font>kamu melebihi kondisi nilai<font color='#00b034'> promosi </font>, kalahkan<font color='#00b034'> Fortune Cat </font>yang muncul setelah kamu memenangkan pertarungan untuk mempromosikan<font color='#00b034'> Rank </font>kamu."
+  },
+  {
+   "n": 8280,
+   "text": "Memperoleh kemangan di<font color='#00b034'> Arena </font>dan menaikkan<font color='#00b034'> Rank </font>kamu ke<font color='#00b034'> Chunin I </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Arena </font>dan menang dalam duel untuk meningkatkan<font color='#00b034'> Skor </font>kamu. Ketika<font color='#00b034'> skor </font>kamu melebihi kondisi nilai<font color='#00b034'> promosi </font>, kalahkan<font color='#00b034'> Fortune Cat </font>yang muncul setelah kamu memenangkan pertarungan untuk mempromosikan<font color='#00b034'> Rank </font>kamu."
+  },
+  {
+   "n": 8281,
+   "text": "Memperoleh kemangan di<font color='#00b034'> Arena </font>dan menaikkan<font color='#00b034'> peringkat </font>kamu ke<font color='#00b034'> Chunin I </font>.<br><br>Tips: Pergi ke<font color='#00b034'> Arena </font>dan menang dalam duel untuk meningkatkan<font color='#00b034'> skor </font>kamu. Ketika<font color='#00b034'> skor </font>kamu melebihi kondisi nilai<font color='#00b034'> promosi </font>, kalahkan<font color='#00b034'> Kucing Masa Depan </font>yang muncul setelah kamu memenangkan pertarunganuntuk mempromosikan<font color='#00b034'> peringkat </font>kamu."
+  },
+  {
+   "n": 8282,
+   "text": "Buka<font color='#00b034'> Ruang Bimbingan</font>'<font color='#00b034'> ⟨0⟩rd </font><font color='#00b034'> slot Murid</font>.<br><br>Tips：Setelah mencapai lv.<font color='#00b034'>⟨1⟩</font>, pergilah ke<font color='#00b034'> Kota Malaikat</font>lalu masuk<font color='#00b034'> Ruang Bimbingan </font>, gunakan<font color='#00b034'> Apprentice Panel Opening Book </font>untuk membuka<font color='#00b034'> ⟨2⟩rd </font><font color='#00b034'> slot murid</font>.<br> Dalam<font color='#00b034'> Arena, </font>kalahkan semua musuh dalam<font color='#00b034'> daftar musuh</font>, buka ketiga<font color='#00b034'> kartu </font> dan dapatkan<font color='#00b034'> kartu tambahan untuk di buka</font>, maka kamu berkesempatan untuk meraih<font color='#00b034'> Apprentice Panel Opening Book </font>."
+  },
+  {
+   "n": 8283,
+   "text": "<font color='#00b034'> Untuk memiliki </font> Murid sebanyak <font color='#00b034'> ⟨0⟩ orang </font>.<br><br>Tips: Dalam<font color='#00b034'> Arena, </font> kalahkan <font color='#00b034'> musuhmu </font>，lalu masuk<font color='#00b034'> Ruang Bimbingan </font> dan kalahkan lagi<font color='#00b034'> pemain </font> <font color='#00b034'> dalam daftar </font>, lalu kamu dapat menjadikan<font color='#00b034'> pemain tersebut </font> menjadi <font color='#00b034'> murid kamu </font>."
+  },
+  {
+   "n": 8284,
+   "text": "Membeli<font color='#00b034'> item </font>,<font color='#00b034'> item mall</font>di dalam game.<br><br>Tips: klik di<font color='#00b034'> tombol pengarah </font> [<font color='#00b034'> Barang Mall </font>]untuk membuka<font color='#00b034'> tampilan barang mall </font>. Lihat dan<font color='#00b034'> beli </font><font color='#00b034'> item </font>apa saja.<br><font color='#00b034'> barang-barang mall </font>kebanyakan bisa dibeli dengan<font color='#00b034'> gold </font>atau<font color='#00b034'> voucher hadiah </font>. Hanya beberapa<font color='#00b034'> barang-barang </font>memerlukan<font color='#00b034'> gold </font>untuk membelinya."
+  }
+ ]
+}

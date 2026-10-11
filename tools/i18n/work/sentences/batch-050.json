@@ -1,0 +1,402 @@
+{
+ "terms": {
+  "Ninja Chunin": "Chunin",
+  "Ninja Jounin": "Jounin",
+  "Ninja Genius": "Genius",
+  "Terhormat": "Honored",
+  "Demi Cinta!": "For Love",
+  "Berusaha menang": "Try to Win",
+  "Agent of Soul Reaper": "Soul Reaper Agent",
+  "Penyihir": "Sorcerer"
+ },
+ "units": [
+  {
+   "n": 13742,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Jounin Summoner</font><br>[line]Hit    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Critical Strike    +⟨2⟩<br>Dodge    +⟨3⟩<br>[line]<font color='#5df9ff'>Menggunakan Item hadiah event untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13743,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Graduate</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Menyelesaikan [Ninja Penyihir]<br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13744,
+   "text": "Gelar : <font color='#5df9ff'>Optimistic Sagittarius</font><br>[line]Hit    +⟨0⟩<br>Speed    +⟨1⟩%<br>Critical Strike    +⟨2⟩<br>[line]<font color='#5df9ff'>Sagittarius yang periang dan cinta damai<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13745,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Adventurer</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Adventurer] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13746,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Angel of Mercy</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Angel of Mercy] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13747,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Band Collector</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Band Collector] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13748,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Young Hero</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Young Hero] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13749,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Agent of Soul Reaper</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Agent of Soul Reaper] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13750,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Mysterious Organization</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Mysterious Organization] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13751,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Rookie of Card</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Rookie of Card] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13752,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Village's Pride</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Village's Pride] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13753,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Beyond God</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Beyond God] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13754,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Card Expert</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Card Expert] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13755,
+   "text": "Gelar : <font color='#5df9ff'>Resolute Capricorn</font><br>[line]Armor Break    +⟨0⟩<br>Block    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Capricorn yang praktis dan telaten <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13756,
+   "text": "Gelar Saat Ini <font color='#5df9ff'>Card Master</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Card Master] <br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13757,
+   "text": "Gelar: <font color='#5df9ff'>Kage</font><br>[line]Hit    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Constitution    +⟨2⟩<br>Attack    +⟨3⟩%<br>Speed    +⟨4⟩%<br>HP    +⟨5⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah untuk bertahan dari serangan Tailed Beasts untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13758,
+   "text": "Gelar: <font color='#5df9ff'>Tailed Beast Killer</font><br>[line]Critical Strike    +⟨0⟩<br>Strength    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah untuk bertahan dari serangan Tailed Beasts untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13759,
+   "text": "Gelar saat ini: <font color='#5df9ff'>Emperor of Login</font><br>[line]Armor Break    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Dodge    +⟨2⟩<br>Block    +⟨3⟩<br>[line]<font color='#5df9ff'>Gunakan item ini untuk mendapatkan gelar.</font>"
+  },
+  {
+   "n": 13760,
+   "text": "Gelar Saat Ini: <font color='#5df9ff'>Tailed Beast Defender</font><br>[line]Hit    +⟨0⟩<br>Speed    +⟨1⟩%<br>Minimum Attack  +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan item hadiah dari event untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13761,
+   "text": "Gelar : <font color='#5df9ff'>Independent Aquarius</font><br>[line]Pierce    +⟨0⟩<br>Dodge    +⟨1⟩<br>Max Attack+⟨2⟩<br>[line]<font color='#5df9ff'> Aquarius yang percaya diri dan berdikari <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13762,
+   "text": "Gelar : <font color='#5df9ff'>Artistic Pisces</font><br>[line]Block    +⟨0⟩<br>Defense    +⟨1⟩<br>Chakra+⟨2⟩<br>[line]<font color='#5df9ff'>Pisces yang romantis dan sensitif <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13763,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Chunin</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai【Ninjutsu Limits】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13764,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Jounin</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai【Ninjutsu Master】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13765,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Genius</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai【Legendary Ninja】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13766,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Terhormat</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Mencapai 【Treat Money Like Dirt】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13767,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Demi Cinta!</font><br>[line]Max HP    +⟨0⟩<br>[line]<font color='#5df9ff'>Mencapai 【Lost Love】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13768,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Berusaha menang</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Mencapai 【Adept Wealth Hunter】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13769,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Tidak ada efek tambahan"
+  },
+  {
+   "n": 13770,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai 【Prominent Ninja】 <br> dapat memperoleh gelar ini. </font>"
+  },
+  {
+   "n": 13771,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Speed    +⟨0⟩%<br>[line]<font color='#5df9ff'>Mencapai 【Fight for Love】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13772,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ kostum orange +⟨1⟩ ke daftar kostum<br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13773,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Menyimpan ⟨0⟩ Kostum orange +⟨1⟩ pada daftar kostum<br> Untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13774,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Attack    +⟨0⟩%<br>[line]<font color='#5df9ff'>Mencapai 【Curry in Life】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13775,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Stone drops    +⟨0⟩%<br>[line]<font color='#5df9ff'>Mencapai 【Tsunade's Bet】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13776,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Armor Break    +⟨0⟩<br>Defense    +⟨1⟩<br>[line]<font color='#5df9ff'>Mencapai 【Essence of Final Release】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13777,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Armor Break    +⟨0⟩<br>Defense    +⟨1⟩<br>[line]<font color='#5df9ff'>Mencapai 【Wake of Sharingan】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13778,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Armor Break    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Dodge    +⟨2⟩<br>Block    +⟨3⟩<br>[line]<font color='#5df9ff'>Menyelesaikan login pada event semester baru Gunakan hadiah item akan mendapatkan gelar ini.akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar:<font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13779,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Attack    +⟨0⟩%<br>Critical Strike    +⟨1⟩<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13780,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Speed    +⟨0⟩%<br>Dodge    +⟨1⟩<br>Critical Strike    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13781,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Defense    +⟨0⟩<br>HP    +⟨1⟩%<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13782,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Dodge    +⟨0⟩<br>Speed    +⟨1⟩%<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13783,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai 【Early Peep of Nindo】 <br>dapat memperoleh gelar ini. </font>"
+  },
+  {
+   "n": 13784,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Hit    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13785,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ kostum biru +⟨1⟩ ke daftar kostum<br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13786,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Critical Strike    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13787,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Armor Break    +⟨0⟩<br>Attack    +⟨1⟩%<br>Critical Strike    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13788,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Attack    +⟨0⟩%<br>Speed    +⟨1⟩%<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font><br>[line]Sisa waktu gelar: <font color='#5df9ff'>{@0:}</font> hari. "
+  },
+  {
+   "n": 13789,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Attack    +⟨0⟩%<br>Critical Strike    +⟨1⟩<br>Min Attack+⟨2⟩<br>[line]<font color='#5df9ff'>Aries yang berani dan terus maju<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13790,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]HP    +⟨0⟩%<br>Stamina    +⟨1⟩<br>Constitution    +⟨2⟩<br>[line]<font color='#5df9ff'>Taurus yang sabar dan cermat <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13791,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Speed    +⟨0⟩%<br>Agility    +⟨1⟩<br>Dodge    +⟨2⟩<br>[line]<font color='#5df9ff'>Gemini yang pandai dan tak terduga<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13792,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Block    +⟨0⟩<br>Chakra  +⟨1⟩<br>Max HP +⟨2⟩<br>[line]<font color='#5df9ff'>Cancer yang lemah lembut<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13793,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Critical Strike    +⟨0⟩<br>Strength    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Leo yang antusias dan ramah<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13794,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Defense    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Min Attack+⟨2⟩<br>[line]<font color='#5df9ff'>Virgo yang teliti dan penuh akal <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13795,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai 【Ninjutsu Beginner】 <br>dapat memperoleh gelar ini. </font>"
+  },
+  {
+   "n": 13796,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Dodge    +⟨0⟩<br>Defense    +⟨1⟩<br>Block    +⟨2⟩<br>[line]<font color='#5df9ff'>Libra yang anggun dan jujur<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13797,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Abu-Abu +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13798,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Strength    +⟨0⟩<br>Hit    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13799,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Agility    +⟨0⟩<br>Attack    +⟨1⟩%<br>Speed    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13800,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Defense    +⟨0⟩<br>Block    +⟨1⟩<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13801,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Dodge    +⟨0⟩<br>Pierce    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13802,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Pierce    +⟨0⟩<br>Hit    +⟨1⟩<br>Block    +⟨2⟩<br>[line]<font color='#5df9ff'>Scorpio yang mistik dan menawan<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13803,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Hit    +⟨0⟩<br>HP    +⟨1⟩%<br>Attack    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13804,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Critical Strike    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Speed    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13805,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Armor Break    +⟨0⟩<br>Constitution    +⟨1⟩<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13806,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Attack    +⟨0⟩%<br>Speed    +⟨1⟩%<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13807,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Mempertahankan kemenangan ⟨0⟩ kali<br> tuntuk memperoleh gelar ini.</font>"
+  },
+  {
+   "n": 13808,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Menantang ⟨0⟩ tuan rumah<br> untuk memperoleh gelar ini.</font>"
+  },
+  {
+   "n": 13809,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>⟨0⟩ Menggagalkan ⟨1⟩ Tantangan<br> untuk memperoleh gelar ini.</font>"
+  },
+  {
+   "n": 13810,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Hit    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Critical Strike    +⟨2⟩<br>Dodge    +⟨3⟩<br>[line]<font color='#5df9ff'>Menggunakan Item hadiah event untuk mendapatkan gelar ini.</font><br>[line]Sisa Waktu：<font color='#5df9ff'>{@0:}</font>Hari."
+  },
+  {
+   "n": 13811,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Menyelesaikan [Ninja Penyihir]<br> untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13812,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Hit    +⟨0⟩<br>Speed    +⟨1⟩%<br>Critical Strike    +⟨2⟩<br>[line]<font color='#5df9ff'>Sagittarius yang periang dan cinta damai<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13813,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Adventurer] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13814,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Angel of Mercy] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13815,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Band Collector] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13816,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Young Hero] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13817,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Agent of Soul Reaper] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13818,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Mysterious Organization] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13819,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Village's Pride] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13820,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Beyond God] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13821,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Rookie of Card] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13822,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Card Expert] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13823,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Armor Break    +⟨0⟩<br>Block    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Capricorn yang praktis dan telaten <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13824,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Meraih [Card Master] <br>untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13825,
+   "text": "<font color='#5df9ff'> Klik untuk mengganti gelar</font><br>[line]Hit    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Constitution    +⟨2⟩<br>Attack    +⟨3⟩%<br>Speed    +⟨4⟩%<br>HP    +⟨5⟩%<br>[line]<font color='#5df9ff'>Gunakan item penghargaan Pertahanan dari serangan Tailed beast untuk mendapatkan gelar ini.</font><br>[line]Waktu gelar: <font color='#5df9ff'>{@0: }</font> hari."
+  },
+  {
+   "n": 13826,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Critical Strike    +⟨0⟩<br>Strength    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah untuk bertahan dari serangan Tailed Beasts untuk mendapatkan gelar ini.</font><br>[line]Waktu gelar:<font color='#5df9ff'>{@0:}</font> Hari."
+  },
+  {
+   "n": 13827,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Armor Break    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Dodge    +⟨2⟩<br>Block    +⟨3⟩<br>[line]<font color='#5df9ff'>gunakan item dari autumn sign-in event untuk memperoleh gelar ini.</font><br>[line]Waktu gelar: <font color='#5df9ff'>{@0: }</font> days."
+  },
+  {
+   "n": 13828,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti title</font><br>[line]Hit    +⟨0⟩<br>Speed    +⟨1⟩%<br>Minimum Attack    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan item hadiah dari event untuk mendapatkan gelar ini.</font><br>[line]Masa berlaku gelar: <font color='#5df9ff'>{@0: }</font> hari."
+  },
+  {
+   "n": 13829,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Pierce    +⟨0⟩<br>Dodge    +⟨1⟩<br>Max Attack+⟨2⟩<br>[line]<font color='#5df9ff'>Aquarius yang percaya diri dan berdikari <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13830,
+   "text": "<font color='#5df9ff'>Klik untuk mengganti gelar</font><br>[line]Block    +⟨0⟩<br>Defense    +⟨1⟩<br>Chakra  +⟨2⟩<br>[line]<font color='#5df9ff'>Pisces yang romantis dan sensitif <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font><br>[line]Sisa masa berlaku:<font color='#5df9ff'>{@0:}</font>hari."
+  },
+  {
+   "n": 13831,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai 【Ninjutsu Limits】 <br>dapat memperoleh gelar ini. </font>"
+  },
+  {
+   "n": 13832,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai 【Ninjutsu Master】 <br>dapat memperoleh gelar ini. </font>"
+  },
+  {
+   "n": 13833,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Mencapai 【Treat Money Like Dirt】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13834,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Max HP    +⟨0⟩<br>[line]<font color='#5df9ff'>Mencapai 【Lost Love】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13835,
+   "text": "<font color='#5df9ff'>Klik untuk mengubah gelar</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Mencapai 【Adept Wealth Hunter】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13836,
+   "text": "Gold Equipment"
+  },
+  {
+   "n": 13837,
+   "text": "Wish"
+  },
+  {
+   "n": 13838,
+   "text": "Boar Hair"
+  }
+ ]
+}

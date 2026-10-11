@@ -1,0 +1,3106 @@
+{
+ "terms": {
+  "Nara Shikamaru": "Shikamaru Nara",
+  "Akimichi Choji": "Choji Akimichi",
+  "Yamanaka Ino": "Ino Yamanaka",
+  "Inuzuka Kiba": "Kiba Inuzuka",
+  "Aburame Shino": "Shino Aburame",
+  "Neji": "Neji Hyuga",
+  "Kakashi": "Kakashi Hatake",
+  "Sasuke": "Sasuke Uchiha",
+  "Murid Ninja": "Beginner Ninja",
+  "Ninja Akademi": "Academy Ninja",
+  "Ninja Genin": "Genin",
+  "Semangat, anak muda!": "Keep Going, Young One",
+  "Gudian of Sand": "Guardian of Sand",
+  "eBlue Beast": "[Ex] Blue Beast",
+  "eYellow Flash": "[Ex] Yellow Flash",
+  "eGudian of Sand": "[Ex] Guardian of Sand",
+  "eNight Dancer": "[Ex] Night Dancer",
+  "eBlade of Chaos": "[Ex] Blade of Chaos",
+  "eRed Sunset": "[Ex] Red Sunset",
+  "eWhite Fang": "[Ex] White Fang",
+  "eNinja Hero": "[Ex] Ninja Hero",
+  "Come Come Paradise": "Make Out Paradise",
+  "Kota Iblis": "Demon City",
+  "Jalan Kematian": "Marsh of Death",
+  "Amegakure": "Hidden Rain Village",
+  "Rumah": "Home",
+  "Serangan": "Attack",
+  "Kemurkaan": "Wrath",
+  "Cairan": "Liquid",
+  "Latihan Ninjutsu": "Ninjutsu Training",
+  "Tim Pengawal": "Guard Squad",
+  "Krisis Pegunungan": "Mountain Crisis",
+  "Stinger Bee": "Bee Stingers",
+  "Kembali ke Desa": "Return to the Village",
+  "Perayaan [I]": "Celebration [I]",
+  "Perayaan [II]": "Celebration [II]",
+  "Darurat": "Emergency",
+  "Penyelamatan": "Rescue",
+  "Anjing Ninja Pakkun": "Ninja Dog",
+  "Laporan": "Report",
+  "Aktivitas Aneh": "Unusual Activity",
+  "Bayangan Gelap": "Dark Shadow",
+  "Perasaan Familiar": "Familiar Scent",
+  "Hati yang Hilang": "Lost Heart",
+  "Sejarah Desa": "History of the Village",
+  "Pilih": "Choose",
+  "Permasalahan Toko": "Trouble at the Item Shop",
+  "Janji yang Hilang": "Missed Appointment",
+  "Pedagang yang Sial": "Unlucky Businessman",
+  "Mengawal": "Escort",
+  "Berangkat": "Set Off",
+  "Memberi": "Gift",
+  "Salam": "Greeting",
+  "Ujian": "Test",
+  "Mengunjungi Ketua": "Meet the Master",
+  "Menolong Orang": "Help People",
+  "Mengenali": "Recognized",
+  "Permintaan Nyonya Feng": "Feng Niang's Commission",
+  "Jiwa yang Mekar": "Flower Demon",
+  "Pertolongan dari Pedagang": "Merchant's Help",
+  "Menghukum Banteng yang Nakal": "Lesson Bull",
+  "Percaya": "Trust",
+  "Membangun Desa Kembali": "Rebuild the Village",
+  "Mengumpulkan Biji": "Collect Seeds",
+  "Dosa Pejuang": "Evil Warrior",
+  "Harta yang Dicuri": "Stolen Treasure",
+  "Mencari Harta": "Looking for Treasure",
+  "Melaporkan Diri": "Report In",
+  "Pencuri Malam [I]": "Night Thief [I]",
+  "Pencuri Malam [II]": "Night Thief [II]",
+  "Pencuri Malam [III]": "Night Thief [III]",
+  "Cerita Kota Iblis": "Legend of Castlevania",
+  "Hantu Wanita yang Kabur": "Escaped Female Ghost",
+  "Krisis": "Crisis",
+  "Kehancuran Iblis": "Exorcism",
+  "Cerita": "The Rumor",
+  "Jiwa Iblis": "Heart Demon",
+  "Rahasia Minyak Katak": "The Mystery of Toad Oil",
+  "Lilin Suci": "Holy Candle",
+  "Iblis Chuuji": "Chuuji Demon",
+  "Kekuatan Iblis [I]": "Demon Power [I]",
+  "Kekuatan Iblis [II]": "Demon Power [II]",
+  "Mengetahui": "Notify",
+  "Menyelidiki": "Investigation",
+  "Menukar": "Trade",
+  "Ganas": "Violent",
+  "Barisan Anjing Laut": "Seal Array",
+  "Kembali ke Kota Suci": "Return to Angel City",
+  "Jalan Keselamatan": "Path of Salvation",
+  "Bumbu-bumbu": "Spices",
+  "Obat yang Menyegarkan": "Fragrance Medicine",
+  "Menyelamatkan Pejuang": "Save the Samurai",
+  "Iblis Api": "Fire Demon",
+  "Ninja Penggosip": "Gossiping Ninja",
+  "Dukun Sesat": "Rogue Shaman",
+  "Bandit Hutan Hijau": "Green Forest Bandit",
+  "Ninja Pulau Kuno": "Ancient Island Ninja",
+  "Pertikaian": "Dispute",
+  "Harta Karun": "Hidden Treasure",
+  "Iblis Naomasa": "Naomasa Demon",
+  "Invasi Hutan Api": "Fire Forest Invasion",
+  "Pasukan Khusus": "Special Forces",
+  "Pengelana yang Hilang": "The Lost Traveler",
+  "Lagu Perayu": "Charming Song",
+  "Kerapuhan Hutan": "Fragile Forest",
+  "Elang Botak": "Bald Eagle",
+  "Sumber Kerapuhan": "Source of Decay",
+  "Mengakali Kelelawar Darah": "Outwit the Blood Bat",
+  "Membersihkan Bencana": "Clean Up the Disaster",
+  "Pondok Bandit": "Bandit Lodge",
+  "Menghukum Ketua Bandit": "Punish the Bandit Leader",
+  "Kerapuhan Angin": "Fragile Wind",
+  "Melaporkan ke Ketua": "Report to the Leader",
+  "Segel Angin": "Wind Seal",
+  "Seruling Angin [I]": "Wind Flute [I]",
+  "Seruling Angin [II]": "Wind Flute [II]",
+  "Seruling Angin [III]": "Wind Flute [III]",
+  "Penuh Seni": "Full of Art",
+  "Bencana Semburan Naga": "Dragon Breath Disaster",
+  "Kemurkaan Roh Angin": "Wrath of the Wind Spirit",
+  "Iblis Tadakatsu": "Tadakatsu Demon",
+  "Pembalasan Ninja Hutan": "Forest Ninja Revenge",
+  "Ketua Ninja Hutan": "Forest Ninja Leader",
+  "Yang Tak Terduga": "The Unexpected",
+  "Jejak Penyihir": "Sorcerer's Trail",
+  "Jejak Harta Karun": "Treasure Trail",
+  "Jalan Masuk Reruntuhan": "Entrance to the Ruins",
+  "Segel Reruntuhan": "Ruins Seal",
+  "Undangan [I]": "Invitation [I]",
+  "Undangan [II]": "Invitation [II]",
+  "Menjelajah [I]": "Explore [I]",
+  "Menjelajah [II]": "Explore [II]",
+  "Menjelajah [III]": "Explore [III]",
+  "Kembali": "Return",
+  "Peringatan": "Warning",
+  "Iblis Gorila": "Gorilla Demon",
+  "Perseteruan": "Feud",
+  "Bukti": "Proof",
+  "Kemana Harus Pergi": "Where to Go",
+  "Iblis Air": "Water Demon",
+  "Lembut Laksana Hutan": "Gentle as the Forest",
+  "Padang Gersang": "Barren Plains",
+  "Roh Kayu yang Terbuang": "Abandoned Wood Spirit",
+  "Ahli Pedang dari Tanah Derita": "Swordmaster of the Land of Suffering",
+  "Kegilaan Iblis Blosom": "Madness of the Blossom Demon",
+  "Pengejaran Bandit": "Bandit Pursuit",
+  "Pemberantasan Bandit": "Bandit Eradication",
+  "Kepala Perampok": "Robber Chief",
+  "Para Penyihir": "The Sorcerers",
+  "Roh Air": "Water Spirit",
+  "Roh Air [II]": "Water Spirit [II]",
+  "Gosip di Perairan": "Rumors on the Waters",
+  "Raja Iblis": "Demon King",
+  "Burung Pembawa Berita": "Messenger Bird",
+  "Elang Botak yang Jinak": "Tame Bald Eagle",
+  "Obat Terlarang": "Forbidden Medicine",
+  "Obat Terlarang [II]": "Forbidden Medicine [II]",
+  "Obat Terlarang [III]": "Forbidden Medicine [III]",
+  "Iblis Tanah": "Earth Demon",
+  "Segel Tanah": "Earth Seal",
+  "Sekeras Gunung": "Firm as Mountain",
+  "Ancaman Pantai": "Beach Threat",
+  "Bertemu  Pemancing": "Meet the Angler",
+  "Pembersihan Pantai[I]": "Beach Cleanup [I]",
+  "Report dari Pantai[I]": "Report from the Beach [I]",
+  "Kembali ke Pantai[I]": "Return to the Beach [I]",
+  "Pembersihan Pantai[II]": "Beach Cleanup [II]",
+  "Report dari Pantai[II]": "Report from the Beach [II]",
+  "Kembali ke Pantai[II]": "Return to the Beach [II]",
+  "Pembersihan Pantai[Ⅲ]": "Beach Cleanup [III]",
+  "Report dari Pantai[Ⅲ]": "Report from the Beach [Ⅲ]",
+  "Kembali ke Pantai[Ⅲ]": "Return to the Beach [III]",
+  "Pembersihan Pantai[Ⅳ]": "Beach Cleanup [IV]",
+  "Report dari Pantai[Ⅳ]": "Report from the Beach [Ⅳ]",
+  "Kembali ke Pantai[Ⅳ]": "Return to the Beach [IV]",
+  "Ancaman Terakhir": "The Final Threat",
+  "Kemenangan Kembali": "Victory Returns",
+  "Merubah Amegakure": "Change Amegakure",
+  "Menyelinap ke Amegakure": "Sneak into Amegakure",
+  "Peperangan di Amegakure[I]": "War in Amegakure [I]",
+  "Report dari Amegakure[I]": "Report from Amegakure [I]",
+  "Perampokan di Amegakure[I]": "Robbery in Amegakure [I]",
+  "Peperangan di Amegakure[II]": "War in Amegakure [II]",
+  "Report dari Amegakure[II]": "Report from Amegakure [II]",
+  "Perampokan di Amegakure[II]": "Robbery in Amegakure [II]",
+  "Peperangan di Amegakure[Ⅲ]": "War in Amegakure [III]",
+  "Report dari Amegakure[Ⅲ]": "Report from Amegakure [Ⅲ]",
+  "Perampokan di Amegakure[Ⅲ]": "Robbery in Amegakure [III]",
+  "Peperangan di Amegakure[Ⅳ]": "War in Amegakure [IV]",
+  "Report dari Amegakure[Ⅳ]": "Report from Amegakure [Ⅳ]",
+  "Perampokan di Amegakure[Ⅳ]": "Robbery in Amegakure [IV]",
+  "Hidup atau Mati! Inferno Dog!": "Life or Death Inferno Dog",
+  "Berita Kemenangan": "News of Victory",
+  "Koleksi Kartu Nama": "Namecard Collection",
+  "Mengumpulkan Benda Asing": "Collect Foreign Matter",
+  "Mengunjungi Penduduk": "Visit the Residents",
+  "Bukti Keberanian": "Proof of Courage",
+  "Mineral Misterius": "Mysterious Mineral",
+  "Dalang Kegelapan": "Puppeteer of Darkness",
+  "Banteng yang Kuat": "Mighty Bull",
+  "Pejuang Petir": "Lightning Warrior",
+  "Bayangan Malam": "Night Shadow",
+  "Orang yang Hilang": "The Missing Person",
+  "Penguasa Air": "Water Ruler",
+  "Bencana Bandit": "Bandit Calamity",
+  "Ninja Hutan": "Forest Ninja",
+  "Perubahan Tulang": "Bone Transformation",
+  "Persetujuan pencuri yang benar": "The True Thief's Agreement",
+  "Rahasia Payung": "Secret of the Umbrella",
+  "Menghukum Stinger Bee": "Punish the Stinger Bee",
+  "Bau yang Menyengat": "Pungent Smell",
+  "Bor yang Dicuri": "The Stolen Drill",
+  "Kentang dan Batu Permata": "Potatoes and Gemstones",
+  "Monyet dan Anjing": "The Monkey and the Dog",
+  "Onigiri Pemakan Manusia": "Man-Eating Onigiri",
+  "Iblis yang Menakutkan": "Terrifying Demon",
+  "Mencuri Jagung": "Steal Corn",
+  "Pencuri di Toko": "Thief in the Shop",
+  "Hantu Wanita yang Nakal": "Naughty Female Ghost",
+  "Inti Api": "Fire Core",
+  "Larutan Mineral": "Mineral Solution",
+  "Kecantikan dan Keburukan": "Beauty and Ugliness",
+  "Anak Panah yang Tajam": "Sharp Arrows",
+  "Kelicikan Para Pejuang": "Cunning of the Warriors",
+  "Dendam sang anak": "The Child's Revenge",
+  "Tangisan yang Berisik": "Noisy Crying",
+  "Menghancurkan Iblis": "Destroy the Demon",
+  "Menghukum para Bandit": "Punish the Bandits",
+  "Material Senjata": "Weapon Materials",
+  "Menghukum Penjahat demi Masyarakat": "Punish Criminals for the People",
+  "Melindungi Jalan Rahasia": "Protect the Secret Path",
+  "Melampaui": "Surpassing",
+  "Menghukum Dukun Sesat": "Punish the Rogue Shaman",
+  "Ancaman dari perdagangan Caravan": "Threat to the Caravan Trade",
+  "Seruling Memikat": "Enticing Flute",
+  "Perampok Gunung": "Mountain Bandit",
+  "Botol Ramuan": "Potion Bottle",
+  "Ancaman Bloodbat": "Bloodbat Threat",
+  "Mengusir Egret": "Drive Away the Egret",
+  "Ninja keras Kepala": "Stubborn Ninja",
+  "Sumber Rusak": "Broken Source",
+  "Pemeliharaan Gagal": "Failed Maintenance",
+  "Pemurnian": "Purification",
+  "Skeleton Berkumpul": "Skeletons Gather",
+  "Keseimbangan Lingkungan": "Environmental Balance",
+  "Minuman Sari Buah": "Fruit Juice Drink",
+  "Menghukum Biksu Jahat": "Punish the Evil Monk",
+  "Bandit yang Sombong": "Arrogant Bandit",
+  "Masuk Rumah": "Enter the House",
+  "Menangkap Ikan": "Catch Fish",
+  "Pembersihan Pantai": "Beach Cleanup",
+  "Penelitian Cairan": "Liquid Research",
+  "Mimpi Buruk": "Nightmare",
+  "Nilai Tulang Ikan": "Fishbone Value",
+  "Kesialan di pantai": "Misfortune at the Beach",
+  "Merebut Mutiara": "Seize the Pearl",
+  "Keseimbangan Pantai": "Beach Balance",
+  "Kamu memiliki keyakinan?": "Do You Have Faith",
+  "Hal yang menjengkelkan": "Annoying Matters",
+  "Permainan Kematian": "Death Game",
+  "Alasan Kuat": "Strong Reason",
+  "Pemebelajaran Perubahan Reptil": "Reptile Transformation Study",
+  "Permintaan yang sombong": "Arrogant Request",
+  "Penemuan Besar": "Great Discovery",
+  "Mudah dan ujian keras": "Easy and Hard Trials",
+  "Bukti dari kekuatan": "Proof of Strength",
+  "Menghilangkan Sisa": "Remove the Remains",
+  "Undian Guci Keberuntungan": "Lucky Jar Draw",
+  "Klaim Gift Box": "Claim Gift Box",
+  "Perubahan Peta": "Map Change",
+  "Temukan Daratan Rahasia": "Find the Secret Land",
+  "Beli Carrier Bag": "Buy a Carrier Bag",
+  "Mencari Level": "Searching for Levels",
+  "Auto-Combat Zone Luar": "Auto-Combat Outer Zone",
+  "Bunuh Iblis": "Slay the Demon",
+  "Auto-Combat Zone Luar [Ⅱ]": "Auto-Combat Outer Zone [II]",
+  "Ambil Hadiah": "Claim the Reward",
+  "Pengejaran Kejahatan": "Crime Pursuit",
+  "Sinergi Ninjutsu": "Ninjutsu Synergy",
+  "Rahasia di Las Noches": "Secret of Las Noches",
+  "Tantangan Las Noches": "Las Noches Challenge",
+  "Hancurkan Kejahatan": "Crush the Evil",
+  "Valhalla Camp [Sulit]": "Valhalla Camp [Hard]",
+  "Endless Sea Forests [Sulit]": "Endless Sea Forests [Hard]",
+  "Crimson Grassland [Sulit]": "Crimson Grassland [Hard]",
+  "Deadwood Villa [Sulit]": "Deadwood Villa [Hard]",
+  "Turnamen Bela Diri Dunia": "World Martial Arts Tournament",
+  "Promosikan Rank [Ⅰ]": "Promote Rank [I]",
+  "Promosikan Rank [Ⅱ]": "Promote Rank [II]",
+  "Promosikan Rank [Ⅲ]": "Promote Rank [Ⅲ]",
+  "Bimbingan Murid [Satu]": "Student Guidance [One]",
+  "Bimbingan Murid [Dua]": "Student Guidance [Two]",
+  "Bimbingan Murid [Tiga]": "Student Guidance [Three]",
+  "Bimbingan Murid [Empat]": "Student Guidance [Four]",
+  "Bimbingan Murid [Lima]": "Student Guidance [Five]",
+  "Lihat Ranking": "View Rankings",
+  "Enhance Peralatan": "Enhance Equipment",
+  "Pemurnian Peralatan": "Equipment Purification",
+  "Sintesis Gem": "Gem Synthesis",
+  "Slot Peralatan": "Equipment Slots",
+  "Pakai Gem": "Use Gems",
+  "Sintesis Kostum": "Outfit Synthesis",
+  "Gunakan Enchantment": "Use Enchantment",
+  "Kunjungi Matchmaker": "Visit the Matchmaker",
+  "Klaim Gift Box[Ⅰ]": "Claim Gift Box [I]",
+  "Klaim Gift Box[Ⅱ]": "Claim Gift Box [II]",
+  "Klaim Gift Box[Ⅲ]": "Claim Gift Box [III]",
+  "Klaim Gift Box[Ⅳ]": "Claim Gift Box [IV]",
+  "Klaim Gift Box[Ⅴ]": "Claim Gift Box [V]",
+  "Curry in Life Kesatu": "Curry in Life I",
+  "Curry in Life Kedua": "Curry in Life II",
+  "Curry in Life Ketiga": "Curry in Life III",
+  "Curry in Life Keempat": "Curry in Life IV",
+  "Curry in Life Kelima": "Curry in Life V",
+  "Curry in Life Keenam": "Curry in Life VI",
+  "Curry in Life Ketujuh": "Curry in Life VII",
+  "Curry in Life Kedelapan": "Curry in Life VIII",
+  "Curry in Life Kesembilan": "Curry in Life IX",
+  "Curry in Life Terakhir": "Curry in Life Final",
+  "Membuat Kebun": "Build a Garden",
+  "Kunjungi Ketua Ninja": "Visit the Ninja Leader",
+  "Membuat Gudang": "Build a Warehouse",
+  "Accelerate Bangunan": "Accelerate Building",
+  "Menguprade Rumah": "Upgrade the House",
+  "Membuat Ruang Penetasan": "Build a Hatching Room",
+  "Membuat Kincir Angin": "Build a Windmill",
+  "Mengupgrade Tower Prstasi": "Upgrade the Achievement Tower",
+  "Mengupgrade Kebun": "Upgrade the Garden",
+  "Memperluas pemandangan": "Expand the Scenery",
+  "Mengatur Cuaca": "Control the Weather",
+  "Menetaskan telur": "Hatch the Egg",
+  "Mengambil telur": "Take the Egg",
+  "Lempar telur busuk": "Throw Rotten Eggs",
+  "Resep Rahasia Leluhur": "Ancestral Secret Recipe",
+  "Demon Proof of Suppression! Selesai!": "Demon Proof of Suppression Complete",
+  "Warga! Serangan Tailed Beast !": "Citizens! Tailed Beast Attack",
+  "Kunjungi Ketua Desa": "Visit the Village Elder",
+  "Peralatan Senjata": "Weapon Equipment",
+  "Panel Misi": "Quest Panel",
+  "Latihan Bertarung[I]": "Combat Training [I]",
+  "Latihan Bertarung[II]": "Combat Training [II]",
+  "Keseimbangan Alam": "Balance of Nature",
+  "Jebakan Sunflower": "Sunflower Trap",
+  "Pasokan Perorangan": "Individual Supplies",
+  "Pengumpulan informasi": "Information Gathering",
+  "Mengungkap Laporan": "Reveal the Report",
+  "Perintah Baru": "New Orders",
+  "Perintah Ketua Desa": "Village Elder's Orders",
+  "Berduka": "In Mourning",
+  "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
+  "Talisman Pengaman": "Protection Talisman",
+  "Jagung": "Corn",
+  "Hirako Shinji": "Shinji Hirako",
+  "Hollowfied Hirako Shinji": "Hollowified Shinji",
+  "Hyuga Neji": "Neji Hyuga",
+  "Sarugaki Hiyori": "Hiyori Sarugaki",
+  "Shiba Kuukaku": "Kukaku Shiba",
+  "Kurenai Yuuhi": "Kurenai Yuhi",
+  "Ghost Lady": "Phantom Lady",
+  "Hatake Kakashi": "Kakashi Hatake",
+  "Uchiha Sasuke": "Sasuke Uchiha",
+  "Mitarashi Anko": "Anko Mitarashi",
+  "Kurotsuchi Nemu": "Nemu Kurotsuchi",
+  "Kusajishi Yachiru": "Yachiru Kusajishi",
+  "Kotetsu Isane": "Isane Kotetsu",
+  "Yadomaru Sasha": "Lisa Yadomaru",
+  "Arisawa Tatsuki": "Tatsuki Arisawa",
+  "Momochi Zabuza": "Zabuza Momochi",
+  "Penyihir": "Sorcerer",
+  "Perampok": "Bandit",
+  "Pemancing": "Fisherman",
+  "Greedy Bandit Chief": "Greedy Bandit"
+ },
+ "units": [
+  {
+   "n": 13060,
+   "text": "Pelepasan efek cuaca berikutnya akan dirasakan dalam {@0:} menit"
+  },
+  {
+   "n": 13061,
+   "text": "<font color='#6a6e70'><b>    Well    </b></font>"
+  },
+  {
+   "n": 13062,
+   "text": "Well"
+  },
+  {
+   "n": 13063,
+   "text": "Berbicara dengan [{@0:}]"
+  },
+  {
+   "n": 13064,
+   "text": "Tidak dapat pesan pribadi ke diri sendiri"
+  },
+  {
+   "n": 13065,
+   "text": "Kamu saat ini tidak memiliki teman!"
+  },
+  {
+   "n": 13066,
+   "text": "Masukkan nama pemain kamu untuk pesan pribadi:"
+  },
+  {
+   "n": 13067,
+   "text": "Pemain tidak ada atau offline! Silahkan ulangi!"
+  },
+  {
+   "n": 13068,
+   "text": "Chat pribadi"
+  },
+  {
+   "n": 13069,
+   "text": "<font color='#6a6e70'><b>    Kincir Angin    </b></font>"
+  },
+  {
+   "n": 13070,
+   "text": "Kincir Angin"
+  },
+  {
+   "n": 13071,
+   "text": "Shippuden Wishing Pot"
+  },
+  {
+   "n": 13072,
+   "text": "S-rank Ninja Wishing Pot"
+  },
+  {
+   "n": 13073,
+   "text": "Kamu memiliki pilihan  {@0:}<br>masukan jumlah wishing pots yang ingin kamu gunakan."
+  },
+  {
+   "n": 13074,
+   "text": "kamu telah memperoleh <font color='#ff0000'>{@1:}</font> {@0:} dari Wishing Pot "
+  },
+  {
+   "n": 13075,
+   "text": "Silakan pilih item dari bawah"
+  },
+  {
+   "n": 13076,
+   "text": "<font color='#6a6e70'><b>    Wooden Horse   </b></font>"
+  },
+  {
+   "n": 13077,
+   "text": "Kuda Kayu"
+  },
+  {
+   "n": 13078,
+   "text": "Sistem pesan"
+  },
+  {
+   "n": 13079,
+   "text": "Tas kamu sudah level max."
+  },
+  {
+   "n": 13080,
+   "text": "Tas kamu sudah level max, harus mengupgrade rumah pertama."
+  },
+  {
+   "n": 13081,
+   "text": "Dana tidak mencukupi, tindakan ini memerlukan<font color='#ffffff'> {@1:} </font>{@0:type}."
+  },
+  {
+   "n": 13082,
+   "text": "Upgrade berhasil, biaya<font color='#ffffff'> {@1:} </font>{@0:type}."
+  },
+  {
+   "n": 13083,
+   "text": "Penjualan tanaman yang dihasilkan <font color='#ffffff'> {@1:} </font>{@0:type}."
+  },
+  {
+   "n": 13084,
+   "text": "Maksimal Taruhan:   {@0: }  {@1: } "
+  },
+  {
+   "n": 13085,
+   "text": "Kamu tidak cukup memiliki {@0:}, taruhan gagal!"
+  },
+  {
+   "n": 13086,
+   "text": "Kamu bertaruh pada {@0: } Menang! Jumlah taruhan {@1: }  {@2: } ! Taruhan kalah, kehilangan taruhan!"
+  },
+  {
+   "n": 13087,
+   "text": "Kamu bertaruh pada {@0: } Mendapatkan Kemenangan! Jumlah taruhan {@1: }  {@2: } , Taruhan Berhasil, Memperoleh hadiah!"
+  },
+  {
+   "n": 13088,
+   "text": "Waktunya bertaruh p[ada putaran ini:   {@0: } —— {@1: }   [Selesai]"
+  },
+  {
+   "n": 13089,
+   "text": "Sudah bertaruh {@0: } :  {@1: }  {@2: }<br>      Menunggu hasil..."
+  },
+  {
+   "n": 13090,
+   "text": "Taruhan putaran ini telah dimulai, <a href= 'event: buy'><u>Klik untuk bertaruh!</u></a>"
+  },
+  {
+   "n": 13091,
+   "text": "Sekarang waktunya bertaruh:   {@0: } —— {@1: }   [Not started]"
+  },
+  {
+   "n": 13092,
+   "text": "Memperoleh<font color='#ffffff'> {@0:} </font>medali arena."
+  },
+  {
+   "n": 13093,
+   "text": "Kamu memiliki pilihan<font color='#ff0000'> {@0:} </font>sebagai pemenang dari pertandingan ini! (Limit taruhan pertandingan {@1:} {@2:}, Saldo kamu saat ini : {@3:})<br>Semua Gold yang di pertaruhkan akan di kurangi sementara!"
+  },
+  {
+   "n": 13094,
+   "text": "Konfirmasi bertaruh [<font color='#ff0000'>{@0:}</font>] untuk {@1:quantity} {@2:type}？"
+  },
+  {
+   "n": 13095,
+   "text": "⟨0⟩. Hanya dapat bertaruh setelah kompetisi ⟨1⟩ besar. Hanya bisa bertaruh sekali pada setiap pertandingan. <br>⟨2⟩. Jika kamu menang taruhan, kamu akan menerima dua kali jumlah taruhan. Hadiah akan dikirim setelah pertandingan berakhir. <br>⟨3⟩. Jika kamu tidak menang, taruhan kamu tidak akan dikembalikan."
+  },
+  {
+   "n": 13096,
+   "text": "Medali Arena"
+  },
+  {
+   "n": 13097,
+   "text": "Minimal taruhan adalah {@0: }  {@1: } !"
+  },
+  {
+   "n": 13098,
+   "text": "Arena Ranking：{@1:}"
+  },
+  {
+   "n": 13099,
+   "text": "Rank : {@0:}"
+  },
+  {
+   "n": 13100,
+   "text": "Rata-rata kemenangan Arena : {@0:}%"
+  },
+  {
+   "n": 13101,
+   "text": "Aturan Turnamen Bela Diri Dunia :<br><br>Pemain yang terdaftar akan dibagi dalam ⟨0⟩ kelompok di babak awal. Selanjutnya ⟨1⟩ pemenang di babak penyisihan akan berpartisipasi di babak sistem gugur dan hanya satu pemenang akan muncul di turnamen ini! <br>Berpartisipasi dalam Turnamen Bela Diri Dunia membutuhkan biaya ⟨2⟩ Batu yang akan dipotong saat pendaftaran berhasil!"
+  },
+  {
+   "n": 13102,
+   "text": "Waktu bertaruh: <font color='#ff0000'>{@0:} - {@1:}</font>"
+  },
+  {
+   "n": 13103,
+   "text": "Pil EXP"
+  },
+  {
+   "n": 13104,
+   "text": "Penyediaan Pil"
+  },
+  {
+   "n": 13105,
+   "text": "Pil Dahaga"
+  },
+  {
+   "n": 13106,
+   "text": "Tas kamu sudah penuh, silahkan mengatur kembali sebelum membeli!"
+  },
+  {
+   "n": 13107,
+   "text": "Mendapatkan suatu barang untuk dijual{@1:value} {@0:type}!"
+  },
+  {
+   "n": 13108,
+   "text": "Tailed beast sedang menyerbu daratan! Hokage mengundang kelima ketua desa dan membicarakan keamanan desa. Pergi untuk melihat!"
+  },
+  {
+   "n": 13109,
+   "text": "Tailed beast sedang menyerbu daratan! Mizukage mengundang kelima ketua desa dan membicarakan keamanan desa. Pergi untuk melihat!"
+  },
+  {
+   "n": 13110,
+   "text": "Tailed beast sedang menyerbu daratan! Raikage mengundang kelima ketua desa dan membicarakan keamanan desa. Pergi untuk melihat!"
+  },
+  {
+   "n": 13111,
+   "text": "Tailed beast sedang menyerbu daratan! Kazekage mengundang kelima ketua desa dan membicarakan keamanan desa. Pergi untuk melihat!"
+  },
+  {
+   "n": 13112,
+   "text": "Tailed beast sedang menyerbu daratan! Tsuchikage mengundang kelima ketua desa dan membicarakan keamanan desa. Pergi untuk melihat!"
+  },
+  {
+   "n": 13113,
+   "text": "Kostum Awal"
+  },
+  {
+   "n": 13114,
+   "text": "Talisman Pengaman"
+  },
+  {
+   "n": 13115,
+   "text": "Rata-Rata keberhasilan transfer: {@0:}%"
+  },
+  {
+   "n": 13116,
+   "text": "Biaya  Transfer: <font color='#ff0000'>{@0:}</font>gold"
+  },
+  {
+   "n": 13117,
+   "text": "⟨0⟩. Tarik Kostum+⟨1⟩ atau lebih dari Tas ke box(menerima special outfit).\n⟨2⟩. Klik untuk memulai. System akan mentransfer Kostum awal ke yang lain dengan tingkat, level dan bound attribut yang sama.\n⟨3⟩. Original transfer mungkin akan gagal dan menghasilkan kehilangan kostum. Kamu dapat menggunakan Talisman pengaman untuk menjaga Kostum awal.\n⟨4⟩. Kamu dapat membayar gold lebih untuk mengansurasikan ⟨5⟩% keberhasilan.\n⟨6⟩. Setiap transfer akan dikenakan biaya gold tertentu, tergantung pada tingkat dari Kostum asli. Sebuah Talisman pengaman juga akan digunakan jika kamu memilikinya (⟨7⟩% sukses tidak memerlukan Talisman pengaman).\n⟨8⟩. Semua kostum akan bound setelah melakukan transfer."
+  },
+  {
+   "n": 13118,
+   "text": "kamu harus membayar <font color='#ff0000'>{@0:}</font> gold untuk transfer kostum awal ke target kostum dengan ⟨0⟩% Sukses! ⟨1⟩% transfer tidak memerlukan Talisman pengaman."
+  },
+  {
+   "n": 13119,
+   "text": "Setiap transfer kamu memerlukan biaya <font color='#ff0000'>{@0:}</font> gold. Lebih baik kamu menggunakan Talisman pengaman. Apa kamu yakin untuk memulai? (Prompt ini tidak akan muncul pada waktu berikutnya) "
+  },
+  {
+   "n": 13120,
+   "text": "Transfer Gagal!"
+  },
+  {
+   "n": 13121,
+   "text": "Transfer Gagal! Kostum Hilang"
+  },
+  {
+   "n": 13122,
+   "text": "Transfer berhasil!"
+  },
+  {
+   "n": 13123,
+   "text": "Selamat, <font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:} </u></a></font> telah mencoba mentransfer kostum dan memperoleh {@1:emoticon}</a>!"
+  },
+  {
+   "n": 13124,
+   "text": "Advanced outfit transfer costs {@0:}gold"
+  },
+  {
+   "n": 13125,
+   "text": "Menggunakan {@1:num} Talisman pengaman untuk memulai transfer kostum khusus"
+  },
+  {
+   "n": 13126,
+   "text": "Selamat, <font color='#ff0000'><a href= 'event:player|{@0:}'><u>{@0:} </u></a></font>{@1:emoticon} Telah mencoba transfer kostum khusus dan memperoleh<a href= 'event:ItemLink|{@2:config}*{@3:Uid}*{@4:type}'><u>{@5:item name}</u></a>"
+  },
+  {
+   "n": 13127,
+   "text": "Item yang kamu taruh tidak sesuai jenis dan level. Transfer gagal! "
+  },
+  {
+   "n": 13128,
+   "text": "Silahkan tarik kostum +⟨0⟩ atau lebih yang diinginkan untuk di transfer!"
+  },
+  {
+   "n": 13129,
+   "text": "⟨0⟩% biaya: <font color='#ff0000'>{@0:}</font> gold"
+  },
+  {
+   "n": 13130,
+   "text": "Tidak dapat transfer"
+  },
+  {
+   "n": 13131,
+   "text": "Kamu hanya dapat melakukan tantangan ⟨0⟩ kali sehari di Arena. Silahkan kembali besok! "
+  },
+  {
+   "n": 13132,
+   "text": "END"
+  },
+  {
+   "n": 13133,
+   "text": "Cakar Singa"
+  },
+  {
+   "n": 13134,
+   "text": "Ekor Singa"
+  },
+  {
+   "n": 13135,
+   "text": "<a href= 'event:activitydepot'><u><b>Biaya gold untuk mengaktifkan</b></u></a></font>"
+  },
+  {
+   "n": 13136,
+   "text": "<a href= 'event:activitydepot'><u><b>biaya Batu untuk mengaktifkan</b></u></a></font>"
+  },
+  {
+   "n": 13137,
+   "text": "Menangkap beberapa kali:"
+  },
+  {
+   "n": 13138,
+   "text": "Atribut Dasar"
+  },
+  {
+   "n": 13139,
+   "text": "Diambil beberapa kali:"
+  },
+  {
+   "n": 13140,
+   "text": "Alur misi"
+  },
+  {
+   "n": 13141,
+   "text": "⟨0⟩-kunci untuk bergerak"
+  },
+  {
+   "n": 13142,
+   "text": "Mulai Menanam"
+  },
+  {
+   "n": 13143,
+   "text": "Mengamankan murid"
+  },
+  {
+   "n": 13144,
+   "text": "Tarik dan taruh Pet"
+  },
+  {
+   "n": 13145,
+   "text": "Gudang Batu"
+  },
+  {
+   "n": 13146,
+   "text": "Menahan gurunya"
+  },
+  {
+   "n": 13147,
+   "text": "Pengiriman untuk bekerja"
+  },
+  {
+   "n": 13148,
+   "text": "Membantu guru"
+  },
+  {
+   "n": 13149,
+   "text": "Event Murid"
+  },
+  {
+   "n": 13150,
+   "text": "Meminta gurunya"
+  },
+  {
+   "n": 13151,
+   "text": "Menebus"
+  },
+  {
+   "n": 13152,
+   "text": "Selamatkan dia"
+  },
+  {
+   "n": 13153,
+   "text": "Memanggil NPC untuk tantangan"
+  },
+  {
+   "n": 13154,
+   "text": "Penyimpanan"
+  },
+  {
+   "n": 13155,
+   "text": "Set pesan Pergi"
+  },
+  {
+   "n": 13156,
+   "text": "Rangking Murid"
+  },
+  {
+   "n": 13157,
+   "text": "Pemulihan"
+  },
+  {
+   "n": 13158,
+   "text": "Mengembalikan"
+  },
+  {
+   "n": 13159,
+   "text": "Menutup efek zona special"
+  },
+  {
+   "n": 13160,
+   "text": "Menjalankan efek zona special"
+  },
+  {
+   "n": 13161,
+   "text": "Kembalikan setingan awal"
+  },
+  {
+   "n": 13162,
+   "text": "Menggunakan<font color='#ffffff'> {@3:} </font>{@2:} berhasil membeli<font color='#ffffff'> {@1:} </font><font color='#00aeff'>{@0:}</font> dengan sukses."
+  },
+  {
+   "n": 13163,
+   "text": "Hapus inbox"
+  },
+  {
+   "n": 13164,
+   "text": "Selamat!"
+  },
+  {
+   "n": 13165,
+   "text": "Misi Harian"
+  },
+  {
+   "n": 13166,
+   "text": "Dana Gudang"
+  },
+  {
+   "n": 13167,
+   "text": "Instruksi Gudang:<br>Gudang dapat menyimpan peralatan dan item yang untuk sementara yang tidak kamu gunakan.<br><br>Max Batu yang kamu simpan di Gudang adalah </font>:<font color='#00b035'>⟨0⟩,⟨1⟩,⟨2⟩</font>"
+  },
+  {
+   "n": 13168,
+   "text": "Langsung menarik pet ke panel gambar untuk mengatur status pemeliharaan."
+  },
+  {
+   "n": 13169,
+   "text": "Misi Cabang"
+  },
+  {
+   "n": 13170,
+   "text": "Mempekerjakan pekerja"
+  },
+  {
+   "n": 13171,
+   "text": "Sudah memperkerjakan murid"
+  },
+  {
+   "n": 13172,
+   "text": "Karma"
+  },
+  {
+   "n": 13173,
+   "text": "Ranking EXP"
+  },
+  {
+   "n": 13174,
+   "text": "Atribut Pertarungan"
+  },
+  {
+   "n": 13175,
+   "text": "Mencoba mengisi"
+  },
+  {
+   "n": 13176,
+   "text": "Berpartisipasi dalam perselisihan internal monster"
+  },
+  {
+   "n": 13177,
+   "text": "Dia gurunya"
+  },
+  {
+   "n": 13178,
+   "text": "Misi Perayaan"
+  },
+  {
+   "n": 13179,
+   "text": "Level bengkel saat ini akan menghasilkan <font color='#00b035'> {@0:}％ </font> bonus profit atas tanaman yang dijual."
+  },
+  {
+   "n": 13180,
+   "text": "Target Pemain"
+  },
+  {
+   "n": 13181,
+   "text": "Level kamar tidur:"
+  },
+  {
+   "n": 13182,
+   "text": "Penerima"
+  },
+  {
+   "n": 13183,
+   "text": "Objek misi"
+  },
+  {
+   "n": 13184,
+   "text": "Misi Singkat"
+  },
+  {
+   "n": 13185,
+   "text": "Misi Panduan"
+  },
+  {
+   "n": 13186,
+   "text": "Daftar Misi"
+  },
+  {
+   "n": 13187,
+   "text": "Guru Kamu:"
+  },
+  {
+   "n": 13188,
+   "text": "Account Pemain"
+  },
+  {
+   "n": 13189,
+   "text": "Aku ingin pergi ke"
+  },
+  {
+   "n": 13190,
+   "text": "Produksi rata-rata kamu saat ini:"
+  },
+  {
+   "n": 13191,
+   "text": "Meninggalkan"
+  },
+  {
+   "n": 13192,
+   "text": "Sisa percobaan penyelamatan hari ini:"
+  },
+  {
+   "n": 13193,
+   "text": "Misi Utama"
+  },
+  {
+   "n": 13194,
+   "text": "Penyerapan"
+  },
+  {
+   "n": 13195,
+   "text": "Duel Toggle"
+  },
+  {
+   "n": 13196,
+   "text": "Sisa poin"
+  },
+  {
+   "n": 13197,
+   "text": "Pantulan"
+  },
+  {
+   "n": 13198,
+   "text": "Subjek pencarian"
+  },
+  {
+   "n": 13199,
+   "text": "Hapus Karakter:"
+  },
+  {
+   "n": 13200,
+   "text": "Defeat Message"
+  },
+  {
+   "n": 13201,
+   "text": "Masukan Pasword:"
+  },
+  {
+   "n": 13202,
+   "text": "Menyaring Mail"
+  },
+  {
+   "n": 13203,
+   "text": "Unique Signature"
+  },
+  {
+   "n": 13204,
+   "text": "Victory Cry"
+  },
+  {
+   "n": 13205,
+   "text": "Perkembangan penjelajahan: </font>"
+  },
+  {
+   "n": 13206,
+   "text": "Sisa mencoba hari ini: </font>"
+  },
+  {
+   "n": 13207,
+   "text": "Sisa waktu untuk penjelajahan berikutnya: </font>"
+  },
+  {
+   "n": 13208,
+   "text": "Nama: </font>"
+  },
+  {
+   "n": 13209,
+   "text": "Item yang di konsumsi: </font>"
+  },
+  {
+   "n": 13210,
+   "text": "Tas Penuh, gagal untuk mendapatkan item!"
+  },
+  {
+   "n": 13211,
+   "text": "Pemeliharaan pet: <br>Harus menetapkan pekerja untuk memelihara pet.<br>Pemeliharaan pet membutuhkan Batu selama pemeliharaan.<br>Pet mendapatkan EXP melalui pemeliharaan.<br>Semakin tinggi level kandang pet, semakin kuat para pekerja pemeliharaan pet, dan semakin tinggi EXP diperoleh oleh pet.<br><br>Jika Batu tidak mencukupi untuk membiayai pekerja, pemeliharaaan pet akan berakhir dan pekerja akan kabur."
+  },
+  {
+   "n": 13212,
+   "text": "EXP saat ini"
+  },
+  {
+   "n": 13213,
+   "text": "Level Pet"
+  },
+  {
+   "n": 13214,
+   "text": "semua"
+  },
+  {
+   "n": 13215,
+   "text": "posisi"
+  },
+  {
+   "n": 13216,
+   "text": "Class"
+  },
+  {
+   "n": 13217,
+   "text": "Terima semua Mail pemain"
+  },
+  {
+   "n": 13218,
+   "text": "Ijinkan semua pemain untuk duel"
+  },
+  {
+   "n": 13219,
+   "text": "Hanya menerima Mail teman"
+  },
+  {
+   "n": 13220,
+   "text": "Hanya bolehkan teman untuk duel"
+  },
+  {
+   "n": 13221,
+   "text": "Tolak semua Mail pemain"
+  },
+  {
+   "n": 13222,
+   "text": "Tolak semua duel pemain"
+  },
+  {
+   "n": 13223,
+   "text": "Tolak Mail musuh"
+  },
+  {
+   "n": 13224,
+   "text": "Tolak musuh untuk duel"
+  },
+  {
+   "n": 13225,
+   "text": "Sisa Poin"
+  },
+  {
+   "n": 13226,
+   "text": "Reset"
+  },
+  {
+   "n": 13227,
+   "text": "Sisa waktu untuk merefresh berikutnya: {@0:}"
+  },
+  {
+   "n": 13228,
+   "text": "Rangking sumber daya"
+  },
+  {
+   "n": 13229,
+   "text": "Melaksanakan Perintah"
+  },
+  {
+   "n": 13230,
+   "text": "Klik untuk sekali jelajah"
+  },
+  {
+   "n": 13231,
+   "text": "Masukkan tanaman penjualan di interface:"
+  },
+  {
+   "n": 13232,
+   "text": "Batu tidak cukup, Pengiriman gagal!"
+  },
+  {
+   "n": 13233,
+   "text": "Semua tidak digunakan"
+  },
+  {
+   "n": 13234,
+   "text": "Poin"
+  },
+  {
+   "n": 13235,
+   "text": "Gagal: Ditangkap sebagai murid!"
+  },
+  {
+   "n": 13236,
+   "text": "Jika kamu bertemu dengan seorang penjaga, kamu harus melawan dia!"
+  },
+  {
+   "n": 13237,
+   "text": "Menang: Memanen tanaman berhasil!"
+  },
+  {
+   "n": 13238,
+   "text": "Guild"
+  },
+  {
+   "n": 13239,
+   "text": "Kamu telah melakukan <font color='#ffa201'>{@0:}／{@1:}</font> hambatan"
+  },
+  {
+   "n": 13240,
+   "text": "Tidak membantu"
+  },
+  {
+   "n": 13241,
+   "text": "Tidak dapat menggunakan item obat dan makanan dalam stadium.<br>Akan pulih secara otomatis <font color='#ffffff'> ⟨0⟩% </font> HP dan <font color='#ffffff'> ⟨1⟩% </font> chakra setiap pertempuran!"
+  },
+  {
+   "n": 13242,
+   "text": "Masukkan Saldo gold dapat diakses:"
+  },
+  {
+   "n": 13243,
+   "text": "Biaya menggunakan Batu"
+  },
+  {
+   "n": 13244,
+   "text": "Sekarang dapat digunakan"
+  },
+  {
+   "n": 13245,
+   "text": "Level Bengkel: "
+  },
+  {
+   "n": 13246,
+   "text": "Menulis surat"
+  },
+  {
+   "n": 13247,
+   "text": "Pilih menurut Level"
+  },
+  {
+   "n": 13248,
+   "text": "<font color='#00ffff'>Buang</font>"
+  },
+  {
+   "n": 13249,
+   "text": "<font color='#00ffff'>Kombinasi</font>"
+  },
+  {
+   "n": 13250,
+   "text": "<font color='#00ffff'>Tampilan</font>"
+  },
+  {
+   "n": 13251,
+   "text": "<font color='#00ffff'>Menilai</font>"
+  },
+  {
+   "n": 13252,
+   "text": "Perbaikan"
+  },
+  {
+   "n": 13253,
+   "text": "Send"
+  },
+  {
+   "n": 13254,
+   "text": "<font color='#00ffff'>Gunakan</font>"
+  },
+  {
+   "n": 13255,
+   "text": "Konfirmasi tugas"
+  },
+  {
+   "n": 13256,
+   "text": "Level kebun sayur:"
+  },
+  {
+   "n": 13257,
+   "text": "Sisa  dana"
+  },
+  {
+   "n": 13258,
+   "text": "Sisa waktu refresh"
+  },
+  {
+   "n": 13259,
+   "text": "Aturan Penghapusan: <br><br>⟨0⟩. Karakter tidak dapat dihapus jika<font color='#ff0000'> Pasword sekunder </font> tidak di set<br>⟨1⟩. Penghapusan Karakter akan berlaku setelah <font color='#ff0000'> ⟨2⟩ Jam </font>. Selama waktu ini kamu tidak dapat login, tetapi kamu dapat <font color='#ff0000'> membatalkan proses penghapusan </font> pada interface login<br>⟨3⟩. Klik untuk <font color='#ff0000'> langsung hapus </font>, biaya <font color='#ff0000'> ⟨4⟩ gold </font> Untuk secara langsung menghapus karakter<br>⟨5⟩. Hanya dapat menghapus karakter<font color='#ff0000'> ⟨6⟩ kali </font> dalam sebulan."
+  },
+  {
+   "n": 13260,
+   "text": "Memulangkan pekerja"
+  },
+  {
+   "n": 13261,
+   "text": "Belum mempekerjakan murid"
+  },
+  {
+   "n": 13262,
+   "text": "Hollowfied Hirako Shinji"
+  },
+  {
+   "n": 13263,
+   "text": "Akimichi Choji"
+  },
+  {
+   "n": 13264,
+   "text": "Inuzuka Kiba"
+  },
+  {
+   "n": 13265,
+   "text": "Aburame Shino"
+  },
+  {
+   "n": 13266,
+   "text": "Nara Shikamaru"
+  },
+  {
+   "n": 13267,
+   "text": "Witch"
+  },
+  {
+   "n": 13268,
+   "text": "Asuma Sarutobi"
+  },
+  {
+   "n": 13269,
+   "text": "Rock Lee"
+  },
+  {
+   "n": 13270,
+   "text": "Hyuga Neji"
+  },
+  {
+   "n": 13271,
+   "text": "Scorpion"
+  },
+  {
+   "n": 13272,
+   "text": "Yamato"
+  },
+  {
+   "n": 13273,
+   "text": "Nel"
+  },
+  {
+   "n": 13274,
+   "text": "Sarugaki Hiyori"
+  },
+  {
+   "n": 13275,
+   "text": "Ggio Vega"
+  },
+  {
+   "n": 13276,
+   "text": "Mashiro Kuna"
+  },
+  {
+   "n": 13277,
+   "text": "Shiba Kuukaku"
+  },
+  {
+   "n": 13278,
+   "text": "Nanao Ise"
+  },
+  {
+   "n": 13279,
+   "text": "Momo Hinamori"
+  },
+  {
+   "n": 13280,
+   "text": "Rangiku Matsumoto"
+  },
+  {
+   "n": 13281,
+   "text": "Kurenai Yuuhi"
+  },
+  {
+   "n": 13282,
+   "text": "Hime"
+  },
+  {
+   "n": 13283,
+   "text": "Shizune"
+  },
+  {
+   "n": 13284,
+   "text": "White Ichigo"
+  },
+  {
+   "n": 13285,
+   "text": "Alice"
+  },
+  {
+   "n": 13286,
+   "text": "Priest"
+  },
+  {
+   "n": 13287,
+   "text": "Ghost Lady"
+  },
+  {
+   "n": 13288,
+   "text": "Zombie Lady"
+  },
+  {
+   "n": 13289,
+   "text": "Mizukage"
+  },
+  {
+   "n": 13290,
+   "text": "Hatake Kakashi"
+  },
+  {
+   "n": 13291,
+   "text": "Uchiha Sasuke"
+  },
+  {
+   "n": 13292,
+   "text": "Bomb Ichigo"
+  },
+  {
+   "n": 13293,
+   "text": "⟨0⟩nd Hokage"
+  },
+  {
+   "n": 13294,
+   "text": "Zangetsu"
+  },
+  {
+   "n": 13295,
+   "text": "⟨0⟩rd Hokage"
+  },
+  {
+   "n": 13296,
+   "text": "⟨0⟩th Hokage"
+  },
+  {
+   "n": 13297,
+   "text": "Jiraiya"
+  },
+  {
+   "n": 13298,
+   "text": "Arale"
+  },
+  {
+   "n": 13299,
+   "text": "Yamanaka Ino"
+  },
+  {
+   "n": 13300,
+   "text": "Mitarashi Anko"
+  },
+  {
+   "n": 13301,
+   "text": "Temari"
+  },
+  {
+   "n": 13302,
+   "text": "Tenten"
+  },
+  {
+   "n": 13303,
+   "text": "Haku"
+  },
+  {
+   "n": 13304,
+   "text": "Kurotsuchi Nemu"
+  },
+  {
+   "n": 13305,
+   "text": "Kusajishi Yachiru"
+  },
+  {
+   "n": 13306,
+   "text": "Kotetsu Isane"
+  },
+  {
+   "n": 13307,
+   "text": "Yadomaru Sasha"
+  },
+  {
+   "n": 13308,
+   "text": "Arisawa Tatsuki"
+  },
+  {
+   "n": 13309,
+   "text": "Bomb Rukia"
+  },
+  {
+   "n": 13310,
+   "text": "Tsunade"
+  },
+  {
+   "n": 13311,
+   "text": "Momochi Zabuza"
+  },
+  {
+   "n": 13312,
+   "text": "Little Meng"
+  },
+  {
+   "n": 13313,
+   "text": "Little Jun"
+  },
+  {
+   "n": 13314,
+   "text": "Love Aikawa"
+  },
+  {
+   "n": 13315,
+   "text": "Toadling"
+  },
+  {
+   "n": 13316,
+   "text": "Akamaru Young"
+  },
+  {
+   "n": 13317,
+   "text": "Soul Fledgling"
+  },
+  {
+   "n": 13318,
+   "text": "Lily Young"
+  },
+  {
+   "n": 13319,
+   "text": "Penerimaan Aula dari Five Kage"
+  },
+  {
+   "n": 13320,
+   "text": "Greedy Bandit Chief"
+  },
+  {
+   "n": 13321,
+   "text": "Stagfury Swordsman"
+  },
+  {
+   "n": 13322,
+   "text": "Blazing Dancer"
+  },
+  {
+   "n": 13323,
+   "text": "Spiralwind Dancer"
+  },
+  {
+   "n": 13324,
+   "text": "Retainer"
+  },
+  {
+   "n": 13325,
+   "text": "Wasit"
+  },
+  {
+   "n": 13326,
+   "text": "Karin"
+  },
+  {
+   "n": 13327,
+   "text": "Kurenai Yuuhi "
+  },
+  {
+   "n": 13328,
+   "text": "Second Hokage"
+  },
+  {
+   "n": 13329,
+   "text": "Third Hokage"
+  },
+  {
+   "n": 13330,
+   "text": "Fourth Hokage"
+  },
+  {
+   "n": 13331,
+   "text": "Sai"
+  },
+  {
+   "n": 13332,
+   "text": "Jugo"
+  },
+  {
+   "n": 13333,
+   "text": "Kyuubi Naruto"
+  },
+  {
+   "n": 13334,
+   "text": "Sage Jiraiya"
+  },
+  {
+   "n": 13335,
+   "text": "Pergi ke <font color='#00b035'> {@0:location name} </font> dan bunuh {@1:number} <font color='#ff6565'> {@2:monster name} </font>."
+  },
+  {
+   "n": 13336,
+   "text": "Kamu dalam pertarungan"
+  },
+  {
+   "n": 13337,
+   "text": "Latihan Ninjutsu"
+  },
+  {
+   "n": 13338,
+   "text": "Tim Pengawal"
+  },
+  {
+   "n": 13339,
+   "text": "Krisis Pegunungan"
+  },
+  {
+   "n": 13340,
+   "text": "Kembali ke Desa"
+  },
+  {
+   "n": 13341,
+   "text": "Perayaan [I]"
+  },
+  {
+   "n": 13342,
+   "text": "Perayaan [II]"
+  },
+  {
+   "n": 13343,
+   "text": "Darurat"
+  },
+  {
+   "n": 13344,
+   "text": "Penyelamatan"
+  },
+  {
+   "n": 13345,
+   "text": "Anjing Ninja Pakkun"
+  },
+  {
+   "n": 13346,
+   "text": "Laporan"
+  },
+  {
+   "n": 13347,
+   "text": "Aktivitas Aneh"
+  },
+  {
+   "n": 13348,
+   "text": "Bayangan Gelap"
+  },
+  {
+   "n": 13349,
+   "text": "Perasaan Familiar"
+  },
+  {
+   "n": 13350,
+   "text": "Hati yang Hilang"
+  },
+  {
+   "n": 13351,
+   "text": "Sejarah Desa"
+  },
+  {
+   "n": 13352,
+   "text": "Permasalahan Toko"
+  },
+  {
+   "n": 13353,
+   "text": "Janji yang Hilang"
+  },
+  {
+   "n": 13354,
+   "text": "Pedagang yang Sial"
+  },
+  {
+   "n": 13355,
+   "text": "Mengawal"
+  },
+  {
+   "n": 13356,
+   "text": "Berangkat"
+  },
+  {
+   "n": 13357,
+   "text": "Memberi"
+  },
+  {
+   "n": 13358,
+   "text": "Salam"
+  },
+  {
+   "n": 13359,
+   "text": "Ujian"
+  },
+  {
+   "n": 13360,
+   "text": "Mengunjungi Ketua"
+  },
+  {
+   "n": 13361,
+   "text": "Menolong Orang"
+  },
+  {
+   "n": 13362,
+   "text": "Kappa"
+  },
+  {
+   "n": 13363,
+   "text": "Mengenali"
+  },
+  {
+   "n": 13364,
+   "text": "Permintaan Nyonya Feng"
+  },
+  {
+   "n": 13365,
+   "text": "Jiwa yang Mekar"
+  },
+  {
+   "n": 13366,
+   "text": "Pertolongan dari Pedagang"
+  },
+  {
+   "n": 13367,
+   "text": "Menghukum Banteng yang Nakal"
+  },
+  {
+   "n": 13368,
+   "text": "Percaya"
+  },
+  {
+   "n": 13369,
+   "text": "Bandit"
+  },
+  {
+   "n": 13370,
+   "text": "Membangun Desa Kembali"
+  },
+  {
+   "n": 13371,
+   "text": "Mengumpulkan Biji"
+  },
+  {
+   "n": 13372,
+   "text": "Dosa Pejuang"
+  },
+  {
+   "n": 13373,
+   "text": "Harta yang Dicuri"
+  },
+  {
+   "n": 13374,
+   "text": "Mencari Harta"
+  },
+  {
+   "n": 13375,
+   "text": "Melaporkan Diri"
+  },
+  {
+   "n": 13376,
+   "text": "Pencuri Malam [I]"
+  },
+  {
+   "n": 13377,
+   "text": "Pencuri Malam [II]"
+  },
+  {
+   "n": 13378,
+   "text": "Pencuri Malam [III]"
+  },
+  {
+   "n": 13379,
+   "text": "Cerita Kota Iblis"
+  },
+  {
+   "n": 13380,
+   "text": "Hantu Wanita yang Kabur"
+  },
+  {
+   "n": 13381,
+   "text": "Krisis"
+  },
+  {
+   "n": 13382,
+   "text": "Darurat⟨0⟩"
+  },
+  {
+   "n": 13383,
+   "text": "Kehancuran Iblis"
+  },
+  {
+   "n": 13384,
+   "text": "Cerita"
+  },
+  {
+   "n": 13385,
+   "text": "Drumroll"
+  },
+  {
+   "n": 13386,
+   "text": "Jiwa Iblis"
+  },
+  {
+   "n": 13387,
+   "text": "Rahasia Minyak Katak"
+  },
+  {
+   "n": 13388,
+   "text": "Lilin Suci"
+  },
+  {
+   "n": 13389,
+   "text": "Iblis Chuuji"
+  },
+  {
+   "n": 13390,
+   "text": "Kekuatan Iblis [I]"
+  },
+  {
+   "n": 13391,
+   "text": "Kekuatan Iblis [II]"
+  },
+  {
+   "n": 13392,
+   "text": "Mengetahui"
+  },
+  {
+   "n": 13393,
+   "text": "Menyelidiki"
+  },
+  {
+   "n": 13394,
+   "text": "Menukar"
+  },
+  {
+   "n": 13395,
+   "text": "Ganas"
+  },
+  {
+   "n": 13396,
+   "text": "Barisan Anjing Laut"
+  },
+  {
+   "n": 13397,
+   "text": "Kembali ke Kota Suci"
+  },
+  {
+   "n": 13398,
+   "text": "Jalan Keselamatan"
+  },
+  {
+   "n": 13399,
+   "text": "Bumbu-bumbu"
+  },
+  {
+   "n": 13400,
+   "text": "Obat yang Menyegarkan"
+  },
+  {
+   "n": 13401,
+   "text": "Menyelamatkan Pejuang"
+  },
+  {
+   "n": 13402,
+   "text": "Iblis Api"
+  },
+  {
+   "n": 13403,
+   "text": "Ninja Penggosip"
+  },
+  {
+   "n": 13404,
+   "text": "Dukun Sesat"
+  },
+  {
+   "n": 13405,
+   "text": "Bandit Hutan Hijau"
+  },
+  {
+   "n": 13406,
+   "text": "Ninja Pulau Kuno"
+  },
+  {
+   "n": 13407,
+   "text": "Pertikaian"
+  },
+  {
+   "n": 13408,
+   "text": "Harta Karun"
+  },
+  {
+   "n": 13409,
+   "text": "Iblis Naomasa"
+  },
+  {
+   "n": 13410,
+   "text": "Invasi Hutan Api"
+  },
+  {
+   "n": 13411,
+   "text": "Pasukan Khusus"
+  },
+  {
+   "n": 13412,
+   "text": "Pengelana yang Hilang"
+  },
+  {
+   "n": 13413,
+   "text": "Lagu Perayu"
+  },
+  {
+   "n": 13414,
+   "text": "Kerapuhan Hutan"
+  },
+  {
+   "n": 13415,
+   "text": "Elang Botak"
+  },
+  {
+   "n": 13416,
+   "text": "Sumber Kerapuhan"
+  },
+  {
+   "n": 13417,
+   "text": "Mengakali Kelelawar Darah"
+  },
+  {
+   "n": 13418,
+   "text": "Membersihkan Bencana"
+  },
+  {
+   "n": 13419,
+   "text": "Pondok Bandit"
+  },
+  {
+   "n": 13420,
+   "text": "Menghukum Ketua Bandit"
+  },
+  {
+   "n": 13421,
+   "text": "Kerapuhan Angin"
+  },
+  {
+   "n": 13422,
+   "text": "Melaporkan ke Ketua"
+  },
+  {
+   "n": 13423,
+   "text": "Segel Angin"
+  },
+  {
+   "n": 13424,
+   "text": "Seruling Angin [I]"
+  },
+  {
+   "n": 13425,
+   "text": "Seruling Angin [II]"
+  },
+  {
+   "n": 13426,
+   "text": "Seruling Angin [III]"
+  },
+  {
+   "n": 13427,
+   "text": "Penuh Seni"
+  },
+  {
+   "n": 13428,
+   "text": "Bencana Semburan Naga"
+  },
+  {
+   "n": 13429,
+   "text": "Kemurkaan Roh Angin"
+  },
+  {
+   "n": 13430,
+   "text": "Iblis Tadakatsu"
+  },
+  {
+   "n": 13431,
+   "text": "Pembalasan Ninja Hutan"
+  },
+  {
+   "n": 13432,
+   "text": "Ketua Ninja Hutan"
+  },
+  {
+   "n": 13433,
+   "text": "Yang Tak Terduga"
+  },
+  {
+   "n": 13434,
+   "text": "Jejak Penyihir"
+  },
+  {
+   "n": 13435,
+   "text": "Jejak Harta Karun"
+  },
+  {
+   "n": 13436,
+   "text": "Jalan Masuk Reruntuhan"
+  },
+  {
+   "n": 13437,
+   "text": "Segel Reruntuhan"
+  },
+  {
+   "n": 13438,
+   "text": "Undangan [I]"
+  },
+  {
+   "n": 13439,
+   "text": "Undangan [II]"
+  },
+  {
+   "n": 13440,
+   "text": "Menjelajah [I]"
+  },
+  {
+   "n": 13441,
+   "text": "Menjelajah [II]"
+  },
+  {
+   "n": 13442,
+   "text": "Menjelajah [III]"
+  },
+  {
+   "n": 13443,
+   "text": "Peringatan"
+  },
+  {
+   "n": 13444,
+   "text": "Iblis Gorila"
+  },
+  {
+   "n": 13445,
+   "text": "Perseteruan"
+  },
+  {
+   "n": 13446,
+   "text": "Jalan Kematian"
+  },
+  {
+   "n": 13447,
+   "text": "Bukti"
+  },
+  {
+   "n": 13448,
+   "text": "Kemana Harus Pergi"
+  },
+  {
+   "n": 13449,
+   "text": "Iblis Air"
+  },
+  {
+   "n": 13450,
+   "text": "Lembut Laksana Hutan"
+  },
+  {
+   "n": 13451,
+   "text": "Padang Gersang"
+  },
+  {
+   "n": 13452,
+   "text": "Roh Kayu yang Terbuang"
+  },
+  {
+   "n": 13453,
+   "text": "Ahli Pedang dari Tanah Derita"
+  },
+  {
+   "n": 13454,
+   "text": "Kegilaan Iblis Blosom"
+  },
+  {
+   "n": 13455,
+   "text": "Pengejaran Bandit"
+  },
+  {
+   "n": 13456,
+   "text": "Pemberantasan Bandit"
+  },
+  {
+   "n": 13457,
+   "text": "Kepala Perampok"
+  },
+  {
+   "n": 13458,
+   "text": "Para Penyihir"
+  },
+  {
+   "n": 13459,
+   "text": "Roh Air"
+  },
+  {
+   "n": 13460,
+   "text": "Roh Air [II]"
+  },
+  {
+   "n": 13461,
+   "text": "Gosip di Perairan"
+  },
+  {
+   "n": 13462,
+   "text": "Raja Iblis"
+  },
+  {
+   "n": 13463,
+   "text": "Burung Pembawa Berita"
+  },
+  {
+   "n": 13464,
+   "text": "Elang Botak yang Jinak"
+  },
+  {
+   "n": 13465,
+   "text": "Obat Terlarang"
+  },
+  {
+   "n": 13466,
+   "text": "Obat Terlarang [II]"
+  },
+  {
+   "n": 13467,
+   "text": "Obat Terlarang [III]"
+  },
+  {
+   "n": 13468,
+   "text": "Iblis Tanah"
+  },
+  {
+   "n": 13469,
+   "text": "Segel Tanah"
+  },
+  {
+   "n": 13470,
+   "text": "Sekeras Gunung"
+  },
+  {
+   "n": 13471,
+   "text": "Learn of the Dragons"
+  },
+  {
+   "n": 13472,
+   "text": "Find the Dragons"
+  },
+  {
+   "n": 13473,
+   "text": "Sneaky Spiralwind Dancer"
+  },
+  {
+   "n": 13474,
+   "text": "Trace of the Dragons"
+  },
+  {
+   "n": 13475,
+   "text": "Evidence of the Dragons"
+  },
+  {
+   "n": 13476,
+   "text": "Revisit Dragon Valley"
+  },
+  {
+   "n": 13477,
+   "text": "Mystic Aborigine"
+  },
+  {
+   "n": 13478,
+   "text": "Clueless Enigma"
+  },
+  {
+   "n": 13479,
+   "text": "Ancaman Pantai"
+  },
+  {
+   "n": 13480,
+   "text": "Bertemu  Pemancing"
+  },
+  {
+   "n": 13481,
+   "text": "Pembersihan Pantai[I]"
+  },
+  {
+   "n": 13482,
+   "text": "Report dari Pantai[I]"
+  },
+  {
+   "n": 13483,
+   "text": "Kembali ke Pantai[I]"
+  },
+  {
+   "n": 13484,
+   "text": "Pembersihan Pantai[II]"
+  },
+  {
+   "n": 13485,
+   "text": "Report dari Pantai[II]"
+  },
+  {
+   "n": 13486,
+   "text": "Kembali ke Pantai[II]"
+  },
+  {
+   "n": 13487,
+   "text": "Pembersihan Pantai[Ⅲ]"
+  },
+  {
+   "n": 13488,
+   "text": "Report dari Pantai[Ⅲ]"
+  },
+  {
+   "n": 13489,
+   "text": "Kembali ke Pantai[Ⅲ]"
+  },
+  {
+   "n": 13490,
+   "text": "Pembersihan Pantai[Ⅳ]"
+  },
+  {
+   "n": 13491,
+   "text": "Report dari Pantai[Ⅳ]"
+  },
+  {
+   "n": 13492,
+   "text": "Kembali ke Pantai[Ⅳ]"
+  },
+  {
+   "n": 13493,
+   "text": "Ancaman Terakhir"
+  },
+  {
+   "n": 13494,
+   "text": "Kemenangan Kembali"
+  },
+  {
+   "n": 13495,
+   "text": "Merubah Amegakure"
+  },
+  {
+   "n": 13496,
+   "text": "Menyelinap ke Amegakure"
+  },
+  {
+   "n": 13497,
+   "text": "Peperangan di Amegakure[I]"
+  },
+  {
+   "n": 13498,
+   "text": "Report dari Amegakure[I]"
+  },
+  {
+   "n": 13499,
+   "text": "Perampokan di Amegakure[I]"
+  },
+  {
+   "n": 13500,
+   "text": "Peperangan di Amegakure[II]"
+  },
+  {
+   "n": 13501,
+   "text": "Report dari Amegakure[II]"
+  },
+  {
+   "n": 13502,
+   "text": "Perampokan di Amegakure[II]"
+  },
+  {
+   "n": 13503,
+   "text": "Peperangan di Amegakure[Ⅲ]"
+  },
+  {
+   "n": 13504,
+   "text": "Report dari Amegakure[Ⅲ]"
+  },
+  {
+   "n": 13505,
+   "text": "Perampokan di Amegakure[Ⅲ]"
+  },
+  {
+   "n": 13506,
+   "text": "Peperangan di Amegakure[Ⅳ]"
+  },
+  {
+   "n": 13507,
+   "text": "Report dari Amegakure[Ⅳ]"
+  },
+  {
+   "n": 13508,
+   "text": "Perampokan di Amegakure[Ⅳ]"
+  },
+  {
+   "n": 13509,
+   "text": "Hidup atau Mati! Inferno Dog! "
+  },
+  {
+   "n": 13510,
+   "text": "Berita Kemenangan"
+  },
+  {
+   "n": 13511,
+   "text": "Koleksi Kartu Nama"
+  },
+  {
+   "n": 13512,
+   "text": "Master Arena"
+  },
+  {
+   "n": 13513,
+   "text": "Menghancurkan Iblis"
+  },
+  {
+   "n": 13514,
+   "text": "Mengumpulkan Benda Asing"
+  },
+  {
+   "n": 13515,
+   "text": "Mengunjungi Penduduk"
+  },
+  {
+   "n": 13516,
+   "text": "Bukti Keberanian"
+  },
+  {
+   "n": 13517,
+   "text": "Mineral Misterius"
+  },
+  {
+   "n": 13518,
+   "text": "Memurnikan Mineral"
+  },
+  {
+   "n": 13519,
+   "text": "Dalang Kegelapan"
+  },
+  {
+   "n": 13520,
+   "text": "Banteng yang Kuat"
+  },
+  {
+   "n": 13521,
+   "text": "Pejuang Petir"
+  },
+  {
+   "n": 13522,
+   "text": "Bayangan Malam"
+  },
+  {
+   "n": 13523,
+   "text": "Orang yang Hilang"
+  },
+  {
+   "n": 13524,
+   "text": "Penguasa Air"
+  },
+  {
+   "n": 13525,
+   "text": "Bencana Bandit"
+  },
+  {
+   "n": 13526,
+   "text": "Ninja Hutan"
+  },
+  {
+   "n": 13527,
+   "text": "Perubahan Tulang"
+  },
+  {
+   "n": 13528,
+   "text": "Persetujuan pencuri yang benar"
+  },
+  {
+   "n": 13529,
+   "text": "Rahasia Payung"
+  },
+  {
+   "n": 13530,
+   "text": "Menghukum Stinger Bee"
+  },
+  {
+   "n": 13531,
+   "text": "Bau yang Menyengat"
+  },
+  {
+   "n": 13532,
+   "text": "Bor yang Dicuri"
+  },
+  {
+   "n": 13533,
+   "text": "Kentang dan Batu Permata"
+  },
+  {
+   "n": 13534,
+   "text": "Monyet dan Anjing"
+  },
+  {
+   "n": 13535,
+   "text": "Onigiri Pemakan Manusia"
+  },
+  {
+   "n": 13536,
+   "text": "Iblis yang Menakutkan"
+  },
+  {
+   "n": 13537,
+   "text": "Mencuri Jagung"
+  },
+  {
+   "n": 13538,
+   "text": "Pencuri di Toko"
+  },
+  {
+   "n": 13539,
+   "text": "Hantu Wanita yang Nakal"
+  },
+  {
+   "n": 13540,
+   "text": "Inti Api"
+  },
+  {
+   "n": 13541,
+   "text": "Bukti dari kekuatan"
+  },
+  {
+   "n": 13542,
+   "text": "Menghilangkan Sisa"
+  },
+  {
+   "n": 13543,
+   "text": "Larutan Mineral"
+  },
+  {
+   "n": 13544,
+   "text": "Kecantikan dan Keburukan"
+  },
+  {
+   "n": 13545,
+   "text": "Anak Panah yang Tajam"
+  },
+  {
+   "n": 13546,
+   "text": "Kelicikan Para Pejuang"
+  },
+  {
+   "n": 13547,
+   "text": "Dendam sang anak"
+  },
+  {
+   "n": 13548,
+   "text": "Tangisan yang Berisik"
+  },
+  {
+   "n": 13549,
+   "text": "Menghukum para Bandit"
+  },
+  {
+   "n": 13550,
+   "text": "Material Senjata"
+  },
+  {
+   "n": 13551,
+   "text": "Menghukum Penjahat demi Masyarakat"
+  },
+  {
+   "n": 13552,
+   "text": "Melindungi Jalan Rahasia"
+  },
+  {
+   "n": 13553,
+   "text": "Melampaui"
+  },
+  {
+   "n": 13554,
+   "text": "Menghukum Dukun Sesat"
+  },
+  {
+   "n": 13555,
+   "text": "Ancaman dari perdagangan Caravan"
+  },
+  {
+   "n": 13556,
+   "text": "Seruling Memikat"
+  },
+  {
+   "n": 13557,
+   "text": "Perampok Gunung"
+  },
+  {
+   "n": 13558,
+   "text": "Botol Ramuan"
+  },
+  {
+   "n": 13559,
+   "text": "Ancaman Bloodbat"
+  },
+  {
+   "n": 13560,
+   "text": "Mengusir Egret"
+  },
+  {
+   "n": 13561,
+   "text": "Ninja keras Kepala"
+  },
+  {
+   "n": 13562,
+   "text": "Sumber Rusak"
+  },
+  {
+   "n": 13563,
+   "text": "Pemeliharaan Gagal"
+  },
+  {
+   "n": 13564,
+   "text": "Skeleton Berkumpul"
+  },
+  {
+   "n": 13565,
+   "text": "Keseimbangan Lingkungan"
+  },
+  {
+   "n": 13566,
+   "text": "Minuman Sari Buah"
+  },
+  {
+   "n": 13567,
+   "text": "Menghukum Biksu Jahat"
+  },
+  {
+   "n": 13568,
+   "text": "Bandit yang Sombong"
+  },
+  {
+   "n": 13569,
+   "text": "Masuk Rumah"
+  },
+  {
+   "n": 13570,
+   "text": "Menangkap Ikan"
+  },
+  {
+   "n": 13571,
+   "text": "Pembersihan Pantai"
+  },
+  {
+   "n": 13572,
+   "text": "Penelitian Cairan"
+  },
+  {
+   "n": 13573,
+   "text": "Mimpi Buruk"
+  },
+  {
+   "n": 13574,
+   "text": "Nilai Tulang Ikan"
+  },
+  {
+   "n": 13575,
+   "text": "Kesialan di pantai"
+  },
+  {
+   "n": 13576,
+   "text": "Merebut Mutiara"
+  },
+  {
+   "n": 13577,
+   "text": "Keseimbangan Pantai"
+  },
+  {
+   "n": 13578,
+   "text": "Kamu memiliki keyakinan?"
+  },
+  {
+   "n": 13579,
+   "text": "Hal yang menjengkelkan"
+  },
+  {
+   "n": 13580,
+   "text": "Tit For Tat"
+  },
+  {
+   "n": 13581,
+   "text": "Travel Safely"
+  },
+  {
+   "n": 13582,
+   "text": "Permainan Kematian"
+  },
+  {
+   "n": 13583,
+   "text": "Alasan Kuat"
+  },
+  {
+   "n": 13584,
+   "text": "Pemebelajaran Perubahan Reptil"
+  },
+  {
+   "n": 13585,
+   "text": "Permintaan yang sombong"
+  },
+  {
+   "n": 13586,
+   "text": "Penemuan Besar "
+  },
+  {
+   "n": 13587,
+   "text": "Mudah dan ujian keras"
+  },
+  {
+   "n": 13588,
+   "text": "Guci Berwarna"
+  },
+  {
+   "n": 13589,
+   "text": "Perubahan Peta"
+  },
+  {
+   "n": 13590,
+   "text": "Temukan Daratan Rahasia"
+  },
+  {
+   "n": 13591,
+   "text": "Beli Carrier Bag"
+  },
+  {
+   "n": 13592,
+   "text": "Mencari Level"
+  },
+  {
+   "n": 13593,
+   "text": "Auto-Combat Zone Luar"
+  },
+  {
+   "n": 13594,
+   "text": "Bunuh Iblis"
+  },
+  {
+   "n": 13595,
+   "text": "Auto-Combat Zone Luar [Ⅱ]"
+  },
+  {
+   "n": 13596,
+   "text": "Ambil Hadiah"
+  },
+  {
+   "n": 13597,
+   "text": "Pengejaran Kejahatan"
+  },
+  {
+   "n": 13598,
+   "text": "Item di Mall"
+  },
+  {
+   "n": 13599,
+   "text": "Undian Guci Keberuntungan "
+  },
+  {
+   "n": 13600,
+   "text": "Sinergi Ninjutsu"
+  },
+  {
+   "n": 13601,
+   "text": "Rahasia di Las Noches"
+  },
+  {
+   "n": 13602,
+   "text": "Tantangan Las Noches"
+  },
+  {
+   "n": 13603,
+   "text": "Hancurkan Kejahatan"
+  },
+  {
+   "n": 13604,
+   "text": "Valhalla Camp [Sulit]"
+  },
+  {
+   "n": 13605,
+   "text": "Endless Sea Forests [Sulit]"
+  },
+  {
+   "n": 13606,
+   "text": "Crimson Grassland [Sulit]"
+  },
+  {
+   "n": 13607,
+   "text": "Deadwood Villa [Sulit]"
+  },
+  {
+   "n": 13608,
+   "text": "Promosikan Rank [Ⅰ]"
+  },
+  {
+   "n": 13609,
+   "text": "Promosikan Rank [Ⅱ]"
+  },
+  {
+   "n": 13610,
+   "text": "Promosikan Rank [Ⅲ]"
+  },
+  {
+   "n": 13611,
+   "text": "Bimbingan Murid [Satu]"
+  },
+  {
+   "n": 13612,
+   "text": "Bimbingan Murid [Dua]"
+  },
+  {
+   "n": 13613,
+   "text": "Bimbingan Murid [Tiga]"
+  },
+  {
+   "n": 13614,
+   "text": "Bimbingan Murid [Empat]"
+  },
+  {
+   "n": 13615,
+   "text": "Bimbingan Murid [Lima]"
+  },
+  {
+   "n": 13616,
+   "text": "Use Food"
+  },
+  {
+   "n": 13617,
+   "text": "Equip Pet"
+  },
+  {
+   "n": 13618,
+   "text": "Raise Pet"
+  },
+  {
+   "n": 13619,
+   "text": "Lihat Ranking"
+  },
+  {
+   "n": 13620,
+   "text": "Latihan Auto-Combat"
+  },
+  {
+   "n": 13621,
+   "text": "Enhance Peralatan"
+  },
+  {
+   "n": 13622,
+   "text": "Pemurnian Peralatan"
+  },
+  {
+   "n": 13623,
+   "text": "Sintesis Gem"
+  },
+  {
+   "n": 13624,
+   "text": "Slot Peralatan"
+  },
+  {
+   "n": 13625,
+   "text": "Pakai Gem"
+  },
+  {
+   "n": 13626,
+   "text": "Sintesis Kostum"
+  },
+  {
+   "n": 13627,
+   "text": "Gunakan Enchantment"
+  },
+  {
+   "n": 13628,
+   "text": "Kunjungi Matchmaker"
+  },
+  {
+   "n": 13629,
+   "text": "Klaim Gift Box[Ⅰ]"
+  },
+  {
+   "n": 13630,
+   "text": "Klaim Gift Box[Ⅱ]"
+  },
+  {
+   "n": 13631,
+   "text": "Klaim Gift Box[Ⅲ]"
+  },
+  {
+   "n": 13632,
+   "text": "Klaim Gift Box[Ⅳ]"
+  },
+  {
+   "n": 13633,
+   "text": "Klaim Gift Box[Ⅴ]"
+  },
+  {
+   "n": 13634,
+   "text": "Come Come Paradise I"
+  },
+  {
+   "n": 13635,
+   "text": "Come Come Paradise II"
+  },
+  {
+   "n": 13636,
+   "text": "Come Come Paradise III"
+  },
+  {
+   "n": 13637,
+   "text": "Curry in Life Kesatu"
+  },
+  {
+   "n": 13638,
+   "text": "Curry in Life Kedua"
+  },
+  {
+   "n": 13639,
+   "text": "Curry in Life Ketiga"
+  },
+  {
+   "n": 13640,
+   "text": "Curry in Life Keempat"
+  },
+  {
+   "n": 13641,
+   "text": "Curry in Life Kelima"
+  },
+  {
+   "n": 13642,
+   "text": "Curry in Life Keenam"
+  },
+  {
+   "n": 13643,
+   "text": "Curry in Life Ketujuh"
+  },
+  {
+   "n": 13644,
+   "text": "Curry in Life Kedelapan"
+  },
+  {
+   "n": 13645,
+   "text": "Curry in Life Kesembilan"
+  },
+  {
+   "n": 13646,
+   "text": "Curry in Life Terakhir"
+  },
+  {
+   "n": 13647,
+   "text": "Membuat Kebun"
+  },
+  {
+   "n": 13648,
+   "text": "Kunjungi Ketua Ninja"
+  },
+  {
+   "n": 13649,
+   "text": "Membuat Gudang"
+  },
+  {
+   "n": 13650,
+   "text": "Accelerate Bangunan"
+  },
+  {
+   "n": 13651,
+   "text": "Menguprade Rumah"
+  },
+  {
+   "n": 13652,
+   "text": "Membuat Ruang Penetasan"
+  },
+  {
+   "n": 13653,
+   "text": "Membuat Kincir Angin"
+  },
+  {
+   "n": 13654,
+   "text": "Mengupgrade Tower Prstasi"
+  },
+  {
+   "n": 13655,
+   "text": "Mengupgrade Kebun"
+  },
+  {
+   "n": 13656,
+   "text": "Memperluas pemandangan"
+  },
+  {
+   "n": 13657,
+   "text": "Mengatur Cuaca"
+  },
+  {
+   "n": 13658,
+   "text": "Menetaskan telur"
+  },
+  {
+   "n": 13659,
+   "text": "Mengambil telur"
+  },
+  {
+   "n": 13660,
+   "text": "Lempar telur busuk"
+  },
+  {
+   "n": 13661,
+   "text": "Resep Rahasia Leluhur"
+  },
+  {
+   "n": 13662,
+   "text": "Demon Proof of Suppression! Selesai! "
+  },
+  {
+   "n": 13663,
+   "text": "Warga! Serangan Tailed Beast !"
+  },
+  {
+   "n": 13664,
+   "text": "Kunjungi Ketua Desa"
+  },
+  {
+   "n": 13665,
+   "text": "Newbie Pack"
+  },
+  {
+   "n": 13666,
+   "text": "Peralatan Senjata"
+  },
+  {
+   "n": 13667,
+   "text": "Panel Misi"
+  },
+  {
+   "n": 13668,
+   "text": "Latihan Bertarung[I]"
+  },
+  {
+   "n": 13669,
+   "text": "Latihan Bertarung[II]"
+  },
+  {
+   "n": 13670,
+   "text": "Keseimbangan Alam"
+  },
+  {
+   "n": 13671,
+   "text": "Jebakan Sunflower"
+  },
+  {
+   "n": 13672,
+   "text": "Pasokan Perorangan"
+  },
+  {
+   "n": 13673,
+   "text": "Pengumpulan informasi"
+  },
+  {
+   "n": 13674,
+   "text": "Mengungkap Laporan"
+  },
+  {
+   "n": 13675,
+   "text": "Perintah Baru"
+  },
+  {
+   "n": 13676,
+   "text": "Perintah Ketua Desa"
+  },
+  {
+   "n": 13677,
+   "text": "Berduka"
+  },
+  {
+   "n": 13678,
+   "text": "Quest Gift Box"
+  },
+  {
+   "n": 13679,
+   "text": "Misi Gift Box"
+  },
+  {
+   "n": 13680,
+   "text": "Semangat kepahlawanan dari The Ancient Braves telah dikendalikan oleh setan dan dibelenggu di<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla</font>. Apakah anda ingin menerima tantangan, mengalahkan pasukan setan, dan menyelamatkan semangat kepahlawanan dalam<font color='#00b034'>  Valhalla Camp</font>?"
+  },
+  {
+   "n": 13681,
+   "text": "Semangat kepahlawanan dari The Ancient Braves telah dikendalikan oleh setan dan dibelenggu di<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla</font>. Apakah anda ingin menerima tantangan, mengalahkan pasukan setan, dan menyelamatkan semangat kepahlawanan dalam<font color='#00b034'>  Endless Sea Forests</font>?"
+  },
+  {
+   "n": 13682,
+   "text": "Selamat karena telah mengalahkan iblis penjaga <font color='#00b034'>Hutan Laut tak berujung</font>dan selamatkan para roh-roh pahlawan dari Ilmu Hitam para Iblis. Berikan para arwah pahlawan hadiah juga."
+  },
+  {
+   "n": 13683,
+   "text": "Ini memang<font color='#00b034'> Forest Ninja </font><font color='#00b034'> Forest Shuriken</font>, sekarang pekerjaan saya tidak akan terganggu oleh mereka."
+  },
+  {
+   "n": 13684,
+   "text": "<font color='#00b034'> Kelelawar berdarah </font>yang baru-baru ini kabur dari<font color='#00b034'> Kota Iblis </font>telah banyak merugikan masyarakat umum. Mereka harus dimusnahkan dengan cepat, dan kamu harus mengumpulkan<font color='#00b034'> Jarum Operasi </font>mereka untuk membuktikan kamu membunuh mereka."
+  },
+  {
+   "n": 13685,
+   "text": "Semangat kepahlawanan dari The Ancient Braves telah dikendalikan oleh setan dan dibelenggu di<font color='#00b034'> Kota Iblis </font><font color='#00b034'>Valhalla</font>. Apakah anda ingin menerima tantangan, mengalahkan pasukan setan, dan menyelamatkan semangat kepahlawanan dalam<font color='#00b034'>  Deadwood Villa</font>?"
+  },
+  {
+   "n": 13686,
+   "text": "Selamat karena telah mengalahkan iblis penjaga<font color='#00b034'> Deadwood Villa </font>dan selamatkan para roh-roh pahlawan dari Ilmu Hitam para Iblis. Berikan para arwah pahlawan hadiah juga."
+  },
+  {
+   "n": 13687,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Tidak ada</font><br>[line]Tidak ada efek bonus"
+  },
+  {
+   "n": 13688,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Murid Ninja</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai【Prominent Ninja】 <br>dapat memperoleh gelar ini. </font>"
+  },
+  {
+   "n": 13689,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Come Come Paradise</font><br>[line]Speed    +⟨0⟩%<br>[line]<font color='#5df9ff'>Mencapai 【Fight for Love】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13690,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Pengumpul Orange\n</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Orange +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13691,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Penjaga Orange</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Orange +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13692,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Kolektor Orange</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Orange +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13693,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Koleksi Orange</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Orange +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13694,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Katalog Buku Orange </font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Orange +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13695,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Mighty Orange Collector</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Menyimpan ⟨0⟩ Kostum orange +⟨1⟩ pada daftar kostum<br> Untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13696,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Orange Ruler</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Menyimpan ⟨0⟩ Kostum orange +⟨1⟩ pada daftar kostum<br> Untuk mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13697,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Semangat, anak muda!</font><br>[line]Attack    +⟨0⟩%<br>[line]<font color='#5df9ff'>Mencapai 【Curry in Life】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13698,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Domba gemuk Legendaris</font><br>[line]Rata-rata drop bat    +⟨0⟩%<br>[line]<font color='#5df9ff'>Mencapai 【Tsunade's bet】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13699,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Essence of Final Release</font><br>[line]Armor Break    +⟨0⟩<br>Defense    +⟨1⟩<br>[line]<font color='#5df9ff'>Mencapai 【Essence of Final Release】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13700,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Wake of Sharingan</font><br>[line]Armor Break    +⟨0⟩<br>Defense    +⟨1⟩<br>[line]<font color='#5df9ff'>Mencapai 【Wake of Sharingan】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13701,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>King of Login</font><br>[line]Armor Break    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Dodge    +⟨2⟩<br>Block    +⟨3⟩<br>[line]<font color='#5df9ff'>Menyelesaikan login pada event baru dan menggunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13702,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Blue Beast</font><br>[line]Attack    +⟨0⟩%<br>Critical Strike    +⟨1⟩<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13703,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Yellow Flash</font><br>[line]Speed    +⟨0⟩%<br>Dodge    +⟨1⟩<br>Critical Strike    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13704,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Gudian of Sand</font><br>[line]Defense    +⟨0⟩<br>HP    +⟨1⟩%<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13705,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Night Dancer</font><br>[line]Dodge    +⟨0⟩<br>Speed    +⟨1⟩%<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13706,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Akademi</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai【Early Peep of Nindo】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13707,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Blade of Chaos</font><br>[line]Hit    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13708,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Pengumpul Biru\n</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Biru +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13709,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Penjaga Biru</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Biru +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13710,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Kolektor Biru</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Biru +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13711,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Koleksi Biru</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Biru +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13712,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Katalog Buku Biruk</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Biru +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13713,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Red Sunset</font><br>[line]Critical Strike    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13714,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>White Fang</font><br>[line]Armor Break    +⟨0⟩<br>Attack    +⟨1⟩%<br>Critical Strike    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13715,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Hero</font><br>[line]Attack    +⟨0⟩%<br>Speed    +⟨1⟩%<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah item akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13716,
+   "text": "Gelar : <font color='#5df9ff'>Brave Aries</font><br>[line]Attack    +⟨0⟩%<br>Critical Strike    +⟨1⟩<br>Min Attack+⟨2⟩<br>[line]<font color='#5df9ff'> Aries yang berani dan terus maju<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13717,
+   "text": "Gelar : <font color='#5df9ff'>Steady Taurus</font><br>[line]HP    +⟨0⟩%<br>Stamina    +⟨1⟩<br>Constitution    +⟨2⟩<br>[line]<font color='#5df9ff'>Taurus yang sabar dan cermat <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13718,
+   "text": "Gelar : <font color='#5df9ff'>Witty Gemini</font><br>[line]Speed    +⟨0⟩%<br>Agility    +⟨1⟩<br>Dodge    +⟨2⟩<br>[line]<font color='#5df9ff'>Gemini yang pandai dan tak terduga<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13719,
+   "text": "Gelar : <font color='#5df9ff'>Tender Cancer</font><br>[line]Block    +⟨0⟩<br>Chakra  +⟨1⟩<br>Max HP +⟨2⟩<br>[line]<font color='#5df9ff'> Cancer yang lemah lembut<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13720,
+   "text": "Gelar : <font color='#5df9ff'>Passionate Leo</font><br>[line]Critical Strike    +⟨0⟩<br>Strength    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'> Leo yang antusias dan ramah<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13721,
+   "text": "Gelar : <font color='#5df9ff'>Faultless Virgo</font><br>[line]Defense    +⟨0⟩<br>Critical Strike    +⟨1⟩<br>Min Attack+⟨2⟩<br>[line]<font color='#5df9ff'>Virgo yang teliti dan penuh akal <br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13722,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Ninja Genin</font><br>[line]Strength    +⟨0⟩<br>Agility    +⟨1⟩<br>Stamina    +⟨2⟩<br>[line]<font color='#5df9ff'>Mencapai【Ninjutsu Beginner】 <br>akan mendapatkan gelar ini. </font>"
+  },
+  {
+   "n": 13723,
+   "text": "Gelar : <font color='#5df9ff'>Impartial Libra</font><br>[line]Dodge    +⟨0⟩<br>Defense    +⟨1⟩<br>Block    +⟨2⟩<br>[line]<font color='#5df9ff'>Libra yang anggun dan jujur<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13724,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Grey Gatherer\n</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Abu-Abu +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13725,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Grey Keeper</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Abu-Abu +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13726,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Grey Collector</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Abu-Abu +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13727,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Gray Collection</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Abu-Abu +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13728,
+   "text": "Gelar Saat ini:<font color='#5df9ff'>Gray Book Catalogue</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Record ⟨0⟩ Kostum Abu-Abu +⟨1⟩ pada daftar kostum<br>akan mendapatkan gelar ini.</font>"
+  },
+  {
+   "n": 13729,
+   "text": "Gelar : <font color='#5df9ff'>eBlue Beast</font><br>[line]Strength    +⟨0⟩<br>Hit    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13730,
+   "text": "Gelar : <font color='#5df9ff'>eYellow Flash</font><br>[line]Agility    +⟨0⟩<br>Attack    +⟨1⟩%<br>Speed    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13731,
+   "text": "Gelar : <font color='#5df9ff'>eGudian of Sand</font><br>[line]Defense    +⟨0⟩<br>Block    +⟨1⟩<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13732,
+   "text": "Gelar : <font color='#5df9ff'>eNight Dancer</font><br>[line]Dodge    +⟨0⟩<br>Pierce    +⟨1⟩<br>Armor Break    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13733,
+   "text": "Gelar : <font color='#5df9ff'>Mysterious Scorpio</font><br>[line]Pierce    +⟨0⟩<br>Hit    +⟨1⟩<br>Block    +⟨2⟩<br>[line]<font color='#5df9ff'>Scorpio yang mistik dan menawan<br>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13734,
+   "text": "Gelar : <font color='#5df9ff'>eBlade of Chaos</font><br>[line]Hit    +⟨0⟩<br>HP    +⟨1⟩%<br>Attack    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13735,
+   "text": "Gelar : <font color='#5df9ff'>eRed Sunset</font><br>[line]Critical Strike    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Speed    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13736,
+   "text": "Gelar : <font color='#5df9ff'>eWhite Fang</font><br>[line]Armor Break    +⟨0⟩<br>Constitution    +⟨1⟩<br>Hit    +⟨2⟩<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13737,
+   "text": "Gelar : <font color='#5df9ff'>eNinja Hero</font><br>[line]Attack    +⟨0⟩%<br>Speed    +⟨1⟩%<br>HP    +⟨2⟩%<br>[line]<font color='#5df9ff'>Gunakan hadiah event untuk mendapatkan gelarnya.</font>"
+  },
+  {
+   "n": 13738,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Invincible Man</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Pertahankan kemenangan ⟨0⟩ kali<br> Untuk memperoleh gelar ini.</font>"
+  },
+  {
+   "n": 13739,
+   "text": "Gelar Saat Ini: <font color='#5df9ff'>The Lionhearted</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>Menantang ⟨0⟩ Tuan rumah<br> untuk mendapatkan title ini.</font>"
+  },
+  {
+   "n": 13740,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Never Give UP</font><br>[line]Tidak ada efek tambahan<br>[line]<font color='#5df9ff'>⟨0⟩ Failed Challenges<br> to obtain this title.</font>"
+  },
+  {
+   "n": 13741,
+   "text": "Gelar Saat ini: <font color='#5df9ff'>Special Jounin</font><br>[line]Hit    +⟨0⟩<br>Armor Break    +⟨1⟩<br>Critical Strike    +⟨2⟩<br>Dodge    +⟨3⟩<br>[line]<font color='#5df9ff'>Menggunakan Item hadiah event untuk mendapatkan gelar ini.</font>"
+  }
+ ]
+}
