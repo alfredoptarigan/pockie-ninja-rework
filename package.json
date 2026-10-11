@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "pnpm --parallel --filter @pockie/client --filter @pockie/server dev",
     "build": "pnpm -r build",
-    "typecheck": "pnpm -r typecheck",
+    "typecheck": "pnpm -r typecheck && tsc -p tools",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "test": "pnpm -r test",
@@ -20,7 +20,8 @@
     "db:migrate": "pnpm --filter @pockie/server db:migrate",
     "db:reset": "pnpm --filter @pockie/server db:reset",
     "db:seed": "pnpm --filter @pockie/server db:seed",
-    "create-admin": "pnpm --filter @pockie/server create-admin"
+    "create-admin": "pnpm --filter @pockie/server create-admin",
+    "assets:export": "node tools/export-assets.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -31,6 +32,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0",
     "prettier": "^3.9.10",
+    "sharp": "^0.35.5",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.71.1",
     "vitest": "^5.0.3"

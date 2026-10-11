@@ -1,0 +1,42 @@
+{
+  "naruto": {
+    "name": "Uzumaki Naruto",
+    "file": "/assets/sprites/naruto-stand.webp",
+    "frames": 7,
+    "frameWidth": 196,
+    "frameHeight": 228,
+    "fps": 12
+  },
+  "ichigo": {
+    "name": "Kurosaki Ichigo",
+    "file": "/assets/sprites/ichigo-stand.webp",
+    "frames": 7,
+    "frameWidth": 186,
+    "frameHeight": 223,
+    "fps": 12
+  },
+  "sasuke": {
+    "name": "Uchiha Sasuke",
+    "file": "/assets/sprites/sasuke-stand.webp",
+    "frames": 7,
+    "frameWidth": 182,
+    "frameHeight": 233,
+    "fps": 12
+  },
+  "rukia": {
+    "name": "Kuchiki Rukia",
+    "file": "/assets/sprites/rukia-stand.webp",
+    "frames": 7,
+    "frameWidth": 137,
+    "frameHeight": 215,
+    "fps": 12
+  },
+  "gaara": {
+    "name": "Gaara",
+    "file": "/assets/sprites/gaara-stand.webp",
+    "frames": 7,
+    "frameWidth": 148,
+    "frameHeight": 214,
+    "fps": 12
+  }
+}
