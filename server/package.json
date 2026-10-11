@@ -1,0 +1,22 @@
+{
+  "name": "@pockie/server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=../.env src/index.ts",
+    "build": "tsup src/index.ts --format esm --target node24 --clean",
+    "start": "node --env-file-if-exists=../.env dist/index.js",
+    "typecheck": "tsc",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@pockie/shared": "workspace:*",
+    "fastify": "^5.12.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15"
+  }
+}
