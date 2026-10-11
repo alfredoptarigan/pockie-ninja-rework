@@ -14,7 +14,13 @@
     "format": "prettier --write .",
     "test": "pnpm -r test",
     "test:coverage": "pnpm -r test:coverage",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "db:setup": "pnpm --filter @pockie/server db:setup",
+    "db:generate": "pnpm --filter @pockie/server db:generate",
+    "db:migrate": "pnpm --filter @pockie/server db:migrate",
+    "db:reset": "pnpm --filter @pockie/server db:reset",
+    "db:seed": "pnpm --filter @pockie/server db:seed",
+    "create-admin": "pnpm --filter @pockie/server create-admin"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
