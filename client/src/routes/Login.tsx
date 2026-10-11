@@ -10,8 +10,8 @@ import { applyServerErrors } from './form-errors'
 
 function redirectTarget(state: unknown) {
   const from = (state as { from?: unknown } | null)?.from
-  // Only same-site paths, never protocol-relative URLs.
-  return typeof from === 'string' && from.startsWith('/') && !from.startsWith('//') ? from : '/play'
+  // Only same-site paths: never protocol-relative (//host) or backslash (/\host) URLs.
+  return typeof from === 'string' && /^\/(?![/\\])/.test(from) ? from : '/play'
 }
 
 export function Login() {

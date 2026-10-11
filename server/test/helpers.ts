@@ -14,8 +14,8 @@ export async function truncateAll(db: Db) {
   )
 }
 
-export function buildTestApp(db: Db) {
-  return buildApp({ env: loadEnv(), db })
+export function buildTestApp(db: Db, env: Record<string, string> = {}) {
+  return buildApp({ env: loadEnv({ ...process.env, ...env }), db })
 }
 
 type App = ReturnType<typeof buildTestApp>

@@ -6,6 +6,8 @@ import type { Db } from '../../db/client.js'
 import { users } from '../../db/schema.js'
 import type { Env } from '../../env.js'
 import { HttpError } from '../../http.js'
+import { cookieConfig } from './cookies.js'
+import { createLoginLimiter } from './login-limiter.js'
 import { getDummyHash, hashPassword, verifyPassword } from './password.js'
 import {
   createSession,
@@ -13,7 +15,6 @@ import {
   findSession,
   publicUserColumns,
   REMEMBER_ME_SECONDS,
-  SESSION_COOKIE,
   toPublicUser,
   type AuthContext,
 } from './sessions.js'
@@ -42,21 +43,21 @@ function uniqueViolation(error: unknown): string | undefined {
 }
 
 /** Resolves the session cookie on every request into request.auth. */
-export const sessionPlugin = fp(async (app: FastifyInstance, { db }: Options) => {
+export const sessionPlugin = fp(async (app: FastifyInstance, { db, env }: Options) => {
+  const cookieName = cookieConfig(env).session
   app.decorateRequest('auth', null)
   app.addHook('onRequest', async (request) => {
-    const token = request.cookies[SESSION_COOKIE]
+    const token = request.cookies[cookieName]
     request.auth = token ? await findSession(db, token) : null
   })
 })
 
 export async function authRoutes(app: FastifyInstance, { db, env }: Options) {
+  const cookies = cookieConfig(env)
+  const loginLimiter = createLoginLimiter()
   const setSessionCookie = (reply: FastifyReply, token: string, rememberMe: boolean) =>
-    reply.setCookie(SESSION_COOKIE, token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: env.NODE_ENV === 'production',
-      path: '/',
+    reply.setCookie(cookies.session, token, {
+      ...cookies.options,
       ...(rememberMe ? { maxAge: REMEMBER_ME_SECONDS } : {}),
     })
 
@@ -101,6 +102,13 @@ export async function authRoutes(app: FastifyInstance, { db, env }: Options) {
   app.post('/login', { config: rateLimit(10, '15 minutes') }, async (request, reply) => {
     const { login, password, rememberMe } = loginSchema.parse(request.body)
     const key = login.toLowerCase()
+    if (loginLimiter.isLocked(key)) {
+      throw new HttpError(
+        429,
+        'account_locked',
+        'Too many failed attempts for this account. Try again in 15 minutes.',
+      )
+    }
 
     const [user] = await db
       .select({ ...publicUserColumns, passwordHash: users.passwordHash })
@@ -108,9 +116,13 @@ export async function authRoutes(app: FastifyInstance, { db, env }: Options) {
       .where(or(eq(users.usernameLower, key), eq(users.email, key)))
     const valid = await verifyPassword(user?.passwordHash ?? (await getDummyHash()), password)
     if (!user || !valid) {
+      loginLimiter.fail(key)
       throw new HttpError(401, 'invalid_credentials', 'Wrong username, email or password.')
     }
 
+    loginLimiter.reset(key)
+    // Never keep the session the browser presented: a fresh token on every login.
+    if (request.auth) await deleteSession(db, request.auth.sessionId)
     await db
       .update(users)
       .set({ lastLoginAt: sql`now()` })
@@ -122,7 +134,7 @@ export async function authRoutes(app: FastifyInstance, { db, env }: Options) {
 
   app.post('/logout', async (request, reply) => {
     if (request.auth) await deleteSession(db, request.auth.sessionId)
-    reply.clearCookie(SESSION_COOKIE, { path: '/' })
+    reply.clearCookie(cookies.session, cookies.options)
     return reply.code(204).send()
   })
 

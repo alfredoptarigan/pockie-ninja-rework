@@ -26,6 +26,17 @@ function firstFieldErrors(error: ZodError) {
   )
 }
 
+const DEFAULT_400 = 'The request could not be understood.'
+const CLIENT_ERROR_MESSAGES: Record<number, string> = {
+  404: 'Not found.',
+  413: 'The request is too large.',
+  415: 'Unsupported content type.',
+}
+
+export function notFoundHandler(_request: FastifyRequest, reply: FastifyReply) {
+  return reply.code(404).send(body('not_found', 'Not found.'))
+}
+
 export function errorHandler(
   error: FastifyError | HttpError | ZodError,
   request: FastifyRequest,
@@ -40,8 +51,15 @@ export function errorHandler(
     return reply.code(error.statusCode).send(body(error.code, error.message, error.fields))
   }
   const status = error.statusCode ?? 500
+  if (status === 429 && error.code === 'rate_limited') {
+    return reply.code(429).send(body(error.code, error.message))
+  }
   if (status < 500) {
-    return reply.code(status).send(body(error.code ?? 'bad_request', error.message))
+    // Framework errors (JSON parser, content type, body size) keep their internals to the log.
+    request.log.info({ err: error }, 'client error')
+    return reply
+      .code(status)
+      .send(body('bad_request', CLIENT_ERROR_MESSAGES[status] ?? DEFAULT_400))
   }
   request.log.error(error)
   return reply.code(500).send(body('internal', 'Something went wrong. Please try again.'))

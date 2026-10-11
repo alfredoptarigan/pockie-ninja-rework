@@ -3,8 +3,8 @@ import type { FastifyInstance } from 'fastify'
 import fp from 'fastify-plugin'
 import type { Env } from '../../env.js'
 import { HttpError } from '../../http.js'
+import { cookieConfig } from './cookies.js'
 
-export const CSRF_COOKIE = 'pn_csrf'
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS'])
 
 function sameToken(a: string, b: string) {
@@ -19,16 +19,12 @@ function sameToken(a: string, b: string) {
  * Requests that carry a foreign Origin header are rejected outright.
  */
 export const csrfPlugin = fp(async (app: FastifyInstance, { env }: { env: Env }) => {
+  const cookies = cookieConfig(env)
   app.get('/api/auth/csrf', async (request, reply) => {
-    let token = request.cookies[CSRF_COOKIE]
+    let token = request.cookies[cookies.csrf]
     if (!token) {
       token = randomBytes(32).toString('base64url')
-      reply.setCookie(CSRF_COOKIE, token, {
-        httpOnly: true,
-        sameSite: 'lax',
-        secure: env.NODE_ENV === 'production',
-        path: '/',
-      })
+      reply.setCookie(cookies.csrf, token, cookies.options)
     }
     return { token }
   })
@@ -40,7 +36,7 @@ export const csrfPlugin = fp(async (app: FastifyInstance, { env }: { env: Env })
     if (origin && origin !== env.APP_ORIGIN) {
       throw new HttpError(403, 'bad_origin', 'This request came from an unknown site.')
     }
-    const cookie = request.cookies[CSRF_COOKIE]
+    const cookie = request.cookies[cookies.csrf]
     const header = request.headers['x-csrf-token']
     if (!cookie || typeof header !== 'string' || !sameToken(cookie, header)) {
       throw new HttpError(403, 'csrf', 'Your session expired. Refresh the page and try again.')

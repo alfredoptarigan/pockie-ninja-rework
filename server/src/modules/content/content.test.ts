@@ -101,3 +101,18 @@ describe('GET /api/faq', () => {
     expect(response.items.map((f: { question: string }) => f.question)).toEqual(['Q1', 'Q2'])
   })
 })
+
+describe('GET /api/posts cursor validation', () => {
+  const cursor = (value: string) => Buffer.from(value).toString('base64url')
+
+  it.each([
+    [
+      'an out-of-range date',
+      `+275760-09-13T00:00:00.000Z|${'0'.repeat(8)}-0000-7000-8000-${'0'.repeat(12)}`,
+    ],
+    ['a malformed id', `2026-10-10T09:00:00.000Z|${'-'.repeat(36)}`],
+  ])('returns 400 for %s', async (_label, value) => {
+    const response = await get(`/api/posts?cursor=${cursor(value)}`)
+    expect(response.statusCode).toBe(400)
+  })
+})

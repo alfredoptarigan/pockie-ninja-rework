@@ -1,6 +1,7 @@
 import { postsQuerySchema, type FaqItem, type LoreChapter, type PostsPage } from '@pockie/shared'
 import { and, asc, desc, eq, lte, sql, type SQL } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
+import { z } from 'zod'
 import type { Db } from '../../db/client.js'
 import { faqItems, loreChapters, posts } from '../../db/schema.js'
 import { HttpError } from '../../http.js'
@@ -9,14 +10,15 @@ import { HttpError } from '../../http.js'
 const encodeCursor = (publishedAt: Date, id: string) =>
   Buffer.from(`${publishedAt.toISOString()}|${id}`).toString('base64url')
 
+const cursorSchema = z.tuple([z.iso.datetime(), z.uuid()])
+
 function decodeCursor(cursor: string) {
-  const [iso, id] = Buffer.from(cursor, 'base64url').toString().split('|')
-  const publishedAt = new Date(iso ?? '')
-  const validId = /^[0-9a-f-]{36}$/.test(id ?? '')
-  if (Number.isNaN(publishedAt.getTime()) || !validId) {
+  const parsed = cursorSchema.safeParse(Buffer.from(cursor, 'base64url').toString().split('|'))
+  if (!parsed.success) {
     throw new HttpError(400, 'bad_cursor', 'This page link is no longer valid.')
   }
-  return { publishedAt, id: id as string }
+  const [publishedAt, id] = parsed.data
+  return { publishedAt: new Date(publishedAt), id }
 }
 
 export async function contentRoutes(app: FastifyInstance, { db }: { db: Db }) {

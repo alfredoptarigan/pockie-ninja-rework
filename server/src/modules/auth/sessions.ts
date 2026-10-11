@@ -4,7 +4,6 @@ import { and, eq, gt, lt, sql } from 'drizzle-orm'
 import type { Db } from '../../db/client.js'
 import { sessions, users } from '../../db/schema.js'
 
-export const SESSION_COOKIE = 'pn_session'
 export const REMEMBER_ME_SECONDS = 30 * 24 * 60 * 60
 const BROWSER_SESSION_SECONDS = 24 * 60 * 60
 const TOUCH_INTERVAL_MS = 60_000
@@ -37,9 +36,8 @@ export function toPublicUser(row: {
 export async function createSession(db: Db, userId: string, rememberMe: boolean) {
   const token = randomBytes(32).toString('base64url')
   const ttl = rememberMe ? REMEMBER_ME_SECONDS : BROWSER_SESSION_SECONDS
-  await db
-    .delete(sessions)
-    .where(and(eq(sessions.userId, userId), lt(sessions.expiresAt, sql`now()`)))
+  // ponytail: purges expired sessions on login; add a scheduled job if logins become rare.
+  await db.delete(sessions).where(lt(sessions.expiresAt, sql`now()`))
   await db.insert(sessions).values({
     tokenHash: hashToken(token),
     userId,
