@@ -75,6 +75,15 @@ export function buildCandidates({ source, reborn, npcs, items }: Inputs): Candid
     add(key, 'outfit', id, `item__${AVATAR_ITEM_BASE + Number(id)}--name`)
   }
 
+  // Base (+0) outfit names live on the outfit items: AvatarID 1-100 and 4001-4020.
+  // Higher tiers ("Name ＋N") are derived from these, not translated one by one.
+  for (const [key, id] of idsOf(/^lg_avatar(\d+)$/)) {
+    const avatarId = Number(id)
+    if (avatarId > 100 && (avatarId < 4001 || avatarId > 4020)) continue
+    const rebornKey = avatarId <= 100 ? `item__${AVATAR_ITEM_BASE + avatarId}--name` : undefined
+    add(key, 'outfit', id, rebornKey)
+  }
+
   for (const [key, id] of idsOf(/^lg_SkillName_(\d+)$/)) add(key, 'skill', id, `skill__${id}--name`)
   for (const [key, id] of idsOf(/^lg_Task_(\d+)$/)) add(key, 'quest', id, `quest__${id}--name`)
   for (const [key, id] of idsOf(/^lg_EffortTitle(\d+)$/)) {

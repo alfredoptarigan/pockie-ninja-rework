@@ -1,7 +1,7 @@
 // Phase 1 of the translation (names). `prepare` groups the glossary candidates into unique units
 // and writes batches for translators; `merge` reads their results and writes glossary.json.
 // Run with `pnpm i18n:names prepare` / `pnpm i18n:names merge`. Rules: tools/i18n/NAMES_GUIDE.md.
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Candidate, Kind } from './build-glossary-candidates.ts'
 
@@ -95,15 +95,26 @@ if (import.meta.main) {
   const command = process.argv[2]
 
   if (command === 'prepare') {
-    const { units, keysByUnit } = groupNames(candidates)
+    // Incremental: units that already exist keep their number, so finished batches stay valid.
+    const indexPath = join(work, 'index.json')
+    const previous: Record<string, string[]> = existsSync(indexPath) ? read(indexPath) : {}
+    const known = new Set(Object.values(previous).flat())
+    const { units, keysByUnit } = groupNames(candidates.filter((c) => !known.has(c.key)))
+    const offset = Object.keys(previous).length
+    const index = { ...previous }
+    for (const [n, keys] of Object.entries(keysByUnit)) index[Number(n) + offset] = keys
     mkdirSync(work, { recursive: true })
-    writeFileSync(join(work, 'index.json'), JSON.stringify(keysByUnit))
+    writeFileSync(indexPath, JSON.stringify(index))
+    const firstBatch = readdirSync(work).filter((name) => /^batch-\d+\.json$/.test(name)).length
     let batches = 0
     for (let start = 0; start < units.length; start += BATCH_SIZE, batches++) {
-      const file = join(work, `batch-${String(batches).padStart(2, '0')}.json`)
-      writeFileSync(file, `${JSON.stringify(units.slice(start, start + BATCH_SIZE), null, 1)}\n`)
+      const file = join(work, `batch-${String(firstBatch + batches).padStart(2, '0')}.json`)
+      const slice = units
+        .slice(start, start + BATCH_SIZE)
+        .map((unit) => ({ ...unit, n: unit.n + offset }))
+      writeFileSync(file, `${JSON.stringify(slice, null, 1)}\n`)
     }
-    console.log(`${units.length} name units in ${batches} batches under ${work}`)
+    console.log(`${units.length} new name units in ${batches} new batches under ${work}`)
   } else if (command === 'merge') {
     const results: Record<string, NameResult> = {}
     for (const file of readdirSync(work).filter((name) => name.endsWith('.out.json'))) {

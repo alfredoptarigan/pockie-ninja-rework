@@ -1,0 +1,539 @@
+[
+  {
+    "n": 3982,
+    "kind": "outfit",
+    "source": "2nd Hokage＋0",
+    "reborn": "2nd Hokage"
+  },
+  {
+    "n": 3983,
+    "kind": "outfit",
+    "source": "3rd Hokage＋0",
+    "reborn": "3rd Hokage"
+  },
+  {
+    "n": 3984,
+    "kind": "outfit",
+    "source": "4th Hokage ＋0",
+    "reborn": "4th Hokage"
+  },
+  {
+    "n": 3985,
+    "kind": "outfit",
+    "source": "Abarai Renji ＋0",
+    "reborn": "Renji Abarai"
+  },
+  {
+    "n": 3986,
+    "kind": "outfit",
+    "source": "Aburame Shino ＋0",
+    "reborn": "Shino Aburame"
+  },
+  {
+    "n": 3987,
+    "kind": "outfit",
+    "source": "Aizen ＋0",
+    "reborn": "Sosuke Aizen"
+  },
+  {
+    "n": 3988,
+    "kind": "outfit",
+    "source": "Akimichi Choji ＋0",
+    "reborn": "Choji Akimichi"
+  },
+  {
+    "n": 3989,
+    "kind": "outfit",
+    "source": "Alice ＋0",
+    "reborn": "Alice"
+  },
+  {
+    "n": 3990,
+    "kind": "outfit",
+    "source": "Arale ＋0",
+    "reborn": "Test Character"
+  },
+  {
+    "n": 3991,
+    "kind": "outfit",
+    "source": "Arisawa Tatsuki＋0",
+    "reborn": "Tatsuki Arisawa"
+  },
+  {
+    "n": 3992,
+    "kind": "outfit",
+    "source": "Asuma Sarutobi ＋0",
+    "reborn": "Asuma Sarutobi"
+  },
+  {
+    "n": 3993,
+    "kind": "outfit",
+    "source": "Bomb Ichigo ＋0",
+    "reborn": "Hollowified Ichigo"
+  },
+  {
+    "n": 3994,
+    "kind": "outfit",
+    "source": "Bomb Rukia ＋0"
+  },
+  {
+    "n": 3995,
+    "kind": "outfit",
+    "source": "Chi ＋0"
+  },
+  {
+    "n": 3996,
+    "kind": "outfit",
+    "source": "Deidara+0"
+  },
+  {
+    "n": 3997,
+    "kind": "outfit",
+    "source": "Gaara ＋0",
+    "reborn": "Gaara"
+  },
+  {
+    "n": 3998,
+    "kind": "outfit",
+    "source": "Ggio Vega ＋0",
+    "reborn": "Ggio Vega"
+  },
+  {
+    "n": 3999,
+    "kind": "outfit",
+    "source": "Ghost Lady ＋0",
+    "reborn": "Phantom Lady"
+  },
+  {
+    "n": 4000,
+    "kind": "outfit",
+    "source": "Gin Ichimaru ＋0",
+    "reborn": "Gin Ichimaru"
+  },
+  {
+    "n": 4001,
+    "kind": "outfit",
+    "source": "Grimmjow ＋0",
+    "reborn": "Grimmjow Jaegerjaquez"
+  },
+  {
+    "n": 4002,
+    "kind": "outfit",
+    "source": "Haku ＋0",
+    "reborn": "Haku"
+  },
+  {
+    "n": 4003,
+    "kind": "outfit",
+    "source": "Halibel ＋0",
+    "reborn": "Halibel"
+  },
+  {
+    "n": 4004,
+    "kind": "outfit",
+    "source": "Hatake Kakashi ＋0",
+    "reborn": "Kakashi Hatake"
+  },
+  {
+    "n": 4005,
+    "kind": "outfit",
+    "source": "Hebi Sasuke+0"
+  },
+  {
+    "n": 4006,
+    "kind": "outfit",
+    "source": "Hidan+0"
+  },
+  {
+    "n": 4007,
+    "kind": "outfit",
+    "source": "Hirako Shinji ＋0",
+    "reborn": "Shinji Hirako"
+  },
+  {
+    "n": 4008,
+    "kind": "outfit",
+    "source": "Hitsugaya Toushiro ＋0",
+    "reborn": "Toshiro Hitsugaya"
+  },
+  {
+    "n": 4009,
+    "kind": "outfit",
+    "source": "Hollow Ulquiorra ＋0",
+    "reborn": "Ulquiorra Cifer"
+  },
+  {
+    "n": 4010,
+    "kind": "outfit",
+    "source": "Hollowfied Grimmjow ＋0",
+    "reborn": "Released Grimmjow"
+  },
+  {
+    "n": 4011,
+    "kind": "outfit",
+    "source": "Hollowfied Hirako Shinji ＋0",
+    "reborn": "Hollowified Shinji"
+  },
+  {
+    "n": 4012,
+    "kind": "outfit",
+    "source": "Hyuga Hinata ＋0",
+    "reborn": "Hinata Hyuga"
+  },
+  {
+    "n": 4013,
+    "kind": "outfit",
+    "source": "Hyuga Neji ＋0",
+    "reborn": "Neji Hyuga"
+  },
+  {
+    "n": 4014,
+    "kind": "outfit",
+    "source": "Inoue Orihime ＋0",
+    "reborn": "Orihime Inoue"
+  },
+  {
+    "n": 4015,
+    "kind": "outfit",
+    "source": "Inuzuka Kiba ＋0",
+    "reborn": "Kiba Inuzuka"
+  },
+  {
+    "n": 4016,
+    "kind": "outfit",
+    "source": "Jiraiya ＋0",
+    "reborn": "Jiraiya"
+  },
+  {
+    "n": 4017,
+    "kind": "outfit",
+    "source": "Kakuzu+0"
+  },
+  {
+    "n": 4018,
+    "kind": "outfit",
+    "source": "Karin+0"
+  },
+  {
+    "n": 4019,
+    "kind": "outfit",
+    "source": "Kisame Hoshigaki+0"
+  },
+  {
+    "n": 4020,
+    "kind": "outfit",
+    "source": "Konan ＋0",
+    "reborn": "Test Character"
+  },
+  {
+    "n": 4021,
+    "kind": "outfit",
+    "source": "Konan+0"
+  },
+  {
+    "n": 4022,
+    "kind": "outfit",
+    "source": "Kostum Natal (Female)＋0",
+    "reborn": "Christmas (Female)"
+  },
+  {
+    "n": 4023,
+    "kind": "outfit",
+    "source": "Kostum Natal (Male) +0",
+    "reborn": "Christmas (Male)"
+  },
+  {
+    "n": 4024,
+    "kind": "outfit",
+    "source": "Kotetsu Isane＋0",
+    "reborn": "Isane Kotetsu"
+  },
+  {
+    "n": 4025,
+    "kind": "outfit",
+    "source": "Kuchiki Byakuya ＋0",
+    "reborn": "Byakuya Kuchiki"
+  },
+  {
+    "n": 4026,
+    "kind": "outfit",
+    "source": "Kuchiki Rukia ＋0",
+    "reborn": "Rukia Kuchiki"
+  },
+  {
+    "n": 4027,
+    "kind": "outfit",
+    "source": "Kurenai Yuuhi ＋0",
+    "reborn": "Kurenai Yuhi"
+  },
+  {
+    "n": 4028,
+    "kind": "outfit",
+    "source": "Kurosaki Ichigo ＋0",
+    "reborn": "Ichigo Kurosaki"
+  },
+  {
+    "n": 4029,
+    "kind": "outfit",
+    "source": "Kurotsuchi Nemu ＋0",
+    "reborn": "Nemu Kurotsuchi"
+  },
+  {
+    "n": 4030,
+    "kind": "outfit",
+    "source": "Kusajishi Yachiru ＋0",
+    "reborn": "Yachiru Kusajishi"
+  },
+  {
+    "n": 4031,
+    "kind": "outfit",
+    "source": "Kyuubi Naruto＋0",
+    "reborn": "Kyuubi Naruto"
+  },
+  {
+    "n": 4032,
+    "kind": "outfit",
+    "source": "Little Jun ＋0",
+    "reborn": "Little Jun"
+  },
+  {
+    "n": 4033,
+    "kind": "outfit",
+    "source": "Little Meng ＋0",
+    "reborn": "Little Meng"
+  },
+  {
+    "n": 4034,
+    "kind": "outfit",
+    "source": "Love Aikawa ＋0",
+    "reborn": "Love Aikawa"
+  },
+  {
+    "n": 4035,
+    "kind": "outfit",
+    "source": "Mashiro Kuna＋0",
+    "reborn": "Mashiro Kuna"
+  },
+  {
+    "n": 4036,
+    "kind": "outfit",
+    "source": "Mitarashi Anko ＋0",
+    "reborn": "Anko Mitarashi"
+  },
+  {
+    "n": 4037,
+    "kind": "outfit",
+    "source": "Mizukage＋0",
+    "reborn": "5th Mizukage"
+  },
+  {
+    "n": 4038,
+    "kind": "outfit",
+    "source": "Momo Hinamori ＋0",
+    "reborn": "Momo Hinamori"
+  },
+  {
+    "n": 4039,
+    "kind": "outfit",
+    "source": "Momochi Zabuza ＋0",
+    "reborn": "Zabuza Momochi"
+  },
+  {
+    "n": 4040,
+    "kind": "outfit",
+    "source": "Nanao Ise ＋0",
+    "reborn": "Nanao Ise"
+  },
+  {
+    "n": 4041,
+    "kind": "outfit",
+    "source": "Nara Shikamaru ＋0",
+    "reborn": "Shikamaru Nara"
+  },
+  {
+    "n": 4042,
+    "kind": "outfit",
+    "source": "Nel ＋0"
+  },
+  {
+    "n": 4043,
+    "kind": "outfit",
+    "source": "Nelliel ＋0",
+    "reborn": "Nelliel"
+  },
+  {
+    "n": 4044,
+    "kind": "outfit",
+    "source": "Orochimaru ＋0",
+    "reborn": "Orochimaru"
+  },
+  {
+    "n": 4045,
+    "kind": "outfit",
+    "source": "Pain+0"
+  },
+  {
+    "n": 4046,
+    "kind": "outfit",
+    "source": "Priest ＋0"
+  },
+  {
+    "n": 4047,
+    "kind": "outfit",
+    "source": "Rangiku Matsumoto ＋0",
+    "reborn": "Rangiku Matsumoto"
+  },
+  {
+    "n": 4048,
+    "kind": "outfit",
+    "source": "Rock Lee ＋0",
+    "reborn": "Rock Lee"
+  },
+  {
+    "n": 4049,
+    "kind": "outfit",
+    "source": "Sage Naruto+0"
+  },
+  {
+    "n": 4050,
+    "kind": "outfit",
+    "source": "Sakura Haruno ＋0",
+    "reborn": "Sakura Haruno"
+  },
+  {
+    "n": 4051,
+    "kind": "outfit",
+    "source": "Sarugaki Hiyori ＋0",
+    "reborn": "Hiyori Sarugaki"
+  },
+  {
+    "n": 4052,
+    "kind": "outfit",
+    "source": "Scorpion ＋0",
+    "reborn": "Sasori"
+  },
+  {
+    "n": 4053,
+    "kind": "outfit",
+    "source": "Shiba Kuukaku＋0",
+    "reborn": "Kukaku Shiba"
+  },
+  {
+    "n": 4054,
+    "kind": "outfit",
+    "source": "Shihouin Yoruichi ＋0",
+    "reborn": "Yoruichi Shihouin"
+  },
+  {
+    "n": 4055,
+    "kind": "outfit",
+    "source": "Shizune ＋0",
+    "reborn": "Shizune"
+  },
+  {
+    "n": 4056,
+    "kind": "outfit",
+    "source": "Soifon ＋0",
+    "reborn": "Soifon"
+  },
+  {
+    "n": 4057,
+    "kind": "outfit",
+    "source": "Suigetsu+0"
+  },
+  {
+    "n": 4058,
+    "kind": "outfit",
+    "source": "Temari ＋0",
+    "reborn": "Temari"
+  },
+  {
+    "n": 4059,
+    "kind": "outfit",
+    "source": "Tenten ＋0",
+    "reborn": "Tenten"
+  },
+  {
+    "n": 4060,
+    "kind": "outfit",
+    "source": "Tsunade ＋0",
+    "reborn": "Tsunade"
+  },
+  {
+    "n": 4061,
+    "kind": "outfit",
+    "source": "Uchiha Itachi ＋0",
+    "reborn": "Itachi Uchiha"
+  },
+  {
+    "n": 4062,
+    "kind": "outfit",
+    "source": "Uchiha Sasuke ＋0",
+    "reborn": "Sasuke Uchiha"
+  },
+  {
+    "n": 4063,
+    "kind": "outfit",
+    "source": "Ulquiorra ＋0",
+    "reborn": "2nd Release Ulquiorra"
+  },
+  {
+    "n": 4064,
+    "kind": "outfit",
+    "source": "Unohana Retsu Kostum ＋0",
+    "reborn": "Retsu Unohana"
+  },
+  {
+    "n": 4065,
+    "kind": "outfit",
+    "source": "Uzumaki Naruto ＋0",
+    "reborn": "Naruto Uzumaki"
+  },
+  {
+    "n": 4066,
+    "kind": "outfit",
+    "source": "White Ichigo ＋0",
+    "reborn": "White Ichigo"
+  },
+  {
+    "n": 4067,
+    "kind": "outfit",
+    "source": "White Ulquiorra ＋0",
+    "reborn": "Released Ulquiorra"
+  },
+  {
+    "n": 4068,
+    "kind": "outfit",
+    "source": "Witch ＋0",
+    "reborn": "Witch"
+  },
+  {
+    "n": 4069,
+    "kind": "outfit",
+    "source": "Yadomaru Sasha ＋0",
+    "reborn": "Lisa Yadomaru"
+  },
+  {
+    "n": 4070,
+    "kind": "outfit",
+    "source": "Yamanaka Ino ＋0",
+    "reborn": "Ino Yamanaka"
+  },
+  {
+    "n": 4071,
+    "kind": "outfit",
+    "source": "Yamato＋0",
+    "reborn": "Yamato"
+  },
+  {
+    "n": 4072,
+    "kind": "outfit",
+    "source": "Zangetsu ＋0",
+    "reborn": "Zangetsu"
+  },
+  {
+    "n": 4073,
+    "kind": "outfit",
+    "source": "Zombie Lady ＋0"
+  }
+]

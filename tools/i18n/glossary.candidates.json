@@ -24988,6 +24988,635 @@
   "reborn": "Kyuubi Naruto"
  },
  {
+  "key": "lg_avatar1",
+  "kind": "outfit",
+  "id": "1",
+  "source": "<font color='#ff8a00'>Kurosaki Ichigo ＋0</font>",
+  "reborn": "Ichigo Kurosaki"
+ },
+ {
+  "key": "lg_avatar10",
+  "kind": "outfit",
+  "id": "10",
+  "source": "<font color='#00aeff'>Grimmjow ＋0</font>",
+  "reborn": "Grimmjow Jaegerjaquez"
+ },
+ {
+  "key": "lg_avatar11",
+  "kind": "outfit",
+  "id": "11",
+  "source": "<font color='#00aeff'>Hitsugaya Toushiro ＋0</font>",
+  "reborn": "Toshiro Hitsugaya"
+ },
+ {
+  "key": "lg_avatar12",
+  "kind": "outfit",
+  "id": "12",
+  "source": "<font color='#8e8e8e'>Hirako Shinji ＋0</font>",
+  "reborn": "Shinji Hirako"
+ },
+ {
+  "key": "lg_avatar13",
+  "kind": "outfit",
+  "id": "13",
+  "source": "<font color='#00aeff'>Hollowfied Hirako Shinji ＋0</font>",
+  "reborn": "Hollowified Shinji"
+ },
+ {
+  "key": "lg_avatar14",
+  "kind": "outfit",
+  "id": "14",
+  "source": "<font color='#8e8e8e'>Abarai Renji ＋0</font>",
+  "reborn": "Renji Abarai"
+ },
+ {
+  "key": "lg_avatar15",
+  "kind": "outfit",
+  "id": "15",
+  "source": "<font color='#00aeff'>Gin Ichimaru ＋0</font>",
+  "reborn": "Gin Ichimaru"
+ },
+ {
+  "key": "lg_avatar16",
+  "kind": "outfit",
+  "id": "16",
+  "source": "<font color='#8e8e8e'>Akimichi Choji ＋0</font>",
+  "reborn": "Choji Akimichi"
+ },
+ {
+  "key": "lg_avatar17",
+  "kind": "outfit",
+  "id": "17",
+  "source": "<font color='#8e8e8e'>Inuzuka Kiba ＋0</font>",
+  "reborn": "Kiba Inuzuka"
+ },
+ {
+  "key": "lg_avatar18",
+  "kind": "outfit",
+  "id": "18",
+  "source": "<font color='#8e8e8e'>Aburame Shino ＋0</font>",
+  "reborn": "Shino Aburame"
+ },
+ {
+  "key": "lg_avatar19",
+  "kind": "outfit",
+  "id": "19",
+  "source": "<font color='#8e8e8e'>Nara Shikamaru ＋0</font>",
+  "reborn": "Shikamaru Nara"
+ },
+ {
+  "key": "lg_avatar2",
+  "kind": "outfit",
+  "id": "2",
+  "source": "<font color='#8e8e8e'>Witch ＋0</font>",
+  "reborn": "Witch"
+ },
+ {
+  "key": "lg_avatar20",
+  "kind": "outfit",
+  "id": "20",
+  "source": "<font color='#8e8e8e'>Asuma Sarutobi ＋0</font>",
+  "reborn": "Asuma Sarutobi"
+ },
+ {
+  "key": "lg_avatar21",
+  "kind": "outfit",
+  "id": "21",
+  "source": "<font color='#00aeff'>Rock Lee ＋0</font>",
+  "reborn": "Rock Lee"
+ },
+ {
+  "key": "lg_avatar22",
+  "kind": "outfit",
+  "id": "22",
+  "source": "<font color='#00aeff'>Hyuga Neji ＋0</font>",
+  "reborn": "Neji Hyuga"
+ },
+ {
+  "key": "lg_avatar23",
+  "kind": "outfit",
+  "id": "23",
+  "source": "<font color='#00aeff'>Scorpion ＋0</font>",
+  "reborn": "Sasori"
+ },
+ {
+  "key": "lg_avatar24",
+  "kind": "outfit",
+  "id": "24",
+  "source": "<font color='#ff8a00'>Yamato＋0</font>",
+  "reborn": "Yamato"
+ },
+ {
+  "key": "lg_avatar25",
+  "kind": "outfit",
+  "id": "25",
+  "source": "<font color='#8e8e8e'>Nel ＋0</font>"
+ },
+ {
+  "key": "lg_avatar26",
+  "kind": "outfit",
+  "id": "26",
+  "source": "<font color='#8e8e8e'>Sarugaki Hiyori ＋0</font>",
+  "reborn": "Hiyori Sarugaki"
+ },
+ {
+  "key": "lg_avatar27",
+  "kind": "outfit",
+  "id": "27",
+  "source": "<font color='#ff8a00'>Shihouin Yoruichi ＋0</font>",
+  "reborn": "Yoruichi Shihouin"
+ },
+ {
+  "key": "lg_avatar28",
+  "kind": "outfit",
+  "id": "28",
+  "source": "<font color='#00aeff'>Soifon ＋0</font>",
+  "reborn": "Soifon"
+ },
+ {
+  "key": "lg_avatar29",
+  "kind": "outfit",
+  "id": "29",
+  "source": "<font color='#ff8a00'>Halibel ＋0</font>",
+  "reborn": "Halibel"
+ },
+ {
+  "key": "lg_avatar3",
+  "kind": "outfit",
+  "id": "3",
+  "source": "<font color='#8e8e8e'>Ggio Vega ＋0</font>",
+  "reborn": "Ggio Vega"
+ },
+ {
+  "key": "lg_avatar30",
+  "kind": "outfit",
+  "id": "30",
+  "source": "<font color='#ff8a00'>Mashiro Kuna＋0</font>",
+  "reborn": "Mashiro Kuna"
+ },
+ {
+  "key": "lg_avatar31",
+  "kind": "outfit",
+  "id": "31",
+  "source": "<font color='#ff8a00'>Shiba Kuukaku＋0</font>",
+  "reborn": "Kukaku Shiba"
+ },
+ {
+  "key": "lg_avatar32",
+  "kind": "outfit",
+  "id": "32",
+  "source": "<font color='#8e8e8e'>Nanao Ise ＋0</font>",
+  "reborn": "Nanao Ise"
+ },
+ {
+  "key": "lg_avatar33",
+  "kind": "outfit",
+  "id": "33",
+  "source": "<font color='#8e8e8e'>Momo Hinamori ＋0</font>",
+  "reborn": "Momo Hinamori"
+ },
+ {
+  "key": "lg_avatar34",
+  "kind": "outfit",
+  "id": "34",
+  "source": "<font color='#8e8e8e'>Rangiku Matsumoto ＋0</font>",
+  "reborn": "Rangiku Matsumoto"
+ },
+ {
+  "key": "lg_avatar35",
+  "kind": "outfit",
+  "id": "35",
+  "source": "<font color='#ff8a00'>Inoue Orihime ＋0</font>",
+  "reborn": "Orihime Inoue"
+ },
+ {
+  "key": "lg_avatar36",
+  "kind": "outfit",
+  "id": "36",
+  "source": "<font color='#8e8e8e'>Kurenai Yuuhi ＋0</font>",
+  "reborn": "Kurenai Yuhi"
+ },
+ {
+  "key": "lg_avatar37",
+  "kind": "outfit",
+  "id": "37",
+  "source": "<font color='#ff8a00'>Hyuga Hinata ＋0</font>",
+  "reborn": "Hinata Hyuga"
+ },
+ {
+  "key": "lg_avatar38",
+  "kind": "outfit",
+  "id": "38",
+  "source": "<font color='#8e8e8e'>Chi ＋0</font>"
+ },
+ {
+  "key": "lg_avatar39",
+  "kind": "outfit",
+  "id": "39",
+  "source": "<font color='#8e8e8e'>Shizune ＋0</font>",
+  "reborn": "Shizune"
+ },
+ {
+  "key": "lg_avatar4",
+  "kind": "outfit",
+  "id": "4",
+  "source": "<font color='#ff8a00'>White Ichigo ＋0</font>",
+  "reborn": "White Ichigo"
+ },
+ {
+  "key": "lg_avatar40",
+  "kind": "outfit",
+  "id": "40",
+  "source": "<font color='#8e8e8e'>Alice ＋0</font>",
+  "reborn": "Alice"
+ },
+ {
+  "key": "lg_avatar4003",
+  "kind": "outfit",
+  "id": "4003",
+  "source": "<font color='#ff8a00'>Kakuzu+0</font>"
+ },
+ {
+  "key": "lg_avatar4004",
+  "kind": "outfit",
+  "id": "4004",
+  "source": "<font color='#ff8a00'>Hidan+0</font>"
+ },
+ {
+  "key": "lg_avatar4005",
+  "kind": "outfit",
+  "id": "4005",
+  "source": "<font color='#ff8a00'>Deidara+0</font>"
+ },
+ {
+  "key": "lg_avatar4006",
+  "kind": "outfit",
+  "id": "4006",
+  "source": "<font color='#ff8a00'>Pain+0</font>"
+ },
+ {
+  "key": "lg_avatar4007",
+  "kind": "outfit",
+  "id": "4007",
+  "source": "<font color='#ff8a00'>Kisame Hoshigaki+0</font>"
+ },
+ {
+  "key": "lg_avatar4008",
+  "kind": "outfit",
+  "id": "4008",
+  "source": "<font color='#ff8a00'>Konan+0</font>"
+ },
+ {
+  "key": "lg_avatar4009",
+  "kind": "outfit",
+  "id": "4009",
+  "source": "<font color='#ff8a00'>Sage Naruto+0</font>"
+ },
+ {
+  "key": "lg_avatar4011",
+  "kind": "outfit",
+  "id": "4011",
+  "source": "<font color='#ff8a00'>Hebi Sasuke+0</font>"
+ },
+ {
+  "key": "lg_avatar4013",
+  "kind": "outfit",
+  "id": "4013",
+  "source": "<font color='#ff8a00'>Suigetsu+0</font>"
+ },
+ {
+  "key": "lg_avatar4014",
+  "kind": "outfit",
+  "id": "4014",
+  "source": "<font color='#ff8a00'>Karin+0</font>"
+ },
+ {
+  "key": "lg_avatar41",
+  "kind": "outfit",
+  "id": "41",
+  "source": "<font color='#8e8e8e'>Priest ＋0</font>"
+ },
+ {
+  "key": "lg_avatar42",
+  "kind": "outfit",
+  "id": "42",
+  "source": "<font color='#8e8e8e'>Ghost Lady ＋0</font>",
+  "reborn": "Phantom Lady"
+ },
+ {
+  "key": "lg_avatar43",
+  "kind": "outfit",
+  "id": "43",
+  "source": "<font color='#8e8e8e'>Zombie Lady ＋0</font>"
+ },
+ {
+  "key": "lg_avatar44",
+  "kind": "outfit",
+  "id": "44",
+  "source": "<font color='#ff8a00'>Mizukage＋0</font>",
+  "reborn": "5th Mizukage"
+ },
+ {
+  "key": "lg_avatar45",
+  "kind": "outfit",
+  "id": "45",
+  "source": "<font color='#ff8a00'>Uzumaki Naruto ＋0</font>",
+  "reborn": "Naruto Uzumaki"
+ },
+ {
+  "key": "lg_avatar46",
+  "kind": "outfit",
+  "id": "46",
+  "source": "<font color='#ff8a00'>Gaara ＋0</font>",
+  "reborn": "Gaara"
+ },
+ {
+  "key": "lg_avatar47",
+  "kind": "outfit",
+  "id": "47",
+  "source": "<font color='#ff8a00'>Hatake Kakashi ＋0</font>",
+  "reborn": "Kakashi Hatake"
+ },
+ {
+  "key": "lg_avatar48",
+  "kind": "outfit",
+  "id": "48",
+  "source": "<font color='#ff8a00'>Uchiha Sasuke ＋0</font>",
+  "reborn": "Sasuke Uchiha"
+ },
+ {
+  "key": "lg_avatar49",
+  "kind": "outfit",
+  "id": "49",
+  "source": "<font color='#ff8a00'>Uchiha Itachi ＋0</font>",
+  "reborn": "Itachi Uchiha"
+ },
+ {
+  "key": "lg_avatar5",
+  "kind": "outfit",
+  "id": "5",
+  "source": "<font color='#ff8a00'>Bomb Ichigo ＋0</font>",
+  "reborn": "Hollowified Ichigo"
+ },
+ {
+  "key": "lg_avatar50",
+  "kind": "outfit",
+  "id": "50",
+  "source": "<font color='#ff8a00'>2nd Hokage＋0</font>",
+  "reborn": "2nd Hokage"
+ },
+ {
+  "key": "lg_avatar51",
+  "kind": "outfit",
+  "id": "51",
+  "source": "<font color='#ff8a00'>Orochimaru ＋0</font>",
+  "reborn": "Orochimaru"
+ },
+ {
+  "key": "lg_avatar52",
+  "kind": "outfit",
+  "id": "52",
+  "source": "<font color='#00aeff'>Zangetsu ＋0</font>",
+  "reborn": "Zangetsu"
+ },
+ {
+  "key": "lg_avatar53",
+  "kind": "outfit",
+  "id": "53",
+  "source": "<font color='#ff8a00'>3rd Hokage＋0</font>",
+  "reborn": "3rd Hokage"
+ },
+ {
+  "key": "lg_avatar54",
+  "kind": "outfit",
+  "id": "54",
+  "source": "<font color='#00aeff'>Hollowfied Grimmjow ＋0</font>",
+  "reborn": "Released Grimmjow"
+ },
+ {
+  "key": "lg_avatar55",
+  "kind": "outfit",
+  "id": "55",
+  "source": "<font color='#ff8a00'>Aizen ＋0</font>",
+  "reborn": "Sosuke Aizen"
+ },
+ {
+  "key": "lg_avatar56",
+  "kind": "outfit",
+  "id": "56",
+  "source": "<font color='#ff8a00'>4th Hokage ＋0</font>",
+  "reborn": "4th Hokage"
+ },
+ {
+  "key": "lg_avatar57",
+  "kind": "outfit",
+  "id": "57",
+  "source": "<font color='#ff8a00'>Jiraiya ＋0</font>",
+  "reborn": "Jiraiya"
+ },
+ {
+  "key": "lg_avatar58",
+  "kind": "outfit",
+  "id": "58",
+  "source": "<font color='#ff8a00'>Sakura Haruno ＋0</font>",
+  "reborn": "Sakura Haruno"
+ },
+ {
+  "key": "lg_avatar59",
+  "kind": "outfit",
+  "id": "59",
+  "source": "<font color='#8e8e8e'>Arale ＋0</font>",
+  "reborn": "Test Character"
+ },
+ {
+  "key": "lg_avatar6",
+  "kind": "outfit",
+  "id": "6",
+  "source": "<font color='#00aeff'>Ulquiorra ＋0</font>",
+  "reborn": "2nd Release Ulquiorra"
+ },
+ {
+  "key": "lg_avatar60",
+  "kind": "outfit",
+  "id": "60",
+  "source": "<font color='#00aeff'>Yamanaka Ino ＋0</font>",
+  "reborn": "Ino Yamanaka"
+ },
+ {
+  "key": "lg_avatar61",
+  "kind": "outfit",
+  "id": "61",
+  "source": "<font color='#8e8e8e'>Mitarashi Anko ＋0</font>",
+  "reborn": "Anko Mitarashi"
+ },
+ {
+  "key": "lg_avatar62",
+  "kind": "outfit",
+  "id": "62",
+  "source": "<font color='#00aeff'>Temari ＋0</font>",
+  "reborn": "Temari"
+ },
+ {
+  "key": "lg_avatar63",
+  "kind": "outfit",
+  "id": "63",
+  "source": "<font color='#8e8e8e'>Tenten ＋0</font>",
+  "reborn": "Tenten"
+ },
+ {
+  "key": "lg_avatar64",
+  "kind": "outfit",
+  "id": "64",
+  "source": "<font color='#00aeff'>Haku ＋0</font>",
+  "reborn": "Haku"
+ },
+ {
+  "key": "lg_avatar65",
+  "kind": "outfit",
+  "id": "65",
+  "source": "<font color='#8e8e8e'>Kurotsuchi Nemu ＋0</font>",
+  "reborn": "Nemu Kurotsuchi"
+ },
+ {
+  "key": "lg_avatar66",
+  "kind": "outfit",
+  "id": "66",
+  "source": "<font color='#00aeff'>Kusajishi Yachiru ＋0</font>",
+  "reborn": "Yachiru Kusajishi"
+ },
+ {
+  "key": "lg_avatar67",
+  "kind": "outfit",
+  "id": "67",
+  "source": "<font color='#ff8a00'>Kotetsu Isane＋0</font>",
+  "reborn": "Isane Kotetsu"
+ },
+ {
+  "key": "lg_avatar68",
+  "kind": "outfit",
+  "id": "68",
+  "source": "<font color='#8e8e8e'>Konan ＋0</font>",
+  "reborn": "Test Character"
+ },
+ {
+  "key": "lg_avatar69",
+  "kind": "outfit",
+  "id": "69",
+  "source": "<font color='#00aeff'>Yadomaru Sasha ＋0</font>",
+  "reborn": "Lisa Yadomaru"
+ },
+ {
+  "key": "lg_avatar7",
+  "kind": "outfit",
+  "id": "7",
+  "source": "<font color='#00aeff'>White Ulquiorra ＋0</font>",
+  "reborn": "Released Ulquiorra"
+ },
+ {
+  "key": "lg_avatar70",
+  "kind": "outfit",
+  "id": "70",
+  "source": "<font color='#ff8a00'>Arisawa Tatsuki＋0</font>",
+  "reborn": "Tatsuki Arisawa"
+ },
+ {
+  "key": "lg_avatar71",
+  "kind": "outfit",
+  "id": "71",
+  "source": "<font color='#8e8e8e'>Bomb Rukia ＋0</font>"
+ },
+ {
+  "key": "lg_avatar72",
+  "kind": "outfit",
+  "id": "72",
+  "source": "<font color='#ff8a00'>Tsunade ＋0</font>",
+  "reborn": "Tsunade"
+ },
+ {
+  "key": "lg_avatar74",
+  "kind": "outfit",
+  "id": "74",
+  "source": "<font color='#ff8a00'>Kuchiki Rukia ＋0</font>",
+  "reborn": "Rukia Kuchiki"
+ },
+ {
+  "key": "lg_avatar76",
+  "kind": "outfit",
+  "id": "76",
+  "source": "<font color='#00aeff'>Momochi Zabuza ＋0</font>",
+  "reborn": "Zabuza Momochi"
+ },
+ {
+  "key": "lg_avatar8",
+  "kind": "outfit",
+  "id": "8",
+  "source": "<font color='#ff8a00'>Hollow Ulquiorra ＋0</font>",
+  "reborn": "Ulquiorra Cifer"
+ },
+ {
+  "key": "lg_avatar84",
+  "kind": "outfit",
+  "id": "84",
+  "source": "<font color='#ff8a00'>Kuchiki Byakuya ＋0</font>",
+  "reborn": "Byakuya Kuchiki"
+ },
+ {
+  "key": "lg_avatar85",
+  "kind": "outfit",
+  "id": "85",
+  "source": "<font color='#ff8a00'>Nelliel ＋0</font>",
+  "reborn": "Nelliel"
+ },
+ {
+  "key": "lg_avatar86",
+  "kind": "outfit",
+  "id": "86",
+  "source": "<font color='#ff8a00'>Little Meng ＋0</font>",
+  "reborn": "Little Meng"
+ },
+ {
+  "key": "lg_avatar87",
+  "kind": "outfit",
+  "id": "87",
+  "source": "<font color='#ff8a00'>Little Jun ＋0</font>",
+  "reborn": "Little Jun"
+ },
+ {
+  "key": "lg_avatar88",
+  "kind": "outfit",
+  "id": "88",
+  "source": "<font color='#00aeff'>Kostum Natal (Male) +0</font>",
+  "reborn": "Christmas (Male)"
+ },
+ {
+  "key": "lg_avatar89",
+  "kind": "outfit",
+  "id": "89",
+  "source": "<font color='#00aeff'>Kostum Natal (Female)＋0</font>",
+  "reborn": "Christmas (Female)"
+ },
+ {
+  "key": "lg_avatar9",
+  "kind": "outfit",
+  "id": "9",
+  "source": "<font color='#8e8e8e'>Love Aikawa ＋0</font>",
+  "reborn": "Love Aikawa"
+ },
+ {
+  "key": "lg_avatar90",
+  "kind": "outfit",
+  "id": "90",
+  "source": "<font color='#ff8a00'>Unohana Retsu Kostum ＋0</font>",
+  "reborn": "Retsu Unohana"
+ },
+ {
+  "key": "lg_avatar98",
+  "kind": "outfit",
+  "id": "98",
+  "source": "<font color='#ff8a00'>Kyuubi Naruto＋0</font>",
+  "reborn": "Kyuubi Naruto"
+ },
+ {
   "key": "lg_SkillName_101802",
   "kind": "skill",
   "id": "101802",
