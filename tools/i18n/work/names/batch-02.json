@@ -1,0 +1,1365 @@
+[
+  {
+    "n": 500,
+    "kind": "skill",
+    "source": "Shintenshin no Jutsu",
+    "reborn": "The Eight Inner Gates Released"
+  },
+  {
+    "n": 501,
+    "kind": "skill",
+    "source": "Suiton",
+    "reborn": "Earth Release"
+  },
+  {
+    "n": 502,
+    "kind": "skill",
+    "source": "Suiton Suijinheki"
+  },
+  {
+    "n": 503,
+    "kind": "skill",
+    "source": "Suiton Suijinheki",
+    "reborn": "Giant Waterfall"
+  },
+  {
+    "n": 504,
+    "kind": "skill",
+    "source": "Teknik ilusi",
+    "reborn": "Healing Jutsu"
+  },
+  {
+    "n": 505,
+    "kind": "skill",
+    "source": "Teknik Penyegelan",
+    "reborn": "Illusionary Technique"
+  },
+  {
+    "n": 506,
+    "kind": "skill",
+    "source": "Ten no noroi"
+  },
+  {
+    "n": 507,
+    "kind": "skill",
+    "source": "Ten no noroi",
+    "reborn": "Cursed Seal of Heaven"
+  },
+  {
+    "n": 508,
+    "kind": "title",
+    "source": "Adventurer"
+  },
+  {
+    "n": 509,
+    "kind": "title",
+    "source": "Agent of Soul Reaper",
+    "reborn": "[Ex] Night Dancer"
+  },
+  {
+    "n": 510,
+    "kind": "title",
+    "source": "Angel of Mercy",
+    "reborn": "[Ex] Blue Beast"
+  },
+  {
+    "n": 511,
+    "kind": "title",
+    "source": "Artistic Pisces(30 hari)",
+    "reborn": "Optimist Sagitarius"
+  },
+  {
+    "n": 512,
+    "kind": "title",
+    "source": "Artistic Pisces(7 hari)",
+    "reborn": "Blade of Chaos"
+  },
+  {
+    "n": 513,
+    "kind": "title",
+    "source": "Band Collector",
+    "reborn": "[Ex] Yellow Flash"
+  },
+  {
+    "n": 514,
+    "kind": "title",
+    "source": "Berusaha menang",
+    "reborn": "Try to Win"
+  },
+  {
+    "n": 515,
+    "kind": "title",
+    "source": "Beyond God",
+    "reborn": "[Ex] White Fang"
+  },
+  {
+    "n": 516,
+    "kind": "title",
+    "source": "Blade of Chaos",
+    "reborn": "Blue Collector"
+  },
+  {
+    "n": 517,
+    "kind": "title",
+    "source": "Blue Beast",
+    "reborn": "Orange Collection"
+  },
+  {
+    "n": 518,
+    "kind": "title",
+    "source": "Brave Aries(30 hari)",
+    "reborn": "Red Sunset"
+  },
+  {
+    "n": 519,
+    "kind": "title",
+    "source": "Brave Aries(7 hari)",
+    "reborn": "Gray Keeper"
+  },
+  {
+    "n": 520,
+    "kind": "title",
+    "source": "Card Expert",
+    "reborn": "Invincible Man"
+  },
+  {
+    "n": 521,
+    "kind": "title",
+    "source": "Card Master",
+    "reborn": "The Lionhearted"
+  },
+  {
+    "n": 522,
+    "kind": "title",
+    "source": "Come Come Paradise",
+    "reborn": "Come Come Paradise"
+  },
+  {
+    "n": 523,
+    "kind": "title",
+    "source": "Conspicuous Failure"
+  },
+  {
+    "n": 524,
+    "kind": "title",
+    "source": "Demi Cinta!",
+    "reborn": "For Love"
+  },
+  {
+    "n": 525,
+    "kind": "title",
+    "source": "Domba Gemuk Legendaris"
+  },
+  {
+    "n": 526,
+    "kind": "title",
+    "source": "Emperor of Login",
+    "reborn": "Conspicuous Failure"
+  },
+  {
+    "n": 527,
+    "kind": "title",
+    "source": "Faultless Virgo(30 hari)",
+    "reborn": "Witti Geminis"
+  },
+  {
+    "n": 528,
+    "kind": "title",
+    "source": "Faultless Virgo(7 hari)",
+    "reborn": "Wake of Sharingan"
+  },
+  {
+    "n": 529,
+    "kind": "title",
+    "source": "Gudian of Sand",
+    "reborn": "Blue Gatherer"
+  },
+  {
+    "n": 530,
+    "kind": "title",
+    "source": "Impartial Libra(30 hari)",
+    "reborn": "Tender Cancer"
+  },
+  {
+    "n": 531,
+    "kind": "title",
+    "source": "Impartial Libra(7 hari)",
+    "reborn": "King of Login (14 Day)"
+  },
+  {
+    "n": 532,
+    "kind": "title",
+    "source": "Independent Aquarius(30 hari)",
+    "reborn": "Mysterious Scorpio"
+  },
+  {
+    "n": 533,
+    "kind": "title",
+    "source": "Independent Aquarius(7 hari)",
+    "reborn": "Night Dancer"
+  },
+  {
+    "n": 534,
+    "kind": "title",
+    "source": "Invincible Man",
+    "reborn": "Red Gatherer"
+  },
+  {
+    "n": 535,
+    "kind": "title",
+    "source": "Jounin Summoner"
+  },
+  {
+    "n": 536,
+    "kind": "title",
+    "source": "Kage",
+    "reborn": "Special Jounin"
+  },
+  {
+    "n": 537,
+    "kind": "title",
+    "source": "King of Login",
+    "reborn": "Orange Collector"
+  },
+  {
+    "n": 538,
+    "kind": "title",
+    "source": "Murid Ninja",
+    "reborn": "Beginner Ninja"
+  },
+  {
+    "n": 539,
+    "kind": "title",
+    "source": "Mysterious Organization",
+    "reborn": "[Ex] Blade of Chaos"
+  },
+  {
+    "n": 540,
+    "kind": "title",
+    "source": "Mysterious Scorpio(30 hari)",
+    "reborn": "Pacionate Leo"
+  },
+  {
+    "n": 541,
+    "kind": "title",
+    "source": "Mysterious Scorpio(7 hari)",
+    "reborn": "Blue Beast"
+  },
+  {
+    "n": 542,
+    "kind": "title",
+    "source": "Night Dancer",
+    "reborn": "Blue Keeper"
+  },
+  {
+    "n": 543,
+    "kind": "title",
+    "source": "Ninja Akademi",
+    "reborn": "Academy Ninja"
+  },
+  {
+    "n": 544,
+    "kind": "title",
+    "source": "Ninja Chunin",
+    "reborn": "Chunin"
+  },
+  {
+    "n": 545,
+    "kind": "title",
+    "source": "Ninja Genin",
+    "reborn": "Genin"
+  },
+  {
+    "n": 546,
+    "kind": "title",
+    "source": "Ninja Genius",
+    "reborn": "Genius"
+  },
+  {
+    "n": 547,
+    "kind": "title",
+    "source": "Ninja Graduate",
+    "reborn": "Red Keeper"
+  },
+  {
+    "n": 548,
+    "kind": "title",
+    "source": "Ninja Hero",
+    "reborn": "Gray Gatherer"
+  },
+  {
+    "n": 549,
+    "kind": "title",
+    "source": "Ninja Jounin",
+    "reborn": "Jounin"
+  },
+  {
+    "n": 550,
+    "kind": "title",
+    "source": "Optimistic Sagittarius(30 hari)",
+    "reborn": "Faultless Virgo"
+  },
+  {
+    "n": 551,
+    "kind": "title",
+    "source": "Optimistic Sagittarius(7 hari)",
+    "reborn": "Yellow Flash"
+  },
+  {
+    "n": 552,
+    "kind": "title",
+    "source": "Passionate Leo(30 hari)",
+    "reborn": "Steady Taurus"
+  },
+  {
+    "n": 553,
+    "kind": "title",
+    "source": "Passionate Leo(7 hari)",
+    "reborn": "Secret of Final Release"
+  },
+  {
+    "n": 554,
+    "kind": "title",
+    "source": "Red Sunset",
+    "reborn": "Blue Collection"
+  },
+  {
+    "n": 555,
+    "kind": "title",
+    "source": "Resolute Capricorn(30 hari)",
+    "reborn": "Impartial Libra"
+  },
+  {
+    "n": 556,
+    "kind": "title",
+    "source": "Resolute Capricorn(7 hari)",
+    "reborn": "Guardian of Sand"
+  },
+  {
+    "n": 557,
+    "kind": "title",
+    "source": "Rookie of Card",
+    "reborn": "[Ex] Ninja Hero"
+  },
+  {
+    "n": 558,
+    "kind": "title",
+    "source": "Secret of Final Release",
+    "reborn": "Orange Gatherer"
+  },
+  {
+    "n": 559,
+    "kind": "title",
+    "source": "Semangat, anak muda!"
+  },
+  {
+    "n": 560,
+    "kind": "title",
+    "source": "Special Jounin"
+  },
+  {
+    "n": 561,
+    "kind": "title",
+    "source": "Steady Taurus(30 hari)",
+    "reborn": "White Fang"
+  },
+  {
+    "n": 562,
+    "kind": "title",
+    "source": "Steady Taurus(7 hari)",
+    "reborn": "Gray Collector"
+  },
+  {
+    "n": 563,
+    "kind": "title",
+    "source": "Tailed Beast Defender",
+    "reborn": "Orange Ruler"
+  },
+  {
+    "n": 564,
+    "kind": "title",
+    "source": "Tailed Beast Killer",
+    "reborn": "Mighty Orange Collector"
+  },
+  {
+    "n": 565,
+    "kind": "title",
+    "source": "Tender Cancer(30 hari)",
+    "reborn": "Brave Aries"
+  },
+  {
+    "n": 566,
+    "kind": "title",
+    "source": "Tender Cancer(7 hari)",
+    "reborn": "Gray Book Cataloge"
+  },
+  {
+    "n": 567,
+    "kind": "title",
+    "source": "Terhormat",
+    "reborn": "Graduated"
+  },
+  {
+    "n": 568,
+    "kind": "title",
+    "source": "The Lionhearted"
+  },
+  {
+    "n": 569,
+    "kind": "title",
+    "source": "Tidak ada gelar",
+    "reborn": "No Title"
+  },
+  {
+    "n": 570,
+    "kind": "title",
+    "source": "Village's Pride",
+    "reborn": "[Ex] Red Sunset"
+  },
+  {
+    "n": 571,
+    "kind": "title",
+    "source": "Wake of Sharingan",
+    "reborn": "Orange Keeper"
+  },
+  {
+    "n": 572,
+    "kind": "title",
+    "source": "White Fang",
+    "reborn": "Blue Book Cataloge"
+  },
+  {
+    "n": 573,
+    "kind": "title",
+    "source": "Witty Gemini(30 hari)",
+    "reborn": "Ninja Hero"
+  },
+  {
+    "n": 574,
+    "kind": "title",
+    "source": "Witty Gemini(7 hari)",
+    "reborn": "Gray Collection"
+  },
+  {
+    "n": 575,
+    "kind": "title",
+    "source": "Yellow Flash",
+    "reborn": "Orange Book Cataloge"
+  },
+  {
+    "n": 576,
+    "kind": "title",
+    "source": "Young Hero",
+    "reborn": "[Ex] Guardian of Sand"
+  },
+  {
+    "n": 577,
+    "kind": "title",
+    "source": "eBlade of Chaos"
+  },
+  {
+    "n": 578,
+    "kind": "title",
+    "source": "eBlue Beast",
+    "reborn": "Resolute Capricornius"
+  },
+  {
+    "n": 579,
+    "kind": "title",
+    "source": "eGudian of Sand",
+    "reborn": "Artistic Pices"
+  },
+  {
+    "n": 580,
+    "kind": "title",
+    "source": "eNight Dancer"
+  },
+  {
+    "n": 581,
+    "kind": "title",
+    "source": "eNinja Hero"
+  },
+  {
+    "n": 582,
+    "kind": "title",
+    "source": "eRed Sunset"
+  },
+  {
+    "n": 583,
+    "kind": "title",
+    "source": "eWhite Fang"
+  },
+  {
+    "n": 584,
+    "kind": "title",
+    "source": "eYellow Flash",
+    "reborn": "Independent Aquarius"
+  },
+  {
+    "n": 585,
+    "kind": "quest",
+    "source": "Accelerate Bangunan"
+  },
+  {
+    "n": 586,
+    "kind": "quest",
+    "source": "Ahli Pedang dari Tanah Derita"
+  },
+  {
+    "n": 587,
+    "kind": "quest",
+    "source": "Aktivitas Aneh",
+    "reborn": "Unusual Activity"
+  },
+  {
+    "n": 588,
+    "kind": "quest",
+    "source": "Aktivitas Aneh"
+  },
+  {
+    "n": 589,
+    "kind": "quest",
+    "source": "Alasan Kuat"
+  },
+  {
+    "n": 590,
+    "kind": "quest",
+    "source": "Ambil Hadiah"
+  },
+  {
+    "n": 591,
+    "kind": "quest",
+    "source": "Anak Panah yang Tajam"
+  },
+  {
+    "n": 592,
+    "kind": "quest",
+    "source": "Ancaman Bloodbat"
+  },
+  {
+    "n": 593,
+    "kind": "quest",
+    "source": "Ancaman dari perdagangan Caravan"
+  },
+  {
+    "n": 594,
+    "kind": "quest",
+    "source": "Ancaman Pantai"
+  },
+  {
+    "n": 595,
+    "kind": "quest",
+    "source": "Ancaman Terakhir"
+  },
+  {
+    "n": 596,
+    "kind": "quest",
+    "source": "Anjing Ninja Pakkun",
+    "reborn": "Ninja Dog"
+  },
+  {
+    "n": 597,
+    "kind": "quest",
+    "source": "Anjing Ninja Pakkun",
+    "reborn": "Ninja Dog Pakkun"
+  },
+  {
+    "n": 598,
+    "kind": "quest",
+    "source": "Anjing Ninja Pakkun"
+  },
+  {
+    "n": 599,
+    "kind": "quest",
+    "source": "Arena Duel"
+  },
+  {
+    "n": 600,
+    "kind": "quest",
+    "source": "Armor Appraisal"
+  },
+  {
+    "n": 601,
+    "kind": "quest",
+    "source": "Auto-Combat Zone Luar"
+  },
+  {
+    "n": 602,
+    "kind": "quest",
+    "source": "Auto-Combat Zone Luar [Ⅱ]"
+  },
+  {
+    "n": 603,
+    "kind": "quest",
+    "source": "Bandit",
+    "reborn": "thief"
+  },
+  {
+    "n": 604,
+    "kind": "quest",
+    "source": "Bandit"
+  },
+  {
+    "n": 605,
+    "kind": "quest",
+    "source": "Bandit Hutan Hijau"
+  },
+  {
+    "n": 606,
+    "kind": "quest",
+    "source": "Bandit yang Sombong"
+  },
+  {
+    "n": 607,
+    "kind": "quest",
+    "source": "Banteng yang Kuat",
+    "reborn": "Village Life"
+  },
+  {
+    "n": 608,
+    "kind": "quest",
+    "source": "Banteng yang Kuat",
+    "reborn": "Dark Forest"
+  },
+  {
+    "n": 609,
+    "kind": "quest",
+    "source": "Banteng yang Kuat",
+    "reborn": "Coordinated Attacks"
+  },
+  {
+    "n": 610,
+    "kind": "quest",
+    "source": "Banteng yang Kuat",
+    "reborn": "Hidden Meeting"
+  },
+  {
+    "n": 611,
+    "kind": "quest",
+    "source": "Banteng yang Kuat",
+    "reborn": "Exile"
+  },
+  {
+    "n": 612,
+    "kind": "quest",
+    "source": "Barisan Anjing Laut",
+    "reborn": "Seal Array"
+  },
+  {
+    "n": 613,
+    "kind": "quest",
+    "source": "Barisan Anjing Laut"
+  },
+  {
+    "n": 614,
+    "kind": "quest",
+    "source": "Bau yang Menyengat"
+  },
+  {
+    "n": 615,
+    "kind": "quest",
+    "source": "Bayangan Gelap",
+    "reborn": "Dark Shadow"
+  },
+  {
+    "n": 616,
+    "kind": "quest",
+    "source": "Bayangan Gelap"
+  },
+  {
+    "n": 617,
+    "kind": "quest",
+    "source": "Bayangan Malam",
+    "reborn": "Ancient Texts"
+  },
+  {
+    "n": 618,
+    "kind": "quest",
+    "source": "Beli Carrier Bag"
+  },
+  {
+    "n": 619,
+    "kind": "quest",
+    "source": "Bencana Bandit",
+    "reborn": "Enemy of My Enemy"
+  },
+  {
+    "n": 620,
+    "kind": "quest",
+    "source": "Bencana Semburan Naga"
+  },
+  {
+    "n": 621,
+    "kind": "quest",
+    "source": "Berangkat",
+    "reborn": "Set off"
+  },
+  {
+    "n": 622,
+    "kind": "quest",
+    "source": "Berangkat"
+  },
+  {
+    "n": 623,
+    "kind": "quest",
+    "source": "Berduka"
+  },
+  {
+    "n": 624,
+    "kind": "quest",
+    "source": "Berita Kemenangan"
+  },
+  {
+    "n": 625,
+    "kind": "quest",
+    "source": "Bertemu  Pemancing"
+  },
+  {
+    "n": 626,
+    "kind": "quest",
+    "source": "Bimbingan Murid [Dua]"
+  },
+  {
+    "n": 627,
+    "kind": "quest",
+    "source": "Bimbingan Murid [Empat]"
+  },
+  {
+    "n": 628,
+    "kind": "quest",
+    "source": "Bimbingan Murid [Lima]"
+  },
+  {
+    "n": 629,
+    "kind": "quest",
+    "source": "Bimbingan Murid [Satu]"
+  },
+  {
+    "n": 630,
+    "kind": "quest",
+    "source": "Bimbingan Murid [Tiga]"
+  },
+  {
+    "n": 631,
+    "kind": "quest",
+    "source": "Bor yang Dicuri"
+  },
+  {
+    "n": 632,
+    "kind": "quest",
+    "source": "Botol Ramuan"
+  },
+  {
+    "n": 633,
+    "kind": "quest",
+    "source": "Bukti"
+  },
+  {
+    "n": 634,
+    "kind": "quest",
+    "source": "Bukti dari kekuatan"
+  },
+  {
+    "n": 635,
+    "kind": "quest",
+    "source": "Bukti Keberanian"
+  },
+  {
+    "n": 636,
+    "kind": "quest",
+    "source": "Bumbu-bumbu",
+    "reborn": "spices"
+  },
+  {
+    "n": 637,
+    "kind": "quest",
+    "source": "Bumbu-bumbu"
+  },
+  {
+    "n": 638,
+    "kind": "quest",
+    "source": "Bunuh Iblis"
+  },
+  {
+    "n": 639,
+    "kind": "quest",
+    "source": "Burung Pembawa Berita"
+  },
+  {
+    "n": 640,
+    "kind": "quest",
+    "source": "Cerita",
+    "reborn": "the rumor"
+  },
+  {
+    "n": 641,
+    "kind": "quest",
+    "source": "Cerita"
+  },
+  {
+    "n": 642,
+    "kind": "quest",
+    "source": "Cerita Kota Iblis",
+    "reborn": "Legend of Castlevania"
+  },
+  {
+    "n": 643,
+    "kind": "quest",
+    "source": "Cerita Kota Iblis"
+  },
+  {
+    "n": 644,
+    "kind": "quest",
+    "source": "Clueless Enigma"
+  },
+  {
+    "n": 645,
+    "kind": "quest",
+    "source": "Collect Namecard"
+  },
+  {
+    "n": 646,
+    "kind": "quest",
+    "source": "Come Come Paradise I"
+  },
+  {
+    "n": 647,
+    "kind": "quest",
+    "source": "Come Come Paradise II"
+  },
+  {
+    "n": 648,
+    "kind": "quest",
+    "source": "Come Come Paradise III"
+  },
+  {
+    "n": 649,
+    "kind": "quest",
+    "source": "Crimson Grassland"
+  },
+  {
+    "n": 650,
+    "kind": "quest",
+    "source": "Crimson Grassland [Sulit]"
+  },
+  {
+    "n": 651,
+    "kind": "quest",
+    "source": "Curry in Life Kedelapan"
+  },
+  {
+    "n": 652,
+    "kind": "quest",
+    "source": "Curry in Life Kedua"
+  },
+  {
+    "n": 653,
+    "kind": "quest",
+    "source": "Curry in Life Keempat"
+  },
+  {
+    "n": 654,
+    "kind": "quest",
+    "source": "Curry in Life Keenam"
+  },
+  {
+    "n": 655,
+    "kind": "quest",
+    "source": "Curry in Life Kelima"
+  },
+  {
+    "n": 656,
+    "kind": "quest",
+    "source": "Curry in Life Kesatu"
+  },
+  {
+    "n": 657,
+    "kind": "quest",
+    "source": "Curry in Life Kesembilan"
+  },
+  {
+    "n": 658,
+    "kind": "quest",
+    "source": "Curry in Life Ketiga"
+  },
+  {
+    "n": 659,
+    "kind": "quest",
+    "source": "Curry in Life Ketujuh"
+  },
+  {
+    "n": 660,
+    "kind": "quest",
+    "source": "Curry in Life Terakhir"
+  },
+  {
+    "n": 661,
+    "kind": "quest",
+    "source": "Dalang Kegelapan",
+    "reborn": "An Ordinary Day"
+  },
+  {
+    "n": 662,
+    "kind": "quest",
+    "source": "Dalang Kegelapan",
+    "reborn": "First Real Mission"
+  },
+  {
+    "n": 663,
+    "kind": "quest",
+    "source": "Dalang Kegelapan",
+    "reborn": "Akira's Warning"
+  },
+  {
+    "n": 664,
+    "kind": "quest",
+    "source": "Dalang Kegelapan",
+    "reborn": "Shared Burden"
+  },
+  {
+    "n": 665,
+    "kind": "quest",
+    "source": "Dalang Kegelapan",
+    "reborn": "Impossible Choice"
+  },
+  {
+    "n": 666,
+    "kind": "quest",
+    "source": "Darurat",
+    "reborn": "Emergency"
+  },
+  {
+    "n": 667,
+    "kind": "quest",
+    "source": "Darurat"
+  },
+  {
+    "n": 668,
+    "kind": "quest",
+    "source": "Darurat2",
+    "reborn": "urgent"
+  },
+  {
+    "n": 669,
+    "kind": "quest",
+    "source": "Darurat2"
+  },
+  {
+    "n": 670,
+    "kind": "quest",
+    "source": "Deadwood Villa"
+  },
+  {
+    "n": 671,
+    "kind": "quest",
+    "source": "Deadwood Villa [Sulit]"
+  },
+  {
+    "n": 672,
+    "kind": "quest",
+    "source": "Demon Elimination"
+  },
+  {
+    "n": 673,
+    "kind": "quest",
+    "source": "Demon Proof of Suppression! Selesai!"
+  },
+  {
+    "n": 674,
+    "kind": "quest",
+    "source": "Dendam sang anak"
+  },
+  {
+    "n": 675,
+    "kind": "quest",
+    "source": "Dosa Pejuang",
+    "reborn": "Evil Warrior"
+  },
+  {
+    "n": 676,
+    "kind": "quest",
+    "source": "Dosa Pejuang"
+  },
+  {
+    "n": 677,
+    "kind": "quest",
+    "source": "Drumroll",
+    "reborn": "drum"
+  },
+  {
+    "n": 678,
+    "kind": "quest",
+    "source": "Drumroll"
+  },
+  {
+    "n": 679,
+    "kind": "quest",
+    "source": "Dukun Sesat"
+  },
+  {
+    "n": 680,
+    "kind": "quest",
+    "source": "Elang Botak"
+  },
+  {
+    "n": 681,
+    "kind": "quest",
+    "source": "Elang Botak yang Jinak"
+  },
+  {
+    "n": 682,
+    "kind": "quest",
+    "source": "Endless Sea Forests"
+  },
+  {
+    "n": 683,
+    "kind": "quest",
+    "source": "Endless Sea Forests [Sulit]"
+  },
+  {
+    "n": 684,
+    "kind": "quest",
+    "source": "Enhance Peralatan"
+  },
+  {
+    "n": 685,
+    "kind": "quest",
+    "source": "Evidence of the Dragons"
+  },
+  {
+    "n": 686,
+    "kind": "quest",
+    "source": "Find the Dragons"
+  },
+  {
+    "n": 687,
+    "kind": "quest",
+    "source": "Ganas",
+    "reborn": "violent"
+  },
+  {
+    "n": 688,
+    "kind": "quest",
+    "source": "Ganas"
+  },
+  {
+    "n": 689,
+    "kind": "quest",
+    "source": "Gosip di Perairan"
+  },
+  {
+    "n": 690,
+    "kind": "quest",
+    "source": "Gunakan Enchantment"
+  },
+  {
+    "n": 691,
+    "kind": "quest",
+    "source": "Gunakan makanan"
+  },
+  {
+    "n": 692,
+    "kind": "quest",
+    "source": "Hal yang menjengkelkan"
+  },
+  {
+    "n": 693,
+    "kind": "quest",
+    "source": "Hancurkan Kejahatan"
+  },
+  {
+    "n": 694,
+    "kind": "quest",
+    "source": "Hantu Wanita yang Kabur",
+    "reborn": "escaped female ghost"
+  },
+  {
+    "n": 695,
+    "kind": "quest",
+    "source": "Hantu Wanita yang Kabur"
+  },
+  {
+    "n": 696,
+    "kind": "quest",
+    "source": "Hantu Wanita yang Nakal"
+  },
+  {
+    "n": 697,
+    "kind": "quest",
+    "source": "Harta Karun"
+  },
+  {
+    "n": 698,
+    "kind": "quest",
+    "source": "Harta yang Dicuri",
+    "reborn": "stolen treasure"
+  },
+  {
+    "n": 699,
+    "kind": "quest",
+    "source": "Harta yang Dicuri"
+  },
+  {
+    "n": 700,
+    "kind": "quest",
+    "source": "Hati yang Hilang",
+    "reborn": "Lost Heart"
+  },
+  {
+    "n": 701,
+    "kind": "quest",
+    "source": "Hati yang Hilang"
+  },
+  {
+    "n": 702,
+    "kind": "quest",
+    "source": "Hidup atau Mati! Inferno Dog!"
+  },
+  {
+    "n": 703,
+    "kind": "quest",
+    "source": "Iblis Air"
+  },
+  {
+    "n": 704,
+    "kind": "quest",
+    "source": "Iblis Api",
+    "reborn": "Fire Demon"
+  },
+  {
+    "n": 705,
+    "kind": "quest",
+    "source": "Iblis Api"
+  },
+  {
+    "n": 706,
+    "kind": "quest",
+    "source": "Iblis Chuuji",
+    "reborn": "Tadaji"
+  },
+  {
+    "n": 707,
+    "kind": "quest",
+    "source": "Iblis Chuuji"
+  },
+  {
+    "n": 708,
+    "kind": "quest",
+    "source": "Iblis Gorila"
+  },
+  {
+    "n": 709,
+    "kind": "quest",
+    "source": "Iblis Naomasa"
+  },
+  {
+    "n": 710,
+    "kind": "quest",
+    "source": "Iblis Tadakatsu"
+  },
+  {
+    "n": 711,
+    "kind": "quest",
+    "source": "Iblis Tanah"
+  },
+  {
+    "n": 712,
+    "kind": "quest",
+    "source": "Iblis yang Menakutkan"
+  },
+  {
+    "n": 713,
+    "kind": "quest",
+    "source": "Inti Api"
+  },
+  {
+    "n": 714,
+    "kind": "quest",
+    "source": "Invasi Hutan Api"
+  },
+  {
+    "n": 715,
+    "kind": "quest",
+    "source": "Item Mall"
+  },
+  {
+    "n": 716,
+    "kind": "quest",
+    "source": "Jalan Kematian"
+  },
+  {
+    "n": 717,
+    "kind": "quest",
+    "source": "Jalan Keselamatan",
+    "reborn": "remedy"
+  },
+  {
+    "n": 718,
+    "kind": "quest",
+    "source": "Jalan Keselamatan"
+  },
+  {
+    "n": 719,
+    "kind": "quest",
+    "source": "Jalan Masuk Reruntuhan"
+  },
+  {
+    "n": 720,
+    "kind": "quest",
+    "source": "Janji yang Hilang",
+    "reborn": "Missed Appointment"
+  },
+  {
+    "n": 721,
+    "kind": "quest",
+    "source": "Janji yang Hilang"
+  },
+  {
+    "n": 722,
+    "kind": "quest",
+    "source": "Jebakan Sunflower"
+  },
+  {
+    "n": 723,
+    "kind": "quest",
+    "source": "Jejak Harta Karun"
+  },
+  {
+    "n": 724,
+    "kind": "quest",
+    "source": "Jejak Penyihir"
+  },
+  {
+    "n": 725,
+    "kind": "quest",
+    "source": "Jiwa Iblis",
+    "reborn": "Heart Demon"
+  },
+  {
+    "n": 726,
+    "kind": "quest",
+    "source": "Jiwa Iblis"
+  },
+  {
+    "n": 727,
+    "kind": "quest",
+    "source": "Jiwa yang Mekar",
+    "reborn": "flower demon"
+  },
+  {
+    "n": 728,
+    "kind": "quest",
+    "source": "Jiwa yang Mekar"
+  },
+  {
+    "n": 729,
+    "kind": "quest",
+    "source": "Kamu memiliki keyakinan?"
+  },
+  {
+    "n": 730,
+    "kind": "quest",
+    "source": "Kappa",
+    "reborn": "Kappa's prank"
+  },
+  {
+    "n": 731,
+    "kind": "quest",
+    "source": "Kappa"
+  },
+  {
+    "n": 732,
+    "kind": "quest",
+    "source": "Kecantikan dan Keburukan"
+  },
+  {
+    "n": 733,
+    "kind": "quest",
+    "source": "Kegilaan Iblis Blosom"
+  },
+  {
+    "n": 734,
+    "kind": "quest",
+    "source": "Kehancuran Iblis",
+    "reborn": "Exorcism"
+  },
+  {
+    "n": 735,
+    "kind": "quest",
+    "source": "Kehancuran Iblis"
+  },
+  {
+    "n": 736,
+    "kind": "quest",
+    "source": "Kekuatan Iblis [I]",
+    "reborn": "demon power, one"
+  },
+  {
+    "n": 737,
+    "kind": "quest",
+    "source": "Kekuatan Iblis [I]"
+  },
+  {
+    "n": 738,
+    "kind": "quest",
+    "source": "Kekuatan Iblis [II]",
+    "reborn": "demon force, two"
+  },
+  {
+    "n": 739,
+    "kind": "quest",
+    "source": "Kekuatan Iblis [II]"
+  },
+  {
+    "n": 740,
+    "kind": "quest",
+    "source": "Kelicikan Para Pejuang"
+  },
+  {
+    "n": 741,
+    "kind": "quest",
+    "source": "Kemana Harus Pergi"
+  },
+  {
+    "n": 742,
+    "kind": "quest",
+    "source": "Kembali"
+  },
+  {
+    "n": 743,
+    "kind": "quest",
+    "source": "Kembali ke Desa",
+    "reborn": "Return to the village"
+  },
+  {
+    "n": 744,
+    "kind": "quest",
+    "source": "Kembali ke Desa"
+  },
+  {
+    "n": 745,
+    "kind": "quest",
+    "source": "Kembali ke Kota Suci",
+    "reborn": "return to angel city"
+  },
+  {
+    "n": 746,
+    "kind": "quest",
+    "source": "Kembali ke Kota Suci"
+  },
+  {
+    "n": 747,
+    "kind": "quest",
+    "source": "Kembali ke Pantai[I]"
+  },
+  {
+    "n": 748,
+    "kind": "quest",
+    "source": "Kembali ke Pantai[II]"
+  },
+  {
+    "n": 749,
+    "kind": "quest",
+    "source": "Kembali ke Pantai[Ⅲ]"
+  }
+]

@@ -1,0 +1,1227 @@
+[
+  {
+    "n": 3750,
+    "kind": "item",
+    "source": "Topaz Level 7",
+    "reborn": "Topaz Level 8"
+  },
+  {
+    "n": 3751,
+    "kind": "item",
+    "source": "Topaz Level 8",
+    "reborn": "Topaz Level 9"
+  },
+  {
+    "n": 3752,
+    "kind": "item",
+    "source": "Topaz Level 9",
+    "reborn": "Topaz Level 10"
+  },
+  {
+    "n": 3753,
+    "kind": "item",
+    "source": "Tortoise Belt",
+    "reborn": "Tortoise Belt"
+  },
+  {
+    "n": 3754,
+    "kind": "item",
+    "source": "Tortoise Chest"
+  },
+  {
+    "n": 3755,
+    "kind": "item",
+    "source": "Tortoise Gloves",
+    "reborn": "Tortoise Gloves"
+  },
+  {
+    "n": 3756,
+    "kind": "item",
+    "source": "Tortoise Hat"
+  },
+  {
+    "n": 3757,
+    "kind": "item",
+    "source": "Traveler's Strawhat",
+    "reborn": "Traveler's Strawhat"
+  },
+  {
+    "n": 3758,
+    "kind": "item",
+    "source": "Treant Fledgling Gift Box"
+  },
+  {
+    "n": 3759,
+    "kind": "item",
+    "source": "Treant＋0"
+  },
+  {
+    "n": 3760,
+    "kind": "item",
+    "source": "Treant＋1"
+  },
+  {
+    "n": 3761,
+    "kind": "item",
+    "source": "Treant＋10"
+  },
+  {
+    "n": 3762,
+    "kind": "item",
+    "source": "Treant＋11"
+  },
+  {
+    "n": 3763,
+    "kind": "item",
+    "source": "Treant＋12"
+  },
+  {
+    "n": 3764,
+    "kind": "item",
+    "source": "Treant＋13"
+  },
+  {
+    "n": 3765,
+    "kind": "item",
+    "source": "Treant＋14"
+  },
+  {
+    "n": 3766,
+    "kind": "item",
+    "source": "Treant＋15"
+  },
+  {
+    "n": 3767,
+    "kind": "item",
+    "source": "Treant＋16"
+  },
+  {
+    "n": 3768,
+    "kind": "item",
+    "source": "Treant＋17"
+  },
+  {
+    "n": 3769,
+    "kind": "item",
+    "source": "Treant＋18"
+  },
+  {
+    "n": 3770,
+    "kind": "item",
+    "source": "Treant＋19"
+  },
+  {
+    "n": 3771,
+    "kind": "item",
+    "source": "Treant＋2"
+  },
+  {
+    "n": 3772,
+    "kind": "item",
+    "source": "Treant＋20"
+  },
+  {
+    "n": 3773,
+    "kind": "item",
+    "source": "Treant＋21"
+  },
+  {
+    "n": 3774,
+    "kind": "item",
+    "source": "Treant＋22"
+  },
+  {
+    "n": 3775,
+    "kind": "item",
+    "source": "Treant＋23"
+  },
+  {
+    "n": 3776,
+    "kind": "item",
+    "source": "Treant＋24"
+  },
+  {
+    "n": 3777,
+    "kind": "item",
+    "source": "Treant＋25"
+  },
+  {
+    "n": 3778,
+    "kind": "item",
+    "source": "Treant＋26"
+  },
+  {
+    "n": 3779,
+    "kind": "item",
+    "source": "Treant＋27"
+  },
+  {
+    "n": 3780,
+    "kind": "item",
+    "source": "Treant＋3"
+  },
+  {
+    "n": 3781,
+    "kind": "item",
+    "source": "Treant＋4"
+  },
+  {
+    "n": 3782,
+    "kind": "item",
+    "source": "Treant＋5"
+  },
+  {
+    "n": 3783,
+    "kind": "item",
+    "source": "Treant＋6"
+  },
+  {
+    "n": 3784,
+    "kind": "item",
+    "source": "Treant＋7"
+  },
+  {
+    "n": 3785,
+    "kind": "item",
+    "source": "Treant＋8"
+  },
+  {
+    "n": 3786,
+    "kind": "item",
+    "source": "Treant＋9"
+  },
+  {
+    "n": 3787,
+    "kind": "item",
+    "source": "Treasure Box"
+  },
+  {
+    "n": 3788,
+    "kind": "item",
+    "source": "Treasure of the Ancient Isle",
+    "reborn": "Treasure of the Ancient Isle"
+  },
+  {
+    "n": 3789,
+    "kind": "item",
+    "source": "Treasure-filled Box",
+    "reborn": "Treasure-filled Box"
+  },
+  {
+    "n": 3790,
+    "kind": "item",
+    "source": "Trendy Trident"
+  },
+  {
+    "n": 3791,
+    "kind": "item",
+    "source": "Tsukuyomi Order"
+  },
+  {
+    "n": 3792,
+    "kind": "item",
+    "source": "Tsukuyomi Ring"
+  },
+  {
+    "n": 3793,
+    "kind": "item",
+    "source": "Tsunade Gift Box"
+  },
+  {
+    "n": 3794,
+    "kind": "item",
+    "source": "Tsunade Hime"
+  },
+  {
+    "n": 3795,
+    "kind": "item",
+    "source": "Tsunade's Special Potion",
+    "reborn": "Tsunade's Special Potion"
+  },
+  {
+    "n": 3796,
+    "kind": "item",
+    "source": "Turmeric Resolve"
+  },
+  {
+    "n": 3797,
+    "kind": "item",
+    "source": "Turmeric Ring",
+    "reborn": "Turmeric Ring"
+  },
+  {
+    "n": 3798,
+    "kind": "item",
+    "source": "Uchiha Itachi"
+  },
+  {
+    "n": 3799,
+    "kind": "item",
+    "source": "Uchiha Itachi Gift Box"
+  },
+  {
+    "n": 3800,
+    "kind": "item",
+    "source": "Uchiha Itachi Namecard"
+  },
+  {
+    "n": 3801,
+    "kind": "item",
+    "source": "Uchiha Madara"
+  },
+  {
+    "n": 3802,
+    "kind": "item",
+    "source": "Uchiha Sasuke Gift Box"
+  },
+  {
+    "n": 3803,
+    "kind": "item",
+    "source": "Uchiha Sasuke Namecard"
+  },
+  {
+    "n": 3804,
+    "kind": "item",
+    "source": "Ukitake Jūshiro"
+  },
+  {
+    "n": 3805,
+    "kind": "item",
+    "source": "Ulquiorra Gift Box"
+  },
+  {
+    "n": 3806,
+    "kind": "item",
+    "source": "Ulquiorra Namecard"
+  },
+  {
+    "n": 3807,
+    "kind": "item",
+    "source": "Unohana Retsu"
+  },
+  {
+    "n": 3808,
+    "kind": "item",
+    "source": "Unohana Retsu Gift Box"
+  },
+  {
+    "n": 3809,
+    "kind": "item",
+    "source": "Urahara Shop's Coupon"
+  },
+  {
+    "n": 3810,
+    "kind": "item",
+    "source": "UUUU9 exclusive Gift Box"
+  },
+  {
+    "n": 3811,
+    "kind": "item",
+    "source": "Uzumaki Naruto Gift Box"
+  },
+  {
+    "n": 3812,
+    "kind": "item",
+    "source": "Uzumaki Naruto Namecard"
+  },
+  {
+    "n": 3813,
+    "kind": "item",
+    "source": "Valley of the End"
+  },
+  {
+    "n": 3814,
+    "kind": "item",
+    "source": "Vampire Cape"
+  },
+  {
+    "n": 3815,
+    "kind": "item",
+    "source": "Veiled Boots"
+  },
+  {
+    "n": 3816,
+    "kind": "item",
+    "source": "Veiled Faceguard"
+  },
+  {
+    "n": 3817,
+    "kind": "item",
+    "source": "Veiled Garb"
+  },
+  {
+    "n": 3818,
+    "kind": "item",
+    "source": "Venom Stinger",
+    "reborn": "Venom Stinger"
+  },
+  {
+    "n": 3819,
+    "kind": "item",
+    "source": "Vermilion Bird Jade Box"
+  },
+  {
+    "n": 3820,
+    "kind": "item",
+    "source": "Vermilion Bird Ring",
+    "reborn": "Lunar Ring"
+  },
+  {
+    "n": 3821,
+    "kind": "item",
+    "source": "Vermilion Bird Talisman",
+    "reborn": "Lunar Pendant"
+  },
+  {
+    "n": 3822,
+    "kind": "item",
+    "source": "Vermilion BirdVigor"
+  },
+  {
+    "n": 3823,
+    "kind": "item",
+    "source": "Vibrant Garment"
+  },
+  {
+    "n": 3824,
+    "kind": "item",
+    "source": "Village Secret"
+  },
+  {
+    "n": 3825,
+    "kind": "item",
+    "source": "Village Secret Special Reward Pack"
+  },
+  {
+    "n": 3826,
+    "kind": "item",
+    "source": "Village Wear"
+  },
+  {
+    "n": 3827,
+    "kind": "item",
+    "source": "Village's Pride",
+    "reborn": "Faultless Virgo Title"
+  },
+  {
+    "n": 3828,
+    "kind": "item",
+    "source": "Vine Drill",
+    "reborn": "Vine Drill"
+  },
+  {
+    "n": 3829,
+    "kind": "item",
+    "source": "Vision"
+  },
+  {
+    "n": 3830,
+    "kind": "item",
+    "source": "Vision[E]",
+    "reborn": "Pet Skill - [[skill__50022--name]]"
+  },
+  {
+    "n": 3831,
+    "kind": "item",
+    "source": "Vision[卍]",
+    "reborn": "Pet Skill - [[skill__50056--name]]"
+  },
+  {
+    "n": 3832,
+    "kind": "item",
+    "source": "Visionary Fists",
+    "reborn": "Kage Gauntlets"
+  },
+  {
+    "n": 3833,
+    "kind": "item",
+    "source": "Visor of Destruction"
+  },
+  {
+    "n": 3834,
+    "kind": "item",
+    "source": "Vivacious[E]",
+    "reborn": "Pet Skill - [[skill__50024--name]]"
+  },
+  {
+    "n": 3835,
+    "kind": "item",
+    "source": "Vivacious[卍]",
+    "reborn": "Pet Skill - [[skill__50058--name]]"
+  },
+  {
+    "n": 3836,
+    "kind": "item",
+    "source": "Void Jade Bintang 1"
+  },
+  {
+    "n": 3837,
+    "kind": "item",
+    "source": "Void Jade Bintang 10"
+  },
+  {
+    "n": 3838,
+    "kind": "item",
+    "source": "Void Jade Bintang 2"
+  },
+  {
+    "n": 3839,
+    "kind": "item",
+    "source": "Void Jade Bintang 3"
+  },
+  {
+    "n": 3840,
+    "kind": "item",
+    "source": "Void Jade Bintang 4"
+  },
+  {
+    "n": 3841,
+    "kind": "item",
+    "source": "Void Jade Bintang 5"
+  },
+  {
+    "n": 3842,
+    "kind": "item",
+    "source": "Void Jade Bintang 6"
+  },
+  {
+    "n": 3843,
+    "kind": "item",
+    "source": "Void Jade Bintang 7"
+  },
+  {
+    "n": 3844,
+    "kind": "item",
+    "source": "Void Jade Bintang 8"
+  },
+  {
+    "n": 3845,
+    "kind": "item",
+    "source": "Void Jade Bintang 9"
+  },
+  {
+    "n": 3846,
+    "kind": "item",
+    "source": "Vulture ＋0"
+  },
+  {
+    "n": 3847,
+    "kind": "item",
+    "source": "Vulture ＋1"
+  },
+  {
+    "n": 3848,
+    "kind": "item",
+    "source": "Vulture ＋10"
+  },
+  {
+    "n": 3849,
+    "kind": "item",
+    "source": "Vulture ＋11"
+  },
+  {
+    "n": 3850,
+    "kind": "item",
+    "source": "Vulture ＋12"
+  },
+  {
+    "n": 3851,
+    "kind": "item",
+    "source": "Vulture ＋13"
+  },
+  {
+    "n": 3852,
+    "kind": "item",
+    "source": "Vulture ＋14"
+  },
+  {
+    "n": 3853,
+    "kind": "item",
+    "source": "Vulture ＋15"
+  },
+  {
+    "n": 3854,
+    "kind": "item",
+    "source": "Vulture ＋16"
+  },
+  {
+    "n": 3855,
+    "kind": "item",
+    "source": "Vulture ＋17"
+  },
+  {
+    "n": 3856,
+    "kind": "item",
+    "source": "Vulture ＋18"
+  },
+  {
+    "n": 3857,
+    "kind": "item",
+    "source": "Vulture ＋19"
+  },
+  {
+    "n": 3858,
+    "kind": "item",
+    "source": "Vulture ＋2"
+  },
+  {
+    "n": 3859,
+    "kind": "item",
+    "source": "Vulture ＋20"
+  },
+  {
+    "n": 3860,
+    "kind": "item",
+    "source": "Vulture ＋21"
+  },
+  {
+    "n": 3861,
+    "kind": "item",
+    "source": "Vulture ＋22"
+  },
+  {
+    "n": 3862,
+    "kind": "item",
+    "source": "Vulture ＋23"
+  },
+  {
+    "n": 3863,
+    "kind": "item",
+    "source": "Vulture ＋24"
+  },
+  {
+    "n": 3864,
+    "kind": "item",
+    "source": "Vulture ＋25"
+  },
+  {
+    "n": 3865,
+    "kind": "item",
+    "source": "Vulture ＋26"
+  },
+  {
+    "n": 3866,
+    "kind": "item",
+    "source": "Vulture ＋27"
+  },
+  {
+    "n": 3867,
+    "kind": "item",
+    "source": "Vulture ＋3"
+  },
+  {
+    "n": 3868,
+    "kind": "item",
+    "source": "Vulture ＋4"
+  },
+  {
+    "n": 3869,
+    "kind": "item",
+    "source": "Vulture ＋5"
+  },
+  {
+    "n": 3870,
+    "kind": "item",
+    "source": "Vulture ＋6"
+  },
+  {
+    "n": 3871,
+    "kind": "item",
+    "source": "Vulture ＋7"
+  },
+  {
+    "n": 3872,
+    "kind": "item",
+    "source": "Vulture ＋8"
+  },
+  {
+    "n": 3873,
+    "kind": "item",
+    "source": "Vulture ＋9"
+  },
+  {
+    "n": 3874,
+    "kind": "item",
+    "source": "Vulture Fledgling Gift Box"
+  },
+  {
+    "n": 3875,
+    "kind": "item",
+    "source": "Warfare Scepter",
+    "reborn": "Suppression Hammer"
+  },
+  {
+    "n": 3876,
+    "kind": "item",
+    "source": "Warfrenzy Demon Proof of Suppression"
+  },
+  {
+    "n": 3877,
+    "kind": "item",
+    "source": "Warrior Belt"
+  },
+  {
+    "n": 3878,
+    "kind": "item",
+    "source": "Warrior Clog"
+  },
+  {
+    "n": 3879,
+    "kind": "item",
+    "source": "Wasabi Sushi Roll",
+    "reborn": "Wasabi Sushi Roll"
+  },
+  {
+    "n": 3880,
+    "kind": "item",
+    "source": "Water Crystal",
+    "reborn": "Water Crystal"
+  },
+  {
+    "n": 3881,
+    "kind": "item",
+    "source": "Water Release Chest"
+  },
+  {
+    "n": 3882,
+    "kind": "item",
+    "source": "Waterdrop Crystal"
+  },
+  {
+    "n": 3883,
+    "kind": "item",
+    "source": "Weapon Disassembly Scroll",
+    "reborn": "Weapon Disassembly Scroll"
+  },
+  {
+    "n": 3884,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 1",
+    "reborn": "Level 21 Weapon Enchantment Stone I"
+  },
+  {
+    "n": 3885,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 1",
+    "reborn": "Level 21 Weapon Enchantment Stone II"
+  },
+  {
+    "n": 3886,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 1",
+    "reborn": "Level 21 Weapon Enchantment Stone III"
+  },
+  {
+    "n": 3887,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 1",
+    "reborn": "Level 21 Weapon Enchantment Stone IV"
+  },
+  {
+    "n": 3888,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 1",
+    "reborn": "Level 21 Weapon Enchantment Stone V"
+  },
+  {
+    "n": 3889,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 2",
+    "reborn": "Level 31 Weapon Enchantment Stone I"
+  },
+  {
+    "n": 3890,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 2",
+    "reborn": "Level 31 Weapon Enchantment Stone II"
+  },
+  {
+    "n": 3891,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 2",
+    "reborn": "Level 31 Weapon Enchantment Stone III"
+  },
+  {
+    "n": 3892,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 2",
+    "reborn": "Level 31 Weapon Enchantment Stone IV"
+  },
+  {
+    "n": 3893,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 2",
+    "reborn": "Level 31 Weapon Enchantment Stone V"
+  },
+  {
+    "n": 3894,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 3",
+    "reborn": "Level 41 Weapon Enchantment Stone I"
+  },
+  {
+    "n": 3895,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 3",
+    "reborn": "Level 41 Weapon Enchantment Stone II"
+  },
+  {
+    "n": 3896,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 3",
+    "reborn": "Level 41 Weapon Enchantment Stone III"
+  },
+  {
+    "n": 3897,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 3",
+    "reborn": "Level 41 Weapon Enchantment Stone IV"
+  },
+  {
+    "n": 3898,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 3",
+    "reborn": "Level 41 Weapon Enchantment Stone V"
+  },
+  {
+    "n": 3899,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 4"
+  },
+  {
+    "n": 3900,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 5"
+  },
+  {
+    "n": 3901,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Level 6"
+  },
+  {
+    "n": 3902,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Lv.7"
+  },
+  {
+    "n": 3903,
+    "kind": "item",
+    "source": "Weapon Enchantment Stone Pemula",
+    "reborn": "Basic Weapon Enchantment Stone"
+  },
+  {
+    "n": 3904,
+    "kind": "item",
+    "source": "Weekend Red Blossom Pack"
+  },
+  {
+    "n": 3905,
+    "kind": "item",
+    "source": "White Fang Proof",
+    "reborn": "King of Login Title"
+  },
+  {
+    "n": 3906,
+    "kind": "item",
+    "source": "White Ichigo Gift Box"
+  },
+  {
+    "n": 3907,
+    "kind": "item",
+    "source": "White Ichigo Namecard"
+  },
+  {
+    "n": 3908,
+    "kind": "item",
+    "source": "White iPhone4 Gift Card"
+  },
+  {
+    "n": 3909,
+    "kind": "item",
+    "source": "White Sock"
+  },
+  {
+    "n": 3910,
+    "kind": "item",
+    "source": "White Tiger Vigor"
+  },
+  {
+    "n": 3911,
+    "kind": "item",
+    "source": "White Ulquiorra Gift Box"
+  },
+  {
+    "n": 3912,
+    "kind": "item",
+    "source": "White Ulquiorra Namecard"
+  },
+  {
+    "n": 3913,
+    "kind": "item",
+    "source": "Whole Wheat Bread"
+  },
+  {
+    "n": 3914,
+    "kind": "item",
+    "source": "Wild Dog Claw",
+    "reborn": "Wild Dog Claw"
+  },
+  {
+    "n": 3915,
+    "kind": "item",
+    "source": "Wildhammer",
+    "reborn": "Wildhammer"
+  },
+  {
+    "n": 3916,
+    "kind": "item",
+    "source": "Wind Crystal",
+    "reborn": "Wind Crystal"
+  },
+  {
+    "n": 3917,
+    "kind": "item",
+    "source": "Wind Release Chest"
+  },
+  {
+    "n": 3918,
+    "kind": "item",
+    "source": "Windbore Dragon Proof of Suppression"
+  },
+  {
+    "n": 3919,
+    "kind": "item",
+    "source": "Windling Claw"
+  },
+  {
+    "n": 3920,
+    "kind": "item",
+    "source": "Windstorm Armor"
+  },
+  {
+    "n": 3921,
+    "kind": "item",
+    "source": "Windstorm Band"
+  },
+  {
+    "n": 3922,
+    "kind": "item",
+    "source": "Windstorm Belt"
+  },
+  {
+    "n": 3923,
+    "kind": "item",
+    "source": "Windstorm Boots"
+  },
+  {
+    "n": 3924,
+    "kind": "item",
+    "source": "Windstorm Clothes"
+  },
+  {
+    "n": 3925,
+    "kind": "item",
+    "source": "Windstorm Crystal"
+  },
+  {
+    "n": 3926,
+    "kind": "item",
+    "source": "Windstorm Girdle",
+    "reborn": "Windstorm Girdle"
+  },
+  {
+    "n": 3927,
+    "kind": "item",
+    "source": "Windstorm Gloves",
+    "reborn": "Windstorm Gloves"
+  },
+  {
+    "n": 3928,
+    "kind": "item",
+    "source": "Windstorm Gloves"
+  },
+  {
+    "n": 3929,
+    "kind": "item",
+    "source": "Windstorm Helm"
+  },
+  {
+    "n": 3930,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 1"
+  },
+  {
+    "n": 3931,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 10"
+  },
+  {
+    "n": 3932,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 2"
+  },
+  {
+    "n": 3933,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 3"
+  },
+  {
+    "n": 3934,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 4"
+  },
+  {
+    "n": 3935,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 5"
+  },
+  {
+    "n": 3936,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 6"
+  },
+  {
+    "n": 3937,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 7"
+  },
+  {
+    "n": 3938,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 8"
+  },
+  {
+    "n": 3939,
+    "kind": "item",
+    "source": "Windstorm Jade Bintang 9"
+  },
+  {
+    "n": 3940,
+    "kind": "item",
+    "source": "Windstrike Saber",
+    "reborn": "Windstrike Saber"
+  },
+  {
+    "n": 3941,
+    "kind": "item",
+    "source": "Winter Vocation Gift Box"
+  },
+  {
+    "n": 3942,
+    "kind": "item",
+    "source": "Wishing pot Kostum Abu-abu",
+    "reborn": "Gray Outfit Wishing Pot"
+  },
+  {
+    "n": 3943,
+    "kind": "item",
+    "source": "Wishing pot Kostum Biru",
+    "reborn": "Blue Outfit Wishing Pot"
+  },
+  {
+    "n": 3944,
+    "kind": "item",
+    "source": "Wishing pot Kostum Orange",
+    "reborn": "Orange Outfit Wishing Pot"
+  },
+  {
+    "n": 3945,
+    "kind": "item",
+    "source": "Wishing Pot Legenda",
+    "reborn": "Legend Wishing Pot"
+  },
+  {
+    "n": 3946,
+    "kind": "item",
+    "source": "Witch Namecard"
+  },
+  {
+    "n": 3947,
+    "kind": "item",
+    "source": "Withstand[E]",
+    "reborn": "Pet Skill - [[skill__50027--name]]"
+  },
+  {
+    "n": 3948,
+    "kind": "item",
+    "source": "Withstand[卍]",
+    "reborn": "Pet Skill - [[skill__50061--name]]"
+  },
+  {
+    "n": 3949,
+    "kind": "item",
+    "source": "Witty Gemini Proof 30-hari",
+    "reborn": "Gray Book Catalog Title"
+  },
+  {
+    "n": 3950,
+    "kind": "item",
+    "source": "Witty Gemini Proof 7-hari",
+    "reborn": "Orange Collector Title"
+  },
+  {
+    "n": 3951,
+    "kind": "item",
+    "source": "Wolf Fang Bat"
+  },
+  {
+    "n": 3952,
+    "kind": "item",
+    "source": "Wonderland Coat",
+    "reborn": "Wonderland Coat"
+  },
+  {
+    "n": 3953,
+    "kind": "item",
+    "source": "World League Champion Trophy"
+  },
+  {
+    "n": 3954,
+    "kind": "item",
+    "source": "Woven Hat",
+    "reborn": "Woven Hat"
+  },
+  {
+    "n": 3955,
+    "kind": "item",
+    "source": "X-ray Vision",
+    "reborn": "Clan Picnic Box Lv.14"
+  },
+  {
+    "n": 3956,
+    "kind": "item",
+    "source": "Yadomaru Sasha Gift Box"
+  },
+  {
+    "n": 3957,
+    "kind": "item",
+    "source": "Yadomaru Sasha Namecard"
+  },
+  {
+    "n": 3958,
+    "kind": "item",
+    "source": "Yamabuki Jade"
+  },
+  {
+    "n": 3959,
+    "kind": "item",
+    "source": "Yamanaka Ino"
+  },
+  {
+    "n": 3960,
+    "kind": "item",
+    "source": "Yamanaka Ino Gift Box"
+  },
+  {
+    "n": 3961,
+    "kind": "item",
+    "source": "Yamanaka Ino Namecard"
+  },
+  {
+    "n": 3962,
+    "kind": "item",
+    "source": "Yamato Namecard"
+  },
+  {
+    "n": 3963,
+    "kind": "item",
+    "source": "Yellow Flash Proof",
+    "reborn": "Genius Title"
+  },
+  {
+    "n": 3964,
+    "kind": "item",
+    "source": "Yellow Tourmaline"
+  },
+  {
+    "n": 3965,
+    "kind": "item",
+    "source": "Young Hero",
+    "reborn": "Witti Geminis Title"
+  },
+  {
+    "n": 3966,
+    "kind": "item",
+    "source": "YZZ exclusive Gift Box"
+  },
+  {
+    "n": 3967,
+    "kind": "item",
+    "source": "Zangetsu Gift Box"
+  },
+  {
+    "n": 3968,
+    "kind": "item",
+    "source": "Zangetsu Namecard"
+  },
+  {
+    "n": 3969,
+    "kind": "item",
+    "source": "Zanron Pendant"
+  },
+  {
+    "n": 3970,
+    "kind": "item",
+    "source": "Zanron Ring"
+  },
+  {
+    "n": 3971,
+    "kind": "item",
+    "source": "Zetsu"
+  },
+  {
+    "n": 3972,
+    "kind": "item",
+    "source": "Zodiac Box",
+    "reborn": "Title Box II"
+  },
+  {
+    "n": 3973,
+    "kind": "item",
+    "source": "Zombie Lady Namecard"
+  },
+  {
+    "n": 3974,
+    "kind": "item",
+    "source": "eBlade of Chaos Proof"
+  },
+  {
+    "n": 3975,
+    "kind": "item",
+    "source": "eBlue Beast Proof",
+    "reborn": "Tailed Beast Slayer Title"
+  },
+  {
+    "n": 3976,
+    "kind": "item",
+    "source": "eGudian of Sand Proof"
+  },
+  {
+    "n": 3977,
+    "kind": "item",
+    "source": "eNight Dancer Proof"
+  },
+  {
+    "n": 3978,
+    "kind": "item",
+    "source": "eNinja Hero Proof",
+    "reborn": "Guardian of Sand Title"
+  },
+  {
+    "n": 3979,
+    "kind": "item",
+    "source": "eRed Sunset Proof",
+    "reborn": "Blue Beast Title"
+  },
+  {
+    "n": 3980,
+    "kind": "item",
+    "source": "eWhite Fang Proof",
+    "reborn": "Yellow Flash Title"
+  },
+  {
+    "n": 3981,
+    "kind": "item",
+    "source": "eYellow Flash Proof"
+  }
+]

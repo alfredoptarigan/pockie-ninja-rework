@@ -1,0 +1,1381 @@
+[
+  {
+    "n": 0,
+    "kind": "scene",
+    "source": "Alam Liar",
+    "reborn": "Dawning Wilds"
+  },
+  {
+    "n": 1,
+    "kind": "scene",
+    "source": "Altar Lush",
+    "reborn": "Lush Alter"
+  },
+  {
+    "n": 2,
+    "kind": "scene",
+    "source": "Amegakure",
+    "reborn": "Hidden Rain Village"
+  },
+  {
+    "n": 3,
+    "kind": "scene",
+    "source": "Chillbone Pool"
+  },
+  {
+    "n": 4,
+    "kind": "scene",
+    "source": "Crossroad",
+    "reborn": "Crossroads"
+  },
+  {
+    "n": 5,
+    "kind": "scene",
+    "source": "Daratan Patah Hati",
+    "reborn": "Plains of Despair"
+  },
+  {
+    "n": 6,
+    "kind": "scene",
+    "source": "Dataran Subur",
+    "reborn": "Greenwaves Plain"
+  },
+  {
+    "n": 7,
+    "kind": "scene",
+    "source": "Desa Air",
+    "reborn": "Water Village"
+  },
+  {
+    "n": 8,
+    "kind": "scene",
+    "source": "Desa Angin",
+    "reborn": "Wind Village"
+  },
+  {
+    "n": 9,
+    "kind": "scene",
+    "source": "Desa Api",
+    "reborn": "Fire Village"
+  },
+  {
+    "n": 10,
+    "kind": "scene",
+    "source": "Desa Matahari",
+    "reborn": "Surprise Village"
+  },
+  {
+    "n": 11,
+    "kind": "scene",
+    "source": "Desa Petir",
+    "reborn": "Lightning Village"
+  },
+  {
+    "n": 12,
+    "kind": "scene",
+    "source": "Desa Tanah",
+    "reborn": "Earth Village"
+  },
+  {
+    "n": 13,
+    "kind": "scene",
+    "source": "Dragontame Forest",
+    "reborn": "Dragontame Forest"
+  },
+  {
+    "n": 14,
+    "kind": "scene",
+    "source": "Dragontame Valley",
+    "reborn": "Dragontame Valley"
+  },
+  {
+    "n": 15,
+    "kind": "scene",
+    "source": "Gerbang Naga Tersembunyi",
+    "reborn": "Hidden Dragon Corridor"
+  },
+  {
+    "n": 16,
+    "kind": "scene",
+    "source": "Goa Batu",
+    "reborn": "Boulder Cavern"
+  },
+  {
+    "n": 17,
+    "kind": "scene",
+    "source": "Hutan Cahaya",
+    "reborn": "Glowing Forest"
+  },
+  {
+    "n": 18,
+    "kind": "scene",
+    "source": "Jalan Kematian",
+    "reborn": "Marsh of Death"
+  },
+  {
+    "n": 19,
+    "kind": "scene",
+    "source": "Jalan Senja",
+    "reborn": "Eventide Barrens"
+  },
+  {
+    "n": 20,
+    "kind": "scene",
+    "source": "Jembatan Api",
+    "reborn": "Fiery Ridge"
+  },
+  {
+    "n": 21,
+    "kind": "scene",
+    "source": "Kota Iblis",
+    "reborn": "Demon City"
+  },
+  {
+    "n": 22,
+    "kind": "scene",
+    "source": "Kota Malaikat",
+    "reborn": "Angel City"
+  },
+  {
+    "n": 23,
+    "kind": "scene",
+    "source": "Kota yang Hilang",
+    "reborn": "Abandoned Evernight City"
+  },
+  {
+    "n": 24,
+    "kind": "scene",
+    "source": "Lembah Angin",
+    "reborn": "Typhoon Plateau"
+  },
+  {
+    "n": 25,
+    "kind": "scene",
+    "source": "Lembah awan",
+    "reborn": "Windscent Pass"
+  },
+  {
+    "n": 26,
+    "kind": "scene",
+    "source": "Lembah Kesunyian",
+    "reborn": "Soulshatter Valley"
+  },
+  {
+    "n": 27,
+    "kind": "scene",
+    "source": "Lintasan Setapak",
+    "reborn": "Eerie Passage"
+  },
+  {
+    "n": 28,
+    "kind": "scene",
+    "source": "Padang Berangin",
+    "reborn": "Ashvoid Gully"
+  },
+  {
+    "n": 29,
+    "kind": "scene",
+    "source": "Pantai Naga",
+    "reborn": "Dragontame Coast"
+  },
+  {
+    "n": 30,
+    "kind": "scene",
+    "source": "Puncak Bebatuan",
+    "reborn": "Peaked Whetstone"
+  },
+  {
+    "n": 31,
+    "kind": "scene",
+    "source": "Ruang Meeting 5 Kage",
+    "reborn": "Five Kage Hall"
+  },
+  {
+    "n": 32,
+    "kind": "scene",
+    "source": "Rumah",
+    "reborn": "Home"
+  },
+  {
+    "n": 33,
+    "kind": "scene",
+    "source": "Rumah Christmas"
+  },
+  {
+    "n": 34,
+    "kind": "scene",
+    "source": "Secret Demon Tunnel"
+  },
+  {
+    "n": 35,
+    "kind": "scene",
+    "source": "Sungai ketenangan",
+    "reborn": "Verdent Alley"
+  },
+  {
+    "n": 36,
+    "kind": "scene",
+    "source": "Sungai Sakura",
+    "reborn": "Slowflower River"
+  },
+  {
+    "n": 37,
+    "kind": "scene",
+    "source": "Tambang Batu",
+    "reborn": "Smelting Mountains"
+  },
+  {
+    "n": 38,
+    "kind": "scene",
+    "source": "Tapak Petir",
+    "reborn": "Thundering Steps"
+  },
+  {
+    "n": 39,
+    "kind": "scene",
+    "source": "Tebing Keramat",
+    "reborn": "Holywood Range"
+  },
+  {
+    "n": 40,
+    "kind": "scene",
+    "source": "Valhalla"
+  },
+  {
+    "n": 41,
+    "kind": "npc",
+    "source": "Aaroniero",
+    "reborn": "Aaroniero"
+  },
+  {
+    "n": 42,
+    "kind": "npc",
+    "source": "Abarai Renji",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 43,
+    "kind": "npc",
+    "source": "Aborigine",
+    "reborn": "Aborigine"
+  },
+  {
+    "n": 44,
+    "kind": "npc",
+    "source": "Aburame Shino"
+  },
+  {
+    "n": 45,
+    "kind": "npc",
+    "source": "Abyssal Treant",
+    "reborn": "Gloomy Tree"
+  },
+  {
+    "n": 46,
+    "kind": "npc",
+    "source": "Adu Nasib"
+  },
+  {
+    "n": 47,
+    "kind": "npc",
+    "source": "Ahli Agama",
+    "reborn": "Priest"
+  },
+  {
+    "n": 48,
+    "kind": "npc",
+    "source": "Aizen"
+  },
+  {
+    "n": 49,
+    "kind": "npc",
+    "source": "Aizen",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 50,
+    "kind": "npc",
+    "source": "Akimichi Choji"
+  },
+  {
+    "n": 51,
+    "kind": "npc",
+    "source": "Ancient Isle Nightwatch",
+    "reborn": "Ancient Isle Nightwatch"
+  },
+  {
+    "n": 52,
+    "kind": "npc",
+    "source": "Ancient Isle Ninja",
+    "reborn": "Ancient Isle Ninja"
+  },
+  {
+    "n": 53,
+    "kind": "npc",
+    "source": "Barragan",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 54,
+    "kind": "npc",
+    "source": "Barrens Vulture",
+    "reborn": "Desert Vulture"
+  },
+  {
+    "n": 55,
+    "kind": "npc",
+    "source": "Bereaver"
+  },
+  {
+    "n": 56,
+    "kind": "npc",
+    "source": "Berlatih"
+  },
+  {
+    "n": 57,
+    "kind": "npc",
+    "source": "Berserker Demondog",
+    "reborn": "Furious Dog"
+  },
+  {
+    "n": 58,
+    "kind": "npc",
+    "source": "Bewitcher"
+  },
+  {
+    "n": 59,
+    "kind": "npc",
+    "source": "Bewitching Siren"
+  },
+  {
+    "n": 60,
+    "kind": "npc",
+    "source": "Blackhawk",
+    "reborn": "Black Eagle"
+  },
+  {
+    "n": 61,
+    "kind": "npc",
+    "source": "Bloodbat",
+    "reborn": "Bloodbat"
+  },
+  {
+    "n": 62,
+    "kind": "npc",
+    "source": "Bloodbloom",
+    "reborn": "Bloodthirsty Sunflower"
+  },
+  {
+    "n": 63,
+    "kind": "npc",
+    "source": "Bloodboil Demon"
+  },
+  {
+    "n": 64,
+    "kind": "npc",
+    "source": "Bloody Demonsoul"
+  },
+  {
+    "n": 65,
+    "kind": "npc",
+    "source": "Bluewing Dragon"
+  },
+  {
+    "n": 66,
+    "kind": "npc",
+    "source": "Boss di Grosir"
+  },
+  {
+    "n": 67,
+    "kind": "npc",
+    "source": "Boss di Tempat Tempa",
+    "reborn": "Blacksmith"
+  },
+  {
+    "n": 68,
+    "kind": "npc",
+    "source": "Boss di Tempat Tempa"
+  },
+  {
+    "n": 69,
+    "kind": "npc",
+    "source": "Boss Toko Barang",
+    "reborn": "Merchant Boss"
+  },
+  {
+    "n": 70,
+    "kind": "npc",
+    "source": "Boss Toko Barang"
+  },
+  {
+    "n": 71,
+    "kind": "npc",
+    "source": "Boss Toko Barang",
+    "reborn": "Angel City Merchant"
+  },
+  {
+    "n": 72,
+    "kind": "npc",
+    "source": "Bullheaded Champ",
+    "reborn": "Bullhead Demon"
+  },
+  {
+    "n": 73,
+    "kind": "npc",
+    "source": "Bun Monster",
+    "reborn": "Bun Monster"
+  },
+  {
+    "n": 74,
+    "kind": "npc",
+    "source": "Cannibal Hollow",
+    "reborn": "Cannibal Hollow"
+  },
+  {
+    "n": 75,
+    "kind": "npc",
+    "source": "Carcass Rat",
+    "reborn": "Corpse Mouse"
+  },
+  {
+    "n": 76,
+    "kind": "npc",
+    "source": "Chevalier",
+    "reborn": "Chevalier Demon"
+  },
+  {
+    "n": 77,
+    "kind": "npc",
+    "source": "Craftsman",
+    "reborn": "Lumberjack Man"
+  },
+  {
+    "n": 78,
+    "kind": "npc",
+    "source": "Cunning Ghost Granny",
+    "reborn": "Fraud"
+  },
+  {
+    "n": 79,
+    "kind": "npc",
+    "source": "Darksliver Demon Soldier"
+  },
+  {
+    "n": 80,
+    "kind": "npc",
+    "source": "Decadent Monk",
+    "reborn": "Degenerate Monk"
+  },
+  {
+    "n": 81,
+    "kind": "npc",
+    "source": "Decadent Ninja"
+  },
+  {
+    "n": 82,
+    "kind": "npc",
+    "source": "Decayed Meat Bun"
+  },
+  {
+    "n": 83,
+    "kind": "npc",
+    "source": "Decayed Riceball"
+  },
+  {
+    "n": 84,
+    "kind": "npc",
+    "source": "Decayed Sushi"
+  },
+  {
+    "n": 85,
+    "kind": "npc",
+    "source": "Deer Swordsman",
+    "reborn": "Barbarians"
+  },
+  {
+    "n": 86,
+    "kind": "npc",
+    "source": "Deidara"
+  },
+  {
+    "n": 87,
+    "kind": "npc",
+    "source": "Deidara",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 88,
+    "kind": "npc",
+    "source": "Demon Brute"
+  },
+  {
+    "n": 89,
+    "kind": "npc",
+    "source": "Demon Chuuji",
+    "reborn": "Demon Chuuji"
+  },
+  {
+    "n": 90,
+    "kind": "npc",
+    "source": "Demon Flute Succubus",
+    "reborn": "Demon Flute Succubus"
+  },
+  {
+    "n": 91,
+    "kind": "npc",
+    "source": "Demon Naomasa",
+    "reborn": "Bloodboil Demon"
+  },
+  {
+    "n": 92,
+    "kind": "npc",
+    "source": "Demon Tadakatsu"
+  },
+  {
+    "n": 93,
+    "kind": "npc",
+    "source": "Demon Tenkai"
+  },
+  {
+    "n": 94,
+    "kind": "npc",
+    "source": "Demon Yagyu"
+  },
+  {
+    "n": 95,
+    "kind": "npc",
+    "source": "Demon Yasumasa"
+  },
+  {
+    "n": 96,
+    "kind": "npc",
+    "source": "Demoneye Bloom",
+    "reborn": "Demon Eye Demon"
+  },
+  {
+    "n": 97,
+    "kind": "npc",
+    "source": "Demonic Horror"
+  },
+  {
+    "n": 98,
+    "kind": "npc",
+    "source": "Demonic Potato Demon"
+  },
+  {
+    "n": 99,
+    "kind": "npc",
+    "source": "Desolate Demon Guard"
+  },
+  {
+    "n": 100,
+    "kind": "npc",
+    "source": "Digrat",
+    "reborn": "Digrat"
+  },
+  {
+    "n": 101,
+    "kind": "npc",
+    "source": "Dragon api",
+    "reborn": "10k Stones"
+  },
+  {
+    "n": 102,
+    "kind": "npc",
+    "source": "Drowned Spirit",
+    "reborn": "Drowning"
+  },
+  {
+    "n": 103,
+    "kind": "npc",
+    "source": "Dukun Gunung",
+    "reborn": "Rougue Monk"
+  },
+  {
+    "n": 104,
+    "kind": "npc",
+    "source": "Earth Dragon"
+  },
+  {
+    "n": 105,
+    "kind": "npc",
+    "source": "Earthbind Demon"
+  },
+  {
+    "n": 106,
+    "kind": "npc",
+    "source": "Earthbore Dragon"
+  },
+  {
+    "n": 107,
+    "kind": "npc",
+    "source": "Earthvein Demon Soldier"
+  },
+  {
+    "n": 108,
+    "kind": "npc",
+    "source": "Earthwing Dragon"
+  },
+  {
+    "n": 109,
+    "kind": "npc",
+    "source": "Earthwing Dragon",
+    "reborn": "Earth Pterosaur"
+  },
+  {
+    "n": 110,
+    "kind": "npc",
+    "source": "Egret",
+    "reborn": "Egret"
+  },
+  {
+    "n": 111,
+    "kind": "npc",
+    "source": "Evil Merchant"
+  },
+  {
+    "n": 112,
+    "kind": "npc",
+    "source": "Fang Reaper"
+  },
+  {
+    "n": 113,
+    "kind": "npc",
+    "source": "Fierce Eight-Tailed"
+  },
+  {
+    "n": 114,
+    "kind": "npc",
+    "source": "Fierce Five-Tailed"
+  },
+  {
+    "n": 115,
+    "kind": "npc",
+    "source": "Fierce Four-Tailed"
+  },
+  {
+    "n": 116,
+    "kind": "npc",
+    "source": "Fierce Nine-Tailed"
+  },
+  {
+    "n": 117,
+    "kind": "npc",
+    "source": "Fierce One-Tailed"
+  },
+  {
+    "n": 118,
+    "kind": "npc",
+    "source": "Fierce Seven-Tailed"
+  },
+  {
+    "n": 119,
+    "kind": "npc",
+    "source": "Fierce Six-Tailed"
+  },
+  {
+    "n": 120,
+    "kind": "npc",
+    "source": "Fierce Three-Tailed"
+  },
+  {
+    "n": 121,
+    "kind": "npc",
+    "source": "Fierce Two-Tailed"
+  },
+  {
+    "n": 122,
+    "kind": "npc",
+    "source": "Firebore Dragon"
+  },
+  {
+    "n": 123,
+    "kind": "npc",
+    "source": "Firewing Dragon"
+  },
+  {
+    "n": 124,
+    "kind": "npc",
+    "source": "Flameplate Brigand",
+    "reborn": "Flameplate Brigand"
+  },
+  {
+    "n": 125,
+    "kind": "npc",
+    "source": "Flaming Demon Soldier"
+  },
+  {
+    "n": 126,
+    "kind": "npc",
+    "source": "Flowburst Demon Soldier"
+  },
+  {
+    "n": 127,
+    "kind": "npc",
+    "source": "Fortune Cat"
+  },
+  {
+    "n": 128,
+    "kind": "npc",
+    "source": "Frost Dragon"
+  },
+  {
+    "n": 129,
+    "kind": "npc",
+    "source": "Frostbore Dragon"
+  },
+  {
+    "n": 130,
+    "kind": "npc",
+    "source": "Frostwing Dragon"
+  },
+  {
+    "n": 131,
+    "kind": "npc",
+    "source": "Frostwing Dragon",
+    "reborn": "Ice Pterosaur"
+  },
+  {
+    "n": 132,
+    "kind": "npc",
+    "source": "Furious Eight-Tailed"
+  },
+  {
+    "n": 133,
+    "kind": "npc",
+    "source": "Furious Five-Tailed"
+  },
+  {
+    "n": 134,
+    "kind": "npc",
+    "source": "Furious Four-Tailed"
+  },
+  {
+    "n": 135,
+    "kind": "npc",
+    "source": "Furious Nine-Tailed"
+  },
+  {
+    "n": 136,
+    "kind": "npc",
+    "source": "Furious One-Tailed"
+  },
+  {
+    "n": 137,
+    "kind": "npc",
+    "source": "Furious Seven-Tailed"
+  },
+  {
+    "n": 138,
+    "kind": "npc",
+    "source": "Furious Six-Tailed"
+  },
+  {
+    "n": 139,
+    "kind": "npc",
+    "source": "Furious Three-Tailed"
+  },
+  {
+    "n": 140,
+    "kind": "npc",
+    "source": "Furious Two-Tailed"
+  },
+  {
+    "n": 141,
+    "kind": "npc",
+    "source": "Gaara"
+  },
+  {
+    "n": 142,
+    "kind": "npc",
+    "source": "Genin",
+    "reborn": "Genin"
+  },
+  {
+    "n": 143,
+    "kind": "npc",
+    "source": "Genin"
+  },
+  {
+    "n": 144,
+    "kind": "npc",
+    "source": "Ghastful Eight-Tailed"
+  },
+  {
+    "n": 145,
+    "kind": "npc",
+    "source": "Ghastful Five-Tailed"
+  },
+  {
+    "n": 146,
+    "kind": "npc",
+    "source": "Ghastful Four-Tailed"
+  },
+  {
+    "n": 147,
+    "kind": "npc",
+    "source": "Ghastful Nine-Tailed"
+  },
+  {
+    "n": 148,
+    "kind": "npc",
+    "source": "Ghastful One-Tailed"
+  },
+  {
+    "n": 149,
+    "kind": "npc",
+    "source": "Ghastful Seven-Tailed"
+  },
+  {
+    "n": 150,
+    "kind": "npc",
+    "source": "Ghastful Six-Tailed"
+  },
+  {
+    "n": 151,
+    "kind": "npc",
+    "source": "Ghastful Three-Tailed"
+  },
+  {
+    "n": 152,
+    "kind": "npc",
+    "source": "Ghastful Two-Tailed"
+  },
+  {
+    "n": 153,
+    "kind": "npc",
+    "source": "Ghastly Corn"
+  },
+  {
+    "n": 154,
+    "kind": "npc",
+    "source": "Ghastly Hollow",
+    "reborn": "Ghastly Hollow"
+  },
+  {
+    "n": 155,
+    "kind": "npc",
+    "source": "Ghastly Hollow",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 156,
+    "kind": "npc",
+    "source": "Ghastly Temptress"
+  },
+  {
+    "n": 157,
+    "kind": "npc",
+    "source": "Ghost Granny",
+    "reborn": "Ghost Granny"
+  },
+  {
+    "n": 158,
+    "kind": "npc",
+    "source": "Ghostfaced Henchman",
+    "reborn": "Ghostfaced Henchman"
+  },
+  {
+    "n": 159,
+    "kind": "npc",
+    "source": "Giant Bird"
+  },
+  {
+    "n": 160,
+    "kind": "npc",
+    "source": "Giant Centipede",
+    "reborn": "Huge Centipede"
+  },
+  {
+    "n": 161,
+    "kind": "npc",
+    "source": "Giant Chameleon"
+  },
+  {
+    "n": 162,
+    "kind": "npc",
+    "source": "Giant Ox"
+  },
+  {
+    "n": 163,
+    "kind": "npc",
+    "source": "Gillian",
+    "reborn": "Gillian"
+  },
+  {
+    "n": 164,
+    "kind": "npc",
+    "source": "Gin Ichimaru"
+  },
+  {
+    "n": 165,
+    "kind": "npc",
+    "source": "Gin Ichimaru",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 166,
+    "kind": "npc",
+    "source": "Gold Demonblade",
+    "reborn": "Jin Mang Monster"
+  },
+  {
+    "n": 167,
+    "kind": "npc",
+    "source": "Golem Warrior"
+  },
+  {
+    "n": 168,
+    "kind": "npc",
+    "source": "Gozu",
+    "reborn": "Gozu"
+  },
+  {
+    "n": 169,
+    "kind": "npc",
+    "source": "Greedy Bandit Chief",
+    "reborn": "Greedy Bandit"
+  },
+  {
+    "n": 170,
+    "kind": "npc",
+    "source": "Greenskin Frog",
+    "reborn": "Green Frog"
+  },
+  {
+    "n": 171,
+    "kind": "npc",
+    "source": "Grimearth Demon"
+  },
+  {
+    "n": 172,
+    "kind": "npc",
+    "source": "Grimfire Demon"
+  },
+  {
+    "n": 173,
+    "kind": "npc",
+    "source": "Grimmjow",
+    "reborn": "Grimmjow"
+  },
+  {
+    "n": 174,
+    "kind": "npc",
+    "source": "Grimthunder Demon"
+  },
+  {
+    "n": 175,
+    "kind": "npc",
+    "source": "Grimwater Demon"
+  },
+  {
+    "n": 176,
+    "kind": "npc",
+    "source": "Grimwind Demon"
+  },
+  {
+    "n": 177,
+    "kind": "npc",
+    "source": "Grinning Monkey",
+    "reborn": "Monkey"
+  },
+  {
+    "n": 178,
+    "kind": "npc",
+    "source": "Halibel",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 179,
+    "kind": "npc",
+    "source": "Handbook of Home"
+  },
+  {
+    "n": 180,
+    "kind": "npc",
+    "source": "Hanzo"
+  },
+  {
+    "n": 181,
+    "kind": "npc",
+    "source": "Harsh Barrens Swordsman"
+  },
+  {
+    "n": 182,
+    "kind": "npc",
+    "source": "Hate Demon",
+    "reborn": "Resentment"
+  },
+  {
+    "n": 183,
+    "kind": "npc",
+    "source": "Hidan"
+  },
+  {
+    "n": 184,
+    "kind": "npc",
+    "source": "Hidan",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 185,
+    "kind": "npc",
+    "source": "Hirako Shinji",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 186,
+    "kind": "npc",
+    "source": "Hollowfied Grimmjow",
+    "reborn": "Hollowfied Grimmjow"
+  },
+  {
+    "n": 187,
+    "kind": "npc",
+    "source": "Hollowfied Ulquiorra"
+  },
+  {
+    "n": 188,
+    "kind": "npc",
+    "source": "Hollowfied Ulquiorra",
+    "reborn": "Hollowfied Ulquiorra"
+  },
+  {
+    "n": 189,
+    "kind": "npc",
+    "source": "Hongo Batai",
+    "reborn": "Hongo Batai"
+  },
+  {
+    "n": 190,
+    "kind": "npc",
+    "source": "Hyuga Hinata"
+  },
+  {
+    "n": 191,
+    "kind": "npc",
+    "source": "Iblis Jagung",
+    "reborn": "Corn"
+  },
+  {
+    "n": 192,
+    "kind": "npc",
+    "source": "Illusionary Demon"
+  },
+  {
+    "n": 193,
+    "kind": "npc",
+    "source": "Immoral Monk",
+    "reborn": "Immoral Monk"
+  },
+  {
+    "n": 194,
+    "kind": "npc",
+    "source": "Immortal Shiro"
+  },
+  {
+    "n": 195,
+    "kind": "npc",
+    "source": "Imp",
+    "reborn": "Bakeneko"
+  },
+  {
+    "n": 196,
+    "kind": "npc",
+    "source": "Inferno Dog",
+    "reborn": "Cerberus"
+  },
+  {
+    "n": 197,
+    "kind": "npc",
+    "source": "Inoue Orihime",
+    "reborn": "Orihime Inoue"
+  },
+  {
+    "n": 198,
+    "kind": "npc",
+    "source": "Inoue Orihime",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 199,
+    "kind": "npc",
+    "source": "Inuzuka Kiba"
+  },
+  {
+    "n": 200,
+    "kind": "npc",
+    "source": "Isonade"
+  },
+  {
+    "n": 201,
+    "kind": "npc",
+    "source": "Jounin didalam arena",
+    "reborn": "Arena Master"
+  },
+  {
+    "n": 202,
+    "kind": "npc",
+    "source": "Jounin didalam arena"
+  },
+  {
+    "n": 203,
+    "kind": "npc",
+    "source": "Kabuki",
+    "reborn": "Kabuki"
+  },
+  {
+    "n": 204,
+    "kind": "npc",
+    "source": "Kakuzu"
+  },
+  {
+    "n": 205,
+    "kind": "npc",
+    "source": "Kakuzu",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 206,
+    "kind": "npc",
+    "source": "Kappa",
+    "reborn": "Kappa"
+  },
+  {
+    "n": 207,
+    "kind": "npc",
+    "source": "Kei Ichiro",
+    "reborn": "Barren Swordsman"
+  },
+  {
+    "n": 208,
+    "kind": "npc",
+    "source": "Kenshin Susumi"
+  },
+  {
+    "n": 209,
+    "kind": "npc",
+    "source": "Ketua Angin di Five Kage Meeting Room"
+  },
+  {
+    "n": 210,
+    "kind": "npc",
+    "source": "Ketua Desa Air"
+  },
+  {
+    "n": 211,
+    "kind": "npc",
+    "source": "Ketua Desa Air di Five Kage Meeting Room"
+  },
+  {
+    "n": 212,
+    "kind": "npc",
+    "source": "Ketua Desa Angin di aula"
+  },
+  {
+    "n": 213,
+    "kind": "npc",
+    "source": "Ketua Desa Api dalam aula",
+    "reborn": "Village Elder"
+  },
+  {
+    "n": 214,
+    "kind": "npc",
+    "source": "Ketua Desa Api di Five Kage Meeting Room"
+  },
+  {
+    "n": 215,
+    "kind": "npc",
+    "source": "Ketua Desa Petir di aula"
+  },
+  {
+    "n": 216,
+    "kind": "npc",
+    "source": "Ketua Desa Tanah di Aula"
+  },
+  {
+    "n": 217,
+    "kind": "npc",
+    "source": "Ketua Ninja di Aula",
+    "reborn": "Angel City Elder"
+  },
+  {
+    "n": 218,
+    "kind": "npc",
+    "source": "Ketua Petir di Five Kage Meeting Room"
+  },
+  {
+    "n": 219,
+    "kind": "npc",
+    "source": "Ketua Tanah di Five Kage Meeting Room"
+  },
+  {
+    "n": 220,
+    "kind": "npc",
+    "source": "Kisame Hoshigaki"
+  },
+  {
+    "n": 221,
+    "kind": "npc",
+    "source": "Kisame Hoshigaki",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 222,
+    "kind": "npc",
+    "source": "Kisuke Urahara di Toko Urahara",
+    "reborn": "Kisuke Urahara"
+  },
+  {
+    "n": 223,
+    "kind": "npc",
+    "source": "Koki",
+    "reborn": "Chef"
+  },
+  {
+    "n": 224,
+    "kind": "npc",
+    "source": "Komandan Ninja"
+  },
+  {
+    "n": 225,
+    "kind": "npc",
+    "source": "Konan",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 226,
+    "kind": "npc",
+    "source": "Kuchiki Byakuya",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 227,
+    "kind": "npc",
+    "source": "Kuchiki Rukia",
+    "reborn": "Rukia Kuchiki"
+  },
+  {
+    "n": 228,
+    "kind": "npc",
+    "source": "Kuchiki Rukia",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 229,
+    "kind": "npc",
+    "source": "Kurenai Yuuhi"
+  },
+  {
+    "n": 230,
+    "kind": "npc",
+    "source": "Kurosaki Ichigo",
+    "reborn": "Ichigo Kurosaki"
+  },
+  {
+    "n": 231,
+    "kind": "npc",
+    "source": "Lady Feng",
+    "reborn": "Feng"
+  },
+  {
+    "n": 232,
+    "kind": "npc",
+    "source": "Little Isonade"
+  },
+  {
+    "n": 233,
+    "kind": "npc",
+    "source": "Longfeather Bandit",
+    "reborn": "Longfeather Demon"
+  },
+  {
+    "n": 234,
+    "kind": "npc",
+    "source": "Lost Dog",
+    "reborn": "Lost Dog"
+  },
+  {
+    "n": 235,
+    "kind": "npc",
+    "source": "Lunar Swordsman"
+  },
+  {
+    "n": 236,
+    "kind": "npc",
+    "source": "Malicious Hollow",
+    "reborn": "Green Malicious Hollow"
+  },
+  {
+    "n": 237,
+    "kind": "npc",
+    "source": "Malicious Hollow",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 238,
+    "kind": "npc",
+    "source": "Maneater Blossom",
+    "reborn": "Man-Eater"
+  },
+  {
+    "n": 239,
+    "kind": "npc",
+    "source": "Marsh Frong",
+    "reborn": "Swamp Poison Frog"
+  },
+  {
+    "n": 240,
+    "kind": "npc",
+    "source": "Masked Robber",
+    "reborn": "Masked Robber"
+  },
+  {
+    "n": 241,
+    "kind": "npc",
+    "source": "Master Yuan",
+    "reborn": "Master Yuan"
+  },
+  {
+    "n": 242,
+    "kind": "npc",
+    "source": "Master Yuan"
+  },
+  {
+    "n": 243,
+    "kind": "npc",
+    "source": "Matchmaker",
+    "reborn": "Crystal Keeper"
+  },
+  {
+    "n": 244,
+    "kind": "npc",
+    "source": "Momo Hinamori"
+  },
+  {
+    "n": 245,
+    "kind": "npc",
+    "source": "Mooncake Thief"
+  },
+  {
+    "n": 246,
+    "kind": "npc",
+    "source": "Mountain Boar Bandit",
+    "reborn": "Demon Brute"
+  },
+  {
+    "n": 247,
+    "kind": "npc",
+    "source": "Mountain Monk"
+  },
+  {
+    "n": 248,
+    "kind": "npc",
+    "source": "Nanao Ise"
+  },
+  {
+    "n": 249,
+    "kind": "npc",
+    "source": "Nara Shikamaru"
+  }
+]

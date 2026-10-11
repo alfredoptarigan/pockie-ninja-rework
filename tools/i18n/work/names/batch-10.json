@@ -1,0 +1,1323 @@
+[
+  {
+    "n": 2500,
+    "kind": "item",
+    "source": "Lily ＋0"
+  },
+  {
+    "n": 2501,
+    "kind": "item",
+    "source": "Lily ＋1"
+  },
+  {
+    "n": 2502,
+    "kind": "item",
+    "source": "Lily ＋10"
+  },
+  {
+    "n": 2503,
+    "kind": "item",
+    "source": "Lily ＋11"
+  },
+  {
+    "n": 2504,
+    "kind": "item",
+    "source": "Lily ＋12"
+  },
+  {
+    "n": 2505,
+    "kind": "item",
+    "source": "Lily ＋13"
+  },
+  {
+    "n": 2506,
+    "kind": "item",
+    "source": "Lily ＋14"
+  },
+  {
+    "n": 2507,
+    "kind": "item",
+    "source": "Lily ＋15"
+  },
+  {
+    "n": 2508,
+    "kind": "item",
+    "source": "Lily ＋16"
+  },
+  {
+    "n": 2509,
+    "kind": "item",
+    "source": "Lily ＋17"
+  },
+  {
+    "n": 2510,
+    "kind": "item",
+    "source": "Lily ＋18"
+  },
+  {
+    "n": 2511,
+    "kind": "item",
+    "source": "Lily ＋19"
+  },
+  {
+    "n": 2512,
+    "kind": "item",
+    "source": "Lily ＋2"
+  },
+  {
+    "n": 2513,
+    "kind": "item",
+    "source": "Lily ＋20"
+  },
+  {
+    "n": 2514,
+    "kind": "item",
+    "source": "Lily ＋21"
+  },
+  {
+    "n": 2515,
+    "kind": "item",
+    "source": "Lily ＋22"
+  },
+  {
+    "n": 2516,
+    "kind": "item",
+    "source": "Lily ＋23"
+  },
+  {
+    "n": 2517,
+    "kind": "item",
+    "source": "Lily ＋24"
+  },
+  {
+    "n": 2518,
+    "kind": "item",
+    "source": "Lily ＋25"
+  },
+  {
+    "n": 2519,
+    "kind": "item",
+    "source": "Lily ＋26"
+  },
+  {
+    "n": 2520,
+    "kind": "item",
+    "source": "Lily ＋27"
+  },
+  {
+    "n": 2521,
+    "kind": "item",
+    "source": "Lily ＋3"
+  },
+  {
+    "n": 2522,
+    "kind": "item",
+    "source": "Lily ＋4"
+  },
+  {
+    "n": 2523,
+    "kind": "item",
+    "source": "Lily ＋5"
+  },
+  {
+    "n": 2524,
+    "kind": "item",
+    "source": "Lily ＋6"
+  },
+  {
+    "n": 2525,
+    "kind": "item",
+    "source": "Lily ＋7"
+  },
+  {
+    "n": 2526,
+    "kind": "item",
+    "source": "Lily ＋8"
+  },
+  {
+    "n": 2527,
+    "kind": "item",
+    "source": "Lily ＋9"
+  },
+  {
+    "n": 2528,
+    "kind": "item",
+    "source": "Lily Young Gift Box"
+  },
+  {
+    "n": 2529,
+    "kind": "item",
+    "source": "Limited Blunt Box",
+    "reborn": "Limited Blunt Box Lv. 76"
+  },
+  {
+    "n": 2530,
+    "kind": "item",
+    "source": "Limited Fist Box",
+    "reborn": "Limited Fist Box Lv. 76"
+  },
+  {
+    "n": 2531,
+    "kind": "item",
+    "source": "Limited Ring Box",
+    "reborn": "Limited Ring Box Lv. 76"
+  },
+  {
+    "n": 2532,
+    "kind": "item",
+    "source": "Limited Sharp Box",
+    "reborn": "Limited Sharp Box Lv. 76"
+  },
+  {
+    "n": 2533,
+    "kind": "item",
+    "source": "Liquor Gourd",
+    "reborn": "Liquor Gourd"
+  },
+  {
+    "n": 2534,
+    "kind": "item",
+    "source": "Little Beans",
+    "reborn": "Little Beans"
+  },
+  {
+    "n": 2535,
+    "kind": "item",
+    "source": "Little Beans*2"
+  },
+  {
+    "n": 2536,
+    "kind": "item",
+    "source": "Lobster",
+    "reborn": "Lobster"
+  },
+  {
+    "n": 2537,
+    "kind": "item",
+    "source": "Lobster*2"
+  },
+  {
+    "n": 2538,
+    "kind": "item",
+    "source": "Locked Treasure Box"
+  },
+  {
+    "n": 2539,
+    "kind": "item",
+    "source": "Lollipop",
+    "reborn": "Lollipop"
+  },
+  {
+    "n": 2540,
+    "kind": "item",
+    "source": "Longbread"
+  },
+  {
+    "n": 2541,
+    "kind": "item",
+    "source": "Love Aikawa Namecard"
+  },
+  {
+    "n": 2542,
+    "kind": "item",
+    "source": "Love Ring",
+    "reborn": "Amethyst Band"
+  },
+  {
+    "n": 2543,
+    "kind": "item",
+    "source": "Lovely Eel Rice",
+    "reborn": "Lovely Eel Rice"
+  },
+  {
+    "n": 2544,
+    "kind": "item",
+    "source": "low level Inscription Talisman",
+    "reborn": "Low Level Inscription Talisman"
+  },
+  {
+    "n": 2545,
+    "kind": "item",
+    "source": "Low Purify Stone",
+    "reborn": "Low Purify Stone"
+  },
+  {
+    "n": 2546,
+    "kind": "item",
+    "source": "Lucid Jade"
+  },
+  {
+    "n": 2547,
+    "kind": "item",
+    "source": "Lucid Ring"
+  },
+  {
+    "n": 2548,
+    "kind": "item",
+    "source": "Lucky Bag"
+  },
+  {
+    "n": 2549,
+    "kind": "item",
+    "source": "Lucky Gem",
+    "reborn": "Lucky Gem"
+  },
+  {
+    "n": 2550,
+    "kind": "item",
+    "source": "Lucky Money Red Packet"
+  },
+  {
+    "n": 2551,
+    "kind": "item",
+    "source": "Lunch Box"
+  },
+  {
+    "n": 2552,
+    "kind": "item",
+    "source": "Lunch Meat"
+  },
+  {
+    "n": 2553,
+    "kind": "item",
+    "source": "Lush Pendant"
+  },
+  {
+    "n": 2554,
+    "kind": "item",
+    "source": "Lush Ring",
+    "reborn": "Rose Ring"
+  },
+  {
+    "n": 2555,
+    "kind": "item",
+    "source": "Luxury Newbie Pack"
+  },
+  {
+    "n": 2556,
+    "kind": "item",
+    "source": "Luxury Outfit Box",
+    "reborn": "Luxury Outfit Box"
+  },
+  {
+    "n": 2557,
+    "kind": "item",
+    "source": "Luxury Pet Box",
+    "reborn": "Luxury Pet Box"
+  },
+  {
+    "n": 2558,
+    "kind": "item",
+    "source": "Lv.1 Crystal Ukir",
+    "reborn": "Lv. 1 Carving Crystal"
+  },
+  {
+    "n": 2559,
+    "kind": "item",
+    "source": "Lv.1 Luxury EXP Bag*20"
+  },
+  {
+    "n": 2560,
+    "kind": "item",
+    "source": "Lv.1 Newbie Pack",
+    "reborn": "Akatsuki Wishing Pot"
+  },
+  {
+    "n": 2561,
+    "kind": "item",
+    "source": "Lv.1 Pisau Ukir",
+    "reborn": "Lv. 1 Carving Blade"
+  },
+  {
+    "n": 2562,
+    "kind": "item",
+    "source": "Lv.10 Newbie Pack",
+    "reborn": "Lv. 1 Newbie Pack"
+  },
+  {
+    "n": 2563,
+    "kind": "item",
+    "source": "Lv.10 stone bag*20"
+  },
+  {
+    "n": 2564,
+    "kind": "item",
+    "source": "Lv.2 Crystal Ukir",
+    "reborn": "Lv. 2 Carving Crystal"
+  },
+  {
+    "n": 2565,
+    "kind": "item",
+    "source": "Lv.2 Luxury EXP Bag*20"
+  },
+  {
+    "n": 2566,
+    "kind": "item",
+    "source": "Lv.2 Pisau Ukir",
+    "reborn": "Lv. 2 Carving Blade"
+  },
+  {
+    "n": 2567,
+    "kind": "item",
+    "source": "Lv.20 Newbie Pack",
+    "reborn": "Lv. 20 Newbie Pack"
+  },
+  {
+    "n": 2568,
+    "kind": "item",
+    "source": "Lv.3 Crystal Ukir",
+    "reborn": "Lv. 3 Carving Crystal"
+  },
+  {
+    "n": 2569,
+    "kind": "item",
+    "source": "Lv.3 Luxury EXP Bag*20"
+  },
+  {
+    "n": 2570,
+    "kind": "item",
+    "source": "Lv.3 Pisau Ukir",
+    "reborn": "Lv. 3 Carving Blade"
+  },
+  {
+    "n": 2571,
+    "kind": "item",
+    "source": "Lv.30 Newbie Pack",
+    "reborn": "Lv. 30 Newbie Pack"
+  },
+  {
+    "n": 2572,
+    "kind": "item",
+    "source": "Lv.4 Crystal Ukir",
+    "reborn": "Lv. 4 Carving Crystal"
+  },
+  {
+    "n": 2573,
+    "kind": "item",
+    "source": "Lv.4 Gift Coupon Bag*2"
+  },
+  {
+    "n": 2574,
+    "kind": "item",
+    "source": "Lv.4 Pisau Ukir",
+    "reborn": "Lv. 4 Carving Blade"
+  },
+  {
+    "n": 2575,
+    "kind": "item",
+    "source": "Lv.40 Newbie Pack",
+    "reborn": "Lv. 40 Newbie Pack"
+  },
+  {
+    "n": 2576,
+    "kind": "item",
+    "source": "Lv.5 Crystal Ukir",
+    "reborn": "Lv. 5 Carving Crystal"
+  },
+  {
+    "n": 2577,
+    "kind": "item",
+    "source": "Lv.5 Pisau Ukir",
+    "reborn": "Lv. 5 Carving Blade"
+  },
+  {
+    "n": 2578,
+    "kind": "item",
+    "source": "Lv.50 Newbie Pack",
+    "reborn": "Lv. 50 Newbie Pack"
+  },
+  {
+    "n": 2579,
+    "kind": "item",
+    "source": "Lv.6 Chakra Carrier Bag*2"
+  },
+  {
+    "n": 2580,
+    "kind": "item",
+    "source": "Lv.6 Chakra Carrier Bag*4"
+  },
+  {
+    "n": 2581,
+    "kind": "item",
+    "source": "Lv.6 Crystal Ukir"
+  },
+  {
+    "n": 2582,
+    "kind": "item",
+    "source": "Lv.6 Engrave Blade*20"
+  },
+  {
+    "n": 2583,
+    "kind": "item",
+    "source": "Lv.6 Engrave Crystal*20"
+  },
+  {
+    "n": 2584,
+    "kind": "item",
+    "source": "Lv.6 HP Carrier Bag*2"
+  },
+  {
+    "n": 2585,
+    "kind": "item",
+    "source": "Lv.6 HP Carrier Bag*4"
+  },
+  {
+    "n": 2586,
+    "kind": "item",
+    "source": "Lv.6 Pisau Ukir"
+  },
+  {
+    "n": 2587,
+    "kind": "item",
+    "source": "Lv.7 Crystal Ukir",
+    "reborn": "Lv. 7 Carving Crystal"
+  },
+  {
+    "n": 2588,
+    "kind": "item",
+    "source": "Lv.7 Pisau Ukir",
+    "reborn": "Lv. 7 Carving Blade"
+  },
+  {
+    "n": 2589,
+    "kind": "item",
+    "source": "Lv.8 Crystal Ukir",
+    "reborn": "Lv. 8 Carving Crystal"
+  },
+  {
+    "n": 2590,
+    "kind": "item",
+    "source": "Lv.8 Engrave Blade*2",
+    "reborn": "[[item__350008--name]] x2 Pack"
+  },
+  {
+    "n": 2591,
+    "kind": "item",
+    "source": "Lv.8 Engrave Crystal*2",
+    "reborn": "[[item__350108--name]] x2 Pack"
+  },
+  {
+    "n": 2592,
+    "kind": "item",
+    "source": "Lv.8 Engrave Crystal*3",
+    "reborn": "[[item__350108--name]] x3 Pack"
+  },
+  {
+    "n": 2593,
+    "kind": "item",
+    "source": "Lv.8 Enhancement Talisman*3",
+    "reborn": "All Outfits Wishing Pot"
+  },
+  {
+    "n": 2594,
+    "kind": "item",
+    "source": "Lv.8 Gem Formula"
+  },
+  {
+    "n": 2595,
+    "kind": "item",
+    "source": "Lv.8 Pisau Ukir",
+    "reborn": "Lv. 8 Carving Blade"
+  },
+  {
+    "n": 2596,
+    "kind": "item",
+    "source": "Lv.8 Slot Talisman*3",
+    "reborn": "Rare Outfit Wishing Pot"
+  },
+  {
+    "n": 2597,
+    "kind": "item",
+    "source": "Lv.80 Brotherhood Pack"
+  },
+  {
+    "n": 2598,
+    "kind": "item",
+    "source": "Lv.81 Blueberry Cake"
+  },
+  {
+    "n": 2599,
+    "kind": "item",
+    "source": "Lv.81 Cake Box"
+  },
+  {
+    "n": 2600,
+    "kind": "item",
+    "source": "Lv.81 Caramel Cake"
+  },
+  {
+    "n": 2601,
+    "kind": "item",
+    "source": "Lv.81 Chocolate Cake"
+  },
+  {
+    "n": 2602,
+    "kind": "item",
+    "source": "Lv.81 Coffee Cake"
+  },
+  {
+    "n": 2603,
+    "kind": "item",
+    "source": "Lv.81 Cream Cake"
+  },
+  {
+    "n": 2604,
+    "kind": "item",
+    "source": "Lv.81 Jelly Cake"
+  },
+  {
+    "n": 2605,
+    "kind": "item",
+    "source": "Lv.81 Matcha Cake"
+  },
+  {
+    "n": 2606,
+    "kind": "item",
+    "source": "Lv.81 Strawberry Cake"
+  },
+  {
+    "n": 2607,
+    "kind": "item",
+    "source": "Lv.81-90 Gold Equipment Pack"
+  },
+  {
+    "n": 2608,
+    "kind": "item",
+    "source": "Magic Dragon Armor",
+    "reborn": "Magic Dragon Armor"
+  },
+  {
+    "n": 2609,
+    "kind": "item",
+    "source": "Magic-infused Stone"
+  },
+  {
+    "n": 2610,
+    "kind": "item",
+    "source": "Magnifier",
+    "reborn": "Trace Identify Scroll"
+  },
+  {
+    "n": 2611,
+    "kind": "item",
+    "source": "Majestic Heart"
+  },
+  {
+    "n": 2612,
+    "kind": "item",
+    "source": "Maneater Blossom Fledgling Gift Box"
+  },
+  {
+    "n": 2613,
+    "kind": "item",
+    "source": "Maneater Blossom＋0"
+  },
+  {
+    "n": 2614,
+    "kind": "item",
+    "source": "Maneater Blossom＋1"
+  },
+  {
+    "n": 2615,
+    "kind": "item",
+    "source": "Maneater Blossom＋10"
+  },
+  {
+    "n": 2616,
+    "kind": "item",
+    "source": "Maneater Blossom＋11"
+  },
+  {
+    "n": 2617,
+    "kind": "item",
+    "source": "Maneater Blossom＋12"
+  },
+  {
+    "n": 2618,
+    "kind": "item",
+    "source": "Maneater Blossom＋13"
+  },
+  {
+    "n": 2619,
+    "kind": "item",
+    "source": "Maneater Blossom＋14"
+  },
+  {
+    "n": 2620,
+    "kind": "item",
+    "source": "Maneater Blossom＋15"
+  },
+  {
+    "n": 2621,
+    "kind": "item",
+    "source": "Maneater Blossom＋16"
+  },
+  {
+    "n": 2622,
+    "kind": "item",
+    "source": "Maneater Blossom＋17"
+  },
+  {
+    "n": 2623,
+    "kind": "item",
+    "source": "Maneater Blossom＋18"
+  },
+  {
+    "n": 2624,
+    "kind": "item",
+    "source": "Maneater Blossom＋19"
+  },
+  {
+    "n": 2625,
+    "kind": "item",
+    "source": "Maneater Blossom＋2"
+  },
+  {
+    "n": 2626,
+    "kind": "item",
+    "source": "Maneater Blossom＋20"
+  },
+  {
+    "n": 2627,
+    "kind": "item",
+    "source": "Maneater Blossom＋21"
+  },
+  {
+    "n": 2628,
+    "kind": "item",
+    "source": "Maneater Blossom＋22"
+  },
+  {
+    "n": 2629,
+    "kind": "item",
+    "source": "Maneater Blossom＋23"
+  },
+  {
+    "n": 2630,
+    "kind": "item",
+    "source": "Maneater Blossom＋24"
+  },
+  {
+    "n": 2631,
+    "kind": "item",
+    "source": "Maneater Blossom＋25"
+  },
+  {
+    "n": 2632,
+    "kind": "item",
+    "source": "Maneater Blossom＋26"
+  },
+  {
+    "n": 2633,
+    "kind": "item",
+    "source": "Maneater Blossom＋27"
+  },
+  {
+    "n": 2634,
+    "kind": "item",
+    "source": "Maneater Blossom＋3"
+  },
+  {
+    "n": 2635,
+    "kind": "item",
+    "source": "Maneater Blossom＋4"
+  },
+  {
+    "n": 2636,
+    "kind": "item",
+    "source": "Maneater Blossom＋5"
+  },
+  {
+    "n": 2637,
+    "kind": "item",
+    "source": "Maneater Blossom＋6"
+  },
+  {
+    "n": 2638,
+    "kind": "item",
+    "source": "Maneater Blossom＋7"
+  },
+  {
+    "n": 2639,
+    "kind": "item",
+    "source": "Maneater Blossom＋8"
+  },
+  {
+    "n": 2640,
+    "kind": "item",
+    "source": "Maneater Blossom＋9"
+  },
+  {
+    "n": 2641,
+    "kind": "item",
+    "source": "Mark of Special Training"
+  },
+  {
+    "n": 2642,
+    "kind": "item",
+    "source": "Mashiro Kuna Namecard"
+  },
+  {
+    "n": 2643,
+    "kind": "item",
+    "source": "Meat Bone",
+    "reborn": "Meat Bone"
+  },
+  {
+    "n": 2644,
+    "kind": "item",
+    "source": "Meat Bun",
+    "reborn": "Meat Bun"
+  },
+  {
+    "n": 2645,
+    "kind": "item",
+    "source": "Meatball",
+    "reborn": "Meatball"
+  },
+  {
+    "n": 2646,
+    "kind": "item",
+    "source": "Media gift box"
+  },
+  {
+    "n": 2647,
+    "kind": "item",
+    "source": "Medium Elemental Focus Bottle",
+    "reborn": "Greater Elemental Potion"
+  },
+  {
+    "n": 2648,
+    "kind": "item",
+    "source": "Medium Elemental Focus Potion",
+    "reborn": "Elemental Focus Tonic"
+  },
+  {
+    "n": 2649,
+    "kind": "item",
+    "source": "Medium Healing Bottle",
+    "reborn": "Greater Healing Potion"
+  },
+  {
+    "n": 2650,
+    "kind": "item",
+    "source": "Medium Healing Potion",
+    "reborn": "Healing Tonic"
+  },
+  {
+    "n": 2651,
+    "kind": "item",
+    "source": "Medium Purify Stone",
+    "reborn": "Medium Purify Stone"
+  },
+  {
+    "n": 2652,
+    "kind": "item",
+    "source": "Medium Tonic Bottle",
+    "reborn": "Medium Tonic Bottle"
+  },
+  {
+    "n": 2653,
+    "kind": "item",
+    "source": "Medium Tonic Potion",
+    "reborn": "Chakra Tonic"
+  },
+  {
+    "n": 2654,
+    "kind": "item",
+    "source": "Menggunakan Kotak Skill"
+  },
+  {
+    "n": 2655,
+    "kind": "item",
+    "source": "Meningkatkan keluarnya Air"
+  },
+  {
+    "n": 2656,
+    "kind": "item",
+    "source": "Meningkatkan keluarnya Angin"
+  },
+  {
+    "n": 2657,
+    "kind": "item",
+    "source": "Meningkatkan keluarnya Api"
+  },
+  {
+    "n": 2658,
+    "kind": "item",
+    "source": "Meningkatkan keluarnya Petir"
+  },
+  {
+    "n": 2659,
+    "kind": "item",
+    "source": "Meningkatkan keluarnya Tanah"
+  },
+  {
+    "n": 2660,
+    "kind": "item",
+    "source": "Midsize Beans*20",
+    "reborn": "[[item__170127--name]] x20 Pack"
+  },
+  {
+    "n": 2661,
+    "kind": "item",
+    "source": "Midsized Beans",
+    "reborn": "Midsized Beans"
+  },
+  {
+    "n": 2662,
+    "kind": "item",
+    "source": "Mighty Dragon Lord Armor"
+  },
+  {
+    "n": 2663,
+    "kind": "item",
+    "source": "Mighty Dragon Lord Belt"
+  },
+  {
+    "n": 2664,
+    "kind": "item",
+    "source": "Mighty Dragon Lord Boots"
+  },
+  {
+    "n": 2665,
+    "kind": "item",
+    "source": "Mighty Dragon Lord Gloves"
+  },
+  {
+    "n": 2666,
+    "kind": "item",
+    "source": "Mighty Dragon Lord Helm"
+  },
+  {
+    "n": 2667,
+    "kind": "item",
+    "source": "Mighty Dragon Lord Sets Pack"
+  },
+  {
+    "n": 2668,
+    "kind": "item",
+    "source": "Milk",
+    "reborn": "Milk"
+  },
+  {
+    "n": 2669,
+    "kind": "item",
+    "source": "Milk*2"
+  },
+  {
+    "n": 2670,
+    "kind": "item",
+    "source": "Minato Namikaze"
+  },
+  {
+    "n": 2671,
+    "kind": "item",
+    "source": "Mini Christmas Tree"
+  },
+  {
+    "n": 2672,
+    "kind": "item",
+    "source": "Misfortune Hammer",
+    "reborn": "Misfortune Hammer"
+  },
+  {
+    "n": 2673,
+    "kind": "item",
+    "source": "Miso Soup",
+    "reborn": "Miso Soup"
+  },
+  {
+    "n": 2674,
+    "kind": "item",
+    "source": "Misty Medicinal Powder"
+  },
+  {
+    "n": 2675,
+    "kind": "item",
+    "source": "Mitarashi Anko Namecard"
+  },
+  {
+    "n": 2676,
+    "kind": "item",
+    "source": "Mizukage Namecard"
+  },
+  {
+    "n": 2677,
+    "kind": "item",
+    "source": "Momo Hinamori Namecard"
+  },
+  {
+    "n": 2678,
+    "kind": "item",
+    "source": "Momochi Zabuza Gift Box"
+  },
+  {
+    "n": 2679,
+    "kind": "item",
+    "source": "Mooncake Box"
+  },
+  {
+    "n": 2680,
+    "kind": "item",
+    "source": "Moonstone"
+  },
+  {
+    "n": 2681,
+    "kind": "item",
+    "source": "Mount Myoboku"
+  },
+  {
+    "n": 2682,
+    "kind": "item",
+    "source": "Mujina＋0"
+  },
+  {
+    "n": 2683,
+    "kind": "item",
+    "source": "Mujina＋1"
+  },
+  {
+    "n": 2684,
+    "kind": "item",
+    "source": "Mujina＋10"
+  },
+  {
+    "n": 2685,
+    "kind": "item",
+    "source": "Mujina＋11"
+  },
+  {
+    "n": 2686,
+    "kind": "item",
+    "source": "Mujina＋12"
+  },
+  {
+    "n": 2687,
+    "kind": "item",
+    "source": "Mujina＋13"
+  },
+  {
+    "n": 2688,
+    "kind": "item",
+    "source": "Mujina＋14"
+  },
+  {
+    "n": 2689,
+    "kind": "item",
+    "source": "Mujina＋15"
+  },
+  {
+    "n": 2690,
+    "kind": "item",
+    "source": "Mujina＋16"
+  },
+  {
+    "n": 2691,
+    "kind": "item",
+    "source": "Mujina＋17"
+  },
+  {
+    "n": 2692,
+    "kind": "item",
+    "source": "Mujina＋18"
+  },
+  {
+    "n": 2693,
+    "kind": "item",
+    "source": "Mujina＋19"
+  },
+  {
+    "n": 2694,
+    "kind": "item",
+    "source": "Mujina＋2"
+  },
+  {
+    "n": 2695,
+    "kind": "item",
+    "source": "Mujina＋20"
+  },
+  {
+    "n": 2696,
+    "kind": "item",
+    "source": "Mujina＋21"
+  },
+  {
+    "n": 2697,
+    "kind": "item",
+    "source": "Mujina＋22"
+  },
+  {
+    "n": 2698,
+    "kind": "item",
+    "source": "Mujina＋23"
+  },
+  {
+    "n": 2699,
+    "kind": "item",
+    "source": "Mujina＋24"
+  },
+  {
+    "n": 2700,
+    "kind": "item",
+    "source": "Mujina＋25"
+  },
+  {
+    "n": 2701,
+    "kind": "item",
+    "source": "Mujina＋26"
+  },
+  {
+    "n": 2702,
+    "kind": "item",
+    "source": "Mujina＋27"
+  },
+  {
+    "n": 2703,
+    "kind": "item",
+    "source": "Mujina＋3"
+  },
+  {
+    "n": 2704,
+    "kind": "item",
+    "source": "Mujina＋4"
+  },
+  {
+    "n": 2705,
+    "kind": "item",
+    "source": "Mujina＋5"
+  },
+  {
+    "n": 2706,
+    "kind": "item",
+    "source": "Mujina＋6"
+  },
+  {
+    "n": 2707,
+    "kind": "item",
+    "source": "Mujina＋7"
+  },
+  {
+    "n": 2708,
+    "kind": "item",
+    "source": "Mujina＋8"
+  },
+  {
+    "n": 2709,
+    "kind": "item",
+    "source": "Mujina＋9"
+  },
+  {
+    "n": 2710,
+    "kind": "item",
+    "source": "Mysterious Organization",
+    "reborn": "Pacionate Leo Title"
+  },
+  {
+    "n": 2711,
+    "kind": "item",
+    "source": "Mysterious Scorpio Proof 30-hari",
+    "reborn": "Special Jounin Title"
+  },
+  {
+    "n": 2712,
+    "kind": "item",
+    "source": "Mysterious Scorpio Proof 7-hari",
+    "reborn": "Blue Collector Title"
+  },
+  {
+    "n": 2713,
+    "kind": "item",
+    "source": "Mystery Disassembly Scroll",
+    "reborn": "Mysterious Weapon Disassembly Scroll"
+  },
+  {
+    "n": 2714,
+    "kind": "item",
+    "source": "Mystery Disassembly Scroll",
+    "reborn": "Mysterious Armor Disassembly Scroll"
+  },
+  {
+    "n": 2715,
+    "kind": "item",
+    "source": "Mystery Disassembly Scroll",
+    "reborn": "Mysterious Jewelry Disassembly Scroll"
+  },
+  {
+    "n": 2716,
+    "kind": "item",
+    "source": "Mystic Jar"
+  },
+  {
+    "n": 2717,
+    "kind": "item",
+    "source": "Mythbeast Bat"
+  },
+  {
+    "n": 2718,
+    "kind": "item",
+    "source": "Nagato"
+  },
+  {
+    "n": 2719,
+    "kind": "item",
+    "source": "Namecard Desa Air",
+    "reborn": "Namecard of Water Village Resident"
+  },
+  {
+    "n": 2720,
+    "kind": "item",
+    "source": "Namecard Desa Angin",
+    "reborn": "Namecard of Wind Village Resident"
+  },
+  {
+    "n": 2721,
+    "kind": "item",
+    "source": "Namecard Desa Api",
+    "reborn": "Namecard of Fire Village Resident"
+  },
+  {
+    "n": 2722,
+    "kind": "item",
+    "source": "Namecard Desa Petir",
+    "reborn": "Namecard of Lightning Village Resident"
+  },
+  {
+    "n": 2723,
+    "kind": "item",
+    "source": "Namecard Desa Tanah",
+    "reborn": "Namecard of Earth Village Resident"
+  },
+  {
+    "n": 2724,
+    "kind": "item",
+    "source": "Nanao Ise Namecard"
+  },
+  {
+    "n": 2725,
+    "kind": "item",
+    "source": "Nanas",
+    "reborn": "Pineapple"
+  },
+  {
+    "n": 2726,
+    "kind": "item",
+    "source": "Nara Shikamaru"
+  },
+  {
+    "n": 2727,
+    "kind": "item",
+    "source": "Nara Shikamaru Namecard"
+  },
+  {
+    "n": 2728,
+    "kind": "item",
+    "source": "Naruto's Sage Treasure"
+  },
+  {
+    "n": 2729,
+    "kind": "item",
+    "source": "National Amateur League Trophy"
+  },
+  {
+    "n": 2730,
+    "kind": "item",
+    "source": "National Elite League Trophy"
+  },
+  {
+    "n": 2731,
+    "kind": "item",
+    "source": "National Premier League Trophy"
+  },
+  {
+    "n": 2732,
+    "kind": "item",
+    "source": "National Professional League Trophy"
+  },
+  {
+    "n": 2733,
+    "kind": "item",
+    "source": "Natural Enemy",
+    "reborn": "Clan Picnic Box Lv.10"
+  },
+  {
+    "n": 2734,
+    "kind": "item",
+    "source": "Neji"
+  },
+  {
+    "n": 2735,
+    "kind": "item",
+    "source": "Nekomata＋0"
+  },
+  {
+    "n": 2736,
+    "kind": "item",
+    "source": "Nekomata＋1"
+  },
+  {
+    "n": 2737,
+    "kind": "item",
+    "source": "Nekomata＋10"
+  },
+  {
+    "n": 2738,
+    "kind": "item",
+    "source": "Nekomata＋11"
+  },
+  {
+    "n": 2739,
+    "kind": "item",
+    "source": "Nekomata＋12"
+  },
+  {
+    "n": 2740,
+    "kind": "item",
+    "source": "Nekomata＋13"
+  },
+  {
+    "n": 2741,
+    "kind": "item",
+    "source": "Nekomata＋14"
+  },
+  {
+    "n": 2742,
+    "kind": "item",
+    "source": "Nekomata＋15"
+  },
+  {
+    "n": 2743,
+    "kind": "item",
+    "source": "Nekomata＋16"
+  },
+  {
+    "n": 2744,
+    "kind": "item",
+    "source": "Nekomata＋17"
+  },
+  {
+    "n": 2745,
+    "kind": "item",
+    "source": "Nekomata＋18"
+  },
+  {
+    "n": 2746,
+    "kind": "item",
+    "source": "Nekomata＋19"
+  },
+  {
+    "n": 2747,
+    "kind": "item",
+    "source": "Nekomata＋2"
+  },
+  {
+    "n": 2748,
+    "kind": "item",
+    "source": "Nekomata＋20"
+  },
+  {
+    "n": 2749,
+    "kind": "item",
+    "source": "Nekomata＋21"
+  }
+]

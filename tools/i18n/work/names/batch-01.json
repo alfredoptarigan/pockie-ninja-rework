@@ -1,0 +1,1410 @@
+[
+  {
+    "n": 250,
+    "kind": "npc",
+    "source": "Nelliel",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 251,
+    "kind": "npc",
+    "source": "Nightmare Demon Guard"
+  },
+  {
+    "n": 252,
+    "kind": "npc",
+    "source": "Nightowl"
+  },
+  {
+    "n": 253,
+    "kind": "npc",
+    "source": "Nine-Headed Dragon",
+    "reborn": "Nine-Headed Dragon"
+  },
+  {
+    "n": 254,
+    "kind": "npc",
+    "source": "Ninja Hutan",
+    "reborn": "Forest Ninja"
+  },
+  {
+    "n": 255,
+    "kind": "npc",
+    "source": "Nnoitra",
+    "reborn": "Nnoitra"
+  },
+  {
+    "n": 256,
+    "kind": "npc",
+    "source": "Noxious Kappa",
+    "reborn": "Poisonous Marsh Knap"
+  },
+  {
+    "n": 257,
+    "kind": "npc",
+    "source": "Nurari"
+  },
+  {
+    "n": 258,
+    "kind": "npc",
+    "source": "Orochimaru"
+  },
+  {
+    "n": 259,
+    "kind": "npc",
+    "source": "Orochimaru",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 260,
+    "kind": "npc",
+    "source": "Pain",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 261,
+    "kind": "npc",
+    "source": "Pakkun",
+    "reborn": "Pakkun"
+  },
+  {
+    "n": 262,
+    "kind": "npc",
+    "source": "Pakkun"
+  },
+  {
+    "n": 263,
+    "kind": "npc",
+    "source": "Pedagang Keliling",
+    "reborn": "Traveling Merchant"
+  },
+  {
+    "n": 264,
+    "kind": "npc",
+    "source": "Pedagang Keliling"
+  },
+  {
+    "n": 265,
+    "kind": "npc",
+    "source": "Pedagang Misterius"
+  },
+  {
+    "n": 266,
+    "kind": "npc",
+    "source": "Pedagang Misterius di Toko Misteri",
+    "reborn": "Card Master"
+  },
+  {
+    "n": 267,
+    "kind": "npc",
+    "source": "Pemancing",
+    "reborn": "Fisherman"
+  },
+  {
+    "n": 268,
+    "kind": "npc",
+    "source": "Pemburu",
+    "reborn": "Hunter"
+  },
+  {
+    "n": 269,
+    "kind": "npc",
+    "source": "Pemburu"
+  },
+  {
+    "n": 270,
+    "kind": "npc",
+    "source": "Pendekar Pedang",
+    "reborn": "Ninja Troop Commander"
+  },
+  {
+    "n": 271,
+    "kind": "npc",
+    "source": "Penjaga Kota Iblis di Kota Iblis",
+    "reborn": "Demon City Guard"
+  },
+  {
+    "n": 272,
+    "kind": "npc",
+    "source": "Penyihir",
+    "reborn": "Miko"
+  },
+  {
+    "n": 273,
+    "kind": "npc",
+    "source": "Perampok",
+    "reborn": "Bandit"
+  },
+  {
+    "n": 274,
+    "kind": "npc",
+    "source": "Petualang"
+  },
+  {
+    "n": 275,
+    "kind": "npc",
+    "source": "Petugas di Pasar",
+    "reborn": "Pet Rearing Employee"
+  },
+  {
+    "n": 276,
+    "kind": "npc",
+    "source": "Petugas di Pasar"
+  },
+  {
+    "n": 277,
+    "kind": "npc",
+    "source": "Plague Demon"
+  },
+  {
+    "n": 278,
+    "kind": "npc",
+    "source": "Plague Lich"
+  },
+  {
+    "n": 279,
+    "kind": "npc",
+    "source": "Puppet Warrior"
+  },
+  {
+    "n": 280,
+    "kind": "npc",
+    "source": "Rangiku Matsumoto"
+  },
+  {
+    "n": 281,
+    "kind": "npc",
+    "source": "Riceball Monster",
+    "reborn": "Meal"
+  },
+  {
+    "n": 282,
+    "kind": "npc",
+    "source": "Righteous Bandit Saizon",
+    "reborn": "The Righteous Thief"
+  },
+  {
+    "n": 283,
+    "kind": "npc",
+    "source": "Rippling Demon"
+  },
+  {
+    "n": 284,
+    "kind": "npc",
+    "source": "Roaring Demon Ape",
+    "reborn": "Roar Demon Ape"
+  },
+  {
+    "n": 285,
+    "kind": "npc",
+    "source": "Rock Lee"
+  },
+  {
+    "n": 286,
+    "kind": "npc",
+    "source": "Roy",
+    "reborn": "Roy"
+  },
+  {
+    "n": 287,
+    "kind": "npc",
+    "source": "Roy",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 288,
+    "kind": "npc",
+    "source": "Rudobon",
+    "reborn": "Rudobon"
+  },
+  {
+    "n": 289,
+    "kind": "npc",
+    "source": "Rull",
+    "reborn": "Rull"
+  },
+  {
+    "n": 290,
+    "kind": "npc",
+    "source": "Sakura Haruno"
+  },
+  {
+    "n": 291,
+    "kind": "npc",
+    "source": "Samehada"
+  },
+  {
+    "n": 292,
+    "kind": "npc",
+    "source": "Sand Spirit"
+  },
+  {
+    "n": 293,
+    "kind": "npc",
+    "source": "Sasori",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 294,
+    "kind": "npc",
+    "source": "Sasuke",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 295,
+    "kind": "npc",
+    "source": "Scarlet Bandit",
+    "reborn": "Scarlet"
+  },
+  {
+    "n": 296,
+    "kind": "npc",
+    "source": "Scorching Demon",
+    "reborn": "Sorching Demon"
+  },
+  {
+    "n": 297,
+    "kind": "npc",
+    "source": "Scorpion"
+  },
+  {
+    "n": 298,
+    "kind": "npc",
+    "source": "Secret Tunnel Sentry",
+    "reborn": "Sentry"
+  },
+  {
+    "n": 299,
+    "kind": "npc",
+    "source": "Senyo of the Forest",
+    "reborn": "Senyo of the Forest"
+  },
+  {
+    "n": 300,
+    "kind": "npc",
+    "source": "Shadow Bat",
+    "reborn": "Shadow Bat"
+  },
+  {
+    "n": 301,
+    "kind": "npc",
+    "source": "Shihouin Yoruichi",
+    "reborn": "Yoruichi Shihouin"
+  },
+  {
+    "n": 302,
+    "kind": "npc",
+    "source": "Shihouin Yoruichi",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 303,
+    "kind": "npc",
+    "source": "Skeleton Soldier",
+    "reborn": "Skeleton Swordsman"
+  },
+  {
+    "n": 304,
+    "kind": "npc",
+    "source": "Soifon"
+  },
+  {
+    "n": 305,
+    "kind": "npc",
+    "source": "Soifon",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 306,
+    "kind": "npc",
+    "source": "Soulblade Demon"
+  },
+  {
+    "n": 307,
+    "kind": "npc",
+    "source": "Soulender"
+  },
+  {
+    "n": 308,
+    "kind": "npc",
+    "source": "Spiralwind Dancer",
+    "reborn": "Whirlwind"
+  },
+  {
+    "n": 309,
+    "kind": "npc",
+    "source": "Starrk",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 310,
+    "kind": "npc",
+    "source": "Stinger Bee",
+    "reborn": "Bee"
+  },
+  {
+    "n": 311,
+    "kind": "npc",
+    "source": "Sunflower",
+    "reborn": "Sunflower"
+  },
+  {
+    "n": 312,
+    "kind": "npc",
+    "source": "Sunrise Brigand",
+    "reborn": "Sunrise Brigand"
+  },
+  {
+    "n": 313,
+    "kind": "npc",
+    "source": "Sunset Bat"
+  },
+  {
+    "n": 314,
+    "kind": "npc",
+    "source": "Sunset Bee"
+  },
+  {
+    "n": 315,
+    "kind": "npc",
+    "source": "Sushi Monster",
+    "reborn": "Sushi"
+  },
+  {
+    "n": 316,
+    "kind": "npc",
+    "source": "Sweet Potato Demon",
+    "reborn": "Potato"
+  },
+  {
+    "n": 317,
+    "kind": "npc",
+    "source": "Swiftwind Demon Soldier"
+  },
+  {
+    "n": 318,
+    "kind": "npc",
+    "source": "Szayel Aporro",
+    "reborn": "Szayelaporro"
+  },
+  {
+    "n": 319,
+    "kind": "npc",
+    "source": "Tenten"
+  },
+  {
+    "n": 320,
+    "kind": "npc",
+    "source": "Thorn Crown Dragon"
+  },
+  {
+    "n": 321,
+    "kind": "npc",
+    "source": "Thunder Dragon"
+  },
+  {
+    "n": 322,
+    "kind": "npc",
+    "source": "Thunderbolt Warrior",
+    "reborn": "Thunderbolt Warrior"
+  },
+  {
+    "n": 323,
+    "kind": "npc",
+    "source": "Thunderbore Dragon"
+  },
+  {
+    "n": 324,
+    "kind": "npc",
+    "source": "Thundercloud Demon Soldier"
+  },
+  {
+    "n": 325,
+    "kind": "npc",
+    "source": "Thundering Demon"
+  },
+  {
+    "n": 326,
+    "kind": "npc",
+    "source": "Thunderwing Dragon"
+  },
+  {
+    "n": 327,
+    "kind": "npc",
+    "source": "Thunderwing Dragon",
+    "reborn": "Lei Pterosaur"
+  },
+  {
+    "n": 328,
+    "kind": "npc",
+    "source": "Toad Dragon",
+    "reborn": "Toad Dragon"
+  },
+  {
+    "n": 329,
+    "kind": "npc",
+    "source": "Toad Sovereign",
+    "reborn": "Lord Toad"
+  },
+  {
+    "n": 330,
+    "kind": "npc",
+    "source": "Treant",
+    "reborn": "Tree Ent"
+  },
+  {
+    "n": 331,
+    "kind": "npc",
+    "source": "Tsunade",
+    "reborn": "Tsunade"
+  },
+  {
+    "n": 332,
+    "kind": "npc",
+    "source": "Twin Head Dragon",
+    "reborn": "Double Headed Dragon"
+  },
+  {
+    "n": 333,
+    "kind": "npc",
+    "source": "Uchiha Itachi"
+  },
+  {
+    "n": 334,
+    "kind": "npc",
+    "source": "Uchiha Itachi",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 335,
+    "kind": "npc",
+    "source": "Uchiha Sasuke"
+  },
+  {
+    "n": 336,
+    "kind": "npc",
+    "source": "Uesuki Saki",
+    "reborn": "Uesugi Saski"
+  },
+  {
+    "n": 337,
+    "kind": "npc",
+    "source": "Ulquiorra"
+  },
+  {
+    "n": 338,
+    "kind": "npc",
+    "source": "Ulquiorra",
+    "reborn": "Ulquiorra"
+  },
+  {
+    "n": 339,
+    "kind": "npc",
+    "source": "Unohana Retsu",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 340,
+    "kind": "npc",
+    "source": "Uzumaki Naruto"
+  },
+  {
+    "n": 341,
+    "kind": "npc",
+    "source": "Valley Bandit"
+  },
+  {
+    "n": 342,
+    "kind": "npc",
+    "source": "Venomfog Demon",
+    "reborn": "Fog Monster"
+  },
+  {
+    "n": 343,
+    "kind": "npc",
+    "source": "Vulture",
+    "reborn": "Vulture"
+  },
+  {
+    "n": 344,
+    "kind": "npc",
+    "source": "Wanita Ninja Pengintai"
+  },
+  {
+    "n": 345,
+    "kind": "npc",
+    "source": "Warfrenzy Demon"
+  },
+  {
+    "n": 346,
+    "kind": "npc",
+    "source": "Warrior of Darkness",
+    "reborn": "Warrior of Darkness"
+  },
+  {
+    "n": 347,
+    "kind": "npc",
+    "source": "Whirlwind Demon"
+  },
+  {
+    "n": 348,
+    "kind": "npc",
+    "source": "White Ulquiorra"
+  },
+  {
+    "n": 349,
+    "kind": "npc",
+    "source": "White Ulquiorra",
+    "reborn": "White Ulquiorra"
+  },
+  {
+    "n": 350,
+    "kind": "npc",
+    "source": "Wildboar King",
+    "reborn": "1M EXP"
+  },
+  {
+    "n": 351,
+    "kind": "npc",
+    "source": "Wildhaired Banshee",
+    "reborn": "Banshee"
+  },
+  {
+    "n": 352,
+    "kind": "npc",
+    "source": "Wind Dragon"
+  },
+  {
+    "n": 353,
+    "kind": "npc",
+    "source": "Windbore Dragon"
+  },
+  {
+    "n": 354,
+    "kind": "npc",
+    "source": "Windwing Dragon"
+  },
+  {
+    "n": 355,
+    "kind": "npc",
+    "source": "Windwing Dragon",
+    "reborn": "Wild Pterosaur"
+  },
+  {
+    "n": 356,
+    "kind": "npc",
+    "source": "Yamanaka Ino"
+  },
+  {
+    "n": 357,
+    "kind": "npc",
+    "source": "Yammy",
+    "reborn": "Flower Demon"
+  },
+  {
+    "n": 358,
+    "kind": "npc",
+    "source": "Yimoji di Inn"
+  },
+  {
+    "n": 359,
+    "kind": "outfit",
+    "source": "2nd Hokage",
+    "reborn": "2nd Hokage"
+  },
+  {
+    "n": 360,
+    "kind": "outfit",
+    "source": "3rd Hokage",
+    "reborn": "3rd Hokage"
+  },
+  {
+    "n": 361,
+    "kind": "outfit",
+    "source": "4th Hokage",
+    "reborn": "4th Hokage"
+  },
+  {
+    "n": 362,
+    "kind": "outfit",
+    "source": "Abarai Renji",
+    "reborn": "Renji Abarai"
+  },
+  {
+    "n": 363,
+    "kind": "outfit",
+    "source": "Alice",
+    "reborn": "Alice"
+  },
+  {
+    "n": 364,
+    "kind": "outfit",
+    "source": "Arale",
+    "reborn": "Test Character"
+  },
+  {
+    "n": 365,
+    "kind": "outfit",
+    "source": "Arisawa Tatsuki",
+    "reborn": "Tatsuki Arisawa"
+  },
+  {
+    "n": 366,
+    "kind": "outfit",
+    "source": "Asuma Sarutobi",
+    "reborn": "Asuma Sarutobi"
+  },
+  {
+    "n": 367,
+    "kind": "outfit",
+    "source": "Bomb Ichigo",
+    "reborn": "Hollowified Ichigo"
+  },
+  {
+    "n": 368,
+    "kind": "outfit",
+    "source": "Bomb Rukia"
+  },
+  {
+    "n": 369,
+    "kind": "outfit",
+    "source": "Christmas Boy",
+    "reborn": "Christmas (Male)"
+  },
+  {
+    "n": 370,
+    "kind": "outfit",
+    "source": "Christmas Girl",
+    "reborn": "Christmas (Female)"
+  },
+  {
+    "n": 371,
+    "kind": "outfit",
+    "source": "Ggio Vega",
+    "reborn": "Ggio Vega"
+  },
+  {
+    "n": 372,
+    "kind": "outfit",
+    "source": "Ghost Lady",
+    "reborn": "Phantom Lady"
+  },
+  {
+    "n": 373,
+    "kind": "outfit",
+    "source": "Grimmjow",
+    "reborn": "Grimmjow Jaegerjaquez"
+  },
+  {
+    "n": 374,
+    "kind": "outfit",
+    "source": "Haku",
+    "reborn": "Haku"
+  },
+  {
+    "n": 375,
+    "kind": "outfit",
+    "source": "Halibel",
+    "reborn": "Halibel"
+  },
+  {
+    "n": 376,
+    "kind": "outfit",
+    "source": "Hatake Kakashi",
+    "reborn": "Kakashi Hatake"
+  },
+  {
+    "n": 377,
+    "kind": "outfit",
+    "source": "Hebi Sasuke",
+    "reborn": "Hebi Sasuke"
+  },
+  {
+    "n": 378,
+    "kind": "outfit",
+    "source": "Hime"
+  },
+  {
+    "n": 379,
+    "kind": "outfit",
+    "source": "Hirako Shinji",
+    "reborn": "Shinji Hirako"
+  },
+  {
+    "n": 380,
+    "kind": "outfit",
+    "source": "Hitsugaya Toushiro",
+    "reborn": "Toshiro Hitsugaya"
+  },
+  {
+    "n": 381,
+    "kind": "outfit",
+    "source": "Hollowfied Grimmjow",
+    "reborn": "Released Grimmjow"
+  },
+  {
+    "n": 382,
+    "kind": "outfit",
+    "source": "Hollowfied Hirako Shinji",
+    "reborn": "Hollowified Shinji"
+  },
+  {
+    "n": 383,
+    "kind": "outfit",
+    "source": "Hyuga Neji",
+    "reborn": "Neji Hyuga"
+  },
+  {
+    "n": 384,
+    "kind": "outfit",
+    "source": "Jiraiya",
+    "reborn": "Jiraiya"
+  },
+  {
+    "n": 385,
+    "kind": "outfit",
+    "source": "Karin",
+    "reborn": "Karin"
+  },
+  {
+    "n": 386,
+    "kind": "outfit",
+    "source": "Konan",
+    "reborn": "Konan"
+  },
+  {
+    "n": 387,
+    "kind": "outfit",
+    "source": "Konan",
+    "reborn": "Test Character"
+  },
+  {
+    "n": 388,
+    "kind": "outfit",
+    "source": "Kotetsu Isane",
+    "reborn": "Isane Kotetsu"
+  },
+  {
+    "n": 389,
+    "kind": "outfit",
+    "source": "Kuchiki Byakuya",
+    "reborn": "Byakuya Kuchiki"
+  },
+  {
+    "n": 390,
+    "kind": "outfit",
+    "source": "Kurotsuchi Nemu",
+    "reborn": "Nemu Kurotsuchi"
+  },
+  {
+    "n": 391,
+    "kind": "outfit",
+    "source": "Kusajishi Yachiru",
+    "reborn": "Yachiru Kusajishi"
+  },
+  {
+    "n": 392,
+    "kind": "outfit",
+    "source": "Little Jun",
+    "reborn": "Little Jun"
+  },
+  {
+    "n": 393,
+    "kind": "outfit",
+    "source": "Little Meng",
+    "reborn": "Little Meng"
+  },
+  {
+    "n": 394,
+    "kind": "outfit",
+    "source": "Love Aikawa",
+    "reborn": "Love Aikawa"
+  },
+  {
+    "n": 395,
+    "kind": "outfit",
+    "source": "Mashiro Kuna",
+    "reborn": "Mashiro Kuna"
+  },
+  {
+    "n": 396,
+    "kind": "outfit",
+    "source": "Mitarashi Anko",
+    "reborn": "Anko Mitarashi"
+  },
+  {
+    "n": 397,
+    "kind": "outfit",
+    "source": "Mizukage",
+    "reborn": "5th Mizukage"
+  },
+  {
+    "n": 398,
+    "kind": "outfit",
+    "source": "Momochi Zabuza",
+    "reborn": "Zabuza Momochi"
+  },
+  {
+    "n": 399,
+    "kind": "outfit",
+    "source": "Nel"
+  },
+  {
+    "n": 400,
+    "kind": "outfit",
+    "source": "Nelliel",
+    "reborn": "Nelliel"
+  },
+  {
+    "n": 401,
+    "kind": "outfit",
+    "source": "Nine-tailed Naruto",
+    "reborn": "Kyuubi Naruto"
+  },
+  {
+    "n": 402,
+    "kind": "outfit",
+    "source": "Pain",
+    "reborn": "Pain"
+  },
+  {
+    "n": 403,
+    "kind": "outfit",
+    "source": "Priest"
+  },
+  {
+    "n": 404,
+    "kind": "outfit",
+    "source": "Sage Naruto",
+    "reborn": "Sage Naruto"
+  },
+  {
+    "n": 405,
+    "kind": "outfit",
+    "source": "Sarugaki Hiyori",
+    "reborn": "Hiyori Sarugaki"
+  },
+  {
+    "n": 406,
+    "kind": "outfit",
+    "source": "Shiba Kuukaku",
+    "reborn": "Kukaku Shiba"
+  },
+  {
+    "n": 407,
+    "kind": "outfit",
+    "source": "Shizune",
+    "reborn": "Shizune"
+  },
+  {
+    "n": 408,
+    "kind": "outfit",
+    "source": "Suigetsu",
+    "reborn": "Suigetsu Hozuki"
+  },
+  {
+    "n": 409,
+    "kind": "outfit",
+    "source": "Temari",
+    "reborn": "Temari"
+  },
+  {
+    "n": 410,
+    "kind": "outfit",
+    "source": "Tsunade",
+    "reborn": "Tsunade"
+  },
+  {
+    "n": 411,
+    "kind": "outfit",
+    "source": "Unohana Retsu Kostum",
+    "reborn": "Retsu Unohana"
+  },
+  {
+    "n": 412,
+    "kind": "outfit",
+    "source": "White Ichigo",
+    "reborn": "White Ichigo"
+  },
+  {
+    "n": 413,
+    "kind": "outfit",
+    "source": "Witch",
+    "reborn": "Witch"
+  },
+  {
+    "n": 414,
+    "kind": "outfit",
+    "source": "Yadomaru Sasha",
+    "reborn": "Lisa Yadomaru"
+  },
+  {
+    "n": 415,
+    "kind": "outfit",
+    "source": "Yamato",
+    "reborn": "Yamato"
+  },
+  {
+    "n": 416,
+    "kind": "outfit",
+    "source": "Zangetsu",
+    "reborn": "Zangetsu"
+  },
+  {
+    "n": 417,
+    "kind": "outfit",
+    "source": "Zombie Lady"
+  },
+  {
+    "n": 418,
+    "kind": "skill",
+    "source": "Alat Ninja",
+    "reborn": "Sealing Technique"
+  },
+  {
+    "n": 419,
+    "kind": "skill",
+    "source": "Assassinate"
+  },
+  {
+    "n": 420,
+    "kind": "skill",
+    "source": "Assassinate",
+    "reborn": "Assassinate"
+  },
+  {
+    "n": 421,
+    "kind": "skill",
+    "source": "Body Technique",
+    "reborn": "Ninja Tool"
+  },
+  {
+    "n": 422,
+    "kind": "skill",
+    "source": "Bomb"
+  },
+  {
+    "n": 423,
+    "kind": "skill",
+    "source": "Bomb",
+    "reborn": "Bomb"
+  },
+  {
+    "n": 424,
+    "kind": "skill",
+    "source": "Cairan"
+  },
+  {
+    "n": 425,
+    "kind": "skill",
+    "source": "Cairan",
+    "reborn": "Liquor"
+  },
+  {
+    "n": 426,
+    "kind": "skill",
+    "source": "Chakura Katana"
+  },
+  {
+    "n": 427,
+    "kind": "skill",
+    "source": "Chakura Katana",
+    "reborn": "Chakra Blade"
+  },
+  {
+    "n": 428,
+    "kind": "skill",
+    "source": "Chidori No Jutsu"
+  },
+  {
+    "n": 429,
+    "kind": "skill",
+    "source": "Chidori No Jutsu",
+    "reborn": "Chidori"
+  },
+  {
+    "n": 430,
+    "kind": "skill",
+    "source": "Dai kyōdo"
+  },
+  {
+    "n": 431,
+    "kind": "skill",
+    "source": "Dai kyōdo",
+    "reborn": "Great Strength"
+  },
+  {
+    "n": 432,
+    "kind": "skill",
+    "source": "Doro kabe No Jutsu"
+  },
+  {
+    "n": 433,
+    "kind": "skill",
+    "source": "Doro kabe No Jutsu",
+    "reborn": "Mud Wall"
+  },
+  {
+    "n": 434,
+    "kind": "skill",
+    "source": "Doroku Gaeshi"
+  },
+  {
+    "n": 435,
+    "kind": "skill",
+    "source": "Doroku Gaeshi",
+    "reborn": "Great Mud River"
+  },
+  {
+    "n": 436,
+    "kind": "skill",
+    "source": "Doryuuheki"
+  },
+  {
+    "n": 437,
+    "kind": "skill",
+    "source": "Doryuuheki",
+    "reborn": "Earth Prison"
+  },
+  {
+    "n": 438,
+    "kind": "skill",
+    "source": "Doton",
+    "reborn": "Lightning Release"
+  },
+  {
+    "n": 439,
+    "kind": "skill",
+    "source": "En Katon no Jutsu"
+  },
+  {
+    "n": 440,
+    "kind": "skill",
+    "source": "Furaingu raijin No Jutsu"
+  },
+  {
+    "n": 441,
+    "kind": "skill",
+    "source": "Furaingu raijin No Jutsu",
+    "reborn": "Flying Thunder God"
+  },
+  {
+    "n": 442,
+    "kind": "skill",
+    "source": "Geirupamu  No Jutsu"
+  },
+  {
+    "n": 443,
+    "kind": "skill",
+    "source": "Geirupamu  No Jutsu",
+    "reborn": "Gale Palm"
+  },
+  {
+    "n": 444,
+    "kind": "skill",
+    "source": "Healing Jutsu"
+  },
+  {
+    "n": 445,
+    "kind": "skill",
+    "source": "Inori"
+  },
+  {
+    "n": 446,
+    "kind": "skill",
+    "source": "Inori",
+    "reborn": "Prayer"
+  },
+  {
+    "n": 447,
+    "kind": "skill",
+    "source": "Jeratan"
+  },
+  {
+    "n": 448,
+    "kind": "skill",
+    "source": "Jeratan",
+    "reborn": "Snared"
+  },
+  {
+    "n": 449,
+    "kind": "skill",
+    "source": "Jinnikuken"
+  },
+  {
+    "n": 450,
+    "kind": "skill",
+    "source": "Jinnikuken",
+    "reborn": "Quickstep"
+  },
+  {
+    "n": 451,
+    "kind": "skill",
+    "source": "Kaminari",
+    "reborn": "Wind Release"
+  },
+  {
+    "n": 452,
+    "kind": "skill",
+    "source": "Katon",
+    "reborn": "Water Release"
+  },
+  {
+    "n": 453,
+    "kind": "skill",
+    "source": "Katon no Jutsu"
+  },
+  {
+    "n": 454,
+    "kind": "skill",
+    "source": "Katon no Jutsu",
+    "reborn": "Fireball"
+  },
+  {
+    "n": 455,
+    "kind": "skill",
+    "source": "Kawarimi no jutsu"
+  },
+  {
+    "n": 456,
+    "kind": "skill",
+    "source": "Kawarimi no jutsu",
+    "reborn": "Substitution Technique"
+  },
+  {
+    "n": 457,
+    "kind": "skill",
+    "source": "Kaze",
+    "reborn": "Body Technique"
+  },
+  {
+    "n": 458,
+    "kind": "skill",
+    "source": "Ketsueki futto"
+  },
+  {
+    "n": 459,
+    "kind": "skill",
+    "source": "Ketsueki futto",
+    "reborn": "Bloodboil"
+  },
+  {
+    "n": 460,
+    "kind": "skill",
+    "source": "Kibaku nendo No Jutsu"
+  },
+  {
+    "n": 461,
+    "kind": "skill",
+    "source": "Kibaku nendo No Jutsu",
+    "reborn": "Detonating Clay"
+  },
+  {
+    "n": 462,
+    "kind": "skill",
+    "source": "Kiri ga hi hyoji"
+  },
+  {
+    "n": 463,
+    "kind": "skill",
+    "source": "Kiri ga hi hyoji",
+    "reborn": "Mist-Hide"
+  },
+  {
+    "n": 464,
+    "kind": "skill",
+    "source": "Kurisutaruburedo"
+  },
+  {
+    "n": 465,
+    "kind": "skill",
+    "source": "Kurisutaruburedo",
+    "reborn": "Crystal Blade"
+  },
+  {
+    "n": 466,
+    "kind": "skill",
+    "source": "Mangekyou sharingan"
+  },
+  {
+    "n": 467,
+    "kind": "skill",
+    "source": "Mangekyou sharingan",
+    "reborn": "Death Mirage Jutsu"
+  },
+  {
+    "n": 468,
+    "kind": "skill",
+    "source": "None"
+  },
+  {
+    "n": 469,
+    "kind": "skill",
+    "source": "O-juu hāto"
+  },
+  {
+    "n": 470,
+    "kind": "skill",
+    "source": "O-juu hāto",
+    "reborn": "Tailed Beast Heart"
+  },
+  {
+    "n": 471,
+    "kind": "skill",
+    "source": "pamu gijutsu"
+  },
+  {
+    "n": 472,
+    "kind": "skill",
+    "source": "pamu gijutsu",
+    "reborn": "Mystical Palm Technique"
+  },
+  {
+    "n": 473,
+    "kind": "skill",
+    "source": "Pre-Healing Jutsu"
+  },
+  {
+    "n": 474,
+    "kind": "skill",
+    "source": "Pre-Healing Jutsu",
+    "reborn": "Pre-Healing Jutsu"
+  },
+  {
+    "n": 475,
+    "kind": "skill",
+    "source": "Puppet"
+  },
+  {
+    "n": 476,
+    "kind": "skill",
+    "source": "Puppet",
+    "reborn": "Puppet"
+  },
+  {
+    "n": 477,
+    "kind": "skill",
+    "source": "Rasengan"
+  },
+  {
+    "n": 478,
+    "kind": "skill",
+    "source": "Rasengan",
+    "reborn": "Rasengan"
+  },
+  {
+    "n": 479,
+    "kind": "skill",
+    "source": "Rōtasusukiru No Jutsu"
+  },
+  {
+    "n": 480,
+    "kind": "skill",
+    "source": "Rōtasusukiru No Jutsu",
+    "reborn": "Lotus"
+  },
+  {
+    "n": 481,
+    "kind": "skill",
+    "source": "Sabaki no Genki No Jutsu"
+  },
+  {
+    "n": 482,
+    "kind": "skill",
+    "source": "Sabaki no Genki No Jutsu",
+    "reborn": "Windstorm Array"
+  },
+  {
+    "n": 483,
+    "kind": "skill",
+    "source": "Sandki No Jutsu"
+  },
+  {
+    "n": 484,
+    "kind": "skill",
+    "source": "Sandki No Jutsu",
+    "reborn": "Thunderfall"
+  },
+  {
+    "n": 485,
+    "kind": "skill",
+    "source": "Sansetto"
+  },
+  {
+    "n": 486,
+    "kind": "skill",
+    "source": "Sansetto",
+    "reborn": "Sunset"
+  },
+  {
+    "n": 487,
+    "kind": "skill",
+    "source": "seishitsu henka"
+  },
+  {
+    "n": 488,
+    "kind": "skill",
+    "source": "seishitsu henka",
+    "reborn": "Five Elements Seal"
+  },
+  {
+    "n": 489,
+    "kind": "skill",
+    "source": "Seiteki firudo No Jutsu"
+  },
+  {
+    "n": 490,
+    "kind": "skill",
+    "source": "Seiteki fīrudo No Jutsu",
+    "reborn": "Static Field"
+  },
+  {
+    "n": 491,
+    "kind": "skill",
+    "source": "Sexy No Jutsu"
+  },
+  {
+    "n": 492,
+    "kind": "skill",
+    "source": "Sexy No Jutsu",
+    "reborn": "Sexy Technique"
+  },
+  {
+    "n": 493,
+    "kind": "skill",
+    "source": "Shi no tenshi Jutsu"
+  },
+  {
+    "n": 494,
+    "kind": "skill",
+    "source": "Shi no tenshi Jutsu",
+    "reborn": "Dead Demon Consuming Seal"
+  },
+  {
+    "n": 495,
+    "kind": "skill",
+    "source": "Shikon no Jutsu"
+  },
+  {
+    "n": 496,
+    "kind": "skill",
+    "source": "Shikon no Jutsu",
+    "reborn": "Eight Trigram Palm"
+  },
+  {
+    "n": 497,
+    "kind": "skill",
+    "source": "Shinsei no Jutsu"
+  },
+  {
+    "n": 498,
+    "kind": "skill",
+    "source": "Shinsei no Jutsu",
+    "reborn": "Creation Rebirth"
+  },
+  {
+    "n": 499,
+    "kind": "skill",
+    "source": "Shintenshin no Jutsu"
+  }
+]

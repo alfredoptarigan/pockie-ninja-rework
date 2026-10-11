@@ -1,0 +1,1308 @@
+[
+  {
+    "n": 750,
+    "kind": "quest",
+    "source": "Kembali ke Pantai[Ⅳ]"
+  },
+  {
+    "n": 751,
+    "kind": "quest",
+    "source": "Kemenangan Kembali"
+  },
+  {
+    "n": 752,
+    "kind": "quest",
+    "source": "Kemurkaan Roh Angin"
+  },
+  {
+    "n": 753,
+    "kind": "quest",
+    "source": "Kentang dan Batu Permata"
+  },
+  {
+    "n": 754,
+    "kind": "quest",
+    "source": "Kepala Perampok"
+  },
+  {
+    "n": 755,
+    "kind": "quest",
+    "source": "Kerapuhan Angin"
+  },
+  {
+    "n": 756,
+    "kind": "quest",
+    "source": "Kerapuhan Hutan"
+  },
+  {
+    "n": 757,
+    "kind": "quest",
+    "source": "Keseimbangan Alam"
+  },
+  {
+    "n": 758,
+    "kind": "quest",
+    "source": "Keseimbangan Lingkungan"
+  },
+  {
+    "n": 759,
+    "kind": "quest",
+    "source": "Keseimbangan Pantai"
+  },
+  {
+    "n": 760,
+    "kind": "quest",
+    "source": "Kesialan di pantai"
+  },
+  {
+    "n": 761,
+    "kind": "quest",
+    "source": "Ketua Ninja Hutan"
+  },
+  {
+    "n": 762,
+    "kind": "quest",
+    "source": "Klaim Gift Box"
+  },
+  {
+    "n": 763,
+    "kind": "quest",
+    "source": "Klaim Gift Box[Ⅰ]"
+  },
+  {
+    "n": 764,
+    "kind": "quest",
+    "source": "Klaim Gift Box[Ⅱ]"
+  },
+  {
+    "n": 765,
+    "kind": "quest",
+    "source": "Klaim Gift Box[Ⅲ]"
+  },
+  {
+    "n": 766,
+    "kind": "quest",
+    "source": "Klaim Gift Box[Ⅳ]"
+  },
+  {
+    "n": 767,
+    "kind": "quest",
+    "source": "Klaim Gift Box[Ⅴ]"
+  },
+  {
+    "n": 768,
+    "kind": "quest",
+    "source": "Koleksi Kartu Nama"
+  },
+  {
+    "n": 769,
+    "kind": "quest",
+    "source": "Krisis",
+    "reborn": "crisis"
+  },
+  {
+    "n": 770,
+    "kind": "quest",
+    "source": "Krisis"
+  },
+  {
+    "n": 771,
+    "kind": "quest",
+    "source": "Krisis Pegunungan",
+    "reborn": "Mountain Crisis"
+  },
+  {
+    "n": 772,
+    "kind": "quest",
+    "source": "Krisis Pegunungan"
+  },
+  {
+    "n": 773,
+    "kind": "quest",
+    "source": "Kumpulkan Foreign Matter"
+  },
+  {
+    "n": 774,
+    "kind": "quest",
+    "source": "Kumpulkan Namecard"
+  },
+  {
+    "n": 775,
+    "kind": "quest",
+    "source": "Kunjungi Ketua Desa"
+  },
+  {
+    "n": 776,
+    "kind": "quest",
+    "source": "Kunjungi Ketua Ninja"
+  },
+  {
+    "n": 777,
+    "kind": "quest",
+    "source": "Kunjungi Matchmaker"
+  },
+  {
+    "n": 778,
+    "kind": "quest",
+    "source": "Lagu Perayu"
+  },
+  {
+    "n": 779,
+    "kind": "quest",
+    "source": "Laporan",
+    "reborn": "Report"
+  },
+  {
+    "n": 780,
+    "kind": "quest",
+    "source": "Laporan"
+  },
+  {
+    "n": 781,
+    "kind": "quest",
+    "source": "Larutan Mineral"
+  },
+  {
+    "n": 782,
+    "kind": "quest",
+    "source": "Latihan Bertarung[I]"
+  },
+  {
+    "n": 783,
+    "kind": "quest",
+    "source": "Latihan Bertarung[II]"
+  },
+  {
+    "n": 784,
+    "kind": "quest",
+    "source": "Latihan Combo"
+  },
+  {
+    "n": 785,
+    "kind": "quest",
+    "source": "Latihan Ninjutsu",
+    "reborn": "Ninjutsu Training"
+  },
+  {
+    "n": 786,
+    "kind": "quest",
+    "source": "Latihan Ninjutsu"
+  },
+  {
+    "n": 787,
+    "kind": "quest",
+    "source": "Learn of the Dragons"
+  },
+  {
+    "n": 788,
+    "kind": "quest",
+    "source": "Lembut Laksana Hutan"
+  },
+  {
+    "n": 789,
+    "kind": "quest",
+    "source": "Lempar telur busuk"
+  },
+  {
+    "n": 790,
+    "kind": "quest",
+    "source": "Liga Nasional"
+  },
+  {
+    "n": 791,
+    "kind": "quest",
+    "source": "Lihat Ranking"
+  },
+  {
+    "n": 792,
+    "kind": "quest",
+    "source": "Lilin Suci",
+    "reborn": "Demon Candle"
+  },
+  {
+    "n": 793,
+    "kind": "quest",
+    "source": "Lilin Suci"
+  },
+  {
+    "n": 794,
+    "kind": "quest",
+    "source": "Mall Item"
+  },
+  {
+    "n": 795,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Welcome, Young Ninja"
+  },
+  {
+    "n": 796,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Equip Your Gear"
+  },
+  {
+    "n": 797,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "First Blood"
+  },
+  {
+    "n": 798,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Hidden Potential"
+  },
+  {
+    "n": 799,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Art of Enhancement"
+  },
+  {
+    "n": 800,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Refining Excellence"
+  },
+  {
+    "n": 801,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Gem Socketing"
+  },
+  {
+    "n": 802,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Magical Enchantments"
+  },
+  {
+    "n": 803,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Inscription Arts"
+  },
+  {
+    "n": 804,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Recast Your Destiny"
+  },
+  {
+    "n": 805,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Leave Your Mark"
+  },
+  {
+    "n": 806,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Summoning Contract"
+  },
+  {
+    "n": 807,
+    "kind": "quest",
+    "source": "Master Arena",
+    "reborn": "Hatch Your Partner"
+  },
+  {
+    "n": 808,
+    "kind": "quest",
+    "source": "Masuk Rumah"
+  },
+  {
+    "n": 809,
+    "kind": "quest",
+    "source": "Material Senjata"
+  },
+  {
+    "n": 810,
+    "kind": "quest",
+    "source": "Melampaui"
+  },
+  {
+    "n": 811,
+    "kind": "quest",
+    "source": "Melaporkan Diri",
+    "reborn": "return"
+  },
+  {
+    "n": 812,
+    "kind": "quest",
+    "source": "Melaporkan Diri"
+  },
+  {
+    "n": 813,
+    "kind": "quest",
+    "source": "Melaporkan ke Ketua"
+  },
+  {
+    "n": 814,
+    "kind": "quest",
+    "source": "Melihat Attributes"
+  },
+  {
+    "n": 815,
+    "kind": "quest",
+    "source": "Melindungi Jalan Rahasia"
+  },
+  {
+    "n": 816,
+    "kind": "quest",
+    "source": "Membangun Desa Kembali",
+    "reborn": "Rebuild the village"
+  },
+  {
+    "n": 817,
+    "kind": "quest",
+    "source": "Membangun Desa Kembali"
+  },
+  {
+    "n": 818,
+    "kind": "quest",
+    "source": "Membeli Armor"
+  },
+  {
+    "n": 819,
+    "kind": "quest",
+    "source": "Membeli Potion"
+  },
+  {
+    "n": 820,
+    "kind": "quest",
+    "source": "Membeli Senjata"
+  },
+  {
+    "n": 821,
+    "kind": "quest",
+    "source": "Memberi",
+    "reborn": "Gift"
+  },
+  {
+    "n": 822,
+    "kind": "quest",
+    "source": "Memberi"
+  },
+  {
+    "n": 823,
+    "kind": "quest",
+    "source": "Membersihkan Bencana"
+  },
+  {
+    "n": 824,
+    "kind": "quest",
+    "source": "Membuat Gudang"
+  },
+  {
+    "n": 825,
+    "kind": "quest",
+    "source": "Membuat Kebun"
+  },
+  {
+    "n": 826,
+    "kind": "quest",
+    "source": "Membuat Kincir Angin"
+  },
+  {
+    "n": 827,
+    "kind": "quest",
+    "source": "Membuat Ruang Penetasan"
+  },
+  {
+    "n": 828,
+    "kind": "quest",
+    "source": "Memeriksa arahan Upgrade"
+  },
+  {
+    "n": 829,
+    "kind": "quest",
+    "source": "Memperluas pemandangan"
+  },
+  {
+    "n": 830,
+    "kind": "quest",
+    "source": "Menambahkan ke koleksi"
+  },
+  {
+    "n": 831,
+    "kind": "quest",
+    "source": "Menangkap Ikan"
+  },
+  {
+    "n": 832,
+    "kind": "quest",
+    "source": "Menantang Boss"
+  },
+  {
+    "n": 833,
+    "kind": "quest",
+    "source": "Mencari Harta",
+    "reborn": "looking for treasure"
+  },
+  {
+    "n": 834,
+    "kind": "quest",
+    "source": "Mencari Harta"
+  },
+  {
+    "n": 835,
+    "kind": "quest",
+    "source": "Mencari Level"
+  },
+  {
+    "n": 836,
+    "kind": "quest",
+    "source": "Mencuri Jagung"
+  },
+  {
+    "n": 837,
+    "kind": "quest",
+    "source": "Menerima Misi"
+  },
+  {
+    "n": 838,
+    "kind": "quest",
+    "source": "Menetaskan telur"
+  },
+  {
+    "n": 839,
+    "kind": "quest",
+    "source": "Mengakali Kelelawar Darah"
+  },
+  {
+    "n": 840,
+    "kind": "quest",
+    "source": "Mengambil telur"
+  },
+  {
+    "n": 841,
+    "kind": "quest",
+    "source": "Mengatur Cuaca"
+  },
+  {
+    "n": 842,
+    "kind": "quest",
+    "source": "Mengawal",
+    "reborn": "Escort"
+  },
+  {
+    "n": 843,
+    "kind": "quest",
+    "source": "Mengawal"
+  },
+  {
+    "n": 844,
+    "kind": "quest",
+    "source": "Mengenali",
+    "reborn": "recognized"
+  },
+  {
+    "n": 845,
+    "kind": "quest",
+    "source": "Mengenali"
+  },
+  {
+    "n": 846,
+    "kind": "quest",
+    "source": "Mengetahui",
+    "reborn": "notify"
+  },
+  {
+    "n": 847,
+    "kind": "quest",
+    "source": "Mengetahui"
+  },
+  {
+    "n": 848,
+    "kind": "quest",
+    "source": "Menggunakan Potion"
+  },
+  {
+    "n": 849,
+    "kind": "quest",
+    "source": "Menggunakan Senjata"
+  },
+  {
+    "n": 850,
+    "kind": "quest",
+    "source": "Menggunakan Skill"
+  },
+  {
+    "n": 851,
+    "kind": "quest",
+    "source": "Menghancurkan Iblis"
+  },
+  {
+    "n": 852,
+    "kind": "quest",
+    "source": "Menghilangkan Sisa"
+  },
+  {
+    "n": 853,
+    "kind": "quest",
+    "source": "Menghukum Banteng yang Nakal",
+    "reborn": "lesson bull"
+  },
+  {
+    "n": 854,
+    "kind": "quest",
+    "source": "Menghukum Banteng yang Nakal"
+  },
+  {
+    "n": 855,
+    "kind": "quest",
+    "source": "Menghukum Biksu Jahat"
+  },
+  {
+    "n": 856,
+    "kind": "quest",
+    "source": "Menghukum Dukun Sesat"
+  },
+  {
+    "n": 857,
+    "kind": "quest",
+    "source": "Menghukum Ketua Bandit"
+  },
+  {
+    "n": 858,
+    "kind": "quest",
+    "source": "Menghukum para Bandit"
+  },
+  {
+    "n": 859,
+    "kind": "quest",
+    "source": "Menghukum Penjahat demi Masyarakat"
+  },
+  {
+    "n": 860,
+    "kind": "quest",
+    "source": "Menghukum Stinger Bee"
+  },
+  {
+    "n": 861,
+    "kind": "quest",
+    "source": "Mengumpulkan Benda Asing"
+  },
+  {
+    "n": 862,
+    "kind": "quest",
+    "source": "Mengumpulkan Biji",
+    "reborn": "collect seeds"
+  },
+  {
+    "n": 863,
+    "kind": "quest",
+    "source": "Mengumpulkan Biji"
+  },
+  {
+    "n": 864,
+    "kind": "quest",
+    "source": "Mengungkap Laporan"
+  },
+  {
+    "n": 865,
+    "kind": "quest",
+    "source": "Mengunjungi Ketua",
+    "reborn": "meet the master"
+  },
+  {
+    "n": 866,
+    "kind": "quest",
+    "source": "Mengunjungi Ketua"
+  },
+  {
+    "n": 867,
+    "kind": "quest",
+    "source": "Mengunjungi Ketua Desa"
+  },
+  {
+    "n": 868,
+    "kind": "quest",
+    "source": "Mengunjungi Penduduk"
+  },
+  {
+    "n": 869,
+    "kind": "quest",
+    "source": "Mengunjungi Warga"
+  },
+  {
+    "n": 870,
+    "kind": "quest",
+    "source": "Mengupgrade Kebun"
+  },
+  {
+    "n": 871,
+    "kind": "quest",
+    "source": "Mengupgrade Tower Prstasi"
+  },
+  {
+    "n": 872,
+    "kind": "quest",
+    "source": "Menguprade Rumah"
+  },
+  {
+    "n": 873,
+    "kind": "quest",
+    "source": "Mengusir Egret"
+  },
+  {
+    "n": 874,
+    "kind": "quest",
+    "source": "Menjelajah [I]"
+  },
+  {
+    "n": 875,
+    "kind": "quest",
+    "source": "Menjelajah [II]"
+  },
+  {
+    "n": 876,
+    "kind": "quest",
+    "source": "Menjelajah [III]"
+  },
+  {
+    "n": 877,
+    "kind": "quest",
+    "source": "Menolong Orang",
+    "reborn": "help people"
+  },
+  {
+    "n": 878,
+    "kind": "quest",
+    "source": "Menolong Orang"
+  },
+  {
+    "n": 879,
+    "kind": "quest",
+    "source": "Menolong Teman"
+  },
+  {
+    "n": 880,
+    "kind": "quest",
+    "source": "Menukar",
+    "reborn": "trade"
+  },
+  {
+    "n": 881,
+    "kind": "quest",
+    "source": "Menukar"
+  },
+  {
+    "n": 882,
+    "kind": "quest",
+    "source": "Menyelamatkan Pejuang",
+    "reborn": "save the samurai"
+  },
+  {
+    "n": 883,
+    "kind": "quest",
+    "source": "Menyelamatkan Pejuang"
+  },
+  {
+    "n": 884,
+    "kind": "quest",
+    "source": "Menyelidiki",
+    "reborn": "investigation"
+  },
+  {
+    "n": 885,
+    "kind": "quest",
+    "source": "Menyelidiki"
+  },
+  {
+    "n": 886,
+    "kind": "quest",
+    "source": "Menyelinap ke Amegakure"
+  },
+  {
+    "n": 887,
+    "kind": "quest",
+    "source": "Merebut Mutiara"
+  },
+  {
+    "n": 888,
+    "kind": "quest",
+    "source": "Merubah Amegakure"
+  },
+  {
+    "n": 889,
+    "kind": "quest",
+    "source": "Mimpi Buruk"
+  },
+  {
+    "n": 890,
+    "kind": "quest",
+    "source": "Mineral Misterius"
+  },
+  {
+    "n": 891,
+    "kind": "quest",
+    "source": "Minuman Sari Buah"
+  },
+  {
+    "n": 892,
+    "kind": "quest",
+    "source": "Monyet dan Anjing"
+  },
+  {
+    "n": 893,
+    "kind": "quest",
+    "source": "Mudah dan ujian keras"
+  },
+  {
+    "n": 894,
+    "kind": "quest",
+    "source": "Mysterious Mineral"
+  },
+  {
+    "n": 895,
+    "kind": "quest",
+    "source": "Mystic Aborigine"
+  },
+  {
+    "n": 896,
+    "kind": "quest",
+    "source": "Newbie Pack"
+  },
+  {
+    "n": 897,
+    "kind": "quest",
+    "source": "Nilai Tulang Ikan"
+  },
+  {
+    "n": 898,
+    "kind": "quest",
+    "source": "Ninja Hutan",
+    "reborn": "Temporary Truce"
+  },
+  {
+    "n": 899,
+    "kind": "quest",
+    "source": "Ninja keras Kepala"
+  },
+  {
+    "n": 900,
+    "kind": "quest",
+    "source": "Ninja Penggosip"
+  },
+  {
+    "n": 901,
+    "kind": "quest",
+    "source": "Ninja Pulau Kuno"
+  },
+  {
+    "n": 902,
+    "kind": "quest",
+    "source": "Normal Minerals"
+  },
+  {
+    "n": 903,
+    "kind": "quest",
+    "source": "Obat Terlarang"
+  },
+  {
+    "n": 904,
+    "kind": "quest",
+    "source": "Obat Terlarang [II]"
+  },
+  {
+    "n": 905,
+    "kind": "quest",
+    "source": "Obat Terlarang [III]"
+  },
+  {
+    "n": 906,
+    "kind": "quest",
+    "source": "Obat yang Menyegarkan",
+    "reborn": "fragrance medicine"
+  },
+  {
+    "n": 907,
+    "kind": "quest",
+    "source": "Obat yang Menyegarkan"
+  },
+  {
+    "n": 908,
+    "kind": "quest",
+    "source": "Onigiri Pemakan Manusia"
+  },
+  {
+    "n": 909,
+    "kind": "quest",
+    "source": "Orang yang Hilang",
+    "reborn": "Akira's Revelation"
+  },
+  {
+    "n": 910,
+    "kind": "quest",
+    "source": "Ordinary Ores"
+  },
+  {
+    "n": 911,
+    "kind": "quest",
+    "source": "Padang Gersang"
+  },
+  {
+    "n": 912,
+    "kind": "quest",
+    "source": "Pakai Gem"
+  },
+  {
+    "n": 913,
+    "kind": "quest",
+    "source": "Pakai pet"
+  },
+  {
+    "n": 914,
+    "kind": "quest",
+    "source": "Panel Misi"
+  },
+  {
+    "n": 915,
+    "kind": "quest",
+    "source": "Para Penyihir"
+  },
+  {
+    "n": 916,
+    "kind": "quest",
+    "source": "Pasar"
+  },
+  {
+    "n": 917,
+    "kind": "quest",
+    "source": "Pasokan Perorangan"
+  },
+  {
+    "n": 918,
+    "kind": "quest",
+    "source": "Pasukan Khusus"
+  },
+  {
+    "n": 919,
+    "kind": "quest",
+    "source": "Pedagang yang Sial",
+    "reborn": "Unlucky Businessman"
+  },
+  {
+    "n": 920,
+    "kind": "quest",
+    "source": "Pedagang yang Sial"
+  },
+  {
+    "n": 921,
+    "kind": "quest",
+    "source": "Pejuang Petir",
+    "reborn": "The Prodigy"
+  },
+  {
+    "n": 922,
+    "kind": "quest",
+    "source": "Pejuang Petir",
+    "reborn": "You're Not Alone"
+  },
+  {
+    "n": 923,
+    "kind": "quest",
+    "source": "Pejuang Petir",
+    "reborn": "The General Appears"
+  },
+  {
+    "n": 924,
+    "kind": "quest",
+    "source": "Pejuang Petir",
+    "reborn": "Other Survivors"
+  },
+  {
+    "n": 925,
+    "kind": "quest",
+    "source": "Pejuang Petir",
+    "reborn": "Now Hunted"
+  },
+  {
+    "n": 926,
+    "kind": "quest",
+    "source": "Pembalasan Ninja Hutan"
+  },
+  {
+    "n": 927,
+    "kind": "quest",
+    "source": "Pemberantasan Bandit"
+  },
+  {
+    "n": 928,
+    "kind": "quest",
+    "source": "Pembersihan Pantai"
+  },
+  {
+    "n": 929,
+    "kind": "quest",
+    "source": "Pembersihan Pantai[I]"
+  },
+  {
+    "n": 930,
+    "kind": "quest",
+    "source": "Pembersihan Pantai[II]"
+  },
+  {
+    "n": 931,
+    "kind": "quest",
+    "source": "Pembersihan Pantai[Ⅲ]"
+  },
+  {
+    "n": 932,
+    "kind": "quest",
+    "source": "Pembersihan Pantai[Ⅳ]"
+  },
+  {
+    "n": 933,
+    "kind": "quest",
+    "source": "Pemebelajaran Perubahan Reptil"
+  },
+  {
+    "n": 934,
+    "kind": "quest",
+    "source": "Pemeliharaan Gagal"
+  },
+  {
+    "n": 935,
+    "kind": "quest",
+    "source": "Pemurnian"
+  },
+  {
+    "n": 936,
+    "kind": "quest",
+    "source": "Pemurnian Mineral"
+  },
+  {
+    "n": 937,
+    "kind": "quest",
+    "source": "Pemurnian Peralatan"
+  },
+  {
+    "n": 938,
+    "kind": "quest",
+    "source": "Pemusnahan Iblis"
+  },
+  {
+    "n": 939,
+    "kind": "quest",
+    "source": "Pencuri di Toko"
+  },
+  {
+    "n": 940,
+    "kind": "quest",
+    "source": "Pencuri Malam [I]",
+    "reborn": "Phantom of the night, a"
+  },
+  {
+    "n": 941,
+    "kind": "quest",
+    "source": "Pencuri Malam [I]"
+  },
+  {
+    "n": 942,
+    "kind": "quest",
+    "source": "Pencuri Malam [II]",
+    "reborn": "Phantom of the Night, II"
+  },
+  {
+    "n": 943,
+    "kind": "quest",
+    "source": "Pencuri Malam [II]"
+  },
+  {
+    "n": 944,
+    "kind": "quest",
+    "source": "Pencuri Malam [III]",
+    "reborn": "The Phantom of the Night, Three"
+  },
+  {
+    "n": 945,
+    "kind": "quest",
+    "source": "Pencuri Malam [III]"
+  },
+  {
+    "n": 946,
+    "kind": "quest",
+    "source": "Penelitian Cairan"
+  },
+  {
+    "n": 947,
+    "kind": "quest",
+    "source": "Penemuan Besar"
+  },
+  {
+    "n": 948,
+    "kind": "quest",
+    "source": "Pengejaran Bandit"
+  },
+  {
+    "n": 949,
+    "kind": "quest",
+    "source": "Pengejaran Kejahatan"
+  },
+  {
+    "n": 950,
+    "kind": "quest",
+    "source": "Pengelana yang Hilang"
+  },
+  {
+    "n": 951,
+    "kind": "quest",
+    "source": "Penguasa Air",
+    "reborn": "Demon General Fight"
+  },
+  {
+    "n": 952,
+    "kind": "quest",
+    "source": "Pengumpulan informasi"
+  },
+  {
+    "n": 953,
+    "kind": "quest",
+    "source": "Penuh Seni"
+  },
+  {
+    "n": 954,
+    "kind": "quest",
+    "source": "Penumpasan Iblis"
+  },
+  {
+    "n": 955,
+    "kind": "quest",
+    "source": "Penyelamatan",
+    "reborn": "Rescue"
+  },
+  {
+    "n": 956,
+    "kind": "quest",
+    "source": "Penyelamatan"
+  },
+  {
+    "n": 957,
+    "kind": "quest",
+    "source": "Peperangan di Amegakure[I]"
+  },
+  {
+    "n": 958,
+    "kind": "quest",
+    "source": "Peperangan di Amegakure[II]"
+  },
+  {
+    "n": 959,
+    "kind": "quest",
+    "source": "Peperangan di Amegakure[Ⅲ]"
+  },
+  {
+    "n": 960,
+    "kind": "quest",
+    "source": "Peperangan di Amegakure[Ⅳ]"
+  },
+  {
+    "n": 961,
+    "kind": "quest",
+    "source": "Peralatan Armor"
+  },
+  {
+    "n": 962,
+    "kind": "quest",
+    "source": "Peralatan Senjata"
+  },
+  {
+    "n": 963,
+    "kind": "quest",
+    "source": "Perampok Gunung"
+  },
+  {
+    "n": 964,
+    "kind": "quest",
+    "source": "Perampokan di Amegakure[I]"
+  },
+  {
+    "n": 965,
+    "kind": "quest",
+    "source": "Perampokan di Amegakure[II]"
+  },
+  {
+    "n": 966,
+    "kind": "quest",
+    "source": "Perampokan di Amegakure[Ⅲ]"
+  },
+  {
+    "n": 967,
+    "kind": "quest",
+    "source": "Perampokan di Amegakure[Ⅳ]"
+  },
+  {
+    "n": 968,
+    "kind": "quest",
+    "source": "Perasaan Familiar",
+    "reborn": "Familiar Scent"
+  },
+  {
+    "n": 969,
+    "kind": "quest",
+    "source": "Perasaan Familiar"
+  },
+  {
+    "n": 970,
+    "kind": "quest",
+    "source": "Perayaan [I]",
+    "reborn": "Celebration [i]"
+  },
+  {
+    "n": 971,
+    "kind": "quest",
+    "source": "Perayaan [I]"
+  },
+  {
+    "n": 972,
+    "kind": "quest",
+    "source": "Perayaan [II]",
+    "reborn": "Celebration [ii]"
+  },
+  {
+    "n": 973,
+    "kind": "quest",
+    "source": "Perayaan [II]"
+  },
+  {
+    "n": 974,
+    "kind": "quest",
+    "source": "Percaya",
+    "reborn": "trust"
+  },
+  {
+    "n": 975,
+    "kind": "quest",
+    "source": "Percaya"
+  },
+  {
+    "n": 976,
+    "kind": "quest",
+    "source": "Pergi ke Luar"
+  },
+  {
+    "n": 977,
+    "kind": "quest",
+    "source": "Peringatan"
+  },
+  {
+    "n": 978,
+    "kind": "quest",
+    "source": "Perintah Baru"
+  },
+  {
+    "n": 979,
+    "kind": "quest",
+    "source": "Perintah Ketua Desa"
+  },
+  {
+    "n": 980,
+    "kind": "quest",
+    "source": "Permainan Kematian"
+  },
+  {
+    "n": 981,
+    "kind": "quest",
+    "source": "Permasalahan Toko",
+    "reborn": "Trouble at the Item Shop"
+  },
+  {
+    "n": 982,
+    "kind": "quest",
+    "source": "Permasalahan Toko"
+  },
+  {
+    "n": 983,
+    "kind": "quest",
+    "source": "Permintaan Nyonya Feng",
+    "reborn": "Feng Niang's commission"
+  },
+  {
+    "n": 984,
+    "kind": "quest",
+    "source": "Permintaan Nyonya Feng"
+  },
+  {
+    "n": 985,
+    "kind": "quest",
+    "source": "Permintaan yang sombong"
+  },
+  {
+    "n": 986,
+    "kind": "quest",
+    "source": "Perseteruan"
+  },
+  {
+    "n": 987,
+    "kind": "quest",
+    "source": "Persetujuan pencuri yang benar",
+    "reborn": "Memory Crystal"
+  },
+  {
+    "n": 988,
+    "kind": "quest",
+    "source": "Pertarunagn di luar"
+  },
+  {
+    "n": 989,
+    "kind": "quest",
+    "source": "Pertikaian"
+  },
+  {
+    "n": 990,
+    "kind": "quest",
+    "source": "Pertolongan dari Pedagang",
+    "reborn": "Merchant's help"
+  },
+  {
+    "n": 991,
+    "kind": "quest",
+    "source": "Pertolongan dari Pedagang"
+  },
+  {
+    "n": 992,
+    "kind": "quest",
+    "source": "Perubahan Peta"
+  },
+  {
+    "n": 993,
+    "kind": "quest",
+    "source": "Perubahan Tulang",
+    "reborn": "The Real History"
+  },
+  {
+    "n": 994,
+    "kind": "quest",
+    "source": "Pilih",
+    "reborn": "Seal Team Selection"
+  },
+  {
+    "n": 995,
+    "kind": "quest",
+    "source": "Pilih"
+  },
+  {
+    "n": 996,
+    "kind": "quest",
+    "source": "Pondok Bandit"
+  },
+  {
+    "n": 997,
+    "kind": "quest",
+    "source": "Promosi Rank"
+  },
+  {
+    "n": 998,
+    "kind": "quest",
+    "source": "Promosikan Rank [Ⅰ]"
+  },
+  {
+    "n": 999,
+    "kind": "quest",
+    "source": "Promosikan Rank [Ⅱ]"
+  }
+]

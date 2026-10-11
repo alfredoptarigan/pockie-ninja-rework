@@ -24,7 +24,8 @@
     "assets:export": "node tools/export-assets.ts",
     "reborn:fetch": "tools/fetch-reborn-data.sh",
     "i18n:extract": "node tools/i18n/extract-source.ts",
-    "i18n:candidates": "node tools/i18n/build-glossary-candidates.ts"
+    "i18n:candidates": "node tools/i18n/build-glossary-candidates.ts",
+    "i18n:names": "node tools/i18n/names.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,0 +1,1354 @@
+[
+  {
+    "n": 3500,
+    "kind": "item",
+    "source": "Sweet Potato＋10"
+  },
+  {
+    "n": 3501,
+    "kind": "item",
+    "source": "Sweet Potato＋11"
+  },
+  {
+    "n": 3502,
+    "kind": "item",
+    "source": "Sweet Potato＋12"
+  },
+  {
+    "n": 3503,
+    "kind": "item",
+    "source": "Sweet Potato＋13"
+  },
+  {
+    "n": 3504,
+    "kind": "item",
+    "source": "Sweet Potato＋14"
+  },
+  {
+    "n": 3505,
+    "kind": "item",
+    "source": "Sweet Potato＋15"
+  },
+  {
+    "n": 3506,
+    "kind": "item",
+    "source": "Sweet Potato＋16"
+  },
+  {
+    "n": 3507,
+    "kind": "item",
+    "source": "Sweet Potato＋17"
+  },
+  {
+    "n": 3508,
+    "kind": "item",
+    "source": "Sweet Potato＋18"
+  },
+  {
+    "n": 3509,
+    "kind": "item",
+    "source": "Sweet Potato＋19"
+  },
+  {
+    "n": 3510,
+    "kind": "item",
+    "source": "Sweet Potato＋2"
+  },
+  {
+    "n": 3511,
+    "kind": "item",
+    "source": "Sweet Potato＋20"
+  },
+  {
+    "n": 3512,
+    "kind": "item",
+    "source": "Sweet Potato＋21"
+  },
+  {
+    "n": 3513,
+    "kind": "item",
+    "source": "Sweet Potato＋22"
+  },
+  {
+    "n": 3514,
+    "kind": "item",
+    "source": "Sweet Potato＋23"
+  },
+  {
+    "n": 3515,
+    "kind": "item",
+    "source": "Sweet Potato＋24"
+  },
+  {
+    "n": 3516,
+    "kind": "item",
+    "source": "Sweet Potato＋25"
+  },
+  {
+    "n": 3517,
+    "kind": "item",
+    "source": "Sweet Potato＋26"
+  },
+  {
+    "n": 3518,
+    "kind": "item",
+    "source": "Sweet Potato＋27"
+  },
+  {
+    "n": 3519,
+    "kind": "item",
+    "source": "Sweet Potato＋3"
+  },
+  {
+    "n": 3520,
+    "kind": "item",
+    "source": "Sweet Potato＋4"
+  },
+  {
+    "n": 3521,
+    "kind": "item",
+    "source": "Sweet Potato＋5"
+  },
+  {
+    "n": 3522,
+    "kind": "item",
+    "source": "Sweet Potato＋6"
+  },
+  {
+    "n": 3523,
+    "kind": "item",
+    "source": "Sweet Potato＋7"
+  },
+  {
+    "n": 3524,
+    "kind": "item",
+    "source": "Sweet Potato＋8"
+  },
+  {
+    "n": 3525,
+    "kind": "item",
+    "source": "Sweet Potato＋9"
+  },
+  {
+    "n": 3526,
+    "kind": "item",
+    "source": "Swift Slicer"
+  },
+  {
+    "n": 3527,
+    "kind": "item",
+    "source": "Swiping Fists"
+  },
+  {
+    "n": 3528,
+    "kind": "item",
+    "source": "Tailed Beast Defender Certificate"
+  },
+  {
+    "n": 3529,
+    "kind": "item",
+    "source": "Tailed Beast Essence"
+  },
+  {
+    "n": 3530,
+    "kind": "item",
+    "source": "Tailed Beast Legend Chest"
+  },
+  {
+    "n": 3531,
+    "kind": "item",
+    "source": "Tailed Beast Wishing Pot"
+  },
+  {
+    "n": 3532,
+    "kind": "item",
+    "source": "Takigakure"
+  },
+  {
+    "n": 3533,
+    "kind": "item",
+    "source": "Talisman Air",
+    "reborn": "Windsoul Pendant"
+  },
+  {
+    "n": 3534,
+    "kind": "item",
+    "source": "Talisman Angin",
+    "reborn": "Thundersoul Pendant"
+  },
+  {
+    "n": 3535,
+    "kind": "item",
+    "source": "Talisman Api",
+    "reborn": "Blazesoul Pendant"
+  },
+  {
+    "n": 3536,
+    "kind": "item",
+    "source": "Talisman Pengaman"
+  },
+  {
+    "n": 3537,
+    "kind": "item",
+    "source": "Talisman Petir",
+    "reborn": "Watersoul Pendant"
+  },
+  {
+    "n": 3538,
+    "kind": "item",
+    "source": "Talisman Tanah",
+    "reborn": "Earthsoul Pendant"
+  },
+  {
+    "n": 3539,
+    "kind": "item",
+    "source": "Tas Batu Level 1",
+    "reborn": "Level 1 Stone Bag"
+  },
+  {
+    "n": 3540,
+    "kind": "item",
+    "source": "Tas Batu Level 10",
+    "reborn": "Level 10 Stone Bag"
+  },
+  {
+    "n": 3541,
+    "kind": "item",
+    "source": "Tas Batu Level 2",
+    "reborn": "Level 2 Stone Bag"
+  },
+  {
+    "n": 3542,
+    "kind": "item",
+    "source": "Tas Batu Level 3",
+    "reborn": "Level 3 Stone Bag"
+  },
+  {
+    "n": 3543,
+    "kind": "item",
+    "source": "Tas Batu Level 4",
+    "reborn": "Level 4 Stone Bag"
+  },
+  {
+    "n": 3544,
+    "kind": "item",
+    "source": "Tas Batu Level 5",
+    "reborn": "Level 5 Stone Bag"
+  },
+  {
+    "n": 3545,
+    "kind": "item",
+    "source": "Tas Batu Level 6",
+    "reborn": "Level 6 Stone Bag"
+  },
+  {
+    "n": 3546,
+    "kind": "item",
+    "source": "Tas Batu Level 7",
+    "reborn": "Level 7 Stone Bag"
+  },
+  {
+    "n": 3547,
+    "kind": "item",
+    "source": "Tas Batu Level 8",
+    "reborn": "Level 8 Stone Bag"
+  },
+  {
+    "n": 3548,
+    "kind": "item",
+    "source": "Tas Batu Level 9",
+    "reborn": "Level 9 Stone Bag"
+  },
+  {
+    "n": 3549,
+    "kind": "item",
+    "source": "Tas berisikan Chakra",
+    "reborn": "Chakra Pouch Lvl.8"
+  },
+  {
+    "n": 3550,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 1",
+    "reborn": "Chakra Pouch Lvl.1"
+  },
+  {
+    "n": 3551,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 10",
+    "reborn": "Chakra Pouch Lvl.10"
+  },
+  {
+    "n": 3552,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 2",
+    "reborn": "Chakra Pouch Lvl.2"
+  },
+  {
+    "n": 3553,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 3",
+    "reborn": "Chakra Pouch Lvl.3"
+  },
+  {
+    "n": 3554,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 4",
+    "reborn": "Chakra Pouch Lvl.4"
+  },
+  {
+    "n": 3555,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 5",
+    "reborn": "Chakra Pouch Lvl.5"
+  },
+  {
+    "n": 3556,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 6",
+    "reborn": "Chakra Pouch Lvl.6"
+  },
+  {
+    "n": 3557,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 7",
+    "reborn": "Chakra Pouch Lvl.7"
+  },
+  {
+    "n": 3558,
+    "kind": "item",
+    "source": "Tas berisikan Chakra Level 9",
+    "reborn": "Chakra Pouch Lvl.9"
+  },
+  {
+    "n": 3559,
+    "kind": "item",
+    "source": "Tas berisikan HP",
+    "reborn": "Healing Pouch Lvl.8"
+  },
+  {
+    "n": 3560,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 1",
+    "reborn": "Healing Pouch Lvl.1"
+  },
+  {
+    "n": 3561,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 10",
+    "reborn": "Healing Pouch Lvl.10"
+  },
+  {
+    "n": 3562,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 2",
+    "reborn": "Healing Pouch Lvl.2"
+  },
+  {
+    "n": 3563,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 3",
+    "reborn": "Healing Pouch Lvl.3"
+  },
+  {
+    "n": 3564,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 4",
+    "reborn": "Healing Pouch Lvl.4"
+  },
+  {
+    "n": 3565,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 5",
+    "reborn": "Healing Pouch Lvl.5"
+  },
+  {
+    "n": 3566,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 6",
+    "reborn": "Healing Pouch Lvl.6"
+  },
+  {
+    "n": 3567,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 7",
+    "reborn": "Healing Pouch Lvl.7"
+  },
+  {
+    "n": 3568,
+    "kind": "item",
+    "source": "Tas berisikan HP Level 9",
+    "reborn": "Healing Pouch Lvl.9"
+  },
+  {
+    "n": 3569,
+    "kind": "item",
+    "source": "Tas Crystal Valhalla umum",
+    "reborn": "[[item__152015--name]] x300 Pack"
+  },
+  {
+    "n": 3570,
+    "kind": "item",
+    "source": "Tas EXP Level 1",
+    "reborn": "Level 1 Exp Bag"
+  },
+  {
+    "n": 3571,
+    "kind": "item",
+    "source": "Tas EXP Level 10",
+    "reborn": "Level 10 Exp Bag"
+  },
+  {
+    "n": 3572,
+    "kind": "item",
+    "source": "Tas EXP Level 2",
+    "reborn": "Level 2 Exp Bag"
+  },
+  {
+    "n": 3573,
+    "kind": "item",
+    "source": "Tas EXP Level 3",
+    "reborn": "Level 3 Exp Bag"
+  },
+  {
+    "n": 3574,
+    "kind": "item",
+    "source": "Tas EXP Level 4",
+    "reborn": "Level 4 Exp Bag"
+  },
+  {
+    "n": 3575,
+    "kind": "item",
+    "source": "Tas EXP Level 5",
+    "reborn": "Level 5 Exp Bag"
+  },
+  {
+    "n": 3576,
+    "kind": "item",
+    "source": "Tas EXP Level 6",
+    "reborn": "Level 6 Exp Bag"
+  },
+  {
+    "n": 3577,
+    "kind": "item",
+    "source": "Tas EXP Level 7",
+    "reborn": "Level 7 Exp Bag"
+  },
+  {
+    "n": 3578,
+    "kind": "item",
+    "source": "Tas EXP Level 8",
+    "reborn": "Level 8 Exp Bag"
+  },
+  {
+    "n": 3579,
+    "kind": "item",
+    "source": "Tas EXP Level 9",
+    "reborn": "Level 9 Exp Bag"
+  },
+  {
+    "n": 3580,
+    "kind": "item",
+    "source": "Tas Gem Level 1"
+  },
+  {
+    "n": 3581,
+    "kind": "item",
+    "source": "Tas Gem Level 10"
+  },
+  {
+    "n": 3582,
+    "kind": "item",
+    "source": "Tas Gem Level 2"
+  },
+  {
+    "n": 3583,
+    "kind": "item",
+    "source": "Tas Gem Level 3"
+  },
+  {
+    "n": 3584,
+    "kind": "item",
+    "source": "Tas Gem Level 4"
+  },
+  {
+    "n": 3585,
+    "kind": "item",
+    "source": "Tas Gem Level 5"
+  },
+  {
+    "n": 3586,
+    "kind": "item",
+    "source": "Tas Gem Level 6"
+  },
+  {
+    "n": 3587,
+    "kind": "item",
+    "source": "Tas Gem Level 7"
+  },
+  {
+    "n": 3588,
+    "kind": "item",
+    "source": "Tas Gem Level 8"
+  },
+  {
+    "n": 3589,
+    "kind": "item",
+    "source": "Tas Gem Level 9"
+  },
+  {
+    "n": 3590,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 1",
+    "reborn": "Level 1 Gift Coupon Bag"
+  },
+  {
+    "n": 3591,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 10",
+    "reborn": "Level 10 Gift Coupon Bag"
+  },
+  {
+    "n": 3592,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 2",
+    "reborn": "Level 2 Gift Coupon Bag"
+  },
+  {
+    "n": 3593,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 3",
+    "reborn": "Level 3 Gift Coupon Bag"
+  },
+  {
+    "n": 3594,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 4",
+    "reborn": "Level 4 Gift Coupon Bag"
+  },
+  {
+    "n": 3595,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 5",
+    "reborn": "Level 5 Gift Coupon Bag"
+  },
+  {
+    "n": 3596,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 6",
+    "reborn": "Level 6 Gift Coupon Bag"
+  },
+  {
+    "n": 3597,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 7",
+    "reborn": "Level 7 Gift Coupon Bag"
+  },
+  {
+    "n": 3598,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 8",
+    "reborn": "Level 8 Gift Coupon Bag"
+  },
+  {
+    "n": 3599,
+    "kind": "item",
+    "source": "Tas Gift Coupon Level 9",
+    "reborn": "Level 9 Gift Coupon Bag"
+  },
+  {
+    "n": 3600,
+    "kind": "item",
+    "source": "Tas kecil Common Valhalla Crystal"
+  },
+  {
+    "n": 3601,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 1"
+  },
+  {
+    "n": 3602,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 10"
+  },
+  {
+    "n": 3603,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 2"
+  },
+  {
+    "n": 3604,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 3"
+  },
+  {
+    "n": 3605,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 4"
+  },
+  {
+    "n": 3606,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 5"
+  },
+  {
+    "n": 3607,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 6"
+  },
+  {
+    "n": 3608,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 7"
+  },
+  {
+    "n": 3609,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 8"
+  },
+  {
+    "n": 3610,
+    "kind": "item",
+    "source": "Tas Luxury EXP Lv. 9"
+  },
+  {
+    "n": 3611,
+    "kind": "item",
+    "source": "Tas Medal Level 1",
+    "reborn": "Level 1 Medal Bag"
+  },
+  {
+    "n": 3612,
+    "kind": "item",
+    "source": "Tas Medal Level 10",
+    "reborn": "Level 10 Medal Bag"
+  },
+  {
+    "n": 3613,
+    "kind": "item",
+    "source": "Tas Medal Level 2",
+    "reborn": "Level 2 Medal Bag"
+  },
+  {
+    "n": 3614,
+    "kind": "item",
+    "source": "Tas Medal Level 3",
+    "reborn": "Level 3 Medal Bag"
+  },
+  {
+    "n": 3615,
+    "kind": "item",
+    "source": "Tas Medal Level 4",
+    "reborn": "Level 4 Medal Bag"
+  },
+  {
+    "n": 3616,
+    "kind": "item",
+    "source": "Tas Medal Level 5",
+    "reborn": "Level 5 Medal Bag"
+  },
+  {
+    "n": 3617,
+    "kind": "item",
+    "source": "Tas Medal Level 6",
+    "reborn": "Level 6 Medal Bag"
+  },
+  {
+    "n": 3618,
+    "kind": "item",
+    "source": "Tas Medal Level 7",
+    "reborn": "Level 7 Medal Bag"
+  },
+  {
+    "n": 3619,
+    "kind": "item",
+    "source": "Tas Medal Level 8",
+    "reborn": "Level 8 Medal Bag"
+  },
+  {
+    "n": 3620,
+    "kind": "item",
+    "source": "Tas Medal Level 9",
+    "reborn": "Level 9 Medal Bag"
+  },
+  {
+    "n": 3621,
+    "kind": "item",
+    "source": "Tas Pet Khusus"
+  },
+  {
+    "n": 3622,
+    "kind": "item",
+    "source": "Tas Pet Level 1"
+  },
+  {
+    "n": 3623,
+    "kind": "item",
+    "source": "Tas Pet Level 10"
+  },
+  {
+    "n": 3624,
+    "kind": "item",
+    "source": "Tas Pet Level 2"
+  },
+  {
+    "n": 3625,
+    "kind": "item",
+    "source": "Tas Pet Level 3"
+  },
+  {
+    "n": 3626,
+    "kind": "item",
+    "source": "Tas Pet Level 4"
+  },
+  {
+    "n": 3627,
+    "kind": "item",
+    "source": "Tas Pet Level 5"
+  },
+  {
+    "n": 3628,
+    "kind": "item",
+    "source": "Tas Pet Level 6"
+  },
+  {
+    "n": 3629,
+    "kind": "item",
+    "source": "Tas Pet Level 7"
+  },
+  {
+    "n": 3630,
+    "kind": "item",
+    "source": "Tas Pet Level 8"
+  },
+  {
+    "n": 3631,
+    "kind": "item",
+    "source": "Tas Pet Level 9"
+  },
+  {
+    "n": 3632,
+    "kind": "item",
+    "source": "Tas Point Level 1",
+    "reborn": "Level 11 Medal Bag"
+  },
+  {
+    "n": 3633,
+    "kind": "item",
+    "source": "Tas Point Level 10",
+    "reborn": "Exp Bag With 45M Exp"
+  },
+  {
+    "n": 3634,
+    "kind": "item",
+    "source": "Tas Point Level 2",
+    "reborn": "Level 12 Medal Bag"
+  },
+  {
+    "n": 3635,
+    "kind": "item",
+    "source": "Tas Point Level 3",
+    "reborn": "Level 13 Medal Bag"
+  },
+  {
+    "n": 3636,
+    "kind": "item",
+    "source": "Tas Point Level 4",
+    "reborn": "Level 14 Medal Bag"
+  },
+  {
+    "n": 3637,
+    "kind": "item",
+    "source": "Tas Point Level 5",
+    "reborn": "Level 15 Medal Bag"
+  },
+  {
+    "n": 3638,
+    "kind": "item",
+    "source": "Tas Point Level 6"
+  },
+  {
+    "n": 3639,
+    "kind": "item",
+    "source": "Tas Point Level 7"
+  },
+  {
+    "n": 3640,
+    "kind": "item",
+    "source": "Tas Point Level 8"
+  },
+  {
+    "n": 3641,
+    "kind": "item",
+    "source": "Tas Point Level 9"
+  },
+  {
+    "n": 3642,
+    "kind": "item",
+    "source": "Tas Set Equip Level 1"
+  },
+  {
+    "n": 3643,
+    "kind": "item",
+    "source": "Tas Set Equip Level 10"
+  },
+  {
+    "n": 3644,
+    "kind": "item",
+    "source": "Tas Set Equip Level 2"
+  },
+  {
+    "n": 3645,
+    "kind": "item",
+    "source": "Tas Set Equip Level 3"
+  },
+  {
+    "n": 3646,
+    "kind": "item",
+    "source": "Tas Set Equip Level 4"
+  },
+  {
+    "n": 3647,
+    "kind": "item",
+    "source": "Tas Set Equip Level 5"
+  },
+  {
+    "n": 3648,
+    "kind": "item",
+    "source": "Tas Set Equip Level 6"
+  },
+  {
+    "n": 3649,
+    "kind": "item",
+    "source": "Tas Set Equip Level 7"
+  },
+  {
+    "n": 3650,
+    "kind": "item",
+    "source": "Tas Set Equip Level 8"
+  },
+  {
+    "n": 3651,
+    "kind": "item",
+    "source": "Tas Set Equip Level 9"
+  },
+  {
+    "n": 3652,
+    "kind": "item",
+    "source": "Tas Tanaman"
+  },
+  {
+    "n": 3653,
+    "kind": "item",
+    "source": "Tattered Ancient Tome",
+    "reborn": "Tattered Ancient Tome"
+  },
+  {
+    "n": 3654,
+    "kind": "item",
+    "source": "Temari Gift Box"
+  },
+  {
+    "n": 3655,
+    "kind": "item",
+    "source": "Temari Namecard"
+  },
+  {
+    "n": 3656,
+    "kind": "item",
+    "source": "Tender Cancer Proof 30-hari",
+    "reborn": "Secret of Final Release Title"
+  },
+  {
+    "n": 3657,
+    "kind": "item",
+    "source": "Tender Cancer Proof 7-hari",
+    "reborn": "Orange Collection Title"
+  },
+  {
+    "n": 3658,
+    "kind": "item",
+    "source": "Tengu Bamboo Hat"
+  },
+  {
+    "n": 3659,
+    "kind": "item",
+    "source": "Tengu Boots"
+  },
+  {
+    "n": 3660,
+    "kind": "item",
+    "source": "Tengu Vestment"
+  },
+  {
+    "n": 3661,
+    "kind": "item",
+    "source": "Tenten"
+  },
+  {
+    "n": 3662,
+    "kind": "item",
+    "source": "Tenten Namecard"
+  },
+  {
+    "n": 3663,
+    "kind": "item",
+    "source": "Terong",
+    "reborn": "Eggplant"
+  },
+  {
+    "n": 3664,
+    "kind": "item",
+    "source": "Testimonial Desa Api",
+    "reborn": "Fire Village Testionial"
+  },
+  {
+    "n": 3665,
+    "kind": "item",
+    "source": "Thick Skin[E]",
+    "reborn": "Pet Skill - [[skill__50029--name]]"
+  },
+  {
+    "n": 3666,
+    "kind": "item",
+    "source": "Thick Skin[卍]",
+    "reborn": "Pet Skill - [[skill__50063--name]]"
+  },
+  {
+    "n": 3667,
+    "kind": "item",
+    "source": "Thunder Crystal",
+    "reborn": "Thunder Crystal"
+  },
+  {
+    "n": 3668,
+    "kind": "item",
+    "source": "Thunderbore Dragon Proof of Suppression"
+  },
+  {
+    "n": 3669,
+    "kind": "item",
+    "source": "Thundering Amulet"
+  },
+  {
+    "n": 3670,
+    "kind": "item",
+    "source": "Thundering Crystal"
+  },
+  {
+    "n": 3671,
+    "kind": "item",
+    "source": "Thundering Ring"
+  },
+  {
+    "n": 3672,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 1"
+  },
+  {
+    "n": 3673,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 10"
+  },
+  {
+    "n": 3674,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 2"
+  },
+  {
+    "n": 3675,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 3"
+  },
+  {
+    "n": 3676,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 4"
+  },
+  {
+    "n": 3677,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 5"
+  },
+  {
+    "n": 3678,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 6"
+  },
+  {
+    "n": 3679,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 7"
+  },
+  {
+    "n": 3680,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 8"
+  },
+  {
+    "n": 3681,
+    "kind": "item",
+    "source": "Thunderwail Jade Bintang 9"
+  },
+  {
+    "n": 3682,
+    "kind": "item",
+    "source": "Tigerfury Armor"
+  },
+  {
+    "n": 3683,
+    "kind": "item",
+    "source": "Tigerfury Helm"
+  },
+  {
+    "n": 3684,
+    "kind": "item",
+    "source": "Tigerlord Belt"
+  },
+  {
+    "n": 3685,
+    "kind": "item",
+    "source": "Tigerlord Boots"
+  },
+  {
+    "n": 3686,
+    "kind": "item",
+    "source": "Tigerlord Gloves"
+  },
+  {
+    "n": 3687,
+    "kind": "item",
+    "source": "Toad Arcanum",
+    "reborn": "Zodiac Gift Box"
+  },
+  {
+    "n": 3688,
+    "kind": "item",
+    "source": "Toad Arcanum*20"
+  },
+  {
+    "n": 3689,
+    "kind": "item",
+    "source": "Toadling Gift Box"
+  },
+  {
+    "n": 3690,
+    "kind": "item",
+    "source": "Toadling＋0"
+  },
+  {
+    "n": 3691,
+    "kind": "item",
+    "source": "Toadling＋1"
+  },
+  {
+    "n": 3692,
+    "kind": "item",
+    "source": "Toadling＋10"
+  },
+  {
+    "n": 3693,
+    "kind": "item",
+    "source": "Toadling＋11"
+  },
+  {
+    "n": 3694,
+    "kind": "item",
+    "source": "Toadling＋12"
+  },
+  {
+    "n": 3695,
+    "kind": "item",
+    "source": "Toadling＋13"
+  },
+  {
+    "n": 3696,
+    "kind": "item",
+    "source": "Toadling＋14"
+  },
+  {
+    "n": 3697,
+    "kind": "item",
+    "source": "Toadling＋15"
+  },
+  {
+    "n": 3698,
+    "kind": "item",
+    "source": "Toadling＋16"
+  },
+  {
+    "n": 3699,
+    "kind": "item",
+    "source": "Toadling＋17"
+  },
+  {
+    "n": 3700,
+    "kind": "item",
+    "source": "Toadling＋18"
+  },
+  {
+    "n": 3701,
+    "kind": "item",
+    "source": "Toadling＋19"
+  },
+  {
+    "n": 3702,
+    "kind": "item",
+    "source": "Toadling＋2"
+  },
+  {
+    "n": 3703,
+    "kind": "item",
+    "source": "Toadling＋20"
+  },
+  {
+    "n": 3704,
+    "kind": "item",
+    "source": "Toadling＋21"
+  },
+  {
+    "n": 3705,
+    "kind": "item",
+    "source": "Toadling＋22"
+  },
+  {
+    "n": 3706,
+    "kind": "item",
+    "source": "Toadling＋23"
+  },
+  {
+    "n": 3707,
+    "kind": "item",
+    "source": "Toadling＋24"
+  },
+  {
+    "n": 3708,
+    "kind": "item",
+    "source": "Toadling＋25"
+  },
+  {
+    "n": 3709,
+    "kind": "item",
+    "source": "Toadling＋26"
+  },
+  {
+    "n": 3710,
+    "kind": "item",
+    "source": "Toadling＋27"
+  },
+  {
+    "n": 3711,
+    "kind": "item",
+    "source": "Toadling＋3"
+  },
+  {
+    "n": 3712,
+    "kind": "item",
+    "source": "Toadling＋4"
+  },
+  {
+    "n": 3713,
+    "kind": "item",
+    "source": "Toadling＋5"
+  },
+  {
+    "n": 3714,
+    "kind": "item",
+    "source": "Toadling＋6"
+  },
+  {
+    "n": 3715,
+    "kind": "item",
+    "source": "Toadling＋7"
+  },
+  {
+    "n": 3716,
+    "kind": "item",
+    "source": "Toadling＋8"
+  },
+  {
+    "n": 3717,
+    "kind": "item",
+    "source": "Toadling＋9"
+  },
+  {
+    "n": 3718,
+    "kind": "item",
+    "source": "Tobirama Senju"
+  },
+  {
+    "n": 3719,
+    "kind": "item",
+    "source": "Tonic Capsule",
+    "reborn": "Chakra Salve"
+  },
+  {
+    "n": 3720,
+    "kind": "item",
+    "source": "Tonic Powder",
+    "reborn": "Chakra Powder"
+  },
+  {
+    "n": 3721,
+    "kind": "item",
+    "source": "Tonton"
+  },
+  {
+    "n": 3722,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 1",
+    "reborn": "Level 21 Hat/Gloves Enchantment Stone I"
+  },
+  {
+    "n": 3723,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 1",
+    "reborn": "Level 21 Hat/Gloves Enchantment Stone II"
+  },
+  {
+    "n": 3724,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 1",
+    "reborn": "Level 21 Hat/Gloves Enchantment Stone III"
+  },
+  {
+    "n": 3725,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 1",
+    "reborn": "Level 21 Hat/Gloves Enchantment Stone IV"
+  },
+  {
+    "n": 3726,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 2",
+    "reborn": "Level 31 Hat/Gloves Enchantment Stone I"
+  },
+  {
+    "n": 3727,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 2",
+    "reborn": "Level 31 Hat/Gloves Enchantment Stone II"
+  },
+  {
+    "n": 3728,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 2",
+    "reborn": "Level 31 Hat/Gloves Enchantment Stone III"
+  },
+  {
+    "n": 3729,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 2",
+    "reborn": "Level 31 Hat/Gloves Enchantment Stone IV"
+  },
+  {
+    "n": 3730,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 3",
+    "reborn": "Level 41 Hat/Gloves Enchantment Stone I"
+  },
+  {
+    "n": 3731,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 3",
+    "reborn": "Level 41 Hat/Gloves Enchantment Stone II"
+  },
+  {
+    "n": 3732,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 3",
+    "reborn": "Level 41 Hat/Gloves Enchantment Stone III"
+  },
+  {
+    "n": 3733,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 3",
+    "reborn": "Level 41 Hat/Gloves Enchantment Stone IV"
+  },
+  {
+    "n": 3734,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 4"
+  },
+  {
+    "n": 3735,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 5"
+  },
+  {
+    "n": 3736,
+    "kind": "item",
+    "source": "Top Enchantment Stone Level 6"
+  },
+  {
+    "n": 3737,
+    "kind": "item",
+    "source": "Top Enchantment Stone Lv.7"
+  },
+  {
+    "n": 3738,
+    "kind": "item",
+    "source": "Top-up Equipment Gift Box"
+  },
+  {
+    "n": 3739,
+    "kind": "item",
+    "source": "Top-up EXP Gift Box"
+  },
+  {
+    "n": 3740,
+    "kind": "item",
+    "source": "Top-up Item Gift Box"
+  },
+  {
+    "n": 3741,
+    "kind": "item",
+    "source": "Top-up Kostum Gift Box"
+  },
+  {
+    "n": 3742,
+    "kind": "item",
+    "source": "Top-up Pet Gift Box"
+  },
+  {
+    "n": 3743,
+    "kind": "item",
+    "source": "Topaz Level 1",
+    "reborn": "Flawed Topaz"
+  },
+  {
+    "n": 3744,
+    "kind": "item",
+    "source": "Topaz Level 10",
+    "reborn": "Topaz Level 11"
+  },
+  {
+    "n": 3745,
+    "kind": "item",
+    "source": "Topaz Level 2",
+    "reborn": "Cracked Topaz"
+  },
+  {
+    "n": 3746,
+    "kind": "item",
+    "source": "Topaz Level 3",
+    "reborn": "Topaz"
+  },
+  {
+    "n": 3747,
+    "kind": "item",
+    "source": "Topaz Level 4",
+    "reborn": "Flawless Topaz"
+  },
+  {
+    "n": 3748,
+    "kind": "item",
+    "source": "Topaz Level 5",
+    "reborn": "Perfect Topaz"
+  },
+  {
+    "n": 3749,
+    "kind": "item",
+    "source": "Topaz Level 6",
+    "reborn": "Radiant Topaz"
+  }
+]
