@@ -5,7 +5,7 @@ import { expect, test, type Locator, type Page } from '@playwright/test'
 
 test.use({ viewport: { width: 1440, height: 900 } })
 // Character creation, five quests, two scenes and a battle replay.
-test.setTimeout(120_000)
+test.setTimeout(60_000)
 
 const suffix = Date.now().toString(36).slice(-6)
 const account = {
@@ -92,6 +92,146 @@ async function sceneAction(page: Page, name: string) {
   await button.focus()
   return button
 }
+
+/** Creates a fresh Fire Village ninja for an independent journey. */
+async function createNinja(page: Page, role: string) {
+  const id = `${role}_${Date.now().toString(36).slice(-5)}`
+  await page.goto('/register')
+  await page.getByLabel('Username').fill(id)
+  await page.getByLabel('Email').fill(`${id}@example.test`)
+  await page.getByLabel('Password').fill(account.password)
+  await page.getByRole('button', { name: 'Create account' }).click()
+  await expect(page).toHaveURL('/play/create')
+  await page.getByLabel('Character Name').fill(id)
+  for (const choice of ['Ggio Vega', 'Fire Village']) {
+    await page
+      .getByRole('radio', { name: new RegExp(`^${choice}`) })
+      .locator('..')
+      .click()
+  }
+  await page.getByRole('button', { name: 'Enter Game' }).click()
+  await expect(
+    page.getByRole('main', { name: 'Game' }).getByRole('heading', { name: id }),
+  ).toBeVisible()
+  return id
+}
+
+async function travelToField(page: Page) {
+  await page
+    .getByRole('region', { name: 'Location' })
+    .getByRole('button', { name: 'World Map' })
+    .click()
+  await dialog(page, 'World Map').getByRole('button', { name: FIELD, exact: true }).click()
+  await expect(
+    page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: FIELD }),
+  ).toBeVisible({ timeout: 15_000 })
+}
+
+test('another account receives world chat and sees the sender only in the shared scene', async ({
+  page,
+  browser,
+}) => {
+  test.setTimeout(60_000)
+  // Arrange: two authenticated accounts have separate cookie jars.
+  const sender = await createNinja(page, 'Sender')
+  const observerContext = await browser.newContext({ baseURL: test.info().project.use.baseURL })
+  try {
+    const observer = await observerContext.newPage()
+    const receiver = await createNinja(observer, 'Reader')
+    const senderChat = page.getByRole('region', { name: 'Chat' })
+    const receiverChat = observer.getByRole('region', { name: 'Chat' })
+    await expect(senderChat.getByText('Online', { exact: true })).toBeVisible()
+    await expect(receiverChat.getByText('Online', { exact: true })).toBeVisible()
+
+    // Act: send through the world channel and open the second account's player list.
+    const message = `Greetings from ${sender}`
+    await senderChat.getByLabel('Message to world chat').fill(message)
+    await senderChat.getByRole('button', { name: 'Send' }).click()
+    await receiverChat.getByRole('button', { name: /^Players \(/ }).click()
+
+    // Assert: the remote account receives the broadcast and the scene membership.
+    await expect(receiverChat.getByRole('list', { name: 'World messages' })).toContainText(
+      `${sender}: ${message}`,
+    )
+    const players = observer.getByRole('region', { name: /^Players here/ })
+    await expect(players).toContainText(sender)
+    await expect(players).toContainText(receiver)
+    await travelToField(page)
+    await expect(players).not.toContainText(sender)
+    await expect(players).toContainText(receiver)
+  } finally {
+    await observerContext.close()
+  }
+})
+
+test('a fresh ninja searches an exploration spot and sees the result cards', async ({ page }) => {
+  test.setTimeout(60_000)
+  // Arrange: a new character has the original seven daily searches and no cooldown.
+  await createNinja(page, 'Search')
+  await travelToField(page)
+  await page
+    .getByRole('region', { name: 'Exploration' })
+    .getByRole('button', { name: 'Explore' })
+    .click()
+  const explore = dialog(page, 'Exploration')
+  await expect(explore).toContainText('7 / 7')
+
+  // Act: confirm the first free spot; a randomly drawn fight may open a replay.
+  await explore
+    .getByRole('button', { name: /^Explore / })
+    .first()
+    .click()
+  await dialog(page, 'Start Exploring?')
+    .getByRole('button', { name: 'Explore', exact: true })
+    .click()
+  const result = dialog(page, 'Exploration Result')
+  const skip = page
+    .getByRole('region', { name: 'Battle replay' })
+    .getByRole('button', { name: 'Skip' })
+  await expect(result.or(skip)).toBeVisible()
+  if (await skip.isVisible()) await skip.click()
+
+  // Assert: one selected card plus four alternatives, and one search consumed.
+  await expect(result).toBeVisible()
+  await expect(
+    result.getByRole('list', { name: 'The other cards held' }).getByRole('listitem'),
+  ).toHaveCount(4)
+  await result.getByRole('button', { name: 'Back to Exploration' }).click()
+  await expect(explore).toContainText('6 / 7')
+  await expect(explore.getByRole('button', { name: /^Explore / }).first()).toBeDisabled()
+})
+
+test('a ninja defeated in a field fight returns to the village with one HP', async ({ page }) => {
+  test.setTimeout(60_000)
+  // Arrange: an unarmed level-one ninja cannot beat the field boss.
+  await createNinja(page, 'Revive')
+  await travelToField(page)
+
+  // Act: lose a real server-simulated fight and finish its replay.
+  await (await sceneAction(page, 'Fight Warrior of Darkness')).click()
+  await page.getByRole('button', { name: 'Fight anyway', exact: true }).click()
+  await page
+    .getByRole('region', { name: 'Battle replay' })
+    .getByRole('button', { name: 'Skip' })
+    .click()
+  const defeat = dialog(page, 'Defeat')
+  await expect(defeat).toContainText('Warrior of Darkness defeated you.')
+  await defeat.getByRole('button', { name: 'Close' }).click()
+  const revive = dialog(page, 'Defeated')
+  await expect(revive.getByRole('button', { name: 'Revive here', exact: true })).toBeDisabled()
+  await revive.getByRole('button', { name: 'Return to village', exact: true }).click()
+
+  // Assert: the home revive from relive.ini restores one HP and allows travel again.
+  await expect(revive).toBeHidden()
+  await expect(
+    page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: 'Fire Village' }),
+  ).toBeVisible()
+  await expect(page.getByRole('meter', { name: 'HP', exact: true })).toHaveAttribute(
+    'aria-valuenow',
+    '1',
+  )
+  await travelToField(page)
+})
 
 test('a new ninja plays the Fire Village tutorial to the first fight and levels up', async ({
   page,
