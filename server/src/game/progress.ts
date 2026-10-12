@@ -21,6 +21,7 @@ type CharacterRow = typeof characters.$inferSelect
 const ROOKIE = 4
 const READY = 1
 const COMPLETED = 2
+const COLLECT_STEP = 1
 const CURRENCY_COLUMN = { 0: 'stone', 2: 'gold', 3: 'giftCoupon' } as const
 
 /** Adds items, stacking onto unequipped rows of the same item up to the stack size. */
@@ -63,6 +64,32 @@ export async function consumeOne(tx: Tx, row: typeof inventoryItems.$inferSelect
       .where(eq(inventoryItems.id, row.id))
   } else {
     await tx.delete(inventoryItems).where(eq(inventoryItems.id, row.id))
+  }
+}
+
+/** Removes up to `count` of an item from unequipped stacks (quest hand-ins). */
+export async function removeItems(tx: Tx, characterId: string, itemId: string, count: number) {
+  let left = count
+  const rows = await tx
+    .select()
+    .from(inventoryItems)
+    .where(
+      and(
+        eq(inventoryItems.characterId, characterId),
+        eq(inventoryItems.itemId, itemId),
+        sql`${inventoryItems.equippedSlot} is null`,
+      ),
+    )
+  for (const row of rows) {
+    if (left <= 0) return
+    const taken = Math.min(left, row.count)
+    left -= taken
+    if (taken === row.count) await tx.delete(inventoryItems).where(eq(inventoryItems.id, row.id))
+    else
+      await tx
+        .update(inventoryItems)
+        .set({ count: row.count - taken })
+        .where(eq(inventoryItems.id, row.id))
   }
 }
 
@@ -111,6 +138,13 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
   const [character] = await tx.select().from(characters).where(eq(characters.id, characterId))
   if (!character) throw new Error(`Character ${characterId} not found`)
 
+  // Collected quest items are handed in (CollectRule).
+  for (const step of subTasks(taskId)) {
+    if (Number(step.SubTaskType) === COLLECT_STEP) {
+      await removeItems(tx, characterId, String(step.TargetItem), Number(step.TargetRequireNum))
+    }
+  }
+
   const dropId = Number(row.RewardDropID)
   if (dropId > 0 && dropLib(dropId)) {
     const random = createRandom(randomInt(2 ** 31))
@@ -152,7 +186,10 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
 
   const nextId = Number(row.NextTaskID)
   const next = nextId > 0 ? task(nextId) : undefined
-  if (next && Number(next.AutoAcceptTask) === 1) await acceptQuest(tx, characterId, nextId)
+  // RookieTaskSystem: the next task is auto-accepted when it says so and its level allows it.
+  if (next && Number(next.AutoAcceptTask) === 1 && exp.level >= Number(next.RequireLevel)) {
+    await acceptQuest(tx, characterId, nextId)
+  }
   return levelsGained
 }
 
