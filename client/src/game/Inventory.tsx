@@ -2,13 +2,20 @@
 // equipment columns around the character, then the bag grid with its page tabs. Positions are
 // the measured ones, relative to the window content (Reborn's x - 5, y - 31).
 import { useId, useState, type CSSProperties } from 'react'
-import { errorMessage, useCharacter, useEquipItem, useInventory, useUseItem } from './api'
+import {
+  errorMessage,
+  useCharacter,
+  useEquipItem,
+  useInventory,
+  useUnequipItem,
+  useUseItem,
+} from './api'
 import { useOutfitStand } from './art'
 import { ItemIcon, itemIcon } from './ItemIcon'
 import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
-import type { BagHighlight, InventoryItem } from './types'
+import type { ActionResult, BagHighlight, InventoryItem } from './types'
 import { isEquipment, isUsable } from './world'
 
 /** Whether a bag item is what the current tutorial step asks for. */
@@ -47,12 +54,16 @@ const box = ([left, top, width, height]: readonly number[]): CSSProperties => ({
   height,
 })
 
-type Run = (item: InventoryItem, kind: 'use' | 'equip') => void
+type Kind = 'use' | 'equip' | 'unequip'
+type Run = (item: InventoryItem, kind: Kind) => void
+const VERBS: Record<Kind, string> = { use: 'Used', equip: 'Equipped', unequip: 'Unequipped' }
 
 export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const inventory = useInventory()
   const use = useUseItem()
   const equip = useEquipItem()
+  const unequip = useUnequipItem()
+  const actions = { use, equip, unequip }
   const [notice, setNotice] = useState<{ tone: 'info' | 'error'; text: string } | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [page, setPage] = useState<number | null>(null)
@@ -60,15 +71,16 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const run: Run = async (item, kind) => {
     setNotice(null)
     try {
-      const result = await (kind === 'use' ? use : equip).mutateAsync(item.id)
+      const result = await actions[kind].mutateAsync(item.id)
       const name = plainText(item.nameKey, 'the item')
-      const verb = kind === 'use' ? 'Used' : 'Equipped'
-      setNotice({ tone: 'info', text: `${verb} ${name}.${completedNotice(result.completed)}` })
+      const completed =
+        kind === 'unequip' ? '' : completedNotice((result as ActionResult).completed)
+      setNotice({ tone: 'info', text: `${VERBS[kind]} ${name}.${completed}` })
     } catch (error) {
       setNotice({ tone: 'error', text: errorMessage(error) })
     }
   }
-  const busy = use.isPending || equip.isPending
+  const busy = use.isPending || equip.isPending || unequip.isPending
 
   if (inventory.isPending) return <p>Opening your bag...</p>
   if (inventory.isError) return <Notice tone="error">We could not open your bag.</Notice>
@@ -77,6 +89,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const marked = bag.find((item) => isHighlighted(item, highlight))
   // The tutorial's item is selected (and its page shown) until the player picks another.
   const selected = bag.find((item) => item.id === selectedId) ?? marked
+  const worn = inventory.data.find((item) => item.id === selectedId && item.equippedSlot)
   const markedPage = marked ? Math.floor(bag.indexOf(marked) / PAGE_SIZE) : 0
   const shownPage = page ?? markedPage
   const shown = bag.slice(shownPage * PAGE_SIZE, (shownPage + 1) * PAGE_SIZE)
@@ -84,7 +97,22 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   return (
     <div className="relative -m-3 h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
       <BagPages />
-      <Equipment items={inventory.data} />
+      <Equipment items={inventory.data} selectedId={selectedId} onSelect={setSelectedId} />
+      {worn && (
+        <div className="absolute top-[331px] left-[288px] flex w-[75px] flex-col gap-[5px] text-[11px] text-ink-game">
+          <p className="font-bold">
+            <GameText k={worn.nameKey} fallback="Unknown item" />
+          </p>
+          <GameButton
+            disabled={busy}
+            aria-label={`Unequip ${plainText(worn.nameKey, 'item')}`}
+            onClick={() => run(worn, 'unequip')}
+            className="h-[25px] w-[75px]"
+          >
+            Unequip
+          </GameButton>
+        </div>
+      )}
       <div className="game-inset absolute top-[313px] left-0 h-[200px] w-[369px]" />
       <div
         role="tabpanel"
@@ -128,7 +156,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           </button>
         ))}
       </div>
-      {bag.length > 0 && !selected && (
+      {bag.length > 0 && !selected && !worn && (
         <p className="absolute top-[331px] left-[288px] w-[75px] text-[11px] text-ink-game">
           Select an item.
         </p>
@@ -165,8 +193,19 @@ function BagPages() {
   )
 }
 
-/** The equipment columns, the character backdrop and the slots with what is worn. */
-function Equipment({ items }: { items: InventoryItem[] }) {
+/**
+ * The equipment columns, the character backdrop and the slots with what is worn. Selecting a
+ * worn item shows it in the side column with its Unequip button, like a bag item.
+ */
+function Equipment({
+  items,
+  selectedId,
+  onSelect,
+}: {
+  items: InventoryItem[]
+  selectedId: string | null
+  onSelect: (id: string) => void
+}) {
   const character = useCharacter().data
   return (
     <>
@@ -194,6 +233,18 @@ function Equipment({ items }: { items: InventoryItem[] }) {
               }}
             >
               {icon && <img src={icon.file} alt="" className="size-full object-contain p-[2px]" />}
+              {worn && (
+                <button
+                  type="button"
+                  aria-label={plainText(worn.nameKey, 'Unknown item')}
+                  aria-pressed={worn.id === selectedId}
+                  title={plainText(worn.nameKey, 'Unknown item')}
+                  onClick={() => onSelect(worn.id)}
+                  className={`absolute inset-0 cursor-pointer ${
+                    worn.id === selectedId ? 'shadow-[inset_0_0_0_2px_#fff2ae]' : ''
+                  }`}
+                />
+              )}
               <span className="sr-only">
                 {label}:{' '}
                 {worn ? (
