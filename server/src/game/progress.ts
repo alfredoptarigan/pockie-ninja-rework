@@ -1,20 +1,14 @@
 // Shared game state changes inside a transaction: items, quest progress and quest completion
 // (TaskSystem / RookieTaskSystem / RewardRule), see docs/original-data/quests-items.md.
-import {
-  createRandom,
-  deriveStats,
-  gainExp,
-  rollDrops,
-  type DropEntry,
-  type DropLib,
-} from '@pockie/game-core'
+import { createRandom, deriveStats, gainExp } from '@pockie/game-core'
 import { randomInt } from 'node:crypto'
 import type { QuestHandIn } from '@pockie/shared'
 import { and, eq, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characterQuests, characters, inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { avatarStats, dropItems, dropLib, item, levels, subTasks, task } from './data.js'
+import { avatarStats, dropLib, item, levels, subTasks, task } from './data.js'
+import { newGearState, rollLibDrops, type GrantedItem } from './gear.js'
 import { countItems, questRewards, type QuestProgress } from './quests.js'
 
 export type Tx = Parameters<Parameters<Db['transaction']>[0]>[0]
@@ -26,13 +20,13 @@ const READY = 1
 const COMPLETED = 2
 const COLLECT_STEP = 1
 
-/** Adds items, stacking onto unequipped rows of the same item up to the stack size. */
-export async function grantItems(
-  tx: Tx,
-  characterId: string,
-  items: { itemId: string; bound: boolean }[],
-) {
-  for (const { itemId, bound } of items) {
+/**
+ * Adds items, stacking onto unequipped rows of the same item up to the stack size. Equipment with
+ * an identify count (drop lists) rolls its properties as it lands in the bag.
+ */
+export async function grantItems(tx: Tx, characterId: string, items: GrantedItem[]) {
+  const random = createRandom(randomInt(2 ** 31))
+  for (const { itemId, bound, identifyCount = 0 } of items) {
     const maxStack = Number(item(itemId)?.ItemMaxFoldNum ?? 1)
     const [stack] = await tx
       .select()
@@ -53,7 +47,9 @@ export async function grantItems(
         .set({ count: stack.count + 1 })
         .where(eq(inventoryItems.id, stack.id))
     } else {
-      await tx.insert(inventoryItems).values({ characterId, itemId, bound })
+      await tx
+        .insert(inventoryItems)
+        .values({ characterId, itemId, bound, ...newGearState(itemId, identifyCount, random) })
     }
   }
 }
@@ -177,19 +173,17 @@ export async function completeQuest(
 
   const rewards = questRewards(taskId)
   const dropId = Number(row.RewardDropID)
-  const itemIds =
+  const granted: GrantedItem[] =
     dropId > 0 && dropLib(dropId)
-      ? rollDrops(
-          dropLib(dropId) as unknown as DropLib,
-          dropItems(dropId) as unknown as DropEntry[],
-          createRandom(randomInt(2 ** 31)),
-        ).map((drop) => drop.itemId)
-      : rewards.items.flatMap(({ itemId, count }) => Array<string>(count).fill(itemId))
-  await grantItems(
-    tx,
-    characterId,
-    itemIds.map((itemId) => ({ itemId, bound: true })),
-  )
+      ? rollLibDrops(dropId, createRandom(randomInt(2 ** 31))).map((drop) => ({
+          ...drop,
+          bound: true,
+        }))
+      : rewards.items.flatMap(({ itemId, count }) =>
+          Array.from({ length: count }, () => ({ itemId, bound: true })),
+        )
+  const itemIds = granted.map((drop) => drop.itemId)
+  await grantItems(tx, characterId, granted)
 
   const { levelsGained, ...exp } = expUpdate(character, rewards.exp)
   await tx

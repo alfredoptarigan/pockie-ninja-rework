@@ -64,6 +64,20 @@ export function gearView(row: ItemRow): GearView | undefined {
   }
 }
 
+/**
+ * Why CheckEquipProp refuses to wear an equipment row beyond level and job (EquipSystem.java:421,
+ * 374-): unappraised gear and broken gear (Hardiness 0). Undefined when it may be worn.
+ */
+export function equipRefusal(row: ItemRow): { code: string; message: string } | undefined {
+  const config = equipConfigOf(row.itemId)
+  if (!config) return undefined
+  if (!isAppraised(row)) return { code: 'unappraised', message: 'Appraise that item first.' }
+  if (durabilityOf(row, config) <= 0) {
+    return { code: 'broken', message: 'That item is broken. Repair it first.' }
+  }
+  return undefined
+}
+
 /** A drop with the identify count its DropItemLib row carries. */
 export interface GrantedItem {
   itemId: string

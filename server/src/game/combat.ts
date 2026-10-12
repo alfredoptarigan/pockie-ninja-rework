@@ -5,11 +5,8 @@ import {
   createRandom,
   deriveStats,
   gainExp,
-  rollDrops,
   simulateFight,
   type CombatStats,
-  type DropEntry,
-  type DropLib,
   type FighterInput,
   type SkillInput,
 } from '@pockie/game-core'
@@ -29,6 +26,7 @@ import {
   skill,
 } from './data.js'
 import { equipmentBonuses, equippedGear, type Gear } from './equipment.js'
+import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.js'
 import { drawPouch } from './pouch.js'
 import { grantItems, loadQuests, saveQuests, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
@@ -132,7 +130,7 @@ export function monsterDrops(monsterId: string): MonsterDrop[] {
 export interface FightRewards {
   exp: number
   stone: number
-  items: { itemId: string; bound: boolean }[]
+  items: GrantedItem[]
   levelsGained: number
 }
 
@@ -172,13 +170,7 @@ export async function fightMonster(
       Number(monster.DropCapital0Max ?? 0),
     )
     for (const libId of monsterDropLibIds(monsterId)) {
-      rewards.items.push(
-        ...rollDrops(
-          dropLib(libId) as unknown as DropLib,
-          dropItems(libId) as unknown as DropEntry[],
-          random,
-        ),
-      )
+      rewards.items.push(...rollLibDrops(libId, random))
     }
 
     const table = levels()
@@ -210,6 +202,8 @@ export async function fightMonster(
       progress.filter((q) => changed.has(q.taskId)),
     )
     await grantItems(tx, character.id, rewards.items)
+    // HardinessSystem 170-182: worn gear loses 1 per enemy killed (one monster per fight).
+    await wearEquipped(tx, character.id, () => KILL_LOSS)
   }
 
   // RoleUseSystem.OnCommandFightEnd draws on the pouches after a win; OutSearchSystem does it
