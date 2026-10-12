@@ -7,6 +7,12 @@ const baseURL = `http://localhost:${clientPort}`
 // Never reuse a server by default: whatever listens on the port may be another app. Set
 // E2E_REUSE=1 to run against a `pnpm dev` you started yourself on the same ports.
 const reuseExistingServer = !process.env.CI && Boolean(process.env.E2E_REUSE)
+// Headless Chromium draws WebGL with SwiftShader by default: the Phaser stage then runs at about
+// 4 fps and battle replays take minutes to start. On macOS use the real GPU through Metal.
+const gpuArgs =
+  process.platform === 'darwin'
+    ? ['--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=metal']
+    : []
 
 export default defineConfig({
   testDir: './e2e',
@@ -15,7 +21,9 @@ export default defineConfig({
   reporter: 'list',
   use: {
     baseURL,
+    actionTimeout: 15_000,
     trace: 'retain-on-failure',
+    launchOptions: { args: gpuArgs },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: [
