@@ -54,7 +54,8 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
     return locationAt(locations, x, y)
   }
 
-  const pin = (sceneId: number, className: string, style?: CSSProperties) => {
+  /** A place button; `closed` styles it when travel there is not possible (not the current place). */
+  const pin = (sceneId: number, className: string, style?: CSSProperties, closed = '') => {
     const road = roads.get(sceneId)
     const level = road && !road.open && road.level > character.level ? ` Lv. ${road.level}` : ''
     const here = sceneId === character.sceneId
@@ -68,7 +69,7 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
         onMouseLeave={() => setHover(undefined)}
         onFocus={() => setHover(sceneId)}
         onBlur={() => setHover(undefined)}
-        className={`game-map-pin font-bold ${here ? 'bg-[#1b6e17]! text-white!' : ''} ${className}`}
+        className={`game-map-pin font-bold ${here ? 'bg-[#1b6e17]! text-white!' : closed} ${className}`}
         style={style}
       >
         {sceneName(sceneId)}
@@ -121,6 +122,8 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
               Number(id),
               'absolute z-10 px-1 text-[11px] leading-tight whitespace-nowrap',
               labelStyle(Number(id), r),
+              // Opaque when closed too, so the name stays readable over the painting.
+              'disabled:bg-[#e6dcc0]! disabled:text-[#5c4f38]!',
             ),
           )}
         </div>
