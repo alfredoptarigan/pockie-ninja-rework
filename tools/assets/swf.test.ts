@@ -1,6 +1,6 @@
 import { deflateSync } from 'node:zlib'
 import { describe, expect, it } from 'vitest'
-import { symbolTimeline } from './swf.ts'
+import { scalingGrids, symbolTimeline } from './swf.ts'
 
 function tag(code: number, body: Buffer) {
   const header = Buffer.alloc(2)
@@ -41,5 +41,36 @@ describe('symbolTimeline', () => {
 
   it('returns undefined when no symbol has that class name', () => {
     expect(symbolTimeline(sampleSwf(), 'Other')).toBeUndefined()
+  })
+})
+
+/** RECT with 8 signed bits per field (values in twips). */
+function rect(xMin: number, xMax: number, yMin: number, yMax: number) {
+  const bits = [8, xMin, xMax, yMin, yMax]
+    .map((value, i) => (value & (i === 0 ? 0x1f : 0xff)).toString(2).padStart(i === 0 ? 5 : 8, '0'))
+    .join('')
+    .padEnd(40, '0')
+  return Buffer.from(bits.match(/.{8}/g)!.map((byte) => Number.parseInt(byte, 2)))
+}
+
+function gridSwf() {
+  const grid = Buffer.concat([u16(5), rect(20, 100, 40, 60)])
+  const symbols = Buffer.concat([u16(1), u16(5), cstring('Button_defaultImage')])
+  const header = Buffer.from([0x00, 0x00, 0x0c, 0x01, 0x00])
+  return Buffer.concat([
+    Buffer.from('FWS'),
+    Buffer.from([10, 0, 0, 0, 0]),
+    header,
+    tag(78, grid),
+    tag(76, symbols),
+    tag(0, Buffer.alloc(0)),
+  ])
+}
+
+describe('scalingGrids', () => {
+  it('reads the 9-slice rectangle (in pixels) of each named symbol', () => {
+    expect(scalingGrids(gridSwf())).toEqual({
+      Button_defaultImage: { xMin: 1, xMax: 5, yMin: 2, yMax: 3 },
+    })
   })
 })

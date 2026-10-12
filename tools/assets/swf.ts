@@ -7,6 +7,8 @@ const TAG_SHOW_FRAME = 1
 const TAG_DEFINE_SPRITE = 39
 const TAG_FRAME_LABEL = 43
 const TAG_SYMBOL_CLASS = 76
+const TAG_DEFINE_SCALING_GRID = 78
+const TWIPS_PER_PIXEL = 20
 
 interface Tag {
   code: number
@@ -45,6 +47,62 @@ function swfBody(file: Buffer) {
   return { body, firstTag: rectBytes + 4 }
 }
 
+/** Symbol id to class name for every SymbolClass entry. */
+function symbolClasses(tags: Tag[]) {
+  const names = new Map<number, string>()
+  for (const tag of tags.filter((t) => t.code === TAG_SYMBOL_CLASS)) {
+    const count = tag.body.readUInt16LE(0)
+    let offset = 2
+    for (let i = 0; i < count; i++) {
+      const id = tag.body.readUInt16LE(offset)
+      const name = readString(tag.body, offset + 2)
+      names.set(id, name.value)
+      offset = name.next
+    }
+  }
+  return names
+}
+
+/** Reads a SWF RECT (signed fields, `bits` wide each) starting at byte `offset`. */
+function readRect(body: Buffer, offset: number) {
+  let bit = offset * 8
+  const read = (count: number) => {
+    let value = 0
+    for (let i = 0; i < count; i++, bit++)
+      value = (value << 1) | ((body[bit >> 3]! >> (7 - (bit & 7))) & 1)
+    return value
+  }
+  const bits = read(5)
+  const signed = () => {
+    const value = read(bits)
+    return value & (1 << (bits - 1)) ? value - (1 << bits) : value
+  }
+  const [xMin, xMax, yMin, yMax] = [signed(), signed(), signed(), signed()].map(
+    (twips) => twips / TWIPS_PER_PIXEL,
+  )
+  return { xMin: xMin!, xMax: xMax!, yMin: yMin!, yMax: yMax! }
+}
+
+export interface Rect {
+  xMin: number
+  xMax: number
+  yMin: number
+  yMax: number
+}
+
+/** The 9-slice (DefineScalingGrid) rectangle, in pixels, of every symbol that has a class name. */
+export function scalingGrids(file: Buffer): Record<string, Rect> {
+  const { body, firstTag } = swfBody(file)
+  const tags = [...readTags(body, firstTag)]
+  const names = symbolClasses(tags)
+  const grids: Record<string, Rect> = {}
+  for (const tag of tags.filter((t) => t.code === TAG_DEFINE_SCALING_GRID)) {
+    const name = names.get(tag.body.readUInt16LE(0))
+    if (name) grids[name] = readRect(tag.body, 2)
+  }
+  return grids
+}
+
 export interface Timeline {
   frames: number
   /** Frame label to 0-based frame index. */
@@ -57,16 +115,7 @@ export function symbolTimeline(file: Buffer, className: string): Timeline | unde
   const tags = [...readTags(body, firstTag)]
 
   let spriteId: number | undefined
-  for (const tag of tags.filter((t) => t.code === TAG_SYMBOL_CLASS)) {
-    const count = tag.body.readUInt16LE(0)
-    let offset = 2
-    for (let i = 0; i < count; i++) {
-      const id = tag.body.readUInt16LE(offset)
-      const name = readString(tag.body, offset + 2)
-      if (name.value === className) spriteId = id
-      offset = name.next
-    }
-  }
+  for (const [id, name] of symbolClasses(tags)) if (name === className) spriteId = id
   if (spriteId === undefined) return undefined
 
   const sprite = tags.find(
