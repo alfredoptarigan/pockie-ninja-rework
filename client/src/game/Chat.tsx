@@ -142,7 +142,7 @@ export function ChatBox({
   }
 
   return (
-    <section aria-label="Chat" className="game-frame flex min-h-0 flex-col gap-1 p-2 font-game">
+    <section aria-label="Chat" className="game-hud flex min-h-0 flex-col gap-1 p-2 font-game">
       <div className="flex items-end justify-between">
         <Tabs
           label="Chat channel"
@@ -150,17 +150,22 @@ export function ChatBox({
           active={channel}
           onChange={setChannel}
           panelId={`${ids}-log`}
+          variant="dark"
         />
         <span className="text-xs text-trim-soft">
           {status === 'online' ? 'Online' : status === 'connecting' ? 'Connecting...' : 'Offline'}
         </span>
       </div>
-      <div id={`${ids}-log`} role="tabpanel" className="game-inset h-40 overflow-auto p-2 text-xs">
+      <div
+        id={`${ids}-log`}
+        role="tabpanel"
+        className="game-hud-inset h-40 overflow-auto p-2 text-xs"
+      >
         {error && <Notice tone="error">{error}</Notice>}
         <ol ref={logRef} aria-live="polite" aria-label={`${channel} messages`}>
           {shown.map((message) => (
             <li key={message.id} className="break-words">
-              <span className="font-bold text-ember-dark">{message.sender.name}:</span>{' '}
+              <span className="font-bold text-trim">{message.sender.name}:</span>{' '}
               {/* Plain text only: React escapes it; never render chat as HTML. */}
               <span>{message.text}</span>
             </li>
@@ -178,7 +183,7 @@ export function ChatBox({
           maxLength={CHAT_MAX_LENGTH}
           onChange={(event) => setText(event.target.value)}
           autoComplete="off"
-          className="min-h-8 flex-1 rounded border-2 border-wood-light bg-parchment px-2 text-sm text-wood-deep focus-visible:outline-2 focus-visible:outline-trim"
+          className="game-hud-inset min-h-7 flex-1 px-2 text-sm"
         />
         <GameButton small type="submit" disabled={status !== 'online' || sending}>
           Send

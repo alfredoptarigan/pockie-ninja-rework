@@ -1,5 +1,5 @@
 // The UI skin manifest must point at files that exist, cover every exported piece, and the
-// generated CSS must agree with it.
+// generated CSS and the stylesheet must agree with it.
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { deflateSync } from 'node:zlib'
@@ -35,6 +35,14 @@ describe('game-ui.json', () => {
 
   it('matches the generated game-ui.css', () => {
     expect(readFileSync(join(paths.generated, 'game-ui.css'), 'utf8')).toBe(uiCss(manifest))
+  })
+
+  it('defines every --ui-* variable the stylesheet uses', () => {
+    const css = readFileSync(join(paths.root, 'client/src/index.css'), 'utf8')
+    const generated = readFileSync(join(paths.generated, 'game-ui.css'), 'utf8')
+    const used = new Set([...css.matchAll(/var\((--ui-[\w-]+)\)/g)].map((m) => m[1]!))
+    expect(used.size).toBeGreaterThan(0)
+    for (const name of used) expect(generated, name).toContain(`${name}:`)
   })
 })
 

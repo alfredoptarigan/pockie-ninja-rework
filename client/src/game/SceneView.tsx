@@ -64,10 +64,7 @@ export function SceneView({ character }: { character: Character }) {
             ) : (
               <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
                 {scene.data.monsters.map((monster) => (
-                  <li
-                    key={monster.id}
-                    className="flex flex-col gap-1 rounded border border-wood-light/60 bg-white/50 p-2"
-                  >
+                  <li key={monster.id} className="flex flex-col gap-1 game-card p-2">
                     <span className="font-bold">
                       <GameText k={monster.nameKey} fallback="Monster" />
                     </span>

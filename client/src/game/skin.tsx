@@ -1,6 +1,14 @@
-// Redrawn 2011 in-game skin: wood frames with gold trim, parchment insets, ember buttons.
-// Utilities live in index.css (game-frame, game-inset, game-button).
-import { useEffect, useId, useRef, type ComponentProps, type ReactNode } from 'react'
+// In-game skin built from the original 2011 UI pieces (tools/assets/ui.ts): charcoal window frame
+// with its glossy header, cream content panels, brown glossy buttons, gold tabs, the original
+// HP/MP/EXP bars. Utilities live in index.css (game-frame, game-inset, game-button, game-tab...).
+import {
+  useEffect,
+  useId,
+  useRef,
+  type ComponentProps,
+  type CSSProperties,
+  type ReactNode,
+} from 'react'
 
 export function Panel({
   title,
@@ -15,9 +23,12 @@ export function Panel({
 }) {
   const id = useId()
   return (
-    <section aria-labelledby={id} className={`game-frame flex flex-col p-2 ${className}`}>
-      <div className="flex items-center justify-between gap-2 px-2 pb-1.5">
-        <h2 id={id} className="font-game text-sm font-bold tracking-wide text-trim-soft">
+    <section
+      aria-labelledby={id}
+      className={`game-frame flex flex-col px-2 pt-0 pb-2 ${className}`}
+    >
+      <div className="game-frame-title mb-2 flex items-center justify-between gap-2">
+        <h2 id={id} className="game-title-tag font-game text-sm font-bold">
           {title}
         </h2>
         {actions}
@@ -35,30 +46,43 @@ export function GameButton({
   return (
     <button
       type="button"
-      className={`game-button inline-flex items-center justify-center gap-1 font-game transition-[filter] hover:brightness-110 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-trim active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50 disabled:grayscale ${
-        small ? 'min-h-8 px-2.5 text-xs' : 'min-h-10 px-4 text-sm'
+      className={`inline-flex items-center justify-center gap-1 font-game active:translate-y-px disabled:cursor-not-allowed ${
+        small
+          ? 'game-button-small min-h-6 min-w-12 px-2.5 text-xs'
+          : 'game-button min-h-8 min-w-20 px-4 text-sm'
       } ${className}`}
       {...props}
     />
   )
 }
 
-/** HP, MP and EXP bars. */
+const BAR_STYLE = {
+  hp: { bar: 'game-bar-hp h-[11px] w-[106px]', label: 'text-[#ff7dfa]' },
+  mp: { bar: 'game-bar-mp h-[11px] w-[106px]', label: 'text-[#66ccff]' },
+  exp: { bar: 'game-bar-exp h-[10px] flex-1', label: 'text-[#9dff6a]' },
+} as const
+
+/** HP, MP and EXP bars: the original empty bar with the full one clipped to the value. */
 export function Bar({
   label,
   value,
   max,
-  color,
+  kind,
 }: {
   label: string
   value: number
   max: number
-  color: string
+  kind: keyof typeof BAR_STYLE
 }) {
   const percent = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0
+  const style = BAR_STYLE[kind]
   return (
     <div className="flex items-center gap-2 font-game text-xs">
-      <span className="w-8 font-bold text-trim-soft">{label}</span>
+      <span
+        className={`w-8 font-black italic [text-shadow:var(--shadow-game-text)] ${style.label}`}
+      >
+        {label}
+      </span>
       <div
         role="meter"
         aria-label={label}
@@ -66,13 +90,12 @@ export function Bar({
         aria-valuemax={max}
         aria-valuenow={value}
         aria-valuetext={`${value} / ${max}`}
-        className="relative h-4 flex-1 overflow-hidden rounded-sm border border-wood-deep bg-wood-deep"
-      >
-        <div className="h-full" style={{ width: `${percent}%`, background: color }} />
-        <span className="absolute inset-0 flex items-center justify-center text-[11px] font-bold text-white [text-shadow:0_1px_1px_#000]">
-          {value} / {max}
-        </span>
-      </div>
+        className={`game-bar ${style.bar}`}
+        style={{ '--fill': `${percent}%` } as CSSProperties}
+      />
+      <span className="text-[11px] font-bold whitespace-nowrap text-white [text-shadow:var(--shadow-game-text)]">
+        {value} / {max}
+      </span>
     </div>
   )
 }
@@ -83,16 +106,20 @@ export function Tabs<T extends string>({
   active,
   onChange,
   panelId,
+  variant = 'gold',
 }: {
   label: string
+  /** gold: window tabs (cream panels); dark: chat channel tabs on the translucent HUD. */
+  variant?: 'gold' | 'dark'
   /** id of the tabpanel the tabs control */
   panelId: string
-  tabs: { id: T; title: string }[]
+  /** `icon`: URL of a small picture shown before the title (decorative). */
+  tabs: { id: T; title: string; icon?: string }[]
   active: T
   onChange: (id: T) => void
 }) {
   return (
-    <div role="tablist" aria-label={label} className="flex gap-1">
+    <div role="tablist" aria-label={label} className="flex gap-0.5">
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -111,12 +138,9 @@ export function Tabs<T extends string>({
             buttons?.[tabs.indexOf(next)]?.focus()
           }}
           tabIndex={tab.id === active ? 0 : -1}
-          className={`rounded-t-md border-2 border-b-0 px-3 py-1 font-game text-xs font-bold focus-visible:outline-2 focus-visible:outline-trim ${
-            tab.id === active
-              ? 'border-trim bg-parchment text-wood-deep'
-              : 'border-wood-light bg-wood text-trim-soft hover:brightness-125'
-          }`}
+          className={`${variant === 'gold' ? 'game-tab' : 'game-tab-dark'} min-h-6 px-3 font-game text-xs font-bold`}
         >
+          {tab.icon && <img src={tab.icon} alt="" className="-my-1 mr-1 inline h-5 w-auto" />}
           {tab.title}
         </button>
       ))}
@@ -136,8 +160,8 @@ export function Notice({
       role={tone === 'error' ? 'alert' : 'status'}
       className={`rounded border px-2 py-1 font-game text-xs ${
         tone === 'error'
-          ? 'border-bar-hp bg-[#fbe1dc] text-[#8a1610]'
-          : 'border-wood-light bg-parchment text-wood-deep'
+          ? 'border-[#a01010] bg-[#ffe3dc] text-[#8a1610]'
+          : 'border-wood-light bg-parchment text-ink-game'
       }`}
     >
       {children}
@@ -166,17 +190,20 @@ export function Dialog({
       ref={ref}
       aria-labelledby={id}
       onClose={onClose}
-      className="game-frame m-auto w-[min(32rem,calc(100vw-2rem))] p-2 backdrop:bg-black/50"
+      className="game-frame m-auto w-[min(32rem,calc(100vw-2rem))] bg-transparent px-2 pt-0 pb-2 backdrop:bg-black/50"
     >
-      <h2 id={id} className="px-2 pb-1.5 font-game text-sm font-bold text-trim-soft">
-        {title}
-      </h2>
-      <div className="game-inset max-h-[70dvh] overflow-auto p-3 font-game text-sm">{children}</div>
-      <div className="flex justify-end px-1 pt-2">
-        <GameButton small onClick={onClose}>
-          Close
-        </GameButton>
+      <div className="game-frame-title mb-2 flex items-center justify-between gap-2">
+        <h2 id={id} className="game-title-tag font-game text-sm font-bold">
+          {title}
+        </h2>
+        <button
+          type="button"
+          aria-label="Close"
+          className="game-close shrink-0"
+          onClick={onClose}
+        />
       </div>
+      <div className="game-inset max-h-[70dvh] overflow-auto p-3 font-game text-sm">{children}</div>
     </dialog>
   )
 }

@@ -84,7 +84,7 @@ function CreationForm({ options }: { options: CreationOptions }) {
             autoComplete="off"
             aria-invalid={nameError ? true : undefined}
             aria-describedby={`${ids}-name-hint`}
-            className="min-h-10 rounded border-2 border-wood-light bg-white px-3 text-base focus-visible:outline-3 focus-visible:outline-ember"
+            className="game-field min-h-9 px-3 text-base"
             {...form.register('name')}
           />
           <p id={`${ids}-name-hint`} className={nameError ? 'font-bold text-[#8a1610]' : 'text-xs'}>
@@ -112,7 +112,7 @@ function CreationForm({ options }: { options: CreationOptions }) {
               .map((outfit) => (
                 <label
                   key={outfit.clothing}
-                  className="flex cursor-pointer items-center gap-2 rounded border-2 border-wood-light bg-parchment px-2 py-2 has-checked:border-ember has-checked:bg-[#ffe2c4] has-focus-visible:outline-2 has-focus-visible:outline-ember"
+                  className="flex cursor-pointer items-center gap-2 rounded border-2 border-wood-light bg-parchment px-2 py-2 has-checked:border-ember has-checked:bg-[#ffd98a] has-focus-visible:outline-3 has-focus-visible:outline-offset-1 has-focus-visible:outline-wood-deep"
                 >
                   <input className="sr-only" {...radio('clothing', outfit.clothing)} />
                   <span>
@@ -131,7 +131,7 @@ function CreationForm({ options }: { options: CreationOptions }) {
             {options.villages.map((village) => (
               <label
                 key={village.nation}
-                className="flex cursor-pointer items-center justify-between gap-2 rounded border-2 border-wood-light bg-parchment px-2 py-2 has-checked:border-ember has-checked:bg-[#ffe2c4] has-focus-visible:outline-2 has-focus-visible:outline-ember"
+                className="flex cursor-pointer items-center justify-between gap-2 rounded border-2 border-wood-light bg-parchment px-2 py-2 has-checked:border-ember has-checked:bg-[#ffd98a] has-focus-visible:outline-3 has-focus-visible:outline-offset-1 has-focus-visible:outline-wood-deep"
               >
                 <input className="sr-only" {...radio('nation', village.nation)} />
                 <span className="font-bold">
