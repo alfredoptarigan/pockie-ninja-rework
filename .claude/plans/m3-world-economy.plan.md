@@ -1,7 +1,7 @@
 # Plan: World & Economy (Milestone 3)
 
 **Project**: Pockie Ninja Remastered
-**Status**: draft, not yet approved by the user (open questions at the end)
+**Status**: draft; user decisions of 2026-10-12 recorded under "Decisions" (four questions still open)
 **Complexity**: Large
 
 ## Goal
@@ -38,8 +38,8 @@ enter the repo. Parallel agents work in their own worktree with a private `TEST_
 In: everything in the goal. Out (later milestones): the Gold mall (`VirtualShopSystem`), player
 trade and market (`ExchangeSystem`, `MartSystem`, M4), teams in toll gates and pub fights and the
 captain bonus (M4), the weekly toll gate ranking (M4), sockets, gems, enchant, synthesis, ring
-exchange and engraving (later forge work), Christmas maps xx04 (no art for 2204-2504), daily
-quests (`DayTaskSystem`) unless the user pulls them in (open question 6).
+exchange and engraving (later forge work), Christmas maps xx04 (no art for 2204-2504), the
+Gold top-up and payment gateway (later). Daily quests (`DayTaskSystem`) are IN scope (decision 5).
 
 ## Folder ownership
 
@@ -171,8 +171,8 @@ one-line wiring), and the `shared/src/index.ts` re-export.
   rule section required, missing origin key = free, `RequireLevel`); go home / go out via
   `ToScene`; record `scenes_entered`. Fields: task-boss gate by `TaskID` (accepted or completed),
   subtask type 10 (boss + item), ticket bosses (i150078, level variant via `LevelAttackRec`,
-  hourly schedule, dates ignored per open question 2), Stone Organization rest, energy if
-  decided (open question 1), Angel/Demon City buildings and NPC menus that route to shop, forge
+  hourly schedule, expired dates not applied per decision 2), Stone Organization rest (no energy,
+  decision 1), Angel/Demon City buildings and NPC menus that route to shop, forge
   and gate windows. Client: full world map (34 buttons minus 181, visited state), scene exits,
   the new field scenes, ticket boss timer, rest dialog, and the one-line window wiring for tasks
   6, 7 and 9.
@@ -225,7 +225,7 @@ Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 fi
 | ---- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 0004 | `item_instances`   | `inventory_items`: `enhance_level`, `inscribe_level`, `durability`, `can_identify`, `identify_count`, `identify_times`, `props jsonb` (`[{propId, value}]`), `engraved_slot` (null); backfill durability from `MaxHardiness` |
 | 0005 | `shops`            | `character_shop_stock` (character, shop type 1-3, slot, item, prices per currency, identify count, appraised, bound), `character_shops` (character, shop type, `last_refresh_at`, `free_restocks_used`), `mystic_spawns` (scene, until, stock per row, sold totals), `character_mystic_purchases` (spawn, item, count) |
-| 0006 | `world`            | `characters`: `scenes_entered int[]`, `energy`, `energy_day` (only if open question 1 keeps energy)                                                                                                                             |
+| 0006 | `world`            | `characters`: `scenes_entered int[]`; daily quest state with its UTC day (no energy: decision 1)                                                                                                                             |
 | 0007 | `instances`        | `characters`: `toll_gate_day`, `toll_gate_entries`; `toll_gate_runs` (one per character: gate, sub gate, point, passed point, state, card state, 5 cards, peeks); `single_gate` (best, current floor, pot, lives, bought, runs today, day); `pub_fight_lineups` (character, scene, 3 NPC ids, last pull, fights today, day) |
 
 ## Asset exports (input for task 3)
@@ -247,28 +247,31 @@ Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 fi
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Item instance model touches every inventory path (M2 code)        | Single migration with defaults that keep M2 behaviour; task 7 owns `server/src/game/` |
 | Currency exploits (original Gold check bug, races on stock/cards) | Per-currency checks, row locks per character, tests for double spend                  |
-| Energy changes M2 fights retroactively                            | Decide first (open question 1); feature behind one rule function                      |
-| Gold has no in-game source; Mystery Shop, flips and enhance need it | Gift Coupons cover most paid actions; decide a Gold source or leave Gold-only actions dormant |
+| Gold has no in-game source until the top-up exists (decision 3) | Gold-only actions ship but stay unreachable for players without Gold; Gift Coupons where the original allows; an admin grant for tests |
 | Toll gate scope (21 gates, 1080 NPCs, card flip, Las Noches)      | Solo only; ranking and teams to M4; auto mode optional                                |
 | Asset volume (repo already about 170 MB of game assets)           | Export only referenced keys; WebP; measure before committing                          |
 | 1,071 field quests, mostly unreviewed text                        | Review main chains only; rest stays marked unreviewed                                 |
 | Original data holes (missing tasks 10150-10161, never-attackable bosses, set 8862 without items) | Port faithfully and list them in the UI notes; no invented content |
 
+## Decisions (user, 2026-10-12)
+
+1. **Energy**: not ported at all. Field fights, pub fights and rewards never check or spend energy.
+2. **Expired schedules**: the ticket bosses and the Mysterious Merchant are included and active;
+   their 2020 end dates are not applied (they would otherwise never spawn).
+3. **Gold**: comes from a top-up through a payment gateway, built later (not M3). Gold prices and
+   Gold-only actions are ported as in the original.
+4. **Free shop restock**: daily (resets at 00:00 UTC), not once per character.
+5. **Daily quests** (`DayTaskSystem`, 284 quests in the neutral fields): in M3, owned by task 8
+   (`server/src/modules/game`), schema in task 2's migration 0006.
+6. **Daily resets**: UTC midnight everywhere (explore, shop restock, toll gates, pub fights,
+   daily quests).
+
 ## Open questions for the user
 
-1. **Energy**: port it fully (200 max, +100 per day, a won field fight pays nothing without
-   1 energy), only as the pub fight cost, or not at all? Full port changes M2 fights.
-2. **Expired schedules**: ticket bosses (end 2020-07-06) and the Mysterious Merchant (end
-   2020-01-01) never spawn if ported literally. Treat the dates as always on? (Draft assumes yes.)
-3. **Gold**: no in-game source. Keep Gold-only actions (Mystery Shop, merchant, card peeks,
-   Las Noches lives) with Gift Coupon alternatives where the original allows, or add a Gold source?
-4. **Free shop restock**: once per character as coded, or daily?
-5. **World map**: unvisited places hidden but clickable (original) or dimmed and blocked?
+1. **World map**: unvisited places hidden but clickable (original) or dimmed and blocked?
    Angel City's "Village" button leads to 2601 (original `ToScene`): keep?
-6. **Daily quests** (284 in the neutral fields, `DayTaskSystem`): in M3 or later?
-7. **Never-attackable task bosses** (n32025, n31025, n31026, n32030): show locked or hide?
-8. **Daily resets**: original uses server-local midnight; M2 explore uses UTC. UTC everywhere?
-9. **Original quirks**: SkillAdd set bonuses give 0 chance (`% 100`), Dragon Soul/Kage no-op
+2. **Never-attackable task bosses** (n32025, n31025, n31026, n32030): show locked or hide?
+3. **Original quirks**: SkillAdd set bonuses give 0 chance (`% 100`), Dragon Soul/Kage no-op
    bonuses, inscription on rings/amulets with no bonus, unclipped city NPCs. Port as is?
-10. **VIP**: no VIP system; treat everyone as non-VIP (no +30% toll gate EXP, no 96.7% Las Noches
+4. **VIP**: no VIP system; treat everyone as non-VIP (no +30% toll gate EXP, no 96.7% Las Noches
     start, no 80% pouch price)?
