@@ -354,8 +354,14 @@
   }
 }
 
-/* Stats window pieces (UI_RoleInfo_Xml, see docs/ui-layout-reborn.md). */
-/* Grey plate behind the player's title (BigBG7). */
+/* Stats and Inventory window pieces (UI_RoleInfo_Xml, UIResource Equip / Common). */
+/* Translucent bar behind a row of buttons (SmallBG1). */
+@utility game-panel-small {
+  border: 0;
+  border-image: var(--ui-panel-small) var(--ui-panel-small-slice) fill /
+    var(--ui-panel-small-border);
+}
+/* Grey plate behind a window title or a player title (BigBG7). */
 @utility game-title-plate {
   border: 0;
   border-image: var(--ui-title-plate) var(--ui-title-plate-slice) fill /
@@ -445,4 +451,13 @@
 }
 @utility game-icon-notice {
   background: var(--ui-icon-notice) center / 100% 100% no-repeat;
+/* Column holding the equipment slots (EquipBG). */
+@utility game-equip-column {
+  border: 0;
+  border-image: var(--ui-equip-column) var(--ui-equip-column-slice) fill /
+    var(--ui-equip-column-border);
+}
+/* Character backdrop (Peoplebg): the export keeps a 104px glow margin, scaled off the edges here. */
+@utility game-equip-backdrop {
+  background: var(--ui-equip-backdrop) -63px -61px / 364px 378px no-repeat;
 }

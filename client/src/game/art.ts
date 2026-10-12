@@ -15,6 +15,13 @@ export function useOutfitPortrait(clothing: number) {
   return useMotions().data?.outfits[clothing]?.portrait
 }
 
+/** Stand animation of an outfit (the bag window draws its first frame). */
+export function useOutfitStand(clothing: number) {
+  const outfit = useMotions().data?.outfits[clothing]
+  const motion = outfit?.actions['999']
+  return motion ? outfit.motions[motion] : undefined
+}
+
 /** Photo shown in an NPC's dialog. */
 export function useNpcPhoto(npcId: string) {
   const motions = useMotions().data

@@ -1,30 +1,68 @@
-import { useId, useState } from 'react'
-import { errorMessage, useEquipItem, useInventory, useUseItem } from './api'
-import { ItemIcon } from './ItemIcon'
+// Inventory window laid out like Pockie Ninja Reborn's (docs/ui-layout-reborn.md, "Inventory"):
+// equipment columns around the character, then the bag grid with its page tabs. Positions are
+// the measured ones, relative to the window content (Reborn's x - 5, y - 31).
+import { useId, useState, type CSSProperties } from 'react'
+import { errorMessage, useCharacter, useEquipItem, useInventory, useUseItem } from './api'
+import { useOutfitStand } from './art'
+import { ItemIcon, itemIcon } from './ItemIcon'
+import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { BagHighlight, InventoryItem } from './types'
-import { completedNotice } from './QuestLog'
 import { isEquipment, isUsable } from './world'
 
-/** Whether a bag row is what the current tutorial step asks for. */
+/** Whether a bag item is what the current tutorial step asks for. */
 const isHighlighted = (item: InventoryItem, highlight: BagHighlight | undefined) =>
   !!highlight &&
   ('itemId' in highlight
     ? item.itemId === highlight.itemId
     : isEquipment(item.itemId) && !item.equippedSlot && item.fitsOutfit !== false)
 
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+/** Bag tabs I-X of 5 x 3 cells. ponytail: items past the 150th are not shown; page on if bags grow. */
+const BAG_COLUMNS = 5
+const PAGE_SIZE = BAG_COLUMNS * 3
+
+/**
+ * Equipment slots: `slot` is the item's EquipType (server equippedSlot). Outfit and Pet have no
+ * items yet, so they always show their empty picture. `art` is drawn at half its exported size.
+ */
+const SLOTS = [
+  { slot: 'Outfit', label: 'Outfit', art: 'outfit', size: 61, at: [4, 50, 55, 55] },
+  { slot: 'Weapon', label: 'Weapon', art: 'weapon', size: '71px 98.5px', at: [4, 107, 55, 83] },
+  { slot: 'Glove', label: 'Gloves', art: 'glove', size: 73, at: [4, 192, 55, 55] },
+  { slot: 'Pet', label: 'Pet', art: 'pet', size: 71, at: [4, 249, 55, 55] },
+  { slot: 'Ring', label: 'Ring', art: 'ring', size: 34, at: [309, 49, 28, 28] },
+  { slot: 'Amulet', label: 'Amulet', art: 'amulet', size: 34, at: [338, 49, 28, 28] },
+  { slot: 'Hat', label: 'Hat', art: 'hat', size: 73, at: [310, 78, 55, 55] },
+  { slot: 'Cloth', label: 'Armour', art: 'cloth', size: 73, at: [310, 135, 55, 55] },
+  { slot: 'Girdle', label: 'Belt', art: 'belt', size: 73, at: [310, 192, 55, 55] },
+  { slot: 'Shoes', label: 'Shoes', art: 'shoes', size: 73, at: [310, 249, 55, 55] },
+] as const
+
+const box = ([left, top, width, height]: readonly number[]): CSSProperties => ({
+  left,
+  top,
+  width,
+  height,
+})
+
+type Run = (item: InventoryItem, kind: 'use' | 'equip') => void
+
 export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const inventory = useInventory()
   const use = useUseItem()
   const equip = useEquipItem()
   const [notice, setNotice] = useState<{ tone: 'info' | 'error'; text: string } | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [page, setPage] = useState<number | null>(null)
 
-  const run = async (action: typeof use, item: InventoryItem, verb: string) => {
+  const run: Run = async (item, kind) => {
     setNotice(null)
     try {
-      const result = await action.mutateAsync(item.id)
+      const result = await (kind === 'use' ? use : equip).mutateAsync(item.id)
       const name = plainText(item.nameKey, 'the item')
+      const verb = kind === 'use' ? 'Used' : 'Equipped'
       setNotice({ tone: 'info', text: `${verb} ${name}.${completedNotice(result.completed)}` })
     } catch (error) {
       setNotice({ tone: 'error', text: errorMessage(error) })
@@ -35,66 +73,267 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   if (inventory.isPending) return <p>Opening your bag...</p>
   if (inventory.isError) return <Notice tone="error">We could not open your bag.</Notice>
 
+  const bag = inventory.data.filter((item) => !item.equippedSlot)
+  const marked = bag.find((item) => isHighlighted(item, highlight))
+  // The tutorial's item is selected (and its page shown) until the player picks another.
+  const selected = bag.find((item) => item.id === selectedId) ?? marked
+  const markedPage = marked ? Math.floor(bag.indexOf(marked) / PAGE_SIZE) : 0
+  const shownPage = page ?? markedPage
+  const shown = bag.slice(shownPage * PAGE_SIZE, (shownPage + 1) * PAGE_SIZE)
+
   return (
-    <div className="flex flex-col gap-2">
-      {notice && <Notice tone={notice.tone}>{notice.text}</Notice>}
-      {inventory.data.length === 0 ? (
-        <p>Your bag is empty.</p>
-      ) : (
-        <ul className="flex flex-col gap-1.5">
-          {inventory.data.map((item) => (
-            <li
+    <div className="relative -m-3 h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
+      <BagPages />
+      <Equipment items={inventory.data} />
+      <div className="game-inset absolute top-[313px] left-0 h-[200px] w-[369px]" />
+      <div
+        role="tabpanel"
+        aria-label={`Bag ${ROMAN[shownPage]}`}
+        className="game-inset absolute top-[340px] left-[5px] h-[170px] w-[279px]"
+      >
+        <ul
+          aria-label="Bag"
+          className="absolute top-[5px] left-[5px] grid h-[160px] w-[271px] grid-cols-[repeat(5,51px)] content-start gap-x-[4px] gap-y-[3.5px]"
+          style={{ background: 'var(--ui-slot) 0 0 / 51px 51px space' }}
+        >
+          {shown.map((item) => (
+            <BagCell
               key={item.id}
-              className={`flex items-center justify-between gap-2 game-card px-2 py-1 ${
-                isHighlighted(item, highlight) ? 'ring-2 ring-[#ffb300]' : ''
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                {/* Bag cell of the original package grid; the stack count sits in its corner. */}
-                <ItemIcon itemId={item.itemId} name={plainText(item.nameKey, 'Unknown item')}>
-                  {item.count > 1 && (
-                    <span
-                      aria-hidden="true"
-                      className="absolute right-0.5 bottom-0 text-[10px] font-bold"
-                    >
-                      {item.count}
-                    </span>
-                  )}
-                </ItemIcon>
-                <GameText k={item.nameKey} fallback="Unknown item" />
-                {item.count > 1 && <span className="sr-only">x{item.count}</span>}
-                {isHighlighted(item, highlight) && (
-                  <span className="rounded bg-[#ffb300] px-1 text-xs font-bold text-ink-game">
-                    Next step
-                  </span>
-                )}
-                {item.equippedSlot && (
-                  <span className="ml-2 rounded bg-leaf px-1 text-xs font-bold text-white">
-                    Equipped
-                  </span>
-                )}
-              </span>
-              {isEquipment(item.itemId)
-                ? !item.equippedSlot && (
-                    <EquipButton
-                      item={item}
-                      busy={busy}
-                      onEquip={() => run(equip, item, 'Equipped')}
-                    />
-                  )
-                : isUsable(item.itemId) && (
-                    <GameButton
-                      small
-                      disabled={busy}
-                      aria-label={`Use ${plainText(item.nameKey, 'item')}`}
-                      onClick={() => run(use, item, 'Used')}
-                    >
-                      Use
-                    </GameButton>
-                  )}
-            </li>
+              item={item}
+              highlighted={isHighlighted(item, highlight)}
+              selected={item === selected}
+              busy={busy}
+              onSelect={() => setSelectedId(item.id)}
+              run={run}
+            />
           ))}
         </ul>
+        {bag.length === 0 && (
+          <p className="absolute inset-0 grid place-items-center text-white [text-shadow:var(--shadow-game-text)]">
+            Your bag is empty.
+          </p>
+        )}
+      </div>
+      <div role="tablist" aria-label="Bag tabs" className="absolute top-[318px] left-[10px] flex">
+        {ROMAN.map((label, index) => (
+          <button
+            key={label}
+            type="button"
+            role="tab"
+            aria-selected={index === shownPage}
+            onClick={() => setPage(index)}
+            className="game-tab h-[22px] w-[27px] px-0 text-[13px] tracking-[-0.5px] text-black"
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {bag.length > 0 && !selected && (
+        <p className="absolute top-[331px] left-[288px] w-[75px] text-[11px] text-ink-game">
+          Select an item.
+        </p>
+      )}
+      {notice && (
+        <div className="absolute bottom-[213px] left-[69px] w-[231px]">
+          <Notice tone={notice.tone}>{notice.text}</Notice>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/** Bag pages I-V: the bag is a single page today, so only I is open. */
+function BagPages() {
+  return (
+    <div
+      role="group"
+      aria-label="Bag pages"
+      className="game-panel-small absolute top-[6px] left-[32px] flex h-[32px] w-[305px] gap-[4px] pt-[3px] pl-[4px]"
+    >
+      {ROMAN.slice(0, 5).map((label, index) => (
+        <GameButton
+          key={label}
+          small
+          aria-pressed={index === 0}
+          disabled={index > 0}
+          className="h-[24px] w-[56px]"
+        >
+          {label}
+        </GameButton>
+      ))}
+    </div>
+  )
+}
+
+/** The equipment columns, the character backdrop and the slots with what is worn. */
+function Equipment({ items }: { items: InventoryItem[] }) {
+  const character = useCharacter().data
+  return (
+    <>
+      <div className="game-equip-column absolute top-[46px] left-0 h-[262px] w-[63px]" />
+      <div className="game-equip-column absolute top-[46px] left-[306px] h-[262px] w-[63px]" />
+      <div className="game-equip-backdrop absolute top-[48px] left-[65px] h-[256px] w-[239px]">
+        {character && <StandPose clothing={character.clothing} />}
+      </div>
+      {character && (
+        <p className="game-title-plate absolute top-[52px] left-[103px] grid h-[36px] w-[164px] place-items-center text-[13px] font-bold text-[#e8e8e8] [text-shadow:var(--shadow-game-text)]">
+          {character.name}
+        </p>
+      )}
+      <ul aria-label="Equipment">
+        {SLOTS.map(({ slot, label, art, size, at }) => {
+          const worn = items.find((item) => item.equippedSlot === slot)
+          const icon = worn && itemIcon(worn.itemId)
+          return (
+            <li
+              key={slot}
+              className="absolute grid place-items-center"
+              style={{
+                ...box(at),
+                background: `var(--ui-slot-${art}) center / ${typeof size === 'number' ? `${size}px` : size} no-repeat`,
+              }}
+            >
+              {icon && <img src={icon.file} alt="" className="size-full object-contain p-[2px]" />}
+              <span className="sr-only">
+                {label}:{' '}
+                {worn ? (
+                  <>
+                    <GameText k={worn.nameKey} fallback="Unknown item" /> <span>Equipped</span>
+                  </>
+                ) : (
+                  'empty'
+                )}
+              </span>
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
+}
+
+/** First frame of the outfit's stand animation at twice its size, standing on the platform. */
+function StandPose({ clothing }: { clothing: number }) {
+  const stand = useOutfitStand(clothing)
+  if (!stand) return null
+  const rows = Math.ceil(stand.frames / stand.columns)
+  const width = stand.frameWidth * 2
+  const height = stand.frameHeight * 2
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute bottom-[10px] left-1/2 -translate-x-1/2"
+      style={{
+        width,
+        height,
+        backgroundImage: `url(${stand.file})`,
+        backgroundSize: `${width * stand.columns}px ${height * rows}px`,
+      }}
+    />
+  )
+}
+
+/**
+ * One bag cell: the icon (selecting it shows the item in the side column), and, when selected,
+ * its name and action there (positioned against the grid, so they land in the side column).
+ */
+function BagCell({
+  item,
+  highlighted,
+  selected,
+  busy,
+  onSelect,
+  run,
+}: {
+  item: InventoryItem
+  highlighted: boolean
+  selected: boolean
+  busy: boolean
+  onSelect: () => void
+  run: Run
+}) {
+  const name = plainText(item.nameKey, 'Unknown item')
+  return (
+    <li>
+      <ItemIcon
+        itemId={item.itemId}
+        name={name}
+        className={`size-[51px] [&_img]:size-full [&_img]:object-contain ${
+          highlighted ? 'ring-2 ring-[#ffb300]' : ''
+        } ${selected ? 'shadow-[inset_0_0_0_2px_#fff2ae]' : ''}`}
+      >
+        {item.count > 1 && (
+          <span aria-hidden="true" className="absolute right-[3px] bottom-px text-[11px] font-bold">
+            {item.count}
+          </span>
+        )}
+        <button
+          type="button"
+          aria-label={name}
+          aria-pressed={selected}
+          title={name}
+          onClick={onSelect}
+          className="absolute inset-0 cursor-pointer"
+        />
+      </ItemIcon>
+      {selected ? (
+        <ItemDetails item={item} highlighted={highlighted} busy={busy} run={run} />
+      ) : (
+        <span className="sr-only">
+          <span>
+            <GameText k={item.nameKey} fallback="Unknown item" />
+          </span>
+          {item.count > 1 && <span> x{item.count}</span>}
+          {highlighted && (
+            <>
+              {' '}
+              (<span>Next step</span>)
+            </>
+          )}
+        </span>
+      )}
+    </li>
+  )
+}
+
+/** The selected item in the side column: name, tutorial marker and its Use / Equip button. */
+function ItemDetails({
+  item,
+  highlighted,
+  busy,
+  run,
+}: {
+  item: InventoryItem
+  highlighted: boolean
+  busy: boolean
+  run: Run
+}) {
+  const name = plainText(item.nameKey, 'item')
+  return (
+    // Positioned against the bag grid (window 10,345): the side column is at window 288,331.
+    <div className="absolute top-[-14px] left-[278px] flex w-[75px] flex-col gap-[5px] text-[11px] text-ink-game">
+      <p className="font-bold">
+        <GameText k={item.nameKey} fallback="Unknown item" />
+        {item.count > 1 && <span className="sr-only"> x{item.count}</span>}
+      </p>
+      {highlighted && (
+        <span className="self-start rounded bg-[#ffb300] px-1 font-bold text-ink-game">
+          Next step
+        </span>
+      )}
+      {isEquipment(item.itemId) ? (
+        <EquipButton item={item} busy={busy} onEquip={() => run(item, 'equip')} />
+      ) : (
+        isUsable(item.itemId) && (
+          <GameButton
+            disabled={busy}
+            aria-label={`Use ${name}`}
+            onClick={() => run(item, 'use')}
+            className="h-[25px] w-[75px]"
+          >
+            Use
+          </GameButton>
+        )
       )}
     </div>
   )
@@ -115,21 +354,21 @@ function EquipButton({
   const id = useId()
   const fits = item.fitsOutfit !== false
   return (
-    <span className="flex shrink-0 items-center gap-2">
-      {!fits && (
-        <span id={id} className="max-w-36 text-right text-xs text-[#8a1610]">
-          {UNFIT_REASON}
-        </span>
-      )}
+    <>
       <GameButton
-        small
         disabled={busy || !fits}
         aria-label={`Equip ${plainText(item.nameKey, 'item')}`}
         aria-describedby={fits ? undefined : id}
         onClick={onEquip}
+        className="h-[25px] w-[75px]"
       >
         Equip
       </GameButton>
-    </span>
+      {!fits && (
+        <span id={id} className="text-[#8a1610]">
+          {UNFIT_REASON}
+        </span>
+      )}
+    </>
   )
 }
