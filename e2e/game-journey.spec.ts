@@ -116,12 +116,13 @@ async function createNinja(page: Page, role: string) {
   return id
 }
 
+// Fields stay blocked on the World Map until visited (decision 7); Leave walks out of the
+// village to its ToScene field.
 async function travelToField(page: Page) {
   await page
     .getByRole('region', { name: 'Location' })
-    .getByRole('button', { name: 'World Map' })
+    .getByRole('button', { name: 'Leave', exact: true })
     .click()
-  await dialog(page, 'World Map').getByRole('button', { name: FIELD, exact: true }).click()
   await expect(
     page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: FIELD }),
   ).toBeVisible({ timeout: 15_000 })
@@ -207,19 +208,19 @@ test('a fresh ninja searches an exploration spot and sees the result cards', asy
 
 test('a ninja defeated in a field fight returns to the village with one HP', async ({ page }) => {
   test.setTimeout(60_000)
-  // Arrange: an unarmed level-one ninja cannot beat the field boss.
+  // Arrange: an unarmed level-one ninja deals 0 damage (original fists rule), so it cannot win.
   await createNinja(page, 'Revive')
   await travelToField(page)
 
   // Act: lose a real server-simulated fight and finish its replay.
-  await (await sceneAction(page, 'Fight Warrior of Darkness')).click()
+  await (await sceneAction(page, `Fight ${MONSTER}`)).click()
   await page.getByRole('button', { name: 'Fight anyway', exact: true }).click()
   await page
     .getByRole('region', { name: 'Battle replay' })
     .getByRole('button', { name: 'Skip' })
     .click()
   const defeat = dialog(page, 'Defeat')
-  await expect(defeat).toContainText('Warrior of Darkness defeated you.')
+  await expect(defeat).toContainText(`${MONSTER} defeated you.`)
   await defeat.getByRole('button', { name: 'Close' }).click()
   const revive = dialog(page, 'Defeated')
   await expect(revive.getByRole('button', { name: 'Revive here', exact: true })).toBeDisabled()
@@ -328,14 +329,15 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
     'aria-disabled',
     'true',
   )
-  await map.getByRole('button', { name: FIELD, exact: true }).hover()
+  // An unvisited field keeps its tooltip but is blocked until the ninja has walked there.
+  const field = map.getByRole('button', { name: `${FIELD} (not visited yet)`, exact: true })
+  await expect(field).toHaveAttribute('aria-disabled', 'true')
+  await field.hover()
   await expect(map.getByRole('tooltip')).toContainText('Entry level: Level 1')
   await shot(page, 'world-map')
-  await map.getByRole('button', { name: FIELD, exact: true }).click()
+  await map.getByRole('button', { name: 'Close' }).click()
   await expect(map).toBeHidden()
-  await expect(
-    page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: FIELD }),
-  ).toBeVisible()
+  await travelToField(page)
   // Phaser removes the old scene's canvas a frame after the new one mounts.
   const pictureCanvas = page.getByTestId('scene-picture').locator('canvas')
   await expect(pictureCanvas).toHaveCount(1)
