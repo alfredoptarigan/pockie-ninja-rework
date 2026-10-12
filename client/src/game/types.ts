@@ -150,3 +150,55 @@ export interface FightResult {
   }
   character: Character
 }
+
+/** Star level of an explore spot: it rises every `perStar` searches up to 5 (progress -1 at 5). */
+export interface ExploreStar {
+  level: number
+  progress: number
+  perStar: number
+}
+
+/** An explore spot of the current scene (GET /api/game/explore). */
+export interface ExploreSpot {
+  id: string
+  nameKey: string
+  requireLevel: number
+  /** Keys used up by every search. */
+  requireItems: { itemId: string; count: number }[]
+  star: ExploreStar
+}
+
+/** Today's searches (all spots together) and the end of the rest after the last one. */
+export interface ExploreStatus {
+  remaining: number
+  total: number
+  cooldownEndsAt: string | null
+}
+
+export interface ExploreView extends ExploreStatus {
+  spots: ExploreSpot[]
+}
+
+/** What one of the five cards of a search holds (server/src/game/explore.ts). */
+export type ExploreCard =
+  | { type: 'fight'; monsterId: string }
+  | { type: 'stone'; amount: number }
+  | { type: 'item' | 'boss' | 'key' | 'pet'; itemId: string; bound: boolean }
+  | { type: 'game' }
+  | { type: 'nothing' }
+
+/** POST /api/game/explore/:spotId: the player's card is paid out, the other four only shown. */
+export interface ExploreResult {
+  spotId: string
+  star: ExploreStar
+  /** Rolled when the star level just rose. */
+  starBonus: { type: 'exp'; exp: number } | { type: 'pet'; itemId: string; bound: boolean } | null
+  /** `granted` is false when a pet egg got away. */
+  card: ExploreCard & { granted: boolean }
+  otherCards: ExploreCard[]
+  fight: { replay: Replay; won: boolean } | null
+  rewards: FightResult['rewards']
+  completed: number[]
+  explore: ExploreStatus
+  character: Character
+}

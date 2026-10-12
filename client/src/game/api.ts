@@ -14,6 +14,8 @@ import type {
   QuestOffer,
   SceneView,
   TalkResult,
+  ExploreResult,
+  ExploreView,
 } from './types'
 
 export const gameKeys = {
@@ -153,4 +155,20 @@ export function useEquipItem() {
 
 export function errorMessage(error: unknown) {
   return error instanceof ApiError ? error.message : 'Something went wrong. Please try again.'
+}
+
+/** Under gameKeys.all, so every game action (travel, revive, explore) refetches it. */
+export const exploreKey = ['game', 'explore'] as const
+
+/** Explore spots of the current scene, today's searches and the rest after the last one. */
+export function useExplore(enabled = true) {
+  return useQuery({
+    queryKey: exploreKey,
+    queryFn: () => api<ExploreView>('/api/game/explore'),
+    enabled,
+  })
+}
+
+export function useExploreSpot() {
+  return useGameAction((spotId: string) => post<ExploreResult>(`/api/game/explore/${spotId}`))
 }

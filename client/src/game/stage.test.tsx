@@ -37,8 +37,14 @@ describe('ScenePictureMount', () => {
   it('starts the picture and forwards clicks to the callbacks', async () => {
     const onNpc = vi.fn()
     const onMonster = vi.fn()
+    const onExplore = vi.fn()
     const { unmount } = render(
-      <ScenePictureMount scene={villageScene} onNpc={onNpc} onMonster={onMonster} />,
+      <ScenePictureMount
+        scene={villageScene}
+        onNpc={onNpc}
+        onMonster={onMonster}
+        onExplore={onExplore}
+      />,
     )
 
     expect(screen.getByTestId('scene-picture')).toHaveAttribute('aria-hidden', 'true')
@@ -50,6 +56,8 @@ describe('ScenePictureMount', () => {
     actions.onMonster({ id: 'n33017', nameKey: 'lg_name_n33017', level: 2 })
     expect(onNpc).toHaveBeenCalledWith(villageScene.npcs[0])
     expect(onMonster).toHaveBeenCalledWith(expect.objectContaining({ id: 'n33017' }))
+    actions.onExplore?.()
+    expect(onExplore).toHaveBeenCalled()
 
     const handle = vi.mocked(mountPicture).mock.results.at(-1)!.value as { destroy: () => void }
     unmount()

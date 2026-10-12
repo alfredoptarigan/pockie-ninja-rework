@@ -1,6 +1,7 @@
 import type { Character } from '@pockie/shared'
 import { useState } from 'react'
 import { errorMessage, useFight, useInventory, useScene } from './api'
+import { ExploreWindow } from './ExploreWindow'
 import { FightSummary } from './FightSummary'
 import { DropsMenu } from './MonsterDrops'
 import { ReviveWindow } from './ReviveWindow'
@@ -35,6 +36,7 @@ export function SceneView({
   const [unarmed, setUnarmed] = useState<SceneMonster | null>(null)
   const [unarmedOk, setUnarmedOk] = useState(false)
   const [refused, setRefused] = useState(false)
+  const [exploring, setExploring] = useState(false)
   const [fightState, setFightState] = useState<{
     result: FightResult
     monster: SceneMonster
@@ -70,7 +72,20 @@ export function SceneView({
 
   return (
     <>
-      {scene.data && <ScenePictureMount scene={scene.data} onNpc={onNpc} onMonster={startFight} />}
+      {scene.data && (
+        <ScenePictureMount
+          scene={scene.data}
+          onNpc={onNpc}
+          onMonster={startFight}
+          onExplore={() => setExploring(true)}
+        />
+      )}
+      <ExploreWindow
+        character={character}
+        scene={scene.data}
+        open={exploring}
+        onOpenChange={setExploring}
+      />
       {/* Keyboard and screen-reader access to the picture: hidden until it has the focus. */}
       <div className="pointer-events-auto absolute top-[150px] left-1 z-10 w-[300px]">
         <section aria-label="Scene actions" className="sr-only focus-within:not-sr-only">
