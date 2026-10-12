@@ -45,7 +45,8 @@
   --color-bar-exp: #44dd44;
   /* Window chrome text: white with the dark outline the Flash labels had. */
   --shadow-game-text: 0 0 2px #000, 0 1px 1px #000;
-  --font-game: 'Noto Sans Variable', Tahoma, Verdana, ui-sans-serif, system-ui, sans-serif;
+  /* Pockie Ninja Reborn draws the game UI in Arial (values in a monospace face). */
+  --font-game: Arial, Helvetica, ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -94,6 +95,7 @@
 @utility game-title-tag {
   margin-top: 3px;
   padding: 0 6px;
+  font-size: 12px;
   border: 1px solid #6d5f2c;
   border-radius: 2px;
   background: linear-gradient(180deg, #fff9d6 0%, #f3df8e 100%);
@@ -125,46 +127,26 @@
   border-image: var(--ui-input) var(--ui-input-slice) fill / var(--ui-input-border);
   color: var(--color-ink-game);
 }
+/*
+ * Buttons as Pockie Ninja Reborn draws them (its gold "jbutton"): a gold gradient with a dark
+ * brown edge and caption.
+ */
 @utility game-button {
-  border: 0;
-  border-image: var(--ui-button-normal) var(--ui-button-normal-slice) fill /
-    var(--ui-button-normal-border);
-  color: #fff;
+  border: 1px solid #906020;
+  border-radius: 4px;
+  background: linear-gradient(#f5e0b0, #d8b060 50%, #c08030);
+  color: #2a1800;
   font-weight: 700;
-  text-shadow:
-    0 0 2px #4a2200,
-    0 1px 1px #4a2200;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.3);
   &:hover:not(:disabled) {
-    border-image-source: var(--ui-button-hover);
-    color: #5a2c00;
-    text-shadow: 0 1px 0 rgb(255 255 255 / 0.6);
+    background: linear-gradient(#fff0c8, #e8c478 50%, #d0903c);
   }
   &:active:not(:disabled) {
-    border-image-source: var(--ui-button-pressed);
-  }
-  &:disabled {
-    border-image-source: var(--ui-button-disabled);
-    color: #d5d5d5;
-    text-shadow: 0 1px 1px #000;
-  }
-}
-/* Small buttons ("Send", "Go"): the gold box of the original text field with the button's hover. */
-@utility game-button-small {
-  border: 0;
-  border-image: var(--ui-input) var(--ui-input-slice) fill / var(--ui-input-border);
-  box-shadow: 0 0 0 1px #5a4310;
-  border-radius: 3px;
-  color: #3a2400;
-  font-weight: 700;
-  &:hover:not(:disabled) {
-    border-image: var(--ui-button-hover) var(--ui-button-hover-slice) fill / 5px 6px 5px 6px;
-  }
-  &:active:not(:disabled) {
-    filter: brightness(0.9);
+    background: linear-gradient(#c08030, #d8b060 50%, #f5e0b0);
   }
   &:disabled {
     filter: grayscale(1);
-    opacity: 0.7;
+    opacity: 0.65;
   }
 }
 /* Light boxes inside cream panels (quest entries, bag rows), like the quest navigation list. */

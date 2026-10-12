@@ -29,7 +29,7 @@ export function Panel({
       className={`game-frame flex flex-col px-2 pt-0 pb-2 ${className}`}
     >
       <div className="game-frame-title mb-2 flex items-center justify-between gap-2">
-        <h2 id={id} className="game-title-tag font-game text-sm font-bold">
+        <h2 id={id} className="game-title-tag font-game font-bold">
           {title}
         </h2>
         {actions}
@@ -49,8 +49,8 @@ export function GameButton({
       type="button"
       className={`inline-flex items-center justify-center gap-1 font-game active:translate-y-px disabled:cursor-not-allowed ${
         small
-          ? 'game-button-small min-h-6 min-w-12 px-2.5 text-xs'
-          : 'game-button min-h-8 min-w-20 px-4 text-sm'
+          ? 'game-button min-h-5 min-w-11 px-2 text-xs'
+          : 'game-button min-h-6 min-w-16 px-3 text-xs'
       } ${className}`}
       {...props}
     />
@@ -139,7 +139,7 @@ export function Tabs<T extends string>({
             buttons?.[tabs.indexOf(next)]?.focus()
           }}
           tabIndex={tab.id === active ? 0 : -1}
-          className={`${variant === 'gold' ? 'game-tab' : 'game-tab-dark'} min-h-6 px-3 font-game text-xs font-bold`}
+          className={`${variant === 'gold' ? 'game-tab' : 'game-tab-dark'} h-[22px] px-[5px] font-game text-[13px]`}
         >
           {tab.icon && <img src={tab.icon} alt="" className="-my-1 mr-1 inline h-5 w-auto" />}
           {tab.title}
@@ -200,7 +200,7 @@ export function Dialog({
       className={`game-frame game-window m-auto max-w-[calc(100%-1rem)] bg-transparent px-2 pt-0 pb-2 backdrop:bg-black/25 ${className}`}
     >
       <div className="game-frame-title mb-2 flex items-center justify-between gap-2">
-        <h2 id={id} className="game-title-tag font-game text-sm font-bold">
+        <h2 id={id} className="game-title-tag font-game font-bold">
           {title}
         </h2>
         <button

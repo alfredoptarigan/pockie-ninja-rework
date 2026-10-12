@@ -281,6 +281,126 @@
       "width": 92,
       "height": 91
     },
-    "card-name-bar": { "file": "/assets/game/ui/card-name-bar.webp", "width": 110, "height": 26 }
+    "card-name-bar": { "file": "/assets/game/ui/card-name-bar.webp", "width": 110, "height": 26 },
+    "role-card": { "file": "/assets/game/ui/role-card.webp", "width": 205, "height": 78 },
+    "role-letters": { "file": "/assets/game/ui/role-letters.webp", "width": 27, "height": 34 },
+    "vp-track": { "file": "/assets/game/ui/vp-track.webp", "width": 106, "height": 11 },
+    "vp-fill": { "file": "/assets/game/ui/vp-fill.webp", "width": 106, "height": 11 },
+    "refill-hp": { "file": "/assets/game/ui/refill-hp.webp", "width": 16, "height": 12 },
+    "refill-mp": { "file": "/assets/game/ui/refill-mp.webp", "width": 16, "height": 12 },
+    "refill-vp": { "file": "/assets/game/ui/refill-vp.webp", "width": 16, "height": 12 },
+    "map-plaque": { "file": "/assets/game/ui/map-plaque.webp", "width": 138, "height": 54 },
+    "menu-package-up": {
+      "file": "/assets/game/ui/menu-package-up.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-package-over": {
+      "file": "/assets/game/ui/menu-package-over.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-package-down": {
+      "file": "/assets/game/ui/menu-package-down.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-role-up": { "file": "/assets/game/ui/menu-role-up.webp", "width": 50, "height": 28 },
+    "menu-role-over": { "file": "/assets/game/ui/menu-role-over.webp", "width": 50, "height": 28 },
+    "menu-role-down": { "file": "/assets/game/ui/menu-role-down.webp", "width": 50, "height": 28 },
+    "menu-skill-up": { "file": "/assets/game/ui/menu-skill-up.webp", "width": 50, "height": 28 },
+    "menu-skill-over": {
+      "file": "/assets/game/ui/menu-skill-over.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-skill-down": {
+      "file": "/assets/game/ui/menu-skill-down.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-task-up": { "file": "/assets/game/ui/menu-task-up.webp", "width": 50, "height": 28 },
+    "menu-task-over": { "file": "/assets/game/ui/menu-task-over.webp", "width": 50, "height": 28 },
+    "menu-task-down": { "file": "/assets/game/ui/menu-task-down.webp", "width": 50, "height": 28 },
+    "menu-social-up": { "file": "/assets/game/ui/menu-social-up.webp", "width": 50, "height": 28 },
+    "menu-social-over": {
+      "file": "/assets/game/ui/menu-social-over.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-social-down": {
+      "file": "/assets/game/ui/menu-social-down.webp",
+      "width": 50,
+      "height": 28
+    },
+    "menu-rank-up": { "file": "/assets/game/ui/menu-rank-up.webp", "width": 50, "height": 28 },
+    "menu-rank-over": { "file": "/assets/game/ui/menu-rank-over.webp", "width": 50, "height": 28 },
+    "menu-rank-down": { "file": "/assets/game/ui/menu-rank-down.webp", "width": 50, "height": 28 },
+    "menu-mart-up": { "file": "/assets/game/ui/menu-mart-up.webp", "width": 50, "height": 28 },
+    "menu-mart-over": { "file": "/assets/game/ui/menu-mart-over.webp", "width": 50, "height": 28 },
+    "menu-mart-down": { "file": "/assets/game/ui/menu-mart-down.webp", "width": 50, "height": 28 },
+    "menu-shop-up": { "file": "/assets/game/ui/menu-shop-up.webp", "width": 57, "height": 28 },
+    "menu-shop-over": { "file": "/assets/game/ui/menu-shop-over.webp", "width": 57, "height": 28 },
+    "menu-shop-down": { "file": "/assets/game/ui/menu-shop-down.webp", "width": 57, "height": 28 },
+    "chat-panel": {
+      "file": "/assets/game/ui/chat-panel.webp",
+      "width": 344,
+      "height": 266,
+      "slice": { "top": 10, "right": 10, "bottom": 10, "left": 10 }
+    },
+    "chat-tab": {
+      "file": "/assets/game/ui/chat-tab.webp",
+      "width": 41,
+      "height": 18,
+      "slice": { "top": 5, "right": 5, "bottom": 5, "left": 5 }
+    },
+    "chat-tab-hover": {
+      "file": "/assets/game/ui/chat-tab-hover.webp",
+      "width": 41,
+      "height": 18,
+      "slice": { "top": 5, "right": 5, "bottom": 5, "left": 5 }
+    },
+    "chat-tab-selected": {
+      "file": "/assets/game/ui/chat-tab-selected.webp",
+      "width": 41,
+      "height": 18,
+      "slice": { "top": 5, "right": 5, "bottom": 5, "left": 5 }
+    },
+    "title-plate": {
+      "file": "/assets/game/ui/title-plate.webp",
+      "width": 101,
+      "height": 54,
+      "slice": { "top": 13, "right": 26, "bottom": 14, "left": 25 }
+    },
+    "value-box": {
+      "file": "/assets/game/ui/value-box.webp",
+      "width": 68,
+      "height": 21,
+      "slice": { "top": 5, "right": 17, "bottom": 5, "left": 17 }
+    },
+    "equip-column": {
+      "file": "/assets/game/ui/equip-column.webp",
+      "width": 63,
+      "height": 220,
+      "slice": { "top": 5, "right": 5, "bottom": 5, "left": 5 }
+    },
+    "equip-backdrop": {
+      "file": "/assets/game/ui/equip-backdrop.webp",
+      "width": 303,
+      "height": 322
+    },
+    "slot-outfit": { "file": "/assets/game/ui/slot-outfit.webp", "width": 61, "height": 61 },
+    "slot-weapon": { "file": "/assets/game/ui/slot-weapon.webp", "width": 71, "height": 99 },
+    "slot-glove": { "file": "/assets/game/ui/slot-glove.webp", "width": 73, "height": 73 },
+    "slot-pet": { "file": "/assets/game/ui/slot-pet.webp", "width": 71, "height": 71 },
+    "slot-ring": { "file": "/assets/game/ui/slot-ring.webp", "width": 34, "height": 34 },
+    "slot-amulet": { "file": "/assets/game/ui/slot-amulet.webp", "width": 34, "height": 34 },
+    "slot-hat": { "file": "/assets/game/ui/slot-hat.webp", "width": 73, "height": 73 },
+    "slot-cloth": { "file": "/assets/game/ui/slot-cloth.webp", "width": 73, "height": 73 },
+    "slot-belt": { "file": "/assets/game/ui/slot-belt.webp", "width": 73, "height": 73 },
+    "slot-shoes": { "file": "/assets/game/ui/slot-shoes.webp", "width": 73, "height": 73 },
+    "icon-scroll": { "file": "/assets/game/ui/icon-scroll.webp", "width": 30, "height": 27 },
+    "icon-notice": { "file": "/assets/game/ui/icon-notice.webp", "width": 16, "height": 16 },
+    "monster-card": { "file": "/assets/game/ui/monster-card.webp", "width": 67, "height": 86 }
   }
 }

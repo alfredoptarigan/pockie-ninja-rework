@@ -39,10 +39,14 @@ export interface UiPiece {
 
 interface PieceSource {
   swf: string
-  /** Class name (UI_LookAndFeel) or sprite id (timeline-only HUD SWFs). */
+  /** Class name (UI_LookAndFeel) or character id (timeline-only HUD SWFs). */
   symbol: string | number
+  /** What the id names: a sprite (default), a bare shape or a button (rendered per state). */
+  kind?: 'sprite' | 'shape' | 'button'
   /** 1-based frame (HP/MP/EXP clips have 100 frames, one per percent). */
   frame?: number
+  /** Button state to render (kind 'button'). */
+  state?: 'up' | 'over' | 'down'
   /** true: 9-slice insets from the symbol's scaling grid; an Insets object overrides them. */
   slice?: true | Insets
 }
@@ -59,12 +63,79 @@ const lookAndFeel = (symbol: string, slice?: true | Insets): PieceSource => ({
   slice,
 })
 
-const resource = (name: string, slice?: true): PieceSource => ({
+const resource = (name: string, slice?: true | Insets): PieceSource => ({
   swf: 'UI_Resource',
   symbol: `UIResource.${name}`,
   slice,
 })
 const sprite = (swf: string, symbol: number): PieceSource => ({ swf, symbol })
+const shape = (swf: string, symbol: number, slice?: Insets): PieceSource => ({
+  swf,
+  symbol,
+  kind: 'shape',
+  slice,
+})
+/** up / over / down pieces of a button, keyed `<key>-<state>`. */
+const buttonStates = (key: string, swf: string, symbol: number) =>
+  Object.fromEntries(
+    (['up', 'over', 'down'] as const).map((state) => [
+      `${key}-${state}`,
+      { swf, symbol, kind: 'button', state } satisfies PieceSource,
+    ]),
+  )
+
+// Scene HUD as laid out on the original timelines (UI_RoleIcon, UI_BottomMenu, UI_SmallMap,
+// UI_Chat): the player card behind the HP/MP/VP bars, the bar letters, the bottom menu buttons
+// (UI_BottomMenu.as: Package, Role, Skill, Task, Social, Rank, Mart, Shop), the small map plaque
+// without its buttons (their captions are text fields) and the chat panel and tab plates (their
+// Indonesian captions are text fields too).
+const HUD_PIECES: Record<string, PieceSource> = {
+  'role-card': shape('UI_RoleIcon', 1),
+  'role-letters': shape('UI_RoleIcon', 4),
+  'vp-track': { swf: 'UI_RoleIcon', symbol: 16, frame: 1 },
+  'vp-fill': { swf: 'UI_RoleIcon', symbol: 16, frame: 100 },
+  // clipHP / clipMP show the pouch fill (100 frames); clipVP is the refill button.
+  'refill-hp': { swf: 'UI_RoleIcon', symbol: 23, frame: 100 },
+  'refill-mp': { swf: 'UI_RoleIcon', symbol: 25, frame: 100 },
+  'refill-vp': { swf: 'UI_RoleIcon', symbol: 30, kind: 'button', state: 'up' },
+  'map-plaque': shape('UI_SmallMap', 18),
+  ...buttonStates('menu-package', 'UI_BottomMenu', 17),
+  ...buttonStates('menu-role', 'UI_BottomMenu', 66),
+  ...buttonStates('menu-skill', 'UI_BottomMenu', 24),
+  ...buttonStates('menu-task', 'UI_BottomMenu', 31),
+  ...buttonStates('menu-social', 'UI_BottomMenu', 38),
+  ...buttonStates('menu-rank', 'UI_BottomMenu', 45),
+  ...buttonStates('menu-mart', 'UI_BottomMenu', 52),
+  ...buttonStates('menu-shop', 'UI_BottomMenu', 59),
+  'chat-panel': shape('UI_Chat', 7, { top: 10, right: 10, bottom: 10, left: 10 }),
+  'chat-tab': shape('UI_Chat', 34, { top: 5, right: 5, bottom: 5, left: 5 }),
+  'chat-tab-hover': shape('UI_Chat', 36, { top: 5, right: 5, bottom: 5, left: 5 }),
+  'chat-tab-selected': shape('UI_Chat', 38, { top: 5, right: 5, bottom: 5, left: 5 }),
+}
+
+// Window pieces the Stats, Inventory, NPC and quest windows draw (UI_RoleInfo_Xml, UI_Package,
+// UI_NpcMenu_Xml, UI_TaskInfo_Xml): the title plate, value fields, the equipment column, the
+// avatar backdrop, empty equipment slot pictures and the quest section icons.
+const WINDOW_PIECES: Record<string, PieceSource> = {
+  'title-plate': resource('Common.BigBG7', true),
+  'value-box': resource('Common.TextBG2', true),
+  // Its scaling grid keeps most of the column fixed; only the bevel needs to stay.
+  'equip-column': resource('Equip.EquipBG', { top: 5, right: 5, bottom: 5, left: 5 }),
+  'equip-backdrop': resource('Equip.Peoplebg'),
+  'slot-outfit': resource('Equip.Avatar'),
+  'slot-weapon': resource('Equip.Weapon2'),
+  'slot-glove': resource('Equip.Glove'),
+  'slot-pet': resource('Equip.Pet'),
+  'slot-ring': resource('Equip.FingerRing'),
+  'slot-amulet': resource('Equip.Amu'),
+  'slot-hat': resource('Equip.Hat'),
+  'slot-cloth': resource('Equip.Cloth'),
+  'slot-belt': resource('Equip.Caestus'),
+  'slot-shoes': resource('Equip.Shoes'),
+  'icon-scroll': resource('Icon.Icon_Scroll'),
+  'icon-notice': resource('Icon.Icon_ExcalmatoryPoint'),
+  'monster-card': resource('List.HobgoblinBG'),
+}
 
 // M3 windows. The shop, forge, exchange and Las Noches layouts (UI_NpcShop_Xml, UI_MysticShop_Xml,
 // UI_RoleUse_Xml, UI_MartBuySet_Xml, UI_EquipMakeRoom_Xml, UI_YYEquipCompose_Xml,
@@ -175,6 +246,8 @@ export const UI_PIECES: Record<string, PieceSource> = {
   },
   slot: { swf: 'UI_UIResourceTemp', symbol: 'Grid_PackageBack' },
   ...M3_PIECES,
+  ...HUD_PIECES,
+  ...WINDOW_PIECES,
 }
 
 /** Splits a BaseSource bundle (the parts already joined) into its entries by title. */
@@ -215,7 +288,8 @@ export function baseSourceFiles() {
 }
 
 function spriteDir(out: string, swf: string, symbol: string | number) {
-  const dir = join(out, `${swf}.swf`)
+  // Several export types at once put each type in its own folder.
+  const dir = join(out, `${swf}.swf`, 'sprites')
   const pattern =
     typeof symbol === 'number'
       ? new RegExp(`^DefineSprite_${symbol}$`)
@@ -223,6 +297,22 @@ function spriteDir(out: string, swf: string, symbol: string | number) {
   const entry = readdirSync(dir).find((name) => pattern.test(name))
   if (!entry) throw new Error(`Symbol ${symbol} not found in ${swf}`)
   return join(dir, entry)
+}
+
+const BUTTON_FRAMES = { up: '1_up', over: '2_over', down: '3_down' } as const
+
+/** The rendered PNG of a piece in FFDec's export layout. */
+function piecePng(out: string, source: PieceSource) {
+  const dir = join(out, `${source.swf}.swf`)
+  if (source.kind === 'shape') return join(dir, 'shapes', `${source.symbol}.png`)
+  if (source.kind === 'button') {
+    const entry = readdirSync(join(dir, 'buttons')).find((name) =>
+      new RegExp(`^DefineButton2_${source.symbol}(_|$)`).test(name),
+    )
+    if (!entry) throw new Error(`Button ${source.symbol} not found in ${source.swf}`)
+    return join(dir, 'buttons', entry, `${BUTTON_FRAMES[source.state ?? 'up']}.png`)
+  }
+  return join(spriteDir(out, source.swf, source.symbol), `${source.frame ?? 1}.png`)
 }
 
 /** Insets from a scaling grid, given the symbol's size; sprites start at (0, 0). */
@@ -254,7 +344,8 @@ async function exportPieces(swfs: Map<string, Buffer>) {
       if (ids.includes(undefined)) throw new Error(`Unknown symbol class in ${name}`)
       await ffdec([
         ...['-zoom', String(ZOOM), '-selectid', [...new Set(ids)].join(',')],
-        ...['-format', 'sprite:png', '-export', 'sprite', out, input],
+        ...['-format', 'sprite:png,shape:png,button:png'],
+        ...['-export', 'sprite,shape,button', out, input],
       ])
     }
     const grids = Object.fromEntries([...swfs].map(([name, data]) => [name, scalingGrids(data)]))
@@ -264,7 +355,7 @@ async function exportPieces(swfs: Map<string, Buffer>) {
 
     const pieces: Record<string, UiPiece> = {}
     for (const [key, source] of Object.entries(UI_PIECES)) {
-      const png = join(spriteDir(out, source.swf, source.symbol), `${source.frame ?? 1}.png`)
+      const png = piecePng(out, source)
       const { width = 0, height = 0 } = await sharp(png).metadata()
       const file = `${OUT_DIR}/${key}.webp`
       await sharp(png).webp({ lossless: true, effort: 6 }).toFile(join(paths.assets, file))
