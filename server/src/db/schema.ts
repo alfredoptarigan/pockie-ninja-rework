@@ -170,6 +170,14 @@ export const characters = pgTable(
     // the UTC Monday of the week it belongs to (TaskPerWeekFlush).
     dailyScore: integer('daily_score').notNull().default(0),
     dailyScoreWeek: date('daily_score_week'),
+    // Toll gates: EntryTollGateSceneTimes on the UTC day `tollGateDay` (TollGatePerDayFlush).
+    tollGateDay: date('toll_gate_day'),
+    tollGateEntries: smallint('toll_gate_entries').notNull().default(0),
+    // Pub fights (per ninja, not per scene): PubSceneFightDayNum on the UTC day
+    // `pubFightDay` (PubSceneFightFlushTime) and LastPullRockerTime (one pull per 3600 s).
+    pubFightDay: date('pub_fight_day'),
+    pubFightsToday: smallint('pub_fights_today').notNull().default(0),
+    pubFightPulledAt: timestamp('pub_fight_pulled_at', { withTimezone: true }),
     createdAt: createdAt(),
   },
   (t) => [
@@ -187,6 +195,10 @@ export const characters = pgTable(
     check(
       'characters_daily_quests',
       sql`${t.dailyQuestsAccepted} >= 0 and ${t.dailyQuestsCompleted} >= 0 and ${t.dailyScore} >= 0`,
+    ),
+    check(
+      'characters_instance_counts',
+      sql`${t.tollGateEntries} >= 0 and ${t.pubFightsToday} >= 0`,
     ),
   ],
 )
@@ -412,5 +424,96 @@ export const characterMysticPurchases = pgTable(
     primaryKey({ columns: [t.spawnId, t.characterId, t.itemId] }),
     index('character_mystic_purchases_character_id_idx').on(t.characterId),
     check('character_mystic_purchases_count', sql`${t.count} > 0`),
+  ],
+)
+
+// Demon City instances (docs/original-data/toll-gates.md).
+
+/** One card of the post-clear card flip (TGCardDropLib row), in slot order. */
+export interface TollGateCard {
+  itemId: string
+  count: number
+  bound: boolean
+  /** Shown to the player (show all or a peek). */
+  revealed: boolean
+}
+
+// The ninja's current solo toll gate run; at most one, deleted when the run ends.
+export const tollGateRuns = pgTable(
+  'toll_gate_runs',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // TollGate.ini section (100000-100038).
+    gateId: integer('gate_id').notNull(),
+    // Sub gate and fight point sequence (0-based) to fight next.
+    subGate: smallint('sub_gate').notNull().default(0),
+    point: smallint('point').notNull().default(0),
+    // Last point passed as `subGate * 5 + point` (schedule %), null = none yet.
+    passedPoint: smallint('passed_point'),
+    // FightMonsterPointState = 0: the run was lost and only ends.
+    lost: boolean('lost').notNull().default(false),
+    // TGCardSystem: 0 no cards yet, 1 dealt, 2 all shown, 3 shuffled face down.
+    cardState: smallint('card_state').notNull().default(0),
+    // The 5 dealt cards (empty before the deal).
+    cards: jsonb('cards').$type<TollGateCard[]>().notNull().default([]),
+    // Peeks bought on this deal (LookCap index).
+    peeks: smallint('peeks').notNull().default(0),
+    startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check('toll_gate_runs_progress', sql`${t.subGate} >= 0 and ${t.point} >= 0`),
+    check('toll_gate_runs_card_state', sql`${t.cardState} between 0 and 3`),
+    check('toll_gate_runs_cards', jsonbArray(t.cards, 5)),
+    check('toll_gate_runs_peeks', sql`${t.peeks} between 0 and 5`),
+  ],
+)
+
+// Las Noches (SingleGateSystem), manual mode: one row per ninja once it entered.
+export const singleGate = pgTable(
+  'single_gate',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // SGateMaxFloor: best floor cleared (0-170).
+    bestFloor: smallint('best_floor').notNull().default(0),
+    // SGateCurOrder: floor to fight next; null = no run (SGateIsStart = 0).
+    currentFloor: smallint('current_floor'),
+    // SGateExp: EXP pot of the run, paid when it ends.
+    potExp: bigint('pot_exp', { mode: 'number' }).notNull().default(0),
+    // SGateReliveCnt and SGateBuyCnt: lives left and lives bought this run.
+    lives: smallint('lives').notNull().default(0),
+    livesBought: smallint('lives_bought').notNull().default(0),
+    // SGateCount runs ended on the UTC day `runsDay` (SGateTime).
+    runsDay: date('runs_day'),
+    runsToday: smallint('runs_today').notNull().default(0),
+  },
+  (t) => [
+    check('single_gate_best_floor', sql`${t.bestFloor} between 0 and 170`),
+    check('single_gate_current_floor', sql`${t.currentFloor} between 1 and 170`),
+    check(
+      'single_gate_amounts',
+      sql`${t.potExp} >= 0 and ${t.lives} >= 0 and ${t.livesBought} between 0 and 999 and ${t.runsToday} >= 0`,
+    ),
+  ],
+)
+
+// Pub fight line-up per ninja and neutral field (PullRockerMonsterRec).
+export const pubFightLineups = pgTable(
+  'pub_fight_lineups',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // PubSceneFightInfo scene (2601-2804).
+    sceneId: integer('scene_id').notNull(),
+    // The 3 PubMonsterLib NPC ids (n8000xxx), in fight order.
+    npcIds: text('npc_ids').array().notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.sceneId] }),
+    check('pub_fight_lineups_npc_ids', sql`cardinality(${t.npcIds}) = 3`),
   ],
 )

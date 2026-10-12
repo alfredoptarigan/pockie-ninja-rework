@@ -10,6 +10,9 @@ import {
   characterShopStock,
   mysticItemSales,
   mysticSpawns,
+  pubFightLineups,
+  singleGate,
+  tollGateRuns,
   users,
 } from './schema.js'
 
@@ -169,8 +172,67 @@ describe('Mysterious Merchant', () => {
   })
 })
 
+describe('Demon City instances', () => {
+  it('keeps one toll gate run per ninja, starting at the first point with no cards', async () => {
+    const characterId = await character()
+    const [run] = await db.insert(tollGateRuns).values({ characterId, gateId: 100001 }).returning()
+    expect(run).toMatchObject({
+      subGate: 0,
+      point: 0,
+      passedPoint: null,
+      lost: false,
+      cardState: 0,
+      cards: [],
+      peeks: 0,
+    })
+    await expect(db.insert(tollGateRuns).values({ characterId, gateId: 100002 })).rejects.toThrow()
+  })
+
+  const card = { itemId: 'i152010', count: 1, bound: true, revealed: false }
+  it.each([
+    ['card state 4', { cardState: 4 }],
+    ['6 cards', { cards: Array.from({ length: 6 }, () => card) }],
+    ['6 peeks', { peeks: 6 }],
+    ['a negative point', { point: -1 }],
+  ])('rejects a toll gate run with %s', async (_label, override) => {
+    const characterId = await character()
+    await expect(
+      db.insert(tollGateRuns).values({ characterId, gateId: 100001, ...override }),
+    ).rejects.toThrow()
+  })
+
+  it.each([
+    ['best floor 171', { bestFloor: 171 }],
+    ['current floor 0', { currentFloor: 0 }],
+    ['a negative pot', { potExp: -1 }],
+    ['1000 bought lives', { livesBought: 1000 }],
+  ])('rejects a Las Noches row with %s', async (_label, override) => {
+    const characterId = await character()
+    await expect(db.insert(singleGate).values({ characterId, ...override })).rejects.toThrow()
+  })
+
+  it('keeps one pub fight line-up of exactly 3 NPCs per ninja and scene', async () => {
+    const characterId = await character()
+    const lineup = { characterId, sceneId: 2601, npcIds: ['n8000001', 'n8000002', 'n8000003'] }
+    await db.insert(pubFightLineups).values(lineup)
+    await expect(db.insert(pubFightLineups).values(lineup)).rejects.toThrow()
+    await expect(
+      db.insert(pubFightLineups).values({ ...lineup, sceneId: 2602, npcIds: ['n8000001'] }),
+    ).rejects.toThrow()
+  })
+
+  it('rejects negative daily toll gate and pub fight counts', async () => {
+    const characterId = await character()
+    for (const counts of [{ tollGateEntries: -1 }, { pubFightsToday: -1 }]) {
+      await expect(
+        db.update(characters).set(counts).where(eq(characters.id, characterId)),
+      ).rejects.toThrow()
+    }
+  })
+})
+
 describe('deleting an account', () => {
-  it('removes the character shop, merchant and daily quest rows', async () => {
+  it('removes every per-character M3 row but keeps the server-wide spawn', async () => {
     const characterId = await character()
     const [spawn] = await db
       .insert(mysticSpawns)
@@ -183,6 +245,11 @@ describe('deleting an account', () => {
       .returning()
     await db.insert(characterShops).values({ characterId, shopType: 2 })
     await db.insert(characterDailyQuests).values({ characterId, taskId: 26001 })
+    await db.insert(tollGateRuns).values({ characterId, gateId: 100001 })
+    await db.insert(singleGate).values({ characterId, bestFloor: 12 })
+    await db
+      .insert(pubFightLineups)
+      .values({ characterId, sceneId: 2601, npcIds: ['n8000001', 'n8000002', 'n8000003'] })
     await db
       .insert(characterShopStock)
       .values({ characterId, shopType: 2, slot: 0, itemId: 'i250101', priceGold: 8, bound: false })
@@ -195,6 +262,9 @@ describe('deleting an account', () => {
       characterShopStock,
       characterMysticPurchases,
       characterDailyQuests,
+      tollGateRuns,
+      singleGate,
+      pubFightLineups,
     ]) {
       expect(await db.select().from(table)).toHaveLength(0)
     }

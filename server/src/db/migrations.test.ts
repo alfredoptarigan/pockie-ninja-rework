@@ -116,10 +116,11 @@ describe('migrations', { timeout: SLOW }, () => {
       expect(spots).toEqual([{ spot_id: 21011, star_level: 2, star_progress: 30 }])
     })
 
-    it('marks the current scene as entered and starts the daily counters at zero', async () => {
+    it('marks the current scene as entered and starts every daily counter at zero', async () => {
       const [character] = await sql`
         select scenes_entered, daily_quest_day, daily_quests_accepted, daily_quests_completed,
-               daily_quest_offer_at, daily_score, daily_score_week
+               daily_quest_offer_at, daily_score, daily_score_week, toll_gate_day,
+               toll_gate_entries, pub_fight_day, pub_fights_today, pub_fight_pulled_at
         from characters`
       expect(character).toEqual({
         scenes_entered: [2101],
@@ -129,6 +130,11 @@ describe('migrations', { timeout: SLOW }, () => {
         daily_quest_offer_at: null,
         daily_score: 0,
         daily_score_week: null,
+        toll_gate_day: null,
+        toll_gate_entries: 0,
+        pub_fight_day: null,
+        pub_fights_today: 0,
+        pub_fight_pulled_at: null,
       })
     })
 
