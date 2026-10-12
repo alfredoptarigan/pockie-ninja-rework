@@ -2,11 +2,14 @@ import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:f
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { getTableName, is } from 'drizzle-orm'
+import { PgTable } from 'drizzle-orm/pg-core'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import postgres from 'postgres'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { loadEnv } from '../env.js'
+import * as schema from './schema.js'
 
 // Runs the real migration files against a scratch database next to the test database.
 const migrationsFolder = fileURLToPath(new URL('../../drizzle', import.meta.url))
@@ -51,16 +54,19 @@ afterAll(async () => {
 }, SLOW)
 
 describe('migrations', { timeout: SLOW }, () => {
-  it('migrate an empty database to the latest schema', async () => {
+  it('migrates an empty database to every table of the schema', async () => {
     await recreateScratch()
     await migrateTo()
     const sql = scratch()
     try {
       const tables = await sql<{ name: string }[]>`
-        select table_name as name from information_schema.tables where table_schema = 'public'`
-      expect(tables.map((t) => t.name)).toEqual(
-        expect.arrayContaining(['users', 'characters', 'inventory_items', 'character_quests']),
-      )
+        select table_name as name from information_schema.tables
+        where table_schema = 'public' order by table_name`
+      const expected = Object.values(schema)
+        .filter((value) => is(value, PgTable))
+        .map((table) => getTableName(table))
+        .sort()
+      expect(tables.map((t) => t.name)).toEqual(expected)
     } finally {
       await sql.end()
     }

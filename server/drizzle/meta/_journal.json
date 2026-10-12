@@ -36,6 +36,13 @@
       "when": 1791796846919,
       "tag": "0004_item_instances",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791797406716,
+      "tag": "0005_shops",
+      "breakpoints": true
     }
   ]
 }

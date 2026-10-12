@@ -1,5 +1,6 @@
 import { sql } from 'drizzle-orm'
 import {
+  type AnyPgColumn,
   bigint,
   boolean,
   check,
@@ -110,6 +111,12 @@ export const faqItems = pgTable(
 // (empty pouches, level cap 90, currencies: stone, gold, gift coupons).
 const currency = (name: string) => bigint(name, { mode: 'number' }).notNull().default(0)
 
+/** Check body: the jsonb column holds an array (of at most `max` entries). */
+const jsonbArray = (column: AnyPgColumn, max?: number) =>
+  max === undefined
+    ? sql`jsonb_typeof(${column}) = 'array'`
+    : sql`jsonb_typeof(${column}) = 'array' and jsonb_array_length(${column}) <= ${sql.raw(String(max))}`
+
 /** One rolled equipment property (IdentifyPropRec row): IdentifyPropLib id and value. */
 export interface ItemProp {
   propId: number
@@ -206,10 +213,7 @@ export const inventoryItems = pgTable(
     check('inventory_items_durability', sql`${t.durability} >= 0`),
     check('inventory_items_identify_count', sql`${t.identifyCount} between 0 and 4`),
     check('inventory_items_identify_times', sql`${t.identifyTimes} >= 0`),
-    check(
-      'inventory_items_props',
-      sql`jsonb_typeof(${t.props}) = 'array' and jsonb_array_length(${t.props}) <= 4`,
-    ),
+    check('inventory_items_props', jsonbArray(t.props, 4)),
     check('inventory_items_engraved_slot', sql`${t.engravedSlot} between 0 and 3`),
   ],
 )
@@ -248,5 +252,125 @@ export const characterExploreSpots = pgTable(
   (t) => [
     primaryKey({ columns: [t.characterId, t.spotId] }),
     check('character_explore_spots_star', sql`${t.starLevel} between 0 and 5`),
+  ],
+)
+
+// Refresh shops (RefreshShopSystem, docs/original-data/shops.md): shop type 1 Item Shop,
+// 2 Mystery Shop, 3 Dark Shop. One row per character and shop once it was first stocked.
+const shopType = () => smallint('shop_type').notNull()
+
+export const characterShops = pgTable(
+  'character_shops',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    shopType: shopType(),
+    // LastRefreshTime: last restock (automatic, paid or free); null = never stocked.
+    lastRefreshAt: timestamp('last_refresh_at', { withTimezone: true }),
+    // UTC day of the last free instant restock (GratisRefreshCount, daily: decision 4).
+    freeRestockDay: date('free_restock_day'),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.shopType] }),
+    check('character_shops_shop_type', sql`${t.shopType} between 1 and 3`),
+  ],
+)
+
+// RefreshShopBox_1..3 contents: one drawn item per slot; a purchase deletes the row.
+export const characterShopStock = pgTable(
+  'character_shop_stock',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    shopType: shopType(),
+    // Position in the box (draw order, 0-based).
+    slot: smallint('slot').notNull(),
+    itemId: text('item_id').notNull(),
+    // refreshitems.ini `price,type` pairs; null = not sold for that currency.
+    priceStone: integer('price_stone'),
+    priceGold: integer('price_gold'),
+    priceGiftCoupon: integer('price_gift_coupon'),
+    // IdentifyPropCount given at the draw (0-4).
+    identifyCount: smallint('identify_count').notNull().default(0),
+    // Item Shop equipment is rolled at the draw (Flush); Mystery and Dark Shop items are not.
+    appraised: boolean('appraised').notNull().default(false),
+    // IdentifyPropRec of an appraised item, moved into the bag on purchase.
+    props: jsonb('props').$type<ItemProp[]>().notNull().default([]),
+    // ItemBindingStatus of the bought item (shop types 1 and 3 bind).
+    bound: boolean('bound').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.shopType, t.slot] }),
+    check('character_shop_stock_shop_type', sql`${t.shopType} between 1 and 3`),
+    check('character_shop_stock_slot', sql`${t.slot} between 0 and 99`),
+    check(
+      'character_shop_stock_prices',
+      sql`${t.priceStone} >= 0 and ${t.priceGold} >= 0 and ${t.priceGiftCoupon} >= 0`,
+    ),
+    check('character_shop_stock_identify_count', sql`${t.identifyCount} between 0 and 4`),
+    check('character_shop_stock_props', jsonbArray(t.props, 4)),
+  ],
+)
+
+/** One Gold-tab row of a Mysterious Merchant spawn (Cap2ItemsRec), in MysticItemLib order. */
+export interface MysticStockRow {
+  itemId: string
+  /** Price for this spawn, raised by the item's server-wide sales (GetItemNewPrice). */
+  price: number
+  /** MysticItemLib maxCnt and the count left. */
+  maxCount: number
+  left: number
+}
+
+// Mysterious Merchant spawns (MysticShopSystem): server-wide, one per hourly slot.
+export const mysticSpawns = pgTable(
+  'mystic_spawns',
+  {
+    id: id(),
+    // MysticNpcLocation scene (2601-2605).
+    sceneId: integer('scene_id').notNull(),
+    // Spawn (MysticNpcTime `hour`) and despawn (+ `livetime` minutes).
+    startsAt: timestamp('starts_at', { withTimezone: true }).notNull(),
+    endsAt: timestamp('ends_at', { withTimezone: true }).notNull(),
+    // Gold tab stock; lock the spawn row (FOR UPDATE) before decrementing `left`.
+    stock: jsonb('stock').$type<MysticStockRow[]>().notNull(),
+  },
+  (t) => [
+    // Creating the same hourly spawn twice (two requests at once) fails on this key.
+    uniqueIndex('mystic_spawns_starts_at_key').on(t.startsAt),
+    check('mystic_spawns_window', sql`${t.endsAt} > ${t.startsAt}`),
+    check('mystic_spawns_stock', jsonbArray(t.stock)),
+  ],
+)
+
+// Server-wide count sold per item over all spawns (SAVEITEMINFO_MYSTICITEM); sets the price.
+export const mysticItemSales = pgTable(
+  'mystic_item_sales',
+  {
+    itemId: text('item_id').primaryKey(),
+    sold: integer('sold').notNull().default(0),
+  },
+  (t) => [check('mystic_item_sales_sold', sql`${t.sold} >= 0`)],
+)
+
+// Per-player purchases per spawn (MysticBuyRec), checked against the MysticCfg limits.
+export const characterMysticPurchases = pgTable(
+  'character_mystic_purchases',
+  {
+    spawnId: uuid('spawn_id')
+      .notNull()
+      .references(() => mysticSpawns.id, { onDelete: 'cascade' }),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    itemId: text('item_id').notNull(),
+    count: smallint('count').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.spawnId, t.characterId, t.itemId] }),
+    index('character_mystic_purchases_character_id_idx').on(t.characterId),
+    check('character_mystic_purchases_count', sql`${t.count} > 0`),
   ],
 )
