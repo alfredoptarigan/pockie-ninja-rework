@@ -37,11 +37,18 @@ export function Inventory() {
           {inventory.data.map((item) => (
             <li
               key={item.id}
-              className="flex items-center justify-between gap-2 rounded border border-wood-light/50 bg-white/50 px-2 py-1"
+              className="flex items-center justify-between gap-2 game-card px-2 py-1"
             >
-              <span>
+              <span className="flex items-center gap-2">
+                {/* Bag cell of the original package grid; the stack count sits in its corner. */}
+                <span
+                  aria-hidden="true"
+                  className="game-slot flex size-9 shrink-0 items-end justify-end p-0.5 text-[10px] font-bold"
+                >
+                  {item.count > 1 ? item.count : ''}
+                </span>
                 <GameText k={item.nameKey} fallback="Unknown item" />
-                {item.count > 1 && <span className="ml-1 font-bold">x{item.count}</span>}
+                {item.count > 1 && <span className="sr-only">x{item.count}</span>}
                 {item.equippedSlot && (
                   <span className="ml-2 rounded bg-leaf px-1 text-xs font-bold text-white">
                     Equipped

@@ -46,7 +46,7 @@ export function QuestLog() {
   return (
     <ul className="flex flex-col gap-3" aria-label="Quest log">
       {quests.data.map((quest) => (
-        <li key={quest.taskId} className="rounded border border-wood-light/50 bg-white/50 p-2">
+        <li key={quest.taskId} className="game-card p-2">
           <h3 className="flex justify-between gap-2 font-bold">
             <GameText k={quest.nameKey} fallback={`Quest ${quest.taskId}`} />
             <span className="shrink-0 text-xs font-normal">{stateLabel(quest)}</span>
@@ -66,8 +66,8 @@ export function QuestTracker() {
   const quests = useQuests()
   if (!quests.data?.length) return null
   return (
-    <section aria-label="Quest tracker" className="game-frame p-2 font-game text-xs text-parchment">
-      <h2 className="mb-1 font-bold text-trim-soft">Quests</h2>
+    <section aria-label="Quest tracker" className="game-hud p-2 font-game text-xs text-parchment">
+      <h2 className="mb-1 font-bold text-trim">Quests</h2>
       <ul className="flex flex-col gap-1.5">
         {quests.data.map((quest) => (
           <li key={quest.taskId}>

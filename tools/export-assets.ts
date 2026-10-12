@@ -1,7 +1,8 @@
 // Exports the original 2011 art into client/public/assets with JSON manifests in
 // client/src/generated: the landing sprites (sprites.json) and the game assets (outfit, monster and
 // NPC motion sheets in game-motions.json; village and field scenes in game-scenes.json).
-// Run with `pnpm assets:export`. Needs the original game backup (GAME_BACKUP_DIR, default
+// The in-game UI skin pieces go to client/public/assets/game/ui with game-ui.json.
+// Run with `pnpm assets:export` (`pnpm assets:export ui` for the UI skin only). Needs the original game backup (GAME_BACKUP_DIR, default
 // ~/Privates/game-pockieninja) with JPEXS FFDec and JDK 8 under local-run/.runtime. Unchanged
 // sources are skipped on re-runs (cache in node_modules/.cache/pockie-assets).
 // Raw SWFs never enter this repo; only the optimized WebP output and the manifests do.
@@ -13,6 +14,7 @@ import { ACTION_NAMES, exportMonsters, exportNpcs, exportOutfits } from './asset
 import { ffdec } from './assets/ffdec.ts'
 import { paths } from './assets/paths.ts'
 import { exportScenes } from './assets/scenes.ts'
+import { exportUi, uiCss } from './assets/ui.ts'
 
 const { movieclips, assets: assetsDir } = paths
 const manifestPath = join(paths.generated, 'sprites.json')
@@ -152,7 +154,17 @@ async function exportGame() {
   )
 }
 
+async function exportUiSkin() {
+  const ui = await exportUi()
+  await writeJson(join(paths.generated, 'game-ui.json'), ui)
+  writeFileSync(join(paths.generated, 'game-ui.css'), uiCss(ui))
+  console.log('Exported the UI skin')
+}
+
 mkdirSync(paths.cache, { recursive: true })
 mkdirSync(paths.generated, { recursive: true })
-await exportLanding()
-await exportGame()
+if (process.argv[2] !== 'ui') {
+  await exportLanding()
+  await exportGame()
+}
+await exportUiSkin()

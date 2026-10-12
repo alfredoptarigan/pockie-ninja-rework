@@ -56,10 +56,7 @@ export function NpcDialog({
           {offers.length > 0 && (
             <section aria-label="Quests offered" className="flex flex-col gap-2">
               {offers.map((offer) => (
-                <article
-                  key={offer.taskId}
-                  className="rounded border border-wood-light/60 bg-white/50 p-2"
-                >
+                <article key={offer.taskId} className="game-card p-2">
                   <h3 className="font-bold">
                     <GameText k={`lg_Task_${offer.taskId}`} fallback={`Quest ${offer.taskId}`} />
                   </h3>

@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/outfit';
+@import '@fontsource-variable/noto-sans';
+/* Original 2011 UI pieces as --ui-* variables (tools/assets/ui.ts). */
+@import './generated/game-ui.css';
 
 /* Memphis palette for the landing site: cream base, five brights, charcoal ink. */
 @theme {
@@ -22,21 +25,27 @@
   --shadow-sticker: 6px 6px 0 0 var(--color-ink);
   --shadow-sticker-sm: 3px 3px 0 0 var(--color-ink);
 
-  /* In-game skin, redrawn after the 2011 client: dark wood frames, gold trim, parchment insets. */
-  --color-wood-deep: #2a170c;
-  --color-wood: #4a2b16;
-  --color-wood-light: #7a4a26;
-  --color-trim: #e2b04a;
-  --color-trim-soft: #f6d98c;
-  --color-parchment: #f7ecd0;
-  --color-parchment-dark: #e6d3a6;
-  --color-ember: #e0641c;
-  --color-ember-dark: #a8410b;
-  --color-leaf: #2f8f2a;
-  --color-bar-hp: #d0342c;
-  --color-bar-mp: #2f78d0;
-  --color-bar-exp: #e9b520;
-  --font-game: Verdana, Tahoma, ui-sans-serif, system-ui, sans-serif;
+  /* In-game skin, sampled from the 2011 client (UI_LookAndFeel, UI_RoleIcon, UI_TopGuide). The
+     old token names stay: wood = the charcoal window chrome, parchment = the cream content panels,
+     trim = highlight yellow. */
+  --color-wood-deep: #1c1f21;
+  --color-wood: #2c3033;
+  --color-wood-light: #b59a52;
+  --color-trim: #ffd84a;
+  --color-trim-soft: #ffffcc;
+  --color-parchment: #fff2ae;
+  --color-parchment-dark: #f2dd86;
+  /* Dark grey the original uses for text on cream panels (Foreground 4f5254 in the UI XML). */
+  --color-ink-game: #3f4244;
+  --color-ember: #f07a12;
+  --color-ember-dark: #9a4500;
+  --color-leaf: #4f7000;
+  --color-bar-hp: #ff6a00;
+  --color-bar-mp: #00a8ff;
+  --color-bar-exp: #44dd44;
+  /* Window chrome text: white with the dark outline the Flash labels had. */
+  --shadow-game-text: 0 0 2px #000, 0 1px 1px #000;
+  --font-game: 'Noto Sans Variable', Tahoma, Verdana, ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -66,41 +75,231 @@
   background-size: 18px 18px;
 }
 
-/* Game skin pieces (used by client/src/game/skin.tsx). */
+/* Game skin pieces (used by client/src/game/skin.tsx): 9-slice border images of the original UI.
+   border-image-width paints over the padding, so content padding is set separately. */
 @utility game-frame {
-  border: 3px solid var(--color-trim);
-  border-radius: 10px;
-  background: linear-gradient(
-    180deg,
-    var(--color-wood-light) 0%,
-    var(--color-wood) 18%,
-    var(--color-wood-deep) 100%
-  );
-  box-shadow:
-    inset 0 0 0 2px var(--color-wood-deep),
-    0 4px 0 0 rgb(0 0 0 / 0.35);
+  border: 0;
+  border-image: var(--ui-frame) var(--ui-frame-slice) fill / var(--ui-frame-border);
+  color: #fff;
+  filter: drop-shadow(0 3px 4px rgb(0 0 0 / 0.5));
+}
+/* Header band of game-frame (the glossy title strip is the top 26px of the frame picture). */
+@utility game-frame-title {
+  min-height: 26px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: var(--shadow-game-text);
+}
+/* Window title: the pale label at the top left of the header band. */
+@utility game-title-tag {
+  margin-top: 3px;
+  padding: 0 6px;
+  border: 1px solid #6d5f2c;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #fff9d6 0%, #f3df8e 100%);
+  color: #1c1f21;
+  line-height: 19px;
+  text-shadow: none;
 }
 @utility game-inset {
-  border: 2px solid var(--color-wood-light);
-  border-radius: 6px;
-  background: linear-gradient(180deg, var(--color-parchment) 0%, var(--color-parchment-dark) 100%);
-  color: var(--color-wood-deep);
+  border: 0;
+  border-image: var(--ui-inset) var(--ui-inset-slice) fill / var(--ui-inset-border);
+  color: var(--color-ink-game);
+}
+/* Translucent dark HUD panels (quest tracker, chat), like UI_TaskShort and UI_Chat. */
+@utility game-hud {
+  border: 1px solid #6b6f72;
+  border-radius: 5px;
+  background: rgb(28 31 33 / 0.86);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+  color: #fff;
+}
+@utility game-hud-inset {
+  border: 1px solid #45494c;
+  border-radius: 4px;
+  background: rgb(0 0 0 / 0.55);
+  color: #fff;
+}
+@utility game-field {
+  border: 0;
+  border-image: var(--ui-input) var(--ui-input-slice) fill / var(--ui-input-border);
+  color: var(--color-ink-game);
 }
 @utility game-button {
-  border: 2px solid var(--color-trim-soft);
-  border-radius: 6px;
-  background: linear-gradient(
-    180deg,
-    #ffa24a 0%,
-    var(--color-ember) 50%,
-    var(--color-ember-dark) 100%
-  );
-  color: #fffaf0;
+  border: 0;
+  border-image: var(--ui-button-normal) var(--ui-button-normal-slice) fill /
+    var(--ui-button-normal-border);
+  color: #fff;
   font-weight: 700;
-  text-shadow: 0 1px 0 rgb(0 0 0 / 0.55);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.4),
-    0 2px 0 0 var(--color-wood-deep);
+  text-shadow:
+    0 0 2px #4a2200,
+    0 1px 1px #4a2200;
+  &:hover:not(:disabled) {
+    border-image-source: var(--ui-button-hover);
+    color: #5a2c00;
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.6);
+  }
+  &:active:not(:disabled) {
+    border-image-source: var(--ui-button-pressed);
+  }
+  &:disabled {
+    border-image-source: var(--ui-button-disabled);
+    color: #d5d5d5;
+    text-shadow: 0 1px 1px #000;
+  }
+}
+/* Small buttons ("Send", "Go"): the gold box of the original text field with the button's hover. */
+@utility game-button-small {
+  border: 0;
+  border-image: var(--ui-input) var(--ui-input-slice) fill / var(--ui-input-border);
+  box-shadow: 0 0 0 1px #5a4310;
+  border-radius: 3px;
+  color: #3a2400;
+  font-weight: 700;
+  &:hover:not(:disabled) {
+    border-image: var(--ui-button-hover) var(--ui-button-hover-slice) fill / 5px 6px 5px 6px;
+  }
+  &:active:not(:disabled) {
+    filter: brightness(0.9);
+  }
+  &:disabled {
+    filter: grayscale(1);
+    opacity: 0.7;
+  }
+}
+/* Light boxes inside cream panels (quest entries, bag rows), like the quest navigation list. */
+@utility game-card {
+  border: 1px solid #b9ab78;
+  border-radius: 2px;
+  background: #fff9d8;
+}
+@utility game-tab-dark {
+  border: 1px solid #6b6f72;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, #6d7174 0%, #3a3d40 50%, #26292b 100%);
+  color: #fff;
+  &:hover {
+    background: linear-gradient(180deg, #858a8d 0%, #4a4e51 50%, #303335 100%);
+  }
+  &[aria-selected='true'] {
+    background: linear-gradient(180deg, #a9aeb2 0%, #6b7074 50%, #45494c 100%);
+  }
+}
+@utility game-tab {
+  border: 0;
+  border-image: var(--ui-tab-normal) var(--ui-tab-normal-slice) fill / var(--ui-tab-normal-border);
+  color: #4a3400;
+  &:hover {
+    border-image-source: var(--ui-tab-hover);
+  }
+  &[aria-selected='true'] {
+    border-image-source: var(--ui-tab-selected);
+    color: #3a1f00;
+  }
+}
+@utility game-close {
+  width: 22px;
+  height: 20px;
+  background: var(--ui-close-normal) center / 100% 100% no-repeat;
+  &:hover {
+    background-image: var(--ui-close-hover);
+  }
+  &:active {
+    background-image: var(--ui-close-pressed);
+  }
+}
+@utility game-slot {
+  background: var(--ui-slot) center / 100% 100% no-repeat;
+  color: #fff;
+  text-shadow: var(--shadow-game-text);
+}
+/* Currency box from the top bar: coin on the left, the amount on the dark field. */
+@utility game-currency-stone {
+  border: 0;
+  border-image: var(--ui-currency-stone) var(--ui-currency-stone-slice) fill /
+    var(--ui-currency-stone-border);
+}
+@utility game-currency-gold {
+  border: 0;
+  border-image: var(--ui-currency-gold) var(--ui-currency-gold-slice) fill /
+    var(--ui-currency-gold-border);
+}
+@utility game-currency-coupon {
+  border: 0;
+  border-image: var(--ui-currency-coupon) var(--ui-currency-coupon-slice) fill /
+    var(--ui-currency-coupon-border);
+}
+@utility game-topbar {
+  border: 0;
+  border-image: var(--ui-menu-bar) var(--ui-menu-bar-slice) fill / var(--ui-menu-bar-border);
+}
+
+/* HP / MP / EXP: the original empty bar with the full bar clipped to the value (--fill). */
+.game-bar {
+  position: relative;
+  background: center / 100% 100% no-repeat;
+}
+.game-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-image: var(--bar-fill);
+  clip-path: inset(0 calc(100% - var(--fill, 0%)) 0 0);
+}
+.game-bar-hp {
+  background-image: var(--ui-hp-track);
+  --bar-fill: var(--ui-hp-fill);
+}
+.game-bar-mp {
+  background-image: var(--ui-mp-track);
+  --bar-fill: var(--ui-mp-fill);
+}
+.game-bar-exp {
+  background-image: var(--ui-exp-track);
+  --bar-fill: var(--ui-exp-fill);
+}
+
+/* Scrollbars inside game panels: the original track, thumb and arrows (WebKit/Blink). */
+[data-game-ui] * {
+  scrollbar-color: #d9b75a #3b3f42;
+}
+@supports selector(::-webkit-scrollbar) {
+  [data-game-ui] * {
+    scrollbar-color: auto;
+  }
+  [data-game-ui] ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  [data-game-ui] ::-webkit-scrollbar-track {
+    background: var(--ui-scroll-track) center / 4px 100% no-repeat;
+  }
+  [data-game-ui] ::-webkit-scrollbar-thumb {
+    border: 0;
+    border-image: var(--ui-scroll-thumb) var(--ui-scroll-thumb-slice) fill /
+      var(--ui-scroll-thumb-border);
+  }
+  [data-game-ui] ::-webkit-scrollbar-thumb:hover {
+    border-image-source: var(--ui-scroll-thumb-hover);
+  }
+  [data-game-ui] ::-webkit-scrollbar-button:single-button:vertical:decrement {
+    height: 12px;
+    background: var(--ui-scroll-up) center / 12px 11px no-repeat;
+  }
+  [data-game-ui] ::-webkit-scrollbar-button:single-button:vertical:increment {
+    height: 12px;
+    background: var(--ui-scroll-down) center / 12px 11px no-repeat;
+  }
+}
+
+/* One focus ring for the whole game UI (unlayered, so it wins over utilities): white with a dark
+   halo, visible on the charcoal chrome and on the cream panels alike. */
+[data-game-ui] :focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px #000;
 }
 
 /* Sprite strips: frames side by side, stepped through with jump-none so each frame shows once. */

@@ -1,5 +1,6 @@
 import type { Character } from '@pockie/shared'
 import { useState } from 'react'
+import { gameUi } from '../generated/game-ui'
 import { Link, Navigate } from 'react-router'
 import { useLogout } from '../lib/auth'
 import { errorMessage, useCharacter } from './api'
@@ -15,7 +16,10 @@ import { GameButton, Notice, Tabs } from './skin'
 export default function GameApp({ view }: { view: 'game' | 'create' }) {
   const character = useCharacter()
   return (
-    <div className="min-h-[100dvh] bg-[radial-gradient(circle_at_top,#5a3a22,#1c0f07)] font-game text-parchment">
+    <div
+      data-game-ui
+      className="min-h-[100dvh] bg-[radial-gradient(circle_at_top,#3a4044,#0c0e0f)] font-game text-parchment"
+    >
       {character.isPending && <p className="p-6">Entering the village...</p>}
       {character.isError && (
         <div className="mx-auto max-w-md p-6">
@@ -42,9 +46,9 @@ export default function GameApp({ view }: { view: 'game' | 'create' }) {
 }
 
 type SideTab = 'quests' | 'bag'
-const SIDE_TABS: { id: SideTab; title: string }[] = [
-  { id: 'quests', title: 'Quest log' },
-  { id: 'bag', title: 'Bag' },
+const SIDE_TABS: { id: SideTab; title: string; icon: string }[] = [
+  { id: 'quests', title: 'Quest log', icon: gameUi.pieces['icon-quests']!.file },
+  { id: 'bag', title: 'Bag', icon: gameUi.pieces['icon-bag']!.file },
 ]
 
 function GameScreen({ character }: { character: Character }) {
@@ -52,8 +56,10 @@ function GameScreen({ character }: { character: Character }) {
   const logout = useLogout()
   return (
     <div className="mx-auto grid max-w-7xl gap-3 p-3 lg:grid-cols-[1fr_22rem]">
-      <header className="flex items-center justify-between lg:col-span-2">
-        <h1 className="font-game text-lg font-bold text-trim">Pockie Ninja Remastered</h1>
+      <header className="game-topbar flex items-center justify-between px-3 py-1.5 lg:col-span-2">
+        <h1 className="font-game text-base font-bold text-white [text-shadow:var(--shadow-game-text)]">
+          Pockie Ninja Remastered
+        </h1>
         <nav aria-label="Account" className="flex items-center gap-3">
           <Link to="/" className="text-xs text-trim-soft underline">
             Back to the website
@@ -69,7 +75,7 @@ function GameScreen({ character }: { character: Character }) {
       </main>
       <aside className="flex min-w-0 flex-col gap-3">
         <QuestTracker />
-        <div className="game-frame flex flex-col p-2">
+        <div className="game-frame flex flex-col px-2 pt-1 pb-2">
           <Tabs
             label="Panels"
             tabs={SIDE_TABS}
@@ -80,7 +86,7 @@ function GameScreen({ character }: { character: Character }) {
           <div
             id="side-panel"
             role="tabpanel"
-            className="game-inset max-h-96 overflow-auto p-3 text-sm"
+            className="game-inset mt-1 max-h-96 overflow-auto p-3 text-sm"
           >
             {tab === 'quests' ? <QuestLog /> : <Inventory />}
           </div>

@@ -1,0 +1,152 @@
+{
+  "scale": 2,
+  "pieces": {
+    "frame": {
+      "file": "/assets/game/ui/frame.webp",
+      "width": 130,
+      "height": 177,
+      "slice": { "top": 46, "right": 8, "bottom": 8, "left": 8 }
+    },
+    "frame-title": {
+      "file": "/assets/game/ui/frame-title.webp",
+      "width": 205,
+      "height": 27,
+      "slice": { "top": 12, "right": 55, "bottom": 11, "left": 50 }
+    },
+    "close-normal": { "file": "/assets/game/ui/close-normal.webp", "width": 22, "height": 20 },
+    "close-hover": { "file": "/assets/game/ui/close-hover.webp", "width": 22, "height": 20 },
+    "close-pressed": { "file": "/assets/game/ui/close-pressed.webp", "width": 22, "height": 20 },
+    "close-disabled": { "file": "/assets/game/ui/close-disabled.webp", "width": 22, "height": 20 },
+    "button-normal": {
+      "file": "/assets/game/ui/button-normal.webp",
+      "width": 99,
+      "height": 28,
+      "slice": { "top": 10, "right": 29, "bottom": 12, "left": 24 }
+    },
+    "button-hover": {
+      "file": "/assets/game/ui/button-hover.webp",
+      "width": 99,
+      "height": 28,
+      "slice": { "top": 10, "right": 29, "bottom": 12, "left": 24 }
+    },
+    "button-pressed": {
+      "file": "/assets/game/ui/button-pressed.webp",
+      "width": 99,
+      "height": 28,
+      "slice": { "top": 10, "right": 29, "bottom": 12, "left": 24 }
+    },
+    "button-disabled": {
+      "file": "/assets/game/ui/button-disabled.webp",
+      "width": 99,
+      "height": 28,
+      "slice": { "top": 10, "right": 29, "bottom": 12, "left": 24 }
+    },
+    "tab-normal": {
+      "file": "/assets/game/ui/tab-normal.webp",
+      "width": 33,
+      "height": 14,
+      "slice": { "top": 6, "right": 15, "bottom": 6, "left": 14 }
+    },
+    "tab-hover": {
+      "file": "/assets/game/ui/tab-hover.webp",
+      "width": 33,
+      "height": 14,
+      "slice": { "top": 6, "right": 15, "bottom": 6, "left": 14 }
+    },
+    "tab-selected": {
+      "file": "/assets/game/ui/tab-selected.webp",
+      "width": 33,
+      "height": 14,
+      "slice": { "top": 6, "right": 15, "bottom": 6, "left": 14 }
+    },
+    "inset": {
+      "file": "/assets/game/ui/inset.webp",
+      "width": 100,
+      "height": 53,
+      "slice": { "top": 8, "right": 8, "bottom": 8, "left": 8 }
+    },
+    "textarea": {
+      "file": "/assets/game/ui/textarea.webp",
+      "width": 100,
+      "height": 53,
+      "slice": { "top": 8, "right": 8, "bottom": 8, "left": 8 }
+    },
+    "input": {
+      "file": "/assets/game/ui/input.webp",
+      "width": 61,
+      "height": 20,
+      "slice": { "top": 5, "right": 11, "bottom": 5, "left": 10 }
+    },
+    "tooltip": {
+      "file": "/assets/game/ui/tooltip.webp",
+      "width": 92,
+      "height": 53,
+      "slice": { "top": 8, "right": 8, "bottom": 8, "left": 8 }
+    },
+    "progress-track": {
+      "file": "/assets/game/ui/progress-track.webp",
+      "width": 64,
+      "height": 19,
+      "slice": { "top": 8, "right": 14, "bottom": 9, "left": 10 }
+    },
+    "progress-fill": {
+      "file": "/assets/game/ui/progress-fill.webp",
+      "width": 62,
+      "height": 17,
+      "slice": { "top": 7, "right": 14, "bottom": 8, "left": 12 }
+    },
+    "scroll-track": {
+      "file": "/assets/game/ui/scroll-track.webp",
+      "width": 12,
+      "height": 40,
+      "slice": { "top": 8, "right": 4, "bottom": 10, "left": 3 }
+    },
+    "scroll-thumb": {
+      "file": "/assets/game/ui/scroll-thumb.webp",
+      "width": 12,
+      "height": 14,
+      "slice": { "top": 5, "right": 4, "bottom": 8, "left": 4 }
+    },
+    "scroll-thumb-hover": {
+      "file": "/assets/game/ui/scroll-thumb-hover.webp",
+      "width": 12,
+      "height": 14,
+      "slice": { "top": 4, "right": 4, "bottom": 8, "left": 4 }
+    },
+    "scroll-up": { "file": "/assets/game/ui/scroll-up.webp", "width": 13, "height": 12 },
+    "scroll-down": { "file": "/assets/game/ui/scroll-down.webp", "width": 13, "height": 12 },
+    "hp-track": { "file": "/assets/game/ui/hp-track.webp", "width": 106, "height": 11 },
+    "hp-fill": { "file": "/assets/game/ui/hp-fill.webp", "width": 106, "height": 11 },
+    "mp-track": { "file": "/assets/game/ui/mp-track.webp", "width": 106, "height": 11 },
+    "mp-fill": { "file": "/assets/game/ui/mp-fill.webp", "width": 106, "height": 11 },
+    "exp-track": { "file": "/assets/game/ui/exp-track.webp", "width": 189, "height": 10 },
+    "exp-fill": { "file": "/assets/game/ui/exp-fill.webp", "width": 189, "height": 10 },
+    "menu-bar": {
+      "file": "/assets/game/ui/menu-bar.webp",
+      "width": 205,
+      "height": 27,
+      "slice": { "top": 8, "right": 8, "bottom": 8, "left": 8 }
+    },
+    "icon-bag": { "file": "/assets/game/ui/icon-bag.webp", "width": 29, "height": 26 },
+    "icon-quests": { "file": "/assets/game/ui/icon-quests.webp", "width": 33, "height": 26 },
+    "currency-stone": {
+      "file": "/assets/game/ui/currency-stone.webp",
+      "width": 115,
+      "height": 24,
+      "slice": { "top": 4, "right": 8, "bottom": 4, "left": 26 }
+    },
+    "currency-gold": {
+      "file": "/assets/game/ui/currency-gold.webp",
+      "width": 115,
+      "height": 24,
+      "slice": { "top": 4, "right": 8, "bottom": 4, "left": 26 }
+    },
+    "currency-coupon": {
+      "file": "/assets/game/ui/currency-coupon.webp",
+      "width": 115,
+      "height": 24,
+      "slice": { "top": 4, "right": 8, "bottom": 4, "left": 26 }
+    },
+    "slot": { "file": "/assets/game/ui/slot.webp", "width": 23, "height": 23 }
+  }
+}
