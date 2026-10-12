@@ -1,7 +1,7 @@
 # Plan: World & Economy (Milestone 3)
 
 **Project**: Pockie Ninja Remastered
-**Status**: draft; user decisions of 2026-10-12 recorded under "Decisions" (VIP details open)
+**Status**: wave 1 merged; wave 2 started 2026-10-12 (decisions 1-14 recorded)
 **Complexity**: Large
 
 ## Goal
@@ -152,8 +152,9 @@ one-line wiring), and the `shared/src/index.ts` re-export.
 - **Action**: `server/src/modules/forge/`: appraise (one, all on the page), refine (paid or
   talisman), enhance (paid or talisman, Gift Coupon binds), inscribe (seals, Stone, fail level),
   repair (one, all equipped), forge-NPC free-counter talismans if the counters exist (otherwise
-  skip). Wire task 4 into `server/src/game/` so `GET /character` stats and every fight use full
-  equipment props and set bonuses; durability loss (−1 per enemy killed in a won fight, −5% on
+  skip). Task 4 is already wired (M2, 2026-10-12): `server/src/game/equipment.ts` feeds every
+  equipment prop and set bonus into `deriveStats`, `GET /character` and fights; build on it, do
+  not re-implement. Still to do: durability loss (−1 per enemy killed in a won fight, −5% on
   revive home, which M2 skipped); unappraised gear cannot be equipped. Drops and boxes roll
   identify properties on grant (`IdentifyPropCount`). Client `client/src/game/forge/`: forge
   window (Enhance and Refine tabs), inscription window, bag Appraise/Repair actions, item border
@@ -175,12 +176,24 @@ one-line wiring), and the `shared/src/index.ts` re-export.
   decision 1), Angel/Demon City buildings and NPC menus that route to shop, forge
   and gate windows. Client: full world map (34 buttons minus 181, visited state), scene exits,
   the new field scenes, ticket boss timer, rest dialog, and the one-line window wiring for tasks
-  6, 7 and 9.
+  6, 7 and 9. Also: migration `0009_explore_searches` (task 2 is merged, so task 8 writes it)
+  persisting the pending explore cards and peeks that M2 keeps in process memory
+  (`server/src/modules/game/explore.ts`), and hide the empty VP groove in the HUD (decision 12).
 - **Validate**: API tests: 2601 → every neighbour, nation-locked field refused unless the task
   allows it, level gate, go home from 161 lands in 2601; task boss refused without its quest;
   a ticket boss fight consumes one i150078; the Fire main chain plays from 10025 to 10045 in a
   test.
 - **Depends on**: tasks 1, 2, 3 (world map and scenes).
+
+### Task 8b: Daily quests (split from task 8, decision 13)
+
+- **Action**: `DayTaskSystem` (284 quests in the neutral fields 26xx-28xx): daily pick, accept,
+  progress, hand-in, reset at 00:00 UTC, state in migration 0006's columns. Server
+  `server/src/modules/daily/`, client `client/src/game/daily/` (window component plus an `open`
+  hook for task 8 to wire), schema `shared/src/schemas/daily.ts`.
+- **Validate**: API tests for pick, accept, complete, reset across the UTC boundary, and
+  refusal outside the neutral fields.
+- **Depends on**: tasks 1, 2.
 
 ### Task 9: Demon City instances and pub fights
 
@@ -200,9 +213,9 @@ one-line wiring), and the `shared/src/index.ts` re-export.
   full bag, Las Noches pot halving.
 - **Depends on**: tasks 1, 2, 3, 4 (weapon/HP checks use the stats); energy decision.
 
-### Task 11: VIP (after the user answers open question 1)
+### Task 11: VIP (decision 14)
 
-- **Folders**: one VIP field set in task 2's migrations (for example `users.vip_until`, `vip_tier`),
+- **Folders**: migration `0010_vip` (`characters.vip_until`),
   one rule module `server/src/game/vip.ts` that every EXP and drop roll goes through (fights,
   explore, quests, toll gates, pub fights), a VIP badge in the client HUD.
 - **Acceptance**: tests show EXP and drop rolls with and without VIP, VIP expiry, and that the
@@ -222,7 +235,7 @@ one-line wiring), and the `shared/src/index.ts` re-export.
 | Wave | Tasks (agents)                              | Notes                                                        |
 | ---- | ------------------------------------------- | ------------------------------------------------------------ |
 | 1    | 1 import, 2 schema, 3 assets, 4 game-core, 5 i18n (done, merged 2026-10-12) | five disjoint folders; 2 merges first so wave 2 can start   |
-| 2    | 6 shops, 7 forge, 8 world, 9 instances     | four disjoint feature folders; coordinator merges `app.ts` and window wiring |
+| 2    | 6 shops (Codex), 7 forge, 8 world, 8b daily (Codex), 9 instances | five disjoint feature folders; coordinator merges `app.ts` and window wiring |
 | 3    | 10 verification, 11 VIP                     | after wave 2 merges                                          |
 
 Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 first and 9 alone.
@@ -284,8 +297,14 @@ Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 fi
     original VIP perks (+30% toll gate EXP, 96.7% Las Noches start, 80% pouch price) are not
     assumed; how VIP is obtained and the exact rates are still open.
 
+11. **Explore cards persist** (2026-10-12): pending explore cards and peeks move from process
+    memory to a table (task 8, migration 0009).
+12. **VP groove**: hidden. It is the original Energy bar, which decision 1 removes.
+13. **Daily quests** are their own task 8b so task 8 stays the only owner of the window wiring.
+14. **VIP**: bought in the item mall with Gold (mall is a later milestone); one tier, 30 days
+    (`vip_until`), +50% EXP and +25% drop chance on every reward path. Task 11 ships the rule
+    module, the column and a badge; the purchase arrives with the mall.
+
 ## Open questions for the user
 
-1. **VIP**: how does a player get VIP (with the Gold top-up, a separate purchase, tiers or a
-   duration such as 30 days)? How much higher are the EXP and drop rates (for example +50% EXP,
-   +25% drop chance), and do they differ per tier?
+None.
