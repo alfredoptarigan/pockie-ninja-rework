@@ -153,7 +153,7 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
       weapon-layer runtime file per outfit under `client/public/assets/game/weapons/<outfit>/` (21k
       sheets, about 77 MB; index `gameWeapons`), text-free 768x426 world map with original button
       bounds (`gameWorldMap`), all from `client/src/generated/game-extra.ts`. Not used by the client yet.
-- [~] **Task 4 — battle engine** (`game-core/src/battle`).
+- [x] **Task 4 — battle engine** (`game-core/src/battle`; two items deferred below).
   - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,
         counters, parry skill 7777, typed replay, golden test from an original replay.
   - [x] Skill/trigger/buff engine following the Java flow (`battle/skills.ts`, `buffs.ts`,
@@ -164,9 +164,14 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] Server wiring (`server/src/game/combat.ts`): `POST /fight` and explore fight cards use
         outfit skills (`avatar-skills.json`) and monster skills (`npc-records`), MP is saved after
         fights. Starting-outfit skills cost no MP, so MP does not drop in M2 fights yet.
-  - [ ] Other 48 aoyi scripts (avatar level 9+), recast skills, rebound/absorb/vampire/shields,
-        stun/seal, regeneration auras; import `FightBuff.ini` to `fight-buffs.json` (6 buffs are
-        hard-coded in `buffs.ts` for now).
+  - [x] `FightBuff.ini` imported to `fight-buffs.json` (136 rows); `buffs.ts` reads the table and
+        keeps only the scripts hand-ported (`BUFF_SCRIPTS`), `validity` honoured. Every monster in
+        scenes 2101-2501 (53 + 22 explore variants) has its skills ported (40020/40024/40028/
+        40029/40032/40037-40040/40042, interrupt buff 11830); guard test derives the list from
+        `scene-npcs.json`. Aoyi verified by diff: all 114 scripts match 1901/1902/19010, nothing
+        left. Rebound/absorb/vampire/shields/stun/seal already in `attack()` (2026-10-12).
+  - [ ] Deferred: regeneration auras 11861-11863 (pet skills only, no pets before M6); recast
+        passives (type 3, `skilladd.ini` stat bonuses) belong to the stats layer, not the engine.
 - [~] **Task 5 — character model.**
   - [x] Tables `characters`, `inventory_items`, `character_quests`; stats (`game-core/src/stats.ts`),
         EXP/level-up and drops (`game-core/src/progression.ts`).
