@@ -82,11 +82,41 @@ Bandit Lv8, n32002 Warrior of Darkness Lv10 (TaskBossNpc).
   unused). Daily total `7 + level/10`.
 - Outcome weights per card (5 cards): `GostRate` fight from `GostFactory.ini`, `MoneyRate`
   (`MoneyRule`, `MoneyType`), `BabyFactoryRate` pet egg, `BossFactoryRate`, `ItemFactoryRate`
-  (50% granted), `GameFactoryRate` mini-game, `KeyFactoryRate`. Factory files: `ID`, `Config`,
+  (always granted), `GameFactoryRate` mini-game, `KeyFactoryRate`. Only pet egg cards have a
+  50% grant chance (`OnCustomGetBonus`, type 3, `RandInt(1,100) <= 50`). Factory files: `ID`, `Config`,
   `BindingStatus`, `Odds`.
 - Stars: `StarUp` searches per star; `[BabyRateStarLvN, ExpRateStarLvN]` weights;
   exp = `ExpBase + ExpBase*star/10`.
-- Peeks: `CanLookCount`; `FirstMoney` stones, then `Second..FifthMoney` gold.
+- Peeks (`OutSearchSystem.java OnCustomLook`, lines 380-521): `CanLookCount` limits paid
+  reveals per search. The first costs `FirstMoney` Stone (capital 0); the second costs
+  `SecondMoney` Gold (capital 2) or Gift Coupons (capital 3), chosen by the player. Later
+  peeks cost `ThirdMoney`, `FourthMoney`, then `FifthMoney` Gold only. Revealing an already
+  revealed card does not charge or use another peek. Picking any of the five cards is free
+  and awards that card once. For 21011: 83 Stone, then 2 Gold/Coupons, then 7 Gold; limit 3.
+- Senior search (`UseOutSearchKey`, `OnOutSearch`, `CostOutSearch`): starts from using one
+  item whose `GetItemsId` maps to the spot. `ItemBaseSystem.java` lines 169-177 checks the
+  item's `UseLevel`; `javascript/item/OutSearchItem.js` consumes one key after a successful
+  start. It refuses scenes 3101/3102/111/121/131/141/151/161/171. It allows the mapped spot
+  from another field and bypasses normal spot level/Stone/key costs, daily quota, and global
+  cooldown (neither sets nor clears that cooldown). It still advances stars and has exactly
+  five cards; there is no extra-card fee. See `item.ini` i150046-i150069 and i155070-i155073.
+- Bag guard (`OnOutSearch` lines 576-580): requires room for item shape 6 before starting,
+  even if the card would be Stone. `PackSystem.java` initializes two 60-cell bags. Item shapes
+  2/4/6 are rectangles of width shape/2 and height 2 (`PosContainerRule.SetPosRecordValue`).
+- Missing Gost factories 18/20/22/24/26/28 are absent from all six backup copies (app,
+  app-tmp, op/update, each Resource and `复件 Resource`). Their spots
+  27012/27022/27032/27042/28012/28022 all have `GostRate=0`: these references are unused
+  and cannot turn a drawable fight card into nothing. The importer validates every positively
+  weighted factory reference; its test records these six unused gaps without inventing entries.
+
+Implementation scope: pending cards/peek counts currently live in the server process, with
+character row locks and commit serialization; they resume after closing/reopening the UI, but
+not after a server restart or across server processes. Original `OutSearchBonus` persistence
+needs a schema/migration owned by the character-data work. The bag guard accounts for item
+shape area and stack space in the initial 120 cells; exact placement/fragmentation and expanded
+bags need persisted bag positions/activation counts. Exploration key use through the generic
+inventory action also needs integration outside the explore-owned files.
+
 - Client: `ClipName` (`OutCity_1110`), `Name` (`OutSearch_<id>`).
 
 ## Language keys (`language.s53464.kv`, prefix `lg_`)
