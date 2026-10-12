@@ -1,6 +1,8 @@
 // Inscription (InscribeSystem.java; docs/original-data/blacksmith.md "Inscription").
 import type { Random } from '../random.js'
 import {
+  ARMOUR,
+  WEAPON,
   float,
   type EquipConfig,
   type InscribeLevels,
@@ -20,8 +22,6 @@ export interface SealOdds {
   HighOdds: number
 }
 
-const WEAPON = 1
-const ARMOUR = 2
 const SURE_ODDS = 100
 
 const sealOdds = (seals: SealOdds, type: SealType) =>

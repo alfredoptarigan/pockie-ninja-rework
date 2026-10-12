@@ -1,13 +1,10 @@
 // Enhance (ConsolidateSystem.java; docs/original-data/blacksmith.md "Enhance").
 import type { Random } from '../random.js'
 import { isAppraised } from './identify.js'
-import { float, type EquipConfig, type EquipInstance } from './types.js'
+import { ARMOUR, WEAPON, float, type EquipConfig, type EquipInstance } from './types.js'
 
 /** enhance-fail-rates.json (ConsolidateFailRate.ini), section = target level. */
 export type EnhanceFailRates = Readonly<Record<string, { FailRate: number }>>
-
-const WEAPON = 1
-const ARMOUR = 2
 
 /**
  * CanBaseConsolidateEquip (88-114): weapon or armour, appraised, below ConsolidateMaxLevel and a

@@ -96,5 +96,9 @@ export interface EquipTables {
   enhanceFactor: number
 }
 
+/** EquipBaseType values. */
+export const WEAPON = 1
+export const ARMOUR = 2
+
 /** Java `(float)` casts. */
 export const float = Math.fround
