@@ -1,0 +1,185 @@
+// Builds the client's slice of the game text and world data for milestone 2 from the imported
+// original data (server/data/game) and the English table (tools/i18n/en.json):
+//   client/src/i18n/en.json        strings the M2 slice can show (scenes 1x1 and 21xx-25xx)
+//   client/src/game/world-data.json quest offers and travel routes the client needs for its UI
+// Run with `pnpm --filter @pockie/client game-text` after en.json or the game data change.
+import { execFileSync } from 'node:child_process'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+type Row = Record<string, number | string | (number | string)[]>
+
+const root = join(import.meta.dirname, '../..')
+const read = <T>(path: string): T => JSON.parse(readFileSync(join(root, path), 'utf8')) as T
+const game = <T>(name: string) => read<T>(`server/data/game/${name}.json`)
+
+const en = read<Record<string, string>>('tools/i18n/en.json')
+const scenes = game<Record<string, Row>>('scenes')
+const switchRules = game<Record<string, Row>>('scene-switch-rules')
+const sceneNpcs = game<Record<string, { r?: string | string[] }>>('scene-npcs')
+const npcs = game<Record<string, Row>>('npcs')
+const items = game<Record<string, Row>>('items')
+const tasks = game<Record<string, Row>>('tasks')
+const subTasks = game<Record<string, Row[]>>('sub-tasks')
+const dropItems = game<Record<string, Row[]>>('drop-items')
+const levels = game<{ levelexp: Record<string, number>; role: { maxlevel: number } }>('levels')
+const taskMonsterDrops = game<Record<string, Row[]>>('task-monster-drops')
+
+const VILLAGES = [111, 121, 131, 141, 151]
+const FIELD_ZONES = [21, 22, 23, 24, 25]
+const sliceScenes = new Set([
+  ...VILLAGES,
+  ...Object.keys(scenes)
+    .map(Number)
+    .filter((id) => FIELD_ZONES.includes(Math.floor(id / 100))),
+])
+const isTutorial = (id: number) => id >= 90000 && id < 95000
+
+const keys = new Set<string>()
+const itemIds = new Set<string>()
+const npcIds = new Set<string>()
+
+const spawns = (sceneId: number) => {
+  const r = sceneNpcs[String(sceneId)]?.r
+  return (r === undefined ? [] : Array.isArray(r) ? r : [r]).map((line) => line.split(',')[0]!)
+}
+
+function addItemsFromDrop(libId: number, seen = new Set<number>()) {
+  if (libId <= 0 || seen.has(libId)) return
+  seen.add(libId)
+  for (const entry of dropItems[String(libId)] ?? []) addItem(String(entry.ItemConfig), seen)
+}
+
+function addItem(id: string, seen = new Set<number>()) {
+  const row = items[id]
+  if (!row || itemIds.has(id)) return
+  itemIds.add(id)
+  // Boxes (like the newbie pack) open into more items.
+  addItemsFromDrop(Number(row.BoxDropID ?? 0), seen)
+}
+
+// Scenes: every scene name (the world map lists them), NPCs and monsters of the slice scenes.
+for (const id of Object.keys(scenes)) keys.add(`lg_Scene_BackGround_${id}`)
+for (const sceneId of sliceScenes) for (const id of spawns(sceneId)) npcIds.add(id)
+
+// Quests: village tutorials and every quest given out in a slice scene.
+const sliceTasks = Object.entries(tasks).filter(
+  ([id, row]) => isTutorial(Number(id)) || sliceScenes.has(Number(row.AcceptNpcSceneID)),
+)
+const offers: Record<string, object> = {}
+const previous: Record<string, number> = {}
+// Generic step templates (SubTaskDes_<n>) take {@i:...} arguments in this order; text arguments
+// are string keys, '#total' and '#current' are filled from the quest progress.
+const STEP_ARGS: Record<string, string[]> = {
+  '1': ['zone', 'npc', '#total', '#current'],
+  '2': ['zone', 'npc', 'item', '#total', '#current'],
+  '3': ['zone', 'npc'],
+  '4': ['zone', 'npc', 'item', '#total', '#current'],
+  '5': ['zone', 'npc', 'item'],
+  '11': ['zone', ''],
+  '13': ['zone', ''],
+}
+const stepArgs: Record<string, string[][]> = {}
+const npcKey = (id: unknown) => (typeof id === 'string' && npcs[id] ? `lg_${npcs[id].Name}` : '')
+const itemKey = (id: unknown) => (typeof id === 'string' && items[id] ? `lg_${items[id].Name}` : '')
+for (const [id, row] of sliceTasks) {
+  keys.add(`lg_Task_${id}`).add(`lg_TaskDes_${id}`)
+  for (const field of ['StartNpcMessageID', 'SubmitNpcMessageID']) {
+    if (row[field]) keys.add(`lg_${row[field]}`)
+  }
+  for (const field of ['AcceptNpcConfig', 'SubmitNpcConfig']) {
+    if (typeof row[field] === 'string' && npcs[row[field]]) npcIds.add(row[field])
+  }
+  const args = (subTasks[id] ?? []).map((step) => {
+    const variant = /^SubTaskDes_(\d+)$/.exec(String(step.SubTaskDescription))?.[1] ?? ''
+    const scene = Number(step.SubmitSceneID)
+    const values: Record<string, string> = {
+      zone: scene > 0 ? `lg_Scene_BackGround_${scene}` : '',
+      npc: npcKey(step.TargetConfiger),
+      item: itemKey(step.TargetItem),
+    }
+    return (STEP_ARGS[variant] ?? []).map((arg) => values[arg] ?? arg)
+  })
+  if (args.some((list) => list.length > 0)) stepArgs[id] = args
+  for (const step of subTasks[id] ?? []) {
+    keys.add(`lg_${step.SubTaskDescription}`)
+    if (typeof step.TargetItem === 'string') addItem(step.TargetItem)
+    if (typeof step.TargetConfiger === 'string' && npcs[step.TargetConfiger]) {
+      npcIds.add(step.TargetConfiger)
+    }
+  }
+  for (const drop of taskMonsterDrops[id] ?? []) addItem(String(drop.TaskItemConfig))
+  if (typeof row.RewardItem === 'string') addItem(row.RewardItem)
+  addItemsFromDrop(Number(row.RewardDropID ?? 0))
+
+  if (Number(row.PreTaskID) > 0) previous[id] = Number(row.PreTaskID)
+  // Quests the player takes at an NPC (the server checks all of this again on accept).
+  if (Number(row.AutoAcceptTask) !== 1 && typeof row.AcceptNpcConfig === 'string') {
+    offers[id] = {
+      npc: row.AcceptNpcConfig,
+      scene: Number(row.AcceptNpcSceneID),
+      pre: Number(row.PreTaskID),
+      level: Number(row.RequireLevel),
+      nation: Number(row.RequireCountry),
+      talkKey: row.StartNpcMessageID ? `lg_${row.StartNpcMessageID}` : null,
+    }
+  }
+}
+
+for (const id of npcIds) {
+  const row = npcs[id]
+  if (!row) continue
+  keys.add(`lg_${row.Name}`).add(`lg_Say_${id}`)
+  addItemsFromDrop(Number(row.DropLibID ?? 0))
+  addItemsFromDrop(Number(row.AppendDropLibID ?? 0))
+}
+// HP potions sold and dropped early on.
+for (const [id, row] of Object.entries(items)) {
+  if (row.class === 'PharmacyItem' && Number(row.UseLevel ?? 0) <= 20) addItem(id)
+}
+for (const id of itemIds) keys.add(`lg_${items[id]!.Name}`)
+
+// Common UI labels: weapon classes and starting outfits.
+for (const n of [1, 2, 4, 7]) keys.add(`lg_Common_RolePopsinger${n}`)
+for (let n = 1; n <= 100; n++) keys.add(`lg_avatar${n}`)
+
+// Travel (sceneswitchrule.ini): a scene can be entered from every scene its rule lists.
+const travel: Record<string, { sceneId: number; level: number; nation: number }[]> = {}
+for (const [target, rule] of Object.entries(switchRules)) {
+  const scene = scenes[target]
+  if (!scene || Number(scene.IsStart) !== 1) continue
+  const level = Math.max(Number(rule.RequireLevel ?? -1), Number(scene.Level ?? -1))
+  for (const from of Object.keys(rule)) {
+    if (from === target || !scenes[from]) continue
+    ;(travel[from] ??= []).push({ sceneId: Number(target), level, nation: Number(scene.Nation) })
+  }
+}
+
+const sorted = <T>(o: Record<string, T>) =>
+  Object.fromEntries(Object.entries(o).sort(([a], [b]) => (a < b ? -1 : 1)))
+const strings = Object.fromEntries(
+  [...keys].filter((key) => en[key] !== undefined).map((key) => [key, en[key]!]),
+)
+const outputs = {
+  'client/src/i18n/en.json': sorted(strings),
+  'client/src/game/world-data.json': {
+    levelExp: levels.levelexp,
+    maxLevel: levels.role.maxlevel,
+    offers: sorted(offers),
+    previous: sorted(previous),
+    stepArgs: sorted(stepArgs),
+    travel: sorted(travel),
+    equipment: [...itemIds].filter((id) => items[id]!.class === 'EquipItem').sort(),
+    usable: [...itemIds]
+      .filter((id) => items[id]!.class !== 'EquipItem' && Number(items[id]!.CanUse) === 1)
+      .sort(),
+    itemNames: sorted(Object.fromEntries([...itemIds].map((id) => [id, `lg_${items[id]!.Name}`]))),
+  },
+}
+for (const [path, data] of Object.entries(outputs)) {
+  writeFileSync(join(root, path), `${JSON.stringify(data)}\n`)
+}
+execFileSync('pnpm', ['exec', 'prettier', '--write', ...Object.keys(outputs)], { cwd: root })
+process.stdout.write(
+  `${Object.keys(strings).length} strings, ${Object.keys(offers).length} quest offers\n`,
+)
