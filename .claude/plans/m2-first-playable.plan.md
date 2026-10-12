@@ -148,6 +148,11 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
       `client/src/generated/game-ui.json`; the HUD (`skin.tsx`, `index.css`) uses them. Gaps: item
       icons not exported; small-button skin approximated; full-screen HUD layout is Task 8c.
       Layout references (Reborn screenshots, gitignored): `data/reborn-raw/screenshots/`.
+- [x] **Task 3c — item icons, weapon layers, world map.** `pnpm assets:export extra`
+      (`tools/assets/extra.ts`, spec in `tools/assets/EXTRA.md`): 206 item icons (`gameItems`), one
+      weapon-layer runtime file per outfit under `client/public/assets/game/weapons/<outfit>/` (21k
+      sheets, about 77 MB; index `gameWeapons`), text-free 768x426 world map with original button
+      bounds (`gameWorldMap`), all from `client/src/generated/game-extra.ts`. Not used by the client yet.
 - [~] **Task 4 — battle engine** (`game-core/src/battle`).
   - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,
         counters, parry skill 7777, typed replay, golden test from an original replay.
@@ -199,7 +204,8 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         and bars top left, currencies top strip, monster row top centre, scene name + Village/World
         Map top right, chat bottom left, EXP bar bottom centre, menu icons bottom right, Quest
         Navigation window). References: `data/reborn-raw/screenshots/` (gitignored).
-  - [ ] World map picture, Drops menu on monster portraits, explore UI, item icons.
+  - [ ] World map picture, Drops menu on monster portraits, explore UI, item icons, weapon layers
+        in battle (assets ready: Task 3c).
   - [x] "0 damage" was fighting without the newbie fists (i270100); the original gives 0 too.
         Defeat/revive now follow the original: a loss leaves 0 HP and state dead (no fight, travel
         or explore), `POST /api/game/revive {mode: home|gold}` (relive.ini). Explore losses keep 1 HP.
@@ -211,7 +217,16 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         `GET /quests/available`, `fitsOutfit` on inventory, `revive` terms in `GET /scene`.
   - [ ] Buying pouch refills (`OnCustomBuy`), equipment wear on going home (no durability yet),
         explore UI in the client.
-- [ ] **Task 9 — copy fixes and verification** (not started).
+- [~] **Task 9 — copy fixes and verification.**
+  - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
+        `pnpm db:seed` to refresh an existing database.
+  - [x] Reviewed translations survive `i18n:sentences merge` (`tools/i18n/overrides.json`, required).
+  - [x] Security review: `docs/security-review-m2.md`. Open: High — mutating game routes need a
+        `FOR UPDATE` character lock, conditional item consumption and an atomic quest claim (box
+        and quest rewards can pay twice); Medium — sockets outlive expired/rotated sessions, no
+        socket admission cap; Low — register email enumeration, login budget per alias, stale chat
+        buckets. Reviewed before `POST /revive` and `GET /quests/available` existed.
+  - [ ] Coverage >= 80%, Playwright journey (create -> tutorial -> fight -> level up -> chat).
 
 ### Notes for Task 8 (client)
 
