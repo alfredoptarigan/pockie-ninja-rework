@@ -1,6 +1,6 @@
 {
   "naruto": {
-    "name": "Uzumaki Naruto",
+    "name": "Naruto Uzumaki",
     "file": "/assets/sprites/naruto-stand.webp",
     "frames": 7,
     "frameWidth": 196,
@@ -8,7 +8,7 @@
     "fps": 12
   },
   "ichigo": {
-    "name": "Kurosaki Ichigo",
+    "name": "Ichigo Kurosaki",
     "file": "/assets/sprites/ichigo-stand.webp",
     "frames": 7,
     "frameWidth": 186,
@@ -16,7 +16,7 @@
     "fps": 12
   },
   "sasuke": {
-    "name": "Uchiha Sasuke",
+    "name": "Sasuke Uchiha",
     "file": "/assets/sprites/sasuke-stand.webp",
     "frames": 7,
     "frameWidth": 182,
@@ -24,7 +24,7 @@
     "fps": 12
   },
   "rukia": {
-    "name": "Kuchiki Rukia",
+    "name": "Rukia Kuchiki",
     "file": "/assets/sprites/rukia-stand.webp",
     "frames": 7,
     "frameWidth": 137,

@@ -1,3 +1,4 @@
+import { landingCopy } from './landing-copy'
 import { useFaq } from '../lib/content'
 import { Card, EmptyState, ErrorState, SectionHeading, Skeleton } from './ui'
 
@@ -26,7 +27,7 @@ export function FaqAccordion() {
           <Card key={item.id} className="shadow-sticker-sm">
             <details className="group">
               <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-6 py-4 font-display text-lg font-bold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue/60 [&::-webkit-details-marker]:hidden">
-                {item.question}
+                {landingCopy(item.question)}
                 <span
                   aria-hidden="true"
                   className="flex size-8 shrink-0 items-center justify-center rounded-full border-[3px] border-ink bg-mustard text-xl leading-none transition-transform group-open:rotate-45"
@@ -34,7 +35,9 @@ export function FaqAccordion() {
                   +
                 </span>
               </summary>
-              <p className="max-w-[65ch] px-6 pb-6 leading-relaxed text-ink-soft">{item.answer}</p>
+              <p className="max-w-[65ch] px-6 pb-6 leading-relaxed text-ink-soft">
+                {landingCopy(item.answer)}
+              </p>
             </details>
           </Card>
         ))}

@@ -1,3 +1,4 @@
+import { landingCopy } from './landing-copy'
 import { useLore } from '../lib/content'
 import { Card, EmptyState, ErrorState, SectionHeading, Skeleton } from './ui'
 
@@ -37,9 +38,11 @@ export function LoreList() {
             <Card className="p-6 md:p-8">
               <h3 className="text-2xl font-bold">
                 <span className="sr-only">Chapter {chapter.position}: </span>
-                {chapter.title}
+                {landingCopy(chapter.title)}
               </h3>
-              <p className="mt-3 max-w-[65ch] leading-relaxed text-ink-soft">{chapter.body}</p>
+              <p className="mt-3 max-w-[65ch] leading-relaxed text-ink-soft">
+                {landingCopy(chapter.body)}
+              </p>
             </Card>
           </li>
         ))}
