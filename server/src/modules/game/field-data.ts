@@ -123,13 +123,14 @@ export const restCost = (level: number) =>
 
 let walkable: number[] | undefined
 /**
- * Map targets a ninja can walk to from the villages through scene exits (scenequeue.ini). The
+ * Map targets a ninja can walk to from the villages ("Go out" to the first field, then scene exits,
+ * scenequeue.ini). The
  * world map offers these only once entered (decision 7); the rest (161, the 2605 ring, 28xx) are
  * entered from the map in the original, so the map keeps them open.
  */
 export function visitRequiredScenes() {
   if (walkable) return walkable
-  const villages = Object.values(nationScenes()).map((n) => n.castle)
+  const villages = Object.values(nationScenes()).flatMap((n) => [n.castle, n.field])
   const seen = new Set<number>(villages)
   const queue = [...villages]
   while (queue.length > 0) {

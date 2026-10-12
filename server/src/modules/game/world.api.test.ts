@@ -113,6 +113,8 @@ describe('POST /api/game/fight', () => {
 
   it('gives nothing for a lost fight and leaves the ninja defeated on 0 HP', async () => {
     await db.update(characters).set({ sceneId: 2101 }).where(eq(characters.id, characterId))
+    // The task boss needs one of its quests (n32002 TaskID 10014;...).
+    await db.insert(characterQuests).values({ characterId, taskId: 10014, progress: [0] })
     // No weapon: attack 1 cannot pierce the boss's defence.
     const body = (await client.post('/api/game/fight', { monsterId: 'n32002' })).json()
     expect(body.won).toBe(false)
