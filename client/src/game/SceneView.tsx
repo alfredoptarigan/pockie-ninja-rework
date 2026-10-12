@@ -4,7 +4,7 @@ import { errorMessage, useFight, useScene, useTalk, useTravel } from './api'
 import { FightSummary } from './FightSummary'
 import { NpcDialog } from './NpcDialog'
 import { GameButton, Notice, Panel } from './skin'
-import { ScenePictureMount } from './stage'
+import { BattleReplayMount, ScenePictureMount } from './stage'
 import { GameText, plainText } from './text'
 import type { FightResult, SceneMonster, SceneNpc } from './types'
 import { destinations, sceneNameKey } from './world'
@@ -14,7 +14,13 @@ export function SceneView({ character }: { character: Character }) {
   const talk = useTalk()
   const fight = useFight()
   const [npc, setNpc] = useState<SceneNpc | null>(null)
-  const [result, setResult] = useState<FightResult | null>(null)
+  const [fightState, setFightState] = useState<{
+    result: FightResult
+    monster: SceneMonster
+    /** Bumped by "Watch again" to restart the replay. */
+    run: number
+    finished: boolean
+  } | null>(null)
 
   const openNpc = (target: SceneNpc) => {
     setNpc(target)
@@ -22,7 +28,8 @@ export function SceneView({ character }: { character: Character }) {
   }
   const startFight = async (monster: SceneMonster) => {
     try {
-      setResult(await fight.mutateAsync(monster.id))
+      const result = await fight.mutateAsync(monster.id)
+      setFightState({ result, monster, run: 0, finished: false })
     } catch {
       // shown from fight.error below
     }
@@ -89,7 +96,28 @@ export function SceneView({ character }: { character: Character }) {
       {npc && (
         <NpcDialog npc={npc} talk={talk} character={character} onClose={() => setNpc(null)} />
       )}
-      {result && <FightSummary result={result} onClose={() => setResult(null)} />}
+      {fightState && (
+        <BattleReplayMount
+          key={fightState.run}
+          replay={fightState.result.replay}
+          clothing={character.clothing}
+          monsterIds={[fightState.monster.id]}
+          sceneId={character.sceneId}
+          onFinished={() => setFightState((s) => s && { ...s, finished: true })}
+        />
+      )}
+      {fightState?.finished && (
+        <FightSummary
+          result={fightState.result}
+          onClose={() => setFightState(null)}
+          onReplay={() => setFightState((s) => s && { ...s, run: s.run + 1, finished: false })}
+          onFightAgain={() => {
+            const { monster } = fightState
+            setFightState(null)
+            void startFight(monster)
+          }}
+        />
+      )}
     </Panel>
   )
 }

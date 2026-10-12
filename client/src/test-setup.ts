@@ -33,3 +33,13 @@ HTMLDialogElement.prototype.close = function (this: HTMLDialogElement) {
 }
 
 afterEach(cleanup)
+
+// Phaser needs WebGL/canvas, which jsdom lacks: the stage entry is replaced by a stub that starts
+// nothing and ends battles at once (stage.test.tsx inspects the calls).
+vi.mock('./game/phaser', () => ({
+  mountPicture: vi.fn(() => ({ destroy: vi.fn() })),
+  mountBattle: vi.fn((_parent: HTMLElement, options: { onFinished: () => void }) => {
+    options.onFinished()
+    return Promise.resolve({ skip: vi.fn(), replay: vi.fn(), setSpeed: vi.fn(), destroy: vi.fn() })
+  }),
+}))

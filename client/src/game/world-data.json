@@ -3742,6 +3742,63 @@
       { "sceneId": 2804, "level": 86, "nation": -1 }
     ]
   },
+  "buildings": {
+    "111": {
+      "clip_hall": "n11001",
+      "clip_arena": "n11002",
+      "clip_foundry": "n11003",
+      "clip_equip": "n11005",
+      "clip_reward": "n11006",
+      "clip_pet": "n11012",
+      "clip_salve": "n11006",
+      "clip_CardLink": "n11015",
+      "clip_meetingroom": "n11017"
+    },
+    "121": {
+      "clip_hall": "n12001",
+      "clip_arena": "n12002",
+      "clip_foundry": "n12003",
+      "clip_equip": "n12005",
+      "clip_reward": "n12006",
+      "clip_pet": "n12012",
+      "clip_salve": "n11006",
+      "clip_CardLink": "n12015",
+      "clip_meetingroom": "n12017"
+    },
+    "131": {
+      "clip_hall": "n13001",
+      "clip_arena": "n13002",
+      "clip_foundry": "n13003",
+      "clip_equip": "n13004",
+      "clip_reward": "n13005",
+      "clip_pet": "n13012",
+      "clip_salve": "n11006",
+      "clip_CardLink": "n13015",
+      "clip_meetingroom": "n13017"
+    },
+    "141": {
+      "clip_hall": "n14001",
+      "clip_arena": "n14002",
+      "clip_foundry": "n14003",
+      "clip_equip": "n14004",
+      "clip_reward": "n14005",
+      "clip_pet": "n14012",
+      "clip_salve": "n11006",
+      "clip_CardLink": "n14015",
+      "clip_meetingroom": "n14017"
+    },
+    "151": {
+      "clip_hall": "n15001",
+      "clip_arena": "n15002",
+      "clip_foundry": "n15003",
+      "clip_equip": "n15004",
+      "clip_reward": "n15005",
+      "clip_pet": "n15012",
+      "clip_salve": "n11006",
+      "clip_CardLink": "n15015",
+      "clip_meetingroom": "n15017"
+    }
+  },
   "equipment": [
     "i210101",
     "i210102",
