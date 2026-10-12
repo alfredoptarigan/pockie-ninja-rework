@@ -137,7 +137,7 @@ function GameScreen({ character }: { character: Character }) {
       </main>
 
       {openWindow === 'bag' && (
-        <Dialog title="Inventory" onClose={close} className="w-[28rem]">
+        <Dialog title="Inventory" onClose={close} className="w-[379px] px-[5px]! pb-[7px]!">
           <Inventory highlight={bagHighlight} />
         </Dialog>
       )}
