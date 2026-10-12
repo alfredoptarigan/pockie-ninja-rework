@@ -260,7 +260,8 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
   // Custom 128 ("Appraise all"): every appraisable item of the page, for the summed cost.
   app.post('/forge/appraise-all', { config: { rateLimit: RATE_LIMITS.forge } }, async (request) => {
-    const { itemIds } = appraiseAllSchema.parse(request.body)
+    // A repeated id is one item: appraise and charge it once.
+    const itemIds = [...new Set(appraiseAllSchema.parse(request.body).itemIds)]
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)

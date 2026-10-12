@@ -34,7 +34,7 @@ import { playerFighter } from '../../game/combat.js'
 import { removeItems, type Tx } from '../../game/progress.js'
 import { vipDropMul, vipExp } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
-import { characterOf, requireUser } from '../game/characters.js'
+import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
   bad,
@@ -208,6 +208,8 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
   app.post('/run/fight', { config: { rateLimit: RATE_LIMITS.gateFight } }, async (request) =>
     withCharacter(db, request, async (tx, character): Promise<TollGateFightResult> => {
+      // A lost duel leaves 1 HP: without this a defeated ninja would skip the revive cost.
+      requireAlive(character, 'fight')
       const row = await requireRun(tx, character.id)
       const tables = tollGateTables()
       const layout = gateLayout(row.gateId, tables)

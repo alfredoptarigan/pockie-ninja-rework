@@ -28,6 +28,12 @@ type CharacterRow = typeof characters.$inferSelect
 const boardWhere = (id: string) => eq(characterDailyQuests.characterId, id)
 const taskWhere = (id: string, taskId: number) =>
   and(boardWhere(id), eq(characterDailyQuests.taskId, taskId))
+/** The route's quest id; unknown ids (also past the int column's range) stop before SQL. */
+function taskIdOf(params: unknown) {
+  const { taskId } = dailyTaskParamsSchema.parse(params)
+  if (!task(taskId)) throw bad('not_offered', 'That daily quest is not available.')
+  return taskId
+}
 
 /** DayTaskSystem.UpdataDayTaskCompleteNum, OnCustomOpenTaskDialog and H_DayTaskFlushkHeart. */
 async function openBoard(tx: Tx, character: CharacterRow) {
@@ -148,7 +154,7 @@ export async function dailyRoutes(app: FastifyInstance, { db }: { db: Db }) {
   // DayTaskSystem.OnCustomAcceptDayTask / CheckAcceptedDayTaskCount, TaskSystem.TryAcceptTask.
   app.post('/:taskId/accept', { config: { rateLimit: RATE_LIMITS.daily } }, async (request) => {
     const userId = requireUser(request).id
-    const { taskId } = dailyTaskParamsSchema.parse(request.params)
+    const taskId = taskIdOf(request.params)
     return db.transaction(async (tx) => {
       const character = await openBoard(tx, await lockCharacter(tx, userId))
       const board = await tx.select().from(characterDailyQuests).where(boardWhere(character.id))
@@ -184,7 +190,7 @@ export async function dailyRoutes(app: FastifyInstance, { db }: { db: Db }) {
   // DayTaskSystem.OnCustomRewardDayTask / CheckSelectTaskRewardType / DecRewardDayTaskCapital.
   app.post('/:taskId/hand-in', { config: { rateLimit: RATE_LIMITS.daily } }, async (request) => {
     const userId = requireUser(request).id
-    const { taskId } = dailyTaskParamsSchema.parse(request.params)
+    const taskId = taskIdOf(request.params)
     const { selectType } = dailyRewardBodySchema.parse(request.body ?? {})
     return db.transaction(async (tx) => {
       const character = await openBoard(tx, await lockCharacter(tx, userId))
