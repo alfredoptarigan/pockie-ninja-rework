@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { simulateFight, type FighterInput, type SkillInput } from '../fight.js'
 import { fakeContext, makeFighter } from '../testing.js'
-import { SKILL_SUCCESS, type FightEvent } from '../types.js'
+import { SKILL_LOSE, SKILL_SUCCESS, type FightEvent } from '../types.js'
 import { MONSTER_SKILLS } from './monster-skills.js'
 
 const blind = MONSTER_SKILLS['skill/skill_taiyangquan_40027.js']!
@@ -9,6 +9,10 @@ const bite = MONSTER_SKILLS['skill/skill_dingyao_40023.js']!
 const blade = MONSTER_SKILLS['skill/skill_daoguang_40031.js']!
 const launch = MONSTER_SKILLS['skill/skill_tiaofei_40033.js']!
 const combo = MONSTER_SKILLS['skill/skill_lianzhan_40036.js']!
+const heal = MONSTER_SKILLS['skill/skill_zhiliao_40020.js']!
+const comboHit = MONSTER_SKILLS['skill/skill_lianji_40024.js']!
+const crush = MONSTER_SKILLS['skill/skill_zhongya_40028.js']!
+const burrow = MONSTER_SKILLS['skill/skill_zuandi_40029.js']!
 
 const player = (overrides = {}) => makeFighter({ index: 0, ...overrides })
 const monster = (overrides = {}) => makeFighter({ index: 1, side: 'defenders', ...overrides })
@@ -112,6 +116,121 @@ describe('40036 Combo Slash (skill_lianzhan_40036.js)', () => {
     combo(ctx, monster({ mp: 73, maxMp: 73 }), player(), fv, 0)
     expect(calls).toEqual([['attack', damage]])
     expect(fv.attackCount).toBe(count)
+  })
+})
+
+describe('40020 Heal (skill_zhiliao_40020.js)', () => {
+  it('heals InitMaxHP * 0.1 for InitMaxMP * 0.15, truncating into the int fields', () => {
+    const { ctx, calls } = fakeContext()
+    const self = monster({ hp: 10, maxHp: 15, mp: 100, maxMp: 100 })
+    const fv = event()
+    expect(heal(ctx, self, player(), fv, 0)).toBe(SKILL_SUCCESS)
+    expect(calls).toEqual([])
+    // 10 + 1.5 -> 11; IncHP 1.5 -> 1
+    expect(self.hp).toBe(11)
+    expect(fv.incHp).toBe(1)
+    expect(self.mp).toBe(85)
+    expect(fv.decMp).toBe(15)
+  })
+
+  it('never heals above InitMaxHP', () => {
+    const { ctx } = fakeContext()
+    const self = monster({ hp: 95, maxHp: 100, mp: 100, maxMp: 100 })
+    const fv = event()
+    heal(ctx, self, player(), fv, 0)
+    expect(self.hp).toBe(100)
+    expect(fv.incHp).toBe(5)
+  })
+
+  it('attacks normally at full HP or without mana', () => {
+    const full = fakeContext()
+    heal(full.ctx, monster({ hp: 100, maxHp: 100 }), player(), event(), 0)
+    expect(full.calls).toEqual([['normalAttack']])
+    const noMana = fakeContext()
+    heal(noMana.ctx, monster({ hp: 50, mp: 10, maxMp: 100 }), player(), event(), 0)
+    expect(noMana.calls).toEqual([['normalAttack']])
+  })
+})
+
+describe('40024 / 40042 Combo Hit (skill_lianji_40024.js, skill_lianji_40042.js)', () => {
+  it.each([
+    { rolls: [59], damage: 22, count: 2 },
+    { rolls: [60], damage: 24, count: 3 },
+  ])('rolls $rolls into $count strikes for $damage', ({ rolls, damage, count }) => {
+    const { ctx, calls } = fakeContext({ rolls, damage: 20 })
+    const fv = event()
+    const self = monster({ mp: 100, maxMp: 100 })
+    comboHit(ctx, self, player(), fv, 0)
+    expect(calls).toEqual([['attack', damage]])
+    expect(fv.attackCount).toBe(count)
+    expect(self.mp).toBe(85)
+  })
+
+  it('is the same script under both ids', () => {
+    expect(MONSTER_SKILLS['skill/skill_lianji_40042.js']).toBe(comboHit)
+  })
+})
+
+describe('40028 Crush (skill_zhongya_40028.js)', () => {
+  it('hits for damage * 0.8 and stuns for 2 units on a hit', () => {
+    const { ctx, calls } = fakeContext({ damage: 10 })
+    const self = monster({ mp: 100, maxMp: 100 })
+    crush(ctx, self, player(), event(), 0)
+    expect(calls).toEqual([
+      ['attack', 8],
+      ['addBuff', 0, 11813, 2],
+    ])
+    expect(self.mp).toBe(85)
+  })
+
+  it('does not stun on a miss', () => {
+    const { ctx, calls } = fakeContext({ damage: 10, miss: true })
+    crush(ctx, monster({ mp: 100, maxMp: 100 }), player(), event(), 0)
+    expect(calls).toEqual([['attack', 8]])
+  })
+})
+
+describe('40029 Burrow (skill_zuandi_40029.js, before being attacked)', () => {
+  it('passes a roll below 8 * MaxMP * target AtkTime / 18000, deals MaxMP * 0.19 and interrupts', () => {
+    // 8 * 100 * 1000 / 18000 = 44.4: 44 passes
+    const { ctx, calls } = fakeContext({ rolls: [44] })
+    const self = monster({ mp: 100, maxMp: 100 })
+    const fv = event()
+    expect(burrow(ctx, self, player(), fv, 0)).toBe(SKILL_SUCCESS)
+    expect(calls).toEqual([
+      ['attack', 19],
+      ['addBuff', 0, 11830, 0],
+    ])
+    expect(self.mp).toBe(81)
+    expect(fv.decMp).toBe(19)
+  })
+
+  it('does not stack the interrupt', () => {
+    const { ctx, calls } = fakeContext({ rolls: [0] })
+    const target = player({ buffs: [{ id: 11830, saveData: 0, lifeTime: 0, startTime: 0 }] })
+    burrow(ctx, monster({ mp: 100, maxMp: 100 }), target, event(), 0)
+    expect(calls).toEqual([['attack', 19]])
+  })
+
+  it('fails on the roll or without mana, without a fallback', () => {
+    const rolled = fakeContext({ rolls: [45] })
+    expect(burrow(rolled.ctx, monster({ mp: 100, maxMp: 100 }), player(), event(), 0)).toBe(
+      SKILL_LOSE,
+    )
+    const noMana = fakeContext({ rolls: [0] })
+    expect(burrow(noMana.ctx, monster({ mp: 18, maxMp: 100 }), player(), event(), 0)).toBe(
+      SKILL_LOSE,
+    )
+    expect(noMana.calls).toEqual([])
+  })
+})
+
+describe('scripts shared between ids', () => {
+  it('maps Combo Slash 40032 and Blade Light 40037-40040 to the ported scripts', () => {
+    expect(MONSTER_SKILLS['skill/skill_lianzhan_40032.js']).toBe(combo)
+    for (const id of [40037, 40038, 40039, 40040]) {
+      expect(MONSTER_SKILLS[`skill/skill_daoguang_${id}.js`]).toBe(blade)
+    }
   })
 })
 

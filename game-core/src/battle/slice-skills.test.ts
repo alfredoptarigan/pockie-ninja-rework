@@ -25,8 +25,15 @@ const outfitSkills = data<{ AvatarID: number }[]>('creation-outfits').map(({ Ava
 
 const records = data<Record<string, Record<string, number>>>('npc-records')
 const values = data<Record<string, { r: number | number[] }>>('npc-record-values')
-const monsterSkills = ['n33017', 'n33006', 'n33026', 'n32001', 'n32002'].map((id) =>
-  Object.values(records[id]!).flatMap((rec) => [values[rec]!.r].flat()),
+/** Every monster spawned in the 21xx-25xx fields (RefresNpc.ini) that has a skill record. */
+const fieldMonsters = Object.entries(data<Record<string, { r: string | string[] }>>('scene-npcs'))
+  .filter(([sceneId]) => /^2[1-5]\d\d$/.test(sceneId))
+  .flatMap(([, scene]) => [scene.r].flat().map((line) => line.split(',')[0]!))
+  .filter((id) => records[id]?.AttackSkill !== undefined || records[id]?.TriggerSkill !== undefined)
+const monsterSkills = [...new Set(fieldMonsters)].map((id) =>
+  [records[id]!.AttackSkill, records[id]!.TriggerSkill]
+    .filter((rec) => rec !== undefined)
+    .flatMap((rec) => [values[rec]!.r].flat()),
 )
 
 describe('skills of the M2 slice', () => {

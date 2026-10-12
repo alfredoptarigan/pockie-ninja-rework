@@ -158,6 +158,7 @@ if (import.meta.main) {
   write('avatar-skills', ini('Equip/AvatarAddSkill.ini'))
   write('skills', ini('skill/skill.ini'))
   write('skill-adds', ini('skill/skilladd.ini'))
+  write('fight-buffs', ini('skill/FightBuff.ini'))
   write('levels', ini('role/LevelExp.ini'))
 
   const mapValues = <T>(rows: Record<string, Row>, fn: (row: Row) => T) =>

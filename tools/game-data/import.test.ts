@@ -112,6 +112,21 @@ describe('imported game data', () => {
     expect(data('avatar-skills').i290045).toMatchObject({ SkillID1: 1945, SkillID4: 2042 })
   })
 
+  it('keeps the fight buffs (FightBuff.ini) with their scripts', () => {
+    const buffs = data('fight-buffs')
+    expect(count(buffs)).toBe(136)
+    expect(buffs['11841']).toEqual({
+      cleartype: 2,
+      javascript: 'buff/buff_gedang_11841.js',
+      lifttime: -1,
+      overlying: 2,
+      replace: 11841,
+      type: 1,
+      validity: 2,
+    })
+    expect(buffs['11888']).toMatchObject({ lifttime: 0, replace: 11888, type: 1 })
+  })
+
   it('has the level cap at 90 and the first EXP steps', () => {
     const levels = data('levels')
     expect(levels.role.maxlevel).toBe(90)

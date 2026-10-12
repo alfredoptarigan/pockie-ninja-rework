@@ -126,7 +126,7 @@ export function simulateFight({
 
   function addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData = 0) {
     const def = BUFFS[buffId]
-    if (!def) return
+    if (!def || (def.validity !== 1 && def.validity !== 2)) return
     if (def.replace !== 0 && target.buffs) {
       for (let i = target.buffs.length - 1; i >= 0; i--) {
         const other = target.buffs[i]
