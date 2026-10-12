@@ -18,6 +18,7 @@ import {
   subTasks,
 } from '../../game/data.js'
 import { HttpError } from '../../http.js'
+import { RATE_LIMITS } from './rate-limits.js'
 
 const NATIONS: Nation[] = [0, 1, 2, 3, 4]
 const NAME_TAKEN = 'That ninja name is already taken.'
@@ -70,73 +71,81 @@ function constraintOf(error: unknown) {
 }
 
 export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) {
-  app.get('/creation', async (request): Promise<CreationOptions> => {
-    requireUser(request)
-    const scenes = nationScenes()
-    return {
-      outfits: creationOutfits(),
-      villages: NATIONS.map((nation) => ({ nation, sceneId: scenes[nation]!.castle })),
-      suggestedNation: await suggestedNation(db),
-    }
-  })
+  app.get(
+    '/creation',
+    { config: { rateLimit: RATE_LIMITS.read } },
+    async (request): Promise<CreationOptions> => {
+      requireUser(request)
+      const scenes = nationScenes()
+      return {
+        outfits: creationOutfits(),
+        villages: NATIONS.map((nation) => ({ nation, sceneId: scenes[nation]!.castle })),
+        suggestedNation: await suggestedNation(db),
+      }
+    },
+  )
 
-  app.get('/character', async (request) => {
+  app.get('/character', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const user = requireUser(request)
     const [row] = await db.select().from(characters).where(eq(characters.userId, user.id))
     if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
     return { character: toCharacter(row) }
   })
 
-  app.post('/characters', async (request, reply) => {
-    const user = requireUser(request)
-    const input = createCharacterSchema.parse(request.body)
+  app.post(
+    '/characters',
+    { config: { rateLimit: RATE_LIMITS.createCharacter } },
+    async (request, reply) => {
+      const user = requireUser(request)
+      const input = createCharacterSchema.parse(request.body)
 
-    const outfit = creationOutfits().find((o) => o.clothing === input.clothing)
-    if (!outfit || outfit.gender !== input.gender) {
-      throw new HttpError(400, 'validation', 'Please check the highlighted fields.', {
-        clothing: 'Choose one of the starting outfits.',
-      })
-    }
-
-    const avatarId = avatarIdForClothing(input.clothing)
-    const stats = deriveStats(avatarStats(avatarId), 1)
-    const sceneId = nationScenes()[input.nation]!.login
-    const firstTask = FIRST_TUTORIAL_TASK[input.nation]!
-
-    const row = await db
-      .transaction(async (tx) => {
-        const [created] = await tx
-          .insert(characters)
-          .values({
-            userId: user.id,
-            name: input.name,
-            gender: input.gender,
-            nation: input.nation,
-            clothing: input.clothing,
-            avatarId,
-            hp: stats.maxHp,
-            mp: stats.maxMp,
-            sceneId,
-          })
-          .returning()
-        await tx.insert(characterQuests).values({
-          characterId: created!.id,
-          taskId: firstTask,
-          progress: subTasks(firstTask).map(() => 0),
+      const outfit = creationOutfits().find((o) => o.clothing === input.clothing)
+      if (!outfit || outfit.gender !== input.gender) {
+        throw new HttpError(400, 'validation', 'Please check the highlighted fields.', {
+          clothing: 'Choose one of the starting outfits.',
         })
-        return created!
-      })
-      .catch((error: unknown) => {
-        const constraint = constraintOf(error)
-        if (constraint === 'characters_name_lower_key') {
-          throw new HttpError(409, 'conflict', NAME_TAKEN, { name: NAME_TAKEN })
-        }
-        if (constraint === 'characters_user_id_key') {
-          throw new HttpError(409, 'conflict', 'You already have a ninja.')
-        }
-        throw error
-      })
+      }
 
-    return reply.code(201).send({ character: toCharacter(row) })
-  })
+      const avatarId = avatarIdForClothing(input.clothing)
+      const stats = deriveStats(avatarStats(avatarId), 1)
+      const sceneId = nationScenes()[input.nation]!.login
+      const firstTask = FIRST_TUTORIAL_TASK[input.nation]!
+
+      const row = await db
+        .transaction(async (tx) => {
+          const [created] = await tx
+            .insert(characters)
+            .values({
+              userId: user.id,
+              name: input.name,
+              gender: input.gender,
+              nation: input.nation,
+              clothing: input.clothing,
+              avatarId,
+              hp: stats.maxHp,
+              mp: stats.maxMp,
+              sceneId,
+            })
+            .returning()
+          await tx.insert(characterQuests).values({
+            characterId: created!.id,
+            taskId: firstTask,
+            progress: subTasks(firstTask).map(() => 0),
+          })
+          return created!
+        })
+        .catch((error: unknown) => {
+          const constraint = constraintOf(error)
+          if (constraint === 'characters_name_lower_key') {
+            throw new HttpError(409, 'conflict', NAME_TAKEN, { name: NAME_TAKEN })
+          }
+          if (constraint === 'characters_user_id_key') {
+            throw new HttpError(409, 'conflict', 'You already have a ninja.')
+          }
+          throw error
+        })
+
+      return reply.code(201).send({ character: toCharacter(row) })
+    },
+  )
 }
