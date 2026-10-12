@@ -145,9 +145,18 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
 - [~] **Task 4 — battle engine** (`game-core/src/battle`).
   - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,
         counters, parry skill 7777, typed replay, golden test from an original replay.
-  - [ ] Scripted skills (`RES/javascript/skill/*.js`): port the ones the starting outfits and the
-        slice monsters use (e.g. 1945, 2042); buffs (`FightBuff.ini`); begin-fight skills (8888);
-        MP costs.
+  - [x] Skill/trigger/buff engine following the Java flow (`battle/skills.ts`, `buffs.ts`,
+        `scripts/*`): 7777/8888 parry, the 10 starting outfits' execute ultimates (aoyi), monster
+        skills 40023/40027/40031/40033/40036, buffs 8888/11811/11824/11841/11843/11851, MP costs.
+        Replay events gained optional `selfDamage`, `decMp`, `attackCount`, `addBuffs`, `delBuffs`;
+        event 9 (buff tick/expiry) is now emitted; fighters carry `maxMp`/`startMp`/`mp`.
+  - [ ] **Server wiring:** `world.ts` (fight + explore) must pass `skills` and `avatarLevel` to the
+        engine (players: `avatar-skills.json` SkillID1-4; monsters: `npc-records` AttackSkill/
+        TriggerSkill via `npc-record-values`, `avatarLevel = CounterBombMul` unless -1) and save
+        `replay.fighters[0].mp`. Until then fighters only use 7777/8888.
+  - [ ] Other 48 aoyi scripts (avatar level 9+), recast skills, rebound/absorb/vampire/shields,
+        stun/seal, regeneration auras; import `FightBuff.ini` to `fight-buffs.json` (6 buffs are
+        hard-coded in `buffs.ts` for now).
 - [~] **Task 5 — character model.**
   - [x] Tables `characters`, `inventory_items`, `character_quests`; stats (`game-core/src/stats.ts`),
         EXP/level-up and drops (`game-core/src/progression.ts`).
@@ -158,10 +167,16 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         `GET quests`, `POST quests/:taskId/accept`, `POST npcs/:npcId/talk`, `GET inventory`,
         `POST items/:id/use`, `POST items/:id/equip`, `POST travel`. The Fire Village tutorial
         (90000 → 90002) plays end to end in `actions.api.test.ts`.
-  - [ ] Explore spots (`explore-spots.json` + factories, global 300 s cooldown, daily count
-        `7 + level/10`, cards).
-  - [ ] Remaining sub-task types the tutorials use (check 90003-90015 and 91000-94015).
-  - [ ] Per-action rate limits on every game route (fight already has one).
+  - [x] Explore spots: `GET /explore`, `POST /explore/:spotId` (300 s cooldown, `7 + level/10` per
+        UTC day, key items, stars with bonus, five cards, row lock), migration
+        `0002_explore_spots.sql`. Not done: paid card peeks, "senior" search, bag-space checks;
+        monster factories 18/20/22/24/26/28 are missing from the data (fight cards become nothing).
+        `docs/original-data/world.md` says item cards are 50%; the Java gives 50% to pet eggs.
+  - [x] All five village tutorials (90000-94015) play to the end in `tutorials.api.test.ts`;
+        fights now complete quests, collect quests remove their items.
+  - [x] Rate limits on every game route (`rate-limits.ts`, guarded by a test).
+  - [ ] An "available/completed quests" view for the client (8a guesses offers from chain data);
+        character stats in `GET /character`.
 - [x] **Task 7 — realtime presence and chat.** `server/src/modules/realtime/realtime.ts`
       (Socket.IO on `app.server`, `pn_session` cookie + origin check, rooms `scene:<id>`, travel
       moves sockets after commit, logout disconnects the session), events and zod schemas in
