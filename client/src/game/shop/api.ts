@@ -39,8 +39,9 @@ export interface MerchantItem {
   slot: number
   itemId: string
   price: number
-  left: number
-  maxCount: number
+  /** Null on the VIP tab: it has no stock limit. */
+  left: number | null
+  maxCount?: number
   bound: boolean
   useLevel: number
   limit: number

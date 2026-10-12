@@ -36,6 +36,7 @@ import {
   type StarState,
 } from '../../game/explore.js'
 import { expUpdate, grantItems, removeItems, rookieHandIns, type Tx } from '../../game/progress.js'
+import { vipDropMul, vipExp } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
@@ -378,7 +379,9 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
         }
 
         // Star bonus: EXP or the spot's pet egg.
-        const starBonus = rollStarBonus(spot, star, random)
+        const rolled = rollStarBonus(spot, star, random)
+        const starBonus =
+          rolled?.type === 'exp' ? { ...rolled, exp: vipExp(rolled.exp, character, now) } : rolled
         if (starBonus?.type === 'exp') {
           const { levelsGained, ...update } = expUpdate(current, starBonus.exp)
           current = { ...current, ...update }
@@ -454,7 +457,7 @@ async function settleSearch(
       .set({ stone: current.stone + card.amount })
       .where(eq(characters.id, character.id))
   } else if ('itemId' in card) {
-    granted = cardGranted(card, random)
+    granted = cardGranted(card, random, vipDropMul(character))
     if (granted) toGrant.push({ itemId: card.itemId, bound: card.bound })
   }
   await requireBagRoom(tx, character.id, toGrant)

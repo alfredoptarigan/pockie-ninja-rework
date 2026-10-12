@@ -71,6 +71,13 @@
       "when": 1791821232873,
       "tag": "0009_explore_searches",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1791823456129,
+      "tag": "0010_vip",
+      "breakpoints": true
     }
   ]
 }

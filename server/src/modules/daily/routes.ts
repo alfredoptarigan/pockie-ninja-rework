@@ -238,6 +238,7 @@ export async function dailyRoutes(app: FastifyInstance, { db }: { db: Db }) {
         .where(eq(characters.id, character.id))
       if (choice) {
         // RewardRule.GetRewardTaskFactor / RewardExp: only EXP is increased; money and items are unchanged.
+        // reward.exp already holds the VIP bonus (completeQuest), so the factor scales it too.
         const bonus = Math.floor(Math.fround(Math.fround(reward.exp) * choice.factor) / 100)
         const [paid] = await tx.select().from(characters).where(eq(characters.id, character.id))
         const { levelsGained, ...exp } = expUpdate(paid!, bonus)

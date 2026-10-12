@@ -30,6 +30,7 @@ import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.
 import { drawPouch } from './pouch.js'
 import { grantItems, loadQuests, saveQuests, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
+import { vipDropMul, vipExp } from './vip.js'
 
 type CharacterRow = typeof characters.$inferSelect
 /** A player's fighter keeps the derived stats (strength, weapon class) for display. */
@@ -164,13 +165,14 @@ export async function fightMonster(
   if (won) {
     const monster = npc(monsterId)!
     const random = createRandom(seed ^ 0x5eed)
-    rewards.exp = Number(monster.NpcExp ?? 0)
+    const dropMul = vipDropMul(character)
+    rewards.exp = vipExp(Number(monster.NpcExp ?? 0), character)
     rewards.stone = random.between(
       Number(monster.DropCapital0Min ?? 0),
       Number(monster.DropCapital0Max ?? 0),
     )
     for (const libId of monsterDropLibIds(monsterId)) {
-      rewards.items.push(...rollLibDrops(libId, random))
+      rewards.items.push(...rollLibDrops(libId, random, dropMul))
     }
 
     const table = levels()
@@ -190,7 +192,7 @@ export async function fightMonster(
       for (const update of updates) changed.add(update.taskId)
       progress = progress.map((q) => updates.find((u) => u.taskId === q.taskId) ?? q)
     }
-    const questItems = questItemDrops(progress, monsterId, character.sceneId, random)
+    const questItems = questItemDrops(progress, monsterId, character.sceneId, random, dropMul)
     apply(recordKill(progress, monsterId, character.sceneId))
     for (const questItem of questItems) {
       rewards.items.push({ itemId: questItem, bound: true })

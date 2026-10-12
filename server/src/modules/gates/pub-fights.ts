@@ -17,6 +17,7 @@ import { pubFightLineups } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
+import { vipDropMul, vipExp } from '../../game/vip.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
   bad,
@@ -85,7 +86,7 @@ async function pull(tx: Tx, character: CharacterRow, pool: string[]) {
   const lineup = pullLineup(pool, createRandom(newSeed()))
   const { rewardRules, drops } = pubData()
   const ruleId = comboRule(lineup, rewardRules)
-  const items = ruleId ? rollDropLib(drops[ruleId]?.DropLibID ?? 0) : []
+  const items = ruleId ? rollDropLib(drops[ruleId]?.DropLibID ?? 0, vipDropMul(character)) : []
   await requireBagRoom(tx, character.id, items)
   await grantItems(tx, character.id, items)
   await saveLineup(tx, character, lineup)
@@ -142,11 +143,12 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
       } else {
         const hpDraw = drawPouch(hp, maxHp, character.hpPouch)
         const mpDraw = drawPouch(mp, maxMp, character.mpPouch)
-        const kill = lastNpcRewards(npcIds[npcIds.length - 1]!)
+        const kill = lastNpcRewards(npcIds[npcIds.length - 1]!, vipDropMul(character))
+        const exp = vipExp(kill.exp, character)
         const { update, levelsGained } = withExp(
           character,
           { hp: hpDraw.value, mp: mpDraw.value, hpPouch: hpDraw.pouch, mpPouch: mpDraw.pouch },
-          kill.exp,
+          exp,
         )
         await grantItems(tx, character.id, kill.items)
         await saveCharacter(tx, character.id, {
@@ -155,7 +157,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
           stone: character.stone + kill.stone,
         })
         Object.assign(rewards, {
-          exp: kill.exp,
+          exp,
           stone: kill.stone,
           items: kill.items,
           levelsGained,

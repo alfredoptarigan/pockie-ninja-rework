@@ -153,6 +153,9 @@ export function seniorKey(spotId: string) {
 
 export const SENIOR_FORBIDDEN_SCENES = [3101, 3102, 111, 121, 131, 141, 151, 161, 171]
 
-/** OnCustomGetBonus type 3 (pet): RandInt(1,100) <= 50. Other item cards always grant. */
-export const cardGranted = (card: ExploreCard, random: Random) =>
-  card.type !== 'pet' || random.int(100) < 50
+/**
+ * OnCustomGetBonus type 3 (pet): RandInt(1,100) <= 50. Other item cards always grant.
+ * `chanceMul` is the VIP drop factor (vipDropMul).
+ */
+export const cardGranted = (card: ExploreCard, random: Random, chanceMul = 1) =>
+  card.type !== 'pet' || random.int(100) < 50 * chanceMul
