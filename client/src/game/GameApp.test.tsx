@@ -159,7 +159,7 @@ describe('GameScreen', () => {
 
   it('goes home with the Village button in a field', async () => {
     const fetchMock = renderGame(
-      { 'POST /api/game/travel': () => json({ character }) },
+      { 'POST /api/game/travel': () => json({ completed: [], character }) },
       { ...character, sceneId: 2101 },
     )
     await userEvent.click(await screen.findByRole('button', { name: 'Village' }))
@@ -178,15 +178,47 @@ describe('character info', () => {
         name: 'Character',
       }),
     )
-    const combat = within(screen.getByRole('dialog', { name: 'Stats' })).getByRole('region', {
-      name: 'Combat stats',
-    })
+    const statsWindow = screen.getByRole('dialog', { name: 'Stats' })
+    expect(within(statsWindow).getByRole('region', { name: 'Profile' })).toHaveTextContent(
+      'NameNinja_01Level1',
+    )
+    const combat = within(statsWindow).getByRole('region', { name: 'Combat stats' })
     // Attributes are stored x100; speed is 1000 / AtkTime; defence 154 takes 10% off.
     expect(await within(combat).findByText('8 - 9')).toBeVisible()
-    expect(combat).toHaveTextContent('Strength13')
+    expect(combat).toHaveTextContent('STR13')
     expect(combat).toHaveTextContent('Speed1.00')
-    expect(combat).toHaveTextContent('Defense154 (-10% damage)')
+    expect(combat).toHaveTextContent('HP120/160')
+    expect(within(combat).getByText('154')).toHaveAttribute(
+      'title',
+      'Takes 10% off the damage you receive',
+    )
     expect(combat).toHaveTextContent('Block2')
+    expect(within(statsWindow).getByRole('region', { name: 'Refill pouches' })).toHaveTextContent(
+      'HP pouch1,000/10,000',
+    )
+  })
+
+  it('refills both pouches with Gift Coupons from the Character window', async () => {
+    const fetchMock = renderGame(
+      { 'POST /api/game/pouches/buy': () => json({ completed: [], character }) },
+      { ...character, giftCoupon: 20 },
+    )
+    await userEvent.click(
+      within(await screen.findByRole('navigation', { name: 'Menu' })).getByRole('button', {
+        name: 'Character',
+      }),
+    )
+    const refill = within(screen.getByRole('dialog', { name: 'Stats' })).getByRole('region', {
+      name: 'Refill pouches',
+    })
+    expect(refill).toHaveTextContent('Cost 20')
+    expect(within(refill).getByRole('button', { name: 'Refill with Gold' })).toBeDisabled()
+    await userEvent.click(within(refill).getByRole('button', { name: 'Refill with Coupons' }))
+    expect(requestBody(fetchMock, 'POST /api/game/pouches/buy')).toEqual({
+      currency: 'giftCoupon',
+      hp: 'full',
+      mp: 'full',
+    })
   })
 })
 

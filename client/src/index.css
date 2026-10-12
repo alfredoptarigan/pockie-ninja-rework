@@ -325,3 +325,36 @@
     animation: none;
   }
 }
+
+/* Stats window pieces (UI_RoleInfo_Xml, see docs/ui-layout-reborn.md). */
+/* Grey plate behind the player's title (BigBG7). */
+@utility game-title-plate {
+  border: 0;
+  border-image: var(--ui-title-plate) var(--ui-title-plate-slice) fill /
+    var(--ui-title-plate-border);
+}
+/* Pale value field (TextBG2) that holds one stat. */
+@utility game-value-box {
+  border: 0;
+  border-image: var(--ui-value-box) var(--ui-value-box-slice) fill / var(--ui-value-box-border);
+}
+/* Gold line between stat groups (PartitionYellow). */
+@utility game-divider {
+  border: 0;
+  border-image: var(--ui-divider) var(--ui-divider-slice) fill / var(--ui-divider-border);
+}
+/* Rounded progress bar: the track with the fill clipped to --fill. */
+@utility game-progress {
+  position: relative;
+  border: 0;
+  border-image: var(--ui-progress-track) var(--ui-progress-track-slice) fill /
+    var(--ui-progress-track-border);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-image: var(--ui-progress-fill) var(--ui-progress-fill-slice) fill /
+      var(--ui-progress-fill-border);
+    clip-path: inset(0 calc(100% - var(--fill, 0%)) 0 0);
+  }
+}
