@@ -6,9 +6,9 @@ import {
   type DropEntry,
   type DropLib,
 } from '@pockie/game-core'
-import { buyPouchesSchema, CLOSED_SCENES } from '@pockie/shared'
+import { BAG_SLOTS, buyPouchesSchema, CLOSED_SCENES, itemActionParamsSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
-import { and, eq } from 'drizzle-orm'
+import { and, count, eq, isNull } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
@@ -52,6 +52,7 @@ import {
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
+import { playerFighter } from '../../game/combat.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
@@ -63,7 +64,7 @@ const COMPLETED = 2
 // Quest types handed in at their submit NPC (TaskBaseRule.OnTestTaskComplete).
 const HANDED_IN_TYPES = new Set([1, 3, 5])
 
-const itemParams = z.object({ id: z.uuid() })
+const itemParams = itemActionParamsSchema
 const taskParams = z.object({ taskId: z.coerce.number().int().positive() })
 const npcParams = z.object({ npcId: z.string().regex(/^n\d+$/) })
 const travelBody = z.object({ sceneId: z.number().int().positive() })
@@ -139,8 +140,10 @@ export async function actionRoutes(
   app: FastifyInstance,
   { db, realtime }: { db: Db; realtime: Pick<Realtime, 'moveCharacter'> },
 ) {
-  const reload = async (tx: Tx, id: string) =>
-    toCharacter((await tx.select().from(characters).where(eq(characters.id, id)))[0]!)
+  const reload = async (tx: Tx, id: string) => {
+    const [row] = await tx.select().from(characters).where(eq(characters.id, id))
+    return toCharacter(row!, await playerFighter(tx, row!))
+  }
 
   async function ownedItem(tx: Tx, characterId: string, id: string) {
     const [row] = await tx
@@ -348,6 +351,29 @@ export async function actionRoutes(
         ...(await rookieHandIns(tx, character.id)),
         character: await reload(tx, character.id),
       }
+    })
+  })
+
+  // EquipSystem.OnCustomUnEquip: the item goes back to the bag, which needs a free row.
+  app.post('/items/:id/unequip', { config: { rateLimit: RATE_LIMITS.item } }, async (request) => {
+    const { id } = itemParams.parse(request.params)
+    const userId = requireUser(request).id
+    return db.transaction(async (tx) => {
+      const character = await lockCharacter(tx, userId)
+      const row = await ownedItem(tx, character.id, id)
+      if (!row.equippedSlot) throw bad('not_equipped', 'That item is not equipped.')
+      const [bag] = await tx
+        .select({ rows: count() })
+        .from(inventoryItems)
+        .where(
+          and(eq(inventoryItems.characterId, character.id), isNull(inventoryItems.equippedSlot)),
+        )
+      if ((bag?.rows ?? 0) >= BAG_SLOTS) throw bad('bag_full', 'Your bag is full.')
+      await tx
+        .update(inventoryItems)
+        .set({ equippedSlot: null })
+        .where(eq(inventoryItems.id, row.id))
+      return { character: await reload(tx, character.id) }
     })
   })
 

@@ -27,6 +27,15 @@ export type CreateCharacterInput = z.infer<typeof createCharacterSchema>
  */
 export const CLOSED_SCENES: readonly number[] = [2104, 2204, 2304, 2404, 2504]
 
+/**
+ * Bag rows a character can hold (the inventory window's 10 tabs of 15 cells). ponytail: the
+ * original grows the bag by pages bought with Gold; a per-character size column when that lands.
+ */
+export const BAG_SLOTS = 150
+
+/** Params of POST /api/game/items/:id/equip and /unequip: the inventory row. */
+export const itemActionParamsSchema = z.object({ id: z.uuid() })
+
 /** 0 Fire, 1 Water, 2 Earth, 3 Wind, 4 Lightning (original nation numbering). */
 export type Nation = 0 | 1 | 2 | 3 | 4
 
