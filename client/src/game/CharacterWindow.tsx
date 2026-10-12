@@ -1,7 +1,7 @@
 import type { Character, CharacterStats } from '@pockie/shared'
-import { useCharacterStats } from './api'
+import { errorMessage, useBuyPouches, useCharacterStats } from './api'
 import { useOutfitPortrait } from './art'
-import { Bar, Dialog } from './skin'
+import { Bar, Dialog, GameButton, Notice } from './skin'
 import { outfitName, plainText } from './text'
 import { expToNext, sceneNameKey, villageOf } from './world'
 
@@ -29,6 +29,48 @@ export function statRows(stats: CharacterStats): [string, string | number][] {
     ['Pierce', stats.pierce],
     ['Toughness', stats.tough],
   ]
+}
+
+/** OnCustomBuy: 1 Gold or Gift Coupon per 1000 pouch points. */
+const POUCH_POINTS_PER_COIN = 1000
+
+/** Buys both pouches full (UI_RoleUse.as "Full" choice) with Gold or Gift Coupons. */
+function PouchRefill({ character }: { character: Character }) {
+  const buy = useBuyPouches()
+  const cost = [character.hpPouch, character.mpPouch].reduce(
+    (sum, pouch) => sum + Math.ceil((character.pouchMax - pouch) / POUCH_POINTS_PER_COIN),
+    0,
+  )
+  const refill = (currency: 'gold' | 'giftCoupon') =>
+    buy.mutate({ currency, hp: 'full', mp: 'full' })
+  return (
+    <section aria-label="Refill pouches" className="game-card mt-3 flex flex-col gap-1 p-2 text-xs">
+      {buy.isError && <Notice tone="error">{errorMessage(buy.error)}</Notice>}
+      {cost === 0 ? (
+        <p>Your pouches are full.</p>
+      ) : (
+        <>
+          <p>Refill both pouches for {cost} Gold or {cost} Gift Coupons.</p>
+          <div className="flex gap-2">
+            <GameButton
+              small
+              disabled={buy.isPending || character.gold < cost}
+              onClick={() => refill('gold')}
+            >
+              Refill with Gold
+            </GameButton>
+            <GameButton
+              small
+              disabled={buy.isPending || character.giftCoupon < cost}
+              onClick={() => refill('giftCoupon')}
+            >
+              Refill with Coupons
+            </GameButton>
+          </div>
+        </>
+      )}
+    </section>
+  )
 }
 
 /** Character stats window (menu bar "Character"). */
@@ -71,6 +113,7 @@ export function CharacterWindow({
           ))}
         </dl>
       </div>
+      <PouchRefill character={character} />
       <section aria-label="Combat stats" className="mt-3">
         {stats.isPending && <p className="text-xs">Loading stats...</p>}
         {stats.isError && <p className="text-xs">We could not load your stats.</p>}

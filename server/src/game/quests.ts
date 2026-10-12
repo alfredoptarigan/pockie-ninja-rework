@@ -131,6 +131,8 @@ export function talkItems(quests: QuestProgress[], npcId: string) {
 /** Rookie commands (CommandRule.java): 8888 use item, 8887 equip weapon, ... */
 export const USE_ITEM_COMMAND = 8888
 export const EQUIP_WEAPON_COMMAND = 8887
+/** Sent by RoleUseSystem.OnCustomBuy after a pouch refill purchase. */
+export const BUY_POUCH_COMMAND = 2118
 
 /** What the player does for a rookie command step, for the client to point at (bag, weapon). */
 export function stepCommand(step: ReturnType<typeof subTasks>[number]) {

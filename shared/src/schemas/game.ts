@@ -112,6 +112,28 @@ export const questHandInSchema = questRewardsSchema.extend({
 /** An item a monster can drop (GET /api/game/scene `monsters[].drops`), without its chance. */
 export const monsterDropSchema = z.object({ itemId: itemIdSchema, nameKey: z.string() })
 
+/**
+ * One pouch's part of a refill purchase (UI_RoleUse.as choices): 0 none, thousands of points
+ * (5 = 5,000) or 'full' to fill it up. Each 1,000 points cost 1 Gold or Gift Coupon.
+ */
+export const pouchRefillSchema = z.union([
+  z.literal(0),
+  z.literal(5),
+  z.literal(10),
+  z.literal(50),
+  z.literal(100),
+  z.literal('full'),
+])
+
+/** POST /api/game/pouches/buy (RoleUseSystem.OnCustomBuy). */
+export const buyPouchesSchema = z.object({
+  currency: z.enum(['gold', 'giftCoupon']),
+  hp: pouchRefillSchema.default(0),
+  mp: pouchRefillSchema.default(0),
+})
+
+export type PouchRefill = z.infer<typeof pouchRefillSchema>
+export type BuyPouchesInput = z.input<typeof buyPouchesSchema>
 export type RewardItem = z.infer<typeof rewardItemSchema>
 export type QuestRewards = z.infer<typeof questRewardsSchema>
 export type QuestHandIn = z.infer<typeof questHandInSchema>

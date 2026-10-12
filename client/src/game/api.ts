@@ -1,4 +1,5 @@
 import type {
+  BuyPouchesInput,
   Character,
   CharacterStats,
   CreateCharacterInput,
@@ -138,6 +139,12 @@ export function useAcceptQuest() {
 export function useRevive() {
   return useGameAction((mode: 'home' | 'gold') =>
     post<{ character: Character }>('/api/game/revive', { mode }),
+  )
+}
+
+export function useBuyPouches() {
+  return useGameAction((input: BuyPouchesInput) =>
+    post<ActionResult>('/api/game/pouches/buy', input),
   )
 }
 

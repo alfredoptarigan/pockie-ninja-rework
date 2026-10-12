@@ -86,6 +86,8 @@ export interface TalkResult {
 
 export interface ActionResult {
   completed: number[]
+  /** What each completed quest granted, in `completed` order. */
+  rewards?: QuestHandIn[]
   character: Character
 }
 
