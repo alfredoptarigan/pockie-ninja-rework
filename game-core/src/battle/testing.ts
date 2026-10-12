@@ -1,0 +1,80 @@
+// Test helpers: a fighter in its fight state and a scripted FightContext that records calls.
+import type { FightContext, Fighter, FighterInput, FightEvent } from './types.js'
+
+export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
+  const input: FighterInput = {
+    name: 'Ninja',
+    level: 1,
+    hp: 100,
+    maxHp: 100,
+    mp: 100,
+    maxMp: 100,
+    minAttack: 10,
+    maxAttack: 10,
+    atkTime: 1000,
+    hit: 0,
+    dodge: 0,
+    crit: 0,
+    critAttach: 230,
+    tough: 0,
+    parry: 0,
+    pierce: 0,
+    defense: 0,
+    neglectDefense: 0,
+    counter: 0,
+    priority: 0,
+  }
+  return {
+    ...input,
+    index: 0,
+    side: 'attackers',
+    startHp: input.hp,
+    startMp: input.mp,
+    initAtkTime: input.atkTime,
+    initHit: input.hit,
+    hitMulAdd: 0,
+    next: 0,
+    parryPercent: 0,
+    buffs: null,
+    attackSkills: [],
+    triggerSkills: [],
+    opponent: null,
+    ...overrides,
+  }
+}
+
+/** `rolls` are returned by randInt in order; `damage` by getDamage; attacks hit unless `miss`. */
+export function fakeContext({
+  rolls = [],
+  damage = 10,
+  miss = false,
+}: { rolls?: number[]; damage?: number; miss?: boolean } = {}) {
+  const calls: unknown[][] = []
+  const queue = [...rolls]
+  const ctx: FightContext = {
+    randInt: () => {
+      const r = queue.shift()
+      if (r === undefined) throw new Error('unexpected randInt')
+      return r
+    },
+    getDamage: () => damage,
+    attack: (_self, _target, amount, fv: FightEvent) => {
+      calls.push(['attack', Math.trunc(amount)])
+      fv.hit = !miss
+    },
+    damage: (victim, amount) => calls.push(['damage', victim.index, Math.trunc(amount)]),
+    damageWithValue: (victim, amount) => calls.push(['damage', victim.index, Math.trunc(amount)]),
+    addBuff: (target, buffId, _timer, _fv, saveData = 0) =>
+      calls.push(['addBuff', target.index, buffId, Math.trunc(saveData)]),
+    removeBuff: (target, buffId) => calls.push(['removeBuff', target.index, buffId]),
+    getBuff: (target, buffId) => target.buffs?.find((b) => b.id === buffId),
+    changeNextAtkTime: (target, amount) =>
+      calls.push(['changeNextAtkTime', target.index, Math.trunc(amount)]),
+    changeHit: (target, add) => calls.push(['changeHit', target.index, add]),
+    normalAttack: () => {
+      calls.push(['normalAttack'])
+      return 0
+    },
+  }
+  return { ctx, calls }
+}
