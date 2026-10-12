@@ -42,6 +42,7 @@ import {
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
+import type { Realtime } from '../realtime/realtime.js'
 import { requireUser, toCharacter } from './characters.js'
 
 const READY = 1
@@ -56,7 +57,10 @@ const travelBody = z.object({ sceneId: z.number().int().positive() })
 
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 
-export async function actionRoutes(app: FastifyInstance, { db }: { db: Db }) {
+export async function actionRoutes(
+  app: FastifyInstance,
+  { db, realtime }: { db: Db; realtime: Pick<Realtime, 'moveCharacter'> },
+) {
   async function characterOf(tx: Tx | Db, userId: string) {
     const [row] = await tx.select().from(characters).where(eq(characters.userId, userId))
     if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
@@ -275,7 +279,7 @@ export async function actionRoutes(app: FastifyInstance, { db }: { db: Db }) {
   app.post('/travel', async (request) => {
     const { sceneId } = travelBody.parse(request.body)
     const userId = requireUser(request).id
-    return db.transaction(async (tx) => {
+    const result = await db.transaction(async (tx) => {
       const character = await characterOf(tx, userId)
       const target = scene(sceneId)
       const rule = sceneSwitchRule(sceneId)
@@ -298,5 +302,8 @@ export async function actionRoutes(app: FastifyInstance, { db }: { db: Db }) {
       await tx.update(characters).set({ sceneId }).where(eq(characters.id, character.id))
       return { character: await reload(tx, character.id) }
     })
+    // After commit, so sockets never move to a scene the database rolled back.
+    realtime.moveCharacter(result.character)
+    return result
   })
 }

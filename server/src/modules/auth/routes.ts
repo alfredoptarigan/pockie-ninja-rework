@@ -5,6 +5,7 @@ import fp from 'fastify-plugin'
 import type { Db } from '../../db/client.js'
 import { users } from '../../db/schema.js'
 import type { Env } from '../../env.js'
+import type { Realtime } from '../realtime/realtime.js'
 import { HttpError } from '../../http.js'
 import { cookieConfig } from './cookies.js'
 import { createLoginLimiter } from './login-limiter.js'
@@ -52,7 +53,10 @@ export const sessionPlugin = fp(async (app: FastifyInstance, { db, env }: Option
   })
 })
 
-export async function authRoutes(app: FastifyInstance, { db, env }: Options) {
+export async function authRoutes(
+  app: FastifyInstance,
+  { db, env, realtime }: Options & { realtime: Pick<Realtime, 'endSession'> },
+) {
   const cookies = cookieConfig(env)
   const loginLimiter = createLoginLimiter()
   const setSessionCookie = (reply: FastifyReply, token: string, rememberMe: boolean) =>
@@ -133,7 +137,10 @@ export async function authRoutes(app: FastifyInstance, { db, env }: Options) {
   })
 
   app.post('/logout', async (request, reply) => {
-    if (request.auth) await deleteSession(db, request.auth.sessionId)
+    if (request.auth) {
+      await deleteSession(db, request.auth.sessionId)
+      realtime.endSession(request.auth.sessionId)
+    }
     reply.clearCookie(cookies.session, cookies.options)
     return reply.code(204).send()
   })
