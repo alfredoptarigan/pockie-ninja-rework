@@ -49,7 +49,7 @@ import {
 import { pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
-import { requireAlive, requireUser, toCharacter } from './characters.js'
+import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 const READY = 1
@@ -133,11 +133,6 @@ export async function actionRoutes(
   app: FastifyInstance,
   { db, realtime }: { db: Db; realtime: Pick<Realtime, 'moveCharacter'> },
 ) {
-  async function characterOf(tx: Tx | Db, userId: string) {
-    const [row] = await tx.select().from(characters).where(eq(characters.userId, userId))
-    if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
-    return row
-  }
   const reload = async (tx: Tx, id: string) =>
     toCharacter((await tx.select().from(characters).where(eq(characters.id, id)))[0]!)
 
@@ -206,7 +201,7 @@ export async function actionRoutes(
       const { taskId } = taskParams.parse(request.params)
       const userId = requireUser(request).id
       return db.transaction(async (tx) => {
-        const character = await characterOf(tx, userId)
+        const character = await lockCharacter(tx, userId)
         const quests = await loadQuests(tx, character.id)
         const lock = questLock(taskId, character, quests)
         if (lock) throw bad(lock.code, lock.message)
@@ -224,7 +219,7 @@ export async function actionRoutes(
     const { npcId } = npcParams.parse(request.params)
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
-      const character = await characterOf(tx, userId)
+      const character = await lockCharacter(tx, userId)
       if (!sceneSpawns(character.sceneId).some((spawn) => spawn.id === npcId)) {
         throw bad('not_here', 'That person is not here.')
       }
@@ -248,8 +243,7 @@ export async function actionRoutes(
           row.SubmitNpcConfig === npcId &&
           Number(row.SubmitNpcSceneID) === character.sceneId
         ) {
-          await completeQuest(tx, character.id, quest.taskId)
-          completed.push(quest.taskId)
+          if (await completeQuest(tx, character.id, quest.taskId)) completed.push(quest.taskId)
         }
       }
       return {
@@ -265,7 +259,7 @@ export async function actionRoutes(
     const { id } = itemParams.parse(request.params)
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
-      const character = await characterOf(tx, userId)
+      const character = await lockCharacter(tx, userId)
       const row = await ownedItem(tx, character.id, id)
       const def = item(row.itemId)
       if (!def || Number(def.CanUse) !== 1) throw bad('cannot_use', 'That item cannot be used.')
@@ -310,7 +304,7 @@ export async function actionRoutes(
     const { id } = itemParams.parse(request.params)
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
-      const character = await characterOf(tx, userId)
+      const character = await lockCharacter(tx, userId)
       const row = await ownedItem(tx, character.id, id)
       const def = item(row.itemId)
       if (!def || def.class !== 'EquipItem')
@@ -351,7 +345,7 @@ export async function actionRoutes(
     const { sceneId } = travelBody.parse(request.body)
     const userId = requireUser(request).id
     const result = await db.transaction(async (tx) => {
-      const character = await characterOf(tx, userId)
+      const character = await lockCharacter(tx, userId)
       requireAlive(character, 'travel')
       const target = scene(sceneId)
       const rule = sceneSwitchRule(sceneId)
@@ -385,7 +379,7 @@ export async function actionRoutes(
     const { mode } = reviveBody.parse(request.body)
     const userId = requireUser(request).id
     const result = await db.transaction(async (tx) => {
-      const character = await characterOf(tx, userId)
+      const character = await lockCharacter(tx, userId)
       if (character.hp > 0) throw bad('not_defeated', 'You have not been defeated.')
 
       const terms = reviveTerms(character)

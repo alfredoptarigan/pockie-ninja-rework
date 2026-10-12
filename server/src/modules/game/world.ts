@@ -5,10 +5,10 @@ import type { Db } from '../../db/client.js'
 import { characters } from '../../db/schema.js'
 import { fightMonster } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
-import { completeReadyRookieQuests, type Tx } from '../../game/progress.js'
+import { completeReadyRookieQuests } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { reviveTerms } from './actions.js'
-import { requireAlive, requireUser, toCharacter } from './characters.js'
+import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
@@ -31,14 +31,8 @@ export function sceneMonsters(sceneId: number, playerLevel: number) {
 }
 
 export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
-  async function characterOf(userId: string, tx: Tx | Db = db) {
-    const [row] = await tx.select().from(characters).where(eq(characters.userId, userId))
-    if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
-    return row
-  }
-
   app.get('/scene', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
-    const character = await characterOf(requireUser(request).id)
+    const character = await characterOf(db, requireUser(request).id)
     const sceneId = character.sceneId
     return {
       sceneId,
@@ -61,7 +55,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const { monsterId } = fightSchema.parse(request.body)
 
     return db.transaction(async (tx) => {
-      const character = await characterOf(userId, tx)
+      const character = await lockCharacter(tx, userId)
       if (!sceneMonsters(character.sceneId, character.level).some((m) => m.id === monsterId)) {
         throw new HttpError(400, 'not_here', 'That monster is not in this area.')
       }
