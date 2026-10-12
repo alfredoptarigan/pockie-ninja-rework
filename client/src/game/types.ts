@@ -58,7 +58,37 @@ export interface ActionResult {
   character: Character
 }
 
-/** Battle replay from game-core (`Replay`); Task 8b plays it back. */
+/** A buff added to or removed from fighter `role` (game-core BuffChange). */
+export interface BuffChange {
+  role: number
+  buff: number
+}
+
+/**
+ * One replay entry (game-core FightEvent). Event ids: 1 begin action, 2 end action, 5 priority
+ * strike, 7 counter, 9 buff tick or buff change, 14 skill, 20 death, 21 next fighter.
+ */
+export interface FightEvent {
+  actor: number
+  event: number
+  target?: number
+  /** Skill id for 5 / 7 / 14, buff id for a ticking buff (event 9). */
+  skillId?: number
+  damage?: number
+  hit?: boolean
+  crit?: boolean
+  parry?: boolean
+  /** HP the actor itself loses (e.g. a poison tick). */
+  selfDamage?: number
+  /** MP the actor spends. */
+  decMp?: number
+  /** Number of strikes to animate. */
+  attackCount?: number
+  addBuffs?: BuffChange[]
+  delBuffs?: BuffChange[]
+}
+
+/** Battle replay from game-core (`Replay`); the Phaser player in ./phaser plays it back. */
 export interface Replay {
   seed: number
   fighters: {
@@ -69,8 +99,12 @@ export interface Replay {
     maxHp: number
     startHp: number
     hp: number
+    /** Older replays (before the MP fields) lack these. */
+    maxMp?: number
+    startMp?: number
+    mp?: number
   }[]
-  events: { actor: number; event: number; target?: number; damage?: number }[]
+  events: FightEvent[]
   winner: 'attackers' | 'defenders'
 }
 

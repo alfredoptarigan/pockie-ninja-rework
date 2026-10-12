@@ -24,6 +24,8 @@ const subTasks = game<Record<string, Row[]>>('sub-tasks')
 const dropItems = game<Record<string, Row[]>>('drop-items')
 const levels = game<{ levelexp: Record<string, number>; role: { maxlevel: number } }>('levels')
 const taskMonsterDrops = game<Record<string, Row[]>>('task-monster-drops')
+const sceneBuildings =
+  game<{ SceneID: number; ClipName: string; NameFlag: string }[]>('scene-buildings')
 
 const VILLAGES = [111, 121, 131, 141, 151]
 const FIELD_ZONES = [21, 22, 23, 24, 25]
@@ -142,6 +144,16 @@ for (const id of itemIds) keys.add(`lg_${items[id]!.Name}`)
 // Common UI labels: weapon classes and starting outfits.
 for (const n of [1, 2, 4, 7]) keys.add(`lg_Common_RolePopsinger${n}`)
 for (let n = 1; n <= 100; n++) keys.add(`lg_avatar${n}`)
+// Battle replay labels: every skill and buff name (small, and any outfit may use them).
+for (const key of Object.keys(en)) if (/^lg_(Skill|Buffer)_\d+$/.test(key)) keys.add(key)
+
+// Village buildings (scene picture hotspots): clip name to the NPC behind it (NameFlag name_<id>).
+const buildings: Record<string, Record<string, string>> = {}
+for (const row of sceneBuildings) {
+  if (!sliceScenes.has(row.SceneID)) continue
+  ;(buildings[row.SceneID] ??= {})[row.ClipName] = row.NameFlag.replace(/^name_/, '')
+  keys.add(`lg_${row.NameFlag}`)
+}
 
 // Travel (sceneswitchrule.ini): a scene can be entered from every scene its rule lists.
 const travel: Record<string, { sceneId: number; level: number; nation: number }[]> = {}
@@ -169,6 +181,7 @@ const outputs = {
     previous: sorted(previous),
     stepArgs: sorted(stepArgs),
     travel: sorted(travel),
+    buildings: sorted(buildings),
     equipment: [...itemIds].filter((id) => items[id]!.class === 'EquipItem').sort(),
     usable: [...itemIds]
       .filter((id) => items[id]!.class !== 'EquipItem' && Number(items[id]!.CanUse) === 1)
