@@ -16,6 +16,8 @@ export interface Destination {
 }
 
 const travel = data.travel as Record<string, Destination[]>
+/** Roads from a scene no switch rule lists: the server lets it travel to every rule target. */
+const travelAnywhere = data.travelAnywhere as Destination[]
 const itemNames = data.itemNames as Record<string, string>
 const stepArgs = data.stepArgs as Record<string, string[][]>
 
@@ -52,7 +54,7 @@ export function questTarget(quest: Quest): { sceneId?: number; npcId?: string } 
 
 /** Scenes reachable from here that this character may enter, plus locked ones for the map. */
 export function destinations(character: Character) {
-  return (travel[character.sceneId] ?? [])
+  return (travel[character.sceneId] ?? travelAnywhere)
     .filter((d) => d.nation === -1 || d.nation === character.nation)
     .map((d) => ({ ...d, open: allowed(character, d.level, d.nation) }))
 }

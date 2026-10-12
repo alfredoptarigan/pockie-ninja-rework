@@ -57,6 +57,13 @@
       "when": 1791797888936,
       "tag": "0007_instances",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1791816520466,
+      "tag": "0008_leave_christmas_house",
+      "breakpoints": true
     }
   ]
 }

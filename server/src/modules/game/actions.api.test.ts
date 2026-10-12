@@ -136,6 +136,13 @@ describe('POST /api/game/travel', () => {
     expect(noRoute.json().error.code).toBe('no_route')
   })
 
+  it('has no route to the Christmas House, whose event is not in the game yet', async () => {
+    for (const sceneId of [2104, 2204, 2304, 2404, 2504]) {
+      const response = await client.post('/api/game/travel', { sceneId })
+      expect(response.json().error.code).toBe('no_route')
+    }
+  })
+
   it('refuses to travel while defeated', async () => {
     await db.update(characters).set({ hp: 0 }).where(eq(characters.id, characterId))
     const response = await client.post('/api/game/travel', { sceneId: 2101 })

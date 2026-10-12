@@ -6,6 +6,7 @@
 import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { CLOSED_SCENES } from '../../shared/src/schemas/game.ts'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -192,15 +193,21 @@ for (const row of sceneBuildings) {
   keys.add(`lg_${row.NameFlag}`).add(`lg_build_${npcId}`)
 }
 
-// Travel (sceneswitchrule.ini): a scene can be entered from every scene its rule lists.
-const travel: Record<string, { sceneId: number; level: number; nation: number }[]> = {}
+// Travel (sceneswitchrule.ini): a scene can be entered from every scene its rule lists, and from
+// any scene no rule lists (SceneSwitchRuleSystem.CanChangeScene, as the server checks it). Closed
+// scenes (the Christmas House) are left out.
+type Road = { sceneId: number; level: number; nation: number }
+const travel: Record<string, Road[]> = {}
+const travelAnywhere: Road[] = []
 for (const [target, rule] of Object.entries(switchRules)) {
   const scene = scenes[target]
-  if (!scene || Number(scene.IsStart) !== 1) continue
+  if (!scene || Number(scene.IsStart) !== 1 || CLOSED_SCENES.includes(Number(target))) continue
   const level = Math.max(Number(rule.RequireLevel ?? -1), Number(scene.Level ?? -1))
+  const road = { sceneId: Number(target), level, nation: Number(scene.Nation) }
+  travelAnywhere.push(road)
   for (const from of Object.keys(rule)) {
     if (from === target || !scenes[from]) continue
-    ;(travel[from] ??= []).push({ sceneId: Number(target), level, nation: Number(scene.Nation) })
+    ;(travel[from] ??= []).push(road)
   }
 }
 
@@ -218,6 +225,7 @@ const outputs = {
     previous: sorted(previous),
     stepArgs: sorted(stepArgs),
     travel: sorted(travel),
+    travelAnywhere,
     buildings: sorted(buildings),
     equipment: [...itemIds].filter((id) => items[id]!.class === 'EquipItem').sort(),
     usable: [...itemIds]

@@ -20,6 +20,13 @@ export const createCharacterSchema = z.object({
 
 export type CreateCharacterInput = z.infer<typeof createCharacterSchema>
 
+/**
+ * Scenes no road leads to yet: the Christmas House maps (xx04) belong to the original Christmas
+ * event (UI_SmallMap ChristmasStartTime / ChristmasEndTime), which is not built. They have no
+ * exits of their own, so a ninja sent there could not leave.
+ */
+export const CLOSED_SCENES: readonly number[] = [2104, 2204, 2304, 2404, 2504]
+
 /** 0 Fire, 1 Water, 2 Earth, 3 Wind, 4 Lightning (original nation numbering). */
 export type Nation = 0 | 1 | 2 | 3 | 4
 

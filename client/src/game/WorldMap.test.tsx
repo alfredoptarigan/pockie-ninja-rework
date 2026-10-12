@@ -77,9 +77,9 @@ describe('WorldMap', () => {
   it('lists the roads that are not on the painting and locks them by level', () => {
     renderMap()
 
-    // Every M3 field has a map button now; the Christmas map has none.
+    // Every M3 field has a map button now; the Christmas House is closed (CLOSED_SCENES).
     const others = screen.getByRole('region', { name: 'Other areas' })
-    expect(others).toHaveTextContent('Christmas House')
+    expect(others).not.toHaveTextContent('Christmas House')
     expect(screen.getByRole('button', { name: 'Hidden Rain Village Lv. 86' })).toBeDisabled()
     // Places on the painting carry their level lock in their name too.
     expect(place('Eventide Barrens Lv. 11')).toHaveAttribute('aria-disabled', 'true')

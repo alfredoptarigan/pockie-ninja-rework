@@ -6,7 +6,7 @@ import {
   type DropEntry,
   type DropLib,
 } from '@pockie/game-core'
-import { buyPouchesSchema } from '@pockie/shared'
+import { buyPouchesSchema, CLOSED_SCENES } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
 import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
@@ -363,7 +363,12 @@ export async function actionRoutes(
       // (SceneSwitchRuleSystem.CanChangeScene: the target needs a sceneswitchrule.ini section; a
       // current scene missing from it travels free, it only prices the trip).
       const linked = sceneLinks(character.sceneId).includes(sceneId)
-      if (!target || (!rule && !linked) || Number(target.IsStart) !== 1) {
+      if (
+        !target ||
+        CLOSED_SCENES.includes(sceneId) ||
+        (!rule && !linked) ||
+        Number(target.IsStart) !== 1
+      ) {
         throw bad('no_route', 'You cannot travel there from here.')
       }
       const nation = Number(target.Nation)

@@ -451,6 +451,7 @@
 }
 @utility game-icon-notice {
   background: var(--ui-icon-notice) center / 100% 100% no-repeat;
+}
 /* Column holding the equipment slots (EquipBG). */
 @utility game-equip-column {
   border: 0;
