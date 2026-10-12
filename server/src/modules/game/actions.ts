@@ -37,12 +37,15 @@ import {
   type Tx,
 } from '../../game/progress.js'
 import {
+  availableQuests,
   EQUIP_WEAPON_COMMAND,
+  questLock,
   recordCommand,
   recordTalk,
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
+import { pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
 import { requireAlive, requireUser, toCharacter } from './characters.js'
@@ -59,13 +62,65 @@ const npcParams = z.object({ npcId: z.string().regex(/^n\d+$/) })
 const travelBody = z.object({ sceneId: z.number().int().positive() })
 const reviveBody = z.object({ mode: z.enum(['home', 'gold']) })
 
+type CharacterRow = typeof characters.$inferSelect
+
 // relive.ini: going home costs 5% of the next level's EXP and leaves 1 HP; reviving on the spot
 // costs 1 Gold (capital type 2) and refills HP and MP.
 const RELIVE_EXP_PERCENT = 5
 const RELIVE_HP = 1
 const RELIVE_GOLD = 1
 
+/**
+ * What each revive costs this character (ReliveSystem): the EXP going home takes (5% of the next
+ * level's EXP, 0 at the level cap) and whether the scene allows reviving on the spot.
+ */
+export function reviveTerms(character: Pick<CharacterRow, 'level' | 'sceneId'>) {
+  const table = levels()
+  const nextExp =
+    character.level < table.role.maxlevel ? (table.levelexp[String(character.level + 1)] ?? 0) : 0
+  return {
+    homeExpLoss: Math.trunc(nextExp * RELIVE_EXP_PERCENT * 0.01),
+    gold: RELIVE_GOLD,
+    goldAllowed: Number(scene(character.sceneId)?.CanRelive) !== 0,
+  }
+}
+
 const bad = (code: string, message: string) => new HttpError(400, code, message)
+
+/**
+ * Column updates for HP/MP potions and pouch refills, by the item's script
+ * (Resource/javascript/item/*.js); undefined for other items. hp.js, mp.js and hmp.js refuse when
+ * there is nothing to heal; hmpcontainer.js fills the pouches up to their size.
+ */
+function restoreItem(character: CharacterRow, def: NonNullable<ReturnType<typeof item>>) {
+  const addHp = Number(def.HP ?? 0)
+  const addMp = Number(def.MP ?? 0)
+  const script = String(def.JavaScript)
+  if (script === 'item/hmpcontainer.js') {
+    const max = pouchMax(character.level)
+    const hpFull = addHp <= 0 || character.hpPouch >= max
+    const mpFull = addMp <= 0 || character.mpPouch >= max
+    if (hpFull && mpFull) throw bad('pouch_full', 'Your pouch is already full.')
+    return {
+      hpPouch: Math.min(max, character.hpPouch + Math.max(0, addHp)),
+      mpPouch: Math.min(max, character.mpPouch + Math.max(0, addMp)),
+    }
+  }
+  if (!['item/hp.js', 'item/mp.js', 'item/hmp.js'].includes(script)) return undefined
+  // The original leaves a defeated ninja dead (StateSystem) whatever their HP; here 0 HP is the
+  // dead state, so healing waits until they revive.
+  if (character.hp <= 0) throw bad('defeated', 'You were defeated. Revive before you heal.')
+  const stats = deriveStats(avatarStats(character.avatarId), character.level)
+  const canHeal = addHp > 0 && character.hp < stats.maxHp
+  const canRestore = addMp > 0 && character.mp < stats.maxMp
+  if (!canHeal && !canRestore) {
+    throw bad('full', addHp > 0 ? 'Your HP is already full.' : 'Your chakra is already full.')
+  }
+  return {
+    hp: Math.min(stats.maxHp, character.hp + Math.max(0, addHp)),
+    mp: Math.min(stats.maxMp, character.mp + Math.max(0, addMp)),
+  }
+}
 
 export async function actionRoutes(
   app: FastifyInstance,
@@ -106,6 +161,15 @@ export async function actionRoutes(
     }
   })
 
+  app.get('/quests/available', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
+    const character = await characterOf(db, requireUser(request).id)
+    const rows = await db.transaction((tx) => loadQuests(tx, character.id))
+    return {
+      available: availableQuests(character, rows),
+      completed: rows.filter((q) => q.state === COMPLETED).map((q) => q.taskId),
+    }
+  })
+
   app.get('/inventory', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const rows = await db
@@ -132,23 +196,10 @@ export async function actionRoutes(
       const userId = requireUser(request).id
       return db.transaction(async (tx) => {
         const character = await characterOf(tx, userId)
-        const row = task(taskId)
-        if (!row) throw bad('unknown_quest', 'Unknown quest.')
         const quests = await loadQuests(tx, character.id)
-        if (quests.some((q) => q.taskId === taskId))
-          throw bad('already_taken', 'You already have that quest.')
-        const pre = Number(row.PreTaskID)
-        if (pre > 0 && !quests.some((q) => q.taskId === pre && q.state === COMPLETED)) {
-          throw bad('locked', 'Finish the previous quest first.')
-        }
-        const nation = Number(row.RequireCountry)
-        if (
-          character.level < Number(row.RequireLevel) ||
-          (nation !== -1 && nation !== character.nation)
-        ) {
-          throw bad('locked', 'You cannot take this quest yet.')
-        }
-        const acceptScene = Number(row.AcceptNpcSceneID)
+        const lock = questLock(taskId, character, quests)
+        if (lock) throw bad(lock.code, lock.message)
+        const acceptScene = Number(task(taskId)!.AcceptNpcSceneID)
         if (acceptScene > 0 && acceptScene !== character.sceneId) {
           throw bad('wrong_place', 'Talk to the quest giver to take this quest.')
         }
@@ -210,12 +261,9 @@ export async function actionRoutes(
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
 
-      if (def.class === 'PharmacyItem' && Number(def.HP) > 0) {
-        const maxHp = deriveStats(avatarStats(character.avatarId), character.level).maxHp
-        await tx
-          .update(characters)
-          .set({ hp: Math.min(maxHp, character.hp + Number(def.HP)) })
-          .where(eq(characters.id, character.id))
+      const restore = restoreItem(character, def)
+      if (restore) {
+        await tx.update(characters).set(restore).where(eq(characters.id, character.id))
       } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
         const libId = Number(def.BoxDropID)
         const drops = rollDrops(
@@ -331,8 +379,9 @@ export async function actionRoutes(
       const character = await characterOf(tx, userId)
       if (character.hp > 0) throw bad('not_defeated', 'You have not been defeated.')
 
+      const terms = reviveTerms(character)
       if (mode === 'gold') {
-        if (Number(scene(character.sceneId)?.CanRelive) === 0) {
+        if (!terms.goldAllowed) {
           throw bad('no_relive', 'You cannot revive here.')
         }
         if (character.gold < RELIVE_GOLD) {
@@ -344,19 +393,13 @@ export async function actionRoutes(
           .set({ hp: stats.maxHp, mp: stats.maxMp, gold: character.gold - RELIVE_GOLD })
           .where(eq(characters.id, character.id))
       } else {
-        // LevelSystem.GetNextLevelExp is 0 at the level cap; SceneSystem.GoHome.
-        const table = levels()
-        const nextExp =
-          character.level < table.role.maxlevel
-            ? (table.levelexp[String(character.level + 1)] ?? 0)
-            : 0
-        const lost = Math.trunc(nextExp * RELIVE_EXP_PERCENT * 0.01)
+        // SceneSystem.GoHome.
         const toScene = Number(scene(character.sceneId)?.ToScene ?? 0)
         await tx
           .update(characters)
           .set({
             hp: RELIVE_HP,
-            exp: Math.max(0, character.exp - lost),
+            exp: Math.max(0, character.exp - terms.homeExpLoss),
             sceneId: toScene > 0 ? toScene : nationScenes()[character.nation]!.castle,
           })
           .where(eq(characters.id, character.id))

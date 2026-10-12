@@ -1,7 +1,7 @@
 // Quest progress rules ported from TaskModule (KillMonsterRule, CollectRule); see
 // docs/original-data/quests-items.md. Progress is one count per sub-task, indexed by SetpSeq.
 import type { Random } from '@pockie/game-core'
-import { subTasks, taskMonsterDrops } from './data.js'
+import { npcOfferedTaskIds, subTasks, task, taskMonsterDrops } from './data.js'
 
 export interface QuestProgress {
   taskId: number
@@ -10,6 +10,7 @@ export interface QuestProgress {
 }
 
 const KILL = 2
+const COMPLETED = 2
 const COLLECT = 1
 const ACTIVE = 0
 const READY = 1
@@ -144,4 +145,51 @@ export function recordCommand(
       (!String(step.TargetItem).startsWith('i') || step.TargetItem === itemId) &&
       inScene(step, sceneId),
   )
+}
+
+/**
+ * Why the character cannot take quest `taskId` yet (TaskSystem accept checks: held, previous quest,
+ * level, village), or undefined when they can. Where the quest giver stands is checked on accept.
+ */
+export function questLock(
+  taskId: number,
+  character: { level: number; nation: number },
+  quests: QuestProgress[],
+): { code: string; message: string } | undefined {
+  const row = task(taskId)
+  if (!row) return { code: 'unknown_quest', message: 'Unknown quest.' }
+  if (quests.some((q) => q.taskId === taskId)) {
+    return { code: 'already_taken', message: 'You already have that quest.' }
+  }
+  const pre = Number(row.PreTaskID)
+  if (pre > 0 && !quests.some((q) => q.taskId === pre && q.state === COMPLETED)) {
+    return { code: 'locked', message: 'Finish the previous quest first.' }
+  }
+  const nation = Number(row.RequireCountry)
+  if (
+    character.level < Number(row.RequireLevel) ||
+    (nation !== -1 && nation !== character.nation)
+  ) {
+    return { code: 'locked', message: 'You cannot take this quest yet.' }
+  }
+  return undefined
+}
+
+/** Quests the character can take from an NPC right now, with the NPC and the scene. */
+export function availableQuests(
+  character: { level: number; nation: number },
+  quests: QuestProgress[],
+) {
+  return npcOfferedTaskIds()
+    .filter((taskId) => !questLock(taskId, character, quests))
+    .map((taskId) => {
+      const row = task(taskId)!
+      return {
+        taskId,
+        npcId: String(row.AcceptNpcConfig),
+        sceneId: Number(row.AcceptNpcSceneID),
+        nameKey: `lg_Task_${taskId}`,
+        talkKey: row.StartNpcMessageID ? `lg_${String(row.StartNpcMessageID)}` : null,
+      }
+    })
 }

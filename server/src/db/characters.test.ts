@@ -31,8 +31,8 @@ describe('characters table', () => {
       stone: 0,
       gold: 0,
       giftCoupon: 0,
-      hpPouch: 50,
-      mpPouch: 30,
+      hpPouch: 0,
+      mpPouch: 0,
     })
   })
 

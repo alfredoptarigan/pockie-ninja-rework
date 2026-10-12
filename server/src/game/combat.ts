@@ -7,6 +7,7 @@ import {
   gainExp,
   rollDrops,
   simulateFight,
+  type CombatStats,
   type DropEntry,
   type DropLib,
   type FighterInput,
@@ -26,10 +27,13 @@ import {
   npcSkillIds,
   skill,
 } from './data.js'
+import { drawPouch } from './pouch.js'
 import { grantItems, loadQuests, saveQuests, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
 
 type CharacterRow = typeof characters.$inferSelect
+/** A player's fighter keeps the derived stats (strength, weapon class) for display. */
+export type PlayerFighter = FighterInput & CombatStats
 
 /**
  * A lost field fight saves the fight's HP (0) and marks the player dead (FightSystem.Fight,
@@ -83,7 +87,7 @@ export function monsterFighter(id: string): FighterInput {
   }
 }
 
-export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<FighterInput> {
+export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<PlayerFighter> {
   const equipped = await tx
     .select({ itemId: inventoryItems.itemId })
     .from(inventoryItems)
@@ -100,7 +104,7 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
 export function playerFighterFrom(
   character: Pick<CharacterRow, 'name' | 'avatarId' | 'level' | 'hp' | 'mp'>,
   equippedItemIds: string[],
-): FighterInput {
+): PlayerFighter {
   const bonus = { minAttack: 0, maxAttack: 0, defense: 0 }
   for (const itemId of equippedItemIds) {
     const row = item(itemId)
@@ -149,8 +153,9 @@ export async function fightMonster(
   const won = replay.winner === 'attackers'
   const rewards: FightRewards = { exp: 0, stone: 0, items: [], levelsGained: 0 }
   let { level, exp } = character
+  const explore = minHp > DEFEATED_HP
   // A timeout loss can leave HP above 0; the player is dead all the same.
-  let hp = Math.max(minHp, won || minHp > 0 ? replay.fighters[0]!.hp : DEFEATED_HP)
+  let hp = won || explore ? replay.fighters[0]!.hp : DEFEATED_HP
   let mp = replay.fighters[0]!.mp
 
   if (won) {
@@ -205,9 +210,19 @@ export async function fightMonster(
     await grantItems(tx, character.id, rewards.items)
   }
 
+  // RoleUseSystem.OnCommandFightEnd draws on the pouches after a win; OutSearchSystem does it
+  // after every explore fight, before lifting HP 0 to 1.
+  let { hpPouch, mpPouch } = character
+  if (won || explore) {
+    const stats = deriveStats(avatarStats(character.avatarId), level)
+    ;({ value: hp, pouch: hpPouch } = drawPouch(hp, stats.maxHp, hpPouch))
+    ;({ value: mp, pouch: mpPouch } = drawPouch(mp, stats.maxMp, mpPouch))
+  }
+  hp = Math.max(minHp, hp)
+
   await tx
     .update(characters)
-    .set({ hp, mp, level, exp, stone: character.stone + rewards.stone })
+    .set({ hp, mp, hpPouch, mpPouch, level, exp, stone: character.stone + rewards.stone })
     .where(eq(characters.id, character.id))
   return { replay, won, rewards }
 }

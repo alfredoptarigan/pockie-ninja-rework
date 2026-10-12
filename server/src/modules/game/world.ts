@@ -7,6 +7,7 @@ import { fightMonster } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
 import { completeReadyRookieQuests, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
+import { reviveTerms } from './actions.js'
 import { requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
@@ -51,6 +52,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
         .map(({ id, x, y, scale }) => ({ id, nameKey: `lg_${npc(id)!.Name}`, x, y, scale })),
       exploreSpots: exploreSpotIds(sceneId),
       links: sceneLinks(sceneId),
+      revive: reviveTerms(character),
     }
   })
 

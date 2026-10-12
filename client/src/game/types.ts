@@ -23,6 +23,8 @@ export interface SceneView {
   npcs: SceneNpc[]
   exploreSpots: string[]
   links: number[]
+  /** What reviving costs here (ReliveSystem): EXP for going home, Gold for reviving here. */
+  revive: { homeExpLoss: number; gold: number; goldAllowed: boolean }
 }
 
 /** 0 accepted, 1 ready to hand in, 2 completed. */
