@@ -18,6 +18,7 @@ import {
 } from './damage.js'
 import { GENERIC_SKILLS, NORMAL_ATTACK, SKILL_SCRIPTS } from './skills.js'
 import {
+  SKILL_CANT_USE,
   SKILL_LOSE,
   SKILL_NO_MANA,
   SKILL_SUCCESS,
@@ -360,10 +361,23 @@ export function simulateFight({
     return SKILL_SUCCESS
   }
 
-  function normalAttack(self: Fighter, target: Fighter, fv: FightEvent, timer: number) {
+  /** FightSystem.ChangeSkill + FightSystem.UserSkill (the script-facing one). */
+  function changeSkill(
+    self: Fighter,
+    target: Fighter,
+    skill: SkillInput,
+    fv: FightEvent,
+    timer: number,
+  ) {
     changed.add(fv)
-    return useSkill(self, target, NORMAL_ATTACK, getDamage(self), timer, fv, true)
+    if (skill.type !== 1 || self.canMove <= 0) return SKILL_CANT_USE
+    if (skill.quomodo === 2 && self.canAttack <= 0) return SKILL_CANT_USE
+    if (skill !== NORMAL_ATTACK && self.canUseSkill <= 0) return SKILL_CANT_USE
+    return useSkill(self, target, skill, getDamage(self), timer, fv, true)
   }
+
+  const normalAttack = (self: Fighter, target: Fighter, fv: FightEvent, timer: number) =>
+    changeSkill(self, target, NORMAL_ATTACK, fv, timer)
 
   function checkDeaths(self: Fighter, target: Fighter, timer: number) {
     if (self.hp <= 0) die(self, target, timer)
@@ -550,6 +564,7 @@ export function simulateFight({
       target.hitMulAdd = hitMulAdd
       target.hit = Math.trunc(target.initHit * 100 * 0.01) + hitMulAdd
     },
+    changeSkill,
     normalAttack,
   }
 

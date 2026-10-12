@@ -198,6 +198,14 @@ export interface FightContext {
   changeNextAtkTime(target: Fighter, amount: number): void
   changeHit(target: Fighter, add: number): void
   changeDodge(target: Fighter, add: number): void
+  /** ChangeSkill(skill, id) + UserSkill: use another skill.ini row instead, recorded under its id. */
+  changeSkill(
+    self: Fighter,
+    target: Fighter,
+    skill: SkillInput,
+    fv: FightEvent,
+    timer: number,
+  ): number
   /** ChangeSkill(skill, 1) + UserSkill: fall back to the normal attack. */
   normalAttack(self: Fighter, target: Fighter, fv: FightEvent, timer: number): number
 }

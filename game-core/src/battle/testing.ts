@@ -85,6 +85,10 @@ export function fakeContext({
       calls.push(['changeNextAtkTime', target.index, Math.trunc(amount)]),
     changeHit: (target, add) => calls.push(['changeHit', target.index, add]),
     changeDodge: (target, add) => calls.push(['changeDodge', target.index, add]),
+    changeSkill: (_self, _target, skill) => {
+      calls.push(['changeSkill', skill.id])
+      return 0
+    },
     normalAttack: () => {
       calls.push(['normalAttack'])
       return 0

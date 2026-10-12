@@ -2,7 +2,16 @@ import { describe, expect, it } from 'vitest'
 import { simulateFight, type FighterInput, type SkillInput } from '../fight.js'
 import { fakeContext, makeFighter } from '../testing.js'
 import { SKILL_LOSE, SKILL_SUCCESS, type FightEvent } from '../types.js'
-import { avatarLevelFromAvatarId, avatarLevelOf, execute, executeOdds } from './execute.js'
+import {
+  avatarLevelFromAvatarId,
+  avatarLevelOf,
+  execute,
+  executeOdds,
+  executeOrNewUltimate,
+  NEW_ULTIMATE_SKILL_IDS,
+  newUltimate,
+  newUltimateSkill,
+} from './execute.js'
 
 const monster = (overrides = {}) => makeFighter({ index: 1, level: 2, ...overrides })
 
@@ -58,6 +67,67 @@ describe('execute skills (skill_aoyi_1903.js and the 65 identical outfit ultimat
   })
 })
 
+describe('execute skills with the +9 ultimate (skill_aoyi_1901.js and 47 more)', () => {
+  // Avatar level 9 against a level 2 monster (-5): gap 14, Probability 10 + 14^1.2 = 33.74,
+  // HPCondition 15 + 14^1.26 = 42.85.
+  const nine = () => makeFighter({ avatarLevel: 9 })
+
+  it('switches to skill id * 10 on a 50 % roll at avatar level 9+', () => {
+    const { ctx, calls } = fakeContext({ rolls: [33, 49] })
+    const fv: FightEvent = { actor: 0, event: 14, target: 1 }
+    expect(executeOrNewUltimate(19010)(ctx, nine(), monster({ hp: 42 }), fv, 0)).toBe(SKILL_SUCCESS)
+    expect(calls).toEqual([['changeSkill', 19010]])
+  })
+
+  it('executes like the other ultimates when the 50 % roll fails', () => {
+    const { ctx, calls } = fakeContext({ rolls: [33, 50, 400] })
+    const fv: FightEvent = { actor: 0, event: 14, target: 1 }
+    executeOrNewUltimate(19010)(ctx, nine(), monster({ hp: 42 }), fv, 0)
+    // 400 / 100 * 42 = 168
+    expect(calls).toEqual([['damage', 1, 168]])
+    expect(fv).toMatchObject({ damage: 168, hit: true })
+  })
+
+  it('never rolls for the new ultimate below avatar level 9', () => {
+    const { ctx, calls } = fakeContext({ rolls: [0, 300] })
+    const fv: FightEvent = { actor: 0, event: 14, target: 1 }
+    executeOrNewUltimate(19010)(ctx, makeFighter({ avatarLevel: 8 }), monster({ hp: 7 }), fv, 0)
+    expect(calls).toEqual([['damage', 1, 21]])
+  })
+
+  it('fails like the other ultimates on the chance or HP condition', () => {
+    const { ctx, calls } = fakeContext({ rolls: [34] })
+    const fv: FightEvent = { actor: 0, event: 14 }
+    expect(executeOrNewUltimate(19010)(ctx, nine(), monster({ hp: 1 }), fv, 0)).toBe(SKILL_LOSE)
+    expect(calls).toEqual([])
+  })
+})
+
+describe('new ultimates (skill_aoyi_19010.js and the other 113 ids * 10)', () => {
+  it('deals RandInt(300,500)/100 * HP without any condition', () => {
+    const { ctx, calls } = fakeContext({ rolls: [500] })
+    const fv: FightEvent = { actor: 0, event: 14, target: 1 }
+    expect(newUltimate(ctx, makeFighter(), monster({ hp: 1000 }), fv, 0)).toBe(SKILL_SUCCESS)
+    expect(calls).toEqual([['damage', 1, 5000]])
+  })
+
+  it('matches the skill.ini rows of every new ultimate', () => {
+    expect(NEW_ULTIMATE_SKILL_IDS).toHaveLength(114)
+    expect(newUltimateSkill(19010)).toEqual({
+      id: 19010,
+      type: 1,
+      quomodo: 1,
+      effect: 1,
+      priority: 1,
+      probability: 0,
+      canbecounter: 0,
+      decmp: 0,
+      secondid: 19010,
+      javascript: 'skill/skill_aoyi_19010.js',
+    })
+  })
+})
+
 describe('execute skills in a fight', () => {
   const aoyi: SkillInput = {
     id: 1903,
@@ -92,5 +162,19 @@ describe('execute skills in a fight', () => {
       expect(replay.winner).toBe('attackers')
     }
     expect(executions).toBeGreaterThan(0)
+  })
+
+  it('records the new ultimate as skill 19450 for Naruto (1945) at avatar level 9', () => {
+    const naruto: SkillInput = { ...aoyi, id: 1945, javascript: 'skill/skill_aoyi_1945.js' }
+    const used = new Set<number | undefined>()
+    for (let seed = 1; seed <= 20; seed++) {
+      const replay = simulateFight({
+        attackers: [{ ...base, avatarLevel: 9, hp: 1000, maxHp: 1000, skills: [naruto] }],
+        defenders: [{ ...base, level: 2, hp: 300, maxHp: 1000, minAttack: 0, maxAttack: 0 }],
+        seed,
+      })
+      for (const e of replay.events) if (e.actor === 0 && e.damage) used.add(e.skillId)
+    }
+    expect(used).toEqual(new Set([1, 1945, 19450]))
   })
 })
