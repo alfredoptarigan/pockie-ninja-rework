@@ -46,6 +46,16 @@ describe('pictureLayout', () => {
     expect((sunflower!.x + bee!.x) / 2).toBe(layout.width / 2)
   })
 
+  it('opens the Explore window from the field’s explore tree', () => {
+    const layout = pictureLayout({ ...field, exploreSpots: ['21011', '21012'] })!
+    expect(layout.explore).toMatchObject({
+      title: 'Explore',
+      spot: { file: expect.stringMatching(/clip-OutCity_1110/) },
+    })
+    expect(pictureLayout(field)!.explore).toBeUndefined()
+    expect(pictureLayout(villageScene)!.explore).toBeUndefined()
+  })
+
   it('has no picture for scenes without art', () => {
     expect(pictureLayout({ ...villageScene, sceneId: 171 })).toBeUndefined()
   })

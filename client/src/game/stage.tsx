@@ -73,16 +73,20 @@ export function ScenePictureMount({
   scene,
   onNpc,
   onMonster,
+  onExplore,
 }: {
   scene: SceneView
   onNpc: (npc: SceneNpc) => void
   onMonster: (monster: SceneMonster) => void
+  /** The field's explore tree was clicked. */
+  onExplore?: () => void
 }) {
-  const latest = useLatest({ onNpc, onMonster })
+  const latest = useLatest({ onNpc, onMonster, onExplore })
   const { ref, failed } = useStage(scene, (stage, parent) =>
     stage.mountPicture(parent, scene, {
       onNpc: (npc) => latest.current.onNpc(npc),
       onMonster: (monster) => latest.current.onMonster(monster),
+      onExplore: () => latest.current.onExplore?.(),
     }),
   )
   if (!hasPicture(scene.sceneId) || failed) return null

@@ -6,6 +6,7 @@ import {
   type Hotspot,
   type MotionSheet,
 } from '../../generated/game-assets'
+import { exploreClip } from '../explore'
 import { plainText } from '../text'
 import type { SceneMonster, SceneNpc, SceneView } from '../types'
 import worldData from '../world-data.json'
@@ -53,6 +54,8 @@ export interface PictureLayout {
   hotspots: PictureHotspot[]
   figures: PictureFigure[]
   portraits: PicturePortrait[]
+  /** The field's explore spot (a tree): opens the Explore window. */
+  explore?: { spot: Hotspot; title: string; label: string }
   skybox?: string
 }
 
@@ -122,6 +125,9 @@ export function pictureLayout(scene: SceneView): PictureLayout | undefined {
     y: top + size / 2,
   }))
 
+  const exploreSpot = scene.exploreSpots.flatMap((id) => exploreClip(id) ?? [])[0]
+  const explore = exploreSpot ? art.hotspots[exploreSpot] : undefined
+
   const { background, backgroundeffect, element, skybox } = art.layers
   return {
     width: art.width,
@@ -131,6 +137,7 @@ export function pictureLayout(scene: SceneView): PictureLayout | undefined {
     // Lower figures stand in front.
     figures: npcs.sort((a, b) => a.y - b.y),
     portraits,
+    explore: explore && { spot: explore, title: 'Explore', label: 'Explore this area' },
     skybox,
   }
 }

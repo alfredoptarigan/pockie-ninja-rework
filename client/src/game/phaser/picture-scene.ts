@@ -10,6 +10,7 @@ import Phaser from 'phaser'
 export interface PictureActions {
   onNpc: (npc: SceneNpc) => void
   onMonster: (monster: SceneMonster) => void
+  onExplore?: () => void
 }
 
 const SCENE_TICK_MS = tickMs(gameMotions.fps.scene)
@@ -34,10 +35,10 @@ class PictureScene extends Phaser.Scene {
   }
 
   preload() {
-    const { under, hotspots, figures, portraits, skybox } = this.layout
+    const { under, hotspots, figures, portraits, explore, skybox } = this.layout
     const files = [
       ...under,
-      ...hotspots.map((h) => h.spot.file),
+      ...[...hotspots, ...(explore ? [explore] : [])].map((h) => h.spot.file),
       ...portraits.map((p) => p.portrait),
     ]
     for (const file of [...files, skybox]) {
@@ -64,6 +65,14 @@ class PictureScene extends Phaser.Scene {
         .setAlpha(HIDDEN_ALPHA)
       this.interactive(image, hotspot.label, () => this.actions.onNpc(npc), true)
     }
+    const { explore } = this.layout
+    if (explore && ready(explore.spot.file)) {
+      const image = this.add
+        .image(explore.spot.x, explore.spot.y, explore.spot.file)
+        .setOrigin(0)
+        .setAlpha(HIDDEN_ALPHA)
+      this.interactive(image, explore.label, () => this.actions.onExplore?.(), true)
+    }
 
     for (const figure of figures) {
       if (!ready(figure.sheet.file)) continue
@@ -89,9 +98,10 @@ class PictureScene extends Phaser.Scene {
       .setVisible(false)
   }
 
-  /** Small building names floating over the village, like the original's signs. */
+  /** Small building names floating over the village (and the field's explore tree). */
   private drawTitles() {
-    for (const { spot, title } of this.layout.hotspots) {
+    const { hotspots, explore } = this.layout
+    for (const { spot, title } of [...hotspots, ...(explore ? [explore] : [])]) {
       const text = this.add
         .text(0, spot.y + spot.height * TITLE_DROP, title, {
           ...LABEL_STYLE,
