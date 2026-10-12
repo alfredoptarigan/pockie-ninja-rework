@@ -23,6 +23,7 @@ import {
   nationScenes,
   npc,
   scene,
+  sceneLinks,
   sceneSpawns,
   sceneSwitchRule,
   subTasks,
@@ -358,20 +359,20 @@ export async function actionRoutes(
       requireAlive(character, 'travel')
       const target = scene(sceneId)
       const rule = sceneSwitchRule(sceneId)
-      // sceneswitchrule.ini: the target must list the current scene as a starting point.
-      if (
-        !target ||
-        !rule ||
-        Number(target.IsStart) !== 1 ||
-        !(String(character.sceneId) in rule)
-      ) {
+      // Scene exits (scenequeue.ini links, SceneSystem.CanSwitchScene) or the world map
+      // (SceneSwitchRuleSystem.CanChangeScene: the target needs a sceneswitchrule.ini section; a
+      // current scene missing from it travels free, it only prices the trip).
+      const linked = sceneLinks(character.sceneId).includes(sceneId)
+      if (!target || (!rule && !linked) || Number(target.IsStart) !== 1) {
         throw bad('no_route', 'You cannot travel there from here.')
       }
       const nation = Number(target.Nation)
       if (nation !== -1 && nation !== character.nation) {
         throw bad('other_village', 'Only ninjas of that village may enter.')
       }
-      if (character.level < Math.max(Number(rule.RequireLevel ?? -1), Number(target.Level ?? -1))) {
+      if (
+        character.level < Math.max(Number(rule?.RequireLevel ?? -1), Number(target.Level ?? -1))
+      ) {
         throw bad('too_low', 'Your level is too low for that area.')
       }
       await tx.update(characters).set({ sceneId }).where(eq(characters.id, character.id))
