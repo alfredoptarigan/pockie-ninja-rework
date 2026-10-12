@@ -28,31 +28,6 @@ describe('NewsTabs', () => {
     expect(screen.queryByRole('button', { name: 'Load more' })).not.toBeInTheDocument()
   })
 
-  it('corrects both legacy level-cap claims in news from the API', async () => {
-    mockApi({
-      'GET /api/posts': () =>
-        json({
-          items: [
-            {
-              ...post(1, 'news'),
-              title: 'Uzumaki Naruto',
-              summary: 'Level cap: 100',
-              body: 'We keep the level cap at 100, just like the original.',
-            },
-            { ...post(2, 'update'), body: 'A level table that tops out at 100.' },
-          ],
-          nextCursor: null,
-        }),
-    })
-    renderWithProviders(<NewsTabs />)
-    expect(await screen.findByRole('heading', { name: 'Naruto Uzumaki' })).toBeInTheDocument()
-    expect(screen.getByText('Level cap: 90')).toBeInTheDocument()
-    await userEvent.click(screen.getAllByText('Read more')[0]!)
-    expect(screen.getByText('We keep the level cap at 90, just like the original.')).toBeVisible()
-    expect(screen.getByText('A level table that tops out at 90.')).toBeInTheDocument()
-    expect(screen.queryByText(/level cap at 100/)).not.toBeInTheDocument()
-  })
-
   it('filters by kind and shows an empty state', async () => {
     const fetchMock = mockApi({
       'GET /api/posts': (url) =>

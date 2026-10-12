@@ -25,28 +25,6 @@ describe('LoreList', () => {
     ])
   })
 
-  it('corrects legacy level and character copy returned by the API', async () => {
-    mockApi({
-      'GET /api/lore': () =>
-        json({
-          items: [
-            {
-              id: 'legacy',
-              position: 1,
-              title: 'Uzumaki Naruto',
-              body: 'We keep the level cap at 100, just like the original.',
-            },
-          ],
-        }),
-    })
-    renderWithProviders(<LoreList />)
-    expect(await screen.findByRole('heading', { name: /Naruto Uzumaki/ })).toBeInTheDocument()
-    expect(
-      screen.getByText('We keep the level cap at 90, just like the original.'),
-    ).toBeInTheDocument()
-    expect(screen.queryByText(/level cap at 100/)).not.toBeInTheDocument()
-  })
-
   it('shows an empty state', async () => {
     mockApi({ 'GET /api/lore': () => json({ items: [] }) })
     renderWithProviders(<LoreList />)
@@ -66,26 +44,6 @@ describe('FaqAccordion', () => {
     expect(screen.getByText('Yes.')).not.toBeVisible()
     await userEvent.click(question)
     expect(screen.getByText('Yes.')).toBeVisible()
-  })
-
-  it('renders canonical character names from legacy FAQ answers', async () => {
-    mockApi({
-      'GET /api/faq': () =>
-        json({
-          items: [
-            {
-              id: 'legacy',
-              position: 1,
-              question: 'Which characters can I play?',
-              answer: 'Uzumaki Naruto, Uchiha Sasuke, Kurosaki Ichigo and Kuchiki Rukia.',
-            },
-          ],
-        }),
-    })
-    renderWithProviders(<FaqAccordion />)
-    expect(
-      await screen.findByText('Naruto Uzumaki, Sasuke Uchiha, Ichigo Kurosaki and Rukia Kuchiki.'),
-    ).toBeInTheDocument()
   })
 
   it('shows an error state', async () => {

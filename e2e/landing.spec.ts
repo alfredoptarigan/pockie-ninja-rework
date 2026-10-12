@@ -11,7 +11,7 @@ for (const viewport of [
     await page.goto('/')
 
     await expect(page.getByText(/Server online/)).toBeVisible()
-    await expect(page.getByRole('img', { name: 'Uzumaki Naruto' })).toBeVisible()
+    await expect(page.getByRole('img', { name: 'Naruto Uzumaki' })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Welcome back, ninja' })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Chapter 1: The Five Seals' })).toBeAttached()
     await expect(page.getByText('What is Pockie Ninja Remastered?')).toBeAttached()

@@ -1,4 +1,3 @@
-import { landingCopy } from './landing-copy'
 import type { Post, PostKind } from '@pockie/shared'
 import { useId, useRef, useState, type KeyboardEvent } from 'react'
 import { formatDate, usePosts } from '../lib/content'
@@ -31,14 +30,14 @@ function PostCard({ post }: { post: Post }) {
           {formatDate(post.publishedAt)}
         </time>
       </div>
-      <h3 className="text-2xl font-bold leading-tight">{landingCopy(post.title)}</h3>
-      <p className="text-ink-soft">{landingCopy(post.summary)}</p>
+      <h3 className="text-2xl font-bold leading-tight">{post.title}</h3>
+      <p className="text-ink-soft">{post.summary}</p>
       <details className="group mt-auto">
         <summary className="w-fit cursor-pointer list-none font-semibold underline decoration-coral decoration-[3px] underline-offset-4">
           <span className="group-open:hidden">Read more</span>
           <span className="hidden group-open:inline">Show less</span>
         </summary>
-        <p className="mt-3 leading-relaxed">{landingCopy(post.body)}</p>
+        <p className="mt-3 leading-relaxed">{post.body}</p>
       </details>
     </Card>
   )

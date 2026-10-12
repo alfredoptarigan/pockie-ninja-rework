@@ -43,8 +43,8 @@ export const seedPosts: SeedPost[] = [
     slug: 'event-preview-the-sushi-feast',
     title: 'Event preview: The Sushi Feast',
     summary:
-      'The Fire Village banquet is short on wasabi sushi rolls, and the Sushi Monsters of the Forge Highlands will not share.',
-    body: 'Every new ninja remembers their first errand: the Fire Village is throwing a banquet and the kitchen has run out of wasabi sushi rolls. The only supply belongs to the Sushi Monsters roaming the Forge Highlands. The Sushi Feast will be our first live event once the game client opens, with a banquet table that fills up as the whole server brings rolls home.',
+      'The Fire Village banquet is short on wasabi sushi rolls, and the Sushi Monsters of the Smelting Mountains will not share.',
+    body: 'Every new ninja remembers their first errand: the Fire Village is throwing a banquet and the kitchen has run out of wasabi sushi rolls. The only supply belongs to the Sushi Monsters roaming the Smelting Mountains. The Sushi Feast will be our first live event once the game client opens, with a banquet table that fills up as the whole server brings rolls home.',
     publishedAt: '2026-10-03T09:00:00Z',
   },
   {
@@ -69,7 +69,7 @@ export const seedPosts: SeedPost[] = [
     slug: 'why-we-are-remastering-pockie-ninja',
     title: 'Why we are remastering Pockie Ninja',
     summary: 'A short note on what we keep, what we fix and what stays exactly the same.',
-    body: 'We keep the things that made the game special: auto-battles you plan rather than click through, outfits that change your skills, a home with a garden, and a long road from the Fire Village to the Endless Night. We fix the things that aged badly: Flash, broken translations and grind that existed only to sell boosts. And we keep the level cap at 100, just like the original.',
+    body: 'We keep the things that made the game special: auto-battles you plan rather than click through, outfits that change your skills, a home with a garden, and a long road from the Fire Village to the Abandoned Evernight City. We fix the things that aged badly: Flash, broken translations and grind that existed only to sell boosts. And we keep the level cap at 90, just like the original.',
     publishedAt: '2026-09-15T09:00:00Z',
   },
   {
@@ -77,7 +77,7 @@ export const seedPosts: SeedPost[] = [
     slug: 'dev-log-0-digging-up-the-archives',
     title: 'Dev log #0: digging up the archives',
     summary: 'We restored a full 2011 server backup and got the original game running again.',
-    body: 'Before writing a single line of new code, we restored a complete backup of the original game and played it again, end to end. It gave us the real numbers: 92 outfits, 339 skills, 360 monster groups and a level table that tops out at 100. Every system in the remaster starts from that data, not from memory.',
+    body: 'Before writing a single line of new code, we restored a complete backup of the original game and played it again, end to end. It gave us the real numbers: 92 outfits, 339 skills, 360 monster groups and a level table that tops out at 90. Every system in the remaster starts from that data, not from memory.',
     publishedAt: '2026-09-10T09:00:00Z',
   },
 ]
@@ -91,22 +91,22 @@ export const seedLore = [
   {
     position: 2,
     title: 'The Fire Village',
-    body: 'Every journey starts at the Fire Village, where the old village chief still tells the history of the seals to anyone who will listen. Beyond its gates lie the Forge Highlands, the Sunset Wasteland and the Blazing Gorge. A genin scout sent out to gather news has gone missing, travelling merchants are being robbed on the roads, and something has made the fire seal flicker.',
+    body: 'Every journey starts at the Fire Village, where the old village chief still tells the history of the seals to anyone who will listen. Beyond its gates lie the Smelting Mountains, the Eventide Barrens and the Fiery Ridge. A genin scout sent out to gather news has gone missing, travelling merchants are being robbed on the roads, and something has made the fire seal flicker.',
   },
   {
     position: 3,
     title: 'Wind and Earth',
-    body: 'The Wind Village sits above the Green Path and the Flowing Blossom River, where the air never stops moving. The Earth Village guards the Thousand Peaks and the Thunder Ladder that climbs into the clouds. Its masters keep an ancient scroll called Immovable Mountain, but the Earth Demon General has already stirred, and the villagers who live closest to the seal are starting to change.',
+    body: 'The Wind Village sits above Verdant Alley and the Slowflower River, where the air never stops moving. The Earth Village guards Peaked Whetstone and the Thundering Steps that climb into the clouds. Its masters keep an ancient scroll called Immovable Mountain, but the Earth Demon General has already stirred, and the villagers who live closest to the seal are starting to change.',
   },
   {
     position: 4,
     title: 'Angel City and Demon City',
-    body: 'Past the villages stand two great cities that have watched each other for centuries: shining Angel City and the walled Demon City. Their markets are the busiest in the land, their arenas the loudest, and their spies are everywhere. Further on, the Dragon Tamer Valley hides caves where young ninja go to earn a mount that will not throw them off.',
+    body: 'Past the villages stand two great cities that have watched each other for centuries: shining Angel City and the walled Demon City. Their markets are the busiest in the land, their arenas the loudest, and their spies are everywhere. Further on, Dragontame Valley hides caves where young ninja go to earn a mount that will not throw them off.',
   },
   {
     position: 5,
     title: 'The Endless Night',
-    body: 'At the edge of the map lie the Endless Night Ruins, the Valley of Lost Souls and the Plain of Despair, where the last seal is failing. The heroes who reach it will need every outfit, technique and friend they have gathered on the way, because the generals behind the seals remember who locked them in.',
+    body: 'At the edge of the map lie the Abandoned Evernight City, Soulshatter Valley and the Plains of Despair, where the last seal is failing. The heroes who reach it will need every outfit, technique and friend they have gathered on the way, because the generals behind the seals remember who locked them in.',
   },
 ]
 
@@ -144,7 +144,7 @@ export const seedFaq = [
     position: 6,
     question: 'Which characters can I play?',
     answer:
-      'You create your own ninja and change their look and skills with outfits. The original game had 92 outfits, from Uzumaki Naruto and Uchiha Sasuke to Kurosaki Ichigo and Kuchiki Rukia, and they are all coming back.',
+      'You create your own ninja and change their look and skills with outfits. The original game had 92 outfits, from Naruto Uzumaki and Sasuke Uchiha to Ichigo Kurosaki and Rukia Kuchiki, and they are all coming back.',
   },
   {
     position: 7,
