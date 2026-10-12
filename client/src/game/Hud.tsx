@@ -9,7 +9,7 @@ import { useLogout } from '../lib/auth'
 import { useOutfitPortrait } from './art'
 import { Bar, GameButton } from './skin'
 import { plainText } from './text'
-import { expToNext, sceneNameKey } from './world'
+import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
 
 const CURRENCIES = [
   { key: 'stone', label: 'Stone', box: 'game-currency-stone' },
@@ -121,8 +121,27 @@ export function PlayerCard({ character }: { character: Character }) {
         </h2>
         <Bar label="HP" value={character.hp} max={character.maxHp} kind="hp" />
         <Bar label="MP" value={character.mp} max={character.maxMp} kind="mp" />
+        <Pouches character={character} />
       </div>
     </section>
+  )
+}
+
+/** HP and MP pouch amounts: they refill the bars after won fights (RoleUseSystem). */
+function Pouches({ character }: { character: Character }) {
+  const amount = (value: number) =>
+    `${value.toLocaleString('en-US')} / ${character.pouchMax.toLocaleString('en-US')}`
+  return (
+    <dl
+      aria-label="Pouches"
+      title="Pouches refill your HP and chakra after every won fight."
+      className="grid grid-cols-[auto_1fr] gap-x-1 text-[10px] leading-tight text-white"
+    >
+      <dt className="text-[#ff7dfa]">HP pouch</dt>
+      <dd>{amount(character.hpPouch)}</dd>
+      <dt className="text-[#66ccff]">MP pouch</dt>
+      <dd>{amount(character.mpPouch)}</dd>
+    </dl>
   )
 }
 
@@ -130,11 +149,14 @@ export function PlayerCard({ character }: { character: Character }) {
 export function ScenePlaque({
   sceneId,
   inVillage,
+  defeated = false,
   onVillage,
   onWorldMap,
 }: {
   sceneId: number | undefined
   inVillage: boolean
+  /** A defeated ninja cannot travel: the Village/Leave button waits for the revive. */
+  defeated?: boolean
   onVillage: () => void
   onWorldMap: () => void
 }) {
@@ -149,7 +171,13 @@ export function ScenePlaque({
         {name}
       </h2>
       <div className="flex gap-1">
-        <GameButton small className="flex-1 whitespace-nowrap" onClick={onVillage}>
+        <GameButton
+          small
+          className="flex-1 whitespace-nowrap"
+          disabled={defeated}
+          title={defeated ? DEFEATED_REASON : undefined}
+          onClick={onVillage}
+        >
           {inVillage ? 'Leave' : 'Village'}
         </GameButton>
         <GameButton small className="flex-1 whitespace-nowrap" onClick={onWorldMap}>

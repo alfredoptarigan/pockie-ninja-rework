@@ -120,6 +120,16 @@ export const taskMonsterDrops = (taskId: number) =>
   load<Record<string, Row[]>>('task-monster-drops')[String(taskId)] ?? []
 
 export const task = (id: number) => load<Record<string, Row>>('tasks')[String(id)]
+let offeredTaskIds: number[] | undefined
+/** Quests taken at an NPC: not auto-accepted and with a quest giver (Task.ini AcceptNpcConfig). */
+export function npcOfferedTaskIds() {
+  offeredTaskIds ??= Object.entries(load<Record<string, Row>>('tasks'))
+    .filter(
+      ([, row]) => Number(row.AutoAcceptTask) !== 1 && typeof row.AcceptNpcConfig === 'string',
+    )
+    .map(([id]) => Number(id))
+  return offeredTaskIds
+}
 export const scene = (id: number) => load<Record<string, Row>>('scenes')[String(id)]
 export const sceneSwitchRule = (id: number) =>
   load<Record<string, Row>>('scene-switch-rules')[String(id)]

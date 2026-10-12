@@ -23,6 +23,8 @@ export interface SceneView {
   npcs: SceneNpc[]
   exploreSpots: string[]
   links: number[]
+  /** What reviving costs here (ReliveSystem): EXP for going home, Gold for reviving here. */
+  revive: { homeExpLoss: number; gold: number; goldAllowed: boolean }
 }
 
 /** 0 accepted, 1 ready to hand in, 2 completed. */
@@ -34,8 +36,28 @@ export interface Quest {
   progress: number[]
   nameKey: string
   descriptionKey: string
-  steps: { descriptionKey: string; target: number }[]
+  steps: QuestStep[]
 }
+
+export interface QuestStep {
+  descriptionKey: string
+  target: number
+  /** Rookie command steps: use an item from the bag, or equip a weapon. */
+  command?: 'use' | 'equip'
+  itemId?: string
+}
+
+/** A quest an NPC hands out now (GET /api/game/quests/available). */
+export interface QuestOffer {
+  taskId: number
+  npcId: string
+  sceneId: number
+  nameKey: string
+  talkKey: string | null
+}
+
+/** Bag items to point at for a tutorial step: one item to use, or the weapons to equip. */
+export type BagHighlight = { itemId: string } | { equipment: true }
 
 export interface InventoryItem {
   id: string
@@ -44,6 +66,8 @@ export interface InventoryItem {
   bound: boolean
   equippedSlot: string | null
   nameKey: string
+  /** Equipment only: whether this outfit's weapon class may wear it. */
+  fitsOutfit?: boolean
 }
 
 export interface TalkResult {

@@ -46,5 +46,35 @@ export interface Character {
   mp: number
   maxHp: number
   maxMp: number
+  /** HP/MP pouch amounts and their shared size (RoleUseSystem). */
+  hpPouch: number
+  mpPouch: number
+  pouchMax: number
   sceneId: number
+}
+
+/**
+ * Combat stats with equipment, as fights use them (GET /api/game/character `stats`).
+ * Raw server values: strength/agility/stamina are x100, atkTime is the time between actions.
+ */
+export interface CharacterStats {
+  strength: number
+  agility: number
+  stamina: number
+  maxHp: number
+  maxMp: number
+  minAttack: number
+  maxAttack: number
+  atkTime: number
+  defense: number
+  dodge: number
+  hit: number
+  crit: number
+  critAttach: number
+  parry: number
+  pierce: number
+  tough: number
+  neglectDefense: number
+  counter: number
+  weaponClass: number
 }

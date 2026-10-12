@@ -107,7 +107,7 @@ export const faqItems = pgTable(
 )
 
 // Game: one ninja per account (milestone 2). Values follow the original server
-// (firstset.js starting pouches, level cap 90, currencies: stone, gold, gift coupons).
+// (empty pouches, level cap 90, currencies: stone, gold, gift coupons).
 const currency = (name: string) => bigint(name, { mode: 'number' }).notNull().default(0)
 
 export const characters = pgTable(
@@ -133,8 +133,9 @@ export const characters = pgTable(
     honor: integer('honor').notNull().default(0),
     hp: integer('hp').notNull(),
     mp: integer('mp').notNull(),
-    hpPouch: integer('hp_pouch').notNull().default(50),
-    mpPouch: integer('mp_pouch').notNull().default(30),
+    // HP/MP pouch amounts (RoleUseSystem); they start empty, the size is 9000 + level * 1000.
+    hpPouch: integer('hp_pouch').notNull().default(0),
+    mpPouch: integer('mp_pouch').notNull().default(0),
     sceneId: integer('scene_id').notNull(),
     // Explore spots (OutSearchSystem): global cooldown and searches used on `exploreDay` (UTC).
     exploreLastAt: timestamp('explore_last_at', { withTimezone: true }),

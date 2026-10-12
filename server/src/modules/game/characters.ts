@@ -2,6 +2,7 @@ import { deriveStats } from '@pockie/game-core'
 import {
   createCharacterSchema,
   type Character,
+  type CharacterStats,
   type CreationOptions,
   type Nation,
 } from '@pockie/shared'
@@ -17,6 +18,8 @@ import {
   nationScenes,
   subTasks,
 } from '../../game/data.js'
+import { playerFighter, type PlayerFighter } from '../../game/combat.js'
+import { pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
@@ -44,11 +47,39 @@ export function toCharacter(row: CharacterRow): Character {
     mp: row.mp,
     maxHp: stats.maxHp,
     maxMp: stats.maxMp,
+    hpPouch: row.hpPouch,
+    mpPouch: row.mpPouch,
+    pouchMax: pouchMax(row.level),
     sceneId: row.sceneId,
   }
 }
 
 /** A defeated (0 HP, dead) ninja cannot fight, travel or explore until revived (StateSystem). */
+/** The fighter's stats without its fight state (name, HP/MP, skills). */
+function statsOf(fighter: PlayerFighter): CharacterStats {
+  return {
+    strength: fighter.strength,
+    agility: fighter.agility,
+    stamina: fighter.stamina,
+    maxHp: fighter.maxHp,
+    maxMp: fighter.maxMp,
+    minAttack: fighter.minAttack,
+    maxAttack: fighter.maxAttack,
+    atkTime: fighter.atkTime,
+    defense: fighter.defense,
+    dodge: fighter.dodge,
+    hit: fighter.hit,
+    crit: fighter.crit,
+    critAttach: fighter.critAttach,
+    parry: fighter.parry,
+    pierce: fighter.pierce,
+    tough: fighter.tough,
+    neglectDefense: fighter.neglectDefense,
+    counter: fighter.counter,
+    weaponClass: fighter.weaponClass,
+  }
+}
+
 export function requireAlive(character: Pick<CharacterRow, 'hp'>, action: string) {
   if (character.hp <= 0) {
     throw new HttpError(400, 'no_hp', `You were defeated. Revive before you ${action}.`)
@@ -96,7 +127,7 @@ export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) 
     const user = requireUser(request)
     const [row] = await db.select().from(characters).where(eq(characters.userId, user.id))
     if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
-    return { character: toCharacter(row) }
+    return { character: toCharacter(row), stats: statsOf(await playerFighter(db, row)) }
   })
 
   app.post(

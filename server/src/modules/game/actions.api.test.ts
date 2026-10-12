@@ -45,15 +45,20 @@ describe('Fire Village tutorial', () => {
 
     // 90001 (AutoAcceptTask = 1) is active: use the pack.
     expect(await quests()).toContainEqual(expect.objectContaining({ taskId: 90001, state: 0 }))
+    // The step tells the client which item to use (rookie command 8888).
+    const packQuest = (await quests()).find((q: { taskId: number }) => q.taskId === 90001)
+    expect(packQuest.steps[0]).toMatchObject({ command: 'use', itemId: 'i159104' })
     const pack = await itemRow('i159104')
     const used = await client.post(`/api/game/items/${pack.id}/use`)
     expect(used.json().completed).toEqual([90001])
     expect(await itemRow('i159104')).toBeUndefined()
     const fists = await itemRow('i270100')
-    expect(fists).toBeDefined()
+    expect(fists).toMatchObject({ fitsOutfit: true })
 
     // 90002 is not auto-accepted: accept it at the Elder, then equip the fists.
     expect((await client.post('/api/game/quests/90002/accept')).statusCode).toBe(200)
+    const equipQuest = (await quests()).find((q: { taskId: number }) => q.taskId === 90002)
+    expect(equipQuest.steps[0]).toMatchObject({ command: 'equip' })
     const equipped = await client.post(`/api/game/items/${fists.id}/equip`)
     expect(equipped.json().completed).toEqual([90002])
     expect(await itemRow('i270100')).toMatchObject({ equippedSlot: 'Weapon' })
@@ -85,6 +90,7 @@ describe('items', () => {
     // i250100 is a blunt weapon; Ggio Vega fights with fists.
     await db.insert(inventoryItems).values({ characterId, itemId: 'i250100' })
     const bat = await itemRow('i250100')
+    expect(bat.fitsOutfit).toBe(false)
     expect((await client.post(`/api/game/items/${bat.id}/equip`)).statusCode).toBe(400)
   })
 

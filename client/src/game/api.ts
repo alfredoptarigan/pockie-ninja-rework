@@ -1,4 +1,9 @@
-import type { Character, CreateCharacterInput, CreationOptions } from '@pockie/shared'
+import type {
+  Character,
+  CharacterStats,
+  CreateCharacterInput,
+  CreationOptions,
+} from '@pockie/shared'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api, ApiError } from '../lib/api'
 import type {
@@ -6,6 +11,7 @@ import type {
   FightResult,
   InventoryItem,
   Quest,
+  QuestOffer,
   SceneView,
   TalkResult,
 } from './types'
@@ -15,7 +21,9 @@ export const gameKeys = {
   character: ['game', 'character'] as const,
   creation: ['game', 'creation'] as const,
   scene: ['game', 'scene'] as const,
+  stats: ['game', 'stats'] as const,
   quests: ['game', 'quests'] as const,
+  availableQuests: ['game', 'quests', 'available'] as const,
   inventory: ['game', 'inventory'] as const,
 }
 
@@ -34,6 +42,17 @@ export function useCharacter() {
   })
 }
 
+/**
+ * Combat stats with equipment (GET /character `stats`). Its own query, so every game action
+ * refetches it (actions only return the character).
+ */
+export function useCharacterStats() {
+  return useQuery({
+    queryKey: gameKeys.stats,
+    queryFn: async () => (await api<{ stats: CharacterStats }>('/api/game/character')).stats,
+  })
+}
+
 export function useCreationOptions() {
   return useQuery({
     queryKey: gameKeys.creation,
@@ -49,6 +68,15 @@ export function useQuests() {
   return useQuery({
     queryKey: gameKeys.quests,
     queryFn: async () => (await api<{ quests: Quest[] }>('/api/game/quests')).quests,
+  })
+}
+
+/** NPC quests the character can take now, and the ids of finished quests. */
+export function useAvailableQuests() {
+  return useQuery({
+    queryKey: gameKeys.availableQuests,
+    queryFn: () =>
+      api<{ available: QuestOffer[]; completed: number[] }>('/api/game/quests/available'),
   })
 }
 
@@ -103,6 +131,12 @@ export function useAcceptQuest() {
     mutationFn: (taskId: number) => post<unknown>(`/api/game/quests/${taskId}/accept`),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: gameKeys.quests }),
   })
+}
+
+export function useRevive() {
+  return useGameAction((mode: 'home' | 'gold') =>
+    post<{ character: Character }>('/api/game/revive', { mode }),
+  )
 }
 
 export function useFight() {
