@@ -1,4 +1,5 @@
 packages:
+  - game-core
   - client
   - server
   - shared
