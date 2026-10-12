@@ -44,7 +44,7 @@ export const originOf = (sheet: MotionSheet) => ({
 
 /** A fighter's motions plus where its skill motions are listed in skill-motions.json. */
 export interface FighterArt {
-  set: MotionSet
+  set: MotionSet & { portrait?: string }
   skills: { group: keyof SkillMotions; key: string }
 }
 

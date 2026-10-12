@@ -165,7 +165,12 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     const motion = ev.crit ? HIT_HEAVY : HIT_LIGHT
     pose(target, at, motion)
     loseHp(at, target, amount)
-    text(at, target, ev.crit ? 'crit' : 'damage', ev.crit ? `Critical ${amount}` : `-${amount}`)
+    text(
+      at,
+      target,
+      ev.crit ? 'crit' : 'damage',
+      ev.crit ? `Critical ${amount}` : amount > 0 ? `-${amount}` : '0',
+    )
     if (ev.parry && last) text(at, target, 'info', 'Parry')
     if (hp[target]! > 0) pose(target, at + motionMs(target, motion), STAND)
   }

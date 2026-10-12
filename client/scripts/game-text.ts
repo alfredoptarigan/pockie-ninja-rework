@@ -151,8 +151,9 @@ for (const key of Object.keys(en)) if (/^lg_(Skill|Buffer)_\d+$/.test(key)) keys
 const buildings: Record<string, Record<string, string>> = {}
 for (const row of sceneBuildings) {
   if (!sliceScenes.has(row.SceneID)) continue
-  ;(buildings[row.SceneID] ??= {})[row.ClipName] = row.NameFlag.replace(/^name_/, '')
-  keys.add(`lg_${row.NameFlag}`)
+  const npcId = row.NameFlag.replace(/^name_/, '')
+  ;(buildings[row.SceneID] ??= {})[row.ClipName] = npcId
+  keys.add(`lg_${row.NameFlag}`).add(`lg_build_${npcId}`)
 }
 
 // Travel (sceneswitchrule.ini): a scene can be entered from every scene its rule lists.
