@@ -203,10 +203,14 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] "0 damage" was fighting without the newbie fists (i270100); the original gives 0 too.
         Defeat/revive now follow the original: a loss leaves 0 HP and state dead (no fight, travel
         or explore), `POST /api/game/revive {mode: home|gold}` (relive.ini). Explore losses keep 1 HP.
-  - [ ] Client: Revive dialog after a defeat (loss text still says "Heal before your next fight"),
-        keep players from skipping the pack/equip tutorial steps, show attack/defence stats.
-  - [ ] Server: HP pouch refill after won fights (`UseHPContainer`, max `9000 + level*1000`),
-        character stats in `GET /character`, an available/completed quests endpoint, equipment wear.
+  - [x] Revive window, disabled actions while defeated, combat stats + pouches in the Character
+        window/HUD, Quest Navigation "Available" from `GET /quests/available`, tutorial nudges
+        (Go opens the bag and marks the pack/weapon; warning before fighting unarmed).
+  - [x] Server: HP/MP pouches (size `9000 + level*1000`, start at 0, refill after won fights and
+        every explore fight; migration 0003), `GET /character` returns `{ character, stats }`,
+        `GET /quests/available`, `fitsOutfit` on inventory, `revive` terms in `GET /scene`.
+  - [ ] Buying pouch refills (`OnCustomBuy`), equipment wear on going home (no durability yet),
+        explore UI in the client.
 - [ ] **Task 9 — copy fixes and verification** (not started).
 
 ### Notes for Task 8 (client)
