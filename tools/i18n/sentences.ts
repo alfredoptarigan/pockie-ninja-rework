@@ -127,6 +127,23 @@ if (import.meta.main) {
       created++
     }
     console.log(`${fresh.length} new templates in ${created} new batches under ${work}`)
+  } else if (command === 'status') {
+    // Which batches still need a valid translation (see tools/i18n/HANDOFF.md).
+    const todo: string[] = []
+    const files = readdirSync(work)
+      .filter((name) => /^batch-\d+\.json$/.test(name))
+      .sort()
+    for (const file of files) {
+      const batch: { units: { n: number; text: string }[] } = read(join(work, file))
+      const outPath = join(work, file.replace('.json', '.out.json'))
+      const out: Record<string, string> = existsSync(outPath) ? read(outPath) : {}
+      const bad = batch.units.filter(
+        (unit) => out[unit.n] === undefined || validate(unit.text, out[unit.n]!).length > 0,
+      ).length
+      if (bad) todo.push(`${file.slice(6, 9)} (${bad}/${batch.units.length} left)`)
+    }
+    console.log(`${files.length - todo.length}/${files.length} batches done`)
+    if (todo.length) console.log(`To do: ${todo.join(', ')}`)
   } else if (command === 'merge') {
     const index: Record<string, { key: string; numbers: string[] }[]> = read(
       join(work, 'index.json'),
@@ -168,7 +185,7 @@ if (import.meta.main) {
     const problems = Object.keys(status).length
     console.log(`Wrote ${Object.keys(en).length} strings to en.json, ${problems} with problems`)
   } else {
-    console.error('Usage: sentences.ts prepare|merge')
+    console.error('Usage: sentences.ts prepare|status|merge')
     process.exitCode = 1
   }
 }
