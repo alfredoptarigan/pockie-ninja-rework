@@ -7,7 +7,6 @@ import {
   type MotionSheet,
 } from '../../generated/game-assets'
 import { exploreClip } from '../explore'
-import { itemIcon } from '../ItemIcon'
 import { plainText } from '../text'
 import type { SceneMonster, SceneNpc, SceneView } from '../types'
 import worldData from '../world-data.json'
@@ -42,8 +41,8 @@ export interface PicturePortrait {
   monster: SceneMonster
   portrait: string
   name: string
-  /** What it can drop, shown while the portrait is hovered; `icon` is the item's picture. */
-  drops: { itemId: string; name: string; icon?: string }[]
+  /** Top centre of its Drops panel (shown while hovered), as fractions of the picture size. */
+  dropsAt: { x: number; y: number }
   /** Centre of the cell. */
   x: number
   y: number
@@ -64,6 +63,8 @@ export interface PictureLayout {
 
 /** Monster portrait cells, top centre like the original field screen, below the HUD strip (scene pixels). */
 export const PORTRAIT_CELL = { size: 120, gap: 14, top: 50 }
+/** The Drops panel starts this far below the portrait cell, under its name plate. */
+const DROPS_BELOW = 46
 /** Building names longer than this are sentences in the table, not names. */
 const MAX_TITLE = 24
 
@@ -120,18 +121,17 @@ export function pictureLayout(scene: SceneView): PictureLayout | undefined {
   })
   const { size, gap, top } = PORTRAIT_CELL
   const left = (art.width - shown.length * size - (shown.length - 1) * gap) / 2
-  const portraits = shown.map(({ monster, portrait }, i) => ({
-    monster,
-    portrait,
-    name: plainText(monster.nameKey, 'Monster'),
-    drops: (monster.drops ?? []).map(({ itemId, nameKey }) => ({
-      itemId,
-      name: plainText(nameKey, 'Unknown item'),
-      icon: itemIcon(itemId)?.file,
-    })),
-    x: Math.round(left + i * (size + gap) + size / 2),
-    y: top + size / 2,
-  }))
+  const portraits = shown.map(({ monster, portrait }, i) => {
+    const x = Math.round(left + i * (size + gap) + size / 2)
+    return {
+      monster,
+      portrait,
+      name: plainText(monster.nameKey, 'Monster'),
+      dropsAt: { x: x / art.width, y: (top + size + DROPS_BELOW) / art.height },
+      x,
+      y: top + size / 2,
+    }
+  })
 
   const exploreSpot = scene.exploreSpots.flatMap((id) => exploreClip(id) ?? [])[0]
   const explore = exploreSpot ? art.hotspots[exploreSpot] : undefined

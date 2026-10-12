@@ -11,6 +11,8 @@ export interface PictureActions {
   onNpc: (npc: SceneNpc) => void
   onMonster: (monster: SceneMonster) => void
   onExplore?: () => void
+  /** A monster portrait is hovered (its Drops panel shows above the HUD), or left (null). */
+  onMonsterHover?: (portrait: PicturePortrait | null) => void
 }
 
 const SCENE_TICK_MS = tickMs(gameMotions.fps.scene)
@@ -22,8 +24,6 @@ const TITLE_SIZE = 30
 const NAME_CHARS = 10
 /** Building names sit this far down the building's clip (its roof). */
 const TITLE_DROP = 0.22
-/** Drops panel under a hovered portrait (scene pixels). */
-const DROPS = { width: 340, header: 44, row: 44, icon: 36, pad: 12, below: 46 }
 
 class PictureScene extends Phaser.Scene {
   private animated: { sprite: Phaser.GameObjects.Sprite; durations: number[] }[] = []
@@ -42,9 +42,7 @@ class PictureScene extends Phaser.Scene {
       ...under,
       ...[...hotspots, ...(explore ? [explore] : [])].map((h) => h.spot.file),
       ...portraits.map((p) => p.portrait),
-      ...portraits.flatMap((p) => p.drops.flatMap((drop) => (drop.icon ? [drop.icon] : []))),
     ]
-    // Monsters share most drops: load each icon once.
     for (const file of new Set([...files, skybox])) {
       if (file) this.load.image(file, file)
     }
@@ -136,9 +134,8 @@ class PictureScene extends Phaser.Scene {
         const image = this.add.image(x, y - 6, portrait)
         image.setScale((size - 24) / Math.max(image.width, image.height))
         this.interactive(image, '', () => this.actions.onMonster(monster))
-        const drops = this.drawDrops(cell)
-        image.on('pointerover', () => drops.setVisible(true))
-        image.on('pointerout', () => drops.setVisible(false))
+        image.on('pointerover', () => this.actions.onMonsterHover?.(cell))
+        image.on('pointerout', () => this.actions.onMonsterHover?.(null))
       }
       const small = { ...LABEL_STYLE, strokeThickness: 5 }
       this.add
@@ -150,41 +147,6 @@ class PictureScene extends Phaser.Scene {
         .setOrigin(0.5, 1)
       this.add.text(x, y + size / 2 + 23, name, { ...small, fontSize: '22px' }).setOrigin(0.5)
     }
-  }
-
-  /** Hidden list of what a monster can drop (icon and name per row), under its portrait. */
-  private drawDrops({ drops, x, y }: PicturePortrait) {
-    const { width, header, row, icon, pad, below } = DROPS
-    const height = header + Math.max(1, drops.length) * row + pad
-    const left = Phaser.Math.Clamp(x - width / 2, 0, this.layout.width - width)
-    const panel = this.add
-      .container(left, y + PORTRAIT_CELL.size / 2 + below)
-      .setDepth(999)
-      .setVisible(false)
-    const g = this.add.graphics()
-    g.fillStyle(0x1c0f07, 0.92).fillRoundedRect(0, 0, width, height, 10)
-    g.lineStyle(3, 0xd9a441).strokeRoundedRect(0, 0, width, height, 10)
-    const small = { ...LABEL_STYLE, strokeThickness: 5 }
-    panel.add(g)
-    panel.add(
-      this.add
-        .text(width / 2, pad, 'Drops', { ...small, fontSize: '24px', color: '#ffd23c' })
-        .setOrigin(0.5, 0),
-    )
-    const rows = drops.length > 0 ? drops : [{ name: 'Nothing', icon: undefined }]
-    rows.forEach((drop, i) => {
-      const rowY = header + i * row + row / 2
-      if (drop.icon && this.textures.exists(drop.icon)) {
-        const image = this.add.image(pad + icon / 2, rowY, drop.icon)
-        panel.add(image.setScale(icon / Math.max(image.width, image.height)))
-      }
-      panel.add(
-        this.add
-          .text(pad * 2 + icon, rowY, drop.name, { ...small, fontSize: '22px' })
-          .setOrigin(0, 0.5),
-      )
-    })
-    return panel
   }
 
   override update(time: number) {
