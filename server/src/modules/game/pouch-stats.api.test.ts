@@ -3,7 +3,7 @@
 import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { characters, inventoryItems } from '../../db/schema.js'
+import { characterQuests, characters, inventoryItems } from '../../db/schema.js'
 import { EXPLORE_MIN_HP, fightMonster } from '../../game/combat.js'
 
 const { db, close } = createTestDb()
@@ -73,6 +73,8 @@ describe('pouches', () => {
 
   it('stay untouched after a lost field fight: the ninja stays defeated', async () => {
     await update({ sceneId: 2101, hpPouch: 5000 })
+    // n32002 is a task boss: it can only be fought while one of its quests (10014) is held.
+    await db.insert(characterQuests).values({ characterId, taskId: 10014, progress: [0], state: 0 })
     const body = (await client.post('/api/game/fight', { monsterId: BOSS })).json()
     expect(body.won).toBe(false)
     expect(body.character).toMatchObject({ hp: 0, hpPouch: 5000 })

@@ -307,6 +307,37 @@ export const characterExploreSpots = pgTable(
   ],
 )
 
+// The explore search waiting for its card pick (OutSearchSystem OutSearchBonus): the five cards,
+// which ones were peeked at, and what the search already paid out. One per character.
+export const exploreSearches = pgTable(
+  'explore_searches',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    searchId: uuid('search_id').notNull(),
+    spotId: integer('spot_id').notNull(),
+    // The scene a normal search started in (senior searches may be picked anywhere).
+    sceneId: integer('scene_id').notNull(),
+    mode: text('mode').$type<'normal' | 'senior'>().notNull(),
+    cards: jsonb('cards').$type<unknown[]>().notNull(),
+    // Card indexes revealed by paid peeks (LookCount).
+    revealed: smallint('revealed')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    peekCount: smallint('peek_count').notNull().default(0),
+    star: jsonb('star').$type<{ level: number; progress: number }>().notNull(),
+    starBonus: jsonb('star_bonus').$type<unknown>(),
+    rewards: jsonb('rewards').$type<unknown>().notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check('explore_searches_mode', sql`${t.mode} in ('normal', 'senior')`),
+    check('explore_searches_peek_count', sql`${t.peekCount} between 0 and 5`),
+  ],
+)
+
 // Refresh shops (RefreshShopSystem, docs/original-data/shops.md): shop type 1 Item Shop,
 // 2 Mystery Shop, 3 Dark Shop. One row per character and shop once it was first stocked.
 const shopType = () => smallint('shop_type').notNull()

@@ -67,7 +67,10 @@ export function pictureLayout(scene: SceneView, exploreClip?: string): PictureLa
   const art = gameScenes[String(scene.sceneId)]
   if (!art?.layers.background) return undefined
   const npcsById = new Map(scene.npcs.map((npc) => [npc.id, npc]))
-  const clips = buildings[String(scene.sceneId)] ?? {}
+  // Generated for the villages and 21xx-25xx; other towns (161, 171) name the clip per NPC.
+  const clips =
+    buildings[String(scene.sceneId)] ??
+    Object.fromEntries(scene.npcs.flatMap((npc) => (npc.clip ? [[npc.clip, npc.id]] : [])))
 
   const hotspots = Object.entries(clips).flatMap(([clip, npcId]): PictureHotspot[] => {
     const spot = art.hotspots[clip]

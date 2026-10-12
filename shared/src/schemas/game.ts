@@ -181,3 +181,17 @@ export type QuestHandIn = z.infer<typeof questHandInSchema>
 export type QuestCompletion = z.infer<typeof questCompletionSchema>
 export type LootQuestCompletion = z.infer<typeof lootQuestCompletionSchema>
 export type MonsterDrop = z.infer<typeof monsterDropSchema>
+
+/**
+ * POST /api/game/travel. `link` takes a scene exit (scenequeue.ini, SceneSystem.CanSwitchScene),
+ * `map` a world map place (sceneswitchrule.ini, SceneSwitchRuleSystem.CanChangeScene); `home`
+ * ("Village") and `out` ("Go out") use the scene's ToScene, else the village or its first field.
+ */
+export const travelSchema = z.union([
+  z.object({
+    sceneId: z.number().int().positive(),
+    via: z.enum(['link', 'map']).default('map'),
+  }),
+  z.object({ via: z.enum(['home', 'out']) }),
+])
+export type TravelInput = z.input<typeof travelSchema>

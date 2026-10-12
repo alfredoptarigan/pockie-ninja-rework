@@ -15,9 +15,11 @@ export interface Destination {
   nation: number
 }
 
-const travel = data.travel as Record<string, Destination[]>
-/** Roads from a scene no switch rule lists: the server lets it travel to every rule target. */
-const travelAnywhere = data.travelAnywhere as Destination[]
+/**
+ * World map places (every sceneswitchrule.ini target): CanChangeScene lets any scene travel to
+ * them, a current scene missing from the rule travels free.
+ */
+const mapPlaces = data.travelAnywhere as Destination[]
 const itemNames = data.itemNames as Record<string, string>
 const stepArgs = data.stepArgs as Record<string, string[][]>
 
@@ -52,12 +54,16 @@ export function questTarget(quest: Quest): { sceneId?: number; npcId?: string } 
   return { sceneId: scene ? Number(scene[1]) : undefined, npcId: npc?.[1] }
 }
 
-/** Scenes reachable from here that this character may enter, plus locked ones for the map. */
+/** World map places of this character's village or neutral, and whether the level lets them in. */
 export function destinations(character: Character) {
-  return (travel[character.sceneId] ?? travelAnywhere)
+  return mapPlaces
     .filter((d) => d.nation === -1 || d.nation === character.nation)
     .map((d) => ({ ...d, open: allowed(character, d.level, d.nation) }))
 }
+
+/** TeamStoneNpc.js: resting costs `-0.005 L² + 1.593 L + 61.72` Stone above level 10. */
+export const restCost = (level: number) =>
+  level > 10 ? Math.trunc(-0.005 * level * level + 1.593 * level + 61.72) : 0
 
 /** Arguments for a quest step's generic template: zone, NPC/monster, item names and counts. */
 export function questStepArgs(taskId: number, step: number, current: number, total: number) {

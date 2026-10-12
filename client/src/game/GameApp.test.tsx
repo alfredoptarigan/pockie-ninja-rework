@@ -153,7 +153,7 @@ describe('GameScreen', () => {
     )
     await userEvent.click(within(map).getByRole('button', { name: 'Smelting Mountains' }))
 
-    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101 })
+    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101, via: 'map' })
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
   })
 
@@ -163,11 +163,62 @@ describe('GameScreen', () => {
       { ...character, sceneId: 2101 },
     )
     await userEvent.click(await screen.findByRole('button', { name: 'Village' }))
-    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 111 })
+    // SceneSystem.GoHome: the server picks the scene's ToScene or the home village.
+    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ via: 'home' })
+  })
+
+  it('goes out to the first field with the Leave button in the village', async () => {
+    const fetchMock = renderGame({
+      'POST /api/game/travel': () => json({ character: { ...character, sceneId: 2101 } }),
+    })
+    await userEvent.click(await screen.findByRole('button', { name: 'Leave' }))
+    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ via: 'out' })
+  })
+
+  it('takes a scene exit with link travel', async () => {
+    const fetchMock = renderGame(
+      {
+        'GET /api/game/scene': () => json({ ...field, links: [2103, 2102] }),
+        'POST /api/game/travel': () => json({ character: { ...character, sceneId: 2102 } }),
+      },
+      { ...character, sceneId: 2101, level: 12 },
+    )
+    const exits = await screen.findByRole('navigation', { name: 'Exits' })
+    // 2103 needs level 21.
+    expect(within(exits).getByRole('button', { name: /Lv\. 21/ })).toBeDisabled()
+    await userEvent.click(within(exits).getByRole('button', { name: /Eventide Barrens/ }))
+    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2102, via: 'link' })
+  })
+
+  it('opens a feature window from an NPC menu, closing the conversation', async () => {
+    renderGame({
+      'GET /api/game/scene': () =>
+        json({
+          ...villageScene,
+          npcs: [
+            { id: 'n11003', nameKey: 'lg_name_n11003', x: 0, y: 0, scale: 100, menu: 'forge' },
+          ],
+        }),
+      'POST /api/game/npcs/n11003/talk': () => json({ completed: [], character }),
+    })
+    const actions = await screen.findByRole('region', { name: 'Scene actions' })
+    await userEvent.click(await within(actions).findByRole('button', { name: 'Blacksmith' }))
+    const talk = await screen.findByRole('dialog', { name: 'Blacksmith' })
+    await userEvent.click(await within(talk).findByRole('button', { name: 'Blacksmith' }))
+    await waitFor(() => expect(screen.getAllByRole('dialog')).toHaveLength(1))
+    // The Blacksmith's menu opens the forge window registered in windows.tsx.
+    expect(await screen.findByRole('dialog', { name: 'Forge' })).toBeInTheDocument()
   })
 })
 
 describe('character info', () => {
+  it('hides the empty VP groove of the player card (decision 12)', async () => {
+    renderGame()
+    const card = await screen.findByTestId('role-card')
+    expect(card.style.clipPath).toContain('evenodd')
+    expect(screen.queryByRole('meter', { name: /VP|Energy/ })).not.toBeInTheDocument()
+  })
+
   it('shows the combat stats and pouches in the Character window', async () => {
     renderGame({}, { ...character, hpPouch: 1000 })
     const card = await screen.findByRole('region', { name: 'Character' })

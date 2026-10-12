@@ -3,7 +3,7 @@
 import { and, eq, isNull } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { characters, inventoryItems } from '../../db/schema.js'
+import { characterQuests, characters, inventoryItems } from '../../db/schema.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -105,6 +105,8 @@ describe('durability loss', () => {
   it('takes nothing after a lost fight', async () => {
     const fists = await giveItem('i270100', { equippedSlot: 'Weapon' })
     await setCharacter({ sceneId: 2101 })
+    // n32002 is a task boss: it can only be fought while one of its quests (10014) is held.
+    await db.insert(characterQuests).values({ characterId, taskId: 10014, progress: [0], state: 0 })
     const body = (await client.post('/api/game/fight', { monsterId: 'n32002' })).json()
     expect(body.won).toBe(false)
     expect((await itemRow(fists.id)).durability).toBeNull()

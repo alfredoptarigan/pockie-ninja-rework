@@ -65,6 +65,14 @@ const SHADOW = '[text-shadow:2px_2px_4px_#000,-2px_-2px_4px_#000]'
  * and the name). A click starts the fight; hovering shows the Drops panel under the card. The
  * row is a pointer twin of SceneView's "Scene actions" list, which keeps keyboard access.
  */
+/** Why a task boss cannot be fought yet (decision 8 keeps the never-attackable ones locked). */
+export const lockReason = (monster: SceneMonster) =>
+  monster.lock === 'quest'
+    ? 'You need the quest for this boss before you fight it.'
+    : monster.lock === 'never'
+      ? 'This boss cannot be challenged.'
+      : undefined
+
 export function MonsterRow({
   monsters,
   onFight,
@@ -92,14 +100,15 @@ export function MonsterRow({
               type="button"
               tabIndex={-1}
               data-testid="monster-card"
-              title={name}
+              title={lockReason(monster) ?? name}
+              aria-disabled={monster.lock ? true : undefined}
               onClick={() => {
                 setHovered(null)
-                onFight(monster)
+                if (!monster.lock) onFight(monster)
               }}
               onMouseEnter={() => setHovered(monster.id)}
               onMouseLeave={() => setHovered(null)}
-              className="game-monster-card absolute inset-0 cursor-pointer hover:brightness-110"
+              className={`game-monster-card absolute inset-0 ${monster.lock ? 'cursor-not-allowed grayscale' : 'cursor-pointer hover:brightness-110'}`}
             >
               <img
                 src={portrait}

@@ -8,6 +8,35 @@ export interface SceneMonster {
   level: number
   /** What it can drop (GET /scene); optional so the UI copes with responses without it. */
   drops?: MonsterDrop[]
+  /**
+   * Task bosses: `quest` until one of their quests is held or done, `never` for bosses whose
+   * quests do not exist (shown, but locked); null or absent when it can be fought.
+   */
+  lock?: 'quest' | 'never' | null
+}
+
+/** Which window an NPC's menu opens (npc.ini JavaScript); null for talk-only NPCs. */
+export type NpcMenu = 'shop' | 'forge' | 'gates' | 'daily' | 'rest'
+
+/** The scene's timed boss (RefresHeartNpc.ini), fought for one ticket item. */
+export interface TicketBoss {
+  /** The listed boss, sent to POST /fight. */
+  id: string
+  /** The variant fought at the player's level (LevelAttackRec). */
+  fightId: string
+  nameKey: string
+  level: number
+  x: number
+  y: number
+  scale: number
+  /** Out now (until `endsAt`), else it next appears at `startsAt`. */
+  active: boolean
+  startsAt: string
+  endsAt: string
+  ticketItemId: string
+  ticketNameKey: string
+  /** Tickets in the bag. */
+  tickets: number
 }
 
 export interface SceneNpc {
@@ -16,6 +45,9 @@ export interface SceneNpc {
   x: number
   y: number
   scale: number
+  menu?: NpcMenu | null
+  /** The building picture (scene clip) this NPC stands for, if any. */
+  clip?: string | null
 }
 
 export interface SceneView {
@@ -27,6 +59,9 @@ export interface SceneView {
   links: number[]
   /** ScenesEntered: every scene the ninja has stood in; the world map colours only these. */
   visitedScenes: number[]
+  /** World map places that open only once entered (reachable on foot from the villages). */
+  visitRequired?: number[]
+  ticketBoss?: TicketBoss | null
   /** What reviving costs here (ReliveSystem): EXP for going home, Gold for reviving here. */
   revive: { homeExpLoss: number; gold: number; goldAllowed: boolean }
 }

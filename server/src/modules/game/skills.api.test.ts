@@ -3,7 +3,7 @@ import { simulateFight } from '@pockie/game-core'
 import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { characters, inventoryItems } from '../../db/schema.js'
+import { characterQuests, characters, inventoryItems } from '../../db/schema.js'
 import {
   EXPLORE_MIN_HP,
   fightMonster,
@@ -99,6 +99,8 @@ describe('POST /api/game/fight with skills', () => {
 
   it('saves 0 HP (defeated) and the remaining MP after a lost fight', async () => {
     await db.delete(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+    // n32002 is a task boss: it can only be fought while one of its quests (10014) is held.
+    await db.insert(characterQuests).values({ characterId, taskId: 10014, progress: [0], state: 0 })
     const body = (await client.post('/api/game/fight', { monsterId: 'n32002' })).json()
     expect(body.won).toBe(false)
     expect(body.character).toMatchObject({ hp: 0, mp: body.replay.fighters[0].mp })

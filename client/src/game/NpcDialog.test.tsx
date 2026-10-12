@@ -4,9 +4,11 @@ import userEvent from '@testing-library/user-event'
 import { useEffect } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { character, equipOffer, villageScene } from '../test/game'
-import { json, mockApi, renderWithProviders } from '../test/utils'
+import { json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import { useTalk } from './api'
 import { NpcDialog } from './NpcDialog'
+import type { SceneNpc } from './types'
+import { OpenWindowProvider } from './windows'
 
 const elder = villageScene.npcs[0]!
 
@@ -102,5 +104,73 @@ describe('NpcDialog', () => {
     const options = await screen.findByRole('list', { name: 'Options' })
     expect(await within(options).findByRole('button', { name: 'End Conversation' })).toBeVisible()
     expect(within(options).queryByRole('button', { name: 'Quests' })).not.toBeInTheDocument()
+  })
+})
+
+describe('NPC menus (Angel City, Demon City, Stone Organization)', () => {
+  function renderMenu(npc: SceneNpc, who = character) {
+    const openWindow = vi.fn()
+    const fetchMock = mockApi({
+      [`POST /api/game/npcs/${npc.id}/talk`]: () => json({ completed: [], character: who }),
+      'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
+      'POST /api/game/rest': () =>
+        json({ cost: 117, character: { ...who, stone: who.stone - 117, hp: who.maxHp } }),
+      'GET /api/game/scene': () => json(villageScene),
+      'GET /api/game/quests': () => json({ quests: [] }),
+      'GET /api/game/inventory': () => json({ items: [] }),
+    })
+    function Menu() {
+      const talk = useTalk()
+      const { mutate } = talk
+      useEffect(() => mutate(npc.id), [mutate])
+      return (
+        <OpenWindowProvider value={openWindow}>
+          <NpcDialog npc={npc} talk={talk} character={who} onClose={vi.fn()} />
+        </OpenWindowProvider>
+      )
+    }
+    renderWithProviders(<Menu />)
+    return { openWindow, fetchMock }
+  }
+  const npc = (id: string, menu: SceneNpc['menu']): SceneNpc => ({
+    id,
+    nameKey: `lg_name_${id}`,
+    x: 0,
+    y: 0,
+    scale: 100,
+    menu,
+  })
+
+  it('opens the blacksmith window from the Angel City Blacksmith', async () => {
+    const { openWindow } = renderMenu(npc('n16003', 'forge'))
+    await userEvent.click(await screen.findByRole('button', { name: 'Blacksmith' }))
+    expect(openWindow).toHaveBeenCalledWith('forge', { npcId: 'n16003' })
+  })
+
+  it.each([
+    ['n16004', 'shop', 'Shop'],
+    ['n17001', 'gates', 'Enter'],
+    ['n16013', 'daily', 'Daily Quests'],
+  ] as const)('routes %s to the %s window', async (id, menu, label) => {
+    const { openWindow } = renderMenu(npc(id, menu))
+    await userEvent.click(await screen.findByRole('button', { name: label }))
+    expect(openWindow).toHaveBeenCalledWith(menu, { npcId: id })
+  })
+
+  it('rests at the Stone Organization for Stone', async () => {
+    const { fetchMock } = renderMenu(npc('n26100', 'rest'), { ...character, level: 40, stone: 200 })
+    expect(await screen.findByRole('dialog', { name: 'Stone Organization' })).toBeInTheDocument()
+    await userEvent.click(await screen.findByRole('button', { name: 'Rest' }))
+    expect(screen.getByText(/for 117 Stone/)).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Rest (117 Stone)' }))
+    expect(requestBody(fetchMock, 'POST /api/game/rest')).toEqual({ npcId: 'n26100' })
+    expect(await screen.findByText(/You feel rested/)).toBeInTheDocument()
+  })
+
+  it('offers no window to a talk-only NPC', async () => {
+    renderMenu(npc('n16001', null))
+    expect(await screen.findByRole('button', { name: 'End Conversation' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Shop' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Rest' })).not.toBeInTheDocument()
   })
 })

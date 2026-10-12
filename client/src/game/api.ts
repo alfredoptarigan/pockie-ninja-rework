@@ -4,6 +4,7 @@ import type {
   CharacterStats,
   CreateCharacterInput,
   CreationOptions,
+  TravelInput,
 } from '@pockie/shared'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
@@ -135,9 +136,20 @@ export function useCreateCharacter() {
   )
 }
 
+/** A scene id is a world map trip; scene exits pass `via: 'link'`, Village / Go out `home` / `out`. */
 export function useTravel() {
-  return useGameAction((sceneId: number) =>
-    post<{ character: Character }>('/api/game/travel', { sceneId }),
+  return useGameAction((input: number | TravelInput) =>
+    post<{ character: Character }>(
+      '/api/game/travel',
+      typeof input === 'number' ? { sceneId: input } : input,
+    ),
+  )
+}
+
+/** The Stone Organization's rest: full HP and MP for Stone. */
+export function useRest() {
+  return useGameAction((npcId: string) =>
+    post<{ cost: number; character: Character }>('/api/game/rest', { npcId }),
   )
 }
 

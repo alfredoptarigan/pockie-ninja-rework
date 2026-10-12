@@ -1,12 +1,22 @@
 import type { Character } from '@pockie/shared'
 import { useState, type ComponentProps } from 'react'
-import { errorMessage, useAcceptQuest, useAvailableQuests, type useTalk } from './api'
+import { errorMessage, useAcceptQuest, useAvailableQuests, useRest, type useTalk } from './api'
 import { useNpcPhoto } from './art'
 import { completedNotice, questName } from './QuestLog'
 import { QuestRewardList } from './Rewards'
 import { Dialog, Notice } from './skin'
 import { GameText, plainText } from './text'
-import type { SceneNpc } from './types'
+import type { NpcMenu, SceneNpc } from './types'
+import { useOpenWindow, type WindowName } from './windows'
+import { restCost } from './world'
+
+/** The menu row that opens an NPC's window (shops, blacksmith, gates, daily quests). */
+const WINDOW_OPTIONS: Record<Exclude<NpcMenu, 'rest'>, { window: WindowName; label: string }> = {
+  shop: { window: 'shop', label: 'Shop' },
+  forge: { window: 'forge', label: 'Blacksmith' },
+  gates: { window: 'gates', label: 'Enter' },
+  daily: { window: 'daily', label: 'Daily Quests' },
+}
 
 /**
  * NPC conversation laid out like the original UI_NpcMenu_Xml (485x242): the photo card on the
@@ -28,7 +38,14 @@ export function NpcDialog({
   const available = useAvailableQuests()
   const accept = useAcceptQuest()
   const photo = useNpcPhoto(npc.id)
-  const [showQuests, setShowQuests] = useState(false)
+  const openWindow = useOpenWindow()
+  const rest = useRest()
+  const [page, setPage] = useState<'main' | 'quests' | 'rest'>('main')
+  const showQuests = page === 'quests'
+  const setShowQuests = (show: boolean) => setPage(show ? 'quests' : 'main')
+  const menu = npc.menu ?? null
+  const windowOption = menu && menu !== 'rest' ? WINDOW_OPTIONS[menu] : undefined
+  const cost = restCost(character.level)
   const [accepted, setAccepted] = useState<number | null>(null)
   const offers = talk.isSuccess
     ? (available.data?.available ?? []).filter(
@@ -48,7 +65,7 @@ export function NpcDialog({
 
   return (
     <Dialog
-      title={plainText(npc.nameKey, 'Villager')}
+      title={plainText(npc.nameKey, npc.menu === 'rest' ? 'Stone Organization' : 'Villager')}
       onClose={onClose}
       className="game-window-bare w-[485px]"
     >
@@ -85,7 +102,21 @@ export function NpcDialog({
             {accept.isError && <Notice tone="error">{errorMessage(accept.error)}</Notice>}
           </div>
           <div className="game-inset h-[134px] overflow-auto px-[5px] py-[6px] font-game text-[13px]">
-            {showQuests ? (
+            {page === 'rest' ? (
+              <section aria-label="Rest" className="flex flex-col gap-px">
+                <p className="px-[9px] py-[3px] text-[#3d2914]">
+                  {cost > 0
+                    ? `Rest here to restore all your HP and chakra for ${cost} Stone.`
+                    : 'Rest here to restore all your HP and chakra for free.'}
+                </p>
+                {rest.isSuccess && <Notice>You feel rested. HP and chakra are full again.</Notice>}
+                {rest.isError && <Notice tone="error">{errorMessage(rest.error)}</Notice>}
+                <Option disabled={rest.isPending} onClick={() => rest.mutate(npc.id)}>
+                  Rest ({cost} Stone)
+                </Option>
+                <Option onClick={() => setPage('main')}>Back</Option>
+              </section>
+            ) : showQuests ? (
               <section aria-label="Quests offered" className="flex flex-col gap-px">
                 {offers.length === 0 && (
                   <p className="px-[9px] py-[3px] text-[#3d2914]">No quests for you right now.</p>
@@ -106,6 +137,18 @@ export function NpcDialog({
                 {offers.length > 0 && (
                   <li>
                     <Option onClick={() => setShowQuests(true)}>Quests</Option>
+                  </li>
+                )}
+                {windowOption && (
+                  <li>
+                    <Option onClick={() => openWindow(windowOption.window, { npcId: npc.id })}>
+                      {windowOption.label}
+                    </Option>
+                  </li>
+                )}
+                {menu === 'rest' && (
+                  <li>
+                    <Option onClick={() => setPage('rest')}>Rest</Option>
                   </li>
                 )}
                 <li>
