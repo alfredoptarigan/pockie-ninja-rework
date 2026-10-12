@@ -2,6 +2,7 @@
 import type { Random } from '@pockie/game-core'
 import {
   exploreFactory,
+  item,
   exploreMonsters,
   type ExploreFactory,
   type ExploreFactoryEntry,
@@ -128,3 +129,30 @@ export function requiredItems(spot: SpotRow) {
     return itemId && Number(count) > 0 ? [{ itemId, count: Number(count) }] : []
   })
 }
+
+/** OnCustomLook: first peek uses Stone; second may use coupons; later peeks require Gold. */
+export function peekCost(spot: SpotRow, count: number, currency: 'gold' | 'giftCoupon') {
+  if (count >= Number(spot.CanLookCount) || count < 0) return null
+  if (count === 0) return { currency: 'stone' as const, amount: Number(spot.FirstMoney ?? 1000) }
+  if (count > 1 && currency !== 'gold') return null
+  const key = ['FirstMoney', 'SecondMoney', 'ThirdMoney', 'FourthMoney', 'FifthMoney'][
+    Math.min(count, 4)
+  ]!
+  return { currency, amount: Number(spot[key] ?? (count === 1 ? 2 : 100)) }
+}
+
+/** OutSearchItem.js / item.ini: consuming one mapped key starts senior search. */
+export function seniorKey(spotId: string) {
+  const ids = [
+    ...Array.from({ length: 24 }, (_, i) => `i${150046 + i}`),
+    ...Array.from({ length: 4 }, (_, i) => `i${155070 + i}`),
+  ]
+  const itemId = ids.find((id) => Number(item(id)?.GetItemsId) === Number(spotId))
+  return itemId ? { itemId, level: Number(item(itemId)?.UseLevel ?? 1) } : null
+}
+
+export const SENIOR_FORBIDDEN_SCENES = [3101, 3102, 111, 121, 131, 141, 151, 161, 171]
+
+/** OnCustomGetBonus type 3 (pet): RandInt(1,100) <= 50. Other item cards always grant. */
+export const cardGranted = (card: ExploreCard, random: Random) =>
+  card.type !== 'pet' || random.int(100) < 50
