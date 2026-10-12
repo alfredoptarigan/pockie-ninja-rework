@@ -64,16 +64,43 @@ describe('NpcDialog', () => {
 
   it('still works with a talk result without rewards', async () => {
     renderConversation({ dialogKey: 'lg_Say_n11001', nameKey: 'lg_name_n11001', completed: [] })
-    expect(await screen.findByRole('button', { name: /^Quests/ })).toBeVisible()
+    expect(await screen.findByRole('button', { name: 'Quests' })).toBeVisible()
     expect(screen.queryByRole('group')).not.toBeInTheDocument()
   })
 
-  it('lists the rewards of the quests on offer', async () => {
+  it('lists one row per quest on offer with Back and End Conversation, like Reborn', async () => {
     renderConversation({ dialogKey: 'lg_Say_n11001', nameKey: 'lg_name_n11001', completed: [] })
-    await userEvent.click(await screen.findByRole('button', { name: 'Quests (1)' }))
+    const options = await screen.findByRole('list', { name: 'Options' })
+    expect(
+      within(options)
+        .getAllByRole('button')
+        .map((b) => b.textContent),
+    ).toEqual(['Quests', 'End Conversation'])
+
+    await userEvent.click(within(options).getByRole('button', { name: 'Quests' }))
     const offered = screen.getByRole('region', { name: 'Quests offered' })
-    expect(within(offered).getByRole('group', { name: 'Rewards' })).toHaveTextContent(
-      'EXP +10, Coupons +10',
-    )
+    const row = within(offered).getByRole('article', { name: 'Weapon Equipment' })
+    expect(row).toHaveTextContent('Accept quest: Weapon Equipment')
+    expect(
+      within(offered)
+        .getAllByRole('button')
+        .map((b) => b.textContent),
+    ).toEqual(['Accept quest: Weapon Equipment', 'Back', 'End Conversation'])
+
+    await userEvent.click(within(offered).getByRole('button', { name: 'Back' }))
+    expect(screen.getByRole('list', { name: 'Options' })).toBeVisible()
+  })
+
+  it('offers no Quests option when the NPC has none', async () => {
+    mockApi({
+      'POST /api/game/npcs/n11001/talk': () =>
+        json({ dialogKey: 'lg_Say_n11001', nameKey: 'lg_name_n11001', completed: [], character }),
+      'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
+      'GET /api/game/quests': () => json({ quests: [] }),
+    })
+    renderWithProviders(<Conversation />)
+    const options = await screen.findByRole('list', { name: 'Options' })
+    expect(await within(options).findByRole('button', { name: 'End Conversation' })).toBeVisible()
+    expect(within(options).queryByRole('button', { name: 'Quests' })).not.toBeInTheDocument()
   })
 })

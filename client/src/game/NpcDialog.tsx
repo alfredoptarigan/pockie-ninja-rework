@@ -1,14 +1,19 @@
 import type { Character } from '@pockie/shared'
-import { useState, type ReactNode } from 'react'
+import { useState, type ComponentProps } from 'react'
 import { errorMessage, useAcceptQuest, useAvailableQuests, type useTalk } from './api'
 import { useNpcPhoto } from './art'
-import { completedNotice } from './QuestLog'
+import { completedNotice, questName } from './QuestLog'
 import { QuestRewardList } from './Rewards'
-import { Dialog, GameButton, Notice } from './skin'
+import { Dialog, Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { SceneNpc } from './types'
 
-/** NPC conversation like the original: photo on the left, words and options on the right. */
+/**
+ * NPC conversation laid out like the original UI_NpcMenu_Xml (485x242): the photo card on the
+ * left, the NPC's words on the right and the options under them. The first page offers Quests
+ * (when the NPC has some) and End Conversation; Quests lists one row per quest, Back and End
+ * Conversation.
+ */
 export function NpcDialog({
   npc,
   talk,
@@ -42,92 +47,86 @@ export function NpcDialog({
   }
 
   return (
-    <Dialog title={plainText(npc.nameKey, 'Villager')} onClose={onClose} className="w-[40rem]">
-      <div className="flex min-h-56 gap-3">
-        <div className="game-card grid w-40 shrink-0 place-items-center overflow-hidden">
-          {photo && <img src={photo} alt="" className="max-h-56 w-full object-contain" />}
+    <Dialog
+      title={plainText(npc.nameKey, 'Villager')}
+      onClose={onClose}
+      className="game-window-bare w-[485px]"
+    >
+      <div className="flex gap-[5px]">
+        <div className="game-npc-card relative h-[204px] w-[161px] shrink-0">
+          <div className="game-npc-frame absolute top-[13px] left-[13px] h-[182px] w-[137px] overflow-hidden">
+            {photo && <img src={photo} alt="" className="size-full object-contain" />}
+          </div>
         </div>
-        <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <div className="game-card min-h-16 p-2">
+        <div className="flex w-[309px] flex-col gap-[5px]">
+          <div className="game-inset flex min-h-[65px] flex-col gap-1 p-[5px] font-[monospace] text-[12px] leading-[14px] text-black">
             {talk.isPending && <p>...</p>}
             {talk.isError && <Notice tone="error">{errorMessage(talk.error)}</Notice>}
             {talk.data && (
-              <p>
+              <p className="whitespace-pre-wrap">
                 <GameText k={talk.data.dialogKey} fallback="Good day, ninja." />
               </p>
             )}
-          </div>
-          {talk.data && talk.data.completed.length > 0 && (
-            <Notice>{completedNotice(talk.data.completed).trim()}</Notice>
-          )}
-          {talk.data?.rewards?.map((handIn) => (
-            <div key={handIn.taskId} className="game-card px-2 pb-1">
+            {talk.data && talk.data.completed.length > 0 && (
+              <Notice>{completedNotice(talk.data.completed).trim()}</Notice>
+            )}
+            {talk.data?.rewards?.map((handIn) => (
               <QuestRewardList
+                key={handIn.taskId}
                 rewards={handIn}
-                title={`Received for ${plainText(`lg_Task_${handIn.taskId}`, `Quest ${handIn.taskId}`)}`}
+                title={`Received for ${questName({ taskId: handIn.taskId, nameKey: `lg_Task_${handIn.taskId}` })}`}
               />
-            </div>
-          ))}
-          {accepted !== null && (
-            <Notice>
-              Quest accepted: {plainText(`lg_Task_${accepted}`, `Quest ${accepted}`)}.
-            </Notice>
-          )}
-          {accept.isError && <Notice tone="error">{errorMessage(accept.error)}</Notice>}
-          {showQuests ? (
-            <section aria-label="Quests offered" className="flex flex-col gap-2">
-              {offers.length === 0 && <p className="text-xs">No quests for you right now.</p>}
-              {offers.map((offer) => (
-                <article key={offer.taskId} className="game-card p-2">
-                  <h3 className="font-bold">
-                    <GameText k={`lg_Task_${offer.taskId}`} fallback={`Quest ${offer.taskId}`} />
-                  </h3>
-                  {offer.talkKey && (
-                    <p className="mt-1 text-xs">
-                      <GameText k={offer.talkKey} />
-                    </p>
-                  )}
-                  <QuestRewardList rewards={offer.rewards} />
-                  <GameButton
-                    small
-                    className="mt-2"
-                    disabled={accept.isPending}
-                    onClick={() => onAccept(offer.taskId)}
-                  >
-                    Accept quest
-                  </GameButton>
-                </article>
-              ))}
-              <DialogOption onClick={() => setShowQuests(false)}>Back</DialogOption>
-            </section>
-          ) : (
-            <ul aria-label="Options" className="game-card flex flex-col p-1">
-              {talk.isSuccess && (
+            ))}
+            {accepted !== null && (
+              <Notice>
+                Quest accepted: {questName({ taskId: accepted, nameKey: `lg_Task_${accepted}` })}.
+              </Notice>
+            )}
+            {accept.isError && <Notice tone="error">{errorMessage(accept.error)}</Notice>}
+          </div>
+          <div className="game-inset h-[134px] overflow-auto px-[5px] py-[6px] font-game text-[13px]">
+            {showQuests ? (
+              <section aria-label="Quests offered" className="flex flex-col gap-px">
+                {offers.length === 0 && (
+                  <p className="px-[9px] py-[3px] text-[#3d2914]">No quests for you right now.</p>
+                )}
+                {offers.map((offer) => (
+                  <article key={offer.taskId} aria-label={questName(offer)}>
+                    <Option disabled={accept.isPending} onClick={() => onAccept(offer.taskId)}>
+                      Accept quest
+                      <span aria-hidden="true">: {questName(offer)}</span>
+                    </Option>
+                  </article>
+                ))}
+                <Option onClick={() => setShowQuests(false)}>Back</Option>
+                <Option onClick={onClose}>End Conversation</Option>
+              </section>
+            ) : (
+              <ul aria-label="Options" className="flex flex-col gap-px">
+                {offers.length > 0 && (
+                  <li>
+                    <Option onClick={() => setShowQuests(true)}>Quests</Option>
+                  </li>
+                )}
                 <li>
-                  <DialogOption onClick={() => setShowQuests(true)}>
-                    Quests{offers.length > 0 ? ` (${offers.length})` : ''}
-                  </DialogOption>
+                  <Option onClick={onClose}>End Conversation</Option>
                 </li>
-              )}
-              <li>
-                <DialogOption onClick={onClose}>End Conversation</DialogOption>
-              </li>
-            </ul>
-          )}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </Dialog>
   )
 }
 
-function DialogOption({ onClick, children }: { onClick: () => void; children: ReactNode }) {
+/** One option row of the NPC menu (299x23). */
+function Option(props: ComponentProps<'button'>) {
   return (
     <button
       type="button"
-      onClick={onClick}
-      className="w-full rounded-sm border-b border-[#e3d39a] px-3 py-1 text-left hover:bg-[#f7e9a8]"
-    >
-      {children}
-    </button>
+      className="game-npc-option block h-[23px] w-full truncate px-[9px] text-left"
+      {...props}
+    />
   )
 }

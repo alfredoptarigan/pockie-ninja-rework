@@ -157,7 +157,7 @@ function GameScreen({ character }: { character: Character }) {
       {openWindow === 'character' && <CharacterWindow character={character} onClose={close} />}
       {openWindow === 'quests' && (
         <Dialog title="Quest Log" onClose={close} className="w-[32rem]">
-          <QuestLog />
+          <QuestLog onNpc={openNpc} />
         </Dialog>
       )}
       {openWindow === 'map' && <WorldMap character={character} onClose={close} />}
