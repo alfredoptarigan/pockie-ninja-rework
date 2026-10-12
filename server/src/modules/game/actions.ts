@@ -6,7 +6,7 @@ import {
   type DropEntry,
   type DropLib,
 } from '@pockie/game-core'
-import { BAG_SLOTS, buyPouchesSchema, CLOSED_SCENES, itemActionParamsSchema } from '@pockie/shared'
+import { BAG_SLOTS, buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
 import { and, count, eq, isNull } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
@@ -23,9 +23,7 @@ import {
   nationScenes,
   npc,
   scene,
-  sceneLinks,
   sceneSpawns,
-  sceneSwitchRule,
   subTasks,
   task,
 } from '../../game/data.js'
@@ -57,6 +55,8 @@ import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
+import { homeScene, travelRefusal } from './travel.js'
+import { recordSceneEntered } from './world.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 const READY = 1
@@ -67,7 +67,6 @@ const HANDED_IN_TYPES = new Set([1, 3, 5])
 const itemParams = itemActionParamsSchema
 const taskParams = z.object({ taskId: z.coerce.number().int().positive() })
 const npcParams = z.object({ npcId: z.string().regex(/^n\d+$/) })
-const travelBody = z.object({ sceneId: z.number().int().positive() })
 const reviveBody = z.object({ mode: z.enum(['home', 'gold']) })
 
 type CharacterRow = typeof characters.$inferSelect
@@ -378,35 +377,26 @@ export async function actionRoutes(
   })
 
   app.post('/travel', { config: { rateLimit: RATE_LIMITS.travel } }, async (request) => {
-    const { sceneId } = travelBody.parse(request.body)
+    const input = travelSchema.parse(request.body)
     const userId = requireUser(request).id
     const result = await db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
       requireAlive(character, 'travel')
-      const target = scene(sceneId)
-      const rule = sceneSwitchRule(sceneId)
-      // Scene exits (scenequeue.ini links, SceneSystem.CanSwitchScene) or the world map
-      // (SceneSwitchRuleSystem.CanChangeScene: the target needs a sceneswitchrule.ini section; a
-      // current scene missing from it travels free, it only prices the trip).
-      const linked = sceneLinks(character.sceneId).includes(sceneId)
-      if (
-        !target ||
-        CLOSED_SCENES.includes(sceneId) ||
-        (!rule && !linked) ||
-        Number(target.IsStart) !== 1
-      ) {
-        throw bad('no_route', 'You cannot travel there from here.')
-      }
-      const nation = Number(target.Nation)
-      if (nation !== -1 && nation !== character.nation) {
-        throw bad('other_village', 'Only ninjas of that village may enter.')
-      }
-      if (
-        character.level < Math.max(Number(rule?.RequireLevel ?? -1), Number(target.Level ?? -1))
-      ) {
-        throw bad('too_low', 'Your level is too low for that area.')
+      let sceneId: number
+      if ('sceneId' in input) {
+        const refused = travelRefusal(
+          character,
+          await loadQuests(tx, character.id),
+          input.sceneId,
+          input.via,
+        )
+        if (refused) throw bad(refused.code, refused.message)
+        sceneId = input.sceneId
+      } else {
+        sceneId = homeScene(character, input.via)
       }
       await tx.update(characters).set({ sceneId }).where(eq(characters.id, character.id))
+      await recordSceneEntered(tx, character.id, sceneId)
       return { character: await reload(tx, character.id) }
     })
     // After commit, so sockets never move to a scene the database rolled back.

@@ -5,7 +5,7 @@ import type { Db } from '../../db/client.js'
 import { characters } from '../../db/schema.js'
 import { fightMonster, monsterDrops } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
-import { rookieHandIns } from '../../game/progress.js'
+import { rookieHandIns, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { reviveTerms } from './actions.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
@@ -34,7 +34,7 @@ export function sceneMonsters(sceneId: number, playerLevel: number) {
  * SceneSystem.SetScenePass: remembers the scene the ninja stands in (ScenesEntered), once.
  * Looking at the scene is what entering it means, so this covers creation and every travel.
  */
-export async function recordSceneEntered(db: Db, characterId: string, sceneId: number) {
+export async function recordSceneEntered(db: Db | Tx, characterId: string, sceneId: number) {
   const visited = characters.scenesEntered
   const [row] = await db
     .update(characters)
