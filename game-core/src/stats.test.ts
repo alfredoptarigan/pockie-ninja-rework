@@ -66,3 +66,83 @@ describe('deriveStats (RefreshSystem.java)', () => {
     expect(stats.dodge).toBe(Math.trunc((1 + 2) * 150 * 0.01))
   })
 })
+
+describe('deriveStats equipment terms (RefreshSystem.java 283-393)', () => {
+  it('applies separate min and max attack multipliers on top of the shared one', () => {
+    // 359-360: MinAtkMul / MaxAtkMul, AbsAddAtkMul adds to both (293-296).
+    const stats = deriveStats(naruto, 1, {
+      minAttack: 7,
+      maxAttack: 8,
+      attackMul: 20,
+      minAttackMul: 100,
+      maxAttackMul: 200,
+    })
+    expect(stats.minAttack).toBe(Math.trunc(8 * (1020 + 20 + 100) * 0.001))
+    expect(stats.maxAttack).toBe(Math.trunc(9 * (1020 + 20 + 200) * 0.001))
+  })
+
+  it('multiplies hit, crit, defence, pierce, tough and neglect defence by their percent terms', () => {
+    const stats = deriveStats(naruto, 1, {
+      hit: 43,
+      hitMul: 20,
+      crit: 25,
+      critMul: 18,
+      defense: 34,
+      defenseMul: 22,
+      pierce: 51,
+      pierceMul: 18,
+      tough: 33,
+      toughMul: 22,
+      neglectDefense: 36,
+      neglectDefenseMul: 19,
+    })
+    expect(stats).toMatchObject({
+      hit: Math.trunc(43 * 120 * 0.01),
+      crit: Math.trunc(25 * 118 * 0.01),
+      defense: Math.trunc(34 * 122 * 0.01),
+      pierce: Math.trunc(51 * 118 * 0.01),
+      tough: Math.trunc(33 * 122 * 0.01),
+      neglectDefense: Math.trunc(36 * 119 * 0.01),
+    })
+  })
+
+  it('passes the plain sums through for the fighter and rewards', () => {
+    const stats = deriveStats(naruto, 1, {
+      counterBomb: 1,
+      vampiricHp: 7,
+      decDamage: 7,
+      absorb: 3,
+      rebound: 4,
+      priority: 5,
+      luck: 6,
+      skillAdd0: 3000,
+      skillAdd4: 1500,
+      expMul: 10,
+      capMul: 11,
+      dropMul: 12,
+    })
+    expect(stats).toMatchObject({
+      counterBomb: 1,
+      vampiricHp: 7,
+      decDamage: 7,
+      absorb: 3,
+      rebound: 4,
+      priority: 5,
+      luck: 6,
+      skillAdd: [3000, 0, 0, 0, 1500, 0, 0, 0, 0, 0],
+      expMul: 10,
+      capMul: 11,
+      dropMul: 12,
+    })
+  })
+
+  it('defaults every new term to zero', () => {
+    expect(deriveStats(naruto, 1)).toMatchObject({
+      pierce: 0,
+      tough: 0,
+      neglectDefense: 0,
+      priority: 0,
+      skillAdd: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    })
+  })
+})
