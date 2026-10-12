@@ -1,40 +1,42 @@
-// HUD pieces laid over the scene picture at the original game's positions (1280x720 HUD pixels,
-// see GameApp): top strip with currencies and Settings, player card top left, scene plaque top
-// right, Level/EXP bottom centre, menu icons bottom right.
+// HUD pieces drawn 1:1 and anchored to the window edges, as the original client (AlignType) and
+// Pockie Ninja Reborn do (docs/ui-layout-reborn.md): top strip with currencies and Settings,
+// player card top left (UI_RoleIcon), scene plaque top right (UI_SmallMap), EXP strip and menu
+// buttons bottom right (UI_BottomMenu).
 import type { Character } from '@pockie/shared'
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { gameUi } from '../generated/game-ui'
 import { useLogout } from '../lib/auth'
 import { useOutfitPortrait } from './art'
-import { Bar, GameButton } from './skin'
+import { GameButton } from './skin'
 import { plainText } from './text'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
 
 const CURRENCIES = [
-  { key: 'stone', label: 'Stone', box: 'game-currency-stone' },
-  { key: 'gold', label: 'Gold', box: 'game-currency-gold' },
-  { key: 'giftCoupon', label: 'Coupons', box: 'game-currency-coupon' },
+  { key: 'stone', label: 'Stone', box: 'game-currency-stone', color: 'text-[#f5f5f5]' },
+  { key: 'gold', label: 'Gold', box: 'game-currency-gold', color: 'text-[#ffd700]' },
+  { key: 'giftCoupon', label: 'Coupons', box: 'game-currency-coupon', color: 'text-[#f5f5f5]' },
 ] as const
+const SHADOW = '[text-shadow:0_0_2px_#000,0_0_2px_#000,0_0_2px_#000]'
+const number = (value: number) => value.toLocaleString('en-US')
 
 export function TopBar({ character }: { character: Character }) {
   return (
-    <div className="game-topbar pointer-events-auto absolute inset-x-0 top-0 flex h-[28px] items-center justify-between px-1">
-      <dl aria-label="Currencies" className="flex gap-1 font-game text-xs">
-        {CURRENCIES.map(({ key, label, box }) => (
-          <div
-            key={key}
-            className={`flex h-6 w-[115px] items-center justify-end pr-2 pl-7 ${box}`}
-            title={label}
-          >
+    <div className="game-topbar pointer-events-auto absolute inset-x-0 top-0 h-[30px]">
+      <dl aria-label="Currencies" className="absolute top-[2px] left-[4px] flex gap-[6px]">
+        {CURRENCIES.map(({ key, label, box, color }) => (
+          <div key={key} className={`relative h-6 w-[115px] ${box}`} title={label}>
             <dt className="sr-only">{label}</dt>
-            <dd className="font-bold text-white [text-shadow:var(--shadow-game-text)]">
-              {character[key].toLocaleString('en-US')}
+            <dd
+              className={`absolute top-[4px] left-[26px] w-[80px] text-right font-mono text-xs ${color}`}
+            >
+              {number(character[key])}
             </dd>
           </div>
         ))}
       </dl>
-      <SettingsMenu />
+      <div className="absolute top-[4px] right-[6px]">
+        <SettingsMenu />
+      </div>
     </div>
   )
 }
@@ -65,7 +67,7 @@ export function SettingsMenu() {
       }}
     >
       <GameButton
-        className="!min-h-6 !min-w-0 !px-3 text-xs"
+        className="h-[22px] w-[66px] !min-w-0 !px-0"
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((o) => !o)}
@@ -99,53 +101,112 @@ export function SettingsMenu() {
   )
 }
 
-/** Portrait, name, level and HP/MP at the top left. */
+/** One bar of the player card: the original bar art with its fill clipped, percent on top. */
+function CardBar({
+  label,
+  value,
+  max,
+  kind,
+  x,
+  y,
+  color,
+}: {
+  label: string
+  value: number
+  max: number
+  kind: 'hp' | 'mp'
+  x: number
+  y: number
+  color: string
+}) {
+  const percent = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0
+  return (
+    <div
+      role="meter"
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-valuenow={value}
+      aria-valuetext={`${value} / ${max}`}
+      title={`${label} ${number(value)} / ${number(max)}`}
+      className={`game-bar game-bar-${kind} !absolute h-[11px] w-[106px]`}
+      style={{ left: x, top: y, '--fill': `${percent}%` } as CSSProperties}
+    >
+      <span
+        className={`absolute inset-0 z-10 text-center text-[8px] leading-[11px] font-bold ${color} [text-shadow:1px_1px_2px_#000,-1px_-1px_2px_#000]`}
+      >
+        {percent}%
+      </span>
+    </div>
+  )
+}
+
+/** Portrait, name, level, HP/MP bars and pouch icons at the top left (UI_RoleIcon). */
 export function PlayerCard({ character }: { character: Character }) {
   const portrait = useOutfitPortrait(character.clothing)
+  const pouch = (value: number) => `${number(value)} / ${number(character.pouchMax)}`
+  const pouchTip = 'Pouches refill your HP and chakra after every won fight.'
   return (
     <section
       aria-label="Character"
-      className="pointer-events-auto absolute top-[30px] left-1 flex items-start gap-1 font-game"
+      className="pointer-events-auto absolute top-[31px] left-[6px] h-[82px] w-[220px] font-game"
     >
-      <div className="relative">
-        <div className="grid size-[74px] place-items-center overflow-hidden rounded-full border-2 border-[#d9b75a] bg-[radial-gradient(circle,#4a4e51,#141617)] shadow-[0_2px_4px_rgb(0_0_0/0.6)]">
-          {portrait && <img src={portrait} alt="" className="size-full object-cover" />}
-        </div>
-        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border border-[#6b6f72] bg-[#1c1f21] px-2 text-[11px] font-bold whitespace-nowrap text-white">
-          Lv. {character.level}
-        </span>
+      <div className="game-role-card absolute top-0 left-0 h-[78px] w-[205px]" />
+      <div className="absolute top-0 left-0 size-[82px] overflow-hidden rounded-full">
+        {portrait && <img src={portrait} alt="" className="size-full object-cover" />}
       </div>
-      <div className="flex flex-col gap-0.5 rounded-tr-[28px] rounded-br-md border border-[#5d6163] bg-[linear-gradient(110deg,rgb(44_47_49/0.92)_0%,rgb(20_22_23/0.92)_60%,rgb(58_61_63/0.92)_100%)] py-1 pr-5 pl-2">
-        <h2 className="text-sm font-bold text-trim [text-shadow:var(--shadow-game-text)]">
-          {character.name}
-        </h2>
-        <Bar label="HP" value={character.hp} max={character.maxHp} kind="hp" />
-        <Bar label="MP" value={character.mp} max={character.maxMp} kind="mp" />
-        <Pouches character={character} />
-      </div>
+      <h2
+        className={`absolute top-[2px] left-[100px] w-[100px] truncate text-[11px] font-bold text-[#ffd700] ${SHADOW}`}
+      >
+        {character.name}
+      </h2>
+      <div className="game-role-letters absolute top-[18px] left-[73px] h-[34px] w-[27px]" />
+      <CardBar
+        label="HP"
+        value={character.hp}
+        max={character.maxHp}
+        kind="hp"
+        x={99}
+        y={18}
+        color="text-[#ffe4e1]"
+      />
+      <CardBar
+        label="MP"
+        value={character.mp}
+        max={character.maxMp}
+        kind="mp"
+        x={95}
+        y={30}
+        color="text-[#e0e0ff]"
+      />
+      <img
+        src="/assets/game/ui/refill-hp.webp"
+        alt=""
+        title={`HP pouch ${pouch(character.hpPouch)}. ${pouchTip}`}
+        className="absolute top-[18px] left-[204px] h-[12px] w-[16px]"
+      />
+      <img
+        src="/assets/game/ui/refill-mp.webp"
+        alt=""
+        title={`MP pouch ${pouch(character.mpPouch)}. ${pouchTip}`}
+        className="absolute top-[30px] left-[200px] h-[12px] w-[16px]"
+      />
+      <dl aria-label="Pouches" className="sr-only">
+        <dt>HP pouch</dt>
+        <dd>{pouch(character.hpPouch)}</dd>
+        <dt>MP pouch</dt>
+        <dd>{pouch(character.mpPouch)}</dd>
+      </dl>
+      <span
+        className={`absolute top-[58px] left-[106px] text-[11px] font-bold text-white ${SHADOW}`}
+      >
+        Lv. {character.level}
+      </span>
     </section>
   )
 }
 
-/** HP and MP pouch amounts: they refill the bars after won fights (RoleUseSystem). */
-function Pouches({ character }: { character: Character }) {
-  const amount = (value: number) =>
-    `${value.toLocaleString('en-US')} / ${character.pouchMax.toLocaleString('en-US')}`
-  return (
-    <dl
-      aria-label="Pouches"
-      title="Pouches refill your HP and chakra after every won fight."
-      className="grid grid-cols-[auto_1fr] gap-x-1 text-[10px] leading-tight text-white"
-    >
-      <dt className="text-[#ff7dfa]">HP pouch</dt>
-      <dd>{amount(character.hpPouch)}</dd>
-      <dt className="text-[#66ccff]">MP pouch</dt>
-      <dd>{amount(character.mpPouch)}</dd>
-    </dl>
-  )
-}
-
-/** Scene name plaque with the Village/Leave and World Map buttons, top right. */
+/** Scene name plaque with the Village/Leave and World Map buttons, top right (UI_SmallMap). */
 export function ScenePlaque({
   sceneId,
   inVillage,
@@ -165,42 +226,56 @@ export function ScenePlaque({
   return (
     <section
       aria-label="Location"
-      className="game-hud pointer-events-auto absolute top-[32px] right-1 flex w-[180px] flex-col gap-1 p-1.5 font-game"
+      className="game-map-plaque pointer-events-auto absolute top-[30px] right-[6px] h-[54px] w-[139px] font-game"
     >
-      <h2 className="game-field truncate px-2 text-center text-sm leading-6 font-bold tracking-wide">
+      <h2 className="absolute top-[8px] left-[8px] w-[125px] truncate text-center font-mono text-xs leading-[14px] text-black">
         {name}
       </h2>
-      <div className="flex gap-1">
-        <GameButton
-          small
-          className="flex-1 whitespace-nowrap"
-          disabled={defeated}
-          title={defeated ? DEFEATED_REASON : undefined}
-          onClick={onVillage}
-        >
-          {inVillage ? 'Leave' : 'Village'}
-        </GameButton>
-        <GameButton small className="flex-1 whitespace-nowrap" onClick={onWorldMap}>
-          World Map
-        </GameButton>
-      </div>
+      <GameButton
+        small
+        className="absolute top-[31px] left-[6px] h-5 w-[46px] !min-h-0 !min-w-0 !px-0"
+        disabled={defeated}
+        title={defeated ? DEFEATED_REASON : undefined}
+        onClick={onVillage}
+      >
+        {inVillage ? 'Leave' : 'Village'}
+      </GameButton>
+      <GameButton
+        small
+        className="absolute top-[31px] left-[63px] h-5 w-[70px] !min-h-0 !min-w-0 !px-0"
+        onClick={onWorldMap}
+      >
+        World Map
+      </GameButton>
     </section>
   )
 }
 
-/** Level and EXP bar, bottom centre. */
+/** Level and EXP bar left of the menu buttons, bottom right (UI_BottomMenu BSD). */
 export function ExpStrip({ character }: { character: Character }) {
   const next = expToNext(character.level)
+  const percent = next ? Math.min(100, Math.round((character.exp / next) * 100)) : 100
   return (
     <section
       aria-label="Experience"
-      className="game-hud pointer-events-auto absolute bottom-1 left-[488px] flex w-[300px] flex-col px-2 py-0.5 font-game text-[11px] leading-tight"
+      className={`game-topbar pointer-events-auto absolute right-[472px] bottom-px h-[33px] w-[234px] font-game text-xs text-[#f5f5f5] ${SHADOW}`}
     >
-      <span>Level: {character.level}</span>
+      <span className="absolute top-[3px] left-[6px] leading-[14px]">Level: {character.level}</span>
+      <span className="absolute top-[16px] left-[6px] leading-[14px]">EXP:</span>
       {next === undefined ? (
-        <span>EXP {character.exp} (max level)</span>
+        <span className="absolute top-[16px] left-[38px] leading-[14px]">max level</span>
       ) : (
-        <Bar label="EXP" value={character.exp} max={next} kind="exp" />
+        <div
+          role="meter"
+          aria-label="EXP"
+          aria-valuemin={0}
+          aria-valuemax={next}
+          aria-valuenow={character.exp}
+          aria-valuetext={`${character.exp} / ${next}`}
+          title={`EXP ${number(character.exp)} / ${number(next)}`}
+          className="game-bar game-bar-exp !absolute top-[19px] left-[38px] h-[10px] w-[189px]"
+          style={{ '--fill': `${percent}%` } as CSSProperties}
+        />
       )}
     </section>
   )
@@ -208,76 +283,50 @@ export function ExpStrip({ character }: { character: Character }) {
 
 export type MenuWindow = 'bag' | 'character' | 'quests'
 
-const SOON = ['Skills', 'Pets', 'Friends', 'Shop', 'Mail']
+/** The eight buttons of UI_BottomMenu.as, in its order, with the windows we have. */
+const MENU: { piece: string; label: string; window?: MenuWindow }[] = [
+  { piece: 'package', label: 'Bag', window: 'bag' },
+  { piece: 'role', label: 'Character', window: 'character' },
+  { piece: 'skill', label: 'Skills' },
+  { piece: 'task', label: 'Quests', window: 'quests' },
+  { piece: 'social', label: 'Friends' },
+  { piece: 'rank', label: 'Rankings' },
+  { piece: 'mart', label: 'Market' },
+  { piece: 'shop', label: 'Shop' },
+]
 
-/** Menu icons, bottom right: Bag, Character and Quests open windows; the rest are not built. */
-export function MenuBar({
-  character,
-  onOpen,
-}: {
-  character: Character
-  onOpen: (window: MenuWindow) => void
-}) {
-  const portrait = useOutfitPortrait(character.clothing)
-  const icon = (src: string | undefined) =>
-    src ? <img src={src} alt="" className="max-h-[26px] max-w-[30px] object-contain" /> : null
+/** Menu buttons, bottom right: Bag, Character and Quests open windows; the rest are not built. */
+export function MenuBar({ onOpen }: { onOpen: (window: MenuWindow) => void }) {
   return (
     <nav
       aria-label="Menu"
-      className="game-hud pointer-events-auto absolute right-1 bottom-1 flex gap-1 p-1"
+      className="game-topbar pointer-events-auto absolute right-[4px] bottom-px flex h-[33px] w-[465px] items-start pt-[3px] pl-[3px]"
     >
-      <MenuIcon label="Bag" onClick={() => onOpen('bag')}>
-        {icon(gameUi.pieces['icon-bag']?.file)}
-      </MenuIcon>
-      <MenuIcon label="Character" onClick={() => onOpen('character')}>
-        {portrait ? (
-          <img src={portrait} alt="" className="size-[26px] rounded object-cover" />
-        ) : (
-          'Char'
-        )}
-      </MenuIcon>
-      <MenuIcon label="Quests" onClick={() => onOpen('quests')}>
-        {icon(gameUi.pieces['icon-quests']?.file)}
-      </MenuIcon>
-      {SOON.map((label) => (
-        <MenuIcon key={label} label={label}>
-          {label}
-        </MenuIcon>
-      ))}
+      {MENU.map(({ piece, label, window }) => {
+        const art = (state: string) => `url(/assets/game/ui/menu-${piece}-${state}.webp)`
+        return (
+          <button
+            key={piece}
+            type="button"
+            aria-label={window ? label : `${label} (coming soon)`}
+            aria-disabled={window ? undefined : true}
+            title={window ? label : `${label}: coming soon`}
+            onClick={window ? () => onOpen(window) : undefined}
+            className={`h-[28px] w-[50px] bg-(image:--up) bg-size-[100%_100%] focus-visible:outline-2 focus-visible:outline-[#ffe27a] ${
+              window
+                ? 'hover:bg-(image:--over) active:bg-(image:--down)'
+                : 'cursor-not-allowed opacity-50'
+            }`}
+            style={
+              {
+                '--up': art('up'),
+                '--over': art('over'),
+                '--down': art('down'),
+              } as CSSProperties
+            }
+          />
+        )
+      })}
     </nav>
-  )
-}
-
-function MenuIcon({
-  label,
-  onClick,
-  children,
-}: {
-  label: string
-  /** Missing for features that are not built yet: shown greyed with "Coming soon". */
-  onClick?: () => void
-  children: ReactNode
-}) {
-  const tip = onClick ? label : 'Coming soon'
-  return (
-    <span className="group relative">
-      <button
-        type="button"
-        aria-label={onClick ? label : `${label} (coming soon)`}
-        aria-disabled={onClick ? undefined : true}
-        onClick={onClick}
-        className={`grid h-[30px] w-[40px] place-items-center rounded border border-[#6b6f72] bg-[linear-gradient(180deg,#5a5e61,#26292b)] text-[9px] leading-none font-bold text-white hover:brightness-125 ${
-          onClick ? '' : 'cursor-not-allowed opacity-50 grayscale'
-        }`}
-      >
-        {children}
-      </button>
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-full left-1/2 mb-1 hidden -translate-x-1/2 rounded border border-[#6b6f72] bg-[#1c1f21] px-2 py-0.5 text-[11px] whitespace-nowrap text-white group-hover:block group-has-focus-visible:block"
-      >
-        {tip}
-      </span>
-    </span>
   )
 }

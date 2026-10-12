@@ -215,16 +215,22 @@ export function Dialog({
   )
 }
 
-/** Scale that fits a fixed-size stage (the original Flash stage) into the window. */
-export function useFitScale(width: number, height: number) {
-  const [scale, setScale] = useState(() =>
-    Math.min(window.innerWidth / width, window.innerHeight / height),
-  )
+/**
+ * Scale of a fixed-size stage (the original Flash stage) in the window: `contain` fits all of
+ * it, `cover` fills the window and crops the overflow.
+ */
+export function useFitScale(width: number, height: number, mode: 'contain' | 'cover' = 'contain') {
+  const fit = () => {
+    const pick = mode === 'cover' ? Math.max : Math.min
+    return pick(window.innerWidth / width, window.innerHeight / height)
+  }
+  const [scale, setScale] = useState(fit)
   useEffect(() => {
-    const onResize = () =>
-      setScale(Math.min(window.innerWidth / width, window.innerHeight / height))
+    const onResize = () => setScale(fit())
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [width, height])
+    // fit only reads the props listed here.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, mode])
   return scale
 }

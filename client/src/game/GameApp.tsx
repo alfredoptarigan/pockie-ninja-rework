@@ -50,13 +50,17 @@ export default function GameApp({ view }: { view: 'game' | 'create' }) {
   )
 }
 
-/** The HUD is laid out on a 1280x720 stage and scaled to the screen like the original Flash. */
+/**
+ * The scene keeps the original 1280x720 stage, scaled to cover the window (explore and drop
+ * overlays share it through --hud-scale). The HUD and windows draw 1:1 on top, anchored to the
+ * window edges like the original client and Pockie Ninja Reborn.
+ */
 const STAGE = { width: 1280, height: 720 }
 
 type Window = MenuWindow | 'map'
 
 function GameScreen({ character }: { character: Character }) {
-  const scale = useFitScale(STAGE.width, STAGE.height)
+  const scale = useFitScale(STAGE.width, STAGE.height, 'cover')
   const scene = useScene()
   const talk = useTalk()
   const travel = useTravel()
@@ -91,25 +95,23 @@ function GameScreen({ character }: { character: Character }) {
   return (
     <div
       data-game-ui
-      className="grid h-[100dvh] w-screen place-items-center overflow-hidden bg-black font-game text-parchment"
+      className="h-[100dvh] w-screen overflow-hidden bg-black font-game text-parchment"
       style={{ '--hud-scale': scale } as CSSProperties}
     >
-      <main
-        aria-label="Game"
-        className="relative overflow-hidden"
-        style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
-      >
-        <SceneView
-          key={character.sceneId}
-          character={character}
-          onNpc={openNpc}
-          onOpenBag={openBag}
-        />
-        {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
+      <main aria-label="Game" className="relative size-full overflow-hidden">
         <div
-          className="pointer-events-none absolute top-0 left-0"
-          style={{ width: STAGE.width, height: STAGE.height, zoom: scale }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
         >
+          <SceneView
+            key={character.sceneId}
+            character={character}
+            onNpc={openNpc}
+            onOpenBag={openBag}
+          />
+        </div>
+        {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
+        <div className="pointer-events-none absolute inset-0">
           <TopBar character={character} />
           <PlayerCard character={character} />
           <ScenePlaque
@@ -120,7 +122,7 @@ function GameScreen({ character }: { character: Character }) {
             onWorldMap={() => open('map')}
           />
           {travel.isError && (
-            <div className="pointer-events-auto absolute top-[110px] right-1 w-[168px]">
+            <div className="pointer-events-auto absolute top-[88px] right-[6px] w-[168px]">
               <Notice tone="error">{errorMessage(travel.error)}</Notice>
             </div>
           )}
@@ -132,7 +134,7 @@ function GameScreen({ character }: { character: Character }) {
           />
           <RealtimePanels characterId={character.id} />
           <ExpStrip character={character} />
-          <MenuBar character={character} onOpen={open} />
+          <MenuBar onOpen={open} />
         </div>
       </main>
 

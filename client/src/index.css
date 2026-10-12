@@ -212,9 +212,19 @@
   border-image: var(--ui-currency-coupon) var(--ui-currency-coupon-slice) fill /
     var(--ui-currency-coupon-border);
 }
-/* Floating windows live in the top layer, outside the zoomed HUD: they scale on their own. */
+/* Floating windows open at their natural size, like the HUD (1:1, no stage zoom). */
 @utility game-window {
-  zoom: var(--hud-scale, 1);
+  zoom: 1;
+}
+/* HUD backgrounds from UI_RoleIcon and UI_SmallMap. */
+@utility game-role-card {
+  background: var(--ui-role-card) 0 0 / 100% 100% no-repeat;
+}
+@utility game-role-letters {
+  background: var(--ui-role-letters) 0 0 / 100% 100% no-repeat;
+}
+@utility game-map-plaque {
+  background: var(--ui-map-plaque) 0 0 / 100% 100% no-repeat;
 }
 @utility game-topbar {
   border: 0;
