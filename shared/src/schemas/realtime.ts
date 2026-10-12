@@ -72,18 +72,15 @@ export type ChatAck =
   | { ok: false; error: { code: ChatErrorCode; message: string } }
 
 /**
- * Handshake rejections arrive as connect_error with `data.code` set to one of these.
- * `bad_origin` is no longer sent: a foreign Origin is refused at the transport (HTTP 403), which
- * reaches the client as a connect_error without `data`.
+ * Handshake rejections arrive as connect_error with `data.code` set to one of these
+ * (`too_many_connections`: the character already has the maximum number of open sockets).
+ * A foreign Origin is refused at the transport (HTTP 403), which reaches the client as a
+ * connect_error without `data`, like an unreachable server.
  */
-export type RealtimeConnectErrorCode = 'unauthenticated' | 'no_character' | 'bad_origin'
+export type RealtimeConnectErrorCode = 'unauthenticated' | 'no_character' | 'too_many_connections'
 
-/**
- * Also a connect_error `data.code`: the character already has the maximum number of open sockets.
- * Kept apart so the client's exhaustive message map still compiles; fold it into
- * RealtimeConnectErrorCode once the client shows a message for it.
- */
-export type RealtimeAdmissionErrorCode = 'too_many_connections'
+/** @deprecated Folded into RealtimeConnectErrorCode; kept until the server stops importing it. */
+export type RealtimeAdmissionErrorCode = Extract<RealtimeConnectErrorCode, 'too_many_connections'>
 
 export interface ServerToClientEvents {
   [REALTIME_EVENTS.scenePlayers]: (event: ScenePlayersEvent) => void

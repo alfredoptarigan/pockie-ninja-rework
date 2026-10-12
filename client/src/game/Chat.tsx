@@ -8,7 +8,7 @@ import {
   type RealtimeConnectErrorCode,
   type ScenePlayer,
 } from '@pockie/shared'
-import { useQueryClient } from '@tanstack/react-query'
+import { useQueryClient, type QueryClient } from '@tanstack/react-query'
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { createGameSocket, type GameSocket } from '../lib/socket'
 import { gameKeys } from './api'
@@ -23,8 +23,14 @@ type SendChat = (input: ChatSendInput, ack: (result: ChatAck) => void) => boolea
 const CONNECT_ERRORS: Record<RealtimeConnectErrorCode, string> = {
   unauthenticated: 'Your session ended. Please log in again.',
   no_character: 'Create your ninja first.',
-  bad_origin: 'Chat is not available from this address.',
+  too_many_connections: 'Too many game tabs are open. Close one and reload.',
 }
+/** A refusal without a code: a foreign origin, or the server cannot be reached. */
+const UNAVAILABLE = 'Chat is unavailable. Reconnecting...'
+
+/** The session is gone: checking it again lets the route guard send the player to log in. */
+const recheckSession = (queryClient: QueryClient) =>
+  void queryClient.invalidateQueries({ queryKey: ['me'] })
 
 /** One socket per game screen: scene players, chat messages and connection state. */
 function useRealtime() {
@@ -46,11 +52,11 @@ function useRealtime() {
     next.on('connect_error', (err) => {
       setStatus('offline')
       const code = (err as Error & { data?: { code?: RealtimeConnectErrorCode } }).data?.code
-      setError(code ? CONNECT_ERRORS[code] : 'Chat is offline. Reconnecting...')
+      setError((code && CONNECT_ERRORS[code]) || UNAVAILABLE)
       // The character or session is gone: let the game screen route to creation or login.
       if (code === 'no_character')
         void queryClient.invalidateQueries({ queryKey: gameKeys.character })
-      if (code === 'unauthenticated') void queryClient.invalidateQueries({ queryKey: ['me'] })
+      if (code === 'unauthenticated') recheckSession(queryClient)
     })
     next.on(REALTIME_EVENTS.scenePlayers, (event) => setPlayers(event.players))
     next.on(REALTIME_EVENTS.chatMessage, (message) =>
@@ -64,7 +70,10 @@ function useRealtime() {
 
   const send: SendChat = (input, ack) => {
     if (!socket.current) return false
-    socket.current.emit(REALTIME_EVENTS.chatSend, input, ack)
+    socket.current.emit(REALTIME_EVENTS.chatSend, input, (result) => {
+      if (!result.ok && result.error.code === 'unauthenticated') recheckSession(queryClient)
+      ack(result)
+    })
     return true
   }
   return { send, players, messages, status, error }

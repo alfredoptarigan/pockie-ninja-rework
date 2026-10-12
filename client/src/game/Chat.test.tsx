@@ -1,9 +1,10 @@
 import type { ChatMessage } from '@pockie/shared'
-import { act, screen, within } from '@testing-library/react'
+import { act, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { useMe } from '../lib/auth'
 import { createFakeSocket, type FakeSocket } from '../test/socket'
-import { renderWithProviders } from '../test/utils'
+import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
 import { RealtimePanels } from './Chat'
 
 let socket: FakeSocket
@@ -111,4 +112,64 @@ describe('Chat', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('Your session ended. Please log in again.')
     expect(screen.getByRole('button', { name: 'Send' })).toBeDisabled()
   })
+
+  it('asks to close a tab when too many game tabs are open', () => {
+    renderWithProviders(<RealtimePanels characterId="c1" />)
+    act(() =>
+      socket.serverEmit(
+        'connect_error',
+        Object.assign(new Error('rejected'), { data: { code: 'too_many_connections' } }),
+      ),
+    )
+
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      'Too many game tabs are open. Close one and reload.',
+    )
+  })
+
+  it('says chat is unavailable when the connection fails without a reason', () => {
+    renderWithProviders(<RealtimePanels characterId="c1" />)
+    // A foreign origin (HTTP 403) or an unreachable server: no `data`.
+    act(() => socket.serverEmit('connect_error', new Error('xhr poll error')))
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Chat is unavailable. Reconnecting...')
+  })
+
+  it('sends the player to log in again when a message finds the session ended', async () => {
+    let sessionChecks = 0
+    mockApi({
+      'GET /api/auth/me': () => {
+        sessionChecks++
+        return sessionChecks === 1
+          ? json({ user: { id: 'u1', username: 'Player_one' } })
+          : apiError(401, 'unauthenticated', 'Please log in.')
+      },
+    })
+    renderWithProviders(
+      <>
+        <SessionProbe />
+        <RealtimePanels characterId="c1" />
+      </>,
+    )
+    act(() => socket.serverEmit('connect'))
+    await waitFor(() => expect(sessionChecks).toBe(1))
+    socket.onSend = () => ({
+      ok: false,
+      error: { code: 'unauthenticated', message: 'Your session ended. Please log in again.' },
+    })
+
+    await userEvent.type(screen.getByLabelText('Message to world chat'), 'hi all{Enter}')
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Your session ended. Please log in again.',
+    )
+    // The session is checked again; the route guard then sends the player to the login page.
+    await waitFor(() => expect(sessionChecks).toBe(2))
+  })
 })
+
+/** Watches the session like the route guard of /play does. */
+function SessionProbe() {
+  useMe()
+  return null
+}
