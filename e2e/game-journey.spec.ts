@@ -35,7 +35,6 @@ const QUEST = {
 const shot = (page: Page, name: string) =>
   page.screenshot({ path: `test-results/visual/${name}.png` })
 
-
 const questNavigation = (page: Page) => page.getByRole('region', { name: 'Quest Navigation' })
 
 /** Presses Go on a Quest Navigation entry of the given tab. */
