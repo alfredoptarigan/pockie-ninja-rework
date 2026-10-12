@@ -12,6 +12,7 @@ import { randomInt } from 'node:crypto'
 import { and, eq, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characterQuests, characters, inventoryItems } from '../db/schema.js'
+import { HttpError } from '../http.js'
 import { avatarStats, dropItems, dropLib, item, levels, subTasks, task } from './data.js'
 import type { QuestProgress } from './quests.js'
 
@@ -19,6 +20,7 @@ export type Tx = Parameters<Parameters<Db['transaction']>[0]>[0]
 type CharacterRow = typeof characters.$inferSelect
 
 const ROOKIE = 4
+const ACTIVE = 0
 const READY = 1
 const COMPLETED = 2
 const COLLECT_STEP = 1
@@ -56,15 +58,18 @@ export async function grantItems(
   }
 }
 
+/** Uses up one of `row`; fails when the row no longer holds that count (a stale read). */
 export async function consumeOne(tx: Tx, row: typeof inventoryItems.$inferSelect) {
-  if (row.count > 1) {
-    await tx
-      .update(inventoryItems)
-      .set({ count: row.count - 1 })
-      .where(eq(inventoryItems.id, row.id))
-  } else {
-    await tx.delete(inventoryItems).where(eq(inventoryItems.id, row.id))
-  }
+  const unchanged = and(eq(inventoryItems.id, row.id), eq(inventoryItems.count, row.count))
+  const used =
+    row.count > 1
+      ? await tx
+          .update(inventoryItems)
+          .set({ count: row.count - 1 })
+          .where(unchanged)
+          .returning({ id: inventoryItems.id })
+      : await tx.delete(inventoryItems).where(unchanged).returning({ id: inventoryItems.id })
+  if (used.length === 0) throw new HttpError(409, 'conflict', 'That item was already used.')
 }
 
 /** Removes up to `count` of an item from unequipped stacks (quest hand-ins). */
@@ -97,13 +102,18 @@ export async function loadQuests(tx: Tx, characterId: string): Promise<QuestProg
   return tx.select().from(characterQuests).where(eq(characterQuests.characterId, characterId))
 }
 
+/** Saves progress of active quests; a quest that is already ready or completed is never reverted. */
 export async function saveQuests(tx: Tx, characterId: string, changed: QuestProgress[]) {
   for (const quest of changed) {
     await tx
       .update(characterQuests)
       .set({ progress: quest.progress, state: quest.state })
       .where(
-        and(eq(characterQuests.characterId, characterId), eq(characterQuests.taskId, quest.taskId)),
+        and(
+          eq(characterQuests.characterId, characterId),
+          eq(characterQuests.taskId, quest.taskId),
+          eq(characterQuests.state, ACTIVE),
+        ),
       )
   }
 }
@@ -132,8 +142,24 @@ export async function acceptQuest(tx: Tx, characterId: string, taskId: number) {
     .onConflictDoNothing()
 }
 
-/** Pays out a quest (items, money, honor, EXP), marks it completed and auto-accepts the next. */
+/**
+ * Claims a ready quest (ready -> completed in one UPDATE), then pays it out (items, money, honor,
+ * EXP) and auto-accepts the next. Returns false and pays nothing when the quest was not ready.
+ */
 export async function completeQuest(tx: Tx, characterId: string, taskId: number) {
+  const claimed = await tx
+    .update(characterQuests)
+    .set({ state: COMPLETED, completedAt: sql`now()` })
+    .where(
+      and(
+        eq(characterQuests.characterId, characterId),
+        eq(characterQuests.taskId, taskId),
+        eq(characterQuests.state, READY),
+      ),
+    )
+    .returning({ taskId: characterQuests.taskId })
+  if (claimed.length === 0) return false
+
   const row = task(taskId)!
   const [character] = await tx.select().from(characters).where(eq(characters.id, characterId))
   if (!character) throw new Error(`Character ${characterId} not found`)
@@ -174,15 +200,11 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
       if (column) money[column] = (money[column] ?? character[column]) + Number(amount)
     }
   }
-  const { levelsGained, ...exp } = expUpdate(character, Number(row.RewardExp ?? 0))
+  const { levelsGained: _levelsGained, ...exp } = expUpdate(character, Number(row.RewardExp ?? 0))
   await tx
     .update(characters)
     .set({ ...money, ...exp, honor: character.honor + Number(row.RewardHono ?? 0) })
     .where(eq(characters.id, characterId))
-  await tx
-    .update(characterQuests)
-    .set({ state: COMPLETED, completedAt: sql`now()` })
-    .where(and(eq(characterQuests.characterId, characterId), eq(characterQuests.taskId, taskId)))
 
   const nextId = Number(row.NextTaskID)
   const next = nextId > 0 ? task(nextId) : undefined
@@ -190,7 +212,7 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
   if (next && Number(next.AutoAcceptTask) === 1 && exp.level >= Number(next.RequireLevel)) {
     await acceptQuest(tx, characterId, nextId)
   }
-  return levelsGained
+  return true
 }
 
 /** Rookie (tutorial) quests complete as soon as every step is done (RookieTaskSystem). */
@@ -201,7 +223,6 @@ export async function completeReadyRookieQuests(tx: Tx, characterId: string) {
       (q) => q.state === READY && Number(task(q.taskId)?.TaskBaseType) === ROOKIE,
     )
     if (!ready) return completed
-    await completeQuest(tx, characterId, ready.taskId)
-    completed.push(ready.taskId)
+    if (await completeQuest(tx, characterId, ready.taskId)) completed.push(ready.taskId)
   }
 }

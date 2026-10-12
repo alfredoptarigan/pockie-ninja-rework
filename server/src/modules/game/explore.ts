@@ -27,7 +27,7 @@ import {
   type Tx,
 } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
-import { requireAlive, requireUser, toCharacter } from './characters.js'
+import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 type CharacterRow = typeof characters.$inferSelect
@@ -64,13 +64,6 @@ async function bagCount(tx: Tx, characterId: string, itemId: string) {
 }
 
 export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
-  async function characterOf(tx: Tx | Db, userId: string, lock = false) {
-    const query = tx.select().from(characters).where(eq(characters.userId, userId))
-    const [row] = lock ? await query.for('update') : await query
-    if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
-    return row
-  }
-
   app.get('/explore', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const stars = await db
@@ -105,7 +98,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
     return db.transaction(async (tx) => {
       // Row lock: concurrent searches queue here and see each other's cooldown.
-      const character = await characterOf(tx, userId, true)
+      const character = await lockCharacter(tx, userId)
       const now = new Date()
       const status = exploreStatus(character, now)
 

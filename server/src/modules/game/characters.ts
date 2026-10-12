@@ -20,6 +20,7 @@ import {
 } from '../../game/data.js'
 import { playerFighter, type PlayerFighter } from '../../game/combat.js'
 import { pouchMax } from '../../game/pouch.js'
+import type { Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
@@ -91,6 +92,24 @@ export function requireUser(request: FastifyRequest) {
   return request.auth.user
 }
 
+async function findCharacter(db: Tx | Db, userId: string, lock: boolean) {
+  const query = db.select().from(characters).where(eq(characters.userId, userId))
+  const [row] = lock ? await query.for('update') : await query
+  if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
+  return row
+}
+
+/** The user's character, unlocked: for reads only. */
+export const characterOf = (db: Tx | Db, userId: string) => findCharacter(db, userId, false)
+
+/**
+ * Locks the user's character row (SELECT ... FOR UPDATE) and returns it. Every mutating game
+ * transaction calls this first, before any check or other read: actions on one character then run
+ * one at a time, and the character row is always the first lock taken (before inventory or quest
+ * rows), so they cannot deadlock each other.
+ */
+export const lockCharacter = (tx: Tx, userId: string) => findCharacter(tx, userId, true)
+
 async function suggestedNation(db: Db): Promise<Nation> {
   const rows = await db
     .select({ nation: characters.nation, total: count() })
@@ -124,9 +143,7 @@ export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) 
   )
 
   app.get('/character', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
-    const user = requireUser(request)
-    const [row] = await db.select().from(characters).where(eq(characters.userId, user.id))
-    if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
+    const row = await characterOf(db, requireUser(request).id)
     return { character: toCharacter(row), stats: statsOf(await playerFighter(db, row)) }
   })
 
