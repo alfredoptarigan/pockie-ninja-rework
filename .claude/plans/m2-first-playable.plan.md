@@ -133,7 +133,15 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         (`pnpm i18n:sentences status`, `pnpm i18n:sentences merge`).
   - [ ] Hand-review the slice strings (tutorial chains 90000-94015, first main quests, 21xx-25xx
         NPCs and monsters, common UI) and serve en.json to the client (Task 8).
-- [ ] **Task 3 — asset export** (not started).
+- [x] **Task 3 — asset export.** `pnpm assets:export` (`tools/export-assets.ts` + `tools/assets/*`;
+      full run about 35 min, cached re-run about 12 s, cache in `node_modules/.cache/pockie-assets`).
+      91 MB under `client/public/assets/game`: 87/92 outfits with about 40 motions each, 6 monster
+      art sets (every 2101-2501 monster), 10 scenes (layers + fight backgrounds), 45 village
+      buildings, 52 placed NPCs. `tools/assets/manifest.test.ts` guards coverage.
+  - Gaps: outfits 25/38/41/68/71 have no art in the backup; 43/59 only have motion 52; weapons
+    (separate `motion/weapon` layer) not exported; motions 60/800 (+18 upgrades) skipped
+    (`HIGH_TIER_MOTIONS`); animated sky/effect layers are first frame only; N21001/N21002 stand
+    animations have a baked-in "Genin" label.
 - [~] **Task 4 — battle engine** (`game-core/src/battle`).
   - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,
         counters, parry skill 7777, typed replay, golden test from an original replay.
@@ -154,9 +162,34 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         `7 + level/10`, cards).
   - [ ] Remaining sub-task types the tutorials use (check 90003-90015 and 91000-94015).
   - [ ] Per-action rate limits on every game route (fight already has one).
-- [ ] **Task 7 — realtime presence and chat** (not started).
+- [x] **Task 7 — realtime presence and chat.** `server/src/modules/realtime/realtime.ts`
+      (Socket.IO on `app.server`, `pn_session` cookie + origin check, rooms `scene:<id>`, travel
+      moves sockets after commit, logout disconnects the session), events and zod schemas in
+      `shared/src/schemas/realtime.ts`, client helper `client/src/lib/socket.ts`. Chat: 200 chars,
+      control characters stripped, 5 messages per 5 s per character (in memory, single process).
 - [ ] **Task 8 — game client** (not started).
 - [ ] **Task 9 — copy fixes and verification** (not started).
+
+### Notes for Task 8 (client)
+
+- **Assets:** import `gameMotions`, `gameScenes`, `SKILL_MOTIONS_URL` from
+  `client/src/generated/game-assets.ts`. Sheets are Phaser spritesheets (`frameWidth`/`frameHeight`,
+  cells left to right wrapping after `columns`); cell i lasts `durations[i]` ticks at 14 ticks/s in
+  battle and 12 in scenes; `labels.Attacking` is the hit tick; sprite origin = `anchor` (Flash
+  registration point, about waist height). Original fighter spots: (300,455) and (700,455) on a
+  1000x600 stage. Action -> `motions[actions[actionId]]` ("999" = stand); skill -> fetch
+  `skill-motions.json` (about 1 MB, runtime only) and read `[outfitId or artKey][skillId]`;
+  monsters -> `monsters[npcId]` gives the `mobs` key. Scene draw order: background,
+  backgroundeffect, element, characters, skybox; `hotspots` are the clickable buildings (English
+  names from `NameFlag`); NPC dialog picture = `npcs.art[key].photo`.
+- **Realtime:** `createGameSocket()` (same origin, cookie auth, path `/socket.io`; Vite dev needs
+  `'/socket.io': { target: 'http://127.0.0.1:3000', ws: true }`). Listen to `scene:players`
+  (replace the list), `chat:message` (append, plain text only), `connect_error` (`err.data.code`:
+  `unauthenticated`, `no_character` -> creation, `bad_origin`). Send with
+  `emitWithAck('chat:send', { channel, text })`; on `ok: false` show `error.message`; do not append
+  from the ack (the sender gets the broadcast too). After travel the server moves the sockets.
+- **Parallel agents:** run server tests with a private `TEST_DATABASE_URL`
+  (name must contain `test`), otherwise concurrent runs reset each other's schema.
 
 ## Next steps for another assistant (can run while the translation finishes)
 
