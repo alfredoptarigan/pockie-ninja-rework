@@ -14,4 +14,7 @@ export const RATE_LIMITS = {
   travel: perMinute(30),
   revive: perMinute(10),
   buyPouches: perMinute(20),
+  forge: perMinute(60),
+  gates: perMinute(60),
+  gateFight: perMinute(30),
 }
