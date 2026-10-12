@@ -12,4 +12,5 @@ export const RATE_LIMITS = {
   item: perMinute(60),
   travel: perMinute(30),
   revive: perMinute(10),
+  buyPouches: perMinute(20),
 }

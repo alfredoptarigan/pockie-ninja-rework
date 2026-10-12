@@ -8,7 +8,12 @@ import { z } from 'zod'
 import type { Db } from '../../db/client.js'
 import { characterExploreSpots, characters, inventoryItems } from '../../db/schema.js'
 import { EXPLORE_MIN_HP, fightMonster, type FightRewards } from '../../game/combat.js'
-import { exploreCooldownSeconds, exploreSpot, exploreSpotIds } from '../../game/data.js'
+import {
+  exploreClipName,
+  exploreCooldownSeconds,
+  exploreSpot,
+  exploreSpotIds,
+} from '../../game/data.js'
 import {
   advanceStar,
   CARDS_PER_SEARCH,
@@ -19,13 +24,7 @@ import {
   type ExploreCard,
   type StarState,
 } from '../../game/explore.js'
-import {
-  completeReadyRookieQuests,
-  expUpdate,
-  grantItems,
-  removeItems,
-  type Tx,
-} from '../../game/progress.js'
+import { expUpdate, grantItems, removeItems, rookieHandIns, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
@@ -72,13 +71,16 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       .where(eq(characterExploreSpots.characterId, character.id))
     return {
       ...publicStatus(exploreStatus(character, new Date())),
+      cooldownSeconds: exploreCooldownSeconds(),
       spots: exploreSpotIds(character.sceneId).map((id) => {
         const spot = exploreSpot(id)!
         const star = stars.find((s) => String(s.spotId) === id)
         return {
           id,
           nameKey: `lg_OutSearch_${id}`,
+          clipName: exploreClipName(id),
           requireLevel: Number(spot.RequireLevel),
+          requireStone: Number(spot.RequireStone ?? 0),
           requireItems: requiredItems(spot),
           star: {
             level: star?.starLevel ?? 0,
@@ -167,6 +169,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
           level: current.level,
           exp: current.exp,
           hp: current.hp,
+          mp: current.mp,
           exploreLastAt: current.exploreLastAt,
           exploreDay: current.exploreDay,
           exploreUsed: current.exploreUsed,
@@ -198,7 +201,9 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       rewards.items.push(...toGrant)
       await grantItems(tx, character.id, toGrant)
 
-      const completed = await completeReadyRookieQuests(tx, character.id)
+      // `rewards` already holds the search's loot, so hand-ins go in `questRewards`.
+      const handIns = await rookieHandIns(tx, character.id)
+      rewards.levelsGained += handIns.levelsGained
       const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
       return {
         spotId,
@@ -208,7 +213,8 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
         otherCards: cards.slice(1),
         fight,
         rewards,
-        completed,
+        completed: handIns.completed,
+        questRewards: handIns.rewards,
         explore: publicStatus(exploreStatus(updated!, new Date())),
         character: toCharacter(updated!),
       }

@@ -58,3 +58,42 @@ describe('a fresh ninja against the Sunflower', () => {
     }
   })
 })
+
+// EquipSystem.GetEquipSelfProp (AttackMin/Max, Defense) + AddOtherProp (OtherPropName/Value)
+// feeding RefreshSystem's *Equip terms. Level 1 AvatarID 3: HP 220, AtkTime 980, counter 5.
+describe('equipment bonuses', () => {
+  const fighter = (equipped: string[]) => playerFighterFrom(freshNinja, equipped)
+
+  it('adds the starter armour defence: Straw Hat i220101 (24) + Cloth Armour i240101 (71)', () => {
+    expect(fighter(['i220101', 'i240101'])).toMatchObject({ defense: 95, maxHp: 220 })
+  })
+
+  it('multiplies max HP (MaxHPMulEquip 50 on i298004, plus its Defense 167)', () => {
+    // (int)(220 * (1000 + 1365/1400*10 + 50) * 0.001) = 231
+    expect(fighter(['i298004'])).toMatchObject({ maxHp: 231, defense: 167 })
+  })
+
+  it('adds hit, speed, counter and extra defence', () => {
+    expect(fighter(['i298005'])).toMatchObject({ hit: 66, defense: 55 })
+    // (int)(1000 / ((1000 + 2310/1000*10 + 50) * 0.001)) = 934
+    expect(fighter(['i298006']).atkTime).toBe(934)
+    expect(fighter(['i298007']).counter).toBe(10)
+    // Defense 39 + DefenseEquip 71.
+    expect(fighter(['i298008']).defense).toBe(110)
+  })
+
+  it('reads several properties from one item (i299901 HP/MP, i299910 crit/pierce)', () => {
+    // (int)((220 + 6654) * 1000 * 0.001)
+    expect(fighter(['i299901'])).toMatchObject({ maxHp: 6874, maxMp: 6874 })
+    expect(fighter(['i299910'])).toMatchObject({ crit: 390, pierce: 390 })
+  })
+
+  it('passes damage reduction and life steal to the fight (i298009, i298010)', () => {
+    expect(fighter(['i298009']).decDamage).toBe(3)
+    expect(fighter(['i298010']).vampiricHp).toBe(3)
+  })
+
+  it('sums the same bonus over several items', () => {
+    expect(fighter(['i298005', 'i298005']).hit).toBe(132)
+  })
+})

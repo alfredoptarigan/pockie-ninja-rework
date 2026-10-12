@@ -30,6 +30,8 @@ const NAME_TAKEN = 'That ninja name is already taken.'
 type CharacterRow = typeof characters.$inferSelect
 
 export function toCharacter(row: CharacterRow): Character {
+  // ponytail: maxHp/maxMp leave out equipment HP/MP bonuses (as do potions, revive and quest
+  // level-ups); no item below level 21 has them. Load equipmentBonuses here once such items drop.
   const stats = deriveStats(avatarStats(row.avatarId), row.level)
   return {
     id: row.id,

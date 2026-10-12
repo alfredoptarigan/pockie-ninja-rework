@@ -26,6 +26,7 @@ const handIn: QuestHandIn = {
   giftCoupon: 10,
   honor: 0,
   items: [{ itemId: 'i159104', count: 1, nameKey: 'lg_Debris159104_itemname' }],
+  levelsGained: 0,
 }
 
 function renderConversation(talkBody: object) {

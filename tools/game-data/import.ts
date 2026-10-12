@@ -95,6 +95,13 @@ if (import.meta.main) {
   // Exploring
   write('explore-spots', ini('role/RoleOutSearch.ini'))
   write('explore-common', ini('role/OutSearchCommon.ini'))
+  // Client-only column: the field scene element that opens a spot (-1 = none).
+  write(
+    'explore-clips',
+    Object.fromEntries(
+      tab('roleoutsearch.s26824.tab', { skipHeader: true }).map((row) => [row.ID, row.ClipName]),
+    ),
+  )
   for (const factory of ['Gost', 'Boss', 'Item', 'Key', 'Baby', 'Game']) {
     write(`explore-${factory.toLowerCase()}-factory`, ini(`role/${factory}Factory.ini`))
   }

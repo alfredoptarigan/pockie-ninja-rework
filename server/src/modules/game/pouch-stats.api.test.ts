@@ -108,6 +108,51 @@ describe('pouches', () => {
   })
 })
 
+describe('POST /api/game/pouches/buy (OnCustomBuy)', () => {
+  const buy = (body: object) => client.post('/api/game/pouches/buy', body)
+
+  it('charges Gold, 1 per 1000 points, and fills the pouches', async () => {
+    await update({ gold: 20, mpPouch: 9000 })
+    const response = await buy({ currency: 'gold', hp: 5, mp: 'full' })
+    expect(response.statusCode).toBe(200)
+    expect(response.json().character).toMatchObject({
+      gold: 14,
+      hpPouch: 5000,
+      mpPouch: 10_000,
+    })
+    expect(response.json()).toMatchObject({ completed: [], rewards: [] })
+  })
+
+  it('can pay with Gift Coupons', async () => {
+    await update({ giftCoupon: 10 })
+    const { character } = (await buy({ currency: 'giftCoupon', hp: 'full' })).json()
+    expect(character).toMatchObject({ giftCoupon: 0, hpPouch: 10_000, gold: 0 })
+  })
+
+  it('refuses without enough currency and charges nothing', async () => {
+    await update({ gold: 4 })
+    const response = await buy({ currency: 'gold', hp: 5 })
+    expect(response.statusCode).toBe(400)
+    expect(response.json().error.code).toBe('no_money')
+    expect(await row()).toMatchObject({ gold: 4, hpPouch: 0 })
+  })
+
+  it('refuses when the chosen pouches are full', async () => {
+    await update({ gold: 10, hpPouch: 10_000 })
+    const response = await buy({ currency: 'gold', hp: 'full' })
+    expect(response.statusCode).toBe(400)
+    expect(response.json().error.code).toBe('pouch_full')
+    expect((await row()).gold).toBe(10)
+  })
+
+  it('rejects amounts the original never offered and other currencies', async () => {
+    await update({ gold: 1000, stone: 1000 })
+    expect((await buy({ currency: 'gold', hp: 7 })).statusCode).toBe(400)
+    expect((await buy({ currency: 'stone', hp: 5 })).statusCode).toBe(400)
+    expect((await row()).hpPouch).toBe(0)
+  })
+})
+
 describe('potions', () => {
   it('do not end the defeated state (heal after reviving)', async () => {
     await update({ hp: 0 })
@@ -154,6 +199,15 @@ describe('GET /api/game/character stats', () => {
     const after = (await client.get('/api/game/character')).json().stats
     // Fists i270100: AttackMin 7, AttackMax 8.
     expect(after).toMatchObject({ minAttack: 8, maxAttack: 9 })
+  })
+
+  it('includes armour defence and the item.ini OtherProp bonuses', async () => {
+    // Hat i298005 (Def 55, HitMulEquip 66) and Cloth Armour i240101 (Def 71); the bag hat does not count.
+    await giveItem('i298005', { equippedSlot: 'Hat' })
+    await giveItem('i240101', { equippedSlot: 'Cloth' })
+    await giveItem('i220101')
+    const { stats } = (await client.get('/api/game/character')).json()
+    expect(stats).toMatchObject({ defense: 126, hit: 66 })
   })
 
   it('requires a login', async () => {

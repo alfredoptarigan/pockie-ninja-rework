@@ -6,6 +6,7 @@ import {
   type DropEntry,
   type DropLib,
 } from '@pockie/game-core'
+import { buyPouchesSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
 import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
@@ -22,6 +23,7 @@ import {
   nationScenes,
   npc,
   scene,
+  sceneLinks,
   sceneSpawns,
   sceneSwitchRule,
   subTasks,
@@ -30,16 +32,17 @@ import {
 import {
   acceptQuest,
   completeQuest,
-  completeReadyRookieQuests,
   consumeOne,
   grantItems,
   handInReadyRookieQuests,
+  rookieHandIns,
   loadQuests,
   saveQuests,
   type Tx,
 } from '../../game/progress.js'
 import {
   availableQuests,
+  BUY_POUCH_COMMAND,
   EQUIP_WEAPON_COMMAND,
   questLock,
   questRewards,
@@ -49,7 +52,7 @@ import {
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
-import { pouchMax } from '../../game/pouch.js'
+import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
@@ -301,7 +304,7 @@ export async function actionRoutes(
         recordCommand(quests, USE_ITEM_COMMAND, character.sceneId, row.itemId),
       )
       return {
-        completed: await completeReadyRookieQuests(tx, character.id),
+        ...(await rookieHandIns(tx, character.id)),
         character: await reload(tx, character.id),
       }
     })
@@ -342,7 +345,7 @@ export async function actionRoutes(
         )
       }
       return {
-        completed: await completeReadyRookieQuests(tx, character.id),
+        ...(await rookieHandIns(tx, character.id)),
         character: await reload(tx, character.id),
       }
     })
@@ -356,20 +359,20 @@ export async function actionRoutes(
       requireAlive(character, 'travel')
       const target = scene(sceneId)
       const rule = sceneSwitchRule(sceneId)
-      // sceneswitchrule.ini: the target must list the current scene as a starting point.
-      if (
-        !target ||
-        !rule ||
-        Number(target.IsStart) !== 1 ||
-        !(String(character.sceneId) in rule)
-      ) {
+      // Scene exits (scenequeue.ini links, SceneSystem.CanSwitchScene) or the world map
+      // (SceneSwitchRuleSystem.CanChangeScene: the target needs a sceneswitchrule.ini section; a
+      // current scene missing from it travels free, it only prices the trip).
+      const linked = sceneLinks(character.sceneId).includes(sceneId)
+      if (!target || (!rule && !linked) || Number(target.IsStart) !== 1) {
         throw bad('no_route', 'You cannot travel there from here.')
       }
       const nation = Number(target.Nation)
       if (nation !== -1 && nation !== character.nation) {
         throw bad('other_village', 'Only ninjas of that village may enter.')
       }
-      if (character.level < Math.max(Number(rule.RequireLevel ?? -1), Number(target.Level ?? -1))) {
+      if (
+        character.level < Math.max(Number(rule?.RequireLevel ?? -1), Number(target.Level ?? -1))
+      ) {
         throw bad('too_low', 'Your level is too low for that area.')
       }
       await tx.update(characters).set({ sceneId }).where(eq(characters.id, character.id))
@@ -378,6 +381,39 @@ export async function actionRoutes(
     // After commit, so sockets never move to a scene the database rolled back.
     realtime.moveCharacter(result.character)
     return result
+  })
+
+  // RoleUseSystem.OnCustomBuy: pouch refills for Gold or Gift Coupons.
+  app.post('/pouches/buy', { config: { rateLimit: RATE_LIMITS.buyPouches } }, async (request) => {
+    const { currency, hp, mp } = buyPouchesSchema.parse(request.body)
+    const userId = requireUser(request).id
+    return db.transaction(async (tx) => {
+      const character = await lockCharacter(tx, userId)
+      const purchase = buyPouches(character, hp, mp)
+      if (!purchase) throw bad('pouch_full', 'Your pouch is already full.')
+      if (character[currency] < purchase.cost) {
+        const name = currency === 'gold' ? 'Gold' : 'Gift Coupons'
+        throw bad('no_money', `You need ${purchase.cost} ${name}.`)
+      }
+      await tx
+        .update(characters)
+        .set({
+          [currency]: character[currency] - purchase.cost,
+          hpPouch: purchase.hpPouch,
+          mpPouch: purchase.mpPouch,
+        })
+        .where(eq(characters.id, character.id))
+      const quests = await loadQuests(tx, character.id)
+      await saveQuests(
+        tx,
+        character.id,
+        recordCommand(quests, BUY_POUCH_COMMAND, character.sceneId),
+      )
+      return {
+        ...(await rookieHandIns(tx, character.id)),
+        character: await reload(tx, character.id),
+      }
+    })
   })
 
   // ReliveSystem.OnCustomRelive. ponytail: the 5% equipment wear on going home is skipped

@@ -5,7 +5,7 @@ import type { Db } from '../../db/client.js'
 import { characters } from '../../db/schema.js'
 import { fightMonster, monsterDrops } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
-import { completeReadyRookieQuests } from '../../game/progress.js'
+import { rookieHandIns } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { reviveTerms } from './actions.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
@@ -65,9 +65,21 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       requireAlive(character, 'fight again')
 
       const result = await fightMonster(tx, character, monsterId)
-      const completed = await completeReadyRookieQuests(tx, character.id)
+      // `rewards` already holds the fight's loot, so hand-ins go in `questRewards`.
+      // A quest level-up counts as the fight's own, so the result shows it.
+      const handIns = await rookieHandIns(tx, character.id)
+      const rewards = {
+        ...result.rewards,
+        levelsGained: result.rewards.levelsGained + handIns.levelsGained,
+      }
       const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
-      return { ...result, completed, character: toCharacter(updated!) }
+      return {
+        ...result,
+        rewards,
+        completed: handIns.completed,
+        questRewards: handIns.rewards,
+        character: toCharacter(updated!),
+      }
     })
   })
 }

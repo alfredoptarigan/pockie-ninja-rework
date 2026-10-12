@@ -112,6 +112,30 @@ describe('POST /api/game/travel', () => {
     expect((await client.post('/api/game/travel', { sceneId: 171 })).statusCode).toBe(400)
   })
 
+  it('travels from a neutral field such as 2601, which no switch rule lists as a key', async () => {
+    // SceneSwitchRuleSystem.CanChangeScene: a missing key is free, not forbidden.
+    await db
+      .update(characters)
+      .set({ sceneId: 2601, level: 40 })
+      .where(eq(characters.id, characterId))
+    const field = await client.post('/api/game/travel', { sceneId: 2602 })
+    expect(field.statusCode).toBe(200)
+    expect(field.json().character.sceneId).toBe(2602)
+    expect((await client.post('/api/game/travel', { sceneId: 111 })).statusCode).toBe(200)
+  })
+
+  it('still checks the level and needs a switch rule or a scene link', async () => {
+    await db
+      .update(characters)
+      .set({ sceneId: 2601, level: 20 })
+      .where(eq(characters.id, characterId))
+    const tooLow = await client.post('/api/game/travel', { sceneId: 2602 })
+    expect(tooLow.json().error.code).toBe('too_low')
+    // 3101 (Las Noches) has no switch rule and is not linked from 2601.
+    const noRoute = await client.post('/api/game/travel', { sceneId: 3101 })
+    expect(noRoute.json().error.code).toBe('no_route')
+  })
+
   it('refuses to travel while defeated', async () => {
     await db.update(characters).set({ hp: 0 }).where(eq(characters.id, characterId))
     const response = await client.post('/api/game/travel', { sceneId: 2101 })

@@ -49,18 +49,25 @@ describe('GET /api/game/explore', () => {
       remaining: 7,
       total: 7,
       cooldownEndsAt: null,
+      // OutSearchCommon.ini OutSearchTimeSpace.
+      cooldownSeconds: 300,
       spots: [
         {
           id: '21011',
           nameKey: 'lg_OutSearch_21011',
+          // roleoutsearch.tab ClipName: the field's explore tree.
+          clipName: 'OutCity_1110',
           requireLevel: 1,
+          requireStone: 0,
           requireItems: [],
           star: { level: 0, progress: 0, perStar: 2 },
         },
         {
           id: '21012',
           nameKey: 'lg_OutSearch_21012',
+          clipName: null,
           requireLevel: 1,
+          requireStone: 0,
           requireItems: [{ itemId: 'i150046', count: 1 }],
           star: { level: 0, progress: 0, perStar: 4 },
         },
@@ -85,6 +92,8 @@ describe('POST /api/game/explore/:spotId', () => {
     expect(body.star).toEqual({ level: 0, progress: 1, perStar: 2 })
     expect(body.starBonus).toBeNull()
     expect(body.otherCards).toHaveLength(4)
+    // No tutorial step is an explore, so nothing is handed in.
+    expect(body).toMatchObject({ completed: [], questRewards: [] })
     expect(['fight', 'stone', 'pet', 'boss', 'item', 'key', 'nothing']).toContain(body.card.type)
     expect(body.explore.remaining).toBe(6)
     expect(Date.parse(body.explore.cooldownEndsAt) - Date.now()).toBeGreaterThan(

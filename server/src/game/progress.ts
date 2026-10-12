@@ -118,7 +118,7 @@ export async function saveQuests(tx: Tx, characterId: string, changed: QuestProg
   }
 }
 
-/** Applies EXP with level-ups (refilling HP on level-up) and returns the column updates. */
+/** Applies EXP with level-ups (refilling HP and MP on level-up) and returns the column updates. */
 export function expUpdate(character: CharacterRow, gained: number) {
   const table = levels()
   const result = gainExp(
@@ -128,11 +128,10 @@ export function expUpdate(character: CharacterRow, gained: number) {
     table.levelexp,
     table.role.maxlevel,
   )
-  const hp =
-    result.levelsGained > 0
-      ? deriveStats(avatarStats(character.avatarId), result.level).maxHp
-      : character.hp
-  return { level: result.level, exp: result.exp, hp, levelsGained: result.levelsGained }
+  const { level, exp, levelsGained } = result
+  if (levelsGained === 0) return { level, exp, hp: character.hp, mp: character.mp, levelsGained }
+  const stats = deriveStats(avatarStats(character.avatarId), level)
+  return { level, exp, hp: stats.maxHp, mp: stats.maxMp, levelsGained }
 }
 
 export async function acceptQuest(tx: Tx, characterId: string, taskId: number) {
@@ -192,7 +191,7 @@ export async function completeQuest(
     itemIds.map((itemId) => ({ itemId, bound: true })),
   )
 
-  const { levelsGained: _levelsGained, ...exp } = expUpdate(character, rewards.exp)
+  const { levelsGained, ...exp } = expUpdate(character, rewards.exp)
   await tx
     .update(characters)
     .set({
@@ -210,7 +209,7 @@ export async function completeQuest(
   if (next && Number(next.AutoAcceptTask) === 1 && exp.level >= Number(next.RequireLevel)) {
     await acceptQuest(tx, characterId, nextId)
   }
-  return { taskId, ...rewards, items: countItems(itemIds) }
+  return { taskId, ...rewards, items: countItems(itemIds), levelsGained }
 }
 
 /** Rookie (tutorial) quests complete as soon as every step is done (RookieTaskSystem). */
@@ -226,7 +225,15 @@ export async function handInReadyRookieQuests(tx: Tx, characterId: string) {
   }
 }
 
-/** Ids of the rookie quests handInReadyRookieQuests completed. */
-export async function completeReadyRookieQuests(tx: Tx, characterId: string) {
-  return (await handInReadyRookieQuests(tx, characterId)).map((handIn) => handIn.taskId)
+/**
+ * Hands in ready rookie quests for an action response: `completed` ids and, in the same order,
+ * what each one granted (`rewards`).
+ */
+export async function rookieHandIns(tx: Tx, characterId: string) {
+  const rewards = await handInReadyRookieQuests(tx, characterId)
+  return {
+    completed: rewards.map((handIn) => handIn.taskId),
+    rewards,
+    levelsGained: rewards.reduce((sum, handIn) => sum + handIn.levelsGained, 0),
+  }
 }
