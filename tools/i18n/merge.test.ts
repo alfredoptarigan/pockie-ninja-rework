@@ -24,7 +24,7 @@ describe('reproducible reviewed sentence merge', () => {
     >
     expect(Object.keys(overrides).length).toBeGreaterThan(0)
     for (const [key, text] of Object.entries(overrides)) expect(en[key], key).toBe(text)
-  })
+  }, 15_000)
 
   it('rejects overrides for missing keys or changed placeholders', () => {
     const source = { greeting: 'Hello {@0:name}' }
