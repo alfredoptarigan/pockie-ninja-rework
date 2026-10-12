@@ -3,6 +3,7 @@ import { useState, type ReactNode } from 'react'
 import { errorMessage, useAcceptQuest, useAvailableQuests, type useTalk } from './api'
 import { useNpcPhoto } from './art'
 import { completedNotice } from './QuestLog'
+import { QuestRewardList } from './Rewards'
 import { Dialog, GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { SceneNpc } from './types'
@@ -59,6 +60,14 @@ export function NpcDialog({
           {talk.data && talk.data.completed.length > 0 && (
             <Notice>{completedNotice(talk.data.completed).trim()}</Notice>
           )}
+          {talk.data?.rewards?.map((handIn) => (
+            <div key={handIn.taskId} className="game-card px-2 pb-1">
+              <QuestRewardList
+                rewards={handIn}
+                title={`Received for ${plainText(`lg_Task_${handIn.taskId}`, `Quest ${handIn.taskId}`)}`}
+              />
+            </div>
+          ))}
           {accepted !== null && (
             <Notice>
               Quest accepted: {plainText(`lg_Task_${accepted}`, `Quest ${accepted}`)}.
@@ -78,6 +87,7 @@ export function NpcDialog({
                       <GameText k={offer.talkKey} />
                     </p>
                   )}
+                  <QuestRewardList rewards={offer.rewards} />
                   <GameButton
                     small
                     className="mt-2"

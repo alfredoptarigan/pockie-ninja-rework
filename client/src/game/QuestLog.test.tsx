@@ -33,6 +33,23 @@ describe('QuestLog', () => {
     expect(equip).toHaveTextContent('1/1')
   })
 
+  it('shows what each quest pays, with the reward item icons', async () => {
+    const rewards = {
+      exp: 5,
+      stone: 100,
+      gold: 0,
+      giftCoupon: 10,
+      honor: 0,
+      items: [{ itemId: 'i159104', count: 1, nameKey: 'lg_Debris159104_itemname' }],
+    }
+    mockApi({ 'GET /api/game/quests': () => json({ quests: [{ ...newbiePackQuest, rewards }] }) })
+    renderWithProviders(<QuestLog />)
+
+    const group = await screen.findByRole('group', { name: 'Rewards' })
+    expect(group).toHaveTextContent('EXP +5, Stone +100, Coupons +10')
+    expect(within(group).getByRole('img', { name: 'Lv.1 Newbie Pack' })).toBeVisible()
+  })
+
   it('says so when there are no quests', async () => {
     mockApi({ 'GET /api/game/quests': () => json({ quests: [] }) })
     renderWithProviders(<QuestLog />)
