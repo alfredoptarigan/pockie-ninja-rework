@@ -201,6 +201,16 @@ export function equipTables(): EquipTables & { suits: EquipSuits } {
   }
 }
 
+let setPieces: Map<number, number> | undefined
+/** How many items of item.ini belong to a set (SuitID). */
+export function setPieceCount(suitId: number) {
+  setPieces ??= Object.values(load<Record<string, Row>>('items')).reduce((counts, row) => {
+    const id = Number(row.SuitID ?? 0)
+    return id > 0 ? counts.set(id, (counts.get(id) ?? 0) + 1) : counts
+  }, new Map<number, number>())
+  return setPieces.get(suitId) ?? 0
+}
+
 /** equipPropConfig.ini costs and factors (blacksmith.md "Config"). */
 export const equipConfig = () =>
   load<{ config: Record<string, number | string> }>('equip-config').config

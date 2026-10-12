@@ -71,6 +71,30 @@ describe('GET /api/game/forge', () => {
   })
 })
 
+describe('GET /api/game/forge/gear', () => {
+  it('shows each piece’s set progress with the stacked bonuses', async () => {
+    const cloth = await giveItem('i281601', { equippedSlot: 'Cloth' })
+    const hat = await giveItem('i281602', { equippedSlot: 'Hat', durability: 0 })
+    const view = await gear(cloth.id)
+    // The broken hat does not count.
+    expect(view.set).toMatchObject({ id: 8160, worn: 1 })
+    expect(view.set.pieces).toBeGreaterThanOrEqual(7)
+    expect(view.set.bonuses).toEqual([
+      { pieces: 2, name: 'StaminaEquip', value: 2800 },
+      { pieces: 4, name: 'StrengthEquip', value: 2800 },
+      { pieces: 7, name: 'AgilityEquip', value: 2800 },
+    ])
+    await db.update(inventoryItems).set({ durability: null }).where(eq(inventoryItems.id, hat.id))
+    expect((await gear(hat.id)).set.worn).toBe(2)
+    expect((await gear(hat.id)).durability).toBe(200)
+  })
+
+  it('has no set for items outside one', async () => {
+    const bat = await giveItem('i250104')
+    expect((await gear(bat.id)).set).toBeUndefined()
+  })
+})
+
 describe('POST /api/game/forge/appraise', () => {
   it('rolls the properties for (int)(-0.0009 L^2 + 0.27 L + 12) Stone: L30 = 19', async () => {
     // i282607: a level 30 ring with an identify list.

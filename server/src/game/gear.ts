@@ -11,6 +11,7 @@ import {
   reviveDurabilityLoss,
   rollDrops,
   rollIdentify,
+  setCounts,
   wearDurability,
   type DropEntry,
   type DropLib,
@@ -20,7 +21,15 @@ import {
 import type { GearView } from '@pockie/shared'
 import { and, eq, isNotNull } from 'drizzle-orm'
 import { inventoryItems } from '../db/schema.js'
-import { dropItems, dropLib, equipTables, identifyList, identifyTables, item } from './data.js'
+import {
+  dropItems,
+  dropLib,
+  equipTables,
+  identifyList,
+  identifyTables,
+  item,
+  setPieceCount,
+} from './data.js'
 import type { Tx } from './progress.js'
 
 type ItemRow = typeof inventoryItems.$inferSelect
@@ -35,8 +44,32 @@ export const equipConfigOf = (itemId: string) => {
 export const durabilityOf = (row: Pick<ItemRow, 'durability'>, config: EquipConfig) =>
   row.durability ?? Math.max(config.MaxHardiness ?? 0, 1)
 
-/** The forge state of an equipment row for the client; undefined for other items. */
-export function gearView(row: ItemRow): GearView | undefined {
+/** Active (unbroken) worn pieces per set id among a character's rows (GetEquipBoxSuitIDType). */
+export function wornSetCounts(rows: readonly ItemRow[]): Record<string, number> {
+  return setCounts(
+    rows.flatMap((row) => {
+      const config = row.equippedSlot ? equipConfigOf(row.itemId) : undefined
+      return config && durabilityOf(row, config) > 0 ? [config] : []
+    }),
+  )
+}
+
+function setProgress(suitId: number, worn: Readonly<Record<string, number>>) {
+  if (suitId <= 0) return undefined
+  const bonuses = [...(equipTables().suits[suitId] ?? [])]
+    .sort((a, b) => a.Index - b.Index)
+    .map((row) => ({ pieces: row.Index, name: row.PropName, value: row.PropValue }))
+  return { id: suitId, pieces: setPieceCount(suitId), worn: worn[suitId] ?? 0, bonuses }
+}
+
+/**
+ * The forge state of an equipment row for the client; undefined for other items. `worn` is
+ * wornSetCounts of the character's rows, for the set progress.
+ */
+export function gearView(
+  row: ItemRow,
+  worn: Readonly<Record<string, number>> = {},
+): GearView | undefined {
   const config = equipConfigOf(row.itemId)
   if (!config) return undefined
   const tables = equipTables()
@@ -58,7 +91,7 @@ export function gearView(row: ItemRow): GearView | undefined {
     defense: config.Defense ?? 0,
     maxHp: enhancedMaxHp(config, row.enhanceLevel),
     inscription: inscriptionProps(config, row.inscribeLevel, tables.inscribeLevels),
-    setId: config.SuitID ?? 0,
+    set: setProgress(config.SuitID ?? 0, worn),
     appraiseCost: appraiseCost(config.UseLevel ?? 0),
     repairCost: repairCost(config, durability),
   }

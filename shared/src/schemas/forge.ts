@@ -61,7 +61,13 @@ export interface GearView {
   maxHp: number
   /** InscribeRec rows of the current inscription level. */
   inscription: { name: string; value: number }[]
-  setId: number
+  /** The item's set (SuitID): pieces in it, active pieces worn and its stacked bonuses. */
+  set?: {
+    id: number
+    pieces: number
+    worn: number
+    bonuses: { pieces: number; name: string; value: number }[]
+  }
   appraiseCost: number
   repairCost: number
 }

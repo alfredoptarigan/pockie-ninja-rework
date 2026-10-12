@@ -43,7 +43,7 @@ import {
   sealOdds,
 } from '../../game/data.js'
 import { playerFighter } from '../../game/combat.js'
-import { durabilityOf, equipConfigOf, gearView } from '../../game/gear.js'
+import { durabilityOf, equipConfigOf, gearView, wornSetCounts } from '../../game/gear.js'
 import { consumeOne, removeItems, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
@@ -149,7 +149,7 @@ async function payForge(
   return { bindNow: false, bindOnSuccess: payment === 'giftCoupon' }
 }
 
-export function itemView(row: ItemRow) {
+export function itemView(row: ItemRow, worn: Readonly<Record<string, number>> = {}) {
   return {
     id: row.id,
     itemId: row.itemId,
@@ -157,7 +157,7 @@ export function itemView(row: ItemRow) {
     bound: row.bound,
     equippedSlot: row.equippedSlot,
     nameKey: itemNameKey(row.itemId),
-    gear: gearView(row),
+    gear: gearView(row, worn),
   }
 }
 
@@ -207,7 +207,13 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const [row] = await tx.select().from(characters).where(eq(characters.id, characterId))
     const character = toCharacter(row!, await playerFighter(tx, row!))
     if (!itemId) return { character }
-    return { character, item: itemView(await ownedItem(tx, characterId, itemId)) }
+    const rows = await tx
+      .select()
+      .from(inventoryItems)
+      .where(eq(inventoryItems.characterId, characterId))
+    const forged = rows.find((r) => r.id === itemId)
+    if (!forged) throw new HttpError(404, 'no_item', 'You do not have that item.')
+    return { character, item: itemView(forged, wornSetCounts(rows)) }
   }
 
   app.get('/forge', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
@@ -226,10 +232,11 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
       .select()
       .from(inventoryItems)
       .where(eq(inventoryItems.characterId, character.id))
+    const worn = wornSetCounts(rows)
     return {
       gear: Object.fromEntries(
         rows.flatMap((row) => {
-          const view = gearView(row)
+          const view = gearView(row, worn)
           return view ? [[row.id, view]] : []
         }),
       ),
