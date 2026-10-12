@@ -187,7 +187,21 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
       moves sockets after commit, logout disconnects the session), events and zod schemas in
       `shared/src/schemas/realtime.ts`, client helper `client/src/lib/socket.ts`. Chat: 200 chars,
       control characters stripped, 5 messages per 5 s per character (in memory, single process).
-- [ ] **Task 8 — game client** (not started).
+- [~] **Task 8 — game client.**
+  - [x] 8a: `/play` + `/play/create`, React HUD (character panel, quest log/tracker, bag, NPC
+        dialogs, fight summary, travel list, player list, world/scene chat), static text slice
+        (`pnpm --filter @pockie/client game-text` -> `client/src/i18n/en.json`), 747 slice strings
+        hand-reviewed in `tools/i18n/en.json` (re-running `i18n:sentences merge` would revert them).
+  - [x] 8b: Phaser (`client/src/game/phaser/`, lazy chunk): scene picture with building signs,
+        hover/click hotspots, field NPCs, monster portrait row; full-screen battle replay (VS HUD,
+        motions, damage/crit/parry/dodge, skills, buffs, Skip/Replay/x2) then the result window.
+  - [ ] 8c: full-screen layout like the original (scene fills the stage, HUD overlays: portrait
+        and bars top left, currencies top strip, monster row top centre, scene name + Village/World
+        Map top right, chat bottom left, EXP bar bottom centre, menu icons bottom right, Quest
+        Navigation window). References: `data/reborn-raw/screenshots/` (gitignored).
+  - [ ] World map picture, Drops menu on monster portraits, explore UI, item icons.
+  - [ ] **Bug:** a fresh level 1 character deals 0 damage to the level 2 Sunflower, so early
+        fights are lost; fighting at 1 HP is allowed.
 - [ ] **Task 9 — copy fixes and verification** (not started).
 
 ### Notes for Task 8 (client)
