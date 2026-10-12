@@ -201,6 +201,15 @@ describe('GET /api/game/character stats', () => {
     expect(after).toMatchObject({ minAttack: 8, maxAttack: 9 })
   })
 
+  it('includes armour defence and the item.ini OtherProp bonuses', async () => {
+    // Hat i298005 (Def 55, HitMulEquip 66) and Cloth Armour i240101 (Def 71); the bag hat does not count.
+    await giveItem('i298005', { equippedSlot: 'Hat' })
+    await giveItem('i240101', { equippedSlot: 'Cloth' })
+    await giveItem('i220101')
+    const { stats } = (await client.get('/api/game/character')).json()
+    expect(stats).toMatchObject({ defense: 126, hit: 66 })
+  })
+
   it('requires a login', async () => {
     const anonymous = new Client(app)
     expect((await anonymous.get('/api/game/character')).statusCode).toBe(401)
