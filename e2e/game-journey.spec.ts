@@ -104,14 +104,16 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await page.getByRole('button', { name: 'Create account' }).click()
   await expect(page).toHaveURL('/play/create')
 
-  await page.getByLabel('Ninja name').fill(ninja)
-  await page.getByRole('radio', { name: 'Male', exact: true }).check()
-  // Outfit and village radios are hidden inside their cards: pick the card.
+  // The original creation screen: portraits and village icons are radios inside their art.
+  await page.getByLabel('Character Name').fill(ninja)
   for (const choice of ['Ggio Vega', 'Fire Village']) {
-    await page.getByText(choice, { exact: true }).click()
-    await expect(page.getByRole('radio', { name: new RegExp(`^${choice}`) })).toBeChecked()
+    const radio = page.getByRole('radio', { name: new RegExp(`^${choice}`) })
+    await radio.locator('..').click()
+    await expect(radio).toBeChecked()
   }
-  await page.getByRole('button', { name: 'Create ninja' }).click()
+  await expectImagesLoaded(page.locator('form'))
+  await shot(page, 'create')
+  await page.getByRole('button', { name: 'Enter Game' }).click()
 
   await expect(page).toHaveURL('/play')
   const game = page.getByRole('main', { name: 'Game' })
@@ -177,8 +179,13 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
     .click()
   const map = dialog(page, 'World Map')
   await expectImagesLoaded(map)
-  await expect(map.getByRole('button', { name: 'Fire Village (You are here)' })).toBeDisabled()
-  await expect(map.getByRole('button', { name: FIELD, exact: true })).toBeEnabled()
+  // No labels on the painting: names are the places' accessible names and their tooltips.
+  await expect(map.getByRole('button', { name: 'Fire Village (You are here)' })).toHaveAttribute(
+    'aria-disabled',
+    'true',
+  )
+  await map.getByRole('button', { name: FIELD, exact: true }).hover()
+  await expect(map.getByRole('tooltip')).toContainText('Entry level: Level 1')
   await shot(page, 'world-map')
   await map.getByRole('button', { name: FIELD, exact: true }).click()
   await expect(map).toBeHidden()

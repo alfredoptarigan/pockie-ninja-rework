@@ -232,6 +232,17 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
           Explore, World Map, fight result) with its original SWF/AS and the Reborn screenshots;
           list each gap here and fix it.
         - Acceptance: side-by-side screenshots (original vs ours) checked per window.
+        - [x] Creation screen (2026-10-12): `tools/assets/create-role.ts` exports the text-free
+              1000x600 screen, tab/button art per state and the 10 big outfit pictures
+              (`bitmap/peoplecreate`); `CreateCharacter.tsx` draws it scaled to the window with
+              English text at the original positions. Gender follows the outfit; Random and Back
+              as in `onRest`/`onBack`; the boost line is `CreatRolePanel_SelectRole`.
+        - [x] World Map (2026-10-12): no labels on the painting (they overlapped). As in
+              `WorldMapFrame.as`: coloured place art (up/over/down) stacked by Flash depth, the
+              original tooltip `Tip_WorldMap_<scene>_<nation>` on hover/focus, the `face_<scene>`
+              glow on the current place and the painting's own close button. Reborn draws it the
+              same way (tooltip only). Open: grey art for unvisited places needs a visited-scenes
+              list on the character (`ScenesEntered`).
 - [~] **Task 9 — copy fixes and verification.**
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.

@@ -147,7 +147,10 @@ describe('GameScreen', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'World Map' }))
     const map = screen.getByRole('dialog', { name: 'World Map' })
 
-    expect(within(map).getAllByRole('button', { name: /Lv\. 11/ })[0]).toBeDisabled()
+    expect(within(map).getAllByRole('button', { name: /Lv\. 11/ })[0]).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    )
     await userEvent.click(within(map).getByRole('button', { name: 'Smelting Mountains' }))
 
     expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101 })

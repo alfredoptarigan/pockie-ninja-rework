@@ -1,5 +1,5 @@
 import type { Character } from '@pockie/shared'
-import { fireEvent, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character } from '../test/game'
@@ -15,56 +15,63 @@ const renderMap = (who: Character = character) => {
   return { fetchMock, onClose }
 }
 
-/** The painting drawn at half size (384x213) at the page origin. */
-const painting = () => {
-  const image = document.querySelector<HTMLImageElement>('img[src="/assets/game/map/world.webp"]')!
-  vi.spyOn(image, 'getBoundingClientRect').mockReturnValue(
-    DOMRect.fromRect({ x: 0, y: 0, width: 384, height: 213 }),
-  )
-  return image
-}
+const place = (name: string) => screen.getByRole('button', { name })
 
 describe('WorldMap', () => {
-  it('draws the painting with English labels and marks where the ninja is', () => {
+  it('draws the places without labels and marks where the ninja is', () => {
     renderMap()
 
-    expect(painting()).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Smelting Mountains' })).toBeEnabled()
-    expect(screen.getByRole('button', { name: 'Fire Village (You are here)' })).toBeDisabled()
+    expect(document.querySelector('img[src="/assets/game/map/world.webp"]')).toBeInTheDocument()
+    // Names are accessible names only: nothing is written over the painting.
+    expect(screen.queryByText('Smelting Mountains')).not.toBeInTheDocument()
+    expect(place('Smelting Mountains')).toHaveAttribute('aria-disabled', 'false')
+    expect(place('Fire Village (You are here)')).toHaveAttribute('aria-disabled', 'true')
+    expect(document.querySelector('img[src="/assets/game/map/111-face.webp"]')).toBeInTheDocument()
     // Other nations' villages and fields are not on this ninja's roads.
-    expect(screen.getByRole('button', { name: 'Water Village' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Verdant Alley' })).toBeDisabled()
+    expect(place('Water Village')).toHaveAttribute('aria-disabled', 'true')
+    expect(place('Verdant Alley')).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('shows the original tooltip of a place on hover, for this ninja’s village', () => {
+    renderMap()
+
+    fireEvent.mouseEnter(place('Smelting Mountains'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Entry level: Level 1')
+    fireEvent.mouseLeave(place('Smelting Mountains'))
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument()
+
+    // A closed place still explains itself (lg_Tip_WorldMap_121_0).
+    fireEvent.mouseEnter(place('Water Village'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('You are not from')
   })
 
   it('travels from the keyboard', async () => {
     const { fetchMock, onClose } = renderMap()
 
-    screen.getByRole('button', { name: 'Smelting Mountains' }).focus()
+    act(() => place('Smelting Mountains').focus())
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Smelting Mountains')
     await userEvent.keyboard('{Enter}')
 
     expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101 })
     await waitFor(() => expect(onClose).toHaveBeenCalled())
   })
 
-  it('travels when the painting is clicked inside a place, at any drawn size', async () => {
+  it('does not travel to a closed place', () => {
     const { fetchMock } = renderMap()
 
-    // Painting point (40, 320) is only inside Smelting Mountains.
-    fireEvent.click(painting(), { clientX: 20, clientY: 160 })
-
-    await waitFor(() =>
-      expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101 }),
-    )
-  })
-
-  it('gives overlapping places to the higher depth', () => {
-    const { fetchMock } = renderMap()
-
-    // Painting point (100, 360) is in Smelting Mountains (depth 2) and Fire Village (depth 4):
-    // Fire Village wins, and the ninja is already there.
-    fireEvent.click(painting(), { clientX: 50, clientY: 180 })
+    fireEvent.click(place('Fire Village (You are here)'))
+    fireEvent.click(place('Water Village'))
 
     expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it('stacks overlapping places by their original depth', () => {
+    renderMap()
+
+    // Fire Village (depth 4) covers part of Smelting Mountains (depth 2).
+    expect(Number(place('Fire Village (You are here)').style.zIndex)).toBeGreaterThan(
+      Number(place('Smelting Mountains').style.zIndex),
+    )
   })
 
   it('lists the roads that are not on the painting and locks them by level', () => {
@@ -73,13 +80,23 @@ describe('WorldMap', () => {
     // Every M3 field has a map button now; the Christmas map has none.
     const others = screen.getByRole('region', { name: 'Other areas' })
     expect(others).toHaveTextContent('Christmas House')
-    expect(screen.getByRole('button', { name: 'Eventide Barrens Lv. 11' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Hidden Rain Village Lv. 86' })).toBeDisabled()
+    // Places on the painting carry their level lock in their name too.
+    expect(place('Eventide Barrens Lv. 11')).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('closes with the painting’s own close button', async () => {
+    const { onClose } = renderMap()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }))
+
+    expect(onClose).toHaveBeenCalled()
   })
 
   it('keeps every road closed while defeated', () => {
     renderMap({ ...character, hp: 0 })
 
     expect(screen.getByRole('alert')).toHaveTextContent('You cannot travel until then.')
-    expect(screen.getByRole('button', { name: 'Smelting Mountains' })).toBeDisabled()
+    expect(place('Smelting Mountains')).toHaveAttribute('aria-disabled', 'true')
   })
 })

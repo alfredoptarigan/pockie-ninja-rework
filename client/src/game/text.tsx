@@ -57,15 +57,20 @@ interface Span {
   children: ReactNode[]
 }
 
-/** Renders a game string with its colors and line breaks. */
+/**
+ * Renders a game string with its colors and line breaks. `tone="dark"` keeps the original colors
+ * for dark backgrounds (tooltips); the default darkens them for parchment.
+ */
 export function GameText({
   k,
   fallback = '',
   args = [],
+  tone = 'light',
 }: {
   k: string
   fallback?: string
   args?: (string | number)[]
+  tone?: 'light' | 'dark'
 }) {
   const text = table[k]
   if (text === undefined) return <>{fallback}</>
@@ -79,7 +84,8 @@ export function GameText({
     const lower = part.toLowerCase()
     if (lower.startsWith('<font')) {
       const color = COLOR.exec(part)![0].toLowerCase()
-      stack.push({ color: READABLE[color] ?? color, bold: top.bold, children: [] })
+      const shown = tone === 'dark' ? color : (READABLE[color] ?? color)
+      stack.push({ color: shown, bold: top.bold, children: [] })
     } else if (lower === '<b>') {
       stack.push({ color: top.color, bold: true, children: [] })
     } else if (lower === '</font>' || lower === '</b>') {

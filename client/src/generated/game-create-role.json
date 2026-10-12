@@ -1,0 +1,501 @@
+{
+  "width": 1000,
+  "height": 600,
+  "background": {
+    "file": "/assets/game/create/background.webp",
+    "x": 0,
+    "y": 0,
+    "width": 1000,
+    "height": 600
+  },
+  "nations": {
+    "1": {
+      "normal": {
+        "file": "/assets/game/create/nation1-normal.webp",
+        "x": 120.8,
+        "y": 86.75,
+        "width": 22,
+        "height": 21
+      },
+      "over": {
+        "file": "/assets/game/create/nation1-over.webp",
+        "x": 119.8,
+        "y": 84.75,
+        "width": 25,
+        "height": 25
+      },
+      "selected": {
+        "file": "/assets/game/create/nation1-selected.webp",
+        "x": 118.8,
+        "y": 84.75,
+        "width": 26,
+        "height": 25
+      }
+    },
+    "2": {
+      "normal": {
+        "file": "/assets/game/create/nation2-normal.webp",
+        "x": 162.6,
+        "y": 85.75,
+        "width": 18,
+        "height": 24
+      },
+      "over": {
+        "file": "/assets/game/create/nation2-over.webp",
+        "x": 160.6,
+        "y": 84.75,
+        "width": 22,
+        "height": 27
+      },
+      "selected": {
+        "file": "/assets/game/create/nation2-selected.webp",
+        "x": 160.6,
+        "y": 83.75,
+        "width": 22,
+        "height": 28
+      }
+    },
+    "3": {
+      "normal": {
+        "file": "/assets/game/create/nation3-normal.webp",
+        "x": 199.4,
+        "y": 90.75,
+        "width": 25,
+        "height": 16
+      },
+      "over": {
+        "file": "/assets/game/create/nation3-over.webp",
+        "x": 199.4,
+        "y": 87.75,
+        "width": 27,
+        "height": 23
+      },
+      "selected": {
+        "file": "/assets/game/create/nation3-selected.webp",
+        "x": 195.4,
+        "y": 87.75,
+        "width": 33,
+        "height": 23
+      }
+    },
+    "4": {
+      "normal": {
+        "file": "/assets/game/create/nation4-normal.webp",
+        "x": 239.2,
+        "y": 86.75,
+        "width": 26,
+        "height": 23
+      },
+      "over": {
+        "file": "/assets/game/create/nation4-over.webp",
+        "x": 239.2,
+        "y": 84.75,
+        "width": 27,
+        "height": 27
+      },
+      "selected": {
+        "file": "/assets/game/create/nation4-selected.webp",
+        "x": 235.2,
+        "y": 82.75,
+        "width": 34,
+        "height": 31
+      }
+    },
+    "5": {
+      "normal": {
+        "file": "/assets/game/create/nation5-normal.webp",
+        "x": 280,
+        "y": 87.75,
+        "width": 24,
+        "height": 22
+      },
+      "over": {
+        "file": "/assets/game/create/nation5-over.webp",
+        "x": 279,
+        "y": 85.75,
+        "width": 27,
+        "height": 26
+      },
+      "selected": {
+        "file": "/assets/game/create/nation5-selected.webp",
+        "x": 278,
+        "y": 85.75,
+        "width": 28,
+        "height": 26
+      }
+    }
+  },
+  "roles": {
+    "1": {
+      "normal": {
+        "file": "/assets/game/create/role1-normal.webp",
+        "x": 57.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role1-over.webp",
+        "x": 57.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role1-selected.webp",
+        "x": 57.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "2": {
+      "normal": {
+        "file": "/assets/game/create/role2-normal.webp",
+        "x": 122.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role2-over.webp",
+        "x": 122.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role2-selected.webp",
+        "x": 122.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "3": {
+      "normal": {
+        "file": "/assets/game/create/role3-normal.webp",
+        "x": 187.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role3-over.webp",
+        "x": 187.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role3-selected.webp",
+        "x": 187.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "4": {
+      "normal": {
+        "file": "/assets/game/create/role4-normal.webp",
+        "x": 252.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role4-over.webp",
+        "x": 252.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role4-selected.webp",
+        "x": 252.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "5": {
+      "normal": {
+        "file": "/assets/game/create/role5-normal.webp",
+        "x": 317.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role5-over.webp",
+        "x": 317.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role5-selected.webp",
+        "x": 317.65,
+        "y": 197.9,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "6": {
+      "normal": {
+        "file": "/assets/game/create/role6-normal.webp",
+        "x": 42.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role6-over.webp",
+        "x": 42.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role6-selected.webp",
+        "x": 42.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "7": {
+      "normal": {
+        "file": "/assets/game/create/role7-normal.webp",
+        "x": 107.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role7-over.webp",
+        "x": 107.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role7-selected.webp",
+        "x": 107.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "8": {
+      "normal": {
+        "file": "/assets/game/create/role8-normal.webp",
+        "x": 172.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role8-over.webp",
+        "x": 172.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role8-selected.webp",
+        "x": 172.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "9": {
+      "normal": {
+        "file": "/assets/game/create/role9-normal.webp",
+        "x": 237.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role9-over.webp",
+        "x": 237.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role9-selected.webp",
+        "x": 237.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      }
+    },
+    "10": {
+      "normal": {
+        "file": "/assets/game/create/role10-normal.webp",
+        "x": 302.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "over": {
+        "file": "/assets/game/create/role10-over.webp",
+        "x": 302.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      },
+      "selected": {
+        "file": "/assets/game/create/role10-selected.webp",
+        "x": 302.65,
+        "y": 261.8,
+        "width": 63,
+        "height": 63
+      }
+    }
+  },
+  "enter": {
+    "up": {
+      "file": "/assets/game/create/enter-up.webp",
+      "x": 648,
+      "y": 532,
+      "width": 197,
+      "height": 45
+    },
+    "over": {
+      "file": "/assets/game/create/enter-over.webp",
+      "x": 648,
+      "y": 532,
+      "width": 197,
+      "height": 45
+    },
+    "down": {
+      "file": "/assets/game/create/enter-down.webp",
+      "x": 648,
+      "y": 532,
+      "width": 197,
+      "height": 45
+    }
+  },
+  "back": {
+    "up": {
+      "file": "/assets/game/create/back-up.webp",
+      "x": 72,
+      "y": 536,
+      "width": 99,
+      "height": 42
+    },
+    "over": {
+      "file": "/assets/game/create/back-over.webp",
+      "x": 72,
+      "y": 536,
+      "width": 99,
+      "height": 42
+    },
+    "down": {
+      "file": "/assets/game/create/back-down.webp",
+      "x": 72,
+      "y": 536,
+      "width": 99,
+      "height": 42
+    }
+  },
+  "random": {
+    "up": {
+      "file": "/assets/game/create/random-up.webp",
+      "x": 252,
+      "y": 536,
+      "width": 99,
+      "height": 42
+    },
+    "over": {
+      "file": "/assets/game/create/random-over.webp",
+      "x": 252,
+      "y": 536,
+      "width": 99,
+      "height": 42
+    },
+    "down": {
+      "file": "/assets/game/create/random-down.webp",
+      "x": 252,
+      "y": 536,
+      "width": 99,
+      "height": 42
+    }
+  },
+  "outfits": {
+    "3": {
+      "file": "/assets/game/create/outfit-3.webp",
+      "x": 623.2,
+      "y": 116.5,
+      "width": 313,
+      "height": 335
+    },
+    "9": {
+      "file": "/assets/game/create/outfit-9.webp",
+      "x": 589.2,
+      "y": 116.5,
+      "width": 335,
+      "height": 334
+    },
+    "14": {
+      "file": "/assets/game/create/outfit-14.webp",
+      "x": 617.2,
+      "y": 113.5,
+      "width": 344,
+      "height": 338
+    },
+    "16": {
+      "file": "/assets/game/create/outfit-16.webp",
+      "x": 614.2,
+      "y": 124.5,
+      "width": 347,
+      "height": 329
+    },
+    "17": {
+      "file": "/assets/game/create/outfit-17.webp",
+      "x": 621.2,
+      "y": 120.5,
+      "width": 306,
+      "height": 332
+    },
+    "32": {
+      "file": "/assets/game/create/outfit-32.webp",
+      "x": 655.2,
+      "y": 114.5,
+      "width": 242,
+      "height": 338
+    },
+    "34": {
+      "file": "/assets/game/create/outfit-34.webp",
+      "x": 613.2,
+      "y": 113.5,
+      "width": 348,
+      "height": 336
+    },
+    "39": {
+      "file": "/assets/game/create/outfit-39.webp",
+      "x": 615.2,
+      "y": 127.5,
+      "width": 339,
+      "height": 322
+    },
+    "63": {
+      "file": "/assets/game/create/outfit-63.webp",
+      "x": 621.2,
+      "y": 115.5,
+      "width": 307,
+      "height": 334
+    },
+    "65": {
+      "file": "/assets/game/create/outfit-65.webp",
+      "x": 650.25,
+      "y": 114.5,
+      "width": 331,
+      "height": 336
+    }
+  }
+}

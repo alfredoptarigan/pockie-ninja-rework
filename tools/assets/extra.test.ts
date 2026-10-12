@@ -12,6 +12,7 @@ import {
   itemIconIds,
   itemRows,
   mapButtonSvg,
+  mapFaceSvg,
   mapLocations,
   playerOutfits,
   sliceItemIds,
@@ -152,6 +153,9 @@ describe('M2 extra asset coverage', () => {
         expect(state.x + state.width).toBeLessThanOrEqual(gameWorldMap.width)
         expect(state.y + state.height).toBeLessThanOrEqual(gameWorldMap.height)
       }
+    // The "you are here" glow (face_<id>) of every place, and the original close button.
+    for (const location of Object.values(gameWorldMap.locations)) fileExists(location.face.file)
+    for (const state of Object.values(gameWorldMap.close)) fileExists(state.file)
     for (const rect of Object.values(gameWorldMap.locations)) {
       expect(rect.x).toBeGreaterThanOrEqual(0)
       expect(rect.y).toBeGreaterThanOrEqual(0)
@@ -188,10 +192,28 @@ describe('M2 extra asset coverage', () => {
       '    <style><![CDATA[ .button-frame-over { opacity: 0; } ]]></style>',
       '</svg>',
     ].join('\n')
-    const over = mapButtonSvg(svg, '2601', 'over')
+    const over = mapButtonSvg(svg, 'scene_2601', 'over')
     expect(over).toContain('id="scene_2601"')
     expect(over).toContain('#over')
     for (const gone of ['scene_2602', '#shape0', '<rect', '#up', '#down', '#hittest', '<style'])
       expect(over).not.toContain(gone)
+  })
+
+  it('draws one face marker of the face layer alone', () => {
+    const svg = [
+      '<svg>',
+      '    <use height="426.0" xlink:href="#shape0"/>',
+      '    <use id="scene_111" xlink:href="#button0"/>',
+      '    <use id="facelayer" xlink:href="#sprite73"/>',
+      '    <g id="sprite73">',
+      '      <use id="face_111" xlink:href="#sprite74"/>',
+      '      <use id="face_2101" xlink:href="#sprite77"/>',
+      '    </g>',
+      '</svg>',
+    ].join('\n')
+    const face = mapFaceSvg(svg, '2101')
+    expect(face).toContain('id="facelayer"')
+    expect(face).toContain('id="face_2101"')
+    for (const gone of ['face_111', 'scene_111', '#shape0']) expect(face).not.toContain(gone)
   })
 })

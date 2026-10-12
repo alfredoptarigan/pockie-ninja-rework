@@ -23,8 +23,11 @@ export type CreateCharacterInput = z.infer<typeof createCharacterSchema>
 /** 0 Fire, 1 Water, 2 Earth, 3 Wind, 4 Lightning (original nation numbering). */
 export type Nation = 0 | 1 | 2 | 3 | 4
 
+/** Base stat an outfit favours; the creation screen names it and the stats it affects. */
+export type OutfitBoost = 'strength' | 'agility' | 'stamina'
+
 export interface CreationOptions {
-  outfits: { clothing: number; gender: 0 | 1; weaponClass: number }[]
+  outfits: { clothing: number; gender: 0 | 1; weaponClass: number; boost: OutfitBoost }[]
   villages: { nation: Nation; sceneId: number }[]
   suggestedNation: Nation
 }

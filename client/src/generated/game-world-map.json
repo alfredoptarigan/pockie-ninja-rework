@@ -2,6 +2,23 @@
   "file": "/assets/game/map/world.webp",
   "width": 768,
   "height": 426,
+  "close": {
+    "up": { "file": "/assets/game/map/close-up.webp", "x": 735, "y": 3, "width": 32, "height": 28 },
+    "over": {
+      "file": "/assets/game/map/close-over.webp",
+      "x": 734,
+      "y": 1,
+      "width": 34,
+      "height": 32
+    },
+    "down": {
+      "file": "/assets/game/map/close-down.webp",
+      "x": 734,
+      "y": 1,
+      "width": 34,
+      "height": 32
+    }
+  },
   "locations": {
     "111": {
       "depth": 4,
@@ -31,6 +48,13 @@
           "width": 91,
           "height": 61
         }
+      },
+      "face": {
+        "file": "/assets/game/map/111-face.webp",
+        "x": 80,
+        "y": 348,
+        "width": 51,
+        "height": 50
       }
     },
     "121": {
@@ -61,6 +85,13 @@
           "width": 92,
           "height": 48
         }
+      },
+      "face": {
+        "file": "/assets/game/map/121-face.webp",
+        "x": 663,
+        "y": 305,
+        "width": 47,
+        "height": 39
       }
     },
     "131": {
@@ -91,6 +122,13 @@
           "width": 74,
           "height": 82
         }
+      },
+      "face": {
+        "file": "/assets/game/map/131-face.webp",
+        "x": 32,
+        "y": 178,
+        "width": 40,
+        "height": 51
       }
     },
     "141": {
@@ -121,6 +159,13 @@
           "width": 51,
           "height": 55
         }
+      },
+      "face": {
+        "file": "/assets/game/map/141-face.webp",
+        "x": 346,
+        "y": 346,
+        "width": 49,
+        "height": 54
       }
     },
     "151": {
@@ -151,6 +196,13 @@
           "width": 135,
           "height": 82
         }
+      },
+      "face": {
+        "file": "/assets/game/map/151-face.webp",
+        "x": 614,
+        "y": 149,
+        "width": 47,
+        "height": 45
       }
     },
     "161": {
@@ -181,6 +233,13 @@
           "width": 98,
           "height": 74
         }
+      },
+      "face": {
+        "file": "/assets/game/map/161-face.webp",
+        "x": 329,
+        "y": 117,
+        "width": 56,
+        "height": 57
       }
     },
     "171": {
@@ -211,6 +270,13 @@
           "width": 148,
           "height": 98
         }
+      },
+      "face": {
+        "file": "/assets/game/map/171-face.webp",
+        "x": 371,
+        "y": 63,
+        "width": 50,
+        "height": 44
       }
     },
     "2101": {
@@ -241,6 +307,13 @@
           "width": 92,
           "height": 73
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2101-face.webp",
+        "x": 52,
+        "y": 315,
+        "width": 24,
+        "height": 24
       }
     },
     "2102": {
@@ -271,6 +344,13 @@
           "width": 195,
           "height": 78
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2102-face.webp",
+        "x": 104,
+        "y": 292,
+        "width": 24,
+        "height": 23
       }
     },
     "2103": {
@@ -301,6 +381,13 @@
           "width": 81,
           "height": 56
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2103-face.webp",
+        "x": 155,
+        "y": 348,
+        "width": 24,
+        "height": 24
       }
     },
     "2201": {
@@ -331,6 +418,13 @@
           "width": 68,
           "height": 51
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2201-face.webp",
+        "x": 620,
+        "y": 295,
+        "width": 24,
+        "height": 23
       }
     },
     "2202": {
@@ -361,6 +455,13 @@
           "width": 107,
           "height": 55
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2202-face.webp",
+        "x": 601,
+        "y": 262,
+        "width": 24,
+        "height": 24
       }
     },
     "2203": {
@@ -391,6 +492,13 @@
           "width": 133,
           "height": 74
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2203-face.webp",
+        "x": 651,
+        "y": 247,
+        "width": 24,
+        "height": 23
       }
     },
     "2301": {
@@ -421,6 +529,13 @@
           "width": 70,
           "height": 79
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2301-face.webp",
+        "x": 50,
+        "y": 249,
+        "width": 24,
+        "height": 24
       }
     },
     "2302": {
@@ -451,6 +566,13 @@
           "width": 121,
           "height": 64
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2302-face.webp",
+        "x": 118,
+        "y": 226,
+        "width": 24,
+        "height": 24
       }
     },
     "2303": {
@@ -481,6 +603,13 @@
           "width": 152,
           "height": 74
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2303-face.webp",
+        "x": 124,
+        "y": 186,
+        "width": 24,
+        "height": 24
       }
     },
     "2401": {
@@ -511,6 +640,13 @@
           "width": 130,
           "height": 74
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2401-face.webp",
+        "x": 243,
+        "y": 331,
+        "width": 24,
+        "height": 24
       }
     },
     "2402": {
@@ -541,6 +677,13 @@
           "width": 132,
           "height": 67
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2402-face.webp",
+        "x": 287,
+        "y": 304,
+        "width": 24,
+        "height": 24
       }
     },
     "2403": {
@@ -571,6 +714,13 @@
           "width": 120,
           "height": 63
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2403-face.webp",
+        "x": 370,
+        "y": 325,
+        "width": 24,
+        "height": 24
       }
     },
     "2501": {
@@ -601,6 +751,13 @@
           "width": 107,
           "height": 50
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2501-face.webp",
+        "x": 650,
+        "y": 207,
+        "width": 24,
+        "height": 24
       }
     },
     "2502": {
@@ -631,6 +788,13 @@
           "width": 139,
           "height": 80
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2502-face.webp",
+        "x": 509,
+        "y": 174,
+        "width": 24,
+        "height": 24
       }
     },
     "2503": {
@@ -661,6 +825,13 @@
           "width": 150,
           "height": 71
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2503-face.webp",
+        "x": 571,
+        "y": 159,
+        "width": 24,
+        "height": 24
       }
     },
     "2601": {
@@ -691,6 +862,13 @@
           "width": 348,
           "height": 125
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2601-face.webp",
+        "x": 301,
+        "y": 198,
+        "width": 45,
+        "height": 47
       }
     },
     "2602": {
@@ -721,6 +899,13 @@
           "width": 84,
           "height": 72
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2602-face.webp",
+        "x": 406,
+        "y": 118,
+        "width": 24,
+        "height": 24
       }
     },
     "2603": {
@@ -751,6 +936,13 @@
           "width": 79,
           "height": 40
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2603-face.webp",
+        "x": 430,
+        "y": 140,
+        "width": 24,
+        "height": 23
       }
     },
     "2604": {
@@ -781,6 +973,13 @@
           "width": 146,
           "height": 66
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2604-face.webp",
+        "x": 410,
+        "y": 183,
+        "width": 24,
+        "height": 24
       }
     },
     "2605": {
@@ -811,6 +1010,13 @@
           "width": 103,
           "height": 68
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2605-face.webp",
+        "x": 363,
+        "y": 103,
+        "width": 24,
+        "height": 23
       }
     },
     "2701": {
@@ -841,6 +1047,13 @@
           "width": 166,
           "height": 61
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2701-face.webp",
+        "x": 167,
+        "y": 104,
+        "width": 24,
+        "height": 24
       }
     },
     "2702": {
@@ -871,6 +1084,13 @@
           "width": 76,
           "height": 56
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2702-face.webp",
+        "x": 100,
+        "y": 103,
+        "width": 24,
+        "height": 24
       }
     },
     "2703": {
@@ -901,6 +1121,13 @@
           "width": 103,
           "height": 52
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2703-face.webp",
+        "x": 144,
+        "y": 78,
+        "width": 24,
+        "height": 24
       }
     },
     "2704": {
@@ -931,6 +1158,13 @@
           "width": 52,
           "height": 41
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2704-face.webp",
+        "x": 203,
+        "y": 48,
+        "width": 24,
+        "height": 24
       }
     },
     "2801": {
@@ -961,6 +1195,13 @@
           "width": 98,
           "height": 65
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2801-face.webp",
+        "x": 431,
+        "y": 295,
+        "width": 24,
+        "height": 24
       }
     },
     "2802": {
@@ -991,6 +1232,13 @@
           "width": 55,
           "height": 35
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2802-face.webp",
+        "x": 467,
+        "y": 274,
+        "width": 24,
+        "height": 24
       }
     },
     "2803": {
@@ -1021,6 +1269,13 @@
           "width": 105,
           "height": 72
         }
+      },
+      "face": {
+        "file": "/assets/game/map/2803-face.webp",
+        "x": 527,
+        "y": 289,
+        "width": 24,
+        "height": 24
       }
     }
   }

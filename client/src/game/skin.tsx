@@ -5,6 +5,7 @@ import {
   useEffect,
   useId,
   useRef,
+  useState,
   type ComponentProps,
   type CSSProperties,
   type ReactNode,
@@ -212,4 +213,18 @@ export function Dialog({
       <div className="game-inset max-h-[520px] overflow-auto p-3 font-game text-sm">{children}</div>
     </dialog>
   )
+}
+
+/** Scale that fits a fixed-size stage (the original Flash stage) into the window. */
+export function useFitScale(width: number, height: number) {
+  const [scale, setScale] = useState(() =>
+    Math.min(window.innerWidth / width, window.innerHeight / height),
+  )
+  useEffect(() => {
+    const onResize = () =>
+      setScale(Math.min(window.innerWidth / width, window.innerHeight / height))
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [width, height])
+  return scale
 }

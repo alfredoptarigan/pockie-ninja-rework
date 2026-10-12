@@ -175,6 +175,13 @@ for (const n of [1, 2, 4, 7]) keys.add(`lg_Common_RolePopsinger${n}`)
 for (let n = 1; n <= 100; n++) keys.add(`lg_avatar${n}`)
 // Battle replay labels: every skill and buff name (small, and any outfit may use them).
 for (const key of Object.keys(en)) if (/^lg_(Skill|Buffer)_\d+$/.test(key)) keys.add(key)
+// World map tooltips (Tip_WorldMap_<scene>_<nation>, WorldMapFrame.onScenePointOver).
+for (const key of Object.keys(en)) if (/^lg_Tip_WorldMap_\d+_\d$/.test(key)) keys.add(key)
+// Character creation (CreatRoleBase): village tips, the outfit boost line and its stat names.
+for (let n = 0; n < 5; n++) keys.add(`lg_Tip_LoginNation_${n}`).add(`lg_Common_Nation_${n}`)
+keys.add('lg_CreatRolePanel_SelectRole')
+for (const stat of ['Force', 'Attack', 'GridFile', 'Agile', 'Speed', 'Dodge', 'Spirit', 'Hp', 'Sp'])
+  keys.add(`lg_RoleInfo_${stat}`)
 
 // Village buildings (scene picture hotspots): clip name to the NPC behind it (NameFlag name_<id>).
 const buildings: Record<string, Record<string, string>> = {}

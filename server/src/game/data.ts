@@ -3,6 +3,7 @@
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import type { AvatarStats, SkillInput } from '@pockie/game-core'
+import type { OutfitBoost } from '@pockie/shared'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -22,12 +23,20 @@ export function avatarStats(avatarId: number): AvatarStats {
   return row
 }
 
+/** Stat the creation screen says an outfit boosts (CreatRoleBase.SetRoleSelectDes). */
+function outfitBoost({ Strength, Agility, Stamina }: AvatarStats): OutfitBoost {
+  if (Strength > Agility && Strength > Stamina) return 'strength'
+  if (Agility > Strength && Agility > Stamina) return 'agility'
+  return 'stamina'
+}
+
 /** The 10 outfits the original creation screen offers (creatrole.tab, first rows). */
 export function creationOutfits() {
   return load<Row[]>('creation-outfits').map((row) => ({
     clothing: Number(row.Cloth),
     gender: Number(row.Sex) as 0 | 1,
     weaponClass: Number(row.Pos),
+    boost: outfitBoost(avatarStats(Number(row.AvatarID))),
   }))
 }
 

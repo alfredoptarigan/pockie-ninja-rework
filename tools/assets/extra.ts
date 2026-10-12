@@ -380,7 +380,7 @@ export async function exportWorldMap() {
     )
     const data = entries.get('UI_WorldMap.swf')!
     const hash = createHash('sha1').update(data).digest('hex')
-    return await cached('world-map', hash, [join(paths.assets, 'game/map')], async () => {
+    return await cached('world-map-v2', hash, [join(paths.assets, 'game/map')], async () => {
       mkdirSync(join(work, 'in'))
       const swf = join(work, 'in/world.swf')
       writeFileSync(swf, data)
@@ -407,8 +407,13 @@ export async function exportWorldMap() {
       const svg = readFileSync(join(frames, 'world.swf', '1.svg'), 'utf8')
       const locations: Record<string, MapLocation> = {}
       for (const [id, hit] of Object.entries(mapLocations(readFileSync(xml, 'utf8'))))
-        locations[id] = { ...hit, states: await mapButtonStates(svg, id) }
-      return { file: assetUrl('game/map/world.webp'), width, height, locations }
+        locations[id] = {
+          ...hit,
+          states: await mapButtonStates(svg, `scene_${id}`, id),
+          face: await mapCrop(mapFaceSvg(svg, id), `${id}-face`),
+        }
+      const close = await mapButtonStates(svg, 'btnclose', 'close')
+      return { file: assetUrl('game/map/world.webp'), width, height, close, locations }
     })
   } finally {
     rmSync(work, { recursive: true, force: true })
@@ -425,14 +430,15 @@ interface MapState {
 }
 type MapLocation = ReturnType<typeof mapLocations>[string] & {
   states: Record<(typeof MAP_STATES)[number], MapState>
+  face: MapState
 }
 
-/** One map button drawn alone in one state, as an SVG of the whole painting's size. */
-export function mapButtonSvg(svg: string, sceneId: string, state: (typeof MAP_STATES)[number]) {
+/** One map button (`scene_<id>` or `btnclose`) drawn alone in one state, painting-sized SVG. */
+export function mapButtonSvg(svg: string, element: string, state: (typeof MAP_STATES)[number]) {
   const others = ['up', 'over', 'down', 'hittest'].filter((name) => name !== state).join('|')
   return svg
     .split('\n')
-    .filter((line) => !/^ {4}<(use|rect) /.test(line) || line.includes(` id="scene_${sceneId}"`))
+    .filter((line) => !/^ {4}<(use|rect) /.test(line) || line.includes(` id="${element}"`))
     .join('\n')
     .replace(/<style><!\[CDATA\[[\s\S]*?\]\]><\/style>/g, '')
     .replace(
@@ -445,31 +451,45 @@ export function mapButtonSvg(svg: string, sceneId: string, state: (typeof MAP_ST
 }
 
 /**
+ * The face layer with only `face_<sceneId>`: the glow WorldMapFrame.InitUI shows on the place the
+ * player stands in (every other face clip is hidden).
+ */
+export function mapFaceSvg(svg: string, sceneId: string) {
+  return svg
+    .split('\n')
+    .filter(
+      (line) =>
+        !(/^ {4}<(use|rect) /.test(line) && !line.includes(' id="facelayer"')) &&
+        !(/^ {6}<use [^>]*id="face_/.test(line) && !line.includes(` id="face_${sceneId}"`)),
+    )
+    .join('\n')
+}
+
+/** Renders a painting-sized SVG and saves its opaque part as game/map/<name>.webp. */
+async function mapCrop(svg: string, name: string): Promise<MapState> {
+  const { data, info } = await sharp(Buffer.from(svg))
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true })
+  const box = opaqueBounds([{ data, width: info.width, height: info.height }])
+  if (!box) throw new Error(`Empty map art ${name}`)
+  const relative = `game/map/${name}.webp`
+  await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .extract(box)
+    .webp({ quality: 85, alphaQuality: 90, effort: 6 })
+    .toFile(join(paths.assets, relative))
+  return { file: assetUrl(relative), x: box.left, y: box.top, width: box.width, height: box.height }
+}
+
+/**
  * The coloured art the original shows over the grey painting for a place the player has visited
  * (WorldMapFrame.refreshMap sets alpha 1), per button state, cropped, in painting coordinates.
+ * Also used for the close button.
  */
-async function mapButtonStates(svg: string, sceneId: string) {
+async function mapButtonStates(svg: string, element: string, name: string) {
   const states = {} as MapLocation['states']
-  for (const state of MAP_STATES) {
-    const { data, info } = await sharp(Buffer.from(mapButtonSvg(svg, sceneId, state)))
-      .ensureAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true })
-    const box = opaqueBounds([{ data, width: info.width, height: info.height }])
-    if (!box) throw new Error(`Empty map button ${sceneId} ${state}`)
-    const relative = `game/map/${sceneId}-${state}.webp`
-    await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
-      .extract(box)
-      .webp({ quality: 85, alphaQuality: 90, effort: 6 })
-      .toFile(join(paths.assets, relative))
-    states[state] = {
-      file: assetUrl(relative),
-      x: box.left,
-      y: box.top,
-      width: box.width,
-      height: box.height,
-    }
-  }
+  for (const state of MAP_STATES)
+    states[state] = await mapCrop(mapButtonSvg(svg, element, state), `${name}-${state}`)
   return states
 }
 

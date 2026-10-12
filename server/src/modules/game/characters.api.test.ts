@@ -40,7 +40,11 @@ describe('GET /api/game/creation', () => {
     expect(response.statusCode).toBe(200)
     const body = response.json()
     expect(body.outfits).toHaveLength(10)
-    expect(body.outfits[0]).toEqual({ clothing: 39, gender: 1, weaponClass: 4 })
+    expect(body.outfits[0]).toEqual({ clothing: 39, gender: 1, weaponClass: 4, boost: 'stamina' })
+    // CreatRoleBase.SetRoleSelectDes: the strictly highest base stat, else stamina (16 ties).
+    const boost = (clothing: number) =>
+      body.outfits.find((o: { clothing: number }) => o.clothing === clothing).boost
+    expect([boost(3), boost(9), boost(16)]).toEqual(['agility', 'strength', 'stamina'])
     expect(body.villages.map((v: { nation: number }) => v.nation)).toEqual([0, 1, 2, 3, 4])
     expect(body.villages[4]).toEqual({ nation: 4, sceneId: 131 })
     expect(body.suggestedNation).toBe(0)

@@ -14,6 +14,7 @@ import { join } from 'node:path'
 import { format, resolveConfig } from 'prettier'
 import sharp from 'sharp'
 import { ACTION_NAMES, exportMonsters, exportNpcs, exportOutfits } from './assets/characters.ts'
+import { exportCreateRole } from './assets/create-role.ts'
 import { exportItems, exportWeapons, exportWorldMap } from './assets/extra.ts'
 import { ffdec } from './assets/ffdec.ts'
 import { paths } from './assets/paths.ts'
@@ -173,9 +174,14 @@ async function exportExtra() {
   await writeJson(join(paths.generated, 'game-world-map.json'), await exportWorldMap())
   await writeJson(join(paths.generated, 'game-weapons.json'), await exportWeapons())
 }
-// `pnpm assets:export [game|extra|ui]` runs one part; no argument runs everything.
+async function exportCreateScreen() {
+  await writeJson(join(paths.generated, 'game-create-role.json'), await exportCreateRole())
+  console.log('Exported the character creation screen')
+}
+// `pnpm assets:export [game|extra|ui|create]` runs one part; no argument runs everything.
 const part = process.argv[2]
 if (!part) await exportLanding()
 if (!part || part === 'game') await exportGame()
 if (!part || part === 'extra') await exportExtra()
 if (!part || part === 'ui') await exportUiSkin()
+if (!part || part === 'create') await exportCreateScreen()

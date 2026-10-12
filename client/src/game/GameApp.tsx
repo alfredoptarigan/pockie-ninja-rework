@@ -1,5 +1,5 @@
 import type { Character } from '@pockie/shared'
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { Navigate } from 'react-router'
 import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
 import { CharacterWindow } from './CharacterWindow'
@@ -11,7 +11,7 @@ import { NpcDialog } from './NpcDialog'
 import { QuestLog } from './QuestLog'
 import { QuestNavigation } from './QuestNavigation'
 import { SceneView } from './SceneView'
-import { Dialog, GameButton, Notice } from './skin'
+import { Dialog, GameButton, Notice, useFitScale } from './skin'
 import type { BagHighlight, SceneNpc } from './types'
 import { destinations, isDefeated, isVillage, villageOf } from './world'
 import { WorldMap } from './WorldMap'
@@ -53,21 +53,10 @@ export default function GameApp({ view }: { view: 'game' | 'create' }) {
 /** The HUD is laid out on a 1280x720 stage and scaled to the screen like the original Flash. */
 const STAGE = { width: 1280, height: 720 }
 
-function useStageScale() {
-  const fit = () => Math.min(window.innerWidth / STAGE.width, window.innerHeight / STAGE.height)
-  const [scale, setScale] = useState(fit)
-  useEffect(() => {
-    const onResize = () => setScale(fit())
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
-  return scale
-}
-
 type Window = MenuWindow | 'map'
 
 function GameScreen({ character }: { character: Character }) {
-  const scale = useStageScale()
+  const scale = useFitScale(STAGE.width, STAGE.height)
   const scene = useScene()
   const talk = useTalk()
   const travel = useTravel()
