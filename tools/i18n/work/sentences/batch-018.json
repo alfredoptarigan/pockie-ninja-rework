@@ -5,7 +5,6 @@
   "Iwagakure": "Earth Village",
   "Otogakure": "Sound Village",
   "Kusagakure": "Grass Village",
-  "Sasuke": "Sasuke Uchiha",
   "Desa Api": "Fire Village",
   "Desa Air": "Water Village",
   "Desa Petir": "Lightning Village",
@@ -20,19 +19,10 @@
   "Lintasan Setapak": "Eerie Passage",
   "Amegakure": "Hidden Rain Village",
   "Rumah": "Home",
-  "Stinger Bee": "Bee Stingers",
   "Darurat": "Emergency",
   "Pilih": "Choose",
   "Menetaskan telur": "Hatch the Egg",
-  "Jagung": "Corn",
-  "Boss Toko Barang": "Merchant Boss",
-  "Pedagang Keliling": "Traveling Merchant",
-  "Lady Feng": "Feng",
-  "Ahli Agama": "Priest",
-  "Scarlet Bandit": "Scarlet",
-  "Grinning Monkey": "Monkey",
-  "Sweet Potato Demon": "Potato",
-  "Iblis Jagung": "Corn"
+  "Jagung": "Corn"
  },
  "units": [
   {

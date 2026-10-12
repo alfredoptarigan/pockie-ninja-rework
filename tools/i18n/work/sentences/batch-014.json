@@ -1,7 +1,6 @@
 {
  "terms": {
   "Kakashi": "Kakashi Hatake",
-  "Sasuke": "Sasuke Uchiha",
   "Desa Api": "Fire Village",
   "Desa Air": "Water Village",
   "Desa Petir": "Lightning Village",
@@ -43,8 +42,7 @@
   "Rumahku": "My Home",
   "Menolong Teman": "Help a Friend",
   "Suigetsu": "Suigetsu Hozuki",
-  "Hatake Kakashi": "Kakashi Hatake",
-  "Aizen": "Sosuke Aizen"
+  "Hatake Kakashi": "Kakashi Hatake"
  },
  "units": [
   {

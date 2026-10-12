@@ -24,19 +24,10 @@
   "Goa Batu": "Boulder Cavern",
   "Altar Lush": "Lush Altar",
   "Rumah": "Home",
-  "Stinger Bee": "Bee Stingers",
   "Pilih": "Choose",
   "Menukar": "Trade",
   "Kembali": "Return",
-  "Menerima Misi": "Accept a Quest",
-  "Kurosaki Ichigo": "Ichigo Kurosaki",
-  "Shihouin Yoruichi": "Yoruichi Shihoin",
-  "Inoue Orihime": "Orihime Inoue",
-  "Hyuga Hinata": "Hinata Hyuga",
-  "Uzumaki Naruto": "Naruto Uzumaki",
-  "Maneater Blossom": "Man-Eater",
-  "Sweet Potato Demon": "Potato",
-  "Berlatih": "Training"
+  "Menerima Misi": "Accept a Quest"
  },
  "units": [
   {

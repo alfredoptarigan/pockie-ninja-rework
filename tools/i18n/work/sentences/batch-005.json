@@ -1,6 +1,5 @@
 {
  "terms": {
-  "Sasuke": "Sasuke Uchiha",
   "Murid Ninja": "Beginner Ninja",
   "Ninja Akademi": "Academy Ninja",
   "Ninja Genin": "Genin",
@@ -16,10 +15,7 @@
   "Blok": "Block",
   "Pilih": "Choose",
   "Memberi": "Gift",
-  "Pasar": "Market",
-  "Penyihir": "Sorcerer",
-  "Treant": "Tree Ent",
-  "Sushi Monster": "Sushi"
+  "Pasar": "Market"
  },
  "units": [
   {

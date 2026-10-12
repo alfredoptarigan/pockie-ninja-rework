@@ -1,6 +1,5 @@
 {
  "terms": {
-  "Sasuke": "Sasuke Uchiha",
   "Gudian of Sand": "Guardian of Sand",
   "Come Come Paradise": "Make Out Paradise",
   "Advanced Inscription Talisman": "High Level Inscription Talisman",
@@ -13,14 +12,10 @@
   "Bukti": "Proof",
   "Rumput": "Grass",
   "Kue bulan": "Mooncake",
-  "Kurosaki Ichigo": "Ichigo Kurosaki",
-  "Grimmjow": "Grimmjow Jaegerjaquez",
   "Suigetsu": "Suigetsu Hozuki",
   "Shiba Kuukaku": "Kukaku Shiba",
   "Kotetsu Isane": "Isane Kotetsu",
-  "Arisawa Tatsuki": "Tatsuki Arisawa",
-  "Perampok": "Bandit",
-  "Blackhawk": "Black Eagle"
+  "Arisawa Tatsuki": "Tatsuki Arisawa"
  },
  "units": [
   {

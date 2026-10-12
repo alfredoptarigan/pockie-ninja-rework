@@ -1,14 +1,5 @@
 {
- "terms": {
-  "Stinger Bee": "Bee Stingers",
-  "Earthwing Dragon": "Earth Pterosaur",
-  "Frostwing Dragon": "Ice Pterosaur",
-  "Greenskin Frog": "Green Frog",
-  "Grinning Monkey": "Monkey",
-  "Treant": "Tree Ent",
-  "Sweet Potato Demon": "Potato",
-  "Sushi Monster": "Sushi"
- },
+ "terms": {},
  "units": [
   {
    "n": 11331,

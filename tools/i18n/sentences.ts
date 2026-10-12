@@ -5,7 +5,7 @@
 // Run with `pnpm i18n:sentences prepare` / `merge`. Rules: tools/i18n/SENTENCES_GUIDE.md.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import type { GlossaryEntry } from './names.ts'
+import { applyName, type GlossaryEntry } from './names.ts'
 
 const PROTECTED = /(<[^>]*>|\{@[^}]*\})/
 const NUMBER = /\d+(?:\.\d+)?/g
@@ -63,6 +63,117 @@ function termPattern(term: string) {
   return new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, 'u')
 }
 
+/** NPC/monster terms never become substring rules for prose, even through duplicate quest names. */
+export function sentenceTerms(glossary: Record<string, GlossaryEntry>) {
+  const npcNames = new Set(
+    Object.values(glossary)
+      .filter((entry) => entry.kind === 'npc')
+      .map((entry) => plain(entry.source)),
+  )
+  const terms = new Map<string, string>()
+  for (const entry of Object.values(glossary)) {
+    const from = plain(entry.source)
+    const to = plain(entry.en)
+    if (!npcNames.has(from) && from.length >= MIN_TERM_LENGTH && from !== to && !terms.has(from))
+      terms.set(from, to)
+  }
+  return terms
+}
+
+/** Only an NPC name alias whose entire visible source matches its canonical name is eligible. */
+export function npcNameTranslation(
+  key: string,
+  source: string,
+  glossary: Record<string, GlossaryEntry>,
+) {
+  const id = /^lg_NPC_(n\d+)$/.exec(key)?.[1]
+  const entry = id ? glossary[`lg_name_${id}`] : undefined
+  return entry?.kind === 'npc' && plain(source) === plain(entry.source)
+    ? applyName(source, plain(entry.en))
+    : undefined
+}
+
+export type SentenceIndex = Record<string, { key: string; numbers: string[] }[]>
+const sorted = (o: Record<string, string>) =>
+  Object.fromEntries(Object.entries(o).sort(([a], [b]) => (a < b ? -1 : 1)))
+
+/** Pure merge used by the CLI and regression test; reviewed values have final precedence. */
+export function mergeSentences(
+  source: Record<string, string>,
+  glossary: Record<string, GlossaryEntry>,
+  index: SentenceIndex,
+  results: Record<string, string>,
+  overrides: Record<string, string> = {},
+) {
+  const names = Object.fromEntries(Object.entries(glossary).map(([key, entry]) => [key, entry.en]))
+  const en: Record<string, string> = { ...names }
+  const status: Record<string, string> = {}
+
+  for (const [n, rows] of Object.entries(index)) {
+    const template = toTemplate(source[rows[0]!.key] ?? '').template
+    const translation = results[n]
+    const errors = translation === undefined ? ['missing'] : validate(template, translation)
+    for (const { key, numbers } of rows) {
+      if (errors.length) {
+        en[key] = source[key] ?? ''
+        status[key] = errors.join(', ')
+      } else {
+        en[key] = fillTemplate(translation!, numbers)
+      }
+    }
+  }
+  for (const [key, text] of Object.entries(source)) {
+    if (key in en) continue
+    const tier = tierName(key, names)
+    en[key] = tier ?? text // markup-only or empty strings stay as they are
+    if (/^lg_avatar\d+$/.test(key) && !tier && plain(text)) status[key] = 'no base outfit name'
+  }
+
+  for (const [key, text] of Object.entries(source)) {
+    const name = npcNameTranslation(key, text, glossary)
+    if (name !== undefined) {
+      en[key] = name
+      delete status[key]
+    }
+  }
+  const placeholders = (value: string) =>
+    [...value.matchAll(/\{@[^}]*\}/g)]
+      .map((match) => match[0])
+      .sort()
+      .join('\u0000')
+  for (const [key, value] of Object.entries(overrides)) {
+    if (!(key in source)) throw new Error(`Unknown reviewed key: ${key}`)
+    if (typeof value !== 'string' || (!value.trim() && plain(source[key]!)))
+      throw new Error(`Empty reviewed value: ${key}`)
+    if (placeholders(source[key]!) !== placeholders(value))
+      throw new Error(`Reviewed placeholders differ: ${key}`)
+    en[key] = value
+    delete status[key]
+  }
+  return { en: sorted(en), problems: sorted(status) }
+}
+
+/** Reads committed inputs without writing output. Tests exercise the same path as merge. */
+export function mergeFromFiles(dir = import.meta.dirname) {
+  const read = <T>(file: string): T => JSON.parse(readFileSync(join(dir, file), 'utf8'))
+  const work = join(dir, 'work/sentences')
+  const results: Record<string, string> = {}
+  for (const file of readdirSync(work)
+    .filter((file) => file.endsWith('.out.json'))
+    .sort())
+    Object.assign(results, JSON.parse(readFileSync(join(work, file), 'utf8')))
+  const overrides = existsSync(join(dir, 'overrides.json'))
+    ? read<Record<string, string>>('overrides.json')
+    : {}
+  return mergeSentences(
+    read('source.id.json'),
+    read('glossary.json'),
+    read('work/sentences/index.json'),
+    results,
+    overrides,
+  )
+}
+
 if (import.meta.main) {
   const dir = import.meta.dirname
   const work = join(dir, 'work/sentences')
@@ -98,12 +209,7 @@ if (import.meta.main) {
       ;(index[n] ??= []).push({ key, numbers })
     }
 
-    const terms = new Map<string, string>()
-    for (const entry of Object.values(glossary)) {
-      const from = plain(entry.source)
-      const to = plain(entry.en)
-      if (from.length >= MIN_TERM_LENGTH && from !== to && !terms.has(from)) terms.set(from, to)
-    }
+    const terms = sentenceTerms(glossary)
     const patterns = [...terms].map(([from, to]) => [from, to, termPattern(from)] as const)
 
     mkdirSync(work, { recursive: true })
@@ -145,45 +251,12 @@ if (import.meta.main) {
     console.log(`${files.length - todo.length}/${files.length} batches done`)
     if (todo.length) console.log(`To do: ${todo.join(', ')}`)
   } else if (command === 'merge') {
-    const index: Record<string, { key: string; numbers: string[] }[]> = read(
-      join(work, 'index.json'),
+    const { en, problems } = mergeFromFiles(dir)
+    writeFileSync(join(dir, 'en.json'), `${JSON.stringify(en, null, 1)}\n`)
+    writeFileSync(join(dir, 'en.problems.json'), `${JSON.stringify(problems, null, 1)}\n`)
+    console.log(
+      `Wrote ${Object.keys(en).length} strings to en.json, ${Object.keys(problems).length} with problems`,
     )
-    const results: Record<string, string> = {}
-    for (const file of readdirSync(work).filter((name) => name.endsWith('.out.json'))) {
-      Object.assign(results, read(join(work, file)))
-    }
-    const names = Object.fromEntries(
-      Object.entries(glossary).map(([key, entry]) => [key, entry.en]),
-    )
-    const en: Record<string, string> = { ...names }
-    const status: Record<string, string> = {}
-
-    for (const [n, rows] of Object.entries(index)) {
-      const template = toTemplate(source[rows[0]!.key] ?? '').template
-      const translation = results[n]
-      const errors = translation === undefined ? ['missing'] : validate(template, translation)
-      for (const { key, numbers } of rows) {
-        if (errors.length) {
-          en[key] = source[key] ?? ''
-          status[key] = errors.join(', ')
-        } else {
-          en[key] = fillTemplate(translation!, numbers)
-        }
-      }
-    }
-    for (const [key, text] of Object.entries(source)) {
-      if (key in en) continue
-      const tier = tierName(key, names)
-      en[key] = tier ?? text // markup-only or empty strings stay as they are
-      if (/^lg_avatar\d+$/.test(key) && !tier && plain(text)) status[key] = 'no base outfit name'
-    }
-
-    const sorted = (o: Record<string, string>) =>
-      Object.fromEntries(Object.entries(o).sort(([a], [b]) => (a < b ? -1 : 1)))
-    writeFileSync(join(dir, 'en.json'), `${JSON.stringify(sorted(en), null, 1)}\n`)
-    writeFileSync(join(dir, 'en.problems.json'), `${JSON.stringify(sorted(status), null, 1)}\n`)
-    const problems = Object.keys(status).length
-    console.log(`Wrote ${Object.keys(en).length} strings to en.json, ${problems} with problems`)
   } else {
     console.error('Usage: sentences.ts prepare|status|merge')
     process.exitCode = 1
