@@ -25,6 +25,8 @@ export interface SceneView {
   npcs: SceneNpc[]
   exploreSpots: string[]
   links: number[]
+  /** ScenesEntered: every scene the ninja has stood in; the world map colours only these. */
+  visitedScenes: number[]
   /** What reviving costs here (ReliveSystem): EXP for going home, Gold for reviving here. */
   revive: { homeExpLoss: number; gold: number; goldAllowed: boolean }
 }

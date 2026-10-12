@@ -1,7 +1,7 @@
 import type { Character } from '@pockie/shared'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { gameWorldMap, type MapButtonArt } from '../generated/game-extra'
-import { errorMessage, useTravel } from './api'
+import { errorMessage, useScene, useTravel } from './api'
 import { GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 import { DEFEATED_REASON, destinations, isDefeated, sceneNameKey } from './world'
@@ -50,7 +50,9 @@ function MapTip({ sceneId, nation }: { sceneId: number; nation: number }) {
  * no labels on the painting. Each place is its coloured button art (up/over/down); hovering or
  * focusing one shows the original tooltip (Tip_WorldMap_<scene>_<nation>), the place the ninja
  * stands in glows (face_<scene>). Buttons stack by their Flash depth, so overlaps go to the higher
- * one. Travel rules stay on the server: `destinations` only mirrors them to decide what to offer.
+ * one. Places the ninja has never entered (ScenesEntered) draw no art, so the grey painting shows
+ * through, as refreshMap does with alpha 0; they still travel and show their tooltip. Travel rules
+ * stay on the server: `destinations` only mirrors them to decide what to offer.
  */
 export function WorldMap({ character, onClose }: { character: Character; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null)
@@ -58,6 +60,8 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
   const defeated = isDefeated(character)
   const roads = new Map(destinations(character).map((place) => [place.sceneId, place]))
   const others = [...roads.keys()].filter((sceneId) => !onPainting(sceneId))
+  // Until the scene arrives only the place the ninja stands in is known to be entered.
+  const visited = new Set(useScene().data?.visitedScenes ?? [character.sceneId])
   const [tip, setTip] = useState<number>()
 
   useEffect(() => {
@@ -119,6 +123,7 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
         {Object.entries(locations).map(([id, r]) => {
           const sceneId = Number(id)
           const open = canGo(sceneId)
+          const entered = visited.has(sceneId)
           // Disabled places keep their tooltip (it says why), so aria-disabled, not disabled.
           return (
             <button
@@ -134,28 +139,32 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
               className={`group absolute focus-visible:outline-2 focus-visible:outline-[#ffe27a] ${open ? 'cursor-pointer' : 'cursor-default'}`}
               style={{ ...box(r), zIndex: r.depth }}
             >
-              <img
-                src={r.states.up.file}
-                alt=""
-                draggable={false}
-                className="absolute max-w-none group-hover:invisible group-focus-visible:invisible"
-                style={box(r.states.up, r)}
-              />
-              <img
-                src={r.states.over.file}
-                alt=""
-                draggable={false}
-                className={`invisible absolute max-w-none group-hover:visible group-focus-visible:visible ${open ? 'group-active:invisible' : ''}`}
-                style={box(r.states.over, r)}
-              />
-              {open && (
-                <img
-                  src={r.states.down.file}
-                  alt=""
-                  draggable={false}
-                  className="invisible absolute max-w-none group-active:visible"
-                  style={box(r.states.down, r)}
-                />
+              {entered && (
+                <>
+                  <img
+                    src={r.states.up.file}
+                    alt=""
+                    draggable={false}
+                    className="absolute max-w-none group-hover:invisible group-focus-visible:invisible"
+                    style={box(r.states.up, r)}
+                  />
+                  <img
+                    src={r.states.over.file}
+                    alt=""
+                    draggable={false}
+                    className={`invisible absolute max-w-none group-hover:visible group-focus-visible:visible ${open ? 'group-active:invisible' : ''}`}
+                    style={box(r.states.over, r)}
+                  />
+                  {open && (
+                    <img
+                      src={r.states.down.file}
+                      alt=""
+                      draggable={false}
+                      className="invisible absolute max-w-none group-active:visible"
+                      style={box(r.states.down, r)}
+                    />
+                  )}
+                </>
               )}
             </button>
           )
