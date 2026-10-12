@@ -1,0 +1,506 @@
+{
+  "scenes": {
+    "111": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/111/background.webp",
+        "element": "/assets/game/scenes/111/element.webp"
+      },
+      "hotspots": {
+        "clip_hall": {
+          "file": "/assets/game/scenes/111/clip-clip_hall.webp",
+          "x": 732,
+          "y": 495,
+          "width": 455,
+          "height": 444
+        },
+        "clip_salve": {
+          "file": "/assets/game/scenes/111/clip-clip_salve.webp",
+          "x": 636,
+          "y": 425,
+          "width": 154,
+          "height": 318
+        },
+        "clip_foundry": {
+          "file": "/assets/game/scenes/111/clip-clip_foundry.webp",
+          "x": 505,
+          "y": 532,
+          "width": 282,
+          "height": 454
+        },
+        "clip_equip": {
+          "file": "/assets/game/scenes/111/clip-clip_equip.webp",
+          "x": 232,
+          "y": 463,
+          "width": 327,
+          "height": 534
+        },
+        "clip_reward": {
+          "file": "/assets/game/scenes/111/clip-clip_reward.webp",
+          "x": 824,
+          "y": 760,
+          "width": 233,
+          "height": 320
+        },
+        "clip_pet": {
+          "file": "/assets/game/scenes/111/clip-clip_pet.webp",
+          "x": 1064,
+          "y": 599,
+          "width": 404,
+          "height": 481
+        },
+        "clip_arena": {
+          "file": "/assets/game/scenes/111/clip-clip_arena.webp",
+          "x": 544,
+          "y": 157,
+          "width": 803,
+          "height": 362
+        },
+        "clip_CardLink": {
+          "file": "/assets/game/scenes/111/clip-clip_CardLink.webp",
+          "x": 1194,
+          "y": 375,
+          "width": 264,
+          "height": 257
+        },
+        "clip_meetingroom": {
+          "file": "/assets/game/scenes/111/clip-clip_meetingroom.webp",
+          "x": 0,
+          "y": 277,
+          "width": 440,
+          "height": 803
+        }
+      }
+    },
+    "121": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/121/background.webp",
+        "element": "/assets/game/scenes/121/element.webp",
+        "skybox": "/assets/game/scenes/121/skybox.webp"
+      },
+      "hotspots": {
+        "clip_reward": {
+          "file": "/assets/game/scenes/121/clip-clip_reward.webp",
+          "x": 0,
+          "y": 31,
+          "width": 728,
+          "height": 926
+        },
+        "clip_hall": {
+          "file": "/assets/game/scenes/121/clip-clip_hall.webp",
+          "x": 0,
+          "y": 512,
+          "width": 716,
+          "height": 568
+        },
+        "clip_arena": {
+          "file": "/assets/game/scenes/121/clip-clip_arena.webp",
+          "x": 383,
+          "y": 281,
+          "width": 320,
+          "height": 356
+        },
+        "clip_pet": {
+          "file": "/assets/game/scenes/121/clip-clip_pet.webp",
+          "x": 946,
+          "y": 543,
+          "width": 140,
+          "height": 201
+        },
+        "clip_equip": {
+          "file": "/assets/game/scenes/121/clip-clip_equip.webp",
+          "x": 1194,
+          "y": 516,
+          "width": 243,
+          "height": 189
+        },
+        "clip_salve": {
+          "file": "/assets/game/scenes/121/clip-clip_salve.webp",
+          "x": 1437,
+          "y": 477,
+          "width": 135,
+          "height": 235
+        },
+        "clip_foundry": {
+          "file": "/assets/game/scenes/121/clip-clip_foundry.webp",
+          "x": 1013,
+          "y": 592,
+          "width": 482,
+          "height": 321
+        },
+        "clip_CardLink": {
+          "file": "/assets/game/scenes/121/clip-clip_CardLink.webp",
+          "x": 1422,
+          "y": 282,
+          "width": 498,
+          "height": 693
+        },
+        "clip_meetingroom": {
+          "file": "/assets/game/scenes/121/clip-clip_meetingroom.webp",
+          "x": 806,
+          "y": 721,
+          "width": 165,
+          "height": 167
+        }
+      }
+    },
+    "131": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/131/background.webp",
+        "backgroundeffect": "/assets/game/scenes/131/backgroundeffect.webp",
+        "element": "/assets/game/scenes/131/element.webp",
+        "skybox": "/assets/game/scenes/131/skybox.webp"
+      },
+      "hotspots": {
+        "clip_salve": {
+          "file": "/assets/game/scenes/131/clip-clip_salve.webp",
+          "x": 795,
+          "y": 40,
+          "width": 184,
+          "height": 356
+        },
+        "clip_hall": {
+          "file": "/assets/game/scenes/131/clip-clip_hall.webp",
+          "x": 906,
+          "y": 89,
+          "width": 346,
+          "height": 358
+        },
+        "clip_reward": {
+          "file": "/assets/game/scenes/131/clip-clip_reward.webp",
+          "x": 1279,
+          "y": 337,
+          "width": 177,
+          "height": 250
+        },
+        "clip_arena": {
+          "file": "/assets/game/scenes/131/clip-clip_arena.webp",
+          "x": 1150,
+          "y": 598,
+          "width": 346,
+          "height": 348
+        },
+        "clip_foundry": {
+          "file": "/assets/game/scenes/131/clip-clip_foundry.webp",
+          "x": 698,
+          "y": 467,
+          "width": 195,
+          "height": 176
+        },
+        "clip_pet": {
+          "file": "/assets/game/scenes/131/clip-clip_pet.webp",
+          "x": 393,
+          "y": 387,
+          "width": 181,
+          "height": 198
+        },
+        "clip_equip": {
+          "file": "/assets/game/scenes/131/clip-clip_equip.webp",
+          "x": 851,
+          "y": 550,
+          "width": 190,
+          "height": 298
+        },
+        "clip_CardLink": {
+          "file": "/assets/game/scenes/131/clip-clip_CardLink.webp",
+          "x": 423,
+          "y": 696,
+          "width": 301,
+          "height": 284
+        },
+        "clip_meetingroom": {
+          "file": "/assets/game/scenes/131/clip-clip_meetingroom.webp",
+          "x": 1000,
+          "y": 772,
+          "width": 197,
+          "height": 230
+        }
+      }
+    },
+    "141": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/141/background.webp",
+        "element": "/assets/game/scenes/141/element.webp",
+        "skybox": "/assets/game/scenes/141/skybox.webp"
+      },
+      "hotspots": {
+        "clip_foundry": {
+          "file": "/assets/game/scenes/141/clip-clip_foundry.webp",
+          "x": 1354,
+          "y": 269,
+          "width": 122,
+          "height": 169
+        },
+        "clip_reward": {
+          "file": "/assets/game/scenes/141/clip-clip_reward.webp",
+          "x": 1151,
+          "y": 661,
+          "width": 178,
+          "height": 197
+        },
+        "clip_pet": {
+          "file": "/assets/game/scenes/141/clip-clip_pet.webp",
+          "x": 1273,
+          "y": 594,
+          "width": 148,
+          "height": 162
+        },
+        "clip_hall": {
+          "file": "/assets/game/scenes/141/clip-clip_hall.webp",
+          "x": 801,
+          "y": 185,
+          "width": 463,
+          "height": 318
+        },
+        "clip_arena": {
+          "file": "/assets/game/scenes/141/clip-clip_arena.webp",
+          "x": 759,
+          "y": 415,
+          "width": 345,
+          "height": 242
+        },
+        "clip_equip": {
+          "file": "/assets/game/scenes/141/clip-clip_equip.webp",
+          "x": 529,
+          "y": 450,
+          "width": 139,
+          "height": 288
+        },
+        "clip_salve": {
+          "file": "/assets/game/scenes/141/clip-clip_salve.webp",
+          "x": 361,
+          "y": 733,
+          "width": 319,
+          "height": 277
+        },
+        "clip_CardLink": {
+          "file": "/assets/game/scenes/141/clip-clip_CardLink.webp",
+          "x": 156,
+          "y": 468,
+          "width": 192,
+          "height": 308
+        },
+        "clip_meetingroom": {
+          "file": "/assets/game/scenes/141/clip-clip_meetingroom.webp",
+          "x": 1585,
+          "y": 513,
+          "width": 292,
+          "height": 239
+        }
+      }
+    },
+    "151": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/151/background.webp",
+        "backgroundeffect": "/assets/game/scenes/151/backgroundeffect.webp",
+        "element": "/assets/game/scenes/151/element.webp",
+        "skybox": "/assets/game/scenes/151/skybox.webp"
+      },
+      "hotspots": {
+        "clip_salve": {
+          "file": "/assets/game/scenes/151/clip-clip_salve.webp",
+          "x": 392,
+          "y": 79,
+          "width": 384,
+          "height": 303
+        },
+        "clip_arena": {
+          "file": "/assets/game/scenes/151/clip-clip_arena.webp",
+          "x": 600,
+          "y": 226,
+          "width": 373,
+          "height": 183
+        },
+        "clip_hall": {
+          "file": "/assets/game/scenes/151/clip-clip_hall.webp",
+          "x": 994,
+          "y": 238,
+          "width": 367,
+          "height": 207
+        },
+        "clip_reward": {
+          "file": "/assets/game/scenes/151/clip-clip_reward.webp",
+          "x": 1055,
+          "y": 449,
+          "width": 268,
+          "height": 139
+        },
+        "clip_foundry": {
+          "file": "/assets/game/scenes/151/clip-clip_foundry.webp",
+          "x": 857,
+          "y": 737,
+          "width": 135,
+          "height": 131
+        },
+        "clip_equip": {
+          "file": "/assets/game/scenes/151/clip-clip_equip.webp",
+          "x": 264,
+          "y": 301,
+          "width": 221,
+          "height": 256
+        },
+        "clip_pet": {
+          "file": "/assets/game/scenes/151/clip-clip_pet.webp",
+          "x": 494,
+          "y": 637,
+          "width": 116,
+          "height": 279
+        },
+        "clip_CardLink": {
+          "file": "/assets/game/scenes/151/clip-clip_CardLink.webp",
+          "x": 1367,
+          "y": 254,
+          "width": 120,
+          "height": 151
+        },
+        "clip_meetingroom": {
+          "file": "/assets/game/scenes/151/clip-clip_meetingroom.webp",
+          "x": 628,
+          "y": 779,
+          "width": 135,
+          "height": 102
+        }
+      }
+    },
+    "2101": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2101/background.webp",
+        "element": "/assets/game/scenes/2101/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2101/clip-OutCity_1109.webp",
+          "x": 424,
+          "y": 385,
+          "width": 277,
+          "height": 194
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2101/clip-OutCity_1110.webp",
+          "x": 762,
+          "y": 357,
+          "width": 331,
+          "height": 344
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2101/fight-background.webp"
+    },
+    "2201": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2201/background.webp",
+        "backgroundeffect": "/assets/game/scenes/2201/backgroundeffect.webp",
+        "element": "/assets/game/scenes/2201/element.webp",
+        "skybox": "/assets/game/scenes/2201/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2201/clip-OutCity_1109.webp",
+          "x": 1164,
+          "y": 360,
+          "width": 374,
+          "height": 80
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2201/clip-OutCity_1110.webp",
+          "x": 1148,
+          "y": 533,
+          "width": 223,
+          "height": 180
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2201/fight-background.webp"
+    },
+    "2301": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2301/background.webp",
+        "backgroundeffect": "/assets/game/scenes/2301/backgroundeffect.webp",
+        "element": "/assets/game/scenes/2301/element.webp",
+        "skybox": "/assets/game/scenes/2301/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2301/clip-OutCity_1110.webp",
+          "x": 1079,
+          "y": 294,
+          "width": 211,
+          "height": 219
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2301/clip-OutCity_1109.webp",
+          "x": 495,
+          "y": 434,
+          "width": 308,
+          "height": 334
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2301/fight-background.webp"
+    },
+    "2401": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2401/background.webp",
+        "element": "/assets/game/scenes/2401/element.webp",
+        "skybox": "/assets/game/scenes/2401/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2401/clip-OutCity_1110.webp",
+          "x": 662,
+          "y": 369,
+          "width": 142,
+          "height": 142
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2401/clip-OutCity_1109.webp",
+          "x": 1360,
+          "y": 371,
+          "width": 165,
+          "height": 150
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2401/fight-background.webp"
+    },
+    "2501": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2501/background.webp",
+        "element": "/assets/game/scenes/2501/element.webp",
+        "skybox": "/assets/game/scenes/2501/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2501/clip-OutCity_1110.webp",
+          "x": 705,
+          "y": 164,
+          "width": 230,
+          "height": 360
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2501/clip-OutCity_1109.webp",
+          "x": 416,
+          "y": 164,
+          "width": 119,
+          "height": 240
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2501/fight-background.webp"
+    }
+  }
+}
