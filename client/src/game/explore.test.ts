@@ -144,7 +144,9 @@ describe('cardText', () => {
   it('describes what a card held', () => {
     expect(cardText({ type: 'fight', monsterId: 'n330261' })).toBe('A fight with Sushi')
     expect(cardText({ type: 'stone', amount: 671 })).toBe('671 Stone')
-    expect(cardText({ type: 'key', itemId: 'i150046', bound: true })).toBe('Smelting Mountains Secret Key')
+    expect(cardText({ type: 'key', itemId: 'i150046', bound: true })).toBe(
+      'Smelting Mountains Secret Key',
+    )
     expect(cardText({ type: 'game' })).toBe('A mini-game')
     expect(cardText({ type: 'nothing' })).toBe('Nothing')
   })

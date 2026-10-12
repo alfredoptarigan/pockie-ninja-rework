@@ -150,7 +150,9 @@ describe('ExploreWindow', () => {
 
     // The expert spot takes a key the bag does not hold.
     const expert = within(dialog).getByRole('region', { name: EXPERT })
-    expect(within(expert).getByRole('img', { name: 'Smelting Mountains Secret Key' })).toBeInTheDocument()
+    expect(
+      within(expert).getByRole('img', { name: 'Smelting Mountains Secret Key' }),
+    ).toBeInTheDocument()
     expect(expert).toHaveTextContent('1 x Smelting Mountains Secret Key (you have 0)')
     const button = within(expert).getByRole('button', { name: `Explore ${EXPERT}` })
     expect(button).toBeDisabled()
