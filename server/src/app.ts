@@ -61,5 +61,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(actionRoutes, { db, realtime, prefix: '/api/game' })
   app.register(exploreRoutes, { db, prefix: '/api/game' })
 
+  app.register(import('./modules/shop/routes.js'), { db, prefix: '/api/game/shop' })
+
   return app
 }

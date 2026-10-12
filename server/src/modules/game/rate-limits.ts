@@ -2,6 +2,16 @@
 const perMinute = (max: number) => ({ max, timeWindow: '1 minute' })
 
 export const RATE_LIMITS = {
+  shopOpen: perMinute(120),
+  shopWholesale: perMinute(30),
+  shopRefresh: perMinute(30),
+  shopBuy: perMinute(30),
+  shopBuyAll: perMinute(20),
+  shopSell: perMinute(30),
+  shopSellAll: perMinute(20),
+  shopPouch: perMinute(20),
+  shopMerchant: perMinute(120),
+  shopMerchantBuy: perMinute(30),
   read: perMinute(120),
   createCharacter: perMinute(10),
   fight: perMinute(60),
