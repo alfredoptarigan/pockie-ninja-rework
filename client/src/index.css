@@ -325,3 +325,64 @@
     animation: none;
   }
 }
+
+/* Windows that lay out their own panels (NPC dialog, quest detail, after UI_NpcMenu_Xml and
+   UI_TaskInfo_Xml): no cream inset around the content, 5px side margins, content at y 31.
+   The doubled selector outranks the Dialog's own px-2 / pb-2 utilities. */
+@utility game-window-bare {
+  && {
+    padding-inline: 5px;
+    padding-bottom: 7px;
+  }
+  & > .game-frame-title {
+    margin-bottom: 5px;
+  }
+  & > .game-inset {
+    border-image: none;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+    color: inherit;
+  }
+}
+/* NPC dialog: the portrait card (TottomBG1) and the photo frame (EstopCircle). */
+@utility game-npc-card {
+  background: var(--ui-npc-card) center / 100% 100% no-repeat;
+}
+@utility game-npc-frame {
+  background: var(--ui-npc-frame) center / 100% 100% no-repeat;
+}
+/* Option rows of the NPC dialog, as Reborn draws them. */
+@utility game-npc-option {
+  border: 1px solid rgb(139 115 85 / 0.3);
+  border-radius: 3px;
+  background: rgb(139 115 85 / 0.15);
+  color: #3d2914;
+  &:hover:not(:disabled) {
+    background: rgb(139 115 85 / 0.3);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+/* Light field of the quest window (TextBG1): section headings and reward values. */
+@utility game-text-box {
+  border: 0;
+  border-image: var(--ui-text-box) var(--ui-text-box-slice) fill / var(--ui-text-box-border);
+  color: #000;
+}
+/* Label plate on a reward field ("EXP", "Gift", "Stones"). */
+@utility game-reward-label {
+  border: 1px solid #3f4448;
+  border-radius: 4px;
+  background: linear-gradient(#a3a9ae, #6d7378 50%, #4d5256);
+  color: #fff;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.4);
+}
+@utility game-icon-scroll {
+  background: var(--ui-icon-scroll) center / 100% 100% no-repeat;
+}
+@utility game-icon-notice {
+  background: var(--ui-icon-notice) center / 100% 100% no-repeat;
+}
