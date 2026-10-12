@@ -1,2 +1,4 @@
 export * from './random.js'
 export * from './stats.js'
+export * from './battle/damage.js'
+export * from './battle/fight.js'
