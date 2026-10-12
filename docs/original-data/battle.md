@@ -78,14 +78,21 @@ for j in 0..59:                              // MaxBout = 60 actions, both sides
 6. Parry: `T.Parry > 0` → `IsParry = T.SaveSkillID`, `d = (int)((double)(d*(100-Parry))*0.01)`.
 7. Defence: `def = max(-1353, T.Defense - A.NeglectDefAttach)`;
    `d = max(0, (int)(d*(1 - def/(def+1354))))`.
-8. Shield (1494): `dmg >= ShieldDamage` → subtract and remove the shield; otherwise absorb all,
-   decrement ShieldCount (remove at 0, -1 unlimited).
-9. Rebound `back` mitigated by the attacker's DecDamage/defence/shield; self damage likewise.
-10. Vampiric: `inchp = (int)(A.VampHP*0.01f*(d - absorb))` (MP too, uncapped).
+8. Shield (1494, only while a type 3 buff is `ShieldBuff`): `dmg >= ShieldDamage` → subtract and
+   remove the shield; otherwise absorb all, decrement ShieldCount (remove at 0, -1 unlimited).
+   Absorbed amounts go to `TargetShield` / `SelfShield`.
+9. Rebound `back` mitigated by the attacker's DecDamage and defence (`BackDamage` is written here),
+   then by the attacker's shield. `selfhp = (int)(sd*A.AbsorptionDamage/100f)` first runs through
+   the target's shield (bug: it drains it, and the call with 0 still decrements ShieldCount), then
+   the target's DecDamage and defence.
+10. Vampiric: `inchp = (int)(A.VampHP*0.01f*(d - absorb))` (MP too, uncapped). Float order
+    matters: `20*0.01f` rounds to 0.19999999f, so 20 % of 100 gives 19.
 11. `lastT = d - absorb`, `lastS = back + sd - selfhp - inchp` (negative heals), HP clamped to
     `[0, MaxHP]`. Clear the target's type-2 buffs; type-1 buffs when damaged. If `d > 0` and both
     alive, fire the target's q4.
 
+- `SelfLastDamage = lastS + inchp`, `TargetLastDamage = lastT` (the port's `damage`). Self damage
+  comes from `selfmul`/`selfadd` of script-less skills or the scripts' `Attack(..., selfdamage)`.
 - Damage roll: `MaxAtk <= MinAtk ? MaxAtk : RandInt(MinAtk, MaxAtk)`.
   Check: 1848 vs Def 154 → `1848*(1 - 154/1508) = 1659` (matches a sample replay).
 
@@ -96,6 +103,21 @@ group); `cleartype` 1 removed when damaged, 2 removed when hit; `lifttime` in ti
 (-1 permanent); `javascript` with `OnAdd` / `OnActivation` / `OnRemove(fs, obj, buff, fv, timer)`.
 `buff.ini` and `UnFightBuff.ini` are not used in fights.
 
+Turn flags `CanMove` / `CanAttack` / `CanUseSkill` start at 1; buffs lower and restore them.
+`CanMove <= 0`: the action is event 3 only. Triggers q2-q9 and the priority strike need
+`CanMove > 0 && CanUseSkill > 0` (q5 then does not even zero the HP); begin-fight skills ignore the
+flags. `FindAttackSkill`: `CanUseSkill <= 0` → normal attack without a roll; `CanAttack <= 0` drops
+quomodo 2 skills and the normal attack (a failed skill still falls back to it). Counters need
+`target.CanAttack != 0`. Scripted `UserSkill` returns 2 when the flags forbid the skill.
+
+Ported buffs (`game-core/src/battle/buffs.ts`): 8888, 11801 paralysis marker, 11802 freeze
+(CanMove, Dodge -9999, DecDamage -= SaveData-100, cleartype 2), 11811 poison, 11812 seal (marker,
+LifeTime = SaveData), 11813 stun / 11815 seduction (CanMove, LifeTime = SaveData), 11817 needles
+(Rebound +25), 11824 earth wall (Parry 40, Rebound +60), 11826 daze (CanAttack + CanUseSkill,
+cleartype 1), 11831 static barrier (type 3, ShieldDamage = SaveData, ShieldCount 999), 11841,
+11843, 11851. The regeneration auras 11861-11863 (pets) shorten the stuns and heal by `SaveData1`,
+which only pet skills set; not ported.
+
 ## Scripts (Rhino, `RES/javascript/skill/*.js`)
 
 `OnUser(fightsystem, self, target, skill, fv, timer)` returns 0 success, 1 no mana, 2 can't use,
@@ -103,8 +125,24 @@ group); `cleartype` 1 removed when damaged, 2 removed when hit; `lifttime` in ti
 `RemoveBuff`, `AddBuff`, `ChangeSkill`, `UserSkill`, `Attack`. Scripts write fighter fields
 (`HP`, `MP`, `CanMove`, `CanAttack`, `CanUseSkill`, `Parry`, `ShieldDamage`) and `fv` fields.
 Examples: Fireball 1808 (own MP cost, falls back to skill 1 when sealed, adds burn 11804);
-Heal 3803 (q5 revive with `HP = MaxHP*0.25`); Naruto's 1945 (must-skill; execute chance from the
-avatar-level gap: `HPCond = 15 + gap^1.26`, `Prob = 10 + gap^1.2`, damage `RandInt(300,500)/100*T.HP`).
+Heal 3803 (q5 revive with `HP = MaxHP*0.25`).
+
+Outfit ultimates `skill_aoyi_<id>.js` (must-skills, quomodo 1, never countered): execute chance from
+the avatar-level gap: `HPCond = 15 + gap^1.26`, `Prob = 10 + gap^1.2`; if `RandInt(0,99) < Prob`
+and `HP < MaxHP*HPCond%`, damage `RandInt(300,500)/100*T.HP` (truncated). Avatar level: players
+`getAvatarLevel(PlayerAvatarID)`, NPCs `CounterBombMul` unless -1, else `Level/3 - 5`.
+66 scripts (1902, 1903, ...) have the +9 branch commented out. 48 (1901, 1904, 1905, 1908, 1924,
+1927, 1929-1931, 1935, 1937, 1944-1951, 1953, 1955-1958, 1967, 1970, 1972, 1974, 1984-1987, 1990,
+1998, 2201-2214) run it: at avatar level >= 9, `RandInt(0,99) < 50` → `ChangeSkill(skill, id*10)`
+
+- `UserSkill` (a damage roll, then the flag checks). The 114 "new ultimates" `skill_aoyi_<id*10>.js`
+  (skill.ini: probability 0, same row otherwise) deal the same damage unconditionally and show their
+  own id. 2215-2220 and 22150-22200 have skill.ini rows but no script in the backup, so the original
+  server fell back to the normal attack (JsRunFun returns null → 3).
+
+Recast skills (`AvatarAddSkill.ini` `RecastSkillID1/2`, e.g. 2003 / 2004) and the fourth outfit
+skill are type 3 passives without scripts: their `skilladd.ini` rows (`SkillAdd0Skill`,
+`VampiricHP`, `CounterMul`, ...) are stat bonuses applied outside the fight engine.
 
 ## Randomness
 
@@ -129,6 +167,6 @@ q4 / counter rolls.
 
 ## Known original bugs (decide per case)
 
-Timeout tie kills the target; `selfhp` drains the target's shield; vampiric MP uncapped; parry
-applies before defence; 474 skill + 172 buff scripts need per-script ports (port only what the
-slice uses).
+Timeout tie kills the target; `selfhp` drains the target's shield and every absorbed hit decrements the
+target's ShieldCount twice; vampiric MP uncapped; parry applies before defence; 474 skill + 172
+buff scripts need per-script ports (port only what the slice uses).
