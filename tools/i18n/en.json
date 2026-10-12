@@ -10592,7 +10592,7 @@
  "lg_HomePlayerList_Lv": "Level",
  "lg_HomePlayerList_PlayerName": "Player name",
  "lg_HomeTaskBtnTips": "This quest will help you build your house.",
- "lg_HomeTaskGoldReward": "<font color='#5a8300'>{@0:} gold</font>  <font color='#ed4f4f'>（Setelah tax {@1:} gold）</font>",
+ "lg_HomeTaskGoldReward": "<font color='#5a8300'>{@0:} gold</font>  <font color='#ed4f4f'>（after tax {@1:} gold）</font>",
  "lg_HomeTaskGoldRewardInfo": "<font color='#5a8300'>{@0:}gold</font>  <font color='#5c7e01'> (When the quest is complete, the publisher can receive gold after tax)</font>",
  "lg_HomeTaskIssueReward": "<font color='#5a8300'>{@0:} {@1:}</font>",
  "lg_HomeTaskStoneCost": "<font color='#5a8300'>{@0:} Stone</font>",

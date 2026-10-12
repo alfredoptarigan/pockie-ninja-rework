@@ -126,13 +126,13 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
 
 - [x] **Task 1 — data import.** `tools/game-data/import.ts` → `server/data/game/*.json` (31 files,
       original field names). Specs: `docs/original-data/{world,quests-items,characters,battle}.md`.
-- [~] **Task 2 — translation.**
+- [~] **Task 2 — translation** (all 51k strings translated; review and client wiring left).
   - [x] Indonesian source extracted (`tools/i18n/source.id.json`).
   - [x] Name glossary, 7,150 names (`tools/i18n/glossary.json`).
-  - [~] Sentences: 30/51 batches done, including every string the slice uses. **Another assistant
-        is finishing the rest via `tools/i18n/HANDOFF.md`** (`pnpm i18n:sentences status`).
-  - [ ] When all batches are done: `pnpm i18n:sentences merge` → `tools/i18n/en.json`; hand-review
-        the slice strings; serve en.json to the client (Task 8).
+  - [x] Sentences: 51/51 batches; `tools/i18n/en.json` merged with 0 problems
+        (`pnpm i18n:sentences status`, `pnpm i18n:sentences merge`).
+  - [ ] Hand-review the slice strings (tutorial chains 90000-94015, first main quests, 21xx-25xx
+        NPCs and monsters, common UI) and serve en.json to the client (Task 8).
 - [ ] **Task 3 — asset export** (not started).
 - [~] **Task 4 — battle engine** (`game-core/src/battle`).
   - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,

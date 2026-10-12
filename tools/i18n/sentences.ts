@@ -175,7 +175,7 @@ if (import.meta.main) {
       if (key in en) continue
       const tier = tierName(key, names)
       en[key] = tier ?? text // markup-only or empty strings stay as they are
-      if (/^lg_avatar\d+$/.test(key) && !tier) status[key] = 'no base outfit name'
+      if (/^lg_avatar\d+$/.test(key) && !tier && plain(text)) status[key] = 'no base outfit name'
     }
 
     const sorted = (o: Record<string, string>) =>
