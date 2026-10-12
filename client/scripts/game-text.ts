@@ -135,6 +135,35 @@ for (const id of npcIds) {
   addItemsFromDrop(Number(row.DropLibID ?? 0))
   addItemsFromDrop(Number(row.AppendDropLibID ?? 0))
 }
+// Explore spots of the slice: names, key items, what their cards can hand out, and the monsters
+// (level variants like n330261 that share the art and name of n33026).
+const exploreSpots = game<Record<string, Row>>('explore-spots')
+const exploreFactories = {
+  ItemFactoryID: game<Record<string, Row>>('explore-item-factory'),
+  BossFactoryID: game<Record<string, Row>>('explore-boss-factory'),
+  KeyFactoryID: game<Record<string, Row>>('explore-key-factory'),
+  BabyFactoryID: game<Record<string, Row>>('explore-baby-factory'),
+}
+const gostFactory = game<Record<string, { Item: string[] }>>('explore-gost-factory')
+const exploreMonsters: Record<string, string> = {}
+for (const [id, spot] of Object.entries(exploreSpots)) {
+  if (!sliceScenes.has(Number(spot.SceneID))) continue
+  keys.add(`lg_OutSearch_${id}`)
+  for (const part of String(spot.RequireItem).split(';')) addItem(part.split(',')[0]!)
+  addItem(String(spot.PetBonusAppend))
+  for (const [field, factory] of Object.entries(exploreFactories)) {
+    for (const entry of Object.values(factory)) {
+      if (entry.ID === spot[field]) addItem(String(entry.Config))
+    }
+  }
+  for (const monster of gostFactory[String(spot.GostFactoryID)]?.Item ?? []) {
+    const base = /^name_(n\d+)$/.exec(String(npcs[monster]?.Name))?.[1]
+    if (!base) continue
+    exploreMonsters[monster] = base
+    keys.add(`lg_name_${base}`)
+  }
+}
+
 // HP potions sold and dropped early on.
 for (const [id, row] of Object.entries(items)) {
   if (row.class === 'PharmacyItem' && Number(row.UseLevel ?? 0) <= 20) addItem(id)
@@ -188,6 +217,7 @@ const outputs = {
       .filter((id) => items[id]!.class !== 'EquipItem' && Number(items[id]!.CanUse) === 1)
       .sort(),
     itemNames: sorted(Object.fromEntries([...itemIds].map((id) => [id, `lg_${items[id]!.Name}`]))),
+    exploreMonsters: sorted(exploreMonsters),
   },
 }
 for (const [path, data] of Object.entries(outputs)) {
