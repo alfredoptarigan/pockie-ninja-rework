@@ -199,6 +199,15 @@ describe('Angel City and Demon City menus', () => {
     })
   })
 
+  it('names the building picture of each city NPC by its BuildType', async () => {
+    await set({ sceneId: 161, level: 20 })
+    const clips = Object.fromEntries(
+      (await scene()).npcs.map((n: { id: string; clip: string | null }) => [n.id, n.clip]),
+    )
+    // The table's NameFlag says n16002 for the foundry; BuildType 3 is the Blacksmith.
+    expect(clips).toMatchObject({ n16001: 'clip_hall', n16003: 'clip_foundry', n16004: null })
+  })
+
   it('routes the Demon City guards to the gates window', async () => {
     await set({ sceneId: 171, level: 20 })
     expect(await menus()).toMatchObject({ n17001: 'gates', n17003: 'gates', n17006: 'forge' })

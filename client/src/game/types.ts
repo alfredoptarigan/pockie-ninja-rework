@@ -46,6 +46,8 @@ export interface SceneNpc {
   y: number
   scale: number
   menu?: NpcMenu | null
+  /** The building picture (scene clip) this NPC stands for, if any. */
+  clip?: string | null
 }
 
 export interface SceneView {

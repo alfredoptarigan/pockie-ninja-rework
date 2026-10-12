@@ -144,3 +144,17 @@ export function visitRequiredScenes() {
   walkable = [...seen].filter((id) => sceneSwitchRule(id)).sort((a, b) => a - b)
   return walkable
 }
+
+/**
+ * The building picture an NPC stands for (scenecitybuild.tab `ClipName`, matched by BuildType in
+ * the same scene, as the original client does), or null.
+ */
+export function buildingClip(sceneId: number, npcId: string): string | null {
+  const buildType = npc(npcId)?.BuildType
+  if (buildType === undefined) return null
+  const rows = load<{ SceneID: number; ClipName: string; BuildType: number }[]>('scene-buildings')
+  return (
+    rows.find((row) => row.SceneID === sceneId && row.BuildType === Number(buildType))?.ClipName ??
+    null
+  )
+}

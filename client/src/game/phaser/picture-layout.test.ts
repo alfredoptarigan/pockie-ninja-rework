@@ -32,6 +32,18 @@ describe('pictureLayout', () => {
     expect(layout.figures).toEqual([])
   })
 
+  it('maps Angel City buildings from the clip each NPC names', () => {
+    const layout = pictureLayout({
+      ...villageScene,
+      sceneId: 161,
+      npcs: [
+        { id: 'n16003', nameKey: 'lg_name_n16003', x: 0, y: 0, scale: 100, clip: 'clip_foundry' },
+        { id: 'n16004', nameKey: 'lg_name_n16004', x: 0, y: 0, scale: 100, clip: null },
+      ],
+    })!
+    expect(layout.hotspots.find((h) => h.clip === 'clip_foundry')?.npc?.id).toBe('n16003')
+  })
+
   it('places standing NPCs at their coordinates', () => {
     const layout = pictureLayout(field)!
     expect(layout.figures.map((f) => f.key)).toEqual(['npc:n21001', 'npc:n21002'])

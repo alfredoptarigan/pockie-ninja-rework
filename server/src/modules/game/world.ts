@@ -20,6 +20,7 @@ import { reviveTerms } from './actions.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import {
   bossTaskIds,
+  buildingClip,
   levelVariant,
   npcMenu,
   restCost,
@@ -185,6 +186,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
           y,
           scale,
           menu: npcMenu(id),
+          clip: buildingClip(sceneId, id),
         })),
       exploreSpots: exploreSpotIds(sceneId),
       links: sceneLinks(sceneId),
