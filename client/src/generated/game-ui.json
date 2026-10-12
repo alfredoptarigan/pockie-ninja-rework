@@ -147,6 +147,140 @@
       "height": 24,
       "slice": { "top": 4, "right": 8, "bottom": 4, "left": 26 }
     },
-    "slot": { "file": "/assets/game/ui/slot.webp", "width": 23, "height": 23 }
+    "slot": { "file": "/assets/game/ui/slot.webp", "width": 23, "height": 23 },
+    "panel-1": {
+      "file": "/assets/game/ui/panel-1.webp",
+      "width": 100,
+      "height": 53,
+      "slice": { "top": 13, "right": 25, "bottom": 13, "left": 25 }
+    },
+    "panel-2": {
+      "file": "/assets/game/ui/panel-2.webp",
+      "width": 100,
+      "height": 53,
+      "slice": { "top": 13, "right": 25, "bottom": 13, "left": 25 }
+    },
+    "panel-3": {
+      "file": "/assets/game/ui/panel-3.webp",
+      "width": 75,
+      "height": 41,
+      "slice": { "top": 10, "right": 19, "bottom": 10, "left": 19 }
+    },
+    "panel-4": {
+      "file": "/assets/game/ui/panel-4.webp",
+      "width": 100,
+      "height": 53,
+      "slice": { "top": 25, "right": 40, "bottom": 24, "left": 57 }
+    },
+    "panel-5": {
+      "file": "/assets/game/ui/panel-5.webp",
+      "width": 75,
+      "height": 41,
+      "slice": { "top": 10, "right": 19, "bottom": 10, "left": 19 }
+    },
+    "panel-small": {
+      "file": "/assets/game/ui/panel-small.webp",
+      "width": 206,
+      "height": 35,
+      "slice": { "top": 9, "right": 52, "bottom": 9, "left": 52 }
+    },
+    "text-box": {
+      "file": "/assets/game/ui/text-box.webp",
+      "width": 68,
+      "height": 21,
+      "slice": { "top": 5, "right": 17, "bottom": 5, "left": 17 }
+    },
+    "divider": {
+      "file": "/assets/game/ui/divider.webp",
+      "width": 55,
+      "height": 2,
+      "slice": { "top": 0, "right": 14, "bottom": 1, "left": 14 }
+    },
+    "slot-shop": {
+      "file": "/assets/game/ui/slot-shop.webp",
+      "width": 26,
+      "height": 26,
+      "slice": { "top": 7, "right": 7, "bottom": 7, "left": 7 }
+    },
+    "slot-tall": {
+      "file": "/assets/game/ui/slot-tall.webp",
+      "width": 96,
+      "height": 123,
+      "slice": { "top": 23, "right": 48, "bottom": 55, "left": 16 }
+    },
+    "market-row": {
+      "file": "/assets/game/ui/market-row.webp",
+      "width": 188,
+      "height": 75,
+      "slice": { "top": 48, "right": 47, "bottom": 19, "left": 47 }
+    },
+    "market-cell": { "file": "/assets/game/ui/market-cell.webp", "width": 39, "height": 38 },
+    "market-field": {
+      "file": "/assets/game/ui/market-field.webp",
+      "width": 46,
+      "height": 18,
+      "slice": { "top": 7, "right": 18, "bottom": 7, "left": 15 }
+    },
+    "compose-plus": { "file": "/assets/game/ui/compose-plus.webp", "width": 23, "height": 23 },
+    "compose-equals": { "file": "/assets/game/ui/compose-equals.webp", "width": 24, "height": 16 },
+    "compose-arrow": { "file": "/assets/game/ui/compose-arrow.webp", "width": 47, "height": 20 },
+    "compose-unknown": {
+      "file": "/assets/game/ui/compose-unknown.webp",
+      "width": 55,
+      "height": 82
+    },
+    "icon-gold": { "file": "/assets/game/ui/icon-gold.webp", "width": 16, "height": 13 },
+    "icon-stone": { "file": "/assets/game/ui/icon-stone.webp", "width": 16, "height": 13 },
+    "npc-frame": { "file": "/assets/game/ui/npc-frame.webp", "width": 157, "height": 202 },
+    "npc-card": { "file": "/assets/game/ui/npc-card.webp", "width": 165, "height": 208 },
+    "scroll-paper": { "file": "/assets/game/ui/scroll-paper.webp", "width": 438, "height": 460 },
+    "scroll-paper-short": {
+      "file": "/assets/game/ui/scroll-paper-short.webp",
+      "width": 438,
+      "height": 270
+    },
+    "scroll-rod-top": { "file": "/assets/game/ui/scroll-rod-top.webp", "width": 502, "height": 48 },
+    "scroll-rod-bottom": {
+      "file": "/assets/game/ui/scroll-rod-bottom.webp",
+      "width": 497,
+      "height": 52
+    },
+    "scroll-rope": { "file": "/assets/game/ui/scroll-rope.webp", "width": 137, "height": 96 },
+    "scroll-cloud-left": {
+      "file": "/assets/game/ui/scroll-cloud-left.webp",
+      "width": 121,
+      "height": 59
+    },
+    "scroll-cloud-right": {
+      "file": "/assets/game/ui/scroll-cloud-right.webp",
+      "width": 94,
+      "height": 55
+    },
+    "scroll-swirl-left": {
+      "file": "/assets/game/ui/scroll-swirl-left.webp",
+      "width": 68,
+      "height": 33
+    },
+    "scroll-swirl-right": {
+      "file": "/assets/game/ui/scroll-swirl-right.webp",
+      "width": 54,
+      "height": 46
+    },
+    "plaque-normal": { "file": "/assets/game/ui/plaque-normal.webp", "width": 119, "height": 34 },
+    "plaque-hover": { "file": "/assets/game/ui/plaque-hover.webp", "width": 119, "height": 34 },
+    "tag-green": { "file": "/assets/game/ui/tag-green.webp", "width": 90, "height": 28 },
+    "parchment": { "file": "/assets/game/ui/parchment.webp", "width": 356, "height": 248 },
+    "pub-board": { "file": "/assets/game/ui/pub-board.webp", "width": 352, "height": 345 },
+    "pub-lever": { "file": "/assets/game/ui/pub-lever.webp", "width": 135, "height": 251 },
+    "pub-button": { "file": "/assets/game/ui/pub-button.webp", "width": 87, "height": 24 },
+    "pub-back": { "file": "/assets/game/ui/pub-back.webp", "width": 36, "height": 36 },
+    "pub-close": { "file": "/assets/game/ui/pub-close.webp", "width": 36, "height": 36 },
+    "card-face": { "file": "/assets/game/ui/card-face.webp", "width": 108, "height": 150 },
+    "card-item-frame": {
+      "file": "/assets/game/ui/card-item-frame.webp",
+      "width": 92,
+      "height": 91
+    },
+    "card-name-bar": { "file": "/assets/game/ui/card-name-bar.webp", "width": 110, "height": 26 }
   }
 }
