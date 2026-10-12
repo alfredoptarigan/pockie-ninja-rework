@@ -178,6 +178,8 @@ export const characters = pgTable(
     pubFightDay: date('pub_fight_day'),
     pubFightsToday: smallint('pub_fights_today').notNull().default(0),
     pubFightPulledAt: timestamp('pub_fight_pulled_at', { withTimezone: true }),
+    // VIP membership (decision 14) runs until this instant; null means none.
+    vipUntil: timestamp('vip_until', { withTimezone: true }),
     createdAt: createdAt(),
   },
   (t) => [
