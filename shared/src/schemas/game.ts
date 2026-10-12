@@ -109,6 +109,24 @@ export const questHandInSchema = questRewardsSchema.extend({
   taskId: z.number().int().positive(),
 })
 
+/**
+ * Quests an action completed and what each granted, in the same order. Talk, item use, equip and
+ * pouch buys return these fields as they are.
+ */
+export const questCompletionSchema = z.object({
+  completed: z.array(z.number().int().positive()),
+  rewards: z.array(questHandInSchema),
+})
+
+/**
+ * POST /api/game/fight and /explore/:spotId: their `rewards` is the fight or search loot, so the
+ * quest hand-ins come as `questRewards`.
+ */
+export const lootQuestCompletionSchema = z.object({
+  completed: z.array(z.number().int().positive()),
+  questRewards: z.array(questHandInSchema),
+})
+
 /** An item a monster can drop (GET /api/game/scene `monsters[].drops`), without its chance. */
 export const monsterDropSchema = z.object({ itemId: itemIdSchema, nameKey: z.string() })
 
@@ -137,4 +155,6 @@ export type BuyPouchesInput = z.input<typeof buyPouchesSchema>
 export type RewardItem = z.infer<typeof rewardItemSchema>
 export type QuestRewards = z.infer<typeof questRewardsSchema>
 export type QuestHandIn = z.infer<typeof questHandInSchema>
+export type QuestCompletion = z.infer<typeof questCompletionSchema>
+export type LootQuestCompletion = z.infer<typeof lootQuestCompletionSchema>
 export type MonsterDrop = z.infer<typeof monsterDropSchema>

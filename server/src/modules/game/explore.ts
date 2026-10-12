@@ -19,13 +19,7 @@ import {
   type ExploreCard,
   type StarState,
 } from '../../game/explore.js'
-import {
-  completeReadyRookieQuests,
-  expUpdate,
-  grantItems,
-  removeItems,
-  type Tx,
-} from '../../game/progress.js'
+import { expUpdate, grantItems, removeItems, rookieHandIns, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
@@ -199,7 +193,8 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       rewards.items.push(...toGrant)
       await grantItems(tx, character.id, toGrant)
 
-      const completed = await completeReadyRookieQuests(tx, character.id)
+      // `rewards` already holds the search's loot, so hand-ins go in `questRewards`.
+      const { completed, rewards: questRewards } = await rookieHandIns(tx, character.id)
       const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
       return {
         spotId,
@@ -210,6 +205,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
         fight,
         rewards,
         completed,
+        questRewards,
         explore: publicStatus(exploreStatus(updated!, new Date())),
         character: toCharacter(updated!),
       }

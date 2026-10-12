@@ -5,7 +5,7 @@ import type { Db } from '../../db/client.js'
 import { characters } from '../../db/schema.js'
 import { fightMonster, monsterDrops } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
-import { completeReadyRookieQuests } from '../../game/progress.js'
+import { rookieHandIns } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { reviveTerms } from './actions.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
@@ -65,9 +65,10 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       requireAlive(character, 'fight again')
 
       const result = await fightMonster(tx, character, monsterId)
-      const completed = await completeReadyRookieQuests(tx, character.id)
+      // `rewards` already holds the fight's loot, so hand-ins go in `questRewards`.
+      const { completed, rewards: questRewards } = await rookieHandIns(tx, character.id)
       const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
-      return { ...result, completed, character: toCharacter(updated!) }
+      return { ...result, completed, questRewards, character: toCharacter(updated!) }
     })
   })
 }

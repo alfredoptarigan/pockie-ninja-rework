@@ -150,6 +150,9 @@ export interface FightResult {
     items: { itemId: string; bound: boolean }[]
     levelsGained: number
   }
+  completed?: number[]
+  /** What each completed quest granted, in `completed` order. */
+  questRewards?: QuestHandIn[]
   character: Character
 }
 
@@ -201,6 +204,8 @@ export interface ExploreResult {
   fight: { replay: Replay; won: boolean } | null
   rewards: FightResult['rewards']
   completed: number[]
+  /** What each completed quest granted, in `completed` order. */
+  questRewards?: QuestHandIn[]
   explore: ExploreStatus
   character: Character
 }

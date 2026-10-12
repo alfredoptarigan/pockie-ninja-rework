@@ -31,10 +31,10 @@ import {
 import {
   acceptQuest,
   completeQuest,
-  completeReadyRookieQuests,
   consumeOne,
   grantItems,
   handInReadyRookieQuests,
+  rookieHandIns,
   loadQuests,
   saveQuests,
   type Tx,
@@ -303,7 +303,7 @@ export async function actionRoutes(
         recordCommand(quests, USE_ITEM_COMMAND, character.sceneId, row.itemId),
       )
       return {
-        completed: await completeReadyRookieQuests(tx, character.id),
+        ...(await rookieHandIns(tx, character.id)),
         character: await reload(tx, character.id),
       }
     })
@@ -344,7 +344,7 @@ export async function actionRoutes(
         )
       }
       return {
-        completed: await completeReadyRookieQuests(tx, character.id),
+        ...(await rookieHandIns(tx, character.id)),
         character: await reload(tx, character.id),
       }
     })
@@ -383,43 +383,37 @@ export async function actionRoutes(
   })
 
   // RoleUseSystem.OnCustomBuy: pouch refills for Gold or Gift Coupons.
-  app.post(
-    '/pouches/buy',
-    { config: { rateLimit: RATE_LIMITS.buyPouches } },
-    async (request) => {
-      const { currency, hp, mp } = buyPouchesSchema.parse(request.body)
-      const userId = requireUser(request).id
-      return db.transaction(async (tx) => {
-        const character = await lockCharacter(tx, userId)
-        const purchase = buyPouches(character, hp, mp)
-        if (!purchase) throw bad('pouch_full', 'Your pouch is already full.')
-        if (character[currency] < purchase.cost) {
-          const name = currency === 'gold' ? 'Gold' : 'Gift Coupons'
-          throw bad('no_money', `You need ${purchase.cost} ${name}.`)
-        }
-        await tx
-          .update(characters)
-          .set({
-            [currency]: character[currency] - purchase.cost,
-            hpPouch: purchase.hpPouch,
-            mpPouch: purchase.mpPouch,
-          })
-          .where(eq(characters.id, character.id))
-        const quests = await loadQuests(tx, character.id)
-        await saveQuests(
-          tx,
-          character.id,
-          recordCommand(quests, BUY_POUCH_COMMAND, character.sceneId),
-        )
-        const handIns = await handInReadyRookieQuests(tx, character.id)
-        return {
-          completed: handIns.map((handIn) => handIn.taskId),
-          rewards: handIns,
-          character: await reload(tx, character.id),
-        }
-      })
-    },
-  )
+  app.post('/pouches/buy', { config: { rateLimit: RATE_LIMITS.buyPouches } }, async (request) => {
+    const { currency, hp, mp } = buyPouchesSchema.parse(request.body)
+    const userId = requireUser(request).id
+    return db.transaction(async (tx) => {
+      const character = await lockCharacter(tx, userId)
+      const purchase = buyPouches(character, hp, mp)
+      if (!purchase) throw bad('pouch_full', 'Your pouch is already full.')
+      if (character[currency] < purchase.cost) {
+        const name = currency === 'gold' ? 'Gold' : 'Gift Coupons'
+        throw bad('no_money', `You need ${purchase.cost} ${name}.`)
+      }
+      await tx
+        .update(characters)
+        .set({
+          [currency]: character[currency] - purchase.cost,
+          hpPouch: purchase.hpPouch,
+          mpPouch: purchase.mpPouch,
+        })
+        .where(eq(characters.id, character.id))
+      const quests = await loadQuests(tx, character.id)
+      await saveQuests(
+        tx,
+        character.id,
+        recordCommand(quests, BUY_POUCH_COMMAND, character.sceneId),
+      )
+      return {
+        ...(await rookieHandIns(tx, character.id)),
+        character: await reload(tx, character.id),
+      }
+    })
+  })
 
   // ReliveSystem.OnCustomRelive. ponytail: the 5% equipment wear on going home is skipped
   // (durability is not tracked yet).

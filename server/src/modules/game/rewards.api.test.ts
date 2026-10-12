@@ -1,7 +1,9 @@
 // Quest rewards (GET /quests, /quests/available), what a hand-in granted (POST /npcs/:id/talk)
 // and what monsters can drop (GET /scene).
 import {
+  lootQuestCompletionSchema,
   monsterDropSchema,
+  questCompletionSchema,
   questHandInSchema,
   questRewardsSchema,
   type QuestRewards,
@@ -9,7 +11,7 @@ import {
 import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { characterQuests, characters } from '../../db/schema.js'
+import { characterQuests, characters, inventoryItems } from '../../db/schema.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -107,6 +109,55 @@ describe('POST /api/game/npcs/:npcId/talk rewards', () => {
   it('returns no rewards when nothing was completed', async () => {
     const body = (await client.post('/api/game/npcs/n11002/talk')).json()
     expect(body).toMatchObject({ completed: [], rewards: [] })
+  })
+})
+
+describe('rewards of quests completed by other actions', () => {
+  const tutorialCoupons = (taskId: number, exp: number) => ({
+    taskId,
+    ...none,
+    exp,
+    giftCoupon: 10,
+  })
+  const bagItem = async (itemId: string) =>
+    (await client.get('/api/game/inventory'))
+      .json()
+      .items.find((i: { itemId: string }) => i.itemId === itemId)
+
+  it('item use and equip return `rewards` next to `completed`', async () => {
+    await client.post('/api/game/npcs/n11001/talk')
+    const used = (await client.post(`/api/game/items/${(await bagItem('i159104')).id}/use`)).json()
+    expect(used.completed).toEqual([90001])
+    expect(questHandInSchema.array().parse(used.rewards)).toEqual([tutorialCoupons(90001, 5)])
+
+    await client.post('/api/game/quests/90002/accept')
+    const fists = await bagItem('i270100')
+    const equipped = (await client.post(`/api/game/items/${fists.id}/equip`)).json()
+    expect(questCompletionSchema.parse(equipped)).toEqual({
+      completed: [90002],
+      rewards: [tutorialCoupons(90002, 10)],
+    })
+  })
+
+  it('a fight returns them as `questRewards`, keeping the fight `rewards`', async () => {
+    // 90007: kill one Sunflower (n33017) in 2101; pays 40 EXP, 10 coupons and an HP pouch.
+    await db.delete(characterQuests).where(eq(characterQuests.characterId, characterId))
+    await db.insert(characterQuests).values({ characterId, taskId: 90007, progress: [0] })
+    await db.update(characters).set({ sceneId: 2101 }).where(eq(characters.id, characterId))
+    await db
+      .insert(inventoryItems)
+      .values({ characterId, itemId: 'i270100', equippedSlot: 'Weapon' })
+
+    const body = (await client.post('/api/game/fight', { monsterId: 'n33017' })).json()
+    expect(body.won).toBe(true)
+    expect(body.rewards.exp).toBe(8)
+    expect(lootQuestCompletionSchema.parse(body).completed).toEqual([90007])
+    expect(body.questRewards).toEqual([
+      {
+        ...tutorialCoupons(90007, 40),
+        items: [{ itemId: 'i160050', count: 1, nameKey: expect.any(String) }],
+      },
+    ])
   })
 })
 

@@ -225,7 +225,11 @@ export async function handInReadyRookieQuests(tx: Tx, characterId: string) {
   }
 }
 
-/** Ids of the rookie quests handInReadyRookieQuests completed. */
-export async function completeReadyRookieQuests(tx: Tx, characterId: string) {
-  return (await handInReadyRookieQuests(tx, characterId)).map((handIn) => handIn.taskId)
+/**
+ * Hands in ready rookie quests for an action response: `completed` ids and, in the same order,
+ * what each one granted (`rewards`).
+ */
+export async function rookieHandIns(tx: Tx, characterId: string) {
+  const rewards = await handInReadyRookieQuests(tx, characterId)
+  return { completed: rewards.map((handIn) => handIn.taskId), rewards }
 }

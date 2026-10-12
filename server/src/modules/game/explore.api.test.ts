@@ -85,6 +85,8 @@ describe('POST /api/game/explore/:spotId', () => {
     expect(body.star).toEqual({ level: 0, progress: 1, perStar: 2 })
     expect(body.starBonus).toBeNull()
     expect(body.otherCards).toHaveLength(4)
+    // No tutorial step is an explore, so nothing is handed in.
+    expect(body).toMatchObject({ completed: [], questRewards: [] })
     expect(['fight', 'stone', 'pet', 'boss', 'item', 'key', 'nothing']).toContain(body.card.type)
     expect(body.explore.remaining).toBe(6)
     expect(Date.parse(body.explore.cooldownEndsAt) - Date.now()).toBeGreaterThan(
