@@ -88,6 +88,12 @@ export function reviveTerms(character: Pick<CharacterRow, 'level' | 'sceneId'>) 
 
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 
+/** Whether the outfit's weapon class may use the item (UsePopsinger bit mask, -1 any). */
+function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: number) {
+  const allowed = Number(def.UsePopsinger)
+  return allowed === -1 || (allowed & avatarStats(avatarId).Popsinger) !== 0
+}
+
 /**
  * Column updates for HP/MP potions and pouch refills, by the item's script
  * (Resource/javascript/item/*.js); undefined for other items. hp.js, mp.js and hmp.js refuse when
@@ -186,6 +192,9 @@ export async function actionRoutes(
         bound: row.bound,
         equippedSlot: row.equippedSlot,
         nameKey: `lg_${item(row.itemId)?.Name ?? row.itemId}`,
+        ...(item(row.itemId)?.class === 'EquipItem'
+          ? { fitsOutfit: fitsOutfit(item(row.itemId)!, character.avatarId) }
+          : {}),
       })),
     }
   })
@@ -308,9 +317,7 @@ export async function actionRoutes(
         throw bad('cannot_equip', 'That item cannot be equipped.')
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
-      const allowed = Number(def.UsePopsinger)
-      const weaponClass = avatarStats(character.avatarId).Popsinger
-      if (allowed !== -1 && (allowed & weaponClass) === 0) {
+      if (!fitsOutfit(def, character.avatarId)) {
         throw bad('wrong_class', 'Your outfit cannot use this kind of weapon.')
       }
       const slot = String(def.EquipType)

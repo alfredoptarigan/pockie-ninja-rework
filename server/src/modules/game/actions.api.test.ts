@@ -53,7 +53,7 @@ describe('Fire Village tutorial', () => {
     expect(used.json().completed).toEqual([90001])
     expect(await itemRow('i159104')).toBeUndefined()
     const fists = await itemRow('i270100')
-    expect(fists).toBeDefined()
+    expect(fists).toMatchObject({ fitsOutfit: true })
 
     // 90002 is not auto-accepted: accept it at the Elder, then equip the fists.
     expect((await client.post('/api/game/quests/90002/accept')).statusCode).toBe(200)
@@ -90,6 +90,7 @@ describe('items', () => {
     // i250100 is a blunt weapon; Ggio Vega fights with fists.
     await db.insert(inventoryItems).values({ characterId, itemId: 'i250100' })
     const bat = await itemRow('i250100')
+    expect(bat.fitsOutfit).toBe(false)
     expect((await client.post(`/api/game/items/${bat.id}/equip`)).statusCode).toBe(400)
   })
 

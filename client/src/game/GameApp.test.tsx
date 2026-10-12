@@ -280,13 +280,22 @@ describe('tutorial nudges', () => {
             },
           ],
         }),
-      'GET /api/game/inventory': () => json({ items: [potion, fists] }),
+      'GET /api/game/inventory': () =>
+        json({
+          items: [
+            potion,
+            { ...fists, fitsOutfit: true },
+            { ...fists, id: 'stick', itemId: 'i250100', fitsOutfit: false },
+          ],
+        }),
     })
     const nav = await screen.findByRole('region', { name: 'Quest Navigation' })
     await userEvent.click(await within(nav).findByRole('button', { name: /^Go:/ }))
     const bag = await screen.findByRole('dialog', { name: 'Inventory' })
     const marked = await within(bag).findByText('Next step')
     expect(within(marked.closest('li')!).getByRole('button', { name: /^Equip/ })).toBeVisible()
+    // Only the weapon this outfit can wear is marked.
+    expect(within(bag).getAllByText('Next step')).toHaveLength(1)
   })
 })
 

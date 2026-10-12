@@ -66,6 +66,8 @@ export interface InventoryItem {
   bound: boolean
   equippedSlot: string | null
   nameKey: string
+  /** Equipment only: whether this outfit's weapon class may wear it. */
+  fitsOutfit?: boolean
 }
 
 export interface TalkResult {

@@ -11,7 +11,7 @@ const isHighlighted = (item: InventoryItem, highlight: BagHighlight | undefined)
   !!highlight &&
   ('itemId' in highlight
     ? item.itemId === highlight.itemId
-    : isEquipment(item.itemId) && !item.equippedSlot)
+    : isEquipment(item.itemId) && !item.equippedSlot && item.fitsOutfit !== false)
 
 export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const inventory = useInventory()
