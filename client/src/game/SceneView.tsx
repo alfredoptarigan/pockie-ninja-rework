@@ -37,12 +37,15 @@ export function SceneView({
   const [fightState, setFightState] = useState<{
     result: FightResult
     monster: SceneMonster
+    /** Weapon equipped when the fight started; the replay draws it. */
+    weaponItemId?: string
     /** Bumped by "Watch again" to restart the replay. */
     run: number
     finished: boolean
   } | null>(null)
 
-  const hasWeapon = !inventory.data || inventory.data.some((item) => item.equippedSlot === 'Weapon')
+  const weapon = inventory.data?.find((item) => item.equippedSlot === 'Weapon')
+  const hasWeapon = !inventory.data || !!weapon
 
   const startFight = async (monster: SceneMonster, confirmed = unarmedOk) => {
     if (defeated) {
@@ -56,7 +59,7 @@ export function SceneView({
     }
     try {
       const result = await fight.mutateAsync(monster.id)
-      setFightState({ result, monster, run: 0, finished: false })
+      setFightState({ result, monster, weaponItemId: weapon?.itemId, run: 0, finished: false })
       setRefused(false)
       if (!result.won) setReviveOpen(true)
     } catch {
@@ -139,6 +142,7 @@ export function SceneView({
           clothing={character.clothing}
           monsterIds={[fightState.monster.id]}
           sceneId={character.sceneId}
+          weaponItemId={fightState.weaponItemId}
           onFinished={() => setFightState((s) => s && { ...s, finished: true })}
         />
       )}

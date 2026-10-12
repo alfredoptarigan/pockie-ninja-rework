@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { errorMessage, useEquipItem, useInventory, useUseItem } from './api'
+import { ItemIcon } from './ItemIcon'
 import { GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { BagHighlight, InventoryItem } from './types'
@@ -50,12 +51,16 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
             >
               <span className="flex items-center gap-2">
                 {/* Bag cell of the original package grid; the stack count sits in its corner. */}
-                <span
-                  aria-hidden="true"
-                  className="game-slot flex size-9 shrink-0 items-end justify-end p-0.5 text-[10px] font-bold"
-                >
-                  {item.count > 1 ? item.count : ''}
-                </span>
+                <ItemIcon itemId={item.itemId} name={plainText(item.nameKey, 'Unknown item')}>
+                  {item.count > 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute right-0.5 bottom-0 text-[10px] font-bold"
+                    >
+                      {item.count}
+                    </span>
+                  )}
+                </ItemIcon>
                 <GameText k={item.nameKey} fallback="Unknown item" />
                 {item.count > 1 && <span className="sr-only">x{item.count}</span>}
                 {isHighlighted(item, highlight) && (

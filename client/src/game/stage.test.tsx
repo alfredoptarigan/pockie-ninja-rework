@@ -76,6 +76,7 @@ describe('BattleReplayMount', () => {
         clothing={3}
         monsterIds={['n33017']}
         sceneId={2101}
+        weaponItemId="i270100"
         onFinished={onFinished}
       />,
     )
@@ -89,7 +90,13 @@ describe('BattleReplayMount', () => {
     await waitFor(() => expect(skip).toBeEnabled())
     expect(mountBattle).toHaveBeenLastCalledWith(
       screen.getByTestId('battle-stage'),
-      expect.objectContaining({ replay, clothing: 3, monsterIds: ['n33017'], sceneId: 2101 }),
+      expect.objectContaining({
+        replay,
+        clothing: 3,
+        monsterIds: ['n33017'],
+        sceneId: 2101,
+        weaponItemId: 'i270100',
+      }),
     )
     expect(handle.setSpeed).toHaveBeenLastCalledWith(1)
 

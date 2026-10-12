@@ -37,7 +37,7 @@ export function frameAt(durations: number[], tick: number, loop: boolean) {
 }
 
 /** Phaser origin that puts the sheet's registration point on the sprite position. */
-export const originOf = (sheet: MotionSheet) => ({
+export const originOf = (sheet: Pick<MotionSheet, 'anchor' | 'frameWidth' | 'frameHeight'>) => ({
   x: sheet.anchor.x / sheet.frameWidth,
   y: sheet.anchor.y / sheet.frameHeight,
 })
@@ -63,28 +63,40 @@ export function monsterArt(npcId: string): FighterArt | undefined {
 export const sheetOf = (art: FighterArt | undefined, motion: string) =>
   art ? (art.set.motions[motion] ?? art.set.motions[STAND]) : undefined
 
-/** Motion played for a skill: skill-motions.json, else the normal attack, else stand. */
+/**
+ * Motion played for a skill: skill-motions.json, else the normal attack, else stand. `skillId` is
+ * the skill whose motion the body really plays (none when it stands), for the weapon layer.
+ */
 export function skillMotion(
   art: FighterArt | undefined,
   skillId: number | undefined,
   skillMotions: SkillMotions | null,
-) {
-  if (!art) return STAND
+): { motion: string; skillId?: number } {
+  if (!art) return { motion: STAND }
   const id = skillId ?? NORMAL_ATTACK_SKILL
   const listed = skillMotions?.[art.skills.group][art.skills.key]?.[String(id)]
-  if (listed && art.set.motions[listed]) return listed
-  return art.set.motions[NORMAL_ATTACK_MOTION] ? NORMAL_ATTACK_MOTION : STAND
+  if (listed && art.set.motions[listed]) return { motion: listed, skillId: id }
+  return art.set.motions[NORMAL_ATTACK_MOTION]
+    ? { motion: NORMAL_ATTACK_MOTION, skillId: NORMAL_ATTACK_SKILL }
+    : { motion: STAND }
 }
 
-let skillMotionsRequest: Promise<SkillMotions | null> | null = null
-/** skill-motions.json (about 200 KB, fetched once when the first battle plays). */
-export function loadSkillMotions() {
-  skillMotionsRequest ??= fetch(SKILL_MOTIONS_URL)
-    .then((res) => (res.ok ? (res.json() as Promise<SkillMotions>) : null))
-    .catch(() => null)
-    .then((data) => {
-      if (!data) skillMotionsRequest = null // retry on the next battle
-      return data
-    })
-  return skillMotionsRequest
+const jsonRequests = new Map<string, Promise<unknown>>()
+/** Fetches a runtime JSON file once; a failed request resolves to null and is tried again later. */
+export function fetchJsonOnce<T>(url: string): Promise<T | null> {
+  let request = jsonRequests.get(url) as Promise<T | null> | undefined
+  if (!request) {
+    request = fetch(url)
+      .then((res) => (res.ok ? (res.json() as Promise<T>) : null))
+      .catch(() => null)
+      .then((data) => {
+        if (!data) jsonRequests.delete(url)
+        return data
+      })
+    jsonRequests.set(url, request)
+  }
+  return request
 }
+
+/** skill-motions.json (about 200 KB, fetched once when the first battle plays). */
+export const loadSkillMotions = () => fetchJsonOnce<SkillMotions>(SKILL_MOTIONS_URL)

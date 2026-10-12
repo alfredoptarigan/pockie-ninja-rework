@@ -64,6 +64,22 @@ describe('Inventory', () => {
     )
   })
 
+  it('shows each item with its original icon, or a placeholder', async () => {
+    const unknown = { ...potion, id: 'u3', itemId: 'i999999', nameKey: 'lg_missing', count: 1 }
+    mockApi({ 'GET /api/game/inventory': () => json({ items: [potion, fists, unknown] }) })
+    renderWithProviders(<Inventory />)
+
+    expect(await screen.findByRole('img', { name: 'Healing Powder' })).toHaveAttribute(
+      'src',
+      '/assets/game/items/icon_resume6.webp',
+    )
+    expect(screen.getByRole('img', { name: 'Newbie Swiping Fists' })).toHaveAttribute(
+      'src',
+      '/assets/game/items/icon_weapon_gloves1.webp',
+    )
+    expect(screen.getByRole('img', { name: 'Unknown item' })).not.toHaveAttribute('src')
+  })
+
   it('says when the bag is empty', async () => {
     mockApi({ 'GET /api/game/inventory': () => json({ items: [] }) })
     renderWithProviders(<Inventory />)

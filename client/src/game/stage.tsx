@@ -105,12 +105,15 @@ export function BattleReplayMount({
   clothing,
   monsterIds,
   sceneId,
+  weaponItemId,
   onFinished,
 }: {
   replay: Replay
   clothing: number
   monsterIds: string[]
   sceneId: number
+  /** The player's equipped weapon, drawn over the body. */
+  weaponItemId?: string
   onFinished: () => void
 }) {
   const [speed, setSpeed] = useState<(typeof SPEEDS)[number]>(1)
@@ -121,6 +124,7 @@ export function BattleReplayMount({
       clothing,
       monsterIds,
       sceneId,
+      weaponItemId,
       onFinished: () => latest.current(),
     }),
   )
