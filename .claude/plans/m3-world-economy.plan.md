@@ -1,7 +1,7 @@
 # Plan: World & Economy (Milestone 3)
 
 **Project**: Pockie Ninja Remastered
-**Status**: draft; user decisions of 2026-10-12 recorded under "Decisions" (four questions still open)
+**Status**: draft; user decisions of 2026-10-12 recorded under "Decisions" (VIP details open)
 **Complexity**: Large
 
 ## Goal
@@ -200,6 +200,14 @@ one-line wiring), and the `shared/src/index.ts` re-export.
   full bag, Las Noches pot halving.
 - **Depends on**: tasks 1, 2, 3, 4 (weapon/HP checks use the stats); energy decision.
 
+### Task 11: VIP (after the user answers open question 1)
+
+- **Folders**: one VIP field set in task 2's migrations (for example `users.vip_until`, `vip_tier`),
+  one rule module `server/src/game/vip.ts` that every EXP and drop roll goes through (fights,
+  explore, quests, toll gates, pub fights), a VIP badge in the client HUD.
+- **Acceptance**: tests show EXP and drop rolls with and without VIP, VIP expiry, and that the
+  rate applies in every reward path; no other original VIP perk changes.
+
 ### Task 10: Verification
 
 - **Action**: Playwright journeys (buy a potion and sell loot; appraise and enhance a weapon;
@@ -215,7 +223,7 @@ one-line wiring), and the `shared/src/index.ts` re-export.
 | ---- | ------------------------------------------- | ------------------------------------------------------------ |
 | 1    | 1 import, 2 schema, 3 assets, 4 game-core, 5 i18n | five disjoint folders; 2 merges first so wave 2 can start   |
 | 2    | 6 shops, 7 forge, 8 world, 9 instances     | four disjoint feature folders; coordinator merges `app.ts` and window wiring |
-| 3    | 10 verification                             | after wave 2 merges                                          |
+| 3    | 10 verification, 11 VIP                     | after wave 2 merges                                          |
 
 Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 first and 9 alone.
 
@@ -266,12 +274,18 @@ Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 fi
 6. **Daily resets**: UTC midnight everywhere (explore, shop restock, toll gates, pub fights,
    daily quests).
 
+7. **World map**: places the player cannot enter yet (level, nation or not visited) are drawn
+   dimmed and blocked, showing the level they need. Angel City's "Village" button keeps the
+   original `ToScene` (2601).
+8. **Never-attackable task bosses** (n32025, n31025, n31026, n32030): shown, but locked.
+9. **Original quirks** (SkillAdd set bonuses with 0 chance, Dragon Soul/Kage no-op bonuses, ring
+   and amulet inscriptions without a bonus, unclipped city NPCs): ported as they are.
+10. **VIP**: build a VIP system in M3 (task 11). VIP raises the EXP rate and the drop rate. The
+    original VIP perks (+30% toll gate EXP, 96.7% Las Noches start, 80% pouch price) are not
+    assumed; how VIP is obtained and the exact rates are still open.
+
 ## Open questions for the user
 
-1. **World map**: unvisited places hidden but clickable (original) or dimmed and blocked?
-   Angel City's "Village" button leads to 2601 (original `ToScene`): keep?
-2. **Never-attackable task bosses** (n32025, n31025, n31026, n32030): show locked or hide?
-3. **Original quirks**: SkillAdd set bonuses give 0 chance (`% 100`), Dragon Soul/Kage no-op
-   bonuses, inscription on rings/amulets with no bonus, unclipped city NPCs. Port as is?
-4. **VIP**: no VIP system; treat everyone as non-VIP (no +30% toll gate EXP, no 96.7% Las Noches
-    start, no 80% pouch price)?
+1. **VIP**: how does a player get VIP (with the Gold top-up, a separate purchase, tiers or a
+   duration such as 30 days)? How much higher are the EXP and drop rates (for example +50% EXP,
+   +25% drop chance), and do they differ per tier?
