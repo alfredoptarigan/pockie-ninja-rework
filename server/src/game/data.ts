@@ -2,7 +2,15 @@
 // Files are loaded on first use and cached for the life of the process.
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import type { AvatarStats, SkillInput } from '@pockie/game-core'
+import type {
+  AvatarStats,
+  EquipPropDefines,
+  EquipSuits,
+  EquipTables,
+  IdentifyProps,
+  InscribeLevels,
+  SkillInput,
+} from '@pockie/game-core'
 import type { OutfitBoost } from '@pockie/shared'
 
 type Row = Record<string, number | string | (number | string)[]>
@@ -175,3 +183,15 @@ export const exploreFactory = (kind: ExploreFactory, id: number) =>
 /** GostFactory.ini: monster configs of one factory id. */
 export const exploreMonsters = (id: number) =>
   load<Record<string, { Item: string[] }>>('explore-gost-factory')[String(id)]?.Item ?? []
+
+/** The tables every equipped item's stat list needs (EquipSystem; game-core/equipment). */
+export function equipTables(): EquipTables & { suits: EquipSuits } {
+  return {
+    propDefines: load<EquipPropDefines>('equip-props'),
+    identifyProps: load<IdentifyProps>('identify-props'),
+    inscribeLevels: load<{ levels: InscribeLevels }>('inscribe-levels').levels,
+    enhanceFactor: load<{ config: { ConsolidateEquipFatcor: number } }>('equip-config').config
+      .ConsolidateEquipFatcor,
+    suits: load<EquipSuits>('equip-suits'),
+  }
+}

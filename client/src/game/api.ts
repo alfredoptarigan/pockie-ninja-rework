@@ -181,6 +181,13 @@ export function useEquipItem() {
   return useGameAction((id: string) => post<ActionResult>(`/api/game/items/${id}/equip`))
 }
 
+/** Moves a worn item back to the bag; no quest completes, so only the character comes back. */
+export function useUnequipItem() {
+  return useGameAction((id: string) =>
+    post<{ character: Character }>(`/api/game/items/${id}/unequip`),
+  )
+}
+
 export function errorMessage(error: unknown) {
   return error instanceof ApiError ? error.message : 'Something went wrong. Please try again.'
 }

@@ -1,4 +1,4 @@
-import { deriveStats } from '@pockie/game-core'
+import { deriveStats, type CombatStats } from '@pockie/game-core'
 import {
   createCharacterSchema,
   type Character,
@@ -29,10 +29,15 @@ const NAME_TAKEN = 'That ninja name is already taken.'
 
 type CharacterRow = typeof characters.$inferSelect
 
-export function toCharacter(row: CharacterRow): Character {
-  // ponytail: maxHp/maxMp leave out equipment HP/MP bonuses (as do potions, revive and quest
-  // level-ups); no item below level 21 has them. Load equipmentBonuses here once such items drop.
-  const stats = deriveStats(avatarStats(row.avatarId), row.level)
+/**
+ * The API view of a character. `stats` (playerFighter) brings the equipment HP/MP bonuses; without
+ * it the outfit's own max is used. ponytail: potions, revive and quest level-ups still refill to
+ * the outfit's max; pass the fighter there once gear with HP bonuses drops (level 21+).
+ */
+export function toCharacter(
+  row: CharacterRow,
+  stats: Pick<CombatStats, 'maxHp' | 'maxMp'> = deriveStats(avatarStats(row.avatarId), row.level),
+): Character {
   return {
     id: row.id,
     name: row.name,
@@ -146,7 +151,8 @@ export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) 
 
   app.get('/character', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const row = await characterOf(db, requireUser(request).id)
-    return { character: toCharacter(row), stats: statsOf(await playerFighter(db, row)) }
+    const fighter = await playerFighter(db, row)
+    return { character: toCharacter(row, fighter), stats: statsOf(fighter) }
   })
 
   app.post(

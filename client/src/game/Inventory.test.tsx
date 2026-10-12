@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { character, fists, potion } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
 import { Inventory } from './Inventory'
+import type { InventoryItem } from './types'
 
 describe('Inventory', () => {
   it('uses a potion', async () => {
@@ -53,6 +54,34 @@ describe('Inventory', () => {
     expect(within(equipment).getByText(/Weapon:/)).toHaveTextContent('Newbie Swiping Fists')
     expect(screen.queryByRole('button', { name: /Equip/ })).not.toBeInTheDocument()
     expect(screen.getByText('Your bag is empty.')).toBeVisible()
+  })
+
+  it('unequips a worn item back into the bag', async () => {
+    let items: InventoryItem[] = [{ ...fists, equippedSlot: 'Weapon' }]
+    const fetchMock = mockApi({
+      'GET /api/game/inventory': () => json({ items }),
+      [`POST /api/game/items/${fists.id}/unequip`]: () => {
+        items = [fists]
+        return json({ character })
+      },
+    })
+    renderWithProviders(<Inventory />)
+
+    const equipment = await screen.findByRole('list', { name: 'Equipment' })
+    await userEvent.click(within(equipment).getByRole('button', { name: 'Newbie Swiping Fists' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Unequip Newbie Swiping Fists' }))
+
+    expect(await screen.findByRole('status')).toHaveTextContent('Unequipped Newbie Swiping Fists.')
+    expect(await within(equipment).findByText(/Weapon:/)).toHaveTextContent('empty')
+    expect(
+      within(screen.getByRole('list', { name: 'Bag' })).getByRole('button', {
+        name: 'Newbie Swiping Fists',
+      }),
+    ).toBeInTheDocument()
+    expect(fetchMock).toHaveBeenCalledWith(
+      `/api/game/items/${fists.id}/unequip`,
+      expect.objectContaining({ method: 'POST' }),
+    )
   })
 
   it('disables Equip with a reason on weapons the outfit cannot use', async () => {
