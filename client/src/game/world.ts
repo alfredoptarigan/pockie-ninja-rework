@@ -41,11 +41,12 @@ const allowed = (character: Character, level: number, nation: number) =>
   character.level >= level && (nation === -1 || nation === character.nation)
 
 /**
- * Quests this NPC can hand out now. Completed quests are not listed by the API, so a quest counts
- * as done when a later quest of its chain is held; of an unheld chain only the first quest shows.
+ * Quests the character can pick up now, from any NPC. Completed quests are not listed by the API,
+ * so a quest counts as done when a later quest of its chain is held; of an unheld chain only the
+ * first quest shows.
  * ponytail: a heuristic; an "available quests" endpoint would make it exact.
  */
-export function questOffers(npcId: string, sceneId: number, character: Character, held: Quest[]) {
+export function availableQuests(character: Character, held: Quest[]) {
   const heldIds = new Set(held.map((q) => q.taskId))
   const done = new Set<number>()
   for (const quest of held) {
@@ -58,8 +59,6 @@ export function questOffers(npcId: string, sceneId: number, character: Character
     .map(([id, offer]) => ({ taskId: Number(id), ...offer }))
     .filter(
       (offer) =>
-        offer.npc === npcId &&
-        offer.scene === sceneId &&
         !heldIds.has(offer.taskId) &&
         !done.has(offer.taskId) &&
         !heldIds.has(offer.pre) &&
@@ -67,6 +66,30 @@ export function questOffers(npcId: string, sceneId: number, character: Character
     )
   const ids = new Set(candidates.map((offer) => offer.taskId))
   return candidates.filter((offer) => !ids.has(offer.pre))
+}
+
+/** Quests this NPC can hand out now. */
+export function questOffers(npcId: string, sceneId: number, character: Character, held: Quest[]) {
+  return availableQuests(character, held).filter(
+    (offer) => offer.npc === npcId && offer.scene === sceneId,
+  )
+}
+
+/** Home village of each nation (Character.nation). */
+const VILLAGES = [111, 121, 151, 141, 131]
+export const villageOf = (nation: number) => VILLAGES[nation] ?? VILLAGES[0]!
+export const isVillage = (sceneId: number) => VILLAGES.includes(sceneId)
+
+/**
+ * Where a held quest leads: the zone and NPC (or monster) of its first unfinished step, or of
+ * its last step once every step is done.
+ */
+export function questTarget(quest: Quest): { sceneId?: number; npcId?: string } {
+  const open = quest.steps.findIndex((step, i) => (quest.progress[i] ?? 0) < step.target)
+  const args = stepArgs[quest.taskId]?.[open === -1 ? quest.steps.length - 1 : open] ?? []
+  const scene = /^lg_Scene_BackGround_(\d+)$/.exec(args[0] ?? '')
+  const npc = /^lg_name_(n\d+)$/.exec(args[1] ?? '')
+  return { sceneId: scene ? Number(scene[1]) : undefined, npcId: npc?.[1] }
 }
 
 /** Scenes reachable from here that this character may enter, plus locked ones for the map. */

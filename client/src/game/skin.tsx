@@ -169,14 +169,20 @@ export function Notice({
   )
 }
 
-/** Modal dialog on the native <dialog> element (focus trap and Escape come with it). */
+/**
+ * Floating game window: a modal on the native <dialog> element (focus trap and Escape come with
+ * it), centred over the stage and scaled with the HUD (--hud-scale, see GameApp).
+ */
 export function Dialog({
   title,
   onClose,
+  className = 'w-[32rem]',
   children,
 }: {
   title: ReactNode
   onClose: () => void
+  /** Width (and other sizing) of the window; the stage is 1280x720 HUD pixels. */
+  className?: string
   children: ReactNode
 }) {
   const ref = useRef<HTMLDialogElement>(null)
@@ -190,7 +196,7 @@ export function Dialog({
       ref={ref}
       aria-labelledby={id}
       onClose={onClose}
-      className="game-frame m-auto w-[min(32rem,calc(100vw-2rem))] bg-transparent px-2 pt-0 pb-2 backdrop:bg-black/50"
+      className={`game-frame game-window m-auto max-w-[calc(100%-1rem)] bg-transparent px-2 pt-0 pb-2 backdrop:bg-black/25 ${className}`}
     >
       <div className="game-frame-title mb-2 flex items-center justify-between gap-2">
         <h2 id={id} className="game-title-tag font-game text-sm font-bold">
@@ -203,7 +209,7 @@ export function Dialog({
           onClick={onClose}
         />
       </div>
-      <div className="game-inset max-h-[70dvh] overflow-auto p-3 font-game text-sm">{children}</div>
+      <div className="game-inset max-h-[520px] overflow-auto p-3 font-game text-sm">{children}</div>
     </dialog>
   )
 }

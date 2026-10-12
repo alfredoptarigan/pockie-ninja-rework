@@ -24,13 +24,22 @@ vi.stubGlobal(
   },
 )
 
-// jsdom has <dialog> but not its modal methods.
+// jsdom has <dialog> but not its modal behaviour: like a browser, showModal focuses the first
+// control, close() fires "close", and Escape closes the dialog that has the focus.
 HTMLDialogElement.prototype.showModal = function (this: HTMLDialogElement) {
   this.open = true
+  this.querySelector<HTMLElement>('button, [href], input, select, textarea')?.focus()
 }
 HTMLDialogElement.prototype.close = function (this: HTMLDialogElement) {
+  if (!this.open) return
   this.open = false
+  this.dispatchEvent(new Event('close'))
 }
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape' || !(event.target instanceof Element)) return
+  const dialog = event.target.closest('dialog')
+  if (dialog?.open) dialog.close()
+})
 
 afterEach(cleanup)
 

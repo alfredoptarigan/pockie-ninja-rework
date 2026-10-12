@@ -70,7 +70,8 @@ describe('Play', () => {
     mockApi({ ...inGame, 'POST /api/auth/logout': () => new Response(null, { status: 204 }) })
     renderPlay()
 
-    await userEvent.click(await screen.findByRole('button', { name: 'Log out' }, LAZY))
+    await userEvent.click(await screen.findByRole('button', { name: 'Settings' }, LAZY))
+    await userEvent.click(screen.getByRole('button', { name: 'Log out' }))
 
     expect(await screen.findByTestId('location')).toHaveTextContent(/^\/$/)
     expect(socket.disconnected).toBe(true)

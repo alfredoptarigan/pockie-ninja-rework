@@ -70,19 +70,18 @@ function useRealtime() {
   return { send, players, messages, status, error }
 }
 
+/** Chat box at the bottom left of the stage; the scene's player list opens from its header. */
 export function RealtimePanels({ characterId }: { characterId: string }) {
   const realtime = useRealtime()
-  return (
-    <>
-      <PlayerList players={realtime.players} selfId={characterId} />
-      <ChatBox {...realtime} />
-    </>
-  )
+  return <ChatBox {...realtime} selfId={characterId} />
 }
 
 function PlayerList({ players, selfId }: { players: ScenePlayer[]; selfId: string }) {
   return (
-    <Panel title={`Players here (${players.length})`} className="max-h-64">
+    <Panel
+      title={`Players here (${players.length})`}
+      className="absolute bottom-full left-0 mb-1 max-h-56 w-64"
+    >
       {players.length === 0 ? (
         <p className="text-xs">Nobody else is here.</p>
       ) : (
@@ -109,14 +108,19 @@ const CHANNELS: { id: ChatChannel; title: string }[] = [
 export function ChatBox({
   send,
   messages,
+  players,
+  selfId,
   status,
   error,
 }: {
   send: SendChat
   messages: ChatMessage[]
+  players: ScenePlayer[]
+  selfId: string
   status: Status
   error: string | null
 }) {
+  const [showPlayers, setShowPlayers] = useState(false)
   const [channel, setChannel] = useState<ChatChannel>('world')
   const [text, setText] = useState('')
   const [sendError, setSendError] = useState<string | null>(null)
@@ -142,8 +146,12 @@ export function ChatBox({
   }
 
   return (
-    <section aria-label="Chat" className="game-hud flex min-h-0 flex-col gap-1 p-2 font-game">
-      <div className="flex items-end justify-between">
+    <section
+      aria-label="Chat"
+      className="pointer-events-auto absolute bottom-1 left-1 flex w-[440px] flex-col font-game"
+    >
+      {showPlayers && <PlayerList players={players} selfId={selfId} />}
+      <div className="flex items-end gap-2">
         <Tabs
           label="Chat channel"
           tabs={CHANNELS}
@@ -152,14 +160,22 @@ export function ChatBox({
           panelId={`${ids}-log`}
           variant="dark"
         />
-        <span className="text-xs text-trim-soft">
+        <span className="ml-auto text-xs text-trim-soft [text-shadow:var(--shadow-game-text)]">
           {status === 'online' ? 'Online' : status === 'connecting' ? 'Connecting...' : 'Offline'}
         </span>
+        <GameButton
+          small
+          className="mb-0.5"
+          aria-expanded={showPlayers}
+          onClick={() => setShowPlayers((v) => !v)}
+        >
+          Players ({players.length})
+        </GameButton>
       </div>
       <div
         id={`${ids}-log`}
         role="tabpanel"
-        className="game-hud-inset h-40 overflow-auto p-2 text-xs"
+        className="h-[180px] overflow-auto rounded-tr border border-[#45494c] bg-black/55 p-2 text-xs text-white"
       >
         {error && <Notice tone="error">{error}</Notice>}
         <ol ref={logRef} aria-live="polite" aria-label={`${channel} messages`}>
@@ -173,7 +189,7 @@ export function ChatBox({
         </ol>
       </div>
       {sendError && <Notice tone="error">{sendError}</Notice>}
-      <form onSubmit={onSubmit} className="flex gap-1">
+      <form onSubmit={onSubmit} className="game-hud mt-1 flex gap-1 p-1">
         <label htmlFor={`${ids}-input`} className="sr-only">
           Message to {channel} chat
         </label>

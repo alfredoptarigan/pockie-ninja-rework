@@ -13,7 +13,7 @@ export function completedNotice(taskIds: number[]) {
 
 const stateLabel = (quest: Quest) => (quest.state === 1 ? 'Ready to hand in' : 'In progress')
 
-function Steps({ quest }: { quest: Quest }) {
+export function Steps({ quest }: { quest: Quest }) {
   return (
     <ul className="mt-1 flex flex-col gap-0.5">
       {quest.steps.map((step, i) => {
@@ -58,36 +58,5 @@ export function QuestLog() {
         </li>
       ))}
     </ul>
-  )
-}
-
-/** Compact always-visible list of current quests. */
-export function QuestTracker() {
-  const quests = useQuests()
-  if (!quests.data?.length) return null
-  return (
-    <section aria-label="Quest tracker" className="game-hud p-2 font-game text-xs text-parchment">
-      <h2 className="mb-1 font-bold text-trim">Quests</h2>
-      <ul className="flex flex-col gap-1.5">
-        {quests.data.map((quest) => (
-          <li key={quest.taskId}>
-            <span className="font-bold text-white">
-              {plainText(quest.nameKey, `Quest ${quest.taskId}`)}
-            </span>
-            {quest.state === 1 && <span className="ml-1 text-trim">(ready)</span>}
-            {quest.steps.map((step, i) => (
-              <span key={i} className="block">
-                {plainText(
-                  step.descriptionKey,
-                  'Objective',
-                  questStepArgs(quest.taskId, i, quest.progress[i] ?? 0, step.target),
-                )}{' '}
-                {Math.min(quest.progress[i] ?? 0, step.target)}/{step.target}
-              </span>
-            ))}
-          </li>
-        ))}
-      </ul>
-    </section>
   )
 }

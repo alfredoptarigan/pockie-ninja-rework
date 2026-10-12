@@ -78,7 +78,7 @@ describe('Chat', () => {
     expect(screen.getByLabelText('Message to world chat')).toHaveValue('')
   })
 
-  it('lists the players in the scene', () => {
+  it('lists the players in the scene', async () => {
     renderChat()
     act(() =>
       socket.serverEmit('scene:players', {
@@ -89,6 +89,10 @@ describe('Chat', () => {
         ],
       }),
     )
+
+    // The list opens from the chat header.
+    expect(screen.queryByRole('region', { name: /Players here/ })).not.toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Players (2)' }))
 
     const list = screen.getByRole('region', { name: 'Players here (2)' })
     expect(within(list).getByText('Sasuke_1')).toBeInTheDocument()

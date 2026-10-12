@@ -1,12 +1,14 @@
 import type { Character } from '@pockie/shared'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { errorMessage, useAcceptQuest, useQuests, type useTalk } from './api'
+import { useNpcPhoto } from './art'
 import { completedNotice } from './QuestLog'
 import { Dialog, GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { SceneNpc } from './types'
 import { questOffers } from './world'
 
+/** NPC conversation like the original: photo on the left, words and options on the right. */
 export function NpcDialog({
   npc,
   talk,
@@ -20,6 +22,8 @@ export function NpcDialog({
 }) {
   const quests = useQuests()
   const accept = useAcceptQuest()
+  const photo = useNpcPhoto(npc.id)
+  const [showQuests, setShowQuests] = useState(false)
   const [accepted, setAccepted] = useState<number | null>(null)
   const offers = talk.isSuccess
     ? questOffers(npc.id, character.sceneId, character, quests.data ?? [])
@@ -36,15 +40,22 @@ export function NpcDialog({
   }
 
   return (
-    <Dialog title={plainText(npc.nameKey, 'Villager')} onClose={onClose}>
-      {talk.isPending && <p>...</p>}
-      {talk.isError && <Notice tone="error">{errorMessage(talk.error)}</Notice>}
-      {talk.data && (
-        <div className="flex flex-col gap-3">
-          <p>
-            <GameText k={talk.data.dialogKey} fallback="Good day, ninja." />
-          </p>
-          {talk.data.completed.length > 0 && (
+    <Dialog title={plainText(npc.nameKey, 'Villager')} onClose={onClose} className="w-[40rem]">
+      <div className="flex min-h-56 gap-3">
+        <div className="game-card grid w-40 shrink-0 place-items-center overflow-hidden">
+          {photo && <img src={photo} alt="" className="max-h-56 w-full object-contain" />}
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <div className="game-card min-h-16 p-2">
+            {talk.isPending && <p>...</p>}
+            {talk.isError && <Notice tone="error">{errorMessage(talk.error)}</Notice>}
+            {talk.data && (
+              <p>
+                <GameText k={talk.data.dialogKey} fallback="Good day, ninja." />
+              </p>
+            )}
+          </div>
+          {talk.data && talk.data.completed.length > 0 && (
             <Notice>{completedNotice(talk.data.completed).trim()}</Notice>
           )}
           {accepted !== null && (
@@ -53,8 +64,9 @@ export function NpcDialog({
             </Notice>
           )}
           {accept.isError && <Notice tone="error">{errorMessage(accept.error)}</Notice>}
-          {offers.length > 0 && (
+          {showQuests ? (
             <section aria-label="Quests offered" className="flex flex-col gap-2">
+              {offers.length === 0 && <p className="text-xs">No quests for you right now.</p>}
               {offers.map((offer) => (
                 <article key={offer.taskId} className="game-card p-2">
                   <h3 className="font-bold">
@@ -75,10 +87,36 @@ export function NpcDialog({
                   </GameButton>
                 </article>
               ))}
+              <DialogOption onClick={() => setShowQuests(false)}>Back</DialogOption>
             </section>
+          ) : (
+            <ul aria-label="Options" className="game-card flex flex-col p-1">
+              {talk.isSuccess && (
+                <li>
+                  <DialogOption onClick={() => setShowQuests(true)}>
+                    Quests{offers.length > 0 ? ` (${offers.length})` : ''}
+                  </DialogOption>
+                </li>
+              )}
+              <li>
+                <DialogOption onClick={onClose}>End Conversation</DialogOption>
+              </li>
+            </ul>
           )}
         </div>
-      )}
+      </div>
     </Dialog>
+  )
+}
+
+function DialogOption({ onClick, children }: { onClick: () => void; children: ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="w-full rounded-sm border-b border-[#e3d39a] px-3 py-1 text-left hover:bg-[#f7e9a8]"
+    >
+      {children}
+    </button>
   )
 }

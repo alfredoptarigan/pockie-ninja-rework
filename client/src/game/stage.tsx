@@ -2,7 +2,7 @@
 // chunks). Each mount owns one Phaser game and destroys it on unmount (StrictMode safe).
 //
 // ScenePictureMount: the scene picture with hoverable, clickable buildings, NPCs and monsters; it
-// calls `onNpc` / `onMonster` like the lists next to it, which stay as the keyboard fallback.
+// calls `onNpc` / `onMonster` like SceneView's action list, which stays as the keyboard fallback.
 //
 // BattleReplayMount: plays a fight replay on the field's fight background with Skip, Replay and
 // speed controls, and reports when it is over (or could not play) through `onFinished`.
@@ -86,13 +86,14 @@ export function ScenePictureMount({
     }),
   )
   if (!hasPicture(scene.sceneId) || failed) return null
-  // The canvas has no keyboard access; the lists below offer the same actions.
+  // The canvas has no keyboard access; SceneView's action list offers the same actions.
+  // It fills the stage (same 16:9 ratio as the 1920x1080 pictures).
   return (
     <div
       ref={ref}
       data-testid="scene-picture"
       aria-hidden="true"
-      className="aspect-video w-full overflow-hidden rounded bg-black/40"
+      className="absolute inset-0 overflow-hidden bg-black"
     />
   )
 }
