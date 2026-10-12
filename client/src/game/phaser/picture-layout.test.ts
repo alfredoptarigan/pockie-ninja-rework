@@ -65,7 +65,7 @@ describe('pictureLayout', () => {
   })
 
   it('has no picture for scenes without art', () => {
-    expect(pictureLayout({ ...villageScene, sceneId: 171 })).toBeUndefined()
+    expect(pictureLayout({ ...villageScene, sceneId: 5001 })).toBeUndefined()
   })
 })
 

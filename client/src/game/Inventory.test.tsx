@@ -86,7 +86,7 @@ describe('Inventory', () => {
   })
 
   it('shows each item with its original icon, or a placeholder', async () => {
-    const unknown = { ...potion, id: 'u3', itemId: 'i999999', nameKey: 'lg_missing', count: 1 }
+    const unknown = { ...potion, id: 'u3', itemId: 'i0000000', nameKey: 'lg_missing', count: 1 }
     mockApi({ 'GET /api/game/inventory': () => json({ items: [potion, fists, unknown] }) })
     renderWithProviders(<Inventory />)
 
