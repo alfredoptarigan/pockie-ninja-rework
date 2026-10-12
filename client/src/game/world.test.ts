@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { character } from '../test/game'
-import { destinations } from './world'
+import { destinations, restCost } from './world'
 
 const CHRISTMAS = [2104, 2204, 2304, 2404, 2504]
 const ids = (list: { sceneId: number }[]) => list.map((d) => d.sceneId)
@@ -17,5 +17,12 @@ describe('destinations', () => {
     const roads = destinations({ ...character, sceneId: 2601, level: 40 })
     expect(roads.find((d) => d.sceneId === 111)).toMatchObject({ open: true })
     expect(roads.find((d) => d.sceneId === 2602)).toMatchObject({ open: true })
+  })
+})
+
+describe('restCost', () => {
+  it('is free up to level 10 and follows TeamStoneNpc.js above', () => {
+    expect(restCost(10)).toBe(0)
+    expect(restCost(40)).toBe(117)
   })
 })

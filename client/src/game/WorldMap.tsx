@@ -50,18 +50,20 @@ function MapTip({ sceneId, nation }: { sceneId: number; nation: number }) {
  * no labels on the painting. Each place is its coloured button art (up/over/down); hovering or
  * focusing one shows the original tooltip (Tip_WorldMap_<scene>_<nation>), the place the ninja
  * stands in glows (face_<scene>). Buttons stack by their Flash depth, so overlaps go to the higher
- * one. Places the ninja has never entered (ScenesEntered) draw no art, so the grey painting shows
- * through, as refreshMap does with alpha 0; they still travel and show their tooltip. Travel rules
- * stay on the server: `destinations` only mirrors them to decide what to offer.
+ * one. Places the ninja cannot enter yet (level, village, or a place reached on foot that was
+ * never entered) are drawn dimmed and do not travel; a level lock shows the level needed
+ * (decision 7). Travel rules stay on the server: this only decides what to offer.
  */
 export function WorldMap({ character, onClose }: { character: Character; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null)
   const travel = useTravel()
+  const scene = useScene().data
   const defeated = isDefeated(character)
   const roads = new Map(destinations(character).map((place) => [place.sceneId, place]))
   const others = [...roads.keys()].filter((sceneId) => !onPainting(sceneId))
   // Until the scene arrives only the place the ninja stands in is known to be entered.
-  const visited = new Set(useScene().data?.visitedScenes ?? [character.sceneId])
+  const visited = new Set(scene?.visitedScenes ?? [character.sceneId])
+  const visitRequired = new Set(scene?.visitRequired ?? [])
   const [tip, setTip] = useState<number>()
 
   useEffect(() => {
@@ -69,24 +71,37 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
     if (!ref.current?.open) ref.current?.showModal()
   }, [])
 
+  /** Why the ninja cannot enter a place yet, whatever else is going on. */
+  const lockOf = (sceneId: number): 'village' | 'level' | 'visit' | null => {
+    const road = roads.get(sceneId)
+    if (!road) return 'village'
+    if (!road.open) return 'level'
+    if (visitRequired.has(sceneId) && !visited.has(sceneId)) return 'visit'
+    return null
+  }
   const canGo = (sceneId: number) =>
-    !defeated && !travel.isPending && sceneId !== character.sceneId && !!roads.get(sceneId)?.open
+    !defeated && !travel.isPending && sceneId !== character.sceneId && lockOf(sceneId) === null
 
   const go = async (sceneId: number) => {
     if (!canGo(sceneId)) return
     try {
-      await travel.mutateAsync(sceneId)
+      await travel.mutateAsync({ sceneId, via: 'map' })
       onClose()
     } catch {
       // shown from travel.error below
     }
   }
 
-  /** Accessible name: the place, its level lock and where the ninja is. */
+  /** Accessible name: the place, why it is locked and where the ninja is. */
   const label = (sceneId: number) => {
-    const road = roads.get(sceneId)
-    const level = road && !road.open && road.level > character.level ? ` Lv. ${road.level}` : ''
-    return `${sceneName(sceneId)}${level}${sceneId === character.sceneId ? ' (You are here)' : ''}`
+    const lock = lockOf(sceneId)
+    const reason =
+      lock === 'level'
+        ? ` Lv. ${roads.get(sceneId)!.level}`
+        : lock === 'visit'
+          ? ' (not visited yet)'
+          : ''
+    return `${sceneName(sceneId)}${reason}${sceneId === character.sceneId ? ' (You are here)' : ''}`
   }
 
   const here = locations[String(character.sceneId)]
@@ -123,7 +138,8 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
         {Object.entries(locations).map(([id, r]) => {
           const sceneId = Number(id)
           const open = canGo(sceneId)
-          const entered = visited.has(sceneId)
+          const lock = lockOf(sceneId)
+          const dimmed = lock !== null
           // Disabled places keep their tooltip (it says why), so aria-disabled, not disabled.
           return (
             <button
@@ -131,40 +147,49 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
               type="button"
               aria-disabled={!open}
               aria-label={label(sceneId)}
+              data-locked={lock ?? undefined}
               onClick={() => void go(sceneId)}
               onMouseEnter={() => setTip(sceneId)}
               onMouseLeave={() => setTip((t) => (t === sceneId ? undefined : t))}
               onFocus={() => setTip(sceneId)}
               onBlur={() => setTip((t) => (t === sceneId ? undefined : t))}
-              className={`group absolute focus-visible:outline-2 focus-visible:outline-[#ffe27a] ${open ? 'cursor-pointer' : 'cursor-default'}`}
+              className={`group absolute focus-visible:outline-2 focus-visible:outline-[#ffe27a] ${open ? 'cursor-pointer' : 'cursor-not-allowed'}`}
               style={{ ...box(r), zIndex: r.depth }}
             >
-              {entered && (
-                <>
-                  <img
-                    src={r.states.up.file}
-                    alt=""
-                    draggable={false}
-                    className="absolute max-w-none group-hover:invisible group-focus-visible:invisible"
-                    style={box(r.states.up, r)}
-                  />
+              <span className={dimmed ? 'opacity-45 grayscale' : undefined}>
+                <img
+                  src={r.states.up.file}
+                  alt=""
+                  draggable={false}
+                  className={`absolute max-w-none ${dimmed ? '' : 'group-hover:invisible group-focus-visible:invisible'}`}
+                  style={box(r.states.up, r)}
+                />
+                {!dimmed && (
                   <img
                     src={r.states.over.file}
                     alt=""
                     draggable={false}
-                    className={`invisible absolute max-w-none group-hover:visible group-focus-visible:visible ${open ? 'group-active:invisible' : ''}`}
+                    className="invisible absolute max-w-none group-hover:visible group-focus-visible:visible group-active:invisible"
                     style={box(r.states.over, r)}
                   />
-                  {open && (
-                    <img
-                      src={r.states.down.file}
-                      alt=""
-                      draggable={false}
-                      className="invisible absolute max-w-none group-active:visible"
-                      style={box(r.states.down, r)}
-                    />
-                  )}
-                </>
+                )}
+                {open && (
+                  <img
+                    src={r.states.down.file}
+                    alt=""
+                    draggable={false}
+                    className="invisible absolute max-w-none group-active:visible"
+                    style={box(r.states.down, r)}
+                  />
+                )}
+              </span>
+              {lock === 'level' && (
+                <span
+                  aria-hidden="true"
+                  className="absolute top-1/2 left-1/2 -translate-1/2 rounded-[3px] bg-black/75 px-1 font-mono text-[10px] leading-[14px] whitespace-nowrap text-[#ffd700]"
+                >
+                  Lv. {roads.get(sceneId)!.level}
+                </span>
               )}
             </button>
           )

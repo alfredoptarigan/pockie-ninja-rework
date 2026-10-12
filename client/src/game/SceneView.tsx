@@ -1,13 +1,23 @@
 import type { Character } from '@pockie/shared'
-import { useContext, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { errorMessage, useApplyResult, useExplore, useFight, useInventory, useScene } from './api'
+import { useQueryClient } from '@tanstack/react-query'
+import {
+  errorMessage,
+  gameKeys,
+  useApplyResult,
+  useExplore,
+  useFight,
+  useInventory,
+  useScene,
+} from './api'
 import { exploreClip } from './explore'
 import { ExploreWindow } from './ExploreWindow'
 import { FightSummary } from './FightSummary'
 import { HudLayer } from './Hud'
-import { DropsMenu, MonsterRow } from './MonsterDrops'
+import { DropsMenu, lockReason, MonsterRow } from './MonsterDrops'
 import { ReviveWindow } from './ReviveWindow'
+import { TicketBossPanel } from './TicketBoss'
 import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
 import { plainText } from './text'
@@ -57,6 +67,12 @@ export function SceneView({
     applied: boolean
   } | null>(null)
   const applyResult = useApplyResult()
+  const queryClient = useQueryClient()
+  const refetchScene = useCallback(
+    () => void queryClient.invalidateQueries({ queryKey: gameKeys.scene }),
+    [queryClient],
+  )
+  const ticketBoss = scene.data?.ticketBoss
   // The HUD keeps its pre-fight values while the replay plays (or until it is skipped).
   const finishReplay = () => {
     if (fightState && !fightState.applied) applyResult(fightState.result)
@@ -67,6 +83,7 @@ export function SceneView({
   const hasWeapon = !inventory.data || !!weapon
 
   const startFight = async (monster: SceneMonster, confirmed = unarmedOk) => {
+    if (monster.lock) return
     if (defeated) {
       setRefused(true)
       setReviveOpen(true)
@@ -107,7 +124,25 @@ export function SceneView({
         pictureReady &&
         hudLayer &&
         createPortal(
-          <MonsterRow monsters={scene.data.monsters} onFight={(m) => void startFight(m)} />,
+          <>
+            <MonsterRow monsters={scene.data.monsters} onFight={(m) => void startFight(m)} />
+            {ticketBoss && (
+              <div className="absolute top-[120px] left-[6px]">
+                <TicketBossPanel
+                  boss={ticketBoss}
+                  disabled={fight.isPending || defeated}
+                  onExpire={refetchScene}
+                  onFight={() =>
+                    void startFight({
+                      id: ticketBoss.id,
+                      nameKey: ticketBoss.nameKey,
+                      level: ticketBoss.level,
+                    })
+                  }
+                />
+              </div>
+            )}
+          </>,
           hudLayer,
         )}
       <ExploreWindow
@@ -153,8 +188,8 @@ export function SceneView({
                         <li key={monster.id} className="flex flex-wrap gap-1">
                           <GameButton
                             small
-                            disabled={fight.isPending || defeated}
-                            title={defeated ? DEFEATED_REASON : undefined}
+                            disabled={fight.isPending || defeated || Boolean(monster.lock)}
+                            title={defeated ? DEFEATED_REASON : lockReason(monster)}
                             aria-label={`Fight ${plainText(monster.nameKey, 'monster')}`}
                             onClick={() => startFight(monster)}
                           >

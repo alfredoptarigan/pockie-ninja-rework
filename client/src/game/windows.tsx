@@ -1,0 +1,80 @@
+// Windows other features open from the HUD or an NPC menu (shop, forge, toll gates, daily quests).
+// Each feature owns its window component in its own folder (client/src/game/<feature>/) and plugs
+// it in with ONE line in WINDOWS below; GameApp renders whichever window is open.
+//
+// Contract for a window component:
+//   - props: WindowProps (the character, the NPC whose menu opened it if any, and onClose);
+//   - it renders its own dialog (skin.tsx Dialog) and calls onClose when closed;
+//   - it fetches its own data and applies game action results with useApplyResult (api.ts).
+// To open one from anywhere under GameApp: `const open = useOpenWindow(); open('shop', { npcId })`.
+import type { Character } from '@pockie/shared'
+import { createContext, useContext, type ComponentType } from 'react'
+import { Dialog, GameButton } from './skin'
+
+export type WindowName = 'shop' | 'forge' | 'gates' | 'daily'
+
+export interface WindowProps {
+  character: Character
+  /** The NPC whose menu opened the window (which shop, which guard); absent from the HUD. */
+  npcId?: string
+  onClose: () => void
+}
+
+export interface OpenWindow {
+  name: WindowName
+  npcId?: string
+}
+
+const TITLES: Record<WindowName, string> = {
+  shop: 'Shop',
+  forge: 'Blacksmith',
+  gates: 'Demon City',
+  daily: 'Daily Quests',
+}
+
+/** Shown until a feature registers its window. */
+function ComingSoon({ title, onClose }: { title: string; onClose: () => void }) {
+  return (
+    <Dialog title={title} onClose={onClose} className="w-[22rem]">
+      <p>This is not open yet. Come back soon.</p>
+      <GameButton small className="mt-3" onClick={onClose}>
+        Close
+      </GameButton>
+    </Dialog>
+  )
+}
+
+const placeholder = (name: WindowName) =>
+  function Placeholder({ onClose }: WindowProps) {
+    return <ComingSoon title={TITLES[name]} onClose={onClose} />
+  }
+
+/** One line per feature: replace its placeholder with the feature's window component. */
+const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
+  shop: placeholder('shop'),
+  forge: placeholder('forge'),
+  gates: placeholder('gates'),
+  daily: placeholder('daily'),
+}
+
+const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
+  () => {},
+)
+export const OpenWindowProvider = OpenWindowContext.Provider
+
+/** Opens a registered window (closing NPC dialogs and other windows first). */
+export const useOpenWindow = () => useContext(OpenWindowContext)
+
+/** The open feature window, if any. */
+export function FeatureWindow({
+  open,
+  character,
+  onClose,
+}: {
+  open: OpenWindow
+  character: Character
+  onClose: () => void
+}) {
+  const Window = WINDOWS[open.name]
+  return <Window character={character} npcId={open.npcId} onClose={onClose} />
+}
