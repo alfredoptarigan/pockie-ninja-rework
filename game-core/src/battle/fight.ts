@@ -1,10 +1,9 @@
 // Fight simulation ported from FightSystem.java / SkillSystem.java / BuffSystem.java
 // (docs/original-data/battle.md): sequential 1v1 duels on an AtkTime timeline (at most 60 actions
 // per duel), priority strikes, trigger skills by quomodo, attack skill choice (must-skills, then a
-// weighted pick), scripted skills (./skills.ts), fight buffs (./buffs.ts), hit / crit / parry /
-// defence and counters. RandInt calls happen where the Java code makes them.
-// ponytail: CanMove / CanAttack / CanUseSkill stay 1 because no ported skill stuns or seals, and
-// shields are not ported. Port them together with the first skill or buff that sets them.
+// weighted pick), scripted skills (./skills.ts), fight buffs (./buffs.ts), hit / crit / DecDamage /
+// parry / defence / shields, rebound, absorption, vampiric, counters and the CanMove / CanAttack /
+// CanUseSkill flags. RandInt calls happen where the Java code makes them.
 import { createRandom } from '../random.js'
 import { BUFFS } from './buffs.js'
 import {
@@ -43,6 +42,7 @@ const ON_DEATH = 5
 const AFTER_HIT = 7
 const AFTER_HIT_PET = 8
 const AFTER_BEING_HIT = 9
+const SHIELD_BUFF = 3
 const f = Math.fround
 const probability = (skill: SkillInput) => skill.probability ?? 0
 
@@ -86,6 +86,14 @@ export function simulateFight({
         hitMulAdd: 0,
         next: 0,
         parryPercent: 0,
+        initDodge: input.dodge,
+        dodgeMulAdd: 0,
+        canMove: 1,
+        canAttack: 1,
+        canUseSkill: 1,
+        shieldBuff: null,
+        shieldDamage: 0,
+        shieldCount: 0,
         buffs: null,
         attackSkills: skills.filter((s) => s.type === 1),
         triggerSkills: skills.filter((s) => s.type === 2),
@@ -111,6 +119,7 @@ export function simulateFight({
     if (!buff) return
     ;(fv.delBuffs ??= []).push({ role: target.index, buff: buff.id })
     target.buffs!.splice(i, 1)
+    if (BUFFS[buff.id]?.type === SHIELD_BUFF) target.shieldBuff = null
     BUFFS[buff.id]?.onRemove?.(ctx, target, buff, fv, timer)
   }
 
@@ -131,6 +140,7 @@ export function simulateFight({
       startTime: timer,
     }
     ;(target.buffs ??= []).push(buff)
+    if (def.type === SHIELD_BUFF) target.shieldBuff = buff
     def.onAdd?.(ctx, target, buff, fv, timer)
   }
 
@@ -199,6 +209,30 @@ export function simulateFight({
     victim.hp = Math.min(victim.maxHp, Math.max(0, victim.hp - Math.min(victim.hp, amount)))
   }
 
+  /** FightSystem.ShieldDamage: the shield takes the damage first. */
+  function shieldDamage(
+    owner: Fighter,
+    damage: number,
+    timer: number,
+    fv: FightEvent,
+    key: 'targetShield' | 'selfShield',
+  ) {
+    if (!owner.shieldBuff) return damage
+    const taken = Math.min(damage, owner.shieldDamage)
+    if (taken) fv[key] = (fv[key] ?? 0) + taken
+    if (damage >= owner.shieldDamage) {
+      owner.shieldDamage = 0
+      removeBuff(owner, owner.shieldBuff.id, timer, fv)
+      return damage - taken
+    }
+    owner.shieldDamage -= damage
+    if (owner.shieldCount !== -1) {
+      if (owner.shieldCount === 0) removeBuff(owner, owner.shieldBuff.id, timer, fv)
+      owner.shieldCount--
+    }
+    return 0
+  }
+
   function attack(
     self: Fighter,
     target: Fighter,
@@ -228,18 +262,22 @@ export function simulateFight({
       fv.parry = true
     }
     damage = applyDefense(damage, target.defense, self.neglectDefense)
+    damage = shieldDamage(target, damage, timer, fv, 'targetShield')
     back = applyDefense(applyDecDamage(back, self.decDamage), self.defense, target.neglectDefense)
-    // The original mitigates the absorbed part of the self damage with the target's stats.
-    const selfHp = applyDefense(
-      applyDecDamage(absorbed(selfDamage, self.absorb), target.decDamage),
+    if (back) fv.backDamage = back
+    let selfHp = absorbed(selfDamage, self.absorb)
+    // Original bugs: this drains the target's shield, and the target's stats mitigate selfHp.
+    shieldDamage(target, selfHp, timer, fv, 'selfShield')
+    selfHp = applyDefense(
+      applyDecDamage(selfHp, target.decDamage),
       target.defense,
       self.neglectDefense,
     )
+    back = shieldDamage(self, back, timer, fv, 'selfShield')
     const incHp = vampiricOf(damage - targetHp, self.vampiricHp)
     const incMp = vampiricOf(damage - targetHp, self.vampiricMp)
     const lastTarget = damage - targetHp
     const lastSelf = back + selfDamage - selfHp - incHp
-    if (back) fv.backDamage = back
     if (incHp) fv.incHp = (fv.incHp ?? 0) + incHp
     if (incMp) fv.incMp = (fv.incMp ?? 0) + incMp
     if (lastSelf + incHp) fv.selfDamage = lastSelf + incHp
@@ -316,7 +354,9 @@ export function simulateFight({
         timer,
       )
     }
-    if (skill.canbecounter && canCounter && fv.hit !== false) counter(target, self, timer)
+    if (skill.canbecounter && canCounter && fv.hit !== false && target.canAttack !== 0) {
+      counter(target, self, timer)
+    }
     return SKILL_SUCCESS
   }
 
@@ -332,6 +372,7 @@ export function simulateFight({
 
   /** UserSkillBeforeAttack, UserBeDamageSkill, UserDieSkill, ...: trigger skills of a quomodo. */
   function trigger(self: Fighter, target: Fighter, quomodo: number, timer: number) {
+    if (self.canMove <= 0 || self.canUseSkill <= 0) return false
     if (quomodo === ON_DEATH) self.hp = 0
     if (self.triggerSkills.length === 0) return false
     const candidates = self.triggerSkills.filter((s) => s.quomodo === quomodo && probability(s) > 0)
@@ -367,6 +408,7 @@ export function simulateFight({
   }
 
   function priorityStrike(defender: Fighter, actor: Fighter, timer: number) {
+    if (defender.canMove <= 0 || defender.canUseSkill <= 0) return false
     if (randInt(1, 100) + actor.priority > defender.priority) return false
     const fv = skillEvent(defender, actor, 5)
     const size = events.length
@@ -387,12 +429,25 @@ export function simulateFight({
     return true
   }
 
+  /** SkillSystem.FindAttackSkill: must-skills and the weighted pick, minus what the flags forbid. */
+  function findAttackSkill(self: Fighter) {
+    if (self.canMove <= 0) return { must: [], pick: null }
+    if (self.canUseSkill <= 0 || self.attackSkills.length === 0) {
+      return { must: [], pick: NORMAL_ATTACK }
+    }
+    const usable = self.attackSkills.filter((s) => self.canAttack > 0 || s.quomodo !== 2)
+    return {
+      must: usable.filter((s) => probability(s) >= 100),
+      pick: pickWeighted(usable.filter((s) => probability(s) < 100)) ?? NORMAL_ATTACK,
+    }
+  }
+
   function attackSkill(self: Fighter, target: Fighter, timer: number) {
-    const must = self.attackSkills.filter((s) => probability(s) >= 100)
-    let skill =
-      self.attackSkills.length === 0
-        ? NORMAL_ATTACK
-        : (pickWeighted(self.attackSkills.filter((s) => probability(s) < 100)) ?? NORMAL_ATTACK)
+    const { must, pick } = findAttackSkill(self)
+    let skill = pick
+    // Without CanAttack the normal attack is not allowed (FightSystem.UserAttackSkill).
+    if (skill === NORMAL_ATTACK && self.canAttack <= 0) skill = null
+    if (!skill && must.length === 0) return
     const fv = skillEvent(self, target, 14)
     const damage = getDamage(self)
     const size = events.length
@@ -400,7 +455,9 @@ export function simulateFight({
       (s) => useSkill(self, target, s, damage, timer, fv, true) === SKILL_SUCCESS,
     )
     if (!used) {
+      if (!skill) return
       used = useSkill(self, target, skill, damage, timer, fv, true) === SKILL_SUCCESS
+      // The fallback skips the CanAttack check, like the original.
       if (!used && skill !== NORMAL_ATTACK) {
         skill = NORMAL_ATTACK
         used = useSkill(self, target, skill, damage, timer, fv, true) === SKILL_SUCCESS
@@ -410,7 +467,7 @@ export function simulateFight({
     if (used) events.splice(size, 0, fv)
     checkDeaths(self, target, timer)
     // The original checks the weighted pick here even when a must-skill was used.
-    if (isBreak(self, target) || skill.effect !== 1 || fv.hit === false) return
+    if (isBreak(self, target) || !skill || skill.effect !== 1 || fv.hit === false) return
     if (skill.quomodo === 2) trigger(self, target, AFTER_HIT, timer)
     if (isBreak(self, target)) return
     trigger(self, target, AFTER_HIT_PET, timer)
@@ -421,6 +478,10 @@ export function simulateFight({
   /** AttackTarget: one action. Returns false when the duel is over. */
   function act(self: Fighter, target: Fighter, timer: number) {
     if (!activateBuffs(self, timer)) return false
+    if (self.canMove <= 0) {
+      events.push({ actor: self.index, event: 3 })
+      return true
+    }
     events.push({ actor: self.index, event: 1 })
     if (!priorityStrike(target, self, timer)) {
       trigger(target, self, BEFORE_ATTACKED, timer)
@@ -480,6 +541,10 @@ export function simulateFight({
     getBuff: (target, buffId) => target.buffs?.find((b) => b.id === buffId),
     changeNextAtkTime: (target, amount) => {
       if (Math.trunc(amount) > 0) target.next += Math.trunc(amount)
+    },
+    changeDodge: (target, dodgeMulAdd) => {
+      target.dodgeMulAdd = dodgeMulAdd
+      target.dodge = Math.trunc(target.initDodge * 100 * 0.01) + dodgeMulAdd
     },
     changeHit: (target, hitMulAdd) => {
       target.hitMulAdd = hitMulAdd

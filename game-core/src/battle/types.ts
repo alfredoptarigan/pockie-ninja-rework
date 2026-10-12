@@ -75,8 +75,9 @@ export interface BuffChange {
 }
 
 /**
- * One replay entry (FightValue). Event ids: 1 begin action, 2 end action, 5 priority strike,
- * 7 counter, 9 buff tick or buff change, 14 skill, 20 death, 21 next fighter.
+ * One replay entry (FightValue). Event ids: 1 begin action, 2 end action, 3 cannot move (stun,
+ * freeze, ...), 5 priority strike, 7 counter, 9 buff tick or buff change, 14 skill, 20 death,
+ * 21 next fighter.
  */
 export interface FightEvent {
   actor: number
@@ -101,6 +102,9 @@ export interface FightEvent {
   /** HP / MP the actor gains from vampiric strikes or healing scripts (IncHP / IncMP). */
   incHp?: number
   incMp?: number
+  /** Damage a shield of the target / of the actor took instead of HP (TargetShield / SelfShield). */
+  targetShield?: number
+  selfShield?: number
   /** Number of strikes the client animates (AttackCount, skill 40036). */
   attackCount?: number
   addBuffs?: BuffChange[]
@@ -153,8 +157,18 @@ export interface Fighter extends FighterInput {
   initHit: number
   hitMulAdd: number
   next: number
-  /** Parry percent set by buff 11841. */
+  /** Parry percent set by buffs 11841 / 11824. */
   parryPercent: number
+  initDodge: number
+  dodgeMulAdd: number
+  /** Turn flags lowered by control buffs: <= 0 means no action / no normal attack / no skills. */
+  canMove: number
+  canAttack: number
+  canUseSkill: number
+  /** The type 3 buff that holds the shield, its HP left and hits left (-1 unlimited). */
+  shieldBuff: ActiveBuff | null
+  shieldDamage: number
+  shieldCount: number
   buffs: ActiveBuff[] | null
   attackSkills: SkillInput[]
   triggerSkills: SkillInput[]
@@ -183,6 +197,7 @@ export interface FightContext {
   getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
   changeNextAtkTime(target: Fighter, amount: number): void
   changeHit(target: Fighter, add: number): void
+  changeDodge(target: Fighter, add: number): void
   /** ChangeSkill(skill, 1) + UserSkill: fall back to the normal attack. */
   normalAttack(self: Fighter, target: Fighter, fv: FightEvent, timer: number): number
 }

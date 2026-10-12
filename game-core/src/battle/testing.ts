@@ -40,6 +40,14 @@ export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
     hitMulAdd: 0,
     next: 0,
     parryPercent: 0,
+    initDodge: input.dodge,
+    dodgeMulAdd: 0,
+    canMove: 1,
+    canAttack: 1,
+    canUseSkill: 1,
+    shieldBuff: null,
+    shieldDamage: 0,
+    shieldCount: 0,
     buffs: null,
     attackSkills: [],
     triggerSkills: [],
@@ -76,6 +84,7 @@ export function fakeContext({
     changeNextAtkTime: (target, amount) =>
       calls.push(['changeNextAtkTime', target.index, Math.trunc(amount)]),
     changeHit: (target, add) => calls.push(['changeHit', target.index, add]),
+    changeDodge: (target, add) => calls.push(['changeDodge', target.index, add]),
     normalAttack: () => {
       calls.push(['normalAttack'])
       return 0
