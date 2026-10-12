@@ -33,7 +33,7 @@ function refill(pouch: number, max: number, choice: PouchRefill) {
 /**
  * RoleUseSystem.OnCustomBuy: what buying the chosen refills costs (1 Gold or Gift Coupon per 1000
  * points) and the new pouch amounts; undefined when there is nothing to buy. The VIP discount is
- * left out (there is no VIP).
+ * left out (M3 decision 10).
  */
 export function buyPouches(
   character: { level: number; hpPouch: number; mpPouch: number },
