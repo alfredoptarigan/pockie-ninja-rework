@@ -13,6 +13,7 @@ import { worldRoutes } from './modules/game/world.js'
 import { actionRoutes } from './modules/game/actions.js'
 import { exploreRoutes } from './modules/game/explore.js'
 import { forgeRoutes } from './modules/forge/routes.js'
+import { gateRoutes } from './modules/gates/routes.js'
 import { attachRealtime } from './modules/realtime/realtime.js'
 import { statusRoutes } from './modules/status/routes.js'
 
@@ -62,6 +63,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(actionRoutes, { db, realtime, prefix: '/api/game' })
   app.register(exploreRoutes, { db, prefix: '/api/game' })
   app.register(forgeRoutes, { db, prefix: '/api/game' })
+  app.register(gateRoutes, { db, prefix: '/api/game/gates' })
 
   return app
 }
