@@ -1,6 +1,7 @@
 import type { Character } from '@pockie/shared'
 import { useState } from 'react'
-import { errorMessage, useFight, useInventory, useScene } from './api'
+import { errorMessage, useApplyResult, useExplore, useFight, useInventory, useScene } from './api'
+import { exploreClip } from './explore'
 import { ExploreWindow } from './ExploreWindow'
 import { FightSummary } from './FightSummary'
 import { DropsMenu } from './MonsterDrops'
@@ -31,6 +32,10 @@ export function SceneView({
   const fight = useFight()
   const inventory = useInventory()
   const defeated = isDefeated(character)
+  const hasSpots = Boolean(scene.data?.exploreSpots.length)
+  // The picture waits for the spots, so the explore tree is there from the start.
+  const explore = useExplore(hasSpots)
+  const pictureReady = !hasSpots || !explore.isPending
   const [reviveOpen, setReviveOpen] = useState(true)
   /** A monster picked while no weapon is equipped, waiting for "Fight anyway". */
   const [unarmed, setUnarmed] = useState<SceneMonster | null>(null)
@@ -45,7 +50,15 @@ export function SceneView({
     /** Bumped by "Watch again" to restart the replay. */
     run: number
     finished: boolean
+    /** The result reached the HUD (after the first replay). */
+    applied: boolean
   } | null>(null)
+  const applyResult = useApplyResult()
+  // The HUD keeps its pre-fight values while the replay plays (or until it is skipped).
+  const finishReplay = () => {
+    if (fightState && !fightState.applied) applyResult(fightState.result)
+    setFightState((s) => s && { ...s, finished: true, applied: true })
+  }
 
   const weapon = inventory.data?.find((item) => item.equippedSlot === 'Weapon')
   const hasWeapon = !inventory.data || !!weapon
@@ -62,7 +75,14 @@ export function SceneView({
     }
     try {
       const result = await fight.mutateAsync(monster.id)
-      setFightState({ result, monster, weaponItemId: weapon?.itemId, run: 0, finished: false })
+      setFightState({
+        result,
+        monster,
+        weaponItemId: weapon?.itemId,
+        run: 0,
+        finished: false,
+        applied: false,
+      })
       setRefused(false)
       if (!result.won) setReviveOpen(true)
     } catch {
@@ -72,9 +92,10 @@ export function SceneView({
 
   return (
     <>
-      {scene.data && (
+      {scene.data && pictureReady && (
         <ScenePictureMount
           scene={scene.data}
+          exploreClip={exploreClip(explore.data?.spots)}
           onNpc={onNpc}
           onMonster={startFight}
           onExplore={() => setExploring(true)}
@@ -160,7 +181,7 @@ export function SceneView({
           monsterIds={[fightState.monster.id]}
           sceneId={character.sceneId}
           weaponItemId={fightState.weaponItemId}
-          onFinished={() => setFightState((s) => s && { ...s, finished: true })}
+          onFinished={finishReplay}
         />
       )}
       {fightState?.finished && (

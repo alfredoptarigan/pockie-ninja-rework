@@ -4,11 +4,13 @@ import {
   blockMessage,
   cardText,
   cooldownLeft,
+  costText,
   exploreBlock,
   exploreClip,
   exploreMonster,
   formatCountdown,
   outcomeText,
+  restText,
   starText,
 } from './explore'
 import type { ExploreResult, ExploreSpot, ExploreStatus, InventoryItem } from './types'
@@ -17,7 +19,9 @@ const NOW = Date.parse('2026-10-12T10:00:00Z')
 const free: ExploreSpot = {
   id: '21011',
   nameKey: 'lg_OutSearch_21011',
+  clipName: 'OutCity_1110',
   requireLevel: 1,
+  requireStone: 0,
   requireItems: [],
   star: { level: 0, progress: 0, perStar: 2 },
 }
@@ -25,6 +29,7 @@ const expert: ExploreSpot = {
   ...free,
   id: '21012',
   nameKey: 'lg_OutSearch_21012',
+  clipName: null,
   requireItems: [{ itemId: 'i150046', count: 1 }],
 }
 const ready: ExploreStatus = { remaining: 7, total: 7, cooldownEndsAt: null }
@@ -123,13 +128,36 @@ describe('starText', () => {
 })
 
 describe('exploreClip', () => {
-  it('points the first spot of a field at its scene clip (roleoutsearch.tab ClipName)', () => {
-    expect(exploreClip('21011')).toBe('OutCity_1110')
-    expect(exploreClip('23011')).toBe('OutCity_1109')
+  it('uses the clip the server names for the spots (roleoutsearch.tab ClipName)', () => {
+    expect(exploreClip([expert, { ...free, clipName: 'OutCity_1109' }])).toBe('OutCity_1109')
   })
 
-  it('gives the expert spots no clip', () => {
-    expect(exploreClip('21012')).toBeUndefined()
+  it('has none when every spot has a null clip or the spots are not loaded', () => {
+    expect(exploreClip([expert])).toBeUndefined()
+    expect(exploreClip(undefined)).toBeUndefined()
+  })
+})
+
+describe('costs and rest', () => {
+  it('shows the Stone cost when there is one', () => {
+    expect(costText(free)).toBe('Free')
+    expect(costText({ ...free, requireStone: 500 })).toBe('500 Stone')
+    expect(costText({ ...expert, requireStone: 20 })).toBe(
+      '20 Stone and 1 x Smelting Mountains Secret Key',
+    )
+  })
+
+  it('blocks a search the ninja cannot pay in Stone', () => {
+    const spot = { ...free, requireStone: 500 }
+    expect(exploreBlock(spot, ready, { ...character, stone: 499 }, [], NOW)).toBe('no_stone')
+    expect(exploreBlock(spot, ready, { ...character, stone: 500 }, [], NOW)).toBeNull()
+    expect(blockMessage('no_stone', spot, 0)).toBe('You need 500 Stone to explore there.')
+  })
+
+  it('words the rest from the server cooldown', () => {
+    expect(restText(300)).toBe('5 minutes')
+    expect(restText(60)).toBe('1 minute')
+    expect(restText(90)).toBe('1:30')
   })
 })
 

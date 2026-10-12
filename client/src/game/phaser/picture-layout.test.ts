@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { villageScene } from '../../test/game'
 import type { SceneView } from '../types'
-import { pictureLayout } from './picture-layout'
+import { fitName, pictureLayout } from './picture-layout'
 
 const field: SceneView = {
   ...villageScene,
@@ -46,33 +46,57 @@ describe('pictureLayout', () => {
     expect((sunflower!.x + bee!.x) / 2).toBe(layout.width / 2)
   })
 
-  it('gives each portrait its drops with English names and icons', () => {
-    const drops = [
-      { itemId: 'i250101', nameKey: 'lg_Equip_Blunt1' },
-      { itemId: 'i999999', nameKey: 'lg_i999999' },
-    ]
-    const [sunflower, bee] = pictureLayout({
-      ...field,
-      monsters: [{ ...field.monsters[0]!, drops }, field.monsters[1]!],
-    })!.portraits
-    expect(sunflower!.drops).toEqual([
-      { itemId: 'i250101', name: 'Dogsmasher', icon: '/assets/game/items/icon_weapon_blunt1.webp' },
-      { itemId: 'i999999', name: 'Unknown item', icon: undefined },
-    ])
-    expect(bee!.drops).toEqual([])
+  it('anchors the Drops panel of each portrait under its cell, as stage fractions', () => {
+    const layout = pictureLayout(field)!
+    const [sunflower] = layout.portraits
+    expect(sunflower!.dropsAt.x).toBeCloseTo(sunflower!.x / layout.width)
+    expect(sunflower!.dropsAt.y).toBeCloseTo((50 + 120 + 64) / layout.height)
   })
 
   it('opens the Explore window from the field’s explore tree', () => {
-    const layout = pictureLayout({ ...field, exploreSpots: ['21011', '21012'] })!
+    const layout = pictureLayout({ ...field, exploreSpots: ['21011', '21012'] }, 'OutCity_1110')!
     expect(layout.explore).toMatchObject({
       title: 'Explore',
       spot: { file: expect.stringMatching(/clip-OutCity_1110/) },
     })
     expect(pictureLayout(field)!.explore).toBeUndefined()
+    expect(pictureLayout(field, 'NoSuchClip')!.explore).toBeUndefined()
     expect(pictureLayout(villageScene)!.explore).toBeUndefined()
   })
 
   it('has no picture for scenes without art', () => {
     expect(pictureLayout({ ...villageScene, sceneId: 171 })).toBeUndefined()
+  })
+})
+
+describe('fitName', () => {
+  // About half an em per character.
+  const measure = (text: string, size: number) => text.length * size * 0.5
+
+  it('keeps short names on one line at the full size', () => {
+    expect(fitName('Sunflower', 108, measure)).toEqual({ size: 22, lines: ['Sunflower'] })
+  })
+
+  it('shrinks a name that almost fits instead of cutting it', () => {
+    expect(fitName('Scorching Demon', 130, measure)).toEqual({
+      size: 17,
+      lines: ['Scorching Demon'],
+    })
+  })
+
+  it('wraps long names on two lines', () => {
+    expect(fitName('Warrior of Darkness', 108, measure)).toEqual({
+      size: 19,
+      lines: ['Warrior of', 'Darkness'],
+    })
+    expect(fitName('Thunderbolt Warrior', 108, measure)).toEqual({
+      size: 19,
+      lines: ['Thunderbolt', 'Warrior'],
+    })
+  })
+
+  it('never drops part of the name', () => {
+    const fit = fitName('Extraordinarily Unpronounceable Name', 60, measure)
+    expect(fit.lines.join(' ')).toBe('Extraordinarily Unpronounceable Name')
   })
 })

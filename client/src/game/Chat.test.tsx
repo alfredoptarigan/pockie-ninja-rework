@@ -100,6 +100,15 @@ describe('Chat', () => {
     expect(within(list).getByText('Lv. 7')).toBeInTheDocument()
   })
 
+  it('shows the connection state on the dark HUD plate so it reads over the scene', () => {
+    renderChat()
+    const state = screen.getByRole('status')
+    expect(state).toHaveTextContent('Online')
+    expect(state).toHaveClass('game-hud')
+    act(() => socket.serverEmit('disconnect'))
+    expect(screen.getByRole('status')).toHaveTextContent('Offline')
+  })
+
   it('explains handshake rejections', () => {
     renderWithProviders(<RealtimePanels characterId="c1" />)
     act(() =>

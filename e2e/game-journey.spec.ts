@@ -214,6 +214,14 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await shot(page, 'drops')
   await drops.click()
 
+  // Hovering the Sunflower portrait (first of four, top centre of the 1920x1080 picture) shows
+  // its Drops panel above the HUD.
+  const canvas = await page.getByTestId('scene-picture').locator('canvas').boundingBox()
+  await page.mouse.move(canvas!.x + canvas!.width * (759 / 1920), canvas!.y + canvas!.height * 0.1)
+  await expect(page.locator(`section[aria-label="${MONSTER} drops"]`)).toBeVisible()
+  await shot(page, 'drops-hover')
+  await page.mouse.move(canvas!.x + 10, canvas!.y + canvas!.height / 2)
+
   // 90004: accept at the scout, then beat a Sunflower with the weapon drawn.
   await acceptFrom(page, SCOUT, QUEST.combat)
   const expBefore = Number(await expMeter(page).getAttribute('aria-valuenow'))
@@ -222,6 +230,9 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await expect(replay.getByRole('button', { name: 'Skip' })).toBeEnabled()
   await page.waitForTimeout(1_500) // a few ticks in, both fighters on stage
   await shot(page, 'battle')
+  // The HUD keeps the pre-fight values while the replay plays.
+  await expectLevel(page, 2)
+  expect(Number(await expMeter(page).getAttribute('aria-valuenow'))).toBe(expBefore)
   await replay.getByRole('button', { name: 'Skip' }).click()
 
   // A level-2 ninja with a weapon beats a Sunflower; the quest reward brings level 3.

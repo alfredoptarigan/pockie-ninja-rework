@@ -49,6 +49,27 @@ describe('Inventory', () => {
     expect(screen.queryByRole('button', { name: /Equip/ })).not.toBeInTheDocument()
   })
 
+  it('disables Equip with a reason on weapons the outfit cannot use', async () => {
+    const club = {
+      ...fists,
+      id: '00000000-0000-7000-8000-000000000009',
+      itemId: 'i250101',
+      nameKey: 'lg_Equip_Blunt1',
+      fitsOutfit: false,
+    }
+    const fetchMock = mockApi({
+      'GET /api/game/inventory': () => json({ items: [{ ...fists, fitsOutfit: true }, club] }),
+    })
+    renderWithProviders(<Inventory />)
+
+    const equipClub = await screen.findByRole('button', { name: 'Equip Dogsmasher' })
+    expect(equipClub).toBeDisabled()
+    expect(equipClub).toHaveAccessibleDescription("Your outfit can't use this weapon.")
+    expect(screen.getByRole('button', { name: 'Equip Newbie Swiping Fists' })).toBeEnabled()
+    await userEvent.click(equipClub)
+    expect(fetchMock.mock.calls.some(([, init]) => init?.method === 'POST')).toBe(false)
+  })
+
   it('shows why an action failed', async () => {
     mockApi({
       'GET /api/game/inventory': () => json({ items: [fists] }),

@@ -1,9 +1,10 @@
-import { screen, waitFor, within } from '@testing-library/react'
+import { act, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character, fists, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
-import { mountBattle } from './phaser'
+import { useCharacter } from './api'
+import { mountBattle, mountPicture, type BattleHandle } from './phaser'
 import { SceneView } from './SceneView'
 import type { FightResult, SceneView as Scene } from './types'
 
@@ -50,6 +51,12 @@ const armed = {
   'GET /api/game/inventory': () => json({ items: [{ ...fists, equippedSlot: 'Weapon' }] }),
 }
 
+/** What the HUD reads: the cached character. */
+function HudLevel() {
+  const character = useCharacter()
+  return <p>HUD level {character.data?.level}</p>
+}
+
 describe('SceneView', () => {
   it('opens NPCs from the keyboard list', async () => {
     mockApi({ ...armed, 'GET /api/game/scene': () => json(villageScene) })
@@ -61,6 +68,36 @@ describe('SceneView', () => {
       await within(actions).findByRole('button', { name: 'Fire Village Elder in the Hall' }),
     )
     expect(onNpc).toHaveBeenCalledWith(villageScene.npcs[0])
+  })
+
+  it('starts the picture with the explore tree the server names', async () => {
+    mockApi({
+      ...armed,
+      'GET /api/game/scene': () => json({ ...field, exploreSpots: ['21011', '21012'] }),
+      'GET /api/game/explore': () =>
+        json({
+          remaining: 7,
+          total: 7,
+          cooldownEndsAt: null,
+          cooldownSeconds: 300,
+          spots: [
+            { id: '21012', clipName: null },
+            { id: '21011', clipName: 'OutCity_1109' },
+          ].map((spot) => ({
+            ...spot,
+            nameKey: `lg_OutSearch_${spot.id}`,
+            requireLevel: 1,
+            requireStone: 0,
+            requireItems: [],
+            star: { level: 0, progress: 0, perStar: 2 },
+          })),
+        }),
+    })
+    const before = vi.mocked(mountPicture).mock.calls.length
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
+
+    await waitFor(() => expect(vi.mocked(mountPicture).mock.calls.length).toBe(before + 1))
+    expect(vi.mocked(mountPicture).mock.calls.at(-1)![3]).toBe('OutCity_1109')
   })
 
   it('fights a monster and shows the result', async () => {
@@ -88,6 +125,42 @@ describe('SceneView', () => {
       expect.anything(),
       expect.objectContaining({ clothing: 3, weaponItemId: fists.itemId }),
     )
+  })
+
+  it('keeps the HUD at the pre-fight values until the replay is over', async () => {
+    mockApi({
+      ...armed,
+      'GET /api/game/character': () => json({ character: { ...character, sceneId: 2101 } }),
+      'GET /api/game/scene': () => json(field),
+      'POST /api/game/fight': () => json(fightResult),
+    })
+    let finish = () => {}
+    vi.mocked(mountBattle).mockImplementationOnce((_parent, options) => {
+      finish = options.onFinished
+      return Promise.resolve({
+        skip: vi.fn(),
+        replay: vi.fn(),
+        setSpeed: vi.fn(),
+        destroy: vi.fn(),
+      } satisfies BattleHandle)
+    })
+    renderWithProviders(
+      <>
+        <SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />
+        <HudLevel />
+      </>,
+    )
+    expect(await screen.findByText('HUD level 1')).toBeVisible()
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
+    await waitFor(() => expect(mountBattle).toHaveBeenCalled())
+    await screen.findByRole('region', { name: 'Battle replay' })
+    // The fight already levelled the ninja up on the server, but the replay is still playing.
+    expect(screen.getByText('HUD level 1')).toBeVisible()
+
+    act(() => finish())
+    expect(await screen.findByText('HUD level 2')).toBeVisible()
+    expect(await screen.findByRole('dialog', { name: 'Victory' })).toBeVisible()
   })
 
   it('replays the battle and fights again from the result window', async () => {

@@ -33,7 +33,8 @@ export const itemName = (itemId: string) => plainText(itemNameKey(itemId), 'an u
 export const bagCount = (bag: InventoryItem[], itemId: string) =>
   bag.filter((item) => item.itemId === itemId).reduce((sum, item) => sum + item.count, 0)
 
-export type ExploreBlock = 'defeated' | 'too_low' | 'daily_limit' | 'cooldown' | 'missing_item'
+export type ExploreBlock =
+  'defeated' | 'too_low' | 'daily_limit' | 'cooldown' | 'no_stone' | 'missing_item'
 
 /**
  * Why `spot` cannot be explored now, in the order the server checks (CheckCanSearch), or null.
@@ -50,6 +51,7 @@ export function exploreBlock(
   if (character.level < spot.requireLevel) return 'too_low'
   if (status.remaining <= 0) return 'daily_limit'
   if (cooldownLeft(status.cooldownEndsAt, now) > 0) return 'cooldown'
+  if (character.stone < spot.requireStone) return 'no_stone'
   if (bag && spot.requireItems.some((need) => bagCount(bag, need.itemId) < need.count)) {
     return 'missing_item'
   }
@@ -70,25 +72,37 @@ export function blockMessage(block: ExploreBlock, spot: ExploreSpot, secondsLeft
       return 'You cannot explore any more today.'
     case 'cooldown':
       return `Resting. You can explore again in ${formatCountdown(secondsLeft)}.`
+    case 'no_stone':
+      return `You need ${spot.requireStone} Stone to explore there.`
     case 'missing_item':
       return `You need ${keysText(spot)} to explore there.`
   }
 }
 
-/** What a search costs, for the spot list and the confirmation. */
-export const costText = (spot: ExploreSpot) =>
-  spot.requireItems.length === 0 ? 'Free' : keysText(spot)
+/** What a search costs (Stone, then keys), for the spot list and the confirmation. */
+export function costText(spot: ExploreSpot) {
+  const parts = [
+    ...(spot.requireStone > 0 ? [`${spot.requireStone} Stone`] : []),
+    ...(spot.requireItems.length > 0 ? [keysText(spot)] : []),
+  ]
+  return parts.length === 0 ? 'Free' : parts.join(' and ')
+}
+
+/** The rest after a search: "5 minutes", "1 minute" or "4:30". */
+export function restText(seconds: number) {
+  if (seconds % 60 !== 0) return formatCountdown(seconds)
+  const minutes = seconds / 60
+  return minutes === 1 ? '1 minute' : `${minutes} minutes`
+}
+
+/** The scene element (the field's tree) that opens the Explore window, from the server's spots. */
+export const exploreClip = (spots: ExploreSpot[] | undefined) =>
+  spots?.find((spot) => spot.clipName)?.clipName ?? undefined
 
 export const starText = (star: ExploreStar) =>
   star.level >= MAX_STARS
     ? `All ${MAX_STARS} stars earned`
     : `${star.progress} / ${star.perStar} searches to the next star`
-
-// roleoutsearch.tab `ClipName`: the scene element that opens a field's first spot (the big tree);
-// expert spots have none. Not in the imported ini data, so kept here.
-const CLIP_EXCEPTIONS: Record<string, string> = { '23011': 'OutCity_1109', '26041': 'OutCity_1109' }
-export const exploreClip = (spotId: string) =>
-  spotId.endsWith('1') ? (CLIP_EXCEPTIONS[spotId] ?? 'OutCity_1110') : undefined
 
 /** Explore monsters are level variants (n330261) drawn and named like their base (n33026). */
 export function exploreMonster(monsterId: string) {

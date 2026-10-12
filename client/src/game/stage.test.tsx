@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { villageScene } from '../test/game'
@@ -62,6 +62,32 @@ describe('ScenePictureMount', () => {
     const handle = vi.mocked(mountPicture).mock.results.at(-1)!.value as { destroy: () => void }
     unmount()
     expect(handle.destroy).toHaveBeenCalled()
+  })
+
+  it("shows the hovered portrait's Drops panel above the HUD and hides it on leave", async () => {
+    const monster = {
+      id: 'n33017',
+      nameKey: 'lg_name_n33017',
+      level: 2,
+      drops: [{ itemId: 'i250101', nameKey: 'lg_Equip_Blunt1' }],
+    }
+    render(<ScenePictureMount scene={villageScene} onNpc={vi.fn()} onMonster={vi.fn()} />)
+    await waitFor(() => expect(mountPicture).toHaveBeenCalled())
+    const actions = vi.mocked(mountPicture).mock.calls.at(-1)![2]
+    const name = { name: 'Sunflower drops', hidden: true }
+    act(() =>
+      actions.onMonsterHover?.({
+        monster,
+        portrait: '',
+        name: 'Sunflower',
+        dropsAt: { x: 0.5, y: 0.2 },
+        x: 960,
+        y: 110,
+      }),
+    )
+    expect(screen.getByRole('region', name)).toHaveTextContent('Dogsmasher')
+    act(() => actions.onMonsterHover?.(null))
+    expect(screen.queryByRole('region', name)).not.toBeInTheDocument()
   })
 
   it('renders nothing for scenes without exported art', () => {

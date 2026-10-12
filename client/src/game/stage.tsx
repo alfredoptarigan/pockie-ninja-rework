@@ -6,8 +6,10 @@
 //
 // BattleReplayMount: plays a fight replay on the field's fight background with Skip, Replay and
 // speed controls, and reports when it is over (or could not play) through `onFinished`.
-import { useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import scenesJson from '../generated/game-scenes.json'
+import { DropsPanel } from './MonsterDrops'
+import type { PicturePortrait } from './phaser/picture-layout'
 import { GameButton } from './skin'
 import type { Replay, SceneMonster, SceneNpc, SceneView } from './types'
 
@@ -74,31 +76,48 @@ export function ScenePictureMount({
   onNpc,
   onMonster,
   onExplore,
+  exploreClip,
 }: {
   scene: SceneView
   onNpc: (npc: SceneNpc) => void
   onMonster: (monster: SceneMonster) => void
   /** The field's explore tree was clicked. */
   onExplore?: () => void
+  /** Scene element of the explore tree (GET /explore `clipName`). */
+  exploreClip?: string
 }) {
   const latest = useLatest({ onNpc, onMonster, onExplore })
-  const { ref, failed } = useStage(scene, (stage, parent) =>
-    stage.mountPicture(parent, scene, {
-      onNpc: (npc) => latest.current.onNpc(npc),
-      onMonster: (monster) => latest.current.onMonster(monster),
-      onExplore: () => latest.current.onExplore?.(),
-    }),
+  const [hovered, setHovered] = useState<PicturePortrait | null>(null)
+  const key = useMemo(() => ({ scene, exploreClip }), [scene, exploreClip])
+  const { ref, failed } = useStage(key, (stage, parent) =>
+    stage.mountPicture(
+      parent,
+      scene,
+      {
+        onNpc: (npc) => latest.current.onNpc(npc),
+        onMonster: (monster) => {
+          setHovered(null)
+          latest.current.onMonster(monster)
+        },
+        onExplore: () => latest.current.onExplore?.(),
+        onMonsterHover: setHovered,
+      },
+      exploreClip,
+    ),
   )
   if (!hasPicture(scene.sceneId) || failed) return null
   // The canvas has no keyboard access; SceneView's action list offers the same actions.
   // It fills the stage (same 16:9 ratio as the 1920x1080 pictures).
   return (
-    <div
-      ref={ref}
-      data-testid="scene-picture"
-      aria-hidden="true"
-      className="absolute inset-0 overflow-hidden bg-black"
-    />
+    <>
+      <div
+        ref={ref}
+        data-testid="scene-picture"
+        aria-hidden="true"
+        className="absolute inset-0 overflow-hidden bg-black"
+      />
+      {hovered && <DropsPanel monster={hovered.monster} at={hovered.dropsAt} />}
+    </>
   )
 }
 

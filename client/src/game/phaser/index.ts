@@ -13,8 +13,13 @@ import { loadWeaponLayer } from './weapon'
 export type { BattleHandle, PictureActions, PictureHandle }
 
 /** Starts the scene picture, or returns null when the scene has no exported art. */
-export function mountPicture(parent: HTMLElement, scene: SceneView, actions: PictureActions) {
-  const layout = pictureLayout(scene)
+export function mountPicture(
+  parent: HTMLElement,
+  scene: SceneView,
+  actions: PictureActions,
+  exploreClip?: string,
+) {
+  const layout = pictureLayout(scene, exploreClip)
   return layout ? startScenePicture(parent, layout, actions) : null
 }
 

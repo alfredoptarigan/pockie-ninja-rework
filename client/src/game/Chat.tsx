@@ -169,7 +169,11 @@ export function ChatBox({
           panelId={`${ids}-log`}
           variant="dark"
         />
-        <span className="ml-auto text-xs text-trim-soft [text-shadow:var(--shadow-game-text)]">
+        {/* On the skin's dark HUD plate: plain text was unreadable over bright scene pictures. */}
+        <span
+          role="status"
+          className="game-hud mb-0.5 ml-auto px-1.5 py-0.5 text-xs font-bold text-trim-soft [text-shadow:var(--shadow-game-text)]"
+        >
           {status === 'online' ? 'Online' : status === 'connecting' ? 'Connecting...' : 'Offline'}
         </span>
         <GameButton

@@ -1,10 +1,11 @@
 import type { Character } from '@pockie/shared'
-import { screen, waitFor, within } from '@testing-library/react'
+import { act, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { character, fists, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
+import { useCharacter } from './api'
 import { ExploreWindow } from './ExploreWindow'
 import { mountBattle } from './phaser'
 import type { ExploreResult, ExploreView, InventoryItem, Replay, SceneView } from './types'
@@ -24,18 +25,23 @@ const view: ExploreView = {
   remaining: 6,
   total: 7,
   cooldownEndsAt: null,
+  cooldownSeconds: 300,
   spots: [
     {
       id: '21011',
       nameKey: 'lg_OutSearch_21011',
+      clipName: 'OutCity_1110',
       requireLevel: 1,
+      requireStone: 0,
       requireItems: [],
       star: { level: 1, progress: 1, perStar: 2 },
     },
     {
       id: '21012',
       nameKey: 'lg_OutSearch_21012',
+      clipName: null,
       requireLevel: 1,
+      requireStone: 0,
       requireItems: [{ itemId: 'i150046', count: 1 }],
       star: { level: 0, progress: 0, perStar: 4 },
     },
@@ -92,6 +98,12 @@ const fought: ExploreResult = {
 function Harness({ who = ninja, scene = field }: { who?: Character; scene?: SceneView }) {
   const [open, setOpen] = useState(false)
   return <ExploreWindow character={who} scene={scene} open={open} onOpenChange={setOpen} />
+}
+
+/** What the HUD reads: the cached character. */
+function HudLevel() {
+  const character = useCharacter()
+  return <p>HUD level {character.data?.level}</p>
 }
 
 const api = (
@@ -161,6 +173,41 @@ describe('ExploreWindow', () => {
     )
   })
 
+  it('shows a Stone cost, the rest from the server and locks a spot the ninja cannot pay', async () => {
+    const [free, expert] = view.spots
+    api(
+      {},
+      {
+        explore: {
+          ...view,
+          cooldownSeconds: 600,
+          spots: [
+            { ...free!, requireStone: 50 },
+            { ...expert!, requireStone: 500 },
+          ],
+        },
+        items: [{ ...fists, itemId: 'i150046', nameKey: 'lg_i150046' }],
+      },
+    )
+    renderWithProviders(<Harness />)
+    const dialog = await openWindow()
+
+    const cheap = within(dialog).getByRole('region', { name: FREE })
+    expect(cheap).toHaveTextContent('Cost50 Stone (you have 100)')
+    await userEvent.click(within(cheap).getByRole('button', { name: `Explore ${FREE}` }))
+    const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
+    expect(confirm).toHaveTextContent(
+      'This uses 1 of your 6 searches left today and 50 Stone. Afterwards you rest 10 minutes',
+    )
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Cancel' }))
+
+    const costly = within(dialog).getByRole('region', { name: EXPERT })
+    expect(costly).toHaveTextContent('500 Stone (you have 100)')
+    expect(
+      within(costly).getByRole('button', { name: `Explore ${EXPERT}` }),
+    ).toHaveAccessibleDescription('You need 500 Stone to explore there.')
+  })
+
   it('explores after a confirmation, shows what was found and refreshes the game', async () => {
     const fetchMock = api({ 'POST /api/game/explore/21011': () => json(found) })
     renderWithProviders(<Harness />)
@@ -170,7 +217,9 @@ describe('ExploreWindow', () => {
     await userEvent.click(within(dialog).getByRole('button', { name: `Explore ${FREE}` }))
     const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
     expect(confirm).toHaveTextContent(`Explore ${FREE}?`)
-    expect(confirm).toHaveTextContent('This uses 1 of your 6 searches left today.')
+    expect(confirm).toHaveTextContent(
+      'This uses 1 of your 6 searches left today. Afterwards you rest 5 minutes before the next search.',
+    )
     await userEvent.click(within(confirm).getByRole('button', { name: 'Cancel' }))
     expect(calls(fetchMock, 'POST /api/game/explore/21011')).toBe(0)
 
@@ -223,6 +272,56 @@ describe('ExploreWindow', () => {
     await userEvent.click(within(result).getByRole('button', { name: 'Replay Battle' }))
     expect(await screen.findByRole('dialog', { name: 'Exploration Result' })).toBeVisible()
     expect(vi.mocked(mountBattle).mock.calls.length).toBe(before + 1)
+  })
+
+  it('keeps the HUD at the pre-fight values until the explore fight replay is over', async () => {
+    api(
+      {
+        'GET /api/game/character': () => json({ character: ninja }),
+        'POST /api/game/explore/21011': () => json(fought),
+      },
+      { items: [{ ...fists, equippedSlot: 'Weapon' }] },
+    )
+    let finish = () => {}
+    vi.mocked(mountBattle).mockImplementationOnce((_parent, options) => {
+      finish = options.onFinished
+      return Promise.resolve({
+        skip: vi.fn(),
+        replay: vi.fn(),
+        setSpeed: vi.fn(),
+        destroy: vi.fn(),
+      })
+    })
+    renderWithProviders(
+      <>
+        <Harness />
+        <HudLevel />
+      </>,
+    )
+    expect(await screen.findByText('HUD level 1')).toBeVisible()
+
+    await exploreFree()
+    await screen.findByRole('region', { name: 'Battle replay' })
+    expect(screen.getByText('HUD level 1')).toBeVisible()
+
+    act(() => finish())
+    expect(await screen.findByText('HUD level 2')).toBeVisible()
+  })
+
+  it('applies a search without a fight at once', async () => {
+    api({
+      'GET /api/game/character': () => json({ character: ninja }),
+      'POST /api/game/explore/21011': () => json(found),
+    })
+    renderWithProviders(
+      <>
+        <Harness />
+        <HudLevel />
+      </>,
+    )
+    expect(await screen.findByText('HUD level 1')).toBeVisible()
+    await exploreFree()
+    expect(await screen.findByText('HUD level 2')).toBeVisible()
   })
 
   it('counts down the rest and keeps exploring locked until it ends', async () => {

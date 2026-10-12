@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { errorMessage, useEquipItem, useInventory, useUseItem } from './api'
 import { ItemIcon } from './ItemIcon'
 import { GameButton, Notice } from './skin'
@@ -76,14 +76,11 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
               </span>
               {isEquipment(item.itemId)
                 ? !item.equippedSlot && (
-                    <GameButton
-                      small
-                      disabled={busy}
-                      aria-label={`Equip ${plainText(item.nameKey, 'item')}`}
-                      onClick={() => run(equip, item, 'Equipped')}
-                    >
-                      Equip
-                    </GameButton>
+                    <EquipButton
+                      item={item}
+                      busy={busy}
+                      onEquip={() => run(equip, item, 'Equipped')}
+                    />
                   )
                 : isUsable(item.itemId) && (
                     <GameButton
@@ -100,5 +97,39 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
         </ul>
       )}
     </div>
+  )
+}
+
+const UNFIT_REASON = "Your outfit can't use this weapon."
+
+/** Equip, or a disabled Equip with the reason when the outfit's weapon class cannot wear it. */
+function EquipButton({
+  item,
+  busy,
+  onEquip,
+}: {
+  item: InventoryItem
+  busy: boolean
+  onEquip: () => void
+}) {
+  const id = useId()
+  const fits = item.fitsOutfit !== false
+  return (
+    <span className="flex shrink-0 items-center gap-2">
+      {!fits && (
+        <span id={id} className="max-w-36 text-right text-xs text-[#8a1610]">
+          {UNFIT_REASON}
+        </span>
+      )}
+      <GameButton
+        small
+        disabled={busy || !fits}
+        aria-label={`Equip ${plainText(item.nameKey, 'item')}`}
+        aria-describedby={fits ? undefined : id}
+        onClick={onEquip}
+      >
+        Equip
+      </GameButton>
+    </span>
   )
 }
