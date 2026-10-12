@@ -162,15 +162,13 @@ export function mergeFromFiles(dir = import.meta.dirname) {
     .filter((file) => file.endsWith('.out.json'))
     .sort())
     Object.assign(results, JSON.parse(readFileSync(join(work, file), 'utf8')))
-  const overrides = existsSync(join(dir, 'overrides.json'))
-    ? read<Record<string, string>>('overrides.json')
-    : {}
+  // Required: merging without the reviewed values would silently revert them in en.json.
   return mergeSentences(
     read('source.id.json'),
     read('glossary.json'),
     read('work/sentences/index.json'),
     results,
-    overrides,
+    read('overrides.json'),
   )
 }
 
