@@ -1,79 +1,42 @@
-// Fight simulation ported from FightSystem.java (docs/original-data/battle.md): sequential 1v1
-// duels, an AtkTime timeline with at most 60 actions per duel, priority strikes, hit / crit /
-// parry / defence, counters, and the generic parry skill 7777.
-// ponytail: scripted skills (javascript in skill.ini) are not ported yet, so every fighter uses the
-// normal attack (skill 1), exactly what the original does when a skill fails. Port per skill.
+// Fight simulation ported from FightSystem.java / SkillSystem.java / BuffSystem.java
+// (docs/original-data/battle.md): sequential 1v1 duels on an AtkTime timeline (at most 60 actions
+// per duel), priority strikes, trigger skills by quomodo, attack skill choice (must-skills, then a
+// weighted pick), scripted skills (./skills.ts), fight buffs (./buffs.ts), hit / crit / parry /
+// defence and counters. RandInt calls happen where the Java code makes them.
+// ponytail: CanMove / CanAttack / CanUseSkill stay 1 because no ported skill stuns or seals, and
+// rebound, absorption, DecDamage, vampiric, shields and self damage are 0 for every fighter the
+// slice simulates. Port them together with the first skill or stat that sets them.
 import { createRandom } from '../random.js'
+import { BUFFS } from './buffs.js'
 import { applyCrit, applyDefense, applyParry, hitChance } from './damage.js'
+import { GENERIC_SKILLS, NORMAL_ATTACK, SKILL_SCRIPTS } from './skills.js'
+import {
+  SKILL_LOSE,
+  SKILL_NO_MANA,
+  SKILL_SUCCESS,
+  type ActiveBuff,
+  type FightContext,
+  type Fighter,
+  type FighterInput,
+  type FightEvent,
+  type Replay,
+  type SkillInput,
+  type Side,
+} from './types.js'
 
-export interface FighterInput {
-  name: string
-  level: number
-  hp: number
-  maxHp: number
-  mp: number
-  maxMp: number
-  minAttack: number
-  maxAttack: number
-  atkTime: number
-  hit: number
-  dodge: number
-  /** CritMul */
-  crit: number
-  critAttach: number
-  tough: number
-  /** ParryMul: chance source of the generic parry skill 7777 */
-  parry: number
-  pierce: number
-  defense: number
-  neglectDefense: number
-  /** CounterMul: percent chance to strike back after being hit */
-  counter: number
-  /** PriorityMul: chance to strike first when attacked */
-  priority: number
-}
-
-export type Side = 'attackers' | 'defenders'
-
-/** Event ids follow the original replay: 1 begin, 2 end, 5 priority, 7 counter, 14 skill, 20 death, 21 next. */
-export interface FightEvent {
-  actor: number
-  event: number
-  target?: number
-  skillId?: number
-  damage?: number
-  hit?: boolean
-  crit?: boolean
-  parry?: boolean
-}
-
-export interface Replay {
-  seed: number
-  fighters: {
-    index: number
-    side: Side
-    name: string
-    level: number
-    maxHp: number
-    startHp: number
-    hp: number
-  }[]
-  events: FightEvent[]
-  winner: Side
-}
-
-interface State extends FighterInput {
-  index: number
-  side: Side
-  startHp: number
-  next: number
-  parryActive: boolean
-}
+export type { BuffChange, FighterInput, FightEvent, Replay, Side, SkillInput } from './types.js'
 
 const MAX_BOUT = 60
-const NORMAL_ATTACK = 1
-const PARRY_PERCENT = 40
-const PARRY_DELAY = 0.6
+const FIGHT_BEGIN = 1
+const BEFORE_ATTACK = 2
+const BEFORE_ATTACKED = 3
+const ON_DAMAGED = 4
+const ON_DEATH = 5
+const AFTER_HIT = 7
+const AFTER_HIT_PET = 8
+const AFTER_BEING_HIT = 9
+const f = Math.fround
+const probability = (skill: SkillInput) => skill.probability ?? 0
 
 export function simulateFight({
   attackers,
@@ -87,88 +50,343 @@ export function simulateFight({
   const random = createRandom(seed)
   const randInt = (min: number, max: number) => (max < min ? min : random.between(min, max))
   const events: FightEvent[] = []
+  /** FightValue.IsChange: the script switched to another skill. */
+  const changed = new WeakSet<FightEvent>()
 
-  const toState =
+  const toFighter =
     (side: Side, offset: number) =>
-    (input: FighterInput, i: number): State => ({
-      ...input,
-      // FightObject.Set rescales Tough.
-      tough: Math.ceil(input.tough / 1.5),
-      index: offset + i,
-      side,
-      startHp: input.hp,
-      next: 0,
-      parryActive: false,
-    })
-  const left = attackers.map(toState('attackers', 0))
-  const right = defenders.map(toState('defenders', attackers.length))
+    (input: FighterInput, i: number): Fighter => {
+      // FightObject.AddSkill keeps each list sorted by ascending priority (stable).
+      const skills = [...(input.skills ?? GENERIC_SKILLS)].sort(
+        (a, b) => (a.priority ?? 0) - (b.priority ?? 0),
+      )
+      return {
+        ...input,
+        // FightObject.Set rescales Tough.
+        tough: Math.ceil(input.tough / 1.5),
+        index: offset + i,
+        side,
+        startHp: input.hp,
+        startMp: input.mp,
+        initAtkTime: input.atkTime,
+        initHit: input.hit,
+        hitMulAdd: 0,
+        next: 0,
+        parryPercent: 0,
+        buffs: null,
+        attackSkills: skills.filter((s) => s.type === 1),
+        triggerSkills: skills.filter((s) => s.type === 2),
+        opponent: null,
+      }
+    }
+  const left = attackers.map(toFighter('attackers', 0))
+  const right = defenders.map(toFighter('defenders', attackers.length))
 
-  function strike(attacker: State, defender: State, event: number, canCounter: boolean) {
-    const base: FightEvent = {
-      actor: attacker.index,
-      event,
-      target: defender.index,
-      skillId: NORMAL_ATTACK,
-    }
-    let damage =
-      attacker.maxAttack <= attacker.minAttack
-        ? attacker.maxAttack
-        : randInt(attacker.minAttack, attacker.maxAttack)
-    if (defender.hp <= 0 || damage === 0) {
-      events.push({ ...base, damage: 0 })
-      return
-    }
-    if (randInt(1, 100) > hitChance(defender.dodge, attacker.hit)) {
-      events.push({ ...base, hit: false })
-      return
-    }
+  const isBreak = (a: Fighter, b: Fighter) => a.hp <= 0 || b.hp <= 0
+  const skillEvent = (self: Fighter, target: Fighter, event: number): FightEvent => ({
+    actor: self.index,
+    event,
+    target: target.index,
+  })
+  const getDamage = (self: Fighter) =>
+    self.maxAttack <= self.minAttack ? self.maxAttack : randInt(self.minAttack, self.maxAttack)
 
-    const c = attacker.crit - defender.tough
-    const crit = c > 0 && randInt(1, 100) <= Math.trunc(c / 16)
-    if (crit) damage = applyCrit(damage, attacker.critAttach, c)
-    const parried = defender.parryActive
-    if (parried) {
-      // Buff 11841: parry 40%, consumed by this hit, and the attacker is slowed down.
-      damage = applyParry(damage, PARRY_PERCENT)
-      defender.parryActive = false
-      attacker.next += Math.trunc(attacker.atkTime * PARRY_DELAY)
-    }
-    damage = applyDefense(damage, defender.defense, attacker.neglectDefense)
-    defender.hp = Math.max(0, defender.hp - damage)
-    events.push({
-      ...base,
-      damage,
-      hit: true,
-      ...(crit ? { crit } : {}),
-      ...(parried ? { parry: true } : {}),
-    })
+  // ---- Buffs (BuffSystem) ----
 
-    // Skill 7777 (on being damaged): may prepare a parry for the next hit.
-    if (damage > 0 && defender.hp > 0 && attacker.hp > 0 && !defender.parryActive) {
-      const chance = Math.fround((defender.parry - attacker.pierce) / 16)
-      if (randInt(0, 99) < chance) defender.parryActive = true
+  function removeBuffAt(target: Fighter, i: number, timer: number, fv: FightEvent) {
+    const buff = target.buffs?.[i]
+    if (!buff) return
+    ;(fv.delBuffs ??= []).push({ role: target.index, buff: buff.id })
+    target.buffs!.splice(i, 1)
+    BUFFS[buff.id]?.onRemove?.(ctx, target, buff, fv, timer)
+  }
+
+  function addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData = 0) {
+    const def = BUFFS[buffId]
+    if (!def) return
+    if (def.replace !== 0 && target.buffs) {
+      for (let i = target.buffs.length - 1; i >= 0; i--) {
+        const other = target.buffs[i]
+        if (other && BUFFS[other.id]?.replace === def.replace) removeBuffAt(target, i, timer, fv)
+      }
     }
-    if (canCounter && defender.hp > 0 && attacker.hp > 0 && randInt(1, 100) <= defender.counter) {
-      strike(defender, attacker, 7, false)
+    ;(fv.addBuffs ??= []).push({ role: target.index, buff: buffId })
+    const buff: ActiveBuff = {
+      id: buffId,
+      saveData: Math.trunc(saveData),
+      lifeTime: def.lifeTime,
+      startTime: timer,
+    }
+    ;(target.buffs ??= []).push(buff)
+    def.onAdd?.(ctx, target, buff, fv, timer)
+  }
+
+  function removeBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent) {
+    const i = target.buffs?.findIndex((b) => b.id === buffId) ?? -1
+    if (i >= 0) removeBuffAt(target, i, timer, fv)
+  }
+
+  function clearTypeBuff(target: Fighter, fv: FightEvent, clearType: number, timer: number) {
+    if (!target.buffs) return
+    for (let i = target.buffs.length - 1; i >= 0; i--) {
+      const buff = target.buffs[i]
+      if (buff && BUFFS[buff.id]?.clearType === clearType) removeBuffAt(target, i, timer, fv)
     }
   }
 
-  function act(actor: State, target: State) {
-    events.push({ actor: actor.index, event: 1 })
-    if (randInt(1, 100) + actor.priority <= target.priority) {
-      strike(target, actor, 5, false)
+  /** ActivationBuffBeginFight: ticks (type 2) and expiry at the start of the owner's action. */
+  function activateBuffs(self: Fighter, timer: number) {
+    if (!self.buffs) return true
+    const ids = self.buffs.map((b) => b.id)
+    for (let i = ids.length - 1; i >= 0; i--) {
+      const buff = self.buffs.findLast((b) => b.id === ids[i])
+      if (!buff) continue
+      const size = events.length
+      let fv: FightEvent | null = null
+      if (BUFFS[buff.id]?.type === 2) {
+        fv = { actor: self.index, event: 9, skillId: buff.id }
+        BUFFS[buff.id]?.onActivation?.(ctx, self, buff, fv, timer)
+      }
+      if (buff.lifeTime !== -1 && timer > buff.startTime + buff.lifeTime) {
+        fv ??= { actor: self.index, event: 9 }
+        removeBuff(self, buff.id, timer, fv)
+      }
+      if (!fv) continue
+      events.splice(size, 0, fv)
+      if (self.hp > 0) continue
+      die(self, self, timer)
+      if (self.hp <= 0) return false
+    }
+    return true
+  }
+
+  /** The duel loop starts by removing every buff of both fighters (event 9). */
+  function clearAllBuffs(fighter: Fighter) {
+    // The original also writes an empty event 9 once the buff list exists; skipped here.
+    if (!fighter.buffs?.length) return
+    const fv: FightEvent = { actor: fighter.index, event: 9 }
+    for (let i = fighter.buffs.length - 1; i >= 0; i--) removeBuffAt(fighter, i, 0, fv)
+    events.push(fv)
+  }
+
+  // ---- Damage (FightSystem.Attack / Damage.java) ----
+
+  /** Damage.Damage: raw HP change, then the victim's on-damaged trigger. */
+  function damageHp(victim: Fighter, amount: number, timer: number) {
+    const attacker = victim.opponent
+    const dealt = Math.min(victim.hp, amount)
+    victim.hp = Math.min(victim.maxHp, Math.max(0, victim.hp - dealt))
+    if (dealt > 0 && victim.hp > 0 && attacker && attacker.hp > 0 && attacker !== victim) {
+      trigger(victim, attacker, ON_DAMAGED, timer)
+    }
+  }
+
+  function attack(self: Fighter, target: Fighter, damage: number, fv: FightEvent, timer: number) {
+    if (target.hp <= 0 || damage === 0) {
+      fv.damage = 0
+      return
+    }
+    if (randInt(1, 100) > hitChance(target.dodge, self.hit)) {
+      fv.hit = false
+      return
+    }
+    const c = self.crit - target.tough
+    if (c > 0 && randInt(1, 100) <= Math.trunc(c / 16)) {
+      damage = applyCrit(damage, self.critAttach, c)
+      fv.crit = true
+    }
+    if (target.parryPercent > 0) {
+      damage = applyParry(damage, target.parryPercent)
+      fv.parry = true
+    }
+    damage = applyDefense(damage, target.defense, self.neglectDefense)
+    fv.damage = damage
+    fv.hit = true
+    target.hp = Math.max(0, target.hp - damage)
+    clearTypeBuff(target, fv, 2, timer)
+    if (damage > 0) clearTypeBuff(target, fv, 1, timer)
+    if (damage > 0 && target.hp > 0 && self.hp > 0 && self !== target) {
+      trigger(target, self, ON_DAMAGED, timer)
+    }
+  }
+
+  // ---- Skills (SkillSystem) ----
+
+  /** Weighted pick shared by FindTypeTriggerSkill and FindAttackSkill; always rolls. */
+  function pickWeighted(pool: SkillInput[]) {
+    const total = pool.reduce((sum, s) => sum + probability(s), 0)
+    let r: number
+    if (total < 100) {
+      r = randInt(0, 100)
+      if (r > total) return null
     } else {
-      strike(actor, target, 14, true)
+      r = randInt(0, total)
     }
-    events.push({ actor: actor.index, event: 2 })
-    return actor.hp > 0 && target.hp > 0
+    let acc = 0
+    for (const skill of pool) {
+      if (r > acc && r <= acc + probability(skill)) return skill
+      acc += probability(skill)
+    }
+    return null
   }
 
-  function duel(self: State, target: State) {
-    for (const fighter of [self, target]) {
-      fighter.next = fighter.atkTime
-      fighter.parryActive = false
+  function spendMp(self: Fighter, fv: FightEvent, decMp: number) {
+    if (decMp === 0) return
+    fv.decMp = decMp
+    self.mp -= decMp
+  }
+
+  function useSkill(
+    self: Fighter,
+    target: Fighter,
+    skill: SkillInput,
+    damage: number,
+    timer: number,
+    fv: FightEvent,
+    canCounter: boolean,
+  ): number {
+    if (self.mp < 0) self.mp = 0
+    const decMp = skill.decmp ?? 0
+    if (decMp !== 0 && self.mp < decMp) return SKILL_NO_MANA
+    const skillId = skill.secondid ?? skill.id
+    if (skill.javascript) {
+      const script = SKILL_SCRIPTS[skill.javascript]
+      const res = script ? script(ctx, self, target, fv, timer) : SKILL_LOSE
+      if (res !== SKILL_SUCCESS) return res
+      if (!changed.has(fv) || !fv.skillId) {
+        fv.skillId = skillId
+        spendMp(self, fv, decMp)
+      }
+    } else {
+      fv.skillId = skillId
+      spendMp(self, fv, decMp)
+      const mul = f(skill.mul ?? 0)
+      attack(self, target, Math.trunc(f(f(damage * mul) + (skill.add ?? 0))), fv, timer)
     }
+    if (skill.canbecounter && canCounter && fv.hit !== false) counter(target, self, timer)
+    return SKILL_SUCCESS
+  }
+
+  function normalAttack(self: Fighter, target: Fighter, fv: FightEvent, timer: number) {
+    changed.add(fv)
+    return useSkill(self, target, NORMAL_ATTACK, getDamage(self), timer, fv, true)
+  }
+
+  function checkDeaths(self: Fighter, target: Fighter, timer: number) {
+    if (self.hp <= 0) die(self, target, timer)
+    if (target.hp <= 0) die(target, self, timer)
+  }
+
+  /** UserSkillBeforeAttack, UserBeDamageSkill, UserDieSkill, ...: trigger skills of a quomodo. */
+  function trigger(self: Fighter, target: Fighter, quomodo: number, timer: number) {
+    if (quomodo === ON_DEATH) self.hp = 0
+    if (self.triggerSkills.length === 0) return false
+    const candidates = self.triggerSkills.filter((s) => s.quomodo === quomodo && probability(s) > 0)
+    const must = candidates.filter((s) => probability(s) >= 100)
+    const pick = pickWeighted(candidates.filter((s) => probability(s) < 100))
+    if (!pick && must.length === 0) return false
+    const fv = skillEvent(self, target, 14)
+    const damage = getDamage(self)
+    const size = events.length
+    const used = must.some(
+      (s) => useSkill(self, target, s, damage, timer, fv, true) === SKILL_SUCCESS,
+    )
+    if (!used && (!pick || useSkill(self, target, pick, damage, timer, fv, true) !== SKILL_SUCCESS))
+      return false
+    if (quomodo >= AFTER_HIT) events.splice(size, 0, fv)
+    else events.push(fv)
+    if (quomodo !== ON_DEATH) checkDeaths(self, target, timer)
+    return true
+  }
+
+  function die(self: Fighter, target: Fighter, timer: number) {
+    trigger(self, target, ON_DEATH, timer)
+  }
+
+  function counter(self: Fighter, target: Fighter, timer: number) {
+    checkDeaths(self, target, timer)
+    if (isBreak(self, target) || randInt(1, 100) > self.counter) return
+    const fv = skillEvent(self, target, 7)
+    const damage = getDamage(self)
+    events.push(fv)
+    useSkill(self, target, NORMAL_ATTACK, damage, timer, fv, false)
+    checkDeaths(self, target, timer)
+  }
+
+  function priorityStrike(defender: Fighter, actor: Fighter, timer: number) {
+    if (randInt(1, 100) + actor.priority > defender.priority) return false
+    const fv = skillEvent(defender, actor, 5)
+    const size = events.length
+    if (useSkill(defender, actor, NORMAL_ATTACK, getDamage(defender), timer, fv, false) === 0) {
+      events.splice(size, 0, fv)
+    }
+    checkDeaths(defender, actor, timer)
+    return true
+  }
+
+  function beginFight(self: Fighter, target: Fighter) {
+    for (const skill of self.triggerSkills.filter((s) => s.quomodo === FIGHT_BEGIN)) {
+      const fv = skillEvent(self, target, 14)
+      const damage = getDamage(self)
+      if (useSkill(self, target, skill, damage, 0, fv, true) === SKILL_SUCCESS) events.push(fv)
+      if (isBreak(self, target)) return false
+    }
+    return true
+  }
+
+  function attackSkill(self: Fighter, target: Fighter, timer: number) {
+    const must = self.attackSkills.filter((s) => probability(s) >= 100)
+    let skill =
+      self.attackSkills.length === 0
+        ? NORMAL_ATTACK
+        : (pickWeighted(self.attackSkills.filter((s) => probability(s) < 100)) ?? NORMAL_ATTACK)
+    const fv = skillEvent(self, target, 14)
+    const damage = getDamage(self)
+    const size = events.length
+    let used = must.some(
+      (s) => useSkill(self, target, s, damage, timer, fv, true) === SKILL_SUCCESS,
+    )
+    if (!used) {
+      used = useSkill(self, target, skill, damage, timer, fv, true) === SKILL_SUCCESS
+      if (!used && skill !== NORMAL_ATTACK) {
+        skill = NORMAL_ATTACK
+        used = useSkill(self, target, skill, damage, timer, fv, true) === SKILL_SUCCESS
+        if (!used) return
+      }
+    }
+    if (used) events.splice(size, 0, fv)
+    checkDeaths(self, target, timer)
+    // The original checks the weighted pick here even when a must-skill was used.
+    if (isBreak(self, target) || skill.effect !== 1 || fv.hit === false) return
+    if (skill.quomodo === 2) trigger(self, target, AFTER_HIT, timer)
+    if (isBreak(self, target)) return
+    trigger(self, target, AFTER_HIT_PET, timer)
+    if (isBreak(self, target)) return
+    if (skill.quomodo === 2) trigger(target, self, AFTER_BEING_HIT, timer)
+  }
+
+  /** AttackTarget: one action. Returns false when the duel is over. */
+  function act(self: Fighter, target: Fighter, timer: number) {
+    if (!activateBuffs(self, timer)) return false
+    events.push({ actor: self.index, event: 1 })
+    if (!priorityStrike(target, self, timer)) {
+      trigger(target, self, BEFORE_ATTACKED, timer)
+      if (isBreak(self, target)) return false
+      trigger(self, target, BEFORE_ATTACK, timer)
+      if (isBreak(self, target)) return false
+      attackSkill(self, target, timer)
+    }
+    if (isBreak(self, target)) return false
+    events.push({ actor: self.index, event: 2 })
+    return true
+  }
+
+  function duel(self: Fighter, target: Fighter) {
+    self.opponent = target
+    target.opponent = self
+    self.next = self.atkTime
+    target.next = target.atkTime
+    if (!beginFight(self, target) || !beginFight(target, self)) return
     let selfTurn = false
     let targetTurn = false
     let time = Math.min(self.atkTime, target.atkTime)
@@ -181,21 +399,40 @@ export function simulateFight({
       }
       let ongoing: boolean
       if (selfTurn) {
-        ongoing = act(self, target)
+        ongoing = act(self, target, time)
         self.next += self.atkTime
         selfTurn = false
       } else {
-        ongoing = act(target, self)
+        ongoing = act(target, self, time)
         target.next += target.atkTime
         targetTurn = false
       }
       time = Math.min(self.next, target.next)
       if (!ongoing) return
     }
-    // Timeout: the lower HP percentage loses; a tie kills the target (original behaviour).
-    const percent = (f: State) => Math.trunc((f.hp * 100) / f.maxHp) * 100
-    if (percent(self) < percent(target)) self.hp = 0
-    else target.hp = 0
+  }
+
+  const ctx: FightContext = {
+    randInt,
+    getDamage,
+    attack: (self, target, damage, fv, timer) =>
+      attack(self, target, Math.trunc(damage), fv, timer),
+    damage: (victim, amount) => damageHp(victim, Math.trunc(amount), 0),
+    damageWithValue: (victim, amount, fv, timer) => {
+      damageHp(victim, Math.trunc(amount), timer)
+      clearTypeBuff(victim, fv, 1, timer)
+    },
+    addBuff,
+    removeBuff,
+    getBuff: (target, buffId) => target.buffs?.find((b) => b.id === buffId),
+    changeNextAtkTime: (target, amount) => {
+      if (Math.trunc(amount) > 0) target.next += Math.trunc(amount)
+    },
+    changeHit: (target, hitMulAdd) => {
+      target.hitMulAdd = hitMulAdd
+      target.hit = Math.trunc(target.initHit * 100 * 0.01) + hitMulAdd
+    },
+    normalAttack,
   }
 
   let a = 0
@@ -203,7 +440,15 @@ export function simulateFight({
   while (a < left.length && d < right.length) {
     const self = left[a]!
     const target = right[d]!
+    clearAllBuffs(self)
+    clearAllBuffs(target)
     duel(self, target)
+    if (self.hp > 0 && target.hp > 0) {
+      // Timeout: the lower HP percentage loses; a tie kills the target (original behaviour).
+      const percent = (x: Fighter) => Math.trunc((x.hp * 100) / x.maxHp) * 100
+      if (percent(self) < percent(target)) self.hp = 0
+      else target.hp = 0
+    }
     if (target.hp <= 0) {
       events.push({ actor: target.index, event: 20 })
       d++
@@ -218,14 +463,17 @@ export function simulateFight({
 
   return {
     seed,
-    fighters: [...left, ...right].map((f) => ({
-      index: f.index,
-      side: f.side,
-      name: f.name,
-      level: f.level,
-      maxHp: f.maxHp,
-      startHp: f.startHp,
-      hp: f.hp,
+    fighters: [...left, ...right].map((x) => ({
+      index: x.index,
+      side: x.side,
+      name: x.name,
+      level: x.level,
+      maxHp: x.maxHp,
+      startHp: x.startHp,
+      hp: x.hp,
+      maxMp: x.maxMp,
+      startMp: x.startMp,
+      mp: x.mp,
     })),
     events,
     winner: a >= left.length ? 'defenders' : 'attackers',
