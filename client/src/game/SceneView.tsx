@@ -2,6 +2,7 @@ import type { Character } from '@pockie/shared'
 import { useState } from 'react'
 import { errorMessage, useFight, useInventory, useScene } from './api'
 import { FightSummary } from './FightSummary'
+import { DropsMenu } from './MonsterDrops'
 import { ReviveWindow } from './ReviveWindow'
 import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
@@ -104,7 +105,7 @@ export function SceneView({
                   ) : (
                     <ul className="flex flex-wrap gap-1.5">
                       {scene.data.monsters.map((monster) => (
-                        <li key={monster.id}>
+                        <li key={monster.id} className="flex flex-wrap gap-1">
                           <GameButton
                             small
                             disabled={fight.isPending || defeated}
@@ -114,6 +115,7 @@ export function SceneView({
                           >
                             {plainText(monster.nameKey, 'Monster')} Lv. {monster.level}
                           </GameButton>
+                          <DropsMenu monster={monster} />
                         </li>
                       ))}
                     </ul>
