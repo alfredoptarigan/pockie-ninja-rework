@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { character, villageScene } from '../test/game'
@@ -102,6 +102,27 @@ describe('SceneView', () => {
     expect(dialog).toHaveTextContent('Healing Powder')
     expect(dialog).toHaveTextContent('Level up! You are now level 2.')
     expect(requestBody(fetchMock, 'POST /api/game/fight')).toEqual({ monsterId: 'n33017' })
+  })
+
+  it('replays the battle and fights again from the result window', async () => {
+    let fights = 0
+    mockApi({
+      'GET /api/game/scene': () => json(field),
+      'POST /api/game/fight': () => {
+        fights++
+        return json(fightResult)
+      },
+    })
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} />)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Victory' })
+    expect(dialog).toHaveTextContent('You dealt 0 damage to Sunflower.')
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Replay Battle' }))
+    // The stub stage ends the replay at once, so the results come back.
+    const again = await screen.findByRole('dialog', { name: 'Victory' })
+    await userEvent.click(within(again).getByRole('button', { name: 'Fight Again' }))
+    await waitFor(() => expect(fights).toBe(2))
   })
 
   it('shows why a fight was refused', async () => {
