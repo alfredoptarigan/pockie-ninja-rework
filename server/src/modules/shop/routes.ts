@@ -278,6 +278,9 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const [, box] = findLevelBand(wholesale.boxes, c.level)!
       const offer = wholesale.items[box.BoxName]!.find((row) => row.item === input.itemId)
       if (!offer) throw bad('unknown_item', 'That item is not in your Wholesale shop.')
+      // The original client caps one purchase at one stack; larger counts held the lock for seconds.
+      if (input.count > Number(item(offer.item)?.ItemMaxFoldNum ?? 1))
+        throw bad('invalid_count', 'You can buy at most one stack at a time.')
       const awards = Array.from({ length: input.count }, () => ({
         itemId: offer.item,
         bound: true,
