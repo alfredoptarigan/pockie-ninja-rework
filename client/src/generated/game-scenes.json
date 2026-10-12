@@ -1,5 +1,33 @@
 {
   "scenes": {
+    "61": {
+      "width": 1920,
+      "height": 1080,
+      "layers": { "background": "/assets/game/scenes/61/background.webp" },
+      "hotspots": {},
+      "fightBackground": "/assets/game/scenes/61/fight-background.webp"
+    },
+    "62": {
+      "width": 1920,
+      "height": 1080,
+      "layers": { "background": "/assets/game/scenes/62/background.webp" },
+      "hotspots": {},
+      "fightBackground": "/assets/game/scenes/62/fight-background.webp"
+    },
+    "63": {
+      "width": 1920,
+      "height": 1080,
+      "layers": { "background": "/assets/game/scenes/63/background.webp" },
+      "hotspots": {},
+      "fightBackground": "/assets/game/scenes/63/fight-background.webp"
+    },
+    "64": {
+      "width": 1920,
+      "height": 1080,
+      "layers": { "background": "/assets/game/scenes/64/background.webp" },
+      "hotspots": {},
+      "fightBackground": "/assets/game/scenes/64/fight-background.webp"
+    },
     "111": {
       "width": 1920,
       "height": 1080,
@@ -371,6 +399,98 @@
         }
       }
     },
+    "161": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/161/background.webp",
+        "element": "/assets/game/scenes/161/element.webp",
+        "skybox": "/assets/game/scenes/161/skybox.webp"
+      },
+      "hotspots": {
+        "clip_foundry": {
+          "file": "/assets/game/scenes/161/clip-clip_foundry.webp",
+          "x": 334,
+          "y": 467,
+          "width": 250,
+          "height": 325
+        },
+        "clip_equip": {
+          "file": "/assets/game/scenes/161/clip-clip_equip.webp",
+          "x": 600,
+          "y": 472,
+          "width": 311,
+          "height": 258
+        },
+        "clip_arena": {
+          "file": "/assets/game/scenes/161/clip-clip_arena.webp",
+          "x": 740,
+          "y": 318,
+          "width": 221,
+          "height": 240
+        },
+        "clip_hall": {
+          "file": "/assets/game/scenes/161/clip-clip_hall.webp",
+          "x": 906,
+          "y": 34,
+          "width": 393,
+          "height": 563
+        },
+        "clip_reward": {
+          "file": "/assets/game/scenes/161/clip-clip_reward.webp",
+          "x": 1060,
+          "y": 620,
+          "width": 327,
+          "height": 224
+        },
+        "clip_pet": {
+          "file": "/assets/game/scenes/161/clip-clip_pet.webp",
+          "x": 1326,
+          "y": 459,
+          "width": 489,
+          "height": 404
+        },
+        "clip_salve": {
+          "file": "/assets/game/scenes/161/clip-clip_salve.webp",
+          "x": 1224,
+          "y": 341,
+          "width": 230,
+          "height": 270
+        },
+        "clip_RandPot": {
+          "file": "/assets/game/scenes/161/clip-clip_RandPot.webp",
+          "x": 240,
+          "y": 476,
+          "width": 161,
+          "height": 145
+        }
+      }
+    },
+    "171": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/171/background.webp",
+        "element": "/assets/game/scenes/171/element.webp",
+        "skybox": "/assets/game/scenes/171/skybox.webp"
+      },
+      "hotspots": {
+        "clip_nation": {
+          "file": "/assets/game/scenes/171/clip-clip_nation.webp",
+          "x": 603,
+          "y": 208,
+          "width": 364,
+          "height": 249
+        },
+        "clip_middle": {
+          "file": "/assets/game/scenes/171/clip-clip_middle.webp",
+          "x": 786,
+          "y": 465,
+          "width": 287,
+          "height": 396
+        }
+      }
+    },
     "2101": {
       "width": 1920,
       "height": 1080,
@@ -395,6 +515,56 @@
         }
       },
       "fightBackground": "/assets/game/scenes/2101/fight-background.webp"
+    },
+    "2102": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2102/background.webp",
+        "element": "/assets/game/scenes/2102/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2102/clip-OutCity_1109.webp",
+          "x": 0,
+          "y": 774,
+          "width": 436,
+          "height": 130
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2102/clip-OutCity_1110.webp",
+          "x": 1080,
+          "y": 447,
+          "width": 284,
+          "height": 258
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2102/fight-background.webp"
+    },
+    "2103": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2103/background.webp",
+        "element": "/assets/game/scenes/2103/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2103/clip-OutCity_1110.webp",
+          "x": 824,
+          "y": 436,
+          "width": 180,
+          "height": 160
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2103/clip-OutCity_1109.webp",
+          "x": 1281,
+          "y": 293,
+          "width": 174,
+          "height": 165
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2103/fight-background.webp"
     },
     "2201": {
       "width": 1920,
@@ -423,6 +593,59 @@
       },
       "fightBackground": "/assets/game/scenes/2201/fight-background.webp"
     },
+    "2202": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2202/background.webp",
+        "backgroundeffect": "/assets/game/scenes/2202/backgroundeffect.webp",
+        "element": "/assets/game/scenes/2202/element.webp",
+        "skybox": "/assets/game/scenes/2202/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2202/clip-OutCity_1110.webp",
+          "x": 233,
+          "y": 573,
+          "width": 169,
+          "height": 209
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2202/clip-OutCity_1109.webp",
+          "x": 1101,
+          "y": 617,
+          "width": 295,
+          "height": 136
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2202/fight-background.webp"
+    },
+    "2203": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2203/background.webp",
+        "element": "/assets/game/scenes/2203/element.webp",
+        "skybox": "/assets/game/scenes/2203/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2203/clip-OutCity_1110.webp",
+          "x": 701,
+          "y": 579,
+          "width": 86,
+          "height": 168
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2203/clip-OutCity_1109.webp",
+          "x": 1218,
+          "y": 240,
+          "width": 103,
+          "height": 105
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2203/fight-background.webp"
+    },
     "2301": {
       "width": 1920,
       "height": 1080,
@@ -450,6 +673,60 @@
       },
       "fightBackground": "/assets/game/scenes/2301/fight-background.webp"
     },
+    "2302": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2302/background.webp",
+        "backgroundeffect": "/assets/game/scenes/2302/backgroundeffect.webp",
+        "element": "/assets/game/scenes/2302/element.webp",
+        "skybox": "/assets/game/scenes/2302/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2302/clip-OutCity_1110.webp",
+          "x": 438,
+          "y": 420,
+          "width": 293,
+          "height": 250
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2302/clip-OutCity_1109.webp",
+          "x": 1150,
+          "y": 321,
+          "width": 267,
+          "height": 140
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2302/fight-background.webp"
+    },
+    "2303": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2303/background.webp",
+        "backgroundeffect": "/assets/game/scenes/2303/backgroundeffect.webp",
+        "element": "/assets/game/scenes/2303/element.webp",
+        "skybox": "/assets/game/scenes/2303/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2303/clip-OutCity_1110.webp",
+          "x": 531,
+          "y": 98,
+          "width": 841,
+          "height": 640
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2303/clip-OutCity_1109.webp",
+          "x": 289,
+          "y": 564,
+          "width": 63,
+          "height": 104
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2303/fight-background.webp"
+    },
     "2401": {
       "width": 1920,
       "height": 1080,
@@ -476,6 +753,58 @@
       },
       "fightBackground": "/assets/game/scenes/2401/fight-background.webp"
     },
+    "2402": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2402/background.webp",
+        "element": "/assets/game/scenes/2402/element.webp",
+        "skybox": "/assets/game/scenes/2402/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2402/clip-OutCity_1109.webp",
+          "x": 0,
+          "y": 633,
+          "width": 689,
+          "height": 302
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2402/clip-OutCity_1110.webp",
+          "x": 739,
+          "y": 723,
+          "width": 503,
+          "height": 101
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2402/fight-background.webp"
+    },
+    "2403": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2403/background.webp",
+        "element": "/assets/game/scenes/2403/element.webp",
+        "skybox": "/assets/game/scenes/2403/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2403/clip-OutCity_1110.webp",
+          "x": 1043,
+          "y": 395,
+          "width": 149,
+          "height": 165
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2403/clip-OutCity_1109.webp",
+          "x": 983,
+          "y": 647,
+          "width": 445,
+          "height": 191
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2403/fight-background.webp"
+    },
     "2501": {
       "width": 1920,
       "height": 1080,
@@ -501,6 +830,1045 @@
         }
       },
       "fightBackground": "/assets/game/scenes/2501/fight-background.webp"
+    },
+    "2502": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2502/background.webp",
+        "element": "/assets/game/scenes/2502/element.webp",
+        "skybox": "/assets/game/scenes/2502/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2502/clip-OutCity_1110.webp",
+          "x": 929,
+          "y": 540,
+          "width": 156,
+          "height": 216
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2502/clip-OutCity_1109.webp",
+          "x": 331,
+          "y": 691,
+          "width": 122,
+          "height": 91
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2502/fight-background.webp"
+    },
+    "2503": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2503/background.webp",
+        "element": "/assets/game/scenes/2503/element.webp",
+        "skybox": "/assets/game/scenes/2503/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2503/clip-OutCity_1109.webp",
+          "x": 422,
+          "y": 410,
+          "width": 144,
+          "height": 219
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2503/clip-OutCity_1110.webp",
+          "x": 726,
+          "y": 567,
+          "width": 540,
+          "height": 149
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2503/fight-background.webp"
+    },
+    "2601": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2601/background.webp",
+        "element": "/assets/game/scenes/2601/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2601/clip-OutCity_1110.webp",
+          "x": 472,
+          "y": 436,
+          "width": 169,
+          "height": 257
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2601/clip-OutCity_1109.webp",
+          "x": 626,
+          "y": 336,
+          "width": 176,
+          "height": 110
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2601/fight-background.webp"
+    },
+    "2602": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2602/background.webp",
+        "element": "/assets/game/scenes/2602/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2602/clip-OutCity_1109.webp",
+          "x": 970,
+          "y": 392,
+          "width": 114,
+          "height": 215
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2602/clip-OutCity_1110.webp",
+          "x": 673,
+          "y": 262,
+          "width": 160,
+          "height": 329
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2602/fight-background.webp"
+    },
+    "2603": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2603/background.webp",
+        "element": "/assets/game/scenes/2603/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2603/clip-OutCity_1110.webp",
+          "x": 123,
+          "y": 441,
+          "width": 409,
+          "height": 205
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2603/clip-OutCity_1109.webp",
+          "x": 1303,
+          "y": 489,
+          "width": 246,
+          "height": 131
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2603/fight-background.webp"
+    },
+    "2604": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2604/background.webp",
+        "element": "/assets/game/scenes/2604/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2604/clip-OutCity_1110.webp",
+          "x": 919,
+          "y": 643,
+          "width": 265,
+          "height": 188
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2604/clip-OutCity_1109.webp",
+          "x": 1213,
+          "y": 357,
+          "width": 220,
+          "height": 271
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2604/fight-background.webp"
+    },
+    "2605": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2605/background.webp",
+        "element": "/assets/game/scenes/2605/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2605/clip-OutCity_1110.webp",
+          "x": 194,
+          "y": 170,
+          "width": 265,
+          "height": 240
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2605/fight-background.webp"
+    },
+    "2701": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2701/background.webp",
+        "element": "/assets/game/scenes/2701/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2701/clip-OutCity_1109.webp",
+          "x": 0,
+          "y": 285,
+          "width": 475,
+          "height": 467
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2701/clip-OutCity_1110.webp",
+          "x": 461,
+          "y": 232,
+          "width": 927,
+          "height": 420
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2701/fight-background.webp"
+    },
+    "2702": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2702/background.webp",
+        "element": "/assets/game/scenes/2702/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2702/clip-OutCity_1109.webp",
+          "x": 0,
+          "y": 502,
+          "width": 783,
+          "height": 316
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2702/clip-OutCity_1110.webp",
+          "x": 620,
+          "y": 472,
+          "width": 631,
+          "height": 325
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2702/fight-background.webp"
+    },
+    "2703": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2703/background.webp",
+        "element": "/assets/game/scenes/2703/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2703/clip-OutCity_1109.webp",
+          "x": 600,
+          "y": 457,
+          "width": 214,
+          "height": 62
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2703/clip-OutCity_1110.webp",
+          "x": 1142,
+          "y": 590,
+          "width": 436,
+          "height": 263
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2703/fight-background.webp"
+    },
+    "2704": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2704/background.webp",
+        "element": "/assets/game/scenes/2704/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2704/clip-OutCity_1109.webp",
+          "x": 0,
+          "y": 100,
+          "width": 548,
+          "height": 980
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2704/clip-OutCity_1110.webp",
+          "x": 629,
+          "y": 368,
+          "width": 636,
+          "height": 409
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2704/fight-background.webp"
+    },
+    "2801": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2801/background.webp",
+        "element": "/assets/game/scenes/2801/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2801/clip-OutCity_1110.webp",
+          "x": 643,
+          "y": 633,
+          "width": 214,
+          "height": 159
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2801/fight-background.webp"
+    },
+    "2802": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2802/background.webp",
+        "element": "/assets/game/scenes/2802/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2802/clip-OutCity_1110.webp",
+          "x": 653,
+          "y": 438,
+          "width": 165,
+          "height": 353
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2802/fight-background.webp"
+    },
+    "2803": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2803/background.webp",
+        "element": "/assets/game/scenes/2803/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2803/clip-OutCity_1110.webp",
+          "x": 324,
+          "y": 360,
+          "width": 428,
+          "height": 467
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/2803/clip-OutCity_1109.webp",
+          "x": 836,
+          "y": 600,
+          "width": 88,
+          "height": 199
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2803/fight-background.webp"
+    },
+    "2804": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/2804/background.webp",
+        "element": "/assets/game/scenes/2804/element.webp"
+      },
+      "hotspots": {
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/2804/clip-OutCity_1110.webp",
+          "x": 802,
+          "y": 650,
+          "width": 216,
+          "height": 203
+        }
+      },
+      "fightBackground": "/assets/game/scenes/2804/fight-background.webp"
+    },
+    "3101": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/3101/background.webp",
+        "element": "/assets/game/scenes/3101/element.webp",
+        "skybox": "/assets/game/scenes/3101/skybox.webp"
+      },
+      "hotspots": {
+        "OutCity_1112": {
+          "file": "/assets/game/scenes/3101/clip-OutCity_1112.webp",
+          "x": 880,
+          "y": 223,
+          "width": 553,
+          "height": 639
+        },
+        "OutCity_1111": {
+          "file": "/assets/game/scenes/3101/clip-OutCity_1111.webp",
+          "x": 739,
+          "y": 711,
+          "width": 206,
+          "height": 151
+        },
+        "OutCity_1110": {
+          "file": "/assets/game/scenes/3101/clip-OutCity_1110.webp",
+          "x": 0,
+          "y": 597,
+          "width": 359,
+          "height": 331
+        },
+        "OutCity_1109": {
+          "file": "/assets/game/scenes/3101/clip-OutCity_1109.webp",
+          "x": 1311,
+          "y": 518,
+          "width": 609,
+          "height": 475
+        }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "3102": {
+      "width": 1920,
+      "height": 1080,
+      "layers": {
+        "background": "/assets/game/scenes/3102/background.webp",
+        "element": "/assets/game/scenes/3102/element.webp",
+        "skybox": "/assets/game/scenes/3102/skybox.webp"
+      },
+      "hotspots": {
+        "TollGate_100003": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100003.webp",
+          "x": 881,
+          "y": 283,
+          "width": 239,
+          "height": 173
+        },
+        "TollGate_100007": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100007.webp",
+          "x": 0,
+          "y": 145,
+          "width": 530,
+          "height": 663
+        },
+        "TollGate_100001": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100001.webp",
+          "x": 556,
+          "y": 138,
+          "width": 248,
+          "height": 335
+        },
+        "TollGate_100002": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100002.webp",
+          "x": 812,
+          "y": 475,
+          "width": 195,
+          "height": 198
+        },
+        "TollGate_100004": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100004.webp",
+          "x": 1083,
+          "y": 424,
+          "width": 114,
+          "height": 131
+        },
+        "TollGate_100005": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100005.webp",
+          "x": 1117,
+          "y": 265,
+          "width": 175,
+          "height": 209
+        },
+        "TollGate_100006": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100006.webp",
+          "x": 1319,
+          "y": 90,
+          "width": 308,
+          "height": 359
+        },
+        "TollGate_100008": {
+          "file": "/assets/game/scenes/3102/clip-TollGate_100008.webp",
+          "x": 1348,
+          "y": 466,
+          "width": 138,
+          "height": 153
+        }
+      },
+      "fightBackground": "/assets/game/scenes/3102/fight-background.webp"
+    }
+  },
+  "tollGates": {
+    "100000": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-seventollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-seventollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 363.7, "y": 10.95, "width": 282.49, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 130.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Beachhead_0": { "x": 374.95, "y": 155, "width": 218, "height": 115 },
+        "Btn_Fight0": { "x": 441.25, "y": 276.55, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 557.65, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100001": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fristtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fristtollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 365.3, "y": 10.95, "width": 277.94, "height": 31.1 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Beachhead_0": { "x": 374.45, "y": 161.5, "width": 218, "height": 115 },
+        "Beachhead_1": { "x": 582.45, "y": 402.95, "width": 218, "height": 137 },
+        "Btn_Fight0": { "x": 441.25, "y": 276.55, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 604.3, "y": 371.05, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 554.65, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100002": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-secondtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-secondtollgate/fight-point.webp",
+        "width": 63,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 256.95, "y": 96, "width": 218, "height": 185 },
+        "Beachhead_2": { "x": 611.9, "y": 200.95, "width": 310.05, "height": 91 },
+        "Beachhead_1": { "x": 433.95, "y": 366.95, "width": 218, "height": 177 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 135.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight2": { "x": 574.2, "y": 270.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 494.2, "y": 335.1, "width": 34.1, "height": 27.65 },
+        "Btn_Fight0": { "x": 301.2, "y": 281.1, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 552.15, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100003": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-thirdtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-thirdtollgate/fight-point.webp",
+        "width": 63,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 230.15, "y": 135.05, "width": 218, "height": 135 },
+        "Beachhead_2": { "x": 596.25, "y": 94.1, "width": 218, "height": 150 },
+        "Beachhead_1": { "x": 395.2, "y": 339.15, "width": 218, "height": 147 },
+        "Beachhead_3": { "x": 705.3, "y": 373.1, "width": 228.05, "height": 180.5 },
+        "percentmapget": { "x": 366.25, "y": 12.9, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.9, "y": 17.5, "width": 130.05, "height": 19 },
+        "mapgetper": { "x": 519.7, "y": 17.5, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.6, "y": 10, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 353.25, "y": 251.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 582.25, "y": 247.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 434.2, "y": 325.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 677.25, "y": 334.15, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 551.15, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100004": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fourtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fourtollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 119.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight1": { "x": 603.6, "y": 226.7, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 554.6, "y": 370.7, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 666.6, "y": 295.7, "width": 34.1, "height": 27.65 },
+        "Btn_Fight0": { "x": 329.55, "y": 330.7, "width": 34.1, "height": 27.65 },
+        "Beachhead_1": { "x": 600.7, "y": 81.05, "width": 218, "height": 150 },
+        "Beachhead_0": { "x": 340.1, "y": 200.05, "width": 218, "height": 130 },
+        "Beachhead_3": { "x": 679.2, "y": 326.1, "width": 228, "height": 180 },
+        "Beachhead_2": { "x": 403.05, "y": 402.05, "width": 218, "height": 147.05 },
+        "Btn_RankView": { "x": 551.15, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100005": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fifthtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fifthtollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_3": { "x": 623.15, "y": 396.7, "width": 218, "height": 140 },
+        "Beachhead_2": { "x": 656.9, "y": 98.75, "width": 218, "height": 150 },
+        "Beachhead_1": { "x": 340.1, "y": 262.2, "width": 218, "height": 147 },
+        "Beachhead_0": { "x": 114.05, "y": 189.05, "width": 218, "height": 135 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 133.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 239.2, "y": 320.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 512.2, "y": 232.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 659.2, "y": 244.1, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 640.2, "y": 370.1, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 551.65, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100006": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-sixtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-sixtollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 166.95, "y": 120, "width": 218, "height": 115 },
+        "Beachhead_2": { "x": 634.45, "y": 105.5, "width": 218, "height": 120 },
+        "Beachhead_1": { "x": 357.95, "y": 334.95, "width": 218, "height": 150 },
+        "Beachhead_3": { "x": 657.95, "y": 322.95, "width": 218, "height": 141 },
+        "percentmapget": { "x": 362.4, "y": 10.95, "width": 284.76, "height": 31.1 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 230.2, "y": 236.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 404.25, "y": 305.2, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 647.3, "y": 222.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 813.35, "y": 291.2, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 557.65, "y": 24.3, "width": 106.2, "height": 34.7 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100007": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-eighttollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-eighttollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 364.55, "y": 10.95, "width": 277.2, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 144.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Beachhead_0": { "x": 596.45, "y": 138.5, "width": 309.75, "height": 91 },
+        "Btn_Fight0": { "x": 557.25, "y": 207.6, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 554.65, "y": 23.8, "width": 106.2, "height": 34.7 },
+        "Btn_Fight1": { "x": 186.3, "y": 310.55, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 578.25, "y": 329.55, "width": 34.1, "height": 27.65 },
+        "Beachhead_2": { "x": 517.45, "y": 362.4, "width": 218, "height": 177 },
+        "Beachhead_1": { "x": 139.5, "y": 131.5, "width": 218, "height": 185 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100008": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-ninetollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-ninetollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 166.95, "y": 120, "width": 218, "height": 115 },
+        "Beachhead_2": { "x": 634.45, "y": 105.5, "width": 218, "height": 120 },
+        "Beachhead_1": { "x": 357.95, "y": 334.95, "width": 218, "height": 150 },
+        "Beachhead_3": { "x": 657.95, "y": 322.95, "width": 218, "height": 140 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 252.65, "height": 31.1 },
+        "mapgetper": { "x": 519.6, "y": 18.55, "width": 30.4, "height": 16 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 230.2, "y": 236.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 404.25, "y": 305.2, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 647.3, "y": 222.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 813.35, "y": 291.2, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 555.65, "y": 22.8, "width": 76.55, "height": 36.95 },
+        "Btn_Cashfiesta": { "x": 161.45, "y": 15.4, "width": 105.3, "height": 25.4 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100021": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fristtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fristtollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 365.3, "y": 10.95, "width": 277.94, "height": 31.1 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Beachhead_0": { "x": 374.45, "y": 161.5, "width": 218, "height": 115 },
+        "Beachhead_1": { "x": 582.45, "y": 402.95, "width": 218, "height": 137 },
+        "Btn_Fight0": { "x": 441.25, "y": 276.55, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 604.3, "y": 371.05, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 554.65, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "100022": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-secondtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-secondtollgate/fight-point.webp",
+        "width": 63,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 256.95, "y": 96, "width": 218, "height": 185 },
+        "Beachhead_2": { "x": 611.9, "y": 200.95, "width": 310.05, "height": 91 },
+        "Beachhead_1": { "x": 433.95, "y": 366.95, "width": 218, "height": 177 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 135.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight2": { "x": 574.2, "y": 270.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 494.2, "y": 335.1, "width": 34.1, "height": 27.65 },
+        "Btn_Fight0": { "x": 301.2, "y": 281.1, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 552.15, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "100023": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-thirdtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-thirdtollgate/fight-point.webp",
+        "width": 63,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 230.15, "y": 135.05, "width": 218, "height": 135 },
+        "Beachhead_2": { "x": 596.25, "y": 94.1, "width": 218, "height": 150 },
+        "Beachhead_1": { "x": 395.2, "y": 339.15, "width": 218, "height": 147 },
+        "Beachhead_3": { "x": 705.3, "y": 373.1, "width": 228.05, "height": 180.5 },
+        "percentmapget": { "x": 366.25, "y": 12.9, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.9, "y": 17.5, "width": 130.05, "height": 19 },
+        "mapgetper": { "x": 519.7, "y": 17.5, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.6, "y": 10, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 353.25, "y": 251.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 582.25, "y": 247.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 434.2, "y": 325.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 677.25, "y": 334.15, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 551.15, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "100024": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fourtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fourtollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 119.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight1": { "x": 603.6, "y": 226.7, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 554.6, "y": 370.7, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 666.6, "y": 295.7, "width": 34.1, "height": 27.65 },
+        "Btn_Fight0": { "x": 329.55, "y": 330.7, "width": 34.1, "height": 27.65 },
+        "Beachhead_1": { "x": 600.7, "y": 81.05, "width": 218, "height": 150 },
+        "Beachhead_0": { "x": 340.1, "y": 200.05, "width": 218, "height": 130 },
+        "Beachhead_3": { "x": 679.2, "y": 326.1, "width": 228, "height": 180 },
+        "Beachhead_2": { "x": 403.05, "y": 402.05, "width": 218, "height": 147.05 },
+        "Btn_RankView": { "x": 551.15, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "100025": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fifthtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fifthtollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_3": { "x": 623.15, "y": 396.7, "width": 218, "height": 140 },
+        "Beachhead_2": { "x": 656.9, "y": 98.75, "width": 218, "height": 150 },
+        "Beachhead_1": { "x": 340.1, "y": 262.2, "width": 218, "height": 147 },
+        "Beachhead_0": { "x": 114.05, "y": 189.05, "width": 218, "height": 135 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 133.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 239.2, "y": 320.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 512.2, "y": 232.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 659.2, "y": 244.1, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 640.2, "y": 370.1, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 551.65, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "100026": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-sixtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-sixtollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 166.95, "y": 120, "width": 218, "height": 115 },
+        "Beachhead_2": { "x": 634.45, "y": 105.5, "width": 218, "height": 120 },
+        "Beachhead_1": { "x": 357.95, "y": 334.95, "width": 218, "height": 150 },
+        "Beachhead_3": { "x": 657.95, "y": 322.95, "width": 218, "height": 141 },
+        "percentmapget": { "x": 362.4, "y": 10.95, "width": 284.76, "height": 31.1 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 230.2, "y": 236.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 404.25, "y": 305.2, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 647.3, "y": 222.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 813.35, "y": 291.2, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 557.65, "y": 24.3, "width": 106.2, "height": 34.7 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 }
+      },
+      "fightBackground": "/assets/game/scenes/3101/fight-background.webp"
+    },
+    "100027": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-eighttollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-eighttollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 364.55, "y": 10.95, "width": 277.2, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 144.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Beachhead_0": { "x": 596.45, "y": 138.5, "width": 309.75, "height": 91 },
+        "Btn_Fight0": { "x": 557.25, "y": 207.6, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 554.65, "y": 23.8, "width": 106.2, "height": 34.7 },
+        "Btn_Fight1": { "x": 186.3, "y": 310.55, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 578.25, "y": 329.55, "width": 34.1, "height": 27.65 },
+        "Beachhead_2": { "x": 517.45, "y": 362.4, "width": 218, "height": 177 },
+        "Beachhead_1": { "x": 139.5, "y": 131.5, "width": 218, "height": 185 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100028": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-ninetollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-ninetollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 166.95, "y": 120, "width": 218, "height": 115 },
+        "Beachhead_2": { "x": 634.45, "y": 105.5, "width": 218, "height": 120 },
+        "Beachhead_1": { "x": 357.95, "y": 334.95, "width": 218, "height": 150 },
+        "Beachhead_3": { "x": 657.95, "y": 322.95, "width": 218, "height": 140 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 252.65, "height": 31.1 },
+        "mapgetper": { "x": 519.6, "y": 18.55, "width": 30.4, "height": 16 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 230.2, "y": 236.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 404.25, "y": 305.2, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 647.3, "y": 222.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 813.35, "y": 291.2, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 555.65, "y": 22.8, "width": 76.55, "height": 36.95 },
+        "Btn_Cashfiesta": { "x": 161.45, "y": 15.4, "width": 105.3, "height": 25.4 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100035": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-fifthtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-fifthtollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_3": { "x": 623.15, "y": 396.7, "width": 218, "height": 140 },
+        "Beachhead_2": { "x": 656.9, "y": 98.75, "width": 218, "height": 150 },
+        "Beachhead_1": { "x": 340.1, "y": 262.2, "width": 218, "height": 147 },
+        "Beachhead_0": { "x": 114.05, "y": 189.05, "width": 218, "height": 135 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 272.65, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 133.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 239.2, "y": 320.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 512.2, "y": 232.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 659.2, "y": 244.1, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 640.2, "y": 370.1, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 551.65, "y": 24.3, "width": 106.2, "height": 34.7 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100036": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-sixtollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-sixtollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 166.95, "y": 120, "width": 218, "height": 115 },
+        "Beachhead_2": { "x": 634.45, "y": 105.5, "width": 218, "height": 120 },
+        "Beachhead_1": { "x": 357.95, "y": 334.95, "width": 218, "height": 150 },
+        "Beachhead_3": { "x": 657.95, "y": 322.95, "width": 218, "height": 141 },
+        "percentmapget": { "x": 362.4, "y": 10.95, "width": 284.76, "height": 31.1 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 230.2, "y": 236.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 404.25, "y": 305.2, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 647.3, "y": 222.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 813.35, "y": 291.2, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 557.65, "y": 24.3, "width": 106.2, "height": 34.7 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100037": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-eighttollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-eighttollgate/fight-point.webp",
+        "width": 63,
+        "height": 57
+      },
+      "points": {
+        "percentmapget": { "x": 364.55, "y": 10.95, "width": 277.2, "height": 31.1 },
+        "txtmapget": { "x": 374.8, "y": 15.55, "width": 144.15, "height": 19 },
+        "mapgetper": { "x": 519.6, "y": 15.55, "width": 30.4, "height": 19 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Beachhead_0": { "x": 596.45, "y": 138.5, "width": 309.75, "height": 91 },
+        "Btn_Fight0": { "x": 557.25, "y": 207.6, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 554.65, "y": 23.8, "width": 106.2, "height": 34.7 },
+        "Btn_Fight1": { "x": 186.3, "y": 310.55, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 578.25, "y": 329.55, "width": 34.1, "height": 27.65 },
+        "Beachhead_2": { "x": 517.45, "y": 362.4, "width": 218, "height": 177 },
+        "Beachhead_1": { "x": 139.5, "y": 131.5, "width": 218, "height": 185 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
+    },
+    "100038": {
+      "background": "/assets/game/scenes/tollgate/background.webp",
+      "map": {
+        "file": "/assets/game/scenes/tollgate-ninetollgate/map.webp",
+        "width": 1000,
+        "height": 600
+      },
+      "fightPoint": {
+        "file": "/assets/game/scenes/tollgate-ninetollgate/fight-point.webp",
+        "width": 62,
+        "height": 56
+      },
+      "points": {
+        "Beachhead_0": { "x": 166.95, "y": 120, "width": 218, "height": 115 },
+        "Beachhead_2": { "x": 634.45, "y": 105.5, "width": 218, "height": 120 },
+        "Beachhead_1": { "x": 357.95, "y": 334.95, "width": 218, "height": 150 },
+        "Beachhead_3": { "x": 657.95, "y": 322.95, "width": 218, "height": 140 },
+        "percentmapget": { "x": 366.15, "y": 10.95, "width": 252.65, "height": 31.1 },
+        "mapgetper": { "x": 519.6, "y": 18.55, "width": 30.4, "height": 16 },
+        "Btn_Close": { "x": 961.5, "y": 8.05, "width": 40, "height": 37.3 },
+        "Btn_Fight0": { "x": 230.2, "y": 236.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight1": { "x": 404.25, "y": 305.2, "width": 34.1, "height": 27.65 },
+        "Btn_Fight2": { "x": 647.3, "y": 222.15, "width": 34.1, "height": 27.65 },
+        "Btn_Fight3": { "x": 813.35, "y": 291.2, "width": 34.1, "height": 27.65 },
+        "Btn_RankView": { "x": 555.65, "y": 22.8, "width": 76.55, "height": 36.95 },
+        "Btn_Cashfiesta": { "x": 161.45, "y": 15.4, "width": 105.3, "height": 25.4 }
+      },
+      "fightBackground": "/assets/game/scenes/arena/fight-background.webp"
     }
   }
 }
