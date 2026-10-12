@@ -110,6 +110,12 @@ export const faqItems = pgTable(
 // (empty pouches, level cap 90, currencies: stone, gold, gift coupons).
 const currency = (name: string) => bigint(name, { mode: 'number' }).notNull().default(0)
 
+/** One rolled equipment property (IdentifyPropRec row): IdentifyPropLib id and value. */
+export interface ItemProp {
+  propId: number
+  value: number
+}
+
 export const characters = pgTable(
   'characters',
   {
@@ -170,6 +176,24 @@ export const inventoryItems = pgTable(
     bound: boolean('bound').notNull().default(false),
     equippedSlot: text('equipped_slot'),
     createdAt: createdAt(),
+    // Item instance state (docs/original-data/blacksmith.md). The defaults describe a plain
+    // M2 item: not enhanced, appraised, no properties.
+    // ConsolidateLevel (0-12); attack and HP follow from the item config.
+    enhanceLevel: smallint('enhance_level').notNull().default(0),
+    // InscribeLevel (0-12); the bonus follows from the config and EquipInscribe.ini.
+    inscribeLevel: smallint('inscribe_level').notNull().default(0),
+    // Hardiness. Null = full (the item's MaxHardiness) or an item without durability.
+    durability: integer('durability'),
+    // CanIdentify: true = has hidden properties (appraised once identifyTimes >= 1).
+    canIdentify: boolean('can_identify').notNull().default(false),
+    // IdentifyPropCount (0-4): properties to roll.
+    identifyCount: smallint('identify_count').notNull().default(0),
+    // IdentifyTimes: times rolled (appraise + refines).
+    identifyTimes: integer('identify_times').notNull().default(0),
+    // IdentifyPropRec rows (<= 4); the name comes from identify-props.
+    props: jsonb('props').$type<ItemProp[]>().notNull().default([]),
+    // ImpressIdentRec: the engraved (locked) property position 0-3, null = none.
+    engravedSlot: smallint('engraved_slot'),
   },
   (t) => [
     index('inventory_items_character_id_idx').on(t.characterId),
@@ -177,6 +201,16 @@ export const inventoryItems = pgTable(
       .on(t.characterId, t.equippedSlot)
       .where(sql`${t.equippedSlot} is not null`),
     check('inventory_items_count', sql`${t.count} > 0`),
+    check('inventory_items_enhance_level', sql`${t.enhanceLevel} between 0 and 12`),
+    check('inventory_items_inscribe_level', sql`${t.inscribeLevel} between 0 and 12`),
+    check('inventory_items_durability', sql`${t.durability} >= 0`),
+    check('inventory_items_identify_count', sql`${t.identifyCount} between 0 and 4`),
+    check('inventory_items_identify_times', sql`${t.identifyTimes} >= 0`),
+    check(
+      'inventory_items_props',
+      sql`jsonb_typeof(${t.props}) = 'array' and jsonb_array_length(${t.props}) <= 4`,
+    ),
+    check('inventory_items_engraved_slot', sql`${t.engravedSlot} between 0 and 3`),
   ],
 )
 

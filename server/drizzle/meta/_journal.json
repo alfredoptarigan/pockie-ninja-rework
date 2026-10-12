@@ -29,6 +29,13 @@
       "when": 1791784108456,
       "tag": "0003_pouch_amounts",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791796846919,
+      "tag": "0004_item_instances",
+      "breakpoints": true
     }
   ]
 }

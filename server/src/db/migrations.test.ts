@@ -1,0 +1,155 @@
+import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { drizzle } from 'drizzle-orm/postgres-js'
+import { migrate } from 'drizzle-orm/postgres-js/migrator'
+import postgres from 'postgres'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { loadEnv } from '../env.js'
+
+// Runs the real migration files against a scratch database next to the test database.
+const migrationsFolder = fileURLToPath(new URL('../../drizzle', import.meta.url))
+const testUrl = new URL(loadEnv().DATABASE_URL)
+const scratchName = `${testUrl.pathname.slice(1)}_migrations`
+const scratchUrl = Object.assign(new URL(testUrl), { pathname: `/${scratchName}` }).toString()
+const admin = postgres(testUrl.toString(), { max: 1, onnotice: () => {} })
+// Each run builds a whole database; allow for a busy machine.
+const SLOW = 60_000
+const tmp = mkdtempSync(join(tmpdir(), 'pockie-migrations-'))
+
+/** Applies the first `count` migrations (all when omitted) to the scratch database. */
+async function migrateTo(count?: number) {
+  let folder = migrationsFolder
+  if (count !== undefined) {
+    folder = join(tmp, String(count))
+    cpSync(migrationsFolder, folder, { recursive: true })
+    const journalPath = join(folder, 'meta', '_journal.json')
+    const journal = JSON.parse(readFileSync(journalPath, 'utf8')) as { entries: unknown[] }
+    journal.entries = journal.entries.slice(0, count)
+    writeFileSync(journalPath, JSON.stringify(journal))
+  }
+  const client = postgres(scratchUrl, { max: 1, onnotice: () => {} })
+  try {
+    await migrate(drizzle(client), { migrationsFolder: folder })
+  } finally {
+    await client.end()
+  }
+}
+
+async function recreateScratch() {
+  await admin.unsafe(`drop database if exists "${scratchName}" with (force)`)
+  await admin.unsafe(`create database "${scratchName}"`)
+}
+
+const scratch = () => postgres(scratchUrl, { max: 1, onnotice: () => {} })
+
+afterAll(async () => {
+  await admin.unsafe(`drop database if exists "${scratchName}" with (force)`)
+  await admin.end()
+  rmSync(tmp, { recursive: true, force: true })
+}, SLOW)
+
+describe('migrations', { timeout: SLOW }, () => {
+  it('migrate an empty database to the latest schema', async () => {
+    await recreateScratch()
+    await migrateTo()
+    const sql = scratch()
+    try {
+      const tables = await sql<{ name: string }[]>`
+        select table_name as name from information_schema.tables where table_schema = 'public'`
+      expect(tables.map((t) => t.name)).toEqual(
+        expect.arrayContaining(['users', 'characters', 'inventory_items', 'character_quests']),
+      )
+    } finally {
+      await sql.end()
+    }
+  })
+
+  describe('on a database holding M2 data', () => {
+    const sql = scratch()
+    let characterId = ''
+
+    beforeAll(async () => {
+      await recreateScratch()
+      await migrateTo(4) // 0000-0003: the M2 schema
+      const [user] = await sql<{ id: string }[]>`
+        insert into users (username, email, password_hash)
+        values ('Naruto', 'naruto@example.com', 'x') returning id`
+      const [character] = await sql<{ id: string }[]>`
+        insert into characters (user_id, name, gender, nation, clothing, avatar_id, hp, mp, scene_id, stone)
+        values (${user!.id}, 'Hokage_7', 0, 0, 45, 45, 224, 224, 2101, 500) returning id`
+      characterId = character!.id
+      await sql`
+        insert into inventory_items (character_id, item_id, count, bound, equipped_slot) values
+          (${characterId}, 'i250101', 1, true, 'Weapon'),
+          (${characterId}, 'i300111', 1, false, null),
+          (${characterId}, 'i160006', 7, true, null)`
+      await sql`
+        insert into character_quests (character_id, task_id, state, progress)
+        values (${characterId}, 90000, 2, '[1]'), (${characterId}, 10025, 0, '[0, 2]')`
+      await sql`
+        insert into character_explore_spots (character_id, spot_id, star_level, star_progress)
+        values (${characterId}, 21011, 2, 30)`
+      await migrateTo()
+    }, SLOW)
+
+    afterAll(() => sql.end())
+
+    it('keeps the character, quests and explore spots', async () => {
+      const [character] = await sql`select name, stone, scene_id from characters`
+      expect(character).toEqual({ name: 'Hokage_7', stone: '500', scene_id: 2101 })
+      const quests =
+        await sql`select task_id, state, progress from character_quests order by task_id`
+      expect(quests).toEqual([
+        { task_id: 10025, state: 0, progress: [0, 2] },
+        { task_id: 90000, state: 2, progress: [1] },
+      ])
+      const spots =
+        await sql`select spot_id, star_level, star_progress from character_explore_spots`
+      expect(spots).toEqual([{ spot_id: 21011, star_level: 2, star_progress: 30 }])
+    })
+
+    it('gives existing equipment full durability and plain item defaults', async () => {
+      const items = await sql`
+        select item_id, count, bound, equipped_slot, enhance_level, inscribe_level, durability,
+               can_identify, identify_count, identify_times, props, engraved_slot
+        from inventory_items order by item_id`
+      const plain = {
+        enhance_level: 0,
+        inscribe_level: 0,
+        can_identify: false,
+        identify_count: 0,
+        identify_times: 0,
+        props: [],
+        engraved_slot: null,
+      }
+      expect(items).toEqual([
+        {
+          item_id: 'i160006',
+          count: 7,
+          bound: true,
+          equipped_slot: null,
+          durability: null,
+          ...plain,
+        },
+        {
+          item_id: 'i250101',
+          count: 1,
+          bound: true,
+          equipped_slot: 'Weapon',
+          durability: 100,
+          ...plain,
+        },
+        {
+          item_id: 'i300111',
+          count: 1,
+          bound: false,
+          equipped_slot: null,
+          durability: 1,
+          ...plain,
+        },
+      ])
+    })
+  })
+})

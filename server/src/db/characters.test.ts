@@ -92,6 +92,49 @@ describe('inventory and quests', () => {
     ).rejects.toThrow()
   })
 
+  it('stores item instance state with plain defaults', async () => {
+    const characterId = await character()
+    const [row] = await db
+      .insert(inventoryItems)
+      .values({ characterId, itemId: 'i250104' })
+      .returning()
+    expect(row).toMatchObject({
+      enhanceLevel: 0,
+      inscribeLevel: 0,
+      durability: null,
+      canIdentify: false,
+      identifyCount: 0,
+      identifyTimes: 0,
+      props: [],
+      engravedSlot: null,
+    })
+    const props = [{ propId: 1, value: 2800 }]
+    const [rolled] = await db
+      .insert(inventoryItems)
+      .values({ characterId, itemId: 'i250104', enhanceLevel: 12, inscribeLevel: 12, props })
+      .returning()
+    expect(rolled?.props).toEqual(props)
+  })
+
+  it.each([
+    ['enhance level above 12', { enhanceLevel: 13 }],
+    ['negative enhance level', { enhanceLevel: -1 }],
+    ['inscription level above 12', { inscribeLevel: 13 }],
+    ['negative durability', { durability: -1 }],
+    ['identify count above 4', { identifyCount: 5 }],
+    ['negative identify times', { identifyTimes: -1 }],
+    [
+      'more than 4 properties',
+      { props: Array.from({ length: 5 }, () => ({ propId: 1, value: 1 })) },
+    ],
+    ['engraved slot outside 0-3', { engravedSlot: 4 }],
+  ])('rejects an item with %s', async (_label, override) => {
+    const characterId = await character()
+    await expect(
+      db.insert(inventoryItems).values({ characterId, itemId: 'i250104', ...override }),
+    ).rejects.toThrow()
+  })
+
   it('tracks each quest once per character with its progress', async () => {
     const characterId = await character()
     await db.insert(characterQuests).values({ characterId, taskId: 90000, progress: [0] })
