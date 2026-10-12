@@ -1,10 +1,15 @@
 import { sql } from 'drizzle-orm'
 import {
+  bigint,
+  boolean,
   check,
   index,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
+  primaryKey,
+  smallint,
   text,
   timestamp,
   uniqueIndex,
@@ -98,4 +103,93 @@ export const faqItems = pgTable(
     answer: text('answer').notNull(),
   },
   (t) => [uniqueIndex('faq_items_position_key').on(t.position)],
+)
+
+// Game: one ninja per account (milestone 2). Values follow the original server
+// (firstset.js starting pouches, level cap 90, currencies: stone, gold, gift coupons).
+const currency = (name: string) => bigint(name, { mode: 'number' }).notNull().default(0)
+
+export const characters = pgTable(
+  'characters',
+  {
+    id: id(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    name: text('name').notNull(),
+    nameLower: text('name_lower')
+      .notNull()
+      .generatedAlwaysAs(sql`lower(name)`),
+    gender: smallint('gender').notNull(),
+    nation: smallint('nation').notNull(),
+    clothing: smallint('clothing').notNull(),
+    avatarId: integer('avatar_id').notNull(),
+    level: smallint('level').notNull().default(1),
+    exp: bigint('exp', { mode: 'number' }).notNull().default(0),
+    stone: currency('stone'),
+    gold: currency('gold'),
+    giftCoupon: currency('gift_coupon'),
+    honor: integer('honor').notNull().default(0),
+    hp: integer('hp').notNull(),
+    mp: integer('mp').notNull(),
+    hpPouch: integer('hp_pouch').notNull().default(50),
+    mpPouch: integer('mp_pouch').notNull().default(30),
+    sceneId: integer('scene_id').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex('characters_user_id_key').on(t.userId),
+    uniqueIndex('characters_name_lower_key').on(t.nameLower),
+    index('characters_scene_id_idx').on(t.sceneId),
+    check('characters_name_format', sql`${t.name} ~ '^[A-Za-z0-9_]{3,12}$'`),
+    check('characters_gender', sql`${t.gender} in (0, 1)`),
+    check('characters_nation', sql`${t.nation} between 0 and 4`),
+    check('characters_level', sql`${t.level} between 1 and 90`),
+    check(
+      'characters_amounts',
+      sql`${t.exp} >= 0 and ${t.stone} >= 0 and ${t.gold} >= 0 and ${t.giftCoupon} >= 0 and ${t.hp} >= 0 and ${t.mp} >= 0`,
+    ),
+  ],
+)
+
+export const inventoryItems = pgTable(
+  'inventory_items',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    itemId: text('item_id').notNull(),
+    count: integer('count').notNull().default(1),
+    bound: boolean('bound').notNull().default(false),
+    equippedSlot: text('equipped_slot'),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('inventory_items_character_id_idx').on(t.characterId),
+    uniqueIndex('inventory_items_equipped_slot_key')
+      .on(t.characterId, t.equippedSlot)
+      .where(sql`${t.equippedSlot} is not null`),
+    check('inventory_items_count', sql`${t.count} > 0`),
+  ],
+)
+
+export const characterQuests = pgTable(
+  'character_quests',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    taskId: integer('task_id').notNull(),
+    // 0 accepted, 1 ready to hand in, 2 completed
+    state: smallint('state').notNull().default(0),
+    // Count per sub-task, indexed by SetpSeq
+    progress: jsonb('progress').$type<number[]>().notNull(),
+    acceptedAt: timestamp('accepted_at', { withTimezone: true }).notNull().defaultNow(),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.taskId] }),
+    check('character_quests_state', sql`${t.state} between 0 and 2`),
+  ],
 )
