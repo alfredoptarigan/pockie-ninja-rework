@@ -202,7 +202,8 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       await grantItems(tx, character.id, toGrant)
 
       // `rewards` already holds the search's loot, so hand-ins go in `questRewards`.
-      const { completed, rewards: questRewards } = await rookieHandIns(tx, character.id)
+      const handIns = await rookieHandIns(tx, character.id)
+      rewards.levelsGained += handIns.levelsGained
       const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
       return {
         spotId,
@@ -212,8 +213,8 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
         otherCards: cards.slice(1),
         fight,
         rewards,
-        completed,
-        questRewards,
+        completed: handIns.completed,
+        questRewards: handIns.rewards,
         explore: publicStatus(exploreStatus(updated!, new Date())),
         character: toCharacter(updated!),
       }

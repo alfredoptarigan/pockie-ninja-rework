@@ -66,9 +66,20 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
       const result = await fightMonster(tx, character, monsterId)
       // `rewards` already holds the fight's loot, so hand-ins go in `questRewards`.
-      const { completed, rewards: questRewards } = await rookieHandIns(tx, character.id)
+      // A quest level-up counts as the fight's own, so the result shows it.
+      const handIns = await rookieHandIns(tx, character.id)
+      const rewards = {
+        ...result.rewards,
+        levelsGained: result.rewards.levelsGained + handIns.levelsGained,
+      }
       const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
-      return { ...result, completed, questRewards, character: toCharacter(updated!) }
+      return {
+        ...result,
+        rewards,
+        completed: handIns.completed,
+        questRewards: handIns.rewards,
+        character: toCharacter(updated!),
+      }
     })
   })
 }

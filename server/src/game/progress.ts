@@ -191,7 +191,7 @@ export async function completeQuest(
     itemIds.map((itemId) => ({ itemId, bound: true })),
   )
 
-  const { levelsGained: _levelsGained, ...exp } = expUpdate(character, rewards.exp)
+  const { levelsGained, ...exp } = expUpdate(character, rewards.exp)
   await tx
     .update(characters)
     .set({
@@ -209,7 +209,7 @@ export async function completeQuest(
   if (next && Number(next.AutoAcceptTask) === 1 && exp.level >= Number(next.RequireLevel)) {
     await acceptQuest(tx, characterId, nextId)
   }
-  return { taskId, ...rewards, items: countItems(itemIds) }
+  return { taskId, ...rewards, items: countItems(itemIds), levelsGained }
 }
 
 /** Rookie (tutorial) quests complete as soon as every step is done (RookieTaskSystem). */
@@ -231,5 +231,9 @@ export async function handInReadyRookieQuests(tx: Tx, characterId: string) {
  */
 export async function rookieHandIns(tx: Tx, characterId: string) {
   const rewards = await handInReadyRookieQuests(tx, characterId)
-  return { completed: rewards.map((handIn) => handIn.taskId), rewards }
+  return {
+    completed: rewards.map((handIn) => handIn.taskId),
+    rewards,
+    levelsGained: rewards.reduce((sum, handIn) => sum + handIn.levelsGained, 0),
+  }
 }

@@ -107,6 +107,8 @@ export const questRewardsSchema = z.object({
 /** What completing one quest granted (POST /api/game/npcs/:npcId/talk `rewards`). */
 export const questHandInSchema = questRewardsSchema.extend({
   taskId: z.number().int().positive(),
+  /** Levels its EXP reward gained. */
+  levelsGained: amountSchema,
 })
 
 /**
@@ -116,11 +118,13 @@ export const questHandInSchema = questRewardsSchema.extend({
 export const questCompletionSchema = z.object({
   completed: z.array(z.number().int().positive()),
   rewards: z.array(questHandInSchema),
+  /** Levels all of them gained together. */
+  levelsGained: amountSchema,
 })
 
 /**
  * POST /api/game/fight and /explore/:spotId: their `rewards` is the fight or search loot, so the
- * quest hand-ins come as `questRewards`.
+ * quest hand-ins come as `questRewards`; `rewards.levelsGained` includes their level-ups.
  */
 export const lootQuestCompletionSchema = z.object({
   completed: z.array(z.number().int().positive()),

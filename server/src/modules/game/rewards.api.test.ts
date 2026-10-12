@@ -88,7 +88,15 @@ describe('POST /api/game/npcs/:npcId/talk rewards', () => {
     const body = (await client.post('/api/game/npcs/n11001/talk')).json()
     expect(body.completed).toEqual([90000])
     expect(body.rewards).toEqual([
-      { taskId: 90000, ...none, exp: 5, stone: 100, giftCoupon: 10, items: [newbiePack] },
+      {
+        taskId: 90000,
+        ...none,
+        exp: 5,
+        stone: 100,
+        giftCoupon: 10,
+        items: [newbiePack],
+        levelsGained: 0,
+      },
     ])
     expect(questHandInSchema.array().parse(body.rewards)).toHaveLength(1)
   })
@@ -97,7 +105,9 @@ describe('POST /api/game/npcs/:npcId/talk rewards', () => {
     await db.insert(characterQuests).values({ characterId, taskId: 37102, progress: [4], state: 1 })
     const body = (await client.post('/api/game/npcs/n11003/talk')).json()
     expect(body.completed).toEqual([37102])
-    expect(body.rewards).toEqual([{ taskId: 37102, ...quest37102 }])
+    // 263 EXP at level 1: 15 + 48 + 99 to reach level 4.
+    expect(body.rewards).toEqual([{ taskId: 37102, ...quest37102, levelsGained: 3 }])
+    expect(body.character.level).toBe(4)
     const items = (await client.get('/api/game/inventory')).json().items
     expect(items).toEqual(
       expect.arrayContaining(
@@ -113,11 +123,12 @@ describe('POST /api/game/npcs/:npcId/talk rewards', () => {
 })
 
 describe('rewards of quests completed by other actions', () => {
-  const tutorialCoupons = (taskId: number, exp: number) => ({
+  const tutorialCoupons = (taskId: number, exp: number, levelsGained = 0) => ({
     taskId,
     ...none,
     exp,
     giftCoupon: 10,
+    levelsGained,
   })
   const bagItem = async (itemId: string) =>
     (await client.get('/api/game/inventory'))
@@ -135,11 +146,13 @@ describe('rewards of quests completed by other actions', () => {
     const equipped = (await client.post(`/api/game/items/${fists.id}/equip`)).json()
     expect(questCompletionSchema.parse(equipped)).toEqual({
       completed: [90002],
-      rewards: [tutorialCoupons(90002, 10)],
+      // 5 + 5 + 10 EXP: level 2.
+      rewards: [tutorialCoupons(90002, 10, 1)],
+      levelsGained: 1,
     })
   })
 
-  it('a fight returns them as `questRewards`, keeping the fight `rewards`', async () => {
+  it('a fight returns them as `questRewards`, with the quest level-up in its result', async () => {
     // 90007: kill one Sunflower (n33017) in 2101; pays 40 EXP, 10 coupons and an HP pouch.
     await db.delete(characterQuests).where(eq(characterQuests.characterId, characterId))
     await db.insert(characterQuests).values({ characterId, taskId: 90007, progress: [0] })
@@ -151,10 +164,13 @@ describe('rewards of quests completed by other actions', () => {
     const body = (await client.post('/api/game/fight', { monsterId: 'n33017' })).json()
     expect(body.won).toBe(true)
     expect(body.rewards.exp).toBe(8)
+    // 8 EXP from the Sunflower, then 40 from the quest: 48 reaches level 2 (15).
+    expect(body.rewards.levelsGained).toBe(1)
+    expect(body.character.level).toBe(2)
     expect(lootQuestCompletionSchema.parse(body).completed).toEqual([90007])
     expect(body.questRewards).toEqual([
       {
-        ...tutorialCoupons(90007, 40),
+        ...tutorialCoupons(90007, 40, 1),
         items: [{ itemId: 'i160050', count: 1, nameKey: expect.any(String) }],
       },
     ])
