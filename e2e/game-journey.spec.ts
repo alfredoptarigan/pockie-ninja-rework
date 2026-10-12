@@ -184,6 +184,10 @@ test('a fresh ninja searches an exploration spot and sees the result cards', asy
   await dialog(page, 'Start Exploring?')
     .getByRole('button', { name: 'Explore', exact: true })
     .click()
+  // Five face-down cards: pick the first without paying to peek.
+  await dialog(page, 'Choose an Exploration Card')
+    .getByRole('button', { name: 'Pick card 1' })
+    .click()
   const result = dialog(page, 'Exploration Result')
   const skip = page
     .getByRole('region', { name: 'Battle replay' })

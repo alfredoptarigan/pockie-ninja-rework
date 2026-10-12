@@ -120,7 +120,7 @@ C = `G/local-run/.runtime/swf/LittleNinjasClient/scripts`.
 | Battle parity with the original | Golden tests from the Java formulas and sample `.fight` files |
 | Realtime load | Single process for now; rooms per scene; limits on chat |
 
-## Progress (updated 2026-10-12)
+## Progress (updated 2026-10-12, milestone complete; deferred items listed under their tasks)
 
 Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and pushed to `main`.
 
@@ -172,24 +172,32 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         left. Rebound/absorb/vampire/shields/stun/seal already in `attack()` (2026-10-12).
   - [ ] Deferred: regeneration auras 11861-11863 (pet skills only, no pets before M6); recast
         passives (type 3, `skilladd.ini` stat bonuses) belong to the stats layer, not the engine.
-- [~] **Task 5 — character model.**
+- [x] **Task 5 — character model.**
   - [x] Tables `characters`, `inventory_items`, `character_quests`; stats (`game-core/src/stats.ts`),
         EXP/level-up and drops (`game-core/src/progression.ts`).
-  - [ ] Equipment bonuses beyond attack/defence, HP/MP pouch auto-heal, revive rules
-        (a lost fight currently leaves 1 HP).
-- [~] **Task 6 — game API** (`server/src/modules/game/*`, all under `/api/game`).
+  - [x] Equipment bonuses (2026-10-12): `server/src/game/equipment.ts` applies every active
+        item's base props, `OtherProp` pairs, identify and inscription rows and set bonuses
+        through `game-core/equipment` into `deriveStats`; items of another weapon class, wrong
+        gender or 0 durability give nothing, as in the original. Pouch auto-heal and revive
+        rules were done under Task 8.
+- [x] **Task 6 — game API** (`server/src/modules/game/*`, all under `/api/game`).
   - [x] `GET creation`, `POST characters`, `GET character`, `GET scene`, `POST fight`,
         `GET quests`, `POST quests/:taskId/accept`, `POST npcs/:npcId/talk`, `GET inventory`,
         `POST items/:id/use`, `POST items/:id/equip`, `POST travel`. The Fire Village tutorial
         (90000 → 90002) plays end to end in `actions.api.test.ts`.
   - [x] Explore spots: `GET /explore`, `POST /explore/:spotId` (300 s cooldown, `7 + level/10` per
         UTC day, key items, stars with bonus, five cards, row lock), migration
-        `0002_explore_spots.sql`. Not done: paid card peeks, "senior" search, bag-space checks;
-        monster factories 18/20/22/24/26/28 are missing from the data (fight cards become nothing).
-        `docs/original-data/world.md` says item cards are 50%; the Java gives 50% to pet eggs.
+        `0002_explore_spots.sql`. Card peeks (`POST /explore/:spotId/peek`, Stone then Gold or
+        Gift Coupons, `CanLookCount`), start/pick flow and senior search (key item, no quota or
+        cooldown) and the bag guard follow `OutSearchSystem.java`; only pet egg cards have the
+        50% grant chance (doc fixed). Factories 18-28 are absent from every backup copy and
+        only referenced by `GostRate=0` spots (importer validates weighted references).
+        Pending cards live in process memory (single process; persistence needs a schema).
   - [x] All five village tutorials (90000-94015) play to the end in `tutorials.api.test.ts`;
         fights now complete quests, collect quests remove their items.
   - [x] Rate limits on every game route (`rate-limits.ts`, guarded by a test).
+  - [x] `POST /items/:id/unequip` (`no_item`, `not_equipped`, `bag_full`), Unequip button in the
+        inventory window.
   - [x] Available quests (`GET /quests/available`) and character stats in `GET /character`.
 - [x] **Task 7 — realtime presence and chat.** `server/src/modules/realtime/realtime.ts`
       (Socket.IO on `app.server`, `pn_session` cookie + origin check, rooms `scene:<id>`, travel
@@ -254,12 +262,13 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
               drawn 1:1 and anchored (top strip, UI_RoleIcon card, UI_SmallMap plaque, EXP strip,
               eight UI_BottomMenu buttons, monster cards on HobgoblinBG), Arial and Reborn's gold
               buttons, Chat, Stats, Inventory (equipment slots and bag grid), NPC dialog, Quest
-              Navigation and the quest detail window. Open: no unequip API, Reborn-only buttons left
-              out. Deferred with reasons: the VP groove is `Energy` (max 200, +100 per UTC day,
+              Navigation and the quest detail window. Open: Reborn-only buttons left out. Deferred with reasons: the VP groove is `Energy` (max 200, +100 per UTC day,
               `EnergySystem.java`) and only auto-fight, home and pub fights spend it (M3+);
               titles come from items (`RoleTitleSystem`, later item feature); the player-list
               rank is `CompeteRank`, the arena ranking (M4).
-- [~] **Task 9 — copy fixes and verification.**
+- [x] **Task 9 — copy fixes and verification.**
+  - [x] E2E journeys (`e2e/game-journey.spec.ts`): tutorial to level up and world chat, a
+        second account sees the chat and the scene player list, explore search, revive.
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.
   - [x] Reviewed translations survive `i18n:sentences merge` (`tools/i18n/overrides.json`, required).
