@@ -1,7 +1,7 @@
 # Plan: World & Economy (Milestone 3)
 
 **Project**: Pockie Ninja Remastered
-**Status**: wave 1 merged; wave 2 started 2026-10-12 (decisions 1-14 recorded)
+**Status**: waves 1 and 2 merged (2026-10-12); wave 3 (tasks 10, 11) next
 **Complexity**: Large
 
 ## Goal
@@ -235,10 +235,26 @@ one-line wiring), and the `shared/src/index.ts` re-export.
 | Wave | Tasks (agents)                              | Notes                                                        |
 | ---- | ------------------------------------------- | ------------------------------------------------------------ |
 | 1    | 1 import, 2 schema, 3 assets, 4 game-core, 5 i18n (done, merged 2026-10-12) | five disjoint folders; 2 merges first so wave 2 can start   |
-| 2    | 6 shops (Codex), 7 forge, 8 world, 8b daily (Codex), 9 instances | five disjoint feature folders; coordinator merges `app.ts` and window wiring |
+| 2    | 6 shops (Codex), 7 forge, 8 world, 8b daily (Codex), 9 instances (done, merged 2026-10-12) | five disjoint feature folders; coordinator merges `app.ts` and window wiring |
 | 3    | 10 verification, 11 VIP                     | after wave 2 merges                                          |
 
 Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 first and 9 alone.
+
+## Wave 2 notes (merged 2026-10-12)
+
+- Windows: every feature window is registered in `client/src/game/windows.tsx` (shop, merchant,
+  forge, gates, pubFight, daily); NPC menus come from the npc.ini script (`field-data.ts`
+  `MENUS`), Kisuke Urahara (n17003) opens Las Noches, a Pub Fight button shows in the 13
+  `pub-fights.json` scenes. Forge gear icons and Appraise/Repair live in the inventory.
+- Task bosses need one of their quests (n32002 needs 10014 etc.); fields are blocked on the
+  World Map until visited, so the village Leave button is the way out.
+- Choices to confirm with the user: a full bag refuses a toll gate card take and keeps the cards
+  (the original loses it); toll gate exchange output is unbound; appraising an item without an
+  identify list is free and gives no properties.
+- Deferred: forge free-counter talismans (no counters in the data), identify rolls on explore
+  item cards and shop gear, quest commands 2126/2114 (quests 59501/59502), kill-count quest
+  progress from toll gates, lobby/instance scene changes (runs start from 171), Las Noches auto
+  mode, floor broadcasts.
 
 ## Migrations (serialized: all written by task 2, in this order)
 
