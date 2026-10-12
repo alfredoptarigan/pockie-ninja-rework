@@ -62,6 +62,7 @@ export const villageScene: SceneView = {
   npcs: [{ id: 'n11001', nameKey: 'lg_name_n11001', x: 0, y: 0, scale: 100 }],
   exploreSpots: [],
   links: [171],
+  visitedScenes: [111],
   revive: { homeExpLoss: 0, gold: 1, goldAllowed: true },
 }
 

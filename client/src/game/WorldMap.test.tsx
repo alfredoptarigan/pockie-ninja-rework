@@ -6,9 +6,10 @@ import { character } from '../test/game'
 import { json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import { WorldMap } from './WorldMap'
 
-const renderMap = (who: Character = character) => {
+const renderMap = (who: Character = character, visitedScenes = [111, 2101]) => {
   const onClose = vi.fn()
   const fetchMock = mockApi({
+    'GET /api/game/scene': () => json({ sceneId: who.sceneId, visitedScenes }),
     'POST /api/game/travel': () => json({ character: { ...who, sceneId: 2101 } }),
   })
   renderWithProviders(<WorldMap character={who} onClose={onClose} />)
@@ -30,6 +31,32 @@ describe('WorldMap', () => {
     // Other nations' villages and fields are not on this ninja's roads.
     expect(place('Water Village')).toHaveAttribute('aria-disabled', 'true')
     expect(place('Verdant Alley')).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('leaves places the ninja has never entered grey, as refreshMap does with ScenesEntered', async () => {
+    renderMap(character, [111])
+
+    // Until the scene arrives only the place the ninja stands in is coloured.
+    expect(place('Smelting Mountains').querySelector('img')).toBeNull()
+    await waitFor(() =>
+      expect(document.querySelector('img[src="/assets/game/map/111-up.webp"]')).toBeInTheDocument(),
+    )
+    // Unvisited: the grey painting shows through, the button still travels and explains itself.
+    expect(place('Smelting Mountains').querySelector('img')).toBeNull()
+    expect(place('Smelting Mountains')).toHaveAttribute('aria-disabled', 'false')
+    fireEvent.mouseEnter(place('Smelting Mountains'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Entry level: Level 1')
+  })
+
+  it('colours every place the ninja has entered', async () => {
+    renderMap()
+
+    await waitFor(() =>
+      expect(
+        document.querySelector('img[src="/assets/game/map/2101-up.webp"]'),
+      ).toBeInTheDocument(),
+    )
+    expect(document.querySelector('img[src="/assets/game/map/121-up.webp"]')).toBeNull()
   })
 
   it('shows the original tooltip of a place on hover, for this ninja’s village', () => {
@@ -62,7 +89,7 @@ describe('WorldMap', () => {
     fireEvent.click(place('Fire Village (You are here)'))
     fireEvent.click(place('Water Village'))
 
-    expect(fetchMock).not.toHaveBeenCalled()
+    expect(requestBody(fetchMock, 'POST /api/game/travel')).toBeUndefined()
   })
 
   it('stacks overlapping places by their original depth', () => {

@@ -42,6 +42,18 @@ describe('GET /api/game/scene', () => {
     expect(scene.links).toEqual([171])
   })
 
+  it('records every scene the ninja has entered (ScenesEntered) for the world map', async () => {
+    // The home village counts from the first look, like SetScenePass on login.
+    expect((await client.get('/api/game/scene')).json().visitedScenes).toEqual([111])
+
+    await goToForgeHighlandsWithFists()
+    expect((await client.get('/api/game/scene')).json().visitedScenes).toEqual([111, 2101])
+    // Coming back adds nothing twice.
+    expect((await client.get('/api/game/scene')).json().visitedScenes).toEqual([111, 2101])
+    const [row] = await db.select().from(characters).where(eq(characters.id, characterId))
+    expect(row!.scenesEntered).toEqual([111, 2101])
+  })
+
   it('lists the field monsters, hiding normal monsters more than 5 levels above the player', async () => {
     await goToForgeHighlandsWithFists()
     const scene = (await client.get('/api/game/scene')).json()

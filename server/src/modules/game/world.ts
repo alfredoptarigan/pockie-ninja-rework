@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
@@ -30,12 +30,30 @@ export function sceneMonsters(sceneId: number, playerLevel: number) {
     .slice(0, MAX_LISTED_MONSTERS)
 }
 
+/**
+ * SceneSystem.SetScenePass: remembers the scene the ninja stands in (ScenesEntered), once.
+ * Looking at the scene is what entering it means, so this covers creation and every travel.
+ */
+export async function recordSceneEntered(db: Db, characterId: string, sceneId: number) {
+  const visited = characters.scenesEntered
+  const [row] = await db
+    .update(characters)
+    .set({
+      scenesEntered: sql`case when ${sceneId} = any(${visited}) then ${visited} else array_append(${visited}, ${sceneId}) end`,
+    })
+    .where(eq(characters.id, characterId))
+    .returning({ scenesEntered: visited })
+  return row?.scenesEntered ?? [sceneId]
+}
+
 export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
   app.get('/scene', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const sceneId = character.sceneId
+    const visitedScenes = await recordSceneEntered(db, character.id, sceneId)
     return {
       sceneId,
+      visitedScenes,
       nameKey: `lg_Scene_BackGround_${sceneId}`,
       monsters: sceneMonsters(sceneId, character.level).map((monster) => ({
         ...monster,
