@@ -12,8 +12,8 @@ import { QuestLog } from './QuestLog'
 import { QuestNavigation } from './QuestNavigation'
 import { SceneView } from './SceneView'
 import { Dialog, GameButton, Notice } from './skin'
-import type { SceneNpc } from './types'
-import { destinations, isVillage, villageOf } from './world'
+import type { BagHighlight, SceneNpc } from './types'
+import { destinations, isDefeated, isVillage, villageOf } from './world'
 import { WorldMap } from './WorldMap'
 
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
@@ -73,7 +73,17 @@ function GameScreen({ character }: { character: Character }) {
   const travel = useTravel()
   const [openWindow, setWindow] = useState<Window | null>(null)
   const [npc, setNpc] = useState<SceneNpc | null>(null)
+  const [bagHighlight, setBagHighlight] = useState<BagHighlight | undefined>()
   const close = () => setWindow(null)
+  const open = (window: Window) => {
+    setBagHighlight(undefined)
+    setWindow(window)
+  }
+  const openBag = (highlight: BagHighlight) => {
+    setNpc(null)
+    setBagHighlight(highlight)
+    setWindow('bag')
+  }
 
   const openNpc = (target: SceneNpc) => {
     setWindow(null)
@@ -100,7 +110,12 @@ function GameScreen({ character }: { character: Character }) {
         className="relative overflow-hidden"
         style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
       >
-        <SceneView key={character.sceneId} character={character} onNpc={openNpc} />
+        <SceneView
+          key={character.sceneId}
+          character={character}
+          onNpc={openNpc}
+          onOpenBag={openBag}
+        />
         {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
         <div
           className="pointer-events-none absolute top-0 left-0"
@@ -111,24 +126,30 @@ function GameScreen({ character }: { character: Character }) {
           <ScenePlaque
             sceneId={scene.data?.sceneId}
             inVillage={inVillage}
+            defeated={isDefeated(character)}
             onVillage={onVillage}
-            onWorldMap={() => setWindow('map')}
+            onWorldMap={() => open('map')}
           />
           {travel.isError && (
             <div className="pointer-events-auto absolute top-[110px] right-1 w-[168px]">
               <Notice tone="error">{errorMessage(travel.error)}</Notice>
             </div>
           )}
-          <QuestNavigation character={character} scene={scene.data} onNpc={openNpc} />
+          <QuestNavigation
+            character={character}
+            scene={scene.data}
+            onNpc={openNpc}
+            onOpenBag={openBag}
+          />
           <RealtimePanels characterId={character.id} />
           <ExpStrip character={character} />
-          <MenuBar character={character} onOpen={setWindow} />
+          <MenuBar character={character} onOpen={open} />
         </div>
       </main>
 
       {openWindow === 'bag' && (
         <Dialog title="Inventory" onClose={close} className="w-[28rem]">
-          <Inventory />
+          <Inventory highlight={bagHighlight} />
         </Dialog>
       )}
       {openWindow === 'character' && <CharacterWindow character={character} onClose={close} />}

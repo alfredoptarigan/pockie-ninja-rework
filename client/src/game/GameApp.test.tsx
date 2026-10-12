@@ -1,7 +1,15 @@
 import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { character, newbiePackQuest, potion, villageScene } from '../test/game'
+import {
+  character,
+  equipOffer,
+  fists,
+  newbiePackQuest,
+  potion,
+  stats,
+  villageScene,
+} from '../test/game'
 import { createFakeSocket, type FakeSocket } from '../test/socket'
 import { json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import GameApp from './GameApp'
@@ -22,9 +30,11 @@ const field = {
 
 function renderGame(handlers: Parameters<typeof mockApi>[0] = {}, player = character) {
   const fetchMock = mockApi({
-    'GET /api/game/character': () => json({ character: player }),
+    'GET /api/game/character': () => json({ character: player, stats }),
     'GET /api/game/scene': () => json(player.sceneId === 111 ? villageScene : field),
     'GET /api/game/quests': () => json({ quests: [] }),
+    'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
+    'GET /api/game/inventory': () => json({ items: [{ ...fists, equippedSlot: 'Weapon' }] }),
     ...handlers,
   })
   renderWithProviders(<GameApp view="game" />, { route: '/play', path: '/play' })
@@ -66,9 +76,9 @@ describe('GameScreen', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 
     await userEvent.click(within(menu).getByRole('button', { name: 'Character' }))
-    const stats = screen.getByRole('dialog', { name: 'Stats' })
-    expect(stats).toHaveTextContent('Ninja_01')
-    await userEvent.click(within(stats).getByRole('button', { name: 'Close' }))
+    const statsWindow = screen.getByRole('dialog', { name: 'Stats' })
+    expect(statsWindow).toHaveTextContent('Ninja_01')
+    await userEvent.click(within(statsWindow).getByRole('button', { name: 'Close' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 
     await userEvent.click(within(menu).getByRole('button', { name: 'Quests' }))
@@ -96,6 +106,8 @@ describe('GameScreen', () => {
     let quests: Quest[] = []
     const fetchMock = renderGame({
       'GET /api/game/quests': () => json({ quests }),
+      'GET /api/game/quests/available': () =>
+        json({ available: quests.length ? [] : [equipOffer], completed: [90000, 90001] }),
       'POST /api/game/npcs/n11001/talk': () =>
         json({
           dialogKey: 'lg_Say_n11001',
@@ -152,6 +164,132 @@ describe('GameScreen', () => {
   })
 })
 
+describe('character info', () => {
+  it('shows the combat stats and pouches in the Character window', async () => {
+    renderGame({}, { ...character, hpPouch: 1000 })
+    const card = await screen.findByRole('region', { name: 'Character' })
+    expect(within(card).getByLabelText('Pouches')).toHaveTextContent('HP pouch1,000 / 10,000')
+
+    await userEvent.click(
+      within(screen.getByRole('navigation', { name: 'Menu' })).getByRole('button', {
+        name: 'Character',
+      }),
+    )
+    const combat = within(screen.getByRole('dialog', { name: 'Stats' })).getByRole('region', {
+      name: 'Combat stats',
+    })
+    // Attributes are stored x100; speed is 1000 / AtkTime; defence 154 takes 10% off.
+    expect(await within(combat).findByText('8 - 9')).toBeVisible()
+    expect(combat).toHaveTextContent('Strength13')
+    expect(combat).toHaveTextContent('Speed1.00')
+    expect(combat).toHaveTextContent('Defense154 (-10% damage)')
+    expect(combat).toHaveTextContent('Block2')
+  })
+})
+
+describe('defeat and revive', () => {
+  const defeatedInField = { ...character, hp: 0, sceneId: 2101 }
+  const fieldTerms = { homeExpLoss: 51, gold: 1, goldAllowed: true }
+  const sceneWith = (revive = fieldTerms) => ({
+    'GET /api/game/scene': () => json({ ...field, revive }),
+  })
+
+  it('offers to go home for EXP and blocks travel while defeated', async () => {
+    const fetchMock = renderGame(
+      {
+        ...sceneWith(),
+        'POST /api/game/revive': () => json({ character: { ...character, hp: 1 } }),
+      },
+      defeatedInField,
+    )
+    const dialog = await screen.findByRole('dialog', { name: 'Defeated' })
+    const home = within(dialog).getByRole('region', { name: 'Return to village' })
+    expect(await within(home).findByText(/You lose 51 EXP/)).toBeVisible()
+    const here = within(dialog).getByRole('region', { name: 'Revive here' })
+    expect(here).toHaveTextContent('You need 1 Gold and have 0.')
+    expect(within(here).getByRole('button', { name: 'Revive here' })).toBeDisabled()
+
+    await userEvent.click(within(home).getByRole('button', { name: 'Return to village' }))
+    expect(requestBody(fetchMock, 'POST /api/game/revive')).toEqual({ mode: 'home' })
+  })
+
+  it('revives on the spot for Gold', async () => {
+    const fetchMock = renderGame(
+      {
+        ...sceneWith(),
+        'POST /api/game/revive': () =>
+          json({ character: { ...defeatedInField, hp: 160, gold: 4 } }),
+      },
+      { ...defeatedInField, gold: 5 },
+    )
+    const dialog = await screen.findByRole('dialog', { name: 'Defeated' })
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Revive here' }))
+    expect(requestBody(fetchMock, 'POST /api/game/revive')).toEqual({ mode: 'gold' })
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+  })
+
+  it('says why reviving here is closed and keeps travel locked after closing', async () => {
+    renderGame(sceneWith({ ...fieldTerms, goldAllowed: false }), { ...defeatedInField, gold: 5 })
+    const dialog = await screen.findByRole('dialog', { name: 'Defeated' })
+    expect(await within(dialog).findByText('You cannot revive in this area.')).toBeVisible()
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Close' }))
+
+    expect(screen.getByRole('button', { name: 'Village' })).toBeDisabled()
+    // The HUD keeps a way back to the revive window.
+    await userEvent.click(screen.getByRole('button', { name: 'Revive' }))
+    expect(screen.getByRole('dialog', { name: 'Defeated' })).toBeVisible()
+  })
+})
+
+describe('tutorial nudges', () => {
+  const pack = { ...potion, id: 'p1', itemId: 'i159104', count: 1, nameKey: 'lg_x' }
+
+  it('Go on the newbie pack step opens the bag and points at the pack', async () => {
+    renderGame({
+      'GET /api/game/quests': () =>
+        json({
+          quests: [
+            {
+              ...newbiePackQuest,
+              steps: [{ ...newbiePackQuest.steps[0]!, command: 'use', itemId: 'i159104' }],
+            },
+          ],
+        }),
+      'GET /api/game/inventory': () => json({ items: [potion, pack] }),
+    })
+    const nav = await screen.findByRole('region', { name: 'Quest Navigation' })
+    expect(await within(nav).findByText('Open your bag and use the item.')).toBeVisible()
+    await userEvent.click(within(nav).getByRole('button', { name: 'Go: Newbie Pack' }))
+
+    const bag = await screen.findByRole('dialog', { name: 'Inventory' })
+    const marked = await within(bag).findByText('Next step')
+    expect(marked.closest('li')).toHaveTextContent('Unknown item')
+    expect(within(bag).getAllByText('Next step')).toHaveLength(1)
+  })
+
+  it('Go on the weapon step points at the unequipped weapons', async () => {
+    renderGame({
+      'GET /api/game/quests': () =>
+        json({
+          quests: [
+            {
+              ...newbiePackQuest,
+              taskId: 90002,
+              nameKey: 'lg_Task_90002',
+              steps: [{ ...newbiePackQuest.steps[0]!, command: 'equip' }],
+            },
+          ],
+        }),
+      'GET /api/game/inventory': () => json({ items: [potion, fists] }),
+    })
+    const nav = await screen.findByRole('region', { name: 'Quest Navigation' })
+    await userEvent.click(await within(nav).findByRole('button', { name: /^Go:/ }))
+    const bag = await screen.findByRole('dialog', { name: 'Inventory' })
+    const marked = await within(bag).findByText('Next step')
+    expect(within(marked.closest('li')!).getByRole('button', { name: /^Equip/ })).toBeVisible()
+  })
+})
+
 describe('QuestNavigation', () => {
   const guardSquad: Quest = {
     taskId: 10002,
@@ -196,6 +334,8 @@ describe('QuestNavigation', () => {
 
   it('lists available quests and closes to a button', async () => {
     renderGame({
+      'GET /api/game/quests/available': () =>
+        json({ available: [equipOffer], completed: [90000, 90001] }),
       'POST /api/game/npcs/n11001/talk': () =>
         json({ dialogKey: 'lg_Say_n11001', nameKey: 'lg_name_n11001', completed: [], character }),
     })

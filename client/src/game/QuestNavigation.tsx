@@ -1,11 +1,11 @@
 import type { Character } from '@pockie/shared'
 import { useId, useState, type ReactNode } from 'react'
-import { errorMessage, useQuests, useTravel } from './api'
+import { errorMessage, useAvailableQuests, useQuests, useTravel } from './api'
 import { Steps } from './QuestLog'
 import { GameButton, Notice, Tabs } from './skin'
 import { GameText, plainText } from './text'
-import type { SceneNpc, SceneView } from './types'
-import { availableQuests, destinations, questTarget, sceneNameKey } from './world'
+import type { BagHighlight, Quest, SceneNpc, SceneView } from './types'
+import { DEFEATED_REASON, destinations, isDefeated, questTarget, sceneNameKey } from './world'
 
 type Tab = 'accepted' | 'available'
 const TABS: { id: Tab; title: string }[] = [
@@ -22,6 +22,16 @@ interface Entry {
   details: ReactNode
   sceneId?: number
   npcId?: string
+  /** Tutorial steps done in the bag (open the newbie pack, equip the weapon). */
+  bag?: BagHighlight
+}
+
+/** The bag item an unfinished rookie command step needs: the item to use, or a weapon. */
+export function bagStep(quest: Quest): BagHighlight | undefined {
+  const step = quest.steps.find((s, i) => (quest.progress[i] ?? 0) < s.target)
+  if (step?.command === 'use' && step.itemId) return { itemId: step.itemId }
+  if (step?.command === 'equip') return { equipment: true }
+  return undefined
 }
 
 /**
@@ -32,15 +42,19 @@ export function QuestNavigation({
   character,
   scene,
   onNpc,
+  onOpenBag,
 }: {
   character: Character
   scene: SceneView | undefined
   onNpc: (npc: SceneNpc) => void
+  /** Opens the bag pointing at the items a tutorial step needs. */
+  onOpenBag: (highlight: BagHighlight) => void
 }) {
   const [open, setOpen] = useState(true)
   const [tab, setTab] = useState<Tab>('accepted')
   const [expanded, setExpanded] = useState<number | null>(null)
   const quests = useQuests()
+  const available = useAvailableQuests()
   const travel = useTravel()
   const ids = useId()
 
@@ -65,7 +79,9 @@ export function QuestNavigation({
             taskId: quest.taskId,
             nameKey: quest.nameKey,
             status: quest.state === 1 ? 'Completed' : 'In progress',
-            hint: target.npcId ? `Find ${plainText(`lg_name_${target.npcId}`, 'them')}` : '',
+            hint:
+              bagHint(bagStep(quest)) ??
+              (target.npcId ? `Find ${plainText(`lg_name_${target.npcId}`, 'them')}` : ''),
             details: (
               <>
                 <GameText k={quest.descriptionKey} />
@@ -73,27 +89,31 @@ export function QuestNavigation({
               </>
             ),
             ...target,
+            bag: bagStep(quest),
           }
         })
-      : availableQuests(character, held)
+      : [...(available.data?.available ?? [])]
           .sort(
-            (a, b) => Number(b.scene === character.sceneId) - Number(a.scene === character.sceneId),
+            (a, b) =>
+              Number(b.sceneId === character.sceneId) - Number(a.sceneId === character.sceneId),
           )
           .map((offer) => ({
             taskId: offer.taskId,
-            nameKey: `lg_Task_${offer.taskId}`,
+            nameKey: offer.nameKey,
             status: 'Available',
-            hint: `Talk to ${plainText(`lg_name_${offer.npc}`, 'a villager')} in ${plainText(sceneNameKey(offer.scene), 'another area')}`,
+            hint: `Talk to ${plainText(`lg_name_${offer.npcId}`, 'a villager')} in ${plainText(sceneNameKey(offer.sceneId), 'another area')}`,
             details: offer.talkKey ? <GameText k={offer.talkKey} /> : 'No details.',
-            sceneId: offer.scene,
-            npcId: offer.npc,
+            sceneId: offer.sceneId,
+            npcId: offer.npcId,
           }))
 
   /** What Go does for an entry, or undefined when it cannot help. */
+  const defeated = isDefeated(character)
   const goFor = (entry: Entry) => {
+    if (entry.bag) return () => onOpenBag(entry.bag!)
     if (entry.sceneId !== undefined && entry.sceneId !== character.sceneId) {
       const place = destinations(character).find((d) => d.sceneId === entry.sceneId)
-      return place?.open ? () => travel.mutate(entry.sceneId!) : undefined
+      return place?.open && !defeated ? () => travel.mutate(entry.sceneId!) : undefined
     }
     const npc = scene?.npcs.find((n) => n.id === entry.npcId)
     return npc ? () => onNpc(npc) : undefined
@@ -128,6 +148,7 @@ export function QuestNavigation({
         className="game-inset mt-0.5 min-h-0 flex-1 overflow-auto p-1.5 font-game text-xs"
       >
         {travel.isError && <Notice tone="error">{errorMessage(travel.error)}</Notice>}
+        {defeated && <Notice tone="error">{DEFEATED_REASON} Travel is closed until then.</Notice>}
         {entries.length === 0 && (
           <p className="p-1">
             {tab === 'accepted' ? 'No quests yet. Look in Available.' : 'Nothing new right now.'}
@@ -180,4 +201,11 @@ export function QuestNavigation({
       </div>
     </section>
   )
+}
+
+function bagHint(bag: BagHighlight | undefined) {
+  if (!bag) return undefined
+  return 'itemId' in bag
+    ? 'Open your bag and use the item.'
+    : 'Open your bag and equip your weapon.'
 }

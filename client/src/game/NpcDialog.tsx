@@ -1,12 +1,11 @@
 import type { Character } from '@pockie/shared'
 import { useState, type ReactNode } from 'react'
-import { errorMessage, useAcceptQuest, useQuests, type useTalk } from './api'
+import { errorMessage, useAcceptQuest, useAvailableQuests, type useTalk } from './api'
 import { useNpcPhoto } from './art'
 import { completedNotice } from './QuestLog'
 import { Dialog, GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { SceneNpc } from './types'
-import { questOffers } from './world'
 
 /** NPC conversation like the original: photo on the left, words and options on the right. */
 export function NpcDialog({
@@ -20,13 +19,15 @@ export function NpcDialog({
   character: Character
   onClose: () => void
 }) {
-  const quests = useQuests()
+  const available = useAvailableQuests()
   const accept = useAcceptQuest()
   const photo = useNpcPhoto(npc.id)
   const [showQuests, setShowQuests] = useState(false)
   const [accepted, setAccepted] = useState<number | null>(null)
   const offers = talk.isSuccess
-    ? questOffers(npc.id, character.sceneId, character, quests.data ?? [])
+    ? (available.data?.available ?? []).filter(
+        (offer) => offer.npcId === npc.id && offer.sceneId === character.sceneId,
+      )
     : []
 
   const onAccept = async (taskId: number) => {

@@ -43,7 +43,11 @@ export function FightSummary({
         <p>
           {won
             ? `You defeated ${enemy ? fighterName(enemy.name) : 'the monster'}.`
-            : `${enemy ? fighterName(enemy.name) : 'The monster'} defeated you. Heal before your next fight.`}
+            : `${enemy ? fighterName(enemy.name) : 'The monster'} defeated you. ${
+                result.character.hp <= 0
+                  ? 'Revive to keep playing: return to your village or revive here for Gold.'
+                  : 'Heal before your next fight.'
+              }`}
         </p>
         <p>
           You dealt {dealt} damage to {enemyName}. Your foes dealt {taken} damage to you.

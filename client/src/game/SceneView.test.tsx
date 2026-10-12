@@ -1,7 +1,7 @@
 import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import { character, villageScene } from '../test/game'
+import { character, fists, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import { SceneView } from './SceneView'
 import type { FightResult, SceneView as Scene } from './types'
@@ -45,9 +45,13 @@ const fightResult: FightResult = {
   character: { ...character, level: 2, hp: 150, sceneId: 2101 },
 }
 
+const armed = {
+  'GET /api/game/inventory': () => json({ items: [{ ...fists, equippedSlot: 'Weapon' }] }),
+}
+
 describe('SceneView', () => {
   it('opens NPCs from the keyboard list', async () => {
-    mockApi({ 'GET /api/game/scene': () => json(villageScene) })
+    mockApi({ ...armed, 'GET /api/game/scene': () => json(villageScene) })
     const onNpc = vi.fn()
     renderWithProviders(<SceneView character={character} onNpc={onNpc} />)
 
@@ -60,6 +64,7 @@ describe('SceneView', () => {
 
   it('fights a monster and shows the result', async () => {
     const fetchMock = mockApi({
+      ...armed,
       'GET /api/game/scene': () => json(field),
       'POST /api/game/fight': () => json(fightResult),
     })
@@ -78,6 +83,7 @@ describe('SceneView', () => {
   it('replays the battle and fights again from the result window', async () => {
     let fights = 0
     mockApi({
+      ...armed,
       'GET /api/game/scene': () => json(field),
       'POST /api/game/fight': () => {
         fights++
@@ -98,6 +104,7 @@ describe('SceneView', () => {
 
   it('shows why a fight was refused', async () => {
     mockApi({
+      ...armed,
       'GET /api/game/scene': () => json(field),
       'POST /api/game/fight': () => apiError(400, 'no_hp', 'Heal before you fight again.'),
     })
@@ -106,5 +113,65 @@ describe('SceneView', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Heal before you fight again.')
+  })
+
+  it('warns before fighting without a weapon and can open the bag', async () => {
+    const fetchMock = mockApi({
+      'GET /api/game/scene': () => json(field),
+      'GET /api/game/inventory': () => json({ items: [fists] }),
+      'POST /api/game/fight': () => json(fightResult),
+    })
+    const onOpenBag = vi.fn()
+    renderWithProviders(
+      <SceneView
+        character={{ ...character, sceneId: 2101 }}
+        onNpc={vi.fn()}
+        onOpenBag={onOpenBag}
+      />,
+    )
+    const fight = await screen.findByRole('button', { name: 'Fight Sunflower' })
+    await waitFor(() => expect(fetchMock.mock.calls.length).toBeGreaterThanOrEqual(2))
+
+    await userEvent.click(fight)
+    const warning = await screen.findByRole('dialog', { name: 'No weapon equipped' })
+    await userEvent.click(within(warning).getByRole('button', { name: 'Open Bag' }))
+    expect(onOpenBag).toHaveBeenCalledWith({ equipment: true })
+    expect(requestBody(fetchMock, 'POST /api/game/fight')).toBeUndefined()
+
+    await userEvent.click(fight)
+    const again = await screen.findByRole('dialog', { name: 'No weapon equipped' })
+    await userEvent.click(within(again).getByRole('button', { name: 'Fight anyway' }))
+    expect(await screen.findByRole('dialog', { name: 'Victory' })).toBeVisible()
+  })
+
+  it('tells a defeated player to revive after the fight and offers no rematch', async () => {
+    const lost: FightResult = {
+      ...fightResult,
+      won: false,
+      replay: { ...fightResult.replay, winner: 'defenders' },
+      rewards: { exp: 0, stone: 0, items: [], levelsGained: 0 },
+      character: { ...character, hp: 0, sceneId: 2101 },
+    }
+    mockApi({
+      ...armed,
+      'GET /api/game/scene': () => json(field),
+      'POST /api/game/fight': () => json(lost),
+    })
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Defeat' })
+    expect(dialog).toHaveTextContent('Sunflower defeated you. Revive to keep playing')
+    expect(within(dialog).queryByRole('button', { name: 'Fight Again' })).not.toBeInTheDocument()
+  })
+
+  it('locks fights while defeated', async () => {
+    mockApi({ ...armed, 'GET /api/game/scene': () => json(field) })
+    renderWithProviders(
+      <SceneView character={{ ...character, hp: 0, sceneId: 2101 }} onNpc={vi.fn()} />,
+    )
+    expect(await screen.findByRole('dialog', { name: 'Defeated' })).toBeVisible()
+    expect(
+      await screen.findByRole('button', { name: 'Fight Sunflower', hidden: true }),
+    ).toBeDisabled()
   })
 })

@@ -1,5 +1,5 @@
-import type { Character } from '@pockie/shared'
-import type { InventoryItem, Quest, SceneView } from '../game/types'
+import type { Character, CharacterStats } from '@pockie/shared'
+import type { InventoryItem, Quest, QuestOffer, SceneView } from '../game/types'
 
 export const character: Character = {
   id: 'c1',
@@ -22,6 +22,37 @@ export const character: Character = {
   mpPouch: 0,
   pouchMax: 10000,
   sceneId: 111,
+}
+
+export const stats: CharacterStats = {
+  strength: 1365,
+  agility: 1365,
+  stamina: 1365,
+  maxHp: 160,
+  maxMp: 40,
+  minAttack: 8,
+  maxAttack: 9,
+  atkTime: 1000,
+  defense: 154,
+  dodge: 1,
+  hit: 0,
+  crit: 0,
+  critAttach: 230,
+  parry: 2,
+  pierce: 0,
+  tough: 0,
+  neglectDefense: 0,
+  counter: 5,
+  weaponClass: 4,
+}
+
+/** Quest 90002 (equip the weapon), handed out by the Fire Village Elder. */
+export const equipOffer: QuestOffer = {
+  taskId: 90002,
+  npcId: 'n11001',
+  sceneId: 111,
+  nameKey: 'lg_Task_90002',
+  talkKey: null,
 }
 
 export const villageScene: SceneView = {
