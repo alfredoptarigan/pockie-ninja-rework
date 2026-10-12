@@ -17,6 +17,7 @@ import {
   dropItems,
   dropLib,
   item,
+  itemNameKey,
   levels,
   nationScenes,
   npc,
@@ -32,6 +33,7 @@ import {
   completeReadyRookieQuests,
   consumeOne,
   grantItems,
+  handInReadyRookieQuests,
   loadQuests,
   saveQuests,
   type Tx,
@@ -40,6 +42,7 @@ import {
   availableQuests,
   EQUIP_WEAPON_COMMAND,
   questLock,
+  questRewards,
   recordCommand,
   recordTalk,
   stepCommand,
@@ -155,6 +158,7 @@ export async function actionRoutes(
           ...q,
           nameKey: `lg_Task_${q.taskId}`,
           descriptionKey: `lg_TaskDes_${q.taskId}`,
+          rewards: questRewards(q.taskId),
           steps: subTasks(q.taskId).map((step) => ({
             descriptionKey: `lg_${step.SubTaskDescription}`,
             target: Number(step.TargetRequireNum),
@@ -186,7 +190,7 @@ export async function actionRoutes(
         count: row.count,
         bound: row.bound,
         equippedSlot: row.equippedSlot,
-        nameKey: `lg_${item(row.itemId)?.Name ?? row.itemId}`,
+        nameKey: itemNameKey(row.itemId),
         ...(item(row.itemId)?.class === 'EquipItem'
           ? { fitsOutfit: fitsOutfit(item(row.itemId)!, character.avatarId) }
           : {}),
@@ -232,7 +236,7 @@ export async function actionRoutes(
         given.map((itemId) => ({ itemId, bound: true })),
       )
 
-      const completed = await completeReadyRookieQuests(tx, character.id)
+      const handIns = await handInReadyRookieQuests(tx, character.id)
       // Ready main/branch quests are handed in at their submit NPC.
       for (const quest of await loadQuests(tx, character.id)) {
         const row = task(quest.taskId)
@@ -243,13 +247,16 @@ export async function actionRoutes(
           row.SubmitNpcConfig === npcId &&
           Number(row.SubmitNpcSceneID) === character.sceneId
         ) {
-          if (await completeQuest(tx, character.id, quest.taskId)) completed.push(quest.taskId)
+          const handIn = await completeQuest(tx, character.id, quest.taskId)
+          if (handIn) handIns.push(handIn)
         }
       }
       return {
         dialogKey: `lg_Say_${npcId}`,
         nameKey: `lg_${npc(npcId)?.Name ?? npcId}`,
-        completed,
+        completed: handIns.map((handIn) => handIn.taskId),
+        /** What each completed quest granted, in `completed` order. */
+        rewards: handIns,
         character: await reload(tx, character.id),
       }
     })

@@ -3,7 +3,7 @@ import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
 import { characters } from '../../db/schema.js'
-import { fightMonster } from '../../game/combat.js'
+import { fightMonster, monsterDrops } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
 import { completeReadyRookieQuests } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
@@ -37,7 +37,10 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return {
       sceneId,
       nameKey: `lg_Scene_BackGround_${sceneId}`,
-      monsters: sceneMonsters(sceneId, character.level),
+      monsters: sceneMonsters(sceneId, character.level).map((monster) => ({
+        ...monster,
+        drops: monsterDrops(monster.id),
+      })),
       npcs: sceneSpawns(sceneId)
         .filter(({ id }) => {
           const row = npc(id)

@@ -2,6 +2,7 @@ import type { Character } from '@pockie/shared'
 import { useId, useState, type ReactNode } from 'react'
 import { errorMessage, useAvailableQuests, useQuests, useTravel } from './api'
 import { Steps } from './QuestLog'
+import { QuestRewardList } from './Rewards'
 import { GameButton, Notice, Tabs } from './skin'
 import { GameText, plainText } from './text'
 import type { BagHighlight, Quest, SceneNpc, SceneView } from './types'
@@ -86,6 +87,7 @@ export function QuestNavigation({
               <>
                 <GameText k={quest.descriptionKey} />
                 <Steps quest={quest} />
+                <QuestRewardList rewards={quest.rewards} />
               </>
             ),
             ...target,
@@ -102,7 +104,12 @@ export function QuestNavigation({
             nameKey: offer.nameKey,
             status: 'Available',
             hint: `Talk to ${plainText(`lg_name_${offer.npcId}`, 'a villager')} in ${plainText(sceneNameKey(offer.sceneId), 'another area')}`,
-            details: offer.talkKey ? <GameText k={offer.talkKey} /> : 'No details.',
+            details: (
+              <>
+                {offer.talkKey ? <GameText k={offer.talkKey} /> : 'No details.'}
+                <QuestRewardList rewards={offer.rewards} />
+              </>
+            ),
             sceneId: offer.sceneId,
             npcId: offer.npcId,
           }))

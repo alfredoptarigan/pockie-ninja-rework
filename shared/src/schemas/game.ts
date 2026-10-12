@@ -78,3 +78,41 @@ export interface CharacterStats {
   counter: number
   weaponClass: number
 }
+
+const itemIdSchema = z.string().regex(/^i\d+$/)
+const amountSchema = z.number().int().nonnegative()
+
+/** An item and how many of it (quest rewards, what a hand-in granted). */
+export const rewardItemSchema = z.object({
+  itemId: itemIdSchema,
+  count: z.number().int().positive(),
+  /** en.json key of the item's name. */
+  nameKey: z.string(),
+})
+
+/**
+ * What a quest pays (Task.ini Reward*), as the original quest window lists it
+ * (GET /api/game/quests and /quests/available `rewards`). Quests that pay a random pick from a
+ * drop list have no `items`, like the original.
+ */
+export const questRewardsSchema = z.object({
+  exp: amountSchema,
+  stone: amountSchema,
+  gold: amountSchema,
+  giftCoupon: amountSchema,
+  honor: amountSchema,
+  items: z.array(rewardItemSchema),
+})
+
+/** What completing one quest granted (POST /api/game/npcs/:npcId/talk `rewards`). */
+export const questHandInSchema = questRewardsSchema.extend({
+  taskId: z.number().int().positive(),
+})
+
+/** An item a monster can drop (GET /api/game/scene `monsters[].drops`), without its chance. */
+export const monsterDropSchema = z.object({ itemId: itemIdSchema, nameKey: z.string() })
+
+export type RewardItem = z.infer<typeof rewardItemSchema>
+export type QuestRewards = z.infer<typeof questRewardsSchema>
+export type QuestHandIn = z.infer<typeof questHandInSchema>
+export type MonsterDrop = z.infer<typeof monsterDropSchema>

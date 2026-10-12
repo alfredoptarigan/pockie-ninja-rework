@@ -4,7 +4,7 @@ import { gameMotions } from '../../generated/game-assets'
 import type { SceneMonster, SceneNpc } from '../types'
 import { createGame, LABEL_STYLE, loadSheet, setHighlight } from './game'
 import { frameAt, originOf, tickMs } from './motion'
-import { PORTRAIT_CELL, type PictureLayout } from './picture-layout'
+import { PORTRAIT_CELL, type PictureLayout, type PicturePortrait } from './picture-layout'
 import Phaser from 'phaser'
 
 export interface PictureActions {
@@ -21,6 +21,8 @@ const TITLE_SIZE = 30
 const NAME_CHARS = 10
 /** Building names sit this far down the building's clip (its roof). */
 const TITLE_DROP = 0.22
+/** Drops panel under a hovered portrait (scene pixels). */
+const DROPS = { width: 340, header: 44, row: 44, icon: 36, pad: 12, below: 46 }
 
 class PictureScene extends Phaser.Scene {
   private animated: { sprite: Phaser.GameObjects.Sprite; durations: number[] }[] = []
@@ -39,8 +41,10 @@ class PictureScene extends Phaser.Scene {
       ...under,
       ...hotspots.map((h) => h.spot.file),
       ...portraits.map((p) => p.portrait),
+      ...portraits.flatMap((p) => p.drops.flatMap((drop) => (drop.icon ? [drop.icon] : []))),
     ]
-    for (const file of [...files, skybox]) {
+    // Monsters share most drops: load each icon once.
+    for (const file of new Set([...files, skybox])) {
       if (file) this.load.image(file, file)
     }
     for (const figure of figures) loadSheet(this, figure.sheet)
@@ -110,7 +114,8 @@ class PictureScene extends Phaser.Scene {
   /** The area's monsters as portraits in a row at the top; a click starts the fight. */
   private drawPortraits() {
     const { size } = PORTRAIT_CELL
-    for (const { monster, portrait, name: full, x, y } of this.layout.portraits) {
+    for (const cell of this.layout.portraits) {
+      const { monster, portrait, name: full, x, y } = cell
       const name = full.length > NAME_CHARS ? `${full.slice(0, NAME_CHARS - 1)}...` : full
       const g = this.add.graphics()
       g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(x - size / 2, y - size / 2, size, size, 10)
@@ -121,6 +126,9 @@ class PictureScene extends Phaser.Scene {
         const image = this.add.image(x, y - 6, portrait)
         image.setScale((size - 24) / Math.max(image.width, image.height))
         this.interactive(image, '', () => this.actions.onMonster(monster))
+        const drops = this.drawDrops(cell)
+        image.on('pointerover', () => drops.setVisible(true))
+        image.on('pointerout', () => drops.setVisible(false))
       }
       const small = { ...LABEL_STYLE, strokeThickness: 5 }
       this.add
@@ -132,6 +140,41 @@ class PictureScene extends Phaser.Scene {
         .setOrigin(0.5, 1)
       this.add.text(x, y + size / 2 + 23, name, { ...small, fontSize: '22px' }).setOrigin(0.5)
     }
+  }
+
+  /** Hidden list of what a monster can drop (icon and name per row), under its portrait. */
+  private drawDrops({ drops, x, y }: PicturePortrait) {
+    const { width, header, row, icon, pad, below } = DROPS
+    const height = header + Math.max(1, drops.length) * row + pad
+    const left = Phaser.Math.Clamp(x - width / 2, 0, this.layout.width - width)
+    const panel = this.add
+      .container(left, y + PORTRAIT_CELL.size / 2 + below)
+      .setDepth(999)
+      .setVisible(false)
+    const g = this.add.graphics()
+    g.fillStyle(0x1c0f07, 0.92).fillRoundedRect(0, 0, width, height, 10)
+    g.lineStyle(3, 0xd9a441).strokeRoundedRect(0, 0, width, height, 10)
+    const small = { ...LABEL_STYLE, strokeThickness: 5 }
+    panel.add(g)
+    panel.add(
+      this.add
+        .text(width / 2, pad, 'Drops', { ...small, fontSize: '24px', color: '#ffd23c' })
+        .setOrigin(0.5, 0),
+    )
+    const rows = drops.length > 0 ? drops : [{ name: 'Nothing', icon: undefined }]
+    rows.forEach((drop, i) => {
+      const rowY = header + i * row + row / 2
+      if (drop.icon && this.textures.exists(drop.icon)) {
+        const image = this.add.image(pad + icon / 2, rowY, drop.icon)
+        panel.add(image.setScale(icon / Math.max(image.width, image.height)))
+      }
+      panel.add(
+        this.add
+          .text(pad * 2 + icon, rowY, drop.name, { ...small, fontSize: '22px' })
+          .setOrigin(0, 0.5),
+      )
+    })
+    return panel
   }
 
   override update(time: number) {

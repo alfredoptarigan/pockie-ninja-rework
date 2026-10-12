@@ -46,6 +46,22 @@ describe('pictureLayout', () => {
     expect((sunflower!.x + bee!.x) / 2).toBe(layout.width / 2)
   })
 
+  it('gives each portrait its drops with English names and icons', () => {
+    const drops = [
+      { itemId: 'i250101', nameKey: 'lg_Equip_Blunt1' },
+      { itemId: 'i999999', nameKey: 'lg_i999999' },
+    ]
+    const [sunflower, bee] = pictureLayout({
+      ...field,
+      monsters: [{ ...field.monsters[0]!, drops }, field.monsters[1]!],
+    })!.portraits
+    expect(sunflower!.drops).toEqual([
+      { itemId: 'i250101', name: 'Dogsmasher', icon: '/assets/game/items/icon_weapon_blunt1.webp' },
+      { itemId: 'i999999', name: 'Unknown item', icon: undefined },
+    ])
+    expect(bee!.drops).toEqual([])
+  })
+
   it('has no picture for scenes without art', () => {
     expect(pictureLayout({ ...villageScene, sceneId: 171 })).toBeUndefined()
   })

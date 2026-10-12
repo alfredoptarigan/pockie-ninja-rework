@@ -6,6 +6,7 @@ import {
   type Hotspot,
   type MotionSheet,
 } from '../../generated/game-assets'
+import { itemIcon } from '../ItemIcon'
 import { plainText } from '../text'
 import type { SceneMonster, SceneNpc, SceneView } from '../types'
 import worldData from '../world-data.json'
@@ -40,6 +41,8 @@ export interface PicturePortrait {
   monster: SceneMonster
   portrait: string
   name: string
+  /** What it can drop, shown while the portrait is hovered; `icon` is the item's picture. */
+  drops: { itemId: string; name: string; icon?: string }[]
   /** Centre of the cell. */
   x: number
   y: number
@@ -118,6 +121,11 @@ export function pictureLayout(scene: SceneView): PictureLayout | undefined {
     monster,
     portrait,
     name: plainText(monster.nameKey, 'Monster'),
+    drops: (monster.drops ?? []).map(({ itemId, nameKey }) => ({
+      itemId,
+      name: plainText(nameKey, 'Unknown item'),
+      icon: itemIcon(itemId)?.file,
+    })),
     x: Math.round(left + i * (size + gap) + size / 2),
     y: top + size / 2,
   }))

@@ -1,11 +1,13 @@
 // Response shapes of /api/game/* that @pockie/shared does not export yet (see
 // server/src/modules/game/*). Character, CreationOptions and the realtime types come from shared.
-import type { Character } from '@pockie/shared'
+import type { Character, MonsterDrop, QuestHandIn, QuestRewards } from '@pockie/shared'
 
 export interface SceneMonster {
   id: string
   nameKey: string
   level: number
+  /** What it can drop (GET /scene); optional so the UI copes with responses without it. */
+  drops?: MonsterDrop[]
 }
 
 export interface SceneNpc {
@@ -37,6 +39,8 @@ export interface Quest {
   nameKey: string
   descriptionKey: string
   steps: QuestStep[]
+  /** What the quest pays; optional so the UI copes with responses without it. */
+  rewards?: QuestRewards
 }
 
 export interface QuestStep {
@@ -54,6 +58,7 @@ export interface QuestOffer {
   sceneId: number
   nameKey: string
   talkKey: string | null
+  rewards?: QuestRewards
 }
 
 /** Bag items to point at for a tutorial step: one item to use, or the weapons to equip. */
@@ -74,6 +79,8 @@ export interface TalkResult {
   dialogKey: string
   nameKey: string
   completed: number[]
+  /** What each completed quest granted, in `completed` order. */
+  rewards?: QuestHandIn[]
   character: Character
 }
 

@@ -87,6 +87,8 @@ export function npcSkillIds(npcId: string) {
 }
 
 export const item = (id: string) => load<Record<string, Row>>('items')[id]
+/** en.json key of an item's name (`lg_<Name>`), or `lg_<id>` for items without a row. */
+export const itemNameKey = (id: string) => `lg_${item(id)?.Name ?? id}`
 export const levels = () =>
   load<{ levelexp: Record<string, number>; role: { maxlevel: number } }>('levels')
 

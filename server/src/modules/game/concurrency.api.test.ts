@@ -239,7 +239,7 @@ describe('atomic state changes', () => {
       await completeQuest(tx, characterId, HANDED_IN_QUEST),
     ])
 
-    expect(claims).toEqual([true, false])
+    expect(claims.map(Boolean)).toEqual([true, false])
     expect(await bag()).toEqual({ [QUEST_REWARD.itemId]: 1 })
     expect(await row()).toMatchObject({ stone: QUEST_REWARD.stone, exp: QUEST_REWARD.exp })
   })

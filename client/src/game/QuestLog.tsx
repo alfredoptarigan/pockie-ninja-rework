@@ -1,4 +1,5 @@
 import { useQuests } from './api'
+import { QuestRewardList } from './Rewards'
 import { Notice } from './skin'
 import { GameText, plainText } from './text'
 import type { Quest } from './types'
@@ -55,6 +56,7 @@ export function QuestLog() {
             <GameText k={quest.descriptionKey} />
           </p>
           <Steps quest={quest} />
+          <QuestRewardList rewards={quest.rewards} />
         </li>
       ))}
     </ul>
