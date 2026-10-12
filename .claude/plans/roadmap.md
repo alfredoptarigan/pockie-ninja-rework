@@ -7,7 +7,7 @@ milestone gets a detailed plan; later ones are outlines and will be re-planned w
 |---|---|---|---|
 | 1 | Landing site + accounts | Done | `landing-auth.plan.md` |
 | 2 | First Playable | In progress | `m2-first-playable.plan.md` |
-| 3 | World & Economy | Outline | |
+| 3 | World & Economy | Draft plan | `m3-world-economy.plan.md` |
 | 4 | Social & Competition | Outline | |
 | 5 | Reborn Update | Outline | |
 | 6 | Home, Collection & Launch | Outline | |
