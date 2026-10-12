@@ -73,6 +73,29 @@ export const i298001: EquipConfig = {
   UsePopsinger: 2,
 }
 
+/** item.ini i281601-07: Oracle Outfit (set 8160), Cloth Hat Shoes Amulet Glove Girdle Ring. */
+const oracle = (EquipBaseType: number, Defense: number, UseLevel: number): EquipConfig => ({
+  AttackMin: 0,
+  AttackMax: 0,
+  ConsolidateMaxLevel: EquipBaseType === 3 ? 0 : 12,
+  ConsolidateRate: 5,
+  Defense,
+  EquipBaseType,
+  MaxHardiness: EquipBaseType === 3 ? 1 : 200,
+  Sex: 2,
+  SuitID: 8160,
+  UnDecHardiness: EquipBaseType === 3 ? 1 : 0,
+  UseLevel,
+  UsePopsinger: 7,
+})
+export const i281601 = oracle(2, 119, 17)
+export const i281602 = oracle(2, 34, 13)
+export const i281603 = oracle(2, 28, 15)
+export const i281604 = oracle(3, 0, 14)
+export const i281605 = oracle(2, 30, 18)
+export const i281606 = oracle(2, 25, 19)
+export const i281607 = oracle(3, 0, 20)
+
 export const appraised = { canIdentify: false, identifyTimes: 0 }
 
 const inscribeRow = (

@@ -14,7 +14,7 @@ export const INSCRIBE_MAX_LEVEL = 12
 /** Client seal type 0 Low (i161008) or 1 High (i161009). */
 export type SealType = 'low' | 'high'
 
-/** SealOdds.ini `[SealOdds]` (inside inscribe-levels.json). */
+/** SealOdds.ini `[SealOdds]` (LowOdds 3, HighOdds 6). */
 export interface SealOdds {
   LowOdds: number
   HighOdds: number
