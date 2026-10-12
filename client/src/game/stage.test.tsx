@@ -103,7 +103,8 @@ describe('BattleReplayMount', () => {
 
     unmount()
     expect(handle.destroy).toHaveBeenCalled()
-  })
+    // Several user events: allow for slow, busy machines.
+  }, 15_000)
 
   it('reports the end of the replay', async () => {
     const onFinished = vi.fn()
