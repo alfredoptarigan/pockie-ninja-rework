@@ -214,6 +214,13 @@ describe('GameScreen', () => {
 })
 
 describe('character info', () => {
+  it('hides the empty VP groove of the player card (decision 12)', async () => {
+    renderGame()
+    const card = await screen.findByTestId('role-card')
+    expect(card.style.clipPath).toContain('evenodd')
+    expect(screen.queryByRole('meter', { name: /VP|Energy/ })).not.toBeInTheDocument()
+  })
+
   it('shows the combat stats and pouches in the Character window', async () => {
     renderGame({}, { ...character, hpPouch: 1000 })
     const card = await screen.findByRole('region', { name: 'Character' })

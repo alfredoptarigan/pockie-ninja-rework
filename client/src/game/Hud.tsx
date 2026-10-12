@@ -144,6 +144,12 @@ function CardBar({
   )
 }
 
+/**
+ * The card art has a third groove under HP and MP for the original Energy (VP) bar. Energy is not
+ * ported (decisions 1 and 12), so the empty groove is cut out of the card (205x78 HUD pixels).
+ */
+const NO_VP_GROOVE = "path(evenodd, 'M0 0H205V78H0Z M77 41.5H205V54.5H145V53H77Z')"
+
 /** Portrait, name, level, HP/MP bars and pouch icons at the top left (UI_RoleIcon). */
 export function PlayerCard({ character }: { character: Character }) {
   const portrait = useOutfitPortrait(character.clothing)
@@ -154,7 +160,11 @@ export function PlayerCard({ character }: { character: Character }) {
       aria-label="Character"
       className="pointer-events-auto absolute top-[31px] left-[6px] h-[82px] w-[220px] font-game"
     >
-      <div className="game-role-card absolute top-0 left-0 h-[78px] w-[205px]" />
+      <div
+        data-testid="role-card"
+        className="game-role-card absolute top-0 left-0 h-[78px] w-[205px]"
+        style={{ clipPath: NO_VP_GROOVE }}
+      />
       <div className="absolute top-0 left-0 size-[82px] overflow-hidden rounded-full">
         {portrait && <img src={portrait} alt="" className="size-full object-cover" />}
       </div>
