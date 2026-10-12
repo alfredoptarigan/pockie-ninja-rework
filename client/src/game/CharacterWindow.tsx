@@ -50,7 +50,9 @@ function PouchRefill({ character }: { character: Character }) {
         <p>Your pouches are full.</p>
       ) : (
         <>
-          <p>Refill both pouches for {cost} Gold or {cost} Gift Coupons.</p>
+          <p>
+            Refill both pouches for {cost} Gold or {cost} Gift Coupons.
+          </p>
           <div className="flex gap-2">
             <GameButton
               small
