@@ -119,3 +119,69 @@ C = `G/local-run/.runtime/swf/LittleNinjasClient/scripts`.
 | Translation volume (about 51k keys) | Resumable cached batches; review only slice strings now |
 | Battle parity with the original | Golden tests from the Java formulas and sample `.fight` files |
 | Realtime load | Single process for now; rooms per scene; limits on chat |
+
+## Progress (updated 2026-10-12)
+
+Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and pushed to `main`.
+
+- [x] **Task 1 — data import.** `tools/game-data/import.ts` → `server/data/game/*.json` (31 files,
+      original field names). Specs: `docs/original-data/{world,quests-items,characters,battle}.md`.
+- [~] **Task 2 — translation.**
+  - [x] Indonesian source extracted (`tools/i18n/source.id.json`).
+  - [x] Name glossary, 7,150 names (`tools/i18n/glossary.json`).
+  - [~] Sentences: 30/51 batches done, including every string the slice uses. **Another assistant
+        is finishing the rest via `tools/i18n/HANDOFF.md`** (`pnpm i18n:sentences status`).
+  - [ ] When all batches are done: `pnpm i18n:sentences merge` → `tools/i18n/en.json`; hand-review
+        the slice strings; serve en.json to the client (Task 8).
+- [ ] **Task 3 — asset export** (not started).
+- [~] **Task 4 — battle engine** (`game-core/src/battle`).
+  - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,
+        counters, parry skill 7777, typed replay, golden test from an original replay.
+  - [ ] Scripted skills (`RES/javascript/skill/*.js`): port the ones the starting outfits and the
+        slice monsters use (e.g. 1945, 2042); buffs (`FightBuff.ini`); begin-fight skills (8888);
+        MP costs.
+- [~] **Task 5 — character model.**
+  - [x] Tables `characters`, `inventory_items`, `character_quests`; stats (`game-core/src/stats.ts`),
+        EXP/level-up and drops (`game-core/src/progression.ts`).
+  - [ ] Equipment bonuses beyond attack/defence, HP/MP pouch auto-heal, revive rules
+        (a lost fight currently leaves 1 HP).
+- [~] **Task 6 — game API** (`server/src/modules/game/*`, all under `/api/game`).
+  - [x] `GET creation`, `POST characters`, `GET character`, `GET scene`, `POST fight`,
+        `GET quests`, `POST quests/:taskId/accept`, `POST npcs/:npcId/talk`, `GET inventory`,
+        `POST items/:id/use`, `POST items/:id/equip`, `POST travel`. The Fire Village tutorial
+        (90000 → 90002) plays end to end in `actions.api.test.ts`.
+  - [ ] Explore spots (`explore-spots.json` + factories, global 300 s cooldown, daily count
+        `7 + level/10`, cards).
+  - [ ] Remaining sub-task types the tutorials use (check 90003-90015 and 91000-94015).
+  - [ ] Per-action rate limits on every game route (fight already has one).
+- [ ] **Task 7 — realtime presence and chat** (not started).
+- [ ] **Task 8 — game client** (not started).
+- [ ] **Task 9 — copy fixes and verification** (not started).
+
+## Next steps for another assistant (can run while the translation finishes)
+
+Read `CLAUDE.md`, `.claude/plans/roadmap.md` and this file first. Conventions: English only,
+TDD for game logic, `pnpm typecheck && pnpm lint && pnpm test` before every commit, small
+conventional commits pushed to `main`. Tests use the `pockie_remastered_test` database.
+
+1. **Task 7 — realtime (Socket.IO).** Add `socket.io` to the Fastify server (same process),
+   authenticate with the `pn_session` cookie (`findSession` in
+   `server/src/modules/auth/sessions.ts`), one room per scene (character `sceneId`), a per-scene
+   player list (join, leave, travel), world and scene chat (length limit, rate limit, plain text
+   only). Shared event types in `shared/src/schemas/`. Tests with `socket.io-client`.
+2. **Task 3 — asset export.** Extend `tools/export-assets.ts`: every motion of the 92 base outfits
+   (`server/data/game/avatar-clothing.json`) and the slice monsters (`npcs.json` `ResourceID`)
+   as sprite strips + manifest; village backgrounds 111/121/131/141/151 and first fields
+   2101/2201/2301/2401/2501 (`apache/source/movieclip/scene/*`); building clips
+   (`scene-buildings.json`); NPC art. Raw SWFs stay in the backup.
+3. **Task 6 — explore spots** as described above (spec in `docs/original-data/world.md`).
+4. **Task 4 — scripted skills** for the starting outfits (`creation-outfits.json` →
+   `avatar-skills.json`) and the 2101-2501 monsters (`npc-records.json` →
+   `npc-record-values.json`), each ported with a test, in `game-core/src/battle`.
+5. **Task 8 — client.** `/play` mounts Phaser (scene picture with clickable NPCs/buildings,
+   explore spots, monster portraits; battle replay player) with a React HUD in a 2011-style skin:
+   creation flow (`GET /api/game/creation`), character panel, quest log, inventory, world map,
+   player list, chat. Text comes from `tools/i18n/en.json` keys (`nameKey`, `descriptionKey`).
+6. **Task 9.** Landing copy says level cap 100 (should be 90) and uses old names (e.g. the sprite
+   manifest's "Uzumaki Naruto" → "Naruto Uzumaki"); coverage ≥ 80%; security review of the game
+   API and sockets; Playwright journey (create → tutorial → fight → level up → chat).
