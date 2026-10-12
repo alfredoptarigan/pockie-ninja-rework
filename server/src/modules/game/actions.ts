@@ -1,4 +1,4 @@
-// Player actions in the world: quests, NPC talk, items, equipment and travel.
+// Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
 import {
   createRandom,
   deriveStats,
@@ -17,6 +17,8 @@ import {
   dropItems,
   dropLib,
   item,
+  levels,
+  nationScenes,
   npc,
   scene,
   sceneSpawns,
@@ -43,7 +45,7 @@ import {
 } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
-import { requireUser, toCharacter } from './characters.js'
+import { requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 const READY = 1
@@ -55,6 +57,13 @@ const itemParams = z.object({ id: z.uuid() })
 const taskParams = z.object({ taskId: z.coerce.number().int().positive() })
 const npcParams = z.object({ npcId: z.string().regex(/^n\d+$/) })
 const travelBody = z.object({ sceneId: z.number().int().positive() })
+const reviveBody = z.object({ mode: z.enum(['home', 'gold']) })
+
+// relive.ini: going home costs 5% of the next level's EXP and leaves 1 HP; reviving on the spot
+// costs 1 Gold (capital type 2) and refills HP and MP.
+const RELIVE_EXP_PERCENT = 5
+const RELIVE_HP = 1
+const RELIVE_GOLD = 1
 
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 
@@ -286,6 +295,7 @@ export async function actionRoutes(
     const userId = requireUser(request).id
     const result = await db.transaction(async (tx) => {
       const character = await characterOf(tx, userId)
+      requireAlive(character, 'travel')
       const target = scene(sceneId)
       const rule = sceneSwitchRule(sceneId)
       // sceneswitchrule.ini: the target must list the current scene as a starting point.
@@ -308,6 +318,51 @@ export async function actionRoutes(
       return { character: await reload(tx, character.id) }
     })
     // After commit, so sockets never move to a scene the database rolled back.
+    realtime.moveCharacter(result.character)
+    return result
+  })
+
+  // ReliveSystem.OnCustomRelive. ponytail: the 5% equipment wear on going home is skipped
+  // (durability is not tracked yet).
+  app.post('/revive', { config: { rateLimit: RATE_LIMITS.revive } }, async (request) => {
+    const { mode } = reviveBody.parse(request.body)
+    const userId = requireUser(request).id
+    const result = await db.transaction(async (tx) => {
+      const character = await characterOf(tx, userId)
+      if (character.hp > 0) throw bad('not_defeated', 'You have not been defeated.')
+
+      if (mode === 'gold') {
+        if (Number(scene(character.sceneId)?.CanRelive) === 0) {
+          throw bad('no_relive', 'You cannot revive here.')
+        }
+        if (character.gold < RELIVE_GOLD) {
+          throw bad('no_gold', `You need ${RELIVE_GOLD} Gold to revive here.`)
+        }
+        const stats = deriveStats(avatarStats(character.avatarId), character.level)
+        await tx
+          .update(characters)
+          .set({ hp: stats.maxHp, mp: stats.maxMp, gold: character.gold - RELIVE_GOLD })
+          .where(eq(characters.id, character.id))
+      } else {
+        // LevelSystem.GetNextLevelExp is 0 at the level cap; SceneSystem.GoHome.
+        const table = levels()
+        const nextExp =
+          character.level < table.role.maxlevel
+            ? (table.levelexp[String(character.level + 1)] ?? 0)
+            : 0
+        const lost = Math.trunc(nextExp * RELIVE_EXP_PERCENT * 0.01)
+        const toScene = Number(scene(character.sceneId)?.ToScene ?? 0)
+        await tx
+          .update(characters)
+          .set({
+            hp: RELIVE_HP,
+            exp: Math.max(0, character.exp - lost),
+            sceneId: toScene > 0 ? toScene : nationScenes()[character.nation]!.castle,
+          })
+          .where(eq(characters.id, character.id))
+      }
+      return { character: await reload(tx, character.id) }
+    })
     realtime.moveCharacter(result.character)
     return result
   })

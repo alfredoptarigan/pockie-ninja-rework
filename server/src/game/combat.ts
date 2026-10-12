@@ -31,8 +31,13 @@ import { questItemDrops, recordCollect, recordKill, type QuestProgress } from '.
 
 type CharacterRow = typeof characters.$inferSelect
 
-// ponytail: the original revive rules (ReliveSystem) are not ported; a lost fight leaves 1 HP.
-const HP_AFTER_DEFEAT = 1
+/**
+ * A lost field fight saves the fight's HP (0) and marks the player dead (FightSystem.Fight,
+ * StateSystem); POST /revive brings them back. Explore fights pass 1: OutSearchSystem sets HP to
+ * 1 when it reaches 0.
+ */
+export const DEFEATED_HP = 0
+export const EXPLORE_MIN_HP = 1
 /** CounterBombMul of NPCs that derive their avatar level from their level. */
 const NO_AVATAR_LEVEL = -1
 
@@ -85,8 +90,19 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
     .where(
       and(eq(inventoryItems.characterId, character.id), isNotNull(inventoryItems.equippedSlot)),
     )
+  return playerFighterFrom(
+    character,
+    equipped.map((row) => row.itemId),
+  )
+}
+
+/** A character's fighter from its equipped item ids (EquipSystem.GetEquipSelfProp). */
+export function playerFighterFrom(
+  character: Pick<CharacterRow, 'name' | 'avatarId' | 'level' | 'hp' | 'mp'>,
+  equippedItemIds: string[],
+): FighterInput {
   const bonus = { minAttack: 0, maxAttack: 0, defense: 0 }
-  for (const { itemId } of equipped) {
+  for (const itemId of equippedItemIds) {
     const row = item(itemId)
     bonus.minAttack += Number(row?.AttackMin ?? 0)
     bonus.maxAttack += Number(row?.AttackMax ?? 0)
@@ -118,7 +134,12 @@ export interface FightRewards {
  * Fights one monster, pays out a win (EXP, Stone, drops, quest kills and quest items) and saves
  * HP, MP, level and EXP. The caller checks that the monster may be fought.
  */
-export async function fightMonster(tx: Tx, character: CharacterRow, monsterId: string) {
+export async function fightMonster(
+  tx: Tx,
+  character: CharacterRow,
+  monsterId: string,
+  minHp = DEFEATED_HP,
+) {
   const seed = randomInt(2 ** 31)
   const replay = simulateFight({
     attackers: [await playerFighter(tx, character)],
@@ -128,7 +149,8 @@ export async function fightMonster(tx: Tx, character: CharacterRow, monsterId: s
   const won = replay.winner === 'attackers'
   const rewards: FightRewards = { exp: 0, stone: 0, items: [], levelsGained: 0 }
   let { level, exp } = character
-  let hp = won ? replay.fighters[0]!.hp : HP_AFTER_DEFEAT
+  // A timeout loss can leave HP above 0; the player is dead all the same.
+  let hp = Math.max(minHp, won || minHp > 0 ? replay.fighters[0]!.hp : DEFEATED_HP)
   let mp = replay.fighters[0]!.mp
 
   if (won) {

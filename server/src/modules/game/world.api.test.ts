@@ -93,15 +93,52 @@ describe('POST /api/game/fight', () => {
     await db.update(characters).set({ hp: 0 }).where(eq(characters.id, characterId))
     const response = await client.post('/api/game/fight', { monsterId: 'n33017' })
     expect(response.statusCode).toBe(400)
-    expect(response.json().error.code).toBe('no_hp')
+    expect(response.json().error).toMatchObject({
+      code: 'no_hp',
+      message: 'You were defeated. Revive before you fight again.',
+    })
   })
 
-  it('gives nothing for a lost fight and leaves the ninja on 1 HP', async () => {
+  it('gives nothing for a lost fight and leaves the ninja defeated on 0 HP', async () => {
     await db.update(characters).set({ sceneId: 2101 }).where(eq(characters.id, characterId))
     // No weapon: attack 1 cannot pierce the boss's defence.
     const body = (await client.post('/api/game/fight', { monsterId: 'n32002' })).json()
     expect(body.won).toBe(false)
     expect(body.rewards).toEqual({ exp: 0, stone: 0, items: [], levelsGained: 0 })
-    expect(body.character.hp).toBe(1)
+    // FightSystem saves the fight HP (0) and StateSystem marks the player dead until revived.
+    expect(body.character.hp).toBe(0)
+    const again = await client.post('/api/game/fight', { monsterId: 'n33017' })
+    expect(again.json().error.code).toBe('no_hp')
+  })
+})
+
+describe('first fights after the Fire Village tutorial', () => {
+  const FIGHTS = 20
+  const MIN_WINS = 18
+
+  it('beats the Sunflower almost every time with the newbie fists', async () => {
+    // 90000-90003: talk to the Elder, open the newbie pack, equip the fists, talk again.
+    await client.post('/api/game/npcs/n11001/talk')
+    const bag = async () => (await client.get('/api/game/inventory')).json().items
+    const pack = (await bag()).find((i: { itemId: string }) => i.itemId === 'i159104')
+    await client.post(`/api/game/items/${pack.id}/use`)
+    await client.post('/api/game/quests/90002/accept')
+    const fists = (await bag()).find((i: { itemId: string }) => i.itemId === 'i270100')
+    expect((await client.post(`/api/game/items/${fists.id}/equip`)).statusCode).toBe(200)
+    await client.post('/api/game/quests/90003/accept')
+    await client.post('/api/game/npcs/n11001/talk')
+    expect((await client.post('/api/game/travel', { sceneId: 2101 })).statusCode).toBe(200)
+
+    let wins = 0
+    for (let fight = 0; fight < FIGHTS; fight++) {
+      // Fresh HP and level 1 each time, so every fight is a brand-new ninja's first fight.
+      await db
+        .update(characters)
+        .set({ hp: 220, level: 1, exp: 0 })
+        .where(eq(characters.id, characterId))
+      const body = (await client.post('/api/game/fight', { monsterId: 'n33017' })).json()
+      if (body.won) wins++
+    }
+    expect(wins).toBeGreaterThanOrEqual(MIN_WINS)
   })
 })

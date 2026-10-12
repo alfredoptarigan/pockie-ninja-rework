@@ -105,4 +105,54 @@ describe('POST /api/game/travel', () => {
     expect((await client.post('/api/game/travel', { sceneId: 2201 })).statusCode).toBe(400)
     expect((await client.post('/api/game/travel', { sceneId: 171 })).statusCode).toBe(400)
   })
+
+  it('refuses to travel while defeated', async () => {
+    await db.update(characters).set({ hp: 0 }).where(eq(characters.id, characterId))
+    const response = await client.post('/api/game/travel', { sceneId: 2101 })
+    expect(response.statusCode).toBe(400)
+    expect(response.json().error.code).toBe('no_hp')
+  })
+})
+
+describe('POST /api/game/revive (ReliveSystem, relive.ini)', () => {
+  const defeatInField = (extra: Partial<typeof characters.$inferInsert> = {}) =>
+    db
+      .update(characters)
+      .set({ hp: 0, mp: 3, sceneId: 2101, ...extra })
+      .where(eq(characters.id, characterId))
+  const revive = (mode: string) => client.post('/api/game/revive', { mode })
+
+  it('goes home with 1 HP and loses 5% of the next level’s EXP', async () => {
+    // Level 10 → 11 costs 1036 EXP: (int)(1036 * 5 * 0.01f) = 51.
+    await defeatInField({ level: 10, exp: 500 })
+    const response = await revive('home')
+    expect(response.statusCode).toBe(200)
+    expect(response.json().character).toMatchObject({ hp: 1, mp: 3, exp: 449, sceneId: 111 })
+  })
+
+  it('never takes EXP below 0', async () => {
+    await defeatInField({ level: 10, exp: 20 })
+    expect((await revive('home')).json().character.exp).toBe(0)
+  })
+
+  it('revives on the spot with full HP and MP for 1 Gold', async () => {
+    await defeatInField({ gold: 5 })
+    const body = (await revive('gold')).json()
+    expect(body.character).toMatchObject({ gold: 4, sceneId: 2101 })
+    expect(body.character.hp).toBe(body.character.maxHp)
+    expect(body.character.mp).toBe(body.character.maxMp)
+  })
+
+  it('needs 1 Gold to revive on the spot', async () => {
+    await defeatInField({ gold: 0 })
+    const response = await revive('gold')
+    expect(response.statusCode).toBe(400)
+    expect(response.json().error.code).toBe('no_gold')
+  })
+
+  it('refuses when the ninja is not defeated or the mode is unknown', async () => {
+    expect((await revive('home')).json().error.code).toBe('not_defeated')
+    await defeatInField()
+    expect((await revive('pray')).statusCode).toBe(400)
+  })
 })

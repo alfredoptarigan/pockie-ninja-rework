@@ -7,7 +7,7 @@ import { fightMonster } from '../../game/combat.js'
 import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js'
 import { completeReadyRookieQuests, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
-import { requireUser, toCharacter } from './characters.js'
+import { requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
@@ -63,7 +63,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       if (!sceneMonsters(character.sceneId, character.level).some((m) => m.id === monsterId)) {
         throw new HttpError(400, 'not_here', 'That monster is not in this area.')
       }
-      if (character.hp <= 0) throw new HttpError(400, 'no_hp', 'Heal before you fight again.')
+      requireAlive(character, 'fight again')
 
       const result = await fightMonster(tx, character, monsterId)
       const completed = await completeReadyRookieQuests(tx, character.id)
