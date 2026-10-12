@@ -1,8 +1,10 @@
-import { sql } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { afterAll, beforeEach, describe, expect, it } from 'vitest'
 import { createTestDb, truncateAll } from '../../test/helpers.js'
 import {
+  characterDailyQuests,
   characterMysticPurchases,
+  characterQuests,
   characters,
   characterShops,
   characterShopStock,
@@ -41,6 +43,45 @@ async function character() {
 beforeEach(async () => {
   await truncateAll(db)
   await db.execute(sql`truncate table mystic_spawns, mystic_item_sales cascade`)
+})
+
+describe('world and daily quests', () => {
+  it('starts a new ninja with no entered scenes and empty daily counters', async () => {
+    const [row] = await db
+      .select()
+      .from(characters)
+      .where(eq(characters.id, await character()))
+    expect(row).toMatchObject({
+      scenesEntered: [],
+      dailyQuestDay: null,
+      dailyQuestsAccepted: 0,
+      dailyQuestsCompleted: 0,
+      dailyScore: 0,
+    })
+  })
+
+  it('keeps each daily quest once on the board, in states 0-3', async () => {
+    const characterId = await character()
+    await db.insert(characterDailyQuests).values({ characterId, taskId: 26001 })
+    await expect(
+      db.insert(characterDailyQuests).values({ characterId, taskId: 26001, state: 3 }),
+    ).rejects.toThrow()
+    await expect(
+      db.insert(characterDailyQuests).values({ characterId, taskId: 26002, state: 4 }),
+    ).rejects.toThrow()
+  })
+
+  it('rejects negative daily counters and unknown complete types', async () => {
+    const characterId = await character()
+    await expect(
+      db.update(characters).set({ dailyQuestsCompleted: -1 }).where(eq(characters.id, characterId)),
+    ).rejects.toThrow()
+    await expect(
+      db
+        .insert(characterQuests)
+        .values({ characterId, taskId: 26001, progress: [], completeType: 3 }),
+    ).rejects.toThrow()
+  })
 })
 
 describe('refresh shops', () => {
@@ -129,7 +170,7 @@ describe('Mysterious Merchant', () => {
 })
 
 describe('deleting an account', () => {
-  it('removes the character shop and merchant rows', async () => {
+  it('removes the character shop, merchant and daily quest rows', async () => {
     const characterId = await character()
     const [spawn] = await db
       .insert(mysticSpawns)
@@ -141,6 +182,7 @@ describe('deleting an account', () => {
       })
       .returning()
     await db.insert(characterShops).values({ characterId, shopType: 2 })
+    await db.insert(characterDailyQuests).values({ characterId, taskId: 26001 })
     await db
       .insert(characterShopStock)
       .values({ characterId, shopType: 2, slot: 0, itemId: 'i250101', priceGold: 8, bound: false })
@@ -148,7 +190,12 @@ describe('deleting an account', () => {
       .insert(characterMysticPurchases)
       .values({ spawnId: spawn!.id, characterId, itemId: 'i150078', count: 2 })
     await db.delete(users)
-    for (const table of [characterShops, characterShopStock, characterMysticPurchases]) {
+    for (const table of [
+      characterShops,
+      characterShopStock,
+      characterMysticPurchases,
+      characterDailyQuests,
+    ]) {
       expect(await db.select().from(table)).toHaveLength(0)
     }
     expect(await db.select().from(mysticSpawns)).toHaveLength(1)

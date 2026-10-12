@@ -154,6 +154,22 @@ export const characters = pgTable(
     exploreLastAt: timestamp('explore_last_at', { withTimezone: true }),
     exploreDay: date('explore_day'),
     exploreUsed: smallint('explore_used').notNull().default(0),
+    // ScenesEntered: every scene the ninja has switched to (world map "visited" state).
+    scenesEntered: integer('scenes_entered')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    // Daily quests (DayTaskSystem), reset on a new UTC day (`dailyQuestDay`, TaskPerDayFlush):
+    // AcceptedDayTaskNum and CompletedDayTaskNum.
+    dailyQuestDay: date('daily_quest_day'),
+    dailyQuestsAccepted: smallint('daily_quests_accepted').notNull().default(0),
+    dailyQuestsCompleted: smallint('daily_quests_completed').notNull().default(0),
+    // LastOpenTaskDialogTime: start of the current offer period (FlushDayTaskTime timer).
+    dailyQuestOfferAt: timestamp('daily_quest_offer_at', { withTimezone: true }),
+    // CurWeekTaskScore (RewardScore), paid out as honor on a new week; `dailyScoreWeek` is
+    // the UTC Monday of the week it belongs to (TaskPerWeekFlush).
+    dailyScore: integer('daily_score').notNull().default(0),
+    dailyScoreWeek: date('daily_score_week'),
     createdAt: createdAt(),
   },
   (t) => [
@@ -167,6 +183,10 @@ export const characters = pgTable(
     check(
       'characters_amounts',
       sql`${t.exp} >= 0 and ${t.stone} >= 0 and ${t.gold} >= 0 and ${t.giftCoupon} >= 0 and ${t.hp} >= 0 and ${t.mp} >= 0`,
+    ),
+    check(
+      'characters_daily_quests',
+      sql`${t.dailyQuestsAccepted} >= 0 and ${t.dailyQuestsCompleted} >= 0 and ${t.dailyScore} >= 0`,
     ),
   ],
 )
@@ -231,10 +251,30 @@ export const characterQuests = pgTable(
     progress: jsonb('progress').$type<number[]>().notNull(),
     acceptedAt: timestamp('accepted_at', { withTimezone: true }).notNull().defaultNow(),
     completedAt: timestamp('completed_at', { withTimezone: true }),
+    // TaskAccepted_Rec CompleteType (daily quests): 0 normal, 1 auto-complete, 2 hurried (paid).
+    completeType: smallint('complete_type').notNull().default(0),
   },
   (t) => [
     primaryKey({ columns: [t.characterId, t.taskId] }),
     check('character_quests_state', sql`${t.state} between 0 and 2`),
+    check('character_quests_complete_type', sql`${t.completeType} between 0 and 2`),
+  ],
+)
+
+// Today's daily quest board (TaskDayAccepted_Rec). Progress of an accepted daily quest lives
+// in character_quests like any quest. State: 0 offered, 1-2 accepted, 3 completed today.
+export const characterDailyQuests = pgTable(
+  'character_daily_quests',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    taskId: integer('task_id').notNull(),
+    state: smallint('state').notNull().default(0),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.taskId] }),
+    check('character_daily_quests_state', sql`${t.state} between 0 and 3`),
   ],
 )
 

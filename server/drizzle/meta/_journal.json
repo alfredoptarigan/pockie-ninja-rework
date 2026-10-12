@@ -43,6 +43,13 @@
       "when": 1791797406716,
       "tag": "0005_shops",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791797710876,
+      "tag": "0006_world",
+      "breakpoints": true
     }
   ]
 }

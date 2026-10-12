@@ -106,14 +106,30 @@ describe('migrations', { timeout: SLOW }, () => {
       const [character] = await sql`select name, stone, scene_id from characters`
       expect(character).toEqual({ name: 'Hokage_7', stone: '500', scene_id: 2101 })
       const quests =
-        await sql`select task_id, state, progress from character_quests order by task_id`
+        await sql`select task_id, state, progress, complete_type from character_quests order by task_id`
       expect(quests).toEqual([
-        { task_id: 10025, state: 0, progress: [0, 2] },
-        { task_id: 90000, state: 2, progress: [1] },
+        { task_id: 10025, state: 0, progress: [0, 2], complete_type: 0 },
+        { task_id: 90000, state: 2, progress: [1], complete_type: 0 },
       ])
       const spots =
         await sql`select spot_id, star_level, star_progress from character_explore_spots`
       expect(spots).toEqual([{ spot_id: 21011, star_level: 2, star_progress: 30 }])
+    })
+
+    it('marks the current scene as entered and starts the daily counters at zero', async () => {
+      const [character] = await sql`
+        select scenes_entered, daily_quest_day, daily_quests_accepted, daily_quests_completed,
+               daily_quest_offer_at, daily_score, daily_score_week
+        from characters`
+      expect(character).toEqual({
+        scenes_entered: [2101],
+        daily_quest_day: null,
+        daily_quests_accepted: 0,
+        daily_quests_completed: 0,
+        daily_quest_offer_at: null,
+        daily_score: 0,
+        daily_score_week: null,
+      })
     })
 
     it('gives existing equipment full durability and plain item defaults', async () => {
