@@ -6,6 +6,7 @@ import type {
   CreationOptions,
 } from '@pockie/shared'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useCallback } from 'react'
 import { api, ApiError } from '../lib/api'
 import type {
   ActionResult,
@@ -91,21 +92,37 @@ export function useInventory() {
 }
 
 /**
- * A game action. The returned character replaces the cached one and the rest of the game state
- * (scene, quests, inventory) is refetched, since most actions touch several of them.
+ * Puts a game action's result into the cache: the returned character replaces the cached one and
+ * the rest of the game state (scene, quests, inventory) is refetched, since most actions touch
+ * several of them.
  */
-function useGameAction<TInput, TResult extends { character: Character }>(
-  request: (input: TInput) => Promise<TResult>,
-) {
+export function useApplyResult() {
   const queryClient = useQueryClient()
-  return useMutation({
-    mutationFn: request,
-    onSuccess: (result) => {
+  return useCallback(
+    (result: { character: Character }) => {
       queryClient.setQueryData(gameKeys.character, result.character)
       void queryClient.invalidateQueries({
         queryKey: gameKeys.all,
         predicate: (query) => query.queryKey[1] !== 'character',
       })
+    },
+    [queryClient],
+  )
+}
+
+/**
+ * A game action whose result is applied at once, unless `defer` says the caller applies it later
+ * (with useApplyResult): a fight keeps the HUD at its pre-fight values until the replay is over.
+ */
+function useGameAction<TInput, TResult extends { character: Character }>(
+  request: (input: TInput) => Promise<TResult>,
+  defer: (result: TResult) => boolean = () => false,
+) {
+  const apply = useApplyResult()
+  return useMutation({
+    mutationFn: request,
+    onSuccess: (result) => {
+      if (!defer(result)) apply(result)
     },
   })
 }
@@ -148,8 +165,12 @@ export function useBuyPouches() {
   )
 }
 
+/** The caller applies the result (useApplyResult) once the replay is over. */
 export function useFight() {
-  return useGameAction((monsterId: string) => post<FightResult>('/api/game/fight', { monsterId }))
+  return useGameAction(
+    (monsterId: string) => post<FightResult>('/api/game/fight', { monsterId }),
+    () => true,
+  )
 }
 
 export function useUseItem() {
@@ -176,6 +197,10 @@ export function useExplore(enabled = true) {
   })
 }
 
+/** A search with a fight is applied by the caller (useApplyResult) once its replay is over. */
 export function useExploreSpot() {
-  return useGameAction((spotId: string) => post<ExploreResult>(`/api/game/explore/${spotId}`))
+  return useGameAction(
+    (spotId: string) => post<ExploreResult>(`/api/game/explore/${spotId}`),
+    (result) => Boolean(result.fight),
+  )
 }

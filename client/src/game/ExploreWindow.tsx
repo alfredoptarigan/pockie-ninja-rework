@@ -3,7 +3,7 @@
 // the result window. The scene picture opens the same window from the spot's tree.
 import type { Character } from '@pockie/shared'
 import { useEffect, useId, useState } from 'react'
-import { errorMessage, useExplore, useExploreSpot, useInventory } from './api'
+import { errorMessage, useApplyResult, useExplore, useExploreSpot, useInventory } from './api'
 import {
   bagCount,
   blockMessage,
@@ -112,6 +112,8 @@ interface Outcome {
   /** Bumped by "Replay Battle" to restart the replay. */
   run: number
   replaying: boolean
+  /** The result reached the HUD (searches with a fight wait for the first replay to end). */
+  applied: boolean
 }
 
 function ExploreFlow({
@@ -129,13 +131,19 @@ function ExploreFlow({
   const inventory = useInventory()
   const [confirming, setConfirming] = useState<ExploreSpot | null>(null)
   const [outcome, setOutcome] = useState<Outcome | null>(null)
+  const applyResult = useApplyResult()
+  const finishReplay = () => {
+    if (outcome && !outcome.applied) applyResult(outcome.result)
+    setOutcome((o) => o && { ...o, replaying: false, applied: true })
+  }
 
   const start = async (spot: ExploreSpot) => {
     setConfirming(null)
     const weaponItemId = inventory.data?.find((item) => item.equippedSlot === 'Weapon')?.itemId
     try {
       const result = await explore.mutateAsync(spot.id)
-      setOutcome({ result, weaponItemId, run: 0, replaying: Boolean(result.fight) })
+      const fought = Boolean(result.fight)
+      setOutcome({ result, weaponItemId, run: 0, replaying: fought, applied: !fought })
     } catch {
       // Shown from explore.error. The list was stale (another tab, a new day): fetch it again.
       void status.refetch()
@@ -153,7 +161,7 @@ function ExploreFlow({
         monsterIds={card.type === 'fight' ? [exploreMonster(card.monsterId).id] : []}
         sceneId={sceneId}
         weaponItemId={outcome.weaponItemId}
-        onFinished={() => setOutcome((o) => o && { ...o, replaying: false })}
+        onFinished={finishReplay}
       />
     )
   }

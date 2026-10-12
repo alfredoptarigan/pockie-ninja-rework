@@ -230,6 +230,9 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await expect(replay.getByRole('button', { name: 'Skip' })).toBeEnabled()
   await page.waitForTimeout(1_500) // a few ticks in, both fighters on stage
   await shot(page, 'battle')
+  // The HUD keeps the pre-fight values while the replay plays.
+  await expectLevel(page, 2)
+  expect(Number(await expMeter(page).getAttribute('aria-valuenow'))).toBe(expBefore)
   await replay.getByRole('button', { name: 'Skip' }).click()
 
   // A level-2 ninja with a weapon beats a Sunflower; the quest reward brings level 3.

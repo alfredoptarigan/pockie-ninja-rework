@@ -1,10 +1,11 @@
 import type { Character } from '@pockie/shared'
-import { screen, waitFor, within } from '@testing-library/react'
+import { act, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { character, fists, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
+import { useCharacter } from './api'
 import { ExploreWindow } from './ExploreWindow'
 import { mountBattle } from './phaser'
 import type { ExploreResult, ExploreView, InventoryItem, Replay, SceneView } from './types'
@@ -92,6 +93,12 @@ const fought: ExploreResult = {
 function Harness({ who = ninja, scene = field }: { who?: Character; scene?: SceneView }) {
   const [open, setOpen] = useState(false)
   return <ExploreWindow character={who} scene={scene} open={open} onOpenChange={setOpen} />
+}
+
+/** What the HUD reads: the cached character. */
+function HudLevel() {
+  const character = useCharacter()
+  return <p>HUD level {character.data?.level}</p>
 }
 
 const api = (
@@ -223,6 +230,56 @@ describe('ExploreWindow', () => {
     await userEvent.click(within(result).getByRole('button', { name: 'Replay Battle' }))
     expect(await screen.findByRole('dialog', { name: 'Exploration Result' })).toBeVisible()
     expect(vi.mocked(mountBattle).mock.calls.length).toBe(before + 1)
+  })
+
+  it('keeps the HUD at the pre-fight values until the explore fight replay is over', async () => {
+    api(
+      {
+        'GET /api/game/character': () => json({ character: ninja }),
+        'POST /api/game/explore/21011': () => json(fought),
+      },
+      { items: [{ ...fists, equippedSlot: 'Weapon' }] },
+    )
+    let finish = () => {}
+    vi.mocked(mountBattle).mockImplementationOnce((_parent, options) => {
+      finish = options.onFinished
+      return Promise.resolve({
+        skip: vi.fn(),
+        replay: vi.fn(),
+        setSpeed: vi.fn(),
+        destroy: vi.fn(),
+      })
+    })
+    renderWithProviders(
+      <>
+        <Harness />
+        <HudLevel />
+      </>,
+    )
+    expect(await screen.findByText('HUD level 1')).toBeVisible()
+
+    await exploreFree()
+    await screen.findByRole('region', { name: 'Battle replay' })
+    expect(screen.getByText('HUD level 1')).toBeVisible()
+
+    act(() => finish())
+    expect(await screen.findByText('HUD level 2')).toBeVisible()
+  })
+
+  it('applies a search without a fight at once', async () => {
+    api({
+      'GET /api/game/character': () => json({ character: ninja }),
+      'POST /api/game/explore/21011': () => json(found),
+    })
+    renderWithProviders(
+      <>
+        <Harness />
+        <HudLevel />
+      </>,
+    )
+    expect(await screen.findByText('HUD level 1')).toBeVisible()
+    await exploreFree()
+    expect(await screen.findByText('HUD level 2')).toBeVisible()
   })
 
   it('counts down the rest and keeps exploring locked until it ends', async () => {
