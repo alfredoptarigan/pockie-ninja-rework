@@ -7,7 +7,6 @@ import {
   gainExp,
   rollDrops,
   simulateFight,
-  type Bonuses,
   type CombatStats,
   type DropEntry,
   type DropLib,
@@ -15,21 +14,21 @@ import {
   type SkillInput,
 } from '@pockie/game-core'
 import type { MonsterDrop } from '@pockie/shared'
-import { and, eq, isNotNull } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
-import { characters, inventoryItems } from '../db/schema.js'
+import { characters } from '../db/schema.js'
 import {
   avatarSkillIds,
   avatarStats,
   dropItems,
   dropLib,
-  item,
   itemNameKey,
   levels,
   npc,
   npcSkillIds,
   skill,
 } from './data.js'
+import { equipmentBonuses, equippedGear, type Gear } from './equipment.js'
 import { drawPouch } from './pouch.js'
 import { grantItems, loadQuests, saveQuests, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
@@ -90,96 +89,25 @@ export function monsterFighter(id: string): FighterInput {
   }
 }
 
-async function equippedItemIds(tx: Tx | Db, characterId: string) {
-  const rows = await tx
-    .select({ itemId: inventoryItems.itemId })
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, characterId), isNotNull(inventoryItems.equippedSlot)))
-  return rows.map((row) => row.itemId)
-}
-
 export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<PlayerFighter> {
-  return playerFighterFrom(character, await equippedItemIds(tx, character.id))
+  return playerFighterFrom(character, await equippedGear(tx, character.id))
 }
 
-/** RefreshSystem *Equip terms: deriveStats bonuses plus the ones fighters take as they are. */
-type EquipBonuses = Partial<Bonuses> &
-  Partial<Pick<FighterInput, 'tough' | 'pierce' | 'neglectDefense' | 'decDamage' | 'vampiricHp'>>
-
-/**
- * EquipSystem.AddOtherProp: item.ini OtherPropName → the RefreshSystem term it feeds. With no
- * *MulMul equipment terms, hit/crit/tough/pierce/neglectDefense are plain sums.
- */
-const OTHER_PROPS: Record<string, keyof EquipBonuses> = {
-  MaxHPEquip: 'hp',
-  MaxMPEquip: 'mp',
-  MaxHPMulEquip: 'hpMul',
-  AbsAddAtkMulEquip: 'attackMul',
-  AtkTimeMulEquip: 'atkTimeMul',
-  DodgeMulEquip: 'dodge',
-  ParryMulEquip: 'parry',
-  HitMulEquip: 'hit',
-  CritMulEquip: 'crit',
-  DefenseEquip: 'defense',
-  CounterMulEquip: 'counter',
-  ToughEquip: 'tough',
-  PierceEquip: 'pierce',
-  NeglectDefAttachEquip: 'neglectDefense',
-  DecDamageEquip: 'decDamage',
-  VampiricHPEquip: 'vampiricHp',
-}
-
-/**
- * EquipSystem.RefreshEquipProperty: each equipped item's GetEquipSelfProp (AttackMin/Max,
- * Defense) and AddOtherProp (`OtherPropName` / `OtherPropValue`, `;`-separated) summed.
- * Identify, jewel, inscribe, consolidation and suit bonuses belong to item instances and are not
- * modelled.
- */
-export function equipmentBonuses(itemIds: string[]): EquipBonuses {
-  const bonuses: Record<string, number> = {}
-  const add = (key: keyof EquipBonuses, value: number) => {
-    bonuses[key] = (bonuses[key] ?? 0) + value
-  }
-  for (const itemId of itemIds) {
-    const row = item(itemId)
-    if (!row) continue
-    add('minAttack', Number(row.AttackMin ?? 0))
-    add('maxAttack', Number(row.AttackMax ?? 0))
-    add('defense', Number(row.Defense ?? 0))
-    const names = String(row.OtherPropName ?? '').split(';')
-    const values = String(row.OtherPropValue ?? '').split(';')
-    // AddOtherProp skips the list when the two lengths differ.
-    if (names.length !== values.length) continue
-    names.forEach((name, i) => {
-      const key = OTHER_PROPS[name]
-      if (key) add(key, Number(values[i]))
-    })
-  }
-  return bonuses
-}
-
-/** Max HP/MP and the other derived stats at `level` with the equipped items. */
-const statsWith = (avatarId: number, level: number, bonuses: EquipBonuses) =>
-  deriveStats(avatarStats(avatarId), level, bonuses)
-
-/** A character's fighter from its equipped item ids. */
+/** A character's fighter from its equipped rows (RefreshSystem with the *Equip terms). */
 export function playerFighterFrom(
-  character: Pick<CharacterRow, 'name' | 'avatarId' | 'level' | 'hp' | 'mp'>,
-  equippedItemIds: string[],
+  character: Pick<CharacterRow, 'name' | 'avatarId' | 'gender' | 'level' | 'hp' | 'mp'>,
+  equipped: readonly Gear[],
 ): PlayerFighter {
-  const bonuses = equipmentBonuses(equippedItemIds)
-  const stats = statsWith(character.avatarId, character.level, bonuses)
+  const stats = deriveStats(
+    avatarStats(character.avatarId),
+    character.level,
+    equipmentBonuses(equipped, character),
+  )
   return {
     ...stats,
     name: character.name,
     hp: Math.min(character.hp, stats.maxHp),
     mp: Math.min(character.mp, stats.maxMp),
-    neglectDefense: bonuses.neglectDefense ?? 0,
-    tough: bonuses.tough ?? 0,
-    pierce: bonuses.pierce ?? 0,
-    decDamage: bonuses.decDamage ?? 0,
-    vampiricHp: bonuses.vampiricHp ?? 0,
-    priority: 0,
     avatarLevel: avatarLevelFromAvatarId(character.avatarId),
     ...skillsOf(avatarSkillIds(character.avatarId)),
   }
@@ -219,8 +147,9 @@ export async function fightMonster(
   minHp = DEFEATED_HP,
 ) {
   const seed = randomInt(2 ** 31)
-  const equipped = await equippedItemIds(tx, character.id)
-  const bonuses = equipmentBonuses(equipped)
+  const equipped = await equippedGear(tx, character.id)
+  const bonuses = equipmentBonuses(equipped, character)
+  const statsAt = (level: number) => deriveStats(avatarStats(character.avatarId), level, bonuses)
   const replay = simulateFight({
     attackers: [playerFighterFrom(character, equipped)],
     defenders: [monsterFighter(monsterId)],
@@ -258,7 +187,7 @@ export async function fightMonster(
     level = gained.level
     exp = gained.exp
     if (gained.levelsGained > 0) {
-      const stats = statsWith(character.avatarId, level, bonuses)
+      const stats = statsAt(level)
       hp = stats.maxHp
       mp = stats.maxMp
     }
@@ -287,7 +216,7 @@ export async function fightMonster(
   // after every explore fight, before lifting HP 0 to 1.
   let { hpPouch, mpPouch } = character
   if (won || explore) {
-    const stats = statsWith(character.avatarId, level, bonuses)
+    const stats = statsAt(level)
     ;({ value: hp, pouch: hpPouch } = drawPouch(hp, stats.maxHp, hpPouch))
     ;({ value: mp, pouch: mpPouch } = drawPouch(mp, stats.maxMp, mpPouch))
   }

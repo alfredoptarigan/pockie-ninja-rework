@@ -8,16 +8,17 @@ const SEEDS = Array.from({ length: 50 }, (_, seed) => seed)
 const SKILL_EVENT = 14
 const NORMAL_ATTACK = 1
 /** Clothing 3 → AvatarID 3: Str 1300 + 65/level, StrAtkAdd 1700, HP 200 + 20/level. */
-const freshNinja = { name: 'Ninja_01', avatarId: 3, level: 1, hp: 220, mp: 220 }
+const freshNinja = { name: 'Ninja_01', avatarId: 3, gender: 0, level: 1, hp: 220, mp: 220 }
 /** The fists from the Fire Village newbie pack (i159104): AttackMin 7, AttackMax 8. */
 const NEWBIE_FISTS = 'i270100'
 /** n33017: HP 15, Def 71, Atk 9-10 (npc.ini). */
 const SUNFLOWER = 'n33017'
 
+const gear = (itemIds: string[]) => itemIds.map((itemId) => ({ itemId }))
 const fights = (equipped: string[]) =>
   SEEDS.map((seed) =>
     simulateFight({
-      attackers: [playerFighterFrom(freshNinja, equipped)],
+      attackers: [playerFighterFrom(freshNinja, gear(equipped))],
       defenders: [monsterFighter(SUNFLOWER)],
       seed,
     }),
@@ -30,7 +31,7 @@ const normalHits = (replay: Replay) =>
 describe('a fresh ninja against the Sunflower', () => {
   it('has attack 1 without a weapon, which Def 71 rounds down to 0 damage (as in the original)', () => {
     // (int)((1 + 0) * (1000 + 1365/1700*10) * 0.001) = 1; (int)(1 * (1 - 71/1425)) = 0.
-    const player = playerFighterFrom(freshNinja, [])
+    const player = playerFighterFrom(freshNinja, gear([]))
     expect(player).toMatchObject({ minAttack: 1, maxAttack: 1, maxHp: 220 })
     expect(applyDefense(1, 71, 0)).toBe(0)
 
@@ -43,7 +44,7 @@ describe('a fresh ninja against the Sunflower', () => {
 
   it('hits for 7-8 with the newbie fists and wins every fight in 2-3 hits', () => {
     // (1 + 7..8) * 1.000 = 8..9 attack; 8 → 7, 9 → 8 after Def 71. Sunflower HP 15.
-    const player = playerFighterFrom(freshNinja, [NEWBIE_FISTS])
+    const player = playerFighterFrom(freshNinja, gear([NEWBIE_FISTS]))
     expect(player).toMatchObject({ minAttack: 8, maxAttack: 9 })
     expect([applyDefense(8, 71, 0), applyDefense(9, 71, 0)]).toEqual([7, 8])
 
@@ -62,7 +63,7 @@ describe('a fresh ninja against the Sunflower', () => {
 // EquipSystem.GetEquipSelfProp (AttackMin/Max, Defense) + AddOtherProp (OtherPropName/Value)
 // feeding RefreshSystem's *Equip terms. Level 1 AvatarID 3: HP 220, AtkTime 980, counter 5.
 describe('equipment bonuses', () => {
-  const fighter = (equipped: string[]) => playerFighterFrom(freshNinja, equipped)
+  const fighter = (equipped: string[]) => playerFighterFrom(freshNinja, gear(equipped))
 
   it('adds the starter armour defence: Straw Hat i220101 (24) + Cloth Armour i240101 (71)', () => {
     expect(fighter(['i220101', 'i240101'])).toMatchObject({ defense: 95, maxHp: 220 })
@@ -83,9 +84,23 @@ describe('equipment bonuses', () => {
   })
 
   it('reads several properties from one item (i299901 HP/MP, i299910 crit/pierce)', () => {
-    // (int)((220 + 6654) * 1000 * 0.001)
-    expect(fighter(['i299901'])).toMatchObject({ maxHp: 6874, maxMp: 6874 })
+    // i299901 is a Sharp weapon (UsePopsinger 2): CheckEquipEffect gives it to a Sharp ninja
+    // (AvatarID 63: Stamina 1470, MaxHPAdd 1300) only. (int)((220 + 6654) * 1010 * 0.001).
+    const sharp = { ...freshNinja, avatarId: 63 }
+    expect(playerFighterFrom(sharp, gear(['i299901']))).toMatchObject({ maxHp: 6942, maxMp: 6942 })
+    expect(fighter(['i299901'])).toMatchObject({ maxHp: 220, maxMp: 220 })
     expect(fighter(['i299910'])).toMatchObject({ crit: 390, pierce: 390 })
+  })
+
+  it('applies a complete set (Oracle Outfit 8160: +28 Stamina at 2, +28 Strength at 4 pieces)', () => {
+    const pieces = ['i281601', 'i281602', 'i281603', 'i281604']
+    expect(fighter(pieces.slice(0, 2))).toMatchObject({ stamina: 1300 + 65 + 2800 })
+    expect(fighter(pieces)).toMatchObject({ stamina: 4165, strength: 1365 + 2800 })
+  })
+
+  it('ignores a broken item (durability 0) for stats and sets', () => {
+    const broken = [{ itemId: 'i281601', durability: 0 }, { itemId: 'i281602' }]
+    expect(playerFighterFrom(freshNinja, broken)).toMatchObject({ defense: 34, stamina: 1365 })
   })
 
   it('passes damage reduction and life steal to the fight (i298009, i298010)', () => {
