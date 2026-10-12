@@ -221,7 +221,7 @@ one-line wiring), and the `shared/src/index.ts` re-export.
 
 | Wave | Tasks (agents)                              | Notes                                                        |
 | ---- | ------------------------------------------- | ------------------------------------------------------------ |
-| 1    | 1 import, 2 schema, 3 assets, 4 game-core, 5 i18n | five disjoint folders; 2 merges first so wave 2 can start   |
+| 1    | 1 import, 2 schema, 3 assets, 4 game-core, 5 i18n (done, merged 2026-10-12) | five disjoint folders; 2 merges first so wave 2 can start   |
 | 2    | 6 shops, 7 forge, 8 world, 9 instances     | four disjoint feature folders; coordinator merges `app.ts` and window wiring |
 | 3    | 10 verification, 11 VIP                     | after wave 2 merges                                          |
 

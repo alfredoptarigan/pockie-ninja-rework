@@ -221,8 +221,17 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] Server: HP/MP pouches (size `9000 + level*1000`, start at 0, refill after won fights and
         every explore fight; migration 0003), `GET /character` returns `{ character, stats }`,
         `GET /quests/available`, `fitsOutfit` on inventory, `revive` terms in `GET /scene`.
-  - [ ] Buying pouch refills (`OnCustomBuy`), equipment wear on going home (no durability yet).
-        Hand-ins completed by fights, items or equip return only quest ids, not granted items.
+  - [x] Pouch refills (`POST /pouches/buy`), hand-in rewards from every path, quest level-ups in
+        fight results. Equipment wear moves to M3 (durability column in 0004).
+  - [ ] **8d: UI fidelity to the original.** 8a was marked done on behaviour alone; its windows
+        use the generic BaseSource skin, not the original window layouts. Reopened 2026-10-12.
+        - Creation screen mirrors `creatrolenew.swf` / `CreatRoleBase.as`: original layout and
+          art (text-free export), animated preview of the chosen outfit and gender, outfit cards
+          with portraits, village choice; behaviour unchanged.
+        - Compare every M2 window (Character, Bag, Quest log/Navigation, NPC dialog, Revive,
+          Explore, World Map, fight result) with its original SWF/AS and the Reborn screenshots;
+          list each gap here and fix it.
+        - Acceptance: side-by-side screenshots (original vs ours) checked per window.
 - [~] **Task 9 — copy fixes and verification.**
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.
