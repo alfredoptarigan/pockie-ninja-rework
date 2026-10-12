@@ -188,9 +188,6 @@
   --ui-chat-tab-hover: url('/assets/game/ui/chat-tab-hover.webp');
   --ui-chat-tab-hover-slice: 10 10 10 10;
   --ui-chat-tab-hover-border: 5px 5px 5px 5px;
-  --ui-chat-tab-selected: url('/assets/game/ui/chat-tab-selected.webp');
-  --ui-chat-tab-selected-slice: 10 10 10 10;
-  --ui-chat-tab-selected-border: 5px 5px 5px 5px;
   --ui-title-plate: url('/assets/game/ui/title-plate.webp');
   --ui-title-plate-slice: 26 52 28 50;
   --ui-title-plate-border: 13px 26px 14px 25px;

@@ -110,7 +110,6 @@ const HUD_PIECES: Record<string, PieceSource> = {
   'chat-panel': shape('UI_Chat', 7, { top: 10, right: 10, bottom: 10, left: 10 }),
   'chat-tab': shape('UI_Chat', 34, { top: 5, right: 5, bottom: 5, left: 5 }),
   'chat-tab-hover': shape('UI_Chat', 36, { top: 5, right: 5, bottom: 5, left: 5 }),
-  'chat-tab-selected': shape('UI_Chat', 38, { top: 5, right: 5, bottom: 5, left: 5 }),
 }
 
 // Window pieces the Stats, Inventory, NPC and quest windows draw (UI_RoleInfo_Xml, UI_Package,

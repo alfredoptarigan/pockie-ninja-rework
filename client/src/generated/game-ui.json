@@ -360,12 +360,6 @@
       "height": 18,
       "slice": { "top": 5, "right": 5, "bottom": 5, "left": 5 }
     },
-    "chat-tab-selected": {
-      "file": "/assets/game/ui/chat-tab-selected.webp",
-      "width": 41,
-      "height": 18,
-      "slice": { "top": 5, "right": 5, "bottom": 5, "left": 5 }
-    },
     "title-plate": {
       "file": "/assets/game/ui/title-plate.webp",
       "width": 101,

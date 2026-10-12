@@ -242,13 +242,10 @@
   border: 0;
   border-image: var(--ui-chat-tab) var(--ui-chat-tab-slice) fill / var(--ui-chat-tab-border);
   color: #fff;
-  &:hover {
-    border-image-source: var(--ui-chat-tab-hover);
-  }
-  /* The original selected plate is cream: white text would not read on it. */
+  /* Reborn shows the selected channel on the light grey plate (UI_Chat shape 36). */
+  &:hover,
   &[aria-selected='true'] {
-    border-image-source: var(--ui-chat-tab-selected);
-    color: #3a1f00;
+    border-image-source: var(--ui-chat-tab-hover);
   }
 }
 
