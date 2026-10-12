@@ -131,6 +131,17 @@ export function talkItems(quests: QuestProgress[], npcId: string) {
 export const USE_ITEM_COMMAND = 8888
 export const EQUIP_WEAPON_COMMAND = 8887
 
+/** What the player does for a rookie command step, for the client to point at (bag, weapon). */
+export function stepCommand(step: ReturnType<typeof subTasks>[number]) {
+  if (Number(step.SubTaskType) !== COMMAND) return {}
+  const condition = Number(step.TargetCondition)
+  if (condition === EQUIP_WEAPON_COMMAND) return { command: 'equip' as const }
+  if (condition === USE_ITEM_COMMAND && String(step.TargetItem).startsWith('i')) {
+    return { command: 'use' as const, itemId: String(step.TargetItem) }
+  }
+  return {}
+}
+
 export function recordCommand(
   quests: QuestProgress[],
   command: number,

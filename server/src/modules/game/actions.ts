@@ -42,6 +42,7 @@ import {
   questLock,
   recordCommand,
   recordTalk,
+  stepCommand,
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
@@ -156,6 +157,7 @@ export async function actionRoutes(
           steps: subTasks(q.taskId).map((step) => ({
             descriptionKey: `lg_${step.SubTaskDescription}`,
             target: Number(step.TargetRequireNum),
+            ...stepCommand(step),
           })),
         })),
     }
