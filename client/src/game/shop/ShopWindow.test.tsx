@@ -234,4 +234,46 @@ describe('merchant purchase dialog', () => {
       count: 2,
     })
   })
+
+  it('lets a VIP buy from the VIP tab, which has no stock limit', async () => {
+    const fetch = mockApi({
+      'GET /api/game/shop/merchant': () =>
+        json({
+          available: true,
+          spawnId: 'spawn1',
+          sceneId: 2601,
+          endsAt: new Date(Date.now() + 600000).toISOString(),
+          vipAvailable: true,
+          stock: [],
+          vipStock: [
+            {
+              slot: 0,
+              itemId: 'i160006',
+              price: 35,
+              bound: true,
+              left: null,
+              limit: 2,
+              purchased: 0,
+              useLevel: 1,
+            },
+          ],
+        }),
+      'POST /api/game/shop/merchant/buy': () => json({ character }),
+    })
+    renderWithProviders(<MerchantWindow character={character} onClose={vi.fn()} />)
+    await userEvent.click(await screen.findByRole('tab', { name: 'VIP' }))
+    expect(screen.getByText(/Stock: Unlimited/)).toBeVisible()
+    expect(screen.queryByText('VIP membership is required.')).toBeNull()
+    await userEvent.click(screen.getByRole('button', { name: 'Buy Healing Powder' }))
+    await userEvent.clear(screen.getByLabelText('Quantity'))
+    await userEvent.type(screen.getByLabelText('Quantity'), '2')
+    await userEvent.click(screen.getByRole('button', { name: 'Confirm purchase' }))
+    expect(await screen.findByText('Purchase complete.')).toBeVisible()
+    expect(requestBody(fetch, 'POST /api/game/shop/merchant/buy')).toEqual({
+      spawnId: 'spawn1',
+      tab: 'vip',
+      slot: 0,
+      count: 2,
+    })
+  })
 })

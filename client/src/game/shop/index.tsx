@@ -571,7 +571,7 @@ export function MerchantWindow({
                       </p>
                       <p>{item.bound ? 'Bound' : 'Unbound'}</p>
                       <p>
-                        Stock: {item.left}; your remaining limit:{' '}
+                        Stock: {item.left ?? 'Unlimited'}; your remaining limit:{' '}
                         {Math.max(0, item.limit - item.purchased)}
                       </p>
                       <p>Requires level {item.useLevel}</p>
@@ -611,10 +611,7 @@ export function MerchantWindow({
               aria-label="Quantity"
               type="number"
               min={1}
-              max={Math.min(
-                selected.left < 0 ? Infinity : selected.left,
-                selected.limit - selected.purchased,
-              )}
+              max={Math.min(selected.left ?? Infinity, selected.limit - selected.purchased)}
               value={count}
               onChange={(event) => setCount(Number(event.target.value))}
             />
@@ -627,7 +624,7 @@ export function MerchantWindow({
               !Number.isInteger(count) ||
               count < 1 ||
               count > selected.limit - selected.purchased ||
-              (selected.left >= 0 && count > selected.left)
+              (selected.left !== null && count > selected.left)
             }
             onClick={async () => {
               try {

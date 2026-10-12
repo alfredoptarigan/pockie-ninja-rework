@@ -150,6 +150,28 @@ function CardBar({
  */
 const NO_VP_GROOVE = "path(evenodd, 'M0 0H205V78H0Z M77 41.5H205V54.5H145V53H77Z')"
 
+const vipDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+
+/** VIP membership (decision 14): a text badge next to the level, its end date in the tooltip. */
+function VipBadge({ until }: { until: string | null }) {
+  const [now] = useState(Date.now)
+  if (!until || Date.parse(until) <= now) return null
+  return (
+    <span
+      title={`VIP until ${vipDate(until)}`}
+      className={`absolute top-[58px] left-[150px] text-[11px] font-bold text-[#ffd700] ${SHADOW}`}
+    >
+      VIP
+    </span>
+  )
+}
+
 /** Portrait, name, level, HP/MP bars and pouch icons at the top left (UI_RoleIcon). */
 export function PlayerCard({ character }: { character: Character }) {
   const portrait = useOutfitPortrait(character.clothing)
@@ -215,6 +237,7 @@ export function PlayerCard({ character }: { character: Character }) {
       >
         Lv. {character.level}
       </span>
+      <VipBadge until={character.vipUntil} />
     </section>
   )
 }
