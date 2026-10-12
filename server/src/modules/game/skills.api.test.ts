@@ -4,7 +4,13 @@ import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { characters, inventoryItems } from '../../db/schema.js'
-import { monsterFighter, playerFighter, skillRows } from '../../game/combat.js'
+import {
+  EXPLORE_MIN_HP,
+  fightMonster,
+  monsterFighter,
+  playerFighter,
+  skillRows,
+} from '../../game/combat.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -91,10 +97,19 @@ describe('POST /api/game/fight with skills', () => {
     expect((await character()).mp).toBe(body.replay.fighters[0].mp)
   })
 
-  it('keeps 1 HP and the remaining MP after a lost fight', async () => {
+  it('saves 0 HP (defeated) and the remaining MP after a lost fight', async () => {
     await db.delete(inventoryItems).where(eq(inventoryItems.characterId, characterId))
     const body = (await client.post('/api/game/fight', { monsterId: 'n32002' })).json()
     expect(body.won).toBe(false)
-    expect(body.character).toMatchObject({ hp: 1, mp: body.replay.fighters[0].mp })
+    expect(body.character).toMatchObject({ hp: 0, mp: body.replay.fighters[0].mp })
+  })
+
+  it('leaves 1 HP after a lost explore fight (OutSearchSystem)', async () => {
+    await db.delete(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+    const result = await db.transaction(async (tx) =>
+      fightMonster(tx, await character(), 'n32002', EXPLORE_MIN_HP),
+    )
+    expect(result.won).toBe(false)
+    expect((await character()).hp).toBe(1)
   })
 })

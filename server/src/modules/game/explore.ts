@@ -7,7 +7,7 @@ import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
 import { characterExploreSpots, characters, inventoryItems } from '../../db/schema.js'
-import { fightMonster, type FightRewards } from '../../game/combat.js'
+import { EXPLORE_MIN_HP, fightMonster, type FightRewards } from '../../game/combat.js'
 import { exploreCooldownSeconds, exploreSpot, exploreSpotIds } from '../../game/data.js'
 import {
   advanceStar,
@@ -27,7 +27,7 @@ import {
   type Tx,
 } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
-import { requireUser, toCharacter } from './characters.js'
+import { requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 type CharacterRow = typeof characters.$inferSelect
@@ -110,6 +110,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const status = exploreStatus(character, now)
 
       // CheckCanSearch
+      requireAlive(character, 'explore')
       if (!exploreSpotIds(character.sceneId).includes(spotId)) {
         throw bad('not_here', 'That place is not in this area.')
       }
@@ -185,7 +186,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       let granted = true
       let fight = null
       if (card.type === 'fight') {
-        const result = await fightMonster(tx, current, card.monsterId)
+        const result = await fightMonster(tx, current, card.monsterId, EXPLORE_MIN_HP)
         fight = { replay: result.replay, won: result.won }
         rewards.exp += result.rewards.exp
         rewards.stone += result.rewards.stone

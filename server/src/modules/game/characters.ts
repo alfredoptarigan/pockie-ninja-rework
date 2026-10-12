@@ -48,6 +48,13 @@ export function toCharacter(row: CharacterRow): Character {
   }
 }
 
+/** A defeated (0 HP, dead) ninja cannot fight, travel or explore until revived (StateSystem). */
+export function requireAlive(character: Pick<CharacterRow, 'hp'>, action: string) {
+  if (character.hp <= 0) {
+    throw new HttpError(400, 'no_hp', `You were defeated. Revive before you ${action}.`)
+  }
+}
+
 export function requireUser(request: FastifyRequest) {
   if (!request.auth) throw new HttpError(401, 'unauthenticated', 'Please log in.')
   return request.auth.user

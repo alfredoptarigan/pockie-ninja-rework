@@ -11,4 +11,5 @@ export const RATE_LIMITS = {
   acceptQuest: perMinute(30),
   item: perMinute(60),
   travel: perMinute(30),
+  revive: perMinute(10),
 }
