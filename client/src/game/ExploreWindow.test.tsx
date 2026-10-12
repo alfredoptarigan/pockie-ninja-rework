@@ -150,12 +150,12 @@ describe('ExploreWindow', () => {
 
     // The expert spot takes a key the bag does not hold.
     const expert = within(dialog).getByRole('region', { name: EXPERT })
-    expect(within(expert).getByRole('img', { name: 'Stone Mine Secret Key' })).toBeInTheDocument()
-    expect(expert).toHaveTextContent('1 x Stone Mine Secret Key (you have 0)')
+    expect(within(expert).getByRole('img', { name: 'Smelting Mountains Secret Key' })).toBeInTheDocument()
+    expect(expert).toHaveTextContent('1 x Smelting Mountains Secret Key (you have 0)')
     const button = within(expert).getByRole('button', { name: `Explore ${EXPERT}` })
     expect(button).toBeDisabled()
     expect(button).toHaveAccessibleDescription(
-      'You need 1 x Stone Mine Secret Key to explore there.',
+      'You need 1 x Smelting Mountains Secret Key to explore there.',
     )
   })
 
