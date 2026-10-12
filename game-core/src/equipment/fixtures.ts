@@ -116,7 +116,7 @@ export const INSCRIBE_LEVELS: InscribeLevels = Object.fromEntries(
 /** SealOdds.ini. */
 export const SEAL_ODDS = { LowOdds: 3, HighOdds: 6 }
 
-/** IdentifyPropLib.ini rows of groups 1001 and 2001 (and 1000, a test row not in any group). */
+/** IdentifyPropLib.ini rows from groups 1001 (newbie weapons) and 2001 (gold). */
 export const IDENTIFY_PROPS: IdentifyProps = {
   '1': { PropName: 'StrengthEquip', PropMinValue: 2800, PropMaxValue: 3400 },
   '21': { PropName: 'AgilityEquip', PropMinValue: 2800, PropMaxValue: 3400 },
@@ -126,6 +126,8 @@ export const IDENTIFY_PROPS: IdentifyProps = {
   '261': { PropName: 'MaxMPMulEquip', PropMinValue: 23, PropMaxValue: 29 },
   '381': { PropName: 'StrengthEquip', PropMinValue: 3600, PropMaxValue: 4400 },
   '764': { PropName: 'ParryMulMulEquip', PropMinValue: 18, PropMaxValue: 22 },
+  '765': { PropName: 'PierceMulEquip', PropMinValue: 18, PropMaxValue: 22 },
+  '766': { PropName: 'ToughMulEquip', PropMinValue: 18, PropMaxValue: 22 },
   '772': { PropName: 'IsDecHardEquip', PropMinValue: 1, PropMaxValue: 1 },
 }
 
