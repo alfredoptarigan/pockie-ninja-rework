@@ -3,7 +3,7 @@
 // player card top left (UI_RoleIcon), scene plaque top right (UI_SmallMap), EXP strip and menu
 // buttons bottom right (UI_BottomMenu).
 import type { Character } from '@pockie/shared'
-import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
+import { createContext, useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
 import { useLogout } from '../lib/auth'
 import { useOutfitPortrait } from './art'
@@ -17,6 +17,9 @@ const CURRENCIES = [
   { key: 'giftCoupon', label: 'Coupons', box: 'game-currency-coupon', color: 'text-[#f5f5f5]' },
 ] as const
 const SHADOW = '[text-shadow:0_0_2px_#000,0_0_2px_#000,0_0_2px_#000]'
+
+/** The 1:1 HUD layer, for HUD pieces rendered by the scene (its monster cards) through a portal. */
+export const HudLayer = createContext<HTMLElement | null>(null)
 const number = (value: number) => value.toLocaleString('en-US')
 
 export function TopBar({ character }: { character: Character }) {

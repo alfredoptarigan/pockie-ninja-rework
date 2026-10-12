@@ -2,16 +2,15 @@
 // chunks). Each mount owns one Phaser game and destroys it on unmount (StrictMode safe).
 //
 // ScenePictureMount: the scene picture with hoverable, clickable buildings, NPCs and monsters; it
-// calls `onNpc` / `onMonster` like SceneView's action list, which stays as the keyboard fallback.
+// calls `onNpc` like SceneView's action list, which stays as the keyboard fallback. The monster
+// cards are HUD elements (MonsterRow), not part of the picture.
 //
 // BattleReplayMount: plays a fight replay on the field's fight background with Skip, Replay and
 // speed controls, and reports when it is over (or could not play) through `onFinished`.
 import { useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import scenesJson from '../generated/game-scenes.json'
-import { DropsPanel } from './MonsterDrops'
-import type { PicturePortrait } from './phaser/picture-layout'
 import { GameButton } from './skin'
-import type { Replay, SceneMonster, SceneNpc, SceneView } from './types'
+import type { Replay, SceneNpc, SceneView } from './types'
 
 type Stage = typeof import('./phaser')
 const loadStage = () => import('./phaser')
@@ -74,20 +73,17 @@ function useLatest<T>(value: T) {
 export function ScenePictureMount({
   scene,
   onNpc,
-  onMonster,
   onExplore,
   exploreClip,
 }: {
   scene: SceneView
   onNpc: (npc: SceneNpc) => void
-  onMonster: (monster: SceneMonster) => void
   /** The field's explore tree was clicked. */
   onExplore?: () => void
   /** Scene element of the explore tree (GET /explore `clipName`). */
   exploreClip?: string
 }) {
-  const latest = useLatest({ onNpc, onMonster, onExplore })
-  const [hovered, setHovered] = useState<PicturePortrait | null>(null)
+  const latest = useLatest({ onNpc, onExplore })
   const key = useMemo(() => ({ scene, exploreClip }), [scene, exploreClip])
   const { ref, failed } = useStage(key, (stage, parent) =>
     stage.mountPicture(
@@ -95,12 +91,7 @@ export function ScenePictureMount({
       scene,
       {
         onNpc: (npc) => latest.current.onNpc(npc),
-        onMonster: (monster) => {
-          setHovered(null)
-          latest.current.onMonster(monster)
-        },
         onExplore: () => latest.current.onExplore?.(),
-        onMonsterHover: setHovered,
       },
       exploreClip,
     ),
@@ -109,15 +100,12 @@ export function ScenePictureMount({
   // The canvas has no keyboard access; SceneView's action list offers the same actions.
   // It fills the stage (same 16:9 ratio as the 1920x1080 pictures).
   return (
-    <>
-      <div
-        ref={ref}
-        data-testid="scene-picture"
-        aria-hidden="true"
-        className="absolute inset-0 overflow-hidden bg-black"
-      />
-      {hovered && <DropsPanel monster={hovered.monster} at={hovered.dropsAt} />}
-    </>
+    <div
+      ref={ref}
+      data-testid="scene-picture"
+      aria-hidden="true"
+      className="absolute inset-0 overflow-hidden bg-black"
+    />
   )
 }
 

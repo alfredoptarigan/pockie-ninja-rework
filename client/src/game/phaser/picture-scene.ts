@@ -1,18 +1,15 @@
 // Phaser scene picture: layers at original coordinates, hoverable and clickable buildings, NPCs
 // and monsters with English labels. Loaded lazily by ../stage.tsx.
 import { gameMotions } from '../../generated/game-assets'
-import type { SceneMonster, SceneNpc } from '../types'
+import type { SceneNpc } from '../types'
 import { createGame, LABEL_STYLE, loadSheet, setHighlight } from './game'
 import { frameAt, originOf, tickMs } from './motion'
-import { fitName, PORTRAIT_CELL, type PictureLayout, type PicturePortrait } from './picture-layout'
+import type { PictureLayout } from './picture-layout'
 import Phaser from 'phaser'
 
 export interface PictureActions {
   onNpc: (npc: SceneNpc) => void
-  onMonster: (monster: SceneMonster) => void
   onExplore?: () => void
-  /** A monster portrait is hovered (its Drops panel shows above the HUD), or left (null). */
-  onMonsterHover?: (portrait: PicturePortrait | null) => void
 }
 
 const SCENE_TICK_MS = tickMs(gameMotions.fps.scene)
@@ -20,8 +17,6 @@ const LABEL_SIZE = 34
 /** Invisible but still hit-testable (Phaser skips input on alpha 0). */
 const HIDDEN_ALPHA = 0.001
 const TITLE_SIZE = 30
-/** Name plate under a portrait: one line high, taller for a name wrapped on two lines. */
-const PLATE = { gap: 6, height: 34, pad: 10, lineHeight: 1.1 }
 /** Building names sit this far down the building's clip (its roof). */
 const TITLE_DROP = 0.22
 
@@ -37,11 +32,10 @@ class PictureScene extends Phaser.Scene {
   }
 
   preload() {
-    const { under, hotspots, figures, portraits, explore, skybox } = this.layout
+    const { under, hotspots, figures, explore, skybox } = this.layout
     const files = [
       ...under,
       ...[...hotspots, ...(explore ? [explore] : [])].map((h) => h.spot.file),
-      ...portraits.map((p) => p.portrait),
     ]
     for (const file of new Set([...files, skybox])) {
       if (file) this.load.image(file, file)
@@ -91,7 +85,6 @@ class PictureScene extends Phaser.Scene {
 
     if (ready(skybox)) this.add.image(0, 0, skybox).setOrigin(0)
     this.drawTitles()
-    this.drawPortraits()
 
     this.label = this.add
       .text(0, 0, '', { ...LABEL_STYLE, fontSize: `${LABEL_SIZE}px`, strokeThickness: 8 })
@@ -116,45 +109,6 @@ class PictureScene extends Phaser.Scene {
         .setOrigin(0.5)
       const half = text.width / 2
       text.setX(Phaser.Math.Clamp(spot.x + spot.width / 2, half, this.layout.width - half))
-    }
-  }
-
-  /** The area's monsters as portraits in a row at the top; a click starts the fight. */
-  private drawPortraits() {
-    const { size } = PORTRAIT_CELL
-    const small = { ...LABEL_STYLE, strokeThickness: 5 }
-    for (const cell of this.layout.portraits) {
-      const { monster, portrait, name, x, y } = cell
-      // Full names: smaller type, then two lines, instead of the original "Sorchin..." cut.
-      const label = this.add.text(0, 0, '', small).setOrigin(0.5, 0).setAlign('center')
-      const fit = fitName(
-        name,
-        size - PLATE.pad,
-        (text, px) => label.setFontSize(px).setText(text).getBounds().width,
-      )
-      label.setFontSize(fit.size).setLineSpacing(0).setText(fit.lines.join('\n'))
-      const plateTop = y + size / 2 + PLATE.gap
-      const plateHeight = Math.max(PLATE.height, label.height + PLATE.pad / 2)
-      const g = this.add.graphics()
-      g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(x - size / 2, y - size / 2, size, size, 10)
-      g.lineStyle(4, 0xd9a441).strokeRoundedRect(x - size / 2, y - size / 2, size, size, 10)
-      g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(x - size / 2, plateTop, size, plateHeight, 8)
-      g.lineStyle(3, 0xd9a441).strokeRoundedRect(x - size / 2, plateTop, size, plateHeight, 8)
-      label.setPosition(x, plateTop + (plateHeight - label.height) / 2).setDepth(1)
-      if (this.textures.exists(portrait)) {
-        const image = this.add.image(x, y - 6, portrait)
-        image.setScale((size - 24) / Math.max(image.width, image.height))
-        this.interactive(image, '', () => this.actions.onMonster(monster))
-        image.on('pointerover', () => this.actions.onMonsterHover?.(cell))
-        image.on('pointerout', () => this.actions.onMonsterHover?.(null))
-      }
-      this.add
-        .text(x, y + size / 2 - 6, `Lv.${monster.level}`, {
-          ...small,
-          fontSize: '24px',
-          color: '#ffd23c',
-        })
-        .setOrigin(0.5, 1)
     }
   }
 

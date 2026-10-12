@@ -5,7 +5,15 @@ import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
 import { CharacterWindow } from './CharacterWindow'
 import { RealtimePanels } from './Chat'
 import { CreateCharacter } from './CreateCharacter'
-import { ExpStrip, MenuBar, PlayerCard, ScenePlaque, TopBar, type MenuWindow } from './Hud'
+import {
+  ExpStrip,
+  HudLayer,
+  MenuBar,
+  PlayerCard,
+  ScenePlaque,
+  TopBar,
+  type MenuWindow,
+} from './Hud'
 import { Inventory } from './Inventory'
 import { NpcDialog } from './NpcDialog'
 import { QuestLog } from './QuestLog'
@@ -65,6 +73,7 @@ function GameScreen({ character }: { character: Character }) {
   const talk = useTalk()
   const travel = useTravel()
   const [openWindow, setWindow] = useState<Window | null>(null)
+  const [hudLayer, setHudLayer] = useState<HTMLDivElement | null>(null)
   const [npc, setNpc] = useState<SceneNpc | null>(null)
   const [bagHighlight, setBagHighlight] = useState<BagHighlight | undefined>()
   const close = () => setWindow(null)
@@ -103,15 +112,17 @@ function GameScreen({ character }: { character: Character }) {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
         >
-          <SceneView
-            key={character.sceneId}
-            character={character}
-            onNpc={openNpc}
-            onOpenBag={openBag}
-          />
+          <HudLayer value={hudLayer}>
+            <SceneView
+              key={character.sceneId}
+              character={character}
+              onNpc={openNpc}
+              onOpenBag={openBag}
+            />
+          </HudLayer>
         </div>
         {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
-        <div className="pointer-events-none absolute inset-0">
+        <div ref={setHudLayer} className="pointer-events-none absolute inset-0">
           <TopBar character={character} />
           <PlayerCard character={character} />
           <ScenePlaque

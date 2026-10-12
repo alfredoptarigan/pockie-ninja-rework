@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { villageScene } from '../test/game'
@@ -36,15 +36,9 @@ const fakeHandle = (): BattleHandle => ({
 describe('ScenePictureMount', () => {
   it('starts the picture and forwards clicks to the callbacks', async () => {
     const onNpc = vi.fn()
-    const onMonster = vi.fn()
     const onExplore = vi.fn()
     const { unmount } = render(
-      <ScenePictureMount
-        scene={villageScene}
-        onNpc={onNpc}
-        onMonster={onMonster}
-        onExplore={onExplore}
-      />,
+      <ScenePictureMount scene={villageScene} onNpc={onNpc} onExplore={onExplore} />,
     )
 
     expect(screen.getByTestId('scene-picture')).toHaveAttribute('aria-hidden', 'true')
@@ -53,9 +47,7 @@ describe('ScenePictureMount', () => {
     expect(parent).toBe(screen.getByTestId('scene-picture'))
     expect(scene).toBe(villageScene)
     actions.onNpc(villageScene.npcs[0]!)
-    actions.onMonster({ id: 'n33017', nameKey: 'lg_name_n33017', level: 2 })
     expect(onNpc).toHaveBeenCalledWith(villageScene.npcs[0])
-    expect(onMonster).toHaveBeenCalledWith(expect.objectContaining({ id: 'n33017' }))
     actions.onExplore?.()
     expect(onExplore).toHaveBeenCalled()
 
@@ -64,40 +56,8 @@ describe('ScenePictureMount', () => {
     expect(handle.destroy).toHaveBeenCalled()
   })
 
-  it("shows the hovered portrait's Drops panel above the HUD and hides it on leave", async () => {
-    const monster = {
-      id: 'n33017',
-      nameKey: 'lg_name_n33017',
-      level: 2,
-      drops: [{ itemId: 'i250101', nameKey: 'lg_Equip_Blunt1' }],
-    }
-    render(<ScenePictureMount scene={villageScene} onNpc={vi.fn()} onMonster={vi.fn()} />)
-    await waitFor(() => expect(mountPicture).toHaveBeenCalled())
-    const actions = vi.mocked(mountPicture).mock.calls.at(-1)![2]
-    const name = { name: 'Sunflower drops', hidden: true }
-    act(() =>
-      actions.onMonsterHover?.({
-        monster,
-        portrait: '',
-        name: 'Sunflower',
-        dropsAt: { x: 0.5, y: 0.2 },
-        x: 960,
-        y: 110,
-      }),
-    )
-    expect(screen.getByRole('region', name)).toHaveTextContent('Dogsmasher')
-    act(() => actions.onMonsterHover?.(null))
-    expect(screen.queryByRole('region', name)).not.toBeInTheDocument()
-  })
-
   it('renders nothing for scenes without exported art', () => {
-    render(
-      <ScenePictureMount
-        scene={{ ...villageScene, sceneId: 5001 }}
-        onNpc={vi.fn()}
-        onMonster={vi.fn()}
-      />,
-    )
+    render(<ScenePictureMount scene={{ ...villageScene, sceneId: 5001 }} onNpc={vi.fn()} />)
     expect(screen.queryByTestId('scene-picture')).not.toBeInTheDocument()
   })
 })

@@ -21,3 +21,12 @@ export function useNpcPhoto(npcId: string) {
   const key = motions?.npcs.placed[npcId]
   return key ? motions.npcs.art[key]?.photo : undefined
 }
+
+/** Portrait of a monster (the HUD monster cards), by NPC id, once the manifest is loaded. */
+export function useMonsterPortrait() {
+  const motions = useMotions().data
+  return (npcId: string) => {
+    const key = motions?.monsters[npcId]
+    return key ? motions.mobs[key]?.portrait : undefined
+  }
+}

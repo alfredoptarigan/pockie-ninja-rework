@@ -1,10 +1,12 @@
 import type { Character } from '@pockie/shared'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { errorMessage, useApplyResult, useExplore, useFight, useInventory, useScene } from './api'
 import { exploreClip } from './explore'
 import { ExploreWindow } from './ExploreWindow'
 import { FightSummary } from './FightSummary'
-import { DropsMenu } from './MonsterDrops'
+import { HudLayer } from './Hud'
+import { DropsMenu, MonsterRow } from './MonsterDrops'
 import { ReviveWindow } from './ReviveWindow'
 import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
@@ -36,6 +38,7 @@ export function SceneView({
   // The picture waits for the spots, so the explore tree is there from the start.
   const explore = useExplore(hasSpots)
   const pictureReady = !hasSpots || !explore.isPending
+  const hudLayer = useContext(HudLayer)
   const [reviveOpen, setReviveOpen] = useState(true)
   /** A monster picked while no weapon is equipped, waiting for "Fight anyway". */
   const [unarmed, setUnarmed] = useState<SceneMonster | null>(null)
@@ -97,10 +100,16 @@ export function SceneView({
           scene={scene.data}
           exploreClip={exploreClip(explore.data?.spots)}
           onNpc={onNpc}
-          onMonster={startFight}
           onExplore={() => setExploring(true)}
         />
       )}
+      {scene.data &&
+        pictureReady &&
+        hudLayer &&
+        createPortal(
+          <MonsterRow monsters={scene.data.monsters} onFight={(m) => void startFight(m)} />,
+          hudLayer,
+        )}
       <ExploreWindow
         character={character}
         scene={scene.data}

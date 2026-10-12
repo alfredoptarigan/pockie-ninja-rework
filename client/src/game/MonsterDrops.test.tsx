@@ -1,7 +1,8 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
-import { DropsMenu, DropsPanel } from './MonsterDrops'
+import { describe, expect, it, vi } from 'vitest'
+import { renderWithProviders } from '../test/utils'
+import { DropsMenu, MonsterRow } from './MonsterDrops'
 import type { SceneMonster } from './types'
 
 const sunflower: SceneMonster = {
@@ -63,23 +64,37 @@ describe('DropsMenu', () => {
   })
 })
 
-describe('DropsPanel', () => {
+describe('MonsterRow', () => {
   const panel = () => screen.getByRole('region', { name: 'Sunflower drops', hidden: true })
 
-  it('wraps a long list into columns and stays inside the stage', () => {
-    const many = Array.from({ length: 16 }, (_, i) => ({ itemId: `i${i}`, nameKey: `lg_i${i}` }))
-    render(<DropsPanel monster={{ ...sunflower, drops: many }} at={{ x: 0.01, y: 0.2 }} />)
-    expect(panel().style.width).toBe('380px')
-    // Pushed right so it does not leave the left edge.
-    expect(panel().style.left).toBe('4px')
-    expect(panel().style.top).toBe('144px')
-    expect(panel().querySelector('ul')!.style.gridTemplateRows).toBe('repeat(8, auto)')
+  it('draws a card per monster with art and shows its drops while hovered', async () => {
+    const onFight = vi.fn()
+    renderWithProviders(
+      <MonsterRow monsters={[sunflower, { ...sunflower, id: 'n0' }]} onFight={onFight} />,
+    )
+
+    // n0 has no art: only the Sunflower gets a card.
+    const card = await screen.findByTestId('monster-card')
+    expect(screen.getAllByTestId('monster-card')).toHaveLength(1)
+    expect(card).toHaveTextContent('Lv.2')
+    expect(card).toHaveTextContent('Sunflower')
+    expect(card.closest('[aria-hidden]')).toHaveAttribute('aria-hidden', 'true')
+
+    await userEvent.hover(card)
+    expect(within(panel()).getByText('Dogsmasher')).toBeInTheDocument()
+    await userEvent.unhover(card)
+    expect(screen.queryByRole('region', { name: 'Sunflower drops', hidden: true })).toBeNull()
+
+    await userEvent.click(card)
+    expect(onFight).toHaveBeenCalledWith(sunflower)
   })
 
-  it('is clamped at the right edge and lies above the HUD', () => {
-    render(<DropsPanel monster={sunflower} at={{ x: 0.99, y: 0.2 }} />)
-    expect(panel().style.left).toBe(`${1280 - 190 - 4}px`)
-    expect(panel().parentElement).toHaveClass('z-30', 'pointer-events-none')
-    expect(within(panel()).getByText('Dogsmasher')).toBeInTheDocument()
+  it('wraps a long drop list into columns', async () => {
+    const many = Array.from({ length: 16 }, (_, i) => ({ itemId: `i${i}`, nameKey: `lg_i${i}` }))
+    renderWithProviders(<MonsterRow monsters={[{ ...sunflower, drops: many }]} onFight={vi.fn()} />)
+
+    await userEvent.hover(await screen.findByTestId('monster-card'))
+    expect(panel().style.width).toBe('380px')
+    expect(panel().querySelector('ul')!.style.gridTemplateRows).toBe('repeat(8, auto)')
   })
 })

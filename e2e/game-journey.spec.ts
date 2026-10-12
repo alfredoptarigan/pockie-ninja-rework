@@ -224,14 +224,12 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await shot(page, 'drops')
   await drops.click()
 
-  // Hovering the Sunflower portrait (first of four, top centre of the 1920x1080 picture) shows
-  // its Drops panel above the HUD.
+  // Hovering the Sunflower card (monster row at the top of the HUD) shows its Drops panel.
   await expect(pictureCanvas).toHaveCount(1)
-  const canvas = await pictureCanvas.boundingBox()
-  await page.mouse.move(canvas!.x + canvas!.width * (759 / 1920), canvas!.y + canvas!.height * 0.1)
+  await page.getByTestId('monster-card').filter({ hasText: MONSTER }).hover()
   await expect(page.locator(`section[aria-label="${MONSTER} drops"]`)).toBeVisible()
   await shot(page, 'drops-hover')
-  await page.mouse.move(canvas!.x + 10, canvas!.y + canvas!.height / 2)
+  await page.mouse.move(10, 400)
 
   // 90004: accept at the scout, then beat a Sunflower with the weapon drawn.
   await acceptFrom(page, SCOUT, QUEST.combat)

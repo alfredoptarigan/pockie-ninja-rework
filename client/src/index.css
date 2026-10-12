@@ -223,6 +223,9 @@
 @utility game-role-letters {
   background: var(--ui-role-letters) 0 0 / 100% 100% no-repeat;
 }
+@utility game-monster-card {
+  background: var(--ui-monster-card) 0 0 / 100% 100% no-repeat;
+}
 @utility game-map-plaque {
   background: var(--ui-map-plaque) 0 0 / 100% 100% no-repeat;
 }
