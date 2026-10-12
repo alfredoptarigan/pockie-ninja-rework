@@ -1,0 +1,234 @@
+// The M2 journey: a new ninja plays the Fire Village tutorial (90000-90004) through the HUD up to
+// the first fight in Smelting Mountains, and visits every window on the way. Screenshots for the
+// visual check land in test-results/visual/ (gitignored).
+import { expect, test, type Locator, type Page } from '@playwright/test'
+
+test.use({ viewport: { width: 1440, height: 900 } })
+// Character creation, five quests, two scenes and a battle replay.
+test.setTimeout(120_000)
+
+const suffix = Date.now().toString(36).slice(-6)
+const account = {
+  username: `Hero_${suffix}`,
+  email: `hero_${suffix}@example.test`,
+  password: 'e2e-journey-password',
+}
+const ninja = `Ninja_${suffix}`
+
+// English names from client/src/i18n/en.json.
+const ELDER = 'Fire Village Elder in the Hall'
+const SCOUT = 'Genin'
+const FIELD = 'Smelting Mountains'
+const MONSTER = 'Sunflower'
+const PACK = 'Lv.1 Newbie Pack'
+const FISTS = 'Newbie Swiping Fists'
+// lg_Task_90000-90004.
+const QUEST = {
+  elder: 'Visit the Village Elder',
+  pack: 'Newbie Pack',
+  weapon: 'Weapon Equipment',
+  panel: 'Quest Panel',
+  combat: 'Combat Training [I]',
+}
+
+const shot = (page: Page, name: string) =>
+  page.screenshot({ path: `test-results/visual/${name}.png` })
+
+const dialog = (page: Page, name: string) => page.getByRole('dialog', { name, exact: true })
+
+const questNavigation = (page: Page) => page.getByRole('region', { name: 'Quest Navigation' })
+
+/** Presses Go on a Quest Navigation entry of the given tab. */
+async function go(page: Page, tab: 'Accepted' | 'Available', quest: string) {
+  const nav = questNavigation(page)
+  await nav.getByRole('tab', { name: tab }).click()
+  await nav.getByRole('button', { name: `Go: ${quest}`, exact: true }).click()
+}
+
+const expMeter = (page: Page) =>
+  page.getByRole('region', { name: 'Experience' }).getByRole('meter', { name: 'EXP' })
+
+async function expectLevel(page: Page, level: number) {
+  await expect(page.getByRole('region', { name: 'Experience' })).toContainText(`Level: ${level}`)
+}
+
+async function expectExp(page: Page, exp: number) {
+  await expect(expMeter(page)).toHaveAttribute('aria-valuenow', String(exp))
+}
+
+/** Every <img> under `scope` has loaded real pixels (no broken or missing art). */
+async function expectImagesLoaded(scope: Locator) {
+  const images = scope.locator('img')
+  await expect(images.first()).toBeVisible()
+  await expect
+    .poll(() =>
+      images.evaluateAll((list) =>
+        list.every(
+          (img) => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0,
+        ),
+      ),
+    )
+    .toBe(true)
+}
+
+/** Talks to the NPC through Go on an available quest, accepts it and ends the conversation. */
+async function acceptFrom(page: Page, npc: string, quest: string) {
+  await go(page, 'Available', quest)
+  const talk = dialog(page, npc)
+  await talk.getByRole('button', { name: /^Quests/ }).click()
+  await talk
+    .getByRole('article')
+    .filter({ hasText: quest })
+    .getByRole('button', { name: 'Accept quest' })
+    .click()
+  await expect(talk.getByRole('status')).toContainText(`Quest accepted: ${quest}.`)
+  await talk.getByRole('button', { name: 'Close' }).click()
+  await expect(talk).toBeHidden()
+}
+
+/** Buttons of the scene's keyboard action list are hidden until focused. */
+async function sceneAction(page: Page, name: string) {
+  const button = page.getByRole('region', { name: 'Scene actions' }).getByRole('button', { name })
+  await button.focus()
+  return button
+}
+
+test('a new ninja plays the Fire Village tutorial to the first fight and levels up', async ({
+  page,
+}) => {
+  // Register and create the ninja in the Fire Village.
+  await page.goto('/register')
+  await page.getByLabel('Username').fill(account.username)
+  await page.getByLabel('Email').fill(account.email)
+  await page.getByLabel('Password').fill(account.password)
+  await page.getByRole('button', { name: 'Create account' }).click()
+  await expect(page).toHaveURL('/play/create')
+
+  await page.getByLabel('Ninja name').fill(ninja)
+  await page.getByRole('radio', { name: 'Male', exact: true }).check()
+  // Outfit and village radios are hidden inside their cards: pick the card.
+  for (const choice of ['Ggio Vega', 'Fire Village']) {
+    await page.getByText(choice, { exact: true }).click()
+    await expect(page.getByRole('radio', { name: new RegExp(`^${choice}`) })).toBeChecked()
+  }
+  await page.getByRole('button', { name: 'Create ninja' }).click()
+
+  await expect(page).toHaveURL('/play')
+  const game = page.getByRole('main', { name: 'Game' })
+  await expect(game.getByRole('heading', { name: ninja })).toBeVisible()
+  await expect(
+    page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: 'Fire Village' }),
+  ).toBeVisible()
+  await expectLevel(page, 1)
+  await expectExp(page, 0)
+
+  // World chat: the message comes back through the server broadcast.
+  const chat = page.getByRole('region', { name: 'Chat' })
+  await expect(chat.getByText('Online', { exact: true })).toBeVisible()
+  const message = `Hello from ${ninja}`
+  await chat.getByLabel('Message to world chat').fill(message)
+  await chat.getByRole('button', { name: 'Send' }).click()
+  await expect(chat.getByRole('list', { name: 'world messages' })).toContainText(
+    `${ninja}: ${message}`,
+  )
+
+  // 90000: talk to the Village Elder (auto-accepted on creation).
+  await go(page, 'Accepted', QUEST.elder)
+  const elder = dialog(page, ELDER)
+  await expect(elder.getByRole('status').first()).toContainText(`Quest complete: ${QUEST.elder}.`)
+  await expect(elder.getByRole('list', { name: /Received for/ })).toBeVisible()
+  await elder.getByRole('button', { name: 'End Conversation' }).click()
+  await expectExp(page, 5)
+
+  // 90001: Go opens the bag at the newbie pack; the bag shows original item icons.
+  await go(page, 'Accepted', QUEST.pack)
+  const bag = dialog(page, 'Inventory')
+  await expect(bag.getByRole('img', { name: PACK })).toBeVisible()
+  await expectImagesLoaded(bag)
+  await bag.getByRole('button', { name: `Use ${PACK}` }).click()
+  await expect(bag.getByRole('status')).toContainText(`Quest complete: ${QUEST.pack}.`)
+  await expect(bag.getByRole('img', { name: FISTS })).toBeVisible()
+  await expectImagesLoaded(bag)
+  await shot(page, 'bag')
+  await bag.getByRole('button', { name: 'Close' }).click()
+  await expectExp(page, 10)
+
+  // 90002: accept at the Elder, equip the newbie weapon; its EXP reaches level 2.
+  await acceptFrom(page, ELDER, QUEST.weapon)
+  await go(page, 'Accepted', QUEST.weapon)
+  await bag.getByRole('button', { name: `Equip ${FISTS}` }).click()
+  await expect(bag.getByRole('status')).toContainText(`Quest complete: ${QUEST.weapon}.`)
+  await expect(bag.getByRole('listitem').filter({ hasText: FISTS })).toContainText('Equipped')
+  await bag.getByRole('button', { name: 'Close' }).click()
+  await expectLevel(page, 2)
+  await expect(game.getByText('Lv. 2', { exact: true })).toBeVisible()
+
+  // 90003: accept, then talk to the Elder again.
+  await acceptFrom(page, ELDER, QUEST.panel)
+  await go(page, 'Accepted', QUEST.panel)
+  await expect(elder.getByRole('status').first()).toContainText(`Quest complete: ${QUEST.panel}.`)
+  await elder.getByRole('button', { name: 'End Conversation' }).click()
+  await expectExp(page, 20)
+
+  // World Map: the painting with its places; the first field is a click away.
+  await page
+    .getByRole('region', { name: 'Location' })
+    .getByRole('button', { name: 'World Map' })
+    .click()
+  const map = dialog(page, 'World Map')
+  await expectImagesLoaded(map)
+  await expect(map.getByRole('button', { name: 'Fire Village (You are here)' })).toBeDisabled()
+  await expect(map.getByRole('button', { name: FIELD, exact: true })).toBeEnabled()
+  await shot(page, 'world-map')
+  await map.getByRole('button', { name: FIELD, exact: true }).click()
+  await expect(map).toBeHidden()
+  await expect(
+    page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: FIELD }),
+  ).toBeVisible()
+  await expect(page.getByTestId('scene-picture').locator('canvas')).toBeVisible()
+
+  // The field HUD has the Explore button by the scene plaque.
+  const exploration = page.getByRole('region', { name: 'Exploration' })
+  await expect(exploration).toContainText('today')
+  await page.waitForTimeout(1_000) // let the picture finish drawing
+  await shot(page, 'scene-hud')
+
+  // Explore window: the field's spots (looked at, not searched: the cards are random).
+  await exploration.getByRole('button', { name: 'Explore' }).click()
+  const explore = dialog(page, 'Exploration')
+  await expect(explore.getByText('Searches left today')).toBeVisible()
+  const spots = explore.getByRole('button', { name: /^Explore / })
+  await expect(spots.first()).toBeVisible()
+  expect(await spots.count()).toBeGreaterThan(0)
+  await shot(page, 'explore')
+  await explore.getByRole('button', { name: 'Close' }).click()
+  await expect(explore).toBeHidden()
+
+  // Drops menu of the Sunflower (the keyboard twin of the portrait's hover panel).
+  const drops = await sceneAction(page, `Drops: ${MONSTER}`)
+  await drops.click()
+  await expect(drops).toHaveAttribute('aria-expanded', 'true')
+  const dropList = page.getByRole('list', { name: `${MONSTER} drops` })
+  await expect(dropList).toBeVisible()
+  await expect(dropList.getByRole('listitem').first()).toBeVisible()
+  await shot(page, 'drops')
+  await drops.click()
+
+  // 90004: accept at the scout, then beat a Sunflower with the weapon drawn.
+  await acceptFrom(page, SCOUT, QUEST.combat)
+  const expBefore = Number(await expMeter(page).getAttribute('aria-valuenow'))
+  await (await sceneAction(page, `Fight ${MONSTER}`)).click()
+  const replay = page.getByRole('region', { name: 'Battle replay' })
+  await expect(replay.getByRole('button', { name: 'Skip' })).toBeEnabled()
+  await page.waitForTimeout(1_500) // a few ticks in, both fighters on stage
+  await shot(page, 'battle')
+  await replay.getByRole('button', { name: 'Skip' }).click()
+
+  // A level-2 ninja with a weapon beats a Sunflower; the quest reward brings level 3.
+  const summary = dialog(page, 'Victory')
+  await expect(summary).toContainText(`You defeated ${MONSTER}.`)
+  await expect(summary).toContainText(/EXP\s*\+\d+/)
+  await summary.getByRole('button', { name: 'Close' }).click()
+  await expectLevel(page, 3)
+  expect(Number(await expMeter(page).getAttribute('aria-valuenow'))).not.toBe(expBefore)
+})

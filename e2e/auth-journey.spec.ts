@@ -8,7 +8,9 @@ const account = {
   password: 'e2e-journey-password',
 }
 
+// The game has its own Log out under Settings; the landing account panel is the plain one.
 async function logOut(page: Page) {
+  await page.goto('/')
   await page.getByRole('button', { name: 'Log out' }).click()
   await expect(page).toHaveURL('/')
   await expect(page.getByRole('heading', { name: 'Claim your ninja name' })).toBeVisible()
@@ -26,8 +28,9 @@ test('register, log in, see the account, open play and log out', async ({ page }
   await page.getByLabel('Password').fill(account.password)
   await page.getByRole('button', { name: 'Create account' }).click()
 
-  await expect(page).toHaveURL('/play')
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(account.username)
+  // A new account has no ninja yet: play opens character creation.
+  await expect(page).toHaveURL('/play/create')
+  await expect(page.getByRole('heading', { name: 'Create your ninja' })).toBeVisible()
   await logOut(page)
 
   // Log in with the email in different casing, remembered for 30 days
@@ -36,7 +39,7 @@ test('register, log in, see the account, open play and log out', async ({ page }
   await page.getByLabel('Password').fill(account.password)
   await page.getByLabel('Remember me for 30 days').check()
   await page.getByRole('button', { name: 'Log in' }).click()
-  await expect(page).toHaveURL('/play')
+  await expect(page).toHaveURL('/play/create')
 
   const session = (await page.context().cookies()).find((cookie) => cookie.name === 'pn_session')
   expect(session?.httpOnly).toBe(true)
@@ -49,7 +52,7 @@ test('register, log in, see the account, open play and log out', async ({ page }
 
   // Play, then log out; play is protected afterwards
   await page.getByRole('link', { name: 'Play', exact: true }).first().click()
-  await expect(page).toHaveURL('/play')
+  await expect(page).toHaveURL('/play/create')
   await logOut(page)
   await page.goto('/play')
   await expect(page).toHaveURL('/login')
