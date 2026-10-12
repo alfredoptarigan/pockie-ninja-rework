@@ -1,3 +1,4 @@
+import { ItemIcon } from './ItemIcon'
 import { Dialog, GameButton } from './skin'
 import { GameText, plainText } from './text'
 import type { FightResult } from './types'
@@ -70,9 +71,14 @@ export function FightSummary({
                 {rewards.items.length === 0 ? (
                   'None'
                 ) : (
-                  <ul>
+                  <ul className="flex flex-col gap-1">
                     {rewards.items.map((item, i) => (
-                      <li key={`${item.itemId}-${i}`}>
+                      <li key={`${item.itemId}-${i}`} className="flex items-center gap-2">
+                        <ItemIcon
+                          itemId={item.itemId}
+                          name={plainText(itemNameKey(item.itemId), 'Unknown item')}
+                          className="size-8"
+                        />
                         <GameText k={itemNameKey(item.itemId)} fallback="Unknown item" />
                       </li>
                     ))}

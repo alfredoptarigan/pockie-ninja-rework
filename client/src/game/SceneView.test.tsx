@@ -76,6 +76,10 @@ describe('SceneView', () => {
     expect(dialog).toHaveTextContent('You defeated Sunflower.')
     expect(dialog).toHaveTextContent('+10')
     expect(dialog).toHaveTextContent('Healing Powder')
+    expect(within(dialog).getByRole('img', { name: 'Healing Powder' })).toHaveAttribute(
+      'src',
+      '/assets/game/items/icon_resume6.webp',
+    )
     expect(dialog).toHaveTextContent('Level up! You are now level 2.')
     expect(requestBody(fetchMock, 'POST /api/game/fight')).toEqual({ monsterId: 'n33017' })
   })
