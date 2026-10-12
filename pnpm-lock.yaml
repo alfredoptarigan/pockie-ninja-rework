@@ -267,6 +267,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)
 
+  game-core: {}
+
   server:
     dependencies:
       '@fastify/cookie':
@@ -278,6 +280,9 @@ importers:
       '@node-rs/argon2':
         specifier: ^2.2.2
         version: 2.2.2
+      '@pockie/game-core':
+        specifier: workspace:*
+        version: link:../game-core
       '@pockie/shared':
         specifier: workspace:*
         version: link:../shared
@@ -302,7 +307,7 @@ importers:
         version: 0.31.11
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(postcss@8.5.29)(tsx@4.23.15)(typescript@6.0.3)
+        version: 8.5.1(jiti@2.7.0)(postcss@8.5.29)(tsx@4.23.15)(typescript@6.0.3)
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
@@ -312,6 +317,8 @@ importers:
       zod:
         specifier: ^4.6.5
         version: 4.6.5
+
+  tools: {}
 
 packages:
 
@@ -5404,10 +5411,11 @@ snapshots:
     dependencies:
       playwright-core: 1.64.0
 
-  postcss-load-config@6.0.1(postcss@8.5.29)(tsx@4.23.15):
+  postcss-load-config@6.0.1(jiti@2.7.0)(postcss@8.5.29)(tsx@4.23.15):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
+      jiti: 2.7.0
       postcss: 8.5.29
       tsx: 4.23.15
 
@@ -5683,7 +5691,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(postcss@8.5.29)(tsx@4.23.15)(typescript@6.0.3):
+  tsup@8.5.1(jiti@2.7.0)(postcss@8.5.29)(tsx@4.23.15)(typescript@6.0.3):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.7)
       cac: 6.7.14
@@ -5694,7 +5702,7 @@ snapshots:
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(postcss@8.5.29)(tsx@4.23.15)
+      postcss-load-config: 6.0.1(jiti@2.7.0)(postcss@8.5.29)(tsx@4.23.15)
       resolve-from: 5.0.0
       rollup: 4.64.5
       source-map: 0.7.6

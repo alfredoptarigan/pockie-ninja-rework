@@ -8,6 +8,7 @@ import { csrfPlugin } from './modules/auth/csrf.js'
 import { getDummyHash } from './modules/auth/password.js'
 import { authRoutes, sessionPlugin } from './modules/auth/routes.js'
 import { contentRoutes } from './modules/content/routes.js'
+import { characterRoutes } from './modules/game/characters.js'
 import { statusRoutes } from './modules/status/routes.js'
 
 interface AppOptions {
@@ -50,6 +51,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(authRoutes, { db, env, prefix: '/api/auth' })
   app.register(contentRoutes, { db, prefix: '/api' })
   app.register(statusRoutes, { db, prefix: '/api' })
+  app.register(characterRoutes, { db, prefix: '/api/game' })
 
   return app
 }

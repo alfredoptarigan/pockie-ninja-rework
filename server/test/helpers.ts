@@ -10,7 +10,7 @@ export function createTestDb() {
 
 export async function truncateAll(db: Db) {
   await db.execute(
-    sql`truncate table sessions, users, posts, lore_chapters, faq_items restart identity cascade`,
+    sql`truncate table character_quests, inventory_items, characters, sessions, users, posts, lore_chapters, faq_items restart identity cascade`,
   )
 }
 
