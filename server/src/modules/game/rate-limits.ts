@@ -13,6 +13,7 @@ export const RATE_LIMITS = {
   shopMerchant: perMinute(120),
   shopMerchantBuy: perMinute(30),
   read: perMinute(120),
+  daily: perMinute(30),
   createCharacter: perMinute(10),
   fight: perMinute(60),
   // The 300 s cooldown already limits real searches; this only stops hammering.

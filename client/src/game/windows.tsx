@@ -11,8 +11,8 @@ import type { Character } from '@pockie/shared'
 import { createContext, useContext, type ComponentType } from 'react'
 import { ForgeWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
+import { DailyQuestWindow } from './daily'
 import { MerchantWindow, ShopWindow } from './shop'
-import { Dialog, GameButton } from './skin'
 
 export type WindowName = 'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily'
 
@@ -28,32 +28,6 @@ export interface OpenWindow {
   npcId?: string
 }
 
-const TITLES: Record<WindowName, string> = {
-  shop: 'Shop',
-  merchant: 'Mysterious Merchant',
-  forge: 'Blacksmith',
-  gates: 'Demon City',
-  pubFight: 'Pub Fight',
-  daily: 'Daily Quests',
-}
-
-/** Shown until a feature registers its window. */
-function ComingSoon({ title, onClose }: { title: string; onClose: () => void }) {
-  return (
-    <Dialog title={title} onClose={onClose} className="w-[22rem]">
-      <p>This is not open yet. Come back soon.</p>
-      <GameButton small className="mt-3" onClick={onClose}>
-        Close
-      </GameButton>
-    </Dialog>
-  )
-}
-
-const placeholder = (name: WindowName) =>
-  function Placeholder({ onClose }: WindowProps) {
-    return <ComingSoon title={TITLES[name]} onClose={onClose} />
-  }
-
 /** Kisuke Urahara (n17003, SingleGateEntryNpc.js) runs Las Noches; the Guard (n17001) the toll gates. */
 const LAS_NOCHES_NPC = 'n17003'
 
@@ -62,14 +36,14 @@ function GateWindow({ character, npcId, onClose }: WindowProps) {
   return <Window character={character} onClose={onClose} />
 }
 
-/** One line per feature: replace its placeholder with the feature's window component. */
+/** One line per feature: the window component each feature opens. */
 const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   shop: ({ character, onClose }) => <ShopWindow character={character} onClose={onClose} />,
   merchant: ({ character, onClose }) => <MerchantWindow character={character} onClose={onClose} />,
   forge: ({ onClose }) => <ForgeWindow view="enhance" onClose={onClose} />,
   gates: GateWindow,
   pubFight: ({ character, onClose }) => <PubFightWindow character={character} onClose={onClose} />,
-  daily: placeholder('daily'),
+  daily: ({ onClose }) => <DailyQuestWindow onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(

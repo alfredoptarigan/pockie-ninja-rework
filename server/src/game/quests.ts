@@ -169,9 +169,13 @@ export function questLock(
   taskId: number,
   character: { level: number; nation: number },
   quests: QuestProgress[],
+  daily = false,
 ): { code: string; message: string } | undefined {
   const row = task(taskId)
   if (!row) return { code: 'unknown_quest', message: 'Unknown quest.' }
+  // DayTaskSystem.OnCustomAcceptDayTask: daily quests must come from the daily board.
+  if (Number(row.TaskBaseType) === 2 && !daily)
+    return { code: 'daily_quest', message: 'Open Daily Quests to accept this quest.' }
   if (quests.some((q) => q.taskId === taskId)) {
     return { code: 'already_taken', message: 'You already have that quest.' }
   }
