@@ -1,10 +1,5 @@
 {
  "terms": {
-  "Nara Shikamaru": "Shikamaru Nara",
-  "Akimichi Choji": "Choji Akimichi",
-  "Inuzuka Kiba": "Kiba Inuzuka",
-  "Aburame Shino": "Shino Aburame",
-  "Soifon": "Soi Fon",
   "Hitsugaya Toushiro": "Toshiro Hitsugaya",
   "Neji": "Neji Hyuga",
   "Kakashi": "Kakashi Hatake",
@@ -23,20 +18,10 @@
   "Alat Ninja": "Ninja Tool",
   "Teknik Penyegelan": "Sealing Technique",
   "S-rank Ninja Wishing Pot": "S-Rank Outfit Wishing Pot",
-  "Kurosaki Ichigo": "Ichigo Kurosaki",
-  "Grimmjow": "Grimmjow Jaegerjaquez",
-  "Hirako Shinji": "Shinji Hirako",
   "Hollowfied Hirako Shinji": "Hollowified Shinji",
-  "Abarai Renji": "Renji Abarai",
   "Hyuga Neji": "Neji Hyuga",
   "Sarugaki Hiyori": "Hiyori Sarugaki",
-  "Shihouin Yoruichi": "Yoruichi Shihoin",
-  "Shiba Kuukaku": "Kukaku Shiba",
-  "Inoue Orihime": "Orihime Inoue",
-  "Kurenai Yuuhi": "Kurenai Yuhi",
-  "Hyuga Hinata": "Hinata Hyuga",
-  "Aizen": "Sosuke Aizen",
-  "Halibel": "Tier Harribel"
+  "Shiba Kuukaku": "Kukaku Shiba"
  },
  "units": [
   {

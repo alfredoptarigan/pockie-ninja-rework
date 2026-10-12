@@ -1,6 +1,8 @@
 // Exports the original 2011 art into client/public/assets with JSON manifests in
 // client/src/generated: the landing sprites (sprites.json) and the game assets (outfit, monster and
 // NPC motion sheets in game-motions.json; village and field scenes in game-scenes.json).
+// M2 item icons, weapon overlays and the text-free world map use separate new manifests
+// (game-items.json, game-weapons.json, game-world-map.json); run `pnpm assets:export extra`.
 // The in-game UI skin pieces go to client/public/assets/game/ui with game-ui.json.
 // Run with `pnpm assets:export` (`pnpm assets:export ui` for the UI skin only). Needs the original game backup (GAME_BACKUP_DIR, default
 // ~/Privates/game-pockieninja) with JPEXS FFDec and JDK 8 under local-run/.runtime. Unchanged
@@ -11,6 +13,7 @@ import { join } from 'node:path'
 import { format, resolveConfig } from 'prettier'
 import sharp from 'sharp'
 import { ACTION_NAMES, exportMonsters, exportNpcs, exportOutfits } from './assets/characters.ts'
+import { exportItems, exportWeapons, exportWorldMap } from './assets/extra.ts'
 import { ffdec } from './assets/ffdec.ts'
 import { paths } from './assets/paths.ts'
 import { exportScenes } from './assets/scenes.ts'
@@ -33,10 +36,10 @@ const STAND_FRAMES = { first: 5, last: 11 }
 const LOGIN_ART_CROP = { left: 0, top: 0, width: 1120, height: 1080 }
 
 const characters = [
-  { slug: 'naruto', name: 'Uzumaki Naruto', avatarId: 45 },
-  { slug: 'ichigo', name: 'Kurosaki Ichigo', avatarId: 1 },
-  { slug: 'sasuke', name: 'Uchiha Sasuke', avatarId: 48 },
-  { slug: 'rukia', name: 'Kuchiki Rukia', avatarId: 74 },
+  { slug: 'naruto', name: 'Naruto Uzumaki', avatarId: 45 },
+  { slug: 'ichigo', name: 'Ichigo Kurosaki', avatarId: 1 },
+  { slug: 'sasuke', name: 'Sasuke Uchiha', avatarId: 48 },
+  { slug: 'rukia', name: 'Rukia Kuchiki', avatarId: 74 },
   { slug: 'gaara', name: 'Gaara', avatarId: 46 },
 ]
 
@@ -163,8 +166,15 @@ async function exportUiSkin() {
 
 mkdirSync(paths.cache, { recursive: true })
 mkdirSync(paths.generated, { recursive: true })
-if (process.argv[2] !== 'ui') {
+async function exportExtra() {
+  await writeJson(join(paths.generated, 'game-items.json'), await exportItems())
+  await writeJson(join(paths.generated, 'game-world-map.json'), await exportWorldMap())
+  await writeJson(join(paths.generated, 'game-weapons.json'), await exportWeapons())
+}
+if (process.argv[2] === 'extra') await exportExtra()
+else if (process.argv[2] !== 'ui') {
   await exportLanding()
   await exportGame()
+  await exportExtra()
 }
-await exportUiSkin()
+if (process.argv[2] !== 'extra') await exportUiSkin()

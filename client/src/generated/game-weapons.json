@@ -1,0 +1,1605 @@
+{
+  "fps": 14,
+  "items": {
+    "i250100": "blunt1",
+    "i250101": "blunt1",
+    "i250102": "blunt2",
+    "i250103": "blunt3",
+    "i250104": "blunt4",
+    "i250105": "blunt5",
+    "i250106": "blunt6",
+    "i250107": "blunt7",
+    "i250108": "blunt8",
+    "i250110": "blunt10",
+    "i250117": "blunt17",
+    "i250118": "blunt20",
+    "i260100": "sharp1",
+    "i260101": "sharp1",
+    "i260102": "sharp2",
+    "i260103": "sharp3",
+    "i260104": "sharp4",
+    "i260105": "sharp5",
+    "i260106": "sharp6",
+    "i260107": "sharp7",
+    "i260108": "sharp8",
+    "i260110": "sharp10",
+    "i260117": "sharp17",
+    "i260118": "sharp20",
+    "i270100": "gloves1",
+    "i270101": "gloves1",
+    "i270102": "gloves2",
+    "i270103": "gloves3",
+    "i270104": "gloves4",
+    "i270105": "gloves5",
+    "i270106": "gloves6",
+    "i270107": "gloves7",
+    "i270108": "gloves8",
+    "i270110": "gloves10",
+    "i270117": "gloves17",
+    "i270118": "gloves19"
+  },
+  "outfits": {
+    "1": {
+      "file": "/assets/game/weapons/1/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "2": {
+      "file": "/assets/game/weapons/2/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "3": {
+      "file": "/assets/game/weapons/3/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "4": {
+      "file": "/assets/game/weapons/4/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "5": {
+      "file": "/assets/game/weapons/5/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "6": {
+      "file": "/assets/game/weapons/6/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "7": {
+      "file": "/assets/game/weapons/7/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "8": {
+      "file": "/assets/game/weapons/8/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "9": {
+      "file": "/assets/game/weapons/9/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "10": {
+      "file": "/assets/game/weapons/10/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "11": {
+      "file": "/assets/game/weapons/11/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "12": {
+      "file": "/assets/game/weapons/12/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "13": {
+      "file": "/assets/game/weapons/13/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "14": {
+      "file": "/assets/game/weapons/14/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "15": {
+      "file": "/assets/game/weapons/15/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "16": {
+      "file": "/assets/game/weapons/16/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "17": {
+      "file": "/assets/game/weapons/17/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "18": {
+      "file": "/assets/game/weapons/18/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "19": {
+      "file": "/assets/game/weapons/19/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "20": {
+      "file": "/assets/game/weapons/20/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "21": {
+      "file": "/assets/game/weapons/21/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "22": {
+      "file": "/assets/game/weapons/22/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "23": {
+      "file": "/assets/game/weapons/23/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "24": {
+      "file": "/assets/game/weapons/24/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "26": {
+      "file": "/assets/game/weapons/26/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "27": {
+      "file": "/assets/game/weapons/27/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "28": {
+      "file": "/assets/game/weapons/28/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "29": {
+      "file": "/assets/game/weapons/29/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "30": {
+      "file": "/assets/game/weapons/30/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "31": {
+      "file": "/assets/game/weapons/31/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "32": {
+      "file": "/assets/game/weapons/32/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "33": {
+      "file": "/assets/game/weapons/33/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "34": {
+      "file": "/assets/game/weapons/34/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "35": {
+      "file": "/assets/game/weapons/35/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "36": {
+      "file": "/assets/game/weapons/36/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "37": {
+      "file": "/assets/game/weapons/37/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "39": {
+      "file": "/assets/game/weapons/39/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "40": {
+      "file": "/assets/game/weapons/40/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "42": {
+      "file": "/assets/game/weapons/42/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "43": {
+      "file": "/assets/game/weapons/43/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "44": {
+      "file": "/assets/game/weapons/44/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "45": {
+      "file": "/assets/game/weapons/45/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "46": {
+      "file": "/assets/game/weapons/46/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "47": {
+      "file": "/assets/game/weapons/47/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "48": {
+      "file": "/assets/game/weapons/48/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "49": {
+      "file": "/assets/game/weapons/49/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "50": {
+      "file": "/assets/game/weapons/50/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "51": {
+      "file": "/assets/game/weapons/51/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "52": {
+      "file": "/assets/game/weapons/52/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "53": {
+      "file": "/assets/game/weapons/53/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "54": {
+      "file": "/assets/game/weapons/54/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "55": {
+      "file": "/assets/game/weapons/55/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "56": {
+      "file": "/assets/game/weapons/56/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "57": {
+      "file": "/assets/game/weapons/57/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "58": {
+      "file": "/assets/game/weapons/58/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "59": {
+      "file": "/assets/game/weapons/59/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "60": {
+      "file": "/assets/game/weapons/60/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "61": {
+      "file": "/assets/game/weapons/61/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "62": {
+      "file": "/assets/game/weapons/62/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "63": {
+      "file": "/assets/game/weapons/63/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "64": {
+      "file": "/assets/game/weapons/64/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "65": {
+      "file": "/assets/game/weapons/65/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "66": {
+      "file": "/assets/game/weapons/66/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "67": {
+      "file": "/assets/game/weapons/67/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "69": {
+      "file": "/assets/game/weapons/69/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "70": {
+      "file": "/assets/game/weapons/70/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20"
+      ]
+    },
+    "72": {
+      "file": "/assets/game/weapons/72/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "74": {
+      "file": "/assets/game/weapons/74/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "76": {
+      "file": "/assets/game/weapons/76/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "84": {
+      "file": "/assets/game/weapons/84/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "85": {
+      "file": "/assets/game/weapons/85/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "86": {
+      "file": "/assets/game/weapons/86/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20",
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20",
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "87": {
+      "file": "/assets/game/weapons/87/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20",
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20",
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "88": {
+      "file": "/assets/game/weapons/88/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20",
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20",
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "89": {
+      "file": "/assets/game/weapons/89/layers.json",
+      "keys": [
+        "blunt1",
+        "blunt2",
+        "blunt3",
+        "blunt4",
+        "blunt5",
+        "blunt6",
+        "blunt7",
+        "blunt8",
+        "blunt10",
+        "blunt17",
+        "blunt20",
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20",
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "90": {
+      "file": "/assets/game/weapons/90/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "98": {
+      "file": "/assets/game/weapons/98/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "103": {
+      "file": "/assets/game/weapons/103/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "104": {
+      "file": "/assets/game/weapons/104/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "105": {
+      "file": "/assets/game/weapons/105/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "106": {
+      "file": "/assets/game/weapons/106/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "107": {
+      "file": "/assets/game/weapons/107/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "108": {
+      "file": "/assets/game/weapons/108/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "109": {
+      "file": "/assets/game/weapons/109/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    },
+    "111": {
+      "file": "/assets/game/weapons/111/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "113": {
+      "file": "/assets/game/weapons/113/layers.json",
+      "keys": [
+        "sharp1",
+        "sharp2",
+        "sharp3",
+        "sharp4",
+        "sharp5",
+        "sharp6",
+        "sharp7",
+        "sharp8",
+        "sharp10",
+        "sharp17",
+        "sharp20"
+      ]
+    },
+    "114": {
+      "file": "/assets/game/weapons/114/layers.json",
+      "keys": [
+        "gloves1",
+        "gloves2",
+        "gloves3",
+        "gloves4",
+        "gloves5",
+        "gloves6",
+        "gloves7",
+        "gloves8",
+        "gloves10",
+        "gloves17",
+        "gloves19"
+      ]
+    }
+  },
+  "gaps": {
+    "incompleteBodyOutfits": [43, 59],
+    "unmappedActions": ["102"],
+    "unmappedSkills": [
+      "1000",
+      "1101",
+      "1201",
+      "1301",
+      "1302",
+      "1303",
+      "1401",
+      "1402",
+      "1403",
+      "1501",
+      "1502",
+      "1801",
+      "18011",
+      "18012",
+      "1804",
+      "1806",
+      "1809",
+      "1811",
+      "1812",
+      "1817",
+      "1818",
+      "1819",
+      "1820",
+      "1821",
+      "1833",
+      "20001",
+      "215",
+      "31000",
+      "31002",
+      "31003",
+      "31004",
+      "31005",
+      "31100",
+      "31801",
+      "31808",
+      "31816",
+      "31817",
+      "31818",
+      "31824",
+      "31828",
+      "31830",
+      "31832",
+      "32000",
+      "32001",
+      "33001",
+      "33002",
+      "34001",
+      "5242",
+      "5302",
+      "531",
+      "5312",
+      "544",
+      "5442",
+      "5502",
+      "553",
+      "5532",
+      "567",
+      "5672",
+      "570",
+      "5702",
+      "6032",
+      "604",
+      "6042",
+      "6052",
+      "606",
+      "6062",
+      "607",
+      "6072",
+      "6082",
+      "6092",
+      "613",
+      "6132",
+      "614",
+      "6142",
+      "8"
+    ],
+    "outfitsWithMissingLayers": []
+  }
+}

@@ -129,7 +129,7 @@ export function readBaseSource(joined: Buffer) {
 }
 
 /** Newest BaseSource version (file names are v<dotted version>_baseSource_<part>). */
-function baseSourceFiles() {
+export function baseSourceFiles() {
   const dir = join(paths.apache, 'source/BaseSource')
   const versions = [
     ...new Set(

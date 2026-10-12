@@ -27,7 +27,6 @@
   "Amegakure": "Hidden Rain Village",
   "Rumah": "Home",
   "Tim Pengawal": "Guard Squad",
-  "Stinger Bee": "Bee Stingers",
   "Laporan": "Report",
   "Menyelidiki": "Investigation",
   "Iblis Api": "Fire Demon",
@@ -37,21 +36,8 @@
   "Kembali": "Return",
   "Iblis Air": "Water Demon",
   "Iblis Tanah": "Earth Demon",
-  "Ninja Hutan": "Forest Ninja",
   "Rumput": "Grass",
-  "Jagung": "Corn",
-  "Boss Toko Barang": "Merchant Boss",
-  "Pedagang Keliling": "Traveling Merchant",
-  "Ahli Agama": "Priest",
-  "Penyihir": "Sorcerer",
-  "Perampok": "Bandit",
-  "Pendekar Pedang": "Swordsman",
-  "Petualang": "Adventurer",
-  "Pemancing": "Fisherman",
-  "Giant Centipede": "Huge Centipede",
-  "Scarlet Bandit": "Scarlet",
-  "Righteous Bandit Saizon": "The Righteous Thief",
-  "Chevalier": "Chevalier Demon"
+  "Jagung": "Corn"
  },
  "units": [
   {

@@ -1,0 +1,17 @@
+{
+  "file": "/assets/game/map/world.webp",
+  "width": 768,
+  "height": 426,
+  "locations": {
+    "111": { "depth": 4, "x": 63.95, "y": 350, "width": 90, "height": 61.6 },
+    "121": { "depth": 10, "x": 639, "y": 297.25, "width": 92, "height": 46.9 },
+    "131": { "depth": 34, "x": 25.95, "y": 171, "width": 72, "height": 81.1 },
+    "141": { "depth": 24, "x": 347.25, "y": 351, "width": 47.5, "height": 54.25 },
+    "151": { "depth": 28, "x": 590, "y": 134, "width": 131.6, "height": 83 },
+    "2101": { "depth": 2, "x": 29.95, "y": 303, "width": 90.5, "height": 71.65 },
+    "2201": { "depth": 12, "x": 600.95, "y": 288, "width": 67, "height": 51 },
+    "2301": { "depth": 36, "x": 44.25, "y": 218.4, "width": 69.75, "height": 79.6 },
+    "2401": { "depth": 22, "x": 230, "y": 312.55, "width": 130, "height": 71.1 },
+    "2501": { "depth": 32, "x": 601.95, "y": 198, "width": 106, "height": 50 }
+  }
+}
