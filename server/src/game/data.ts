@@ -2,7 +2,7 @@
 // Files are loaded on first use and cached for the life of the process.
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import type { AvatarStats } from '@pockie/game-core'
+import type { AvatarStats, SkillInput } from '@pockie/game-core'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -61,6 +61,31 @@ const list = (value: Row[string] | undefined) =>
   value === undefined ? [] : Array.isArray(value) ? value.map(String) : [String(value)]
 
 export const npc = (id: string) => load<Record<string, Row>>('npcs')[id]
+
+/** skill.ini row of one skill id (without the id). */
+export const skill = (id: number) =>
+  load<Record<string, Omit<SkillInput, 'id'>>>('skills')[String(id)]
+
+/** AvatarSkill.ini SkillID1-4 of an outfit (`i29NNNN`), 0 = empty slot. */
+export function avatarSkillIds(avatarId: number) {
+  const row =
+    load<Record<string, Record<string, number>>>('avatar-skills')[
+      `i29${String(avatarId).padStart(4, '0')}`
+    ]
+  return row ? [row.SkillID1, row.SkillID2, row.SkillID3, row.SkillID4].map(Number) : undefined
+}
+
+/** NpcRecord AttackSkill + TriggerSkill ids, resolved through the record values. */
+export function npcSkillIds(npcId: string) {
+  const record = load<Record<string, Record<string, number>>>('npc-records')[npcId]
+  if (record?.AttackSkill === undefined && record?.TriggerSkill === undefined) return undefined
+  const values =
+    load<Record<string, { r: number | string | (number | string)[] }>>('npc-record-values')
+  return [record.AttackSkill, record.TriggerSkill].flatMap((rec) =>
+    rec === undefined ? [] : [values[String(rec)]?.r ?? []].flat().map(Number),
+  )
+}
+
 export const item = (id: string) => load<Record<string, Row>>('items')[id]
 export const levels = () =>
   load<{ levelexp: Record<string, number>; role: { maxlevel: number } }>('levels')
