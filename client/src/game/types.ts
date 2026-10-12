@@ -177,7 +177,11 @@ export interface ExploreStar {
 export interface ExploreSpot {
   id: string
   nameKey: string
+  /** Scene element that opens the spot (the field's big tree); null for spots without one. */
+  clipName: string | null
   requireLevel: number
+  /** Stone paid by every search (0: none). */
+  requireStone: number
   /** Keys used up by every search. */
   requireItems: { itemId: string; count: number }[]
   star: ExploreStar
@@ -191,6 +195,8 @@ export interface ExploreStatus {
 }
 
 export interface ExploreView extends ExploreStatus {
+  /** Rest after each search (OutSearchCommon.ini), in seconds. */
+  cooldownSeconds: number
   spots: ExploreSpot[]
 }
 

@@ -6,7 +6,6 @@ import {
   type Hotspot,
   type MotionSheet,
 } from '../../generated/game-assets'
-import { exploreClip } from '../explore'
 import { plainText } from '../text'
 import type { SceneMonster, SceneNpc, SceneView } from '../types'
 import worldData from '../world-data.json'
@@ -81,7 +80,8 @@ function buildingTitle(clip: string, npcId: string, fallback: string) {
   return CLIP_TITLES[clip] ?? (title && title.length <= MAX_TITLE ? title : fallback)
 }
 
-export function pictureLayout(scene: SceneView): PictureLayout | undefined {
+/** `exploreClip`: the element that opens the Explore window (from GET /explore), if any. */
+export function pictureLayout(scene: SceneView, exploreClip?: string): PictureLayout | undefined {
   const art = gameScenes[String(scene.sceneId)]
   if (!art?.layers.background) return undefined
   const npcsById = new Map(scene.npcs.map((npc) => [npc.id, npc]))
@@ -133,8 +133,7 @@ export function pictureLayout(scene: SceneView): PictureLayout | undefined {
     }
   })
 
-  const exploreSpot = scene.exploreSpots.flatMap((id) => exploreClip(id) ?? [])[0]
-  const explore = exploreSpot ? art.hotspots[exploreSpot] : undefined
+  const explore = exploreClip ? art.hotspots[exploreClip] : undefined
 
   const { background, backgroundeffect, element, skybox } = art.layers
   return {

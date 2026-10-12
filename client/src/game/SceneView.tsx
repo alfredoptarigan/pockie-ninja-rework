@@ -1,6 +1,7 @@
 import type { Character } from '@pockie/shared'
 import { useState } from 'react'
-import { errorMessage, useApplyResult, useFight, useInventory, useScene } from './api'
+import { errorMessage, useApplyResult, useExplore, useFight, useInventory, useScene } from './api'
+import { exploreClip } from './explore'
 import { ExploreWindow } from './ExploreWindow'
 import { FightSummary } from './FightSummary'
 import { DropsMenu } from './MonsterDrops'
@@ -31,6 +32,10 @@ export function SceneView({
   const fight = useFight()
   const inventory = useInventory()
   const defeated = isDefeated(character)
+  const hasSpots = Boolean(scene.data?.exploreSpots.length)
+  // The picture waits for the spots, so the explore tree is there from the start.
+  const explore = useExplore(hasSpots)
+  const pictureReady = !hasSpots || !explore.isPending
   const [reviveOpen, setReviveOpen] = useState(true)
   /** A monster picked while no weapon is equipped, waiting for "Fight anyway". */
   const [unarmed, setUnarmed] = useState<SceneMonster | null>(null)
@@ -87,9 +92,10 @@ export function SceneView({
 
   return (
     <>
-      {scene.data && (
+      {scene.data && pictureReady && (
         <ScenePictureMount
           scene={scene.data}
+          exploreClip={exploreClip(explore.data?.spots)}
           onNpc={onNpc}
           onMonster={startFight}
           onExplore={() => setExploring(true)}

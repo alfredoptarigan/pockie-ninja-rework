@@ -25,18 +25,23 @@ const view: ExploreView = {
   remaining: 6,
   total: 7,
   cooldownEndsAt: null,
+  cooldownSeconds: 300,
   spots: [
     {
       id: '21011',
       nameKey: 'lg_OutSearch_21011',
+      clipName: 'OutCity_1110',
       requireLevel: 1,
+      requireStone: 0,
       requireItems: [],
       star: { level: 1, progress: 1, perStar: 2 },
     },
     {
       id: '21012',
       nameKey: 'lg_OutSearch_21012',
+      clipName: null,
       requireLevel: 1,
+      requireStone: 0,
       requireItems: [{ itemId: 'i150046', count: 1 }],
       star: { level: 0, progress: 0, perStar: 4 },
     },
@@ -168,6 +173,41 @@ describe('ExploreWindow', () => {
     )
   })
 
+  it('shows a Stone cost, the rest from the server and locks a spot the ninja cannot pay', async () => {
+    const [free, expert] = view.spots
+    api(
+      {},
+      {
+        explore: {
+          ...view,
+          cooldownSeconds: 600,
+          spots: [
+            { ...free!, requireStone: 50 },
+            { ...expert!, requireStone: 500 },
+          ],
+        },
+        items: [{ ...fists, itemId: 'i150046', nameKey: 'lg_i150046' }],
+      },
+    )
+    renderWithProviders(<Harness />)
+    const dialog = await openWindow()
+
+    const cheap = within(dialog).getByRole('region', { name: FREE })
+    expect(cheap).toHaveTextContent('Cost50 Stone (you have 100)')
+    await userEvent.click(within(cheap).getByRole('button', { name: `Explore ${FREE}` }))
+    const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
+    expect(confirm).toHaveTextContent(
+      'This uses 1 of your 6 searches left today and 50 Stone. Afterwards you rest 10 minutes',
+    )
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Cancel' }))
+
+    const costly = within(dialog).getByRole('region', { name: EXPERT })
+    expect(costly).toHaveTextContent('500 Stone (you have 100)')
+    expect(
+      within(costly).getByRole('button', { name: `Explore ${EXPERT}` }),
+    ).toHaveAccessibleDescription('You need 500 Stone to explore there.')
+  })
+
   it('explores after a confirmation, shows what was found and refreshes the game', async () => {
     const fetchMock = api({ 'POST /api/game/explore/21011': () => json(found) })
     renderWithProviders(<Harness />)
@@ -177,7 +217,9 @@ describe('ExploreWindow', () => {
     await userEvent.click(within(dialog).getByRole('button', { name: `Explore ${FREE}` }))
     const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
     expect(confirm).toHaveTextContent(`Explore ${FREE}?`)
-    expect(confirm).toHaveTextContent('This uses 1 of your 6 searches left today.')
+    expect(confirm).toHaveTextContent(
+      'This uses 1 of your 6 searches left today. Afterwards you rest 5 minutes before the next search.',
+    )
     await userEvent.click(within(confirm).getByRole('button', { name: 'Cancel' }))
     expect(calls(fetchMock, 'POST /api/game/explore/21011')).toBe(0)
 

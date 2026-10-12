@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { character, fists, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import { useCharacter } from './api'
-import { mountBattle, type BattleHandle } from './phaser'
+import { mountBattle, mountPicture, type BattleHandle } from './phaser'
 import { SceneView } from './SceneView'
 import type { FightResult, SceneView as Scene } from './types'
 
@@ -68,6 +68,36 @@ describe('SceneView', () => {
       await within(actions).findByRole('button', { name: 'Fire Village Elder in the Hall' }),
     )
     expect(onNpc).toHaveBeenCalledWith(villageScene.npcs[0])
+  })
+
+  it('starts the picture with the explore tree the server names', async () => {
+    mockApi({
+      ...armed,
+      'GET /api/game/scene': () => json({ ...field, exploreSpots: ['21011', '21012'] }),
+      'GET /api/game/explore': () =>
+        json({
+          remaining: 7,
+          total: 7,
+          cooldownEndsAt: null,
+          cooldownSeconds: 300,
+          spots: [
+            { id: '21012', clipName: null },
+            { id: '21011', clipName: 'OutCity_1109' },
+          ].map((spot) => ({
+            ...spot,
+            nameKey: `lg_OutSearch_${spot.id}`,
+            requireLevel: 1,
+            requireStone: 0,
+            requireItems: [],
+            star: { level: 0, progress: 0, perStar: 2 },
+          })),
+        }),
+    })
+    const before = vi.mocked(mountPicture).mock.calls.length
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
+
+    await waitFor(() => expect(vi.mocked(mountPicture).mock.calls.length).toBe(before + 1))
+    expect(vi.mocked(mountPicture).mock.calls.at(-1)![3]).toBe('OutCity_1109')
   })
 
   it('fights a monster and shows the result', async () => {

@@ -16,6 +16,7 @@ import {
   itemName,
   MAX_STARS,
   outcomeText,
+  restText,
   starText,
 } from './explore'
 import { ItemIcon } from './ItemIcon'
@@ -209,8 +210,8 @@ function ExploreFlow({
           <p>Explore {spotName(confirming)}?</p>
           <p className="mt-1">
             This uses 1 of your {data.remaining} searches left today
-            {confirming.requireItems.length > 0 ? ` and ${costText(confirming)}` : ''}. Afterwards
-            you rest before the next search.
+            {costText(confirming) === 'Free' ? '' : ` and ${costText(confirming)}`}. Afterwards you
+            rest {restText(data.cooldownSeconds)} before the next search.
           </p>
           <div className="mt-3 flex gap-2">
             <GameButton small onClick={() => void start(confirming)}>
@@ -258,6 +259,7 @@ function SpotList({
             <SpotRow
               spot={spot}
               bag={bag}
+              stone={character.stone}
               block={exploreBlock(spot, status, character, bag, now)}
               secondsLeft={left}
               busy={busy}
@@ -273,6 +275,7 @@ function SpotList({
 function SpotRow({
   spot,
   bag,
+  stone,
   block,
   secondsLeft,
   busy,
@@ -280,6 +283,8 @@ function SpotRow({
 }: {
   spot: ExploreSpot
   bag: InventoryItem[] | undefined
+  /** The ninja's Stone, shown next to a Stone cost. */
+  stone: number
   block: ReturnType<typeof exploreBlock>
   secondsLeft: number
   busy: boolean
@@ -302,19 +307,19 @@ function SpotRow({
           <dd>{spot.requireLevel}+</dd>
           <dt className="font-bold">Cost</dt>
           <dd>
-            {spot.requireItems.length === 0
-              ? 'Free'
-              : spot.requireItems.map((need) => (
-                  <span key={need.itemId} className="flex items-center gap-1">
-                    <ItemIcon
-                      itemId={need.itemId}
-                      name={itemName(need.itemId)}
-                      className="size-7"
-                    />
-                    {need.count} x {itemName(need.itemId)}
-                    {bag && ` (you have ${bagCount(bag, need.itemId)})`}
-                  </span>
-                ))}
+            {spot.requireStone === 0 && spot.requireItems.length === 0 && 'Free'}
+            {spot.requireStone > 0 && (
+              <span className="block">
+                {spot.requireStone} Stone (you have {stone})
+              </span>
+            )}
+            {spot.requireItems.map((need) => (
+              <span key={need.itemId} className="flex items-center gap-1">
+                <ItemIcon itemId={need.itemId} name={itemName(need.itemId)} className="size-7" />
+                {need.count} x {itemName(need.itemId)}
+                {bag && ` (you have ${bagCount(bag, need.itemId)})`}
+              </span>
+            ))}
           </dd>
         </dl>
         {block && (

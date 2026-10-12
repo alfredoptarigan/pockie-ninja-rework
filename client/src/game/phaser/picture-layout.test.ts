@@ -54,12 +54,13 @@ describe('pictureLayout', () => {
   })
 
   it('opens the Explore window from the field’s explore tree', () => {
-    const layout = pictureLayout({ ...field, exploreSpots: ['21011', '21012'] })!
+    const layout = pictureLayout({ ...field, exploreSpots: ['21011', '21012'] }, 'OutCity_1110')!
     expect(layout.explore).toMatchObject({
       title: 'Explore',
       spot: { file: expect.stringMatching(/clip-OutCity_1110/) },
     })
     expect(pictureLayout(field)!.explore).toBeUndefined()
+    expect(pictureLayout(field, 'NoSuchClip')!.explore).toBeUndefined()
     expect(pictureLayout(villageScene)!.explore).toBeUndefined()
   })
 
