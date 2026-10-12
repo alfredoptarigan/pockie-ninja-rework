@@ -185,7 +185,10 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await expect(
     page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: FIELD }),
   ).toBeVisible()
-  await expect(page.getByTestId('scene-picture').locator('canvas')).toBeVisible()
+  // Phaser removes the old scene's canvas a frame after the new one mounts.
+  const pictureCanvas = page.getByTestId('scene-picture').locator('canvas')
+  await expect(pictureCanvas).toHaveCount(1)
+  await expect(pictureCanvas).toBeVisible()
 
   // The field HUD has the Explore button by the scene plaque.
   const exploration = page.getByRole('region', { name: 'Exploration' })
@@ -216,7 +219,8 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
 
   // Hovering the Sunflower portrait (first of four, top centre of the 1920x1080 picture) shows
   // its Drops panel above the HUD.
-  const canvas = await page.getByTestId('scene-picture').locator('canvas').boundingBox()
+  await expect(pictureCanvas).toHaveCount(1)
+  const canvas = await pictureCanvas.boundingBox()
   await page.mouse.move(canvas!.x + canvas!.width * (759 / 1920), canvas!.y + canvas!.height * 0.1)
   await expect(page.locator(`section[aria-label="${MONSTER} drops"]`)).toBeVisible()
   await shot(page, 'drops-hover')
