@@ -93,7 +93,7 @@ describe('ScenePictureMount', () => {
   it('renders nothing for scenes without exported art', () => {
     render(
       <ScenePictureMount
-        scene={{ ...villageScene, sceneId: 171 }}
+        scene={{ ...villageScene, sceneId: 5001 }}
         onNpc={vi.fn()}
         onMonster={vi.fn()}
       />,

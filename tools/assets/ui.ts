@@ -3,7 +3,8 @@
 // SourceCenter.as): the parts joined and inflated hold length-prefixed entries, each a UTF title
 // plus content. UI_LookAndFeel.swf is the AsWing skin (FrameUIBase.as asks it for Frame_activeBG,
 // FrameTitleBar, Frame_CloseButton); UI_RoleIcon, UI_BottomMenu and UI_TopGuide are the scene HUD;
-// UI_UIResourceTemp has the bag slot. Only text-free pieces are picked, rendered at 2x by FFDec,
+// UI_UIResourceTemp has the bag slot; M3_PIECES add the shop, forge, toll gate, pub fight and card
+// windows. Only text-free pieces are picked, rendered at 2x by FFDec,
 // and written as lossless WebP with their 9-slice insets (from DefineScalingGrid) in game-ui.json.
 import { createHash } from 'node:crypto'
 import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -13,7 +14,7 @@ import sharp from 'sharp'
 import { cached } from './cache.ts'
 import { ffdec } from './ffdec.ts'
 import { assetUrl, paths } from './paths.ts'
-import { scalingGrids, type Rect } from './swf.ts'
+import { scalingGrids, symbolIds, type Rect } from './swf.ts'
 
 const BASE_SOURCE_PARTS = 7
 const ZOOM = 2
@@ -57,6 +58,68 @@ const lookAndFeel = (symbol: string, slice?: true | Insets): PieceSource => ({
   symbol,
   slice,
 })
+
+const resource = (name: string, slice?: true): PieceSource => ({
+  swf: 'UI_Resource',
+  symbol: `UIResource.${name}`,
+  slice,
+})
+const sprite = (swf: string, symbol: number): PieceSource => ({ swf, symbol })
+
+// M3 windows. The shop, forge, exchange and Las Noches layouts (UI_NpcShop_Xml, UI_MysticShop_Xml,
+// UI_RoleUse_Xml, UI_MartBuySet_Xml, UI_EquipMakeRoom_Xml, UI_YYEquipCompose_Xml,
+// UI_ItemExchange_Xml, UI_SingleTollGate_Xml) are AsWing trees over the look and feel above plus
+// these UI_Resource backgrounds. The toll gate, pub fight and card flip windows are SWFs; only
+// their text-free parts are taken (titles, labels, the card back logo and the prize scrolls carry
+// Indonesian or Chinese text).
+const M3_PIECES: Record<string, PieceSource> = {
+  'panel-1': resource('Common.BigBG1', true),
+  'panel-2': resource('Common.BigBG2', true),
+  'panel-3': resource('Common.BigBG3', true),
+  'panel-4': resource('Common.BigBG4', true),
+  'panel-5': resource('Common.BigBG5', true),
+  'panel-small': resource('Common.SmallBG1', true),
+  'text-box': resource('Common.TextBG1', true),
+  divider: resource('Common.PartitionYellow', true),
+  'slot-shop': resource('Icon.Grid_YellowBSD', true),
+  'slot-tall': resource('Icon.Grid_Base1', true),
+  'market-row': resource('PropMaketplace.PropBG1', true),
+  'market-cell': resource('PropMaketplace.PropBG2'),
+  'market-field': resource('PropMaketplace.PropBG3', true),
+  'compose-plus': resource('Compose.Add'),
+  'compose-equals': resource('Compose.Amount'),
+  'compose-arrow': resource('Compose.Direction'),
+  'compose-unknown': resource('Compose.Interrogation'),
+  'icon-gold': resource('Icon.Icon_Gold'),
+  'icon-stone': resource('Icon.Icon_Carpolite'),
+  'npc-frame': resource('NPC.EstopCircle'),
+  'npc-card': resource('NPC.TottomBG1'),
+  // UI_TollGateChallenge / UI_TollGateSelect: the scroll window and its plaque buttons.
+  'scroll-paper': sprite('UI_TollGateChallenge', 3),
+  'scroll-paper-short': sprite('UI_TollGateSelect', 2),
+  'scroll-rod-top': sprite('UI_TollGateChallenge', 25),
+  'scroll-rod-bottom': sprite('UI_TollGateChallenge', 13),
+  'scroll-rope': sprite('UI_TollGateChallenge', 27),
+  'scroll-cloud-left': sprite('UI_TollGateChallenge', 29),
+  'scroll-cloud-right': sprite('UI_TollGateChallenge', 31),
+  'scroll-swirl-left': sprite('UI_TollGateChallenge', 15),
+  'scroll-swirl-right': sprite('UI_TollGateChallenge', 19),
+  'plaque-normal': sprite('UI_TollGateChallenge', 42),
+  'plaque-hover': sprite('UI_TollGateChallenge', 46),
+  'tag-green': sprite('UI_TollGateChallenge', 75),
+  // UI_TollGateFightMenu: the small parchment of the sub gate fight menu.
+  parchment: sprite('UI_TollGateFightMenu', 8),
+  // UI_PubFightMonster: ranking board, lever, buttons.
+  'pub-board': sprite('UI_PubFightMonster', 7),
+  'pub-lever': sprite('UI_PubFightMonster', 56),
+  'pub-button': sprite('UI_PubFightMonster', 28),
+  'pub-back': sprite('UI_PubFightMonster', 42),
+  'pub-close': sprite('UI_PubFightMonster', 16),
+  // UI_OutSearchCard (also the toll gate card flip, UIDefine.UI_TollGateCard): a revealed card.
+  'card-face': sprite('UI_OutSearchCard', 7),
+  'card-item-frame': sprite('UI_OutSearchCard', 40),
+  'card-name-bar': sprite('UI_OutSearchCard', 38),
+}
 
 export const UI_PIECES: Record<string, PieceSource> = {
   frame: lookAndFeel('Frame_activeBG', FRAME_SLICE),
@@ -111,6 +174,7 @@ export const UI_PIECES: Record<string, PieceSource> = {
     slice: { top: 4, right: 8, bottom: 4, left: 26 },
   },
   slot: { swf: 'UI_UIResourceTemp', symbol: 'Grid_PackageBack' },
+  ...M3_PIECES,
 }
 
 /** Splits a BaseSource bundle (the parts already joined) into its entries by title. */
@@ -175,12 +239,25 @@ export function gridInsets(grid: Rect, width: number, height: number): Insets {
 async function exportPieces(swfs: Map<string, Buffer>) {
   const work = mkdtempSync(join(paths.cache, 'ui-'))
   try {
-    const input = join(work, 'swf')
-    mkdirSync(input)
-    for (const [name, data] of swfs) writeFileSync(join(input, `${name}.swf`), data)
     const out = join(work, 'png')
-    await ffdec(['-zoom', String(ZOOM), '-format', 'sprite:png', '-export', 'sprite', out, input])
-    const grids = scalingGrids(swfs.get(LAF)!)
+    // One FFDec run per SWF, rendering only the sprites the pieces use (UI_Resource is large).
+    for (const [name, data] of swfs) {
+      const input = join(work, 'swf', name)
+      mkdirSync(input, { recursive: true })
+      writeFileSync(join(input, `${name}.swf`), data)
+      const classes = symbolIds(data)
+      const ids = Object.values(UI_PIECES)
+        .filter((source) => source.swf === name)
+        .map((source) =>
+          typeof source.symbol === 'number' ? source.symbol : classes.get(source.symbol),
+        )
+      if (ids.includes(undefined)) throw new Error(`Unknown symbol class in ${name}`)
+      await ffdec([
+        ...['-zoom', String(ZOOM), '-selectid', [...new Set(ids)].join(',')],
+        ...['-format', 'sprite:png', '-export', 'sprite', out, input],
+      ])
+    }
+    const grids = Object.fromEntries([...swfs].map(([name, data]) => [name, scalingGrids(data)]))
     // Start clean so pieces dropped from UI_PIECES do not linger in the repo.
     rmSync(join(paths.assets, OUT_DIR), { recursive: true, force: true })
     mkdirSync(join(paths.assets, OUT_DIR), { recursive: true })
@@ -197,7 +274,7 @@ async function exportPieces(swfs: Map<string, Buffer>) {
         height: Math.round(height / ZOOM),
       }
       if (source.slice === true) {
-        const grid = grids[source.symbol as string]
+        const grid = grids[source.swf]![source.symbol as string]
         if (!grid) throw new Error(`${source.symbol} has no scaling grid`)
         piece.slice = gridInsets(grid, width / ZOOM, height / ZOOM)
       } else if (source.slice) piece.slice = source.slice

@@ -1,15 +1,19 @@
-// Additional M2 art. The original weapon table decides action/skill mappings; transparent
-// placeholder motions are explicit null entries. Weapon and body share a registration point,
-// not a crop rectangle: draw both at the fighter position using their own anchors, at 14 fps.
+// Item icons, weapon layers and the world map. The original weapon table decides action/skill
+// mappings; transparent placeholder motions are explicit null entries. Weapon and body share a
+// registration point, not a crop rectangle: draw both at the fighter position using their own
+// anchors, at 14 fps.
+import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import sharp from 'sharp'
 import { decodeCompressedAmf3 } from '../game-data/amf3.ts'
 import { tableRows } from '../game-data/import.ts'
+import { cached } from './cache.ts'
 import { ffdec, mapLimit } from './ffdec.ts'
 import { exportMotions, type Motion } from './motions.ts'
 import { assetUrl, paths } from './paths.ts'
-import { FIELD_SCENES, VILLAGE_SCENES, iconSource } from './sources.ts'
+import { opaqueBounds } from './sheet.ts'
+import { VILLAGE_SCENES, iconSource, namedClothing } from './sources.ts'
 import { baseSourceFiles, readBaseSource } from './ui.ts'
 
 type Row = Record<string, string | number>
@@ -25,13 +29,17 @@ export function playerOutfits() {
   const stats = read<Record<string, Row>>('avatar-stats')
   const clothing = read<Record<string, Row>>('avatar-clothing')
   const items = itemRows()
-  return Object.entries(body.outfits).map(([id, outfit]) => ({
-    Cloth: Number(id),
-    Sex: outfit.sex,
-    Pos: Number(
-      stats[Number(items[String(clothing[id]?.AvatarConfig)]?.AvatarID ?? id)]?.Popsinger,
-    ),
-  }))
+  // Player outfits only: the unnamed outfits people NPCs wear have no weapon layers yet.
+  const { named } = namedClothing()
+  return Object.entries(body.outfits)
+    .filter(([id]) => named.includes(Number(id)))
+    .map(([id, outfit]) => ({
+      Cloth: Number(id),
+      Sex: outfit.sex,
+      Pos: Number(
+        stats[Number(items[String(clothing[id]?.AvatarConfig)]?.AvatarID ?? id)]?.Popsinger,
+      ),
+    }))
 }
 
 /** Same quest/field scope as game-text, plus exploration factories and fixed box contents. */
@@ -145,18 +153,51 @@ async function textFreeItem(source: string, resource: string) {
   return image.composite([{ input: Buffer.from(svg) }])
 }
 
+/**
+ * Every item of items.json (shop pools, forge materials, set pieces, toll gate cards and crystals
+ * all come from it), split into those with an icon in the backup and those without.
+ */
+export function itemIconIds() {
+  const rows = itemRows()
+  const withIcon: string[] = []
+  const withoutIcon: string[] = []
+  const withText: string[] = []
+  for (const id of Object.keys(rows).sort()) {
+    // The card collection (CardItem) is not part of the game yet and its cards carry Chinese text.
+    if (rows[id]!.class === 'CardItem') continue
+    const resource = String(rows[id]!.ResourceID)
+    const source = iconSource(resource)
+    // Seven home-system icons (eggs, home drops) are SWF animations, not bitmaps.
+    const bitmap = source && /\.(png|gif|jpe?g)$/i.test(source) && existsSync(source)
+    if (bitmap && ICONS_WITH_TEXT.includes(resource.toLowerCase())) withText.push(id)
+    else (bitmap ? withIcon : withoutIcon).push(id)
+  }
+  return { withIcon, withoutIcon, withText }
+}
+
+// Icons whose art is Chinese text or a partner site logo (promotional gift boxes, element badges,
+// coupon and talisman labels). They are left out rather than shown untranslated.
+export const ICONS_WITH_TEXT = [
+  ...[103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 115, 116].map((n) => `debris${n}`),
+  ...[144, 145, 146, 147, 148, 149, 207, 208, 209, 286, 298].map((n) => `debris${n}`),
+  'normaltask9',
+  'recast',
+].map((name) => `icon_${name}`)
+
 export async function exportItems() {
   const rows = itemRows()
   const icons: Record<string, { file: string; width: number; height: number; textRemoved?: true }> =
     {}
   const resources = new Map<string, (typeof icons)[string]>()
+  // Start clean so icons dropped from the set do not linger in the repo.
+  rmSync(join(paths.assets, 'game/items'), { recursive: true, force: true })
   mkdirSync(join(paths.assets, 'game/items'), { recursive: true })
-  for (const id of sliceItemIds()) {
+  const { withIcon, withoutIcon, withText } = itemIconIds()
+  for (const id of withIcon) {
     const resource = String(rows[id]!.ResourceID)
     let icon = resources.get(resource)
     if (!icon) {
-      const source = iconSource(resource)
-      if (!source) throw new Error(`Missing item icon: ${id} ${resource}`)
+      const source = iconSource(resource)!
       const relative = `game/items/${resource.toLowerCase()}.webp`
       const image = await textFreeItem(source, resource)
       const { width, height } = await image
@@ -174,7 +215,13 @@ export async function exportItems() {
     }
     icons[id] = icon
   }
-  return { items: icons }
+  const resourcesOf = (ids: string[]) =>
+    [...new Set(ids.map((id) => String(rows[id]!.ResourceID)))].sort()
+  // Resource keys (several items share one): absent from the backup or left out for their text.
+  return {
+    items: icons,
+    gaps: { missingIcons: resourcesOf(withoutIcon), textIcons: resourcesOf(withText) },
+  }
 }
 
 export async function exportWeapons() {
@@ -331,21 +378,99 @@ export async function exportWorldMap() {
     const entries = readBaseSource(
       Buffer.concat(baseSourceFiles().map((file) => readFileSync(file))),
     )
-    const swf = join(work, 'world.swf')
-    writeFileSync(swf, entries.get('UI_WorldMap.swf')!)
-    const xml = join(work, 'world.xml')
-    await ffdec(['-swf2xml', swf, xml])
-    await ffdec(['-format', 'image:png', '-export', 'image', join(work, 'images'), swf])
-    // Bitmap 1 is the text-free 768x426 world painting. Labels and scene buttons are separate tags.
-    mkdirSync(join(paths.assets, 'game/map'), { recursive: true })
-    const { width, height } = await sharp(join(work, 'images/1.png'))
-      .webp({ quality: 85 })
-      .toFile(join(paths.assets, 'game/map/world.webp'))
-    const locations = mapLocations(readFileSync(xml, 'utf8'))
-    return { file: assetUrl('game/map/world.webp'), width, height, locations }
+    const data = entries.get('UI_WorldMap.swf')!
+    const hash = createHash('sha1').update(data).digest('hex')
+    return await cached('world-map', hash, [join(paths.assets, 'game/map')], async () => {
+      mkdirSync(join(work, 'in'))
+      const swf = join(work, 'in/world.swf')
+      writeFileSync(swf, data)
+      const xml = join(work, 'world.xml')
+      await ffdec(['-swf2xml', swf, xml])
+      await ffdec(['-format', 'image:png', '-export', 'image', join(work, 'images'), swf])
+      const frames = join(work, 'frames')
+      await ffdec([
+        '-select',
+        '1',
+        '-format',
+        'frame:svg',
+        '-export',
+        'frame',
+        frames,
+        join(work, 'in'),
+      ])
+      // Bitmap 1 is the text-free 768x426 world painting. Labels and scene buttons are separate.
+      rmSync(join(paths.assets, 'game/map'), { recursive: true, force: true })
+      mkdirSync(join(paths.assets, 'game/map'), { recursive: true })
+      const { width, height } = await sharp(join(work, 'images/1.png'))
+        .webp({ quality: 85 })
+        .toFile(join(paths.assets, 'game/map/world.webp'))
+      const svg = readFileSync(join(frames, 'world.swf', '1.svg'), 'utf8')
+      const locations: Record<string, MapLocation> = {}
+      for (const [id, hit] of Object.entries(mapLocations(readFileSync(xml, 'utf8'))))
+        locations[id] = { ...hit, states: await mapButtonStates(svg, id) }
+      return { file: assetUrl('game/map/world.webp'), width, height, locations }
+    })
   } finally {
     rmSync(work, { recursive: true, force: true })
   }
+}
+
+const MAP_STATES = ['up', 'over', 'down'] as const
+interface MapState {
+  file: string
+  x: number
+  y: number
+  width: number
+  height: number
+}
+type MapLocation = ReturnType<typeof mapLocations>[string] & {
+  states: Record<(typeof MAP_STATES)[number], MapState>
+}
+
+/** One map button drawn alone in one state, as an SVG of the whole painting's size. */
+export function mapButtonSvg(svg: string, sceneId: string, state: (typeof MAP_STATES)[number]) {
+  const others = ['up', 'over', 'down', 'hittest'].filter((name) => name !== state).join('|')
+  return svg
+    .split('\n')
+    .filter((line) => !/^ {4}<(use|rect) /.test(line) || line.includes(` id="scene_${sceneId}"`))
+    .join('\n')
+    .replace(/<style><!\[CDATA\[[\s\S]*?\]\]><\/style>/g, '')
+    .replace(
+      new RegExp(
+        `\\n( +)<g class="button-frame button-frame-(?:${others})"[\\s\\S]*?\\n\\1</g>`,
+        'g',
+      ),
+      '',
+    )
+}
+
+/**
+ * The coloured art the original shows over the grey painting for a place the player has visited
+ * (WorldMapFrame.refreshMap sets alpha 1), per button state, cropped, in painting coordinates.
+ */
+async function mapButtonStates(svg: string, sceneId: string) {
+  const states = {} as MapLocation['states']
+  for (const state of MAP_STATES) {
+    const { data, info } = await sharp(Buffer.from(mapButtonSvg(svg, sceneId, state)))
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true })
+    const box = opaqueBounds([{ data, width: info.width, height: info.height }])
+    if (!box) throw new Error(`Empty map button ${sceneId} ${state}`)
+    const relative = `game/map/${sceneId}-${state}.webp`
+    await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } })
+      .extract(box)
+      .webp({ quality: 85, alphaQuality: 90, effort: 6 })
+      .toFile(join(paths.assets, relative))
+    states[state] = {
+      file: assetUrl(relative),
+      x: box.left,
+      y: box.top,
+      width: box.width,
+      height: box.height,
+    }
+  }
+  return states
 }
 
 /** Original hit-state rectangles in painting coordinates (SWF matrices use 20 twips/pixel). */
@@ -362,7 +487,8 @@ export function mapLocations(xml: string) {
   for (const match of xml.matchAll(
     /<item type="PlaceObject2Tag"([^>]*name="scene_(\d+)"[^>]*)>\s*<matrix ([^>]*)/g,
   )) {
-    if (![...VILLAGE_SCENES, ...FIELD_SCENES].includes(Number(match[2]))) continue
+    // scene_181 has no scene in logicscene.ini (clicking it failed in the original).
+    if (match[2] === '181') continue
     const buttonId = attribute(match[1]!, 'characterId')
     const button = new RegExp(
       `<item type="DefineButton2Tag"[^>]*buttonId="${buttonId}"[^>]*>([\\s\\S]*?)</characters>`,

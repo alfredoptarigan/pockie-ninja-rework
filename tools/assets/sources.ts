@@ -3,11 +3,26 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { decodeCompressedAmf3 } from '../game-data/amf3.ts'
+import { tableRows } from '../game-data/import.ts'
 import { paths } from './paths.ts'
 
 export const VILLAGE_SCENES = [111, 121, 131, 141, 151]
-export const FIELD_SCENES = [2101, 2201, 2301, 2401, 2501]
+/** Angel City and Demon City (maincity art like the villages). */
+export const CITY_SCENES = [161, 171]
+/** Fields with art: xx01-xx03 of every village and all neutral fields (xx04 are Christmas maps). */
+export const FIELD_SCENES = [
+  ...[21, 22, 23, 24, 25].flatMap((zone) => [1, 2, 3].map((map) => zone * 100 + map)),
+  ...[2601, 2602, 2603, 2604, 2605, 2701, 2702, 2703, 2704, 2801, 2802, 2803, 2804],
+]
+/** Las Noches entry (3101), toll gate lobby (3102) and the Las Noches floor scenes 61-64. */
+export const INSTANCE_SCENES = [3101, 3102, 61, 62, 63, 64]
+export const SCENES = [...VILLAGE_SCENES, ...CITY_SCENES, ...FIELD_SCENES, ...INSTANCE_SCENES]
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc', 'TicketBossNpc'])
+// Fighters outside the scenes (docs/original-data/toll-gates.md): toll gate groups n300-n308xxx,
+// n601-n608xxx, n705-n708xxx, Las Noches floors n900001-n900170, pub fight NPCs n8000xxx.
+const INSTANCE_NPC = /^n(?:30[0-8]\d{3}|60[1-8]\d{3}|70[5-8]\d{3}|900\d{3}|8000\d{3})$/
+// "MapUserFace_N33017".substr(12) in RoleObjectBase.as; "OutUserFace_" has the same length.
+const MONSTER_ART = /^(?:Map|Out)UserFace_/
 
 type Row = Record<string, unknown>
 
@@ -73,19 +88,22 @@ export function namedClothing() {
 
 /**
  * The base outfits: every clothing id of avatar-clothing.json with an English name (unnamed slots
- * are unused in the original) and motion art under motion/people.
+ * are unused by players) and motion art under motion/people, plus the unnamed outfits that
+ * people NPCs wear (77-83). `unnamed` lists the unnamed ids left out.
  */
 export function outfits() {
   const { clothing, named } = namedClothing()
+  const worn = Object.values(peopleNpcs()).map((art) => art.clothing)
+  const wanted = clothing.filter((id) => named.includes(id) || worn.includes(id))
   const found: Outfit[] = []
   const missing: number[] = []
-  for (const id of named) {
+  for (const id of wanted) {
     const dir = join(paths.movieclips, 'motion/people', `people_${id}`)
     const sample = safeList(dir).find((file) => file.startsWith('motion_'))
     if (!sample) missing.push(id)
     else found.push({ clothing: id, sex: Number(sample.split('_')[1]), dir })
   }
-  return { found, missing, unnamed: clothing.filter((id) => !named.includes(id)) }
+  return { found, missing, unnamed: clothing.filter((id) => !wanted.includes(id)) }
 }
 
 function safeList(dir: string) {
@@ -106,28 +124,103 @@ function npcRows() {
   return gameData<Record<string, Row>>('npcs')
 }
 
-/** Monsters of the field scenes: npc id to art resource (e.g. n33017 to N33017). */
-export function fieldMonsters() {
+/** Monster npcs of every field (xx04 included) plus the instance fighters. */
+function fighterIds() {
   const npcs = npcRows()
-  const monsters: Record<string, string> = {}
-  for (const id of FIELD_SCENES.flatMap(sceneNpcIds)) {
-    const row = npcs[id]
-    if (!row || !MONSTER_CLASSES.has(String(row.class))) continue
-    // "MapUserFace_N33017".substr(12) in RoleObjectBase.as; "OutUserFace_" has the same length.
-    monsters[id] = String(row.ResourceID).slice(12)
-  }
-  return monsters
+  const fields = Object.keys(gameData<Record<string, unknown>>('scenes'))
+    .map(Number)
+    .filter((id) => id >= 2100 && id < 2900)
+  const placed = fields
+    .flatMap(sceneNpcIds)
+    .filter((id) => MONSTER_CLASSES.has(String(npcs[id]?.class)))
+  return [...new Set([...placed, ...Object.keys(npcs).filter((id) => INSTANCE_NPC.test(id))])]
 }
 
-/** Non-monster NPCs placed in the slice's scenes: npc id to art resource (e.g. N21001). */
+/**
+ * Monster art keys of every fighter (e.g. N33017), and npc id to key for every npc drawn with one
+ * of them: explore and ticket boss level variants reuse their base monster's art.
+ */
+export function monsterNpcs() {
+  const npcs = npcRows()
+  const art = (id: string) => String(npcs[id]?.ResourceID ?? '')
+  const keys = new Set(
+    fighterIds()
+      .filter((id) => MONSTER_ART.test(art(id)))
+      .map((id) => art(id).slice(12)),
+  )
+  const monsters: Record<string, string> = {}
+  for (const id of Object.keys(npcs).sort())
+    if (MONSTER_ART.test(art(id)) && keys.has(art(id).slice(12))) monsters[id] = art(id).slice(12)
+  return { keys: [...keys].sort(), monsters }
+}
+
+export interface PeopleArt {
+  sex: number
+  clothing: number
+  /** Weapon key of the weapon layers (e.g. "sharp1"). */
+  weapon: string
+}
+
+/**
+ * Fighters drawn like players (Binary_PeopleNpc, RoleObjectBase.as): toll gate, Las Noches and pub
+ * fight NPCs whose ResourceID is a TGate/Avatar/ArenaUserFace key use an outfit and a weapon.
+ */
+export function peopleNpcs() {
+  const npcs = npcRows()
+  const table = keyValueTable('peoplenpc')
+  const people: Record<string, PeopleArt> = {}
+  for (const id of fighterIds().sort()) {
+    const value = table[String(npcs[id]?.ResourceID)]
+    if (!value) continue
+    const [sex, clothing, weapon] = value.split(',')
+    people[id] = { sex: Number(sex), clothing: Number(clothing), weapon: weapon!.toLowerCase() }
+  }
+  return people
+}
+
+/** Non-monster NPCs placed in the exported scenes: npc id to art resource (e.g. N21001). */
 export function sceneNpcs() {
   const npcs = npcRows()
   const result: Record<string, string> = {}
-  for (const id of [...VILLAGE_SCENES, ...FIELD_SCENES].flatMap(sceneNpcIds)) {
+  // Not in the scene tables: the Mysterious Merchant (MysticNpcTime.ini spawns it in 2601-2605) and
+  // the two xx04 event NPCs the M3 plan lists.
+  for (const id of [...SCENES.flatMap(sceneNpcIds), 'n28001', 'n27001', 'n27002']) {
     const row = npcs[id]
     if (row && !MONSTER_CLASSES.has(String(row.class))) result[id] = String(row.ResourceID)
   }
   return result
+}
+
+let sources: Map<string, string> | undefined
+
+/** Binary_SourceList (datatable/SourceList.tab): class source id to its path in the backup. */
+function sourceList() {
+  return (sources ??= new Map(
+    tableRows(
+      decodeCompressedAmf3(
+        readFileSync(join(paths.apache, 'source/binary/datatable/SourceList.tab')),
+      ) as Record<string, unknown[]>,
+    ).map((row) => [String(row.SourceID), backupPath(String(row.SourcePath))]),
+  ))
+}
+
+/**
+ * Toll gate scenes (TollClone.as, client-defined ids 1000xx): the shared backdrop, the gate map
+ * (Scene_Element_<id>) and the fight background (Binary_SceneFight, FightBG999 = the arena).
+ */
+export function tollGateScenes() {
+  const list = sourceList()
+  const fights = keyValueTable('scenefight')
+  const ids = [...list.keys()]
+    .map((id) => /^Scene_Element_(1000\d\d)$/.exec(id)?.[1])
+    .filter((id): id is string => Boolean(id))
+    .sort()
+  return ids.map((id) => ({
+    id,
+    background: list.get(`Scene_BackGround_${id}`)!,
+    map: list.get(`Scene_Element_${id}`)!,
+    fight: list.get(fights[id] ?? 'FightBG999')!,
+  }))
 }
 
 /** Building clip names per scene from scene-buildings.json. */

@@ -8,7 +8,7 @@ describe('itemIcon', () => {
   })
 
   it('has nothing for unknown ids, including object built-ins', () => {
-    expect(itemIcon('i999999')).toBeUndefined()
+    expect(itemIcon('i0000000')).toBeUndefined()
     expect(itemIcon('constructor')).toBeUndefined()
     expect(itemIcon('__proto__')).toBeUndefined()
   })
@@ -24,7 +24,7 @@ describe('ItemIcon', () => {
   })
 
   it('shows a neutral placeholder with the item name when the icon is missing', () => {
-    render(<ItemIcon itemId="i999999" name="Mystery Box" />)
+    render(<ItemIcon itemId="i0000000" name="Mystery Box" />)
     const placeholder = screen.getByRole('img', { name: 'Mystery Box' })
     expect(placeholder).not.toHaveAttribute('src')
   })

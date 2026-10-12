@@ -70,8 +70,9 @@ describe('WorldMap', () => {
   it('lists the roads that are not on the painting and locks them by level', () => {
     renderMap()
 
+    // Every M3 field has a map button now; the Christmas map has none.
     const others = screen.getByRole('region', { name: 'Other areas' })
-    expect(others).toHaveTextContent('Eventide Barrens')
+    expect(others).toHaveTextContent('Christmas House')
     expect(screen.getByRole('button', { name: 'Eventide Barrens Lv. 11' })).toBeDisabled()
   })
 

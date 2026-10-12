@@ -7,17 +7,36 @@ import {
   gameWorldMap,
   type WeaponLayers,
 } from '../../client/src/generated/game-extra.ts'
-import { itemRows, sliceItemIds, playerOutfits, mapLocations } from './extra.ts'
+import {
+  ICONS_WITH_TEXT,
+  itemIconIds,
+  itemRows,
+  mapButtonSvg,
+  mapLocations,
+  playerOutfits,
+  sliceItemIds,
+} from './extra.ts'
 import tableGaps from './weapon-table-gaps.json'
 import { paths } from './paths.ts'
-import { FIELD_SCENES, VILLAGE_SCENES } from './sources.ts'
+import { CITY_SCENES, FIELD_SCENES, VILLAGE_SCENES } from './sources.ts'
 
 const fileExists = (url: string) =>
   expect(existsSync(join(paths.root, 'client/public', url)), url).toBe(true)
 
 describe('M2 extra asset coverage', () => {
-  it('covers every bag, reward, box, explore, class weapon and HP item', () => {
-    expect(Object.keys(gameItems.items).sort()).toEqual(sliceItemIds())
+  it('covers every item with an icon in the backup, the M2 slice included', () => {
+    const { withIcon } = itemIconIds()
+    expect(Object.keys(gameItems.items).sort()).toEqual(withIcon)
+    for (const id of sliceItemIds()) expect(gameItems.items[id], id).toBeDefined()
+    // Known gaps: 48 resource keys have no bitmap in the backup (home eggs and drops are SWFs,
+    // unnamed avatar clothes, blood souls), and the Chinese-text icons are left out.
+    expect(gameItems.gaps.missingIcons).toHaveLength(48)
+    expect(gameItems.gaps.textIcons.map((key) => key.toLowerCase()).sort()).toEqual(
+      [...ICONS_WITH_TEXT].sort(),
+    )
+    // M3 spot checks: forge talismans and Valhalla crystals.
+    for (const id of ['i161001', 'i161009', 'i152010', 'i152015'])
+      expect(gameItems.items[id], id).toBeDefined()
     const world = JSON.parse(
       readFileSync(join(paths.root, 'client/src/game/world-data.json'), 'utf8'),
     )
@@ -118,13 +137,21 @@ describe('M2 extra asset coverage', () => {
     }
   }, 30_000)
 
-  it('covers all ten original map hit regions inside the painting', () => {
+  it('covers all 34 original map places inside the painting, with their button art', () => {
     fileExists(gameWorldMap.file)
+    // Every scene_<id> button of UI_WorldMap.swf except 181 (no such scene); 2804 has none.
+    const places = [...VILLAGE_SCENES, ...CITY_SCENES, ...FIELD_SCENES].filter((id) => id !== 2804)
     expect(
       Object.keys(gameWorldMap.locations)
         .map(Number)
         .sort((a, b) => a - b),
-    ).toEqual([...VILLAGE_SCENES, ...FIELD_SCENES].sort((a, b) => a - b))
+    ).toEqual(places.sort((a, b) => a - b))
+    for (const location of Object.values(gameWorldMap.locations))
+      for (const state of Object.values(location.states)) {
+        fileExists(state.file)
+        expect(state.x + state.width).toBeLessThanOrEqual(gameWorldMap.width)
+        expect(state.y + state.height).toBeLessThanOrEqual(gameWorldMap.height)
+      }
     for (const rect of Object.values(gameWorldMap.locations)) {
       expect(rect.x).toBeGreaterThanOrEqual(0)
       expect(rect.y).toBeGreaterThanOrEqual(0)
@@ -144,5 +171,27 @@ describe('M2 extra asset coverage', () => {
     expect(() => mapLocations(xml.replace('shapeId="6"', 'shapeId="9"'))).toThrow(
       'Missing map hit bounds',
     )
+    // scene_181 has no scene and is skipped.
+    expect(mapLocations(xml.replace('scene_2101', 'scene_181'))).toEqual({})
+  })
+
+  it('draws one map button in one state', () => {
+    const frame = (state: string) =>
+      `\n        <g class="button-frame button-frame-${state}">\n          <use xlink:href="#${state}"/>\n        </g>`
+    const svg = [
+      '<svg>',
+      '    <rect fill="#ffffff" height="426.0px" width="768.0px"/>',
+      '    <use height="426.0" xlink:href="#shape0"/>',
+      '    <use id="scene_2601" xlink:href="#button0"/>',
+      '    <use id="scene_2602" xlink:href="#button1"/>',
+      `    <g id="button0">${['up', 'over', 'down', 'hittest'].map(frame).join('')}\n    </g>`,
+      '    <style><![CDATA[ .button-frame-over { opacity: 0; } ]]></style>',
+      '</svg>',
+    ].join('\n')
+    const over = mapButtonSvg(svg, '2601', 'over')
+    expect(over).toContain('id="scene_2601"')
+    expect(over).toContain('#over')
+    for (const gone of ['scene_2602', '#shape0', '<rect', '#up', '#down', '#hittest', '<style'])
+      expect(over).not.toContain(gone)
   })
 })

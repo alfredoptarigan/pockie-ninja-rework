@@ -90,6 +90,13 @@ export interface Rect {
   yMax: number
 }
 
+/** Class name to symbol id for every SymbolClass entry. */
+export function symbolIds(file: Buffer) {
+  const { body, firstTag } = swfBody(file)
+  const names = symbolClasses([...readTags(body, firstTag)])
+  return new Map([...names].map(([id, name]) => [name, id]))
+}
+
 /** The 9-slice (DefineScalingGrid) rectangle, in pixels, of every symbol that has a class name. */
 export function scalingGrids(file: Buffer): Record<string, Rect> {
   const { body, firstTag } = swfBody(file)
