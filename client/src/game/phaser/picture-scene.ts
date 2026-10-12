@@ -4,7 +4,7 @@ import { gameMotions } from '../../generated/game-assets'
 import type { SceneMonster, SceneNpc } from '../types'
 import { createGame, LABEL_STYLE, loadSheet, setHighlight } from './game'
 import { frameAt, originOf, tickMs } from './motion'
-import { PORTRAIT_CELL, type PictureLayout, type PicturePortrait } from './picture-layout'
+import { fitName, PORTRAIT_CELL, type PictureLayout, type PicturePortrait } from './picture-layout'
 import Phaser from 'phaser'
 
 export interface PictureActions {
@@ -20,8 +20,8 @@ const LABEL_SIZE = 34
 /** Invisible but still hit-testable (Phaser skips input on alpha 0). */
 const HIDDEN_ALPHA = 0.001
 const TITLE_SIZE = 30
-/** Longer monster names are cut like the original plates ("Sorchin..."). */
-const NAME_CHARS = 10
+/** Name plate under a portrait: one line high, taller for a name wrapped on two lines. */
+const PLATE = { gap: 6, height: 34, pad: 10, lineHeight: 1.1 }
 /** Building names sit this far down the building's clip (its roof). */
 const TITLE_DROP = 0.22
 
@@ -122,14 +122,25 @@ class PictureScene extends Phaser.Scene {
   /** The area's monsters as portraits in a row at the top; a click starts the fight. */
   private drawPortraits() {
     const { size } = PORTRAIT_CELL
+    const small = { ...LABEL_STYLE, strokeThickness: 5 }
     for (const cell of this.layout.portraits) {
-      const { monster, portrait, name: full, x, y } = cell
-      const name = full.length > NAME_CHARS ? `${full.slice(0, NAME_CHARS - 1)}...` : full
+      const { monster, portrait, name, x, y } = cell
+      // Full names: smaller type, then two lines, instead of the original "Sorchin..." cut.
+      const label = this.add.text(0, 0, '', small).setOrigin(0.5, 0).setAlign('center')
+      const fit = fitName(
+        name,
+        size - PLATE.pad,
+        (text, px) => label.setFontSize(px).setText(text).getBounds().width,
+      )
+      label.setFontSize(fit.size).setLineSpacing(0).setText(fit.lines.join('\n'))
+      const plateTop = y + size / 2 + PLATE.gap
+      const plateHeight = Math.max(PLATE.height, label.height + PLATE.pad / 2)
       const g = this.add.graphics()
       g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(x - size / 2, y - size / 2, size, size, 10)
       g.lineStyle(4, 0xd9a441).strokeRoundedRect(x - size / 2, y - size / 2, size, size, 10)
-      g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(x - size / 2, y + size / 2 + 6, size, 34, 8)
-      g.lineStyle(3, 0xd9a441).strokeRoundedRect(x - size / 2, y + size / 2 + 6, size, 34, 8)
+      g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(x - size / 2, plateTop, size, plateHeight, 8)
+      g.lineStyle(3, 0xd9a441).strokeRoundedRect(x - size / 2, plateTop, size, plateHeight, 8)
+      label.setPosition(x, plateTop + (plateHeight - label.height) / 2).setDepth(1)
       if (this.textures.exists(portrait)) {
         const image = this.add.image(x, y - 6, portrait)
         image.setScale((size - 24) / Math.max(image.width, image.height))
@@ -137,7 +148,6 @@ class PictureScene extends Phaser.Scene {
         image.on('pointerover', () => this.actions.onMonsterHover?.(cell))
         image.on('pointerout', () => this.actions.onMonsterHover?.(null))
       }
-      const small = { ...LABEL_STYLE, strokeThickness: 5 }
       this.add
         .text(x, y + size / 2 - 6, `Lv.${monster.level}`, {
           ...small,
@@ -145,7 +155,6 @@ class PictureScene extends Phaser.Scene {
           color: '#ffd23c',
         })
         .setOrigin(0.5, 1)
-      this.add.text(x, y + size / 2 + 23, name, { ...small, fontSize: '22px' }).setOrigin(0.5)
     }
   }
 

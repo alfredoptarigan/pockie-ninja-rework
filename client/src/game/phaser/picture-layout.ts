@@ -63,8 +63,8 @@ export interface PictureLayout {
 
 /** Monster portrait cells, top centre like the original field screen, below the HUD strip (scene pixels). */
 export const PORTRAIT_CELL = { size: 120, gap: 14, top: 50 }
-/** The Drops panel starts this far below the portrait cell, under its name plate. */
-const DROPS_BELOW = 46
+/** The Drops panel starts this far below the portrait cell, under its name plate (two lines for long names). */
+const DROPS_BELOW = 64
 /** Building names longer than this are sentences in the table, not names. */
 const MAX_TITLE = 24
 
@@ -148,4 +148,40 @@ export function pictureLayout(scene: SceneView): PictureLayout | undefined {
     explore: explore && { spot: explore, title: 'Explore', label: 'Explore this area' },
     skybox,
   }
+}
+
+/** Font sizes tried for a monster name plate, largest first (scene pixels). */
+export const NAME_SIZES = [22, 19, 17, 15]
+const NAME_LINES = 2
+
+/** Words of `name` packed greedily into lines that `fits` accepts (a long word gets its own). */
+function wrapWords(name: string, fits: (text: string) => boolean) {
+  const lines: string[] = []
+  for (const word of name.split(/\s+/)) {
+    const last = lines.at(-1)
+    if (last !== undefined && fits(`${last} ${word}`)) lines[lines.length - 1] = `${last} ${word}`
+    else lines.push(word)
+  }
+  return lines
+}
+
+/**
+ * A monster name on its plate, never cut: the largest size that fits one line, else two lines,
+ * else the smallest size on as many lines as it needs. `measure` gives a text's drawn width.
+ */
+export function fitName(
+  name: string,
+  width: number,
+  measure: (text: string, size: number) => number,
+): { size: number; lines: string[] } {
+  for (const size of NAME_SIZES) {
+    if (measure(name, size) <= width) return { size, lines: [name] }
+  }
+  for (const size of NAME_SIZES) {
+    const fits = (text: string) => measure(text, size) <= width
+    const lines = wrapWords(name, fits)
+    if (lines.length <= NAME_LINES && lines.every(fits)) return { size, lines }
+  }
+  const size = NAME_SIZES.at(-1)!
+  return { size, lines: wrapWords(name, (text) => measure(text, size) <= width) }
 }
