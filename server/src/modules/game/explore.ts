@@ -8,7 +8,12 @@ import { z } from 'zod'
 import type { Db } from '../../db/client.js'
 import { characterExploreSpots, characters, inventoryItems } from '../../db/schema.js'
 import { EXPLORE_MIN_HP, fightMonster, type FightRewards } from '../../game/combat.js'
-import { exploreCooldownSeconds, exploreSpot, exploreSpotIds } from '../../game/data.js'
+import {
+  exploreClipName,
+  exploreCooldownSeconds,
+  exploreSpot,
+  exploreSpotIds,
+} from '../../game/data.js'
 import {
   advanceStar,
   CARDS_PER_SEARCH,
@@ -66,13 +71,16 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       .where(eq(characterExploreSpots.characterId, character.id))
     return {
       ...publicStatus(exploreStatus(character, new Date())),
+      cooldownSeconds: exploreCooldownSeconds(),
       spots: exploreSpotIds(character.sceneId).map((id) => {
         const spot = exploreSpot(id)!
         const star = stars.find((s) => String(s.spotId) === id)
         return {
           id,
           nameKey: `lg_OutSearch_${id}`,
+          clipName: exploreClipName(id),
           requireLevel: Number(spot.RequireLevel),
+          requireStone: Number(spot.RequireStone ?? 0),
           requireItems: requiredItems(spot),
           star: {
             level: star?.starLevel ?? 0,

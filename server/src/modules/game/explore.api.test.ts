@@ -49,18 +49,25 @@ describe('GET /api/game/explore', () => {
       remaining: 7,
       total: 7,
       cooldownEndsAt: null,
+      // OutSearchCommon.ini OutSearchTimeSpace.
+      cooldownSeconds: 300,
       spots: [
         {
           id: '21011',
           nameKey: 'lg_OutSearch_21011',
+          // roleoutsearch.tab ClipName: the field's explore tree.
+          clipName: 'OutCity_1110',
           requireLevel: 1,
+          requireStone: 0,
           requireItems: [],
           star: { level: 0, progress: 0, perStar: 2 },
         },
         {
           id: '21012',
           nameKey: 'lg_OutSearch_21012',
+          clipName: null,
           requireLevel: 1,
+          requireStone: 0,
           requireItems: [{ itemId: 'i150046', count: 1 }],
           star: { level: 0, progress: 0, perStar: 4 },
         },

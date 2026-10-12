@@ -147,6 +147,12 @@ export type ExploreFactory = 'baby' | 'boss' | 'item' | 'key'
 /** RoleOutSearch.ini row (one explore spot). */
 export const exploreSpot = (id: string) => load<Record<string, Row>>('explore-spots')[id]
 
+/** roleoutsearch.tab ClipName: the field scene element that opens the spot, or null. */
+export function exploreClipName(id: string) {
+  const clip = load<Record<string, string | number>>('explore-clips')[id]
+  return typeof clip === 'string' ? clip : null
+}
+
 /** OutSearchCommon.ini: the global cooldown between searches, in seconds. */
 export const exploreCooldownSeconds = () =>
   load<{ r: { OutSearchTimeSpace: number } }>('explore-common').r.OutSearchTimeSpace
