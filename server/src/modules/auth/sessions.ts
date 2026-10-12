@@ -10,6 +10,7 @@ const TOUCH_INTERVAL_MS = 60_000
 
 export interface AuthContext {
   sessionId: string
+  expiresAt: Date
   user: PublicUser
 }
 
@@ -48,20 +49,34 @@ export async function createSession(db: Db, userId: string, rememberMe: boolean)
 
 export async function findSession(db: Db, token: string): Promise<AuthContext | null> {
   const [row] = await db
-    .select({ sessionId: sessions.id, lastSeenAt: sessions.lastSeenAt, ...publicUserColumns })
+    .select({
+      sessionId: sessions.id,
+      expiresAt: sessions.expiresAt,
+      lastSeenAt: sessions.lastSeenAt,
+      ...publicUserColumns,
+    })
     .from(sessions)
     .innerJoin(users, eq(users.id, sessions.userId))
     .where(and(eq(sessions.tokenHash, hashToken(token)), gt(sessions.expiresAt, sql`now()`)))
   if (!row) return null
 
-  const { sessionId, lastSeenAt, ...user } = row
+  const { sessionId, expiresAt, lastSeenAt, ...user } = row
   if (Date.now() - lastSeenAt.getTime() > TOUCH_INTERVAL_MS) {
     await db
       .update(sessions)
       .set({ lastSeenAt: sql`now()` })
       .where(eq(sessions.id, sessionId))
   }
-  return { sessionId, user: toPublicUser(user) }
+  return { sessionId, expiresAt, user: toPublicUser(user) }
+}
+
+/** True while the session exists and has not expired (live sockets re-check this). */
+export async function isSessionActive(db: Db, sessionId: string) {
+  const rows = await db
+    .select({ id: sessions.id })
+    .from(sessions)
+    .where(and(eq(sessions.id, sessionId), gt(sessions.expiresAt, sql`now()`)))
+  return rows.length > 0
 }
 
 export async function deleteSession(db: Db, sessionId: string) {

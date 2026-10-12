@@ -58,7 +58,15 @@ export async function authRoutes(
   { db, env, realtime }: Options & { realtime: Pick<Realtime, 'endSession'> },
 ) {
   const cookies = cookieConfig(env)
-  const loginLimiter = createLoginLimiter()
+  // Existing accounts are counted by user id, so the username and email share one budget.
+  // Unknown logins get their own bounded map so they cannot crowd real accounts out.
+  const accountAttempts = createLoginLimiter()
+  const unknownAttempts = createLoginLimiter()
+  /** Deletes a session and drops its live sockets: every revocation path goes through here. */
+  const revokeSession = async (sessionId: string) => {
+    await deleteSession(db, sessionId)
+    realtime.endSession(sessionId)
+  }
   const setSessionCookie = (reply: FastifyReply, token: string, rememberMe: boolean) =>
     reply.setCookie(cookies.session, token, {
       ...cookies.options,
@@ -105,28 +113,29 @@ export async function authRoutes(
 
   app.post('/login', { config: rateLimit(10, '15 minutes') }, async (request, reply) => {
     const { login, password, rememberMe } = loginSchema.parse(request.body)
-    const key = login.toLowerCase()
-    if (loginLimiter.isLocked(key)) {
+    const identifier = login.toLowerCase()
+    const [user] = await db
+      .select({ ...publicUserColumns, passwordHash: users.passwordHash })
+      .from(users)
+      .where(or(eq(users.usernameLower, identifier), eq(users.email, identifier)))
+
+    // Reserve the attempt before the slow password check; a success clears the budget again.
+    const [limiter, key] = user ? [accountAttempts, user.id] : [unknownAttempts, identifier]
+    if (!limiter.reserve(key)) {
       throw new HttpError(
         429,
         'account_locked',
         'Too many failed attempts for this account. Try again in 15 minutes.',
       )
     }
-
-    const [user] = await db
-      .select({ ...publicUserColumns, passwordHash: users.passwordHash })
-      .from(users)
-      .where(or(eq(users.usernameLower, key), eq(users.email, key)))
     const valid = await verifyPassword(user?.passwordHash ?? (await getDummyHash()), password)
     if (!user || !valid) {
-      loginLimiter.fail(key)
       throw new HttpError(401, 'invalid_credentials', 'Wrong username, email or password.')
     }
 
-    loginLimiter.reset(key)
+    limiter.reset(key)
     // Never keep the session the browser presented: a fresh token on every login.
-    if (request.auth) await deleteSession(db, request.auth.sessionId)
+    if (request.auth) await revokeSession(request.auth.sessionId)
     await db
       .update(users)
       .set({ lastLoginAt: sql`now()` })
@@ -137,10 +146,7 @@ export async function authRoutes(
   })
 
   app.post('/logout', async (request, reply) => {
-    if (request.auth) {
-      await deleteSession(db, request.auth.sessionId)
-      realtime.endSession(request.auth.sessionId)
-    }
+    if (request.auth) await revokeSession(request.auth.sessionId)
     reply.clearCookie(cookies.session, cookies.options)
     return reply.code(204).send()
   })
