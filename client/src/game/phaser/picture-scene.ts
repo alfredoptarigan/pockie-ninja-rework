@@ -160,7 +160,11 @@ class PictureScene extends Phaser.Scene {
       setHighlight(object, false)
       this.label.setVisible(false)
     })
-    object.on('pointerup', onClick)
+    // Phaser also reports releases that started elsewhere (the HUD lies over the canvas): only a
+    // press that began on the canvas counts as a click.
+    object.on('pointerup', (pointer: Phaser.Input.Pointer) => {
+      if (pointer.downElement === this.game.canvas) onClick()
+    })
   }
 }
 

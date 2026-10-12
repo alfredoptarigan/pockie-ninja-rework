@@ -56,8 +56,8 @@ export interface PictureLayout {
   skybox?: string
 }
 
-/** Monster portrait cells, top centre like the original field screen (scene pixels). */
-export const PORTRAIT_CELL = { size: 120, gap: 14, top: 24 }
+/** Monster portrait cells, top centre like the original field screen, below the HUD strip (scene pixels). */
+export const PORTRAIT_CELL = { size: 120, gap: 14, top: 50 }
 /** Building names longer than this are sentences in the table, not names. */
 const MAX_TITLE = 24
 
