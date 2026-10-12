@@ -62,6 +62,11 @@ export async function authRoutes(
   // Unknown logins get their own bounded map so they cannot crowd real accounts out.
   const accountAttempts = createLoginLimiter()
   const unknownAttempts = createLoginLimiter()
+  /** Deletes a session and drops its live sockets: every revocation path goes through here. */
+  const revokeSession = async (sessionId: string) => {
+    await deleteSession(db, sessionId)
+    realtime.endSession(sessionId)
+  }
   const setSessionCookie = (reply: FastifyReply, token: string, rememberMe: boolean) =>
     reply.setCookie(cookies.session, token, {
       ...cookies.options,
@@ -130,7 +135,7 @@ export async function authRoutes(
 
     limiter.reset(key)
     // Never keep the session the browser presented: a fresh token on every login.
-    if (request.auth) await deleteSession(db, request.auth.sessionId)
+    if (request.auth) await revokeSession(request.auth.sessionId)
     await db
       .update(users)
       .set({ lastLoginAt: sql`now()` })
@@ -141,10 +146,7 @@ export async function authRoutes(
   })
 
   app.post('/logout', async (request, reply) => {
-    if (request.auth) {
-      await deleteSession(db, request.auth.sessionId)
-      realtime.endSession(request.auth.sessionId)
-    }
+    if (request.auth) await revokeSession(request.auth.sessionId)
     reply.clearCookie(cookies.session, cookies.options)
     return reply.code(204).send()
   })

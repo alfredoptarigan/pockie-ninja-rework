@@ -63,14 +63,27 @@ export interface ChatMessage {
   sentAt: string
 }
 
-export type ChatErrorCode = 'invalid_payload' | 'empty' | 'too_long' | 'rate_limited'
+/** `unauthenticated`: the session ended; the server then drops the session's sockets. */
+export type ChatErrorCode =
+  'invalid_payload' | 'empty' | 'too_long' | 'rate_limited' | 'unauthenticated'
 
 export type ChatAck =
   | { ok: true; message: ChatMessage }
   | { ok: false; error: { code: ChatErrorCode; message: string } }
 
-/** Handshake rejections arrive as connect_error with `data.code` set to one of these. */
+/**
+ * Handshake rejections arrive as connect_error with `data.code` set to one of these.
+ * `bad_origin` is no longer sent: a foreign Origin is refused at the transport (HTTP 403), which
+ * reaches the client as a connect_error without `data`.
+ */
 export type RealtimeConnectErrorCode = 'unauthenticated' | 'no_character' | 'bad_origin'
+
+/**
+ * Also a connect_error `data.code`: the character already has the maximum number of open sockets.
+ * Kept apart so the client's exhaustive message map still compiles; fold it into
+ * RealtimeConnectErrorCode once the client shows a message for it.
+ */
+export type RealtimeAdmissionErrorCode = 'too_many_connections'
 
 export interface ServerToClientEvents {
   [REALTIME_EVENTS.scenePlayers]: (event: ScenePlayersEvent) => void

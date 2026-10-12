@@ -13,6 +13,7 @@ import { io as connectClient, type Socket } from 'socket.io-client'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { sessions } from '../../db/schema.js'
+import { MAX_SOCKETS_PER_CHARACTER } from './realtime.js'
 
 type TestSocket = Socket<ServerToClientEvents, ClientToServerEvents>
 interface Tab {
@@ -77,6 +78,17 @@ function rejection(cookie?: string, headers?: Record<string, string>) {
   })
 }
 
+/** 'connected', or the connect_error code (message when there is none). */
+function outcome(cookie?: string) {
+  const tab = open(cookie)
+  return new Promise<string>((resolve) => {
+    tab.socket.once('connect', () => resolve('connected'))
+    tab.socket.once('connect_error', (error: ConnectError) =>
+      resolve(error.data?.code ?? error.message),
+    )
+  })
+}
+
 /** Names in the latest player list the tab received for a scene. */
 function namesIn(tab: Tab, sceneId: number) {
   const latest = tab.players.filter((event) => event.sceneId === sceneId).at(-1)
@@ -126,10 +138,16 @@ describe('handshake', () => {
     expect(error.data).toEqual({ code: 'no_character', message: 'Create your ninja first.' })
   })
 
-  it('rejects a foreign origin', async () => {
+  it('refuses a foreign origin at the transport handshake, before any session lookup', async () => {
     const client = await player('Player_one', { name: 'Ninja_01', nation: 0 })
-    const error = await rejection(client.cookieHeader, { origin: 'https://evil.example' })
-    expect(error.data?.code).toBe('bad_origin')
+    // Engine.IO answers 403 itself, so the Socket.IO middleware (and its queries) never runs.
+    const response = await fetch(`${url}/socket.io/?EIO=4&transport=polling`, {
+      headers: { origin: 'https://evil.example', cookie: client.cookieHeader },
+    })
+    expect(response.status).toBe(403)
+    await expect(
+      rejection(client.cookieHeader, { origin: 'https://evil.example' }),
+    ).resolves.toBeInstanceOf(Error)
   })
 
   it('accepts the configured app origin', async () => {
@@ -143,6 +161,79 @@ describe('handshake', () => {
     const tab = await connect(client)
     await client.post('/api/auth/logout')
     await vi.waitFor(() => expect(tab.socket.connected).toBe(false))
+  })
+})
+
+describe('session lifecycle', () => {
+  it('disconnects a socket when its session expires', async () => {
+    const client = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    await db.update(sessions).set({ expiresAt: sql`now() + interval '1 second'` })
+    const tab = await connect(client)
+    expect(tab.socket.connected).toBe(true)
+    await vi.waitFor(() => expect(tab.socket.connected).toBe(false), { timeout: 3_000 })
+  })
+
+  it('rejects chat and drops the socket once its session is revoked', async () => {
+    const client = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const tab = await connect(client)
+    await db.delete(sessions)
+
+    expect(await send(tab, { channel: 'world', text: 'still here?' })).toEqual({
+      ok: false,
+      error: { code: 'unauthenticated', message: expect.any(String) },
+    })
+    await vi.waitFor(() => expect(tab.socket.connected).toBe(false))
+    expect(tab.chat).toEqual([])
+  })
+
+  it('disconnects the old session when the browser logs in again', async () => {
+    const client = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const tab = await connect(client)
+    const login = await client.post('/api/auth/login', {
+      login: 'Player_one',
+      password: 'believe-it',
+    })
+    expect(login.statusCode).toBe(200)
+    await vi.waitFor(() => expect(tab.socket.connected).toBe(false))
+  })
+})
+
+describe('admission', () => {
+  it(`caps a character at ${MAX_SOCKETS_PER_CHARACTER} sockets, even when they race`, async () => {
+    const client = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const attempts = Array.from({ length: MAX_SOCKETS_PER_CHARACTER + 2 }, () =>
+      outcome(client.cookieHeader),
+    )
+    const results = await Promise.all(attempts)
+    expect(results.filter((r) => r === 'connected')).toHaveLength(MAX_SOCKETS_PER_CHARACTER)
+    expect(results.filter((r) => r === 'too_many_connections')).toHaveLength(2)
+
+    // Closing a tab frees its slot.
+    opened.find((socket) => socket.connected)!.disconnect()
+    expect(await outcome(client.cookieHeader)).toBe('connected')
+  })
+
+  it('broadcasts presence only on the first join and the last leave of a character', async () => {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const two = await player('Player_two', { name: 'Ninja_02', nation: 0 })
+    const three = await player('Player_three', { name: 'Ninja_03', nation: 0 })
+    const watcher = await connect(two)
+    await vi.waitFor(() => expect(namesIn(watcher, VILLAGE)).toEqual(['Ninja_02']))
+
+    const tabA = await connect(one)
+    await vi.waitFor(() => expect(namesIn(watcher, VILLAGE)).toEqual(['Ninja_01', 'Ninja_02']))
+    const tabB = await connect(one)
+    // The extra tab still gets the current list, just for itself.
+    await vi.waitFor(() => expect(namesIn(tabB, VILLAGE)).toEqual(['Ninja_01', 'Ninja_02']))
+    tabB.socket.disconnect()
+
+    await connect(three)
+    await vi.waitFor(() =>
+      expect(namesIn(watcher, VILLAGE)).toEqual(['Ninja_01', 'Ninja_02', 'Ninja_03']),
+    )
+    tabA.socket.disconnect()
+    await vi.waitFor(() => expect(namesIn(watcher, VILLAGE)).toEqual(['Ninja_02', 'Ninja_03']))
+    expect(watcher.players.map((event) => event.players.length)).toEqual([1, 2, 3, 2])
   })
 })
 
@@ -328,5 +419,17 @@ describe('chat', () => {
     })
     // Another player is not affected.
     expect((await send(b, { channel: 'world', text: 'me too' })).ok).toBe(true)
+  })
+
+  it('keeps the chat budget when a player reconnects within the window', async () => {
+    const { one, a } = await villagers()
+    for (let i = 0; i < 5; i++) await send(a, { channel: 'world', text: `m${i}` })
+    a.socket.disconnect()
+
+    const again = await connect(one)
+    expect(await send(again, { channel: 'world', text: 'fresh start?' })).toMatchObject({
+      ok: false,
+      error: { code: 'rate_limited' },
+    })
   })
 })
