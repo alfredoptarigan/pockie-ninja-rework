@@ -233,6 +233,24 @@
   border: 0;
   border-image: var(--ui-menu-bar) var(--ui-menu-bar-slice) fill / var(--ui-menu-bar-border);
 }
+/* Chat box (UI_Chat): the dark message panel and the channel tab plates above it. */
+@utility game-chat-panel {
+  border: 0;
+  border-image: var(--ui-chat-panel) var(--ui-chat-panel-slice) fill / var(--ui-chat-panel-border);
+}
+@utility game-chat-tab {
+  border: 0;
+  border-image: var(--ui-chat-tab) var(--ui-chat-tab-slice) fill / var(--ui-chat-tab-border);
+  color: #fff;
+  &:hover {
+    border-image-source: var(--ui-chat-tab-hover);
+  }
+  /* The original selected plate is cream: white text would not read on it. */
+  &[aria-selected='true'] {
+    border-image-source: var(--ui-chat-tab-selected);
+    color: #3a1f00;
+  }
+}
 
 /* HP / MP / EXP: the original empty bar with the full bar clipped to the value (--fill). */
 .game-bar {

@@ -37,7 +37,7 @@ describe('Chat', () => {
       ),
     )
 
-    const log = screen.getByRole('list', { name: 'world messages' })
+    const log = screen.getByRole('list', { name: 'World messages' })
     expect(log).toHaveTextContent('Sasuke_1: <img src=x onerror=alert(1)><b>bold</b>')
     expect(log.querySelector('img, b')).toBeNull()
   })
@@ -54,6 +54,47 @@ describe('Chat', () => {
 
     expect(screen.getByText('over here')).toBeInTheDocument()
     expect(screen.queryByText('world news')).not.toBeInTheDocument()
+  })
+
+  it('shows each line as time, [Channel], name and text', () => {
+    renderChat()
+    act(() => socket.serverEmit('chat:message', message({ text: 'gm' })))
+
+    const line = within(screen.getByRole('list', { name: 'World messages' })).getByRole('listitem')
+    expect(line).toHaveTextContent(/^\d\d:\d\d \[World\] Sasuke_1: gm$/)
+    expect(line.querySelector('time')).toHaveAttribute('datetime', '2026-10-12T00:00:00Z')
+  })
+
+  it('merges both channels on the All tab', async () => {
+    renderChat()
+    act(() => {
+      socket.serverEmit('chat:message', message({ id: 'w', text: 'world news' }))
+      socket.serverEmit('chat:message', message({ id: 's', channel: 'scene', text: 'over here' }))
+    })
+
+    await userEvent.click(screen.getByRole('tab', { name: 'All' }))
+
+    const log = screen.getByRole('list', { name: 'All messages' })
+    expect(log).toHaveTextContent('[World] Sasuke_1: world news')
+    expect(log).toHaveTextContent('[Scene] Sasuke_1: over here')
+  })
+
+  it('sends on the channel picked by the tab or the channel select', async () => {
+    renderChat()
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Scene' }))
+    expect(screen.getByLabelText('Send to')).toHaveValue('scene')
+    await userEvent.type(screen.getByLabelText('Message to scene chat'), 'near{Enter}')
+
+    await userEvent.click(screen.getByRole('tab', { name: 'All' }))
+    await userEvent.selectOptions(screen.getByLabelText('Send to'), 'world')
+    await userEvent.type(screen.getByLabelText('Message to world chat'), 'far{Enter}')
+
+    expect(socket.sent).toEqual([
+      { channel: 'scene', text: 'near' },
+      { channel: 'world', text: 'far' },
+    ])
   })
 
   it('sends on the active channel and shows ack errors', async () => {
