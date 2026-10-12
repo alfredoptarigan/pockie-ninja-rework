@@ -142,6 +142,12 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
     (separate `motion/weapon` layer) not exported; motions 60/800 (+18 upgrades) skipped
     (`HIGH_TIER_MOTIONS`); animated sky/effect layers are first frame only; N21001/N21002 stand
     animations have a baked-in "Genin" label.
+- [x] **Task 3b — original UI skin.** `pnpm assets:export ui` (`tools/assets/ui.ts`) decodes the
+      client's `BaseSource` bundle (`UI_LookAndFeel`, `UI_RoleIcon`, `UI_BottomMenu`, `UI_TopGuide`)
+      into 37 text-free pieces (148 KB) under `client/public/assets/game/ui/` with 9-slice insets in
+      `client/src/generated/game-ui.json`; the HUD (`skin.tsx`, `index.css`) uses them. Gaps: item
+      icons not exported; small-button skin approximated; full-screen HUD layout is Task 8c.
+      Layout references (Reborn screenshots, gitignored): `data/reborn-raw/screenshots/`.
 - [~] **Task 4 — battle engine** (`game-core/src/battle`).
   - [x] Timeline, sequential duels, 60-action cap, priority strike, hit/crit/parry/defence,
         counters, parry skill 7777, typed replay, golden test from an original replay.
