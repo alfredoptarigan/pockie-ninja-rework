@@ -11,7 +11,9 @@ import {
   useUseItem,
 } from './api'
 import { useOutfitStand } from './art'
-import { ItemIcon, itemIcon } from './ItemIcon'
+import { BagForgeButtons, GearIcon, ItemForgeActions, useGear } from './forge'
+import type { GearView } from '@pockie/shared'
+import { itemIcon } from './ItemIcon'
 import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
@@ -63,6 +65,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const use = useUseItem()
   const equip = useEquipItem()
   const unequip = useUnequipItem()
+  const gear = useGear().data ?? {}
   const actions = { use, equip, unequip }
   const [notice, setNotice] = useState<{ tone: 'info' | 'error'; text: string } | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -130,6 +133,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
               item={item}
               highlighted={isHighlighted(item, highlight)}
               selected={item === selected}
+              gear={gear[item.id]}
               busy={busy}
               onSelect={() => setSelectedId(item.id)}
               run={run}
@@ -161,6 +165,9 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           Select an item.
         </p>
       )}
+      <div className="absolute bottom-[6px] left-[288px] w-[75px] text-[11px]">
+        <BagForgeButtons pageItemIds={shown.map((item) => item.id)} />
+      </div>
       {notice && (
         <div className="absolute bottom-[213px] left-[69px] w-[231px]">
           <Notice tone={notice.tone}>{notice.text}</Notice>
@@ -292,6 +299,7 @@ function BagCell({
   item,
   highlighted,
   selected,
+  gear,
   busy,
   onSelect,
   run,
@@ -299,6 +307,7 @@ function BagCell({
   item: InventoryItem
   highlighted: boolean
   selected: boolean
+  gear?: GearView
   busy: boolean
   onSelect: () => void
   run: Run
@@ -306,10 +315,11 @@ function BagCell({
   const name = plainText(item.nameKey, 'Unknown item')
   return (
     <li>
-      <ItemIcon
+      <GearIcon
         itemId={item.itemId}
-        name={name}
-        className={`size-[51px] [&_img]:size-full [&_img]:object-contain ${
+        nameKey={item.nameKey}
+        gear={gear}
+        className={`size-[51px] ${
           highlighted ? 'ring-2 ring-[#ffb300]' : ''
         } ${selected ? 'shadow-[inset_0_0_0_2px_#fff2ae]' : ''}`}
       >
@@ -326,9 +336,9 @@ function BagCell({
           onClick={onSelect}
           className="absolute inset-0 cursor-pointer"
         />
-      </ItemIcon>
+      </GearIcon>
       {selected ? (
-        <ItemDetails item={item} highlighted={highlighted} busy={busy} run={run} />
+        <ItemDetails item={item} gear={gear} highlighted={highlighted} busy={busy} run={run} />
       ) : (
         <span className="sr-only">
           <span>
@@ -350,11 +360,13 @@ function BagCell({
 /** The selected item in the side column: name, tutorial marker and its Use / Equip button. */
 function ItemDetails({
   item,
+  gear,
   highlighted,
   busy,
   run,
 }: {
   item: InventoryItem
+  gear?: GearView
   highlighted: boolean
   busy: boolean
   run: Run
@@ -386,6 +398,7 @@ function ItemDetails({
           </GameButton>
         )
       )}
+      <ItemForgeActions item={item} gear={gear} />
     </div>
   )
 }

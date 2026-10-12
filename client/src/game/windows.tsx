@@ -9,9 +9,11 @@
 // To open one from anywhere under GameApp: `const open = useOpenWindow(); open('shop', { npcId })`.
 import type { Character } from '@pockie/shared'
 import { createContext, useContext, type ComponentType } from 'react'
+import { ForgeWindow } from './forge'
+import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { Dialog, GameButton } from './skin'
 
-export type WindowName = 'shop' | 'forge' | 'gates' | 'daily'
+export type WindowName = 'shop' | 'forge' | 'gates' | 'pubFight' | 'daily'
 
 export interface WindowProps {
   character: Character
@@ -29,6 +31,7 @@ const TITLES: Record<WindowName, string> = {
   shop: 'Shop',
   forge: 'Blacksmith',
   gates: 'Demon City',
+  pubFight: 'Pub Fight',
   daily: 'Daily Quests',
 }
 
@@ -49,11 +52,20 @@ const placeholder = (name: WindowName) =>
     return <ComingSoon title={TITLES[name]} onClose={onClose} />
   }
 
+/** Kisuke Urahara (n17003, SingleGateEntryNpc.js) runs Las Noches; the Guard (n17001) the toll gates. */
+const LAS_NOCHES_NPC = 'n17003'
+
+function GateWindow({ character, npcId, onClose }: WindowProps) {
+  const Window = npcId === LAS_NOCHES_NPC ? LasNochesWindow : TollGateWindow
+  return <Window character={character} onClose={onClose} />
+}
+
 /** One line per feature: replace its placeholder with the feature's window component. */
 const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   shop: placeholder('shop'),
-  forge: placeholder('forge'),
-  gates: placeholder('gates'),
+  forge: ({ onClose }) => <ForgeWindow view="enhance" onClose={onClose} />,
+  gates: GateWindow,
+  pubFight: ({ character, onClose }) => <PubFightWindow character={character} onClose={onClose} />,
   daily: placeholder('daily'),
 }
 

@@ -22,7 +22,13 @@ import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
 import { plainText } from './text'
 import type { BagHighlight, FightResult, SceneMonster, SceneNpc } from './types'
+import { useOpenWindow } from './windows'
 import { DEFEATED_REASON, isDefeated } from './world'
+
+/** Scenes with a pub fight line-up (`pub-fights.json` scenes): the neutral fields 26xx-28xx. */
+const PUB_FIGHT_SCENES = [
+  2601, 2602, 2603, 2604, 2605, 2701, 2702, 2703, 2704, 2801, 2802, 2803, 2804,
+]
 
 /**
  * The scene layer of the stage: the Phaser picture filling the screen (buildings, NPCs, the
@@ -44,6 +50,7 @@ export function SceneView({
   const fight = useFight()
   const inventory = useInventory()
   const defeated = isDefeated(character)
+  const openWindow = useOpenWindow()
   const hasSpots = Boolean(scene.data?.exploreSpots.length)
   // The picture waits for the spots, so the explore tree is there from the start.
   const explore = useExplore(hasSpots)
@@ -126,8 +133,13 @@ export function SceneView({
         createPortal(
           <>
             <MonsterRow monsters={scene.data.monsters} onFight={(m) => void startFight(m)} />
-            {ticketBoss && (
-              <div className="absolute top-[120px] left-[6px]">
+            <div className="absolute top-[120px] left-[6px] flex flex-col items-start gap-1">
+              {PUB_FIGHT_SCENES.includes(character.sceneId) && (
+                <GameButton small disabled={defeated} onClick={() => openWindow('pubFight')}>
+                  Pub Fight
+                </GameButton>
+              )}
+              {ticketBoss && (
                 <TicketBossPanel
                   boss={ticketBoss}
                   disabled={fight.isPending || defeated}
@@ -140,8 +152,8 @@ export function SceneView({
                     })
                   }
                 />
-              </div>
-            )}
+              )}
+            </div>
           </>,
           hudLayer,
         )}

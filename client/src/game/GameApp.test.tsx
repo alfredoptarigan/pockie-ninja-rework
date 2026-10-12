@@ -206,10 +206,8 @@ describe('GameScreen', () => {
     const talk = await screen.findByRole('dialog', { name: 'Blacksmith' })
     await userEvent.click(await within(talk).findByRole('button', { name: 'Blacksmith' }))
     await waitFor(() => expect(screen.getAllByRole('dialog')).toHaveLength(1))
-    // Until the forge task plugs its window in, the registry shows a placeholder.
-    expect(await screen.findByRole('dialog', { name: 'Blacksmith' })).toHaveTextContent(
-      'This is not open yet.',
-    )
+    // The Blacksmith's menu opens the forge window registered in windows.tsx.
+    expect(await screen.findByRole('dialog', { name: 'Forge' })).toBeInTheDocument()
   })
 })
 
