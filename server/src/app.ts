@@ -60,6 +60,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(worldRoutes, { db, prefix: '/api/game' })
   app.register(actionRoutes, { db, realtime, prefix: '/api/game' })
   app.register(exploreRoutes, { db, prefix: '/api/game' })
+  app.register(import('./modules/daily/routes.js'), { db, prefix: '/api/game/daily' })
 
   return app
 }
