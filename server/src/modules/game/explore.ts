@@ -167,6 +167,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
           level: current.level,
           exp: current.exp,
           hp: current.hp,
+          mp: current.mp,
           exploreLastAt: current.exploreLastAt,
           exploreDay: current.exploreDay,
           exploreUsed: current.exploreUsed,

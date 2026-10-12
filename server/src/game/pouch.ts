@@ -1,6 +1,8 @@
 // HP and MP pouches (RoleUseSystem.java): reserves that refill HP/MP after won fights and after
 // every explore fight. firstset.js sets sizes 50/30, but RefreshExtendMax replaces them on the
 // first login and on every level-up; the amounts start at 0 (the tutorial hands out a pouch item).
+// Only fight ends draw on them (FightSystem command 12, OutSearchSystem, toll gates): reviving
+// and travel do not, and a level-up refills HP/MP to the new maximum by itself (LevelSystem).
 import type { PouchRefill } from '@pockie/shared'
 
 const POUCH_BASE = 9000

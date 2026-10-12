@@ -118,7 +118,7 @@ export async function saveQuests(tx: Tx, characterId: string, changed: QuestProg
   }
 }
 
-/** Applies EXP with level-ups (refilling HP on level-up) and returns the column updates. */
+/** Applies EXP with level-ups (refilling HP and MP on level-up) and returns the column updates. */
 export function expUpdate(character: CharacterRow, gained: number) {
   const table = levels()
   const result = gainExp(
@@ -128,11 +128,10 @@ export function expUpdate(character: CharacterRow, gained: number) {
     table.levelexp,
     table.role.maxlevel,
   )
-  const hp =
-    result.levelsGained > 0
-      ? deriveStats(avatarStats(character.avatarId), result.level).maxHp
-      : character.hp
-  return { level: result.level, exp: result.exp, hp, levelsGained: result.levelsGained }
+  const { level, exp, levelsGained } = result
+  if (levelsGained === 0) return { level, exp, hp: character.hp, mp: character.mp, levelsGained }
+  const stats = deriveStats(avatarStats(character.avatarId), level)
+  return { level, exp, hp: stats.maxHp, mp: stats.maxMp, levelsGained }
 }
 
 export async function acceptQuest(tx: Tx, characterId: string, taskId: number) {
