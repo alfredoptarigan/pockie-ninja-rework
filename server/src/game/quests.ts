@@ -1,7 +1,8 @@
 // Quest progress rules ported from TaskModule (KillMonsterRule, CollectRule); see
 // docs/original-data/quests-items.md. Progress is one count per sub-task, indexed by SetpSeq.
 import type { Random } from '@pockie/game-core'
-import { npcOfferedTaskIds, subTasks, task, taskMonsterDrops } from './data.js'
+import type { QuestRewards, RewardItem } from '@pockie/shared'
+import { itemNameKey, npcOfferedTaskIds, subTasks, task, taskMonsterDrops } from './data.js'
 
 export interface QuestProgress {
   taskId: number
@@ -201,6 +202,46 @@ export function availableQuests(
         sceneId: Number(row.AcceptNpcSceneID),
         nameKey: `lg_Task_${taskId}`,
         talkKey: row.StartNpcMessageID ? `lg_${String(row.StartNpcMessageID)}` : null,
+        rewards: questRewards(taskId),
       }
     })
+}
+
+/** Capital types in Task.ini RewardMoney ("type,amount;..."): 0 Stone, 2 Gold, 3 Gift Coupon. */
+const CURRENCY = { 0: 'stone', 2: 'gold', 3: 'giftCoupon' } as const
+
+/** Item ids (one per unit) as item stacks with counts, in first-seen order. */
+export function countItems(itemIds: string[]): RewardItem[] {
+  const counts = new Map<string, number>()
+  for (const id of itemIds) counts.set(id, (counts.get(id) ?? 0) + 1)
+  return [...counts].map(([itemId, count]) => ({ itemId, count, nameKey: itemNameKey(itemId) }))
+}
+
+/**
+ * What quest `taskId` pays (Task.ini RewardExp, RewardMoney, RewardHono, RewardItem), as the
+ * original quest window (UI_Task) lists it. RewardDropID quests pay a random pick instead, which
+ * the window does not show.
+ */
+export function questRewards(taskId: number): QuestRewards {
+  const row = task(taskId)!
+  const money = { stone: 0, gold: 0, giftCoupon: 0 }
+  for (const part of String(row.RewardMoney).split(';')) {
+    const [type = '', amount = '0'] = part.split(',')
+    const column = CURRENCY[Number(type) as keyof typeof CURRENCY]
+    if (column) money[column] += Number(amount)
+  }
+  const items = String(row.RewardItem).startsWith('i')
+    ? String(row.RewardItem)
+        .split(';')
+        .map((part) => {
+          const [itemId = '', count = '1'] = part.split(',')
+          return { itemId, count: Number(count), nameKey: itemNameKey(itemId) }
+        })
+    : []
+  return {
+    exp: Number(row.RewardExp ?? 0),
+    ...money,
+    honor: Number(row.RewardHono ?? 0),
+    items,
+  }
 }

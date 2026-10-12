@@ -185,6 +185,7 @@ describe('GET /api/game/quests/available', () => {
       sceneId: 111,
       nameKey: 'lg_Task_90002',
       talkKey: expect.any(String),
+      rewards: expect.objectContaining({ exp: 10, giftCoupon: 10 }),
     })
     // Every listed quest can really be accepted (same rules as the accept route).
     const accepted = await client.post('/api/game/quests/90002/accept')

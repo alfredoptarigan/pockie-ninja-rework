@@ -13,6 +13,7 @@ import {
   type FighterInput,
   type SkillInput,
 } from '@pockie/game-core'
+import type { MonsterDrop } from '@pockie/shared'
 import { and, eq, isNotNull } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characters, inventoryItems } from '../db/schema.js'
@@ -22,6 +23,7 @@ import {
   dropItems,
   dropLib,
   item,
+  itemNameKey,
   levels,
   npc,
   npcSkillIds,
@@ -127,6 +129,22 @@ export function playerFighterFrom(
   }
 }
 
+/** A monster's drop lists that exist (NormalNpc DropLibID and AppendDropLibID). */
+const monsterDropLibIds = (monsterId: string) =>
+  [npc(monsterId)?.DropLibID, npc(monsterId)?.AppendDropLibID]
+    .map(Number)
+    .filter((libId) => libId > 0 && dropLib(libId))
+
+/** Each item a monster can drop, once; the chances stay on the server like the original UI. */
+export function monsterDrops(monsterId: string): MonsterDrop[] {
+  const itemIds = monsterDropLibIds(monsterId).flatMap((libId) =>
+    dropItems(libId)
+      .filter((entry) => Number(entry.Probability) > 0)
+      .map((entry) => String(entry.ItemConfig)),
+  )
+  return [...new Set(itemIds)].map((itemId) => ({ itemId, nameKey: itemNameKey(itemId) }))
+}
+
 export interface FightRewards {
   exp: number
   stone: number
@@ -166,17 +184,14 @@ export async function fightMonster(
       Number(monster.DropCapital0Min ?? 0),
       Number(monster.DropCapital0Max ?? 0),
     )
-    for (const libId of [monster.DropLibID, monster.AppendDropLibID].map(Number)) {
-      const lib = libId > 0 ? dropLib(libId) : undefined
-      if (lib) {
-        rewards.items.push(
-          ...rollDrops(
-            lib as unknown as DropLib,
-            dropItems(libId) as unknown as DropEntry[],
-            random,
-          ),
-        )
-      }
+    for (const libId of monsterDropLibIds(monsterId)) {
+      rewards.items.push(
+        ...rollDrops(
+          dropLib(libId) as unknown as DropLib,
+          dropItems(libId) as unknown as DropEntry[],
+          random,
+        ),
+      )
     }
 
     const table = levels()

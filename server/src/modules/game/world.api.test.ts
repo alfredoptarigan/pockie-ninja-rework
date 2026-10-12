@@ -45,7 +45,7 @@ describe('GET /api/game/scene', () => {
   it('lists the field monsters, hiding normal monsters more than 5 levels above the player', async () => {
     await goToForgeHighlandsWithFists()
     const scene = (await client.get('/api/game/scene')).json()
-    expect(scene.monsters).toEqual([
+    expect(scene.monsters).toMatchObject([
       { id: 'n33017', nameKey: 'lg_name_n33017', level: 2 },
       { id: 'n33006', nameKey: 'lg_name_n33006', level: 4 },
       { id: 'n33026', nameKey: 'lg_name_n33026', level: 6 },

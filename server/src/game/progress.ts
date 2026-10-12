@@ -9,12 +9,13 @@ import {
   type DropLib,
 } from '@pockie/game-core'
 import { randomInt } from 'node:crypto'
+import type { QuestHandIn } from '@pockie/shared'
 import { and, eq, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characterQuests, characters, inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
 import { avatarStats, dropItems, dropLib, item, levels, subTasks, task } from './data.js'
-import type { QuestProgress } from './quests.js'
+import { countItems, questRewards, type QuestProgress } from './quests.js'
 
 export type Tx = Parameters<Parameters<Db['transaction']>[0]>[0]
 type CharacterRow = typeof characters.$inferSelect
@@ -24,7 +25,6 @@ const ACTIVE = 0
 const READY = 1
 const COMPLETED = 2
 const COLLECT_STEP = 1
-const CURRENCY_COLUMN = { 0: 'stone', 2: 'gold', 3: 'giftCoupon' } as const
 
 /** Adds items, stacking onto unequipped rows of the same item up to the stack size. */
 export async function grantItems(
@@ -144,9 +144,14 @@ export async function acceptQuest(tx: Tx, characterId: string, taskId: number) {
 
 /**
  * Claims a ready quest (ready -> completed in one UPDATE), then pays it out (items, money, honor,
- * EXP) and auto-accepts the next. Returns false and pays nothing when the quest was not ready.
+ * EXP), auto-accepts the next and returns what it granted. Returns undefined and pays nothing when
+ * the quest was not ready.
  */
-export async function completeQuest(tx: Tx, characterId: string, taskId: number) {
+export async function completeQuest(
+  tx: Tx,
+  characterId: string,
+  taskId: number,
+): Promise<QuestHandIn | undefined> {
   const claimed = await tx
     .update(characterQuests)
     .set({ state: COMPLETED, completedAt: sql`now()` })
@@ -158,7 +163,7 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
       ),
     )
     .returning({ taskId: characterQuests.taskId })
-  if (claimed.length === 0) return false
+  if (claimed.length === 0) return undefined
 
   const row = task(taskId)!
   const [character] = await tx.select().from(characters).where(eq(characters.id, characterId))
@@ -171,39 +176,32 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
     }
   }
 
+  const rewards = questRewards(taskId)
   const dropId = Number(row.RewardDropID)
-  if (dropId > 0 && dropLib(dropId)) {
-    const random = createRandom(randomInt(2 ** 31))
-    const drops = rollDrops(
-      dropLib(dropId) as unknown as DropLib,
-      dropItems(dropId) as unknown as DropEntry[],
-      random,
-    )
-    await grantItems(
-      tx,
-      characterId,
-      drops.map((d) => ({ ...d, bound: true })),
-    )
-  } else if (String(row.RewardItem).startsWith('i')) {
-    for (const part of String(row.RewardItem).split(';')) {
-      const [itemId = '', count = '1'] = part.split(',')
-      const items = Array.from({ length: Number(count) }, () => ({ itemId, bound: true }))
-      await grantItems(tx, characterId, items)
-    }
-  }
+  const itemIds =
+    dropId > 0 && dropLib(dropId)
+      ? rollDrops(
+          dropLib(dropId) as unknown as DropLib,
+          dropItems(dropId) as unknown as DropEntry[],
+          createRandom(randomInt(2 ** 31)),
+        ).map((drop) => drop.itemId)
+      : rewards.items.flatMap(({ itemId, count }) => Array<string>(count).fill(itemId))
+  await grantItems(
+    tx,
+    characterId,
+    itemIds.map((itemId) => ({ itemId, bound: true })),
+  )
 
-  const money: Partial<Record<'stone' | 'gold' | 'giftCoupon', number>> = {}
-  if (String(row.RewardMoney) !== '0') {
-    for (const part of String(row.RewardMoney).split(';')) {
-      const [type = '', amount = '0'] = part.split(',')
-      const column = CURRENCY_COLUMN[Number(type) as keyof typeof CURRENCY_COLUMN]
-      if (column) money[column] = (money[column] ?? character[column]) + Number(amount)
-    }
-  }
-  const { levelsGained: _levelsGained, ...exp } = expUpdate(character, Number(row.RewardExp ?? 0))
+  const { levelsGained: _levelsGained, ...exp } = expUpdate(character, rewards.exp)
   await tx
     .update(characters)
-    .set({ ...money, ...exp, honor: character.honor + Number(row.RewardHono ?? 0) })
+    .set({
+      ...exp,
+      stone: character.stone + rewards.stone,
+      gold: character.gold + rewards.gold,
+      giftCoupon: character.giftCoupon + rewards.giftCoupon,
+      honor: character.honor + rewards.honor,
+    })
     .where(eq(characters.id, characterId))
 
   const nextId = Number(row.NextTaskID)
@@ -212,17 +210,23 @@ export async function completeQuest(tx: Tx, characterId: string, taskId: number)
   if (next && Number(next.AutoAcceptTask) === 1 && exp.level >= Number(next.RequireLevel)) {
     await acceptQuest(tx, characterId, nextId)
   }
-  return true
+  return { taskId, ...rewards, items: countItems(itemIds) }
 }
 
 /** Rookie (tutorial) quests complete as soon as every step is done (RookieTaskSystem). */
-export async function completeReadyRookieQuests(tx: Tx, characterId: string) {
-  const completed: number[] = []
+export async function handInReadyRookieQuests(tx: Tx, characterId: string) {
+  const handIns: QuestHandIn[] = []
   for (;;) {
     const ready = (await loadQuests(tx, characterId)).find(
       (q) => q.state === READY && Number(task(q.taskId)?.TaskBaseType) === ROOKIE,
     )
-    if (!ready) return completed
-    if (await completeQuest(tx, characterId, ready.taskId)) completed.push(ready.taskId)
+    if (!ready) return handIns
+    const handIn = await completeQuest(tx, characterId, ready.taskId)
+    if (handIn) handIns.push(handIn)
   }
+}
+
+/** Ids of the rookie quests handInReadyRookieQuests completed. */
+export async function completeReadyRookieQuests(tx: Tx, characterId: string) {
+  return (await handInReadyRookieQuests(tx, characterId)).map((handIn) => handIn.taskId)
 }
