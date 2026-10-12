@@ -19,6 +19,19 @@ race coverage is absent.
 | Medium   |     2 | Live socket authorization outlasts sessions; socket admission is unbounded               |
 | Low      |     3 | Registration email enumeration; login budget alias/in-flight gaps; retained chat buckets |
 
+## Status (2026-10-12)
+
+| Finding                               | Status                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. High: game actions not serialized  | Fixed (`fix/game-locks`): `lockCharacter` (`SELECT ... FOR UPDATE`) starts every mutating game transaction, including revive and pouch refills; `consumeOne` fails with 409 on a stale count; `completeQuest` claims `ready -> completed` before paying; `saveQuests` only writes active quests. Race tests: `server/src/modules/game/concurrency.api.test.ts`. |
+| 2. Medium: sockets outlive sessions   | Fixed (`fix/socket-sessions`): sockets disconnect at session expiry, `chat:send` re-checks the session, login rotation and logout share `revokeSession`. Open: a logout during a socket handshake can leave that socket alive until expiry.                                                                                                                     |
+| 3. Medium: no socket admission budget | Fixed: `MAX_SOCKETS_PER_CHARACTER` = 5, foreign origins get 403 in `allowRequest`, presence broadcasts only on first join and last leave. Open: per-IP handshake limits belong at the proxy.                                                                                                                                                                    |
+| 4. Low: registration reveals emails   | Open (product decision).                                                                                                                                                                                                                                                                                                                                        |
+| 5. Low: login budget split by alias   | Fixed: one budget per user ID, reserved before the password check. Note: the shared lockout reveals whether a username and an email belong to one account.                                                                                                                                                                                                      |
+| 6. Low: chat buckets never expire     | Fixed: `chat-limiter.ts` drops an offline bucket after its window.                                                                                                                                                                                                                                                                                              |
+
+All limits remain per process; several server instances need shared state.
+
 ## Findings
 
 ### 1. High — game transactions do not serialize character actions

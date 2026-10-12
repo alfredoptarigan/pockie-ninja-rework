@@ -221,11 +221,11 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.
   - [x] Reviewed translations survive `i18n:sentences merge` (`tools/i18n/overrides.json`, required).
-  - [x] Security review: `docs/security-review-m2.md`. Open: High — mutating game routes need a
-        `FOR UPDATE` character lock, conditional item consumption and an atomic quest claim (box
-        and quest rewards can pay twice); Medium — sockets outlive expired/rotated sessions, no
-        socket admission cap; Low — register email enumeration, login budget per alias, stale chat
-        buckets. Reviewed before `POST /revive` and `GET /quests/available` existed.
+  - [x] Security review: `docs/security-review-m2.md` (status table at the top). Fixed: game
+        actions serialized on the character row, sockets end with their session, socket cap,
+        login budget per account, chat bucket cleanup. Open: register email enumeration (product
+        decision), per-IP socket limits at the proxy. Client still needs messages for the new
+        `too_many_connections` connect error and the `unauthenticated` chat ack (`Chat.tsx`).
   - [ ] Coverage >= 80%, Playwright journey (create -> tutorial -> fight -> level up -> chat).
 
 ### Notes for Task 8 (client)
