@@ -1,22 +1,23 @@
-// Exports the original 2011 art used by the landing site into client/public/assets.
+// Exports the original 2011 art into client/public/assets with JSON manifests in
+// client/src/generated: the landing sprites (sprites.json) and the game assets (outfit, monster and
+// NPC motion sheets in game-motions.json; village and field scenes in game-scenes.json).
 // Run with `pnpm assets:export`. Needs the original game backup (GAME_BACKUP_DIR, default
-// ~/Privates/game-pockieninja) with JPEXS FFDec and JDK 8 under local-run/.runtime.
-// Raw SWFs never enter this repo; only the optimized WebP output and a JSON manifest do.
-import { execFileSync } from 'node:child_process'
+// ~/Privates/game-pockieninja) with JPEXS FFDec and JDK 8 under local-run/.runtime. Unchanged
+// sources are skipped on re-runs (cache in node_modules/.cache/pockie-assets).
+// Raw SWFs never enter this repo; only the optimized WebP output and the manifests do.
 import { mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
-import { homedir, tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
+import { join } from 'node:path'
+import { format, resolveConfig } from 'prettier'
 import sharp from 'sharp'
+import { ACTION_NAMES, exportMonsters, exportNpcs, exportOutfits } from './assets/characters.ts'
+import { ffdec } from './assets/ffdec.ts'
+import { paths } from './assets/paths.ts'
+import { exportScenes } from './assets/scenes.ts'
 
-const backup = resolve(process.env.GAME_BACKUP_DIR ?? join(homedir(), 'Privates/game-pockieninja'))
-const runtime = join(backup, 'local-run/.runtime')
-const java = join(runtime, 'jdk8/bin/java')
-const ffdec = join(runtime, 'ffdec/ffdec.jar')
-const movieclips = join(backup, 'apache/source/movieclip')
-
-const root = resolve(import.meta.dirname, '..')
-const assetsDir = join(root, 'client/public/assets')
-const manifestPath = join(root, 'client/src/generated/sprites.json')
+const { movieclips, assets: assetsDir } = paths
+const manifestPath = join(paths.generated, 'sprites.json')
+// GameFighting.as switches the stage to 14 fps for battles; scenes run at 12.
+const GAME_FPS = { battle: 14, scene: 12 }
 
 // Sprites are small bitmaps; 2x keeps them sharp enough for the hero without obvious blur.
 const ZOOM = 2
@@ -37,10 +38,6 @@ const characters = [
   { slug: 'gaara', name: 'Gaara', avatarId: 46 },
 ]
 
-function ffdecExport(args: string[]) {
-  execFileSync(java, ['-Djava.awt.headless=true', '-jar', ffdec, ...args], { stdio: 'pipe' })
-}
-
 function findEntry(dir: string, pattern: RegExp) {
   const entry = readdirSync(dir).find((name) => pattern.test(name))
   if (!entry) throw new Error(`Nothing matching ${pattern} in ${dir}`)
@@ -55,7 +52,7 @@ async function exportIdleStrip(character: (typeof characters)[number], work: str
     new RegExp(`^motion_\\d+_${character.avatarId}_${STAND_MOTION}_role.*\\.swf$`),
   )
   const out = join(work, character.slug)
-  ffdecExport(['-zoom', String(ZOOM), '-format', 'sprite:png', '-export', 'sprite', out, swf])
+  await ffdec(['-zoom', String(ZOOM), '-format', 'sprite:png', '-export', 'sprite', out, swf])
 
   const spriteDir = findEntry(out, /MotionSource$/)
   const frames = readdirSync(spriteDir)
@@ -92,28 +89,70 @@ async function exportIdleStrip(character: (typeof characters)[number], work: str
 
 async function exportLoginArt(work: string) {
   const out = join(work, 'login')
-  ffdecExport(['-export', 'image', out, join(movieclips, 'ui/sceneui/loginbackgrond.s31763.swf')])
+  await ffdec(['-export', 'image', out, join(movieclips, 'ui/sceneui/loginbackgrond.s31763.swf')])
   await sharp(findEntry(out, /\.jpe?g$/))
     .extract(LOGIN_ART_CROP)
     .webp({ quality: 78 })
     .toFile(join(assetsDir, 'art/login-kyuubi.webp'))
 }
 
-const work = mkdtempSync(join(tmpdir(), 'pockie-assets-'))
-try {
-  mkdirSync(join(assetsDir, 'sprites'), { recursive: true })
-  mkdirSync(join(assetsDir, 'art'), { recursive: true })
-  mkdirSync(join(root, 'client/src/generated'), { recursive: true })
-
-  const manifest: Record<string, Awaited<ReturnType<typeof exportIdleStrip>>> = {}
-  for (const character of characters) {
-    manifest[character.slug] = await exportIdleStrip(character, work)
-    console.log(`Exported ${character.name}`)
-  }
-  await exportLoginArt(work)
-  console.log('Exported login art')
-
-  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
-} finally {
-  rmSync(work, { recursive: true, force: true })
+async function writeJson(file: string, value: unknown) {
+  const options = await resolveConfig(file)
+  writeFileSync(file, await format(JSON.stringify(value), { ...options, filepath: file }))
 }
+
+async function exportLanding() {
+  const work = mkdtempSync(join(paths.cache, 'landing-'))
+  try {
+    mkdirSync(join(assetsDir, 'sprites'), { recursive: true })
+    mkdirSync(join(assetsDir, 'art'), { recursive: true })
+    const manifest: Record<string, Awaited<ReturnType<typeof exportIdleStrip>>> = {}
+    for (const character of characters) {
+      manifest[character.slug] = await exportIdleStrip(character, work)
+      console.log(`Exported ${character.name}`)
+    }
+    await exportLoginArt(work)
+    console.log('Exported login art')
+    await writeJson(manifestPath, manifest)
+  } finally {
+    rmSync(work, { recursive: true, force: true })
+  }
+}
+
+async function exportGame() {
+  const { outfits, missing, unnamed, skillMotions: outfitSkills } = await exportOutfits()
+  const { monsters, mobs, skillMotions: mobSkills } = await exportMonsters()
+  const { npcs, art } = await exportNpcs()
+  const scenes = await exportScenes()
+
+  await writeJson(join(paths.generated, 'game-motions.json'), {
+    fps: GAME_FPS,
+    actionNames: ACTION_NAMES,
+    outfits,
+    monsters,
+    mobs,
+    npcs: { placed: npcs, art },
+    gaps: {
+      outfitsWithoutArt: missing,
+      // The backup only has a few motion SWFs for these (no stand motion).
+      incompleteOutfits: Object.entries(outfits)
+        .filter(([, outfit]) => !outfit.actions['999'])
+        .map(([id]) => Number(id)),
+      unnamedOutfits: unnamed,
+    },
+  })
+  await writeJson(join(paths.generated, 'game-scenes.json'), { scenes })
+  // Skill id to motion id per character; large, so the client fetches it when a battle starts.
+  writeFileSync(
+    join(assetsDir, 'game/skill-motions.json'),
+    JSON.stringify({ outfits: outfitSkills, mobs: mobSkills }),
+  )
+  console.log(
+    `Exported ${Object.keys(outfits).length} outfits, ${Object.keys(mobs).length} monsters`,
+  )
+}
+
+mkdirSync(paths.cache, { recursive: true })
+mkdirSync(paths.generated, { recursive: true })
+await exportLanding()
+await exportGame()
