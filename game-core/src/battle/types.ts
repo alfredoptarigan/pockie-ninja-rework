@@ -48,6 +48,15 @@ export interface FighterInput {
   counter: number
   /** PriorityMul: chance to strike first when attacked */
   priority: number
+  /** DecDamage: percent less damage taken (capped at 100; negative takes more). */
+  decDamage?: number
+  /** ReboundAttach: percent of the raw damage reflected to the attacker. */
+  rebound?: number
+  /** AbsorptionDamage: percent of the raw damage taken that comes back as HP. */
+  absorb?: number
+  /** VampiricHP / VampiricMP: percent of the damage dealt healed as HP / MP. */
+  vampiricHp?: number
+  vampiricMp?: number
   /**
    * Avatar level used by the execute skills (aoyi). Players: `avatarLevelOf(PlayerAvatarID)`;
    * NPCs: their CounterBombMul when it is not -1. Absent = NPC rule `trunc(level / 3) - 5`.
@@ -66,8 +75,9 @@ export interface BuffChange {
 }
 
 /**
- * One replay entry (FightValue). Event ids: 1 begin action, 2 end action, 5 priority strike,
- * 7 counter, 9 buff tick or buff change, 14 skill, 20 death, 21 next fighter.
+ * One replay entry (FightValue). Event ids: 1 begin action, 2 end action, 3 cannot move (stun,
+ * freeze, ...), 5 priority strike, 7 counter, 9 buff tick or buff change, 14 skill, 20 death,
+ * 21 next fighter.
  */
 export interface FightEvent {
   actor: number
@@ -75,7 +85,10 @@ export interface FightEvent {
   target?: number
   /** Skill id for 5 / 7 / 14, buff id for a ticking buff (event 9). */
   skillId?: number
-  /** HP the target loses (after mitigation; for the execute skills the script damage). */
+  /**
+   * HP the target loses (TargetLastDamage: after mitigation and absorption, so it can be negative;
+   * for the execute skills the script damage).
+   */
   damage?: number
   hit?: boolean
   crit?: boolean
@@ -84,6 +97,14 @@ export interface FightEvent {
   selfDamage?: number
   /** MP the actor spends (DecMP). */
   decMp?: number
+  /** Rebound the actor takes, after its own mitigation (BackDamage; included in selfDamage). */
+  backDamage?: number
+  /** HP / MP the actor gains from vampiric strikes or healing scripts (IncHP / IncMP). */
+  incHp?: number
+  incMp?: number
+  /** Damage a shield of the target / of the actor took instead of HP (TargetShield / SelfShield). */
+  targetShield?: number
+  selfShield?: number
   /** Number of strikes the client animates (AttackCount, skill 40036). */
   attackCount?: number
   addBuffs?: BuffChange[]
@@ -123,6 +144,11 @@ export interface ActiveBuff {
 
 /** FightObject: a fighter during the fight. */
 export interface Fighter extends FighterInput {
+  decDamage: number
+  rebound: number
+  absorb: number
+  vampiricHp: number
+  vampiricMp: number
   index: number
   side: Side
   startHp: number
@@ -131,8 +157,18 @@ export interface Fighter extends FighterInput {
   initHit: number
   hitMulAdd: number
   next: number
-  /** Parry percent set by buff 11841. */
+  /** Parry percent set by buffs 11841 / 11824. */
   parryPercent: number
+  initDodge: number
+  dodgeMulAdd: number
+  /** Turn flags lowered by control buffs: <= 0 means no action / no normal attack / no skills. */
+  canMove: number
+  canAttack: number
+  canUseSkill: number
+  /** The type 3 buff that holds the shield, its HP left and hits left (-1 unlimited). */
+  shieldBuff: ActiveBuff | null
+  shieldDamage: number
+  shieldCount: number
   buffs: ActiveBuff[] | null
   attackSkills: SkillInput[]
   triggerSkills: SkillInput[]
@@ -143,8 +179,15 @@ export interface Fighter extends FighterInput {
 export interface FightContext {
   randInt(min: number, max: number): number
   getDamage(fighter: Fighter): number
-  /** FightSystem.Attack: hit, crit, parry and defence, then HP loss and trigger skills. */
-  attack(self: Fighter, target: Fighter, damage: number, fv: FightEvent, timer: number): void
+  /** FightSystem.Attack: hit, crit, parry, defence, rebound, ..., then HP loss and triggers. */
+  attack(
+    self: Fighter,
+    target: Fighter,
+    damage: number,
+    fv: FightEvent,
+    timer: number,
+    selfDamage?: number,
+  ): void
   /** FightSystem.Damage(obj, damage): raw HP loss of `victim`, without a FightValue. */
   damage(victim: Fighter, amount: number): void
   /** FightSystem.Damage(obj, damage, fv, timer): raw HP loss that also clears cleartype-1 buffs. */
@@ -154,6 +197,15 @@ export interface FightContext {
   getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
   changeNextAtkTime(target: Fighter, amount: number): void
   changeHit(target: Fighter, add: number): void
+  changeDodge(target: Fighter, add: number): void
+  /** ChangeSkill(skill, id) + UserSkill: use another skill.ini row instead, recorded under its id. */
+  changeSkill(
+    self: Fighter,
+    target: Fighter,
+    skill: SkillInput,
+    fv: FightEvent,
+    timer: number,
+  ): number
   /** ChangeSkill(skill, 1) + UserSkill: fall back to the normal attack. */
   normalAttack(self: Fighter, target: Fighter, fv: FightEvent, timer: number): number
 }

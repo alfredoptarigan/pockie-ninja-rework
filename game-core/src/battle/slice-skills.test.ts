@@ -1,8 +1,10 @@
-// Guard: every skill the starting outfits and the 2101-2501 monsters use has a ported script.
+// Guard: every skill the starting outfits and the 2101-2501 monsters use has a ported script, and
+// so does every outfit ultimate with a script in the backup.
 /// <reference types="node" />
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { simulateFight, type FighterInput, type SkillInput } from './fight.js'
+import { NEW_ULTIMATE_SKILL_IDS, newUltimateSkill } from './scripts/execute.js'
 import { SKILL_SCRIPTS } from './skills.js'
 
 const data = <T>(name: string): T =>
@@ -77,5 +79,30 @@ describe('skills of the M2 slice', () => {
         seed: 11,
       }),
     )
+  })
+})
+
+describe('outfit ultimates (avatar-skills.json SkillID1)', () => {
+  const ultimates = new Set(
+    Object.values(data<Record<string, { SkillID1: number }>>('avatar-skills')).map(
+      (add) => add.SkillID1,
+    ),
+  )
+  // skill_aoyi_2215.js ... 2220.js are missing from the backup (the server fell back to skill 1).
+  const missing = [2215, 2216, 2217, 2218, 2219, 2220]
+
+  it('has a script for every ultimate but the six missing from the backup', () => {
+    const unported = [...ultimates].filter((id) => {
+      const js = row(id).javascript
+      return row(id).type !== 3 && js !== undefined && !SKILL_SCRIPTS[js]
+    })
+    expect(unported).toEqual(missing)
+  })
+
+  it('builds the new ultimate rows exactly like skill.ini', () => {
+    for (const id of NEW_ULTIMATE_SKILL_IDS) {
+      const { level: _level, skillvalue: _value, ...ini } = skills[id] as Record<string, unknown>
+      expect(newUltimateSkill(id)).toEqual({ id, ...ini })
+    }
   })
 })
