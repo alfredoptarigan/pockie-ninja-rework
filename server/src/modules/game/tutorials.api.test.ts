@@ -10,6 +10,8 @@ let client: Client
 let characterId: string
 
 const MAX_FIGHT_ATTEMPTS = 50
+// Up to six fights with retries per chain.
+const TUTORIAL_TIMEOUT_MS = 30_000
 
 beforeEach(async () => {
   await truncateAll(db)
@@ -123,75 +125,79 @@ const villages = [
 ]
 
 describe.each(villages)('$name Village tutorial', (v) => {
-  it(`plays ${v.base} → ${v.base + 15} and unlocks main quest ${v.main}`, async () => {
-    // Clothing 3 (Ggio Vega) fights with fists.
-    const created = await client.post('/api/game/characters', {
-      name: 'Ninja_01',
-      gender: 0,
-      clothing: 3,
-      nation: v.nation,
-    })
-    characterId = created.json().character.id
-    const q = (step: number) => v.base + step
-    const done = (body: { completed: number[] }, step: number) =>
-      expect(body.completed).toContain(q(step))
+  it(
+    `plays ${v.base} → ${v.base + 15} and unlocks main quest ${v.main}`,
+    async () => {
+      // Clothing 3 (Ggio Vega) fights with fists.
+      const created = await client.post('/api/game/characters', {
+        name: 'Ninja_01',
+        gender: 0,
+        clothing: 3,
+        nation: v.nation,
+      })
+      characterId = created.json().character.id
+      const q = (step: number) => v.base + step
+      const done = (body: { completed: number[] }, step: number) =>
+        expect(body.completed).toContain(q(step))
 
-    // 0-3 in the village: talk, open the newbie pack, equip the weapon, talk again.
-    done(await talk(v.hub), 0)
-    done(await useItem('i159104'), 1)
-    await accept(q(2))
-    done(await ok(`/api/game/items/${(await itemRow('i270100'))!.id}/equip`), 2)
-    await accept(q(3))
-    done(await talk(v.hub), 3)
+      // 0-3 in the village: talk, open the newbie pack, equip the weapon, talk again.
+      done(await talk(v.hub), 0)
+      done(await useItem('i159104'), 1)
+      await accept(q(2))
+      done(await ok(`/api/game/items/${(await itemRow('i270100'))!.id}/equip`), 2)
+      await accept(q(3))
+      done(await talk(v.hub), 3)
 
-    // 4-7: kill steps in the first field, accepted alternately at the scout and the hub.
-    await travel(v.field)
-    await accept(q(4))
-    done(await winFight('n33017'), 4)
-    await travel(v.village)
-    await accept(q(5))
-    await travel(v.field)
-    done(await winFight('n33006'), 5)
-    await accept(q(6))
-    done(await winFight('n33006'), 6)
-    await travel(v.village)
-    await accept(q(7))
-    await travel(v.field)
-    done(await winFight('n33017'), 7)
+      // 4-7: kill steps in the first field, accepted alternately at the scout and the hub.
+      await travel(v.field)
+      await accept(q(4))
+      done(await winFight('n33017'), 4)
+      await travel(v.village)
+      await accept(q(5))
+      await travel(v.field)
+      done(await winFight('n33006'), 5)
+      await accept(q(6))
+      done(await winFight('n33006'), 6)
+      await travel(v.village)
+      await accept(q(7))
+      await travel(v.field)
+      done(await winFight('n33017'), 7)
 
-    // 8: the reward potion is used in the field (auto-accepted).
-    expect(await quests()).toContainEqual(expect.objectContaining({ taskId: q(8), state: 0 }))
-    done(await useItem('i160050'), 8)
+      // 8: the reward potion is used in the field (auto-accepted).
+      expect(await quests()).toContainEqual(expect.objectContaining({ taskId: q(8), state: 0 }))
+      done(await useItem('i160050'), 8)
 
-    // 9-11: talk steps between the hub and the scout.
-    await travel(v.village)
-    await accept(q(9))
-    await travel(v.field)
-    done(await talk(v.scout), 9)
-    await accept(q(10))
-    await travel(v.village)
-    done(await talk(v.hub), 10)
-    await accept(q(11))
-    await travel(v.field)
-    done(await talk(v.scout), 11)
+      // 9-11: talk steps between the hub and the scout.
+      await travel(v.village)
+      await accept(q(9))
+      await travel(v.field)
+      done(await talk(v.scout), 9)
+      await accept(q(10))
+      await travel(v.village)
+      done(await talk(v.hub), 10)
+      await accept(q(11))
+      await travel(v.field)
+      done(await talk(v.scout), 11)
 
-    // 12: collect the quest item from a Sushi Monster; it is taken on completion.
-    await accept(q(12))
-    done(await winFight('n33026'), 12)
-    expect(await itemRow('i140028')).toBeUndefined()
+      // 12: collect the quest item from a Sushi Monster; it is taken on completion.
+      await accept(q(12))
+      done(await winFight('n33026'), 12)
+      expect(await itemRow('i140028')).toBeUndefined()
 
-    // 13-15: report back, then open the reward pack.
-    await travel(v.village)
-    await accept(q(13))
-    await travel(v.field)
-    done(await talk(v.scout), 13)
-    await accept(q(14))
-    await travel(v.village)
-    done(await talk(v.hub), 14)
-    done(await useItem('i159110'), 15)
+      // 13-15: report back, then open the reward pack.
+      await travel(v.village)
+      await accept(q(13))
+      await travel(v.field)
+      done(await talk(v.scout), 13)
+      await accept(q(14))
+      await travel(v.village)
+      done(await talk(v.hub), 14)
+      done(await useItem('i159110'), 15)
 
-    const open = await quests()
-    expect(open.filter((quest) => quest.taskId >= v.base && quest.taskId <= q(15))).toEqual([])
-    expect(open).toContainEqual(expect.objectContaining({ taskId: v.main, state: 0 }))
-  })
+      const open = await quests()
+      expect(open.filter((quest) => quest.taskId >= v.base && quest.taskId <= q(15))).toEqual([])
+      expect(open).toContainEqual(expect.objectContaining({ taskId: v.main, state: 0 }))
+    },
+    TUTORIAL_TIMEOUT_MS,
+  )
 })
