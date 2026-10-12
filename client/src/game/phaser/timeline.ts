@@ -44,6 +44,8 @@ export interface Pose {
   moveMs: number
   /** in: fades in over FADE_MS; out: fades out once the (non-looping) motion is over. */
   fade?: 'in' | 'out'
+  /** Skill whose motion this is (strikes); other poses are actions (`motion` is the action id). */
+  skillId?: number
 }
 
 export type TextKind = 'damage' | 'crit' | 'miss' | 'mp' | 'buff' | 'buffEnd' | 'skill' | 'info'
@@ -178,7 +180,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   function strike(ev: FightEvent, start: number) {
     const actor = ev.actor
     const target = ev.target
-    const motion = skillMotion(art[actor], ev.skillId, skillMotions)
+    const { motion, skillId } = skillMotion(art[actor], ev.skillId, skillMotions)
     const name =
       ev.skillId !== undefined && ev.skillId !== NORMAL_ATTACK_SKILL
         ? skillName(ev.skillId)
@@ -203,7 +205,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     const parts = splitDamage(ev.damage ?? 0, ev.attackCount ?? 1)
     let impact = t
     parts.forEach((amount, k) => {
-      pose(actor, t, motion, { from: contact, to: contact })
+      pose(actor, t, motion, { from: contact, to: contact, skillId })
       impact = t + hitMs(actor, motion)
       if (onTarget) react(target, impact, ev, amount, k === parts.length - 1)
       t += motionMs(actor, motion)

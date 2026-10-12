@@ -100,10 +100,11 @@ describe('frame math', () => {
   })
 
   it('picks the skill motion, falling back to the normal attack', () => {
-    expect(skillMotion(art, 40027, skills)).toBe('18')
-    expect(skillMotion(art, 12345, skills)).toBe('52')
-    expect(skillMotion(art, 40027, null)).toBe('52')
-    expect(skillMotion(undefined, 1, skills)).toBe('999')
+    expect(skillMotion(art, 40027, skills)).toEqual({ motion: '18', skillId: 40027 })
+    // The skill the body really plays, so the weapon layer can follow it.
+    expect(skillMotion(art, 12345, skills)).toEqual({ motion: '52', skillId: 1 })
+    expect(skillMotion(art, 40027, null)).toEqual({ motion: '52', skillId: 1 })
+    expect(skillMotion(undefined, 1, skills)).toEqual({ motion: '999' })
   })
 })
 
@@ -212,6 +213,20 @@ describe('buildTimeline', () => {
     expect(timeline.poses[0]!.at(-1)!.motion).toBe('59')
     expect(barAt(timeline, 0, timeline.endAt)!.hp).toBe(88)
     expect(timeline.duration).toBeGreaterThan(timeline.endAt)
+  })
+
+  it('tags strike poses with the skill the body plays, and action poses with none', () => {
+    const timeline = build(
+      replayOf([
+        { actor: 1, event: 14, target: 0, skillId: 40027, damage: 1, hit: true },
+        { actor: 0, event: 14, target: 1, skillId: 12345, damage: 1, hit: true },
+      ]),
+    )
+    expect(timeline.poses[1]!.find((p) => p.motion === '18')!.skillId).toBe(40027)
+    expect(timeline.poses[0]!.find((p) => p.motion === '52')!.skillId).toBe(1)
+    const actions = timeline.poses[0]!.filter((p) => p.motion !== '52')
+    expect(actions.length).toBeGreaterThan(0)
+    expect(actions.every((p) => p.skillId === undefined)).toBe(true)
   })
 
   it('brings the next fighter in for sequential duels', () => {

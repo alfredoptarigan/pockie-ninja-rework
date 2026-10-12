@@ -1,6 +1,8 @@
 // Phaser battle replay: samples a Timeline (./timeline.ts) at the playback clock. Everything on
 // screen is a function of that clock, so skip, replay and speed changes need no extra state.
 import Phaser from 'phaser'
+import type { MotionSheet } from '../../generated/game-assets'
+import type { WeaponLayer } from '../../generated/game-extra'
 import type { Replay } from '../types'
 import { createGame, LABEL_STYLE, loadSheet } from './game'
 import { frameAt, originOf, sheetOf, sheetTicks, type FighterArt } from './motion'
@@ -12,14 +14,18 @@ import {
   poseX,
   STAGE,
   type FloatText,
+  type Pose,
   type TextKind,
   type Timeline,
 } from './timeline'
+import { weaponFrameAt, weaponSheetFor } from './weapon'
 
 export interface BattleSetup {
   replay: Replay
   timeline: Timeline
   art: (FighterArt | undefined)[]
+  /** Weapon layer drawn over each fighter's body (the player's equipped weapon; none for monsters). */
+  weapons: (WeaponLayer | undefined)[]
   names: string[]
   background?: string
   /** Name shown with a buff id in the status line. */
@@ -49,6 +55,8 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
   info: { color: '#e8f4ff', size: 24 },
 }
 const HUD = { margin: 12, portrait: 84, vsGap: 30, hpY: 22, hpH: 24, mpY: 52, mpH: 9 }
+/** Puts the weapon right above its body (body depths are pose start times in ms). */
+const WEAPON_ABOVE_BODY = 0.01
 
 /** Stacks texts that appear close together over the same fighter. */
 function textSlots(texts: FloatText[]) {
@@ -65,6 +73,7 @@ class BattleScene extends Phaser.Scene {
   private speed = 1
   private finished = false
   private sprites: (Phaser.GameObjects.Sprite | undefined)[] = []
+  private weaponSprites: (Phaser.GameObjects.Sprite | undefined)[] = []
   private floating = new Map<number, Phaser.GameObjects.Text>()
   private slots: number[]
   private hud!: Phaser.GameObjects.Graphics
@@ -78,16 +87,19 @@ class BattleScene extends Phaser.Scene {
   }
 
   preload() {
-    const { background, timeline, art } = this.setup
+    const { background, timeline, art, weapons } = this.setup
     if (background) this.load.image(background, background)
     for (const fighterArt of art) {
       const portrait = fighterArt?.set.portrait
       if (portrait && !this.textures.exists(portrait)) this.load.image(portrait, portrait)
     }
     timeline.poses.forEach((poses, i) => {
+      const weapon = weapons[i]
       for (const pose of poses) {
         const sheet = sheetOf(art[i], pose.motion)
         if (sheet) loadSheet(this, sheet)
+        const weaponSheet = weapon && weaponSheetFor(weapon, art[i], pose)
+        if (weaponSheet) loadSheet(this, weaponSheet)
       }
     })
   }
@@ -103,6 +115,9 @@ class BattleScene extends Phaser.Scene {
       g.fillStyle(0x8a6a3e).fillRect(0, STAGE.groundY - 40, STAGE.width, STAGE.height)
     }
     this.sprites = replay.fighters.map(() => this.add.sprite(0, 0, '__MISSING').setVisible(false))
+    this.weaponSprites = replay.fighters.map((_, i) =>
+      this.setup.weapons[i] ? this.add.sprite(0, 0, '__MISSING').setVisible(false) : undefined,
+    )
     this.hud = this.add.graphics().setDepth(900)
     for (const side of ['attackers', 'defenders'] as const) {
       this.portraits[side] = this.add.image(0, 0, '__MISSING').setDepth(901).setVisible(false)
@@ -164,6 +179,8 @@ class BattleScene extends Phaser.Scene {
   private renderFighters(t: number) {
     const { timeline, art, replay } = this.setup
     this.sprites.forEach((sprite, i) => {
+      const weapon = this.weaponSprites[i]
+      weapon?.setVisible(false)
       if (!sprite) return
       const pose = latestAt(timeline.poses[i] ?? [], t)
       const sheet = pose && sheetOf(art[i], pose.motion)
@@ -185,7 +202,32 @@ class BattleScene extends Phaser.Scene {
         .setAlpha(alpha)
         .setDepth(pose.at)
         .setVisible(alpha > 0)
+      if (weapon) this.renderWeapon(weapon, i, pose, sheet, sprite)
     })
+  }
+
+  /** The weapon over its body: same spot, scale, flip and fade, its own sheet, anchor and cells. */
+  private renderWeapon(
+    weapon: Phaser.GameObjects.Sprite,
+    i: number,
+    pose: Pose,
+    body: MotionSheet,
+    sprite: Phaser.GameObjects.Sprite,
+  ) {
+    const layer = this.setup.weapons[i]
+    const sheet = layer && weaponSheetFor(layer, this.setup.art[i], pose)
+    if (!sheet || !this.textures.exists(sheet.file)) return
+    const origin = originOf(sheet)
+    const tick = (this.clock - pose.at) / BATTLE_TICK_MS
+    weapon
+      .setTexture(sheet.file, weaponFrameAt(body.durations, sheet.durations, tick, pose.loop))
+      .setOrigin(origin.x, origin.y)
+      .setPosition(sprite.x, sprite.y)
+      .setScale(sprite.scaleX, sprite.scaleY)
+      .setFlipX(sprite.flipX)
+      .setAlpha(sprite.alpha)
+      .setDepth(sprite.depth + WEAPON_ABOVE_BODY)
+      .setVisible(sprite.visible)
   }
 
   private renderTexts(t: number) {

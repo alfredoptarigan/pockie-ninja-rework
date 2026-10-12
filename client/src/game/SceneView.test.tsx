@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character, fists, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
+import { mountBattle } from './phaser'
 import { SceneView } from './SceneView'
 import type { FightResult, SceneView as Scene } from './types'
 
@@ -82,6 +83,11 @@ describe('SceneView', () => {
     )
     expect(dialog).toHaveTextContent('Level up! You are now level 2.')
     expect(requestBody(fetchMock, 'POST /api/game/fight')).toEqual({ monsterId: 'n33017' })
+    // The replay draws the weapon equipped when the fight started.
+    expect(mountBattle).toHaveBeenLastCalledWith(
+      expect.anything(),
+      expect.objectContaining({ clothing: 3, weaponItemId: fists.itemId }),
+    )
   })
 
   it('replays the battle and fights again from the result window', async () => {
