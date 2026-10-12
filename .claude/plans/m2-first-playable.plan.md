@@ -150,10 +150,9 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         skills 40023/40027/40031/40033/40036, buffs 8888/11811/11824/11841/11843/11851, MP costs.
         Replay events gained optional `selfDamage`, `decMp`, `attackCount`, `addBuffs`, `delBuffs`;
         event 9 (buff tick/expiry) is now emitted; fighters carry `maxMp`/`startMp`/`mp`.
-  - [ ] **Server wiring:** `world.ts` (fight + explore) must pass `skills` and `avatarLevel` to the
-        engine (players: `avatar-skills.json` SkillID1-4; monsters: `npc-records` AttackSkill/
-        TriggerSkill via `npc-record-values`, `avatarLevel = CounterBombMul` unless -1) and save
-        `replay.fighters[0].mp`. Until then fighters only use 7777/8888.
+  - [x] Server wiring (`server/src/game/combat.ts`): `POST /fight` and explore fight cards use
+        outfit skills (`avatar-skills.json`) and monster skills (`npc-records`), MP is saved after
+        fights. Starting-outfit skills cost no MP, so MP does not drop in M2 fights yet.
   - [ ] Other 48 aoyi scripts (avatar level 9+), recast skills, rebound/absorb/vampire/shields,
         stun/seal, regeneration auras; import `FightBuff.ini` to `fight-buffs.json` (6 buffs are
         hard-coded in `buffs.ts` for now).
