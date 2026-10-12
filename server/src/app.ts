@@ -11,6 +11,7 @@ import { contentRoutes } from './modules/content/routes.js'
 import { characterRoutes } from './modules/game/characters.js'
 import { worldRoutes } from './modules/game/world.js'
 import { actionRoutes } from './modules/game/actions.js'
+import { attachRealtime } from './modules/realtime/realtime.js'
 import { statusRoutes } from './modules/status/routes.js'
 
 interface AppOptions {
@@ -48,14 +49,15 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   })
   app.register(csrfPlugin, { env })
   app.register(sessionPlugin, { db, env })
+  const realtime = attachRealtime(app, { db, env })
 
   app.get('/api/health', async () => ({ ok: true }))
-  app.register(authRoutes, { db, env, prefix: '/api/auth' })
+  app.register(authRoutes, { db, env, realtime, prefix: '/api/auth' })
   app.register(contentRoutes, { db, prefix: '/api' })
   app.register(statusRoutes, { db, prefix: '/api' })
   app.register(characterRoutes, { db, prefix: '/api/game' })
   app.register(worldRoutes, { db, prefix: '/api/game' })
-  app.register(actionRoutes, { db, prefix: '/api/game' })
+  app.register(actionRoutes, { db, realtime, prefix: '/api/game' })
 
   return app
 }
