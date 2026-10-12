@@ -98,3 +98,50 @@ export function recordCollect(quests: QuestProgress[], itemId: string) {
     (step) => Number(step.SubTaskType) === COLLECT && step.TargetItem === itemId,
   )
 }
+
+const TALK = 3
+const COMMAND = 8
+
+/** Talking to an NPC counts for active talk steps that target it in this scene. */
+export function recordTalk(quests: QuestProgress[], npcId: string, sceneId: number) {
+  return advance(
+    quests,
+    (step) =>
+      Number(step.SubTaskType) === TALK && step.TargetConfiger === npcId && inScene(step, sceneId),
+  )
+}
+
+/** Items an NPC hands out in a talk step (TargetCondition 1 with a TargetItem). */
+export function talkItems(quests: QuestProgress[], npcId: string) {
+  return quests
+    .filter((quest) => quest.state === ACTIVE)
+    .flatMap((quest) => subTasks(quest.taskId))
+    .filter(
+      (step) =>
+        Number(step.SubTaskType) === TALK &&
+        step.TargetConfiger === npcId &&
+        Number(step.TargetCondition) === 1 &&
+        String(step.TargetItem).startsWith('i'),
+    )
+    .map((step) => String(step.TargetItem))
+}
+
+/** Rookie commands (CommandRule.java): 8888 use item, 8887 equip weapon, ... */
+export const USE_ITEM_COMMAND = 8888
+export const EQUIP_WEAPON_COMMAND = 8887
+
+export function recordCommand(
+  quests: QuestProgress[],
+  command: number,
+  sceneId: number,
+  itemId?: string,
+) {
+  return advance(
+    quests,
+    (step) =>
+      Number(step.SubTaskType) === COMMAND &&
+      Number(step.TargetCondition) === command &&
+      (!String(step.TargetItem).startsWith('i') || step.TargetItem === itemId) &&
+      inScene(step, sceneId),
+  )
+}

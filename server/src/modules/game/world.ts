@@ -9,7 +9,7 @@ import {
   type DropLib,
   type FighterInput,
 } from '@pockie/game-core'
-import { and, eq, isNotNull, sql } from 'drizzle-orm'
+import { and, eq, isNotNull } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
@@ -25,12 +25,12 @@ import {
   sceneLinks,
   sceneSpawns,
 } from '../../game/data.js'
+import { grantItems, saveQuests, type Tx } from '../../game/progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
 import { requireUser, toCharacter } from './characters.js'
 
 type CharacterRow = typeof characters.$inferSelect
-type Tx = Parameters<Parameters<Db['transaction']>[0]>[0]
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
 const MAX_LISTED_MONSTERS = 6
@@ -104,49 +104,6 @@ async function playerFighter(tx: Tx, character: CharacterRow): Promise<FighterIn
     tough: 0,
     pierce: 0,
     priority: 0,
-  }
-}
-
-/** Adds items, stacking onto unequipped rows of the same item and binding up to the stack size. */
-async function grantItems(
-  tx: Tx,
-  characterId: string,
-  items: { itemId: string; bound: boolean }[],
-) {
-  for (const { itemId, bound } of items) {
-    const maxStack = Number(item(itemId)?.ItemMaxFoldNum ?? 1)
-    const [stack] = await tx
-      .select()
-      .from(inventoryItems)
-      .where(
-        and(
-          eq(inventoryItems.characterId, characterId),
-          eq(inventoryItems.itemId, itemId),
-          eq(inventoryItems.bound, bound),
-          sql`${inventoryItems.equippedSlot} is null`,
-          sql`${inventoryItems.count} < ${maxStack}`,
-        ),
-      )
-      .limit(1)
-    if (stack) {
-      await tx
-        .update(inventoryItems)
-        .set({ count: stack.count + 1 })
-        .where(eq(inventoryItems.id, stack.id))
-    } else {
-      await tx.insert(inventoryItems).values({ characterId, itemId, bound })
-    }
-  }
-}
-
-async function saveQuests(tx: Tx, characterId: string, changed: QuestProgress[]) {
-  for (const quest of changed) {
-    await tx
-      .update(characterQuests)
-      .set({ progress: quest.progress, state: quest.state })
-      .where(
-        and(eq(characterQuests.characterId, characterId), eq(characterQuests.taskId, quest.taskId)),
-      )
   }
 }
 

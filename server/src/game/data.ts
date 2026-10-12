@@ -93,3 +93,8 @@ export const dropLib = (id: number) => load<Record<string, Row>>('drop-libs')[St
 export const dropItems = (id: number) => load<Record<string, Row[]>>('drop-items')[String(id)] ?? []
 export const taskMonsterDrops = (taskId: number) =>
   load<Record<string, Row[]>>('task-monster-drops')[String(taskId)] ?? []
+
+export const task = (id: number) => load<Record<string, Row>>('tasks')[String(id)]
+export const scene = (id: number) => load<Record<string, Row>>('scenes')[String(id)]
+export const sceneSwitchRule = (id: number) =>
+  load<Record<string, Row>>('scene-switch-rules')[String(id)]
