@@ -1,10 +1,15 @@
 // Explore spots (server/src/modules/game/explore.ts): what the Explore window shows and offers.
 // The server re-checks every rule; this only decides which buttons are enabled and how results
 // read.
+import { useMutation } from '@tanstack/react-query'
+import { api } from '../lib/api'
+import { useApplyResult } from './api'
+import type { ExploreSearchInput, ExplorePeekInput } from '../../../shared/src/schemas/explore'
 import type { Character } from '@pockie/shared'
 import { plainText } from './text'
 import type {
   ExploreCard,
+  ExploreView,
   ExploreResult,
   ExploreSpot,
   ExploreStar,
@@ -145,3 +150,68 @@ export function outcomeText({ card, fight }: Pick<ExploreResult, 'card' | 'fight
         : `You found ${itemName(card.itemId)}, but it got away.`
   }
 }
+
+export interface PendingExplore {
+  searchId: string
+  spotId: string
+  mode: 'normal' | 'senior'
+  cards: (ExploreCard | null)[]
+  peek: {
+    count: number
+    limit: number
+    cost: { currency: 'stone' | 'gold' | 'giftCoupon'; amount: number } | null
+  }
+  character: Character
+}
+
+export type ExploreCardsView = ExploreView & { pending?: PendingExplore }
+
+export function useExploreCards() {
+  const apply = useApplyResult()
+  return useMutation({
+    mutationFn: ({ spotId, ...input }: ExploreSearchInput & { spotId: string }) =>
+      api<PendingExplore | ExploreResult>(`/api/game/explore/${spotId}`, {
+        method: 'POST',
+        body: input,
+      }),
+    onSuccess: (result) => {
+      if ('searchId' in result || !result.fight) apply(result)
+    },
+  })
+}
+
+export function usePeekCard() {
+  const apply = useApplyResult()
+  return useMutation({
+    mutationFn: ({ spotId, ...input }: ExplorePeekInput & { spotId: string }) =>
+      api<PendingExplore>(`/api/game/explore/${spotId}/peek`, { method: 'POST', body: input }),
+    onSuccess: apply,
+  })
+}
+
+export type SeniorExploreSpot = ExploreSpot & { senior?: { itemId: string; level: number } | null }
+
+export function seniorBlock(
+  spot: SeniorExploreSpot,
+  character: Character,
+  bag: InventoryItem[] | undefined,
+) {
+  if (isDefeated(character)) return 'defeated'
+  if ([3101, 3102, 111, 121, 131, 141, 151, 161, 171].includes(character.sceneId)) return 'not_here'
+  if (character.level < (spot.senior?.level ?? spot.requireLevel)) return 'too_low'
+  if (spot.senior === null) return 'missing_item'
+  if (
+    !bag ||
+    spot.requireItems.length === 0 ||
+    (spot.senior
+      ? bagCount(bag, spot.senior.itemId) < 1
+      : spot.requireItems.some((need) => bagCount(bag, need.itemId) < 1))
+  )
+    return 'missing_item'
+  return null
+}
+
+export const peekPriceText = (cost: PendingExplore['peek']['cost']) =>
+  cost
+    ? `${cost.amount} ${cost.currency === 'stone' ? 'Stone' : cost.currency === 'gold' ? 'Gold' : 'Gift Coupons'}`
+    : 'No peeks remaining'

@@ -3,9 +3,16 @@
 // the result window. The scene picture opens the same window from the spot's tree.
 import type { Character } from '@pockie/shared'
 import { useEffect, useId, useState } from 'react'
-import { errorMessage, useApplyResult, useExplore, useExploreSpot, useInventory } from './api'
+import { errorMessage, useApplyResult, useExplore, useInventory } from './api'
 import {
   bagCount,
+  useExploreCards,
+  usePeekCard,
+  seniorBlock,
+  peekPriceText,
+  type PendingExplore,
+  type SeniorExploreSpot,
+  type ExploreCardsView,
   blockMessage,
   cardText,
   cooldownLeft,
@@ -128,7 +135,10 @@ function ExploreFlow({
   status: ReturnType<typeof useExplore>
   onClose: () => void
 }) {
-  const explore = useExploreSpot()
+  const explore = useExploreCards()
+  const peek = usePeekCard()
+  const [pending, setPending] = useState<PendingExplore | null>(null)
+  const [mode, setMode] = useState<'normal' | 'senior'>('normal')
   const inventory = useInventory()
   const [confirming, setConfirming] = useState<ExploreSpot | null>(null)
   const [outcome, setOutcome] = useState<Outcome | null>(null)
@@ -142,7 +152,11 @@ function ExploreFlow({
     setConfirming(null)
     const weaponItemId = inventory.data?.find((item) => item.equippedSlot === 'Weapon')?.itemId
     try {
-      const result = await explore.mutateAsync(spot.id)
+      const result = await explore.mutateAsync({ spotId: spot.id, action: 'start', mode })
+      if ('searchId' in result) {
+        setPending(result)
+        return
+      }
       const fought = Boolean(result.fight)
       setOutcome({ result, weaponItemId, run: 0, replaying: fought, applied: !fought })
     } catch {
@@ -184,6 +198,51 @@ function ExploreFlow({
     )
   }
 
+  const currentSearch = pending ?? (status.data as ExploreCardsView | undefined)?.pending
+  if (currentSearch) {
+    const choose = async (cardIndex: number) => {
+      const weaponItemId = inventory.data?.find((item) => item.equippedSlot === 'Weapon')?.itemId
+      try {
+        const result = await explore.mutateAsync({
+          spotId: currentSearch.spotId,
+          action: 'pick',
+          searchId: currentSearch.searchId,
+          cardIndex,
+        })
+        if ('searchId' in result) return
+        setPending(null)
+        const fought = Boolean(result.fight)
+        setOutcome({ result, weaponItemId, run: 0, replaying: fought, applied: !fought })
+      } catch {
+        void status.refetch()
+      }
+    }
+    const reveal = async (cardIndex: number, currency: 'gold' | 'giftCoupon') => {
+      try {
+        setPending(
+          await peek.mutateAsync({
+            spotId: currentSearch.spotId,
+            searchId: currentSearch.searchId,
+            cardIndex,
+            currency,
+          }),
+        )
+      } catch {
+        // The mutation's error is shown in the card window.
+      }
+    }
+    return (
+      <ExploreCardWindow
+        search={currentSearch}
+        busy={explore.isPending || peek.isPending}
+        error={explore.error ?? peek.error}
+        onPick={(index) => void choose(index)}
+        onPeek={(index, currency) => void reveal(index, currency)}
+        onClose={onClose}
+      />
+    )
+  }
+
   const data = status.data
   return (
     <>
@@ -196,7 +255,10 @@ function ExploreFlow({
             status={data}
             bag={inventory.data}
             busy={explore.isPending}
-            onExplore={setConfirming}
+            onExplore={(spot, nextMode) => {
+              setMode(nextMode)
+              setConfirming(spot)
+            }}
           />
         )}
         {explore.isError && (
@@ -209,9 +271,15 @@ function ExploreFlow({
         <Dialog title="Start Exploring?" onClose={() => setConfirming(null)} className="w-[26rem]">
           <p>Explore {spotName(confirming)}?</p>
           <p className="mt-1">
-            This uses 1 of your {data.remaining} searches left today
-            {costText(confirming) === 'Free' ? '' : ` and ${costText(confirming)}`}. Afterwards you
-            rest {restText(data.cooldownSeconds)} before the next search.
+            {mode === 'senior' ? (
+              'Uses one exploration key. Does not use today’s searches or start a cooldown. Five cards.'
+            ) : (
+              <>
+                This uses 1 of your {data.remaining} searches left today
+                {costText(confirming) === 'Free' ? '' : ` and ${costText(confirming)}`}. Afterwards
+                you rest {restText(data.cooldownSeconds)} before the next search.
+              </>
+            )}
           </p>
           <div className="mt-3 flex gap-2">
             <GameButton small onClick={() => void start(confirming)}>
@@ -238,7 +306,7 @@ function SpotList({
   status: ExploreStatus & { spots: ExploreSpot[] }
   bag: InventoryItem[] | undefined
   busy: boolean
-  onExplore: (spot: ExploreSpot) => void
+  onExplore: (spot: ExploreSpot, mode: 'normal' | 'senior') => void
 }) {
   const now = useNow(status.cooldownEndsAt)
   const left = cooldownLeft(status.cooldownEndsAt, now)
@@ -263,7 +331,9 @@ function SpotList({
               block={exploreBlock(spot, status, character, bag, now)}
               secondsLeft={left}
               busy={busy}
-              onExplore={() => onExplore(spot)}
+              onExplore={() => onExplore(spot, 'normal')}
+              seniorDisabled={Boolean(seniorBlock(spot, character, bag))}
+              onSenior={() => onExplore(spot, 'senior')}
             />
           </li>
         ))}
@@ -280,8 +350,10 @@ function SpotRow({
   secondsLeft,
   busy,
   onExplore,
+  onSenior,
+  seniorDisabled,
 }: {
-  spot: ExploreSpot
+  spot: SeniorExploreSpot
   bag: InventoryItem[] | undefined
   /** The ninja's Stone, shown next to a Stone cost. */
   stone: number
@@ -289,6 +361,8 @@ function SpotRow({
   secondsLeft: number
   busy: boolean
   onExplore: () => void
+  onSenior: () => void
+  seniorDisabled: boolean
 }) {
   const id = useId()
   const name = spotName(spot)
@@ -305,6 +379,12 @@ function SpotRow({
         <dl className="grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-0.5 text-xs">
           <dt className="font-bold">Level</dt>
           <dd>{spot.requireLevel}+</dd>
+          {spot.senior && (
+            <>
+              <dt className="font-bold">Senior level</dt>
+              <dd>{spot.senior.level}+</dd>
+            </>
+          )}
           <dt className="font-bold">Cost</dt>
           <dd>
             {spot.requireStone === 0 && spot.requireItems.length === 0 && 'Free'}
@@ -337,7 +417,93 @@ function SpotRow({
       >
         Explore
       </GameButton>
+      {spot.requireItems.length > 0 && (
+        <GameButton
+          small
+          disabled={seniorDisabled || busy}
+          aria-label={`Senior Explore ${name}`}
+          onClick={onSenior}
+        >
+          Senior Explore
+        </GameButton>
+      )}
     </section>
+  )
+}
+
+function ExploreCardWindow({
+  search,
+  busy,
+  error,
+  onPick,
+  onPeek,
+  onClose,
+}: {
+  search: PendingExplore
+  busy: boolean
+  error: unknown
+  onPick: (index: number) => void
+  onPeek: (index: number, currency: 'gold' | 'giftCoupon') => void
+  onClose: () => void
+}) {
+  const [currency, setCurrency] = useState<'gold' | 'giftCoupon'>('gold')
+  const cost =
+    search.peek.cost && search.peek.count === 1
+      ? { ...search.peek.cost, currency }
+      : search.peek.cost
+  return (
+    <Dialog title="Choose an Exploration Card" onClose={onClose} className="w-[42rem]">
+      <p>Pick one card to collect its reward. You may pay to peek before choosing.</p>
+      <p className="mt-1">
+        {cost ? `Peek costs ${peekPriceText(cost)}.` : peekPriceText(null)} {search.peek.count} /{' '}
+        {search.peek.limit} peeks used.
+      </p>
+      {search.peek.count === 1 && search.peek.cost && (
+        <label className="mt-2 block">
+          Pay the second peek with{' '}
+          <select
+            aria-label="Peek currency"
+            value={currency}
+            onChange={(event) => setCurrency(event.target.value as 'gold' | 'giftCoupon')}
+          >
+            <option value="gold">Gold</option>
+            <option value="giftCoupon">Gift Coupons</option>
+          </select>
+        </label>
+      )}
+      <ol className="mt-3 grid grid-cols-5 gap-2">
+        {search.cards.map((card, index) => (
+          <li
+            key={index}
+            className="flex min-h-32 flex-col gap-2 rounded border border-wood-light bg-white/40 p-2 text-xs"
+          >
+            <p className="font-bold">Card {index + 1}</p>
+            <p className="flex-1">{card ? cardText(card) : 'Face down'}</p>
+            <GameButton
+              small
+              aria-label={`Peek at card ${index + 1}`}
+              disabled={busy || Boolean(card) || !cost}
+              onClick={() => onPeek(index, currency)}
+            >
+              Peek
+            </GameButton>
+            <GameButton
+              small
+              aria-label={`Pick card ${index + 1}`}
+              disabled={busy}
+              onClick={() => onPick(index)}
+            >
+              Pick
+            </GameButton>
+          </li>
+        ))}
+      </ol>
+      {Boolean(error) && (
+        <div className="mt-2">
+          <Notice tone="error">{errorMessage(error)}</Notice>
+        </div>
+      )}
+    </Dialog>
   )
 }
 
