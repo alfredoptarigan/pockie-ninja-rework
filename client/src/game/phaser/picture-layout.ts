@@ -62,7 +62,7 @@ export interface PictureLayout {
 
 /** Monster portrait cells, top centre like the original field screen, below the HUD strip (scene pixels). */
 export const PORTRAIT_CELL = { size: 120, gap: 14, top: 50 }
-/** The Drops panel starts this far below the portrait cell, under its name plate (two lines for long names). */
+/** The Drops panel starts this far below the portrait cell, under its (up to two line) name plate. */
 const DROPS_BELOW = 64
 /** Building names longer than this are sentences in the table, not names. */
 const MAX_TITLE = 24

@@ -88,7 +88,16 @@ export function DropsPanel({
       <section
         aria-label={`${name} drops`}
         className="game-hud absolute overflow-hidden p-2 font-game text-xs"
-        style={{ left, top, width, maxHeight: HUD.height - top - HUD.margin } as CSSProperties}
+        // Nearly opaque: the scene's labels would show through the HUD plate's usual alpha.
+        style={
+          {
+            left,
+            top,
+            width,
+            maxHeight: HUD.height - top - HUD.margin,
+            background: 'rgb(28 31 33 / 0.96)',
+          } as CSSProperties
+        }
       >
         <h3 className="mb-1 text-center font-bold text-trim">Drops</h3>
         {drops.length === 0 ? (
