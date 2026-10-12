@@ -110,7 +110,7 @@ describe('blockMessage', () => {
     expect(blockMessage('daily_limit', free, 0)).toBe('You cannot explore any more today.')
     expect(blockMessage('cooldown', free, 272)).toBe('Resting. You can explore again in 4:32.')
     expect(blockMessage('missing_item', expert, 0)).toBe(
-      'You need 1 x Stone Mine Secret Key to explore there.',
+      'You need 1 x Smelting Mountains Secret Key to explore there.',
     )
   })
 })
@@ -144,7 +144,9 @@ describe('cardText', () => {
   it('describes what a card held', () => {
     expect(cardText({ type: 'fight', monsterId: 'n330261' })).toBe('A fight with Sushi')
     expect(cardText({ type: 'stone', amount: 671 })).toBe('671 Stone')
-    expect(cardText({ type: 'key', itemId: 'i150046', bound: true })).toBe('Stone Mine Secret Key')
+    expect(cardText({ type: 'key', itemId: 'i150046', bound: true })).toBe(
+      'Smelting Mountains Secret Key',
+    )
     expect(cardText({ type: 'game' })).toBe('A mini-game')
     expect(cardText({ type: 'nothing' })).toBe('Nothing')
   })
