@@ -88,6 +88,11 @@ describe('equipment bonuses', () => {
     expect(fighter(['i299910'])).toMatchObject({ crit: 390, pierce: 390 })
   })
 
+  it('passes damage reduction and life steal to the fight (i298009, i298010)', () => {
+    expect(fighter(['i298009']).decDamage).toBe(3)
+    expect(fighter(['i298010']).vampiricHp).toBe(3)
+  })
+
   it('sums the same bonus over several items', () => {
     expect(fighter(['i298005', 'i298005']).hit).toBe(132)
   })

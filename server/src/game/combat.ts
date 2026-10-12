@@ -103,13 +103,12 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
 }
 
 /** RefreshSystem *Equip terms: deriveStats bonuses plus the ones fighters take as they are. */
-type EquipBonuses = Partial<Bonuses> & { tough?: number; pierce?: number; neglectDefense?: number }
+type EquipBonuses = Partial<Bonuses> &
+  Partial<Pick<FighterInput, 'tough' | 'pierce' | 'neglectDefense' | 'decDamage' | 'vampiricHp'>>
 
 /**
  * EquipSystem.AddOtherProp: item.ini OtherPropName → the RefreshSystem term it feeds. With no
- * *MulMul equipment terms, hit/crit/tough/pierce/neglectDefense are plain sums. Not ported yet:
- * DecDamageEquip and VampiricHPEquip (level 21+ items), as the battle engine has no damage
- * reduction or life steal.
+ * *MulMul equipment terms, hit/crit/tough/pierce/neglectDefense are plain sums.
  */
 const OTHER_PROPS: Record<string, keyof EquipBonuses> = {
   MaxHPEquip: 'hp',
@@ -126,6 +125,8 @@ const OTHER_PROPS: Record<string, keyof EquipBonuses> = {
   ToughEquip: 'tough',
   PierceEquip: 'pierce',
   NeglectDefAttachEquip: 'neglectDefense',
+  DecDamageEquip: 'decDamage',
+  VampiricHPEquip: 'vampiricHp',
 }
 
 /**
@@ -176,6 +177,8 @@ export function playerFighterFrom(
     neglectDefense: bonuses.neglectDefense ?? 0,
     tough: bonuses.tough ?? 0,
     pierce: bonuses.pierce ?? 0,
+    decDamage: bonuses.decDamage ?? 0,
+    vampiricHp: bonuses.vampiricHp ?? 0,
     priority: 0,
     avatarLevel: avatarLevelFromAvatarId(character.avatarId),
     ...skillsOf(avatarSkillIds(character.avatarId)),
