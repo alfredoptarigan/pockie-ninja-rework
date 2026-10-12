@@ -1,7 +1,7 @@
 # Plan: World & Economy (Milestone 3)
 
 **Project**: Pockie Ninja Remastered
-**Status**: waves 1 and 2 merged (2026-10-12); wave 3 (tasks 10, 11) next
+**Status**: Done (2026-10-13); all three waves merged
 **Complexity**: Large
 
 ## Goal
@@ -320,6 +320,22 @@ Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 fi
 14. **VIP**: bought in the item mall with Gold (mall is a later milestone); one tier, 30 days
     (`vip_until`), +50% EXP and +25% drop chance on every reward path. Task 11 ships the rule
     module, the column and a badge; the purchase arrives with the mall.
+
+## Wave 3 notes (merged 2026-10-13)
+
+- VIP: `characters.vip_until` (migration 0010), `server/src/game/vip.ts` applies +50% EXP and
+  +25% drop chance on every reward path; HUD badge; VIP members buy from the Mysterious
+  Merchant VIP tab. No purchase route yet (item mall, later).
+- Verification: fixes for wholesale stack cap, toll gate duel while defeated, appraise-all double
+  charge, daily id 400; regressions in `security-m3.api.test.ts`; new
+  `e2e/economy-journey.spec.ts` (shop, appraise and enhance, travel to Angel City, toll gate card
+  take) with shared steps and psql seeding in `e2e/helpers.ts`. Report:
+  `docs/security-review-m3.md`.
+- Open product choices (security review 5-8, for the fix phase): shop routes do not check the
+  scene or NPC; fight and box drops ignore the bag size; a won pub fight rolls back when its
+  combo does not fit the bag; plus the three wave 2 choices above.
+- Flaky: `concurrency.api.test.ts` "keeps a pouch refill used while a fight is running" failed
+  once under the full serialized suite, passed on rerun and alone.
 
 ## Open questions for the user
 
