@@ -85,8 +85,19 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
     .where(
       and(eq(inventoryItems.characterId, character.id), isNotNull(inventoryItems.equippedSlot)),
     )
+  return playerFighterFrom(
+    character,
+    equipped.map((row) => row.itemId),
+  )
+}
+
+/** A character's fighter from its equipped item ids (EquipSystem.GetEquipSelfProp). */
+export function playerFighterFrom(
+  character: Pick<CharacterRow, 'name' | 'avatarId' | 'level' | 'hp' | 'mp'>,
+  equippedItemIds: string[],
+): FighterInput {
   const bonus = { minAttack: 0, maxAttack: 0, defense: 0 }
-  for (const { itemId } of equipped) {
+  for (const itemId of equippedItemIds) {
     const row = item(itemId)
     bonus.minAttack += Number(row?.AttackMin ?? 0)
     bonus.maxAttack += Number(row?.AttackMax ?? 0)
