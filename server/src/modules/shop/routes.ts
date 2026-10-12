@@ -46,6 +46,7 @@ import {
   type Tx,
 } from '../../game/progress.js'
 import { recordCommand } from '../../game/quests.js'
+import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
@@ -420,7 +421,8 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
   app.post('/merchant/buy', { config: { rateLimit: RATE_LIMITS.shopMerchantBuy } }, (request) =>
     locked(request, async (tx, c) => {
       const i = merchantBuySchema.parse(request.body)
-      if (i.tab === 'vip')
+      const vip = i.tab === 'vip'
+      if (vip && !isVip(c, now()))
         throw bad('vip_required', 'The VIP merchant tab requires VIP membership.')
       const [spawn] = await tx
         .select()
@@ -429,8 +431,11 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         .for('update')
       if (!spawn || now() < spawn.startsAt || now() >= spawn.endsAt || spawn.sceneId !== c.sceneId)
         throw bad('merchant_unavailable', 'The merchant is not here.')
-      const offer = mystic.items['1']![i.slot]
-      const row = spawn.stock[i.slot]
+      const offer = mystic.items[vip ? '2' : '1']![i.slot]
+      // The VIP tab (lib 2) has a fixed price and no stock limit.
+      const row = vip
+        ? offer && { itemId: offer.item, price: offer.price, left: Infinity }
+        : spawn.stock[i.slot]
       if (!offer || !row || row.left < i.count)
         throw bad('stock_empty', 'The merchant has no more of that item.')
       if (c.level < offer.useLevel) throw bad('too_low', 'Your level is too low to buy that item.')
@@ -454,8 +459,6 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
       await bagRoom(tx, c.id, awards)
       await charge(tx, c, { gold: row.price * i.count })
       await grantItems(tx, c.id, awards)
-      spawn.stock[i.slot] = { ...row, left: row.left - i.count }
-      await tx.update(mysticSpawns).set({ stock: spawn.stock }).where(eq(mysticSpawns.id, spawn.id))
       await tx
         .insert(characterMysticPurchases)
         .values({ spawnId: spawn.id, characterId: c.id, itemId: row.itemId, count })
@@ -467,16 +470,30 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
           ],
           set: { count },
         })
-      await tx
-        .insert(mysticItemSales)
-        .values({ itemId: row.itemId, sold: i.count })
-        .onConflictDoUpdate({
-          target: mysticItemSales.itemId,
-          set: { sold: sql`${mysticItemSales.sold} + ${i.count}` },
-        })
+      if (!vip) await recordGoldSale(tx, spawn, i.slot, i.count)
       return result(tx, c)
     }),
   )
+}
+/** Takes a Gold tab sale off the spawn's stock and adds it to the server-wide sales. */
+async function recordGoldSale(
+  tx: Tx,
+  spawn: typeof mysticSpawns.$inferSelect,
+  slot: number,
+  count: number,
+) {
+  const row = spawn.stock[slot]!
+  const stock = spawn.stock.map((entry, i) =>
+    i === slot ? { ...row, left: row.left - count } : entry,
+  )
+  await tx.update(mysticSpawns).set({ stock }).where(eq(mysticSpawns.id, spawn.id))
+  await tx
+    .insert(mysticItemSales)
+    .values({ itemId: row.itemId, sold: count })
+    .onConflictDoUpdate({
+      target: mysticItemSales.itemId,
+      set: { sold: sql`${mysticItemSales.sold} + ${count}` },
+    })
 }
 async function merchantView(tx: Tx, c: Character) {
   const at = now()
@@ -539,10 +556,10 @@ async function merchantView(tx: Tx, c: Character) {
       bound: row.bind === 1,
       useLevel: row.useLevel,
       limit: mystic.buyLimits[row.item] ?? 1,
-      purchased: 0,
+      purchased: purchases.find((p) => p.itemId === row.item)?.count ?? 0,
       left: null,
     })),
-    vipAvailable: false,
+    vipAvailable: isVip(c, at),
   }
 }
 

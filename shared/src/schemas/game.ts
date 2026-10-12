@@ -70,6 +70,8 @@ export interface Character {
   mpPouch: number
   pouchMax: number
   sceneId: number
+  /** VIP membership end (ISO instant); null without VIP (decision 14). */
+  vipUntil: string | null
 }
 
 /**

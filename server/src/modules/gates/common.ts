@@ -116,8 +116,11 @@ export async function duel(tx: Tx, character: CharacterRow, npcIds: string[]) {
   }
 }
 
-/** OnPlayerKillVirtualNpc for a group's last NPC: NpcExp, Stone and drops (no energy). */
-export function lastNpcRewards(npcId: string) {
+/**
+ * OnPlayerKillVirtualNpc for a group's last NPC: NpcExp, Stone and drops (no energy). The caller
+ * applies vipExp; `chanceMul` is the VIP drop factor (vipDropMul).
+ */
+export function lastNpcRewards(npcId: string, chanceMul: number) {
   const row = npc(npcId)
   const random = createRandom(newSeed())
   const n = (key: string) => Number(row?.[key] ?? 0)
@@ -128,6 +131,7 @@ export function lastNpcRewards(npcId: string) {
         dropLib(libId) as unknown as DropLib,
         dropItems(libId) as unknown as DropEntry[],
         random,
+        chanceMul,
       ),
     )
   return {
@@ -137,13 +141,14 @@ export function lastNpcRewards(npcId: string) {
   }
 }
 
-/** Rolls one DropLib (pub fight combos). */
-export function rollDropLib(libId: number) {
+/** Rolls one DropLib (pub fight combos); `chanceMul` is the VIP drop factor (vipDropMul). */
+export function rollDropLib(libId: number, chanceMul: number) {
   if (!(libId > 0 && dropLib(libId))) return []
   return rollDrops(
     dropLib(libId) as unknown as DropLib,
     dropItems(libId) as unknown as DropEntry[],
     createRandom(newSeed()),
+    chanceMul,
   ) as Award[]
 }
 

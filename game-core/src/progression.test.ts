@@ -52,4 +52,21 @@ describe('rollDrops (DropSystem.java)', () => {
     const drops = rollDrops({ ItemDropType: 2, DropCount: 0 }, entries, createRandom(3))
     expect(drops.map((d) => d.itemId)).toEqual(['always'])
   })
+
+  it('scales each independent chance by chanceMul (VIP), never what probability 0 drops', () => {
+    // A fixed roll of 450,000: below 400,000 * 1.25 = 500,000 but not below 400,000.
+    const fixed = { int: () => 450_000, between: (min: number) => min, next: () => 0.45 }
+    const entries = [entry('boosted', 400_000), entry('never', 0)]
+    const lib = { ItemDropType: 2, DropCount: 0 }
+    expect(rollDrops(lib, entries, fixed)).toEqual([])
+    expect(rollDrops(lib, entries, fixed, 1.25).map((d) => d.itemId)).toEqual(['boosted'])
+  })
+
+  it('leaves quantity drops alone: they always give DropCount entries', () => {
+    const entries = ['a', 'b', 'c'].map((item) => entry(item, 10, 0))
+    const lib = { ItemDropType: 1, DropCount: 2 }
+    expect(rollDrops(lib, entries, createRandom(4), 1.25)).toEqual(
+      rollDrops(lib, entries, createRandom(4)),
+    )
+  })
 })

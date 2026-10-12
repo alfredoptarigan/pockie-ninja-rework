@@ -334,6 +334,37 @@ describe('Mysterious Merchant', () => {
     expect((await row()).gold).toBe(39)
     expect(await bag()).toHaveLength(0)
   })
+  it('sells the VIP tab to a VIP at its fixed price, sharing the per-item limit', async () => {
+    const merchant = await spawn()
+    await update({ vipUntil: new Date('2099-01-01T00:00:00Z') })
+    const view = (await client.get(`${base}/merchant`)).json()
+    expect(view.vipAvailable).toBe(true)
+    // VIP slot 0: i150078 for 35 Gold, limit 2 per spawn, bound, no stock count.
+    expect(view.vipStock[0]).toMatchObject({ itemId: 'i150078', price: 35, limit: 2, left: null })
+    const buy = (tab: string, count: number) =>
+      post('merchant/buy', { spawnId: merchant.id, tab, slot: 0, count })
+    expect((await buy('vip', 2)).statusCode).toBe(200)
+    expect((await row()).gold).toBe(930)
+    expect(await bag()).toMatchObject([{ itemId: 'i150078', count: 2, bound: true }])
+    expect((await client.get(`${base}/merchant`)).json().vipStock[0].purchased).toBe(2)
+    expect((await buy('vip', 1)).json().error.code).toBe('purchase_limit')
+    expect((await buy('gold', 1)).json().error.code).toBe('purchase_limit')
+    const [after] = await db.select().from(mysticSpawns).where(eq(mysticSpawns.id, merchant.id))
+    expect(after!.stock).toEqual(merchant.stock)
+  })
+  it('locks the VIP tab once VIP has expired', async () => {
+    const merchant = await spawn()
+    await update({ vipUntil: new Date('2026-10-12T09:00:00Z') })
+    expect((await client.get(`${base}/merchant`)).json().vipAvailable).toBe(false)
+    const response = await post('merchant/buy', {
+      spawnId: merchant.id,
+      tab: 'vip',
+      slot: 0,
+      count: 1,
+    })
+    expect(response.json().error.code).toBe('vip_required')
+    expect((await row()).gold).toBe(1000)
+  })
   it('refuses purchases at the exact ten-minute despawn boundary', async () => {
     const merchant = await spawn()
     vi.mocked(Date.now).mockReturnValue(Date.parse('2026-10-12T09:10:00Z'))

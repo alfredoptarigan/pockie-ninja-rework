@@ -38,9 +38,10 @@ const INDEPENDENT_ROLL_RANGE = 1_000_000
 /**
  * DropSystem.java: type 1 gives every entry when there are at most DropCount of them, otherwise
  * DropCount weighted picks without replacement; type 2 rolls each entry out of 1,000,000.
- * Entries with probability <= 0 never drop.
+ * Entries with probability <= 0 never drop. `chanceMul` scales each type 2 chance (VIP); type 1
+ * always gives DropCount entries, so it has no chance to scale.
  */
-export function rollDrops(lib: DropLib, entries: DropEntry[], random: Random) {
+export function rollDrops(lib: DropLib, entries: DropEntry[], random: Random, chanceMul = 1) {
   const pool = entries.filter((entry) => entry.Probability > 0)
   const toDrop = (entry: DropEntry) => ({
     itemId: entry.ItemConfig,
@@ -49,7 +50,7 @@ export function rollDrops(lib: DropLib, entries: DropEntry[], random: Random) {
 
   if (lib.ItemDropType === 2) {
     return pool
-      .filter((entry) => random.int(INDEPENDENT_ROLL_RANGE) < entry.Probability)
+      .filter((entry) => random.int(INDEPENDENT_ROLL_RANGE) < entry.Probability * chanceMul)
       .map(toDrop)
   }
   if (pool.length <= lib.DropCount) return pool.map(toDrop)

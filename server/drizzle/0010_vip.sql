@@ -1,0 +1,1 @@
+ALTER TABLE "characters" ADD COLUMN "vip_until" timestamp with time zone;

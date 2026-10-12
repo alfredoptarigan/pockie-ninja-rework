@@ -153,4 +153,10 @@ describe('card grants', () => {
     expect(cardGranted({ ...pet, type: 'boss' }, fixed(99))).toBe(true)
     expect(cardGranted({ ...pet, type: 'key' }, fixed(99))).toBe(true)
   })
+
+  it('raises the pet chance by the VIP factor (50 * 1.25 = 62.5)', () => {
+    const pet = { type: 'pet' as const, itemId: 'i283017', bound: true }
+    expect(cardGranted(pet, fixed(62), 1.25)).toBe(true)
+    expect(cardGranted(pet, fixed(63), 1.25)).toBe(false)
+  })
 })
