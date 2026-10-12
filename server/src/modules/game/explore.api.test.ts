@@ -54,6 +54,7 @@ describe('GET /api/game/explore', () => {
       spots: [
         {
           id: '21011',
+          senior: null,
           nameKey: 'lg_OutSearch_21011',
           // roleoutsearch.tab ClipName: the field's explore tree.
           clipName: 'OutCity_1110',
@@ -64,6 +65,7 @@ describe('GET /api/game/explore', () => {
         },
         {
           id: '21012',
+          senior: { itemId: 'i150046', level: 1 },
           nameKey: 'lg_OutSearch_21012',
           clipName: null,
           requireLevel: 1,
@@ -206,5 +208,131 @@ describe('POST /api/game/explore/:spotId', () => {
       expect(body.rewards.exp).toBeGreaterThanOrEqual(115)
       expect((await row()).level).toBeGreaterThan(before.level)
     }
+  })
+})
+
+const startSearch = (spotId = '21011', mode = 'normal') =>
+  client.post(`/api/game/explore/${spotId}`, { action: 'start', mode })
+const peek = (searchId: string, cardIndex: number, currency = 'gold', spotId = '21011') =>
+  client.post(`/api/game/explore/${spotId}/peek`, { searchId, cardIndex, currency })
+const pick = (searchId: string, cardIndex: number, spotId = '21011') =>
+  client.post(`/api/game/explore/${spotId}`, { action: 'pick', searchId, cardIndex })
+
+describe('pending searches and paid peeks', () => {
+  it('starts five face-down cards without paying out the selected card', async () => {
+    const body = (await startSearch()).json()
+    expect(body.cards).toEqual([null, null, null, null, null])
+    expect(body.searchId).toBeTypeOf('string')
+    expect(body.peek).toEqual({ count: 0, limit: 3, cost: { currency: 'stone', amount: 83 } })
+    expect(body.character.stone).toBe(0)
+    expect(body.explore.remaining).toBe(6)
+    expect((await startSearch()).json().error.code).toBe('search_pending')
+    expect((await client.get('/api/game/explore')).json().pending.searchId).toBe(body.searchId)
+  })
+
+  it('charges Stone then coupons or Gold, retains revealed cards and enforces the peek limit', async () => {
+    await setCharacter({ stone: 500, gold: 20, giftCoupon: 10 })
+    const { searchId } = (await startSearch()).json()
+    const first = await peek(searchId, 4)
+    expect(first.statusCode).toBe(200)
+    expect(first.json().cards[4]).not.toBeNull()
+    expect((await row()).stone).toBe(417)
+    expect((await peek(searchId, 4)).statusCode).toBe(200)
+    expect((await row()).stone).toBe(417)
+    expect((await peek(searchId, 0, 'giftCoupon')).statusCode).toBe(200)
+    expect((await row()).giftCoupon).toBe(8)
+    expect(errorCode(await peek(searchId, 1, 'giftCoupon'))).toBe('invalid_currency')
+    expect((await peek(searchId, 1)).statusCode).toBe(200)
+    expect((await row()).gold).toBe(13)
+    expect(errorCode(await peek(searchId, 2))).toBe('peek_limit')
+    const picked = await pick(searchId, 4)
+    expect(picked.statusCode).toBe(200)
+    expect(picked.json().card).toMatchObject(first.json().cards[4])
+    expect(picked.json().otherCards).toHaveLength(4)
+    expect((await row()).exploreUsed).toBe(1)
+    expect(errorCode(await pick(searchId, 4))).toBe('no_search')
+  })
+
+  it('refuses unaffordable peeks without revealing cards or consuming a peek', async () => {
+    const { searchId } = (await startSearch()).json()
+    expect(errorCode(await peek(searchId, 0))).toBe('no_stone')
+    await setCharacter({ stone: 83 })
+    const response = await peek(searchId, 0)
+    expect(response.statusCode).toBe(200)
+    expect(response.json().peek.count).toBe(1)
+    expect(errorCode(await peek(searchId, 1))).toBe('no_gold')
+  })
+
+  it('serializes duplicate peeks and picks, awarding only once', async () => {
+    await setCharacter({ stone: 1000 })
+    const { searchId } = (await startSearch()).json()
+    const peeks = await Promise.all([peek(searchId, 1), peek(searchId, 1)])
+    expect(peeks.map((r) => r.statusCode)).toEqual([200, 200])
+    expect((await row()).stone).toBe(917)
+    const picks = await Promise.all([pick(searchId, 1), pick(searchId, 1)])
+    expect(picks.map((r) => r.statusCode).sort()).toEqual([200, 400])
+  })
+
+  it('validates card indexes, search identity, spot and login', async () => {
+    const { searchId } = (await startSearch()).json()
+    expect((await peek(searchId, -1)).statusCode).toBe(400)
+    expect((await peek(searchId, 5)).statusCode).toBe(400)
+    expect((await peek(searchId, 1.5)).statusCode).toBe(400)
+    expect((await peek('forged', 0)).statusCode).toBe(400)
+    expect(errorCode(await peek(searchId, 0, 'gold', '21012'))).toBe('no_search')
+    const anonymous = new Client(app)
+    expect(
+      (await anonymous.post('/api/game/explore/21011/peek', { searchId, cardIndex: 0 })).statusCode,
+    ).toBe(401)
+    await setCharacter({ sceneId: 2201 })
+    expect(errorCode(await peek(searchId, 0))).toBe('not_here')
+    expect(errorCode(await pick(searchId, 0))).toBe('not_here')
+  })
+})
+
+describe('senior searches', () => {
+  it('consumes a mapped key, bypasses scene, daily quota and cooldown, and still has five cards', async () => {
+    await setCharacter({
+      sceneId: 2201,
+      exploreDay: today(),
+      exploreUsed: 7,
+      exploreLastAt: new Date(),
+    })
+    await db.insert(inventoryItems).values({ characterId, itemId: 'i150046', count: 2 })
+    const before = await row()
+    const response = await startSearch('21012', 'senior')
+    expect(response.statusCode).toBe(200)
+    expect(response.json().cards).toHaveLength(5)
+    expect(await row()).toMatchObject({ exploreUsed: 7, exploreLastAt: before.exploreLastAt })
+    expect(
+      (await db.select().from(inventoryItems).where(eq(inventoryItems.itemId, 'i150046')))[0]!
+        .count,
+    ).toBe(1)
+    expect((await pick(response.json().searchId, 0, '21012')).statusCode).toBe(200)
+  })
+
+  it('requires the mapped key and its UseLevel and refuses the original forbidden scenes', async () => {
+    expect(errorCode(await startSearch('21012', 'senior'))).toBe('missing_item')
+    await db.insert(inventoryItems).values({ characterId, itemId: 'i150066' })
+    expect(errorCode(await startSearch('27012', 'senior'))).toBe('too_low')
+    await setCharacter({ level: 46, sceneId: 111 })
+    expect(errorCode(await startSearch('27012', 'senior'))).toBe('not_here')
+    await setCharacter({ sceneId: 2101 })
+    expect(errorCode(await startSearch('21011', 'senior'))).toBe('no_senior_key')
+  })
+})
+
+describe('explore bag guard', () => {
+  it('reserves the original six cells before spending a search or key', async () => {
+    await db
+      .insert(inventoryItems)
+      .values(Array.from({ length: 115 }, () => ({ characterId, itemId: 'i160006' })))
+    const response = await startSearch()
+    expect(response.statusCode).toBe(400)
+    expect(response.json().error).toMatchObject({
+      code: 'bag_full',
+      message: 'Your bag is full. Free at least six cells before exploring.',
+    })
+    expect(await row()).toMatchObject({ exploreUsed: 0, exploreLastAt: null })
   })
 })

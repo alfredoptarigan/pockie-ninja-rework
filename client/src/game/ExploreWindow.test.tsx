@@ -369,3 +369,77 @@ describe('ExploreWindow', () => {
     await waitFor(() => expect(calls(fetchMock, 'GET /api/game/explore')).toBe(2))
   })
 })
+
+describe('explore cards', () => {
+  it('shows five face-down cards, prices a Peek and picks a revealed card', async () => {
+    const pending = {
+      searchId: 'cfa3523c-dc3b-4b75-bc03-22d985d52d66',
+      spotId: '21011',
+      mode: 'normal',
+      cards: [null, null, null, null, null],
+      peek: { count: 0, limit: 3, cost: { currency: 'stone', amount: 83 } },
+      character: ninja,
+    }
+    const fetchMock = api({
+      'POST /api/game/explore/21011': () => {
+        const call = fetchMock.mock.calls.at(-1)
+        const body = JSON.parse(String(call?.[1]?.body ?? '{}'))
+        return json(body.action === 'pick' ? found : pending)
+      },
+      'POST /api/game/explore/21011/peek': () =>
+        json({
+          ...pending,
+          cards: [found.card, null, null, null, null],
+          peek: { count: 1, limit: 3, cost: { currency: 'gold', amount: 2 } },
+          character: { ...ninja, stone: 17 },
+        }),
+    })
+    renderWithProviders(<Harness />)
+    await exploreFree()
+    const cards = await screen.findByRole('dialog', { name: 'Choose an Exploration Card' })
+    expect(within(cards).getAllByText('Face down')).toHaveLength(5)
+    expect(cards).toHaveTextContent('Peek costs 83 Stone')
+    await userEvent.click(within(cards).getByRole('button', { name: 'Peek at card 1' }))
+    expect(await within(cards).findByText('Healing Powder')).toBeVisible()
+    expect(cards).toHaveTextContent('Peek costs 2 Gold')
+    expect(within(cards).getByRole('button', { name: 'Peek at card 1' })).toBeDisabled()
+    await userEvent.click(within(cards).getByRole('button', { name: 'Pick card 1' }))
+    expect(await screen.findByRole('dialog', { name: 'Exploration Result' })).toBeVisible()
+    const postCalls = fetchMock.mock.calls.filter(
+      ([input, init]) =>
+        String(input).endsWith('/api/game/explore/21011') && init?.method === 'POST',
+    )
+    expect(JSON.parse(String(postCalls[0]?.[1]?.body))).toEqual({ action: 'start', mode: 'normal' })
+    expect(JSON.parse(String(postCalls[1]?.[1]?.body))).toEqual({
+      action: 'pick',
+      searchId: pending.searchId,
+      cardIndex: 0,
+    })
+  })
+
+  it('offers a key-paid senior search during the normal cooldown', async () => {
+    const fetchMock = api(
+      { 'POST /api/game/explore/21012': () => json(found) },
+      {
+        explore: resting(300_000),
+        items: [{ ...fists, itemId: 'i150046' }],
+      },
+    )
+    renderWithProviders(<Harness />)
+    const dialog = await openWindow()
+    const button = await within(dialog).findByRole('button', { name: `Senior Explore ${EXPERT}` })
+    expect(button).toBeEnabled()
+    await userEvent.click(button)
+    const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
+    expect(confirm).toHaveTextContent(
+      'Uses one exploration key. Does not use today’s searches or start a cooldown. Five cards.',
+    )
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Explore' }))
+    await screen.findByRole('dialog', { name: 'Exploration Result' })
+    const call = fetchMock.mock.calls.find(
+      ([input, init]) =>
+        String(input).endsWith('/api/game/explore/21012') && init?.method === 'POST',
+    )
+    expect(JSON.parse(String(call?.[1]?.body))).toEqual({ action: 'start', mode: 'senior' })
+  })
+})

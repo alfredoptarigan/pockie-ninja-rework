@@ -1,7 +1,15 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { coerce, groupBy, namedRows, stockRows, tableRows, type Row } from './import.ts'
+import {
+  coerce,
+  missingExploreFactories,
+  groupBy,
+  namedRows,
+  stockRows,
+  tableRows,
+  type Row,
+} from './import.ts'
 
 describe('coerce', () => {
   it('turns plain numbers into numbers and leaves everything else alone', () => {
@@ -352,5 +360,31 @@ describe('imported M3 data: Demon City instances', () => {
     expect(pub.scenes['2601']).toEqual({ MonsterLibID: 20001, UseEnergy: 3 })
     expect(Object.values(pub.libs).flat()).toHaveLength(195)
     expect(count(pub.rewardRules)).toBe(403)
+  })
+})
+
+describe('explore factory references', () => {
+  it('rejects a missing factory with a positive card weight', () => {
+    expect(
+      missingExploreFactories({ '1': { GostFactoryID: 18, GostRate: 1 } }, { Gost: {} }),
+    ).toEqual([{ spotId: '1', kind: 'Gost', factoryId: 18 }])
+  })
+
+  it('has every drawable factory and only six unused monster references missing', () => {
+    const spots = data('explore-spots')
+    const factories = Object.fromEntries(
+      ['Gost', 'Boss', 'Item', 'Key', 'Baby', 'Game'].map((kind) => [
+        kind,
+        data(`explore-${kind.toLowerCase()}-factory`),
+      ]),
+    )
+    expect(missingExploreFactories(spots, factories)).toEqual([])
+    expect(missingExploreFactories(spots, factories, true)).toEqual(
+      [18, 20, 22, 24, 26, 28].map((factoryId, i) => ({
+        spotId: ['27012', '27022', '27032', '27042', '28012', '28022'][i],
+        kind: 'Gost',
+        factoryId,
+      })),
+    )
   })
 })

@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest'
 import { exploreSpot } from './data.js'
 import {
   advanceStar,
+  peekCost,
+  cardGranted,
+  seniorKey,
   dailyExploreTotal,
   requiredItems,
   rollCard,
@@ -106,7 +109,7 @@ describe('rollCard', () => {
   })
 
   it('gives nothing when the spot’s monster factory is missing from the data', () => {
-    // GostFactory 18 does not exist in GostFactory.ini.
+    // GostFactory 18 is absent in every backup copy; its real spots all have GostRate=0.
     expect(rollCard({ ...spot, GostFactoryID: 18 }, fixed(0))).toEqual({ type: 'nothing' })
   })
 
@@ -120,5 +123,34 @@ describe('requiredItems', () => {
   it('parses RequireItem', () => {
     expect(requiredItems(spot)).toEqual([])
     expect(requiredItems(exploreSpot('21012')!)).toEqual([{ itemId: 'i150046', count: 1 }])
+  })
+})
+
+describe('paid peeks', () => {
+  it('uses Stone first, Gold or Gift Coupons second, then Gold only', () => {
+    expect(peekCost(spot, 0, 'gold')).toEqual({ currency: 'stone', amount: 83 })
+    expect(peekCost(spot, 1, 'giftCoupon')).toEqual({ currency: 'giftCoupon', amount: 2 })
+    expect(peekCost(spot, 2, 'gold')).toEqual({ currency: 'gold', amount: 7 })
+    expect(peekCost(spot, 2, 'giftCoupon')).toBeNull()
+    expect(peekCost(spot, 3, 'gold')).toBeNull()
+  })
+})
+
+describe('senior search keys', () => {
+  it('uses the original item GetItemsId and UseLevel, with no extra cards', () => {
+    expect(seniorKey('21012')).toEqual({ itemId: 'i150046', level: 1 })
+    expect(seniorKey('27012')).toEqual({ itemId: 'i150066', level: 46 })
+    expect(seniorKey('21011')).toBeNull()
+  })
+})
+
+describe('card grants', () => {
+  it('gives only pet cards the 50 percent chance, including its boundaries', () => {
+    const pet = { type: 'pet' as const, itemId: 'i283017', bound: true }
+    expect(cardGranted(pet, fixed(49))).toBe(true)
+    expect(cardGranted(pet, fixed(50))).toBe(false)
+    expect(cardGranted({ ...pet, type: 'item' }, fixed(99))).toBe(true)
+    expect(cardGranted({ ...pet, type: 'boss' }, fixed(99))).toBe(true)
+    expect(cardGranted({ ...pet, type: 'key' }, fixed(99))).toBe(true)
   })
 })

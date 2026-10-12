@@ -93,6 +93,28 @@ export function stockRows(value: Value | undefined): StockRow[] {
   return rows
 }
 
+const EXPLORE_FACTORIES = ['Gost', 'Boss', 'Item', 'Key', 'Baby', 'Game'] as const
+
+/** References with a positive weight must exist; zero-weight references are unused in Java. */
+export function missingExploreFactories(
+  spots: Record<string, Row>,
+  factories: Record<string, Record<string, Row>>,
+  includeUnused = false,
+) {
+  return Object.entries(spots).flatMap(([spotId, spot]) =>
+    EXPLORE_FACTORIES.flatMap((kind) => {
+      const factoryId = Number(spot[`${kind}FactoryID`])
+      const rate = Number(spot[kind === 'Gost' ? 'GostRate' : `${kind}FactoryRate`])
+      const rows = factories[kind] ?? {}
+      const exists =
+        kind === 'Gost' || kind === 'Game'
+          ? rows[String(factoryId)] !== undefined
+          : Object.values(rows).some((row) => Number(row.ID) === factoryId)
+      return !exists && (includeUnused || rate > 0) ? [{ spotId, kind, factoryId }] : []
+    }),
+  )
+}
+
 if (import.meta.main) {
   const backup = resolve(
     process.env.GAME_BACKUP_DIR ?? join(homedir(), 'Privates/game-pockieninja'),
@@ -127,7 +149,8 @@ if (import.meta.main) {
   write('npc-record-values', ini('npc/npcrecordvalue.ini'))
 
   // Exploring
-  write('explore-spots', ini('role/RoleOutSearch.ini'))
+  const exploreSpots = ini('role/RoleOutSearch.ini')
+  write('explore-spots', exploreSpots)
   write('explore-common', ini('role/OutSearchCommon.ini'))
   // Client-only column: the field scene element that opens a spot (-1 = none).
   write(
@@ -136,8 +159,13 @@ if (import.meta.main) {
       tab('roleoutsearch.s26824.tab', { skipHeader: true }).map((row) => [row.ID, row.ClipName]),
     ),
   )
-  for (const factory of ['Gost', 'Boss', 'Item', 'Key', 'Baby', 'Game']) {
-    write(`explore-${factory.toLowerCase()}-factory`, ini(`role/${factory}Factory.ini`))
+  const factories = Object.fromEntries(
+    EXPLORE_FACTORIES.map((kind) => [kind, ini(`role/${kind}Factory.ini`)]),
+  )
+  const missing = missingExploreFactories(exploreSpots, factories)
+  if (missing.length > 0) throw new Error(`Missing explore factories: ${JSON.stringify(missing)}`)
+  for (const factory of EXPLORE_FACTORIES) {
+    write(`explore-${factory.toLowerCase()}-factory`, factories[factory])
   }
 
   // Quests

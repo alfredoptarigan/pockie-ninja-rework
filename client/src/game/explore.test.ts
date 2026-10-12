@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { character, potion } from '../test/game'
 import {
   blockMessage,
+  seniorBlock,
+  peekPriceText,
   cardText,
   cooldownLeft,
   costText,
@@ -207,5 +209,33 @@ describe('outcomeText', () => {
     const fight = (won: boolean) => ({ won }) as ExploreResult['fight']
     expect(outcomeText(result(card, fight(true)))).toBe('You ran into Sushi and won the fight.')
     expect(outcomeText(result(card, fight(false)))).toBe('You ran into Sushi and lost the fight.')
+  })
+})
+
+describe('seniorBlock', () => {
+  it('checks the key and level while ignoring normal costs and cooldown', () => {
+    const ninja = { ...character, sceneId: 2101 }
+    expect(seniorBlock({ ...expert, requireStone: 99999 }, ninja, [key])).toBeNull()
+    expect(seniorBlock(expert, ninja, [])).toBe('missing_item')
+    expect(seniorBlock(expert, { ...ninja, hp: 0 }, [key])).toBe('defeated')
+    expect(seniorBlock(expert, { ...ninja, sceneId: 111 }, [key])).toBe('not_here')
+    expect(seniorBlock({ ...expert, requireLevel: 11 }, ninja, [key])).toBe('too_low')
+  })
+})
+
+describe('peekPriceText', () => {
+  it('names the currency and the limit in English', () => {
+    expect(peekPriceText({ currency: 'stone', amount: 83 })).toBe('83 Stone')
+    expect(peekPriceText({ currency: 'gold', amount: 2 })).toBe('2 Gold')
+    expect(peekPriceText({ currency: 'giftCoupon', amount: 2 })).toBe('2 Gift Coupons')
+    expect(peekPriceText(null)).toBe('No peeks remaining')
+  })
+})
+
+describe('senior key level', () => {
+  it('uses the key UseLevel instead of the spot level where the original differs', () => {
+    const spot = { ...expert, requireLevel: 26, senior: { itemId: 'i150046', level: 31 } }
+    expect(seniorBlock(spot, { ...character, sceneId: 2101, level: 26 }, [key])).toBe('too_low')
+    expect(seniorBlock(spot, { ...character, sceneId: 2101, level: 31 }, [key])).toBeNull()
   })
 })

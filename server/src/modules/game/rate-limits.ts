@@ -7,6 +7,7 @@ export const RATE_LIMITS = {
   fight: perMinute(60),
   // The 300 s cooldown already limits real searches; this only stops hammering.
   explore: perMinute(20),
+  explorePeek: perMinute(30),
   talk: perMinute(60),
   acceptQuest: perMinute(30),
   item: perMinute(60),
