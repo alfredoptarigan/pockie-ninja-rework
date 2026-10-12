@@ -4,11 +4,19 @@
 // weighted pick), scripted skills (./skills.ts), fight buffs (./buffs.ts), hit / crit / parry /
 // defence and counters. RandInt calls happen where the Java code makes them.
 // ponytail: CanMove / CanAttack / CanUseSkill stay 1 because no ported skill stuns or seals, and
-// rebound, absorption, DecDamage, vampiric, shields and self damage are 0 for every fighter the
-// slice simulates. Port them together with the first skill or stat that sets them.
+// shields are not ported. Port them together with the first skill or buff that sets them.
 import { createRandom } from '../random.js'
 import { BUFFS } from './buffs.js'
-import { applyCrit, applyDefense, applyParry, hitChance } from './damage.js'
+import {
+  absorbed,
+  applyCrit,
+  applyDecDamage,
+  applyDefense,
+  applyParry,
+  hitChance,
+  reboundOf,
+  vampiricOf,
+} from './damage.js'
 import { GENERIC_SKILLS, NORMAL_ATTACK, SKILL_SCRIPTS } from './skills.js'
 import {
   SKILL_LOSE,
@@ -64,6 +72,11 @@ export function simulateFight({
         ...input,
         // FightObject.Set rescales Tough.
         tough: Math.ceil(input.tough / 1.5),
+        decDamage: input.decDamage ?? 0,
+        rebound: input.rebound ?? 0,
+        absorb: input.absorb ?? 0,
+        vampiricHp: input.vampiricHp ?? 0,
+        vampiricMp: input.vampiricMp ?? 0,
         index: offset + i,
         side,
         startHp: input.hp,
@@ -181,8 +194,20 @@ export function simulateFight({
     }
   }
 
-  function attack(self: Fighter, target: Fighter, damage: number, fv: FightEvent, timer: number) {
-    if (target.hp <= 0 || damage === 0) {
+  /** Damage.DamageUnSkill: raw HP change without triggers (negative heals, capped at MaxHP). */
+  function changeHp(victim: Fighter, amount: number) {
+    victim.hp = Math.min(victim.maxHp, Math.max(0, victim.hp - Math.min(victim.hp, amount)))
+  }
+
+  function attack(
+    self: Fighter,
+    target: Fighter,
+    damage: number,
+    selfDamage: number,
+    fv: FightEvent,
+    timer: number,
+  ) {
+    if (target.hp <= 0 || (damage === 0 && selfDamage === 0)) {
       fv.damage = 0
       return
     }
@@ -195,16 +220,37 @@ export function simulateFight({
       damage = applyCrit(damage, self.critAttach, c)
       fv.crit = true
     }
+    let back = reboundOf(damage, target.rebound)
+    const targetHp = absorbed(damage, target.absorb)
+    damage = applyDecDamage(damage, target.decDamage)
     if (target.parryPercent > 0) {
       damage = applyParry(damage, target.parryPercent)
       fv.parry = true
     }
     damage = applyDefense(damage, target.defense, self.neglectDefense)
-    fv.damage = damage
+    back = applyDefense(applyDecDamage(back, self.decDamage), self.defense, target.neglectDefense)
+    // The original mitigates the absorbed part of the self damage with the target's stats.
+    const selfHp = applyDefense(
+      applyDecDamage(absorbed(selfDamage, self.absorb), target.decDamage),
+      target.defense,
+      self.neglectDefense,
+    )
+    const incHp = vampiricOf(damage - targetHp, self.vampiricHp)
+    const incMp = vampiricOf(damage - targetHp, self.vampiricMp)
+    const lastTarget = damage - targetHp
+    const lastSelf = back + selfDamage - selfHp - incHp
+    if (back) fv.backDamage = back
+    if (incHp) fv.incHp = (fv.incHp ?? 0) + incHp
+    if (incMp) fv.incMp = (fv.incMp ?? 0) + incMp
+    if (lastSelf + incHp) fv.selfDamage = lastSelf + incHp
+    fv.damage = lastTarget
     fv.hit = true
-    target.hp = Math.max(0, target.hp - damage)
+    self.mp += incMp
+    changeHp(target, lastTarget)
+    damageHp(self, lastSelf, timer)
     clearTypeBuff(target, fv, 2, timer)
     if (damage > 0) clearTypeBuff(target, fv, 1, timer)
+    if (back + selfDamage > 0) clearTypeBuff(self, fv, 1, timer)
     if (damage > 0 && target.hp > 0 && self.hp > 0 && self !== target) {
       trigger(target, self, ON_DAMAGED, timer)
     }
@@ -260,8 +306,15 @@ export function simulateFight({
     } else {
       fv.skillId = skillId
       spendMp(self, fv, decMp)
-      const mul = f(skill.mul ?? 0)
-      attack(self, target, Math.trunc(f(f(damage * mul) + (skill.add ?? 0))), fv, timer)
+      const scaled = (mul = 0, add = 0) => Math.trunc(f(f(damage * f(mul)) + add))
+      attack(
+        self,
+        target,
+        scaled(skill.mul, skill.add),
+        scaled(skill.selfmul, skill.selfadd),
+        fv,
+        timer,
+      )
     }
     if (skill.canbecounter && canCounter && fv.hit !== false) counter(target, self, timer)
     return SKILL_SUCCESS
@@ -415,8 +468,8 @@ export function simulateFight({
   const ctx: FightContext = {
     randInt,
     getDamage,
-    attack: (self, target, damage, fv, timer) =>
-      attack(self, target, Math.trunc(damage), fv, timer),
+    attack: (self, target, damage, fv, timer, selfDamage = 0) =>
+      attack(self, target, Math.trunc(damage), Math.trunc(selfDamage), fv, timer),
     damage: (victim, amount) => damageHp(victim, Math.trunc(amount), 0),
     damageWithValue: (victim, amount, fv, timer) => {
       damageHp(victim, Math.trunc(amount), timer)

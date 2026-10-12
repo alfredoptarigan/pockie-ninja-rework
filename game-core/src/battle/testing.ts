@@ -26,6 +26,11 @@ export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
   }
   return {
     ...input,
+    decDamage: 0,
+    rebound: 0,
+    absorb: 0,
+    vampiricHp: 0,
+    vampiricMp: 0,
     index: 0,
     side: 'attackers',
     startHp: input.hp,
