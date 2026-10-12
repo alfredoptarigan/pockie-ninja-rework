@@ -59,6 +59,7 @@ export function toCharacter(
     mpPouch: row.mpPouch,
     pouchMax: pouchMax(row.level),
     sceneId: row.sceneId,
+    vipUntil: row.vipUntil?.toISOString() ?? null,
   }
 }
 

@@ -82,6 +82,15 @@ describe('POST /api/game/characters', () => {
     expect(response.json().character.name).toBe('Ninja_01')
   })
 
+  it('exposes the VIP expiry (null without VIP)', async () => {
+    await client.post('/api/game/characters', ggio)
+    expect((await client.get('/api/game/character')).json().character.vipUntil).toBeNull()
+    await db.update(characters).set({ vipUntil: new Date('2026-11-11T00:00:00Z') })
+    expect((await client.get('/api/game/character')).json().character.vipUntil).toBe(
+      '2026-11-11T00:00:00.000Z',
+    )
+  })
+
   it('returns 404 before a character exists', async () => {
     expect((await client.get('/api/game/character')).statusCode).toBe(404)
   })

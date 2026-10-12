@@ -22,6 +22,7 @@ export const character: Character = {
   mpPouch: 0,
   pouchMax: 10000,
   sceneId: 111,
+  vipUntil: null,
 }
 
 export const stats: CharacterStats = {
