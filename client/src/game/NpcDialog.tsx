@@ -13,6 +13,7 @@ import { restCost } from './world'
 /** The menu row that opens an NPC's window (shops, blacksmith, gates, daily quests). */
 const WINDOW_OPTIONS: Record<Exclude<NpcMenu, 'rest'>, { window: WindowName; label: string }> = {
   shop: { window: 'shop', label: 'Shop' },
+  merchant: { window: 'merchant', label: 'Shop' },
   forge: { window: 'forge', label: 'Blacksmith' },
   gates: { window: 'gates', label: 'Enter' },
   daily: { window: 'daily', label: 'Daily Quests' },

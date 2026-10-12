@@ -65,5 +65,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(forgeRoutes, { db, prefix: '/api/game' })
   app.register(gateRoutes, { db, prefix: '/api/game/gates' })
 
+  app.register(import('./modules/shop/routes.js'), { db, prefix: '/api/game/shop' })
+
   return app
 }

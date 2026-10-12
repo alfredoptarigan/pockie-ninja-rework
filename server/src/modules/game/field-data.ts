@@ -102,12 +102,13 @@ export function levelVariant(npcId: string, level: number) {
 }
 
 /** What an NPC's script opens (npc.ini `JavaScript`); null for talk-only NPCs. */
-export type NpcMenu = 'shop' | 'forge' | 'gates' | 'daily' | 'rest'
+export type NpcMenu = 'shop' | 'merchant' | 'forge' | 'gates' | 'daily' | 'rest'
 const MENUS: Record<string, NpcMenu> = {
   'npc/pharmacyNpc.js': 'shop',
   'npc/equipNpc.js': 'shop',
   'npc/magicNpc.js': 'shop',
   'npc/blackshop.js': 'shop',
+  'npc/MysticShopNpc.js': 'merchant',
   'npc/foundryNpc.js': 'forge',
   'npc/EntryTollGateScene.js': 'gates',
   'npc/SingleGateEntryNpc.js': 'gates',

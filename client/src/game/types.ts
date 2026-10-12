@@ -16,7 +16,7 @@ export interface SceneMonster {
 }
 
 /** Which window an NPC's menu opens (npc.ini JavaScript); null for talk-only NPCs. */
-export type NpcMenu = 'shop' | 'forge' | 'gates' | 'daily' | 'rest'
+export type NpcMenu = 'shop' | 'merchant' | 'forge' | 'gates' | 'daily' | 'rest'
 
 /** The scene's timed boss (RefresHeartNpc.ini), fought for one ticket item. */
 export interface TicketBoss {

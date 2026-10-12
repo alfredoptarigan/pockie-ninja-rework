@@ -11,9 +11,10 @@ import type { Character } from '@pockie/shared'
 import { createContext, useContext, type ComponentType } from 'react'
 import { ForgeWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
+import { MerchantWindow, ShopWindow } from './shop'
 import { Dialog, GameButton } from './skin'
 
-export type WindowName = 'shop' | 'forge' | 'gates' | 'pubFight' | 'daily'
+export type WindowName = 'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily'
 
 export interface WindowProps {
   character: Character
@@ -29,6 +30,7 @@ export interface OpenWindow {
 
 const TITLES: Record<WindowName, string> = {
   shop: 'Shop',
+  merchant: 'Mysterious Merchant',
   forge: 'Blacksmith',
   gates: 'Demon City',
   pubFight: 'Pub Fight',
@@ -62,7 +64,8 @@ function GateWindow({ character, npcId, onClose }: WindowProps) {
 
 /** One line per feature: replace its placeholder with the feature's window component. */
 const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
-  shop: placeholder('shop'),
+  shop: ({ character, onClose }) => <ShopWindow character={character} onClose={onClose} />,
+  merchant: ({ character, onClose }) => <MerchantWindow character={character} onClose={onClose} />,
   forge: ({ onClose }) => <ForgeWindow view="enhance" onClose={onClose} />,
   gates: GateWindow,
   pubFight: ({ character, onClose }) => <PubFightWindow character={character} onClose={onClose} />,
