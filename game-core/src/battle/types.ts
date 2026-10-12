@@ -1,0 +1,167 @@
+// Shared types of the fight engine (FightSystem.java, SkillSystem.java, BuffSystem.java).
+
+/**
+ * One row of skill.ini (server/data/game/skills.json) plus its section id. Missing keys default
+ * like SkillInfo.java does: numbers 0, no script.
+ */
+export interface SkillInput {
+  id: number
+  /** 1 active, 2 trigger, 3 passive (ignored in fights). */
+  type: number
+  quomodo?: number
+  probability?: number
+  priority?: number
+  effect?: number
+  decmp?: number
+  canbecounter?: number
+  mul?: number
+  add?: number
+  selfmul?: number
+  selfadd?: number
+  javascript?: string
+  /** Id written to the replay (defaults to `id`). */
+  secondid?: number
+}
+
+export interface FighterInput {
+  name: string
+  level: number
+  hp: number
+  maxHp: number
+  mp: number
+  maxMp: number
+  minAttack: number
+  maxAttack: number
+  atkTime: number
+  hit: number
+  dodge: number
+  /** CritMul */
+  crit: number
+  critAttach: number
+  tough: number
+  /** ParryMul: chance source of the parry skills 7777 / 8888 */
+  parry: number
+  pierce: number
+  defense: number
+  neglectDefense: number
+  /** CounterMul: percent chance to strike back after being hit */
+  counter: number
+  /** PriorityMul: chance to strike first when attacked */
+  priority: number
+  /**
+   * Avatar level used by the execute skills (aoyi). Players: `avatarLevelOf(PlayerAvatarID)`;
+   * NPCs: their CounterBombMul when it is not -1. Absent = NPC rule `trunc(level / 3) - 5`.
+   */
+  avatarLevel?: number
+  /** Attack and trigger skills. Absent = the generic skills every fighter has (7777, 8888). */
+  skills?: SkillInput[]
+}
+
+export type Side = 'attackers' | 'defenders'
+
+/** A buff added to or removed from a fighter (FightValue AddBuff / DelBuff with role index). */
+export interface BuffChange {
+  role: number
+  buff: number
+}
+
+/**
+ * One replay entry (FightValue). Event ids: 1 begin action, 2 end action, 5 priority strike,
+ * 7 counter, 9 buff tick or buff change, 14 skill, 20 death, 21 next fighter.
+ */
+export interface FightEvent {
+  actor: number
+  event: number
+  target?: number
+  /** Skill id for 5 / 7 / 14, buff id for a ticking buff (event 9). */
+  skillId?: number
+  /** HP the target loses (after mitigation; for the execute skills the script damage). */
+  damage?: number
+  hit?: boolean
+  crit?: boolean
+  parry?: boolean
+  /** HP the actor itself loses, e.g. a poison tick (SelfLastDamage). */
+  selfDamage?: number
+  /** MP the actor spends (DecMP). */
+  decMp?: number
+  /** Number of strikes the client animates (AttackCount, skill 40036). */
+  attackCount?: number
+  addBuffs?: BuffChange[]
+  delBuffs?: BuffChange[]
+}
+
+export interface Replay {
+  seed: number
+  fighters: {
+    index: number
+    side: Side
+    name: string
+    level: number
+    maxHp: number
+    startHp: number
+    hp: number
+    maxMp: number
+    startMp: number
+    mp: number
+  }[]
+  events: FightEvent[]
+  winner: Side
+}
+
+/** UserSkillReturn.java */
+export const SKILL_SUCCESS = 0
+export const SKILL_NO_MANA = 1
+export const SKILL_CANT_USE = 2
+export const SKILL_LOSE = 3
+
+export interface ActiveBuff {
+  id: number
+  saveData: number
+  lifeTime: number
+  startTime: number
+}
+
+/** FightObject: a fighter during the fight. */
+export interface Fighter extends FighterInput {
+  index: number
+  side: Side
+  startHp: number
+  startMp: number
+  initAtkTime: number
+  initHit: number
+  hitMulAdd: number
+  next: number
+  /** Parry percent set by buff 11841. */
+  parryPercent: number
+  buffs: ActiveBuff[] | null
+  attackSkills: SkillInput[]
+  triggerSkills: SkillInput[]
+  opponent: Fighter | null
+}
+
+/** The `fightsystem` object the original scripts receive. */
+export interface FightContext {
+  randInt(min: number, max: number): number
+  getDamage(fighter: Fighter): number
+  /** FightSystem.Attack: hit, crit, parry and defence, then HP loss and trigger skills. */
+  attack(self: Fighter, target: Fighter, damage: number, fv: FightEvent, timer: number): void
+  /** FightSystem.Damage(obj, damage): raw HP loss of `victim`, without a FightValue. */
+  damage(victim: Fighter, amount: number): void
+  /** FightSystem.Damage(obj, damage, fv, timer): raw HP loss that also clears cleartype-1 buffs. */
+  damageWithValue(victim: Fighter, amount: number, fv: FightEvent, timer: number): void
+  addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData?: number): void
+  removeBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent): void
+  getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
+  changeNextAtkTime(target: Fighter, amount: number): void
+  changeHit(target: Fighter, add: number): void
+  /** ChangeSkill(skill, 1) + UserSkill: fall back to the normal attack. */
+  normalAttack(self: Fighter, target: Fighter, fv: FightEvent, timer: number): number
+}
+
+export type SkillScript = (
+  ctx: FightContext,
+  self: Fighter,
+  target: Fighter,
+  fv: FightEvent,
+  timer: number,
+) => number
