@@ -27,4 +27,17 @@ describe('damageTotals', () => {
     }
     expect(damageTotals(replay)).toEqual({ dealt: 33, taken: 12 })
   })
+
+  it('does not count heals (negative damage) as damage', () => {
+    const replay: Replay = {
+      seed: 1,
+      winner: 'attackers',
+      fighters: [fighter(0, 'attackers'), fighter(1, 'defenders')],
+      events: [
+        { actor: 0, event: 14, target: 1, damage: -5, hit: true },
+        { actor: 1, event: 14, target: 0, damage: 10, hit: true },
+      ],
+    }
+    expect(damageTotals(replay)).toEqual({ dealt: 0, taken: 10 })
+  })
 })

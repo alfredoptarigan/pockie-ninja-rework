@@ -12,11 +12,13 @@ export function damageTotals(replay: FightResult['replay']) {
   let dealt = 0
   let taken = 0
   for (const ev of replay.events) {
-    const damage = ev.damage ?? 0
+    // Negative damage heals the target: not damage.
+    const damage = Math.max(0, ev.damage ?? 0)
+    const self = Math.max(0, ev.selfDamage ?? 0)
     if (side(ev.actor) === 'attackers') dealt += damage
     else taken += damage
-    if (side(ev.actor) === 'attackers') taken += ev.selfDamage ?? 0
-    else dealt += ev.selfDamage ?? 0
+    if (side(ev.actor) === 'attackers') taken += self
+    else dealt += self
   }
   return { dealt, taken }
 }

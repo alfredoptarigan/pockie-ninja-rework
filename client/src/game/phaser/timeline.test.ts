@@ -6,6 +6,7 @@ import {
   BATTLE_TICK_MS,
   buildTimeline,
   HOME,
+  hpText,
   latestAt,
   poseX,
   splitDamage,
@@ -69,7 +70,7 @@ const build = (replay: Replay) =>
     art: replay.fighters.map(() => art),
     skillMotions: skills,
     skillName: (id) => (id === 40027 ? 'Bite' : undefined),
-    buffName: (id) => (id === 11811 ? 'Poisoning' : undefined),
+    buffName: (id) => ({ 11811: 'Poisoning', 11802: 'Frozen' })[id],
   })
 
 const barAt = (timeline: Timeline, fighter: number, t: number) =>
@@ -248,5 +249,136 @@ describe('buildTimeline', () => {
     expect(timeline.poses[1]![0]!.at).toBe(0)
     const strike = timeline.poses[0]!.find((p) => p.motion === '52')!
     expect(strike.to).toBe(HOME.defenders - 120)
+  })
+})
+
+describe('new replay data', () => {
+  const textsOf = (timeline: Timeline, fighter: number) =>
+    timeline.texts.filter((t) => t.fighter === fighter).map((t) => [t.kind, t.text])
+
+  it('formats HP changes without a double minus', () => {
+    expect(hpText(-5)).toEqual({ kind: 'damage', text: '-5' })
+    expect(hpText(5)).toEqual({ kind: 'heal', text: '+5' })
+    expect(hpText(0)).toEqual({ kind: 'damage', text: '0' })
+  })
+
+  it('says why a fighter cannot move, with the control buff name when known', () => {
+    const frozen = build(
+      replayOf([
+        {
+          actor: 1,
+          event: 14,
+          target: 0,
+          skillId: 1,
+          hit: true,
+          damage: 1,
+          addBuffs: [{ role: 0, buff: 11802 }],
+        },
+        { actor: 0, event: 3 },
+      ]),
+    )
+    expect(textsOf(frozen, 0)).toContainEqual(['info', 'Frozen'])
+    const held = build(replayOf([{ actor: 0, event: 3 }]))
+    expect(textsOf(held, 0)).toEqual([['info', 'Cannot move']])
+    // The turn takes time on the timeline.
+    expect(held.endAt).toBeGreaterThan(build(replayOf([])).endAt)
+  })
+
+  it('shows shield absorbs on the target and on the actor', () => {
+    const timeline = build(
+      replayOf([
+        {
+          actor: 0,
+          event: 14,
+          target: 1,
+          skillId: 1,
+          hit: true,
+          damage: 4,
+          targetShield: 20,
+          selfShield: 3,
+        },
+      ]),
+    )
+    expect(textsOf(timeline, 1)).toEqual([
+      ['damage', '-4'],
+      ['shield', 'Absorbed 20'],
+    ])
+    expect(textsOf(timeline, 0)).toContainEqual(['shield', 'Absorbed 3'])
+    const hit = timeline.texts.find((t) => t.fighter === 1)!
+    expect(barAt(timeline, 1, hit.at)!.hp).toBe(96)
+  })
+
+  it('heals the striker by life steal (HP and MP) in green', () => {
+    const timeline = build(
+      replayOf([
+        { actor: 1, event: 14, target: 0, skillId: 1, hit: true, damage: 50 },
+        { actor: 0, event: 14, target: 1, skillId: 1, hit: true, damage: 20, incHp: 8, incMp: 2 },
+      ]),
+    )
+    expect(textsOf(timeline, 0)).toEqual([
+      ['damage', '-50'],
+      ['heal', '+8'],
+      ['mp', '+2 MP'],
+    ])
+    const heal = timeline.texts.find((t) => t.kind === 'heal')!
+    expect(barAt(timeline, 0, heal.at)!.hp).toBe(58)
+  })
+
+  it('shows rebound damage on the attacker and takes incHp - selfDamage off its HP', () => {
+    const timeline = build(
+      replayOf([
+        {
+          actor: 0,
+          event: 14,
+          target: 1,
+          skillId: 1,
+          hit: true,
+          damage: 30,
+          backDamage: 6,
+          selfDamage: 6,
+          incHp: 2,
+        },
+      ]),
+    )
+    expect(textsOf(timeline, 0)).toEqual([
+      ['damage', 'Rebound -6'],
+      ['heal', '+2'],
+    ])
+    const rebound = timeline.texts.find((t) => t.text === 'Rebound -6')!
+    expect(barAt(timeline, 0, rebound.at)!.hp).toBe(96)
+  })
+
+  it('treats negative damage as a heal of the target, capped at its max HP', () => {
+    const timeline = build(
+      replayOf([
+        { actor: 1, event: 14, target: 0, skillId: 1, hit: true, damage: 30 },
+        { actor: 1, event: 14, target: 0, skillId: 1, hit: true, damage: -5 },
+        { actor: 1, event: 14, target: 0, skillId: 1, hit: true, damage: -50, crit: true },
+      ]),
+    )
+    const texts = textsOf(timeline, 0)
+    expect(texts).toEqual([
+      ['damage', '-30'],
+      ['heal', '+5'],
+      ['heal', '+50'],
+    ])
+    expect(texts.flat().join(' ')).not.toContain('--')
+    const heals = timeline.texts.filter((t) => t.kind === 'heal')
+    expect(barAt(timeline, 0, heals[0]!.at)!.hp).toBe(75)
+    expect(barAt(timeline, 0, heals[1]!.at)!.hp).toBe(100)
+  })
+
+  it('plays healing buff ticks as green numbers', () => {
+    const timeline = build(
+      replayOf([
+        { actor: 1, event: 14, target: 0, skillId: 1, hit: true, damage: 30 },
+        { actor: 0, event: 9, skillId: 11811, incHp: 7 },
+      ]),
+    )
+    expect(textsOf(timeline, 0)).toContainEqual(['heal', '+7'])
+    const heal = timeline.texts.find((t) => t.kind === 'heal')!
+    expect(barAt(timeline, 0, heal.at)!.hp).toBe(77)
+    // A healing tick does not play the hurt motion.
+    expect(timeline.poses[0]!.some((p) => p.at === heal.at && p.motion === '63')).toBe(false)
   })
 })

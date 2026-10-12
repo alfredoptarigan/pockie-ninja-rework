@@ -48,7 +48,8 @@ export interface Pose {
   skillId?: number
 }
 
-export type TextKind = 'damage' | 'crit' | 'miss' | 'mp' | 'buff' | 'buffEnd' | 'skill' | 'info'
+export type TextKind =
+  'damage' | 'crit' | 'miss' | 'heal' | 'shield' | 'mp' | 'buff' | 'buffEnd' | 'skill' | 'info'
 
 export interface FloatText {
   at: number
@@ -85,11 +86,22 @@ export interface TimelineOptions {
 /** Splits `total` into `count` strikes; the last strike gets the remainder. */
 export function splitDamage(total: number, count: number) {
   const n = Math.max(1, Math.floor(count))
-  const base = Math.floor(total / n)
+  const base = Math.trunc(total / n)
   return Array.from({ length: n }, (_, i) => (i === n - 1 ? total - base * (n - 1) : base))
 }
 
 const STRIKES = new Set([5, 7, 14])
+/** Event 3: the actor cannot move this turn. */
+const CANNOT_MOVE = 3
+/** Buffs that stop the owner from acting (game-core buffs.ts: freeze, stun, seduction). */
+const CONTROL_BUFFS = [11802, 11813, 11815]
+
+/** An HP change as a floating text: "-5" damage or "+5" heal, never "--5". */
+export function hpText(change: number): { kind: TextKind; text: string } {
+  return change < 0
+    ? { kind: 'damage', text: `-${-change}` }
+    : { kind: change > 0 ? 'heal' : 'damage', text: change > 0 ? `+${change}` : '0' }
+}
 
 export function buildTimeline(replay: Replay, options: TimelineOptions): Timeline {
   const { fighters } = replay
@@ -135,9 +147,37 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   const text = (at: number, fighter: number, kind: TextKind, value: string) => {
     if (fighters[fighter]) texts.push({ at, fighter, kind, text: value })
   }
-  const loseHp = (at: number, i: number, amount: number) => {
-    hp[i] = Math.max(0, hp[i]! - amount)
+  /** Adds `change` (negative: a loss) to fighter i's HP, kept within 0 and its max HP. */
+  const changeHp = (at: number, i: number, change: number) => {
+    const max = fighters[i]?.maxHp ?? Infinity
+    hp[i] = Math.min(max, Math.max(0, hp[i]! + change))
     bar(at, i)
+  }
+
+  /**
+   * What the actor gets back from its own event: shield absorbs, rebound, other self damage and
+   * life steal. Its HP changes by `incHp - selfDamage` (selfDamage includes the rebound).
+   */
+  function selfEffects(at: number, ev: FightEvent) {
+    const actor = ev.actor
+    if (ev.selfShield) text(at, actor, 'shield', `Absorbed ${ev.selfShield}`)
+    const back = Math.max(0, ev.backDamage ?? 0)
+    if (back) text(at, actor, 'damage', `Rebound -${back}`)
+    // The rest of the self damage; a self shield can leave less than the rebound shown.
+    const total = ev.selfDamage ?? 0
+    const other = back ? Math.max(0, total - back) : total
+    if (other) {
+      const shown = hpText(-other)
+      text(at, actor, shown.kind, shown.text)
+    }
+    if (ev.incHp) text(at, actor, 'heal', `+${ev.incHp}`)
+    if (ev.incMp) {
+      mp[actor] = Math.min(fighters[actor]?.maxMp ?? Infinity, mp[actor]! + ev.incMp)
+      text(at, actor, 'mp', `+${ev.incMp} MP`)
+      bar(at, actor)
+    }
+    const change = (ev.incHp ?? 0) - (ev.selfDamage ?? 0)
+    if (change) changeHp(at, actor, change)
   }
 
   function changeBuffs(at: number, ev: FightEvent) {
@@ -166,13 +206,14 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     }
     const motion = ev.crit ? HIT_HEAVY : HIT_LIGHT
     pose(target, at, motion)
-    loseHp(at, target, amount)
-    text(
-      at,
-      target,
-      ev.crit ? 'crit' : 'damage',
-      ev.crit ? `Critical ${amount}` : amount > 0 ? `-${amount}` : '0',
-    )
+    changeHp(at, target, -amount)
+    // Negative damage: the target's absorption turned the hit into a heal.
+    if (ev.crit && amount > 0) text(at, target, 'crit', `Critical ${amount}`)
+    else {
+      const shown = hpText(-amount)
+      text(at, target, shown.kind, shown.text)
+    }
+    if (ev.targetShield && last) text(at, target, 'shield', `Absorbed ${ev.targetShield}`)
     if (ev.parry && last) text(at, target, 'info', 'Parry')
     if (hp[target]! > 0) pose(target, at + motionMs(target, motion), STAND)
   }
@@ -210,10 +251,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
       if (onTarget) react(target, impact, ev, amount, k === parts.length - 1)
       t += motionMs(actor, motion)
     })
-    if (ev.selfDamage) {
-      loseHp(impact, actor, ev.selfDamage)
-      text(impact, actor, 'damage', `-${ev.selfDamage}`)
-    }
+    selfEffects(impact, ev)
     changeBuffs(impact, ev)
     if (onTarget) {
       pose(actor, t, RUN, { from: contact, to: home(actor), moveMs: RUN_MS })
@@ -226,16 +264,26 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   function buffEvent(ev: FightEvent, start: number) {
     const actor = ev.actor
     const changes = (ev.addBuffs?.length ?? 0) + (ev.delBuffs?.length ?? 0)
-    if (!ev.selfDamage && changes === 0) return start
-    if (ev.selfDamage) {
+    const ticks = Boolean(ev.selfDamage || ev.incHp || ev.incMp || ev.selfShield)
+    if (!ticks && changes === 0) return start
+    if (ticks) {
       const name = ev.skillId === undefined ? undefined : buffName(ev.skillId)
       if (name) text(start, actor, 'buff', name)
-      pose(actor, start, HIT_LIGHT)
-      loseHp(start, actor, ev.selfDamage)
-      text(start, actor, 'damage', `-${ev.selfDamage}`)
-      if (hp[actor]! > 0) pose(actor, start + motionMs(actor, HIT_LIGHT), STAND)
+      // Only a loss makes the fighter flinch; a healing tick does not.
+      const hurt = (ev.selfDamage ?? 0) > (ev.incHp ?? 0)
+      if (hurt) pose(actor, start, HIT_LIGHT)
+      selfEffects(start, ev)
+      if (hurt && hp[actor]! > 0) pose(actor, start + motionMs(actor, HIT_LIGHT), STAND)
     }
     changeBuffs(start, ev)
+    return start + BUFF_EVENT_MS
+  }
+
+  /** Event 3: the actor skips its turn, held by a control buff ("Frozen", "Dizzy"). */
+  function cannotMove(ev: FightEvent, start: number) {
+    const held = [...buffs[ev.actor]!].reverse().find((b) => CONTROL_BUFFS.includes(b))
+    const name = held === undefined ? undefined : buffName(held)
+    text(start, ev.actor, 'info', name ?? 'Cannot move')
     return start + BUFF_EVENT_MS
   }
 
@@ -253,6 +301,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     if (!fighters[ev.actor]) continue
     if (STRIKES.has(ev.event)) t = strike(ev, t)
     else if (ev.event === 9) t = buffEvent(ev, t)
+    else if (ev.event === CANNOT_MOVE) t = cannotMove(ev, t)
     else if (ev.event === 2) t += GAP_MS
     else if (ev.event === 20) {
       hp[ev.actor] = 0

@@ -98,8 +98,9 @@ export interface BuffChange {
 }
 
 /**
- * One replay entry (game-core FightEvent). Event ids: 1 begin action, 2 end action, 5 priority
- * strike, 7 counter, 9 buff tick or buff change, 14 skill, 20 death, 21 next fighter.
+ * One replay entry (game-core FightEvent). Event ids: 1 begin action, 2 end action, 3 cannot move
+ * (stun, freeze, ...), 5 priority strike, 7 counter, 9 buff tick or buff change, 14 skill,
+ * 20 death, 21 next fighter.
  */
 export interface FightEvent {
   actor: number
@@ -107,14 +108,23 @@ export interface FightEvent {
   target?: number
   /** Skill id for 5 / 7 / 14, buff id for a ticking buff (event 9). */
   skillId?: number
+  /** HP the target loses, after mitigation and absorption: negative means it heals. */
   damage?: number
   hit?: boolean
   crit?: boolean
   parry?: boolean
-  /** HP the actor itself loses (e.g. a poison tick). */
+  /** HP the actor itself loses, e.g. a poison tick or a rebound (before `incHp`). */
   selfDamage?: number
   /** MP the actor spends. */
   decMp?: number
+  /** Rebound the actor takes, after its own mitigation (included in selfDamage). */
+  backDamage?: number
+  /** HP / MP the actor gains from vampiric strikes or healing scripts. */
+  incHp?: number
+  incMp?: number
+  /** Damage a shield of the target / of the actor took instead of HP. */
+  targetShield?: number
+  selfShield?: number
   /** Number of strikes to animate. */
   attackCount?: number
   addBuffs?: BuffChange[]

@@ -48,6 +48,8 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
   damage: { color: '#ff5a3c', size: 30 },
   crit: { color: '#ffd23c', size: 38 },
   miss: { color: '#e8f4ff', size: 26 },
+  heal: { color: '#5aff6e', size: 30 },
+  shield: { color: '#9ad8ff', size: 24 },
   mp: { color: '#5ab4ff', size: 24 },
   buff: { color: '#7dff8a', size: 22 },
   buffEnd: { color: '#c8c8c8', size: 20 },
