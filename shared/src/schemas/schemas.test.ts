@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { loginSchema, registerSchema } from './auth.js'
 import { postsQuerySchema } from './content.js'
+import { CHAT_MAX_LENGTH, chatSendSchema } from './realtime.js'
 
 const valid = { username: 'Naruto_99', email: 'naruto@konoha.example', password: 'believe-it' }
 
@@ -50,5 +51,21 @@ describe('postsQuerySchema', () => {
   it('rejects unknown kinds and out-of-range limits', () => {
     expect(postsQuerySchema.safeParse({ kind: 'gossip' }).success).toBe(false)
     expect(postsQuerySchema.safeParse({ limit: '21' }).success).toBe(false)
+  })
+})
+
+describe('chatSendSchema', () => {
+  it('trims and replaces control characters but keeps HTML as text', () => {
+    expect(chatSendSchema.parse({ channel: 'scene', text: ' <i>a</i>\u0007b ' })).toEqual({
+      channel: 'scene',
+      text: '<i>a</i> b',
+    })
+  })
+
+  it('rejects empty, overlong and unknown-channel messages', () => {
+    expect(chatSendSchema.safeParse({ channel: 'world', text: '\n\t' }).success).toBe(false)
+    const long = 'x'.repeat(CHAT_MAX_LENGTH + 1)
+    expect(chatSendSchema.safeParse({ channel: 'world', text: long }).success).toBe(false)
+    expect(chatSendSchema.safeParse({ channel: 'guild', text: 'hi' }).success).toBe(false)
   })
 })
