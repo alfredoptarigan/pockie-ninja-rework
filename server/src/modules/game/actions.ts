@@ -1,11 +1,5 @@
 // Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
-import {
-  createRandom,
-  deriveStats,
-  rollDrops,
-  type DropEntry,
-  type DropLib,
-} from '@pockie/game-core'
+import { createRandom, deriveStats } from '@pockie/game-core'
 import { BAG_SLOTS, buyPouchesSchema, CLOSED_SCENES, itemActionParamsSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
 import { and, count, eq, isNull } from 'drizzle-orm'
@@ -15,7 +9,6 @@ import type { Db } from '../../db/client.js'
 import { characters, inventoryItems } from '../../db/schema.js'
 import {
   avatarStats,
-  dropItems,
   dropLib,
   item,
   itemNameKey,
@@ -53,6 +46,7 @@ import {
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
 import { playerFighter } from '../../game/combat.js'
+import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
@@ -283,12 +277,7 @@ export async function actionRoutes(
       if (restore) {
         await tx.update(characters).set(restore).where(eq(characters.id, character.id))
       } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
-        const libId = Number(def.BoxDropID)
-        const drops = rollDrops(
-          dropLib(libId) as unknown as DropLib,
-          dropItems(libId) as unknown as DropEntry[],
-          createRandom(randomInt(2 ** 31)),
-        )
+        const drops = rollLibDrops(Number(def.BoxDropID), createRandom(randomInt(2 ** 31)))
         // Box contents inherit the box's binding.
         await grantItems(
           tx,
@@ -327,6 +316,8 @@ export async function actionRoutes(
       if (!fitsOutfit(def, character.avatarId)) {
         throw bad('wrong_class', 'Your outfit cannot use this kind of weapon.')
       }
+      const refusal = equipRefusal(row)
+      if (refusal) throw bad(refusal.code, refusal.message)
       const slot = String(def.EquipType)
       await tx
         .update(inventoryItems)
@@ -447,8 +438,7 @@ export async function actionRoutes(
     })
   })
 
-  // ReliveSystem.OnCustomRelive. ponytail: the 5% equipment wear on going home is skipped
-  // (durability is not tracked yet).
+  // ReliveSystem.OnCustomRelive: going home also wears worn gear by 5% of its MaxHardiness.
   app.post('/revive', { config: { rateLimit: RATE_LIMITS.revive } }, async (request) => {
     const { mode } = reviveBody.parse(request.body)
     const userId = requireUser(request).id
@@ -480,6 +470,7 @@ export async function actionRoutes(
             sceneId: toScene > 0 ? toScene : nationScenes()[character.nation]!.castle,
           })
           .where(eq(characters.id, character.id))
+        await wearEquipped(tx, character.id, reviveLoss)
       }
       return { character: await reload(tx, character.id) }
     })

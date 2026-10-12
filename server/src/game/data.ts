@@ -4,11 +4,16 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import type {
   AvatarStats,
+  EnhanceFailRates,
   EquipPropDefines,
   EquipSuits,
   EquipTables,
+  IdentifyGroups,
+  IdentifyList,
   IdentifyProps,
+  IdentifyTables,
   InscribeLevels,
+  SealOdds,
   SkillInput,
 } from '@pockie/game-core'
 import type { OutfitBoost } from '@pockie/shared'
@@ -195,3 +200,30 @@ export function equipTables(): EquipTables & { suits: EquipSuits } {
     suits: load<EquipSuits>('equip-suits'),
   }
 }
+
+let setPieces: Map<number, number> | undefined
+/** How many items of item.ini belong to a set (SuitID). */
+export function setPieceCount(suitId: number) {
+  setPieces ??= Object.values(load<Record<string, Row>>('items')).reduce((counts, row) => {
+    const id = Number(row.SuitID ?? 0)
+    return id > 0 ? counts.set(id, (counts.get(id) ?? 0) + 1) : counts
+  }, new Map<number, number>())
+  return setPieces.get(suitId) ?? 0
+}
+
+/** equipPropConfig.ini costs and factors (blacksmith.md "Config"). */
+export const equipConfig = () =>
+  load<{ config: Record<string, number | string> }>('equip-config').config
+/** ConsolidateFailRate.ini, section = target level. */
+export const enhanceFailRates = () => load<EnhanceFailRates>('enhance-fail-rates')
+/** SealOdds.ini with the seal item ids. */
+export const sealOdds = () =>
+  load<{ seals: SealOdds & { LowSeal: string; HighSeal: string } }>('inscribe-levels').seals
+/** EquipIdentifyIDList.ini row of an item; items without one never get properties. */
+export const identifyList = (itemId: string) =>
+  load<Record<string, IdentifyList>>('identify-lists')[itemId]
+/** EquipIdentifyProp.ini groups and IdentifyPropLib.ini props. */
+export const identifyTables = (): IdentifyTables => ({
+  groups: load<IdentifyGroups>('identify-groups'),
+  props: load<IdentifyProps>('identify-props'),
+})
