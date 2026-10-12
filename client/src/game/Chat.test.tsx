@@ -1,0 +1,110 @@
+import type { ChatMessage } from '@pockie/shared'
+import { act, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createFakeSocket, type FakeSocket } from '../test/socket'
+import { renderWithProviders } from '../test/utils'
+import { RealtimePanels } from './Chat'
+
+let socket: FakeSocket
+vi.mock('../lib/socket', () => ({ createGameSocket: () => socket }))
+beforeEach(() => {
+  socket = createFakeSocket()
+})
+
+const message = (overrides: Partial<ChatMessage>): ChatMessage => ({
+  id: 'm1',
+  channel: 'world',
+  sender: { characterId: 'c2', name: 'Sasuke_1' },
+  text: 'Hello',
+  sentAt: '2026-10-12T00:00:00Z',
+  ...overrides,
+})
+
+function renderChat() {
+  renderWithProviders(<RealtimePanels characterId="c1" />)
+  act(() => socket.serverEmit('connect'))
+}
+
+describe('Chat', () => {
+  it('renders messages as plain text, never as HTML', () => {
+    renderChat()
+    act(() =>
+      socket.serverEmit(
+        'chat:message',
+        message({ text: '<img src=x onerror=alert(1)><b>bold</b>' }),
+      ),
+    )
+
+    const log = screen.getByRole('list', { name: 'world messages' })
+    expect(log).toHaveTextContent('Sasuke_1: <img src=x onerror=alert(1)><b>bold</b>')
+    expect(log.querySelector('img, b')).toBeNull()
+  })
+
+  it('keeps world and scene messages on their own tabs', async () => {
+    renderChat()
+    act(() => {
+      socket.serverEmit('chat:message', message({ id: 'w', text: 'world news' }))
+      socket.serverEmit('chat:message', message({ id: 's', channel: 'scene', text: 'over here' }))
+    })
+    expect(screen.queryByText('over here')).not.toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Scene' }))
+
+    expect(screen.getByText('over here')).toBeInTheDocument()
+    expect(screen.queryByText('world news')).not.toBeInTheDocument()
+  })
+
+  it('sends on the active channel and shows ack errors', async () => {
+    renderChat()
+    socket.onSend = () => ({
+      ok: false,
+      error: { code: 'rate_limited', message: 'You are sending messages too fast.' },
+    })
+
+    await userEvent.type(screen.getByLabelText('Message to world chat'), 'hi all{Enter}')
+
+    expect(socket.sent).toEqual([{ channel: 'world', text: 'hi all' }])
+    expect(await screen.findByRole('alert')).toHaveTextContent('You are sending messages too fast.')
+    expect(screen.getByLabelText('Message to world chat')).toHaveValue('hi all')
+  })
+
+  it('clears the input when the server accepts the message', async () => {
+    renderChat()
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
+
+    await userEvent.type(screen.getByLabelText('Message to world chat'), 'hi all{Enter}')
+
+    expect(screen.getByLabelText('Message to world chat')).toHaveValue('')
+  })
+
+  it('lists the players in the scene', () => {
+    renderChat()
+    act(() =>
+      socket.serverEmit('scene:players', {
+        sceneId: 111,
+        players: [
+          { characterId: 'c1', name: 'Ninja_01', level: 3, clothing: 3, gender: 0, nation: 0 },
+          { characterId: 'c2', name: 'Sasuke_1', level: 7, clothing: 9, gender: 0, nation: 0 },
+        ],
+      }),
+    )
+
+    const list = screen.getByRole('region', { name: 'Players here (2)' })
+    expect(within(list).getByText('Sasuke_1')).toBeInTheDocument()
+    expect(within(list).getByText('Lv. 7')).toBeInTheDocument()
+  })
+
+  it('explains handshake rejections', () => {
+    renderWithProviders(<RealtimePanels characterId="c1" />)
+    act(() =>
+      socket.serverEmit(
+        'connect_error',
+        Object.assign(new Error('rejected'), { data: { code: 'unauthenticated' } }),
+      ),
+    )
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Your session ended. Please log in again.')
+    expect(screen.getByRole('button', { name: 'Send' })).toBeDisabled()
+  })
+})

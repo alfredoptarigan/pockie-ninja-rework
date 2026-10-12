@@ -23,6 +23,7 @@ function useSetUser() {
   const queryClient = useQueryClient()
   return ({ user }: { user: PublicUser }) => {
     queryClient.setQueryData(meKey, user)
+    queryClient.removeQueries({ queryKey: ['game'] })
     void queryClient.invalidateQueries({ queryKey: ['status'] })
   }
 }
@@ -51,6 +52,8 @@ export function useLogout() {
     mutationFn: () => api<void>('/api/auth/logout', { method: 'POST' }),
     onSuccess: () => {
       queryClient.setQueryData(meKey, null)
+      // Game state belongs to the account that just left.
+      queryClient.removeQueries({ queryKey: ['game'] })
       void queryClient.invalidateQueries({ queryKey: ['status'] })
     },
   })

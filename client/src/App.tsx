@@ -12,6 +12,7 @@ export function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/play" element={<Play />} />
+      <Route path="/play/create" element={<Play view="create" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

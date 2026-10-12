@@ -21,6 +21,22 @@
 
   --shadow-sticker: 6px 6px 0 0 var(--color-ink);
   --shadow-sticker-sm: 3px 3px 0 0 var(--color-ink);
+
+  /* In-game skin, redrawn after the 2011 client: dark wood frames, gold trim, parchment insets. */
+  --color-wood-deep: #2a170c;
+  --color-wood: #4a2b16;
+  --color-wood-light: #7a4a26;
+  --color-trim: #e2b04a;
+  --color-trim-soft: #f6d98c;
+  --color-parchment: #f7ecd0;
+  --color-parchment-dark: #e6d3a6;
+  --color-ember: #e0641c;
+  --color-ember-dark: #a8410b;
+  --color-leaf: #2f8f2a;
+  --color-bar-hp: #d0342c;
+  --color-bar-mp: #2f78d0;
+  --color-bar-exp: #e9b520;
+  --font-game: Verdana, Tahoma, ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -48,6 +64,43 @@
 @utility bg-dots {
   background-image: radial-gradient(var(--color-ink) 1.6px, transparent 1.6px);
   background-size: 18px 18px;
+}
+
+/* Game skin pieces (used by client/src/game/skin.tsx). */
+@utility game-frame {
+  border: 3px solid var(--color-trim);
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    var(--color-wood-light) 0%,
+    var(--color-wood) 18%,
+    var(--color-wood-deep) 100%
+  );
+  box-shadow:
+    inset 0 0 0 2px var(--color-wood-deep),
+    0 4px 0 0 rgb(0 0 0 / 0.35);
+}
+@utility game-inset {
+  border: 2px solid var(--color-wood-light);
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--color-parchment) 0%, var(--color-parchment-dark) 100%);
+  color: var(--color-wood-deep);
+}
+@utility game-button {
+  border: 2px solid var(--color-trim-soft);
+  border-radius: 6px;
+  background: linear-gradient(
+    180deg,
+    #ffa24a 0%,
+    var(--color-ember) 50%,
+    var(--color-ember-dark) 100%
+  );
+  color: #fffaf0;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.55);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.4),
+    0 2px 0 0 var(--color-wood-deep);
 }
 
 /* Sprite strips: frames side by side, stepped through with jump-none so each frame shows once. */
