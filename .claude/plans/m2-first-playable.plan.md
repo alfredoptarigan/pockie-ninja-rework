@@ -195,13 +195,18 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] 8b: Phaser (`client/src/game/phaser/`, lazy chunk): scene picture with building signs,
         hover/click hotspots, field NPCs, monster portrait row; full-screen battle replay (VS HUD,
         motions, damage/crit/parry/dodge, skills, buffs, Skip/Replay/x2) then the result window.
-  - [ ] 8c: full-screen layout like the original (scene fills the stage, HUD overlays: portrait
+  - [x] 8c: full-screen layout like the original (scene fills the stage, HUD overlays: portrait
         and bars top left, currencies top strip, monster row top centre, scene name + Village/World
         Map top right, chat bottom left, EXP bar bottom centre, menu icons bottom right, Quest
         Navigation window). References: `data/reborn-raw/screenshots/` (gitignored).
   - [ ] World map picture, Drops menu on monster portraits, explore UI, item icons.
-  - [ ] **Bug:** a fresh level 1 character deals 0 damage to the level 2 Sunflower, so early
-        fights are lost; fighting at 1 HP is allowed.
+  - [x] "0 damage" was fighting without the newbie fists (i270100); the original gives 0 too.
+        Defeat/revive now follow the original: a loss leaves 0 HP and state dead (no fight, travel
+        or explore), `POST /api/game/revive {mode: home|gold}` (relive.ini). Explore losses keep 1 HP.
+  - [ ] Client: Revive dialog after a defeat (loss text still says "Heal before your next fight"),
+        keep players from skipping the pack/equip tutorial steps, show attack/defence stats.
+  - [ ] Server: HP pouch refill after won fights (`UseHPContainer`, max `9000 + level*1000`),
+        character stats in `GET /character`, an available/completed quests endpoint, equipment wear.
 - [ ] **Task 9 — copy fixes and verification** (not started).
 
 ### Notes for Task 8 (client)
