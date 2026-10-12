@@ -98,3 +98,28 @@ export const task = (id: number) => load<Record<string, Row>>('tasks')[String(id
 export const scene = (id: number) => load<Record<string, Row>>('scenes')[String(id)]
 export const sceneSwitchRule = (id: number) =>
   load<Record<string, Row>>('scene-switch-rules')[String(id)]
+
+export interface ExploreFactoryEntry {
+  Config: string
+  BindingStatus: number
+  ID: number
+  Odds: number
+}
+export type ExploreFactory = 'baby' | 'boss' | 'item' | 'key'
+
+/** RoleOutSearch.ini row (one explore spot). */
+export const exploreSpot = (id: string) => load<Record<string, Row>>('explore-spots')[id]
+
+/** OutSearchCommon.ini: the global cooldown between searches, in seconds. */
+export const exploreCooldownSeconds = () =>
+  load<{ r: { OutSearchTimeSpace: number } }>('explore-common').r.OutSearchTimeSpace
+
+/** BabyFactory / BossFactory / ItemFactory / KeyFactory.ini rows of one factory id, in order. */
+export const exploreFactory = (kind: ExploreFactory, id: number) =>
+  Object.values(load<Record<string, ExploreFactoryEntry>>(`explore-${kind}-factory`)).filter(
+    (entry) => entry.ID === id,
+  )
+
+/** GostFactory.ini: monster configs of one factory id. */
+export const exploreMonsters = (id: number) =>
+  load<Record<string, { Item: string[] }>>('explore-gost-factory')[String(id)]?.Item ?? []

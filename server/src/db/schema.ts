@@ -3,6 +3,7 @@ import {
   bigint,
   boolean,
   check,
+  date,
   index,
   integer,
   jsonb,
@@ -135,6 +136,10 @@ export const characters = pgTable(
     hpPouch: integer('hp_pouch').notNull().default(50),
     mpPouch: integer('mp_pouch').notNull().default(30),
     sceneId: integer('scene_id').notNull(),
+    // Explore spots (OutSearchSystem): global cooldown and searches used on `exploreDay` (UTC).
+    exploreLastAt: timestamp('explore_last_at', { withTimezone: true }),
+    exploreDay: date('explore_day'),
+    exploreUsed: smallint('explore_used').notNull().default(0),
     createdAt: createdAt(),
   },
   (t) => [
@@ -191,5 +196,22 @@ export const characterQuests = pgTable(
   (t) => [
     primaryKey({ columns: [t.characterId, t.taskId] }),
     check('character_quests_state', sql`${t.state} between 0 and 2`),
+  ],
+)
+
+// Star level per explore spot (OutSearch record: StarLevel, StarUpValue).
+export const characterExploreSpots = pgTable(
+  'character_explore_spots',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    spotId: integer('spot_id').notNull(),
+    starLevel: smallint('star_level').notNull(),
+    starProgress: smallint('star_progress').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.spotId] }),
+    check('character_explore_spots_star', sql`${t.starLevel} between 0 and 5`),
   ],
 )
