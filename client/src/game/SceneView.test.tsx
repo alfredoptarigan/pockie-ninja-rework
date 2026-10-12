@@ -1,10 +1,10 @@
 import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { character, villageScene } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import { SceneView } from './SceneView'
-import type { FightResult, Quest, SceneView as Scene } from './types'
+import type { FightResult, SceneView as Scene } from './types'
 
 const field: Scene = {
   ...villageScene,
@@ -46,45 +46,16 @@ const fightResult: FightResult = {
 }
 
 describe('SceneView', () => {
-  it('talks to an NPC and accepts the quest it offers', async () => {
-    let quests: Quest[] = []
-    const fetchMock = mockApi({
-      'GET /api/game/scene': () => json(villageScene),
-      'GET /api/game/quests': () => json({ quests }),
-      'POST /api/game/npcs/n11001/talk': () =>
-        json({
-          dialogKey: 'lg_Say_n11001',
-          nameKey: 'lg_name_n11001',
-          completed: [90001],
-          character,
-        }),
-      'POST /api/game/quests/90002/accept': () => {
-        quests = [
-          {
-            taskId: 90002,
-            state: 0,
-            progress: [0],
-            nameKey: 'lg_Task_90002',
-            descriptionKey: 'lg_TaskDes_90002',
-            steps: [],
-          },
-        ]
-        return json({ quests })
-      },
-    })
-    renderWithProviders(<SceneView character={character} />)
+  it('opens NPCs from the keyboard list', async () => {
+    mockApi({ 'GET /api/game/scene': () => json(villageScene) })
+    const onNpc = vi.fn()
+    renderWithProviders(<SceneView character={character} onNpc={onNpc} />)
 
+    const actions = screen.getByRole('region', { name: 'Scene actions' })
     await userEvent.click(
-      await screen.findByRole('button', { name: 'Fire Village Elder in the Hall' }),
+      await within(actions).findByRole('button', { name: 'Fire Village Elder in the Hall' }),
     )
-    const dialog = await screen.findByRole('dialog', { name: 'Fire Village Elder in the Hall' })
-    expect(await within(dialog).findByText(/Quest complete: Newbie Pack/)).toBeVisible()
-
-    const offers = await within(dialog).findByRole('region', { name: 'Quests offered' })
-    await userEvent.click(within(offers).getAllByRole('button', { name: 'Accept quest' })[0]!)
-
-    expect(await within(dialog).findByText(/Quest accepted/)).toBeVisible()
-    expect(fetchMock.mock.calls.some(([url]) => String(url).endsWith('/90002/accept'))).toBe(true)
+    expect(onNpc).toHaveBeenCalledWith(villageScene.npcs[0])
   })
 
   it('fights a monster and shows the result', async () => {
@@ -92,7 +63,7 @@ describe('SceneView', () => {
       'GET /api/game/scene': () => json(field),
       'POST /api/game/fight': () => json(fightResult),
     })
-    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} />)
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
 
@@ -113,7 +84,7 @@ describe('SceneView', () => {
         return json(fightResult)
       },
     })
-    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} />)
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
     const dialog = await screen.findByRole('dialog', { name: 'Victory' })
@@ -130,23 +101,10 @@ describe('SceneView', () => {
       'GET /api/game/scene': () => json(field),
       'POST /api/game/fight': () => apiError(400, 'no_hp', 'Heal before you fight again.'),
     })
-    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} />)
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Heal before you fight again.')
-  })
-
-  it('travels to an open area and locks areas above the player level', async () => {
-    const fetchMock = mockApi({
-      'GET /api/game/scene': () => json(villageScene),
-      'POST /api/game/travel': () => json({ character: { ...character, sceneId: 2101 } }),
-    })
-    renderWithProviders(<SceneView character={character} />)
-
-    expect((await screen.findAllByRole('button', { name: /Lv\. 11/ }))[0]).toBeDisabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Smelting Mountains' }))
-
-    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101 })
   })
 })

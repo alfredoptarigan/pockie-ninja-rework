@@ -1,20 +1,27 @@
 import type { Character } from '@pockie/shared'
-import { useState } from 'react'
-import { gameUi } from '../generated/game-ui'
-import { Link, Navigate } from 'react-router'
-import { useLogout } from '../lib/auth'
-import { errorMessage, useCharacter } from './api'
-import { CharacterPanel } from './CharacterPanel'
+import { useEffect, useState, type CSSProperties } from 'react'
+import { Navigate } from 'react-router'
+import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
+import { CharacterWindow } from './CharacterWindow'
 import { RealtimePanels } from './Chat'
 import { CreateCharacter } from './CreateCharacter'
+import { ExpStrip, MenuBar, PlayerCard, ScenePlaque, TopBar, type MenuWindow } from './Hud'
 import { Inventory } from './Inventory'
-import { QuestLog, QuestTracker } from './QuestLog'
+import { NpcDialog } from './NpcDialog'
+import { QuestLog } from './QuestLog'
+import { QuestNavigation } from './QuestNavigation'
 import { SceneView } from './SceneView'
-import { GameButton, Notice, Tabs } from './skin'
+import { Dialog, GameButton, Notice } from './skin'
+import type { SceneNpc } from './types'
+import { destinations, isVillage, villageOf } from './world'
+import { WorldMap } from './WorldMap'
 
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
 export default function GameApp({ view }: { view: 'game' | 'create' }) {
   const character = useCharacter()
+  if (character.isSuccess && character.data && view === 'game') {
+    return <GameScreen character={character.data} />
+  }
   return (
     <div
       data-game-ui
@@ -36,63 +43,104 @@ export default function GameApp({ view }: { view: 'game' | 'create' }) {
           ) : (
             <Navigate to="/play/create" replace />
           )
-        ) : view === 'create' ? (
-          <Navigate to="/play" replace />
         ) : (
-          <GameScreen character={character.data} />
+          <Navigate to="/play" replace />
         ))}
     </div>
   )
 }
 
-type SideTab = 'quests' | 'bag'
-const SIDE_TABS: { id: SideTab; title: string; icon: string }[] = [
-  { id: 'quests', title: 'Quest log', icon: gameUi.pieces['icon-quests']!.file },
-  { id: 'bag', title: 'Bag', icon: gameUi.pieces['icon-bag']!.file },
-]
+/** The HUD is laid out on a 1280x720 stage and scaled to the screen like the original Flash. */
+const STAGE = { width: 1280, height: 720 }
+
+function useStageScale() {
+  const fit = () => Math.min(window.innerWidth / STAGE.width, window.innerHeight / STAGE.height)
+  const [scale, setScale] = useState(fit)
+  useEffect(() => {
+    const onResize = () => setScale(fit())
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+  return scale
+}
+
+type Window = MenuWindow | 'map'
 
 function GameScreen({ character }: { character: Character }) {
-  const [tab, setTab] = useState<SideTab>('quests')
-  const logout = useLogout()
+  const scale = useStageScale()
+  const scene = useScene()
+  const talk = useTalk()
+  const travel = useTravel()
+  const [openWindow, setWindow] = useState<Window | null>(null)
+  const [npc, setNpc] = useState<SceneNpc | null>(null)
+  const close = () => setWindow(null)
+
+  const openNpc = (target: SceneNpc) => {
+    setWindow(null)
+    setNpc(target)
+    talk.mutate(target.id)
+  }
+  const inVillage = isVillage(character.sceneId)
+  // "Village" goes home when the road is open; "Leave" (and a closed road) opens the map.
+  const onVillage = () => {
+    const home = villageOf(character.nation)
+    const road = destinations(character).find((d) => d.sceneId === home)
+    if (!inVillage && road?.open) travel.mutate(home)
+    else setWindow('map')
+  }
+
   return (
-    <div className="mx-auto grid max-w-7xl gap-3 p-3 lg:grid-cols-[1fr_22rem]">
-      <header className="game-topbar flex items-center justify-between px-3 py-1.5 lg:col-span-2">
-        <h1 className="font-game text-base font-bold text-white [text-shadow:var(--shadow-game-text)]">
-          Pockie Ninja Remastered
-        </h1>
-        <nav aria-label="Account" className="flex items-center gap-3">
-          <Link to="/" className="text-xs text-trim-soft underline">
-            Back to the website
-          </Link>
-          <GameButton small disabled={logout.isPending} onClick={() => logout.mutate()}>
-            Log out
-          </GameButton>
-        </nav>
-      </header>
-      <main className="flex min-w-0 flex-col gap-3">
-        <CharacterPanel character={character} />
-        <SceneView key={character.sceneId} character={character} />
-      </main>
-      <aside className="flex min-w-0 flex-col gap-3">
-        <QuestTracker />
-        <div className="game-frame flex flex-col px-2 pt-1 pb-2">
-          <Tabs
-            label="Panels"
-            tabs={SIDE_TABS}
-            active={tab}
-            onChange={setTab}
-            panelId="side-panel"
+    <div
+      data-game-ui
+      className="grid h-[100dvh] w-screen place-items-center overflow-hidden bg-black font-game text-parchment"
+      style={{ '--hud-scale': scale } as CSSProperties}
+    >
+      <main
+        aria-label="Game"
+        className="relative overflow-hidden"
+        style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
+      >
+        <SceneView key={character.sceneId} character={character} onNpc={openNpc} />
+        {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
+        <div
+          className="pointer-events-none absolute top-0 left-0"
+          style={{ width: STAGE.width, height: STAGE.height, zoom: scale }}
+        >
+          <TopBar character={character} />
+          <PlayerCard character={character} />
+          <ScenePlaque
+            sceneId={scene.data?.sceneId}
+            inVillage={inVillage}
+            onVillage={onVillage}
+            onWorldMap={() => setWindow('map')}
           />
-          <div
-            id="side-panel"
-            role="tabpanel"
-            className="game-inset mt-1 max-h-96 overflow-auto p-3 text-sm"
-          >
-            {tab === 'quests' ? <QuestLog /> : <Inventory />}
-          </div>
+          {travel.isError && (
+            <div className="pointer-events-auto absolute top-[110px] right-1 w-[168px]">
+              <Notice tone="error">{errorMessage(travel.error)}</Notice>
+            </div>
+          )}
+          <QuestNavigation character={character} scene={scene.data} onNpc={openNpc} />
+          <RealtimePanels characterId={character.id} />
+          <ExpStrip character={character} />
+          <MenuBar character={character} onOpen={setWindow} />
         </div>
-        <RealtimePanels characterId={character.id} />
-      </aside>
+      </main>
+
+      {openWindow === 'bag' && (
+        <Dialog title="Inventory" onClose={close} className="w-[28rem]">
+          <Inventory />
+        </Dialog>
+      )}
+      {openWindow === 'character' && <CharacterWindow character={character} onClose={close} />}
+      {openWindow === 'quests' && (
+        <Dialog title="Quest Log" onClose={close} className="w-[32rem]">
+          <QuestLog />
+        </Dialog>
+      )}
+      {openWindow === 'map' && <WorldMap character={character} onClose={close} />}
+      {npc && (
+        <NpcDialog npc={npc} talk={talk} character={character} onClose={() => setNpc(null)} />
+      )}
     </div>
   )
 }

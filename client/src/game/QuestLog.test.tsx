@@ -2,7 +2,7 @@ import { screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { newbiePackQuest } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
-import { completedNotice, QuestLog, QuestTracker } from './QuestLog'
+import { completedNotice, QuestLog } from './QuestLog'
 
 const equipQuest = {
   ...newbiePackQuest,
@@ -37,15 +37,6 @@ describe('QuestLog', () => {
     mockApi({ 'GET /api/game/quests': () => json({ quests: [] }) })
     renderWithProviders(<QuestLog />)
     expect(await screen.findByText('No quests right now. Talk to the villagers.')).toBeVisible()
-  })
-
-  it('tracks current quests in a compact list', async () => {
-    mockApi({ 'GET /api/game/quests': () => json({ quests: [equipQuest] }) })
-    renderWithProviders(<QuestTracker />)
-
-    const tracker = await screen.findByRole('region', { name: 'Quest tracker' })
-    expect(tracker).toHaveTextContent('(ready)')
-    expect(tracker).toHaveTextContent('1/1')
   })
 
   it('names completed quests', () => {
