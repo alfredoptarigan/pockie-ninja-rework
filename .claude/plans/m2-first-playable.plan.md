@@ -126,13 +126,13 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
 
 - [x] **Task 1 — data import.** `tools/game-data/import.ts` → `server/data/game/*.json` (31 files,
       original field names). Specs: `docs/original-data/{world,quests-items,characters,battle}.md`.
-- [~] **Task 2 — translation** (all 51k strings translated; review and client wiring left).
+- [x] **Task 2 — translation** (all 51k strings translated, slice reviewed, client wired).
   - [x] Indonesian source extracted (`tools/i18n/source.id.json`).
   - [x] Name glossary, 7,150 names (`tools/i18n/glossary.json`).
   - [x] Sentences: 51/51 batches; `tools/i18n/en.json` merged with 0 problems
         (`pnpm i18n:sentences status`, `pnpm i18n:sentences merge`).
-  - [ ] Hand-review the slice strings (tutorial chains 90000-94015, first main quests, 21xx-25xx
-        NPCs and monsters, common UI) and serve en.json to the client (Task 8).
+  - [x] Hand-review of the slice strings: `tools/i18n/review-m2.md` (3,419 keys read, 78 fixed in
+        `overrides.json`); the client serves the slice from `client/src/i18n/en.json` (Task 8a).
 - [x] **Task 3 — asset export.** `pnpm assets:export` (`tools/export-assets.ts` + `tools/assets/*`;
       full run about 35 min, cached re-run about 12 s, cache in `node_modules/.cache/pockie-assets`).
       91 MB under `client/public/assets/game`: 87/92 outfits with about 40 motions each, 6 monster
@@ -241,15 +241,19 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
               `WorldMapFrame.as`: coloured place art (up/over/down) stacked by Flash depth, the
               original tooltip `Tip_WorldMap_<scene>_<nation>` on hover/focus, the `face_<scene>`
               glow on the current place and the painting's own close button. Reborn draws it the
-              same way (tooltip only). Open: grey art for unvisited places needs a visited-scenes
-              list on the character (`ScenesEntered`).
+              same way (tooltip only). Unvisited places are drawn without button art (2026-10-12):
+              `GET /scene` records `scenes_entered` (column from 0006) and returns `visitedScenes`;
+              the original (`WorldMapFrame.refreshMap`) also just hides the coloured overlay.
         - [x] HUD and windows like Reborn (2026-10-12), measured with REA into
               `docs/ui-layout-reborn.md` (art exported from our backup, no Reborn files): HUD
               drawn 1:1 and anchored (top strip, UI_RoleIcon card, UI_SmallMap plaque, EXP strip,
               eight UI_BottomMenu buttons, monster cards on HobgoblinBG), Arial and Reborn's gold
               buttons, Chat, Stats, Inventory (equipment slots and bag grid), NPC dialog, Quest
-              Navigation and the quest detail window. Open: VP has no data (empty groove), no
-              player titles or rank, no unequip API, Reborn-only buttons left out.
+              Navigation and the quest detail window. Open: no unequip API, Reborn-only buttons left
+              out. Deferred with reasons: the VP groove is `Energy` (max 200, +100 per UTC day,
+              `EnergySystem.java`) and only auto-fight, home and pub fights spend it (M3+);
+              titles come from items (`RoleTitleSystem`, later item feature); the player-list
+              rank is `CompeteRank`, the arena ranking (M4).
 - [~] **Task 9 — copy fixes and verification.**
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.
