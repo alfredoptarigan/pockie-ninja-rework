@@ -110,13 +110,17 @@ flags. `FindAttackSkill`: `CanUseSkill <= 0` → normal attack without a roll; `
 quomodo 2 skills and the normal attack (a failed skill still falls back to it). Counters need
 `target.CanAttack != 0`. Scripted `UserSkill` returns 2 when the flags forbid the skill.
 
-Ported buffs (`game-core/src/battle/buffs.ts`): 8888, 11801 paralysis marker, 11802 freeze
-(CanMove, Dodge -9999, DecDamage -= SaveData-100, cleartype 2), 11811 poison, 11812 seal (marker,
-LifeTime = SaveData), 11813 stun / 11815 seduction (CanMove, LifeTime = SaveData), 11817 needles
-(Rebound +25), 11824 earth wall (Parry 40, Rebound +60), 11826 daze (CanAttack + CanUseSkill,
-cleartype 1), 11831 static barrier (type 3, ShieldDamage = SaveData, ShieldCount 999), 11841,
-11843, 11851. The regeneration auras 11861-11863 (pets) shorten the stuns and heal by `SaveData1`,
-which only pet skills set; not ported.
+The 136 rows are imported to `server/data/game/fight-buffs.json` (`validity` must be 1 or 2 for
+`AddFightBuff` to add the buff; `overlying` is unused in fights). `game-core/src/battle/buffs.ts`
+joins them with the ported scripts by the `javascript` path; rows without a ported script are
+markers only (added, replaced, expired, cleared). Ported scripts: 8888, 11801 paralysis marker,
+11802 freeze (CanMove, Dodge -9999, DecDamage -= SaveData-100, cleartype 2), 11811 poison, 11812
+seal (marker, LifeTime = SaveData), 11813 stun / 11815 seduction (CanMove, LifeTime = SaveData),
+11817 needles (Rebound +25), 11824 earth wall (Parry 40, Rebound +60), 11826 daze (CanAttack +
+CanUseSkill, cleartype 1), 11830 interrupt (Pierce -= SaveData; Burrow adds it with SaveData 0),
+11831 static barrier (type 3, ShieldDamage = SaveData, ShieldCount 999), 11841, 11843, 11851. The
+regeneration auras 11861-11863 (pets) shorten the stuns and heal by `SaveData1`, which only pet
+skills set; not ported (no pets in the slice).
 
 ## Scripts (Rhino, `RES/javascript/skill/*.js`)
 
@@ -127,13 +131,24 @@ which only pet skills set; not ported.
 Examples: Fireball 1808 (own MP cost, falls back to skill 1 when sealed, adds burn 11804);
 Heal 3803 (q5 revive with `HP = MaxHP*0.25`).
 
+Monster skills of the 2101-2501 fields (`game-core/src/battle/scripts/monster-skills.ts`, all the
+`AttackSkill` / `TriggerSkill` records of the 53 spawned monsters): Heal 40020 (MaxHP * 0.1, normal
+attack at full HP), Bite 40023 (poison), Combo Hit 40024 / 40042 (60 % two strikes x1.1, else three
+x1.2), Sun Fist 40027 (blind), Crush 40028 (x0.8, 2-unit stun on a hit), Burrow 40029 (q3 trigger:
+own roll `RandInt(0,100) < 8*MaxMP*T.AtkTime/18000`, damage `MaxMP*0.19`, interrupt 11830), Blade
+Light 40031 / 40037-40040 (break earth wall, x1.2), Launch 40033, Combo Slash 40032 / 40036. Each
+costs a share of MaxMP (truncated into `MP` / `DecMP`) and falls back to skill 1 without it, except
+Burrow which just fails. Explore-spot variants (`n330261`, ...) only have 1 / 7777 / 8888.
+
 Outfit ultimates `skill_aoyi_<id>.js` (must-skills, quomodo 1, never countered): execute chance from
 the avatar-level gap: `HPCond = 15 + gap^1.26`, `Prob = 10 + gap^1.2`; if `RandInt(0,99) < Prob`
 and `HP < MaxHP*HPCond%`, damage `RandInt(300,500)/100*T.HP` (truncated). Avatar level: players
 `getAvatarLevel(PlayerAvatarID)`, NPCs `CounterBombMul` unless -1, else `Level/3 - 5`.
 66 scripts (1902, 1903, ...) have the +9 branch commented out. 48 (1901, 1904, 1905, 1908, 1924,
 1927, 1929-1931, 1935, 1937, 1944-1951, 1953, 1955-1958, 1967, 1970, 1972, 1974, 1984-1987, 1990,
-1998, 2201-2214) run it: at avatar level >= 9, `RandInt(0,99) < 50` → `ChangeSkill(skill, id*10)`
+1998, 2201-2214) run it (verified: each group is byte-identical apart from the ids and blank
+lines, so `scripts/execute.ts` covers all 114 outfit ultimates): at avatar level >= 9,
+`RandInt(0,99) < 50` → `ChangeSkill(skill, id*10)`
 
 - `UserSkill` (a damage roll, then the flag checks). The 114 "new ultimates" `skill_aoyi_<id*10>.js`
   (skill.ini: probability 0, same row otherwise) deal the same damage unconditionally and show their
