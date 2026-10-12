@@ -7,7 +7,12 @@ import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { exploreSearchSchema, explorePeekSchema } from '../../../../shared/src/schemas/explore.js'
 import type { Db } from '../../db/client.js'
-import { characterExploreSpots, characters, inventoryItems } from '../../db/schema.js'
+import {
+  characterExploreSpots,
+  characters,
+  exploreSearches,
+  inventoryItems,
+} from '../../db/schema.js'
 import { EXPLORE_MIN_HP, fightMonster, type FightRewards } from '../../game/combat.js'
 import {
   item,
@@ -136,16 +141,57 @@ async function requireBagRoom(
     throw bad('bag_full', 'Your bag is full. Free at least six cells before exploring.')
 }
 
-export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
-  // Pending cards are process-local until the owned schema gains OutSearchBonus storage.
-  const pending = new Map<string, PendingSearch>()
-  const queues = new Map<string, Promise<void>>()
-  app.addHook('onClose', async () => {
-    pending.clear()
-  })
+/** The pending search (explore_searches), or null. */
+async function loadSearch(tx: Tx | Db, characterId: string): Promise<PendingSearch | null> {
+  const [row] = await tx
+    .select()
+    .from(exploreSearches)
+    .where(eq(exploreSearches.characterId, characterId))
+  if (!row) return null
+  return {
+    searchId: row.searchId,
+    spotId: String(row.spotId),
+    sceneId: row.sceneId,
+    mode: row.mode,
+    cards: row.cards as ExploreCard[],
+    revealed: row.revealed,
+    peekCount: row.peekCount,
+    star: row.star,
+    starBonus: row.starBonus as PendingSearch['starBonus'],
+    rewards: row.rewards as FightRewards,
+  }
+}
 
-  function requireSearch(character: CharacterRow, spotId: string, searchId: string) {
-    const search = pending.get(character.id)
+async function saveSearch(tx: Tx, characterId: string, search: PendingSearch | null) {
+  if (!search) {
+    await tx.delete(exploreSearches).where(eq(exploreSearches.characterId, characterId))
+    return
+  }
+  const values = {
+    searchId: search.searchId,
+    spotId: Number(search.spotId),
+    sceneId: search.sceneId,
+    mode: search.mode,
+    cards: search.cards,
+    revealed: search.revealed,
+    peekCount: search.peekCount,
+    star: search.star,
+    starBonus: search.starBonus,
+    rewards: search.rewards,
+  }
+  await tx
+    .insert(exploreSearches)
+    .values({ characterId, ...values })
+    .onConflictDoUpdate({ target: exploreSearches.characterId, set: values })
+}
+
+export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
+  function requireSearch(
+    character: CharacterRow,
+    search: PendingSearch | null,
+    spotId: string,
+    searchId: string,
+  ) {
     if (!search || search.searchId !== searchId || search.spotId !== spotId) {
       throw bad('no_search', 'That search is no longer available. Start a new search.')
     }
@@ -155,36 +201,22 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return search
   }
 
-  // Keep the memory update and DB commit together for requests in this process. All routes
-  // still acquire the same PostgreSQL character row lock used by other game actions.
+  // The character row lock (lockCharacter) orders every action on one ninja, so the pending
+  // search row is read and written in the same transaction.
   async function locked<T>(
     userId: string,
     action: (
       tx: Tx,
       character: CharacterRow,
+      pending: PendingSearch | null,
     ) => Promise<{ response: T; search: PendingSearch | null }>,
   ) {
-    const previous = queues.get(userId) ?? Promise.resolve()
-    let release = () => {}
-    const queue = new Promise<void>((resolve) => {
-      release = resolve
-    })
-    queues.set(userId, queue)
-    await previous
-    try {
-      let characterId = ''
-      const result = await db.transaction(async (tx) => {
-        const character = await lockCharacter(tx, userId)
-        characterId = character.id
-        return action(tx, character)
-      })
-      if (result.search) pending.set(characterId, result.search)
-      else pending.delete(characterId)
+    return db.transaction(async (tx) => {
+      const character = await lockCharacter(tx, userId)
+      const result = await action(tx, character, await loadSearch(tx, character.id))
+      await saveSearch(tx, character.id, result.search)
       return result.response
-    } finally {
-      release()
-      if (queues.get(userId) === queue) queues.delete(userId)
-    }
+    })
   }
 
   app.get('/explore', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
@@ -193,12 +225,11 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       .select()
       .from(characterExploreSpots)
       .where(eq(characterExploreSpots.characterId, character.id))
+    const pending = await loadSearch(db, character.id)
     return {
       ...publicStatus(exploreStatus(character, new Date())),
       cooldownSeconds: exploreCooldownSeconds(),
-      ...(pending.has(character.id)
-        ? { pending: pendingView(pending.get(character.id)!, character) }
-        : {}),
+      ...(pending ? { pending: pendingView(pending, character) } : {}),
       spots: exploreSpotIds(character.sceneId).map((id) => {
         const spot = exploreSpot(id)!
         const star = stars.find((s) => String(s.spotId) === id)
@@ -227,8 +258,8 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const userId = requireUser(request).id
       const { spotId } = spotParams.parse(request.params)
       const input = explorePeekSchema.parse(request.body)
-      return locked<ReturnType<typeof pendingView>>(userId, async (tx, character) => {
-        const search = requireSearch(character, spotId, input.searchId)
+      return locked<ReturnType<typeof pendingView>>(userId, async (tx, character, pending) => {
+        const search = requireSearch(character, pending, spotId, input.searchId)
         requireAlive(character, 'explore')
         const spot = exploreSpot(spotId)!
         if (search.revealed.includes(input.cardIndex)) {
@@ -278,15 +309,14 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
     if (!spot) throw new HttpError(404, 'unknown_spot', 'There is no such place to explore.')
     return locked<ReturnType<typeof pendingView> | Awaited<ReturnType<typeof settleSearch>>>(
       userId,
-      async (tx, character) => {
+      async (tx, character, pending) => {
         requireAlive(character, 'explore')
         if (input.action === 'pick') {
-          const search = requireSearch(character, spotId, input.searchId)
+          const search = requireSearch(character, pending, spotId, input.searchId)
           const response = await settleSearch(tx, character, search, input.cardIndex)
           return { response, search: null }
         }
-        if (pending.has(character.id))
-          throw bad('search_pending', 'Choose a card from your current search first.')
+        if (pending) throw bad('search_pending', 'Choose a card from your current search first.')
         await requireBagRoom(tx, character.id, [], 6)
         const now = new Date()
         const status = exploreStatus(character, now)

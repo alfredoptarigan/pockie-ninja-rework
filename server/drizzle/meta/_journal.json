@@ -64,6 +64,13 @@
       "when": 1791816520466,
       "tag": "0008_leave_christmas_house",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791821232873,
+      "tag": "0009_explore_searches",
+      "breakpoints": true
     }
   ]
 }

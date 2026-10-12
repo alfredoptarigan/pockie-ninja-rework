@@ -230,6 +230,32 @@ describe('pending searches and paid peeks', () => {
     expect((await client.get('/api/game/explore')).json().pending.searchId).toBe(body.searchId)
   })
 
+  it('keeps the pending cards and peeks across a server restart (decision 11)', async () => {
+    await setCharacter({ stone: 500 })
+    const { searchId } = (await startSearch()).json()
+    const peeked = (await peek(searchId, 2)).json().cards[2]
+
+    // A new process: nothing in memory, the same session.
+    const cookies = client.cookieHeader
+    const csrf = client.csrfToken
+    await app.close()
+    app = buildTestApp(db)
+    client = new Client(app)
+    for (const pair of cookies.split('; ')) {
+      const [name = '', value = ''] = pair.split('=')
+      client.setCookie(name, value)
+    }
+    client.csrfToken = csrf
+
+    const pending = (await client.get('/api/game/explore')).json().pending
+    expect(pending).toMatchObject({ searchId, peek: { count: 1 } })
+    expect(pending.cards[2]).toEqual(peeked)
+    const picked = await pick(searchId, 2)
+    expect(picked.statusCode).toBe(200)
+    expect(picked.json().card).toMatchObject(peeked)
+    expect((await client.get('/api/game/explore')).json().pending).toBeUndefined()
+  })
+
   it('charges Stone then coupons or Gold, retains revealed cards and enforces the peek limit', async () => {
     await setCharacter({ stone: 500, gold: 20, giftCoupon: 10 })
     const { searchId } = (await startSearch()).json()
