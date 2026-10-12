@@ -243,6 +243,13 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
               glow on the current place and the painting's own close button. Reborn draws it the
               same way (tooltip only). Open: grey art for unvisited places needs a visited-scenes
               list on the character (`ScenesEntered`).
+        - [x] HUD and windows like Reborn (2026-10-12), measured with REA into
+              `docs/ui-layout-reborn.md` (art exported from our backup, no Reborn files): HUD
+              drawn 1:1 and anchored (top strip, UI_RoleIcon card, UI_SmallMap plaque, EXP strip,
+              eight UI_BottomMenu buttons, monster cards on HobgoblinBG), Arial and Reborn's gold
+              buttons, Chat, Stats, Inventory (equipment slots and bag grid), NPC dialog, Quest
+              Navigation and the quest detail window. Open: VP has no data (empty groove), no
+              player titles or rank, no unequip API, Reborn-only buttons left out.
 - [~] **Task 9 — copy fixes and verification.**
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.
