@@ -185,8 +185,7 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] All five village tutorials (90000-94015) play to the end in `tutorials.api.test.ts`;
         fights now complete quests, collect quests remove their items.
   - [x] Rate limits on every game route (`rate-limits.ts`, guarded by a test).
-  - [ ] An "available/completed quests" view for the client (8a guesses offers from chain data);
-        character stats in `GET /character`.
+  - [x] Available quests (`GET /quests/available`) and character stats in `GET /character`.
 - [x] **Task 7 — realtime presence and chat.** `server/src/modules/realtime/realtime.ts`
       (Socket.IO on `app.server`, `pn_session` cookie + origin check, rooms `scene:<id>`, travel
       moves sockets after commit, logout disconnects the session), events and zod schemas in
@@ -204,8 +203,15 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
         and bars top left, currencies top strip, monster row top centre, scene name + Village/World
         Map top right, chat bottom left, EXP bar bottom centre, menu icons bottom right, Quest
         Navigation window). References: `data/reborn-raw/screenshots/` (gitignored).
-  - [ ] World map picture, Drops menu on monster portraits, explore UI, item icons, weapon layers
-        in battle (assets ready: Task 3c).
+  - [x] Item icons (`ItemIcon.tsx`: bag, fight drops, quest rewards, hand-ins), World Map painting
+        with clickable places (`WorldMap.tsx`, `world-map.ts`), equipped weapon over the player in
+        battle (`phaser/weapon.ts`), Drops menu on monster portraits (`MonsterDrops.tsx`, drops in
+        `GET /scene`), quest rewards in `GET /quests` and the talk response.
+  - [x] Explore UI (`ExploreWindow.tsx`, `explore.ts`): Explore button by the scene plaque and the
+        field's explore tree, spot list with key cost, stars, quota and cooldown, confirm, fight
+        replay, result cards. Server gaps: no Stone cost, `ClipName` or cooldown length in
+        `GET /explore`; explore monster variants mapped to base monsters client-side.
+  - [x] Chat messages for `too_many_connections`, ended sessions and refused connections.
   - [x] "0 damage" was fighting without the newbie fists (i270100); the original gives 0 too.
         Defeat/revive now follow the original: a loss leaves 0 HP and state dead (no fight, travel
         or explore), `POST /api/game/revive {mode: home|gold}` (relive.ini). Explore losses keep 1 HP.
@@ -215,8 +221,8 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] Server: HP/MP pouches (size `9000 + level*1000`, start at 0, refill after won fights and
         every explore fight; migration 0003), `GET /character` returns `{ character, stats }`,
         `GET /quests/available`, `fitsOutfit` on inventory, `revive` terms in `GET /scene`.
-  - [ ] Buying pouch refills (`OnCustomBuy`), equipment wear on going home (no durability yet),
-        explore UI in the client.
+  - [ ] Buying pouch refills (`OnCustomBuy`), equipment wear on going home (no durability yet).
+        Hand-ins completed by fights, items or equip return only quest ids, not granted items.
 - [~] **Task 9 — copy fixes and verification.**
   - [x] Landing seed copy: level cap 90 and glossary names (`server/scripts/seed-data.ts`); run
         `pnpm db:seed` to refresh an existing database.
@@ -224,8 +230,7 @@ Legend: [x] done, [~] partly done, [ ] not started. Every item is committed and 
   - [x] Security review: `docs/security-review-m2.md` (status table at the top). Fixed: game
         actions serialized on the character row, sockets end with their session, socket cap,
         login budget per account, chat bucket cleanup. Open: register email enumeration (product
-        decision), per-IP socket limits at the proxy. Client still needs messages for the new
-        `too_many_connections` connect error and the `unauthenticated` chat ack (`Chat.tsx`).
+        decision), per-IP socket limits at the proxy.
   - [ ] Coverage >= 80%, Playwright journey (create -> tutorial -> fight -> level up -> chat).
 
 ### Notes for Task 8 (client)
