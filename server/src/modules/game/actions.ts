@@ -44,6 +44,7 @@ import {
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
 import { requireUser, toCharacter } from './characters.js'
+import { RATE_LIMITS } from './rate-limits.js'
 
 const READY = 1
 const COMPLETED = 2
@@ -78,7 +79,7 @@ export async function actionRoutes(
     return row
   }
 
-  app.get('/quests', async (request) => {
+  app.get('/quests', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const rows = await db.transaction((tx) => loadQuests(tx, character.id))
     return {
@@ -96,7 +97,7 @@ export async function actionRoutes(
     }
   })
 
-  app.get('/inventory', async (request) => {
+  app.get('/inventory', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const rows = await db
       .select()
@@ -114,37 +115,41 @@ export async function actionRoutes(
     }
   })
 
-  app.post('/quests/:taskId/accept', async (request) => {
-    const { taskId } = taskParams.parse(request.params)
-    const userId = requireUser(request).id
-    return db.transaction(async (tx) => {
-      const character = await characterOf(tx, userId)
-      const row = task(taskId)
-      if (!row) throw bad('unknown_quest', 'Unknown quest.')
-      const quests = await loadQuests(tx, character.id)
-      if (quests.some((q) => q.taskId === taskId))
-        throw bad('already_taken', 'You already have that quest.')
-      const pre = Number(row.PreTaskID)
-      if (pre > 0 && !quests.some((q) => q.taskId === pre && q.state === COMPLETED)) {
-        throw bad('locked', 'Finish the previous quest first.')
-      }
-      const nation = Number(row.RequireCountry)
-      if (
-        character.level < Number(row.RequireLevel) ||
-        (nation !== -1 && nation !== character.nation)
-      ) {
-        throw bad('locked', 'You cannot take this quest yet.')
-      }
-      const acceptScene = Number(row.AcceptNpcSceneID)
-      if (acceptScene > 0 && acceptScene !== character.sceneId) {
-        throw bad('wrong_place', 'Talk to the quest giver to take this quest.')
-      }
-      await acceptQuest(tx, character.id, taskId)
-      return { quests: await loadQuests(tx, character.id) }
-    })
-  })
+  app.post(
+    '/quests/:taskId/accept',
+    { config: { rateLimit: RATE_LIMITS.acceptQuest } },
+    async (request) => {
+      const { taskId } = taskParams.parse(request.params)
+      const userId = requireUser(request).id
+      return db.transaction(async (tx) => {
+        const character = await characterOf(tx, userId)
+        const row = task(taskId)
+        if (!row) throw bad('unknown_quest', 'Unknown quest.')
+        const quests = await loadQuests(tx, character.id)
+        if (quests.some((q) => q.taskId === taskId))
+          throw bad('already_taken', 'You already have that quest.')
+        const pre = Number(row.PreTaskID)
+        if (pre > 0 && !quests.some((q) => q.taskId === pre && q.state === COMPLETED)) {
+          throw bad('locked', 'Finish the previous quest first.')
+        }
+        const nation = Number(row.RequireCountry)
+        if (
+          character.level < Number(row.RequireLevel) ||
+          (nation !== -1 && nation !== character.nation)
+        ) {
+          throw bad('locked', 'You cannot take this quest yet.')
+        }
+        const acceptScene = Number(row.AcceptNpcSceneID)
+        if (acceptScene > 0 && acceptScene !== character.sceneId) {
+          throw bad('wrong_place', 'Talk to the quest giver to take this quest.')
+        }
+        await acceptQuest(tx, character.id, taskId)
+        return { quests: await loadQuests(tx, character.id) }
+      })
+    },
+  )
 
-  app.post('/npcs/:npcId/talk', async (request) => {
+  app.post('/npcs/:npcId/talk', { config: { rateLimit: RATE_LIMITS.talk } }, async (request) => {
     const { npcId } = npcParams.parse(request.params)
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
@@ -185,7 +190,7 @@ export async function actionRoutes(
     })
   })
 
-  app.post('/items/:id/use', async (request) => {
+  app.post('/items/:id/use', { config: { rateLimit: RATE_LIMITS.item } }, async (request) => {
     const { id } = itemParams.parse(request.params)
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
@@ -233,7 +238,7 @@ export async function actionRoutes(
     })
   })
 
-  app.post('/items/:id/equip', async (request) => {
+  app.post('/items/:id/equip', { config: { rateLimit: RATE_LIMITS.item } }, async (request) => {
     const { id } = itemParams.parse(request.params)
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
@@ -276,7 +281,7 @@ export async function actionRoutes(
     })
   })
 
-  app.post('/travel', async (request) => {
+  app.post('/travel', { config: { rateLimit: RATE_LIMITS.travel } }, async (request) => {
     const { sceneId } = travelBody.parse(request.body)
     const userId = requireUser(request).id
     const result = await db.transaction(async (tx) => {

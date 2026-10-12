@@ -8,6 +8,7 @@ import { exploreSpotIds, npc, sceneLinks, sceneSpawns } from '../../game/data.js
 import { completeReadyRookieQuests, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { requireUser, toCharacter } from './characters.js'
+import { RATE_LIMITS } from './rate-limits.js'
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
 const MAX_LISTED_MONSTERS = 6
@@ -35,7 +36,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return row
   }
 
-  app.get('/scene', async (request) => {
+  app.get('/scene', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(requireUser(request).id)
     const sceneId = character.sceneId
     return {
@@ -53,25 +54,21 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     }
   })
 
-  app.post(
-    '/fight',
-    { config: { rateLimit: { max: 60, timeWindow: '1 minute' } } },
-    async (request) => {
-      const userId = requireUser(request).id
-      const { monsterId } = fightSchema.parse(request.body)
+  app.post('/fight', { config: { rateLimit: RATE_LIMITS.fight } }, async (request) => {
+    const userId = requireUser(request).id
+    const { monsterId } = fightSchema.parse(request.body)
 
-      return db.transaction(async (tx) => {
-        const character = await characterOf(userId, tx)
-        if (!sceneMonsters(character.sceneId, character.level).some((m) => m.id === monsterId)) {
-          throw new HttpError(400, 'not_here', 'That monster is not in this area.')
-        }
-        if (character.hp <= 0) throw new HttpError(400, 'no_hp', 'Heal before you fight again.')
+    return db.transaction(async (tx) => {
+      const character = await characterOf(userId, tx)
+      if (!sceneMonsters(character.sceneId, character.level).some((m) => m.id === monsterId)) {
+        throw new HttpError(400, 'not_here', 'That monster is not in this area.')
+      }
+      if (character.hp <= 0) throw new HttpError(400, 'no_hp', 'Heal before you fight again.')
 
-        const result = await fightMonster(tx, character, monsterId)
-        const completed = await completeReadyRookieQuests(tx, character.id)
-        const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
-        return { ...result, completed, character: toCharacter(updated!) }
-      })
-    },
-  )
+      const result = await fightMonster(tx, character, monsterId)
+      const completed = await completeReadyRookieQuests(tx, character.id)
+      const [updated] = await tx.select().from(characters).where(eq(characters.id, character.id))
+      return { ...result, completed, character: toCharacter(updated!) }
+    })
+  })
 }
