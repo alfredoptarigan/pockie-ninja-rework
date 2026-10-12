@@ -17,6 +17,7 @@ import type { Db } from '../../db/client.js'
 import { singleGate } from '../../db/schema.js'
 import { drawPouch } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
+import { vipExp } from '../../game/vip.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
@@ -90,8 +91,9 @@ const withRun = (row: Row, run: LasNochesRun): Row => ({
   livesBought: run.livesBought,
 })
 
-/** Ends the run: the pot is paid (AddExpNoMul) and the run counts for today. */
+/** Ends the run: the pot is paid (AddExpNoMul, plus VIP) and the run counts for today. */
 function endRun(row: Row, character: CharacterRow, state: Partial<CharacterRow>, pot: number) {
+  const paid = vipExp(pot, character)
   const ended: Row = {
     ...row,
     currentFloor: null,
@@ -101,7 +103,7 @@ function endRun(row: Row, character: CharacterRow, state: Partial<CharacterRow>,
     runsDay: utcDay(),
     runsToday: runsToday(row) + 1,
   }
-  return { ended, ...withExp(character, state, pot) }
+  return { ended, paid, ...withExp(character, state, paid) }
 }
 
 function requireRun(row: Row) {
@@ -148,6 +150,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
       let state: Partial<CharacterRow>
       let next: Row
       let pot: number | null = null
+      let paid: number | null = null
       let levelsGained = 0
       if (won) {
         // Pouches refill after a win.
@@ -168,6 +171,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         const ending = endRun(next, character, state, pot)
         next = ending.ended
         state = ending.update
+        paid = ending.paid
         levelsGained = ending.levelsGained
       }
       await saveCharacter(tx, character.id, state)
@@ -176,8 +180,8 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         replay,
         won,
         npcIds: [npcId],
-        rewards: { exp: pot ?? 0, stone: 0, items: [], levelsGained },
-        potPaid: pot,
+        rewards: { exp: paid ?? 0, stone: 0, items: [], levelsGained },
+        potPaid: paid,
         lasNoches: view(saved),
         character: await characterView(tx, character.id),
       }
@@ -202,11 +206,11 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
     withCharacter(db, request, async (tx, character) => {
       const row = await loadRow(tx, character.id)
       const run = requireRun(row)
-      const { ended, update, levelsGained } = endRun(row, character, {}, run.pot)
+      const { ended, paid, update, levelsGained } = endRun(row, character, {}, run.pot)
       await saveCharacter(tx, character.id, update)
       const saved = await saveRow(tx, ended)
       return {
-        potPaid: run.pot,
+        potPaid: paid,
         levelsGained,
         lasNoches: view(saved),
         character: await characterView(tx, character.id),

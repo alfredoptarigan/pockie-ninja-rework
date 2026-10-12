@@ -118,13 +118,17 @@ export interface GrantedItem {
   identifyCount?: number
 }
 
-/** rollDrops with each drop's `IdentifyPropCount` (DropSystem.java:144-157). */
-export function rollLibDrops(libId: number, random: Random): GrantedItem[] {
+/**
+ * rollDrops with each drop's `IdentifyPropCount` (DropSystem.java:144-157); `chanceMul` is the
+ * VIP drop factor (vipDropMul).
+ */
+export function rollLibDrops(libId: number, random: Random, chanceMul = 1): GrantedItem[] {
   const entries = dropItems(libId)
   return rollDrops(
     dropLib(libId) as unknown as DropLib,
     entries as unknown as DropEntry[],
     random,
+    chanceMul,
   ).map((drop) => ({
     ...drop,
     identifyCount: Number(

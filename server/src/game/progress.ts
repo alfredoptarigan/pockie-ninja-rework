@@ -10,6 +10,7 @@ import { HttpError } from '../http.js'
 import { avatarStats, dropLib, item, levels, subTasks, task } from './data.js'
 import { newGearState, rollLibDrops, type GrantedItem } from './gear.js'
 import { countItems, questRewards, type QuestProgress } from './quests.js'
+import { vipDropMul, vipExp } from './vip.js'
 
 export type Tx = Parameters<Parameters<Db['transaction']>[0]>[0]
 type CharacterRow = typeof characters.$inferSelect
@@ -171,14 +172,17 @@ export async function completeQuest(
     }
   }
 
-  const rewards = questRewards(taskId)
+  const listed = questRewards(taskId)
+  const rewards = { ...listed, exp: vipExp(listed.exp, character) }
   const dropId = Number(row.RewardDropID)
   const granted: GrantedItem[] =
     dropId > 0 && dropLib(dropId)
-      ? rollLibDrops(dropId, createRandom(randomInt(2 ** 31))).map((drop) => ({
-          ...drop,
-          bound: true,
-        }))
+      ? rollLibDrops(dropId, createRandom(randomInt(2 ** 31)), vipDropMul(character)).map(
+          (drop) => ({
+            ...drop,
+            bound: true,
+          }),
+        )
       : rewards.items.flatMap(({ itemId, count }) =>
           Array.from({ length: count }, () => ({ itemId, bound: true })),
         )

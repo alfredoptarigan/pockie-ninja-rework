@@ -63,12 +63,16 @@ export function recordKill(quests: QuestProgress[], monsterId: string, sceneId: 
   )
 }
 
-/** Quest items (TaskMonsterDrop.ini) only drop while a matching collect step is unfinished. */
+/**
+ * Quest items (TaskMonsterDrop.ini) only drop while a matching collect step is unfinished.
+ * `chanceMul` is the VIP drop factor (vipDropMul).
+ */
 export function questItemDrops(
   quests: QuestProgress[],
   monsterId: string,
   sceneId: number,
   random: Random,
+  chanceMul = 1,
 ) {
   const items: string[] = []
   for (const quest of quests) {
@@ -84,7 +88,7 @@ export function questItemDrops(
         wanted &&
         drop.MonsterConfig === monsterId &&
         Number(drop.SceneID) === sceneId &&
-        random.int(100) < Number(drop.DropProbability)
+        random.int(100) < Number(drop.DropProbability) * chanceMul
       ) {
         items.push(String(drop.TaskItemConfig))
       }
