@@ -2,6 +2,7 @@
 // the first fight in Smelting Mountains, and visits every window on the way. Screenshots for the
 // visual check land in test-results/visual/ (gitignored).
 import { expect, test, type Locator, type Page } from '@playwright/test'
+import { createNinja, dialog, leaveVillage, sceneAction } from './helpers'
 
 test.use({ viewport: { width: 1440, height: 900 } })
 // Character creation, five quests, two scenes and a battle replay.
@@ -34,7 +35,6 @@ const QUEST = {
 const shot = (page: Page, name: string) =>
   page.screenshot({ path: `test-results/visual/${name}.png` })
 
-const dialog = (page: Page, name: string) => page.getByRole('dialog', { name, exact: true })
 
 const questNavigation = (page: Page) => page.getByRole('region', { name: 'Quest Navigation' })
 
@@ -86,48 +86,6 @@ async function acceptFrom(page: Page, npc: string, quest: string) {
   await expect(talk).toBeHidden()
 }
 
-/** Buttons of the scene's keyboard action list are hidden until focused. */
-async function sceneAction(page: Page, name: string) {
-  const button = page.getByRole('region', { name: 'Scene actions' }).getByRole('button', { name })
-  await button.focus()
-  return button
-}
-
-/** Creates a fresh Fire Village ninja for an independent journey. */
-async function createNinja(page: Page, role: string) {
-  const id = `${role}_${Date.now().toString(36).slice(-5)}`
-  await page.goto('/register')
-  await page.getByLabel('Username').fill(id)
-  await page.getByLabel('Email').fill(`${id}@example.test`)
-  await page.getByLabel('Password').fill(account.password)
-  await page.getByRole('button', { name: 'Create account' }).click()
-  await expect(page).toHaveURL('/play/create')
-  await page.getByLabel('Character Name').fill(id)
-  for (const choice of ['Ggio Vega', 'Fire Village']) {
-    await page
-      .getByRole('radio', { name: new RegExp(`^${choice}`) })
-      .locator('..')
-      .click()
-  }
-  await page.getByRole('button', { name: 'Enter Game' }).click()
-  await expect(
-    page.getByRole('main', { name: 'Game' }).getByRole('heading', { name: id }),
-  ).toBeVisible()
-  return id
-}
-
-// Fields stay blocked on the World Map until visited (decision 7); Leave walks out of the
-// village to its ToScene field.
-async function travelToField(page: Page) {
-  await page
-    .getByRole('region', { name: 'Location' })
-    .getByRole('button', { name: 'Leave', exact: true })
-    .click()
-  await expect(
-    page.getByRole('region', { name: 'Location' }).getByRole('heading', { name: FIELD }),
-  ).toBeVisible({ timeout: 15_000 })
-}
-
 test('another account receives world chat and sees the sender only in the shared scene', async ({
   page,
   browser,
@@ -157,7 +115,7 @@ test('another account receives world chat and sees the sender only in the shared
     const players = observer.getByRole('region', { name: /^Players here/ })
     await expect(players).toContainText(sender)
     await expect(players).toContainText(receiver)
-    await travelToField(page)
+    await leaveVillage(page)
     await expect(players).not.toContainText(sender)
     await expect(players).toContainText(receiver)
   } finally {
@@ -169,7 +127,7 @@ test('a fresh ninja searches an exploration spot and sees the result cards', asy
   test.setTimeout(60_000)
   // Arrange: a new character has the original seven daily searches and no cooldown.
   await createNinja(page, 'Search')
-  await travelToField(page)
+  await leaveVillage(page)
   await page
     .getByRole('region', { name: 'Exploration' })
     .getByRole('button', { name: 'Explore' })
@@ -210,7 +168,7 @@ test('a ninja defeated in a field fight returns to the village with one HP', asy
   test.setTimeout(60_000)
   // Arrange: an unarmed level-one ninja deals 0 damage (original fists rule), so it cannot win.
   await createNinja(page, 'Revive')
-  await travelToField(page)
+  await leaveVillage(page)
 
   // Act: lose a real server-simulated fight and finish its replay.
   await (await sceneAction(page, `Fight ${MONSTER}`)).click()
@@ -235,7 +193,7 @@ test('a ninja defeated in a field fight returns to the village with one HP', asy
     'aria-valuenow',
     '1',
   )
-  await travelToField(page)
+  await leaveVillage(page)
 })
 
 test('a new ninja plays the Fire Village tutorial to the first fight and levels up', async ({
@@ -337,7 +295,7 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await shot(page, 'world-map')
   await map.getByRole('button', { name: 'Close' }).click()
   await expect(map).toBeHidden()
-  await travelToField(page)
+  await leaveVillage(page)
   // Phaser removes the old scene's canvas a frame after the new one mounts.
   const pictureCanvas = page.getByTestId('scene-picture').locator('canvas')
   await expect(pictureCanvas).toHaveCount(1)
