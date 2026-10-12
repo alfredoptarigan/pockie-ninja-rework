@@ -1,6 +1,7 @@
 // Exports the original 2011 art into client/public/assets with JSON manifests in
 // client/src/generated: the landing sprites (sprites.json) and the game assets (outfit, monster and
-// NPC motion sheets in game-motions.json; village and field scenes in game-scenes.json).
+// NPC motion sheets in game-motions.json; village, city, field, instance and toll gate scenes in
+// game-scenes.json).
 // M2 item icons, weapon overlays and the text-free world map use separate new manifests
 // (game-items.json, game-weapons.json, game-world-map.json); run `pnpm assets:export extra`.
 // The in-game UI skin pieces go to client/public/assets/game/ui with game-ui.json.
@@ -126,7 +127,7 @@ async function exportLanding() {
 
 async function exportGame() {
   const { outfits, missing, unnamed, skillMotions: outfitSkills } = await exportOutfits()
-  const { monsters, mobs, skillMotions: mobSkills } = await exportMonsters()
+  const { monsters, mobs, people, skillMotions: mobSkills } = await exportMonsters()
   const { npcs, art } = await exportNpcs()
   const scenes = await exportScenes()
 
@@ -136,6 +137,7 @@ async function exportGame() {
     outfits,
     monsters,
     mobs,
+    people,
     npcs: { placed: npcs, art },
     gaps: {
       outfitsWithoutArt: missing,
@@ -146,7 +148,7 @@ async function exportGame() {
       unnamedOutfits: unnamed,
     },
   })
-  await writeJson(join(paths.generated, 'game-scenes.json'), { scenes })
+  await writeJson(join(paths.generated, 'game-scenes.json'), scenes)
   // Skill id to motion id per character; large, so the client fetches it when a battle starts.
   writeFileSync(
     join(assetsDir, 'game/skill-motions.json'),
@@ -171,10 +173,9 @@ async function exportExtra() {
   await writeJson(join(paths.generated, 'game-world-map.json'), await exportWorldMap())
   await writeJson(join(paths.generated, 'game-weapons.json'), await exportWeapons())
 }
-if (process.argv[2] === 'extra') await exportExtra()
-else if (process.argv[2] !== 'ui') {
-  await exportLanding()
-  await exportGame()
-  await exportExtra()
-}
-if (process.argv[2] !== 'extra') await exportUiSkin()
+// `pnpm assets:export [game|extra|ui]` runs one part; no argument runs everything.
+const part = process.argv[2]
+if (!part) await exportLanding()
+if (!part || part === 'game') await exportGame()
+if (!part || part === 'extra') await exportExtra()
+if (!part || part === 'ui') await exportUiSkin()

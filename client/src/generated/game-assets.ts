@@ -56,6 +56,12 @@ export interface GameMotions {
   /** Monster npc id (npcs.json) to its art key in `mobs`. */
   monsters: Record<string, string>
   mobs: Record<string, MonsterArt>
+  /**
+   * Fighters drawn like players (toll gate, Las Noches and pub fight NPCs; Binary_PeopleNpc): an
+   * outfit from `outfits` and a weapon key for the weapon layers (layers exist only where the
+   * outfit's layers.json has that key).
+   */
+  people: Record<string, { sex: number; clothing: number; weapon: string }>
   npcs: {
     /** NPC id to its art key (npcs.json ResourceID) in `art`. */
     placed: Record<string, string>
@@ -86,8 +92,33 @@ export interface SceneArt {
   fightBackground?: string
 }
 
+export interface Rect {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
+/** A toll gate (TollClone.as, scene ids 1000xx). */
+export interface TollGateArt {
+  /** 1920x1080 backdrop, scaled to cover the stage. */
+  background: string
+  /** The gate map without labels or panels, drawn centred on the stage. */
+  map: { file: string; width: number; height: number }
+  /** Fight point button art (up state); place it at points.Btn_Fight<n>. */
+  fightPoint: { file: string; width: number; height: number }
+  /**
+   * Named clips in map pixels: Btn_Fight<n> (fight points), Beachhead_<n> (sub gate panels),
+   * Btn_Close, Btn_RankView, percentmapget / mapgetper (progress bar).
+   */
+  points: Record<string, Rect>
+  fightBackground: string
+}
+
 export const gameMotions = motionsJson as GameMotions
+/** Villages, Angel/Demon City, fields 21xx-28xx, 3101, 3102 and the Las Noches floors 61-64. */
 export const gameScenes = scenesJson.scenes as Record<string, SceneArt>
+export const gameTollGates = scenesJson.tollGates as Record<string, TollGateArt>
 
 /** Skill id to motion id per outfit / monster art; fetch it when a battle needs skill motions. */
 export const SKILL_MOTIONS_URL = '/assets/game/skill-motions.json'

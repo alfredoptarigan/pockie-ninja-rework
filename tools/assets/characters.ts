@@ -8,11 +8,12 @@ import { exportMotions, type Motion, type MotionFile } from './motions.ts'
 import { assetUrl, paths } from './paths.ts'
 import {
   backupPath,
-  fieldMonsters,
   iconSource,
+  monsterNpcs,
   motionIdOf,
   motionSourceList,
   outfits,
+  peopleNpcs,
   sceneNpcs,
 } from './sources.ts'
 
@@ -85,6 +86,8 @@ async function writePortrait(key: string, relative: string) {
   return assetUrl(relative)
 }
 
+const exportedFolders = new Map<string, ReturnType<typeof exportMotions>>()
+
 /** Motion sheets plus the action and skill tables (only entries whose motion was exported). */
 async function exportCharacter(
   files: MotionFile[],
@@ -92,7 +95,10 @@ async function exportCharacter(
   keyPrefix: string,
   keySuffix: string,
 ) {
-  const { motions, skipped } = await exportMotions(files, outDir)
+  // Some art keys share a motion folder (N3102120 uses N32056's): export each folder once.
+  let exported = exportedFolders.get(outDir)
+  if (!exported) exportedFolders.set(outDir, (exported = exportMotions(files, outDir)))
+  const { motions, skipped } = await exported
   const { actions, skills } = actionTables(keyPrefix, keySuffix)
   const resolvable = (table: Record<string, string>) =>
     Object.fromEntries(Object.entries(table).filter(([, motion]) => motions[motion]))
@@ -134,9 +140,9 @@ export async function exportOutfits() {
   return { outfits: entries, missing, unnamed, skillMotions }
 }
 
+/** Monster art (field monsters, toll gate and Las Noches NPCs); people NPCs reuse outfit art. */
 export async function exportMonsters() {
-  const monsters = fieldMonsters()
-  const resources = [...new Set(Object.values(monsters))]
+  const { keys: resources, monsters } = monsterNpcs()
   const used = usedPaths()
   const results = await mapLimit(resources, PARALLEL_EXPORTS, async (resource) => {
     const stand = motionSourceList()[`${resource}_Motion_999`]
@@ -149,15 +155,15 @@ export async function exportMonsters() {
       '',
     )
     const portrait = await writePortrait(`UserFace_${resource}`, `game/portraits/${resource}.webp`)
-    const listPortrait = await writePortrait(
-      `MapUserFace_${resource}`,
-      `game/portraits/${resource}-list.webp`,
-    )
+    // N3102120 and N31032 (ticket bosses) have no list icon; the battle portrait stands in.
+    const listPortrait =
+      (await writePortrait(`MapUserFace_${resource}`, `game/portraits/${resource}-list.webp`)) ??
+      portrait
     console.log(`Monster art ${resource}: ${Object.keys(set.motions).length} motions`)
     return [resource, { portrait, listPortrait, ...set }] as const
   })
   const { entries, skillMotions } = splitSkills(results)
-  return { monsters, mobs: entries, skillMotions }
+  return { monsters, mobs: entries, people: peopleNpcs(), skillMotions }
 }
 
 /** NPC art: the standing animation (field NPCs) and the dialog picture (all NPCs). */
