@@ -21,22 +21,52 @@ async function registered() {
 }
 
 describe('per-account login limit', () => {
+  const attempt = (client: Client, login: string, password: string, ip: string) =>
+    app.inject({
+      method: 'POST',
+      url: '/api/auth/login',
+      remoteAddress: ip,
+      payload: { login, password },
+      headers: { cookie: client.cookieHeader, 'x-csrf-token': client.csrfToken },
+    })
+
   it('locks an account after 10 failed logins even when they come from different IPs', async () => {
     const client = await registered()
-    const attempt = (password: string, ip: string) =>
-      app.inject({
-        method: 'POST',
-        url: '/api/auth/login',
-        remoteAddress: ip,
-        payload: { login: 'NARUTO', password },
-        headers: { cookie: client.cookieHeader, 'x-csrf-token': client.csrfToken },
-      })
-
     for (let i = 0; i < 10; i++) {
-      expect((await attempt('wrong-password', `10.0.0.${i}`)).statusCode).toBe(401)
+      const failed = await attempt(client, 'NARUTO', 'wrong-password', `10.0.0.${i}`)
+      expect(failed.statusCode).toBe(401)
     }
-    const locked = await attempt(naruto.password, '10.0.1.1')
+    const locked = await attempt(client, 'NARUTO', naruto.password, '10.0.1.1')
     expect(locked.statusCode).toBe(429)
+  })
+
+  it('shares one budget between the username and the email of an account', async () => {
+    const client = await registered()
+    for (let i = 0; i < 10; i++) {
+      const login = i % 2 ? naruto.username : naruto.email.toUpperCase()
+      expect((await attempt(client, login, 'wrong-password', `10.0.0.${i}`)).statusCode).toBe(401)
+    }
+    expect((await attempt(client, naruto.email, naruto.password, '10.0.1.1')).statusCode).toBe(429)
+  })
+
+  it('counts simultaneous failures before any password is checked', async () => {
+    const client = await registered()
+    const results = await Promise.all(
+      Array.from({ length: 15 }, (_, i) =>
+        attempt(client, naruto.username, 'wrong-password', `10.0.2.${i}`),
+      ),
+    )
+    const statuses = results.map((r) => r.statusCode)
+    expect(statuses.filter((s) => s === 401)).toHaveLength(10)
+    expect(statuses.filter((s) => s === 429)).toHaveLength(5)
+  })
+
+  it('locks unknown logins the same way, so a lockout does not reveal an account', async () => {
+    const client = await registered()
+    for (let i = 0; i < 10; i++) {
+      expect((await attempt(client, 'Ghost', 'wrong-password', `10.0.3.${i}`)).statusCode).toBe(401)
+    }
+    expect((await attempt(client, 'GHOST', 'wrong-password', '10.0.4.1')).statusCode).toBe(429)
   })
 
   it('does not trust X-Forwarded-For unless TRUST_PROXY is set', async () => {
