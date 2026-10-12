@@ -56,3 +56,40 @@ export const FIRST_TUTORIAL_TASK: Record<number, number> = {
 export function subTasks(taskId: number) {
   return load<Record<string, Row[]>>('sub-tasks')[String(taskId)] ?? []
 }
+
+const list = (value: Row[string] | undefined) =>
+  value === undefined ? [] : Array.isArray(value) ? value.map(String) : [String(value)]
+
+export const npc = (id: string) => load<Record<string, Row>>('npcs')[id]
+export const item = (id: string) => load<Record<string, Row>>('items')[id]
+export const levels = () =>
+  load<{ levelexp: Record<string, number>; role: { maxlevel: number } }>('levels')
+
+/** RefresNpc.ini spawn lines: npcId,picX,picY,scale. */
+export function sceneSpawns(sceneId: number) {
+  const scene = load<Record<string, Row>>('scene-npcs')[String(sceneId)]
+  return list(scene?.r).map((line) => {
+    const [id = '', x = 0, y = 0, scale = 100] = line.split(',')
+    return { id, x: Number(x), y: Number(y), scale: Number(scale) }
+  })
+}
+
+/** scenequeue.ini: linked scenes, empty slots (-1) dropped. */
+export function sceneLinks(sceneId: number) {
+  const scene = load<Record<string, Row>>('scene-links')[String(sceneId)]
+  return list(scene?.r)
+    .flatMap((line) => line.split(','))
+    .map(Number)
+    .filter((id) => id !== -1)
+}
+
+export function exploreSpotIds(sceneId: number) {
+  return Object.entries(load<Record<string, Row>>('explore-spots'))
+    .filter(([, spot]) => Number(spot.SceneID) === sceneId)
+    .map(([id]) => id)
+}
+
+export const dropLib = (id: number) => load<Record<string, Row>>('drop-libs')[String(id)]
+export const dropItems = (id: number) => load<Record<string, Row[]>>('drop-items')[String(id)] ?? []
+export const taskMonsterDrops = (taskId: number) =>
+  load<Record<string, Row[]>>('task-monster-drops')[String(taskId)] ?? []

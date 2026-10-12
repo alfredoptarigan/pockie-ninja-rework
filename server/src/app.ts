@@ -9,6 +9,7 @@ import { getDummyHash } from './modules/auth/password.js'
 import { authRoutes, sessionPlugin } from './modules/auth/routes.js'
 import { contentRoutes } from './modules/content/routes.js'
 import { characterRoutes } from './modules/game/characters.js'
+import { worldRoutes } from './modules/game/world.js'
 import { statusRoutes } from './modules/status/routes.js'
 
 interface AppOptions {
@@ -52,6 +53,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(contentRoutes, { db, prefix: '/api' })
   app.register(statusRoutes, { db, prefix: '/api' })
   app.register(characterRoutes, { db, prefix: '/api/game' })
+  app.register(worldRoutes, { db, prefix: '/api/game' })
 
   return app
 }
