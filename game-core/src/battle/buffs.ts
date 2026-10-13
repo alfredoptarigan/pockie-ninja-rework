@@ -4,6 +4,7 @@
 import fightBuffs from '../../../server/data/game/fight-buffs.json'
 import { INSTANCE_BUFFS } from './scripts/instance-skills.js'
 import { FIELD_2600_BUFFS } from './scripts/field-2600-buffs.js'
+import { NINJUTSU_BUFFS } from './scripts/ninjutsu-buffs.js'
 import type { ActiveBuff, FightContext, Fighter, FightEvent } from './types.js'
 
 type BuffScript = (
@@ -171,6 +172,7 @@ const BUFF_SCRIPTS: Record<string, BuffScripts> = {
   'buff/buff_gedangjiasu_11851.js': {},
   ...INSTANCE_BUFFS,
   ...FIELD_2600_BUFFS,
+  ...NINJUTSU_BUFFS,
 }
 
 const toBuffDef = (row: BuffRow): BuffDef => ({

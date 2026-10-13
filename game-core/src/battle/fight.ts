@@ -128,7 +128,14 @@ export function simulateFight({
     BUFFS[buff.id]?.onRemove?.(ctx, target, buff, fv, timer)
   }
 
-  function addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData = 0) {
+  function addBuff(
+    target: Fighter,
+    buffId: number,
+    timer: number,
+    fv: FightEvent,
+    saveData = 0,
+    saveData1 = 0,
+  ) {
     const def = BUFFS[buffId]
     if (!def || (def.validity !== 1 && def.validity !== 2)) return
     if (def.replace !== 0 && target.buffs) {
@@ -141,6 +148,7 @@ export function simulateFight({
     const buff: ActiveBuff = {
       id: buffId,
       saveData: Math.trunc(saveData),
+      saveData1: Math.trunc(saveData1),
       lifeTime: def.lifeTime,
       startTime: timer,
     }
@@ -340,9 +348,10 @@ export function simulateFight({
     const skillId = skill.secondid ?? skill.id
     if (skill.javascript) {
       const script = SKILL_SCRIPTS[skill.javascript]
-      const res = script ? script(ctx, self, target, fv, timer) : SKILL_LOSE
+      const res = script ? script(ctx, self, target, fv, timer, skill) : SKILL_LOSE
       if (res !== SKILL_SUCCESS) return res
-      if (!changed.has(fv) || !fv.skillId) {
+      // A kicked-back bomb (event 6) keeps the id its script wrote.
+      if ((!changed.has(fv) && fv.event !== 6) || (changed.has(fv) && !fv.skillId)) {
         fv.skillId = skillId
         spendMp(self, fv, decMp)
       }

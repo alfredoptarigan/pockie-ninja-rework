@@ -14,6 +14,8 @@ export interface SkillInput {
   effect?: number
   decmp?: number
   canbecounter?: number
+  /** Skill level (GetLevel); the ninjutsu scripts pick their numbers by it. */
+  level?: number
   mul?: number
   add?: number
   selfmul?: number
@@ -62,6 +64,8 @@ export interface FighterInput {
    * NPCs: their CounterBombMul when it is not -1. Absent = NPC rule `trunc(level / 3) - 5`.
    */
   avatarLevel?: number
+  /** Clothing != 0 (players) or CounterBombMul > 0 (NPCs): can kick a bomb back (skill 1828). */
+  kicksBombs?: boolean
   /** Attack and trigger skills. Absent = the generic skills every fighter has (7777, 8888). */
   skills?: SkillInput[]
 }
@@ -76,8 +80,8 @@ export interface BuffChange {
 
 /**
  * One replay entry (FightValue). Event ids: 1 begin action, 2 end action, 3 cannot move (stun,
- * freeze, ...), 5 priority strike, 7 counter, 9 buff tick or buff change, 14 skill, 20 death,
- * 21 next fighter.
+ * freeze, ...), 5 priority strike, 6 bomb kicked back (actor: the kicker), 7 counter, 9 buff tick
+ * or buff change, 14 skill, 20 death, 21 next fighter.
  */
 export interface FightEvent {
   actor: number
@@ -97,6 +101,10 @@ export interface FightEvent {
   selfDamage?: number
   /** MP the actor spends (DecMP). */
   decMp?: number
+  /** MP the target loses to the strike (TargetDecMP). */
+  targetDecMp?: number
+  /** The strike ignored defence (IsNeglectDef; the client shows it). */
+  neglectDef?: boolean
   /** Rebound the actor takes, after its own mitigation (BackDamage; included in selfDamage). */
   backDamage?: number
   /** HP / MP the actor gains from vampiric strikes or healing scripts (IncHP / IncMP). */
@@ -138,6 +146,8 @@ export const SKILL_LOSE = 3
 export interface ActiveBuff {
   id: number
   saveData: number
+  /** SaveData1 (0 when absent). */
+  saveData1?: number
   lifeTime: number
   startTime: number
 }
@@ -197,7 +207,14 @@ export interface FightContext {
   damage(victim: Fighter, amount: number): void
   /** FightSystem.Damage(obj, damage, fv, timer): raw HP loss that also clears cleartype-1 buffs. */
   damageWithValue(victim: Fighter, amount: number, fv: FightEvent, timer: number): void
-  addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData?: number): void
+  addBuff(
+    target: Fighter,
+    buffId: number,
+    timer: number,
+    fv: FightEvent,
+    saveData?: number,
+    saveData1?: number,
+  ): void
   removeBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent): void
   getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
   changeNextAtkTime(target: Fighter, amount: number): void
@@ -223,4 +240,6 @@ export type SkillScript = (
   target: Fighter,
   fv: FightEvent,
   timer: number,
+  /** The skill.ini row being used (always passed by the engine). */
+  skill?: SkillInput,
 ) => number
