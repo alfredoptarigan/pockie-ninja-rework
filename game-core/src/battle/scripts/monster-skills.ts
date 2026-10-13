@@ -26,7 +26,7 @@ const BURROW_COST_RATE = 0.19
 const BURROW_CHANCE_MUL = 8
 const BURROW_CHANCE_DIV = 18000
 
-function pay(self: Fighter, fv: FightEvent, cost: number) {
+export function pay(self: Fighter, fv: FightEvent, cost: number) {
   self.mp = Math.trunc(self.mp - cost)
   fv.decMp = Math.trunc(cost)
 }

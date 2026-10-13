@@ -156,6 +156,11 @@ export interface Fighter extends FighterInput {
   initAtkTime: number
   initHit: number
   hitMulAdd: number
+  /** InitMinAtk / InitMaxAtk and the MinAtkMul / MaxAtkMul percent of FightSystem.ChangeAtk. */
+  initMinAttack: number
+  initMaxAttack: number
+  minAtkMul: number
+  maxAtkMul: number
   next: number
   /** Parry percent set by buffs 11841 / 11824. */
   parryPercent: number
@@ -198,6 +203,8 @@ export interface FightContext {
   changeNextAtkTime(target: Fighter, amount: number): void
   changeHit(target: Fighter, add: number): void
   changeDodge(target: Fighter, add: number): void
+  /** ChangeAtk with MinAtkAdd / MaxAtkAdd kept (nothing ported sets them). */
+  changeAtk(target: Fighter, minAtkMul: number, maxAtkMul: number): void
   /** ChangeSkill(skill, id) + UserSkill: use another skill.ini row instead, recorded under its id. */
   changeSkill(
     self: Fighter,

@@ -1,5 +1,6 @@
 // Skill rows the engine needs on its own, and the ported scripts by their skill.ini `javascript`.
 import { AOYI_SCRIPTS } from './scripts/execute.js'
+import { INSTANCE_SKILLS } from './scripts/instance-skills.js'
 import { MONSTER_SKILLS } from './scripts/monster-skills.js'
 import { fightBegin, parry } from './scripts/parry.js'
 import type { SkillInput, SkillScript } from './types.js'
@@ -41,5 +42,6 @@ export const SKILL_SCRIPTS: Record<string, SkillScript> = {
   'skill/skill_gedang_7777.js': parry,
   'skill/skill_init_8888.js': fightBegin,
   ...MONSTER_SKILLS,
+  ...INSTANCE_SKILLS,
   ...AOYI_SCRIPTS,
 }
