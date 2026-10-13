@@ -3,6 +3,7 @@
 import { and, eq, isNotNull } from 'drizzle-orm'
 import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '../../db/schema.js'
 import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.js'
+import { talentFighterInput } from '../../game/talents.js'
 import { activeBuffs, buffBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, type PlayerFighter } from '../../game/combat.js'
 import type { Tx } from '../../game/progress.js'
@@ -40,15 +41,16 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     // A 7-day scroll skill leaving the fighter also invalidates the stored defence.
     ...(await scrollSkillExpiries(tx, character.id)),
   ]
+  const talents = await talentFighterInput(tx, character.id)
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
   const { name, gender, level, avatarId, clothing, nation } = character
   const gear = [...equipped].sort((x, y) => x.id.localeCompare(y.id))
   return {
     ...(expiries.length > 0 && { buffExpiresAt: new Date(Math.min(...expiries)).toISOString() }),
-    fighter: { ...live, hp: live.maxHp, mp: live.maxMp },
+    fighter: { ...live, hp: live.maxHp, mp: live.maxMp, talents },
     look: { clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
     // Nation adds its element passive; it also marks snapshots from before passives as stale.
-    source: JSON.stringify([name, gender, level, avatarId, clothing, nation, gear]),
+    source: JSON.stringify([name, gender, level, avatarId, clothing, nation, gear, talents]),
   }
 }
 

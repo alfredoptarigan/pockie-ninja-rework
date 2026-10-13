@@ -4,6 +4,7 @@ import { errorMessage, useBuyPouches, useCharacterStats, useBuffs } from './api'
 import { Dialog, GameButton, Notice } from './skin'
 import { plainText } from './text'
 import { expToNext, sceneNameKey, villageOf } from './world'
+import { useOpenWindow } from './windows'
 
 /** Points per displayed attribute point (RoleInitProperty.ini stores attributes x100). */
 const ATTRIBUTE_SCALE = 100
@@ -207,6 +208,7 @@ export function CharacterWindow({
   const buffs = useBuffs()
   const title = buffs.data?.titles.find((title) => title.active)
   const village = plainText(sceneNameKey(villageOf(character.nation)), 'Village')
+  const openWindow = useOpenWindow()
   return (
     <Dialog
       title="Stats"
@@ -253,6 +255,11 @@ export function CharacterWindow({
           ))}
       </section>
       <PouchRefill character={character} />
+      <section aria-label="Training" className="game-inset mt-[5px] flex justify-end p-1.5">
+        <GameButton small onClick={() => openWindow('talents')}>
+          Talents
+        </GameButton>
+      </section>
     </Dialog>
   )
 }

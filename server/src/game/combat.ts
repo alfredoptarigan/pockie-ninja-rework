@@ -33,6 +33,7 @@ import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.
 import { drawPouch } from './pouch.js'
 import { grantDrops, loadQuests, saveQuests, saveCharacterProgress, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
+import { talentFighterInput } from './talents.js'
 import { characterSkillInputs } from './skill-bar.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
@@ -94,12 +95,15 @@ export function monsterFighter(id: string): FighterInput {
 }
 
 export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<PlayerFighter> {
-  return playerFighterFrom(
-    character,
-    await equippedGear(tx, character.id),
-    await buffBonuses(tx, character.id),
-    await characterSkillInputs(tx, character.id),
-  )
+  return {
+    ...playerFighterFrom(
+      character,
+      await equippedGear(tx, character.id),
+      await buffBonuses(tx, character.id),
+      await characterSkillInputs(tx, character.id),
+    ),
+    talents: await talentFighterInput(tx, character.id),
+  }
 }
 
 /** Matches the *Skill property names of skilladd.ini (MaxHPMulSKill keeps its original typo). */

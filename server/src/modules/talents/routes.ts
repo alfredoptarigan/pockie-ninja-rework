@@ -2,15 +2,13 @@
 // Every action locks the character row first, then the talent rows (plan ground rules).
 import { createRandom } from '@pockie/game-core'
 import { randomInt } from 'node:crypto'
-import { and, eq, isNotNull } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import {
   canActivate,
   rollUpgrade,
   talentCap,
   upgradeCost,
-  TALENT_IDS,
-  type Talents,
 } from '../../../../game-core/src/reborn/talents.js'
 import {
   talentActiveBodySchema,
@@ -25,11 +23,11 @@ import { rebornTalents } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
+export { talentFighterInput } from '../../game/talents.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 
 type CharacterRow = typeof characters.$inferSelect
-type TalentRow = typeof characterTalents.$inferSelect
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 const DAY_MS = 86_400_000
 const SLOTS = [0, 1, 2] as const
@@ -169,26 +167,6 @@ async function setActive(tx: Tx, userId: string, talentId: number, active: boole
  * Active talents for `FighterInput.talents`, levels capped by the ninja's current level
  * (decision 6). Empty when none are active.
  */
-export async function talentFighterInput(tx: Tx | Db, characterId: string): Promise<Talents> {
-  const [character] = await tx
-    .select({ level: characters.level })
-    .from(characters)
-    .where(eq(characters.id, characterId))
-  const rows: TalentRow[] = await tx
-    .select()
-    .from(characterTalents)
-    .where(
-      and(eq(characterTalents.characterId, characterId), isNotNull(characterTalents.activeSlot)),
-    )
-  const cap = talentCap(character?.level ?? 0)
-  const talents: Talents = {}
-  for (const id of TALENT_IDS) {
-    const level = Math.min(rows.find((r) => r.talentId === id)?.level ?? 0, cap)
-    if (level > 0) talents[id] = level
-  }
-  return talents
-}
-
 export async function talentRoutes(app: FastifyInstance, { db }: { db: Db }) {
   app.get('/', { config: { rateLimit: RATE_LIMITS.read } }, async (request) =>
     view(db, await characterOf(db, requireUser(request).id)),

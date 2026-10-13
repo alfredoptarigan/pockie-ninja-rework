@@ -3,7 +3,7 @@ import { and, eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { arenaPlayers, characters, characterTalents } from '../../db/schema.js'
-import { talentFighterInput, talentRoutes } from './routes.js'
+import { talentFighterInput } from './routes.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -13,8 +13,6 @@ let characterId: string
 beforeEach(async () => {
   await truncateAll(db)
   app = buildTestApp(db)
-  // Remove once server/src/app.ts registers talentRoutes (coordinator wiring).
-  app.register(talentRoutes, { db, prefix: '/api/game/talents' })
   client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Player_one',
