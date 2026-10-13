@@ -70,6 +70,13 @@ export interface FighterInput {
    * NPCs: their CounterBombMul when it is not -1. Absent = NPC rule `trunc(level / 3) - 5`.
    */
   avatarLevel?: number
+  /**
+   * Reborn talents (decision 8): active ones only, levels capped by `talentCap`. Keys 1-8 as in
+   * `game-core/src/reborn/talents.ts`.
+   */
+  talents?: Partial<Record<1 | 2 | 3 | 4 | 5 | 6 | 7 | 8, number>>
+  /** HP percent below which the outfit ultimate can fire at a gap of 0 (default 15; 20 at 5 stars). */
+  secretThreshold?: number
   /** Clothing != 0 (players) or CounterBombMul > 0 (NPCs): can kick a bomb back (skill 1828). */
   kicksBombs?: boolean
   /** Attack and trigger skills. Absent = the generic skills every fighter has (7777, 8888). */

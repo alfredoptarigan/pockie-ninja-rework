@@ -68,9 +68,12 @@ export function avatarLevelFromAvatarId(avatarId: number) {
 export const avatarLevelOf = (fighter: Fighter) =>
   fighter.avatarLevel ?? Math.trunc(fighter.level / 3) - 5
 
-export function executeOdds(gap: number) {
+/** Below this HP percent the ultimate can fire at a gap of 0 (Reborn: secret technique). */
+export const SECRET_THRESHOLD = 15
+
+export function executeOdds(gap: number, threshold = SECRET_THRESHOLD) {
   return {
-    hpCondition: 15 + (gap > 0 ? Math.pow(gap, 1.26) : 0),
+    hpCondition: threshold + (gap > 0 ? Math.pow(gap, 1.26) : 0),
     probability: 10 + (gap > 0 ? Math.pow(gap, 1.2) : 0),
   }
 }
@@ -86,7 +89,10 @@ function ultimateDamage(ctx: FightContext, target: Fighter, fv: FightEvent) {
 }
 
 function executeChance(ctx: FightContext, self: Fighter, target: Fighter) {
-  const { hpCondition, probability } = executeOdds(avatarLevelOf(self) - avatarLevelOf(target))
+  const { hpCondition, probability } = executeOdds(
+    avatarLevelOf(self) - avatarLevelOf(target),
+    self.secretThreshold,
+  )
   return ctx.randInt(0, 99) < probability && target.hp < target.maxHp * hpCondition * 0.01
 }
 

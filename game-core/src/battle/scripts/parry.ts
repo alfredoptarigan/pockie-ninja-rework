@@ -1,4 +1,5 @@
 // skill_gedang_7777.js (on being damaged) and skill_init_8888.js (fight begin): prepare a parry.
+import { parryChance } from '../../reborn/talents.js'
 import { SKILL_LOSE, type FightContext, type Fighter, type FightEvent } from '../types.js'
 
 export const BUFF_PARRY = 11841
@@ -12,8 +13,8 @@ function rollParry(
   fv: FightEvent,
   timer: number,
 ) {
-  const finalParry = self.parry - target.pierce
-  const chance = finalParry > 0 ? finalParry / 16 : 0
+  // (parry - pierce) / 16, adjusted by the Pierce and Block talents.
+  const chance = parryChance(self, target)
   if (ctx.randInt(0, 99) < chance && !ctx.getBuff(self, BUFF_PARRY)) {
     ctx.addBuff(self, BUFF_PARRY, timer, fv, Math.trunc(target.initAtkTime * PARRY_DELAY))
   }

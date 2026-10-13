@@ -5,6 +5,7 @@
 // parry / defence / shields, rebound, absorption, vampiric, counters and the CanMove / CanAttack /
 // CanUseSkill flags. RandInt calls happen where the Java code makes them.
 import { createRandom } from '../random.js'
+import { critRoll, defenseRoll, hitPercent } from '../reborn/talents.js'
 import { BUFFS } from './buffs.js'
 import {
   absorbed,
@@ -12,7 +13,6 @@ import {
   applyDecDamage,
   applyDefense,
   applyParry,
-  hitChance,
   reboundOf,
   vampiricOf,
 } from './damage.js'
@@ -266,12 +266,13 @@ export function simulateFight({
       fv.damage = 0
       return
     }
-    if (randInt(1, 100) > hitChance(target.dodge, self.hit)) {
+    // Reborn talents (decision 8) adjust these rolls against the current opponent only.
+    if (randInt(1, 100) > hitPercent(self, target)) {
       fv.hit = false
       return
     }
-    const c = self.crit - target.tough
-    if (c > 0 && randInt(1, 100) <= Math.trunc(c / 16)) {
+    const { c, chance } = critRoll(self, target)
+    if ((c > 0 || chance > 0) && randInt(1, 100) <= chance) {
       damage = applyCrit(damage, self.critAttach, c)
       fv.crit = true
     }
@@ -282,7 +283,8 @@ export function simulateFight({
       damage = applyParry(damage, target.parryPercent)
       fv.parry = true
     }
-    damage = applyDefense(damage, target.defense, self.neglectDefense)
+    const { defense, neglectDefense } = defenseRoll(self, target)
+    damage = applyDefense(damage, defense, neglectDefense)
     damage = shieldDamage(target, damage, timer, fv, 'targetShield')
     back = applyDefense(applyDecDamage(back, self.decDamage), self.defense, target.neglectDefense)
     if (back) fv.backDamage = back
