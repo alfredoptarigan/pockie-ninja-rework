@@ -129,12 +129,14 @@ export function rollLibDrops(libId: number, random: Random, chanceMul = 1): Gran
     entries as unknown as DropEntry[],
     random,
     chanceMul,
-  ).map((drop) => ({
-    ...drop,
-    identifyCount: Number(
-      entries.find((entry) => String(entry.ItemConfig) === drop.itemId)?.IdentifyPropCount ?? 0,
-    ),
-  }))
+  )
+    .filter((drop) => !/^i15900[0-3]$/.test(drop.itemId))
+    .map((drop) => ({
+      ...drop,
+      identifyCount: Number(
+        entries.find((entry) => String(entry.ItemConfig) === drop.itemId)?.IdentifyPropCount ?? 0,
+      ),
+    }))
 }
 
 /**

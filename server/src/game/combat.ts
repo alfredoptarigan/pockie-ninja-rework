@@ -134,7 +134,9 @@ export function monsterDrops(monsterId: string): MonsterDrop[] {
       .filter((entry) => Number(entry.Probability) > 0)
       .map((entry) => String(entry.ItemConfig)),
   )
-  return [...new Set(itemIds)].map((itemId) => ({ itemId, nameKey: itemNameKey(itemId) }))
+  return [...new Set(itemIds)]
+    .filter((itemId) => !/^i15900[0-3]$/.test(itemId))
+    .map((itemId) => ({ itemId, nameKey: itemNameKey(itemId) }))
 }
 
 export interface FightRewards {
