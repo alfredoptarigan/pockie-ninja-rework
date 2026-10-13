@@ -41,9 +41,11 @@ import {
   recordCommand,
   recordTalk,
   stepCommand,
+  stepTarget,
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
+import { grantFreeSkillReset } from '../../game/skill-bar.js'
 import { useBuffItem } from '../../game/nonfight-buffs.js'
 import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
@@ -166,7 +168,7 @@ export async function actionRoutes(
           rewards: questRewards(q.taskId),
           steps: subTasks(q.taskId).map((step) => ({
             descriptionKey: `lg_${step.SubTaskDescription}`,
-            target: Number(step.TargetRequireNum),
+            target: stepTarget(step),
             ...stepCommand(step),
           })),
         })),
@@ -275,11 +277,16 @@ export async function actionRoutes(
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
 
+      const freeResetItem = await grantFreeSkillReset(tx, character, def)
       const buffItem = await useBuffItem(tx, character.id, row.itemId, def)
-      const restore = buffItem
-        ? undefined
-        : restoreItem(character, def, await playerFighter(tx, character))
-      if (buffItem) {
+      const restore =
+        buffItem || freeResetItem
+          ? undefined
+          : restoreItem(character, def, await playerFighter(tx, character))
+      if (freeResetItem) {
+        await consumeOne(tx, row)
+        await refreshBuffState(tx, character)
+      } else if (buffItem) {
         await consumeOne(tx, row)
         await refreshBuffState(tx, character)
       } else if (restore) {
@@ -296,9 +303,13 @@ export async function actionRoutes(
       }
       if (restore) await consumeOne(tx, row)
 
-      let quests = await loadQuests(tx, character.id)
       if (def.JavaScript === 'item/FoodItem.js')
-        quests = recordCommand(quests, 2127, character.sceneId)
+        await saveQuests(
+          tx,
+          character.id,
+          recordCommand(await loadQuests(tx, character.id), 2127, character.sceneId),
+        )
+      const quests = await loadQuests(tx, character.id)
       await saveQuests(
         tx,
         character.id,

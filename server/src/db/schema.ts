@@ -5,6 +5,7 @@ import {
   boolean,
   check,
   date,
+  foreignKey,
   index,
   integer,
   jsonb,
@@ -1222,6 +1223,34 @@ export const characterSkillState = pgTable(
       .primaryKey()
       .references(() => characters.id, { onDelete: 'cascade' }),
     learnedThrough: smallint('learned_through').notNull().default(1),
+    activeTree: smallint('active_tree').notNull().default(0),
+    freeResets: integer('free_resets').notNull().default(0),
   },
-  (t) => [check('character_skill_state_level', sql`${t.learnedThrough} between 1 and 90`)],
+  (t) => [
+    check('character_skill_state_level', sql`${t.learnedThrough} between 1 and 90`),
+    check('character_skill_state_tree', sql`${t.activeTree} between 0 and 2`),
+    check('character_skill_state_resets', sql`${t.freeResets} >= 0`),
+  ],
+)
+
+export const characterSkillSlots = pgTable(
+  'character_skill_slots',
+  {
+    characterId: uuid('character_id').notNull(),
+    tree: smallint('tree').notNull(),
+    slot: smallint('slot').notNull(),
+    skillId: integer('skill_id').notNull(),
+    level: smallint('use_level').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.tree, t.slot] }),
+    uniqueIndex('character_skill_slots_skill_key').on(t.characterId, t.tree, t.skillId),
+    foreignKey({
+      columns: [t.characterId, t.skillId],
+      foreignColumns: [characterSkills.characterId, characterSkills.skillId],
+    }).onDelete('cascade'),
+    check('character_skill_slots_tree', sql`${t.tree} between 0 and 2`),
+    check('character_skill_slots_slot', sql`${t.slot} between 0 and 5`),
+    check('character_skill_slots_level', sql`${t.level} between 1 and 13`),
+  ],
 )

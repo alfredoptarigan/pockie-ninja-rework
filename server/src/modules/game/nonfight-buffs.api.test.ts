@@ -12,6 +12,7 @@ import {
   characterBuffs,
   characterTitles,
   arenaPlayers,
+  characterQuests,
 } from '../../db/schema.js'
 
 const { db, close } = createTestDb()
@@ -118,6 +119,13 @@ describe('non-fight consumables', () => {
     expect(await buffBonuses(db, characterId)).toEqual({})
     expect((await view()).buffs).toEqual([])
     expect(buffExp(100, await row(), (await buffBonuses(db, characterId)).expMul)).toBe(100)
+  })
+  it('records the food command when using a consumable', async () => {
+    await db.insert(characterQuests).values({ characterId, taskId: 59402, state: 0, progress: [0] })
+    expect((await use((await give('i120002')).id)).statusCode).toBe(200)
+    const [quest] = await db.select().from(characterQuests).where(eq(characterQuests.taskId, 59402))
+    expect(quest!.state).toBe(1)
+    expect(quest!.progress).toEqual([1])
   })
   it('pays the food EXP bonus after an actual field fight', async () => {
     await db

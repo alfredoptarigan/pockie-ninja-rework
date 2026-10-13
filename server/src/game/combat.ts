@@ -30,6 +30,7 @@ import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.
 import { drawPouch } from './pouch.js'
 import { grantDrops, loadQuests, saveQuests, saveCharacterProgress, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
+import { characterSkillInputs } from './skill-bar.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
 
@@ -94,6 +95,7 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
     character,
     await equippedGear(tx, character.id),
     await buffBonuses(tx, character.id),
+    await characterSkillInputs(tx, character.id),
   )
 }
 
@@ -102,6 +104,7 @@ export function playerFighterFrom(
   character: Pick<CharacterRow, 'name' | 'avatarId' | 'gender' | 'level' | 'hp' | 'mp'>,
   equipped: readonly Gear[],
   effects: Partial<Bonuses> = {},
+  learned: SkillInput[] = [],
 ): PlayerFighter {
   const stats = deriveStats(
     avatarStats(character.avatarId),
@@ -114,7 +117,7 @@ export function playerFighterFrom(
     hp: Math.min(character.hp, stats.maxHp),
     mp: Math.min(character.mp, stats.maxMp),
     avatarLevel: avatarLevelFromAvatarId(character.avatarId),
-    ...skillsOf(avatarSkillIds(character.avatarId)),
+    skills: [...learned, ...skillRows(avatarSkillIds(character.avatarId) ?? [7777, 8888])],
   }
 }
 
@@ -156,10 +159,11 @@ export async function fightMonster(
   const seed = randomInt(2 ** 31)
   const equipped = await equippedGear(tx, character.id)
   const effects = await buffBonuses(tx, character.id)
+  const learned = await characterSkillInputs(tx, character.id)
   const bonuses = sumBonuses(equipmentBonuses(equipped, character), effects)
   const statsAt = (level: number) => deriveStats(avatarStats(character.avatarId), level, bonuses)
   const replay = simulateFight({
-    attackers: [playerFighterFrom(character, equipped, effects)],
+    attackers: [playerFighterFrom(character, equipped, effects, learned)],
     defenders: [monsterFighter(monsterId)],
     seed,
   })
