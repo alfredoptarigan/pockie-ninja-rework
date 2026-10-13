@@ -11,6 +11,8 @@ export const cardPaySchema = z.object({ currency }).strict()
 export const cardPeekSchema = z.object({ index: cardIndex, currency }).strict()
 export const cardTakeSchema = z.object({ index: cardIndex }).strict()
 export const gateExchangeSchema = z.object({ exchangeId: z.number().int().positive() }).strict()
+export const lasNochesAutoSchema = z.object({ runs: z.number().int().min(1).max(3) }).strict()
+
 export const lasNochesStartSchema = z.object({ mode: z.enum(['first', 'half']) }).strict()
 
 export type EnterGateInput = z.input<typeof enterGateSchema>
@@ -115,6 +117,16 @@ export interface CardTakeResult {
 }
 
 export interface LasNochesView {
+  character?: Character
+  broadcasts?: { key: string; message: string }[]
+  mode?: number
+  auto?: {
+    runsLeft: number
+    runsBought: number
+    reachFloor: number
+    nextTickAt: string | null
+  } | null
+
   bestFloor: number
   runsLeft: number
   maxRuns: number

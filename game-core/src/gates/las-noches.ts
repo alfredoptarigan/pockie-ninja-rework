@@ -1,6 +1,4 @@
-// Las Noches manual mode (J/CloneSceneModule/SingleGateSystem.java): one duel per floor, an EXP
-// pot paid when the run ends, one free life and bought lives. The VIP 96.7% start and auto mode
-// are not ported (decision 10, M3 scope).
+// Las Noches manual EXP pots, lives, and binary combat probes for timestamp-driven auto runs.
 import { refuse } from './errors.js'
 
 export interface SingleGateConfig {
@@ -90,3 +88,25 @@ export function buyLife(
   if (run.livesBought >= config.BuyReliveCnt) refuse('life_limit', 'You cannot buy more lives.')
   return { ...run, lives: run.lives + 1, livesBought: run.livesBought + 1 }
 }
+
+/** Probe full-health battles to find the reachable auto floor (SingleGateSystem.OnAutoFight). */
+export async function lasNochesAutoReach(
+  start: number,
+  max: number,
+  wins: (floor: number) => Promise<boolean>,
+) {
+  if (await wins(max)) return max
+  if (!(await wins(start))) return start - 1
+  let low = start,
+    high = max
+  while (low + 1 < high) {
+    const mid = Math.floor((low + high) / 2)
+    if (await wins(mid)) low = mid
+    else high = mid
+  }
+  return low
+}
+
+export const LAS_NOCHES_AUTO_COSTS = [28, 58, 91] as const
+export const LAS_NOCHES_AUTO_MAX_FLOOR = 160
+export const LAS_NOCHES_AUTO_TICK_MS = 30000
