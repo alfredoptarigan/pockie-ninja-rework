@@ -10,16 +10,21 @@ export interface QuestProgress {
   progress: number[]
 }
 
+const COMMAND = 8
 const KILL = 2
 const COMPLETED = 2
 const COLLECT = 1
 const ACTIVE = 0
 const READY = 1
 
+/** CommandRule zero-count rows are completion flags: one matching command completes them. */
+export const stepTarget = (step: ReturnType<typeof subTasks>[number]) =>
+  Number(step.SubTaskType) === COMMAND
+    ? Math.max(1, Number(step.TargetRequireNum))
+    : Number(step.TargetRequireNum)
+
 const isComplete = (taskId: number, progress: number[]) =>
-  subTasks(taskId).every(
-    (step) => (progress[Number(step.SetpSeq)] ?? 0) >= Number(step.TargetRequireNum),
-  )
+  subTasks(taskId).every((step) => (progress[Number(step.SetpSeq)] ?? 0) >= stepTarget(step))
 
 function advance(
   quests: QuestProgress[],
@@ -32,7 +37,7 @@ function advance(
     let touched = false
     for (const step of subTasks(quest.taskId)) {
       const index = Number(step.SetpSeq)
-      const target = Number(step.TargetRequireNum)
+      const target = stepTarget(step)
       if (matches(step) && (progress[index] ?? 0) < target) {
         progress[index] = (progress[index] ?? 0) + 1
         touched = true
@@ -106,7 +111,6 @@ export function recordCollect(quests: QuestProgress[], itemId: string) {
 }
 
 const TALK = 3
-const COMMAND = 8
 
 /** Talking to an NPC counts for active talk steps that target it in this scene. */
 export function recordTalk(quests: QuestProgress[], npcId: string, sceneId: number) {

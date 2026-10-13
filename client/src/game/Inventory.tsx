@@ -9,7 +9,10 @@ import {
   useInventory,
   useUnequipItem,
   useUseItem,
+  usePendingTreasure,
 } from './api'
+import { BuffsPanel } from './BuffsPanel'
+import { TreasurePanel } from './TreasurePanel'
 import { useOutfitStand } from './art'
 import { BagForgeButtons, GearIcon, ItemForgeActions, useGear } from './forge'
 import type { GearView } from '@pockie/shared'
@@ -63,6 +66,10 @@ const VERBS: Record<Kind, string> = { use: 'Used', equip: 'Equipped', unequip: '
 export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const inventory = useInventory()
   const use = useUseItem()
+  const pendingTreasure = usePendingTreasure()
+  const [treasureBox, setTreasureBox] = useState<InventoryItem | null>(null)
+  const [treasureVisible, setTreasureVisible] = useState(false)
+  const [buffsVisible, setBuffsVisible] = useState(false)
   const equip = useEquipItem()
   const unequip = useUnequipItem()
   const gear = useGear().data ?? {}
@@ -73,6 +80,11 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
 
   const run: Run = async (item, kind) => {
     setNotice(null)
+    if (kind === 'use' && /^i15900[0-3]$/.test(item.itemId)) {
+      setTreasureBox(item)
+      setTreasureVisible(true)
+      return
+    }
     try {
       const result = await actions[kind].mutateAsync(item.id)
       const name = plainText(item.nameKey, 'the item')
@@ -100,6 +112,33 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   return (
     <div className="relative -m-3 h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
       <BagPages />
+      <GameButton
+        className="absolute top-[90px] left-[100px] z-10"
+        disabled={treasureVisible}
+        onClick={() => setBuffsVisible(true)}
+      >
+        Buffs and titles
+      </GameButton>
+      {buffsVisible && <BuffsPanel onClose={() => setBuffsVisible(false)} />}
+      {pendingTreasure.data?.treasure && !treasureVisible && (
+        <GameButton
+          className="absolute top-[120px] left-[100px] z-10"
+          onClick={() => setTreasureVisible(true)}
+        >
+          Resume treasure
+        </GameButton>
+      )}
+      {treasureVisible && (
+        <TreasurePanel
+          box={treasureBox}
+          pending={pendingTreasure.data?.treasure ?? null}
+          onClose={() => {
+            setTreasureVisible(false)
+            setTreasureBox(null)
+          }}
+        />
+      )}
+
       <Equipment items={inventory.data} selectedId={selectedId} onSelect={setSelectedId} />
       {worn && (
         <div className="absolute top-[331px] left-[288px] flex w-[75px] flex-col gap-[5px] text-[11px] text-ink-game">

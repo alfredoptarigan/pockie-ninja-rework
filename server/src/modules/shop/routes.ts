@@ -324,6 +324,8 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
     if (!rows.length) throw bad('stock_empty', 'That stock has already been bought.')
     const costs = { stone: 0, gold: 0, giftCoupon: 0 }
     for (const row of rows) {
+      if (/^i15900[0-3]$/.test(row.itemId))
+        throw bad('unavailable', 'Treasure scrolls are unavailable in the shop.')
       if (currency) {
         const price = {
           stone: row.priceStone,

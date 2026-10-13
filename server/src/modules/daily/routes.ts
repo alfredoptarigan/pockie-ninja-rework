@@ -5,7 +5,14 @@ import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { characterDailyQuests, characterQuests, characters } from '../../db/schema.js'
 import { itemNameKey, subTasks, task } from '../../game/data.js'
-import { acceptQuest, completeQuest, expUpdate, loadQuests, type Tx } from '../../game/progress.js'
+import {
+  acceptQuest,
+  completeQuest,
+  expUpdate,
+  loadQuests,
+  saveCharacterProgress,
+  type Tx,
+} from '../../game/progress.js'
 import { questLock, questRewards } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, toCharacter } from '../game/characters.js'
@@ -227,10 +234,10 @@ export async function dailyRoutes(app: FastifyInstance, { db }: { db: Db }) {
         const bonus = Math.floor(Math.fround(Math.fround(reward.exp) * choice.factor) / 100)
         const [paid] = await tx.select().from(characters).where(eq(characters.id, character.id))
         const { levelsGained, ...exp } = expUpdate(paid!, bonus)
-        await tx
-          .update(characters)
-          .set({ ...exp, [choice.currency]: paid![choice.currency] - choice.cost })
-          .where(eq(characters.id, character.id))
+        await saveCharacterProgress(tx, character.id, {
+          ...exp,
+          [choice.currency]: paid![choice.currency] - choice.cost,
+        })
         reward.exp += bonus
         reward.levelsGained += levelsGained
       }

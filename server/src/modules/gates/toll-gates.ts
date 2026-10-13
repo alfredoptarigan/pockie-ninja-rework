@@ -34,7 +34,8 @@ import type { Db } from '../../db/client.js'
 import { tollGateRuns } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { removeItems, type Tx } from '../../game/progress.js'
-import { vipDropMul, vipExp } from '../../game/vip.js'
+import { rewardExp } from '../../game/nonfight-buffs.js'
+import { vipDropMul } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
@@ -180,7 +181,7 @@ export async function winForMember(
     stone: Math.trunc((gateStone * (captainMul?.MoneyMul ?? 0)) / 100),
   }
   const rewards: GateRewards = {
-    exp: vipExp(kill.exp + gateExp, character) + bonus.exp,
+    exp: (await rewardExp(tx, character, kill.exp + gateExp)) + bonus.exp,
     stone: kill.stone + gateStone + bonus.stone,
     items: [],
     levelsGained: 0,

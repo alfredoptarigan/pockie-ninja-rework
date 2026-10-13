@@ -89,7 +89,10 @@ export async function playerOpponent(
   arena: ArenaRow,
 ): Promise<Opponent> {
   let snapshot = arena.snapshot ? fromSnapshot(arena.snapshot) : null
-  if (!snapshot) {
+  if (
+    !snapshot ||
+    (snapshot.buffExpiresAt && new Date(snapshot.buffExpiresAt).getTime() <= Date.now())
+  ) {
     snapshot = await arenaFighter(tx, character)
     await tx
       .update(arenaPlayers)

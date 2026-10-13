@@ -22,7 +22,8 @@ import type { Db } from '../../db/client.js'
 import { characters, teamMembers } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
-import { vipDropMul, vipExp } from '../../game/vip.js'
+import { rewardExp } from '../../game/nonfight-buffs.js'
+import { vipDropMul } from '../../game/vip.js'
 import { requireAlive, requireUser } from '../game/characters.js'
 import {
   bad,
@@ -320,7 +321,7 @@ export function teamPubFight(db: Db, request: FastifyRequest) {
       const hpDraw = drawPouch(hp, maxHp, ninja.hpPouch)
       const mpDraw = drawPouch(mp, maxMp, ninja.mpPouch)
       const kill = lastNpcRewards(lastNpcId, vipDropMul(ninja))
-      const exp = vipExp(kill.exp, ninja)
+      const exp = await rewardExp(ctx.tx, ninja, kill.exp)
       const { update, levelsGained } = withExp(
         ninja,
         { hp: hpDraw.value, mp: mpDraw.value, hpPouch: hpDraw.pouch, mpPouch: mpDraw.pouch },

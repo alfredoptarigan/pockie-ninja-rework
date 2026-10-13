@@ -41,9 +41,13 @@ import {
   recordCommand,
   recordTalk,
   stepCommand,
+  stepTarget,
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
+import { grantFreeSkillReset } from '../../game/skill-bar.js'
+import { useBuffItem } from '../../game/nonfight-buffs.js'
+import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
@@ -101,7 +105,11 @@ function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: number)
  * (Resource/javascript/item/*.js); undefined for other items. hp.js, mp.js and hmp.js refuse when
  * there is nothing to heal; hmpcontainer.js fills the pouches up to their size.
  */
-function restoreItem(character: CharacterRow, def: NonNullable<ReturnType<typeof item>>) {
+function restoreItem(
+  character: CharacterRow,
+  def: NonNullable<ReturnType<typeof item>>,
+  stats: { maxHp: number; maxMp: number },
+) {
   const addHp = Number(def.HP ?? 0)
   const addMp = Number(def.MP ?? 0)
   const script = String(def.JavaScript)
@@ -119,7 +127,6 @@ function restoreItem(character: CharacterRow, def: NonNullable<ReturnType<typeof
   // The original leaves a defeated ninja dead (StateSystem) whatever their HP; here 0 HP is the
   // dead state, so healing waits until they revive.
   if (character.hp <= 0) throw bad('defeated', 'You were defeated. Revive before you heal.')
-  const stats = deriveStats(avatarStats(character.avatarId), character.level)
   const canHeal = addHp > 0 && character.hp < stats.maxHp
   const canRestore = addMp > 0 && character.mp < stats.maxMp
   if (!canHeal && !canRestore) {
@@ -162,7 +169,7 @@ export async function actionRoutes(
           rewards: questRewards(q.taskId),
           steps: subTasks(q.taskId).map((step) => ({
             descriptionKey: `lg_${step.SubTaskDescription}`,
-            target: Number(step.TargetRequireNum),
+            target: stepTarget(step),
             ...stepCommand(step),
           })),
         })),
@@ -271,8 +278,19 @@ export async function actionRoutes(
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
 
-      const restore = restoreItem(character, def)
-      if (restore) {
+      const freeResetItem = await grantFreeSkillReset(tx, character, def)
+      const buffItem = await useBuffItem(tx, character.id, row.itemId, def)
+      const restore =
+        buffItem || freeResetItem
+          ? undefined
+          : restoreItem(character, def, await playerFighter(tx, character))
+      if (freeResetItem) {
+        await consumeOne(tx, row)
+        await refreshBuffState(tx, character)
+      } else if (buffItem) {
+        await consumeOne(tx, row)
+        await refreshBuffState(tx, character)
+      } else if (restore) {
         await tx.update(characters).set(restore).where(eq(characters.id, character.id))
       } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
         const drops = rollLibDrops(Number(def.BoxDropID), createRandom(randomInt(2 ** 31)))
@@ -286,6 +304,12 @@ export async function actionRoutes(
       }
       if (restore) await consumeOne(tx, row)
 
+      if (def.JavaScript === 'item/FoodItem.js')
+        await saveQuests(
+          tx,
+          character.id,
+          recordCommand(await loadQuests(tx, character.id), 2127, character.sceneId),
+        )
       const quests = await loadQuests(tx, character.id)
       await saveQuests(
         tx,

@@ -31,6 +31,7 @@ const field = {
 function renderGame(handlers: Parameters<typeof mockApi>[0] = {}, player = character) {
   const fetchMock = mockApi({
     'GET /api/game/character': () => json({ character: player, stats }),
+    'GET /api/game/buffs': () => json({ buffs: [], titles: [] }),
     'GET /api/game/scene': () => json(player.sceneId === 111 ? villageScene : field),
     'GET /api/game/quests': () => json({ quests: [] }),
     'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
@@ -42,6 +43,28 @@ function renderGame(handlers: Parameters<typeof mockApi>[0] = {}, player = chara
 }
 
 describe('GameScreen', () => {
+  it('opens the Skills window from the HUD and closes it', async () => {
+    renderGame({
+      'GET /api/game/skills': () =>
+        json({
+          learned: [],
+          catalog: [],
+          learnedThrough: 1,
+          activeTree: 0,
+          freeResets: 0,
+          resetCost: 8,
+          trees: Array.from({ length: 3 }, () =>
+            Array.from({ length: 6 }, (_, slot) => ({ slot, skillId: null, level: 0 })),
+          ),
+        }),
+    })
+    await userEvent.click(await screen.findByRole('button', { name: 'Skills' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Skills' })
+    expect(await within(dialog).findByRole('tab', { name: 'Tree 1' })).toBeVisible()
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Close' }))
+    expect(screen.queryByRole('dialog', { name: 'Skills' })).not.toBeInTheDocument()
+  })
+
   it('lays the HUD over the scene', async () => {
     renderGame()
 
@@ -56,10 +79,7 @@ describe('GameScreen', () => {
     expect(within(location).getByRole('button', { name: 'Leave' })).toBeVisible()
     expect(screen.getByRole('region', { name: 'Chat' })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Quest Navigation' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Skills (coming soon)' })).toHaveAttribute(
-      'aria-disabled',
-      'true',
-    )
+    expect(screen.getByRole('button', { name: 'Skills' })).not.toHaveAttribute('aria-disabled')
   }, 15_000)
 
   it('opens windows from the menu icons and closes them with Escape or X', async () => {

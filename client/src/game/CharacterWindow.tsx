@@ -1,6 +1,6 @@
 import type { Character, CharacterStats } from '@pockie/shared'
 import type { CSSProperties } from 'react'
-import { errorMessage, useBuyPouches, useCharacterStats } from './api'
+import { errorMessage, useBuyPouches, useCharacterStats, useBuffs } from './api'
 import { Dialog, GameButton, Notice } from './skin'
 import { plainText } from './text'
 import { expToNext, sceneNameKey, villageOf } from './world'
@@ -204,6 +204,8 @@ export function CharacterWindow({
   onClose: () => void
 }) {
   const stats = useCharacterStats()
+  const buffs = useBuffs()
+  const title = buffs.data?.titles.find((title) => title.active)
   const village = plainText(sceneNameKey(villageOf(character.nation)), 'Village')
   return (
     <Dialog
@@ -213,9 +215,8 @@ export function CharacterWindow({
       className="w-[328px] px-[5px]! [&>.game-frame-title]:mb-[5px] [&>.game-inset]:p-0 [&>.game-inset]:[border-image:none]"
     >
       <div className="game-title-plate grid h-10 place-items-center">
-        {/* No titles yet: Reborn's empty plate reads "No title". */}
         <p className="text-base font-bold tracking-widest text-[#9ba3b0] [text-shadow:0_1px_0_#2a2d31]">
-          No title
+          {title ? plainText(title.nameKey, `Title ${title.titleId}`) : 'No title'}
         </p>
       </div>
       <section aria-label="Profile" className="game-inset mt-[5px] h-[100px] pt-1.5">

@@ -2,12 +2,16 @@
 // on arena_players and refreshed on every gear, level or skill change.
 import { and, eq, isNotNull } from 'drizzle-orm'
 import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '../../db/schema.js'
+import { characterSkillInputs } from '../../game/skill-bar.js'
+import { activeBuffs, buffBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, type PlayerFighter } from '../../game/combat.js'
 import type { Tx } from '../../game/progress.js'
 
 type CharacterRow = typeof characters.$inferSelect
 
 export interface ArenaFighter {
+  /** Rebuild the defence once its earliest timed effect expires. */
+  buffExpiresAt?: string
   fighter: PlayerFighter
   /** How the ninja is drawn in a replay. */
   look: { clothing: number; weaponItemId?: string }
@@ -21,9 +25,18 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     .where(
       and(eq(inventoryItems.characterId, character.id), isNotNull(inventoryItems.equippedSlot)),
     )
-  const live = playerFighterFrom(character, equipped)
+  const live = playerFighterFrom(
+    character,
+    equipped,
+    await buffBonuses(tx, character.id),
+    await characterSkillInputs(tx, character.id),
+  )
+  const expiries = (await activeBuffs(tx, character.id)).flatMap((row) =>
+    row.expiresAt ? [row.expiresAt.getTime()] : [],
+  )
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
   return {
+    ...(expiries.length > 0 && { buffExpiresAt: new Date(Math.min(...expiries)).toISOString() }),
     fighter: { ...live, hp: live.maxHp, mp: live.maxMp },
     look: { clothing: character.clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
   }

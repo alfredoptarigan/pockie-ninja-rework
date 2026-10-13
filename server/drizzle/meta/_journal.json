@@ -120,6 +120,34 @@
       "when": 1791854708544,
       "tag": "0016_rankings",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1791854709544,
+      "tag": "0017_treasure",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1791870995755,
+      "tag": "0018_nonfight_buffs",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1791871959839,
+      "tag": "0019_skill_learning",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1791873174880,
+      "tag": "0020_skill_bars",
+      "breakpoints": true
     }
   ]
 }

@@ -420,18 +420,9 @@ describe('stock instance and currency fidelity', () => {
       }),
     ])
   })
-  it('keeps the original Stone price on Mystery Shop scrolls', async () => {
-    await update({ stone: 2, gold: 0 })
+  it('withholds treasure scrolls from Mystery Shop stock', async () => {
     await client.get(`${base}/open`)
-    const scroll = (await stock(2)).find((row) => row.itemId === 'i159000')!
-    expect(scroll).toMatchObject({ priceStone: 1, priceGold: null })
-    expect(
-      (await post('buy', { shopType: 2, slot: scroll.slot, currency: 'gold' })).statusCode,
-    ).toBe(400)
-    expect(
-      (await post('buy', { shopType: 2, slot: scroll.slot, currency: 'stone' })).statusCode,
-    ).toBe(200)
-    expect((await row()).stone).toBe(1)
+    expect((await stock(2)).filter((row) => /^i15900[0-3]$/.test(row.itemId))).toEqual([])
   })
   it('allows stacking medicine in a full bag but refuses a new stack', async () => {
     await update({ stone: 10000 })

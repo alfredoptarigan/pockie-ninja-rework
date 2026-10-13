@@ -2,6 +2,7 @@ import type { Character } from '@pockie/shared'
 import { useCallback, useState, type CSSProperties } from 'react'
 import { Navigate } from 'react-router'
 import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
+import { SkillsWindow } from './SkillsWindow'
 import { CharacterWindow } from './CharacterWindow'
 import { RealtimePanels } from './Chat'
 import { CreateCharacter } from './CreateCharacter'
@@ -168,6 +169,7 @@ function GameScreen({ character }: { character: Character }) {
             <Inventory highlight={bagHighlight} />
           </Dialog>
         )}
+        {openWindow === 'skills' && <SkillsWindow character={character} onClose={close} />}
         {openWindow === 'character' && <CharacterWindow character={character} onClose={close} />}
         {openWindow === 'quests' && (
           <Dialog title="Quest Log" onClose={close} className="w-[32rem]">

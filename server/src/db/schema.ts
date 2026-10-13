@@ -5,6 +5,7 @@ import {
   boolean,
   check,
   date,
+  foreignKey,
   index,
   integer,
   jsonb,
@@ -1130,5 +1131,126 @@ export const tollGateWeeklyClaims = pgTable(
   (t) => [
     primaryKey({ columns: [t.characterId, t.gateId, t.week] }),
     check('toll_gate_weekly_claims_place', sql`${t.place} between 1 and 50`),
+  ],
+)
+
+/** Paid treasure cards survive reconnects; a character may have only one pending box. */
+export const characterTreasures = pgTable(
+  'character_treasures',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    boxId: text('box_id').notNull(),
+    cards: jsonb('cards').$type<string[]>().notNull(),
+  },
+  (t) => [
+    uniqueIndex('character_treasures_character_key').on(t.characterId),
+    check(
+      'character_treasures_cards',
+      sql`jsonb_typeof(${t.cards}) = 'array' and jsonb_array_length(${t.cards}) = 5`,
+    ),
+  ],
+)
+
+/** Original server-wide jackpot limits (TreasureRole.Value). */
+export const treasureJackpots = pgTable(
+  'treasure_jackpots',
+  {
+    itemId: text('item_id').primaryKey(),
+    claimed: integer('claimed').notNull().default(0),
+  },
+  (t) => [check('treasure_jackpots_claimed', sql`${t.claimed} >= 0`)],
+)
+
+export const characterBuffs = pgTable(
+  'character_buffs',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    buffId: integer('buff_id').notNull(),
+    group: integer('replacement_group').notNull(),
+    source: text('source').notNull(),
+    sourceId: text('source_id').notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.buffId] }),
+    uniqueIndex('character_buffs_group_key').on(t.characterId, t.group),
+    check('character_buffs_source', sql`${t.source} in ('food', 'title')`),
+  ],
+)
+
+export const characterTitles = pgTable(
+  'character_titles',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    titleId: integer('title_id').notNull(),
+    active: boolean('active').notNull().default(false),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.titleId] }),
+    uniqueIndex('character_titles_active_key')
+      .on(t.characterId)
+      .where(sql`${t.active} = true`),
+  ],
+)
+
+export const characterSkills = pgTable(
+  'character_skills',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    skillId: integer('skill_id').notNull(),
+    level: smallint('skill_level').notNull().default(1),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.skillId] }),
+    check('character_skills_level', sql`${t.level} between 1 and 13`),
+  ],
+)
+
+export const characterSkillState = pgTable(
+  'character_skill_state',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    learnedThrough: smallint('learned_through').notNull().default(1),
+    activeTree: smallint('active_tree').notNull().default(0),
+    freeResets: integer('free_resets').notNull().default(0),
+  },
+  (t) => [
+    check('character_skill_state_level', sql`${t.learnedThrough} between 1 and 90`),
+    check('character_skill_state_tree', sql`${t.activeTree} between 0 and 2`),
+    check('character_skill_state_resets', sql`${t.freeResets} >= 0`),
+  ],
+)
+
+export const characterSkillSlots = pgTable(
+  'character_skill_slots',
+  {
+    characterId: uuid('character_id').notNull(),
+    tree: smallint('tree').notNull(),
+    slot: smallint('slot').notNull(),
+    skillId: integer('skill_id').notNull(),
+    level: smallint('use_level').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.tree, t.slot] }),
+    uniqueIndex('character_skill_slots_skill_key').on(t.characterId, t.tree, t.skillId),
+    foreignKey({
+      columns: [t.characterId, t.skillId],
+      foreignColumns: [characterSkills.characterId, characterSkills.skillId],
+    }).onDelete('cascade'),
+    check('character_skill_slots_tree', sql`${t.tree} between 0 and 2`),
+    check('character_skill_slots_slot', sql`${t.slot} between 0 and 5`),
+    check('character_skill_slots_level', sql`${t.level} between 1 and 13`),
   ],
 )

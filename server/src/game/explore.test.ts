@@ -99,9 +99,7 @@ describe('rollCard', () => {
     // ItemFactory 1: entry 0 i170001 (odds 1, bound) covers rolls 0-1, entry 1 starts at 2.
     expect(rollCard(spot, fixed(3300, 1))).toEqual({ type: 'item', itemId: 'i170001', bound: true })
     expect(rollCard(spot, fixed(3300, 2))).toEqual({
-      type: 'item',
-      itemId: 'i159000',
-      bound: false,
+      type: 'nothing',
     })
     expect(rollCard(spot, fixed(2000, 0))).toMatchObject({ type: 'pet', bound: true })
     expect(rollCard(spot, fixed(2500, 0))).toEqual({ type: 'boss', itemId: 'i150078', bound: true })
