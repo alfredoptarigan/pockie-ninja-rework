@@ -1,7 +1,7 @@
 # Plan: Reborn Update (Milestone 5)
 
 **Project**: Pockie Ninja Remastered
-**Status**: Planned (2026-10-13). Open questions answered; wave 1 ready.
+**Status**: In progress (2026-10-13). Task 1 merged; tasks 2 and 3 running.
 **Complexity**: Large
 **Reference (primary source)**: `m5-reborn-reference.md`, normalized data in
 `data/reborn-raw/re/normalized/{talents,bloodlines,skills,quests,events}.json`, raw
@@ -120,7 +120,7 @@ after M5: fetch audio, pets, wings, auras, general effects and card art (roadmap
     | 12 | `atkTimeMul` |
     | 16 | `critAttach` |
     | 17 | `tough` |
-    | 18 | `defenseMul` (value / 10) |
+    | 18 | `parry` 1:1 (task 1: the Guard soul, shown as block, same values as Dodge) |
     | 19 | `pierce` |
     | 31-40 | `skillAdd0..9` (+N, read by `skillChance` as +N%) |
 
@@ -282,7 +282,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 
 ## Tasks
 
-### Task 1: Reborn data import
+### Task 1: Reborn data import (done)
 - **Action**: `node tools/game-data/import-reborn.ts` reads the normalized files and serverConfig and
   writes `server/data/game/reborn/*.json`: talents (costs, `expNeeded`); 44 limits with stat ids
   mapped by decision 11; 13 soul types with `valueByLevel` and level limits clamped to 90; scroll
