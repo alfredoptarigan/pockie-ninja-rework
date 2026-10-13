@@ -1,7 +1,7 @@
 # Plan: Reborn Update (Milestone 5)
 
 **Project**: Pockie Ninja Remastered
-**Status**: Planned (2026-10-13). Nothing started; waiting for the user's answers to the open questions.
+**Status**: Planned (2026-10-13). Open questions answered; wave 1 ready.
 **Complexity**: Large
 **Reference (primary source)**: `m5-reborn-reference.md`, normalized data in
 `data/reborn-raw/re/normalized/{talents,bloodlines,skills,quests,events}.json`, raw
@@ -318,7 +318,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
      `{ clothing, atlas, pages, damageFrame, motionFrame, offset, transforms, concurrent?,
      concurrentOffset?, concurrentOrigin?, targetAnimation?, holdDeathUntilReaction? }`.
   3. **Gate**: convert outfit 1 first and report the ratio. Stop and ask if the projected total goes
-     over 150 MB.
+     over 350 MB (user chose all 100 outfits up to 120).
 
   | Group | Source (PNG) | Estimated WebP |
   |---|---|---|
@@ -537,7 +537,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 
 | Risk | Mitigation |
 |---|---|
-| Git LFS size and bandwidth (secret techniques are most of it) | Size gate in task 3 (150 MB); only the 49 fighting outfits now; lossy WebP; per-replay lazy load |
+| Git LFS size and bandwidth (secret techniques are most of it) | Size gate in task 3 (350 MB); 100 outfits up to 120; lossy WebP; per-replay lazy load |
 | Wrong stat scale makes bloodlines or talents trivial or useless | Decision 11 map checked in task 1; task 4 test pins a level-60 fighter's totals; constants in one file per feature |
 | Power creep trivializes 2011 content past 50 | Talents only narrow gaps (never past parity); story rewards at 50%; measure arena win rates after M5 |
 | Reborn ids collide with 2011 ids (quests, buffs, skills) | 8xxxxx quest ids, 15xxx buffs; task 1 collision test |
@@ -565,15 +565,13 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
       weekly.
 - [ ] Every new route is in `docs/security-review-m5.md`; `pnpm typecheck && pnpm lint && pnpm test
       && pnpm e2e` is green.
-- [ ] `client/public/assets/reborn/**` is at most 150 MB and fully in LFS.
+- [ ] `client/public/assets/reborn/**` is at most 350 MB and fully in LFS.
 
 ## Open questions for the user
 
-1. **Outfit stars.** Earning a star needs outfit tiers +31 and duplicate outfits (M6 outfit
-   collection). The plan ships only the threshold field now and moves star-up to M6 (decision 9).
-   Alternative: a temporary star-up path in M5 (e.g. paying Seal Breakers).
-2. **Bloodline daily cap.** The plan reads `itemsPerDay = 10` as 10 turn-ins, not 10 items
-   (decision 12).
-3. **Secret-technique art.** Import the 49 fighting outfits now (~100 MB), or all 100 outfits up to
-   120 (~300 MB) so M6 needs no further import.
-4. **Story chain size.** All 118 story quests in M5, or acts 1-2 (~40) now and the rest in M6?
+Answered 2026-10-13:
+1. Outfit stars: star-up moves to M6 as proposed (decision 9).
+2. Bloodline daily cap: 10 turn-ins a day (decision 12).
+3. Secret-technique art: import all 100 outfits up to 120 in M5, not only the 49 fighting outfits.
+   Task 3 size gate becomes 350 MB; acceptance limit for `client/public/assets/reborn/**` is 350 MB.
+4. Story chain: all 118 story quests in M5.
