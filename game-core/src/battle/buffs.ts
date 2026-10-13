@@ -1,6 +1,7 @@
 // Fight buffs: the rows of RES/skill/FightBuff.ini (imported to server/data/game/fight-buffs.json)
 // joined with the ported scripts of RES/javascript/buff/*.js by the row's `javascript` path.
 // Rows whose script is not ported act as markers (added, replaced, expired, cleared) only.
+import { SCROLL_BUFFS } from './scripts/scroll-buffs.js'
 import fightBuffs from '../../../server/data/game/fight-buffs.json'
 import { INSTANCE_BUFFS } from './scripts/instance-skills.js'
 import { LAS_NOCHES_B_BUFFS } from './scripts/las-noches-b-buffs.js'
@@ -26,6 +27,14 @@ export interface BuffScripts {
 }
 
 export interface BuffDef extends BuffScripts {
+  negative?: boolean
+  undispellable?: boolean
+  preventsRevive?: boolean
+  healingMultiplier?: (buff: ActiveBuff) => number
+  incomingDamage?: (buff: ActiveBuff, element: number) => number
+  outgoingDamage?: (buff: ActiveBuff, element: number) => number
+  onDamage?: (self: Fighter, buff: ActiveBuff, amount: number) => void
+  pendingRevive?: (buff: ActiveBuff) => boolean
   /** 1 stat / flag, 2 ticks on each action of its owner, 3 shield */
   type: number
   /** Buffs of the same group replace each other. */
@@ -192,6 +201,9 @@ const toBuffDef = (row: BuffRow): BuffDef => ({
   ...(row.javascript ? BUFF_SCRIPTS[row.javascript] : {}),
 })
 
-export const BUFFS: Record<number, BuffDef> = Object.fromEntries(
-  Object.entries(fightBuffs as Record<string, BuffRow>).map(([id, row]) => [id, toBuffDef(row)]),
-)
+export const BUFFS: Record<number, BuffDef> = {
+  ...SCROLL_BUFFS,
+  ...Object.fromEntries(
+    Object.entries(fightBuffs as Record<string, BuffRow>).map(([id, row]) => [id, toBuffDef(row)]),
+  ),
+}

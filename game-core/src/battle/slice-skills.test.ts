@@ -156,3 +156,11 @@ describe('outfit ultimates (avatar-skills.json SkillID1)', () => {
     }
   })
 })
+
+describe('Reborn scroll skill overlay', () => {
+  const overlay = data<Record<string, Omit<SkillInput, 'id'>>>('reborn/skills')
+  it.each(Object.entries(overlay))('skill %s has its imported script registered', (id, skill) => {
+    expect(skill.javascript).toBe(`skill/skill_scroll_${id}.js`)
+    expect(SKILL_SCRIPTS[skill.javascript!]).toBeTypeOf('function')
+  })
+})
