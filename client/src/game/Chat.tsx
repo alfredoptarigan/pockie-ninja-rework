@@ -17,6 +17,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { createGameSocket, type GameSocket } from '../lib/socket'
 import { gameKeys } from './api'
 import { GameButton, Notice as NoticeBox, Panel } from './skin'
+import { onWhisperRequest } from './social/requests'
 
 const MAX_MESSAGES = 100
 
@@ -408,6 +409,8 @@ export function ChatBox({
     setText(`/${name} `)
     inputRef.current?.focus()
   }
+  // Whisper buttons in other windows (the Friends list) prefill the input the same way.
+  useEffect(() => onWhisperRequest(startWhisper), [])
 
   const onReport = (message: ChatMessage) => {
     const sent = report(
