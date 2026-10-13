@@ -1,7 +1,7 @@
 # Plan: Reborn Update (Milestone 5)
 
 **Project**: Pockie Ninja Remastered
-**Status**: In progress (2026-10-13). Task 1 merged; tasks 2 and 3 running.
+**Status**: In progress (2026-10-13). Wave 1 (tasks 1-3) merged; wave 2 next.
 **Complexity**: Large
 **Reference (primary source)**: `m5-reborn-reference.md`, normalized data in
 `data/reborn-raw/re/normalized/{talents,bloodlines,skills,quests,events}.json`, raw
@@ -299,7 +299,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
   overlay id collides with an original id (skills, buffs, items, tasks).
 - **Validate**: `pnpm --filter @pockie/tools test -- import-reborn && pnpm --filter @pockie/server test -- data`
 
-### Task 2: Schema and migrations (all M5 tables; see Migrations)
+### Task 2: Schema and migrations (done)
 - **Action**: Drizzle tables and checks for 0021-0026. No feature logic.
 - **Mirror**: `schema.ts:1204-1256`, `server/drizzle/0019/0020`, `server/src/db/m4-tables.test.ts`.
 - **TDD**: `server/src/db/m5-tables.test.ts`: talent level 0-60, at most 3 active talents and limits
@@ -307,7 +307,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
   non-negative currency.
 - **Validate**: `pnpm db:reset && pnpm --filter @pockie/server test -- migrations m5-tables`
 
-### Task 3: Reborn asset import (WebP, LFS)
+### Task 3: Reborn asset import (done: 2,757 files, 411 MB in LFS; user accepted over the 350 MB gate)
 - **Action**:
   1. Extend `fetch-reborn-assets.ts` with the small missing groups: `icons/items/<path>.png` for the
      24 scroll items and 18 limit items; `dailylogin/reward.png`, `dailylogin/20min.png`.
@@ -565,7 +565,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
       weekly.
 - [ ] Every new route is in `docs/security-review-m5.md`; `pnpm typecheck && pnpm lint && pnpm test
       && pnpm e2e` is green.
-- [ ] `client/public/assets/reborn/**` is at most 350 MB and fully in LFS.
+- [x] `client/public/assets/reborn/**` fully in LFS (411 MB, accepted by the user).
 
 ## Open questions for the user
 
