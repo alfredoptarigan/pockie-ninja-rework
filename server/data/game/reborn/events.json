@@ -1,0 +1,382 @@
+{
+  "dailyLogin": {
+    "cycle": [
+      {
+        "item": "i150117",
+        "amount": 1
+      },
+      {
+        "item": "i161008",
+        "amount": 25
+      },
+      {
+        "item": "i350008",
+        "amount": 5
+      },
+      {
+        "item": "i160103",
+        "amount": 3
+      },
+      {
+        "item": "i170127",
+        "amount": 5
+      },
+      {
+        "item": "i160103",
+        "amount": 3
+      },
+      {
+        "item": "i161007",
+        "amount": 10
+      }
+    ],
+    "bonus": {
+      "item": "i120002",
+      "amount": 1
+    }
+  },
+  "weekly": {
+    "activities": [
+      {
+        "id": "arenaDuel",
+        "max": 5,
+        "points": 40
+      },
+      {
+        "id": "duelFriend",
+        "max": 3,
+        "points": 10
+      },
+      {
+        "id": "tollGate",
+        "max": 1,
+        "points": 50
+      },
+      {
+        "id": "pubFight",
+        "max": 3,
+        "points": 50
+      },
+      {
+        "id": "lasNoches",
+        "max": 10,
+        "points": 45
+      },
+      {
+        "id": "twentyMinReward",
+        "max": 3,
+        "points": 20
+      },
+      {
+        "id": "globalChat",
+        "max": 1,
+        "points": 10
+      },
+      {
+        "id": "mission",
+        "max": 1,
+        "points": 20
+      }
+    ],
+    "milestones": [
+      {
+        "points": 50,
+        "item": "i159000",
+        "amount": 10
+      },
+      {
+        "points": 100,
+        "item": "i150117",
+        "amount": 1
+      },
+      {
+        "points": 200,
+        "gold": 10
+      }
+    ],
+    "weekdayThreshold": 50,
+    "weekdayRewards": [
+      {
+        "dayIndex": 0,
+        "item": "i150406",
+        "amount": 6
+      },
+      {
+        "dayIndex": 1,
+        "item": "i150177",
+        "amount": 1
+      },
+      {
+        "dayIndex": 2,
+        "item": "i160103",
+        "amount": 1
+      },
+      {
+        "dayIndex": 3,
+        "item": "i100004",
+        "amount": 20
+      },
+      {
+        "dayIndex": 4,
+        "item": "i160103",
+        "amount": 1
+      },
+      {
+        "dayIndex": 5,
+        "item": "i150157",
+        "amount": 1
+      },
+      {
+        "dayIndex": 6,
+        "item": "i161007",
+        "amount": 40
+      }
+    ],
+    "bonus": {
+      "item": "i160103",
+      "amount": 5
+    }
+  },
+  "dice": {
+    "rollsPerDay": 10,
+    "dice": 6,
+    "replenishCost": 10000,
+    "clearCurseCost": 5000,
+    "tiers": [
+      {
+        "minNet": 4,
+        "buff": 80102
+      },
+      {
+        "minNet": 2,
+        "buff": 80101
+      },
+      {
+        "minNet": -1,
+        "buff": null
+      },
+      {
+        "minNet": -3,
+        "buff": 80201
+      },
+      {
+        "minNet": -6,
+        "buff": 80202
+      }
+    ],
+    "durationSeconds": {
+      "80101": 7200,
+      "80102": 21600,
+      "80201": 7200,
+      "80202": 21600
+    }
+  },
+  "twentyMinute": {
+    "cooldownSeconds": 1200,
+    "giftCoupons": 10,
+    "claimsPerDay": 6
+  },
+  "tailedBeast": {
+    "beasts": [
+      {
+        "id": 1,
+        "nameKey": "reborn_beast_1"
+      },
+      {
+        "id": 2,
+        "nameKey": "reborn_beast_2"
+      },
+      {
+        "id": 3,
+        "nameKey": "reborn_beast_3"
+      },
+      {
+        "id": 4,
+        "nameKey": "reborn_beast_4"
+      },
+      {
+        "id": 5,
+        "nameKey": "reborn_beast_5"
+      },
+      {
+        "id": 6,
+        "nameKey": "reborn_beast_6"
+      },
+      {
+        "id": 7,
+        "nameKey": "reborn_beast_7"
+      },
+      {
+        "id": 8,
+        "nameKey": "reborn_beast_8"
+      },
+      {
+        "id": 9,
+        "nameKey": "reborn_beast_9"
+      }
+    ],
+    "ticketsPerDay": 10,
+    "ticketCost": [
+      1,
+      3,
+      5
+    ],
+    "hp": [
+      750000000,
+      1000000000,
+      1250000000
+    ],
+    "level": {
+      "base": 25,
+      "perBeast": 5,
+      "perMode": 25
+    },
+    "honorPerDamage": 100000,
+    "boxes": [
+      {
+        "fights": 5,
+        "item": "i500003"
+      },
+      {
+        "fights": 10,
+        "item": "i500002"
+      },
+      {
+        "fights": 20,
+        "item": "i500001"
+      }
+    ],
+    "kageChoices": [
+      "i100004",
+      "i161007",
+      "i150117",
+      "i159140"
+    ],
+    "shop": [
+      {
+        "item": "i100004",
+        "essence": 150
+      },
+      {
+        "item": "i161007",
+        "essence": 80
+      },
+      {
+        "item": "i150117",
+        "essence": 200,
+        "limit": 5
+      },
+      {
+        "item": "i540001",
+        "essence": 300
+      },
+      {
+        "item": "i540002",
+        "essence": 300
+      },
+      {
+        "item": "i540003",
+        "essence": 300
+      },
+      {
+        "item": "i540004",
+        "essence": 300
+      },
+      {
+        "item": "i540005",
+        "essence": 300
+      },
+      {
+        "item": "i540006",
+        "essence": 300
+      },
+      {
+        "item": "i540007",
+        "essence": 300
+      },
+      {
+        "item": "i540008",
+        "essence": 300
+      },
+      {
+        "item": "i540009",
+        "essence": 300
+      },
+      {
+        "item": "i540010",
+        "essence": 300
+      },
+      {
+        "item": "i540011",
+        "essence": 300
+      },
+      {
+        "item": "i540012",
+        "essence": 300
+      }
+    ]
+  },
+  "teamStone": {
+    "minLevel": 50,
+    "attemptsPerDay": 25,
+    "teamSize": 3,
+    "botFillSeconds": [
+      15,
+      30
+    ],
+    "leagues": [
+      {
+        "id": "academy",
+        "nameKey": "reborn_league_academy",
+        "minScore": 0,
+        "battleCoins": 250
+      },
+      {
+        "id": "bronze",
+        "nameKey": "reborn_league_bronze",
+        "minScore": 300,
+        "battleCoins": 500
+      },
+      {
+        "id": "silver",
+        "nameKey": "reborn_league_silver",
+        "minScore": 700,
+        "battleCoins": 800
+      },
+      {
+        "id": "gold",
+        "nameKey": "reborn_league_gold",
+        "minScore": 1200,
+        "battleCoins": 1200
+      },
+      {
+        "id": "platinum",
+        "nameKey": "reborn_league_platinum",
+        "minScore": 1800,
+        "battleCoins": 1800
+      },
+      {
+        "id": "diamond",
+        "nameKey": "reborn_league_diamond",
+        "minScore": 2500,
+        "battleCoins": 2600
+      },
+      {
+        "id": "master",
+        "nameKey": "reborn_league_master",
+        "minScore": 3300,
+        "battleCoins": 3600,
+        "item": "i159044",
+        "amount": 1
+      },
+      {
+        "id": "champion",
+        "nameKey": "reborn_league_champion",
+        "minScore": 4200,
+        "battleCoins": 5000,
+        "item": "i159045",
+        "amount": 3
+      }
+    ]
+  }
+}
