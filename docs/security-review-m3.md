@@ -21,16 +21,16 @@ Each fixed finding has a failing test written first in
 
 ## Status (2026-10-12)
 
-| Finding                                                            | Status                                                                                                                                                   |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1. Medium: wholesale buy of 10000 items                            | Fixed (`fix: wholesale buys are capped at one stack`): one purchase is at most `ItemMaxFoldNum`, like the original client; `invalid_count` otherwise.    |
-| 2. Low: toll gate duel while defeated skips the revive cost        | Fixed (`fix: refuse toll gate duels for a defeated ninja`): `/gates/run/fight` calls `requireAlive` like Las Noches; the run waits for a revive.         |
-| 3. Low: appraise-all charges a repeated id per repeat              | Fixed (`fix: appraise-all charges a repeated item id once`): ids are de-duplicated before pricing.                                                       |
-| 4. Low: daily routes return 500 for ids past int range             | Fixed (`fix: daily quest routes answer unknown quest ids with 400`): unknown quest ids stop before SQL with `not_offered`.                               |
-| 5. Low: shop routes do not check the scene or NPC                  | Open (product decision).                                                                                                                                 |
-| 6. Low: fight and box drops ignore the bag size                    | Open (product decision).                                                                                                                                 |
-| 7. Low: a won pub fight is rolled back when its combo does not fit | Open (product decision).                                                                                                                                 |
-| 8. Info: choices already listed in the plan (wave 2 notes)         | Open (product decision): full bag refuses a card take; exchange output is unbound even from bound crystals; appraising without an identify list is free. |
+| Finding                                                            | Status                                                                                                                                                    |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Medium: wholesale buy of 10000 items                            | Fixed (`fix: wholesale buys are capped at one stack`): one purchase is at most `ItemMaxFoldNum`, like the original client; `invalid_count` otherwise.     |
+| 2. Low: toll gate duel while defeated skips the revive cost        | Fixed (`fix: refuse toll gate duels for a defeated ninja`): `/gates/run/fight` calls `requireAlive` like Las Noches; the run waits for a revive.          |
+| 3. Low: appraise-all charges a repeated id per repeat              | Fixed (`fix: appraise-all charges a repeated item id once`): ids are de-duplicated before pricing.                                                        |
+| 4. Low: daily routes return 500 for ids past int range             | Fixed (`fix: daily quest routes answer unknown quest ids with 400`): unknown quest ids stop before SQL with `not_offered`.                                |
+| 5. Low: shop routes do not check the scene or NPC                  | Fixed (`fix: shop routes need a shop NPC in the scene`): every shop route except the Mysterious Merchant answers `not_here` without a shop NPC.           |
+| 6. Low: fight and box drops ignore the bag size                    | Fixed: fight loot that needs a new row in a full bag is lost (`rewards.lost`); a box does not open into a full bag (`bag_full`, the box stays).           |
+| 7. Low: a won pub fight is rolled back when its combo does not fit | Fixed: the pull after a win is fight loot, so combo items that do not fit are lost; the hourly pull still refuses a full bag.                             |
+| 8. Info: choices already listed in the plan (wave 2 notes)         | Decided: a full bag keeps refusing a card take; exchange output is bound when any crystal used was bound; appraising without an identify list stays free. |
 
 All limits remain per process; several server instances need shared state (unchanged from M2).
 

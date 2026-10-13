@@ -337,6 +337,17 @@ Task 9 is the largest; if only three agents are free in wave 2, run 6 + 7 + 8 fi
 - Flaky: `concurrency.api.test.ts` "keeps a pouch refill used while a fight is running" failed
   once under the full serialized suite, passed on rerun and alone.
 
+## Fix phase (2026-10-13)
+
+User decisions on the open choices, all done (`docs/security-review-m3.md` status table):
+shop routes need a shop NPC in the scene; fight loot (field, explore, toll gate and pub kills, the
+pub combo after a win) that needs a new row in a full bag is lost and reported as `rewards.lost`;
+a box does not open into a full bag; a full bag keeps refusing a card take; exchange output is
+bound when any crystal used was bound (`removeItems` now uses bound stacks first); appraising
+without an identify list stays free. Tests: `bag-full.api.test.ts`, shop scene check. The flaky
+pouch refill test asserted an empty bag, but the Sunflower can drop an i250101; it now checks the
+pouch only.
+
 ## Open questions for the user
 
 None.
