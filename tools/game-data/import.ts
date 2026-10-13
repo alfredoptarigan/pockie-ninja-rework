@@ -93,6 +93,54 @@ export function stockRows(value: Value | undefined): StockRow[] {
   return rows
 }
 
+export interface MartNode {
+  /** StepName<n>: a language key, a literal ("1—10") or a number shown as is. */
+  Name: number | string
+  /** StepDes<n>: language key of the combo label (empty at the top). */
+  Des: string
+  /** Category key sent to the server: top type, then child indexes joined with `_`. */
+  Path: string
+  children: MartNode[]
+}
+
+/** Top types whose last step (quality) is sent +1 (`MarcketBuyShowPage.GetSelectInfo`). */
+const MART_EQUIPMENT_TYPES = new Set(['0', '2'])
+
+/**
+ * The Market category tree as `MarcketBuyShowPage.InitData` builds it from martsellshow.tab:
+ * rows are grouped by StepName1-4 in first-seen order; a node whose first child has an empty
+ * name is a leaf. The path is the top type (StepName1) and then the child index per step, with
+ * the quality index +1 for weapons and armour, matching item.ini `MartType` (+ `_<quality>`).
+ */
+export function martTree(rows: Row[]): MartNode[] {
+  const build = (step: number, group: Row[], parentPath: string): MartNode[] => {
+    if (step === 5) return []
+    const names: (number | string)[] = []
+    const byName = new Map<number | string, Row[]>()
+    for (const row of group) {
+      const name = (row[`StepName${step}`] ?? '') as number | string
+      if (!byName.has(name)) names.push(name)
+      byName.set(name, [...(byName.get(name) ?? []), row])
+    }
+    if (step > 1 && String(names[0]) === '') return []
+    const top = parentPath.split('_')[0] ?? ''
+    return names.map((name, index) => {
+      const part =
+        step === 1
+          ? String(name)
+          : String(step === 4 && MART_EQUIPMENT_TYPES.has(top) ? index + 1 : index)
+      const path = parentPath ? `${parentPath}_${part}` : part
+      return {
+        Name: name,
+        Des: String(byName.get(name)?.[0]?.[`StepDes${step}`] ?? ''),
+        Path: path,
+        children: build(step + 1, byName.get(name) ?? [], path),
+      }
+    })
+  }
+  return build(1, rows, '')
+}
+
 const EXPLORE_FACTORIES = ['Gost', 'Boss', 'Item', 'Key', 'Baby', 'Game'] as const
 
 /** References with a positive weight must exist; zero-weight references are unused in Java. */
@@ -289,4 +337,60 @@ if (import.meta.main) {
     rewardRules: pub('PubMonsterRewardRule'),
     drops: pub('PubMonsterDropLib'),
   })
+
+  // Arena (M4). competenpc.ini and HonorExp.ini share the tier sections of competerank.ini.
+  const compete = (file: string) => ini(`compete/${file}.ini`)
+  const competeNpcs = compete('competenpc')
+  const honorExp = compete('HonorExp')
+  write(
+    'arena-tiers',
+    Object.fromEntries(
+      Object.entries(compete('competerank')).map(([tier, row]) => [
+        tier,
+        {
+          ...row,
+          npcs: String(competeNpcs[tier]?.r ?? '').split(','),
+          HonorExp: honorExp[tier],
+        },
+      ]),
+    ),
+  )
+  write('arena-config', compete('compete').compete)
+  write('arena-honor-shop', compete('scoreprize'))
+
+  // Weekly toll gate ranking rewards: section = place 1-50, key = gate id.
+  write('toll-gate-rank-rewards', {
+    exp: gate('RankExpReward'),
+    money: gate('RankMoneyReward'),
+    item: gate('RankItemReward'),
+  })
+
+  // Rankings window (gametop.tab, literal Indonesian labels): only the lists of M4 decision 13,
+  // with our English labels. The weekly toll gate ranking is its own window (IsExistsRank gates).
+  const RANKING_LABELS: Record<number, { key: string; group: string; label: string }> = {
+    0: { key: 'level', group: 'Ninja', label: 'Level' },
+    8: { key: 'stone', group: 'Wealth', label: 'Stone' },
+    10: { key: 'lasNoches', group: 'Las Noches', label: 'Best Floor' },
+    26: { key: 'arena', group: 'Arena', label: 'Arena Rank' },
+  }
+  write('rankings', {
+    lists: tab('gametop.s53463.tab').flatMap((row) => {
+      const labels = RANKING_LABELS[Number(row.ID)]
+      return labels ? [{ ...row, ...labels }] : []
+    }),
+    tollGates: {
+      key: 'tollGateWeekly',
+      group: 'Demon City',
+      label: 'Weekly Toll Gate Ranking',
+      gates: Object.entries(gate('TollGate'))
+        .filter(([, row]) => Number(row.IsExistsRank) === 1)
+        .map(([id]) => Number(id)),
+    },
+  })
+
+  // Market listing categories; items map to them through item.ini MartType (items.json).
+  write('market-categories', martTree(tab('martsellshow.s34727.tab', { skipHeader: true })))
+
+  // Mail: only the three length keys are read by MailServer (friends-mail.md "Config values").
+  write('mail-config', ini('Mail/MailPropConfig.ini').MailPropConfig)
 }

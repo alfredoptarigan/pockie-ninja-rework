@@ -17,6 +17,7 @@ import type {
   SkillInput,
 } from '@pockie/game-core'
 import type { OutfitBoost } from '@pockie/shared'
+import { z } from 'zod'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -227,3 +228,214 @@ export const identifyTables = (): IdentifyTables => ({
   groups: load<IdentifyGroups>('identify-groups'),
   props: load<IdentifyProps>('identify-props'),
 })
+
+// --- M4: arena, rankings, Market, mail, teams (zod-checked on first load) ---
+
+function loadChecked<T>(name: string, schema: z.ZodType<T>): T {
+  const key = `checked:${name}`
+  if (!cache.has(key)) cache.set(key, schema.parse(load<unknown>(name)))
+  return cache.get(key) as T
+}
+
+const int = z.number().int()
+
+const arenaTierSchema = z.object({
+  beginscore: int,
+  /** -1 on the top tier (no promotion). */
+  endscore: int,
+  /** Honor per arena fight, win or loss. */
+  honor: int,
+  /** Chest card libs (competeprize.ini, not imported: chests are deferred). */
+  item0: int,
+  item1: int,
+  item2: int,
+  item3: int,
+  /** Honor paid on the boss win that promotes you to this tier. */
+  ranknpchonor: int,
+  /** competenpc.ini: 18 normal opponents, then the Fortune Cat, then the boss. */
+  npcs: z.array(z.string().regex(/^n\d+$/)).length(20),
+  /** HonorExp.ini: pay `honor`, gain `exp` per unit. */
+  HonorExp: z.object({ exp: int, honor: int }),
+})
+export type ArenaTier = z.infer<typeof arenaTierSchema>
+
+/** competerank.ini + competenpc.ini + HonorExp.ini, tiers 0-21 in order. */
+export const arenaTiers = () =>
+  loadChecked(
+    'arena-tiers',
+    z
+      .record(z.string(), arenaTierSchema)
+      .transform((tiers) => Object.keys(tiers).map((_, tier) => tiers[String(tier)]!)),
+  )
+export const arenaTier = (tier: number): ArenaTier | undefined => arenaTiers()[tier]
+
+/** compete.ini (pvp-rankings.md 11). */
+export const arenaConfig = () =>
+  loadChecked(
+    'arena-config',
+    z.object({
+      initscore: int,
+      competecd: int,
+      competemaxcount: int,
+      competevipmaxcount: int,
+      savaselffightcount: int,
+      competelevel: int,
+      competerank: int,
+      topcount: int,
+      onemoney: int,
+      backmoney: int,
+      fortunecatmul: int,
+      expprizescore: int,
+      competefriendfightcount: int,
+      friendonemoney: int,
+      savefightfriendcount: int,
+      lookone: int,
+      looktwo: int,
+      refurbishtime: int,
+      refurbishmoney: int,
+      competemaxcountGold: int,
+    }),
+  )
+
+const honorShopSchema = z.object({
+  /** Weights for 1-4 identified properties. */
+  c1: int,
+  c2: int,
+  c3: int,
+  c4: int,
+  honor: int,
+  /** Minimum arena tier. */
+  rank: int,
+})
+export type HonorShopOffer = z.infer<typeof honorShopSchema>
+/** scoreprize.ini: the Honor shop armour by item id. */
+export const arenaHonorShop = () =>
+  loadChecked('arena-honor-shop', z.record(z.string(), honorShopSchema))
+
+const placeByGate = <T extends z.ZodType>(value: T) =>
+  z.record(z.string(), z.record(z.string(), value))
+const tollGateRankRewards = () =>
+  loadChecked(
+    'toll-gate-rank-rewards',
+    z.object({
+      exp: placeByGate(int),
+      /** `capitalType,amount` (always 0 = Stone). */
+      money: placeByGate(z.string().regex(/^\d+,\d+$/)),
+      item: placeByGate(z.union([int, z.string()])),
+    }),
+  )
+/** Rank{Exp,Money,Item}Reward.ini: the weekly reward for a place (1-50) at a toll gate. */
+export function tollGateRankReward(gateId: number, place: number) {
+  const tables = tollGateRankRewards()
+  const exp = tables.exp[String(place)]?.[String(gateId)]
+  const money = tables.money[String(place)]?.[String(gateId)]
+  if (exp === undefined || money === undefined) return undefined
+  const [capitalType = 0, amount = 0] = money.split(',').map(Number)
+  return { exp, capitalType, money: amount, item: tables.item[String(place)]?.[String(gateId)] }
+}
+
+/** gametop.tab rows of the M4 lists (decision 13) with our English labels, plus the toll gates. */
+export const rankings = () =>
+  loadChecked(
+    'rankings',
+    z.object({
+      lists: z.array(
+        z.object({
+          ID: int,
+          Type: z.string(),
+          Name: z.string(),
+          key: z.enum(['level', 'stone', 'lasNoches', 'arena']),
+          group: z.string(),
+          label: z.string(),
+        }),
+      ),
+      tollGates: z.object({
+        key: z.literal('tollGateWeekly'),
+        group: z.string(),
+        label: z.string(),
+        gates: z.array(int),
+      }),
+    }),
+  )
+
+export interface MarketCategory {
+  /** StepName<n>: a language key, a literal ("1—10") or a number shown as is. */
+  Name: number | string
+  /** StepDes<n>: language key of the step's label. */
+  Des: string
+  /** Category key: top type, then the child index per step, joined with `_`. */
+  Path: string
+  children: MarketCategory[]
+}
+const marketCategorySchema: z.ZodType<MarketCategory> = z.lazy(() =>
+  z.object({
+    Name: z.union([int, z.string()]),
+    Des: z.string(),
+    Path: z.string(),
+    children: z.array(marketCategorySchema),
+  }),
+)
+/** The Market browse tree (martsellshow.tab, built like MarcketBuyShowPage.InitData). */
+export const marketCategories = () =>
+  loadChecked('market-categories', z.array(marketCategorySchema))
+
+let marketLeaves: Set<string> | undefined
+/**
+ * Category of a listed item (MartSystem.GetDomainRec): item.ini `MartType`, plus
+ * `_<properties - 1>` for weapons (type 0) and armour (type 2). Undefined when the item has no
+ * browsable category.
+ */
+export function marketCategoryKey(itemId: string, identifiedProps = 0) {
+  if (!marketLeaves) {
+    const leaves = new Set<string>()
+    const walk = (node: MarketCategory): void => {
+      if (node.children.length === 0) leaves.add(node.Path)
+      node.children.forEach(walk)
+    }
+    marketCategories().forEach(walk)
+    marketLeaves = leaves
+  }
+  const martType = item(itemId)?.MartType
+  if (martType === undefined) return undefined
+  const base = String(martType)
+  const key = /^[02]_/.test(base) ? `${base}_${identifiedProps - 1}` : base
+  return marketLeaves.has(key) ? key : undefined
+}
+
+/** MailPropConfig.ini. Only the three length keys were read by the original MailServer. */
+export const mailConfig = () =>
+  loadChecked(
+    'mail-config',
+    z.object({
+      PlayerMailMaxTitleWord: int,
+      PlayerMailMaxTextWord: int,
+      SystemHintMailMaxTextWord: int,
+      PlayerMailMaxSaveTime: int,
+      SystemHintMailMaxSaveTime: int,
+      PlayerMailMaxCount: int,
+      SystemHintMailMaxCount: int,
+      SystemBRMailCount: int,
+    }),
+  )
+
+/**
+ * Mail categories in the client's tab order (UI_MailFrame._mailTypeAry) with their tab label
+ * keys. Hard-coded in the client, no data file (friends-mail.md "Types and categories").
+ */
+export const MAIL_CATEGORIES = [
+  { type: 0, key: 'Common_SystemNoticeMailTab' },
+  { type: 2, key: 'Common_PlayerMailTab' },
+  { type: 8, key: 'Common_MailArenaMailTab' },
+  { type: 10, key: 'Common_MailMartMailTab' },
+  { type: 5, key: 'Common_MailSlaveMailTab' },
+  { type: 4, key: 'Common_MailInterMailTab' },
+  { type: 7, key: 'Common_MailMatchMailTab' },
+  { type: 6, key: 'Common_MailRaceMailTab' },
+  { type: 9, key: 'Common_MailSGateMailTab' },
+  { type: 3, key: 'Common_ArenaMsgMailTab' },
+  { type: 1, key: 'Common_MailOtherMailTab' },
+] as const
+
+/** Team size; no data file (J/TeamModule/TeamDefine/TeamDefine.java:7-8). */
+export const TEAM_MAX_MEMBERS = 3
+export const TEAM_MIN_MEMBERS = 2

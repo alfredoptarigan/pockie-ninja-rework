@@ -5,7 +5,9 @@ import {
   coerce,
   missingExploreFactories,
   groupBy,
+  martTree,
   namedRows,
+  type MartNode,
   stockRows,
   tableRows,
   type Row,
@@ -360,6 +362,89 @@ describe('imported M3 data: Demon City instances', () => {
     expect(pub.scenes['2601']).toEqual({ MonsterLibID: 20001, UseEnergy: 3 })
     expect(Object.values(pub.libs).flat()).toHaveLength(195)
     expect(count(pub.rewardRules)).toBe(403)
+  })
+})
+
+describe('martTree', () => {
+  it('groups steps in first-seen order, stops at empty names, sends quality +1 for gear', () => {
+    const rows = [
+      { StepName1: 0, StepName2: 'W1', StepName3: '1—10', StepName4: 'Blue', StepDes2: 'Pos' },
+      { StepName1: 0, StepName2: 'W1', StepName3: '1—10', StepName4: 'Gold', StepDes2: 'Pos' },
+      { StepName1: 0, StepName2: 'W2', StepName3: '1—10', StepName4: 'Blue', StepDes2: 'Pos' },
+      { StepName1: 4, StepName2: 'Food', StepName3: '', StepName4: '', StepDes2: 'Class' },
+      { StepName1: 3, StepName2: 'Gem', StepName3: 'Red', StepName4: 1, StepDes2: 'Class' },
+    ]
+    const paths = (nodes: MartNode[]): string[] =>
+      nodes.flatMap((node) => [node.Path, ...paths(node.children)])
+    expect(paths(martTree(rows))).toEqual([
+      ...['0', '0_0', '0_0_0', '0_0_0_1', '0_0_0_2', '0_1', '0_1_0', '0_1_0_1'],
+      ...['4', '4_0'],
+      ...['3', '3_0', '3_0_0', '3_0_0_0'],
+    ])
+    expect(martTree(rows)[1]?.children[0]).toEqual({
+      Name: 'Food',
+      Des: 'Class',
+      Path: '4_0',
+      children: [],
+    })
+  })
+})
+
+describe('imported M4 data', () => {
+  it('has 22 arena tiers with 20 NPCs each and 50 × 16 toll gate rank rewards', () => {
+    const tiers = data('arena-tiers') as Record<string, { npcs: string[] }>
+    expect(count(tiers)).toBe(22)
+    expect(Object.values(tiers).every((tier) => tier.npcs.length === 20)).toBe(true)
+    const rewards = data('toll-gate-rank-rewards')
+    // RankItemReward.ini only lists 100001-100006, all 0 (no item rewards).
+    for (const [table, gates] of [
+      ['exp', 16],
+      ['money', 16],
+      ['item', 6],
+    ] as const) {
+      expect(count(rewards[table])).toBe(50)
+      expect(Object.values(rewards[table]).every((row) => count(row as object) === gates)).toBe(
+        true,
+      )
+    }
+    expect(Object.values(rewards.item).flatMap((row) => Object.values(row as object))).toEqual(
+      Array(300).fill(0),
+    )
+    expect(rewards.money['1']['100001']).toBe('0,16908')
+  })
+
+  it('gives every tradable MartType a Market category, except 14 off-tree items', () => {
+    const leaves = new Set<string>()
+    const walk = (node: MartNode): void => {
+      if (node.children.length === 0) leaves.add(node.Path)
+      node.children.forEach(walk)
+    }
+    ;(data('market-categories') as MartNode[]).forEach(walk)
+    expect(leaves.size).toBe(531)
+    const offTree = Object.entries(data('items') as Record<string, Row>)
+      .filter(([, row]) => row.MartType !== undefined && [2, 3].includes(Number(row.CanTrade)))
+      .filter(([, row]) => {
+        const type = String(row.MartType)
+        return !leaves.has(/^[02]_/.test(type) ? `${type}_1` : type)
+      })
+      .map(([id]) => id)
+    // Level 10 gems, two level 5 debris and six level 91-100 armours (data hole).
+    expect(offTree.sort()).toEqual([
+      'i110110',
+      'i110210',
+      'i110310',
+      'i110410',
+      'i110510',
+      'i110610',
+      'i152004',
+      'i152014',
+      'i210110',
+      'i220110',
+      'i230110',
+      'i280110',
+      'i300110',
+      'i310110',
+    ])
   })
 })
 
