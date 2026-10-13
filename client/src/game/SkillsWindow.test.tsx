@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import type { SkillView } from '@pockie/shared'
 import { character } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
+import { scrollSkillIcon } from './ScrollSkillsPanel'
 import { SkillsWindow } from './SkillsWindow'
 
 const skills: SkillView = {
@@ -19,6 +20,7 @@ const skills: SkillView = {
   activeTree: 0,
   freeResets: 0,
   resetCost: 8,
+  scrolls: [],
   trees: Array.from({ length: 3 }, () =>
     Array.from({ length: 6 }, (_, slot) => ({ slot, skillId: null, level: 0 })),
   ),
@@ -37,7 +39,7 @@ describe('Skills window', () => {
   it('shows three trees, six slots, English skill names and passive elements', async () => {
     setup()
     expect(await screen.findByRole('tab', { name: 'Tree 1' })).toBeVisible()
-    expect(screen.getAllByRole('tab')).toHaveLength(3)
+    expect(screen.getAllByRole('tab')).toHaveLength(4)
     expect(screen.getAllByRole('combobox', { name: /Slot \d skill/ })).toHaveLength(6)
     expect(screen.getByText('Fire Release')).toBeVisible()
     expect(screen.getAllByRole('option', { name: 'Crystal Blade' })).toHaveLength(6)
@@ -132,5 +134,54 @@ describe('Skills window', () => {
         body: JSON.stringify({ tree: 0, slot: 0, skillId: 1803, level: 1 }),
       }),
     )
+  })
+  it('lists scroll skills with time left and slots them up to two per tree', async () => {
+    const view: SkillView = {
+      ...skills,
+      scrolls: [
+        { skillId: 1831, expiresAt: null },
+        {
+          skillId: 1833,
+          expiresAt: new Date(Date.now() + 3 * 86_400_000 + 9_000_000).toISOString(),
+        },
+        { skillId: 18046, expiresAt: null },
+      ],
+      trees: skills.trees.map((slots, tree) =>
+        slots.map((slot) =>
+          tree === 0 && slot.slot < 2
+            ? { ...slot, skillId: [1831, 1833][slot.slot]!, level: 1 }
+            : slot,
+        ),
+      ),
+    }
+    const fetchMock = mockApi({
+      'GET /api/game/skills': () => json(view),
+      'POST /api/game/skills/slot': () => json({ ...view, character }),
+    })
+    renderWithProviders(<SkillsWindow character={character} onClose={() => {}} />)
+    await userEvent.click(await screen.findByRole('tab', { name: 'Scroll Skills' }))
+    expect(screen.getByText('Izanagi')).toBeVisible()
+    expect(screen.getAllByText('Permanent')).toHaveLength(2)
+    expect(screen.getByText('3d 2h left')).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Slot Royal Hollow Flash in tree 1' })).toBeDisabled()
+    await userEvent.click(screen.getByRole('button', { name: 'Slot Royal Hollow Flash in tree 2' }))
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/game/skills/slot',
+      expect.objectContaining({ body: JSON.stringify({ tree: 1, slot: 0, skillId: 18046 }) }),
+    )
+    await userEvent.click(screen.getByRole('button', { name: 'Remove Izanagi from tree 1' }))
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/game/skills/slot',
+      expect.objectContaining({ body: JSON.stringify({ tree: 0, slot: 0, skillId: null }) }),
+    )
+  })
+  it('has an icon in the Reborn asset manifest for every scroll skill', async () => {
+    const { default: assets } = await import('../generated/reborn-assets.json')
+    for (const id of [
+      1831, 1833, 1834, 1835, 1836, 18041, 18042, 18043, 18044, 18045, 18046, 18091,
+    ])
+      expect((assets as Record<string, { url: string }>)[`icons/skills/${id}.png`]?.url).toBe(
+        scrollSkillIcon(id),
+      )
   })
 })

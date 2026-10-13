@@ -6,13 +6,14 @@ import {
   type SkillInput,
 } from '@pockie/game-core'
 import {
+  SCROLL_SKILLS_PER_TREE,
   SKILL_RESET_COST,
   SKILL_SLOTS_PER_TREE,
   SKILL_TREE_COUNT,
   type SkillSlotInput,
   type SkillView,
 } from '@pockie/shared'
-import { and, eq, inArray, ne, sql } from 'drizzle-orm'
+import { and, eq, gt, inArray, isNotNull, isNull, lte, ne, notInArray, or, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import {
   characterSkills,
@@ -21,7 +22,7 @@ import {
   characters,
 } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { item, skill } from './data.js'
+import { item, rebornScrollSkills, skill } from './data.js'
 import { learningView, learnThroughLevel } from './learning.js'
 import type { Tx } from './progress.js'
 
@@ -33,14 +34,95 @@ const skillAt = (id: number, level: number): SkillInput | undefined => {
   return row ? { id: actualId, ...row } : undefined
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000
+const scrollIds = () => Object.keys(rebornScrollSkills()).map(Number)
+export const isScrollSkill = (id: number) => Object.hasOwn(rebornScrollSkills(), String(id))
+const ownSkill = (characterId: string, skillId: number) =>
+  and(eq(characterSkills.characterId, characterId), eq(characterSkills.skillId, skillId))
+/** Rows still usable at `now`: everything but expired 7-day scroll skills. */
+const live = (now: Date) =>
+  or(isNull(characterSkills.expiresAt), gt(characterSkills.expiresAt, now))
+
+/** Lazily deletes expired scroll skills; their slots cascade. The character lock must be held. */
+async function dropExpiredScrolls(tx: Tx, characterId: string, now = new Date()) {
+  await tx
+    .delete(characterSkills)
+    .where(and(eq(characterSkills.characterId, characterId), lte(characterSkills.expiresAt, now)))
+}
+
+/**
+ * SkillScrollItem (decision 18): learns the scroll's skill. A 7-day scroll extends from
+ * max(now, expiry); a permanent one clears the expiry; a permanent skill refuses both.
+ * Returns false for other items. The character lock must be held.
+ */
+export async function learnScrollSkill(
+  tx: Tx,
+  characterId: string,
+  def: NonNullable<ReturnType<typeof item>>,
+  now = new Date(),
+) {
+  if (def.class !== 'SkillScrollItem') return false
+  const skillId = Number(def.AddSkillId)
+  const days = Number(def.ScrollDays)
+  if (!isScrollSkill(skillId) || ![0, 7].includes(days))
+    throw bad('cannot_use', 'That scroll cannot be used.')
+  await dropExpiredScrolls(tx, characterId, now)
+  const [current] = await tx
+    .select()
+    .from(characterSkills)
+    .where(ownSkill(characterId, skillId))
+    .for('update')
+  if (current && current.expiresAt === null)
+    throw bad('already_permanent', 'You already know that skill permanently.')
+  const expiresAt = days
+    ? new Date(Math.max(now.getTime(), current?.expiresAt?.getTime() ?? 0) + days * DAY_MS)
+    : null
+  if (current)
+    await tx.update(characterSkills).set({ expiresAt }).where(ownSkill(characterId, skillId))
+  else await tx.insert(characterSkills).values({ characterId, skillId, level: 1, expiresAt })
+  return true
+}
+
+/** Expiry times (ms) of live 7-day scroll skills, for rebuilding the arena snapshot. */
+export async function scrollSkillExpiries(tx: Tx | Db, characterId: string, now = new Date()) {
+  const rows = await tx
+    .select({ expiresAt: characterSkills.expiresAt })
+    .from(characterSkills)
+    .where(
+      and(
+        eq(characterSkills.characterId, characterId),
+        isNotNull(characterSkills.expiresAt),
+        gt(characterSkills.expiresAt, now),
+      ),
+    )
+  return rows.map((row) => row.expiresAt!.getTime())
+}
+
 export async function skillView(tx: Tx, characterId: string): Promise<SkillView> {
+  await dropExpiredScrolls(tx, characterId)
+  const scrolls = await tx
+    .select({ skillId: characterSkills.skillId, expiresAt: characterSkills.expiresAt })
+    .from(characterSkills)
+    .where(
+      and(
+        eq(characterSkills.characterId, characterId),
+        inArray(characterSkills.skillId, scrollIds()),
+      ),
+    )
+    .orderBy(characterSkills.skillId)
+  const learning = await learningView(tx, characterId)
   const [state] = await tx
     .select()
     .from(characterSkillState)
     .where(eq(characterSkillState.characterId, characterId))
   const rows = await tx.select().from(characterSkillSlots).where(owner(characterId))
   return {
-    ...(await learningView(tx, characterId)),
+    ...learning,
+    learned: learning.learned.filter((row) => !isScrollSkill(row.skillId)),
+    scrolls: scrolls.map((row) => ({
+      skillId: row.skillId,
+      expiresAt: row.expiresAt?.toISOString() ?? null,
+    })),
     activeTree: state!.activeTree,
     freeResets: state!.freeResets,
     resetCost: SKILL_RESET_COST,
@@ -63,15 +145,33 @@ export async function setSkillSlot(tx: Tx, characterId: string, input: SkillSlot
     await tx.delete(characterSkillSlots).where(target)
     return
   }
-  if (!LEARNABLE_NINJUTSU.includes(input.skillId))
-    throw bad('not_slottable', 'Only learned ninjutsu can go in the skill bar.')
+  const scroll = isScrollSkill(input.skillId)
+  if (!scroll && !LEARNABLE_NINJUTSU.includes(input.skillId))
+    throw bad('not_slottable', 'Only learned ninjutsu and scroll skills can go in the skill bar.')
+  await dropExpiredScrolls(tx, characterId)
   const [learned] = await tx
     .select()
     .from(characterSkills)
-    .where(
-      and(eq(characterSkills.characterId, characterId), eq(characterSkills.skillId, input.skillId)),
-    )
+    .where(ownSkill(characterId, input.skillId))
   if (!learned) throw bad('not_learned', 'You have not learned that skill.')
+  if (scroll) {
+    const others = await tx
+      .select({ skillId: characterSkillSlots.skillId })
+      .from(characterSkillSlots)
+      .where(
+        and(
+          owner(characterId),
+          eq(characterSkillSlots.tree, input.tree),
+          ne(characterSkillSlots.slot, input.slot),
+          ne(characterSkillSlots.skillId, input.skillId),
+        ),
+      )
+    if (others.filter((row) => isScrollSkill(row.skillId)).length >= SCROLL_SKILLS_PER_TREE)
+      throw bad(
+        'not_slottable',
+        `A skill tree holds at most ${SCROLL_SKILLS_PER_TREE} scroll skills.`,
+      )
+  }
   const level = input.level ?? learned.level
   if (level > learned.level || !skillAt(input.skillId, level))
     throw bad('invalid_level', 'Choose a level you have learned.')
@@ -103,10 +203,24 @@ export async function characterSkillInputs(
     .select()
     .from(characterSkillState)
     .where(eq(characterSkillState.characterId, characterId))
+  // Expired scroll skills drop out at once (decision 18), before the lazy delete.
   const slots = await tx
-    .select()
+    .select({ skillId: characterSkillSlots.skillId, level: characterSkillSlots.level })
     .from(characterSkillSlots)
-    .where(and(owner(characterId), eq(characterSkillSlots.tree, state?.activeTree ?? 0)))
+    .innerJoin(
+      characterSkills,
+      and(
+        eq(characterSkills.characterId, characterSkillSlots.characterId),
+        eq(characterSkills.skillId, characterSkillSlots.skillId),
+      ),
+    )
+    .where(
+      and(
+        owner(characterId),
+        eq(characterSkillSlots.tree, state?.activeTree ?? 0),
+        live(new Date()),
+      ),
+    )
     .orderBy(characterSkillSlots.slot)
   const passives = await tx
     .select()
@@ -159,7 +273,15 @@ export async function resetSkills(
   // OnCustomResetSkill preserves primary count and rerolls primary skills before secondary skills.
   draw(ELEMENT_PASSIVES, primaryCount)
   draw(LEARNABLE_NINJUTSU, character.level - 1)
-  await tx.delete(characterSkills).where(eq(characterSkills.characterId, character.id)) // cascades all three bars
+  // Cascades their slots in all three bars; scroll skills (bought, timed) are kept.
+  await tx
+    .delete(characterSkills)
+    .where(
+      and(
+        eq(characterSkills.characterId, character.id),
+        notInArray(characterSkills.skillId, scrollIds()),
+      ),
+    )
   if (learned.length) await tx.insert(characterSkills).values(learned)
   if (free)
     await tx

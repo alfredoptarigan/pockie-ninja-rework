@@ -53,6 +53,7 @@ describe('GameScreen', () => {
           activeTree: 0,
           freeResets: 0,
           resetCost: 8,
+          scrolls: [],
           trees: Array.from({ length: 3 }, () =>
             Array.from({ length: 6 }, (_, slot) => ({ slot, skillId: null, level: 0 })),
           ),
