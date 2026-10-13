@@ -117,7 +117,7 @@ describe('monster skills in live content', () => {
 
   // Known gaps from the 2026-10-13 skills audit (.claude/plans/skills-gaps.plan.md). Remove an id
   // here when its script lands; a new id showing up means live content gained an unported skill.
-  const unportedKnown = [5, 6, 7, 8]
+  const unportedKnown: number[] = []
 
   it('has a script for every live monster skill but the known gaps', () => {
     const unported = [...liveSkills]

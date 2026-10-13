@@ -1,6 +1,7 @@
 // Skill rows the engine needs on its own, and the ported scripts by their skill.ini `javascript`.
 import { AOYI_SCRIPTS } from './scripts/execute.js'
 import { INSTANCE_SKILLS } from './scripts/instance-skills.js'
+import { LAS_NOCHES_A_SKILLS } from './scripts/las-noches-a.js'
 import { LAS_NOCHES_B_SKILLS } from './scripts/las-noches-b.js'
 import { FIELD_2600_SKILLS } from './scripts/field-2600-skills.js'
 import { MONSTER_SKILLS } from './scripts/monster-skills.js'
@@ -53,5 +54,6 @@ export const SKILL_SCRIPTS: Record<string, SkillScript> = {
   ...AOYI_SCRIPTS,
   ...NINJUTSU_ATTACK,
   ...NINJUTSU_TRIGGER_A_SKILLS,
+  ...LAS_NOCHES_A_SKILLS,
   ...LAS_NOCHES_B_SKILLS,
 }

@@ -171,7 +171,8 @@ export interface Fighter extends FighterInput {
   atkTimeMul: number
   atkTimeAdd: number
   initDefense: number
-  /** DefenseAdd of FightSystem.ChangeDefense (DefenseMul stays 0). */
+  /** DefenseMul / DefenseAdd of FightSystem.ChangeDefense. */
+  defenseMul: number
   defenseAdd: number
   initHit: number
   hitMulAdd: number
@@ -230,8 +231,8 @@ export interface FightContext {
   changeHit(target: Fighter, add: number): void
   /** ChangeAtkTime: AtkTime = InitAtkTime * 100 / (100 + mul) - add; refused when it would be <= 0. */
   changeAtkTime(target: Fighter, atkTimeMul: number, atkTimeAdd: number): void
-  /** ChangeDefense with DefenseMul 0 (no ported script sets it). */
-  changeDefense(target: Fighter, defenseAdd: number): void
+  /** ChangeDefense: Defense = InitDefense * (100 + mul) / 100 + add; mul defaults to the current. */
+  changeDefense(target: Fighter, defenseAdd: number, defenseMul?: number): void
   changeDodge(target: Fighter, add: number): void
   /** ChangeAtk with MinAtkAdd / MaxAtkAdd kept (nothing ported sets them). */
   changeAtk(target: Fighter, minAtkMul: number, maxAtkMul: number): void
