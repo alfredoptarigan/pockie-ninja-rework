@@ -1,11 +1,12 @@
-import type { ChatMessage } from '@pockie/shared'
+import type { ChatMessage, Notice } from '@pockie/shared'
 import { act, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useState } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { useMe } from '../lib/auth'
 import { createFakeSocket, type FakeSocket } from '../test/socket'
 import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
-import { RealtimePanels } from './Chat'
+import { onNotice, RealtimePanels } from './Chat'
 
 let socket: FakeSocket
 vi.mock('../lib/socket', () => ({ createGameSocket: () => socket }))
@@ -61,7 +62,8 @@ describe('Chat', () => {
     act(() => socket.serverEmit('chat:message', message({ text: 'gm' })))
 
     const line = within(screen.getByRole('list', { name: 'World messages' })).getByRole('listitem')
-    expect(line).toHaveTextContent(/^\d\d:\d\d \[World\] Sasuke_1: gm$/)
+    // Then the Report action, shown on hover or focus.
+    expect(line).toHaveTextContent(/^\d\d:\d\d \[World\] Sasuke_1: gm Report$/)
     expect(line.querySelector('time')).toHaveAttribute('datetime', '2026-10-12T00:00:00Z')
   })
 
@@ -217,6 +219,131 @@ describe('Chat', () => {
     await waitFor(() => expect(sessionChecks).toBe(2))
   })
 })
+
+describe('Chat whispers, team and reports', () => {
+  const me = { characterId: 'c1', name: 'Ninja_01' }
+  const sasuke = { characterId: 'c2', name: 'Sasuke_1' }
+
+  it('sends /Name text as a whisper and keeps the name for a follow-up', async () => {
+    renderChat()
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
+
+    await userEvent.type(
+      screen.getByLabelText('Message to world chat'),
+      '/Sasuke_1 hi there{Enter}',
+    )
+
+    expect(socket.sent).toEqual([{ channel: 'whisper', to: 'Sasuke_1', text: 'hi there' }])
+    expect(screen.getByLabelText('Message to world chat')).toHaveValue('/Sasuke_1 ')
+  })
+
+  it('explains the whisper syntax on the Whisper tab', async () => {
+    renderChat()
+    await userEvent.click(screen.getByRole('tab', { name: 'Whisper' }))
+    await userEvent.type(screen.getByLabelText('Whisper (/Name message)'), 'hello{Enter}')
+
+    expect(socket.sent).toEqual([])
+    expect(screen.getByRole('alert')).toHaveTextContent('To whisper, type /Name and your message.')
+  })
+
+  it('shows whispers both ways on the Whisper tab and starts a reply from a name', async () => {
+    renderChat()
+    act(() => {
+      socket.serverEmit('chat:message', message({ id: 'w', text: 'world news' }))
+      socket.serverEmit(
+        'chat:message',
+        message({ id: 'in', channel: 'whisper', sender: sasuke, to: me, text: 'psst' }),
+      )
+      socket.serverEmit(
+        'chat:message',
+        message({ id: 'out', channel: 'whisper', sender: me, to: sasuke, text: 'yes?' }),
+      )
+    })
+    await userEvent.click(screen.getByRole('tab', { name: 'Whisper' }))
+
+    const log = screen.getByRole('list', { name: 'Whisper messages' })
+    expect(log).not.toHaveTextContent('world news')
+    expect(log).toHaveTextContent('[Whisper] From Sasuke_1: psst')
+    expect(log).toHaveTextContent('[Whisper] To Sasuke_1: yes?')
+
+    await userEvent.click(within(log).getAllByRole('button', { name: 'Whisper to Sasuke_1' })[0]!)
+    expect(screen.getByLabelText('Whisper (/Name message)')).toHaveValue('/Sasuke_1 ')
+  })
+
+  it('has a Team tab and channel only in a team', async () => {
+    renderWithProviders(<TeamToggle />)
+    act(() => socket.serverEmit('connect'))
+    expect(screen.queryByRole('tab', { name: 'Team' })).not.toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Join a team' }))
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
+    await userEvent.click(screen.getByRole('tab', { name: 'Team' }))
+    await userEvent.type(screen.getByLabelText('Message to team chat'), 'ready{Enter}')
+    expect(socket.sent).toEqual([{ channel: 'team', text: 'ready' }])
+  })
+
+  it('reports a line once with the text as shown', async () => {
+    renderChat()
+    act(() => socket.serverEmit('chat:message', message({ id: 'bad', text: 'rude ****' })))
+    socket.onSend = () => ({ ok: true }) as never
+
+    await userEvent.click(screen.getByRole('button', { name: 'Report this message from Sasuke_1' }))
+
+    expect(socket.sent).toEqual([{ channel: 'world', characterId: 'c2', text: 'rude ****' }])
+    expect(screen.getByText('Your report was sent. Thank you.')).toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', { name: 'Report this message from Sasuke_1' }),
+    ).not.toBeInTheDocument()
+  })
+
+  it('offers no report or whisper on your own lines', () => {
+    renderChat()
+    act(() => socket.serverEmit('chat:message', message({ sender: me, text: 'mine' })))
+    expect(screen.queryByRole('button', { name: /Report|Whisper to/ })).not.toBeInTheDocument()
+  })
+
+  it('turns notices and friend presence into system lines and tells listeners', () => {
+    const notices: Notice[] = []
+    const off = onNotice((notice) => notices.push(notice))
+    renderChat()
+    const from = { characterId: 'c2', name: 'Sasuke_1', level: 12 }
+    act(() => {
+      socket.serverEmit('notice', { kind: 'mail', mailId: 'm', category: 'player' })
+      socket.serverEmit('notice', {
+        kind: 'teamPrompt',
+        promptId: 'p',
+        prompt: 'invite',
+        from,
+        expiresAt: '2026-10-12T00:01:00Z',
+      })
+      socket.serverEmit('notice', { kind: 'teamChanged', teamId: null })
+      socket.serverEmit('notice', { kind: 'friendAdded', from })
+      socket.serverEmit('friend:presence', { characterId: 'c2', name: 'Sasuke_1', online: true })
+    })
+    off()
+
+    const log = screen.getByRole('list', { name: 'World messages' })
+    expect(log).toHaveTextContent('[System] You have new mail.')
+    expect(log).toHaveTextContent('Sasuke_1 (Level 12) has invited you to join a team.')
+    expect(log).toHaveTextContent('Sasuke_1 added you as a friend.')
+    expect(log).toHaveTextContent('Sasuke_1 is now online.')
+    expect(within(log).getAllByRole('listitem')).toHaveLength(4)
+    expect(notices.map((n) => n.kind)).toEqual(['mail', 'teamPrompt', 'teamChanged', 'friendAdded'])
+  })
+})
+
+/** Stands in for the team state the game screen passes down. */
+function TeamToggle() {
+  const [inTeam, setInTeam] = useState(false)
+  return (
+    <>
+      <button type="button" onClick={() => setInTeam(true)}>
+        Join a team
+      </button>
+      <RealtimePanels characterId="c1" inTeam={inTeam} />
+    </>
+  )
+}
 
 /** Watches the session like the route guard of /play does. */
 function SessionProbe() {
