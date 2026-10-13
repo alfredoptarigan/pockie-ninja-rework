@@ -1,5 +1,6 @@
 // Las Noches boss skills 5 Poison Mist, 6 Darkness, 7 Needles, 8 Big Rasengan and their buffs
-// 11885 / 11886. Only level 1 rows exist; other levels keep 0 like the scripts' switch.
+// 11885 (11886 Dark Walk lives in las-noches-b-buffs.ts). Only level 1 rows exist; other levels keep
+// 0 like the scripts' switch.
 import type { BuffScripts } from '../buffs.js'
 import {
   SKILL_SUCCESS,
@@ -211,9 +212,6 @@ export const LAS_NOCHES_A_SKILLS: Record<string, SkillScript> = {
 const MIST_PIERCE = 430
 const MIST_PARRY = 290
 const MIST_TOUGH = 410
-const DARKNESS_SLOW = 50
-const DARKNESS_HIT = 430
-const DARKNESS_DODGE = 290
 
 /** buff_duwu_11885.js on add (sign 1) and remove (sign -1); Parry is the parry percent. */
 function mist(ctx: Ctx, self: Fighter, defenseDown: number, sign: number) {
@@ -221,13 +219,6 @@ function mist(ctx: Ctx, self: Fighter, defenseDown: number, sign: number) {
   self.pierce -= sign * MIST_PIERCE
   self.parryPercent -= sign * MIST_PARRY
   self.tough -= sign * MIST_TOUGH
-}
-
-/** buff_heianxingzhishu_11886.js; ChangeHit / ChangeDodge keep HitMulMul / DodgeMulMul (0). */
-function dark(ctx: Ctx, self: Fighter, slow: number, sign: number) {
-  ctx.changeAtkTime(self, self.atkTimeMul - sign * slow, self.atkTimeAdd)
-  ctx.changeHit(self, self.hitMulAdd - sign * DARKNESS_HIT)
-  ctx.changeDodge(self, self.dodgeMulAdd - sign * DARKNESS_DODGE)
 }
 
 export const LAS_NOCHES_A_BUFFS: Record<string, BuffScripts> = {
@@ -238,15 +229,5 @@ export const LAS_NOCHES_A_BUFFS: Record<string, BuffScripts> = {
       mist(ctx, self, buff.saveData1 ?? 0, 1)
     },
     onRemove: (ctx, self, buff) => mist(ctx, self, buff.saveData1 ?? 0, -1),
-  },
-  // Darkness (6): for SaveData units, AtkTimeMul - 50 (more with SaveData1), less hit and dodge.
-  'buff/buff_heianxingzhishu_11886.js': {
-    onAdd: (ctx, self, buff) => {
-      buff.lifeTime = buff.saveData
-      const slow = Math.trunc(DARKNESS_SLOW * (1 + 0.01 * Math.trunc((buff.saveData1 ?? 0) * 0.01)))
-      dark(ctx, self, slow, 1)
-      buff.saveData1 = slow
-    },
-    onRemove: (ctx, self, buff) => dark(ctx, self, buff.saveData1 ?? 0, -1),
   },
 }

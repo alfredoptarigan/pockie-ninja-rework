@@ -344,43 +344,6 @@ describe('11885 poison mist (buff_duwu_11885.js)', () => {
   })
 })
 
-describe('11886 darkness (buff_heianxingzhishu_11886.js)', () => {
-  it('lasts SaveData units: AtkTimeMul -50, HitMulAdd -430, DodgeMulAdd -290', () => {
-    // Arrange
-    const { ctx, calls } = fakeContext()
-    const self = makeFighter({ atkTimeMul: 10, atkTimeAdd: 3, hitMulAdd: 5, dodgeMulAdd: 6 })
-    const slow = active(11886, 800)
-
-    // Act
-    BUFFS[11886]!.onAdd!(ctx, self, slow, tick(), 0)
-    BUFFS[11886]!.onRemove!(ctx, self, slow, tick(), 0)
-
-    // Assert
-    expect(slow.lifeTime).toBe(800)
-    expect(slow.saveData1).toBe(50)
-    expect(calls).toEqual([
-      ['changeAtkTime', 0, -40, 3],
-      ['changeHit', 0, -425],
-      ['changeDodge', 0, -284],
-      ['changeAtkTime', 0, 60, 3],
-      ['changeHit', 0, 435],
-      ['changeDodge', 0, 296],
-    ])
-  })
-
-  it('a SaveData1 of 200 raises the slow by 2 %', () => {
-    // Arrange
-    const { ctx } = fakeContext()
-    const slow = active(11886, 800, 250)
-
-    // Act
-    BUFFS[11886]!.onAdd!(ctx, makeFighter(), slow, tick(), 0)
-
-    // Assert: 50 * (1 + 0.01 * ToInt(2.5))
-    expect(slow.saveData1).toBe(51)
-  })
-})
-
 describe('in a fight', () => {
   const TEST_SCRIPT = 'test/las_noches_a.js'
   afterEach(() => {
