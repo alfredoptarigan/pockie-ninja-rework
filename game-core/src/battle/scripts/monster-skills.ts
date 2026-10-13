@@ -34,7 +34,7 @@ export function pay(self: Fighter, fv: FightEvent, cost: number) {
 type Hook = (...args: Parameters<SkillScript>) => void
 
 /** The shared shape: MP check, optional effect before, damage * mul strike, effect after, pay. */
-function mpStrike(
+export function mpStrike(
   costRate: number,
   {
     mul = () => STRIKE_MUL,
