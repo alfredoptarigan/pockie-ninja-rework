@@ -1,7 +1,7 @@
 # Plan: Social & Competition (Milestone 4)
 
 **Project**: Pockie Ninja Remastered
-**Status**: In progress. Wave 0 and wave 1 merged; wave 2 tasks 5, 7, 8, 9 merged (server, routes wired in `app.ts`) on 2026-10-13. Tasks 1-10 merged (2026-10-13): team lifecycle, team runs, invite by name, Team and Arena windows, arena replays draw player defenders, translation review. Open: task 11 verification (Playwright journeys, security review)
+**Status**: Done (2026-10-13); tasks 1-11 merged. Task 11: security review, plus Playwright journeys for the arena, market, social (friends, whisper, mail, block) and team toll gate. The journeys found and fixed four client bugs: no team HUD in Demon City (171), Friends/Rankings/Market/Mail could not be opened, Whisper did not prefill the chat, and the Market name search missed Market-only items.
 **Complexity**: Large
 
 ## Goal
