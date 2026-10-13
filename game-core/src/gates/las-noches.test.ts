@@ -71,3 +71,21 @@ describe('a Las Noches run', () => {
     expect(() => buyLife({ ...run, livesBought: 999 }, config)).toThrow()
   })
 })
+
+describe('auto reach', () => {
+  it.each([0, 1, 50, 159, 160])('finds reachable floor %i with binary probes', async (reach) => {
+    const { lasNochesAutoReach } = await import('./las-noches.js')
+    let probes = 0
+    expect(
+      await lasNochesAutoReach(1, 160, async (floor) => {
+        probes++
+        return floor <= reach
+      }),
+    ).toBe(reach)
+    expect(probes).toBeLessThanOrEqual(10)
+  })
+  it('does not invent wins below a failed midway start', async () => {
+    const { lasNochesAutoReach } = await import('./las-noches.js')
+    expect(await lasNochesAutoReach(50, 160, async () => false)).toBe(49)
+  })
+})

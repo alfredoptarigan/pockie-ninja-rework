@@ -26,7 +26,7 @@ const setRun = (values: Partial<typeof singleGate.$inferInsert>) =>
 describe('Las Noches', () => {
   it('shows the entry options and today’s runs', async () => {
     const view = (await ninja.client.get('/api/game/gates/las-noches')).json()
-    expect(view).toEqual({
+    expect(view).toMatchObject({
       bestFloor: 0,
       runsLeft: 3,
       maxRuns: 3,
@@ -45,6 +45,7 @@ describe('Las Noches', () => {
       nextNpcId: 'n900001',
       lifePrice: 6,
     })
+    expect((await gateRow())!.mode).toBe(2)
     expect((await ninja.row()).stone).toBe(4000)
     expect(errorCode(await post('/start', { mode: 'first' }))).toBe('run_active')
   })
@@ -106,5 +107,134 @@ describe('Las Noches', () => {
     const after = await ninja.row()
     expect(after.level > before.level || after.exp === before.exp + 120).toBe(true)
     expect(errorCode(await post('/withdraw'))).toBe('no_run')
+  })
+})
+
+describe('Las Noches auto Gold', () => {
+  it.each([
+    [1, 28],
+    [2, 58],
+    [3, 91],
+  ])('charges %i runs once', async (runs, price) => {
+    await ninja.set({ gold: 100 })
+    const responses = await Promise.all([post('/auto', { runs }), post('/auto', { runs })])
+    expect(responses.filter((r) => r.statusCode === 200)).toHaveLength(1)
+    expect((await ninja.row()).gold).toBe(100 - price)
+    expect(await gateRow()).toMatchObject({ mode: 1, autoRunsBought: runs })
+  })
+  it('refuses insufficient Gold without starting', async () => {
+    await ninja.set({ gold: 27 })
+    expect(errorCode(await post('/auto', { runs: 1 }))).toBe('no_gold')
+    expect((await ninja.row()).gold).toBe(27)
+    expect(await gateRow()).toBeUndefined()
+  })
+  it('refuses invalid and unavailable run counts', async () => {
+    await ninja.set({ gold: 100 })
+    expect((await post('/auto', { runs: 4 })).statusCode).toBe(400)
+    await setRun({ runsDay: today(), runsToday: 2 })
+    expect(errorCode(await post('/auto', { runs: 2 }))).toBe('daily_limit')
+    expect((await ninja.row()).gold).toBe(100)
+  })
+})
+
+describe('auto catch-up', () => {
+  it('processes elapsed floors only once under concurrent loads', async () => {
+    await setRun({
+      mode: 1,
+      currentFloor: 1,
+      autoRunsLeft: 1,
+      autoRunsBought: 1,
+      autoEndFloor: 160,
+      autoReachFloor: 3,
+      autoTickAt: new Date(Date.now() - 61000),
+    })
+    await Promise.all([
+      ninja.client.get('/api/game/gates/las-noches'),
+      ninja.client.get('/api/game/gates/las-noches'),
+    ])
+    expect(await gateRow()).toMatchObject({ currentFloor: 3, mode: 1, bestFloor: 2 })
+    const pot = (await gateRow())!.potExp
+    expect(pot).toBe(355 + 374)
+    await ninja.client.get('/api/game/gates/las-noches')
+    expect((await gateRow())!.potExp).toBe(pot)
+  })
+  it('pays completed runs once and ends auto mode', async () => {
+    await setRun({
+      mode: 1,
+      currentFloor: 1,
+      autoRunsLeft: 1,
+      autoRunsBought: 1,
+      autoEndFloor: 160,
+      autoReachFloor: 1,
+      autoTickAt: new Date(Date.now() - 31000),
+    })
+    await Promise.all([
+      ninja.client.get('/api/game/gates/las-noches'),
+      ninja.client.get('/api/game/gates/las-noches'),
+    ])
+    expect(await gateRow()).toMatchObject({ currentFloor: null, mode: 0, runsToday: 1, potExp: 0 })
+  })
+  it('stops, resumes without another charge, and claims', async () => {
+    await ninja.set({ gold: 100 })
+    await post('/auto', { runs: 1 })
+    await post('/auto-stop')
+    expect((await gateRow())!.mode).toBe(2)
+    await post('/auto', { runs: 1 })
+    expect((await ninja.row()).gold).toBe(72)
+    await post('/auto-stop')
+    await post('/withdraw')
+    expect(await gateRow()).toMatchObject({ mode: 0, autoRunsLeft: 0 })
+  })
+})
+
+describe('auto run boundaries', () => {
+  it('claim preserves other purchased runs while paused', async () => {
+    await setRun({
+      mode: 2,
+      currentFloor: 2,
+      potExp: 355,
+      autoRunsLeft: 3,
+      autoRunsBought: 3,
+      autoEndFloor: 160,
+      autoReachFloor: 160,
+    })
+    const response = await post('/withdraw')
+    expect(response.json().potPaid).toBe(355)
+    expect(await gateRow()).toMatchObject({
+      mode: 2,
+      currentFloor: 1,
+      potExp: 0,
+      runsToday: 1,
+      autoRunsLeft: 2,
+    })
+  })
+  it('catches up all three runs after a long absence', async () => {
+    await setRun({
+      mode: 1,
+      currentFloor: 1,
+      autoRunsLeft: 3,
+      autoRunsBought: 3,
+      autoEndFloor: 160,
+      autoReachFloor: 160,
+      autoTickAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+    })
+    const result = (await ninja.client.get('/api/game/gates/las-noches')).json()
+    expect(await gateRow()).toMatchObject({
+      mode: 2,
+      currentFloor: 161,
+      runsToday: 3,
+      autoRunsLeft: 0,
+      bestFloor: 160,
+      floor50Broadcast: true,
+    })
+    expect(
+      result.broadcasts.filter((m: { key: string }) => m.key === 'SingleGate_231'),
+    ).toHaveLength(1)
+    expect(
+      result.broadcasts.filter((m: { key: string }) => m.key === 'SingleGate_303'),
+    ).toHaveLength(10)
+    const before = await ninja.row()
+    expect((await ninja.client.get('/api/game/gates/las-noches')).json().broadcasts).toEqual([])
+    expect(await ninja.row()).toEqual(before)
   })
 })
