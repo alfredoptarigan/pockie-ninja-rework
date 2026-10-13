@@ -18,6 +18,16 @@ import {
   VICTORY,
   type FighterArt,
 } from './motion'
+import {
+  rebornSign,
+  SECRET_FRAME_MS,
+  secretOverlay,
+  shiftFrames,
+  type OverlayLayer,
+  type SecretArt,
+  type SecretOverlay,
+  type TargetShift,
+} from './secret-technique'
 
 /** Original stage: 1000x600, fighters stand on y 455 at x 300 (left) and 700 (right). */
 export const STAGE = { width: 1000, height: 600, groundY: 455 }
@@ -46,6 +56,12 @@ export interface Pose {
   fade?: 'in' | 'out'
   /** Skill whose motion this is (strikes); other poses are actions (`motion` is the action id). */
   skillId?: number
+  /** Ultimate art drawn instead of the body (the body shows `motion` when it fails to load). */
+  secret?: SecretOverlay
+  /** Secret-technique target motion moving this fighter. */
+  shift?: TargetShift
+  /** Holds the motion's first cell (Reborn's hurt lock). */
+  freeze?: boolean
 }
 
 export type TextKind =
@@ -81,6 +97,8 @@ export interface TimelineOptions {
   skillMotions: SkillMotions | null
   skillName?: (skillId: number) => string | undefined
   buffName?: (buffId: number) => string | undefined
+  /** Loaded ultimate art for a fighter's skill (none: the strike plays the normal motion). */
+  secretArt?: (fighter: number, skillId: number) => SecretArt | undefined
 }
 
 /** Splits `total` into `count` strikes; the last strike gets the remainder. */
@@ -105,7 +123,13 @@ export function hpText(change: number): { kind: TextKind; text: string } {
 
 export function buildTimeline(replay: Replay, options: TimelineOptions): Timeline {
   const { fighters } = replay
-  const { art, skillMotions, skillName = () => undefined, buffName = () => undefined } = options
+  const {
+    art,
+    skillMotions,
+    skillName = () => undefined,
+    buffName = () => undefined,
+    secretArt = () => undefined,
+  } = options
   const poses: Pose[][] = fighters.map(() => [])
   const texts: FloatText[] = []
   const bars: BarState[] = []
@@ -197,7 +221,15 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     }
   }
 
-  function react(target: number, at: number, ev: FightEvent, amount: number, last: boolean) {
+  /** `hold`: the target keeps its current (secret-technique) pose; `shift` keeps moving it. */
+  function react(
+    target: number,
+    at: number,
+    ev: FightEvent,
+    amount: number,
+    last: boolean,
+    { shift, hold = false }: { shift?: TargetShift; hold?: boolean } = {},
+  ) {
     if (ev.hit === false) {
       pose(target, at, DODGE)
       text(at, target, 'miss', 'Dodge')
@@ -205,7 +237,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
       return
     }
     const motion = ev.crit ? HIT_HEAVY : HIT_LIGHT
-    pose(target, at, motion)
+    if (!hold) pose(target, at, motion, { shift })
     changeHp(at, target, -amount)
     // Negative damage: the target's absorption turned the hit into a heal.
     if (ev.crit && amount > 0) text(at, target, 'crit', `Critical ${amount}`)
@@ -215,13 +247,12 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     }
     if (ev.targetShield && last) text(at, target, 'shield', `Absorbed ${ev.targetShield}`)
     if (ev.parry && last) text(at, target, 'info', 'Parry')
-    if (hp[target]! > 0) pose(target, at + motionMs(target, motion), STAND)
+    if (!hold && hp[target]! > 0) pose(target, at + motionMs(target, motion), STAND, { shift })
   }
 
-  function strike(ev: FightEvent, start: number) {
+  /** Skill name and MP cost shown when a strike starts. */
+  function announce(ev: FightEvent, start: number) {
     const actor = ev.actor
-    const target = ev.target
-    const { motion, skillId } = skillMotion(art[actor], ev.skillId, skillMotions)
     const name =
       ev.skillId !== undefined && ev.skillId !== NORMAL_ATTACK_SKILL
         ? skillName(ev.skillId)
@@ -232,11 +263,64 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
       text(start, actor, 'mp', `-${ev.decMp} MP`)
       bar(start, actor)
     }
-    const onTarget =
-      target !== undefined &&
-      target !== actor &&
-      fighters[target] !== undefined &&
-      (ev.hit !== undefined || ev.damage !== undefined)
+  }
+
+  /** The fighter a strike lands on (none for self casts and misses without a target). */
+  const targetOf = ({ target, actor, hit, damage }: FightEvent) =>
+    target !== undefined &&
+    target !== actor &&
+    fighters[target] !== undefined &&
+    (hit !== undefined || damage !== undefined)
+      ? target
+      : undefined
+
+  /**
+   * An ultimate with Reborn art: the caster hides at home while the overlay plays, the target
+   * reacts from `motionFrame` and takes the whole damage on `damageFrame`.
+   */
+  function secretStrike(ev: FightEvent, start: number, secret: SecretArt) {
+    const actor = ev.actor
+    const { technique } = secret
+    const { motion, skillId } = skillMotion(art[actor], ev.skillId, skillMotions)
+    announce(ev, start)
+    const overlay = secretOverlay(secret, sideOf(actor), home(actor), STAGE.groundY, STAGE.width)
+    pose(actor, start, motion, { skillId, secret: overlay })
+    const frameAt = (frame: number) => start + (frame - 1) * SECRET_FRAME_MS
+    const impact = frameAt(technique.damageFrame)
+    let end = start + Math.max(...overlay.layers.map((l) => l.frames.length)) * SECRET_FRAME_MS
+    const target = targetOf(ev)
+    if (target !== undefined) {
+      let shift: TargetShift | undefined
+      let hold = false
+      if (technique.motionFrame > 0) {
+        const at = frameAt(technique.motionFrame)
+        const frames = shiftFrames(technique)
+        if (frames > 0 && !Array.isArray(technique.transforms)) {
+          const { transforms, targetVisibility: visibility } = technique
+          shift = { at, transforms, visibility, sign: rebornSign(sideOf(target)), frames }
+          end = Math.max(end, at + frames * SECRET_FRAME_MS)
+        }
+        pose(target, at, HIT_LIGHT, { shift, freeze: true })
+        hold = technique.holdDeathUntilReaction === true && shift !== undefined
+      }
+      react(target, impact, ev, ev.damage ?? 0, true, { shift, hold })
+      if (hold && hp[target]! > 0) pose(target, shift!.at + shift!.frames * SECRET_FRAME_MS, STAND)
+    }
+    selfEffects(impact, ev)
+    changeBuffs(impact, ev)
+    end = Math.max(end, impact)
+    if (hp[actor]! > 0) pose(actor, end, STAND)
+    return end
+  }
+
+  function strike(ev: FightEvent, start: number) {
+    const actor = ev.actor
+    const secret = ev.skillId === undefined ? undefined : secretArt(actor, ev.skillId)
+    if (secret) return secretStrike(ev, start, secret)
+    const { motion, skillId } = skillMotion(art[actor], ev.skillId, skillMotions)
+    announce(ev, start)
+    const target = targetOf(ev)
+    const onTarget = target !== undefined
     const contact = onTarget ? home(target) - facing(actor) * CONTACT : home(actor)
     let t = start
     if (onTarget) {
@@ -348,4 +432,13 @@ export function poseX(pose: Pose, t: number) {
   if (pose.moveMs <= 0) return pose.to
   const k = Math.min(1, Math.max(0, (t - pose.at) / pose.moveMs))
   return pose.from + (pose.to - pose.from) * k
+}
+
+/** Distinct overlay layers in a timeline (the atlases the battle scene loads). */
+export function secretLayers(timeline: Pick<Timeline, 'poses'>) {
+  const layers = new Map<string, OverlayLayer>()
+  for (const pose of timeline.poses.flat()) {
+    for (const layer of pose.secret?.layers ?? []) layers.set(layer.texture, layer)
+  }
+  return [...layers.values()]
 }
