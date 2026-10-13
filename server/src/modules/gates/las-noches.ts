@@ -44,6 +44,14 @@ const emptyRow = (characterId: string): Row => ({
   livesBought: 0,
   runsDay: null,
   runsToday: 0,
+  mode: 0,
+  expBonus: 0,
+  autoRunsLeft: 0,
+  autoRunsBought: 0,
+  autoEndFloor: null,
+  autoReachFloor: null,
+  autoTickAt: null,
+  floor50Broadcast: false,
 })
 
 async function loadRow(tx: Tx | Db, characterId: string) {
