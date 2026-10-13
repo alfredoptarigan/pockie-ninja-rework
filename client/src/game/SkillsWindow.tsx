@@ -7,8 +7,11 @@ import {
   useActivateSkillTree,
   useResetSkills,
 } from './api'
+import { ScrollSkillsPanel, scrollSkillName } from './ScrollSkillsPanel'
 import { Dialog, GameButton, Notice, Tabs } from './skin'
 import { plainText } from './text'
+
+const SCROLL_TAB = 'scrolls'
 
 export function SkillsWindow({
   character,
@@ -22,6 +25,7 @@ export function SkillsWindow({
   const activate = useActivateSkillTree()
   const reset = useResetSkills()
   const [selectedTree, selectTree] = useState<number | null>(null)
+  const [scrollTab, showScrolls] = useState(false)
   const [currency, setCurrency] = useState<'gold' | 'giftCoupon'>('gold')
   const [confirm, setConfirm] = useState(false)
   const [message, setMessage] = useState('')
@@ -72,98 +76,132 @@ export function SkillsWindow({
               <Tabs
                 label="Skill trees"
                 panelId={panelId}
-                tabs={[0, 1, 2].map((id) => ({ id: String(id), title: `Tree ${id + 1}` }))}
-                active={String(tree)}
+                tabs={[
+                  ...[0, 1, 2].map((id) => ({ id: String(id), title: `Tree ${id + 1}` })),
+                  { id: SCROLL_TAB, title: 'Scroll Skills' },
+                ]}
+                active={scrollTab ? SCROLL_TAB : String(tree)}
                 onChange={(id) => {
-                  selectTree(Number(id))
+                  showScrolls(id === SCROLL_TAB)
+                  if (id !== SCROLL_TAB) selectTree(Number(id))
                   setConfirm(false)
                 }}
               />
-              <section
-                id={panelId}
-                role="tabpanel"
-                aria-label={`Tree ${tree + 1}`}
-                className="space-y-2"
-              >
-                {tree === data.activeTree ? (
-                  <p className="font-bold">Active tree</p>
-                ) : (
-                  <GameButton
-                    disabled={busy}
-                    onClick={() =>
-                      void run(() => activate.mutateAsync({ tree }), `Tree ${tree + 1} activated.`)
+              {scrollTab ? (
+                <section
+                  id={panelId}
+                  role="tabpanel"
+                  aria-label="Scroll Skills"
+                  className="space-y-2"
+                >
+                  <ScrollSkillsPanel
+                    data={data}
+                    busy={busy}
+                    onSlot={(tree, slot, skillId) =>
+                      void run(
+                        () => setSlot.mutateAsync({ tree, slot, skillId }),
+                        skillId === null ? 'Scroll skill removed.' : 'Scroll skill slotted.',
+                      )
                     }
-                  >
-                    Activate tree {tree + 1}
-                  </GameButton>
-                )}
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {data.trees[tree]?.map((slot) => {
-                    const learned = owned.find((skill) => skill.skillId === slot.skillId)
-                    return (
-                      <fieldset
-                        key={slot.slot}
-                        disabled={busy}
-                        className="rounded border border-wood-light p-2"
-                      >
-                        <legend>Slot {slot.slot + 1}</legend>
-                        <select
-                          aria-label={`Slot ${slot.slot + 1} skill`}
-                          className="w-full rounded border border-wood-light bg-parchment p-1"
-                          value={slot.skillId ?? ''}
-                          onChange={(event) => {
-                            const skillId = event.target.value ? Number(event.target.value) : null
-                            const level = ninjutsu.find((skill) => skill.skillId === skillId)?.level
-                            void run(
-                              () =>
-                                setSlot.mutateAsync({
-                                  tree,
-                                  slot: slot.slot,
-                                  skillId,
-                                  ...(level ? { level } : {}),
-                                }),
-                              'Slot saved.',
-                            )
-                          }}
+                  />
+                </section>
+              ) : (
+                <section
+                  id={panelId}
+                  role="tabpanel"
+                  aria-label={`Tree ${tree + 1}`}
+                  className="space-y-2"
+                >
+                  {tree === data.activeTree ? (
+                    <p className="font-bold">Active tree</p>
+                  ) : (
+                    <GameButton
+                      disabled={busy}
+                      onClick={() =>
+                        void run(
+                          () => activate.mutateAsync({ tree }),
+                          `Tree ${tree + 1} activated.`,
+                        )
+                      }
+                    >
+                      Activate tree {tree + 1}
+                    </GameButton>
+                  )}
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {data.trees[tree]?.map((slot) => {
+                      const learned = owned.find((skill) => skill.skillId === slot.skillId)
+                      return (
+                        <fieldset
+                          key={slot.slot}
+                          disabled={busy}
+                          className="rounded border border-wood-light p-2"
                         >
-                          <option value="">No skill</option>
-                          {ninjutsu.map((skill) => (
-                            <option key={skill.skillId} value={skill.skillId}>
-                              {name(skill.skillId)}
-                            </option>
-                          ))}
-                        </select>
-                        <label className="mt-2 flex items-center gap-2">
-                          Use level
+                          <legend>Slot {slot.slot + 1}</legend>
                           <select
-                            aria-label={`Slot ${slot.slot + 1} level`}
-                            disabled={!learned || busy}
-                            value={slot.level || 1}
-                            onChange={(event) =>
+                            aria-label={`Slot ${slot.slot + 1} skill`}
+                            className="w-full rounded border border-wood-light bg-parchment p-1"
+                            value={slot.skillId ?? ''}
+                            onChange={(event) => {
+                              const skillId = event.target.value ? Number(event.target.value) : null
+                              const level = ninjutsu.find(
+                                (skill) => skill.skillId === skillId,
+                              )?.level
                               void run(
                                 () =>
                                   setSlot.mutateAsync({
                                     tree,
                                     slot: slot.slot,
-                                    skillId: slot.skillId,
-                                    level: Number(event.target.value),
+                                    skillId,
+                                    ...(level ? { level } : {}),
                                   }),
-                                'Skill level saved.',
+                                'Slot saved.',
                               )
-                            }
+                            }}
                           >
-                            {Array.from({ length: learned?.level ?? 1 }, (_, index) => (
-                              <option key={index} value={index + 1}>
-                                {index + 1}
+                            <option value="">No skill</option>
+                            {ninjutsu.map((skill) => (
+                              <option key={skill.skillId} value={skill.skillId}>
+                                {name(skill.skillId)}
+                              </option>
+                            ))}
+                            {data.scrolls.map((scroll) => (
+                              <option key={scroll.skillId} value={scroll.skillId}>
+                                {scrollSkillName(scroll.skillId)} (scroll)
                               </option>
                             ))}
                           </select>
-                        </label>
-                      </fieldset>
-                    )
-                  })}
-                </div>
-              </section>
+                          <label className="mt-2 flex items-center gap-2">
+                            Use level
+                            <select
+                              aria-label={`Slot ${slot.slot + 1} level`}
+                              disabled={!learned || busy}
+                              value={slot.level || 1}
+                              onChange={(event) =>
+                                void run(
+                                  () =>
+                                    setSlot.mutateAsync({
+                                      tree,
+                                      slot: slot.slot,
+                                      skillId: slot.skillId,
+                                      level: Number(event.target.value),
+                                    }),
+                                  'Skill level saved.',
+                                )
+                              }
+                            >
+                              {Array.from({ length: learned?.level ?? 1 }, (_, index) => (
+                                <option key={index} value={index + 1}>
+                                  {index + 1}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                        </fieldset>
+                      )
+                    })}
+                  </div>
+                </section>
+              )}
               <section aria-label="Learned skills">
                 <h3 className="font-bold">Learned ninjutsu ({ninjutsu.length})</h3>
                 {ninjutsu.length ? (
