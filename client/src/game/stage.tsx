@@ -9,6 +9,7 @@
 // speed controls, and reports when it is over (or could not play) through `onFinished`.
 import { useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import scenesJson from '../generated/game-scenes.json'
+import type { FighterLook } from './phaser/motion'
 import { GameButton } from './skin'
 import type { Replay, SceneNpc, SceneView } from './types'
 
@@ -115,6 +116,7 @@ export function BattleReplayMount({
   replay,
   clothing,
   monsterIds,
+  defenderLooks,
   sceneId,
   weaponItemId,
   onFinished,
@@ -122,6 +124,8 @@ export function BattleReplayMount({
   replay: Replay
   clothing: number
   monsterIds: string[]
+  /** How each defender is drawn (arena and duels); replaces `monsterIds`. */
+  defenderLooks?: FighterLook[]
   sceneId: number
   /** The player's equipped weapon, drawn over the body. */
   weaponItemId?: string
@@ -134,6 +138,7 @@ export function BattleReplayMount({
       replay,
       clothing,
       monsterIds,
+      defenderLooks,
       sceneId,
       weaponItemId,
       onFinished: () => latest.current(),

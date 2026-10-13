@@ -22,14 +22,13 @@ export function ArenaReplay({
 }) {
   const apply = useApplyResult()
   const [attacker, defender] = playing.replay.looks
-  // ponytail: the stage draws one outfit (the attackers) and NPC art for the defenders, so a
-  // defending player or the Referee has no body yet; pass their outfit once BattleOptions takes it.
   return (
     <BattleReplayMount
       replay={playing.replay.replay}
       clothing={'clothing' in attacker ? attacker.clothing : character.clothing}
       weaponItemId={'clothing' in attacker ? attacker.weaponItemId : undefined}
-      monsterIds={['npcId' in defender ? defender.npcId : '']}
+      monsterIds={[]}
+      defenderLooks={[defender]}
       sceneId={character.sceneId}
       onFinished={() => {
         if (playing.result) apply(playing.result)
