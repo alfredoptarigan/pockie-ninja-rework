@@ -1,7 +1,7 @@
 # Plan: Social & Competition (Milestone 4)
 
 **Project**: Pockie Ninja Remastered
-**Status**: In progress. Wave 0 and wave 1 merged; wave 2 tasks 5, 7, 8, 9 merged (server, routes wired in `app.ts`) on 2026-10-13. Task 6 team lifecycle merged and registered at `/api/game/team` (2026-10-13). Open: task 6 team runs, team and arena client windows, waves 3
+**Status**: In progress. Wave 0 and wave 1 merged; wave 2 tasks 5, 7, 8, 9 merged (server, routes wired in `app.ts`) on 2026-10-13. Tasks 1-10 merged (2026-10-13): team lifecycle, team runs, invite by name, Team and Arena windows, arena replays draw player defenders, translation review. Open: task 11 verification (Playwright journeys, security review)
 **Complexity**: Large
 
 ## Goal
