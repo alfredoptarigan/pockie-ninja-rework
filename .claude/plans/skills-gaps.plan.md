@@ -1,7 +1,7 @@
 # Plan: Skills gaps (M3/M4 cleanup + Ninjutsu milestone)
 
 **Project**: Pockie Ninja Remastered
-**Status**: A1, A2, A3, A4, A6, B1 done on main; every live monster skill has a script. A5 and B7 on Codex's branch, not merged. B2-B6 open.
+**Status**: Done (2026-10-13). Part A and B1-B5, B7 on main (A5, B2-B4, B7 merged from `codex/skills-gaps`); B6 closed without code (no item in the data grants a skill).
 **Source**: skills audit of 2026-10-13 (regular, ultimate/scroll and monster skills vs the original
 server in `~/Privates/game-pockieninja/app/code/props/serv/game/Resource`, decompiled Java in
 `local-run/.runtime/decompiled`).
@@ -42,7 +42,7 @@ Each task: TDD, port 1:1 from the Rhino script, remove the ids from `unportedKno
       Heavy Attack (x3, 10% MaxMP; Las Noches floors).
 - [x] **A4 Las Noches bosses.** 5, 6, 7, 8, 5000, 60001-60005 and buffs 11882, 11883, 11886.
       60003/60004/60005 reuse the 1815/40019/1830 scripts and already fight (done with A2 and B1).
-- [ ] **A5 Secret Technique Scroll.** Either build the treasure box (open with Seal Breakers or
+- [x] **A5 Secret Technique Scroll.** Either build the treasure box (open with Seal Breakers or
       gold, 5-card pick, server-side roll, test-first since it moves items) or pull i159000-i159003
       from the stone shop and explore drops until it exists. Decide before starting.
 - [x] **A6 Lucky Cat 9999** (arena event NPC n310019) and buff 99999.
@@ -55,17 +55,23 @@ with its real kit.
 - [x] **B1 Port the 40 ninjutsu scripts** (1802-1839, 3802-3827) and their ~30 missing fight buffs
       (11804-11849, 11880). Split into batches by buff dependency. Closes the remaining
       `unportedKnown` ids.
-- [ ] **B2 Learning.** Level-up learns one random learnable ninjutsu; every 10th level one element
+- [x] **B2 Learning.** Level-up learns one random learnable ninjutsu; every 10th level one element
       passive 2801-2810 (`SkillSystem.java`, `UpSkilCfg.ini`, `UpSkillLimit.ini`). DB table + API.
-- [ ] **B3 Skill bar.** 3 trees x 6 slots, active tree switch, per-slot level pick, reset (8 gold or
+- [x] **B3 Skill bar.** 3 trees x 6 slots, active tree switch, per-slot level pick, reset (8 gold or
       coupons, free resets). Arena snapshot refreshes on change (M4 rule).
-- [ ] **B4 Skills window** behind the HUD "Skills" button, with English names from
+- [x] **B4 Skills window** behind the HUD "Skills" button, with English names from
       `tools/i18n/en.json`.
-- [ ] **B5 Passives and SkillAdd.** Feed type 3 skills into stats: 29 outfit element passives,
-      nation skill (+1 level of one element passive), per-element SkillAdd chance (`value % 100`)
-      in `fight.ts`. Keep the original quirk that most chances come out as 0.
-- [ ] **B6 Gear skill bonuses** (+skill level, granted skills; skipped in `sets.ts` today).
-- [ ] **B7 Non-fight buffs**: food, EXP scrolls, pills, titles from `UnFightBuff.ini` via item use.
+- [x] **B5 Passives and SkillAdd.** Type 3 skills (outfit passive, learned element passives, the
+      nation passive from `NationUpSkill.ini`) add their `skilladd.ini` `*Skill` terms to the stats
+      (`passiveBonuses` in `server/src/game/combat.ts`); rows naming a final property (2100-2104,
+      2901-2972 CounterBombMul) add nothing, because RefreshRoleProperty overwrites them. The
+      weighted skill pick uses `skillChance` (`probability + SkillAddN % 100`), so the 500-3000
+      outfit bonuses add 0 and the +3 element passives add 3, as in the original. Arena snapshots
+      from before this change are stale (nation joined the source key).
+- [x] **B6 Gear skill bonuses**: closed without code. `AddSkillEquip` / `EffectSkillEquip` never
+      occur on a real item (all 59 `AddSkillId` are 0; one identify row with the prefix "test"),
+      and sets skip them in the original too. Revisit only if new content grants skills.
+- [x] **B7 Non-fight buffs**: food, EXP scrolls, pills, titles from `UnFightBuff.ini` via item use.
 
 ## Who does what (Claude / Codex)
 
