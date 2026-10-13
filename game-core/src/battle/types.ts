@@ -14,6 +14,8 @@ export interface SkillInput {
   effect?: number
   decmp?: number
   canbecounter?: number
+  /** Skill level (GetLevel); the ninjutsu scripts pick their numbers by it. */
+  level?: number
   mul?: number
   add?: number
   selfmul?: number
@@ -97,6 +99,8 @@ export interface FightEvent {
   selfDamage?: number
   /** MP the actor spends (DecMP). */
   decMp?: number
+  /** The strike ignored defence (IsNeglectDef; the client shows it). */
+  neglectDef?: boolean
   /** Rebound the actor takes, after its own mitigation (BackDamage; included in selfDamage). */
   backDamage?: number
   /** HP / MP the actor gains from vampiric strikes or healing scripts (IncHP / IncMP). */
@@ -138,6 +142,8 @@ export const SKILL_LOSE = 3
 export interface ActiveBuff {
   id: number
   saveData: number
+  /** SaveData1 (0 when absent). */
+  saveData1?: number
   lifeTime: number
   startTime: number
 }
@@ -154,6 +160,8 @@ export interface Fighter extends FighterInput {
   startHp: number
   startMp: number
   initAtkTime: number
+  /** AtkTimeMul of FightSystem.ChangeAtkTime (AtkTimeAdd stays 0: nothing ported sets it). */
+  atkTimeMul: number
   initHit: number
   hitMulAdd: number
   /** InitMinAtk / InitMaxAtk and the MinAtkMul / MaxAtkMul percent of FightSystem.ChangeAtk. */
@@ -197,10 +205,19 @@ export interface FightContext {
   damage(victim: Fighter, amount: number): void
   /** FightSystem.Damage(obj, damage, fv, timer): raw HP loss that also clears cleartype-1 buffs. */
   damageWithValue(victim: Fighter, amount: number, fv: FightEvent, timer: number): void
-  addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData?: number): void
+  addBuff(
+    target: Fighter,
+    buffId: number,
+    timer: number,
+    fv: FightEvent,
+    saveData?: number,
+    saveData1?: number,
+  ): void
   removeBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent): void
   getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
   changeNextAtkTime(target: Fighter, amount: number): void
+  /** FightSystem.ChangeAtkTime: AtkTime = InitAtkTime * 100 / (100 + mul), unless that is <= 0. */
+  changeAtkTime(target: Fighter, atkTimeMul: number): void
   changeHit(target: Fighter, add: number): void
   changeDodge(target: Fighter, add: number): void
   /** ChangeAtk with MinAtkAdd / MaxAtkAdd kept (nothing ported sets them). */
@@ -223,4 +240,6 @@ export type SkillScript = (
   target: Fighter,
   fv: FightEvent,
   timer: number,
+  /** The skill.ini row being used (always passed by the engine). */
+  skill?: SkillInput,
 ) => number
