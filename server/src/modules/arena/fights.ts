@@ -247,7 +247,7 @@ export async function bossFight(tx: Tx, character: CharacterRow, arena: ArenaRow
   const tier = tierOf(arena.tier)
   if (arena.tier >= TOP_TIER) throw bad('top_tier', 'You are already at the highest rank.')
   if (arena.score < tier.endscore)
-    throw bad('boss_locked', 'Reach the end of your rank before you challenge the boss.')
+    throw bad('boss_locked', 'Reach the score needed for the next rank to challenge the boss.')
   const npcId = bossNpc(arena.tier)
   const live = await arenaFighter(tx, character)
   const opponent = npcOpponent(npcId)

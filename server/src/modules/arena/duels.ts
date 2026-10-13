@@ -122,12 +122,12 @@ export async function duelRoutes(app: FastifyInstance, { db }: { db: Db }) {
         const me = requireTier(
           arenas.get(character.id),
           'tier_too_low',
-          'Your rank is too low, you must be Beginner III or above.',
+          'Ninjutsu Duels need the rank Beginner III or higher.',
         )
         const theirs = requireTier(
           arenas.get(target.id),
           'target_tier_too_low',
-          "The opponent's rank is too low. They must be Beginner III or above.",
+          "Ninjutsu Duels need the rank Beginner III or higher. Your opponent's rank is too low.",
         )
         if (await blocked(tx, character.id, target.id))
           throw bad('blocked', 'You cannot duel this ninja.')
