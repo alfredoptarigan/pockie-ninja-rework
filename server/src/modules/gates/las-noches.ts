@@ -28,6 +28,7 @@ import type { Tx } from '../../game/progress.js'
 import { vipExp } from '../../game/vip.js'
 import { requireAlive } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
+import { requireNoTeam } from '../teams/index.js'
 import {
   bad,
   characterView,
@@ -255,6 +256,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
       if (row.mode === 1) throw bad('auto_active', 'Auto mode is already running.')
       if (character.sceneId !== 171 && character.sceneId !== 3101)
         throw bad('not_here', 'Enter Las Noches from Demon City.')
+      await requireNoTeam(tx, character.id, 'enter Las Noches')
       if (character.level < LAS_NOCHES_MIN_LEVEL)
         throw bad('too_low', 'You need level 13 to enter Las Noches.')
       if ((row.currentFloor ?? 1) > 160) throw bad('auto_floor', 'Auto mode ends at floor 160.')
@@ -314,6 +316,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
     return withCharacter(db, request, async (tx, character) => {
       if (character.sceneId !== DEMON_CITY)
         throw bad('not_here', 'Talk to Kisuke Urahara in Demon City to enter Las Noches.')
+      await requireNoTeam(tx, character.id, 'enter Las Noches')
       if (character.level < LAS_NOCHES_MIN_LEVEL)
         throw bad('too_low', `You need level ${LAS_NOCHES_MIN_LEVEL} to enter Las Noches.`)
       const row = await loadRow(tx, character.id)
