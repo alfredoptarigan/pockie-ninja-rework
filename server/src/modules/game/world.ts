@@ -1,4 +1,5 @@
-import { and, eq, isNull, sql } from 'drizzle-orm'
+import { unequippedBagItemsWhere } from '../../game/bag.js'
+import { and, eq, sql } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
@@ -66,14 +67,7 @@ async function heldCount(tx: Tx, characterId: string, itemId: string) {
   const rows = await tx
     .select({ count: inventoryItems.count })
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, characterId),
-        eq(inventoryItems.itemId, itemId),
-        isNull(inventoryItems.equippedSlot),
-      ),
-    )
+    .where(and(unequippedBagItemsWhere(characterId), eq(inventoryItems.itemId, itemId)))
   return rows.reduce((sum, row) => sum + row.count, 0)
 }
 

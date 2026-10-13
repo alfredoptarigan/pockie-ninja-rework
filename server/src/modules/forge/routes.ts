@@ -1,3 +1,4 @@
+import { bagItemsWhere, unequippedBagItemsWhere } from '../../game/bag.js'
 // The blacksmith under /api/game/forge (docs/original-data/blacksmith.md): Appraise
 // (IdentifySystem first roll), Refine (re-roll), Enhance (ConsolidateSystem), Inscription
 // (InscribeSystem) and Repair (HardinessSystem). Like the original, none of them checks the scene.
@@ -28,7 +29,7 @@ import {
   type ForgePayment,
 } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
-import { and, eq, inArray, isNotNull, isNull } from 'drizzle-orm'
+import { and, eq, inArray, isNotNull } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { characters, inventoryItems } from '../../db/schema.js'
@@ -83,13 +84,7 @@ async function ownedItem(tx: Tx | Db, characterId: string, id: string) {
   const [row] = await tx
     .select()
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.id, id),
-        eq(inventoryItems.characterId, characterId),
-      ),
-    )
+    .where(and(bagItemsWhere(characterId), eq(inventoryItems.id, id)))
   if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
   return row
 }
@@ -105,14 +100,7 @@ const bagRows = (tx: Tx | Db, characterId: string, itemId: string) =>
   tx
     .select()
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, characterId),
-        eq(inventoryItems.itemId, itemId),
-        isNull(inventoryItems.equippedSlot),
-      ),
-    )
+    .where(and(unequippedBagItemsWhere(characterId), eq(inventoryItems.itemId, itemId)))
 
 const countOf = (rows: ItemRow[]) => rows.reduce((sum, row) => sum + row.count, 0)
 
@@ -214,10 +202,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const [row] = await tx.select().from(characters).where(eq(characters.id, characterId))
     const character = toCharacter(row!, await playerFighter(tx, row!))
     if (!itemId) return { character }
-    const rows = await tx
-      .select()
-      .from(inventoryItems)
-      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, characterId)))
+    const rows = await tx.select().from(inventoryItems).where(bagItemsWhere(characterId))
     const forged = rows.find((r) => r.id === itemId)
     if (!forged) throw new HttpError(404, 'no_item', 'You do not have that item.')
     return { character, item: itemView(forged, wornSetCounts(rows)) }
@@ -225,26 +210,14 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
   app.get('/forge', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
-    const bag = await db
-      .select()
-      .from(inventoryItems)
-      .where(
-        and(
-          eq(inventoryItems.location, 'bag'),
-          eq(inventoryItems.characterId, character.id),
-          isNull(inventoryItems.equippedSlot),
-        ),
-      )
+    const bag = await db.select().from(inventoryItems).where(unequippedBagItemsWhere(character.id))
     return forgeInfo(bag)
   })
 
   // Tooltip and forge state of every equipment row the character owns, keyed by row id.
   app.get('/forge/gear', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
-    const rows = await db
-      .select()
-      .from(inventoryItems)
-      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, character.id)))
+    const rows = await db.select().from(inventoryItems).where(bagItemsWhere(character.id))
     const worn = wornSetCounts(rows)
     return {
       gear: Object.fromEntries(
@@ -281,13 +254,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const rows = await tx
         .select()
         .from(inventoryItems)
-        .where(
-          and(
-            eq(inventoryItems.location, 'bag'),
-            eq(inventoryItems.characterId, character.id),
-            inArray(inventoryItems.id, itemIds),
-          ),
-        )
+        .where(and(bagItemsWhere(character.id), inArray(inventoryItems.id, itemIds)))
       const targets = itemIds.flatMap((id) => {
         const row = rows.find((r) => r.id === id)
         const config = row && equipConfigOf(row.itemId)

@@ -1,6 +1,7 @@
+import { unequippedBagItemsWhere } from '../../game/bag.js'
 import { requireBagRoom } from '../../game/bag.js'
 import { randomInt } from 'node:crypto'
-import { and, eq, isNull, sql } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import {
   shopOpenSchema,
@@ -158,13 +159,7 @@ async function sell(tx: Tx, c: Character, ids: string[], amount?: number) {
   const bag = await tx
     .select()
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, c.id),
-        isNull(inventoryItems.equippedSlot),
-      ),
-    )
+    .where(and(unequippedBagItemsWhere(c.id)))
   let earned = 0
   for (const id of ids) {
     const row = bag.find((r) => r.id === id)
@@ -225,13 +220,7 @@ async function openView(tx: Tx, c: Character) {
   const bag = await tx
     .select()
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, c.id),
-        isNull(inventoryItems.equippedSlot),
-      ),
-    )
+    .where(and(unequippedBagItemsWhere(c.id)))
   const sellable = bag.filter(canSell).map((row) => {
     const def = item(row.itemId)!
     return {
