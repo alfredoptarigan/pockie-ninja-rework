@@ -56,3 +56,17 @@ Import `gameMotions`, `gameScenes` and `gameTollGates` from `client/src/generate
   Their weapon layers exist only where the outfit's `layers.json` already has the key.
 - The shop, forge, toll gate, pub fight and card flip skin pieces are in `game-ui.json` (see the
   `M3_PIECES` comment in `ui.ts`).
+
+## M4 assets (`pnpm assets:export ui`, `pnpm assets:export arena`)
+
+- Window skin: the `M4_PIECES` comment in `ui.ts` lists the pieces per window (team frame and
+  boards, Friends, Mail, Market tree and form controls, whisper window, minimap Mail/Whisper,
+  arena, Honor shop). Paged lists use `page-first/prev/next/last`; the HUD Friends, Rankings and
+  Market buttons are the M3 `menu-social`, `menu-rank`, `menu-mart`. Rankings reuse the panels,
+  pager and tree pieces (there is no `UI_GameTop` SWF, only its AsWing layout).
+- Not exported (text baked in): the 23 arena tier badges (`Font_PosCall*`, Indonesian names),
+  "Kirim", "GO!", "EXP", the "TOP" board, the arena side buttons, "Battle!", the chest cards.
+- Import `gameArena` from `client/src/generated/game-assets.ts`: `faces[clothing]` is the arena
+  opponent picture for players and NPCs; `npcs[id]` is an outfit + weapon or a mob key (N31023,
+  the arena boss, is in `gameArena.mobs`). `gaps` lists 7 outfits without a face in the backup and
+  35 outfit/weapon pairs without weapon layers (draw those NPCs without a weapon).
