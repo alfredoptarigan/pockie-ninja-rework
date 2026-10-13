@@ -28,7 +28,7 @@ import {
 import { equipmentBonuses, equippedGear, type Gear } from './equipment.js'
 import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.js'
 import { drawPouch } from './pouch.js'
-import { grantItems, loadQuests, saveQuests, type Tx } from './progress.js'
+import { grantDrops, loadQuests, saveQuests, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
 import { vipDropMul, vipExp } from './vip.js'
 
@@ -133,6 +133,8 @@ export interface FightRewards {
   stone: number
   items: GrantedItem[]
   levelsGained: number
+  /** Drops that did not fit in a full bag. */
+  lost?: number
 }
 
 /**
@@ -194,16 +196,22 @@ export async function fightMonster(
     }
     const questItems = questItemDrops(progress, monsterId, character.sceneId, random, dropMul)
     apply(recordKill(progress, monsterId, character.sceneId))
-    for (const questItem of questItems) {
-      rewards.items.push({ itemId: questItem, bound: true })
-      apply(recordCollect(progress, questItem))
-    }
+    // Quest items take the last bag rows first; a full bag loses the rest of the loot.
+    const keptQuestItems = await grantDrops(
+      tx,
+      character.id,
+      questItems.map((itemId) => ({ itemId, bound: true })),
+    )
+    for (const questItem of keptQuestItems) apply(recordCollect(progress, questItem.itemId))
     await saveQuests(
       tx,
       character.id,
       progress.filter((q) => changed.has(q.taskId)),
     )
-    await grantItems(tx, character.id, rewards.items)
+    const keptLoot = await grantDrops(tx, character.id, rewards.items)
+    const lost = rewards.items.length + questItems.length - keptLoot.length - keptQuestItems.length
+    rewards.items = [...keptLoot, ...keptQuestItems]
+    if (lost > 0) rewards.lost = lost
     // HardinessSystem 170-182: worn gear loses 1 per enemy killed (one monster per fight).
     await wearEquipped(tx, character.id, () => KILL_LOSS)
   }

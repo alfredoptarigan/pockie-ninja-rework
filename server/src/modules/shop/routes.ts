@@ -36,7 +36,7 @@ import {
   mysticItemSales,
   characterMysticPurchases,
 } from '../../db/schema.js'
-import { item, itemNameKey, task } from '../../game/data.js'
+import { item, itemNameKey, sceneSpawns, task } from '../../game/data.js'
 import {
   grantItems,
   consumeOne,
@@ -49,6 +49,7 @@ import { recordCommand } from '../../game/quests.js'
 import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
+import { npcMenu } from '../game/field-data.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { wholesale, refresh, sellAsk, identifyLists, identifyTables, mystic } from './data.js'
 
@@ -263,8 +264,15 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const userId = requireUser(request).id
     return db.transaction(async (tx) => fn(tx, await lockCharacter(tx, userId)))
   }
-  app.get('/open', { config: { rateLimit: RATE_LIMITS.shopOpen } }, (request) =>
+  // The original only gates the window on the client; the server needs a shop NPC in the scene.
+  const atShop = (request: FastifyRequest, fn: (tx: Tx, c: Character) => Promise<unknown>) =>
     locked(request, async (tx, c) => {
+      if (!sceneSpawns(c.sceneId).some((spawn) => npcMenu(spawn.id) === 'shop'))
+        throw bad('not_here', 'Visit a shop in a village first.')
+      return fn(tx, c)
+    })
+  app.get('/open', { config: { rateLimit: RATE_LIMITS.shopOpen } }, (request) =>
+    atShop(request, async (tx, c) => {
       const { tab } = shopOpenSchema.parse(request.query)
       if (tab === 2) {
         await command(tx, c, 2109)
@@ -274,7 +282,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
     }),
   )
   app.post('/wholesale/buy', { config: { rateLimit: RATE_LIMITS.shopWholesale } }, (request) =>
-    locked(request, async (tx, c) => {
+    atShop(request, async (tx, c) => {
       const input = wholesaleBuySchema.parse(request.body)
       const [, box] = findLevelBand(wholesale.boxes, c.level)!
       const offer = wholesale.items[box.BoxName]!.find((row) => row.item === input.itemId)
@@ -299,7 +307,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
     }),
   )
   app.post('/refresh', { config: { rateLimit: RATE_LIMITS.shopRefresh } }, (request) =>
-    locked(request, async (tx, c) => {
+    atShop(request, async (tx, c) => {
       const { shopType, mode, currency } = shopRefreshSchema.parse(request.body)
       const at = now()
       const [, pool] = poolOf(c.level, shopType)
@@ -380,29 +388,29 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return result(tx, c)
   }
   app.post('/buy', { config: { rateLimit: RATE_LIMITS.shopBuy } }, (request) =>
-    locked(request, async (tx, c) => {
+    atShop(request, async (tx, c) => {
       const i = shopBuySchema.parse(request.body)
       return purchaseStock(tx, c, i.shopType, i.slot, i.currency)
     }),
   )
   app.post('/buy-all', { config: { rateLimit: RATE_LIMITS.shopBuyAll } }, (request) =>
-    locked(request, async (tx, c) =>
+    atShop(request, async (tx, c) =>
       purchaseStock(tx, c, shopBuyAllSchema.parse(request.body).shopType),
     ),
   )
   app.post('/sell', { config: { rateLimit: RATE_LIMITS.shopSell } }, (request) =>
-    locked(request, async (tx, c) => {
+    atShop(request, async (tx, c) => {
       const i = shopSellSchema.parse(request.body)
       return sell(tx, c, [i.inventoryId], i.count)
     }),
   )
   app.post('/sell-all', { config: { rateLimit: RATE_LIMITS.shopSellAll } }, (request) =>
-    locked(request, async (tx, c) =>
+    atShop(request, async (tx, c) =>
       sell(tx, c, shopSellAllSchema.parse(request.body).inventoryIds),
     ),
   )
   app.post('/pouches/refill', { config: { rateLimit: RATE_LIMITS.shopPouch } }, (request) =>
-    locked(request, async (tx, c) => {
+    atShop(request, async (tx, c) => {
       const i = shopPouchRefillSchema.parse(request.body)
       const refill = pouchRefill(c.hpPouch, c.mpPouch, 9000 + c.level * 1000, i.hp, i.mp)
       if (!refill.cost) throw bad('pouch_full', 'Your selected pouches are already full.')

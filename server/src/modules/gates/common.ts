@@ -16,7 +16,7 @@ import type { Db } from '../../db/client.js'
 import { characters, inventoryItems } from '../../db/schema.js'
 import { monsterFighter, playerFighter } from '../../game/combat.js'
 import { dropItems, dropLib, item, npc } from '../../game/data.js'
-import { expUpdate, grantItems, type Tx } from '../../game/progress.js'
+import { expUpdate, grantDrops, grantItems, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 
@@ -162,4 +162,4 @@ export async function saveCharacter(tx: Tx, id: string, values: Partial<Characte
   await tx.update(characters).set(values).where(eq(characters.id, id))
 }
 
-export { grantItems }
+export { grantDrops, grantItems }

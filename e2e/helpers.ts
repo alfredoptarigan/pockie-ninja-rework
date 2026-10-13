@@ -8,8 +8,7 @@ import { parseEnv } from 'node:util'
 
 const PASSWORD = 'e2e-journey-password'
 
-export const dialog = (page: Page, name: string) =>
-  page.getByRole('dialog', { name, exact: true })
+export const dialog = (page: Page, name: string) => page.getByRole('dialog', { name, exact: true })
 
 export const location = (page: Page) => page.getByRole('region', { name: 'Location' })
 

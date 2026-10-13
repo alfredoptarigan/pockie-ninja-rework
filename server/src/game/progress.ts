@@ -2,8 +2,8 @@
 // (TaskSystem / RookieTaskSystem / RewardRule), see docs/original-data/quests-items.md.
 import { createRandom, deriveStats, gainExp } from '@pockie/game-core'
 import { randomInt } from 'node:crypto'
-import type { QuestHandIn } from '@pockie/shared'
-import { and, eq, sql } from 'drizzle-orm'
+import { BAG_SLOTS, type QuestHandIn } from '@pockie/shared'
+import { and, count, desc, eq, isNull, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characterQuests, characters, inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
@@ -23,11 +23,20 @@ const COLLECT_STEP = 1
 
 /**
  * Adds items, stacking onto unequipped rows of the same item up to the stack size. Equipment with
- * an identify count (drop lists) rolls its properties as it lands in the bag.
+ * an identify count (drop lists) rolls its properties as it lands in the bag. With `dropOverflow`
+ * an item that needs a new row in a full bag (BAG_SLOTS) is lost instead; returns what landed.
  */
-export async function grantItems(tx: Tx, characterId: string, items: GrantedItem[]) {
+export async function grantItems(
+  tx: Tx,
+  characterId: string,
+  items: GrantedItem[],
+  { dropOverflow = false } = {},
+) {
   const random = createRandom(randomInt(2 ** 31))
-  for (const { itemId, bound, identifyCount = 0 } of items) {
+  let freeRows = dropOverflow ? BAG_SLOTS - (await bagRows(tx, characterId)) : Infinity
+  const kept: GrantedItem[] = []
+  for (const granted of items) {
+    const { itemId, bound, identifyCount = 0 } = granted
     const maxStack = Number(item(itemId)?.ItemMaxFoldNum ?? 1)
     const [stack] = await tx
       .select()
@@ -47,12 +56,29 @@ export async function grantItems(tx: Tx, characterId: string, items: GrantedItem
         .update(inventoryItems)
         .set({ count: stack.count + 1 })
         .where(eq(inventoryItems.id, stack.id))
-    } else {
+    } else if (freeRows > 0) {
       await tx
         .insert(inventoryItems)
         .values({ characterId, itemId, bound, ...newGearState(itemId, identifyCount, random) })
+      freeRows--
+    } else {
+      continue
     }
+    kept.push(granted)
   }
+  return kept
+}
+
+/** Fight loot: whatever does not fit in the bag is lost. Returns what landed. */
+export const grantDrops = (tx: Tx, characterId: string, items: GrantedItem[]) =>
+  grantItems(tx, characterId, items, { dropOverflow: true })
+
+async function bagRows(tx: Tx, characterId: string) {
+  const [bag] = await tx
+    .select({ rows: count() })
+    .from(inventoryItems)
+    .where(and(eq(inventoryItems.characterId, characterId), isNull(inventoryItems.equippedSlot)))
+  return bag?.rows ?? 0
 }
 
 /** Uses up one of `row`; fails when the row no longer holds that count (a stale read). */
@@ -69,9 +95,13 @@ export async function consumeOne(tx: Tx, row: typeof inventoryItems.$inferSelect
   if (used.length === 0) throw new HttpError(409, 'conflict', 'That item was already used.')
 }
 
-/** Removes up to `count` of an item from unequipped stacks (quest hand-ins). */
+/**
+ * Removes up to `count` of an item from unequipped stacks (quest hand-ins), bound stacks first.
+ * Returns whether any bound item was used.
+ */
 export async function removeItems(tx: Tx, characterId: string, itemId: string, count: number) {
   let left = count
+  let usedBound = false
   const rows = await tx
     .select()
     .from(inventoryItems)
@@ -82,10 +112,12 @@ export async function removeItems(tx: Tx, characterId: string, itemId: string, c
         sql`${inventoryItems.equippedSlot} is null`,
       ),
     )
+    .orderBy(desc(inventoryItems.bound))
   for (const row of rows) {
-    if (left <= 0) return
+    if (left <= 0) break
     const taken = Math.min(left, row.count)
     left -= taken
+    usedBound ||= row.bound
     if (taken === row.count) await tx.delete(inventoryItems).where(eq(inventoryItems.id, row.id))
     else
       await tx
@@ -93,6 +125,7 @@ export async function removeItems(tx: Tx, characterId: string, itemId: string, c
         .set({ count: row.count - taken })
         .where(eq(inventoryItems.id, row.id))
   }
+  return usedBound
 }
 
 export async function loadQuests(tx: Tx, characterId: string): Promise<QuestProgress[]> {

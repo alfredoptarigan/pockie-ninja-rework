@@ -90,6 +90,7 @@ export function FightSummary({
             </>
           )}
         </dl>
+        {won && rewards.lost ? <BagFullNote lost={rewards.lost} /> : null}
         {rewards.levelsGained > 0 && (
           <p role="status" className="font-bold text-leaf">
             Level up! You are now level {result.character.level}.
@@ -111,5 +112,14 @@ export function FightSummary({
         )}
       </div>
     </Dialog>
+  )
+}
+
+/** Drops that did not fit in a full bag are lost (fight loot only). */
+export function BagFullNote({ lost }: { lost: number }) {
+  return (
+    <p role="status" className="font-bold text-danger">
+      Your bag is full: {lost} {lost === 1 ? 'drop was' : 'drops were'} lost.
+    </p>
   )
 }

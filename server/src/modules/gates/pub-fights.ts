@@ -23,7 +23,7 @@ import {
   bad,
   characterView,
   duel,
-  grantItems,
+  grantDrops,
   lastNpcRewards,
   newSeed,
   requireBagRoom,
@@ -81,17 +81,20 @@ async function saveLineup(tx: Tx, character: CharacterRow, npcIds: string[]) {
     })
 }
 
-/** A pull: a new line-up and, for a matching combo, its DropLib at once. */
-async function pull(tx: Tx, character: CharacterRow, pool: string[]) {
+/**
+ * A pull: a new line-up and, for a matching combo, its DropLib at once. The hourly pull refuses a
+ * full bag; the pull after a win is fight loot, so combo items that do not fit are lost.
+ */
+async function pull(tx: Tx, character: CharacterRow, pool: string[], afterWin = false) {
   const lineup = pullLineup(pool, createRandom(newSeed()))
   const { rewardRules, drops } = pubData()
   const ruleId = comboRule(lineup, rewardRules)
-  const items = ruleId ? rollDropLib(drops[ruleId]?.DropLibID ?? 0, vipDropMul(character)) : []
-  await requireBagRoom(tx, character.id, items)
-  await grantItems(tx, character.id, items)
+  const rolled = ruleId ? rollDropLib(drops[ruleId]?.DropLibID ?? 0, vipDropMul(character)) : []
+  if (!afterWin) await requireBagRoom(tx, character.id, rolled)
+  const items = await grantDrops(tx, character.id, rolled)
   await saveLineup(tx, character, lineup)
   const combo = ruleId ? { ruleId, grade: rewardRules[ruleId]!.RewardGrade, items } : null
-  return { lineup, combo }
+  return { lineup, combo, lost: rolled.length - items.length }
 }
 
 export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
@@ -130,12 +133,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
         throw bad('daily_limit', 'You cannot fight in the pub any more today.')
       const { replay, won, hp, mp, maxHp, maxMp } = await duel(tx, character, npcIds)
       const daily = { pubFightDay: utcDay(), pubFightsToday: count + 1 }
-      const rewards = {
-        exp: 0,
-        stone: 0,
-        items: [] as { itemId: string; bound: boolean }[],
-        levelsGained: 0,
-      }
+      const rewards: PubFightResult['rewards'] = { exp: 0, stone: 0, items: [], levelsGained: 0 }
       let combo: PubPullResult['combo'] = null
       let lineup = npcIds
       if (!won) {
@@ -150,20 +148,23 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
           { hp: hpDraw.value, mp: mpDraw.value, hpPouch: hpDraw.pouch, mpPouch: mpDraw.pouch },
           exp,
         )
-        await grantItems(tx, character.id, kill.items)
+        const items = await grantDrops(tx, character.id, kill.items)
         await saveCharacter(tx, character.id, {
           ...update,
           ...daily,
           stone: character.stone + kill.stone,
         })
+        // A win pulls a new line-up at once (outside the hourly limit).
+        const next = await pull(tx, character, pool, true)
+        ;({ lineup, combo } = next)
+        const lost = kill.items.length - items.length + next.lost
         Object.assign(rewards, {
           exp,
           stone: kill.stone,
-          items: kill.items,
+          items,
           levelsGained,
+          ...(lost > 0 && { lost }),
         })
-        // A win pulls a new line-up at once (outside the hourly limit).
-        ;({ lineup, combo } = await pull(tx, character, pool))
       }
       return {
         replay,

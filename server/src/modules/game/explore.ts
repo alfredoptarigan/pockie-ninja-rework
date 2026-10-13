@@ -450,6 +450,7 @@ async function settleSearch(
     rewards.stone += result.rewards.stone
     rewards.items.push(...result.rewards.items)
     rewards.levelsGained += result.rewards.levelsGained
+    if (result.rewards.lost) rewards.lost = (rewards.lost ?? 0) + result.rewards.lost
   } else if (card.type === 'stone') {
     rewards.stone += card.amount
     await tx

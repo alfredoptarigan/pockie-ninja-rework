@@ -26,6 +26,7 @@ import {
   restText,
   starText,
 } from './explore'
+import { BagFullNote } from './FightSummary'
 import { ItemIcon } from './ItemIcon'
 import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount } from './stage'
@@ -592,6 +593,7 @@ function ExploreResultWindow({
         ) : (
           <p>Nothing gained this time.</p>
         )}
+        {rewards.lost ? <BagFullNote lost={rewards.lost} /> : null}
         {rewards.levelsGained > 0 && (
           <p role="status" className="font-bold text-leaf">
             Level up! You are now level {result.character.level}.
