@@ -1,7 +1,7 @@
 # Plan: Reborn Update (Milestone 5)
 
 **Project**: Pockie Ninja Remastered
-**Status**: In progress (2026-10-13). Waves 1-2 (tasks 1-5, 9) merged; wave 3 next.
+**Status**: In progress (2026-10-13). Waves 1-2 and tasks 6, 8 merged and wired; tasks 7 and 11 running.
 **Complexity**: Large
 **Reference (primary source)**: `m5-reborn-reference.md`, normalized data in
 `data/reborn-raw/re/normalized/{talents,bloodlines,skills,quests,events}.json`, raw
@@ -379,7 +379,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
   fallback, limitation (dizzy/charm block, 3 uses).
 - **Validate**: `pnpm --filter @pockie/game-core test -- scroll slice-skills`
 
-### Task 6: Talents feature
+### Task 6: Talents feature (done, wired)
 - **Action**: routes `GET /api/game/talents`, `POST /talents/:id/upgrade {useGold}`,
   `POST /talents/:id/active {active}` with lazy daily reset, cost by attempt index, cap check, EXP and
   level-ups, 3-active rule; `talentFighterInput(tx, id)` for the coordinator; arena snapshot refresh
@@ -407,7 +407,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- bloodlines pub-fights`
 - **Depends on**: 1, 2, 4.
 
-### Task 8: Scroll skills feature
+### Task 8: Scroll skills feature (done, wired; skill reset keeps scroll skills; treasure pool weight is 1% for all 12 permanent scrolls together)
 - **Action**: item use of 540xxx inserts or extends the `character_skills` row with `expires_at`
   (decision 18); `setSkillSlot` accepts scroll skills (max 2 per tree, `not_slottable` otherwise);
   `characterSkillInputs` filters expired rows; decision 19 sources (treasure pool row, pub-fight combo
