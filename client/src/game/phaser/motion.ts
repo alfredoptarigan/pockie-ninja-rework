@@ -1,5 +1,6 @@
 // Sheet and frame math for the exported motion sheets (see generated/game-assets.ts). Pure, so the
 // Phaser scenes and the tests share it.
+import type { ArenaLook } from '../../../../shared/src/schemas/arena'
 import {
   gameMotions,
   SKILL_MOTIONS_URL,
@@ -57,6 +58,29 @@ export function monsterArt(npcId: string): FighterArt | undefined {
   const key = gameMotions.monsters[npcId]
   const set = key ? gameMotions.mobs[key] : undefined
   return set && key ? { set, skills: { group: 'mobs', key } } : undefined
+}
+
+/** How a fighter is drawn: an outfit (players, the Referee) or monster art by npc id. */
+export type FighterLook = ArenaLook
+/** Shown for the outfits the backup has no art for. */
+export const DEFAULT_OUTFIT = 1
+
+/** The outfit drawn for a clothing id (the default one when the backup has no art for it). */
+export const shownOutfit = (clothing: number) => (outfitArt(clothing) ? clothing : DEFAULT_OUTFIT)
+
+export const lookArt = (look: FighterLook) =>
+  'npcId' in look ? monsterArt(look.npcId) : outfitArt(shownOutfit(look.clothing))
+
+/** Look per fighter: attackers wear `attacker`, defenders take `defenders` in fighter order. */
+export function fighterLooks(
+  fighters: { side: 'attackers' | 'defenders' }[],
+  attacker: FighterLook,
+  defenders: FighterLook[],
+): FighterLook[] {
+  let defender = 0
+  return fighters.map((f) =>
+    f.side === 'attackers' ? attacker : (defenders[defender++] ?? { npcId: '' }),
+  )
 }
 
 /** Sheet of a motion id, falling back to the stand motion. */

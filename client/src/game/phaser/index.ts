@@ -4,7 +4,13 @@ import { gameScenes } from '../../generated/game-assets'
 import { plainText } from '../text'
 import type { Replay, SceneView } from '../types'
 import { startBattle, type BattleHandle } from './battle-scene'
-import { loadSkillMotions, monsterArt, outfitArt } from './motion'
+import {
+  fighterLooks,
+  lookArt,
+  loadSkillMotions,
+  shownOutfit,
+  type FighterLook,
+} from './motion'
 import { pictureLayout } from './picture-layout'
 import { startScenePicture, type PictureActions, type PictureHandle } from './picture-scene'
 import { buildTimeline } from './timeline'
@@ -29,14 +35,14 @@ export interface BattleOptions {
   clothing: number
   /** Monster npc id per defender, in fighter order. */
   monsterIds: string[]
+  /** How each defender is drawn, in fighter order (arena and duels); replaces `monsterIds`. */
+  defenderLooks?: FighterLook[]
   sceneId: number
   /** Item id of the player's equipped weapon, drawn over the body (none: bare hands). */
   weaponItemId?: string
   onFinished: () => void
 }
 
-/** Shown for the outfits the backup has no art for. */
-const DEFAULT_OUTFIT = 1
 const skillName = (id: number) => plainText(`lg_Skill_${id}`) || undefined
 const buffName = (id: number) => plainText(`lg_Buffer_${id}`) || undefined
 
@@ -44,23 +50,31 @@ export async function mountBattle(
   parent: HTMLElement,
   options: BattleOptions,
 ): Promise<BattleHandle> {
-  const { replay, clothing, monsterIds, sceneId, weaponItemId, onFinished } = options
-  const outfit = outfitArt(clothing) ? clothing : DEFAULT_OUTFIT
-  // Both are runtime JSON files; a missing weapon layer only leaves the weapon out.
-  const [skillMotions, weapon] = await Promise.all([
-    loadSkillMotions(),
-    weaponItemId ? loadWeaponLayer(outfit, weaponItemId) : undefined,
-  ])
-  let defender = 0
-  const art = replay.fighters.map((f) =>
-    f.side === 'attackers' ? outfitArt(outfit) : monsterArt(monsterIds[defender++] ?? ''),
+  const { replay, clothing, monsterIds, defenderLooks, sceneId, weaponItemId, onFinished } =
+    options
+  const looks = fighterLooks(
+    replay.fighters,
+    { clothing, weaponItemId },
+    defenderLooks ?? monsterIds.map((npcId) => ({ npcId })),
   )
+  const art = looks.map(lookArt)
+  // Both are runtime JSON files; a missing weapon layer only leaves the weapon out.
+  const [skillMotions, weapons] = await Promise.all([
+    loadSkillMotions(),
+    Promise.all(
+      looks.map((look) =>
+        'weaponItemId' in look && look.weaponItemId
+          ? loadWeaponLayer(shownOutfit(look.clothing), look.weaponItemId)
+          : undefined,
+      ),
+    ),
+  ])
   const timeline = buildTimeline(replay, { art, skillMotions, skillName, buffName })
   return startBattle(parent, {
     replay,
     timeline,
     art,
-    weapons: replay.fighters.map((f) => (f.side === 'attackers' ? weapon : undefined)),
+    weapons,
     names: replay.fighters.map((f) => plainText(f.name, f.name)),
     background: gameScenes[String(sceneId)]?.fightBackground,
     buffName,

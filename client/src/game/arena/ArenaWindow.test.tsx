@@ -1,8 +1,9 @@
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { character } from '../../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
+import { mountBattle } from '../phaser'
 import type { Replay } from '../types'
 import { ArenaWindow } from './ArenaWindow'
 import type {
@@ -178,6 +179,13 @@ describe('ArenaWindow', () => {
     expect(screen.getByText('-9.00')).toBeInTheDocument()
 
     await userEvent.click(screen.getByRole('button', { name: 'Watch the fight with Rival_02' }))
+    // Both ninjas wear their outfits: the defending player is no npc.
+    await vi.waitFor(() =>
+      expect(mountBattle).toHaveBeenLastCalledWith(
+        expect.anything(),
+        expect.objectContaining({ clothing: 1, defenderLooks: [{ clothing: 2 }] }),
+      ),
+    )
     expect(await screen.findByRole('tab', { name: 'Fight Log' })).toHaveAttribute(
       'aria-selected',
       'true',
