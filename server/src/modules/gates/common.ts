@@ -70,23 +70,30 @@ export async function hasWeapon(tx: Tx, characterId: string) {
 
 export { bagFits, requireBagRoom } from '../../game/bag.js'
 
-/** The player against `npcIds` as sequential duels (battle.md); HP and MP carry over. */
-export async function duel(tx: Tx, character: CharacterRow, npcIds: string[]) {
-  const fighter = await playerFighter(tx, character)
+/**
+ * Ninjas (a team in fight order) against `npcIds` as sequential duels (battle.md, teams.md 4.1):
+ * the survivor keeps HP and MP and meets the next opponent. `states[i]` is ninja i after the fight.
+ */
+export async function teamDuel(tx: Tx, ninjas: CharacterRow[], npcIds: string[]) {
+  const fighters = await Promise.all(ninjas.map((character) => playerFighter(tx, character)))
   const replay = simulateFight({
-    attackers: [fighter],
+    attackers: fighters,
     defenders: npcIds.map(monsterFighter),
     seed: newSeed(),
   })
-  const me = replay.fighters[0]!
-  return {
-    replay,
-    won: replay.winner === 'attackers',
-    hp: me.hp,
-    mp: me.mp,
+  const states = fighters.map((fighter, i) => ({
+    hp: replay.fighters[i]!.hp,
+    mp: replay.fighters[i]!.mp,
     maxHp: fighter.maxHp,
     maxMp: fighter.maxMp,
-  }
+  }))
+  return { replay, won: replay.winner === 'attackers', states }
+}
+
+/** The player against `npcIds` as sequential duels (battle.md); HP and MP carry over. */
+export async function duel(tx: Tx, character: CharacterRow, npcIds: string[]) {
+  const { replay, won, states } = await teamDuel(tx, [character], npcIds)
+  return { replay, won, ...states[0]! }
 }
 
 /**
