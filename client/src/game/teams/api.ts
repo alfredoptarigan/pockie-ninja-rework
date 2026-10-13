@@ -16,6 +16,12 @@ export const teamKeys = {
 export const teamScene = (sceneId: number) =>
   sceneId === 3102 || [26, 27, 28].includes(Math.floor(sceneId / 100))
 
+const TOLL_GATE_INSTANCE = 5001
+
+/** Scenes where the team HUD shows: the team scenes and the toll gate instance. */
+export const teamHudScene = (sceneId: number) =>
+  teamScene(sceneId) || sceneId === TOLL_GATE_INSTANCE
+
 /** My team and the prompts addressed to me; refetched on every team notice. */
 export function useTeam(enabled = true) {
   const queryClient = useQueryClient()

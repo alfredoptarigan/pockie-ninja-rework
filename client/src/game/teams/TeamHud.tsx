@@ -4,13 +4,11 @@
 import type { Character } from '@pockie/shared'
 import { Panel, GameButton } from '../skin'
 import { useOpenWindow } from '../windows'
-import { teamScene, useTeam } from './api'
+import { teamHudScene, useTeam } from './api'
 import { TeamPromptList } from './TeamPrompts'
 
-const TOLL_GATE_INSTANCE = 5001
-
 export function TeamHud({ character }: { character: Character }) {
-  const shown = teamScene(character.sceneId) || character.sceneId === TOLL_GATE_INSTANCE
+  const shown = teamHudScene(character.sceneId)
   const team = useTeam(shown)
   const open = useOpenWindow()
   if (!shown) return null

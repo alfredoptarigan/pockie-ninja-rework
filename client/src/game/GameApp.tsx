@@ -25,6 +25,7 @@ import type { BagHighlight, SceneNpc } from './types'
 import { isDefeated, isVillage } from './world'
 import { FeatureWindow, OpenWindowProvider, type OpenWindow, type WindowName } from './windows'
 import { WorldMap } from './WorldMap'
+import { teamHudScene, useTeam } from './teams/api'
 
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
 export default function GameApp({ view }: { view: 'game' | 'create' }) {
@@ -74,6 +75,7 @@ function GameScreen({ character }: { character: Character }) {
   const scene = useScene()
   const talk = useTalk()
   const travel = useTravel()
+  const team = useTeam(teamHudScene(character.sceneId))
   const [openWindow, setWindow] = useState<Window | null>(null)
   const [hudLayer, setHudLayer] = useState<HTMLDivElement | null>(null)
   const [npc, setNpc] = useState<SceneNpc | null>(null)
@@ -155,7 +157,7 @@ function GameScreen({ character }: { character: Character }) {
               onNpc={openNpc}
               onOpenBag={openBag}
             />
-            <RealtimePanels characterId={character.id} />
+            <RealtimePanels characterId={character.id} inTeam={Boolean(team.data?.team)} />
             <ExpStrip character={character} />
             <MenuBar onOpen={open} />
           </div>
