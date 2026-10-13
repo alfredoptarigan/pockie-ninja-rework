@@ -9,12 +9,13 @@
 // To open one from anywhere under GameApp: `const open = useOpenWindow(); open('shop', { npcId })`.
 import type { Character } from '@pockie/shared'
 import { createContext, useContext, type ComponentType } from 'react'
+import { ArenaWindow } from './arena'
 import { ForgeWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { DailyQuestWindow } from './daily'
 import { MerchantWindow, ShopWindow } from './shop'
 
-export type WindowName = 'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily'
+export type WindowName = 'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily' | 'arena'
 
 export interface WindowProps {
   character: Character
@@ -44,6 +45,7 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   gates: GateWindow,
   pubFight: ({ character, onClose }) => <PubFightWindow character={character} onClose={onClose} />,
   daily: ({ onClose }) => <DailyQuestWindow onClose={onClose} />,
+  arena: ({ character, onClose }) => <ArenaWindow character={character} onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
