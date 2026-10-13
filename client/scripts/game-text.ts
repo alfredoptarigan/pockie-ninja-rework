@@ -19,7 +19,8 @@ const scenes = game<Record<string, Row>>('scenes')
 const switchRules = game<Record<string, Row>>('scene-switch-rules')
 const sceneNpcs = game<Record<string, { r?: string | string[] }>>('scene-npcs')
 const npcs = game<Record<string, Row>>('npcs')
-const items = game<Record<string, Row>>('items')
+const rebornItems = game<Record<string, Row>>('reborn/items')
+const items = { ...game<Record<string, Row>>('items'), ...rebornItems }
 const tasks = game<Record<string, Row>>('tasks')
 const subTasks = game<Record<string, Row[]>>('sub-tasks')
 const dropItems = game<Record<string, Row[]>>('drop-items')
@@ -173,6 +174,8 @@ for (const [id, row] of Object.entries(items)) {
   if (row.class === 'PharmacyItem' && Number(row.UseLevel ?? 0) <= 20) addItem(id)
 }
 for (const id of Object.keys(honorShop)) addItem(id)
+// M5 scroll skill items (server/data/game/reborn/items.json).
+for (const id of Object.keys(rebornItems)) addItem(id)
 for (const id of itemIds) keys.add(`lg_${items[id]!.Name}`)
 
 // Market, arena and rankings windows: every Market item (any tradable bag item can be listed), the
@@ -248,6 +251,15 @@ const outputs = {
       .filter((id) => items[id]!.class !== 'EquipItem' && Number(items[id]!.CanUse) === 1)
       .sort(),
     itemNames: sorted(Object.fromEntries([...itemIds].map((id) => [id, `lg_${items[id]!.Name}`]))),
+    // Reborn item icons (ResourceID "reborn/etc/360111" -> client/public/assets/reborn/icons/items).
+    rebornItemIcons: sorted(
+      Object.fromEntries(
+        Object.entries(rebornItems).map(([id, row]) => [
+          id,
+          `/assets/reborn/icons/items/${String(row.ResourceID).replace(/^reborn\//, '')}.webp`,
+        ]),
+      ),
+    ),
     marketItemNames: sorted(
       Object.fromEntries(nameOnlyItems.map((id) => [id, `lg_${items[id]!.Name}`])),
     ),

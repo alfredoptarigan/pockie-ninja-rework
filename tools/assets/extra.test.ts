@@ -42,7 +42,11 @@ describe('M2 extra asset coverage', () => {
     const world = JSON.parse(
       readFileSync(join(paths.root, 'client/src/game/world-data.json'), 'utf8'),
     )
-    for (const id of Object.keys(world.itemNames)) expect(gameItems.items[id], id).toBeDefined()
+    for (const id of Object.keys(world.itemNames)) {
+      // M5 Reborn items carry their own icons (world.rebornItemIcons).
+      if (world.rebornItemIcons[id]) fileExists(world.rebornItemIcons[id])
+      else expect(gameItems.items[id], id).toBeDefined()
+    }
     for (const icon of Object.values(gameItems.items)) {
       fileExists(icon.file)
       expect(icon.width).toBeGreaterThan(0)

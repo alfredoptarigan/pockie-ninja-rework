@@ -1,10 +1,18 @@
 // Original item icons (tools/assets/EXTRA.md), drawn in the bag-cell slot of the 2011 skin.
 import type { ReactNode } from 'react'
 import { gameItems, type ItemIcon as Icon } from '../generated/game-extra'
+import world from './world-data.json'
+
+// Reborn items (M5 scroll skills) use Reborn's 24px icons.
+const rebornIcons = world.rebornItemIcons as Record<string, string>
+const REBORN_ICON_SIZE = 24
 
 /** The exported icon of an item id ("i160006"), or undefined when the backup has none. */
-export const itemIcon = (itemId: string): Icon | undefined =>
-  Object.hasOwn(gameItems.items, itemId) ? gameItems.items[itemId] : undefined
+export const itemIcon = (itemId: string): Icon | undefined => {
+  if (Object.hasOwn(gameItems.items, itemId)) return gameItems.items[itemId]
+  const file = Object.hasOwn(rebornIcons, itemId) ? rebornIcons[itemId] : undefined
+  return file ? { file, width: REBORN_ICON_SIZE, height: REBORN_ICON_SIZE } : undefined
+}
 
 /**
  * An item in a bag cell: its original icon, or a neutral "?" when it has none. Both are named

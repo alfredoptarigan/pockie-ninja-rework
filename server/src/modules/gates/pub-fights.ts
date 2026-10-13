@@ -19,6 +19,7 @@ import { drawPouch } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
 import { rewardExp } from '../../game/nonfight-buffs.js'
 import { vipDropMul } from '../../game/vip.js'
+import { scrollComboPrizes } from '../../game/scroll-sources.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
 import {
@@ -91,7 +92,13 @@ export async function pull(tx: Tx, character: CharacterRow, pool: string[], afte
   const lineup = pullLineup(pool, createRandom(newSeed()))
   const { rewardRules, drops } = pubData()
   const ruleId = comboRule(lineup, rewardRules)
-  const rolled = ruleId ? rollDropLib(drops[ruleId]?.DropLibID ?? 0, vipDropMul(character)) : []
+  const rolled = ruleId
+    ? [
+        ...rollDropLib(drops[ruleId]?.DropLibID ?? 0, vipDropMul(character)),
+        // M5 decision 19: a matched combo can also give a 7-day scroll.
+        ...scrollComboPrizes(createRandom(newSeed())),
+      ]
+    : []
   if (!afterWin) await requireBagRoom(tx, character.id, rolled)
   const items = await grantDrops(tx, character.id, rolled)
   await saveLineup(tx, character, lineup)

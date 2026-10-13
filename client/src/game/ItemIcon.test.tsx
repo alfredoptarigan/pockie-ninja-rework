@@ -7,6 +7,14 @@ describe('itemIcon', () => {
     expect(itemIcon('i160006')?.file).toBe('/assets/game/items/icon_resume6.webp')
   })
 
+  it('uses the Reborn icon for M5 scroll items', () => {
+    expect(itemIcon('i540001')).toEqual({
+      file: '/assets/reborn/icons/items/etc/360111.webp',
+      width: 24,
+      height: 24,
+    })
+  })
+
   it('has nothing for unknown ids, including object built-ins', () => {
     expect(itemIcon('i0000000')).toBeUndefined()
     expect(itemIcon('constructor')).toBeUndefined()

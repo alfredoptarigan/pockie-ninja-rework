@@ -2,7 +2,7 @@
 // on arena_players and refreshed on every gear, level or skill change.
 import { and, eq, isNotNull } from 'drizzle-orm'
 import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '../../db/schema.js'
-import { characterSkillInputs } from '../../game/skill-bar.js'
+import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.js'
 import { activeBuffs, buffBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, type PlayerFighter } from '../../game/combat.js'
 import type { Tx } from '../../game/progress.js'
@@ -33,9 +33,13 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     await buffBonuses(tx, character.id),
     await characterSkillInputs(tx, character.id),
   )
-  const expiries = (await activeBuffs(tx, character.id)).flatMap((row) =>
-    row.expiresAt ? [row.expiresAt.getTime()] : [],
-  )
+  const expiries = [
+    ...(await activeBuffs(tx, character.id)).flatMap((row) =>
+      row.expiresAt ? [row.expiresAt.getTime()] : [],
+    ),
+    // A 7-day scroll skill leaving the fighter also invalidates the stored defence.
+    ...(await scrollSkillExpiries(tx, character.id)),
+  ]
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
   const { name, gender, level, avatarId, clothing, nation } = character
   const gear = [...equipped].sort((x, y) => x.id.localeCompare(y.id))
