@@ -970,7 +970,12 @@ export const arenaPlayers = pgTable(
   },
   (t) => [
     // The arena order (World Rank and the opponent windows): tier, score, tie rule.
-    index('arena_players_rank_idx').on(t.tier.desc().nullsFirst(), t.score.desc().nullsFirst(), t.scoreAt, t.characterId),
+    index('arena_players_rank_idx').on(
+      t.tier.desc().nullsFirst(),
+      t.score.desc().nullsFirst(),
+      t.scoreAt,
+      t.characterId,
+    ),
     // Win streak list (tier 2+).
     index('arena_players_streak_idx').on(t.streak.desc().nullsFirst(), t.characterId),
     check('arena_players_tier', sql`${t.tier} between 0 and 21`),
