@@ -63,6 +63,50 @@ export function simulateFight({
   const events: FightEvent[] = []
   /** FightValue.IsChange: the script switched to another skill. */
   const changed = new WeakSet<FightEvent>()
+  const currentSkills = new WeakMap<Fighter, SkillInput>()
+  const healingHandled = new WeakMap<FightEvent, number>()
+  const triggeringDamage = new WeakMap<Fighter, number>()
+  const tickDamage = new WeakMap<FightEvent, number>()
+  const preventsRevive = (self: Fighter) =>
+    self.buffs?.some((buff) => BUFFS[buff.id]?.preventsRevive) ?? false
+  const pendingRevive = (self: Fighter) =>
+    !preventsRevive(self) &&
+    (self.buffs?.some((buff) => BUFFS[buff.id]?.pendingRevive?.(buff)) ?? false)
+  const healingRate = (self: Fighter) =>
+    (self.buffs ?? []).reduce(
+      (rate, buff) => rate * (BUFFS[buff.id]?.healingMultiplier?.(buff) ?? 1),
+      1,
+    )
+  const damageRate = (self: Fighter, element: number, incoming: boolean, ignoreBlessings = false) =>
+    (self.buffs ?? []).reduce(
+      (rate, buff) =>
+        rate *
+        (incoming
+          ? ignoreBlessings && !BUFFS[buff.id]?.negative
+            ? 1
+            : (BUFFS[buff.id]?.incomingDamage?.(buff, element) ?? 1)
+          : (BUFFS[buff.id]?.outgoingDamage?.(buff, element) ?? 1)),
+      1,
+    )
+  function recordDamage(self: Fighter, amount: number) {
+    if (amount <= 0) return
+    for (const buff of self.buffs ?? []) BUFFS[buff.id]?.onDamage?.(self, buff, amount)
+  }
+  function normalizeHealing(
+    self: Fighter,
+    fv: FightEvent,
+    before: number,
+    handled: number,
+    dead: boolean,
+  ) {
+    const raw = (fv.incHp ?? 0) - before - ((healingHandled.get(fv) ?? 0) - handled)
+    if (raw <= 0) return
+    const rate = dead && preventsRevive(self) ? 0 : healingRate(self)
+    if (rate === 1) return
+    const reduction = raw - Math.trunc(raw * rate)
+    self.hp = Math.max(0, self.hp - reduction)
+    fv.incHp = (fv.incHp ?? 0) - reduction
+  }
 
   const toFighter =
     (side: Side, offset: number) =>
@@ -116,7 +160,8 @@ export function simulateFight({
   const left = attackers.map(toFighter('attackers', 0))
   const right = defenders.map(toFighter('defenders', attackers.length))
 
-  const isBreak = (a: Fighter, b: Fighter) => a.hp <= 0 || b.hp <= 0
+  const isBreak = (a: Fighter, b: Fighter) =>
+    (a.hp <= 0 && !pendingRevive(a)) || (b.hp <= 0 && !pendingRevive(b))
   const skillEvent = (self: Fighter, target: Fighter, event: number): FightEvent => ({
     actor: self.index,
     event,
@@ -133,7 +178,11 @@ export function simulateFight({
     ;(fv.delBuffs ??= []).push({ role: target.index, buff: buff.id })
     target.buffs!.splice(i, 1)
     if (BUFFS[buff.id]?.type === SHIELD_BUFF) target.shieldBuff = null
+    const before = fv.incHp ?? 0
+    const handled = healingHandled.get(fv) ?? 0
+    const dead = target.hp <= 0
     BUFFS[buff.id]?.onRemove?.(ctx, target, buff, fv, timer)
+    normalizeHealing(target, fv, before, handled, dead)
   }
 
   function addBuff(
@@ -163,6 +212,8 @@ export function simulateFight({
     ;(target.buffs ??= []).push(buff)
     if (def.type === SHIELD_BUFF) target.shieldBuff = buff
     def.onAdd?.(ctx, target, buff, fv, timer)
+    const incoming = triggeringDamage.get(target)
+    if (incoming) def.onDamage?.(target, buff, incoming)
   }
 
   function removeBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent) {
@@ -189,7 +240,10 @@ export function simulateFight({
       let fv: FightEvent | null = null
       if (BUFFS[buff.id]?.type === 2) {
         fv = { actor: self.index, event: 9, skillId: buff.id }
+        const dead = self.hp <= 0
         BUFFS[buff.id]?.onActivation?.(ctx, self, buff, fv, timer)
+        normalizeHealing(self, fv, 0, 0, dead)
+        if (tickDamage.has(fv)) fv.selfDamage = tickDamage.get(fv)
       }
       if (buff.lifeTime !== -1 && timer > buff.startTime + buff.lifeTime) {
         fv ??= { actor: self.index, event: 9 }
@@ -197,7 +251,7 @@ export function simulateFight({
       }
       if (!fv) continue
       events.splice(size, 0, fv)
-      if (self.hp > 0) continue
+      if (self.hp > 0 || pendingRevive(self)) continue
       die(self, self, timer)
       if (self.hp <= 0) return false
     }
@@ -215,18 +269,31 @@ export function simulateFight({
 
   // ---- Damage (FightSystem.Attack / Damage.java) ----
 
+  function damageTrigger(victim: Fighter, attacker: Fighter, amount: number, timer: number) {
+    const previous = triggeringDamage.get(victim)
+    triggeringDamage.set(victim, amount)
+    try {
+      trigger(victim, attacker, ON_DAMAGED, timer)
+    } finally {
+      if (previous !== undefined) triggeringDamage.set(victim, previous)
+      else triggeringDamage.delete(victim)
+    }
+  }
+
   /** Damage.Damage: raw HP change, then the victim's on-damaged trigger. */
   function damageHp(victim: Fighter, amount: number, timer: number) {
     const attacker = victim.opponent
     const dealt = Math.min(victim.hp, amount)
     victim.hp = Math.min(victim.maxHp, Math.max(0, victim.hp - dealt))
-    if (dealt > 0 && victim.hp > 0 && attacker && attacker.hp > 0 && attacker !== victim) {
-      trigger(victim, attacker, ON_DAMAGED, timer)
+    recordDamage(victim, Math.max(0, dealt))
+    if (dealt > 0 && attacker && attacker.hp > 0 && attacker !== victim) {
+      damageTrigger(victim, attacker, dealt, timer)
     }
   }
 
   /** Damage.DamageUnSkill: raw HP change without triggers (negative heals, capped at MaxHP). */
   function changeHp(victim: Fighter, amount: number) {
+    recordDamage(victim, Math.max(0, Math.min(victim.hp, amount)))
     victim.hp = Math.min(victim.maxHp, Math.max(0, victim.hp - Math.min(victim.hp, amount)))
   }
 
@@ -266,6 +333,17 @@ export function simulateFight({
       fv.damage = 0
       return
     }
+    const element = currentSkills.get(self)?.skilladdtype ?? -1
+    damage = Math.trunc(
+      damage *
+        damageRate(self, element, false) *
+        damageRate(
+          target,
+          element,
+          true,
+          currentSkills.get(self)?.javascript === 'skill/skill_scroll_18041.js',
+        ),
+    )
     // Reborn talents (decision 8) adjust these rolls against the current opponent only.
     if (randInt(1, 100) > hitPercent(self, target)) {
       fv.hit = false
@@ -276,8 +354,9 @@ export function simulateFight({
       damage = applyCrit(damage, self.critAttach, c)
       fv.crit = true
     }
-    let back = reboundOf(damage, target.rebound)
-    const targetHp = absorbed(damage, target.absorb)
+    let back = Math.trunc(reboundOf(damage, target.rebound) * damageRate(self, -1, true))
+    selfDamage = Math.trunc(selfDamage * damageRate(self, -1, true))
+    const targetHp = Math.trunc(absorbed(damage, target.absorb) * healingRate(target))
     damage = applyDecDamage(damage, target.decDamage)
     if (target.parryPercent > 0) {
       damage = applyParry(damage, target.parryPercent)
@@ -288,7 +367,7 @@ export function simulateFight({
     damage = shieldDamage(target, damage, timer, fv, 'targetShield')
     back = applyDefense(applyDecDamage(back, self.decDamage), self.defense, target.neglectDefense)
     if (back) fv.backDamage = back
-    let selfHp = absorbed(selfDamage, self.absorb)
+    let selfHp = Math.trunc(absorbed(selfDamage, self.absorb) * healingRate(self))
     // Original bugs: this drains the target's shield, and the target's stats mitigate selfHp.
     shieldDamage(target, selfHp, timer, fv, 'selfShield')
     selfHp = applyDefense(
@@ -297,23 +376,27 @@ export function simulateFight({
       self.neglectDefense,
     )
     back = shieldDamage(self, back, timer, fv, 'selfShield')
-    const incHp = vampiricOf(damage - targetHp, self.vampiricHp)
+    const incHp = Math.trunc(vampiricOf(damage - targetHp, self.vampiricHp) * healingRate(self))
     const incMp = vampiricOf(damage - targetHp, self.vampiricMp)
     const lastTarget = damage - targetHp
     const lastSelf = back + selfDamage - selfHp - incHp
-    if (incHp) fv.incHp = (fv.incHp ?? 0) + incHp
+    if (incHp) {
+      fv.incHp = (fv.incHp ?? 0) + incHp
+      healingHandled.set(fv, (healingHandled.get(fv) ?? 0) + incHp)
+    }
     if (incMp) fv.incMp = (fv.incMp ?? 0) + incMp
     if (lastSelf + incHp) fv.selfDamage = lastSelf + incHp
     fv.damage = lastTarget
     fv.hit = true
     self.mp += incMp
+    const targetLost = Math.max(0, Math.min(target.hp, lastTarget))
     changeHp(target, lastTarget)
     damageHp(self, lastSelf, timer)
     clearTypeBuff(target, fv, 2, timer)
     if (damage > 0) clearTypeBuff(target, fv, 1, timer)
     if (back + selfDamage > 0) clearTypeBuff(self, fv, 1, timer)
-    if (damage > 0 && target.hp > 0 && self.hp > 0 && self !== target) {
-      trigger(target, self, ON_DAMAGED, timer)
+    if (damage > 0 && self.hp > 0 && self !== target) {
+      damageTrigger(target, self, targetLost, timer)
     }
   }
 
@@ -362,7 +445,19 @@ export function simulateFight({
     const skillId = skill.secondid ?? skill.id
     if (skill.javascript) {
       const script = SKILL_SCRIPTS[skill.javascript]
-      const res = script ? script(ctx, self, target, fv, timer, skill) : SKILL_LOSE
+      const previous = currentSkills.get(self)
+      const before = fv.incHp ?? 0
+      const handled = healingHandled.get(fv) ?? 0
+      const dead = self.hp <= 0
+      currentSkills.set(self, skill)
+      let res: number
+      try {
+        res = script ? script(ctx, self, target, fv, timer, skill) : SKILL_LOSE
+      } finally {
+        if (previous) currentSkills.set(self, previous)
+        else currentSkills.delete(self)
+      }
+      normalizeHealing(self, fv, before, handled, dead)
       if (res !== SKILL_SUCCESS) return res
       // A kicked-back bomb (event 6) keeps the id its script wrote.
       if ((!changed.has(fv) && fv.event !== 6) || (changed.has(fv) && !fv.skillId)) {
@@ -373,6 +468,7 @@ export function simulateFight({
       fv.skillId = skillId
       spendMp(self, fv, decMp)
       const scaled = (mul = 0, add = 0) => Math.trunc(f(f(damage * f(mul)) + add))
+      currentSkills.set(self, skill)
       attack(
         self,
         target,
@@ -381,6 +477,7 @@ export function simulateFight({
         fv,
         timer,
       )
+      currentSkills.delete(self)
     }
     if (skill.canbecounter && canCounter && fv.hit !== false && target.canAttack !== 0) {
       counter(target, self, timer)
@@ -414,9 +511,29 @@ export function simulateFight({
   /** UserSkillBeforeAttack, UserBeDamageSkill, UserDieSkill, ...: trigger skills of a quomodo. */
   function trigger(self: Fighter, target: Fighter, quomodo: number, timer: number) {
     if (self.canMove <= 0 || self.canUseSkill <= 0) return false
+    if (quomodo === ON_DEATH && preventsRevive(self)) return false
+    if (
+      self.hp <= 0 &&
+      quomodo === ON_DAMAGED &&
+      !self.triggerSkills.some(
+        (skill) =>
+          skill.quomodo === ON_DAMAGED && skill.javascript?.startsWith('skill/skill_scroll_'),
+      )
+    )
+      return false
+    if (self.hp <= 0 && quomodo !== ON_DEATH && quomodo !== ON_DAMAGED) return false
     if (quomodo === ON_DEATH) self.hp = 0
     if (self.triggerSkills.length === 0) return false
-    const candidates = self.triggerSkills.filter((s) => s.quomodo === quomodo && probability(s) > 0)
+    const candidates = self.triggerSkills.filter(
+      (s) =>
+        s.quomodo === quomodo &&
+        (self.hp > 0 ||
+          quomodo !== ON_DAMAGED ||
+          s.javascript?.startsWith('skill/skill_scroll_')) &&
+        (s.javascript?.startsWith('skill/skill_scroll_')
+          ? skillChance(s, self.skillAdd)
+          : probability(s)) > 0,
+    )
     const must = candidates.filter((s) => probability(s) >= 100)
     const pick = pickWeighted(
       self,
@@ -526,6 +643,7 @@ export function simulateFight({
   /** AttackTarget: one action. Returns false when the duel is over. */
   function act(self: Fighter, target: Fighter, timer: number) {
     if (!activateBuffs(self, timer)) return false
+    if (self.hp <= 0) return pendingRevive(self)
     if (self.canMove <= 0) {
       events.push({ actor: self.index, event: 3 })
       return true
@@ -553,6 +671,23 @@ export function simulateFight({
     let targetTurn = false
     let time = Math.min(self.atkTime, target.atkTime)
     for (let bout = 0; bout < MAX_BOUT; bout++) {
+      // While one side awaits a delayed revival there is nobody to attack. Advance directly
+      // to the restoration instead of spending the action limit on attacks against a corpse.
+      const waiting = [self, target].filter((fighter) => fighter.hp <= 0 && pendingRevive(fighter))
+      if (waiting.length) {
+        const due = Math.min(
+          ...waiting.flatMap((fighter) =>
+            (fighter.buffs ?? [])
+              .filter((buff) => BUFFS[buff.id]?.pendingRevive?.(buff))
+              .map((buff) => buff.startTime + buff.lifeTime + 1),
+          ),
+        )
+        time = Math.max(time, due)
+        self.next = waiting.includes(self) ? time : time + self.atkTime
+        target.next = waiting.includes(target) ? time : time + target.atkTime
+        selfTurn = false
+        targetTurn = false
+      }
       selfTurn ||= time === self.next
       targetTurn ||= time === target.next
       if (selfTurn && targetTurn) {
@@ -579,9 +714,18 @@ export function simulateFight({
     getDamage,
     attack: (self, target, damage, fv, timer, selfDamage = 0) =>
       attack(self, target, Math.trunc(damage), Math.trunc(selfDamage), fv, timer),
-    damage: (victim, amount) => damageHp(victim, Math.trunc(amount), 0),
+    damage: (victim, amount) =>
+      damageHp(
+        victim,
+        Math.trunc(amount * (amount > 0 ? damageRate(victim, -1, true) : healingRate(victim))),
+        0,
+      ),
     damageWithValue: (victim, amount, fv, timer) => {
-      damageHp(victim, Math.trunc(amount), timer)
+      const adjusted = Math.trunc(
+        amount * (amount > 0 ? damageRate(victim, -1, true) : healingRate(victim)),
+      )
+      if (amount > 0 && adjusted !== Math.trunc(amount)) tickDamage.set(fv, adjusted)
+      damageHp(victim, adjusted, timer)
       clearTypeBuff(victim, fv, 1, timer)
     },
     addBuff,

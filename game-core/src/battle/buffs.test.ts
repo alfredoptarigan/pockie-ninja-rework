@@ -5,7 +5,9 @@ import { BUFFS } from './buffs.js'
 
 describe('BUFFS (FightBuff.ini + buff scripts)', () => {
   it('has every FightBuff.ini row with its ini values', () => {
-    expect(Object.keys(BUFFS)).toHaveLength(136)
+    expect(
+      Object.keys(BUFFS).filter((id) => Number(id) < 15001 || Number(id) > 15099),
+    ).toHaveLength(136)
     expect(BUFFS[11841]).toMatchObject({ type: 1, replace: 11841, clearType: 2, lifeTime: -1 })
     expect(BUFFS[11811]).toMatchObject({ type: 2, replace: 11811, clearType: 0, lifeTime: 6000 })
     expect(BUFFS[11831]).toMatchObject({ type: 3, replace: 11831, clearType: 0, lifeTime: -1 })

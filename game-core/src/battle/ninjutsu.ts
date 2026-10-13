@@ -1,3 +1,5 @@
+import scrolls from '../../../server/data/game/reborn/scroll-skills.json'
+
 // The ninjutsu players learn on level-up (RES/skill/UpSkilCfg.ini, RoleBaseSystem.java).
 // Precursor=0 rows are the "secondary" skills: one random one per level gained, up to MaxLevel 1,
 // without the UpSkillLimit.ini level gate. Precursor=1 rows are the "primary" skills: one random
@@ -24,10 +26,14 @@ export const NATION_PASSIVES = [2801, 2802, 2803, 2805, 2804]
  * The passives add 500-3000 (whole hundreds) or 3, so most of it comes out as 0, as in the original.
  */
 export function skillChance(
-  skill: { probability?: number; skilladdtype?: number },
+  skill: { id?: number; javascript?: string; probability?: number; skilladdtype?: number },
   skillAdd: readonly number[],
 ) {
   const base = skill.probability ?? 0
   const tree = skill.skilladdtype ?? -1
-  return tree < 0 ? base : base + ((skillAdd[tree] ?? 0) % 100)
+  const chance = tree < 0 ? base : base + ((skillAdd[tree] ?? 0) % 100)
+  const scroll = scrolls[String(skill.id) as keyof typeof scrolls]
+  return scroll && skill.javascript === `skill/skill_scroll_${skill.id}.js`
+    ? Math.max(0, Math.min(scroll.castChance[1]!, chance))
+    : chance
 }
