@@ -8,6 +8,7 @@ import { Link } from 'react-router'
 import { useLogout } from '../lib/auth'
 import { useOutfitPortrait } from './art'
 import { GameButton } from './skin'
+import { TeamHud } from './teams'
 import { plainText } from './text'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
 
@@ -238,6 +239,7 @@ export function PlayerCard({ character }: { character: Character }) {
         Lv. {character.level}
       </span>
       <VipBadge until={character.vipUntil} />
+      <TeamHud character={character} />
     </section>
   )
 }

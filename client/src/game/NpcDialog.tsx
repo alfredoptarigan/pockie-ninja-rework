@@ -152,6 +152,13 @@ export function NpcDialog({
                     <Option onClick={() => setPage('rest')}>Rest</Option>
                   </li>
                 )}
+                {menu === 'rest' && (
+                  <li>
+                    <Option onClick={() => openWindow('teamBoard', { npcId: npc.id })}>
+                      Team Board
+                    </Option>
+                  </li>
+                )}
                 <li>
                   <Option onClick={onClose}>End Conversation</Option>
                 </li>
