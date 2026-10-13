@@ -107,7 +107,7 @@ function MemberRow({
     >
       <span className="w-4 text-center">{member.fightOrder + 1}.</span>
       <span className="min-w-0 flex-1 truncate">
-        <span className={self ? 'font-bold' : 'font-semibold'}>{member.name}</span> Lv{' '}
+        <span className={self ? 'font-bold' : 'font-semibold'}>{member.name}</span> Lv.{' '}
         {member.level}
         {member.captain && <span className="ml-1 font-bold text-[#9a6a00]">Captain</span>}
         {!member.online && <span className="ml-1 text-[#8a1610]">Offline</span>}

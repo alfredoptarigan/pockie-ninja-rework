@@ -174,7 +174,7 @@ export async function listItem(tx: Tx, c: Character, input: ListInput, now: Date
   if (active >= MARKET_MAX_LISTINGS)
     throw bad('too_many_listings', `You can have at most ${MARKET_MAX_LISTINGS} listings.`)
   const fee = listingFee(c.level, input.hours)
-  if (c.stone < fee) throw bad('no_stone', `The listing fee is ${fee} Stone.`)
+  if (c.stone < fee) throw bad('no_stone', `You need ${fee} Stone to pay the listing fee.`)
 
   await tx
     .update(characters)

@@ -44,8 +44,10 @@ describe('Team board window', () => {
         json({ prompt: { promptId: 'p', expiresAt: '' }, ...solo }),
     })
     renderWithProviders(<TeamBoardWindow character={me} onClose={noop} />)
-    const row = await screen.findByRole('listitem', { name: /Sakura_1 \(Lv 22, arena tier 3\)/ })
-    expect(row).toHaveTextContent('Rock_1 (Lv 20, no arena tier)')
+    const row = await screen.findByRole('listitem', {
+      name: /Sakura_1 \(Lv\. 22, arena rank Beginner IV\)/,
+    })
+    expect(row).toHaveTextContent('Rock_1 (Lv. 20, unranked)')
     await userEvent.click(within(row).getByRole('button', { name: 'Join' }))
     expect(await screen.findByText(/You asked to join Sakura_1's team/)).toBeInTheDocument()
     expect(requestBody(fetch, 'POST /api/game/team/apply')).toEqual({ characterId: CAPTAIN })
