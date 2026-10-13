@@ -148,6 +148,48 @@
       "when": 1791873174880,
       "tag": "0020_skill_bars",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1791904329663,
+      "tag": "0021_talents",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1791904412381,
+      "tag": "0022_bloodlines",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1791904505140,
+      "tag": "0023_souls_scrolls",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1791904566635,
+      "tag": "0024_daily_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1791904585072,
+      "tag": "0025_tailed_beast",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1791904619793,
+      "tag": "0026_team_stone",
+      "breakpoints": true
     }
   ]
 }
