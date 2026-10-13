@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import {
   arenaConfig,
@@ -5,12 +7,22 @@ import {
   arenaTier,
   arenaTiers,
   item,
+  itemNameKey,
   mailConfig,
   MAIL_CATEGORIES,
   marketCategories,
   marketCategoryKey,
   npc,
   rankings,
+  rebornBloodlines,
+  rebornEvents,
+  rebornNonfightBuffs,
+  rebornScrollSkills,
+  rebornSouls,
+  rebornTalents,
+  skill,
+  subTasks,
+  task,
   tollGateRankReward,
 } from './data.js'
 
@@ -143,5 +155,75 @@ describe('mail and team constants (M4)', () => {
   it('keeps the MailPropConfig lengths and 11 categories', () => {
     expect(mailConfig()).toMatchObject({ PlayerMailMaxTitleWord: 20, PlayerMailMaxTextWord: 200 })
     expect(MAIL_CATEGORIES.map(({ type }) => type)).toEqual([0, 2, 8, 10, 5, 4, 7, 6, 9, 3, 1])
+  })
+})
+
+describe('Reborn overlay (M5 task 1)', () => {
+  const dir = fileURLToPath(new URL('../../data/game/', import.meta.url))
+  const base = (name: string) =>
+    JSON.parse(readFileSync(`${dir}${name}.json`, 'utf8')) as Record<string, unknown>
+  const overlay = (name: string) => base(`reborn/${name}`)
+
+  it('validates and counts every overlay file', () => {
+    expect(rebornTalents().talents).toHaveLength(8)
+    expect(rebornTalents().costs).toHaveLength(80)
+    expect(rebornBloodlines().limits).toHaveLength(44)
+    expect(rebornSouls().types).toHaveLength(13)
+    expect(Object.keys(rebornScrollSkills())).toHaveLength(12)
+    expect(Object.keys(rebornNonfightBuffs().buffs)).toEqual(['80101', '80102', '80201', '80202'])
+    expect(rebornEvents().weekly.activities.reduce((sum, a) => sum + a.points, 0)).toBe(245)
+  })
+
+  it('merges scroll skills into skill() and scroll items into item()', () => {
+    expect(skill(1831)).toMatchObject({ type: 2, quomodo: 2, skilladdtype: 8, probability: 3 })
+    expect(skill(18042)).toMatchObject({ type: 1, quomodo: 2, skilladdtype: 2 })
+    expect(skill(1802)).toMatchObject({ javascript: 'skill/skill_luolei_1802.js' })
+    expect(item('i540001')).toMatchObject({ CanUse: 1, AddSkillId: 1831, ScrollDays: 7 })
+    expect(item('i540112')).toMatchObject({ CanUse: 1, AddSkillId: 18046, ScrollDays: 0 })
+    expect(itemNameKey('i540001')).toBe('lg_reborn_item_540001')
+    expect(item('i250115')).toBeDefined()
+  })
+
+  it('keeps the task hooks working with an empty quest overlay', () => {
+    expect(task(10001)).toBeDefined()
+    expect(subTasks(10001).length).toBeGreaterThan(0)
+  })
+
+  it('never reuses an original skill, fight buff, item or task id', () => {
+    const clash = (name: string, ids: string[]) => ids.filter((id) => id in base(name))
+    expect(clash('skills', Object.keys(overlay('skills')))).toEqual([])
+    expect(clash('fight-buffs', Object.keys(overlay('skills')))).toEqual([])
+    expect(clash('items', Object.keys(overlay('items')))).toEqual([])
+    expect(clash('tasks', Object.keys(overlay('tasks')))).toEqual([])
+  })
+
+  it('overrides only the original Dice of Fate buffs (same ids and flags, decision 25)', () => {
+    const original = JSON.parse(
+      readFileSync(new URL('./nonfight-buff-data.json', import.meta.url), 'utf8'),
+    ) as { buffs: Record<string, unknown>; properties: Record<string, Record<string, number>> }
+    const { buffs, properties } = rebornNonfightBuffs()
+    for (const [id, row] of Object.entries(buffs)) {
+      expect(row).toEqual(original.buffs[id])
+      expect(Object.keys(properties[id]!).sort()).toEqual(
+        Object.keys(original.properties[id]!).sort(),
+      )
+    }
+  })
+
+  it('only points at items that exist', () => {
+    const events = rebornEvents()
+    const ids = [
+      ...rebornBloodlines().limits.flatMap((limit) => [limit.unlockItem, limit.npcOutfit]),
+      ...events.dailyLogin.cycle.map((reward) => reward.item),
+      events.dailyLogin.bonus.item,
+      ...events.weekly.weekdayRewards.map((reward) => reward.item),
+      events.weekly.bonus.item,
+      ...events.weekly.milestones.flatMap((m) => (m.item ? [m.item] : [])),
+      ...events.tailedBeast.boxes.map((box) => box.item),
+      ...events.tailedBeast.kageChoices,
+      ...events.tailedBeast.shop.map((offer) => offer.item),
+      ...events.teamStone.leagues.flatMap((league) => (league.item ? [league.item] : [])),
+    ]
+    expect(ids.filter((id) => !item(id))).toEqual([])
   })
 })

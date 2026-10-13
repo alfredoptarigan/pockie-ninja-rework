@@ -27,6 +27,7 @@
     "i18n:candidates": "node tools/i18n/build-glossary-candidates.ts",
     "i18n:names": "node tools/i18n/names.ts",
     "game-data:import": "node tools/game-data/import.ts",
+    "game-data:reborn": "node tools/game-data/import-reborn.ts",
     "i18n:sentences": "node tools/i18n/sentences.ts"
   },
   "devDependencies": {

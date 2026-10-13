@@ -1,0 +1,290 @@
+{
+  "inventory": 250,
+  "socketsPerLimit": 5,
+  "levelLimits": [
+    25,
+    25,
+    25,
+    36,
+    36,
+    51,
+    71,
+    71,
+    90,
+    90
+  ],
+  "discover": {
+    "perDay": 10,
+    "perDayVip": 30,
+    "levelOdds": [
+      70,
+      25,
+      5
+    ]
+  },
+  "synthesis": {
+    "count": 3,
+    "maxLevel": 10
+  },
+  "prayer": {
+    "maxLevel": 9,
+    "expBase": 5000,
+    "soulExpBase": 100,
+    "soulExpFactor": 3,
+    "bonusPerLevel": 800,
+    "attributes": [
+      "strength",
+      "agility",
+      "stamina"
+    ]
+  },
+  "types": [
+    {
+      "id": 1,
+      "nameKey": "reborn_soul_1",
+      "stat": 4,
+      "field": "defense",
+      "valueByLevel": [
+        7.8,
+        13,
+        22.1,
+        34.45,
+        50.05,
+        69.55,
+        92.3,
+        115.7,
+        143,
+        174.2,
+        208
+      ]
+    },
+    {
+      "id": 2,
+      "nameKey": "reborn_soul_2",
+      "stat": 5,
+      "field": "neglectDefense",
+      "valueByLevel": [
+        7.15,
+        11.7,
+        19.5,
+        30.55,
+        44.85,
+        62.4,
+        82.55,
+        103.35,
+        126.75,
+        154.7,
+        184.6
+      ]
+    },
+    {
+      "id": 3,
+      "nameKey": "reborn_soul_3",
+      "stat": 6,
+      "field": "dodge",
+      "valueByLevel": [
+        4.55,
+        7.8,
+        12.35,
+        19.5,
+        28.6,
+        39,
+        52,
+        65.65,
+        81.25,
+        98.8,
+        118.3
+      ]
+    },
+    {
+      "id": 4,
+      "nameKey": "reborn_soul_4",
+      "stat": 7,
+      "field": "hit",
+      "valueByLevel": [
+        7.15,
+        11.7,
+        19.5,
+        30.55,
+        44.85,
+        62.4,
+        82.55,
+        103.35,
+        126.75,
+        154.7,
+        184.6
+      ]
+    },
+    {
+      "id": 5,
+      "nameKey": "reborn_soul_5",
+      "stat": 15,
+      "field": "crit",
+      "valueByLevel": [
+        4.55,
+        7.8,
+        12.35,
+        19.5,
+        28.6,
+        39,
+        52,
+        65.65,
+        81.25,
+        98.8,
+        118.3
+      ]
+    },
+    {
+      "id": 6,
+      "nameKey": "reborn_soul_6",
+      "stat": 17,
+      "field": "tough",
+      "valueByLevel": [
+        6.5,
+        11.05,
+        18.2,
+        27.95,
+        40.95,
+        56.55,
+        74.75,
+        93.6,
+        115.05,
+        140.4,
+        167.05
+      ]
+    },
+    {
+      "id": 7,
+      "nameKey": "reborn_soul_7",
+      "stat": 8,
+      "field": "hp",
+      "valueByLevel": [
+        7.8,
+        13,
+        22.1,
+        34.45,
+        50.05,
+        69.55,
+        92.3,
+        115.7,
+        143,
+        174.2,
+        208
+      ]
+    },
+    {
+      "id": 8,
+      "nameKey": "reborn_soul_8",
+      "stat": 13,
+      "field": "mp",
+      "valueByLevel": [
+        7.8,
+        13,
+        22.1,
+        34.45,
+        50.05,
+        69.55,
+        92.3,
+        115.7,
+        143,
+        174.2,
+        208
+      ]
+    },
+    {
+      "id": 9,
+      "nameKey": "reborn_soul_9",
+      "stat": 19,
+      "field": "pierce",
+      "valueByLevel": [
+        7.15,
+        11.7,
+        19.5,
+        30.55,
+        44.85,
+        62.4,
+        82.55,
+        103.35,
+        126.75,
+        154.7,
+        184.6
+      ]
+    },
+    {
+      "id": 10,
+      "nameKey": "reborn_soul_10",
+      "stat": 18,
+      "field": "parry",
+      "valueByLevel": [
+        4.55,
+        7.8,
+        12.35,
+        19.5,
+        28.6,
+        39,
+        52,
+        65.65,
+        81.25,
+        98.8,
+        118.3
+      ]
+    },
+    {
+      "id": 11,
+      "nameKey": "reborn_soul_11",
+      "stat": 20,
+      "field": "minAttack",
+      "valueByLevel": [
+        2.6,
+        3.9,
+        6.5,
+        10.4,
+        14.95,
+        20.8,
+        27.3,
+        34.45,
+        42.9,
+        52,
+        62.4
+      ]
+    },
+    {
+      "id": 12,
+      "nameKey": "reborn_soul_12",
+      "stat": 10,
+      "field": "maxAttack",
+      "valueByLevel": [
+        2.6,
+        3.9,
+        6.5,
+        10.4,
+        14.95,
+        20.8,
+        27.3,
+        34.45,
+        42.9,
+        52,
+        62.4
+      ]
+    },
+    {
+      "id": 13,
+      "nameKey": "reborn_soul_13",
+      "stat": 12,
+      "field": "atkTimeMul",
+      "valueByLevel": [
+        5.85,
+        9.75,
+        15.6,
+        24.05,
+        35.75,
+        48.75,
+        65,
+        81.25,
+        100.75,
+        122.85,
+        146.25
+      ]
+    }
+  ]
+}

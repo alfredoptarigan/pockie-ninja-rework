@@ -1,0 +1,134 @@
+{
+  "1831": {
+    "element": "illusion",
+    "trigger": "before_attack",
+    "castChance": [
+      3,
+      40
+    ],
+    "chakra": 2,
+    "sevenDayItem": "i540001",
+    "permanentItem": "i540101"
+  },
+  "1833": {
+    "element": "healing",
+    "trigger": "before_attack",
+    "castChance": [
+      9,
+      25
+    ],
+    "chakra": 1,
+    "sevenDayItem": "i540007",
+    "permanentItem": "i540107"
+  },
+  "1834": {
+    "element": "healing",
+    "trigger": "after_damage",
+    "castChance": [
+      8,
+      25
+    ],
+    "chakra": 1.6,
+    "sevenDayItem": "i540002",
+    "permanentItem": "i540102"
+  },
+  "1835": {
+    "element": "lightning",
+    "trigger": "after_damage",
+    "castChance": [
+      3,
+      25
+    ],
+    "chakra": 2,
+    "sevenDayItem": "i540006",
+    "permanentItem": "i540106"
+  },
+  "1836": {
+    "element": "water",
+    "trigger": "before_enemy_turn",
+    "castChance": [
+      1,
+      25
+    ],
+    "chakra": 3,
+    "sevenDayItem": "i540011",
+    "permanentItem": "i540111"
+  },
+  "18041": {
+    "element": "water",
+    "trigger": "attack",
+    "castChance": [
+      1,
+      25
+    ],
+    "chakra": 1.6,
+    "sevenDayItem": "i540004",
+    "permanentItem": "i540104"
+  },
+  "18042": {
+    "element": "earth",
+    "trigger": "attack",
+    "castChance": [
+      2,
+      20
+    ],
+    "chakra": 1,
+    "sevenDayItem": "i540003",
+    "permanentItem": "i540103"
+  },
+  "18043": {
+    "element": "body",
+    "trigger": "additional_attack",
+    "castChance": [
+      5,
+      25
+    ],
+    "chakra": 0,
+    "sevenDayItem": "i540009",
+    "permanentItem": "i540109"
+  },
+  "18044": {
+    "element": "illusion",
+    "trigger": "before_attack",
+    "castChance": [
+      8,
+      19
+    ],
+    "chakra": 2.3,
+    "sevenDayItem": "i540008",
+    "permanentItem": "i540108"
+  },
+  "18045": {
+    "element": "fire",
+    "trigger": "before_attack",
+    "castChance": [
+      0,
+      25
+    ],
+    "chakra": 3,
+    "sevenDayItem": "i540010",
+    "permanentItem": "i540110"
+  },
+  "18046": {
+    "element": "sealing",
+    "trigger": "before_attack",
+    "castChance": [
+      7,
+      19
+    ],
+    "chakra": 3,
+    "sevenDayItem": "i540012",
+    "permanentItem": "i540112"
+  },
+  "18091": {
+    "element": "fire",
+    "trigger": "before_attack",
+    "castChance": [
+      0,
+      32
+    ],
+    "chakra": 1.3,
+    "sevenDayItem": "i540005",
+    "permanentItem": "i540105"
+  }
+}

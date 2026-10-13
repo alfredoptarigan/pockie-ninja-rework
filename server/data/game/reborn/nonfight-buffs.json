@@ -1,0 +1,82 @@
+{
+  "buffs": {
+    "80101": {
+      "buffadd": 80101,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "80102": {
+      "buffadd": 80102,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "80201": {
+      "buffadd": 80201,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "80202": {
+      "buffadd": 80202,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    }
+  },
+  "properties": {
+    "80101": {
+      "ToughBuff": 211,
+      "DodgeMulBuff": 163,
+      "ParryMulBuff": 163,
+      "HitMulBuff": 163,
+      "PierceBuff": 163,
+      "CritMulBuff": 163,
+      "NeglectDefAttachBuff": 163,
+      "DefenseBuff": 163
+    },
+    "80102": {
+      "ToughBuff": 465,
+      "DodgeMulBuff": 358,
+      "ParryMulBuff": 358,
+      "HitMulBuff": 358,
+      "PierceBuff": 358,
+      "CritMulBuff": 358,
+      "NeglectDefAttachBuff": 358,
+      "DefenseBuff": 358
+    },
+    "80201": {
+      "ToughBuff": -455,
+      "DodgeMulBuff": -350,
+      "ParryMulBuff": -350,
+      "HitMulBuff": -350,
+      "PierceBuff": -350,
+      "CritMulBuff": -350,
+      "NeglectDefAttachBuff": -350,
+      "DefenseBuff": -350
+    },
+    "80202": {
+      "ToughBuff": -802,
+      "DodgeMulBuff": -620,
+      "ParryMulBuff": -620,
+      "HitMulBuff": -620,
+      "PierceBuff": -620,
+      "CritMulBuff": -620,
+      "NeglectDefAttachBuff": -620,
+      "DefenseBuff": -620
+    }
+  }
+}

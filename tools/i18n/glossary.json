@@ -17154,6 +17154,66 @@
   "source": "None",
   "en": "None"
  },
+ "lg_Skill_18041": {
+  "kind": "skill",
+  "source": "Water Colliding Wave",
+  "en": "Water Colliding Wave"
+ },
+ "lg_Skill_18042": {
+  "kind": "skill",
+  "source": "Sand Burial",
+  "en": "Sand Burial"
+ },
+ "lg_Skill_18043": {
+  "kind": "skill",
+  "source": "Reverse Lotus",
+  "en": "Reverse Lotus"
+ },
+ "lg_Skill_18044": {
+  "kind": "skill",
+  "source": "Black Coffin",
+  "en": "Black Coffin"
+ },
+ "lg_Skill_18045": {
+  "kind": "skill",
+  "source": "Single Blade Cremation",
+  "en": "Single Blade Cremation"
+ },
+ "lg_Skill_18046": {
+  "kind": "skill",
+  "source": "Royal Hollow Flash",
+  "en": "Royal Hollow Flash"
+ },
+ "lg_Skill_18091": {
+  "kind": "skill",
+  "source": "Amaterasu",
+  "en": "Amaterasu"
+ },
+ "lg_Skill_1831": {
+  "kind": "skill",
+  "source": "Izanagi",
+  "en": "Izanagi"
+ },
+ "lg_Skill_1833": {
+  "kind": "skill",
+  "source": "Art of Rinne Rebirth",
+  "en": "Art of Rinne Rebirth"
+ },
+ "lg_Skill_1834": {
+  "kind": "skill",
+  "source": "Izanami",
+  "en": "Izanami"
+ },
+ "lg_Skill_1835": {
+  "kind": "skill",
+  "source": "Kirin",
+  "en": "Kirin"
+ },
+ "lg_Skill_1836": {
+  "kind": "skill",
+  "source": "Sprenger",
+  "en": "Sprenger"
+ },
  "lg_Sustain10_itemname": {
   "kind": "item",
   "source": "30-hari Stone Bag",
@@ -35748,5 +35808,755 @@
   "kind": "npc",
   "source": "Furious Nine-Tailed",
   "en": "Furious Nine-Tailed"
+ },
+ "lg_reborn_item_540001": {
+  "kind": "item",
+  "source": "Scroll: Izanagi",
+  "en": "Scroll: Izanagi"
+ },
+ "lg_reborn_item_540002": {
+  "kind": "item",
+  "source": "Scroll: Izanami",
+  "en": "Scroll: Izanami"
+ },
+ "lg_reborn_item_540003": {
+  "kind": "item",
+  "source": "Scroll: Sand Burial",
+  "en": "Scroll: Sand Burial"
+ },
+ "lg_reborn_item_540004": {
+  "kind": "item",
+  "source": "Scroll: Water Colliding Wave",
+  "en": "Scroll: Water Colliding Wave"
+ },
+ "lg_reborn_item_540005": {
+  "kind": "item",
+  "source": "Scroll: Amaterasu",
+  "en": "Scroll: Amaterasu"
+ },
+ "lg_reborn_item_540006": {
+  "kind": "item",
+  "source": "Scroll: Kirin",
+  "en": "Scroll: Kirin"
+ },
+ "lg_reborn_item_540007": {
+  "kind": "item",
+  "source": "Scroll: Art of Rinne Rebirth",
+  "en": "Scroll: Art of Rinne Rebirth"
+ },
+ "lg_reborn_item_540008": {
+  "kind": "item",
+  "source": "Scroll: Black Coffin",
+  "en": "Scroll: Black Coffin"
+ },
+ "lg_reborn_item_540009": {
+  "kind": "item",
+  "source": "Scroll: Reverse Lotus",
+  "en": "Scroll: Reverse Lotus"
+ },
+ "lg_reborn_item_540010": {
+  "kind": "item",
+  "source": "Scroll: Single Blade Cremation",
+  "en": "Scroll: Single Blade Cremation"
+ },
+ "lg_reborn_item_540011": {
+  "kind": "item",
+  "source": "Scroll: Sprenger",
+  "en": "Scroll: Sprenger"
+ },
+ "lg_reborn_item_540012": {
+  "kind": "item",
+  "source": "Scroll: Royal Hollow Flash",
+  "en": "Scroll: Royal Hollow Flash"
+ },
+ "lg_reborn_item_540101": {
+  "kind": "item",
+  "source": "Permanent Scroll: Izanagi",
+  "en": "Permanent Scroll: Izanagi"
+ },
+ "lg_reborn_item_540102": {
+  "kind": "item",
+  "source": "Permanent Scroll: Izanami",
+  "en": "Permanent Scroll: Izanami"
+ },
+ "lg_reborn_item_540103": {
+  "kind": "item",
+  "source": "Permanent Scroll: Sand Burial",
+  "en": "Permanent Scroll: Sand Burial"
+ },
+ "lg_reborn_item_540104": {
+  "kind": "item",
+  "source": "Permanent Scroll: Water Colliding Wave",
+  "en": "Permanent Scroll: Water Colliding Wave"
+ },
+ "lg_reborn_item_540105": {
+  "kind": "item",
+  "source": "Permanent Scroll: Amaterasu",
+  "en": "Permanent Scroll: Amaterasu"
+ },
+ "lg_reborn_item_540106": {
+  "kind": "item",
+  "source": "Permanent Scroll: Kirin",
+  "en": "Permanent Scroll: Kirin"
+ },
+ "lg_reborn_item_540107": {
+  "kind": "item",
+  "source": "Permanent Scroll: Art of Rinne Rebirth",
+  "en": "Permanent Scroll: Art of Rinne Rebirth"
+ },
+ "lg_reborn_item_540108": {
+  "kind": "item",
+  "source": "Permanent Scroll: Black Coffin",
+  "en": "Permanent Scroll: Black Coffin"
+ },
+ "lg_reborn_item_540109": {
+  "kind": "item",
+  "source": "Permanent Scroll: Reverse Lotus",
+  "en": "Permanent Scroll: Reverse Lotus"
+ },
+ "lg_reborn_item_540110": {
+  "kind": "item",
+  "source": "Permanent Scroll: Single Blade Cremation",
+  "en": "Permanent Scroll: Single Blade Cremation"
+ },
+ "lg_reborn_item_540111": {
+  "kind": "item",
+  "source": "Permanent Scroll: Sprenger",
+  "en": "Permanent Scroll: Sprenger"
+ },
+ "lg_reborn_item_540112": {
+  "kind": "item",
+  "source": "Permanent Scroll: Royal Hollow Flash",
+  "en": "Permanent Scroll: Royal Hollow Flash"
+ },
+ "reborn_beast_1": {
+  "kind": "npc",
+  "source": "Shukaku",
+  "en": "Shukaku"
+ },
+ "reborn_beast_2": {
+  "kind": "npc",
+  "source": "Matatabi",
+  "en": "Matatabi"
+ },
+ "reborn_beast_3": {
+  "kind": "npc",
+  "source": "Isobu",
+  "en": "Isobu"
+ },
+ "reborn_beast_4": {
+  "kind": "npc",
+  "source": "Son Goku",
+  "en": "Son Goku"
+ },
+ "reborn_beast_5": {
+  "kind": "npc",
+  "source": "Kokuo",
+  "en": "Kokuo"
+ },
+ "reborn_beast_6": {
+  "kind": "npc",
+  "source": "Saiken",
+  "en": "Saiken"
+ },
+ "reborn_beast_7": {
+  "kind": "npc",
+  "source": "Chomei",
+  "en": "Chomei"
+ },
+ "reborn_beast_8": {
+  "kind": "npc",
+  "source": "Gyuki",
+  "en": "Gyuki"
+ },
+ "reborn_beast_9": {
+  "kind": "npc",
+  "source": "Kurama",
+  "en": "Kurama"
+ },
+ "reborn_league_academy": {
+  "kind": "title",
+  "source": "Academy",
+  "en": "Academy"
+ },
+ "reborn_league_bronze": {
+  "kind": "title",
+  "source": "Bronze",
+  "en": "Bronze"
+ },
+ "reborn_league_champion": {
+  "kind": "title",
+  "source": "Champion",
+  "en": "Champion"
+ },
+ "reborn_league_diamond": {
+  "kind": "title",
+  "source": "Diamond",
+  "en": "Diamond"
+ },
+ "reborn_league_gold": {
+  "kind": "title",
+  "source": "Gold",
+  "en": "Gold"
+ },
+ "reborn_league_master": {
+  "kind": "title",
+  "source": "Master",
+  "en": "Master"
+ },
+ "reborn_league_platinum": {
+  "kind": "title",
+  "source": "Platinum",
+  "en": "Platinum"
+ },
+ "reborn_league_silver": {
+  "kind": "title",
+  "source": "Silver",
+  "en": "Silver"
+ },
+ "reborn_limit_1": {
+  "kind": "skill",
+  "source": "Body Enlargement Technique",
+  "en": "Body Enlargement Technique"
+ },
+ "reborn_limit_10": {
+  "kind": "skill",
+  "source": "Mountain Storm",
+  "en": "Mountain Storm"
+ },
+ "reborn_limit_11": {
+  "kind": "skill",
+  "source": "Wooden Tomb",
+  "en": "Wooden Tomb"
+ },
+ "reborn_limit_12": {
+  "kind": "skill",
+  "source": "Consciousness Transfer",
+  "en": "Consciousness Transfer"
+ },
+ "reborn_limit_13": {
+  "kind": "skill",
+  "source": "Eye of Mind",
+  "en": "Eye of Mind"
+ },
+ "reborn_limit_14": {
+  "kind": "skill",
+  "source": "Cherry Storm",
+  "en": "Cherry Storm"
+ },
+ "reborn_limit_15": {
+  "kind": "skill",
+  "source": "FlameThrower",
+  "en": "FlameThrower"
+ },
+ "reborn_limit_16": {
+  "kind": "skill",
+  "source": "Blade Dance",
+  "en": "Blade Dance"
+ },
+ "reborn_limit_17": {
+  "kind": "skill",
+  "source": "Cursed Land",
+  "en": "Cursed Land"
+ },
+ "reborn_limit_18": {
+  "kind": "skill",
+  "source": "Demonic Crystal Ice Mirrors",
+  "en": "Demonic Crystal Ice Mirrors"
+ },
+ "reborn_limit_19": {
+  "kind": "skill",
+  "source": "Demonic Illusion: Deadly Tree Bind",
+  "en": "Demonic Illusion: Deadly Tree Bind"
+ },
+ "reborn_limit_2": {
+  "kind": "skill",
+  "source": "House of Flying Blades",
+  "en": "House of Flying Blades"
+ },
+ "reborn_limit_20": {
+  "kind": "skill",
+  "source": "Shadow Clone Technique",
+  "en": "Shadow Clone Technique"
+ },
+ "reborn_limit_21": {
+  "kind": "skill",
+  "source": "Cosmic Resurrection",
+  "en": "Cosmic Resurrection"
+ },
+ "reborn_limit_22": {
+  "kind": "skill",
+  "source": "Prophet",
+  "en": "Prophet"
+ },
+ "reborn_limit_23": {
+  "kind": "skill",
+  "source": "Huge Rasengan",
+  "en": "Huge Rasengan"
+ },
+ "reborn_limit_24": {
+  "kind": "skill",
+  "source": "Beast Clay",
+  "en": "Beast Clay"
+ },
+ "reborn_limit_25": {
+  "kind": "skill",
+  "source": "Blood Obsession",
+  "en": "Blood Obsession"
+ },
+ "reborn_limit_26": {
+  "kind": "skill",
+  "source": "Shark Prison",
+  "en": "Shark Prison"
+ },
+ "reborn_limit_27": {
+  "kind": "skill",
+  "source": "Hidden Mist",
+  "en": "Hidden Mist"
+ },
+ "reborn_limit_28": {
+  "kind": "skill",
+  "source": "Hidden Ink",
+  "en": "Hidden Ink"
+ },
+ "reborn_limit_29": {
+  "kind": "skill",
+  "source": "Paper Messenger of God",
+  "en": "Paper Messenger of God"
+ },
+ "reborn_limit_3": {
+  "kind": "skill",
+  "source": "BeastMan Clone",
+  "en": "BeastMan Clone"
+ },
+ "reborn_limit_30": {
+  "kind": "skill",
+  "source": "Konoha Vortex",
+  "en": "Konoha Vortex"
+ },
+ "reborn_limit_31": {
+  "kind": "skill",
+  "source": "Water Meat Grinder",
+  "en": "Water Meat Grinder"
+ },
+ "reborn_limit_32": {
+  "kind": "skill",
+  "source": "Berserk Mode",
+  "en": "Berserk Mode"
+ },
+ "reborn_limit_33": {
+  "kind": "skill",
+  "source": "Kyuby Eye",
+  "en": "Kyuby Eye"
+ },
+ "reborn_limit_34": {
+  "kind": "skill",
+  "source": "2nd Sharingan",
+  "en": "2nd Sharingan"
+ },
+ "reborn_limit_35": {
+  "kind": "skill",
+  "source": "3rd Stage Sharingan",
+  "en": "3rd Stage Sharingan"
+ },
+ "reborn_limit_36": {
+  "kind": "skill",
+  "source": "Hell Swamp",
+  "en": "Hell Swamp"
+ },
+ "reborn_limit_37": {
+  "kind": "skill",
+  "source": "Divine Healing",
+  "en": "Divine Healing"
+ },
+ "reborn_limit_38": {
+  "kind": "skill",
+  "source": "Devastation",
+  "en": "Devastation"
+ },
+ "reborn_limit_39": {
+  "kind": "skill",
+  "source": "Rinnegan",
+  "en": "Rinnegan"
+ },
+ "reborn_limit_4": {
+  "kind": "skill",
+  "source": "Insect Control",
+  "en": "Insect Control"
+ },
+ "reborn_limit_40": {
+  "kind": "skill",
+  "source": "Mangekyo Sharingan",
+  "en": "Mangekyo Sharingan"
+ },
+ "reborn_limit_41": {
+  "kind": "skill",
+  "source": "Mangekyo Sharingan",
+  "en": "Mangekyo Sharingan"
+ },
+ "reborn_limit_42": {
+  "kind": "skill",
+  "source": "Immortality",
+  "en": "Immortality"
+ },
+ "reborn_limit_43": {
+  "kind": "skill",
+  "source": "Six Path Seal",
+  "en": "Six Path Seal"
+ },
+ "reborn_limit_44": {
+  "kind": "skill",
+  "source": "Toad Mouth Trap",
+  "en": "Toad Mouth Trap"
+ },
+ "reborn_limit_5": {
+  "kind": "skill",
+  "source": "Byakugan",
+  "en": "Byakugan"
+ },
+ "reborn_limit_6": {
+  "kind": "skill",
+  "source": "Byakugan",
+  "en": "Byakugan"
+ },
+ "reborn_limit_7": {
+  "kind": "skill",
+  "source": "Immunity to Poison",
+  "en": "Immunity to Poison"
+ },
+ "reborn_limit_8": {
+  "kind": "skill",
+  "source": "Snakes: Hidden in the Shadows",
+  "en": "Snakes: Hidden in the Shadows"
+ },
+ "reborn_limit_9": {
+  "kind": "skill",
+  "source": "Shadow Imitation",
+  "en": "Shadow Imitation"
+ },
+ "reborn_npc_81001": {
+  "kind": "npc",
+  "source": "Choji Akimichi",
+  "en": "Choji Akimichi"
+ },
+ "reborn_npc_81002": {
+  "kind": "npc",
+  "source": "Tenten",
+  "en": "Tenten"
+ },
+ "reborn_npc_81003": {
+  "kind": "npc",
+  "source": "Kiba Inuzuka",
+  "en": "Kiba Inuzuka"
+ },
+ "reborn_npc_81004": {
+  "kind": "npc",
+  "source": "Shino Aburame",
+  "en": "Shino Aburame"
+ },
+ "reborn_npc_81005": {
+  "kind": "npc",
+  "source": "Hinata Hyuga",
+  "en": "Hinata Hyuga"
+ },
+ "reborn_npc_81006": {
+  "kind": "npc",
+  "source": "Neji Hyuga",
+  "en": "Neji Hyuga"
+ },
+ "reborn_npc_81007": {
+  "kind": "npc",
+  "source": "Shizune",
+  "en": "Shizune"
+ },
+ "reborn_npc_81008": {
+  "kind": "npc",
+  "source": "Anko Mitarashi",
+  "en": "Anko Mitarashi"
+ },
+ "reborn_npc_81009": {
+  "kind": "npc",
+  "source": "Shikamaru Nara",
+  "en": "Shikamaru Nara"
+ },
+ "reborn_npc_81010": {
+  "kind": "npc",
+  "source": "Asuma Sarutobi",
+  "en": "Asuma Sarutobi"
+ },
+ "reborn_npc_81011": {
+  "kind": "npc",
+  "source": "Yamato",
+  "en": "Yamato"
+ },
+ "reborn_npc_81012": {
+  "kind": "npc",
+  "source": "Ino Yamanaka",
+  "en": "Ino Yamanaka"
+ },
+ "reborn_npc_81013": {
+  "kind": "npc",
+  "source": "Karin",
+  "en": "Karin"
+ },
+ "reborn_npc_81014": {
+  "kind": "npc",
+  "source": "Sakura Haruno",
+  "en": "Sakura Haruno"
+ },
+ "reborn_npc_81015": {
+  "kind": "npc",
+  "source": "Sasori",
+  "en": "Sasori"
+ },
+ "reborn_npc_81016": {
+  "kind": "npc",
+  "source": "Temari",
+  "en": "Temari"
+ },
+ "reborn_npc_81017": {
+  "kind": "npc",
+  "source": "Kakuzu",
+  "en": "Kakuzu"
+ },
+ "reborn_npc_81018": {
+  "kind": "npc",
+  "source": "Haku",
+  "en": "Haku"
+ },
+ "reborn_npc_81019": {
+  "kind": "npc",
+  "source": "Kurenai Yuhi",
+  "en": "Kurenai Yuhi"
+ },
+ "reborn_npc_81020": {
+  "kind": "npc",
+  "source": "Naruto Uzumaki",
+  "en": "Naruto Uzumaki"
+ },
+ "reborn_npc_81021": {
+  "kind": "npc",
+  "source": "2nd Hokage",
+  "en": "2nd Hokage"
+ },
+ "reborn_npc_81022": {
+  "kind": "npc",
+  "source": "3rd Hokage",
+  "en": "3rd Hokage"
+ },
+ "reborn_npc_81023": {
+  "kind": "npc",
+  "source": "4th Hokage",
+  "en": "4th Hokage"
+ },
+ "reborn_npc_81024": {
+  "kind": "npc",
+  "source": "Deidara",
+  "en": "Deidara"
+ },
+ "reborn_npc_81025": {
+  "kind": "npc",
+  "source": "Hidan",
+  "en": "Hidan"
+ },
+ "reborn_npc_81026": {
+  "kind": "npc",
+  "source": "Kisame Hoshigaki",
+  "en": "Kisame Hoshigaki"
+ },
+ "reborn_npc_81027": {
+  "kind": "npc",
+  "source": "5th Mizukage",
+  "en": "5th Mizukage"
+ },
+ "reborn_npc_81028": {
+  "kind": "npc",
+  "source": "Sai",
+  "en": "Sai"
+ },
+ "reborn_npc_81029": {
+  "kind": "npc",
+  "source": "Konan",
+  "en": "Konan"
+ },
+ "reborn_npc_81030": {
+  "kind": "npc",
+  "source": "Rock Lee",
+  "en": "Rock Lee"
+ },
+ "reborn_npc_81031": {
+  "kind": "npc",
+  "source": "Suigetsu Hozuki",
+  "en": "Suigetsu Hozuki"
+ },
+ "reborn_npc_81032": {
+  "kind": "npc",
+  "source": "Gin Ichimaru",
+  "en": "Gin Ichimaru"
+ },
+ "reborn_npc_81033": {
+  "kind": "npc",
+  "source": "Kyuubi Naruto",
+  "en": "Kyuubi Naruto"
+ },
+ "reborn_npc_81034": {
+  "kind": "npc",
+  "source": "Sasuke Uchiha",
+  "en": "Sasuke Uchiha"
+ },
+ "reborn_npc_81035": {
+  "kind": "npc",
+  "source": "Kakashi Hatake",
+  "en": "Kakashi Hatake"
+ },
+ "reborn_npc_81036": {
+  "kind": "npc",
+  "source": "Jiraiya",
+  "en": "Jiraiya"
+ },
+ "reborn_npc_81037": {
+  "kind": "npc",
+  "source": "Tsunade",
+  "en": "Tsunade"
+ },
+ "reborn_npc_81038": {
+  "kind": "npc",
+  "source": "Gaara",
+  "en": "Gaara"
+ },
+ "reborn_npc_81039": {
+  "kind": "npc",
+  "source": "Pain",
+  "en": "Pain"
+ },
+ "reborn_npc_81040": {
+  "kind": "npc",
+  "source": "Itachi Uchiha",
+  "en": "Itachi Uchiha"
+ },
+ "reborn_npc_81041": {
+  "kind": "npc",
+  "source": "Hebi Sasuke",
+  "en": "Hebi Sasuke"
+ },
+ "reborn_npc_81042": {
+  "kind": "npc",
+  "source": "Orochimaru",
+  "en": "Orochimaru"
+ },
+ "reborn_npc_81043": {
+  "kind": "npc",
+  "source": "Sage Naruto",
+  "en": "Sage Naruto"
+ },
+ "reborn_npc_81044": {
+  "kind": "npc",
+  "source": "Sage Jiraiya",
+  "en": "Sage Jiraiya"
+ },
+ "reborn_soul_1": {
+  "kind": "skill",
+  "source": "Firm",
+  "en": "Firm"
+ },
+ "reborn_soul_10": {
+  "kind": "skill",
+  "source": "Guard",
+  "en": "Guard"
+ },
+ "reborn_soul_11": {
+  "kind": "skill",
+  "source": "Sharp",
+  "en": "Sharp"
+ },
+ "reborn_soul_12": {
+  "kind": "skill",
+  "source": "Edge",
+  "en": "Edge"
+ },
+ "reborn_soul_13": {
+  "kind": "skill",
+  "source": "Speedy",
+  "en": "Speedy"
+ },
+ "reborn_soul_2": {
+  "kind": "skill",
+  "source": "Ruin",
+  "en": "Ruin"
+ },
+ "reborn_soul_3": {
+  "kind": "skill",
+  "source": "Deft",
+  "en": "Deft"
+ },
+ "reborn_soul_4": {
+  "kind": "skill",
+  "source": "Aim",
+  "en": "Aim"
+ },
+ "reborn_soul_5": {
+  "kind": "skill",
+  "source": "Savage",
+  "en": "Savage"
+ },
+ "reborn_soul_6": {
+  "kind": "skill",
+  "source": "Flexible",
+  "en": "Flexible"
+ },
+ "reborn_soul_7": {
+  "kind": "skill",
+  "source": "Life",
+  "en": "Life"
+ },
+ "reborn_soul_8": {
+  "kind": "skill",
+  "source": "Energy",
+  "en": "Energy"
+ },
+ "reborn_soul_9": {
+  "kind": "skill",
+  "source": "Fatal",
+  "en": "Fatal"
+ },
+ "reborn_talent_1": {
+  "kind": "skill",
+  "source": "Heart of Pierce",
+  "en": "Heart of Pierce"
+ },
+ "reborn_talent_2": {
+  "kind": "skill",
+  "source": "Heart of Block",
+  "en": "Heart of Block"
+ },
+ "reborn_talent_3": {
+  "kind": "skill",
+  "source": "Heart of Armor Break",
+  "en": "Heart of Armor Break"
+ },
+ "reborn_talent_4": {
+  "kind": "skill",
+  "source": "Heart of Defense",
+  "en": "Heart of Defense"
+ },
+ "reborn_talent_5": {
+  "kind": "skill",
+  "source": "Heart of Critical Strike",
+  "en": "Heart of Critical Strike"
+ },
+ "reborn_talent_6": {
+  "kind": "skill",
+  "source": "Heart of Constitution",
+  "en": "Heart of Constitution"
+ },
+ "reborn_talent_7": {
+  "kind": "skill",
+  "source": "Heart of Hit",
+  "en": "Heart of Hit"
+ },
+ "reborn_talent_8": {
+  "kind": "skill",
+  "source": "Heart of Dodge",
+  "en": "Heart of Dodge"
  }
 }

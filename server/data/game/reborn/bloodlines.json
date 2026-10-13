@@ -1,0 +1,1607 @@
+{
+  "itemsPerTurnIn": 4,
+  "amityPerTurnIn": 30,
+  "turnInsPerDay": 10,
+  "maxActive": 3,
+  "stats": {
+    "1": {
+      "label": "Strength",
+      "field": "strength",
+      "scale": 100
+    },
+    "2": {
+      "label": "Agility",
+      "field": "agility",
+      "scale": 100
+    },
+    "3": {
+      "label": "Stamina",
+      "field": "stamina",
+      "scale": 100
+    },
+    "4": {
+      "label": "Defense",
+      "field": "defense",
+      "scale": 1
+    },
+    "5": {
+      "label": "Defense Break",
+      "field": "neglectDefense",
+      "scale": 1
+    },
+    "6": {
+      "label": "Dodge",
+      "field": "dodge",
+      "scale": 1
+    },
+    "7": {
+      "label": "Hit",
+      "field": "hit",
+      "scale": 1
+    },
+    "8": {
+      "label": "Max Health",
+      "field": "hp",
+      "scale": 1
+    },
+    "9": {
+      "label": "Max Health %",
+      "field": "hpMul",
+      "scale": 1
+    },
+    "10": {
+      "label": "Max Attack",
+      "field": "maxAttack",
+      "scale": 1
+    },
+    "11": {
+      "label": "Attack %",
+      "field": "attackMul",
+      "scale": 1
+    },
+    "12": {
+      "label": "Speed %",
+      "field": "atkTimeMul",
+      "scale": 1
+    },
+    "13": {
+      "label": "Max Chakra",
+      "field": "mp",
+      "scale": 1
+    },
+    "15": {
+      "label": "Critical",
+      "field": "crit",
+      "scale": 1
+    },
+    "16": {
+      "label": "Critical Damage",
+      "field": "critAttach",
+      "scale": 1
+    },
+    "17": {
+      "label": "Constitution",
+      "field": "tough",
+      "scale": 1
+    },
+    "18": {
+      "label": "Defense Improvement %",
+      "field": "parry",
+      "scale": 1
+    },
+    "19": {
+      "label": "Pierce",
+      "field": "pierce",
+      "scale": 1
+    },
+    "20": {
+      "label": "Min Attack",
+      "field": "minAttack",
+      "scale": 1
+    },
+    "31": {
+      "label": "Fire Skill Cast Chance %",
+      "field": "skillAdd0",
+      "scale": 1
+    },
+    "32": {
+      "label": "Water Skill Cast Chance %",
+      "field": "skillAdd1",
+      "scale": 1
+    },
+    "33": {
+      "label": "Earth Skill Cast Chance %",
+      "field": "skillAdd2",
+      "scale": 1
+    },
+    "34": {
+      "label": "Lightning Skill Cast Chance %",
+      "field": "skillAdd3",
+      "scale": 1
+    },
+    "35": {
+      "label": "Wind Skill Cast Chance %",
+      "field": "skillAdd4",
+      "scale": 1
+    },
+    "36": {
+      "label": "Body Skill Cast Chance %",
+      "field": "skillAdd5",
+      "scale": 1
+    },
+    "37": {
+      "label": "Tool Skill Cast Chance %",
+      "field": "skillAdd6",
+      "scale": 1
+    },
+    "38": {
+      "label": "Sealing Skill Cast Chance %",
+      "field": "skillAdd7",
+      "scale": 1
+    },
+    "39": {
+      "label": "Illusion Skill Cast Chance %",
+      "field": "skillAdd8",
+      "scale": 1
+    },
+    "40": {
+      "label": "Healing Skill Cast Chance %",
+      "field": "skillAdd9",
+      "scale": 1
+    }
+  },
+  "limits": [
+    {
+      "id": 1,
+      "nameKey": "reborn_limit_1",
+      "requiredLevel": 16,
+      "unlockItem": "i148023",
+      "amity": 30,
+      "avatar": 16,
+      "npcId": 81001,
+      "npcNameKey": "reborn_npc_81001",
+      "npcOutfit": "i290016",
+      "base": {
+        "strength": 2300,
+        "agility": 1100,
+        "stamina": 2300
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 2
+        },
+        {
+          "stat": 17,
+          "field": "tough",
+          "value": 43
+        },
+        {
+          "stat": 1,
+          "field": "strength",
+          "value": 3000
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nameKey": "reborn_limit_2",
+      "requiredLevel": 21,
+      "unlockItem": "i148023",
+      "amity": 30,
+      "avatar": 63,
+      "npcId": 81002,
+      "npcNameKey": "reborn_npc_81002",
+      "npcOutfit": "i290063",
+      "base": {
+        "strength": 1800,
+        "agility": 1300,
+        "stamina": 2400
+      },
+      "bonus": [
+        {
+          "stat": 37,
+          "field": "skillAdd6",
+          "value": 2
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 53
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 47
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nameKey": "reborn_limit_3",
+      "requiredLevel": 25,
+      "unlockItem": "i148024",
+      "amity": 210,
+      "avatar": 17,
+      "npcId": 81003,
+      "npcNameKey": "reborn_npc_81003",
+      "npcOutfit": "i290017",
+      "base": {
+        "strength": 1800,
+        "agility": 2500,
+        "stamina": 1200
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 2
+        },
+        {
+          "stat": 19,
+          "field": "pierce",
+          "value": 47
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 30
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nameKey": "reborn_limit_4",
+      "requiredLevel": 28,
+      "unlockItem": "i148024",
+      "amity": 210,
+      "avatar": 18,
+      "npcId": 81004,
+      "npcNameKey": "reborn_npc_81004",
+      "npcOutfit": "i290018",
+      "base": {
+        "strength": 1200,
+        "agility": 2300,
+        "stamina": 2300
+      },
+      "bonus": [
+        {
+          "stat": 37,
+          "field": "skillAdd6",
+          "value": 2
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 53
+        },
+        {
+          "stat": 12,
+          "field": "atkTimeMul",
+          "value": 37
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nameKey": "reborn_limit_5",
+      "requiredLevel": 26,
+      "unlockItem": "i148025",
+      "amity": 210,
+      "avatar": 37,
+      "npcId": 81005,
+      "npcNameKey": "reborn_npc_81005",
+      "npcOutfit": "i290037",
+      "base": {
+        "strength": 2300,
+        "agility": 2000,
+        "stamina": 1300
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 2
+        },
+        {
+          "stat": 2,
+          "field": "agility",
+          "value": 3000
+        },
+        {
+          "stat": 16,
+          "field": "critAttach",
+          "value": 30
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nameKey": "reborn_limit_6",
+      "requiredLevel": 31,
+      "unlockItem": "i148025",
+      "amity": 210,
+      "avatar": 22,
+      "npcId": 81006,
+      "npcNameKey": "reborn_npc_81006",
+      "npcOutfit": "i290022",
+      "base": {
+        "strength": 2000,
+        "agility": 2000,
+        "stamina": 2000
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 2
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 47
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 3000
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nameKey": "reborn_limit_7",
+      "requiredLevel": 26,
+      "unlockItem": "i148026",
+      "amity": 210,
+      "avatar": 39,
+      "npcId": 81007,
+      "npcNameKey": "reborn_npc_81007",
+      "npcOutfit": "i290039",
+      "base": {
+        "strength": 1200,
+        "agility": 1400,
+        "stamina": 3000
+      },
+      "bonus": [
+        {
+          "stat": 40,
+          "field": "skillAdd9",
+          "value": 2
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 3000
+        },
+        {
+          "stat": 9,
+          "field": "hpMul",
+          "value": 37
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nameKey": "reborn_limit_8",
+      "requiredLevel": 31,
+      "unlockItem": "i148026",
+      "amity": 210,
+      "avatar": 61,
+      "npcId": 81008,
+      "npcNameKey": "reborn_npc_81008",
+      "npcOutfit": "i290061",
+      "base": {
+        "strength": 1300,
+        "agility": 2500,
+        "stamina": 2200
+      },
+      "bonus": [
+        {
+          "stat": 38,
+          "field": "skillAdd7",
+          "value": 2
+        },
+        {
+          "stat": 9,
+          "field": "hpMul",
+          "value": 47
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 47
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "nameKey": "reborn_limit_9",
+      "requiredLevel": 36,
+      "unlockItem": "i148027",
+      "amity": 720,
+      "avatar": 19,
+      "npcId": 81009,
+      "npcNameKey": "reborn_npc_81009",
+      "npcOutfit": "i290019",
+      "base": {
+        "strength": 1800,
+        "agility": 2400,
+        "stamina": 5000
+      },
+      "bonus": [
+        {
+          "stat": 39,
+          "field": "skillAdd8",
+          "value": 3
+        },
+        {
+          "stat": 18,
+          "field": "parry",
+          "value": 44
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 77
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nameKey": "reborn_limit_10",
+      "requiredLevel": 43,
+      "unlockItem": "i148027",
+      "amity": 720,
+      "avatar": 20,
+      "npcId": 81010,
+      "npcNameKey": "reborn_npc_81010",
+      "npcOutfit": "i290020",
+      "base": {
+        "strength": 3800,
+        "agility": 3500,
+        "stamina": 2500
+      },
+      "bonus": [
+        {
+          "stat": 31,
+          "field": "skillAdd0",
+          "value": 3
+        },
+        {
+          "stat": 12,
+          "field": "atkTimeMul",
+          "value": 55
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 69
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nameKey": "reborn_limit_11",
+      "requiredLevel": 39,
+      "unlockItem": "i148027",
+      "amity": 720,
+      "avatar": 24,
+      "npcId": 81011,
+      "npcNameKey": "reborn_npc_81011",
+      "npcOutfit": "i290024",
+      "base": {
+        "strength": 3300,
+        "agility": 2900,
+        "stamina": 3300
+      },
+      "bonus": [
+        {
+          "stat": 33,
+          "field": "skillAdd2",
+          "value": 3
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 69
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 44
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "nameKey": "reborn_limit_12",
+      "requiredLevel": 37,
+      "unlockItem": "i148028",
+      "amity": 720,
+      "avatar": 60,
+      "npcId": 81012,
+      "npcNameKey": "reborn_npc_81012",
+      "npcOutfit": "i290060",
+      "base": {
+        "strength": 3100,
+        "agility": 2400,
+        "stamina": 3800
+      },
+      "bonus": [
+        {
+          "stat": 39,
+          "field": "skillAdd8",
+          "value": 3
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 4400
+        },
+        {
+          "stat": 19,
+          "field": "pierce",
+          "value": 69
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "nameKey": "reborn_limit_13",
+      "requiredLevel": 41,
+      "unlockItem": "i148028",
+      "amity": 720,
+      "avatar": 114,
+      "npcId": 81013,
+      "npcNameKey": "reborn_npc_81013",
+      "npcOutfit": "i290114",
+      "base": {
+        "strength": 1500,
+        "agility": 4500,
+        "stamina": 3500
+      },
+      "bonus": [
+        {
+          "stat": 40,
+          "field": "skillAdd9",
+          "value": 3
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 44
+        },
+        {
+          "stat": 1,
+          "field": "strength",
+          "value": 6300
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "nameKey": "reborn_limit_14",
+      "requiredLevel": 46,
+      "unlockItem": "i148028",
+      "amity": 720,
+      "avatar": 58,
+      "npcId": 81014,
+      "npcNameKey": "reborn_npc_81014",
+      "npcOutfit": "i290058",
+      "base": {
+        "strength": 2400,
+        "agility": 2000,
+        "stamina": 5500
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 3
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 6300
+        },
+        {
+          "stat": 19,
+          "field": "pierce",
+          "value": 55
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "nameKey": "reborn_limit_15",
+      "requiredLevel": 46,
+      "unlockItem": "i148028",
+      "amity": 720,
+      "avatar": 23,
+      "npcId": 81015,
+      "npcNameKey": "reborn_npc_81015",
+      "npcOutfit": "i290023",
+      "base": {
+        "strength": 3200,
+        "agility": 2300,
+        "stamina": 4500
+      },
+      "bonus": [
+        {
+          "stat": 37,
+          "field": "skillAdd6",
+          "value": 3
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 4400
+        },
+        {
+          "stat": 16,
+          "field": "critAttach",
+          "value": 44
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "nameKey": "reborn_limit_16",
+      "requiredLevel": 37,
+      "unlockItem": "i148029",
+      "amity": 720,
+      "avatar": 62,
+      "npcId": 81016,
+      "npcNameKey": "reborn_npc_81016",
+      "npcOutfit": "i290062",
+      "base": {
+        "strength": 3200,
+        "agility": 3200,
+        "stamina": 3000
+      },
+      "bonus": [
+        {
+          "stat": 35,
+          "field": "skillAdd4",
+          "value": 3
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 69
+        },
+        {
+          "stat": 11,
+          "field": "attackMul",
+          "value": 55
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "nameKey": "reborn_limit_17",
+      "requiredLevel": 42,
+      "unlockItem": "i148029",
+      "amity": 720,
+      "avatar": 103,
+      "npcId": 81017,
+      "npcNameKey": "reborn_npc_81017",
+      "npcOutfit": "i290103",
+      "base": {
+        "strength": 4200,
+        "agility": 2000,
+        "stamina": 3500
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 3
+        },
+        {
+          "stat": 1,
+          "field": "strength",
+          "value": 4400
+        },
+        {
+          "stat": 18,
+          "field": "parry",
+          "value": 44
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "nameKey": "reborn_limit_18",
+      "requiredLevel": 37,
+      "unlockItem": "i148030",
+      "amity": 720,
+      "avatar": 64,
+      "npcId": 81018,
+      "npcNameKey": "reborn_npc_81018",
+      "npcOutfit": "i290064",
+      "base": {
+        "strength": 2200,
+        "agility": 3800,
+        "stamina": 3300
+      },
+      "bonus": [
+        {
+          "stat": 32,
+          "field": "skillAdd1",
+          "value": 3
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 69
+        },
+        {
+          "stat": 2,
+          "field": "agility",
+          "value": 4400
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "nameKey": "reborn_limit_19",
+      "requiredLevel": 41,
+      "unlockItem": "i148030",
+      "amity": 720,
+      "avatar": 36,
+      "npcId": 81019,
+      "npcNameKey": "reborn_npc_81019",
+      "npcOutfit": "i290036",
+      "base": {
+        "strength": 1600,
+        "agility": 3500,
+        "stamina": 4500
+      },
+      "bonus": [
+        {
+          "stat": 39,
+          "field": "skillAdd8",
+          "value": 3
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 43
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 44
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "nameKey": "reborn_limit_20",
+      "requiredLevel": 46,
+      "unlockItem": "i148030",
+      "amity": 720,
+      "avatar": 45,
+      "npcId": 81020,
+      "npcNameKey": "reborn_npc_81020",
+      "npcOutfit": "i290045",
+      "base": {
+        "strength": 4500,
+        "agility": 3200,
+        "stamina": 2300
+      },
+      "bonus": [
+        {
+          "stat": 35,
+          "field": "skillAdd4",
+          "value": 3
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 69
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 69
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "nameKey": "reborn_limit_21",
+      "requiredLevel": 54,
+      "unlockItem": "i148031",
+      "amity": 2100,
+      "avatar": 50,
+      "npcId": 81021,
+      "npcNameKey": "reborn_npc_81021",
+      "npcOutfit": "i290050",
+      "base": {
+        "strength": 4000,
+        "agility": 6300,
+        "stamina": 5500
+      },
+      "bonus": [
+        {
+          "stat": 32,
+          "field": "skillAdd1",
+          "value": 4
+        },
+        {
+          "stat": 12,
+          "field": "atkTimeMul",
+          "value": 75
+        },
+        {
+          "stat": 18,
+          "field": "parry",
+          "value": 60
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "nameKey": "reborn_limit_22",
+      "requiredLevel": 74,
+      "unlockItem": "i148035",
+      "amity": 4500,
+      "avatar": 53,
+      "npcId": 81022,
+      "npcNameKey": "reborn_npc_81022",
+      "npcOutfit": "i290053",
+      "base": {
+        "strength": 6000,
+        "agility": 8800,
+        "stamina": 8600
+      },
+      "bonus": [
+        {
+          "stat": 40,
+          "field": "skillAdd9",
+          "value": 5
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 8000
+        },
+        {
+          "stat": 12,
+          "field": "atkTimeMul",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "nameKey": "reborn_limit_23",
+      "requiredLevel": 76,
+      "unlockItem": "i148035",
+      "amity": 4500,
+      "avatar": 56,
+      "npcId": 81023,
+      "npcNameKey": "reborn_npc_81023",
+      "npcOutfit": "i290056",
+      "base": {
+        "strength": 9200,
+        "agility": 8400,
+        "stamina": 5200
+      },
+      "bonus": [
+        {
+          "stat": 35,
+          "field": "skillAdd4",
+          "value": 5
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 127
+        },
+        {
+          "stat": 16,
+          "field": "critAttach",
+          "value": 80
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "nameKey": "reborn_limit_24",
+      "requiredLevel": 56,
+      "unlockItem": "i148032",
+      "amity": 2100,
+      "avatar": 105,
+      "npcId": 81024,
+      "npcNameKey": "reborn_npc_81024",
+      "npcOutfit": "i290105",
+      "base": {
+        "strength": 5000,
+        "agility": 7000,
+        "stamina": 4000
+      },
+      "bonus": [
+        {
+          "stat": 33,
+          "field": "skillAdd2",
+          "value": 4
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 96
+        },
+        {
+          "stat": 11,
+          "field": "attackMul",
+          "value": 75
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "nameKey": "reborn_limit_25",
+      "requiredLevel": 52,
+      "unlockItem": "i148032",
+      "amity": 2100,
+      "avatar": 104,
+      "npcId": 81025,
+      "npcNameKey": "reborn_npc_81025",
+      "npcOutfit": "i290104",
+      "base": {
+        "strength": 6800,
+        "agility": 3200,
+        "stamina": 5600
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 4
+        },
+        {
+          "stat": 9,
+          "field": "hpMul",
+          "value": 75
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 60
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "nameKey": "reborn_limit_26",
+      "requiredLevel": 60,
+      "unlockItem": "i148032",
+      "amity": 2100,
+      "avatar": 107,
+      "npcId": 81026,
+      "npcNameKey": "reborn_npc_81026",
+      "npcOutfit": "i290107",
+      "base": {
+        "strength": 6500,
+        "agility": 3500,
+        "stamina": 6500
+      },
+      "bonus": [
+        {
+          "stat": 32,
+          "field": "skillAdd1",
+          "value": 4
+        },
+        {
+          "stat": 9,
+          "field": "hpMul",
+          "value": 75
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 96
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "nameKey": "reborn_limit_27",
+      "requiredLevel": 58,
+      "unlockItem": "i148033",
+      "amity": 2100,
+      "avatar": 44,
+      "npcId": 81027,
+      "npcNameKey": "reborn_npc_81027",
+      "npcOutfit": "i290044",
+      "base": {
+        "strength": 5400,
+        "agility": 5400,
+        "stamina": 5400
+      },
+      "bonus": [
+        {
+          "stat": 32,
+          "field": "skillAdd1",
+          "value": 4
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 96
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 96
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "nameKey": "reborn_limit_28",
+      "requiredLevel": 51,
+      "unlockItem": "i148033",
+      "amity": 2100,
+      "avatar": 112,
+      "npcId": 81028,
+      "npcNameKey": "reborn_npc_81028",
+      "npcOutfit": "i290112",
+      "base": {
+        "strength": 5800,
+        "agility": 3200,
+        "stamina": 6500
+      },
+      "bonus": [
+        {
+          "stat": 39,
+          "field": "skillAdd8",
+          "value": 4
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 96
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 107
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "nameKey": "reborn_limit_29",
+      "requiredLevel": 54,
+      "unlockItem": "i148033",
+      "amity": 2100,
+      "avatar": 108,
+      "npcId": 81029,
+      "npcNameKey": "reborn_npc_81029",
+      "npcOutfit": "i290108",
+      "base": {
+        "strength": 5800,
+        "agility": 6000,
+        "stamina": 4000
+      },
+      "bonus": [
+        {
+          "stat": 31,
+          "field": "skillAdd0",
+          "value": 4
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 60
+        },
+        {
+          "stat": 19,
+          "field": "pierce",
+          "value": 96
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "nameKey": "reborn_limit_30",
+      "requiredLevel": 51,
+      "unlockItem": "i148034",
+      "amity": 2100,
+      "avatar": 21,
+      "npcId": 81030,
+      "npcNameKey": "reborn_npc_81030",
+      "npcOutfit": "i290021",
+      "base": {
+        "strength": 5200,
+        "agility": 5100,
+        "stamina": 5200
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 4
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 96
+        },
+        {
+          "stat": 2,
+          "field": "agility",
+          "value": 6000
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "nameKey": "reborn_limit_31",
+      "requiredLevel": 56,
+      "unlockItem": "i148034",
+      "amity": 4500,
+      "avatar": 113,
+      "npcId": 81031,
+      "npcNameKey": "reborn_npc_81031",
+      "npcOutfit": "i290113",
+      "base": {
+        "strength": 6800,
+        "agility": 5200,
+        "stamina": 4000
+      },
+      "bonus": [
+        {
+          "stat": 32,
+          "field": "skillAdd1",
+          "value": 4
+        },
+        {
+          "stat": 16,
+          "field": "critAttach",
+          "value": 60
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 60
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "nameKey": "reborn_limit_32",
+      "requiredLevel": 60,
+      "unlockItem": "i148034",
+      "amity": 4500,
+      "avatar": 115,
+      "npcId": 81032,
+      "npcNameKey": "reborn_npc_81032",
+      "npcOutfit": "i290115",
+      "base": {
+        "strength": 3800,
+        "agility": 6500,
+        "stamina": 6500
+      },
+      "bonus": [
+        {
+          "stat": 36,
+          "field": "skillAdd5",
+          "value": 4
+        },
+        {
+          "stat": 2,
+          "field": "agility",
+          "value": 6000
+        },
+        {
+          "stat": 1,
+          "field": "strength",
+          "value": 8700
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "nameKey": "reborn_limit_33",
+      "requiredLevel": 58,
+      "unlockItem": "i148031",
+      "amity": 4500,
+      "avatar": 98,
+      "npcId": 81033,
+      "npcNameKey": "reborn_npc_81033",
+      "npcOutfit": "i290098",
+      "base": {
+        "strength": 3800,
+        "agility": 5900,
+        "stamina": 6500
+      },
+      "bonus": [
+        {
+          "stat": 31,
+          "field": "skillAdd0",
+          "value": 4
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 60
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 6000
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "nameKey": "reborn_limit_34",
+      "requiredLevel": 60,
+      "unlockItem": "i148031",
+      "amity": 4500,
+      "avatar": 48,
+      "npcId": 81034,
+      "npcNameKey": "reborn_npc_81034",
+      "npcOutfit": "i290048",
+      "base": {
+        "strength": 6500,
+        "agility": 6500,
+        "stamina": 3500
+      },
+      "bonus": [
+        {
+          "stat": 34,
+          "field": "skillAdd3",
+          "value": 4
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 96
+        },
+        {
+          "stat": 12,
+          "field": "atkTimeMul",
+          "value": 75
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "nameKey": "reborn_limit_35",
+      "requiredLevel": 73,
+      "unlockItem": "i148037",
+      "amity": 4500,
+      "avatar": 47,
+      "npcId": 81035,
+      "npcNameKey": "reborn_npc_81035",
+      "npcOutfit": "i290047",
+      "base": {
+        "strength": 7800,
+        "agility": 7700,
+        "stamina": 7700
+      },
+      "bonus": [
+        {
+          "stat": 34,
+          "field": "skillAdd3",
+          "value": 5
+        },
+        {
+          "stat": 18,
+          "field": "parry",
+          "value": 80
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 80
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "nameKey": "reborn_limit_36",
+      "requiredLevel": 75,
+      "unlockItem": "i148037",
+      "amity": 4500,
+      "avatar": 57,
+      "npcId": 81036,
+      "npcNameKey": "reborn_npc_81036",
+      "npcOutfit": "i290057",
+      "base": {
+        "strength": 8800,
+        "agility": 9800,
+        "stamina": 5000
+      },
+      "bonus": [
+        {
+          "stat": 31,
+          "field": "skillAdd0",
+          "value": 5
+        },
+        {
+          "stat": 2,
+          "field": "agility",
+          "value": 8000
+        },
+        {
+          "stat": 11,
+          "field": "attackMul",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "nameKey": "reborn_limit_37",
+      "requiredLevel": 75,
+      "unlockItem": "i148036",
+      "amity": 4500,
+      "avatar": 72,
+      "npcId": 81037,
+      "npcNameKey": "reborn_npc_81037",
+      "npcOutfit": "i290072",
+      "base": {
+        "strength": 5100,
+        "agility": 9000,
+        "stamina": 9500
+      },
+      "bonus": [
+        {
+          "stat": 40,
+          "field": "skillAdd9",
+          "value": 5
+        },
+        {
+          "stat": 16,
+          "field": "critAttach",
+          "value": 80
+        },
+        {
+          "stat": 9,
+          "field": "hpMul",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "nameKey": "reborn_limit_38",
+      "requiredLevel": 72,
+      "unlockItem": "i148036",
+      "amity": 4500,
+      "avatar": 46,
+      "npcId": 81038,
+      "npcNameKey": "reborn_npc_81038",
+      "npcOutfit": "i290046",
+      "base": {
+        "strength": 8400,
+        "agility": 4800,
+        "stamina": 9800
+      },
+      "bonus": [
+        {
+          "stat": 33,
+          "field": "skillAdd2",
+          "value": 5
+        },
+        {
+          "stat": 1,
+          "field": "strength",
+          "value": 8000
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 142
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "nameKey": "reborn_limit_39",
+      "requiredLevel": 82,
+      "unlockItem": "i148038",
+      "amity": 4500,
+      "avatar": 106,
+      "npcId": 81039,
+      "npcNameKey": "reborn_npc_81039",
+      "npcOutfit": "i290106",
+      "base": {
+        "strength": 7000,
+        "agility": 12000,
+        "stamina": 9000
+      },
+      "bonus": [
+        {
+          "stat": 39,
+          "field": "skillAdd8",
+          "value": 6
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 100
+        },
+        {
+          "stat": 3,
+          "field": "stamina",
+          "value": 10000
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "nameKey": "reborn_limit_40",
+      "requiredLevel": 81,
+      "unlockItem": "i148038",
+      "amity": 4500,
+      "avatar": 49,
+      "npcId": 81040,
+      "npcNameKey": "reborn_npc_81040",
+      "npcOutfit": "i290049",
+      "base": {
+        "strength": 9000,
+        "agility": 12000,
+        "stamina": 7000
+      },
+      "bonus": [
+        {
+          "stat": 39,
+          "field": "skillAdd8",
+          "value": 6
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 158
+        },
+        {
+          "stat": 6,
+          "field": "dodge",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "nameKey": "reborn_limit_41",
+      "requiredLevel": 84,
+      "unlockItem": "i148040",
+      "amity": 4500,
+      "avatar": 111,
+      "npcId": 81041,
+      "npcNameKey": "reborn_npc_81041",
+      "npcOutfit": "i290111",
+      "base": {
+        "strength": 12000,
+        "agility": 9000,
+        "stamina": 7000
+      },
+      "bonus": [
+        {
+          "stat": 34,
+          "field": "skillAdd3",
+          "value": 6
+        },
+        {
+          "stat": 7,
+          "field": "hit",
+          "value": 158
+        },
+        {
+          "stat": 5,
+          "field": "neglectDefense",
+          "value": 158
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "nameKey": "reborn_limit_42",
+      "requiredLevel": 81,
+      "unlockItem": "i148040",
+      "amity": 4500,
+      "avatar": 51,
+      "npcId": 81042,
+      "npcNameKey": "reborn_npc_81042",
+      "npcOutfit": "i290051",
+      "base": {
+        "strength": 7000,
+        "agility": 8000,
+        "stamina": 12000
+      },
+      "bonus": [
+        {
+          "stat": 38,
+          "field": "skillAdd7",
+          "value": 6
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 177
+        },
+        {
+          "stat": 9,
+          "field": "hpMul",
+          "value": 125
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "nameKey": "reborn_limit_43",
+      "requiredLevel": 84,
+      "unlockItem": "i148039",
+      "amity": 4500,
+      "avatar": 109,
+      "npcId": 81043,
+      "npcNameKey": "reborn_npc_81043",
+      "npcOutfit": "i290109",
+      "base": {
+        "strength": 12000,
+        "agility": 7000,
+        "stamina": 9000
+      },
+      "bonus": [
+        {
+          "stat": 35,
+          "field": "skillAdd4",
+          "value": 6
+        },
+        {
+          "stat": 1,
+          "field": "strength",
+          "value": 10000
+        },
+        {
+          "stat": 18,
+          "field": "parry",
+          "value": 100
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "nameKey": "reborn_limit_44",
+      "requiredLevel": 82,
+      "unlockItem": "i148039",
+      "amity": 4500,
+      "avatar": 110,
+      "npcId": 81044,
+      "npcNameKey": "reborn_npc_81044",
+      "npcOutfit": "i290110",
+      "base": {
+        "strength": 9000,
+        "agility": 7000,
+        "stamina": 12000
+      },
+      "bonus": [
+        {
+          "stat": 31,
+          "field": "skillAdd0",
+          "value": 6
+        },
+        {
+          "stat": 4,
+          "field": "defense",
+          "value": 177
+        },
+        {
+          "stat": 16,
+          "field": "critAttach",
+          "value": 100
+        }
+      ]
+    }
+  ]
+}
