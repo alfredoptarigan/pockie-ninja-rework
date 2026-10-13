@@ -1479,7 +1479,10 @@ export const tailedBeastPools = pgTable(
   (t) => [
     primaryKey({ columns: [t.week, t.beast, t.mode] }),
     index('tailed_beast_pools_killed_by_idx').on(t.killedBy),
-    check('tailed_beast_pools_beast', sql`${t.beast} between 1 and 9 and ${t.mode} between 0 and 2`),
+    check(
+      'tailed_beast_pools_beast',
+      sql`${t.beast} between 1 and 9 and ${t.mode} between 0 and 2`,
+    ),
     check('tailed_beast_pools_hp', sql`${t.hpLeft} >= 0`),
   ],
 )
@@ -1521,10 +1524,7 @@ export const tailedBeastPlayers = pgTable(
       'tailed_beast_players_amounts',
       sql`${t.honor} >= 0 and ${t.essence} >= 0 and ${t.fights} >= 0 and ${t.ticketsUsed} >= 0`,
     ),
-    check(
-      'tailed_beast_players_boxes',
-      sql`${t.boxesClaimed} <@ '{5,10,20}'::smallint[]`,
-    ),
+    check('tailed_beast_players_boxes', sql`${t.boxesClaimed} <@ '{5,10,20}'::smallint[]`),
   ],
 )
 
@@ -1545,10 +1545,7 @@ export const tailedBeastKages = pgTable(
     primaryKey({ columns: [t.week, t.village] }),
     index('tailed_beast_kages_character_idx').on(t.characterId),
     check('tailed_beast_kages_village', sql`${t.village} between 0 and 4`),
-    check(
-      'tailed_beast_kages_claim',
-      sql`(${t.claimedItemId} is null) = (${t.claimedAt} is null)`,
-    ),
+    check('tailed_beast_kages_claim', sql`(${t.claimedItemId} is null) = (${t.claimedAt} is null)`),
   ],
 )
 

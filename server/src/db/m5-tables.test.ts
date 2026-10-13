@@ -101,11 +101,24 @@ describe('characters', () => {
 
 describe('talents', () => {
   it('stores one row per talent 1-8 with level 0-60 and non-negative EXP', async () => {
-    const [row] = await db.insert(characterTalents).values({ characterId: a, talentId: 1 }).returning()
+    const [row] = await db
+      .insert(characterTalents)
+      .values({ characterId: a, talentId: 1 })
+      .returning()
     expect(row).toMatchObject({ level: 0, exp: 0, activeSlot: null })
-    await expect(db.insert(characterTalents).values({ characterId: a, talentId: 1 })).rejects.toThrow()
-    for (const values of [{ talentId: 0 }, { talentId: 9 }, { talentId: 2, level: 61 }, { talentId: 2, level: -1 }, { talentId: 2, exp: -1 }]) {
-      await expect(db.insert(characterTalents).values({ characterId: a, ...values })).rejects.toThrow()
+    await expect(
+      db.insert(characterTalents).values({ characterId: a, talentId: 1 }),
+    ).rejects.toThrow()
+    for (const values of [
+      { talentId: 0 },
+      { talentId: 9 },
+      { talentId: 2, level: 61 },
+      { talentId: 2, level: -1 },
+      { talentId: 2, exp: -1 },
+    ]) {
+      await expect(
+        db.insert(characterTalents).values({ characterId: a, ...values }),
+      ).rejects.toThrow()
     }
     await db.insert(characterTalents).values({ characterId: a, talentId: 8, level: 60 })
   })
@@ -144,7 +157,9 @@ describe('bloodlines', () => {
       .returning()
     expect(row).toMatchObject({ amity: 0, unlockedAt: null, activeSlot: null })
     for (const values of [{ limitId: 0 }, { limitId: 45 }, { limitId: 1, amity: -1 }]) {
-      await expect(db.insert(characterBloodlines).values({ characterId: a, ...values })).rejects.toThrow()
+      await expect(
+        db.insert(characterBloodlines).values({ characterId: a, ...values }),
+      ).rejects.toThrow()
     }
   })
 
@@ -157,10 +172,14 @@ describe('bloodlines', () => {
       { characterId: b, limitId: 1, unlockedAt, activeSlot: 0 },
     ])
     await expect(
-      db.insert(characterBloodlines).values({ characterId: a, limitId: 4, unlockedAt, activeSlot: 2 }),
+      db
+        .insert(characterBloodlines)
+        .values({ characterId: a, limitId: 4, unlockedAt, activeSlot: 2 }),
     ).rejects.toThrow()
     await expect(
-      db.insert(characterBloodlines).values({ characterId: a, limitId: 5, unlockedAt, activeSlot: 3 }),
+      db
+        .insert(characterBloodlines)
+        .values({ characterId: a, limitId: 5, unlockedAt, activeSlot: 3 }),
     ).rejects.toThrow()
     await expect(
       db.insert(characterBloodlines).values({ characterId: b, limitId: 6, activeSlot: 1 }),
@@ -178,7 +197,12 @@ describe('bloodlines', () => {
       db.insert(characterBloodlinePrayer).values({ characterId: a, limitId: 2, attribute: 1 }),
     ).rejects.toThrow() // limit not owned
     await db.delete(characterBloodlinePrayer)
-    for (const values of [{ attribute: 0 }, { attribute: 4 }, { attribute: 1, level: 10 }, { attribute: 1, progress: -1 }]) {
+    for (const values of [
+      { attribute: 0 },
+      { attribute: 4 },
+      { attribute: 1, level: 10 },
+      { attribute: 1, progress: -1 },
+    ]) {
       await expect(
         db.insert(characterBloodlinePrayer).values({ characterId: a, limitId: 1, ...values }),
       ).rejects.toThrow()
@@ -190,8 +214,15 @@ describe('souls', () => {
   it('stores types 1-13 at levels 1-10', async () => {
     const [row] = await db.insert(characterSouls).values({ characterId: a, type: 13 }).returning()
     expect(row).toMatchObject({ level: 1, limitId: null, socket: null })
-    for (const values of [{ type: 0 }, { type: 14 }, { type: 1, level: 0 }, { type: 1, level: 11 }]) {
-      await expect(db.insert(characterSouls).values({ characterId: a, ...values })).rejects.toThrow()
+    for (const values of [
+      { type: 0 },
+      { type: 14 },
+      { type: 1, level: 0 },
+      { type: 1, level: 11 },
+    ]) {
+      await expect(
+        db.insert(characterSouls).values({ characterId: a, ...values }),
+      ).rejects.toThrow()
     }
     await db.insert(characterSouls).values({ characterId: a, type: 1, level: 10 })
   })
@@ -259,7 +290,11 @@ describe('daily events', () => {
       .insert(characterWeeklyRewards)
       .values({ characterId: a, week, claimedMilestones: [50, 200], claimedWeekdays: [1, 7] })
       .returning()
-    expect(row).toMatchObject({ counters: {}, claimedMilestones: [50, 200], claimedWeekdays: [1, 7] })
+    expect(row).toMatchObject({
+      counters: {},
+      claimedMilestones: [50, 200],
+      claimedWeekdays: [1, 7],
+    })
     for (const values of [
       { counters: [] as unknown as Record<string, number> },
       { claimedMilestones: [60] },
@@ -281,7 +316,9 @@ describe('tailed beast', () => {
     await db.insert(tailedBeastPools).values(pool)
     await expect(db.insert(tailedBeastPools).values(pool)).rejects.toThrow()
     for (const values of [{ beast: 0 }, { beast: 10 }, { mode: 3 }, { hpLeft: -1 }]) {
-      await expect(db.insert(tailedBeastPools).values({ ...pool, mode: 0, ...values })).rejects.toThrow()
+      await expect(
+        db.insert(tailedBeastPools).values({ ...pool, mode: 0, ...values }),
+      ).rejects.toThrow()
     }
   })
 
@@ -291,7 +328,9 @@ describe('tailed beast', () => {
       .values({ week, characterId: a, village: 0 })
       .returning()
     expect(row).toMatchObject({ honor: 0, essence: 0, fights: 0, ticketsUsed: 0, boxesClaimed: [] })
-    await expect(db.insert(tailedBeastPlayers).values({ week, characterId: a, village: 0 })).rejects.toThrow()
+    await expect(
+      db.insert(tailedBeastPlayers).values({ week, characterId: a, village: 0 }),
+    ).rejects.toThrow()
     for (const values of [
       { essence: -1 },
       { honor: -1 },
@@ -328,7 +367,9 @@ describe('team stone', () => {
     const [row] = await db.insert(teamStonePlayers).values({ characterId: a }).returning()
     expect(row).toMatchObject({ score: 0, attemptsUsed: 0, playedThisWeek: false })
     for (const values of [{ score: -1 }, { attemptsUsed: -1 }]) {
-      await expect(db.insert(teamStonePlayers).values({ characterId: b, ...values })).rejects.toThrow()
+      await expect(
+        db.insert(teamStonePlayers).values({ characterId: b, ...values }),
+      ).rejects.toThrow()
     }
   })
 
@@ -342,7 +383,9 @@ describe('team stone', () => {
   it('stores a match of two teams of 3 with a winner side 0 or 1', async () => {
     const team = [a, b, a]
     await db.insert(teamStoneMatches).values({ teamA: team, teamB: team })
-    await expect(db.insert(teamStoneMatches).values({ teamA: [a, b], teamB: team })).rejects.toThrow()
+    await expect(
+      db.insert(teamStoneMatches).values({ teamA: [a, b], teamB: team }),
+    ).rejects.toThrow()
     await expect(
       db.insert(teamStoneMatches).values({ teamA: team, teamB: team, winner: 2 }),
     ).rejects.toThrow()
