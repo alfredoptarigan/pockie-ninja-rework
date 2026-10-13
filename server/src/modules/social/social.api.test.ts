@@ -119,9 +119,12 @@ describe('friends', () => {
       templateKey: 'friend.added',
       params: { characterId: naruto.id, name: 'Naruto_01' },
     })
-    expect(notices).toContainEqual([
-      sasuke.id,
-      { kind: 'friendAdded', from: { characterId: naruto.id, name: 'Naruto_01', level: 10 } },
+    expect(notices).toEqual([
+      [sasuke.id, { kind: 'mail', mailId: mail.id, category: 'interaction' }],
+      [
+        sasuke.id,
+        { kind: 'friendAdded', from: { characterId: naruto.id, name: 'Naruto_01', level: 10 } },
+      ],
     ])
   })
 

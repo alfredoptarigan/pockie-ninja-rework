@@ -20,9 +20,15 @@ const row = (owner: string, friend: string) =>
 
 /**
  * Sends a friend notice mail unless the same one went out in the last day: add, remove, add
- * again (exploit 10, the harassment loop) mails and prompts the target once.
+ * again (exploit 10, the harassment loop) mails and prompts the target once. Returns the mail
+ * notice to push, or an empty outbox.
  */
-async function noticeMail(tx: Tx, to: string, templateKey: string, from: CharacterRow) {
+async function noticeMail(
+  tx: Tx,
+  to: string,
+  templateKey: string,
+  from: CharacterRow,
+): Promise<Outbox> {
   const [recent] = await tx
     .select({ id: mails.id })
     .from(mails)
@@ -35,12 +41,12 @@ async function noticeMail(tx: Tx, to: string, templateKey: string, from: Charact
       ),
     )
     .limit(1)
-  if (recent) return false
-  await sendSystemMail(tx, to, 'interaction', templateKey, {
+  if (recent) return []
+  const mail = await sendSystemMail(tx, to, 'interaction', templateKey, {
     characterId: from.id,
     name: from.name,
   })
-  return true
+  return [[to, { kind: 'mail', mailId: mail.id, category: mail.category }]]
 }
 
 /**
@@ -73,8 +79,9 @@ export async function addFriend(tx: Tx, me: CharacterRow, them: CharacterRow): P
       .where(row(them.id, me.id))
   }
   const mailed = await noticeMail(tx, them.id, 'friend.added', me)
-  if (!mailed || mutual) return []
+  if (!mailed.length || mutual) return mailed
   return [
+    ...mailed,
     [
       them.id,
       {
@@ -91,11 +98,11 @@ export async function declineAddBack(tx: Tx, me: CharacterRow, them: CharacterRo
 }
 
 /** One-sided remove; the other side keeps its row, loses the home flag and gets a mail. */
-export async function removeFriend(tx: Tx, me: CharacterRow, them: CharacterRow) {
+export async function removeFriend(tx: Tx, me: CharacterRow, them: CharacterRow): Promise<Outbox> {
   const removed = await tx.delete(friends).where(row(me.id, them.id)).returning()
-  if (!removed.length) return
+  if (!removed.length) return []
   await tx.update(friends).set({ homeFriend: false }).where(row(them.id, me.id))
-  await noticeMail(tx, them.id, 'friend.removed', me)
+  return noticeMail(tx, them.id, 'friend.removed', me)
 }
 
 /** Blocks `them` and drops the friendship both ways. Idempotent; `them` is not told. */
