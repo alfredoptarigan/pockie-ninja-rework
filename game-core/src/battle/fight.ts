@@ -85,6 +85,10 @@ export function simulateFight({
         initAtkTime: input.atkTime,
         initHit: input.hit,
         hitMulAdd: 0,
+        initMinAttack: input.minAttack,
+        initMaxAttack: input.maxAttack,
+        minAtkMul: 0,
+        maxAtkMul: 0,
         next: 0,
         parryPercent: 0,
         initDodge: input.dodge,
@@ -559,6 +563,15 @@ export function simulateFight({
     changeDodge: (target, dodgeMulAdd) => {
       target.dodgeMulAdd = dodgeMulAdd
       target.dodge = Math.trunc(target.initDodge * 100 * 0.01) + dodgeMulAdd
+    },
+    changeAtk: (target, minAtkMul, maxAtkMul) => {
+      const min = Math.trunc(target.initMinAttack * (100 + minAtkMul) * 0.01)
+      const max = Math.trunc(target.initMaxAttack * (100 + maxAtkMul) * 0.01)
+      if (min < 0 || max < 0) return
+      target.minAttack = min
+      target.maxAttack = max
+      target.minAtkMul = minAtkMul
+      target.maxAtkMul = maxAtkMul
     },
     changeHit: (target, hitMulAdd) => {
       target.hitMulAdd = hitMulAdd
