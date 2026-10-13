@@ -186,6 +186,26 @@ export const characters = pgTable(
     // stone/gold by an explicit claim.
     marketStone: currency('market_stone'),
     marketGold: currency('market_gold'),
+    // Talent upgrades (M5 decision 7): attempts used on the UTC day `talentDay`, shared by all
+    // talents; the n-th attempt costs costNeeded[n].
+    talentDay: date('talent_day'),
+    talentAttemptsUsed: smallint('talent_attempts_used').notNull().default(0),
+    // Bloodline turn-ins (decision 12: 10 a day, 4 items each) on the UTC day `bloodlineDay`.
+    bloodlineDay: date('bloodline_day'),
+    bloodlineTurnIns: smallint('bloodline_turn_ins').notNull().default(0),
+    // Soul discovery (decision 15: 10 a day, 30 with VIP) on the UTC day `soulDay`.
+    soulDay: date('soul_day'),
+    soulsDiscovered: smallint('souls_discovered').notNull().default(0),
+    // Dice of Fate (decision 25) on the UTC day `diceDay`: rolls used and replenishes bought.
+    diceDay: date('dice_day'),
+    diceUsed: smallint('dice_used').notNull().default(0),
+    diceBought: smallint('dice_bought').notNull().default(0),
+    // Twenty-Minute Reward (decision 26): last claim and claims on the UTC day `twentyMinDay`.
+    twentyMinAt: timestamp('twenty_min_at', { withTimezone: true }),
+    twentyMinDay: date('twenty_min_day'),
+    twentyMinCount: smallint('twenty_min_count').notNull().default(0),
+    // Team Stone shop currency (decision 28); never lost on a loss.
+    battleCoins: currency('battle_coins'),
   },
   (t) => [
     uniqueIndex('characters_user_id_key').on(t.userId),
@@ -208,6 +228,16 @@ export const characters = pgTable(
       sql`${t.tollGateEntries} >= 0 and ${t.pubFightsToday} >= 0`,
     ),
     check('characters_market_wallet', sql`${t.marketStone} >= 0 and ${t.marketGold} >= 0`),
+    // M5 daily counters: the caps live in each feature's constants file, the database only
+    // refuses negatives.
+    check('characters_talent_attempts', sql`${t.talentAttemptsUsed} >= 0`),
+    check('characters_bloodline_turn_ins', sql`${t.bloodlineTurnIns} >= 0`),
+    check('characters_souls_discovered', sql`${t.soulsDiscovered} >= 0`),
+    check(
+      'characters_daily_events',
+      sql`${t.diceUsed} >= 0 and ${t.diceBought} >= 0 and ${t.twentyMinCount} >= 0`,
+    ),
+    check('characters_battle_coins', sql`${t.battleCoins} >= 0`),
     // Rankings (decision 13), ties to the older ninja. `desc().nullsFirst()` matches a plain
     // `order by ... desc`, so the index serves it.
     index('characters_level_rank_idx').on(
@@ -1209,6 +1239,9 @@ export const characterSkills = pgTable(
       .references(() => characters.id, { onDelete: 'cascade' }),
     skillId: integer('skill_id').notNull(),
     level: smallint('skill_level').notNull().default(1),
+    // 7-day scroll skills (decision 18) end here; null = permanent. Expired rows are ignored by
+    // fights and deleted lazily.
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
   },
   (t) => [
     primaryKey({ columns: [t.characterId, t.skillId] }),
@@ -1252,5 +1285,340 @@ export const characterSkillSlots = pgTable(
     check('character_skill_slots_tree', sql`${t.tree} between 0 and 2`),
     check('character_skill_slots_slot', sql`${t.slot} between 0 and 5`),
     check('character_skill_slots_level', sql`${t.level} between 1 and 13`),
+  ],
+)
+
+// M5 Reborn Update (.claude/plans/m5-reborn-update.plan.md). Lock order as everywhere: the
+// character row first, then feature rows by key.
+
+// Talents (decision 6-8). A row exists once a talent got EXP or was touched. "Active" is a slot
+// 0-2, so the unique index caps active talents at 3 per ninja.
+export const characterTalents = pgTable(
+  'character_talents',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    talentId: smallint('talent_id').notNull(),
+    // Capped by max(0, level - 50) in the feature code; 60 is serverConfig's last expNeeded row.
+    level: smallint('level').notNull().default(0),
+    exp: integer('exp').notNull().default(0),
+    activeSlot: smallint('active_slot'),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.talentId] }),
+    uniqueIndex('character_talents_active_key')
+      .on(t.characterId, t.activeSlot)
+      .where(sql`${t.activeSlot} is not null`),
+    check('character_talents_id', sql`${t.talentId} between 1 and 8`),
+    check('character_talents_level', sql`${t.level} between 0 and 60 and ${t.exp} >= 0`),
+    check(
+      'character_talents_active',
+      sql`${t.activeSlot} is null or (${t.activeSlot} between 0 and 2 and ${t.level} >= 1)`,
+    ),
+  ],
+)
+
+// Bloodline limits (decision 11-14): a row per limit the ninja has handed items in for. Active
+// is a slot 0-2 (at most 3 active, unlocked limits only).
+export const characterBloodlines = pgTable(
+  'character_bloodlines',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    limitId: smallint('limit_id').notNull(),
+    // +30 per turn-in; unlocked once it reaches the limit's target.
+    amity: integer('amity').notNull().default(0),
+    unlockedAt: timestamp('unlocked_at', { withTimezone: true }),
+    activeSlot: smallint('active_slot'),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.limitId] }),
+    uniqueIndex('character_bloodlines_active_key')
+      .on(t.characterId, t.activeSlot)
+      .where(sql`${t.activeSlot} is not null`),
+    check('character_bloodlines_id', sql`${t.limitId} between 1 and 44`),
+    check('character_bloodlines_amity', sql`${t.amity} >= 0`),
+    check(
+      'character_bloodlines_active',
+      sql`${t.activeSlot} is null or (${t.activeSlot} between 0 and 2 and ${t.unlockedAt} is not null)`,
+    ),
+  ],
+)
+
+/** The soul inventory size (decision 15), enforced by the `character_souls_cap` trigger (0023). */
+export const SOUL_INVENTORY_MAX = 250
+
+// Bloodline souls (decision 15). A soul is loose (limit and socket null) or socketed in one of
+// the 5 sockets of an owned limit, at most one soul of each type per limit.
+export const characterSouls = pgTable(
+  'character_souls',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    type: smallint('type').notNull(),
+    level: smallint('level').notNull().default(1),
+    limitId: smallint('limit_id'),
+    socket: smallint('socket'),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('character_souls_character_idx').on(t.characterId, t.level),
+    foreignKey({
+      columns: [t.characterId, t.limitId],
+      foreignColumns: [characterBloodlines.characterId, characterBloodlines.limitId],
+    }),
+    uniqueIndex('character_souls_socket_key')
+      .on(t.characterId, t.limitId, t.socket)
+      .where(sql`${t.limitId} is not null`),
+    uniqueIndex('character_souls_type_key')
+      .on(t.characterId, t.limitId, t.type)
+      .where(sql`${t.limitId} is not null`),
+    check('character_souls_type', sql`${t.type} between 1 and 13`),
+    check('character_souls_level', sql`${t.level} between 1 and 10`),
+    check(
+      'character_souls_socket',
+      sql`(${t.limitId} is null) = (${t.socket} is null) and ${t.socket} between 0 and 4`,
+    ),
+  ],
+)
+
+// Prayer on a limit (decision 16): attribute 1 Str, 2 Agi, 3 Sta; switching it resets level and
+// progress. The bonus (8 x level Reborn points) is computed, not stored.
+export const characterBloodlinePrayer = pgTable(
+  'character_bloodline_prayer',
+  {
+    characterId: uuid('character_id').notNull(),
+    limitId: smallint('limit_id').notNull(),
+    attribute: smallint('attribute').notNull(),
+    level: smallint('level').notNull().default(0),
+    // Points toward the next level (5000 x 2^level).
+    progress: integer('progress').notNull().default(0),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.limitId] }),
+    foreignKey({
+      columns: [t.characterId, t.limitId],
+      foreignColumns: [characterBloodlines.characterId, characterBloodlines.limitId],
+    }).onDelete('cascade'),
+    check('character_bloodline_prayer_attribute', sql`${t.attribute} between 1 and 3`),
+    check(
+      'character_bloodline_prayer_level',
+      sql`${t.level} between 0 and 9 and ${t.progress} >= 0`,
+    ),
+  ],
+)
+
+// Daily Login (decision 24): a 7-day cycle that advances only on a claimed day, plus the daily
+// bonus. `claimDay`/`bonusDay` are the UTC days last claimed.
+export const characterDailyLogin = pgTable(
+  'character_daily_login',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    completedDays: integer('completed_days').notNull().default(0),
+    claimDay: date('claim_day'),
+    bonusDay: date('bonus_day'),
+  },
+  (t) => [check('character_daily_login_days', sql`${t.completedDays} >= 0`)],
+)
+
+/** Weekly activity counters, keyed by activity (decision 24). */
+export type WeeklyCounters = Record<string, number>
+
+// Weekly Rewards (decision 24) for the week starting `week` (UTC Monday). A new week is a new
+// row; old rows can be pruned.
+export const characterWeeklyRewards = pgTable(
+  'character_weekly_rewards',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    week: date('week').notNull(),
+    counters: jsonb('counters').$type<WeeklyCounters>().notNull().default({}),
+    // Point milestones claimed (50, 100, 200) and weekday rewards claimed (1 Monday - 7 Sunday).
+    claimedMilestones: smallint('claimed_milestones')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    claimedWeekdays: smallint('claimed_weekdays')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    // The bonus after all 7 weekday rewards.
+    bonusClaimed: boolean('bonus_claimed').notNull().default(false),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.week] }),
+    check('character_weekly_rewards_counters', sql`jsonb_typeof(${t.counters}) = 'object'`),
+    check(
+      'character_weekly_rewards_claims',
+      sql`${t.claimedMilestones} <@ '{50,100,200}'::smallint[] and ${t.claimedWeekdays} <@ '{1,2,3,4,5,6,7}'::smallint[]`,
+    ),
+  ],
+)
+
+// Tailed Beast (decision 27). Rows are keyed by `week` (UTC Monday), so the weekly reset is a
+// new key. The pool row is the shared HP: one locked update per fight.
+export const tailedBeastPools = pgTable(
+  'tailed_beast_pools',
+  {
+    week: date('week').notNull(),
+    beast: smallint('beast').notNull(),
+    // 0 normal, 1 hard, 2 rampage.
+    mode: smallint('mode').notNull(),
+    hpLeft: bigint('hp_left', { mode: 'number' }).notNull(),
+    // The ninja who dealt the last hit.
+    killedBy: uuid('killed_by').references(() => characters.id, { onDelete: 'set null' }),
+    killedAt: timestamp('killed_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.week, t.beast, t.mode] }),
+    index('tailed_beast_pools_killed_by_idx').on(t.killedBy),
+    check('tailed_beast_pools_beast', sql`${t.beast} between 1 and 9 and ${t.mode} between 0 and 2`),
+    check('tailed_beast_pools_hp', sql`${t.hpLeft} >= 0`),
+  ],
+)
+
+export const tailedBeastPlayers = pgTable(
+  'tailed_beast_players',
+  {
+    week: date('week').notNull(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // The ninja's nation when the week's first fight was recorded (village Honor).
+    village: smallint('village').notNull(),
+    honor: bigint('honor', { mode: 'number' }).notNull().default(0),
+    // Spent in the Essence shop; Essence gained = Honor gained.
+    essence: bigint('essence', { mode: 'number' }).notNull().default(0),
+    fights: integer('fights').notNull().default(0),
+    // Free tickets used on the UTC day `ticketDay` (10 a day; a fight costs 1, 3 or 5).
+    ticketDay: date('ticket_day'),
+    ticketsUsed: smallint('tickets_used').notNull().default(0),
+    // Fight-count boxes claimed (5, 10, 20).
+    boxesClaimed: smallint('boxes_claimed')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+  },
+  (t) => [
+    primaryKey({ columns: [t.week, t.characterId] }),
+    index('tailed_beast_players_honor_idx').on(t.week, t.honor.desc().nullsFirst(), t.characterId),
+    index('tailed_beast_players_village_idx').on(
+      t.week,
+      t.village,
+      t.honor.desc().nullsFirst(),
+      t.characterId,
+    ),
+    index('tailed_beast_players_character_idx').on(t.characterId),
+    check('tailed_beast_players_village', sql`${t.village} between 0 and 4`),
+    check(
+      'tailed_beast_players_amounts',
+      sql`${t.honor} >= 0 and ${t.essence} >= 0 and ${t.fights} >= 0 and ${t.ticketsUsed} >= 0`,
+    ),
+    check(
+      'tailed_beast_players_boxes',
+      sql`${t.boxesClaimed} <@ '{5,10,20}'::smallint[]`,
+    ),
+  ],
+)
+
+// The weekly Kage per village (top Honor) and whether the Kage reward was picked.
+export const tailedBeastKages = pgTable(
+  'tailed_beast_kages',
+  {
+    week: date('week').notNull(),
+    village: smallint('village').notNull(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // The picked reward item; null until claimed.
+    claimedItemId: text('claimed_item_id'),
+    claimedAt: timestamp('claimed_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.week, t.village] }),
+    index('tailed_beast_kages_character_idx').on(t.characterId),
+    check('tailed_beast_kages_village', sql`${t.village} between 0 and 4`),
+    check(
+      'tailed_beast_kages_claim',
+      sql`(${t.claimedItemId} is null) = (${t.claimedAt} is null)`,
+    ),
+  ],
+)
+
+// Team Stone (decision 28): ranked 3v3. Score resets on the 1st of the month (`month`), the
+// weekly Battle Coin pay needs `playedThisWeek` for the week starting `week`.
+export const teamStonePlayers = pgTable(
+  'team_stone_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    score: integer('score').notNull().default(0),
+    // Attempts used on the UTC day `attemptsDay` (25 a day, spent when a fight starts).
+    attemptsDay: date('attempts_day'),
+    attemptsUsed: smallint('attempts_used').notNull().default(0),
+    week: date('week'),
+    playedThisWeek: boolean('played_this_week').notNull().default(false),
+    // First day of the UTC month the score belongs to.
+    month: date('month'),
+  },
+  (t) => [
+    index('team_stone_players_rank_idx').on(t.score.desc().nullsFirst(), t.characterId),
+    check('team_stone_players_counts', sql`${t.score} >= 0 and ${t.attemptsUsed} >= 0`),
+  ],
+)
+
+// A finished (or running) 3v3 match: the character ids of both sides in fight order; bot slots
+// hold the id of the ninja whose arena snapshot fought.
+export const teamStoneMatches = pgTable(
+  'team_stone_matches',
+  {
+    id: id(),
+    teamA: uuid('team_a').array().notNull(),
+    teamB: uuid('team_b').array().notNull(),
+    // 0 side A, 1 side B; null while running.
+    winner: smallint('winner'),
+    replay: jsonb('replay').$type<unknown>(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('team_stone_matches_created_at_idx').on(t.createdAt),
+    check(
+      'team_stone_matches_teams',
+      sql`cardinality(${t.teamA}) = 3 and cardinality(${t.teamB}) = 3`,
+    ),
+    check('team_stone_matches_winner', sql`${t.winner} in (0, 1)`),
+  ],
+)
+
+// The matchmaking queue: one row per queued ninja. A pre-made team queues its members with the
+// same `teamId`. `matchId` is set once matched (the ninja is held until the match ends).
+export const teamStoneQueue = pgTable(
+  'team_stone_queue',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    teamId: uuid('team_id').references(() => teams.id, { onDelete: 'cascade' }),
+    // Score and fighter power when queued (matching and the score rule).
+    score: integer('score').notNull(),
+    power: bigint('power', { mode: 'number' }).notNull(),
+    queuedAt: timestamp('queued_at', { withTimezone: true }).notNull().defaultNow(),
+    matchId: uuid('match_id').references(() => teamStoneMatches.id, { onDelete: 'set null' }),
+  },
+  (t) => [
+    index('team_stone_queue_waiting_idx')
+      .on(t.queuedAt)
+      .where(sql`${t.matchId} is null`),
+    index('team_stone_queue_team_id_idx').on(t.teamId),
+    index('team_stone_queue_match_id_idx').on(t.matchId),
+    check('team_stone_queue_amounts', sql`${t.score} >= 0 and ${t.power} >= 0`),
   ],
 )
