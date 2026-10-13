@@ -1,5 +1,6 @@
 // Shared pieces of the instance routes: the character lock, rule errors, bag room, item counts,
 // duels against NPCs and their last-NPC rewards.
+import { unequippedBagItemsWhere } from '../../game/bag.js'
 import {
   createRandom,
   GateRuleError,
@@ -8,7 +9,7 @@ import {
   type DropEntry,
   type DropLib,
 } from '@pockie/game-core'
-import { and, eq, isNull } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import type { FastifyRequest } from 'fastify'
 import { randomInt } from 'node:crypto'
 import type { Db } from '../../db/client.js'
@@ -49,18 +50,11 @@ export async function characterView(tx: Tx | Db, characterId: string) {
   return toCharacter(row!, await playerFighter(tx, row!))
 }
 
-const unequipped = (characterId: string) =>
-  and(
-    eq(inventoryItems.location, 'bag'),
-    eq(inventoryItems.characterId, characterId),
-    isNull(inventoryItems.equippedSlot),
-  )
-
 export async function countItem(tx: Tx, characterId: string, itemId: string) {
   const rows = await tx
     .select({ count: inventoryItems.count })
     .from(inventoryItems)
-    .where(and(unequipped(characterId), eq(inventoryItems.itemId, itemId)))
+    .where(and(unequippedBagItemsWhere(characterId), eq(inventoryItems.itemId, itemId)))
   return rows.reduce((sum, row) => sum + row.count, 0)
 }
 

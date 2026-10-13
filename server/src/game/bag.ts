@@ -6,6 +6,12 @@ import { item } from './data.js'
 import type { GrantedItem } from './gear.js'
 import type { Tx } from './progress.js'
 
+/** Inventory ownership includes market storage; bag reads must use these predicates. */
+export const bagItemsWhere = (characterId: string) =>
+  and(eq(inventoryItems.characterId, characterId), eq(inventoryItems.location, 'bag'))
+export const unequippedBagItemsWhere = (characterId: string) =>
+  and(bagItemsWhere(characterId), isNull(inventoryItems.equippedSlot))
+
 export const BAG_CELLS = 120
 export const itemCells = (itemId: string) => Number(item(itemId)?.ItemShapeType ?? 1)
 export const itemStackSize = (itemId: string) =>
@@ -31,13 +37,7 @@ export async function bagFits(
       count: inventoryItems.count,
     })
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, characterId),
-        isNull(inventoryItems.equippedSlot),
-      ),
-    )
+    .where(unequippedBagItemsWhere(characterId))
   const rows = bag.map((row) => ({ ...row }))
   let used = rows.reduce((sum, row) => sum + itemCells(row.itemId), 0)
   for (const award of awards) {

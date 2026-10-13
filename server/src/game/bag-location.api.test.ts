@@ -4,7 +4,7 @@ import { createTestDb, truncateAll } from '../../test/helpers.js'
 import { inventoryItems } from '../db/schema.js'
 import { countItem } from '../modules/gates/common.js'
 import { setUpNinja } from '../modules/gates/test-setup.js'
-import { bagFits } from './bag.js'
+import { bagFits, requireBagRoom } from './bag.js'
 import { grantItems, removeItems } from './progress.js'
 
 const { db, close } = createTestDb()
@@ -32,6 +32,9 @@ for (const location of ['market', 'warehouse'] as const) {
         expect(await bagFits(tx, ninja.characterId, [{ itemId: 'i250101', bound: true }])).toBe(
           true,
         )
+        await expect(
+          requireBagRoom(tx, ninja.characterId, [{ itemId: 'i250101', bound: true }]),
+        ).resolves.toBeUndefined()
         expect(
           await grantItems(tx, ninja.characterId, [{ itemId: 'i160006', bound: true }], {
             dropOverflow: true,
@@ -118,6 +121,9 @@ for (const location of ['market', 'warehouse'] as const) {
       const rows = await ninja.bag('i152010')
       expect(rows).toEqual([expect.objectContaining({ id: outside.id, count: 10, location })])
       expect(rows.some((row) => row.id === inside.id)).toBe(false)
+      await db.transaction(async (tx) => {
+        expect(await countItem(tx, ninja.characterId, 'i152010')).toBe(0)
+      })
     })
   })
 }

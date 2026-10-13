@@ -1,9 +1,9 @@
-import { requireBagRoom as checkBagRoom } from '../../game/bag.js'
 // Explore spots (OutSearchSystem): search a spot in the current scene, reveal five cards and pay
 // out the picked one, with a global cooldown and a daily search count.
+import { requireBagRoom as checkBagRoom, unequippedBagItemsWhere } from '../../game/bag.js'
 import { createRandom } from '@pockie/game-core'
 import { randomInt, randomUUID } from 'node:crypto'
-import { and, eq, isNull } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { exploreSearchSchema, explorePeekSchema } from '../../../../shared/src/schemas/explore.js'
@@ -68,14 +68,7 @@ async function bagCount(tx: Tx, characterId: string, itemId: string) {
   const rows = await tx
     .select({ count: inventoryItems.count })
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, characterId),
-        eq(inventoryItems.itemId, itemId),
-        isNull(inventoryItems.equippedSlot),
-      ),
-    )
+    .where(and(unequippedBagItemsWhere(characterId), eq(inventoryItems.itemId, itemId)))
   return rows.reduce((sum, row) => sum + row.count, 0)
 }
 

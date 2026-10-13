@@ -1,4 +1,5 @@
 // Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
+import { bagItemsWhere, requireBagRoom } from '../../game/bag.js'
 import { createRandom, deriveStats } from '@pockie/game-core'
 import { buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
@@ -45,7 +46,6 @@ import {
 } from '../../game/quests.js'
 import { playerFighter } from '../../game/combat.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
-import { requireBagRoom } from '../../game/bag.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
@@ -143,13 +143,7 @@ export async function actionRoutes(
     const [row] = await tx
       .select()
       .from(inventoryItems)
-      .where(
-        and(
-          eq(inventoryItems.location, 'bag'),
-          eq(inventoryItems.id, id),
-          eq(inventoryItems.characterId, characterId),
-        ),
-      )
+      .where(and(bagItemsWhere(characterId), eq(inventoryItems.id, id)))
     if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
     return row
   }
@@ -185,10 +179,7 @@ export async function actionRoutes(
 
   app.get('/inventory', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
-    const rows = await db
-      .select()
-      .from(inventoryItems)
-      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, character.id)))
+    const rows = await db.select().from(inventoryItems).where(bagItemsWhere(character.id))
     return {
       items: rows.map((row) => ({
         id: row.id,

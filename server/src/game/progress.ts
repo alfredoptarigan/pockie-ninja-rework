@@ -7,7 +7,7 @@ import { and, desc, eq, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characterQuests, characters, inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { bagFits, itemStackSize } from './bag.js'
+import { bagFits, itemStackSize, unequippedBagItemsWhere } from './bag.js'
 import { avatarStats, dropLib, levels, subTasks, task } from './data.js'
 import { newGearState, rollLibDrops, type GrantedItem } from './gear.js'
 import { countItems, questRewards, type QuestProgress } from './quests.js'
@@ -44,11 +44,9 @@ export async function grantItems(
       .from(inventoryItems)
       .where(
         and(
-          eq(inventoryItems.location, 'bag'),
-          eq(inventoryItems.characterId, characterId),
+          unequippedBagItemsWhere(characterId),
           eq(inventoryItems.itemId, itemId),
           eq(inventoryItems.bound, bound),
-          sql`${inventoryItems.equippedSlot} is null`,
           sql`${inventoryItems.count} < ${maxStack}`,
         ),
       )
@@ -96,14 +94,7 @@ export async function removeItems(tx: Tx, characterId: string, itemId: string, c
   const rows = await tx
     .select()
     .from(inventoryItems)
-    .where(
-      and(
-        eq(inventoryItems.location, 'bag'),
-        eq(inventoryItems.characterId, characterId),
-        eq(inventoryItems.itemId, itemId),
-        sql`${inventoryItems.equippedSlot} is null`,
-      ),
-    )
+    .where(and(unequippedBagItemsWhere(characterId), eq(inventoryItems.itemId, itemId)))
     .orderBy(desc(inventoryItems.bound))
   for (const row of rows) {
     if (left <= 0) break
