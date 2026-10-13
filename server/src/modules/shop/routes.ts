@@ -1,5 +1,4 @@
-import { unequippedBagItemsWhere } from '../../game/bag.js'
-import { requireBagRoom } from '../../game/bag.js'
+import { requireBagRoom, unequippedBagItemsWhere } from '../../game/bag.js'
 import { randomInt } from 'node:crypto'
 import { and, eq, sql } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
@@ -156,10 +155,7 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
 const canSell = (row: typeof inventoryItems.$inferSelect) =>
   row.location === 'bag' && !row.equippedSlot && (Number(item(row.itemId)?.CanTrade ?? 0) & 1) !== 0
 async function sell(tx: Tx, c: Character, ids: string[], amount?: number) {
-  const bag = await tx
-    .select()
-    .from(inventoryItems)
-    .where(and(unequippedBagItemsWhere(c.id)))
+  const bag = await tx.select().from(inventoryItems).where(unequippedBagItemsWhere(c.id))
   let earned = 0
   for (const id of ids) {
     const row = bag.find((r) => r.id === id)
@@ -217,10 +213,7 @@ async function openView(tx: Tx, c: Character) {
     priceStone: pricesFromCosts(row.costs).stone,
     maxStack: Number(item(row.item)?.ItemMaxFoldNum ?? 1),
   }))
-  const bag = await tx
-    .select()
-    .from(inventoryItems)
-    .where(and(unequippedBagItemsWhere(c.id)))
+  const bag = await tx.select().from(inventoryItems).where(unequippedBagItemsWhere(c.id))
   const sellable = bag.filter(canSell).map((row) => {
     const def = item(row.itemId)!
     return {

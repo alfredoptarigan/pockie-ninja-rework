@@ -1,5 +1,5 @@
-import { bagItemsWhere, requireBagRoom } from '../../game/bag.js'
 // Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
+import { bagItemsWhere, requireBagRoom } from '../../game/bag.js'
 import { createRandom, deriveStats } from '@pockie/game-core'
 import { buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'

@@ -1,8 +1,8 @@
-import { bagItemsWhere, unequippedBagItemsWhere } from '../../game/bag.js'
 // The blacksmith under /api/game/forge (docs/original-data/blacksmith.md): Appraise
 // (IdentifySystem first roll), Refine (re-roll), Enhance (ConsolidateSystem), Inscription
 // (InscribeSystem) and Repair (HardinessSystem). Like the original, none of them checks the scene.
 // Every route locks the character row first, then checks and pays per currency.
+import { bagItemsWhere, unequippedBagItemsWhere } from '../../game/bag.js'
 import {
   canAppraise,
   canEnhance,

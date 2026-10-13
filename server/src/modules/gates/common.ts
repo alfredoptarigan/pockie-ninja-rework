@@ -1,6 +1,6 @@
-import { unequippedBagItemsWhere } from '../../game/bag.js'
 // Shared pieces of the instance routes: the character lock, rule errors, bag room, item counts,
 // duels against NPCs and their last-NPC rewards.
+import { unequippedBagItemsWhere } from '../../game/bag.js'
 import {
   createRandom,
   GateRuleError,
@@ -50,13 +50,11 @@ export async function characterView(tx: Tx | Db, characterId: string) {
   return toCharacter(row!, await playerFighter(tx, row!))
 }
 
-const unequipped = unequippedBagItemsWhere
-
 export async function countItem(tx: Tx, characterId: string, itemId: string) {
   const rows = await tx
     .select({ count: inventoryItems.count })
     .from(inventoryItems)
-    .where(and(unequipped(characterId), eq(inventoryItems.itemId, itemId)))
+    .where(and(unequippedBagItemsWhere(characterId), eq(inventoryItems.itemId, itemId)))
   return rows.reduce((sum, row) => sum + row.count, 0)
 }
 
