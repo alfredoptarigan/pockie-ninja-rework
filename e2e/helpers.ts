@@ -1,10 +1,11 @@
 // Shared steps of the game journeys, and DB seeding for journeys a fresh ninja cannot reach
 // (currency, levels, items, a cleared toll gate). Seeding runs psql against the e2e server's
 // database: DATABASE_URL, else the one in the repository's .env.
-import { expect, type Page } from '@playwright/test'
+import { expect, type Browser, type Page } from '@playwright/test'
 import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import { parseEnv } from 'node:util'
+import { hashPassword } from '../server/src/modules/auth/password'
 
 const PASSWORD = 'e2e-journey-password'
 
@@ -37,7 +38,13 @@ export async function createNinja(page: Page, role: string) {
   await page.getByLabel('Email').fill(`${id}@example.test`)
   await page.getByLabel('Password').fill(PASSWORD)
   await page.getByRole('button', { name: 'Create account' }).click()
-  await expect(page).toHaveURL('/play/create')
+  await createCharacter(page, id)
+  return id
+}
+
+/** Completes character creation for a signed-in account without a ninja. */
+async function createCharacter(page: Page, id: string) {
+  await expect(page).toHaveURL('/play/create', { timeout: 30_000 })
   await page.getByLabel('Character Name').fill(id)
   for (const choice of ['Ggio Vega', 'Fire Village']) {
     await page
@@ -49,7 +56,6 @@ export async function createNinja(page: Page, role: string) {
   await expect(
     page.getByRole('main', { name: 'Game' }).getByRole('heading', { name: id }),
   ).toBeVisible({ timeout: 15_000 })
-  return id
 }
 
 // Fields stay blocked on the World Map until visited (decision 7); Leave walks out of the
@@ -117,4 +123,61 @@ export function giveItem(
       name,
     },
   )
+}
+
+// Two-player fixtures seed accounts so the suite stays within the auth endpoint's per-IP
+// registration limit. Login and character creation still run through the real UI.
+/** Two ninjas, each in its own browser context (separate cookies and sockets). */
+export async function createTwoNinjas(browser: Browser, roles: [string, string]) {
+  const passwordHash = await hashPassword(PASSWORD)
+  const player = async (role: string) => {
+    const name = `${role}_${Date.now().toString(36).slice(-5)}`
+    sql(`insert into users (username, email, password_hash) values (:'name', :'email', :'hash');`, {
+      name,
+      email: `${name.toLowerCase()}@example.test`,
+      hash: passwordHash,
+    })
+    const context = await browser.newContext()
+    const page = await context.newPage()
+    try {
+      await loginNinja(page, name)
+      await createCharacter(page, name)
+      return { context, page, name }
+    } catch (error) {
+      await context.close()
+      throw error
+    }
+  }
+  // Keep the first game load and character creation sequential.
+  const first = await player(roles[0])
+  try {
+    return [first, await player(roles[1])] as const
+  } catch (error) {
+    await first.context.close()
+    throw error
+  }
+}
+
+/** Moves every ninja to `sceneId` in the DB, then reloads each page so it reconnects there. */
+export async function meetInScene(players: { page: Page; name: string }[], sceneId: number) {
+  for (const { name } of players) seedCharacter(name, 'scene_id = :scene', { scene: sceneId })
+  for (const { page } of players) {
+    await page.reload()
+    await expect(location(page)).toBeVisible()
+  }
+}
+
+/** Opens the chat box's player list and returns it. */
+export async function openPlayerList(page: Page) {
+  await page.getByRole('button', { name: /^Players \(\d+\)$/ }).click()
+  return page.getByRole('region', { name: /^Players here/ })
+}
+
+/** Signs a seeded or existing journey account in through the login form. */
+export async function loginNinja(page: Page, name: string) {
+  await page.goto('/login')
+  await page.getByLabel('Username or email').fill(name)
+  await page.getByLabel('Password').fill(PASSWORD)
+  await page.getByRole('button', { name: 'Log in' }).click()
+  await expect(page).toHaveURL(/\/play(?:\/create)?$/, { timeout: 30_000 })
 }
