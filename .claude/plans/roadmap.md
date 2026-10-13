@@ -65,6 +65,8 @@ Plan and M3/M4 skill cleanup: `skills-gaps.plan.md`.
 Systems that exist only in Reborn, designed by us with Reborn names and tooltips as reference:
 talents (8), named bloodlines (44 `limit__N`), scroll and secret-technique (ultimate) skills,
 additional outfits (new art), additional quests and events.
+Reference from the live game: `m5-reborn-reference.md`. After M5: fetch the remaining Reborn
+assets (audio, pets, wings, auras, general effects, card art).
 
 ### 6. Home, Collection & Launch
 Home and garden, pets, cards, outfit collection and recast, tailed beasts, admin panel, email
