@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import type {
   AvatarStats,
+  Bonuses,
   EnhanceFailRates,
   EquipPropDefines,
   EquipSuits,
@@ -77,7 +78,7 @@ export const FIRST_TUTORIAL_TASK: Record<number, number> = {
 }
 
 export function subTasks(taskId: number) {
-  return load<Record<string, Row[]>>('sub-tasks')[String(taskId)] ?? []
+  return withReborn<Row[]>('sub-tasks')[String(taskId)] ?? []
 }
 
 const list = (value: Row[string] | undefined) =>
@@ -85,9 +86,8 @@ const list = (value: Row[string] | undefined) =>
 
 export const npc = (id: string) => load<Record<string, Row>>('npcs')[id]
 
-/** skill.ini row of one skill id (without the id). */
-export const skill = (id: number) =>
-  load<Record<string, Omit<SkillInput, 'id'>>>('skills')[String(id)]
+/** skill.ini row of one skill id (without the id), including the Reborn scroll skills. */
+export const skill = (id: number) => withReborn<Omit<SkillInput, 'id'>>('skills')[String(id)]
 
 /** skilladd.ini: the properties a passive skill adds (`SkillAdd0Skill`, `MaxHP`, ...). */
 export const skillAddRow = (id: number) =>
@@ -113,7 +113,8 @@ export function npcSkillIds(npcId: string) {
   )
 }
 
-export const item = (id: string) => load<Record<string, Row>>('items')[id]
+/** item.ini row, including the Reborn scroll items. */
+export const item = (id: string) => withReborn<Row>('items')[id]
 /** en.json key of an item's name (`lg_<Name>`), or `lg_<id>` for items without a row. */
 export const itemNameKey = (id: string) => `lg_${item(id)?.Name ?? id}`
 export const levels = () =>
@@ -148,11 +149,11 @@ export const dropItems = (id: number) => load<Record<string, Row[]>>('drop-items
 export const taskMonsterDrops = (taskId: number) =>
   load<Record<string, Row[]>>('task-monster-drops')[String(taskId)] ?? []
 
-export const task = (id: number) => load<Record<string, Row>>('tasks')[String(id)]
+export const task = (id: number) => withReborn<Row>('tasks')[String(id)]
 let offeredTaskIds: number[] | undefined
 /** Quests taken at an NPC: not auto-accepted and with a quest giver (Task.ini AcceptNpcConfig). */
 export function npcOfferedTaskIds() {
-  offeredTaskIds ??= Object.entries(load<Record<string, Row>>('tasks'))
+  offeredTaskIds ??= Object.entries(withReborn<Row>('tasks'))
     .filter(
       ([, row]) => Number(row.AutoAcceptTask) !== 1 && typeof row.AcceptNpcConfig === 'string',
     )
@@ -443,3 +444,284 @@ export const MAIL_CATEGORIES = [
 /** Team size; no data file (J/TeamModule/TeamDefine/TeamDefine.java:7-8). */
 export const TEAM_MAX_MEMBERS = 3
 export const TEAM_MIN_MEMBERS = 2
+
+// --- M5: Reborn overlay (server/data/game/reborn, `pnpm game-data:reborn`, zod-checked) ---
+
+const rowValue = z.union([z.number(), z.string(), z.array(z.union([z.number(), z.string()]))])
+const rowSchema = z.record(z.string(), rowValue)
+const itemId = z.string().regex(/^i\d+$/)
+const BONUS_FIELDS = [
+  'strength',
+  'agility',
+  'stamina',
+  'hp',
+  'hpMul',
+  'mp',
+  'minAttack',
+  'maxAttack',
+  'attackMul',
+  'atkTimeMul',
+  'dodge',
+  'parry',
+  'hit',
+  'crit',
+  'critAttach',
+  'defense',
+  'pierce',
+  'tough',
+  'neglectDefense',
+  'skillAdd0',
+  'skillAdd1',
+  'skillAdd2',
+  'skillAdd3',
+  'skillAdd4',
+  'skillAdd5',
+  'skillAdd6',
+  'skillAdd7',
+  'skillAdd8',
+  'skillAdd9',
+] as const satisfies readonly (keyof Bonuses)[]
+const bonusField = z.enum(BONUS_FIELDS)
+
+/** Overlays merged into the original lookups; their ids must not exist in the original files. */
+const REBORN_OVERLAYS = {
+  skills: z.record(
+    z.string(),
+    z
+      .object({
+        type: z.union([z.literal(1), z.literal(2)]),
+        quomodo: int,
+        probability: int.min(0).max(100),
+        skilladdtype: int.min(0).max(9),
+        effect: int,
+        decmp: int,
+        canbecounter: z.union([z.literal(0), z.literal(1)]),
+        level: int,
+        secondid: int,
+        skillvalue: int,
+        javascript: z.string(),
+      })
+      .strict(),
+  ),
+  items: z.record(
+    itemId,
+    z
+      .object({
+        Name: z.string().regex(/^reborn_item_\d+$/),
+        CanUse: z.literal(1),
+        AddSkillId: int,
+        /** Decision 18: 7-day scroll, 0 = permanent. */
+        ScrollDays: z.union([z.literal(0), z.literal(7)]),
+        class: z.literal('SkillScrollItem'),
+      })
+      .catchall(rowValue),
+  ),
+  tasks: z.record(z.string(), rowSchema),
+  'sub-tasks': z.record(z.string(), z.array(rowSchema)),
+}
+
+function withReborn<T>(name: keyof typeof REBORN_OVERLAYS): Record<string, T> {
+  const key = `merged:${name}`
+  if (!cache.has(key)) {
+    const base = load<Record<string, T>>(name)
+    const overlay = loadChecked<Record<string, unknown>>(`reborn/${name}`, REBORN_OVERLAYS[name])
+    const clash = Object.keys(overlay).filter((id) => id in base)
+    if (clash.length) throw new Error(`Reborn ${name} reuse original ids: ${clash.join(', ')}`)
+    cache.set(key, { ...base, ...overlay })
+  }
+  return cache.get(key) as Record<string, T>
+}
+
+const talentsSchema = z.object({
+  unlockLevel: int,
+  /** Decision 6: talent level <= max(0, level - levelOffset). */
+  levelOffset: int,
+  maxActive: int,
+  attemptsPerDay: int,
+  expPerUpgrade: int,
+  critPercent: int,
+  critMultiplier: int,
+  /** expNeeded[L - 1]: EXP to reach level L. */
+  expNeeded: z.array(int.positive()).length(60),
+  /** costs[n - 1] = [gold, stones] of the n-th upgrade of the day. */
+  costs: z.array(z.tuple([int.nonnegative(), int.nonnegative()])).length(80),
+  talents: z
+    .array(
+      z.object({
+        id: int.min(1).max(8),
+        nameKey: z.string(),
+        stat: bonusField,
+        counter: bonusField,
+      }),
+    )
+    .length(8),
+})
+export type RebornTalents = z.infer<typeof talentsSchema>
+export const rebornTalents = () => loadChecked('reborn/talents', talentsSchema)
+
+const statBonus = z.object({ stat: int, field: bonusField, value: z.number() })
+const bloodlinesSchema = z.object({
+  itemsPerTurnIn: int,
+  amityPerTurnIn: int,
+  /** Decision 12: turn-ins per day, not items. */
+  turnInsPerDay: int,
+  maxActive: int,
+  /** Reborn stat id -> its Reborn label, our field and the factor into our units. */
+  stats: z.record(z.string(), z.object({ label: z.string(), field: bonusField, scale: int })),
+  limits: z
+    .array(
+      z.object({
+        id: int.min(1).max(44),
+        nameKey: z.string(),
+        requiredLevel: int.min(1).max(90),
+        unlockItem: itemId,
+        amity: int.positive(),
+        avatar: int,
+        npcId: int,
+        npcNameKey: z.string(),
+        npcOutfit: itemId,
+        /** x100 internal units. */
+        base: z.object({ strength: int, agility: int, stamina: int }),
+        /** Values already in our units. */
+        bonus: z.array(statBonus).length(3),
+      }),
+    )
+    .length(44),
+})
+export type RebornBloodlines = z.infer<typeof bloodlinesSchema>
+export const rebornBloodlines = () => loadChecked('reborn/bloodlines', bloodlinesSchema)
+
+const soulsSchema = z.object({
+  inventory: int,
+  socketsPerLimit: int,
+  /** Character level needed for soul level n at index n - 1 (clamped to 90, decision 13). */
+  levelLimits: z.array(int.max(90)).length(10),
+  discover: z.object({ perDay: int, perDayVip: int, levelOdds: z.array(int).length(3) }),
+  synthesis: z.object({ count: int, maxLevel: int }),
+  prayer: z.object({
+    maxLevel: int,
+    expBase: int,
+    soulExpBase: int,
+    soulExpFactor: int,
+    /** Internal (x100) attribute points per prayer level (decision 16). */
+    bonusPerLevel: int,
+    attributes: z.array(z.enum(['strength', 'agility', 'stamina'])).length(3),
+  }),
+  types: z
+    .array(
+      z.object({
+        id: int.min(1).max(13),
+        nameKey: z.string(),
+        stat: int,
+        field: bonusField,
+        /** Index = soul level 0-10; sum, then truncate. */
+        valueByLevel: z.array(z.number()).length(11),
+      }),
+    )
+    .length(13),
+})
+export type RebornSouls = z.infer<typeof soulsSchema>
+export const rebornSouls = () => loadChecked('reborn/souls', soulsSchema)
+
+const scrollSkillsSchema = z.record(
+  z.string(),
+  z.object({
+    element: z.string(),
+    trigger: z.string(),
+    /** [low, high]; the SkillAdd bonus is capped at the high end (decision 17). */
+    castChance: z.tuple([int, int]),
+    /** Multiplier of the level-based MP amount; 0 = no chakra. */
+    chakra: z.number().nonnegative(),
+    sevenDayItem: itemId,
+    permanentItem: itemId,
+  }),
+)
+export type RebornScrollSkill = z.infer<typeof scrollSkillsSchema>[string]
+/** The 12 scroll skills by skill id (their skill.ini rows are merged into `skill()`). */
+export const rebornScrollSkills = () => loadChecked('reborn/scroll-skills', scrollSkillsSchema)
+
+/** Dice of Fate buffs in nonfight-buff-data.json shape (decision 25 values for 80101-80202). */
+export const rebornNonfightBuffs = () =>
+  loadChecked(
+    'reborn/nonfight-buffs',
+    z.object({
+      buffs: z.record(
+        z.string(),
+        z.object({
+          buffadd: int,
+          cleartype: int,
+          deltype: int,
+          overlying: int,
+          replace: int,
+          type: int,
+          validity: int,
+        }),
+      ),
+      properties: z.record(z.string(), z.record(z.string(), int)),
+    }),
+  )
+
+const itemReward = z.object({ item: itemId, amount: int.positive() })
+const eventsSchema = z.object({
+  dailyLogin: z.object({ cycle: z.array(itemReward).length(7), bonus: itemReward }),
+  weekly: z.object({
+    activities: z.array(z.object({ id: z.string(), max: int.positive(), points: int.positive() })),
+    milestones: z.array(
+      z.object({
+        points: int,
+        item: itemId.optional(),
+        amount: int.optional(),
+        gold: int.optional(),
+      }),
+    ),
+    weekdayThreshold: int,
+    /** dayIndex 0 = Sunday. */
+    weekdayRewards: z.array(itemReward.extend({ dayIndex: int.min(0).max(6) })).length(7),
+    bonus: itemReward,
+  }),
+  dice: z.object({
+    rollsPerDay: int,
+    dice: int,
+    replenishCost: int,
+    clearCurseCost: int,
+    /** Best first: the first tier with net lucky dice >= minNet applies. */
+    tiers: z.array(z.object({ minNet: int, buff: int.nullable() })),
+    durationSeconds: z.record(z.string(), int),
+  }),
+  twentyMinute: z.object({ cooldownSeconds: int, giftCoupons: int, claimsPerDay: int }),
+  tailedBeast: z.object({
+    beasts: z.array(z.object({ id: int, nameKey: z.string() })).length(9),
+    ticketsPerDay: int,
+    /** Per mode: normal, hard, rampage. */
+    ticketCost: z.array(int).length(3),
+    hp: z.array(int).length(3),
+    /** level = base + perBeast * (id - 1) + perMode * mode. */
+    level: z.object({ base: int, perBeast: int, perMode: int }),
+    /** Honor = floor(damage / honorPerDamage); Essence = Honor. */
+    honorPerDamage: int,
+    boxes: z.array(z.object({ fights: int, item: itemId })),
+    kageChoices: z.array(itemId),
+    shop: z.array(z.object({ item: itemId, essence: int, limit: int.optional() })),
+  }),
+  teamStone: z.object({
+    minLevel: int,
+    attemptsPerDay: int,
+    teamSize: int,
+    botFillSeconds: z.tuple([int, int]),
+    leagues: z
+      .array(
+        z.object({
+          id: z.string(),
+          nameKey: z.string(),
+          minScore: int,
+          battleCoins: int,
+          item: itemId.optional(),
+          amount: int.optional(),
+        }),
+      )
+      .length(8),
+  }),
+})
+export type RebornEvents = z.infer<typeof eventsSchema>
+/** Daily Login, Weekly Rewards, Dice of Fate, Twenty-Minute Reward, Tailed Beast, Team Stone. */
+export const rebornEvents = () => loadChecked('reborn/events', eventsSchema)
