@@ -52,7 +52,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp11"
       ]
     },
     "2": {
@@ -100,7 +101,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp11"
       ]
     },
     "5": {
@@ -132,7 +134,9 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp9",
+        "sharp11"
       ]
     },
     "7": {
@@ -148,7 +152,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp9"
       ]
     },
     "8": {
@@ -196,7 +201,9 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt9",
+        "blunt11"
       ]
     },
     "11": {
@@ -212,7 +219,9 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves9",
+        "gloves11"
       ]
     },
     "12": {
@@ -244,7 +253,9 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves9",
+        "gloves11"
       ]
     },
     "14": {
@@ -260,7 +271,9 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt9",
+        "blunt11"
       ]
     },
     "15": {
@@ -436,7 +449,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt9"
       ]
     },
     "27": {
@@ -532,7 +546,9 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt9",
+        "blunt11"
       ]
     },
     "33": {
@@ -548,7 +564,9 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp9",
+        "sharp11"
       ]
     },
     "34": {
@@ -580,7 +598,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves11"
       ]
     },
     "36": {
@@ -612,7 +631,9 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves9",
+        "gloves11"
       ]
     },
     "39": {
@@ -660,7 +681,9 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt9",
+        "blunt11"
       ]
     },
     "43": {
@@ -708,7 +731,9 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves9",
+        "gloves11"
       ]
     },
     "46": {
@@ -724,7 +749,9 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt9",
+        "blunt11"
       ]
     },
     "47": {
@@ -772,7 +799,9 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp9",
+        "sharp11"
       ]
     },
     "50": {
@@ -916,7 +945,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt11"
       ]
     },
     "59": {
@@ -1012,7 +1042,9 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp9",
+        "sharp11"
       ]
     },
     "65": {
@@ -1028,7 +1060,9 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves9",
+        "gloves11"
       ]
     },
     "66": {
@@ -1108,7 +1142,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves9"
       ]
     },
     "74": {

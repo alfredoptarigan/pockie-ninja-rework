@@ -179,8 +179,9 @@ async function exportCreateScreen() {
   await writeJson(join(paths.generated, 'game-create-role.json'), await exportCreateRole())
   console.log('Exported the character creation screen')
 }
-// Arena faces, arena NPC art and the mob art only they use (run after `game` and `extra`).
+// Arena faces, weapon layers and exclusive mob art (requires the existing body manifests).
 async function exportArenaArt() {
+  await writeJson(join(paths.generated, 'game-weapons.json'), await exportWeapons(true))
   await writeJson(join(paths.generated, 'game-arena.json'), await exportArena())
 }
 // `pnpm assets:export [game|extra|ui|create|arena]` runs one part; no argument runs everything.

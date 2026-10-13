@@ -8,6 +8,7 @@ import { join } from 'node:path'
 import sharp from 'sharp'
 import { decodeCompressedAmf3 } from '../game-data/amf3.ts'
 import { tableRows } from '../game-data/import.ts'
+import { arenaNpcs } from './arena.ts'
 import { cached } from './cache.ts'
 import { ffdec, mapLimit } from './ffdec.ts'
 import { exportMotions, type Motion } from './motions.ts'
@@ -224,7 +225,7 @@ export async function exportItems() {
   }
 }
 
-export async function exportWeapons() {
+export async function exportWeapons(arenaOnly = false) {
   const rows = itemRows()
   const items = Object.fromEntries(
     sliceItemIds()
@@ -265,15 +266,18 @@ export async function exportWeapons() {
     ),
   ].sort()
   const creation = read<{ Cloth: number; AvatarID: number }[]>('creation-outfits')
+  // Arena NPCs wear tier 9 and 11 weapons that no item in the slice references.
+  const arenaKeys = new Map<number, Set<string>>()
+  for (const npc of Object.values(arenaNpcs()))
+    if ('clothing' in npc)
+      arenaKeys.set(npc.clothing, (arenaKeys.get(npc.clothing) ?? new Set()).add(npc.weapon))
   const avatarSkills = read<Record<string, Row>>('avatar-skills')
   const outfits = await mapLimit(playerOutfits(), 2, async (outfit) => {
-    const keys = [
-      ...new Set(
-        Object.entries(items)
-          .filter(([id]) => (Number(rows[id]!.UsePopsinger) & outfit.Pos) !== 0)
-          .map(([, key]) => key),
-      ),
-    ]
+    const itemKeys = Object.entries(items)
+      .filter(([id]) => (Number(rows[id]!.UsePopsinger) & outfit.Pos) !== 0)
+      .map(([, key]) => key)
+    const arenaSkins = [...(arenaKeys.get(outfit.Cloth) ?? [])]
+    const keys = [...new Set([...itemKeys, ...arenaSkins])]
     const sets: Record<
       string,
       {
@@ -283,6 +287,11 @@ export async function exportWeapons() {
         missing: { actions: string[]; skills: string[] }
       }
     > = {}
+    // The arena pass only needs to regenerate outfits with additional NPC weapon skins.
+    // Other outfits retain the existing item layers; `extra` regenerates those from source.
+    const layerFile = join(paths.assets, `game/weapons/${outfit.Cloth}/layers.json`)
+    if (arenaOnly && arenaSkins.every((key) => itemKeys.includes(key)) && existsSync(layerFile))
+      return [outfit.Cloth, JSON.parse(readFileSync(layerFile, 'utf8')) as typeof sets] as const
     const starting = creation.find((row) => row.Cloth === outfit.Cloth)
     const assigned = starting
       ? avatarSkills[`i29${String(starting.AvatarID).padStart(4, '0')}`]
