@@ -158,6 +158,27 @@ export function newGearState(
   return { canIdentify: true, identifyCount, identifyTimes: 1, props: rolled.props }
 }
 
+/**
+ * RefreshShopSystem transfers instances rather than rerolling them. SetEquipIdentifyPropCount
+ * refuses items without an identify list; plain gear is appraised without an identify roll.
+ */
+export function shopGearState(
+  itemId: string,
+  identifyCount: number,
+  appraised: boolean,
+  props: ItemRow['props'] = [],
+): Pick<ItemRow, 'canIdentify' | 'identifyCount' | 'identifyTimes' | 'props'> {
+  const canIdentify = Boolean(
+    equipConfigOf(itemId) && identifyList(itemId) && identifyCount >= 1 && identifyCount <= 4,
+  )
+  return {
+    canIdentify,
+    identifyCount: canIdentify ? identifyCount : 0,
+    identifyTimes: canIdentify && appraised ? 1 : 0,
+    props: canIdentify && appraised ? props : [],
+  }
+}
+
 /** Points an item loses on a revive at home (5% of its MaxHardiness). */
 export const reviveLoss = (config: EquipConfig) => reviveDurabilityLoss(config)
 /** Points an item loses per enemy killed in a won fight. */

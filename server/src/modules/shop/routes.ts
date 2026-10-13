@@ -46,6 +46,7 @@ import {
   type Tx,
 } from '../../game/progress.js'
 import { recordCommand } from '../../game/quests.js'
+import { shopGearState } from '../../game/gear.js'
 import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
@@ -126,6 +127,7 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
           rng,
         )
       : null
+    const gear = shopGearState(row.item, row.identifyCount, row.appraised, rolled?.props ?? [])
     const offer = refresh.items[poolId]!.find((offer) => offer.item === row.item)!
     const has = (type: number) => offer.costs.some((cost) => cost.type === type)
     await tx.insert(characterShopStock).values({
@@ -136,9 +138,9 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
       priceStone: has(0) ? row.prices.stone : null,
       priceGold: has(2) ? row.prices.gold : null,
       priceGiftCoupon: has(3) ? row.prices.coupons : null,
-      identifyCount: row.identifyCount,
-      appraised: row.appraised,
-      props: rolled?.props ?? [],
+      identifyCount: gear.identifyCount,
+      appraised: !gear.canIdentify || gear.identifyTimes > 0,
+      props: gear.props,
       bound: row.bound,
     })
   }
@@ -346,10 +348,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         characterId: c.id,
         itemId: row.itemId,
         bound: row.bound,
-        identifyCount: row.identifyCount,
-        canIdentify: row.identifyCount > 0,
-        identifyTimes: row.appraised ? 1 : 0,
-        props: row.props,
+        ...shopGearState(row.itemId, row.identifyCount, row.appraised, row.props),
       })
       await tx
         .delete(characterShopStock)

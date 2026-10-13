@@ -1,7 +1,12 @@
 import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { characterExploreSpots, characters, inventoryItems } from '../../db/schema.js'
+import {
+  characterExploreSpots,
+  characters,
+  exploreSearches,
+  inventoryItems,
+} from '../../db/schema.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -360,5 +365,29 @@ describe('explore bag guard', () => {
       message: 'Your bag is full. Free at least six cells before exploring.',
     })
     expect(await row()).toMatchObject({ exploreUsed: 0, exploreLastAt: null })
+  })
+})
+
+it('grants explore item-card equipment with the original plain identify defaults', async () => {
+  const { searchId } = (await startSearch()).json()
+  await db
+    .update(exploreSearches)
+    .set({
+      cards: Array.from({ length: 5 }, () => ({ type: 'item', itemId: 'i250101', bound: true })),
+    })
+    .where(eq(exploreSearches.characterId, characterId))
+  const response = await pick(searchId, 0)
+  expect(response.statusCode).toBe(200)
+  const [gear] = await db
+    .select()
+    .from(inventoryItems)
+    .where(eq(inventoryItems.characterId, characterId))
+  expect(gear).toMatchObject({
+    itemId: 'i250101',
+    bound: true,
+    canIdentify: false,
+    identifyCount: 0,
+    identifyTimes: 0,
+    props: [],
   })
 })
