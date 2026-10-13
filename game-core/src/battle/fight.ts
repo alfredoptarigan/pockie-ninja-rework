@@ -88,6 +88,7 @@ export function simulateFight({
         atkTimeMul: 0,
         atkTimeAdd: 0,
         initDefense: input.defense,
+        defenseMul: 0,
         defenseAdd: 0,
         initHit: input.hit,
         hitMulAdd: 0,
@@ -595,9 +596,10 @@ export function simulateFight({
       target.atkTimeMul = atkTimeMul
       target.atkTimeAdd = atkTimeAdd
     },
-    changeDefense: (target, defenseAdd) => {
+    changeDefense: (target, defenseAdd, defenseMul = target.defenseMul) => {
+      target.defenseMul = defenseMul
       target.defenseAdd = defenseAdd
-      target.defense = Math.trunc(target.initDefense * 100 * 0.01) + defenseAdd
+      target.defense = Math.trunc(target.initDefense * (100 + defenseMul) * 0.01) + defenseAdd
     },
     changeHit: (target, hitMulAdd) => {
       target.hitMulAdd = hitMulAdd
