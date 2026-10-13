@@ -88,12 +88,14 @@ export async function playerOpponent(
   character: CharacterRow,
   arena: ArenaRow,
 ): Promise<Opponent> {
-  let snapshot = arena.snapshot ? fromSnapshot(arena.snapshot) : null
-  if (
-    !snapshot ||
-    (snapshot.buffExpiresAt && new Date(snapshot.buffExpiresAt).getTime() <= Date.now())
-  ) {
-    snapshot = await arenaFighter(tx, character)
+  // Rebuilt whenever gear, level or skills changed since it was stored (decision 9), or once its
+  // earliest timed buff ran out; the character row is locked, so this is the defender as they are now.
+  const live = await arenaFighter(tx, character)
+  const stored = arena.snapshot ? fromSnapshot(arena.snapshot) : null
+  const expired =
+    stored?.buffExpiresAt !== undefined && new Date(stored.buffExpiresAt).getTime() <= Date.now()
+  const snapshot = stored && !expired && stored.source === live.source ? stored : live
+  if (snapshot === live) {
     await tx
       .update(arenaPlayers)
       .set({ snapshot: toSnapshot(snapshot), snapshotAt: new Date() })

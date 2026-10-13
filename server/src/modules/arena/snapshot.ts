@@ -15,6 +15,8 @@ export interface ArenaFighter {
   fighter: PlayerFighter
   /** How the ninja is drawn in a replay. */
   look: { clothing: number; weaponItemId?: string }
+  /** What it was built from; a stored snapshot with another source is stale (decision 9). */
+  source: string
 }
 
 /** A ninja as an arena fighter: playerFighterFrom with the equipped rows, at full HP and MP. */
@@ -35,10 +37,13 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     row.expiresAt ? [row.expiresAt.getTime()] : [],
   )
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
+  const { name, gender, level, avatarId, clothing } = character
+  const gear = [...equipped].sort((x, y) => x.id.localeCompare(y.id))
   return {
     ...(expiries.length > 0 && { buffExpiresAt: new Date(Math.min(...expiries)).toISOString() }),
     fighter: { ...live, hp: live.maxHp, mp: live.maxMp },
-    look: { clothing: character.clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
+    look: { clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
+    source: JSON.stringify([name, gender, level, avatarId, clothing, gear]),
   }
 }
 
