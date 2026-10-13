@@ -204,7 +204,7 @@ export async function disband(ctx: TeamContext, teamId: string, message?: string
 const LEAVE_LINES = {
   leave: (name: string) => `${name} has left the team.`,
   offline: (name: string) => `${name} has left the team.`,
-  kick: (name: string) => `${name} has been kicked by the team leader.`,
+  kick: (name: string) => `${name} has been kicked by the captain.`,
 }
 
 /**
@@ -252,12 +252,7 @@ export async function removeMember(
   )
   notifyTeam(ctx, restIds, team.id, LEAVE_LINES[reason](name))
   if (captainId !== team.captainId)
-    notifyTeam(
-      ctx,
-      restIds,
-      team.id,
-      `${charOf(ctx, captainId).name} has been promoted to team leader.`,
-    )
+    notifyTeam(ctx, restIds, team.id, `${charOf(ctx, captainId).name} is now the team captain.`)
 }
 
 /** Refuses actions a team member cannot take (travel, go home, explore, field fights). */

@@ -237,7 +237,7 @@ export async function refuse(ctx: TeamContext, actorId: string, promptId: string
       teamOf(ctx, prompt.fromId)?.team.id ?? null,
       prompt.kind === 'invite'
         ? `${name} has declined your team invitation.`
-        : 'Your application was rejected.',
+        : 'Your application was declined.',
     )
 }
 
@@ -263,7 +263,7 @@ export async function leave(ctx: TeamContext, actorId: string) {
 
 /** OnCustomHandOverCatpain: to an online member. */
 export async function promote(ctx: TeamContext, actorId: string, targetId: string) {
-  if (actorId === targetId) throw bad('cant_target_self', 'You are already the team leader.')
+  if (actorId === targetId) throw bad('cant_target_self', 'You are already the captain.')
   const mine = requireCaptain(ctx, actorId)
   const member = mine.members.find((m) => m.characterId === targetId)
   if (!member) throw bad('not_member', 'That ninja is not in your team.')
@@ -271,12 +271,12 @@ export async function promote(ctx: TeamContext, actorId: string, targetId: strin
   await ctx.tx.update(teams).set({ captainId: targetId }).where(eq(teams.id, mine.team.id))
   ctx.teams.set(mine.team.id, { ...mine, team: { ...mine.team, captainId: targetId } })
   const name = charOf(ctx, targetId).name
-  notifyTeam(ctx, [targetId], mine.team.id, 'You have been promoted to team leader!')
+  notifyTeam(ctx, [targetId], mine.team.id, 'You are now the team captain.')
   notifyTeam(
     ctx,
     ids(mine).filter((id) => id !== targetId),
     mine.team.id,
-    `${name} has been promoted to team leader.`,
+    `${name} is now the team captain.`,
   )
 }
 

@@ -80,20 +80,20 @@ describe('Team window', () => {
     await userEvent.type(screen.getByLabelText('Ninja name'), 'sakura_1')
     await userEvent.click(screen.getByRole('button', { name: 'Invite' }))
     expect(await screen.findByText(/Invitation sent/)).toBeInTheDocument()
-    expect(requestBody(fetch, 'POST /api/game/team/invite')).toEqual({ characterId: SAKURA })
+    expect(requestBody(fetch, 'POST /api/game/team/invite')).toEqual({ name: 'sakura_1' })
   })
 
-  it('refuses an unknown name without asking the server', async () => {
-    const fetch = mockApi({
+  it('shows the server refusal for an unknown name', async () => {
+    mockApi({
       'GET /api/game/team': () => json(state(null)),
-      'GET /api/game/social/friends': () => json(friends),
+      'POST /api/game/team/invite': () =>
+        apiError(404, 'unknown_name', 'There is no ninja with that name.'),
     })
     renderWindow()
     await userEvent.click(await screen.findByRole('button', { name: 'Create team' }))
     await userEvent.type(screen.getByLabelText('Ninja name'), 'Nobody')
     await userEvent.click(screen.getByRole('button', { name: 'Invite' }))
-    expect(screen.getByRole('alert')).toHaveTextContent('No such ninja')
-    expect(requestBody(fetch, 'POST /api/game/team/invite')).toBeUndefined()
+    expect(await screen.findByText('There is no ninja with that name.')).toBeInTheDocument()
   })
 
   it('accepts an invitation and shows the new team', async () => {

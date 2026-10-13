@@ -1,19 +1,12 @@
 // Team window: the controls of the original party frame (UI_TeamRoleIcon, teams.md 6) in one
 // window. Members in fight order with level and captain mark; the captain reorders, kicks and
 // hands over the lead; anyone leaves. Invite by name, and the pending prompts with their timer.
-import {
-  TEAM_MAX_SIZE,
-  type TeamBoardView,
-  type TeamMemberView,
-  type TeamView,
-} from '@pockie/shared'
-import { useQueryClient } from '@tanstack/react-query'
+import { TEAM_MAX_SIZE, type TeamMemberView, type TeamView } from '@pockie/shared'
 import { useState, type FormEvent } from 'react'
 import { errorMessage } from '../api'
 import { Dialog, GameButton, Notice } from '../skin'
-import { useFriends } from '../social/api'
 import type { WindowProps } from '../windows'
-import { teamKeys, teamScene, useTeam, useTeamAction } from './api'
+import { teamScene, useTeam, useTeamAction } from './api'
 import { TeamPromptList } from './TeamPrompts'
 
 export function TeamWindow({ character, onClose }: WindowProps) {
@@ -158,35 +151,16 @@ function MemberRow({
   )
 }
 
-/**
- * Invite by name. The server takes a character id, so the name is looked up among the players
- * this client knows: friends and the team stone board.
- * ponytail: known players only; drop the lookup once /invite accepts a name.
- */
+/** Invite by name; the server looks the ninja up and refuses an unknown name. */
 function InviteForm() {
   const [name, setName] = useState('')
-  const [missing, setMissing] = useState<string | null>(null)
-  const friends = useFriends()
-  const queryClient = useQueryClient()
   const action = useTeamAction()
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
-    const wanted = name.trim().toLowerCase()
-    if (!wanted) return
-    const board = queryClient.getQueryData<TeamBoardView>(teamKeys.board)
-    const known = [
-      ...(friends.data?.friends ?? []),
-      ...(board?.solos ?? []),
-      ...(board?.teams.flatMap((t) => [t.captain, t.member]) ?? []),
-    ]
-    const target = known.find((player) => player.name.toLowerCase() === wanted)
-    setMissing(target ? null : 'No such ninja among your friends or on the team stone board here.')
-    if (target)
-      action.mutate(
-        { path: 'invite', body: { characterId: target.characterId } },
-        { onSuccess: () => setName('') },
-      )
+    const wanted = name.trim()
+    if (wanted)
+      action.mutate({ path: 'invite', body: { name: wanted } }, { onSuccess: () => setName('') })
   }
 
   return (
@@ -205,7 +179,6 @@ function InviteForm() {
           Invite
         </GameButton>
       </div>
-      {missing && <Notice tone="error">{missing}</Notice>}
       {action.isError && <Notice tone="error">{errorMessage(action.error)}</Notice>}
       {action.isSuccess && <Notice>Invitation sent. It expires in 60 seconds.</Notice>}
     </form>
