@@ -134,6 +134,13 @@
       "when": 1791870995755,
       "tag": "0018_nonfight_buffs",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1791871959839,
+      "tag": "0019_skill_learning",
+      "breakpoints": true
     }
   ]
 }

@@ -1199,3 +1199,29 @@ export const characterTitles = pgTable(
       .where(sql`${t.active} = true`),
   ],
 )
+
+export const characterSkills = pgTable(
+  'character_skills',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    skillId: integer('skill_id').notNull(),
+    level: smallint('skill_level').notNull().default(1),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.skillId] }),
+    check('character_skills_level', sql`${t.level} between 1 and 13`),
+  ],
+)
+
+export const characterSkillState = pgTable(
+  'character_skill_state',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    learnedThrough: smallint('learned_through').notNull().default(1),
+  },
+  (t) => [check('character_skill_state_level', sql`${t.learnedThrough} between 1 and 90`)],
+)

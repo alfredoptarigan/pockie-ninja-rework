@@ -35,7 +35,14 @@ import {
   type ExploreCard,
   type StarState,
 } from '../../game/explore.js'
-import { expUpdate, grantItems, removeItems, rookieHandIns, type Tx } from '../../game/progress.js'
+import {
+  expUpdate,
+  grantItems,
+  removeItems,
+  rookieHandIns,
+  saveCharacterProgress,
+  type Tx,
+} from '../../game/progress.js'
 import { vipDropMul, vipExp } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
@@ -360,19 +367,16 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
         })
         await grantItems(tx, character.id, toGrant)
         rewards.items.push(...toGrant)
-        await tx
-          .update(characters)
-          .set({
-            stone: current.stone,
-            level: current.level,
-            exp: current.exp,
-            hp: current.hp,
-            mp: current.mp,
-            exploreLastAt: current.exploreLastAt,
-            exploreDay: current.exploreDay,
-            exploreUsed: current.exploreUsed,
-          })
-          .where(eq(characters.id, character.id))
+        await saveCharacterProgress(tx, character.id, {
+          stone: current.stone,
+          level: current.level,
+          exp: current.exp,
+          hp: current.hp,
+          mp: current.mp,
+          exploreLastAt: current.exploreLastAt,
+          exploreDay: current.exploreDay,
+          exploreUsed: current.exploreUsed,
+        })
 
         const search: PendingSearch = {
           searchId: randomUUID(),

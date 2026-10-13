@@ -16,7 +16,13 @@ import type { Db } from '../../db/client.js'
 import { characters, inventoryItems } from '../../db/schema.js'
 import { monsterFighter, playerFighter } from '../../game/combat.js'
 import { dropItems, dropLib, npc } from '../../game/data.js'
-import { expUpdate, grantDrops, grantItems, type Tx } from '../../game/progress.js'
+import {
+  expUpdate,
+  grantDrops,
+  grantItems,
+  saveCharacterProgress,
+  type Tx,
+} from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 
@@ -132,7 +138,7 @@ export function withExp(character: CharacterRow, state: Partial<CharacterRow>, e
 }
 
 export async function saveCharacter(tx: Tx, id: string, values: Partial<CharacterRow>) {
-  await tx.update(characters).set(values).where(eq(characters.id, id))
+  await saveCharacterProgress(tx, id, values)
 }
 
 export { grantDrops, grantItems }

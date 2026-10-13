@@ -11,7 +11,7 @@ import { and, asc, desc, eq, sql } from 'drizzle-orm'
 import type { Db } from '../../db/client.js'
 import { characters, tollGateWeekly, tollGateWeeklyClaims } from '../../db/schema.js'
 import { rankings, tollGateRankReward } from '../../game/data.js'
-import { expUpdate, type Tx } from '../../game/progress.js'
+import { expUpdate, saveCharacterProgress, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { tollGateTables } from '../gates/data.js'
 
@@ -178,9 +178,9 @@ export async function claimTollGateReward(
     .returning()
   if (!claim) throw new HttpError(400, 'already_claimed', 'You have already claimed this reward.')
   const { levelsGained, ...update } = expUpdate(character, reward.exp)
-  await tx
-    .update(characters)
-    .set({ ...update, stone: character.stone + reward.stone })
-    .where(eq(characters.id, character.id))
+  await saveCharacterProgress(tx, character.id, {
+    ...update,
+    stone: character.stone + reward.stone,
+  })
   return { ...reward, levelsGained }
 }

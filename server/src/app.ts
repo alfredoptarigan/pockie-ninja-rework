@@ -10,6 +10,7 @@ import { authRoutes, sessionPlugin } from './modules/auth/routes.js'
 import { contentRoutes } from './modules/content/routes.js'
 import { characterRoutes } from './modules/game/characters.js'
 import { worldRoutes } from './modules/game/world.js'
+import { skillRoutes } from './modules/game/skills.js'
 import { nonfightBuffRoutes } from './modules/game/nonfight-buffs.js'
 import { treasureRoutes } from './modules/game/treasure.js'
 import { actionRoutes } from './modules/game/actions.js'
@@ -65,6 +66,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(statusRoutes, { db, prefix: '/api' })
   app.register(characterRoutes, { db, prefix: '/api/game' })
   app.register(worldRoutes, { db, prefix: '/api/game' })
+  app.register(skillRoutes, { db, prefix: '/api/game' })
   app.register(nonfightBuffRoutes, { db, prefix: '/api/game' })
   app.register(treasureRoutes, { db, prefix: '/api/game' })
   app.register(actionRoutes, { db, realtime, prefix: '/api/game' })

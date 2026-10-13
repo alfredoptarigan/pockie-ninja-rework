@@ -12,7 +12,6 @@ import {
   type SkillInput,
 } from '@pockie/game-core'
 import type { MonsterDrop } from '@pockie/shared'
-import { eq } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characters } from '../db/schema.js'
 import {
@@ -29,7 +28,7 @@ import {
 import { equipmentBonuses, equippedGear, type Gear } from './equipment.js'
 import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.js'
 import { drawPouch } from './pouch.js'
-import { grantDrops, loadQuests, saveQuests, type Tx } from './progress.js'
+import { grantDrops, loadQuests, saveQuests, saveCharacterProgress, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
@@ -235,9 +234,14 @@ export async function fightMonster(
   }
   hp = Math.max(minHp, hp)
 
-  await tx
-    .update(characters)
-    .set({ hp, mp, hpPouch, mpPouch, level, exp, stone: character.stone + rewards.stone })
-    .where(eq(characters.id, character.id))
+  await saveCharacterProgress(tx, character.id, {
+    hp,
+    mp,
+    hpPouch,
+    mpPouch,
+    level,
+    exp,
+    stone: character.stone + rewards.stone,
+  })
   return { replay, won, rewards }
 }

@@ -11,6 +11,7 @@ import { bagFits, itemStackSize, unequippedBagItemsWhere } from './bag.js'
 import { avatarStats, dropLib, levels, subTasks, task } from './data.js'
 import { newGearState, rollLibDrops, type GrantedItem } from './gear.js'
 import { countItems, questRewards, type QuestProgress } from './quests.js'
+import { learnThroughLevel } from './learning.js'
 import { vipDropMul, vipExp } from './vip.js'
 
 export type Tx = Parameters<Parameters<Db['transaction']>[0]>[0]
@@ -206,16 +207,13 @@ export async function completeQuest(
   await grantItems(tx, characterId, granted)
 
   const { levelsGained, ...exp } = expUpdate(character, rewards.exp)
-  await tx
-    .update(characters)
-    .set({
-      ...exp,
-      stone: character.stone + rewards.stone,
-      gold: character.gold + rewards.gold,
-      giftCoupon: character.giftCoupon + rewards.giftCoupon,
-      honor: character.honor + rewards.honor,
-    })
-    .where(eq(characters.id, characterId))
+  await saveCharacterProgress(tx, characterId, {
+    ...exp,
+    stone: character.stone + rewards.stone,
+    gold: character.gold + rewards.gold,
+    giftCoupon: character.giftCoupon + rewards.giftCoupon,
+    honor: character.honor + rewards.honor,
+  })
 
   const nextId = Number(row.NextTaskID)
   const next = nextId > 0 ? task(nextId) : undefined
@@ -250,4 +248,29 @@ export async function rookieHandIns(tx: Tx, characterId: string) {
     rewards,
     levelsGained: rewards.reduce((sum, handIn) => sum + handIn.levelsGained, 0),
   }
+}
+
+/** Every EXP source uses this write so each crossed level learns skills in the same transaction. */
+export async function saveCharacterProgress(tx: Tx, id: string, values: Partial<CharacterRow>) {
+  const before =
+    values.level === undefined
+      ? undefined
+      : (await tx.select().from(characters).where(eq(characters.id, id)).for('update'))[0]
+  let [updated] = await tx.update(characters).set(values).where(eq(characters.id, id)).returning()
+  if (!updated) throw new Error('Character disappeared during progression.')
+  if (values.level !== undefined) {
+    await learnThroughLevel(tx, updated)
+    if (before && updated.level > before.level) {
+      const { playerFighter } = await import('./combat.js')
+      const stats = await playerFighter(tx, updated)
+      ;[updated] = await tx
+        .update(characters)
+        .set({ hp: stats.maxHp, mp: stats.maxMp })
+        .where(eq(characters.id, id))
+        .returning()
+    }
+    const { refreshArenaSnapshot } = await import('../modules/arena/snapshot.js')
+    await refreshArenaSnapshot(tx, id)
+  }
+  return updated!
 }
