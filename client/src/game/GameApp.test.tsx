@@ -88,6 +88,29 @@ describe('GameScreen', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   }, 15_000)
 
+  it('opens the Market and Friends from the menu and Mail from the minimap', async () => {
+    renderGame({
+      'GET /api/game/social/mail/summary': () => json({ unread: 2, categories: [] }),
+      'GET /api/game/social/friends': () => json({ friends: [], addBack: [], max: 50 }),
+      'GET /api/game/social/blocks': () => json({ blocked: [], max: 50 }),
+      'GET /api/game/social/mail': () => json({ mails: [] }),
+    })
+    const menu = await screen.findByRole('navigation', { name: 'Menu' })
+
+    await userEvent.click(within(menu).getByRole('button', { name: 'Market' }))
+    expect(screen.getByRole('dialog', { name: 'Market' })).toHaveTextContent(
+      'The Market opens at level 25.',
+    )
+    await userEvent.keyboard('{Escape}')
+
+    await userEvent.click(within(menu).getByRole('button', { name: 'Friends' }))
+    expect(await screen.findByText('Add a ninja by name to start your friend list.')).toBeVisible()
+    await userEvent.keyboard('{Escape}')
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Mail (2 unread)' }))
+    expect(screen.getByRole('dialog', { name: 'Mail' })).toBeVisible()
+  }, 15_000)
+
   it('has Back to the website and Log out in the Settings menu', async () => {
     renderGame()
     const settings = await screen.findByRole('button', { name: 'Settings' })
