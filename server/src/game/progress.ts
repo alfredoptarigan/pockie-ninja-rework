@@ -2,12 +2,13 @@
 // (TaskSystem / RookieTaskSystem / RewardRule), see docs/original-data/quests-items.md.
 import { createRandom, deriveStats, gainExp } from '@pockie/game-core'
 import { randomInt } from 'node:crypto'
-import { BAG_SLOTS, type QuestHandIn } from '@pockie/shared'
-import { and, count, desc, eq, isNull, sql } from 'drizzle-orm'
+import { type QuestHandIn } from '@pockie/shared'
+import { and, desc, eq, sql } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characterQuests, characters, inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { avatarStats, dropLib, item, levels, subTasks, task } from './data.js'
+import { bagFits, itemStackSize } from './bag.js'
+import { avatarStats, dropLib, levels, subTasks, task } from './data.js'
 import { newGearState, rollLibDrops, type GrantedItem } from './gear.js'
 import { countItems, questRewards, type QuestProgress } from './quests.js'
 import { vipDropMul, vipExp } from './vip.js'
@@ -24,7 +25,7 @@ const COLLECT_STEP = 1
 /**
  * Adds items, stacking onto unequipped rows of the same item up to the stack size. Equipment with
  * an identify count (drop lists) rolls its properties as it lands in the bag. With `dropOverflow`
- * an item that needs a new row in a full bag (BAG_SLOTS) is lost instead; returns what landed.
+ * an item that needs cells in a full bag is lost instead; returns what landed.
  */
 export async function grantItems(
   tx: Tx,
@@ -33,11 +34,11 @@ export async function grantItems(
   { dropOverflow = false } = {},
 ) {
   const random = createRandom(randomInt(2 ** 31))
-  let freeRows = dropOverflow ? BAG_SLOTS - (await bagRows(tx, characterId)) : Infinity
   const kept: GrantedItem[] = []
   for (const granted of items) {
     const { itemId, bound, identifyCount = 0 } = granted
-    const maxStack = Number(item(itemId)?.ItemMaxFoldNum ?? 1)
+    if (dropOverflow && !(await bagFits(tx, characterId, [granted]))) continue
+    const maxStack = itemStackSize(itemId)
     const [stack] = await tx
       .select()
       .from(inventoryItems)
@@ -56,13 +57,10 @@ export async function grantItems(
         .update(inventoryItems)
         .set({ count: stack.count + 1 })
         .where(eq(inventoryItems.id, stack.id))
-    } else if (freeRows > 0) {
+    } else {
       await tx
         .insert(inventoryItems)
         .values({ characterId, itemId, bound, ...newGearState(itemId, identifyCount, random) })
-      freeRows--
-    } else {
-      continue
     }
     kept.push(granted)
   }
@@ -72,14 +70,6 @@ export async function grantItems(
 /** Fight loot: whatever does not fit in the bag is lost. Returns what landed. */
 export const grantDrops = (tx: Tx, characterId: string, items: GrantedItem[]) =>
   grantItems(tx, characterId, items, { dropOverflow: true })
-
-async function bagRows(tx: Tx, characterId: string) {
-  const [bag] = await tx
-    .select({ rows: count() })
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, characterId), isNull(inventoryItems.equippedSlot)))
-  return bag?.rows ?? 0
-}
 
 /** Uses up one of `row`; fails when the row no longer holds that count (a stale read). */
 export async function consumeOne(tx: Tx, row: typeof inventoryItems.$inferSelect) {

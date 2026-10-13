@@ -1,8 +1,8 @@
+import { requireBagRoom } from '../../game/bag.js'
 import { randomInt } from 'node:crypto'
-import { and, eq, isNull, sql } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import {
-  BAG_SLOTS,
   shopOpenSchema,
   merchantOpenSchema,
   wholesaleBuySchema,
@@ -86,35 +86,6 @@ async function charge(
       giftCoupon: c.giftCoupon - (costs.giftCoupon ?? 0),
     })
     .where(eq(characters.id, c.id))
-}
-async function bagRoom(
-  tx: Tx,
-  id: string,
-  awards: { itemId: string; bound: boolean }[],
-  separate = false,
-) {
-  const bag = await tx
-    .select()
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, id), isNull(inventoryItems.equippedSlot)))
-  let used = bag.length
-  for (const award of awards) {
-    const max = Number(item(award.itemId)?.ItemMaxFoldNum ?? 1)
-    const stack =
-      !separate &&
-      bag.find((row) => row.itemId === award.itemId && row.bound === award.bound && row.count < max)
-    if (stack) stack.count++
-    else {
-      used++
-      bag.push({
-        ...bag[0],
-        itemId: award.itemId,
-        bound: award.bound,
-        count: 1,
-      } as (typeof bag)[number])
-    }
-  }
-  if (used > BAG_SLOTS) throw bad('bag_full', 'Your bag is full.')
 }
 async function command(tx: Tx, c: Character, code: number) {
   await saveQuests(tx, c.id, recordCommand(await loadQuests(tx, c.id), code, c.sceneId))
@@ -294,7 +265,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         itemId: offer.item,
         bound: true,
       }))
-      await bagRoom(tx, c.id, awards)
+      await requireBagRoom(tx, c.id, awards)
       const costs = money(pricesFromCosts(offer.costs))
       await charge(tx, c, {
         stone: costs.stone * input.count,
@@ -363,11 +334,11 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
       costs.gold += row.priceGold ?? 0
       costs.giftCoupon += row.priceGiftCoupon ?? 0
     }
-    await bagRoom(
+    await requireBagRoom(
       tx,
       c.id,
       rows.map((row) => ({ itemId: row.itemId, bound: row.bound })),
-      true,
+      { separate: true },
     )
     await charge(tx, c, costs)
     for (const row of rows) {
@@ -467,7 +438,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         itemId: row.itemId,
         bound: offer.bind === 1,
       }))
-      await bagRoom(tx, c.id, awards)
+      await requireBagRoom(tx, c.id, awards)
       await charge(tx, c, { gold: row.price * i.count })
       await grantItems(tx, c.id, awards)
       await tx

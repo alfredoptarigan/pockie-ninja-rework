@@ -1,6 +1,6 @@
 // Full bag rules (docs/security-review-m3.md findings 6 and 8): fight loot that does not fit is
 // lost, a box stays closed, and an exchange of bound crystals gives a bound result.
-import { BAG_SLOTS } from '@pockie/shared'
+import { BAG_CELLS, itemCells } from '../game/bag.js'
 import { and, eq, isNull } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createTestDb, truncateAll } from '../../test/helpers.js'
@@ -27,14 +27,16 @@ const bagRows = () =>
       and(eq(inventoryItems.characterId, ninja.characterId), isNull(inventoryItems.equippedSlot)),
     )
 
-/** Fills the bag up to BAG_SLOTS rows with single, unstackable filler items. */
+/** Fills the bag up to BAG_CELLS rows with single, unstackable filler items. */
 async function fillBag() {
-  const free = BAG_SLOTS - (await bagRows()).length
-  await db
-    .insert(inventoryItems)
-    .values(
-      Array.from({ length: free }, () => ({ characterId: ninja.characterId, itemId: 'i250101' })),
-    )
+  const free = BAG_CELLS - (await bagRows()).reduce((sum, row) => sum + itemCells(row.itemId), 0)
+  await db.insert(inventoryItems).values(
+    Array.from({ length: free }, () => ({
+      characterId: ninja.characterId,
+      itemId: 'i160001',
+      count: 999,
+    })),
+  )
 }
 
 describe('fight loot in a full bag', () => {
@@ -51,7 +53,7 @@ describe('fight loot in a full bag', () => {
     )
 
     expect(kept).toEqual([{ itemId: 'i160006', bound: true }])
-    expect(await bagRows()).toHaveLength(BAG_SLOTS)
+    expect((await bagRows()).reduce((sum, row) => sum + itemCells(row.itemId), 0)).toBe(BAG_CELLS)
     expect((await ninja.bag('i160006'))[0]!.count).toBe(2)
     expect(await ninja.bag('i152010')).toHaveLength(0)
   })
@@ -68,7 +70,7 @@ describe('fight loot in a full bag', () => {
     )
 
     expect(kept).toEqual([{ itemId: 'i152010', bound: false }])
-    expect(await bagRows()).toHaveLength(BAG_SLOTS)
+    expect((await bagRows()).reduce((sum, row) => sum + itemCells(row.itemId), 0)).toBe(BAG_CELLS)
   })
 })
 
@@ -81,7 +83,7 @@ describe('opening a box in a full bag', () => {
 
     expect(errorCode(response)).toBe('bag_full')
     expect((await ninja.bag('i150128'))[0]!.count).toBe(2)
-    expect(await bagRows()).toHaveLength(BAG_SLOTS)
+    expect((await bagRows()).reduce((sum, row) => sum + itemCells(row.itemId), 0)).toBe(BAG_CELLS)
   })
 })
 

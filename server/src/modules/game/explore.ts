@@ -1,3 +1,4 @@
+import { requireBagRoom as checkBagRoom } from '../../game/bag.js'
 // Explore spots (OutSearchSystem): search a spot in the current scene, reveal five cards and pay
 // out the picked one, with a global cooldown and a daily search count.
 import { createRandom } from '@pockie/game-core'
@@ -15,7 +16,6 @@ import {
 } from '../../db/schema.js'
 import { EXPLORE_MIN_HP, fightMonster, type FightRewards } from '../../game/combat.js'
 import {
-  item,
   exploreClipName,
   exploreCooldownSeconds,
   exploreSpot,
@@ -108,38 +108,6 @@ function pendingView(search: PendingSearch, character: CharacterRow) {
     explore: publicStatus(exploreStatus(character, new Date())),
     character: toCharacter(character),
   }
-}
-
-/** Two initially active 60-cell bags (PackSystem). Geometry/expanded bags need schema support. */
-async function requireBagRoom(
-  tx: Tx,
-  characterId: string,
-  awards: FightRewards['items'],
-  reserve = 0,
-) {
-  const bag = await tx
-    .select({
-      itemId: inventoryItems.itemId,
-      bound: inventoryItems.bound,
-      count: inventoryItems.count,
-    })
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, characterId), isNull(inventoryItems.equippedSlot)))
-  let used = bag.reduce((sum, row) => sum + Number(item(row.itemId)?.ItemShapeType ?? 1), 0)
-  for (const award of awards) {
-    const config = item(award.itemId)
-    const max = Number(config?.ItemMaxFoldNum ?? 1)
-    const stack = bag.find(
-      (row) => row.itemId === award.itemId && row.bound === award.bound && row.count < max,
-    )
-    if (stack) stack.count += 1
-    else {
-      used += Number(config?.ItemShapeType ?? 1)
-      bag.push({ itemId: award.itemId, bound: award.bound, count: 1 })
-    }
-  }
-  if (used + reserve > 120)
-    throw bad('bag_full', 'Your bag is full. Free at least six cells before exploring.')
 }
 
 /** The pending search (explore_searches), or null. */
@@ -318,7 +286,10 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
           return { response, search: null }
         }
         if (pending) throw bad('search_pending', 'Choose a card from your current search first.')
-        await requireBagRoom(tx, character.id, [], 6)
+        await checkBagRoom(tx, character.id, [], {
+          reserve: 6,
+          message: 'Your bag is full. Free at least six cells before exploring.',
+        })
         const now = new Date()
         const status = exploreStatus(character, now)
         const mode = input.mode
@@ -390,7 +361,9 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
         } else if (starBonus) {
           toGrant.push({ itemId: starBonus.itemId, bound: true })
         }
-        await requireBagRoom(tx, character.id, toGrant)
+        await checkBagRoom(tx, character.id, toGrant, {
+          message: 'Your bag is full. Free at least six cells before exploring.',
+        })
         await grantItems(tx, character.id, toGrant)
         rewards.items.push(...toGrant)
         await tx
@@ -461,7 +434,9 @@ async function settleSearch(
     granted = cardGranted(card, random, vipDropMul(character))
     if (granted) toGrant.push({ itemId: card.itemId, bound: card.bound })
   }
-  await requireBagRoom(tx, character.id, toGrant)
+  await checkBagRoom(tx, character.id, toGrant, {
+    message: 'Your bag is full. Free at least six cells before exploring.',
+  })
   rewards.items.push(...toGrant)
   await grantItems(tx, character.id, toGrant)
 

@@ -8,14 +8,13 @@ import {
   type DropEntry,
   type DropLib,
 } from '@pockie/game-core'
-import { BAG_SLOTS } from '@pockie/shared'
 import { and, eq, isNull } from 'drizzle-orm'
 import type { FastifyRequest } from 'fastify'
 import { randomInt } from 'node:crypto'
 import type { Db } from '../../db/client.js'
 import { characters, inventoryItems } from '../../db/schema.js'
 import { monsterFighter, playerFighter } from '../../game/combat.js'
-import { dropItems, dropLib, item, npc } from '../../game/data.js'
+import { dropItems, dropLib, npc } from '../../game/data.js'
 import { expUpdate, grantDrops, grantItems, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
@@ -71,31 +70,7 @@ export async function hasWeapon(tx: Tx, characterId: string) {
   return Boolean(row)
 }
 
-/** Whether `awards` fit in the bag (BAG_SLOTS rows), stacking like grantItems. */
-export async function bagFits(tx: Tx, characterId: string, awards: Award[]) {
-  const bag = await tx
-    .select({
-      itemId: inventoryItems.itemId,
-      bound: inventoryItems.bound,
-      count: inventoryItems.count,
-    })
-    .from(inventoryItems)
-    .where(unequipped(characterId))
-  const rows = bag.map((row) => ({ ...row }))
-  for (const award of awards) {
-    const max = Number(item(award.itemId)?.ItemMaxFoldNum ?? 1)
-    const stack = rows.find(
-      (row) => row.itemId === award.itemId && row.bound === award.bound && row.count < max,
-    )
-    if (stack) stack.count += 1
-    else rows.push({ ...award, count: 1 })
-  }
-  return rows.length <= BAG_SLOTS
-}
-
-export async function requireBagRoom(tx: Tx, characterId: string, awards: Award[]) {
-  if (!(await bagFits(tx, characterId, awards))) throw bad('bag_full', 'Your bag is full.')
-}
+export { bagFits, requireBagRoom } from '../../game/bag.js'
 
 /** The player against `npcIds` as sequential duels (battle.md); HP and MP carry over. */
 export async function duel(tx: Tx, character: CharacterRow, npcIds: string[]) {

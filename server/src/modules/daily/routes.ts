@@ -1,18 +1,9 @@
-import {
-  BAG_SLOTS,
-  dailyRewardBodySchema,
-  dailyTaskParamsSchema,
-  dailyViewSchema,
-} from '@pockie/shared'
-import { and, count, eq, inArray, isNull } from 'drizzle-orm'
+import { requireBagRoom } from '../../game/bag.js'
+import { dailyRewardBodySchema, dailyTaskParamsSchema, dailyViewSchema } from '@pockie/shared'
+import { and, eq, inArray } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
-import {
-  characterDailyQuests,
-  characterQuests,
-  characters,
-  inventoryItems,
-} from '../../db/schema.js'
+import { characterDailyQuests, characterQuests, characters } from '../../db/schema.js'
 import { itemNameKey, subTasks, task } from '../../game/data.js'
 import { acceptQuest, completeQuest, expUpdate, loadQuests, type Tx } from '../../game/progress.js'
 import { questLock, questRewards } from '../../game/quests.js'
@@ -215,13 +206,7 @@ export async function dailyRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const reward = await completeQuest(tx, character.id, taskId)
       if (!reward) throw bad('not_ready', 'Finish the daily quest objectives first.')
       // TaskBaseRule.CanGiveTaskRewardItems: a full bag must not lose the quest or its rewards.
-      const [bag] = await tx
-        .select({ rows: count() })
-        .from(inventoryItems)
-        .where(
-          and(eq(inventoryItems.characterId, character.id), isNull(inventoryItems.equippedSlot)),
-        )
-      if ((bag?.rows ?? 0) > BAG_SLOTS) throw bad('bag_full', 'Your bag is full.')
+      await requireBagRoom(tx, character.id, [])
       // TaskBaseRule.OnAfterTaskComplete: dailies are removed, never stored in TaskCompleted_Rec.
       await tx
         .delete(characterQuests)
