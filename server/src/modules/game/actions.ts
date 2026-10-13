@@ -144,7 +144,13 @@ export async function actionRoutes(
     const [row] = await tx
       .select()
       .from(inventoryItems)
-      .where(and(eq(inventoryItems.id, id), eq(inventoryItems.characterId, characterId)))
+      .where(
+        and(
+          eq(inventoryItems.location, 'bag'),
+          eq(inventoryItems.id, id),
+          eq(inventoryItems.characterId, characterId),
+        ),
+      )
     if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
     return row
   }
@@ -183,7 +189,7 @@ export async function actionRoutes(
     const rows = await db
       .select()
       .from(inventoryItems)
-      .where(eq(inventoryItems.characterId, character.id))
+      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, character.id)))
     return {
       items: rows.map((row) => ({
         id: row.id,

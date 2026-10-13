@@ -50,7 +50,11 @@ export async function characterView(tx: Tx | Db, characterId: string) {
 }
 
 const unequipped = (characterId: string) =>
-  and(eq(inventoryItems.characterId, characterId), isNull(inventoryItems.equippedSlot))
+  and(
+    eq(inventoryItems.location, 'bag'),
+    eq(inventoryItems.characterId, characterId),
+    isNull(inventoryItems.equippedSlot),
+  )
 
 export async function countItem(tx: Tx, characterId: string, itemId: string) {
   const rows = await tx

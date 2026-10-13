@@ -44,6 +44,7 @@ export async function grantItems(
       .from(inventoryItems)
       .where(
         and(
+          eq(inventoryItems.location, 'bag'),
           eq(inventoryItems.characterId, characterId),
           eq(inventoryItems.itemId, itemId),
           eq(inventoryItems.bound, bound),
@@ -97,6 +98,7 @@ export async function removeItems(tx: Tx, characterId: string, itemId: string, c
     .from(inventoryItems)
     .where(
       and(
+        eq(inventoryItems.location, 'bag'),
         eq(inventoryItems.characterId, characterId),
         eq(inventoryItems.itemId, itemId),
         sql`${inventoryItems.equippedSlot} is null`,

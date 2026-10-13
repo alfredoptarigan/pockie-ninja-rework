@@ -70,6 +70,7 @@ async function bagCount(tx: Tx, characterId: string, itemId: string) {
     .from(inventoryItems)
     .where(
       and(
+        eq(inventoryItems.location, 'bag'),
         eq(inventoryItems.characterId, characterId),
         eq(inventoryItems.itemId, itemId),
         isNull(inventoryItems.equippedSlot),

@@ -31,7 +31,13 @@ export async function bagFits(
       count: inventoryItems.count,
     })
     .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, characterId), isNull(inventoryItems.equippedSlot)))
+    .where(
+      and(
+        eq(inventoryItems.location, 'bag'),
+        eq(inventoryItems.characterId, characterId),
+        isNull(inventoryItems.equippedSlot),
+      ),
+    )
   const rows = bag.map((row) => ({ ...row }))
   let used = rows.reduce((sum, row) => sum + itemCells(row.itemId), 0)
   for (const award of awards) {
