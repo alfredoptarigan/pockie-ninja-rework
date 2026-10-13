@@ -1,9 +1,9 @@
 // M4 security review (docs/security-review-m4.md): one regression test per finding.
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createTestDb, truncateAll } from '../../test/helpers.js'
-import { inventoryItems, marketListings } from '../db/schema.js'
+import { blocks, inventoryItems, marketListings } from '../db/schema.js'
 import { startJobs } from '../jobs.js'
-import { arenaTestApp, type Ninja } from './arena/test-setup.js'
+import { arenaTestApp, errorCode, type Ninja } from './arena/test-setup.js'
 import { MARKET_EXPIRY_INTERVAL_MS } from './market/market.js'
 
 // Each test registers two ninjas (argon2), slow on a loaded machine.
@@ -78,5 +78,49 @@ describe('periodic jobs', () => {
     })
     const [item] = await db.select().from(inventoryItems)
     expect(item).toMatchObject({ characterId: a.id, location: 'warehouse' })
+  })
+})
+
+describe('races without findings', () => {
+  it('two Honor shop buys at once spend the Honor once', async () => {
+    // i292101 costs 180 Honor at tier 0; there is Honor for one.
+    await a.join()
+    await a.set({ honor: 200 })
+    const buy = () => a.client.post('/api/game/arena/shop/buy', { itemId: 'i292101' })
+
+    const responses = await Promise.all([buy(), buy()])
+
+    expect(responses.map((r) => r.statusCode).sort()).toEqual([200, 400])
+    expect(responses.map(errorCode)).toContain('no_honor')
+    expect((await a.row()).honor).toBe(20)
+    const items = await db.select().from(inventoryItems)
+    expect(items.filter((row) => row.itemId === 'i292101')).toHaveLength(1)
+  })
+
+  it('two Market wallet claims at once pay the wallet once', async () => {
+    await a.set({ level: 25, stone: 0, marketStone: 100 })
+    const claim = () => a.client.post('/api/game/market/wallet/claim', {})
+
+    const responses = await Promise.all([claim(), claim()])
+
+    expect(responses.map((r) => r.statusCode).sort()).toEqual([200, 400])
+    expect(responses.map(errorCode)).toContain('wallet_empty')
+    expect(await a.row()).toMatchObject({ stone: 100, marketStone: 0 })
+  })
+})
+
+describe('block bypasses without findings', () => {
+  it('a block either way refuses a Ninjutsu Duel before any Gold or try is spent', async () => {
+    const d = await setup.ninja('Defender')
+    await a.join({ tier: 2 })
+    await d.join({ tier: 2 })
+    await db.insert(blocks).values({ ownerId: d.id, blockedId: a.id })
+
+    const attack = await a.client.post('/api/game/arena/duel', { name: 'Defender' })
+    const back = await d.client.post('/api/game/arena/duel', { name: 'Attacker' })
+
+    expect([errorCode(attack), errorCode(back)]).toEqual(['blocked', 'blocked'])
+    expect(attack.json().error.message).toBe(back.json().error.message)
+    expect((await a.arena()).duelsUsed).toBe(0)
   })
 })
