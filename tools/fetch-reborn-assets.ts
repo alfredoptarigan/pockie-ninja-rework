@@ -25,7 +25,7 @@ const BASE = 'https://pockieninjareborn.com/assets/'
 const CONCURRENCY = 4
 const DELAY_MS = 100
 const root = resolve(import.meta.dirname, '..')
-const raw = join(root, 'data/reborn-raw')
+const raw = resolve(process.env.REBORN_RAW_DIR ?? join(root, 'data/reborn-raw'))
 const outDir = join(raw, 'assets')
 const manifestFile = join(raw, 're/assets-manifest.json')
 
@@ -202,7 +202,10 @@ function bundleSkills(bundle: string) {
 
 type Config = {
   avatars: Record<string, { src: string; innate?: { skills?: number[] } }>
-  bloodline: { Limits: Record<string, { avatar: number }>; Souls: Record<string, unknown> }
+  bloodline: {
+    Limits: Record<string, { avatar: number; item: number }>
+    Souls: Record<string, unknown>
+  }
   skill_info: Record<string, unknown>
 }
 
@@ -214,6 +217,17 @@ async function main() {
   ) as Record<string, string>
   const limits = Object.keys(config.bloodline.Limits).map(Number)
 
+  if (process.argv.includes('--m5-missing')) {
+    const previous = JSON.parse(readFileSync(manifestFile, 'utf8')) as {
+      assets: Entry[]
+      missing: string[]
+      secretTechniques: Record<string, string[]>
+    }
+    manifest.push(...previous.assets)
+    Object.assign(secretTechniques, previous.secretTechniques)
+    missing.push(...previous.missing)
+  }
+
   // Avatars: every outfit src, bloodline limit outfits, hashirama event leaders (@3834667).
   const avatarIds = new Set<number>([
     ...Object.values(config.avatars).map((a) => Number(a.src.split('/')[1])),
@@ -221,12 +235,31 @@ async function main() {
     170,
     188,
   ])
-  await pool(
-    [...avatarIds].sort((a, b) => a - b),
-    fetchAvatar,
-  )
+  if (!process.argv.includes('--m5-missing'))
+    await pool(
+      [...avatarIds].sort((a, b) => a - b),
+      fetchAvatar,
+    )
 
+  const items = JSON.parse(readFileSync(join(raw, 'json_items.json'), 'utf8')) as Record<
+    string,
+    [string]
+  >
+  const itemIds = [
+    ...new Set([
+      ...Array.from({ length: 12 }, (_, i) => 540001 + i),
+      ...Array.from({ length: 12 }, (_, i) => 540101 + i),
+      ...Object.values(config.bloodline.Limits).map((l) => l.item),
+    ]),
+  ]
   const fixed: [string, string | number, string][] = [
+    ...itemIds.map((id): [string, number, string] => [
+      'item-icon',
+      id,
+      `icons/items/${items[id]![0]}.png`,
+    ]),
+    ['daily-login', 'reward', 'dailylogin/reward.png'],
+    ['daily-login', '20min', 'dailylogin/20min.png'],
     ['bloodline', 'menu', 'ui/newui/Bloodline.png'],
     ...limits.flatMap((id): [string, number, string][] => [
       ['bloodline', id, `icons/bloodlines/bg/${id}.png`],
@@ -246,55 +279,61 @@ async function main() {
       path,
     ]),
   ]
-  await pool(fixed, ([category, id, path]) => fetchAsset(category, id, path))
-  const beasts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].flatMap((beast) =>
-    ['', '-1', '-2'].map((stage) => `beast-${beast}${stage}`),
+  await pool(
+    process.argv.includes('--m5-missing')
+      ? fixed.filter(([category]) => category === 'item-icon' || category === 'daily-login')
+      : fixed,
+    ([category, id, path]) => fetchAsset(category, id, path),
   )
-  await pool(beasts, (beast) =>
-    fetchAtlas('event', 'tailedBeast', `scenes/tailedBeast/${beast}.json`),
-  )
-
-  // Skills: icons for every known id, core combat atlases, per-skill data atlases.
-  const skills = bundleSkills(bundle)
-  const skillIds = new Set<number>([
-    ...Object.keys(config.skill_info).map(Number),
-    ...Object.values(config.avatars).flatMap((a) => a.innate?.skills ?? []),
-    ...skills.ids,
-  ])
-  await fetchAtlas('skill-effect', 'icons', 'icons/skills.json')
-  await pool([...skillIds], async (id) => {
-    await fetchAsset('skill-icon', id, `icons/skills/${id}.png`)
-    const data = parseJson<{ name?: string }>(
-      await fetchAsset('skill-effect', id, `entities/skills/data/${id}.json`),
+  if (!process.argv.includes('--m5-missing')) {
+    const beasts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].flatMap((beast) =>
+      ['', '-1', '-2'].map((stage) => `beast-${beast}${stage}`),
     )
-    if (data?.name) await fetchAtlas('skill-effect', id, `entities/skills/${data.name}.json`)
-  })
-  await pool(skills.names, (name) =>
-    fetchAtlas('skill-effect', name, `entities/skills/core/${name}.json`),
-  )
+    await pool(beasts, (beast) =>
+      fetchAtlas('event', 'tailedBeast', `scenes/tailedBeast/${beast}.json`),
+    )
 
-  // NPC portraits and overworld sprites: ids from locale keys npc__<id>--name and scenes/npcs.json.
-  const scenes = parseJson<Record<string, Record<string, unknown>>>(
-    await fetchAsset('npc', 'scenes', 'scenes/npcs.json'),
-  )
-  const npcIds = new Set<number>([
-    ...Object.keys(locale)
-      .flatMap((key) => key.match(/^npc__(\d+)--/)?.[1] ?? [])
-      .map(Number),
-    ...Object.values(scenes ?? {}).flatMap((npcs) => Object.keys(npcs).map(Number)),
-    ...limits.map((id) => 81000 + id),
-  ])
-  await pool([...npcIds], async (id) => {
-    await fetchAsset('npc', id, `icons/npc/${id}.png`)
-    await fetchAtlas('npc', id, `entities/npcs/${id}.json`)
-  })
+    // Skills: icons for every known id, core combat atlases, per-skill data atlases.
+    const skills = bundleSkills(bundle)
+    const skillIds = new Set<number>([
+      ...Object.keys(config.skill_info).map(Number),
+      ...Object.values(config.avatars).flatMap((a) => a.innate?.skills ?? []),
+      ...skills.ids,
+    ])
+    await fetchAtlas('skill-effect', 'icons', 'icons/skills.json')
+    await pool([...skillIds], async (id) => {
+      await fetchAsset('skill-icon', id, `icons/skills/${id}.png`)
+      const data = parseJson<{ name?: string }>(
+        await fetchAsset('skill-effect', id, `entities/skills/data/${id}.json`),
+      )
+      if (data?.name) await fetchAtlas('skill-effect', id, `entities/skills/${data.name}.json`)
+    })
+    await pool(skills.names, (name) =>
+      fetchAtlas('skill-effect', name, `entities/skills/core/${name}.json`),
+    )
 
+    // NPC portraits and overworld sprites: ids from locale keys npc__<id>--name and scenes/npcs.json.
+    const scenes = parseJson<Record<string, Record<string, unknown>>>(
+      await fetchAsset('npc', 'scenes', 'scenes/npcs.json'),
+    )
+    const npcIds = new Set<number>([
+      ...Object.keys(locale)
+        .flatMap((key) => key.match(/^npc__(\d+)--/)?.[1] ?? [])
+        .map(Number),
+      ...Object.values(scenes ?? {}).flatMap((npcs) => Object.keys(npcs).map(Number)),
+      ...limits.map((id) => 81000 + id),
+    ])
+    await pool([...npcIds], async (id) => {
+      await fetchAsset('npc', id, `icons/npc/${id}.png`)
+      await fetchAtlas('npc', id, `entities/npcs/${id}.json`)
+    })
+  }
   const unique = [...new Map(manifest.map((e) => [e.path, e])).values()].sort((a, b) =>
     a.path.localeCompare(b.path, undefined, { numeric: true }),
   )
   writeFileSync(
     manifestFile,
-    `${JSON.stringify({ secretTechniques, missing: missing.sort(), assets: unique }, null, 1)}\n`,
+    `${JSON.stringify({ secretTechniques, missing: [...new Set(missing)].filter((path) => !unique.some((entry) => entry.path === path)).sort(), assets: unique }, null, 1)}\n`,
   )
   const totals = new Map<string, { files: number; bytes: number }>()
   for (const e of unique) {
