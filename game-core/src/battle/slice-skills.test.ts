@@ -89,6 +89,52 @@ describe('skills of the M2 slice', () => {
   })
 })
 
+describe('monster skills in live content', () => {
+  // Every file that spawns NPCs into a fight: fields, timed bosses, explore ghosts, toll gates,
+  // Las Noches, pub fights and arena tiers. NPC ids are picked out of any string value.
+  const spawnFiles = [
+    'scene-npcs',
+    'scene-timed-npcs',
+    'explore-gost-factory',
+    'toll-gate-groups',
+    'single-gate',
+    'pub-fights',
+    'arena-tiers',
+  ]
+  const npcIds = new Set<string>()
+  const collect = (value: unknown): void => {
+    if (typeof value === 'string') value.match(/\bn\d+\b/g)?.forEach((id) => npcIds.add(id))
+    else if (value && typeof value === 'object') Object.values(value).forEach(collect)
+  }
+  spawnFiles.forEach((name) => collect(data(name)))
+  const liveSkills = new Set(
+    [...npcIds].flatMap((id) =>
+      [records[id]?.AttackSkill, records[id]?.TriggerSkill]
+        .filter((rec) => rec !== undefined)
+        .flatMap((rec) => [values[rec]!.r].flat()),
+    ),
+  )
+
+  // Known gaps from the 2026-10-13 skills audit (.claude/plans/skills-gaps.plan.md). Remove an id
+  // here when its script lands; a new id showing up means live content gained an unported skill.
+  const unportedKnown = [
+    2, 3, 5, 6, 7, 8, 1802, 1803, 1805, 1807, 1808, 1810, 1813, 1814, 1815, 1816, 1822, 1823,
+    1825, 1826, 1827, 1828, 1829, 1830, 1832, 1839, 3802, 3803, 3804, 3805, 3806, 3807, 3809,
+    3810, 3811, 3812, 3813, 3814, 3815, 3819, 3820, 3821, 3822, 3825, 3826, 3827, 5000, 9999,
+    40018, 40019, 40021, 40022, 40025, 40026, 40030, 60001, 60002, 60003, 60004, 60005,
+  ]
+
+  it('has a script for every live monster skill but the known gaps', () => {
+    const unported = [...liveSkills]
+      .filter((id) => {
+        const skill = row(id)
+        return skill.type !== 3 && skill.javascript !== undefined && !SKILL_SCRIPTS[skill.javascript]
+      })
+      .sort((a, b) => a - b)
+    expect(unported).toEqual(unportedKnown)
+  })
+})
+
 describe('outfit ultimates (avatar-skills.json SkillID1)', () => {
   const ultimates = new Set(
     Object.values(data<Record<string, { SkillID1: number }>>('avatar-skills')).map(

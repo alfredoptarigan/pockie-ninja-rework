@@ -56,6 +56,11 @@ inscribe), equipment sets, Angel City and Demon City, toll gates.
 ### 4. Social & Competition
 Party, PvP arena with ranking, trade, friends, mail.
 
+### 4.5 Ninjutsu
+The original's 40 learnable ninjutsu (learning on level-up, skill bar, Skills window), passives and
+SkillAdd, non-fight buffs. The same scripts give instance and arena monsters their real kits.
+Plan and M3/M4 skill cleanup: `skills-gaps.plan.md`.
+
 ### 5. Reborn Update
 Systems that exist only in Reborn, designed by us with Reborn names and tooltips as reference:
 talents (8), named bloodlines (44 `limit__N`), scroll and secret-technique (ultimate) skills,
