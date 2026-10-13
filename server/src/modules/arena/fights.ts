@@ -88,9 +88,12 @@ export async function playerOpponent(
   character: CharacterRow,
   arena: ArenaRow,
 ): Promise<Opponent> {
-  let snapshot = arena.snapshot ? fromSnapshot(arena.snapshot) : null
-  if (!snapshot) {
-    snapshot = await arenaFighter(tx, character)
+  // Rebuilt whenever gear, level or skills changed since it was stored (decision 9); the
+  // character row is locked, so this is the defender as they are now.
+  const live = await arenaFighter(tx, character)
+  const stored = arena.snapshot ? fromSnapshot(arena.snapshot) : null
+  const snapshot = stored?.source === live.source ? stored : live
+  if (snapshot === live) {
     await tx
       .update(arenaPlayers)
       .set({ snapshot: toSnapshot(snapshot), snapshotAt: new Date() })
