@@ -6,12 +6,14 @@ import type { WeaponLayer } from '../../generated/game-extra'
 import type { Replay } from '../types'
 import { createGame, LABEL_STYLE, loadSheet } from './game'
 import { frameAt, originOf, sheetOf, sheetTicks, type FighterArt } from './motion'
+import { overlayFrame, shiftAt } from './secret-technique'
 import {
   BATTLE_TICK_MS,
   FADE_MS,
   HOME,
   latestAt,
   poseX,
+  secretLayers,
   STAGE,
   type FloatText,
   type Pose,
@@ -59,6 +61,8 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
 const HUD = { margin: 12, portrait: 84, vsGap: 30, hpY: 22, hpH: 24, mpY: 52, mpH: 9 }
 /** Puts the weapon right above its body (body depths are pose start times in ms). */
 const WEAPON_ABOVE_BODY = 0.01
+/** Ultimate art goes over every body, its back layers behind them; texts and HUD stay on top. */
+const DEPTH = { background: -2, overlayBack: -1, overlay: 1e6, ui: 2e6 }
 
 /** Stacks texts that appear close together over the same fighter. */
 function textSlots(texts: FloatText[]) {
@@ -76,6 +80,8 @@ class BattleScene extends Phaser.Scene {
   private finished = false
   private sprites: (Phaser.GameObjects.Sprite | undefined)[] = []
   private weaponSprites: (Phaser.GameObjects.Sprite | undefined)[] = []
+  /** Secret-technique layers per fighter (main atlas and its concurrent layer). */
+  private overlaySprites: Phaser.GameObjects.Sprite[][] = []
   private floating = new Map<number, Phaser.GameObjects.Text>()
   private slots: number[]
   private hud!: Phaser.GameObjects.Graphics
@@ -104,15 +110,25 @@ class BattleScene extends Phaser.Scene {
         if (weaponSheet) loadSheet(this, weaponSheet)
       }
     })
+    // Only the ultimates this replay casts; a failed load leaves the normal motion.
+    for (const layer of secretLayers(timeline)) {
+      if (this.textures.exists(layer.texture)) continue
+      const dir = layer.atlas.slice(0, layer.atlas.lastIndexOf('/') + 1)
+      this.load.multiatlas(layer.texture, layer.atlas, dir)
+    }
   }
 
   create() {
     const { background, replay } = this.setup
     if (background && this.textures.exists(background)) {
-      this.add.image(0, 0, background).setOrigin(0).setDisplaySize(STAGE.width, STAGE.height)
+      this.add
+        .image(0, 0, background)
+        .setOrigin(0)
+        .setDisplaySize(STAGE.width, STAGE.height)
+        .setDepth(DEPTH.background)
     } else {
       // Fallback stage: dusk sky over a dirt ground.
-      const g = this.add.graphics()
+      const g = this.add.graphics().setDepth(DEPTH.background)
       g.fillStyle(0x6a8fb5).fillRect(0, 0, STAGE.width, STAGE.groundY - 40)
       g.fillStyle(0x8a6a3e).fillRect(0, STAGE.groundY - 40, STAGE.width, STAGE.height)
     }
@@ -120,9 +136,17 @@ class BattleScene extends Phaser.Scene {
     this.weaponSprites = replay.fighters.map((_, i) =>
       this.setup.weapons[i] ? this.add.sprite(0, 0, '__MISSING').setVisible(false) : undefined,
     )
-    this.hud = this.add.graphics().setDepth(900)
+    this.overlaySprites = replay.fighters.map((_, i) =>
+      this.setup.timeline.poses[i]?.some((p) => p.secret)
+        ? [0, 1].map(() => this.add.sprite(0, 0, '__MISSING').setOrigin(0).setVisible(false))
+        : [],
+    )
+    this.hud = this.add.graphics().setDepth(DEPTH.ui + 100)
     for (const side of ['attackers', 'defenders'] as const) {
-      this.portraits[side] = this.add.image(0, 0, '__MISSING').setDepth(901).setVisible(false)
+      this.portraits[side] = this.add
+        .image(0, 0, '__MISSING')
+        .setDepth(DEPTH.ui + 101)
+        .setVisible(false)
     }
     this.drawEmblem()
     this.banner = this.add
@@ -132,7 +156,7 @@ class BattleScene extends Phaser.Scene {
         strokeThickness: 10,
       })
       .setOrigin(0.5)
-      .setDepth(1000)
+      .setDepth(DEPTH.ui + 200)
       .setVisible(false)
     this.render()
   }
@@ -183,8 +207,13 @@ class BattleScene extends Phaser.Scene {
     this.sprites.forEach((sprite, i) => {
       const weapon = this.weaponSprites[i]
       weapon?.setVisible(false)
+      for (const overlay of this.overlaySprites[i] ?? []) overlay.setVisible(false)
       if (!sprite) return
       const pose = latestAt(timeline.poses[i] ?? [], t)
+      if (pose?.secret && this.renderSecret(i, pose, t)) {
+        sprite.setVisible(false)
+        return
+      }
       const sheet = pose && sheetOf(art[i], pose.motion)
       if (!pose || !sheet || !this.textures.exists(sheet.file)) {
         sprite.setVisible(false)
@@ -196,16 +225,41 @@ class BattleScene extends Phaser.Scene {
       let alpha = 1
       if (pose.fade === 'in') alpha = Math.min(1, elapsed / FADE_MS)
       if (pose.fade === 'out') alpha = 1 - Math.min(1, Math.max(0, elapsed - motionMs) / FADE_MS)
+      const shift = pose.shift && shiftAt(pose.shift, t)
+      const tick = pose.freeze ? 0 : elapsed / BATTLE_TICK_MS
       sprite
-        .setTexture(sheet.file, frameAt(sheet.durations, elapsed / BATTLE_TICK_MS, pose.loop))
+        .setTexture(sheet.file, frameAt(sheet.durations, tick, pose.loop))
         .setOrigin(origin.x, origin.y)
-        .setPosition(poseX(pose, t), STAGE.groundY)
+        .setPosition(poseX(pose, t) + (shift?.dx ?? 0), STAGE.groundY + (shift?.dy ?? 0))
+        .setRotation(shift?.rotation ?? 0)
         .setFlipX(replay.fighters[i]?.side === 'defenders')
         .setAlpha(alpha)
         .setDepth(pose.at)
-        .setVisible(alpha > 0)
+        .setVisible(alpha > 0 && (shift?.visible ?? true))
       if (weapon) this.renderWeapon(weapon, i, pose, sheet, sprite)
     })
+  }
+
+  /**
+   * Draws the ultimate art of fighter i's pose (the body hides). False when its atlas did not
+   * load, so the body plays the normal motion instead.
+   */
+  private renderSecret(i: number, pose: Pose, t: number) {
+    const layers = pose.secret?.layers ?? []
+    if (!layers[0] || !this.textures.exists(layers[0].texture)) return false
+    layers.forEach((layer, k) => {
+      const sprite = this.overlaySprites[i]?.[k]
+      const frame = overlayFrame(layer, t - pose.at)
+      if (!sprite || frame === undefined || !this.textures.exists(layer.texture)) return
+      if (!this.textures.get(layer.texture).has(frame)) return
+      sprite
+        .setTexture(layer.texture, frame)
+        .setPosition(layer.x, layer.y)
+        .setScale(layer.scaleX, 1)
+        .setDepth(layer.front ? DEPTH.overlay + k : DEPTH.overlayBack)
+        .setVisible(true)
+    })
+    return true
   }
 
   /** The weapon over its body: same spot, scale, flip and fade, its own sheet, anchor and cells. */
@@ -226,6 +280,7 @@ class BattleScene extends Phaser.Scene {
       .setOrigin(origin.x, origin.y)
       .setPosition(sprite.x, sprite.y)
       .setScale(sprite.scaleX, sprite.scaleY)
+      .setRotation(sprite.rotation)
       .setFlipX(sprite.flipX)
       .setAlpha(sprite.alpha)
       .setDepth(sprite.depth + WEAPON_ABOVE_BODY)
@@ -252,7 +307,7 @@ class BattleScene extends Phaser.Scene {
             strokeThickness: 6,
           })
           .setOrigin(0.5, 1)
-          .setDepth(800)
+          .setDepth(DEPTH.ui)
         this.floating.set(i, object)
       }
       const pose = latestAt(poses[text.fighter] ?? [], t)
@@ -337,7 +392,7 @@ class BattleScene extends Phaser.Scene {
   private hudLine(i: number, x: number, y: number, text: string, size: number, align: number) {
     this.hudText[i] ??= this.add
       .text(0, 0, '', { ...LABEL_STYLE, strokeThickness: 4 })
-      .setDepth(901)
+      .setDepth(DEPTH.ui + 101)
     this.hudText[i]!.setText(text)
       .setFontSize(size)
       .setOrigin(align, 0)
@@ -358,7 +413,7 @@ class BattleScene extends Phaser.Scene {
     ]
     this.add
       .graphics()
-      .setDepth(902)
+      .setDepth(DEPTH.ui + 102)
       .fillStyle(0x7a1f12)
       .fillPoints(diamond, true)
       .lineStyle(3, 0xffd23c)
@@ -372,7 +427,7 @@ class BattleScene extends Phaser.Scene {
         strokeThickness: 6,
       })
       .setOrigin(0.5)
-      .setDepth(903)
+      .setDepth(DEPTH.ui + 103)
   }
 
   /** The side's fighter whose first appearance is the latest one before t. */

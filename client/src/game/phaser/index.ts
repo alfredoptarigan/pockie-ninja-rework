@@ -7,6 +7,12 @@ import { startBattle, type BattleHandle } from './battle-scene'
 import { fighterLooks, lookArt, loadSkillMotions, shownOutfit, type FighterLook } from './motion'
 import { pictureLayout } from './picture-layout'
 import { startScenePicture, type PictureActions, type PictureHandle } from './picture-scene'
+import {
+  loadSecretArt,
+  replaySecretTechniques,
+  resolveSecretTechnique,
+  type SecretArt,
+} from './secret-technique'
 import { buildTimeline } from './timeline'
 import { loadWeaponLayer } from './weapon'
 
@@ -51,8 +57,13 @@ export async function mountBattle(
     defenderLooks ?? monsterIds.map((npcId) => ({ npcId })),
   )
   const art = looks.map(lookArt)
-  // Both are runtime JSON files; a missing weapon layer only leaves the weapon out.
-  const [skillMotions, weapons] = await Promise.all([
+  const clothingOf = (i: number) => {
+    const look = looks[i]
+    return look && 'clothing' in look ? look.clothing : undefined
+  }
+  const techniques = [...replaySecretTechniques(replay.events, clothingOf)]
+  // Runtime JSON files; a missing weapon layer or ultimate atlas only leaves that art out.
+  const [skillMotions, weapons, secrets] = await Promise.all([
     loadSkillMotions(),
     Promise.all(
       looks.map((look) =>
@@ -61,8 +72,15 @@ export async function mountBattle(
           : undefined,
       ),
     ),
+    Promise.all(techniques.map(([key, technique]) => loadSecretArt(key, technique))),
   ])
-  const timeline = buildTimeline(replay, { art, skillMotions, skillName, buffName })
+  const secretByKey = new Map<string, SecretArt>()
+  for (const secret of secrets) if (secret) secretByKey.set(secret.key, secret)
+  const secretArt = (fighter: number, skillId: number) => {
+    const resolved = resolveSecretTechnique(clothingOf(fighter), skillId)
+    return resolved && secretByKey.get(resolved.key)
+  }
+  const timeline = buildTimeline(replay, { art, skillMotions, skillName, buffName, secretArt })
   return startBattle(parent, {
     replay,
     timeline,
