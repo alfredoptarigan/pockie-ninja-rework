@@ -191,6 +191,144 @@ const M3_PIECES: Record<string, PieceSource> = {
   'card-name-bar': sprite('UI_OutSearchCard', 38),
 }
 
+const laf = (symbol: string): PieceSource => ({ swf: LAF, symbol })
+const resourceButton = (name: string): PieceSource => ({
+  swf: 'UI_Resource',
+  symbol: `UIResource.${name}`,
+  kind: 'button',
+})
+/** up / over / down of a UI_Resource button class, keyed `<key>-<state>`. */
+const resourceButtonStates = (key: string, name: string) =>
+  Object.fromEntries(
+    (['up', 'over', 'down'] as const).map((state) => [
+      `${key}-${state}`,
+      { ...resourceButton(name), state } satisfies PieceSource,
+    ]),
+  )
+const SIDES_4 = { top: 4, right: 4, bottom: 4, left: 4 }
+
+// M4 windows (docs/original-data: teams.md 6, friends-mail.md, trade-market.md part 5,
+// pvp-rankings.md 8 and 10). The AsWing trees UI_Society_Xml, UI_Mail*_Xml, UI_Mart*_Xml,
+// UI_Depot_Xml, UI_TeamFrame_Xml, UI_TeamWait*_Xml, UI_GameTop_Xml, UI_Whister*_Xml,
+// UI_HonorExchange_Xml and UI_ArenaBox*_Xml reuse the M3 backgrounds (BigBG1-5, TextBG1/2, the
+// slot and currency icons) plus the pieces below. The arena windows (UI_ArenaFighter,
+// UI_ArenaInfo, UI_ArenaPKReady), the party frame (TeamRoleIcon in UI_UIResourceTemp) and the
+// minimap Mail / Whisper buttons are SWF art; only text-free parts are taken. The tier badges
+// (Font_PosCall1-23) are lettering only, so they are not exported: draw the tier names as text.
+// Left out for their baked text: Arena.Top_BG ("TOP" board), Mail.SendButton ("Kirim"),
+// Icon.Go ("GO!"), Equip.ExP ("EXP"), Common.Brigade (a "T"), the arena side buttons, the
+// "Battle!" button and the chest cards (logo). Tree_leafControlImage is empty in this skin.
+const M4_PIECES: Record<string, PieceSource> = {
+  // Look and feel: market category tree, listing form controls, mail accordion headers.
+  'tree-folder-closed': laf('Tree_folderCollapsedImage'),
+  'tree-folder-open': laf('Tree_folderExpandedImage'),
+  'tree-leaf': laf('Tree_leafImage'),
+  'radio-normal': laf('RadioButton_defaultImage'),
+  'radio-selected': laf('RadioButton_selectedImage'),
+  'checkbox-normal': laf('CheckBox_defaultImage'),
+  'checkbox-selected': laf('CheckBox_selectedImage'),
+  'combo-box': lookAndFeel('ComboBox_defaultImage', true),
+  'combo-arrow': laf('ComboBox_arrowButton_defaultImage'),
+  'combo-arrow-hover': laf('ComboBox_arrowButton_rolloverImage'),
+  'accordion-header': lookAndFeel('Accordion_header_defaultImage', true),
+  'accordion-header-hover': lookAndFeel('Accordion_header_rolloverImage', true),
+  'accordion-header-selected': lookAndFeel('Accordion_header_selectedImage', true),
+  // List rows (friends, enemies, market, team waits) and the pager of every paged list.
+  'list-row': resource('Common.TextBG4', true),
+  'panel-6': resource('Common.BigBG6', true),
+  ornament: resource('Common.FlowerPattem2'),
+  ...resourceButtonStates('page-first', 'Common.Lift2'),
+  ...resourceButtonStates('page-prev', 'Common.Lift'),
+  ...resourceButtonStates('page-next', 'Common.Right'),
+  ...resourceButtonStates('page-last', 'Common.Right2'),
+  'portrait-frame': resource('Icon.Grid_HeadPortraitBase1'),
+  'portrait-frame-small': resource('Icon.Grid_HeadPortraitBase2'),
+  // Friends rows: gender, village, online and standing icons.
+  'icon-boy': resource('Icon.Boy'),
+  'icon-girl': resource('Icon.Girl'),
+  'icon-fire': resource('Icon.Icon_Fire'),
+  'icon-water': resource('Icon.Icon_Water'),
+  'icon-earth': resource('Icon.Icon_Terra'),
+  'icon-wind': resource('Icon.Icon_Wind'),
+  'icon-lightning': resource('Icon.Icon_Thunder'),
+  'icon-online': { swf: 'UI_UIResourceTemp', symbol: 'OnlineIcon' },
+  'icon-offline': { swf: 'UI_UIResourceTemp', symbol: 'OfflineIcon' },
+  'icon-mutual': resource('Icon.RoleAccomplish'),
+  'icon-one-sided': resource('Icon.Fork'),
+  // Mail: envelopes, delete all, mark all read, write and send.
+  'mail-unread': resource('Icon.Icon_CloseEnvelope'),
+  'mail-read': resource('Icon.Icon_OpenEnvelope'),
+  'mail-battle': resource('Icon.Icon_BattleUpToSnuff'),
+  ...resourceButtonStates('mail-delete', 'Mail.Dustbin'),
+  ...resourceButtonStates('mail-read-all', 'Mail.OpenEnvelopeButton'),
+  ...resourceButtonStates('mail-write', 'Mail.EpistolizeButton'),
+  // Whisper window (UI_WhisterFrame): panels, conversation tab states, tab close.
+  'whisper-panel': resource('Chat.ChatBG1', true),
+  'whisper-input': resource('Chat.ChatBG2', SIDES_4),
+  'whisper-tab': resource('Chat.ChatBG5', true),
+  'whisper-tab-hover': resource('Chat.ChatBG4', true),
+  'whisper-tab-selected': resource('Chat.ChatBG3', true),
+  ...resourceButtonStates('whisper-close', 'Chat.ChatClose'),
+  // Minimap buttons (UI_SmallMap: Mail is a button, Whister a 3-state clip).
+  ...buttonStates('minimap-mail', 'UI_SmallMap', 8),
+  'minimap-whisper-up': { swf: 'UI_SmallMap', symbol: 17, frame: 1 },
+  'minimap-whisper-over': { swf: 'UI_SmallMap', symbol: 17, frame: 2 },
+  'minimap-whisper-down': { swf: 'UI_SmallMap', symbol: 17, frame: 3 },
+  // Party frame (TeamRoleIcon): orb, name plate, bars (100 frames each), level ribbon, crown,
+  // make-leader / leave buttons, the fight order arrows (Btn_Down is Btn_Up flipped) and their pill.
+  'team-orb': sprite('UI_UIResourceTemp', 1017),
+  'team-name-plate': sprite('UI_UIResourceTemp', 995),
+  'team-level': sprite('UI_UIResourceTemp', 1026),
+  'team-crown': sprite('UI_UIResourceTemp', 1041),
+  'team-arrows-back': sprite('UI_UIResourceTemp', 1043),
+  'team-hp-track': { swf: 'UI_UIResourceTemp', symbol: 1014, frame: 1 },
+  'team-hp-fill': { swf: 'UI_UIResourceTemp', symbol: 1014, frame: 100 },
+  'team-mp-track': { swf: 'UI_UIResourceTemp', symbol: 1002, frame: 1 },
+  'team-mp-fill': { swf: 'UI_UIResourceTemp', symbol: 1002, frame: 100 },
+  'team-sp-track': { swf: 'UI_UIResourceTemp', symbol: 1008, frame: 1 },
+  'team-sp-fill': { swf: 'UI_UIResourceTemp', symbol: 1008, frame: 100 },
+  ...buttonStates('team-leader', 'UI_UIResourceTemp', 1034),
+  ...buttonStates('team-leave', 'UI_UIResourceTemp', 1039),
+  ...buttonStates('team-arrow', 'UI_UIResourceTemp', 1047),
+  // Arena (UI_ArenaTop_Xml, UI_ArenaFighter, UI_ArenaInfo, UI_ArenaPKReady).
+  'arena-row-1': sprite('UI_ArenaFighter', 4),
+  'arena-row-2': sprite('UI_ArenaFighter', 8),
+  'arena-row-3': sprite('UI_ArenaFighter', 6),
+  'arena-header': sprite('UI_ArenaFighter', 10),
+  'arena-card-slot': sprite('UI_ArenaFighter', 27),
+  'arena-card-slot-base': sprite('UI_ArenaFighter', 37),
+  'arena-button-plate': sprite('UI_ArenaFighter', 16),
+  'arena-button-plate-hover': sprite('UI_ArenaFighter', 17),
+  'arena-cloud-left': sprite('UI_ArenaFighter', 72),
+  'arena-cloud-right': sprite('UI_ArenaFighter', 74),
+  'arena-banner': sprite('UI_ArenaInfo', 3),
+  'arena-leaf': sprite('UI_ArenaInfo', 5),
+  'arena-scroll': sprite('UI_ArenaInfo', 15),
+  'arena-scroll-rod': sprite('UI_ArenaInfo', 21),
+  'arena-scroll-header': sprite('UI_ArenaInfo', 26),
+  'arena-brush-blue': sprite('UI_ArenaInfo', 43),
+  'arena-brush-pink': sprite('UI_ArenaInfo', 47),
+  'arena-card-own': sprite('UI_ArenaPKReady', 5),
+  'arena-card-foe': sprite('UI_ArenaPKReady', 10),
+  'arena-name-own': sprite('UI_ArenaPKReady', 13),
+  'arena-name-foe': sprite('UI_ArenaPKReady', 16),
+  'arena-info-box': sprite('UI_ArenaPKReady', 22),
+  'arena-info-frame': sprite('UI_ArenaPKReady', 24),
+  'arena-vs-v': sprite('UI_ArenaPKReady', 61),
+  'arena-vs-s': sprite('UI_ArenaPKReady', 63),
+  'arena-button': sprite('UI_ArenaPKReady', 26),
+  'arena-button-hover': sprite('UI_ArenaPKReady', 31),
+  'arena-button-pressed': sprite('UI_ArenaPKReady', 34),
+  // Honor shop and jars (UI_ArenaBoxShop*_Xml, UI_ArenaBoxActive_Xml).
+  'honor-inner-1': resource('Transfer.InnerBG1', SIDES_4),
+  'honor-inner-2': resource('Transfer.InnerBG2', true),
+  'honor-name': resource('Transfer.NameBG', true),
+  'honor-name-2': resource('Transfer.NameBG2', true),
+  'honor-divider': resource('Transfer.PartitionBlack', true),
+  'honor-pot': resource('TransferShop.PotBG3', SIDES_4),
+  'honor-tab': resource('TransferShop.Tab', SIDES_4),
+}
+
 export const UI_PIECES: Record<string, PieceSource> = {
   frame: lookAndFeel('Frame_activeBG', FRAME_SLICE),
   'frame-title': lookAndFeel('FrameTitleBar', true),
@@ -247,6 +385,7 @@ export const UI_PIECES: Record<string, PieceSource> = {
   ...M3_PIECES,
   ...HUD_PIECES,
   ...WINDOW_PIECES,
+  ...M4_PIECES,
 }
 
 /** Splits a BaseSource bundle (the parts already joined) into its entries by title. */
@@ -301,12 +440,12 @@ function spriteDir(out: string, swf: string, symbol: string | number) {
 const BUTTON_FRAMES = { up: '1_up', over: '2_over', down: '3_down' } as const
 
 /** The rendered PNG of a piece in FFDec's export layout. */
-function piecePng(out: string, source: PieceSource) {
+function piecePng(out: string, source: PieceSource, id: number) {
   const dir = join(out, `${source.swf}.swf`)
   if (source.kind === 'shape') return join(dir, 'shapes', `${source.symbol}.png`)
   if (source.kind === 'button') {
     const entry = readdirSync(join(dir, 'buttons')).find((name) =>
-      new RegExp(`^DefineButton2_${source.symbol}(_|$)`).test(name),
+      new RegExp(`^DefineButton2_${id}(_|$)`).test(name),
     )
     if (!entry) throw new Error(`Button ${source.symbol} not found in ${source.swf}`)
     return join(dir, 'buttons', entry, `${BUTTON_FRAMES[source.state ?? 'up']}.png`)
@@ -329,12 +468,14 @@ async function exportPieces(swfs: Map<string, Buffer>) {
   const work = mkdtempSync(join(paths.cache, 'ui-'))
   try {
     const out = join(work, 'png')
+    const classesBySwf = new Map<string, Map<string, number>>()
     // One FFDec run per SWF, rendering only the sprites the pieces use (UI_Resource is large).
     for (const [name, data] of swfs) {
       const input = join(work, 'swf', name)
       mkdirSync(input, { recursive: true })
       writeFileSync(join(input, `${name}.swf`), data)
       const classes = symbolIds(data)
+      classesBySwf.set(name, classes)
       const ids = Object.values(UI_PIECES)
         .filter((source) => source.swf === name)
         .map((source) =>
@@ -354,7 +495,11 @@ async function exportPieces(swfs: Map<string, Buffer>) {
 
     const pieces: Record<string, UiPiece> = {}
     for (const [key, source] of Object.entries(UI_PIECES)) {
-      const png = piecePng(out, source)
+      const id =
+        typeof source.symbol === 'number'
+          ? source.symbol
+          : classesBySwf.get(source.swf)!.get(source.symbol)!
+      const png = piecePng(out, source, id)
       const { width = 0, height = 0 } = await sharp(png).metadata()
       const file = `${OUT_DIR}/${key}.webp`
       await sharp(png).webp({ lossless: true, effort: 6 }).toFile(join(paths.assets, file))

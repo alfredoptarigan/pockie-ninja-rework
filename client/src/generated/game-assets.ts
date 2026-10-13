@@ -1,6 +1,7 @@
 // Typed access to the game asset manifests written by `pnpm assets:export`
 // (tools/export-assets.ts). Images live under client/public/assets/game.
 import motionsJson from './game-motions.json'
+import arenaJson from './game-arena.json'
 import scenesJson from './game-scenes.json'
 
 /**
@@ -126,3 +127,22 @@ export interface SkillMotions {
   outfits: Record<string, Record<string, string>>
   mobs: Record<string, Record<string, string>>
 }
+
+/**
+ * Arena art (`pnpm assets:export arena`). `faces[clothing]` is the opponent card picture of
+ * ArenaFighterPanel.as, for players (by their outfit) and arena NPCs alike. An NPC is drawn like a
+ * player (outfit from `gameMotions.outfits`, weapon layers where the outfit has the key) or with
+ * mob art (`gameMotions.mobs`, else `mobs` here). Skill motions of the arena-only mobs are in
+ * `skillMotions`.
+ */
+export interface GameArena {
+  faces: Record<string, string>
+  npcs: Record<
+    string,
+    { sex: number; clothing: number; weapon: string; face: string } | { mob: string }
+  >
+  mobs: Record<string, MonsterArt>
+  skillMotions: Record<string, Record<string, string>>
+  gaps: { facesNotInBackup: number[]; weaponsWithoutLayers: string[] }
+}
+export const gameArena = arenaJson as GameArena

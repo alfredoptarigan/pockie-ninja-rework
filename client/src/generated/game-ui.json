@@ -395,6 +395,398 @@
     "slot-shoes": { "file": "/assets/game/ui/slot-shoes.webp", "width": 73, "height": 73 },
     "icon-scroll": { "file": "/assets/game/ui/icon-scroll.webp", "width": 30, "height": 27 },
     "icon-notice": { "file": "/assets/game/ui/icon-notice.webp", "width": 16, "height": 16 },
-    "monster-card": { "file": "/assets/game/ui/monster-card.webp", "width": 67, "height": 86 }
+    "monster-card": { "file": "/assets/game/ui/monster-card.webp", "width": 67, "height": 86 },
+    "tree-folder-closed": {
+      "file": "/assets/game/ui/tree-folder-closed.webp",
+      "width": 16,
+      "height": 16
+    },
+    "tree-folder-open": {
+      "file": "/assets/game/ui/tree-folder-open.webp",
+      "width": 16,
+      "height": 16
+    },
+    "tree-leaf": { "file": "/assets/game/ui/tree-leaf.webp", "width": 16, "height": 16 },
+    "radio-normal": { "file": "/assets/game/ui/radio-normal.webp", "width": 18, "height": 18 },
+    "radio-selected": { "file": "/assets/game/ui/radio-selected.webp", "width": 18, "height": 18 },
+    "checkbox-normal": {
+      "file": "/assets/game/ui/checkbox-normal.webp",
+      "width": 19,
+      "height": 19
+    },
+    "checkbox-selected": {
+      "file": "/assets/game/ui/checkbox-selected.webp",
+      "width": 19,
+      "height": 19
+    },
+    "combo-box": {
+      "file": "/assets/game/ui/combo-box.webp",
+      "width": 68,
+      "height": 20,
+      "slice": { "top": 7, "right": 26, "bottom": 6, "left": 35 }
+    },
+    "combo-arrow": { "file": "/assets/game/ui/combo-arrow.webp", "width": 14, "height": 14 },
+    "combo-arrow-hover": {
+      "file": "/assets/game/ui/combo-arrow-hover.webp",
+      "width": 14,
+      "height": 14
+    },
+    "accordion-header": {
+      "file": "/assets/game/ui/accordion-header.webp",
+      "width": 111,
+      "height": 21,
+      "slice": { "top": 8, "right": 41, "bottom": 9, "left": 50 }
+    },
+    "accordion-header-hover": {
+      "file": "/assets/game/ui/accordion-header-hover.webp",
+      "width": 111,
+      "height": 21,
+      "slice": { "top": 8, "right": 41, "bottom": 9, "left": 50 }
+    },
+    "accordion-header-selected": {
+      "file": "/assets/game/ui/accordion-header-selected.webp",
+      "width": 111,
+      "height": 21,
+      "slice": { "top": 8, "right": 41, "bottom": 9, "left": 50 }
+    },
+    "list-row": {
+      "file": "/assets/game/ui/list-row.webp",
+      "width": 68,
+      "height": 21,
+      "slice": { "top": 5, "right": 17, "bottom": 5, "left": 17 }
+    },
+    "panel-6": {
+      "file": "/assets/game/ui/panel-6.webp",
+      "width": 100,
+      "height": 53,
+      "slice": { "top": 25, "right": 40, "bottom": 24, "left": 57 }
+    },
+    "ornament": { "file": "/assets/game/ui/ornament.webp", "width": 11, "height": 14 },
+    "page-first-up": { "file": "/assets/game/ui/page-first-up.webp", "width": 17, "height": 15 },
+    "page-first-over": {
+      "file": "/assets/game/ui/page-first-over.webp",
+      "width": 17,
+      "height": 15
+    },
+    "page-first-down": {
+      "file": "/assets/game/ui/page-first-down.webp",
+      "width": 17,
+      "height": 15
+    },
+    "page-prev-up": { "file": "/assets/game/ui/page-prev-up.webp", "width": 14, "height": 15 },
+    "page-prev-over": { "file": "/assets/game/ui/page-prev-over.webp", "width": 14, "height": 15 },
+    "page-prev-down": { "file": "/assets/game/ui/page-prev-down.webp", "width": 14, "height": 15 },
+    "page-next-up": { "file": "/assets/game/ui/page-next-up.webp", "width": 14, "height": 15 },
+    "page-next-over": { "file": "/assets/game/ui/page-next-over.webp", "width": 14, "height": 15 },
+    "page-next-down": { "file": "/assets/game/ui/page-next-down.webp", "width": 14, "height": 15 },
+    "page-last-up": { "file": "/assets/game/ui/page-last-up.webp", "width": 17, "height": 15 },
+    "page-last-over": { "file": "/assets/game/ui/page-last-over.webp", "width": 17, "height": 15 },
+    "page-last-down": { "file": "/assets/game/ui/page-last-down.webp", "width": 17, "height": 15 },
+    "portrait-frame": { "file": "/assets/game/ui/portrait-frame.webp", "width": 56, "height": 56 },
+    "portrait-frame-small": {
+      "file": "/assets/game/ui/portrait-frame-small.webp",
+      "width": 96,
+      "height": 96
+    },
+    "icon-boy": { "file": "/assets/game/ui/icon-boy.webp", "width": 17, "height": 19 },
+    "icon-girl": { "file": "/assets/game/ui/icon-girl.webp", "width": 16, "height": 19 },
+    "icon-fire": { "file": "/assets/game/ui/icon-fire.webp", "width": 18, "height": 18 },
+    "icon-water": { "file": "/assets/game/ui/icon-water.webp", "width": 18, "height": 18 },
+    "icon-earth": { "file": "/assets/game/ui/icon-earth.webp", "width": 18, "height": 18 },
+    "icon-wind": { "file": "/assets/game/ui/icon-wind.webp", "width": 18, "height": 18 },
+    "icon-lightning": { "file": "/assets/game/ui/icon-lightning.webp", "width": 18, "height": 18 },
+    "icon-online": { "file": "/assets/game/ui/icon-online.webp", "width": 20, "height": 20 },
+    "icon-offline": { "file": "/assets/game/ui/icon-offline.webp", "width": 20, "height": 20 },
+    "icon-mutual": { "file": "/assets/game/ui/icon-mutual.webp", "width": 17, "height": 17 },
+    "icon-one-sided": { "file": "/assets/game/ui/icon-one-sided.webp", "width": 17, "height": 17 },
+    "mail-unread": { "file": "/assets/game/ui/mail-unread.webp", "width": 14, "height": 12 },
+    "mail-read": { "file": "/assets/game/ui/mail-read.webp", "width": 14, "height": 14 },
+    "mail-battle": { "file": "/assets/game/ui/mail-battle.webp", "width": 13, "height": 15 },
+    "mail-delete-up": { "file": "/assets/game/ui/mail-delete-up.webp", "width": 14, "height": 14 },
+    "mail-delete-over": {
+      "file": "/assets/game/ui/mail-delete-over.webp",
+      "width": 14,
+      "height": 14
+    },
+    "mail-delete-down": {
+      "file": "/assets/game/ui/mail-delete-down.webp",
+      "width": 14,
+      "height": 14
+    },
+    "mail-read-all-up": {
+      "file": "/assets/game/ui/mail-read-all-up.webp",
+      "width": 14,
+      "height": 14
+    },
+    "mail-read-all-over": {
+      "file": "/assets/game/ui/mail-read-all-over.webp",
+      "width": 14,
+      "height": 14
+    },
+    "mail-read-all-down": {
+      "file": "/assets/game/ui/mail-read-all-down.webp",
+      "width": 14,
+      "height": 14
+    },
+    "mail-write-up": { "file": "/assets/game/ui/mail-write-up.webp", "width": 111, "height": 21 },
+    "mail-write-over": {
+      "file": "/assets/game/ui/mail-write-over.webp",
+      "width": 111,
+      "height": 21
+    },
+    "mail-write-down": {
+      "file": "/assets/game/ui/mail-write-down.webp",
+      "width": 111,
+      "height": 21
+    },
+    "whisper-panel": {
+      "file": "/assets/game/ui/whisper-panel.webp",
+      "width": 154,
+      "height": 101,
+      "slice": { "top": 25, "right": 39, "bottom": 25, "left": 38 }
+    },
+    "whisper-input": {
+      "file": "/assets/game/ui/whisper-input.webp",
+      "width": 273,
+      "height": 32,
+      "slice": { "top": 4, "right": 4, "bottom": 4, "left": 4 }
+    },
+    "whisper-tab": {
+      "file": "/assets/game/ui/whisper-tab.webp",
+      "width": 125,
+      "height": 24,
+      "slice": { "top": 6, "right": 31, "bottom": 6, "left": 31 }
+    },
+    "whisper-tab-hover": {
+      "file": "/assets/game/ui/whisper-tab-hover.webp",
+      "width": 125,
+      "height": 24,
+      "slice": { "top": 6, "right": 31, "bottom": 6, "left": 31 }
+    },
+    "whisper-tab-selected": {
+      "file": "/assets/game/ui/whisper-tab-selected.webp",
+      "width": 125,
+      "height": 24,
+      "slice": { "top": 6, "right": 31, "bottom": 6, "left": 31 }
+    },
+    "whisper-close-up": {
+      "file": "/assets/game/ui/whisper-close-up.webp",
+      "width": 13,
+      "height": 11
+    },
+    "whisper-close-over": {
+      "file": "/assets/game/ui/whisper-close-over.webp",
+      "width": 13,
+      "height": 11
+    },
+    "whisper-close-down": {
+      "file": "/assets/game/ui/whisper-close-down.webp",
+      "width": 13,
+      "height": 11
+    },
+    "minimap-mail-up": {
+      "file": "/assets/game/ui/minimap-mail-up.webp",
+      "width": 49,
+      "height": 45
+    },
+    "minimap-mail-over": {
+      "file": "/assets/game/ui/minimap-mail-over.webp",
+      "width": 49,
+      "height": 45
+    },
+    "minimap-mail-down": {
+      "file": "/assets/game/ui/minimap-mail-down.webp",
+      "width": 49,
+      "height": 45
+    },
+    "minimap-whisper-up": {
+      "file": "/assets/game/ui/minimap-whisper-up.webp",
+      "width": 35,
+      "height": 37
+    },
+    "minimap-whisper-over": {
+      "file": "/assets/game/ui/minimap-whisper-over.webp",
+      "width": 35,
+      "height": 37
+    },
+    "minimap-whisper-down": {
+      "file": "/assets/game/ui/minimap-whisper-down.webp",
+      "width": 35,
+      "height": 37
+    },
+    "team-orb": { "file": "/assets/game/ui/team-orb.webp", "width": 133, "height": 92 },
+    "team-name-plate": {
+      "file": "/assets/game/ui/team-name-plate.webp",
+      "width": 327,
+      "height": 55
+    },
+    "team-level": { "file": "/assets/game/ui/team-level.webp", "width": 76, "height": 34 },
+    "team-crown": { "file": "/assets/game/ui/team-crown.webp", "width": 22, "height": 12 },
+    "team-arrows-back": {
+      "file": "/assets/game/ui/team-arrows-back.webp",
+      "width": 18,
+      "height": 27
+    },
+    "team-hp-track": { "file": "/assets/game/ui/team-hp-track.webp", "width": 193, "height": 20 },
+    "team-hp-fill": { "file": "/assets/game/ui/team-hp-fill.webp", "width": 193, "height": 20 },
+    "team-mp-track": { "file": "/assets/game/ui/team-mp-track.webp", "width": 180, "height": 16 },
+    "team-mp-fill": { "file": "/assets/game/ui/team-mp-fill.webp", "width": 180, "height": 16 },
+    "team-sp-track": { "file": "/assets/game/ui/team-sp-track.webp", "width": 164, "height": 13 },
+    "team-sp-fill": { "file": "/assets/game/ui/team-sp-fill.webp", "width": 164, "height": 13 },
+    "team-leader-up": { "file": "/assets/game/ui/team-leader-up.webp", "width": 11, "height": 11 },
+    "team-leader-over": {
+      "file": "/assets/game/ui/team-leader-over.webp",
+      "width": 11,
+      "height": 11
+    },
+    "team-leader-down": {
+      "file": "/assets/game/ui/team-leader-down.webp",
+      "width": 11,
+      "height": 11
+    },
+    "team-leave-up": { "file": "/assets/game/ui/team-leave-up.webp", "width": 12, "height": 12 },
+    "team-leave-over": {
+      "file": "/assets/game/ui/team-leave-over.webp",
+      "width": 12,
+      "height": 12
+    },
+    "team-leave-down": {
+      "file": "/assets/game/ui/team-leave-down.webp",
+      "width": 12,
+      "height": 12
+    },
+    "team-arrow-up": { "file": "/assets/game/ui/team-arrow-up.webp", "width": 12, "height": 7 },
+    "team-arrow-over": { "file": "/assets/game/ui/team-arrow-over.webp", "width": 12, "height": 7 },
+    "team-arrow-down": { "file": "/assets/game/ui/team-arrow-down.webp", "width": 12, "height": 7 },
+    "arena-row-1": { "file": "/assets/game/ui/arena-row-1.webp", "width": 496, "height": 59 },
+    "arena-row-2": { "file": "/assets/game/ui/arena-row-2.webp", "width": 496, "height": 59 },
+    "arena-row-3": { "file": "/assets/game/ui/arena-row-3.webp", "width": 496, "height": 59 },
+    "arena-header": { "file": "/assets/game/ui/arena-header.webp", "width": 478, "height": 26 },
+    "arena-card-slot": {
+      "file": "/assets/game/ui/arena-card-slot.webp",
+      "width": 71,
+      "height": 58
+    },
+    "arena-card-slot-base": {
+      "file": "/assets/game/ui/arena-card-slot-base.webp",
+      "width": 83,
+      "height": 85
+    },
+    "arena-button-plate": {
+      "file": "/assets/game/ui/arena-button-plate.webp",
+      "width": 78,
+      "height": 18
+    },
+    "arena-button-plate-hover": {
+      "file": "/assets/game/ui/arena-button-plate-hover.webp",
+      "width": 88,
+      "height": 28
+    },
+    "arena-cloud-left": {
+      "file": "/assets/game/ui/arena-cloud-left.webp",
+      "width": 40,
+      "height": 19
+    },
+    "arena-cloud-right": {
+      "file": "/assets/game/ui/arena-cloud-right.webp",
+      "width": 38,
+      "height": 24
+    },
+    "arena-banner": { "file": "/assets/game/ui/arena-banner.webp", "width": 556, "height": 73 },
+    "arena-leaf": { "file": "/assets/game/ui/arena-leaf.webp", "width": 62, "height": 48 },
+    "arena-scroll": { "file": "/assets/game/ui/arena-scroll.webp", "width": 536, "height": 247 },
+    "arena-scroll-rod": {
+      "file": "/assets/game/ui/arena-scroll-rod.webp",
+      "width": 50,
+      "height": 224
+    },
+    "arena-scroll-header": {
+      "file": "/assets/game/ui/arena-scroll-header.webp",
+      "width": 448,
+      "height": 20
+    },
+    "arena-brush-blue": {
+      "file": "/assets/game/ui/arena-brush-blue.webp",
+      "width": 130,
+      "height": 34
+    },
+    "arena-brush-pink": {
+      "file": "/assets/game/ui/arena-brush-pink.webp",
+      "width": 130,
+      "height": 34
+    },
+    "arena-card-own": {
+      "file": "/assets/game/ui/arena-card-own.webp",
+      "width": 176,
+      "height": 187
+    },
+    "arena-card-foe": {
+      "file": "/assets/game/ui/arena-card-foe.webp",
+      "width": 176,
+      "height": 187
+    },
+    "arena-name-own": { "file": "/assets/game/ui/arena-name-own.webp", "width": 134, "height": 23 },
+    "arena-name-foe": { "file": "/assets/game/ui/arena-name-foe.webp", "width": 134, "height": 23 },
+    "arena-info-box": { "file": "/assets/game/ui/arena-info-box.webp", "width": 179, "height": 63 },
+    "arena-info-frame": {
+      "file": "/assets/game/ui/arena-info-frame.webp",
+      "width": 182,
+      "height": 66
+    },
+    "arena-vs-v": { "file": "/assets/game/ui/arena-vs-v.webp", "width": 61, "height": 70 },
+    "arena-vs-s": { "file": "/assets/game/ui/arena-vs-s.webp", "width": 41, "height": 67 },
+    "arena-button": { "file": "/assets/game/ui/arena-button.webp", "width": 165, "height": 26 },
+    "arena-button-hover": {
+      "file": "/assets/game/ui/arena-button-hover.webp",
+      "width": 165,
+      "height": 26
+    },
+    "arena-button-pressed": {
+      "file": "/assets/game/ui/arena-button-pressed.webp",
+      "width": 165,
+      "height": 26
+    },
+    "honor-inner-1": {
+      "file": "/assets/game/ui/honor-inner-1.webp",
+      "width": 303,
+      "height": 322,
+      "slice": { "top": 4, "right": 4, "bottom": 4, "left": 4 }
+    },
+    "honor-inner-2": {
+      "file": "/assets/game/ui/honor-inner-2.webp",
+      "width": 100,
+      "height": 57,
+      "slice": { "top": 23, "right": 44, "bottom": 29, "left": 50 }
+    },
+    "honor-name": {
+      "file": "/assets/game/ui/honor-name.webp",
+      "width": 75,
+      "height": 22,
+      "slice": { "top": 10, "right": 19, "bottom": 11, "left": 19 }
+    },
+    "honor-name-2": {
+      "file": "/assets/game/ui/honor-name-2.webp",
+      "width": 75,
+      "height": 22,
+      "slice": { "top": 10, "right": 19, "bottom": 11, "left": 19 }
+    },
+    "honor-divider": {
+      "file": "/assets/game/ui/honor-divider.webp",
+      "width": 119,
+      "height": 2,
+      "slice": { "top": 0, "right": 30, "bottom": 1, "left": 30 }
+    },
+    "honor-pot": {
+      "file": "/assets/game/ui/honor-pot.webp",
+      "width": 122,
+      "height": 120,
+      "slice": { "top": 4, "right": 4, "bottom": 4, "left": 4 }
+    },
+    "honor-tab": {
+      "file": "/assets/game/ui/honor-tab.webp",
+      "width": 79,
+      "height": 72,
+      "slice": { "top": 4, "right": 4, "bottom": 4, "left": 4 }
+    }
   }
 }

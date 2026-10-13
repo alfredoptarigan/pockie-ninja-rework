@@ -13,6 +13,7 @@ import { mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node
 import { join } from 'node:path'
 import { format, resolveConfig } from 'prettier'
 import sharp from 'sharp'
+import { exportArena } from './assets/arena.ts'
 import { ACTION_NAMES, exportMonsters, exportNpcs, exportOutfits } from './assets/characters.ts'
 import { exportCreateRole } from './assets/create-role.ts'
 import { exportItems, exportWeapons, exportWorldMap } from './assets/extra.ts'
@@ -178,10 +179,15 @@ async function exportCreateScreen() {
   await writeJson(join(paths.generated, 'game-create-role.json'), await exportCreateRole())
   console.log('Exported the character creation screen')
 }
-// `pnpm assets:export [game|extra|ui|create]` runs one part; no argument runs everything.
+// Arena faces, arena NPC art and the mob art only they use (run after `game` and `extra`).
+async function exportArenaArt() {
+  await writeJson(join(paths.generated, 'game-arena.json'), await exportArena())
+}
+// `pnpm assets:export [game|extra|ui|create|arena]` runs one part; no argument runs everything.
 const part = process.argv[2]
 if (!part) await exportLanding()
 if (!part || part === 'game') await exportGame()
 if (!part || part === 'extra') await exportExtra()
 if (!part || part === 'ui') await exportUiSkin()
 if (!part || part === 'create') await exportCreateScreen()
+if (!part || part === 'arena') await exportArenaArt()

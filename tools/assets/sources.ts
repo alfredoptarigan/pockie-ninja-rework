@@ -31,7 +31,7 @@ function gameData<T>(name: string): T {
 }
 
 /** Latest version of a client table: files are named <name>.s<version>.kv (or <name>.kv). */
-function keyValueTable(name: string): Record<string, string> {
+export function keyValueTable(name: string): Record<string, string> {
   const versions = readdirSync(paths.keyValueTables)
     .map((file) => ({ file, match: new RegExp(`^${name}(?:\\.s(\\d+))?\\.kv$`).exec(file) }))
     .filter((entry) => entry.match)
