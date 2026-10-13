@@ -17,6 +17,7 @@ import {
   playerOutfits,
   sliceItemIds,
 } from './extra.ts'
+import { arenaNpcs } from './arena.ts'
 import tableGaps from './weapon-table-gaps.json'
 import { paths } from './paths.ts'
 import { CITY_SCENES, FIELD_SCENES, VILLAGE_SCENES } from './sources.ts'
@@ -137,6 +138,33 @@ describe('M2 extra asset coverage', () => {
       }
     }
   }, 30_000)
+
+  it('resolves every arena outfit/weapon pair to exported WebP layers', () => {
+    const arena = JSON.parse(readFileSync(join(paths.generated, 'game-arena.json'), 'utf8'))
+    expect(arena.gaps.weaponsWithoutLayers).toEqual([])
+    const pairs = new Set<string>()
+    for (const npc of Object.values(arenaNpcs())) {
+      if (!('clothing' in npc)) continue
+      const pair = `${npc.clothing}:${npc.weapon}`
+      if (pairs.has(pair)) continue
+      pairs.add(pair)
+      const index = gameWeapons.outfits[npc.clothing]
+      expect(index?.keys, pair).toContain(npc.weapon)
+      const sets = JSON.parse(
+        readFileSync(join(paths.root, 'client/public', index!.file), 'utf8'),
+      ) as WeaponLayers
+      const set = sets[npc.weapon]!
+      expect(set.missing, pair).toEqual({ actions: [], skills: [] })
+      expect(Object.keys(set.motions).length, pair).toBeGreaterThan(0)
+      for (const motion of Object.values(set.actions).concat(Object.values(set.skills)))
+        if (motion !== null) expect(set.motions[motion], pair).toBeDefined()
+      for (const sheet of Object.values(set.motions)) {
+        expect(sheet.file).toMatch(/\.webp$/)
+        fileExists(sheet.file)
+      }
+    }
+    expect(pairs.size).toBe(186)
+  })
 
   it('covers all 34 original map places inside the painting, with their button art', () => {
     fileExists(gameWorldMap.file)

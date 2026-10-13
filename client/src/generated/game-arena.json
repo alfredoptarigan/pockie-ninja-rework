@@ -827,44 +827,5 @@
       "10002": "21"
     }
   },
-  "gaps": {
-    "facesNotInBackup": [25, 38, 41, 43, 59, 68, 71],
-    "weaponsWithoutLayers": [
-      "10:blunt11",
-      "10:blunt9",
-      "11:gloves11",
-      "11:gloves9",
-      "13:gloves11",
-      "13:gloves9",
-      "14:blunt11",
-      "14:blunt9",
-      "1:sharp11",
-      "26:blunt9",
-      "32:blunt11",
-      "32:blunt9",
-      "33:sharp11",
-      "33:sharp9",
-      "35:gloves11",
-      "37:gloves11",
-      "37:gloves9",
-      "42:blunt11",
-      "42:blunt9",
-      "45:gloves11",
-      "45:gloves9",
-      "46:blunt11",
-      "46:blunt9",
-      "49:sharp11",
-      "49:sharp9",
-      "4:sharp11",
-      "58:blunt11",
-      "64:sharp11",
-      "64:sharp9",
-      "65:gloves11",
-      "65:gloves9",
-      "6:sharp11",
-      "6:sharp9",
-      "72:gloves9",
-      "7:sharp9"
-    ]
-  }
+  "gaps": { "facesNotInBackup": [25, 38, 41, 43, 59, 68, 71], "weaponsWithoutLayers": [] }
 }
