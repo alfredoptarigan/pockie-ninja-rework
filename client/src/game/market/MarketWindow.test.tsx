@@ -153,6 +153,8 @@ describe('Market helpers', () => {
     expect(searchItemIds('zzzz-no-such-item')).toEqual([])
     const ids = searchItemIds('Dogsmasher')
     expect(ids).toContain('i250101')
+    // Items only the Market knows by name (food, materials) are found too.
+    expect(searchItemIds('Strawberry')).toContain('i120010')
   })
   it('formats the time left', () => {
     const now = Date.parse('2026-10-13T00:00:00Z')
