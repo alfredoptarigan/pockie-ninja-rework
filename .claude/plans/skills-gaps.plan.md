@@ -1,7 +1,7 @@
 # Plan: Skills gaps (M3/M4 cleanup + Ninjutsu milestone)
 
 **Project**: Pockie Ninja Remastered
-**Status**: A1, A2, A3, A6, B1 done on main. A4 in progress. A5 and B7 on Codex's branch, not merged. B2-B6 open.
+**Status**: A1, A2, A3, A4, A6, B1 done on main; every live monster skill has a script. A5 and B7 on Codex's branch, not merged. B2-B6 open.
 **Source**: skills audit of 2026-10-13 (regular, ultimate/scroll and monster skills vs the original
 server in `~/Privates/game-pockieninja/app/code/props/serv/game/Resource`, decompiled Java in
 `local-run/.runtime/decompiled`).
@@ -40,7 +40,7 @@ Each task: TDD, port 1:1 from the Rhino script, remove the ids from `unportedKno
       11837, 11838 in `scripts/monster-skills.ts` (same `mpStrike` shape as M2).
 - [x] **A3 Instance basics.** Skill 2 Heavy Strike (x1, level-based MP; ~1060 NPCs) and skill 3
       Heavy Attack (x3, 10% MaxMP; Las Noches floors).
-- [ ] **A4 Las Noches bosses.** 5, 6, 7, 8, 5000, 60001-60005 and buffs 11882, 11883, 11886.
+- [x] **A4 Las Noches bosses.** 5, 6, 7, 8, 5000, 60001-60005 and buffs 11882, 11883, 11886.
       60003/60004/60005 reuse the 1815/40019/1830 scripts and already fight (done with A2 and B1).
 - [ ] **A5 Secret Technique Scroll.** Either build the treasure box (open with Seal Breakers or
       gold, 5-card pick, server-side roll, test-first since it moves items) or pull i159000-i159003
