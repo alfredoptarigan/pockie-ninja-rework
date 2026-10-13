@@ -4,6 +4,7 @@
 import type { BoardPlayer } from '@pockie/shared'
 import { useId, useState } from 'react'
 import { errorMessage } from '../api'
+import { tierName } from '../arena/labels'
 import { Dialog, GameButton, Notice, Tabs } from '../skin'
 import type { WindowProps } from '../windows'
 import { useBoardListing, useTeam, useTeamAction, useTeamBoard } from './api'
@@ -15,7 +16,7 @@ const TABS: { id: Tab; title: string }[] = [
 ]
 
 const tier = (player: BoardPlayer) =>
-  player.arenaTier === null ? 'no arena tier' : `arena tier ${player.arenaTier}`
+  player.arenaTier === null ? 'unranked' : `arena rank ${tierName(player.arenaTier)}`
 
 export function TeamBoardWindow({ character, onClose }: WindowProps) {
   const [tab, setTab] = useState<Tab>('teams')
@@ -71,7 +72,7 @@ export function TeamBoardWindow({ character, onClose }: WindowProps) {
                   data.teams.map((row) => (
                     <BoardRow
                       key={row.teamId}
-                      label={`${row.captain.name} (Lv ${row.captain.level}, ${tier(row.captain)}) and ${row.member.name} (Lv ${row.member.level}, ${tier(row.member)})`}
+                      label={`${row.captain.name} (Lv. ${row.captain.level}, ${tier(row.captain)}) and ${row.member.name} (Lv. ${row.member.level}, ${tier(row.member)})`}
                       button="Join"
                       disabled={action.isPending || inTeam}
                       onClick={() => ask('apply', row.captain)}
@@ -85,7 +86,7 @@ export function TeamBoardWindow({ character, onClose }: WindowProps) {
                   data.solos.map((player) => (
                     <BoardRow
                       key={player.characterId}
-                      label={`${player.name} (Lv ${player.level}, ${tier(player)})`}
+                      label={`${player.name} (Lv. ${player.level}, ${tier(player)})`}
                       button="Invite"
                       disabled={
                         action.isPending ||

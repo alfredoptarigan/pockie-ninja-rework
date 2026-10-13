@@ -27,6 +27,9 @@ const levels = game<{ levelexp: Record<string, number>; role: { maxlevel: number
 const taskMonsterDrops = game<Record<string, Row[]>>('task-monster-drops')
 const sceneBuildings =
   game<{ SceneID: number; ClipName: string; NameFlag: string }[]>('scene-buildings')
+const honorShop = game<Record<string, Row>>('arena-honor-shop')
+const arenaTiers = game<Record<string, { npcs: string[] }>>('arena-tiers')
+const tollGates = game<Record<string, { TollGateName: string }>>('toll-gates')
 
 const VILLAGES = [111, 121, 131, 141, 151]
 const FIELD_ZONES = [21, 22, 23, 24, 25]
@@ -169,7 +172,20 @@ for (const [id, spot] of Object.entries(exploreSpots)) {
 for (const [id, row] of Object.entries(items)) {
   if (row.class === 'PharmacyItem' && Number(row.UseLevel ?? 0) <= 20) addItem(id)
 }
+for (const id of Object.keys(honorShop)) addItem(id)
 for (const id of itemIds) keys.add(`lg_${items[id]!.Name}`)
+
+// Market, arena and rankings windows: every Market item (any tradable bag item can be listed), the
+// Honor shop items, the arena fighters' names (their ids differ from their name keys), and the
+// toll gate names of the weekly rankings. Market-only items carry a name, not bag behaviour.
+const nameOnlyItems = Object.keys(items).filter((id) => items[id]!.MartType)
+const arenaNpcNames: Record<string, string> = {}
+for (const tier of Object.values(arenaTiers)) {
+  for (const id of tier.npcs) if (npcs[id]) arenaNpcNames[id] = `lg_${npcs[id].Name}`
+}
+for (const key of Object.values(arenaNpcNames)) keys.add(key)
+for (const id of nameOnlyItems) keys.add(`lg_${items[id]!.Name}`)
+for (const gate of Object.values(tollGates)) keys.add(`lg_${gate.TollGateName}`)
 
 // Common UI labels: weapon classes and starting outfits.
 for (const n of [1, 2, 4, 7]) keys.add(`lg_Common_RolePopsinger${n}`)
@@ -232,6 +248,10 @@ const outputs = {
       .filter((id) => items[id]!.class !== 'EquipItem' && Number(items[id]!.CanUse) === 1)
       .sort(),
     itemNames: sorted(Object.fromEntries([...itemIds].map((id) => [id, `lg_${items[id]!.Name}`]))),
+    marketItemNames: sorted(
+      Object.fromEntries(nameOnlyItems.map((id) => [id, `lg_${items[id]!.Name}`])),
+    ),
+    arenaNpcNames: sorted(arenaNpcNames),
     exploreMonsters: sorted(exploreMonsters),
   },
 }

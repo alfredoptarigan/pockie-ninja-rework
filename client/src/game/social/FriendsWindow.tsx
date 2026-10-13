@@ -16,7 +16,7 @@ const village = (nation: number) => plainText(`lg_Common_Nation_${nation}`, 'Vil
 function PlayerInfo({ player }: { player: SocialPlayer }) {
   return (
     <span className="min-w-0 flex-1 truncate">
-      <span className="font-semibold">{player.name}</span> Lv {player.level}{' '}
+      <span className="font-semibold">{player.name}</span> Lv. {player.level}{' '}
       {village(player.nation)}
     </span>
   )

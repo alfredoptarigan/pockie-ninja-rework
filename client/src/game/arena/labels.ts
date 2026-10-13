@@ -1,5 +1,6 @@
 // English labels for the arena (pvp-rankings.md 2.1 tier names, 2.7 log types).
 import { plainText } from '../text'
+import data from '../world-data.json'
 import type { ArenaLogKind, ArenaSlotView } from '../../../../shared/src/schemas/arena'
 
 /** competerank.ini tiers 0-21 (client TipRank_1-22). */
@@ -37,7 +38,10 @@ export const tierName = (tier: number) => TIER_NAMES[tier] ?? `Rank ${tier + 1}`
 export const score = (raw: number) => (raw / 100).toFixed(2)
 export const signedScore = (raw: number) => `${raw >= 0 ? '+' : ''}${score(raw)}`
 
-export const npcName = (npcId: string) => plainText(`lg_name_${npcId}`, 'Arena Fighter')
+// Arena fighter ids (n401001) differ from their name keys (name_n401001, name_n31017).
+const arenaNpcNames = data.arenaNpcNames as Record<string, string>
+export const npcName = (npcId: string) =>
+  plainText(arenaNpcNames[npcId] ?? `lg_name_${npcId}`, 'Arena Fighter')
 
 export function slotName(slot: ArenaSlotView) {
   if (slot.kind === 'player') return slot.name

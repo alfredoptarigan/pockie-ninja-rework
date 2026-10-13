@@ -32,7 +32,10 @@ const equipment = new Set(data.equipment)
 export const isEquipment = (itemId: string) => equipment.has(itemId)
 const usable = new Set(data.usable)
 export const isUsable = (itemId: string) => usable.has(itemId)
-export const itemNameKey = (itemId: string) => itemNames[itemId] ?? `lg_${itemId}`
+// Items that only the Market lists (no bag behaviour, no icon check): name keys alone.
+const marketItemNames = data.marketItemNames as Record<string, string>
+export const itemNameKey = (itemId: string) =>
+  itemNames[itemId] ?? marketItemNames[itemId] ?? `lg_${itemId}`
 
 const allowed = (character: Character, level: number, nation: number) =>
   character.level >= level && (nation === -1 || nation === character.nation)
