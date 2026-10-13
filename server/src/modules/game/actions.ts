@@ -1,4 +1,3 @@
-import { requireBagRoom } from '../../game/bag.js'
 // Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
 import { createRandom, deriveStats } from '@pockie/game-core'
 import { buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
@@ -46,7 +45,7 @@ import {
 } from '../../game/quests.js'
 import { playerFighter } from '../../game/combat.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
-
+import { requireBagRoom } from '../../game/bag.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
