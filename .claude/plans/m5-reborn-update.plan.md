@@ -1,7 +1,7 @@
 # Plan: Reborn Update (Milestone 5)
 
 **Project**: Pockie Ninja Remastered
-**Status**: In progress (2026-10-13). Wave 1 (tasks 1-3) and task 9 merged; tasks 4 and 5 running.
+**Status**: In progress (2026-10-13). Waves 1-2 (tasks 1-5, 9) merged; wave 3 next.
 **Complexity**: Large
 **Reference (primary source)**: `m5-reborn-reference.md`, normalized data in
 `data/reborn-raw/re/normalized/{talents,bloodlines,skills,quests,events}.json`, raw
@@ -340,7 +340,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
   19xx0 skill of the 49 outfits; reproducible (second run writes 0 files).
 - **Validate**: `pnpm --filter @pockie/tools test -- reborn && pnpm assets:reborn && du -sh client/public/assets/reborn && git lfs ls-files | wc -l`
 
-### Task 4: Fight engine: talents, Reborn stat bonuses, threshold
+### Task 4: Fight engine: talents, Reborn stat bonuses, threshold (done)
 - **Action**: `game-core/src/reborn/talents.ts` (`narrowGap(enemy, mine, level)`, `talentCap(level)`,
   `upgradeCost(n)`, `rollUpgrade(random)` per decision 7, `canActivate`);
   `FighterInput.talents?: Partial<Record<1|...|8, number>>` (active only, levels capped); apply
@@ -354,7 +354,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
   not.
 - **Validate**: `pnpm --filter @pockie/game-core test`
 
-### Task 5: Scroll skill scripts
+### Task 5: Scroll skill scripts (done; also extended `fight.ts`/`buffs.ts` with damage, healing and revive hooks for scroll buffs, guarded so 2011 skills behave as before)
 - **Action**: 12 scripts in `scroll-skills.ts`, buffs 15001+ in `scroll-buffs.ts`, per decision 17:
 
   | Skill | Effect |
