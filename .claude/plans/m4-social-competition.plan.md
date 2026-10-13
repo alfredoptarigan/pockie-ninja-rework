@@ -1,7 +1,7 @@
 # Plan: Social & Competition (Milestone 4)
 
 **Project**: Pockie Ninja Remastered
-**Status**: Planned (2026-10-13); wave 0 running (Codex: bag capacity, Las Noches auto)
+**Status**: In progress. Wave 0 and wave 1 merged; wave 2 tasks 5, 7, 8, 9 merged (server, routes wired in `app.ts`) on 2026-10-13. Open: task 6 team runs, arena client, client HUD wiring, waves 3
 **Complexity**: Large
 
 ## Goal

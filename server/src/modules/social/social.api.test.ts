@@ -14,7 +14,7 @@ import {
   MAX_FRIENDS,
   PLAYER_INBOX_CAP,
 } from '../../../../shared/src/schemas/social.js'
-import { isBlocked, purgeExpiredMail, socialRoutes } from './routes.js'
+import { isBlocked, purgeExpiredMail } from './routes.js'
 
 const { db, close } = createTestDb()
 const base = '/api/game/social'
@@ -89,8 +89,6 @@ let sasuke: Ninja
 beforeEach(async () => {
   await truncateAll(db)
   app = buildTestApp(db)
-  // ponytail: remove this line once app.ts registers socialRoutes under the same prefix.
-  app.register(socialRoutes, { db, prefix: base })
   notices = []
   offNotice = presence.onNotice((id, notice) => notices.push([id, notice]))
   naruto = await ninja('Naruto_01')

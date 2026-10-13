@@ -3,15 +3,13 @@
 import { and, eq } from 'drizzle-orm'
 import { buildTestApp, Client, type createTestDb } from '../../../test/helpers.js'
 import { arenaLogs, arenaOpponents, arenaPlayers, characters } from '../../db/schema.js'
-import { arenaRoutes } from './routes.js'
 
 type TestDb = ReturnType<typeof createTestDb>['db']
 export type Ninja = Awaited<ReturnType<ReturnType<typeof arenaTestApp>['ninja']>>
 
-/** The test app with the arena registered (the coordinator wires it in app.ts). */
+/** The test app (app.ts registers the arena). */
 export function arenaTestApp(db: TestDb) {
   const app = buildTestApp(db)
-  app.register(arenaRoutes, { db, prefix: '/api/game/arena' })
   let count = 0
 
   async function ninja(name: string) {

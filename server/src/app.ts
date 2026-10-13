@@ -14,7 +14,10 @@ import { actionRoutes } from './modules/game/actions.js'
 import { exploreRoutes } from './modules/game/explore.js'
 import { forgeRoutes } from './modules/forge/routes.js'
 import { gateRoutes } from './modules/gates/routes.js'
+import { arenaRoutes } from './modules/arena/routes.js'
+import { rankingRoutes } from './modules/rankings/routes.js'
 import { attachRealtime } from './modules/realtime/realtime.js'
+import { socialRoutes } from './modules/social/routes.js'
 import { statusRoutes } from './modules/status/routes.js'
 
 interface AppOptions {
@@ -66,6 +69,10 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(gateRoutes, { db, prefix: '/api/game/gates' })
   app.register(import('./modules/shop/routes.js'), { db, prefix: '/api/game/shop' })
   app.register(import('./modules/daily/routes.js'), { db, prefix: '/api/game/daily' })
+  app.register(socialRoutes, { db, prefix: '/api/game/social' })
+  app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
+  app.register(arenaRoutes, { db, prefix: '/api/game/arena' })
+  app.register(rankingRoutes, { db, prefix: '/api/game/rankings' })
 
   return app
 }

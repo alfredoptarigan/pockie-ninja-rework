@@ -1,16 +1,14 @@
-// Shared setup of the rankings API tests: the app with the rankings routes (the coordinator wires
-// them into app.ts), one logged-in ninja and a fast way to add many ranked ninjas.
+// Shared setup of the rankings API tests: the app (app.ts registers the rankings
+// routes), one logged-in ninja and a fast way to add many ranked ninjas.
 import { eq } from 'drizzle-orm'
 import { buildTestApp, Client, type createTestDb } from '../../../test/helpers.js'
 import { characters, users } from '../../db/schema.js'
-import { rankingRoutes } from './routes.js'
 
 type TestDb = ReturnType<typeof createTestDb>['db']
 export type CharacterValues = Partial<typeof characters.$inferInsert>
 
 export async function setUpRankings(db: TestDb) {
   const app = buildTestApp(db)
-  app.register(rankingRoutes, { db, prefix: '/api/game/rankings' })
   const client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Player_one',
