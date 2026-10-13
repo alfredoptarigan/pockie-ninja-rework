@@ -181,6 +181,10 @@ export const characters = pgTable(
     // VIP membership (decision 14) runs until this instant; null means none.
     vipUntil: timestamp('vip_until', { withTimezone: true }),
     createdAt: createdAt(),
+    // Market wallet (MartCapital0 Stone, MartCapital1 Gold): sale proceeds after tax, moved to
+    // stone/gold by an explicit claim.
+    marketStone: currency('market_stone'),
+    marketGold: currency('market_gold'),
   },
   (t) => [
     uniqueIndex('characters_user_id_key').on(t.userId),
@@ -202,8 +206,22 @@ export const characters = pgTable(
       'characters_instance_counts',
       sql`${t.tollGateEntries} >= 0 and ${t.pubFightsToday} >= 0`,
     ),
+    check('characters_market_wallet', sql`${t.marketStone} >= 0 and ${t.marketGold} >= 0`),
+    // Rankings (decision 13), ties to the older ninja. `desc().nullsFirst()` matches a plain
+    // `order by ... desc`, so the index serves it.
+    index('characters_level_rank_idx').on(
+      t.level.desc().nullsFirst(),
+      t.exp.desc().nullsFirst(),
+      t.createdAt,
+      t.id,
+    ),
+    index('characters_stone_rank_idx').on(t.stone.desc().nullsFirst(), t.createdAt, t.id),
   ],
 )
+
+// Where an inventory item is: in the bag (or equipped), listed on the Market, or waiting in the
+// Market warehouse. Bag queries must filter `location = 'bag'`.
+export const itemLocation = pgEnum('item_location', ['bag', 'market', 'warehouse'])
 
 export const inventoryItems = pgTable(
   'inventory_items',
@@ -235,9 +253,15 @@ export const inventoryItems = pgTable(
     props: jsonb('props').$type<ItemProp[]>().notNull().default([]),
     // ImpressIdentRec: the engraved (locked) property position 0-3, null = none.
     engravedSlot: smallint('engraved_slot'),
+    // Listed and warehoused Market items keep their row (and instance state) but leave the bag.
+    location: itemLocation('location').notNull().default('bag'),
   },
   (t) => [
     index('inventory_items_character_id_idx').on(t.characterId),
+    check(
+      'inventory_items_equipped_in_bag',
+      sql`${t.equippedSlot} is null or ${t.location} = 'bag'`,
+    ),
     uniqueIndex('inventory_items_equipped_slot_key')
       .on(t.characterId, t.equippedSlot)
       .where(sql`${t.equippedSlot} is not null`),
@@ -494,8 +518,12 @@ export const tollGateRuns = pgTable(
     // Peeks bought on this deal (LookCap index).
     peeks: smallint('peeks').notNull().default(0),
     startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
+    // The team the run belongs to (one row per member); null = solo. Kept when the team ends,
+    // so the members finish their own card flip.
+    teamId: uuid('team_id').references((): AnyPgColumn => teams.id, { onDelete: 'set null' }),
   },
   (t) => [
+    index('toll_gate_runs_team_id_idx').on(t.teamId),
     check('toll_gate_runs_progress', sql`${t.subGate} >= 0 and ${t.point} >= 0`),
     check('toll_gate_runs_card_state', sql`${t.cardState} between 0 and 3`),
     check('toll_gate_runs_cards', jsonbArray(t.cards, 5)),
@@ -538,6 +566,8 @@ export const singleGate = pgTable(
     floor50Broadcast: boolean('floor_50_broadcast').notNull().default(false),
   },
   (t) => [
+    // Las Noches best floor ranking (gametop list 10).
+    index('single_gate_best_floor_rank_idx').on(t.bestFloor.desc().nullsFirst(), t.characterId),
     check('single_gate_best_floor', sql`${t.bestFloor} between 0 and 170`),
     check('single_gate_current_floor', sql`${t.currentFloor} between 1 and 170`),
     check(
@@ -566,5 +596,534 @@ export const pubFightLineups = pgTable(
   (t) => [
     primaryKey({ columns: [t.characterId, t.sceneId] }),
     check('pub_fight_lineups_npc_ids', sql`cardinality(${t.npcIds}) = 3`),
+  ],
+)
+
+// Social (docs/original-data/friends-mail.md). Everything is keyed by character id, not by name.
+
+// FriendRecord: one-sided rows; both directions present = mutual.
+export const friends = pgTable(
+  'friends',
+  {
+    ownerId: uuid('owner_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    friendId: uuid('friend_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // FriendRecord col 7 (intimacy): true = home friend (mutual, used by homes in M6).
+    homeFriend: boolean('home_friend').notNull().default(false),
+    // Common_AddFriendPrompt: the friend has not answered the add-back prompt for this row yet
+    // (shown at their next login when they were offline). One per pair by the primary key.
+    addBackPending: boolean('add_back_pending').notNull().default(true),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.ownerId, t.friendId] }),
+    // "Who lists me": add-back prompts, the mutual flag and presence pushes.
+    index('friends_friend_id_idx').on(t.friendId),
+    check('friends_not_self', sql`${t.ownerId} <> ${t.friendId}`),
+  ],
+)
+
+// The Blocked list (decision 17; replaces the original EnemyRecord "block mail" flag).
+export const blocks = pgTable(
+  'blocks',
+  {
+    ownerId: uuid('owner_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    blockedId: uuid('blocked_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.ownerId, t.blockedId] }),
+    index('blocks_blocked_id_idx').on(t.blockedId),
+    check('blocks_not_self', sql`${t.ownerId} <> ${t.blockedId}`),
+  ],
+)
+
+// Mail categories (Mail window tabs, UI_MailFrame._mailTypeAry) used in M4. Original types:
+// 2 player, 8 arena, 10 market, 4 interaction (friend notices), 9 Las Noches, 1 other.
+// Every category but `player` is system mail. Add values with ALTER TYPE when a system needs one.
+export const mailCategory = pgEnum('mail_category', [
+  'player',
+  'arena',
+  'market',
+  'interaction',
+  'las_noches',
+  'other',
+])
+
+/** Params of a system mail template: names, item ids, amounts (rendered by the client). */
+export type MailParams = Record<string, string | number>
+
+// MailRecord. Player mail: subject + body (plain text). System mail: templateKey + params
+// (SendSystemHintMail without the `\b` encoding). No attachments (decision 3).
+export const mails = pgTable(
+  'mails',
+  {
+    id: id(),
+    recipientId: uuid('recipient_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // SendUid; null for system mail (and set to null when the sender is gone).
+    senderId: uuid('sender_id').references(() => characters.id, { onDelete: 'set null' }),
+    category: mailCategory('category').notNull(),
+    // PlayerMailMaxTitleWord 20, PlayerMailMaxTextWord 200.
+    subject: text('subject'),
+    body: text('body'),
+    templateKey: text('template_key'),
+    params: jsonb('params').$type<MailParams>(),
+    // State: 0 unread / 1 read.
+    readAt: timestamp('read_at', { withTimezone: true }),
+    createdAt: createdAt(),
+    // 7 days for player mail, 30 days for system mail (decision 18); purged by a job.
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [
+    // Inbox list with the expiry filter.
+    index('mails_recipient_expires_idx').on(t.recipientId, t.expiresAt),
+    // Per-category list and the inbox caps (count, oldest first).
+    index('mails_recipient_category_idx').on(t.recipientId, t.category, t.createdAt),
+    // Purge job.
+    index('mails_expires_at_idx').on(t.expiresAt),
+    // Per-sender rate limits.
+    index('mails_sender_created_idx').on(t.senderId, t.createdAt),
+    check(
+      'mails_kind',
+      sql`case when ${t.category} = 'player'
+        then ${t.subject} is not null and ${t.body} is not null and ${t.templateKey} is null and ${t.params} is null
+        else ${t.senderId} is null and ${t.subject} is null and ${t.body} is null and ${t.templateKey} is not null and ${t.params} is not null end`,
+    ),
+    check(
+      'mails_lengths',
+      sql`char_length(${t.subject}) between 1 and 20 and char_length(${t.body}) between 1 and 200 and char_length(${t.templateKey}) between 1 and 100`,
+    ),
+    check('mails_params', sql`jsonb_typeof(${t.params}) = 'object'`),
+    check('mails_expiry', sql`${t.expiresAt} > ${t.createdAt}`),
+  ],
+)
+
+export const reportKind = pgEnum('report_kind', ['whisper', 'mail', 'chat'])
+
+// Player reports (decision 19), read by the M6 admin view. The text is a copy, so a report
+// outlives the mail's deletion or expiry.
+export const reports = pgTable(
+  'reports',
+  {
+    id: id(),
+    reporterId: uuid('reporter_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    reportedId: uuid('reported_id').references(() => characters.id, { onDelete: 'set null' }),
+    kind: reportKind('kind').notNull(),
+    mailId: uuid('mail_id').references(() => mails.id, { onDelete: 'set null' }),
+    // Chat channel of a reported chat line (world, scene, team); null for whispers and mail.
+    channel: text('channel'),
+    text: text('text').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('reports_reported_id_idx').on(t.reportedId),
+    index('reports_created_at_idx').on(t.createdAt),
+    // One report per mail and reporter.
+    uniqueIndex('reports_reporter_mail_key')
+      .on(t.reporterId, t.mailId)
+      .where(sql`${t.mailId} is not null`),
+    check('reports_text', sql`char_length(${t.text}) between 1 and 1000`),
+  ],
+)
+
+// Teams (docs/original-data/teams.md): one server-side row instead of the per-member TeamRec
+// copies. Lock the team row (FOR UPDATE) after the characters for every change.
+export const teams = pgTable(
+  'teams',
+  {
+    id: id(),
+    // TeamRec c1 = 1. The captain also has a team_members row.
+    captainId: uuid('captain_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // The scene every member must be in (13 neutral fields 26xx-28xx or the lobby 3102).
+    sceneId: integer('scene_id').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [uniqueIndex('teams_captain_id_key').on(t.captainId)],
+)
+
+// TeamRec rows: 2-3 per team (TEAM_PLAYERMAX 3, TEAM_MINCOUNT 2); one team per character.
+export const teamMembers = pgTable(
+  'team_members',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    teamId: uuid('team_id')
+      .notNull()
+      .references(() => teams.id, { onDelete: 'cascade' }),
+    // TeamRec c2: fight order 0-2 (TEAM_FIGHTFIRST..THIRD). Not unique per team, so a swap can
+    // be two plain updates; the team row lock keeps it consistent.
+    fightOrder: smallint('fight_order').notNull(),
+    joinedAt: timestamp('joined_at', { withTimezone: true }).notNull().defaultNow(),
+    // Disconnected since (decision 15: 60 s grace, then the member leaves); null = online.
+    offlineSince: timestamp('offline_since', { withTimezone: true }),
+  },
+  (t) => [
+    index('team_members_team_id_idx').on(t.teamId),
+    check('team_members_fight_order', sql`${t.fightOrder} between 0 and 2`),
+  ],
+)
+
+export const teamPromptKind = pgEnum('team_prompt_kind', ['invite', 'apply'])
+
+// Invite (MSGBOX_REQUEST_TEAM) and application (MSGBOX_ASKJOIN_TEAM) prompts: one pending per
+// sender and target, 60 s expiry, re-validated on accept.
+export const teamPrompts = pgTable(
+  'team_prompts',
+  {
+    id: id(),
+    kind: teamPromptKind('kind').notNull(),
+    fromId: uuid('from_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    toId: uuid('to_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // The team joined on accept; null for an invite from a solo player (the team is created
+    // on accept, RequestJoinTeamSuccess).
+    teamId: uuid('team_id').references(() => teams.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [
+    uniqueIndex('team_prompts_pair_key').on(t.fromId, t.toId),
+    index('team_prompts_to_id_idx').on(t.toId),
+    index('team_prompts_team_id_idx').on(t.teamId),
+    check('team_prompts_not_self', sql`${t.fromId} <> ${t.toId}`),
+    check('team_prompts_apply_team', sql`${t.kind} = 'invite' or ${t.teamId} is not null`),
+    check('team_prompts_expiry', sql`${t.expiresAt} > ${t.createdAt}`),
+  ],
+)
+
+// Team stone boards (ReadyTeamRec, RequestTeamRec) per neutral field: a captain of 2 publishing
+// the team (teamId set) or a solo ninja publishing themself (teamId null). One row per ninja.
+export const teamBoardEntries = pgTable(
+  'team_board_entries',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    sceneId: integer('scene_id').notNull(),
+    teamId: uuid('team_id').references(() => teams.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('team_board_entries_scene_idx').on(t.sceneId, t.createdAt),
+    index('team_board_entries_team_id_idx').on(t.teamId),
+  ],
+)
+
+// Market (docs/original-data/trade-market.md, MartSystem + MartServer).
+
+// A listing (SaleItemRec / the domain category row). The listed inventory_items row keeps the
+// seller as owner with location 'market'; its `count` is the count left (partial purchases split
+// it). Lock order: characters by id, then the listing.
+export const marketListings = pgTable(
+  'market_listings',
+  {
+    id: id(),
+    sellerId: uuid('seller_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    inventoryItemId: uuid('inventory_item_id')
+      .notNull()
+      .references(() => inventoryItems.id, { onDelete: 'cascade' }),
+    // MartType category path, plus `_<quality>` for equipment (GetDomainRec).
+    category: text('category').notNull(),
+    // Per-unit prices; null = not offered in that currency; each <= 1,000,000.
+    priceStone: integer('price_stone'),
+    priceGold: integer('price_gold'),
+    // Duration (8, 12 or 24 h) and the Stone fee paid for it (GetCharge, not refunded).
+    hours: smallint('hours').notNull(),
+    fee: integer('fee').notNull(),
+    createdAt: createdAt(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [
+    uniqueIndex('market_listings_inventory_item_id_key').on(t.inventoryItemId),
+    // Browse a category (live rows only) and the expiry sweep.
+    index('market_listings_category_idx').on(t.category, t.expiresAt),
+    index('market_listings_expires_at_idx').on(t.expiresAt),
+    index('market_listings_seller_id_idx').on(t.sellerId),
+    check(
+      'market_listings_prices',
+      sql`(${t.priceStone} is not null or ${t.priceGold} is not null) and ${t.priceStone} between 1 and 1000000 and ${t.priceGold} between 1 and 1000000`,
+    ),
+    check('market_listings_hours', sql`${t.hours} in (8, 12, 24)`),
+    check('market_listings_fee', sql`${t.fee} >= 0`),
+    check('market_listings_expiry', sql`${t.expiresAt} > ${t.createdAt}`),
+  ],
+)
+
+// MartDepotRec: the 15-row Market warehouse. The item row has location 'warehouse' and is owned
+// by the warehouse owner; claiming moves it to the bag and deletes this row.
+export const marketWarehouse = pgTable(
+  'market_warehouse',
+  {
+    inventoryItemId: uuid('inventory_item_id')
+      .primaryKey()
+      .references(() => inventoryItems.id, { onDelete: 'cascade' }),
+    ownerId: uuid('owner_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // Source (Common_MarcketDepotFrom): 0 bought, 1 own listing returned (expired or cancelled).
+    source: smallint('source').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('market_warehouse_owner_idx').on(t.ownerId, t.createdAt),
+    check('market_warehouse_source', sql`${t.source} in (0, 1)`),
+  ],
+)
+
+export const marketAction = pgEnum('market_action', [
+  'list',
+  'buy',
+  'cancel',
+  'expire',
+  'claim_item',
+  'claim_wallet',
+])
+
+// Audit trail of every Market move (the original player logs 100-111). No foreign keys on the
+// listing and item ids: the trail outlives them.
+export const marketAudit = pgTable(
+  'market_audit',
+  {
+    id: id(),
+    action: marketAction('action').notNull(),
+    // The acting ninja (seller on list/cancel/expire, buyer on buy, owner on claims).
+    characterId: uuid('character_id').references(() => characters.id, { onDelete: 'set null' }),
+    // The seller on a buy.
+    counterpartyId: uuid('counterparty_id').references(() => characters.id, {
+      onDelete: 'set null',
+    }),
+    listingId: uuid('listing_id'),
+    inventoryItemId: uuid('inventory_item_id'),
+    itemId: text('item_id'),
+    count: integer('count'),
+    // Amounts moved: the buyer's payment, the seller's payout (after tax) and the claimed wallet.
+    stone: bigint('stone', { mode: 'number' }).notNull().default(0),
+    gold: bigint('gold', { mode: 'number' }).notNull().default(0),
+    // 10% tax kept by the server on a buy; listing fee on a list.
+    taxStone: bigint('tax_stone', { mode: 'number' }).notNull().default(0),
+    taxGold: bigint('tax_gold', { mode: 'number' }).notNull().default(0),
+    fee: bigint('fee', { mode: 'number' }).notNull().default(0),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('market_audit_character_idx').on(t.characterId, t.createdAt),
+    index('market_audit_counterparty_idx').on(t.counterpartyId, t.createdAt),
+    check(
+      'market_audit_amounts',
+      sql`${t.count} > 0 and ${t.stone} >= 0 and ${t.gold} >= 0 and ${t.taxStone} >= 0 and ${t.taxGold} >= 0 and ${t.fee} >= 0`,
+    ),
+  ],
+)
+
+// Arena (docs/original-data/pvp-rankings.md, CompeteSystem + CompeteServer). Honor lives in
+// characters.honor. One row per ninja once they opened the arena.
+
+/** The defence snapshot: the fighter built by the live fight code (decision 9). */
+export type ArenaSnapshot = Record<string, unknown>
+
+export const arenaPlayers = pgTable(
+  'arena_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // Tier 0-21 (competerank.ini); never goes down.
+    tier: smallint('tier').notNull().default(0),
+    // CompeteScore (raw, initscore 93500; shown / 100).
+    score: integer('score').notNull().default(93500),
+    // When the score last changed: the one tie rule (decision 12), earlier holder ranks higher.
+    scoreAt: timestamp('score_at', { withTimezone: true }).notNull().defaultNow(),
+    // m_LastWin (current streak), total fights and wins (defences count) for the win rate.
+    streak: integer('streak').notNull().default(0),
+    fights: integer('fights').notNull().default(0),
+    wins: integer('wins').notNull().default(0),
+    // Daily counters on the UTC day `day` (TestCompeteTime): free tries used (competemaxcount 20),
+    // tries bought (competemaxcountGold 15) and Ninjutsu Duels (competefriendfightcount 10).
+    day: date('day'),
+    triesUsed: smallint('tries_used').notNull().default(0),
+    triesBought: smallint('tries_bought').notNull().default(0),
+    duelsUsed: smallint('duels_used').notNull().default(0),
+    // Last free list refresh (refurbishtime 3600 s, at most one stored).
+    freeRefreshAt: timestamp('free_refresh_at', { withTimezone: true }),
+    // Defence snapshot and when it was built (refreshed on every gear, level or skill change).
+    snapshot: jsonb('snapshot').$type<ArenaSnapshot>(),
+    snapshotAt: timestamp('snapshot_at', { withTimezone: true }),
+  },
+  (t) => [
+    // The arena order (World Rank and the opponent windows): tier, score, tie rule.
+    index('arena_players_rank_idx').on(t.tier.desc().nullsFirst(), t.score.desc().nullsFirst(), t.scoreAt, t.characterId),
+    // Win streak list (tier 2+).
+    index('arena_players_streak_idx').on(t.streak.desc().nullsFirst(), t.characterId),
+    check('arena_players_tier', sql`${t.tier} between 0 and 21`),
+    check(
+      'arena_players_counts',
+      sql`${t.score} >= 0 and ${t.streak} >= 0 and ${t.fights} >= 0 and ${t.wins} between 0 and ${t.fights}`,
+    ),
+    check(
+      'arena_players_daily',
+      sql`${t.triesUsed} >= 0 and ${t.triesBought} between 0 and 15 and ${t.duelsUsed} >= 0`,
+    ),
+    check('arena_players_snapshot', sql`jsonb_typeof(${t.snapshot}) = 'object'`),
+  ],
+)
+
+export const arenaOpponentKind = pgEnum('arena_opponent_kind', ['npc', 'player', 'referee'])
+
+// CompeteClient: the 18 opponent slots (3 rows of 6). Replaced as a whole on a list refresh.
+export const arenaOpponents = pgTable(
+  'arena_opponents',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    slot: smallint('slot').notNull(),
+    kind: arenaOpponentKind('kind').notNull(),
+    // competenpc NPC id (npc), the opponent ninja (player) or the Referee's place (-10..-1).
+    npcId: text('npc_id'),
+    opponentId: uuid('opponent_id').references(() => characters.id, { onDelete: 'cascade' }),
+    refereePlace: smallint('referee_place'),
+    // CompeteClient column 12: each slot can be beaten once.
+    beaten: boolean('beaten').notNull().default(false),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.slot] }),
+    index('arena_opponents_opponent_id_idx').on(t.opponentId),
+    check('arena_opponents_slot', sql`${t.slot} between 0 and 17`),
+    check(
+      'arena_opponents_kind',
+      sql`case ${t.kind}
+        when 'npc' then ${t.npcId} is not null and ${t.opponentId} is null and ${t.refereePlace} is null
+        when 'player' then ${t.npcId} is null and ${t.opponentId} is not null and ${t.refereePlace} is null
+        else ${t.npcId} is null and ${t.opponentId} is null and ${t.refereePlace} between -10 and -1 end`,
+    ),
+  ],
+)
+
+// CompeteFight types: 1 attack, 2 revenge, 3 boss, 4 was attacked; duels (CompeteFriendFight)
+// share the log as duel / duel_defense.
+export const arenaLogKind = pgEnum('arena_log_kind', [
+  'attack',
+  'revenge',
+  'boss',
+  'defense',
+  'duel',
+  'duel_defense',
+])
+
+// The fight log (savaselffightcount 15 per ninja; trimmed by the arena code) with replays.
+export const arenaLogs = pgTable(
+  'arena_logs',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    kind: arenaLogKind('kind').notNull(),
+    // The other side: a ninja (null once deleted) or an NPC / Referee by id.
+    opponentId: uuid('opponent_id').references(() => characters.id, { onDelete: 'set null' }),
+    opponentNpcId: text('opponent_npc_id'),
+    // Name shown in the log (kept when the opponent is gone).
+    opponentName: text('opponent_name').notNull(),
+    // From this ninja's side: 0 loss, 1 win, 2 draw.
+    result: smallint('result').notNull(),
+    scoreDelta: integer('score_delta').notNull().default(0),
+    honor: integer('honor').notNull().default(0),
+    streak: integer('streak').notNull().default(0),
+    replay: jsonb('replay').$type<unknown>().notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('arena_logs_character_idx').on(t.characterId, t.createdAt),
+    index('arena_logs_opponent_id_idx').on(t.opponentId),
+    check('arena_logs_result', sql`${t.result} between 0 and 2`),
+    check('arena_logs_honor', sql`${t.honor} >= 0 and ${t.streak} >= 0`),
+  ],
+)
+
+// Revenges used per target on the UTC day `day` (CanBackAtk: first free, then 10 Gold × used).
+export const arenaRevenges = pgTable(
+  'arena_revenges',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    targetId: uuid('target_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    day: date('day').notNull(),
+    used: smallint('used').notNull().default(0),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.targetId] }),
+    index('arena_revenges_target_id_idx').on(t.targetId),
+    check('arena_revenges_used', sql`${t.used} >= 0`),
+  ],
+)
+
+// Weekly toll gate ranking (pvp-rankings.md 7, toll-gates.md 3.1): best progress per ninja,
+// gate and week (the UTC Monday it starts, decision 14). Top 50 by schedule, ties to the
+// earlier time.
+export const tollGateWeekly = pgTable(
+  'toll_gate_weekly',
+  {
+    // TollGate.ini section with IsExistsRank=1 (100001-100008).
+    gateId: integer('gate_id').notNull(),
+    week: date('week').notNull(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // Progress % (schedule, 0-100) and when it was reached.
+    schedule: smallint('schedule').notNull(),
+    reachedAt: timestamp('reached_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.gateId, t.week, t.characterId] }),
+    index('toll_gate_weekly_rank_idx').on(
+      t.gateId,
+      t.week,
+      t.schedule.desc().nullsFirst(),
+      t.reachedAt,
+      t.characterId,
+    ),
+    index('toll_gate_weekly_character_idx').on(t.characterId, t.week),
+    check('toll_gate_weekly_schedule', sql`${t.schedule} between 0 and 100`),
+  ],
+)
+
+// Rewards claimed for a past week's place (once per ninja, gate and week).
+export const tollGateWeeklyClaims = pgTable(
+  'toll_gate_weekly_claims',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    gateId: integer('gate_id').notNull(),
+    week: date('week').notNull(),
+    // The place paid (1-50), for support questions.
+    place: smallint('place').notNull(),
+    claimedAt: timestamp('claimed_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.gateId, t.week] }),
+    check('toll_gate_weekly_claims_place', sql`${t.place} between 1 and 50`),
   ],
 )

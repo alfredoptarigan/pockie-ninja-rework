@@ -85,6 +85,41 @@
       "when": 1791853185403,
       "tag": "0011_las_noches_auto",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1791853186403,
+      "tag": "0012_social",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1791853188403,
+      "tag": "0013_teams",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1791853191403,
+      "tag": "0014_market",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1791854684256,
+      "tag": "0015_arena",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1791854708544,
+      "tag": "0016_rankings",
+      "breakpoints": true
     }
   ]
 }

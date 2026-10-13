@@ -180,4 +180,63 @@ describe('migrations', { timeout: SLOW }, () => {
       ])
     })
   })
+
+  describe('on a database holding M3 data', () => {
+    const sql = scratch()
+
+    beforeAll(async () => {
+      await recreateScratch()
+      await migrateTo(12) // 0000-0011: the M3 schema
+      const [user] = await sql<{ id: string }[]>`
+        insert into users (username, email, password_hash)
+        values ('Kakashi', 'kakashi@example.com', 'x') returning id`
+      const [character] = await sql<{ id: string }[]>`
+        insert into characters (user_id, name, gender, nation, clothing, avatar_id, hp, mp, scene_id, level, stone, honor)
+        values (${user!.id}, 'Kakashi', 0, 0, 45, 45, 900, 900, 3102, 40, 12000, 300) returning id`
+      const id = character!.id
+      await sql`
+        insert into inventory_items (character_id, item_id, count, equipped_slot) values
+          (${id}, 'i250101', 1, 'Weapon'), (${id}, 'i160006', 7, null)`
+      await sql`insert into single_gate (character_id, best_floor) values (${id}, 42)`
+      await sql`insert into toll_gate_runs (character_id, gate_id) values (${id}, 100001)`
+      await migrateTo()
+    }, SLOW)
+
+    afterAll(() => sql.end())
+
+    it('keeps every item in the bag and opens an empty Market wallet', async () => {
+      const items = await sql`select item_id, location from inventory_items order by item_id`
+      expect(items).toEqual([
+        { item_id: 'i160006', location: 'bag' },
+        { item_id: 'i250101', location: 'bag' },
+      ])
+      const [character] = await sql`
+        select level, stone, honor, market_stone, market_gold from characters`
+      expect(character).toEqual({
+        level: 40,
+        stone: '12000',
+        honor: 300,
+        market_stone: '0',
+        market_gold: '0',
+      })
+    })
+
+    it('keeps Las Noches progress and makes a running toll gate run a solo run', async () => {
+      expect(await sql`select best_floor from single_gate`).toEqual([{ best_floor: 42 }])
+      expect(await sql`select gate_id, team_id from toll_gate_runs`).toEqual([
+        { gate_id: 100001, team_id: null },
+      ])
+    })
+
+    it('starts every M4 table empty', async () => {
+      const [counts] = await sql`
+        select (select count(*) from friends)::int as friends,
+               (select count(*) from mails)::int as mails,
+               (select count(*) from teams)::int as teams,
+               (select count(*) from market_listings)::int as listings,
+               (select count(*) from arena_players)::int as arena,
+               (select count(*) from toll_gate_weekly)::int as weekly`
+      expect(counts).toEqual({ friends: 0, mails: 0, teams: 0, listings: 0, arena: 0, weekly: 0 })
+    })
+  })
 })
