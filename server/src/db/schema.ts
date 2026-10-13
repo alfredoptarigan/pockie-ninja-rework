@@ -1132,3 +1132,33 @@ export const tollGateWeeklyClaims = pgTable(
     check('toll_gate_weekly_claims_place', sql`${t.place} between 1 and 50`),
   ],
 )
+
+/** Paid treasure cards survive reconnects; a character may have only one pending box. */
+export const characterTreasures = pgTable(
+  'character_treasures',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    boxId: text('box_id').notNull(),
+    cards: jsonb('cards').$type<string[]>().notNull(),
+  },
+  (t) => [
+    uniqueIndex('character_treasures_character_key').on(t.characterId),
+    check(
+      'character_treasures_cards',
+      sql`jsonb_typeof(${t.cards}) = 'array' and jsonb_array_length(${t.cards}) = 5`,
+    ),
+  ],
+)
+
+/** Original server-wide jackpot limits (TreasureRole.Value). */
+export const treasureJackpots = pgTable(
+  'treasure_jackpots',
+  {
+    itemId: text('item_id').primaryKey(),
+    claimed: integer('claimed').notNull().default(0),
+  },
+  (t) => [check('treasure_jackpots_claimed', sql`${t.claimed} >= 0`)],
+)

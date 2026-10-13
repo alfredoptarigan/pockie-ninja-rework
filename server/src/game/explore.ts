@@ -78,7 +78,7 @@ function pickFactoryEntry(entries: ExploreFactoryEntry[], random: Random) {
 
 function factoryCard(kind: ExploreFactory | 'pet', factoryId: number, random: Random) {
   const entry = pickFactoryEntry(exploreFactory(kind === 'pet' ? 'baby' : kind, factoryId), random)
-  if (!entry) return { type: 'nothing' as const }
+  if (!entry || /^i15900[0-3]$/.test(entry.Config)) return { type: 'nothing' as const }
   return { type: kind, itemId: entry.Config, bound: entry.BindingStatus === 1 }
 }
 

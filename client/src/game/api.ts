@@ -223,3 +223,33 @@ export function useExploreSpot() {
     (result) => Boolean(result.fight),
   )
 }
+
+export interface PendingTreasure {
+  id: string
+  boxId: string
+  slots: number
+}
+export function usePendingTreasure() {
+  return useQuery({
+    queryKey: ['game', 'treasure'],
+    queryFn: () => api<{ treasure: PendingTreasure | null }>('/api/game/treasure'),
+  })
+}
+export function useOpenTreasure() {
+  return useGameAction((input: { id: string; currency: 'gold' | 'giftCoupon' }) =>
+    post<{ treasure: PendingTreasure; character: Character }>(
+      `/api/game/items/${input.id}/treasure`,
+      { currency: input.currency },
+    ),
+  )
+}
+export function usePickTreasure() {
+  return useGameAction((input: { id: string; slot: number }) =>
+    post<{
+      cards: string[]
+      slot: number
+      reward: { itemId: string; bound: boolean; count: number }
+      character: Character
+    }>(`/api/game/treasure/${input.id}/pick`, { slot: input.slot }),
+  )
+}

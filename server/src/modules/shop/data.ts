@@ -46,3 +46,8 @@ export const mystic = load<{
   items: Record<string, MysticOffer[]>
   buyLimits: Record<string, number>
 }>('mystic-shop')
+
+// Treasure scrolls are withheld from acquisition while the skills-gap rollout is reviewed.
+for (const [id, offers] of Object.entries(refresh.items)) {
+  refresh.items[id] = offers.filter((offer) => !/^i15900[0-3]$/.test(offer.item))
+}
