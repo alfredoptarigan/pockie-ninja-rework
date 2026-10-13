@@ -13,8 +13,10 @@ import { ForgeWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { DailyQuestWindow } from './daily'
 import { MerchantWindow, ShopWindow } from './shop'
+import { TeamBoardWindow, TeamWindow } from './teams'
 
-export type WindowName = 'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily'
+export type WindowName =
+  'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily' | 'team' | 'teamBoard'
 
 export interface WindowProps {
   character: Character
@@ -44,6 +46,8 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   gates: GateWindow,
   pubFight: ({ character, onClose }) => <PubFightWindow character={character} onClose={onClose} />,
   daily: ({ onClose }) => <DailyQuestWindow onClose={onClose} />,
+  team: (props) => <TeamWindow {...props} />,
+  teamBoard: (props) => <TeamBoardWindow {...props} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
