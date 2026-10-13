@@ -2,18 +2,21 @@ export const CHAT_RATE_MAX = 5
 export const CHAT_RATE_WINDOW_MS = 5_000
 
 /**
- * Chat budget per character, shared by all of its tabs. A bucket outlives a disconnect until its
+ * Chat budget per character (world chat by default; other channels pass their own limits), shared by all of its tabs. A bucket outlives a disconnect until its
  * newest message leaves the window, so reconnecting never resets the budget.
  * ponytail: in-memory and per process; use a shared store when running several instances.
  */
-export function createChatLimiter(isOnline: (characterId: string) => boolean) {
+export function createChatLimiter(
+  isOnline: (characterId: string) => boolean,
+  { max = CHAT_RATE_MAX, windowMs = CHAT_RATE_WINDOW_MS } = {},
+) {
   const sent = new Map<string, number[]>()
 
   /** Call when a character's last socket leaves: drops its bucket once the window has passed. */
   function forgetWhenStale(characterId: string) {
     const newest = sent.get(characterId)?.at(-1)
     if (newest === undefined || isOnline(characterId)) return
-    const wait = newest + CHAT_RATE_WINDOW_MS - Date.now()
+    const wait = newest + windowMs - Date.now()
     if (wait <= 0) sent.delete(characterId)
     // Re-checks then: a newer message or a return to the game keeps the bucket.
     else setTimeout(() => forgetWhenStale(characterId), wait).unref()
@@ -22,8 +25,8 @@ export function createChatLimiter(isOnline: (characterId: string) => boolean) {
   return {
     allow(characterId: string) {
       const now = Date.now()
-      const recent = (sent.get(characterId) ?? []).filter((t) => now - t < CHAT_RATE_WINDOW_MS)
-      const allowed = recent.length < CHAT_RATE_MAX
+      const recent = (sent.get(characterId) ?? []).filter((t) => now - t < windowMs)
+      const allowed = recent.length < max
       sent.set(characterId, allowed ? [...recent, now] : recent)
       return allowed
     },

@@ -19,6 +19,14 @@ describe('chat limiter', () => {
     expect(chat.allow('a')).toBe(true)
   })
 
+  it('takes its own limits, like the team channel cooldown', () => {
+    const cooldown = createChatLimiter(() => false, { max: 1, windowMs: 1_000 })
+    expect(cooldown.allow('a')).toBe(true)
+    expect(cooldown.allow('a')).toBe(false)
+    vi.advanceTimersByTime(1_000)
+    expect(cooldown.allow('a')).toBe(true)
+  })
+
   it('drops the bucket of a player who sent a message and left, once the window passes', () => {
     const { chat } = limiter()
     chat.allow('a')

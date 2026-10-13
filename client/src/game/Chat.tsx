@@ -111,7 +111,12 @@ function PlayerList({ players, selfId }: { players: ScenePlayer[]; selfId: strin
 
 type ChatTab = 'all' | ChatChannel
 
-const CHANNEL_TITLES: Record<ChatChannel, string> = { world: 'World', scene: 'Scene' }
+const CHANNEL_TITLES: Record<ChatChannel, string> = {
+  world: 'World',
+  scene: 'Scene',
+  team: 'Team',
+  whisper: 'Whisper',
+}
 /** "All" merges both channels; World and Scene also pick the channel the input sends to. */
 const TABS: { id: ChatTab; title: string }[] = [
   { id: 'all', title: 'All' },
@@ -198,7 +203,7 @@ function ChannelSelect({
         onChange={(event) => onChange(event.target.value as ChatChannel)}
         className="game-button h-[22px] w-[70px] appearance-none pr-4 pl-2 font-game text-xs"
       >
-        {Object.entries(CHANNEL_TITLES).map(([channel, title]) => (
+        {Object.entries(CHANNEL_TITLES).slice(0, 2).map(([channel, title]) => (
           <option key={channel} value={channel}>
             {title}
           </option>
@@ -255,7 +260,7 @@ export function ChatBox({
     setSendError(null)
     // Set before emitting: an ack that arrives at once must still clear it.
     setSending(true)
-    const sent = send({ channel, text }, (ack) => {
+    const sent = send({ channel: channel as 'world' | 'scene', text }, (ack) => {
       setSending(false)
       if (ack.ok) setText('')
       else setSendError(ack.error.message)

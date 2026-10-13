@@ -4,15 +4,27 @@ import {
   type ChatAck,
   type ChatMessage,
   type ClientToServerEvents,
+  type FriendPresenceEvent,
+  type Notice,
+  type ReportAck,
   type ScenePlayersEvent,
   type ServerToClientEvents,
 } from '@pockie/shared'
-import { sql } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import type { AddressInfo } from 'node:net'
 import { io as connectClient, type Socket } from 'socket.io-client'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { sessions } from '../../db/schema.js'
+import {
+  blocks,
+  characters,
+  friends,
+  reports,
+  sessions,
+  teamMembers,
+  teams,
+} from '../../db/schema.js'
+import { notifyCharacter, onCharacterOffline, onCharacterOnline } from './events.js'
 import { MAX_SOCKETS_PER_CHARACTER } from './realtime.js'
 
 type TestSocket = Socket<ServerToClientEvents, ClientToServerEvents>
@@ -20,6 +32,8 @@ interface Tab {
   socket: TestSocket
   players: ScenePlayersEvent[]
   chat: ChatMessage[]
+  presence: FriendPresenceEvent[]
+  notices: Notice[]
 }
 type ConnectError = Error & { data?: { code: string; message: string } }
 
@@ -55,9 +69,11 @@ function open(cookie?: string, headers: Record<string, string> = {}): Tab {
     extraHeaders: { ...(cookie ? { cookie } : {}), ...headers },
   })
   opened.push(socket)
-  const tab: Tab = { socket, players: [], chat: [] }
+  const tab: Tab = { socket, players: [], chat: [], presence: [], notices: [] }
   socket.on(REALTIME_EVENTS.scenePlayers, (event) => tab.players.push(event))
   socket.on(REALTIME_EVENTS.chatMessage, (message) => tab.chat.push(message))
+  socket.on(REALTIME_EVENTS.friendPresence, (event) => tab.presence.push(event))
+  socket.on(REALTIME_EVENTS.notice, (notice) => tab.notices.push(notice))
   return tab
 }
 
@@ -97,6 +113,16 @@ function namesIn(tab: Tab, sceneId: number) {
 
 const send = (tab: Tab, payload: unknown): Promise<ChatAck> =>
   tab.socket.emitWithAck(REALTIME_EVENTS.chatSend, payload as never)
+const report = (tab: Tab, payload: unknown): Promise<ReportAck> =>
+  tab.socket.emitWithAck(REALTIME_EVENTS.chatReport, payload as never)
+const errorOf = (ack: ChatAck | ReportAck) => (ack.ok ? 'ok' : ack.error.code)
+
+async function idOf(name: string) {
+  const [row] = await db.select().from(characters).where(eq(characters.name, name))
+  return row!.id
+}
+const setLevel = (name: string, level: number) =>
+  db.update(characters).set({ level }).where(eq(characters.name, name))
 
 const VILLAGE = 111 // Fire Village castle scene: where nation 0 starts.
 const FIELD = 2101 // Its first field.
@@ -431,5 +457,280 @@ describe('chat', () => {
       ok: false,
       error: { code: 'rate_limited' },
     })
+  })
+})
+
+describe('chat filter', () => {
+  it('masks profanity on world and scene lines', async () => {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const a = await connect(one)
+    const world = await send(a, { channel: 'world', text: 'what the fuck' })
+    const scene = await send(a, { channel: 'scene', text: 'shit happens' })
+    expect(world.ok && world.message.text).toBe('what the ****')
+    expect(scene.ok && scene.message.text).toBe('**** happens')
+    await vi.waitFor(() => expect(a.chat.map((m) => m.text)).toContain('what the ****'))
+  })
+})
+
+describe('whispers', () => {
+  async function trio() {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const two = await player('Player_two', { name: 'Ninja_02', nation: 0 })
+    const three = await player('Player_three', { name: 'Ninja_03', nation: 0 })
+    await setLevel('Ninja_01', 10)
+    return { one, a: await connect(one), b: await connect(two), c: await connect(three) }
+  }
+
+  it('delivers by name, case-insensitive, with an echo to every tab of the sender', async () => {
+    const { one, a, b, c } = await trio()
+    const otherTab = await connect(one)
+    const ack = await send(a, { channel: 'whisper', to: 'ninja_02', text: 'psst, fuck' })
+
+    expect(ack).toEqual({
+      ok: true,
+      message: {
+        id: expect.any(String),
+        channel: 'whisper',
+        sender: { characterId: await idOf('Ninja_01'), name: 'Ninja_01' },
+        to: { characterId: await idOf('Ninja_02'), name: 'Ninja_02' },
+        text: 'psst, ****',
+        sentAt: expect.any(String),
+      },
+    })
+    await vi.waitFor(() => expect(b.chat).toEqual([ack.ok && ack.message]))
+    await vi.waitFor(() => expect(a.chat).toHaveLength(1))
+    await vi.waitFor(() => expect(otherTab.chat).toHaveLength(1))
+    // A later world line proves the third player never got the whisper.
+    await send(b, { channel: 'world', text: 'done' })
+    await vi.waitFor(() => expect(c.chat.map((m) => m.text)).toEqual(['done']))
+  })
+
+  it('answers "The player is offline." for offline and unknown names', async () => {
+    const { a, b } = await trio()
+    await player('Player_four', { name: 'Ninja_04', nation: 0 })
+    for (const to of ['Ninja_04', 'Nobody_here', '']) {
+      expect(await send(a, { channel: 'whisper', to, text: 'hi' })).toEqual({
+        ok: false,
+        error: { code: 'offline', message: 'The player is offline.' },
+      })
+    }
+    b.socket.disconnect()
+    await vi.waitFor(async () =>
+      expect(errorOf(await send(a, { channel: 'whisper', to: 'Ninja_02', text: 'hi' }))).toBe(
+        'offline',
+      ),
+    )
+  })
+
+  it('needs level 10 to send', async () => {
+    const { b } = await trio()
+    expect(await send(b, { channel: 'whisper', to: 'Ninja_01', text: 'hi' })).toEqual({
+      ok: false,
+      error: { code: 'level_too_low', message: 'You need level 10 to whisper.' },
+    })
+  })
+
+  it('refuses yourself', async () => {
+    const { a } = await trio()
+    expect(errorOf(await send(a, { channel: 'whisper', to: 'NINJA_01', text: 'me' }))).toBe(
+      'invalid_payload',
+    )
+  })
+
+  it('refuses with the same neutral line whichever side blocked the other', async () => {
+    const { a, b } = await trio()
+    await setLevel('Ninja_02', 10)
+    const [one, two] = [await idOf('Ninja_01'), await idOf('Ninja_02')]
+    await db.insert(blocks).values({ ownerId: two, blockedId: one })
+
+    const blockedByTarget = await send(a, { channel: 'whisper', to: 'Ninja_02', text: 'hi' })
+    const blockedBySender = await send(b, { channel: 'whisper', to: 'Ninja_01', text: 'hi' })
+
+    expect(blockedByTarget).toEqual({
+      ok: false,
+      error: { code: 'refused', message: 'You cannot whisper to this player.' },
+    })
+    expect(blockedBySender).toEqual(blockedByTarget)
+    expect(a.chat).toEqual([])
+    expect(b.chat).toEqual([])
+  })
+
+  it('shares the world chat rate limit', async () => {
+    const { a } = await trio()
+    for (let i = 0; i < 5; i++) await send(a, { channel: 'world', text: `m${i}` })
+    expect(errorOf(await send(a, { channel: 'whisper', to: 'Ninja_02', text: 'hi' }))).toBe(
+      'rate_limited',
+    )
+  })
+})
+
+describe('team chat', () => {
+  async function team() {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const two = await player('Player_two', { name: 'Ninja_02', nation: 0 })
+    const three = await player('Player_three', { name: 'Ninja_03', nation: 0 })
+    const [captain, member] = [await idOf('Ninja_01'), await idOf('Ninja_02')]
+    const [row] = await db
+      .insert(teams)
+      .values({ captainId: captain, sceneId: VILLAGE })
+      .returning()
+    await db.insert(teamMembers).values([
+      { characterId: captain, teamId: row!.id, fightOrder: 0 },
+      { characterId: member, teamId: row!.id, fightOrder: 1 },
+    ])
+    return { a: await connect(one), b: await connect(two), c: await connect(three) }
+  }
+
+  it('reaches the members only, sender included, filtered', async () => {
+    const { a, b, c } = await team()
+    const ack = await send(a, { channel: 'team', text: 'go go, shit' })
+    expect(ack).toMatchObject({ ok: true, message: { channel: 'team', text: 'go go, ****' } })
+    expect(ack.ok && ack.message).not.toHaveProperty('sceneId')
+    await vi.waitFor(() => expect(b.chat).toEqual([ack.ok && ack.message]))
+    await vi.waitFor(() => expect(a.chat).toHaveLength(1))
+    await send(c, { channel: 'world', text: 'done' })
+    await vi.waitFor(() => expect(c.chat.map((m) => m.text)).toEqual(['done']))
+  })
+
+  it('refuses a player without a team', async () => {
+    const { c } = await team()
+    expect(await send(c, { channel: 'team', text: 'hello?' })).toEqual({
+      ok: false,
+      error: { code: 'not_in_team', message: 'You are not in a team.' },
+    })
+  })
+
+  it('has a 5 second cooldown per player', async () => {
+    const { a, b } = await team()
+    expect((await send(a, { channel: 'team', text: 'one' })).ok).toBe(true)
+    expect(errorOf(await send(a, { channel: 'team', text: 'two' }))).toBe('rate_limited')
+    expect((await send(b, { channel: 'team', text: 'mine' })).ok).toBe(true)
+  })
+})
+
+describe('friend presence', () => {
+  it('tells everyone who lists the character, on its first and last socket', async () => {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const two = await player('Player_two', { name: 'Ninja_02', nation: 0 })
+    const three = await player('Player_three', { name: 'Ninja_03', nation: 0 })
+    const id = await idOf('Ninja_01')
+    // Ninja_02 lists Ninja_01; Ninja_01 lists Ninja_03 (that direction tells nobody).
+    await db.insert(friends).values([
+      { ownerId: await idOf('Ninja_02'), friendId: id },
+      { ownerId: id, friendId: await idOf('Ninja_03') },
+    ])
+    const watcher = await connect(two)
+    const stranger = await connect(three)
+
+    const tabA = await connect(one)
+    const tabB = await connect(one)
+    await vi.waitFor(() =>
+      expect(watcher.presence).toEqual([{ characterId: id, name: 'Ninja_01', online: true }]),
+    )
+    tabA.socket.disconnect()
+    tabB.socket.disconnect()
+    await vi.waitFor(() => expect(watcher.presence.map((e) => e.online)).toEqual([true, false]))
+    expect(stranger.presence).toEqual([])
+  })
+
+  it('runs the online and offline hooks on the first and last socket only', async () => {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const id = await idOf('Ninja_01')
+    const events: string[] = []
+    const offOnline = onCharacterOnline((characterId) => events.push(`online ${characterId}`))
+    const offOffline = onCharacterOffline((characterId) => events.push(`offline ${characterId}`))
+    try {
+      const tabA = await connect(one)
+      const tabB = await connect(one)
+      tabA.socket.disconnect()
+      await vi.waitFor(() => expect(tabA.socket.connected).toBe(false))
+      tabB.socket.disconnect()
+      await vi.waitFor(() => expect(events).toEqual([`online ${id}`, `offline ${id}`]))
+    } finally {
+      offOnline()
+      offOffline()
+    }
+  })
+})
+
+describe('notices', () => {
+  it('reach every tab of the character and nobody else, without unlisted fields', async () => {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const two = await player('Player_two', { name: 'Ninja_02', nation: 0 })
+    const [tabA, tabB, other] = [await connect(one), await connect(one), await connect(two)]
+    const mailId = '00000000-0000-4000-8000-000000000001'
+
+    notifyCharacter(await idOf('Ninja_01'), {
+      kind: 'mail',
+      mailId,
+      category: 'system',
+      secret: 'leak',
+    } as Notice)
+    notifyCharacter(await idOf('Ninja_02'), { kind: 'teamChanged', teamId: null })
+
+    const mail = [{ kind: 'mail', mailId, category: 'system' }]
+    await vi.waitFor(() => expect(tabA.notices).toEqual(mail))
+    await vi.waitFor(() => expect(tabB.notices).toEqual(mail))
+    await vi.waitFor(() => expect(other.notices).toEqual([{ kind: 'teamChanged', teamId: null }]))
+  })
+
+  it('throws on a malformed notice', () => {
+    expect(() => notifyCharacter('x', { kind: 'mail' } as Notice)).toThrow()
+  })
+})
+
+describe('reports', () => {
+  async function reporter() {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    await player('Player_two', { name: 'Ninja_02', nation: 0 })
+    return { a: await connect(one), reported: await idOf('Ninja_02') }
+  }
+
+  it('stores chat and whisper reports', async () => {
+    const { a, reported } = await reporter()
+    const line = { channel: 'world', characterId: reported, text: 'rude ****' }
+    expect(await report(a, line)).toEqual({ ok: true })
+    expect(await report(a, { channel: 'whisper', characterId: reported, text: 'spam' })).toEqual({
+      ok: true,
+    })
+
+    const rows = await db.select().from(reports).orderBy(reports.createdAt)
+    expect(rows).toMatchObject([
+      {
+        reporterId: await idOf('Ninja_01'),
+        reportedId: reported,
+        kind: 'chat',
+        channel: 'world',
+        text: 'rude ****',
+        mailId: null,
+      },
+      { reportedId: reported, kind: 'whisper', channel: null, text: 'spam' },
+    ])
+  })
+
+  it('rejects bad payloads, unknown players and yourself', async () => {
+    const { a, reported } = await reporter()
+    const unknown = '00000000-0000-4000-8000-000000000001'
+    const payloads = [
+      { channel: 'world', characterId: reported, text: '' },
+      { channel: 'guild', characterId: reported, text: 'x' },
+      { channel: 'world', characterId: 'not-a-uuid', text: 'x' },
+      { channel: 'world', characterId: unknown, text: 'x' },
+      { channel: 'world', characterId: await idOf('Ninja_01'), text: 'x' },
+      null,
+    ]
+    for (const payload of payloads)
+      expect(errorOf(await report(a, payload))).toBe('invalid_payload')
+    expect(await db.select().from(reports)).toEqual([])
+  })
+
+  it('rate limits reports', async () => {
+    const { a, reported } = await reporter()
+    const results = []
+    for (let i = 0; i < 6; i++)
+      results.push(
+        errorOf(await report(a, { channel: 'scene', characterId: reported, text: `l${i}` })),
+      )
+    expect(results).toEqual(['ok', 'ok', 'ok', 'ok', 'ok', 'rate_limited'])
   })
 })
