@@ -3,8 +3,10 @@
 // turned into React elements here and never injected as HTML.
 import type { ReactNode } from 'react'
 import strings from '../i18n/en.json'
+import skillAndTitleNames from '../i18n/skills-and-titles.json'
 
-const table = strings as Record<string, string>
+// Names from tools/i18n/en.json that are outside the generated scene/item slice.
+const table: Record<string, string> = { ...strings, ...skillAndTitleNames }
 
 const TOKEN =
   /(<font\s+color=['"]?#[0-9a-fA-F]{6}['"]?\s*>|<\/font>|<b>|<\/b>|<br\s*\/?>|\[line\]|\[break\]|\n)/i

@@ -317,13 +317,13 @@ export function ExpStrip({ character }: { character: Character }) {
   )
 }
 
-export type MenuWindow = 'bag' | 'character' | 'quests'
+export type MenuWindow = 'bag' | 'character' | 'quests' | 'skills'
 
 /** The eight buttons of UI_BottomMenu.as, in its order, with the windows we have. */
 const MENU: { piece: string; label: string; window?: MenuWindow }[] = [
   { piece: 'package', label: 'Bag', window: 'bag' },
   { piece: 'role', label: 'Character', window: 'character' },
-  { piece: 'skill', label: 'Skills' },
+  { piece: 'skill', label: 'Skills', window: 'skills' },
   { piece: 'task', label: 'Quests', window: 'quests' },
   { piece: 'social', label: 'Friends' },
   { piece: 'rank', label: 'Rankings' },
@@ -331,7 +331,7 @@ const MENU: { piece: string; label: string; window?: MenuWindow }[] = [
   { piece: 'shop', label: 'Shop' },
 ]
 
-/** Menu buttons, bottom right: Bag, Character and Quests open windows; the rest are not built. */
+/** Menu buttons, bottom right: Bag, Character, Skills and Quests open windows; the rest are not built. */
 export function MenuBar({ onOpen }: { onOpen: (window: MenuWindow) => void }) {
   return (
     <nav

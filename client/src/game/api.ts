@@ -1,4 +1,6 @@
 import type {
+  SkillView,
+  SkillSlotInput,
   BuyPouchesInput,
   Character,
   CharacterStats,
@@ -270,4 +272,29 @@ export function useRemoveBuff() {
   return useGameAction((buffId: number) =>
     post<BuffsView & { character: Character }>(`/api/game/buffs/${buffId}/remove`),
   )
+}
+
+const skillsKey = ['game', 'skills'] as const
+export function useSkills() {
+  return useQuery({ queryKey: skillsKey, queryFn: () => api<SkillView>('/api/game/skills') })
+}
+function useSkillAction<T>(path: string) {
+  const cache = useQueryClient()
+  const apply = useApplyResult()
+  return useMutation({
+    mutationFn: (input: T) => post<SkillView & { character: Character }>(path, input),
+    onSuccess: (result) => {
+      cache.setQueryData(skillsKey, result)
+      apply(result)
+    },
+  })
+}
+export function useSetSkillSlot() {
+  return useSkillAction<SkillSlotInput>('/api/game/skills/slot')
+}
+export function useActivateSkillTree() {
+  return useSkillAction<{ tree: number }>('/api/game/skills/tree')
+}
+export function useResetSkills() {
+  return useSkillAction<{ currency: 'gold' | 'giftCoupon' }>('/api/game/skills/reset')
 }
