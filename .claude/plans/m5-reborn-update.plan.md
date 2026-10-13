@@ -1,7 +1,7 @@
 # Plan: Reborn Update (Milestone 5)
 
 **Project**: Pockie Ninja Remastered
-**Status**: In progress (2026-10-13). Wave 1 (tasks 1-3) merged; wave 2 next.
+**Status**: In progress (2026-10-13). Wave 1 (tasks 1-3) and task 9 merged; tasks 4 and 5 running.
 **Complexity**: Large
 **Reference (primary source)**: `m5-reborn-reference.md`, normalized data in
 `data/reborn-raw/re/normalized/{talents,bloodlines,skills,quests,events}.json`, raw
@@ -418,7 +418,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- skill-bar skills treasure`
 - **Depends on**: 1, 2, 5.
 
-### Task 9: Secret technique playback
+### Task 9: Secret technique playback (done; follow-ups: tools generator should write `concurrentOffset` for the 15 back layers with a non-zero outfit offset; Reborn target poses like "202" fall back to our light-hit pose)
 - **Action**: `phaser/secret-technique.ts` resolves the effect for (clothing, skillId) from
   `reborn-secret-techniques.json`; `battle-scene.ts` preloads its multiatlas pages
   (`this.load.multiatlas`) only for ultimates in the replay; `timeline.ts` turns an ultimate strike
