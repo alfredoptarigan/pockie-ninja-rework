@@ -6,6 +6,7 @@ import type { Character } from '@pockie/shared'
 import { createContext, useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
 import { useLogout } from '../lib/auth'
+import { ArenaButton } from './arena'
 import { useOutfitPortrait } from './art'
 import { GameButton } from './skin'
 import { TeamHud } from './teams'
@@ -38,6 +39,7 @@ export function TopBar({ character }: { character: Character }) {
           </div>
         ))}
       </dl>
+      <ArenaButton />
       <div className="absolute top-[4px] right-[6px]">
         <SettingsMenu />
       </div>
