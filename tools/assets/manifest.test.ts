@@ -2,6 +2,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
+import { arenaNpcs } from './arena.ts'
 import { paths } from './paths.ts'
 import {
   SCENES,
@@ -193,6 +194,42 @@ describe('game asset manifests', () => {
     const missing = urls([motions, scenes, tollGates]).filter(
       (url) => !existsSync(join(paths.root, 'client/public', url)),
     )
+    expect(missing).toEqual([])
+  })
+})
+
+describe('game-arena.json', () => {
+  const arena = read('game-arena.json') as {
+    faces: Record<string, string>
+    npcs: Record<string, { clothing?: number; face?: string; mob?: string }>
+    mobs: Record<string, MotionSet & { portrait?: string }>
+    gaps: { facesNotInBackup: number[]; weaponsWithoutLayers: string[] }
+  }
+
+  it('covers every arena NPC with a face and an outfit, or with mob art', () => {
+    const npcs = arenaNpcs()
+    expect(Object.keys(npcs)).toHaveLength(375)
+    expect(arena.npcs).toEqual(npcs)
+    for (const [id, npc] of Object.entries(arena.npcs)) {
+      if (npc.mob) {
+        const art = motions.mobs[npc.mob] ?? arena.mobs[npc.mob]
+        expect(art?.actions['999'], id).toBeDefined()
+        expect(art?.portrait, id).toBeDefined()
+      } else {
+        expect(arena.faces[npc.face!], id).toBeDefined()
+        expect(motions.outfits[npc.clothing!]?.actions['999'], id).toBeDefined()
+      }
+    }
+  })
+
+  it('has a face for every outfit with art (the gaps are the outfits the backup lacks)', () => {
+    expect(arena.gaps.facesNotInBackup).toEqual(
+      [...OUTFITS_WITHOUT_ART, ...INCOMPLETE_OUTFITS].sort((a, b) => a - b),
+    )
+  })
+
+  it('only references files that exist', () => {
+    const missing = urls(arena).filter((url) => !existsSync(join(paths.root, 'client/public', url)))
     expect(missing).toEqual([])
   })
 })
