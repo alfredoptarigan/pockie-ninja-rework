@@ -119,8 +119,8 @@ describe('monster skills in live content', () => {
   // here when its script lands; a new id showing up means live content gained an unported skill.
   const unportedKnown = [
     5, 6, 7, 8, 1802, 1803, 1805, 1807, 1808, 1810, 1813, 1814, 1815, 1816, 1822, 1823, 1825, 1826,
-    1827, 1828, 1829, 1830, 1832, 1839, 3802, 3803, 3804, 3805, 3806, 3807, 3809, 3810, 3811, 3812,
-    3813, 3814, 3815, 3819, 3820, 3821, 3822, 3825, 3826, 3827, 5000, 60001, 60002, 60003, 60005,
+    1827, 1828, 1829, 1830, 1832, 1839, 3802, 3803, 3804, 3805, 3806, 3807, 5000, 60001, 60002,
+    60003, 60005,
   ]
 
   it('has a script for every live monster skill but the known gaps', () => {
