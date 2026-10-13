@@ -4,13 +4,7 @@ import { gameScenes } from '../../generated/game-assets'
 import { plainText } from '../text'
 import type { Replay, SceneView } from '../types'
 import { startBattle, type BattleHandle } from './battle-scene'
-import {
-  fighterLooks,
-  lookArt,
-  loadSkillMotions,
-  shownOutfit,
-  type FighterLook,
-} from './motion'
+import { fighterLooks, lookArt, loadSkillMotions, shownOutfit, type FighterLook } from './motion'
 import { pictureLayout } from './picture-layout'
 import { startScenePicture, type PictureActions, type PictureHandle } from './picture-scene'
 import { buildTimeline } from './timeline'
@@ -50,8 +44,7 @@ export async function mountBattle(
   parent: HTMLElement,
   options: BattleOptions,
 ): Promise<BattleHandle> {
-  const { replay, clothing, monsterIds, defenderLooks, sceneId, weaponItemId, onFinished } =
-    options
+  const { replay, clothing, monsterIds, defenderLooks, sceneId, weaponItemId, onFinished } = options
   const looks = fighterLooks(
     replay.fighters,
     { clothing, weaponItemId },
