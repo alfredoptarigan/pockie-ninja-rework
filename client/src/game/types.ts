@@ -196,6 +196,8 @@ export interface FightResult {
     stone: number
     items: { itemId: string; bound: boolean }[]
     levelsGained: number
+    /** Drops that did not fit in a full bag. */
+    lost?: number
   }
   completed?: number[]
   /** What each completed quest granted, in `completed` order. */

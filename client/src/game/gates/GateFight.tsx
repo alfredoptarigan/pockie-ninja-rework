@@ -28,13 +28,19 @@ export function GateFight({
   )
 }
 
-/** "EXP +120, Stone +900, 2 items" or "Nothing gained". */
-export function rewardText(rewards: { exp: number; stone: number; items: unknown[] }) {
+/** "EXP +120, Stone +900, 2 items, 1 lost to a full bag" or "Nothing gained". */
+export function rewardText(rewards: {
+  exp: number
+  stone: number
+  items: unknown[]
+  lost?: number
+}) {
   const parts = [
     rewards.exp > 0 && `EXP +${rewards.exp}`,
     rewards.stone > 0 && `Stone +${rewards.stone}`,
     rewards.items.length > 0 &&
       `${rewards.items.length} ${rewards.items.length === 1 ? 'item' : 'items'}`,
+    rewards.lost && `${rewards.lost} lost to a full bag`,
   ].filter(Boolean)
   return parts.length ? parts.join(', ') : 'Nothing gained'
 }

@@ -43,6 +43,7 @@ import {
   countItem,
   DEMON_CITY,
   duel,
+  grantDrops,
   grantItems,
   hasWeapon,
   lastNpcRewards,
@@ -52,7 +53,6 @@ import {
   utcDay,
   withCharacter,
   withExp,
-  type Award,
   type CharacterRow,
 } from './common.js'
 import { cardConfig, cardLib, gateExchanges, tollGateConfig, tollGateTables } from './data.js'
@@ -215,7 +215,12 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const layout = gateLayout(row.gateId, tables)
       const point = currentPoint(runState(row), layout)
       const { replay, won, hp, mp, maxHp, maxMp } = await duel(tx, character, point.npcIds)
-      const rewards = { exp: 0, stone: 0, items: [] as Award[], levelsGained: 0 }
+      const rewards: TollGateFightResult['rewards'] = {
+        exp: 0,
+        stone: 0,
+        items: [],
+        levelsGained: 0,
+      }
 
       if (!won) {
         // OnFightLost: HP 1; the run only ends (no retry, the try is spent).
@@ -239,10 +244,11 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
         rewards.stone += reward?.stone ?? 0
       }
       rewards.exp = vipExp(rewards.exp, character)
-      rewards.items.push(...kill.items)
       const { update, levelsGained } = withExp(character, restored, rewards.exp)
       rewards.levelsGained = levelsGained
-      await grantItems(tx, character.id, rewards.items)
+      rewards.items = await grantDrops(tx, character.id, kill.items)
+      if (rewards.items.length < kill.items.length)
+        rewards.lost = kill.items.length - rewards.items.length
       await saveCharacter(tx, character.id, { ...update, stone: character.stone + rewards.stone })
       const flip = outcome.cleared
         ? dealCards(cardLib(row.gateId), createRandom(newSeed()))
@@ -305,15 +311,16 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const commonOwned = common ? await countItem(tx, character.id, common) : 0
       if (own + commonOwned < row.SrcCount)
         throw bad('missing_item', 'You do not have enough crystals.')
+      const fromOwn = Math.min(own, row.SrcCount)
+      // Bound crystals give a bound result, so an exchange cannot make a bound item tradable.
+      let bound = await removeItems(tx, character.id, row.SrcItemCfg, fromOwn)
+      if (common && row.SrcCount > fromOwn)
+        bound = (await removeItems(tx, character.id, common, row.SrcCount - fromOwn)) || bound
       const awards = Array.from({ length: row.DestCount }, () => ({
         itemId: row.DestItemCfg,
-        bound: false,
+        bound,
       }))
       await requireBagRoom(tx, character.id, awards)
-      const fromOwn = Math.min(own, row.SrcCount)
-      await removeItems(tx, character.id, row.SrcItemCfg, fromOwn)
-      if (common && row.SrcCount > fromOwn)
-        await removeItems(tx, character.id, common, row.SrcCount - fromOwn)
       await grantItems(tx, character.id, awards)
       return { items: awards, character: await characterView(tx, character.id) }
     })

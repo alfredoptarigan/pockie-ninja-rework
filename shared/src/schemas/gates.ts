@@ -89,6 +89,8 @@ export interface GateRewards {
   stone: number
   items: { itemId: string; bound: boolean }[]
   levelsGained: number
+  /** Drops that did not fit in a full bag. */
+  lost?: number
 }
 
 /** A fight result; `replay` is a game-core Replay. */

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { character } from '../../test/game'
 import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
+import { rewardText } from './GateFight'
 import { LasNochesWindow } from './LasNochesWindow'
 import { PubFightWindow } from './PubFightWindow'
 import { TollGateWindow } from './TollGateWindow'
@@ -148,5 +149,14 @@ describe('PubFightWindow', () => {
     expect(screen.getByRole('button', { name: 'Pull' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Fight' })).toBeDisabled()
     expect(screen.getByText('You need full HP to fight.')).toBeInTheDocument()
+  })
+})
+
+describe('rewardText', () => {
+  it('names drops lost to a full bag', () => {
+    expect(rewardText({ exp: 120, stone: 0, items: [{}], lost: 2 })).toBe(
+      'EXP +120, 1 item, 2 lost to a full bag',
+    )
+    expect(rewardText({ exp: 0, stone: 0, items: [] })).toBe('Nothing gained')
   })
 })

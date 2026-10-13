@@ -45,6 +45,7 @@ import {
 } from '../../game/quests.js'
 import { playerFighter } from '../../game/combat.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
+import { requireBagRoom } from '../gates/common.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
@@ -277,16 +278,15 @@ export async function actionRoutes(
         await tx.update(characters).set(restore).where(eq(characters.id, character.id))
       } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
         const drops = rollLibDrops(Number(def.BoxDropID), createRandom(randomInt(2 ** 31)))
-        // Box contents inherit the box's binding.
-        await grantItems(
-          tx,
-          character.id,
-          drops.map((drop) => ({ ...drop, bound: row.bound })),
-        )
+        // Box contents inherit the box's binding; a full bag keeps the box closed.
+        const contents = drops.map((drop) => ({ ...drop, bound: row.bound }))
+        await consumeOne(tx, row)
+        await requireBagRoom(tx, character.id, contents)
+        await grantItems(tx, character.id, contents)
       } else {
         throw bad('cannot_use', 'That item cannot be used yet.')
       }
-      await consumeOne(tx, row)
+      if (restore) await consumeOne(tx, row)
 
       const quests = await loadQuests(tx, character.id)
       await saveQuests(
