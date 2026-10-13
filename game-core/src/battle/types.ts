@@ -19,6 +19,8 @@ export interface SkillInput {
   selfmul?: number
   selfadd?: number
   javascript?: string
+  /** SkillInfo GetLevel(): the row's skill level, read by the ninjutsu scripts. */
+  level?: number
   /** Id written to the replay (defaults to `id`). */
   secondid?: number
 }
@@ -57,6 +59,8 @@ export interface FighterInput {
   /** VampiricHP / VampiricMP: percent of the damage dealt healed as HP / MP. */
   vampiricHp?: number
   vampiricMp?: number
+  /** SkillAdd0 ... SkillAdd9: per-element ninjutsu bonus; ToInt(SkillAddN * 0.01) percent. */
+  skillAdd?: number[]
   /**
    * Avatar level used by the execute skills (aoyi). Players: `avatarLevelOf(PlayerAvatarID)`;
    * NPCs: their CounterBombMul when it is not -1. Absent = NPC rule `trunc(level / 3) - 5`.
@@ -97,6 +101,8 @@ export interface FightEvent {
   selfDamage?: number
   /** MP the actor spends (DecMP). */
   decMp?: number
+  /** MP the target loses to a drain (TargetDecMP). */
+  targetDecMp?: number
   /** Rebound the actor takes, after its own mitigation (BackDamage; included in selfDamage). */
   backDamage?: number
   /** HP / MP the actor gains from vampiric strikes or healing scripts (IncHP / IncMP). */
@@ -138,12 +144,15 @@ export const SKILL_LOSE = 3
 export interface ActiveBuff {
   id: number
   saveData: number
+  /** FightBuff.SaveData1 (0 when absent). */
+  saveData1?: number
   lifeTime: number
   startTime: number
 }
 
 /** FightObject: a fighter during the fight. */
 export interface Fighter extends FighterInput {
+  skillAdd: number[]
   decDamage: number
   rebound: number
   absorb: number
@@ -154,6 +163,12 @@ export interface Fighter extends FighterInput {
   startHp: number
   startMp: number
   initAtkTime: number
+  /** AtkTimeMul / AtkTimeAdd of FightSystem.ChangeAtkTime. */
+  atkTimeMul: number
+  atkTimeAdd: number
+  initDefense: number
+  /** DefenseAdd of FightSystem.ChangeDefense (DefenseMul stays 0). */
+  defenseAdd: number
   initHit: number
   hitMulAdd: number
   /** InitMinAtk / InitMaxAtk and the MinAtkMul / MaxAtkMul percent of FightSystem.ChangeAtk. */
@@ -197,11 +212,22 @@ export interface FightContext {
   damage(victim: Fighter, amount: number): void
   /** FightSystem.Damage(obj, damage, fv, timer): raw HP loss that also clears cleartype-1 buffs. */
   damageWithValue(victim: Fighter, amount: number, fv: FightEvent, timer: number): void
-  addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData?: number): void
+  addBuff(
+    target: Fighter,
+    buffId: number,
+    timer: number,
+    fv: FightEvent,
+    saveData?: number,
+    saveData1?: number,
+  ): void
   removeBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent): void
   getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
   changeNextAtkTime(target: Fighter, amount: number): void
   changeHit(target: Fighter, add: number): void
+  /** ChangeAtkTime: AtkTime = InitAtkTime * 100 / (100 + mul) - add; refused when it would be <= 0. */
+  changeAtkTime(target: Fighter, atkTimeMul: number, atkTimeAdd: number): void
+  /** ChangeDefense with DefenseMul 0 (no ported script sets it). */
+  changeDefense(target: Fighter, defenseAdd: number): void
   changeDodge(target: Fighter, add: number): void
   /** ChangeAtk with MinAtkAdd / MaxAtkAdd kept (nothing ported sets them). */
   changeAtk(target: Fighter, minAtkMul: number, maxAtkMul: number): void
@@ -223,4 +249,6 @@ export type SkillScript = (
   target: Fighter,
   fv: FightEvent,
   timer: number,
+  /** The skill.ini row being used (OnUser's `skill`); scripts that ignore it may omit it. */
+  skill?: SkillInput,
 ) => number

@@ -45,6 +45,7 @@ const AFTER_HIT_PET = 8
 const AFTER_BEING_HIT = 9
 const SHIELD_BUFF = 3
 const f = Math.fround
+const SKILL_ADD_SLOTS = 10
 const probability = (skill: SkillInput) => skill.probability ?? 0
 
 export function simulateFight({
@@ -73,6 +74,7 @@ export function simulateFight({
         ...input,
         // FightObject.Set rescales Tough.
         tough: Math.ceil(input.tough / 1.5),
+        skillAdd: Array.from({ length: SKILL_ADD_SLOTS }, (_, n) => input.skillAdd?.[n] ?? 0),
         decDamage: input.decDamage ?? 0,
         rebound: input.rebound ?? 0,
         absorb: input.absorb ?? 0,
@@ -83,6 +85,10 @@ export function simulateFight({
         startHp: input.hp,
         startMp: input.mp,
         initAtkTime: input.atkTime,
+        atkTimeMul: 0,
+        atkTimeAdd: 0,
+        initDefense: input.defense,
+        defenseAdd: 0,
         initHit: input.hit,
         hitMulAdd: 0,
         initMinAttack: input.minAttack,
@@ -128,7 +134,14 @@ export function simulateFight({
     BUFFS[buff.id]?.onRemove?.(ctx, target, buff, fv, timer)
   }
 
-  function addBuff(target: Fighter, buffId: number, timer: number, fv: FightEvent, saveData = 0) {
+  function addBuff(
+    target: Fighter,
+    buffId: number,
+    timer: number,
+    fv: FightEvent,
+    saveData = 0,
+    saveData1 = 0,
+  ) {
     const def = BUFFS[buffId]
     if (!def || (def.validity !== 1 && def.validity !== 2)) return
     if (def.replace !== 0 && target.buffs) {
@@ -141,6 +154,7 @@ export function simulateFight({
     const buff: ActiveBuff = {
       id: buffId,
       saveData: Math.trunc(saveData),
+      saveData1: Math.trunc(saveData1),
       lifeTime: def.lifeTime,
       startTime: timer,
     }
@@ -340,7 +354,7 @@ export function simulateFight({
     const skillId = skill.secondid ?? skill.id
     if (skill.javascript) {
       const script = SKILL_SCRIPTS[skill.javascript]
-      const res = script ? script(ctx, self, target, fv, timer) : SKILL_LOSE
+      const res = script ? script(ctx, self, target, fv, timer, skill) : SKILL_LOSE
       if (res !== SKILL_SUCCESS) return res
       if (!changed.has(fv) || !fv.skillId) {
         fv.skillId = skillId
@@ -572,6 +586,17 @@ export function simulateFight({
       target.maxAttack = max
       target.minAtkMul = minAtkMul
       target.maxAtkMul = maxAtkMul
+    },
+    changeAtkTime: (target, atkTimeMul, atkTimeAdd) => {
+      const time = Math.trunc(f(f(target.initAtkTime * 100) / (100 + atkTimeMul))) - atkTimeAdd
+      if (time <= 0) return
+      target.atkTime = time
+      target.atkTimeMul = atkTimeMul
+      target.atkTimeAdd = atkTimeAdd
+    },
+    changeDefense: (target, defenseAdd) => {
+      target.defenseAdd = defenseAdd
+      target.defense = Math.trunc(target.initDefense * 100 * 0.01) + defenseAdd
     },
     changeHit: (target, hitMulAdd) => {
       target.hitMulAdd = hitMulAdd
