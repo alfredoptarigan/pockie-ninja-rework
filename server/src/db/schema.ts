@@ -522,6 +522,20 @@ export const singleGate = pgTable(
     // SGateCount runs ended on the UTC day `runsDay` (SGateTime).
     runsDay: date('runs_day'),
     runsToday: smallint('runs_today').notNull().default(0),
+    // SGateType: 0 no run, 1 auto running, 2 manual (or auto paused with auto runs left).
+    mode: smallint('mode').notNull().default(0),
+    // SGateExpAdd: bonus EXP on top of the pot (the floor 150 broadcast shows pot + bonus).
+    expBonus: bigint('exp_bonus', { mode: 'number' }).notNull().default(0),
+    // SGateAutoLoop and SGateAutoMaxLoop: auto runs left and auto runs bought.
+    autoRunsLeft: smallint('auto_runs_left').notNull().default(0),
+    autoRunsBought: smallint('auto_runs_bought').notNull().default(0),
+    // SGateAutoFloor: last floor auto mode aims for (MaxGate); SGateLastFloor: floor it reaches.
+    autoEndFloor: smallint('auto_end_floor'),
+    autoReachFloor: smallint('auto_reach_floor'),
+    // SGateAutoTime: last auto tick; one floor per 30 s, caught up lazily (also offline).
+    autoTickAt: timestamp('auto_tick_at', { withTimezone: true }),
+    // SGateBroadcast: the floor 50 world message was sent once.
+    floor50Broadcast: boolean('floor_50_broadcast').notNull().default(false),
   },
   (t) => [
     check('single_gate_best_floor', sql`${t.bestFloor} between 0 and 170`),
@@ -529,6 +543,10 @@ export const singleGate = pgTable(
     check(
       'single_gate_amounts',
       sql`${t.potExp} >= 0 and ${t.lives} >= 0 and ${t.livesBought} between 0 and 999 and ${t.runsToday} >= 0`,
+    ),
+    check(
+      'single_gate_auto',
+      sql`${t.mode} between 0 and 2 and ${t.expBonus} >= 0 and ${t.autoRunsLeft} between 0 and ${t.autoRunsBought} and ${t.autoRunsBought} between 0 and 3 and ${t.autoEndFloor} between 1 and 170 and ${t.autoReachFloor} between 1 and 170`,
     ),
   ],
 )
