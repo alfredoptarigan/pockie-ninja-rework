@@ -24,8 +24,17 @@ export interface SkillSlot {
   skillId: number | null
   level: number
 }
+/** At most this many scroll skills per skill-bar tree (M5 decision 18). */
+export const SCROLL_SKILLS_PER_TREE = 2
+/** A learned scroll skill; `expiresAt` null = permanent. */
+export interface ScrollSkill {
+  skillId: number
+  expiresAt: string | null
+}
 export interface SkillView extends SkillLearningView {
   trees: SkillSlot[][]
+  /** Live scroll skills (not in `learned`). */
+  scrolls: ScrollSkill[]
   activeTree: number
   freeResets: number
   resetCost: number

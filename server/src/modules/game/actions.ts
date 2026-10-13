@@ -45,7 +45,7 @@ import {
   talkItems,
   USE_ITEM_COMMAND,
 } from '../../game/quests.js'
-import { grantFreeSkillReset } from '../../game/skill-bar.js'
+import { grantFreeSkillReset, learnScrollSkill } from '../../game/skill-bar.js'
 import { useBuffItem } from '../../game/nonfight-buffs.js'
 import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
@@ -278,13 +278,14 @@ export async function actionRoutes(
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
 
-      const freeResetItem = await grantFreeSkillReset(tx, character, def)
-      const buffItem = await useBuffItem(tx, character.id, row.itemId, def)
+      const scrollItem = await learnScrollSkill(tx, character.id, def)
+      const freeResetItem = !scrollItem && (await grantFreeSkillReset(tx, character, def))
+      const buffItem = !scrollItem && (await useBuffItem(tx, character.id, row.itemId, def))
       const restore =
-        buffItem || freeResetItem
+        buffItem || freeResetItem || scrollItem
           ? undefined
           : restoreItem(character, def, await playerFighter(tx, character))
-      if (freeResetItem) {
+      if (scrollItem || freeResetItem) {
         await consumeOne(tx, row)
         await refreshBuffState(tx, character)
       } else if (buffItem) {
