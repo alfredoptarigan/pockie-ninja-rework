@@ -11,12 +11,18 @@ export const TEAM_PROMPT_TTL_MS = 60_000
 export const TEAM_GRACE_MS = 60_000
 
 export const teamTargetSchema = z.object({ characterId: z.uuid() }).strict()
+/** Invite or apply: the target by id or by name (case-insensitive, like the original 260). */
+export const teamInviteSchema = z.union([
+  teamTargetSchema,
+  z.object({ name: z.string().trim().min(1).max(32) }).strict(),
+])
 export const teamOrderSchema = z
   .object({ characterId: z.uuid(), direction: z.enum(['up', 'down']) })
   .strict()
 export const teamPromptParamsSchema = z.object({ id: z.uuid() })
 
 export type TeamTargetInput = z.input<typeof teamTargetSchema>
+export type TeamInviteInput = z.input<typeof teamInviteSchema>
 export type TeamOrderInput = z.input<typeof teamOrderSchema>
 
 export interface TeamMemberView {

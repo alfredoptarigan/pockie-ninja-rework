@@ -183,6 +183,29 @@ describe('apply', () => {
   })
 })
 
+describe('invite and apply by name', () => {
+  it('finds the ninja by name, case-insensitively', async () => {
+    const [a, b, c] = await ninjas(3)
+    const invited = await a.post('invite', { name: b.name.toUpperCase() })
+    expect(invited.statusCode).toBe(200)
+    expect((await b.team()).json().prompts[0].from.characterId).toBe(a.id)
+    await b.post(`prompts/${invited.json().prompt.promptId}/accept`)
+    const applied = await c.post('apply', { name: ` ${b.name.toLowerCase()} ` })
+    expect(applied.statusCode).toBe(200)
+    expect((await a.team()).json().prompts[0]).toMatchObject({ kind: 'apply' })
+  })
+
+  it('answers an unknown name and refuses a body with both or neither', async () => {
+    const [a] = await ninjas(1)
+    const unknown = await a.post('invite', { name: 'Nobody_here' })
+    expect(unknown.statusCode).toBe(404)
+    expect(unknown.json().error.message).toBe('There is no ninja with that name.')
+    expect(errorCode(await a.post('apply', { name: 'Nobody_here' }))).toBe('unknown_name')
+    expect((await a.post('invite', {})).statusCode).toBe(400)
+    expect((await a.post('invite', { name: a.name, characterId: a.id })).statusCode).toBe(400)
+  })
+})
+
 describe('kick, leave, captain and fight order', () => {
   it('kicks a member from a team of three and compacts the fight order', async () => {
     const [a, b, c] = await ninjas(3)
