@@ -2,6 +2,7 @@
 // joined with the ported scripts of RES/javascript/buff/*.js by the row's `javascript` path.
 // Rows whose script is not ported act as markers (added, replaced, expired, cleared) only.
 import fightBuffs from '../../../server/data/game/fight-buffs.json'
+import { NINJUTSU_BUFFS } from './scripts/ninjutsu-buffs.js'
 import type { ActiveBuff, FightContext, Fighter, FightEvent } from './types.js'
 
 type BuffScript = (
@@ -12,7 +13,7 @@ type BuffScript = (
   timer: number,
 ) => void
 
-interface BuffScripts {
+export interface BuffScripts {
   onAdd?: BuffScript
   onActivation?: BuffScript
   onRemove?: BuffScript
@@ -167,6 +168,7 @@ const BUFF_SCRIPTS: Record<string, BuffScripts> = {
   },
   // Marker after a parry, no effect.
   'buff/buff_gedangjiasu_11851.js': {},
+  ...NINJUTSU_BUFFS,
 }
 
 const toBuffDef = (row: BuffRow): BuffDef => ({

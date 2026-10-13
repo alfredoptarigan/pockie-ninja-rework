@@ -38,6 +38,9 @@ export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
     initAtkTime: input.atkTime,
     initHit: input.hit,
     hitMulAdd: 0,
+    initMinAttack: input.minAttack,
+    initMaxAttack: input.maxAttack,
+    atkMul: 0,
     next: 0,
     parryPercent: 0,
     initDodge: input.dodge,
@@ -77,14 +80,21 @@ export function fakeContext({
     },
     damage: (victim, amount) => calls.push(['damage', victim.index, Math.trunc(amount)]),
     damageWithValue: (victim, amount) => calls.push(['damage', victim.index, Math.trunc(amount)]),
-    addBuff: (target, buffId, _timer, _fv, saveData = 0) =>
-      calls.push(['addBuff', target.index, buffId, Math.trunc(saveData)]),
+    addBuff: (target, buffId, _timer, _fv, saveData = 0, saveData1 = 0) =>
+      calls.push([
+        'addBuff',
+        target.index,
+        buffId,
+        Math.trunc(saveData),
+        ...(saveData1 ? [Math.trunc(saveData1)] : []),
+      ]),
     removeBuff: (target, buffId) => calls.push(['removeBuff', target.index, buffId]),
     getBuff: (target, buffId) => target.buffs?.find((b) => b.id === buffId),
     changeNextAtkTime: (target, amount) =>
       calls.push(['changeNextAtkTime', target.index, Math.trunc(amount)]),
     changeHit: (target, add) => calls.push(['changeHit', target.index, add]),
     changeDodge: (target, add) => calls.push(['changeDodge', target.index, add]),
+    changeAtk: (target, atkMul) => calls.push(['changeAtk', target.index, atkMul]),
     changeSkill: (_self, _target, skill) => {
       calls.push(['changeSkill', skill.id])
       return 0
