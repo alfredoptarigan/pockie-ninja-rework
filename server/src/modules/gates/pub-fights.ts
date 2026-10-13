@@ -17,7 +17,8 @@ import { pubFightLineups } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
-import { vipDropMul, vipExp } from '../../game/vip.js'
+import { rewardExp } from '../../game/nonfight-buffs.js'
+import { vipDropMul } from '../../game/vip.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
   bad,
@@ -142,7 +143,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
         const hpDraw = drawPouch(hp, maxHp, character.hpPouch)
         const mpDraw = drawPouch(mp, maxMp, character.mpPouch)
         const kill = lastNpcRewards(npcIds[npcIds.length - 1]!, vipDropMul(character))
-        const exp = vipExp(kill.exp, character)
+        const exp = await rewardExp(tx, character, kill.exp)
         const { update, levelsGained } = withExp(
           character,
           { hp: hpDraw.value, mp: mpDraw.value, hpPouch: hpDraw.pouch, mpPouch: mpDraw.pouch },

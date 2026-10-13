@@ -1162,3 +1162,40 @@ export const treasureJackpots = pgTable(
   },
   (t) => [check('treasure_jackpots_claimed', sql`${t.claimed} >= 0`)],
 )
+
+export const characterBuffs = pgTable(
+  'character_buffs',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    buffId: integer('buff_id').notNull(),
+    group: integer('replacement_group').notNull(),
+    source: text('source').notNull(),
+    sourceId: text('source_id').notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.buffId] }),
+    uniqueIndex('character_buffs_group_key').on(t.characterId, t.group),
+    check('character_buffs_source', sql`${t.source} in ('food', 'title')`),
+  ],
+)
+
+export const characterTitles = pgTable(
+  'character_titles',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    titleId: integer('title_id').notNull(),
+    active: boolean('active').notNull().default(false),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.titleId] }),
+    uniqueIndex('character_titles_active_key')
+      .on(t.characterId)
+      .where(sql`${t.active} = true`),
+  ],
+)

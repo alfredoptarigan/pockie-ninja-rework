@@ -1,0 +1,3048 @@
+{
+  "buffs": {
+    "42100": {
+      "buffadd": 42100,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "42101": {
+      "buffadd": 42101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "42102": {
+      "buffadd": 42102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "42103": {
+      "buffadd": 42103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "42111": {
+      "buffadd": 42111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "42112": {
+      "buffadd": 42112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "42113": {
+      "buffadd": 42113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "43101": {
+      "buffadd": 43101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "43102": {
+      "buffadd": 43102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "43103": {
+      "buffadd": 43103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "43111": {
+      "buffadd": 43111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "43112": {
+      "buffadd": 43112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "43113": {
+      "buffadd": 43113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "44101": {
+      "buffadd": 44101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "44102": {
+      "buffadd": 44102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "44103": {
+      "buffadd": 44103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "44111": {
+      "buffadd": 44111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "44112": {
+      "buffadd": 44112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "44113": {
+      "buffadd": 44113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "45101": {
+      "buffadd": 45101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "45102": {
+      "buffadd": 45102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "45103": {
+      "buffadd": 45103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "45111": {
+      "buffadd": 45111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "45112": {
+      "buffadd": 45112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "45113": {
+      "buffadd": 45113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "46101": {
+      "buffadd": 46101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "46102": {
+      "buffadd": 46102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "46103": {
+      "buffadd": 46103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "46111": {
+      "buffadd": 46111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "46112": {
+      "buffadd": 46112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "46113": {
+      "buffadd": 46113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "47101": {
+      "buffadd": 47101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "47102": {
+      "buffadd": 47102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "47103": {
+      "buffadd": 47103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "47111": {
+      "buffadd": 47111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "47112": {
+      "buffadd": 47112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "47113": {
+      "buffadd": 47113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "48101": {
+      "buffadd": 48101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "48102": {
+      "buffadd": 48102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "48103": {
+      "buffadd": 48103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "48111": {
+      "buffadd": 48111,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "48112": {
+      "buffadd": 48112,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "48113": {
+      "buffadd": 48113,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "50001": {
+      "buffadd": 50001,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 1,
+      "type": 1,
+      "validity": 3
+    },
+    "50002": {
+      "buffadd": 50002,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 1,
+      "type": 1,
+      "validity": 3
+    },
+    "50003": {
+      "buffadd": 50003,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 1,
+      "type": 1,
+      "validity": 3
+    },
+    "50004": {
+      "buffadd": 50004,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 1,
+      "type": 1,
+      "validity": 3
+    },
+    "50005": {
+      "buffadd": 50005,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 1,
+      "type": 1,
+      "validity": 3
+    },
+    "53101": {
+      "buffadd": 53101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53102": {
+      "buffadd": 53102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53103": {
+      "buffadd": 53103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53104": {
+      "buffadd": 53104,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53105": {
+      "buffadd": 53105,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53106": {
+      "buffadd": 53106,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53107": {
+      "buffadd": 53107,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "53108": {
+      "buffadd": 53108,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54101": {
+      "buffadd": 54101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54102": {
+      "buffadd": 54102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54103": {
+      "buffadd": 54103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54104": {
+      "buffadd": 54104,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54105": {
+      "buffadd": 54105,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54106": {
+      "buffadd": 54106,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54107": {
+      "buffadd": 54107,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "54108": {
+      "buffadd": 54108,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55101": {
+      "buffadd": 55101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55102": {
+      "buffadd": 55102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55103": {
+      "buffadd": 55103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55104": {
+      "buffadd": 55104,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55105": {
+      "buffadd": 55105,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55106": {
+      "buffadd": 55106,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55107": {
+      "buffadd": 55107,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "55108": {
+      "buffadd": 55108,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56101": {
+      "buffadd": 56101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56102": {
+      "buffadd": 56102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56103": {
+      "buffadd": 56103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56104": {
+      "buffadd": 56104,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56105": {
+      "buffadd": 56105,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56106": {
+      "buffadd": 56106,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56107": {
+      "buffadd": 56107,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "56108": {
+      "buffadd": 56108,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57101": {
+      "buffadd": 57101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57102": {
+      "buffadd": 57102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57103": {
+      "buffadd": 57103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57104": {
+      "buffadd": 57104,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57105": {
+      "buffadd": 57105,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57106": {
+      "buffadd": 57106,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57107": {
+      "buffadd": 57107,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "57108": {
+      "buffadd": 57108,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58101": {
+      "buffadd": 58101,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58102": {
+      "buffadd": 58102,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58103": {
+      "buffadd": 58103,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58104": {
+      "buffadd": 58104,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58105": {
+      "buffadd": 58105,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58106": {
+      "buffadd": 58106,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58107": {
+      "buffadd": 58107,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "58108": {
+      "buffadd": 58108,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "59101": {
+      "buffadd": 59101,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "59102": {
+      "buffadd": 59102,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "59103": {
+      "buffadd": 59103,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60000": {
+      "buffadd": 60000,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 1,
+      "type": 1,
+      "validity": 3
+    },
+    "60001": {
+      "buffadd": 60001,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60002": {
+      "buffadd": 60002,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60003": {
+      "buffadd": 60003,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60004": {
+      "buffadd": 60004,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60005": {
+      "buffadd": 60005,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60006": {
+      "buffadd": 60006,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60007": {
+      "buffadd": 60007,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60008": {
+      "buffadd": 60008,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60009": {
+      "buffadd": 60009,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60010": {
+      "buffadd": 60010,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60011": {
+      "buffadd": 60011,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60012": {
+      "buffadd": 60012,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60013": {
+      "buffadd": 60013,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60014": {
+      "buffadd": 60014,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60015": {
+      "buffadd": 60015,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60016": {
+      "buffadd": 60016,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60017": {
+      "buffadd": 60017,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60018": {
+      "buffadd": 60018,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60019": {
+      "buffadd": 60019,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60020": {
+      "buffadd": 60020,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60021": {
+      "buffadd": 60021,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60022": {
+      "buffadd": 60022,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60023": {
+      "buffadd": 60023,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60024": {
+      "buffadd": 60024,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60025": {
+      "buffadd": 60025,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60026": {
+      "buffadd": 60026,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60027": {
+      "buffadd": 60027,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60028": {
+      "buffadd": 60028,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60029": {
+      "buffadd": 60029,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60030": {
+      "buffadd": 60030,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60031": {
+      "buffadd": 60031,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "60032": {
+      "buffadd": 60032,
+      "cleartype": 0,
+      "deltype": 1,
+      "overlying": 1,
+      "replace": 0,
+      "type": 1,
+      "validity": 3
+    },
+    "80101": {
+      "buffadd": 80101,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "80102": {
+      "buffadd": 80102,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "80201": {
+      "buffadd": 80201,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "80202": {
+      "buffadd": 80202,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 3,
+      "type": 1,
+      "validity": 3
+    },
+    "90001": {
+      "buffadd": 90001,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90002": {
+      "buffadd": 90002,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90003": {
+      "buffadd": 90003,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90004": {
+      "buffadd": 90004,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90005": {
+      "buffadd": 90005,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90006": {
+      "buffadd": 90006,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90007": {
+      "buffadd": 90007,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90008": {
+      "buffadd": 90008,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90009": {
+      "buffadd": 90009,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90010": {
+      "buffadd": 90010,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90011": {
+      "buffadd": 90011,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90012": {
+      "buffadd": 90012,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90013": {
+      "buffadd": 90013,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90014": {
+      "buffadd": 90014,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90015": {
+      "buffadd": 90015,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90016": {
+      "buffadd": 90016,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90017": {
+      "buffadd": 90017,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90018": {
+      "buffadd": 90018,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90019": {
+      "buffadd": 90019,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90020": {
+      "buffadd": 90020,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90021": {
+      "buffadd": 90021,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90022": {
+      "buffadd": 90022,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90023": {
+      "buffadd": 90023,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90024": {
+      "buffadd": 90024,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90025": {
+      "buffadd": 90025,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90026": {
+      "buffadd": 90026,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90027": {
+      "buffadd": 90027,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90028": {
+      "buffadd": 90028,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90029": {
+      "buffadd": 90029,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90030": {
+      "buffadd": 90030,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90031": {
+      "buffadd": 90031,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90032": {
+      "buffadd": 90032,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90033": {
+      "buffadd": 90033,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90034": {
+      "buffadd": 90034,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90035": {
+      "buffadd": 90035,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90036": {
+      "buffadd": 90036,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90037": {
+      "buffadd": 90037,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90038": {
+      "buffadd": 90038,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90039": {
+      "buffadd": 90039,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90040": {
+      "buffadd": 90040,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90041": {
+      "buffadd": 90041,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90042": {
+      "buffadd": 90042,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90043": {
+      "buffadd": 90043,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90044": {
+      "buffadd": 90044,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90045": {
+      "buffadd": 90045,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90046": {
+      "buffadd": 90046,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90047": {
+      "buffadd": 90047,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90048": {
+      "buffadd": 90048,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90049": {
+      "buffadd": 90049,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90051": {
+      "buffadd": 90051,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90052": {
+      "buffadd": 90052,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90053": {
+      "buffadd": 90053,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90054": {
+      "buffadd": 90054,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90055": {
+      "buffadd": 90055,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90056": {
+      "buffadd": 90056,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90057": {
+      "buffadd": 90057,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90058": {
+      "buffadd": 90058,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    },
+    "90059": {
+      "buffadd": 90059,
+      "cleartype": 0,
+      "deltype": 0,
+      "overlying": 1,
+      "replace": 2,
+      "type": 1,
+      "validity": 3
+    }
+  },
+  "properties": {
+    "1106": {
+      "MaxHPBuff": 1000
+    },
+    "1107": {
+      "MaxMPBuff": 264
+    },
+    "1108": {
+      "StrengthBuff": 456
+    },
+    "1109": {
+      "AgilityBuff": 352
+    },
+    "1110": {
+      "StaminaBuff": 162
+    },
+    "1111": {
+      "MaxHPMulBuff": 100
+    },
+    "1112": {
+      "MaxMPBuff": 1000
+    },
+    "1113": {
+      "MaxMPMulBuff": 100
+    },
+    "1114": {
+      "AbsAddAtkMulBuff": 100
+    },
+    "1115": {
+      "ExpMulBuff": 50
+    },
+    "1116": {
+      "ExpMulBuff": 30
+    },
+    "2100": {
+      "MaxHPBuff": 100,
+      "MaxMPBuff": 100
+    },
+    "2101": {
+      "StrengthBuff": 200,
+      "AgilityBuff": 200
+    },
+    "42101": {
+      "MaxHPBuff": 36
+    },
+    "42102": {
+      "MaxMPBuff": 36
+    },
+    "42103": {
+      "AbsAddAtkBuff": 5
+    },
+    "42111": {
+      "MaxHPBuff": 18
+    },
+    "42112": {
+      "MaxMPBuff": 18
+    },
+    "42113": {
+      "AbsAddAtkBuff": 3
+    },
+    "43101": {
+      "MaxHPBuff": 54
+    },
+    "43102": {
+      "MaxMPBuff": 54
+    },
+    "43103": {
+      "AbsAddAtkBuff": 7
+    },
+    "43111": {
+      "MaxHPBuff": 27
+    },
+    "43112": {
+      "MaxMPBuff": 27
+    },
+    "43113": {
+      "AbsAddAtkBuff": 4
+    },
+    "44101": {
+      "MaxHPBuff": 72
+    },
+    "44102": {
+      "MaxMPBuff": 72
+    },
+    "44103": {
+      "AbsAddAtkBuff": 10
+    },
+    "44111": {
+      "MaxHPBuff": 36
+    },
+    "44112": {
+      "MaxMPBuff": 36
+    },
+    "44113": {
+      "AbsAddAtkBuff": 5
+    },
+    "45101": {
+      "MaxHPBuff": 92
+    },
+    "45102": {
+      "MaxMPBuff": 92
+    },
+    "45103": {
+      "AbsAddAtkBuff": 12
+    },
+    "45111": {
+      "MaxHPBuff": 46
+    },
+    "45112": {
+      "MaxMPBuff": 46
+    },
+    "45113": {
+      "AbsAddAtkBuff": 6
+    },
+    "46101": {
+      "MaxHPBuff": 116
+    },
+    "46102": {
+      "MaxMPBuff": 116
+    },
+    "46103": {
+      "AbsAddAtkBuff": 15
+    },
+    "46111": {
+      "MaxHPBuff": 58
+    },
+    "46112": {
+      "MaxMPBuff": 58
+    },
+    "46113": {
+      "AbsAddAtkBuff": 8
+    },
+    "47101": {
+      "MaxHPBuff": 141
+    },
+    "47102": {
+      "MaxMPBuff": 141
+    },
+    "47103": {
+      "AbsAddAtkBuff": 19
+    },
+    "47111": {
+      "MaxHPBuff": 71
+    },
+    "47112": {
+      "MaxMPBuff": 71
+    },
+    "47113": {
+      "AbsAddAtkBuff": 10
+    },
+    "48101": {
+      "MaxHPBuff": 170
+    },
+    "48102": {
+      "MaxMPBuff": 170
+    },
+    "48103": {
+      "AbsAddAtkBuff": 24
+    },
+    "48111": {
+      "MaxHPBuff": 86
+    },
+    "48112": {
+      "MaxMPBuff": 86
+    },
+    "48113": {
+      "AbsAddAtkBuff": 12
+    },
+    "50001": {
+      "ExpMulBuff": 100
+    },
+    "50002": {
+      "ExpMulBuff": 60
+    },
+    "50003": {
+      "ExpMulBuff": 30
+    },
+    "50004": {
+      "ExpMulBuff": 150
+    },
+    "50005": {
+      "ExpMulBuff": 200
+    },
+    "53101": {
+      "AbsAddAtkBuff": 7,
+      "NeglectDefAttachBuff": 47
+    },
+    "53102": {
+      "AbsAddAtkBuff": 7,
+      "PierceBuff": 60
+    },
+    "53103": {
+      "AbsAddAtkBuff": 7,
+      "HitMulBuff": 60
+    },
+    "53104": {
+      "AbsAddAtkBuff": 7,
+      "CritMulBuff": 34
+    },
+    "53105": {
+      "MaxHPBuff": 54,
+      "ToughBuff": 51
+    },
+    "53106": {
+      "MaxHPBuff": 54,
+      "ParryMulBuff": 40
+    },
+    "53107": {
+      "MaxHPBuff": 54,
+      "DefenseBuff": 53
+    },
+    "53108": {
+      "MaxHPBuff": 54,
+      "DodgeMulBuff": 40
+    },
+    "54101": {
+      "AbsAddAtkBuff": 9,
+      "NeglectDefAttachBuff": 53
+    },
+    "54102": {
+      "AbsAddAtkBuff": 9,
+      "PierceBuff": 64
+    },
+    "54103": {
+      "AbsAddAtkBuff": 9,
+      "HitMulBuff": 64
+    },
+    "54104": {
+      "AbsAddAtkBuff": 9,
+      "CritMulBuff": 37
+    },
+    "54105": {
+      "MaxHPBuff": 72,
+      "ToughBuff": 56
+    },
+    "54106": {
+      "MaxHPBuff": 72,
+      "ParryMulBuff": 43
+    },
+    "54107": {
+      "MaxHPBuff": 72,
+      "DefenseBuff": 60
+    },
+    "54108": {
+      "MaxHPBuff": 72,
+      "DodgeMulBuff": 43
+    },
+    "55101": {
+      "AbsAddAtkBuff": 12,
+      "NeglectDefAttachBuff": 59
+    },
+    "55102": {
+      "AbsAddAtkBuff": 12,
+      "PierceBuff": 68
+    },
+    "55103": {
+      "AbsAddAtkBuff": 12,
+      "HitMulBuff": 68
+    },
+    "55104": {
+      "AbsAddAtkBuff": 12,
+      "CritMulBuff": 41
+    },
+    "55105": {
+      "MaxHPBuff": 92,
+      "ToughBuff": 61
+    },
+    "55106": {
+      "MaxHPBuff": 92,
+      "ParryMulBuff": 45
+    },
+    "55107": {
+      "MaxHPBuff": 92,
+      "DefenseBuff": 67
+    },
+    "55108": {
+      "MaxHPBuff": 92,
+      "DodgeMulBuff": 45
+    },
+    "56101": {
+      "AbsAddAtkBuff": 15,
+      "NeglectDefAttachBuff": 66
+    },
+    "56102": {
+      "AbsAddAtkBuff": 15,
+      "PierceBuff": 73
+    },
+    "56103": {
+      "AbsAddAtkBuff": 15,
+      "HitMulBuff": 73
+    },
+    "56104": {
+      "AbsAddAtkBuff": 15,
+      "CritMulBuff": 44
+    },
+    "56105": {
+      "MaxHPBuff": 116,
+      "ToughBuff": 66
+    },
+    "56106": {
+      "MaxHPBuff": 116,
+      "ParryMulBuff": 48
+    },
+    "56107": {
+      "MaxHPBuff": 116,
+      "DefenseBuff": 74
+    },
+    "56108": {
+      "MaxHPBuff": 116,
+      "DodgeMulBuff": 48
+    },
+    "57101": {
+      "AbsAddAtkBuff": 19,
+      "NeglectDefAttachBuff": 72
+    },
+    "57102": {
+      "AbsAddAtkBuff": 19,
+      "PierceBuff": 77
+    },
+    "57103": {
+      "AbsAddAtkBuff": 19,
+      "HitMulBuff": 77
+    },
+    "57104": {
+      "AbsAddAtkBuff": 19,
+      "CritMulBuff": 47
+    },
+    "57105": {
+      "MaxHPBuff": 141,
+      "ToughBuff": 71
+    },
+    "57106": {
+      "MaxHPBuff": 141,
+      "ParryMulBuff": 51
+    },
+    "57107": {
+      "MaxHPBuff": 141,
+      "DefenseBuff": 82
+    },
+    "57108": {
+      "MaxHPBuff": 141,
+      "DodgeMulBuff": 51
+    },
+    "58101": {
+      "AbsAddAtkBuff": 24,
+      "NeglectDefAttachBuff": 79
+    },
+    "58102": {
+      "AbsAddAtkBuff": 24,
+      "PierceBuff": 82
+    },
+    "58103": {
+      "AbsAddAtkBuff": 24,
+      "HitMulBuff": 82
+    },
+    "58104": {
+      "AbsAddAtkBuff": 24,
+      "CritMulBuff": 50
+    },
+    "58105": {
+      "MaxHPBuff": 170,
+      "ToughBuff": 76
+    },
+    "58106": {
+      "MaxHPBuff": 170,
+      "ParryMulBuff": 54
+    },
+    "58107": {
+      "MaxHPBuff": 170,
+      "DefenseBuff": 89
+    },
+    "58108": {
+      "MaxHPBuff": 170,
+      "DodgeMulBuff": 54
+    },
+    "59101": {
+      "MaxHPBuff": 0
+    },
+    "59102": {
+      "MaxHPBuff": 0
+    },
+    "59103": {
+      "MaxHPBuff": 0
+    },
+    "60000": {
+      "ExpMulBuff": 130
+    },
+    "60001": {
+      "MaxHPBuff": 10,
+      "ParryMulBuff": 15
+    },
+    "60002": {
+      "MaxHPBuff": 22,
+      "ParryMulBuff": 17
+    },
+    "60003": {
+      "MaxHPBuff": 36,
+      "ParryMulBuff": 18
+    },
+    "60004": {
+      "MaxHPBuff": 54,
+      "ParryMulBuff": 20
+    },
+    "60005": {
+      "MaxHPBuff": 72,
+      "ParryMulBuff": 21
+    },
+    "60006": {
+      "MaxHPBuff": 92,
+      "ParryMulBuff": 22
+    },
+    "60007": {
+      "MaxHPBuff": 116,
+      "ParryMulBuff": 24
+    },
+    "60008": {
+      "AbsAddAtkBuff": 1,
+      "CritMulBuff": 12
+    },
+    "60009": {
+      "AbsAddAtkBuff": 3,
+      "CritMulBuff": 13
+    },
+    "60010": {
+      "AbsAddAtkBuff": 5,
+      "CritMulBuff": 15
+    },
+    "60011": {
+      "AbsAddAtkBuff": 7,
+      "CritMulBuff": 16
+    },
+    "60012": {
+      "AbsAddAtkBuff": 10,
+      "CritMulBuff": 17
+    },
+    "60013": {
+      "AbsAddAtkBuff": 12,
+      "CritMulBuff": 18
+    },
+    "60014": {
+      "AbsAddAtkBuff": 15,
+      "CritMulBuff": 19
+    },
+    "60015": {
+      "MaxHPBuff": 10,
+      "DodgeMulBuff": 15
+    },
+    "60016": {
+      "MaxHPBuff": 22,
+      "DodgeMulBuff": 17
+    },
+    "60017": {
+      "MaxHPBuff": 36,
+      "DodgeMulBuff": 18
+    },
+    "60018": {
+      "MaxHPBuff": 54,
+      "DodgeMulBuff": 20
+    },
+    "60019": {
+      "MaxHPBuff": 72,
+      "DodgeMulBuff": 21
+    },
+    "60020": {
+      "MaxHPBuff": 92,
+      "DodgeMulBuff": 22
+    },
+    "60021": {
+      "MaxHPBuff": 116,
+      "DodgeMulBuff": 24
+    },
+    "60022": {
+      "AbsAddAtkBuff": 1,
+      "NeglectDefAttachBuff": 15
+    },
+    "60023": {
+      "AbsAddAtkBuff": 3,
+      "NeglectDefAttachBuff": 18
+    },
+    "60024": {
+      "AbsAddAtkBuff": 5,
+      "NeglectDefAttachBuff": 21
+    },
+    "60025": {
+      "AbsAddAtkBuff": 7,
+      "NeglectDefAttachBuff": 24
+    },
+    "60026": {
+      "AbsAddAtkBuff": 10,
+      "NeglectDefAttachBuff": 27
+    },
+    "60027": {
+      "AbsAddAtkBuff": 12,
+      "NeglectDefAttachBuff": 30
+    },
+    "60028": {
+      "AbsAddAtkBuff": 15,
+      "NeglectDefAttachBuff": 33
+    },
+    "60029": {
+      "MaxHPBuff": 144,
+      "ParryMulBuff": 26
+    },
+    "60030": {
+      "AbsAddAtkBuff": 18,
+      "CritMulBuff": 20
+    },
+    "60031": {
+      "MaxHPBuff": 144,
+      "DodgeMulBuff": 26
+    },
+    "60032": {
+      "AbsAddAtkBuff": 18,
+      "NeglectDefAttachBuff": 36
+    },
+    "80101": {
+      "DodgeMulBuff": 4,
+      "ParryMulBuff": 4,
+      "HitMulBuff": 7,
+      "PierceBuff": 7,
+      "CritMulBuff": 4,
+      "ToughBuff": 6,
+      "NeglectDefAttachBuff": 6,
+      "DefenseBuff": 7
+    },
+    "80102": {
+      "DodgeMulBuff": 9,
+      "ParryMulBuff": 9,
+      "HitMulBuff": 14,
+      "PierceBuff": 14,
+      "CritMulBuff": 8,
+      "ToughBuff": 12,
+      "NeglectDefAttachBuff": 12,
+      "DefenseBuff": 14
+    },
+    "80201": {
+      "DodgeMulBuff": -4,
+      "ParryMulBuff": -4,
+      "HitMulBuff": -7,
+      "PierceBuff": -7,
+      "CritMulBuff": -4,
+      "ToughBuff": -6,
+      "NeglectDefAttachBuff": -6,
+      "DefenseBuff": -7
+    },
+    "80202": {
+      "DodgeMulBuff": -9,
+      "ParryMulBuff": -9,
+      "HitMulBuff": -14,
+      "PierceBuff": -14,
+      "CritMulBuff": -8,
+      "ToughBuff": -12,
+      "NeglectDefAttachBuff": -12,
+      "DefenseBuff": -14
+    },
+    "90001": {
+      "StrengthBuff": 1300,
+      "AgilityBuff": 1300,
+      "StaminaBuff": 1300
+    },
+    "90002": {
+      "StrengthBuff": 1500,
+      "AgilityBuff": 1500,
+      "StaminaBuff": 1500
+    },
+    "90003": {
+      "StrengthBuff": 1700,
+      "AgilityBuff": 1700,
+      "StaminaBuff": 1700
+    },
+    "90004": {
+      "StrengthBuff": 1900,
+      "AgilityBuff": 1900,
+      "StaminaBuff": 1900
+    },
+    "90005": {
+      "StrengthBuff": 2100,
+      "AgilityBuff": 2100,
+      "StaminaBuff": 2100
+    },
+    "90006": {
+      "StrengthBuff": 2300,
+      "AgilityBuff": 2300,
+      "StaminaBuff": 2300
+    },
+    "90007": {
+      "MaxHPBuff": 50
+    },
+    "90008": {
+      "AtkTimeMulBuff": 40
+    },
+    "90009": {
+      "AbsAddAtkMulBuff": 50
+    },
+    "90010": {
+      "CapMulBuff": 5
+    },
+    "90011": {
+      "NeglectDefAttachBuff": 45,
+      "DefenseBuff": 51
+    },
+    "90012": {
+      "NeglectDefAttachBuff": 52,
+      "DefenseBuff": 59
+    },
+    "90013": {
+      "NeglectDefAttachBuff": 54,
+      "CritMulBuff": 35,
+      "DodgeMulBuff": 38,
+      "ParryMulBuff": 38
+    },
+    "90014": {
+      "AbsAddAtkMulBuff": 80,
+      "CritMulBuff": 34,
+      "HitMulBuff": 55
+    },
+    "90015": {
+      "AtkTimeMulBuff": 80,
+      "DodgeMulBuff": 37,
+      "CritMulBuff": 34
+    },
+    "90016": {
+      "DefenseBuff": 118,
+      "MaxHPMulBuff": 40,
+      "HitMulBuff": 55
+    },
+    "90017": {
+      "DodgeMulBuff": 74,
+      "AtkTimeMulBuff": 40,
+      "MaxHPMulBuff": 40
+    },
+    "90018": {
+      "HitMulBuff": 111,
+      "CritMulBuff": 34,
+      "NeglectDefAttachBuff": 52
+    },
+    "90019": {
+      "CritMulBuff": 68,
+      "NeglectDefAttachBuff": 52,
+      "HitMulBuff": 55
+    },
+    "90020": {
+      "NeglectDefAttachBuff": 104,
+      "AbsAddAtkMulBuff": 40,
+      "CritMulBuff": 34
+    },
+    "90021": {
+      "AbsAddAtkMulBuff": 30,
+      "AtkTimeMulBuff": 30,
+      "MaxHPMulBuff": 30
+    },
+    "90022": {
+      "AbsAddAtkMulBuff": 41,
+      "MinAtkBuff": 11,
+      "CritMulBuff": 33
+    },
+    "90023": {
+      "MaxHPMulBuff": 41,
+      "StaminaBuff": 4700,
+      "ToughBuff": 49
+    },
+    "90024": {
+      "AtkTimeMulBuff": 41,
+      "AgilityBuff": 4700,
+      "DodgeMulBuff": 36
+    },
+    "90025": {
+      "ParryMulBuff": 36,
+      "MaxHPBuff": 43,
+      "MaxMPBuff": 43
+    },
+    "90026": {
+      "CritMulBuff": 33,
+      "StrengthBuff": 4700,
+      "NeglectDefAttachBuff": 49
+    },
+    "90027": {
+      "DefenseBuff": 55,
+      "CritMulBuff": 33,
+      "MinAtkBuff": 11
+    },
+    "90028": {
+      "DodgeMulBuff": 36,
+      "DefenseBuff": 55,
+      "ParryMulBuff": 36
+    },
+    "90029": {
+      "PierceBuff": 54,
+      "HitMulBuff": 54,
+      "ParryMulBuff": 36
+    },
+    "90030": {
+      "HitMulBuff": 54,
+      "AtkTimeMulBuff": 41,
+      "CritMulBuff": 33
+    },
+    "90031": {
+      "NeglectDefAttachBuff": 49,
+      "ParryMulBuff": 36,
+      "StaminaBuff": 4700
+    },
+    "90032": {
+      "PierceBuff": 54,
+      "DodgeMulBuff": 36,
+      "MaxAtkBuff": 11
+    },
+    "90033": {
+      "ParryMulBuff": 36,
+      "DefenseBuff": 55,
+      "MaxMPBuff": 43
+    },
+    "90034": {
+      "StrengthBuff": 9800,
+      "HitMulBuff": 58,
+      "NeglectDefAttachBuff": 55
+    },
+    "90035": {
+      "AgilityBuff": 9800,
+      "AbsAddAtkMulBuff": 40,
+      "AtkTimeMulBuff": 40
+    },
+    "90036": {
+      "DefenseBuff": 124,
+      "ParryMulBuff": 55,
+      "MaxHPMulBuff": 40
+    },
+    "90037": {
+      "DodgeMulBuff": 78,
+      "PierceBuff": 58,
+      "NeglectDefAttachBuff": 55
+    },
+    "90038": {
+      "HitMulBuff": 116,
+      "MaxHPMulBuff": 40,
+      "AbsAddAtkMulBuff": 40
+    },
+    "90039": {
+      "CritMulBuff": 71,
+      "NeglectDefAttachBuff": 55,
+      "AtkTimeMulBuff": 40
+    },
+    "90040": {
+      "NeglectDefAttachBuff": 109,
+      "ToughBuff": 58,
+      "HitMulBuff": 58
+    },
+    "90041": {
+      "AbsAddAtkMulBuff": 50,
+      "AtkTimeMulBuff": 50,
+      "MaxHPMulBuff": 50
+    },
+    "90042": {
+      "HitMulBuff": 55,
+      "NeglectDefAttachBuff": 55,
+      "CritMulBuff": 50,
+      "DodgeMulBuff": 50
+    },
+    "90043": {
+      "HitMulBuff": 45,
+      "NeglectDefAttachBuff": 45,
+      "CritMulBuff": 40,
+      "DodgeMulBuff": 40
+    },
+    "90044": {
+      "StrengthBuff": 2500,
+      "AgilityBuff": 2500,
+      "StaminaBuff": 2500
+    },
+    "90045": {
+      "NeglectDefAttachBuff": 75,
+      "CritMulBuff": 49,
+      "DodgeMulBuff": 53,
+      "ParryMulBuff": 53
+    },
+    "90046": {
+      "HitMulBuff": 40,
+      "NeglectDefAttachBuff": 40,
+      "ToughBuff": 40,
+      "AbsAddAtkMulBuff": 30,
+      "AtkTimeMulBuff": 30,
+      "MaxHPMulBuff": 30
+    },
+    "90047": {
+      "CritMulBuff": 30,
+      "StrengthBuff": 4000,
+      "NeglectDefAttachBuff": 45
+    },
+    "90048": {
+      "HitMulBuff": 27,
+      "AtkTimeMulBuff": 20,
+      "MinAtkBuff": 17
+    },
+    "90049": {
+      "NeglectDefAttachBuff": 78,
+      "CritMulBuff": 51,
+      "DodgeMulBuff": 50,
+      "ParryMulBuff": 55
+    },
+    "90051": {
+      "HitMulBuff": 100
+    },
+    "90052": {
+      "ToughBuff": 150
+    },
+    "90053": {
+      "DodgeMulBuff": 100
+    },
+    "90054": {
+      "HitMulMulBuff": 30
+    },
+    "90055": {
+      "AbsAddAtkMulBuff": 100
+    },
+    "90056": {
+      "NeglectDefAttachBuff": 100
+    },
+    "90057": {
+      "AtkTimeMulBuff": 100
+    },
+    "90058": {
+      "MaxHPMulBuff": 200
+    },
+    "90059": {
+      "NeglectDefMulBuff": 30
+    }
+  },
+  "titles": {
+    "0": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle00"
+    },
+    "1": {
+      "BuffID": 90001,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle01"
+    },
+    "10": {
+      "BuffID": 90008,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle10"
+    },
+    "11": {
+      "BuffID": 90009,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle11"
+    },
+    "12": {
+      "BuffID": 90010,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle12"
+    },
+    "13": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle101"
+    },
+    "14": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle102"
+    },
+    "15": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle103"
+    },
+    "16": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle104"
+    },
+    "17": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle105"
+    },
+    "18": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle201"
+    },
+    "19": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle202"
+    },
+    "2": {
+      "BuffID": 90002,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle02"
+    },
+    "20": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle203"
+    },
+    "21": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle204"
+    },
+    "22": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle205"
+    },
+    "23": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle301"
+    },
+    "24": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle302"
+    },
+    "25": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle303"
+    },
+    "26": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle304"
+    },
+    "27": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle305"
+    },
+    "28": {
+      "BuffID": 90011,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle13"
+    },
+    "29": {
+      "BuffID": 90012,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle14"
+    },
+    "3": {
+      "BuffID": 90003,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle03"
+    },
+    "30": {
+      "BuffID": 90013,
+      "EffectDuration": 14,
+      "TitleName": "EffortTitle15"
+    },
+    "31": {
+      "BuffID": 90014,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle16"
+    },
+    "32": {
+      "BuffID": 90015,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle17"
+    },
+    "33": {
+      "BuffID": 90016,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle18"
+    },
+    "34": {
+      "BuffID": 90017,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle19"
+    },
+    "35": {
+      "BuffID": 90018,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle20"
+    },
+    "36": {
+      "BuffID": 90019,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle21"
+    },
+    "37": {
+      "BuffID": 90020,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle22"
+    },
+    "38": {
+      "BuffID": 90021,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle23"
+    },
+    "39": {
+      "BuffID": 90022,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle24"
+    },
+    "4": {
+      "BuffID": 90004,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle04"
+    },
+    "40": {
+      "BuffID": 90023,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle25"
+    },
+    "41": {
+      "BuffID": 90024,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle26"
+    },
+    "42": {
+      "BuffID": 90025,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle27"
+    },
+    "43": {
+      "BuffID": 90026,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle28"
+    },
+    "44": {
+      "BuffID": 90027,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle29"
+    },
+    "45": {
+      "BuffID": 90028,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle30"
+    },
+    "46": {
+      "BuffID": 90029,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle31"
+    },
+    "47": {
+      "BuffID": 90030,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle32"
+    },
+    "48": {
+      "BuffID": 90031,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle33"
+    },
+    "49": {
+      "BuffID": 90032,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle34"
+    },
+    "5": {
+      "BuffID": 90005,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle05"
+    },
+    "50": {
+      "BuffID": 90033,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle35"
+    },
+    "51": {
+      "BuffID": 90022,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle36"
+    },
+    "52": {
+      "BuffID": 90023,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle37"
+    },
+    "53": {
+      "BuffID": 90024,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle38"
+    },
+    "54": {
+      "BuffID": 90025,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle39"
+    },
+    "55": {
+      "BuffID": 90026,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle40"
+    },
+    "56": {
+      "BuffID": 90027,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle41"
+    },
+    "57": {
+      "BuffID": 90028,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle42"
+    },
+    "58": {
+      "BuffID": 90029,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle43"
+    },
+    "59": {
+      "BuffID": 90030,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle44"
+    },
+    "6": {
+      "BuffID": 90006,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle06"
+    },
+    "60": {
+      "BuffID": 90031,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle45"
+    },
+    "61": {
+      "BuffID": 90032,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle46"
+    },
+    "62": {
+      "BuffID": 90033,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle47"
+    },
+    "63": {
+      "BuffID": 90034,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle48"
+    },
+    "64": {
+      "BuffID": 90035,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle49"
+    },
+    "65": {
+      "BuffID": 90036,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle50"
+    },
+    "66": {
+      "BuffID": 90037,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle51"
+    },
+    "67": {
+      "BuffID": 90038,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle52"
+    },
+    "68": {
+      "BuffID": 90039,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle53"
+    },
+    "69": {
+      "BuffID": 90040,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle54"
+    },
+    "7": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle07"
+    },
+    "70": {
+      "BuffID": 90041,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle55"
+    },
+    "71": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle56"
+    },
+    "72": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle57"
+    },
+    "73": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle58"
+    },
+    "74": {
+      "BuffID": 90042,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle59"
+    },
+    "75": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle106"
+    },
+    "76": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "AvatarTitle107"
+    },
+    "77": {
+      "BuffID": 90043,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle60"
+    },
+    "78": {
+      "BuffID": 90044,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle61"
+    },
+    "79": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle62"
+    },
+    "8": {
+      "BuffID": 90007,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle08"
+    },
+    "80": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle63"
+    },
+    "81": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle64"
+    },
+    "82": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle65"
+    },
+    "83": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle66"
+    },
+    "84": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle67"
+    },
+    "85": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle68"
+    },
+    "86": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle69"
+    },
+    "87": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle70"
+    },
+    "88": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle71"
+    },
+    "89": {
+      "BuffID": 0,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle72"
+    },
+    "9": {
+      "BuffID": 0,
+      "EffectDuration": -1,
+      "TitleName": "EffortTitle09"
+    },
+    "90": {
+      "BuffID": 90045,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle73"
+    },
+    "91": {
+      "BuffID": 90046,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle74"
+    },
+    "92": {
+      "BuffID": 90047,
+      "EffectDuration": 7,
+      "TitleName": "EffortTitle75"
+    },
+    "93": {
+      "BuffID": 90048,
+      "EffectDuration": 30,
+      "TitleName": "EffortTitle76"
+    }
+  }
+}

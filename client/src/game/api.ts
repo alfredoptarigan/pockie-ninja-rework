@@ -253,3 +253,21 @@ export function usePickTreasure() {
     }>(`/api/game/treasure/${input.id}/pick`, { slot: input.slot }),
   )
 }
+
+export interface BuffsView {
+  buffs: { buffId: number; nameKey: string; expiresAt: string | null; removable: boolean }[]
+  titles: { titleId: number; nameKey: string; active: boolean; expiresAt: string | null }[]
+}
+export function useBuffs() {
+  return useQuery({ queryKey: ['game', 'buffs'], queryFn: () => api<BuffsView>('/api/game/buffs') })
+}
+export function useActivateTitle() {
+  return useGameAction((titleId: number) =>
+    post<BuffsView & { character: Character }>('/api/game/titles/activate', { titleId }),
+  )
+}
+export function useRemoveBuff() {
+  return useGameAction((buffId: number) =>
+    post<BuffsView & { character: Character }>(`/api/game/buffs/${buffId}/remove`),
+  )
+}

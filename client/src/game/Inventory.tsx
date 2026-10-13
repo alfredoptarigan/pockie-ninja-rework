@@ -11,6 +11,7 @@ import {
   useUseItem,
   usePendingTreasure,
 } from './api'
+import { BuffsPanel } from './BuffsPanel'
 import { TreasurePanel } from './TreasurePanel'
 import { useOutfitStand } from './art'
 import { BagForgeButtons, GearIcon, ItemForgeActions, useGear } from './forge'
@@ -68,6 +69,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const pendingTreasure = usePendingTreasure()
   const [treasureBox, setTreasureBox] = useState<InventoryItem | null>(null)
   const [treasureVisible, setTreasureVisible] = useState(false)
+  const [buffsVisible, setBuffsVisible] = useState(false)
   const equip = useEquipItem()
   const unequip = useUnequipItem()
   const gear = useGear().data ?? {}
@@ -110,9 +112,17 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   return (
     <div className="relative -m-3 h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
       <BagPages />
+      <GameButton
+        className="absolute top-[90px] left-[100px] z-10"
+        disabled={treasureVisible}
+        onClick={() => setBuffsVisible(true)}
+      >
+        Buffs and titles
+      </GameButton>
+      {buffsVisible && <BuffsPanel onClose={() => setBuffsVisible(false)} />}
       {pendingTreasure.data?.treasure && !treasureVisible && (
         <GameButton
-          className="absolute top-[90px] left-[100px] z-10"
+          className="absolute top-[120px] left-[100px] z-10"
           onClick={() => setTreasureVisible(true)}
         >
           Resume treasure

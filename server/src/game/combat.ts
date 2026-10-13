@@ -7,6 +7,7 @@ import {
   gainExp,
   simulateFight,
   type CombatStats,
+  type Bonuses,
   type FighterInput,
   type SkillInput,
 } from '@pockie/game-core'
@@ -30,7 +31,8 @@ import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.
 import { drawPouch } from './pouch.js'
 import { grantDrops, loadQuests, saveQuests, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
-import { vipDropMul, vipExp } from './vip.js'
+import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
+import { vipDropMul } from './vip.js'
 
 type CharacterRow = typeof characters.$inferSelect
 /** A player's fighter keeps the derived stats (strength, weapon class) for display. */
@@ -89,18 +91,23 @@ export function monsterFighter(id: string): FighterInput {
 }
 
 export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<PlayerFighter> {
-  return playerFighterFrom(character, await equippedGear(tx, character.id))
+  return playerFighterFrom(
+    character,
+    await equippedGear(tx, character.id),
+    await buffBonuses(tx, character.id),
+  )
 }
 
 /** A character's fighter from its equipped rows (RefreshSystem with the *Equip terms). */
 export function playerFighterFrom(
   character: Pick<CharacterRow, 'name' | 'avatarId' | 'gender' | 'level' | 'hp' | 'mp'>,
   equipped: readonly Gear[],
+  effects: Partial<Bonuses> = {},
 ): PlayerFighter {
   const stats = deriveStats(
     avatarStats(character.avatarId),
     character.level,
-    equipmentBonuses(equipped, character),
+    sumBonuses(equipmentBonuses(equipped, character), effects),
   )
   return {
     ...stats,
@@ -149,10 +156,11 @@ export async function fightMonster(
 ) {
   const seed = randomInt(2 ** 31)
   const equipped = await equippedGear(tx, character.id)
-  const bonuses = equipmentBonuses(equipped, character)
+  const effects = await buffBonuses(tx, character.id)
+  const bonuses = sumBonuses(equipmentBonuses(equipped, character), effects)
   const statsAt = (level: number) => deriveStats(avatarStats(character.avatarId), level, bonuses)
   const replay = simulateFight({
-    attackers: [playerFighterFrom(character, equipped)],
+    attackers: [playerFighterFrom(character, equipped, effects)],
     defenders: [monsterFighter(monsterId)],
     seed,
   })
@@ -168,11 +176,12 @@ export async function fightMonster(
     const monster = npc(monsterId)!
     const random = createRandom(seed ^ 0x5eed)
     const dropMul = vipDropMul(character)
-    rewards.exp = vipExp(Number(monster.NpcExp ?? 0), character)
+    rewards.exp = buffExp(Number(monster.NpcExp ?? 0), character, bonuses.expMul)
     rewards.stone = random.between(
       Number(monster.DropCapital0Min ?? 0),
       Number(monster.DropCapital0Max ?? 0),
     )
+    rewards.stone = buffStone(rewards.stone, bonuses.capMul)
     for (const libId of monsterDropLibIds(monsterId)) {
       rewards.items.push(...rollLibDrops(libId, random, dropMul))
     }

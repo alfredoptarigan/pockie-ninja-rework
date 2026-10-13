@@ -32,7 +32,8 @@ import type { Db } from '../../db/client.js'
 import { tollGateRuns } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { removeItems, type Tx } from '../../game/progress.js'
-import { vipDropMul, vipExp } from '../../game/vip.js'
+import { rewardExp } from '../../game/nonfight-buffs.js'
+import { vipDropMul } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
@@ -243,7 +244,7 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
         rewards.exp += reward?.exp ?? 0
         rewards.stone += reward?.stone ?? 0
       }
-      rewards.exp = vipExp(rewards.exp, character)
+      rewards.exp = await rewardExp(tx, character, rewards.exp)
       const { update, levelsGained } = withExp(character, restored, rewards.exp)
       rewards.levelsGained = levelsGained
       rewards.items = await grantDrops(tx, character.id, kill.items)
