@@ -450,3 +450,26 @@ describe('shop tab selection', () => {
     expect((await client.get(`${base}/open?tab=99`)).statusCode).toBe(400)
   })
 })
+
+describe('shop scene check', () => {
+  it('refuses every shop action outside a scene with a shop NPC', async () => {
+    await update({ sceneId: 2101, stone: 10000, gold: 1000 })
+    const medicine = await give('i160006', { bound: true, count: 5 })
+    const refused = [
+      await client.get(`${base}/open`),
+      await post('wholesale/buy', { itemId: 'i160006', count: 1 }),
+      await post('refresh', { shopType: 1, mode: 'instant' }),
+      await post('buy', { shopType: 1, slot: 0, currency: 'stone' }),
+      await post('buy-all', { shopType: 1 }),
+      await post('sell', { inventoryId: medicine.id, count: 1 }),
+      await post('sell-all', { inventoryIds: [medicine.id] }),
+      await post('pouches/refill', { currency: 'gold', hp: 1000, mp: 0 }),
+    ]
+    for (const response of refused) {
+      expect(response.statusCode).toBe(400)
+      expect(response.json().error.code).toBe('not_here')
+    }
+    expect((await row()).stone).toBe(10000)
+    expect((await bag())[0]!.count).toBe(5)
+  })
+})
