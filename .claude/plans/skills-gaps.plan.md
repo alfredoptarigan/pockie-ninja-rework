@@ -67,6 +67,31 @@ with its real kit.
 - [ ] **B6 Gear skill bonuses** (+skill level, granted skills; skipped in `sets.ts` today).
 - [ ] **B7 Non-fight buffs**: food, EXP scrolls, pills, titles from `UnFightBuff.ini` via item use.
 
+## Who does what (Claude / Codex)
+
+Split by folder so the two never edit the same file. Both follow the parallel rules: own worktree
+and branch, private test DB via `TEST_DATABASE_URL` (name contains `test`), no push or merge to
+`main` (Claude's main session reviews and merges one branch at a time).
+
+**Claude: fight engine** (`game-core/src/battle/**`, `game-core/src/equipment/**`)
+Order: A2, A3, A6, B1 (in batches), A4, B5, B6.
+- Only Claude edits `unportedKnown` in `slice-skills.test.ts`, `skills.ts`, `fight.ts`,
+  `buffs.ts` and `scripts/*`.
+- Exposes for Codex: `LEARNABLE_NINJUTSU` (the 40 ids) and `ELEMENT_PASSIVES` (2801-2810) from
+  `game-core`, landed first with B1's first batch.
+
+**Codex: server, client, items** (`server/src/**`, `server/drizzle/**`, `client/src/**`, `shared/**`)
+Order: A5, B7, then B2, B3, B4.
+- A5 needs the user's call first: build the treasure box or pull the scroll from shop and drops.
+- B2/B3 own the DB tables, API, and loading the slotted skills into `server/src/game/combat.ts`.
+  Import the id lists from `game-core`; never edit `game-core/src/battle/**`.
+- B4 reads names from `tools/i18n/en.json`; no emojis, English only.
+- Must not touch: `game-core/src/battle/**`, `server/data/game/skills.json`.
+
+Hand-off points: Codex starts B2 once `LEARNABLE_NINJUTSU` is on `main`. A ninjutsu in the skill
+bar whose script is not ported yet still fights as a normal attack, so B2-B4 do not wait for all
+of B1.
+
 ## Moved or redefined elsewhere
 
 - **M5 "scroll and secret-technique skills"**: ultimates are done; scroll skills have no source.
