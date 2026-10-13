@@ -19,6 +19,7 @@ import { drawPouch } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
 import { vipDropMul, vipExp } from '../../game/vip.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
+import { requireNoTeam } from '../teams/index.js'
 import {
   bad,
   characterView,
@@ -36,16 +37,16 @@ import {
 } from './common.js'
 import { pubData, pubPool } from './data.js'
 
-function requirePool(character: CharacterRow) {
+export function requirePool(character: CharacterRow) {
   const pool = pubPool(character.sceneId)
   if (!pool?.length) throw bad('not_here', 'There are no pub fights in this area.')
   return pool
 }
 
-const fightsToday = (character: CharacterRow) =>
+export const fightsToday = (character: CharacterRow) =>
   character.pubFightDay === utcDay() ? character.pubFightsToday : 0
 
-function pubView(character: CharacterRow, lineup: string[], now = new Date()): PubView {
+export function pubView(character: CharacterRow, lineup: string[], now = new Date()): PubView {
   const pulled = character.pubFightPulledAt
   return {
     sceneId: character.sceneId,
@@ -59,7 +60,7 @@ function pubView(character: CharacterRow, lineup: string[], now = new Date()): P
 }
 
 /** The scene's line-up; the first visit picks three different NPCs. */
-async function lineupOf(tx: Tx, character: CharacterRow, pool: string[]) {
+export async function lineupOf(tx: Tx, character: CharacterRow, pool: string[]) {
   const where = and(
     eq(pubFightLineups.characterId, character.id),
     eq(pubFightLineups.sceneId, character.sceneId),
@@ -85,7 +86,7 @@ async function saveLineup(tx: Tx, character: CharacterRow, npcIds: string[]) {
  * A pull: a new line-up and, for a matching combo, its DropLib at once. The hourly pull refuses a
  * full bag; the pull after a win is fight loot, so combo items that do not fit are lost.
  */
-async function pull(tx: Tx, character: CharacterRow, pool: string[], afterWin = false) {
+export async function pull(tx: Tx, character: CharacterRow, pool: string[], afterWin = false) {
   const lineup = pullLineup(pool, createRandom(newSeed()))
   const { rewardRules, drops } = pubData()
   const ruleId = comboRule(lineup, rewardRules)
@@ -124,6 +125,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
   app.post('/pub/fight', { config: { rateLimit: RATE_LIMITS.gateFight } }, async (request) =>
     withCharacter(db, request, async (tx, character): Promise<PubFightResult> => {
+      await requireNoTeam(tx, character.id, 'fight in the pub alone')
       const pool = requirePool(character)
       const npcIds = await lineupOf(tx, character, pool)
       if (character.hp < (await playerFighter(tx, character)).maxHp)

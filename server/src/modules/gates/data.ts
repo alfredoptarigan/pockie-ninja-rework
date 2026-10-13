@@ -21,7 +21,8 @@ function load<T>(name: string): T {
   return cache.get(name) as T
 }
 
-type GateRow = TollGateRow & { Hard: number | string; BossName: string }
+/** RequirTeam: 0 solo only (100000), 2 solo or team. */
+type GateRow = TollGateRow & { Hard: number | string; BossName: string; RequirTeam: number }
 
 export const tollGateTables = (): TollGateTables & { gates: Record<string, GateRow> } => ({
   gates: load('toll-gates'),
@@ -34,6 +35,8 @@ export const tollGateConfig = () =>
   load<{
     props: { RestoreHP: number; RestoreMP: number; EntryTollGateMaxTimes: number }
     cards: { ShowAllCap: number; ExchangeCap: number }
+    /** CaptianMul.ini by team size: the captain's bonus % on sub gate and gate rewards. */
+    captainMul: Record<string, { ExpMul: number; MoneyMul: number }>
   }>('toll-gate-config')
 
 const cards = () =>

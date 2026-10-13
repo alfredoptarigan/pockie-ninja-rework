@@ -29,6 +29,7 @@ import {
   visitRequiredScenes,
 } from './field-data.js'
 import { RATE_LIMITS } from './rate-limits.js'
+import { requireNoTeam } from '../teams/index.js'
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
 const MAX_LISTED_MONSTERS = 6
@@ -196,6 +197,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
       requireAlive(character, 'fight again')
+      await requireNoTeam(tx, character.id, 'fight monsters')
       const opponent = await fightTarget(tx, character, monsterId)
 
       const result = await fightMonster(tx, character, opponent)

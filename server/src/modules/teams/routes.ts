@@ -3,6 +3,7 @@
 import {
   TEAM_GRACE_MS,
   teamOrderSchema,
+  teamInviteSchema,
   teamPromptParamsSchema,
   teamTargetSchema,
   type TeamState,
@@ -11,6 +12,7 @@ import type { FastifyInstance, FastifyRequest } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { requireUser } from '../game/characters.js'
 import { onCharacterOffline, onCharacterOnline } from '../realtime/events.js'
+import { characterByName } from '../social/players.js'
 import { boardView, joinBoard, leaveBoard } from './board.js'
 import { characterIdOf, notifyTeam, teamOf, teamTransaction, type TeamContext } from './context.js'
 import {
@@ -122,8 +124,14 @@ export async function teamRoutes(app: FastifyInstance, { db }: { db: Db }) {
     act(request, none, (ctx, actorId) => teamState(ctx, actorId)),
   )
 
-  app.post('/invite', { config: LIMITS.write }, (request) => {
-    const { characterId } = teamTargetSchema.parse(request.body)
+  /** The invite or apply target: by id, or by name (ids never change, so no lock is needed). */
+  async function targetOf(request: FastifyRequest) {
+    const input = teamInviteSchema.parse(request.body)
+    return 'name' in input ? (await characterByName(db, input.name)).id : input.characterId
+  }
+
+  app.post('/invite', { config: LIMITS.write }, async (request) => {
+    const characterId = await targetOf(request)
     return act(
       request,
       () => [characterId],
@@ -134,8 +142,8 @@ export async function teamRoutes(app: FastifyInstance, { db }: { db: Db }) {
     )
   })
 
-  app.post('/apply', { config: LIMITS.write }, (request) => {
-    const { characterId } = teamTargetSchema.parse(request.body)
+  app.post('/apply', { config: LIMITS.write }, async (request) => {
+    const characterId = await targetOf(request)
     return act(
       request,
       () => [characterId],

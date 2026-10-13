@@ -40,6 +40,7 @@ import { vipDropMul, vipExp } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import { RATE_LIMITS } from './rate-limits.js'
+import { requireNoTeam } from '../teams/index.js'
 
 type CharacterRow = typeof characters.$inferSelect
 
@@ -274,6 +275,7 @@ export async function exploreRoutes(app: FastifyInstance, { db }: { db: Db }) {
       userId,
       async (tx, character, pending) => {
         requireAlive(character, 'explore')
+        await requireNoTeam(tx, character.id, 'explore')
         if (input.action === 'pick') {
           const search = requireSearch(character, pending, spotId, input.searchId)
           const response = await settleSearch(tx, character, search, input.cardIndex)

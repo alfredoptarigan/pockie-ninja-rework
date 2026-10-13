@@ -1,5 +1,6 @@
-// Solo toll gates (TollGateSystem.java): the guard menu with today's tries, entry, the ordered
-// point fights, leaving, and the crystal exchange. The card flip is in cards.ts.
+// Toll gates (TollGateSystem.java): the guard menu with today's tries, entry, the ordered point
+// fights, leaving, and the crystal exchange. The card flip is in cards.ts; a team member's entry,
+// fights and exit go to the team runs (teams/runs.ts).
 import {
   CARD_NONE,
   createRandom,
@@ -21,6 +22,7 @@ import {
   gateExchangeSchema,
   type CardsView,
   type GateExchange,
+  type GateRewards,
   type GateRunView,
   type GatesView,
   type GateTier,
@@ -36,6 +38,8 @@ import { vipDropMul, vipExp } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
+import { recordTollGateProgress, tollGateProgress } from '../rankings/toll-gate-weekly.js'
+import { requireNoTeam } from '../teams/index.js'
 import {
   bad,
   bagFits,
@@ -61,7 +65,7 @@ export type RunRow = typeof tollGateRuns.$inferSelect
 
 const TIERS: Record<string, GateTier> = { '1': 'hard', '2': 'normal', '3': 'pass' }
 
-const REFUSALS: Record<EntryRefusal, string> = {
+export const REFUSALS: Record<EntryRefusal, string> = {
   no_tries: 'You have used all of today’s toll gate tries.',
   too_low: 'Your level is too low for this toll gate.',
   missing_item: 'You need the entry item for this toll gate.',
@@ -115,6 +119,99 @@ export function runView(row: RunRow): GateRunView {
     nextNpcIds: cleared ? null : layout[row.subGate]![row.point]!.npcIds,
     cards: cardsView(row),
   }
+}
+
+/** Why `character` may not enter `gateId` (the solo checks every team member passes too). */
+export async function entryRefusalOf(tx: Tx, character: CharacterRow, gateId: number) {
+  const itemId = requiredItem(gateId)
+  const fighter = await playerFighter(tx, character)
+  return entryRefusal({
+    level: character.level,
+    triesUsed: triesUsed(character),
+    maxTries: tollGateConfig().props.EntryTollGateMaxTimes,
+    minLevel: tollGateTables().gates[String(gateId)]!.RequirMinLevel,
+    hasItem: !itemId || (await countItem(tx, character.id, itemId)) > 0,
+    hasWeapon: await hasWeapon(tx, character.id),
+    hp: character.hp,
+    maxHp: fighter.maxHp,
+  })
+}
+
+/** Spends the entry item and a try and starts the run (one row per team member). */
+export async function payEntry(
+  tx: Tx,
+  character: CharacterRow,
+  gateId: number,
+  teamId: string | null = null,
+) {
+  const itemId = requiredItem(gateId)
+  if (itemId) await removeItems(tx, character.id, itemId, 1)
+  await saveCharacter(tx, character.id, {
+    tollGateDay: utcDay(),
+    tollGateEntries: triesUsed(character) + 1,
+  })
+  const [row] = await tx
+    .insert(tollGateRuns)
+    .values({ characterId: character.id, ...startRun(gateId), teamId })
+    .returning()
+  return row!
+}
+
+/**
+ * A won point for one ninja: restore, the last NPC's kill reward, the sub gate and gate rewards
+ * (plus the captain bonus from CaptianMul on those two), the next point or the dealt cards, and
+ * the weekly rank progress. Every team member gets this in full (teams.md 4.2).
+ */
+export async function winForMember(
+  tx: Tx,
+  character: CharacterRow,
+  row: RunRow,
+  state: { hp: number; mp: number; maxHp: number; maxMp: number },
+  lastNpcId: string,
+  outcome: ReturnType<typeof winPoint>,
+  captainMul?: { ExpMul: number; MoneyMul: number },
+) {
+  const restored = restoreAfterWin(state, tollGateConfig().props)
+  const kill = lastNpcRewards(lastNpcId, vipDropMul(character))
+  const gateExp = (outcome.subGateReward?.exp ?? 0) + (outcome.gateReward?.exp ?? 0)
+  const gateStone = (outcome.subGateReward?.stone ?? 0) + (outcome.gateReward?.stone ?? 0)
+  const bonus = {
+    exp: Math.trunc((gateExp * (captainMul?.ExpMul ?? 0)) / 100),
+    stone: Math.trunc((gateStone * (captainMul?.MoneyMul ?? 0)) / 100),
+  }
+  const rewards: GateRewards = {
+    exp: vipExp(kill.exp + gateExp, character) + bonus.exp,
+    stone: kill.stone + gateStone + bonus.stone,
+    items: [],
+    levelsGained: 0,
+  }
+  const { update, levelsGained } = withExp(character, restored, rewards.exp)
+  rewards.levelsGained = levelsGained
+  rewards.items = await grantDrops(tx, character.id, kill.items)
+  if (rewards.items.length < kill.items.length)
+    rewards.lost = kill.items.length - rewards.items.length
+  await saveCharacter(tx, character.id, { ...update, stone: character.stone + rewards.stone })
+  const flip = outcome.cleared
+    ? dealCards(cardLib(row.gateId), createRandom(newSeed()))
+    : { state: row.cardState, cards: row.cards, peeks: row.peeks }
+  const [run] = await tx
+    .update(tollGateRuns)
+    .set({
+      subGate: outcome.run.subGate,
+      point: outcome.run.point,
+      passedPoint: outcome.run.passedPoint,
+      cardState: flip.state,
+      cards: flip.cards,
+      peeks: flip.peeks,
+    })
+    .where(eq(tollGateRuns.characterId, character.id))
+    .returning()
+  if (outcome.run.passedPoint !== null) {
+    const points = gateLayout(row.gateId, tollGateTables()).reduce((n, sub) => n + sub.length, 0)
+    const progress = tollGateProgress(outcome.run.passedPoint, points)
+    await recordTollGateProgress(tx, character.id, row.gateId, progress, new Date())
+  }
+  return { rewards, run: run!, ...((bonus.exp > 0 || bonus.stone > 0) && { bonus }) }
 }
 
 export async function loadRun(tx: Tx | Db, characterId: string) {
@@ -180,29 +277,14 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return withCharacter(db, request, async (tx, character) => {
       if (character.sceneId !== DEMON_CITY)
         throw bad('not_here', 'Talk to the Demon City Guard to enter a toll gate.')
+      // Joined a team since the look-up above: the captain enters for the team.
+      await requireNoTeam(tx, character.id, 'enter a toll gate alone')
       if (await loadRun(tx, character.id))
         throw bad('run_active', 'You are already in a toll gate.')
-      const itemId = requiredItem(gateId)
-      const fighter = await playerFighter(tx, character)
-      const used = triesUsed(character)
-      const refusal = entryRefusal({
-        level: character.level,
-        triesUsed: used,
-        maxTries: tollGateConfig().props.EntryTollGateMaxTimes,
-        minLevel: gate.RequirMinLevel,
-        hasItem: !itemId || (await countItem(tx, character.id, itemId)) > 0,
-        hasWeapon: await hasWeapon(tx, character.id),
-        hp: character.hp,
-        maxHp: fighter.maxHp,
-      })
+      const refusal = await entryRefusalOf(tx, character, gateId)
       if (refusal) throw bad(refusal, REFUSALS[refusal])
-      if (itemId) await removeItems(tx, character.id, itemId, 1)
-      await saveCharacter(tx, character.id, { tollGateDay: utcDay(), tollGateEntries: used + 1 })
-      const [row] = await tx
-        .insert(tollGateRuns)
-        .values({ characterId: character.id, ...startRun(gateId) })
-        .returning()
-      return { run: runView(row!), character: await characterView(tx, character.id) }
+      const row = await payEntry(tx, character, gateId)
+      return { run: runView(row), character: await characterView(tx, character.id) }
     })
   })
 
@@ -236,41 +318,16 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
         }
       }
 
-      const restored = restoreAfterWin({ hp, mp, maxHp, maxMp }, tollGateConfig().props)
       const outcome = winPoint(runState(row), layout, tables)
-      const kill = lastNpcRewards(point.npcIds[point.npcIds.length - 1]!, vipDropMul(character))
-      for (const reward of [kill, outcome.subGateReward, outcome.gateReward]) {
-        rewards.exp += reward?.exp ?? 0
-        rewards.stone += reward?.stone ?? 0
-      }
-      rewards.exp = vipExp(rewards.exp, character)
-      const { update, levelsGained } = withExp(character, restored, rewards.exp)
-      rewards.levelsGained = levelsGained
-      rewards.items = await grantDrops(tx, character.id, kill.items)
-      if (rewards.items.length < kill.items.length)
-        rewards.lost = kill.items.length - rewards.items.length
-      await saveCharacter(tx, character.id, { ...update, stone: character.stone + rewards.stone })
-      const flip = outcome.cleared
-        ? dealCards(cardLib(row.gateId), createRandom(newSeed()))
-        : { state: row.cardState, cards: row.cards, peeks: row.peeks }
-      const [next] = await tx
-        .update(tollGateRuns)
-        .set({
-          subGate: outcome.run.subGate,
-          point: outcome.run.point,
-          passedPoint: outcome.run.passedPoint,
-          cardState: flip.state,
-          cards: flip.cards,
-          peeks: flip.peeks,
-        })
-        .where(eq(tollGateRuns.characterId, character.id))
-        .returning()
+      const lastNpcId = point.npcIds[point.npcIds.length - 1]!
+      const state = { hp, mp, maxHp, maxMp }
+      const next = await winForMember(tx, character, row, state, lastNpcId, outcome)
       return {
         replay,
         won,
         npcIds: point.npcIds,
-        rewards,
-        run: runView(next!),
+        rewards: next.rewards,
+        run: runView(next.run),
         character: await characterView(tx, character.id),
       }
     }),

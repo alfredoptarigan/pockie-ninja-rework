@@ -53,6 +53,7 @@ import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } fr
 import { homeScene, travelRefusal } from './travel.js'
 import { recordSceneEntered } from './world.js'
 import { RATE_LIMITS } from './rate-limits.js'
+import { requireNoTeam } from '../teams/index.js'
 
 const READY = 1
 const COMPLETED = 2
@@ -364,6 +365,7 @@ export async function actionRoutes(
     const result = await db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
       requireAlive(character, 'travel')
+      await requireNoTeam(tx, character.id, 'travel')
       let sceneId: number
       if ('sceneId' in input) {
         const refused = travelRefusal(
