@@ -89,6 +89,10 @@ export const npc = (id: string) => load<Record<string, Row>>('npcs')[id]
 export const skill = (id: number) =>
   load<Record<string, Omit<SkillInput, 'id'>>>('skills')[String(id)]
 
+/** skilladd.ini: the properties a passive skill adds (`SkillAdd0Skill`, `MaxHP`, ...). */
+export const skillAddRow = (id: number) =>
+  load<Record<string, Record<string, number>>>('skill-adds')[String(id)]
+
 /** AvatarSkill.ini SkillID1-4 of an outfit (`i29NNNN`), 0 = empty slot. */
 export function avatarSkillIds(avatarId: number) {
   const row =

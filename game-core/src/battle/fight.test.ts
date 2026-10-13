@@ -64,6 +64,22 @@ describe('simulateFight', () => {
     expect(tie.fighters[1]!.hp).toBe(0)
   })
 
+  it('raises an attack skill chance by SkillAdd % 100 of its tree (GetSkillProbability)', () => {
+    // A plain attack skill (no script) with a 1 % chance in tree 2.
+    const rare = { id: 4242, type: 1, quomodo: 2, probability: 1, skilladdtype: 2, effect: 1 }
+    const uses = (skillAdd: number[]) =>
+      simulateFight({
+        attackers: [fighter({ atkTime: 500, hp: 5000, maxHp: 5000, skills: [rare], skillAdd })],
+        defenders: [fighter({ minAttack: 0, maxAttack: 0, hp: 5000, maxHp: 5000 })],
+        seed: 7,
+      }).events.filter((e) => e.actor === 0 && e.skillId === 4242).length
+    const attacks = 40 // 60 actions, two thirds of them by the faster side
+    expect(uses([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])).toBeLessThan(5)
+    // 1 + 199 % 100 = 100: every weighted pick lands on it. Whole hundreds still add nothing.
+    expect(uses([0, 0, 199, 0, 0, 0, 0, 0, 0, 0])).toBe(attacks)
+    expect(uses([0, 0, 3000, 0, 0, 0, 0, 0, 0, 0])).toBeLessThan(5)
+  })
+
   it('fights sequential duels and the survivor keeps its HP', () => {
     const replay = simulateFight({
       attackers: [fighter({ minAttack: 100, maxAttack: 100, hp: 500, maxHp: 500 })],

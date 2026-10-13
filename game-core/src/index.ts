@@ -3,7 +3,12 @@ export * from './stats.js'
 export * from './battle/damage.js'
 export * from './battle/fight.js'
 export { GENERIC_SKILLS, NORMAL_ATTACK } from './battle/skills.js'
-export { ELEMENT_PASSIVES, LEARNABLE_NINJUTSU } from './battle/ninjutsu.js'
+export {
+  ELEMENT_PASSIVES,
+  LEARNABLE_NINJUTSU,
+  NATION_PASSIVES,
+  skillChance,
+} from './battle/ninjutsu.js'
 export * from './progression.js'
 export * from './equipment/index.js'
 export { avatarLevelFromAvatarId } from './battle/scripts/execute.js'

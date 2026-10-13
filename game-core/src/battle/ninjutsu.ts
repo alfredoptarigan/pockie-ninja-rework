@@ -12,3 +12,22 @@ export const LEARNABLE_NINJUTSU = [
 
 /** Passive element skills (type 3), learned every 10th level. */
 export const ELEMENT_PASSIVES = [2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810]
+
+/**
+ * NationUpSkill.ini, by nation (0 Fire ... 4 Lightning): RefreshPlayerSkill adds one level of
+ * this passive, so every ninja has it at level 1 or more.
+ */
+export const NATION_PASSIVES = [2801, 2802, 2803, 2805, 2804]
+
+/**
+ * SkillSystem.GetSkillProbability: the chance plus SkillAddN % 100 of the skill's element tree.
+ * The passives add 500-3000 (whole hundreds) or 3, so most of it comes out as 0, as in the original.
+ */
+export function skillChance(
+  skill: { probability?: number; skilladdtype?: number },
+  skillAdd: readonly number[],
+) {
+  const base = skill.probability ?? 0
+  const tree = skill.skilladdtype ?? -1
+  return tree < 0 ? base : base + ((skillAdd[tree] ?? 0) % 100)
+}

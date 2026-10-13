@@ -16,6 +16,7 @@ import {
   reboundOf,
   vampiricOf,
 } from './damage.js'
+import { skillChance } from './ninjutsu.js'
 import { GENERIC_SKILLS, NORMAL_ATTACK, SKILL_SCRIPTS } from './skills.js'
 import {
   SKILL_CANT_USE,
@@ -316,9 +317,13 @@ export function simulateFight({
 
   // ---- Skills (SkillSystem) ----
 
-  /** Weighted pick shared by FindTypeTriggerSkill and FindAttackSkill; always rolls. */
-  function pickWeighted(pool: SkillInput[]) {
-    const total = pool.reduce((sum, s) => sum + probability(s), 0)
+  /**
+   * Weighted pick shared by FindTypeTriggerSkill and FindAttackSkill; always rolls. Weights are
+   * GetSkillProbability (with the live SkillAdd); the < 100 filter uses the plain chance.
+   */
+  function pickWeighted(self: Fighter, pool: SkillInput[]) {
+    const weights = pool.map((s) => skillChance(s, self.skillAdd))
+    const total = weights.reduce((sum, w) => sum + w, 0)
     let r: number
     if (total < 100) {
       r = randInt(0, 100)
@@ -327,9 +332,9 @@ export function simulateFight({
       r = randInt(0, total)
     }
     let acc = 0
-    for (const skill of pool) {
-      if (r > acc && r <= acc + probability(skill)) return skill
-      acc += probability(skill)
+    for (const [i, skill] of pool.entries()) {
+      if (r > acc && r <= acc + weights[i]!) return skill
+      acc += weights[i]!
     }
     return null
   }
@@ -411,7 +416,10 @@ export function simulateFight({
     if (self.triggerSkills.length === 0) return false
     const candidates = self.triggerSkills.filter((s) => s.quomodo === quomodo && probability(s) > 0)
     const must = candidates.filter((s) => probability(s) >= 100)
-    const pick = pickWeighted(candidates.filter((s) => probability(s) < 100))
+    const pick = pickWeighted(
+      self,
+      candidates.filter((s) => probability(s) < 100),
+    )
     if (!pick && must.length === 0) return false
     const fv = skillEvent(self, target, 14)
     const damage = getDamage(self)
@@ -472,7 +480,11 @@ export function simulateFight({
     const usable = self.attackSkills.filter((s) => self.canAttack > 0 || s.quomodo !== 2)
     return {
       must: usable.filter((s) => probability(s) >= 100),
-      pick: pickWeighted(usable.filter((s) => probability(s) < 100)) ?? NORMAL_ATTACK,
+      pick:
+        pickWeighted(
+          self,
+          usable.filter((s) => probability(s) < 100),
+        ) ?? NORMAL_ATTACK,
     }
   }
 

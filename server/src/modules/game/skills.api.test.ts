@@ -49,7 +49,9 @@ const character = async () =>
 describe('fighter builder', () => {
   it('gives a starting ninja its outfit skills and avatar level', async () => {
     const player = await playerFighter(db, await character())
-    expect(player.skills?.map((s) => s.id)).toEqual([1903, 7777, 8888, 2040])
+    // Plus the Fire nation passive 2801 (NationUpSkill.ini).
+    expect(player.skills?.map((s) => s.id)).toEqual([1903, 7777, 8888, 2040, 2801])
+    expect(player.skillAdd).toEqual([3, 0, 0, 0, 500, 0, 0, 0, 0, 0])
     expect(player.skills?.[0]).toMatchObject({
       id: 1903,
       type: 1,

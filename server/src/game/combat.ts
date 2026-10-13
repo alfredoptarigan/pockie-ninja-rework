@@ -4,7 +4,9 @@ import {
   avatarLevelFromAvatarId,
   createRandom,
   deriveStats,
+  equipBonuses,
   gainExp,
+  NATION_PASSIVES,
   simulateFight,
   type CombatStats,
   type Bonuses,
@@ -24,6 +26,7 @@ import {
   npc,
   npcSkillIds,
   skill,
+  skillAddRow,
 } from './data.js'
 import { equipmentBonuses, equippedGear, type Gear } from './equipment.js'
 import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.js'
@@ -99,17 +102,66 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
   )
 }
 
+/** Matches the *Skill property names of skilladd.ini (MaxHPMulSKill keeps its original typo). */
+const SKILL_TERM = /S[Kk]ill$/
+
+/**
+ * SkillSystem.RefreshSkillProperty: every passive (type 3) adds its skilladd.ini row to the *Skill
+ * terms, which RefreshSystem sums like the *Equip ones. Rows that name a final property (MaxHP,
+ * CounterBombMul, ...) are overwritten by RefreshRoleProperty in the original, so they add nothing.
+ */
+export function passiveBonuses(skills: readonly SkillInput[]): Partial<Bonuses> {
+  const totals: Record<string, number> = {}
+  for (const { type, skilladd } of skills) {
+    if (type !== 3 || !skilladd) continue
+    for (const [name, value] of Object.entries(skillAddRow(skilladd) ?? {})) {
+      if (!SKILL_TERM.test(name)) continue
+      const term = name.replace(SKILL_TERM, 'Equip')
+      totals[term] = (totals[term] ?? 0) + value
+    }
+  }
+  return equipBonuses(totals)
+}
+
+type FighterCharacter = Pick<
+  CharacterRow,
+  'name' | 'avatarId' | 'gender' | 'level' | 'hp' | 'mp' | 'nation'
+>
+
+/**
+ * RefreshPlayerSkill: the learned skills, the outfit's AvatarSkill row and one level of the
+ * nation's element passive (NationUpSkill.ini). Element passives only have level 1, so the extra
+ * level resolves to the same row, and AddSkill keeps one row per id. Outfit recasts are M6.
+ */
+const characterSkills = (character: FighterCharacter, learned: SkillInput[]) => {
+  const all = [
+    ...learned,
+    ...skillRows(avatarSkillIds(character.avatarId) ?? [7777, 8888]),
+    ...skillRows([NATION_PASSIVES[character.nation] ?? 0]),
+  ]
+  return all.filter((row, i) => all.findIndex((other) => other.id === row.id) === i)
+}
+
+/** Equipment, buff and passive skill bonuses of a character (RefreshRoleProperty reason 0). */
+const characterBonuses = (
+  character: FighterCharacter,
+  equipped: readonly Gear[],
+  effects: Partial<Bonuses>,
+  skills: readonly SkillInput[],
+) => sumBonuses(equipmentBonuses(equipped, character), effects, passiveBonuses(skills))
+
 /** A character's fighter from its equipped rows (RefreshSystem with the *Equip terms). */
 export function playerFighterFrom(
-  character: Pick<CharacterRow, 'name' | 'avatarId' | 'gender' | 'level' | 'hp' | 'mp'>,
+  character: FighterCharacter,
   equipped: readonly Gear[],
   effects: Partial<Bonuses> = {},
   learned: SkillInput[] = [],
 ): PlayerFighter {
+  const skills = characterSkills(character, learned)
   const stats = deriveStats(
     avatarStats(character.avatarId),
     character.level,
-    sumBonuses(equipmentBonuses(equipped, character), effects),
+    characterBonuses(character, equipped, effects, skills),
   )
   return {
     ...stats,
@@ -117,7 +169,8 @@ export function playerFighterFrom(
     hp: Math.min(character.hp, stats.maxHp),
     mp: Math.min(character.mp, stats.maxMp),
     avatarLevel: avatarLevelFromAvatarId(character.avatarId),
-    skills: [...learned, ...skillRows(avatarSkillIds(character.avatarId) ?? [7777, 8888])],
+    // The engine only reads type 1 and 2; passives (type 3) stay listed, like the PassiveSkill rec.
+    skills,
   }
 }
 
@@ -162,7 +215,12 @@ export async function fightMonster(
   const equipped = await equippedGear(tx, character.id)
   const effects = await buffBonuses(tx, character.id)
   const learned = await characterSkillInputs(tx, character.id)
-  const bonuses = sumBonuses(equipmentBonuses(equipped, character), effects)
+  const bonuses = characterBonuses(
+    character,
+    equipped,
+    effects,
+    characterSkills(character, learned),
+  )
   const statsAt = (level: number) => deriveStats(avatarStats(character.avatarId), level, bonuses)
   const replay = simulateFight({
     attackers: [playerFighterFrom(character, equipped, effects, learned)],

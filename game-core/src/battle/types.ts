@@ -10,6 +10,10 @@ export interface SkillInput {
   type: number
   quomodo?: number
   probability?: number
+  /** Element tree (0-9) whose SkillAdd raises the chance; -1 or absent: none. */
+  skilladdtype?: number
+  /** skilladd.ini row a passive (type 3) adds to the stats. */
+  skilladd?: number
   priority?: number
   effect?: number
   decmp?: number

@@ -1,14 +1,23 @@
 // Early fights with the real data, checked against the original formulas (RefreshSystem.java,
 // Damage.java): a level 1 Ggio Vega (AvatarID 3) against the level 2 Sunflower (n33017).
-import { applyDefense, simulateFight, type Replay } from '@pockie/game-core'
+import { applyDefense, simulateFight, type Replay, type SkillInput } from '@pockie/game-core'
 import { describe, expect, it } from 'vitest'
-import { monsterFighter, playerFighterFrom } from './combat.js'
+import { monsterFighter, passiveBonuses, playerFighterFrom } from './combat.js'
+import { skill } from './data.js'
 
 const SEEDS = Array.from({ length: 50 }, (_, seed) => seed)
 const SKILL_EVENT = 14
 const NORMAL_ATTACK = 1
 /** Clothing 3 → AvatarID 3: Str 1300 + 65/level, StrAtkAdd 1700, HP 200 + 20/level. */
-const freshNinja = { name: 'Ninja_01', avatarId: 3, gender: 0, level: 1, hp: 220, mp: 220 }
+const freshNinja = {
+  name: 'Ninja_01',
+  avatarId: 3,
+  gender: 0,
+  level: 1,
+  hp: 220,
+  mp: 220,
+  nation: 0,
+}
 /** The fists from the Fire Village newbie pack (i159104): AttackMin 7, AttackMax 8. */
 const NEWBIE_FISTS = 'i270100'
 /** n33017: HP 15, Def 71, Atk 9-10 (npc.ini). */
@@ -110,5 +119,37 @@ describe('equipment bonuses', () => {
 
   it('sums the same bonus over several items', () => {
     expect(fighter(['i298005', 'i298005']).hit).toBe(132)
+  })
+})
+
+// SkillSystem.RefreshPlayerSkill / RefreshSkillProperty: type 3 skills feed the *Skill terms.
+describe('passive skills', () => {
+  const skillAdd = (character = freshNinja, learned: SkillInput[] = []) =>
+    playerFighterFrom(character, [], {}, learned).skillAdd
+
+  it('adds the outfit passive (AvatarID 3: 2040, SkillAdd4 +500) and the nation passive', () => {
+    // Fire (nation 0) gets 2801: SkillAdd0 +3 (NationUpSkill.ini, skilladd.ini 2105).
+    expect(skillAdd()).toEqual([3, 0, 0, 0, 500, 0, 0, 0, 0, 0])
+    // Lightning (nation 4) gets 2804: SkillAdd3 +3.
+    expect(skillAdd({ ...freshNinja, nation: 4 })).toEqual([0, 0, 0, 3, 500, 0, 0, 0, 0, 0])
+  })
+
+  it('adds learned element passives, once per skill', () => {
+    const passive = (id: number) => ({ id, ...skill(id)! })
+    expect(skillAdd(freshNinja, [passive(2806)])).toEqual([3, 0, 0, 0, 500, 3, 0, 0, 0, 0])
+    // The nation's own passive learned again stays one record row.
+    expect(skillAdd(freshNinja, [passive(2801)])[0]).toBe(3)
+  })
+
+  it('adds *Skill stat terms and ignores final properties (2100 MaxHP is overwritten)', () => {
+    const fake = (skilladd: number): SkillInput => ({ id: 99000 + skilladd, type: 3, skilladd })
+    // skilladd.ini 2100: MaxHP=100 / MaxMP=100, final properties RefreshRoleProperty recomputes.
+    expect(playerFighterFrom(freshNinja, [], {}, [fake(2100)]).maxHp).toBe(220)
+    expect(passiveBonuses([fake(2100)])).toEqual({})
+  })
+
+  it('lists the outfit and nation passives with the fight skills', () => {
+    const skills = playerFighterFrom(freshNinja, []).skills ?? []
+    expect(skills.map((row) => row.id)).toEqual([1903, 7777, 8888, 2040, 2801])
   })
 })

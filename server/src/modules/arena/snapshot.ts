@@ -37,13 +37,14 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     row.expiresAt ? [row.expiresAt.getTime()] : [],
   )
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
-  const { name, gender, level, avatarId, clothing } = character
+  const { name, gender, level, avatarId, clothing, nation } = character
   const gear = [...equipped].sort((x, y) => x.id.localeCompare(y.id))
   return {
     ...(expiries.length > 0 && { buffExpiresAt: new Date(Math.min(...expiries)).toISOString() }),
     fighter: { ...live, hp: live.maxHp, mp: live.maxMp },
     look: { clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
-    source: JSON.stringify([name, gender, level, avatarId, clothing, gear]),
+    // Nation adds its element passive; it also marks snapshots from before passives as stale.
+    source: JSON.stringify([name, gender, level, avatarId, clothing, nation, gear]),
   }
 }
 
