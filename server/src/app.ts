@@ -18,6 +18,7 @@ import { arenaRoutes } from './modules/arena/routes.js'
 import { rankingRoutes } from './modules/rankings/routes.js'
 import { attachRealtime } from './modules/realtime/realtime.js'
 import { socialRoutes } from './modules/social/routes.js'
+import { teamRoutes } from './modules/teams/index.js'
 import { statusRoutes } from './modules/status/routes.js'
 
 interface AppOptions {
@@ -73,6 +74,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
   app.register(arenaRoutes, { db, prefix: '/api/game/arena' })
   app.register(rankingRoutes, { db, prefix: '/api/game/rankings' })
+  app.register(teamRoutes, { db, prefix: '/api/game/team' })
 
   return app
 }
