@@ -13,11 +13,26 @@ import { ArenaWindow } from './arena'
 import { ForgeWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { DailyQuestWindow } from './daily'
+import { MarketWindow } from './market'
+import { RankingsWindow } from './rankings'
 import { MerchantWindow, ShopWindow } from './shop'
+import { FriendsWindow, MailWindow } from './social'
 import { TeamBoardWindow, TeamWindow } from './teams'
 
 export type WindowName =
-  'shop' | 'merchant' | 'forge' | 'gates' | 'pubFight' | 'daily' | 'team' | 'teamBoard' | 'arena'
+  | 'shop'
+  | 'merchant'
+  | 'forge'
+  | 'gates'
+  | 'pubFight'
+  | 'daily'
+  | 'team'
+  | 'teamBoard'
+  | 'arena'
+  | 'friends'
+  | 'mail'
+  | 'rankings'
+  | 'market'
 
 export interface WindowProps {
   character: Character
@@ -50,6 +65,10 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   team: (props) => <TeamWindow {...props} />,
   teamBoard: (props) => <TeamBoardWindow {...props} />,
   arena: ({ character, onClose }) => <ArenaWindow character={character} onClose={onClose} />,
+  friends: ({ onClose }) => <FriendsWindow onClose={onClose} />,
+  mail: ({ onClose }) => <MailWindow onClose={onClose} />,
+  rankings: ({ onClose }) => <RankingsWindow onClose={onClose} />,
+  market: ({ character, onClose }) => <MarketWindow character={character} onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(

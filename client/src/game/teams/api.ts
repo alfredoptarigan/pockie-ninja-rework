@@ -12,9 +12,17 @@ export const teamKeys = {
   board: ['game', 'team', 'board'] as const,
 }
 
-/** Teams exist only in the neutral fields 26xx-28xx and the toll gate lobby 3102 (teams.md 2). */
+/** Demon City: the guard's gate select is this port's toll gate lobby (server teams/context.ts). */
+const TOLL_GATE_LOBBY = 171
+
+/**
+ * Teams exist only in the neutral fields 26xx-28xx, the toll gate lobby 3102 (teams.md 2) and
+ * Demon City, where teams form for the toll gates.
+ */
 export const teamScene = (sceneId: number) =>
-  sceneId === 3102 || [26, 27, 28].includes(Math.floor(sceneId / 100))
+  sceneId === 3102 ||
+  sceneId === TOLL_GATE_LOBBY ||
+  [26, 27, 28].includes(Math.floor(sceneId / 100))
 
 const TOLL_GATE_INSTANCE = 5001
 

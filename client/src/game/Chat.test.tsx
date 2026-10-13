@@ -7,6 +7,7 @@ import { useMe } from '../lib/auth'
 import { createFakeSocket, type FakeSocket } from '../test/socket'
 import { apiError, json, mockApi, renderWithProviders } from '../test/utils'
 import { onNotice, RealtimePanels } from './Chat'
+import { requestWhisper } from './social/requests'
 
 let socket: FakeSocket
 vi.mock('../lib/socket', () => ({ createGameSocket: () => socket }))
@@ -235,6 +236,15 @@ describe('Chat whispers, team and reports', () => {
 
     expect(socket.sent).toEqual([{ channel: 'whisper', to: 'Sasuke_1', text: 'hi there' }])
     expect(screen.getByLabelText('Message to world chat')).toHaveValue('/Sasuke_1 ')
+  })
+
+  it('starts a whisper asked for by another window (the Friends list)', () => {
+    renderChat()
+
+    act(() => requestWhisper('Sasuke_1'))
+
+    expect(screen.getByLabelText('Message to world chat')).toHaveValue('/Sasuke_1 ')
+    expect(screen.getByLabelText('Message to world chat')).toHaveFocus()
   })
 
   it('explains the whisper syntax on the Whisper tab', async () => {

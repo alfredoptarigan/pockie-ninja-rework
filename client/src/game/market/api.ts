@@ -76,7 +76,10 @@ export function useMarketAction() {
   })
 }
 
-const itemNames = worldData.itemNames as Record<string, string>
+// Every named item: bag items plus the ones only the Market lists (world.ts itemNameKey).
+const namedItemIds = [
+  ...new Set([...Object.keys(worldData.itemNames), ...Object.keys(worldData.marketItemNames)]),
+]
 
 /**
  * Name search: the server has no item names, so the client turns the text into the ids whose
@@ -85,6 +88,6 @@ const itemNames = worldData.itemNames as Record<string, string>
 export function searchItemIds(text: string): string[] | 'too_many' {
   const needle = text.trim().toLowerCase()
   if (!needle) return []
-  const ids = Object.keys(itemNames).filter((id) => itemName(id).toLowerCase().includes(needle))
+  const ids = namedItemIds.filter((id) => itemName(id).toLowerCase().includes(needle))
   return ids.length > MAX_SEARCH_IDS ? 'too_many' : ids
 }

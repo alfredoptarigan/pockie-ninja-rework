@@ -9,8 +9,10 @@ import { useLogout } from '../lib/auth'
 import { ArenaButton } from './arena'
 import { useOutfitPortrait } from './art'
 import { GameButton } from './skin'
+import { MailButton } from './social'
 import { TeamHud } from './teams'
 import { plainText } from './text'
+import { useOpenWindow, type WindowName } from './windows'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
 
 const CURRENCIES = [
@@ -261,6 +263,7 @@ export function ScenePlaque({
   onVillage: () => void
   onWorldMap: () => void
 }) {
+  const openFeature = useOpenWindow()
   const name =
     sceneId === undefined ? 'Loading...' : plainText(sceneNameKey(sceneId), 'Unknown place')
   return (
@@ -287,6 +290,9 @@ export function ScenePlaque({
       >
         World Map
       </GameButton>
+      <div className="absolute top-[14px] -left-[30px]">
+        <MailButton onOpen={() => openFeature('mail')} />
+      </div>
     </section>
   )
 }
@@ -323,37 +329,46 @@ export function ExpStrip({ character }: { character: Character }) {
 
 export type MenuWindow = 'bag' | 'character' | 'quests' | 'skills'
 
-/** The eight buttons of UI_BottomMenu.as, in its order, with the windows we have. */
-const MENU: { piece: string; label: string; window?: MenuWindow }[] = [
+/**
+ * The eight buttons of UI_BottomMenu.as, in its order, with the windows we have: `window` is a
+ * GameApp window, `feature` a registered feature window (windows.tsx).
+ */
+const MENU: { piece: string; label: string; window?: MenuWindow; feature?: WindowName }[] = [
   { piece: 'package', label: 'Bag', window: 'bag' },
   { piece: 'role', label: 'Character', window: 'character' },
   { piece: 'skill', label: 'Skills', window: 'skills' },
   { piece: 'task', label: 'Quests', window: 'quests' },
-  { piece: 'social', label: 'Friends' },
-  { piece: 'rank', label: 'Rankings' },
-  { piece: 'mart', label: 'Market' },
+  { piece: 'social', label: 'Friends', feature: 'friends' },
+  { piece: 'rank', label: 'Rankings', feature: 'rankings' },
+  { piece: 'mart', label: 'Market', feature: 'market' },
   { piece: 'shop', label: 'Shop' },
 ]
 
-/** Menu buttons, bottom right: Bag, Character, Skills and Quests open windows; the rest are not built. */
+/** Menu buttons, bottom right; Shop is not built yet. */
 export function MenuBar({ onOpen }: { onOpen: (window: MenuWindow) => void }) {
+  const openFeature = useOpenWindow()
   return (
     <nav
       aria-label="Menu"
       className="game-topbar pointer-events-auto absolute right-[4px] bottom-px flex h-[33px] w-[465px] items-start pt-[3px] pl-[3px]"
     >
-      {MENU.map(({ piece, label, window }) => {
+      {MENU.map(({ piece, label, window, feature }) => {
         const art = (state: string) => `url(/assets/game/ui/menu-${piece}-${state}.webp)`
+        const onClick = window
+          ? () => onOpen(window)
+          : feature
+            ? () => openFeature(feature)
+            : undefined
         return (
           <button
             key={piece}
             type="button"
-            aria-label={window ? label : `${label} (coming soon)`}
-            aria-disabled={window ? undefined : true}
-            title={window ? label : `${label}: coming soon`}
-            onClick={window ? () => onOpen(window) : undefined}
+            aria-label={onClick ? label : `${label} (coming soon)`}
+            aria-disabled={onClick ? undefined : true}
+            title={onClick ? label : `${label}: coming soon`}
+            onClick={onClick}
             className={`h-[28px] w-[50px] bg-(image:--up) bg-size-[100%_100%] focus-visible:outline-2 focus-visible:outline-[#ffe27a] ${
-              window
+              onClick
                 ? 'hover:bg-(image:--over) active:bg-(image:--down)'
                 : 'cursor-not-allowed opacity-50'
             }`}

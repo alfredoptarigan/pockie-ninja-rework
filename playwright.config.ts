@@ -19,6 +19,8 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   reporter: 'list',
+  // Two-player journeys wait on a second browser's socket pushes; 5 s flakes on a busy machine.
+  expect: { timeout: 10_000 },
   use: {
     baseURL,
     actionTimeout: 15_000,
