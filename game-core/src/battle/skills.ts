@@ -4,6 +4,7 @@ import { INSTANCE_SKILLS } from './scripts/instance-skills.js'
 import { FIELD_2600_SKILLS } from './scripts/field-2600-skills.js'
 import { MONSTER_SKILLS } from './scripts/monster-skills.js'
 import { NINJUTSU_ATTACK } from './scripts/ninjutsu-attack.js'
+import { NINJUTSU_TRIGGER_A_SKILLS } from './scripts/ninjutsu-trigger-a.js'
 import { fightBegin, parry } from './scripts/parry.js'
 import type { SkillInput, SkillScript } from './types.js'
 
@@ -48,4 +49,5 @@ export const SKILL_SCRIPTS: Record<string, SkillScript> = {
   ...FIELD_2600_SKILLS,
   ...AOYI_SCRIPTS,
   ...NINJUTSU_ATTACK,
+  ...NINJUTSU_TRIGGER_A_SKILLS,
 }

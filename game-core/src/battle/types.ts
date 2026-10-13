@@ -59,6 +59,8 @@ export interface FighterInput {
   /** VampiricHP / VampiricMP: percent of the damage dealt healed as HP / MP. */
   vampiricHp?: number
   vampiricMp?: number
+  /** SkillAdd0 ... SkillAdd9: per-element ninjutsu bonus; ToInt(SkillAddN * 0.01) percent. */
+  skillAdd?: number[]
   /**
    * Avatar level used by the execute skills (aoyi). Players: `avatarLevelOf(PlayerAvatarID)`;
    * NPCs: their CounterBombMul when it is not -1. Absent = NPC rule `trunc(level / 3) - 5`.
@@ -154,6 +156,7 @@ export interface ActiveBuff {
 
 /** FightObject: a fighter during the fight. */
 export interface Fighter extends FighterInput {
+  skillAdd: number[]
   decDamage: number
   rebound: number
   absorb: number
@@ -164,6 +167,12 @@ export interface Fighter extends FighterInput {
   startHp: number
   startMp: number
   initAtkTime: number
+  /** AtkTimeMul / AtkTimeAdd of FightSystem.ChangeAtkTime. */
+  atkTimeMul: number
+  atkTimeAdd: number
+  initDefense: number
+  /** DefenseAdd of FightSystem.ChangeDefense (DefenseMul stays 0). */
+  defenseAdd: number
   initHit: number
   hitMulAdd: number
   /** InitMinAtk / InitMaxAtk and the MinAtkMul / MaxAtkMul percent of FightSystem.ChangeAtk. */
@@ -219,6 +228,10 @@ export interface FightContext {
   getBuff(target: Fighter, buffId: number): ActiveBuff | undefined
   changeNextAtkTime(target: Fighter, amount: number): void
   changeHit(target: Fighter, add: number): void
+  /** ChangeAtkTime: AtkTime = InitAtkTime * 100 / (100 + mul) - add; refused when it would be <= 0. */
+  changeAtkTime(target: Fighter, atkTimeMul: number, atkTimeAdd: number): void
+  /** ChangeDefense with DefenseMul 0 (no ported script sets it). */
+  changeDefense(target: Fighter, defenseAdd: number): void
   changeDodge(target: Fighter, add: number): void
   /** ChangeAtk with MinAtkAdd / MaxAtkAdd kept (nothing ported sets them). */
   changeAtk(target: Fighter, minAtkMul: number, maxAtkMul: number): void

@@ -26,6 +26,7 @@ export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
   }
   return {
     ...input,
+    skillAdd: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     decDamage: 0,
     rebound: 0,
     absorb: 0,
@@ -36,6 +37,10 @@ export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
     startHp: input.hp,
     startMp: input.mp,
     initAtkTime: input.atkTime,
+    atkTimeMul: 0,
+    atkTimeAdd: 0,
+    initDefense: input.defense,
+    defenseAdd: 0,
     initHit: input.hit,
     hitMulAdd: 0,
     initMinAttack: input.minAttack,
@@ -94,6 +99,8 @@ export function fakeContext({
     changeNextAtkTime: (target, amount) =>
       calls.push(['changeNextAtkTime', target.index, Math.trunc(amount)]),
     changeHit: (target, add) => calls.push(['changeHit', target.index, add]),
+    changeAtkTime: (target, mul, add) => calls.push(['changeAtkTime', target.index, mul, add]),
+    changeDefense: (target, add) => calls.push(['changeDefense', target.index, add]),
     changeDodge: (target, add) => calls.push(['changeDodge', target.index, add]),
     changeAtk: (target, min, max) => calls.push(['changeAtk', target.index, min, max]),
     changeSkill: (_self, _target, skill) => {
