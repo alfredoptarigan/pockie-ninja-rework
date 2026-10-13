@@ -1,8 +1,8 @@
+import { requireBagRoom } from '../../game/bag.js'
 import { randomInt } from 'node:crypto'
 import { and, eq, isNull, sql } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import {
-  BAG_SLOTS,
   shopOpenSchema,
   merchantOpenSchema,
   wholesaleBuySchema,
@@ -46,6 +46,7 @@ import {
   type Tx,
 } from '../../game/progress.js'
 import { recordCommand } from '../../game/quests.js'
+import { shopGearState } from '../../game/gear.js'
 import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
@@ -87,35 +88,6 @@ async function charge(
     })
     .where(eq(characters.id, c.id))
 }
-async function bagRoom(
-  tx: Tx,
-  id: string,
-  awards: { itemId: string; bound: boolean }[],
-  separate = false,
-) {
-  const bag = await tx
-    .select()
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, id), isNull(inventoryItems.equippedSlot)))
-  let used = bag.length
-  for (const award of awards) {
-    const max = Number(item(award.itemId)?.ItemMaxFoldNum ?? 1)
-    const stack =
-      !separate &&
-      bag.find((row) => row.itemId === award.itemId && row.bound === award.bound && row.count < max)
-    if (stack) stack.count++
-    else {
-      used++
-      bag.push({
-        ...bag[0],
-        itemId: award.itemId,
-        bound: award.bound,
-        count: 1,
-      } as (typeof bag)[number])
-    }
-  }
-  if (used > BAG_SLOTS) throw bad('bag_full', 'Your bag is full.')
-}
 async function command(tx: Tx, c: Character, code: number) {
   await saveQuests(tx, c.id, recordCommand(await loadQuests(tx, c.id), code, c.sceneId))
 }
@@ -155,6 +127,7 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
           rng,
         )
       : null
+    const gear = shopGearState(row.item, row.identifyCount, row.appraised, rolled?.props ?? [])
     const offer = refresh.items[poolId]!.find((offer) => offer.item === row.item)!
     const has = (type: number) => offer.costs.some((cost) => cost.type === type)
     await tx.insert(characterShopStock).values({
@@ -165,9 +138,9 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
       priceStone: has(0) ? row.prices.stone : null,
       priceGold: has(2) ? row.prices.gold : null,
       priceGiftCoupon: has(3) ? row.prices.coupons : null,
-      identifyCount: row.identifyCount,
-      appraised: row.appraised,
-      props: rolled?.props ?? [],
+      identifyCount: gear.identifyCount,
+      appraised: !gear.canIdentify || gear.identifyTimes > 0,
+      props: gear.props,
       bound: row.bound,
     })
   }
@@ -180,9 +153,18 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
     })
 }
 const canSell = (row: typeof inventoryItems.$inferSelect) =>
-  !row.equippedSlot && (Number(item(row.itemId)?.CanTrade ?? 0) & 1) !== 0
+  row.location === 'bag' && !row.equippedSlot && (Number(item(row.itemId)?.CanTrade ?? 0) & 1) !== 0
 async function sell(tx: Tx, c: Character, ids: string[], amount?: number) {
-  const bag = await tx.select().from(inventoryItems).where(eq(inventoryItems.characterId, c.id))
+  const bag = await tx
+    .select()
+    .from(inventoryItems)
+    .where(
+      and(
+        eq(inventoryItems.location, 'bag'),
+        eq(inventoryItems.characterId, c.id),
+        isNull(inventoryItems.equippedSlot),
+      ),
+    )
   let earned = 0
   for (const id of ids) {
     const row = bag.find((r) => r.id === id)
@@ -240,7 +222,16 @@ async function openView(tx: Tx, c: Character) {
     priceStone: pricesFromCosts(row.costs).stone,
     maxStack: Number(item(row.item)?.ItemMaxFoldNum ?? 1),
   }))
-  const bag = await tx.select().from(inventoryItems).where(eq(inventoryItems.characterId, c.id))
+  const bag = await tx
+    .select()
+    .from(inventoryItems)
+    .where(
+      and(
+        eq(inventoryItems.location, 'bag'),
+        eq(inventoryItems.characterId, c.id),
+        isNull(inventoryItems.equippedSlot),
+      ),
+    )
   const sellable = bag.filter(canSell).map((row) => {
     const def = item(row.itemId)!
     return {
@@ -294,7 +285,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         itemId: offer.item,
         bound: true,
       }))
-      await bagRoom(tx, c.id, awards)
+      await requireBagRoom(tx, c.id, awards)
       const costs = money(pricesFromCosts(offer.costs))
       await charge(tx, c, {
         stone: costs.stone * input.count,
@@ -363,11 +354,11 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
       costs.gold += row.priceGold ?? 0
       costs.giftCoupon += row.priceGiftCoupon ?? 0
     }
-    await bagRoom(
+    await requireBagRoom(
       tx,
       c.id,
       rows.map((row) => ({ itemId: row.itemId, bound: row.bound })),
-      true,
+      { separate: true },
     )
     await charge(tx, c, costs)
     for (const row of rows) {
@@ -375,10 +366,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         characterId: c.id,
         itemId: row.itemId,
         bound: row.bound,
-        identifyCount: row.identifyCount,
-        canIdentify: row.identifyCount > 0,
-        identifyTimes: row.appraised ? 1 : 0,
-        props: row.props,
+        ...shopGearState(row.itemId, row.identifyCount, row.appraised, row.props),
       })
       await tx
         .delete(characterShopStock)
@@ -467,7 +455,7 @@ export async function shopRoutes(app: FastifyInstance, { db }: { db: Db }) {
         itemId: row.itemId,
         bound: offer.bind === 1,
       }))
-      await bagRoom(tx, c.id, awards)
+      await requireBagRoom(tx, c.id, awards)
       await charge(tx, c, { gold: row.price * i.count })
       await grantItems(tx, c.id, awards)
       await tx

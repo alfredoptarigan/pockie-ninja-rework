@@ -1,8 +1,9 @@
+import { requireBagRoom } from '../../game/bag.js'
 // Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
 import { createRandom, deriveStats } from '@pockie/game-core'
-import { BAG_SLOTS, buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
+import { buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
 import { randomInt } from 'node:crypto'
-import { and, count, eq, isNull } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type { Db } from '../../db/client.js'
@@ -45,7 +46,7 @@ import {
 } from '../../game/quests.js'
 import { playerFighter } from '../../game/combat.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
-import { requireBagRoom } from '../gates/common.js'
+
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
@@ -143,7 +144,13 @@ export async function actionRoutes(
     const [row] = await tx
       .select()
       .from(inventoryItems)
-      .where(and(eq(inventoryItems.id, id), eq(inventoryItems.characterId, characterId)))
+      .where(
+        and(
+          eq(inventoryItems.location, 'bag'),
+          eq(inventoryItems.id, id),
+          eq(inventoryItems.characterId, characterId),
+        ),
+      )
     if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
     return row
   }
@@ -182,7 +189,7 @@ export async function actionRoutes(
     const rows = await db
       .select()
       .from(inventoryItems)
-      .where(eq(inventoryItems.characterId, character.id))
+      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, character.id)))
     return {
       items: rows.map((row) => ({
         id: row.id,
@@ -352,13 +359,7 @@ export async function actionRoutes(
       const character = await lockCharacter(tx, userId)
       const row = await ownedItem(tx, character.id, id)
       if (!row.equippedSlot) throw bad('not_equipped', 'That item is not equipped.')
-      const [bag] = await tx
-        .select({ rows: count() })
-        .from(inventoryItems)
-        .where(
-          and(eq(inventoryItems.characterId, character.id), isNull(inventoryItems.equippedSlot)),
-        )
-      if ((bag?.rows ?? 0) >= BAG_SLOTS) throw bad('bag_full', 'Your bag is full.')
+      await requireBagRoom(tx, character.id, [row], { separate: true })
       await tx
         .update(inventoryItems)
         .set({ equippedSlot: null })

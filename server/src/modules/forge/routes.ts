@@ -83,7 +83,13 @@ async function ownedItem(tx: Tx | Db, characterId: string, id: string) {
   const [row] = await tx
     .select()
     .from(inventoryItems)
-    .where(and(eq(inventoryItems.id, id), eq(inventoryItems.characterId, characterId)))
+    .where(
+      and(
+        eq(inventoryItems.location, 'bag'),
+        eq(inventoryItems.id, id),
+        eq(inventoryItems.characterId, characterId),
+      ),
+    )
   if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
   return row
 }
@@ -101,6 +107,7 @@ const bagRows = (tx: Tx | Db, characterId: string, itemId: string) =>
     .from(inventoryItems)
     .where(
       and(
+        eq(inventoryItems.location, 'bag'),
         eq(inventoryItems.characterId, characterId),
         eq(inventoryItems.itemId, itemId),
         isNull(inventoryItems.equippedSlot),
@@ -210,7 +217,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const rows = await tx
       .select()
       .from(inventoryItems)
-      .where(eq(inventoryItems.characterId, characterId))
+      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, characterId)))
     const forged = rows.find((r) => r.id === itemId)
     if (!forged) throw new HttpError(404, 'no_item', 'You do not have that item.')
     return { character, item: itemView(forged, wornSetCounts(rows)) }
@@ -221,7 +228,13 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const bag = await db
       .select()
       .from(inventoryItems)
-      .where(and(eq(inventoryItems.characterId, character.id), isNull(inventoryItems.equippedSlot)))
+      .where(
+        and(
+          eq(inventoryItems.location, 'bag'),
+          eq(inventoryItems.characterId, character.id),
+          isNull(inventoryItems.equippedSlot),
+        ),
+      )
     return forgeInfo(bag)
   })
 
@@ -231,7 +244,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const rows = await db
       .select()
       .from(inventoryItems)
-      .where(eq(inventoryItems.characterId, character.id))
+      .where(and(eq(inventoryItems.location, 'bag'), eq(inventoryItems.characterId, character.id)))
     const worn = wornSetCounts(rows)
     return {
       gear: Object.fromEntries(
@@ -269,7 +282,11 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
         .select()
         .from(inventoryItems)
         .where(
-          and(eq(inventoryItems.characterId, character.id), inArray(inventoryItems.id, itemIds)),
+          and(
+            eq(inventoryItems.location, 'bag'),
+            eq(inventoryItems.characterId, character.id),
+            inArray(inventoryItems.id, itemIds),
+          ),
         )
       const targets = itemIds.flatMap((id) => {
         const row = rows.find((r) => r.id === id)

@@ -1,4 +1,5 @@
-import { BAG_SLOTS } from '@pockie/shared'
+import { refresh } from './data.js'
+import { BAG_CELLS } from '../../game/bag.js'
 import { and, eq, sql } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
@@ -129,10 +130,12 @@ describe('shop authentication and Wholesale', () => {
     await update({ stone: 100 })
     await db
       .insert(inventoryItems)
-      .values(Array.from({ length: BAG_SLOTS }, () => ({ characterId, itemId: 'i250101' })))
+      .values(
+        Array.from({ length: BAG_CELLS }, () => ({ characterId, itemId: 'i160001', count: 999 })),
+      )
     expect((await post('wholesale/buy', { itemId: 'i160006', count: 1 })).statusCode).toBe(400)
     expect((await row()).stone).toBe(100)
-    expect(await bag()).toHaveLength(BAG_SLOTS)
+    expect(await bag()).toHaveLength(BAG_CELLS)
   })
 })
 
@@ -433,9 +436,13 @@ describe('stock instance and currency fidelity', () => {
   it('allows stacking medicine in a full bag but refuses a new stack', async () => {
     await update({ stone: 10000 })
     await give('i160006', { bound: true, count: 99 })
-    await db
-      .insert(inventoryItems)
-      .values(Array.from({ length: BAG_SLOTS - 1 }, () => ({ characterId, itemId: 'i250101' })))
+    await db.insert(inventoryItems).values(
+      Array.from({ length: BAG_CELLS - 1 }, () => ({
+        characterId,
+        itemId: 'i160001',
+        count: 999,
+      })),
+    )
     expect((await post('wholesale/buy', { itemId: 'i160006', count: 1 })).statusCode).toBe(200)
     expect((await post('wholesale/buy', { itemId: 'i160006', count: 1 })).statusCode).toBe(400)
     expect((await row()).stone).toBe(9962)
@@ -472,4 +479,75 @@ describe('shop scene check', () => {
     expect((await row()).stone).toBe(10000)
     expect((await bag())[0]!.count).toBe(5)
   })
+})
+
+describe('original shop appraisal state', () => {
+  it.each([2, 3])('keeps shop type %i equipment unappraised after buying', async (shopType) => {
+    await seedStock(shopType)
+    await update({ stone: 10 })
+    await db
+      .update(characterShopStock)
+      .set({ identifyCount: 3, appraised: false })
+      .where(eq(characterShopStock.characterId, characterId))
+    expect((await post('buy', { shopType, slot: 0, currency: 'stone' })).statusCode).toBe(200)
+    expect(await bag()).toEqual([
+      expect.objectContaining({
+        canIdentify: true,
+        identifyCount: 3,
+        identifyTimes: 0,
+        props: [],
+        bound: shopType !== 2,
+      }),
+    ])
+  })
+  it('transfers plain appraised stock without incrementing identifyTimes', async () => {
+    await seedStock()
+    await update({ stone: 10 })
+    await db
+      .update(characterShopStock)
+      .set({ identifyCount: 0, appraised: true })
+      .where(eq(characterShopStock.characterId, characterId))
+    expect((await post('buy', { shopType: 1, slot: 0, currency: 'stone' })).statusCode).toBe(200)
+    expect(await bag()).toEqual([
+      expect.objectContaining({
+        canIdentify: false,
+        identifyCount: 0,
+        identifyTimes: 0,
+        props: [],
+      }),
+    ])
+  })
+  it('normalizes old stock whose equipment has no identify list', async () => {
+    await seedStock(3)
+    await update({ stone: 10 })
+    await db
+      .update(characterShopStock)
+      .set({ itemId: 'i220110', identifyCount: 4, appraised: false })
+      .where(eq(characterShopStock.characterId, characterId))
+    expect((await post('buy', { shopType: 3, slot: 0, currency: 'stone' })).statusCode).toBe(200)
+    expect(await bag()).toEqual([
+      expect.objectContaining({
+        itemId: 'i220110',
+        canIdentify: false,
+        identifyCount: 0,
+        identifyTimes: 0,
+        props: [],
+      }),
+    ])
+  })
+})
+
+it('does not assign hidden counts to newly stocked gear without an identify list', async () => {
+  // A one-off fixture makes stock selection deterministic without changing the RNG rules.
+  const offers = refresh.items['9001']!
+  const original = [...offers]
+  offers.splice(0, offers.length, { item: 'i220110', costs: [{ amount: 5, type: 0 }] })
+  try {
+    const response = await client.get(`${base}/open`)
+    expect(response.statusCode).toBe(200)
+    const [offer] = await stock(1)
+    expect(offer).toMatchObject({ itemId: 'i220110', identifyCount: 0, appraised: true, props: [] })
+  } finally {
+    offers.splice(0, offers.length, ...original)
+  }
 })
