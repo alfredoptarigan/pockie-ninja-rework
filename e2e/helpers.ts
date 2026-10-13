@@ -1,8 +1,9 @@
 // Shared steps of the game journeys, and DB seeding for journeys a fresh ninja cannot reach
 // (currency, levels, items, a cleared toll gate). Seeding runs psql against the e2e server's
 // database: DATABASE_URL, else the one in the repository's .env.
-import { expect, type Browser, type Page } from '@playwright/test'
+import { expect, test, type Browser, type Page } from '@playwright/test'
 import { execFileSync } from 'node:child_process'
+import { createHash, randomBytes } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import { parseEnv } from 'node:util'
 import { hashPassword } from '../server/src/modules/auth/password'
@@ -125,33 +126,48 @@ export function giveItem(
   )
 }
 
-// Two-player fixtures seed accounts so the suite stays within the auth endpoint's per-IP
-// registration limit. Login and character creation still run through the real UI.
-/** Two ninjas, each in its own browser context (separate cookies and sockets). */
-export async function createTwoNinjas(browser: Browser, roles: [string, string]) {
-  const passwordHash = await hashPassword(PASSWORD)
-  const player = async (role: string) => {
-    const name = `${role}_${Date.now().toString(36).slice(-5)}`
-    sql(`insert into users (username, email, password_hash) values (:'name', :'email', :'hash');`, {
+// Seeded fixtures insert the account and its session, so the suite stays within the auth
+// endpoints' per-IP limits (10 registrations an hour, 10 logins in 15 minutes); the auth journey
+// covers both forms. Character creation still runs through the real UI.
+let passwordHash: Promise<string> | undefined
+
+/** A ninja in its own browser context (own cookies and socket), signed in by a seeded session. */
+export async function createSeededNinja(browser: Browser, role: string) {
+  const name = `${role}_${Date.now().toString(36).slice(-5)}`
+  const token = randomBytes(32).toString('base64url')
+  sql(
+    `with account as (
+       insert into users (username, email, password_hash) values (:'name', :'email', :'hash')
+       returning id)
+     insert into sessions (token_hash, user_id, expires_at)
+     select :'token', id, now() + interval '1 day' from account;`,
+    {
       name,
       email: `${name.toLowerCase()}@example.test`,
-      hash: passwordHash,
-    })
-    const context = await browser.newContext()
-    const page = await context.newPage()
-    try {
-      await loginNinja(page, name)
-      await createCharacter(page, name)
-      return { context, page, name }
-    } catch (error) {
-      await context.close()
-      throw error
-    }
-  }
-  // Keep the first game load and character creation sequential.
-  const first = await player(roles[0])
+      hash: await (passwordHash ??= hashPassword(PASSWORD)),
+      // sessions.ts hashToken
+      token: createHash('sha256').update(token).digest('hex'),
+    },
+  )
+  const context = await browser.newContext()
   try {
-    return [first, await player(roles[1])] as const
+    const url = test.info().project.use.baseURL!
+    await context.addCookies([{ name: 'pn_session', value: token, url }])
+    const page = await context.newPage()
+    await page.goto('/play')
+    await createCharacter(page, name)
+    return { context, page, name }
+  } catch (error) {
+    await context.close()
+    throw error
+  }
+}
+
+/** Two seeded ninjas; the first game load and character creation run one after the other. */
+export async function createTwoNinjas(browser: Browser, roles: [string, string]) {
+  const first = await createSeededNinja(browser, roles[0])
+  try {
+    return [first, await createSeededNinja(browser, roles[1])] as const
   } catch (error) {
     await first.context.close()
     throw error
@@ -167,17 +183,40 @@ export async function meetInScene(players: { page: Page; name: string }[], scene
   }
 }
 
+// A level-71 weapon (Equip_Gloves99, Ggio Vega's kind): seeded on, it wins toll gate and arena
+// fights a journey ninja would otherwise lose.
+const STRONG_WEAPON = 'i299902'
+
+/** Seeds `set` (SQL assignments), wears the strong weapon, then fills HP and MP and reloads. */
+export async function armNinja(page: Page, name: string, set: string) {
+  seedCharacter(name, set)
+  giveItem(name, STRONG_WEAPON, { equipped_slot: 'Weapon' })
+  const { character } = await (await page.request.get('/api/game/character')).json()
+  seedCharacter(name, 'hp = :hp, mp = :mp', { hp: character.maxHp, mp: character.maxMp })
+  await reloadGame(page)
+}
+
+/** Reloads the game after seeding and waits for the HUD (a cold reload can take seconds). */
+export async function reloadGame(page: Page) {
+  await page.reload()
+  await expect(location(page)).toBeVisible({ timeout: 15_000 })
+}
+
+/** Opens a window from the bottom-right menu (Bag, Friends, Market...). */
+export async function openMenu(page: Page, name: string) {
+  await page.getByRole('navigation', { name: 'Menu' }).getByRole('button', { name }).click()
+}
+
+/** Skips the battle replay that a fight opens. */
+export async function skipReplay(page: Page) {
+  await page
+    .getByRole('region', { name: 'Battle replay' })
+    .getByRole('button', { name: 'Skip' })
+    .click()
+}
+
 /** Opens the chat box's player list and returns it. */
 export async function openPlayerList(page: Page) {
   await page.getByRole('button', { name: /^Players \(\d+\)$/ }).click()
   return page.getByRole('region', { name: /^Players here/ })
-}
-
-/** Signs a seeded or existing journey account in through the login form. */
-export async function loginNinja(page: Page, name: string) {
-  await page.goto('/login')
-  await page.getByLabel('Username or email').fill(name)
-  await page.getByLabel('Password').fill(PASSWORD)
-  await page.getByRole('button', { name: 'Log in' }).click()
-  await expect(page).toHaveURL(/\/play(?:\/create)?$/, { timeout: 30_000 })
 }
