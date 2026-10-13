@@ -53,10 +53,18 @@ async function createCharacter(page: Page, id: string) {
       .locator('..')
       .click()
   }
-  await page.getByRole('button', { name: 'Enter Game' }).click()
-  await expect(
-    page.getByRole('main', { name: 'Game' }).getByRole('heading', { name: id }),
-  ).toBeVisible({ timeout: 15_000 })
+  const heading = page.getByRole('main', { name: 'Game' }).getByRole('heading', { name: id })
+  const limited = page.getByRole('alert').filter({ hasText: 'Too many attempts' })
+  // A full run creates more ninjas than the server's 10 a minute per IP
+  // (RATE_LIMITS.createCharacter): when limited, wait for the window and try again.
+  for (let attempt = 0; attempt < 15; attempt++) {
+    await page.getByRole('button', { name: 'Enter Game' }).click()
+    await expect(heading.or(limited)).toBeVisible({ timeout: 15_000 })
+    if (await heading.isVisible()) return
+    test.info().setTimeout(test.info().timeout + 5_000)
+    await page.waitForTimeout(5_000)
+  }
+  await expect(heading).toBeVisible()
 }
 
 // Fields stay blocked on the World Map until visited (decision 7); Leave walks out of the
