@@ -6,6 +6,7 @@ import { INSTANCE_BUFFS } from './scripts/instance-skills.js'
 import { FIELD_2600_BUFFS } from './scripts/field-2600-buffs.js'
 import { NINJUTSU_BUFFS } from './scripts/ninjutsu-buffs.js'
 import { NINJUTSU_TRIGGER_A_BUFFS } from './scripts/ninjutsu-trigger-a-buffs.js'
+import { NINJUTSU_TRIGGER_B_BUFFS } from './scripts/ninjutsu-trigger-b-buffs.js'
 import type { ActiveBuff, FightContext, Fighter, FightEvent } from './types.js'
 
 type BuffScript = (
@@ -175,6 +176,7 @@ const BUFF_SCRIPTS: Record<string, BuffScripts> = {
   ...FIELD_2600_BUFFS,
   ...NINJUTSU_BUFFS,
   ...NINJUTSU_TRIGGER_A_BUFFS,
+  ...NINJUTSU_TRIGGER_B_BUFFS,
 }
 
 const toBuffDef = (row: BuffRow): BuffDef => ({
