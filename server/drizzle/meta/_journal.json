@@ -232,6 +232,13 @@
       "when": 1791957438951,
       "tag": "0032_cards",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1791981937115,
+      "tag": "0033_pet_skill_slots",
+      "breakpoints": true
     }
   ]
 }

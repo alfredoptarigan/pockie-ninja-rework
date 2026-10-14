@@ -43,7 +43,7 @@ import { toCharacter } from '../game/characters.js'
 export type PetRow = typeof characterPets.$inferSelect
 type CharacterRow = typeof characters.$inferSelect
 type InventoryRow = typeof inventoryItems.$inferSelect
-/** A skill row without its pet id; skill ids <= 0 hold an unlocked empty slot. */
+/** A skill row without its pet id. */
 export type SkillRow = LearnedSkill
 
 export const bad = (code: string, message: string) => new HttpError(400, code, message)
@@ -59,21 +59,12 @@ export {
 } from '../../game/quests.js'
 
 const KIND_KEYS = { 1: 'halo', 2: 'help', 3: 'pass' } as const
+const SLOT_COLUMNS = { 1: 'haloSlots', 2: 'helpSlots', 3: 'passSlots' } as const
 
-/**
- * Ponytail: the schema has no column for unlocked skill slots, so an unlocked empty slot is a
- * skill row with a negative id (2011 keeps a row with skill id 0). Add a column if it grows.
- */
-export const emptySlotId = (kind: number, slot: number) => -(kind * 10 + slot + 1)
-const isReal = (row: SkillRow) => row.skillId > 0
-const emptySlot = (kind: number, slot: number): SkillRow => ({
-  skillId: emptySlotId(kind, slot),
-  level: 1,
-  learnedOrder: 0,
-  locked: false,
-  kind,
-  slot,
-})
+/** Unlocked skill slots of a kind; they are always slots 0..n-1. */
+export const unlockedSlots = (pet: PetRow, kind: number) =>
+  pet[SLOT_COLUMNS[kind as keyof typeof SLOT_COLUMNS]]
+const slotTotal = (pet: PetRow) => pet.haloSlots + pet.helpSlots + pet.passSlots
 
 let foods: Map<string, PetFood & { level: number }> | undefined
 export function petFood(itemId: string) {
@@ -120,56 +111,41 @@ export async function saveSkills(tx: Tx, petId: string, rows: readonly SkillRow[
  * with none it replaces the oldest unlocked skill of the kind. The learned list keeps
  * MaxSkillCount (5) skills (game-core learnSkill drops the oldest unlocked one, its slot empties).
  */
-export function placeSkill(rows: readonly SkillRow[], skillId: number, kind: number) {
-  const slots = rows
-    .filter((row) => row.kind === kind && row.slot !== null)
-    .sort((a, b) => a.slot! - b.slot!)
-  if (slots.length === 0) throw bad('no_slot', 'Unlock a skill slot of this kind first.')
-  const real = rows.filter(isReal)
-  if (real.some((row) => row.skillId === skillId))
+export function placeSkill(pet: PetRow, rows: readonly SkillRow[], skillId: number, kind: number) {
+  const count = unlockedSlots(pet, kind)
+  if (count === 0) throw bad('no_slot', 'Unlock a skill slot of this kind first.')
+  if (rows.some((row) => row.skillId === skillId))
     throw bad('known', 'Your pet already knows that skill.')
-  const empty = slots.find((row) => !isReal(row))
-  const victim = empty
-    ? undefined
-    : slots
-        .filter((row) => !row.locked)
-        .sort((a, b) => a.learnedOrder - b.learnedOrder)
-        .at(0)
-  const target = empty ?? victim
+  const slotted = rows.filter((row) => row.kind === kind && row.slot !== null)
+  const empty = Array.from({ length: count }, (_, n) => n).find(
+    (n) => !slotted.some((row) => row.slot === n),
+  )
+  const victim =
+    empty === undefined
+      ? slotted.filter((row) => !row.locked).sort((a, b) => a.learnedOrder - b.learnedOrder)[0]
+      : undefined
+  const target = empty ?? victim?.slot ?? null
   const learned =
-    target &&
+    target !== null &&
     learnSkill(
-      real.filter((row) => row !== victim),
+      rows.filter((row) => row !== victim),
       skillId,
       kind,
       PET_SKILL_MAX_LEVEL,
     )
-  if (!target || !learned) throw bad('all_locked', 'Every skill that could make room is locked.')
-  const placed = learned.map((row) =>
-    row.skillId === skillId ? { ...row, slot: target.slot } : row,
-  )
-  return withEmptySlots(placed, rows)
+  if (target === null || !learned)
+    throw bad('all_locked', 'Every skill that could make room is locked.')
+  return learned.map((row) => (row.skillId === skillId ? { ...row, slot: target } : row))
 }
 
-/** `skills` plus an empty-slot row for every slot unlocked in `unlocked` that no skill holds. */
-export function withEmptySlots(skills: readonly SkillRow[], unlocked: readonly SkillRow[]) {
-  const held = (row: SkillRow) =>
-    skills.some((s) => isReal(s) && s.kind === row.kind && s.slot === row.slot)
-  return [
-    ...skills.filter(isReal),
-    ...unlocked
-      .filter((row) => row.slot !== null && !held(row))
-      .map((row) => emptySlot(row.kind, row.slot!)),
-  ]
-}
-
-/** OnCustomActSkill: the next free slot of the kind, or null when no more can be unlocked. */
-export function nextSlot(rows: readonly SkillRow[], kind: number, level: number) {
-  const unlocked = rows.filter((row) => row.slot !== null)
-  const ofKind = unlocked.filter((row) => row.kind === kind)
-  if (!canUnlockSlot(unlocked.length, ofKind.length, level)) return null
-  const slot = [0, 1, 2, 3, 4, 5].find((n) => !ofKind.some((row) => row.slot === n))!
-  return { row: emptySlot(kind, slot), cost: slotCost(unlocked.length + 1)! }
+/**
+ * OnCustomActSkill: the column to raise and the Stone price of the kind's next slot, or null when
+ * no more can be unlocked.
+ */
+export function nextSlot(pet: PetRow, kind: 1 | 2 | 3) {
+  const total = slotTotal(pet)
+  if (!canUnlockSlot(total, unlockedSlots(pet, kind), pet.level)) return null
+  return { column: SLOT_COLUMNS[kind], cost: slotCost(total + 1)! }
 }
 
 /** Learnable skills of a kind: the species pool, without rows that do nothing in a fight. */
@@ -307,10 +283,8 @@ async function itemCounts(tx: Tx | Db, characterId: string) {
 
 function petView(pet: PetRow, rows: readonly SkillRow[]): PetView {
   const species = petSpecies(pet.species)!
-  const unlocked = rows.filter((row) => row.slot !== null)
-  const real = rows.filter(isReal)
-  const kindCount = (kind: number) => unlocked.filter((row) => row.kind === kind).length
-  const nextCost = slotCost(unlocked.length + 1)
+  const total = slotTotal(pet)
+  const nextCost = slotCost(total + 1)
   return {
     id: pet.id,
     species: pet.species,
@@ -333,7 +307,7 @@ function petView(pet: PetRow, rows: readonly SkillRow[]): PetView {
       mul: slot.mul,
       item: slot.item ?? null,
     })),
-    skills: real
+    skills: rows
       .filter((row) => row.slot !== null)
       .map((row) => ({
         skillId: row.skillId,
@@ -343,11 +317,10 @@ function petView(pet: PetRow, rows: readonly SkillRow[]): PetView {
         level: row.level,
         locked: row.locked,
       })),
-    slots: [kindCount(1), kindCount(2), kindCount(3)],
+    slots: [pet.haloSlots, pet.helpSlots, pet.passSlots],
     slotCap: skillCap(pet.level),
-    nextSlotCost:
-      unlocked.length < skillCap(pet.level) && nextCost && nextCost > 0 ? nextCost : null,
-    nextLockCost: lockCost(real.filter((row) => row.locked).length),
+    nextSlotCost: total < skillCap(pet.level) && nextCost && nextCost > 0 ? nextCost : null,
+    nextLockCost: lockCost(rows.filter((row) => row.locked).length),
     evolvesTo: evolutionsOf(pet.species).map((p) => ({ species: p.item, nameKey: p.nameKey })),
   }
 }

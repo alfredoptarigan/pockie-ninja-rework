@@ -31,9 +31,9 @@ export const petBases = (pet: PetRow): PetProps => ({
 /** Battle art avatar: own art, else the family base pet's, else the icon (answer 5). */
 export const petAvatar = (species: RebornPet) => species.artAvatar ?? species.avatar
 
-/** Real skills in slots (skill ids <= 0 mark an unlocked empty slot). */
+/** Skills in slots (a learned skill can sit in no slot). */
 export const slottedSkills = (rows: readonly PetSkillRow[]) =>
-  rows.filter((row) => row.skillId > 0 && row.slot !== null)
+  rows.filter((row) => row.slot !== null)
 
 /**
  * `petFighterInput(...)` of the active pet, or null without one. `pet` goes on the master's

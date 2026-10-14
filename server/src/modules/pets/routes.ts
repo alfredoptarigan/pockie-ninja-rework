@@ -54,7 +54,6 @@ import {
   spendCurrency,
   spendItems,
   type PetRow,
-  withEmptySlots,
   type SkillRow,
 } from './kennel.js'
 export { activePetFighterInput, explorePetItem, grantPetExp } from '../../game/pets.js'
@@ -135,13 +134,9 @@ async function learn({ tx, pet, random }: Ctx, kind: 1 | 2 | 3) {
   if (pet.appetite < HUNGER_MAX)
     throw bad('not_full', 'Feed your pet until its appetite is full first.')
   const rows = await skillRows(tx, pet.id)
-  const skillId = pickLearnSkill(
-    learnPool(pet.species, kind),
-    rows.filter((row) => row.skillId > 0),
-    random,
-  )
+  const skillId = pickLearnSkill(learnPool(pet.species, kind), rows, random)
   if (skillId === null) throw bad('nothing_to_learn', 'Your pet knows every skill of that kind.')
-  await saveSkills(tx, pet.id, placeSkill(rows, skillId, kind))
+  await saveSkills(tx, pet.id, placeSkill(pet, rows, skillId, kind))
   await tx
     .update(characterPets)
     .set({ appetite: pet.appetite - HUNGER_MAX })
@@ -155,18 +150,20 @@ async function learnBook({ tx, character, pet }: Ctx, item: string) {
   if (!rebornPetSkills().skills[String(book.skill)])
     throw bad('unknown_skill', 'That skill book cannot be used yet.')
   const rows = await skillRows(tx, pet.id)
-  const next = placeSkill(rows, book.skill, book.kind)
+  const next = placeSkill(pet, rows, book.skill, book.kind)
   await spendItems(tx, character.id, item, 1, 'You do not have that skill book.')
   await saveSkills(tx, pet.id, next)
   await refreshIfActive(tx, pet)
 }
 
 async function unlockSkillSlot({ tx, character, pet }: Ctx, kind: 1 | 2 | 3) {
-  const rows = await skillRows(tx, pet.id)
-  const next = nextSlot(rows, kind, pet.level)
+  const next = nextSlot(pet, kind)
   if (!next) throw bad('slot_cap', 'Your pet cannot open another skill slot of that kind yet.')
   await spendCurrency(tx, character, 'stone', next.cost)
-  await saveSkills(tx, pet.id, [...rows, next.row])
+  await tx
+    .update(characterPets)
+    .set({ [next.column]: pet[next.column] + 1 })
+    .where(eq(characterPets.id, pet.id))
 }
 
 async function lockSkill({ tx, character, pet }: Ctx, skillId: number, locked: boolean) {
@@ -194,10 +191,7 @@ async function removeSkill({ tx, character, pet }: Ctx, skillId: number) {
   await saveSkills(
     tx,
     pet.id,
-    withEmptySlots(
-      rows.filter((r) => r !== row),
-      rows,
-    ),
+    rows.filter((r) => r !== row),
   )
   await refreshIfActive(tx, pet)
 }

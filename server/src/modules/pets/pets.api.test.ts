@@ -6,7 +6,7 @@ import type { Random } from '@pockie/game-core'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { characterPets, characterPetSkills, characters, inventoryItems } from '../../db/schema.js'
 import { activePetFighterInput, explorePetItem, grantPetExp } from '../../game/pets.js'
-import { adoptPetItem, emptySlotId } from './kennel.js'
+import { adoptPetItem } from './kennel.js'
 import { petRoutes } from './routes.js'
 
 const { db, close } = createTestDb()
@@ -276,8 +276,11 @@ describe('skills', () => {
     await setPet(pet.id, { appetite: 7200 })
     expect((await post(`/${pet.id}/skills/learn`, { kind: 3 })).json().error.code).toBe('no_slot')
     await post(`/${pet.id}/skills/slot`, { kind: 3 })
+    expect(await petRow(pet.id)).toMatchObject({ passSlots: 1 })
+    expect(await skillsOf(pet.id)).toEqual([])
     const learned = await post(`/${pet.id}/skills/learn`, { kind: 3 })
     expect(learned.json().pets[0].skills).toMatchObject([{ skillId: 40043, kind: 3, slot: 0 }])
+    expect(await skillsOf(pet.id)).toMatchObject([{ skillId: 40043, kind: 3, slot: 0 }])
     expect(learned.json().pets[0].appetite).toBe(0)
   })
 
@@ -328,7 +331,8 @@ describe('skills', () => {
     const removed = await post(`/${pet.id}/skills/50020/remove`)
     expect(removed.json().pets[0]).toMatchObject({ skills: [], slots: [0, 0, 1] })
     expect(await held('i152027')).toBe(0)
-    expect((await skillsOf(pet.id)).map((s) => s.skillId)).toEqual([emptySlotId(3, 0)])
+    expect(await skillsOf(pet.id)).toEqual([])
+    expect(await petRow(pet.id)).toMatchObject({ haloSlots: 0, helpSlots: 0, passSlots: 1 })
   })
 })
 

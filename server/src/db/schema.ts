@@ -1662,6 +1662,10 @@ export const characterPets = pgTable(
     appetite: smallint('appetite').notNull().default(0),
     digestEndsAt: timestamp('digest_ends_at', { withTimezone: true }),
     foodSlots: jsonb('food_slots').$type<PetFoodSlot[]>().notNull().default([]),
+    // Unlocked skill slots per kind (decision 14); a kind's slots are always 0..n-1.
+    haloSlots: smallint('halo_slots').notNull().default(0),
+    helpSlots: smallint('help_slots').notNull().default(0),
+    passSlots: smallint('pass_slots').notNull().default(0),
     adoptedAt: timestamp('adopted_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
@@ -1677,6 +1681,10 @@ export const characterPets = pgTable(
       sql`${t.exp} >= 0 and ${t.growth} >= 0 and ${t.baseAttack} >= 0 and ${t.baseDefence} >= 0 and ${t.baseDisturb} >= 0 and ${t.baseActive} >= 0 and ${t.baseSavvy} >= 0`,
     ),
     check('character_pets_food_slots', jsonbArray(t.foodSlots, 6)),
+    check(
+      'character_pets_skill_slots',
+      sql`${t.haloSlots} between 0 and 6 and ${t.helpSlots} between 0 and 6 and ${t.passSlots} between 0 and 6`,
+    ),
   ],
 )
 
@@ -1704,6 +1712,7 @@ export const characterPetSkills = pgTable(
     check('character_pet_skills_kind', sql`${t.kind} between 1 and 3`),
     check('character_pet_skills_slot', sql`${t.slot} between 0 and 5`),
     check('character_pet_skills_amounts', sql`${t.level} >= 1 and ${t.learnedOrder} >= 0`),
+    check('character_pet_skills_skill', sql`${t.skillId} > 0`),
   ],
 )
 

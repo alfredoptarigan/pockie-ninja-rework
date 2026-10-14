@@ -239,4 +239,51 @@ describe('migrations', { timeout: SLOW }, () => {
       expect(counts).toEqual({ friends: 0, mails: 0, teams: 0, listings: 0, arena: 0, weekly: 0 })
     })
   })
+
+  describe('on a database holding M6 pet skill rows', () => {
+    const sql = scratch()
+
+    beforeAll(async () => {
+      await recreateScratch()
+      await migrateTo(33) // 0000-0032: unlocked empty skill slots were rows with negative ids
+      const [user] = await sql<{ id: string }[]>`
+        insert into users (username, email, password_hash)
+        values ('Shino', 'shino@example.com', 'x') returning id`
+      const [character] = await sql<{ id: string }[]>`
+        insert into characters (user_id, name, gender, nation, clothing, avatar_id, hp, mp, scene_id)
+        values (${user!.id}, 'Shino', 0, 0, 45, 45, 224, 224, 2101) returning id`
+      const [pet] = await sql<{ id: string }[]>`
+        insert into character_pets (character_id, species, kennel_slot, growth, base_attack,
+          base_defence, base_disturb, base_active, base_savvy)
+        values (${character!.id}, 'i320002', 0, 120, 11, 6, 8, 8, 6) returning id`
+      // Halo: slot 0 empty. Pass: slot 0 holds 50020, slot 1 empty, slot 2 holds 40043.
+      // 40044 is learned but in no slot.
+      await sql`
+        insert into character_pet_skills (pet_id, skill_id, learned_order, kind, slot) values
+          (${pet!.id}, -11, 0, 1, 0),
+          (${pet!.id}, 50020, 0, 3, 0),
+          (${pet!.id}, -32, 0, 3, 1),
+          (${pet!.id}, 40043, 1, 3, 2),
+          (${pet!.id}, 40044, 2, 3, null)`
+      await migrateTo()
+    }, SLOW)
+
+    afterAll(() => sql.end())
+
+    it('moves unlocked slots to per-kind counts and deletes the empty-slot rows', async () => {
+      expect(await sql`select halo_slots, help_slots, pass_slots from character_pets`).toEqual([
+        { halo_slots: 1, help_slots: 0, pass_slots: 3 },
+      ])
+      const skills = await sql`
+        select skill_id, kind, slot from character_pet_skills order by skill_id`
+      expect(skills).toEqual([
+        { skill_id: 40043, kind: 3, slot: 2 },
+        { skill_id: 40044, kind: 3, slot: null },
+        { skill_id: 50020, kind: 3, slot: 0 },
+      ])
+      expect(
+        await sql`select count(*)::int as n from character_pet_skills where skill_id <= 0`,
+      ).toEqual([{ n: 0 }])
+    })
+  })
 })
