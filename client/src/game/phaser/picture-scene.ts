@@ -64,7 +64,8 @@ class PictureScene extends Phaser.Scene {
         .setAlpha(HIDDEN_ALPHA)
       this.interactive(
         image,
-        hotspot.label,
+        // These buildings open a window, not their NPC: name the building.
+        building ? hotspot.title : hotspot.label,
         () => {
           if (building && this.actions.onBuilding) this.actions.onBuilding(building)
           else if (npc) this.actions.onNpc(npc)

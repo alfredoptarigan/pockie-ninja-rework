@@ -32,6 +32,19 @@ describe('pictureLayout', () => {
     expect(layout.figures).toEqual([])
   })
 
+  it('has a Pet Kennel building in every village and Angel City', () => {
+    const kennels = [111, 121, 131, 141, 151].map((sceneId) => ({ ...villageScene, sceneId }))
+    kennels.push({
+      ...villageScene,
+      sceneId: 161,
+      npcs: [{ id: 'n16012', nameKey: 'lg_name_n16012', x: 0, y: 0, scale: 100, clip: 'clip_pet' }],
+    })
+    for (const scene of kennels) {
+      const kennel = pictureLayout(scene)!.hotspots.find((h) => h.clip === 'clip_pet')
+      expect(kennel?.title, `scene ${scene.sceneId}`).toBe('Pet Kennel')
+    }
+  })
+
   it('maps Angel City buildings from the clip each NPC names', () => {
     const layout = pictureLayout({
       ...villageScene,
