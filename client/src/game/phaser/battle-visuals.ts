@@ -44,7 +44,11 @@ export class BattleVisuals {
     }
     this.replay.fighters.forEach((f, i) => {
       const look = visualLook(f, this.looks[i])
-      load(petAsset(look.pet?.avatar))
+      const pet = petAsset(look.pet?.avatar)
+      load(pet)
+      // Pets without exported motions only have their item icon.
+      if (!pet?.atlas && pet?.icon && !scene.textures.exists(pet.icon))
+        scene.load.image(pet.icon, pet.icon)
       load(wingAsset(look.wingSprite))
       const aura = auraAsset(look.aura)
       load(aura)
@@ -56,6 +60,14 @@ export class BattleVisuals {
       if (number) load(numberAssets[number.atlas])
     }
     if (this.timeline.bars.some((b) => b.buffs.length)) load(statusAsset)
+  }
+  private sprite(id: string, key: string) {
+    let sprite = this.sprites.get(id)
+    if (!sprite) {
+      sprite = this.scene.add.sprite(0, 0, key)
+      this.sprites.set(id, sprite)
+    }
+    return sprite
   }
   private draw(
     id: string,
@@ -85,11 +97,7 @@ export class BattleVisuals {
     const tick = Math.floor((Math.max(0, elapsed) * fps) / 1000 + 1e-9)
     const frame = frames[loop ? tick % frames.length : tick]
     if (!frame) return
-    let sprite = this.sprites.get(id)
-    if (!sprite) {
-      sprite = this.scene.add.sprite(0, 0, key)
-      this.sprites.set(id, sprite)
-    }
+    const sprite = this.sprite(id, key)
     sprite
       .setTexture(key, frame)
       .setOrigin(
@@ -122,6 +130,14 @@ export class BattleVisuals {
       )
       const attacking = action && t < action.end
       const motion = attacking ? action.motion : '999'
+      if (!pet?.atlas && pet?.icon && this.scene.textures.exists(pet.icon))
+        this.sprite(`pet:${i}`, pet.icon)
+          .setTexture(pet.icon)
+          .setOrigin(0.5, 1)
+          .setPosition(petX(HOME[fighter.side], fighter.side), y)
+          .setScale(sign, 1)
+          .setDepth(pose.at - 0.3)
+          .setVisible(true)
       this.draw(
         `pet:${i}`,
         pet,
@@ -201,12 +217,7 @@ export class BattleVisuals {
         const key = statusAsset.atlas
         if (!this.scene.textures.exists(key) || !this.scene.textures.get(key).has(String(buff)))
           return
-        let sprite = this.sprites.get(`status:${i}:${k}`)
-        if (!sprite) {
-          sprite = this.scene.add.sprite(0, 0, key)
-          this.sprites.set(`status:${i}:${k}`, sprite)
-        }
-        sprite
+        this.sprite(`status:${i}:${k}`, key)
           .setTexture(key, String(buff))
           .setOrigin(0)
           .setPosition(HOME[fighter.side] + (k - 2) * 22, 91)

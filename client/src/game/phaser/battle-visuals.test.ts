@@ -9,7 +9,11 @@ function fixture() {
   const sprites: Record<string, unknown>[] = []
   const aura = auraAsset('ki_lightning')!.atlas!
   const scene = {
-    load: { multiatlas: (key: string) => loaded.push(key), json: () => {} },
+    load: {
+      multiatlas: (key: string) => loaded.push(key),
+      image: (key: string) => loaded.push(key),
+      json: () => {},
+    },
     textures: {
       exists: (key: string) => loaded.includes(key),
       get: () => ({
@@ -91,14 +95,16 @@ describe('battle cosmetic rendering', () => {
       expect(layer.Position).toEqual([300, 455])
     }
   })
-  it('draws no pet when its icon-only entry has no atlas', () => {
+  it('draws the icon of an icon-only pet as a static image beside its master', () => {
     const f = fixture()
     f.replay.fighters[0]!.pet = { avatar: 10052, species: 'pet' }
     f.replay.fighters[0]!.look = {}
+    const icon = petAsset(10052)!.icon!
     const visuals = new BattleVisuals(f.scene, f.replay, f.timeline)
     visuals.preload()
     visuals.render(0)
-    expect(f.loaded).toEqual([])
-    expect(f.sprites).toEqual([])
+    expect(f.loaded).toEqual([icon])
+    expect(f.sprites).toHaveLength(1)
+    expect(f.sprites[0]).toMatchObject({ key: icon, Position: [200, 455], Scale: [-1, 1] })
   })
 })
