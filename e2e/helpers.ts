@@ -134,6 +134,14 @@ export function giveItem(
   )
 }
 
+/** How many of an item the ninja holds (bag and worn), as psql prints it. */
+export const heldCount = (name: string, itemId: string) =>
+  sql(
+    `select coalesce(sum(i.count), 0) from inventory_items i
+     join characters c on c.id = i.character_id where c.name = :'name' and i.item_id = :'item'`,
+    { name, item: itemId },
+  )
+
 // Seeded fixtures insert the account and its session, so the suite stays within the auth
 // endpoints' per-IP limits (10 registrations an hour, 10 logins in 15 minutes); the auth journey
 // covers both forms. Character creation still runs through the real UI.
@@ -213,6 +221,15 @@ export async function reloadGame(page: Page) {
 /** Opens a window from the bottom-right menu (Bag, Friends, Market...). */
 export async function openMenu(page: Page, name: string) {
   await page.getByRole('navigation', { name: 'Menu' }).getByRole('button', { name }).click()
+}
+
+/** Opens a window from the top strip's Events menu (Card Room, Pet Tracing, Kennel Shop...). */
+export async function openEvent(page: Page, label: string) {
+  await page.getByRole('button', { name: 'Events', exact: true }).click()
+  await page
+    .getByRole('list', { name: 'Events' })
+    .getByRole('button', { name: label, exact: true })
+    .click()
 }
 
 /** Skips the battle replay that a fight opens. */
