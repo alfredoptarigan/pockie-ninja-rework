@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { commands, generate, storyLevel, tutorialIds } from './reborn-story.ts'
+import { commands, generate, storyLevel, tutorialIds, tutorialRewards } from './reborn-story.ts'
 import { storyText } from './story-text.ts'
 // Tools enforce erasable TS; load the server at runtime because game-core uses parameter properties.
 interface QuestProgress {
@@ -29,7 +29,7 @@ interface Engine {
   questRewards: (id: number) => {
     exp: number
     stone: number
-    items: unknown[]
+    items: { itemId: string; count: number }[]
     gold: number
     honor: number
     giftCoupon: number
@@ -50,6 +50,8 @@ interface Engine {
   REBORN_ARENA_FIGHT_COMMAND: number
   REBORN_LAS_NOCHES_FLOOR_COMMAND: number
   REBORN_BLOODLINE_UNLOCK_COMMAND: number
+  REBORN_EQUIP_PET_COMMAND: number
+  REBORN_FEED_PET_COMMAND: number
 }
 const {
   rebornLocation,
@@ -69,6 +71,8 @@ const {
   REBORN_ARENA_FIGHT_COMMAND,
   REBORN_LAS_NOCHES_FLOOR_COMMAND,
   REBORN_BLOODLINE_UNLOCK_COMMAND,
+  REBORN_EQUIP_PET_COMMAND,
+  REBORN_FEED_PET_COMMAND,
 } = (await import(new URL('../../server/src/game/quests.ts', import.meta.url).href)) as Engine
 
 type Row = Record<string, string | number>
@@ -90,12 +94,15 @@ const generated = generate()
 const sceneNpcs = read<Record<string, { r: string[] }>>('scene-npcs')
 const npcs = read<Record<string, Row>>('npcs')
 const items = read<Record<string, Row>>('items')
+const rebornItems = read<Record<string, Row>>('reborn/items')
+const pets = read<{ item: string }[]>('reborn/pets')
+const foods = read<{ foods: { item: string }[] }>('reborn/pet-foods').foods
 const base = read<Record<string, Row>>('tasks')
 const atScene = (id: string, scene: number) =>
   sceneNpcs[scene]?.r.some((line) => line.split(',')[0] === id)
 
 describe('Reborn quests', () => {
-  it('exports the same six hook ids used by the generated steps', () => {
+  it('exports the same eight hook ids used by the generated steps', () => {
     expect(Object.values(commands)).toEqual([
       REBORN_IDENTIFY_COMMAND,
       REBORN_ENHANCE_COMMAND,
@@ -103,6 +110,8 @@ describe('Reborn quests', () => {
       REBORN_ARENA_FIGHT_COMMAND,
       REBORN_LAS_NOCHES_FLOOR_COMMAND,
       REBORN_BLOODLINE_UNLOCK_COMMAND,
+      REBORN_EQUIP_PET_COMMAND,
+      REBORN_FEED_PET_COMMAND,
     ])
   })
   it('contains exactly the tutorial subset and all 118 story ids, without collisions', () => {
@@ -140,6 +149,21 @@ describe('Reborn quests', () => {
       }
     }
   })
+  it('rewards an existing pet first, then existing food, before the pet steps', () => {
+    const order = tutorialIds.map((id) => id + 800000)
+    const at = (command: number) =>
+      order.findIndex((id) => generated.steps[id]!.some((s) => s.TargetCondition === command))
+    expect(at(commands.equipPet)).toBeGreaterThan(order.indexOf(820012))
+    expect(at(commands.feedPet)).toBeGreaterThan(at(commands.equipPet))
+    const [pet] = String(generated.tasks[820012]!.RewardItem).split(',')
+    expect(rebornItems[pet!]).toBeDefined()
+    expect(pets.some((p) => p.item === pet)).toBe(true)
+    for (const part of String(generated.tasks[820014]!.RewardItem).split(';')) {
+      const [food] = part.split(',')
+      expect(items[food!] ?? rebornItems[food!], food).toBeDefined()
+      expect(foods.some((f) => f.item === food)).toBe(true)
+    }
+  })
   it('pins the captured calibration and caps every other reward at half the level main line', () => {
     expect(storyLevel(30022)).toBe(21)
     expect(questRewards(830022)).toMatchObject({ exp: 3060, stone: 36000 })
@@ -169,7 +193,10 @@ describe('Reborn quests', () => {
         expect(reward.exp).toBeLessThanOrEqual(Number(original.RewardExp) / 2)
         expect(reward.stone).toBeLessThanOrEqual(stone / 2)
       }
-      expect(reward.items).toEqual([])
+      const granted = tutorialRewards[Number(id) - 800000]
+      expect(reward.items.map((item) => `${item.itemId},${item.count}`).join(';')).toBe(
+        granted?.includes(',') ? granted : granted ? `${granted},1` : '',
+      )
       expect(reward.gold + reward.honor + reward.giftCoupon).toBe(0)
     }
   })
