@@ -17,10 +17,11 @@ import { DiceOfFateWindow, NinjaDiaryWindow } from './events'
 import { MarketWindow } from './market'
 import { RankingsWindow } from './rankings'
 import { MerchantWindow, ShopWindow } from './shop'
-import { FriendsWindow, MailWindow } from './social'
+import { SocialWindow } from './social'
 import { TailedBeastWindow } from './tailed-beast'
 import { TalentsWindow } from './talents'
 import { BloodlinesWindow } from './bloodlines'
+import { NinjaHouseWindow } from './bloodlines/ninja-house'
 import { TeamStoneWindow } from './team-stone'
 import { TeamBoardWindow, TeamWindow } from './teams'
 import { WingsWindow } from './wings'
@@ -45,6 +46,7 @@ export type WindowName =
   | 'market'
   | 'talents'
   | 'bloodlines'
+  | 'ninjaHouse'
   | 'ninjaDiary'
   | 'diceOfFate'
   | 'tailedBeast'
@@ -87,13 +89,18 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   team: (props) => <TeamWindow {...props} />,
   teamBoard: (props) => <TeamBoardWindow {...props} />,
   arena: ({ character, onClose }) => <ArenaWindow character={character} onClose={onClose} />,
-  friends: ({ onClose }) => <FriendsWindow onClose={onClose} />,
-  mail: ({ onClose }) => <MailWindow onClose={onClose} />,
+  friends: ({ character, onClose }) => <SocialWindow character={character} onClose={onClose} />,
+  mail: ({ character, onClose }) => (
+    <SocialWindow character={character} tab="mail" onClose={onClose} />
+  ),
   rankings: ({ onClose }) => <RankingsWindow onClose={onClose} />,
   market: ({ character, onClose }) => <MarketWindow character={character} onClose={onClose} />,
   talents: ({ character, onClose }) => <TalentsWindow character={character} onClose={onClose} />,
   bloodlines: ({ character, onClose }) => (
     <BloodlinesWindow character={character} onClose={onClose} />
+  ),
+  ninjaHouse: ({ character, onClose }) => (
+    <NinjaHouseWindow character={character} onClose={onClose} />
   ),
   ninjaDiary: ({ onClose }) => <NinjaDiaryWindow onClose={onClose} />,
   diceOfFate: ({ onClose }) => <DiceOfFateWindow onClose={onClose} />,

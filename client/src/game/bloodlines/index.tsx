@@ -1,20 +1,27 @@
-// Bloodlines window (M5 task 7): the Ninja House (44 NPCs, item turn-ins) and the Bloodline
-// panel (3 active slots and their summed bonuses), plus the Souls and Prayer tabs (souls.tsx).
+// Reborn's Bloodline Limits window (reborn-windows-A-L.md, "Bloodline Limits"; WM key
+// `bloodline`, the Inventory's Blood Limit button): 660x500, tabs Limits and Souls over a BigBG3
+// footer with the Active bar. Limits: the collection grid (50x50 slots by required level, the
+// uncollected ones locked) and the selected limit's header, Activate / Deactivate, its equipped
+// souls with Manage, and its stat totals (limit + souls + prayer). The turn-ins live in the Ninja
+// House (ninja-house.tsx); souls, prayer, Soul Synthesis and Soul Refine in souls.tsx.
+// ponytail: Reborn's five bloodline presets need a server preset store we do not have; the
+// footer shows the summed bonuses of the active limits there instead.
 import type { Character } from '@pockie/shared'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState, type KeyboardEvent } from 'react'
 import type {
   BloodlineLimit,
   BloodlinesView,
   BloodlineStat,
-  BloodlineTurnInResult,
+  SoulsView,
 } from '../../../../shared/src/schemas/bloodlines'
 import names from '../../i18n/reborn.json'
 import { api } from '../../lib/api'
 import { errorMessage, useApplyResult } from '../api'
-import { ItemIcon } from '../ItemIcon'
-import { Bar, Dialog, GameButton, Notice, Tabs } from '../skin'
-import { PrayerPanel, SoulsPanel } from './souls'
+import { Dialog, GameButton, Notice, Tabs } from '../skin'
+import { useBloodlines } from './ninja-house'
+import { bigBg } from './panels'
+import { PRAYER_BONUS_PER_LEVEL, soulIcon, SoulsTab, soulLabel, useSouls } from './souls'
 
 export const bloodlinesKey = ['game', 'bloodlines'] as const
 /** Reborn art (client/src/generated/reborn-assets.json, categories "bloodline" and "npc"). */
@@ -44,14 +51,17 @@ export const LIMIT_ITEM_NAMES: Record<string, string> = {
 }
 
 const text = names as Record<string, string>
-const limitName = (limit: BloodlineLimit) => text[limit.nameKey] ?? `Bloodline ${limit.limitId}`
-const npcName = (limit: BloodlineLimit) => text[limit.npcNameKey] ?? limitName(limit)
+export const limitName = (limit: BloodlineLimit) =>
+  text[limit.nameKey] ?? `Bloodline ${limit.limitId}`
+export const npcName = (limit: BloodlineLimit) => text[limit.npcNameKey] ?? limitName(limit)
 /** Two bloodlines share the names Byakugan and Mangekyo Sharingan, so lists add the teacher. */
 export const limitLabel = (limit: BloodlineLimit) => `${limitName(limit)} (${npcName(limit)})`
 
 /** Attributes are x100 internally; per-mille terms show as tenths of a percent. */
 const ATTRIBUTES = new Set(['strength', 'agility', 'stamina'])
 const PER_MILLE = new Set(['hpMul', 'attackMul', 'atkTimeMul'])
+const PRAYER_FIELDS = ['strength', 'agility', 'stamina'] as const
+const ATTRIBUTE_UNIT = 100
 
 export function formatStat({ field, label, value }: BloodlineStat) {
   const percent = label.endsWith('%')
@@ -60,7 +70,30 @@ export function formatStat({ field, label, value }: BloodlineStat) {
   return `${name} +${Number(shown.toFixed(2))}${percent ? '%' : ''}`
 }
 
-type Tab = 'house' | 'active' | 'souls' | 'prayer'
+/** One limit's stat table: its own stats, plus its socketed souls and its prayer. */
+export function limitTotals(limit: BloodlineLimit, souls?: SoulsView): BloodlineStat[] {
+  const totals = new Map(limit.stats.map((stat) => [stat.field, { ...stat }]))
+  const add = (field: string, label: string, value: number) => {
+    const stat = totals.get(field)
+    totals.set(field, { field, label: stat?.label ?? label, value: (stat?.value ?? 0) + value })
+  }
+  for (const soul of souls?.souls.filter((s) => s.limitId === limit.limitId) ?? []) {
+    const type = souls!.types.find((t) => t.id === soul.type)
+    if (type) add(type.field, type.label, type.valueByLevel[soul.level] ?? 0)
+  }
+  const prayer = souls?.prayers.find((p) => p.limitId === limit.limitId)
+  if (prayer?.level) {
+    const field = PRAYER_FIELDS[prayer.attribute - 1]!
+    const label = field[0]!.toUpperCase() + field.slice(1)
+    add(field, label, prayer.level * PRAYER_BONUS_PER_LEVEL * ATTRIBUTE_UNIT)
+  }
+  return [...totals.values()]
+}
+
+type Tab = 'limits' | 'souls'
+const byLevel = (a: BloodlineLimit, b: BloodlineLimit) =>
+  a.requiredLevel - b.requiredLevel || a.limitId - b.limitId
+const ACTIVE_SLOT_X = [45, 100, 155]
 
 export function BloodlinesWindow({
   character,
@@ -71,26 +104,10 @@ export function BloodlinesWindow({
 }) {
   const queryClient = useQueryClient()
   const apply = useApplyResult()
-  const [tab, setTab] = useState<Tab>('house')
-  const [selected, select] = useState(1)
-  const [message, setMessage] = useState('')
-  const bloodlines = useQuery({
-    queryKey: bloodlinesKey,
-    queryFn: () => api<BloodlinesView>('/api/game/bloodlines'),
-  })
-  const turnIn = useMutation({
-    mutationFn: (id: number) =>
-      api<BloodlineTurnInResult>(`/api/game/bloodlines/${id}/turn-in`, {
-        method: 'POST',
-        body: {},
-      }),
-    onSuccess: (result, id) => {
-      const limit = result.limits.find((l) => l.limitId === id)
-      setMessage(limit?.unlocked ? 'Bloodline unlocked.' : `+${result.amityPerTurnIn} Amity.`)
-      queryClient.setQueryData(bloodlinesKey, result)
-      apply(result)
-    },
-  })
+  const [tab, setTab] = useState<Tab>('limits')
+  const [selected, select] = useState<number | null>(null)
+  const bloodlines = useBloodlines()
+  const souls = useSouls().query.data
   const toggle = useMutation({
     mutationFn: ({ id, active }: { id: number; active: boolean }) =>
       api<BloodlinesView>(`/api/game/bloodlines/${id}/active`, {
@@ -98,7 +115,6 @@ export function BloodlinesWindow({
         body: { active },
       }),
     onSuccess: (result) => {
-      setMessage('')
       queryClient.setQueryData(bloodlinesKey, result)
       // The character's fight stats change with the active limits.
       apply({ character })
@@ -106,184 +122,225 @@ export function BloodlinesWindow({
   })
   const data = bloodlines.data
   const limit = data?.limits.find((l) => l.limitId === selected)
-  const busy = turnIn.isPending || toggle.isPending
   const active = data?.limits.filter((l) => l.active) ?? []
-  const error = bloodlines.error ?? turnIn.error ?? toggle.error
+  const error = bloodlines.error ?? toggle.error
   const panelId = 'bloodlines-panel'
+  const openSouls = (id: number) => {
+    select(id)
+    setTab('souls')
+  }
   return (
-    <Dialog title="Bloodlines" onClose={onClose} className="game-window-bare w-[600px]">
-      <Tabs
-        label="Bloodlines"
-        panelId={panelId}
-        active={tab}
-        onChange={setTab}
-        tabs={[
-          { id: 'house', title: 'Ninja House' },
-          { id: 'active', title: 'Active' },
-          { id: 'souls', title: 'Souls' },
-          { id: 'prayer', title: 'Prayer' },
-        ]}
-      />
-      <div
-        id={panelId}
-        role="tabpanel"
-        className="game-inset flex flex-col gap-2 p-[10px] font-game text-[12px] text-black"
-      >
-        {bloodlines.isPending && <p>Loading bloodlines...</p>}
-        {error && <Notice tone="error">{errorMessage(error)}</Notice>}
-        {data && tab === 'house' && (
-          <>
-            <p>
-              Turn-ins left today: {data.turnInsPerDay - data.turnInsUsed}/{data.turnInsPerDay}. Win
-              pub fights to find the items.
-            </p>
-            <ul
-              aria-label="Ninja House"
-              className="grid max-h-[220px] grid-cols-11 gap-1 overflow-auto"
-            >
-              {data.limits.map((entry) => (
-                <li key={entry.limitId}>
-                  <button
-                    type="button"
-                    aria-label={`${npcName(entry)}: ${limitName(entry)}`}
-                    aria-pressed={entry.limitId === selected}
-                    onClick={() => select(entry.limitId)}
-                    className={`game-card relative grid size-11 place-items-center ${
-                      entry.limitId === selected ? 'outline-2 outline-[#c98a1a]' : ''
-                    } ${entry.unlocked ? '' : 'grayscale-[60%]'}`}
-                  >
-                    <img src={npcIcon(entry.npcId)} alt="" className="max-h-full max-w-full" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-            {limit && (
-              <LimitCard
-                limit={limit}
-                data={data}
-                level={character.level}
-                busy={busy}
-                activeCount={active.length}
-                onTurnIn={() => turnIn.mutate(limit.limitId)}
-                onToggle={() => toggle.mutate({ id: limit.limitId, active: !limit.active })}
+    <Dialog title="Bloodline Limits" onClose={onClose} className="game-window-bare w-[670px]">
+      <div data-menu-root className="relative w-[660px] text-[12px] text-black">
+        <Tabs
+          label="Bloodline Limits"
+          panelId={panelId}
+          active={tab}
+          onChange={setTab}
+          tabs={[
+            { id: 'limits', title: 'Limits' },
+            { id: 'souls', title: 'Souls' },
+          ]}
+        />
+        <div id={panelId} role="tabpanel" className="h-[402px] w-[660px] p-[5px]" style={bigBg(1)}>
+          {bloodlines.isPending && <p>Loading bloodlines...</p>}
+          {error && <Notice tone="error">{errorMessage(error)}</Notice>}
+          {data && tab === 'limits' && (
+            <div className="flex gap-[8px]">
+              <Collection
+                limits={data.limits}
+                selected={selected}
+                onSelect={select}
+                onOpen={openSouls}
               />
-            )}
-          </>
-        )}
-        {data && tab === 'active' && (
-          <>
-            <ul aria-label="Active bloodlines" className="grid grid-cols-3 gap-2">
-              {Array.from({ length: data.maxActive }, (_, i) => active[i]).map((entry, i) => (
-                <li
-                  key={entry?.limitId ?? `empty-${i}`}
-                  className="game-card flex flex-col items-center gap-1 p-2"
-                >
-                  {entry ? (
-                    <>
-                      <img src={limitIcon(entry.limitId)} alt="" className="size-12" />
-                      <span className="text-center font-bold">{limitLabel(entry)}</span>
-                      <GameButton
-                        small
-                        disabled={busy}
-                        onClick={() => toggle.mutate({ id: entry.limitId, active: false })}
-                      >
-                        Deactivate
+              <section
+                aria-label="Selected limit"
+                className="flex h-[392px] w-[326px] flex-col gap-2 p-[10px]"
+                style={bigBg(3)}
+              >
+                {limit ? (
+                  <>
+                    <LimitHeader
+                      limit={limit}
+                      level={character.level}
+                      busy={toggle.isPending}
+                      full={active.length >= data.maxActive}
+                      onToggle={() => toggle.mutate({ id: limit.limitId, active: !limit.active })}
+                    />
+                    <div className="flex items-center gap-2">
+                      <h3 className="grow font-bold">Souls Equipped</h3>
+                      <GameButton small className="h-5 w-[65px]" onClick={() => setTab('souls')}>
+                        Manage
                       </GameButton>
-                    </>
-                  ) : (
-                    <span className="py-6 text-[#5c5c5c]">Empty slot</span>
-                  )}
-                </li>
-              ))}
+                    </div>
+                    <ul aria-label="Souls equipped" className="flex min-h-9 gap-1">
+                      {souls?.souls
+                        .filter((s) => s.limitId === limit.limitId)
+                        .map((soul) => (
+                          <li key={soul.id} title={soulLabel(souls, soul)}>
+                            <img
+                              src={soulIcon(soul.type)}
+                              alt={soulLabel(souls, soul)}
+                              className="game-slot size-9 p-0.5"
+                            />
+                          </li>
+                        ))}
+                    </ul>
+                    <ul
+                      aria-label="Limit stats"
+                      className="grid grid-cols-2 gap-x-3 gap-y-0.5 overflow-auto"
+                    >
+                      {limitTotals(limit, souls).map((stat) => (
+                        <li key={stat.field}>{formatStat(stat)}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <p className="m-auto text-[#5c4a2a]">Select a limit from your collection</p>
+                )}
+              </section>
+            </div>
+          )}
+          {data && tab === 'souls' && <SoulsTab limit={limit} level={character.level} />}
+        </div>
+        {data && (
+          <footer className="relative mt-[6px] h-[66px] w-[660px]" style={bigBg(3)}>
+            <span className="absolute top-[24px] left-[8px] font-bold">Active</span>
+            <ul aria-label="Active bloodlines">
+              {ACTIVE_SLOT_X.map((x, i) => {
+                const entry = active[i]
+                return (
+                  <li key={x} className="absolute top-[8px]" style={{ left: x }}>
+                    <button
+                      type="button"
+                      aria-label={entry ? limitLabel(entry) : 'Empty slot'}
+                      disabled={!entry}
+                      onClick={() => {
+                        if (!entry) return
+                        select(entry.limitId)
+                        setTab('limits')
+                      }}
+                      className="game-slot grid size-[50px] place-items-center"
+                    >
+                      {entry && <img src={limitIcon(entry.limitId)} alt="" className="size-11" />}
+                    </button>
+                  </li>
+                )
+              })}
             </ul>
-            <section className="game-card p-2">
-              <h3 className="font-bold">Bonuses</h3>
+            <ul
+              aria-label="Bloodline bonuses"
+              className="absolute top-[6px] left-[220px] grid h-[54px] w-[430px] grid-cols-3 gap-x-2 overflow-auto text-[11px] leading-[13px]"
+            >
               {data.bonuses.length === 0 ? (
-                <p>Activate a bloodline in the Ninja House to see its bonuses.</p>
+                <li className="col-span-3 text-[#5c4a2a]">
+                  Activate a collected limit to see its bonuses.
+                </li>
               ) : (
-                <ul aria-label="Bloodline bonuses" className="grid grid-cols-2 gap-x-4">
-                  {data.bonuses.map((stat) => (
-                    <li key={stat.field}>{formatStat(stat)}</li>
-                  ))}
-                </ul>
+                data.bonuses.map((stat) => <li key={stat.field}>{formatStat(stat)}</li>)
               )}
-            </section>
-          </>
+            </ul>
+          </footer>
         )}
-        {data && tab === 'souls' && <SoulsPanel limits={data.limits} level={character.level} />}
-        {data && tab === 'prayer' && <PrayerPanel limits={data.limits} />}
-        {message && tab !== 'souls' && tab !== 'prayer' && <Notice>{message}</Notice>}
-      </div>
-      <div className="mt-[10px] flex justify-end">
-        <GameButton onClick={onClose}>Close</GameButton>
       </div>
     </Dialog>
   )
 }
 
-function LimitCard({
+function Collection({
+  limits,
+  selected,
+  onSelect,
+  onOpen,
+}: {
+  limits: BloodlineLimit[]
+  selected: number | null
+  onSelect: (id: number) => void
+  onOpen: (id: number) => void
+}) {
+  const collected = limits.filter((l) => l.unlocked).length
+  const onKey = (event: KeyboardEvent, id: number) => {
+    if (event.key !== 'Enter') return
+    event.preventDefault()
+    onOpen(id)
+  }
+  return (
+    <section
+      aria-label="Collection"
+      className="flex h-[392px] w-[316px] flex-col gap-1 p-[10px]"
+      style={bigBg(3)}
+    >
+      <h3 className="font-bold">
+        Collected {collected}/{limits.length}
+      </h3>
+      <ul aria-label="Limits" className="grid grid-cols-5 gap-[6px] overflow-auto pr-1">
+        {[...limits].sort(byLevel).map((limit) => (
+          <li key={limit.limitId}>
+            <button
+              type="button"
+              aria-label={`${limitLabel(limit)}${limit.unlocked ? '' : ' (locked)'}`}
+              aria-pressed={limit.limitId === selected}
+              title={`${limitLabel(limit)}, level ${limit.requiredLevel}`}
+              onClick={() => onSelect(limit.limitId)}
+              onDoubleClick={() => onOpen(limit.limitId)}
+              onKeyDown={(event) => onKey(event, limit.limitId)}
+              className={`game-slot relative grid size-[50px] place-items-center ${
+                limit.limitId === selected ? 'outline-2 outline-[#c98a1a]' : ''
+              }`}
+            >
+              <img
+                src={limitIcon(limit.limitId)}
+                alt=""
+                className={`size-11 ${limit.unlocked ? '' : 'opacity-60 grayscale'}`}
+              />
+              {!limit.unlocked && (
+                <span
+                  aria-hidden="true"
+                  className="game-skill-lock absolute right-0 bottom-0 size-4"
+                />
+              )}
+              {limit.active && (
+                <span className="absolute top-0 left-0.5 text-[9px] font-bold text-[#7dff6a]">
+                  ON
+                </span>
+              )}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function LimitHeader({
   limit,
-  data,
   level,
   busy,
-  activeCount,
-  onTurnIn,
+  full,
   onToggle,
 }: {
   limit: BloodlineLimit
-  data: BloodlinesView
   level: number
   busy: boolean
-  activeCount: number
-  onTurnIn: () => void
+  full: boolean
   onToggle: () => void
 }) {
-  const itemName = LIMIT_ITEM_NAMES[limit.unlockItem] ?? limit.unlockItem
-  const tooLow = level < limit.requiredLevel
   return (
-    <section aria-label={limitName(limit)} className="game-card flex gap-2 p-2">
-      <img src={limitIcon(limit.limitId)} alt="" className="size-14 shrink-0" />
-      <div className="flex grow flex-col gap-1">
+    <div className="flex items-center gap-2">
+      <img src={limitIcon(limit.limitId)} alt="" className="game-slot size-[50px] p-0.5" />
+      <div className="grow">
         <h3 className="font-bold">{limitLabel(limit)}</h3>
-        <p>
-          Required level {limit.requiredLevel}.{limit.unlocked ? ' Unlocked.' : ''}
-          {limit.active ? ' Active.' : ''}
-        </p>
-        <ul className="grid grid-cols-2 gap-x-4">
-          {limit.stats.map((stat) => (
-            <li key={stat.field}>{formatStat(stat)}</li>
-          ))}
-        </ul>
-        {limit.unlocked ? (
-          <GameButton
-            disabled={busy || tooLow || (!limit.active && activeCount >= data.maxActive)}
-            onClick={onToggle}
-          >
-            {limit.active ? 'Deactivate' : 'Activate'}
-          </GameButton>
-        ) : (
-          <>
-            <Bar label="Amity" kind="exp" value={limit.amity} max={limit.amityNeeded} />
-            <div className="flex items-center gap-2">
-              <ItemIcon itemId={limit.unlockItem} name={itemName} className="size-8" />
-              <span>
-                {itemName}: {limit.itemsHeld}/{data.itemsPerTurnIn}
-              </span>
-              <GameButton
-                disabled={
-                  busy ||
-                  tooLow ||
-                  limit.itemsHeld < data.itemsPerTurnIn ||
-                  data.turnInsUsed >= data.turnInsPerDay
-                }
-                onClick={onTurnIn}
-              >
-                Turn in {data.itemsPerTurnIn} items
-              </GameButton>
-            </div>
-          </>
-        )}
+        <p>Required Level: {limit.requiredLevel}</p>
+        {!limit.unlocked && <p className="text-[#5c4a2a]">Collect it at the Ninja House.</p>}
       </div>
-    </section>
+      <GameButton
+        disabled={
+          busy || !limit.unlocked || (!limit.active && (full || level < limit.requiredLevel))
+        }
+        onClick={onToggle}
+      >
+        {limit.active ? 'Deactivate' : 'Activate'}
+      </GameButton>
+    </div>
   )
 }

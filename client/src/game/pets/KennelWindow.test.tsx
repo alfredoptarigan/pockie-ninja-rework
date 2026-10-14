@@ -47,23 +47,30 @@ const view = (pets = [pet()]) => ({
   books: [],
 })
 
-describe('KennelWindow', () => {
-  it('shows the pet card with nature, props, slots and skills', async () => {
+describe('KennelWindow (Kennel)', () => {
+  it('shows the storage column, the pet slot, the info box and the AURA / AID / PSV rows', async () => {
     mockApi({ 'GET /api/game/pets': () => json(view()) })
     renderWithProviders(<KennelWindow onClose={vi.fn()} />)
-    const card = await screen.findByRole('region', { name: 'Baby Vulture' })
-    expect(card).toHaveTextContent('Nature: Beast')
-    expect(card).toHaveTextContent('Attack:170')
-    expect(within(card).getByRole('group', { name: 'Passive skills' })).toHaveTextContent(
-      'Empty slot',
-    )
-    expect(screen.getByRole('button', { name: 'Unlock slot (100 Gold)' })).toBeInTheDocument()
-    // Level 12 of 30 and 3 of 50 Feathers.
-    expect(within(card).getByRole('button', { name: 'Scavenging Vulture' })).toBeDisabled()
+    const storage = await screen.findByRole('list', { name: 'Storage' })
+    expect(within(storage).getAllByRole('listitem')).toHaveLength(4)
+    expect(within(storage).getByRole('button', { name: 'Baby Vulture' })).toBeVisible()
+    expect(within(storage).getByRole('button', { name: 'Unlock slot (100 Gold)' })).toBeVisible()
+    expect(screen.getByText('1/2')).toBeVisible()
+    expect(screen.getByRole('textbox', { name: 'Name' })).toHaveValue('Baby Vulture Lv. 12')
+    expect(screen.getByRole('button', { name: 'Rename' })).toBeDisabled()
+    expect(screen.getByText('Growth: 40/300')).toBeVisible()
+    expect(screen.getByText('Skill Locks: 1')).toBeVisible()
+    const passive = screen.getByRole('group', { name: 'Passive skills' })
+    expect(within(passive).getAllByRole('listitem')).toHaveLength(6)
+    expect(within(passive).getByText('Empty')).toBeVisible()
+    expect(within(passive).getByRole('button', { name: 'Add slot (1 Stone)' })).toBeVisible()
+    await userEvent.hover(screen.getByRole('button', { name: 'Pet: Baby Vulture' }))
+    const tooltip = screen.getByRole('tooltip')
+    expect(tooltip).toHaveTextContent('Nature: Beast')
+    expect(tooltip).toHaveTextContent('Attack: 170')
   })
 
-  it('learns a skill of a kind and sets the pet active', async () => {
-    // The server state after each action (the window refetches after applying a result).
+  it('discovers a skill of a row and sets the pet active from the pet slot menu', async () => {
     let state = view()
     const fetchMock = mockApi({
       'GET /api/game/pets': () => json(state),
@@ -74,14 +81,38 @@ describe('KennelWindow', () => {
       },
     })
     renderWithProviders(<KennelWindow onClose={vi.fn()} />)
-    const pass = await screen.findByRole('group', { name: 'Passive skills' })
-    await userEvent.click(within(pass).getByRole('button', { name: 'Learn' }))
+    const passive = await screen.findByRole('group', { name: 'Passive skills' })
+    await userEvent.click(within(passive).getByRole('button', { name: 'Discover' }))
     expect(requestBody(fetchMock, 'POST /api/game/pets/pet-1/skills/learn')).toEqual({ kind: 3 })
-    await userEvent.click(screen.getByRole('button', { name: 'Set active' }))
-    expect(await screen.findByRole('button', { name: 'Rest' })).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Pet: Baby Vulture' }))
+    const menu = screen.getByRole('menu')
+    // Level 12 of 30 and 3 of 50 Feathers.
+    expect(
+      within(menu).getByRole('menuitem', { name: 'Evolve into Scavenging Vulture' }),
+    ).toBeDisabled()
+    await userEvent.click(within(menu).getByRole('menuitem', { name: 'Set active' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Pet: Baby Vulture (active)' }))
+    expect(screen.getByRole('menuitem', { name: 'Rest' })).toBeVisible()
   })
 
-  it('feeds the chosen foods and shows the digest timer', async () => {
+  it('locks a skill from its menu', async () => {
+    const fetchMock = mockApi({
+      'GET /api/game/pets': () => json(view()),
+      'POST /api/game/pets/pet-1/skills/40043/lock': () => json({ ...view(), character }),
+    })
+    renderWithProviders(<KennelWindow onClose={vi.fn()} />)
+    const passive = await screen.findByRole('group', { name: 'Passive skills' })
+    await userEvent.click(within(passive).getAllByRole('button')[0]!)
+    await userEvent.click(screen.getByRole('menuitem', { name: 'Lock (1 lock)' }))
+    expect(
+      fetchMock.mock.calls.some(
+        ([url, init]) =>
+          String(url).endsWith('/pets/pet-1/skills/40043/lock') && init?.method === 'POST',
+      ),
+    ).toBe(true)
+  })
+
+  it('puts foods in the slots, feeds and shows digestion', async () => {
     const digesting = pet({
       appetite: 0,
       digestEndsAt: new Date(Date.now() + 3_600_000).toISOString(),
@@ -95,15 +126,16 @@ describe('KennelWindow', () => {
       },
     })
     renderWithProviders(<KennelWindow onClose={vi.fn()} />)
-    await userEvent.selectOptions(await screen.findByLabelText('Food slot 1'), 'i170117')
+    await userEvent.click(await screen.findByRole('button', { name: 'Food slot 1' }))
+    await userEvent.click(screen.getByRole('menuitem', { name: /\(\+80\) x2$/ }))
+    expect(screen.getByText('+ 80')).toBeVisible()
     await userEvent.click(screen.getByRole('button', { name: 'Feed' }))
     expect(requestBody(fetchMock, 'POST /api/game/pets/pet-1/feed')).toEqual({
       foods: ['i170117', null, null, null, null, null],
     })
-    expect(await screen.findByRole('timer')).toHaveTextContent(
-      /Digesting: (1:00:00|0:59:\d\d) left/,
-    )
-    expect(screen.getByRole('button', { name: 'Finish now (8 Gold)' })).toBeInTheDocument()
+    expect(await screen.findByRole('timer')).toHaveTextContent(/^(1:00:00|0:59:\d\d)$/)
+    await userEvent.click(screen.getByRole('button', { name: 'Digestion' }))
+    expect(screen.getByRole('menuitem', { name: 'Finish now (8 Gold)' })).toBeVisible()
   })
 
   it('shows an empty kennel', async () => {

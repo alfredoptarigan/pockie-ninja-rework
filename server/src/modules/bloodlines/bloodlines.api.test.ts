@@ -86,11 +86,18 @@ describe('GET /api/game/bloodlines', () => {
       npcId: 81001,
       requiredLevel: 16,
       unlockItem: 'i148023',
+      dropLevel: 16,
       itemsHeld: 6,
       amity: 0,
       amityNeeded: 30,
       unlocked: false,
       active: false,
+    })
+    // Reborn's Ninja House card: "Drops: SM Lv71+" for the last band.
+    expect(
+      view.limits.find((l: { unlockItem: string }) => l.unlockItem === 'i148040'),
+    ).toMatchObject({
+      dropLevel: 71,
     })
     expect(view).toMatchObject({
       turnInsUsed: 0,

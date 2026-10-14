@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
@@ -11,9 +11,24 @@ const tracing = {
   canBuy: true,
   feathers: 0,
 }
+const offer = (itemId: string, extra: object = {}) => ({
+  itemId,
+  nameKey: itemId,
+  price: 1,
+  level: 8,
+  dailyLimit: 20,
+  purchased: 0,
+  ...extra,
+})
+const shop = (offers = [offer('a')], extra: object = {}) => ({
+  level: 8,
+  feathers: 2,
+  offers,
+  ...extra,
+})
 
-describe('Kennel windows', () => {
-  it('sends the current board identity and refuses to flip an open cell', async () => {
+describe('Pet Tracing', () => {
+  it('lays out the board and the scoreboard, and flips a card of the current board', async () => {
     const flip = vi.fn(() =>
       json({
         ...tracing,
@@ -28,7 +43,11 @@ describe('Kennel windows', () => {
       'POST /api/game/kennel/tracing/flip': flip,
     })
     renderWithProviders(<PetTracingWindow onClose={vi.fn()} />)
-    expect(await screen.findByRole('button', { name: 'Cell 2: North' })).toBeDisabled()
+    const board = await screen.findByRole('list', { name: 'Pet Tracing board' })
+    expect(within(board).getAllByRole('listitem')).toHaveLength(9)
+    const scoreboard = screen.getByRole('region', { name: 'Scoreboard' })
+    expect(scoreboard).toHaveTextContent('Remaining10')
+    expect(screen.getByRole('button', { name: 'Cell 2: North' })).toBeDisabled()
     await userEvent.click(screen.getByRole('button', { name: 'Cell 1: hidden' }))
     expect(await screen.findByRole('status')).toHaveTextContent('You received 1 Feather.')
     expect(flip).toHaveBeenCalledOnce()
@@ -37,29 +56,34 @@ describe('Kennel windows', () => {
       cell: 0,
     })
     expect(screen.getByRole('button', { name: 'Cell 1: East' })).toBeDisabled()
+    expect(scoreboard).toHaveTextContent('Remaining9')
   })
 
-  it('disables exhausted attempts and an unavailable daily refill', async () => {
+  it('disables exhausted attempts and an unavailable purchase', async () => {
     mockApi({
       'GET /api/game/kennel/tracing': () => json({ ...tracing, attemptsLeft: 0, canBuy: false }),
     })
     renderWithProviders(<PetTracingWindow onClose={vi.fn()} />)
     expect(await screen.findByRole('button', { name: 'Cell 1: hidden' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Buy 10 attempts (10 Gold)' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Purchase More' })).toBeDisabled()
   })
 
-  it('buys the daily refill with Gold and applies the returned attempts', async () => {
+  it('purchases 10 more attempts for Gold after choosing the payment', async () => {
     const fetchMock = mockApi({
       'GET /api/game/kennel/tracing': () => json({ ...tracing, attemptsLeft: 0 }),
       'POST /api/game/kennel/tracing/buy': () => json({ ...tracing, canBuy: false }),
     })
     renderWithProviders(<PetTracingWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('button', { name: 'Buy 10 attempts (10 Gold)' }))
-    expect(await screen.findByText('Attempts left today: 10. Feathers: 0.')).toBeInTheDocument()
+    await userEvent.click(await screen.findByRole('button', { name: 'Purchase More' }))
+    const payment = screen.getByRole('menu', { name: 'Choose payment:' })
+    await userEvent.click(within(payment).getByRole('menuitem', { name: '10 Gold' }))
+    const confirm = screen.getByRole('alertdialog')
+    expect(confirm).toHaveTextContent('Purchase 10 more attempts for 10 Gold?')
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Accept' }))
     expect(requestBody(fetchMock, 'POST /api/game/kennel/tracing/buy')).toEqual({
       currency: 'gold',
     })
-    expect(screen.getByRole('button', { name: 'Buy 10 attempts (10 Gold)' })).toBeDisabled()
+    expect(await screen.findByRole('button', { name: 'Purchase More' })).toBeDisabled()
   })
 
   it('shows full bag refusals without reporting a reward', async () => {
@@ -72,32 +96,62 @@ describe('Kennel windows', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Your bag is full.')
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
+})
 
-  it('blocks purchases at level, Feather balance, and daily limits', async () => {
+describe('Pet Shop', () => {
+  it('shows the balance, 8 cards a page and the card states', async () => {
     mockApi({
       'GET /api/game/kennel/shop': () =>
-        json({
-          level: 8,
-          feathers: 2,
-          offers: [
-            { itemId: 'a', nameKey: 'Meatball', price: 1, level: 8, dailyLimit: 20, purchased: 0 },
-            { itemId: 'b', nameKey: 'Lobster', price: 6, level: 23, dailyLimit: 20, purchased: 0 },
-            { itemId: 'c', nameKey: 'Milk', price: 6, level: 8, dailyLimit: 20, purchased: 0 },
-            {
-              itemId: 'd',
-              nameKey: 'Pet Skill Lock',
-              price: 100,
-              level: 1,
-              dailyLimit: 1,
-              purchased: 1,
-            },
-          ],
-        }),
+        json(
+          shop([
+            offer('a'),
+            offer('b', { price: 6, level: 23 }),
+            offer('c', { price: 6 }),
+            offer('d', { price: 100, level: 1, dailyLimit: 1, purchased: 1 }),
+            ...['e', 'f', 'g', 'h', 'i'].map((id) => offer(id)),
+          ]),
+        ),
     })
     renderWithProviders(<KennelShopWindow onClose={vi.fn()} />)
-    expect(await screen.findByRole('button', { name: 'Buy a (1 Feather)' })).toBeEnabled()
-    expect(screen.getByRole('button', { name: 'Requires level 23' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Buy c (6 Feathers)' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Daily limit reached' })).toBeDisabled()
+    const grid = await screen.findByRole('list', { name: 'Pet Shop items' })
+    expect(within(grid).getAllByRole('listitem')).toHaveLength(8)
+    expect(screen.getByText('1/2')).toBeVisible()
+    expect(screen.getByLabelText('Feathers')).toHaveTextContent('2')
+    const card = (id: string) => within(grid).getByRole('listitem', { name: id })
+    expect(within(card('a')).getByRole('button', { name: 'Buy' })).toBeEnabled()
+    expect(card('a')).toHaveTextContent('0/20')
+    expect(card('b')).toHaveTextContent('Lv 23')
+    expect(within(card('b')).queryByRole('button', { name: 'Buy' })).toBeNull()
+    expect(within(card('c')).getByRole('button', { name: 'Buy' })).toBeDisabled()
+    expect(within(card('d')).getByRole('button', { name: 'Sold Out' })).toBeDisabled()
+    await userEvent.click(screen.getByRole('button', { name: 'Next page' }))
+    expect(within(grid).getAllByRole('listitem')).toHaveLength(1)
+  })
+
+  it('confirms the cost and buys the chosen quantity', async () => {
+    const fetchMock = mockApi({
+      'GET /api/game/kennel/shop': () => json(shop([offer('a')], { feathers: 10 })),
+      'POST /api/game/kennel/shop/buy': () =>
+        json(shop([offer('a', { purchased: 5 })], { feathers: 5 })),
+    })
+    renderWithProviders(<KennelShopWindow onClose={vi.fn()} />)
+    const card = await screen.findByRole('listitem', { name: 'a' })
+    await userEvent.selectOptions(within(card).getByRole('combobox', { name: 'Quantity' }), '5')
+    await userEvent.click(within(card).getByRole('button', { name: 'Buy' }))
+    const confirm = screen.getByRole('alertdialog')
+    expect(confirm).toHaveTextContent('Buy a x5?')
+    expect(confirm).toHaveTextContent('Cost: 5 Feathers')
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Accept' }))
+    expect(requestBody(fetchMock, 'POST /api/game/kennel/shop/buy')).toEqual({
+      itemId: 'a',
+      count: 5,
+    })
+    expect(await within(card).findByText('5/20')).toBeVisible()
+  })
+
+  it('shows an empty shop', async () => {
+    mockApi({ 'GET /api/game/kennel/shop': () => json(shop([])) })
+    renderWithProviders(<KennelShopWindow onClose={vi.fn()} />)
+    expect(await screen.findByText('No items available.')).toBeVisible()
   })
 })

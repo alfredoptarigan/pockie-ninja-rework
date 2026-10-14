@@ -1,4 +1,4 @@
-// M5 talents journey: a level-51 ninja upgrades a talent in the Talents window and activates it.
+// M5 talents journey: a level-51 ninja upgrades a talent in the Talent window and activates it.
 // The level, Stone and the talent's EXP are seeded; the upgrade and the activation go through the UI.
 import { expect, test } from '@playwright/test'
 import { createSeededNinja, dialog, openMenu, reloadGame, seedCharacter, sql } from './helpers'
@@ -34,33 +34,38 @@ test('a level-51 ninja upgrades a talent and activates it', async ({ browser }) 
     // Act: Inventory, Talent (as in Reborn), then a Stone upgrade of the first talent.
     await openMenu(page, 'Inventory')
     await dialog(page, 'Inventory').getByRole('button', { name: 'Talent', exact: true }).click()
-    const talents = dialog(page, 'Talents')
-    const upgrade = talents.getByRole('button', { name: /^Upgrade for [0-9,]+ Stone$/ })
+    const talents = dialog(page, 'Talent')
+    await talents
+      .getByRole('list', { name: 'Talents' })
+      .getByRole('button', { name: 'Heart of Pierce', exact: true })
+      .click()
+    const upgrade = talents.getByRole('button', { name: 'Normal Upgrade', exact: true })
     await expect(upgrade).toBeEnabled()
+    await upgrade.click()
+    const prompt = talents.getByRole('alertdialog')
+    await expect(prompt).toContainText('This will cost 10,000 stones, continue?')
     const upgraded = page.waitForResponse(
       (r) => r.url().includes(`/api/game/talents/${TALENT_ID}/upgrade`) && r.ok(),
     )
-    await upgrade.click()
+    await prompt.getByRole('button', { name: 'Accept', exact: true }).click()
     await upgraded
 
     // Assert: the talent reached level 1 and the Stone was spent.
-    await expect(
-      talents.getByRole('list', { name: 'Talents' }).getByRole('listitem').first(),
-    ).toContainText('Lv. 1')
+    await expect(talents.getByText('Current level 1', { exact: true })).toBeVisible()
     expect(talentRow(name)).toMatch(/^1\|\d+\|$/)
     expect(sql(`select stone from characters where name = :'name'`, { name })).toBe(
       String(100_000 - FIRST_UPGRADE_STONE),
     )
 
-    // Act: activate it.
+    // Act: use it.
     const activated = page.waitForResponse(
       (r) => r.url().includes(`/api/game/talents/${TALENT_ID}/active`) && r.ok(),
     )
-    await talents.getByRole('button', { name: 'Activate', exact: true }).click()
+    await talents.getByRole('button', { name: 'Use Talent', exact: true }).click()
     await activated
 
     // Assert: it is active in the window and in slot 0 of the database.
-    await expect(talents.getByRole('button', { name: 'Deactivate', exact: true })).toBeVisible()
+    await expect(talents.getByRole('button', { name: 'Remove Talent', exact: true })).toBeVisible()
     await expect(talents).toContainText('Active: 1/3')
     expect(talentRow(name)).toMatch(/^1\|\d+\|0$/)
   } finally {

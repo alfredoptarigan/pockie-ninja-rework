@@ -21,6 +21,7 @@ import { bloodlineBonuses } from '../../game/bloodlines.js'
 export { bloodlineBonuses } from '../../game/bloodlines.js'
 export { limitItemDrops } from './rules.js'
 import { bad, lockLimit, nextUtcDay, utcDay } from './common.js'
+import { LIMIT_ITEM_BANDS } from './rules.js'
 import { soulRoutes } from './souls.js'
 
 type CharacterRow = typeof characters.$inferSelect
@@ -73,6 +74,7 @@ async function view(tx: Tx | Db, character: CharacterRow): Promise<BloodlinesVie
         npcNameKey: limit.npcNameKey,
         requiredLevel: limit.requiredLevel,
         unlockItem: limit.unlockItem,
+        dropLevel: LIMIT_ITEM_BANDS[limit.unlockItem] ?? null,
         itemsHeld: counts.get(limit.unlockItem) ?? 0,
         amity: row?.amity ?? 0,
         amityNeeded: limit.amity,

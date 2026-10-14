@@ -71,23 +71,24 @@ test('a ninja adopts, feeds and activates a pet that attacks in a field fight', 
     await adopted
     await bag.getByRole('button', { name: 'Close', exact: true }).click()
 
-    // Act: open the Pet Kennel from its village building and feed the food in the first slot.
-    await page
-      .getByRole('region', { name: 'Scene actions' })
-      .getByRole('button', { name: 'Pet Kennel', exact: true })
-      .click()
-    const kennel = dialog(page, 'Pet Kennel')
-    await expect(kennel.getByRole('region', { name: PET.name })).toBeVisible()
-    await kennel.getByLabel('Food slot 1').selectOption(FOOD)
+    // Act: open the Kennel from its village building and put the food in the first food slot.
+    await (await sceneAction(page, 'Pet Kennel')).click()
+    const kennel = dialog(page, 'Kennel')
+    await expect(
+      kennel.getByRole('button', { name: `Pet: ${PET.name}`, exact: true }),
+    ).toBeVisible()
+    await kennel.getByRole('button', { name: 'Food slot 1', exact: true }).click()
+    await kennel.getByRole('menu').getByRole('menuitem').first().click()
     const fed = page.waitForResponse((r) => r.url().endsWith('/feed') && r.ok())
     await kennel.getByRole('button', { name: 'Feed', exact: true }).click()
     await fed
     await expect(kennel.getByRole('timer')).toBeVisible()
 
-    // Act: finish the digestion now for Gold.
+    // Act: finish the digestion now for Gold (the Digestion button's menu).
+    await kennel.getByRole('button', { name: 'Digestion', exact: true }).click()
     const digested = page.waitForResponse((r) => r.url().endsWith('/digest-now') && r.ok())
     await kennel
-      .getByRole('button', { name: `Finish now (${DIGEST_GOLD} Gold)`, exact: true })
+      .getByRole('menuitem', { name: `Finish now (${DIGEST_GOLD} Gold)`, exact: true })
       .click()
     const digest = await (await digested).json()
 
@@ -100,11 +101,14 @@ test('a ninja adopts, feeds and activates a pet that attacks in a field fight', 
       '0',
     )
 
-    // Act: set it active.
+    // Act: set it active from the pet slot's menu.
     const activated = page.waitForResponse((r) => r.url().endsWith('/active') && r.ok())
-    await kennel.getByRole('button', { name: 'Set active', exact: true }).click()
+    await kennel.getByRole('button', { name: `Pet: ${PET.name}`, exact: true }).click()
+    await kennel.getByRole('menuitem', { name: 'Set active', exact: true }).click()
     expect((await (await activated).json()).pets[0].active).toBe(true)
-    await expect(kennel.getByRole('button', { name: 'Rest', exact: true })).toBeVisible()
+    await expect(
+      kennel.getByRole('button', { name: `Pet: ${PET.name} (active)`, exact: true }),
+    ).toBeVisible()
 
     // Arrange: teach it PET_ATTACK, refill HP and walk to the field.
     sql(

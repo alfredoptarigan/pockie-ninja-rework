@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { character } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
 import { AudioProvider } from './audio'
-import { PlayerCard, SettingsMenu, TopBar, shortNumber } from './Hud'
+import { PlayerCard, TopBar, shortNumber } from './Hud'
 import { OpenWindowProvider } from './windows'
 
 const card = () => screen.getByRole('region', { name: 'Character' })
@@ -118,7 +118,7 @@ describe('TopBar', () => {
       'Team Stone': 'teamStone',
       'Card Room': 'cardRoom',
       'Pet Tracing': 'petTracing',
-      'Kennel Shop': 'kennelShop',
+      'Pet Shop': 'kennelShop',
     }
     for (const [label, name] of Object.entries(windows)) {
       await userEvent.click(screen.getByRole('button', { name: 'Events' }))
@@ -208,17 +208,13 @@ describe('PlayerCard VIP badge', () => {
   })
 })
 
-describe('Settings menu', () => {
-  it('holds the sound controls', async () => {
-    renderWithProviders(
-      <AudioProvider>
-        <SettingsMenu />
-      </AudioProvider>,
-    )
+describe('Settings button', () => {
+  it('opens the Settings window with the sound controls', async () => {
+    renderTopBar()
     await userEvent.click(screen.getByRole('button', { name: 'Settings' }))
-    const menu = screen.getByRole('list', { name: 'Settings' })
-    await userEvent.click(within(menu).getByRole('checkbox', { name: 'Mute music' }))
-    expect(within(menu).getByRole('checkbox', { name: 'Mute music' })).toBeChecked()
-    expect(within(menu).getByRole('slider', { name: /Music volume/ })).toBeInTheDocument()
+    const settings = screen.getByRole('dialog', { name: 'Settings' })
+    await userEvent.click(within(settings).getByRole('checkbox', { name: 'Mute Music' }))
+    expect(within(settings).getByRole('checkbox', { name: 'Mute Music' })).toBeChecked()
+    expect(within(settings).getByRole('slider', { name: 'Volume' })).toBeDisabled()
   })
 })

@@ -21,6 +21,8 @@ export interface BloodlineLimit {
   requiredLevel: number
   /** The item handed in at the Ninja House, for example "i148023". */
   unlockItem: string
+  /** Lowest pub-fight scene level that drops the item (Reborn's "Drops: SM LvN+"); null if none. */
+  dropLevel: number | null
   itemsHeld: number
   amity: number
   amityNeeded: number

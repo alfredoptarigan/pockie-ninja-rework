@@ -40,15 +40,18 @@ describe('CardRoomWindow', () => {
     }
   })
 
-  it('shows 10 collection pages with progress and refuses an incomplete claim', async () => {
+  it('lists the 10 collections and shows a page with its cards and rewards', async () => {
     mockApi({ 'GET /api/game/cards': () => json(view()) })
     renderWithProviders(<CardRoomWindow onClose={vi.fn()} />)
-    const nav = await screen.findByRole('navigation', { name: 'Collections' })
-    expect(within(nav).getAllByRole('button')).toHaveLength(10)
-    expect(screen.getByText(/Konoha Village - Green - 1\/7 cards/)).toBeVisible()
-    expect(screen.getByText('x2')).toBeVisible()
-    expect(screen.getAllByText('Missing')).toHaveLength(6)
-    expect(screen.getByRole('button', { name: 'Claim prize' })).toBeDisabled()
+    const list = await screen.findByRole('list', { name: 'Collections' })
+    expect(within(list).getAllByRole('button')).toHaveLength(10)
+    expect(screen.getByText('Collections 9/74')).toBeVisible()
+    expect(screen.getByRole('heading', { name: 'Konoha Village' })).toBeVisible()
+    const cards = screen.getByRole('list', { name: 'Cards' })
+    expect(within(cards).getAllByTitle('Not Owned')).toHaveLength(6)
+    expect(within(cards).getByTitle('Owned')).toHaveTextContent('x2')
+    expect(screen.getByRole('region', { name: 'Konoha Village Rewards' })).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Claim' })).toBeDisabled()
   })
 
   it('claims a complete collection once', async () => {
@@ -61,14 +64,10 @@ describe('CardRoomWindow', () => {
       },
     })
     renderWithProviders(<CardRoomWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('button', { name: /Seireitei Reapers/ }))
-    await userEvent.click(screen.getByRole('button', { name: 'Claim prize' }))
-    expect(
-      await screen.findByText(
-        'Prize claimed: 2 x Plume Shard [Second Grade], Talisman of Luck [D].',
-      ),
-    ).toBeVisible()
-    expect(screen.getByRole('button', { name: 'Prize claimed' })).toBeDisabled()
+    const list = await screen.findByRole('list', { name: 'Collections' })
+    await userEvent.click(within(list).getByRole('button', { name: /Seireitei Reapers/ }))
+    await userEvent.click(screen.getByRole('button', { name: 'Claim' }))
+    expect(await screen.findByRole('button', { name: 'Claimed' })).toBeDisabled()
   })
 
   it('shows a full bag refusal', async () => {
@@ -78,8 +77,23 @@ describe('CardRoomWindow', () => {
         apiError(400, 'bag_full', 'Your bag is full.'),
     })
     renderWithProviders(<CardRoomWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('button', { name: /Seireitei Reapers/ }))
-    await userEvent.click(screen.getByRole('button', { name: 'Claim prize' }))
+    const list = await screen.findByRole('list', { name: 'Collections' })
+    await userEvent.click(within(list).getByRole('button', { name: /Seireitei Reapers/ }))
+    await userEvent.click(screen.getByRole('button', { name: 'Claim' }))
     expect(await screen.findByText('Your bag is full.')).toBeVisible()
+  })
+
+  it('lists owned cards in My Card Box with a search', async () => {
+    mockApi({ 'GET /api/game/cards': () => json(view()) })
+    renderWithProviders(<CardRoomWindow onClose={vi.fn()} />)
+    await userEvent.click(await screen.findByRole('tab', { name: 'My Card Box' }))
+    expect(screen.getByText('My Card Box (9/9)')).toBeVisible()
+    const box = screen.getByRole('list', { name: 'My cards' })
+    expect(within(box).getAllByRole('listitem')).toHaveLength(9)
+    await userEvent.click(screen.getByRole('button', { name: /^Konoha Village/ }))
+    expect(screen.getByText('My Card Box (1/9)')).toBeVisible()
+    await userEvent.click(screen.getByRole('button', { name: 'All Cards' }))
+    await userEvent.type(screen.getByRole('searchbox', { name: 'Search' }), 'zzz')
+    expect(screen.getByText('My Card Box (0/9)')).toBeVisible()
   })
 })

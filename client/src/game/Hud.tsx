@@ -13,9 +13,9 @@ import {
   type ReactNode,
 } from 'react'
 import { Link } from 'react-router'
-import { useLogout } from '../lib/auth'
 import { ArenaButton } from './arena'
-import { SoundSettings, SoundToggle } from './audio'
+import { SoundToggle } from './audio'
+import { SettingsButton } from './settings'
 import { useOutfitPortrait } from './art'
 import { TwentyMinuteRewardButton } from './events'
 import { GameButton } from './skin'
@@ -139,7 +139,7 @@ export function TopBar({ character }: { character: Character }) {
         <GameButton className={TOP_BUTTON} disabled title="Coming soon">
           Discord
         </GameButton>
-        <SettingsMenu />
+        <SettingsButton />
         <ArenaButton />
         <EventsMenu />
         <Link
@@ -206,37 +206,6 @@ function HudMenu({
 
 const MENU_ITEM = 'w-full rounded px-2 py-1 text-left text-trim-soft hover:bg-white/10'
 
-/** Settings button of the top strip: sound, back to the website and log out. */
-export function SettingsMenu() {
-  const logout = useLogout()
-  return (
-    <HudMenu label="Settings">
-      {() => (
-        <>
-          <li className="px-2 py-1 text-trim-soft">
-            <SoundSettings />
-          </li>
-          <li>
-            <Link to="/" className="block rounded px-2 py-1 text-trim-soft hover:bg-white/10">
-              Back to the website
-            </Link>
-          </li>
-          <li>
-            <button
-              type="button"
-              disabled={logout.isPending}
-              onClick={() => logout.mutate()}
-              className={MENU_ITEM}
-            >
-              Log out
-            </button>
-          </li>
-        </>
-      )}
-    </HudMenu>
-  )
-}
-
 /** The Reborn events (M5) and M6 extras: rewards, dice, bosses, Team Stone, cards, pet events. */
 const EVENTS: { label: string; window: WindowName }[] = [
   { label: 'Ninja Diary', window: 'ninjaDiary' },
@@ -245,7 +214,7 @@ const EVENTS: { label: string; window: WindowName }[] = [
   { label: 'Team Stone', window: 'teamStone' },
   { label: 'Card Room', window: 'cardRoom' },
   { label: 'Pet Tracing', window: 'petTracing' },
-  { label: 'Kennel Shop', window: 'kennelShop' },
+  { label: 'Pet Shop', window: 'kennelShop' },
 ]
 
 /** Events button of the top strip, after Arena. */
@@ -522,7 +491,7 @@ const MENU: {
   { icon: '11-2', label: 'Character', window: 'character' },
   { icon: '11-3', label: 'Skills', window: 'skills' },
   { icon: 'task', label: 'Tasks', tasks: true },
-  { icon: 'ninjahouse', label: 'Ninja House', feature: 'bloodlines' },
+  { icon: 'ninjahouse', label: 'Ninja House', feature: 'ninjaHouse' },
   { icon: 'social', label: 'Social', feature: 'friends' },
   { icon: 'rank', label: 'Rankings', feature: 'rankings' },
   { icon: 'bankai', label: 'Bankai' },

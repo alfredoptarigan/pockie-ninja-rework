@@ -150,12 +150,28 @@ describe('GameScreen', () => {
     await userEvent.keyboard('{Escape}')
 
     await userEvent.click(within(menu).getByRole('button', { name: 'Social' }))
-    expect(await screen.findByText('Add a ninja by name to start your friend list.')).toBeVisible()
+    expect(await screen.findByText('Your friends list is empty')).toBeVisible()
+    expect(screen.getByRole('tab', { name: 'Friends' })).toHaveAttribute('aria-selected', 'true')
     await userEvent.keyboard('{Escape}')
 
     await userEvent.click(await screen.findByRole('button', { name: 'Mail (2 unread)' }))
-    expect(screen.getByRole('dialog', { name: 'Mail' })).toBeVisible()
+    expect(screen.getByRole('dialog', { name: 'Social' })).toBeVisible()
+    expect(screen.getByRole('tab', { name: 'Mail' })).toHaveAttribute('aria-selected', 'true')
   }, 15_000)
+
+  it('hides the Player List in villages', async () => {
+    renderGame({ 'GET /api/game/social/scene-players': () => json({ players: [] }) })
+    await screen.findByRole('navigation', { name: 'Menu' })
+    expect(screen.queryByRole('region', { name: 'Player List' })).toBeNull()
+  })
+
+  it('shows the Player List in a field', async () => {
+    renderGame(
+      { 'GET /api/game/social/scene-players': () => json({ players: [] }) },
+      { ...character, sceneId: 2101 },
+    )
+    expect(await screen.findByRole('region', { name: 'Player List' })).toBeVisible()
+  })
 
   it('opens the Card Room from Events, Wings and the Pet Kennel from the Character window', async () => {
     renderGame({
@@ -201,22 +217,25 @@ describe('GameScreen', () => {
     const actions = vi.mocked(mountPicture).mock.calls.at(-1)![2]
 
     act(() => actions.onBuilding?.('clip_pet'))
-    expect(await screen.findByRole('dialog', { name: 'Pet Kennel' })).toBeVisible()
+    expect(await screen.findByRole('dialog', { name: 'Kennel' })).toBeVisible()
     await userEvent.keyboard('{Escape}')
 
     act(() => actions.onBuilding?.('clip_CardLink'))
     expect(await screen.findByRole('dialog', { name: 'Card Room' })).toBeVisible()
   })
 
-  it('has Back to the website and Log out in the Settings menu', async () => {
+  it('has Back to the website and Log out in the Settings window', async () => {
     renderGame()
     const settings = await screen.findByRole('button', { name: 'Settings' })
     expect(screen.queryByRole('button', { name: 'Log out' })).not.toBeInTheDocument()
 
     await userEvent.click(settings)
-    expect(settings).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByRole('link', { name: 'Back to the website' })).toHaveAttribute('href', '/')
-    expect(screen.getByRole('button', { name: 'Log out' })).toBeVisible()
+    const window = screen.getByRole('dialog', { name: 'Settings' })
+    expect(within(window).getByRole('link', { name: 'Back to the website' })).toHaveAttribute(
+      'href',
+      '/',
+    )
+    expect(within(window).getByRole('button', { name: 'Log out' })).toBeVisible()
 
     await userEvent.keyboard('{Escape}')
     expect(screen.queryByRole('button', { name: 'Log out' })).not.toBeInTheDocument()

@@ -223,7 +223,7 @@ export async function openMenu(page: Page, name: string) {
   await page.getByRole('navigation', { name: 'Menu' }).getByRole('button', { name }).click()
 }
 
-/** Opens a window from the top strip's Events menu (Card Room, Pet Tracing, Kennel Shop...). */
+/** Opens a window from the top strip's Events menu (Card Room, Pet Tracing, Pet Shop...). */
 export async function openEvent(page: Page, label: string) {
   await page.getByRole('button', { name: 'Events', exact: true }).click()
   await page

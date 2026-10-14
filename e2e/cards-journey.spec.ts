@@ -66,20 +66,24 @@ test('a ninja opens a card box and claims a completed collection', async ({ brow
     await openEvent(page, 'Card Room')
     const room = dialog(page, 'Card Room')
     await room
-      .getByRole('navigation', { name: 'Collections' })
-      .getByRole('button', { name: `${COLLECTION.name} (${CARDS}/${CARDS})`, exact: true })
+      .getByRole('list', { name: 'Collections' })
+      .getByRole('button')
+      .filter({ hasText: COLLECTION.name })
       .click()
+    await expect(room.getByRole('region', { name: COLLECTION.name, exact: true })).toContainText(
+      `${COLLECTION.name} Rewards`,
+    )
     const claimed = page.waitForResponse(
       (r) => r.url().endsWith(`/cards/collections/${COLLECTION.id}/claim`) && r.ok(),
     )
-    await room.getByRole('button', { name: 'Claim prize', exact: true }).click()
+    await room.getByRole('button', { name: 'Claim', exact: true }).click()
     const result = await (await claimed).json()
 
     // Assert: the prize is paid once and the button shows it.
     expect(result.collections.find((c: { id: number }) => c.id === COLLECTION.id).claimed).toBe(
       true,
     )
-    await expect(room.getByRole('button', { name: 'Prize claimed', exact: true })).toBeDisabled()
+    await expect(room.getByRole('button', { name: 'Claimed', exact: true })).toBeDisabled()
     expect(
       sql(
         `select count(*) from inventory_items i join characters c on c.id = i.character_id

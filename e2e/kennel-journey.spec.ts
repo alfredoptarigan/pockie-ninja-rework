@@ -1,5 +1,5 @@
 // M6 kennel journey: a level-20 ninja finds the pet on a seeded Pet Tracing board, then spends
-// seeded Feathers on food in the Kennel Shop. The board's pet cell and the Feathers are seeded; the
+// seeded Feathers on food in the Pet Shop (the Events menu's Kennel Shop). The board's pet cell and the Feathers are seeded; the
 // flip and the purchase use the UI.
 import { expect, test } from '@playwright/test'
 import { randomUUID } from 'node:crypto'
@@ -23,7 +23,7 @@ const FIND_FEATHERS = 10
 const PET_CELL = 4
 // kennel-shop.json: Meatball (i170114) costs 1 Feather from level 8.
 const FOOD = { itemId: 'i170114', name: 'Meatball', price: 1 }
-const BOUGHT = 2
+const BOUGHT = 5
 
 test('a ninja finds a traced pet and buys food with Feathers', async ({ browser }) => {
   // Arrange: level 20 with Feathers and today's board hiding the pet in the middle cell.
@@ -55,14 +55,16 @@ test('a ninja finds a traced pet and buys food with Feathers', async ({ browser 
     expect(heldCount(name, FEATHER)).toBe(String(SEEDED_FEATHERS + FIND_FEATHERS))
     await tracing.getByRole('button', { name: 'Close', exact: true }).click()
 
-    // Act: buy two Meatballs in the Kennel Shop.
-    await openEvent(page, 'Kennel Shop')
-    const shop = dialog(page, 'Kennel Shop')
-    await shop.getByLabel(`${FOOD.name} quantity`).fill(String(BOUGHT))
+    // Act: buy five Meatballs in the Pet Shop and confirm the cost.
+    await openEvent(page, 'Pet Shop')
+    const shop = dialog(page, 'Pet Shop')
+    const card = shop.getByRole('listitem', { name: FOOD.name, exact: true })
+    await card.getByRole('combobox', { name: 'Quantity' }).selectOption(String(BOUGHT))
+    await card.getByRole('button', { name: 'Buy', exact: true }).click()
+    const prompt = shop.getByRole('alertdialog')
+    await expect(prompt).toContainText(`Cost: ${BOUGHT * FOOD.price} Feathers`)
     const bought = page.waitForResponse((r) => r.url().endsWith('/shop/buy') && r.ok())
-    await shop
-      .getByRole('button', { name: `Buy ${FOOD.name} (${BOUGHT * FOOD.price} Feathers)` })
-      .click()
+    await prompt.getByRole('button', { name: 'Accept', exact: true }).click()
     const result = await (await bought).json()
 
     // Assert: the Feathers paid for the food and the daily count rose.
@@ -71,7 +73,7 @@ test('a ninja finds a traced pet and buys food with Feathers', async ({ browser 
     expect(result.offers.find((o: { itemId: string }) => o.itemId === FOOD.itemId).purchased).toBe(
       BOUGHT,
     )
-    await expect(shop).toContainText(`Feathers: ${feathersLeft}.`)
+    await expect(shop.getByLabel('Feathers')).toHaveText(String(feathersLeft))
     expect(heldCount(name, FOOD.itemId)).toBe(String(BOUGHT))
     expect(heldCount(name, FEATHER)).toBe(String(feathersLeft))
   } finally {

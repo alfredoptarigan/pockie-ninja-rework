@@ -1,5 +1,6 @@
-// M5 bloodlines journey: a level-51 ninja turns in limit items at the Ninja House and activates the
-// unlocked bloodline. The level and the items are seeded; the turn-in and activation use the UI.
+// M5 bloodlines journey: a level-51 ninja turns in limit items to a Ninja House NPC (Talk, Ninja
+// Saga) and activates the unlocked limit in Bloodline Limits (Inventory, Blood Limit), as in Reborn.
+// The level and the items are seeded; the turn-in and activation use the UI.
 import { expect, test } from '@playwright/test'
 import {
   createSeededNinja,
@@ -32,21 +33,25 @@ test('a level-51 ninja turns in limit items and activates a bloodline', async ({
     giveItem(name, LIMIT.item, { count: LIMIT.itemsPerTurnIn })
     await reloadGame(page)
 
-    // Act: Inventory, Blood Limit (as in Reborn), then the first Ninja House entry's turn-in.
-    await openMenu(page, 'Inventory')
-    await dialog(page, 'Inventory')
-      .getByRole('button', { name: 'Blood Limit', exact: true })
+    // Act: Ninja House from the bottom bar, Talk to the first NPC (limit 1, the lowest level).
+    await openMenu(page, 'Ninja House')
+    const house = dialog(page, 'Ninja House')
+    await house
+      .getByRole('list', { name: 'Ninja House' })
+      .getByRole('listitem')
+      .first()
+      .getByRole('button', { name: 'Talk', exact: true })
       .click()
-    const bloodlines = dialog(page, 'Bloodlines')
-    await bloodlines.getByRole('list', { name: 'Ninja House' }).getByRole('button').first().click()
+    const saga = dialog(page, 'Ninja Saga')
     const turnedIn = page.waitForResponse(
       (r) => r.url().includes(`/api/game/bloodlines/${LIMIT.id}/turn-in`) && r.ok(),
     )
-    await bloodlines.getByRole('button', { name: /^Turn in \d+ items$/ }).click()
+    await saga.getByRole('button', { name: 'Turn In', exact: true }).click()
     await turnedIn
 
     // Assert: the items are spent and 30 Amity unlock the bloodline.
-    await expect(bloodlines.getByRole('button', { name: 'Activate', exact: true })).toBeVisible()
+    await expect(saga.getByText('30/30', { exact: true })).toBeVisible()
+    await expect(saga.getByRole('button', { name: 'Turn In', exact: true })).toBeDisabled()
     expect(limitRow(name)).toBe('30|t|')
     expect(
       sql(
@@ -55,22 +60,35 @@ test('a level-51 ninja turns in limit items and activates a bloodline', async ({
         { name, item: LIMIT.item },
       ),
     ).toBe('0')
+    await saga.getByRole('button', { name: 'Close', exact: true }).click()
+    await house.getByRole('button', { name: 'Close', exact: true }).click()
 
-    // Act: activate it.
+    // Act: Inventory, Blood Limit, pick the limit in the collection and activate it.
+    await openMenu(page, 'Inventory')
+    await dialog(page, 'Inventory')
+      .getByRole('button', { name: 'Blood Limit', exact: true })
+      .click()
+    const limits = dialog(page, 'Bloodline Limits')
+    await limits
+      .getByRole('list', { name: 'Limits' })
+      .getByRole('button', { name: /^Body Enlargement Technique/ })
+      .click()
     const activated = page.waitForResponse(
       (r) => r.url().includes(`/api/game/bloodlines/${LIMIT.id}/active`) && r.ok(),
     )
-    await bloodlines.getByRole('button', { name: 'Activate', exact: true }).click()
+    await limits.getByRole('button', { name: 'Activate', exact: true }).click()
     await activated
 
-    // Assert: it fills a slot of the Bloodlines tab and slot 0 of the database.
-    await bloodlines.getByRole('tab', { name: 'Active', exact: true }).click()
+    // Assert: it fills a slot of the Active bar and slot 0 of the database.
     await expect(
-      bloodlines
+      limits
         .getByRole('list', { name: 'Active bloodlines' })
-        .getByRole('button', { name: 'Deactivate', exact: true }),
-    ).toHaveCount(1)
-    await expect(bloodlines.getByRole('list', { name: 'Bloodline bonuses' })).toBeVisible()
+        .getByRole('button', { name: /^Body Enlargement Technique/ }),
+    ).toBeEnabled()
+    await expect(limits.getByRole('button', { name: 'Deactivate', exact: true })).toBeVisible()
+    await expect(limits.getByRole('list', { name: 'Bloodline bonuses' })).not.toContainText(
+      'Activate a collected limit',
+    )
     expect(limitRow(name)).toBe('30|t|0')
   } finally {
     await context.close()
