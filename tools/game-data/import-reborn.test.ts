@@ -256,6 +256,9 @@ describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
     expect(petSkills.skills['50056']).toMatchObject({ kind: 3, skillAdd: { PierceSkill: 130 } })
     expect(petSkills.skills['50060']).toMatchObject({ skillAdd: { MaxHPMulSKill: 200 } })
     expect(petSkills.skills['50086']).toMatchObject({ skillAdd: { StrengthSkill: 28500 } })
+    expect(petSkills.skills['50057']).toMatchObject({ skillAdd: { AtkTimeMulSkill: 200 } })
+    expect(petSkills.skills['50071']).toMatchObject({ skillAdd: { AtkTimeMulSkill: 250 } })
+    expect(petSkills.omitted).toEqual([])
     expect(petSkills.books).toHaveLength(50)
     const omitted = new Set(petSkills.omitted.map((o) => o.skill))
     for (const book of petSkills.books) {
@@ -468,3 +471,15 @@ describe.skipIf(!existsSync(defaultRawDir) || !existsSync(defaultPetIniDir))(
     })
   },
 )
+
+describe('Sharpness placeholders (ours)', () => {
+  it.each([
+    [50057, 200],
+    [50071, 250],
+  ])('resolves book %i to its marked speed value', (id, value) => {
+    expect(passRowFromTooltip(['Increase speed by @1@%.'], id)).toEqual({ AtkTimeMulSkill: value })
+  })
+  it('keeps unknown placeholders omitted', () => {
+    expect(passRowFromTooltip(['Increase speed by @1@%.'], 59999)).toBeNull()
+  })
+})

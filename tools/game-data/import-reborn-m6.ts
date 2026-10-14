@@ -196,8 +196,21 @@ const REBORN_PASS_FIRST = 50056
 const REBORN_PASS_LAST = 50086
 
 /** Decision 16: a Reborn-only Pass skill as a skilladd row, from its level-1 tooltip. */
-export function passRowFromTooltip(lines: string[]): Record<string, number> | null {
-  const match = /Increases? ([a-z ]+?) by (\d+(?:\.\d+)?)(%?)/i.exec(lines.join(' '))
+/**
+ * Ours: neither 50057 nor 50071 exists in the 2011 skill.ini/skilladd.ini/scripts.
+ * Continue Sharpness's 5%, 10%, 15% tier progression with 20% [S] and 25% Frenzied.
+ * Only these known placeholders are substituted; other missing tooltips remain omitted.
+ */
+const SHARPNESS_SPEED_PERCENT: Record<number, number> = { 50057: 20, 50071: 25 }
+
+export function passRowFromTooltip(
+  lines: string[],
+  skillId?: number,
+): Record<string, number> | null {
+  const percent = skillId === undefined ? undefined : SHARPNESS_SPEED_PERCENT[skillId]
+  const tooltip = lines.join(' ')
+  const text = percent === undefined ? tooltip : tooltip.replace('@1@', String(percent))
+  const match = /Increases? ([a-z ]+?) by (\d+(?:\.\d+)?)(%?)/i.exec(text)
   if (!match) return null
   const words = `${match[1]!.toLowerCase()}${match[3] ? ' %' : ''}`
   const entry = PASS_STATS.find(([pattern]) => pattern.test(words))
@@ -223,8 +236,9 @@ function buildPetSkills(input: M6Inputs, locale: Record<string, unknown>) {
   }
   const omitted: { skill: number; reason: string }[] = []
   for (let id = REBORN_PASS_FIRST; id <= REBORN_PASS_LAST; id++) {
+    if (rows[id]) continue // Prefer an original skill row when the 2011 table supplies one.
     const tooltip = locale[`skill__${id}--tooltip`]
-    const skillAdd = Array.isArray(tooltip) ? passRowFromTooltip(tooltip as string[]) : null
+    const skillAdd = Array.isArray(tooltip) ? passRowFromTooltip(tooltip as string[], id) : null
     if (skillAdd) rows[id] = { kind: 3, source: 'reborn', script: null, skillAdd }
     else omitted.push({ skill: id, reason: 'The Reborn tooltip has no value.' })
   }

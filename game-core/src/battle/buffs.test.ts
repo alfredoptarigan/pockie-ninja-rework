@@ -18,6 +18,6 @@ describe('BUFFS (FightBuff.ini + buff scripts)', () => {
   it('attaches the ported scripts by their javascript path', () => {
     expect(BUFFS[11841]?.onRemove).toBeTypeOf('function')
     expect(BUFFS[11830]?.onAdd).toBeTypeOf('function')
-    expect(BUFFS[11804]?.onAdd).toBeUndefined()
+    expect(BUFFS[11804]?.onAdd).toBeTypeOf('function')
   })
 })

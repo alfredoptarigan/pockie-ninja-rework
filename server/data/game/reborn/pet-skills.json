@@ -1036,6 +1036,14 @@
         "PierceSkill": 130
       }
     },
+    "50057": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "AtkTimeMulSkill": 200
+      }
+    },
     "50058": {
       "kind": 3,
       "source": "reborn",
@@ -1138,6 +1146,14 @@
       "script": null,
       "skillAdd": {
         "PierceSkill": 216
+      }
+    },
+    "50071": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "AtkTimeMulSkill": 250
       }
     },
     "50072": {
@@ -1261,16 +1277,7 @@
       }
     }
   },
-  "omitted": [
-    {
-      "skill": 50057,
-      "reason": "The Reborn tooltip has no value."
-    },
-    {
-      "skill": 50071,
-      "reason": "The Reborn tooltip has no value."
-    }
-  ],
+  "omitted": [],
   "books": [
     {
       "item": "i180035",

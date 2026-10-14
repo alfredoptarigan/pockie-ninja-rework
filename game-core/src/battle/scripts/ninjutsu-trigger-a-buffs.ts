@@ -1,5 +1,6 @@
 // Fight buffs added by the trigger ninjutsu of ./ninjutsu-trigger-a.ts.
 import type { BuffScripts } from '../buffs.js'
+import { regenAuraResist } from './pet-core.js'
 import type { FightContext, Fighter, FightEvent } from '../types.js'
 
 const BUFF_POISON = 11811
@@ -29,10 +30,9 @@ function endExcitement(ctx: FightContext, self: Fighter, fv: FightEvent, timer: 
 
 export const NINJUTSU_TRIGGER_A_BUFFS: Record<string, BuffScripts> = {
   // Slow (1816): AtkTime x2 (AtkTimeMul -50) for SaveData units.
-  // ponytail: the regeneration auras (11861-11863) shorten it and add 11888; not ported.
   'buff/buff_chihuan_11810.js': {
-    onAdd: (ctx, self, buff) => {
-      buff.lifeTime = buff.saveData
+    onAdd: (ctx, self, buff, fv, timer) => {
+      buff.lifeTime = regenAuraResist(ctx, self, buff.saveData, fv, timer)
       const rate = Math.trunc(SLOW_RATE * bonusOf(buff.saveData1))
       ctx.changeAtkTime(self, self.atkTimeMul - rate, self.atkTimeAdd)
       buff.saveData1 = rate
