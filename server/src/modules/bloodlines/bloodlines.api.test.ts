@@ -1,5 +1,5 @@
 // Bloodline limits (M5 task 7): Ninja House turn-ins, 3 active limits and their fight bonuses.
-import { playerFighterFrom } from '../../game/combat.js'
+import { playerFighter, playerFighterFrom } from '../../game/combat.js'
 import { and, eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
@@ -11,7 +11,7 @@ import {
   characterSouls,
   inventoryItems,
 } from '../../db/schema.js'
-import bloodlineRoutes, { bloodlineBonuses } from './routes.js'
+import { bloodlineBonuses } from './routes.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -21,8 +21,6 @@ let characterId: string
 beforeEach(async () => {
   await truncateAll(db)
   app = buildTestApp(db)
-  // Until the coordinator adds this line to app.ts (then delete it here).
-  app.register(bloodlineRoutes, { db, prefix: '/api/game/bloodlines' })
   client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Player_one',
@@ -255,5 +253,20 @@ describe('bloodlineBonuses', () => {
     expect(withLimits.tough - without.tough).toBe(43)
     expect(withLimits.neglectDefense - without.neglectDefense).toBe(47)
     expect(withLimits.maxHp).toBeGreaterThan(without.maxHp)
+  })
+  it('raises the live fighter and the arena defence of an active limit', async () => {
+    await client.get('/api/game/arena')
+    const before = await playerFighter(db, await row())
+    await unlock(1)
+    await activate(1)
+    const after = await playerFighter(db, await row())
+    expect(after.maxHp).toBeGreaterThan(before.maxHp)
+    expect(after.tough).toBeGreaterThan(before.tough)
+    const [arena] = await db
+      .select()
+      .from(arenaPlayers)
+      .where(eq(arenaPlayers.characterId, characterId))
+    const snapshot = arena!.snapshot as unknown as { fighter: { maxHp: number } }
+    expect(snapshot.fighter.maxHp).toBe(after.maxHp)
   })
 })

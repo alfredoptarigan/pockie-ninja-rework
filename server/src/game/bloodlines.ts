@@ -1,12 +1,12 @@
 // Fight bonuses of a ninja's active limits (M5 decision 11), with socketed souls and prayer.
-// Imports no routes, so combat.ts and snapshot.ts can use it without an import cycle.
+// Lives in game/ so combat.ts and snapshot.ts do not import the bloodlines routes.
 import { and, eq, inArray, isNotNull } from 'drizzle-orm'
 import type { Bonuses } from '@pockie/game-core'
-import { limitBonuses } from '../../../../game-core/src/reborn/bloodlines.js'
-import type { Db } from '../../db/client.js'
-import { characterBloodlinePrayer, characterBloodlines, characterSouls } from '../../db/schema.js'
-import { rebornSouls } from '../../game/data.js'
-import type { Tx } from '../../game/progress.js'
+import { limitBonuses } from '../../../game-core/src/reborn/bloodlines.js'
+import type { Db } from '../db/client.js'
+import { characterBloodlinePrayer, characterBloodlines, characterSouls } from '../db/schema.js'
+import { rebornSouls } from './data.js'
+import type { Tx } from './progress.js'
 
 /** Ids of the active limits, in slot order. */
 export async function activeLimitIds(tx: Tx | Db, characterId: string) {

@@ -4,7 +4,8 @@ import { and, eq, isNotNull } from 'drizzle-orm'
 import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '../../db/schema.js'
 import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.js'
 import { talentFighterInput } from '../../game/talents.js'
-import { activeBuffs, buffBonuses } from '../../game/nonfight-buffs.js'
+import { bloodlineBonuses } from '../../game/bloodlines.js'
+import { activeBuffs, buffBonuses, sumBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, type PlayerFighter } from '../../game/combat.js'
 import type { Tx } from '../../game/progress.js'
 
@@ -28,10 +29,11 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     .where(
       and(eq(inventoryItems.characterId, character.id), isNotNull(inventoryItems.equippedSlot)),
     )
+  const bloodlines = await bloodlineBonuses(tx, character.id)
   const live = playerFighterFrom(
     character,
     equipped,
-    await buffBonuses(tx, character.id),
+    sumBonuses(await buffBonuses(tx, character.id), bloodlines),
     await characterSkillInputs(tx, character.id),
   )
   const expiries = [
@@ -50,7 +52,17 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
     fighter: { ...live, hp: live.maxHp, mp: live.maxMp, talents },
     look: { clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
     // Nation adds its element passive; it also marks snapshots from before passives as stale.
-    source: JSON.stringify([name, gender, level, avatarId, clothing, nation, gear, talents]),
+    source: JSON.stringify([
+      name,
+      gender,
+      level,
+      avatarId,
+      clothing,
+      nation,
+      gear,
+      talents,
+      bloodlines,
+    ]),
   }
 }
 

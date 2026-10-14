@@ -17,8 +17,8 @@ import { HttpError } from '../../http.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
-import { bloodlineBonuses } from './bonuses.js'
-export { bloodlineBonuses } from './bonuses.js'
+import { bloodlineBonuses } from '../../game/bloodlines.js'
+export { bloodlineBonuses } from '../../game/bloodlines.js'
 export { limitItemDrops } from './rules.js'
 
 type CharacterRow = typeof characters.$inferSelect

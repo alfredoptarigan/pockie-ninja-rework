@@ -34,6 +34,7 @@ import { drawPouch } from './pouch.js'
 import { grantDrops, loadQuests, saveQuests, saveCharacterProgress, type Tx } from './progress.js'
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
 import { talentFighterInput } from './talents.js'
+import { bloodlineBonuses } from './bloodlines.js'
 import { characterSkillInputs } from './skill-bar.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
@@ -99,7 +100,8 @@ export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promi
     ...playerFighterFrom(
       character,
       await equippedGear(tx, character.id),
-      await buffBonuses(tx, character.id),
+      // Active bloodline limits add like buffs (M5 decision 11).
+      sumBonuses(await buffBonuses(tx, character.id), await bloodlineBonuses(tx, character.id)),
       await characterSkillInputs(tx, character.id),
     ),
     talents: await talentFighterInput(tx, character.id),

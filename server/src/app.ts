@@ -77,6 +77,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/shop/routes.js'), { db, prefix: '/api/game/shop' })
   app.register(import('./modules/daily/routes.js'), { db, prefix: '/api/game/daily' })
   app.register(import('./modules/talents/routes.js'), { db, prefix: '/api/game/talents' })
+  app.register(import('./modules/bloodlines/routes.js'), { db, prefix: '/api/game/bloodlines' })
   app.register(socialRoutes, { db, prefix: '/api/game/social' })
   app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
   app.register(arenaRoutes, { db, prefix: '/api/game/arena' })
