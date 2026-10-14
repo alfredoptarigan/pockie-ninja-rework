@@ -8,6 +8,8 @@ import { plainText } from '../text'
 import { borderColor, propText } from './gear'
 
 const LOW_DURABILITY = 0.1
+const TOOLTIP =
+  'pointer-events-none absolute top-full left-0 z-50 mt-1 w-[190px] rounded-[3px] border-2 border-[#5c5c5c] bg-black/85 px-2 py-1 text-white'
 
 /** The tooltip body; also used as the details panel of the forge windows. */
 export function GearDetails({ nameKey, gear }: { nameKey: string; gear: GearView }) {
@@ -68,23 +70,27 @@ export function GearDetails({ nameKey, gear }: { nameKey: string; gear: GearView
 
 /**
  * The item icon with its border colour and enhance level; hovering or focusing the cell shows
- * the tooltip. `children` (usually the cell's button) go on top.
+ * the tooltip: the gear details, or only the name for other items and when `brief` (the bag's
+ * "Hide" box). `children` (usually the cell's button) go on top.
  */
 export function GearIcon({
   itemId,
   nameKey,
   gear,
+  brief = false,
   className = 'size-[51px]',
   children,
 }: {
   itemId: string
   nameKey: string
   gear?: GearView
+  brief?: boolean
   className?: string
   children?: ReactNode
 }) {
   const [shown, setShown] = useState(false)
   const id = useId()
+  const detailed = gear && !brief
   return (
     <span
       className="relative inline-block"
@@ -92,7 +98,7 @@ export function GearIcon({
       onMouseLeave={() => setShown(false)}
       onFocus={() => setShown(true)}
       onBlur={() => setShown(false)}
-      aria-describedby={gear && shown ? id : undefined}
+      aria-describedby={detailed && shown ? id : undefined}
     >
       <ItemIcon
         itemId={itemId}
@@ -116,13 +122,15 @@ export function GearIcon({
         )}
         {children}
       </ItemIcon>
-      {gear && shown && (
-        <div
-          id={id}
-          role="tooltip"
-          className="pointer-events-none absolute top-full left-0 z-50 mt-1 w-[190px] rounded-[3px] border-2 border-[#5c5c5c] bg-black/85 px-2 py-1 text-white"
-        >
+      {detailed && shown && (
+        <div id={id} role="tooltip" className={TOOLTIP}>
           <GearDetails nameKey={nameKey} gear={gear} />
+        </div>
+      )}
+      {/* The name alone: the cell's accessible name already says it. */}
+      {!detailed && shown && (
+        <div aria-hidden="true" className={`${TOOLTIP} w-max max-w-[190px] text-xs font-bold`}>
+          {plainText(nameKey, 'Unknown item')}
         </div>
       )}
     </span>

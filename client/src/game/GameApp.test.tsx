@@ -497,7 +497,8 @@ describe('tutorial nudges', () => {
     await userEvent.click(await within(nav).findByRole('button', { name: /^Go:/ }))
     const bag = await screen.findByRole('dialog', { name: 'Inventory' })
     const marked = await within(bag).findByText('Next step')
-    expect(within(marked.closest('li')!).getByRole('button', { name: /^Equip/ })).toBeVisible()
+    await userEvent.click(within(marked.closest('li')!).getByRole('button'))
+    expect(within(bag).getByRole('menuitem', { name: /^Equip/ })).toBeEnabled()
     // Only the weapon this outfit can wear is marked.
     expect(within(bag).getAllByText('Next step')).toHaveLength(1)
   })

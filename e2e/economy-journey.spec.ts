@@ -77,7 +77,7 @@ test('a ninja appraises a weapon in the bag and enhances it at the Blacksmith', 
   await page.getByRole('navigation', { name: 'Menu' }).getByRole('button', { name: 'Bag' }).click()
   const bag = dialog(page, 'Inventory')
   await bag.getByRole('button', { name: WEAPON.name, exact: true }).click()
-  const appraise = bag.getByRole('button', { name: new RegExp(`^Appraise ${WEAPON.name} for`) })
+  const appraise = bag.getByRole('menuitem', { name: new RegExp(`^Appraise ${WEAPON.name} for`) })
   const cost = Number((await appraise.getAttribute('aria-label'))!.match(/for (\d+) Stone/)![1])
   await appraise.click()
 

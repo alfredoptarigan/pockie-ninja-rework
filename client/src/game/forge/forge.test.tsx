@@ -3,8 +3,7 @@ import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { character, fists } from '../../test/game'
-import { apiError, json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
-import { BagForgeButtons, ItemForgeActions } from './BagForgeActions'
+import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { ForgeWindow } from './ForgeWindow'
 import { borderColor, propText } from './gear'
 import { GearIcon } from './GearItem'
@@ -179,48 +178,6 @@ describe('ForgeWindow', () => {
       itemId: bat.id,
       seal: 'low',
       seals: 2,
-    })
-  })
-})
-
-describe('bag forge actions', () => {
-  it('appraises an item and shows server errors', async () => {
-    let fail = false
-    mockApi({
-      'GET /api/game/forge/gear': () => json({ gear: {} }),
-      'POST /api/game/forge/appraise': () =>
-        fail ? apiError(400, 'no_money', 'You need 15 Stone.') : json({ character }),
-    })
-    renderWithProviders(
-      <ItemForgeActions item={bat} gear={{ ...batGear, appraised: false, repairCost: 0 }} />,
-    )
-    await userEvent.click(
-      screen.getByRole('button', { name: 'Appraise Mythbeast Bat for 15 Stone' }),
-    )
-    expect(await screen.findByRole('status')).toHaveTextContent('Appraised Mythbeast Bat.')
-    fail = true
-    await userEvent.click(screen.getByRole('button', { name: /Appraise/ }))
-    expect(await screen.findByRole('alert')).toHaveTextContent('You need 15 Stone.')
-    expect(screen.queryByRole('button', { name: /Repair/ })).not.toBeInTheDocument()
-  })
-
-  it('appraises the hidden items of the page for their summed cost', async () => {
-    const other = { ...bat, id: '00000000-0000-7000-8000-000000000011' }
-    const fetchMock = mockApi({
-      'GET /api/game/forge/gear': () =>
-        json({
-          gear: {
-            [bat.id]: { ...batGear, appraised: false },
-            [other.id]: { ...batGear, appraised: false, appraiseCost: 19 },
-          },
-        }),
-      'POST /api/game/forge/appraise-all': () => json({ character }),
-    })
-    renderWithProviders(<BagForgeButtons pageItemIds={[bat.id, other.id]} />)
-    await userEvent.click(await screen.findByRole('button', { name: 'Appraise all for 34 Stone' }))
-    expect(await screen.findByRole('status')).toHaveTextContent('Appraised 2 items.')
-    expect(requestBody(fetchMock, 'POST /api/game/forge/appraise-all')).toEqual({
-      itemIds: [bat.id, other.id],
     })
   })
 })

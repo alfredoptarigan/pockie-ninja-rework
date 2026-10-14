@@ -53,7 +53,7 @@ test('a ninja opens a card box and claims a completed collection', async ({ brow
     const opened = page.waitForResponse(
       (r) => /\/api\/game\/items\/.+\/use$/.test(r.url()) && r.ok(),
     )
-    await bag.getByRole('button', { name: `Use ${BOX.name}`, exact: true }).click()
+    await bag.getByRole('menuitem', { name: `Use ${BOX.name}`, exact: true }).click()
     const { card } = await (await opened).json()
     await bag.getByRole('button', { name: 'Close', exact: true }).click()
 

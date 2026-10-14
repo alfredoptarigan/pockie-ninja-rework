@@ -167,7 +167,12 @@ function GameScreen({ character }: { character: Character }) {
           </main>
 
           {openWindow === 'bag' && (
-            <Dialog title="Inventory" onClose={close} className="w-[379px] px-[5px]! pb-[7px]!">
+            // Fixed 379x551 like Reborn's: no scrolling, and tooltips may reach past the frame.
+            <Dialog
+              title="Inventory"
+              onClose={close}
+              className="game-window-bare w-[379px] overflow-visible"
+            >
               <Inventory highlight={bagHighlight} />
             </Dialog>
           )}

@@ -67,7 +67,7 @@ test('a ninja adopts, feeds and activates a pet that attacks in a field fight', 
     const adopted = page.waitForResponse(
       (r) => /\/api\/game\/items\/.+\/use$/.test(r.url()) && r.ok(),
     )
-    await bag.getByRole('button', { name: `Use ${PET.name}`, exact: true }).click()
+    await bag.getByRole('menuitem', { name: `Use ${PET.name}`, exact: true }).click()
     await adopted
     await bag.getByRole('button', { name: 'Close', exact: true }).click()
 

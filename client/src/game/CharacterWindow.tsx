@@ -1,6 +1,7 @@
 import type { Character, CharacterStats } from '@pockie/shared'
 import type { CSSProperties } from 'react'
-import { errorMessage, useBuyPouches, useCharacterStats, useBuffs, useInventory } from './api'
+import { errorMessage, useBuyPouches, useCharacterStats, useInventory } from './api'
+import { TitleText } from './BuffsPanel'
 import { Dialog, GameButton, Notice } from './skin'
 import { plainText } from './text'
 import { useCharacterPreview } from './phaser/character-preview'
@@ -214,8 +215,6 @@ export function CharacterWindow({
     aura: worn,
   })
   const stats = useCharacterStats()
-  const buffs = useBuffs()
-  const title = buffs.data?.titles.find((title) => title.active)
   const village = plainText(sceneNameKey(villageOf(character.nation)), 'Village')
   const openWindow = useOpenWindow()
   return (
@@ -226,8 +225,8 @@ export function CharacterWindow({
       className="w-[328px] px-[5px]! [&>.game-frame-title]:mb-[5px] [&>.game-inset]:p-0 [&>.game-inset]:[border-image:none]"
     >
       <div className="game-title-plate grid h-10 place-items-center">
-        <p className="text-base font-bold tracking-widest text-[#9ba3b0] [text-shadow:0_1px_0_#2a2d31]">
-          {title ? plainText(title.nameKey, `Title ${title.titleId}`) : 'No title'}
+        <p>
+          <TitleText />
         </p>
       </div>
       <section aria-label="Profile" className="game-inset mt-[5px] h-[100px] pt-1.5">

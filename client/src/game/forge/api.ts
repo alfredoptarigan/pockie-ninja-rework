@@ -32,8 +32,6 @@ export interface ForgeResult {
   /** Enhance and Inscription: whether the attempt succeeded. */
   success?: boolean
   sealsUsed?: number
-  /** Appraise all: the rows rolled. */
-  appraised?: string[]
 }
 
 function useForgeAction<TInput>(path: string) {
