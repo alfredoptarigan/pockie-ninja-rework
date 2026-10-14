@@ -45,6 +45,7 @@ import {
 } from '../../game/data.js'
 import { playerFighter } from '../../game/combat.js'
 import { durabilityOf, equipConfigOf, gearView, wornSetCounts } from '../../game/gear.js'
+import { WING_SLOT } from '../../game/wings.js'
 import { consumeOne, questCommand, removeItems, type Tx } from '../../game/progress.js'
 import {
   REBORN_ENHANCE_COMMAND,
@@ -96,7 +97,9 @@ async function ownedItem(tx: Tx | Db, characterId: string, id: string) {
 
 function equipmentOf(row: ItemRow, action: string): EquipConfig {
   const config = equipConfigOf(row.itemId)
-  if (!config) throw bad('wrong_item', `That item cannot be ${action}.`)
+  // Wings and auras are enhanced in the Wing panel (M6 decision 24); forge rules give them nothing.
+  if (!config || item(row.itemId)?.EquipType === WING_SLOT)
+    throw bad('wrong_item', `That item cannot be ${action}.`)
   return config
 }
 
