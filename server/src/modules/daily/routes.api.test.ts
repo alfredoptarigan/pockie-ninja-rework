@@ -154,7 +154,8 @@ describe('DayTaskSystem daily board', () => {
       .where(eq(characters.id, id))
     vi.setSystemTime(new Date('2026-10-13T00:00:00Z'))
     const next = (await board()).json()
-    expect(next).toMatchObject({ day: '2026-10-13', accepted: 1, completed: 0 })
+    // AcceptedDayTaskMaxNum caps the tasks in progress (the Task Board's "In Progress (n/5)").
+    expect(next).toMatchObject({ day: '2026-10-13', accepted: 1, completed: 0, inProgressLimit: 5 })
     expect(next.quests).toContainEqual(expect.objectContaining({ taskId: 2160102, state: 1 }))
   })
   it('refuses outside neutral fields, unknown/unoffered tasks, and unauthenticated reads', async () => {

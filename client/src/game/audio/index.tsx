@@ -114,31 +114,53 @@ export function SoundToggle() {
   )
 }
 
-/** Mount within the HUD's Sound settings dialog. */
+/**
+ * The "Sound:" block of Reborn's Settings window: Mute Music, then "Volume %" as a number field and
+ * a 0-100 slider, both disabled while the music is muted.
+ */
 export function SoundSettings() {
   const { settings, configure } = useAudio()
+  const setVolume = (value: string) => {
+    // An emptied field reads as 0, so typing a new number starts from scratch.
+    const volume = Number(value)
+    if (Number.isFinite(volume))
+      configure({ ...settings, volume: Math.max(0, Math.min(100, Math.round(volume))) })
+  }
   return (
-    <fieldset className="space-y-3">
-      <legend>Sound</legend>
+    <fieldset className="flex flex-col gap-1">
+      <legend className="font-bold">Sound:</legend>
       <label className="flex items-center gap-2">
         <input
           type="checkbox"
           checked={settings.muted}
           onChange={(event) => configure({ ...settings, muted: event.target.checked })}
         />
-        Mute music
+        Mute Music
       </label>
-      <label className="flex items-center gap-2">
-        Music volume
+      <div className="flex items-center gap-2">
+        <label className="flex items-center gap-2">
+          Volume %
+          <input
+            type="number"
+            min="0"
+            max="100"
+            disabled={settings.muted}
+            value={settings.volume}
+            onChange={(event) => setVolume(event.target.value)}
+            className="w-[50px] border border-wood-light bg-parchment px-1 disabled:opacity-50"
+          />
+        </label>
         <input
           type="range"
+          aria-label="Volume"
           min="0"
           max="100"
+          disabled={settings.muted}
           value={settings.volume}
-          onChange={(event) => configure({ ...settings, volume: Number(event.target.value) })}
+          onChange={(event) => setVolume(event.target.value)}
+          className="flex-1 disabled:opacity-50"
         />
-        <output>{settings.volume}%</output>
-      </label>
+      </div>
     </fieldset>
   )
 }

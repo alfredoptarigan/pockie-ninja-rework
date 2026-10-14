@@ -30,6 +30,8 @@ export const dailyViewSchema = z.object({
   accepted: z.number().int().nonnegative(),
   completed: z.number().int().nonnegative(),
   limit: z.number().int().positive(),
+  /** Tasks held in progress at once (AcceptedDayTaskMaxNum). */
+  inProgressLimit: z.number().int().positive(),
   quests: z.array(dailyQuestSchema),
 })
 export type DailyView = z.infer<typeof dailyViewSchema>

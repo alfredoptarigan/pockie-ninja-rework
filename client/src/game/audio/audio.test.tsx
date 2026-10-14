@@ -81,8 +81,12 @@ it('persists mute and volume across reloads and applies them to audio', () => {
       <SoundSettings />
     </AudioProvider>,
   )
-  fireEvent.click(screen.getByLabelText('Mute music'))
-  fireEvent.change(screen.getByLabelText('Music volume'), { target: { value: '27' } })
+  fireEvent.change(screen.getByLabelText('Volume'), { target: { value: '27' } })
+  expect(screen.getByLabelText('Volume %')).toHaveValue(27)
+  fireEvent.click(screen.getByLabelText('Mute Music'))
+  // Reborn disables the volume while the music is muted.
+  expect(screen.getByLabelText('Volume')).toBeDisabled()
+  expect(screen.getByLabelText('Volume %')).toBeDisabled()
   first.unmount()
   const next = render(
     <AudioProvider sceneId={111}>
@@ -90,7 +94,7 @@ it('persists mute and volume across reloads and applies them to audio', () => {
     </AudioProvider>,
   )
   const audio = next.container.querySelector('audio')!
-  expect(screen.getByLabelText('Mute music')).toBeChecked()
+  expect(screen.getByLabelText('Mute Music')).toBeChecked()
   expect(audio.muted).toBe(true)
   expect(audio.volume).toBe(0.27)
   expect(audio.play).not.toHaveBeenCalled()

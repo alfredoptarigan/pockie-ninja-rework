@@ -119,6 +119,22 @@ describe('events rewards', () => {
     expect((await board()).weekly.counters.pubFight).toBe(3)
     expect((await board()).weekly.points).toBe(53)
   })
+  it("labels the weekly tasks with Reborn's names where the task is the same", async () => {
+    const labels = (await board()).weekly.activities.map((entry: { id: string; label: string }) => [
+      entry.id,
+      entry.label,
+    ])
+    expect(Object.fromEntries(labels)).toEqual({
+      arenaDuel: 'Duel in Arena',
+      duelFriend: 'Duel a friend',
+      tollGate: 'Toll Gate',
+      pubFight: 'Pub Fight',
+      lasNoches: 'Las Noches',
+      twentyMinReward: '20 Min Reward',
+      globalChat: 'Global Chat',
+      mission: 'Complete Mission',
+    })
+  })
   it('claims milestones once and serializes claims', async () => {
     await activity('tollGate')
     const results = await Promise.all([claim('weekly/milestone/50'), claim('weekly/milestone/50')])

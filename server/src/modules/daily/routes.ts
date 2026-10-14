@@ -110,6 +110,7 @@ async function view(tx: Tx, character: CharacterRow) {
     accepted: character.dailyQuestsAccepted,
     completed: character.dailyQuestsCompleted,
     limit: config.PerDayCompleteTaskMax,
+    inProgressLimit: config.AcceptedDayTaskMaxNum,
     quests: board
       .sort((a, b) => a.taskId - b.taskId)
       .map((row) => {
