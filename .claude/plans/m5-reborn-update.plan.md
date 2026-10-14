@@ -435,7 +435,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
   Playwright screenshot of an arena replay.
 - **Depends on**: 3.
 
-### Task 10: Bloodline souls and prayer
+### Task 10: Bloodline souls and prayer (done; discover free up to the daily cap, socketed souls refuse destroy/synthesis/refine/prayer, bind needs an unlocked limit)
 - **Action**: discover (decision 15, VIP 30), soul inventory (250), bind/unbind (one per type, 5
   sockets, level gate), destroy, synthesis (3 to 1, batch), refine, prayer (decision 16, bulk, reset
   on attribute switch). Souls and prayer feed `bloodlineBonuses`. Bloodline panel gets Souls and
