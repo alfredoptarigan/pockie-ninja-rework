@@ -53,17 +53,19 @@ async function payWeek(tx: Tx, row: PlayerRow) {
     .set({ battleCoins: sql`${characters.battleCoins} + ${league.battleCoins}` })
     .where(eq(characters.id, row.characterId))
   // ponytail: a full bag loses the top-league item; add a claim box if players miss it.
-  if (league.item)
-    await grantItems(
-      tx,
-      row.characterId,
-      Array.from({ length: league.amount ?? 1 }, () => ({ itemId: league.item!, bound: true })),
-      { dropOverflow: true },
-    )
+  const kept = league.item
+    ? await grantItems(
+        tx,
+        row.characterId,
+        Array.from({ length: league.amount ?? 1 }, () => ({ itemId: league.item!, bound: true })),
+        { dropOverflow: true },
+      )
+    : []
+  // The mail names only the items that reached the bag.
   await sendSystemMail(tx, row.characterId, 'other', 'team_stone_weekly', {
     league: league.id,
     battleCoins: league.battleCoins,
-    ...(league.item && { itemId: league.item, count: league.amount ?? 1 }),
+    ...(kept.length > 0 && { itemId: league.item, count: kept.length }),
   })
 }
 

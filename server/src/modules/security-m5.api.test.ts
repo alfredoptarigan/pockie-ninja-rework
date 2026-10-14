@@ -3,7 +3,10 @@
 import { eq, sql } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createTestDb, truncateAll } from '../../test/helpers.js'
+import { BAG_CELLS, itemCells } from '../game/bag.js'
 import {
+  inventoryItems,
+  mails,
   tailedBeastKages,
   tailedBeastPlayers,
   teamStoneMatches,
@@ -70,6 +73,36 @@ describe('the Team Stone Battle Coin shop', () => {
 
     expect(response.statusCode).toBe(200)
     expect((await a.row()).battleCoins).toBe(0)
+  })
+})
+
+describe('the Team Stone weekly pay', () => {
+  it('mails only the league items that reached a full bag', async () => {
+    // Arrange: a Champion (3 x i159045) whose bag has no free cell.
+    const a = await ninja('Full_bag')
+    const held = await db.select().from(inventoryItems).where(eq(inventoryItems.characterId, a.id))
+    const free = BAG_CELLS - held.reduce((sum, row) => sum + itemCells(row.itemId), 0)
+    await db
+      .insert(inventoryItems)
+      .values(
+        Array.from({ length: free }, () => ({ characterId: a.id, itemId: 'i160001', count: 999 })),
+      )
+    await db.insert(teamStonePlayers).values({
+      characterId: a.id,
+      score: 5000,
+      week: weekStart(new Date(Date.now() - 7 * DAY_MS)),
+      playedThisWeek: true,
+      month: monthStart(new Date()),
+    })
+
+    // Act
+    await payTeamStoneWeek(db)
+
+    // Assert: the coins are paid; the mail does not promise items that were lost.
+    expect((await a.row()).battleCoins).toBe(5000)
+    const [mail] = await db.select().from(mails).where(eq(mails.recipientId, a.id))
+    expect(mail!.params).toMatchObject({ league: 'champion', battleCoins: 5000 })
+    expect(mail!.params).not.toHaveProperty('itemId')
   })
 })
 
