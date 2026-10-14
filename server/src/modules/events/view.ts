@@ -38,8 +38,10 @@ export async function loginState(tx: Tx, characterId: string) {
     .for('update')
   return row!
 }
+/** Starts a new UTC day for dice and twenty-minute counters; writes only when the day changed. */
 export async function resetDaily(tx: Tx, character: CharacterRow, now: Date) {
   const day = utcDay(now)
+  if (character.diceDay === day && character.twentyMinDay === day) return
   if (character.diceDay !== day) {
     character.diceDay = day
     character.diceUsed = 0

@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import {
@@ -80,6 +80,19 @@ afterAll(close)
 describe('events rewards', () => {
   it('requires authentication', async () => {
     expect((await app.inject(path)).statusCode).toBe(401)
+  })
+  it('does not rewrite the character on every poll, only when the day changes', async () => {
+    const version = async () =>
+      (
+        (await db.execute(sql`select xmin from characters where id = ${id}`)) as { xmin: string }[]
+      )[0]!.xmin
+    await board()
+    const first = await version()
+    await board()
+    expect(await version()).toBe(first)
+    now = new Date('2026-10-13T00:00:01Z')
+    await board()
+    expect(await version()).not.toBe(first)
   })
   it('claims the first login item once, including concurrent requests', async () => {
     const results = await Promise.all([claim('login/claim'), claim('login/claim')])
