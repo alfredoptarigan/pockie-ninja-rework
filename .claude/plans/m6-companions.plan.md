@@ -134,6 +134,45 @@ ours live in one `constants.ts` per feature so they can be tuned.
     pet's level cannot pass its master's level (ours).
 11. **Pet stats 1:1.** Base props are rolled at 80-120% when the pet is adopted (`OnPetItemCreate`).
     Each total is `base x (1 + level x growth / 100) + bonus` (`RefreshPetProp`).
+11b. **Pet base props (ours).** Every 2011 `PetSrcPro` prop is 0, so the bases are ours
+    (`game-core/src/pets/constants.ts`).
+    - **2011 fight use: none.** `RefreshPetProp` totals are only sent to the client (Compete,
+      Arena and World Cup "look" data). The fight packet carries only `PetResourceID`,
+      `PetConfig`, `PetGrowth` and `PetLevel`. No Java code or Rhino script reads the totals,
+      and none sets `IsPet`. PET_ATTACK 40001 deals 0.75 x the master's `GetDamage` and uses the
+      master's hit, crit and defence break.
+    - **Bases at required level 30**, in the order Attack/Defence/Disturb/Active/Savvy:
+
+      | Nature | Bases | Sum |
+      |---|---|---|
+      | 1 Plant | 6/14/10/8/12 | 50 |
+      | 2 Beast | 14/8/10/10/8 | 50 |
+      | 3 Artificial | 8/14/12/8/8 | 50 |
+      | 4 Dragon | 12/8/7/7/10 | 44 |
+      | 5 Tailed Beast | 9/8/7/7/7 | 38 |
+      | 6 Spirits | 7/7/9/12/9 | 44 |
+
+      High-growth natures get smaller sums because growth multiplies the bases (x51 to x91 at
+      level 50).
+    - **Scaling:** level 40 x1.1, level 50 x1.2, an evolved form x1.2. The required level is the
+      Reborn item field 1 (30/40/50), which `pets.json` does not carry yet.
+    - **Fight use (ours):** the totals become master bonuses before `deriveStats`: Attack/165 on
+      both weapon attack terms, Defence/9 on defense, Disturb/18 on hit, Active/22 on dodge,
+      Savvy/36 on crit.
+    - **Power check** against a level-50 player (+6 white level 40-50 gear: HP 1624, attack
+      118-145, defense 431), measured as DPS x effective HP against the same player without a
+      pet:
+
+      | Level-50 pet | Gain |
+      |---|---|
+      | Beast, growth 100 | +6.7% |
+      | Beast or Plant, growth 120 (median) | +9.5% |
+      | Spirits, evolved, growth 140 | +10.6% |
+      | Tailed Beast, evolved, growth 170 | +12.9% |
+      | Tailed Beast, level 50, growth 180 | +13.2% |
+
+      PET_ATTACK (1:1) comes on top: +13% damage in mirror fights, and 352 of 400 seeded wins
+      against the same player without a pet.
 12. **Pet EXP (ours; the 2011 home server is not decompiled).** The active pet gets **50%** of
     the master's fight EXP from field, toll gate and Las Noches fights; arena gives none. When
     food finishes digesting, the pet also gets EXP equal to the appetite gained.
