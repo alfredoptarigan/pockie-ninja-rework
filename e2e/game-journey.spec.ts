@@ -329,11 +329,18 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await shot(page, 'drops')
   await drops.click()
 
-  // Hovering the Sunflower card (monster row at the top of the HUD) shows its Drops panel.
+  // The Sunflower card (monster row at the top of the HUD): hover shows its tooltip, the right
+  // click menu's Drops opens Monster Information on its drops.
   await expect(pictureCanvas).toHaveCount(1)
-  await page.getByTestId('monster-card').filter({ hasText: MONSTER }).hover()
-  await expect(page.locator(`section[aria-label="${MONSTER} drops"]`)).toBeVisible()
+  const card = page.getByTestId('monster-card').filter({ hasText: MONSTER })
+  await card.hover()
+  await expect(page.getByTestId('monster-tooltip')).toContainText(MONSTER)
+  await card.click({ button: 'right' })
+  await page.getByRole('menuitem', { name: 'Drops' }).click()
+  const info = dialog(page, 'Monster Information')
+  await expect(info.getByRole('list', { name: `${MONSTER} drops` })).toBeVisible()
   await shot(page, 'drops-hover')
+  await info.getByRole('button', { name: 'Close' }).click()
   await page.mouse.move(10, 400)
 
   // 90004: accept at the scout, then beat a Sunflower with the weapon drawn.

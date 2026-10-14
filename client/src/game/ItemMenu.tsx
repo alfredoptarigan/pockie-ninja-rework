@@ -28,6 +28,8 @@ export interface MenuEntry {
   disabled?: boolean
   /** Why the entry is disabled; shown under it and read as its description. */
   reason?: string
+  /** Hover hint (e.g. why a feature is not there yet). */
+  title?: string
   onSelect: () => void
 }
 
@@ -81,6 +83,7 @@ export function ItemMenu({
             type="button"
             role="menuitem"
             aria-label={entry.name}
+            title={entry.title}
             aria-describedby={entry.reason ? `${id}-${index}` : undefined}
             disabled={entry.disabled}
             onClick={() => {

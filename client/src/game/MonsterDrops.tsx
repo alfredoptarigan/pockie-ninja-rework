@@ -1,16 +1,22 @@
-// Drops of a monster: the items it can drop (GET /scene `drops`, no chances), as a disclosure
-// button for the keyboard list, and as the panel the scene picture shows while a portrait is
-// hovered (HTML, so it lies above the chat and the other HUD overlays).
-import { useId, useRef, useState } from 'react'
-import { ItemIcon } from './ItemIcon'
+// The field monsters: Reborn's monster cards row (Ry/Ny), its hover tooltip, right-click menu
+// and Monster Information window, plus the Drops disclosure (GET /scene `drops`, no chances)
+// that the window and SceneView's keyboard list share.
+import { useCallback, useId, useRef, useState } from 'react'
+import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
 import { useMonsterPortrait } from './art'
 import { ItemList } from './Rewards'
-import { GameButton } from './skin'
+import { Dialog, GameButton } from './skin'
 import { plainText } from './text'
 import type { SceneMonster } from './types'
 
-export function DropsMenu({ monster }: { monster: SceneMonster }) {
-  const [open, setOpen] = useState(false)
+export function DropsMenu({
+  monster,
+  defaultOpen = false,
+}: {
+  monster: SceneMonster
+  defaultOpen?: boolean
+}) {
+  const [open, setOpen] = useState(defaultOpen)
   const button = useRef<HTMLButtonElement>(null)
   const id = useId()
   const name = plainText(monster.nameKey, 'Monster')
@@ -54,17 +60,12 @@ export function DropsMenu({ monster }: { monster: SceneMonster }) {
   )
 }
 
-/** Drops per column of the hover panel; longer lists wrap into more columns. */
-const ROWS_PER_COLUMN = 8
-const COLUMN_WIDTH = 190
+/** Reborn's card row: 67x86 cards on a 70px pitch, the row centred under the top bar. */
+const CARD_PITCH = 70
 const SHADOW = '[text-shadow:2px_2px_4px_#000,-2px_-2px_4px_#000]'
+const DESCRIPTION = 'A mysterious creature.'
+const CHAIN_ATTACK_SOON = 'Chain Attack: not available yet'
 
-/**
- * The area's monsters as cards in a row at the top centre of the HUD, drawn 1:1 like Pockie
- * Ninja Reborn's monster boxes (the original List.HobgoblinBG card, a 50px portrait, the level
- * and the name). A click starts the fight; hovering shows the Drops panel under the card. The
- * row is a pointer twin of SceneView's "Scene actions" list, which keeps keyboard access.
- */
 /** Why a task boss cannot be fought yet (decision 8 keeps the never-attackable ones locked). */
 export const lockReason = (monster: SceneMonster) =>
   monster.lock === 'quest'
@@ -73,6 +74,12 @@ export const lockReason = (monster: SceneMonster) =>
       ? 'This boss cannot be challenged.'
       : undefined
 
+/**
+ * The area's monsters as Reborn's monster cards at the top centre of the HUD. Hover shows the
+ * tooltip, a click opens Monster Information, a right click the Fight / Chain Attack / Drops
+ * menu. The cards are a pointer twin of SceneView's "Scene actions" list (keyboard access).
+ * ponytail: no Quest pill or daily marker; quest steps do not say which monster they target.
+ */
 export function MonsterRow({
   monsters,
   onFight,
@@ -81,89 +88,190 @@ export function MonsterRow({
   onFight: (monster: SceneMonster) => void
 }) {
   const [hovered, setHovered] = useState<string | null>(null)
+  const [menu, setMenu] = useState<{ monster: SceneMonster; at: { x: number; y: number } }>()
+  const [info, setInfo] = useState<{ monster: SceneMonster; drops: boolean }>()
+  const closeMenu = useCallback(() => setMenu(undefined), [])
   const portraitOf = useMonsterPortrait()
   const shown = monsters.flatMap((monster) => {
     const portrait = portraitOf(monster.id)
     return portrait ? [{ monster, portrait }] : []
   })
   if (shown.length === 0) return null
+
+  const menuEntries = (monster: SceneMonster): MenuEntry[] => [
+    {
+      label: 'Fight',
+      disabled: Boolean(monster.lock),
+      reason: lockReason(monster),
+      onSelect: () => onFight(monster),
+    },
+    { label: 'Chain Attack', disabled: true, title: CHAIN_ATTACK_SOON, onSelect: () => {} },
+    { label: 'Drops', onSelect: () => setInfo({ monster, drops: true }) },
+  ]
+
   return (
     <div
-      aria-hidden="true"
-      className="pointer-events-auto absolute top-[30px] left-1/2 flex -translate-x-1/2 gap-[3px] font-game"
+      data-menu-root
+      className="pointer-events-auto absolute top-[30px] h-[92px] font-game"
+      style={{
+        width: 3 + CARD_PITCH * shown.length,
+        left: `calc(50% - ${(CARD_PITCH / 2) * shown.length}px)`,
+      }}
     >
-      {shown.map(({ monster, portrait }) => {
-        const name = plainText(monster.nameKey, 'Monster')
-        return (
-          <div key={monster.id} className="relative h-[86px] w-[67px]">
-            <button
-              type="button"
-              tabIndex={-1}
-              data-testid="monster-card"
-              title={lockReason(monster) ?? name}
-              aria-disabled={monster.lock ? true : undefined}
-              onClick={() => {
-                setHovered(null)
-                if (!monster.lock) onFight(monster)
-              }}
-              onMouseEnter={() => setHovered(monster.id)}
-              onMouseLeave={() => setHovered(null)}
-              className={`game-monster-card absolute inset-0 ${monster.lock ? 'cursor-not-allowed grayscale' : 'cursor-pointer hover:brightness-110'}`}
-            >
-              <img
-                src={portrait}
-                alt=""
-                className="absolute top-[4px] left-[8px] size-[50px] object-contain"
-              />
-              <span className="absolute top-[35px] left-[8px] h-5 w-[51px] bg-linear-to-t from-black/70 to-transparent" />
-              <span
-                className={`absolute top-[43px] left-[8px] font-mono text-xs text-[#ffd700] ${SHADOW}`}
-              >
-                Lv.{monster.level}
-              </span>
-              <span className="absolute top-[66px] left-[4px] w-[62px] truncate text-center font-mono text-xs leading-[18px] font-bold text-[#f5f5f5]">
-                {name}
-              </span>
-            </button>
-            {hovered === monster.id && <DropsPanel monster={monster} />}
-          </div>
-        )
-      })}
+      <div aria-hidden="true">
+        {shown.map(({ monster, portrait }, i) => (
+          <button
+            key={monster.id}
+            type="button"
+            tabIndex={-1}
+            data-testid="monster-card"
+            onClick={() => {
+              setHovered(null)
+              setInfo({ monster, drops: false })
+            }}
+            onContextMenu={(event) => {
+              setHovered(null)
+              setMenu({ monster, at: menuAt(event) })
+            }}
+            onMouseEnter={() => setHovered(monster.id)}
+            onMouseLeave={() => setHovered(null)}
+            className={`game-monster-card absolute top-0 h-[86px] w-[67px] cursor-pointer hover:brightness-110 ${monster.lock ? 'grayscale' : ''}`}
+            style={{ left: 2 + CARD_PITCH * i }}
+          >
+            <MonsterFace monster={monster} portrait={portrait} />
+          </button>
+        ))}
+        {shown.map(
+          ({ monster }, i) =>
+            hovered === monster.id &&
+            !menu && (
+              <MonsterTooltip key={monster.id} monster={monster} left={2 + CARD_PITCH * (i + 1)} />
+            ),
+        )}
+      </div>
+      {menu && (
+        <ItemMenu
+          title={plainText(menu.monster.nameKey, 'Monster')}
+          at={menu.at}
+          entries={menuEntries(menu.monster)}
+          onClose={closeMenu}
+        />
+      )}
+      {info && (
+        <MonsterInfo
+          key={info.monster.id}
+          monster={info.monster}
+          portrait={portraitOf(info.monster.id)}
+          dropsOpen={info.drops}
+          onFight={() => {
+            setInfo(undefined)
+            onFight(info.monster)
+          }}
+          onClose={() => setInfo(undefined)}
+        />
+      )}
     </div>
   )
 }
 
-/** The hover panel under a monster card; it does not take the pointer (the card keeps the hover). */
-export function DropsPanel({ monster }: { monster: SceneMonster }) {
-  const name = plainText(monster.nameKey, 'Monster')
-  const drops = monster.drops ?? []
-  const columns = Math.max(1, Math.ceil(drops.length / ROWS_PER_COLUMN))
+/** A card's face: the 50px portrait with its bottom shade, the gold level and the name. */
+function MonsterFace({ monster, portrait }: { monster: SceneMonster; portrait: string }) {
   return (
-    <section
-      aria-label={`${name} drops`}
-      className="game-hud pointer-events-none absolute top-[90px] left-1/2 z-30 -translate-x-1/2 overflow-hidden p-2 font-game text-xs"
-      style={{ width: columns * COLUMN_WIDTH, background: 'rgb(28 31 33 / 0.96)' }}
+    <>
+      <span className="absolute top-[4px] left-[8px] size-[51px]">
+        <img src={portrait} alt="" className="size-[50px] object-contain" />
+        <span className="absolute inset-x-0 bottom-0 h-4 bg-linear-to-t from-black/70 to-transparent" />
+      </span>
+      <span
+        className={`absolute top-[45px] left-[8px] h-[18px] w-[55px] text-left font-mono text-xs leading-[18px] text-[#ffd700] ${SHADOW}`}
+      >
+        Lv.{monster.level}
+      </span>
+      <span className="absolute top-[66px] left-[4px] h-[18px] w-[62px] truncate text-center font-mono text-xs leading-[18px] font-bold text-[#f5f5f5]">
+        {plainText(monster.nameKey, 'Monster')}
+      </span>
+    </>
+  )
+}
+
+/** Reborn's `.monster-tooltip` (170 wide), beside the hovered card; it does not take the pointer. */
+function MonsterTooltip({ monster, left }: { monster: SceneMonster; left: number }) {
+  const reason = lockReason(monster)
+  return (
+    <div
+      data-testid="monster-tooltip"
+      className="pointer-events-none absolute top-0 z-30 w-[170px] p-[6px] font-game"
+      style={{
+        left,
+        borderStyle: 'solid',
+        borderImage: 'var(--ui-tooltip) var(--ui-tooltip-slice) fill / var(--ui-tooltip-border)',
+      }}
     >
-      <h3 className="mb-1 text-center font-bold text-trim">Drops</h3>
-      {drops.length === 0 ? (
-        <p>{name} drops nothing.</p>
-      ) : (
-        <ul
-          className="grid grid-flow-col gap-x-3 gap-y-1"
-          style={{ gridTemplateRows: `repeat(${Math.min(drops.length, ROWS_PER_COLUMN)}, auto)` }}
-        >
-          {drops.map(({ itemId, nameKey }, i) => (
-            <li key={`${itemId}-${i}`} className="flex min-w-0 items-center gap-1.5">
-              <ItemIcon
-                itemId={itemId}
-                name={plainText(nameKey, 'Unknown item')}
-                className="size-7"
-              />
-              <span className="leading-tight">{plainText(nameKey, 'Unknown item')}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+      <p className="text-[11px] font-bold text-[#ffd700]">Lv.{monster.level}</p>
+      <p className="text-xs font-bold text-[#c00]">{plainText(monster.nameKey, 'Monster')}</p>
+      <p className="text-[11px] text-[#00ced1]">{DESCRIPTION}</p>
+      {reason && <p className="mt-1 text-[11px] text-[#ff8a80]">{reason}</p>}
+    </div>
+  )
+}
+
+/**
+ * Reborn's Monster Information window (variant A): the 80x102 card (portrait, Lv, name) on the
+ * left, name, description and Fight / Chain Attack / Drops on the right. HP and attack are not
+ * in the scene payload, so they are not shown.
+ */
+function MonsterInfo({
+  monster,
+  portrait,
+  dropsOpen,
+  onFight,
+  onClose,
+}: {
+  monster: SceneMonster
+  portrait?: string
+  dropsOpen: boolean
+  onFight: () => void
+  onClose: () => void
+}) {
+  const name = plainText(monster.nameKey, 'Monster')
+  return (
+    <Dialog title="Monster Information" onClose={onClose} className="w-[378px]">
+      <div className="game-panel-1 min-h-[124px] w-[338px] p-[6px] font-game text-xs">
+        <div className="game-inset flex min-h-[112px] gap-2 p-1">
+          <div className="game-monster-card relative h-[102px] w-[80px] shrink-0">
+            <span className="absolute top-[6px] left-[8px] size-16">
+              {portrait && <img src={portrait} alt="" className="size-[62px] object-contain" />}
+              <span className="absolute inset-x-0 bottom-0 h-4 bg-linear-to-t from-black to-transparent" />
+            </span>
+            <span
+              className={`absolute top-[62px] left-[8px] h-[14px] w-16 text-[10px] leading-[14px] font-bold text-[#ffd700] ${SHADOW}`}
+            >
+              Lv.{monster.level}
+            </span>
+            <span className="absolute top-[80px] left-[2px] h-[14px] w-[76px] truncate text-center text-[9px] leading-[14px] font-bold text-[whitesmoke]">
+              {name}
+            </span>
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col gap-1 py-1">
+            <p className="font-bold">{name}</p>
+            <p>{DESCRIPTION}</p>
+            <div className="mt-auto flex flex-wrap gap-1">
+              <GameButton
+                className="h-6 w-[72px]"
+                disabled={Boolean(monster.lock)}
+                title={lockReason(monster)}
+                onClick={onFight}
+              >
+                Fight
+              </GameButton>
+              <GameButton className="h-6 w-[72px] text-[10px]!" disabled title={CHAIN_ATTACK_SOON}>
+                Chain Attack
+              </GameButton>
+              <DropsMenu monster={monster} defaultOpen={dropsOpen} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Dialog>
   )
 }

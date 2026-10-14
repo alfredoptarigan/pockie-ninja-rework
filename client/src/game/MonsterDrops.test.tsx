@@ -65,36 +65,103 @@ describe('DropsMenu', () => {
 })
 
 describe('MonsterRow', () => {
-  const panel = () => screen.getByRole('region', { name: 'Sunflower drops', hidden: true })
+  const scarlet: SceneMonster = { id: 'n32001', nameKey: 'lg_name_n32001', level: 8 }
 
-  it('draws a card per monster with art and shows its drops while hovered', async () => {
-    const onFight = vi.fn()
+  it('lays the cards out on a 70px pitch centred at top 30, skipping monsters without art', async () => {
     renderWithProviders(
-      <MonsterRow monsters={[sunflower, { ...sunflower, id: 'n0' }]} onFight={onFight} />,
+      <MonsterRow monsters={[sunflower, { ...sunflower, id: 'n0' }, scarlet]} onFight={vi.fn()} />,
     )
 
-    // n0 has no art: only the Sunflower gets a card.
-    const card = await screen.findByTestId('monster-card')
-    expect(screen.getAllByTestId('monster-card')).toHaveLength(1)
-    expect(card).toHaveTextContent('Lv.2')
-    expect(card).toHaveTextContent('Sunflower')
-    expect(card.closest('[aria-hidden]')).toHaveAttribute('aria-hidden', 'true')
-
-    await userEvent.hover(card)
-    expect(within(panel()).getByText('Dogsmasher')).toBeInTheDocument()
-    await userEvent.unhover(card)
-    expect(screen.queryByRole('region', { name: 'Sunflower drops', hidden: true })).toBeNull()
-
-    await userEvent.click(card)
-    expect(onFight).toHaveBeenCalledWith(sunflower)
+    // n0 has no art: only the Sunflower and the Scarlet get a card.
+    const [first, second] = await screen.findAllByTestId('monster-card')
+    expect(screen.getAllByTestId('monster-card')).toHaveLength(2)
+    expect(first).toHaveTextContent('Lv.2')
+    expect(first).toHaveTextContent('Sunflower')
+    expect(second).toHaveTextContent('Lv.8')
+    expect(first!.style.left).toBe('2px')
+    expect(second!.style.left).toBe('72px')
+    const row = first!.closest<HTMLElement>('[data-menu-root]')!
+    expect(row.style.width).toBe('143px')
+    expect(row.style.left).toBe('calc(50% - 70px)')
+    expect(row).toHaveClass('top-[30px]')
+    expect(first!.closest('[aria-hidden]')).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('wraps a long drop list into columns', async () => {
-    const many = Array.from({ length: 16 }, (_, i) => ({ itemId: `i${i}`, nameKey: `lg_i${i}` }))
-    renderWithProviders(<MonsterRow monsters={[{ ...sunflower, drops: many }]} onFight={vi.fn()} />)
+  it('shows the Lv, name and description tooltip while a card is hovered', async () => {
+    renderWithProviders(<MonsterRow monsters={[sunflower]} onFight={vi.fn()} />)
+    const card = await screen.findByTestId('monster-card')
 
-    await userEvent.hover(await screen.findByTestId('monster-card'))
-    expect(panel().style.width).toBe('380px')
-    expect(panel().querySelector('ul')!.style.gridTemplateRows).toBe('repeat(8, auto)')
+    await userEvent.hover(card)
+    const tip = screen.getByTestId('monster-tooltip')
+    expect(tip).toHaveTextContent('Lv.2')
+    expect(tip).toHaveTextContent('Sunflower')
+    expect(tip).toHaveTextContent('A mysterious creature.')
+    await userEvent.unhover(card)
+    expect(screen.queryByTestId('monster-tooltip')).toBeNull()
+  })
+
+  it('opens Monster Information on a click; Fight starts the fight', async () => {
+    const onFight = vi.fn()
+    renderWithProviders(<MonsterRow monsters={[sunflower]} onFight={onFight} />)
+
+    await userEvent.click(await screen.findByTestId('monster-card'))
+    expect(onFight).not.toHaveBeenCalled()
+    const info = screen.getByRole('dialog', { name: 'Monster Information' })
+    expect(info).toHaveTextContent('Lv.2')
+    expect(info).toHaveTextContent('Sunflower')
+    const chain = within(info).getByRole('button', { name: 'Chain Attack' })
+    expect(chain).toBeDisabled()
+    expect(chain).toHaveAttribute('title', 'Chain Attack: not available yet')
+
+    await userEvent.click(within(info).getByRole('button', { name: 'Drops: Sunflower' }))
+    expect(within(info).getByRole('list', { name: 'Sunflower drops' })).toHaveTextContent(
+      'Dogsmasher',
+    )
+
+    await userEvent.click(within(info).getByRole('button', { name: 'Fight' }))
+    expect(onFight).toHaveBeenCalledWith(sunflower)
+    expect(screen.queryByRole('dialog', { name: 'Monster Information' })).toBeNull()
+  })
+
+  it('right-click menu: Fight fights, Chain Attack is disabled, Drops opens the drops', async () => {
+    const onFight = vi.fn()
+    renderWithProviders(<MonsterRow monsters={[sunflower]} onFight={onFight} />)
+    const card = await screen.findByTestId('monster-card')
+
+    await userEvent.pointer({ keys: '[MouseRight]', target: card })
+    const menu = screen.getByRole('menu', { name: 'Sunflower' })
+    const chain = within(menu).getByRole('menuitem', { name: 'Chain Attack' })
+    expect(chain).toBeDisabled()
+    expect(chain).toHaveAttribute('title', 'Chain Attack: not available yet')
+    await userEvent.click(within(menu).getByRole('menuitem', { name: 'Fight' }))
+    expect(onFight).toHaveBeenCalledWith(sunflower)
+    expect(screen.queryByRole('menu')).toBeNull()
+
+    await userEvent.pointer({ keys: '[MouseRight]', target: card })
+    await userEvent.click(screen.getByRole('menuitem', { name: 'Drops' }))
+    const info = screen.getByRole('dialog', { name: 'Monster Information' })
+    expect(within(info).getByRole('button', { name: 'Drops: Sunflower' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+    expect(within(info).getByRole('list', { name: 'Sunflower drops' })).toBeVisible()
+  })
+
+  it('keeps a locked boss from being fought from the menu and the window', async () => {
+    const onFight = vi.fn()
+    renderWithProviders(
+      <MonsterRow monsters={[{ ...sunflower, lock: 'quest' }]} onFight={onFight} />,
+    )
+    const card = await screen.findByTestId('monster-card')
+
+    await userEvent.pointer({ keys: '[MouseRight]', target: card })
+    expect(screen.getByRole('menuitem', { name: 'Fight' })).toBeDisabled()
+    await userEvent.keyboard('{Escape}')
+
+    await userEvent.click(card)
+    const fight = within(screen.getByRole('dialog')).getByRole('button', { name: 'Fight' })
+    expect(fight).toBeDisabled()
+    expect(fight).toHaveAttribute('title', 'You need the quest for this boss before you fight it.')
+    expect(onFight).not.toHaveBeenCalled()
   })
 })
