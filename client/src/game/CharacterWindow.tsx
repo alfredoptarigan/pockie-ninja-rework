@@ -255,9 +255,12 @@ export function CharacterWindow({
           ))}
       </section>
       <PouchRefill character={character} />
-      <section aria-label="Training" className="game-inset mt-[5px] flex justify-end p-1.5">
+      <section aria-label="Training" className="game-inset mt-[5px] flex justify-end gap-1 p-1.5">
         <GameButton small onClick={() => openWindow('talents')}>
           Talents
+        </GameButton>
+        <GameButton small onClick={() => openWindow('bloodlines')}>
+          Bloodlines
         </GameButton>
       </section>
     </Dialog>

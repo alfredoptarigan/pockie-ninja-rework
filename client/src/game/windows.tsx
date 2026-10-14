@@ -18,6 +18,7 @@ import { RankingsWindow } from './rankings'
 import { MerchantWindow, ShopWindow } from './shop'
 import { FriendsWindow, MailWindow } from './social'
 import { TalentsWindow } from './talents'
+import { BloodlinesWindow } from './bloodlines'
 import { TeamBoardWindow, TeamWindow } from './teams'
 
 export type WindowName =
@@ -35,6 +36,7 @@ export type WindowName =
   | 'rankings'
   | 'market'
   | 'talents'
+  | 'bloodlines'
 
 export interface WindowProps {
   character: Character
@@ -72,6 +74,9 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   rankings: ({ onClose }) => <RankingsWindow onClose={onClose} />,
   market: ({ character, onClose }) => <MarketWindow character={character} onClose={onClose} />,
   talents: ({ character, onClose }) => <TalentsWindow character={character} onClose={onClose} />,
+  bloodlines: ({ character, onClose }) => (
+    <BloodlinesWindow character={character} onClose={onClose} />
+  ),
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
