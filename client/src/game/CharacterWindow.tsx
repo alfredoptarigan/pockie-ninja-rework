@@ -1,9 +1,9 @@
 import type { Character, CharacterStats } from '@pockie/shared'
 import type { CSSProperties } from 'react'
-import { errorMessage, useBuyPouches, useCharacterStats, useBuffs } from './api'
+import { errorMessage, useBuyPouches, useCharacterStats, useBuffs, useInventory } from './api'
 import { Dialog, GameButton, Notice } from './skin'
 import { plainText } from './text'
-import { useCharacterPreview, type CharacterCosmetics } from './phaser/character-preview'
+import { useCharacterPreview } from './phaser/character-preview'
 import { expToNext, sceneNameKey, villageOf } from './world'
 import { useOpenWindow } from './windows'
 
@@ -205,11 +205,14 @@ export function CharacterWindow({
   character: Character
   onClose: () => void
 }) {
-  const cosmetics = character as Character & CharacterCosmetics & { look?: CharacterCosmetics }
-  const { canvas: previewRef, visible: hasPreview } = useCharacterPreview(
-    character.clothing,
-    cosmetics.look ?? cosmetics,
-  )
+  // The Wing slot holds a wing or an aura; the preview art is keyed by its numeric item id.
+  const worn = useInventory()
+    .data?.find((item) => item.equippedSlot === 'Wing')
+    ?.itemId.slice(1)
+  const { canvas: previewRef, visible: hasPreview } = useCharacterPreview(character.clothing, {
+    wing: worn,
+    aura: worn,
+  })
   const stats = useCharacterStats()
   const buffs = useBuffs()
   const title = buffs.data?.titles.find((title) => title.active)
