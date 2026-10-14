@@ -1,0 +1,16 @@
+{
+  "blackcity": { "url": "/assets/game/audio/blackcity.mp3", "bytes": 742375 },
+  "compete1": { "url": "/assets/game/audio/compete1.mp3", "bytes": 705053 },
+  "compete2": { "url": "/assets/game/audio/compete2.mp3", "bytes": 774593 },
+  "compete3": { "url": "/assets/game/audio/compete3.mp3", "bytes": 659539 },
+  "compete4": { "url": "/assets/game/audio/compete4.mp3", "bytes": 519571 },
+  "demonCity": { "url": "/assets/reborn/audio/demonCity.mp3", "bytes": 1969259 },
+  "lasNoches": { "url": "/assets/reborn/audio/lasNoches.mp3", "bytes": 4453817 },
+  "maincity1": { "url": "/assets/game/audio/maincity1.mp3", "bytes": 537238 },
+  "maincity2": { "url": "/assets/game/audio/maincity2.mp3", "bytes": 508735 },
+  "maincity3": { "url": "/assets/game/audio/maincity3.mp3", "bytes": 489655 },
+  "maincity4": { "url": "/assets/game/audio/maincity4.mp3", "bytes": 483892 },
+  "singlegate": { "url": "/assets/game/audio/singlegate.mp3", "bytes": 515935 },
+  "tb": { "url": "/assets/reborn/audio/tb.mp3", "bytes": 1584632 },
+  "valhalla": { "url": "/assets/reborn/audio/valhalla.mp3", "bytes": 2060972 }
+}
