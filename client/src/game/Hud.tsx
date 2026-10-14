@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router'
 import { useLogout } from '../lib/auth'
 import { ArenaButton } from './arena'
+import { SoundSettings } from './audio'
 import { useOutfitPortrait } from './art'
 import { TwentyMinuteRewardButton } from './events'
 import { GameButton } from './skin'
@@ -116,13 +117,16 @@ function HudMenu({
 
 const MENU_ITEM = 'w-full rounded px-2 py-1 text-left text-trim-soft hover:bg-white/10'
 
-/** Settings button of the top strip: back to the website and log out. */
+/** Settings button of the top strip: sound, back to the website and log out. */
 export function SettingsMenu() {
   const logout = useLogout()
   return (
     <HudMenu label="Settings">
       {() => (
         <>
+          <li className="px-2 py-1 text-trim-soft">
+            <SoundSettings />
+          </li>
           <li>
             <Link to="/" className="block rounded px-2 py-1 text-trim-soft hover:bg-white/10">
               Back to the website

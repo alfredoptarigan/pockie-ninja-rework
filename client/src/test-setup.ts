@@ -41,6 +41,10 @@ document.addEventListener('keydown', (event) => {
   if (dialog?.open) dialog.close()
 })
 
+// jsdom does not play media: play() resolves and pause() does nothing, as with a muted browser.
+HTMLMediaElement.prototype.play = () => Promise.resolve()
+HTMLMediaElement.prototype.pause = () => {}
+
 afterEach(cleanup)
 
 // Phaser needs WebGL/canvas, which jsdom lacks: the stage entry is replaced by a stub that starts

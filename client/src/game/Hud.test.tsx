@@ -3,7 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
-import { PlayerCard, TopBar } from './Hud'
+import { AudioProvider } from './audio'
+import { PlayerCard, SettingsMenu, TopBar } from './Hud'
 import { OpenWindowProvider } from './windows'
 
 const card = () => screen.getByRole('region', { name: 'Character' })
@@ -62,5 +63,20 @@ describe('TopBar events', () => {
       expect(open).toHaveBeenLastCalledWith(name)
       expect(screen.queryByRole('list', { name: 'Events' })).toBeNull()
     }
+  })
+})
+
+describe('Settings menu', () => {
+  it('holds the sound controls', async () => {
+    renderWithProviders(
+      <AudioProvider>
+        <SettingsMenu />
+      </AudioProvider>,
+    )
+    await userEvent.click(screen.getByRole('button', { name: 'Settings' }))
+    const menu = screen.getByRole('list', { name: 'Settings' })
+    await userEvent.click(within(menu).getByRole('checkbox', { name: 'Mute music' }))
+    expect(within(menu).getByRole('checkbox', { name: 'Mute music' })).toBeChecked()
+    expect(within(menu).getByRole('slider', { name: /Music volume/ })).toBeInTheDocument()
   })
 })
