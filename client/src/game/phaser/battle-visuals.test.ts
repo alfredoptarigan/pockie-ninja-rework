@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import type Phaser from 'phaser'
-import { BattleVisuals } from './battle-visuals'
+import { BattleVisuals, DEPTH } from './battle-visuals'
 import { auraAsset, petAsset, wingAsset, type VisualReplay } from './companions'
+import { effectAsset } from './effects-map'
 import type { Timeline } from './timeline'
 
 function fixture() {
@@ -106,5 +107,18 @@ describe('battle cosmetic rendering', () => {
     expect(f.loaded).toEqual([icon])
     expect(f.sprites).toHaveLength(1)
     expect(f.sprites[0]).toMatchObject({ key: icon, Position: [200, 455], Scale: [-1, 1] })
+  })
+  it('puts global and pet effects in fixed depth bands, not at their master pose', () => {
+    const f = fixture()
+    f.timeline.poses = [[{ at: 5000, motion: '999', loop: true, from: 300, to: 300, moveMs: 0 }]]
+    // Mist covers the whole field; the holy aura plays behind the pet.
+    f.timeline.bars = [{ at: 0, fighter: 0, hp: 100, mp: 0, buffs: [11821, 11865] }]
+    const visuals = new BattleVisuals(f.scene, f.replay, f.timeline)
+    visuals.preload()
+    visuals.render(6000)
+    const depthOf = (atlas: string) =>
+      (f.sprites.find((s) => s.key === atlas)!.Depth as number[])[0]
+    expect(depthOf(effectAsset(11821)!.atlas!)).toBe(DEPTH.overlay)
+    expect(depthOf(effectAsset(11865)!.atlas!)).toBe(DEPTH.overlayBack)
   })
 })

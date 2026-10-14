@@ -16,6 +16,12 @@ import { effectAsset, numberAssets, statusAsset } from './effects-map'
 import { numberGlyphs } from './numbers'
 import { HOME, latestAt, poseX, STAGE, type Timeline } from './timeline'
 
+/**
+ * Ultimate art, global and pet effects go over every body, their back layers behind them; texts
+ * and HUD stay on top. Body depths are pose start times in ms.
+ */
+export const DEPTH = { background: -2, overlayBack: -1, overlay: 1e6, ui: 2e6 }
+
 export function loadAtlas(scene: Phaser.Scene, asset: AtlasAsset | undefined) {
   if (!asset?.atlas || scene.textures.exists(asset.atlas)) return
   scene.load.multiatlas(
@@ -207,7 +213,11 @@ export class BattleVisuals {
               : x,
           effect?.global ? STAGE.height / 2 : y,
           sign,
-          pose.at + (effect?.depth === 'behind' ? -0.4 : 0.2),
+          effect?.global || effect?.onPet
+            ? effect.depth === 'behind'
+              ? DEPTH.overlayBack
+              : DEPTH.overlay
+            : pose.at + (effect?.depth === 'behind' ? -0.4 : 0.2),
           effect?.offset,
           1000 / PET_FRAME_MS,
           !transition.removed,
@@ -221,7 +231,7 @@ export class BattleVisuals {
           .setTexture(key, String(buff))
           .setOrigin(0)
           .setPosition(HOME[fighter.side] + (k - 2) * 22, 91)
-          .setDepth(2e6 + 102)
+          .setDepth(DEPTH.ui + 102)
           .setVisible(true)
       })
     })

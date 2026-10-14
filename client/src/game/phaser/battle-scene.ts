@@ -4,7 +4,7 @@ import Phaser from 'phaser'
 import type { MotionSheet } from '../../generated/game-assets'
 import type { WeaponLayer } from '../../generated/game-extra'
 import type { VisualReplay as Replay, CompanionLook } from './companions'
-import { BattleVisuals } from './battle-visuals'
+import { BattleVisuals, DEPTH } from './battle-visuals'
 import { numberAssets } from './effects-map'
 import { numberGlyphs, glyphLayout } from './numbers'
 import { createGame, LABEL_STYLE, loadSheet } from './game'
@@ -65,8 +65,6 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
 const HUD = { margin: 12, portrait: 84, vsGap: 30, hpY: 22, hpH: 24, mpY: 52, mpH: 9 }
 /** Puts the weapon right above its body (body depths are pose start times in ms). */
 const WEAPON_ABOVE_BODY = 0.01
-/** Ultimate art goes over every body, its back layers behind them; texts and HUD stay on top. */
-const DEPTH = { background: -2, overlayBack: -1, overlay: 1e6, ui: 2e6 }
 
 /** Stacks texts that appear close together over the same fighter. */
 function textSlots(texts: FloatText[]) {
