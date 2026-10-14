@@ -2,7 +2,15 @@
 // docs/original-data/quests-items.md. Progress is one count per sub-task, indexed by SetpSeq.
 import type { Random } from '@pockie/game-core'
 import type { QuestRewards, RewardItem } from '@pockie/shared'
-import { itemNameKey, npcOfferedTaskIds, subTasks, task, taskMonsterDrops } from './data.js'
+import {
+  itemNameKey,
+  npcOfferedTaskIds,
+  scene,
+  sceneSpawns,
+  subTasks,
+  task,
+  taskMonsterDrops,
+} from './data.js'
 
 export interface QuestProgress {
   taskId: number
@@ -17,6 +25,61 @@ const COLLECT = 1
 const ACTIVE = 0
 const READY = 1
 
+/** Reborn rows use Fire-village coordinates as their canonical low-level band. */
+export const isRebornQuest = (id: number) =>
+  (id >= 820001 && id <= 820022) || (id >= 830001 && id <= 830118)
+
+export function rebornLocation(taskId: number, sceneId: number, npcId: string, nation: number) {
+  if (!isRebornQuest(taskId)) return { sceneId, npcId }
+  const villages = [111, 121, 151, 141, 131]
+  const fields = [2100, 2200, 2500, 2400, 2300]
+  const village = villages[nation]
+  const field = fields[nation]
+  if (village === undefined || field === undefined) return { sceneId, npcId }
+  if (sceneId === 111) {
+    return { sceneId: village, npcId: npcId.replace(/^n110/, `n${Math.floor(village / 10)}0`) }
+  }
+  if (sceneId >= 2101 && sceneId <= 2103) {
+    const localScene = field + sceneId - 2100
+    const localSpawns = sceneSpawns(localScene)
+    let localNpc = npcId.replace(/^n210/, `n${field / 100}0`)
+    // Each village has a few different creatures in matching field-roster slots.
+    if (!localSpawns.some((spawn) => spawn.id === localNpc)) {
+      const slot = sceneSpawns(sceneId).findIndex((spawn) => spawn.id === npcId)
+      localNpc = localSpawns[slot]?.id ?? localNpc
+    }
+    return { sceneId: localScene, npcId: localNpc }
+  }
+  return { sceneId, npcId }
+}
+
+/** Character-local quest giver for acceptance or hand-in; original rows are unchanged. */
+export function questLocation(taskId: number, nation: number, phase: 'accept' | 'submit') {
+  const row = task(taskId)!
+  return rebornLocation(
+    taskId,
+    Number(phase === 'accept' ? row.AcceptNpcSceneID : row.SubmitNpcSceneID),
+    String(phase === 'accept' ? row.AcceptNpcConfig : row.SubmitNpcConfig),
+    nation,
+  )
+}
+
+/** Navigation sent with Reborn quests, independent of the original client's static step table. */
+export function questNavigation(quest: QuestProgress, nation: number) {
+  if (!isRebornQuest(quest.taskId)) return undefined
+  if (quest.state === READY) return questLocation(quest.taskId, nation, 'submit')
+  const step = subTasks(quest.taskId).find(
+    (step) => (quest.progress[Number(step.SetpSeq)] ?? 0) < stepTarget(step),
+  )
+  if (!step || Number(step.SubTaskType) === COMMAND) return {}
+  return rebornLocation(
+    quest.taskId,
+    Number(step.SubmitSceneID),
+    String(step.TargetConfiger),
+    nation,
+  )
+}
+
 /** CommandRule zero-count rows are completion flags: one matching command completes them. */
 export const stepTarget = (step: ReturnType<typeof subTasks>[number]) =>
   Number(step.SubTaskType) === COMMAND
@@ -28,7 +91,7 @@ const isComplete = (taskId: number, progress: number[]) =>
 
 function advance(
   quests: QuestProgress[],
-  matches: (step: ReturnType<typeof subTasks>[number]) => boolean,
+  matches: (step: ReturnType<typeof subTasks>[number], taskId: number) => boolean,
 ): QuestProgress[] {
   const changed: QuestProgress[] = []
   for (const quest of quests) {
@@ -38,7 +101,7 @@ function advance(
     for (const step of subTasks(quest.taskId)) {
       const index = Number(step.SetpSeq)
       const target = stepTarget(step)
-      if (matches(step) && (progress[index] ?? 0) < target) {
+      if (matches(step, quest.taskId) && (progress[index] ?? 0) < target) {
         progress[index] = (progress[index] ?? 0) + 1
         touched = true
       }
@@ -54,17 +117,23 @@ function advance(
   return changed
 }
 
-const inScene = (step: ReturnType<typeof subTasks>[number], sceneId: number) =>
-  Number(step.SubmitSceneID) === sceneId || Number(step.SubmitSceneID) === -1
+const localLocation = (taskId: number, sceneId: number, npcId: string, actualScene: number) =>
+  rebornLocation(taskId, sceneId, npcId, Number(scene(actualScene)?.Nation ?? -1))
+
+const inScene = (step: ReturnType<typeof subTasks>[number], sceneId: number, taskId: number) =>
+  Number(step.SubmitSceneID) === -1 ||
+  localLocation(taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), sceneId)
+    .sceneId === sceneId
 
 /** A monster kill counts for active kill steps targeting it in this scene. */
 export function recordKill(quests: QuestProgress[], monsterId: string, sceneId: number) {
   return advance(
     quests,
-    (step) =>
+    (step, taskId) =>
       Number(step.SubTaskType) === KILL &&
-      step.TargetConfiger === monsterId &&
-      inScene(step, sceneId),
+      localLocation(taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), sceneId)
+        .npcId === monsterId &&
+      inScene(step, sceneId, taskId),
   )
 }
 
@@ -91,8 +160,10 @@ export function questItemDrops(
       const wanted = open.some((step) => step.TargetItem === drop.TaskItemConfig)
       if (
         wanted &&
-        drop.MonsterConfig === monsterId &&
-        Number(drop.SceneID) === sceneId &&
+        localLocation(quest.taskId, Number(drop.SceneID), String(drop.MonsterConfig), sceneId)
+          .npcId === monsterId &&
+        localLocation(quest.taskId, Number(drop.SceneID), String(drop.MonsterConfig), sceneId)
+          .sceneId === sceneId &&
         random.int(100) < Number(drop.DropProbability) * chanceMul
       ) {
         items.push(String(drop.TaskItemConfig))
@@ -116,8 +187,11 @@ const TALK = 3
 export function recordTalk(quests: QuestProgress[], npcId: string, sceneId: number) {
   return advance(
     quests,
-    (step) =>
-      Number(step.SubTaskType) === TALK && step.TargetConfiger === npcId && inScene(step, sceneId),
+    (step, taskId) =>
+      Number(step.SubTaskType) === TALK &&
+      localLocation(taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), sceneId)
+        .npcId === npcId &&
+      inScene(step, sceneId, taskId),
   )
 }
 
@@ -142,6 +216,17 @@ export const EQUIP_WEAPON_COMMAND = 8887
 /** Sent by RoleUseSystem.OnCustomBuy after a pouch refill purchase. */
 export const BUY_POUCH_COMMAND = 2118
 
+/** Reborn hooks: emit once after a successful action, inside its character transaction.
+ * Arena counts a completed fight (win or loss); Las Noches counts a cleared floor;
+ * bloodline counts the first unlock, not activation or subsequent gift turn-ins.
+ */
+export const REBORN_IDENTIFY_COMMAND = 82001
+export const REBORN_ENHANCE_COMMAND = 82002
+export const REBORN_INSCRIBE_COMMAND = 82003
+export const REBORN_ARENA_FIGHT_COMMAND = 82004
+export const REBORN_LAS_NOCHES_FLOOR_COMMAND = 82005
+export const REBORN_BLOODLINE_UNLOCK_COMMAND = 82006
+
 /** What the player does for a rookie command step, for the client to point at (bag, weapon). */
 export function stepCommand(step: ReturnType<typeof subTasks>[number]) {
   if (Number(step.SubTaskType) !== COMMAND) return {}
@@ -161,11 +246,11 @@ export function recordCommand(
 ) {
   return advance(
     quests,
-    (step) =>
+    (step, taskId) =>
       Number(step.SubTaskType) === COMMAND &&
       Number(step.TargetCondition) === command &&
       (!String(step.TargetItem).startsWith('i') || step.TargetItem === itemId) &&
-      inScene(step, sceneId),
+      inScene(step, sceneId, taskId),
   )
 }
 
@@ -212,8 +297,7 @@ export function availableQuests(
       const row = task(taskId)!
       return {
         taskId,
-        npcId: String(row.AcceptNpcConfig),
-        sceneId: Number(row.AcceptNpcSceneID),
+        ...questLocation(taskId, character.nation, 'accept'),
         nameKey: `lg_Task_${taskId}`,
         talkKey: row.StartNpcMessageID ? `lg_${String(row.StartNpcMessageID)}` : null,
         rewards: questRewards(taskId),

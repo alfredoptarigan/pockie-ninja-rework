@@ -1,0 +1,98 @@
+{
+  "830005": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33006",
+      "SceneID": 2101,
+      "TaskItemConfig": "i140006"
+    }
+  ],
+  "830015": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33008",
+      "SceneID": 2102,
+      "TaskItemConfig": "i140008"
+    }
+  ],
+  "830017": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33008",
+      "SceneID": 2102,
+      "TaskItemConfig": "i140008"
+    }
+  ],
+  "830026": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33019",
+      "SceneID": 2103,
+      "TaskItemConfig": "i140031"
+    }
+  ],
+  "830029": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33019",
+      "SceneID": 2103,
+      "TaskItemConfig": "i140031"
+    }
+  ],
+  "830033": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33005",
+      "SceneID": 2605,
+      "TaskItemConfig": "i140039"
+    }
+  ],
+  "830036": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33005",
+      "SceneID": 2605,
+      "TaskItemConfig": "i140039"
+    }
+  ],
+  "830051": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33012",
+      "SceneID": 2603,
+      "TaskItemConfig": "i140012"
+    }
+  ],
+  "830057": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33012",
+      "SceneID": 2603,
+      "TaskItemConfig": "i140012"
+    }
+  ],
+  "830076": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33035",
+      "SceneID": 2701,
+      "TaskItemConfig": "i140063"
+    }
+  ],
+  "830092": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33031",
+      "SceneID": 2703,
+      "TaskItemConfig": "i140005"
+    }
+  ],
+  "830106": [
+    {
+      "DropProbability": 85,
+      "MonsterConfig": "n33043",
+      "SceneID": 2704,
+      "TaskItemConfig": "i140071"
+    }
+  ]
+}
