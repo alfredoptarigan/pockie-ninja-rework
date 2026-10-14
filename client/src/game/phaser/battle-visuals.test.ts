@@ -62,7 +62,7 @@ function fixture() {
         maxHp: 100,
         startHp: 100,
         hp: 100,
-        pet: { avatar: 10003 },
+        pet: { avatar: 10003, species: 'pet' },
         look: { wingSprite: 'wing_duotian_3', aura: 'ki_lightning' },
       },
     ],
@@ -93,7 +93,7 @@ describe('battle cosmetic rendering', () => {
   })
   it('draws no pet when its icon-only entry has no atlas', () => {
     const f = fixture()
-    f.replay.fighters[0]!.pet = { avatar: 10052 }
+    f.replay.fighters[0]!.pet = { avatar: 10052, species: 'pet' }
     f.replay.fighters[0]!.look = {}
     const visuals = new BattleVisuals(f.scene, f.replay, f.timeline)
     visuals.preload()

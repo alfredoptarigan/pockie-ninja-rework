@@ -14,7 +14,7 @@ export interface AtlasAsset {
   fps?: number
 }
 export interface CompanionLook {
-  pet?: { avatar: number; species?: string }
+  pet?: { avatar: number; species: string }
   wingSprite?: string
   wing?: string
   aura?: string
