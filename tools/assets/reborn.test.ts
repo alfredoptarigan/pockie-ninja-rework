@@ -29,9 +29,13 @@ describe('reborn asset import', () => {
       entry('skill-effect', '1831', 'entities/skills/core/1831-0.png'),
       entry('npc', '81044', 'icons/npc/81044.png'),
       entry('event', 'tailedBeast', 'scenes/tailedBeast/beast-1.png'),
+      entry('avatar-ui', '120', 'poses/120.png'),
+      entry('skill-icon', '1808', 'icons/skills/1808.png'),
     ]
     const excluded = [
       entry('avatar-secret-technique', '121', 'entities/avatars/121/secret.json'),
+      entry('avatar-ui', '121', 'poses/121.png'),
+      entry('avatar-ui', '56', 'portraits/56.png'),
       entry('avatar', '1', 'entities/avatars/1/avatar.json'),
       entry('avatar-weapon', '1', 'entities/avatars/1/weapons/1.json'),
       entry('skill-effect', 'balsam', 'entities/skills/core/balsam.png'),

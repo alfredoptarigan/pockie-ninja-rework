@@ -15605,6 +15605,36 @@
     "id": "soul-9",
     "bytes": 758
   },
+  "icons/items/cards/item/1.png": {
+    "url": "/assets/reborn/icons/items/cards/item/1.webp",
+    "category": "item-icon",
+    "id": "171001",
+    "bytes": 670
+  },
+  "icons/items/cards/item/2.png": {
+    "url": "/assets/reborn/icons/items/cards/item/2.webp",
+    "category": "item-icon",
+    "id": "171002",
+    "bytes": 676
+  },
+  "icons/items/cards/item/3.png": {
+    "url": "/assets/reborn/icons/items/cards/item/3.webp",
+    "category": "item-icon",
+    "id": "171003",
+    "bytes": 672
+  },
+  "icons/items/cards/item/4.png": {
+    "url": "/assets/reborn/icons/items/cards/item/4.webp",
+    "category": "item-icon",
+    "id": "171004",
+    "bytes": 686
+  },
+  "icons/items/cards/item/5.png": {
+    "url": "/assets/reborn/icons/items/cards/item/5.webp",
+    "category": "item-icon",
+    "id": "171005",
+    "bytes": 706
+  },
   "icons/items/etc/360109.png": {
     "url": "/assets/reborn/icons/items/etc/360109.webp",
     "category": "item-icon",
@@ -16055,6 +16085,24 @@
     "id": "10000",
     "bytes": 562
   },
+  "icons/skills/10002.png": {
+    "url": "/assets/reborn/icons/skills/10002.webp",
+    "category": "skill-icon",
+    "id": "10002",
+    "bytes": 554
+  },
+  "icons/skills/1802.png": {
+    "url": "/assets/reborn/icons/skills/1802.webp",
+    "category": "skill-icon",
+    "id": "1802",
+    "bytes": 450
+  },
+  "icons/skills/1803.png": {
+    "url": "/assets/reborn/icons/skills/1803.webp",
+    "category": "skill-icon",
+    "id": "1803",
+    "bytes": 594
+  },
   "icons/skills/18041.png": {
     "url": "/assets/reborn/icons/skills/18041.webp",
     "category": "skill-icon",
@@ -16091,17 +16139,125 @@
     "id": "18046",
     "bytes": 392
   },
+  "icons/skills/1805.png": {
+    "url": "/assets/reborn/icons/skills/1805.webp",
+    "category": "skill-icon",
+    "id": "1805",
+    "bytes": 460
+  },
+  "icons/skills/1807.png": {
+    "url": "/assets/reborn/icons/skills/1807.webp",
+    "category": "skill-icon",
+    "id": "1807",
+    "bytes": 554
+  },
+  "icons/skills/1808.png": {
+    "url": "/assets/reborn/icons/skills/1808.webp",
+    "category": "skill-icon",
+    "id": "1808",
+    "bytes": 490
+  },
+  "icons/skills/1809.png": {
+    "url": "/assets/reborn/icons/skills/1809.webp",
+    "category": "skill-icon",
+    "id": "1809",
+    "bytes": 480
+  },
   "icons/skills/18091.png": {
     "url": "/assets/reborn/icons/skills/18091.webp",
     "category": "skill-icon",
     "id": "18091",
     "bytes": 304
   },
+  "icons/skills/1810.png": {
+    "url": "/assets/reborn/icons/skills/1810.webp",
+    "category": "skill-icon",
+    "id": "1810",
+    "bytes": 524
+  },
+  "icons/skills/1813.png": {
+    "url": "/assets/reborn/icons/skills/1813.webp",
+    "category": "skill-icon",
+    "id": "1813",
+    "bytes": 512
+  },
+  "icons/skills/1814.png": {
+    "url": "/assets/reborn/icons/skills/1814.webp",
+    "category": "skill-icon",
+    "id": "1814",
+    "bytes": 518
+  },
+  "icons/skills/1815.png": {
+    "url": "/assets/reborn/icons/skills/1815.webp",
+    "category": "skill-icon",
+    "id": "1815",
+    "bytes": 480
+  },
+  "icons/skills/1816.png": {
+    "url": "/assets/reborn/icons/skills/1816.webp",
+    "category": "skill-icon",
+    "id": "1816",
+    "bytes": 576
+  },
+  "icons/skills/1822.png": {
+    "url": "/assets/reborn/icons/skills/1822.webp",
+    "category": "skill-icon",
+    "id": "1822",
+    "bytes": 630
+  },
+  "icons/skills/1823.png": {
+    "url": "/assets/reborn/icons/skills/1823.webp",
+    "category": "skill-icon",
+    "id": "1823",
+    "bytes": 526
+  },
+  "icons/skills/1825.png": {
+    "url": "/assets/reborn/icons/skills/1825.webp",
+    "category": "skill-icon",
+    "id": "1825",
+    "bytes": 530
+  },
+  "icons/skills/1826.png": {
+    "url": "/assets/reborn/icons/skills/1826.webp",
+    "category": "skill-icon",
+    "id": "1826",
+    "bytes": 496
+  },
+  "icons/skills/1827.png": {
+    "url": "/assets/reborn/icons/skills/1827.webp",
+    "category": "skill-icon",
+    "id": "1827",
+    "bytes": 584
+  },
+  "icons/skills/1828.png": {
+    "url": "/assets/reborn/icons/skills/1828.webp",
+    "category": "skill-icon",
+    "id": "1828",
+    "bytes": 452
+  },
+  "icons/skills/1829.png": {
+    "url": "/assets/reborn/icons/skills/1829.webp",
+    "category": "skill-icon",
+    "id": "1829",
+    "bytes": 604
+  },
+  "icons/skills/1830.png": {
+    "url": "/assets/reborn/icons/skills/1830.webp",
+    "category": "skill-icon",
+    "id": "1830",
+    "bytes": 536
+  },
   "icons/skills/1831.png": {
     "url": "/assets/reborn/icons/skills/1831.webp",
     "category": "skill-icon",
     "id": "1831",
     "bytes": 398
+  },
+  "icons/skills/1832.png": {
+    "url": "/assets/reborn/icons/skills/1832.webp",
+    "category": "skill-icon",
+    "id": "1832",
+    "bytes": 596
   },
   "icons/skills/1833.png": {
     "url": "/assets/reborn/icons/skills/1833.webp",
@@ -16126,6 +16282,990 @@
     "category": "skill-icon",
     "id": "1836",
     "bytes": 416
+  },
+  "icons/skills/1839.png": {
+    "url": "/assets/reborn/icons/skills/1839.webp",
+    "category": "skill-icon",
+    "id": "1839",
+    "bytes": 514
+  },
+  "icons/skills/2000.png": {
+    "url": "/assets/reborn/icons/skills/2000.webp",
+    "category": "skill-icon",
+    "id": "2000",
+    "bytes": 518
+  },
+  "icons/skills/2001.png": {
+    "url": "/assets/reborn/icons/skills/2001.webp",
+    "category": "skill-icon",
+    "id": "2001",
+    "bytes": 518
+  },
+  "icons/skills/2002.png": {
+    "url": "/assets/reborn/icons/skills/2002.webp",
+    "category": "skill-icon",
+    "id": "2002",
+    "bytes": 518
+  },
+  "icons/skills/2010.png": {
+    "url": "/assets/reborn/icons/skills/2010.webp",
+    "category": "skill-icon",
+    "id": "2010",
+    "bytes": 520
+  },
+  "icons/skills/2011.png": {
+    "url": "/assets/reborn/icons/skills/2011.webp",
+    "category": "skill-icon",
+    "id": "2011",
+    "bytes": 520
+  },
+  "icons/skills/2012.png": {
+    "url": "/assets/reborn/icons/skills/2012.webp",
+    "category": "skill-icon",
+    "id": "2012",
+    "bytes": 520
+  },
+  "icons/skills/2020.png": {
+    "url": "/assets/reborn/icons/skills/2020.webp",
+    "category": "skill-icon",
+    "id": "2020",
+    "bytes": 524
+  },
+  "icons/skills/2021.png": {
+    "url": "/assets/reborn/icons/skills/2021.webp",
+    "category": "skill-icon",
+    "id": "2021",
+    "bytes": 524
+  },
+  "icons/skills/2022.png": {
+    "url": "/assets/reborn/icons/skills/2022.webp",
+    "category": "skill-icon",
+    "id": "2022",
+    "bytes": 524
+  },
+  "icons/skills/2030.png": {
+    "url": "/assets/reborn/icons/skills/2030.webp",
+    "category": "skill-icon",
+    "id": "2030",
+    "bytes": 548
+  },
+  "icons/skills/2031.png": {
+    "url": "/assets/reborn/icons/skills/2031.webp",
+    "category": "skill-icon",
+    "id": "2031",
+    "bytes": 548
+  },
+  "icons/skills/2032.png": {
+    "url": "/assets/reborn/icons/skills/2032.webp",
+    "category": "skill-icon",
+    "id": "2032",
+    "bytes": 548
+  },
+  "icons/skills/2040.png": {
+    "url": "/assets/reborn/icons/skills/2040.webp",
+    "category": "skill-icon",
+    "id": "2040",
+    "bytes": 544
+  },
+  "icons/skills/2041.png": {
+    "url": "/assets/reborn/icons/skills/2041.webp",
+    "category": "skill-icon",
+    "id": "2041",
+    "bytes": 544
+  },
+  "icons/skills/2042.png": {
+    "url": "/assets/reborn/icons/skills/2042.webp",
+    "category": "skill-icon",
+    "id": "2042",
+    "bytes": 544
+  },
+  "icons/skills/2050.png": {
+    "url": "/assets/reborn/icons/skills/2050.webp",
+    "category": "skill-icon",
+    "id": "2050",
+    "bytes": 516
+  },
+  "icons/skills/2051.png": {
+    "url": "/assets/reborn/icons/skills/2051.webp",
+    "category": "skill-icon",
+    "id": "2051",
+    "bytes": 516
+  },
+  "icons/skills/2052.png": {
+    "url": "/assets/reborn/icons/skills/2052.webp",
+    "category": "skill-icon",
+    "id": "2052",
+    "bytes": 516
+  },
+  "icons/skills/2060.png": {
+    "url": "/assets/reborn/icons/skills/2060.webp",
+    "category": "skill-icon",
+    "id": "2060",
+    "bytes": 438
+  },
+  "icons/skills/2061.png": {
+    "url": "/assets/reborn/icons/skills/2061.webp",
+    "category": "skill-icon",
+    "id": "2061",
+    "bytes": 438
+  },
+  "icons/skills/2062.png": {
+    "url": "/assets/reborn/icons/skills/2062.webp",
+    "category": "skill-icon",
+    "id": "2062",
+    "bytes": 438
+  },
+  "icons/skills/2070.png": {
+    "url": "/assets/reborn/icons/skills/2070.webp",
+    "category": "skill-icon",
+    "id": "2070",
+    "bytes": 600
+  },
+  "icons/skills/2071.png": {
+    "url": "/assets/reborn/icons/skills/2071.webp",
+    "category": "skill-icon",
+    "id": "2071",
+    "bytes": 600
+  },
+  "icons/skills/2072.png": {
+    "url": "/assets/reborn/icons/skills/2072.webp",
+    "category": "skill-icon",
+    "id": "2072",
+    "bytes": 600
+  },
+  "icons/skills/2080.png": {
+    "url": "/assets/reborn/icons/skills/2080.webp",
+    "category": "skill-icon",
+    "id": "2080",
+    "bytes": 552
+  },
+  "icons/skills/2081.png": {
+    "url": "/assets/reborn/icons/skills/2081.webp",
+    "category": "skill-icon",
+    "id": "2081",
+    "bytes": 552
+  },
+  "icons/skills/2082.png": {
+    "url": "/assets/reborn/icons/skills/2082.webp",
+    "category": "skill-icon",
+    "id": "2082",
+    "bytes": 552
+  },
+  "icons/skills/2090.png": {
+    "url": "/assets/reborn/icons/skills/2090.webp",
+    "category": "skill-icon",
+    "id": "2090",
+    "bytes": 458
+  },
+  "icons/skills/2091.png": {
+    "url": "/assets/reborn/icons/skills/2091.webp",
+    "category": "skill-icon",
+    "id": "2091",
+    "bytes": 458
+  },
+  "icons/skills/2092.png": {
+    "url": "/assets/reborn/icons/skills/2092.webp",
+    "category": "skill-icon",
+    "id": "2092",
+    "bytes": 458
+  },
+  "icons/skills/21001.png": {
+    "url": "/assets/reborn/icons/skills/21001.webp",
+    "category": "skill-icon",
+    "id": "21001",
+    "bytes": 528
+  },
+  "icons/skills/2800.png": {
+    "url": "/assets/reborn/icons/skills/2800.webp",
+    "category": "skill-icon",
+    "id": "2800",
+    "bytes": 518
+  },
+  "icons/skills/2801.png": {
+    "url": "/assets/reborn/icons/skills/2801.webp",
+    "category": "skill-icon",
+    "id": "2801",
+    "bytes": 520
+  },
+  "icons/skills/2802.png": {
+    "url": "/assets/reborn/icons/skills/2802.webp",
+    "category": "skill-icon",
+    "id": "2802",
+    "bytes": 524
+  },
+  "icons/skills/2803.png": {
+    "url": "/assets/reborn/icons/skills/2803.webp",
+    "category": "skill-icon",
+    "id": "2803",
+    "bytes": 548
+  },
+  "icons/skills/2804.png": {
+    "url": "/assets/reborn/icons/skills/2804.webp",
+    "category": "skill-icon",
+    "id": "2804",
+    "bytes": 544
+  },
+  "icons/skills/2805.png": {
+    "url": "/assets/reborn/icons/skills/2805.webp",
+    "category": "skill-icon",
+    "id": "2805",
+    "bytes": 516
+  },
+  "icons/skills/2806.png": {
+    "url": "/assets/reborn/icons/skills/2806.webp",
+    "category": "skill-icon",
+    "id": "2806",
+    "bytes": 600
+  },
+  "icons/skills/2807.png": {
+    "url": "/assets/reborn/icons/skills/2807.webp",
+    "category": "skill-icon",
+    "id": "2807",
+    "bytes": 576
+  },
+  "icons/skills/2808.png": {
+    "url": "/assets/reborn/icons/skills/2808.webp",
+    "category": "skill-icon",
+    "id": "2808",
+    "bytes": 552
+  },
+  "icons/skills/2809.png": {
+    "url": "/assets/reborn/icons/skills/2809.webp",
+    "category": "skill-icon",
+    "id": "2809",
+    "bytes": 626
+  },
+  "icons/skills/3802.png": {
+    "url": "/assets/reborn/icons/skills/3802.webp",
+    "category": "skill-icon",
+    "id": "3802",
+    "bytes": 522
+  },
+  "icons/skills/3803.png": {
+    "url": "/assets/reborn/icons/skills/3803.webp",
+    "category": "skill-icon",
+    "id": "3803",
+    "bytes": 354
+  },
+  "icons/skills/3804.png": {
+    "url": "/assets/reborn/icons/skills/3804.webp",
+    "category": "skill-icon",
+    "id": "3804",
+    "bytes": 528
+  },
+  "icons/skills/3805.png": {
+    "url": "/assets/reborn/icons/skills/3805.webp",
+    "category": "skill-icon",
+    "id": "3805",
+    "bytes": 550
+  },
+  "icons/skills/3806.png": {
+    "url": "/assets/reborn/icons/skills/3806.webp",
+    "category": "skill-icon",
+    "id": "3806",
+    "bytes": 568
+  },
+  "icons/skills/3807.png": {
+    "url": "/assets/reborn/icons/skills/3807.webp",
+    "category": "skill-icon",
+    "id": "3807",
+    "bytes": 502
+  },
+  "icons/skills/3810.png": {
+    "url": "/assets/reborn/icons/skills/3810.webp",
+    "category": "skill-icon",
+    "id": "3810",
+    "bytes": 488
+  },
+  "icons/skills/3811.png": {
+    "url": "/assets/reborn/icons/skills/3811.webp",
+    "category": "skill-icon",
+    "id": "3811",
+    "bytes": 494
+  },
+  "icons/skills/3812.png": {
+    "url": "/assets/reborn/icons/skills/3812.webp",
+    "category": "skill-icon",
+    "id": "3812",
+    "bytes": 614
+  },
+  "icons/skills/3813.png": {
+    "url": "/assets/reborn/icons/skills/3813.webp",
+    "category": "skill-icon",
+    "id": "3813",
+    "bytes": 484
+  },
+  "icons/skills/3814.png": {
+    "url": "/assets/reborn/icons/skills/3814.webp",
+    "category": "skill-icon",
+    "id": "3814",
+    "bytes": 496
+  },
+  "icons/skills/3815.png": {
+    "url": "/assets/reborn/icons/skills/3815.webp",
+    "category": "skill-icon",
+    "id": "3815",
+    "bytes": 454
+  },
+  "icons/skills/3819.png": {
+    "url": "/assets/reborn/icons/skills/3819.webp",
+    "category": "skill-icon",
+    "id": "3819",
+    "bytes": 572
+  },
+  "icons/skills/3820.png": {
+    "url": "/assets/reborn/icons/skills/3820.webp",
+    "category": "skill-icon",
+    "id": "3820",
+    "bytes": 630
+  },
+  "icons/skills/3821.png": {
+    "url": "/assets/reborn/icons/skills/3821.webp",
+    "category": "skill-icon",
+    "id": "3821",
+    "bytes": 540
+  },
+  "icons/skills/3822.png": {
+    "url": "/assets/reborn/icons/skills/3822.webp",
+    "category": "skill-icon",
+    "id": "3822",
+    "bytes": 560
+  },
+  "icons/skills/3825.png": {
+    "url": "/assets/reborn/icons/skills/3825.webp",
+    "category": "skill-icon",
+    "id": "3825",
+    "bytes": 506
+  },
+  "icons/skills/3826.png": {
+    "url": "/assets/reborn/icons/skills/3826.webp",
+    "category": "skill-icon",
+    "id": "3826",
+    "bytes": 594
+  },
+  "icons/skills/3827.png": {
+    "url": "/assets/reborn/icons/skills/3827.webp",
+    "category": "skill-icon",
+    "id": "3827",
+    "bytes": 502
+  },
+  "icons/skills/40001.png": {
+    "url": "/assets/reborn/icons/skills/40001.webp",
+    "category": "skill-icon",
+    "id": "40001",
+    "bytes": 464
+  },
+  "icons/skills/40043.png": {
+    "url": "/assets/reborn/icons/skills/40043.webp",
+    "category": "skill-icon",
+    "id": "40043",
+    "bytes": 560
+  },
+  "icons/skills/40044.png": {
+    "url": "/assets/reborn/icons/skills/40044.webp",
+    "category": "skill-icon",
+    "id": "40044",
+    "bytes": 506
+  },
+  "icons/skills/40045.png": {
+    "url": "/assets/reborn/icons/skills/40045.webp",
+    "category": "skill-icon",
+    "id": "40045",
+    "bytes": 408
+  },
+  "icons/skills/40046.png": {
+    "url": "/assets/reborn/icons/skills/40046.webp",
+    "category": "skill-icon",
+    "id": "40046",
+    "bytes": 488
+  },
+  "icons/skills/40047.png": {
+    "url": "/assets/reborn/icons/skills/40047.webp",
+    "category": "skill-icon",
+    "id": "40047",
+    "bytes": 482
+  },
+  "icons/skills/40048.png": {
+    "url": "/assets/reborn/icons/skills/40048.webp",
+    "category": "skill-icon",
+    "id": "40048",
+    "bytes": 556
+  },
+  "icons/skills/40049.png": {
+    "url": "/assets/reborn/icons/skills/40049.webp",
+    "category": "skill-icon",
+    "id": "40049",
+    "bytes": 450
+  },
+  "icons/skills/40050.png": {
+    "url": "/assets/reborn/icons/skills/40050.webp",
+    "category": "skill-icon",
+    "id": "40050",
+    "bytes": 494
+  },
+  "icons/skills/40051.png": {
+    "url": "/assets/reborn/icons/skills/40051.webp",
+    "category": "skill-icon",
+    "id": "40051",
+    "bytes": 494
+  },
+  "icons/skills/40052.png": {
+    "url": "/assets/reborn/icons/skills/40052.webp",
+    "category": "skill-icon",
+    "id": "40052",
+    "bytes": 518
+  },
+  "icons/skills/40053.png": {
+    "url": "/assets/reborn/icons/skills/40053.webp",
+    "category": "skill-icon",
+    "id": "40053",
+    "bytes": 520
+  },
+  "icons/skills/40054.png": {
+    "url": "/assets/reborn/icons/skills/40054.webp",
+    "category": "skill-icon",
+    "id": "40054",
+    "bytes": 524
+  },
+  "icons/skills/40055.png": {
+    "url": "/assets/reborn/icons/skills/40055.webp",
+    "category": "skill-icon",
+    "id": "40055",
+    "bytes": 544
+  },
+  "icons/skills/40056.png": {
+    "url": "/assets/reborn/icons/skills/40056.webp",
+    "category": "skill-icon",
+    "id": "40056",
+    "bytes": 548
+  },
+  "icons/skills/40106.png": {
+    "url": "/assets/reborn/icons/skills/40106.webp",
+    "category": "skill-icon",
+    "id": "40106",
+    "bytes": 500
+  },
+  "icons/skills/40166.png": {
+    "url": "/assets/reborn/icons/skills/40166.webp",
+    "category": "skill-icon",
+    "id": "40166",
+    "bytes": 594
+  },
+  "icons/skills/50002.png": {
+    "url": "/assets/reborn/icons/skills/50002.webp",
+    "category": "skill-icon",
+    "id": "50002",
+    "bytes": 550
+  },
+  "icons/skills/50003.png": {
+    "url": "/assets/reborn/icons/skills/50003.webp",
+    "category": "skill-icon",
+    "id": "50003",
+    "bytes": 494
+  },
+  "icons/skills/50004.png": {
+    "url": "/assets/reborn/icons/skills/50004.webp",
+    "category": "skill-icon",
+    "id": "50004",
+    "bytes": 534
+  },
+  "icons/skills/50005.png": {
+    "url": "/assets/reborn/icons/skills/50005.webp",
+    "category": "skill-icon",
+    "id": "50005",
+    "bytes": 460
+  },
+  "icons/skills/50006.png": {
+    "url": "/assets/reborn/icons/skills/50006.webp",
+    "category": "skill-icon",
+    "id": "50006",
+    "bytes": 426
+  },
+  "icons/skills/50007.png": {
+    "url": "/assets/reborn/icons/skills/50007.webp",
+    "category": "skill-icon",
+    "id": "50007",
+    "bytes": 550
+  },
+  "icons/skills/50008.png": {
+    "url": "/assets/reborn/icons/skills/50008.webp",
+    "category": "skill-icon",
+    "id": "50008",
+    "bytes": 494
+  },
+  "icons/skills/50009.png": {
+    "url": "/assets/reborn/icons/skills/50009.webp",
+    "category": "skill-icon",
+    "id": "50009",
+    "bytes": 524
+  },
+  "icons/skills/50010.png": {
+    "url": "/assets/reborn/icons/skills/50010.webp",
+    "category": "skill-icon",
+    "id": "50010",
+    "bytes": 470
+  },
+  "icons/skills/50011.png": {
+    "url": "/assets/reborn/icons/skills/50011.webp",
+    "category": "skill-icon",
+    "id": "50011",
+    "bytes": 528
+  },
+  "icons/skills/50012.png": {
+    "url": "/assets/reborn/icons/skills/50012.webp",
+    "category": "skill-icon",
+    "id": "50012",
+    "bytes": 584
+  },
+  "icons/skills/50013.png": {
+    "url": "/assets/reborn/icons/skills/50013.webp",
+    "category": "skill-icon",
+    "id": "50013",
+    "bytes": 560
+  },
+  "icons/skills/50014.png": {
+    "url": "/assets/reborn/icons/skills/50014.webp",
+    "category": "skill-icon",
+    "id": "50014",
+    "bytes": 574
+  },
+  "icons/skills/50015.png": {
+    "url": "/assets/reborn/icons/skills/50015.webp",
+    "category": "skill-icon",
+    "id": "50015",
+    "bytes": 522
+  },
+  "icons/skills/50016.png": {
+    "url": "/assets/reborn/icons/skills/50016.webp",
+    "category": "skill-icon",
+    "id": "50016",
+    "bytes": 486
+  },
+  "icons/skills/50017.png": {
+    "url": "/assets/reborn/icons/skills/50017.webp",
+    "category": "skill-icon",
+    "id": "50017",
+    "bytes": 386
+  },
+  "icons/skills/50019.png": {
+    "url": "/assets/reborn/icons/skills/50019.webp",
+    "category": "skill-icon",
+    "id": "50019",
+    "bytes": 472
+  },
+  "icons/skills/50020.png": {
+    "url": "/assets/reborn/icons/skills/50020.webp",
+    "category": "skill-icon",
+    "id": "50020",
+    "bytes": 498
+  },
+  "icons/skills/50021.png": {
+    "url": "/assets/reborn/icons/skills/50021.webp",
+    "category": "skill-icon",
+    "id": "50021",
+    "bytes": 402
+  },
+  "icons/skills/50022.png": {
+    "url": "/assets/reborn/icons/skills/50022.webp",
+    "category": "skill-icon",
+    "id": "50022",
+    "bytes": 502
+  },
+  "icons/skills/50023.png": {
+    "url": "/assets/reborn/icons/skills/50023.webp",
+    "category": "skill-icon",
+    "id": "50023",
+    "bytes": 540
+  },
+  "icons/skills/50024.png": {
+    "url": "/assets/reborn/icons/skills/50024.webp",
+    "category": "skill-icon",
+    "id": "50024",
+    "bytes": 470
+  },
+  "icons/skills/50025.png": {
+    "url": "/assets/reborn/icons/skills/50025.webp",
+    "category": "skill-icon",
+    "id": "50025",
+    "bytes": 520
+  },
+  "icons/skills/50026.png": {
+    "url": "/assets/reborn/icons/skills/50026.webp",
+    "category": "skill-icon",
+    "id": "50026",
+    "bytes": 496
+  },
+  "icons/skills/50027.png": {
+    "url": "/assets/reborn/icons/skills/50027.webp",
+    "category": "skill-icon",
+    "id": "50027",
+    "bytes": 478
+  },
+  "icons/skills/50028.png": {
+    "url": "/assets/reborn/icons/skills/50028.webp",
+    "category": "skill-icon",
+    "id": "50028",
+    "bytes": 432
+  },
+  "icons/skills/50029.png": {
+    "url": "/assets/reborn/icons/skills/50029.webp",
+    "category": "skill-icon",
+    "id": "50029",
+    "bytes": 380
+  },
+  "icons/skills/50030.png": {
+    "url": "/assets/reborn/icons/skills/50030.webp",
+    "category": "skill-icon",
+    "id": "50030",
+    "bytes": 530
+  },
+  "icons/skills/50031.png": {
+    "url": "/assets/reborn/icons/skills/50031.webp",
+    "category": "skill-icon",
+    "id": "50031",
+    "bytes": 416
+  },
+  "icons/skills/50032.png": {
+    "url": "/assets/reborn/icons/skills/50032.webp",
+    "category": "skill-icon",
+    "id": "50032",
+    "bytes": 578
+  },
+  "icons/skills/50033.png": {
+    "url": "/assets/reborn/icons/skills/50033.webp",
+    "category": "skill-icon",
+    "id": "50033",
+    "bytes": 486
+  },
+  "icons/skills/50034.png": {
+    "url": "/assets/reborn/icons/skills/50034.webp",
+    "category": "skill-icon",
+    "id": "50034",
+    "bytes": 528
+  },
+  "icons/skills/50035.png": {
+    "url": "/assets/reborn/icons/skills/50035.webp",
+    "category": "skill-icon",
+    "id": "50035",
+    "bytes": 480
+  },
+  "icons/skills/50036.png": {
+    "url": "/assets/reborn/icons/skills/50036.webp",
+    "category": "skill-icon",
+    "id": "50036",
+    "bytes": 622
+  },
+  "icons/skills/50037.png": {
+    "url": "/assets/reborn/icons/skills/50037.webp",
+    "category": "skill-icon",
+    "id": "50037",
+    "bytes": 498
+  },
+  "icons/skills/50038.png": {
+    "url": "/assets/reborn/icons/skills/50038.webp",
+    "category": "skill-icon",
+    "id": "50038",
+    "bytes": 402
+  },
+  "icons/skills/50039.png": {
+    "url": "/assets/reborn/icons/skills/50039.webp",
+    "category": "skill-icon",
+    "id": "50039",
+    "bytes": 502
+  },
+  "icons/skills/50040.png": {
+    "url": "/assets/reborn/icons/skills/50040.webp",
+    "category": "skill-icon",
+    "id": "50040",
+    "bytes": 540
+  },
+  "icons/skills/50041.png": {
+    "url": "/assets/reborn/icons/skills/50041.webp",
+    "category": "skill-icon",
+    "id": "50041",
+    "bytes": 470
+  },
+  "icons/skills/50042.png": {
+    "url": "/assets/reborn/icons/skills/50042.webp",
+    "category": "skill-icon",
+    "id": "50042",
+    "bytes": 520
+  },
+  "icons/skills/50043.png": {
+    "url": "/assets/reborn/icons/skills/50043.webp",
+    "category": "skill-icon",
+    "id": "50043",
+    "bytes": 496
+  },
+  "icons/skills/50044.png": {
+    "url": "/assets/reborn/icons/skills/50044.webp",
+    "category": "skill-icon",
+    "id": "50044",
+    "bytes": 478
+  },
+  "icons/skills/50045.png": {
+    "url": "/assets/reborn/icons/skills/50045.webp",
+    "category": "skill-icon",
+    "id": "50045",
+    "bytes": 432
+  },
+  "icons/skills/50046.png": {
+    "url": "/assets/reborn/icons/skills/50046.webp",
+    "category": "skill-icon",
+    "id": "50046",
+    "bytes": 380
+  },
+  "icons/skills/50047.png": {
+    "url": "/assets/reborn/icons/skills/50047.webp",
+    "category": "skill-icon",
+    "id": "50047",
+    "bytes": 530
+  },
+  "icons/skills/50048.png": {
+    "url": "/assets/reborn/icons/skills/50048.webp",
+    "category": "skill-icon",
+    "id": "50048",
+    "bytes": 416
+  },
+  "icons/skills/50049.png": {
+    "url": "/assets/reborn/icons/skills/50049.webp",
+    "category": "skill-icon",
+    "id": "50049",
+    "bytes": 578
+  },
+  "icons/skills/50050.png": {
+    "url": "/assets/reborn/icons/skills/50050.webp",
+    "category": "skill-icon",
+    "id": "50050",
+    "bytes": 486
+  },
+  "icons/skills/50051.png": {
+    "url": "/assets/reborn/icons/skills/50051.webp",
+    "category": "skill-icon",
+    "id": "50051",
+    "bytes": 544
+  },
+  "icons/skills/50052.png": {
+    "url": "/assets/reborn/icons/skills/50052.webp",
+    "category": "skill-icon",
+    "id": "50052",
+    "bytes": 490
+  },
+  "icons/skills/50053.png": {
+    "url": "/assets/reborn/icons/skills/50053.webp",
+    "category": "skill-icon",
+    "id": "50053",
+    "bytes": 492
+  },
+  "icons/skills/50054.png": {
+    "url": "/assets/reborn/icons/skills/50054.webp",
+    "category": "skill-icon",
+    "id": "50054",
+    "bytes": 484
+  },
+  "icons/skills/50055.png": {
+    "url": "/assets/reborn/icons/skills/50055.webp",
+    "category": "skill-icon",
+    "id": "50055",
+    "bytes": 542
+  },
+  "icons/skills/50056.png": {
+    "url": "/assets/reborn/icons/skills/50056.webp",
+    "category": "skill-icon",
+    "id": "50056",
+    "bytes": 424
+  },
+  "icons/skills/50057.png": {
+    "url": "/assets/reborn/icons/skills/50057.webp",
+    "category": "skill-icon",
+    "id": "50057",
+    "bytes": 422
+  },
+  "icons/skills/50058.png": {
+    "url": "/assets/reborn/icons/skills/50058.webp",
+    "category": "skill-icon",
+    "id": "50058",
+    "bytes": 550
+  },
+  "icons/skills/50059.png": {
+    "url": "/assets/reborn/icons/skills/50059.webp",
+    "category": "skill-icon",
+    "id": "50059",
+    "bytes": 572
+  },
+  "icons/skills/50060.png": {
+    "url": "/assets/reborn/icons/skills/50060.webp",
+    "category": "skill-icon",
+    "id": "50060",
+    "bytes": 500
+  },
+  "icons/skills/50061.png": {
+    "url": "/assets/reborn/icons/skills/50061.webp",
+    "category": "skill-icon",
+    "id": "50061",
+    "bytes": 470
+  },
+  "icons/skills/50062.png": {
+    "url": "/assets/reborn/icons/skills/50062.webp",
+    "category": "skill-icon",
+    "id": "50062",
+    "bytes": 522
+  },
+  "icons/skills/50063.png": {
+    "url": "/assets/reborn/icons/skills/50063.webp",
+    "category": "skill-icon",
+    "id": "50063",
+    "bytes": 484
+  },
+  "icons/skills/50064.png": {
+    "url": "/assets/reborn/icons/skills/50064.webp",
+    "category": "skill-icon",
+    "id": "50064",
+    "bytes": 292
+  },
+  "icons/skills/50065.png": {
+    "url": "/assets/reborn/icons/skills/50065.webp",
+    "category": "skill-icon",
+    "id": "50065",
+    "bytes": 492
+  },
+  "icons/skills/50066.png": {
+    "url": "/assets/reborn/icons/skills/50066.webp",
+    "category": "skill-icon",
+    "id": "50066",
+    "bytes": 506
+  },
+  "icons/skills/50067.png": {
+    "url": "/assets/reborn/icons/skills/50067.webp",
+    "category": "skill-icon",
+    "id": "50067",
+    "bytes": 412
+  },
+  "icons/skills/50068.png": {
+    "url": "/assets/reborn/icons/skills/50068.webp",
+    "category": "skill-icon",
+    "id": "50068",
+    "bytes": 444
+  },
+  "icons/skills/50069.png": {
+    "url": "/assets/reborn/icons/skills/50069.webp",
+    "category": "skill-icon",
+    "id": "50069",
+    "bytes": 560
+  },
+  "icons/skills/50070.png": {
+    "url": "/assets/reborn/icons/skills/50070.webp",
+    "category": "skill-icon",
+    "id": "50070",
+    "bytes": 444
+  },
+  "icons/skills/50071.png": {
+    "url": "/assets/reborn/icons/skills/50071.webp",
+    "category": "skill-icon",
+    "id": "50071",
+    "bytes": 500
+  },
+  "icons/skills/50072.png": {
+    "url": "/assets/reborn/icons/skills/50072.webp",
+    "category": "skill-icon",
+    "id": "50072",
+    "bytes": 292
+  },
+  "icons/skills/50073.png": {
+    "url": "/assets/reborn/icons/skills/50073.webp",
+    "category": "skill-icon",
+    "id": "50073",
+    "bytes": 492
+  },
+  "icons/skills/50074.png": {
+    "url": "/assets/reborn/icons/skills/50074.webp",
+    "category": "skill-icon",
+    "id": "50074",
+    "bytes": 422
+  },
+  "icons/skills/50075.png": {
+    "url": "/assets/reborn/icons/skills/50075.webp",
+    "category": "skill-icon",
+    "id": "50075",
+    "bytes": 550
+  },
+  "icons/skills/50076.png": {
+    "url": "/assets/reborn/icons/skills/50076.webp",
+    "category": "skill-icon",
+    "id": "50076",
+    "bytes": 624
+  },
+  "icons/skills/50077.png": {
+    "url": "/assets/reborn/icons/skills/50077.webp",
+    "category": "skill-icon",
+    "id": "50077",
+    "bytes": 412
+  },
+  "icons/skills/50078.png": {
+    "url": "/assets/reborn/icons/skills/50078.webp",
+    "category": "skill-icon",
+    "id": "50078",
+    "bytes": 514
+  },
+  "icons/skills/50079.png": {
+    "url": "/assets/reborn/icons/skills/50079.webp",
+    "category": "skill-icon",
+    "id": "50079",
+    "bytes": 506
+  },
+  "icons/skills/50080.png": {
+    "url": "/assets/reborn/icons/skills/50080.webp",
+    "category": "skill-icon",
+    "id": "50080",
+    "bytes": 560
+  },
+  "icons/skills/50081.png": {
+    "url": "/assets/reborn/icons/skills/50081.webp",
+    "category": "skill-icon",
+    "id": "50081",
+    "bytes": 522
+  },
+  "icons/skills/50082.png": {
+    "url": "/assets/reborn/icons/skills/50082.webp",
+    "category": "skill-icon",
+    "id": "50082",
+    "bytes": 470
+  },
+  "icons/skills/50083.png": {
+    "url": "/assets/reborn/icons/skills/50083.webp",
+    "category": "skill-icon",
+    "id": "50083",
+    "bytes": 572
+  },
+  "icons/skills/50084.png": {
+    "url": "/assets/reborn/icons/skills/50084.webp",
+    "category": "skill-icon",
+    "id": "50084",
+    "bytes": 424
+  },
+  "icons/skills/50085.png": {
+    "url": "/assets/reborn/icons/skills/50085.webp",
+    "category": "skill-icon",
+    "id": "50085",
+    "bytes": 618
+  },
+  "icons/skills/50086.png": {
+    "url": "/assets/reborn/icons/skills/50086.webp",
+    "category": "skill-icon",
+    "id": "50086",
+    "bytes": 620
+  },
+  "icons/skills/60003.png": {
+    "url": "/assets/reborn/icons/skills/60003.webp",
+    "category": "skill-icon",
+    "id": "60003",
+    "bytes": 514
+  },
+  "icons/skills/7777.png": {
+    "url": "/assets/reborn/icons/skills/7777.webp",
+    "category": "skill-icon",
+    "id": "7777",
+    "bytes": 548
   },
   "item:148023": {
     "url": "/assets/reborn/icons/items/tasks/64.webp",
@@ -16378,6 +17518,678 @@
     "category": "item-icon",
     "id": "540112",
     "bytes": 406
+  },
+  "poses/1.png": {
+    "url": "/assets/reborn/poses/1.webp",
+    "category": "avatar-ui",
+    "id": "1",
+    "bytes": 11128
+  },
+  "poses/10.png": {
+    "url": "/assets/reborn/poses/10.webp",
+    "category": "avatar-ui",
+    "id": "10",
+    "bytes": 12452
+  },
+  "poses/100.png": {
+    "url": "/assets/reborn/poses/100.webp",
+    "category": "avatar-ui",
+    "id": "100",
+    "bytes": 8652
+  },
+  "poses/101.png": {
+    "url": "/assets/reborn/poses/101.webp",
+    "category": "avatar-ui",
+    "id": "101",
+    "bytes": 7066
+  },
+  "poses/102.png": {
+    "url": "/assets/reborn/poses/102.webp",
+    "category": "avatar-ui",
+    "id": "102",
+    "bytes": 9898
+  },
+  "poses/103.png": {
+    "url": "/assets/reborn/poses/103.webp",
+    "category": "avatar-ui",
+    "id": "103",
+    "bytes": 9018
+  },
+  "poses/104.png": {
+    "url": "/assets/reborn/poses/104.webp",
+    "category": "avatar-ui",
+    "id": "104",
+    "bytes": 8190
+  },
+  "poses/105.png": {
+    "url": "/assets/reborn/poses/105.webp",
+    "category": "avatar-ui",
+    "id": "105",
+    "bytes": 10342
+  },
+  "poses/106.png": {
+    "url": "/assets/reborn/poses/106.webp",
+    "category": "avatar-ui",
+    "id": "106",
+    "bytes": 12088
+  },
+  "poses/107.png": {
+    "url": "/assets/reborn/poses/107.webp",
+    "category": "avatar-ui",
+    "id": "107",
+    "bytes": 9604
+  },
+  "poses/108.png": {
+    "url": "/assets/reborn/poses/108.webp",
+    "category": "avatar-ui",
+    "id": "108",
+    "bytes": 7742
+  },
+  "poses/109.png": {
+    "url": "/assets/reborn/poses/109.webp",
+    "category": "avatar-ui",
+    "id": "109",
+    "bytes": 11008
+  },
+  "poses/11.png": {
+    "url": "/assets/reborn/poses/11.webp",
+    "category": "avatar-ui",
+    "id": "11",
+    "bytes": 12032
+  },
+  "poses/110.png": {
+    "url": "/assets/reborn/poses/110.webp",
+    "category": "avatar-ui",
+    "id": "110",
+    "bytes": 12936
+  },
+  "poses/111.png": {
+    "url": "/assets/reborn/poses/111.webp",
+    "category": "avatar-ui",
+    "id": "111",
+    "bytes": 9742
+  },
+  "poses/112.png": {
+    "url": "/assets/reborn/poses/112.webp",
+    "category": "avatar-ui",
+    "id": "112",
+    "bytes": 8754
+  },
+  "poses/113.png": {
+    "url": "/assets/reborn/poses/113.webp",
+    "category": "avatar-ui",
+    "id": "113",
+    "bytes": 10880
+  },
+  "poses/114.png": {
+    "url": "/assets/reborn/poses/114.webp",
+    "category": "avatar-ui",
+    "id": "114",
+    "bytes": 9196
+  },
+  "poses/115.png": {
+    "url": "/assets/reborn/poses/115.webp",
+    "category": "avatar-ui",
+    "id": "115",
+    "bytes": 10756
+  },
+  "poses/116.png": {
+    "url": "/assets/reborn/poses/116.webp",
+    "category": "avatar-ui",
+    "id": "116",
+    "bytes": 8866
+  },
+  "poses/117.png": {
+    "url": "/assets/reborn/poses/117.webp",
+    "category": "avatar-ui",
+    "id": "117",
+    "bytes": 11982
+  },
+  "poses/118.png": {
+    "url": "/assets/reborn/poses/118.webp",
+    "category": "avatar-ui",
+    "id": "118",
+    "bytes": 7744
+  },
+  "poses/12.png": {
+    "url": "/assets/reborn/poses/12.webp",
+    "category": "avatar-ui",
+    "id": "12",
+    "bytes": 8632
+  },
+  "poses/120.png": {
+    "url": "/assets/reborn/poses/120.webp",
+    "category": "avatar-ui",
+    "id": "120",
+    "bytes": 10106
+  },
+  "poses/13.png": {
+    "url": "/assets/reborn/poses/13.webp",
+    "category": "avatar-ui",
+    "id": "13",
+    "bytes": 11196
+  },
+  "poses/14.png": {
+    "url": "/assets/reborn/poses/14.webp",
+    "category": "avatar-ui",
+    "id": "14",
+    "bytes": 13896
+  },
+  "poses/15.png": {
+    "url": "/assets/reborn/poses/15.webp",
+    "category": "avatar-ui",
+    "id": "15",
+    "bytes": 12498
+  },
+  "poses/16.png": {
+    "url": "/assets/reborn/poses/16.webp",
+    "category": "avatar-ui",
+    "id": "16",
+    "bytes": 13082
+  },
+  "poses/17.png": {
+    "url": "/assets/reborn/poses/17.webp",
+    "category": "avatar-ui",
+    "id": "17",
+    "bytes": 11760
+  },
+  "poses/18.png": {
+    "url": "/assets/reborn/poses/18.webp",
+    "category": "avatar-ui",
+    "id": "18",
+    "bytes": 11160
+  },
+  "poses/19.png": {
+    "url": "/assets/reborn/poses/19.webp",
+    "category": "avatar-ui",
+    "id": "19",
+    "bytes": 7982
+  },
+  "poses/2.png": {
+    "url": "/assets/reborn/poses/2.webp",
+    "category": "avatar-ui",
+    "id": "2",
+    "bytes": 12566
+  },
+  "poses/20.png": {
+    "url": "/assets/reborn/poses/20.webp",
+    "category": "avatar-ui",
+    "id": "20",
+    "bytes": 10658
+  },
+  "poses/21.png": {
+    "url": "/assets/reborn/poses/21.webp",
+    "category": "avatar-ui",
+    "id": "21",
+    "bytes": 8396
+  },
+  "poses/22.png": {
+    "url": "/assets/reborn/poses/22.webp",
+    "category": "avatar-ui",
+    "id": "22",
+    "bytes": 7886
+  },
+  "poses/23.png": {
+    "url": "/assets/reborn/poses/23.webp",
+    "category": "avatar-ui",
+    "id": "23",
+    "bytes": 8036
+  },
+  "poses/24.png": {
+    "url": "/assets/reborn/poses/24.webp",
+    "category": "avatar-ui",
+    "id": "24",
+    "bytes": 9356
+  },
+  "poses/26.png": {
+    "url": "/assets/reborn/poses/26.webp",
+    "category": "avatar-ui",
+    "id": "26",
+    "bytes": 13212
+  },
+  "poses/27.png": {
+    "url": "/assets/reborn/poses/27.webp",
+    "category": "avatar-ui",
+    "id": "27",
+    "bytes": 11262
+  },
+  "poses/28.png": {
+    "url": "/assets/reborn/poses/28.webp",
+    "category": "avatar-ui",
+    "id": "28",
+    "bytes": 10968
+  },
+  "poses/29.png": {
+    "url": "/assets/reborn/poses/29.webp",
+    "category": "avatar-ui",
+    "id": "29",
+    "bytes": 9698
+  },
+  "poses/3.png": {
+    "url": "/assets/reborn/poses/3.webp",
+    "category": "avatar-ui",
+    "id": "3",
+    "bytes": 10912
+  },
+  "poses/30.png": {
+    "url": "/assets/reborn/poses/30.webp",
+    "category": "avatar-ui",
+    "id": "30",
+    "bytes": 10012
+  },
+  "poses/31.png": {
+    "url": "/assets/reborn/poses/31.webp",
+    "category": "avatar-ui",
+    "id": "31",
+    "bytes": 10402
+  },
+  "poses/32.png": {
+    "url": "/assets/reborn/poses/32.webp",
+    "category": "avatar-ui",
+    "id": "32",
+    "bytes": 8324
+  },
+  "poses/33.png": {
+    "url": "/assets/reborn/poses/33.webp",
+    "category": "avatar-ui",
+    "id": "33",
+    "bytes": 9872
+  },
+  "poses/34.png": {
+    "url": "/assets/reborn/poses/34.webp",
+    "category": "avatar-ui",
+    "id": "34",
+    "bytes": 11604
+  },
+  "poses/35.png": {
+    "url": "/assets/reborn/poses/35.webp",
+    "category": "avatar-ui",
+    "id": "35",
+    "bytes": 12860
+  },
+  "poses/36.png": {
+    "url": "/assets/reborn/poses/36.webp",
+    "category": "avatar-ui",
+    "id": "36",
+    "bytes": 10964
+  },
+  "poses/37.png": {
+    "url": "/assets/reborn/poses/37.webp",
+    "category": "avatar-ui",
+    "id": "37",
+    "bytes": 10938
+  },
+  "poses/39.png": {
+    "url": "/assets/reborn/poses/39.webp",
+    "category": "avatar-ui",
+    "id": "39",
+    "bytes": 6670
+  },
+  "poses/4.png": {
+    "url": "/assets/reborn/poses/4.webp",
+    "category": "avatar-ui",
+    "id": "4",
+    "bytes": 12120
+  },
+  "poses/40.png": {
+    "url": "/assets/reborn/poses/40.webp",
+    "category": "avatar-ui",
+    "id": "40",
+    "bytes": 14166
+  },
+  "poses/42.png": {
+    "url": "/assets/reborn/poses/42.webp",
+    "category": "avatar-ui",
+    "id": "42",
+    "bytes": 15342
+  },
+  "poses/44.png": {
+    "url": "/assets/reborn/poses/44.webp",
+    "category": "avatar-ui",
+    "id": "44",
+    "bytes": 9022
+  },
+  "poses/45.png": {
+    "url": "/assets/reborn/poses/45.webp",
+    "category": "avatar-ui",
+    "id": "45",
+    "bytes": 12510
+  },
+  "poses/46.png": {
+    "url": "/assets/reborn/poses/46.webp",
+    "category": "avatar-ui",
+    "id": "46",
+    "bytes": 11680
+  },
+  "poses/47.png": {
+    "url": "/assets/reborn/poses/47.webp",
+    "category": "avatar-ui",
+    "id": "47",
+    "bytes": 12412
+  },
+  "poses/48.png": {
+    "url": "/assets/reborn/poses/48.webp",
+    "category": "avatar-ui",
+    "id": "48",
+    "bytes": 8794
+  },
+  "poses/49.png": {
+    "url": "/assets/reborn/poses/49.webp",
+    "category": "avatar-ui",
+    "id": "49",
+    "bytes": 11082
+  },
+  "poses/5.png": {
+    "url": "/assets/reborn/poses/5.webp",
+    "category": "avatar-ui",
+    "id": "5",
+    "bytes": 12222
+  },
+  "poses/50.png": {
+    "url": "/assets/reborn/poses/50.webp",
+    "category": "avatar-ui",
+    "id": "50",
+    "bytes": 8660
+  },
+  "poses/51.png": {
+    "url": "/assets/reborn/poses/51.webp",
+    "category": "avatar-ui",
+    "id": "51",
+    "bytes": 7764
+  },
+  "poses/52.png": {
+    "url": "/assets/reborn/poses/52.webp",
+    "category": "avatar-ui",
+    "id": "52",
+    "bytes": 6562
+  },
+  "poses/53.png": {
+    "url": "/assets/reborn/poses/53.webp",
+    "category": "avatar-ui",
+    "id": "53",
+    "bytes": 9656
+  },
+  "poses/54.png": {
+    "url": "/assets/reborn/poses/54.webp",
+    "category": "avatar-ui",
+    "id": "54",
+    "bytes": 11432
+  },
+  "poses/55.png": {
+    "url": "/assets/reborn/poses/55.webp",
+    "category": "avatar-ui",
+    "id": "55",
+    "bytes": 8260
+  },
+  "poses/56.png": {
+    "url": "/assets/reborn/poses/56.webp",
+    "category": "avatar-ui",
+    "id": "56",
+    "bytes": 12712
+  },
+  "poses/57.png": {
+    "url": "/assets/reborn/poses/57.webp",
+    "category": "avatar-ui",
+    "id": "57",
+    "bytes": 10994
+  },
+  "poses/58.png": {
+    "url": "/assets/reborn/poses/58.webp",
+    "category": "avatar-ui",
+    "id": "58",
+    "bytes": 11764
+  },
+  "poses/59.png": {
+    "url": "/assets/reborn/poses/59.webp",
+    "category": "avatar-ui",
+    "id": "59",
+    "bytes": 12028
+  },
+  "poses/6.png": {
+    "url": "/assets/reborn/poses/6.webp",
+    "category": "avatar-ui",
+    "id": "6",
+    "bytes": 13416
+  },
+  "poses/60.png": {
+    "url": "/assets/reborn/poses/60.webp",
+    "category": "avatar-ui",
+    "id": "60",
+    "bytes": 11440
+  },
+  "poses/61.png": {
+    "url": "/assets/reborn/poses/61.webp",
+    "category": "avatar-ui",
+    "id": "61",
+    "bytes": 12494
+  },
+  "poses/62.png": {
+    "url": "/assets/reborn/poses/62.webp",
+    "category": "avatar-ui",
+    "id": "62",
+    "bytes": 14138
+  },
+  "poses/63.png": {
+    "url": "/assets/reborn/poses/63.webp",
+    "category": "avatar-ui",
+    "id": "63",
+    "bytes": 11366
+  },
+  "poses/64.png": {
+    "url": "/assets/reborn/poses/64.webp",
+    "category": "avatar-ui",
+    "id": "64",
+    "bytes": 14434
+  },
+  "poses/65.png": {
+    "url": "/assets/reborn/poses/65.webp",
+    "category": "avatar-ui",
+    "id": "65",
+    "bytes": 7694
+  },
+  "poses/66.png": {
+    "url": "/assets/reborn/poses/66.webp",
+    "category": "avatar-ui",
+    "id": "66",
+    "bytes": 8238
+  },
+  "poses/67.png": {
+    "url": "/assets/reborn/poses/67.webp",
+    "category": "avatar-ui",
+    "id": "67",
+    "bytes": 9932
+  },
+  "poses/68.png": {
+    "url": "/assets/reborn/poses/68.webp",
+    "category": "avatar-ui",
+    "id": "68",
+    "bytes": 7742
+  },
+  "poses/69.png": {
+    "url": "/assets/reborn/poses/69.webp",
+    "category": "avatar-ui",
+    "id": "69",
+    "bytes": 10120
+  },
+  "poses/7.png": {
+    "url": "/assets/reborn/poses/7.webp",
+    "category": "avatar-ui",
+    "id": "7",
+    "bytes": 13582
+  },
+  "poses/70.png": {
+    "url": "/assets/reborn/poses/70.webp",
+    "category": "avatar-ui",
+    "id": "70",
+    "bytes": 8666
+  },
+  "poses/72.png": {
+    "url": "/assets/reborn/poses/72.webp",
+    "category": "avatar-ui",
+    "id": "72",
+    "bytes": 12650
+  },
+  "poses/73.png": {
+    "url": "/assets/reborn/poses/73.webp",
+    "category": "avatar-ui",
+    "id": "73",
+    "bytes": 8170
+  },
+  "poses/74.png": {
+    "url": "/assets/reborn/poses/74.webp",
+    "category": "avatar-ui",
+    "id": "74",
+    "bytes": 7122
+  },
+  "poses/75.png": {
+    "url": "/assets/reborn/poses/75.webp",
+    "category": "avatar-ui",
+    "id": "75",
+    "bytes": 11854
+  },
+  "poses/76.png": {
+    "url": "/assets/reborn/poses/76.webp",
+    "category": "avatar-ui",
+    "id": "76",
+    "bytes": 8308
+  },
+  "poses/77.png": {
+    "url": "/assets/reborn/poses/77.webp",
+    "category": "avatar-ui",
+    "id": "77",
+    "bytes": 15256
+  },
+  "poses/78.png": {
+    "url": "/assets/reborn/poses/78.webp",
+    "category": "avatar-ui",
+    "id": "78",
+    "bytes": 10464
+  },
+  "poses/79.png": {
+    "url": "/assets/reborn/poses/79.webp",
+    "category": "avatar-ui",
+    "id": "79",
+    "bytes": 9298
+  },
+  "poses/8.png": {
+    "url": "/assets/reborn/poses/8.webp",
+    "category": "avatar-ui",
+    "id": "8",
+    "bytes": 10898
+  },
+  "poses/80.png": {
+    "url": "/assets/reborn/poses/80.webp",
+    "category": "avatar-ui",
+    "id": "80",
+    "bytes": 11104
+  },
+  "poses/81.png": {
+    "url": "/assets/reborn/poses/81.webp",
+    "category": "avatar-ui",
+    "id": "81",
+    "bytes": 15374
+  },
+  "poses/82.png": {
+    "url": "/assets/reborn/poses/82.webp",
+    "category": "avatar-ui",
+    "id": "82",
+    "bytes": 11414
+  },
+  "poses/83.png": {
+    "url": "/assets/reborn/poses/83.webp",
+    "category": "avatar-ui",
+    "id": "83",
+    "bytes": 9726
+  },
+  "poses/84.png": {
+    "url": "/assets/reborn/poses/84.webp",
+    "category": "avatar-ui",
+    "id": "84",
+    "bytes": 7858
+  },
+  "poses/85.png": {
+    "url": "/assets/reborn/poses/85.webp",
+    "category": "avatar-ui",
+    "id": "85",
+    "bytes": 7510
+  },
+  "poses/86.png": {
+    "url": "/assets/reborn/poses/86.webp",
+    "category": "avatar-ui",
+    "id": "86",
+    "bytes": 12424
+  },
+  "poses/87.png": {
+    "url": "/assets/reborn/poses/87.webp",
+    "category": "avatar-ui",
+    "id": "87",
+    "bytes": 13702
+  },
+  "poses/88.png": {
+    "url": "/assets/reborn/poses/88.webp",
+    "category": "avatar-ui",
+    "id": "88",
+    "bytes": 11202
+  },
+  "poses/89.png": {
+    "url": "/assets/reborn/poses/89.webp",
+    "category": "avatar-ui",
+    "id": "89",
+    "bytes": 14322
+  },
+  "poses/9.png": {
+    "url": "/assets/reborn/poses/9.webp",
+    "category": "avatar-ui",
+    "id": "9",
+    "bytes": 11552
+  },
+  "poses/90.png": {
+    "url": "/assets/reborn/poses/90.webp",
+    "category": "avatar-ui",
+    "id": "90",
+    "bytes": 8784
+  },
+  "poses/91.png": {
+    "url": "/assets/reborn/poses/91.webp",
+    "category": "avatar-ui",
+    "id": "91",
+    "bytes": 10254
+  },
+  "poses/92.png": {
+    "url": "/assets/reborn/poses/92.webp",
+    "category": "avatar-ui",
+    "id": "92",
+    "bytes": 11006
+  },
+  "poses/94.png": {
+    "url": "/assets/reborn/poses/94.webp",
+    "category": "avatar-ui",
+    "id": "94",
+    "bytes": 11572
+  },
+  "poses/95.png": {
+    "url": "/assets/reborn/poses/95.webp",
+    "category": "avatar-ui",
+    "id": "95",
+    "bytes": 10624
+  },
+  "poses/97.png": {
+    "url": "/assets/reborn/poses/97.webp",
+    "category": "avatar-ui",
+    "id": "97",
+    "bytes": 10432
+  },
+  "poses/98.png": {
+    "url": "/assets/reborn/poses/98.webp",
+    "category": "avatar-ui",
+    "id": "98",
+    "bytes": 22548
+  },
+  "poses/99.png": {
+    "url": "/assets/reborn/poses/99.webp",
+    "category": "avatar-ui",
+    "id": "99",
+    "bytes": 11954
   },
   "scenes/tailedBeast/beast-1-1.json": {
     "url": "/assets/reborn/scenes/tailedBeast/beast-1-1.json",

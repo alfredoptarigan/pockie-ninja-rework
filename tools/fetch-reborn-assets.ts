@@ -296,6 +296,8 @@ async function main() {
     ...new Set([
       ...Array.from({ length: 12 }, (_, i) => 540001 + i),
       ...Array.from({ length: 12 }, (_, i) => 540101 + i),
+      // M6 card packs (Green..Gold, icons/items/cards/item/<n>).
+      ...Array.from({ length: 5 }, (_, i) => 171001 + i),
       ...Object.values(config.bloodline.Limits).map((l) => l.item),
     ]),
   ]

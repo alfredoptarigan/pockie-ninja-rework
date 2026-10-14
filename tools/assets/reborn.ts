@@ -50,7 +50,10 @@ export function selectAssets(manifest: Manifest): Entry[] {
             e.path.startsWith(`entities/skills/core/${id}.`) ||
             e.path.startsWith(`entities/skills/core/${id}-`),
         )) ||
-      (e.category === 'skill-icon' && [...scrollSkills, 10000].includes(Number(e.id))) ||
+      // Every skill icon: the Skills window shows the whole ninjutsu and element grid.
+      e.category === 'skill-icon' ||
+      // Inventory preview poses for the outfits we play (ids up to 120, like the ultimates).
+      (e.category === 'avatar-ui' && /^poses\/\d+\.png$/.test(e.path) && Number(e.id) <= 120) ||
       e.category === 'talent' ||
       e.category === 'bloodline' ||
       e.category === 'item-icon' ||
