@@ -1,7 +1,7 @@
 // Downloads Pockie Ninja Reborn's public art into data/reborn-raw/assets/ (gitignored) and writes
 // data/reborn-raw/re/assets-manifest.json. Needs the reverse-engineering inputs in
 // data/reborn-raw/re/ (serverConfig.json, main.js) and data/reborn-raw/locales_en_translation.json.
-// Run with `node tools/fetch-reborn-assets.ts`. Existing files are skipped, so re-runs are cheap.
+// Run with `node tools/fetch-reborn-assets.ts --m6` for the deferred groups. Existing files are skipped, so re-runs are cheap.
 //
 // URL patterns (from the production bundle main.js, CDN_PATH "assets/", offsets in characters):
 // - Avatars (module 49551 @954589): entities/avatars/<n>/data.json, a Phaser multiatlas
@@ -17,8 +17,13 @@
 // - Events: literals around @2143751 (tailed beast), @3603960 (christmas), @3659324 (summer),
 //   @3774579 (akatsuki), @3834667 (hashirama), @1429471 (fight backgrounds).
 // - NPCs: icons/npc/<id>.png (@931076), entities/npcs/<id>.json multiatlas.
+// - M6 audio playlist @353477; entity path helpers @954700-955900, pet load @1353811.
+// - Wings: WING.Line stat -> json_items wingSprite (@1392732), avatar.json @1353300.
+// - Aura profiles @1334500-1337089; effects table @1358810-1363000, loader @1431000.
+// - Fight backgrounds @1429435; card names/sets @3329200-3334500, prefix @3346083.
 // The server answers missing files with 200 text/html (SPA fallback), so HTML means "absent".
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { enumerateM6, audioPaths } from './assets/reborn-fetch.ts'
 import { dirname, extname, join, posix, resolve } from 'node:path'
 
 const BASE = 'https://pockieninjareborn.com/assets/'
@@ -58,9 +63,13 @@ const MIME: Record<string, string> = {
   '.gif': 'image/gif',
   '.webp': 'image/webp',
   '.json': 'application/json',
+  '.mp3': 'audio/mpeg',
+  '.ogg': 'audio/ogg',
+  '.wav': 'audio/wav',
 }
 const manifest: Entry[] = []
 const missing: string[] = []
+const missingDetails: Record<string, { group: string; reason: string }> = {}
 
 const sleep = (ms: number) => new Promise((done) => setTimeout(done, ms))
 
@@ -82,7 +91,12 @@ async function fetchAsset(
       const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } })
       const type = res.headers.get('content-type') ?? ''
       if (res.status === 404 || (res.ok && type.startsWith('text/html'))) {
+        await sleep(DELAY_MS)
         missing.push(path)
+        missingDetails[path] = {
+          group: category,
+          reason: res.status === 404 ? 'HTTP 404' : 'HTML fallback',
+        }
         return null
       }
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -96,6 +110,7 @@ async function fetchAsset(
       if (attempt >= 3) {
         console.error(`failed ${path}: ${(error as Error).message}`)
         missing.push(path)
+        missingDetails[path] = { group: category, reason: (error as Error).message }
         return null
       }
       await sleep(1000 * attempt)
@@ -201,6 +216,8 @@ function bundleSkills(bundle: string) {
 }
 
 type Config = {
+  WING: { Line: Record<string, unknown> }
+  scenes: Record<string, unknown>
   avatars: Record<string, { src: string; innate?: { skills?: number[] } }>
   bloodline: {
     Limits: Record<string, { avatar: number; item: number }>
@@ -217,15 +234,45 @@ async function main() {
   ) as Record<string, string>
   const limits = Object.keys(config.bloodline.Limits).map(Number)
 
-  if (process.argv.includes('--m5-missing')) {
+  if (existsSync(manifestFile)) {
     const previous = JSON.parse(readFileSync(manifestFile, 'utf8')) as {
       assets: Entry[]
+      missingDetails?: typeof missingDetails
       missing: string[]
       secretTechniques: Record<string, string[]>
     }
     manifest.push(...previous.assets)
+    Object.assign(missingDetails, previous.missingDetails)
     Object.assign(secretTechniques, previous.secretTechniques)
     missing.push(...previous.missing)
+  }
+
+  if (process.argv.includes('--m6')) {
+    const items = JSON.parse(readFileSync(join(raw, 'json_items.json'), 'utf8'))
+    const loader = JSON.parse(readFileSync(join(raw, 'json_loader.json'), 'utf8'))
+    const targets = enumerateM6(bundle, config, items, loader)
+    const offsets = parseJson<Record<string, unknown>>(
+      await fetchAsset('combat-effects', 'offsets', 'entities/effects/offsets.json'),
+    )
+    for (const id of Object.keys(offsets ?? {}))
+      targets.push({
+        group: 'combat-effects',
+        id,
+        path: `entities/effects/${id}.json`,
+        atlas: true,
+      })
+    const playlist = parseJson<unknown>(
+      await fetchAsset('audio', 'playlist', 'audio/playlist.json'),
+    )
+    for (const path of audioPaths(playlist, bundle))
+      targets.push({ group: 'audio', id: path, path })
+    await pool(
+      [...new Map(targets.map((target) => [target.path, target])).values()],
+      ({ group, id, path, atlas }) =>
+        atlas ? fetchAtlas(group, id, path) : fetchAsset(group, id, path),
+    )
+    writeManifest()
+    return
   }
 
   // Avatars: every outfit src, bloodline limit outfits, hashirama event leaders (@3834667).
@@ -328,12 +375,16 @@ async function main() {
       await fetchAtlas('npc', id, `entities/npcs/${id}.json`)
     })
   }
+  writeManifest()
+}
+
+function writeManifest() {
   const unique = [...new Map(manifest.map((e) => [e.path, e])).values()].sort((a, b) =>
     a.path.localeCompare(b.path, undefined, { numeric: true }),
   )
   writeFileSync(
     manifestFile,
-    `${JSON.stringify({ secretTechniques, missing: [...new Set(missing)].filter((path) => !unique.some((entry) => entry.path === path)).sort(), assets: unique }, null, 1)}\n`,
+    `${JSON.stringify({ groups: Object.fromEntries([...new Set(unique.map((entry) => entry.category))].map((group) => [group, unique.filter((entry) => entry.category === group).map((entry) => entry.path)])), secretTechniques, missingDetails: Object.fromEntries(Object.entries(missingDetails).filter(([path]) => !unique.some((entry) => entry.path === path))), missing: [...new Set(missing)].filter((path) => !unique.some((entry) => entry.path === path)).sort(), assets: unique }, null, 1)}\n`,
   )
   const totals = new Map<string, { files: number; bytes: number }>()
   for (const e of unique) {
