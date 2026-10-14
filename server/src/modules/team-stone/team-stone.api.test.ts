@@ -12,7 +12,7 @@ import {
 } from '../../db/schema.js'
 import { arenaHonorShop } from '../../game/data.js'
 import { arenaTestApp, errorCode, today, type Ninja } from '../arena/test-setup.js'
-import { matchTeamStone, payTeamStoneWeek, resetTeamStoneMonth, teamStoneRoutes } from './routes.js'
+import { matchTeamStone, payTeamStoneWeek, resetTeamStoneMonth } from './routes.js'
 import { monthStart, weekStart } from './store.js'
 
 // Each test registers several ninjas (argon2), slow on a loaded machine.
@@ -27,7 +27,6 @@ beforeEach(async () => {
   await truncateAll(db)
   await db.execute(sql`truncate table team_stone_matches cascade`)
   setup = arenaTestApp(db)
-  setup.app.register(teamStoneRoutes, { db, prefix: BASE })
 })
 afterEach(() => setup.app.close())
 afterAll(() => close())

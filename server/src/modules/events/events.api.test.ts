@@ -1,5 +1,5 @@
 import { eq, sql } from 'drizzle-orm'
-import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import {
   characterBuffs,
@@ -12,38 +12,14 @@ import { eventsRoutes } from './routes.js'
 import { buffBonuses } from '../../game/nonfight-buffs.js'
 import { recordWeeklyActivity, type WeeklyActivity } from './weekly-activity.js'
 
-// Exercise the real non-fight buff path with the coordinator's pending data merge.
-vi.mock('node:fs', async (importOriginal) => {
-  const original = await importOriginal<typeof import('node:fs')>()
-  const reborn = JSON.parse(
-    original.readFileSync(
-      new URL('../../../data/game/reborn/nonfight-buffs.json', import.meta.url),
-      'utf8',
-    ),
-  )
-  return {
-    ...original,
-    readFileSync: (...args: Parameters<typeof original.readFileSync>) => {
-      const result = original.readFileSync(...args)
-      if (!(args[0] instanceof URL) || !args[0].pathname.endsWith('/nonfight-buff-data.json'))
-        return result
-      const data = JSON.parse(String(result))
-      return JSON.stringify({
-        ...data,
-        buffs: { ...data.buffs, ...reborn.buffs },
-        properties: { ...data.properties, ...reborn.properties },
-      })
-    },
-  }
-})
-
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
 let client: Client
 let id: string
 let now: Date
 let random: number
-const path = '/api/game/events'
+// The app registers the routes at /api/game/events; this copy injects the clock and dice.
+const path = '/api/test/events'
 const claim = (route: string) => client.post(`${path}/${route}`)
 const board = async () => (await client.get(path)).json()
 const row = async () => (await db.select().from(characters).where(eq(characters.id, id)))[0]!

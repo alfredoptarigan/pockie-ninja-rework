@@ -6,7 +6,7 @@ import type { AnyPgColumn } from 'drizzle-orm/pg-core'
 import type { Db } from '../db/client.js'
 import { characterBuffs, characterTitles, characters } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { item, itemNameKey } from './data.js'
+import { item, itemNameKey, rebornNonfightBuffs } from './data.js'
 import type { Tx } from './progress.js'
 import { isVip } from './vip.js'
 
@@ -19,6 +19,9 @@ const data = JSON.parse(
   properties: Record<string, Record<string, number>>
   titles: Record<string, Title>
 }
+// Reborn's Dice of Fate values (buffs 80101, 80102, 80201, 80202) replace the original ones.
+Object.assign(data.buffs, rebornNonfightBuffs().buffs)
+Object.assign(data.properties, rebornNonfightBuffs().properties)
 const live = (expiresAt: AnyPgColumn, now: Date) => or(isNull(expiresAt), gt(expiresAt, now))
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 export const buffDefinition = (id: number) => data.buffs[String(id)]

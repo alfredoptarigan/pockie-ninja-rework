@@ -12,7 +12,7 @@ import {
   users,
 } from '../../db/schema.js'
 import { weekStart } from '../rankings/toll-gate-weekly.js'
-import tailedBeastRoutes, { tailedBeastWeeklyReset, todayBeasts } from './routes.js'
+import { tailedBeastWeeklyReset, todayBeasts } from './routes.js'
 
 // A geared-up ninja: an ungeared level 60 falls to the beast before it lands a hit.
 vi.mock('../../game/combat.js', async (importOriginal) => {
@@ -33,7 +33,6 @@ const { db, close } = createTestDb()
 let t: Awaited<ReturnType<typeof setUp>>
 
 const DAY = 24 * 3600 * 1000
-const PREFIX = '/api/game/tailed-beast'
 const week = () => weekStart(new Date())
 const lastWeek = () => weekStart(new Date(Date.now() - 7 * DAY))
 const today = () => new Date().toISOString().slice(0, 10)
@@ -43,14 +42,9 @@ type CharacterValues = Partial<typeof characters.$inferInsert>
 const errorCode = (response: { json: () => { error?: { code: string } } }) =>
   response.json().error?.code
 
-/** The app with the routes (registered here until app.ts wires them), a ninja and extra ninjas. */
+/** The app (app.ts registers the routes), a ninja and extra ninjas. */
 async function setUp() {
   const app = buildTestApp(db)
-  app.register(async (scope) => {
-    if (!scope.hasRoute({ method: 'GET', url: PREFIX })) {
-      await scope.register(tailedBeastRoutes, { db, prefix: PREFIX })
-    }
-  })
   const client = new Client(app)
   const join = async (to: Client, username: string, name: string, nation: number) => {
     await to.post('/api/auth/register', {

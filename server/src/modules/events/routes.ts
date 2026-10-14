@@ -14,6 +14,7 @@ import { grantItems, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser } from '../game/characters.js'
 import { refreshBuffState } from '../game/nonfight-buffs.js'
+import { RATE_LIMITS } from '../game/rate-limits.js'
 import { DICE_BUY_LIMIT } from './constants.js'
 import { applyDiceBuff, diceBuffs, removeDiceCurse } from './dice-buffs.js'
 import { eventsView, loginState, resetDaily, type CharacterRow } from './view.js'
@@ -48,7 +49,7 @@ export async function eventsRoutes(
 ) {
   const config = rebornEvents()
   // All reads and actions share the same lock order and lazy UTC reset.
-  app.get('/', async (request) =>
+  app.get('/', { config: { rateLimit: RATE_LIMITS.read } }, async (request) =>
     db.transaction(async (tx) => {
       const character = await lockCharacter(tx, requireUser(request).id)
       const time = now()
@@ -57,32 +58,38 @@ export async function eventsRoutes(
     }),
   )
   for (const bonus of [false, true])
-    app.post(bonus ? '/login/bonus' : '/login/claim', async (request) =>
-      db.transaction(async (tx) => {
-        const character = await lockCharacter(tx, requireUser(request).id)
-        const time = now()
-        await resetDaily(tx, character, time)
-        const row = await loginState(tx, character.id)
-        const day = utcDay(time)
-        if ((bonus ? row.bonusDay : row.claimDay) === day)
-          throw bad('already_claimed', 'You already claimed this reward today.')
-        await grantReward(
-          tx,
-          character,
-          bonus ? config.dailyLogin.bonus : config.dailyLogin.cycle[row.completedDays % 7]!,
-        )
-        await tx
-          .update(characterDailyLogin)
-          .set(bonus ? { bonusDay: day } : { claimDay: day, completedDays: row.completedDays + 1 })
-          .where(eq(characterDailyLogin.characterId, character.id))
-        return eventsView(tx, character, time)
-      }),
+    app.post(
+      bonus ? '/login/bonus' : '/login/claim',
+      { config: { rateLimit: RATE_LIMITS.item } },
+      async (request) =>
+        db.transaction(async (tx) => {
+          const character = await lockCharacter(tx, requireUser(request).id)
+          const time = now()
+          await resetDaily(tx, character, time)
+          const row = await loginState(tx, character.id)
+          const day = utcDay(time)
+          if ((bonus ? row.bonusDay : row.claimDay) === day)
+            throw bad('already_claimed', 'You already claimed this reward today.')
+          await grantReward(
+            tx,
+            character,
+            bonus ? config.dailyLogin.bonus : config.dailyLogin.cycle[row.completedDays % 7]!,
+          )
+          await tx
+            .update(characterDailyLogin)
+            .set(
+              bonus ? { bonusDay: day } : { claimDay: day, completedDays: row.completedDays + 1 },
+            )
+            .where(eq(characterDailyLogin.characterId, character.id))
+          return eventsView(tx, character, time)
+        }),
     )
   for (const kind of ['milestone', 'weekday', 'bonus'] as const)
     app.post(
       kind === 'bonus'
         ? '/weekly/bonus'
         : `/weekly/${kind}/:${kind === 'milestone' ? 'points' : 'day'}`,
+      { config: { rateLimit: RATE_LIMITS.item } },
       async (request) => {
         const value =
           kind === 'milestone'
@@ -133,7 +140,7 @@ export async function eventsRoutes(
       },
     )
   for (const action of ['roll', 'replenish', 'clear'] as const)
-    app.post(`/dice/${action}`, async (request) =>
+    app.post(`/dice/${action}`, { config: { rateLimit: RATE_LIMITS.item } }, async (request) =>
       db.transaction(async (tx) => {
         const character = await lockCharacter(tx, requireUser(request).id)
         const time = now()
@@ -181,7 +188,7 @@ export async function eventsRoutes(
         return view
       }),
     )
-  app.post('/twenty-minute/claim', async (request) =>
+  app.post('/twenty-minute/claim', { config: { rateLimit: RATE_LIMITS.item } }, async (request) =>
     db.transaction(async (tx) => {
       const character = await lockCharacter(tx, requireUser(request).id)
       const time = now()
