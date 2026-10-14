@@ -23,7 +23,7 @@ const fixed: () => Random = () => ({ next: () => 0, int: () => 0, between: (a) =
 beforeEach(async () => {
   await truncateAll(db)
   app = buildTestApp(db)
-  app.register(petRoutes, { db, prefix: '/api/game/pets', random: fixed })
+  app.register(petRoutes, { db, prefix: '/api/test/pets', random: fixed })
   client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Player_one',
@@ -87,9 +87,9 @@ describe('Reborn pet tutorial quests', () => {
     await hold(EQUIP)
     const pet = await adoptedPet()
     await db.insert(inventoryItems).values({ characterId, itemId: 'i170113', bound: true })
-    await client.post(`/api/game/pets/${pet.id}/feed`, { foods: ['i170113'] })
+    await client.post(`/api/test/pets/${pet.id}/feed`, { foods: ['i170113'] })
     expect(await state(EQUIP)).toBe(0)
-    const response = await client.post(`/api/game/pets/${pet.id}/active`, { active: true })
+    const response = await client.post(`/api/test/pets/${pet.id}/active`, { active: true })
     expect(response.statusCode).toBe(200)
     expect(await state(EQUIP)).toBe(1)
   })
@@ -102,9 +102,9 @@ describe('Reborn pet tutorial quests', () => {
       expect.arrayContaining(['i170113', 'i170114', 'i170115', 'i170116']),
     )
     expect((await client.post(`/api/game/quests/${FEED}/accept`)).statusCode).toBe(200)
-    await client.post(`/api/game/pets/${pet.id}/active`, { active: true })
+    await client.post(`/api/test/pets/${pet.id}/active`, { active: true })
     expect(await state(FEED)).toBe(0)
-    const fed = await client.post(`/api/game/pets/${pet.id}/feed`, {
+    const fed = await client.post(`/api/test/pets/${pet.id}/feed`, {
       foods: ['i170113', 'i170114', null, null, null, null],
     })
     expect(fed.statusCode).toBe(200)
