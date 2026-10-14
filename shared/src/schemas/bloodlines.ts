@@ -84,6 +84,7 @@ export interface SoulType {
   id: number
   nameKey: string
   field: string
+  label: string
   /** Value by soul level (index 0 is unused). */
   valueByLevel: number[]
 }

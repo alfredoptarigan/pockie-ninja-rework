@@ -26,7 +26,7 @@ import {
 } from '../../../../shared/src/schemas/bloodlines.js'
 import type { Db } from '../../db/client.js'
 import { characterBloodlinePrayer, characters, characterSouls } from '../../db/schema.js'
-import { rebornSouls } from '../../game/data.js'
+import { rebornBloodlines, rebornSouls } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
 import { isVip } from '../../game/vip.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
@@ -37,6 +37,11 @@ import { bad, lockLimit, nextUtcDay, utcDay } from './common.js'
 type CharacterRow = typeof characters.$inferSelect
 type SoulRow = typeof characterSouls.$inferSelect
 
+/** Reborn's stat label; stat 18 is labelled "Defense Improvement %" but the soul is Block. */
+const soulLabel = (field: string) =>
+  field === 'parry'
+    ? 'Block'
+    : (Object.values(rebornBloodlines().stats).find((s) => s.field === field)?.label ?? field)
 const random = (): Random => createRandom(randomInt(2 ** 31))
 const discoveredToday = (character: CharacterRow) =>
   character.soulDay === utcDay() ? character.soulsDiscovered : 0
@@ -70,6 +75,7 @@ async function view(tx: Tx | Db, character: CharacterRow): Promise<SoulsView> {
       id,
       nameKey,
       field,
+      label: soulLabel(field),
       valueByLevel,
     })),
     prayers: prayers.map(({ limitId, attribute, level, progress }) => ({

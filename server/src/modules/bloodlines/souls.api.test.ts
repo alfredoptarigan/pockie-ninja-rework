@@ -98,6 +98,8 @@ describe('GET /api/game/bloodlines/souls', () => {
       prayerMaxLevel: 9,
     })
     expect(response.json().types).toHaveLength(13)
+    expect(response.json().types[0]).toMatchObject({ id: 1, field: 'defense', label: 'Defense' })
+    expect(response.json().types[9]).toMatchObject({ id: 10, field: 'parry', label: 'Block' })
   })
 })
 

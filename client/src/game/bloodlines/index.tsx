@@ -1,5 +1,5 @@
 // Bloodlines window (M5 task 7): the Ninja House (44 NPCs, item turn-ins) and the Bloodline
-// panel (3 active slots and their summed bonuses).
+// panel (3 active slots and their summed bonuses), plus the Souls and Prayer tabs (souls.tsx).
 import type { Character } from '@pockie/shared'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -14,6 +14,7 @@ import { api } from '../../lib/api'
 import { errorMessage, useApplyResult } from '../api'
 import { ItemIcon } from '../ItemIcon'
 import { Bar, Dialog, GameButton, Notice, Tabs } from '../skin'
+import { PrayerPanel, SoulsPanel } from './souls'
 
 export const bloodlinesKey = ['game', 'bloodlines'] as const
 /** Reborn art (client/src/generated/reborn-assets.json, categories "bloodline" and "npc"). */
@@ -57,7 +58,7 @@ export function formatStat({ field, label, value }: BloodlineStat) {
   return `${name} +${Number(shown.toFixed(2))}${percent ? '%' : ''}`
 }
 
-type Tab = 'house' | 'active'
+type Tab = 'house' | 'active' | 'souls' | 'prayer'
 
 export function BloodlinesWindow({
   character,
@@ -117,6 +118,8 @@ export function BloodlinesWindow({
         tabs={[
           { id: 'house', title: 'Ninja House' },
           { id: 'active', title: 'Bloodlines' },
+          { id: 'souls', title: 'Souls' },
+          { id: 'prayer', title: 'Prayer' },
         ]}
       />
       <div
@@ -205,7 +208,9 @@ export function BloodlinesWindow({
             </section>
           </>
         )}
-        {message && <Notice>{message}</Notice>}
+        {data && tab === 'souls' && <SoulsPanel limits={data.limits} level={character.level} />}
+        {data && tab === 'prayer' && <PrayerPanel limits={data.limits} />}
+        {message && tab !== 'souls' && tab !== 'prayer' && <Notice>{message}</Notice>}
       </div>
       <div className="mt-[10px] flex justify-end">
         <GameButton onClick={onClose}>Close</GameButton>
