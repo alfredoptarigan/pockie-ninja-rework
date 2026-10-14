@@ -296,17 +296,25 @@ async function main() {
     ...new Set([
       ...Array.from({ length: 12 }, (_, i) => 540001 + i),
       ...Array.from({ length: 12 }, (_, i) => 540101 + i),
-      // M6 card packs (Green..Gold, icons/items/cards/item/<n>).
-      ...Array.from({ length: 5 }, (_, i) => 171001 + i),
       ...Object.values(config.bloodline.Limits).map((l) => l.item),
     ]),
   ]
+  // Every Reborn item we ship (ResourceID "reborn/<path>"): the bag draws its icon.
+  const ourItems = JSON.parse(
+    readFileSync(join(root, 'server/data/game/reborn/items.json'), 'utf8'),
+  ) as Record<string, { ResourceID?: string }>
+  const ourIcons = Object.entries(ourItems).flatMap(([id, row]) =>
+    row.ResourceID?.startsWith('reborn/')
+      ? [['item-icon', id.slice(1), `icons/items/${row.ResourceID.slice(7)}.png`] as const]
+      : [],
+  )
   const fixed: [string, string | number, string][] = [
     ...itemIds.map((id): [string, number, string] => [
       'item-icon',
       id,
       `icons/items/${items[id]![0]}.png`,
     ]),
+    ...new Map(ourIcons.map((icon) => [icon[2], [...icon] as [string, string, string]])).values(),
     ['daily-login', 'reward', 'dailylogin/reward.png'],
     ['daily-login', '20min', 'dailylogin/20min.png'],
     ['bloodline', 'menu', 'ui/newui/Bloodline.png'],

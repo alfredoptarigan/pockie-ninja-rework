@@ -15635,6 +15635,12 @@
     "id": "171005",
     "bytes": 706
   },
+  "icons/items/etc/213.png": {
+    "url": "/assets/reborn/icons/items/etc/213.webp",
+    "category": "item-icon",
+    "id": "490005",
+    "bytes": 1226
+  },
   "icons/items/etc/360109.png": {
     "url": "/assets/reborn/icons/items/etc/360109.webp",
     "category": "item-icon",
@@ -15706,6 +15712,1146 @@
     "category": "item-icon",
     "id": "540105",
     "bytes": 470
+  },
+  "icons/items/pets/10003.png": {
+    "url": "/assets/reborn/icons/items/pets/10003.webp",
+    "category": "item-icon",
+    "id": "320046",
+    "bytes": 1604
+  },
+  "icons/items/pets/10034.png": {
+    "url": "/assets/reborn/icons/items/pets/10034.webp",
+    "category": "item-icon",
+    "id": "320047",
+    "bytes": 1692
+  },
+  "icons/items/pets/10035.png": {
+    "url": "/assets/reborn/icons/items/pets/10035.webp",
+    "category": "item-icon",
+    "id": "320048",
+    "bytes": 1534
+  },
+  "icons/items/pets/10036.png": {
+    "url": "/assets/reborn/icons/items/pets/10036.webp",
+    "category": "item-icon",
+    "id": "320049",
+    "bytes": 1550
+  },
+  "icons/items/pets/10037.png": {
+    "url": "/assets/reborn/icons/items/pets/10037.webp",
+    "category": "item-icon",
+    "id": "320050",
+    "bytes": 1638
+  },
+  "icons/items/pets/10038.png": {
+    "url": "/assets/reborn/icons/items/pets/10038.webp",
+    "category": "item-icon",
+    "id": "320051",
+    "bytes": 1638
+  },
+  "icons/items/pets/10039.png": {
+    "url": "/assets/reborn/icons/items/pets/10039.webp",
+    "category": "item-icon",
+    "id": "320052",
+    "bytes": 1858
+  },
+  "icons/items/pets/10040.png": {
+    "url": "/assets/reborn/icons/items/pets/10040.webp",
+    "category": "item-icon",
+    "id": "320008",
+    "bytes": 1876
+  },
+  "icons/items/pets/10041.png": {
+    "url": "/assets/reborn/icons/items/pets/10041.webp",
+    "category": "item-icon",
+    "id": "320036",
+    "bytes": 1650
+  },
+  "icons/items/pets/10042.png": {
+    "url": "/assets/reborn/icons/items/pets/10042.webp",
+    "category": "item-icon",
+    "id": "320053",
+    "bytes": 1600
+  },
+  "icons/items/pets/10043.png": {
+    "url": "/assets/reborn/icons/items/pets/10043.webp",
+    "category": "item-icon",
+    "id": "320054",
+    "bytes": 1824
+  },
+  "icons/items/pets/10044.png": {
+    "url": "/assets/reborn/icons/items/pets/10044.webp",
+    "category": "item-icon",
+    "id": "320055",
+    "bytes": 1432
+  },
+  "icons/items/pets/10045.png": {
+    "url": "/assets/reborn/icons/items/pets/10045.webp",
+    "category": "item-icon",
+    "id": "320056",
+    "bytes": 1460
+  },
+  "icons/items/pets/10046.png": {
+    "url": "/assets/reborn/icons/items/pets/10046.webp",
+    "category": "item-icon",
+    "id": "320057",
+    "bytes": 1424
+  },
+  "icons/items/pets/10047.png": {
+    "url": "/assets/reborn/icons/items/pets/10047.webp",
+    "category": "item-icon",
+    "id": "320058",
+    "bytes": 1530
+  },
+  "icons/items/pets/10048.png": {
+    "url": "/assets/reborn/icons/items/pets/10048.webp",
+    "category": "item-icon",
+    "id": "320059",
+    "bytes": 1520
+  },
+  "icons/items/pets/10049.png": {
+    "url": "/assets/reborn/icons/items/pets/10049.webp",
+    "category": "item-icon",
+    "id": "320060",
+    "bytes": 1660
+  },
+  "icons/items/pets/10050.png": {
+    "url": "/assets/reborn/icons/items/pets/10050.webp",
+    "category": "item-icon",
+    "id": "320002",
+    "bytes": 1736
+  },
+  "icons/items/pets/10051.png": {
+    "url": "/assets/reborn/icons/items/pets/10051.webp",
+    "category": "item-icon",
+    "id": "320003",
+    "bytes": 1394
+  },
+  "icons/items/pets/10052.png": {
+    "url": "/assets/reborn/icons/items/pets/10052.webp",
+    "category": "item-icon",
+    "id": "320131",
+    "bytes": 1288
+  },
+  "icons/items/pets/10064.png": {
+    "url": "/assets/reborn/icons/items/pets/10064.webp",
+    "category": "item-icon",
+    "id": "320061",
+    "bytes": 1344
+  },
+  "icons/items/pets/10065.png": {
+    "url": "/assets/reborn/icons/items/pets/10065.webp",
+    "category": "item-icon",
+    "id": "320006",
+    "bytes": 1850
+  },
+  "icons/items/pets/10066.png": {
+    "url": "/assets/reborn/icons/items/pets/10066.webp",
+    "category": "item-icon",
+    "id": "320062",
+    "bytes": 1718
+  },
+  "icons/items/pets/10067.png": {
+    "url": "/assets/reborn/icons/items/pets/10067.webp",
+    "category": "item-icon",
+    "id": "320063",
+    "bytes": 1710
+  },
+  "icons/items/pets/10068.png": {
+    "url": "/assets/reborn/icons/items/pets/10068.webp",
+    "category": "item-icon",
+    "id": "320064",
+    "bytes": 1314
+  },
+  "icons/items/pets/10069.png": {
+    "url": "/assets/reborn/icons/items/pets/10069.webp",
+    "category": "item-icon",
+    "id": "320132",
+    "bytes": 1838
+  },
+  "icons/items/pets/10070.png": {
+    "url": "/assets/reborn/icons/items/pets/10070.webp",
+    "category": "item-icon",
+    "id": "320133",
+    "bytes": 1850
+  },
+  "icons/items/pets/10071.png": {
+    "url": "/assets/reborn/icons/items/pets/10071.webp",
+    "category": "item-icon",
+    "id": "320134",
+    "bytes": 1742
+  },
+  "icons/items/pets/10072.png": {
+    "url": "/assets/reborn/icons/items/pets/10072.webp",
+    "category": "item-icon",
+    "id": "320135",
+    "bytes": 1776
+  },
+  "icons/items/pets/10073.png": {
+    "url": "/assets/reborn/icons/items/pets/10073.webp",
+    "category": "item-icon",
+    "id": "320136",
+    "bytes": 1736
+  },
+  "icons/items/pets/10074.png": {
+    "url": "/assets/reborn/icons/items/pets/10074.webp",
+    "category": "item-icon",
+    "id": "320015",
+    "bytes": 1674
+  },
+  "icons/items/pets/10075.png": {
+    "url": "/assets/reborn/icons/items/pets/10075.webp",
+    "category": "item-icon",
+    "id": "320016",
+    "bytes": 1608
+  },
+  "icons/items/pets/10076.png": {
+    "url": "/assets/reborn/icons/items/pets/10076.webp",
+    "category": "item-icon",
+    "id": "320017",
+    "bytes": 1774
+  },
+  "icons/items/pets/10077.png": {
+    "url": "/assets/reborn/icons/items/pets/10077.webp",
+    "category": "item-icon",
+    "id": "320018",
+    "bytes": 1488
+  },
+  "icons/items/pets/10078.png": {
+    "url": "/assets/reborn/icons/items/pets/10078.webp",
+    "category": "item-icon",
+    "id": "320019",
+    "bytes": 1400
+  },
+  "icons/items/pets/10079.png": {
+    "url": "/assets/reborn/icons/items/pets/10079.webp",
+    "category": "item-icon",
+    "id": "320065",
+    "bytes": 1790
+  },
+  "icons/items/pets/10080.png": {
+    "url": "/assets/reborn/icons/items/pets/10080.webp",
+    "category": "item-icon",
+    "id": "320066",
+    "bytes": 1538
+  },
+  "icons/items/pets/10081.png": {
+    "url": "/assets/reborn/icons/items/pets/10081.webp",
+    "category": "item-icon",
+    "id": "320067",
+    "bytes": 1362
+  },
+  "icons/items/pets/10082.png": {
+    "url": "/assets/reborn/icons/items/pets/10082.webp",
+    "category": "item-icon",
+    "id": "320068",
+    "bytes": 1354
+  },
+  "icons/items/pets/10083.png": {
+    "url": "/assets/reborn/icons/items/pets/10083.webp",
+    "category": "item-icon",
+    "id": "320069",
+    "bytes": 1632
+  },
+  "icons/items/pets/10084.png": {
+    "url": "/assets/reborn/icons/items/pets/10084.webp",
+    "category": "item-icon",
+    "id": "320025",
+    "bytes": 1556
+  },
+  "icons/items/pets/10085.png": {
+    "url": "/assets/reborn/icons/items/pets/10085.webp",
+    "category": "item-icon",
+    "id": "320026",
+    "bytes": 1436
+  },
+  "icons/items/pets/10086.png": {
+    "url": "/assets/reborn/icons/items/pets/10086.webp",
+    "category": "item-icon",
+    "id": "320027",
+    "bytes": 1078
+  },
+  "icons/items/pets/10087.png": {
+    "url": "/assets/reborn/icons/items/pets/10087.webp",
+    "category": "item-icon",
+    "id": "320137",
+    "bytes": 1616
+  },
+  "icons/items/pets/10088.png": {
+    "url": "/assets/reborn/icons/items/pets/10088.webp",
+    "category": "item-icon",
+    "id": "320138",
+    "bytes": 1734
+  },
+  "icons/items/pets/10089.png": {
+    "url": "/assets/reborn/icons/items/pets/10089.webp",
+    "category": "item-icon",
+    "id": "320139",
+    "bytes": 1506
+  },
+  "icons/items/pets/10090.png": {
+    "url": "/assets/reborn/icons/items/pets/10090.webp",
+    "category": "item-icon",
+    "id": "320140",
+    "bytes": 1348
+  },
+  "icons/items/pets/10091.png": {
+    "url": "/assets/reborn/icons/items/pets/10091.webp",
+    "category": "item-icon",
+    "id": "320141",
+    "bytes": 1672
+  },
+  "icons/items/pets/10092.png": {
+    "url": "/assets/reborn/icons/items/pets/10092.webp",
+    "category": "item-icon",
+    "id": "320142",
+    "bytes": 1674
+  },
+  "icons/items/pets/10093.png": {
+    "url": "/assets/reborn/icons/items/pets/10093.webp",
+    "category": "item-icon",
+    "id": "320143",
+    "bytes": 1626
+  },
+  "icons/items/pets/10094.png": {
+    "url": "/assets/reborn/icons/items/pets/10094.webp",
+    "category": "item-icon",
+    "id": "320144",
+    "bytes": 1276
+  },
+  "icons/items/pets/10095.png": {
+    "url": "/assets/reborn/icons/items/pets/10095.webp",
+    "category": "item-icon",
+    "id": "320145",
+    "bytes": 1762
+  },
+  "icons/items/pets/10096.png": {
+    "url": "/assets/reborn/icons/items/pets/10096.webp",
+    "category": "item-icon",
+    "id": "320146",
+    "bytes": 1828
+  },
+  "icons/items/pets/10097.png": {
+    "url": "/assets/reborn/icons/items/pets/10097.webp",
+    "category": "item-icon",
+    "id": "320147",
+    "bytes": 1830
+  },
+  "icons/items/pets/10098.png": {
+    "url": "/assets/reborn/icons/items/pets/10098.webp",
+    "category": "item-icon",
+    "id": "320148",
+    "bytes": 1808
+  },
+  "icons/items/pets/10099.png": {
+    "url": "/assets/reborn/icons/items/pets/10099.webp",
+    "category": "item-icon",
+    "id": "320149",
+    "bytes": 1748
+  },
+  "icons/items/pets/10100.png": {
+    "url": "/assets/reborn/icons/items/pets/10100.webp",
+    "category": "item-icon",
+    "id": "320150",
+    "bytes": 1680
+  },
+  "icons/items/pets/10101.png": {
+    "url": "/assets/reborn/icons/items/pets/10101.webp",
+    "category": "item-icon",
+    "id": "320151",
+    "bytes": 1584
+  },
+  "icons/items/pets/10102.png": {
+    "url": "/assets/reborn/icons/items/pets/10102.webp",
+    "category": "item-icon",
+    "id": "320152",
+    "bytes": 1858
+  },
+  "icons/items/pets/10103.png": {
+    "url": "/assets/reborn/icons/items/pets/10103.webp",
+    "category": "item-icon",
+    "id": "320153",
+    "bytes": 1476
+  },
+  "icons/items/pets/10104.png": {
+    "url": "/assets/reborn/icons/items/pets/10104.webp",
+    "category": "item-icon",
+    "id": "320154",
+    "bytes": 1372
+  },
+  "icons/items/pets/10105.png": {
+    "url": "/assets/reborn/icons/items/pets/10105.webp",
+    "category": "item-icon",
+    "id": "320155",
+    "bytes": 1738
+  },
+  "icons/items/pets/10106.png": {
+    "url": "/assets/reborn/icons/items/pets/10106.webp",
+    "category": "item-icon",
+    "id": "320156",
+    "bytes": 1546
+  },
+  "icons/items/pets/10107.png": {
+    "url": "/assets/reborn/icons/items/pets/10107.webp",
+    "category": "item-icon",
+    "id": "320157",
+    "bytes": 1284
+  },
+  "icons/items/pets/10108.png": {
+    "url": "/assets/reborn/icons/items/pets/10108.webp",
+    "category": "item-icon",
+    "id": "320158",
+    "bytes": 1404
+  },
+  "icons/items/pets/10109.png": {
+    "url": "/assets/reborn/icons/items/pets/10109.webp",
+    "category": "item-icon",
+    "id": "320159",
+    "bytes": 1624
+  },
+  "icons/items/pets/10110.png": {
+    "url": "/assets/reborn/icons/items/pets/10110.webp",
+    "category": "item-icon",
+    "id": "320160",
+    "bytes": 1580
+  },
+  "icons/items/pets/10111.png": {
+    "url": "/assets/reborn/icons/items/pets/10111.webp",
+    "category": "item-icon",
+    "id": "320161",
+    "bytes": 1604
+  },
+  "icons/items/pets/10112.png": {
+    "url": "/assets/reborn/icons/items/pets/10112.webp",
+    "category": "item-icon",
+    "id": "320162",
+    "bytes": 1088
+  },
+  "icons/items/pets/31027.png": {
+    "url": "/assets/reborn/icons/items/pets/31027.webp",
+    "category": "item-icon",
+    "id": "320163",
+    "bytes": 1492
+  },
+  "icons/items/pets/31028.png": {
+    "url": "/assets/reborn/icons/items/pets/31028.webp",
+    "category": "item-icon",
+    "id": "320164",
+    "bytes": 1896
+  },
+  "icons/items/pets/31029.png": {
+    "url": "/assets/reborn/icons/items/pets/31029.webp",
+    "category": "item-icon",
+    "id": "320070",
+    "bytes": 1684
+  },
+  "icons/items/pets/31030.png": {
+    "url": "/assets/reborn/icons/items/pets/31030.webp",
+    "category": "item-icon",
+    "id": "320033",
+    "bytes": 1182
+  },
+  "icons/items/pets/34001.png": {
+    "url": "/assets/reborn/icons/items/pets/34001.webp",
+    "category": "item-icon",
+    "id": "320028",
+    "bytes": 1790
+  },
+  "icons/items/pets/34004.png": {
+    "url": "/assets/reborn/icons/items/pets/34004.webp",
+    "category": "item-icon",
+    "id": "320029",
+    "bytes": 1942
+  },
+  "icons/items/pets/34005.png": {
+    "url": "/assets/reborn/icons/items/pets/34005.webp",
+    "category": "item-icon",
+    "id": "320030",
+    "bytes": 1924
+  },
+  "icons/items/pets/34006.png": {
+    "url": "/assets/reborn/icons/items/pets/34006.webp",
+    "category": "item-icon",
+    "id": "320031",
+    "bytes": 1970
+  },
+  "icons/items/pets/34007.png": {
+    "url": "/assets/reborn/icons/items/pets/34007.webp",
+    "category": "item-icon",
+    "id": "320071",
+    "bytes": 1496
+  },
+  "icons/items/pets/340071.png": {
+    "url": "/assets/reborn/icons/items/pets/340071.webp",
+    "category": "item-icon",
+    "id": "320103",
+    "bytes": 1612
+  },
+  "icons/items/pets/34008.png": {
+    "url": "/assets/reborn/icons/items/pets/34008.webp",
+    "category": "item-icon",
+    "id": "320072",
+    "bytes": 1924
+  },
+  "icons/items/pets/340081.png": {
+    "url": "/assets/reborn/icons/items/pets/340081.webp",
+    "category": "item-icon",
+    "id": "320104",
+    "bytes": 1662
+  },
+  "icons/items/pets/34009.png": {
+    "url": "/assets/reborn/icons/items/pets/34009.webp",
+    "category": "item-icon",
+    "id": "320073",
+    "bytes": 2504
+  },
+  "icons/items/pets/340091.png": {
+    "url": "/assets/reborn/icons/items/pets/340091.webp",
+    "category": "item-icon",
+    "id": "320105",
+    "bytes": 2836
+  },
+  "icons/items/pets/34010.png": {
+    "url": "/assets/reborn/icons/items/pets/34010.webp",
+    "category": "item-icon",
+    "id": "320074",
+    "bytes": 1596
+  },
+  "icons/items/pets/340101.png": {
+    "url": "/assets/reborn/icons/items/pets/340101.webp",
+    "category": "item-icon",
+    "id": "320106",
+    "bytes": 1588
+  },
+  "icons/items/pets/34011.png": {
+    "url": "/assets/reborn/icons/items/pets/34011.webp",
+    "category": "item-icon",
+    "id": "320075",
+    "bytes": 1672
+  },
+  "icons/items/pets/340111.png": {
+    "url": "/assets/reborn/icons/items/pets/340111.webp",
+    "category": "item-icon",
+    "id": "320107",
+    "bytes": 1666
+  },
+  "icons/items/pets/34012.png": {
+    "url": "/assets/reborn/icons/items/pets/34012.webp",
+    "category": "item-icon",
+    "id": "320076",
+    "bytes": 2096
+  },
+  "icons/items/pets/340121.png": {
+    "url": "/assets/reborn/icons/items/pets/340121.webp",
+    "category": "item-icon",
+    "id": "320108",
+    "bytes": 2198
+  },
+  "icons/items/pets/34013.png": {
+    "url": "/assets/reborn/icons/items/pets/34013.webp",
+    "category": "item-icon",
+    "id": "320077",
+    "bytes": 1640
+  },
+  "icons/items/pets/340131.png": {
+    "url": "/assets/reborn/icons/items/pets/340131.webp",
+    "category": "item-icon",
+    "id": "320109",
+    "bytes": 1678
+  },
+  "icons/items/pets/34014.png": {
+    "url": "/assets/reborn/icons/items/pets/34014.webp",
+    "category": "item-icon",
+    "id": "320078",
+    "bytes": 2258
+  },
+  "icons/items/pets/340141.png": {
+    "url": "/assets/reborn/icons/items/pets/340141.webp",
+    "category": "item-icon",
+    "id": "320110",
+    "bytes": 2424
+  },
+  "icons/items/pets/34015.png": {
+    "url": "/assets/reborn/icons/items/pets/34015.webp",
+    "category": "item-icon",
+    "id": "320079",
+    "bytes": 2168
+  },
+  "icons/items/pets/340151.png": {
+    "url": "/assets/reborn/icons/items/pets/340151.webp",
+    "category": "item-icon",
+    "id": "320111",
+    "bytes": 2448
+  },
+  "icons/items/pets/34016.png": {
+    "url": "/assets/reborn/icons/items/pets/34016.webp",
+    "category": "item-icon",
+    "id": "320080",
+    "bytes": 2272
+  },
+  "icons/items/pets/340161.png": {
+    "url": "/assets/reborn/icons/items/pets/340161.webp",
+    "category": "item-icon",
+    "id": "320112",
+    "bytes": 2248
+  },
+  "icons/items/pets/34017.png": {
+    "url": "/assets/reborn/icons/items/pets/34017.webp",
+    "category": "item-icon",
+    "id": "320081",
+    "bytes": 2026
+  },
+  "icons/items/pets/340171.png": {
+    "url": "/assets/reborn/icons/items/pets/340171.webp",
+    "category": "item-icon",
+    "id": "320113",
+    "bytes": 2270
+  },
+  "icons/items/pets/34018.png": {
+    "url": "/assets/reborn/icons/items/pets/34018.webp",
+    "category": "item-icon",
+    "id": "320082",
+    "bytes": 1506
+  },
+  "icons/items/pets/340181.png": {
+    "url": "/assets/reborn/icons/items/pets/340181.webp",
+    "category": "item-icon",
+    "id": "320114",
+    "bytes": 1610
+  },
+  "icons/items/pets/34019.png": {
+    "url": "/assets/reborn/icons/items/pets/34019.webp",
+    "category": "item-icon",
+    "id": "320083",
+    "bytes": 2010
+  },
+  "icons/items/pets/340191.png": {
+    "url": "/assets/reborn/icons/items/pets/340191.webp",
+    "category": "item-icon",
+    "id": "320115",
+    "bytes": 2070
+  },
+  "icons/items/pets/34020.png": {
+    "url": "/assets/reborn/icons/items/pets/34020.webp",
+    "category": "item-icon",
+    "id": "320084",
+    "bytes": 1622
+  },
+  "icons/items/pets/340201.png": {
+    "url": "/assets/reborn/icons/items/pets/340201.webp",
+    "category": "item-icon",
+    "id": "320116",
+    "bytes": 1498
+  },
+  "icons/items/pets/34021.png": {
+    "url": "/assets/reborn/icons/items/pets/34021.webp",
+    "category": "item-icon",
+    "id": "320085",
+    "bytes": 2138
+  },
+  "icons/items/pets/340211.png": {
+    "url": "/assets/reborn/icons/items/pets/340211.webp",
+    "category": "item-icon",
+    "id": "320117",
+    "bytes": 2524
+  },
+  "icons/items/pets/34022.png": {
+    "url": "/assets/reborn/icons/items/pets/34022.webp",
+    "category": "item-icon",
+    "id": "320086",
+    "bytes": 2170
+  },
+  "icons/items/pets/340221.png": {
+    "url": "/assets/reborn/icons/items/pets/340221.webp",
+    "category": "item-icon",
+    "id": "320118",
+    "bytes": 2228
+  },
+  "icons/items/pets/34023.png": {
+    "url": "/assets/reborn/icons/items/pets/34023.webp",
+    "category": "item-icon",
+    "id": "320087",
+    "bytes": 2218
+  },
+  "icons/items/pets/340231.png": {
+    "url": "/assets/reborn/icons/items/pets/340231.webp",
+    "category": "item-icon",
+    "id": "320119",
+    "bytes": 2252
+  },
+  "icons/items/pets/34024.png": {
+    "url": "/assets/reborn/icons/items/pets/34024.webp",
+    "category": "item-icon",
+    "id": "320088",
+    "bytes": 1680
+  },
+  "icons/items/pets/340241.png": {
+    "url": "/assets/reborn/icons/items/pets/340241.webp",
+    "category": "item-icon",
+    "id": "320120",
+    "bytes": 1722
+  },
+  "icons/items/pets/34025.png": {
+    "url": "/assets/reborn/icons/items/pets/34025.webp",
+    "category": "item-icon",
+    "id": "320089",
+    "bytes": 2384
+  },
+  "icons/items/pets/34026.png": {
+    "url": "/assets/reborn/icons/items/pets/34026.webp",
+    "category": "item-icon",
+    "id": "320090",
+    "bytes": 2152
+  },
+  "icons/items/pets/340261.png": {
+    "url": "/assets/reborn/icons/items/pets/340261.webp",
+    "category": "item-icon",
+    "id": "320121",
+    "bytes": 2390
+  },
+  "icons/items/pets/34027.png": {
+    "url": "/assets/reborn/icons/items/pets/34027.webp",
+    "category": "item-icon",
+    "id": "320091",
+    "bytes": 1492
+  },
+  "icons/items/pets/34028.png": {
+    "url": "/assets/reborn/icons/items/pets/34028.webp",
+    "category": "item-icon",
+    "id": "320092",
+    "bytes": 1896
+  },
+  "icons/items/pets/34029.png": {
+    "url": "/assets/reborn/icons/items/pets/34029.webp",
+    "category": "item-icon",
+    "id": "320037",
+    "bytes": 1370
+  },
+  "icons/items/pets/34030.png": {
+    "url": "/assets/reborn/icons/items/pets/34030.webp",
+    "category": "item-icon",
+    "id": "320093",
+    "bytes": 1382
+  },
+  "icons/items/pets/340301.png": {
+    "url": "/assets/reborn/icons/items/pets/340301.webp",
+    "category": "item-icon",
+    "id": "320122",
+    "bytes": 1318
+  },
+  "icons/items/pets/34031.png": {
+    "url": "/assets/reborn/icons/items/pets/34031.webp",
+    "category": "item-icon",
+    "id": "320038",
+    "bytes": 1766
+  },
+  "icons/items/pets/34032.png": {
+    "url": "/assets/reborn/icons/items/pets/34032.webp",
+    "category": "item-icon",
+    "id": "320094",
+    "bytes": 1740
+  },
+  "icons/items/pets/340321.png": {
+    "url": "/assets/reborn/icons/items/pets/340321.webp",
+    "category": "item-icon",
+    "id": "320123",
+    "bytes": 1736
+  },
+  "icons/items/pets/34041.png": {
+    "url": "/assets/reborn/icons/items/pets/34041.webp",
+    "category": "item-icon",
+    "id": "320039",
+    "bytes": 1372
+  },
+  "icons/items/pets/34042.png": {
+    "url": "/assets/reborn/icons/items/pets/34042.webp",
+    "category": "item-icon",
+    "id": "320095",
+    "bytes": 1672
+  },
+  "icons/items/pets/340421.png": {
+    "url": "/assets/reborn/icons/items/pets/340421.webp",
+    "category": "item-icon",
+    "id": "320124",
+    "bytes": 1590
+  },
+  "icons/items/pets/34043.png": {
+    "url": "/assets/reborn/icons/items/pets/34043.webp",
+    "category": "item-icon",
+    "id": "320040",
+    "bytes": 1406
+  },
+  "icons/items/pets/34044.png": {
+    "url": "/assets/reborn/icons/items/pets/34044.webp",
+    "category": "item-icon",
+    "id": "320096",
+    "bytes": 1368
+  },
+  "icons/items/pets/340441.png": {
+    "url": "/assets/reborn/icons/items/pets/340441.webp",
+    "category": "item-icon",
+    "id": "320125",
+    "bytes": 1270
+  },
+  "icons/items/pets/34045.png": {
+    "url": "/assets/reborn/icons/items/pets/34045.webp",
+    "category": "item-icon",
+    "id": "320041",
+    "bytes": 1206
+  },
+  "icons/items/pets/34046.png": {
+    "url": "/assets/reborn/icons/items/pets/34046.webp",
+    "category": "item-icon",
+    "id": "320097",
+    "bytes": 1210
+  },
+  "icons/items/pets/340461.png": {
+    "url": "/assets/reborn/icons/items/pets/340461.webp",
+    "category": "item-icon",
+    "id": "320126",
+    "bytes": 1238
+  },
+  "icons/items/pets/34047.png": {
+    "url": "/assets/reborn/icons/items/pets/34047.webp",
+    "category": "item-icon",
+    "id": "320042",
+    "bytes": 1306
+  },
+  "icons/items/pets/34048.png": {
+    "url": "/assets/reborn/icons/items/pets/34048.webp",
+    "category": "item-icon",
+    "id": "320098",
+    "bytes": 1262
+  },
+  "icons/items/pets/340481.png": {
+    "url": "/assets/reborn/icons/items/pets/340481.webp",
+    "category": "item-icon",
+    "id": "320127",
+    "bytes": 1168
+  },
+  "icons/items/pets/34049.png": {
+    "url": "/assets/reborn/icons/items/pets/34049.webp",
+    "category": "item-icon",
+    "id": "320043",
+    "bytes": 1758
+  },
+  "icons/items/pets/34050.png": {
+    "url": "/assets/reborn/icons/items/pets/34050.webp",
+    "category": "item-icon",
+    "id": "320099",
+    "bytes": 1648
+  },
+  "icons/items/pets/340501.png": {
+    "url": "/assets/reborn/icons/items/pets/340501.webp",
+    "category": "item-icon",
+    "id": "320128",
+    "bytes": 1638
+  },
+  "icons/items/pets/34051.png": {
+    "url": "/assets/reborn/icons/items/pets/34051.webp",
+    "category": "item-icon",
+    "id": "320044",
+    "bytes": 1492
+  },
+  "icons/items/pets/34052.png": {
+    "url": "/assets/reborn/icons/items/pets/34052.webp",
+    "category": "item-icon",
+    "id": "320100",
+    "bytes": 1480
+  },
+  "icons/items/pets/340521.png": {
+    "url": "/assets/reborn/icons/items/pets/340521.webp",
+    "category": "item-icon",
+    "id": "320129",
+    "bytes": 1282
+  },
+  "icons/items/pets/34053.png": {
+    "url": "/assets/reborn/icons/items/pets/34053.webp",
+    "category": "item-icon",
+    "id": "320045",
+    "bytes": 1666
+  },
+  "icons/items/pets/34054.png": {
+    "url": "/assets/reborn/icons/items/pets/34054.webp",
+    "category": "item-icon",
+    "id": "320101",
+    "bytes": 1928
+  },
+  "icons/items/pets/340541.png": {
+    "url": "/assets/reborn/icons/items/pets/340541.webp",
+    "category": "item-icon",
+    "id": "320130",
+    "bytes": 1566
+  },
+  "icons/items/pets/34055.png": {
+    "url": "/assets/reborn/icons/items/pets/34055.webp",
+    "category": "item-icon",
+    "id": "320165",
+    "bytes": 1174
+  },
+  "icons/items/pets/34056.png": {
+    "url": "/assets/reborn/icons/items/pets/34056.webp",
+    "category": "item-icon",
+    "id": "320166",
+    "bytes": 1454
+  },
+  "icons/items/pets/340561.png": {
+    "url": "/assets/reborn/icons/items/pets/340561.webp",
+    "category": "item-icon",
+    "id": "320200",
+    "bytes": 1396
+  },
+  "icons/items/pets/34057.png": {
+    "url": "/assets/reborn/icons/items/pets/34057.webp",
+    "category": "item-icon",
+    "id": "320167",
+    "bytes": 1310
+  },
+  "icons/items/pets/34058.png": {
+    "url": "/assets/reborn/icons/items/pets/34058.webp",
+    "category": "item-icon",
+    "id": "320168",
+    "bytes": 1278
+  },
+  "icons/items/pets/340581.png": {
+    "url": "/assets/reborn/icons/items/pets/340581.webp",
+    "category": "item-icon",
+    "id": "320201",
+    "bytes": 1442
+  },
+  "icons/items/pets/34059.png": {
+    "url": "/assets/reborn/icons/items/pets/34059.webp",
+    "category": "item-icon",
+    "id": "320169",
+    "bytes": 1118
+  },
+  "icons/items/pets/34060.png": {
+    "url": "/assets/reborn/icons/items/pets/34060.webp",
+    "category": "item-icon",
+    "id": "320170",
+    "bytes": 1066
+  },
+  "icons/items/pets/340601.png": {
+    "url": "/assets/reborn/icons/items/pets/340601.webp",
+    "category": "item-icon",
+    "id": "320202",
+    "bytes": 1294
+  },
+  "icons/items/pets/34061.png": {
+    "url": "/assets/reborn/icons/items/pets/34061.webp",
+    "category": "item-icon",
+    "id": "320171",
+    "bytes": 1612
+  },
+  "icons/items/pets/34062.png": {
+    "url": "/assets/reborn/icons/items/pets/34062.webp",
+    "category": "item-icon",
+    "id": "320172",
+    "bytes": 1772
+  },
+  "icons/items/pets/340621.png": {
+    "url": "/assets/reborn/icons/items/pets/340621.webp",
+    "category": "item-icon",
+    "id": "320203",
+    "bytes": 1708
+  },
+  "icons/items/pets/34063.png": {
+    "url": "/assets/reborn/icons/items/pets/34063.webp",
+    "category": "item-icon",
+    "id": "320173",
+    "bytes": 992
+  },
+  "icons/items/pets/34064.png": {
+    "url": "/assets/reborn/icons/items/pets/34064.webp",
+    "category": "item-icon",
+    "id": "320174",
+    "bytes": 1052
+  },
+  "icons/items/pets/340641.png": {
+    "url": "/assets/reborn/icons/items/pets/340641.webp",
+    "category": "item-icon",
+    "id": "320204",
+    "bytes": 1176
+  },
+  "icons/items/pets/34065.png": {
+    "url": "/assets/reborn/icons/items/pets/34065.webp",
+    "category": "item-icon",
+    "id": "320175",
+    "bytes": 1472
+  },
+  "icons/items/pets/34066.png": {
+    "url": "/assets/reborn/icons/items/pets/34066.webp",
+    "category": "item-icon",
+    "id": "320176",
+    "bytes": 1558
+  },
+  "icons/items/pets/340661.png": {
+    "url": "/assets/reborn/icons/items/pets/340661.webp",
+    "category": "item-icon",
+    "id": "320205",
+    "bytes": 1526
+  },
+  "icons/items/pets/34067.png": {
+    "url": "/assets/reborn/icons/items/pets/34067.webp",
+    "category": "item-icon",
+    "id": "320177",
+    "bytes": 1218
+  },
+  "icons/items/pets/34068.png": {
+    "url": "/assets/reborn/icons/items/pets/34068.webp",
+    "category": "item-icon",
+    "id": "320178",
+    "bytes": 1282
+  },
+  "icons/items/pets/340681.png": {
+    "url": "/assets/reborn/icons/items/pets/340681.webp",
+    "category": "item-icon",
+    "id": "320206",
+    "bytes": 1348
+  },
+  "icons/items/pets/34069.png": {
+    "url": "/assets/reborn/icons/items/pets/34069.webp",
+    "category": "item-icon",
+    "id": "320179",
+    "bytes": 1412
+  },
+  "icons/items/pets/34070.png": {
+    "url": "/assets/reborn/icons/items/pets/34070.webp",
+    "category": "item-icon",
+    "id": "320180",
+    "bytes": 1484
+  },
+  "icons/items/pets/340701.png": {
+    "url": "/assets/reborn/icons/items/pets/340701.webp",
+    "category": "item-icon",
+    "id": "320207",
+    "bytes": 1458
+  },
+  "icons/items/pets/34071.png": {
+    "url": "/assets/reborn/icons/items/pets/34071.webp",
+    "category": "item-icon",
+    "id": "340710",
+    "bytes": 1508
+  },
+  "icons/items/pets/34072.png": {
+    "url": "/assets/reborn/icons/items/pets/34072.webp",
+    "category": "item-icon",
+    "id": "320182",
+    "bytes": 1618
+  },
+  "icons/items/pets/34073.png": {
+    "url": "/assets/reborn/icons/items/pets/34073.webp",
+    "category": "item-icon",
+    "id": "320183",
+    "bytes": 1746
+  },
+  "icons/items/pets/340731.png": {
+    "url": "/assets/reborn/icons/items/pets/340731.webp",
+    "category": "item-icon",
+    "id": "320208",
+    "bytes": 1940
+  },
+  "icons/items/pets/34074.png": {
+    "url": "/assets/reborn/icons/items/pets/34074.webp",
+    "category": "item-icon",
+    "id": "320184",
+    "bytes": 1560
+  },
+  "icons/items/pets/34075.png": {
+    "url": "/assets/reborn/icons/items/pets/34075.webp",
+    "category": "item-icon",
+    "id": "320185",
+    "bytes": 1428
+  },
+  "icons/items/pets/34076.png": {
+    "url": "/assets/reborn/icons/items/pets/34076.webp",
+    "category": "item-icon",
+    "id": "320186",
+    "bytes": 1464
+  },
+  "icons/items/pets/34077.png": {
+    "url": "/assets/reborn/icons/items/pets/34077.webp",
+    "category": "item-icon",
+    "id": "320187",
+    "bytes": 1734
+  },
+  "icons/items/pets/34078.png": {
+    "url": "/assets/reborn/icons/items/pets/34078.webp",
+    "category": "item-icon",
+    "id": "320188",
+    "bytes": 2094
+  },
+  "icons/items/pets/34079.png": {
+    "url": "/assets/reborn/icons/items/pets/34079.webp",
+    "category": "item-icon",
+    "id": "320189",
+    "bytes": 1576
+  },
+  "icons/items/pets/34080.png": {
+    "url": "/assets/reborn/icons/items/pets/34080.webp",
+    "category": "item-icon",
+    "id": "320102",
+    "bytes": 2126
+  },
+  "icons/items/pets/34081.png": {
+    "url": "/assets/reborn/icons/items/pets/34081.webp",
+    "category": "item-icon",
+    "id": "320190",
+    "bytes": 1768
+  },
+  "icons/items/pets/34082.png": {
+    "url": "/assets/reborn/icons/items/pets/34082.webp",
+    "category": "item-icon",
+    "id": "320191",
+    "bytes": 1684
+  },
+  "icons/items/pets/34083.png": {
+    "url": "/assets/reborn/icons/items/pets/34083.webp",
+    "category": "item-icon",
+    "id": "320192",
+    "bytes": 1496
+  },
+  "icons/items/pets/34086.png": {
+    "url": "/assets/reborn/icons/items/pets/34086.webp",
+    "category": "item-icon",
+    "id": "320193",
+    "bytes": 1514
+  },
+  "icons/items/pets/34094.png": {
+    "url": "/assets/reborn/icons/items/pets/34094.webp",
+    "category": "item-icon",
+    "id": "320194",
+    "bytes": 1658
+  },
+  "icons/items/pets/34095.png": {
+    "url": "/assets/reborn/icons/items/pets/34095.webp",
+    "category": "item-icon",
+    "id": "320195",
+    "bytes": 1356
+  },
+  "icons/items/pets/34096.png": {
+    "url": "/assets/reborn/icons/items/pets/34096.webp",
+    "category": "item-icon",
+    "id": "320196",
+    "bytes": 1756
+  },
+  "icons/items/pets/34097.png": {
+    "url": "/assets/reborn/icons/items/pets/34097.webp",
+    "category": "item-icon",
+    "id": "320197",
+    "bytes": 1120
+  },
+  "icons/items/pets/34098.png": {
+    "url": "/assets/reborn/icons/items/pets/34098.webp",
+    "category": "item-icon",
+    "id": "320198",
+    "bytes": 1394
+  },
+  "icons/items/pets/34200.png": {
+    "url": "/assets/reborn/icons/items/pets/34200.webp",
+    "category": "item-icon",
+    "id": "320199",
+    "bytes": 1946
   },
   "icons/items/tasks/64.png": {
     "url": "/assets/reborn/icons/items/tasks/64.webp",
@@ -15814,6 +16960,210 @@
     "category": "item-icon",
     "id": "148040",
     "bytes": 582
+  },
+  "icons/items/tasks/master/32.png": {
+    "url": "/assets/reborn/icons/items/tasks/master/32.webp",
+    "category": "item-icon",
+    "id": "180081",
+    "bytes": 484
+  },
+  "icons/items/wings/aura2_chakra_flame_azure.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_chakra_flame_azure.webp",
+    "category": "item-icon",
+    "id": "218203",
+    "bytes": 2058
+  },
+  "icons/items/wings/aura2_chakra_flame_black.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_chakra_flame_black.webp",
+    "category": "item-icon",
+    "id": "218205",
+    "bytes": 2390
+  },
+  "icons/items/wings/aura2_chakra_flame_crimson.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_chakra_flame_crimson.webp",
+    "category": "item-icon",
+    "id": "218202",
+    "bytes": 2270
+  },
+  "icons/items/wings/aura2_chakra_flame_violet.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_chakra_flame_violet.webp",
+    "category": "item-icon",
+    "id": "218204",
+    "bytes": 2230
+  },
+  "icons/items/wings/aura2_eight_gates.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_eight_gates.webp",
+    "category": "item-icon",
+    "id": "218207",
+    "bytes": 2406
+  },
+  "icons/items/wings/aura2_ki_lightning.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_ki_lightning.webp",
+    "category": "item-icon",
+    "id": "218200",
+    "bytes": 2680
+  },
+  "icons/items/wings/aura2_lightning_armor.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_lightning_armor.webp",
+    "category": "item-icon",
+    "id": "218201",
+    "bytes": 2650
+  },
+  "icons/items/wings/aura2_tailed_beast.png": {
+    "url": "/assets/reborn/icons/items/wings/aura2_tailed_beast.webp",
+    "category": "item-icon",
+    "id": "218206",
+    "bytes": 2360
+  },
+  "icons/items/wings/fu_bjf.png": {
+    "url": "/assets/reborn/icons/items/wings/fu_bjf.webp",
+    "category": "item-icon",
+    "id": "218044",
+    "bytes": 454
+  },
+  "icons/items/wings/fu_hyf.png": {
+    "url": "/assets/reborn/icons/items/wings/fu_hyf.webp",
+    "category": "item-icon",
+    "id": "218054",
+    "bytes": 546
+  },
+  "icons/items/wings/fu_wbf.png": {
+    "url": "/assets/reborn/icons/items/wings/fu_wbf.webp",
+    "category": "item-icon",
+    "id": "218034",
+    "bytes": 426
+  },
+  "icons/items/wings/Icon_RedWing_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_RedWing_01.webp",
+    "category": "item-icon",
+    "id": "218018",
+    "bytes": 1722
+  },
+  "icons/items/wings/Icon_WhiteWing_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WhiteWing_01.webp",
+    "category": "item-icon",
+    "id": "218017",
+    "bytes": 790
+  },
+  "icons/items/wings/Icon_WingAbbad_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingAbbad_01.webp",
+    "category": "item-icon",
+    "id": "218009",
+    "bytes": 2448
+  },
+  "icons/items/wings/Icon_WingAndras_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingAndras_01.webp",
+    "category": "item-icon",
+    "id": "218010",
+    "bytes": 2312
+  },
+  "icons/items/wings/Icon_WingLilit_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingLilit_01.webp",
+    "category": "item-icon",
+    "id": "218012",
+    "bytes": 2246
+  },
+  "icons/items/wings/Icon_WingMamon_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingMamon_01.webp",
+    "category": "item-icon",
+    "id": "218011",
+    "bytes": 2588
+  },
+  "icons/items/wings/Icon_WingNew25_02.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingNew25_02.webp",
+    "category": "item-icon",
+    "id": "218015",
+    "bytes": 2140
+  },
+  "icons/items/wings/Icon_WingVaalb_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingVaalb_01.webp",
+    "category": "item-icon",
+    "id": "218013",
+    "bytes": 2242
+  },
+  "icons/items/wings/Icon_WingVerin_01.png": {
+    "url": "/assets/reborn/icons/items/wings/Icon_WingVerin_01.webp",
+    "category": "item-icon",
+    "id": "218014",
+    "bytes": 2662
+  },
+  "icons/items/wings/stone_lv1.png": {
+    "url": "/assets/reborn/icons/items/wings/stone_lv1.webp",
+    "category": "item-icon",
+    "id": "218021",
+    "bytes": 494
+  },
+  "icons/items/wings/stone_lv2.png": {
+    "url": "/assets/reborn/icons/items/wings/stone_lv2.webp",
+    "category": "item-icon",
+    "id": "218022",
+    "bytes": 484
+  },
+  "icons/items/wings/stone_lv3.png": {
+    "url": "/assets/reborn/icons/items/wings/stone_lv3.webp",
+    "category": "item-icon",
+    "id": "218023",
+    "bytes": 498
+  },
+  "icons/items/wings/stone_tzv.png": {
+    "url": "/assets/reborn/icons/items/wings/stone_tzv.webp",
+    "category": "item-icon",
+    "id": "218020",
+    "bytes": 602
+  },
+  "icons/items/wings/wing1.png": {
+    "url": "/assets/reborn/icons/items/wings/wing1.webp",
+    "category": "item-icon",
+    "id": "218000",
+    "bytes": 1604
+  },
+  "icons/items/wings/wing2.png": {
+    "url": "/assets/reborn/icons/items/wings/wing2.webp",
+    "category": "item-icon",
+    "id": "218001",
+    "bytes": 1814
+  },
+  "icons/items/wings/wing3.png": {
+    "url": "/assets/reborn/icons/items/wings/wing3.webp",
+    "category": "item-icon",
+    "id": "218002",
+    "bytes": 1964
+  },
+  "icons/items/wings/wing4.png": {
+    "url": "/assets/reborn/icons/items/wings/wing4.webp",
+    "category": "item-icon",
+    "id": "218003",
+    "bytes": 1616
+  },
+  "icons/items/wings/wing5.png": {
+    "url": "/assets/reborn/icons/items/wings/wing5.webp",
+    "category": "item-icon",
+    "id": "218004",
+    "bytes": 1490
+  },
+  "icons/items/wings/wing6.png": {
+    "url": "/assets/reborn/icons/items/wings/wing6.webp",
+    "category": "item-icon",
+    "id": "218005",
+    "bytes": 1598
+  },
+  "icons/items/wings/wing7.png": {
+    "url": "/assets/reborn/icons/items/wings/wing7.webp",
+    "category": "item-icon",
+    "id": "218006",
+    "bytes": 1960
+  },
+  "icons/items/wings/wing8.png": {
+    "url": "/assets/reborn/icons/items/wings/wing8.webp",
+    "category": "item-icon",
+    "id": "218008",
+    "bytes": 2462
+  },
+  "icons/items/wings/wing9.png": {
+    "url": "/assets/reborn/icons/items/wings/wing9.webp",
+    "category": "item-icon",
+    "id": "218007",
+    "bytes": 1934
   },
   "icons/npc/81001.png": {
     "url": "/assets/reborn/icons/npc/81001.webp",
