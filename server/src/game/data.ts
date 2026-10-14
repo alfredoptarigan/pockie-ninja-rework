@@ -147,7 +147,7 @@ export function exploreSpotIds(sceneId: number) {
 export const dropLib = (id: number) => load<Record<string, Row>>('drop-libs')[String(id)]
 export const dropItems = (id: number) => load<Record<string, Row[]>>('drop-items')[String(id)] ?? []
 export const taskMonsterDrops = (taskId: number) =>
-  load<Record<string, Row[]>>('task-monster-drops')[String(taskId)] ?? []
+  withReborn<Row[]>('task-monster-drops')[String(taskId)] ?? []
 
 export const task = (id: number) => withReborn<Row>('tasks')[String(id)]
 let offeredTaskIds: number[] | undefined
@@ -518,6 +518,7 @@ const REBORN_OVERLAYS = {
   ),
   tasks: z.record(z.string(), rowSchema),
   'sub-tasks': z.record(z.string(), z.array(rowSchema)),
+  'task-monster-drops': z.record(z.string(), z.array(rowSchema)),
 }
 
 function withReborn<T>(name: keyof typeof REBORN_OVERLAYS): Record<string, T> {

@@ -37,6 +37,10 @@ import {
   BUY_POUCH_COMMAND,
   EQUIP_WEAPON_COMMAND,
   questLock,
+  questLocation,
+  questNavigation,
+  isRebornQuest,
+  rebornLocation,
   questRewards,
   recordCommand,
   recordTalk,
@@ -167,9 +171,19 @@ export async function actionRoutes(
           nameKey: `lg_Task_${q.taskId}`,
           descriptionKey: `lg_TaskDes_${q.taskId}`,
           rewards: questRewards(q.taskId),
+          ...(questNavigation(q, character.nation)
+            ? { navigation: questNavigation(q, character.nation) }
+            : {}),
           steps: subTasks(q.taskId).map((step) => ({
             descriptionKey: `lg_${step.SubTaskDescription}`,
             target: stepTarget(step),
+            ...(isRebornQuest(q.taskId)
+              ? {
+                  descriptionArgs: [
+                    `lg_name_${rebornLocation(q.taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), character.nation).npcId}`,
+                  ],
+                }
+              : {}),
             ...stepCommand(step),
           })),
         })),
@@ -214,7 +228,7 @@ export async function actionRoutes(
         const quests = await loadQuests(tx, character.id)
         const lock = questLock(taskId, character, quests)
         if (lock) throw bad(lock.code, lock.message)
-        const acceptScene = Number(task(taskId)!.AcceptNpcSceneID)
+        const acceptScene = questLocation(taskId, character.nation, 'accept').sceneId
         if (acceptScene > 0 && acceptScene !== character.sceneId) {
           throw bad('wrong_place', 'Talk to the quest giver to take this quest.')
         }
@@ -249,8 +263,8 @@ export async function actionRoutes(
           quest.state === READY &&
           row &&
           HANDED_IN_TYPES.has(Number(row.TaskBaseType)) &&
-          row.SubmitNpcConfig === npcId &&
-          Number(row.SubmitNpcSceneID) === character.sceneId
+          questLocation(quest.taskId, character.nation, 'submit').npcId === npcId &&
+          questLocation(quest.taskId, character.nation, 'submit').sceneId === character.sceneId
         ) {
           const handIn = await completeQuest(tx, character.id, quest.taskId)
           if (handIn) handIns.push(handIn)

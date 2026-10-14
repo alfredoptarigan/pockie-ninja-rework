@@ -1,1 +1,1792 @@
-{}
+{
+  "820001": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_820001_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820001_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 111,
+      "TargetCondition": 0,
+      "TargetConfiger": "n11001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820002": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820002_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820002_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 8887,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820003": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_820003_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820003_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33026",
+      "TargetItem": 0,
+      "TargetRequireNum": 2
+    }
+  ],
+  "820004": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820004_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820004_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82001,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820005": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820005_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820005_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82002,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820009": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820009_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820009_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82003,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820016": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820016_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820016_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82004,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820017": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820017_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820017_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82005,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820018": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820018_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820018_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82006,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830001": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830001_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830001_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830002": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830002_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830002_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830003": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830003_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830003_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830004": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830004_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830004_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32001",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830005": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830005_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830005_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33006",
+      "TargetItem": "i140006",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830006": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830006_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830006_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33017",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830007": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830007_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830007_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830008": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830008_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830008_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830009": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830009_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830009_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32001",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830010": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830010_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830010_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32002",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830011": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830011_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830011_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2101,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33017",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830012": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830012_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830012_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33008",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830013": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830013_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830013_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830014": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830014_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830014_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830015": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830015_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830015_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33008",
+      "TargetItem": "i140008",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830016": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_830016_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830016_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82004,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830017": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830017_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830017_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33008",
+      "TargetItem": "i140008",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830018": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830018_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830018_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830019": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830019_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830019_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33011",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830020": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830020_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830020_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830021": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830021_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830021_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2102,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830022": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830022_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830022_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33010",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    },
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830022_start",
+      "SetpSeq": 1,
+      "SubTaskDescription": "RebornQuest_830022_step_1",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33020",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830023": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830023_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830023_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33010",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830024": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830024_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830024_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830025": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830025_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830025_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33019",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830026": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830026_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830026_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33019",
+      "TargetItem": "i140031",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830027": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830027_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830027_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830028": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830028_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830028_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n21004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830029": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830029_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830029_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2103,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33019",
+      "TargetItem": "i140031",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830030": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830030_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830030_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26007",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830031": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830031_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830031_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26007",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830032": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830032_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830032_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33005",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830033": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830033_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830033_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33005",
+      "TargetItem": "i140039",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830034": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830034_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830034_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26007",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830035": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830035_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830035_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32011",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830036": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830036_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830036_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33005",
+      "TargetItem": "i140039",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830037": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830037_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830037_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26007",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830038": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830038_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830038_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26007",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830039": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830039_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830039_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2605,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26007",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830040": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830040_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830040_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830041": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830041_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830041_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830042": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830042_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830042_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33025",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830043": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830043_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830043_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32016",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830044": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830044_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830044_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32027",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830045": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830045_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830045_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830046": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830046_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830046_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830047": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830047_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830047_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33025",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830048": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830048_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830048_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32016",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830049": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830049_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830049_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2602,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26003",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830050": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830050_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830050_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32007",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830051": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830051_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830051_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33012",
+      "TargetItem": "i140012",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830052": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830052_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830052_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830053": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830053_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830053_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33013",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830054": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830054_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830054_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830055": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830055_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830055_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830056": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830056_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830056_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830057": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830057_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830057_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33012",
+      "TargetItem": "i140012",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830058": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830058_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830058_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830059": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830059_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830059_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2603,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26004",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830060": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830060_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830060_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26006",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830061": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830061_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830061_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33002",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830062": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830062_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830062_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26006",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830063": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830063_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830063_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33001",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830064": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830064_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830064_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32012",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830065": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830065_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830065_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26006",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830066": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830066_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830066_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26006",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830067": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830067_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830067_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26006",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830068": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830068_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830068_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26006",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830069": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830069_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830069_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2604,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32012",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830070": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830070_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830070_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26009",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830071": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830071_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830071_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33033",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830072": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830072_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830072_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26009",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830073": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830073_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830073_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26009",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830074": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830074_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830074_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32032",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830075": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830075_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830075_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26009",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830076": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830076_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830076_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33035",
+      "TargetItem": "i140063",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830077": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830077_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830077_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33035",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830078": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830078_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830078_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2701,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26009",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830079": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830079_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830079_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32036",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830080": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_830080_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830080_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82006,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830081": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830081_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830081_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33041",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830082": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830082_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830082_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26010",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830083": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_830083_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830083_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82002,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830084": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830084_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830084_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26010",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830085": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830085_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830085_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26010",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830086": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830086_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830086_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33041",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830087": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830087_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830087_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2702,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33034",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830088": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_830088_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830088_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82005,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830089": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830089_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830089_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32031",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830090": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830090_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830090_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26011",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830091": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830091_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830091_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33031",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830092": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830092_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830092_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33031",
+      "TargetItem": "i140005",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830093": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830093_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830093_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33037",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830094": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830094_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830094_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26011",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830095": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830095_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830095_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26011",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830096": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830096_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830096_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26011",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830097": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830097_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830097_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26011",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830098": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830098_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830098_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2703,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33037",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ],
+  "830099": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830099_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830099_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26012",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830100": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830100_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830100_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32030",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830101": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830101_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830101_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26012",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830102": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830102_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830102_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26012",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830103": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830103_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830103_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26012",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830104": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830104_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830104_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32038",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830105": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830105_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830105_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n32030",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830106": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830106_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830106_step_0",
+      "SubTaskType": 1,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n33043",
+      "TargetItem": "i140071",
+      "TargetRequireNum": 3
+    }
+  ],
+  "830107": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830107_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830107_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26012",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830108": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830108_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830108_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2704,
+      "TargetCondition": 0,
+      "TargetConfiger": "n26012",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830109": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830109_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830109_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n31020",
+      "TargetItem": 0,
+      "TargetRequireNum": 7
+    }
+  ],
+  "830110": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830110_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830110_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n31025",
+      "TargetItem": 0,
+      "TargetRequireNum": 8
+    }
+  ],
+  "830111": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830111_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830111_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n31041",
+      "TargetItem": 0,
+      "TargetRequireNum": 4
+    }
+  ],
+  "830112": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830112_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830112_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n31018",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830113": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830113_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830113_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n28002",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830114": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830114_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830114_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n28002",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830115": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830115_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830115_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n28002",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830116": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_830116_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830116_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82004,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "830117": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830117_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830117_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n31018",
+      "TargetItem": 0,
+      "TargetRequireNum": 5
+    }
+  ],
+  "830118": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_830118_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_830118_step_0",
+      "SubTaskType": 2,
+      "SubmitSceneID": 2801,
+      "TargetCondition": 0,
+      "TargetConfiger": "n31019",
+      "TargetItem": 0,
+      "TargetRequireNum": 6
+    }
+  ]
+}

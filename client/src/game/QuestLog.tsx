@@ -8,6 +8,15 @@ import { GameText, plainText } from './text'
 import type { BagHighlight, Quest, QuestOffer, SceneNpc } from './types'
 import { questStepArgs, questTarget, sceneNameKey } from './world'
 
+/** Reborn objectives receive local target keys with their quest response. */
+function objectiveArgs(quest: Quest, index: number, current: number, total: number) {
+  const step = quest.steps[index] as Quest['steps'][number] & { descriptionArgs?: string[] }
+  return (
+    step.descriptionArgs?.map((key) => plainText(key, key)) ??
+    questStepArgs(quest.taskId, index, current, total)
+  )
+}
+
 /** " Quest complete: X." suffix for action messages. */
 export function completedNotice(taskIds: number[]) {
   if (taskIds.length === 0) return ''
@@ -46,6 +55,20 @@ export function QuestHint({ quest }: { quest: Quest }) {
     return 'itemId' in bag
       ? 'Open your bag and use the item.'
       : 'Open your bag and equip your weapon.'
+  }
+  if (
+    (quest.taskId >= 820001 && quest.taskId <= 820022) ||
+    (quest.taskId >= 830001 && quest.taskId <= 830118)
+  ) {
+    if (quest.state === 1) return 'Return to the quest giver to submit your report.'
+    const step = quest.steps.find((s, i) => (quest.progress[i] ?? 0) < s.target)
+    return step ? (
+      <GameText
+        k={step.descriptionKey}
+        fallback="Open Details for your objective."
+        args={objectiveArgs(quest, quest.steps.indexOf(step), 0, step.target)}
+      />
+    ) : null
   }
   const { npcId } = questTarget(quest)
   if (!npcId) return null
@@ -131,7 +154,7 @@ function Steps({ quest }: { quest: Quest }) {
               <GameText
                 k={step.descriptionKey}
                 fallback="Objective"
-                args={questStepArgs(quest.taskId, i, done, step.target)}
+                args={objectiveArgs(quest, i, done, step.target)}
               />
             </span>
             <span className={`shrink-0 ${done >= step.target ? 'text-[#1b6e17]' : ''}`}>
@@ -246,18 +269,39 @@ export function QuestLog({ onNpc }: { onNpc?: (npc: SceneNpc) => void }) {
   if (quests.isError) return <Notice tone="error">We could not load your quests.</Notice>
   if (quests.data.length === 0) return <p>No quests right now. Talk to the villagers.</p>
 
+  const groups = [
+    {
+      title: 'Quests',
+      rows: quests.data.filter((quest) => quest.taskId < 830001 || quest.taskId > 830118),
+    },
+    {
+      title: 'Reborn Story',
+      rows: quests.data.filter((quest) => quest.taskId >= 830001 && quest.taskId <= 830118),
+    },
+  ]
   return (
-    <ul className="flex flex-col gap-[4px]" aria-label="Quest log">
-      {quests.data.map((quest) => (
-        <QuestRow
-          key={quest.taskId}
-          name={questName(quest)}
-          status={questStatus(quest)}
-          hint={<QuestHint quest={quest} />}
-        >
-          <DetailsButton quest={quest} onNpc={onNpc} />
-        </QuestRow>
-      ))}
-    </ul>
+    <div className="flex flex-col gap-3">
+      {groups
+        .filter((group) => group.rows.length > 0)
+        .map((group) => (
+          <Section key={group.title} icon="scroll" title={group.title}>
+            <ul
+              className="flex flex-col gap-[4px]"
+              aria-label={group.title === 'Quests' ? 'Quest log' : group.title}
+            >
+              {group.rows.map((quest) => (
+                <QuestRow
+                  key={quest.taskId}
+                  name={questName(quest)}
+                  status={questStatus(quest)}
+                  hint={<QuestHint quest={quest} />}
+                >
+                  <DetailsButton quest={quest} onNpc={onNpc} />
+                </QuestRow>
+              ))}
+            </ul>
+          </Section>
+        ))}
+    </div>
   )
 }
