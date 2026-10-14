@@ -36,6 +36,7 @@ import {
 import { monsterFighter, playerFighter } from '../../game/combat.js'
 import { npc, rebornEvents } from '../../game/data.js'
 import { grantItems, type Tx } from '../../game/progress.js'
+import { WING_ESSENCE_OFFERS } from '../../../../game-core/src/wings/constants.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
@@ -59,7 +60,11 @@ const BOUND = true
 /** How often jobs.ts should run `tailedBeastWeeklyReset` (idempotent, so late runs are fine). */
 export const TAILED_BEAST_RESET_INTERVAL_MS = 3600 * 1000
 
-const config = () => rebornEvents().tailedBeast
+/** The imported event data, with the M6 wing offers (decision 26) after its shop list. */
+const config = () => {
+  const data = rebornEvents().tailedBeast
+  return { ...data, shop: [...data.shop, ...WING_ESSENCE_OFFERS] }
+}
 const previousWeek = (now: Date) => weekStart(new Date(now.getTime() - 7 * DAY_MS))
 /** Today's two beasts (UTC). */
 export const todayBeasts = (now = new Date()) => todaysBeasts(weekday(now))

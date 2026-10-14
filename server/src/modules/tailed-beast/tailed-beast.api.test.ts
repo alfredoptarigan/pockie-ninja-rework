@@ -322,6 +322,20 @@ describe('Essence shop', () => {
   const buy = (itemId: string, count = 1) =>
     t.client.post('/api/game/tailed-beast/shop', { itemId, count })
 
+  it('sells wings 218004-218008 and the +3 and +4 wing stones (M6 decision 26)', async () => {
+    const shop = (await view()).shop
+    const price = (itemId: string) => shop.find((o) => o.itemId === itemId)?.essence
+    for (const wing of ['i218004', 'i218005', 'i218006', 'i218007', 'i218008'])
+      expect(price(wing)).toBe(2000)
+    expect(price('i218022')).toBe(300)
+    expect(price('i218023')).toBe(600)
+    await setPlayer({ essence: 2600 })
+    expect((await buy('i218004')).statusCode).toBe(200)
+    expect((await buy('i218023')).statusCode).toBe(200)
+    expect(await player()).toMatchObject({ essence: 0 })
+    expect((await bag('i218004'))[0]).toMatchObject({ count: 1, bound: true })
+  })
+
   it('sells for Essence and keeps Honor', async () => {
     await setPlayer({ essence: 500, honor: 500 })
     const response = await buy('i540001')

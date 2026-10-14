@@ -273,6 +273,22 @@ describe('weekly pay and monthly reset', () => {
 })
 
 describe('BC shop', () => {
+  it('sells wings, Plume Shards and [D] talismans (M6 decision 26)', async () => {
+    const a = await ninja('Wing_buyer')
+    const offers = (await a.client.get(`${BASE}/shop`)).json().offers
+    const price = (itemId: string) =>
+      offers.find((o: { itemId: string }) => o.itemId === itemId)?.price
+    for (const wing of ['i218000', 'i218001', 'i218002', 'i218003']) expect(price(wing)).toBe(1500)
+    expect(price('i218021')).toBe(50)
+    for (const talisman of ['i218030', 'i218040', 'i218050']) expect(price(talisman)).toBe(100)
+    await a.set({ battleCoins: 1550 })
+    expect((await a.client.post(`${BASE}/shop/buy`, { itemId: 'i218000' })).statusCode).toBe(200)
+    expect((await a.client.post(`${BASE}/shop/buy`, { itemId: 'i218021' })).statusCode).toBe(200)
+    expect(await a.row()).toMatchObject({ battleCoins: 0 })
+    const items = await db.select().from(inventoryItems).where(eq(inventoryItems.characterId, a.id))
+    expect(items.filter((i) => i.itemId === 'i218000')).toMatchObject([{ bound: true, props: [] }])
+  })
+
   it('spends Battle Coins atomically under concurrent buys', async () => {
     const a = await ninja('Shopper')
     const [itemId, offer] = Object.entries(arenaHonorShop())[0]!

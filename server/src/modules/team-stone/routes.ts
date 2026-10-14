@@ -3,6 +3,7 @@
 import { createRandom } from '@pockie/game-core'
 import { fighterPower } from '../../../../game-core/src/events/team-stone.js'
 import { pickIdentifyCount } from '../../../../game-core/src/arena/index.js'
+import { WING_BC_OFFERS } from '../../../../game-core/src/wings/constants.js'
 import {
   teamStoneMatchParamsSchema,
   teamStoneShopBuySchema,
@@ -174,16 +175,27 @@ async function replayOf(db: Db, characterId: string, matchId: string): Promise<T
   }
 }
 
+/** The Honor shop list plus the M6 wing offers (decision 26), which roll no identify props. */
+const bcShop = () => ({
+  ...arenaHonorShop(),
+  ...Object.fromEntries(
+    Object.entries(WING_BC_OFFERS).map(([itemId, honor]) => [
+      itemId,
+      { c1: 0, c2: 0, c3: 0, c4: 0, honor, rank: 0 },
+    ]),
+  ),
+})
+
 const shopView = (battleCoins: number): TeamStoneShopView => ({
   battleCoins,
-  offers: Object.entries(arenaHonorShop())
+  offers: Object.entries(bcShop())
     .map(([itemId, offer]) => ({ itemId, price: offer.honor }))
     .sort((a, b) => a.price - b.price || a.itemId.localeCompare(b.itemId)),
 })
 
 /** One transaction with the character locked first: the BC check and the spend cannot race. */
 async function buy(tx: Tx, character: CharacterRow, itemId: string): Promise<TeamStoneShopResult> {
-  const offer = arenaHonorShop()[itemId]
+  const offer = bcShop()[itemId]
   if (!offer) throw bad('unknown_item', 'That item is not sold here.')
   // The Honor shop list comes with its arena rank gate.
   if ((await tierOfCharacter(tx, character.id)) < offer.rank)
@@ -192,7 +204,8 @@ async function buy(tx: Tx, character: CharacterRow, itemId: string): Promise<Tea
     throw bad('no_battle_coins', 'You do not have enough Battle Coins.')
   const award = { itemId, bound: SHOP_ITEMS_BOUND }
   await requireBagRoom(tx, character.id, [award])
-  const identifyCount = pickIdentifyCount(offer, createRandom(randomInt(2 ** 31)))
+  const identifyCount =
+    itemId in WING_BC_OFFERS ? 0 : pickIdentifyCount(offer, createRandom(randomInt(2 ** 31)))
   await grantItems(tx, character.id, [{ ...award, identifyCount }])
   const battleCoins = character.battleCoins - offer.honor
   await saveCharacter(tx, character.id, { battleCoins })
