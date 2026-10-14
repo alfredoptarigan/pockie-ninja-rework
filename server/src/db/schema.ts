@@ -1565,6 +1565,8 @@ export const teamStonePlayers = pgTable(
     attemptsUsed: smallint('attempts_used').notNull().default(0),
     week: date('week'),
     playedThisWeek: boolean('played_this_week').notNull().default(false),
+    // The last week paid, so a week split by the month change is never paid twice.
+    paidWeek: date('paid_week'),
     // First day of the UTC month the score belongs to.
     month: date('month'),
   },

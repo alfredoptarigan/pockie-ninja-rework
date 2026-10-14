@@ -238,6 +238,30 @@ describe('weekly pay and monthly reset', () => {
     expect(await bc(a)).toBe(500)
   })
 
+  it('pays a week split by the month change once, even after more fights that week', async () => {
+    const a = await ninja('Splitter')
+    const lastMonth = monthStart(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0)))
+    await setPlayer(a, { score: 350, month: lastMonth, week: weekStart(now), playedThisWeek: true })
+    expect(await resetTeamStoneMonth(db, now)).toBe(1)
+    expect(await bc(a)).toBe(500)
+    // A fight later in the same week (what matchmaking writes after settling).
+    await setPlayer(a, { score: 20, playedThisWeek: true })
+
+    const nextWeek = new Date(now.getTime() + 7 * DAY_MS)
+    await Promise.all([payTeamStoneWeek(db, nextWeek), payTeamStoneWeek(db, nextWeek)])
+    expect(await bc(a)).toBe(500)
+    expect(await mailsOf(a)).toHaveLength(1)
+    expect(await player(a)).toMatchObject({ playedThisWeek: false, week: weekStart(nextWeek) })
+  })
+
+  it('pays once under concurrent weekly job runs', async () => {
+    const a = await ninja('Racer')
+    await setPlayer(a, { score: 350, week: lastWeek, playedThisWeek: true, month: monthStart(now) })
+    await Promise.all([payTeamStoneWeek(db, now), payTeamStoneWeek(db, now)])
+    expect(await bc(a)).toBe(500)
+    expect(await mailsOf(a)).toHaveLength(1)
+  })
+
   it('resets every score from a past month to 0', async () => {
     const a = await ninja('Veteran')
     const lastMonth = monthStart(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0)))

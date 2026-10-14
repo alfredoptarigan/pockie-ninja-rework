@@ -72,20 +72,21 @@ async function payWeek(tx: Tx, row: PlayerRow) {
 /**
  * Brings a locked player row to `now`: pays the last played week (with the score it ended on),
  * then clears the week flag and resets the score in a new month. A week that straddles the month
- * change is paid at the reset, before its score is zeroed.
- * ponytail: fights after that mid-week reset make the rest of the week payable again (a second,
- * low-league pay); add a paid-week column if that matters.
+ * change is paid at the reset, before its score is zeroed; `paidWeek` keeps fights later that
+ * week from paying it again.
  */
 export async function settle(tx: Tx, row: PlayerRow, now: Date): Promise<PlayerRow> {
   const week = weekStart(now)
   const month = monthStart(now)
   if (row.week === week && row.month === month) return row
   const weekOver = row.week !== null && row.week < week
-  const paid = row.playedThisWeek && (weekOver || row.month !== month)
+  const due = row.playedThisWeek && (weekOver || row.month !== month)
+  const paid = due && row.paidWeek !== row.week
   if (paid) await payWeek(tx, row)
   const next = {
+    ...(paid && { paidWeek: row.week }),
     ...(row.week !== week && { week }),
-    ...((row.week !== week || paid) && { playedThisWeek: false }),
+    ...((row.week !== week || due) && { playedThisWeek: false }),
     ...(row.month !== month && { month, score: 0 }),
   }
   const [saved] = await tx

@@ -1,0 +1,1 @@
+ALTER TABLE "team_stone_players" ADD COLUMN "paid_week" date;
