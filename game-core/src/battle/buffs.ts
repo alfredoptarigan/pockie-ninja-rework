@@ -10,6 +10,7 @@ import { LAS_NOCHES_A_BUFFS } from './scripts/las-noches-a.js'
 import { NINJUTSU_BUFFS } from './scripts/ninjutsu-buffs.js'
 import { NINJUTSU_TRIGGER_A_BUFFS } from './scripts/ninjutsu-trigger-a-buffs.js'
 import { NINJUTSU_TRIGGER_B_BUFFS } from './scripts/ninjutsu-trigger-b-buffs.js'
+import { PET_CORE_BUFFS, regenAuraResist } from './scripts/pet-core.js'
 import type { ActiveBuff, FightContext, Fighter, FightEvent } from './types.js'
 
 type BuffScript = (
@@ -64,10 +65,9 @@ const NEEDLES_REBOUND = 25
 const SHIELD_COUNT = 999
 const FROZEN_DODGE = 9999
 
-/** OnAdd of the timed control buffs: LifeTime = SaveData. */
-// ponytail: the regeneration auras (11861-11863, pets) shorten it and add 11888; not ported.
-const lastsSaveData: BuffScript = (_ctx, _self, buff) => {
-  buff.lifeTime = buff.saveData
+/** OnAdd of the timed control buffs: LifeTime = SaveData, shortened by a regeneration aura. */
+const lastsSaveData: BuffScript = (ctx, self, buff, fv, timer) => {
+  buff.lifeTime = regenAuraResist(ctx, self, buff.saveData, fv, timer)
 }
 
 /** buff_xuanyun_11813.js (stun) and buff_seyou_11815.js (seduction): no action for SaveData. */
@@ -101,8 +101,8 @@ const BUFF_SCRIPTS: Record<string, BuffScripts> = {
   },
   // Poison: MaxHP * 0.0003 * (100 - DecDamage) per action of the owner.
   'buff/buff_zhongdu_11811.js': {
-    onAdd: (_ctx, _self, buff) => {
-      buff.lifeTime = 6000
+    onAdd: (ctx, self, buff, fv, timer) => {
+      buff.lifeTime = regenAuraResist(ctx, self, 6000, fv, timer)
     },
     onActivation: (ctx, self, _buff, fv, timer) => {
       const damage = Math.trunc(self.maxHp * POISON_RATE * 100)
@@ -190,6 +190,7 @@ const BUFF_SCRIPTS: Record<string, BuffScripts> = {
   ...NINJUTSU_TRIGGER_B_BUFFS,
   ...LAS_NOCHES_A_BUFFS,
   ...LAS_NOCHES_B_BUFFS,
+  ...PET_CORE_BUFFS,
 }
 
 const toBuffDef = (row: BuffRow): BuffDef => ({

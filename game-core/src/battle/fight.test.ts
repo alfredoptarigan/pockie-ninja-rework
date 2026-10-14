@@ -1,5 +1,8 @@
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { simulateFight, type FighterInput } from './fight.js'
+import { simulateFight, type FighterInput, type SkillInput } from './fight.js'
+import { SKILL_SCRIPTS } from './skills.js'
 
 function fighter(overrides: Partial<FighterInput> = {}): FighterInput {
   return {
@@ -165,5 +168,55 @@ describe('simulateFight', () => {
     }
     expect(simulateFight({ ...input, seed: 9 })).toEqual(simulateFight({ ...input, seed: 9 }))
     expect(simulateFight({ ...input, seed: 9 })).not.toEqual(simulateFight({ ...input, seed: 10 }))
+  })
+})
+
+describe('replays without a pet (m6 task 5)', () => {
+  it('stay byte-identical to the pre-pet engine', () => {
+    // Every ported non-pet attack and trigger script, spread over two players and 60 seeds. The
+    // hash was taken from main b6b301ce; a deliberate engine change must update it.
+    const rows = JSON.parse(
+      readFileSync(new URL('../../../server/data/game/skills.json', import.meta.url), 'utf8'),
+    ) as Record<string, Omit<SkillInput, 'id'> & { ispet?: number }>
+    const scripted = Object.entries(rows)
+      .filter(([, r]) => !r.ispet && r.type !== 3 && r.javascript && SKILL_SCRIPTS[r.javascript])
+      .map(([id, r]) => ({ ...r, id: Number(id) }))
+    const generic = [7777, 8888].map((id) => ({ ...rows[id]!, id }))
+    const base = fighter({
+      level: 50,
+      hp: 3000,
+      maxHp: 3000,
+      mp: 2000,
+      maxMp: 2000,
+      minAttack: 120,
+      maxAttack: 150,
+      atkTime: 950,
+      hit: 40,
+      dodge: 30,
+      crit: 60,
+      tough: 20,
+      parry: 30,
+      pierce: 20,
+      defense: 400,
+      neglectDefense: 30,
+      counter: 5,
+      priority: 3,
+      skillAdd: [1000, 0, 500, 0, 0, 0, 0, 0, 0, 0],
+    })
+    const replays = Array.from({ length: 60 }, (_, i) => {
+      const seed = i + 1
+      const pick = (k: number) => [...scripted.filter((_, n) => (n + seed) % 7 === k), ...generic]
+      return simulateFight({
+        attackers: [{ ...base, name: 'A', skills: pick(0) }],
+        defenders: [
+          { ...base, name: 'B', skills: pick(3) },
+          { ...base, name: 'C' },
+        ],
+        seed,
+      })
+    })
+    const hash = createHash('sha256').update(JSON.stringify(replays)).digest('hex')
+    expect(scripted.length).toBe(784)
+    expect(hash).toBe('dc9957dd4cd2ba5c524aeea1f8863cc83c47b7503ba3380ff1b9dfae384de373')
   })
 })

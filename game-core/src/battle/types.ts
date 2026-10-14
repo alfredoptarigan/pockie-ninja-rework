@@ -1,4 +1,5 @@
 // Shared types of the fight engine (FightSystem.java, SkillSystem.java, BuffSystem.java).
+import type { PetProps } from '../pets/constants.js'
 
 /**
  * One row of skill.ini (server/data/game/skills.json) plus its section id. Missing keys default
@@ -27,6 +28,24 @@ export interface SkillInput {
   javascript?: string
   /** Id written to the replay (defaults to `id`). */
   secondid?: number
+  /** Pet skill kind: 1 Halo, 2 Help, 3 Pass (absent: not a pet skill). */
+  ispet?: number
+}
+
+/**
+ * The active pet riding with its master (FightSystem.java:996-1001, m6 decision 15). Its Halo and
+ * Help rows join the master's skills (SkillSystem.RefreshPlayerSkill); Pass skills and the props
+ * are already in the master's derived stats.
+ */
+export interface PetInput {
+  /** Pet item id (i3200xx / i340710). */
+  species: string
+  /** Battle art avatar (or the icon when the species has no art). */
+  avatar: number
+  level: number
+  totals: PetProps
+  /** skill.ini rows of the slotted Halo and Help skills (`ispet` 1-2), with their levels. */
+  skills: SkillInput[]
 }
 
 export interface FighterInput {
@@ -81,6 +100,8 @@ export interface FighterInput {
   kicksBombs?: boolean
   /** Attack and trigger skills. Absent = the generic skills every fighter has (7777, 8888). */
   skills?: SkillInput[]
+  /** The active pet (players only). */
+  pet?: PetInput
 }
 
 export type Side = 'attackers' | 'defenders'
@@ -130,6 +151,8 @@ export interface FightEvent {
   attackCount?: number
   addBuffs?: BuffChange[]
   delBuffs?: BuffChange[]
+  /** A pet skill acted (2011 FightValue IsPet); the client animates the pet. */
+  isPet?: boolean
 }
 
 export interface Replay {
@@ -145,6 +168,8 @@ export interface Replay {
     maxMp: number
     startMp: number
     mp: number
+    /** The fighter's pet, drawn behind its master. */
+    pet?: { species: string; avatar: number }
   }[]
   events: FightEvent[]
   winner: Side

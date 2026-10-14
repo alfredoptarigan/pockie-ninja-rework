@@ -33,7 +33,15 @@ import {
   type Side,
 } from './types.js'
 
-export type { BuffChange, FighterInput, FightEvent, Replay, Side, SkillInput } from './types.js'
+export type {
+  BuffChange,
+  FighterInput,
+  FightEvent,
+  PetInput,
+  Replay,
+  Side,
+  SkillInput,
+} from './types.js'
 
 const MAX_BOUT = 60
 const FIGHT_BEGIN = 1
@@ -111,10 +119,11 @@ export function simulateFight({
   const toFighter =
     (side: Side, offset: number) =>
     (input: FighterInput, i: number): Fighter => {
-      // FightObject.AddSkill keeps each list sorted by ascending priority (stable).
-      const skills = [...(input.skills ?? GENERIC_SKILLS)].sort(
-        (a, b) => (a.priority ?? 0) - (b.priority ?? 0),
-      )
+      // FightObject.AddSkill keeps each list sorted by ascending priority (stable). The pet's
+      // Halo and Help rows join the master's (SkillSystem.RefreshPlayerSkill).
+      const own = input.skills ?? GENERIC_SKILLS
+      const pet = (input.pet?.skills ?? []).filter((s) => !own.some((o) => o.id === s.id))
+      const skills = [...own, ...pet].sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
       return {
         ...input,
         // FightObject.Set rescales Tough.
@@ -479,6 +488,7 @@ export function simulateFight({
       )
       currentSkills.delete(self)
     }
+    if (skill.ispet) fv.isPet = true
     if (skill.canbecounter && canCounter && fv.hit !== false && target.canAttack !== 0) {
       counter(target, self, timer)
     }
@@ -806,6 +816,7 @@ export function simulateFight({
       maxMp: x.maxMp,
       startMp: x.startMp,
       mp: x.mp,
+      ...(x.pet && { pet: { species: x.pet.species, avatar: x.pet.avatar } }),
     })),
     events,
     winner: a >= left.length ? 'defenders' : 'attackers',
