@@ -30,6 +30,7 @@ import { filterText } from '../../game/text-filter.js'
 import { cookieConfig } from '../auth/cookies.js'
 import { findSession, isSessionActive } from '../auth/sessions.js'
 import { toCharacter } from '../game/characters.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { createChatLimiter } from './chat-limiter.js'
 import { presence as presenceBus } from './events.js'
 
@@ -257,6 +258,12 @@ export function attachRealtime(app: FastifyInstance, { db, env }: { db: Db; env:
     if (input.channel === 'team') return sendTeam(message)
     const target = input.channel === 'world' ? io : io.to(sceneRoom(presence.sceneId))
     target.emit(REALTIME_EVENTS.chatMessage, message)
+    // Weekly Rewards "global chat": counted after delivery, off the reply path, so a busy
+    // character row never delays chat (the chat limiter bounds these writes).
+    if (input.channel === 'world')
+      void db
+        .transaction((tx) => recordWeeklyActivity(tx, character.id, 'globalChat'))
+        .catch((error: unknown) => app.log.error(error))
     return { ok: true, message } satisfies ChatAck
   }
 

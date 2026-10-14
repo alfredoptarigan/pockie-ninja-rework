@@ -3,6 +3,7 @@ import { dailyRewardBodySchema, dailyTaskParamsSchema, dailyViewSchema } from '@
 import { and, eq, inArray } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { characterDailyQuests, characterQuests, characters } from '../../db/schema.js'
 import { itemNameKey, subTasks, task } from '../../game/data.js'
 import {
@@ -228,6 +229,7 @@ export async function dailyRoutes(app: FastifyInstance, { db }: { db: Db }) {
           dailyScore: character.dailyScore + Number(task(taskId)!.RewardScore),
         })
         .where(eq(characters.id, character.id))
+      await recordWeeklyActivity(tx, character.id, 'mission')
       if (choice) {
         // RewardRule.GetRewardTaskFactor / RewardExp: only EXP is increased; money and items are unchanged.
         // reward.exp already holds the VIP bonus (completeQuest), so the factor scales it too.

@@ -13,6 +13,7 @@ import type { PubFightResult, PubPullResult, PubView } from '@pockie/shared'
 import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { pubFightLineups } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { scene } from '../../game/data.js'
@@ -149,6 +150,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
       if (count >= PUB_FIGHT_MAX_PER_DAY)
         throw bad('daily_limit', 'You cannot fight in the pub any more today.')
       const { replay, won, hp, mp, maxHp, maxMp } = await duel(tx, character, npcIds)
+      await recordWeeklyActivity(tx, character.id, 'pubFight')
       const daily = { pubFightDay: utcDay(), pubFightsToday: count + 1 }
       const rewards: PubFightResult['rewards'] = { exp: 0, stone: 0, items: [], levelsGained: 0 }
       let combo: PubPullResult['combo'] = null

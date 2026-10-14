@@ -25,6 +25,7 @@ import { singleGate } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
 import { questCommand, type Tx } from '../../game/progress.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { REBORN_LAS_NOCHES_FLOOR_COMMAND } from '../../game/quests.js'
 import { vipExp } from '../../game/vip.js'
 import { requireAlive } from '../game/characters.js'
@@ -240,7 +241,10 @@ async function catchUp(
       }
     } else row = { ...row, currentFloor: floor + 1 }
   }
-  if (cleared) await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
+  if (cleared) {
+    await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
+    await recordWeeklyActivity(tx, character.id, 'lasNoches', now)
+  }
   return saveRow(tx, row)
 }
 
@@ -373,6 +377,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         }
         if (outcome.ended) pot = outcome.run.pot
         await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
+        await recordWeeklyActivity(tx, character.id, 'lasNoches')
       } else {
         // A loss refills HP and MP; without a life the pot is halved and the run ends.
         state = { hp: maxHp, mp: maxMp }

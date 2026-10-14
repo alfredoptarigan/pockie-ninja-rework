@@ -17,6 +17,7 @@ import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vites
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import {
   blocks,
+  characterWeeklyRewards,
   characters,
   friends,
   reports,
@@ -387,6 +388,14 @@ describe('chat', () => {
     await vi.waitFor(() => expect(b.chat.map((m) => m.text)).toEqual(['hello world']))
     expect(a.chat.map((m) => m.text)).toEqual(['field only', 'hello world'])
     expect(b.chat[0]).not.toHaveProperty('sceneId')
+  })
+
+  it('counts world chat, not scene chat, for Weekly Rewards', async () => {
+    const { a } = await villagers()
+    const counters = async () => (await db.select().from(characterWeeklyRewards))[0]?.counters ?? {}
+    await send(a, { channel: 'scene', text: 'scene line' })
+    await send(a, { channel: 'world', text: 'world line' })
+    await vi.waitFor(async () => expect(await counters()).toEqual({ globalChat: 1 }))
   })
 
   it('delivers HTML verbatim as plain text', async () => {

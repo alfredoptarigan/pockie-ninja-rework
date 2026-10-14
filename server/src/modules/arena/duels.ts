@@ -17,6 +17,7 @@ import {
   type DuelView,
 } from '../../../../shared/src/schemas/arena.js'
 import type { Db } from '../../db/client.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { arenaPlayers, blocks, characters, friends } from '../../db/schema.js'
 import type { Tx } from '../../game/progress.js'
 import { characterOf, requireUser } from '../game/characters.js'
@@ -159,6 +160,7 @@ export async function duelRoutes(app: FastifyInstance, { db }: { db: Db }) {
           opponentName: character.name,
           result: won ? 0 : 1,
         })
+        await recordWeeklyActivity(tx, character.id, 'duelFriend')
         return {
           replay,
           looks,

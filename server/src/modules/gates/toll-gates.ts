@@ -31,6 +31,7 @@ import {
 import { eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { tollGateRuns } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { removeItems, type Tx } from '../../game/progress.js'
@@ -212,6 +213,7 @@ export async function winForMember(
     const progress = tollGateProgress(outcome.run.passedPoint, points)
     await recordTollGateProgress(tx, character.id, row.gateId, progress, new Date())
   }
+  if (outcome.cleared) await recordWeeklyActivity(tx, character.id, 'tollGate')
   return { rewards, run: run!, ...((bonus.exp > 0 || bonus.stone > 0) && { bonus }) }
 }
 

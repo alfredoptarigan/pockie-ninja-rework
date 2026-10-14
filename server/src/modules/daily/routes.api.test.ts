@@ -5,6 +5,7 @@ import {
   characterDailyQuests,
   characterQuests,
   characters,
+  characterWeeklyRewards,
   inventoryItems,
 } from '../../db/schema.js'
 import { subTasks, task } from '../../game/data.js'
@@ -205,6 +206,12 @@ describe('DayTaskSystem daily board', () => {
     expect(results.map((r) => r.statusCode).sort()).toEqual([200, 400])
     const [character] = await db.select().from(characters).where(eq(characters.id, id))
     expect(character!.dailyQuestsCompleted).toBe(1)
+    // The Weekly Rewards mission activity counts the one hand-in.
+    const [weekly] = await db
+      .select()
+      .from(characterWeeklyRewards)
+      .where(eq(characterWeeklyRewards.characterId, id))
+    expect(weekly!.counters).toEqual({ mission: 1 })
   })
   it('rolls back rewards and ready state if the reward would overflow the bag', async () => {
     await offer(2260102)

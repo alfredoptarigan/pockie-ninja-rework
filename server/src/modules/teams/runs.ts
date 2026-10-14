@@ -19,6 +19,7 @@ import type {
 import { eq } from 'drizzle-orm'
 import type { FastifyRequest } from 'fastify'
 import type { Db } from '../../db/client.js'
+import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { characters, teamMembers } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
@@ -311,6 +312,7 @@ export function teamPubFight(db: Db, request: FastifyRequest) {
     const lastNpcId = npcIds[npcIds.length - 1]!
     const team: TeamMemberRewards[] = []
     for (const [i, ninja] of ninjas.entries()) {
+      await recordWeeklyActivity(ctx.tx, ninja.id, 'pubFight')
       const daily = { pubFightDay: utcDay(), pubFightsToday: fightsToday(ninja) + 1 }
       if (!won) {
         await saveCharacter(ctx.tx, ninja.id, { ...daily, hp: 1, mp: states[i]!.mp })
