@@ -156,23 +156,27 @@ ours live in one `constants.ts` per feature so they can be tuned.
       level 50).
     - **Scaling:** level 40 x1.1, level 50 x1.2, an evolved form x1.2. The required level is the
       Reborn item field 1 (30/40/50), which `pets.json` does not carry yet.
-    - **Fight use (ours):** the totals become master bonuses before `deriveStats`: Attack/165 on
-      both weapon attack terms, Defence/9 on defense, Disturb/18 on hit, Active/22 on dodge,
-      Savvy/36 on crit.
+    - **Fight use (ours):** the totals become master bonuses before `deriveStats`: Attack/420 on
+      both weapon attack terms, Defence/27 on defense, Disturb/54 on hit, Active/66 on dodge,
+      Savvy/108 on crit. This is the user's decision: the props add about 3%, and PET_ATTACK
+      (1:1) brings the rest.
     - **Power check** against a level-50 player (+6 white level 40-50 gear: HP 1624, attack
       118-145, defense 431), measured as DPS x effective HP against the same player without a
       pet:
 
-      | Level-50 pet | Gain |
+      | Level-50 pet | Props gain |
       |---|---|
-      | Beast, growth 100 | +6.7% |
-      | Beast or Plant, growth 120 (median) | +9.5% |
-      | Spirits, evolved, growth 140 | +10.6% |
-      | Tailed Beast, evolved, growth 170 | +12.9% |
-      | Tailed Beast, level 50, growth 180 | +13.2% |
+      | Beast, growth 100 | +1.6% |
+      | Beast, growth 120 (median) | +2.5% |
+      | Spirits, evolved, growth 140 | +3.0% |
+      | Tailed Beast, evolved, growth 170 | +3.1% |
+      | Tailed Beast, level 50, growth 180 | +4.3% |
 
-      PET_ATTACK (1:1) comes on top: +13% damage in mirror fights, and 352 of 400 seeded wins
-      against the same player without a pet.
+      PET_ATTACK adds +13.4% damage. A median pet with PET_ATTACK wins 359 of 400 seeded fights
+      against the same player without a pet (PET_ATTACK alone: 352; no pet: 200). Mirror fights
+      are close, so any edge of about 15% decides most of them. A 60-65% win rate would need
+      PET_ATTACK below 1:1.
+
 12. **Pet EXP (ours; the 2011 home server is not decompiled).** The active pet gets **50%** of
     the master's fight EXP from field, toll gate and Las Noches fights; arena gives none. When
     food finishes digesting, the pet also gets EXP equal to the appetite gained.

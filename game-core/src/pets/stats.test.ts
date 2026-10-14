@@ -79,6 +79,6 @@ describe('petBonuses (ours)', () => {
   it('turns prop totals into master bonus points', () => {
     expect(
       petBonuses({ attack: 854, defence: 488, disturb: 610, active: 610, savvy: 488 }),
-    ).toEqual({ minAttack: 5, maxAttack: 5, defense: 54, hit: 33, dodge: 27, crit: 13 })
+    ).toEqual({ minAttack: 2, maxAttack: 2, defense: 18, hit: 11, dodge: 9, crit: 4 })
   })
 })

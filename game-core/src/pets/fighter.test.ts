@@ -27,12 +27,12 @@ describe('petFighterInput', () => {
       ],
     })
     expect(bonuses).toMatchObject({
-      minAttack: 5,
-      maxAttack: 5,
-      defense: 64,
-      hit: 33,
-      dodge: 27,
-      crit: 13,
+      minAttack: 2,
+      maxAttack: 2,
+      defense: 28,
+      hit: 11,
+      dodge: 9,
+      crit: 4,
     })
   })
 })

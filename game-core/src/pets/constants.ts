@@ -73,12 +73,13 @@ export const EVOLVED_PERCENT = 120
 /**
  * Ours: one master bonus point per this many pet prop points (the 2011 fight never reads the
  * totals). Attack adds to both weapon attack terms, Defence to defense, Disturb to hit, Active to
- * dodge and Savvy to crit. Sized so a median level-50 pet adds about 10% fight power (11b).
+ * dodge and Savvy to crit. Sized so a median level-50 pet's props add about 3% fight power; PET_ATTACK
+ * brings the rest (11b).
  */
 export const PROP_POINTS_PER_BONUS: PetProps = {
-  attack: 165,
-  defence: 9,
-  disturb: 18,
-  active: 22,
-  savvy: 36,
+  attack: 420,
+  defence: 27,
+  disturb: 54,
+  active: 66,
+  savvy: 108,
 }
