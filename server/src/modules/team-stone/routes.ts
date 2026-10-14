@@ -23,6 +23,7 @@ import { grantItems, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { characterOf, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
+import { tierOfCharacter } from '../arena/shop.js'
 import { arenaFighter } from '../arena/snapshot.js'
 import {
   bad,
@@ -184,6 +185,9 @@ const shopView = (battleCoins: number): TeamStoneShopView => ({
 async function buy(tx: Tx, character: CharacterRow, itemId: string): Promise<TeamStoneShopResult> {
   const offer = arenaHonorShop()[itemId]
   if (!offer) throw bad('unknown_item', 'That item is not sold here.')
+  // The Honor shop list comes with its arena rank gate.
+  if ((await tierOfCharacter(tx, character.id)) < offer.rank)
+    throw bad('tier_too_low', 'Your arena rank is too low for this item.')
   if (character.battleCoins < offer.honor)
     throw bad('no_battle_coins', 'You do not have enough Battle Coins.')
   const award = { itemId, bound: SHOP_ITEMS_BOUND }

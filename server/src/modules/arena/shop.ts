@@ -29,7 +29,7 @@ import { tierOf } from './store.js'
 /** Honor shop items are bound: Honor cannot be turned into tradable goods (decision noted). */
 const SHOP_ITEMS_BOUND = true
 
-async function tierOfCharacter(tx: Tx, characterId: string) {
+export async function tierOfCharacter(tx: Tx, characterId: string) {
   const [row] = await tx
     .select({ tier: arenaPlayers.tier })
     .from(arenaPlayers)
