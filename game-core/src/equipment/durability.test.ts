@@ -21,6 +21,10 @@ describe('wearDurability (HardinessSystem.CanDecHardiness / DecEquipHardiness)',
     expect(wearDurability(i281607, worn(1), 1, IDENTIFY_PROPS)).toBe(1)
   })
 
+  it('never wears items without durability (Reborn wings and auras have no MaxHardiness)', () => {
+    expect(wearDurability({}, worn(1), 1, IDENTIFY_PROPS)).toBe(1)
+  })
+
   it('never wears items with the IsDecHardEquip property', () => {
     const noWear = worn(50, [{ propId: 772, value: 1 }])
     expect(wearDurability(i250104, noWear, 10, IDENTIFY_PROPS)).toBe(50)

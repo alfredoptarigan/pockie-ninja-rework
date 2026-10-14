@@ -10,7 +10,8 @@ const NO_WEAR_PROP = 'IsDecHardEquip'
 /**
  * CanDecHardiness (184-196) and DecEquipHardiness (281-287): equipped items lose `loss` points
  * (1 per enemy killed in a won fight, or reviveDurabilityLoss), floored at 0. Items with
- * UnDecHardiness, already broken, or with an IsDecHardEquip property keep their durability.
+ * UnDecHardiness, already broken, or with an IsDecHardEquip property keep their durability, as do
+ * items without MaxHardiness (Reborn wings and auras): they count as durability 1 and never break.
  */
 export function wearDurability(
   config: EquipConfig,
@@ -20,6 +21,7 @@ export function wearDurability(
 ): number {
   const noWear =
     config.UnDecHardiness === 1 ||
+    !config.MaxHardiness ||
     item.durability <= 0 ||
     item.props.some((p) => identifyProps[p.propId]?.PropName === NO_WEAR_PROP)
   return noWear ? item.durability : Math.max(0, item.durability - loss)
