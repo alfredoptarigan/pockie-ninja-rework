@@ -204,6 +204,34 @@
       "when": 1791955012272,
       "tag": "0028_team_stone_paid_week",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1791957417318,
+      "tag": "0029_pets",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1791957425025,
+      "tag": "0030_kennel",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1791957431675,
+      "tag": "0031_wings",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1791957438951,
+      "tag": "0032_cards",
+      "breakpoints": true
     }
   ]
 }

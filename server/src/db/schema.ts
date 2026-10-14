@@ -206,6 +206,8 @@ export const characters = pgTable(
     twentyMinCount: smallint('twenty_min_count').notNull().default(0),
     // Team Stone shop currency (decision 28); never lost on a loss.
     battleCoins: currency('battle_coins'),
+    // Kennel slots owned (M6 decision 17): 1 free, up to 5.
+    petSlots: smallint('pet_slots').notNull().default(1),
   },
   (t) => [
     uniqueIndex('characters_user_id_key').on(t.userId),
@@ -238,6 +240,7 @@ export const characters = pgTable(
       sql`${t.diceUsed} >= 0 and ${t.diceBought} >= 0 and ${t.twentyMinCount} >= 0`,
     ),
     check('characters_battle_coins', sql`${t.battleCoins} >= 0`),
+    check('characters_pet_slots', sql`${t.petSlots} between 1 and 5`),
     // Rankings (decision 13), ties to the older ninja. `desc().nullsFirst()` matches a plain
     // `order by ... desc`, so the index serves it.
     index('characters_level_rank_idx').on(
@@ -268,7 +271,7 @@ export const inventoryItems = pgTable(
     createdAt: createdAt(),
     // Item instance state (docs/original-data/blacksmith.md). The defaults describe a plain
     // M2 item: not enhanced, appraised, no properties.
-    // ConsolidateLevel (0-12); attack and HP follow from the item config.
+    // ConsolidateLevel (0-12 for gear, capped in code); wings and auras go to 30 (M6 decision 24).
     enhanceLevel: smallint('enhance_level').notNull().default(0),
     // InscribeLevel (0-12); the bonus follows from the config and EquipInscribe.ini.
     inscribeLevel: smallint('inscribe_level').notNull().default(0),
@@ -297,7 +300,7 @@ export const inventoryItems = pgTable(
       .on(t.characterId, t.equippedSlot)
       .where(sql`${t.equippedSlot} is not null`),
     check('inventory_items_count', sql`${t.count} > 0`),
-    check('inventory_items_enhance_level', sql`${t.enhanceLevel} between 0 and 12`),
+    check('inventory_items_enhance_level', sql`${t.enhanceLevel} between 0 and 30`),
     check('inventory_items_inscribe_level', sql`${t.inscribeLevel} between 0 and 12`),
     check('inventory_items_durability', sql`${t.durability} >= 0`),
     check('inventory_items_identify_count', sql`${t.identifyCount} between 0 and 4`),
@@ -1621,5 +1624,173 @@ export const teamStoneQueue = pgTable(
     index('team_stone_queue_team_id_idx').on(t.teamId),
     index('team_stone_queue_match_id_idx').on(t.matchId),
     check('team_stone_queue_amounts', sql`${t.score} >= 0 and ${t.power} >= 0`),
+  ],
+)
+
+// Pets (M6 decisions 8-19).
+
+/** One food slot of a pet (decision 13): `PetFeedLib` type 1-7, multiplier tier, food item fed. */
+export interface PetFoodSlot {
+  type: number
+  mul: number
+  item?: string
+}
+
+// A pet in a kennel slot. Props are the rolled bases (80-120%, decision 11); totals are computed.
+// Appetite counts up to `HungerMax` 7200; food digests until `digestEndsAt`.
+export const characterPets = pgTable(
+  'character_pets',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // The pet item id (i3200xx or i340710).
+    species: text('species').notNull(),
+    // Null = the species name.
+    name: text('name'),
+    kennelSlot: smallint('kennel_slot').notNull(),
+    active: boolean('active').notNull().default(false),
+    level: smallint('level').notNull().default(1),
+    exp: integer('exp').notNull().default(0),
+    growth: smallint('growth').notNull(),
+    baseAttack: integer('base_attack').notNull(),
+    baseDefence: integer('base_defence').notNull(),
+    baseDisturb: integer('base_disturb').notNull(),
+    baseActive: integer('base_active').notNull(),
+    baseSavvy: integer('base_savvy').notNull(),
+    appetite: smallint('appetite').notNull().default(0),
+    digestEndsAt: timestamp('digest_ends_at', { withTimezone: true }),
+    foodSlots: jsonb('food_slots').$type<PetFoodSlot[]>().notNull().default([]),
+    adoptedAt: timestamp('adopted_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex('character_pets_kennel_slot_key').on(t.characterId, t.kennelSlot),
+    uniqueIndex('character_pets_active_key')
+      .on(t.characterId)
+      .where(sql`${t.active}`),
+    check('character_pets_kennel_slot', sql`${t.kennelSlot} between 0 and 4`),
+    check('character_pets_level', sql`${t.level} between 1 and 50`),
+    check('character_pets_appetite', sql`${t.appetite} between 0 and 7200`),
+    check(
+      'character_pets_amounts',
+      sql`${t.exp} >= 0 and ${t.growth} >= 0 and ${t.baseAttack} >= 0 and ${t.baseDefence} >= 0 and ${t.baseDisturb} >= 0 and ${t.baseActive} >= 0 and ${t.baseSavvy} >= 0`,
+    ),
+    check('character_pets_food_slots', jsonbArray(t.foodSlots, 6)),
+  ],
+)
+
+// A pet's skills (decision 14): kind 1 Halo, 2 Help, 3 Pass. A slotted skill sits in slot 0-5 of
+// its kind, so a kind holds at most 6. The learned list cap (`MaxSkillCount` 5, the oldest
+// unlocked one is replaced) and the unlocked slot total (`PetSkillCnt`) are rules in game-core.
+export const characterPetSkills = pgTable(
+  'character_pet_skills',
+  {
+    petId: uuid('pet_id')
+      .notNull()
+      .references(() => characterPets.id, { onDelete: 'cascade' }),
+    skillId: integer('skill_id').notNull(),
+    level: smallint('level').notNull().default(1),
+    learnedOrder: integer('learned_order').notNull(),
+    locked: boolean('locked').notNull().default(false),
+    kind: smallint('kind').notNull(),
+    slot: smallint('slot'),
+  },
+  (t) => [
+    primaryKey({ columns: [t.petId, t.skillId] }),
+    uniqueIndex('character_pet_skills_slot_key')
+      .on(t.petId, t.kind, t.slot)
+      .where(sql`${t.slot} is not null`),
+    check('character_pet_skills_kind', sql`${t.kind} between 1 and 3`),
+    check('character_pet_skills_slot', sql`${t.slot} between 0 and 5`),
+    check(
+      'character_pet_skills_amounts',
+      sql`${t.level} >= 1 and ${t.learnedOrder} >= 0`,
+    ),
+  ],
+)
+
+// Pet Tracing (decision 20): attempts used on the UTC day `day`, the day +10 attempts were
+// bought, and the seeded board (the pet cell never leaves the server). Caps live in constants.
+export const characterPetTracing = pgTable(
+  'character_pet_tracing',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    day: date('day'),
+    attemptsUsed: smallint('attempts_used').notNull().default(0),
+    boughtDay: date('bought_day'),
+    board: jsonb('board').$type<Record<string, unknown>>(),
+    finds: integer('finds').notNull().default(0),
+  },
+  (t) => [
+    check(
+      'character_pet_tracing_amounts',
+      sql`${t.attemptsUsed} >= 0 and ${t.finds} >= 0`,
+    ),
+    check('character_pet_tracing_board', sql`jsonb_typeof(${t.board}) = 'object'`),
+  ],
+)
+
+// Kennel shop purchases per UTC day (decision 21); daily limits live in constants.
+export const characterKennelPurchases = pgTable(
+  'character_kennel_purchases',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    day: date('day').notNull(),
+    itemId: text('item_id').notNull(),
+    count: smallint('count').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.day, t.itemId] }),
+    check('character_kennel_purchases_count', sql`${t.count} > 0`),
+  ],
+)
+
+// Wing Collection (decision 25): each wing or aura item registers once; the item is kept.
+export const characterWingCollection = pgTable(
+  'character_wing_collection',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    itemId: text('item_id').notNull(),
+    registeredAt: timestamp('registered_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.characterId, t.itemId] })],
+)
+
+// Cards (decisions 27-30): card 1-74 stacks duplicates; each collection 1-10 pays its prize once.
+export const characterCards = pgTable(
+  'character_cards',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    cardId: smallint('card_id').notNull(),
+    count: integer('count').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.cardId] }),
+    check('character_cards_card', sql`${t.cardId} between 1 and 74`),
+    check('character_cards_count', sql`${t.count} > 0`),
+  ],
+)
+
+export const characterCardPrizes = pgTable(
+  'character_card_prizes',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    collection: smallint('collection').notNull(),
+    claimedAt: timestamp('claimed_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.collection] }),
+    check('character_card_prizes_collection', sql`${t.collection} between 1 and 10`),
   ],
 )

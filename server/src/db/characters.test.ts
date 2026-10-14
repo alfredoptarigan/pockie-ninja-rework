@@ -117,7 +117,7 @@ describe('inventory and quests', () => {
   })
 
   it.each([
-    ['enhance level above 12', { enhanceLevel: 13 }],
+    ['enhance level above 30 (wings, M6)', { enhanceLevel: 31 }],
     ['negative enhance level', { enhanceLevel: -1 }],
     ['inscription level above 12', { inscribeLevel: 13 }],
     ['negative durability', { durability: -1 }],
