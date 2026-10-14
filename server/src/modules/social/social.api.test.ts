@@ -2,7 +2,15 @@ import { and, eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import type { Notice } from '@pockie/shared'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { blocks, characters, friends, mails, reports, users } from '../../db/schema.js'
+import {
+  blocks,
+  characters,
+  friends,
+  inventoryItems,
+  mails,
+  reports,
+  users,
+} from '../../db/schema.js'
 import { PLAYER_MAIL_DAYS, SYSTEM_MAIL_DAYS, sendSystemMail } from '../../game/system-mail.js'
 import { mailConfig } from '../../game/data.js'
 import { presence } from '../realtime/events.js'
@@ -244,6 +252,61 @@ describe('blocked list', () => {
       'self',
     )
     expect((await post(naruto, 'blocks/add', { name: 'Nobody_99' })).statusCode).toBe(404)
+  })
+})
+
+describe('players (Player List, View Character, Requests)', () => {
+  it('lists the online players of my scene, without me, offline players or other scenes', async () => {
+    const elsewhere = await ninja('Gaara_01')
+    const offline = await ninja('Lee_01')
+    await db.update(characters).set({ sceneId: 2101 })
+    await db.update(characters).set({ sceneId: 2201 }).where(eq(characters.id, elsewhere.id))
+    for (const id of [naruto.id, sasuke.id, elsewhere.id]) presence.online(id)
+    try {
+      const response = await get(naruto, 'scene-players')
+      expect(response.statusCode).toBe(200)
+      expect(response.json().players).toEqual([
+        expect.objectContaining({ characterId: sasuke.id, name: 'Sasuke_01', level: 10 }),
+      ])
+      expect(JSON.stringify(response.json())).not.toContain(offline.id)
+    } finally {
+      for (const id of [naruto.id, sasuke.id, elsewhere.id]) presence.offline(id)
+    }
+  })
+
+  it('shows another ninja: public fields, online state and equipped items only', async () => {
+    await db.insert(inventoryItems).values([
+      { characterId: sasuke.id, itemId: 'i270100', equippedSlot: 'Weapon', enhanceLevel: 3 },
+      { characterId: sasuke.id, itemId: 'i160006', count: 2 },
+    ])
+    const response = await get(naruto, `players/${sasuke.id}`)
+    expect(response.statusCode).toBe(200)
+    const view = response.json()
+    expect(view.player).toMatchObject({ characterId: sasuke.id, name: 'Sasuke_01', level: 10 })
+    expect(view.online).toBe(false)
+    expect(view.equipped).toEqual([
+      { slot: 'Weapon', itemId: 'i270100', nameKey: expect.any(String), enhanceLevel: 3 },
+    ])
+    expect(view.player).not.toHaveProperty('userId')
+    expect(view.player).not.toHaveProperty('gold')
+  })
+
+  it('refuses an unknown or malformed player id', async () => {
+    const unknown = await get(naruto, 'players/00000000-0000-4000-8000-000000000000')
+    expect(unknown.statusCode).toBe(404)
+    expect((await get(naruto, 'players/not-an-id')).statusCode).toBe(400)
+  })
+
+  it('marks friend requests (add-back prompts) online or offline', async () => {
+    await post(naruto, 'friends/add', { name: 'Sasuke_01' })
+    presence.online(naruto.id)
+    try {
+      expect((await get(sasuke, 'friends')).json().addBack).toEqual([
+        expect.objectContaining({ characterId: naruto.id, online: true }),
+      ])
+    } finally {
+      presence.offline(naruto.id)
+    }
   })
 })
 

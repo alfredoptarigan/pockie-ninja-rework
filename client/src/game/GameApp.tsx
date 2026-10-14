@@ -20,6 +20,7 @@ import { NpcDialog } from './NpcDialog'
 import { QuestNavigation } from './QuestNavigation'
 import { SceneExits } from './SceneExits'
 import { SceneView } from './SceneView'
+import { PlayerList } from './social'
 import { ToastHost } from './toast'
 import { Dialog, GameButton, Notice, useFitScale } from './skin'
 import type { BagHighlight, SceneNpc } from './types'
@@ -168,6 +169,7 @@ function GameScreen({ character }: { character: Character }) {
                 onOpenBag={openBag}
               />
               <RealtimePanels characterId={character.id} inTeam={Boolean(team.data?.team)} />
+              {!inVillage && <PlayerList character={character} />}
               <MenuBar
                 character={character}
                 onOpen={open}

@@ -1,5 +1,6 @@
-// M4 social journey: a ninja adds another as a friend, whispers and mails them from the Friends
-// window; the friend reads the mail and blocks the sender, whose next whisper and mail are refused.
+// M4 social journey: a ninja sends a friend request from the Social window (the friend accepts it on
+// Requests), PMs them from View Character and mails them from the Mail tab; the friend reads the
+// mail and blocks the sender, whose next whisper and mail are refused.
 // Only the levels are seeded (whispers and mail need level 10); the rest is UI.
 import { expect, test, type Page } from '@playwright/test'
 import { createTwoNinjas, dialog, openMenu, reloadGame, seedCharacter } from './helpers'
@@ -32,29 +33,33 @@ test('friends whisper and mail, and a block refuses both', async ({ browser }) =
       await expect(chat(page).getByText('Online', { exact: true })).toBeVisible()
     }
 
-    // Act: Ami adds Bo by name.
-    await openMenu(ami.page, 'Friends')
-    const friends = dialog(ami.page, 'Friends')
-    await friends.getByLabel('Ninja name').fill(bo.name)
-    await friends.getByRole('button', { name: 'Add Friend' }).click()
+    // Act: Ami sends Bo a friend request from the Social window.
+    await openMenu(ami.page, 'Social')
+    const social = dialog(ami.page, 'Social')
+    await social.getByLabel('Player Name').fill(bo.name)
+    await social.getByRole('button', { name: 'Send Friend Request' }).click()
+    await expect(social.getByText('Friend request sent!')).toBeVisible()
 
-    // Assert: Bo is on Ami's list, online; Bo hears of it and adds Ami back.
-    const row = friends.getByRole('list', { name: 'Friends' }).getByRole('listitem')
-    await expect(row.filter({ hasText: bo.name })).toBeVisible()
-    await expect(row.getByRole('img', { name: 'Online' })).toBeVisible()
+    // Assert: Bo is on Ami's list, online; Bo sees the request and accepts it.
+    const row = social.getByRole('list', { name: 'Friends' }).getByRole('listitem')
+    await expect(row.filter({ hasText: bo.name })).toContainText('Online')
     await expect(chat(bo.page)).toContainText(`${ami.name} added you as a friend.`)
-    await openMenu(bo.page, 'Friends')
-    const boFriends = dialog(bo.page, 'Friends')
-    await expect(boFriends).toContainText(`${ami.name} (Level 25) added you as a friend.`)
-    await boFriends.getByRole('button', { name: 'Add', exact: true }).click()
+    await openMenu(bo.page, 'Social')
+    const boSocial = dialog(bo.page, 'Social')
+    await boSocial.getByRole('tab', { name: 'Requests' }).click()
+    const request = boSocial.getByRole('list', { name: 'Friend requests' }).getByRole('listitem')
+    await expect(request).toContainText(ami.name)
+    await request.getByRole('button', { name: 'Accept' }).click()
+    await boSocial.getByRole('tab', { name: 'Friends' }).click()
     await expect(
-      boFriends.getByRole('list', { name: 'Friends' }).getByRole('listitem'),
+      boSocial.getByRole('list', { name: 'Friends' }).getByRole('listitem'),
     ).toContainText(ami.name)
-    await boFriends.getByRole('button', { name: 'Close' }).click()
+    await boSocial.getByRole('button', { name: 'Close' }).click()
 
-    // Act: Ami whispers from the friend row (it prefills /Name in the chat box).
-    await row.getByRole('button', { name: 'Whisper' }).click()
-    await expect(friends).toBeHidden()
+    // Act: Ami opens Bo's View Character from the name and sends a PM (it prefills /Name).
+    await row.getByRole('button', { name: bo.name }).click()
+    await dialog(ami.page, 'View Character').getByRole('button', { name: 'PM' }).click()
+    await expect(social).toBeHidden()
     const input = chat(ami.page).getByLabel('Message to world chat')
     await expect(input).toHaveValue(`/${bo.name} `)
     // The closing window hands focus back to the menu, so the caret goes to the end first.
@@ -68,19 +73,20 @@ test('friends whisper and mail, and a block refuses both', async ({ browser }) =
       `From ${ami.name}: Meet me in Demon City`,
     )
 
-    // Act: Ami writes a letter from the friend row.
-    await openMenu(ami.page, 'Friends')
-    await row.getByRole('button', { name: 'Mail' }).click()
-    const letter = dialog(ami.page, 'Write Letter')
-    await expect(letter.getByLabel('To')).toHaveValue(bo.name)
-    await writeLetter(letter, 'Toll gate', 'Bring a weapon and full HP.')
-    await expect(letter).toBeHidden()
-    await friends.getByRole('button', { name: 'Close' }).click()
+    // Act: Ami writes a letter from the Mail tab.
+    await openMenu(ami.page, 'Social')
+    await social.getByRole('tab', { name: 'Mail' }).click()
+    await social.getByRole('button', { name: 'Write Letter' }).click()
+    await social.getByLabel('To').fill(bo.name)
+    await writeLetter(social, 'Toll gate', 'Bring a weapon and full HP.')
+    await expect(social.getByLabel('Subject')).toBeHidden()
+    await social.getByRole('button', { name: 'Close' }).click()
 
-    // Assert: Bo's minimap Mail button counts it; Bo reads it.
+    // Assert: Bo's minimap Mail button counts it and opens Social on the Mail tab; Bo reads it.
     // Two unread: the letter and the friend notice (Player Interaction).
     await bo.page.getByRole('button', { name: 'Mail (2 unread)' }).click()
-    const mail = dialog(bo.page, 'Mail')
+    const mail = dialog(bo.page, 'Social')
+    await expect(mail.getByRole('tab', { name: 'Mail' })).toHaveAttribute('aria-selected', 'true')
     await mail
       .getByRole('list', { name: 'Player Mail list' })
       .getByRole('button', { name: 'Toll gate' })
@@ -99,7 +105,7 @@ test('friends whisper and mail, and a block refuses both', async ({ browser }) =
     await expect(chat(ami.page)).toContainText('You cannot whisper to this player.')
     // Ami has unread mail too: Bo's add-back notice.
     await ami.page.getByRole('button', { name: /^Mail \(\d+ unread\)$/ }).click()
-    const amiMail = dialog(ami.page, 'Mail')
+    const amiMail = dialog(ami.page, 'Social')
     await amiMail.getByRole('button', { name: 'Write Letter' }).click()
     await amiMail.getByLabel('To').fill(bo.name)
     await writeLetter(amiMail, 'Sorry', 'Can we talk?')

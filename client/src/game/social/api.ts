@@ -9,6 +9,8 @@ import type {
   MailListView,
   MailSendInput,
   MailSummary,
+  PlayerView,
+  ScenePlayersView,
 } from '../../../../shared/src/schemas/social'
 
 const base = '/api/game/social'
@@ -19,7 +21,11 @@ export const socialKeys = {
   mail: ['game', 'social', 'mail'] as const,
   mailList: (category: MailCategory) => ['game', 'social', 'mail', category] as const,
   mailSummary: ['game', 'social', 'mail', 'summary'] as const,
+  scenePlayers: (sceneId: number) => ['game', 'social', 'scene', sceneId] as const,
+  player: (characterId: string) => ['game', 'social', 'player', characterId] as const,
 }
+/** How often the Player List rereads the scene. */
+const SCENE_PLAYERS_REFRESH_MS = 10_000
 const post = <T>(path: string, body: object) => api<T>(`${base}/${path}`, { method: 'POST', body })
 
 export function useFriends() {
@@ -43,6 +49,26 @@ export function useBlocked() {
   return useQuery({
     queryKey: socialKeys.blocked,
     queryFn: () => api<BlockedView>(`${base}/blocks`),
+  })
+}
+
+/**
+ * Online ninjas in my scene (Player List, Area tab).
+ * ponytail: polls; the chat socket's scenePlayers event would make it live once Chat shares it.
+ */
+export function useScenePlayers(sceneId: number) {
+  return useQuery({
+    queryKey: socialKeys.scenePlayers(sceneId),
+    queryFn: () => api<ScenePlayersView>(`${base}/scene-players`),
+    refetchInterval: SCENE_PLAYERS_REFRESH_MS,
+  })
+}
+
+/** View Character: another ninja's public face. */
+export function usePlayerView(characterId: string) {
+  return useQuery({
+    queryKey: socialKeys.player(characterId),
+    queryFn: () => api<PlayerView>(`${base}/players/${characterId}`),
   })
 }
 

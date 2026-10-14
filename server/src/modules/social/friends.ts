@@ -1,7 +1,8 @@
 // Friends and the Blocked list (decisions 16 and 17, FriendSystem in friends-mail.md).
-import { and, count, desc, eq, gt, or, sql } from 'drizzle-orm'
+import { and, count, desc, eq, gt, isNotNull, ne, or, sql } from 'drizzle-orm'
 import type { Db } from '../../db/client.js'
-import { blocks, characters, friends, mails } from '../../db/schema.js'
+import { blocks, characters, friends, inventoryItems, mails } from '../../db/schema.js'
+import { itemNameKey } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
 import { sendSystemMail } from '../../game/system-mail.js'
 import {
@@ -9,8 +10,18 @@ import {
   MAX_FRIENDS,
   type BlockedView,
   type FriendsView,
+  type PlayerView,
+  type ScenePlayersView,
 } from '../../../../shared/src/schemas/social.js'
-import { bad, isBlocked, isOnline, toPlayer, type CharacterRow, type Outbox } from './players.js'
+import {
+  bad,
+  characterById,
+  isBlocked,
+  isOnline,
+  toPlayer,
+  type CharacterRow,
+  type Outbox,
+} from './players.js'
 
 /** One neutral line for both directions: nobody can tell who blocked whom. */
 const REFUSED = 'You cannot add this player as a friend.'
@@ -150,7 +161,10 @@ export async function friendsView(db: Tx | Db, meId: string): Promise<FriendsVie
       online: isOnline(character.id),
       mutual,
     })),
-    addBack: pending.map(({ character }) => toPlayer(character)),
+    addBack: pending.map(({ character }) => ({
+      ...toPlayer(character),
+      online: isOnline(character.id),
+    })),
     max: MAX_FRIENDS,
   }
 }
@@ -163,4 +177,45 @@ export async function blockedView(db: Tx | Db, meId: string): Promise<BlockedVie
     .where(eq(blocks.ownerId, meId))
     .orderBy(characters.nameLower)
   return { blocked: listed.map(({ character }) => toPlayer(character)), max: MAX_BLOCKED }
+}
+
+/** Rows the Player List reads; a busy field shows its first ones (Reborn pages them by 7). */
+const SCENE_PLAYERS_MAX = 100
+
+/**
+ * Online ninjas in my scene but me, highest level first (Reborn's Player List, Area tab).
+ * ponytail: characters.scene_id plus the presence set, filtered here; the realtime server's own
+ * scene list would be exact for a mid-travel ninja, read it if that ever matters.
+ */
+export async function scenePlayersView(db: Tx | Db, me: CharacterRow): Promise<ScenePlayersView> {
+  const here = await db
+    .select()
+    .from(characters)
+    .where(and(eq(characters.sceneId, me.sceneId), ne(characters.id, me.id)))
+    .orderBy(desc(characters.level), characters.nameLower)
+  return {
+    players: here
+      .filter((row) => isOnline(row.id))
+      .slice(0, SCENE_PLAYERS_MAX)
+      .map(toPlayer),
+  }
+}
+
+/** Reborn's View Character: public fields and the worn items, never stats or the bag. */
+export async function playerView(db: Tx | Db, characterId: string): Promise<PlayerView> {
+  const row = await characterById(db, characterId)
+  const worn = await db
+    .select()
+    .from(inventoryItems)
+    .where(and(eq(inventoryItems.characterId, row.id), isNotNull(inventoryItems.equippedSlot)))
+  return {
+    player: toPlayer(row),
+    online: isOnline(row.id),
+    equipped: worn.map((item) => ({
+      slot: item.equippedSlot!,
+      itemId: item.itemId,
+      nameKey: itemNameKey(item.itemId),
+      enhanceLevel: item.enhanceLevel,
+    })),
+  }
 }

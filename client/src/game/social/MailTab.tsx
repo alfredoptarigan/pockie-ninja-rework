@@ -1,5 +1,6 @@
-// Mail window (UI_MailFrame, minimap Mail button): category tabs with unread counts, the list with
-// batch delete, the read view (Reply, Add Friend, Block, Report, Delete) and the write panel.
+// Mail tab of the Social window (UI_MailFrame; the minimap Mail button opens Social on it): category
+// tabs with unread counts, the list with batch delete, the read view (Reply, Add Friend, Block,
+// Report, Delete) and the write panel. Reborn's claim / reward parts need mail attachments.
 import { useState, type CSSProperties } from 'react'
 import {
   MAIL_CATEGORIES,
@@ -8,7 +9,7 @@ import {
   type MailEntry,
 } from '../../../../shared/src/schemas/social'
 import { errorMessage } from '../api'
-import { Dialog, GameButton, Notice } from '../skin'
+import { GameButton, Notice } from '../skin'
 import { useFriendAction, useMailAction, useMailList, useMailSummary } from './api'
 import { ComposeMail } from './ComposeMail'
 import { mailText } from './templates'
@@ -193,64 +194,62 @@ function MailList({
   )
 }
 
-export function MailWindow({ onClose }: { onClose: () => void }) {
+export function MailTab() {
   const summary = useMailSummary()
   const [category, setCategory] = useState<MailCategory>('player')
   const [view, setView] = useState<View>({ kind: 'list' })
   const toList = () => setView({ kind: 'list' })
   return (
-    <Dialog title="Mail" onClose={onClose} className="w-[560px]">
-      <div className="flex gap-2">
-        <nav aria-label="Mail categories" className="flex w-[150px] shrink-0 flex-col gap-1">
-          {MAIL_CATEGORIES.map((id) => {
-            const count = summary.data?.categories.find((c) => c.category === id)
-            return (
-              <button
-                key={id}
-                type="button"
-                aria-current={id === category && view.kind === 'list' ? 'true' : undefined}
-                onClick={() => {
-                  setCategory(id)
-                  toList()
-                }}
-                className="h-[22px] bg-(image:--bg) bg-size-[100%_100%] px-1 text-left text-[12px] text-white"
-                style={
-                  {
-                    '--bg': `url(${UI}/accordion-header${id === category ? '-selected' : ''}.webp)`,
-                  } as CSSProperties
-                }
-              >
-                {CATEGORY_TITLES[id]} ({count?.unread ?? 0}/{count?.total ?? 0})
-              </button>
-            )
-          })}
-          <GameButton small onClick={() => setView({ kind: 'compose' })}>
-            Write Letter
-          </GameButton>
-        </nav>
-        <div className="min-w-0 flex-1">
-          {view.kind === 'list' && (
-            <MailList category={category} onOpen={(mail) => setView({ kind: 'read', mail })} />
-          )}
-          {view.kind === 'read' && (
-            <ReadMail
-              mail={view.mail}
-              onDone={toList}
-              onReply={() =>
-                setView({
-                  kind: 'compose',
-                  to: view.mail.sender?.name,
-                  subject: reply(view.mail.subject ?? ''),
-                })
+    <div className="flex gap-2">
+      <nav aria-label="Mail categories" className="flex w-[150px] shrink-0 flex-col gap-1">
+        {MAIL_CATEGORIES.map((id) => {
+          const count = summary.data?.categories.find((c) => c.category === id)
+          return (
+            <button
+              key={id}
+              type="button"
+              aria-current={id === category && view.kind === 'list' ? 'true' : undefined}
+              onClick={() => {
+                setCategory(id)
+                toList()
+              }}
+              className="h-[22px] bg-(image:--bg) bg-size-[100%_100%] px-1 text-left text-[12px] text-white"
+              style={
+                {
+                  '--bg': `url(${UI}/accordion-header${id === category ? '-selected' : ''}.webp)`,
+                } as CSSProperties
               }
-            />
-          )}
-          {view.kind === 'compose' && (
-            <ComposeMail to={view.to} subject={view.subject} onSent={toList} onCancel={toList} />
-          )}
-        </div>
+            >
+              {CATEGORY_TITLES[id]} ({count?.unread ?? 0}/{count?.total ?? 0})
+            </button>
+          )
+        })}
+        <GameButton small onClick={() => setView({ kind: 'compose' })}>
+          Write Letter
+        </GameButton>
+      </nav>
+      <div className="min-w-0 flex-1">
+        {view.kind === 'list' && (
+          <MailList category={category} onOpen={(mail) => setView({ kind: 'read', mail })} />
+        )}
+        {view.kind === 'read' && (
+          <ReadMail
+            mail={view.mail}
+            onDone={toList}
+            onReply={() =>
+              setView({
+                kind: 'compose',
+                to: view.mail.sender?.name,
+                subject: reply(view.mail.subject ?? ''),
+              })
+            }
+          />
+        )}
+        {view.kind === 'compose' && (
+          <ComposeMail to={view.to} subject={view.subject} onSent={toList} onCancel={toList} />
+        )}
       </div>
-    </Dialog>
+    </div>
   )
 }
 

@@ -102,9 +102,32 @@ export interface FriendEntry extends SocialPlayer {
 
 export interface FriendsView {
   friends: FriendEntry[]
-  /** Players who added you and wait for an answer to the add-back prompt. */
-  addBack: SocialPlayer[]
+  /**
+   * Players who added you and wait for an answer to the add-back prompt (Reborn's Requests tab:
+   * Accept adds them back, Reject dismisses the prompt).
+   */
+  addBack: (SocialPlayer & { online: boolean })[]
   max: number
+}
+
+/** Online ninjas in my scene, for Reborn's Player List (Area tab). */
+export interface ScenePlayersView {
+  players: SocialPlayer[]
+}
+
+/** An item another ninja wears, by its slot (the server's equippedSlot). */
+export interface WornItem {
+  slot: string
+  itemId: string
+  nameKey: string
+  enhanceLevel: number
+}
+
+/** Reborn's View Character: the public face of another ninja. */
+export interface PlayerView {
+  player: SocialPlayer
+  online: boolean
+  equipped: WornItem[]
 }
 
 export interface BlockedView {

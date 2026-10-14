@@ -20,7 +20,9 @@ import {
   blockedView,
   declineAddBack,
   friendsView,
+  playerView,
   removeFriend,
+  scenePlayersView,
   unblock,
 } from './friends.js'
 import {
@@ -92,6 +94,16 @@ export async function socialRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const { characterId } = characterRefSchema.parse(request.body)
     const self = await withPair(request, (tx) => characterById(tx, characterId), removeFriend)
     return friendsView(db, self.id)
+  })
+
+  app.get('/scene-players', { config: READ }, async (request) =>
+    scenePlayersView(db, await me(request)),
+  )
+
+  app.get('/players/:characterId', { config: READ }, async (request) => {
+    const { characterId } = characterRefSchema.parse(request.params)
+    await me(request)
+    return playerView(db, characterId)
   })
 
   app.get('/blocks', { config: READ }, async (request) => blockedView(db, (await me(request)).id))

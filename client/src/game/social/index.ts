@@ -1,4 +1,5 @@
-export { FriendsWindow } from './FriendsWindow'
-export { MailButton, MailWindow } from './MailWindow'
+export { MailButton } from './MailTab'
+export { PlayerList } from './PlayerList'
+export { SocialWindow } from './SocialWindow'
 export { onItemLinkRequest, onWhisperRequest, requestItemLink, requestWhisper } from './requests'
 export { SYSTEM_MAIL_TEXT } from './templates'
