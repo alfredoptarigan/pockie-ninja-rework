@@ -11,6 +11,7 @@ import { NINJUTSU_TRIGGER_A_SKILLS } from './scripts/ninjutsu-trigger-a.js'
 import { NINJUTSU_TRIGGER_B_SKILLS } from './scripts/ninjutsu-trigger-b.js'
 import { fightBegin, parry } from './scripts/parry.js'
 import { PET_CORE_SKILLS } from './scripts/pet-core.js'
+import { PET_SCRIPTS } from './scripts/pet-help-register.js'
 import type { SkillInput, SkillScript } from './types.js'
 
 /** skill.ini [1]: the normal attack every fighter falls back to. */
@@ -60,4 +61,5 @@ export const SKILL_SCRIPTS: Record<string, SkillScript> = {
   ...LAS_NOCHES_A_SKILLS,
   ...LAS_NOCHES_B_SKILLS,
   ...PET_CORE_SKILLS,
+  ...PET_SCRIPTS,
 }
