@@ -1,7 +1,21 @@
 // Player actions in the world: quests, NPC talk, items, equipment, travel and revive.
-import { bagItemsWhere, requireBagRoom } from '../../game/bag.js'
+import {
+  bagItemsWhere,
+  fitsOutfit,
+  inventoryView,
+  placeAt,
+  placeBag,
+  requireBagRoom,
+  spotOf,
+} from '../../game/bag.js'
+import { USABLE_PAGES } from '../../game/bag-grid.js'
 import { createRandom, deriveStats } from '@pockie/game-core'
-import { buyPouchesSchema, itemActionParamsSchema, travelSchema } from '@pockie/shared'
+import {
+  buyPouchesSchema,
+  itemActionParamsSchema,
+  travelSchema,
+  unequipSchema,
+} from '@pockie/shared'
 import { randomInt } from 'node:crypto'
 import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
@@ -12,7 +26,6 @@ import {
   avatarStats,
   dropLib,
   item,
-  itemNameKey,
   levels,
   nationScenes,
   npc,
@@ -102,12 +115,6 @@ export function reviveTerms(character: Pick<CharacterRow, 'level' | 'sceneId'>) 
 
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 
-/** Whether the outfit's weapon class may use the item (UsePopsinger bit mask, -1 any). */
-function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: number) {
-  const allowed = Number(def.UsePopsinger)
-  return allowed === -1 || (allowed & avatarStats(avatarId).Popsinger) !== 0
-}
-
 /**
  * Column updates for HP/MP potions and pouch refills, by the item's script
  * (Resource/javascript/item/*.js); undefined for other items. hp.js, mp.js and hmp.js refuse when
@@ -146,23 +153,96 @@ function restoreItem(
   }
 }
 
+export async function reloadCharacter(tx: Tx, id: string) {
+  const [row] = await tx.select().from(characters).where(eq(characters.id, id))
+  return toCharacter(row!, await playerFighter(tx, row!))
+}
+
+/** A bag (or equipped) row of the character, or 404. */
+export async function ownedItem(tx: Tx, characterId: string, id: string) {
+  const [row] = await tx
+    .select()
+    .from(inventoryItems)
+    .where(and(bagItemsWhere(characterId), eq(inventoryItems.id, id)))
+  if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
+  return row
+}
+
+/**
+ * POST /items/:id/use for one item: `character` is the caller's locked, current row. Shared by
+ * the bag's Use Multiple.
+ */
+export async function useItem(
+  tx: Tx,
+  character: CharacterRow,
+  row: typeof inventoryItems.$inferSelect,
+) {
+  const def = item(row.itemId)
+  if (!def || Number(def.CanUse) !== 1) throw bad('cannot_use', 'That item cannot be used.')
+  if (character.level < Number(def.UseLevel ?? 0)) throw bad('too_low', 'Your level is too low.')
+  // M6 decision 9: a pet item goes into the Pet Kennel.
+  if (await adoptPetItem(tx, character, row))
+    return {
+      ...(await rookieHandIns(tx, character.id)),
+      character: await reloadCharacter(tx, character.id),
+    }
+
+  let card: { cardId: number; nameKey: string } | undefined
+  const scrollItem = await learnScrollSkill(tx, character.id, def)
+  const freeResetItem = !scrollItem && (await grantFreeSkillReset(tx, character, def))
+  const buffItem = !scrollItem && (await useBuffItem(tx, character.id, row.itemId, def))
+  const restore =
+    buffItem || freeResetItem || scrollItem
+      ? undefined
+      : restoreItem(character, def, await playerFighter(tx, character))
+  if (scrollItem || freeResetItem) {
+    await consumeOne(tx, row)
+    await refreshBuffState(tx, character)
+  } else if (buffItem) {
+    await consumeOne(tx, row)
+    await refreshBuffState(tx, character)
+  } else if (restore) {
+    await tx.update(characters).set(restore).where(eq(characters.id, character.id))
+  } else if (def.class === 'CardBox') {
+    // M6 decision 28: one card into the Card Room; the box is used up there.
+    card = (await openCardBox(tx, character.id, row)) ?? undefined
+    if (!card) throw bad('cannot_use', 'That item cannot be used yet.')
+  } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
+    const drops = rollLibDrops(Number(def.BoxDropID), createRandom(randomInt(2 ** 31)))
+    // Box contents inherit the box's binding; a full bag keeps the box closed.
+    const contents = drops.map((drop) => ({ ...drop, bound: row.bound }))
+    await consumeOne(tx, row)
+    await requireBagRoom(tx, character.id, contents)
+    await grantItems(tx, character.id, contents)
+  } else {
+    throw bad('cannot_use', 'That item cannot be used yet.')
+  }
+  if (restore) await consumeOne(tx, row)
+
+  if (def.JavaScript === 'item/FoodItem.js')
+    await saveQuests(
+      tx,
+      character.id,
+      recordCommand(await loadQuests(tx, character.id), 2127, character.sceneId),
+    )
+  const quests = await loadQuests(tx, character.id)
+  await saveQuests(
+    tx,
+    character.id,
+    recordCommand(quests, USE_ITEM_COMMAND, character.sceneId, row.itemId),
+  )
+  return {
+    ...(await rookieHandIns(tx, character.id)),
+    ...(card && { card }),
+    character: await reloadCharacter(tx, character.id),
+  }
+}
+
 export async function actionRoutes(
   app: FastifyInstance,
   { db, realtime }: { db: Db; realtime: Pick<Realtime, 'moveCharacter'> },
 ) {
-  const reload = async (tx: Tx, id: string) => {
-    const [row] = await tx.select().from(characters).where(eq(characters.id, id))
-    return toCharacter(row!, await playerFighter(tx, row!))
-  }
-
-  async function ownedItem(tx: Tx, characterId: string, id: string) {
-    const [row] = await tx
-      .select()
-      .from(inventoryItems)
-      .where(and(bagItemsWhere(characterId), eq(inventoryItems.id, id)))
-    if (!row) throw new HttpError(404, 'no_item', 'You do not have that item.')
-    return row
-  }
+  const reload = reloadCharacter
 
   app.get('/quests', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
@@ -202,22 +282,10 @@ export async function actionRoutes(
     }
   })
 
+  // Locks the character: placing new items must not race another placement.
   app.get('/inventory', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
-    const character = await characterOf(db, requireUser(request).id)
-    const rows = await db.select().from(inventoryItems).where(bagItemsWhere(character.id))
-    return {
-      items: rows.map((row) => ({
-        id: row.id,
-        itemId: row.itemId,
-        count: row.count,
-        bound: row.bound,
-        equippedSlot: row.equippedSlot,
-        nameKey: itemNameKey(row.itemId),
-        ...(item(row.itemId)?.class === 'EquipItem'
-          ? { fitsOutfit: fitsOutfit(item(row.itemId)!, character.avatarId) }
-          : {}),
-      })),
-    }
+    const userId = requireUser(request).id
+    return db.transaction(async (tx) => inventoryView(tx, await lockCharacter(tx, userId)))
   })
 
   app.post(
@@ -285,67 +353,7 @@ export async function actionRoutes(
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
-      const row = await ownedItem(tx, character.id, id)
-      const def = item(row.itemId)
-      if (!def || Number(def.CanUse) !== 1) throw bad('cannot_use', 'That item cannot be used.')
-      if (character.level < Number(def.UseLevel ?? 0))
-        throw bad('too_low', 'Your level is too low.')
-      // M6 decision 9: a pet item goes into the Pet Kennel.
-      if (await adoptPetItem(tx, character, row))
-        return {
-          ...(await rookieHandIns(tx, character.id)),
-          character: await reload(tx, character.id),
-        }
-
-      let card: { cardId: number; nameKey: string } | undefined
-      const scrollItem = await learnScrollSkill(tx, character.id, def)
-      const freeResetItem = !scrollItem && (await grantFreeSkillReset(tx, character, def))
-      const buffItem = !scrollItem && (await useBuffItem(tx, character.id, row.itemId, def))
-      const restore =
-        buffItem || freeResetItem || scrollItem
-          ? undefined
-          : restoreItem(character, def, await playerFighter(tx, character))
-      if (scrollItem || freeResetItem) {
-        await consumeOne(tx, row)
-        await refreshBuffState(tx, character)
-      } else if (buffItem) {
-        await consumeOne(tx, row)
-        await refreshBuffState(tx, character)
-      } else if (restore) {
-        await tx.update(characters).set(restore).where(eq(characters.id, character.id))
-      } else if (def.class === 'CardBox') {
-        // M6 decision 28: one card into the Card Room; the box is used up there.
-        card = (await openCardBox(tx, character.id, row)) ?? undefined
-        if (!card) throw bad('cannot_use', 'That item cannot be used yet.')
-      } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
-        const drops = rollLibDrops(Number(def.BoxDropID), createRandom(randomInt(2 ** 31)))
-        // Box contents inherit the box's binding; a full bag keeps the box closed.
-        const contents = drops.map((drop) => ({ ...drop, bound: row.bound }))
-        await consumeOne(tx, row)
-        await requireBagRoom(tx, character.id, contents)
-        await grantItems(tx, character.id, contents)
-      } else {
-        throw bad('cannot_use', 'That item cannot be used yet.')
-      }
-      if (restore) await consumeOne(tx, row)
-
-      if (def.JavaScript === 'item/FoodItem.js')
-        await saveQuests(
-          tx,
-          character.id,
-          recordCommand(await loadQuests(tx, character.id), 2127, character.sceneId),
-        )
-      const quests = await loadQuests(tx, character.id)
-      await saveQuests(
-        tx,
-        character.id,
-        recordCommand(quests, USE_ITEM_COMMAND, character.sceneId, row.itemId),
-      )
-      return {
-        ...(await rookieHandIns(tx, character.id)),
-        ...(card && { card }),
-        character: await reload(tx, character.id),
-      }
+      return useItem(tx, character, await ownedItem(tx, character.id, id))
     })
   })
 
@@ -354,6 +362,8 @@ export async function actionRoutes(
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
+      // Placed first, so the replaced item can take the new item's tile.
+      await placeBag(tx, character.id)
       const row = await ownedItem(tx, character.id, id)
       const def = item(row.itemId)
       if (!def || def.class !== 'EquipItem')
@@ -366,16 +376,21 @@ export async function actionRoutes(
       const refusal = equipRefusal(row)
       if (refusal) throw bad(refusal.code, refusal.message)
       const slot = String(def.EquipType)
-      await tx
+      const [replaced] = await tx
         .update(inventoryItems)
         .set({ equippedSlot: null })
         .where(
           and(eq(inventoryItems.characterId, character.id), eq(inventoryItems.equippedSlot, slot)),
         )
+        .returning()
       await tx
         .update(inventoryItems)
-        .set({ equippedSlot: slot })
+        .set({ equippedSlot: slot, bagPage: null, bagSlot: null })
         .where(eq(inventoryItems.id, row.id))
+      // The replaced item takes the new item's tile when it fits there, else any free one.
+      const freed = spotOf(row)
+      if (replaced && replaced.id !== row.id && freed)
+        await placeAt(tx, character.id, replaced, freed)
       // Wing stats are part of the arena defence (M6 decision 23).
       if (slot === WING_SLOT) await refreshArenaSnapshot(tx, character.id)
 
@@ -390,13 +405,16 @@ export async function actionRoutes(
       return {
         ...(await rookieHandIns(tx, character.id)),
         character: await reload(tx, character.id),
+        ...(await inventoryView(tx, character)),
       }
     })
   })
 
-  // EquipSystem.OnCustomUnEquip: the item goes back to the bag, which needs a free row.
+  // EquipSystem.OnCustomUnEquip: the item goes back to the bag, which needs a free row. An
+  // optional {page, slot} drops it on that tile when it is free; otherwise it is placed first-fit.
   app.post('/items/:id/unequip', { config: { rateLimit: RATE_LIMITS.item } }, async (request) => {
     const { id } = itemParams.parse(request.params)
+    const target = unequipSchema.parse(request.body ?? {})
     const userId = requireUser(request).id
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
@@ -407,8 +425,10 @@ export async function actionRoutes(
         .update(inventoryItems)
         .set({ equippedSlot: null })
         .where(eq(inventoryItems.id, row.id))
+      if (target.page !== undefined && target.slot !== undefined && target.page < USABLE_PAGES)
+        await placeAt(tx, character.id, row, { page: target.page, slot: target.slot })
       if (row.equippedSlot === WING_SLOT) await refreshArenaSnapshot(tx, character.id)
-      return { character: await reload(tx, character.id) }
+      return { character: await reload(tx, character.id), ...(await inventoryView(tx, character)) }
     })
   })
 

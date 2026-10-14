@@ -272,6 +272,13 @@ describe('selling and pouch refill', () => {
     expect((await row()).stone).toBe(0)
     expect(await bag()).toHaveLength(2)
   })
+  it('refuses locked items and sell all skips them', async () => {
+    const locked = await give('i160006', { count: 2, locked: true })
+    expect((await post('sell', { inventoryId: locked.id, count: 1 })).statusCode).toBe(400)
+    expect((await post('sell-all', { inventoryIds: [locked.id] })).statusCode).toBe(200)
+    expect((await row()).stone).toBe(0)
+    expect(await bag()).toEqual([expect.objectContaining({ id: locked.id, count: 2 })])
+  })
   it('sell all destroys listed sellable bag items and skips equipped items', async () => {
     const medicine = await give('i160006', { count: 2 })
     const equipped = await give('i250101', { equippedSlot: 'Weapon' })

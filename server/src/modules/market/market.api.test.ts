@@ -160,6 +160,25 @@ describe('Market access', () => {
 })
 
 describe('listing', () => {
+  it('refuses locked items and clears the bag position of listed ones', async () => {
+    const locked = await give(seller.id, FOOD, { count: 2, locked: true })
+    const body = { count: 1, priceStone: 100, priceGold: null, hours: 8 }
+    const refused = await post(seller, 'list', { ...body, inventoryId: locked.id })
+    expect(refused.statusCode).toBe(400)
+    expect(refused.json().error).toMatchObject({
+      code: 'locked',
+      message: 'Unlock the item first.',
+    })
+
+    const placed = await give(seller.id, FOOD, { count: 1, bagPage: 0, bagSlot: 5 })
+    expect((await post(seller, 'list', { ...body, inventoryId: placed.id })).statusCode).toBe(200)
+    expect(await itemRow(placed.id)).toMatchObject({
+      location: 'market',
+      bagPage: null,
+      bagSlot: null,
+    })
+  })
+
   it('charges the fee, moves the item out of the bag and audits the listing', async () => {
     const { row, listingId } = await list(seller, FOOD, { stack: 5, count: 5, hours: 12 })
     expect((await char(seller.id)).stone).toBe(10_000 - 225)

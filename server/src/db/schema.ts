@@ -289,6 +289,12 @@ export const inventoryItems = pgTable(
     engravedSlot: smallint('engraved_slot'),
     // Listed and warehoused Market items keep their row (and instance state) but leave the bag.
     location: itemLocation('location').notNull().default('bag'),
+    // Reborn bag: tab (0-9) and top-left tile (0-59, row-major, 10 per row) of an unequipped
+    // bag item. Null = not placed yet; placeBag (game/bag.ts) places such rows lazily.
+    bagPage: smallint('bag_page'),
+    bagSlot: smallint('bag_slot'),
+    // A locked item cannot be sold or listed on the Market.
+    locked: boolean('locked').notNull().default(false),
   },
   (t) => [
     index('inventory_items_character_id_idx').on(t.characterId),
@@ -307,6 +313,13 @@ export const inventoryItems = pgTable(
     check('inventory_items_identify_times', sql`${t.identifyTimes} >= 0`),
     check('inventory_items_props', jsonbArray(t.props, 4)),
     check('inventory_items_engraved_slot', sql`${t.engravedSlot} between 0 and 3`),
+    check('inventory_items_bag_page', sql`${t.bagPage} between 0 and 9`),
+    check('inventory_items_bag_slot', sql`${t.bagSlot} between 0 and 59`),
+    // Only unequipped bag rows have a position, and always both halves of it.
+    check(
+      'inventory_items_bag_position',
+      sql`(${t.bagPage} is null and ${t.bagSlot} is null) or (${t.bagPage} is not null and ${t.bagSlot} is not null and ${t.location} = 'bag' and ${t.equippedSlot} is null)`,
+    ),
   ],
 )
 

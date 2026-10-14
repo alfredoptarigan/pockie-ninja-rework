@@ -160,6 +160,7 @@ export async function listItem(tx: Tx, c: Character, input: ListInput, now: Date
     )
     .for('update')
   if (!row) throw noItem()
+  if (row.locked) throw bad('locked', 'Unlock the item first.')
   const { refusal, category } = sellability(row)
   if (refusal) throw bad(refusal, REFUSALS[refusal])
   if (input.count > row.count) throw bad('invalid_count', 'You do not have that many.')
@@ -183,7 +184,10 @@ export async function listItem(tx: Tx, c: Character, input: ListInput, now: Date
   let listed = row
   if (input.count < row.count) listed = await splitOff(tx, row, input.count, c.id, 'market')
   else
-    await tx.update(inventoryItems).set({ location: 'market' }).where(eq(inventoryItems.id, row.id))
+    await tx
+      .update(inventoryItems)
+      .set({ location: 'market', bagPage: null, bagSlot: null })
+      .where(eq(inventoryItems.id, row.id))
   const [listing] = await tx
     .insert(marketListings)
     .values({

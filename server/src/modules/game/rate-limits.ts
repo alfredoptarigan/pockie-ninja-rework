@@ -22,6 +22,10 @@ export const RATE_LIMITS = {
   talk: perMinute(60),
   acceptQuest: perMinute(30),
   item: perMinute(60),
+  // Bag window: dragging items around is frequent; selling and sorting are bulk actions.
+  bagMove: perMinute(120),
+  bagSell: perMinute(30),
+  bagSort: perMinute(20),
   travel: perMinute(30),
   revive: perMinute(10),
   buyPouches: perMinute(20),

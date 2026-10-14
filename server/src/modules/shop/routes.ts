@@ -37,16 +37,10 @@ import {
   characterMysticPurchases,
 } from '../../db/schema.js'
 import { item, itemNameKey, sceneSpawns, task } from '../../game/data.js'
-import {
-  grantItems,
-  consumeOne,
-  loadQuests,
-  saveQuests,
-  rookieHandIns,
-  type Tx,
-} from '../../game/progress.js'
+import { grantItems, loadQuests, saveQuests, rookieHandIns, type Tx } from '../../game/progress.js'
 import { recordCommand } from '../../game/quests.js'
 import { shopGearState } from '../../game/gear.js'
+import { canSell, sellRows } from '../../game/sell.js'
 import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { lockCharacter, requireUser, toCharacter } from '../game/characters.js'
@@ -152,11 +146,10 @@ async function restock(tx: Tx, c: Character, type: 1 | 2 | 3, at: Date) {
       set: { lastRefreshAt: at },
     })
 }
-const canSell = (row: typeof inventoryItems.$inferSelect) =>
-  row.location === 'bag' && !row.equippedSlot && (Number(item(row.itemId)?.CanTrade ?? 0) & 1) !== 0
+/** Sell picks listed rows; with `amount` (single Sell) a refused row fails the request. */
 async function sell(tx: Tx, c: Character, ids: string[], amount?: number) {
   const bag = await tx.select().from(inventoryItems).where(unequippedBagItemsWhere(c.id))
-  let earned = 0
+  const sales = []
   for (const id of ids) {
     const row = bag.find((r) => r.id === id)
     if (!row || !canSell(row)) {
@@ -165,15 +158,9 @@ async function sell(tx: Tx, c: Character, ids: string[], amount?: number) {
     }
     const count = amount ?? row.count
     if (count > row.count) throw bad('invalid_count', 'You do not have that many items.')
-    earned += Number(item(row.itemId)?.Price ?? 0) * count
-    for (let n = 0; n < count; n++) {
-      await consumeOne(tx, { ...row, count: row.count - n })
-    }
+    sales.push({ row, count })
   }
-  await tx
-    .update(characters)
-    .set({ stone: c.stone + earned })
-    .where(eq(characters.id, c.id))
+  const earned = await sellRows(tx, c.id, sales)
   return { ...(await result(tx, c)), earned }
 }
 async function openView(tx: Tx, c: Character) {

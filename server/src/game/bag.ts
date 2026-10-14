@@ -1,8 +1,18 @@
 // PackSystem: two initially active 60-cell pages. See docs/original-data/bag.md.
-import { and, eq, isNull } from 'drizzle-orm'
+import type { BagItemInfo, InventoryItemView } from '@pockie/shared'
+import { and, asc, eq, isNull, notInArray } from 'drizzle-orm'
 import { inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { item } from './data.js'
+import {
+  BAG_CELLS,
+  firstFitAnywhere,
+  fits,
+  footprint,
+  occupancy,
+  type Placed,
+  type Spot,
+} from './bag-grid.js'
+import { avatarStats, item, itemNameKey } from './data.js'
 import type { GrantedItem } from './gear.js'
 import type { Tx } from './progress.js'
 
@@ -12,7 +22,7 @@ export const bagItemsWhere = (characterId: string) =>
 export const unequippedBagItemsWhere = (characterId: string) =>
   and(bagItemsWhere(characterId), isNull(inventoryItems.equippedSlot))
 
-export const BAG_CELLS = 120
+export { BAG_CELLS }
 export const itemCells = (itemId: string) => Number(item(itemId)?.ItemShapeType ?? 1)
 export const itemStackSize = (itemId: string) =>
   itemCells(itemId) === 1 ? Number(item(itemId)?.ItemMaxFoldNum ?? 1) : 1
@@ -64,4 +74,115 @@ export async function requireBagRoom(
 ) {
   if (!(await bagFits(tx, characterId, awards, opts)))
     throw new HttpError(400, 'bag_full', opts.message ?? 'Your bag is full.')
+}
+
+type ItemRow = typeof inventoryItems.$inferSelect
+
+/** Whether the outfit's weapon class may use the item (UsePopsinger bit mask, -1 any). */
+export function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: number) {
+  const allowed = Number(def.UsePopsinger)
+  return allowed === -1 || (allowed & avatarStats(avatarId).Popsinger) !== 0
+}
+
+export function itemInfo(itemId: string): BagItemInfo {
+  const def = item(itemId)
+  const itemClass = String(def?.class ?? '')
+  const equip = itemClass === 'EquipItem'
+  const usable = Number(def?.CanUse) === 1 && itemClass !== 'AvatarItem'
+  return {
+    kind: equip ? 'equip' : usable ? 'use' : 'other',
+    equipSlot: equip ? String(def!.EquipType) : null,
+    level: Number(def?.UseLevel ?? 0),
+    sellPrice: (Number(def?.CanTrade ?? 0) & 1) !== 0 ? Number(def?.Price ?? 0) : null,
+    stack: itemStackSize(itemId),
+    ...footprint(itemId),
+    class: itemClass,
+  }
+}
+
+/** The stored top-left tile of a row, or null when it has none. */
+export const spotOf = (row: Pick<ItemRow, 'bagPage' | 'bagSlot'>): Spot | null =>
+  row.bagPage === null || row.bagSlot === null ? null : { page: row.bagPage, slot: row.bagSlot }
+
+/** The rectangles of the given rows that have a position. */
+export const rectsOf = (rows: readonly ItemRow[]): Placed[] =>
+  rows.flatMap((row) => {
+    const spot = spotOf(row)
+    return spot ? [{ ...spot, ...footprint(row.itemId) }] : []
+  })
+
+/** Unequipped bag rows, oldest first (the stable placement order). */
+export const unequippedBagRows = (tx: Tx, characterId: string, except: string[] = []) =>
+  tx
+    .select()
+    .from(inventoryItems)
+    .where(
+      and(
+        unequippedBagItemsWhere(characterId),
+        except.length ? notInArray(inventoryItems.id, except) : undefined,
+      ),
+    )
+    .orderBy(asc(inventoryItems.createdAt), asc(inventoryItems.id))
+
+export const setSpot = (tx: Tx, id: string, spot: Spot | null) =>
+  tx
+    .update(inventoryItems)
+    .set({ bagPage: spot?.page ?? null, bagSlot: spot?.slot ?? null })
+    .where(eq(inventoryItems.id, id))
+
+/** Puts `row` with its top-left at `spot` when that is free of every other item; returns success. */
+export async function placeAt(tx: Tx, characterId: string, row: ItemRow, spot: Spot) {
+  const others = rectsOf(await unequippedBagRows(tx, characterId, [row.id]))
+  if (!fits(occupancy(others, spot.page), spot.slot, footprint(row.itemId))) return false
+  await setSpot(tx, row.id, spot)
+  return true
+}
+
+/**
+ * Gives every unplaced unequipped bag row a position, first-fit on the usable pages, else on the
+ * first overflow page with room. Grants insert unplaced rows, so every bag read calls this.
+ * The caller holds the character lock so two placements cannot pick the same tiles.
+ */
+export async function placeBag(tx: Tx, characterId: string) {
+  const rows = await unequippedBagRows(tx, characterId)
+  const placed = rectsOf(rows)
+  for (const row of rows.filter((r) => !spotOf(r))) {
+    const size = footprint(row.itemId)
+    // ponytail: with all 10 pages full the row stays unplaced until something frees room.
+    const spot = firstFitAnywhere(placed, size)
+    if (!spot) continue
+    placed.push({ ...spot, ...size })
+    await setSpot(tx, row.id, spot)
+  }
+}
+
+/** GET /api/game/inventory rows (bag and equipped), after placing new items. */
+export async function inventoryView(
+  tx: Tx,
+  character: { id: string; avatarId: number },
+): Promise<{ items: InventoryItemView[] }> {
+  await placeBag(tx, character.id)
+  const rows = await tx
+    .select()
+    .from(inventoryItems)
+    .where(bagItemsWhere(character.id))
+    .orderBy(asc(inventoryItems.createdAt), asc(inventoryItems.id))
+  return {
+    items: rows.map((row) => {
+      const def = item(row.itemId)
+      return {
+        id: row.id,
+        itemId: row.itemId,
+        count: row.count,
+        bound: row.bound,
+        equippedSlot: row.equippedSlot,
+        nameKey: itemNameKey(row.itemId),
+        ...(def?.class === 'EquipItem' ? { fitsOutfit: fitsOutfit(def, character.avatarId) } : {}),
+        page: row.bagPage,
+        slot: row.bagSlot,
+        locked: row.locked,
+        info: itemInfo(row.itemId),
+      }
+    }),
+  }
 }
