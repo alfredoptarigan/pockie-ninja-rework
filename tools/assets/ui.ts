@@ -123,6 +123,9 @@ const WINDOW_PIECES: Record<string, PieceSource> = {
   'equip-backdrop': resource('Equip.Peoplebg'),
   'slot-outfit': resource('Equip.Avatar'),
   'slot-weapon': resource('Equip.Weapon2'),
+  // The weapon slot art follows the outfit's weapon class (Reborn: Sharp Weapon1, Fists Weapon2, Blunt Weapon3).
+  'slot-weapon-sharp': resource('Equip.Weapon1'),
+  'slot-weapon-blunt': resource('Equip.Weapon3'),
   'slot-glove': resource('Equip.Glove'),
   'slot-pet': resource('Equip.Pet'),
   'slot-ring': resource('Equip.FingerRing'),

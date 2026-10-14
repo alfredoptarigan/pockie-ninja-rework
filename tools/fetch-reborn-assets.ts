@@ -315,6 +315,30 @@ async function main() {
       `icons/items/${items[id]![0]}.png`,
     ]),
     ...new Map(ourIcons.map((icon) => [icon[2], [...icon] as [string, string, string]])).values(),
+    // HUD art: the bottom menu bar (features/bottom-menu) and the village feature icons (topui).
+    ...['11-1', '11-2', '11-3', 'task', 'ninjahouse', 'social', 'rank', 'bankai', 'clan', '2'].map(
+      (name): [string, string, string] => ['hud', name, `features/bottom-menu/${name}.png`],
+    ),
+    ...[
+      'impeldown',
+      'zanpakuto',
+      'dungeons',
+      'mall',
+      'boutique',
+      'akatsuki',
+      'pub',
+      'shichibukai',
+      'sannin-test',
+      'market',
+      'home',
+    ].map((name): [string, string, string] => ['hud', name, `ui/buttons/topui/${name}.png`]),
+    ['hud', 'ninja-diary', 'dailylogin/NinjaDiary.png'],
+    // Outfit icons for the Inventory's Outfit slot (Reborn's avatars/<outfit>, our clothing ids).
+    ...Array.from({ length: 120 }, (_, i): [string, string, string] => [
+      'item-icon',
+      `avatar-${i + 1}`,
+      `icons/items/avatars/${i + 1}.png`,
+    ]),
     ['daily-login', 'reward', 'dailylogin/reward.png'],
     ['daily-login', '20min', 'dailylogin/20min.png'],
     ['bloodline', 'menu', 'ui/newui/Bloodline.png'],
@@ -338,7 +362,7 @@ async function main() {
   ]
   await pool(
     process.argv.includes('--m5-missing')
-      ? fixed.filter(([category]) => category === 'item-icon' || category === 'daily-login')
+      ? fixed.filter(([category]) => ['item-icon', 'daily-login', 'hud'].includes(category))
       : fixed,
     ([category, id, path]) => fetchAsset(category, id, path),
   )

@@ -385,6 +385,16 @@
     },
     "slot-outfit": { "file": "/assets/game/ui/slot-outfit.webp", "width": 61, "height": 61 },
     "slot-weapon": { "file": "/assets/game/ui/slot-weapon.webp", "width": 71, "height": 99 },
+    "slot-weapon-sharp": {
+      "file": "/assets/game/ui/slot-weapon-sharp.webp",
+      "width": 71,
+      "height": 99
+    },
+    "slot-weapon-blunt": {
+      "file": "/assets/game/ui/slot-weapon-blunt.webp",
+      "width": 71,
+      "height": 99
+    },
     "slot-glove": { "file": "/assets/game/ui/slot-glove.webp", "width": 73, "height": 73 },
     "slot-pet": { "file": "/assets/game/ui/slot-pet.webp", "width": 71, "height": 71 },
     "slot-ring": { "file": "/assets/game/ui/slot-ring.webp", "width": 34, "height": 34 },

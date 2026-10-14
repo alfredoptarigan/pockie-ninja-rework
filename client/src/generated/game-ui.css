@@ -200,6 +200,8 @@
   --ui-equip-backdrop: url('/assets/game/ui/equip-backdrop.webp');
   --ui-slot-outfit: url('/assets/game/ui/slot-outfit.webp');
   --ui-slot-weapon: url('/assets/game/ui/slot-weapon.webp');
+  --ui-slot-weapon-sharp: url('/assets/game/ui/slot-weapon-sharp.webp');
+  --ui-slot-weapon-blunt: url('/assets/game/ui/slot-weapon-blunt.webp');
   --ui-slot-glove: url('/assets/game/ui/slot-glove.webp');
   --ui-slot-pet: url('/assets/game/ui/slot-pet.webp');
   --ui-slot-ring: url('/assets/game/ui/slot-ring.webp');

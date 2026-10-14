@@ -58,6 +58,7 @@ export function selectAssets(manifest: Manifest): Entry[] {
       e.category === 'bloodline' ||
       e.category === 'item-icon' ||
       e.category === 'daily-login' ||
+      e.category === 'hud' ||
       (e.category === 'npc' && /^icons\/npc\/810(0[1-9]|[1-3]\d|4[0-4])\.png$/.test(e.path)) ||
       (e.category === 'event' &&
         (e.path.startsWith('scenes/tailedBeast/') ||
