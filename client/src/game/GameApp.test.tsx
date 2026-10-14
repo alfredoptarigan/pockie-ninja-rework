@@ -132,6 +132,39 @@ describe('GameScreen', () => {
     expect(screen.getByRole('dialog', { name: 'Mail' })).toBeVisible()
   }, 15_000)
 
+  it('opens the Card Room from Events and Wings from the Character window', async () => {
+    renderGame({
+      'GET /api/game/events': () => json({}),
+      'GET /api/game/cards': () => json({ collections: [] }),
+      'GET /api/game/wings': () =>
+        json({
+          maxLevel: 30,
+          equipped: null,
+          owned: [],
+          stones: [],
+          talismans: [],
+          rewardItemId: 'i218021',
+          collection: [],
+        }),
+    })
+    await userEvent.click(await screen.findByRole('button', { name: 'Events' }))
+    await userEvent.click(
+      within(screen.getByRole('list', { name: 'Events' })).getByRole('button', {
+        name: 'Card Room',
+      }),
+    )
+    expect(await screen.findByRole('dialog', { name: 'Card Room' })).toBeVisible()
+    await userEvent.keyboard('{Escape}')
+
+    await userEvent.click(
+      within(screen.getByRole('navigation', { name: 'Menu' })).getByRole('button', {
+        name: 'Character',
+      }),
+    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Wings' }))
+    expect(await screen.findByRole('dialog', { name: 'Wings' })).toBeVisible()
+  }, 15_000)
+
   it('has Back to the website and Log out in the Settings menu', async () => {
     renderGame()
     const settings = await screen.findByRole('button', { name: 'Settings' })

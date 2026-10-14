@@ -148,12 +148,13 @@ export function SettingsMenu() {
   )
 }
 
-/** The Reborn events (M5): daily and weekly rewards, dice, the weekly boss and Team Stone. */
+/** The Reborn events (M5) and the Card Room (M6): rewards, dice, bosses, Team Stone, cards. */
 const EVENTS: { label: string; window: WindowName }[] = [
   { label: 'Ninja Diary', window: 'ninjaDiary' },
   { label: 'Dice of Fate', window: 'diceOfFate' },
   { label: 'Tailed Beast', window: 'tailedBeast' },
   { label: 'Team Stone', window: 'teamStone' },
+  { label: 'Card Room', window: 'cardRoom' },
 ]
 
 /** Events button of the top strip, left of Arena. */

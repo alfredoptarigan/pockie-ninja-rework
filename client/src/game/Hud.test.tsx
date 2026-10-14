@@ -54,6 +54,7 @@ describe('TopBar events', () => {
       'Dice of Fate': 'diceOfFate',
       'Tailed Beast': 'tailedBeast',
       'Team Stone': 'teamStone',
+      'Card Room': 'cardRoom',
     }
     for (const [label, name] of Object.entries(windows)) {
       await userEvent.click(screen.getByRole('button', { name: 'Events' }))

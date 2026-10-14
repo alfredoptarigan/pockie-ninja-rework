@@ -262,6 +262,9 @@ export function CharacterWindow({
         <GameButton small onClick={() => openWindow('bloodlines')}>
           Bloodlines
         </GameButton>
+        <GameButton small onClick={() => openWindow('wings')}>
+          Wings
+        </GameButton>
       </section>
     </Dialog>
   )

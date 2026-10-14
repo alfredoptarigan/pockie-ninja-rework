@@ -23,6 +23,8 @@ import { TalentsWindow } from './talents'
 import { BloodlinesWindow } from './bloodlines'
 import { TeamStoneWindow } from './team-stone'
 import { TeamBoardWindow, TeamWindow } from './teams'
+import { WingsWindow } from './wings'
+import { CardRoomWindow } from './cards'
 
 export type WindowName =
   | 'shop'
@@ -44,6 +46,8 @@ export type WindowName =
   | 'diceOfFate'
   | 'tailedBeast'
   | 'teamStone'
+  | 'wings'
+  | 'cardRoom'
 
 export interface WindowProps {
   character: Character
@@ -92,6 +96,8 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   teamStone: ({ character, onClose }) => (
     <TeamStoneWindow character={character} onClose={onClose} />
   ),
+  wings: ({ onClose }) => <WingsWindow onClose={onClose} />,
+  cardRoom: ({ onClose }) => <CardRoomWindow onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
