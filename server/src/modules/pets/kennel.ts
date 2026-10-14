@@ -126,7 +126,7 @@ export function placeSkill(rows: readonly SkillRow[], skillId: number, kind: num
   const slots = rows
     .filter((row) => row.kind === kind && row.slot !== null)
     .sort((a, b) => a.slot! - b.slot!)
-  if (slots.length === 0) throw bad('no_slot', 'Unlock a skill slot of this kind first.')
+  if (slots.length === 0) throw bad('no_slot', 'Add a skill slot of this kind first.')
   const real = rows.filter(isReal)
   if (real.some((row) => row.skillId === skillId))
     throw bad('known', 'Your pet already knows that skill.')
@@ -146,7 +146,7 @@ export function placeSkill(rows: readonly SkillRow[], skillId: number, kind: num
       kind,
       PET_SKILL_MAX_LEVEL,
     )
-  if (!target || !learned) throw bad('all_locked', 'Every skill that could make room is locked.')
+  if (!target || !learned) throw bad('all_locked', 'Every skill that could be replaced is locked.')
   const placed = learned.map((row) =>
     row.skillId === skillId ? { ...row, slot: target.slot } : row,
   )

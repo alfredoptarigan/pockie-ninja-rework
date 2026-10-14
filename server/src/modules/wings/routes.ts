@@ -159,7 +159,7 @@ export async function wingRoutes(
       if (!wing) throw new HttpError(404, 'no_item', 'You do not have that item.')
       if (!kindOf(wing.itemId)) throw bad('not_wing', 'Only wings and auras can be enhanced here.')
       if (wing.enhanceLevel >= WING_MAX_LEVEL)
-        throw bad('max_level', 'That wing cannot be enhanced any further.')
+        throw bad('max_level', 'That item is already at the maximum level.')
       const data = rebornWings()
       const stone = data.stones.find((s) => s.item === body.stone)
       if (!stone) throw bad('wrong_stone', 'Choose a wing stone.')
@@ -168,7 +168,7 @@ export async function wingRoutes(
         const itemId = body[family]
         if (!itemId) continue
         const talisman = data.talismans.find((t) => t.item === itemId && t.family === family)
-        if (!talisman) throw bad('wrong_talisman', 'That talisman does not fit there.')
+        if (!talisman) throw bad('wrong_talisman', 'That talisman does not fit this slot.')
         values[family] = talisman.value
       }
       await spendOne(tx, character.id, stone.item, 'no_stone')
@@ -202,7 +202,7 @@ export async function wingRoutes(
         .from(inventoryItems)
         .where(and(bagItemsWhere(character.id), eq(inventoryItems.itemId, itemId)))
         .limit(1)
-      if (!owned) throw bad('no_item', 'Put that wing in your bag first.')
+      if (!owned) throw bad('no_item', 'Put that wing in your bag to register it.')
       const alreadyRegistered = () =>
         new HttpError(409, 'already_registered', 'That wing is already registered.')
       // A repeat claim is refused as such, before the bag-room check (character row is locked).
