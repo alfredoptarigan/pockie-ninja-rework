@@ -14,20 +14,18 @@ import { unequippedBagItemsWhere } from '../../game/bag.js'
 import { rebornBloodlines } from '../../game/data.js'
 import { questCommand, removeItems, type Tx } from '../../game/progress.js'
 import { REBORN_BLOODLINE_UNLOCK_COMMAND } from '../../game/quests.js'
-import { HttpError } from '../../http.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { bloodlineBonuses } from '../../game/bloodlines.js'
 export { bloodlineBonuses } from '../../game/bloodlines.js'
 export { limitItemDrops } from './rules.js'
+import { bad, lockLimit, nextUtcDay, utcDay } from './common.js'
+import { soulRoutes } from './souls.js'
 
 type CharacterRow = typeof characters.$inferSelect
-const bad = (code: string, message: string) => new HttpError(400, code, message)
-const DAY_MS = 86_400_000
 const SLOTS = [0, 1, 2] as const
 
-const utcDay = (now = new Date()) => now.toISOString().slice(0, 10)
 /** Lazy daily reset (decision 12): turn-ins count only on the stored UTC day. */
 const turnInsUsed = (character: CharacterRow) =>
   character.bloodlineDay === utcDay() ? character.bloodlineTurnIns : 0
@@ -60,7 +58,7 @@ async function view(tx: Tx | Db, character: CharacterRow): Promise<BloodlinesVie
     itemsPerTurnIn: data.itemsPerTurnIn,
     amityPerTurnIn: data.amityPerTurnIn,
     maxActive: data.maxActive,
-    resetAt: new Date(Date.parse(`${utcDay()}T00:00:00Z`) + DAY_MS).toISOString(),
+    resetAt: nextUtcDay(),
     bonuses: Object.entries(bonuses).map(([field, value]) => ({
       field,
       label: label(field),
@@ -91,20 +89,6 @@ async function view(tx: Tx | Db, character: CharacterRow): Promise<BloodlinesVie
       }
     }),
   }
-}
-
-async function lockLimit(tx: Tx, characterId: string, limitId: number) {
-  const [row] = await tx
-    .select()
-    .from(characterBloodlines)
-    .where(
-      and(
-        eq(characterBloodlines.characterId, characterId),
-        eq(characterBloodlines.limitId, limitId),
-      ),
-    )
-    .for('update')
-  return row
 }
 
 async function turnIn(tx: Tx, userId: string, limitId: number): Promise<BloodlineTurnInResult> {
@@ -189,6 +173,7 @@ export async function bloodlineRoutes(app: FastifyInstance, { db }: { db: Db }) 
     const { active } = bloodlineActiveBodySchema.parse(request.body)
     return db.transaction((tx) => setActive(tx, userId, id, active))
   })
+  await soulRoutes(app, { db })
 }
 
 export default bloodlineRoutes

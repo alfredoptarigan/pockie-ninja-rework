@@ -46,3 +46,61 @@ export interface BloodlinesView {
 export interface BloodlineTurnInResult extends BloodlinesView {
   character: Character
 }
+
+// Souls and prayer (M5 decisions 15, 16): GET /api/game/bloodlines/souls and its actions. Every
+// action answers with the updated SoulsView.
+const SOUL_BATCH_MAX = 250
+const soulIds = z.array(z.uuid()).min(1).max(SOUL_BATCH_MAX)
+
+export const soulParamsSchema = z.object({ soulId: z.uuid() })
+export const soulDiscoverBodySchema = z.object({ count: z.number().int().min(1).max(30) }).strict()
+export const soulIdsBodySchema = z.object({ soulIds: soulIds }).strict()
+export const soulBindBodySchema = z.object({ limitId: z.number().int().min(1).max(44) }).strict()
+export const soulRefineBodySchema = z.object({ targetId: z.uuid(), fuelIds: soulIds }).strict()
+export const prayerBodySchema = z
+  .object({ attribute: z.number().int().min(1).max(3), soulIds: soulIds })
+  .strict()
+
+export interface SoulView {
+  id: string
+  type: number
+  level: number
+  /** Limit the soul is socketed in; null when loose. */
+  limitId: number | null
+  socket: number | null
+}
+
+export interface PrayerView {
+  limitId: number
+  /** 1 Strength, 2 Agility, 3 Stamina. */
+  attribute: number
+  level: number
+  progress: number
+  /** Points to the next level; 0 at the max level. */
+  needed: number
+}
+
+export interface SoulType {
+  id: number
+  nameKey: string
+  field: string
+  /** Value by soul level (index 0 is unused). */
+  valueByLevel: number[]
+}
+
+export interface SoulsView {
+  souls: SoulView[]
+  inventory: number
+  socketsPerLimit: number
+  discoveredToday: number
+  discoverPerDay: number
+  /** Character level needed for soul level n at index n - 1. */
+  levelLimits: number[]
+  types: SoulType[]
+  prayers: PrayerView[]
+  prayerMaxLevel: number
+  /** Points one soul of level n gives at index n - 1. */
+  prayerPoints: number[]
+  /** Start of the next UTC day, when discoveries reset. */
+  resetAt: string
+}
