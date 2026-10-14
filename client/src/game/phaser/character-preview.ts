@@ -55,6 +55,24 @@ async function loadAtlas(asset?: CosmeticAsset): Promise<LoadedAtlas | undefined
   if (!data) return undefined
   return { data, pages: await Promise.all(asset.pages.map(image)) }
 }
+type PageFrame = { frame: AtlasFrame; pageIndex: number }
+const frameCache = new WeakMap<Atlas, Map<string, PageFrame[]>>()
+/** The atlas frames under `prefix` in numeric order, sorted once per (atlas, prefix). */
+export function sortedFrames(atlas: Atlas, prefix: string) {
+  const byPrefix = frameCache.get(atlas) ?? new Map<string, PageFrame[]>()
+  frameCache.set(atlas, byPrefix)
+  const cached = byPrefix.get(prefix)
+  if (cached) return cached
+  const frames = atlas.textures
+    .flatMap((page, pageIndex) =>
+      page.frames
+        .filter((frame) => frame.filename.startsWith(prefix))
+        .map((frame) => ({ frame, pageIndex })),
+    )
+    .sort((a, b) => a.frame.filename.localeCompare(b.frame.filename, undefined, { numeric: true }))
+  byPrefix.set(prefix, frames)
+  return frames
+}
 function drawAtlas(
   context: CanvasRenderingContext2D,
   atlas: LoadedAtlas,
@@ -63,13 +81,7 @@ function drawAtlas(
   x: number,
   y: number,
 ) {
-  const frames = atlas.data.textures
-    .flatMap((page, pageIndex) =>
-      page.frames
-        .filter((frame) => frame.filename.startsWith(prefix))
-        .map((frame) => ({ frame, pageIndex })),
-    )
-    .sort((a, b) => a.frame.filename.localeCompare(b.frame.filename, undefined, { numeric: true }))
+  const frames = sortedFrames(atlas.data, prefix)
   const current =
     frames[Math.floor((elapsed * (atlas.data.meta?.fps ?? 16.8)) / 1000) % frames.length]
   if (!current) return

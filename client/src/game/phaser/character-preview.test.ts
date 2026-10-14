@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { characterCosmetics } from './character-preview'
+import { characterCosmetics, sortedFrames } from './character-preview'
 
 describe('character cosmetics', () => {
   it('resolves the wing sprite and aura item without loading unrelated art', () => {
@@ -14,5 +14,29 @@ describe('character cosmetics', () => {
       wing: undefined,
       aura: undefined,
     })
+  })
+})
+
+describe('preview frames', () => {
+  it('sorts frames numerically once per atlas and prefix', () => {
+    const frame = (filename: string) => ({
+      filename,
+      frame: { x: 0, y: 0, w: 1, h: 1 },
+      sourceSize: { w: 1, h: 1 },
+      spriteSourceSize: { x: 0, y: 0 },
+    })
+    const atlas = {
+      textures: [
+        { image: 'a', frames: [frame('999/10'), frame('999/2'), frame('back/1')] },
+        { image: 'b', frames: [frame('999/1')] },
+      ],
+    }
+    const frames = sortedFrames(atlas, '999/')
+    expect(frames.map((f) => [f.frame.filename, f.pageIndex])).toEqual([
+      ['999/1', 1],
+      ['999/2', 0],
+      ['999/10', 0],
+    ])
+    expect(sortedFrames(atlas, '999/')).toBe(frames)
   })
 })
