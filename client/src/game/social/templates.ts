@@ -3,6 +3,7 @@
 import type { MailEntry } from '../../../../shared/src/schemas/social'
 import { signedScore } from '../arena/labels'
 import { itemName } from '../explore'
+import { TEAM_STONE_MAIL_TEXT } from '../team-stone'
 
 type Params = NonNullable<MailEntry['params']>
 type Template = (params: Params) => { subject: string; body: string }
@@ -26,6 +27,7 @@ const goods = (params: Params) =>
   `${Number(params.count) || 1} x ${itemName(String(params.itemId))}`
 
 export const SYSTEM_MAIL_TEXT: Record<string, Template> = {
+  ...TEAM_STONE_MAIL_TEXT,
   // AddFriendMailTitle / AddFriendMailContent.
   'friend.added': (params) => ({
     subject: 'New friend',

@@ -1,8 +1,10 @@
 import { screen, within } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it, vi } from 'vitest'
 import { character } from '../test/game'
-import { renderWithProviders } from '../test/utils'
-import { PlayerCard } from './Hud'
+import { json, mockApi, renderWithProviders } from '../test/utils'
+import { PlayerCard, TopBar } from './Hud'
+import { OpenWindowProvider } from './windows'
 
 const card = () => screen.getByRole('region', { name: 'Character' })
 
@@ -23,5 +25,42 @@ describe('PlayerCard VIP badge', () => {
       <PlayerCard character={{ ...character, vipUntil: '2000-01-01T00:00:00Z' }} />,
     )
     expect(within(card()).queryByText('VIP')).toBeNull()
+  })
+})
+
+describe('TopBar events', () => {
+  it('opens Ninja Diary, Dice of Fate, Tailed Beast and Team Stone from the Events menu', async () => {
+    mockApi({
+      'GET /api/game/events': () =>
+        json({
+          twentyMinute: {
+            nextClaimAt: '2000-01-01T00:00:00Z',
+            claimsToday: 0,
+            dailyCap: 6,
+            coupons: 10,
+          },
+        }),
+    })
+    const open = vi.fn()
+    renderWithProviders(
+      <OpenWindowProvider value={open}>
+        <TopBar character={character} />
+      </OpenWindowProvider>,
+    )
+    expect(await screen.findByRole('button', { name: 'Claim 10 Gift Coupons' })).toBeEnabled()
+    const windows = {
+      'Ninja Diary': 'ninjaDiary',
+      'Dice of Fate': 'diceOfFate',
+      'Tailed Beast': 'tailedBeast',
+      'Team Stone': 'teamStone',
+    }
+    for (const [label, name] of Object.entries(windows)) {
+      await userEvent.click(screen.getByRole('button', { name: 'Events' }))
+      await userEvent.click(
+        within(screen.getByRole('list', { name: 'Events' })).getByRole('button', { name: label }),
+      )
+      expect(open).toHaveBeenLastCalledWith(name)
+      expect(screen.queryByRole('list', { name: 'Events' })).toBeNull()
+    }
   })
 })

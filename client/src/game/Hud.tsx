@@ -3,11 +3,20 @@
 // player card top left (UI_RoleIcon), scene plaque top right (UI_SmallMap), EXP strip and menu
 // buttons bottom right (UI_BottomMenu).
 import type { Character } from '@pockie/shared'
-import { createContext, useEffect, useId, useRef, useState, type CSSProperties } from 'react'
+import {
+  createContext,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react'
 import { Link } from 'react-router'
 import { useLogout } from '../lib/auth'
 import { ArenaButton } from './arena'
 import { useOutfitPortrait } from './art'
+import { TwentyMinuteRewardButton } from './events'
 import { GameButton } from './skin'
 import { MailButton } from './social'
 import { TeamHud } from './teams'
@@ -42,17 +51,27 @@ export function TopBar({ character }: { character: Character }) {
         ))}
       </dl>
       <ArenaButton />
+      <div className="absolute top-[4px] right-[150px]">
+        <EventsMenu />
+      </div>
       <div className="absolute top-[4px] right-[6px]">
         <SettingsMenu />
       </div>
+      {/* Right of the player card. */}
+      <TwentyMinuteRewardButton className="absolute top-[36px] left-[230px]" />
     </div>
   )
 }
 
-/** Settings button of the top strip: back to the website and log out. */
-export function SettingsMenu() {
+/** A top-strip button with a drop-down list; `children` gets `close` for its items. */
+function HudMenu({
+  label,
+  children,
+}: {
+  label: string
+  children: (close: () => void) => ReactNode
+}) {
   const [open, setOpen] = useState(false)
-  const logout = useLogout()
   const id = useId()
   const root = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -80,14 +99,30 @@ export function SettingsMenu() {
         aria-controls={id}
         onClick={() => setOpen((o) => !o)}
       >
-        Settings
+        {label}
       </GameButton>
       {open && (
         <ul
           id={id}
-          aria-label="Settings"
+          aria-label={label}
           className="game-hud absolute top-full right-0 z-30 mt-1 flex w-44 !bg-[#1c1f21] flex-col gap-1 p-2 font-game text-xs"
         >
+          {children(() => setOpen(false))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+const MENU_ITEM = 'w-full rounded px-2 py-1 text-left text-trim-soft hover:bg-white/10'
+
+/** Settings button of the top strip: back to the website and log out. */
+export function SettingsMenu() {
+  const logout = useLogout()
+  return (
+    <HudMenu label="Settings">
+      {() => (
+        <>
           <li>
             <Link to="/" className="block rounded px-2 py-1 text-trim-soft hover:bg-white/10">
               Back to the website
@@ -98,14 +133,47 @@ export function SettingsMenu() {
               type="button"
               disabled={logout.isPending}
               onClick={() => logout.mutate()}
-              className="w-full rounded px-2 py-1 text-left text-trim-soft hover:bg-white/10"
+              className={MENU_ITEM}
             >
               Log out
             </button>
           </li>
-        </ul>
+        </>
       )}
-    </div>
+    </HudMenu>
+  )
+}
+
+/** The Reborn events (M5): daily and weekly rewards, dice, the weekly boss and Team Stone. */
+const EVENTS: { label: string; window: WindowName }[] = [
+  { label: 'Ninja Diary', window: 'ninjaDiary' },
+  { label: 'Dice of Fate', window: 'diceOfFate' },
+  { label: 'Tailed Beast', window: 'tailedBeast' },
+  { label: 'Team Stone', window: 'teamStone' },
+]
+
+/** Events button of the top strip, left of Arena. */
+export function EventsMenu() {
+  const openFeature = useOpenWindow()
+  return (
+    <HudMenu label="Events">
+      {(close) =>
+        EVENTS.map(({ label, window }) => (
+          <li key={window}>
+            <button
+              type="button"
+              onClick={() => {
+                close()
+                openFeature(window)
+              }}
+              className={MENU_ITEM}
+            >
+              {label}
+            </button>
+          </li>
+        ))
+      }
+    </HudMenu>
   )
 }
 

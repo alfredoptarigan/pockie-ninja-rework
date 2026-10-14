@@ -13,12 +13,15 @@ import { ArenaWindow } from './arena'
 import { ForgeWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { DailyQuestWindow } from './daily'
+import { DiceOfFateWindow, NinjaDiaryWindow } from './events'
 import { MarketWindow } from './market'
 import { RankingsWindow } from './rankings'
 import { MerchantWindow, ShopWindow } from './shop'
 import { FriendsWindow, MailWindow } from './social'
+import { TailedBeastWindow } from './tailed-beast'
 import { TalentsWindow } from './talents'
 import { BloodlinesWindow } from './bloodlines'
+import { TeamStoneWindow } from './team-stone'
 import { TeamBoardWindow, TeamWindow } from './teams'
 
 export type WindowName =
@@ -37,6 +40,10 @@ export type WindowName =
   | 'market'
   | 'talents'
   | 'bloodlines'
+  | 'ninjaDiary'
+  | 'diceOfFate'
+  | 'tailedBeast'
+  | 'teamStone'
 
 export interface WindowProps {
   character: Character
@@ -76,6 +83,14 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   talents: ({ character, onClose }) => <TalentsWindow character={character} onClose={onClose} />,
   bloodlines: ({ character, onClose }) => (
     <BloodlinesWindow character={character} onClose={onClose} />
+  ),
+  ninjaDiary: ({ onClose }) => <NinjaDiaryWindow onClose={onClose} />,
+  diceOfFate: ({ onClose }) => <DiceOfFateWindow onClose={onClose} />,
+  tailedBeast: ({ character, onClose }) => (
+    <TailedBeastWindow character={character} onClose={onClose} />
+  ),
+  teamStone: ({ character, onClose }) => (
+    <TeamStoneWindow character={character} onClose={onClose} />
   ),
 }
 
