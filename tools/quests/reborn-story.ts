@@ -83,17 +83,17 @@ export function generate() {
     {
       level: 10,
       type: 3,
-      text: 'Return to the Village Elder. A ninja who has come this far has earned a companion.',
+      text: 'Return to the Village Elder. You have earned your first pet.',
     },
     {
       level: 10,
       command: commands.equipPet,
-      text: 'Use the Baby Vulture in your bag, then set it as your active pet in the Pet Kennel.',
+      text: 'Use the Baby Vulture in your bag. Then set it active in the Pet Kennel.',
     },
     {
       level: 10,
       command: commands.feedPet,
-      text: 'Fill the food slots of your pet in the Pet Kennel and let it start digesting.',
+      text: "Put food in your pet's food slots in the Pet Kennel. Then press Feed.",
     },
     {
       level: 10,

@@ -97,7 +97,8 @@ async function setActive({ tx, character, pet }: Ctx, active: boolean) {
 
 async function feed({ tx, character, pet }: Ctx, foods: readonly (string | null)[]) {
   if (pet.digestEndsAt) throw bad('digesting', 'Your pet is still digesting.')
-  if (pet.appetite >= HUNGER_MAX) throw bad('full', 'Your pet is full. Teach it a skill first.')
+  if (pet.appetite >= HUNGER_MAX)
+    throw bad('full', "Your pet's appetite is full. Teach it a skill first.")
   const fed = foods.map((itemId) => {
     if (!itemId) return null
     const food = petFood(itemId)
@@ -105,7 +106,7 @@ async function feed({ tx, character, pet }: Ctx, foods: readonly (string | null)
     return food
   })
   if (!canFeed(pet.foodSlots, fed))
-    throw bad('wrong_food', 'Each food must match the type its slot asks for.')
+    throw bad('wrong_food', "Each food must match its slot's food type.")
   const counts = new Map<string, number>()
   for (const itemId of foods) if (itemId) counts.set(itemId, (counts.get(itemId) ?? 0) + 1)
   for (const [itemId, count] of counts)
@@ -131,8 +132,7 @@ async function digestNow({ tx, character, pet, random }: Ctx, currency: 'gold' |
 }
 
 async function learn({ tx, pet, random }: Ctx, kind: 1 | 2 | 3) {
-  if (pet.appetite < HUNGER_MAX)
-    throw bad('not_full', 'Feed your pet until its appetite is full first.')
+  if (pet.appetite < HUNGER_MAX) throw bad('not_full', "Fill your pet's appetite first.")
   const rows = await skillRows(tx, pet.id)
   const skillId = pickLearnSkill(learnPool(pet.species, kind), rows, random)
   if (skillId === null) throw bad('nothing_to_learn', 'Your pet knows every skill of that kind.')
@@ -158,7 +158,7 @@ async function learnBook({ tx, character, pet }: Ctx, item: string) {
 
 async function unlockSkillSlot({ tx, character, pet }: Ctx, kind: 1 | 2 | 3) {
   const next = nextSlot(pet, kind)
-  if (!next) throw bad('slot_cap', 'Your pet cannot open another skill slot of that kind yet.')
+  if (!next) throw bad('slot_cap', 'Your pet cannot add another skill slot of that kind yet.')
   await spendCurrency(tx, character, 'stone', next.cost)
   await tx
     .update(characterPets)
@@ -172,8 +172,14 @@ async function lockSkill({ tx, character, pet }: Ctx, skillId: number, locked: b
   if (row.locked === locked) return
   if (locked) {
     const cost = lockCost(rows.filter((r) => r.locked).length)
-    if (cost === null) throw bad('lock_cap', 'A pet can keep only 2 locked skills.')
-    await spendItems(tx, character.id, PET_LOCK_ITEM, cost, `You need ${cost} Pet Skill Lock.`)
+    if (cost === null) throw bad('lock_cap', 'A pet can have only 2 locked skills.')
+    await spendItems(
+      tx,
+      character.id,
+      PET_LOCK_ITEM,
+      cost,
+      `You need ${cost} Pet Skill ${cost === 1 ? 'Lock' : 'Locks'}.`,
+    )
   }
   await saveSkills(
     tx,
@@ -186,7 +192,13 @@ async function removeSkill({ tx, character, pet }: Ctx, skillId: number) {
   const rows = await skillRows(tx, pet.id)
   const row = slottedSkill(rows, skillId)
   const count = Number(rebornPetFoods().grow.PetSkillRemoveCnt ?? 1)
-  await spendItems(tx, character.id, PET_SKILL_REMOVE_ITEM, count, 'You need a skill remover.')
+  await spendItems(
+    tx,
+    character.id,
+    PET_SKILL_REMOVE_ITEM,
+    count,
+    `You need ${count} Oblivion ${count === 1 ? 'Potion' : 'Potions'}.`,
+  )
   // The freed slot stays unlocked.
   await saveSkills(
     tx,
@@ -218,7 +230,7 @@ async function evolve({ tx, character, pet }: Ctx, into: string | undefined) {
 }
 
 async function release({ tx, pet }: Ctx) {
-  if (pet.active) throw bad('active', 'Set another pet active or rest this one first.')
+  if (pet.active) throw bad('active', 'Rest this pet before you release it.')
   await tx.delete(characterPets).where(eq(characterPets.id, pet.id))
 }
 

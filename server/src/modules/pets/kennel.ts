@@ -113,7 +113,7 @@ export async function saveSkills(tx: Tx, petId: string, rows: readonly SkillRow[
  */
 export function placeSkill(pet: PetRow, rows: readonly SkillRow[], skillId: number, kind: number) {
   const count = unlockedSlots(pet, kind)
-  if (count === 0) throw bad('no_slot', 'Unlock a skill slot of this kind first.')
+  if (count === 0) throw bad('no_slot', 'Add a skill slot of this kind first.')
   if (rows.some((row) => row.skillId === skillId))
     throw bad('known', 'Your pet already knows that skill.')
   const slotted = rows.filter((row) => row.kind === kind && row.slot !== null)
@@ -134,7 +134,7 @@ export function placeSkill(pet: PetRow, rows: readonly SkillRow[], skillId: numb
       PET_SKILL_MAX_LEVEL,
     )
   if (target === null || !learned)
-    throw bad('all_locked', 'Every skill that could make room is locked.')
+    throw bad('all_locked', 'Every skill that could be replaced is locked.')
   return learned.map((row) => (row.skillId === skillId ? { ...row, slot: target } : row))
 }
 

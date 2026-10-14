@@ -27,23 +27,33 @@ export const NATURES: Record<number, string> = {
   3: 'Artificial',
   4: 'Dragon',
   5: 'Tailed Beast',
-  6: 'Spirits',
+  6: 'Spirit',
 }
 const KINDS: { kind: PetSkillKind; label: string }[] = [
-  { kind: 1, label: 'Halo' },
-  { kind: 2, label: 'Help' },
-  { kind: 3, label: 'Pass' },
+  { kind: 1, label: 'Aura' },
+  { kind: 2, label: 'Support' },
+  { kind: 3, label: 'Passive' },
 ]
 const PROPS = [
   ['attack', 'Attack'],
-  ['defence', 'Defence'],
+  ['defence', 'Defense'],
   ['disturb', 'Disturb'],
   ['active', 'Active'],
   ['savvy', 'Savvy'],
 ] as const
 
 const nameOf = (nameKey: string, fallback = 'Unknown') => plainText(nameKey, fallback)
-export const foodTypeLabel = (type: number) => (type === 1 ? 'Any food' : `Food type ${type}`)
+// Food types as the 2011 pet room names them (lg_Common_PetWatchLoveFood1-7).
+const FOOD_TYPES: Record<number, string> = {
+  1: 'Any food',
+  2: 'Grain',
+  3: 'Meat',
+  4: 'Vegetable',
+  5: 'Dessert',
+  6: 'Medicine',
+  7: 'Other',
+}
+export const foodTypeLabel = (type: number) => FOOD_TYPES[type] ?? `Food type ${type}`
 /** Seconds left as h:mm:ss. */
 export function digestCountdown(endsAt: string, now: number) {
   const left = Math.max(0, Math.ceil((Date.parse(endsAt) - now) / 1000))
@@ -73,7 +83,10 @@ export function PetSlot() {
   if (!active) return <span className="sr-only">Pet: empty</span>
   const name = nameOf(active.nameKey, 'Pet')
   return (
-    <span className="absolute inset-0 grid place-items-center" title={`${name} Lv ${active.level}`}>
+    <span
+      className="absolute inset-0 grid place-items-center"
+      title={`${name} Lv. ${active.level}`}
+    >
       <img src={petIcon(active.avatar)} alt="" className="size-full object-contain p-[2px]" />
       <span className="sr-only">
         Pet: {name}, level {active.level}
@@ -145,9 +158,9 @@ export function KennelWindow({ onClose }: { onClose: () => void }) {
                       <GameButton
                         small
                         disabled={action.isPending}
-                        onClick={() => run('/slots/unlock', 'A new kennel slot is open.')}
+                        onClick={() => run('/slots/unlock', 'A new kennel slot was unlocked.')}
                       >
-                        Unlock ({data.slotPrice} Gold)
+                        Unlock slot ({data.slotPrice} Gold)
                       </GameButton>
                     ) : (
                       <span className="text-[10px] text-[#5c5c5c]">Locked</span>
@@ -194,7 +207,7 @@ function PetCard({
         <img src={petIcon(pet.avatar)} alt="" className="game-slot size-16 p-1" />
         <div className="flex flex-col gap-0.5">
           <h3 className="font-bold">
-            {name} <span className="font-normal">Lv {pet.level}</span>
+            {name} <span className="font-normal">Lv. {pet.level}</span>
           </h3>
           <p>
             Nature: {NATURES[pet.nature] ?? 'Unknown'} | Growth: {pet.growth} | Likes:{' '}
@@ -237,7 +250,7 @@ function PetCard({
       {pet.evolvesTo.length > 0 && (
         <div className="flex flex-wrap items-center gap-2">
           <span>
-            Evolve (level {view.evolve.level}, {view.evolve.feathers} Feathers, you have{' '}
+            Evolve (needs level {view.evolve.level} and {view.evolve.feathers} Feathers; you have{' '}
             {view.feathers}):
           </span>
           {pet.evolvesTo.map((form) => (
@@ -312,7 +325,7 @@ function Feeding({
                   .filter((food) => fits(slot.type, food.type))
                   .map((food) => (
                     <option key={food.itemId} value={food.itemId}>
-                      {nameOf(food.nameKey, food.itemId)} ({food.hunger}) x{food.count}
+                      {nameOf(food.nameKey, food.itemId)} (+{food.hunger} appetite) x{food.count}
                     </option>
                   ))}
               </select>
@@ -342,7 +355,7 @@ function Feeding({
         <GameButton
           disabled={busy || foods.every((f) => !f) || pet.appetite >= pet.appetiteMax}
           onClick={() => {
-            run('/feed', 'Your pet started digesting.', { foods })
+            run('/feed', 'Your pet is digesting.', { foods })
             setFoods(Array(6).fill(null))
           }}
         >
@@ -370,7 +383,7 @@ function Skills({
     <section aria-label="Skills" className="flex flex-col gap-1">
       <p>
         Skill slots: {pet.slots.reduce((a, b) => a + b, 0)} / {pet.slotCap} | Pet Skill Locks:{' '}
-        {view.lockItem.count} | Skill removers: {view.removeItem.count}
+        {view.lockItem.count} | Oblivion Potions: {view.removeItem.count}
       </p>
       <div className="grid grid-cols-3 gap-2">
         {KINDS.map(({ kind, label }) => {
@@ -398,7 +411,9 @@ function Skills({
                           )
                         }
                       >
-                        {skill.locked ? 'Unlock' : `Lock (${pet.nextLockCost ?? '-'})`}
+                        {skill.locked
+                          ? 'Unlock'
+                          : `Lock (${pet.nextLockCost ?? '-'} ${pet.nextLockCost === 1 ? 'lock' : 'locks'})`}
                       </GameButton>
                       <GameButton
                         small
@@ -423,7 +438,9 @@ function Skills({
                   small
                   disabled={busy || !full || pet.slots[kind - 1] === 0}
                   onClick={() =>
-                    run('/skills/learn', `Your pet learned a ${label} skill.`, { kind })
+                    run('/skills/learn', `Your pet learned a new ${label.toLowerCase()} skill.`, {
+                      kind,
+                    })
                   }
                 >
                   Learn
@@ -432,9 +449,11 @@ function Skills({
                   <GameButton
                     small
                     disabled={busy}
-                    onClick={() => run('/skills/slot', `A ${label} slot is open.`, { kind })}
+                    onClick={() =>
+                      run('/skills/slot', `A new ${label.toLowerCase()} slot was added.`, { kind })
+                    }
                   >
-                    Open slot ({pet.nextSlotCost} Stone)
+                    Add slot ({pet.nextSlotCost} Stone)
                   </GameButton>
                 )}
               </div>
@@ -442,7 +461,7 @@ function Skills({
           )
         })}
       </div>
-      {!full && <p>Fill the appetite to learn a skill.</p>}
+      {!full && <p>Fill your pet's appetite to learn a skill.</p>}
       {view.books.length > 0 && (
         <div className="flex flex-wrap items-center gap-2">
           <select aria-label="Skill book" value={book} onChange={(e) => setBook(e.target.value)}>

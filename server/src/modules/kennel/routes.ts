@@ -142,7 +142,8 @@ export async function kennelRoutes(
     tracingBuyBodySchema.parse(request.body)
     return run(request, async (tx, c, day) => {
       const state = await tracingState(tx, c, day, random())
-      if (state.boughtDay === day) throw bad('already_bought', 'You already bought attempts today.')
+      if (state.boughtDay === day)
+        throw bad('already_bought', 'You already bought extra attempts today.')
       if (c.gold < REFILL_GOLD) throw bad('not_enough_currency', 'You need 10 Gold.')
       await tx
         .update(characters)
@@ -165,9 +166,9 @@ export async function kennelRoutes(
       if (state.attemptsUsed >= DAILY_ATTEMPTS + (state.boughtDay === day ? REFILL_ATTEMPTS : 0))
         throw bad('no_attempts', 'You have no attempts left today.')
       if (board.id !== body.boardId)
-        throw bad('stale_board', 'This board has already changed. Refresh Pet Tracing.')
+        throw bad('stale_board', 'This board has changed. Reopen Pet Tracing.')
       if (board.opened.includes(body.cell))
-        throw bad('already_flipped', 'That card is already open.')
+        throw bad('already_flipped', 'That cell is already flipped.')
       const result = flip(board, body.cell)
       // The persisted board seed determines its pet reward, including after a rolled-back full bag.
       const rewardRandom = createRandom(board.seed)
@@ -221,7 +222,7 @@ export async function kennelRoutes(
         .for('update')
       const purchased = purchase?.count ?? 0
       if (purchased + count > offer.dailyLimit)
-        throw bad('daily_limit', 'That exceeds the daily purchase limit.')
+        throw bad('daily_limit', "That would exceed today's purchase limit.")
       const { spendItems } = await import('../pets/kennel.js')
       await spendItems(
         tx,

@@ -29,7 +29,7 @@ describe('Kennel windows', () => {
     })
     renderWithProviders(<PetTracingWindow onClose={vi.fn()} />)
     expect(await screen.findByRole('button', { name: 'Cell 2: North' })).toBeDisabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Cell 1: face down' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Cell 1: hidden' }))
     expect(await screen.findByRole('status')).toHaveTextContent('You received 1 Feather.')
     expect(flip).toHaveBeenCalledOnce()
     expect(requestBody(fetchMock, 'POST /api/game/kennel/tracing/flip')).toEqual({
@@ -44,7 +44,7 @@ describe('Kennel windows', () => {
       'GET /api/game/kennel/tracing': () => json({ ...tracing, attemptsLeft: 0, canBuy: false }),
     })
     renderWithProviders(<PetTracingWindow onClose={vi.fn()} />)
-    expect(await screen.findByRole('button', { name: 'Cell 1: face down' })).toBeDisabled()
+    expect(await screen.findByRole('button', { name: 'Cell 1: hidden' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Buy 10 attempts (10 Gold)' })).toBeDisabled()
   })
 
@@ -68,7 +68,7 @@ describe('Kennel windows', () => {
       'POST /api/game/kennel/tracing/flip': () => apiError(400, 'bag_full', 'Your bag is full.'),
     })
     renderWithProviders(<PetTracingWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('button', { name: 'Cell 1: face down' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Cell 1: hidden' }))
     expect(await screen.findByRole('alert')).toHaveTextContent('Your bag is full.')
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
@@ -95,7 +95,7 @@ describe('Kennel windows', () => {
         }),
     })
     renderWithProviders(<KennelShopWindow onClose={vi.fn()} />)
-    expect(await screen.findByRole('button', { name: 'Buy a (1 Feathers)' })).toBeEnabled()
+    expect(await screen.findByRole('button', { name: 'Buy a (1 Feather)' })).toBeEnabled()
     expect(screen.getByRole('button', { name: 'Requires level 23' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Buy c (6 Feathers)' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Daily limit reached' })).toBeDisabled()

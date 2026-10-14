@@ -18,6 +18,7 @@ const DIRECTIONS = {
   W: 'West',
   NW: 'Northwest',
 }
+const feathers = (count: number) => `${count} ${count === 1 ? 'Feather' : 'Feathers'}`
 const ANGLES = { N: 0, NE: 45, E: 90, SE: 135, S: 180, SW: 225, W: 270, NW: 315 }
 
 function useKennelAction<T>(key: readonly string[], path: string) {
@@ -58,15 +59,15 @@ export function PetTracingWindow({ onClose }: { onClose: () => void }) {
               Attempts left today: {data.attemptsLeft}. Feathers: {data.feathers}.
             </p>
             <p>
-              Follow the arrows to find the hidden pet. A miss earns 1 Feather; a find earns 10
-              Feathers with a 5% chance of a pet item. Each find starts a new board.
+              Flip a cell. An arrow points toward the hidden pet. A miss pays 1 Feather. A find pays
+              10 Feathers and has a 5% chance to give a pet item. Each find starts a new board.
             </p>
             <div aria-label="Pet Tracing board" className="mx-auto grid w-72 grid-cols-3 gap-2">
               {data.cells.map((direction, cell) => (
                 <button
                   key={`${data.boardId}-${cell}`}
                   type="button"
-                  aria-label={`Cell ${cell + 1}${direction ? `: ${DIRECTIONS[direction]}` : ': face down'}`}
+                  aria-label={`Cell ${cell + 1}${direction ? `: ${DIRECTIONS[direction]}` : ': hidden'}`}
                   disabled={action.isPending || data.attemptsLeft === 0 || direction !== null}
                   onClick={() =>
                     action.mutate({ action: 'flip', body: { boardId: data.boardId, cell } })
@@ -93,8 +94,8 @@ export function PetTracingWindow({ onClose }: { onClose: () => void }) {
             </div>
             {reward && !error && (
               <p role="status">
-                {reward.feathers === 10 ? 'Pet found! ' : ''}You received {reward.feathers}{' '}
-                {reward.feathers === 1 ? 'Feather' : 'Feathers'}.
+                {reward.feathers === 10 ? 'Pet found! ' : ''}You received{' '}
+                {feathers(reward.feathers)}.
                 {reward.petItem ? ' A pet item was added to your bag.' : ''}
               </p>
             )}
@@ -105,7 +106,8 @@ export function PetTracingWindow({ onClose }: { onClose: () => void }) {
               Buy 10 attempts (10 Gold)
             </GameButton>
             <p>
-              10 free attempts and one paid refill each day. Resets at 00:00 UTC. Requires level 20.
+              You get 10 free attempts a day and can buy 10 more once. Resets daily at 00:00 UTC.
+              Requires level 20.
             </p>
           </>
         )}
@@ -140,8 +142,7 @@ export function KennelShopWindow({ onClose }: { onClose: () => void }) {
                   <li key={offer.itemId} className="game-card flex flex-col gap-1 p-2">
                     <h3 className="font-bold">{name}</h3>
                     <p>
-                      {offer.price} {offer.price === 1 ? 'Feather' : 'Feathers'} each. Level{' '}
-                      {offer.level}.
+                      Price: {feathers(offer.price)} each. Requires level {offer.level}.
                     </p>
                     <p>
                       Purchased today: {offer.purchased}/{offer.dailyLimit}.
@@ -187,7 +188,7 @@ export function KennelShopWindow({ onClose }: { onClose: () => void }) {
                         ? `Requires level ${offer.level}`
                         : remaining === 0
                           ? 'Daily limit reached'
-                          : `Buy ${name} (${offer.price * count} Feathers)`}
+                          : `Buy ${name} (${feathers(offer.price * count)})`}
                     </GameButton>
                   </li>
                 )

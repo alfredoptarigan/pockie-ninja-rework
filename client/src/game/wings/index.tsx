@@ -33,17 +33,17 @@ const FAMILIES: { id: TalismanFamily; label: string }[] = [
 const OUTCOMES: { id: WingOutcome; label: string }[] = [
   { id: 'success', label: 'Success' },
   { id: 'fail', label: 'No change' },
-  { id: 'decrease', label: 'Lose a level' },
+  { id: 'decrease', label: 'Level down' },
   { id: 'reset', label: 'Reset to +0' },
   { id: 'destroy', label: 'Destroyed' },
 ]
 const outcomeText = ({ outcome, level }: WingEnhanceResult) =>
   ({
-    success: `Success. The wing is now +${level}.`,
-    fail: 'The enhancement failed. The level is kept.',
-    decrease: `The enhancement failed. The wing dropped to +${level}.`,
-    reset: 'The enhancement failed. The wing was reset to +0.',
-    destroy: 'The wing was destroyed.',
+    success: `Enhancement succeeded. It is now +${level}.`,
+    fail: 'Enhancement failed. The level is unchanged.',
+    decrease: `Enhancement failed. It dropped to +${level}.`,
+    reset: 'Enhancement failed. It was reset to +0.',
+    destroy: 'Enhancement failed. It was destroyed.',
   })[outcome]
 
 const nameOf = (nameKey: string) => plainText(nameKey, 'Unknown item')
@@ -88,7 +88,7 @@ export function WingsWindow({ onClose }: { onClose: () => void }) {
       }),
     onSuccess: (result) => {
       setMessage(
-        `Registered. +${result.reward} ${nameOf(`lg_reborn_item_${result.rewardItemId.slice(1)}`)}.`,
+        `Registered. You received ${nameOf(`lg_reborn_item_${result.rewardItemId.slice(1)}`)} x${result.reward}.`,
       )
       settle(result)
     },
@@ -157,7 +157,8 @@ function EnhancePanel({
   const [stoneId, setStone] = useState<string | null>(null)
   const [picks, setPicks] = useState<Partial<Record<TalismanFamily, string>>>({})
   const wing = data.owned.find((w) => w.id === selectedId) ?? data.equipped ?? data.owned[0] ?? null
-  if (!wing) return <p>You have no wings or auras. Buy them in the Team Stone and Essence shops.</p>
+  if (!wing)
+    return <p>You have no wings or auras. Buy them in the Team Stone shop or the Essence shop.</p>
   const stone = data.stones.find((s) => s.itemId === stoneId && s.count > 0)
   const talismanValue = (family: TalismanFamily) =>
     data.talismans.find((t) => t.itemId === picks[family])?.value
@@ -185,7 +186,7 @@ function EnhancePanel({
               <WingIcon itemId={w.itemId} name="" />
               <span>
                 {nameOf(w.nameKey)} +{w.level}
-                {w.equipped && ' (worn)'}
+                {w.equipped && ' (equipped)'}
               </span>
             </button>
           </li>
@@ -194,7 +195,7 @@ function EnhancePanel({
       <div className="flex flex-col gap-2">
         <WingCard wing={wing} maxLevel={data.maxLevel} />
         <fieldset className="flex flex-col gap-1">
-          <legend className="font-bold">Stone</legend>
+          <legend className="font-bold">Wing stone</legend>
           {data.stones.map((s) => (
             <label key={s.itemId} className="flex items-center gap-1">
               <input
@@ -237,7 +238,7 @@ function EnhancePanel({
             ))}
           </ul>
         )}
-        <p>The stone and talismans are used up on every attempt.</p>
+        <p>The wing stone and talismans are used up on every attempt.</p>
         <GameButton
           disabled={busy || !odds}
           onClick={() => {
@@ -289,7 +290,7 @@ function CollectionPanel({
 }) {
   return (
     <>
-      <p>Register each wing and aura once for Plume Shards. The wing stays in your bag.</p>
+      <p>Register each wing and aura once to earn Plume Shards. The item stays in your bag.</p>
       <ul
         aria-label="Wing Collection"
         className="grid max-h-[320px] grid-cols-2 gap-1 overflow-auto"

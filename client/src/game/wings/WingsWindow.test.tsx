@@ -80,7 +80,7 @@ describe('WingsWindow', () => {
       luck: 'i218054',
       integrity: 'i218034',
     })
-    expect(await screen.findByText('The wing was destroyed.')).toBeVisible()
+    expect(await screen.findByText('Enhancement failed. It was destroyed.')).toBeVisible()
   })
 
   it('lists the 26 collection entries and registers an owned wing', async () => {
@@ -95,6 +95,8 @@ describe('WingsWindow', () => {
     expect(within(list).getAllByText('Registered')).toHaveLength(1)
     await userEvent.click(screen.getByRole('button', { name: 'Register Fallen Wings' }))
     expect(requestBody(fetch, 'POST /api/game/wings/collection/i218000')).toEqual({})
-    expect(await screen.findByText('Registered. +5 Plume Shard [First Grade].')).toBeVisible()
+    expect(
+      await screen.findByText('Registered. You received Plume Shard [First Grade] x5.'),
+    ).toBeVisible()
   })
 })
