@@ -55,6 +55,7 @@ import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
 import { WING_SLOT } from '../../game/wings.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
+import { openCardBox } from '../cards/routes.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
@@ -289,6 +290,7 @@ export async function actionRoutes(
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
 
+      let card: { cardId: number; nameKey: string } | undefined
       const scrollItem = await learnScrollSkill(tx, character.id, def)
       const freeResetItem = !scrollItem && (await grantFreeSkillReset(tx, character, def))
       const buffItem = !scrollItem && (await useBuffItem(tx, character.id, row.itemId, def))
@@ -304,6 +306,10 @@ export async function actionRoutes(
         await refreshBuffState(tx, character)
       } else if (restore) {
         await tx.update(characters).set(restore).where(eq(characters.id, character.id))
+      } else if (def.class === 'CardBox') {
+        // M6 decision 28: one card into the Card Room; the box is used up there.
+        card = (await openCardBox(tx, character.id, row)) ?? undefined
+        if (!card) throw bad('cannot_use', 'That item cannot be used yet.')
       } else if (Number(def.BoxDropID) > 0 && dropLib(Number(def.BoxDropID))) {
         const drops = rollLibDrops(Number(def.BoxDropID), createRandom(randomInt(2 ** 31)))
         // Box contents inherit the box's binding; a full bag keeps the box closed.
@@ -330,6 +336,7 @@ export async function actionRoutes(
       )
       return {
         ...(await rookieHandIns(tx, character.id)),
+        ...(card && { card }),
         character: await reload(tx, character.id),
       }
     })

@@ -31,6 +31,18 @@ describe('Inventory', () => {
     )
   })
 
+  it('names the card a card box gave', async () => {
+    mockApi({
+      'GET /api/game/inventory': () => json({ items: [potion] }),
+      [`POST /api/game/items/${potion.id}/use`]: () =>
+        json({ completed: [], card: { cardId: 1, nameKey: 'reborn_card_1' }, character }),
+    })
+    renderWithProviders(<Inventory />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Healing Powder' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Use Healing Powder' }))
+    expect(await screen.findByRole('status')).toHaveTextContent('You found Hidden Land.')
+  })
+
   it('equips the class weapon and reports finished quests', async () => {
     let items = [fists]
     mockApi({

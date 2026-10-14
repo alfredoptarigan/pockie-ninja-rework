@@ -20,6 +20,7 @@ import { itemIcon } from './ItemIcon'
 import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
 import { WING_ICONS } from './wings'
+import { cardName } from './cards'
 import { GameText, plainText } from './text'
 import type { ActionResult, BagHighlight, InventoryItem } from './types'
 import { isEquipment, isUsable } from './world'
@@ -93,7 +94,9 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
       const name = plainText(item.nameKey, 'the item')
       const completed =
         kind === 'unequip' ? '' : completedNotice((result as ActionResult).completed)
-      setNotice({ tone: 'info', text: `${VERBS[kind]} ${name}.${completed}` })
+      const card = kind === 'use' ? (result as ActionResult).card : undefined
+      const found = card ? ` You found ${cardName(card)}.` : ''
+      setNotice({ tone: 'info', text: `${VERBS[kind]} ${name}.${found}${completed}` })
     } catch (error) {
       setNotice({ tone: 'error', text: errorMessage(error) })
     }

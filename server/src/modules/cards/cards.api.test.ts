@@ -69,6 +69,20 @@ describe('card data', () => {
   })
 })
 
+describe('POST /api/game/items/:id/use with a card box', () => {
+  it('opens the box and returns the card', async () => {
+    const box = await give('i171001', 1)
+    const response = await client.post(`/api/game/items/${box.id}/use`, {})
+    expect(response.statusCode).toBe(200)
+    const { card } = response.json()
+    expect(card.cardId).toBeGreaterThanOrEqual(1)
+    expect(card.cardId).toBeLessThanOrEqual(21)
+    expect(card.nameKey).toMatch(/\S/)
+    expect(await cards()).toEqual([{ characterId, cardId: card.cardId, count: 1 }])
+    expect(await bagCount('i171001')).toBe(0)
+  })
+})
+
 describe('openCardBox', () => {
   it('adds a card of the box rarity and uses up the box', async () => {
     const box = await give('i171005', 2)

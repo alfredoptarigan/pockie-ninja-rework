@@ -18,6 +18,9 @@ export const cardsKey = ['game', 'cards'] as const
 const CARD_ART = new Map(collections.flatMap((c) => c.cards.map((card) => [card.id, card.image])))
 export const cardArt = (id: number) => CARD_ART.get(id)
 const text = (key: string, fallback: string) => (names as Record<string, string>)[key] ?? fallback
+/** A card's English name, for the bag notice after opening a card box. */
+export const cardName = (card: { cardId: number; nameKey: string }) =>
+  text(card.nameKey, `Card ${card.cardId}`)
 const RARITY_NAMES = {
   GREEN: 'Green',
   BLUE: 'Blue',

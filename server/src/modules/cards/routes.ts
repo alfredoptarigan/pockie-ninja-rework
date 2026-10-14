@@ -74,7 +74,11 @@ export async function openCardBox(
       target: [characterCards.characterId, characterCards.cardId],
       set: { count: sql`${characterCards.count} + 1` },
     })
-  return { cardId }
+  const nameKey =
+    rebornCards()
+      .collections.flatMap((c) => c.cards)
+      .find((card) => card.id === cardId)?.nameKey ?? ''
+  return { cardId, nameKey }
 }
 
 async function claim(tx: Tx, userId: string, collectionId: number): Promise<CardClaimResult> {

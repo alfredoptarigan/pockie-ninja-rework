@@ -125,6 +125,8 @@ export interface ActionResult {
   completed: number[]
   /** What each completed quest granted, in `completed` order. */
   rewards?: QuestHandIn[]
+  /** The card a card box gave (M6 decision 28). */
+  card?: { cardId: number; nameKey: string }
   character: Character
 }
 
