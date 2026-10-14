@@ -56,7 +56,7 @@ const waitedLong = (n: Ninja) =>
 async function bots(count: number, score = 0) {
   const made = []
   for (let i = 0; i < count; i++) {
-    const n = await ninja(`Bot_${i}`)
+    const n = await ninja(`Bot_${score}_${i}`)
     await n.join()
     if (score) await setPlayer(n, { score, month: monthStart(new Date()) })
     made.push(n)
@@ -142,6 +142,58 @@ describe('bot fill', () => {
     expect(left.map((q) => q.characterId)).toEqual([held.id])
   })
 
+  it('refuses a bot that joined the queue after the job read it', async () => {
+    const a = await ninja('Racer')
+    const [late] = await bots(5)
+    await queue(a)
+    await waitedLong(a)
+    const transaction = db.transaction.bind(db)
+    vi.spyOn(db, 'transaction').mockImplementationOnce(async (run) => {
+      await db.insert(teamStoneQueue).values({ characterId: late!.id, score: 0, power: 1 })
+      return transaction(run)
+    })
+    expect(await matchTeamStone(db)).toEqual([])
+    vi.restoreAllMocks()
+    expect((await state(a)).attemptsUsed).toBe(0)
+    expect(await db.select().from(teamStoneMatches)).toHaveLength(0)
+  })
+
+  it('treats a score from a past month as 0 when picking bots', async () => {
+    const a = await ninja('Fresh_one')
+    const stale = await bots(5)
+    const lastMonth = monthStart(new Date(Date.UTC(2020, 0, 1)))
+    for (const n of stale) await setPlayer(n, { score: 1000, month: lastMonth })
+    // Registration allows 10 ninjas per test: 1 queued, 5 stale, 4 current.
+    for (let i = 0; i < 4; i++) {
+      const n = await ninja(`Current_${i}`)
+      await n.join()
+      await setPlayer(n, { score: 500, month: monthStart(new Date()) })
+    }
+    await queue(a)
+    await waitedLong(a)
+    const [id] = await matchTeamStone(db)
+    const [match] = await db.select().from(teamStoneMatches).where(eq(teamStoneMatches.id, id!))
+    const seats = [...match!.teamA, ...match!.teamB]
+    expect(seats.filter((s) => stale.some((n) => n.id === s))).toHaveLength(5)
+  })
+
+  it('stores the clamped score change', async () => {
+    const a = await ninja('Floor_one')
+    // Picked nearest score 0 first, so these two sit on the queued ninja's side, weakened.
+    for (const n of await bots(2)) await n.weaken()
+    for (const n of await bots(3, 10)) {
+      const snapshot = (await n.arena()).snapshot as { fighter: Record<string, unknown> }
+      const fighter = { ...snapshot.fighter, hp: 1e9, maxHp: 1e9, minAttack: 1e6, maxAttack: 1e6 }
+      await n.setArena({ snapshot: { ...snapshot, fighter } })
+    }
+    await queue(a)
+    await waitedLong(a)
+    await matchTeamStone(db)
+    const view = await state(a)
+    expect(view.score).toBe(0)
+    expect(view.history[0]).toMatchObject({ won: false, delta: 0 })
+  })
+
   it('waits when there are not enough arena ninjas', async () => {
     const a = await ninja('Lonely')
     await bots(2)
@@ -174,6 +226,17 @@ describe('weekly pay and monthly reset', () => {
     expect(mail!.params).toMatchObject({ league: 'bronze', battleCoins: 500 })
     expect(await mailsOf(idle)).toHaveLength(0)
     expect(await player(played)).toMatchObject({ playedThisWeek: false, score: 350 })
+  })
+
+  it('pays a week that straddles the month change with the score it had', async () => {
+    const a = await ninja('Straddler')
+    const lastMonth = monthStart(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0)))
+    await setPlayer(a, { score: 350, month: lastMonth, week: weekStart(now), playedThisWeek: true })
+    expect(await resetTeamStoneMonth(db, now)).toBe(1)
+    expect(await player(a)).toMatchObject({ score: 0, playedThisWeek: false })
+    expect(await bc(a)).toBe(500)
+    expect(await payTeamStoneWeek(db, new Date(now.getTime() + 7 * DAY_MS))).toBe(0)
+    expect(await bc(a)).toBe(500)
   })
 
   it('resets every score from a past month to 0', async () => {

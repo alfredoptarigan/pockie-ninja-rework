@@ -21,7 +21,15 @@ import type { Tx } from '../../game/progress.js'
 import { newSeed } from '../gates/common.js'
 import { lockCharacters } from '../arena/store.js'
 import { arenaFighter, fromSnapshot, type ArenaFighter } from '../arena/snapshot.js'
-import { attemptsUsed, config, lockPlayer, settle, utcDay, type PlayerRow } from './store.js'
+import {
+  attemptsUsed,
+  config,
+  lockPlayer,
+  monthStart,
+  settle,
+  utcDay,
+  type PlayerRow,
+} from './store.js'
 
 /** "Run it every few seconds" (the bot fill is 15-30 s). */
 export const TEAM_STONE_MATCH_INTERVAL_MS = 5_000
@@ -43,7 +51,13 @@ export interface StoredMatch {
  * Arena snapshots of level-50+ ninjas nearest `score` (Team Stone score, 0 if never played),
  * skipping `taken`: everyone in the queue and every seat already filled this run.
  */
-async function pickBots(db: Db, count: number, score: number, taken: Set<string>) {
+async function pickBots(
+  db: Db,
+  count: number,
+  score: number,
+  taken: Set<string>,
+  now: Date,
+) {
   if (count === 0) return []
   const rows = await db
     .select({ id: arenaPlayers.characterId, snapshot: arenaPlayers.snapshot })
@@ -58,7 +72,8 @@ async function pickBots(db: Db, count: number, score: number, taken: Set<string>
       ),
     )
     .orderBy(
-      sql`abs(coalesce(${teamStonePlayers.score}, 0) - ${score})`,
+      // The current-month score; a stale month counts as 0 (the full monthly reset).
+      sql`abs((case when ${teamStonePlayers.month} = ${monthStart(now)} then ${teamStonePlayers.score} else 0 end) - ${score})`,
       asc(arenaPlayers.characterId),
     )
     .limit(count)
@@ -66,14 +81,24 @@ async function pickBots(db: Db, count: number, score: number, taken: Set<string>
 }
 
 /**
- * Starts one planned match in its own transaction: locks the queued ninjas (characters by id,
- * then their player rows, then their queue rows) and re-checks they are still waiting with an
- * attempt left. Returns the match id, or null when the plan went stale.
+ * Starts one planned match in its own transaction: locks the queued ninjas and the bots
+ * (characters by id, then the queued player rows, then their queue rows) and re-checks they are
+ * still waiting with an attempt left and that no bot joined the queue since the job read it.
+ * Returns the match id, or null when the plan went stale.
  */
 async function startMatch(tx: Tx, plan: MatchPlan, bots: [Bot[], Bot[]], now: Date) {
   const queuedIds = [...plan.sides[0], ...plan.sides[1]]
-  const locked = await lockCharacters(tx, queuedIds)
-  if (locked.size !== queuedIds.length) return null
+  const botIds = [...bots[0], ...bots[1]].map((b) => b.id)
+  // Joining the queue locks the character too, so a bot cannot queue until this commits.
+  const locked = await lockCharacters(tx, [...queuedIds, ...botIds])
+  if (locked.size !== queuedIds.length + botIds.length) return null
+  if (botIds.length) {
+    const queuedBots = await tx
+      .select({ id: teamStoneQueue.characterId })
+      .from(teamStoneQueue)
+      .where(inArray(teamStoneQueue.characterId, botIds))
+    if (queuedBots.length) return null
+  }
   const players = new Map<string, PlayerRow>()
   for (const id of [...queuedIds].sort())
     players.set(id, await settle(tx, await lockPlayer(tx, id), now))
@@ -120,10 +145,15 @@ async function startMatch(tx: Tx, plan: MatchPlan, bots: [Bot[], Bot[]], now: Da
   })
   const winner = replay.winner === 'attackers' ? 0 : 1
   const power = teams.map((t) => t.reduce((sum, s) => sum + s.power, 0))
+  // The applied change: the score never drops below 0.
   const deltas: Record<string, number> = {}
   for (const [i, team] of teams.entries())
-    for (const seat of team)
-      if (seat.queued) deltas[seat.id] = scoreDelta(power[i]!, power[1 - i]!, winner === i)
+    for (const seat of team) {
+      if (!seat.queued) continue
+      const score = players.get(seat.id)!.score
+      const raw = scoreDelta(power[i]!, power[1 - i]!, winner === i)
+      deltas[seat.id] = Math.max(0, score + raw) - score
+    }
 
   const names = await tx
     .select({ id: characters.id, name: characters.name })
@@ -158,7 +188,7 @@ async function startMatch(tx: Tx, plan: MatchPlan, bots: [Bot[], Bot[]], now: Da
     await tx
       .update(teamStonePlayers)
       .set({
-        score: Math.max(0, row.score + deltas[id]!),
+        score: row.score + deltas[id]!,
         attemptsDay: today,
         attemptsUsed: attemptsUsed(row, now) + 1,
         playedThisWeek: true,
@@ -182,7 +212,7 @@ export async function matchTeamStone(db: Db, now = new Date()) {
   const taken = new Set(queue.map((q) => q.characterId))
   const started: string[] = []
   for (const plan of plans) {
-    const bots = await pickBots(db, plan.bots[0] + plan.bots[1], plan.score, taken)
+    const bots = await pickBots(db, plan.bots[0] + plan.bots[1], plan.score, taken, now)
     // Not enough arena ninjas yet: the plan waits for more players.
     if (bots.length < plan.bots[0] + plan.bots[1]) continue
     for (const bot of bots) taken.add(bot.id)
