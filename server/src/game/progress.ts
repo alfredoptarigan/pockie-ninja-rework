@@ -10,7 +10,7 @@ import { HttpError } from '../http.js'
 import { bagFits, itemStackSize, unequippedBagItemsWhere } from './bag.js'
 import { avatarStats, dropLib, levels, subTasks, task } from './data.js'
 import { newGearState, rollLibDrops, type GrantedItem } from './gear.js'
-import { countItems, questRewards, type QuestProgress } from './quests.js'
+import { countItems, questRewards, recordCommand, type QuestProgress } from './quests.js'
 import { learnThroughLevel } from './learning.js'
 import { vipDropMul, vipExp } from './vip.js'
 
@@ -130,6 +130,19 @@ export async function saveQuests(tx: Tx, characterId: string, changed: QuestProg
         ),
       )
   }
+}
+
+/** A quest command (CommandRule) after a successful action, inside its transaction. */
+export async function questCommand(
+  tx: Tx,
+  character: { id: string; sceneId: number },
+  command: number,
+) {
+  await saveQuests(
+    tx,
+    character.id,
+    recordCommand(await loadQuests(tx, character.id), command, character.sceneId),
+  )
 }
 
 /** Applies EXP with level-ups (refilling HP and MP on level-up) and returns the column updates. */

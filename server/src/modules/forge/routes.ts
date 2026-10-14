@@ -45,7 +45,12 @@ import {
 } from '../../game/data.js'
 import { playerFighter } from '../../game/combat.js'
 import { durabilityOf, equipConfigOf, gearView, wornSetCounts } from '../../game/gear.js'
-import { consumeOne, removeItems, type Tx } from '../../game/progress.js'
+import { consumeOne, questCommand, removeItems, type Tx } from '../../game/progress.js'
+import {
+  REBORN_ENHANCE_COMMAND,
+  REBORN_IDENTIFY_COMMAND,
+  REBORN_INSCRIBE_COMMAND,
+} from '../../game/quests.js'
 import { HttpError } from '../../http.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
@@ -240,6 +245,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
       if (!canAppraise(row)) throw bad('cannot_appraise', 'That item has nothing to appraise.')
       await pay(tx, character, 'stone', appraiseCost(config.UseLevel ?? 0))
       await tx.update(inventoryItems).set(appraiseRoll(row)).where(eq(inventoryItems.id, row.id))
+      await questCommand(tx, character, REBORN_IDENTIFY_COMMAND)
       return respond(tx, character.id, row.id)
     })
   })
@@ -268,6 +274,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
       for (const { row } of targets) {
         await tx.update(inventoryItems).set(appraiseRoll(row)).where(eq(inventoryItems.id, row.id))
       }
+      await questCommand(tx, character, REBORN_IDENTIFY_COMMAND)
       return { ...(await respond(tx, character.id)), appraised: targets.map(({ row }) => row.id) }
     })
   })
@@ -335,6 +342,8 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
           bound: row.bound || binding.bindNow || (result.success && binding.bindOnSuccess),
         })
         .where(eq(inventoryItems.id, row.id))
+      // The Reborn quest asks for a successful enhance.
+      if (result.success) await questCommand(tx, character, REBORN_ENHANCE_COMMAND)
       return { success: result.success, ...(await respond(tx, character.id, row.id)) }
     })
   })
@@ -364,6 +373,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
         .update(inventoryItems)
         .set({ inscribeLevel: result.level })
         .where(eq(inventoryItems.id, row.id))
+      if (result.success) await questCommand(tx, character, REBORN_INSCRIBE_COMMAND)
       return {
         success: result.success,
         sealsUsed: used,

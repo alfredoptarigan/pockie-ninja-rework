@@ -12,7 +12,8 @@ import type { Db } from '../../db/client.js'
 import { characterBloodlines, characters, inventoryItems } from '../../db/schema.js'
 import { unequippedBagItemsWhere } from '../../game/bag.js'
 import { rebornBloodlines } from '../../game/data.js'
-import { removeItems, type Tx } from '../../game/progress.js'
+import { questCommand, removeItems, type Tx } from '../../game/progress.js'
+import { REBORN_BLOODLINE_UNLOCK_COMMAND } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
@@ -131,6 +132,8 @@ async function turnIn(tx: Tx, userId: string, limitId: number): Promise<Bloodlin
       target: [characterBloodlines.characterId, characterBloodlines.limitId],
       set: next,
     })
+  // Only reachable once per limit: an unlocked limit refuses more turn-ins.
+  if (next.unlockedAt) await questCommand(tx, character, REBORN_BLOODLINE_UNLOCK_COMMAND)
   const [updated] = await tx
     .update(characters)
     .set({ bloodlineDay: utcDay(), bloodlineTurnIns: used + 1 })

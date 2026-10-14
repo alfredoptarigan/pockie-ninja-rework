@@ -24,7 +24,8 @@ import type { Db } from '../../db/client.js'
 import { singleGate } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
-import type { Tx } from '../../game/progress.js'
+import { questCommand, type Tx } from '../../game/progress.js'
+import { REBORN_LAS_NOCHES_FLOOR_COMMAND } from '../../game/quests.js'
 import { vipExp } from '../../game/vip.js'
 import { requireAlive } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
@@ -200,9 +201,11 @@ async function catchUp(
       ? Math.min(480, Math.floor((now.getTime() - row.autoTickAt.getTime()) / 30000))
       : 0
   const { floors } = singleGateData()
+  let cleared = false
   while (ticks-- > 0 && row.mode === 1) {
     const floor = row.currentFloor!
     if (floor <= (row.autoReachFloor ?? 0)) {
+      cleared = true
       const message = lasNochesFloorBroadcast(
         character.name,
         floor,
@@ -237,6 +240,7 @@ async function catchUp(
       }
     } else row = { ...row, currentFloor: floor + 1 }
   }
+  if (cleared) await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
   return saveRow(tx, row)
 }
 
@@ -368,6 +372,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
           floor50Broadcast: row.floor50Broadcast || run.floor === 50,
         }
         if (outcome.ended) pot = outcome.run.pot
+        await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
       } else {
         // A loss refills HP and MP; without a life the pot is halved and the run ends.
         state = { hp: maxHp, mp: maxMp }

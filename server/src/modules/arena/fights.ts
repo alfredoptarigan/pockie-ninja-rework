@@ -18,7 +18,8 @@ import {
 import type { ArenaLook } from '../../../../shared/src/schemas/arena.js'
 import { arenaOpponents, arenaPlayers, arenaRevenges } from '../../db/schema.js'
 import { monsterFighter } from '../../game/combat.js'
-import type { Tx } from '../../game/progress.js'
+import { questCommand, type Tx } from '../../game/progress.js'
+import { REBORN_ARENA_FIGHT_COMMAND } from '../../game/quests.js'
 import { sendSystemMail } from '../../game/system-mail.js'
 import { bad, newSeed, saveCharacter, utcDay, type CharacterRow } from '../gates/common.js'
 import { arenaFighter, fromSnapshot, toSnapshot, type ArenaFighter } from './snapshot.js'
@@ -212,6 +213,8 @@ export async function arenaFight(
       { attacker: character.name, score: -scoreDelta },
     )
   }
+  // The Reborn quest counts a fight, won or lost.
+  await questCommand(tx, character, REBORN_ARENA_FIGHT_COMMAND)
   return { replay, looks, won, scoreDelta, honor }
 }
 
@@ -282,6 +285,7 @@ export async function bossFight(tx: Tx, character: CharacterRow, arena: ArenaRow
     replay: { replay, looks },
   })
   if (promotedTo !== null) await rollSlots(tx, { ...arena, ...update })
+  await questCommand(tx, character, REBORN_ARENA_FIGHT_COMMAND)
   return { replay, looks, won, scoreDelta: 0, honor, promotedTo }
 }
 
