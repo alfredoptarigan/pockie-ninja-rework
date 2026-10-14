@@ -815,7 +815,7 @@ adds one line each when merging:
   glossary. Light work: Sonnet.
 - **Depends on**: 7-13.
 
-### Task 15: Verification
+### Task 15: Verification (done; 5 M6 journeys, full e2e 28/28, docs/security-review-m6.md, new modules 86-100% branch coverage)
 - **Action**:
   - Playwright journeys:
     - adopt, feed, digest-now and activate a pet, then win a field fight showing PET_ATTACK;

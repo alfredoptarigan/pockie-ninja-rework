@@ -10,7 +10,7 @@ milestone gets a detailed plan; later ones are outlines and will be re-planned w
 | 3 | World & Economy | Done (2026-10-13) | `m3-world-economy.plan.md` |
 | 4 | Social & Competition | Done (2026-10-13) | `m4-social-competition.plan.md` |
 | 5 | Reborn Update | Done (2026-10-14) | `m5-reborn-update.plan.md` |
-| 6 | Companions & Collection | Planned (2026-10-14) | `m6-companions.plan.md` |
+| 6 | Companions & Collection | Done (2026-10-14) | `m6-companions.plan.md` |
 | 7 | Home & Launch | Outline | |
 
 ## Cross-milestone decisions
