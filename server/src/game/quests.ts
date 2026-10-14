@@ -120,20 +120,27 @@ function advance(
 const localLocation = (taskId: number, sceneId: number, npcId: string, actualScene: number) =>
   rebornLocation(taskId, sceneId, npcId, Number(scene(actualScene)?.Nation ?? -1))
 
-const inScene = (step: ReturnType<typeof subTasks>[number], sceneId: number, taskId: number) =>
-  Number(step.SubmitSceneID) === -1 ||
+type Step = ReturnType<typeof subTasks>[number]
+
+/** Where a step's target stands for a character in `sceneId`. */
+const stepLocation = (step: Step, taskId: number, sceneId: number) =>
   localLocation(taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), sceneId)
-    .sceneId === sceneId
+
+const inScene = (step: Step, location: { sceneId: number }, sceneId: number) =>
+  Number(step.SubmitSceneID) === -1 || location.sceneId === sceneId
+
+/** A step targeting `npcId` in this scene. */
+const targets = (step: Step, taskId: number, npcId: string, sceneId: number) => {
+  const location = stepLocation(step, taskId, sceneId)
+  return location.npcId === npcId && inScene(step, location, sceneId)
+}
 
 /** A monster kill counts for active kill steps targeting it in this scene. */
 export function recordKill(quests: QuestProgress[], monsterId: string, sceneId: number) {
   return advance(
     quests,
     (step, taskId) =>
-      Number(step.SubTaskType) === KILL &&
-      localLocation(taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), sceneId)
-        .npcId === monsterId &&
-      inScene(step, sceneId, taskId),
+      Number(step.SubTaskType) === KILL && targets(step, taskId, monsterId, sceneId),
   )
 }
 
@@ -157,13 +164,16 @@ export function questItemDrops(
         (quest.progress[Number(step.SetpSeq)] ?? 0) < Number(step.TargetRequireNum),
     )
     for (const drop of taskMonsterDrops(quest.taskId)) {
-      const wanted = open.some((step) => step.TargetItem === drop.TaskItemConfig)
+      if (!open.some((step) => step.TargetItem === drop.TaskItemConfig)) continue
+      const location = localLocation(
+        quest.taskId,
+        Number(drop.SceneID),
+        String(drop.MonsterConfig),
+        sceneId,
+      )
       if (
-        wanted &&
-        localLocation(quest.taskId, Number(drop.SceneID), String(drop.MonsterConfig), sceneId)
-          .npcId === monsterId &&
-        localLocation(quest.taskId, Number(drop.SceneID), String(drop.MonsterConfig), sceneId)
-          .sceneId === sceneId &&
+        location.npcId === monsterId &&
+        location.sceneId === sceneId &&
         random.int(100) < Number(drop.DropProbability) * chanceMul
       ) {
         items.push(String(drop.TaskItemConfig))
@@ -187,11 +197,7 @@ const TALK = 3
 export function recordTalk(quests: QuestProgress[], npcId: string, sceneId: number) {
   return advance(
     quests,
-    (step, taskId) =>
-      Number(step.SubTaskType) === TALK &&
-      localLocation(taskId, Number(step.SubmitSceneID), String(step.TargetConfiger), sceneId)
-        .npcId === npcId &&
-      inScene(step, sceneId, taskId),
+    (step, taskId) => Number(step.SubTaskType) === TALK && targets(step, taskId, npcId, sceneId),
   )
 }
 
@@ -250,7 +256,7 @@ export function recordCommand(
       Number(step.SubTaskType) === COMMAND &&
       Number(step.TargetCondition) === command &&
       (!String(step.TargetItem).startsWith('i') || step.TargetItem === itemId) &&
-      inScene(step, sceneId, taskId),
+      inScene(step, stepLocation(step, taskId, sceneId), sceneId),
   )
 }
 

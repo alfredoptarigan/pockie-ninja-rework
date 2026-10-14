@@ -166,14 +166,13 @@ export async function actionRoutes(
     return {
       quests: rows
         .filter((q) => q.state !== COMPLETED)
-        .map((q) => ({
+        .map((q) => ({ q, navigation: questNavigation(q, character.nation) }))
+        .map(({ q, navigation }) => ({
           ...q,
           nameKey: `lg_Task_${q.taskId}`,
           descriptionKey: `lg_TaskDes_${q.taskId}`,
           rewards: questRewards(q.taskId),
-          ...(questNavigation(q, character.nation)
-            ? { navigation: questNavigation(q, character.nation) }
-            : {}),
+          ...(navigation ? { navigation } : {}),
           steps: subTasks(q.taskId).map((step) => ({
             descriptionKey: `lg_${step.SubTaskDescription}`,
             target: stepTarget(step),
@@ -259,16 +258,12 @@ export async function actionRoutes(
       // Ready main/branch quests are handed in at their submit NPC.
       for (const quest of await loadQuests(tx, character.id)) {
         const row = task(quest.taskId)
-        if (
-          quest.state === READY &&
-          row &&
-          HANDED_IN_TYPES.has(Number(row.TaskBaseType)) &&
-          questLocation(quest.taskId, character.nation, 'submit').npcId === npcId &&
-          questLocation(quest.taskId, character.nation, 'submit').sceneId === character.sceneId
-        ) {
-          const handIn = await completeQuest(tx, character.id, quest.taskId)
-          if (handIn) handIns.push(handIn)
-        }
+        if (quest.state !== READY || !row || !HANDED_IN_TYPES.has(Number(row.TaskBaseType)))
+          continue
+        const submit = questLocation(quest.taskId, character.nation, 'submit')
+        if (submit.npcId !== npcId || submit.sceneId !== character.sceneId) continue
+        const handIn = await completeQuest(tx, character.id, quest.taskId)
+        if (handIn) handIns.push(handIn)
       }
       return {
         dialogKey: `lg_Say_${npcId}`,
