@@ -173,7 +173,10 @@ describe('ArenaWindow', () => {
       [`GET /api/game/arena/logs/${log.id}`]: () =>
         json({
           replay,
-          looks: [{ clothing: 1, wingSprite: 'wing_duotian_3', aura: 'ki_lightning' }, { clothing: 2 }],
+          looks: [
+            { clothing: 1, wingSprite: 'wing_duotian_3', aura: 'ki_lightning' },
+            { clothing: 2 },
+          ],
         }),
       'POST /api/game/arena/revenge': () => json({ ...won, won: false, scoreDelta: -500 }),
     })
