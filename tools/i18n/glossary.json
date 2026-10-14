@@ -17214,6 +17214,151 @@
   "source": "Sprenger",
   "en": "Sprenger"
  },
+ "lg_Skill_50056": {
+  "kind": "skill",
+  "source": "Sharp Claws [S]",
+  "en": "Sharp Claws [S]"
+ },
+ "lg_Skill_50058": {
+  "kind": "skill",
+  "source": "Vision [S]",
+  "en": "Vision [S]"
+ },
+ "lg_Skill_50059": {
+  "kind": "skill",
+  "source": "Rampage [S]",
+  "en": "Rampage [S]"
+ },
+ "lg_Skill_50060": {
+  "kind": "skill",
+  "source": "Vivacious [S]",
+  "en": "Vivacious [S]"
+ },
+ "lg_Skill_50061": {
+  "kind": "skill",
+  "source": "Sandbag [S]",
+  "en": "Sandbag [S]"
+ },
+ "lg_Skill_50062": {
+  "kind": "skill",
+  "source": "Nimble [S]",
+  "en": "Nimble [S]"
+ },
+ "lg_Skill_50063": {
+  "kind": "skill",
+  "source": "Withstand [S]",
+  "en": "Withstand [S]"
+ },
+ "lg_Skill_50064": {
+  "kind": "skill",
+  "source": "Calm [S]",
+  "en": "Calm [S]"
+ },
+ "lg_Skill_50065": {
+  "kind": "skill",
+  "source": "Thick Skin [S]",
+  "en": "Thick Skin [S]"
+ },
+ "lg_Skill_50066": {
+  "kind": "skill",
+  "source": "Disarm [S]",
+  "en": "Disarm [S]"
+ },
+ "lg_Skill_50067": {
+  "kind": "skill",
+  "source": "Strong [S]",
+  "en": "Strong [S]"
+ },
+ "lg_Skill_50068": {
+  "kind": "skill",
+  "source": "Ferocious [S]",
+  "en": "Ferocious [S]"
+ },
+ "lg_Skill_50069": {
+  "kind": "skill",
+  "source": "Sagacity [S]",
+  "en": "Sagacity [S]"
+ },
+ "lg_Skill_50070": {
+  "kind": "skill",
+  "source": "Frenzied Sharp Claws",
+  "en": "Frenzied Sharp Claws"
+ },
+ "lg_Skill_50072": {
+  "kind": "skill",
+  "source": "Frenzied Vision",
+  "en": "Frenzied Vision"
+ },
+ "lg_Skill_50073": {
+  "kind": "skill",
+  "source": "Frenzied Rampage",
+  "en": "Frenzied Rampage"
+ },
+ "lg_Skill_50074": {
+  "kind": "skill",
+  "source": "Frenzied Vivacious",
+  "en": "Frenzied Vivacious"
+ },
+ "lg_Skill_50075": {
+  "kind": "skill",
+  "source": "Frenzied Sandbag",
+  "en": "Frenzied Sandbag"
+ },
+ "lg_Skill_50076": {
+  "kind": "skill",
+  "source": "Frenzied Nimble",
+  "en": "Frenzied Nimble"
+ },
+ "lg_Skill_50077": {
+  "kind": "skill",
+  "source": "Frenzied Withstand",
+  "en": "Frenzied Withstand"
+ },
+ "lg_Skill_50078": {
+  "kind": "skill",
+  "source": "Frenzied Calm",
+  "en": "Frenzied Calm"
+ },
+ "lg_Skill_50079": {
+  "kind": "skill",
+  "source": "Frenzied Thick Skin",
+  "en": "Frenzied Thick Skin"
+ },
+ "lg_Skill_50080": {
+  "kind": "skill",
+  "source": "Frenzied Disarm",
+  "en": "Frenzied Disarm"
+ },
+ "lg_Skill_50081": {
+  "kind": "skill",
+  "source": "Frenzied Strong",
+  "en": "Frenzied Strong"
+ },
+ "lg_Skill_50082": {
+  "kind": "skill",
+  "source": "Frenzied Ferocious",
+  "en": "Frenzied Ferocious"
+ },
+ "lg_Skill_50083": {
+  "kind": "skill",
+  "source": "Frenzied Sagacity",
+  "en": "Frenzied Sagacity"
+ },
+ "lg_Skill_50084": {
+  "kind": "skill",
+  "source": "Frenzied Stamina",
+  "en": "Frenzied Stamina"
+ },
+ "lg_Skill_50085": {
+  "kind": "skill",
+  "source": "Frenzied Agility",
+  "en": "Frenzied Agility"
+ },
+ "lg_Skill_50086": {
+  "kind": "skill",
+  "source": "Frenzied Strength",
+  "en": "Frenzied Strength"
+ },
  "lg_Sustain10_itemname": {
   "kind": "item",
   "source": "30-hari Stone Bag",
@@ -35809,6 +35954,1386 @@
   "source": "Furious Nine-Tailed",
   "en": "Furious Nine-Tailed"
  },
+ "lg_reborn_item_171001": {
+  "kind": "item",
+  "source": "Green Card Pack",
+  "en": "Green Card Pack"
+ },
+ "lg_reborn_item_171002": {
+  "kind": "item",
+  "source": "Blue Card Pack",
+  "en": "Blue Card Pack"
+ },
+ "lg_reborn_item_171003": {
+  "kind": "item",
+  "source": "Purple Card Pack",
+  "en": "Purple Card Pack"
+ },
+ "lg_reborn_item_171004": {
+  "kind": "item",
+  "source": "Red Card Pack",
+  "en": "Red Card Pack"
+ },
+ "lg_reborn_item_171005": {
+  "kind": "item",
+  "source": "Gold Card Pack",
+  "en": "Gold Card Pack"
+ },
+ "lg_reborn_item_180063": {
+  "kind": "item",
+  "source": "Pet Skill - Ferocious [S]",
+  "en": "Pet Skill - Ferocious [S]"
+ },
+ "lg_reborn_item_180064": {
+  "kind": "item",
+  "source": "Pet Skill - Sagacity [S]",
+  "en": "Pet Skill - Sagacity [S]"
+ },
+ "lg_reborn_item_180065": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Sharp Claws",
+  "en": "Pet Skill - Frenzied Sharp Claws"
+ },
+ "lg_reborn_item_180066": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Sharpness",
+  "en": "Pet Skill - Frenzied Sharpness"
+ },
+ "lg_reborn_item_180067": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Vision",
+  "en": "Pet Skill - Frenzied Vision"
+ },
+ "lg_reborn_item_180068": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Rampage",
+  "en": "Pet Skill - Frenzied Rampage"
+ },
+ "lg_reborn_item_180069": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Vivacious",
+  "en": "Pet Skill - Frenzied Vivacious"
+ },
+ "lg_reborn_item_180070": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Sandbag",
+  "en": "Pet Skill - Frenzied Sandbag"
+ },
+ "lg_reborn_item_180071": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Nimble",
+  "en": "Pet Skill - Frenzied Nimble"
+ },
+ "lg_reborn_item_180072": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Withstand",
+  "en": "Pet Skill - Frenzied Withstand"
+ },
+ "lg_reborn_item_180073": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Calm",
+  "en": "Pet Skill - Frenzied Calm"
+ },
+ "lg_reborn_item_180074": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Thick Skin",
+  "en": "Pet Skill - Frenzied Thick Skin"
+ },
+ "lg_reborn_item_180075": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Disarm",
+  "en": "Pet Skill - Frenzied Disarm"
+ },
+ "lg_reborn_item_180076": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Strong",
+  "en": "Pet Skill - Frenzied Strong"
+ },
+ "lg_reborn_item_180077": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Ferocious",
+  "en": "Pet Skill - Frenzied Ferocious"
+ },
+ "lg_reborn_item_180078": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Sagacity",
+  "en": "Pet Skill - Frenzied Sagacity"
+ },
+ "lg_reborn_item_180079": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Stamina",
+  "en": "Pet Skill - Frenzied Stamina"
+ },
+ "lg_reborn_item_180080": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Agility",
+  "en": "Pet Skill - Frenzied Agility"
+ },
+ "lg_reborn_item_180081": {
+  "kind": "item",
+  "source": "Pet Skill - Frenzied Strength",
+  "en": "Pet Skill - Frenzied Strength"
+ },
+ "lg_reborn_item_180149": {
+  "kind": "item",
+  "source": "Pet Skill - Ferocious [E]",
+  "en": "Pet Skill - Ferocious [E]"
+ },
+ "lg_reborn_item_180150": {
+  "kind": "item",
+  "source": "Pet Skill - Sagacity [E]",
+  "en": "Pet Skill - Sagacity [E]"
+ },
+ "lg_reborn_item_180151": {
+  "kind": "item",
+  "source": "Pet Skill - Sharp Claws [S]",
+  "en": "Pet Skill - Sharp Claws [S]"
+ },
+ "lg_reborn_item_180152": {
+  "kind": "item",
+  "source": "Pet Skill - Sharpness [S]",
+  "en": "Pet Skill - Sharpness [S]"
+ },
+ "lg_reborn_item_180153": {
+  "kind": "item",
+  "source": "Pet Skill - Vision [S]",
+  "en": "Pet Skill - Vision [S]"
+ },
+ "lg_reborn_item_180154": {
+  "kind": "item",
+  "source": "Pet Skill - Rampage [S]",
+  "en": "Pet Skill - Rampage [S]"
+ },
+ "lg_reborn_item_180155": {
+  "kind": "item",
+  "source": "Pet Skill - Vivacious [S]",
+  "en": "Pet Skill - Vivacious [S]"
+ },
+ "lg_reborn_item_180156": {
+  "kind": "item",
+  "source": "Pet Skill - Sandbag [S]",
+  "en": "Pet Skill - Sandbag [S]"
+ },
+ "lg_reborn_item_180157": {
+  "kind": "item",
+  "source": "Pet Skill - Nimble [S]",
+  "en": "Pet Skill - Nimble [S]"
+ },
+ "lg_reborn_item_180158": {
+  "kind": "item",
+  "source": "Pet Skill - Withstand [S]",
+  "en": "Pet Skill - Withstand [S]"
+ },
+ "lg_reborn_item_180159": {
+  "kind": "item",
+  "source": "Pet Skill - Calm [S]",
+  "en": "Pet Skill - Calm [S]"
+ },
+ "lg_reborn_item_180160": {
+  "kind": "item",
+  "source": "Pet Skill - Thick Skin [S]",
+  "en": "Pet Skill - Thick Skin [S]"
+ },
+ "lg_reborn_item_180161": {
+  "kind": "item",
+  "source": "Pet Skill - Disarm [S]",
+  "en": "Pet Skill - Disarm [S]"
+ },
+ "lg_reborn_item_180162": {
+  "kind": "item",
+  "source": "Pet Skill - Strong [S]",
+  "en": "Pet Skill - Strong [S]"
+ },
+ "lg_reborn_item_218000": {
+  "kind": "item",
+  "source": "Fallen Wings",
+  "en": "Fallen Wings"
+ },
+ "lg_reborn_item_218001": {
+  "kind": "item",
+  "source": "Illusion Wings",
+  "en": "Illusion Wings"
+ },
+ "lg_reborn_item_218002": {
+  "kind": "item",
+  "source": "Judical Wings",
+  "en": "Judical Wings"
+ },
+ "lg_reborn_item_218003": {
+  "kind": "item",
+  "source": "Blood Shadow Wings",
+  "en": "Blood Shadow Wings"
+ },
+ "lg_reborn_item_218004": {
+  "kind": "item",
+  "source": "Dim Wings",
+  "en": "Dim Wings"
+ },
+ "lg_reborn_item_218005": {
+  "kind": "item",
+  "source": "Wings of Gods",
+  "en": "Wings of Gods"
+ },
+ "lg_reborn_item_218006": {
+  "kind": "item",
+  "source": "Phoenix Wings",
+  "en": "Phoenix Wings"
+ },
+ "lg_reborn_item_218007": {
+  "kind": "item",
+  "source": "Wings of Lord Elements",
+  "en": "Wings of Lord Elements"
+ },
+ "lg_reborn_item_218008": {
+  "kind": "item",
+  "source": "Wings of Crimson Curse",
+  "en": "Wings of Crimson Curse"
+ },
+ "lg_reborn_item_218009": {
+  "kind": "item",
+  "source": "Wings of Abbadon",
+  "en": "Wings of Abbadon"
+ },
+ "lg_reborn_item_218010": {
+  "kind": "item",
+  "source": "Wings of Andras",
+  "en": "Wings of Andras"
+ },
+ "lg_reborn_item_218011": {
+  "kind": "item",
+  "source": "Wings of Mammon",
+  "en": "Wings of Mammon"
+ },
+ "lg_reborn_item_218012": {
+  "kind": "item",
+  "source": "Wings of Lilith",
+  "en": "Wings of Lilith"
+ },
+ "lg_reborn_item_218013": {
+  "kind": "item",
+  "source": "Wings of Vaalberith",
+  "en": "Wings of Vaalberith"
+ },
+ "lg_reborn_item_218014": {
+  "kind": "item",
+  "source": "Wings of Verrine",
+  "en": "Wings of Verrine"
+ },
+ "lg_reborn_item_218015": {
+  "kind": "item",
+  "source": "Wings of Fortune",
+  "en": "Wings of Fortune"
+ },
+ "lg_reborn_item_218017": {
+  "kind": "item",
+  "source": "White Wings",
+  "en": "White Wings"
+ },
+ "lg_reborn_item_218018": {
+  "kind": "item",
+  "source": "Red Wings",
+  "en": "Red Wings"
+ },
+ "lg_reborn_item_218020": {
+  "kind": "item",
+  "source": "Paradise Feather",
+  "en": "Paradise Feather"
+ },
+ "lg_reborn_item_218021": {
+  "kind": "item",
+  "source": "Plume Shard [First Grade]",
+  "en": "Plume Shard [First Grade]"
+ },
+ "lg_reborn_item_218022": {
+  "kind": "item",
+  "source": "Plume Shard [Second Grade]",
+  "en": "Plume Shard [Second Grade]"
+ },
+ "lg_reborn_item_218023": {
+  "kind": "item",
+  "source": "Plume Shard [Third Grade]",
+  "en": "Plume Shard [Third Grade]"
+ },
+ "lg_reborn_item_218030": {
+  "kind": "item",
+  "source": "Talisman of Integrity [D]",
+  "en": "Talisman of Integrity [D]"
+ },
+ "lg_reborn_item_218031": {
+  "kind": "item",
+  "source": "Talisman of Integrity [C]",
+  "en": "Talisman of Integrity [C]"
+ },
+ "lg_reborn_item_218032": {
+  "kind": "item",
+  "source": "Talisman of Integrity [B]",
+  "en": "Talisman of Integrity [B]"
+ },
+ "lg_reborn_item_218033": {
+  "kind": "item",
+  "source": "Talisman of Integrity [A]",
+  "en": "Talisman of Integrity [A]"
+ },
+ "lg_reborn_item_218034": {
+  "kind": "item",
+  "source": "Talisman of Integrity [S]",
+  "en": "Talisman of Integrity [S]"
+ },
+ "lg_reborn_item_218040": {
+  "kind": "item",
+  "source": "Talisman of Safety [D]",
+  "en": "Talisman of Safety [D]"
+ },
+ "lg_reborn_item_218041": {
+  "kind": "item",
+  "source": "Talisman of Safety [C]",
+  "en": "Talisman of Safety [C]"
+ },
+ "lg_reborn_item_218042": {
+  "kind": "item",
+  "source": "Talisman of Safety [B]",
+  "en": "Talisman of Safety [B]"
+ },
+ "lg_reborn_item_218043": {
+  "kind": "item",
+  "source": "Talisman of Safety [A]",
+  "en": "Talisman of Safety [A]"
+ },
+ "lg_reborn_item_218044": {
+  "kind": "item",
+  "source": "Talisman of Safety [S]",
+  "en": "Talisman of Safety [S]"
+ },
+ "lg_reborn_item_218050": {
+  "kind": "item",
+  "source": "Talisman of Luck [D]",
+  "en": "Talisman of Luck [D]"
+ },
+ "lg_reborn_item_218051": {
+  "kind": "item",
+  "source": "Talisman of Luck [C]",
+  "en": "Talisman of Luck [C]"
+ },
+ "lg_reborn_item_218052": {
+  "kind": "item",
+  "source": "Talisman of Luck [B]",
+  "en": "Talisman of Luck [B]"
+ },
+ "lg_reborn_item_218053": {
+  "kind": "item",
+  "source": "Talisman of Luck [A]",
+  "en": "Talisman of Luck [A]"
+ },
+ "lg_reborn_item_218054": {
+  "kind": "item",
+  "source": "Talisman of Luck [S]",
+  "en": "Talisman of Luck [S]"
+ },
+ "lg_reborn_item_218200": {
+  "kind": "item",
+  "source": "Ki Lightning",
+  "en": "Ki Lightning"
+ },
+ "lg_reborn_item_218201": {
+  "kind": "item",
+  "source": "Lightning Aura",
+  "en": "Lightning Aura"
+ },
+ "lg_reborn_item_218202": {
+  "kind": "item",
+  "source": "Crimson Chakra Flame",
+  "en": "Crimson Chakra Flame"
+ },
+ "lg_reborn_item_218203": {
+  "kind": "item",
+  "source": "Azure Chakra Flame",
+  "en": "Azure Chakra Flame"
+ },
+ "lg_reborn_item_218204": {
+  "kind": "item",
+  "source": "Violet Chakra Flame",
+  "en": "Violet Chakra Flame"
+ },
+ "lg_reborn_item_218205": {
+  "kind": "item",
+  "source": "Black Chakra Flame",
+  "en": "Black Chakra Flame"
+ },
+ "lg_reborn_item_218206": {
+  "kind": "item",
+  "source": "Tailed Beast Cloak",
+  "en": "Tailed Beast Cloak"
+ },
+ "lg_reborn_item_218207": {
+  "kind": "item",
+  "source": "Eight Gates: Gate of Death",
+  "en": "Eight Gates: Gate of Death"
+ },
+ "lg_reborn_item_320002": {
+  "kind": "item",
+  "source": "Baby Vulture",
+  "en": "Baby Vulture"
+ },
+ "lg_reborn_item_320003": {
+  "kind": "item",
+  "source": "Baby Bat",
+  "en": "Baby Bat"
+ },
+ "lg_reborn_item_320006": {
+  "kind": "item",
+  "source": "Baby Bee",
+  "en": "Baby Bee"
+ },
+ "lg_reborn_item_320008": {
+  "kind": "item",
+  "source": "Frostbore Dragon",
+  "en": "Frostbore Dragon"
+ },
+ "lg_reborn_item_320015": {
+  "kind": "item",
+  "source": "Maneater Blossom",
+  "en": "Maneater Blossom"
+ },
+ "lg_reborn_item_320016": {
+  "kind": "item",
+  "source": "Treant",
+  "en": "Treant"
+ },
+ "lg_reborn_item_320017": {
+  "kind": "item",
+  "source": "Sunflower",
+  "en": "Sunflower"
+ },
+ "lg_reborn_item_320018": {
+  "kind": "item",
+  "source": "Sweet Potato",
+  "en": "Sweet Potato"
+ },
+ "lg_reborn_item_320019": {
+  "kind": "item",
+  "source": "Corn Demon",
+  "en": "Corn Demon"
+ },
+ "lg_reborn_item_320025": {
+  "kind": "item",
+  "source": "Bun Demon",
+  "en": "Bun Demon"
+ },
+ "lg_reborn_item_320026": {
+  "kind": "item",
+  "source": "Sushi Monster",
+  "en": "Sushi Monster"
+ },
+ "lg_reborn_item_320027": {
+  "kind": "item",
+  "source": "Rice Ball",
+  "en": "Rice Ball"
+ },
+ "lg_reborn_item_320028": {
+  "kind": "item",
+  "source": "Toad",
+  "en": "Toad"
+ },
+ "lg_reborn_item_320029": {
+  "kind": "item",
+  "source": "Dog",
+  "en": "Dog"
+ },
+ "lg_reborn_item_320030": {
+  "kind": "item",
+  "source": "Kon",
+  "en": "Kon"
+ },
+ "lg_reborn_item_320031": {
+  "kind": "item",
+  "source": "Lily",
+  "en": "Lily"
+ },
+ "lg_reborn_item_320033": {
+  "kind": "item",
+  "source": "Elk",
+  "en": "Elk"
+ },
+ "lg_reborn_item_320036": {
+  "kind": "item",
+  "source": "Green Dragon",
+  "en": "Green Dragon"
+ },
+ "lg_reborn_item_320037": {
+  "kind": "item",
+  "source": "Shukaku",
+  "en": "Shukaku"
+ },
+ "lg_reborn_item_320038": {
+  "kind": "item",
+  "source": "Matatabi",
+  "en": "Matatabi"
+ },
+ "lg_reborn_item_320039": {
+  "kind": "item",
+  "source": "Isobu",
+  "en": "Isobu"
+ },
+ "lg_reborn_item_320040": {
+  "kind": "item",
+  "source": "Son Gokū",
+  "en": "Son Gokū"
+ },
+ "lg_reborn_item_320041": {
+  "kind": "item",
+  "source": "Kokuō",
+  "en": "Kokuō"
+ },
+ "lg_reborn_item_320042": {
+  "kind": "item",
+  "source": "Saiken",
+  "en": "Saiken"
+ },
+ "lg_reborn_item_320043": {
+  "kind": "item",
+  "source": "Chōmei",
+  "en": "Chōmei"
+ },
+ "lg_reborn_item_320044": {
+  "kind": "item",
+  "source": "Gyūki",
+  "en": "Gyūki"
+ },
+ "lg_reborn_item_320045": {
+  "kind": "item",
+  "source": "Kurama",
+  "en": "Kurama"
+ },
+ "lg_reborn_item_320046": {
+  "kind": "item",
+  "source": "Mountain Gorilla",
+  "en": "Mountain Gorilla"
+ },
+ "lg_reborn_item_320047": {
+  "kind": "item",
+  "source": "Wild Boar",
+  "en": "Wild Boar"
+ },
+ "lg_reborn_item_320048": {
+  "kind": "item",
+  "source": "Cave Bear",
+  "en": "Cave Bear"
+ },
+ "lg_reborn_item_320049": {
+  "kind": "item",
+  "source": "Shadow Wolf",
+  "en": "Shadow Wolf"
+ },
+ "lg_reborn_item_320050": {
+  "kind": "item",
+  "source": "Fierce Tiger",
+  "en": "Fierce Tiger"
+ },
+ "lg_reborn_item_320051": {
+  "kind": "item",
+  "source": "Horned Owl",
+  "en": "Horned Owl"
+ },
+ "lg_reborn_item_320052": {
+  "kind": "item",
+  "source": "Rock Crab",
+  "en": "Rock Crab"
+ },
+ "lg_reborn_item_320053": {
+  "kind": "item",
+  "source": "Sand Scorpion",
+  "en": "Sand Scorpion"
+ },
+ "lg_reborn_item_320054": {
+  "kind": "item",
+  "source": "Thunder Hawk",
+  "en": "Thunder Hawk"
+ },
+ "lg_reborn_item_320055": {
+  "kind": "item",
+  "source": "Forest Stag",
+  "en": "Forest Stag"
+ },
+ "lg_reborn_item_320056": {
+  "kind": "item",
+  "source": "Night Panther",
+  "en": "Night Panther"
+ },
+ "lg_reborn_item_320057": {
+  "kind": "item",
+  "source": "Iron Rhino",
+  "en": "Iron Rhino"
+ },
+ "lg_reborn_item_320058": {
+  "kind": "item",
+  "source": "Storm Eagle",
+  "en": "Storm Eagle"
+ },
+ "lg_reborn_item_320059": {
+  "kind": "item",
+  "source": "Jade Serpent",
+  "en": "Jade Serpent"
+ },
+ "lg_reborn_item_320060": {
+  "kind": "item",
+  "source": "Fire Fox",
+  "en": "Fire Fox"
+ },
+ "lg_reborn_item_320061": {
+  "kind": "item",
+  "source": "Golden Beetle",
+  "en": "Golden Beetle"
+ },
+ "lg_reborn_item_320062": {
+  "kind": "item",
+  "source": "Frost Spider",
+  "en": "Frost Spider"
+ },
+ "lg_reborn_item_320063": {
+  "kind": "item",
+  "source": "Stone Golem",
+  "en": "Stone Golem"
+ },
+ "lg_reborn_item_320064": {
+  "kind": "item",
+  "source": "Wind Falcon",
+  "en": "Wind Falcon"
+ },
+ "lg_reborn_item_320065": {
+  "kind": "item",
+  "source": "Poison Ivy",
+  "en": "Poison Ivy"
+ },
+ "lg_reborn_item_320066": {
+  "kind": "item",
+  "source": "Moon Rabbit",
+  "en": "Moon Rabbit"
+ },
+ "lg_reborn_item_320067": {
+  "kind": "item",
+  "source": "Crystal Snail",
+  "en": "Crystal Snail"
+ },
+ "lg_reborn_item_320068": {
+  "kind": "item",
+  "source": "Desert Cobra",
+  "en": "Desert Cobra"
+ },
+ "lg_reborn_item_320069": {
+  "kind": "item",
+  "source": "Bamboo Panda",
+  "en": "Bamboo Panda"
+ },
+ "lg_reborn_item_320070": {
+  "kind": "item",
+  "source": "Snowman",
+  "en": "Snowman"
+ },
+ "lg_reborn_item_320071": {
+  "kind": "item",
+  "source": "Scavenging Vulture",
+  "en": "Scavenging Vulture"
+ },
+ "lg_reborn_item_320072": {
+  "kind": "item",
+  "source": "Vampire Bat",
+  "en": "Vampire Bat"
+ },
+ "lg_reborn_item_320073": {
+  "kind": "item",
+  "source": "Stinging Bee",
+  "en": "Stinging Bee"
+ },
+ "lg_reborn_item_320074": {
+  "kind": "item",
+  "source": "Maneater Blossom Evo",
+  "en": "Maneater Blossom Evo"
+ },
+ "lg_reborn_item_320075": {
+  "kind": "item",
+  "source": "Ancient Treant",
+  "en": "Ancient Treant"
+ },
+ "lg_reborn_item_320076": {
+  "kind": "item",
+  "source": "Giant Sunflower",
+  "en": "Giant Sunflower"
+ },
+ "lg_reborn_item_320077": {
+  "kind": "item",
+  "source": "Sweet Potato Demon",
+  "en": "Sweet Potato Demon"
+ },
+ "lg_reborn_item_320078": {
+  "kind": "item",
+  "source": "Corn Demon Evo",
+  "en": "Corn Demon Evo"
+ },
+ "lg_reborn_item_320079": {
+  "kind": "item",
+  "source": "Steamed Bun Demon",
+  "en": "Steamed Bun Demon"
+ },
+ "lg_reborn_item_320080": {
+  "kind": "item",
+  "source": "Sushi Monster Evo",
+  "en": "Sushi Monster Evo"
+ },
+ "lg_reborn_item_320081": {
+  "kind": "item",
+  "source": "Rice Ball Spirit",
+  "en": "Rice Ball Spirit"
+ },
+ "lg_reborn_item_320082": {
+  "kind": "item",
+  "source": "Frostbore Dragon Evo",
+  "en": "Frostbore Dragon Evo"
+ },
+ "lg_reborn_item_320083": {
+  "kind": "item",
+  "source": "Great Toad",
+  "en": "Great Toad"
+ },
+ "lg_reborn_item_320084": {
+  "kind": "item",
+  "source": "Akamaru",
+  "en": "Akamaru"
+ },
+ "lg_reborn_item_320085": {
+  "kind": "item",
+  "source": "Kon Evo",
+  "en": "Kon Evo"
+ },
+ "lg_reborn_item_320086": {
+  "kind": "item",
+  "source": "Lily Evo",
+  "en": "Lily Evo"
+ },
+ "lg_reborn_item_320087": {
+  "kind": "item",
+  "source": "Frost Snowman",
+  "en": "Frost Snowman"
+ },
+ "lg_reborn_item_320088": {
+  "kind": "item",
+  "source": "Noble Reindeer",
+  "en": "Noble Reindeer"
+ },
+ "lg_reborn_item_320089": {
+  "kind": "item",
+  "source": "Lucky Rabbit",
+  "en": "Lucky Rabbit"
+ },
+ "lg_reborn_item_320090": {
+  "kind": "item",
+  "source": "Rabbit",
+  "en": "Rabbit"
+ },
+ "lg_reborn_item_320091": {
+  "kind": "item",
+  "source": "Dark Wing",
+  "en": "Dark Wing"
+ },
+ "lg_reborn_item_320092": {
+  "kind": "item",
+  "source": "Azure Dragon",
+  "en": "Azure Dragon"
+ },
+ "lg_reborn_item_320093": {
+  "kind": "item",
+  "source": "Shukaku Evo",
+  "en": "Shukaku Evo"
+ },
+ "lg_reborn_item_320094": {
+  "kind": "item",
+  "source": "Matatabi Evo",
+  "en": "Matatabi Evo"
+ },
+ "lg_reborn_item_320095": {
+  "kind": "item",
+  "source": "Isobu Evo",
+  "en": "Isobu Evo"
+ },
+ "lg_reborn_item_320096": {
+  "kind": "item",
+  "source": "Son Gokū Evo",
+  "en": "Son Gokū Evo"
+ },
+ "lg_reborn_item_320097": {
+  "kind": "item",
+  "source": "Kokuō Evo",
+  "en": "Kokuō Evo"
+ },
+ "lg_reborn_item_320098": {
+  "kind": "item",
+  "source": "Saiken Evo",
+  "en": "Saiken Evo"
+ },
+ "lg_reborn_item_320099": {
+  "kind": "item",
+  "source": "Chōmei Evo",
+  "en": "Chōmei Evo"
+ },
+ "lg_reborn_item_320100": {
+  "kind": "item",
+  "source": "Gyūki Evo",
+  "en": "Gyūki Evo"
+ },
+ "lg_reborn_item_320101": {
+  "kind": "item",
+  "source": "Kurama Evo",
+  "en": "Kurama Evo"
+ },
+ "lg_reborn_item_320102": {
+  "kind": "item",
+  "source": "Phoenix",
+  "en": "Phoenix"
+ },
+ "lg_reborn_item_320103": {
+  "kind": "item",
+  "source": "Great Vulture",
+  "en": "Great Vulture"
+ },
+ "lg_reborn_item_320104": {
+  "kind": "item",
+  "source": "Giant Bat",
+  "en": "Giant Bat"
+ },
+ "lg_reborn_item_320105": {
+  "kind": "item",
+  "source": "Queen Bee",
+  "en": "Queen Bee"
+ },
+ "lg_reborn_item_320106": {
+  "kind": "item",
+  "source": "Devouring Blossom",
+  "en": "Devouring Blossom"
+ },
+ "lg_reborn_item_320107": {
+  "kind": "item",
+  "source": "Elder Treant",
+  "en": "Elder Treant"
+ },
+ "lg_reborn_item_320108": {
+  "kind": "item",
+  "source": "Solar Sunflower",
+  "en": "Solar Sunflower"
+ },
+ "lg_reborn_item_320109": {
+  "kind": "item",
+  "source": "Potato King",
+  "en": "Potato King"
+ },
+ "lg_reborn_item_320110": {
+  "kind": "item",
+  "source": "Corn Lord",
+  "en": "Corn Lord"
+ },
+ "lg_reborn_item_320111": {
+  "kind": "item",
+  "source": "Bun King",
+  "en": "Bun King"
+ },
+ "lg_reborn_item_320112": {
+  "kind": "item",
+  "source": "Sushi Master",
+  "en": "Sushi Master"
+ },
+ "lg_reborn_item_320113": {
+  "kind": "item",
+  "source": "Rice Ball Lord",
+  "en": "Rice Ball Lord"
+ },
+ "lg_reborn_item_320114": {
+  "kind": "item",
+  "source": "Frost Dragon",
+  "en": "Frost Dragon"
+ },
+ "lg_reborn_item_320115": {
+  "kind": "item",
+  "source": "Sage Toad",
+  "en": "Sage Toad"
+ },
+ "lg_reborn_item_320116": {
+  "kind": "item",
+  "source": "Akamaru Guardian",
+  "en": "Akamaru Guardian"
+ },
+ "lg_reborn_item_320117": {
+  "kind": "item",
+  "source": "Super Kon",
+  "en": "Super Kon"
+ },
+ "lg_reborn_item_320118": {
+  "kind": "item",
+  "source": "Lily Queen",
+  "en": "Lily Queen"
+ },
+ "lg_reborn_item_320119": {
+  "kind": "item",
+  "source": "Blizzard Snowman",
+  "en": "Blizzard Snowman"
+ },
+ "lg_reborn_item_320120": {
+  "kind": "item",
+  "source": "Majestic Reindeer",
+  "en": "Majestic Reindeer"
+ },
+ "lg_reborn_item_320121": {
+  "kind": "item",
+  "source": "Celestial Rabbit",
+  "en": "Celestial Rabbit"
+ },
+ "lg_reborn_item_320122": {
+  "kind": "item",
+  "source": "Shukaku Awakened",
+  "en": "Shukaku Awakened"
+ },
+ "lg_reborn_item_320123": {
+  "kind": "item",
+  "source": "Matatabi Awakened",
+  "en": "Matatabi Awakened"
+ },
+ "lg_reborn_item_320124": {
+  "kind": "item",
+  "source": "Isobu Awakened",
+  "en": "Isobu Awakened"
+ },
+ "lg_reborn_item_320125": {
+  "kind": "item",
+  "source": "Son Gokū Awakened",
+  "en": "Son Gokū Awakened"
+ },
+ "lg_reborn_item_320126": {
+  "kind": "item",
+  "source": "Kokuō Awakened",
+  "en": "Kokuō Awakened"
+ },
+ "lg_reborn_item_320127": {
+  "kind": "item",
+  "source": "Saiken Awakened",
+  "en": "Saiken Awakened"
+ },
+ "lg_reborn_item_320128": {
+  "kind": "item",
+  "source": "Chōmei Awakened",
+  "en": "Chōmei Awakened"
+ },
+ "lg_reborn_item_320129": {
+  "kind": "item",
+  "source": "Gyūki Awakened",
+  "en": "Gyūki Awakened"
+ },
+ "lg_reborn_item_320130": {
+  "kind": "item",
+  "source": "Kurama Awakened",
+  "en": "Kurama Awakened"
+ },
+ "lg_reborn_item_320131": {
+  "kind": "item",
+  "source": "320131",
+  "en": "320131"
+ },
+ "lg_reborn_item_320132": {
+  "kind": "item",
+  "source": "320132",
+  "en": "320132"
+ },
+ "lg_reborn_item_320133": {
+  "kind": "item",
+  "source": "320133",
+  "en": "320133"
+ },
+ "lg_reborn_item_320134": {
+  "kind": "item",
+  "source": "320134",
+  "en": "320134"
+ },
+ "lg_reborn_item_320135": {
+  "kind": "item",
+  "source": "320135",
+  "en": "320135"
+ },
+ "lg_reborn_item_320136": {
+  "kind": "item",
+  "source": "320136",
+  "en": "320136"
+ },
+ "lg_reborn_item_320137": {
+  "kind": "item",
+  "source": "320137",
+  "en": "320137"
+ },
+ "lg_reborn_item_320138": {
+  "kind": "item",
+  "source": "320138",
+  "en": "320138"
+ },
+ "lg_reborn_item_320139": {
+  "kind": "item",
+  "source": "320139",
+  "en": "320139"
+ },
+ "lg_reborn_item_320140": {
+  "kind": "item",
+  "source": "320140",
+  "en": "320140"
+ },
+ "lg_reborn_item_320141": {
+  "kind": "item",
+  "source": "320141",
+  "en": "320141"
+ },
+ "lg_reborn_item_320142": {
+  "kind": "item",
+  "source": "320142",
+  "en": "320142"
+ },
+ "lg_reborn_item_320143": {
+  "kind": "item",
+  "source": "320143",
+  "en": "320143"
+ },
+ "lg_reborn_item_320144": {
+  "kind": "item",
+  "source": "320144",
+  "en": "320144"
+ },
+ "lg_reborn_item_320145": {
+  "kind": "item",
+  "source": "320145",
+  "en": "320145"
+ },
+ "lg_reborn_item_320146": {
+  "kind": "item",
+  "source": "320146",
+  "en": "320146"
+ },
+ "lg_reborn_item_320147": {
+  "kind": "item",
+  "source": "320147",
+  "en": "320147"
+ },
+ "lg_reborn_item_320148": {
+  "kind": "item",
+  "source": "320148",
+  "en": "320148"
+ },
+ "lg_reborn_item_320149": {
+  "kind": "item",
+  "source": "320149",
+  "en": "320149"
+ },
+ "lg_reborn_item_320150": {
+  "kind": "item",
+  "source": "320150",
+  "en": "320150"
+ },
+ "lg_reborn_item_320151": {
+  "kind": "item",
+  "source": "320151",
+  "en": "320151"
+ },
+ "lg_reborn_item_320152": {
+  "kind": "item",
+  "source": "320152",
+  "en": "320152"
+ },
+ "lg_reborn_item_320153": {
+  "kind": "item",
+  "source": "320153",
+  "en": "320153"
+ },
+ "lg_reborn_item_320154": {
+  "kind": "item",
+  "source": "320154",
+  "en": "320154"
+ },
+ "lg_reborn_item_320155": {
+  "kind": "item",
+  "source": "320155",
+  "en": "320155"
+ },
+ "lg_reborn_item_320156": {
+  "kind": "item",
+  "source": "320156",
+  "en": "320156"
+ },
+ "lg_reborn_item_320157": {
+  "kind": "item",
+  "source": "320157",
+  "en": "320157"
+ },
+ "lg_reborn_item_320158": {
+  "kind": "item",
+  "source": "320158",
+  "en": "320158"
+ },
+ "lg_reborn_item_320159": {
+  "kind": "item",
+  "source": "320159",
+  "en": "320159"
+ },
+ "lg_reborn_item_320160": {
+  "kind": "item",
+  "source": "320160",
+  "en": "320160"
+ },
+ "lg_reborn_item_320161": {
+  "kind": "item",
+  "source": "320161",
+  "en": "320161"
+ },
+ "lg_reborn_item_320162": {
+  "kind": "item",
+  "source": "320162",
+  "en": "320162"
+ },
+ "lg_reborn_item_320163": {
+  "kind": "item",
+  "source": "320163",
+  "en": "320163"
+ },
+ "lg_reborn_item_320164": {
+  "kind": "item",
+  "source": "320164",
+  "en": "320164"
+ },
+ "lg_reborn_item_320165": {
+  "kind": "item",
+  "source": "Tonton",
+  "en": "Tonton"
+ },
+ "lg_reborn_item_320166": {
+  "kind": "item",
+  "source": "Tonton Evo",
+  "en": "Tonton Evo"
+ },
+ "lg_reborn_item_320167": {
+  "kind": "item",
+  "source": "Noba",
+  "en": "Noba"
+ },
+ "lg_reborn_item_320168": {
+  "kind": "item",
+  "source": "Noba Evo",
+  "en": "Noba Evo"
+ },
+ "lg_reborn_item_320169": {
+  "kind": "item",
+  "source": "Manda",
+  "en": "Manda"
+ },
+ "lg_reborn_item_320170": {
+  "kind": "item",
+  "source": "Manda Evo",
+  "en": "Manda Evo"
+ },
+ "lg_reborn_item_320171": {
+  "kind": "item",
+  "source": "Kurodo",
+  "en": "Kurodo"
+ },
+ "lg_reborn_item_320172": {
+  "kind": "item",
+  "source": "Kurodo Evo",
+  "en": "Kurodo Evo"
+ },
+ "lg_reborn_item_320173": {
+  "kind": "item",
+  "source": "Katsuyu",
+  "en": "Katsuyu"
+ },
+ "lg_reborn_item_320174": {
+  "kind": "item",
+  "source": "Katsuyu Evo",
+  "en": "Katsuyu Evo"
+ },
+ "lg_reborn_item_320175": {
+  "kind": "item",
+  "source": "Enma",
+  "en": "Enma"
+ },
+ "lg_reborn_item_320176": {
+  "kind": "item",
+  "source": "Enma Evo",
+  "en": "Enma Evo"
+ },
+ "lg_reborn_item_320177": {
+  "kind": "item",
+  "source": "Pakkun",
+  "en": "Pakkun"
+ },
+ "lg_reborn_item_320178": {
+  "kind": "item",
+  "source": "Pakkun Evo",
+  "en": "Pakkun Evo"
+ },
+ "lg_reborn_item_320179": {
+  "kind": "item",
+  "source": "Super Beast",
+  "en": "Super Beast"
+ },
+ "lg_reborn_item_320180": {
+  "kind": "item",
+  "source": "Super Beast Evo",
+  "en": "Super Beast Evo"
+ },
+ "lg_reborn_item_320182": {
+  "kind": "item",
+  "source": "Chopper",
+  "en": "Chopper"
+ },
+ "lg_reborn_item_320183": {
+  "kind": "item",
+  "source": "Chopper Evo",
+  "en": "Chopper Evo"
+ },
+ "lg_reborn_item_320184": {
+  "kind": "item",
+  "source": "Fire Dragon",
+  "en": "Fire Dragon"
+ },
+ "lg_reborn_item_320185": {
+  "kind": "item",
+  "source": "Megalo",
+  "en": "Megalo"
+ },
+ "lg_reborn_item_320186": {
+  "kind": "item",
+  "source": "Papag",
+  "en": "Papag"
+ },
+ "lg_reborn_item_320187": {
+  "kind": "item",
+  "source": "Karuya",
+  "en": "Karuya"
+ },
+ "lg_reborn_item_320188": {
+  "kind": "item",
+  "source": "Kirin",
+  "en": "Kirin"
+ },
+ "lg_reborn_item_320189": {
+  "kind": "item",
+  "source": "Momo",
+  "en": "Momo"
+ },
+ "lg_reborn_item_320190": {
+  "kind": "item",
+  "source": "Meng",
+  "en": "Meng"
+ },
+ "lg_reborn_item_320191": {
+  "kind": "item",
+  "source": "Little June",
+  "en": "Little June"
+ },
+ "lg_reborn_item_320192": {
+  "kind": "item",
+  "source": "Bijuu Naruto",
+  "en": "Bijuu Naruto"
+ },
+ "lg_reborn_item_320193": {
+  "kind": "item",
+  "source": "Zombie",
+  "en": "Zombie"
+ },
+ "lg_reborn_item_320194": {
+  "kind": "item",
+  "source": "Huge Bird",
+  "en": "Huge Bird"
+ },
+ "lg_reborn_item_320195": {
+  "kind": "item",
+  "source": "Huge Chameleon",
+  "en": "Huge Chameleon"
+ },
+ "lg_reborn_item_320196": {
+  "kind": "item",
+  "source": "Huge Cerberus",
+  "en": "Huge Cerberus"
+ },
+ "lg_reborn_item_320197": {
+  "kind": "item",
+  "source": "Huge Rhinoceros",
+  "en": "Huge Rhinoceros"
+ },
+ "lg_reborn_item_320198": {
+  "kind": "item",
+  "source": "Huge Centipede",
+  "en": "Huge Centipede"
+ },
+ "lg_reborn_item_320199": {
+  "kind": "item",
+  "source": "Ship",
+  "en": "Ship"
+ },
+ "lg_reborn_item_320200": {
+  "kind": "item",
+  "source": "Tonton Awakened",
+  "en": "Tonton Awakened"
+ },
+ "lg_reborn_item_320201": {
+  "kind": "item",
+  "source": "Noba Awakened",
+  "en": "Noba Awakened"
+ },
+ "lg_reborn_item_320202": {
+  "kind": "item",
+  "source": "Manda Awakened",
+  "en": "Manda Awakened"
+ },
+ "lg_reborn_item_320203": {
+  "kind": "item",
+  "source": "Kurodo Awakened",
+  "en": "Kurodo Awakened"
+ },
+ "lg_reborn_item_320204": {
+  "kind": "item",
+  "source": "Katsuyu Awakened",
+  "en": "Katsuyu Awakened"
+ },
+ "lg_reborn_item_320205": {
+  "kind": "item",
+  "source": "Enma Awakened",
+  "en": "Enma Awakened"
+ },
+ "lg_reborn_item_320206": {
+  "kind": "item",
+  "source": "Pakkun Awakened",
+  "en": "Pakkun Awakened"
+ },
+ "lg_reborn_item_320207": {
+  "kind": "item",
+  "source": "Super Beast Awakened",
+  "en": "Super Beast Awakened"
+ },
+ "lg_reborn_item_320208": {
+  "kind": "item",
+  "source": "Chopper Awakened",
+  "en": "Chopper Awakened"
+ },
+ "lg_reborn_item_340710": {
+  "kind": "item",
+  "source": "Ten Tails Beast",
+  "en": "Ten Tails Beast"
+ },
+ "lg_reborn_item_490005": {
+  "kind": "item",
+  "source": "Expert Majestic Aura",
+  "en": "Expert Majestic Aura"
+ },
+ "lg_reborn_item_490103": {
+  "kind": "item",
+  "source": "Basic Majestic Aura",
+  "en": "Basic Majestic Aura"
+ },
+ "lg_reborn_item_490104": {
+  "kind": "item",
+  "source": "Advanced Majestic Aura",
+  "en": "Advanced Majestic Aura"
+ },
  "lg_reborn_item_540001": {
   "kind": "item",
   "source": "Scroll: Izanagi",
@@ -35973,6 +37498,426 @@
   "kind": "npc",
   "source": "Kurama",
   "en": "Kurama"
+ },
+ "reborn_card_1": {
+  "kind": "item",
+  "source": "Hidden Land",
+  "en": "Hidden Land"
+ },
+ "reborn_card_10": {
+  "kind": "item",
+  "source": "Bunta",
+  "en": "Bunta"
+ },
+ "reborn_card_11": {
+  "kind": "item",
+  "source": "Tonton",
+  "en": "Tonton"
+ },
+ "reborn_card_12": {
+  "kind": "item",
+  "source": "Katsuyu",
+  "en": "Katsuyu"
+ },
+ "reborn_card_13": {
+  "kind": "item",
+  "source": "Konoha",
+  "en": "Konoha"
+ },
+ "reborn_card_14": {
+  "kind": "item",
+  "source": "Sunagakure",
+  "en": "Sunagakure"
+ },
+ "reborn_card_15": {
+  "kind": "item",
+  "source": "Kumogakure",
+  "en": "Kumogakure"
+ },
+ "reborn_card_16": {
+  "kind": "item",
+  "source": "Kirigakure",
+  "en": "Kirigakure"
+ },
+ "reborn_card_17": {
+  "kind": "item",
+  "source": "Iwagakure",
+  "en": "Iwagakure"
+ },
+ "reborn_card_18": {
+  "kind": "item",
+  "source": "Otogakure",
+  "en": "Otogakure"
+ },
+ "reborn_card_19": {
+  "kind": "item",
+  "source": "Amegakure",
+  "en": "Amegakure"
+ },
+ "reborn_card_2": {
+  "kind": "item",
+  "source": "Granny",
+  "en": "Granny"
+ },
+ "reborn_card_20": {
+  "kind": "item",
+  "source": "Kusagakure",
+  "en": "Kusagakure"
+ },
+ "reborn_card_21": {
+  "kind": "item",
+  "source": "Takigakure",
+  "en": "Takigakure"
+ },
+ "reborn_card_22": {
+  "kind": "item",
+  "source": "Soifon",
+  "en": "Soifon"
+ },
+ "reborn_card_23": {
+  "kind": "item",
+  "source": "Retsu",
+  "en": "Retsu"
+ },
+ "reborn_card_24": {
+  "kind": "item",
+  "source": "Byakuya",
+  "en": "Byakuya"
+ },
+ "reborn_card_25": {
+  "kind": "item",
+  "source": "Sajin",
+  "en": "Sajin"
+ },
+ "reborn_card_26": {
+  "kind": "item",
+  "source": "Shunsui",
+  "en": "Shunsui"
+ },
+ "reborn_card_27": {
+  "kind": "item",
+  "source": "Hitsugaya",
+  "en": "Hitsugaya"
+ },
+ "reborn_card_28": {
+  "kind": "item",
+  "source": "Kenpachi",
+  "en": "Kenpachi"
+ },
+ "reborn_card_29": {
+  "kind": "item",
+  "source": "Ukitake",
+  "en": "Ukitake"
+ },
+ "reborn_card_3": {
+  "kind": "item",
+  "source": "Hokage Monument",
+  "en": "Hokage Monument"
+ },
+ "reborn_card_30": {
+  "kind": "item",
+  "source": "Choji",
+  "en": "Choji"
+ },
+ "reborn_card_31": {
+  "kind": "item",
+  "source": "Ino",
+  "en": "Ino"
+ },
+ "reborn_card_32": {
+  "kind": "item",
+  "source": "Kiba",
+  "en": "Kiba"
+ },
+ "reborn_card_33": {
+  "kind": "item",
+  "source": "Rock Lee",
+  "en": "Rock Lee"
+ },
+ "reborn_card_34": {
+  "kind": "item",
+  "source": "Sakura",
+  "en": "Sakura"
+ },
+ "reborn_card_35": {
+  "kind": "item",
+  "source": "Neji",
+  "en": "Neji"
+ },
+ "reborn_card_36": {
+  "kind": "item",
+  "source": "Shino",
+  "en": "Shino"
+ },
+ "reborn_card_37": {
+  "kind": "item",
+  "source": "Tenten",
+  "en": "Tenten"
+ },
+ "reborn_card_38": {
+  "kind": "item",
+  "source": "Deidara",
+  "en": "Deidara"
+ },
+ "reborn_card_39": {
+  "kind": "item",
+  "source": "Hidan",
+  "en": "Hidan"
+ },
+ "reborn_card_4": {
+  "kind": "item",
+  "source": "Valley of the End",
+  "en": "Valley of the End"
+ },
+ "reborn_card_40": {
+  "kind": "item",
+  "source": "Itachi",
+  "en": "Itachi"
+ },
+ "reborn_card_41": {
+  "kind": "item",
+  "source": "Kakuzu",
+  "en": "Kakuzu"
+ },
+ "reborn_card_42": {
+  "kind": "item",
+  "source": "Kisame",
+  "en": "Kisame"
+ },
+ "reborn_card_43": {
+  "kind": "item",
+  "source": "Konan",
+  "en": "Konan"
+ },
+ "reborn_card_44": {
+  "kind": "item",
+  "source": "Pain",
+  "en": "Pain"
+ },
+ "reborn_card_45": {
+  "kind": "item",
+  "source": "Sasori",
+  "en": "Sasori"
+ },
+ "reborn_card_46": {
+  "kind": "item",
+  "source": "Zetsu",
+  "en": "Zetsu"
+ },
+ "reborn_card_47": {
+  "kind": "item",
+  "source": "Hinata",
+  "en": "Hinata"
+ },
+ "reborn_card_48": {
+  "kind": "item",
+  "source": "Kakashi",
+  "en": "Kakashi"
+ },
+ "reborn_card_49": {
+  "kind": "item",
+  "source": "Mangekyou Sharingan",
+  "en": "Mangekyou Sharingan"
+ },
+ "reborn_card_5": {
+  "kind": "item",
+  "source": "Mount Myobuku",
+  "en": "Mount Myobuku"
+ },
+ "reborn_card_50": {
+  "kind": "item",
+  "source": "Nagato",
+  "en": "Nagato"
+ },
+ "reborn_card_51": {
+  "kind": "item",
+  "source": "Neji",
+  "en": "Neji"
+ },
+ "reborn_card_52": {
+  "kind": "item",
+  "source": "Sasuke",
+  "en": "Sasuke"
+ },
+ "reborn_card_53": {
+  "kind": "item",
+  "source": "Hashirama",
+  "en": "Hashirama"
+ },
+ "reborn_card_54": {
+  "kind": "item",
+  "source": "Tobirama",
+  "en": "Tobirama"
+ },
+ "reborn_card_55": {
+  "kind": "item",
+  "source": "Sarutobi",
+  "en": "Sarutobi"
+ },
+ "reborn_card_56": {
+  "kind": "item",
+  "source": "Minato",
+  "en": "Minato"
+ },
+ "reborn_card_57": {
+  "kind": "item",
+  "source": "Tsunade",
+  "en": "Tsunade"
+ },
+ "reborn_card_58": {
+  "kind": "item",
+  "source": "Jiraya",
+  "en": "Jiraya"
+ },
+ "reborn_card_59": {
+  "kind": "item",
+  "source": "Madara",
+  "en": "Madara"
+ },
+ "reborn_card_6": {
+  "kind": "item",
+  "source": "Spirit Beast",
+  "en": "Spirit Beast"
+ },
+ "reborn_card_60": {
+  "kind": "item",
+  "source": "Danzo",
+  "en": "Danzo"
+ },
+ "reborn_card_61": {
+  "kind": "item",
+  "source": "Ranmaru",
+  "en": "Ranmaru"
+ },
+ "reborn_card_62": {
+  "kind": "item",
+  "source": "Kimimaro",
+  "en": "Kimimaro"
+ },
+ "reborn_card_63": {
+  "kind": "item",
+  "source": "Guren",
+  "en": "Guren"
+ },
+ "reborn_card_64": {
+  "kind": "item",
+  "source": "Rookie",
+  "en": "Rookie"
+ },
+ "reborn_card_65": {
+  "kind": "item",
+  "source": "Expert of Cards",
+  "en": "Expert of Cards"
+ },
+ "reborn_card_66": {
+  "kind": "item",
+  "source": "Master of Cards",
+  "en": "Master of Cards"
+ },
+ "reborn_card_67": {
+  "kind": "item",
+  "source": "Hidden Leaf Gate",
+  "en": "Hidden Leaf Gate"
+ },
+ "reborn_card_68": {
+  "kind": "item",
+  "source": "Master Jiraya",
+  "en": "Master Jiraya"
+ },
+ "reborn_card_69": {
+  "kind": "item",
+  "source": "Village Secret",
+  "en": "Village Secret"
+ },
+ "reborn_card_7": {
+  "kind": "item",
+  "source": "Konoha Eight",
+  "en": "Konoha Eight"
+ },
+ "reborn_card_70": {
+  "kind": "item",
+  "source": "Konoha's Future",
+  "en": "Konoha's Future"
+ },
+ "reborn_card_71": {
+  "kind": "item",
+  "source": "Palace Captain",
+  "en": "Palace Captain"
+ },
+ "reborn_card_72": {
+  "kind": "item",
+  "source": "Know Pain",
+  "en": "Know Pain"
+ },
+ "reborn_card_73": {
+  "kind": "item",
+  "source": "First Hokage",
+  "en": "First Hokage"
+ },
+ "reborn_card_74": {
+  "kind": "item",
+  "source": "Kamui",
+  "en": "Kamui"
+ },
+ "reborn_card_8": {
+  "kind": "item",
+  "source": "Akamaru",
+  "en": "Akamaru"
+ },
+ "reborn_card_9": {
+  "kind": "item",
+  "source": "Pakkun",
+  "en": "Pakkun"
+ },
+ "reborn_card_collection_1": {
+  "kind": "title",
+  "source": "Konoha Village",
+  "en": "Konoha Village"
+ },
+ "reborn_card_collection_10": {
+  "kind": "title",
+  "source": "Legendary Cards",
+  "en": "Legendary Cards"
+ },
+ "reborn_card_collection_2": {
+  "kind": "title",
+  "source": "Tiny Ninja",
+  "en": "Tiny Ninja"
+ },
+ "reborn_card_collection_3": {
+  "kind": "title",
+  "source": "Village",
+  "en": "Village"
+ },
+ "reborn_card_collection_4": {
+  "kind": "title",
+  "source": "Seretei Reapers",
+  "en": "Seretei Reapers"
+ },
+ "reborn_card_collection_5": {
+  "kind": "title",
+  "source": "Konoha Gennin",
+  "en": "Konoha Gennin"
+ },
+ "reborn_card_collection_6": {
+  "kind": "title",
+  "source": "Akatsuki",
+  "en": "Akatsuki"
+ },
+ "reborn_card_collection_7": {
+  "kind": "title",
+  "source": "Dojutsu",
+  "en": "Dojutsu"
+ },
+ "reborn_card_collection_8": {
+  "kind": "title",
+  "source": "Legendary Ninja",
+  "en": "Legendary Ninja"
+ },
+ "reborn_card_collection_9": {
+  "kind": "title",
+  "source": "The Lost Generation",
+  "en": "The Lost Generation"
  },
  "reborn_league_academy": {
   "kind": "title",

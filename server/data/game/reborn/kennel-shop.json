@@ -1,0 +1,47 @@
+{
+  "currency": "i150319",
+  "offers": [
+    {
+      "item": "i170114",
+      "price": 1,
+      "level": 8,
+      "dailyLimit": 20
+    },
+    {
+      "item": "i170120",
+      "price": 2,
+      "level": 23,
+      "dailyLimit": 20
+    },
+    {
+      "item": "i170117",
+      "price": 3,
+      "level": 8,
+      "dailyLimit": 20
+    },
+    {
+      "item": "i170116",
+      "price": 3,
+      "level": 8,
+      "dailyLimit": 20
+    },
+    {
+      "item": "i170124",
+      "price": 6,
+      "level": 23,
+      "dailyLimit": 20
+    },
+    {
+      "item": "i170123",
+      "price": 6,
+      "level": 23,
+      "dailyLimit": 20
+    },
+    {
+      "item": "i150406",
+      "price": 100,
+      "level": 1,
+      "dailyLimit": 1
+    }
+  ]
+}

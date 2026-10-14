@@ -15,11 +15,18 @@ import {
   npc,
   rankings,
   rebornBloodlines,
+  rebornCards,
   rebornEvents,
+  rebornKennelShop,
+  rebornPetFoods,
+  rebornPets,
+  rebornPetSkills,
   rebornNonfightBuffs,
   rebornScrollSkills,
   rebornSouls,
   rebornTalents,
+  rebornWingLines,
+  rebornWings,
   skill,
   subTasks,
   task,
@@ -190,7 +197,10 @@ describe('Reborn overlay (M5 task 1)', () => {
   })
 
   it('never reuses an original skill, fight buff, item or task id', () => {
-    const clash = (name: string, ids: string[]) => ids.filter((id) => id in base(name))
+    const clash = (name: string, ids: string[]) => {
+      const original = base(name)
+      return ids.filter((id) => id in original)
+    }
     expect(clash('skills', Object.keys(overlay('skills')))).toEqual([])
     expect(clash('fight-buffs', Object.keys(overlay('skills')))).toEqual([])
     expect(clash('items', Object.keys(overlay('items')))).toEqual([])
@@ -225,5 +235,64 @@ describe('Reborn overlay (M5 task 1)', () => {
       ...events.teamStone.leagues.flatMap((league) => (league.item ? [league.item] : [])),
     ]
     expect(ids.filter((id) => !item(id))).toEqual([])
+  })
+})
+
+describe('Reborn overlay (M6 task 2)', () => {
+  it('validates and counts every M6 file', () => {
+    expect(rebornPets()).toHaveLength(190)
+    expect(rebornPets().filter((pet) => pet.parent)).toHaveLength(74)
+    expect(rebornPetSkills().books).toHaveLength(50)
+    expect(rebornPetFoods().foods).toHaveLength(15)
+    const wings = rebornWings()
+    expect(wings.wings.length + wings.auras.length).toBe(26)
+    expect(Object.keys(rebornWingLines())).toHaveLength(18)
+    for (const levels of Object.values(rebornWingLines())) expect(levels).toHaveLength(31)
+    const cards = rebornCards()
+    expect(cards.boxes).toHaveLength(5)
+    expect(cards.collections).toHaveLength(10)
+    expect(cards.collections.flatMap((c) => c.cards)).toHaveLength(74)
+    expect(rebornKennelShop().offers).toHaveLength(7)
+  })
+
+  it('merges pets, wings, stones, talismans, boxes and books into item()', () => {
+    expect(item('i320002')).toMatchObject({ class: 'PetItem', CanUse: 1, PetNat: 2 })
+    expect(item('i218000')).toMatchObject({
+      class: 'EquipItem',
+      EquipType: 'Wing',
+      WingLine: 10000,
+    })
+    expect(item('i218207')).toMatchObject({ EquipType: 'Wing', BattleAura: 'eight_gates' })
+    expect(item('i218021')).toMatchObject({ class: 'WingStone', LevelJump: 1 })
+    expect(item('i218030')).toMatchObject({ TalismanFamily: 'integrity' })
+    expect(item('i218040')).toMatchObject({ TalismanFamily: 'safety' })
+    expect(item('i171005')).toMatchObject({ class: 'CardBox', CanUse: 1, CardRarity: 'GOLD' })
+    expect(itemNameKey('i218000')).toBe('lg_reborn_item_218000')
+    // 2011 rows stay: foods and the books Reborn did not change.
+    expect(item('i170114')).toMatchObject({ PetFeedType: 3, AddPetHunger: 5 })
+    expect(item('i180035')).toMatchObject({ AddPetSkillId: 50020 })
+  })
+
+  it('only points at items, skills and lines that exist', () => {
+    const skills = rebornPetSkills()
+    const omitted = new Set(skills.omitted.map((o) => o.skill))
+    for (const book of skills.books) {
+      expect(item(book.item)?.AddPetSkillId, book.item).toBe(book.skill)
+      if (!omitted.has(book.skill)) expect(skills.skills[String(book.skill)]).toBeDefined()
+    }
+    for (const pet of rebornPets()) {
+      expect(item(pet.item), pet.item).toBeDefined()
+      if (pet.parent) expect(item(pet.parent)).toBeDefined()
+    }
+    const ids = [
+      ...rebornPetFoods().foods.map((food) => food.item),
+      ...rebornKennelShop().offers.map((offer) => offer.item),
+      rebornKennelShop().currency,
+      ...rebornCards().boxes.map((box) => box.item),
+    ]
+    expect(ids.filter((id) => !item(id))).toEqual([])
+    const lines = rebornWingLines()
+    const { wings, auras } = rebornWings()
+    for (const wing of [...wings, ...auras]) expect(lines[String(wing.line)]).toBeDefined()
   })
 })

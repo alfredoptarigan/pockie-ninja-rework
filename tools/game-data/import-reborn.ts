@@ -4,12 +4,21 @@
 // serverConfig and the normalized captures; where Reborn's server rule is unknown the value is our
 // own design and cites its decision in .claude/plans/m5-reborn-update.plan.md. Only names are taken
 // from Reborn's locale, never its sentences.
+// M6 adds pets, wings, cards and the Kennel shop (import-reborn-m6.ts), which also read the 2011
+// pet ini files (GAME_BACKUP_DIR, default ~/Privates/game-pockieninja).
 // Run with `pnpm game-data:reborn [rawDir]` (default REBORN_RAW_DIR or <repo>/data/reborn-raw).
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
+import { parseIni } from './ini.ts'
+import { buildM6, type M6Inputs } from './import-reborn-m6.ts'
 
 const root = resolve(import.meta.dirname, '../..')
 export const defaultRawDir = process.env.REBORN_RAW_DIR ?? join(root, 'data/reborn-raw')
+export const defaultPetIniDir = join(
+  process.env.GAME_BACKUP_DIR ?? join(homedir(), 'Privates/game-pockieninja'),
+  'app/code/props/serv/game/Resource/pet',
+)
 
 /**
  * Reborn stat id -> our `Bonuses` field (decision 11), with the factor into our units. Attributes
@@ -18,6 +27,7 @@ export const defaultRawDir = process.env.REBORN_RAW_DIR ?? join(root, 'data/rebo
  * 18 is labelled "Defense Improvement %" in Reborn's locale, but the server gives it to the Guard
  * soul, the client panel shows that soul as block, and its values follow the Dodge ladder, so it is
  * the Block rating (`parry`), not `defenseMul` (task 1 check of decision 11).
+ * 21, 23 and 24 are the wing ids of M6 decision 23 (Counter, Vampiric HP, Damage Reduction).
  */
 export const STAT_FIELDS: Record<number, { field: string; scale: number }> = {
   1: { field: 'strength', scale: 100 },
@@ -39,6 +49,9 @@ export const STAT_FIELDS: Record<number, { field: string; scale: number }> = {
   18: { field: 'parry', scale: 1 },
   19: { field: 'pierce', scale: 1 },
   20: { field: 'minAttack', scale: 1 },
+  21: { field: 'counter', scale: 1 },
+  23: { field: 'vampiricHp', scale: 1 },
+  24: { field: 'decDamage', scale: 1 },
   ...Object.fromEntries(
     Array.from({ length: 10 }, (_, n) => [31 + n, { field: `skillAdd${n}`, scale: 1 }]),
   ),
@@ -79,6 +92,8 @@ type ServerConfig = {
     >
     Souls: Record<string, { stat: number; levels: number[] }>
   }
+  petFamilies: Record<string, number>
+  WING: { Line: Record<string, [number, number][][]> }
 }
 type ScrollSkill = {
   id: number
@@ -116,16 +131,47 @@ export interface RawInputs {
   items: Record<string, JsonItem>
   skills: { scrollSkills: { skills: ScrollSkill[] } }
   events: Events
+  mainJs: string
+  petArt: number[]
+  pet2011: M6Inputs['pet2011']
+  original: M6Inputs['original']
 }
 
-export function readRaw(dir: string): RawInputs {
+const PET_INI = [
+  'NewPetCfg',
+  'PetActCapital',
+  'PetCfg',
+  'PetFeedLib',
+  'PetGrow',
+  'PetSkillCnt',
+  'PetSkillDepot',
+  'PetSkillLib',
+  'PetSkillSrc',
+  'PetSrcPro',
+]
+
+export function readRaw(dir: string, petIniDir = defaultPetIniDir): RawInputs {
   const read = <T>(path: string) => JSON.parse(readFileSync(join(dir, path), 'utf8')) as T
+  const game = <T>(name: string) =>
+    JSON.parse(readFileSync(join(root, `server/data/game/${name}.json`), 'utf8')) as T
+  const petDir = join(dir, 'assets/entities/pets')
   return {
     serverConfig: read('re/serverConfig.json'),
     locale: read('locales_en_translation.json'),
     items: read('json_items.json'),
     skills: read('re/normalized/skills.json'),
     events: read('re/normalized/events.json'),
+    mainJs: readFileSync(join(dir, 're/main.js'), 'utf8'),
+    petArt: readdirSync(petDir)
+      .filter((avatar) => existsSync(join(petDir, avatar, 'data.json')))
+      .map(Number),
+    pet2011: Object.fromEntries(
+      PET_INI.map((name) => [
+        name,
+        parseIni(readFileSync(join(petIniDir, `${name}.ini`), 'latin1')),
+      ]),
+    ),
+    original: { items: game('items'), skills: game('skills'), skillAdds: game('skill-adds') },
   }
 }
 
@@ -560,6 +606,20 @@ export function buildReborn(raw: RawInputs) {
   const dice = buildDiceBuffs(raw.events)
   const sevenDay = Object.keys(items).filter((id) => id.startsWith('i5400'))
   const events = buildEvents(raw.events, sevenDay, dice.durations)
+  const m6 = buildM6(
+    {
+      items: raw.items,
+      petFamilies: raw.serverConfig.petFamilies,
+      wingLines: raw.serverConfig.WING.Line,
+      mainJs: raw.mainJs,
+      petArt: raw.petArt,
+      pet2011: raw.pet2011,
+      original: raw.original,
+    },
+    raw.locale,
+    label,
+    mapStat,
+  )
   const names = buildNames(
     raw,
     {
@@ -571,7 +631,7 @@ export function buildReborn(raw: RawInputs) {
       events,
     },
     label,
-  )
+  ).concat(m6.names)
   return {
     files: {
       talents,
@@ -579,13 +639,43 @@ export function buildReborn(raw: RawInputs) {
       souls,
       skills: scroll.rows,
       'scroll-skills': scroll.info,
-      items,
+      items: { ...items, ...m6.items },
       'nonfight-buffs': dice.buffs,
       events,
+      ...m6.files,
     } as Record<string, unknown>,
     names: Object.fromEntries(names.map(({ key, name }) => [key, name])),
+    /** Names the M6 import owns; the CLI always writes these. */
+    m6Names: new Set(m6.names.map(({ key }) => key)),
     glossary: names,
   }
+}
+
+/**
+ * M5 outputs were reviewed by hand after their import (name typos, wording, quest texts), and the
+ * raw capture was re-fetched for M6 since, so the CLI keeps them: it writes the M6 files and
+ * items.json, adds missing names and overwrites only the M6 ones.
+ */
+export const M5_REVIEWED = new Set([
+  'talents',
+  'bloodlines',
+  'souls',
+  'skills',
+  'scroll-skills',
+  'nonfight-buffs',
+  'events',
+])
+
+export function mergeNames<T>(
+  existing: Record<string, T>,
+  generated: Record<string, T>,
+  owned: Set<string>,
+): Record<string, T> {
+  const merged = { ...existing }
+  for (const [key, value] of Object.entries(generated)) {
+    if (owned.has(key) || !(key in merged)) merged[key] = value
+  }
+  return merged
 }
 
 const pretty = (data: unknown, indent = 2) => `${JSON.stringify(data, null, indent)}\n`
@@ -594,15 +684,24 @@ const sortKeys = <T>(record: Record<string, T>) =>
 
 if (import.meta.main) {
   const rawDir = resolve(process.argv[2] ?? defaultRawDir)
-  const { files, names, glossary } = buildReborn(readRaw(rawDir))
+  const { files, names, m6Names, glossary } = buildReborn(readRaw(rawDir))
   for (const [name, data] of Object.entries(files)) {
+    if (M5_REVIEWED.has(name)) continue
     writeFileSync(join(root, `server/data/game/reborn/${name}.json`), pretty(data))
     console.log(`reborn/${name}.json`)
   }
-  writeFileSync(join(root, 'client/src/i18n/reborn.json'), pretty(sortKeys(names)))
+  const readJson = (file: string) =>
+    JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>
+  const namesFile = join(root, 'client/src/i18n/reborn.json')
+  const mergedNames = mergeNames(readJson(namesFile), names, m6Names)
+  writeFileSync(namesFile, pretty(mergedNames))
   const glossaryFile = join(root, 'tools/i18n/glossary.json')
-  const merged = JSON.parse(readFileSync(glossaryFile, 'utf8')) as Record<string, unknown>
-  for (const { key, kind, name } of glossary) merged[key] = { kind, source: name, en: name }
-  writeFileSync(glossaryFile, pretty(sortKeys(merged), 1))
-  console.log(`${Object.keys(names).length} names`)
+  const entries = Object.fromEntries(
+    glossary.map(({ key, kind, name }) => [key, { kind, source: name, en: name }]),
+  )
+  writeFileSync(
+    glossaryFile,
+    pretty(sortKeys(mergeNames(readJson(glossaryFile), entries, m6Names)), 1),
+  )
+  console.log(`${Object.keys(mergedNames).length} names`)
 }

@@ -1,7 +1,17 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { buildReborn, defaultRawDir, mapStat, readRaw, STAT_FIELDS } from './import-reborn.ts'
+import { passRowFromTooltip } from './import-reborn-m6.ts'
+import {
+  buildReborn,
+  defaultPetIniDir,
+  defaultRawDir,
+  M5_REVIEWED,
+  mapStat,
+  mergeNames,
+  readRaw,
+  STAT_FIELDS,
+} from './import-reborn.ts'
 
 const root = resolve(import.meta.dirname, '../..')
 const json = <T>(path: string): T => JSON.parse(readFileSync(join(root, path), 'utf8')) as T
@@ -93,14 +103,16 @@ describe('generated overlay (server/data/game/reborn)', () => {
       1831, 1833, 1834, 1835, 1836, 18041, 18042, 18043, 18044, 18045, 18046, 18091,
     ])
     const items =
-      reborn<Record<string, { CanUse: number; AddSkillId: number; Name: string }>>('items')
-    expect(Object.keys(items)).toHaveLength(24)
+      reborn<Record<string, { CanUse: number; AddSkillId: number; Name: string; class: string }>>(
+        'items',
+      )
+    const scrolls = Object.entries(items).filter(([, row]) => row.class === 'SkillScrollItem')
+    expect(scrolls).toHaveLength(24)
     expect(items.i540001).toMatchObject({ CanUse: 1, AddSkillId: 1831, ScrollDays: 7 })
     expect(items.i540101).toMatchObject({ CanUse: 1, AddSkillId: 1831, ScrollDays: 0 })
-    for (const [id, row] of Object.entries(items)) {
+    for (const [id, row] of Object.entries(items))
       expect(row.Name).toBe(`reborn_item_${id.slice(1)}`)
-      expect(skills[String(row.AddSkillId)]).toBeDefined()
-    }
+    for (const [, row] of scrolls) expect(skills[String(row.AddSkillId)]).toBeDefined()
   })
 
   it('has the four Dice of Fate buffs', () => {
@@ -127,6 +139,271 @@ describe('generated overlay (server/data/game/reborn)', () => {
     expect(Object.values(names).filter((name) => /\p{Extended_Pictographic}/u.test(name))).toEqual(
       [],
     )
+  })
+})
+
+type Pet = {
+  item: string
+  nameKey: string
+  avatar: number
+  artAvatar: number | null
+  nature: number
+  food: number
+  parent: string | null
+  link: string | null
+  growth: number
+  base: Record<string, number>
+  foodMul: number[]
+  skillWeights: Record<string, number>
+  pool: Record<'halo' | 'help' | 'pass', number[]>
+  depot: { skill: number; mul: number }[]
+}
+type PetSkills = {
+  skills: Record<string, { kind: number; source: string; skillAdd: Record<string, number> | null }>
+  omitted: { skill: number }[]
+  books: { item: string; rebornItem: string; skill: number; kind: number; reuse: boolean }[]
+}
+type Wings = {
+  wings: { item: string; line: number; bonus: number; wingSprite: string }[]
+  auras: { item: string; line: number; battleAura: string }[]
+  stones: { item: string; levelJump: number }[]
+  talismans: { item: string; family: string; value: number }[]
+}
+type Cards = {
+  boxes: { item: string; rarity: string }[]
+  collections: {
+    id: number
+    nameKey: string
+    rarity: string
+    box: string
+    cards: { id: number; nameKey: string; name: string }[]
+  }[]
+}
+
+describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
+  const pets = reborn<Pet[]>('pets')
+  const petSkills = reborn<PetSkills>('pet-skills')
+
+  it('has 190 species and 74 families whose parents are species', () => {
+    expect(pets).toHaveLength(190)
+    expect(pets.at(-1)).toMatchObject({ item: 'i340710', nature: 5 })
+    const items = new Set(pets.map((p) => p.item))
+    const evolved = pets.filter((p) => p.parent)
+    expect(evolved).toHaveLength(74)
+    for (const pet of evolved) expect(items.has(pet.parent!)).toBe(true)
+  })
+
+  it('links Reborn 3200NN to 2011 i2830NN with the 2011 growth (decision 9)', () => {
+    const byItem = new Map(pets.map((p) => [p.item, p]))
+    expect(byItem.get('i320002')).toMatchObject({ link: 'i283002', growth: 120 })
+    expect(byItem.get('i320030')).toMatchObject({ link: 'i283030', growth: 160 })
+    expect(byItem.get('i320015')!.pool.halo).toEqual([
+      40062, 40082, 40083, 40084, 40106, 40108, 40110, 40113,
+    ])
+    expect(pets.filter((p) => p.link)).toHaveLength(26)
+  })
+
+  it('resolves all 11 explore pet bonuses (PetBonusAppend) to a Reborn species', () => {
+    const spots = json<Record<string, { PetBonusAppend?: string }>>(
+      'server/data/game/explore-spots.json',
+    )
+    const bonuses = new Set(Object.values(spots).flatMap((s) => s.PetBonusAppend ?? []))
+    expect(bonuses.size).toBe(11)
+    const linked = new Set(pets.map((p) => p.link))
+    expect([...bonuses].filter((id) => !linked.has(id))).toEqual([])
+  })
+
+  it('gives unlinked species our growth by nature, +20 when evolved', () => {
+    const unlinked = pets.filter((p) => !p.link)
+    const expected: Record<number, number> = { 1: 100, 2: 100, 3: 100, 4: 120, 5: 150, 6: 120 }
+    for (const pet of unlinked) {
+      expect(pet.growth, pet.item).toBe(expected[pet.nature]! + (pet.parent ? 20 : 0))
+    }
+  })
+
+  it('pools only skills of the matching kind, and every species can learn each kind', () => {
+    const kinds = { halo: 1, help: 2, pass: 3 } as const
+    for (const pet of pets) {
+      for (const [kind, ids] of Object.entries(pet.pool)) {
+        expect(ids.length, `${pet.item} ${kind}`).toBeGreaterThan(0)
+        for (const id of ids) {
+          expect(petSkills.skills[String(id)]?.kind, `${pet.item} ${id}`).toBe(
+            kinds[kind as keyof typeof kinds],
+          )
+        }
+      }
+      expect(pet.foodMul).toHaveLength(6)
+      expect(Object.keys(pet.base)).toEqual(['attack', 'defence', 'disturb', 'active', 'savvy'])
+    }
+  })
+
+  it('records the art to use: own, else the family base, else the icon only (answer 5)', () => {
+    const art = pets.filter((p) => p.artAvatar === p.avatar)
+    expect(art).toHaveLength(156)
+    for (const pet of pets.filter((p) => p.artAvatar !== p.avatar)) {
+      const parent = pets.find((p) => p.item === pet.parent)
+      expect(pet.artAvatar).toBe(
+        parent && parent.artAvatar === parent.avatar ? parent.avatar : null,
+      )
+    }
+  })
+
+  it('has every ispet skill, Reborn-only Pass rows and 50 books (decisions 14, 16)', () => {
+    const rows = Object.entries(petSkills.skills)
+    expect(rows.filter(([, r]) => r.source === '2011')).toHaveLength(148)
+    const reborn = rows.filter(([, r]) => r.source === 'reborn')
+    expect(reborn.length + petSkills.omitted.length).toBe(31)
+    expect(petSkills.skills['50056']).toMatchObject({ kind: 3, skillAdd: { PierceSkill: 130 } })
+    expect(petSkills.skills['50060']).toMatchObject({ skillAdd: { MaxHPMulSKill: 200 } })
+    expect(petSkills.skills['50086']).toMatchObject({ skillAdd: { StrengthSkill: 28500 } })
+    expect(petSkills.books).toHaveLength(50)
+    const omitted = new Set(petSkills.omitted.map((o) => o.skill))
+    for (const book of petSkills.books) {
+      const row = petSkills.skills[String(book.skill)]
+      if (!omitted.has(book.skill)) expect(row?.kind, book.item).toBe(book.kind)
+    }
+  })
+
+  it('has the 15 foods and the 2011 pet tables (decisions 10, 13, 14)', () => {
+    const foods = reborn<{
+      foods: { item: string; hunger: number; type: number }[]
+      exp: number[]
+      maxLevel: number
+      typeWeights: number[]
+      mulWeights: number[]
+      grow: Record<string, number | string>
+      skillCount: number[]
+      slotCost: number[]
+    }>('pet-foods')
+    expect(foods.foods).toHaveLength(15)
+    expect(foods.maxLevel).toBe(50)
+    expect(foods.exp).toHaveLength(50)
+    expect(foods.exp.slice(0, 3)).toEqual([5, 11, 25])
+    expect(foods.typeWeights).toEqual([100, 100, 100, 100, 100, 100, 100])
+    expect(foods.mulWeights).toEqual([90, 5, 3, 2])
+    expect(foods.grow).toMatchObject({
+      HungerMax: 7200,
+      PetDigestTime: 7200,
+      PetLockItem: 'i150406',
+    })
+    expect(foods.skillCount).toHaveLength(36)
+    expect(foods.slotCost[7]).toBe(26000)
+  })
+})
+
+describe('M6 overlay: wings, cards, Kennel shop, items (task 2)', () => {
+  const wings = reborn<Wings>('wings')
+  const items = reborn<Record<string, Record<string, number | string>>>('items')
+
+  it('has 26 wing and aura items in the Wing slot and 18 lines x 31 levels', () => {
+    expect(wings.wings.length + wings.auras.length).toBe(26)
+    for (const { item } of [...wings.wings, ...wings.auras]) {
+      expect(items[item]).toMatchObject({ EquipType: 'Wing', class: 'EquipItem' })
+    }
+    const lines =
+      reborn<Record<string, { stat: number; field: string; value: number }[][]>>('wing-lines')
+    expect(Object.keys(lines)).toHaveLength(18)
+    for (const levels of Object.values(lines)) expect(levels).toHaveLength(31)
+    for (const wing of [...wings.wings, ...wings.auras]) expect(lines[wing.line]).toBeDefined()
+    expect(lines['10000']![0]).toEqual([
+      { stat: 8, field: 'hp', value: 80 },
+      { stat: 7, field: 'hit', value: 42 },
+      { stat: 5, field: 'neglectDefense', value: 46 },
+      { stat: 24, field: 'decDamage', value: 1.2 },
+    ])
+  })
+
+  it('maps every WING stat id (decision 23)', () => {
+    for (const id of [8, 15, 21, 23, 24]) expect(STAT_FIELDS[id]).toBeDefined()
+    expect(STAT_FIELDS[21]!.field).toBe('counter')
+    expect(STAT_FIELDS[23]!.field).toBe('vampiricHp')
+  })
+
+  it('has stones and talismans named by the locale (answer 2)', () => {
+    expect(wings.stones.map((s) => s.levelJump)).toEqual([1, 1, 3, 4])
+    const family = (item: string) => wings.talismans.find((t) => t.item === item)?.family
+    expect(family('i218030')).toBe('integrity')
+    expect(family('i218040')).toBe('safety')
+    expect(family('i218050')).toBe('luck')
+    expect(wings.talismans).toHaveLength(15)
+  })
+
+  it('has 74 cards in 10 collections and 5 boxes', () => {
+    const cards = reborn<Cards>('cards')
+    expect(cards.boxes.map((b) => b.rarity)).toEqual(['GREEN', 'BLUE', 'PURPLE', 'RED', 'GOLD'])
+    expect(cards.collections).toHaveLength(10)
+    const all = cards.collections.flatMap((c) => c.cards)
+    expect(all.map((c) => c.id)).toEqual(Array.from({ length: 74 }, (_, i) => i + 1))
+    expect(cards.collections[0]!.cards[0]!.name).toBe('Hidden Land')
+    for (const c of cards.collections) expect(items[c.box]).toMatchObject({ class: 'CardBox' })
+  })
+
+  it('sells the decision 21 items for Feathers', () => {
+    const shop = reborn<{
+      currency: string
+      offers: { item: string; price: number; level: number }[]
+    }>('kennel-shop')
+    expect(shop.currency).toBe('i150319')
+    expect(shop.offers.map((o) => o.price)).toEqual([1, 2, 3, 3, 6, 6, 100])
+    expect(shop.offers.map((o) => o.level)).toEqual([8, 23, 8, 8, 23, 23, 1])
+  })
+
+  it('never reuses a 2011 item, skill or fight buff id', () => {
+    const original = (name: string) =>
+      json<Record<string, unknown>>(`server/data/game/${name}.json`)
+    const originalItems = original('items')
+    expect(Object.keys(items).filter((id) => id in originalItems)).toEqual([])
+    const rebornSkills = Object.entries(reborn<PetSkills>('pet-skills').skills)
+      .filter(([, row]) => row.source === 'reborn')
+      .map(([id]) => id)
+    for (const name of ['skills', 'skill-adds', 'fight-buffs']) {
+      const ids = original(name)
+      expect(
+        rebornSkills.filter((id) => id in ids),
+        name,
+      ).toEqual([])
+    }
+  })
+
+  it('names every new item, Reborn pet skill, card and collection', () => {
+    const names = json<Record<string, string>>('client/src/i18n/reborn.json')
+    const cards = reborn<
+      Cards & { collections: { nameKey: string; cards: { nameKey: string }[] }[] }
+    >('cards')
+    const keys = [
+      ...Object.values(items).map((row) => `lg_${row.Name}`),
+      ...Object.entries(reborn<PetSkills>('pet-skills').skills)
+        .filter(([, row]) => row.source === 'reborn')
+        .map(([id]) => `lg_Skill_${id}`),
+      ...cards.collections.flatMap((c) => [c.nameKey, ...c.cards.map((card) => card.nameKey)]),
+    ]
+    expect(keys.filter((key) => !names[key])).toEqual([])
+    expect(Object.values(names).filter((name) => name.includes('[['))).toEqual([])
+  })
+})
+
+describe('mergeNames', () => {
+  it('keeps reviewed names, adds missing ones and overwrites only owned keys', () => {
+    const merged = mergeNames(
+      { a: 'Reviewed', b: 'Old M6', q: 'Quest' },
+      { a: 'Raw', b: 'New M6', c: 'Added' },
+      new Set(['b']),
+    )
+    expect(merged).toEqual({ a: 'Reviewed', b: 'New M6', c: 'Added', q: 'Quest' })
+  })
+})
+
+describe('passRowFromTooltip (decision 16)', () => {
+  it('reads flat, percent and attribute values', () => {
+    expect(passRowFromTooltip(['x: Increase block bypass by 130.'])).toEqual({ PierceSkill: 130 })
+    expect(passRowFromTooltip(['x: Increase max health by 13.5%.'])).toEqual({ MaxHPMulSKill: 135 })
+    expect(passRowFromTooltip(['x: Increase strength by 285.'])).toEqual({ StrengthSkill: 28500 })
+    expect(passRowFromTooltip(['x: Increase max attack by 33.6.'])).toEqual({ MaxAtkSkill: 33 })
+  })
+
+  it('returns null without a value and fails on an unknown stat', () => {
+    expect(passRowFromTooltip(['x: Increase speed by @1@%.'])).toBeNull()
+    expect(() => passRowFromTooltip(['x: Increase luck by 3.'])).toThrow(/Unknown Reborn pet skill/)
   })
 })
 
@@ -163,27 +440,31 @@ describe('stat id check against our element trees (task 1)', () => {
   })
 })
 
-describe.skipIf(!existsSync(defaultRawDir))('buildReborn on the local raw data', () => {
-  it('reproduces the committed overlay', () => {
-    const out = buildReborn(readRaw(defaultRawDir))
-    for (const [name, data] of Object.entries(out.files)) {
-      expect(data, name).toEqual(reborn(name))
-    }
-    expect(out.names).toEqual(json('client/src/i18n/reborn.json'))
-  })
+describe.skipIf(!existsSync(defaultRawDir) || !existsSync(defaultPetIniDir))(
+  'buildReborn on the local raw data',
+  () => {
+    it('reproduces the committed overlay (M5 files are reviewed and kept)', () => {
+      const out = buildReborn(readRaw(defaultRawDir))
+      for (const [name, data] of Object.entries(out.files)) {
+        if (!M5_REVIEWED.has(name)) expect(data, name).toEqual(reborn(name))
+      }
+      const names = json<Record<string, string>>('client/src/i18n/reborn.json')
+      for (const key of out.m6Names) expect(names[key], key).toBe(out.names[key])
+    })
 
-  it('rejects a limit with an unknown bonus id', () => {
-    const raw = readRaw(defaultRawDir)
-    const limits = structuredClone(raw.serverConfig.bloodline.Limits)
-    limits['1']!.bonus[0] = [77, 5]
-    expect(() =>
-      buildReborn({
-        ...raw,
-        serverConfig: {
-          ...raw.serverConfig,
-          bloodline: { ...raw.serverConfig.bloodline, Limits: limits },
-        },
-      }),
-    ).toThrow(/Unknown Reborn stat id 77/)
-  })
-})
+    it('rejects a limit with an unknown bonus id', () => {
+      const raw = readRaw(defaultRawDir)
+      const limits = structuredClone(raw.serverConfig.bloodline.Limits)
+      limits['1']!.bonus[0] = [77, 5]
+      expect(() =>
+        buildReborn({
+          ...raw,
+          serverConfig: {
+            ...raw.serverConfig,
+            bloodline: { ...raw.serverConfig.bloodline, Limits: limits },
+          },
+        }),
+      ).toThrow(/Unknown Reborn stat id 77/)
+    })
+  },
+)

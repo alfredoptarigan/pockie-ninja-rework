@@ -1,0 +1,283 @@
+{
+  "wings": [
+    {
+      "item": "i218000",
+      "icon": "reborn/wings/wing1",
+      "line": 10000,
+      "bonus": 0,
+      "wingSprite": "wing_duotian_3"
+    },
+    {
+      "item": "i218001",
+      "icon": "reborn/wings/wing2",
+      "line": 10001,
+      "bonus": 0,
+      "wingSprite": "wing_huanmeng_3"
+    },
+    {
+      "item": "i218002",
+      "icon": "reborn/wings/wing3",
+      "line": 10002,
+      "bonus": 0,
+      "wingSprite": "wing_shenpan_3"
+    },
+    {
+      "item": "i218003",
+      "icon": "reborn/wings/wing4",
+      "line": 10003,
+      "bonus": 0,
+      "wingSprite": "wing_xueying_3"
+    },
+    {
+      "item": "i218004",
+      "icon": "reborn/wings/wing5",
+      "line": 10004,
+      "bonus": 0,
+      "wingSprite": "wing_youan_3"
+    },
+    {
+      "item": "i218005",
+      "icon": "reborn/wings/wing6",
+      "line": 10005,
+      "bonus": 0,
+      "wingSprite": "wing_zhushen_3"
+    },
+    {
+      "item": "i218006",
+      "icon": "reborn/wings/wing7",
+      "line": 10006,
+      "bonus": 0,
+      "wingSprite": "wing_fenix_3"
+    },
+    {
+      "item": "i218007",
+      "icon": "reborn/wings/wing9",
+      "line": 10007,
+      "bonus": 0,
+      "wingSprite": "wing_elements_3"
+    },
+    {
+      "item": "i218008",
+      "icon": "reborn/wings/wing8",
+      "line": 10008,
+      "bonus": 0,
+      "wingSprite": "wing_crimson_3"
+    },
+    {
+      "item": "i218009",
+      "icon": "reborn/wings/Icon_WingAbbad_01",
+      "line": 10010,
+      "bonus": 0,
+      "wingSprite": "wing_Abbad_1"
+    },
+    {
+      "item": "i218010",
+      "icon": "reborn/wings/Icon_WingAndras_01",
+      "line": 10011,
+      "bonus": 0,
+      "wingSprite": "wing_Andras_1"
+    },
+    {
+      "item": "i218011",
+      "icon": "reborn/wings/Icon_WingMamon_01",
+      "line": 10012,
+      "bonus": 0,
+      "wingSprite": "wing_Mamon_1"
+    },
+    {
+      "item": "i218012",
+      "icon": "reborn/wings/Icon_WingLilit_01",
+      "line": 10013,
+      "bonus": 0,
+      "wingSprite": "wing_Lilit_1"
+    },
+    {
+      "item": "i218013",
+      "icon": "reborn/wings/Icon_WingVaalb_01",
+      "line": 10014,
+      "bonus": 0,
+      "wingSprite": "wing_Vaalb_1"
+    },
+    {
+      "item": "i218014",
+      "icon": "reborn/wings/Icon_WingVerin_01",
+      "line": 10015,
+      "bonus": 0,
+      "wingSprite": "wing_Verin_1"
+    },
+    {
+      "item": "i218015",
+      "icon": "reborn/wings/Icon_WingNew25_02",
+      "line": 10016,
+      "bonus": 0,
+      "wingSprite": "wing_fire_7"
+    },
+    {
+      "item": "i218017",
+      "icon": "reborn/wings/Icon_WhiteWing_01",
+      "line": 10018,
+      "bonus": 0,
+      "wingSprite": "white_wing_1"
+    },
+    {
+      "item": "i218018",
+      "icon": "reborn/wings/Icon_RedWing_01",
+      "line": 10019,
+      "bonus": 0,
+      "wingSprite": "red_wing_1"
+    }
+  ],
+  "auras": [
+    {
+      "item": "i218200",
+      "icon": "reborn/wings/aura2_ki_lightning",
+      "line": 10000,
+      "bonus": 0,
+      "battleAura": "ki_lightning"
+    },
+    {
+      "item": "i218201",
+      "icon": "reborn/wings/aura2_lightning_armor",
+      "line": 10007,
+      "bonus": 0,
+      "battleAura": "lightning_armor"
+    },
+    {
+      "item": "i218202",
+      "icon": "reborn/wings/aura2_chakra_flame_crimson",
+      "line": 10011,
+      "bonus": 0,
+      "battleAura": "chakra_flame_crimson"
+    },
+    {
+      "item": "i218203",
+      "icon": "reborn/wings/aura2_chakra_flame_azure",
+      "line": 10013,
+      "bonus": 0,
+      "battleAura": "chakra_flame_azure"
+    },
+    {
+      "item": "i218204",
+      "icon": "reborn/wings/aura2_chakra_flame_violet",
+      "line": 10012,
+      "bonus": 0,
+      "battleAura": "chakra_flame_violet"
+    },
+    {
+      "item": "i218205",
+      "icon": "reborn/wings/aura2_chakra_flame_black",
+      "line": 10010,
+      "bonus": 0,
+      "battleAura": "chakra_flame_black"
+    },
+    {
+      "item": "i218206",
+      "icon": "reborn/wings/aura2_tailed_beast",
+      "line": 10016,
+      "bonus": 0,
+      "battleAura": "tailed_beast"
+    },
+    {
+      "item": "i218207",
+      "icon": "reborn/wings/aura2_eight_gates",
+      "line": 10019,
+      "bonus": 0,
+      "battleAura": "eight_gates"
+    }
+  ],
+  "stones": [
+    {
+      "item": "i218020",
+      "levelJump": 1
+    },
+    {
+      "item": "i218021",
+      "levelJump": 1
+    },
+    {
+      "item": "i218022",
+      "levelJump": 3
+    },
+    {
+      "item": "i218023",
+      "levelJump": 4
+    }
+  ],
+  "talismans": [
+    {
+      "item": "i218030",
+      "family": "integrity",
+      "value": 9
+    },
+    {
+      "item": "i218031",
+      "family": "integrity",
+      "value": 25
+    },
+    {
+      "item": "i218032",
+      "family": "integrity",
+      "value": 50
+    },
+    {
+      "item": "i218033",
+      "family": "integrity",
+      "value": 75
+    },
+    {
+      "item": "i218034",
+      "family": "integrity",
+      "value": 100
+    },
+    {
+      "item": "i218040",
+      "family": "safety",
+      "value": 15
+    },
+    {
+      "item": "i218041",
+      "family": "safety",
+      "value": 25
+    },
+    {
+      "item": "i218042",
+      "family": "safety",
+      "value": 50
+    },
+    {
+      "item": "i218043",
+      "family": "safety",
+      "value": 75
+    },
+    {
+      "item": "i218044",
+      "family": "safety",
+      "value": 100
+    },
+    {
+      "item": "i218050",
+      "family": "luck",
+      "value": 12
+    },
+    {
+      "item": "i218051",
+      "family": "luck",
+      "value": 25
+    },
+    {
+      "item": "i218052",
+      "family": "luck",
+      "value": 50
+    },
+    {
+      "item": "i218053",
+      "family": "luck",
+      "value": 75
+    },
+    {
+      "item": "i218054",
+      "family": "luck",
+      "value": 100
+    }
+  ]
+}

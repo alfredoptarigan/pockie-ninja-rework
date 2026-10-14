@@ -483,6 +483,40 @@ const BONUS_FIELDS = [
 ] as const satisfies readonly (keyof Bonuses)[]
 const bonusField = z.enum(BONUS_FIELDS)
 
+const rebornName = z.string().regex(/^reborn_item_\d+$/)
+const overlayRow = <T extends z.ZodRawShape>(shape: T) =>
+  z.object({ Name: rebornName, ...shape }).catchall(rowValue)
+/** Reborn item rows in item.ini shape: M5 scrolls, M6 pets, wings, enhancement items, boxes, books. */
+const overlayItem = z.discriminatedUnion('class', [
+  overlayRow({
+    class: z.literal('SkillScrollItem'),
+    CanUse: z.literal(1),
+    AddSkillId: int,
+    /** M5 decision 18: 7-day scroll, 0 = permanent. */
+    ScrollDays: z.union([z.literal(0), z.literal(7)]),
+  }),
+  overlayRow({
+    class: z.literal('PetItem'),
+    CanUse: z.literal(1),
+    PetNat: int.min(1).max(6),
+    PetFeedType: int.min(1).max(7),
+  }),
+  /** M6 decision 22: wings and auras share the Wing slot. */
+  overlayRow({ class: z.literal('EquipItem'), EquipType: z.literal('Wing'), WingLine: int }),
+  overlayRow({ class: z.literal('WingStone'), LevelJump: int.positive() }),
+  overlayRow({
+    class: z.literal('WingTalisman'),
+    TalismanFamily: z.enum(['luck', 'safety', 'integrity']),
+    TalismanValue: int.positive(),
+  }),
+  overlayRow({
+    class: z.literal('CardBox'),
+    CanUse: z.literal(1),
+    CardRarity: z.enum(['GREEN', 'BLUE', 'PURPLE', 'RED', 'GOLD']),
+  }),
+  overlayRow({ class: z.literal('SkillBook'), AddPetSkillId: int, RebornItem: itemId }),
+])
+
 /** Overlays merged into the original lookups; their ids must not exist in the original files. */
 const REBORN_OVERLAYS = {
   skills: z.record(
@@ -503,19 +537,7 @@ const REBORN_OVERLAYS = {
       })
       .strict(),
   ),
-  items: z.record(
-    itemId,
-    z
-      .object({
-        Name: z.string().regex(/^reborn_item_\d+$/),
-        CanUse: z.literal(1),
-        AddSkillId: int,
-        /** Decision 18: 7-day scroll, 0 = permanent. */
-        ScrollDays: z.union([z.literal(0), z.literal(7)]),
-        class: z.literal('SkillScrollItem'),
-      })
-      .catchall(rowValue),
-  ),
+  items: z.record(itemId, overlayItem),
   tasks: z.record(z.string(), rowSchema),
   'sub-tasks': z.record(z.string(), z.array(rowSchema)),
   'task-monster-drops': z.record(z.string(), z.array(rowSchema)),
@@ -726,3 +748,152 @@ const eventsSchema = z.object({
 export type RebornEvents = z.infer<typeof eventsSchema>
 /** Daily Login, Weekly Rewards, Dice of Fate, Twenty-Minute Reward, Tailed Beast, Team Stone. */
 export const rebornEvents = () => loadChecked('reborn/events', eventsSchema)
+
+// --- M6: pets, wings, cards, Kennel shop (m6-companions.plan.md task 2) ---
+
+const kindRecord = <T extends z.ZodType>(value: T) =>
+  z.object({ halo: value, help: value, pass: value })
+const petSchema = z.object({
+  item: itemId,
+  nameKey: z.string(),
+  avatar: int,
+  /** Battle art avatar: own, else the family base pet's, else null = icon only (answer 5). */
+  artAvatar: int.nullable(),
+  icon: z.string(),
+  /** 1 Plant, 2 Beast, 3 Artificial, 4 Dragon, 5 Tailed Beast, 6 Spirits. */
+  nature: int.min(1).max(6),
+  /** Food type that earns the like bonus (decision 13). */
+  food: int.min(1).max(7),
+  /** Base species of an evolved form (petFamilies). */
+  parent: itemId.nullable(),
+  /** 2011 species (decision 9); null = numbers are ours. */
+  link: itemId.nullable(),
+  growth: int.positive(),
+  base: z.object({ attack: int, defence: int, disturb: int, active: int, savvy: int }),
+  /** Learnable skill ids by kind (PetSkillSrc -> PetSkillLib). */
+  pool: kindRecord(z.array(int).min(1)),
+  /** PetSkillDepot rows: skill id and its weight. */
+  depot: z.array(z.object({ skill: int, mul: int })),
+  /** NewPetCfg. */
+  feedType: int,
+  foodMul: z.array(int).length(6),
+  skillWeights: kindRecord(int),
+})
+export type RebornPet = z.infer<typeof petSchema>
+/** The 190 pet species (decision 8), in item id order. */
+export const rebornPets = () => loadChecked('reborn/pets', z.array(petSchema).length(190))
+
+const petSkillsSchema = z.object({
+  skills: z.record(
+    z.string(),
+    z.object({
+      /** 1 Halo, 2 Help, 3 Pass (skill.ini `ispet`). */
+      kind: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+      source: z.enum(['2011', 'reborn']),
+      script: z.string().nullable(),
+      /** skilladd.ini row of a Pass skill. */
+      skillAdd: z.record(z.string(), int).nullable(),
+    }),
+  ),
+  /** Reborn-only skills left out (decision 16), so their books teach nothing yet. */
+  omitted: z.array(z.object({ skill: int, reason: z.string() })),
+  books: z
+    .array(
+      z.object({
+        item: itemId,
+        rebornItem: itemId,
+        skill: int,
+        kind: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+        /** True when the 2011 item with the Reborn id already teaches the same skill. */
+        reuse: z.boolean(),
+      }),
+    )
+    .length(50),
+})
+export type RebornPetSkills = z.infer<typeof petSkillsSchema>
+/** Every pet skill (2011 `ispet` rows and Reborn-only Pass rows) and the 50 skill books. */
+export const rebornPetSkills = () => loadChecked('reborn/pet-skills', petSkillsSchema)
+
+const petFoodsSchema = z.object({
+  foods: z.array(z.object({ item: itemId, hunger: int.positive(), type: int, level: int })),
+  maxLevel: int,
+  /** exp[L - 1]: PetCfg [PetExp] row L. */
+  exp: z.array(int.positive()).length(50),
+  typeWeights: z.array(int).length(7),
+  mulWeights: z.array(int).length(4),
+  /** PetCfg [PetGrow]: HungerMax, combo and like multipliers, item ids, ... */
+  grow: z.record(z.string(), z.union([int, itemId])),
+  skillCount: z.array(int),
+  slotCost: z.array(int),
+})
+export type RebornPetFoods = z.infer<typeof petFoodsSchema>
+/** Foods 170113-170127 and the 2011 pet tables (decisions 10, 13, 14, 17). */
+export const rebornPetFoods = () => loadChecked('reborn/pet-foods', petFoodsSchema)
+
+const wingItem = z.object({ item: itemId, icon: z.string(), line: int, bonus: int })
+const wingsSchema = z.object({
+  wings: z.array(wingItem.extend({ wingSprite: z.string() })),
+  auras: z.array(wingItem.extend({ battleAura: z.string() })),
+  stones: z.array(z.object({ item: itemId, levelJump: int.positive() })),
+  talismans: z.array(
+    z.object({
+      item: itemId,
+      family: z.enum(['luck', 'safety', 'integrity']),
+      /** Luck: success bonus %; Safety and Integrity: reduction %. */
+      value: int.positive(),
+    }),
+  ),
+})
+export type RebornWings = z.infer<typeof wingsSchema>
+/** Wings 218000-218018, auras 218200-218207, stones and talismans (decisions 22, 24). */
+export const rebornWings = () => loadChecked('reborn/wings', wingsSchema)
+
+const wingField = z.enum([...BONUS_FIELDS, 'counter', 'vampiricHp', 'decDamage'])
+/** WING.Line by line id: 31 levels of stats in our units (decision 23: sum, then truncate). */
+export const rebornWingLines = () =>
+  loadChecked(
+    'reborn/wing-lines',
+    z.record(
+      z.string(),
+      z.array(z.array(z.object({ stat: int, field: wingField, value: z.number() }))).length(31),
+    ),
+  )
+
+const rarity = z.enum(['GREEN', 'BLUE', 'PURPLE', 'RED', 'GOLD'])
+const cardsSchema = z.object({
+  boxes: z.array(z.object({ item: itemId, rarity })).length(5),
+  collections: z
+    .array(
+      z.object({
+        id: int.min(1).max(10),
+        nameKey: z.string(),
+        name: z.string(),
+        rarity,
+        box: itemId,
+        cards: z.array(
+          z.object({
+            id: int.min(1).max(74),
+            nameKey: z.string(),
+            name: z.string(),
+            image: z.string(),
+          }),
+        ),
+      }),
+    )
+    .length(10),
+})
+export type RebornCards = z.infer<typeof cardsSchema>
+/** The 10 card collections with their 74 cards, and the 5 boxes by rarity (decision 27). */
+export const rebornCards = () => loadChecked('reborn/cards', cardsSchema)
+
+/** Kennel shop offers in Feathers (decision 21). */
+export const rebornKennelShop = () =>
+  loadChecked(
+    'reborn/kennel-shop',
+    z.object({
+      currency: itemId,
+      offers: z.array(
+        z.object({ item: itemId, price: int.positive(), level: int, dailyLimit: int.positive() }),
+      ),
+    }),
+  )

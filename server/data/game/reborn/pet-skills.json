@@ -1,0 +1,1626 @@
+{
+  "skills": {
+    "40001": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chonggong_40001.js",
+      "skillAdd": null
+    },
+    "40002": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongjiaxue_40002.js",
+      "skillAdd": null
+    },
+    "40003": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongjialan_40003.js",
+      "skillAdd": null
+    },
+    "40004": {
+      "kind": 2,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40005": {
+      "kind": 2,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40006": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongdang_40006.js",
+      "skillAdd": null
+    },
+    "40007": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongzhuoshi_40007.js",
+      "skillAdd": null
+    },
+    "40008": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongxixue_40008.js",
+      "skillAdd": null
+    },
+    "40009": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongdingyao_40009.js",
+      "skillAdd": null
+    },
+    "40010": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chonglianji_40010.js",
+      "skillAdd": null
+    },
+    "40011": {
+      "kind": 2,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40012": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chonghuafen_40012.js",
+      "skillAdd": null
+    },
+    "40013": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongchanrao_40013.js",
+      "skillAdd": null
+    },
+    "40014": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongtaiyang_40014.js",
+      "skillAdd": null
+    },
+    "40015": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongzhongya_40015.js",
+      "skillAdd": null
+    },
+    "40016": {
+      "kind": 2,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40017": {
+      "kind": 2,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40043": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AbsAddAtkMulSkill": 100
+      }
+    },
+    "40044": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "PierceSkill": 29
+      }
+    },
+    "40045": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AtkTimeMulSkill": 50
+      }
+    },
+    "40046": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 29
+      }
+    },
+    "40047": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "CritMulSkill": 17
+      }
+    },
+    "40048": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 68
+      }
+    },
+    "40049": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxMPSkill": 50
+      }
+    },
+    "40050": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPSkill": 86
+      }
+    },
+    "40051": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 100
+      }
+    },
+    "40052": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "SkillAdd0Skill": 100
+      }
+    },
+    "40053": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "SkillAdd1Skill": 100
+      }
+    },
+    "40054": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "SkillAdd2Skill": 100
+      }
+    },
+    "40055": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "SkillAdd3Skill": 100
+      }
+    },
+    "40056": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "SkillAdd4Skill": 100
+      }
+    },
+    "40057": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_chongguanghuanceshi_40057.js",
+      "skillAdd": null
+    },
+    "40058": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shaluguanghuan0_40058.js",
+      "skillAdd": null
+    },
+    "40059": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shaluguanghuan1_40059.js",
+      "skillAdd": null
+    },
+    "40060": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shaluguanghuan2_40060.js",
+      "skillAdd": null
+    },
+    "40061": {
+      "kind": 1,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40062": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_jingjiguanghuan0_40062.js",
+      "skillAdd": null
+    },
+    "40063": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_jingjiguanghuan1_40063.js",
+      "skillAdd": null
+    },
+    "40064": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_jingjiguanghuan2_40064.js",
+      "skillAdd": null
+    },
+    "40065": {
+      "kind": 1,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40066": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zaishengguanghuan0_40066.js",
+      "skillAdd": null
+    },
+    "40067": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zaishengguanghuan1_40067.js",
+      "skillAdd": null
+    },
+    "40068": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zaishengguanghuan2_40068.js",
+      "skillAdd": null
+    },
+    "40069": {
+      "kind": 1,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40070": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shenshengguanghuan0_40070.js",
+      "skillAdd": null
+    },
+    "40071": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shenshengguanghuan1_40071.js",
+      "skillAdd": null
+    },
+    "40072": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shenshengguanghuan2_40072.js",
+      "skillAdd": null
+    },
+    "40073": {
+      "kind": 1,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40074": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zhihuiguanghuan0_40074.js",
+      "skillAdd": null
+    },
+    "40075": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zhihuiguanghuan1_40075.js",
+      "skillAdd": null
+    },
+    "40076": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zhihuiguanghuan2_40076.js",
+      "skillAdd": null
+    },
+    "40077": {
+      "kind": 1,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40078": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_xuezhou_40078.js",
+      "skillAdd": null
+    },
+    "40079": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_roubo_40079.js",
+      "skillAdd": null
+    },
+    "40080": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_kangfen_40080.js",
+      "skillAdd": null
+    },
+    "40082": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_jiancihuti_40082.js",
+      "skillAdd": null
+    },
+    "40083": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_guanghezuoyong_40083.js",
+      "skillAdd": null
+    },
+    "40084": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_hanlengbowen_40084.js",
+      "skillAdd": null
+    },
+    "40086": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_xisheng_40086.js",
+      "skillAdd": null
+    },
+    "40087": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_quxie_40087.js",
+      "skillAdd": null
+    },
+    "40088": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_muoushi_40088.js",
+      "skillAdd": null
+    },
+    "40090": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_longzuxuetong_40090.js",
+      "skillAdd": null
+    },
+    "40091": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_bukeqinfan_40091.js",
+      "skillAdd": null
+    },
+    "40092": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shenshengyinji_40092.js",
+      "skillAdd": null
+    },
+    "40094": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shenmishu_40094.js",
+      "skillAdd": null
+    },
+    "40095": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_ganzhi_40095.js",
+      "skillAdd": null
+    },
+    "40096": {
+      "kind": 1,
+      "source": "2011",
+      "script": null,
+      "skillAdd": null
+    },
+    "40098": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_jueduizhongcheng_40098.js",
+      "skillAdd": null
+    },
+    "40100": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_yazhi_40100.js",
+      "skillAdd": null
+    },
+    "40104": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_xingyun_40104.js",
+      "skillAdd": null
+    },
+    "40105": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_eyun_40105.js",
+      "skillAdd": null
+    },
+    "40106": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_kangti_40106.js",
+      "skillAdd": null
+    },
+    "40108": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_qingxing_40108.js",
+      "skillAdd": null
+    },
+    "40110": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_jieyin_40110.js",
+      "skillAdd": null
+    },
+    "40113": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_zhufu_40113.js",
+      "skillAdd": null
+    },
+    "40114": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_hanbinghuxi_40114.js",
+      "skillAdd": null
+    },
+    "40115": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_fangshoufanji_40115.js",
+      "skillAdd": null
+    },
+    "40116": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chonglianji_40010.js",
+      "skillAdd": null
+    },
+    "40121": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_chongtunshi_40121.js",
+      "skillAdd": null
+    },
+    "40122": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_chonggaoguanghuan0_40122.js",
+      "skillAdd": null
+    },
+    "40123": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_chonggaoguanghuan1_40123.js",
+      "skillAdd": null
+    },
+    "40124": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_chonggaoguanghuan2_40124.js",
+      "skillAdd": null
+    },
+    "40125": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_renzhuli_40125.js",
+      "skillAdd": null
+    },
+    "40126": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shouxuefeiteng_40126.js",
+      "skillAdd": null
+    },
+    "40127": {
+      "kind": 1,
+      "source": "2011",
+      "script": "skill/skill_shouhuakuangbao_40127.js",
+      "skillAdd": null
+    },
+    "40128": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_shazhishouhu_40128.js",
+      "skillAdd": null
+    },
+    "40129": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_shuilongbo_40129.js",
+      "skillAdd": null
+    },
+    "40130": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_suanyefushi_40130.js",
+      "skillAdd": null
+    },
+    "40131": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_yuansujingtong_40131.js",
+      "skillAdd": null
+    },
+    "40132": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_leiyunfengbao_40132.js",
+      "skillAdd": null
+    },
+    "40133": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_huanhua_40133.js",
+      "skillAdd": null
+    },
+    "40134": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_heianzhangkong_40134.js",
+      "skillAdd": null
+    },
+    "40135": {
+      "kind": 2,
+      "source": "2011",
+      "script": "skill/skill_xugoupao_40135.js",
+      "skillAdd": null
+    },
+    "50001": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 80
+      }
+    },
+    "50002": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ToughSkill": 72
+      }
+    },
+    "50003": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 89
+      }
+    },
+    "50004": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxMPSkill": 86
+      }
+    },
+    "50005": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ParryMulSkill": 67
+      }
+    },
+    "50006": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MinAtkSkill": 18
+      }
+    },
+    "50007": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "CritMulSkill": 48
+      }
+    },
+    "50008": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 80
+      }
+    },
+    "50009": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "StrengthSkill": 2600,
+        "AgilitySkill": 2600,
+        "StaminaSkill": 2600
+      }
+    },
+    "50010": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DodgeMulSkill": 67
+      }
+    },
+    "50011": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "PierceSkill": 100
+      }
+    },
+    "50012": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPMulSKill": 50
+      }
+    },
+    "50013": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPSkill": 25
+      }
+    },
+    "50014": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DodgeMulSkill": 19
+      }
+    },
+    "50015": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ParryMulSkill": 19
+      }
+    },
+    "50016": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ToughSkill": 26
+      }
+    },
+    "50017": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 29
+      }
+    },
+    "50018": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 26
+      }
+    },
+    "50019": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxAtkSkill": 6
+      }
+    },
+    "50020": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "PierceSkill": 58
+      }
+    },
+    "50021": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AtkTimeMulSkill": 100
+      }
+    },
+    "50022": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 58
+      }
+    },
+    "50023": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "CritMulSkill": 34
+      }
+    },
+    "50024": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPMulSKill": 100
+      }
+    },
+    "50025": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPSkill": 50
+      }
+    },
+    "50026": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DodgeMulSkill": 38
+      }
+    },
+    "50027": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ParryMulSkill": 38
+      }
+    },
+    "50028": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ToughSkill": 52
+      }
+    },
+    "50029": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 58
+      }
+    },
+    "50030": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 51
+      }
+    },
+    "50031": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxAtkSkill": 13
+      }
+    },
+    "50032": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AbsAddAtkMulSkill": 50
+      }
+    },
+    "50033": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxMPSkill": 25
+      }
+    },
+    "50034": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AtkTimeMulSkill": 100
+      }
+    },
+    "50035": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DropMulSkill": 20
+      }
+    },
+    "50036": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AbsAddAtkMulSkill": 100
+      }
+    },
+    "50037": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "PierceSkill": 87
+      }
+    },
+    "50038": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AtkTimeMulSkill": 150
+      }
+    },
+    "50039": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 87
+      }
+    },
+    "50040": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "CritMulSkill": 51
+      }
+    },
+    "50041": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPMulSKill": 150
+      }
+    },
+    "50042": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxHPSkill": 75
+      }
+    },
+    "50043": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DodgeMulSkill": 57
+      }
+    },
+    "50044": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ParryMulSkill": 57
+      }
+    },
+    "50045": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "ToughSkill": 78
+      }
+    },
+    "50046": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 87
+      }
+    },
+    "50047": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 77
+      }
+    },
+    "50048": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxAtkSkill": 20
+      }
+    },
+    "50049": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AbsAddAtkMulSkill": 150
+      }
+    },
+    "50050": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "MaxMPSkill": 75
+      }
+    },
+    "50051": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "StrengthSkill": 6000
+      }
+    },
+    "50052": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "AgilitySkill": 6000
+      }
+    },
+    "50053": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "StaminaSkill": 6000
+      }
+    },
+    "50054": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 68
+      }
+    },
+    "50055": {
+      "kind": 3,
+      "source": "2011",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 68
+      }
+    },
+    "50056": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "PierceSkill": 130
+      }
+    },
+    "50058": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 140
+      }
+    },
+    "50059": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "CritMulSkill": 76
+      }
+    },
+    "50060": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxHPMulSKill": 200
+      }
+    },
+    "50061": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxHPSkill": 100
+      }
+    },
+    "50062": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "DodgeMulSkill": 85
+      }
+    },
+    "50063": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "ParryMulSkill": 85
+      }
+    },
+    "50064": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "ToughSkill": 117
+      }
+    },
+    "50065": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 130
+      }
+    },
+    "50066": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 115
+      }
+    },
+    "50067": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxAtkSkill": 30
+      }
+    },
+    "50068": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "AbsAddAtkMulSkill": 200
+      }
+    },
+    "50069": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxMPSkill": 100
+      }
+    },
+    "50070": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "PierceSkill": 216
+      }
+    },
+    "50072": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "HitMulSkill": 216
+      }
+    },
+    "50073": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "CritMulSkill": 204
+      }
+    },
+    "50074": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxHPMulSKill": 135
+      }
+    },
+    "50075": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxHPSkill": 195
+      }
+    },
+    "50076": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "DodgeMulSkill": 204
+      }
+    },
+    "50077": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "ParryMulSkill": 204
+      }
+    },
+    "50078": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "ToughSkill": 288
+      }
+    },
+    "50079": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "DefenseSkill": 216
+      }
+    },
+    "50080": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "NeglectDefAttachSkill": 204
+      }
+    },
+    "50081": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxAtkSkill": 33
+      }
+    },
+    "50082": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "AbsAddAtkMulSkill": 135
+      }
+    },
+    "50083": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "MaxMPSkill": 195
+      }
+    },
+    "50084": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "StaminaSkill": 28500
+      }
+    },
+    "50085": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "AgilitySkill": 28500
+      }
+    },
+    "50086": {
+      "kind": 3,
+      "source": "reborn",
+      "script": null,
+      "skillAdd": {
+        "StrengthSkill": 28500
+      }
+    }
+  },
+  "omitted": [
+    {
+      "skill": 50057,
+      "reason": "The Reborn tooltip has no value."
+    },
+    {
+      "skill": 50071,
+      "reason": "The Reborn tooltip has no value."
+    }
+  ],
+  "books": [
+    {
+      "item": "i180035",
+      "rebornItem": "i180035",
+      "skill": 50020,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180036",
+      "rebornItem": "i180036",
+      "skill": 50021,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180037",
+      "rebornItem": "i180037",
+      "skill": 50022,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180038",
+      "rebornItem": "i180038",
+      "skill": 50023,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180039",
+      "rebornItem": "i180039",
+      "skill": 50024,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180040",
+      "rebornItem": "i180040",
+      "skill": 50025,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180041",
+      "rebornItem": "i180041",
+      "skill": 50026,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180042",
+      "rebornItem": "i180042",
+      "skill": 50027,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180043",
+      "rebornItem": "i180043",
+      "skill": 50028,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180044",
+      "rebornItem": "i180044",
+      "skill": 50029,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180045",
+      "rebornItem": "i180045",
+      "skill": 50030,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180046",
+      "rebornItem": "i180046",
+      "skill": 50031,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180047",
+      "rebornItem": "i180047",
+      "skill": 50034,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180048",
+      "rebornItem": "i180048",
+      "skill": 50035,
+      "kind": 3,
+      "reuse": true
+    },
+    {
+      "item": "i180149",
+      "rebornItem": "i180049",
+      "skill": 50032,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180150",
+      "rebornItem": "i180050",
+      "skill": 50033,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180151",
+      "rebornItem": "i180051",
+      "skill": 50056,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180152",
+      "rebornItem": "i180052",
+      "skill": 50057,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180153",
+      "rebornItem": "i180053",
+      "skill": 50058,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180154",
+      "rebornItem": "i180054",
+      "skill": 50059,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180155",
+      "rebornItem": "i180055",
+      "skill": 50060,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180156",
+      "rebornItem": "i180056",
+      "skill": 50061,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180157",
+      "rebornItem": "i180057",
+      "skill": 50062,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180158",
+      "rebornItem": "i180058",
+      "skill": 50063,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180159",
+      "rebornItem": "i180059",
+      "skill": 50064,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180160",
+      "rebornItem": "i180060",
+      "skill": 50065,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180161",
+      "rebornItem": "i180061",
+      "skill": 50066,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180162",
+      "rebornItem": "i180062",
+      "skill": 50067,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180063",
+      "rebornItem": "i180063",
+      "skill": 50068,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180064",
+      "rebornItem": "i180064",
+      "skill": 50069,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180065",
+      "rebornItem": "i180065",
+      "skill": 50070,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180066",
+      "rebornItem": "i180066",
+      "skill": 50071,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180067",
+      "rebornItem": "i180067",
+      "skill": 50072,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180068",
+      "rebornItem": "i180068",
+      "skill": 50073,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180069",
+      "rebornItem": "i180069",
+      "skill": 50074,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180070",
+      "rebornItem": "i180070",
+      "skill": 50075,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180071",
+      "rebornItem": "i180071",
+      "skill": 50076,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180072",
+      "rebornItem": "i180072",
+      "skill": 50077,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180073",
+      "rebornItem": "i180073",
+      "skill": 50078,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180074",
+      "rebornItem": "i180074",
+      "skill": 50079,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180075",
+      "rebornItem": "i180075",
+      "skill": 50080,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180076",
+      "rebornItem": "i180076",
+      "skill": 50081,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180077",
+      "rebornItem": "i180077",
+      "skill": 50082,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180078",
+      "rebornItem": "i180078",
+      "skill": 50083,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180079",
+      "rebornItem": "i180079",
+      "skill": 50084,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180080",
+      "rebornItem": "i180080",
+      "skill": 50085,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i180081",
+      "rebornItem": "i180081",
+      "skill": 50086,
+      "kind": 3,
+      "reuse": false
+    },
+    {
+      "item": "i490103",
+      "rebornItem": "i490003",
+      "skill": 40122,
+      "kind": 1,
+      "reuse": false
+    },
+    {
+      "item": "i490104",
+      "rebornItem": "i490004",
+      "skill": 40123,
+      "kind": 1,
+      "reuse": false
+    },
+    {
+      "item": "i490005",
+      "rebornItem": "i490005",
+      "skill": 40124,
+      "kind": 1,
+      "reuse": false
+    }
+  ]
+}

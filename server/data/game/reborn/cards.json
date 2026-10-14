@@ -1,0 +1,560 @@
+{
+  "boxes": [
+    {
+      "item": "i171001",
+      "rarity": "GREEN"
+    },
+    {
+      "item": "i171002",
+      "rarity": "BLUE"
+    },
+    {
+      "item": "i171003",
+      "rarity": "PURPLE"
+    },
+    {
+      "item": "i171004",
+      "rarity": "RED"
+    },
+    {
+      "item": "i171005",
+      "rarity": "GOLD"
+    }
+  ],
+  "collections": [
+    {
+      "id": 1,
+      "nameKey": "reborn_card_collection_1",
+      "name": "Konoha Village",
+      "rarity": "GREEN",
+      "box": "i171001",
+      "cards": [
+        {
+          "id": 1,
+          "nameKey": "reborn_card_1",
+          "name": "Hidden Land",
+          "image": "icons/items/cards/Konoha Village/1.jpg"
+        },
+        {
+          "id": 2,
+          "nameKey": "reborn_card_2",
+          "name": "Granny",
+          "image": "icons/items/cards/Konoha Village/2.jpg"
+        },
+        {
+          "id": 3,
+          "nameKey": "reborn_card_3",
+          "name": "Hokage Monument",
+          "image": "icons/items/cards/Konoha Village/3.jpg"
+        },
+        {
+          "id": 4,
+          "nameKey": "reborn_card_4",
+          "name": "Valley of the End",
+          "image": "icons/items/cards/Konoha Village/4.jpg"
+        },
+        {
+          "id": 5,
+          "nameKey": "reborn_card_5",
+          "name": "Mount Myobuku",
+          "image": "icons/items/cards/Konoha Village/5.jpg"
+        },
+        {
+          "id": 6,
+          "nameKey": "reborn_card_6",
+          "name": "Spirit Beast",
+          "image": "icons/items/cards/Konoha Village/6.jpg"
+        },
+        {
+          "id": 7,
+          "nameKey": "reborn_card_7",
+          "name": "Konoha Eight",
+          "image": "icons/items/cards/Konoha Village/Ninja.jpg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nameKey": "reborn_card_collection_2",
+      "name": "Tiny Ninja",
+      "rarity": "GREEN",
+      "box": "i171001",
+      "cards": [
+        {
+          "id": 8,
+          "nameKey": "reborn_card_8",
+          "name": "Akamaru",
+          "image": "icons/items/cards/Tiny Ninja/1.jpg"
+        },
+        {
+          "id": 9,
+          "nameKey": "reborn_card_9",
+          "name": "Pakkun",
+          "image": "icons/items/cards/Tiny Ninja/2.jpg"
+        },
+        {
+          "id": 10,
+          "nameKey": "reborn_card_10",
+          "name": "Bunta",
+          "image": "icons/items/cards/Tiny Ninja/3.jpg"
+        },
+        {
+          "id": 11,
+          "nameKey": "reborn_card_11",
+          "name": "Tonton",
+          "image": "icons/items/cards/Tiny Ninja/4.jpg"
+        },
+        {
+          "id": 12,
+          "nameKey": "reborn_card_12",
+          "name": "Katsuyu",
+          "image": "icons/items/cards/Tiny Ninja/5.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nameKey": "reborn_card_collection_3",
+      "name": "Village",
+      "rarity": "GREEN",
+      "box": "i171001",
+      "cards": [
+        {
+          "id": 13,
+          "nameKey": "reborn_card_13",
+          "name": "Konoha",
+          "image": "icons/items/cards/Village/1.jpg"
+        },
+        {
+          "id": 14,
+          "nameKey": "reborn_card_14",
+          "name": "Sunagakure",
+          "image": "icons/items/cards/Village/2.jpg"
+        },
+        {
+          "id": 15,
+          "nameKey": "reborn_card_15",
+          "name": "Kumogakure",
+          "image": "icons/items/cards/Village/3.jpg"
+        },
+        {
+          "id": 16,
+          "nameKey": "reborn_card_16",
+          "name": "Kirigakure",
+          "image": "icons/items/cards/Village/4.jpg"
+        },
+        {
+          "id": 17,
+          "nameKey": "reborn_card_17",
+          "name": "Iwagakure",
+          "image": "icons/items/cards/Village/5.jpg"
+        },
+        {
+          "id": 18,
+          "nameKey": "reborn_card_18",
+          "name": "Otogakure",
+          "image": "icons/items/cards/Village/6.jpg"
+        },
+        {
+          "id": 19,
+          "nameKey": "reborn_card_19",
+          "name": "Amegakure",
+          "image": "icons/items/cards/Village/7.jpg"
+        },
+        {
+          "id": 20,
+          "nameKey": "reborn_card_20",
+          "name": "Kusagakure",
+          "image": "icons/items/cards/Village/8.jpg"
+        },
+        {
+          "id": 21,
+          "nameKey": "reborn_card_21",
+          "name": "Takigakure",
+          "image": "icons/items/cards/Village/9.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nameKey": "reborn_card_collection_4",
+      "name": "Seretei Reapers",
+      "rarity": "BLUE",
+      "box": "i171002",
+      "cards": [
+        {
+          "id": 22,
+          "nameKey": "reborn_card_22",
+          "name": "Soifon",
+          "image": "icons/items/cards/Seretei Reapers/1.jpg"
+        },
+        {
+          "id": 23,
+          "nameKey": "reborn_card_23",
+          "name": "Retsu",
+          "image": "icons/items/cards/Seretei Reapers/2.jpg"
+        },
+        {
+          "id": 24,
+          "nameKey": "reborn_card_24",
+          "name": "Byakuya",
+          "image": "icons/items/cards/Seretei Reapers/3.jpg"
+        },
+        {
+          "id": 25,
+          "nameKey": "reborn_card_25",
+          "name": "Sajin",
+          "image": "icons/items/cards/Seretei Reapers/4.jpg"
+        },
+        {
+          "id": 26,
+          "nameKey": "reborn_card_26",
+          "name": "Shunsui",
+          "image": "icons/items/cards/Seretei Reapers/5.jpg"
+        },
+        {
+          "id": 27,
+          "nameKey": "reborn_card_27",
+          "name": "Hitsugaya",
+          "image": "icons/items/cards/Seretei Reapers/6.jpg"
+        },
+        {
+          "id": 28,
+          "nameKey": "reborn_card_28",
+          "name": "Kenpachi",
+          "image": "icons/items/cards/Seretei Reapers/7.jpg"
+        },
+        {
+          "id": 29,
+          "nameKey": "reborn_card_29",
+          "name": "Ukitake",
+          "image": "icons/items/cards/Seretei Reapers/8.jpg"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nameKey": "reborn_card_collection_5",
+      "name": "Konoha Gennin",
+      "rarity": "BLUE",
+      "box": "i171002",
+      "cards": [
+        {
+          "id": 30,
+          "nameKey": "reborn_card_30",
+          "name": "Choji",
+          "image": "icons/items/cards/Konoha Gennin/1.jpg"
+        },
+        {
+          "id": 31,
+          "nameKey": "reborn_card_31",
+          "name": "Ino",
+          "image": "icons/items/cards/Konoha Gennin/2.jpg"
+        },
+        {
+          "id": 32,
+          "nameKey": "reborn_card_32",
+          "name": "Kiba",
+          "image": "icons/items/cards/Konoha Gennin/3.jpg"
+        },
+        {
+          "id": 33,
+          "nameKey": "reborn_card_33",
+          "name": "Rock Lee",
+          "image": "icons/items/cards/Konoha Gennin/4.jpg"
+        },
+        {
+          "id": 34,
+          "nameKey": "reborn_card_34",
+          "name": "Sakura",
+          "image": "icons/items/cards/Konoha Gennin/5.jpg"
+        },
+        {
+          "id": 35,
+          "nameKey": "reborn_card_35",
+          "name": "Neji",
+          "image": "icons/items/cards/Konoha Gennin/6.jpg"
+        },
+        {
+          "id": 36,
+          "nameKey": "reborn_card_36",
+          "name": "Shino",
+          "image": "icons/items/cards/Konoha Gennin/7.jpg"
+        },
+        {
+          "id": 37,
+          "nameKey": "reborn_card_37",
+          "name": "Tenten",
+          "image": "icons/items/cards/Konoha Gennin/8.jpg"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nameKey": "reborn_card_collection_6",
+      "name": "Akatsuki",
+      "rarity": "PURPLE",
+      "box": "i171003",
+      "cards": [
+        {
+          "id": 38,
+          "nameKey": "reborn_card_38",
+          "name": "Deidara",
+          "image": "icons/items/cards/Akatsuki/1.jpg"
+        },
+        {
+          "id": 39,
+          "nameKey": "reborn_card_39",
+          "name": "Hidan",
+          "image": "icons/items/cards/Akatsuki/2.jpg"
+        },
+        {
+          "id": 40,
+          "nameKey": "reborn_card_40",
+          "name": "Itachi",
+          "image": "icons/items/cards/Akatsuki/3.jpg"
+        },
+        {
+          "id": 41,
+          "nameKey": "reborn_card_41",
+          "name": "Kakuzu",
+          "image": "icons/items/cards/Akatsuki/4.jpg"
+        },
+        {
+          "id": 42,
+          "nameKey": "reborn_card_42",
+          "name": "Kisame",
+          "image": "icons/items/cards/Akatsuki/5.jpg"
+        },
+        {
+          "id": 43,
+          "nameKey": "reborn_card_43",
+          "name": "Konan",
+          "image": "icons/items/cards/Akatsuki/6.jpg"
+        },
+        {
+          "id": 44,
+          "nameKey": "reborn_card_44",
+          "name": "Pain",
+          "image": "icons/items/cards/Akatsuki/7.jpg"
+        },
+        {
+          "id": 45,
+          "nameKey": "reborn_card_45",
+          "name": "Sasori",
+          "image": "icons/items/cards/Akatsuki/8.jpg"
+        },
+        {
+          "id": 46,
+          "nameKey": "reborn_card_46",
+          "name": "Zetsu",
+          "image": "icons/items/cards/Akatsuki/9.jpg"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nameKey": "reborn_card_collection_7",
+      "name": "Dojutsu",
+      "rarity": "RED",
+      "box": "i171004",
+      "cards": [
+        {
+          "id": 47,
+          "nameKey": "reborn_card_47",
+          "name": "Hinata",
+          "image": "icons/items/cards/Dojutsu/1.jpg"
+        },
+        {
+          "id": 48,
+          "nameKey": "reborn_card_48",
+          "name": "Kakashi",
+          "image": "icons/items/cards/Dojutsu/2.jpg"
+        },
+        {
+          "id": 49,
+          "nameKey": "reborn_card_49",
+          "name": "Mangekyou Sharingan",
+          "image": "icons/items/cards/Dojutsu/3.jpg"
+        },
+        {
+          "id": 50,
+          "nameKey": "reborn_card_50",
+          "name": "Nagato",
+          "image": "icons/items/cards/Dojutsu/4.jpg"
+        },
+        {
+          "id": 51,
+          "nameKey": "reborn_card_51",
+          "name": "Neji",
+          "image": "icons/items/cards/Dojutsu/5.jpg"
+        },
+        {
+          "id": 52,
+          "nameKey": "reborn_card_52",
+          "name": "Sasuke",
+          "image": "icons/items/cards/Dojutsu/6.jpg"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nameKey": "reborn_card_collection_8",
+      "name": "Legendary Ninja",
+      "rarity": "RED",
+      "box": "i171004",
+      "cards": [
+        {
+          "id": 53,
+          "nameKey": "reborn_card_53",
+          "name": "Hashirama",
+          "image": "icons/items/cards/Legendary Ninja/1.jpg"
+        },
+        {
+          "id": 54,
+          "nameKey": "reborn_card_54",
+          "name": "Tobirama",
+          "image": "icons/items/cards/Legendary Ninja/2.jpg"
+        },
+        {
+          "id": 55,
+          "nameKey": "reborn_card_55",
+          "name": "Sarutobi",
+          "image": "icons/items/cards/Legendary Ninja/3.jpg"
+        },
+        {
+          "id": 56,
+          "nameKey": "reborn_card_56",
+          "name": "Minato",
+          "image": "icons/items/cards/Legendary Ninja/4.jpg"
+        },
+        {
+          "id": 57,
+          "nameKey": "reborn_card_57",
+          "name": "Tsunade",
+          "image": "icons/items/cards/Legendary Ninja/5.jpg"
+        },
+        {
+          "id": 58,
+          "nameKey": "reborn_card_58",
+          "name": "Jiraya",
+          "image": "icons/items/cards/Legendary Ninja/6.jpg"
+        },
+        {
+          "id": 59,
+          "nameKey": "reborn_card_59",
+          "name": "Madara",
+          "image": "icons/items/cards/Legendary Ninja/7.jpg"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "nameKey": "reborn_card_collection_9",
+      "name": "The Lost Generation",
+      "rarity": "RED",
+      "box": "i171004",
+      "cards": [
+        {
+          "id": 60,
+          "nameKey": "reborn_card_60",
+          "name": "Danzo",
+          "image": "icons/items/cards/The Lost Generation/1.jpg"
+        },
+        {
+          "id": 61,
+          "nameKey": "reborn_card_61",
+          "name": "Ranmaru",
+          "image": "icons/items/cards/The Lost Generation/2.jpg"
+        },
+        {
+          "id": 62,
+          "nameKey": "reborn_card_62",
+          "name": "Kimimaro",
+          "image": "icons/items/cards/The Lost Generation/3.jpg"
+        },
+        {
+          "id": 63,
+          "nameKey": "reborn_card_63",
+          "name": "Guren",
+          "image": "icons/items/cards/The Lost Generation/4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nameKey": "reborn_card_collection_10",
+      "name": "Legendary Cards",
+      "rarity": "GOLD",
+      "box": "i171005",
+      "cards": [
+        {
+          "id": 64,
+          "nameKey": "reborn_card_64",
+          "name": "Rookie",
+          "image": "icons/items/cards/Legendary Cards/1.jpg"
+        },
+        {
+          "id": 65,
+          "nameKey": "reborn_card_65",
+          "name": "Expert of Cards",
+          "image": "icons/items/cards/Legendary Cards/2.jpg"
+        },
+        {
+          "id": 66,
+          "nameKey": "reborn_card_66",
+          "name": "Master of Cards",
+          "image": "icons/items/cards/Legendary Cards/3.jpg"
+        },
+        {
+          "id": 67,
+          "nameKey": "reborn_card_67",
+          "name": "Hidden Leaf Gate",
+          "image": "icons/items/cards/Legendary Cards/4.jpg"
+        },
+        {
+          "id": 68,
+          "nameKey": "reborn_card_68",
+          "name": "Master Jiraya",
+          "image": "icons/items/cards/Legendary Cards/5.jpg"
+        },
+        {
+          "id": 69,
+          "nameKey": "reborn_card_69",
+          "name": "Village Secret",
+          "image": "icons/items/cards/Legendary Cards/6.jpg"
+        },
+        {
+          "id": 70,
+          "nameKey": "reborn_card_70",
+          "name": "Konoha's Future",
+          "image": "icons/items/cards/Legendary Cards/7.jpg"
+        },
+        {
+          "id": 71,
+          "nameKey": "reborn_card_71",
+          "name": "Palace Captain",
+          "image": "icons/items/cards/Legendary Cards/8.jpg"
+        },
+        {
+          "id": 72,
+          "nameKey": "reborn_card_72",
+          "name": "Know Pain",
+          "image": "icons/items/cards/Legendary Cards/9.jpg"
+        },
+        {
+          "id": 73,
+          "nameKey": "reborn_card_73",
+          "name": "First Hokage",
+          "image": "icons/items/cards/Legendary Cards/10.jpg"
+        },
+        {
+          "id": 74,
+          "nameKey": "reborn_card_74",
+          "name": "Kamui",
+          "image": "icons/items/cards/Legendary Cards/11.jpg"
+        }
+      ]
+    }
+  ]
+}
