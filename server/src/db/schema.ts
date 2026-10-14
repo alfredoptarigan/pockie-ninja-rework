@@ -1508,6 +1508,8 @@ export const tailedBeastPlayers = pgTable(
       .array()
       .notNull()
       .default(sql`'{}'`),
+    // Level 10 Stone Bags bought from the Essence shop this week (limit 5).
+    stoneBagsBought: smallint('stone_bags_bought').notNull().default(0),
   },
   (t) => [
     primaryKey({ columns: [t.week, t.characterId] }),

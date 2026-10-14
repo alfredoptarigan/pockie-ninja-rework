@@ -1,0 +1,1 @@
+ALTER TABLE "tailed_beast_players" ADD COLUMN "stone_bags_bought" smallint DEFAULT 0 NOT NULL;

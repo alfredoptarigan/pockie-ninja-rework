@@ -2,10 +2,6 @@
 // Rows are keyed by `week` (UTC Monday), so a new week starts fresh without a reset; the weekly
 // job only names last week's Kages and drops old rows. Every action locks the character row
 // first, then the ninja's week row, then the pool row (plan ground rules).
-import { simulateFight } from '@pockie/game-core'
-import { and, asc, desc, eq, gt, lt, sql } from 'drizzle-orm'
-import type { FastifyInstance } from 'fastify'
-import { randomInt } from 'node:crypto'
 import {
   beastLevel,
   claimableBox,
@@ -15,8 +11,9 @@ import {
   ticketCost,
   TICKETS_PER_DAY,
   todaysBeasts,
+  simulateFight,
   weekday,
-} from '../../../../game-core/src/events/tailed-beast.js'
+} from '@pockie/game-core'
 import {
   tailedBeastBoxSchema,
   tailedBeastFightSchema,
@@ -25,7 +22,10 @@ import {
   type TailedBeastFightResult,
   type TailedBeastResult,
   type TailedBeastView,
-} from '../../../../shared/src/schemas/tailed-beast.js'
+} from '@pockie/shared'
+import { and, asc, desc, eq, gt, lt, sql } from 'drizzle-orm'
+import type { FastifyInstance } from 'fastify'
+import { randomInt } from 'node:crypto'
 import type { Db } from '../../db/client.js'
 import {
   characters,
@@ -137,8 +137,8 @@ export async function tailedBeastWeeklyReset(db: Db, now = new Date()) {
 async function view(tx: Tx | Db, character: CharacterRow, now = new Date()) {
   const data = config()
   const week = weekStart(now)
+  // Read only: the weekly job names last week's Kages.
   const last = previousWeek(now)
-  await nameKages(tx, last)
   const me = await playerRow(tx, week, character.id)
   const pools = await tx.select().from(tailedBeastPools).where(eq(tailedBeastPools.week, week))
   const killers = await tx
@@ -223,12 +223,10 @@ async function view(tx: Tx | Db, character: CharacterRow, now = new Date()) {
       isMe: characterId === character.id,
     })),
     kageChoices: data.kageChoices,
-    // ponytail: limited offers (Level 10 Stone Bag, 5 a week) need a per-item purchase count on
-    // tailed_beast_players; they stay unavailable until that column exists.
     shop: data.shop.map((offer) => ({
       itemId: offer.item,
       essence: offer.essence,
-      available: offer.limit === undefined,
+      available: offer.limit === undefined || (me?.stoneBagsBought ?? 0) < offer.limit,
     })),
   }
   return result
@@ -360,9 +358,12 @@ async function claimKage(tx: Tx, character: CharacterRow, itemId: string) {
 async function buy(tx: Tx, character: CharacterRow, itemId: string, count: number) {
   const offer = config().shop.find((o) => o.item === itemId)
   if (!offer) throw bad('unknown_item', 'That item is not sold here.')
-  if (offer.limit !== undefined) throw bad('unavailable', 'This item is not available yet.')
   const week = weekStart(new Date())
   const me = await lockPlayer(tx, character, week)
+  // The only limited offer is the Level 10 Stone Bag (5 a week).
+  const limited = offer.limit !== undefined
+  if (limited && me.stoneBagsBought + count > offer.limit!)
+    throw bad('limit_reached', `You can buy only ${offer.limit} of these a week.`)
   const price = offer.essence * count
   if (me.essence < price) throw bad('no_essence', 'You do not have enough Essence.')
   const awards = Array.from({ length: count }, () => ({ itemId, bound: BOUND }))
@@ -370,7 +371,10 @@ async function buy(tx: Tx, character: CharacterRow, itemId: string, count: numbe
   await grantItems(tx, character.id, awards)
   await tx
     .update(tailedBeastPlayers)
-    .set({ essence: me.essence - price })
+    .set({
+      essence: me.essence - price,
+      ...(limited && { stoneBagsBought: me.stoneBagsBought + count }),
+    })
     .where(and(eq(tailedBeastPlayers.week, week), eq(tailedBeastPlayers.characterId, character.id)))
   return result(tx, character.id)
 }

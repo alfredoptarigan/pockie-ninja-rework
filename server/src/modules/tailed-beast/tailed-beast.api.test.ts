@@ -287,6 +287,10 @@ describe('Kage', () => {
       { week: last, characterId: rival!, village: 0, honor: 400 },
       { week: last, characterId: other!, village: 3, honor: 10 },
     ])
+    // Reading never writes: the weekly job names the Kages.
+    expect((await view()).kages).toEqual([])
+    expect(await db.select().from(tailedBeastKages)).toEqual([])
+    await tailedBeastWeeklyReset(db)
     const data = await view()
     expect(data.kages.map((k) => [k.village, k.name, k.isMe])).toEqual([
       [0, 'Ninja_01', true],
@@ -339,11 +343,23 @@ describe('Essence shop', () => {
     expect(await bag('i161007')).toEqual([])
   })
 
-  it('does not sell the limited Stone Bag or items outside the list', async () => {
+  it('sells the Level 10 Stone Bag up to 5 a week and nothing outside the list', async () => {
     await setPlayer({ essence: 10_000 })
-    expect(errorCode(await buy('i150117'))).toBe('unavailable')
     expect(errorCode(await buy('i100'))).toBe('unknown_item')
+    expect((await buy('i150117', 3)).statusCode).toBe(200)
+    expect(errorCode(await buy('i150117', 3))).toBe('limit_reached')
+    expect((await buy('i150117', 2)).statusCode).toBe(200)
+    expect(errorCode(await buy('i150117'))).toBe('limit_reached')
+    expect(await player()).toMatchObject({ essence: 9_000, stoneBagsBought: 5 })
+    expect((await bag('i150117')).reduce((n, r) => n + r.count, 0)).toBe(5)
     expect((await view()).shop.find((o) => o.itemId === 'i150117')!.available).toBe(false)
+  })
+
+  it('never sells more than 5 Stone Bags under concurrent buys', async () => {
+    await setPlayer({ essence: 10_000 })
+    const responses = await Promise.all(Array.from({ length: 4 }, () => buy('i150117', 2)))
+    expect(responses.filter((r) => r.statusCode === 200)).toHaveLength(2)
+    expect(await player()).toMatchObject({ stoneBagsBought: 4 })
   })
 
   it('never overspends under concurrent buys', async () => {
@@ -357,16 +373,14 @@ describe('Essence shop', () => {
 describe('leaderboard and villages', () => {
   it('ranks the top 10 by Honor and sums Honor per village', async () => {
     const ids = await t.addNinjas(Array.from({ length: 11 }, (_, i) => ({ nation: i % 5 })))
-    await db
-      .insert(tailedBeastPlayers)
-      .values(
-        ids.map((id, i) => ({
-          week: week(),
-          characterId: id,
-          village: i % 5,
-          honor: (i + 1) * 10,
-        })),
-      )
+    await db.insert(tailedBeastPlayers).values(
+      ids.map((id, i) => ({
+        week: week(),
+        characterId: id,
+        village: i % 5,
+        honor: (i + 1) * 10,
+      })),
+    )
     const data = await view()
     expect(data.leaderboard).toHaveLength(10)
     expect(data.leaderboard[0]).toMatchObject({ place: 1, name: 'Rank_10', honor: 110 })

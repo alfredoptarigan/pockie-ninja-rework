@@ -190,6 +190,13 @@
       "when": 1791904619793,
       "tag": "0026_team_stone",
       "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1791945089663,
+      "tag": "0027_tailed_beast_stone_bags",
+      "breakpoints": true
     }
   ]
 }
