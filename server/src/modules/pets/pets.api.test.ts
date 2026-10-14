@@ -245,6 +245,17 @@ describe('feeding and digestion', () => {
     })
     expect(response.json().error.code).toBe('not_food')
   })
+
+  it('refuses food of the wrong type and a full appetite, keeping the food', async () => {
+    const pet = await newPet()
+    await give('i170117', 2)
+    // Grain slots; i170117 is meat.
+    await setPet(pet.id, { foodSlots: Array.from({ length: 6 }, () => ({ type: 2, mul: 0 })) })
+    expect((await post(`/${pet.id}/feed`, { foods: FOODS })).json().error.code).toBe('wrong_food')
+    await setPet(pet.id, { appetite: 7200 })
+    expect((await post(`/${pet.id}/feed`, { foods: FOODS })).json().error.code).toBe('full')
+    expect(await held('i170117')).toBe(2)
+  })
 })
 
 describe('skills', () => {
@@ -317,6 +328,21 @@ describe('skills', () => {
     await setPet(pet.id, { appetite: 7200 })
     expect((await post(`/${pet.id}/skills/learn`, { kind: 3 })).json().error.code).toBe(
       'all_locked',
+    )
+  })
+
+  it('unlocking a locked skill is free; non-books are refused', async () => {
+    const pet = await slottedPet()
+    await give('i150406')
+    await give('i180035')
+    await post(`/${pet.id}/skills/book`, { item: 'i180035' })
+    await post(`/${pet.id}/skills/50020/lock`)
+    const unlocked = await post(`/${pet.id}/skills/50020/unlock`)
+    expect(unlocked.json().pets[0].skills[0]).toMatchObject({ skillId: 50020, locked: false })
+    expect(await held('i150406')).toBe(0)
+    expect((await post(`/${pet.id}/skills/40001/lock`)).json().error.code).toBe('no_skill')
+    expect((await post(`/${pet.id}/skills/book`, { item: 'i170117' })).json().error.code).toBe(
+      'not_book',
     )
   })
 
