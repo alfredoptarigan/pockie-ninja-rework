@@ -54,8 +54,10 @@ describe('KennelWindow', () => {
     const card = await screen.findByRole('region', { name: 'Baby Vulture' })
     expect(card).toHaveTextContent('Nature: Beast')
     expect(card).toHaveTextContent('Attack:170')
-    expect(within(card).getByRole('group', { name: 'Pass skills' })).toHaveTextContent('Empty slot')
-    expect(screen.getByRole('button', { name: 'Unlock (100 Gold)' })).toBeInTheDocument()
+    expect(within(card).getByRole('group', { name: 'Passive skills' })).toHaveTextContent(
+      'Empty slot',
+    )
+    expect(screen.getByRole('button', { name: 'Unlock slot (100 Gold)' })).toBeInTheDocument()
     // Level 12 of 30 and 3 of 50 Feathers.
     expect(within(card).getByRole('button', { name: 'Scavenging Vulture' })).toBeDisabled()
   })
@@ -72,7 +74,7 @@ describe('KennelWindow', () => {
       },
     })
     renderWithProviders(<KennelWindow onClose={vi.fn()} />)
-    const pass = await screen.findByRole('group', { name: 'Pass skills' })
+    const pass = await screen.findByRole('group', { name: 'Passive skills' })
     await userEvent.click(within(pass).getByRole('button', { name: 'Learn' }))
     expect(requestBody(fetchMock, 'POST /api/game/pets/pet-1/skills/learn')).toEqual({ kind: 3 })
     await userEvent.click(screen.getByRole('button', { name: 'Set active' }))

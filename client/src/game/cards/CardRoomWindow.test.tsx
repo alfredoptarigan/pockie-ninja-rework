@@ -61,7 +61,7 @@ describe('CardRoomWindow', () => {
       },
     })
     renderWithProviders(<CardRoomWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('button', { name: /Seretei Reapers/ }))
+    await userEvent.click(await screen.findByRole('button', { name: /Seireitei Reapers/ }))
     await userEvent.click(screen.getByRole('button', { name: 'Claim prize' }))
     expect(
       await screen.findByText(
@@ -78,7 +78,7 @@ describe('CardRoomWindow', () => {
         apiError(400, 'bag_full', 'Your bag is full.'),
     })
     renderWithProviders(<CardRoomWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('button', { name: /Seretei Reapers/ }))
+    await userEvent.click(await screen.findByRole('button', { name: /Seireitei Reapers/ }))
     await userEvent.click(screen.getByRole('button', { name: 'Claim prize' }))
     expect(await screen.findByText('Your bag is full.')).toBeVisible()
   })
