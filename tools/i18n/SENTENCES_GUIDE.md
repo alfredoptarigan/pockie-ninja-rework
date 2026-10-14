@@ -78,3 +78,33 @@ typos.
 | items (quest and Ninja House requirements)                                         | gifts                    |
 | Tailed Beast (event name); beast (one of the nine)                                 | tailed beast in messages |
 | Name (ranking column for a player)                                                 | Ninja                    |
+
+## M6 window terms (pets, wings, cards, sound)
+
+One English term per thing in the Pet Kennel, Pet Tracing, Kennel Shop, Wings, Card Room and
+Sound windows, the Inventory Pet and Wing slots, and the pet quests. Item, pet, wing, aura,
+talisman and card names stay in `glossary.json` and `client/src/i18n/reborn.json`; fix only clear
+typos and awkward wording. 2011 pet strings that say "pet pen" or "fullness" are unused; our
+window is the Pet Kennel.
+
+| Use                                                                              | Not                               |
+| -------------------------------------------------------------------------------- | --------------------------------- |
+| pet; "your first pet" in quests                                                  | companion, partner                |
+| Pet Kennel (window and place), kennel slot; Unlock slot (kennel slots, in Gold)  | Pet Pen, open                     |
+| appetite (bar, food tooltips, "+5 appetite")                                     | hunger, satiety, fullness         |
+| Aura, Support, Passive (the three pet skill kinds, as in the skill descriptions) | Halo, Help, Pass                  |
+| Add slot (pet skill slots, in Stone); Lock / Unlock (protect a skill)            | Open slot                         |
+| Pet Skill Lock, Oblivion Potion (item names); Remove (the button)                | skill remover                     |
+| Pet Skill Book: Name [E]; tiers are [E], [X] (2011 top tier), [S], Frenzied      | Pet Skill - Name, [卍], Name[E]   |
+| Basic, Advanced, Expert (aura tiers)                                             | Elementary, Beginner              |
+| food types: Any food, Grain, Meat, Vegetable, Dessert, Medicine, Other           | Random, Others, Food type 2       |
+| Defense, Attack (pet props also Disturb, Active, Savvy, as in Reborn)            | Defence                           |
+| Lv. 5 for compact labels, "level 5" in sentences                                 | Lv 5                              |
+| Evolved Name, Awakened Name (pet stages)                                         | Name Evo, Name Awakened           |
+| Feather (1), Feathers (N); Plume Shard; wing stone (not the Stone currency)      | 1 Feathers, Stone for a wing item |
+| Enhance, enhancement (wings); +N levels                                          | upgrade                           |
+| equipped / Equip / Unequip                                                       | worn                              |
+| card pack (item name "Green Card Pack"); Card Room; collection; prize            | card box in player text           |
+| Pet Tracing board: cell, flip, hidden                                            | card, open, face down             |
+| "Resets daily at 00:00 UTC"                                                      | "Resets at 00:00 UTC"             |
+| Ascii names without macrons for pets and beasts (Son Goku, Kokuo)                | Son Gokū, Kokuō                   |
