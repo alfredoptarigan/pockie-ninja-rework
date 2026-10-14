@@ -1,12 +1,12 @@
 # Reborn quests
 
 Run `node tools/quests/reborn-story.ts` from the repository root. The generator writes
-127 Task.ini rows, their SubTask.ini objectives, quest-drop rows, and only the quest
+130 Task.ini rows, their SubTask.ini objectives, quest-drop rows, and only the quest
 text keys in `client/src/i18n/reborn.json`. `names.json` stores the normalized Reborn
 names/ids; `story-text.ts` contains original prose. No raw sentence data is needed.
 Run this generator after `pnpm game-data:reborn`, whose general overlay import writes empty quest placeholders.
 
-The nine tutorial quests form a chain with omitted systems skipped. Story quests
+The twelve tutorial quests form a chain with omitted systems skipped. Story quests
 30001–30118 form a separate branch chain, from level 1 to 70. The three seal
 proposals are sequential investigations rather than mutually exclusive choices.
 Unknown steps, NPC assignments and level gates are our design. Shared field bands
@@ -18,7 +18,9 @@ monster/scene drop probabilities, under independent quest IDs.
 
 Rewards use half the smallest 2011 main-line EXP and Stone reward at the exact
 level, rounded down. Levels without a main-line reward pay zero. No additional
-items, coupons or honor are awarded. The user-approved exception is 830022:
+items, coupons or honor are awarded, except the pet lessons (M6 task 13): 820012 hands out a
+Baby Vulture (i320002, the level-1 explore pet) and 820014 one food of each level-8 type
+(i170113-i170116) for the feeding step that follows. The user-approved exception is 830022:
 level 21, 8 Banshees and 6 Scorching Demons in scene 2103, 3,060 EXP and 36,000 Stone.
 
 ## Coordinator hooks
@@ -36,6 +38,8 @@ feature tasks/coordinator.
 | `REBORN_ARENA_FIGHT_COMMAND`            | 82004 | An arena fight finishes, win or loss                    |
 | `REBORN_LAS_NOCHES_FLOOR_COMMAND`       | 82005 | A Las Noches floor is cleared                           |
 | `REBORN_BLOODLINE_UNLOCK_COMMAND`       | 82006 | A bloodline first becomes unlocked                      |
+| `REBORN_EQUIP_PET_COMMAND`              | 82007 | A pet becomes the active pet                            |
+| `REBORN_FEED_PET_COMMAND`               | 82008 | A pet starts digesting its food                         |
 
 Do not emit on a rejected request, failed upgrade, activation toggle, or repeat
 bloodline gift. Command objectives are scene-independent and count one successful

@@ -83,6 +83,48 @@
       "TargetRequireNum": 1
     }
   ],
+  "820012": [
+    {
+      "CanTransfer": 1,
+      "NpcSayMessageID": "RebornQuest_820012_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820012_step_0",
+      "SubTaskType": 3,
+      "SubmitSceneID": 111,
+      "TargetCondition": 0,
+      "TargetConfiger": "n11001",
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820014": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820014_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820014_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82007,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
+  "820015": [
+    {
+      "CanTransfer": 0,
+      "NpcSayMessageID": "RebornQuest_820015_start",
+      "SetpSeq": 0,
+      "SubTaskDescription": "RebornQuest_820015_step_0",
+      "SubTaskType": 8,
+      "SubmitSceneID": -1,
+      "TargetCondition": 82008,
+      "TargetConfiger": 0,
+      "TargetItem": 0,
+      "TargetRequireNum": 1
+    }
+  ],
   "820016": [
     {
       "CanTransfer": 0,
