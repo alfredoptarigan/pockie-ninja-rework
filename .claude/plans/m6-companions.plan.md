@@ -839,12 +839,13 @@ adds one line each when merging:
       && pnpm e2e` is green.
 - [ ] M6 assets stay within the 160 MB gate (or the user accepts more).
 
-## Open questions for the user
+## Answered by the user (2026-10-14)
 
-1. **Pet level cap:** 50 (2011, decision 10) or Reborn's 35?
-2. **Talisman ids:** the brief had 218030-34 as Safety and 218040-44 as Integrity. The Reborn
-   locale names 218030 "Talisman of Integrity" and 218040 "Talisman of Safety", and decision 24
-   follows the locale. Is that OK?
-3. **Wing Collection:** register without using up the wing (decision 25), or hand the wing in?
-4. **Scene 5001:** is our 5001 the map Reborn calls Valhalla? If not, `valhalla.mp3` is dropped.
-5. **Pet EXP share of 50%** and **evolution at level 30 for 50 Feathers:** OK as starting values?
+1. **Pet level cap:** 50 (2011), as decision 10.
+2. **Talisman ids:** follow the Reborn locale (218030 Integrity, 218040 Safety), as decision 24.
+3. **Wing Collection:** register without using up the wing, as decision 25.
+4. **Scene 5001:** play `valhalla.mp3` only if our 5001 is the Valhalla map (check its scene name
+   in the i18n); otherwise drop the track.
+5. **Pet EXP share 50%** and **evolution at level 30 for 50 Feathers** are accepted. The 34 pets
+   without Reborn art use their family base pet's art; with no family, the item icon only.
+6. **LFS budget:** about 130 MB accepted; the 160 MB gate stays.
