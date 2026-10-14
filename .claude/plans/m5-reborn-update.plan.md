@@ -498,12 +498,12 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- team-stone && pnpm --filter @pockie/game-core test -- team-stone`
 - **Depends on**: 2.
 
-### Task 15: Translation review
+### Task 15: Translation review (done; glossary updated with the M5 window terms)
 - **Action**: review every string in the M5 windows, the scroll-skill tooltips (ours) and the 127
   quest texts; apply the glossary (Reborn names). Light work: Sonnet.
 - **Depends on**: 6-14.
 
-### Task 16: Verification
+### Task 16: Verification (done; 5 M5 journeys, docs/security-review-m5.md; full e2e green, 2 older journeys flake only under heavy machine load)
 - **Action**: Playwright journeys (level-51 seed: upgrade and activate a talent; turn in limit items
   and activate a bloodline; use and slot a 7-day scroll; win an arena fight showing a secret
   technique; claim daily login and dice). `docs/security-review-m5.md` for every M5 route (locks,
