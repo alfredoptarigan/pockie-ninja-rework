@@ -6,7 +6,7 @@ import names from '../../i18n/reborn.json'
 import { api } from '../../lib/api'
 import { errorMessage, gameKeys } from '../api'
 import { Bar, GameButton, Notice } from '../skin'
-import { bloodlinesKey, formatStat } from './index'
+import { bloodlinesKey, formatStat, limitLabel } from './index'
 
 export const soulsKey = ['game', 'bloodlines', 'souls'] as const
 export const soulIcon = (type: number) => `/assets/reborn/icons/bloodlines/souls/${type}.webp`
@@ -15,7 +15,6 @@ export const PRAYER_ATTRIBUTES = ['Strength', 'Agility', 'Stamina'] as const
 const PRAYER_BONUS_PER_LEVEL = 8
 
 const text = names as Record<string, string>
-const limitName = (limit: BloodlineLimit) => text[limit.nameKey] ?? `Bloodline ${limit.limitId}`
 
 export function soulLabel(data: SoulsView, soul: Pick<SoulView, 'type' | 'level'>) {
   const type = data.types.find((t) => t.id === soul.type)
@@ -64,7 +63,7 @@ function useLimitPick(limits: BloodlineLimit[]) {
       >
         {unlocked.map((l) => (
           <option key={l.limitId} value={l.limitId}>
-            {limitName(l)}
+            {limitLabel(l)}
             {l.active ? ' (Active)' : ''}
           </option>
         ))}

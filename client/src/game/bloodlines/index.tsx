@@ -46,6 +46,8 @@ export const LIMIT_ITEM_NAMES: Record<string, string> = {
 const text = names as Record<string, string>
 const limitName = (limit: BloodlineLimit) => text[limit.nameKey] ?? `Bloodline ${limit.limitId}`
 const npcName = (limit: BloodlineLimit) => text[limit.npcNameKey] ?? limitName(limit)
+/** Two bloodlines share the names Byakugan and Mangekyo Sharingan, so lists add the teacher. */
+export const limitLabel = (limit: BloodlineLimit) => `${limitName(limit)} (${npcName(limit)})`
 
 /** Attributes are x100 internally; per-mille terms show as tenths of a percent. */
 const ATTRIBUTES = new Set(['strength', 'agility', 'stamina'])
@@ -179,7 +181,7 @@ export function BloodlinesWindow({
                   {entry ? (
                     <>
                       <img src={limitIcon(entry.limitId)} alt="" className="size-12" />
-                      <span className="text-center font-bold">{limitName(entry)}</span>
+                      <span className="text-center font-bold">{limitLabel(entry)}</span>
                       <GameButton
                         small
                         disabled={busy}
@@ -242,9 +244,7 @@ function LimitCard({
     <section aria-label={limitName(limit)} className="game-card flex gap-2 p-2">
       <img src={limitIcon(limit.limitId)} alt="" className="size-14 shrink-0" />
       <div className="flex grow flex-col gap-1">
-        <h3 className="font-bold">
-          {limitName(limit)} ({npcName(limit)})
-        </h3>
+        <h3 className="font-bold">{limitLabel(limit)}</h3>
         <p>
           Required level {limit.requiredLevel}.{limit.unlocked ? ' Unlocked.' : ''}
           {limit.active ? ' Active.' : ''}

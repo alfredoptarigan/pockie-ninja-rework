@@ -36046,8 +36046,8 @@
  },
  "reborn_limit_15": {
   "kind": "skill",
-  "source": "FlameThrower",
-  "en": "FlameThrower"
+  "source": "Flamethrower",
+  "en": "Flamethrower"
  },
  "reborn_limit_16": {
   "kind": "skill",
@@ -36126,8 +36126,8 @@
  },
  "reborn_limit_3": {
   "kind": "skill",
-  "source": "BeastMan Clone",
-  "en": "BeastMan Clone"
+  "source": "Beastman Clone",
+  "en": "Beastman Clone"
  },
  "reborn_limit_30": {
   "kind": "skill",
@@ -36146,13 +36146,13 @@
  },
  "reborn_limit_33": {
   "kind": "skill",
-  "source": "Kyuby Eye",
-  "en": "Kyuby Eye"
+  "source": "Kyuubi Eye",
+  "en": "Kyuubi Eye"
  },
  "reborn_limit_34": {
   "kind": "skill",
-  "source": "2nd Sharingan",
-  "en": "2nd Sharingan"
+  "source": "2nd Stage Sharingan",
+  "en": "2nd Stage Sharingan"
  },
  "reborn_limit_35": {
   "kind": "skill",
