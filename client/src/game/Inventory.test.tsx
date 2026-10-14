@@ -185,6 +185,7 @@ describe('Inventory', () => {
       'Armour: empty',
       'Belt: empty',
       'Shoes: empty',
+      'Wing: empty',
     ])
   })
 

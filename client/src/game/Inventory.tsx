@@ -19,6 +19,7 @@ import type { GearView } from '@pockie/shared'
 import { itemIcon } from './ItemIcon'
 import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
+import { WING_ICONS } from './wings'
 import { GameText, plainText } from './text'
 import type { ActionResult, BagHighlight, InventoryItem } from './types'
 import { isEquipment, isUsable } from './world'
@@ -38,6 +39,7 @@ const PAGE_SIZE = BAG_COLUMNS * 3
 /**
  * Equipment slots: `slot` is the item's EquipType (server equippedSlot). Outfit and Pet have no
  * items yet, so they always show their empty picture. `art` is drawn at half its exported size.
+ * The Wing slot (M6 decision 22) has no 2011 picture, so it uses a plain cell on the backdrop.
  */
 const SLOTS = [
   { slot: 'Outfit', label: 'Outfit', art: 'outfit', size: 61, at: [4, 50, 55, 55] },
@@ -50,6 +52,7 @@ const SLOTS = [
   { slot: 'Cloth', label: 'Armour', art: 'cloth', size: 73, at: [310, 135, 55, 55] },
   { slot: 'Girdle', label: 'Belt', art: 'belt', size: 73, at: [310, 192, 55, 55] },
   { slot: 'Shoes', label: 'Shoes', art: 'shoes', size: 73, at: [310, 249, 55, 55] },
+  { slot: 'Wing', label: 'Wing', art: null, size: 51, at: [247, 247, 55, 55] },
 ] as const
 
 const box = ([left, top, width, height]: readonly number[]): CSSProperties => ({
@@ -268,17 +271,17 @@ function Equipment({
       <ul aria-label="Equipment">
         {SLOTS.map(({ slot, label, art, size, at }) => {
           const worn = items.find((item) => item.equippedSlot === slot)
-          const icon = worn && itemIcon(worn.itemId)
+          const icon = worn && (itemIcon(worn.itemId)?.file ?? WING_ICONS[worn.itemId])
           return (
             <li
               key={slot}
               className="absolute grid place-items-center"
               style={{
                 ...box(at),
-                background: `var(--ui-slot-${art}) center / ${typeof size === 'number' ? `${size}px` : size} no-repeat`,
+                background: `var(--ui-slot${art ? `-${art}` : ''}) center / ${typeof size === 'number' ? `${size}px` : size} no-repeat`,
               }}
             >
-              {icon && <img src={icon.file} alt="" className="size-full object-contain p-[2px]" />}
+              {icon && <img src={icon} alt="" className="size-full object-contain p-[2px]" />}
               {worn && (
                 <button
                   type="button"
