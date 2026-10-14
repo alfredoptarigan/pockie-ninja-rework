@@ -71,6 +71,13 @@ after M5: fetch audio, pets, wings, auras, general effects and card art (roadmap
 5. **Level cap** stays 90 (Reborn uses 70). Decisions 6 and 13 cover the effect on talents and
    bloodlines.
 
+### User (2026-10-14, after the M5 review)
+
+6. **Team Stone BC shop** keeps the Honor shop's arena rank requirement.
+7. **Tailed Beast Essence** is weekly; unspent Essence is lost when the week ends.
+8. **Team Stone pay** is at most once per week: fix the double pay when a month change splits a
+   week (needs a paid-week column).
+
 ### Design (proposed by the planner; change on request)
 
 6. **Talent cap:** `talentLevel <= max(0, level - 50)`, kept 1:1. Talents unlock at 51 and reach 40
