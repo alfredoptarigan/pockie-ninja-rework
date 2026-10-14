@@ -809,7 +809,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/server test -- quests reborn-quests`
 - **Depends on**: 9.
 
-### Task 14: Translation review
+### Task 14: Translation review (done)
 - **Action**: review every string in the M6 windows (Kennel, Tracing, Shop, Wings, Card Room,
   Sound), the pet skill tooltips (ours for Reborn-only books) and the quest texts against the
   glossary. Light work: Sonnet.
