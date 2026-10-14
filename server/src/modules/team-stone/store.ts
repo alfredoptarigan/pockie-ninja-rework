@@ -8,7 +8,13 @@ import { characters, teamStonePlayers } from '../../db/schema.js'
 import { rebornEvents } from '../../game/data.js'
 import { grantItems, type Tx } from '../../game/progress.js'
 import { sendSystemMail } from '../../game/system-mail.js'
+import { cardBoxDrop } from '../../game/card-boxes.js'
+import { createRandom } from '@pockie/game-core'
+import { randomInt } from 'node:crypto'
 import { weekStart } from '../rankings/toll-gate-weekly.js'
+
+/** M6 decision 29: leagues 7-8 also pay a Gold card box. */
+const CARD_BOX_LEAGUES = new Set(['master', 'champion'])
 
 export type PlayerRow = typeof teamStonePlayers.$inferSelect
 
@@ -61,11 +67,21 @@ async function payWeek(tx: Tx, row: PlayerRow) {
         { dropOverflow: true },
       )
     : []
+  // Like the league item, a card box that does not fit is lost.
+  const [cardBox] = CARD_BOX_LEAGUES.has(league.id)
+    ? await grantItems(
+        tx,
+        row.characterId,
+        cardBoxDrop('teamStoneWeekly', createRandom(randomInt(2 ** 31))),
+        { dropOverflow: true },
+      )
+    : []
   // The mail names only the items that reached the bag.
   await sendSystemMail(tx, row.characterId, 'other', 'team_stone_weekly', {
     league: league.id,
     battleCoins: league.battleCoins,
     ...(kept.length > 0 && { itemId: league.item, count: kept.length }),
+    ...(cardBox && { cardBoxItemId: cardBox.itemId }),
   })
 }
 

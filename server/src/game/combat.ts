@@ -36,6 +36,7 @@ import { questItemDrops, recordCollect, recordKill, type QuestProgress } from '.
 import { talentFighterInput } from './talents.js'
 import { bloodlineBonuses } from './bloodlines.js'
 import { wingBonuses } from './wings.js'
+import { cardBoxDrop } from './card-boxes.js'
 import { characterSkillInputs } from './skill-bar.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
@@ -262,6 +263,7 @@ export async function fightMonster(
     for (const libId of monsterDropLibIds(monsterId)) {
       rewards.items.push(...rollLibDrops(libId, random, dropMul))
     }
+    rewards.items.push(...cardBoxDrop('fieldWin', random))
 
     const table = levels()
     const gained = gainExp(level, exp, rewards.exp, table.levelexp, table.role.maxlevel)

@@ -1,5 +1,6 @@
 // Las Noches manual and timestamp-driven auto runs. Character locks serialize rewards and Gold.
 import {
+  createRandom,
   buyLife,
   lasNochesAutoReach,
   LAS_NOCHES_AUTO_COSTS,
@@ -25,6 +26,7 @@ import { singleGate } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
 import { questCommand, type Tx } from '../../game/progress.js'
+import { cardBoxDrop } from '../../game/card-boxes.js'
 import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { REBORN_LAS_NOCHES_FLOOR_COMMAND } from '../../game/quests.js'
 import { vipExp } from '../../game/vip.js'
@@ -36,6 +38,8 @@ import {
   characterView,
   DEMON_CITY,
   duel,
+  grantDrops,
+  newSeed,
   saveCharacter,
   utcDay,
   withCharacter,
@@ -188,6 +192,13 @@ export function lasNochesFloorBroadcast(
   return null
 }
 
+/** M6 decision 29: every 10th floor cleared may drop a Red card box; fight loot, so a full bag loses it. */
+const CARD_BOX_FLOOR_STEP = 10
+const tenthFloorBoxes = (floor: number) =>
+  floor % CARD_BOX_FLOOR_STEP === 0
+    ? cardBoxDrop('lasNochesTenthFloor', createRandom(newSeed()))
+    : []
+
 async function catchUp(
   tx: Tx,
   character: CharacterRow,
@@ -203,10 +214,12 @@ async function catchUp(
       : 0
   const { floors } = singleGateData()
   let cleared = false
+  const boxes: ReturnType<typeof tenthFloorBoxes> = []
   while (ticks-- > 0 && row.mode === 1) {
     const floor = row.currentFloor!
     if (floor <= (row.autoReachFloor ?? 0)) {
       cleared = true
+      boxes.push(...tenthFloorBoxes(floor))
       const message = lasNochesFloorBroadcast(
         character.name,
         floor,
@@ -242,6 +255,7 @@ async function catchUp(
     } else row = { ...row, currentFloor: floor + 1 }
   }
   if (cleared) {
+    await grantDrops(tx, character.id, boxes)
     await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
     await recordWeeklyActivity(tx, character.id, 'lasNoches', now)
   }
@@ -355,6 +369,8 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
       let pot: number | null = null
       let paid: number | null = null
       let levelsGained = 0
+      let boxes: Awaited<ReturnType<typeof grantDrops>> = []
+      let lost = 0
       if (won) {
         // Pouches refill after a win.
         const hpDraw = drawPouch(hp, maxHp, character.hpPouch)
@@ -378,6 +394,9 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         if (outcome.ended) pot = outcome.run.pot
         await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
         await recordWeeklyActivity(tx, character.id, 'lasNoches')
+        const dropped = tenthFloorBoxes(run.floor)
+        boxes = await grantDrops(tx, character.id, dropped)
+        lost = dropped.length - boxes.length
       } else {
         // A loss refills HP and MP; without a life the pot is halved and the run ends.
         state = { hp: maxHp, mp: maxMp }
@@ -398,7 +417,13 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         replay,
         won,
         npcIds: [npcId],
-        rewards: { exp: paid ?? 0, stone: 0, items: [], levelsGained },
+        rewards: {
+          exp: paid ?? 0,
+          stone: 0,
+          items: boxes,
+          levelsGained,
+          ...(lost > 0 && { lost }),
+        },
         potPaid: paid,
         lasNoches: view(saved, broadcasts),
         character: await characterView(tx, character.id),

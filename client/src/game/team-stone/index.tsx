@@ -15,6 +15,7 @@ import names from '../../i18n/reborn.json'
 import { api } from '../../lib/api'
 import { errorMessage, useApplyResult } from '../api'
 import { itemName } from '../explore'
+import { plainText } from '../text'
 import { ItemIcon } from '../ItemIcon'
 import { Dialog, GameButton, Notice, Tabs } from '../skin'
 import { BattleReplayMount } from '../stage'
@@ -46,6 +47,9 @@ export const TEAM_STONE_MAIL_TEXT = {
       `Your Team Stone league paid ${Number(params.battleCoins) || 0} Battle Coins this week.` +
       (params.itemId
         ? ` You also received ${Number(params.count) || 1} x ${itemName(String(params.itemId))}.`
+        : '') +
+      (params.cardBoxItemId
+        ? ` You also received a ${plainText(`lg_reborn_item_${String(params.cardBoxItemId).slice(1)}`, 'card pack')}.`
         : ''),
   }),
 }

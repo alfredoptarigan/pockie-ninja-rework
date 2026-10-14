@@ -23,6 +23,7 @@ import { rewardExp } from '../../game/nonfight-buffs.js'
 import { vipDropMul } from '../../game/vip.js'
 import { scrollComboPrizes } from '../../game/scroll-sources.js'
 import { limitItemDrops } from '../bloodlines/rules.js'
+import { cardBoxDrop } from '../../game/card-boxes.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
 import {
@@ -171,6 +172,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
         const loot = [
           ...kill.items,
           ...limitItemDrops(sceneLevel(character), createRandom(newSeed())),
+          ...cardBoxDrop('pubFightWin', createRandom(newSeed())),
         ]
         const items = await grantDrops(tx, character.id, loot)
         await saveCharacter(tx, character.id, {

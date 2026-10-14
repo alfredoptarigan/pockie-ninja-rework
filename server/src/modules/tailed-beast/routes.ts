@@ -6,6 +6,7 @@ import {
   beastLevel,
   claimableBox,
   closestByLevel,
+  createRandom,
   honorFor,
   spendTickets,
   ticketCost,
@@ -37,6 +38,7 @@ import { monsterFighter, playerFighter } from '../../game/combat.js'
 import { npc, rebornEvents } from '../../game/data.js'
 import { grantItems, type Tx } from '../../game/progress.js'
 import { WING_ESSENCE_OFFERS } from '../../../../game-core/src/wings/constants.js'
+import { cardBoxDrop } from '../../game/card-boxes.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
@@ -55,6 +57,7 @@ type PlayerRow = typeof tailedBeastPlayers.$inferSelect
 const DAY_MS = 24 * 3600 * 1000
 const VILLAGES = [0, 1, 2, 3, 4]
 const LEADERBOARD_SIZE = 10
+const CARD_BOX_FIGHTS = 10
 /** Rewards are bound, like the Honor shop: event currency never becomes tradable goods. */
 const BOUND = true
 /** How often jobs.ts should run `tailedBeastWeeklyReset` (idempotent, so late runs are fine). */
@@ -327,9 +330,15 @@ async function claimBox(tx: Tx, character: CharacterRow, fights: number) {
     throw bad('box_claimed', 'You have already opened this box this week.')
   if (!claimableBox(me.fights, me.boxesClaimed, fights))
     throw bad('box_locked', `Fight ${fights} times this week to open this box.`)
-  const award = { itemId: config().boxes.find((box) => box.fights === fights)!.item, bound: BOUND }
-  await requireBagRoom(tx, character.id, [award])
-  await grantItems(tx, character.id, [award])
+  const award = [
+    { itemId: config().boxes.find((box) => box.fights === fights)!.item, bound: BOUND },
+    // M6 decision 29: the 10-fight box also holds a Purple card box.
+    ...(fights === CARD_BOX_FIGHTS
+      ? cardBoxDrop('tailedBeastBox', createRandom(randomInt(2 ** 31)))
+      : []),
+  ]
+  await requireBagRoom(tx, character.id, award)
+  await grantItems(tx, character.id, award)
   await tx
     .update(tailedBeastPlayers)
     .set({ boxesClaimed: [...me.boxesClaimed, fights] })
