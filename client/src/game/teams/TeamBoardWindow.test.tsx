@@ -45,7 +45,7 @@ describe('Team board window', () => {
     })
     renderWithProviders(<TeamBoardWindow character={me} onClose={noop} />)
     const row = await screen.findByRole('listitem', {
-      name: /Sakura_1 \(Lv\. 22, arena rank Beginner IV\)/,
+      name: /Sakura_1 \(Lv\. 22, arena rank Prep IV\)/,
     })
     expect(row).toHaveTextContent('Rock_1 (Lv. 20, unranked)')
     await userEvent.click(within(row).getByRole('button', { name: 'Join' }))

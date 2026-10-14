@@ -74,7 +74,10 @@ test('a ninja appraises a weapon in the bag and enhances it at the Blacksmith', 
   })
 
   // Act: appraise from the bag.
-  await page.getByRole('navigation', { name: 'Menu' }).getByRole('button', { name: 'Bag' }).click()
+  await page
+    .getByRole('navigation', { name: 'Menu' })
+    .getByRole('button', { name: 'Inventory' })
+    .click()
   const bag = dialog(page, 'Inventory')
   await bag.getByRole('button', { name: WEAPON.name, exact: true }).click()
   const appraise = bag.getByRole('menuitem', { name: new RegExp(`^Appraise ${WEAPON.name} for`) })

@@ -7,7 +7,7 @@ import { CharacterWindow } from './CharacterWindow'
 import { RealtimePanels } from './Chat'
 import { CreateCharacter } from './CreateCharacter'
 import {
-  ExpStrip,
+  FeatureIcons,
   HudLayer,
   MenuBar,
   PlayerCard,
@@ -17,7 +17,6 @@ import {
 } from './Hud'
 import { Inventory } from './Inventory'
 import { NpcDialog } from './NpcDialog'
-import { QuestLog } from './QuestLog'
 import { QuestNavigation } from './QuestNavigation'
 import { SceneExits } from './SceneExits'
 import { SceneView } from './SceneView'
@@ -83,6 +82,7 @@ function GameScreen({ character }: { character: Character }) {
   const [npc, setNpc] = useState<SceneNpc | null>(null)
   const [bagHighlight, setBagHighlight] = useState<BagHighlight | undefined>()
   const [feature, setFeature] = useState<OpenWindow | null>(null)
+  const [questsOpen, setQuestsOpen] = useState(true)
   const close = () => setWindow(null)
   const open = (window: Window) => {
     setBagHighlight(undefined)
@@ -137,6 +137,7 @@ function GameScreen({ character }: { character: Character }) {
             <div ref={setHudLayer} className="pointer-events-none absolute inset-0">
               <TopBar character={character} />
               <PlayerCard character={character} />
+              {inVillage && <FeatureIcons character={character} />}
               <ScenePlaque
                 sceneId={scene.data?.sceneId}
                 inVillage={inVillage}
@@ -155,14 +156,19 @@ function GameScreen({ character }: { character: Character }) {
                 )}
               </div>
               <QuestNavigation
+                open={questsOpen}
+                onClose={() => setQuestsOpen(false)}
                 character={character}
                 scene={scene.data}
                 onNpc={openNpc}
                 onOpenBag={openBag}
               />
               <RealtimePanels characterId={character.id} inTeam={Boolean(team.data?.team)} />
-              <ExpStrip character={character} />
-              <MenuBar onOpen={open} />
+              <MenuBar
+                character={character}
+                onOpen={open}
+                onTasks={() => setQuestsOpen((shown) => !shown)}
+              />
             </div>
           </main>
 
@@ -178,11 +184,6 @@ function GameScreen({ character }: { character: Character }) {
           )}
           {openWindow === 'skills' && <SkillsWindow character={character} onClose={close} />}
           {openWindow === 'character' && <CharacterWindow character={character} onClose={close} />}
-          {openWindow === 'quests' && (
-            <Dialog title="Quest Log" onClose={close} className="w-[32rem]">
-              <QuestLog onNpc={openNpc} />
-            </Dialog>
-          )}
           {openWindow === 'map' && <WorldMap character={character} onClose={close} />}
           {npc && (
             <NpcDialog npc={npc} talk={talk} character={character} onClose={() => setNpc(null)} />

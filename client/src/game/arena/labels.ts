@@ -3,14 +3,14 @@ import { plainText } from '../text'
 import data from '../world-data.json'
 import type { ArenaLogKind, ArenaSlotView } from '../../../../shared/src/schemas/arena'
 
-/** competerank.ini tiers 0-21 (client TipRank_1-22). */
+/** competerank.ini tiers 0-21, under Reborn's names (rank__1-22, the Stats window's Rank). */
 const TIER_NAMES = [
-  'Beginner I',
-  'Beginner II',
-  'Beginner III',
-  'Beginner IV',
-  'Beginner V',
-  'Transition',
+  'Prep I',
+  'Prep II',
+  'Prep III',
+  'Prep IV',
+  'Prep V',
+  'Pre-Academy',
   'Academy I',
   'Academy II',
   'Academy III',
@@ -21,15 +21,15 @@ const TIER_NAMES = [
   'Chunin II',
   'Chunin III',
   'Chunin IV',
-  'Jounin I',
-  'Jounin II',
-  'Jounin III',
-  'ANBU',
+  'Jonin I',
+  'Jonin II',
+  'Jonin III',
+  'Anbu',
   'Sannin',
   'Kage',
 ]
 
-/** Duels need this tier on both sides (Beginner III). */
+/** Duels need this tier on both sides (Prep III). */
 export const DUEL_TIER = 2
 
 export const tierName = (tier: number) => TIER_NAMES[tier] ?? `Rank ${tier + 1}`

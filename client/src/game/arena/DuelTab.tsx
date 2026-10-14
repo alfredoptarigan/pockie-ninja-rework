@@ -1,5 +1,5 @@
 // Ninjutsu Duel (UI_PlayerPK): random ninjas within 30 places, friends, any name; history.
-// Tier 2 (Beginner III) on both sides; 10 free a day, then Gold.
+// Tier 2 (Prep III) on both sides; 10 free a day, then Gold.
 import { useState } from 'react'
 import { errorMessage } from '../api'
 import { GameButton, Notice } from '../skin'

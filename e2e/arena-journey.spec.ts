@@ -13,7 +13,7 @@ const honorOf = (name: string) =>
   Number(sql(`select honor from characters where name = :'name'`, { name }))
 
 test('a ninja wins an arena fight and buys from the Honor shop', async ({ browser }) => {
-  // Arrange: level 20 with 175 Honor, short of the offer until a win pays 9 (Beginner I).
+  // Arrange: level 20 with 175 Honor, short of the offer until a win pays 9 (Prep I).
   const { context, page, name: ninja } = await createSeededNinja(browser, 'Arena')
   try {
     await armNinja(page, ninja, 'level = 20, honor = 175')

@@ -44,27 +44,25 @@ export function QuestNavigation({
   scene,
   onNpc,
   onOpenBag,
+  open,
+  onClose,
 }: {
+  /** Reborn's bottom-bar Tasks button shows and hides the panel (shown by default). */
+  open: boolean
+  onClose: () => void
   character: Character
   scene: SceneView | undefined
   onNpc: (npc: SceneNpc) => void
   /** Opens the bag pointing at the items a tutorial step needs. */
   onOpenBag: (highlight: BagHighlight) => void
 }) {
-  const [open, setOpen] = useState(true)
   const [tab, setTab] = useState<Tab>('accepted')
   const quests = useQuests()
   const available = useAvailableQuests()
   const travel = useTravel()
   const ids = useId()
 
-  if (!open) {
-    return (
-      <GameButton small className={PANEL} onClick={() => setOpen(true)}>
-        Quest Navigation
-      </GameButton>
-    )
-  }
+  if (!open) return null
 
   const entries: Entry[] =
     tab === 'accepted'
@@ -113,7 +111,7 @@ export function QuestNavigation({
           type="button"
           aria-label="Close Quest Navigation"
           className="game-close mt-[4px] shrink-0"
-          onClick={() => setOpen(false)}
+          onClick={() => onClose()}
         />
       </div>
       <div className="mt-[5px] shrink-0 pl-[5px]">

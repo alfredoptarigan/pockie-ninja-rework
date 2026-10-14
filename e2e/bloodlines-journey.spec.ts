@@ -32,9 +32,11 @@ test('a level-51 ninja turns in limit items and activates a bloodline', async ({
     giveItem(name, LIMIT.item, { count: LIMIT.itemsPerTurnIn })
     await reloadGame(page)
 
-    // Act: Character window, Bloodlines, then the first Ninja House entry's turn-in.
-    await openMenu(page, 'Character')
-    await dialog(page, 'Stats').getByRole('button', { name: 'Bloodlines', exact: true }).click()
+    // Act: Inventory, Blood Limit (as in Reborn), then the first Ninja House entry's turn-in.
+    await openMenu(page, 'Inventory')
+    await dialog(page, 'Inventory')
+      .getByRole('button', { name: 'Blood Limit', exact: true })
+      .click()
     const bloodlines = dialog(page, 'Bloodlines')
     await bloodlines.getByRole('list', { name: 'Ninja House' }).getByRole('button').first().click()
     const turnedIn = page.waitForResponse(

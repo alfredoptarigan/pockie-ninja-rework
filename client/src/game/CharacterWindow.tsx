@@ -1,19 +1,29 @@
+// Stats window (menu bar "Character"), laid out like Reborn's (docs/audit/reborn-ui-audit.md §2,
+// measured 2026-10-14): the title plate, the 318x100 Name / Level / Village / Rank / EXP panel and
+// the 318x260 combat panel with Reborn's hover texts and "Hover over stats for details". Nothing
+// else: the pouches live in the Carrier Bag (portrait refill icons), training in the Inventory.
 import type { Character, CharacterStats } from '@pockie/shared'
 import type { CSSProperties } from 'react'
-import { errorMessage, useBuyPouches, useCharacterStats, useInventory } from './api'
+import { useArena } from './arena/api'
+import { tierName } from './arena/labels'
+import { useCharacterStats } from './api'
 import { TitleText } from './BuffsPanel'
-import { Dialog, GameButton, Notice } from './skin'
+import { Dialog } from './skin'
 import { plainText } from './text'
-import { useCharacterPreview } from './phaser/character-preview'
 import { expToNext, sceneNameKey, villageOf } from './world'
-import { useOpenWindow } from './windows'
 
 /** Points per displayed attribute point (RoleInitProperty.ini stores attributes x100). */
 const ATTRIBUTE_SCALE = 100
-/** Damage reduction from defence: def / (def + 1354) (Damage.java). */
+/** Defence and Break curves: x / (x + 1354) (Damage.java). */
 const DEFENSE_CURVE = 1354
+/** Reborn turns chance ratings into percent by /16 and crit damage by /8. */
+const CHANCE_DIVISOR = 16
+const CRIT_DAMAGE_DIVISOR = 8
+const BASE_CRIT_DAMAGE = 200
+/** Reborn's turn length at speed 1000: 5 s. */
+const TURN_SECONDS = 5
 
-/** One labelled value box; `hint` becomes its hover text. */
+/** One labelled value box; `hint` is its hover text (Reborn uses plain title attributes). */
 interface StatCell {
   label: string
   value: string | number
@@ -22,49 +32,94 @@ interface StatCell {
 /** A row of the two-column grid; null leaves that column empty. */
 type StatRow = [StatCell | null, StatCell | null]
 
-/** Combat groups laid out as Reborn's Stats window (UI_RoleInfo_Xml), split by dividers. */
+const pct = (value: number) => value.toFixed(2)
+const curve = (value: number) => pct((value / (value + DEFENSE_CURVE)) * 100)
+
+/** Combat groups laid out as Reborn's Stats window, split by dividers. */
 export function statGroups(stats: CharacterStats, character: Character): StatRow[][] {
-  const attribute = (value: number) => Math.trunc(value / ATTRIBUTE_SCALE)
+  const attribute = (value: number) => Math.round(value / ATTRIBUTE_SCALE)
   const minAttack = Math.min(stats.minAttack, stats.maxAttack)
-  const reduction = Math.trunc((stats.defense * 100) / (stats.defense + DEFENSE_CURVE))
+  const speed = 1000 / stats.atkTime
+  // Reborn: crit / 8 plus what crit damage adds over its 200% base.
+  const critDamage =
+    stats.crit / CRIT_DAMAGE_DIVISOR +
+    Math.max(0, (stats.critAttach || BASE_CRIT_DAMAGE) - BASE_CRIT_DAMAGE)
   return [
     [
       [
-        { label: 'STR', value: attribute(stats.strength), hint: 'Strength' },
+        { label: 'STR', value: attribute(stats.strength) },
         { label: 'Attack', value: `${minAttack} - ${stats.maxAttack}` },
       ],
-      [null, { label: 'Block', value: stats.parry }],
-    ],
-    [
       [
-        { label: 'AGI', value: attribute(stats.agility), hint: 'Agility' },
-        { label: 'Speed', value: (1000 / stats.atkTime).toFixed(2), hint: 'Actions per second' },
+        null,
+        {
+          label: 'Block',
+          value: stats.parry,
+          hint: `${pct(stats.parry / CHANCE_DIVISOR)}% chance to block attacks`,
+        },
       ],
-      [null, { label: 'Dodge', value: stats.dodge }],
     ],
     [
       [
-        { label: 'STA', value: attribute(stats.stamina), hint: 'Stamina' },
+        { label: 'AGI', value: attribute(stats.agility) },
+        {
+          label: 'Speed',
+          value: speed.toFixed(2),
+          hint: `Speed: ${Math.round(speed * 1000)} (${(TURN_SECONDS / speed).toFixed(2)}s between turns)`,
+        },
+      ],
+      [
+        null,
+        {
+          label: 'Dodge',
+          value: stats.dodge,
+          hint: `${pct(stats.dodge / CHANCE_DIVISOR)}% chance to dodge attacks`,
+        },
+      ],
+    ],
+    [
+      [
+        { label: 'STA', value: attribute(stats.stamina) },
         { label: 'HP', value: `${character.hp}/${character.maxHp}` },
       ],
-      [null, { label: 'Chakra', value: `${character.mp}/${character.maxMp}` }],
+      [null, { label: 'Chakra', value: Math.round(character.maxMp) }],
     ],
     [
       [
-        { label: 'Pierce', value: stats.pierce },
-        { label: 'Hit', value: stats.hit },
+        {
+          label: 'Pierce',
+          value: stats.pierce,
+          hint: `${pct(stats.pierce / CHANCE_DIVISOR)}% armor penetration`,
+        },
+        {
+          label: 'Hit',
+          value: stats.hit,
+          hint: `${pct(stats.hit / CHANCE_DIVISOR)}% attack accuracy`,
+        },
       ],
       [
         {
           label: 'Defense',
           value: stats.defense,
-          hint: `Takes ${reduction}% off the damage you receive`,
+          hint: `${curve(stats.defense)}% damage reduction`,
         },
-        { label: 'Break', value: stats.neglectDefense, hint: 'Ignores part of the enemy defense' },
+        {
+          label: 'Break',
+          value: stats.neglectDefense,
+          hint: `${curve(stats.neglectDefense)}% ignore target defense`,
+        },
       ],
       [
-        { label: 'Crit', value: stats.crit, hint: 'Critical' },
-        { label: 'Const', value: stats.tough, hint: 'Toughness' },
+        {
+          label: 'Crit',
+          value: stats.crit,
+          hint: `${pct(stats.crit / CHANCE_DIVISOR)}% critical chance, +${pct(critDamage)}% critical damage`,
+        },
+        {
+          label: 'Const',
+          value: stats.tough,
+          hint: `${pct(stats.tough / CHANCE_DIVISOR)}% crit resistance, -${pct(stats.tough / CRIT_DAMAGE_DIVISOR)}% crit damage taken`,
+        },
       ],
     ],
   ]
@@ -75,11 +130,9 @@ function Cell({ cell }: { cell: StatCell | null }) {
   if (!cell) return <div aria-hidden className="col-span-2" />
   return (
     <div className="contents">
-      <dt title={cell.hint} className="pr-px text-right font-mono text-[11px] leading-5 font-bold">
-        {cell.label}
-      </dt>
+      <dt className="pr-px text-right font-mono text-[11px] leading-5 font-bold">{cell.label}</dt>
       <dd
-        title={cell.hint}
+        title={cell.hint ?? String(cell.value)}
         className="game-value-box h-5 truncate px-1 text-center font-mono text-xs leading-5"
       >
         {cell.value}
@@ -105,14 +158,20 @@ function StatGrid({ rows }: { rows: StatRow[] }) {
   )
 }
 
-/** Reborn's EXP row: label, the 249x18 bar and "current / next (pct%)" under it. */
+/** Reborn's EXP row: the 249x18 bar and "cur / next (pct%)" under it, or MAX at the cap. */
 function ExpRow({ character }: { character: Character }) {
   const next = expToNext(character.level)
-  const percent = next === undefined ? 100 : Math.min(100, Math.floor((character.exp / next) * 100))
-  const text =
-    next === undefined
-      ? `${character.exp.toLocaleString('en-US')} (max level)`
-      : `${character.exp.toLocaleString('en-US')} / ${next.toLocaleString('en-US')} (${percent}%)`
+  if (next === undefined)
+    return (
+      <div className="flex h-[38px] items-center">
+        <span className="w-[50px] pr-px text-right font-mono text-[11px] font-bold">EXP</span>
+        <p className="flex-1 text-center text-[22px] font-black text-[darkgreen] italic [text-shadow:var(--shadow-game-text)]">
+          MAX
+        </p>
+      </div>
+    )
+  const percent = Math.min(100, Math.floor((character.exp / next) * 100))
+  const text = `${character.exp.toLocaleString('en-US')} / ${next.toLocaleString('en-US')} (${percent}%)`
   return (
     <div className="flex">
       <span className="w-[50px] pt-px pr-px text-right font-mono text-[11px] leading-5 font-bold">
@@ -123,9 +182,10 @@ function ExpRow({ character }: { character: Character }) {
           role="meter"
           aria-label="EXP"
           aria-valuemin={0}
-          aria-valuemax={next ?? character.exp}
+          aria-valuemax={next}
           aria-valuenow={character.exp}
           aria-valuetext={text}
+          title={`${character.exp} / ${next}`}
           className="game-progress h-[18px]"
           style={{ '--fill': `${percent}%` } as CSSProperties}
         />
@@ -135,70 +195,6 @@ function ExpRow({ character }: { character: Character }) {
   )
 }
 
-/** OnCustomBuy: 1 Gold or Gift Coupon per 1000 pouch points. */
-const POUCH_POINTS_PER_COIN = 1000
-
-/** Buys both pouches full (UI_RoleUse.as "Full" choice) with Gold or Gift Coupons. */
-function PouchRefill({ character }: { character: Character }) {
-  const buy = useBuyPouches()
-  const cost = [character.hpPouch, character.mpPouch].reduce(
-    (sum, pouch) => sum + Math.ceil((character.pouchMax - pouch) / POUCH_POINTS_PER_COIN),
-    0,
-  )
-  const refill = (currency: 'gold' | 'giftCoupon') =>
-    buy.mutate({ currency, hp: 'full', mp: 'full' })
-  const amount = (value: number) =>
-    `${value.toLocaleString('en-US')}/${character.pouchMax.toLocaleString('en-US')}`
-  return (
-    <section
-      aria-label="Refill pouches"
-      className="game-inset mt-[5px] flex flex-col gap-1 px-2.5 py-2 text-[11px]"
-    >
-      {buy.isError && <Notice tone="error">{errorMessage(buy.error)}</Notice>}
-      <dl className="flex gap-3 font-bold">
-        <div className="flex gap-1">
-          <dt>HP pouch</dt>
-          <dd className="font-mono font-normal">{amount(character.hpPouch)}</dd>
-        </div>
-        <div className="flex gap-1">
-          <dt>MP pouch</dt>
-          <dd className="font-mono font-normal">{amount(character.mpPouch)}</dd>
-        </div>
-      </dl>
-      {cost === 0 ? (
-        <p>Your pouches are full.</p>
-      ) : (
-        <div className="flex items-center gap-1.5">
-          <p
-            className="flex-1 whitespace-nowrap"
-            title={`Refill both pouches for ${cost} Gold or ${cost} Gift Coupons`}
-          >
-            Cost {cost}
-          </p>
-          <GameButton
-            small
-            disabled={buy.isPending || character.gold < cost}
-            onClick={() => refill('gold')}
-          >
-            Refill with Gold
-          </GameButton>
-          <GameButton
-            small
-            disabled={buy.isPending || character.giftCoupon < cost}
-            onClick={() => refill('giftCoupon')}
-          >
-            Refill with Coupons
-          </GameButton>
-        </div>
-      )}
-    </section>
-  )
-}
-
-/**
- * Character stats window (menu bar "Character"), laid out like Reborn's Stats window: title
- * plate, Name/Level/Village/EXP panel, combat panel. The pouch refill sits in a strip below.
- */
 export function CharacterWindow({
   character,
   onClose,
@@ -206,87 +202,52 @@ export function CharacterWindow({
   character: Character
   onClose: () => void
 }) {
-  // The Wing slot holds a wing or an aura; the preview art is keyed by its numeric item id.
-  const worn = useInventory()
-    .data?.find((item) => item.equippedSlot === 'Wing')
-    ?.itemId.slice(1)
-  const { canvas: previewRef, visible: hasPreview } = useCharacterPreview(character.clothing, {
-    wing: worn,
-    aura: worn,
-  })
   const stats = useCharacterStats()
-  const village = plainText(sceneNameKey(villageOf(character.nation)), 'Village')
-  const openWindow = useOpenWindow()
+  const arena = useArena()
+  // Reborn prints the first word of the home village ("Fire").
+  const village = plainText(sceneNameKey(villageOf(character.nation)), 'Village').split(' ')[0]!
+  const rank = arena.data ? tierName(arena.data.tier) : ''
   return (
-    <Dialog
-      title="Stats"
-      onClose={onClose}
-      // Reborn's panels sit straight on the dark frame: drop the shared cream backing.
-      className="w-[328px] px-[5px]! [&>.game-frame-title]:mb-[5px] [&>.game-inset]:p-0 [&>.game-inset]:[border-image:none]"
-    >
-      <div className="game-title-plate grid h-10 place-items-center">
-        <p>
-          <TitleText />
-        </p>
-      </div>
-      <section aria-label="Profile" className="game-inset mt-[5px] h-[100px] pt-1.5">
-        <StatGrid
-          rows={[
-            [
-              { label: 'Name', value: character.name },
-              { label: 'Level', value: character.level },
-            ],
-          ]}
-        />
-        <Divider />
-        <StatGrid
-          rows={[
-            [
-              { label: 'Village', value: village },
-              // We have no ninja rank yet; Honor takes Rank's place.
-              { label: 'Honor', value: character.honor },
-            ],
-          ]}
-        />
-        <Divider />
-        <ExpRow character={character} />
-      </section>
-      <section aria-label="Combat stats" className="game-inset mt-[5px] min-h-[260px] pt-1.5">
-        {stats.isPending && <p className="p-2 text-xs">Loading stats...</p>}
-        {stats.isError && <p className="p-2 text-xs">We could not load your stats.</p>}
-        {stats.data &&
-          statGroups(stats.data, character).map((rows, index) => (
-            <div key={index}>
-              {index > 0 && <Divider />}
-              <StatGrid rows={rows} />
-            </div>
-          ))}
-      </section>
-      {hasPreview && (
-        <section aria-label="Avatar preview" className="game-inset mt-[5px] flex justify-center">
-          <canvas
-            ref={previewRef}
-            width={310}
-            height={180}
-            aria-label="Equipped avatar cosmetics"
+    <Dialog title="Stats" onClose={onClose} className="game-window-bare w-[328px]">
+      <div className="w-[318px]">
+        <div className="game-title-plate grid h-10 place-items-center">
+          <p>
+            <TitleText />
+          </p>
+        </div>
+        <section aria-label="Profile" className="game-panel-1 mt-[5px] h-[100px] pt-1.5">
+          <StatGrid
+            rows={[
+              [
+                { label: 'Name', value: character.name },
+                { label: 'Level', value: character.level },
+              ],
+            ]}
           />
+          <Divider />
+          <dl className="grid grid-cols-[50px_100px_50px_100px] gap-y-1">
+            <Cell cell={{ label: 'Village', value: village }} />
+            <dt className="pr-px text-right font-mono text-[11px] leading-5 font-bold">Rank</dt>
+            <dd className="game-value-box h-5 truncate px-1 text-center text-sm leading-5 font-black text-[darkblue] italic">
+              {rank}
+            </dd>
+          </dl>
+          <Divider />
+          <ExpRow character={character} />
         </section>
-      )}
-      <PouchRefill character={character} />
-      <section aria-label="Training" className="game-inset mt-[5px] flex justify-end gap-1 p-1.5">
-        <GameButton small onClick={() => openWindow('talents')}>
-          Talents
-        </GameButton>
-        <GameButton small onClick={() => openWindow('bloodlines')}>
-          Bloodlines
-        </GameButton>
-        <GameButton small onClick={() => openWindow('wings')}>
-          Wings
-        </GameButton>
-        <GameButton small onClick={() => openWindow('pets')}>
-          Pet Kennel
-        </GameButton>
-      </section>
+        <section aria-label="Combat stats" className="game-panel-1 mt-[5px] h-[260px] pt-1.5">
+          {stats.isPending && <p className="p-2 text-xs">Loading stats...</p>}
+          {stats.isError && <p className="p-2 text-xs">We could not load your stats.</p>}
+          {stats.data &&
+            statGroups(stats.data, character).map((rows, index) => (
+              <div key={index}>
+                {index > 0 && <Divider />}
+                <StatGrid rows={rows} />
+              </div>
+            ))}
+          <p className="mt-0.5 text-center text-[11px] font-bold">Hover over stats for details</p>
+        </section>
+      </div>
     </Dialog>
   )
 }

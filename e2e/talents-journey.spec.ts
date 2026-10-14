@@ -31,9 +31,9 @@ test('a level-51 ninja upgrades a talent and activates it', async ({ browser }) 
     )
     await reloadGame(page)
 
-    // Act: Character window, Talents, then a Stone upgrade of the first talent.
-    await openMenu(page, 'Character')
-    await dialog(page, 'Stats').getByRole('button', { name: 'Talents', exact: true }).click()
+    // Act: Inventory, Talent (as in Reborn), then a Stone upgrade of the first talent.
+    await openMenu(page, 'Inventory')
+    await dialog(page, 'Inventory').getByRole('button', { name: 'Talent', exact: true }).click()
     const talents = dialog(page, 'Talents')
     const upgrade = talents.getByRole('button', { name: /^Upgrade for [0-9,]+ Stone$/ })
     await expect(upgrade).toBeEnabled()

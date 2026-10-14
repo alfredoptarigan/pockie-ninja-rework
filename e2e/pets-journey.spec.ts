@@ -61,7 +61,7 @@ test('a ninja adopts, feeds and activates a pet that attacks in a field fight', 
     await reloadGame(page)
 
     // Act: use the pet item in the bag.
-    await openMenu(page, 'Bag')
+    await openMenu(page, 'Inventory')
     const bag = dialog(page, 'Inventory')
     await bag.getByRole('button', { name: PET.name, exact: true }).click()
     const adopted = page.waitForResponse(
@@ -71,9 +71,11 @@ test('a ninja adopts, feeds and activates a pet that attacks in a field fight', 
     await adopted
     await bag.getByRole('button', { name: 'Close', exact: true }).click()
 
-    // Act: open the Pet Kennel and feed the food in the first slot.
-    await openMenu(page, 'Character')
-    await dialog(page, 'Stats').getByRole('button', { name: 'Pet Kennel', exact: true }).click()
+    // Act: open the Pet Kennel from its village building and feed the food in the first slot.
+    await page
+      .getByRole('region', { name: 'Scene actions' })
+      .getByRole('button', { name: 'Pet Kennel', exact: true })
+      .click()
     const kennel = dialog(page, 'Pet Kennel')
     await expect(kennel.getByRole('region', { name: PET.name })).toBeVisible()
     await kennel.getByLabel('Food slot 1').selectOption(FOOD)

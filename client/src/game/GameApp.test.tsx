@@ -87,7 +87,10 @@ describe('GameScreen', () => {
     expect(await screen.findByRole('heading', { name: 'Ninja_01' })).toBeInTheDocument()
     expect(screen.getByRole('meter', { name: 'HP' })).toHaveAttribute('aria-valuenow', '120')
     expect(screen.getByRole('meter', { name: 'MP' })).toHaveAttribute('aria-valuenow', '30')
-    expect(screen.getByRole('meter', { name: 'EXP' })).toHaveAttribute('aria-valuenow', '5')
+    expect(screen.getByRole('progressbar', { name: 'EXP' })).toHaveAttribute(
+      'title',
+      expect.stringMatching(/^5 \//),
+    )
     expect(screen.getByTitle('Stone')).toHaveTextContent('100')
     expect(screen.getByTitle('Coupons')).toHaveTextContent('10')
     const location = screen.getByRole('region', { name: 'Location' })
@@ -105,7 +108,7 @@ describe('GameScreen', () => {
     })
     const menu = await screen.findByRole('navigation', { name: 'Menu' })
 
-    await userEvent.click(within(menu).getByRole('button', { name: 'Bag' }))
+    await userEvent.click(within(menu).getByRole('button', { name: 'Inventory' }))
     const bag = screen.getByRole('dialog', { name: 'Inventory' })
     expect(await within(bag).findByText('Healing Powder')).toBeVisible()
     await userEvent.keyboard('{Escape}')
@@ -117,14 +120,16 @@ describe('GameScreen', () => {
     await userEvent.click(within(statsWindow).getByRole('button', { name: 'Close' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 
-    await userEvent.click(within(menu).getByRole('button', { name: 'Quests' }))
-    const log = screen.getByRole('dialog', { name: 'Quest Log' })
-    expect(await within(log).findByText('Newbie Pack')).toBeVisible()
-    await userEvent.keyboard('{Escape}')
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    // Reborn: Tasks shows and hides Quest Navigation.
+    const tasks = within(menu).getByRole('button', { name: 'Tasks' })
+    expect(await screen.findByRole('region', { name: 'Quest Navigation' })).toBeVisible()
+    await userEvent.click(tasks)
+    expect(screen.queryByRole('region', { name: 'Quest Navigation' })).not.toBeInTheDocument()
+    await userEvent.click(tasks)
+    expect(screen.getByRole('region', { name: 'Quest Navigation' })).toBeVisible()
   }, 15_000)
 
-  it('opens the Market and Friends from the menu and Mail from the minimap', async () => {
+  it('opens the Market from the village icons, Social from the menu and Mail from the minimap', async () => {
     renderGame({
       'GET /api/game/social/mail/summary': () => json({ unread: 2, categories: [] }),
       'GET /api/game/social/friends': () => json({ friends: [], addBack: [], max: 50 }),
@@ -133,13 +138,17 @@ describe('GameScreen', () => {
     })
     const menu = await screen.findByRole('navigation', { name: 'Menu' })
 
-    await userEvent.click(within(menu).getByRole('button', { name: 'Market' }))
+    await userEvent.click(
+      within(screen.getByRole('navigation', { name: 'Features' })).getByRole('button', {
+        name: 'Market',
+      }),
+    )
     expect(screen.getByRole('dialog', { name: 'Market' })).toHaveTextContent(
       'The Market opens at level 25.',
     )
     await userEvent.keyboard('{Escape}')
 
-    await userEvent.click(within(menu).getByRole('button', { name: 'Friends' }))
+    await userEvent.click(within(menu).getByRole('button', { name: 'Social' }))
     expect(await screen.findByText('Add a ninja by name to start your friend list.')).toBeVisible()
     await userEvent.keyboard('{Escape}')
 
@@ -172,22 +181,14 @@ describe('GameScreen', () => {
     expect(await screen.findByRole('dialog', { name: 'Card Room' })).toBeVisible()
     await userEvent.keyboard('{Escape}')
 
+    // Reborn: wings come from the Inventory's Collection button.
     await userEvent.click(
       within(screen.getByRole('navigation', { name: 'Menu' })).getByRole('button', {
-        name: 'Character',
+        name: 'Inventory',
       }),
     )
-    await userEvent.click(await screen.findByRole('button', { name: 'Wings' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Collection' }))
     expect(await screen.findByRole('dialog', { name: 'Wings' })).toBeVisible()
-    await userEvent.keyboard('{Escape}')
-
-    await userEvent.click(
-      within(screen.getByRole('navigation', { name: 'Menu' })).getByRole('button', {
-        name: 'Character',
-      }),
-    )
-    await userEvent.click(await screen.findByRole('button', { name: 'Pet Kennel' }))
-    expect(await screen.findByRole('dialog', { name: 'Pet Kennel' })).toBeVisible()
   }, 15_000)
 
   it('opens the Pet Kennel and the Card Room from their village buildings', async () => {
@@ -337,7 +338,7 @@ describe('character info', () => {
     expect(screen.queryByRole('meter', { name: /VP|Energy/ })).not.toBeInTheDocument()
   })
 
-  it('shows the combat stats and pouches in the Character window', async () => {
+  it('shows the combat stats in the Character window and the pouches on the card', async () => {
     renderGame({}, { ...character, hpPouch: 1000 })
     const card = await screen.findByRole('region', { name: 'Character' })
     expect(within(card).getByLabelText('Pouches')).toHaveTextContent('HP pouch1,000 / 10,000')
@@ -352,37 +353,25 @@ describe('character info', () => {
       'NameNinja_01Level1',
     )
     const combat = within(statsWindow).getByRole('region', { name: 'Combat stats' })
-    // Attributes are stored x100; speed is 1000 / AtkTime; defence 154 takes 10% off.
+    // Attributes are stored x100 and rounded like Reborn; speed is 1000 / AtkTime.
     expect(await within(combat).findByText('8 - 9')).toBeVisible()
-    expect(combat).toHaveTextContent('STR13')
+    expect(combat).toHaveTextContent('STR14')
     expect(combat).toHaveTextContent('Speed1.00')
     expect(combat).toHaveTextContent('HP120/160')
-    expect(within(combat).getByText('154')).toHaveAttribute(
-      'title',
-      'Takes 10% off the damage you receive',
-    )
+    expect(within(combat).getByText('154')).toHaveAttribute('title', '10.21% damage reduction')
     expect(combat).toHaveTextContent('Block2')
-    expect(within(statsWindow).getByRole('region', { name: 'Refill pouches' })).toHaveTextContent(
-      'HP pouch1,000/10,000',
-    )
   })
 
-  it('refills both pouches with Gift Coupons from the Character window', async () => {
+  it('refills both pouches with Gift Coupons from the Carrier Bag (portrait refill icon)', async () => {
     const fetchMock = renderGame(
       { 'POST /api/game/pouches/buy': () => json({ completed: [], character }) },
       { ...character, giftCoupon: 20 },
     )
-    await userEvent.click(
-      within(await screen.findByRole('navigation', { name: 'Menu' })).getByRole('button', {
-        name: 'Character',
-      }),
-    )
-    const refill = within(screen.getByRole('dialog', { name: 'Stats' })).getByRole('region', {
-      name: 'Refill pouches',
-    })
-    expect(refill).toHaveTextContent('Cost 20')
-    expect(within(refill).getByRole('button', { name: 'Refill with Gold' })).toBeDisabled()
-    await userEvent.click(within(refill).getByRole('button', { name: 'Refill with Coupons' }))
+    await userEvent.click(await screen.findByRole('button', { name: /^HP carrier bag/ }))
+    const bag = await screen.findByRole('dialog', { name: 'Carrier Bag' })
+    expect(bag).toHaveTextContent('Fill both bags for 20 Gold or 20 Gift Coupons.')
+    expect(within(bag).getByRole('button', { name: 'Buy with Gold' })).toBeDisabled()
+    await userEvent.click(within(bag).getByRole('button', { name: 'Buy with Gift Coupons' }))
     expect(requestBody(fetchMock, 'POST /api/game/pouches/buy')).toEqual({
       currency: 'giftCoupon',
       hp: 'full',
@@ -565,6 +554,6 @@ describe('QuestNavigation', () => {
     expect(dialog).not.toBeInTheDocument()
 
     await userEvent.click(within(nav).getByRole('button', { name: 'Close Quest Navigation' }))
-    expect(screen.getByRole('button', { name: 'Quest Navigation' })).toBeVisible()
+    expect(screen.queryByRole('region', { name: 'Quest Navigation' })).not.toBeInTheDocument()
   })
 })

@@ -77,3 +77,7 @@ export function questStepArgs(taskId: number, step: number, current: number, tot
     arg === '#total' ? total : arg === '#current' ? current : arg && plainText(arg),
   )
 }
+
+/** Building clips of a scene (scene picture hotspots: clip name -> NPC id). */
+export const sceneBuildings = (sceneId: number) =>
+  (data.buildings as Record<string, Record<string, string>>)[String(sceneId)] ?? {}

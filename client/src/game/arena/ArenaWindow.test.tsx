@@ -89,7 +89,7 @@ describe('ArenaWindow', () => {
     open()
     expect(screen.getByText('Loading...')).toBeInTheDocument()
     const summary = await screen.findByRole('region', { name: 'Your arena' })
-    expect(within(summary).getByText('Beginner III')).toBeInTheDocument()
+    expect(within(summary).getByText('Prep III')).toBeInTheDocument()
     expect(within(summary).getByText('1005.00')).toBeInTheDocument()
     expect(within(summary).getByText('60% (6 / 10)')).toBeInTheDocument()
     expect(within(summary).getByText('Next fight: free')).toBeInTheDocument()
@@ -158,10 +158,10 @@ describe('ArenaWindow', () => {
     })
     open()
     await userEvent.click(
-      await screen.findByRole('button', { name: 'Challenge the boss for Beginner IV' }),
+      await screen.findByRole('button', { name: 'Challenge the boss for Prep IV' }),
     )
     expect(
-      await screen.findByText('Victory! You were promoted to Beginner IV. Honor +1300.'),
+      await screen.findByText('Victory! You were promoted to Prep IV. Honor +1300.'),
     ).toBeInTheDocument()
     expect(requestBody(fetch, 'POST /api/game/arena/boss')).toEqual({})
   })
@@ -236,7 +236,7 @@ describe('Honor shop', () => {
     const offers = await screen.findByRole('list', { name: 'Honor shop' })
     const [cheap, locked] = within(offers).getAllByRole('button', { name: /^Buy / })
     expect(locked).toBeDisabled()
-    expect(within(offers).getByText('Needs Transition')).toBeInTheDocument()
+    expect(within(offers).getByText('Needs Pre-Academy')).toBeInTheDocument()
 
     await userEvent.click(cheap!)
     expect(requestBody(fetch, 'POST /api/game/arena/shop/buy')).toEqual({ itemId: 'i292101' })
@@ -276,7 +276,7 @@ describe('Ninjutsu Duel', () => {
     logs: [],
   })
 
-  it('needs Beginner III', async () => {
+  it('needs Prep III', async () => {
     mockApi({
       'GET /api/game/arena': () => json(view({ tier: 1 })),
       'GET /api/game/arena/duels': () => json(duels(1)),
@@ -284,7 +284,7 @@ describe('Ninjutsu Duel', () => {
     open()
     await userEvent.click(screen.getByRole('tab', { name: 'Ninjutsu Duel' }))
     expect(
-      await screen.findByText('Ninjutsu Duels open at Beginner III. Your rank is Beginner II.'),
+      await screen.findByText('Ninjutsu Duels open at Prep III. Your rank is Prep II.'),
     ).toBeInTheDocument()
   })
 

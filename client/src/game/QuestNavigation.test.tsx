@@ -38,6 +38,8 @@ function renderNavigation(onNpc = vi.fn()) {
   })
   renderWithProviders(
     <QuestNavigation
+      open
+      onClose={vi.fn()}
       character={character}
       scene={villageScene}
       onNpc={onNpc}

@@ -23,7 +23,7 @@ import { BattleReplayMount, ScenePictureMount } from './stage'
 import { plainText } from './text'
 import type { BagHighlight, FightResult, SceneMonster, SceneNpc } from './types'
 import { useOpenWindow } from './windows'
-import { DEFEATED_REASON, isDefeated } from './world'
+import { DEFEATED_REASON, isDefeated, sceneBuildings } from './world'
 
 /** Scenes with a pub fight line-up (`pub-fights.json` scenes): the neutral fields 26xx-28xx. */
 const PUB_FIGHT_SCENES = [
@@ -36,6 +36,12 @@ const PUB_FIGHT_SCENES = [
  * flow (replay, then the result window). While the ninja is defeated it offers the revive
  * window instead of fights.
  */
+/** Village buildings that open a window (the picture's hotspots, for the keyboard too). */
+const BUILDINGS = [
+  ['clip_pet', 'Pet Kennel', 'pets'],
+  ['clip_CardLink', 'Card Room', 'cardRoom'],
+] as const
+
 export function SceneView({
   character,
   onNpc,
@@ -175,6 +181,13 @@ export function SceneView({
                   <h3 id="scene-people" className="mb-1 font-bold text-trim">
                     People and buildings
                   </h3>
+                  {BUILDINGS.filter(([clip]) => clip in sceneBuildings(character.sceneId)).map(
+                    ([clip, label, window]) => (
+                      <GameButton key={clip} small onClick={() => openWindow(window)}>
+                        {label}
+                      </GameButton>
+                    ),
+                  )}
                   {scene.data.npcs.length === 0 ? (
                     <p>Nobody is around.</p>
                   ) : (

@@ -7,7 +7,6 @@ import {
   dialog,
   expectCurrency,
   giveItem,
-  openMenu,
   reloadGame,
   seedCharacter,
   sql,
@@ -25,7 +24,11 @@ const stoneOf = (name: string) =>
   Number(sql(`select stone from characters where name = :'name'`, { name }))
 
 async function openMarket(page: Page, tab: string) {
-  await openMenu(page, 'Market')
+  // Reborn: the Market is a village icon (top right), not a menu button.
+  await page
+    .getByRole('navigation', { name: 'Features' })
+    .getByRole('button', { name: 'Market' })
+    .click()
   const market = dialog(page, 'Market')
   await market.getByRole('tab', { name: tab }).click()
   return market

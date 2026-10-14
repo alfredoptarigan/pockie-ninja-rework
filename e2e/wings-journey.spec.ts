@@ -43,9 +43,9 @@ test('a ninja equips, enhances and registers a wing', async ({ browser }) => {
     giveItem(name, STONE.itemId)
     await reloadGame(page)
 
-    // Act: Character window, Wings, then equip the wing.
-    await openMenu(page, 'Character')
-    await dialog(page, 'Stats').getByRole('button', { name: 'Wings', exact: true }).click()
+    // Act: Inventory, Collection (the wings window), then equip the wing.
+    await openMenu(page, 'Inventory')
+    await dialog(page, 'Inventory').getByRole('button', { name: 'Collection', exact: true }).click()
     const wings = dialog(page, 'Wings')
     const equipped = page.waitForResponse(
       (r) => /\/api\/game\/items\/.+\/equip$/.test(r.url()) && r.ok(),
