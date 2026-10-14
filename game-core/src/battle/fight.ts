@@ -817,6 +817,8 @@ export function simulateFight({
       startMp: x.startMp,
       mp: x.mp,
       ...(x.pet && { pet: { species: x.pet.species, avatar: x.pet.avatar } }),
+      ...(x.wingSprite && { wingSprite: x.wingSprite }),
+      ...(x.aura && { aura: x.aura }),
     })),
     events,
     winner: a >= left.length ? 'defenders' : 'attackers',

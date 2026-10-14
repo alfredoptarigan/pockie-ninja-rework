@@ -45,6 +45,16 @@ describe('simulateFight', () => {
     expect(replay.fighters[1]!.hp).toBe(0)
   })
 
+  it('carries the wing sprite and aura of each fighter into the replay', () => {
+    const replay = simulateFight({
+      attackers: [fighter({ wingSprite: 'wing_duotian_3', aura: 'ki_lightning' })],
+      defenders: [fighter({ name: 'Sunflower' })],
+      seed: 1,
+    })
+    expect(replay.fighters[0]).toMatchObject({ wingSprite: 'wing_duotian_3', aura: 'ki_lightning' })
+    expect(replay.fighters[1]).not.toHaveProperty('wingSprite')
+    expect(replay.fighters[1]).not.toHaveProperty('aura')
+  })
   it('gives a fighter with half the attack interval twice the actions', () => {
     const replay = simulateFight({
       attackers: [fighter({ atkTime: 500, minAttack: 1, maxAttack: 1, hp: 1000, maxHp: 1000 })],

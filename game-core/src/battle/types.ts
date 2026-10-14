@@ -102,6 +102,9 @@ export interface FighterInput {
   skills?: SkillInput[]
   /** The active pet (players only). */
   pet?: PetInput
+  /** Worn wing or aura art (players only); only drawn, never fought with. */
+  wingSprite?: string
+  aura?: string
 }
 
 export type Side = 'attackers' | 'defenders'
@@ -170,6 +173,9 @@ export interface Replay {
     mp: number
     /** The fighter's pet, drawn behind its master. */
     pet?: { species: string; avatar: number }
+    /** The fighter's worn wing or aura art. */
+    wingSprite?: string
+    aura?: string
   }[]
   events: FightEvent[]
   winner: Side

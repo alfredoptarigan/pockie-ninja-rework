@@ -21,6 +21,7 @@ import {
   avatarStats,
   dropItems,
   dropLib,
+  item,
   itemNameKey,
   levels,
   npc,
@@ -178,6 +179,16 @@ const characterBonuses = (
   skills: readonly SkillInput[],
 ) => sumBonuses(equipmentBonuses(equipped, character), effects, passiveBonuses(skills))
 
+/** Art of the worn wing (WingSprite) or aura (BattleAura), drawn in replays (M6 decision 22). */
+export function wingLook(equipped: readonly Gear[]): { wingSprite?: string; aura?: string } {
+  for (const { itemId } of equipped) {
+    const def = item(itemId)
+    if (def?.WingSprite) return { wingSprite: String(def.WingSprite) }
+    if (def?.BattleAura) return { aura: String(def.BattleAura) }
+  }
+  return {}
+}
+
 /** A character's fighter from its equipped rows (RefreshSystem with the *Equip terms). */
 export function playerFighterFrom(
   character: FighterCharacter,
@@ -199,6 +210,7 @@ export function playerFighterFrom(
     avatarLevel: avatarLevelFromAvatarId(character.avatarId),
     // The engine only reads type 1 and 2; passives (type 3) stay listed, like the PassiveSkill rec.
     skills,
+    ...wingLook(equipped),
   }
 }
 

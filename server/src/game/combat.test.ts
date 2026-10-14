@@ -71,6 +71,20 @@ describe('a fresh ninja against the Sunflower', () => {
 
 // EquipSystem.GetEquipSelfProp (AttackMin/Max, Defense) + AddOtherProp (OtherPropName/Value)
 // feeding RefreshSystem's *Equip terms. Level 1 AvatarID 3: HP 220, AtkTime 980, counter 5.
+describe('worn wing look', () => {
+  it('draws the worn wing sprite or aura in replays (M6 decision 22)', () => {
+    expect(playerFighterFrom(freshNinja, gear(['i218000']))).toMatchObject({
+      wingSprite: 'wing_duotian_3',
+    })
+    expect(playerFighterFrom(freshNinja, gear(['i218200']))).toMatchObject({
+      aura: 'ki_lightning',
+    })
+    const bare = playerFighterFrom(freshNinja, gear([NEWBIE_FISTS]))
+    expect(bare).not.toHaveProperty('wingSprite')
+    expect(bare).not.toHaveProperty('aura')
+  })
+})
+
 describe('equipment bonuses', () => {
   const fighter = (equipped: string[]) => playerFighterFrom(freshNinja, gear(equipped))
 
