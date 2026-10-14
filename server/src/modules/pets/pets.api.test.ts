@@ -20,7 +20,8 @@ const fixed: () => Random = () => ({ next: () => 0, int: () => 0, between: (a) =
 beforeEach(async () => {
   await truncateAll(db)
   app = buildTestApp(db)
-  app.register(petRoutes, { db, prefix: '/api/game/pets', random: fixed })
+  // The app registers the routes at /api/game/pets; this copy injects the rolls.
+  app.register(petRoutes, { db, prefix: '/api/test/pets', random: fixed })
   client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Player_one',
@@ -72,8 +73,8 @@ async function newPet(itemId = 'i320002') {
     .where(eq(characterPets.characterId, characterId))
   return pets.at(-1)!
 }
-const post = (path: string, body?: object) => client.post(`/api/game/pets${path}`, body)
-const view = async () => (await client.get('/api/game/pets')).json()
+const post = (path: string, body?: object) => client.post(`/api/test/pets${path}`, body)
+const view = async () => (await client.get('/api/test/pets')).json()
 const FOODS = ['i170117', null, null, null, null, null]
 
 describe('adopting from a pet item', () => {

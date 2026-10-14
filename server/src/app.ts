@@ -83,6 +83,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/team-stone/routes.js'), { db, prefix: '/api/game/team-stone' })
   app.register(import('./modules/wings/routes.js'), { db, prefix: '/api/game/wings' })
   app.register(import('./modules/cards/routes.js'), { db, prefix: '/api/game/cards' })
+  app.register(import('./modules/pets/routes.js'), { db, prefix: '/api/game/pets' })
   app.register(socialRoutes, { db, prefix: '/api/game/social' })
   app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
   app.register(arenaRoutes, { db, prefix: '/api/game/arena' })

@@ -56,6 +56,7 @@ import { playerFighter } from '../../game/combat.js'
 import { WING_SLOT } from '../../game/wings.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { openCardBox } from '../cards/routes.js'
+import { adoptPetItem } from '../pets/kennel.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
@@ -289,6 +290,12 @@ export async function actionRoutes(
       if (!def || Number(def.CanUse) !== 1) throw bad('cannot_use', 'That item cannot be used.')
       if (character.level < Number(def.UseLevel ?? 0))
         throw bad('too_low', 'Your level is too low.')
+      // M6 decision 9: a pet item goes into the Pet Kennel.
+      if (await adoptPetItem(tx, character, row))
+        return {
+          ...(await rookieHandIns(tx, character.id)),
+          character: await reload(tx, character.id),
+        }
 
       let card: { cardId: number; nameKey: string } | undefined
       const scrollItem = await learnScrollSkill(tx, character.id, def)

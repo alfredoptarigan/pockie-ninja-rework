@@ -1,7 +1,14 @@
 import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createTestDb, truncateAll } from '../../../test/helpers.js'
-import { arenaOpponents, arenaRevenges, inventoryItems, mails } from '../../db/schema.js'
+import {
+  arenaOpponents,
+  arenaRevenges,
+  characterPets,
+  inventoryItems,
+  mails,
+} from '../../db/schema.js'
+import { adoptPetItem } from '../pets/kennel.js'
 import { addLog } from './store.js'
 import { refreshArenaSnapshot } from './snapshot.js'
 import { arenaTestApp, errorCode, today, yesterday, type Ninja } from './test-setup.js'
@@ -169,6 +176,21 @@ describe('a fight against a ninja', () => {
         })
     })
     expect(await a.logs()).toHaveLength(15)
+  })
+})
+
+describe('the active pet', () => {
+  it('gets no EXP from an arena win (M6 decision 12)', async () => {
+    const [egg] = await db
+      .insert(inventoryItems)
+      .values({ characterId: a.id, itemId: 'i320002', bound: true })
+      .returning()
+    await db.transaction(async (tx) => adoptPetItem(tx, await a.row(), egg!))
+    await db.update(characterPets).set({ active: true }).where(eq(characterPets.characterId, a.id))
+    await playerPair()
+    expect((await fight(a)).json().won).toBe(true)
+    const [pet] = await db.select().from(characterPets).where(eq(characterPets.characterId, a.id))
+    expect(pet).toMatchObject({ exp: 0, level: 1 })
   })
 })
 

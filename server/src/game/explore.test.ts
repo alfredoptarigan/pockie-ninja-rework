@@ -67,10 +67,11 @@ describe('rollStarBonus', () => {
   })
 
   it('rolls the pet egg (weight 1) or ExpBase + ExpBase * star / 10 (weight 99)', () => {
-    // 21011: ExpBase 105, BabyRateStarLv1 1, ExpRateStarLv1 99, PetBonusAppend i283017.
+    // 21011: ExpBase 105, BabyRateStarLv1 1, ExpRateStarLv1 99, PetBonusAppend i283017, whose
+    // Reborn pet item is i320017 (M6 decision 9).
     expect(rollStarBonus(spot, { level: 1, progress: 0 }, fixed(0))).toEqual({
       type: 'pet',
-      itemId: 'i283017',
+      itemId: 'i320017',
       bound: true,
     })
     expect(rollStarBonus(spot, { level: 1, progress: 0 }, fixed(1))).toEqual({

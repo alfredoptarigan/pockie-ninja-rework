@@ -37,6 +37,7 @@ import { talentFighterInput } from './talents.js'
 import { bloodlineBonuses } from './bloodlines.js'
 import { wingBonuses } from './wings.js'
 import { cardBoxDrop } from './card-boxes.js'
+import { activePetFighterInput, grantPetExp } from './pets.js'
 import { characterSkillInputs } from './skill-bar.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
@@ -97,23 +98,35 @@ export function monsterFighter(id: string): FighterInput {
   }
 }
 
-/** Buffs, active bloodline limits (M5 decision 11) and the worn wing (M6 decision 23). */
-export const fighterEffects = async (tx: Tx | Db, characterId: string) =>
+type PetFighterInput = Awaited<ReturnType<typeof activePetFighterInput>>
+
+/**
+ * Buffs, active bloodline limits (M5 decision 11), the worn wing (M6 decision 23) and the active
+ * pet's bonuses (M6 decision 15). The pet's skills ride on `pet`, never in the learned skills.
+ */
+export const fighterEffects = async (
+  tx: Tx | Db,
+  characterId: string,
+  pet: PetFighterInput = null,
+) =>
   sumBonuses(
     await buffBonuses(tx, characterId),
     await bloodlineBonuses(tx, characterId),
     await wingBonuses(tx, characterId),
+    pet?.bonuses ?? {},
   )
 
 export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<PlayerFighter> {
+  const pet = await activePetFighterInput(tx, character.id)
   return {
     ...playerFighterFrom(
       character,
       await equippedGear(tx, character.id),
-      await fighterEffects(tx, character.id),
+      await fighterEffects(tx, character.id, pet),
       await characterSkillInputs(tx, character.id),
     ),
     talents: await talentFighterInput(tx, character.id),
+    ...(pet && { pet: pet.pet }),
   }
 }
 
@@ -228,7 +241,8 @@ export async function fightMonster(
 ) {
   const seed = randomInt(2 ** 31)
   const equipped = await equippedGear(tx, character.id)
-  const effects = await fighterEffects(tx, character.id)
+  const pet = await activePetFighterInput(tx, character.id)
+  const effects = await fighterEffects(tx, character.id, pet)
   const learned = await characterSkillInputs(tx, character.id)
   const bonuses = characterBonuses(
     character,
@@ -238,7 +252,9 @@ export async function fightMonster(
   )
   const statsAt = (level: number) => deriveStats(avatarStats(character.avatarId), level, bonuses)
   const replay = simulateFight({
-    attackers: [playerFighterFrom(character, equipped, effects, learned)],
+    attackers: [
+      { ...playerFighterFrom(character, equipped, effects, learned), ...(pet && { pet: pet.pet }) },
+    ],
     defenders: [monsterFighter(monsterId)],
     seed,
   })
@@ -323,5 +339,7 @@ export async function fightMonster(
     exp,
     stone: character.stone + rewards.stone,
   })
+  // M6 decision 12: the active pet shares a win's EXP.
+  if (won) await grantPetExp(tx, character.id, rewards.exp)
   return { replay, won, rewards }
 }

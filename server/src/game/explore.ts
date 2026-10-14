@@ -7,6 +7,7 @@ import {
   type ExploreFactory,
   type ExploreFactoryEntry,
 } from './data.js'
+import { explorePetItem } from './pets.js'
 
 type SpotRow = Record<string, number | string | (number | string)[]>
 
@@ -61,7 +62,13 @@ export function rollStarBonus(spot: SpotRow, star: StarState, random: Random) {
     Number(spot[`ExpRateStarLv${star.level}`]),
   ]
   const pick = weightedIndex(weights, random)
-  if (pick === 0) return { type: 'pet' as const, itemId: String(spot.PetBonusAppend), bound: true }
+  // M6 decision 9: the 2011 pet egg becomes its linked Reborn pet item.
+  if (pick === 0)
+    return {
+      type: 'pet' as const,
+      itemId: explorePetItem(String(spot.PetBonusAppend)),
+      bound: true,
+    }
   if (pick === 1) {
     const base = Number(spot.ExpBase)
     return { type: 'exp' as const, exp: base + Math.floor((base * star.level) / 10) }

@@ -27,6 +27,7 @@ import { playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
 import { questCommand, type Tx } from '../../game/progress.js'
 import { cardBoxDrop } from '../../game/card-boxes.js'
+import { grantPetExp } from '../../game/pets.js'
 import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { REBORN_LAS_NOCHES_FLOOR_COMMAND } from '../../game/quests.js'
 import { vipExp } from '../../game/vip.js'
@@ -242,6 +243,7 @@ async function catchUp(
     if (floor >= (row.autoReachFloor ?? 0)) {
       const ending = endRun(row, current, {}, row.potExp + row.expBonus)
       await saveCharacter(tx, current.id, ending.update)
+      await grantPetExp(tx, current.id, ending.paid)
       current = { ...current, ...ending.update }
       row = ending.ended
       // A successful final replay returns control at floor 161, as SGateType 2 does.
@@ -412,6 +414,8 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         levelsGained = ending.levelsGained
       }
       await saveCharacter(tx, character.id, state)
+      // M6 decision 12: the active pet shares the pot EXP paid.
+      if (paid) await grantPetExp(tx, character.id, paid)
       const saved = await saveRow(tx, next)
       return {
         replay,
@@ -456,6 +460,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
         run.pot + row.expBonus,
       )
       await saveCharacter(tx, character.id, update)
+      await grantPetExp(tx, character.id, paid)
       const saved = await saveRow(tx, ended)
       return {
         potPaid: paid,

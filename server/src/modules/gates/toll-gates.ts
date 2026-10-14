@@ -36,6 +36,7 @@ import { tollGateRuns } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
 import { removeItems, type Tx } from '../../game/progress.js'
 import { rewardExp } from '../../game/nonfight-buffs.js'
+import { grantPetExp } from '../../game/pets.js'
 import { vipDropMul } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { characterOf, requireAlive, requireUser } from '../game/characters.js'
@@ -193,6 +194,8 @@ export async function winForMember(
   if (rewards.items.length < kill.items.length)
     rewards.lost = kill.items.length - rewards.items.length
   await saveCharacter(tx, character.id, { ...update, stone: character.stone + rewards.stone })
+  // M6 decision 12: the active pet shares the fight EXP.
+  await grantPetExp(tx, character.id, rewards.exp)
   const flip = outcome.cleared
     ? dealCards(cardLib(row.gateId), createRandom(newSeed()))
     : { state: row.cardState, cards: row.cards, peeks: row.peeks }
