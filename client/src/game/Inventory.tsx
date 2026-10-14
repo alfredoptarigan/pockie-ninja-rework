@@ -21,6 +21,7 @@ import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
 import { WING_ICONS } from './wings'
 import { cardName } from './cards'
+import { PetSlot } from './pets'
 import { GameText, plainText } from './text'
 import type { ActionResult, BagHighlight, InventoryItem } from './types'
 import { isEquipment, isUsable } from './world'
@@ -297,16 +298,21 @@ function Equipment({
                   }`}
                 />
               )}
-              <span className="sr-only">
-                {label}:{' '}
-                {worn ? (
-                  <>
-                    <GameText k={worn.nameKey} fallback="Unknown item" /> <span>Equipped</span>
-                  </>
-                ) : (
-                  'empty'
-                )}
-              </span>
+              {/* The active pet (M6) is not an item; PetSlot draws and names it. */}
+              {slot === 'Pet' ? (
+                <PetSlot />
+              ) : (
+                <span className="sr-only">
+                  {label}:{' '}
+                  {worn ? (
+                    <>
+                      <GameText k={worn.nameKey} fallback="Unknown item" /> <span>Equipped</span>
+                    </>
+                  ) : (
+                    'empty'
+                  )}
+                </span>
+              )}
             </li>
           )
         })}

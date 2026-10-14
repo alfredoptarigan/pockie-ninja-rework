@@ -25,6 +25,7 @@ import { TeamStoneWindow } from './team-stone'
 import { TeamBoardWindow, TeamWindow } from './teams'
 import { WingsWindow } from './wings'
 import { CardRoomWindow } from './cards'
+import { KennelWindow } from './pets'
 
 export type WindowName =
   | 'shop'
@@ -48,6 +49,7 @@ export type WindowName =
   | 'teamStone'
   | 'wings'
   | 'cardRoom'
+  | 'pets'
 
 export interface WindowProps {
   character: Character
@@ -98,6 +100,7 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   ),
   wings: ({ onClose }) => <WingsWindow onClose={onClose} />,
   cardRoom: ({ onClose }) => <CardRoomWindow onClose={onClose} />,
+  pets: ({ onClose }) => <KennelWindow onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(

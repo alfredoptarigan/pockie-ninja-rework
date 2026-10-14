@@ -35,3 +35,18 @@ it('opens the Wings window from the character window', async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Wings' }))
   expect(open).toHaveBeenCalledWith('wings')
 })
+
+it('opens the Pet Kennel from the character window', async () => {
+  mockApi({
+    'GET /api/game/character': () => json({ character, stats }),
+    'GET /api/game/buffs': () => json({ buffs: [], titles: [] }),
+  })
+  const open = vi.fn()
+  renderWithProviders(
+    <OpenWindowProvider value={open}>
+      <CharacterWindow character={character} onClose={() => {}} />
+    </OpenWindowProvider>,
+  )
+  await userEvent.click(screen.getByRole('button', { name: 'Pet Kennel' }))
+  expect(open).toHaveBeenCalledWith('pets')
+})

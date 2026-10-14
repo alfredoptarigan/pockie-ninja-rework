@@ -265,6 +265,9 @@ export function CharacterWindow({
         <GameButton small onClick={() => openWindow('wings')}>
           Wings
         </GameButton>
+        <GameButton small onClick={() => openWindow('pets')}>
+          Pet Kennel
+        </GameButton>
       </section>
     </Dialog>
   )

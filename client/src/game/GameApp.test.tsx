@@ -132,10 +132,24 @@ describe('GameScreen', () => {
     expect(screen.getByRole('dialog', { name: 'Mail' })).toBeVisible()
   }, 15_000)
 
-  it('opens the Card Room from Events and Wings from the Character window', async () => {
+  it('opens the Card Room from Events, Wings and the Pet Kennel from the Character window', async () => {
     renderGame({
       'GET /api/game/events': () => json({}),
       'GET /api/game/cards': () => json({ collections: [] }),
+      'GET /api/game/pets': () =>
+        json({
+          pets: [],
+          petSlots: 1,
+          maxSlots: 5,
+          slotPrice: 100,
+          digestPrice: 8,
+          evolve: { level: 30, feathers: 50 },
+          feathers: 0,
+          lockItem: { itemId: 'i150406', nameKey: 'lg_x', count: 0 },
+          removeItem: { itemId: 'i152027', nameKey: 'lg_y', count: 0 },
+          foods: [],
+          books: [],
+        }),
       'GET /api/game/wings': () =>
         json({
           maxLevel: 30,
@@ -163,6 +177,15 @@ describe('GameScreen', () => {
     )
     await userEvent.click(await screen.findByRole('button', { name: 'Wings' }))
     expect(await screen.findByRole('dialog', { name: 'Wings' })).toBeVisible()
+    await userEvent.keyboard('{Escape}')
+
+    await userEvent.click(
+      within(screen.getByRole('navigation', { name: 'Menu' })).getByRole('button', {
+        name: 'Character',
+      }),
+    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Pet Kennel' }))
+    expect(await screen.findByRole('dialog', { name: 'Pet Kennel' })).toBeVisible()
   }, 15_000)
 
   it('has Back to the website and Log out in the Settings menu', async () => {
