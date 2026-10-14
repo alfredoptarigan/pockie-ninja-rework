@@ -2,7 +2,8 @@
 // speed): what each fighter shows (poses), floating texts and the HP/MP/buff bars. Pure, so skip,
 // replay and speed changes are just a different t.
 import { gameMotions, type SkillMotions } from '../../generated/game-assets'
-import type { FightEvent, Replay } from '../types'
+import type { FightEvent } from '../types'
+import { petTiming, type VisualReplay as Replay } from './companions'
 import {
   DIE,
   DODGE,
@@ -85,6 +86,7 @@ export interface BarState {
 export interface Timeline {
   /** By fighter index; a fighter is off stage before its first pose. */
   poses: Pose[][]
+  pets?: { at: number; fighter: number; motion: string; end: number }[]
   texts: FloatText[]
   bars: BarState[]
   /** When the last action and the victory pose are over (the result banner shows). */
@@ -131,6 +133,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     secretArt = () => undefined,
   } = options
   const poses: Pose[][] = fighters.map(() => [])
+  const petPoses: NonNullable<Timeline['pets']> = []
   const texts: FloatText[] = []
   const bars: BarState[] = []
   const hp = fighters.map((f) => f.startHp)
@@ -313,6 +316,19 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     return end
   }
 
+  function petStrike(ev: FightEvent, start: number) {
+    const timing = petTiming(fighters[ev.actor]?.pet?.avatar)
+    const impact = start + timing.impact
+    const end = start + timing.duration
+    petPoses.push({ at: start, fighter: ev.actor, motion: timing.motion, end })
+    announce(ev, start)
+    const target = targetOf(ev)
+    if (target !== undefined) react(target, impact, ev, ev.damage ?? 0, true)
+    selfEffects(impact, ev)
+    changeBuffs(impact, ev)
+    return Math.max(end, impact)
+  }
+
   function strike(ev: FightEvent, start: number) {
     const actor = ev.actor
     const secret = ev.skillId === undefined ? undefined : secretArt(actor, ev.skillId)
@@ -383,7 +399,8 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   let t = INTRO_MS
   for (const ev of replay.events) {
     if (!fighters[ev.actor]) continue
-    if (STRIKES.has(ev.event)) t = strike(ev, t)
+    if (ev.isPet && (STRIKES.has(ev.event) || ev.event === 9)) t = petStrike(ev, t)
+    else if (STRIKES.has(ev.event)) t = strike(ev, t)
     else if (ev.event === 9) t = buffEvent(ev, t)
     else if (ev.event === CANNOT_MOVE) t = cannotMove(ev, t)
     else if (ev.event === 2) t += GAP_MS
@@ -414,7 +431,14 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   }
   const endAt = t + victoryMs
   const byTime = <T extends { at: number }>(list: T[]) => [...list].sort((a, b) => a.at - b.at)
-  return { poses, texts: byTime(texts), bars: byTime(bars), endAt, duration: endAt + OUTRO_MS }
+  return {
+    poses,
+    ...(petPoses.length ? { pets: petPoses } : {}),
+    texts: byTime(texts),
+    bars: byTime(bars),
+    endAt,
+    duration: endAt + OUTRO_MS,
+  }
 }
 
 /** Latest entry with `at <= t` (lists are in time order). */

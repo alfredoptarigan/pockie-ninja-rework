@@ -3,7 +3,10 @@
 import Phaser from 'phaser'
 import type { MotionSheet } from '../../generated/game-assets'
 import type { WeaponLayer } from '../../generated/game-extra'
-import type { Replay } from '../types'
+import type { VisualReplay as Replay, CompanionLook } from './companions'
+import { BattleVisuals } from './battle-visuals'
+import { numberAssets } from './effects-map'
+import { numberGlyphs, glyphLayout } from './numbers'
 import { createGame, LABEL_STYLE, loadSheet } from './game'
 import { frameAt, originOf, sheetOf, sheetTicks, type FighterArt } from './motion'
 import { overlayFrame, shiftAt } from './secret-technique'
@@ -24,6 +27,7 @@ import { weaponFrameAt, weaponSheetFor } from './weapon'
 
 export interface BattleSetup {
   replay: Replay
+  looks?: CompanionLook[]
   timeline: Timeline
   art: (FighterArt | undefined)[]
   /** Weapon layer drawn over each fighter's body (the player's equipped weapon; none for monsters). */
@@ -82,7 +86,8 @@ class BattleScene extends Phaser.Scene {
   private weaponSprites: (Phaser.GameObjects.Sprite | undefined)[] = []
   /** Secret-technique layers per fighter (main atlas and its concurrent layer). */
   private overlaySprites: Phaser.GameObjects.Sprite[][] = []
-  private floating = new Map<number, Phaser.GameObjects.Text>()
+  private floating = new Map<number, Phaser.GameObjects.Text | Phaser.GameObjects.Container>()
+  private visuals: BattleVisuals
   private slots: number[]
   private hud!: Phaser.GameObjects.Graphics
   private hudText: Phaser.GameObjects.Text[] = []
@@ -91,10 +96,12 @@ class BattleScene extends Phaser.Scene {
 
   constructor(private readonly setup: BattleSetup) {
     super('battle')
+    this.visuals = new BattleVisuals(this, setup.replay, setup.timeline, setup.looks)
     this.slots = textSlots(setup.timeline.texts)
   }
 
   preload() {
+    this.visuals.preload()
     const { background, timeline, art, weapons } = this.setup
     if (background) this.load.image(background, background)
     for (const fighterArt of art) {
@@ -194,6 +201,7 @@ class BattleScene extends Phaser.Scene {
     if (!this.banner) return // not created yet; create() renders the current clock
     const t = this.clock
     this.renderFighters(t)
+    this.visuals.render(t)
     this.renderTexts(t)
     this.renderHud(t)
     const { replay, timeline } = this.setup
@@ -299,15 +307,29 @@ class BattleScene extends Phaser.Scene {
       }
       if (!object) {
         const style = TEXT_STYLE[text.kind]
-        object = this.add
-          .text(0, 0, text.text, {
-            ...LABEL_STYLE,
-            color: style.color,
-            fontSize: `${style.size}px`,
-            strokeThickness: 6,
-          })
-          .setOrigin(0.5, 1)
-          .setDepth(DEPTH.ui)
+        const number = numberGlyphs(text.kind, text.text)
+        const key = number && numberAssets[number.atlas].atlas
+        if (
+          number &&
+          key &&
+          this.textures.exists(key) &&
+          number.glyphs.every((g) => this.textures.get(key).has(g))
+        ) {
+          const glyphs = number.glyphs.map((g) => this.add.image(0, 0, key, g).setOrigin(0, 1))
+          const positions = glyphLayout(glyphs.map((g) => g.width))
+          glyphs.forEach((g, k) => g.setX(positions[k]!))
+          object = this.add.container(0, 0, glyphs).setDepth(DEPTH.ui)
+          if (text.kind === 'crit') object.setScale(1.25)
+        } else
+          object = this.add
+            .text(0, 0, text.text, {
+              ...LABEL_STYLE,
+              color: style.color,
+              fontSize: `${style.size}px`,
+              strokeThickness: 6,
+            })
+            .setOrigin(0.5, 1)
+            .setDepth(DEPTH.ui)
         this.floating.set(i, object)
       }
       const pose = latestAt(poses[text.fighter] ?? [], t)

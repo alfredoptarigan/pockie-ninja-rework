@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import { errorMessage, useBuyPouches, useCharacterStats, useBuffs } from './api'
 import { Dialog, GameButton, Notice } from './skin'
 import { plainText } from './text'
+import { useCharacterPreview, type CharacterCosmetics } from './phaser/character-preview'
 import { expToNext, sceneNameKey, villageOf } from './world'
 import { useOpenWindow } from './windows'
 
@@ -204,6 +205,11 @@ export function CharacterWindow({
   character: Character
   onClose: () => void
 }) {
+  const cosmetics = character as Character & CharacterCosmetics & { look?: CharacterCosmetics }
+  const { canvas: previewRef, visible: hasPreview } = useCharacterPreview(
+    character.clothing,
+    cosmetics.look ?? cosmetics,
+  )
   const stats = useCharacterStats()
   const buffs = useBuffs()
   const title = buffs.data?.titles.find((title) => title.active)
@@ -254,6 +260,16 @@ export function CharacterWindow({
             </div>
           ))}
       </section>
+      {hasPreview && (
+        <section aria-label="Avatar preview" className="game-inset mt-[5px] flex justify-center">
+          <canvas
+            ref={previewRef}
+            width={310}
+            height={180}
+            aria-label="Equipped avatar cosmetics"
+          />
+        </section>
+      )}
       <PouchRefill character={character} />
       <section aria-label="Training" className="game-inset mt-[5px] flex justify-end gap-1 p-1.5">
         <GameButton small onClick={() => openWindow('talents')}>

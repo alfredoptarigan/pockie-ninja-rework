@@ -10,6 +10,7 @@ import Phaser from 'phaser'
 export interface PictureActions {
   onNpc: (npc: SceneNpc) => void
   onExplore?: () => void
+  onBuilding?: (clip: 'clip_pet' | 'clip_CardLink') => void
 }
 
 const SCENE_TICK_MS = tickMs(gameMotions.fps.scene)
@@ -52,14 +53,24 @@ class PictureScene extends Phaser.Scene {
     for (const hotspot of hotspots) {
       if (!ready(hotspot.spot.file)) continue
       const npc = hotspot.npc
-      if (!npc) continue
+      const clip = hotspot.clip
+      const building = clip === 'clip_pet' || clip === 'clip_CardLink' ? clip : undefined
+      if (!npc && !(building && this.actions.onBuilding)) continue
       // The element layer already shows the building; its clip copy only appears while hovered
       // (drawn twice, the soft edges of the clip leave seams).
       const image = this.add
         .image(hotspot.spot.x, hotspot.spot.y, hotspot.spot.file)
         .setOrigin(0)
         .setAlpha(HIDDEN_ALPHA)
-      this.interactive(image, hotspot.label, () => this.actions.onNpc(npc), true)
+      this.interactive(
+        image,
+        hotspot.label,
+        () => {
+          if (building && this.actions.onBuilding) this.actions.onBuilding(building)
+          else if (npc) this.actions.onNpc(npc)
+        },
+        true,
+      )
     }
     const { explore } = this.layout
     if (explore && ready(explore.spot.file)) {
