@@ -462,7 +462,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- quests reborn-quests`
 - **Depends on**: 1.
 
-### Task 12: Daily events
+### Task 12: Daily events (done, wired; Events menu in the top bar, weekly activity counted in arena, duels, pub, Las Noches, toll gates, world chat, dailies; dice replenish once a day)
 - **Action**: Daily Login (7-day cycle + bonus); Weekly Rewards (activity counters, decision 24
   points, milestones 50/100/200, weekday reward from 50 points, bonus after 7; exports
   `recordWeeklyActivity(tx, id, activity)`); Dice of Fate (decision 25, non-fight buff path);
@@ -476,7 +476,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- events && pnpm --filter @pockie/game-core test -- dice`
 - **Depends on**: 1, 2.
 
-### Task 13: Tailed Beast event
+### Task 13: Tailed Beast event (done, wired; Essence is weekly; Stone Bag 5 a week via migration 0027)
 - **Action**: weekly state, beast rotation, tickets, fights against the shared HP pool (one locked
   update per fight), Honor and Essence, village Honor, fight boxes, Kage pick per village per week,
   Essence shop, top-10 leaderboard (decision 27), weekly reset job.
@@ -486,7 +486,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- tailed-beast`
 - **Depends on**: 2, 3, 8 (the shop sells scrolls).
 
-### Task 14: Team Stone
+### Task 14: Team Stone (done, wired; solo queue only; power = HP + 5 x (min + max attack); a month change mid-week pays that week early)
 - **Action**: queue table, matchmaking job with snapshot bot fill after 15-30 s, 3v3 fight through
   the team-run duel code, score rule (decision 28) in game-core, attempts, leagues, weekly BC mail and
   monthly reset, BC shop, client queue/league/leaderboard window.
