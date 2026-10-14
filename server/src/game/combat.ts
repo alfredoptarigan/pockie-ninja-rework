@@ -35,6 +35,7 @@ import { grantDrops, loadQuests, saveQuests, saveCharacterProgress, type Tx } fr
 import { questItemDrops, recordCollect, recordKill, type QuestProgress } from './quests.js'
 import { talentFighterInput } from './talents.js'
 import { bloodlineBonuses } from './bloodlines.js'
+import { wingBonuses } from './wings.js'
 import { characterSkillInputs } from './skill-bar.js'
 import { buffBonuses, buffExp, buffStone, sumBonuses } from './nonfight-buffs.js'
 import { vipDropMul } from './vip.js'
@@ -95,13 +96,20 @@ export function monsterFighter(id: string): FighterInput {
   }
 }
 
+/** Buffs, active bloodline limits (M5 decision 11) and the worn wing (M6 decision 23). */
+export const fighterEffects = async (tx: Tx | Db, characterId: string) =>
+  sumBonuses(
+    await buffBonuses(tx, characterId),
+    await bloodlineBonuses(tx, characterId),
+    await wingBonuses(tx, characterId),
+  )
+
 export async function playerFighter(tx: Tx | Db, character: CharacterRow): Promise<PlayerFighter> {
   return {
     ...playerFighterFrom(
       character,
       await equippedGear(tx, character.id),
-      // Active bloodline limits add like buffs (M5 decision 11).
-      sumBonuses(await buffBonuses(tx, character.id), await bloodlineBonuses(tx, character.id)),
+      await fighterEffects(tx, character.id),
       await characterSkillInputs(tx, character.id),
     ),
     talents: await talentFighterInput(tx, character.id),
@@ -219,7 +227,7 @@ export async function fightMonster(
 ) {
   const seed = randomInt(2 ** 31)
   const equipped = await equippedGear(tx, character.id)
-  const effects = await buffBonuses(tx, character.id)
+  const effects = await fighterEffects(tx, character.id)
   const learned = await characterSkillInputs(tx, character.id)
   const bonuses = characterBonuses(
     character,

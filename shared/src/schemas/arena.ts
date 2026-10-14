@@ -18,7 +18,9 @@ export type HonorShopBuyInput = z.input<typeof honorShopBuySchema>
 export type HonorExchangeInput = z.input<typeof honorExchangeSchema>
 
 /** How a fighter is drawn: an outfit (players, the Referee) or arena NPC art by id. */
-export type ArenaLook = { clothing: number; weaponItemId?: string } | { npcId: string }
+export type ArenaLook =
+  | { clothing: number; weaponItemId?: string; wingSprite?: string; aura?: string }
+  | { npcId: string }
 
 export type ArenaSlotView =
   | { slot: number; beaten: boolean; kind: 'npc'; npcId: string; level: number; score: number }

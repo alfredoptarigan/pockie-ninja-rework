@@ -53,6 +53,8 @@ import { grantFreeSkillReset, learnScrollSkill } from '../../game/skill-bar.js'
 import { useBuffItem } from '../../game/nonfight-buffs.js'
 import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
+import { WING_SLOT } from '../../game/wings.js'
+import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
 import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
@@ -360,6 +362,8 @@ export async function actionRoutes(
         .update(inventoryItems)
         .set({ equippedSlot: slot })
         .where(eq(inventoryItems.id, row.id))
+      // Wing stats are part of the arena defence (M6 decision 23).
+      if (slot === WING_SLOT) await refreshArenaSnapshot(tx, character.id)
 
       if (slot === 'Weapon') {
         const quests = await loadQuests(tx, character.id)
@@ -389,6 +393,7 @@ export async function actionRoutes(
         .update(inventoryItems)
         .set({ equippedSlot: null })
         .where(eq(inventoryItems.id, row.id))
+      if (row.equippedSlot === WING_SLOT) await refreshArenaSnapshot(tx, character.id)
       return { character: await reload(tx, character.id) }
     })
   })

@@ -5,6 +5,8 @@ import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '..
 import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.js'
 import { talentFighterInput } from '../../game/talents.js'
 import { bloodlineBonuses } from '../../game/bloodlines.js'
+import { item } from '../../game/data.js'
+import { WING_SLOT, wingBonuses } from '../../game/wings.js'
 import { activeBuffs, buffBonuses, sumBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, type PlayerFighter } from '../../game/combat.js'
 import type { Tx } from '../../game/progress.js'
@@ -16,7 +18,7 @@ export interface ArenaFighter {
   buffExpiresAt?: string
   fighter: PlayerFighter
   /** How the ninja is drawn in a replay. */
-  look: { clothing: number; weaponItemId?: string }
+  look: { clothing: number; weaponItemId?: string; wingSprite?: string; aura?: string }
   /** What it was built from; a stored snapshot with another source is stale (decision 9). */
   source: string
 }
@@ -30,10 +32,11 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
       and(eq(inventoryItems.characterId, character.id), isNotNull(inventoryItems.equippedSlot)),
     )
   const bloodlines = await bloodlineBonuses(tx, character.id)
+  const wings = await wingBonuses(tx, character.id)
   const live = playerFighterFrom(
     character,
     equipped,
-    sumBonuses(await buffBonuses(tx, character.id), bloodlines),
+    sumBonuses(await buffBonuses(tx, character.id), bloodlines, wings),
     await characterSkillInputs(tx, character.id),
   )
   const expiries = [
@@ -45,12 +48,22 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
   ]
   const talents = await talentFighterInput(tx, character.id)
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
+  // A wing has a WingSprite and an aura a BattleAura (M6 decision 22).
+  const wing = equipped.find((row) => row.equippedSlot === WING_SLOT)
+  const wingDef = wing && item(wing.itemId)
+  const wingSprite = wingDef?.WingSprite
+  const aura = wingDef?.BattleAura
   const { name, gender, level, avatarId, clothing, nation } = character
   const gear = [...equipped].sort((x, y) => x.id.localeCompare(y.id))
   return {
     ...(expiries.length > 0 && { buffExpiresAt: new Date(Math.min(...expiries)).toISOString() }),
     fighter: { ...live, hp: live.maxHp, mp: live.maxMp, talents },
-    look: { clothing, ...(weapon && { weaponItemId: weapon.itemId }) },
+    look: {
+      clothing,
+      ...(weapon && { weaponItemId: weapon.itemId }),
+      ...(wingSprite && { wingSprite: String(wingSprite) }),
+      ...(aura && { aura: String(aura) }),
+    },
     // Nation adds its element passive; it also marks snapshots from before passives as stale.
     source: JSON.stringify([
       name,
@@ -62,6 +75,7 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
       gear,
       talents,
       bloodlines,
+      wings,
     ]),
   }
 }

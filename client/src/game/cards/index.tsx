@@ -4,7 +4,7 @@ import { useState } from 'react'
 import type {
   CardClaimResult,
   CardCollectionView,
-  CardsView,
+  CardRoomView,
 } from '../../../../shared/src/schemas/cards'
 import collections from '../../generated/reborn-cards.json'
 import names from '../../i18n/reborn.json'
@@ -38,7 +38,10 @@ export function CardRoomWindow({ onClose }: { onClose: () => void }) {
   const apply = useApplyResult()
   const [page, setPage] = useState(1)
   const [message, setMessage] = useState('')
-  const cards = useQuery({ queryKey: cardsKey, queryFn: () => api<CardsView>('/api/game/cards') })
+  const cards = useQuery({
+    queryKey: cardsKey,
+    queryFn: () => api<CardRoomView>('/api/game/cards'),
+  })
   const claim = useMutation({
     mutationFn: (id: number) =>
       api<CardClaimResult>(`/api/game/cards/collections/${id}/claim`, { method: 'POST' }),

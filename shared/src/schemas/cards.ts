@@ -24,9 +24,9 @@ export interface CardCollectionView {
   prize: { itemId: string; count: number }[]
   claimed: boolean
 }
-export interface CardsView {
+export interface CardRoomView {
   collections: CardCollectionView[]
 }
-export interface CardClaimResult extends CardsView {
+export interface CardClaimResult extends CardRoomView {
   character: Character
 }

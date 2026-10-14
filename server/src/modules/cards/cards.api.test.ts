@@ -6,7 +6,7 @@ import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/h
 import { characterCardPrizes, characterCards, characters, inventoryItems } from '../../db/schema.js'
 import { BAG_CELLS } from '../../game/bag.js'
 import { item, rebornCards } from '../../game/data.js'
-import cardRoutes, { openCardBox } from './routes.js'
+import { openCardBox } from './routes.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -16,7 +16,6 @@ let characterId: string
 beforeEach(async () => {
   await truncateAll(db)
   app = buildTestApp(db)
-  app.register(cardRoutes, { db, prefix: '/api/game/cards' })
   client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Card_player',

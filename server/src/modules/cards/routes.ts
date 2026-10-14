@@ -9,7 +9,7 @@ import { CARD_COLLECTIONS, cardIdsOf } from '../../../../game-core/src/cards/con
 import {
   cardCollectionParamsSchema,
   type CardClaimResult,
-  type CardsView,
+  type CardRoomView,
 } from '../../../../shared/src/schemas/cards.js'
 import type { Db } from '../../db/client.js'
 import { characterCardPrizes, characterCards, inventoryItems } from '../../db/schema.js'
@@ -23,7 +23,7 @@ import { RATE_LIMITS } from '../game/rate-limits.js'
 
 const bad = (code: string, message: string) => new HttpError(400, code, message)
 
-async function view(tx: Tx | Db, characterId: string): Promise<CardsView> {
+async function view(tx: Tx | Db, characterId: string): Promise<CardRoomView> {
   const owned = await tx
     .select()
     .from(characterCards)

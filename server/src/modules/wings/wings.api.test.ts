@@ -4,7 +4,7 @@ import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import type { Random } from '@pockie/game-core'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { arenaPlayers, characters, inventoryItems } from '../../db/schema.js'
-import { playerFighterFrom } from '../../game/combat.js'
+import { playerFighter, playerFighterFrom } from '../../game/combat.js'
 import { wingBonuses } from '../../game/wings.js'
 import { wingRoutes } from './routes.js'
 
@@ -21,7 +21,8 @@ beforeEach(async () => {
   await truncateAll(db)
   roll = 0
   app = buildTestApp(db)
-  app.register(wingRoutes, { db, prefix: '/api/game/wings', random: fixed })
+  // The app registers the routes at /api/game/wings; this copy injects the enhance roll.
+  app.register(wingRoutes, { db, prefix: '/api/test/wings', random: fixed })
   client = new Client(app)
   await client.post('/api/auth/register', {
     username: 'Player_one',
@@ -61,15 +62,19 @@ const rowsOf = (itemId: string) =>
 const held = async (itemId: string) => (await rowsOf(itemId)).reduce((sum, r) => sum + r.count, 0)
 const levelOf = async (id: string) =>
   (await db.select().from(inventoryItems).where(eq(inventoryItems.id, id)))[0]?.enhanceLevel
-const enhanceRow = (id: string, body: object) => client.post(`/api/game/wings/${id}/enhance`, body)
+const enhanceRow = (id: string, body: object) => client.post(`/api/test/wings/${id}/enhance`, body)
 
-describe('GET /api/game/wings', () => {
+describe('GET /api/test/wings', () => {
+  it('is served by the app at /api/game/wings', async () => {
+    expect((await client.get('/api/game/wings')).statusCode).toBe(200)
+  })
+
   it('lists the equipped and owned wings, materials and the 26 collection entries', async () => {
     const worn = await giveWing('i218000', 3, true)
     await giveWing('i218200')
     await give('i218021', 4)
     await give('i218050', 2)
-    const response = await client.get('/api/game/wings')
+    const response = await client.get('/api/test/wings')
     expect(response.statusCode).toBe(200)
     const view = response.json()
     expect(view.maxLevel).toBe(30)
@@ -92,7 +97,7 @@ describe('GET /api/game/wings', () => {
   })
 })
 
-describe('POST /api/game/wings/:itemRowId/enhance', () => {
+describe('POST /api/test/wings/:itemRowId/enhance', () => {
   it('raises the level on success and uses the stone and talismans', async () => {
     const wing = await giveWing()
     await give('i218021', 2)
@@ -209,22 +214,22 @@ describe('POST /api/game/wings/:itemRowId/enhance', () => {
   })
 })
 
-describe('POST /api/game/wings/collection/:itemId', () => {
+describe('POST /api/test/wings/collection/:itemId', () => {
   it('registers a wing once, pays Plume Shards and keeps the wing', async () => {
     await giveWing('i218000')
-    const response = await client.post('/api/game/wings/collection/i218000', {})
+    const response = await client.post('/api/test/wings/collection/i218000', {})
     expect(response.statusCode).toBe(200)
     expect(response.json().reward).toBe(5)
     expect(await held('i218021')).toBe(5)
     expect(await held('i218000')).toBe(1)
-    const again = await client.post('/api/game/wings/collection/i218000', {})
+    const again = await client.post('/api/test/wings/collection/i218000', {})
     expect(again.statusCode).toBe(409)
     expect(await held('i218021')).toBe(5)
   })
 
   it('pays 10 for an aura, also when it is worn', async () => {
     await giveWing('i218200', 0, true)
-    const response = await client.post('/api/game/wings/collection/i218200', {})
+    const response = await client.post('/api/test/wings/collection/i218200', {})
     expect(response.json().reward).toBe(10)
     expect(
       response.json().collection.find((e: { itemId: string }) => e.itemId === 'i218200'),
@@ -232,10 +237,10 @@ describe('POST /api/game/wings/collection/:itemId', () => {
   })
 
   it('refuses an item not owned or not a wing', async () => {
-    const missing = await client.post('/api/game/wings/collection/i218001', {})
+    const missing = await client.post('/api/test/wings/collection/i218001', {})
     expect(missing.json().error.code).toBe('no_item')
     await give('i218021')
-    const notWing = await client.post('/api/game/wings/collection/i218021', {})
+    const notWing = await client.post('/api/test/wings/collection/i218021', {})
     expect(notWing.json().error.code).toBe('not_wing')
   })
 })
@@ -266,8 +271,49 @@ describe('Wing slot (decision 22)', () => {
     const aura = await giveWing('i218200')
     expect((await client.post(`/api/game/items/${wing.id}/equip`, {})).statusCode).toBe(200)
     expect((await client.post(`/api/game/items/${aura.id}/equip`, {})).statusCode).toBe(200)
-    const view = (await client.get('/api/game/wings')).json()
+    const view = (await client.get('/api/test/wings')).json()
     expect(view.equipped.id).toBe(aura.id)
     expect(view.owned.filter((w: { equipped: boolean }) => w.equipped)).toHaveLength(1)
+  })
+})
+
+describe('wing wiring (coordinator)', () => {
+  const row = async () =>
+    (await db.select().from(characters).where(eq(characters.id, characterId)))[0]!
+  const snapshot = async () => {
+    const [arena] = await db
+      .select()
+      .from(arenaPlayers)
+      .where(eq(arenaPlayers.characterId, characterId))
+    return arena!.snapshot as unknown as {
+      fighter: { hit: number; maxHp: number }
+      look: { wingSprite?: string; aura?: string }
+    }
+  }
+
+  it('an equipped wing raises the live fighter and the arena snapshot by its line', async () => {
+    await client.get('/api/game/arena')
+    const before = await playerFighter(db, await row())
+    const wing = await giveWing('i218000')
+    expect((await client.post(`/api/game/items/${wing.id}/equip`, {})).statusCode).toBe(200)
+    const after = await playerFighter(db, await row())
+    expect(after.hit - before.hit).toBe(42)
+    expect(after.neglectDefense - before.neglectDefense).toBe(46)
+    const stored = await snapshot()
+    expect(stored.fighter.hit).toBe(after.hit)
+    expect(stored.fighter.maxHp).toBe(after.maxHp)
+    expect(stored.look.wingSprite).toBe('wing_duotian_3')
+  })
+
+  it('unequipping the wing refreshes the arena snapshot', async () => {
+    await client.get('/api/game/arena')
+    const before = (await snapshot()).fighter.hit
+    const aura = await giveWing('i218200')
+    await client.post(`/api/game/items/${aura.id}/equip`, {})
+    expect((await snapshot()).look.aura).toBe('ki_lightning')
+    expect((await client.post(`/api/game/items/${aura.id}/unequip`, {})).statusCode).toBe(200)
+    const stored = await snapshot()
+    expect(stored.fighter.hit).toBe(before)
+    expect(stored.look.aura).toBeUndefined()
   })
 })
