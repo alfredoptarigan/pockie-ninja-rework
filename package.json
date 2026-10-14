@@ -20,6 +20,7 @@
     "db:migrate": "pnpm --filter @pockie/server db:migrate",
     "db:reset": "pnpm --filter @pockie/server db:reset",
     "db:seed": "pnpm --filter @pockie/server db:seed",
+    "db:seed-qa": "pnpm --filter @pockie/server db:seed-qa",
     "create-admin": "pnpm --filter @pockie/server create-admin",
     "assets:export": "node tools/export-assets.ts",
     "assets:reborn": "node tools/assets/reborn.ts",

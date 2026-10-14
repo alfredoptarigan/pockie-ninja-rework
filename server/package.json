@@ -14,6 +14,7 @@
     "db:migrate": "tsx --env-file-if-exists=../.env scripts/migrate.ts",
     "db:reset": "tsx --env-file-if-exists=../.env scripts/reset.ts",
     "db:seed": "tsx --env-file-if-exists=../.env scripts/seed.ts",
+    "db:seed-qa": "tsx --env-file-if-exists=../.env scripts/seed-qa.ts",
     "create-admin": "tsx --env-file-if-exists=../.env scripts/create-admin.ts"
   },
   "dependencies": {
