@@ -35,7 +35,7 @@ test('a level-51 ninja upgrades a talent and activates it', async ({ browser }) 
     await openMenu(page, 'Character')
     await dialog(page, 'Stats').getByRole('button', { name: 'Talents', exact: true }).click()
     const talents = dialog(page, 'Talents')
-    const upgrade = talents.getByRole('button', { name: /^Normal \(/ })
+    const upgrade = talents.getByRole('button', { name: /^Upgrade for [0-9,]+ Stone$/ })
     await expect(upgrade).toBeEnabled()
     const upgraded = page.waitForResponse(
       (r) => r.url().includes(`/api/game/talents/${TALENT_ID}/upgrade`) && r.ok(),
@@ -46,7 +46,7 @@ test('a level-51 ninja upgrades a talent and activates it', async ({ browser }) 
     // Assert: the talent reached level 1 and the Stone was spent.
     await expect(
       talents.getByRole('list', { name: 'Talents' }).getByRole('listitem').first(),
-    ).toContainText('Level 1')
+    ).toContainText('Lv. 1')
     expect(talentRow(name)).toMatch(/^1\|\d+\|$/)
     expect(sql(`select stone from characters where name = :'name'`, { name })).toBe(
       String(100_000 - FIRST_UPGRADE_STONE),

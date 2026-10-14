@@ -64,7 +64,7 @@ test('a level-51 ninja uses a 7-day scroll and slots the scroll skill', async ({
     const slotted = page.waitForResponse(
       (r) => r.url().includes('/api/game/skills/') && r.request().method() !== 'GET' && r.ok(),
     )
-    await skills.getByRole('button', { name: `Slot ${SKILL_NAME} in tree 1`, exact: true }).click()
+    await skills.getByRole('button', { name: `Add ${SKILL_NAME} to tree 1`, exact: true }).click()
     await slotted
 
     // Assert: the button flips to Remove and the skill sits in a slot of tree 1.

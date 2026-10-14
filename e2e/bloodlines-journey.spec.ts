@@ -40,7 +40,7 @@ test('a level-51 ninja turns in limit items and activates a bloodline', async ({
     const turnedIn = page.waitForResponse(
       (r) => r.url().includes(`/api/game/bloodlines/${LIMIT.id}/turn-in`) && r.ok(),
     )
-    await bloodlines.getByRole('button', { name: /^Turn in \d+$/ }).click()
+    await bloodlines.getByRole('button', { name: /^Turn in \d+ items$/ }).click()
     await turnedIn
 
     // Assert: the items are spent and 30 Amity unlock the bloodline.
@@ -62,7 +62,7 @@ test('a level-51 ninja turns in limit items and activates a bloodline', async ({
     await activated
 
     // Assert: it fills a slot of the Bloodlines tab and slot 0 of the database.
-    await bloodlines.getByRole('tab', { name: 'Bloodlines', exact: true }).click()
+    await bloodlines.getByRole('tab', { name: 'Active', exact: true }).click()
     await expect(
       bloodlines
         .getByRole('list', { name: 'Active bloodlines' })
