@@ -173,10 +173,14 @@ export function nextSlot(rows: readonly SkillRow[], kind: number, level: number)
   return { row: emptySlot(kind, slot), cost: slotCost(unlocked.length + 1)! }
 }
 
-/** Learnable skills of a kind: the species pool, without rows left out of pet-skills.json. */
+/** Learnable skills of a kind: the species pool, without rows that do nothing in a fight. */
 export function learnPool(species: string, kind: PetSkillKind) {
   const known = rebornPetSkills().skills
-  return (petSpecies(species)?.pool[KIND_KEYS[kind]] ?? []).filter((id) => known[String(id)])
+  return (petSpecies(species)?.pool[KIND_KEYS[kind]] ?? []).filter((id) => {
+    const row = known[String(id)]
+    // Halo and Help rows without a script do nothing in a fight (skill-ledger.md).
+    return row && (row.kind === 3 || row.script !== null)
+  })
 }
 
 /** Locks the unequipped stacks of an item and removes `count`, bound stacks first. */
