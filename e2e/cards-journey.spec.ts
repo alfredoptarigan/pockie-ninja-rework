@@ -49,7 +49,7 @@ test('a ninja opens a card box and claims a completed collection', async ({ brow
     // Act: use the card box in the bag.
     await openMenu(page, 'Inventory')
     const bag = dialog(page, 'Inventory')
-    await bag.getByRole('button', { name: BOX.name, exact: true }).click()
+    await bag.getByRole('button', { name: BOX.name, exact: true }).click({ button: 'right' })
     const opened = page.waitForResponse(
       (r) => /\/api\/game\/items\/.+\/use$/.test(r.url()) && r.ok(),
     )

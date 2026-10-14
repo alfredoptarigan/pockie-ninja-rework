@@ -63,7 +63,7 @@ test('a ninja adopts, feeds and activates a pet that attacks in a field fight', 
     // Act: use the pet item in the bag.
     await openMenu(page, 'Inventory')
     const bag = dialog(page, 'Inventory')
-    await bag.getByRole('button', { name: PET.name, exact: true }).click()
+    await bag.getByRole('button', { name: PET.name, exact: true }).click({ button: 'right' })
     const adopted = page.waitForResponse(
       (r) => /\/api\/game\/items\/.+\/use$/.test(r.url()) && r.ok(),
     )

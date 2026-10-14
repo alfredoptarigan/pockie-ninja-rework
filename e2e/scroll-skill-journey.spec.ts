@@ -35,7 +35,7 @@ test('a level-51 ninja uses a 7-day scroll and slots the scroll skill', async ({
     // Act: open the scroll's menu in the bag and use it.
     await openMenu(page, 'Inventory')
     const bag = dialog(page, 'Inventory')
-    await bag.getByRole('button', { name: SCROLL_NAME, exact: true }).click()
+    await bag.getByRole('button', { name: SCROLL_NAME, exact: true }).click({ button: 'right' })
     const used = page.waitForResponse((r) => /\/api\/game\/items\/.+\/use$/.test(r.url()) && r.ok())
     await bag.getByRole('menuitem', { name: `Use ${SCROLL_NAME}`, exact: true }).click()
     await used

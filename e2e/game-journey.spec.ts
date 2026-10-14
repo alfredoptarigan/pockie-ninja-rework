@@ -249,7 +249,7 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   const bag = dialog(page, 'Inventory')
   await expect(bag.getByRole('img', { name: PACK })).toBeVisible()
   await expectImagesLoaded(bag)
-  await bag.getByRole('button', { name: PACK, exact: true }).click()
+  await bag.getByRole('button', { name: PACK, exact: true }).click({ button: 'right' })
   await bag.getByRole('menuitem', { name: `Use ${PACK}` }).click()
   await expect(bag.getByRole('status')).toContainText(`Quest complete: ${QUEST.pack}.`)
   await expect(bag.getByRole('img', { name: FISTS })).toBeVisible()
@@ -261,7 +261,7 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   // 90002: accept at the Elder, equip the newbie weapon; its EXP reaches level 2.
   await acceptFrom(page, ELDER, QUEST.weapon)
   await go(page, 'Accepted', QUEST.weapon)
-  await bag.getByRole('button', { name: FISTS, exact: true }).click()
+  await bag.getByRole('button', { name: FISTS, exact: true }).click({ button: 'right' })
   await bag.getByRole('menuitem', { name: `Equip ${FISTS}` }).click()
   await expect(bag.getByRole('status')).toContainText(`Quest complete: ${QUEST.weapon}.`)
   await expect(bag.getByRole('listitem').filter({ hasText: FISTS })).toContainText('Equipped')

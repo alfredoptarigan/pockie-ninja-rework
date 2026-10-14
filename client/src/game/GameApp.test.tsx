@@ -1,4 +1,4 @@
-import { act, screen, waitFor, within } from '@testing-library/react'
+import { act, fireEvent, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
@@ -486,7 +486,7 @@ describe('tutorial nudges', () => {
     await userEvent.click(await within(nav).findByRole('button', { name: /^Go:/ }))
     const bag = await screen.findByRole('dialog', { name: 'Inventory' })
     const marked = await within(bag).findByText('Next step')
-    await userEvent.click(within(marked.closest('li')!).getByRole('button'))
+    fireEvent.contextMenu(within(marked.closest('li')!).getByRole('button'))
     expect(within(bag).getByRole('menuitem', { name: /^Equip/ })).toBeEnabled()
     // Only the weapon this outfit can wear is marked.
     expect(within(bag).getAllByText('Next step')).toHaveLength(1)

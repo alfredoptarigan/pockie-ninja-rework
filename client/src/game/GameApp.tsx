@@ -20,6 +20,7 @@ import { NpcDialog } from './NpcDialog'
 import { QuestNavigation } from './QuestNavigation'
 import { SceneExits } from './SceneExits'
 import { SceneView } from './SceneView'
+import { ToastHost } from './toast'
 import { Dialog, GameButton, Notice, useFitScale } from './skin'
 import type { BagHighlight, SceneNpc } from './types'
 import { isDefeated, isVillage } from './world'
@@ -191,6 +192,7 @@ function GameScreen({ character }: { character: Character }) {
           {feature && (
             <FeatureWindow open={feature} character={character} onClose={() => setFeature(null)} />
           )}
+          <ToastHost />
         </div>
       </OpenWindowProvider>
     </AudioProvider>

@@ -79,13 +79,14 @@ test('a ninja appraises a weapon in the bag and enhances it at the Blacksmith', 
     .getByRole('button', { name: 'Inventory' })
     .click()
   const bag = dialog(page, 'Inventory')
-  await bag.getByRole('button', { name: WEAPON.name, exact: true }).click()
+  await bag.getByRole('button', { name: WEAPON.name, exact: true }).click({ button: 'right' })
   const appraise = bag.getByRole('menuitem', { name: new RegExp(`^Appraise ${WEAPON.name} for`) })
   const cost = Number((await appraise.getAttribute('aria-label'))!.match(/for (\d+) Stone/)![1])
+  const appraised = page.waitForResponse((r) => r.url().endsWith('/forge/appraise') && r.ok())
   await appraise.click()
+  await appraised
 
-  // Assert: paid in Stone, nothing left to appraise.
-  await expect(bag.getByText(`Appraised ${WEAPON.name}.`)).toBeVisible()
+  // Assert: paid in Stone, nothing left to appraise (Reborn shows no success notice).
   await expectCurrency(page, 'Stone', 1000 - cost)
   await expect(appraise).toBeHidden()
   await bag.getByRole('button', { name: 'Close' }).click()

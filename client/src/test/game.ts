@@ -84,6 +84,10 @@ export const potion: InventoryItem = {
   bound: false,
   equippedSlot: null,
   nameKey: 'lg_HP1_itemname',
+  page: 0,
+  slot: 2,
+  locked: false,
+  info: { kind: 'use', level: 1, sellPrice: 5, stack: 99, w: 1, h: 1, class: 'PharmacyItem' },
 }
 
 export const fists: InventoryItem = {
@@ -93,4 +97,17 @@ export const fists: InventoryItem = {
   bound: true,
   equippedSlot: null,
   nameKey: 'lg_Equip_GlovesNewbie',
+  page: 0,
+  slot: 0,
+  locked: false,
+  info: {
+    kind: 'equip',
+    equipSlot: 'Weapon',
+    level: 1,
+    sellPrice: 20,
+    stack: 1,
+    w: 2,
+    h: 3,
+    class: 'EquipItem',
+  },
 }

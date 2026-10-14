@@ -1,195 +1,268 @@
-// Inventory window laid out like Pockie Ninja Reborn's (docs/ui-layout-reborn.md, "Inventory"):
-// equipment columns around the character pose, then the bag: tabs I-X over a 10x6 grid of 27px
-// tiles where each item covers its icon's tiles, and the six side buttons. Clicking or
-// right-clicking an item opens its context menu (Reborn's #context-menu). Positions are the
-// measured ones, relative to the window content (Reborn's x - 5, y - 31).
-import { useCallback, useState, type CSSProperties, type MouseEvent } from 'react'
-import {
-  errorMessage,
-  useCharacter,
-  useEquipItem,
-  useInventory,
-  useUnequipItem,
-  useUseItem,
-  usePendingTreasure,
-} from './api'
-import { BuffsPanel, TitleText } from './BuffsPanel'
-import { TreasurePanel } from './TreasurePanel'
-import { useOutfitStand } from './art'
-import { footprint, layoutBag, TILE, type Placed } from './bag-layout'
-import { GearIcon, useGear } from './forge'
-import { useAppraise, useRepair } from './forge/api'
+// Inventory window as Pockie Ninja Reborn's (data/reborn-raw/audit-2026-10-14/reborn-windows-A-L.md,
+// "Inventory"; docs/audit/reborn-ui-audit.md §1). A click picks an item up (a ghost follows the
+// pointer; Escape or a right click puts it back); a click on a tile, item or slot then moves,
+// swaps, equips or unequips it. A double click or right click opens a bag item's menu. Menus,
+// tooltips and small windows render inside this window, so they stay in its modal top layer.
 import type { GearView } from '@pockie/shared'
-import { itemIcon } from './ItemIcon'
+import {
+  useCallback,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type MouseEvent,
+  type PointerEvent,
+} from 'react'
+import { useCharacter, useInventory, usePendingTreasure } from './api'
+import { BuffsPanel } from './BuffsPanel'
+import { BagGrid, iconFile, SideButtons, span, type Point } from './inventory/BagGrid'
+import {
+  ConfirmDialog,
+  ManageOutfitDialog,
+  MultiSellDialog,
+  SortDialog,
+  UseMultipleDialog,
+} from './inventory/dialogs'
+import { Equipment, OutfitTooltip, SetBar } from './inventory/EquipmentSlots'
+import { attempt, useBagRequests } from './inventory/requests'
 import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
-import { completedNotice } from './QuestLog'
+import { ItemTooltip } from './ItemTooltip'
 import { GameButton, Notice } from './skin'
-import { WING_ICONS } from './wings'
-import { cardName } from './cards'
-import { PetSlot } from './pets'
-import { GameText, plainText } from './text'
-import type { ActionResult, BagHighlight, InventoryItem } from './types'
-import { isEquipment, isUsable } from './world'
+import { requestItemLink } from './social'
+import { plainText } from './text'
+import { showToast } from './toast'
+import { TreasurePanel } from './TreasurePanel'
+import type { BagHighlight, InventoryItem } from './types'
+import { useGear } from './forge'
 import { useOpenWindow } from './windows'
+
+/** Two clicks on the same item this close together open its menu (Reborn's double click). */
+const DOUBLE_CLICK_MS = 250
+/** Reborn's default split size (settings.splitCount). */
+const SPLIT_COUNT = 2
+/** Reborn's tooltip offset per tile of the item: right and up from the pointer. */
+const TIP_OFFSET = { x: 24, y: 30 }
+const INVALID_SWAP = 'Invalid Swap'
+const UNFIT_REASON = "Your outfit can't use this weapon."
+const TREASURE_BOX = /^i15900[0-3]$/
+const OUTFIT = 'outfit'
+
+type Modal =
+  | { kind: 'sort' }
+  | { kind: 'outfit' }
+  | { kind: 'useMultiple'; id: string }
+  | { kind: 'confirm'; text: string; onAccept: () => void }
+type ClickEvent = MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>
 
 /** Whether a bag item is what the current tutorial step asks for. */
 const isHighlighted = (item: InventoryItem, highlight: BagHighlight | undefined) =>
   !!highlight &&
   ('itemId' in highlight
     ? item.itemId === highlight.itemId
-    : isEquipment(item.itemId) && !item.equippedSlot && item.fitsOutfit !== false)
+    : item.info?.kind === 'equip' && item.fitsOutfit !== false)
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
-/** Icon size for a run of 1-3 tiles (27px each, less Reborn's 3px gap): 24, 51 and 78px. */
-const WIDTHS = ['', 'w-[24px]', 'w-[51px]', 'w-[78px]']
-const HEIGHTS = ['', 'h-[24px]', 'h-[51px]', 'h-[78px]']
+/** Click time, read in event handlers only. */
+const clickTime = () => Date.now()
 
-/**
- * Equipment slots: `slot` is the item's EquipType (server equippedSlot). Outfit and Pet have no
- * items yet, so they always show their empty picture. `art` is drawn at half its exported size.
- * The Wing slot (M6 decision 22) has no 2011 picture: a plain cell, at 70% like Reborn's.
- */
-const SLOTS = [
-  { slot: 'Outfit', label: 'Outfit', art: 'outfit', size: 61, at: [4, 50, 55, 55] },
-  { slot: 'Weapon', label: 'Weapon', art: 'weapon', size: '71px 98.5px', at: [4, 107, 55, 83] },
-  { slot: 'Glove', label: 'Gloves', art: 'glove', size: 73, at: [4, 192, 55, 55] },
-  { slot: 'Pet', label: 'Pet', art: 'pet', size: 71, at: [4, 249, 55, 55] },
-  { slot: 'Ring', label: 'Ring', art: 'ring', size: 34, at: [309, 49, 28, 28] },
-  { slot: 'Amulet', label: 'Amulet', art: 'amulet', size: 34, at: [338, 49, 28, 28] },
-  { slot: 'Hat', label: 'Hat', art: 'hat', size: 73, at: [310, 78, 55, 55] },
-  { slot: 'Cloth', label: 'Armour', art: 'cloth', size: 73, at: [310, 135, 55, 55] },
-  { slot: 'Girdle', label: 'Belt', art: 'belt', size: 73, at: [310, 192, 55, 55] },
-  { slot: 'Shoes', label: 'Shoes', art: 'shoes', size: 73, at: [310, 249, 55, 55] },
-  { slot: 'Wing', label: 'Wing', art: null, size: 51, at: [242, 220, 55, 55] },
-] as const
-
-const box = ([left, top, width, height]: readonly number[]): CSSProperties => ({
-  left,
-  top,
-  width,
-  height,
-})
-
-type Kind = 'use' | 'equip' | 'unequip'
-type Open = (item: InventoryItem, event: MouseEvent<HTMLElement>) => void
-const VERBS: Record<Kind, string> = { use: 'Used', equip: 'Equipped', unequip: 'Unequipped' }
-const UNFIT_REASON = "Your outfit can't use this weapon."
-
-/** Reborn's Sort: the bag grouped by item, larger stacks first. */
-const sortBag = (items: InventoryItem[]) =>
-  [...items].sort((a, b) => a.itemId.localeCompare(b.itemId) || b.count - a.count)
+const toggle = (ids: string[], id: string) =>
+  ids.includes(id) ? ids.filter((other) => other !== id) : [...ids, id]
 
 export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const inventory = useInventory()
-  const use = useUseItem()
-  const equip = useEquipItem()
-  const unequip = useUnequipItem()
-  const appraise = useAppraise()
-  const repair = useRepair()
+  const character = useCharacter().data
+  const gear: Record<string, GearView> = useGear().data ?? {}
+  const request = useBagRequests()
   const pendingTreasure = usePendingTreasure()
-  const gear = useGear().data ?? {}
+  const openWindow = useOpenWindow()
+  const [page, setPage] = useState<number | null>(null)
+  const [heldId, setHeldId] = useState<string | null>(null)
+  const [pointer, setPointer] = useState<Point | null>(null)
+  const [menu, setMenu] = useState<{ id: string; x: number; y: number } | null>(null)
+  const [tip, setTip] = useState<{ id: string; at: Point } | null>(null)
+  const [modal, setModal] = useState<Modal | null>(null)
+  const [multiSell, setMultiSell] = useState(false)
+  const [selected, setSelected] = useState<string[]>([])
   const [treasureBox, setTreasureBox] = useState<InventoryItem | null>(null)
   const [treasureVisible, setTreasureVisible] = useState(false)
   const [buffsVisible, setBuffsVisible] = useState(false)
-  const [notice, setNotice] = useState<{ tone: 'info' | 'error'; text: string } | null>(null)
-  const [menu, setMenu] = useState<{ id: string; x: number; y: number } | null>(null)
-  const [page, setPage] = useState<number | null>(null)
-  const [sorted, setSorted] = useState(false)
-  const [brief, setBrief] = useState(false)
+  const lastClick = useRef<{ id: string; time: number } | null>(null)
+  /** A fixed probe: the origin of fixed tooltips (the window frame may be their containing block). */
+  const origin = useRef<HTMLSpanElement>(null)
   const closeMenu = useCallback(() => setMenu(null), [])
-  const busy =
-    use.isPending || equip.isPending || unequip.isPending || appraise.isPending || repair.isPending
-
-  async function report(action: () => Promise<unknown>, done: (result: unknown) => string) {
-    setNotice(null)
-    try {
-      setNotice({ tone: 'info', text: done(await action()) })
-    } catch (error) {
-      setNotice({ tone: 'error', text: errorMessage(error) })
-    }
-  }
-
-  function run(item: InventoryItem, kind: Kind) {
-    if (kind === 'use' && /^i15900[0-3]$/.test(item.itemId)) {
-      setNotice(null)
-      setTreasureBox(item)
-      setTreasureVisible(true)
-      return
-    }
-    const name = plainText(item.nameKey, 'the item')
-    void report(
-      () => ({ use, equip, unequip })[kind].mutateAsync(item.id),
-      (result) => {
-        const completed =
-          kind === 'unequip' ? '' : completedNotice((result as ActionResult).completed)
-        const card = kind === 'use' ? (result as ActionResult).card : undefined
-        const found = card ? ` You found ${cardName(card)}.` : ''
-        return `${VERBS[kind]} ${name}.${found}${completed}`
-      },
-    )
-  }
-
-  /** Appraise or Repair through the forge, with its price in Stone. */
-  function forgeEntry(verb: 'Appraise' | 'Repair', item: InventoryItem, cost: number): MenuEntry {
-    const name = plainText(item.nameKey, 'the item')
-    const mutate = verb === 'Appraise' ? appraise.mutateAsync : repair.mutateAsync
-    return {
-      label: `${verb} (${cost} Stone)`,
-      name: `${verb} ${name} for ${cost} Stone`,
-      disabled: busy,
-      onSelect: () =>
-        void report(
-          () => mutate({ itemId: item.id }),
-          () => `${verb === 'Appraise' ? 'Appraised' : 'Repaired'} ${name}.`,
-        ),
-    }
-  }
-
-  /** The context menu's actions for a bag or worn item. */
-  function entries(item: InventoryItem): MenuEntry[] {
-    const name = plainText(item.nameKey, 'item')
-    const forged = gear[item.id]
-    const list: MenuEntry[] = []
-    const add = (kind: Kind, label: string, extra: Partial<MenuEntry> = {}) =>
-      list.push({
-        label,
-        name: `${label} ${name}`,
-        disabled: busy,
-        onSelect: () => run(item, kind),
-        ...extra,
-      })
-    if (item.equippedSlot) add('unequip', 'Unequip')
-    else if (isEquipment(item.itemId)) {
-      const fits = item.fitsOutfit !== false
-      add('equip', 'Equip', { disabled: busy || !fits, reason: fits ? undefined : UNFIT_REASON })
-    } else if (isUsable(item.itemId)) add('use', 'Use')
-    if (forged && !forged.appraised) list.push(forgeEntry('Appraise', item, forged.appraiseCost))
-    if (forged && forged.repairCost > 0) list.push(forgeEntry('Repair', item, forged.repairCost))
-    return list
-  }
-
-  const openMenu: Open = (item, event) => setMenu({ id: item.id, ...menuAt(event) })
+  const closeModal = useCallback(() => setModal(null), [])
 
   if (inventory.isPending) return <p>Opening your bag...</p>
   if (inventory.isError) return <Notice tone="error">We could not open your bag.</Notice>
 
-  const bag = inventory.data.filter((item) => !item.equippedSlot)
-  const pages = layoutBag(sorted ? sortBag(bag) : bag, (item) => footprint(itemIcon(item.itemId)))
+  const items = inventory.data
+  const bag = items.filter((item) => !item.equippedSlot && item.page != null && item.slot != null)
+  const held = items.find((item) => item.id === heldId) ?? null
   const marked = bag.find((item) => isHighlighted(item, highlight))
-  const markedPage = marked ? pages.findIndex((list) => list.some((p) => p.item === marked)) : 0
-  const shownPage = page ?? markedPage
-  const menuItem = menu && inventory.data.find((item) => item.id === menu.id)
+  const shownPage = page ?? marked?.page ?? 0
+  const level = character?.level ?? 1
+  const run = (action: () => Promise<unknown>) => void attempt(action)
+
+  function pickUp(item: InventoryItem) {
+    setHeldId(item.id)
+    setTip(null)
+    setMenu(null)
+  }
+
+  function openMenu(id: string, event: ClickEvent) {
+    setHeldId(null)
+    setTip(null)
+    setMenu({ id, ...menuAt(event) })
+  }
+
+  function clickBagItem(item: InventoryItem, event: MouseEvent<HTMLElement>) {
+    if (multiSell) {
+      if (!item.locked) setSelected(toggle(selected, item.id))
+      return
+    }
+    const now = clickTime()
+    const last = lastClick.current
+    lastClick.current = { id: item.id, time: now }
+    if (last?.id === item.id && now - last.time < DOUBLE_CLICK_MS) return openMenu(item.id, event)
+    if (!held) return pickUp(item)
+    if (held.id === item.id) return setHeldId(null)
+    if (held.equippedSlot) {
+      // A worn item over a bag item: wear that one instead, when it fits the slot.
+      if (item.info?.equipSlot !== held.equippedSlot) return showToast(INVALID_SWAP, 'failure')
+      setHeldId(null)
+      return run(() => request.equip(item.id))
+    }
+    setHeldId(null)
+    run(() => request.swap({ id: held.id, targetId: item.id }))
+  }
+
+  function clickTile(tab: number, slot: number) {
+    if (!held) return
+    setHeldId(null)
+    const spot = { id: held.id, page: tab, slot }
+    run(() => (held.equippedSlot ? request.unequip(spot) : request.move(spot)))
+  }
+
+  function clickSlot(slot: string, worn?: InventoryItem) {
+    if (!held) return worn && pickUp(worn)
+    if (held.id === worn?.id) return setHeldId(null)
+    if (held.equippedSlot || held.info?.equipSlot !== slot)
+      return showToast(INVALID_SWAP, 'failure')
+    setHeldId(null)
+    run(() => request.equip(held.id))
+  }
+
+  function showTip(id: string | null, at?: Point) {
+    if (!id || !at || held) return setTip(null)
+    const base = origin.current?.getBoundingClientRect() ?? { left: 0, top: 0 }
+    setTip({ id, at: { x: at.x - base.left, y: at.y - base.top } })
+  }
+
+  function consume(item: InventoryItem) {
+    if (!TREASURE_BOX.test(item.itemId)) return run(() => request.use(item.id))
+    setTreasureBox(item)
+    setTreasureVisible(true)
+  }
+
+  /** The context menu of a bag item, in Reborn's order; Appraise / Repair (our forge) last. */
+  function entries(item: InventoryItem): MenuEntry[] {
+    const name = plainText(item.nameKey, 'item')
+    const info = item.info
+    const list: MenuEntry[] = []
+    const add = (label: string, onSelect: () => void, extra: Partial<MenuEntry> = {}) =>
+      list.push({ label, name: `${label} ${name}`, disabled: request.busy, onSelect, ...extra })
+    if (info?.kind === 'equip') {
+      const fits = item.fitsOutfit !== false
+      add('Equip', () => run(() => request.equip(item.id)), {
+        disabled: request.busy || !fits,
+        reason: fits ? undefined : UNFIT_REASON,
+      })
+    }
+    if (info?.equipSlot === 'Wing') add('Enhance Wing', () => openWindow('wings'))
+    if (info?.kind === 'use') add('Use', () => consume(item))
+    if (info?.kind === 'use' && item.count > 1)
+      add('Use Multiple', () => setModal({ kind: 'useMultiple', id: item.id }))
+    if (item.count > 1) {
+      const count = Math.min(SPLIT_COUNT, item.count - 1)
+      add('Split', () => run(() => request.split({ id: item.id, count })))
+    }
+    const price = info?.sellPrice
+    if (!item.locked && price != null) {
+      const text = `Sell ${item.count} ${name} for ${price * item.count}?`
+      add('Sell', () =>
+        setModal({ kind: 'confirm', text, onAccept: () => run(() => request.sell([item.id])) }),
+      )
+    }
+    add(item.locked ? 'Unlock' : 'Lock', () => run(() => request.lock(item.id)))
+    add('Link in Chat', () => requestItemLink(name), { name: `Link ${name} in chat` })
+    const forged = gear[item.id]
+    const forge = (verb: 'Appraise' | 'Repair', cost: number) =>
+      list.push({
+        label: `${verb} (${cost} Stone)`,
+        name: `${verb} ${name} for ${cost} Stone`,
+        disabled: request.busy,
+        onSelect: () =>
+          run(() => (verb === 'Appraise' ? request.appraise : request.repair)({ itemId: item.id })),
+      })
+    if (forged && !forged.appraised) forge('Appraise', forged.appraiseCost)
+    if (forged && forged.repairCost > 0) forge('Repair', forged.repairCost)
+    return list
+  }
+
+  function closeMultiSell() {
+    setMultiSell(false)
+    setSelected([])
+  }
+
+  const menuItem = menu && menu.id !== OUTFIT && items.find((item) => item.id === menu.id)
+  const tipItem = tip && items.find((item) => item.id === tip.id)
+  const tipAt = (tiles: { w?: number; h?: number } = {}) =>
+    tip && {
+      x: tip.at.x + TIP_OFFSET.x * (tiles.w ?? 2),
+      y: Math.max(0, tip.at.y - TIP_OFFSET.y * (tiles.h ?? 2)),
+    }
+  const wornFor = (item: InventoryItem) => {
+    if (item.equippedSlot || item.info?.kind !== 'equip') return undefined
+    const worn = items.find((other) => other.equippedSlot === item.info?.equipSlot)
+    return worn && { item: worn, gear: gear[worn.id] }
+  }
+  const useMultipleItem =
+    modal?.kind === 'useMultiple' && items.find((item) => item.id === modal.id)
+  const ghost = held && iconFile(held.itemId)
 
   return (
-    <div data-menu-root className="relative h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
-      <BagPages />
+    <div
+      data-menu-root
+      className="relative h-[513px] w-[369px] bg-[#25282b] font-game text-xs"
+      onPointerMove={(event: PointerEvent<HTMLElement>) => {
+        if (!held) return
+        const box = event.currentTarget.getBoundingClientRect()
+        setPointer({ x: event.clientX - box.left, y: event.clientY - box.top })
+      }}
+      onKeyDown={(event) => {
+        if (event.key !== 'Escape' || !held) return
+        // Puts the item back instead of closing the Inventory.
+        event.preventDefault()
+        event.stopPropagation()
+        setHeldId(null)
+      }}
+      onContextMenuCapture={(event) => {
+        if (!held) return
+        event.preventDefault()
+        event.stopPropagation()
+        setHeldId(null)
+      }}
+    >
+      <span ref={origin} aria-hidden="true" className="pointer-events-none fixed top-0 left-0" />
+      <SetBar />
       <Equipment
-        items={inventory.data}
-        menuId={menu?.id ?? null}
-        onOpen={openMenu}
+        items={items}
+        character={character}
+        gear={gear}
+        held={held}
+        outfitMenuOpen={menu?.id === OUTFIT}
         onTitle={() => setBuffsVisible(true)}
-        brief={brief}
-        onBrief={setBrief}
+        onSlot={clickSlot}
+        onOutfitMenu={(event) => openMenu(OUTFIT, event)}
+        onTip={showTip}
       />
       {buffsVisible && <BuffsPanel onClose={() => setBuffsVisible(false)} />}
       {pendingTreasure.data?.treasure && !treasureVisible && (
@@ -210,51 +283,54 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           }}
         />
       )}
-
-      <div className="game-inset absolute top-[313px] left-0 h-[200px] w-[369px]" />
-      <div role="tablist" aria-label="Bag tabs" className="absolute top-[318px] left-[10px] flex">
-        {ROMAN.map((label, index) => (
-          <button
-            key={label}
-            type="button"
-            role="tab"
-            aria-selected={index === shownPage}
-            onClick={() => setPage(index)}
-            className="game-tab h-[22px] w-[27px] px-0 text-[13px] tracking-[-0.5px] text-black"
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-      <div
-        role="tabpanel"
-        aria-label={`Bag ${ROMAN[shownPage]}`}
-        className="game-inset absolute top-[340px] left-[5px] h-[170px] w-[279px]"
-      >
-        <ul
-          aria-label="Bag"
-          className="absolute top-[5px] left-[5px] h-[160px] w-[271px]"
-          style={{ background: `var(--ui-slot) 0 0 / ${TILE}px ${TILE}px` }}
-        >
-          {(pages[shownPage] ?? []).map((placed) => (
-            <BagCell
-              key={placed.item.id}
-              placed={placed}
-              highlighted={placed.item === marked}
-              open={placed.item.id === menu?.id}
-              gear={gear[placed.item.id]}
-              brief={brief}
-              onOpen={openMenu}
-            />
-          ))}
-        </ul>
-        {bag.length === 0 && (
-          <p className="absolute inset-0 grid place-items-center text-white [text-shadow:var(--shadow-game-text)]">
-            Your bag is empty.
-          </p>
-        )}
-      </div>
-      <SideButtons sorted={sorted} onSort={() => setSorted(!sorted)} />
+      <BagGrid
+        items={bag}
+        page={shownPage}
+        onPage={setPage}
+        heldId={heldId}
+        holding={!!held}
+        markedId={marked?.id}
+        menuId={menu?.id}
+        selected={selected}
+        gear={gear}
+        level={level}
+        onTile={clickTile}
+        onClick={clickBagItem}
+        onMenu={(item, event) => (held ? setHeldId(null) : openMenu(item.id, event))}
+        onLock={(item) => run(() => request.lock(item.id))}
+        onTip={(item, at) => showTip(item?.id ?? null, at)}
+      />
+      <SideButtons
+        onMultiSell={() => {
+          setHeldId(null)
+          setMultiSell(true)
+        }}
+        onSort={() => setModal({ kind: 'sort' })}
+      />
+      {ghost && pointer && (
+        <img
+          src={ghost}
+          alt=""
+          className="pointer-events-none absolute z-[65] object-contain opacity-80"
+          style={{
+            left: pointer.x - span(held.info?.w) / 2,
+            top: pointer.y - span(held.info?.h) / 2,
+            width: span(held.info?.w),
+            height: span(held.info?.h),
+          }}
+        />
+      )}
+      {!held && tipItem && (
+        <ItemTooltip
+          entry={{ item: tipItem, gear: gear[tipItem.id] }}
+          worn={wornFor(tipItem)}
+          at={tipAt(tipItem.info)!}
+          characterLevel={level}
+        />
+      )}
+      {!held && tip?.id === OUTFIT && character && (
+        <OutfitTooltip clothing={character.clothing} at={tipAt()!} />
+      )}
       {menuItem && menu && (
         <ItemMenu
           title={plainText(menuItem.nameKey, 'Unknown item')}
@@ -263,277 +339,63 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           onClose={closeMenu}
         />
       )}
-      {notice && (
-        <div className="absolute bottom-[213px] left-[69px] z-20 w-[231px]">
-          <Notice tone={notice.tone}>{notice.text}</Notice>
-        </div>
+      {menu?.id === OUTFIT && character && (
+        <ItemMenu
+          title={plainText(`lg_avatar${character.clothing}`, 'Outfit')}
+          at={menu}
+          entries={[{ label: 'Manage', onSelect: () => setModal({ kind: 'outfit' }) }]}
+          onClose={closeMenu}
+        />
+      )}
+      {multiSell && (
+        <MultiSellDialog
+          items={bag}
+          gear={gear}
+          selected={selected}
+          onSelect={setSelected}
+          onSell={() =>
+            setModal({
+              kind: 'confirm',
+              text: 'Sell these items?',
+              onAccept: () =>
+                run(async () => {
+                  await request.sell(selected)
+                  setSelected([])
+                }),
+            })
+          }
+          onClose={closeMultiSell}
+        />
+      )}
+      {modal?.kind === 'sort' && (
+        <SortDialog
+          page={shownPage}
+          busy={request.busy}
+          onSort={(input) =>
+            run(async () => {
+              await request.sort(input)
+              setModal(null)
+            })
+          }
+          onClose={closeModal}
+        />
+      )}
+      {useMultipleItem && (
+        <UseMultipleDialog
+          item={useMultipleItem}
+          onUse={(amount) => {
+            setModal(null)
+            run(() => request.useMany({ id: useMultipleItem.id, amount }))
+          }}
+          onClose={closeModal}
+        />
+      )}
+      {modal?.kind === 'outfit' && character && (
+        <ManageOutfitDialog clothing={character.clothing} onClose={closeModal} />
+      )}
+      {modal?.kind === 'confirm' && (
+        <ConfirmDialog text={modal.text} onAccept={modal.onAccept} onClose={closeModal} />
       )}
     </div>
-  )
-}
-
-/** Bag pages I-V: the bag is a single page today, so only I is open. */
-function BagPages() {
-  return (
-    <div
-      role="group"
-      aria-label="Bag pages"
-      className="game-panel-small absolute top-[6px] left-[32px] flex h-[32px] w-[305px] gap-[4px] pt-[3px] pl-[4px]"
-    >
-      {ROMAN.slice(0, 5).map((label, index) => (
-        <GameButton
-          key={label}
-          small
-          aria-pressed={index === 0}
-          disabled={index > 0}
-          className="h-[24px] w-[56px]"
-        >
-          {label}
-        </GameButton>
-      ))}
-    </div>
-  )
-}
-
-/**
- * Reborn's side column (x 288 from y 331, 30 apart). Compose opens our forge (the Inscription
- * window is UI_YYEquipCompose), Collection the wing collection, Sort groups the bag.
- * ponytail: Multi Sell, Wardrobe and Reroll have no feature behind them yet, so they stay disabled.
- */
-function SideButtons({ sorted, onSort }: { sorted: boolean; onSort: () => void }) {
-  const openWindow = useOpenWindow()
-  const buttons: { label: string; onClick?: () => void; pressed?: boolean }[] = [
-    { label: 'Compose', onClick: () => openWindow('forge') },
-    { label: 'Multi Sell' },
-    { label: 'Collection', onClick: () => openWindow('wings') },
-    { label: 'Wardrobe' },
-    { label: 'Reroll' },
-    { label: 'Sort', onClick: onSort, pressed: sorted },
-  ]
-  return (
-    <div className="absolute top-[331px] left-[288px] flex w-[75px] flex-col gap-[5px]">
-      {buttons.map(({ label, onClick, pressed }) => (
-        <GameButton
-          key={label}
-          disabled={!onClick}
-          aria-pressed={pressed}
-          onClick={onClick}
-          className="h-[25px] w-[75px] min-w-0! px-0! whitespace-nowrap"
-        >
-          {label}
-        </GameButton>
-      ))}
-    </div>
-  )
-}
-
-/**
- * The equipment columns, the backdrop with the title plate (it opens buffs and titles), the
- * pose, Talent / Blood Limit and the Hide box, and the slots with what is worn.
- */
-function Equipment({
-  items,
-  menuId,
-  onOpen,
-  onTitle,
-  brief,
-  onBrief,
-}: {
-  items: InventoryItem[]
-  menuId: string | null
-  onOpen: Open
-  onTitle: () => void
-  brief: boolean
-  onBrief: (brief: boolean) => void
-}) {
-  const character = useCharacter().data
-  const openWindow = useOpenWindow()
-  return (
-    <>
-      <div className="game-equip-column absolute top-[46px] left-0 h-[262px] w-[63px]" />
-      <div className="game-equip-column absolute top-[46px] left-[306px] h-[262px] w-[63px]" />
-      <div className="game-equip-backdrop absolute top-[48px] left-[65px] h-[256px] w-[239px]">
-        {character && <Pose clothing={character.clothing} />}
-        <GameButton
-          onClick={() => openWindow('talents')}
-          className="absolute top-[160px] left-[4px] h-[42px] w-[45px] min-w-0! px-0!"
-        >
-          Talent
-        </GameButton>
-        <GameButton
-          onClick={() => openWindow('bloodlines')}
-          className="absolute top-[205px] left-[4px] h-[42px] w-[45px] min-w-0! px-0! leading-tight whitespace-normal"
-        >
-          Blood Limit
-        </GameButton>
-        <label
-          title="Click to hide detailed stats"
-          className="absolute top-[230px] left-[183px] flex items-center gap-2 text-[13px] text-[#ffd27a]"
-        >
-          <input
-            type="checkbox"
-            checked={brief}
-            onChange={(event) => onBrief(event.target.checked)}
-            className="size-5 appearance-none border border-[#5a5a5a] bg-linear-to-b from-[#2a2a2a] to-[#1a1a1a] checked:after:block checked:after:text-center checked:after:leading-5 checked:after:text-[#ffd27a] checked:after:content-['✓']"
-          />
-          Hide
-        </label>
-      </div>
-      <button
-        type="button"
-        aria-label="Buffs and titles"
-        onClick={onTitle}
-        className="game-title-plate absolute top-[52px] left-[103px] grid h-[36px] w-[164px] cursor-pointer place-items-center"
-      >
-        <TitleText className="text-[15px]" />
-      </button>
-      <ul aria-label="Equipment">
-        {SLOTS.map(({ slot, label, art, size, at }) => {
-          const worn = items.find((item) => item.equippedSlot === slot)
-          const icon = worn && (itemIcon(worn.itemId)?.file ?? WING_ICONS[worn.itemId])
-          const name = worn && plainText(worn.nameKey, 'Unknown item')
-          return (
-            <li
-              key={slot}
-              className={`absolute grid place-items-center ${art ? '' : 'opacity-70'}`}
-              style={{
-                ...box(at),
-                background: `var(--ui-slot${art ? `-${art}` : ''}) center / ${typeof size === 'number' ? `${size}px` : size} no-repeat`,
-              }}
-            >
-              {icon && <img src={icon} alt="" className="size-full object-contain p-[2px]" />}
-              {worn && (
-                <button
-                  type="button"
-                  aria-label={name}
-                  aria-haspopup="menu"
-                  aria-expanded={worn.id === menuId}
-                  title={name}
-                  onClick={(event) => onOpen(worn, event)}
-                  onContextMenu={(event) => onOpen(worn, event)}
-                  className={`absolute inset-0 cursor-pointer ${
-                    worn.id === menuId ? 'shadow-[inset_0_0_0_2px_#fff2ae]' : ''
-                  }`}
-                />
-              )}
-              {/* The active pet (M6) is not an item; PetSlot draws and names it. */}
-              {slot === 'Pet' ? (
-                <PetSlot />
-              ) : (
-                <span className="sr-only">
-                  {label}:{' '}
-                  {worn ? (
-                    <>
-                      <GameText k={worn.nameKey} fallback="Unknown item" /> <span>Equipped</span>
-                    </>
-                  ) : (
-                    'empty'
-                  )}
-                </span>
-              )}
-            </li>
-          )
-        })}
-      </ul>
-    </>
-  )
-}
-
-/**
- * Reborn's inventory pose (poses/<outfit>.png, 191x320 drawn at 124x208). Outfits without one
- * fall back to the first frame of the stand animation at twice its size.
- */
-function Pose({ clothing }: { clothing: number }) {
-  const [missing, setMissing] = useState<number | null>(null)
-  if (missing === clothing) return <StandPose clothing={clothing} />
-  return (
-    <img
-      src={`/assets/reborn/poses/${clothing}.webp`}
-      alt=""
-      onError={() => setMissing(clothing)}
-      className="absolute top-[38px] left-[56px] h-[208px] w-[124px] object-contain"
-    />
-  )
-}
-
-function StandPose({ clothing }: { clothing: number }) {
-  const stand = useOutfitStand(clothing)
-  if (!stand) return null
-  const rows = Math.ceil(stand.frames / stand.columns)
-  const width = stand.frameWidth * 2
-  const height = stand.frameHeight * 2
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute bottom-[10px] left-1/2 -translate-x-1/2"
-      style={{
-        width,
-        height,
-        backgroundImage: `url(${stand.file})`,
-        backgroundSize: `${width * stand.columns}px ${height * rows}px`,
-      }}
-    />
-  )
-}
-
-/** One bag item over the tiles it covers; clicking it opens its context menu. */
-function BagCell({
-  placed: { item, x, y, w, h },
-  highlighted,
-  open,
-  gear,
-  brief,
-  onOpen,
-}: {
-  placed: Placed<InventoryItem>
-  highlighted: boolean
-  open: boolean
-  gear?: GearView
-  brief: boolean
-  onOpen: Open
-}) {
-  const name = plainText(item.nameKey, 'Unknown item')
-  return (
-    <li className="absolute" style={{ left: x * TILE, top: y * TILE }}>
-      <GearIcon
-        itemId={item.itemId}
-        nameKey={item.nameKey}
-        gear={gear}
-        brief={brief}
-        className={`${WIDTHS[w] ?? WIDTHS[2]} ${HEIGHTS[h] ?? HEIGHTS[2]} ${
-          highlighted ? 'ring-2 ring-[#ffb300]' : ''
-        } ${open ? 'shadow-[inset_0_0_0_2px_#fff2ae]' : ''}`}
-      >
-        {item.count > 1 && (
-          <span
-            aria-hidden="true"
-            className="absolute right-[2px] bottom-0 text-[11px] font-bold text-white [text-shadow:var(--shadow-game-text)]"
-          >
-            {item.count}
-          </span>
-        )}
-        <button
-          type="button"
-          aria-label={name}
-          aria-haspopup="menu"
-          aria-expanded={open}
-          onClick={(event) => onOpen(item, event)}
-          onContextMenu={(event) => onOpen(item, event)}
-          className="absolute inset-0 cursor-pointer"
-        />
-      </GearIcon>
-      <span className="sr-only">
-        <span>
-          <GameText k={item.nameKey} fallback="Unknown item" />
-        </span>
-        {item.count > 1 && <span> x{item.count}</span>}
-        {highlighted && (
-          <>
-            {' '}
-            (<span>Next step</span>)
-          </>
-        )}
-      </span>
-    </li>
   )
 }

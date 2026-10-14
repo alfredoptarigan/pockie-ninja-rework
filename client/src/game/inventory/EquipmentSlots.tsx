@@ -1,0 +1,345 @@
+// The upper half of Reborn's Inventory: the equipment-set bar, the equipment columns around the
+// character pose (Talent, Blood Limit, Hide), the title plate and the slots with what is worn.
+// Positions are the measured ones, relative to the window content (Reborn's x - 5, y - 31).
+import type { Character, GearView } from '@pockie/shared'
+import { useState, type CSSProperties, type KeyboardEvent, type MouseEvent } from 'react'
+import { useOutfitStand } from '../art'
+import { TitleText } from '../BuffsPanel'
+import { PetSlot } from '../pets'
+import { GameButton } from '../skin'
+import { GameText, plainText } from '../text'
+import type { InventoryItem } from '../types'
+import { useOpenWindow } from '../windows'
+import { ItemPicture, pointOf, ROMAN, type Point } from './BagGrid'
+
+/**
+ * Equipment slots: `slot` is the item's EquipType (server equippedSlot). The Pet slot shows the
+ * active pet (not an item). `art` is drawn at half its exported size. The Wing slot (M6
+ * decision 22) has no 2011 picture: a plain cell, at 70% like Reborn's.
+ */
+const SLOTS = [
+  { slot: 'Outfit', label: 'Outfit', art: 'outfit', size: 61, at: [4, 50, 55, 55] },
+  { slot: 'Weapon', label: 'Weapon', art: 'weapon', size: '71px 98.5px', at: [4, 107, 55, 83] },
+  { slot: 'Glove', label: 'Gloves', art: 'glove', size: 73, at: [4, 192, 55, 55] },
+  { slot: 'Pet', label: 'Pet', art: 'pet', size: 71, at: [4, 249, 55, 55] },
+  { slot: 'Ring', label: 'Ring', art: 'ring', size: 34, at: [309, 49, 28, 28] },
+  { slot: 'Amulet', label: 'Amulet', art: 'amulet', size: 34, at: [338, 49, 28, 28] },
+  { slot: 'Hat', label: 'Hat', art: 'hat', size: 73, at: [310, 78, 55, 55] },
+  { slot: 'Cloth', label: 'Armour', art: 'cloth', size: 73, at: [310, 135, 55, 55] },
+  { slot: 'Girdle', label: 'Belt', art: 'belt', size: 73, at: [310, 192, 55, 55] },
+  { slot: 'Shoes', label: 'Shoes', art: 'shoes', size: 73, at: [310, 249, 55, 55] },
+  { slot: 'Wing', label: 'Wing', art: null, size: 51, at: [242, 220, 55, 55] },
+] as const
+
+/** Weapon slot picture by the outfit's weapon class (1 Blunt, 2 Sharp, else Fists / any). */
+const WEAPON_ART: Record<number, string> = { 1: 'weapon-blunt', 2: 'weapon-sharp' }
+/** Reborn's drop-target tints. */
+const FIT_TINT = { good: 'rgba(0, 128, 0, 0.5)', bad: 'rgba(255, 0, 0, 0.3)' }
+type Fit = keyof typeof FIT_TINT
+
+const box = ([left, top, width, height]: readonly number[]): CSSProperties => ({
+  left,
+  top,
+  width,
+  height,
+})
+
+export const outfitName = (clothing: number) =>
+  plainText(`lg_avatar${clothing}`, `Outfit ${clothing}`)
+export const outfitIcon = (clothing: number) =>
+  `/assets/reborn/icons/items/avatars/${clothing}.webp`
+
+/** Reborn's equipment sets I-V: we have a single set, so only I is open. */
+export function SetBar() {
+  return (
+    <div
+      role="group"
+      aria-label="Bag pages"
+      className="game-panel-small absolute top-[6px] left-[32px] flex h-[32px] w-[305px] gap-[4px] pt-[3px] pl-[4px]"
+    >
+      {ROMAN.slice(0, 5).map((label, index) => (
+        <GameButton
+          key={label}
+          small
+          aria-pressed={index === 0}
+          disabled={index > 0}
+          className="h-[24px] w-[56px]"
+        >
+          {label}
+        </GameButton>
+      ))}
+    </div>
+  )
+}
+
+/** Whether the held bag item may go in `slot` (undefined: the slot is not its slot). */
+function fitOf(slot: string, held: InventoryItem | null, level: number): Fit | undefined {
+  if (!held || held.equippedSlot || held.info?.equipSlot !== slot) return undefined
+  return held.info.level > level || held.fitsOutfit === false ? 'bad' : 'good'
+}
+
+export function Equipment({
+  items,
+  character,
+  gear,
+  held,
+  outfitMenuOpen,
+  onTitle,
+  onSlot,
+  onOutfitMenu,
+  onTip,
+}: {
+  items: InventoryItem[]
+  character?: Character | null
+  gear: Record<string, GearView>
+  held: InventoryItem | null
+  outfitMenuOpen: boolean
+  onTitle: () => void
+  /** A click on a slot, with what it wears. */
+  onSlot: (slot: string, worn?: InventoryItem) => void
+  onOutfitMenu: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
+  /** Tooltip of a worn item id, or "outfit". */
+  onTip: (id: string | null, at?: Point) => void
+}) {
+  const openWindow = useOpenWindow()
+  const level = character?.level ?? 1
+  const weaponArt = WEAPON_ART[character?.weaponClass ?? 0] ?? 'weapon'
+  return (
+    <>
+      <div className="game-equip-column absolute top-[46px] left-0 h-[262px] w-[63px]" />
+      <div className="game-equip-column absolute top-[46px] left-[306px] h-[262px] w-[63px]" />
+      <div className="game-equip-backdrop absolute top-[48px] left-[65px] h-[256px] w-[239px]">
+        {character && <Pose clothing={character.clothing} />}
+        <GameButton
+          onClick={() => openWindow('talents')}
+          className="absolute top-[160px] left-[4px] h-[42px] w-[45px] min-w-0! px-0!"
+        >
+          Talent
+        </GameButton>
+        <GameButton
+          onClick={() => openWindow('bloodlines')}
+          className="absolute top-[205px] left-[4px] h-[42px] w-[45px] min-w-0! px-0! leading-tight whitespace-normal"
+        >
+          Blood Limit
+        </GameButton>
+        {/* Reborn's Hide keeps your stats from other players; we have no View Character yet. */}
+        <label
+          title="Click to hide detailed stats"
+          className="absolute top-[230px] left-[183px] flex items-center gap-2 text-[13px] text-[#ffd27a] opacity-60"
+        >
+          <input
+            type="checkbox"
+            disabled
+            className="size-5 appearance-none border border-[#5a5a5a] bg-linear-to-b from-[#2a2a2a] to-[#1a1a1a]"
+          />
+          Hide
+        </label>
+      </div>
+      <button
+        type="button"
+        aria-label="Buffs and titles"
+        onClick={onTitle}
+        className="game-title-plate absolute top-[52px] left-[103px] grid h-[36px] w-[164px] cursor-pointer place-items-center"
+      >
+        <TitleText className="text-[15px]" />
+      </button>
+      <ul aria-label="Equipment">
+        {SLOTS.map(({ slot, label, art, size, at }) => {
+          const worn = items.find((item) => item.equippedSlot === slot)
+          const fit = fitOf(slot, held, level)
+          const picture = art === 'weapon' ? weaponArt : art
+          return (
+            <li
+              key={slot}
+              data-fit={fit}
+              className={`absolute grid place-items-center ${art ? '' : 'opacity-70'}`}
+              style={{
+                ...box(at),
+                background: `var(--ui-slot${picture ? `-${picture}` : ''}) center / ${typeof size === 'number' ? `${size}px` : size} no-repeat`,
+              }}
+            >
+              {worn && (
+                <span className={`size-full p-[2px] ${worn.id === held?.id ? 'opacity-0' : ''}`}>
+                  <ItemPicture item={worn} gear={gear[worn.id]} decorative />
+                </span>
+              )}
+              {fit && (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: FIT_TINT[fit] }}
+                />
+              )}
+              {slot === 'Outfit' ? (
+                <OutfitSlot
+                  clothing={character?.clothing}
+                  open={outfitMenuOpen}
+                  onMenu={onOutfitMenu}
+                  onTip={onTip}
+                />
+              ) : worn ? (
+                <WornButton item={worn} onClick={() => onSlot(slot, worn)} onTip={onTip} />
+              ) : (
+                held && (
+                  <button
+                    type="button"
+                    aria-label={`${label} slot`}
+                    onClick={() => onSlot(slot)}
+                    className="absolute inset-0 cursor-pointer"
+                  />
+                )
+              )}
+              {slot === 'Pet' ? (
+                <PetSlot />
+              ) : (
+                slot !== 'Outfit' && (
+                  <span className="sr-only">
+                    {label}:{' '}
+                    {worn ? (
+                      <>
+                        <GameText k={worn.nameKey} fallback="Unknown item" /> <span>Equipped</span>
+                      </>
+                    ) : (
+                      'empty'
+                    )}
+                  </span>
+                )
+              )}
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
+}
+
+function WornButton({
+  item,
+  onClick,
+  onTip,
+}: {
+  item: InventoryItem
+  onClick: () => void
+  onTip: (id: string | null, at?: Point) => void
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={plainText(item.nameKey, 'Unknown item')}
+      onClick={onClick}
+      onPointerEnter={(event) => onTip(item.id, pointOf(event))}
+      onPointerMove={(event) => onTip(item.id, pointOf(event))}
+      onPointerLeave={() => onTip(null)}
+      onFocus={(event) => onTip(item.id, pointOf(event))}
+      onBlur={() => onTip(null)}
+      className="absolute inset-0 cursor-pointer"
+    />
+  )
+}
+
+/**
+ * Reborn's outfit slot shows the outfit as an item ("+N"; ours have no level). A click does
+ * nothing; a right click (or Enter) opens its one-entry menu, Manage.
+ */
+function OutfitSlot({
+  clothing,
+  open,
+  onMenu,
+  onTip,
+}: {
+  clothing?: number
+  open: boolean
+  onMenu: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
+  onTip: (id: string | null, at?: Point) => void
+}) {
+  if (clothing === undefined) return <span className="sr-only">Outfit: empty</span>
+  const name = outfitName(clothing)
+  return (
+    <>
+      <img src={outfitIcon(clothing)} alt="" className="size-full object-contain p-[2px]" />
+      {/* Drawn by CSS, so the slot's text stays "Outfit: <name>". */}
+      <span
+        aria-hidden="true"
+        className="absolute right-[3px] bottom-[1px] text-[11px] font-bold text-white [text-shadow:var(--shadow-game-text)] after:content-['+0']"
+      />
+      <button
+        type="button"
+        aria-label={name}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onContextMenu={onMenu}
+        onKeyDown={(event) => {
+          if (event.key !== 'Enter') return
+          event.preventDefault()
+          onMenu(event)
+        }}
+        onPointerEnter={(event) => onTip('outfit', pointOf(event))}
+        onPointerMove={(event) => onTip('outfit', pointOf(event))}
+        onPointerLeave={() => onTip(null)}
+        onFocus={(event) => onTip('outfit', pointOf(event))}
+        onBlur={() => onTip(null)}
+        className="absolute inset-0 cursor-default"
+      />
+      <span className="sr-only">Outfit: {name}</span>
+    </>
+  )
+}
+
+/** The outfit's tooltip: a Reborn panel with its name and type. */
+export function OutfitTooltip({ clothing, at }: { clothing: number; at: Point }) {
+  return (
+    <div
+      role="tooltip"
+      className="pointer-events-none fixed z-[70] w-[250px] p-2 font-sans text-xs text-white"
+      style={{
+        left: at.x,
+        top: at.y,
+        borderStyle: 'solid',
+        borderImage: 'var(--ui-tooltip) var(--ui-tooltip-slice) fill / var(--ui-tooltip-border)',
+      }}
+    >
+      <p className="text-center text-sm font-bold">{outfitName(clothing)}</p>
+      <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
+      <p className="flex justify-between gap-2">
+        <span>Item Type:</span> <span>Outfit</span>
+      </p>
+    </div>
+  )
+}
+
+/**
+ * Reborn's inventory pose (poses/<outfit>.png, 191x320 drawn at 124x208). Outfits without one
+ * fall back to the first frame of the stand animation at twice its size.
+ */
+function Pose({ clothing }: { clothing: number }) {
+  const [missing, setMissing] = useState<number | null>(null)
+  if (missing === clothing) return <StandPose clothing={clothing} />
+  return (
+    <img
+      src={`/assets/reborn/poses/${clothing}.webp`}
+      alt=""
+      onError={() => setMissing(clothing)}
+      className="absolute top-[38px] left-[56px] h-[208px] w-[124px] object-contain"
+    />
+  )
+}
+
+function StandPose({ clothing }: { clothing: number }) {
+  const stand = useOutfitStand(clothing)
+  if (!stand) return null
+  const rows = Math.ceil(stand.frames / stand.columns)
+  const width = stand.frameWidth * 2
+  const height = stand.frameHeight * 2
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute bottom-[10px] left-1/2 -translate-x-1/2"
+      style={{
+        width,
+        height,
+        backgroundImage: `url(${stand.file})`,
+        backgroundSize: `${width * stand.columns}px ${height * rows}px`,
+      }}
+    />
+  )
+}

@@ -1,7 +1,9 @@
 // Reborn's toast (docs/audit/reborn-ui-audit.md §3): one message at a time, centred 50px above the
 // middle of the screen, gone after 3 s, its glow green for success, red for failure, blue for info.
-// Any window may call showToast; GameApp renders the single ToastHost.
+// Any window may call showToast; GameApp renders the single ToastHost. While a modal window is
+// open the toast goes inside it: the rest of the page sits under the modal's top layer and is inert.
 import { useEffect, useSyncExternalStore } from 'react'
+import { createPortal } from 'react-dom'
 
 export const TOAST_MS = 3000
 type Tone = 'success' | 'failure' | 'info'
@@ -43,7 +45,8 @@ export function ToastHost() {
     return () => clearTimeout(timer)
   }, [toast])
   if (!toast) return null
-  return (
+  const modal = [...document.querySelectorAll('dialog[open]')].at(-1)
+  const node = (
     <div
       role={toast.tone === 'failure' ? 'alert' : 'status'}
       className="pointer-events-none fixed top-[calc(50%-50px)] left-1/2 z-[80] -translate-x-1/2 -translate-y-1/2 rounded-md bg-black/80 px-5 py-2 font-game text-sm font-bold whitespace-nowrap text-white"
@@ -55,4 +58,5 @@ export function ToastHost() {
       {toast.text}
     </div>
   )
+  return modal ? createPortal(node, modal) : node
 }
