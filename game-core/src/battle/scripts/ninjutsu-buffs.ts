@@ -1,13 +1,15 @@
 // Fight buffs added by the attack ninjutsu (RES/javascript/buff/*.js), wired into BUFF_SCRIPTS.
-// ponytail: the regeneration auras (11861-11863, pets) shorten burn ticks and the timed buffs and
-// add 11888 in OnAdd; not ported (M6), like the timed control buffs in buffs.ts.
 import type { BuffScripts } from '../buffs.js'
+import { regenAuraResist } from './pet-core.js'
 
 const DEATH_SEAL_ATK = 70
 
 export const NINJUTSU_BUFFS: Record<string, BuffScripts> = {
   // Burn: SaveData damage on each action of the owner, SaveData1 times, then LifeTime 0 ends it.
   'buff/buff_ranshao_11804.js': {
+    onAdd: (ctx, self, buff, fv, timer) => {
+      buff.saveData1 = regenAuraResist(ctx, self, buff.saveData1 ?? 0, fv, timer)
+    },
     onActivation: (ctx, self, buff, fv, timer) => {
       ctx.damageWithValue(self, buff.saveData, fv, timer)
       fv.selfDamage = buff.saveData
@@ -28,8 +30,8 @@ export const NINJUTSU_BUFFS: Record<string, BuffScripts> = {
   },
   // Death seal (1814): attack -70 % for SaveData units.
   'buff/buff_shigui_11808.js': {
-    onAdd: (ctx, self, buff) => {
-      buff.lifeTime = buff.saveData
+    onAdd: (ctx, self, buff, fv, timer) => {
+      buff.lifeTime = regenAuraResist(ctx, self, buff.saveData, fv, timer)
       ctx.changeAtk(self, self.minAtkMul - DEATH_SEAL_ATK, self.maxAtkMul - DEATH_SEAL_ATK)
     },
     onRemove: (ctx, self) =>
@@ -37,8 +39,8 @@ export const NINJUTSU_BUFFS: Record<string, BuffScripts> = {
   },
   // Weakness (after Combo 1807): no normal attack and no skills for SaveData units.
   'buff/buff_shili_11833.js': {
-    onAdd: (_ctx, self, buff) => {
-      buff.lifeTime = buff.saveData
+    onAdd: (ctx, self, buff, fv, timer) => {
+      buff.lifeTime = regenAuraResist(ctx, self, buff.saveData, fv, timer)
       self.canAttack -= 1
       self.canUseSkill -= 1
     },
