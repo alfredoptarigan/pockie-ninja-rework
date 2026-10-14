@@ -1,0 +1,3566 @@
+{
+  "10003": {
+    "item": 320046,
+    "icon": "/assets/reborn/icons/items/pets/10003.webp",
+    "atlas": "/assets/reborn/entities/pets/10003/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10003/avatar.webp"],
+    "animations": {
+      "17": [-544, -209.25],
+      "52": [-535, -210.25],
+      "69": [-207, -140],
+      "999": [-123, -149],
+      "20001": [-123, -221.2],
+      "69_1": [-537, -203.25]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10034": {
+    "item": 320047,
+    "icon": "/assets/reborn/icons/items/pets/10034.webp",
+    "atlas": "/assets/reborn/entities/pets/10034/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10034/avatar.webp"],
+    "animations": {
+      "17": [-530, -158],
+      "52": [-533, -159],
+      "69": [-176, -140],
+      "999": [-123, -161],
+      "20001": [-123, -212.55],
+      "69_1": [-511.8, -158]
+    },
+    "motionEvents": {
+      "52": { "frames": 19, "impactFrame": 9, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10035": {
+    "item": 320048,
+    "icon": "/assets/reborn/icons/items/pets/10035.webp",
+    "atlas": "/assets/reborn/entities/pets/10035/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10035/avatar.webp"],
+    "animations": {
+      "17": [-526, -211.25],
+      "52": [-522, -211.25],
+      "69": [-192, -142],
+      "999": [-123, -149],
+      "20001": [-123, -210.8],
+      "69_1": [-536, -201.25]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10036": {
+    "item": 320049,
+    "icon": "/assets/reborn/icons/items/pets/10036.webp",
+    "atlas": "/assets/reborn/entities/pets/10036/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10036/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-528, -213.25],
+      "18": [-123, -159],
+      "52": [-528, -214.25],
+      "69": [-192, -159.5],
+      "999": [-123, -159],
+      "20001": [-123, -228.05],
+      "69_1": [-536, -212.25]
+    },
+    "motionEvents": {
+      "17": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10037": {
+    "item": 320050,
+    "icon": "/assets/reborn/icons/items/pets/10037.webp",
+    "atlas": "/assets/reborn/entities/pets/10037/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10037/avatar.webp"],
+    "animations": {
+      "17": [-516, -220.25],
+      "52": [-519, -220.25],
+      "69": [-192, -172],
+      "999": [-123, -164],
+      "20001": [-123, -230.5],
+      "69_1": [-537, -218.25]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10038": {
+    "item": 320051,
+    "icon": "/assets/reborn/icons/items/pets/10038.webp",
+    "atlas": "/assets/reborn/entities/pets/10038/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10038/avatar.webp"],
+    "animations": {
+      "17": [-527, -210.25],
+      "52": [-524, -210.25],
+      "69": [-193, -159],
+      "999": [-123, -154],
+      "20001": [-123, -220.8],
+      "69_1": [-537, -209.25]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10039": {
+    "item": 320052,
+    "icon": "/assets/reborn/icons/items/pets/10039.webp",
+    "atlas": "/assets/reborn/entities/pets/10039/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10039/avatar.webp"],
+    "animations": {
+      "17": [-510, -195.25],
+      "52": [-539, -195.25],
+      "69": [-174.65, -190],
+      "999": [-128, -194],
+      "20001": [-127, -232.55],
+      "69_1": [-505, -194]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10040": {
+    "item": 320008,
+    "icon": "/assets/reborn/icons/items/pets/10040.webp",
+    "atlas": "/assets/reborn/entities/pets/10040/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10040/avatar.webp"],
+    "animations": {
+      "17": [-515, -186.75],
+      "52": [-533, -186.75],
+      "69": [-94.8, -236],
+      "999": [-135.15, -184.7],
+      "20001": [-127, -230.55],
+      "69_1": [-508.8, -187]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10041": {
+    "item": 320036,
+    "icon": "/assets/reborn/icons/items/pets/10041.webp",
+    "atlas": "/assets/reborn/entities/pets/10041/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10041/avatar.webp"],
+    "animations": {
+      "17": [-516, -186],
+      "52": [-541, -186],
+      "69": [-176.15, -209],
+      "999": [-129, -185],
+      "20001": [-129, -242.55],
+      "69_1": [-508, -186]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10042": {
+    "item": 320053,
+    "icon": "/assets/reborn/icons/items/pets/10042.webp",
+    "atlas": "/assets/reborn/entities/pets/10042/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10042/avatar.webp"],
+    "animations": {
+      "17": [-512, -186.75],
+      "52": [-530, -185.75],
+      "69": [-186.65, -195.65],
+      "999": [-134, -185],
+      "20001": [-134, -242.55],
+      "69_1": [-504.8, -188]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10043": {
+    "item": 320054,
+    "icon": "/assets/reborn/icons/items/pets/10043.webp",
+    "atlas": "/assets/reborn/entities/pets/10043/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10043/avatar.webp"],
+    "animations": {
+      "17": [-516, -187],
+      "52": [-536, -187.25],
+      "69": [-178.15, -164],
+      "999": [-128, -187],
+      "20001": [-127, -232.55],
+      "69_1": [-510, -188]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10044": {
+    "item": 320055,
+    "icon": "/assets/reborn/icons/items/pets/10044.webp",
+    "atlas": "/assets/reborn/entities/pets/10044/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10044/avatar.webp"],
+    "animations": {
+      "17": [-508, -159.25],
+      "52": [-521, -158.25],
+      "69": [-159.5, -155.15],
+      "999": [-105, -152],
+      "20001": [-102, -198.55],
+      "69_1": [-506, -153.3]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10045": {
+    "item": 320056,
+    "icon": "/assets/reborn/icons/items/pets/10045.webp",
+    "atlas": "/assets/reborn/entities/pets/10045/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10045/avatar.webp"],
+    "animations": {
+      "17": [-507, -158.25],
+      "52": [-527, -158.25],
+      "69": [-158, -144.15],
+      "999": [-105, -152],
+      "20001": [-102, -196.55],
+      "69_1": [-510, -156.3]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10046": {
+    "item": 320057,
+    "icon": "/assets/reborn/icons/items/pets/10046.webp",
+    "atlas": "/assets/reborn/entities/pets/10046/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10046/avatar.webp"],
+    "animations": {
+      "17": [-509, -159.25],
+      "52": [-521, -161.3],
+      "69": [-162.65, -157.15],
+      "999": [-105, -152],
+      "20001": [-102, -198.55],
+      "69_1": [-505, -157.3]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10047": {
+    "item": 320058,
+    "icon": "/assets/reborn/icons/items/pets/10047.webp",
+    "atlas": "/assets/reborn/entities/pets/10047/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10047/avatar.webp"],
+    "animations": {
+      "17": [-510, -158.75],
+      "52": [-523, -159.75],
+      "69": [-171.65, -165.5],
+      "999": [-105, -152],
+      "20001": [-102, -195.55],
+      "69_1": [-502, -154.8]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10048": {
+    "item": 320059,
+    "icon": "/assets/reborn/icons/items/pets/10048.webp",
+    "atlas": "/assets/reborn/entities/pets/10048/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10048/avatar.webp"],
+    "animations": {
+      "17": [-509, -159.75],
+      "52": [-520, -158.8],
+      "69": [-179.5, -156.15],
+      "999": [-105, -152],
+      "20001": [-102, -194.55],
+      "69_1": [-500, -156.8]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10049": {
+    "item": 320060,
+    "icon": "/assets/reborn/icons/items/pets/10049.webp",
+    "atlas": "/assets/reborn/entities/pets/10049/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10049/avatar.webp"],
+    "animations": {
+      "17": [-559.85, -206.5],
+      "18": [-539.95, -164.75],
+      "52": [-508, -122],
+      "69": [-138.6, -126],
+      "999": [-86, -122],
+      "20001": [-75.05, -165.55],
+      "69_1": [-492.6, -124]
+    },
+    "motionEvents": {
+      "18": { "frames": 24, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10050": {
+    "item": 320002,
+    "icon": "/assets/reborn/icons/items/pets/10050.webp",
+    "atlas": "/assets/reborn/entities/pets/10050/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10050/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-528, -195],
+      "18": [-616.45, -288.7],
+      "52": [-529, -238],
+      "69": [-144, -152],
+      "999": [-113, -212],
+      "20001": [-113, -252.55],
+      "69_1": [-500, -195]
+    },
+    "motionEvents": {
+      "18": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 20, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10051": {
+    "item": 320003,
+    "icon": "/assets/reborn/icons/items/pets/10051.webp",
+    "atlas": "/assets/reborn/entities/pets/10051/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10051/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-519, -166.45],
+      "18": [-657.3, -201.9],
+      "52": [-529, -163.45],
+      "69": [-188.2, -148.05],
+      "999": [-102, -153],
+      "20001": [-99, -187.55],
+      "69_1": [-538.2, -166.45]
+    },
+    "motionEvents": {
+      "18": { "frames": 31, "impactFrame": 16, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 9, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10052": { "item": 320131, "icon": "/assets/reborn/icons/items/pets/10052.webp" },
+  "10064": {
+    "item": 320061,
+    "icon": "/assets/reborn/icons/items/pets/10064.webp",
+    "atlas": "/assets/reborn/entities/pets/10064/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10064/avatar.webp"],
+    "animations": {
+      "17": [-516.95, -92],
+      "18": [-661.9, -173.75],
+      "52": [-511.45, -93.75],
+      "69": [-130, -91],
+      "999": [-77.35, -92],
+      "20001": [-78.55, -142.55],
+      "69_1": [-510, -92]
+    },
+    "motionEvents": {
+      "18": { "frames": 35, "impactFrame": 25, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10065": {
+    "item": 320006,
+    "icon": "/assets/reborn/icons/items/pets/10065.webp",
+    "atlas": "/assets/reborn/entities/pets/10065/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10065/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-541, -109],
+      "18": [-571.85, -573.65],
+      "52": [-554, -144],
+      "69": [-63, -151],
+      "999": [-93, -141],
+      "20001": [-93, -171.55],
+      "69_1": [-512.5, -139]
+    },
+    "motionEvents": {
+      "18": { "frames": 33, "impactFrame": 14, "timingSource": "Attacking" },
+      "52": { "frames": 20, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10066": {
+    "item": 320062,
+    "icon": "/assets/reborn/icons/items/pets/10066.webp",
+    "atlas": "/assets/reborn/entities/pets/10066/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10066/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-513, -122],
+      "18": [-656.6, -688],
+      "52": [-536, -122],
+      "69": [-145.65, -124.15],
+      "999": [-84, -124],
+      "20001": [-84, -162.55],
+      "69_1": [-514.65, -122.15]
+    },
+    "motionEvents": {
+      "18": { "frames": 33, "impactFrame": 20, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 201, "impactFrame": 201, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10067": {
+    "item": 320063,
+    "icon": "/assets/reborn/icons/items/pets/10067.webp",
+    "atlas": "/assets/reborn/entities/pets/10067/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10067/avatar.webp"],
+    "animations": {
+      "17": [-529, -125],
+      "18": [-578.7, -147.1],
+      "52": [-530, -125],
+      "69": [-144, -121],
+      "999": [-83.3, -125],
+      "20001": [-105, -165.55],
+      "69_1": [-504, -125]
+    },
+    "motionEvents": {
+      "18": { "frames": 24, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 19, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10068": {
+    "item": 320064,
+    "icon": "/assets/reborn/icons/items/pets/10068.webp",
+    "atlas": "/assets/reborn/entities/pets/10068/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10068/avatar.webp"],
+    "animations": {
+      "17": [-527, -114],
+      "52": [-525, -114],
+      "69": [-194, -117],
+      "999": [-103, -112],
+      "20001": [-103, -161.55],
+      "69_1": [-521, -113]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10069": { "item": 320132, "icon": "/assets/reborn/icons/items/pets/10069.webp" },
+  "10070": { "item": 320133, "icon": "/assets/reborn/icons/items/pets/10070.webp" },
+  "10071": { "item": 320134, "icon": "/assets/reborn/icons/items/pets/10071.webp" },
+  "10072": { "item": 320135, "icon": "/assets/reborn/icons/items/pets/10072.webp" },
+  "10073": { "item": 320136, "icon": "/assets/reborn/icons/items/pets/10073.webp" },
+  "10074": {
+    "item": 320015,
+    "icon": "/assets/reborn/icons/items/pets/10074.webp",
+    "atlas": "/assets/reborn/entities/pets/10074/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10074/avatar.webp"],
+    "animations": {
+      "17": [-589, -143.95],
+      "18": [-623, -143.95],
+      "52": [-546, -142.95],
+      "69": [-156, -133],
+      "999": [-120, -141],
+      "20001": [-119, -176.55],
+      "69_1": [-510, -140]
+    },
+    "motionEvents": {
+      "18": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10075": {
+    "item": 320016,
+    "icon": "/assets/reborn/icons/items/pets/10075.webp",
+    "atlas": "/assets/reborn/entities/pets/10075/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10075/avatar.webp"],
+    "animations": {
+      "17": [-503, -158.3],
+      "18": [-503, -158.3],
+      "52": [-548, -158.3],
+      "69": [-156.5, -130],
+      "999": [-103.45, -156],
+      "20001": [-103.45, -192.55],
+      "69_1": [-496.5, -153.3]
+    },
+    "motionEvents": {
+      "18": { "frames": 22, "impactFrame": 8, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10076": {
+    "item": 320017,
+    "icon": "/assets/reborn/icons/items/pets/10076.webp",
+    "atlas": "/assets/reborn/entities/pets/10076/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10076/avatar.webp"],
+    "animations": {
+      "17": [-509.15, -340],
+      "18": [-509.15, -340],
+      "52": [-547, -143.95],
+      "69": [-158.65, -128],
+      "999": [-89, -140],
+      "20001": [-88, -182.55],
+      "69_1": [-508.65, -143.95]
+    },
+    "motionEvents": {
+      "18": { "frames": 19, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10077": {
+    "item": 320018,
+    "icon": "/assets/reborn/icons/items/pets/10077.webp",
+    "atlas": "/assets/reborn/entities/pets/10077/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10077/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-548, -175],
+      "18": [-656.9, -292.15],
+      "52": [-532, -146],
+      "69": [-126, -136],
+      "999": [-86, -149],
+      "20001": [-83.3, -167.55],
+      "69_1": [-504, -146]
+    },
+    "motionEvents": {
+      "18": { "frames": 39, "impactFrame": 20, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 4, "impactFrame": 4, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10078": {
+    "item": 320019,
+    "icon": "/assets/reborn/icons/items/pets/10078.webp",
+    "atlas": "/assets/reborn/entities/pets/10078/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10078/avatar.webp"],
+    "animations": {
+      "17": [-552.5, -148.85],
+      "18": [-587.55, -148.85],
+      "52": [-528, -131.55],
+      "69": [-150, -111],
+      "999": [-93, -125],
+      "20001": [-90.05, -168.55],
+      "69_1": [-511, -129.45]
+    },
+    "motionEvents": {
+      "18": { "frames": 28, "impactFrame": 9, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10079": {
+    "item": 320065,
+    "icon": "/assets/reborn/icons/items/pets/10079.webp",
+    "atlas": "/assets/reborn/entities/pets/10079/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10079/avatar.webp"],
+    "animations": {
+      "17": [-523.1, -210.55],
+      "52": [-520, -199.75],
+      "69": [-188, -157.25],
+      "999": [-115, -220.6],
+      "20001": [-111.05, -229.55],
+      "69_1": [-513.5, -198.6]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10080": {
+    "item": 320066,
+    "icon": "/assets/reborn/icons/items/pets/10080.webp",
+    "atlas": "/assets/reborn/entities/pets/10080/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10080/avatar.webp"],
+    "animations": {
+      "17": [-520, -131.5],
+      "52": [-527, -131.5],
+      "69": [-156, -134],
+      "999": [-94, -132],
+      "20001": [-93, -170.55],
+      "69_1": [-506, -130]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10081": {
+    "item": 320067,
+    "icon": "/assets/reborn/icons/items/pets/10081.webp",
+    "atlas": "/assets/reborn/entities/pets/10081/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10081/avatar.webp"],
+    "animations": {
+      "17": [-532, -131],
+      "52": [-523.4, -131],
+      "69": [-156.95, -113.95],
+      "999": [-93.4, -133],
+      "20001": [-93.4, -167.55],
+      "69_1": [-513.95, -131]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10082": {
+    "item": 320068,
+    "icon": "/assets/reborn/icons/items/pets/10082.webp",
+    "atlas": "/assets/reborn/entities/pets/10082/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10082/avatar.webp"],
+    "animations": {
+      "17": [-526, -176.05],
+      "52": [-525, -167],
+      "69": [-155.95, -183],
+      "999": [-103, -167],
+      "20001": [-103, -202.55],
+      "69_1": [-509.1, -183]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10083": {
+    "item": 320069,
+    "icon": "/assets/reborn/icons/items/pets/10083.webp",
+    "atlas": "/assets/reborn/entities/pets/10083/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10083/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-572, -224],
+      "18": [-572, -224],
+      "52": [-624, -174.5],
+      "69": [-182, -180],
+      "999": [-128, -184],
+      "20001": [-126, -205.55],
+      "69_1": [-506.5, -174.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "18": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10084": {
+    "item": 320025,
+    "icon": "/assets/reborn/icons/items/pets/10084.webp",
+    "atlas": "/assets/reborn/entities/pets/10084/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10084/avatar.webp"],
+    "animations": {
+      "17": [-551, -138.55],
+      "18": [-244.35, -178],
+      "52": [-563, -119.55],
+      "69": [-92, -155],
+      "999": [-89, -116],
+      "20001": [-89, -149.55],
+      "69_1": [-497, -124]
+    },
+    "motionEvents": {
+      "18": { "frames": 15, "impactFrame": 4, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 9, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10085": {
+    "item": 320026,
+    "icon": "/assets/reborn/icons/items/pets/10085.webp",
+    "atlas": "/assets/reborn/entities/pets/10085/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10085/avatar.webp"],
+    "animations": {
+      "17": [-546.1, -189.3],
+      "18": [-257.95, -177.05],
+      "52": [-534, -119.75],
+      "69": [-147, -117],
+      "999": [-102, -113],
+      "20001": [-100, -171.55],
+      "69_1": [-497, -119.75]
+    },
+    "motionEvents": {
+      "18": { "frames": 18, "impactFrame": 7, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10086": {
+    "item": 320027,
+    "icon": "/assets/reborn/icons/items/pets/10086.webp",
+    "atlas": "/assets/reborn/entities/pets/10086/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/10086/avatar.webp"],
+    "animations": {
+      "17": [-520, -186],
+      "18": [-257.95, -177.05],
+      "52": [-523, -95],
+      "69": [-86.1, -126],
+      "999": [-85.5, -86],
+      "20001": [-85.5, -131.55],
+      "69_1": [-507.1, -91]
+    },
+    "motionEvents": {
+      "18": { "frames": 15, "impactFrame": 7, "timingSource": "Attacking" },
+      "52": { "frames": 19, "impactFrame": 8, "timingSource": "Attacking" },
+      "69": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "10087": { "item": 320137, "icon": "/assets/reborn/icons/items/pets/10087.webp" },
+  "10088": { "item": 320138, "icon": "/assets/reborn/icons/items/pets/10088.webp" },
+  "10089": { "item": 320139, "icon": "/assets/reborn/icons/items/pets/10089.webp" },
+  "10090": { "item": 320140, "icon": "/assets/reborn/icons/items/pets/10090.webp" },
+  "10091": { "item": 320141, "icon": "/assets/reborn/icons/items/pets/10091.webp" },
+  "10092": { "item": 320142, "icon": "/assets/reborn/icons/items/pets/10092.webp" },
+  "10093": { "item": 320143, "icon": "/assets/reborn/icons/items/pets/10093.webp" },
+  "10094": { "item": 320144, "icon": "/assets/reborn/icons/items/pets/10094.webp" },
+  "10095": { "item": 320145, "icon": "/assets/reborn/icons/items/pets/10095.webp" },
+  "10096": { "item": 320146, "icon": "/assets/reborn/icons/items/pets/10096.webp" },
+  "10097": { "item": 320147, "icon": "/assets/reborn/icons/items/pets/10097.webp" },
+  "10098": { "item": 320148, "icon": "/assets/reborn/icons/items/pets/10098.webp" },
+  "10099": { "item": 320149, "icon": "/assets/reborn/icons/items/pets/10099.webp" },
+  "10100": { "item": 320150, "icon": "/assets/reborn/icons/items/pets/10100.webp" },
+  "10101": { "item": 320151, "icon": "/assets/reborn/icons/items/pets/10101.webp" },
+  "10102": { "item": 320152, "icon": "/assets/reborn/icons/items/pets/10102.webp" },
+  "10103": { "item": 320153, "icon": "/assets/reborn/icons/items/pets/10103.webp" },
+  "10104": { "item": 320154, "icon": "/assets/reborn/icons/items/pets/10104.webp" },
+  "10105": { "item": 320155, "icon": "/assets/reborn/icons/items/pets/10105.webp" },
+  "10106": { "item": 320156, "icon": "/assets/reborn/icons/items/pets/10106.webp" },
+  "10107": { "item": 320157, "icon": "/assets/reborn/icons/items/pets/10107.webp" },
+  "10108": { "item": 320158, "icon": "/assets/reborn/icons/items/pets/10108.webp" },
+  "10109": { "item": 320159, "icon": "/assets/reborn/icons/items/pets/10109.webp" },
+  "10110": { "item": 320160, "icon": "/assets/reborn/icons/items/pets/10110.webp" },
+  "10111": { "item": 320161, "icon": "/assets/reborn/icons/items/pets/10111.webp" },
+  "10112": { "item": 320162, "icon": "/assets/reborn/icons/items/pets/10112.webp" },
+  "31027": { "item": 320163, "icon": "/assets/reborn/icons/items/pets/31027.webp" },
+  "31028": { "item": 320164, "icon": "/assets/reborn/icons/items/pets/31028.webp" },
+  "31029": {
+    "item": 320070,
+    "icon": "/assets/reborn/icons/items/pets/31029.webp",
+    "atlas": "/assets/reborn/entities/pets/31029/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/31029/avatar.webp"],
+    "animations": {
+      "52": [-514.55, -153],
+      "69": [-159.5, -111],
+      "999": [-94.5, -116],
+      "20001": [-101.5, -158.55],
+      "69_1": [-486.5, -142]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 17, "impactFrame": 17, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "31030": {
+    "item": 320033,
+    "icon": "/assets/reborn/icons/items/pets/31030.webp",
+    "atlas": "/assets/reborn/entities/pets/31030/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/31030/avatar.webp"],
+    "animations": {
+      "52": [-536, -149],
+      "69": [-200, -119],
+      "999": [-108, -149],
+      "20001": [-108, -176.55],
+      "69_1": [-520, -149]
+    },
+    "motionEvents": {
+      "52": { "frames": 21, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 17, "impactFrame": 17, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34001": {
+    "item": 320028,
+    "icon": "/assets/reborn/icons/items/pets/34001.webp",
+    "atlas": "/assets/reborn/entities/pets/34001/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34001/avatar.webp"],
+    "animations": {
+      "52": [-524, -108.05],
+      "69": [-183.55, -96],
+      "999": [-99, -127],
+      "20001": [-98.5, -150.55],
+      "69_1": [-529.55, -120]
+    },
+    "motionEvents": {
+      "52": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34004": {
+    "item": 320029,
+    "icon": "/assets/reborn/icons/items/pets/34004.webp",
+    "atlas": "/assets/reborn/entities/pets/34004/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34004/avatar.webp"],
+    "animations": {
+      "52": [-522, -121],
+      "69": [-183.55, -88],
+      "999": [-102, -121],
+      "20001": [-102, -166.55],
+      "69_1": [-509.55, -121]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34005": {
+    "item": 320030,
+    "icon": "/assets/reborn/icons/items/pets/34005.webp",
+    "atlas": "/assets/reborn/entities/pets/34005/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34005/avatar.webp"],
+    "animations": {
+      "52": [-513.4, -119],
+      "69": [-174.4, -89],
+      "999": [-85.4, -119],
+      "20001": [-88.5, -136.75],
+      "69_1": [-526.4, -119]
+    },
+    "motionEvents": {
+      "52": { "frames": 19, "impactFrame": 9, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 15, "impactFrame": 15, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34006": {
+    "item": 320031,
+    "icon": "/assets/reborn/icons/items/pets/34006.webp",
+    "atlas": "/assets/reborn/entities/pets/34006/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34006/avatar.webp"],
+    "animations": {
+      "52": [-520, -115],
+      "69": [-174.4, -83],
+      "999": [-83.4, -116],
+      "20001": [-85.4, -147.55],
+      "69_1": [-526.4, -115]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 17, "impactFrame": 17, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 15, "impactFrame": 15, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34007": {
+    "item": 320071,
+    "icon": "/assets/reborn/icons/items/pets/34007.webp",
+    "atlas": "/assets/reborn/entities/pets/34007/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34007/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-686.65, -255.4],
+      "52": [-574.5, -186],
+      "69": [-181.95, -165],
+      "999": [-122, -178],
+      "20001": [-119.1, -211.25],
+      "69_1": [-533.9, -183]
+    },
+    "motionEvents": {
+      "18": { "frames": 24, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 25, "impactFrame": 14, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 5, "impactFrame": 5, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34008": {
+    "item": 320072,
+    "icon": "/assets/reborn/icons/items/pets/34008.webp",
+    "atlas": "/assets/reborn/entities/pets/34008/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34008/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-657.35, -202],
+      "52": [-572.5, -154],
+      "69": [-178, -119.05],
+      "999": [-95.5, -163],
+      "20001": [-92.6, -196.25],
+      "69_1": [-530, -154]
+    },
+    "motionEvents": {
+      "18": { "frames": 28, "impactFrame": 15, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34009": {
+    "item": 320073,
+    "icon": "/assets/reborn/icons/items/pets/34009.webp",
+    "atlas": "/assets/reborn/entities/pets/34009/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34009/avatar.webp"],
+    "animations": {
+      "18": [-623.9, -138],
+      "52": [-629.1, -138],
+      "69": [-167, -110],
+      "999": [-111, -134],
+      "20001": [-101.1, -196.25],
+      "69_1": [-507, -138]
+    },
+    "motionEvents": {
+      "18": { "frames": 25, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34010": {
+    "item": 320074,
+    "icon": "/assets/reborn/icons/items/pets/34010.webp",
+    "atlas": "/assets/reborn/entities/pets/34010/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34010/avatar.webp"],
+    "animations": {
+      "18": [-623, -135],
+      "52": [-665.55, -138],
+      "69": [-162, -123.95],
+      "999": [-96, -140],
+      "20001": [-101.05, -211.25],
+      "69_1": [-512.95, -138]
+    },
+    "motionEvents": {
+      "18": { "frames": 26, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34011": {
+    "item": 320075,
+    "icon": "/assets/reborn/icons/items/pets/34011.webp",
+    "atlas": "/assets/reborn/entities/pets/34011/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34011/avatar.webp"],
+    "animations": {
+      "18": [-512.55, -164],
+      "52": [-630.2, -164],
+      "69": [-179, -150],
+      "999": [-113, -157],
+      "20001": [-117, -211.25],
+      "69_1": [-516, -164]
+    },
+    "motionEvents": {
+      "18": { "frames": 26, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 15, "impactFrame": 15, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34012": {
+    "item": 320076,
+    "icon": "/assets/reborn/icons/items/pets/34012.webp",
+    "atlas": "/assets/reborn/entities/pets/34012/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34012/avatar.webp"],
+    "animations": {
+      "18": [-509.15, -340],
+      "52": [-548.95, -136.1],
+      "69": [-129.5, -122],
+      "999": [-86.95, -135],
+      "20001": [-87, -169.55],
+      "69_1": [-520.6, -136.1]
+    },
+    "motionEvents": {
+      "18": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 25, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 17, "impactFrame": 17, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34013": {
+    "item": 320077,
+    "icon": "/assets/reborn/icons/items/pets/34013.webp",
+    "atlas": "/assets/reborn/entities/pets/34013/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34013/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-642.7, -235],
+      "52": [-666.75, -184.65],
+      "69": [-166.15, -100.05],
+      "999": [-90, -132],
+      "20001": [-112.05, -211.25],
+      "69_1": [-516.15, -148]
+    },
+    "motionEvents": {
+      "18": { "frames": 29, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34014": {
+    "item": 320078,
+    "icon": "/assets/reborn/icons/items/pets/34014.webp",
+    "atlas": "/assets/reborn/entities/pets/34014/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34014/avatar.webp"],
+    "animations": {
+      "18": [-578.55, -138.7],
+      "52": [-616.55, -136],
+      "69": [-156, -108],
+      "999": [-93, -145],
+      "20001": [-104.1, -196.25],
+      "69_1": [-516, -139]
+    },
+    "motionEvents": {
+      "18": { "frames": 31, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34015": {
+    "item": 320079,
+    "icon": "/assets/reborn/icons/items/pets/34015.webp",
+    "atlas": "/assets/reborn/entities/pets/34015/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34015/avatar.webp"],
+    "animations": {
+      "18": [-244.35, -178],
+      "52": [-660.75, -164],
+      "69": [-178, -105],
+      "999": [-96, -159.95],
+      "20001": [-95.1, -196.25],
+      "69_1": [-528, -164]
+    },
+    "motionEvents": {
+      "18": { "frames": 12, "impactFrame": 4, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34016": {
+    "item": 320080,
+    "icon": "/assets/reborn/icons/items/pets/34016.webp",
+    "atlas": "/assets/reborn/entities/pets/34016/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34016/avatar.webp"],
+    "animations": {
+      "18": [-257.95, -177.05],
+      "52": [-590, -142.5],
+      "69": [-167.7, -111],
+      "999": [-110, -131.5],
+      "20001": [-94.1, -196.25],
+      "69_1": [-517.7, -138.5]
+    },
+    "motionEvents": {
+      "18": { "frames": 17, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 20, "impactFrame": 9, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34017": {
+    "item": 320081,
+    "icon": "/assets/reborn/icons/items/pets/34017.webp",
+    "atlas": "/assets/reborn/entities/pets/34017/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34017/avatar.webp"],
+    "animations": {
+      "18": [-257.95, -177.05],
+      "52": [-576.95, -162],
+      "69": [-173, -97],
+      "999": [-99.05, -125],
+      "20001": [-113.05, -169.25],
+      "69_1": [-523, -127]
+    },
+    "motionEvents": {
+      "18": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34018": {
+    "item": 320082,
+    "icon": "/assets/reborn/icons/items/pets/34018.webp",
+    "atlas": "/assets/reborn/entities/pets/34018/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34018/avatar.webp"],
+    "animations": {
+      "52": [-572, -154],
+      "69": [-171, -134],
+      "999": [-121, -147],
+      "20001": [-121.1, -196.25],
+      "69_1": [-521, -154]
+    },
+    "motionEvents": {
+      "52": { "frames": 25, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34019": {
+    "item": 320083,
+    "icon": "/assets/reborn/icons/items/pets/34019.webp",
+    "atlas": "/assets/reborn/entities/pets/34019/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34019/avatar.webp"],
+    "animations": {
+      "52": [-571, -131],
+      "69": [-169.35, -125.95],
+      "999": [-126, -120],
+      "20001": [-131.1, -184.25],
+      "69_1": [-529.35, -131]
+    },
+    "motionEvents": {
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34020": {
+    "item": 320084,
+    "icon": "/assets/reborn/icons/items/pets/34020.webp",
+    "atlas": "/assets/reborn/entities/pets/34020/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34020/avatar.webp"],
+    "animations": {
+      "52": [-558.55, -138],
+      "69": [-154.6, -103],
+      "999": [-111.5, -138],
+      "20001": [-115, -173.55],
+      "69_1": [-512.6, -138]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34021": {
+    "item": 320085,
+    "icon": "/assets/reborn/icons/items/pets/34021.webp",
+    "atlas": "/assets/reborn/entities/pets/34021/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34021/avatar.webp"],
+    "animations": {
+      "52": [-552.65, -124],
+      "69": [-129.15, -112],
+      "999": [-82.65, -124],
+      "20001": [-82.7, -128.65],
+      "69_1": [-501.8, -124]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34022": {
+    "item": 320086,
+    "icon": "/assets/reborn/icons/items/pets/34022.webp",
+    "atlas": "/assets/reborn/entities/pets/34022/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34022/avatar.webp"],
+    "animations": {
+      "52": [-607, -222],
+      "69": [-174.85, -165],
+      "999": [-118, -166],
+      "20001": [-122.05, -196.25],
+      "69_1": [-524.85, -166]
+    },
+    "motionEvents": {
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34023": {
+    "item": 320087,
+    "icon": "/assets/reborn/icons/items/pets/34023.webp",
+    "atlas": "/assets/reborn/entities/pets/34023/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34023/avatar.webp"],
+    "animations": {
+      "52": [-638.9, -141],
+      "69": [-175, -111],
+      "999": [-91, -133],
+      "20001": [-95.05, -196.25],
+      "69_1": [-526.1, -132]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34024": {
+    "item": 320088,
+    "icon": "/assets/reborn/icons/items/pets/34024.webp",
+    "atlas": "/assets/reborn/entities/pets/34024/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34024/avatar.webp"],
+    "animations": {
+      "52": [-563, -150],
+      "69": [-199, -90],
+      "999": [-113, -144],
+      "20001": [-117.05, -211.25],
+      "69_1": [-539, -150]
+    },
+    "motionEvents": {
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34025": {
+    "item": 320089,
+    "icon": "/assets/reborn/icons/items/pets/34025.webp",
+    "atlas": "/assets/reborn/entities/pets/34025/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34025/avatar.webp"],
+    "animations": {
+      "52": [-571.45, -138.65],
+      "69": [-130.3, -121.55],
+      "999": [-91, -133],
+      "20001": [-119.15, -167.55],
+      "69_1": [-524.85, -131]
+    },
+    "motionEvents": {
+      "52": { "frames": 28, "impactFrame": 13, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34026": {
+    "item": 320090,
+    "icon": "/assets/reborn/icons/items/pets/34026.webp",
+    "atlas": "/assets/reborn/entities/pets/34026/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34026/avatar.webp"],
+    "animations": {
+      "52": [-556.45, -136],
+      "69": [-130.3, -138],
+      "999": [-90.6, -136],
+      "20001": [-87, -167.55],
+      "69_1": [-500.5, -138]
+    },
+    "motionEvents": {
+      "52": { "frames": 26, "impactFrame": 14, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34027": {
+    "item": 320091,
+    "icon": "/assets/reborn/icons/items/pets/34027.webp",
+    "atlas": "/assets/reborn/entities/pets/34027/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34027/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34027/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "52": [-932.75, -360.2],
+      "69": [-268, -181],
+      "999": [-168, -221],
+      "20001": [-242, -267.25],
+      "69_1": [-578, -217.1]
+    },
+    "motionEvents": {
+      "52": { "frames": 20, "impactFrame": 9, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 15, "impactFrame": 15, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34028": {
+    "item": 320092,
+    "icon": "/assets/reborn/icons/items/pets/34028.webp",
+    "atlas": "/assets/reborn/entities/pets/34028/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34028/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34028/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-1134.1, -316],
+      "52": [-744.35, -295],
+      "69": [-240.75, -229],
+      "999": [-112, -276],
+      "20001": [-211.15, -296.55],
+      "69_1": [-617.15, -264]
+    },
+    "motionEvents": {
+      "17": { "frames": 28, "impactFrame": 14, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34029": {
+    "item": 320037,
+    "icon": "/assets/reborn/icons/items/pets/34029.webp",
+    "atlas": "/assets/reborn/entities/pets/34029/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34029/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34029/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-348.3, -506],
+      "18": [-111.5, -191],
+      "52": [-533.2, -197],
+      "69": [-159.5, -120],
+      "999": [-111.5, -191],
+      "20001": [-144.75, -191],
+      "69_1": [-525.8, -195.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 27, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34030": {
+    "item": 320093,
+    "icon": "/assets/reborn/icons/items/pets/34030.webp",
+    "atlas": "/assets/reborn/entities/pets/34030/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34030/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34030/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-348.3, -506],
+      "18": [-116, -217],
+      "52": [-537, -217],
+      "69": [-186, -159],
+      "999": [-116, -217],
+      "20001": [-138, -219],
+      "69_1": [-528.75, -217]
+    },
+    "motionEvents": {
+      "17": { "frames": 27, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 11, "impactFrame": 11, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34031": {
+    "item": 320038,
+    "icon": "/assets/reborn/icons/items/pets/34031.webp",
+    "atlas": "/assets/reborn/entities/pets/34031/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34031/avatar.webp"],
+    "animations": {
+      "17": [-603.1, -122.6],
+      "18": [-120, -115],
+      "52": [-535.5, -122.6],
+      "69": [-147, -108.25],
+      "999": [-120, -115],
+      "20001": [-125.45, -151.55],
+      "69_1": [-497.1, -115.75]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34032": {
+    "item": 320094,
+    "icon": "/assets/reborn/icons/items/pets/34032.webp",
+    "atlas": "/assets/reborn/entities/pets/34032/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34032/avatar.webp"],
+    "animations": {
+      "17": [-607.1, -156.45],
+      "18": [-123, -148],
+      "52": [-552, -156.45],
+      "69": [-153.9, -131],
+      "999": [-123, -148],
+      "20001": [-145, -155.45],
+      "69_1": [-502, -142]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34041": {
+    "item": 320039,
+    "icon": "/assets/reborn/icons/items/pets/34041.webp",
+    "atlas": "/assets/reborn/entities/pets/34041/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34041/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-1263.3, -183.1],
+      "18": [-122, -126],
+      "52": [-543, -158.1],
+      "69": [-152, -94],
+      "999": [-122, -126],
+      "20001": [-155, -155.05],
+      "69_1": [-522, -107]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34042": {
+    "item": 320095,
+    "icon": "/assets/reborn/icons/items/pets/34042.webp",
+    "atlas": "/assets/reborn/entities/pets/34042/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34042/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-1263.3, -183.1],
+      "18": [-124, -145],
+      "52": [-583, -158.1],
+      "69": [-161, -105],
+      "999": [-124, -145],
+      "20001": [-165, -155.05],
+      "69_1": [-583, -120]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 207, "impactFrame": 207, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34043": {
+    "item": 320040,
+    "icon": "/assets/reborn/icons/items/pets/34043.webp",
+    "atlas": "/assets/reborn/entities/pets/34043/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34043/avatar.webp"],
+    "animations": {
+      "17": [-605.85, -142],
+      "18": [-121, -142],
+      "52": [-552, -142],
+      "69": [-162, -143],
+      "999": [-121, -142],
+      "20001": [-160, -165.05],
+      "69_1": [-552, -143]
+    },
+    "motionEvents": {
+      "17": { "frames": 24, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34044": {
+    "item": 320096,
+    "icon": "/assets/reborn/icons/items/pets/34044.webp",
+    "atlas": "/assets/reborn/entities/pets/34044/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34044/avatar.webp"],
+    "animations": {
+      "17": [-605.85, -195],
+      "18": [-120, -198],
+      "52": [-559, -195],
+      "69": [-172, -153],
+      "999": [-120, -198],
+      "20001": [-170, -199],
+      "69_1": [-559, -195]
+    },
+    "motionEvents": {
+      "17": { "frames": 24, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34045": {
+    "item": 320041,
+    "icon": "/assets/reborn/icons/items/pets/34045.webp",
+    "atlas": "/assets/reborn/entities/pets/34045/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34045/avatar.webp"],
+    "animations": {
+      "18": [-123, -157],
+      "52": [-538, -157],
+      "69": [-153, -139],
+      "999": [-123, -157],
+      "20001": [-131, -165.05],
+      "69_1": [-506, -157]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34046": {
+    "item": 320097,
+    "icon": "/assets/reborn/icons/items/pets/34046.webp",
+    "atlas": "/assets/reborn/entities/pets/34046/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34046/avatar.webp"],
+    "animations": {
+      "18": [-123, -154],
+      "52": [-547, -157],
+      "69": [-169, -137],
+      "999": [-123, -154],
+      "20001": [-131, -165.05],
+      "69_1": [-513, -157]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34047": {
+    "item": 320042,
+    "icon": "/assets/reborn/icons/items/pets/34047.webp",
+    "atlas": "/assets/reborn/entities/pets/34047/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34047/avatar.webp"],
+    "animations": {
+      "18": [-101, -144],
+      "52": [-535, -144],
+      "69": [-148, -102.5],
+      "999": [-101, -144],
+      "20001": [-103.3, -173.55],
+      "69_1": [-517, -144]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34048": {
+    "item": 320098,
+    "icon": "/assets/reborn/icons/items/pets/34048.webp",
+    "atlas": "/assets/reborn/entities/pets/34048/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34048/avatar.webp"],
+    "animations": {
+      "18": [-104.3, -160],
+      "52": [-541, -159],
+      "69": [-157, -125],
+      "999": [-104.3, -160],
+      "20001": [-106.3, -173.55],
+      "69_1": [-504, -159]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34049": {
+    "item": 320043,
+    "icon": "/assets/reborn/icons/items/pets/34049.webp",
+    "atlas": "/assets/reborn/entities/pets/34049/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34049/avatar.webp"],
+    "animations": {
+      "17": [-261.25, -279.95],
+      "18": [-100.05, -215],
+      "52": [-565.85, -210],
+      "69": [-136, -161.5],
+      "999": [-100.05, -215],
+      "20001": [-100.1, -224.55],
+      "69_1": [-476, -210]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34050": {
+    "item": 320099,
+    "icon": "/assets/reborn/icons/items/pets/34050.webp",
+    "atlas": "/assets/reborn/entities/pets/34050/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34050/avatar.webp"],
+    "animations": {
+      "17": [-261.25, -260.05],
+      "18": [-102, -220],
+      "52": [-565.85, -214],
+      "69": [-136, -169.5],
+      "999": [-102, -220],
+      "20001": [-112, -244.55],
+      "69_1": [-480, -214]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34051": {
+    "item": 320044,
+    "icon": "/assets/reborn/icons/items/pets/34051.webp",
+    "atlas": "/assets/reborn/entities/pets/34051/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34051/avatar.webp"],
+    "animations": {
+      "17": [-595.3, -152],
+      "18": [-122, -147],
+      "52": [-520, -152],
+      "69": [-165, -133],
+      "999": [-122, -147],
+      "20001": [-122, -184.55],
+      "69_1": [-510, -152]
+    },
+    "motionEvents": {
+      "17": { "frames": 26, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 12, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34052": {
+    "item": 320100,
+    "icon": "/assets/reborn/icons/items/pets/34052.webp",
+    "atlas": "/assets/reborn/entities/pets/34052/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34052/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-595.3, -199],
+      "18": [-112, -208],
+      "52": [-569, -199],
+      "69": [-195, -228],
+      "999": [-112, -208],
+      "20001": [-149.85, -199],
+      "69_1": [-559, -228]
+    },
+    "motionEvents": {
+      "17": { "frames": 26, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 13, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 13, "impactFrame": 13, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34053": {
+    "item": 320045,
+    "icon": "/assets/reborn/icons/items/pets/34053.webp",
+    "atlas": "/assets/reborn/entities/pets/34053/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34053/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-1164.85, -143],
+      "18": [-137, -148],
+      "52": [-521, -143],
+      "69": [-148, -133],
+      "999": [-137, -148],
+      "20001": [-130, -151.55],
+      "69_1": [-504, -143]
+    },
+    "motionEvents": {
+      "17": { "frames": 40, "impactFrame": 19, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34054": {
+    "item": 320101,
+    "icon": "/assets/reborn/icons/items/pets/34054.webp",
+    "atlas": "/assets/reborn/entities/pets/34054/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34054/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34054/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-1164.85, -166],
+      "18": [-136, -174],
+      "52": [-523, -166],
+      "69": [-147, -158],
+      "999": [-136, -174],
+      "20001": [-151, -166],
+      "69_1": [-523, -166]
+    },
+    "motionEvents": {
+      "17": { "frames": 40, "impactFrame": 19, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34055": {
+    "item": 320165,
+    "icon": "/assets/reborn/icons/items/pets/34055.webp",
+    "atlas": "/assets/reborn/entities/pets/34055/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34055/avatar.webp"],
+    "animations": {
+      "17": [-521.1, -159.95],
+      "52": [-509.95, -105.5],
+      "69": [-132.5, -97.5],
+      "999": [-90.5, -105.5],
+      "20001": [-90.05, -154.55],
+      "69_1": [-473.5, -105.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 17, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34056": {
+    "item": 320166,
+    "icon": "/assets/reborn/icons/items/pets/34056.webp",
+    "atlas": "/assets/reborn/entities/pets/34056/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34056/avatar.webp"],
+    "animations": {
+      "17": [-534.55, -159.95],
+      "52": [-512.5, -125.3],
+      "69": [-143.7, -110.5],
+      "999": [-103, -116.5],
+      "20001": [-105.55, -164.55],
+      "69_1": [-485.05, -125.3]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 17, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34057": {
+    "item": 320167,
+    "icon": "/assets/reborn/icons/items/pets/34057.webp",
+    "atlas": "/assets/reborn/entities/pets/34057/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34057/avatar.webp"],
+    "animations": {
+      "17": [-595.75, -141.7],
+      "52": [-513, -118],
+      "69": [-119.95, -112.5],
+      "999": [-77.55, -118],
+      "20001": [-77.55, -137.15],
+      "69_1": [-460, -118]
+    },
+    "motionEvents": {
+      "17": { "frames": 27, "impactFrame": 9, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34058": {
+    "item": 320168,
+    "icon": "/assets/reborn/icons/items/pets/34058.webp",
+    "atlas": "/assets/reborn/entities/pets/34058/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34058/avatar.webp"],
+    "animations": {
+      "17": [-595.75, -145.7],
+      "52": [-515, -131.5],
+      "69": [-119.95, -121.75],
+      "999": [-77.55, -131],
+      "20001": [-77.6, -162.7],
+      "69_1": [-460, -131]
+    },
+    "motionEvents": {
+      "17": { "frames": 27, "impactFrame": 9, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34059": {
+    "item": 320169,
+    "icon": "/assets/reborn/icons/items/pets/34059.webp",
+    "atlas": "/assets/reborn/entities/pets/34059/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34059/avatar.webp"],
+    "animations": {
+      "17": [-237.8, -147.9],
+      "52": [-545.5, -128],
+      "69": [-144.05, -116],
+      "999": [-117.05, -131],
+      "20001": [-157.1, -154.55],
+      "69_1": [-529.6, -128]
+    },
+    "motionEvents": {
+      "17": { "frames": 15, "impactFrame": 8, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34060": {
+    "item": 320170,
+    "icon": "/assets/reborn/icons/items/pets/34060.webp",
+    "atlas": "/assets/reborn/entities/pets/34060/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34060/avatar.webp"],
+    "animations": {
+      "17": [-242.4, -165.05],
+      "52": [-546.55, -158],
+      "69": [-148.55, -147.5],
+      "999": [-117.05, -162],
+      "20001": [-167.1, -179],
+      "69_1": [-595.6, -158]
+    },
+    "motionEvents": {
+      "17": { "frames": 15, "impactFrame": 8, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 11, "impactFrame": 11, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34061": {
+    "item": 320171,
+    "icon": "/assets/reborn/icons/items/pets/34061.webp",
+    "atlas": "/assets/reborn/entities/pets/34061/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34061/avatar.webp"],
+    "animations": {
+      "17": [-680.15, -171.5],
+      "52": [-526.5, -121.55],
+      "69": [-133.2, -120],
+      "999": [-96.5, -119.25],
+      "20001": [-96.5, -154.55],
+      "69_1": [-469.5, -120.8]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 15, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34062": {
+    "item": 320172,
+    "icon": "/assets/reborn/icons/items/pets/34062.webp",
+    "atlas": "/assets/reborn/entities/pets/34062/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34062/avatar.webp"],
+    "animations": {
+      "17": [-680.15, -179.5],
+      "52": [-537, -143],
+      "69": [-138, -131.25],
+      "999": [-96.5, -138.25],
+      "20001": [-96.5, -154.55],
+      "69_1": [-478, -138.8]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 15, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34063": {
+    "item": 320173,
+    "icon": "/assets/reborn/icons/items/pets/34063.webp",
+    "atlas": "/assets/reborn/entities/pets/34063/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34063/avatar.webp"],
+    "animations": {
+      "17": [-223.75, -116],
+      "52": [-523.15, -116],
+      "69": [-136.5, -106.5],
+      "999": [-97, -116],
+      "20001": [-107.45, -165.1],
+      "69_1": [-498.5, -115.05]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 15, "impactFrame": 15, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34064": {
+    "item": 320174,
+    "icon": "/assets/reborn/icons/items/pets/34064.webp",
+    "atlas": "/assets/reborn/entities/pets/34064/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34064/avatar.webp"],
+    "animations": {
+      "17": [-223.75, -130],
+      "52": [-532.65, -145.15],
+      "69": [-505, -109.75],
+      "999": [-98, -131],
+      "20001": [-102.4, -167.55],
+      "69_1": [-505, -143.2]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 13, "impactFrame": 13, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34065": {
+    "item": 320175,
+    "icon": "/assets/reborn/icons/items/pets/34065.webp",
+    "atlas": "/assets/reborn/entities/pets/34065/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34065/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-734.7, -186.95],
+      "52": [-515.95, -153],
+      "69": [-130.3, -148.55],
+      "999": [-86.95, -148],
+      "20001": [-117.5, -191.55],
+      "69_1": [-503, -152.05]
+    },
+    "motionEvents": {
+      "17": { "frames": 33, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34066": {
+    "item": 320176,
+    "icon": "/assets/reborn/icons/items/pets/34066.webp",
+    "atlas": "/assets/reborn/entities/pets/34066/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34066/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-734.7, -186.95],
+      "52": [-515.95, -149.5],
+      "69": [-130.3, -152],
+      "999": [-86.95, -149],
+      "20001": [-118.95, -191.35],
+      "69_1": [-512, -148.55]
+    },
+    "motionEvents": {
+      "17": { "frames": 33, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34067": {
+    "item": 320177,
+    "icon": "/assets/reborn/icons/items/pets/34067.webp",
+    "atlas": "/assets/reborn/entities/pets/34067/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34067/avatar.webp"],
+    "animations": {
+      "17": [-516.1, -132],
+      "52": [-518.55, -115],
+      "69": [-156, -108],
+      "999": [-103, -114.95],
+      "20001": [-99, -149.65],
+      "69_1": [-531.95, -109]
+    },
+    "motionEvents": {
+      "17": { "frames": 29, "impactFrame": 16, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34068": {
+    "item": 320178,
+    "icon": "/assets/reborn/icons/items/pets/34068.webp",
+    "atlas": "/assets/reborn/entities/pets/34068/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34068/avatar.webp"],
+    "animations": {
+      "17": [-526.45, -148.5],
+      "52": [-529.95, -131.5],
+      "69": [-162, -124],
+      "999": [-113, -129],
+      "20001": [-110.05, -149.9],
+      "69_1": [-537.95, -127.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 29, "impactFrame": 16, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34069": {
+    "item": 320179,
+    "icon": "/assets/reborn/icons/items/pets/34069.webp",
+    "atlas": "/assets/reborn/entities/pets/34069/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34069/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-723.2, -292.4],
+      "52": [-460.5, -129.15],
+      "69": [-163.5, -119],
+      "999": [-104, -127],
+      "20001": [-103, -148.65],
+      "69_1": [-516.45, -127.05]
+    },
+    "motionEvents": {
+      "17": { "frames": 26, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34070": {
+    "item": 320180,
+    "icon": "/assets/reborn/icons/items/pets/34070.webp",
+    "atlas": "/assets/reborn/entities/pets/34070/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34070/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-723.2, -292.4],
+      "52": [-465.5, -157.15],
+      "69": [-175, -149],
+      "999": [-122, -155.95],
+      "20001": [-124, -155.45],
+      "69_1": [-527.95, -158]
+    },
+    "motionEvents": {
+      "17": { "frames": 26, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34071": {
+    "item": 340710,
+    "icon": "/assets/reborn/icons/items/pets/34071.webp",
+    "atlas": "/assets/reborn/entities/pets/34071/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.1.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.2.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.3.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.4.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.5.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.6.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.7.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.8.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.9.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.10.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.11.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.12.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.13.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.14.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.15.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.16.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.17.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.18.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.19.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.20.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.21.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.22.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.23.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.24.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.25.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.26.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.27.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.28.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.29.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.30.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.31.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.32.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.33.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.34.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.35.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.36.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.37.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.38.webp",
+      "/assets/reborn/entities/pets/34071/avatar-ten-tails-pet-20260929.39.webp"
+    ],
+    "animations": {
+      "17": [-1276, -633],
+      "18": [-110, -289],
+      "21": [-1026, -777],
+      "52": [-622, -284],
+      "69": [-118, -308],
+      "999": [-110, -289],
+      "20001": [-255, -284],
+      "69_1": [-630, -284]
+    },
+    "motionEvents": {
+      "17": { "frames": 68, "impactFrame": 45, "timingSource": "Attacking" },
+      "18": { "frames": 6, "impactFrame": 2, "timingSource": "Attacking" },
+      "21": { "frames": 75, "impactFrame": 58, "timingSource": "Attacking" },
+      "52": { "frames": 25, "impactFrame": 13, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34072": {
+    "item": 320182,
+    "icon": "/assets/reborn/icons/items/pets/34072.webp",
+    "atlas": "/assets/reborn/entities/pets/34072/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34072/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34072/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-949.8, -378.05],
+      "52": [-444.95, -138],
+      "69": [-129, -131],
+      "999": [-92, -132],
+      "20001": [-92, -169.55],
+      "69_1": [-482.95, -135]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 12, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34073": {
+    "item": 320183,
+    "icon": "/assets/reborn/icons/items/pets/34073.webp",
+    "atlas": "/assets/reborn/entities/pets/34073/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34073/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34073/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-949.8, -378.05],
+      "52": [-466.95, -159.1],
+      "69": [-125.7, -175],
+      "999": [-103, -151],
+      "20001": [-103, -182.55],
+      "69_1": [-478.7, -157]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 12, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34074": {
+    "item": 320184,
+    "icon": "/assets/reborn/icons/items/pets/34074.webp",
+    "atlas": "/assets/reborn/entities/pets/34074/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34074/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34074/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-612, -343.65],
+      "52": [-582.55, -274.35],
+      "69": [-161.1, -243.95],
+      "999": [-141.25, -264.45],
+      "20001": [-109.35, -264.15],
+      "69_1": [-520.05, -265.55]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 12, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34075": {
+    "item": 320185,
+    "icon": "/assets/reborn/icons/items/pets/34075.webp",
+    "atlas": "/assets/reborn/entities/pets/34075/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34075/avatar.webp"],
+    "animations": {
+      "52": [-561.35, -164.05],
+      "69": [-183, -135],
+      "999": [-152, -155],
+      "20001": [-151.1, -175.55],
+      "69_1": [-555.95, -164.05]
+    },
+    "motionEvents": {
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 201, "impactFrame": 201, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 15, "impactFrame": 15, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34076": {
+    "item": 320186,
+    "icon": "/assets/reborn/icons/items/pets/34076.webp",
+    "atlas": "/assets/reborn/entities/pets/34076/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34076/avatar.webp"],
+    "animations": {
+      "17": [-261.25, -179.55],
+      "52": [-574.4, -168.7],
+      "69": [-132, -136],
+      "999": [-89, -133],
+      "20001": [-98.15, -165.55],
+      "69_1": [-485.9, -130.25]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34077": {
+    "item": 320187,
+    "icon": "/assets/reborn/icons/items/pets/34077.webp",
+    "atlas": "/assets/reborn/entities/pets/34077/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34077/avatar.webp"],
+    "animations": {
+      "17": [-269.25, -246.35],
+      "52": [-586.2, -196],
+      "69": [-142.6, -177],
+      "999": [-94, -178],
+      "20001": [-120, -194.9],
+      "69_1": [-485.9, -178.25]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34078": {
+    "item": 320188,
+    "icon": "/assets/reborn/icons/items/pets/34078.webp",
+    "atlas": "/assets/reborn/entities/pets/34078/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34078/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-269.25, -266.5],
+      "52": [-654.9, -198],
+      "69": [-188.95, -175],
+      "999": [-124.4, -193.5],
+      "20001": [-141.65, -200.1],
+      "69_1": [-544.1, -191.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34079": {
+    "item": 320189,
+    "icon": "/assets/reborn/icons/items/pets/34079.webp",
+    "atlas": "/assets/reborn/entities/pets/34079/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34079/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34079/avatar-pet-flash-20260928.2.webp",
+      "/assets/reborn/entities/pets/34079/avatar-pet-flash-20260928.3.webp"
+    ],
+    "animations": {
+      "17": [-263.1, -205.5],
+      "52": [-728.3, -293],
+      "69": [-176, -139.25],
+      "999": [-139, -156],
+      "20001": [-151, -174],
+      "69_1": [-511, -166.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 45, "impactFrame": 45, "timingSource": "clip-end-compatibility" },
+      "52": { "frames": 53, "impactFrame": 26, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34080": {
+    "item": 320102,
+    "icon": "/assets/reborn/icons/items/pets/34080.webp",
+    "atlas": "/assets/reborn/entities/pets/34080/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34080/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34080/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-709.15, -395],
+      "18": [-143.2, -266.15],
+      "52": [-606.15, -296.1],
+      "69": [-180, -278.5],
+      "999": [-143.2, -266.15],
+      "20001": [-143.6, -276.1],
+      "69_1": [-538.95, -277.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 29, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34081": {
+    "item": 320190,
+    "icon": "/assets/reborn/icons/items/pets/34081.webp",
+    "atlas": "/assets/reborn/entities/pets/34081/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34081/avatar.webp"],
+    "animations": {
+      "17": [-589.1, -173.5],
+      "18": [-250.25, -198.55],
+      "52": [-597.3, -166.25],
+      "69": [-127.5, -130.5],
+      "999": [-84.7, -137],
+      "20001": [-89, -169.55],
+      "69_1": [-509.7, -138]
+    },
+    "motionEvents": {
+      "17": { "frames": 18, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34082": {
+    "item": 320191,
+    "icon": "/assets/reborn/icons/items/pets/34082.webp",
+    "atlas": "/assets/reborn/entities/pets/34082/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34082/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-615.55, -314.15],
+      "18": [-172.4, -204.6],
+      "52": [-597.3, -166.25],
+      "69": [-141.75, -122.5],
+      "999": [-84.7, -133],
+      "20001": [-84.7, -169.55],
+      "69_1": [-509.45, -137.7]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 19, "impactFrame": 8, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34083": {
+    "item": 320192,
+    "icon": "/assets/reborn/icons/items/pets/34083.webp",
+    "atlas": "/assets/reborn/entities/pets/34083/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34083/avatar.webp"],
+    "animations": {
+      "17": [-213.15, -163.8],
+      "18": [-673.3, -215.5],
+      "52": [-597.3, -166.25],
+      "69": [-133.3, -141.5],
+      "999": [-84.7, -140],
+      "20001": [-84.7, -169.55],
+      "69_1": [-508.7, -143.95]
+    },
+    "motionEvents": {
+      "17": { "frames": 20, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 16, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34086": {
+    "item": 320193,
+    "icon": "/assets/reborn/icons/items/pets/34086.webp",
+    "atlas": "/assets/reborn/entities/pets/34086/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34086/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-639.9, -275.4],
+      "18": [-129, -162.1],
+      "52": [-580.4, -144.1],
+      "69": [-125.7, -130.5],
+      "999": [-84.7, -138],
+      "20001": [-84.7, -169.55],
+      "69_1": [-478.7, -142]
+    },
+    "motionEvents": {
+      "17": { "frames": 27, "impactFrame": 5, "timingSource": "Attacking" },
+      "18": { "frames": 18, "impactFrame": 3, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34094": {
+    "item": 320194,
+    "icon": "/assets/reborn/icons/items/pets/34094.webp",
+    "atlas": "/assets/reborn/entities/pets/34094/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34094/avatar.webp"],
+    "animations": {
+      "18": [-115, -220],
+      "52": [-565.85, -215],
+      "69": [-136, -167],
+      "999": [-115, -220],
+      "20001": [-134, -244.55],
+      "69_1": [-518, -215]
+    },
+    "motionEvents": {
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34095": {
+    "item": 320195,
+    "icon": "/assets/reborn/icons/items/pets/34095.webp",
+    "atlas": "/assets/reborn/entities/pets/34095/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34095/avatar.webp"],
+    "animations": {
+      "18": [-117, -218],
+      "52": [-536, -232],
+      "69": [-217, -152],
+      "999": [-117, -218],
+      "20001": [-152, -225],
+      "69_1": [-559.5, -215.85]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34096": {
+    "item": 320196,
+    "icon": "/assets/reborn/icons/items/pets/34096.webp",
+    "atlas": "/assets/reborn/entities/pets/34096/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34096/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34096/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-348.3, -506],
+      "18": [-117, -218],
+      "52": [-536, -232],
+      "69": [-217, -152],
+      "999": [-117, -218],
+      "20001": [-152, -225],
+      "69_1": [-559.5, -215.85]
+    },
+    "motionEvents": {
+      "17": { "frames": 20, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34097": {
+    "item": 320197,
+    "icon": "/assets/reborn/icons/items/pets/34097.webp",
+    "atlas": "/assets/reborn/entities/pets/34097/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34097/avatar.webp"],
+    "animations": {
+      "18": [-144, -171.5],
+      "52": [-536, -167],
+      "69": [-175, -160],
+      "999": [-144, -171.5],
+      "20001": [-141.5, -173.55],
+      "69_1": [-520.3, -167]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34098": {
+    "item": 320198,
+    "icon": "/assets/reborn/icons/items/pets/34098.webp",
+    "atlas": "/assets/reborn/entities/pets/34098/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/34098/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-261.25, -250.05],
+      "18": [-115, -220],
+      "52": [-565.85, -215],
+      "69": [-136, -167],
+      "999": [-115, -220],
+      "20001": [-134, -244.55],
+      "69_1": [-518, -215]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "34200": {
+    "item": 320199,
+    "icon": "/assets/reborn/icons/items/pets/34200.webp",
+    "atlas": "/assets/reborn/entities/pets/34200/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/34200/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/34200/avatar-pet-flash-20260928.2.webp",
+      "/assets/reborn/entities/pets/34200/avatar-pet-flash-20260928.3.webp"
+    ],
+    "animations": {
+      "17": [-650, -352],
+      "18": [-230, -327],
+      "52": [-676, -274],
+      "69": [-181, -253],
+      "999": [-169, -272],
+      "20001": [-177, -272],
+      "69_1": [-510, -268]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 30, "timingSource": "clip-end-compatibility" },
+      "18": { "frames": 27, "impactFrame": 27, "timingSource": "clip-end-compatibility" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 27, "impactFrame": 27, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 201, "impactFrame": 201, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340071": {
+    "item": 320103,
+    "icon": "/assets/reborn/icons/items/pets/340071.webp",
+    "atlas": "/assets/reborn/entities/pets/340071/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340071/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-686.65, -255.4],
+      "52": [-620, -191],
+      "69": [-171, -139],
+      "999": [-107, -167],
+      "20001": [-110.1, -196.25],
+      "69_1": [-521, -158]
+    },
+    "motionEvents": {
+      "18": { "frames": 23, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340081": {
+    "item": 320104,
+    "icon": "/assets/reborn/icons/items/pets/340081.webp",
+    "atlas": "/assets/reborn/entities/pets/340081/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340081/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-657.4, -202],
+      "52": [-610.05, -170],
+      "69": [-182, -137.05],
+      "999": [-103.05, -163],
+      "20001": [-113.05, -196.25],
+      "69_1": [-541, -151]
+    },
+    "motionEvents": {
+      "18": { "frames": 26, "impactFrame": 14, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340091": {
+    "item": 320105,
+    "icon": "/assets/reborn/icons/items/pets/340091.webp",
+    "atlas": "/assets/reborn/entities/pets/340091/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340091/avatar.webp"],
+    "animations": {
+      "18": [-623.9, -200],
+      "52": [-597.4, -200],
+      "69": [-169, -137.05],
+      "999": [-143, -187],
+      "20001": [-104.05, -196.25],
+      "69_1": [-519, -173.35]
+    },
+    "motionEvents": {
+      "18": { "frames": 24, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340101": {
+    "item": 320106,
+    "icon": "/assets/reborn/icons/items/pets/340101.webp",
+    "atlas": "/assets/reborn/entities/pets/340101/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340101/avatar.webp"],
+    "animations": {
+      "18": [-623, -157],
+      "52": [-643.5, -174],
+      "69": [-167, -125],
+      "999": [-89, -184],
+      "20001": [-101.1, -196.25],
+      "69_1": [-517, -162]
+    },
+    "motionEvents": {
+      "18": { "frames": 26, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 7, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340111": {
+    "item": 320107,
+    "icon": "/assets/reborn/icons/items/pets/340111.webp",
+    "atlas": "/assets/reborn/entities/pets/340111/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340111/avatar.webp"],
+    "animations": {
+      "18": [-552.95, -166.45],
+      "52": [-587.25, -200.3],
+      "69": [-175, -150],
+      "999": [-107, -166],
+      "20001": [-125.1, -226.25],
+      "69_1": [-522.95, -168.45]
+    },
+    "motionEvents": {
+      "18": { "frames": 29, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 25, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340121": {
+    "item": 320108,
+    "icon": "/assets/reborn/icons/items/pets/340121.webp",
+    "atlas": "/assets/reborn/entities/pets/340121/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340121/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-509.15, -420],
+      "52": [-605.45, -271.35],
+      "69": [-126.7, -198],
+      "999": [-105, -218],
+      "20001": [-93, -232.55],
+      "69_1": [-485.7, -181]
+    },
+    "motionEvents": {
+      "18": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340131": {
+    "item": 320109,
+    "icon": "/assets/reborn/icons/items/pets/340131.webp",
+    "atlas": "/assets/reborn/entities/pets/340131/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340131/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-627.95, -305],
+      "52": [-612.95, -243],
+      "69": [-170, -130],
+      "999": [-107, -151.95],
+      "20001": [-138.05, -211.25],
+      "69_1": [-520, -178.95]
+    },
+    "motionEvents": {
+      "18": { "frames": 28, "impactFrame": 14, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340141": {
+    "item": 320110,
+    "icon": "/assets/reborn/icons/items/pets/340141.webp",
+    "atlas": "/assets/reborn/entities/pets/340141/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340141/avatar.webp"],
+    "animations": {
+      "18": [-572.55, -164],
+      "52": [-614.95, -164],
+      "69": [-187, -163.5],
+      "999": [-101, -160],
+      "20001": [-102.1, -196.25],
+      "69_1": [-527, -164]
+    },
+    "motionEvents": {
+      "18": { "frames": 27, "impactFrame": 8, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340151": {
+    "item": 320111,
+    "icon": "/assets/reborn/icons/items/pets/340151.webp",
+    "atlas": "/assets/reborn/entities/pets/340151/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340151/avatar.webp"],
+    "animations": {
+      "18": [-244.35, -205],
+      "52": [-567.95, -166],
+      "69": [-168.05, -125.1],
+      "999": [-129, -160],
+      "20001": [-116.1, -196.25],
+      "69_1": [-508.05, -161.3]
+    },
+    "motionEvents": {
+      "18": { "frames": 15, "impactFrame": 4, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 17, "impactFrame": 17, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340161": {
+    "item": 320112,
+    "icon": "/assets/reborn/icons/items/pets/340161.webp",
+    "atlas": "/assets/reborn/entities/pets/340161/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340161/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "18": [-257.95, -177.05],
+      "52": [-582, -133],
+      "69": [-180, -118],
+      "999": [-107, -127],
+      "20001": [-118.1, -196.25],
+      "69_1": [-530, -133]
+    },
+    "motionEvents": {
+      "18": { "frames": 17, "impactFrame": 10, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 7, "impactFrame": 7, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340171": {
+    "item": 320113,
+    "icon": "/assets/reborn/icons/items/pets/340171.webp",
+    "atlas": "/assets/reborn/entities/pets/340171/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340171/avatar.webp"],
+    "animations": {
+      "18": [-257.95, -177.05],
+      "52": [-604, -185],
+      "69": [-166, -140],
+      "999": [-111.75, -166.95],
+      "20001": [-124.05, -196.25],
+      "69_1": [-550.1, -146]
+    },
+    "motionEvents": {
+      "18": { "frames": 20, "impactFrame": 9, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 6, "impactFrame": 6, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340181": {
+    "item": 320114,
+    "icon": "/assets/reborn/icons/items/pets/340181.webp",
+    "atlas": "/assets/reborn/entities/pets/340181/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340181/avatar.webp"],
+    "animations": {
+      "52": [-612.95, -200],
+      "69": [-192, -152],
+      "999": [-123.95, -218.95],
+      "20001": [-125.1, -197.95],
+      "69_1": [-532, -184.1]
+    },
+    "motionEvents": {
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340191": {
+    "item": 320115,
+    "icon": "/assets/reborn/icons/items/pets/340191.webp",
+    "atlas": "/assets/reborn/entities/pets/340191/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340191/avatar.webp"],
+    "animations": {
+      "52": [-666.45, -320.5],
+      "69": [-174, -162.95],
+      "999": [-174, -143],
+      "20001": [-129.1, -196.25],
+      "69_1": [-514, -172.95]
+    },
+    "motionEvents": {
+      "52": { "frames": 27, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 12, "impactFrame": 12, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340201": {
+    "item": 320116,
+    "icon": "/assets/reborn/icons/items/pets/340201.webp",
+    "atlas": "/assets/reborn/entities/pets/340201/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340201/avatar.webp"],
+    "animations": {
+      "52": [-648.45, -239.75],
+      "69": [-146.9, -116],
+      "999": [-114.15, -147],
+      "20001": [-129, -188.25],
+      "69_1": [-485.9, -147]
+    },
+    "motionEvents": {
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340211": {
+    "item": 320117,
+    "icon": "/assets/reborn/icons/items/pets/340211.webp",
+    "atlas": "/assets/reborn/entities/pets/340211/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340211/avatar.webp"],
+    "animations": {
+      "52": [-545.55, -145.95],
+      "69": [-131.5, -121],
+      "999": [-92.05, -142],
+      "20001": [-110.1, -187.25],
+      "69_1": [-481.45, -145.95]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340221": {
+    "item": 320118,
+    "icon": "/assets/reborn/icons/items/pets/340221.webp",
+    "atlas": "/assets/reborn/entities/pets/340221/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340221/avatar.webp"],
+    "animations": {
+      "52": [-593.95, -250],
+      "69": [-176, -193],
+      "999": [-118, -204],
+      "20001": [-142.05, -201],
+      "69_1": [-534.1, -193]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340231": {
+    "item": 320119,
+    "icon": "/assets/reborn/icons/items/pets/340231.webp",
+    "atlas": "/assets/reborn/entities/pets/340231/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340231/avatar.webp"],
+    "animations": {
+      "52": [-576, -140],
+      "69": [-176, -132],
+      "999": [-94, -136],
+      "20001": [-100.1, -196.25],
+      "69_1": [-536, -140]
+    },
+    "motionEvents": {
+      "52": { "frames": 22, "impactFrame": 10, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340241": {
+    "item": 320120,
+    "icon": "/assets/reborn/icons/items/pets/340241.webp",
+    "atlas": "/assets/reborn/entities/pets/340241/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340241/avatar.webp"],
+    "animations": {
+      "52": [-568.95, -163],
+      "69": [-203.95, -118],
+      "999": [-118, -155.95],
+      "20001": [-118.1, -196.25],
+      "69_1": [-543.95, -163]
+    },
+    "motionEvents": {
+      "52": { "frames": 24, "impactFrame": 13, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340261": {
+    "item": 320121,
+    "icon": "/assets/reborn/icons/items/pets/340261.webp",
+    "atlas": "/assets/reborn/entities/pets/340261/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340261/avatar.webp"],
+    "animations": {
+      "52": [-648.9, -159],
+      "69": [-135.95, -138],
+      "999": [-89.3, -156],
+      "20001": [-92.4, -187.55],
+      "69_1": [-495.5, -164]
+    },
+    "motionEvents": {
+      "52": { "frames": 27, "impactFrame": 13, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340301": {
+    "item": 320122,
+    "icon": "/assets/reborn/icons/items/pets/340301.webp",
+    "atlas": "/assets/reborn/entities/pets/340301/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/340301/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/340301/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-348.3, -506],
+      "18": [-117, -218],
+      "52": [-536, -232],
+      "69": [-217, -152],
+      "999": [-117, -218],
+      "20001": [-152, -225],
+      "69_1": [-559.5, -215.85]
+    },
+    "motionEvents": {
+      "17": { "frames": 20, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340321": {
+    "item": 320123,
+    "icon": "/assets/reborn/icons/items/pets/340321.webp",
+    "atlas": "/assets/reborn/entities/pets/340321/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340321/avatar.webp"],
+    "animations": {
+      "17": [-607.1, -152.1],
+      "18": [-119, -148],
+      "52": [-539, -152.1],
+      "69": [-153.9, -122.5],
+      "999": [-119, -148],
+      "20001": [-128, -159],
+      "69_1": [-524.5, -148]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 8, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340421": {
+    "item": 320124,
+    "icon": "/assets/reborn/icons/items/pets/340421.webp",
+    "atlas": "/assets/reborn/entities/pets/340421/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340421/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-1263.3, -183.1],
+      "18": [-136, -184],
+      "52": [-618, -165],
+      "69": [-164, -136],
+      "999": [-136, -184],
+      "20001": [-226, -165.05],
+      "69_1": [-608, -141]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 11, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 11, "impactFrame": 11, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340441": {
+    "item": 320125,
+    "icon": "/assets/reborn/icons/items/pets/340441.webp",
+    "atlas": "/assets/reborn/entities/pets/340441/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340441/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-605.85, -192],
+      "18": [-126, -200],
+      "52": [-556, -192],
+      "69": [-185, -154],
+      "999": [-126, -200],
+      "20001": [-175, -195],
+      "69_1": [-559, -195]
+    },
+    "motionEvents": {
+      "17": { "frames": 24, "impactFrame": 15, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340461": {
+    "item": 320126,
+    "icon": "/assets/reborn/icons/items/pets/340461.webp",
+    "atlas": "/assets/reborn/entities/pets/340461/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340461/avatar.webp"],
+    "animations": {
+      "18": [-123, -167],
+      "52": [-535.5, -174.25],
+      "69": [-161, -143],
+      "999": [-123, -167],
+      "20001": [-142, -182],
+      "69_1": [-510.5, -174.25]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 24, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340481": {
+    "item": 320127,
+    "icon": "/assets/reborn/icons/items/pets/340481.webp",
+    "atlas": "/assets/reborn/entities/pets/340481/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340481/avatar.webp"],
+    "animations": {
+      "18": [-144, -171.5],
+      "52": [-536, -167],
+      "69": [-175, -160],
+      "999": [-144, -171.5],
+      "20001": [-141.5, -173.55],
+      "69_1": [-520.3, -167]
+    },
+    "motionEvents": {
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340501": {
+    "item": 320128,
+    "icon": "/assets/reborn/icons/items/pets/340501.webp",
+    "atlas": "/assets/reborn/entities/pets/340501/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340501/avatar.webp"],
+    "animations": {
+      "17": [-261.25, -250.05],
+      "18": [-115, -220],
+      "52": [-565.85, -215],
+      "69": [-136, -167],
+      "999": [-115, -220],
+      "20001": [-134, -244.55],
+      "69_1": [-518, -215]
+    },
+    "motionEvents": {
+      "17": { "frames": 17, "impactFrame": 11, "timingSource": "Attacking" },
+      "18": { "frames": 9, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340521": {
+    "item": 320129,
+    "icon": "/assets/reborn/icons/items/pets/340521.webp",
+    "atlas": "/assets/reborn/entities/pets/340521/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340521/avatar.webp"],
+    "animations": {
+      "17": [-595.3, -182],
+      "18": [-129, -210],
+      "52": [-522, -186],
+      "69": [-194, -191],
+      "999": [-129, -210],
+      "20001": [-139, -204.55],
+      "69_1": [-534, -191]
+    },
+    "motionEvents": {
+      "17": { "frames": 26, "impactFrame": 12, "timingSource": "Attacking" },
+      "18": { "frames": 13, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 13, "impactFrame": 13, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340541": {
+    "item": 320130,
+    "icon": "/assets/reborn/icons/items/pets/340541.webp",
+    "atlas": "/assets/reborn/entities/pets/340541/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/340541/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/340541/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-1164.85, -182],
+      "18": [-146, -190],
+      "52": [-523, -182],
+      "69": [-154, -172],
+      "999": [-146, -190],
+      "20001": [-148, -182],
+      "69_1": [-523, -182]
+    },
+    "motionEvents": {
+      "17": { "frames": 40, "impactFrame": 19, "timingSource": "Attacking" },
+      "18": { "frames": 10, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340561": {
+    "item": 320200,
+    "icon": "/assets/reborn/icons/items/pets/340561.webp",
+    "atlas": "/assets/reborn/entities/pets/340561/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340561/avatar.webp"],
+    "animations": {
+      "17": [-534.55, -167.95],
+      "52": [-519.3, -135.5],
+      "69": [-141.5, -120.75],
+      "999": [-112.5, -127.5],
+      "20001": [-106.55, -154.55],
+      "69_1": [-481.5, -133.3]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 17, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340581": {
+    "item": 320201,
+    "icon": "/assets/reborn/icons/items/pets/340581.webp",
+    "atlas": "/assets/reborn/entities/pets/340581/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340581/avatar.webp"],
+    "animations": {
+      "17": [-595.75, -161.5],
+      "52": [-546.5, -164],
+      "69": [-133, -154],
+      "999": [-91, -162.5],
+      "20001": [-91, -187.15],
+      "69_1": [-473, -161.5]
+    },
+    "motionEvents": {
+      "17": { "frames": 27, "impactFrame": 9, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340601": {
+    "item": 320202,
+    "icon": "/assets/reborn/icons/items/pets/340601.webp",
+    "atlas": "/assets/reborn/entities/pets/340601/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340601/avatar.webp"],
+    "animations": {
+      "17": [-275.25, -227],
+      "52": [-650.65, -191],
+      "69": [-159.55, -178.5],
+      "999": [-124, -197],
+      "20001": [-262, -209],
+      "69_1": [-656.6, -191]
+    },
+    "motionEvents": {
+      "17": { "frames": 15, "impactFrame": 8, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 11, "impactFrame": 11, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340621": {
+    "item": 320203,
+    "icon": "/assets/reborn/icons/items/pets/340621.webp",
+    "atlas": "/assets/reborn/entities/pets/340621/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340621/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-680.15, -179.5],
+      "52": [-550.5, -163.55],
+      "69": [-150.25, -152.5],
+      "999": [-99.75, -161.25],
+      "20001": [-108, -184.55],
+      "69_1": [-490.25, -162.8]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 15, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340641": {
+    "item": 320204,
+    "icon": "/assets/reborn/icons/items/pets/340641.webp",
+    "atlas": "/assets/reborn/entities/pets/340641/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340641/avatar.webp"],
+    "animations": {
+      "17": [-223.75, -155.9],
+      "52": [-540, -161],
+      "69": [-159.05, -139],
+      "999": [-101, -158],
+      "20001": [-106, -184.55],
+      "69_1": [-512.95, -160.05]
+    },
+    "motionEvents": {
+      "17": { "frames": 30, "impactFrame": 2, "timingSource": "Attacking" },
+      "52": { "frames": 21, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340661": {
+    "item": 320205,
+    "icon": "/assets/reborn/icons/items/pets/340661.webp",
+    "atlas": "/assets/reborn/entities/pets/340661/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340661/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-734.7, -186.95],
+      "52": [-513.95, -152],
+      "69": [-130.3, -150.05],
+      "999": [-86.95, -148],
+      "20001": [-136.95, -190.35],
+      "69_1": [-508, -151.05]
+    },
+    "motionEvents": {
+      "17": { "frames": 33, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 22, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 9, "impactFrame": 9, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340681": {
+    "item": 320206,
+    "icon": "/assets/reborn/icons/items/pets/340681.webp",
+    "atlas": "/assets/reborn/entities/pets/340681/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340681/avatar.webp"],
+    "animations": {
+      "17": [-532.4, -174],
+      "52": [-537.35, -161],
+      "69": [-191, -157],
+      "999": [-114, -159.95],
+      "20001": [-113.6, -181.9],
+      "69_1": [-571.35, -159]
+    },
+    "motionEvents": {
+      "17": { "frames": 29, "impactFrame": 16, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 11, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340701": {
+    "item": 320207,
+    "icon": "/assets/reborn/icons/items/pets/340701.webp",
+    "atlas": "/assets/reborn/entities/pets/340701/avatar.json",
+    "pages": ["/assets/reborn/entities/pets/340701/avatar-pet-flash-20260928.1.webp"],
+    "animations": {
+      "17": [-723.2, -292.4],
+      "52": [-495.95, -188.1],
+      "69": [-208.95, -176],
+      "999": [-118, -182],
+      "20001": [-135, -184.75],
+      "69_1": [-553.95, -186.1]
+    },
+    "motionEvents": {
+      "17": { "frames": 26, "impactFrame": 13, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  },
+  "340731": {
+    "item": 320208,
+    "icon": "/assets/reborn/icons/items/pets/340731.webp",
+    "atlas": "/assets/reborn/entities/pets/340731/avatar.json",
+    "pages": [
+      "/assets/reborn/entities/pets/340731/avatar-pet-flash-20260928.1.webp",
+      "/assets/reborn/entities/pets/340731/avatar-pet-flash-20260928.2.webp"
+    ],
+    "animations": {
+      "17": [-949.8, -378.05],
+      "52": [-477.95, -180.1],
+      "69": [-146, -187.95],
+      "999": [-113, -170],
+      "20001": [-112, -211.55],
+      "69_1": [-498.95, -179]
+    },
+    "motionEvents": {
+      "17": { "frames": 32, "impactFrame": 12, "timingSource": "Attacking" },
+      "52": { "frames": 23, "impactFrame": 12, "timingSource": "Attacking" },
+      "69": { "frames": 10, "impactFrame": 10, "timingSource": "clip-end-compatibility" },
+      "999": { "frames": 8, "impactFrame": 8, "timingSource": "clip-end-compatibility" },
+      "20001": { "frames": 200, "impactFrame": 200, "timingSource": "clip-end-compatibility" },
+      "69_1": { "frames": 16, "impactFrame": 16, "timingSource": "clip-end-compatibility" }
+    }
+  }
+}
