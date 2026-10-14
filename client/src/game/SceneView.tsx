@@ -125,6 +125,7 @@ export function SceneView({
           exploreClip={exploreClip(explore.data?.spots)}
           onNpc={onNpc}
           onExplore={() => setExploring(true)}
+          onBuilding={(clip) => openWindow(clip === 'clip_pet' ? 'pets' : 'cardRoom')}
         />
       )}
       {scene.data &&

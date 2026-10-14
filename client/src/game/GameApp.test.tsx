@@ -1,4 +1,4 @@
-import { screen, waitFor, within } from '@testing-library/react'
+import { act, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import {
@@ -13,6 +13,7 @@ import {
 import { createFakeSocket, type FakeSocket } from '../test/socket'
 import { json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import GameApp from './GameApp'
+import { mountPicture } from './phaser'
 import type { Quest } from './types'
 
 let socket: FakeSocket
@@ -40,6 +41,20 @@ function renderGame(handlers: Parameters<typeof mockApi>[0] = {}, player = chara
   })
   renderWithProviders(<GameApp view="game" />, { route: '/play', path: '/play' })
   return fetchMock
+}
+
+const emptyKennel = {
+  pets: [],
+  petSlots: 1,
+  maxSlots: 5,
+  slotPrice: 100,
+  digestPrice: 8,
+  evolve: { level: 30, feathers: 50 },
+  feathers: 0,
+  lockItem: { itemId: 'i150406', nameKey: 'lg_x', count: 0 },
+  removeItem: { itemId: 'i152027', nameKey: 'lg_y', count: 0 },
+  foods: [],
+  books: [],
 }
 
 describe('GameScreen', () => {
@@ -136,20 +151,7 @@ describe('GameScreen', () => {
     renderGame({
       'GET /api/game/events': () => json({}),
       'GET /api/game/cards': () => json({ collections: [] }),
-      'GET /api/game/pets': () =>
-        json({
-          pets: [],
-          petSlots: 1,
-          maxSlots: 5,
-          slotPrice: 100,
-          digestPrice: 8,
-          evolve: { level: 30, feathers: 50 },
-          feathers: 0,
-          lockItem: { itemId: 'i150406', nameKey: 'lg_x', count: 0 },
-          removeItem: { itemId: 'i152027', nameKey: 'lg_y', count: 0 },
-          foods: [],
-          books: [],
-        }),
+      'GET /api/game/pets': () => json(emptyKennel),
       'GET /api/game/wings': () =>
         json({
           maxLevel: 30,
@@ -187,6 +189,22 @@ describe('GameScreen', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Pet Kennel' }))
     expect(await screen.findByRole('dialog', { name: 'Pet Kennel' })).toBeVisible()
   }, 15_000)
+
+  it('opens the Pet Kennel and the Card Room from their village buildings', async () => {
+    renderGame({
+      'GET /api/game/pets': () => json(emptyKennel),
+      'GET /api/game/cards': () => json({ collections: [] }),
+    })
+    await waitFor(() => expect(mountPicture).toHaveBeenCalled())
+    const actions = vi.mocked(mountPicture).mock.calls.at(-1)![2]
+
+    act(() => actions.onBuilding?.('clip_pet'))
+    expect(await screen.findByRole('dialog', { name: 'Pet Kennel' })).toBeVisible()
+    await userEvent.keyboard('{Escape}')
+
+    act(() => actions.onBuilding?.('clip_CardLink'))
+    expect(await screen.findByRole('dialog', { name: 'Card Room' })).toBeVisible()
+  })
 
   it('has Back to the website and Log out in the Settings menu', async () => {
     renderGame()

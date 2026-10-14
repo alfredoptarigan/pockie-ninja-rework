@@ -11,6 +11,7 @@ import { useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState }
 import scenesJson from '../generated/game-scenes.json'
 import type { CompanionLook } from './phaser/companions'
 import type { FighterLook } from './phaser/motion'
+import type { PictureActions } from './phaser/picture-scene'
 import { GameButton } from './skin'
 import type { Replay, SceneNpc, SceneView } from './types'
 
@@ -76,16 +77,19 @@ export function ScenePictureMount({
   scene,
   onNpc,
   onExplore,
+  onBuilding,
   exploreClip,
 }: {
   scene: SceneView
   onNpc: (npc: SceneNpc) => void
   /** The field's explore tree was clicked. */
   onExplore?: () => void
+  /** A village building without its own NPC menu was clicked (the Pet Kennel, the Card Room). */
+  onBuilding?: PictureActions['onBuilding']
   /** Scene element of the explore tree (GET /explore `clipName`). */
   exploreClip?: string
 }) {
-  const latest = useLatest({ onNpc, onExplore })
+  const latest = useLatest({ onNpc, onExplore, onBuilding })
   const key = useMemo(() => ({ scene, exploreClip }), [scene, exploreClip])
   const { ref, failed } = useStage(key, (stage, parent) =>
     stage.mountPicture(
@@ -94,6 +98,7 @@ export function ScenePictureMount({
       {
         onNpc: (npc) => latest.current.onNpc(npc),
         onExplore: () => latest.current.onExplore?.(),
+        onBuilding: (clip) => latest.current.onBuilding?.(clip),
       },
       exploreClip,
     ),
