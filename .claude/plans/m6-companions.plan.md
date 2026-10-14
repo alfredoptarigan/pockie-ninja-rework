@@ -604,7 +604,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/tools test -- reborn audio && pnpm assets:reborn && pnpm assets:audio && du -sh client/public/assets/reborn`
 - **Depends on**: 1.
 
-### Task 5: Pet engine (game-core)
+### Task 5: Pet engine (game-core) (done, wired; total pet power about 16%, PET_ATTACK 1:1)
 - **Action**:
   - Write `game-core/src/pets/`:
     - `petTotals` (decision 11);
@@ -690,7 +690,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/game-core test -- cards && pnpm --filter @pockie/server test -- cards`
 - **Depends on**: 2, 3.
 
-### Task 9: Pets feature (server and client)
+### Task 9: Pets feature (server and client) (done, wired)
 - **Action**:
   - Routes:
     - `GET /api/game/pets` (kennel, active, digest state);
