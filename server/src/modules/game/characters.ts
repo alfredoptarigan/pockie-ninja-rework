@@ -45,6 +45,7 @@ export function toCharacter(
     nation: row.nation as Nation,
     clothing: row.clothing,
     avatarId: row.avatarId,
+    weaponClass: avatarStats(row.avatarId).Popsinger,
     level: row.level,
     exp: row.exp,
     stone: row.stone,

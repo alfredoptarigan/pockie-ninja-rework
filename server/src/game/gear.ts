@@ -40,6 +40,44 @@ export const equipConfigOf = (itemId: string) => {
   return row?.class === 'EquipItem' ? (row as EquipConfig) : undefined
 }
 
+/** UsePopsinger job mask (1 Blunt, 2 Sharp, 4 Fists, -1 any) as Reborn's Weapon Type. */
+function weaponType(mask = -1) {
+  const jobs = (['Blunt', 'Sharp', 'Fists'] as const).filter((_, bit) => mask & (1 << bit))
+  return mask === -1 || jobs.length !== 1 ? 'Any' : jobs[0]!
+}
+
+/** OtherPropName / OtherPropValue: `;`-separated innate lines. */
+function innateProps(config: EquipConfig) {
+  const names = String(config.OtherPropName ?? '')
+    .split(';')
+    .filter(Boolean)
+  const values = String(config.OtherPropValue ?? '').split(';')
+  return names.map((name, index) => ({ name, value: Number(values[index] ?? 0) }))
+}
+
+let tiers: Map<number, number> | undefined
+/**
+ * A rolled line's tier: its level within the property family, ordered by range (Reborn shows the
+ * Iron Wok Hat's 30-37 Dodge as T3, the third Dodge row). ponytail: rank by range, not the
+ * original identify list level, which the data does not carry; capped at Reborn's T20.
+ */
+function propTier(propId: number) {
+  if (!tiers) {
+    const families = new Map<string, [number, { PropMinValue: number; PropMaxValue: number }][]>()
+    for (const [id, prop] of Object.entries(equipTables().identifyProps))
+      families.set(prop.PropName, [...(families.get(prop.PropName) ?? []), [Number(id), prop]])
+    tiers = new Map()
+    for (const rows of families.values()) {
+      rows.sort(
+        ([a, x], [b, y]) =>
+          x.PropMinValue - y.PropMinValue || x.PropMaxValue - y.PropMaxValue || a - b,
+      )
+      rows.forEach(([id], rank) => tiers!.set(id, Math.min(rank + 1, 20)))
+    }
+  }
+  return tiers.get(propId) ?? 1
+}
+
 /** A null durability column means full (or an item without durability). */
 export const durabilityOf = (row: Pick<ItemRow, 'durability'>, config: EquipConfig) =>
   row.durability ?? Math.max(config.MaxHardiness ?? 0, 1)
@@ -85,8 +123,23 @@ export function gearView(
     identifyCount: row.identifyCount,
     props: row.props.flatMap(({ propId, value }) => {
       const prop = tables.identifyProps[propId]
-      return prop ? [{ propId, name: prop.PropName, value }] : []
+      return prop
+        ? [
+            {
+              propId,
+              name: prop.PropName,
+              value,
+              min: prop.PropMinValue,
+              max: prop.PropMaxValue,
+              tier: propTier(propId),
+            },
+          ]
+        : []
     }),
+    level: config.UseLevel ?? 0,
+    equipType: String(item(row.itemId)?.EquipType ?? ''),
+    ...(config.EquipBaseType === 1 && { weaponType: weaponType(config.UsePopsinger) }),
+    special: innateProps(config),
     attack: enhancedAttack(config, row.enhanceLevel, tables.enhanceFactor),
     defense: config.Defense ?? 0,
     maxHp: enhancedMaxHp(config, row.enhanceLevel),

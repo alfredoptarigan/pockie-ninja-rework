@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createRandom } from '@pockie/game-core'
 import { monsterDrops } from './combat.js'
-import { rollLibDrops, shopGearState } from './gear.js'
+import { gearView, rollLibDrops, shopGearState } from './gear.js'
 
 const plain = { canIdentify: false, identifyCount: 0, identifyTimes: 0, props: [] }
 describe('refresh shop identify state (SetEquipIdentifyPropCount)', () => {
@@ -46,5 +46,42 @@ describe('withheld treasure scroll drops', () => {
     const drops = monsterDrops('n8000001')
     expect(drops.some((drop) => /^i15900[0-3]$/.test(drop.itemId))).toBe(false)
     expect(drops.length).toBeGreaterThan(0)
+  })
+})
+
+describe('gear view for the Reborn item tooltip', () => {
+  const row = (itemId: string, props: { propId: number; value: number }[] = []) => ({
+    itemId,
+    enhanceLevel: 0,
+    inscribeLevel: 0,
+    durability: null,
+    canIdentify: true,
+    identifyCount: props.length,
+    identifyTimes: 1,
+    props,
+  })
+  it('gives each refinement line its range and tier, like Reborn (Iron Wok Hat sample)', () => {
+    const view = gearView(
+      row('i220102', [
+        { propId: 103, value: 37 },
+        { propId: 83, value: 36 },
+        { propId: 161, value: 24 },
+      ]) as never,
+    )!
+    expect(view.props).toEqual([
+      { propId: 103, name: 'DodgeMulEquip', value: 37, min: 30, max: 37, tier: 3 },
+      { propId: 83, name: 'NeglectDefAttachEquip', value: 36, min: 33, max: 40, tier: 3 },
+      { propId: 161, name: 'MaxHPMulEquip', value: 24, min: 23, max: 29, tier: 1 },
+    ])
+    expect(view).toMatchObject({ level: 13, equipType: 'Hat', defense: 34, special: [] })
+  })
+  it('names the weapon type from the job mask and lists innate lines', () => {
+    expect(gearView(row('i250101') as never)).toMatchObject({
+      equipType: 'Weapon',
+      weaponType: 'Blunt',
+    })
+    expect(gearView(row('i286631') as never)!.special).toEqual([
+      { name: 'AbsAddAtkMulEquip', value: 50 },
+    ])
   })
 })

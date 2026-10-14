@@ -36,6 +36,10 @@ export interface GearProp {
   propId: number
   name: string
   value: number
+  /** The line's roll range and tier (its level within the property family, as Reborn shows it). */
+  min: number
+  max: number
+  tier: number
 }
 
 /**
@@ -54,6 +58,12 @@ export interface GearView {
   appraised: boolean
   identifyCount: number
   props: GearProp[]
+  /** UseLevel, EquipType ("Weapon", "Hat"...) and, for weapons, the job that can wield it. */
+  level: number
+  equipType: string
+  weaponType?: 'Sharp' | 'Blunt' | 'Fists' | 'Any'
+  /** Innate lines (OtherPropName / OtherPropValue): Reborn's SPECIAL ATTRIBUTES. */
+  special: { name: string; value: number }[]
   /** Attack and defence with the enhance level applied. */
   attack: { min: number; max: number }
   defense: number

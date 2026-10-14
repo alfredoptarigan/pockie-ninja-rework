@@ -55,6 +55,8 @@ export interface Character {
   nation: Nation
   clothing: number
   avatarId: number
+  /** The outfit's weapon class (UsePopsinger bits: 1 Blunt, 2 Sharp, 4 Fists). */
+  weaponClass: number
   level: number
   exp: number
   stone: number

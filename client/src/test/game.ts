@@ -8,6 +8,7 @@ export const character: Character = {
   nation: 0,
   clothing: 3,
   avatarId: 3,
+  weaponClass: 4,
   level: 1,
   exp: 5,
   stone: 100,
