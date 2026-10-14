@@ -4,6 +4,7 @@ import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import type { Random } from '@pockie/game-core'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { arenaPlayers, characters, inventoryItems } from '../../db/schema.js'
+import { BAG_CELLS } from '../../game/bag.js'
 import { playerFighter, playerFighterFrom } from '../../game/combat.js'
 import { wingBonuses } from '../../game/wings.js'
 import { wingRoutes } from './routes.js'
@@ -225,6 +226,19 @@ describe('POST /api/test/wings/collection/:itemId', () => {
     const again = await client.post('/api/test/wings/collection/i218000', {})
     expect(again.statusCode).toBe(409)
     expect(await held('i218021')).toBe(5)
+  })
+
+  it('refuses a repeat claim as already registered even with a full bag', async () => {
+    await giveWing('i218000')
+    await client.post('/api/test/wings/collection/i218000', {})
+    await db
+      .insert(inventoryItems)
+      .values(
+        Array.from({ length: BAG_CELLS }, () => ({ characterId, itemId: 'i160006', count: 1 })),
+      )
+    const again = await client.post('/api/test/wings/collection/i218000', {})
+    expect(again.statusCode).toBe(409)
+    expect(again.json().error.code).toBe('already_registered')
   })
 
   it('pays 10 for an aura, also when it is worn', async () => {

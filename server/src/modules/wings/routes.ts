@@ -203,6 +203,19 @@ export async function wingRoutes(
         .where(and(bagItemsWhere(character.id), eq(inventoryItems.itemId, itemId)))
         .limit(1)
       if (!owned) throw bad('no_item', 'Put that wing in your bag first.')
+      const alreadyRegistered = () =>
+        new HttpError(409, 'already_registered', 'That wing is already registered.')
+      // A repeat claim is refused as such, before the bag-room check (character row is locked).
+      const [done] = await tx
+        .select({ itemId: characterWingCollection.itemId })
+        .from(characterWingCollection)
+        .where(
+          and(
+            eq(characterWingCollection.characterId, character.id),
+            eq(characterWingCollection.itemId, itemId),
+          ),
+        )
+      if (done) throw alreadyRegistered()
       const reward = collectionReward(itemId)
       // Bound, so wings passed between ninjas cannot farm tradeable shards.
       const shards = Array.from({ length: reward }, () => ({
@@ -215,8 +228,7 @@ export async function wingRoutes(
         .values({ characterId: character.id, itemId })
         .onConflictDoNothing()
         .returning()
-      if (added.length === 0)
-        throw new HttpError(409, 'already_registered', 'That wing is already registered.')
+      if (added.length === 0) throw alreadyRegistered()
       await grantItems(tx, character.id, shards)
       return { reward, ...(await wingsView(tx, character.id)) }
     })
