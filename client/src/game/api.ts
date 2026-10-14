@@ -87,8 +87,10 @@ export function useAvailableQuests() {
   })
 }
 
-export function useInventory() {
+/** `enabled: false` waits (the chat box only needs the bag once a line links an item). */
+export function useInventory({ enabled = true } = {}) {
   return useQuery({
+    enabled,
     queryKey: gameKeys.inventory,
     queryFn: async () => (await api<{ items: InventoryItem[] }>('/api/game/inventory')).items,
   })

@@ -44,7 +44,14 @@ describe('Chat', () => {
     expect(log.querySelector('img, b')).toBeNull()
   })
 
-  it('keeps world and scene messages on their own tabs', async () => {
+  it("has Reborn's tabs in order with World active", () => {
+    renderChat()
+    const tabs = screen.getAllByRole('tab').map((tab) => tab.textContent)
+    expect(tabs).toEqual(['All', 'World', 'Village', 'Trade', 'System'])
+    expect(screen.getByRole('tab', { name: 'World' })).toHaveAttribute('aria-selected', 'true')
+  })
+
+  it('keeps world and village (scene) messages on their own tabs', async () => {
     renderChat()
     act(() => {
       socket.serverEmit('chat:message', message({ id: 'w', text: 'world news' }))
@@ -52,7 +59,7 @@ describe('Chat', () => {
     })
     expect(screen.queryByText('over here')).not.toBeInTheDocument()
 
-    await userEvent.click(screen.getByRole('tab', { name: 'Scene' }))
+    await userEvent.click(screen.getByRole('tab', { name: 'Village' }))
 
     expect(screen.getByText('over here')).toBeInTheDocument()
     expect(screen.queryByText('world news')).not.toBeInTheDocument()
@@ -79,19 +86,62 @@ describe('Chat', () => {
 
     const log = screen.getByRole('list', { name: 'All messages' })
     expect(log).toHaveTextContent('[World] Sasuke_1: world news')
-    expect(log).toHaveTextContent('[Scene] Sasuke_1: over here')
+    expect(log).toHaveTextContent('[Village] Sasuke_1: over here')
+  })
+
+  it('keeps Trade on its own tab, outside All like Reborn, and sends to it', async () => {
+    renderChat()
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
+    act(() => socket.serverEmit('chat:message', message({ channel: 'trade', text: 'WTS pills' })))
+
+    await userEvent.click(screen.getByRole('tab', { name: 'All' }))
+    expect(screen.getByRole('list', { name: 'All messages' })).not.toHaveTextContent('WTS pills')
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Trade' }))
+    expect(screen.getByRole('list', { name: 'Trade messages' })).toHaveTextContent(
+      '[Trade] Sasuke_1: WTS pills',
+    )
+    await userEvent.type(screen.getByLabelText('Message to trade chat'), 'WTB wings{Enter}')
+    expect(socket.sent).toEqual([{ channel: 'trade', text: 'WTB wings' }])
+  })
+
+  it('shows only system lines on the System tab', async () => {
+    renderChat()
+    act(() => {
+      socket.serverEmit('chat:message', message({ text: 'world news' }))
+      socket.serverEmit('notice', { kind: 'mail', mailId: 'm', category: 'player' })
+    })
+
+    await userEvent.click(screen.getByRole('tab', { name: 'System' }))
+
+    const log = screen.getByRole('list', { name: 'System messages' })
+    expect(log).toHaveTextContent('[System] You have new mail.')
+    expect(log).not.toHaveTextContent('world news')
+  })
+
+  it("counts toward Reborn's 250 and turns the counter red near the end", async () => {
+    renderChat()
+    const input = screen.getByLabelText('Message to world chat')
+    expect(screen.getByText('0/250')).toBeInTheDocument()
+
+    await userEvent.click(input)
+    await userEvent.paste('x'.repeat(230))
+
+    expect(screen.getByText('230/250')).toHaveClass('text-[#ff6b6b]')
   })
 
   it('sends on the channel picked by the tab or the channel select', async () => {
     renderChat()
     socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
 
-    await userEvent.click(screen.getByRole('tab', { name: 'Scene' }))
+    await userEvent.click(screen.getByRole('tab', { name: 'Village' }))
     expect(screen.getByLabelText('Send to')).toHaveValue('scene')
-    await userEvent.type(screen.getByLabelText('Message to scene chat'), 'near{Enter}')
+    await userEvent.type(screen.getByLabelText('Message to village chat'), 'near{Enter}')
 
     await userEvent.click(screen.getByRole('tab', { name: 'All' }))
     await userEvent.selectOptions(screen.getByLabelText('Send to'), 'world')
+    // Like Reborn, choosing a channel also switches the tab.
+    expect(screen.getByRole('tab', { name: 'World' })).toHaveAttribute('aria-selected', 'true')
     await userEvent.type(screen.getByLabelText('Message to world chat'), 'far{Enter}')
 
     expect(socket.sent).toEqual([
@@ -247,17 +297,17 @@ describe('Chat whispers, team and reports', () => {
     expect(screen.getByLabelText('Message to world chat')).toHaveFocus()
   })
 
-  it('explains the whisper syntax on the Whisper tab', async () => {
+  it('explains the whisper syntax when /Name has no message', async () => {
     renderChat()
-    await userEvent.click(screen.getByRole('tab', { name: 'Whisper' }))
-    await userEvent.type(screen.getByLabelText('Whisper (/Name message)'), 'hello{Enter}')
+    await userEvent.type(screen.getByLabelText('Message to world chat'), '/Sasuke_1{Enter}')
 
     expect(socket.sent).toEqual([])
     expect(screen.getByRole('alert')).toHaveTextContent('To whisper, type /Name and your message.')
   })
 
-  it('shows whispers both ways on the Whisper tab and starts a reply from a name', async () => {
+  it('opens a PM tab per partner with both directions, and replies from it', async () => {
     renderChat()
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
     act(() => {
       socket.serverEmit('chat:message', message({ id: 'w', text: 'world news' }))
       socket.serverEmit(
@@ -269,26 +319,56 @@ describe('Chat whispers, team and reports', () => {
         message({ id: 'out', channel: 'whisper', sender: me, to: sasuke, text: 'yes?' }),
       )
     })
-    await userEvent.click(screen.getByRole('tab', { name: 'Whisper' }))
+    await userEvent.click(screen.getByRole('tab', { name: 'Sasuke_1' }))
 
-    const log = screen.getByRole('list', { name: 'Whisper messages' })
+    const log = screen.getByRole('list', { name: 'Sasuke_1 messages' })
     expect(log).not.toHaveTextContent('world news')
     expect(log).toHaveTextContent('[Whisper] From Sasuke_1: psst')
     expect(log).toHaveTextContent('[Whisper] To Sasuke_1: yes?')
 
-    await userEvent.click(within(log).getAllByRole('button', { name: 'Whisper to Sasuke_1' })[0]!)
-    expect(screen.getByLabelText('Whisper (/Name message)')).toHaveValue('/Sasuke_1 ')
+    // The PM tab whispers to its partner without the /Name prefix.
+    await userEvent.type(screen.getByLabelText('Message to Sasuke_1'), 'on my way{Enter}')
+    expect(socket.sent).toEqual([{ channel: 'whisper', to: 'Sasuke_1', text: 'on my way' }])
+    expect(screen.getByLabelText('Message to Sasuke_1')).toHaveValue('')
   })
 
-  it('has a Team tab and channel only in a team', async () => {
+  it('closes a PM tab with its x and reopens it on the next whisper', async () => {
+    renderChat()
+    const whisperIn = (id: string) =>
+      act(() =>
+        socket.serverEmit(
+          'chat:message',
+          message({ id, channel: 'whisper', sender: sasuke, to: me, text: id }),
+        ),
+      )
+    whisperIn('first')
+    await userEvent.click(screen.getByRole('tab', { name: 'Sasuke_1' }))
+
+    await userEvent.click(screen.getByRole('button', { name: 'Close Sasuke_1 tab' }))
+
+    expect(screen.queryByRole('tab', { name: 'Sasuke_1' })).not.toBeInTheDocument()
+    expect(screen.getByRole('tab', { name: 'World' })).toHaveAttribute('aria-selected', 'true')
+    whisperIn('second')
+    expect(screen.getByRole('tab', { name: 'Sasuke_1' })).toBeInTheDocument()
+  })
+
+  it('has a Party tab (the team channel) after Village only in a team', async () => {
     renderWithProviders(<TeamToggle />)
     act(() => socket.serverEmit('connect'))
-    expect(screen.queryByRole('tab', { name: 'Team' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('tab', { name: 'Party' })).not.toBeInTheDocument()
 
     await userEvent.click(screen.getByRole('button', { name: 'Join a team' }))
+    expect(screen.getAllByRole('tab').map((tab) => tab.textContent)).toEqual([
+      'All',
+      'World',
+      'Village',
+      'Party',
+      'Trade',
+      'System',
+    ])
     socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
-    await userEvent.click(screen.getByRole('tab', { name: 'Team' }))
-    await userEvent.type(screen.getByLabelText('Message to team chat'), 'ready{Enter}')
+    await userEvent.click(screen.getByRole('tab', { name: 'Party' }))
+    await userEvent.type(screen.getByLabelText('Message to party chat'), 'ready{Enter}')
     expect(socket.sent).toEqual([{ channel: 'team', text: 'ready' }])
   })
 
@@ -339,6 +419,35 @@ describe('Chat whispers, team and reports', () => {
     expect(log).toHaveTextContent('Sasuke_1 is now online.')
     expect(within(log).getAllByRole('listitem')).toHaveLength(4)
     expect(notices.map((n) => n.kind)).toEqual(['mail', 'teamPrompt', 'teamChanged', 'friendAdded'])
+  })
+})
+
+describe('Chat item links', () => {
+  const dogsmasher = {
+    id: 'i1',
+    itemId: 'i250101',
+    count: 1,
+    bound: false,
+    equippedSlot: null,
+    nameKey: 'lg_Equip_Blunt1',
+  }
+
+  it('colours [Name] by refinement lines when the item is in your bag, plain text otherwise', async () => {
+    mockApi({
+      'GET /api/game/inventory': () => json({ items: [dogsmasher] }),
+      'GET /api/game/forge/gear': () =>
+        json({ gear: { i1: { appraised: true, props: [{}, {}] } } }),
+    })
+    renderChat()
+    act(() => socket.serverEmit('chat:message', message({ text: 'WTS [Dogsmasher] or [Nothing]' })))
+
+    const link = await screen.findByText('[Dogsmasher]', { selector: '.chat-item-link' })
+    // Two lines: Reborn's blue.
+    await waitFor(() => expect(link).toHaveStyle({ color: 'rgb(0, 112, 221)' }))
+    expect(screen.queryByText('[Nothing]', { selector: '.chat-item-link' })).toBeNull()
+    expect(screen.getByRole('list', { name: 'World messages' })).toHaveTextContent(
+      'Sasuke_1: WTS [Dogsmasher] or [Nothing]',
+    )
   })
 })
 

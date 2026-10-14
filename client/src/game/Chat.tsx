@@ -13,11 +13,14 @@ import {
   type ScenePlayer,
 } from '@pockie/shared'
 import { useQueryClient, type QueryClient } from '@tanstack/react-query'
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react'
 import { createGameSocket, type GameSocket } from '../lib/socket'
-import { gameKeys } from './api'
+import { gameKeys, useInventory } from './api'
+import { useGear } from './forge'
+import { TIER_COLORS } from './forge/gear'
 import { GameButton, Notice as NoticeBox, Panel } from './skin'
 import { onItemLinkRequest, onWhisperRequest } from './social/requests'
+import { plainText } from './text'
 
 const MAX_MESSAGES = 100
 
@@ -187,31 +190,67 @@ function PlayerList({ players, selfId }: { players: ScenePlayer[]; selfId: strin
   )
 }
 
-/** Channels the select sends to; whispers go by `/Name message`. */
+/** Channels the select sends to; whispers go by `/Name message` or a PM tab. */
 type SendChannel = Exclude<ChatChannel, 'whisper'>
-type ChatTab = 'all' | ChatChannel
+/** Reborn's tabs; `pm:Name` is one private-message tab per whisper partner. */
+type ChatTab = 'all' | SendChannel | 'system' | `pm:${string}`
+interface TabSpec {
+  id: ChatTab
+  title: string
+  /** PM tabs carry an x that closes them. */
+  closable?: boolean
+}
 
 const CHANNEL_TITLES: Record<ChatChannel | 'system', string> = {
   world: 'World',
-  scene: 'Scene',
-  team: 'Team',
+  scene: 'Village',
+  team: 'Party',
+  trade: 'Trade',
   whisper: 'Whisper',
   system: 'System',
 }
-/** "All" merges every channel; World, Scene and Team also pick the channel the input sends to. */
-const tabsFor = (inTeam: boolean): { id: ChatTab; title: string }[] => [
+/** Reborn's [Channel] tag colours; the rest keep the default. */
+const TAG_COLORS: Partial<Record<ChatChannel | 'system', string>> = {
+  world: '#ffffff',
+  team: '#90ee90',
+  trade: '#ffd700',
+  system: '#ffffff',
+}
+const isSendChannel = (tab: ChatTab): tab is SendChannel =>
+  tab === 'world' || tab === 'scene' || tab === 'team' || tab === 'trade'
+
+/** Reborn's order: All, World, Village, Party (in a team), Trade, System, then the PM tabs. */
+const tabsFor = (inTeam: boolean, partners: string[]): TabSpec[] => [
   { id: 'all', title: 'All' },
   { id: 'world', title: 'World' },
-  { id: 'scene', title: 'Scene' },
-  ...(inTeam ? [{ id: 'team' as const, title: 'Team' }] : []),
-  { id: 'whisper', title: 'Whisper' },
+  { id: 'scene', title: 'Village' },
+  ...(inTeam ? [{ id: 'team' as const, title: 'Party' }] : []),
+  { id: 'trade', title: 'Trade' },
+  { id: 'system', title: 'System' },
+  ...partners.map((name) => ({ id: `pm:${name}` as const, title: name, closable: true })),
 ]
+
+/** Whether a line belongs on a tab. All skips Trade, like Reborn; system lines show everywhere. */
+function belongsOn(line: Line, tab: ChatTab, selfId: string) {
+  if (tab === 'system') return line.channel === 'system'
+  if (line.channel === 'system') return true
+  if (tab === 'all') return line.channel !== 'trade'
+  if (tab.startsWith('pm:'))
+    return line.channel === 'whisper' && partnerOf(line, selfId) === tab.slice(3)
+  return line.channel === tab
+}
+
+/** The other player of a whisper. */
+const partnerOf = (line: ChatMessage, selfId: string) =>
+  line.sender.characterId === selfId ? line.to?.name : line.sender.name
 
 /** `/Name message`, like the original chat box. */
 const WHISPER_SYNTAX = /^\/(\S+)\s+(\S[\s\S]*)$/
 const WHISPER_HINT = 'To whisper, type /Name and your message.'
 /** Room for "/Name " (a 12-character name) on top of the message itself. */
 const WHISPER_PREFIX_LENGTH = 14
+/** Reborn's counter turns red from 230 of 250. */
+const COUNTER_WARN = CHAT_MAX_LENGTH - 20
 
 const formatTime = (sentAt: string) =>
   new Date(sentAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
@@ -221,37 +260,110 @@ function ChatTabs({
   tabs,
   active,
   onChange,
+  onClose,
   panelId,
 }: {
-  tabs: { id: ChatTab; title: string }[]
+  tabs: TabSpec[]
   active: ChatTab
   onChange: (tab: ChatTab) => void
+  onClose: (name: string) => void
   panelId: string
 }) {
   return (
-    <div role="tablist" aria-label="Chat channel" className="absolute top-[-20px] left-[4px] flex">
+    <div
+      role="tablist"
+      aria-label="Chat channel"
+      className="absolute top-[-20px] left-[4px] flex max-w-[calc(100%-140px)] overflow-x-auto [scrollbar-width:none]"
+    >
       {tabs.map((tab, index) => (
-        <button
-          key={tab.id}
-          type="button"
-          role="tab"
-          aria-selected={tab.id === active}
-          aria-controls={panelId}
-          tabIndex={tab.id === active ? 0 : -1}
-          onClick={() => onChange(tab.id)}
-          onKeyDown={(event) => {
-            const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
-            if (!step) return
-            const next = (index + step + tabs.length) % tabs.length
-            onChange(tabs[next]!.id)
-            event.currentTarget.parentElement?.querySelectorAll('button')[next]?.focus()
-          }}
-          className="game-chat-tab h-[23px] w-[60px] font-game text-base leading-none"
-        >
-          {tab.title}
-        </button>
+        <div key={tab.id} className="relative shrink-0">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab.id === active}
+            aria-controls={panelId}
+            tabIndex={tab.id === active ? 0 : -1}
+            onClick={() => onChange(tab.id)}
+            onKeyDown={(event) => {
+              const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+              if (!step) return
+              const next = (index + step + tabs.length) % tabs.length
+              onChange(tabs[next]!.id)
+              const list = event.currentTarget.closest('[role="tablist"]')
+              list?.querySelectorAll<HTMLElement>('[role="tab"]')[next]?.focus()
+            }}
+            className="game-chat-tab h-[23px] w-[60px] font-game text-base leading-none"
+          >
+            {tab.closable ? (
+              <span className="inline-block max-w-[50px] truncate pr-2 align-middle text-xs">
+                {tab.title}
+              </span>
+            ) : (
+              tab.title
+            )}
+          </button>
+          {tab.closable && (
+            <button
+              type="button"
+              aria-label={`Close ${tab.title} tab`}
+              onClick={() => onClose(tab.title)}
+              className="absolute top-0.5 right-1 text-[11px] leading-none text-white/70 hover:text-white"
+            >
+              ×
+            </button>
+          )}
+        </div>
       ))}
     </div>
+  )
+}
+
+/** "[Name]" of an item in the player's own bag, keyed to its refinement-tier colour. */
+type ItemLinks = ReadonlyMap<string, string>
+const ITEM_LINK = /(\[[^[\]]+\])/
+const NO_LINKS: ItemLinks = new Map()
+
+/**
+ * Reborn's chat item links: "[Name]" (what Link in Chat inserts) matching an item in the bag is
+ * drawn in that item's tier colour. The bag loads only once some line has brackets.
+ */
+function useItemLinks(lines: Line[]): ItemLinks {
+  const enabled = lines.some((line) => line.channel !== 'system' && ITEM_LINK.test(line.text))
+  const items = useInventory({ enabled }).data
+  const gear = useGear({ enabled }).data
+  return useMemo(() => {
+    if (!items) return NO_LINKS
+    const best = new Map<string, number>()
+    for (const item of items) {
+      const name = plainText(item.nameKey)
+      const forged = gear?.[item.id]
+      const lines = forged?.appraised ? forged.props.length : 0
+      if (name) best.set(`[${name}]`, Math.max(lines, best.get(`[${name}]`) ?? 0))
+    }
+    return new Map([...best].map(([name, lines]) => [name, TIER_COLORS[Math.min(lines, 4)]!]))
+  }, [items, gear])
+}
+
+/** Plain text (React escapes it; never HTML), with bag item names drawn as links. */
+function ChatText({ text, links }: { text: string; links: ItemLinks }) {
+  if (links.size === 0) return <span>{text}</span>
+  return (
+    <span>
+      {text.split(ITEM_LINK).map((part, index) => {
+        const color = links.get(part)
+        return color ? (
+          <span
+            key={index}
+            className="chat-item-link rounded-sm bg-black/40 px-0.5 font-bold hover:underline"
+            style={{ color }}
+          >
+            {part}
+          </span>
+        ) : (
+          part
+        )
+      })}
+    </span>
   )
 }
 
@@ -274,11 +386,13 @@ function Name({ name, onWhisper }: { name: string; onWhisper?: (name: string) =>
 function ChatLine({
   line,
   selfId,
+  links,
   onWhisper,
   onReport,
 }: {
   line: Line
   selfId: string
+  links: ItemLinks
   onWhisper: (name: string) => void
   onReport?: (message: ChatMessage) => void
 }) {
@@ -288,7 +402,10 @@ function ChatLine({
       <time dateTime={line.sentAt} className="text-[11px] text-[#ddd]/40">
         {formatTime(line.sentAt)}
       </time>{' '}
-      <span className="text-[13px] font-medium text-white/85">
+      <span
+        className="text-[13px] font-medium text-white/85"
+        style={{ color: TAG_COLORS[line.channel] }}
+      >
         [{CHANNEL_TITLES[line.channel]}]
       </span>{' '}
       {line.channel !== 'system' && (
@@ -302,8 +419,11 @@ function ChatLine({
           <span className="text-[#ddd]/45">:</span>{' '}
         </>
       )}
-      {/* Plain text only: React escapes it; never render chat as HTML. */}
-      <span>{line.text}</span>{' '}
+      {line.channel === 'system' ? (
+        <span>{line.text}</span>
+      ) : (
+        <ChatText text={line.text} links={links} />
+      )}{' '}
       {line.channel !== 'system' && !fromSelf && onReport && (
         <button
           type="button"
@@ -330,7 +450,8 @@ function ChannelSelect({
   inTeam: boolean
   onChange: (channel: SendChannel) => void
 }) {
-  const channels: SendChannel[] = inTeam ? ['world', 'scene', 'team'] : ['world', 'scene']
+  // Reborn's order: World, Village, Trade, then Party in a team.
+  const channels: SendChannel[] = ['world', 'scene', 'trade', ...(inTeam ? ['team' as const] : [])]
   return (
     <div className="relative">
       <label htmlFor={id} className="sr-only">
@@ -386,23 +507,38 @@ export function ChatBox({
   const [sendError, setSendError] = useState<string | null>(null)
   const [sending, setSending] = useState(false)
   const [reported, setReported] = useState<ReadonlySet<string>>(new Set())
+  /** Closed PM tabs: partner name -> their latest whisper when closed (a newer one reopens it). */
+  const [closedPms, setClosedPms] = useState<Readonly<Record<string, string>>>({})
   const ids = useId()
   const logRef = useRef<HTMLOListElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  // Leaving the team falls back to World.
-  const tab = chosenTab === 'team' && !inTeam ? 'world' : chosenTab
+  const links = useItemLinks(lines)
+  // Latest whisper per partner, in order of the first one.
+  const latestPm = new Map<string, string>()
+  for (const line of lines) {
+    const partner = line.channel === 'whisper' ? partnerOf(line, selfId) : undefined
+    if (partner) latestPm.set(partner, line.id)
+  }
+  const partners = [...latestPm].filter(([name, id]) => closedPms[name] !== id).map(([n]) => n)
+  const tabs = tabsFor(inTeam, partners)
+  // Leaving the team (or a closed PM tab) falls back to World.
+  const tab = tabs.some((t) => t.id === chosenTab) ? chosenTab : 'world'
   const channel = chosenChannel === 'team' && !inTeam ? 'world' : chosenChannel
-  const tabs = tabsFor(inTeam)
-  const shown = lines.filter((l) => tab === 'all' || l.channel === tab || l.channel === 'system')
+  const pmPartner = tab.startsWith('pm:') ? tab.slice(3) : null
+  const shown = lines.filter((line) => belongsOn(line, tab, selfId))
   const tabTitle = tabs.find((t) => t.id === tab)!.title
 
   useEffect(() => {
     logRef.current?.lastElementChild?.scrollIntoView?.({ block: 'nearest' })
   }, [shown.length])
 
-  const onTab = (next: ChatTab) => {
+  const pickTab = (next: ChatTab) => {
     setTab(next)
-    if (next !== 'all' && next !== 'whisper') setChannel(next)
+    if (isSendChannel(next)) setChannel(next)
+  }
+  const closePm = (name: string) => {
+    setClosedPms((closed) => ({ ...closed, [name]: latestPm.get(name) ?? '' }))
+    if (tab === `pm:${name}`) setTab('world')
   }
 
   const startWhisper = (name: string) => {
@@ -437,19 +573,19 @@ export function ChatBox({
     event.preventDefault()
     if (!text.trim()) return
     const whisper = WHISPER_SYNTAX.exec(text.trim())
-    if (!whisper && (tab === 'whisper' || text.trim().startsWith('/'))) {
-      return setSendError(WHISPER_HINT)
-    }
+    if (!whisper && text.trim().startsWith('/')) return setSendError(WHISPER_HINT)
     const input: ChatSendInput = whisper
       ? { channel: 'whisper', to: whisper[1]!, text: whisper[2]! }
-      : { channel, text }
+      : pmPartner
+        ? { channel: 'whisper', to: pmPartner, text }
+        : { channel, text }
     setSendError(null)
     // Set before emitting: an ack that arrives at once must still clear it.
     setSending(true)
     const sent = send(input, (ack) => {
       setSending(false)
-      // After a whisper the input keeps "/Name " for a quick follow-up.
-      if (ack.ok) setText(input.channel === 'whisper' ? `/${input.to} ` : '')
+      // After a /Name whisper the input keeps "/Name " for a quick follow-up.
+      if (ack.ok) setText(whisper ? `/${whisper[1]} ` : '')
       else setSendError(ack.error.message)
     })
     if (!sent) setSending(false)
@@ -461,7 +597,13 @@ export function ChatBox({
       className="pointer-events-auto absolute bottom-[2px] left-[10px] h-[300px] w-[500px] font-game"
     >
       {showPlayers && <PlayerList players={players} selfId={selfId} />}
-      <ChatTabs tabs={tabs} active={tab} onChange={onTab} panelId={`${ids}-log`} />
+      <ChatTabs
+        tabs={tabs}
+        active={tab}
+        onChange={pickTab}
+        onClose={closePm}
+        panelId={`${ids}-log`}
+      />
       <div className="absolute top-[-22px] right-0 flex items-center gap-1">
         {/* On the skin's dark HUD plate: plain text was unreadable over bright scene pictures. */}
         <span
@@ -485,6 +627,7 @@ export function ChatBox({
               key={line.id}
               line={line}
               selfId={selfId}
+              links={links}
               onWhisper={startWhisper}
               onReport={reported.has(line.id) ? undefined : onReport}
             />
@@ -501,31 +644,29 @@ export function ChatBox({
         onSubmit={onSubmit}
         className="absolute inset-x-[5px] top-[270px] flex h-[26px] items-center gap-[5px]"
       >
-        <ChannelSelect
-          id={`${ids}-channel`}
-          value={channel}
-          inTeam={inTeam}
-          onChange={setChannel}
-        />
+        <ChannelSelect id={`${ids}-channel`} value={channel} inTeam={inTeam} onChange={pickTab} />
         <div className="relative">
           <label htmlFor={`${ids}-input`} className="sr-only">
-            {tab === 'whisper' ? 'Whisper (/Name message)' : `Message to ${channel} chat`}
+            {pmPartner
+              ? `Message to ${pmPartner}`
+              : `Message to ${CHANNEL_TITLES[channel].toLowerCase()} chat`}
           </label>
           <input
             ref={inputRef}
             id={`${ids}-input`}
             value={text}
             maxLength={CHAT_MAX_LENGTH + WHISPER_PREFIX_LENGTH}
-            placeholder={tab === 'whisper' ? '/Name message' : undefined}
             onChange={(event) => setText(event.target.value)}
             autoComplete="off"
             className="h-[26px] w-[327px] rounded-[3px] border border-white/20 bg-black/40 pr-14 pl-2 text-[13px] text-white"
           />
           <span
             aria-hidden
-            className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 text-[11px] text-white/50"
+            className={`pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 text-[11px] ${
+              text.length >= COUNTER_WARN ? 'text-[#ff6b6b]' : 'text-white/50'
+            }`}
           >
-            {text.length}/{CHAT_MAX_LENGTH}
+            {`${text.length}/${CHAT_MAX_LENGTH}`}
           </span>
         </div>
         <GameButton

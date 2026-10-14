@@ -256,7 +256,8 @@ export function attachRealtime(app: FastifyInstance, { db, env }: { db: Db; env:
     }
     if (input.channel === 'whisper') return whisper(message, input.to)
     if (input.channel === 'team') return sendTeam(message)
-    const target = input.channel === 'world' ? io : io.to(sceneRoom(presence.sceneId))
+    // World and Trade reach everyone; Village (scene) only the sender's scene.
+    const target = input.channel === 'scene' ? io.to(sceneRoom(presence.sceneId)) : io
     target.emit(REALTIME_EVENTS.chatMessage, message)
     // Weekly Rewards "global chat": counted after delivery, off the reply path, so a busy
     // character row never delays chat (the chat limiter bounds these writes).

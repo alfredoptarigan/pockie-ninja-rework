@@ -5,7 +5,7 @@ import type { Nation } from './game.js'
 export const REALTIME_EVENTS = {
   /** Server → client: the full player list of the socket's current scene. */
   scenePlayers: 'scene:players',
-  /** Server → client: a chat message on the world or scene channel. */
+  /** Server → client: a chat message (world, scene, team, trade or a whisper). */
   chatMessage: 'chat:message',
   /** Client → server: send a chat message or a whisper; answered with a ChatAck. */
   chatSend: 'chat:send',
@@ -17,9 +17,13 @@ export const REALTIME_EVENTS = {
   notice: 'notice',
 } as const
 
-export const CHAT_MAX_LENGTH = 200
-/** `team`: the sender's team only (channel 4). `whisper`: one online player, by ninja name. */
-export const CHAT_CHANNELS = ['world', 'scene', 'team', 'whisper'] as const
+/** Reborn's chat counter reads "n/250". */
+export const CHAT_MAX_LENGTH = 250
+/**
+ * `team`: the sender's team only (channel 4). `trade`: Reborn's Trade channel, sent to everyone
+ * like `world`. `whisper`: one online player, by ninja name.
+ */
+export const CHAT_CHANNELS = ['world', 'scene', 'team', 'trade', 'whisper'] as const
 export type ChatChannel = (typeof CHAT_CHANNELS)[number]
 /** Level needed to whisper (decision: same gate as player mail). */
 export const WHISPER_MIN_LEVEL = 10
@@ -42,7 +46,7 @@ export const chatTextSchema = z
   )
 
 export const chatSendSchema = z.discriminatedUnion('channel', [
-  z.object({ channel: z.enum(['world', 'scene', 'team']), text: chatTextSchema }),
+  z.object({ channel: z.enum(['world', 'scene', 'team', 'trade']), text: chatTextSchema }),
   // Any string: an invalid or unknown name answers "The player is offline." like the original.
   z.object({ channel: z.literal('whisper'), to: z.string().trim().max(32), text: chatTextSchema }),
 ])

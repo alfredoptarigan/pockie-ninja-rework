@@ -68,4 +68,10 @@ describe('chatSendSchema', () => {
     expect(chatSendSchema.safeParse({ channel: 'world', text: long }).success).toBe(false)
     expect(chatSendSchema.safeParse({ channel: 'guild', text: 'hi' }).success).toBe(false)
   })
+
+  it("allows Reborn's 250 characters and the Trade channel", () => {
+    expect(CHAT_MAX_LENGTH).toBe(250)
+    const full = 'x'.repeat(250)
+    expect(chatSendSchema.safeParse({ channel: 'trade', text: full }).success).toBe(true)
+  })
 })

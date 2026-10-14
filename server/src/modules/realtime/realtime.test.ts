@@ -390,6 +390,18 @@ describe('chat', () => {
     expect(b.chat[0]).not.toHaveProperty('sceneId')
   })
 
+  it('delivers trade chat to everyone, like world chat', async () => {
+    const { one, a, b } = await villagers()
+    await one.post('/api/game/travel', { sceneId: FIELD })
+    await vi.waitFor(() => expect(namesIn(a, FIELD)).toEqual(['Ninja_01']))
+
+    const ack = await send(a, { channel: 'trade', text: 'WTS [Iron Sword]' })
+
+    expect(ack.ok && ack.message.channel).toBe('trade')
+    await vi.waitFor(() => expect(b.chat.map((m) => m.text)).toEqual(['WTS [Iron Sword]']))
+    expect(b.chat[0]).not.toHaveProperty('sceneId')
+  })
+
   it('counts world chat, not scene chat, for Weekly Rewards', async () => {
     const { a } = await villagers()
     const counters = async () => (await db.select().from(characterWeeklyRewards))[0]?.counters ?? {}

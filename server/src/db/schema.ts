@@ -768,7 +768,7 @@ export const reports = pgTable(
     reportedId: uuid('reported_id').references(() => characters.id, { onDelete: 'set null' }),
     kind: reportKind('kind').notNull(),
     mailId: uuid('mail_id').references(() => mails.id, { onDelete: 'set null' }),
-    // Chat channel of a reported chat line (world, scene, team); null for whispers and mail.
+    // Chat channel of a reported chat line (world, scene, team, trade); null for whispers and mail.
     channel: text('channel'),
     text: text('text').notNull(),
     createdAt: createdAt(),

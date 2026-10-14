@@ -17,8 +17,9 @@ export function useForgeInfo() {
 }
 
 /** Forge state of every equipment row, keyed by inventory row id. */
-export function useGear() {
+export function useGear({ enabled = true } = {}) {
   return useQuery({
+    enabled,
     queryKey: forgeKeys.gear,
     queryFn: async () =>
       (await api<{ gear: Record<string, GearView> }>('/api/game/forge/gear')).gear,

@@ -62,9 +62,9 @@ test('friends whisper and mail, and a block refuses both', async ({ browser }) =
     await input.pressSequentially('Meet me in Demon City')
     await chat(ami.page).getByRole('button', { name: 'Send' }).click()
 
-    // Assert: Bo reads it on the Whisper tab.
-    await chat(bo.page).getByRole('tab', { name: 'Whisper' }).click()
-    await expect(chat(bo.page).getByRole('list', { name: 'Whisper messages' })).toContainText(
+    // Assert: Bo reads it on the PM tab Reborn opens for Ami.
+    await chat(bo.page).getByRole('tab', { name: ami.name }).click()
+    await expect(chat(bo.page).getByRole('list', { name: `${ami.name} messages` })).toContainText(
       `From ${ami.name}: Meet me in Demon City`,
     )
 
@@ -104,10 +104,10 @@ test('friends whisper and mail, and a block refuses both', async ({ browser }) =
     await amiMail.getByLabel('To').fill(bo.name)
     await writeLetter(amiMail, 'Sorry', 'Can we talk?')
     await expect(amiMail).toContainText('You cannot send mail to this ninja.')
-    // Bo's chat is still on the Whisper tab: the refused whisper never arrived.
-    await expect(chat(bo.page).getByRole('list', { name: 'Whisper messages' })).not.toContainText(
-      'Still there?',
-    )
+    // Bo's chat is still on Ami's PM tab: the refused whisper never arrived.
+    await expect(
+      chat(bo.page).getByRole('list', { name: `${ami.name} messages` }),
+    ).not.toContainText('Still there?')
   } finally {
     await Promise.all(players.map(({ context }) => context.close()))
   }
