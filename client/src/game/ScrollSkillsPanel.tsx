@@ -60,7 +60,7 @@ export function ScrollSkillsPanel({
                         aria-label={`Remove ${name} from tree ${tree + 1}`}
                         onClick={() => onSlot(tree, slotted.slot, null)}
                       >
-                        Tree {tree + 1}: remove
+                        Remove from tree {tree + 1}
                       </GameButton>
                     )
                   const empty = slots.find((slot) => slot.skillId === null)
@@ -71,10 +71,10 @@ export function ScrollSkillsPanel({
                       key={tree}
                       small
                       disabled={busy || !empty || full}
-                      aria-label={`Slot ${name} in tree ${tree + 1}`}
+                      aria-label={`Add ${name} to tree ${tree + 1}`}
                       onClick={() => empty && onSlot(tree, empty.slot, scroll.skillId)}
                     >
-                      Tree {tree + 1}: slot
+                      Add to tree {tree + 1}
                     </GameButton>
                   )
                 })}

@@ -9,9 +9,9 @@ import { rewardCountdown } from './timer'
 const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 const DICE_BUFFS: Record<number, string> = {
   80101: 'Blessing',
-  80102: 'Great blessing',
+  80102: 'Great Blessing',
   80201: 'Curse',
-  80202: 'Great curse',
+  80202: 'Great Curse',
 }
 
 function useNow() {
@@ -34,8 +34,8 @@ export function NinjaDiaryWindow({ onClose }: { onClose: () => void }) {
       <Tabs
         label="Ninja Diary"
         tabs={[
-          { id: 'login', title: 'Login' },
-          { id: 'weekly', title: 'Weekly' },
+          { id: 'login', title: 'Daily Login' },
+          { id: 'weekly', title: 'Weekly Rewards' },
         ]}
         active={tab}
         onChange={setTab}
@@ -48,8 +48,8 @@ export function NinjaDiaryWindow({ onClose }: { onClose: () => void }) {
           (tab === 'login' ? (
             <>
               <p>
-                Claim one reward each day. The seven-day cycle advances when you claim. Daily reset:
-                00:00 UTC.
+                Claim one reward a day. The 7-day cycle moves forward each time you claim. Resets
+                daily at 00:00 UTC.
               </p>
               <ul aria-label="Login rewards" className="grid grid-cols-2 gap-2">
                 {events.data.login.rewards.map((entry) => (
@@ -72,7 +72,7 @@ export function NinjaDiaryWindow({ onClose }: { onClose: () => void }) {
                 ))}
               </ul>
               <div className="game-card p-2">
-                <QuestRewardList title="Daily bonus" rewards={events.data.login.bonus} />
+                <QuestRewardList title="Login bonus" rewards={events.data.login.bonus} />
                 <GameButton
                   disabled={action.isPending || !events.data.login.canClaimBonus}
                   onClick={() => action.mutate('login/bonus')}
@@ -105,7 +105,7 @@ function WeeklyRewards({
   const { weekly } = view
   return (
     <>
-      <p>Activity points: {weekly.points}. Week starts Monday at 00:00 UTC.</p>
+      <p>Activity points: {weekly.points}. Resets every Monday at 00:00 UTC.</p>
       <ul aria-label="Weekly activities" className="game-card grid grid-cols-2 gap-1 p-2">
         {weekly.activities.map((activity) => (
           <li key={activity.id}>
@@ -129,7 +129,8 @@ function WeeklyRewards({
         ))}
       </ul>
       <p>
-        At 50 points, claim today's weekday reward. Each reward is available only on its weekday.
+        Earn 50 points to claim the reward for today's weekday. Each reward is available only on its
+        own weekday.
       </p>
       <ul aria-label="Weekday rewards" className="grid grid-cols-2 gap-2">
         {weekly.weekdays.map((entry) => (
@@ -147,7 +148,7 @@ function WeeklyRewards({
         ))}
       </ul>
       <div className="game-card p-2">
-        <QuestRewardList title="Seven-weekday bonus" rewards={weekly.bonus} />
+        <QuestRewardList title="Weekly bonus" rewards={weekly.bonus} />
         <GameButton disabled={busy || !weekly.canClaimBonus} onClick={() => claim('weekly/bonus')}>
           Claim weekly bonus
         </GameButton>
@@ -168,8 +169,8 @@ export function DiceOfFateWindow({ onClose }: { onClose: () => void }) {
         {error && <Notice tone="error">{errorMessage(error)}</Notice>}
         {dice && (
           <>
-            <p>Rolls left today: {dice.rollsLeft}. Daily reset: 00:00 UTC.</p>
-            <p>Six fair dice decide your fate. Lucky and unlucky dice cancel each other.</p>
+            <p>Rolls left today: {dice.rollsLeft}. Resets daily at 00:00 UTC.</p>
+            <p>Six fair dice decide your fate. Lucky and unlucky dice cancel each other out.</p>
             {dice.lastRoll && (
               <div className="game-card p-2" role="status">
                 <p>
@@ -203,7 +204,7 @@ export function DiceOfFateWindow({ onClose }: { onClose: () => void }) {
               }
               onClick={() => action.mutate('dice/replenish')}
             >
-              Replenish ({dice.replenishCost.toLocaleString('en-US')} Stone)
+              Replenish rolls ({dice.replenishCost.toLocaleString('en-US')} Stone)
             </GameButton>
             <p>
               Replenishments today: {dice.bought}/{dice.buyLimit}. Available after all rolls are
@@ -245,7 +246,7 @@ export function TwentyMinuteRewardButton({ className = '' }: { className?: strin
         onClick={() => action.mutate('twenty-minute/claim')}
       >
         {capped
-          ? 'Daily rewards claimed'
+          ? 'Daily limit reached'
           : !reward
             ? 'Loading reward...'
             : ready

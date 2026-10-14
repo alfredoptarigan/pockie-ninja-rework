@@ -23,7 +23,7 @@ export const npcIcon = (npcId: number) => `/assets/reborn/icons/npc/${npcId}.web
 
 /** Names of the 18 limit items (glossary defaults; the 2011 item rows have no English name). */
 export const LIMIT_ITEM_NAMES: Record<string, string> = {
-  i148023: 'Kebab Flavored Chips',
+  i148023: 'Kebab-Flavored Chips',
   i148024: 'ANBU Mask',
   i148025: 'Family Badge',
   i148026: 'Secret Letter',
@@ -39,7 +39,7 @@ export const LIMIT_ITEM_NAMES: Record<string, string> = {
   i148036: 'Mysterious Weapon Bags',
   i148037: 'Scroll of Spiritual Weapons',
   i148038: "Jinchuriki's Note",
-  i148039: 'Contract for Summoning',
+  i148039: 'Summoning Contract',
   i148040: 'Forbidden Scroll',
 }
 
@@ -117,7 +117,7 @@ export function BloodlinesWindow({
         onChange={setTab}
         tabs={[
           { id: 'house', title: 'Ninja House' },
-          { id: 'active', title: 'Bloodlines' },
+          { id: 'active', title: 'Active' },
           { id: 'souls', title: 'Souls' },
           { id: 'prayer', title: 'Prayer' },
         ]}
@@ -197,7 +197,7 @@ export function BloodlinesWindow({
             <section className="game-card p-2">
               <h3 className="font-bold">Bonuses</h3>
               {data.bonuses.length === 0 ? (
-                <p>Activate an unlocked bloodline at the Ninja House.</p>
+                <p>Activate a bloodline in the Ninja House to see its bonuses.</p>
               ) : (
                 <ul aria-label="Bloodline bonuses" className="grid grid-cols-2 gap-x-4">
                   {data.bonuses.map((stat) => (
@@ -278,7 +278,7 @@ function LimitCard({
                 }
                 onClick={onTurnIn}
               >
-                Turn in {data.itemsPerTurnIn}
+                Turn in {data.itemsPerTurnIn} items
               </GameButton>
             </div>
           </>

@@ -65,7 +65,7 @@ describe('Daily events windows', () => {
     mockApi({ 'GET /api/game/events': () => json(view) })
     renderWithProviders(<NinjaDiaryWindow onClose={vi.fn()} />)
     await screen.findByText('Day 1')
-    await userEvent.click(screen.getByRole('tab', { name: 'Weekly' }))
+    await userEvent.click(screen.getByRole('tab', { name: 'Weekly Rewards' }))
     expect(screen.getByRole('button', { name: 'Claim Monday reward' })).toBeEnabled()
     expect(screen.getByRole('button', { name: 'Claim Tuesday reward' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Claim 50-point reward' })).toBeEnabled()
@@ -83,7 +83,7 @@ describe('Daily events windows', () => {
     })
     renderWithProviders(<DiceOfFateWindow onClose={vi.fn()} />)
     expect(await screen.findByRole('button', { name: 'Roll dice' })).toBeEnabled()
-    expect(screen.getByRole('button', { name: 'Replenish (10,000 Stone)' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Replenish rolls (10,000 Stone)' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Clear curse (5,000 Stone)' })).toBeEnabled()
   })
 
@@ -93,7 +93,7 @@ describe('Daily events windows', () => {
         json({ ...view, twentyMinute: { ...view.twentyMinute, claimsToday: 6 } }),
     })
     renderWithProviders(<TwentyMinuteRewardButton />)
-    expect(await screen.findByRole('button', { name: 'Daily rewards claimed' })).toBeDisabled()
+    expect(await screen.findByRole('button', { name: 'Daily limit reached' })).toBeDisabled()
   })
 
   it('renders a countdown without negative time', () => {

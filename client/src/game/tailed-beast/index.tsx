@@ -122,7 +122,7 @@ export function TailedBeastWindow({
           done(
             replay,
             `You dealt ${number(replay.damage)} damage and earned ${number(replay.honor)} Honor` +
-              (replay.killed ? '. You dealt the final blow!' : '.'),
+              (replay.killed ? '. You landed the final blow!' : '.'),
           )
           setReplay(null)
         }}
@@ -139,7 +139,7 @@ export function TailedBeastWindow({
     <li key={pool.mode} className="flex flex-col gap-0.5">
       <div className="flex items-center justify-between gap-2">
         <span className="font-bold">
-          {MODES[pool.mode]} (level {pool.level})
+          {MODES[pool.mode]} (Lv. {pool.level})
         </span>
         <GameButton
           small
@@ -331,7 +331,7 @@ export function TailedBeastWindow({
                 </>
               )}
             </div>
-            <p>The event resets every Monday at 00:00 UTC.</p>
+            <p>Resets every Monday at 00:00 UTC.</p>
             {message && <Notice>{message}</Notice>}
           </>
         )}

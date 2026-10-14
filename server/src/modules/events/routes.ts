@@ -106,7 +106,7 @@ export async function eventsRoutes(
           let reward: Reward
           if (kind === 'milestone') {
             if (row.claimedMilestones.includes(value))
-              throw bad('already_claimed', 'You already claimed this milestone.')
+              throw bad('already_claimed', 'You already claimed this milestone reward.')
             if (points < value) throw bad('not_ready', 'Earn more weekly points first.')
             reward = config.weekly.milestones.find((reward) => reward.points === value)!
           } else if (kind === 'weekday') {
@@ -156,7 +156,7 @@ export async function eventsRoutes(
           if (character.diceUsed !== config.dice.rollsPerDay)
             throw bad('rolls_remaining', 'Use all your rolls before replenishing.')
           if (character.diceBought >= DICE_BUY_LIMIT)
-            throw bad('buy_limit', 'You reached the daily replenish limit.')
+            throw bad('buy_limit', 'You have reached the daily replenish limit.')
           if (character.stone < config.dice.replenishCost)
             throw bad('no_money', 'You do not have enough Stone.')
           character.stone -= config.dice.replenishCost
@@ -164,7 +164,7 @@ export async function eventsRoutes(
           character.diceBought++
         } else {
           if (!(await diceBuffs(tx, character.id, time)).some((buff) => buff.buffId >= 80201))
-            throw bad('no_active_curse', 'You have no active dice curse.')
+            throw bad('no_active_curse', 'You have no active curse.')
           if (character.stone < config.dice.clearCurseCost)
             throw bad('no_money', 'You do not have enough Stone.')
           await removeDiceCurse(tx, character.id)
@@ -194,7 +194,7 @@ export async function eventsRoutes(
       const time = now()
       await resetDaily(tx, character, time)
       if (character.twentyMinCount >= config.twentyMinute.claimsPerDay)
-        throw bad('daily_limit', 'You reached the daily reward limit.')
+        throw bad('daily_limit', 'You have reached the daily reward limit.')
       if (
         character.twentyMinAt &&
         time.getTime() - character.twentyMinAt.getTime() <

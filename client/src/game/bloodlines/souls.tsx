@@ -19,14 +19,14 @@ const limitName = (limit: BloodlineLimit) => text[limit.nameKey] ?? `Bloodline $
 
 export function soulLabel(data: SoulsView, soul: Pick<SoulView, 'type' | 'level'>) {
   const type = data.types.find((t) => t.id === soul.type)
-  if (!type) return `Soul Lv ${soul.level}`
+  if (!type) return `Soul Lv. ${soul.level}`
   const name = text[type.nameKey] ?? `Soul ${type.id}`
   const stat = formatStat({
     field: type.field,
     label: type.label,
     value: type.valueByLevel[soul.level] ?? 0,
   })
-  return `${name} Lv ${soul.level} (${stat})`
+  return `${name} Lv. ${soul.level} (${stat})`
 }
 
 /** The souls query and one mutation helper; every action answers with the new SoulsView. */
@@ -65,7 +65,7 @@ function useLimitPick(limits: BloodlineLimit[]) {
         {unlocked.map((l) => (
           <option key={l.limitId} value={l.limitId}>
             {limitName(l)}
-            {l.active ? ' (active)' : ''}
+            {l.active ? ' (Active)' : ''}
           </option>
         ))}
       </select>
@@ -179,9 +179,9 @@ export function SoulsPanel({ limits, level }: { limits: BloodlineLimit[]; level:
                     <GameButton
                       small
                       disabled={busy}
-                      onClick={() => run(`souls/${soul.id}/unbind`, {}, 'Soul unbound.')}
+                      onClick={() => run(`souls/${soul.id}/unbind`, {}, 'Soul removed.')}
                     >
-                      Unbind
+                      Remove
                     </GameButton>
                   </>
                 ) : (
@@ -196,10 +196,10 @@ export function SoulsPanel({ limits, level }: { limits: BloodlineLimit[]; level:
       )}
       <LooseSouls data={data} selected={selected} onChange={setSelected} />
       <p className="text-[11px]">
-        Synthesis turns each 3 souls of one level into 1 soul one level higher. Refine changes the
-        first selected soul to another type and uses up the others (same level). One soul of each
-        type per bloodline; soul level {data.levelLimits.length} needs character level{' '}
-        {data.levelLimits.at(-1)}.
+        Synthesize: 3 souls of the same level become 1 soul of the next level. Refine: the first
+        selected soul changes type, and the other selected souls are used up. All refined souls must
+        have the same level. A bloodline holds one soul of each type. Lv. {data.levelLimits.length}{' '}
+        souls need character level {data.levelLimits.at(-1)}.
       </p>
       <div className="flex flex-wrap gap-2">
         <GameButton
@@ -215,7 +215,7 @@ export function SoulsPanel({ limits, level }: { limits: BloodlineLimit[]; level:
             run(`souls/${selected[0]}/bind`, { limitId: limit!.limitId }, 'Soul socketed.')
           }
         >
-          Bind
+          Socket
         </GameButton>
         <GameButton
           small

@@ -144,8 +144,9 @@ function QueueTab({
         <b>{view.battleCoins}</b>. Fights left today: {left}/{view.attemptsPerDay}.
       </p>
       <p>
-        Queue alone: teammates and opponents are matched by score, and empty seats are filled with
-        arena fighters after 15 to 30 seconds. A fight uses an attempt only once it starts.
+        Queue alone. Teammates and opponents are matched by score. After 15 to 30 seconds, empty
+        seats are filled with arena fighters. A fight counts against your daily limit only when it
+        starts.
       </p>
       {message && <p role="status">{message}</p>}
       {error && <Notice tone="error">{errorMessage(error)}</Notice>}
@@ -199,8 +200,8 @@ function LeagueTab() {
   return (
     <div className="flex flex-col gap-2">
       <p>
-        Every Monday (UTC) your league pays Battle Coins by mail if you fought at least once that
-        week. Scores reset to 0 on the 1st of each month.
+        Every Monday (UTC), your league pays Battle Coins by mail for the week that just ended, if
+        you fought at least once in it. Scores reset to 0 on the 1st of each month.
         {view.playedThisWeek ? ' You have fought this week.' : ' You have not fought this week.'}
       </p>
       <table aria-label="Leagues" className="w-full text-left">
@@ -249,7 +250,7 @@ function LeaderboardTab() {
           <thead>
             <tr>
               <th>Place</th>
-              <th>Ninja</th>
+              <th>Name</th>
               <th>Level</th>
               <th>Score</th>
             </tr>

@@ -45,7 +45,7 @@ export function SkillsWindow({
     plainText(data?.catalog.find((skill) => skill.skillId === id)?.nameKey ?? '', `Skill ${id}`)
   const cost = data?.freeResets
     ? 'one free reset'
-    : `${data?.resetCost ?? 8} ${currency === 'gold' ? 'Gold' : 'Gift coupons'}`
+    : `${data?.resetCost ?? 8} ${currency === 'gold' ? 'Gold' : 'Gift Coupons'}`
   async function run(action: () => Promise<unknown>, success: string) {
     setError('')
     setMessage('')
@@ -100,7 +100,7 @@ export function SkillsWindow({
                     onSlot={(tree, slot, skillId) =>
                       void run(
                         () => setSlot.mutateAsync({ tree, slot, skillId }),
-                        skillId === null ? 'Scroll skill removed.' : 'Scroll skill slotted.',
+                        skillId === null ? 'Scroll skill removed.' : 'Scroll skill added.',
                       )
                     }
                   />
@@ -240,7 +240,7 @@ export function SkillsWindow({
                     onChange={(event) => setCurrency(event.target.value as typeof currency)}
                   >
                     <option value="gold">Gold</option>
-                    <option value="giftCoupon">Gift coupons</option>
+                    <option value="giftCoupon">Gift Coupons</option>
                   </select>
                 </label>
                 {!confirm ? (
