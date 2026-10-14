@@ -15,11 +15,13 @@ import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { pubFightLineups } from '../../db/schema.js'
 import { playerFighter } from '../../game/combat.js'
+import { scene } from '../../game/data.js'
 import { drawPouch } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
 import { rewardExp } from '../../game/nonfight-buffs.js'
 import { vipDropMul } from '../../game/vip.js'
 import { scrollComboPrizes } from '../../game/scroll-sources.js'
+import { limitItemDrops } from '../bloodlines/rules.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
 import {
@@ -44,6 +46,9 @@ export function requirePool(character: CharacterRow) {
   if (!pool?.length) throw bad('not_here', 'There are no pub fights in this area.')
   return pool
 }
+
+/** The pub scene's level, which picks the limit item bands (M5 decision 14). */
+const sceneLevel = (character: CharacterRow) => Number(scene(character.sceneId)?.Level ?? 0)
 
 export const fightsToday = (character: CharacterRow) =>
   character.pubFightDay === utcDay() ? character.pubFightsToday : 0
@@ -97,6 +102,8 @@ export async function pull(tx: Tx, character: CharacterRow, pool: string[], afte
         ...rollDropLib(drops[ruleId]?.DropLibID ?? 0, vipDropMul(character)),
         // M5 decision 19: a matched combo can also give a 7-day scroll.
         ...scrollComboPrizes(createRandom(newSeed())),
+        // M5 decision 14: and 4 of one limit item of the scene's bands.
+        ...limitItemDrops(sceneLevel(character), createRandom(newSeed()), { combo: true }),
       ]
     : []
   if (!afterWin) await requireBagRoom(tx, character.id, rolled)
@@ -158,7 +165,12 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
           { hp: hpDraw.value, mp: mpDraw.value, hpPouch: hpDraw.pouch, mpPouch: mpDraw.pouch },
           exp,
         )
-        const items = await grantDrops(tx, character.id, kill.items)
+        // M5 decision 14: a win can also give a limit item of the scene's bands.
+        const loot = [
+          ...kill.items,
+          ...limitItemDrops(sceneLevel(character), createRandom(newSeed())),
+        ]
+        const items = await grantDrops(tx, character.id, loot)
         await saveCharacter(tx, character.id, {
           ...update,
           ...daily,
@@ -167,7 +179,7 @@ export async function pubFightRoutes(app: FastifyInstance, { db }: { db: Db }) {
         // A win pulls a new line-up at once (outside the hourly limit).
         const next = await pull(tx, character, pool, true)
         ;({ lineup, combo } = next)
-        const lost = kill.items.length - items.length + next.lost
+        const lost = loot.length - items.length + next.lost
         Object.assign(rewards, {
           exp,
           stone: kill.stone,
