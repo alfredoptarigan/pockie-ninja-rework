@@ -17,7 +17,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { createGameSocket, type GameSocket } from '../lib/socket'
 import { gameKeys } from './api'
 import { GameButton, Notice as NoticeBox, Panel } from './skin'
-import { onWhisperRequest } from './social/requests'
+import { onItemLinkRequest, onWhisperRequest } from './social/requests'
 
 const MAX_MESSAGES = 100
 
@@ -411,6 +411,15 @@ export function ChatBox({
   }
   // Whisper buttons in other windows (the Friends list) prefill the input the same way.
   useEffect(() => onWhisperRequest(startWhisper), [])
+  // Reborn's "Link in Chat": the item name in brackets at the end of the line.
+  useEffect(
+    () =>
+      onItemLinkRequest((name) => {
+        setText((line) => `${line}${line && !line.endsWith(' ') ? ' ' : ''}[${name}]`)
+        inputRef.current?.focus()
+      }),
+    [],
+  )
 
   const onReport = (message: ChatMessage) => {
     const sent = report(

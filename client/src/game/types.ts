@@ -110,6 +110,29 @@ export interface InventoryItem {
   nameKey: string
   /** Equipment only: whether this outfit's weapon class may wear it. */
   fitsOutfit?: boolean
+  /** Bag tile of the item's top-left corner (null when worn or not placed yet). */
+  page?: number | null
+  slot?: number | null
+  locked?: boolean
+  /** What the item is, from the server's item table (every item, not a client slice). */
+  info?: ItemInfo
+}
+
+export interface ItemInfo {
+  kind: 'equip' | 'use' | 'other'
+  /** EquipType for equipment ("Weapon", "Hat"...). */
+  equipSlot?: string
+  /** UseLevel. */
+  level: number
+  /** Stone per item when it can be sold, null when it cannot. */
+  sellPrice: number | null
+  /** ItemMaxFoldNum. */
+  stack: number
+  /** Footprint in 27px bag tiles. */
+  w: number
+  h: number
+  /** The item table class ("EquipItem", "FoodItem"...). */
+  class: string
 }
 
 export interface TalkResult {

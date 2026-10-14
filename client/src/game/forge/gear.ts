@@ -80,3 +80,57 @@ export function propText(name: string, value: number) {
           : value
   return `${value < 0 ? '' : '+'}${shown} ${label}`
 }
+
+/**
+ * Reborn's names for the refinement families (its stat ids 1-20 and 105) and how it prints them:
+ * base stats at /100, the "%" families at /10 with one decimal.
+ */
+const REBORN_STATS: Record<string, [label: string, scale: 1 | 10 | 100]> = {
+  StrengthEquip: ['Strength', 100],
+  AgilityEquip: ['Agility', 100],
+  StaminaEquip: ['Stamina', 100],
+  DefenseEquip: ['Defense', 1],
+  NeglectDefAttachEquip: ['Defense Break', 1],
+  DodgeMulEquip: ['Dodge', 1],
+  HitMulEquip: ['Hit', 1],
+  MaxHPEquip: ['Max Health', 1],
+  MaxHPMulEquip: ['Max Health %', 10],
+  MaxAtkEquip: ['Max Attack', 1],
+  AbsAddAtkMulEquip: ['Attack %', 10],
+  AtkTimeMulEquip: ['Speed %', 10],
+  MaxMPEquip: ['Max Chakra', 1],
+  MaxMPMulEquip: ['Max Chakra %', 10],
+  CritMulEquip: ['Critical', 1],
+  CritAttachEquip: ['Critical Damage', 1],
+  ToughEquip: ['Constitution', 1],
+  PierceEquip: ['Pierce', 1],
+  MinAtkEquip: ['Min Attack', 1],
+  ParryMulEquip: ['Block', 1],
+}
+
+/** A number as Reborn prints a stat of that family ("2.4" for Max Health % 24). */
+export function statNumber(name: string, value: number) {
+  const scale = REBORN_STATS[name]?.[1] ?? 1
+  return scale === 10 ? (value / 10).toFixed(1) : String(value / scale)
+}
+
+/** A tooltip row: Reborn's label and the signed value ("Dodge", "+37"). */
+export function statLine(name: string, value: number) {
+  const label = REBORN_STATS[name]?.[0]
+  if (!label) {
+    // Families Reborn does not show: fall back to our English line, value first.
+    const text = propText(name, value)
+    const space = text.indexOf(' ')
+    return { label: text.slice(space + 1), value: text.slice(0, space) }
+  }
+  return { label, value: `${value < 0 ? '' : '+'}${statNumber(name, value)}` }
+}
+
+/** Reborn's item name colours by refinement line count (0-4+): white, green, blue, purple, orange. */
+export const TIER_COLORS = [
+  '#ffffff',
+  'rgb(30, 255, 0)',
+  'rgb(0, 112, 221)',
+  'rgb(163, 53, 238)',
+  'rgb(255, 128, 0)',
+] as const
