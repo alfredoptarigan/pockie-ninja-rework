@@ -1264,7 +1264,7 @@ export const characterSkillState = pgTable(
   },
   (t) => [
     check('character_skill_state_level', sql`${t.learnedThrough} between 1 and 90`),
-    check('character_skill_state_tree', sql`${t.activeTree} between 0 and 2`),
+    check('character_skill_state_tree', sql`${t.activeTree} between 0 and 4`),
     check('character_skill_state_resets', sql`${t.freeResets} >= 0`),
   ],
 )
@@ -1285,7 +1285,7 @@ export const characterSkillSlots = pgTable(
       columns: [t.characterId, t.skillId],
       foreignColumns: [characterSkills.characterId, characterSkills.skillId],
     }).onDelete('cascade'),
-    check('character_skill_slots_tree', sql`${t.tree} between 0 and 2`),
+    check('character_skill_slots_tree', sql`${t.tree} between 0 and 4`),
     check('character_skill_slots_slot', sql`${t.slot} between 0 and 5`),
     check('character_skill_slots_level', sql`${t.level} between 1 and 13`),
   ],

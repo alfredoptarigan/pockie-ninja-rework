@@ -239,6 +239,13 @@
       "when": 1791981937115,
       "tag": "0033_pet_skill_slots",
       "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1791989804415,
+      "tag": "0034_skill_presets",
+      "breakpoints": true
     }
   ]
 }

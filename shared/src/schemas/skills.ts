@@ -16,7 +16,8 @@ export interface SkillLearningView {
   learnedThrough: number
 }
 
-export const SKILL_TREE_COUNT = 3
+/** Skill bar trees: Reborn's Skills window presets 1-5. */
+export const SKILL_TREE_COUNT = 5
 export const SKILL_SLOTS_PER_TREE = 6
 export const SKILL_RESET_COST = 8
 export interface SkillSlot {

@@ -67,9 +67,9 @@ async function seedSkills() {
 }
 
 describe('skill trees', () => {
-  it('has three six-slot trees and loads only the active tree plus learned passives', async () => {
+  it('has five six-slot trees (Reborn presets 1-5) and loads only the active tree plus learned passives', async () => {
     await seedSkills()
-    expect((await view()).trees.map((tree: unknown[]) => tree.length)).toEqual([6, 6, 6])
+    expect((await view()).trees.map((tree: unknown[]) => tree.length)).toEqual([6, 6, 6, 6, 6])
     expect((await setSlot(0, 1803)).statusCode).toBe(200)
     expect((await setSlot(0, 1807, 1)).statusCode).toBe(200)
     expect(
@@ -83,6 +83,11 @@ describe('skill trees', () => {
     expect((await playerFighter(db, await row())).skills?.map((skill) => skill.id)).not.toContain(
       1803,
     )
+    // Preset 5 is the last tree.
+    expect((await setSlot(0, 1803, 4)).statusCode).toBe(200)
+    expect((await client.post('/api/game/skills/tree', { tree: 4 })).statusCode).toBe(200)
+    expect((await view()).activeTree).toBe(4)
+    expect((await client.post('/api/game/skills/tree', { tree: 5 })).statusCode).toBe(400)
   })
   it('moves duplicate skills within a tree, allows them in other trees, and clears slots', async () => {
     await seedSkills()
@@ -102,7 +107,7 @@ describe('skill trees', () => {
       [0, 1802, 0, 1],
       [0, 2801, 0, 1],
       [6, 1803, 0, 1],
-      [0, 1803, 3, 1],
+      [0, 1803, 5, 1],
       [0, 1803, 0, 2],
     ]) {
       expect((await setSlot(args[0]!, args[1]!, args[2]!, args[3]!)).statusCode).toBe(400)
