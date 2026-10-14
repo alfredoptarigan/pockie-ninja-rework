@@ -49,3 +49,32 @@ then run `pnpm i18n:sentences merge` and `pnpm --filter @pockie/client game-text
 byte with the committed en.json. Batch `.out.json` files remain the source for unreviewed prose.
 Existing prepared batches have had NPC prose terms removed, so resumed translation uses the same
 scope as newly prepared batches. This change does not attempt another review of all 51k sentences.
+
+## M5 window terms (Reborn update)
+
+One English term per thing in the Talents, Bloodlines, Skills, Ninja Diary, Dice of Fate,
+Tailed Beast and Team Stone windows and in the Reborn quest text. Reborn names (limits, souls,
+talents, beasts, scroll items, Ninja House NPCs, leagues) stay in `glossary.json`; fix only clear
+typos.
+
+| Use                                                                                | Not                      |
+| ---------------------------------------------------------------------------------- | ------------------------ |
+| bloodline (the thing); "Ninja House" (where items are turned in)                   | limit, bloodline limit   |
+| Amity (progress bar), turn in N items                                              | gift, friendship         |
+| Block (the stat the Character window shows)                                        | Parry                    |
+| Armor Break                                                                        | Defense Break, Break     |
+| Constitution                                                                       | Toughness, Const         |
+| Pierce, Critical, Hit, Dodge, Defense                                              | Crit                     |
+| Max HP, Max Chakra                                                                 | Max Health               |
+| Lv. 5 for compact labels, "level 5" in sentences                                   | Lv 5, Level 5 on cards   |
+| Gift Coupons (Title Case), Stone, Gold, Honor, Essence, Battle Coins               | Gift coupons             |
+| socket a soul / remove a soul; discover, synthesize, refine, destroy, pray         | bind, unbind             |
+| scroll skill; "Add to tree 2", "Remove from tree 2"                                | slot, unslot             |
+| Daily Login, Weekly Rewards (Ninja Diary tabs); Dice of Fate; twenty-minute reward | Login, Weekly            |
+| Blessing, Great Blessing, Curse, Great Curse (dice effects)                        | lower-case second word   |
+| Replenish rolls (buy more dice rolls with Stone)                                   | refill                   |
+| "Resets daily at 00:00 UTC", "Resets every Monday at 00:00 UTC"                    | Daily reset, Week starts |
+| Talk to (quest steps)                                                              | Speak with, Speak to     |
+| items (quest and Ninja House requirements)                                         | gifts                    |
+| Tailed Beast (event name); beast (one of the nine)                                 | tailed beast in messages |
+| Name (ranking column for a player)                                                 | Ninja                    |
