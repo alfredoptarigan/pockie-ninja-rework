@@ -22,6 +22,8 @@
     "db:seed": "pnpm --filter @pockie/server db:seed",
     "create-admin": "pnpm --filter @pockie/server create-admin",
     "assets:export": "node tools/export-assets.ts",
+    "assets:reborn": "node tools/assets/reborn.ts",
+    "assets:audio": "node tools/assets/audio.ts",
     "reborn:fetch": "tools/fetch-reborn-data.sh",
     "i18n:extract": "node tools/i18n/extract-source.ts",
     "i18n:candidates": "node tools/i18n/build-glossary-candidates.ts",

@@ -1,1 +1,2 @@
 client/public/assets/reborn/** filter=lfs diff=lfs merge=lfs -text
+client/public/assets/game/audio/** filter=lfs diff=lfs merge=lfs -text
