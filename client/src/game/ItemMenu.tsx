@@ -1,7 +1,25 @@
 // Reborn's item context menu (#context-menu): opened by clicking or right-clicking an item, a
 // dark 5px frame (Common/SmallBG2; our closest piece is the tooltip frame), one whitesmoke 12px
 // Arial line per action. Escape, a click elsewhere or picking an action closes it.
-import { useEffect, useId, useRef } from 'react'
+import { useEffect, useId, useRef, type MouseEvent } from 'react'
+
+/** Gap between a clicked cell and its menu. */
+const MENU_OFFSET = 4
+
+/**
+ * Where to open the menu for a click: beside the cell, or at the pointer for a right click;
+ * relative to the nearest `data-menu-root` ancestor (the window content).
+ */
+export function menuAt(event: MouseEvent<HTMLElement>) {
+  event.preventDefault()
+  const root = event.currentTarget.closest('[data-menu-root]')!.getBoundingClientRect()
+  const cell = event.currentTarget.getBoundingClientRect()
+  const atPointer = event.type === 'contextmenu' && event.clientX > 0
+  return {
+    x: (atPointer ? event.clientX : cell.right) - root.left + MENU_OFFSET,
+    y: (atPointer ? event.clientY : cell.top) - root.top,
+  }
+}
 
 export interface MenuEntry {
   label: string

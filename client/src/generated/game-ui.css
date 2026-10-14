@@ -211,6 +211,11 @@
   --ui-icon-scroll: url('/assets/game/ui/icon-scroll.webp');
   --ui-icon-notice: url('/assets/game/ui/icon-notice.webp');
   --ui-monster-card: url('/assets/game/ui/monster-card.webp');
+  --ui-skill-column: url('/assets/game/ui/skill-column.webp');
+  --ui-skill-column-slice: 46 18 46 18;
+  --ui-skill-column-border: 23px 9px 23px 9px;
+  --ui-skill-level: url('/assets/game/ui/skill-level.webp');
+  --ui-skill-lock: url('/assets/game/ui/skill-lock.webp');
   --ui-tree-folder-closed: url('/assets/game/ui/tree-folder-closed.webp');
   --ui-tree-folder-open: url('/assets/game/ui/tree-folder-open.webp');
   --ui-tree-leaf: url('/assets/game/ui/tree-leaf.webp');

@@ -134,6 +134,10 @@ const WINDOW_PIECES: Record<string, PieceSource> = {
   'icon-scroll': resource('Icon.Icon_Scroll'),
   'icon-notice': resource('Icon.Icon_ExcalmatoryPoint'),
   'monster-card': resource('List.HobgoblinBG'),
+  // Skills window (Reborn draws its skill columns, level strips and locked slots with these).
+  'skill-column': resource('SkillTree.BG', true),
+  'skill-level': resource('SkillTree.TextBG'),
+  'skill-lock': resource('SkillTree.Lock4'),
 }
 
 // M3 windows. The shop, forge, exchange and Las Noches layouts (UI_NpcShop_Xml, UI_MysticShop_Xml,

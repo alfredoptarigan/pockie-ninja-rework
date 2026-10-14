@@ -21,7 +21,7 @@ import { GearIcon, useGear } from './forge'
 import { useAppraise, useRepair } from './forge/api'
 import type { GearView } from '@pockie/shared'
 import { itemIcon } from './ItemIcon'
-import { ItemMenu, type MenuEntry } from './ItemMenu'
+import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
 import { completedNotice } from './QuestLog'
 import { GameButton, Notice } from './skin'
 import { WING_ICONS } from './wings'
@@ -43,8 +43,6 @@ const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 /** Icon size for a run of 1-3 tiles (27px each, less Reborn's 3px gap): 24, 51 and 78px. */
 const WIDTHS = ['', 'w-[24px]', 'w-[51px]', 'w-[78px]']
 const HEIGHTS = ['', 'h-[24px]', 'h-[51px]', 'h-[78px]']
-/** Gap between a clicked item and its context menu. */
-const MENU_OFFSET = 4
 
 /**
  * Equipment slots: `slot` is the item's EquipType (server equippedSlot). Outfit and Pet have no
@@ -170,18 +168,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
     return list
   }
 
-  /** Opens the menu beside the clicked item, or at the pointer for a right click. */
-  const openMenu: Open = (item, event) => {
-    event.preventDefault()
-    const root = event.currentTarget.closest('[data-inventory]')!.getBoundingClientRect()
-    const cell = event.currentTarget.getBoundingClientRect()
-    const atPointer = event.type === 'contextmenu' && event.clientX > 0
-    setMenu({
-      id: item.id,
-      x: (atPointer ? event.clientX : cell.right) - root.left + MENU_OFFSET,
-      y: (atPointer ? event.clientY : cell.top) - root.top,
-    })
-  }
+  const openMenu: Open = (item, event) => setMenu({ id: item.id, ...menuAt(event) })
 
   if (inventory.isPending) return <p>Opening your bag...</p>
   if (inventory.isError) return <Notice tone="error">We could not open your bag.</Notice>
@@ -194,7 +181,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const menuItem = menu && inventory.data.find((item) => item.id === menu.id)
 
   return (
-    <div data-inventory className="relative h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
+    <div data-menu-root className="relative h-[513px] w-[369px] bg-[#25282b] font-game text-xs">
       <BagPages />
       <Equipment
         items={inventory.data}

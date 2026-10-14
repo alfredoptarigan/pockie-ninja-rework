@@ -361,6 +361,28 @@
   border-image: var(--ui-panel-small) var(--ui-panel-small-slice) fill /
     var(--ui-panel-small-border);
 }
+/* Cream window section (BigBG1): Reborn's Skills window panels. */
+@utility game-panel-1 {
+  border: 0;
+  border-image: var(--ui-panel-1) var(--ui-panel-1-slice) fill / var(--ui-panel-1-border);
+}
+/* Skills window: skill columns (SkillTree/BG), 26px icon cells (Grid_YellowBSD at a 3px rim),
+   the level strip under each icon (SkillTree/TextBG) and a locked slot (SkillTree/Lock4). */
+@utility game-skill-column {
+  border: 0;
+  border-image: var(--ui-skill-column) var(--ui-skill-column-slice) fill /
+    var(--ui-skill-column-border);
+}
+@utility game-skill-cell {
+  border: 0;
+  border-image: var(--ui-slot-shop) var(--ui-slot-shop-slice) fill / 3px;
+}
+@utility game-skill-level {
+  background: var(--ui-skill-level) center / 100% 100% no-repeat;
+}
+@utility game-skill-lock {
+  background: var(--ui-skill-lock) center / 100% 100% no-repeat;
+}
 /* Grey plate behind a window title or a player title (BigBG7). */
 @utility game-title-plate {
   border: 0;

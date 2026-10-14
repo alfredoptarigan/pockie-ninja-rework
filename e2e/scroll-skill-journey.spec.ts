@@ -57,19 +57,19 @@ test('a level-51 ninja uses a 7-day scroll and slots the scroll skill', async ({
       ),
     ).toBe('0')
 
-    // Act: the Scroll Skills tab lists it; slot it in the first tree.
+    // Act: the Scroll Skills panel lists it; slot it in preset 1.
     await openMenu(page, 'Skills')
     const skills = dialog(page, 'Skills')
-    await skills.getByRole('tab', { name: 'Scroll Skills', exact: true }).click()
+    await skills.getByRole('button', { name: 'Scroll Skills', exact: true }).click()
     const slotted = page.waitForResponse(
       (r) => r.url().includes('/api/game/skills/') && r.request().method() !== 'GET' && r.ok(),
     )
-    await skills.getByRole('button', { name: `Add ${SKILL_NAME} to tree 1`, exact: true }).click()
+    await skills.getByRole('button', { name: `Add ${SKILL_NAME} to preset 1`, exact: true }).click()
     await slotted
 
-    // Assert: the button flips to Remove and the skill sits in a slot of tree 1.
+    // Assert: the button flips to Remove and the skill sits in a slot of preset 1.
     await expect(
-      skills.getByRole('button', { name: `Remove ${SKILL_NAME} from tree 1`, exact: true }),
+      skills.getByRole('button', { name: `Remove ${SKILL_NAME} from preset 1`, exact: true }),
     ).toBeVisible()
     const { trees } = await (await page.request.get('/api/game/skills')).json()
     expect(

@@ -195,6 +195,10 @@ for (const n of [1, 2, 4, 7]) keys.add(`lg_Common_RolePopsinger${n}`)
 for (let n = 1; n <= 100; n++) keys.add(`lg_avatar${n}`)
 // Battle replay labels: every skill and buff name (small, and any outfit may use them).
 for (const key of Object.keys(en)) if (/^lg_(Skill|Buffer)_\d+$/.test(key)) keys.add(key)
+// Skills window tooltips: player ninjutsu (18xx, 38xx) and element passives (2801-2810). The
+// "_Fake" text is the one the original client displays (damage first), the plain one the rest.
+for (const key of Object.keys(en))
+  if (/^lg_SkillDes_(18[0-3]\d|38[0-2]\d|28(0\d|10))(_Fake)?$/.test(key)) keys.add(key)
 // World map tooltips (Tip_WorldMap_<scene>_<nation>, WorldMapFrame.onScenePointOver).
 for (const key of Object.keys(en)) if (/^lg_Tip_WorldMap_\d+_\d$/.test(key)) keys.add(key)
 // Character creation (CreatRoleBase): village tips, the outfit boost line and its stat names.

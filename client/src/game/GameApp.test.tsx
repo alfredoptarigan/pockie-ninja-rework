@@ -69,14 +69,14 @@ describe('GameScreen', () => {
           freeResets: 0,
           resetCost: 8,
           scrolls: [],
-          trees: Array.from({ length: 3 }, () =>
+          trees: Array.from({ length: 5 }, () =>
             Array.from({ length: 6 }, (_, slot) => ({ slot, skillId: null, level: 0 })),
           ),
         }),
     })
     await userEvent.click(await screen.findByRole('button', { name: 'Skills' }))
     const dialog = await screen.findByRole('dialog', { name: 'Skills' })
-    expect(await within(dialog).findByRole('tab', { name: 'Tree 1' })).toBeVisible()
+    expect(await within(dialog).findByRole('button', { name: 'Preset 1' })).toBeVisible()
     await userEvent.click(within(dialog).getByRole('button', { name: 'Close' }))
     expect(screen.queryByRole('dialog', { name: 'Skills' })).not.toBeInTheDocument()
   })

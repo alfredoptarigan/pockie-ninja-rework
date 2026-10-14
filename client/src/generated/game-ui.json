@@ -396,6 +396,14 @@
     "icon-scroll": { "file": "/assets/game/ui/icon-scroll.webp", "width": 30, "height": 27 },
     "icon-notice": { "file": "/assets/game/ui/icon-notice.webp", "width": 16, "height": 16 },
     "monster-card": { "file": "/assets/game/ui/monster-card.webp", "width": 67, "height": 86 },
+    "skill-column": {
+      "file": "/assets/game/ui/skill-column.webp",
+      "width": 36,
+      "height": 91,
+      "slice": { "top": 23, "right": 9, "bottom": 23, "left": 9 }
+    },
+    "skill-level": { "file": "/assets/game/ui/skill-level.webp", "width": 26, "height": 12 },
+    "skill-lock": { "file": "/assets/game/ui/skill-lock.webp", "width": 32, "height": 30 },
     "tree-folder-closed": {
       "file": "/assets/game/ui/tree-folder-closed.webp",
       "width": 16,
