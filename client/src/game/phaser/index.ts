@@ -2,7 +2,7 @@
 // motion manifest out of the game's first chunk.
 import { gameScenes } from '../../generated/game-assets'
 import { plainText } from '../text'
-import type { Replay, SceneView } from '../types'
+import type { SceneView } from '../types'
 import { startBattle, type BattleHandle } from './battle-scene'
 import { fighterLooks, lookArt, loadSkillMotions, shownOutfit, type FighterLook } from './motion'
 import { pictureLayout } from './picture-layout'
@@ -14,6 +14,7 @@ import {
   type SecretArt,
 } from './secret-technique'
 import { buildTimeline } from './timeline'
+import type { CompanionLook, VisualReplay } from './companions'
 import { loadWeaponLayer } from './weapon'
 
 export type { BattleHandle, PictureActions, PictureHandle }
@@ -30,7 +31,9 @@ export function mountPicture(
 }
 
 export interface BattleOptions {
-  replay: Replay
+  replay: VisualReplay
+  /** Cosmetics from the attacker arena snapshot. */
+  look?: CompanionLook
   /** Outfit of the attackers (the player). */
   clothing: number
   /** Monster npc id per defender, in fighter order. */
@@ -53,7 +56,7 @@ export async function mountBattle(
   const { replay, clothing, monsterIds, defenderLooks, sceneId, weaponItemId, onFinished } = options
   const looks = fighterLooks(
     replay.fighters,
-    { clothing, weaponItemId },
+    { clothing, weaponItemId, ...options.look },
     defenderLooks ?? monsterIds.map((npcId) => ({ npcId })),
   )
   const art = looks.map(lookArt)
@@ -86,6 +89,7 @@ export async function mountBattle(
     timeline,
     art,
     weapons,
+    looks: looks as CompanionLook[],
     names: replay.fighters.map((f) => plainText(f.name, f.name)),
     background: gameScenes[String(sceneId)]?.fightBackground,
     buffName,

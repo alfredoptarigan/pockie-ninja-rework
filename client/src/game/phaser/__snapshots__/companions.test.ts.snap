@@ -1,0 +1,134 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Reborn replay companions > keeps the legacy timeline unchanged without companions 1`] = `
+{
+  "bars": [
+    {
+      "at": 0,
+      "buffs": [],
+      "fighter": 0,
+      "hp": 100,
+      "mp": 0,
+    },
+    {
+      "at": 0,
+      "buffs": [],
+      "fighter": 1,
+      "hp": 100,
+      "mp": 0,
+    },
+    {
+      "at": 1020,
+      "buffs": [],
+      "fighter": 1,
+      "hp": 80,
+      "mp": 0,
+    },
+    {
+      "at": 1540,
+      "buffs": [],
+      "fighter": 0,
+      "hp": 100,
+      "mp": 0,
+    },
+    {
+      "at": 1540,
+      "buffs": [],
+      "fighter": 1,
+      "hp": 80,
+      "mp": 0,
+    },
+  ],
+  "duration": 3040,
+  "endAt": 2140,
+  "poses": [
+    [
+      {
+        "at": 0,
+        "from": 300,
+        "loop": true,
+        "motion": "999",
+        "moveMs": 0,
+        "to": 300,
+      },
+      {
+        "at": 500,
+        "from": 300,
+        "loop": true,
+        "motion": "55",
+        "moveMs": 220,
+        "to": 580,
+      },
+      {
+        "at": 720,
+        "from": 580,
+        "loop": true,
+        "motion": "999",
+        "moveMs": 0,
+        "skillId": undefined,
+        "to": 580,
+      },
+      {
+        "at": 1320,
+        "from": 580,
+        "loop": true,
+        "motion": "55",
+        "moveMs": 220,
+        "to": 300,
+      },
+      {
+        "at": 1540,
+        "from": 300,
+        "loop": true,
+        "motion": "999",
+        "moveMs": 0,
+        "to": 300,
+      },
+      {
+        "at": 1540,
+        "from": 300,
+        "loop": false,
+        "motion": "59",
+        "moveMs": 0,
+        "to": 300,
+      },
+    ],
+    [
+      {
+        "at": 0,
+        "from": 700,
+        "loop": true,
+        "motion": "999",
+        "moveMs": 0,
+        "to": 700,
+      },
+      {
+        "at": 1020,
+        "from": 700,
+        "loop": false,
+        "motion": "63",
+        "moveMs": 0,
+        "shift": undefined,
+        "to": 700,
+      },
+      {
+        "at": 1620,
+        "from": 700,
+        "loop": true,
+        "motion": "999",
+        "moveMs": 0,
+        "shift": undefined,
+        "to": 700,
+      },
+    ],
+  ],
+  "texts": [
+    {
+      "at": 1020,
+      "fighter": 1,
+      "kind": "damage",
+      "text": "-20",
+    },
+  ],
+}
+`;
