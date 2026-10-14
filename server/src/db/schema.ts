@@ -1703,10 +1703,7 @@ export const characterPetSkills = pgTable(
       .where(sql`${t.slot} is not null`),
     check('character_pet_skills_kind', sql`${t.kind} between 1 and 3`),
     check('character_pet_skills_slot', sql`${t.slot} between 0 and 5`),
-    check(
-      'character_pet_skills_amounts',
-      sql`${t.level} >= 1 and ${t.learnedOrder} >= 0`,
-    ),
+    check('character_pet_skills_amounts', sql`${t.level} >= 1 and ${t.learnedOrder} >= 0`),
   ],
 )
 
@@ -1725,10 +1722,7 @@ export const characterPetTracing = pgTable(
     finds: integer('finds').notNull().default(0),
   },
   (t) => [
-    check(
-      'character_pet_tracing_amounts',
-      sql`${t.attemptsUsed} >= 0 and ${t.finds} >= 0`,
-    ),
+    check('character_pet_tracing_amounts', sql`${t.attemptsUsed} >= 0 and ${t.finds} >= 0`),
     check('character_pet_tracing_board', sql`jsonb_typeof(${t.board}) = 'object'`),
   ],
 )

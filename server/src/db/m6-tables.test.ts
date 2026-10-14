@@ -52,7 +52,14 @@ const baseProps = {
 const pet = (characterId: string, values: Partial<typeof characterPets.$inferInsert> = {}) =>
   db
     .insert(characterPets)
-    .values({ characterId, species: 'i320002', kennelSlot: 0, growth: 100, ...baseProps, ...values })
+    .values({
+      characterId,
+      species: 'i320002',
+      kennelSlot: 0,
+      growth: 100,
+      ...baseProps,
+      ...values,
+    })
     .returning()
 
 let a = ''
@@ -166,12 +173,7 @@ describe('pet skills', () => {
   })
 
   it('keeps kind 1-3, level 1 or more and a non-negative learned order', async () => {
-    for (const values of [
-      { kind: 0 },
-      { kind: 4 },
-      { level: 0 },
-      { learnedOrder: -1 },
-    ]) {
+    for (const values of [{ kind: 0 }, { kind: 4 }, { level: 0 }, { learnedOrder: -1 }]) {
       await expect(skill({ skillId: 40200, ...values })).rejects.toThrow()
     }
   })
@@ -196,7 +198,13 @@ describe('pet skills', () => {
 describe('kennel', () => {
   it('starts Pet Tracing at zero with no board and refuses negative counts', async () => {
     const [row] = await db.insert(characterPetTracing).values({ characterId: a }).returning()
-    expect(row).toMatchObject({ day: null, attemptsUsed: 0, boughtDay: null, board: null, finds: 0 })
+    expect(row).toMatchObject({
+      day: null,
+      attemptsUsed: 0,
+      boughtDay: null,
+      board: null,
+      finds: 0,
+    })
     for (const values of [{ attemptsUsed: -1 }, { finds: -1 }]) {
       await expect(
         db.insert(characterPetTracing).values({ characterId: b, ...values }),
@@ -250,7 +258,9 @@ describe('cards', () => {
       { cardId: 2, count: 0 },
       { cardId: 1, count: 1 },
     ]) {
-      await expect(db.insert(characterCards).values({ characterId: a, ...values })).rejects.toThrow()
+      await expect(
+        db.insert(characterCards).values({ characterId: a, ...values }),
+      ).rejects.toThrow()
     }
   })
 
