@@ -10,7 +10,8 @@ milestone gets a detailed plan; later ones are outlines and will be re-planned w
 | 3 | World & Economy | Done (2026-10-13) | `m3-world-economy.plan.md` |
 | 4 | Social & Competition | Done (2026-10-13) | `m4-social-competition.plan.md` |
 | 5 | Reborn Update | Done (2026-10-14) | `m5-reborn-update.plan.md` |
-| 6 | Home, Collection & Launch | Outline | |
+| 6 | Companions & Collection | Planned (2026-10-14) | `m6-companions.plan.md` |
+| 7 | Home & Launch | Outline | |
 
 ## Cross-milestone decisions
 
@@ -68,6 +69,23 @@ additional outfits (new art), additional quests and events.
 Reference from the live game: `m5-reborn-reference.md`. After M5: fetch the remaining Reborn
 assets (audio, pets, wings, auras, general effects, card art).
 
-### 6. Home, Collection & Launch
-Home and garden, pets, cards, outfit collection and recast, tailed beasts, admin panel, email
-verification and password reset, deployment.
+### 6. Companions & Collection
+Agreed with the user on 2026-10-14:
+- Pets: Reborn's 190 species, using 2011 rules (feeding, skills, pet in battle) with our numbers
+  where the 2011 server is silent; Pet Tracing and the Kennel shop.
+- Wings and auras: Wing slot, stats, enhancement, Wing Collection.
+- Cards: collections, boxes, completion prizes.
+- Audio: 2011 and Reborn BGM, mute and volume.
+- General combat effects.
+Tailed beasts shipped in M5. Plan: `m6-companions.plan.md`.
+
+### 7. Home & Launch
+Home and garden (crops, garden pet food, the pet work bonus), admin panel, email verification and
+password reset, deployment.
+
+### Later (after M7)
+- Card market and card synthesis.
+- Outfit collection, recast and outfit stars, with the remaining outfit art.
+- Seasonal and admin-started events.
+- SFX.
+- Clans and Bankai.

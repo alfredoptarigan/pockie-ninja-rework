@@ -1,7 +1,7 @@
 # Pockie Ninja Remastered
 
 Fully English reborn of the 2011 browser game Pockie Ninja (Ninja Kita).
-Roadmap and decisions: `.claude/plans/roadmap.md`. Current milestone: `.claude/plans/m5-reborn-update.plan.md`.
+Roadmap and decisions: `.claude/plans/roadmap.md`. Current milestone: `.claude/plans/m6-companions.plan.md`.
 
 ## Layout
 
