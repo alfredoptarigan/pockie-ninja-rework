@@ -170,7 +170,11 @@ describe('ArenaWindow', () => {
     const fetch = mockApi({
       'GET /api/game/arena': () => json(view()),
       'GET /api/game/arena/logs': () => json({ logs: [log] }),
-      [`GET /api/game/arena/logs/${log.id}`]: () => json({ replay, looks: won.looks }),
+      [`GET /api/game/arena/logs/${log.id}`]: () =>
+        json({
+          replay,
+          looks: [{ clothing: 1, wingSprite: 'wing_duotian_3', aura: 'ki_lightning' }, { clothing: 2 }],
+        }),
       'POST /api/game/arena/revenge': () => json({ ...won, won: false, scoreDelta: -500 }),
     })
     open()
@@ -183,7 +187,12 @@ describe('ArenaWindow', () => {
     await vi.waitFor(() =>
       expect(mountBattle).toHaveBeenLastCalledWith(
         expect.anything(),
-        expect.objectContaining({ clothing: 1, defenderLooks: [{ clothing: 2 }] }),
+        expect.objectContaining({
+          clothing: 1,
+          defenderLooks: [{ clothing: 2 }],
+          // The attacker's wing and aura from its snapshot reach the battle.
+          look: expect.objectContaining({ wingSprite: 'wing_duotian_3', aura: 'ki_lightning' }),
+        }),
       ),
     )
     expect(await screen.findByRole('tab', { name: 'Fight Log' })).toHaveAttribute(

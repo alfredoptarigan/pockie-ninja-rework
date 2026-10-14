@@ -9,6 +9,7 @@
 // speed controls, and reports when it is over (or could not play) through `onFinished`.
 import { useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import scenesJson from '../generated/game-scenes.json'
+import type { CompanionLook } from './phaser/companions'
 import type { FighterLook } from './phaser/motion'
 import { GameButton } from './skin'
 import type { Replay, SceneNpc, SceneView } from './types'
@@ -119,6 +120,7 @@ export function BattleReplayMount({
   defenderLooks,
   sceneId,
   weaponItemId,
+  look,
   onFinished,
 }: {
   replay: Replay
@@ -129,6 +131,8 @@ export function BattleReplayMount({
   sceneId: number
   /** The player's equipped weapon, drawn over the body. */
   weaponItemId?: string
+  /** The player's wing, aura and pet when the replay fighters do not carry them (snapshots). */
+  look?: CompanionLook
   onFinished: () => void
 }) {
   const [speed, setSpeed] = useState<(typeof SPEEDS)[number]>(1)
@@ -141,6 +145,7 @@ export function BattleReplayMount({
       defenderLooks,
       sceneId,
       weaponItemId,
+      look,
       onFinished: () => latest.current(),
     }),
   )

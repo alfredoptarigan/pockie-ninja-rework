@@ -27,6 +27,7 @@ export function ArenaReplay({
       replay={playing.replay.replay}
       clothing={'clothing' in attacker ? attacker.clothing : character.clothing}
       weaponItemId={'clothing' in attacker ? attacker.weaponItemId : undefined}
+      look={'clothing' in attacker ? attacker : undefined}
       monsterIds={[]}
       defenderLooks={[defender]}
       sceneId={character.sceneId}

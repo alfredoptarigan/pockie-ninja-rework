@@ -71,6 +71,7 @@ export function TeamStoneWindow({
         replay={watching.replay}
         clothing={sideA && 'clothing' in sideA ? sideA.clothing : character.clothing}
         weaponItemId={sideA && 'clothing' in sideA ? sideA.weaponItemId : undefined}
+        look={sideA && 'clothing' in sideA ? sideA : undefined}
         monsterIds={[]}
         defenderLooks={watching.looks.slice(3)}
         sceneId={character.sceneId}
