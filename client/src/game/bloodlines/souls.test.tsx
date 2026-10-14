@@ -79,7 +79,7 @@ describe('Souls tab', () => {
     expect(await screen.findByText(/Discoveries left today: 6\/10/)).toBeVisible()
     const sockets = screen.getByRole('list', { name: 'Soul sockets' })
     expect(sockets.querySelectorAll('li')).toHaveLength(5)
-    expect(sockets).toHaveTextContent('Firm Lv 2 (Defense +22.1)')
+    expect(sockets).toHaveTextContent('Firm Lv. 2 (Defense +22.1)')
     expect(screen.getByRole('list', { name: 'Loose souls' }).querySelectorAll('li')).toHaveLength(3)
     await userEvent.click(screen.getByRole('button', { name: 'Discover' }))
     expect(requestBody(fetch, 'POST /api/game/bloodlines/souls/discover')).toEqual({ count: 1 })
@@ -99,10 +99,10 @@ describe('Souls tab', () => {
     const boxes = within(loose).getAllByRole('checkbox')
     await userEvent.click(boxes[0]!)
     expect(screen.getByRole('button', { name: 'Synthesize' })).toBeDisabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Bind' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Socket' }))
     expect(requestBody(fetch, 'POST /api/game/bloodlines/souls/b/bind')).toEqual({ limitId: 1 })
     for (const box of within(loose).getAllByRole('checkbox')) await userEvent.click(box)
-    expect(screen.getByRole('button', { name: 'Bind' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Socket' })).toBeDisabled()
     await userEvent.click(screen.getByRole('button', { name: 'Synthesize' }))
     expect(requestBody(fetch, 'POST /api/game/bloodlines/souls/synthesize')).toEqual({
       soulIds: ['b', 'c', 'd'],

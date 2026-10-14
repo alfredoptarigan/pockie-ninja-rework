@@ -23,7 +23,7 @@ export const npcIcon = (npcId: number) => `/assets/reborn/icons/npc/${npcId}.web
 
 /** Names of the 18 limit items (glossary defaults; the 2011 item rows have no English name). */
 export const LIMIT_ITEM_NAMES: Record<string, string> = {
-  i148023: 'Kebab Flavored Chips',
+  i148023: 'Kebab-Flavored Chips',
   i148024: 'ANBU Mask',
   i148025: 'Family Badge',
   i148026: 'Secret Letter',
@@ -39,13 +39,15 @@ export const LIMIT_ITEM_NAMES: Record<string, string> = {
   i148036: 'Mysterious Weapon Bags',
   i148037: 'Scroll of Spiritual Weapons',
   i148038: "Jinchuriki's Note",
-  i148039: 'Contract for Summoning',
+  i148039: 'Summoning Contract',
   i148040: 'Forbidden Scroll',
 }
 
 const text = names as Record<string, string>
 const limitName = (limit: BloodlineLimit) => text[limit.nameKey] ?? `Bloodline ${limit.limitId}`
 const npcName = (limit: BloodlineLimit) => text[limit.npcNameKey] ?? limitName(limit)
+/** Two bloodlines share the names Byakugan and Mangekyo Sharingan, so lists add the teacher. */
+export const limitLabel = (limit: BloodlineLimit) => `${limitName(limit)} (${npcName(limit)})`
 
 /** Attributes are x100 internally; per-mille terms show as tenths of a percent. */
 const ATTRIBUTES = new Set(['strength', 'agility', 'stamina'])
@@ -117,7 +119,7 @@ export function BloodlinesWindow({
         onChange={setTab}
         tabs={[
           { id: 'house', title: 'Ninja House' },
-          { id: 'active', title: 'Bloodlines' },
+          { id: 'active', title: 'Active' },
           { id: 'souls', title: 'Souls' },
           { id: 'prayer', title: 'Prayer' },
         ]}
@@ -179,7 +181,7 @@ export function BloodlinesWindow({
                   {entry ? (
                     <>
                       <img src={limitIcon(entry.limitId)} alt="" className="size-12" />
-                      <span className="text-center font-bold">{limitName(entry)}</span>
+                      <span className="text-center font-bold">{limitLabel(entry)}</span>
                       <GameButton
                         small
                         disabled={busy}
@@ -197,7 +199,7 @@ export function BloodlinesWindow({
             <section className="game-card p-2">
               <h3 className="font-bold">Bonuses</h3>
               {data.bonuses.length === 0 ? (
-                <p>Activate an unlocked bloodline at the Ninja House.</p>
+                <p>Activate a bloodline in the Ninja House to see its bonuses.</p>
               ) : (
                 <ul aria-label="Bloodline bonuses" className="grid grid-cols-2 gap-x-4">
                   {data.bonuses.map((stat) => (
@@ -242,9 +244,7 @@ function LimitCard({
     <section aria-label={limitName(limit)} className="game-card flex gap-2 p-2">
       <img src={limitIcon(limit.limitId)} alt="" className="size-14 shrink-0" />
       <div className="flex grow flex-col gap-1">
-        <h3 className="font-bold">
-          {limitName(limit)} ({npcName(limit)})
-        </h3>
+        <h3 className="font-bold">{limitLabel(limit)}</h3>
         <p>
           Required level {limit.requiredLevel}.{limit.unlocked ? ' Unlocked.' : ''}
           {limit.active ? ' Active.' : ''}
@@ -278,7 +278,7 @@ function LimitCard({
                 }
                 onClick={onTurnIn}
               >
-                Turn in {data.itemsPerTurnIn}
+                Turn in {data.itemsPerTurnIn} items
               </GameButton>
             </div>
           </>

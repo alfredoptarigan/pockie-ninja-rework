@@ -105,9 +105,9 @@ async function lockSouls(
     .where(and(eq(characterSouls.characterId, characterId), inArray(characterSouls.id, [...ids])))
     .orderBy(asc(characterSouls.id))
     .for('update')
-  if (rows.length !== ids.length) throw bad('no_soul', 'That soul is gone.')
+  if (rows.length !== ids.length) throw bad('no_soul', 'That soul no longer exists.')
   if (loose && rows.some((r) => r.limitId !== null))
-    throw bad('socketed', 'Unbind the soul from its bloodline first.')
+    throw bad('socketed', 'Remove the soul from its bloodline first.')
   return new Map(rows.map((r) => [r.id, r]))
 }
 
@@ -131,7 +131,7 @@ async function discover(tx: Tx, userId: string, wanted: number) {
     .from(characterSouls)
     .where(eq(characterSouls.characterId, character.id))) as [{ held: number }]
   if (held + wanted > rebornSouls().inventory)
-    throw bad('inventory_full', `Your soul inventory holds ${rebornSouls().inventory} souls.`)
+    throw bad('inventory_full', `Your soul inventory is full (${rebornSouls().inventory} souls).`)
   const rng = random()
   await tx
     .insert(characterSouls)
@@ -156,7 +156,10 @@ async function synthesize(tx: Tx, userId: string, ids: string[]) {
   const souls = await lockSouls(tx, character.id, ids)
   const levels = synthesisGroups(ids.map((id) => souls.get(id)!.level))
   if (!levels)
-    throw bad('bad_synthesis', 'Synthesis needs groups of 3 souls of one level below 10.')
+    throw bad(
+      'bad_synthesis',
+      'Synthesis needs groups of 3 souls of the same level, below level 10.',
+    )
   await deleteSouls(tx, ids)
   const rng = random()
   await tx
@@ -171,7 +174,10 @@ async function refine(tx: Tx, userId: string, targetId: string, fuelIds: string[
   const souls = await lockSouls(tx, character.id, [targetId, ...fuelIds])
   const target = souls.get(targetId)!
   if (fuelIds.some((id) => souls.get(id)!.level !== target.level))
-    throw bad('level_mismatch', 'Refining needs fuel souls of the same level as the target.')
+    throw bad(
+      'level_mismatch',
+      'Refining needs souls of the same level as the first selected soul.',
+    )
   const rng = random()
   const type = fuelIds.reduce((current) => refineType(current, rng), target.type)
   await deleteSouls(tx, fuelIds)
@@ -184,7 +190,7 @@ async function bind(tx: Tx, userId: string, soulId: string, limitId: number) {
   const soul = (await lockSouls(tx, character.id, [soulId])).get(soulId)!
   await unlockedLimit(tx, character.id, limitId)
   const gate = soulLevelGate(soul.level)
-  if (character.level < gate) throw bad('too_low', `This soul needs level ${gate}.`)
+  if (character.level < gate) throw bad('too_low', `This soul needs character level ${gate}.`)
   const socketed = await tx
     .select({ type: characterSouls.type, socket: characterSouls.socket })
     .from(characterSouls)
@@ -204,7 +210,7 @@ async function bind(tx: Tx, userId: string, soulId: string, limitId: number) {
 async function unbind(tx: Tx, userId: string, soulId: string) {
   const character = await lockCharacter(tx, userId)
   const soul = (await lockSouls(tx, character.id, [soulId], { loose: false })).get(soulId)!
-  if (soul.limitId === null) throw bad('not_socketed', 'This soul is not in a bloodline.')
+  if (soul.limitId === null) throw bad('not_socketed', 'This soul is not socketed.')
   await tx
     .update(characterSouls)
     .set({ limitId: null, socket: null })

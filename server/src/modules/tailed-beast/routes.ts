@@ -240,8 +240,7 @@ async function result(tx: Tx, characterId: string): Promise<TailedBeastResult> {
 async function fight(tx: Tx, character: CharacterRow, beast: number, mode: number) {
   const now = new Date()
   const week = weekStart(now)
-  if (!todayBeasts(now).includes(beast))
-    throw bad('not_today', 'That tailed beast is not out today.')
+  if (!todayBeasts(now).includes(beast)) throw bad('not_today', 'That beast is not out today.')
   requireAlive(character, 'fight')
   const me = await lockPlayer(tx, character, week)
   const used = spendTickets(ticketsUsed(me, now), mode)
@@ -263,7 +262,7 @@ async function fight(tx: Tx, character: CharacterRow, beast: number, mode: numbe
       ),
     )
     .for('update')
-  if (!pool || pool.hpLeft <= 0) throw bad('beast_dead', 'This tailed beast was already defeated.')
+  if (!pool || pool.hpLeft <= 0) throw bad('beast_dead', 'This beast was already defeated.')
 
   // Beast fights do not cost HP or MP: the ninja enters at full strength and is not hurt.
   const player = await playerFighter(tx, character)
@@ -292,7 +291,7 @@ async function fight(tx: Tx, character: CharacterRow, beast: number, mode: numbe
       ),
     )
     .returning({ hpLeft: tailedBeastPools.hpLeft })
-  if (!after) throw bad('beast_dead', 'This tailed beast was already defeated.')
+  if (!after) throw bad('beast_dead', 'This beast was already defeated.')
 
   const honor = honorFor(damage)
   await tx
@@ -363,7 +362,7 @@ async function buy(tx: Tx, character: CharacterRow, itemId: string, count: numbe
   // The only limited offer is the Level 10 Stone Bag (5 a week).
   const limited = offer.limit !== undefined
   if (limited && me.stoneBagsBought + count > offer.limit!)
-    throw bad('limit_reached', `You can buy only ${offer.limit} of these a week.`)
+    throw bad('limit_reached', `You can buy only ${offer.limit} of this item a week.`)
   const price = offer.essence * count
   if (me.essence < price) throw bad('no_essence', 'You do not have enough Essence.')
   const awards = Array.from({ length: count }, () => ({ itemId, bound: BOUND }))

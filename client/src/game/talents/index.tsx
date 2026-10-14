@@ -17,14 +17,14 @@ export const talentsKey = ['game', 'talents'] as const
 export const talentIcon = (id: number) => `/assets/reborn/ui/UIResource/Talent/talent${id}.webp`
 /** Our own text (decision 8): what each talent does once the enemy leads. */
 export const TALENT_DESCRIPTIONS: Record<number, string> = {
-  1: 'Parry more often when the enemy Pierce beats your Parry.',
-  2: 'Weakens enemy Parry that beats your Pierce.',
-  3: 'Weakens enemy Armor Break that beats your Defense.',
-  4: 'Weakens enemy Defense that beats your Armor Break.',
-  5: 'Weakens enemy Critical that beats your Toughness.',
-  6: 'Land critical hits more often when the enemy Toughness beats your Critical.',
-  7: 'Dodge more often when the enemy Hit beats your Dodge.',
-  8: 'Weakens enemy Dodge that beats your Hit.',
+  1: "When the enemy's Pierce beats your Block, you block more often.",
+  2: "When the enemy's Block beats your Pierce, their Block is weakened.",
+  3: "When the enemy's Armor Break beats your Defense, their Armor Break is weakened.",
+  4: "When the enemy's Defense beats your Armor Break, their Defense is weakened.",
+  5: "When the enemy's Critical beats your Constitution, their Critical is weakened.",
+  6: "When the enemy's Constitution beats your Critical, you land critical hits more often.",
+  7: "When the enemy's Hit beats your Dodge, you dodge more often.",
+  8: "When the enemy's Dodge beats your Hit, their Dodge is weakened.",
 }
 const nameOf = (talent: TalentEntry) =>
   (names as Record<string, string>)[talent.nameKey] ?? `Talent ${talent.talentId}`
@@ -53,7 +53,7 @@ export function TalentsWindow({
     onSuccess: (result) => {
       const { upgrade: gained } = result
       setMessage(
-        `${gained.crit ? 'Critical! ' : ''}+${gained.exp} EXP${gained.levelsGained ? `, level up` : ''}.`,
+        `${gained.crit ? 'Critical upgrade! ' : ''}+${gained.exp} EXP.${gained.levelsGained ? ' Level up!' : ''}`,
       )
       queryClient.setQueryData(talentsKey, result)
       apply(result)
@@ -99,7 +99,7 @@ export function TalentsWindow({
                     <img src={talentIcon(entry.talentId)} alt="" className="size-10" />
                     <span className="font-bold">{nameOf(entry)}</span>
                     <span>
-                      Level {entry.level}
+                      Lv. {entry.level}
                       {entry.active ? ' (Active)' : ''}
                     </span>
                   </button>
@@ -109,7 +109,7 @@ export function TalentsWindow({
             {talent && (
               <section aria-label={nameOf(talent)} className="game-card flex flex-col gap-1 p-2">
                 <h3 className="font-bold">
-                  {nameOf(talent)}, level {talent.level}/{data.cap}
+                  {nameOf(talent)} (Lv. {talent.level}/{data.cap})
                 </h3>
                 <p>{TALENT_DESCRIPTIONS[talent.talentId]}</p>
                 <Bar
@@ -124,13 +124,13 @@ export function TalentsWindow({
                       disabled={busy || locked || talent.level >= data.cap}
                       onClick={() => upgrade.mutate({ id: talent.talentId, useGold: false })}
                     >
-                      Normal ({data.nextCost.stones.toLocaleString('en-US')} Stone)
+                      Upgrade for {data.nextCost.stones.toLocaleString('en-US')} Stone
                     </GameButton>
                     <GameButton
                       disabled={busy || locked || talent.level >= data.cap}
                       onClick={() => upgrade.mutate({ id: talent.talentId, useGold: true })}
                     >
-                      Gold ({data.nextCost.gold} Gold)
+                      Upgrade for {data.nextCost.gold} Gold
                     </GameButton>
                   </div>
                 ) : (

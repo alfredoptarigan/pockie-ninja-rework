@@ -96,15 +96,15 @@ async function turnIn(tx: Tx, userId: string, limitId: number): Promise<Bloodlin
   const data = rebornBloodlines()
   const limit = limitData(limitId)
   if (character.level < limit.requiredLevel)
-    throw bad('too_low', `This bloodline needs level ${limit.requiredLevel}.`)
+    throw bad('too_low', `This bloodline needs character level ${limit.requiredLevel}.`)
   const used = turnInsUsed(character)
   if (used >= data.turnInsPerDay)
-    throw bad('daily_limit', `You can turn in items ${data.turnInsPerDay} times a day.`)
+    throw bad('daily_limit', `You can turn in items only ${data.turnInsPerDay} times a day.`)
   const row = await lockLimit(tx, character.id, limitId)
   if (row?.unlockedAt) throw bad('already_unlocked', 'This bloodline is already unlocked.')
   const held = (await itemCounts(tx, character.id)).get(limit.unlockItem) ?? 0
   if (held < data.itemsPerTurnIn)
-    throw bad('not_enough_items', `You need ${data.itemsPerTurnIn} of the requested item.`)
+    throw bad('not_enough_items', `You need ${data.itemsPerTurnIn} of this item.`)
 
   await removeItems(tx, character.id, limit.unlockItem, data.itemsPerTurnIn)
   const amity = Math.min((row?.amity ?? 0) + data.amityPerTurnIn, limit.amity)
@@ -136,7 +136,10 @@ async function setActive(tx: Tx, userId: string, limitId: number, active: boolea
     if (active) {
       if (!row?.unlockedAt) throw bad('locked', 'Unlock this bloodline at the Ninja House first.')
       if (character.level < limitData(limitId).requiredLevel)
-        throw bad('too_low', `This bloodline needs level ${limitData(limitId).requiredLevel}.`)
+        throw bad(
+          'too_low',
+          `This bloodline needs character level ${limitData(limitId).requiredLevel}.`,
+        )
       if (taken.length >= rebornBloodlines().maxActive)
         throw bad(
           'too_many_active',

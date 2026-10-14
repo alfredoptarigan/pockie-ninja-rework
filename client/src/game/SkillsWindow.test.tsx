@@ -72,7 +72,7 @@ describe('Skills window', () => {
       'giftCoupon',
     )
     await userEvent.click(screen.getByRole('button', { name: 'Reset skills' }))
-    expect(screen.getByText(/clear all three trees/)).toHaveTextContent('8 Gift coupons')
+    expect(screen.getByText(/clear all three trees/)).toHaveTextContent('8 Gift Coupons')
     expect(fetchMock.mock.calls.some(([url]) => url === '/api/game/skills/reset')).toBe(false)
     await userEvent.click(screen.getByRole('button', { name: 'Confirm reset' }))
     expect(fetchMock).toHaveBeenCalledWith(
@@ -163,8 +163,8 @@ describe('Skills window', () => {
     expect(screen.getByText('Izanagi')).toBeVisible()
     expect(screen.getAllByText('Permanent')).toHaveLength(2)
     expect(screen.getByText('3d 2h left')).toBeVisible()
-    expect(screen.getByRole('button', { name: 'Slot Royal Hollow Flash in tree 1' })).toBeDisabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Slot Royal Hollow Flash in tree 2' }))
+    expect(screen.getByRole('button', { name: 'Add Royal Hollow Flash to tree 1' })).toBeDisabled()
+    await userEvent.click(screen.getByRole('button', { name: 'Add Royal Hollow Flash to tree 2' }))
     expect(fetchMock).toHaveBeenCalledWith(
       '/api/game/skills/slot',
       expect.objectContaining({ body: JSON.stringify({ tree: 1, slot: 0, skillId: 18046 }) }),

@@ -53,7 +53,7 @@ export function generate() {
     30116: commands.arena,
   }
   const tutorial = [
-    { level: 1, type: 3, text: 'Meet the village elder and learn where to find assignments.' },
+    { level: 1, type: 3, text: 'Meet the Village Elder and learn where to find assignments.' },
     { level: 1, command: 8887, text: 'Open your bag and equip a weapon before setting out.' },
     { level: 1, type: 2, text: 'Patrol the outskirts and defeat two creatures along the road.' },
     {
@@ -84,7 +84,7 @@ export function generate() {
     {
       level: 20,
       command: commands.bloodline,
-      text: 'Bring the required gifts to the Ninja House until you unlock a bloodline.',
+      text: 'Bring the required items to the Ninja House until you unlock a bloodline.',
     },
   ]
   const main = Object.values(baseTasks).filter((row) => Number(row.TaskBaseType) === 1)
@@ -124,8 +124,7 @@ export function generate() {
     text[`lg_Task_${id}`] = title
     text[`lg_TaskDes_${id}`] = narrative
     text[`lg_RebornQuest_${id}_start`] = narrative
-    text[`lg_RebornQuest_${id}_submit`] =
-      'Your report has been received. The next assignment is ready when you are.'
+    text[`lg_RebornQuest_${id}_submit`] = 'Well done. The next assignment is ready when you are.'
     const rewardRows = main.filter((row) => Number(row.RequireLevel) === level)
     const exp = rewardRows.length
       ? Math.floor(Math.min(...rewardRows.map((row) => Number(row.RewardExp))) / 2)
@@ -221,7 +220,7 @@ export function generate() {
       const descriptions: Record<number, string> = {
         1: `Recover ${objective.TargetRequireNum} supplies from {@0:target}.`,
         2: `Defeat ${objective.TargetRequireNum} {@0:target}.`,
-        3: 'Speak with {@0:target}.',
+        3: 'Talk to {@0:target}.',
         8: narrative,
       }
       text[`lg_RebornQuest_${id}_step_${i}`] = descriptions[Number(objective.SubTaskType)]!

@@ -48,10 +48,10 @@ describe('TalentsWindow', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(8)
     expect(screen.getByText(/Upgrades left today: 31\/40/)).toBeVisible()
     expect(screen.getByRole('meter', { name: 'EXP' })).toHaveAttribute('aria-valuenow', '50')
-    expect(screen.getByRole('button', { name: 'Normal (5,120,000 Stone)' })).toBeEnabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Gold (11 Gold)' }))
+    expect(screen.getByRole('button', { name: 'Upgrade for 5,120,000 Stone' })).toBeEnabled()
+    await userEvent.click(screen.getByRole('button', { name: 'Upgrade for 11 Gold' }))
     expect(requestBody(fetch, 'POST /api/game/talents/1/upgrade')).toEqual({ useGold: true })
-    expect(await screen.findByText('Critical! +300 EXP.')).toBeVisible()
+    expect(await screen.findByText('Critical upgrade! +300 EXP.')).toBeVisible()
   })
 
   it('activates a trained talent and cannot activate an untrained one', async () => {
@@ -76,7 +76,7 @@ describe('TalentsWindow', () => {
     })
     renderWithProviders(<TalentsWindow character={{ ...character, level: 40 }} onClose={vi.fn()} />)
     expect(await screen.findByText('Talents unlock at level 51.')).toBeVisible()
-    expect(screen.getByRole('button', { name: /Normal/ })).toBeDisabled()
+    expect(screen.getByRole('button', { name: /Stone/ })).toBeDisabled()
     await userEvent.click(screen.getByRole('button', { name: 'Activate' }))
     expect(await screen.findByText('Only 3 talents can be active.')).toBeVisible()
   })
