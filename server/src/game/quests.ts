@@ -232,6 +232,9 @@ export const REBORN_INSCRIBE_COMMAND = 82003
 export const REBORN_ARENA_FIGHT_COMMAND = 82004
 export const REBORN_LAS_NOCHES_FLOOR_COMMAND = 82005
 export const REBORN_BLOODLINE_UNLOCK_COMMAND = 82006
+/** M6 decision 38: a pet becomes the active pet; a pet starts digesting its food. */
+export const REBORN_EQUIP_PET_COMMAND = 82007
+export const REBORN_FEED_PET_COMMAND = 82008
 
 /** What the player does for a rookie command step, for the client to point at (bag, weapon). */
 export function stepCommand(step: ReturnType<typeof subTasks>[number]) {

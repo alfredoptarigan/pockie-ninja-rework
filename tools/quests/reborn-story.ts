@@ -10,7 +10,9 @@ type Row = Record<string, string | number>
 const root = new URL('../../', import.meta.url)
 const read = <T>(name: string): T =>
   JSON.parse(readFileSync(new URL(`server/data/game/${name}.json`, root), 'utf8')) as T
-export const tutorialIds = [20001, 20002, 20003, 20004, 20005, 20009, 20016, 20017, 20018]
+export const tutorialIds = [
+  20001, 20002, 20003, 20004, 20005, 20009, 20012, 20014, 20015, 20016, 20017, 20018,
+]
 // Kept local to avoid loading the server at generation time; tests pin the exported hook ids.
 export const commands = {
   identify: 82001,
@@ -19,6 +21,13 @@ export const commands = {
   arena: 82004,
   lasNoches: 82005,
   bloodline: 82006,
+  equipPet: 82007,
+  feedPet: 82008,
+}
+/** Ours: the Elder hands out a Baby Vulture (the level-1 explore pet) and one food per food type. */
+export const tutorialRewards: Record<number, string> = {
+  20012: 'i320002',
+  20014: 'i170113,1;i170114,1;i170115,1;i170116,1',
 }
 export function storyLevel(id: number) {
   const index = id - 30001
@@ -70,6 +79,21 @@ export function generate() {
       level: 10,
       command: commands.inscribe,
       text: 'Successfully inscribe a piece of equipment at the blacksmith.',
+    },
+    {
+      level: 10,
+      type: 3,
+      text: 'Return to the Village Elder. A ninja who has come this far has earned a companion.',
+    },
+    {
+      level: 10,
+      command: commands.equipPet,
+      text: 'Use the Baby Vulture in your bag, then set it as your active pet in the Pet Kennel.',
+    },
+    {
+      level: 10,
+      command: commands.feedPet,
+      text: 'Fill the food slots of your pet in the Pet Kennel and let it start digesting.',
     },
     {
       level: 10,
@@ -162,7 +186,7 @@ export function generate() {
       SubmitNpcMessageID: `RebornQuest_${id}_submit`,
       RewardExp: sourceId === 30022 ? 3060 : exp,
       RewardMoney: `0,${sourceId === 30022 ? 36000 : stone}`,
-      RewardItem: 0,
+      RewardItem: tutorialRewards[sourceId] ?? 0,
     }
     const command = isStory ? storyCommands[sourceId] : lesson!.command
     const type = command
