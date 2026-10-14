@@ -51,13 +51,7 @@ export interface StoredMatch {
  * Arena snapshots of level-50+ ninjas nearest `score` (Team Stone score, 0 if never played),
  * skipping `taken`: everyone in the queue and every seat already filled this run.
  */
-async function pickBots(
-  db: Db,
-  count: number,
-  score: number,
-  taken: Set<string>,
-  now: Date,
-) {
+async function pickBots(db: Db, count: number, score: number, taken: Set<string>, now: Date) {
   if (count === 0) return []
   const rows = await db
     .select({ id: arenaPlayers.characterId, snapshot: arenaPlayers.snapshot })
