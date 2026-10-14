@@ -1,8 +1,7 @@
 // Fight buffs of the batch B trigger ninjutsu (./ninjutsu-trigger-b.ts), from
 // RES/javascript/buff/*.js. Rhino writes numbers into Java int fields by truncation.
-// ponytail: the regeneration auras (11861-11863, pets) shorten the clay bomb and burn and add
-// 11888 in OnAdd; not ported (M6), like the timed control buffs in buffs.ts.
 import type { BuffScripts } from '../buffs.js'
+import { regenAuraResist } from './pet-core.js'
 import type { FightContext, Fighter } from '../types.js'
 import { BUFF_IMMUNITY } from './parry.js'
 import { EXCITED_BY_PRAYER } from './ninjutsu-trigger-b.js'
@@ -56,8 +55,8 @@ export const NINJUTSU_TRIGGER_B_BUFFS: Record<string, BuffScripts> = {
   'buff/buff_simen_11850.js': gate(80),
   // Clay bomb (3812): after SaveData units the owner takes back the HP it lost meanwhile (min 1).
   'buff/buff_yinbaoniantu_11820.js': {
-    onAdd: (_ctx, self, buff, _fv, timer) => {
-      buff.lifeTime = buff.saveData
+    onAdd: (ctx, self, buff, fv, timer) => {
+      buff.lifeTime = regenAuraResist(ctx, self, buff.saveData, fv, timer)
       buff.saveData1 = timer
       buff.saveData = self.hp
     },

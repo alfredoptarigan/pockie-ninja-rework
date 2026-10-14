@@ -134,6 +134,50 @@ describe('regeneration auras 11861-11863', () => {
     expect(fight([buff(11861, 40)])).toBe(540)
   })
 
+  it.each([11808, 11810, 11820, 11833])(
+    'shortens %i on add with each aura and restores its effect on expiry',
+    (id) => {
+      for (const auraId of [11861, 11862, 11863]) {
+        const self = makeFighter({ buffs: [buff(auraId, 125)] })
+        const active = buff(id, 601)
+        const { ctx, calls } = fakeContext()
+        const before = {
+          attack: self.minAtkMul,
+          speed: self.atkTimeMul,
+          canAttack: self.canAttack,
+          canUseSkill: self.canUseSkill,
+        }
+        BUFFS[id]!.onAdd!(ctx, self, active, { actor: 0, event: 9 }, 17)
+        expect(active.lifeTime).toBe(450)
+        expect(calls).toContainEqual(['addBuff', 0, 11888, 0])
+        BUFFS[id]!.onRemove?.(ctx, self, active, { actor: 0, event: 10 }, 467)
+        if (id === 11808) expect(self.minAtkMul).toBe(before.attack)
+        if (id === 11810) expect(self.atkTimeMul).toBe(before.speed)
+        if (id === 11833)
+          expect([self.canAttack, self.canUseSkill]).toEqual([before.canAttack, before.canUseSkill])
+        const ordinary = buff(id, 601)
+        BUFFS[id]!.onAdd!(fakeContext().ctx, makeFighter(), ordinary, { actor: 0, event: 9 }, 17)
+        expect(ordinary.lifeTime).toBe(601)
+      }
+    },
+  )
+
+  it('shortens burn ticks on add and expires after the reduced count', () => {
+    const self = makeFighter({ buffs: [buff(11861, 125)] })
+    const burn = buff(11804, 10, 4)
+    const { ctx, calls } = fakeContext()
+    BUFFS[11804]!.onAdd!(ctx, self, burn, { actor: 0, event: 9 }, 0)
+    expect(burn.saveData1).toBe(3)
+    expect(calls).toEqual([['addBuff', 0, 11888, 0]])
+    for (let tick = 0; tick < 3; tick++) {
+      BUFFS[11804]!.onActivation!(ctx, self, burn, { actor: 0, event: 14 }, tick)
+      expect(burn.lifeTime).toBe(tick === 2 ? 0 : -1)
+    }
+    const ordinary = buff(11804, 10, 4)
+    BUFFS[11804]!.onAdd!(fakeContext().ctx, makeFighter(), ordinary, { actor: 0, event: 9 }, 0)
+    expect(ordinary.saveData1).toBe(4)
+  })
+
   it('reset SaveData on add (the aura skills raise it later)', () => {
     const aura = buff(11862, 7, 7)
     BUFFS[11862]!.onAdd!(fakeContext().ctx, makeFighter(), aura, { actor: 0, event: 9 }, 0)

@@ -164,3 +164,41 @@ describe('Reborn scroll skill overlay', () => {
     expect(SKILL_SCRIPTS[skill.javascript!]).toBeTypeOf('function')
   })
 })
+
+describe('pet skill coverage (M6)', () => {
+  const pets = data<{
+    skills: Record<
+      string,
+      { kind: number; script: string | null; skillAdd: Record<string, number> | null }
+    >
+  }>('reborn/pet-skills')
+  // These eleven legacy Halo/Help rows have no Rhino script or effect data in 2011.
+  // The ledger excludes them from learn pools; keep the list exact so new gaps fail.
+  const legacyEmpty = [40004, 40005, 40011, 40016, 40017, 40061, 40065, 40069, 40073, 40077, 40096]
+
+  it('has a registered script for every scripted pet row and data for every Pass row', () => {
+    const empty: number[] = []
+    for (const [id, pet] of Object.entries(pets.skills)) {
+      if (pet.kind === 3) {
+        expect(pet.script, id).toBeNull()
+        expect(pet.skillAdd, id).not.toBeNull()
+      } else if (pet.script) {
+        expect(SKILL_SCRIPTS[pet.script], id).toBeTypeOf('function')
+      } else {
+        empty.push(Number(id))
+      }
+    }
+    expect(empty).toEqual(legacyEmpty)
+  })
+
+  it.each([
+    [50057, 200],
+    [50071, 250],
+  ])('includes Sharpness book %i as a speed Pass row', (id, value) => {
+    expect(pets.skills[id]).toMatchObject({
+      kind: 3,
+      script: null,
+      skillAdd: { AtkTimeMulSkill: value },
+    })
+  })
+})
