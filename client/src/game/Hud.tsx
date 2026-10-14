@@ -15,7 +15,7 @@ import {
 import { Link } from 'react-router'
 import { useLogout } from '../lib/auth'
 import { ArenaButton } from './arena'
-import { SoundSettings } from './audio'
+import { SoundSettings, SoundToggle } from './audio'
 import { useOutfitPortrait } from './art'
 import { TwentyMinuteRewardButton } from './events'
 import { GameButton } from './skin'
@@ -26,40 +26,129 @@ import { useOpenWindow, type WindowName } from './windows'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
 
 const CURRENCIES = [
-  { key: 'stone', label: 'Stone', box: 'game-currency-stone', color: 'text-[#f5f5f5]' },
-  { key: 'gold', label: 'Gold', box: 'game-currency-gold', color: 'text-[#ffd700]' },
-  { key: 'giftCoupon', label: 'Coupons', box: 'game-currency-coupon', color: 'text-[#f5f5f5]' },
+  {
+    key: 'stone',
+    label: 'Stone',
+    unit: 'stones',
+    box: 'game-currency-stone',
+    color: 'text-[#f5f5f5]',
+  },
+  { key: 'gold', label: 'Gold', unit: 'gold', box: 'game-currency-gold', color: 'text-[#ffd700]' },
+  {
+    key: 'giftCoupon',
+    label: 'Gift Coupons',
+    unit: 'gift coupons',
+    box: 'game-currency-coupon',
+    color: 'text-[#f5f5f5]',
+  },
 ] as const
 const SHADOW = '[text-shadow:0_0_2px_#000,0_0_2px_#000,0_0_2px_#000]'
 
 /** The 1:1 HUD layer, for HUD pieces rendered by the scene (its monster cards) through a portal. */
 export const HudLayer = createContext<HTMLElement | null>(null)
 const number = (value: number) => value.toLocaleString('en-US')
+const COMPACT = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
+/** Reborn's formatShort: en-US grouping under 10,000, else K/M/B/T with one decimal. */
+export const shortNumber = (value: number) =>
+  value < 10000 ? number(value) : COMPACT.format(value)
 
+const CLOCK_MS = 10_000
+const PING_MS = 5_000
+/**
+ * Server time as HH:MM, refreshed every 10 s. ponytail: Reborn shows the account's server time
+ * zone (Europe/Lisbon); our daily and weekly resets run on UTC, so the clock shows UTC.
+ */
+function ServerClock() {
+  const utc = () => new Date().toISOString().slice(11, 16)
+  const [time, setTime] = useState(utc)
+  useEffect(() => {
+    const timer = window.setInterval(() => setTime(utc()), CLOCK_MS)
+    return () => window.clearInterval(timer)
+  }, [])
+  return <span title="Server time (UTC)">{time}</span>
+}
+
+/** Round trip of GET /api/health every 5 s (Reborn pings over its socket every 1 s). */
+function Ping() {
+  const [ms, setMs] = useState<number | null>(null)
+  useEffect(() => {
+    let live = true
+    const measure = async () => {
+      const start = performance.now()
+      try {
+        await fetch('/api/health', { cache: 'no-store' })
+        if (live) setMs(Math.round(performance.now() - start))
+      } catch {
+        // Offline or the server is down: show "--ms" until a ping answers again.
+        if (live) setMs(null)
+      }
+    }
+    void measure()
+    const timer = window.setInterval(() => void measure(), PING_MS)
+    return () => {
+      live = false
+      window.clearInterval(timer)
+    }
+  }, [])
+  return <span title="Updates every 5s">{`${ms ?? '--'}ms`}</span>
+}
+
+const TOP_BUTTON = 'h-[22px] w-[66px] !min-w-0 !px-0'
+
+/**
+ * Reborn's top bar (docs/audit/reborn-ui-audit.md §3, original theme): currencies on the left;
+ * clock, ping, sound, Welcome, Discord, Settings and Website on the right. Arena and Events stay
+ * after Settings (Reborn reaches them from village buildings we lack). ponytail: no Patreon or
+ * Referal (no purchases or referrals); Discord waits for a community link.
+ */
 export function TopBar({ character }: { character: Character }) {
+  const openFeature = useOpenWindow()
   return (
-    <div className="game-topbar pointer-events-auto absolute inset-x-0 top-0 h-[30px]">
+    <div className="pointer-events-auto absolute top-px left-px h-[33px] w-[calc(100%-7px)] font-game">
+      <div aria-hidden="true" className="game-topbar absolute inset-x-0 top-0 h-[24px]" />
       <dl aria-label="Currencies" className="absolute top-[2px] left-[4px] flex gap-[6px]">
-        {CURRENCIES.map(({ key, label, box, color }) => (
-          <div key={key} className={`relative h-6 w-[115px] ${box}`} title={label}>
+        {CURRENCIES.map(({ key, label, unit, box, color }) => (
+          <div
+            key={key}
+            className={`relative h-6 w-[115px] ${box}`}
+            title={`${number(character[key])} ${unit}`}
+          >
             <dt className="sr-only">{label}</dt>
             <dd
               className={`absolute top-[4px] left-[26px] w-[80px] text-right font-mono text-xs ${color}`}
             >
-              {number(character[key])}
+              {shortNumber(character[key])}
             </dd>
           </div>
         ))}
       </dl>
-      <ArenaButton />
-      <div className="absolute top-[4px] right-[150px]">
-        <EventsMenu />
-      </div>
-      <div className="absolute top-[4px] right-[6px]">
+      <nav
+        aria-label="Game menu"
+        className={`absolute top-[3px] right-px flex items-center gap-[5px] text-xs text-[#f5f5f5] ${SHADOW}`}
+      >
+        <ServerClock />
+        <Ping />
+        <SoundToggle />
+        <button
+          type="button"
+          onClick={() => openFeature('ninjaDiary')}
+          className="h-[22px] cursor-pointer rounded-sm border border-[#b4914e] bg-[#493521] px-2 font-[Arial] text-[11px] font-bold text-[#ffe1a0] [text-shadow:none] hover:brightness-125"
+        >
+          Welcome
+        </button>
+        <GameButton className={TOP_BUTTON} disabled title="Coming soon">
+          Discord
+        </GameButton>
         <SettingsMenu />
-      </div>
-      {/* Right of the player card. */}
-      <TwentyMinuteRewardButton className="absolute top-[36px] left-[230px]" />
+        <ArenaButton />
+        <EventsMenu />
+        <Link
+          to="/"
+          className={`game-button inline-flex items-center justify-center text-xs ${TOP_BUTTON}`}
+        >
+          Website
+        </Link>
+      </nav>
     </div>
   )
 }
@@ -95,7 +184,7 @@ function HudMenu({
       }}
     >
       <GameButton
-        className="h-[22px] w-[66px] !min-w-0 !px-0"
+        className={TOP_BUTTON}
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((o) => !o)}
@@ -159,7 +248,7 @@ const EVENTS: { label: string; window: WindowName }[] = [
   { label: 'Kennel Shop', window: 'kennelShop' },
 ]
 
-/** Events button of the top strip, left of Arena. */
+/** Events button of the top strip, after Arena. */
 export function EventsMenu() {
   const openFeature = useOpenWindow()
   return (
@@ -184,7 +273,7 @@ export function EventsMenu() {
   )
 }
 
-/** One bar of the player card: the original bar art with its fill clipped, percent on top. */
+/** One bar of the player card: the original bar art with its fill clipped, `text` on top. */
 function CardBar({
   label,
   value,
@@ -193,14 +282,17 @@ function CardBar({
   x,
   y,
   color,
+  text,
 }: {
   label: string
   value: number
   max: number
-  kind: 'hp' | 'mp'
+  kind: 'hp' | 'mp' | 'vp'
   x: number
   y: number
   color: string
+  /** Defaults to the percentage, as Reborn shows HP and MP. */
+  text?: string
 }) {
   const percent = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0
   return (
@@ -218,17 +310,15 @@ function CardBar({
       <span
         className={`absolute inset-0 z-10 text-center text-[8px] leading-[11px] font-bold ${color} [text-shadow:1px_1px_2px_#000,-1px_-1px_2px_#000]`}
       >
-        {percent}%
+        {text ?? `${percent}%`}
       </span>
     </div>
   )
 }
 
-/**
- * The card art has a third groove under HP and MP for the original Energy (VP) bar. Energy is not
- * ported (decisions 1 and 12), so the empty groove is cut out of the card (205x78 HUD pixels).
- */
-const NO_VP_GROOVE = "path(evenodd, 'M0 0H205V78H0Z M77 41.5H205V54.5H145V53H77Z')"
+/** Reborn's energy cap; we have no Energy system yet, so the VP bar stays at 0 of it. */
+const VP_MAX = 200
+const DAY_MS = 86_400_000
 
 const vipDate = (iso: string) =>
   new Date(iso).toLocaleDateString('en-US', {
@@ -238,41 +328,47 @@ const vipDate = (iso: string) =>
     timeZone: 'UTC',
   })
 
-/** VIP membership (decision 14): a text badge next to the level, its end date in the tooltip. */
-function VipBadge({ until }: { until: string | null }) {
-  const [now] = useState(Date.now)
-  if (!until || Date.parse(until) <= now) return null
+/** Whole VIP days left (a part day counts), or null without VIP or once it has run out. */
+const vipDaysLeft = (until: string | null, now: number) =>
+  until && Date.parse(until) > now ? Math.ceil((Date.parse(until) - now) / DAY_MS) : null
+
+/** VIP membership (decision 14): a badge right of the level, the days remaining on hover. */
+function VipBadge({ until, days }: { until: string; days: number }) {
   return (
     <span
-      title={`VIP until ${vipDate(until)}`}
-      className={`absolute top-[58px] left-[150px] text-[11px] font-bold text-[#ffd700] ${SHADOW}`}
+      title={`VIP: ${days} ${days === 1 ? 'day' : 'days'} remaining (until ${vipDate(until)})`}
+      className={`absolute top-[54px] left-[120px] text-[11px] font-bold text-[#ffd700] ${SHADOW}`}
     >
       VIP
     </span>
   )
 }
 
-/** Portrait, name, level, HP/MP bars and pouch icons at the top left (UI_RoleIcon). */
+const VIP_NAME = 'text-[#ffd700] [text-shadow:0_0_3px_#b8860b,0_0_2px_#000]'
+
+/**
+ * Reborn's portrait card (om, original theme): name, HP/MP in percent, VP cur/200, refill icons,
+ * level, VIP badge and the CLAIM 20-minute reward. ponytail: no village icon (its art is not
+ * exported) and no Battle Power (the server exposes no power rating for the player).
+ */
 export function PlayerCard({ character }: { character: Character }) {
   const portrait = useOutfitPortrait(character.clothing)
   const pouch = (value: number) => `${number(value)} / ${number(character.pouchMax)}`
   const pouchTip = 'Pouches refill your HP and chakra after every won fight.'
   const openWindow = useOpenWindow()
+  const [now] = useState(Date.now)
+  const vipDays = vipDaysLeft(character.vipUntil, now)
   return (
     <section
       aria-label="Character"
       className="pointer-events-auto absolute top-[31px] left-[6px] h-[82px] w-[220px] font-game"
     >
-      <div
-        data-testid="role-card"
-        className="game-role-card absolute top-0 left-0 h-[78px] w-[205px]"
-        style={{ clipPath: NO_VP_GROOVE }}
-      />
+      <div className="game-role-card absolute top-0 left-0 h-[78px] w-[205px]" />
       <div className="absolute top-0 left-0 size-[82px] overflow-hidden rounded-full">
         {portrait && <img src={portrait} alt="" className="size-full object-cover" />}
       </div>
       <h2
-        className={`absolute top-[2px] left-[100px] w-[100px] truncate text-[11px] font-bold text-[#ffd700] ${SHADOW}`}
+        className={`absolute top-[2px] left-[110px] w-[200px] truncate font-[Arial] text-[11px] font-bold ${vipDays === null ? `text-white ${SHADOW}` : VIP_NAME}`}
       >
         {character.name}
       </h2>
@@ -295,6 +391,16 @@ export function PlayerCard({ character }: { character: Character }) {
         y={30}
         color="text-[#e0e0ff]"
       />
+      <CardBar
+        label="VP"
+        value={0}
+        max={VP_MAX}
+        kind="vp"
+        x={91}
+        y={42}
+        color="text-[#fffacd]"
+        text={`0/${VP_MAX}`}
+      />
       {/* Reborn: both refill icons open the Carrier Bag window. */}
       <button
         type="button"
@@ -310,6 +416,14 @@ export function PlayerCard({ character }: { character: Character }) {
         onClick={() => openWindow('carrierBag')}
         className="absolute top-[30px] left-[200px] h-[12px] w-[16px] cursor-pointer bg-[url(/assets/game/ui/refill-mp.webp)] bg-contain bg-no-repeat"
       />
+      {/* Reborn's opens Energy Refill; we have no Energy system yet. */}
+      <button
+        type="button"
+        aria-label="Energy refill"
+        title="Energy: not available yet"
+        disabled
+        className="absolute top-[42px] left-[196px] h-[12px] w-[16px] cursor-not-allowed bg-[url(/assets/game/ui/refill-vp.webp)] bg-contain bg-no-repeat"
+      />
       <dl aria-label="Pouches" className="sr-only">
         <dt>HP pouch</dt>
         <dd>{pouch(character.hpPouch)}</dd>
@@ -317,11 +431,16 @@ export function PlayerCard({ character }: { character: Character }) {
         <dd>{pouch(character.mpPouch)}</dd>
       </dl>
       <span
-        className={`absolute top-[58px] left-[106px] text-[11px] font-bold text-white ${SHADOW}`}
+        className={`absolute top-[58px] left-[82px] font-[Arial] text-[11px] font-bold text-white ${SHADOW}`}
       >
         Lv. {character.level}
       </span>
-      <VipBadge until={character.vipUntil} />
+      {vipDays !== null && <VipBadge until={character.vipUntil!} days={vipDays} />}
+      {/*
+       * Reborn: fixed at top calc(30% + 2.125vh), left 50% + 167% of its 71px, inside the scaled
+       * portrait (its containing block): about (221, 39) on a 720px-high window.
+       */}
+      <TwentyMinuteRewardButton className="absolute top-[39px] left-[221px]" />
       <TeamHud character={character} />
     </section>
   )

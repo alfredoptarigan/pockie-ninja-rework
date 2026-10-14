@@ -58,14 +58,11 @@ export function ArenaWindow({ character, onClose }: { character: Character; onCl
   )
 }
 
-/** HUD top bar button left of Settings (the original opens the arena from n16002's menu). */
+/** HUD top bar button after Settings (the original opens the arena from n16002's menu). */
 export function ArenaButton() {
   const open = useOpenWindow()
   return (
-    <GameButton
-      className="absolute top-[4px] right-[78px] h-[22px] w-[66px] !min-w-0 !px-0"
-      onClick={() => open('arena')}
-    >
+    <GameButton className="h-[22px] w-[66px] !min-w-0 !px-0" onClick={() => open('arena')}>
       Arena
     </GameButton>
   )

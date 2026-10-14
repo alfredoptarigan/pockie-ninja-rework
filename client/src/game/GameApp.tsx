@@ -146,7 +146,10 @@ function GameScreen({ character }: { character: Character }) {
                 onVillage={onVillage}
                 onWorldMap={() => open('map')}
               />
-              <div className="pointer-events-none absolute top-[88px] right-[6px] flex w-[168px] flex-col items-end gap-1">
+              <div
+                // In villages Reborn's Market / Home icons own y 90-140: the exits go under them.
+                className={`pointer-events-none absolute ${inVillage ? 'top-[150px]' : 'top-[88px]'} right-[6px] flex w-[168px] flex-col items-end gap-1`}
+              >
                 {scene.data && (
                   <SceneExits character={character} links={scene.data.links} travel={travel} />
                 )}

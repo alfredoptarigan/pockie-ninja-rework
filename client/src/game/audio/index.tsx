@@ -83,6 +83,37 @@ export function useTailedBeastTrack(active = true) {
   useTrack(active ? 'tb' : null, 2)
 }
 
+/**
+ * The top bar's 22x18 speaker: mutes or unmutes the music. ponytail: Reborn's sound-on/off PNGs
+ * are not exported, so it draws a speaker; swap in the art when tools/ exports it.
+ */
+export function SoundToggle() {
+  const { settings, configure } = useAudio()
+  return (
+    <button
+      type="button"
+      aria-label={settings.muted ? 'Unmute music' : 'Mute music'}
+      title={settings.muted ? 'Sound off' : 'Sound on'}
+      onClick={() => configure({ ...settings, muted: !settings.muted })}
+      className="h-[18px] w-[22px] cursor-pointer text-[#f5f5f5] hover:brightness-125"
+    >
+      <svg viewBox="0 0 22 18" aria-hidden="true" className="size-full">
+        <path d="M2 6h4l5-4v14l-5-4H2z" fill="currentColor" />
+        {settings.muted ? (
+          <path d="M14 6l6 6M20 6l-6 6" stroke="#ff5555" strokeWidth="2" />
+        ) : (
+          <path
+            d="M14 5.5a5 5 0 0 1 0 7M16.5 3a8.5 8.5 0 0 1 0 12"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            fill="none"
+          />
+        )}
+      </svg>
+    </button>
+  )
+}
+
 /** Mount within the HUD's Sound settings dialog. */
 export function SoundSettings() {
   const { settings, configure } = useAudio()

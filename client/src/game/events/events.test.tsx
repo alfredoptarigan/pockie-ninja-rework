@@ -101,5 +101,8 @@ describe('Daily events windows', () => {
       '20:00',
     )
     expect(rewardCountdown('2026-10-14T00:20:00Z', Date.parse('2026-10-14T00:21:00Z'))).toBe('0:00')
+    expect(rewardCountdown('2026-10-15T00:00:00Z', Date.parse('2026-10-14T21:59:30Z'))).toBe(
+      '2:00:30',
+    )
   })
 })

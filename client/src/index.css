@@ -270,6 +270,10 @@
   background-image: var(--ui-mp-track);
   --bar-fill: var(--ui-mp-fill);
 }
+.game-bar-vp {
+  background-image: var(--ui-vp-track);
+  --bar-fill: var(--ui-vp-fill);
+}
 .game-bar-exp {
   background-image: var(--ui-exp-track);
   --bar-fill: var(--ui-exp-fill);

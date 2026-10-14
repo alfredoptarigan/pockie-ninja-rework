@@ -37,6 +37,7 @@ function renderGame(handlers: Parameters<typeof mockApi>[0] = {}, player = chara
     'GET /api/game/quests': () => json({ quests: [] }),
     'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
     'GET /api/game/inventory': () => json({ items: [{ ...fists, equippedSlot: 'Weapon' }] }),
+    'GET /api/health': () => json({ ok: true }),
     ...handlers,
   })
   renderWithProviders(<GameApp view="game" />, { route: '/play', path: '/play' })
@@ -91,8 +92,8 @@ describe('GameScreen', () => {
       'title',
       expect.stringMatching(/^5 \//),
     )
-    expect(screen.getByTitle('Stone')).toHaveTextContent('100')
-    expect(screen.getByTitle('Coupons')).toHaveTextContent('10')
+    expect(screen.getByTitle('100 stones')).toHaveTextContent('100')
+    expect(screen.getByTitle('10 gift coupons')).toHaveTextContent('10')
     const location = screen.getByRole('region', { name: 'Location' })
     expect(await within(location).findByRole('heading', { name: 'Fire Village' })).toBeVisible()
     expect(within(location).getByRole('button', { name: 'Leave' })).toBeVisible()
@@ -331,11 +332,11 @@ describe('GameScreen', () => {
 })
 
 describe('character info', () => {
-  it('hides the empty VP groove of the player card (decision 12)', async () => {
+  it('shows the VP bar empty with its refill disabled (no Energy system yet)', async () => {
     renderGame()
-    const card = await screen.findByTestId('role-card')
-    expect(card.style.clipPath).toContain('evenodd')
-    expect(screen.queryByRole('meter', { name: /VP|Energy/ })).not.toBeInTheDocument()
+    const card = await screen.findByRole('region', { name: 'Character' })
+    expect(within(card).getByRole('meter', { name: 'VP' })).toHaveTextContent('0/200')
+    expect(within(card).getByRole('button', { name: 'Energy refill' })).toBeDisabled()
   })
 
   it('shows the combat stats in the Character window and the pouches on the card', async () => {
