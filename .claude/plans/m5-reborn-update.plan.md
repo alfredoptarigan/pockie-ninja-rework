@@ -392,7 +392,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/server test -- talents && pnpm --filter @pockie/client test -- talents`
 - **Depends on**: 1, 2, 4.
 
-### Task 7: Bloodline limits plus the pub-fight item source
+### Task 7: Bloodline limits plus the pub-fight item source (done, wired; quest hook fires on first unlock)
 - **Action**: routes for the Ninja House list (44 limits, amity, target, required level, owned, items
   held), `POST /bloodlines/:id/turn-in` (4 items, +30 amity, decision 12 daily count, unlock at
   target), `POST /bloodlines/:id/active {active}` (3 slots); `bloodlineBonuses(tx, id)` on top of
@@ -447,7 +447,7 @@ Las Noches, toll gate clear, chat and daily quests; new timers in `server/src/jo
 - **Validate**: `pnpm --filter @pockie/game-core test -- souls && pnpm --filter @pockie/server test -- bloodlines`
 - **Depends on**: 7.
 
-### Task 11: Tutorial subset and story chain
+### Task 11: Tutorial subset and story chain (done; 6 Reborn command hooks wired: enhance/inscribe count successes, arena counts slot/revenge/boss fights, Las Noches counts manual and auto floors)
 - **Action**: author the 9 tutorial and 118 story quests (decisions 20-22) as Task.ini/SubTask.ini
   rows in `server/data/game/reborn/`. A generator `tools/quests/reborn-story.ts` assigns NPCs and
   monsters by level band from `scene-npcs.json`, keeping `requires/unlocks` order from 30001. New
