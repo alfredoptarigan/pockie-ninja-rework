@@ -55,9 +55,10 @@ export const FEATHER_ITEM = 'i150319'
 const REQUIRED_LEVEL = 30
 /** skill.ini has one row per pet skill (`GetSecondMaxLevel` 1), so a known skill cannot rise. */
 export const PET_SKILL_MAX_LEVEL = 1
-/** Quest commands (decision 38); quests.ts adds its own names in task 13. */
-export const EQUIP_PET_COMMAND = 82007
-export const FEED_PET_COMMAND = 82008
+export {
+  REBORN_EQUIP_PET_COMMAND as EQUIP_PET_COMMAND,
+  REBORN_FEED_PET_COMMAND as FEED_PET_COMMAND,
+} from '../../game/quests.js'
 
 const KIND_KEYS = { 1: 'halo', 2: 'help', 3: 'pass' } as const
 
