@@ -1,0 +1,339 @@
+{
+  "effects": {
+    "11838": {
+      "atlas": "/assets/reborn/entities/effects/11838.json",
+      "pages": ["/assets/reborn/entities/effects/11838.webp"],
+      "offset": [26.05, -90.65],
+      "buffs": ["11838"]
+    },
+    "11861": {
+      "atlas": "/assets/reborn/entities/effects/11861.json",
+      "pages": ["/assets/reborn/entities/effects/11861.webp"],
+      "offset": [-125.05, -72.3],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["11861"]
+    },
+    "accelerate": {
+      "atlas": "/assets/reborn/entities/effects/accelerate.json",
+      "pages": ["/assets/reborn/entities/effects/accelerate.webp"],
+      "offset": [-92.8, -18.1],
+      "depth": "behind",
+      "buffs": ["ACCELERATE"]
+    },
+    "advanced_holy_aura": {
+      "atlas": "/assets/reborn/entities/effects/advanced_holy_aura.json",
+      "pages": ["/assets/reborn/entities/effects/advanced_holy_aura.webp"],
+      "offset": [-152.5, -90],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["ADVANCED_HOLY_AURA"]
+    },
+    "advanced_killer_aura": {
+      "atlas": "/assets/reborn/entities/effects/advanced_killer_aura.json",
+      "pages": ["/assets/reborn/entities/effects/advanced_killer_aura.webp"],
+      "offset": [-153.5, -88],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["ADVANCED_KILLER_AURA"]
+    },
+    "advanced_majestic_aura": {
+      "atlas": "/assets/reborn/entities/effects/advanced_majestic_aura.json",
+      "pages": ["/assets/reborn/entities/effects/advanced_majestic_aura.webp"],
+      "offset": [-142.5, -78],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["ADVANCED_MAJESTIC_AURA"]
+    },
+    "advanced_plant_aura": {
+      "atlas": "/assets/reborn/entities/effects/advanced_plant_aura.json",
+      "pages": ["/assets/reborn/entities/effects/advanced_plant_aura.webp"],
+      "offset": [-154.5, -87],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["ADVANCED_PLANT_AURA"]
+    },
+    "advanced_sage_aura": {
+      "atlas": "/assets/reborn/entities/effects/advanced_sage_aura.json",
+      "pages": ["/assets/reborn/entities/effects/advanced_sage_aura.webp"],
+      "offset": [-148.5, -84.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["ADVANCED_SAGE_AURA"]
+    },
+    "advanced_science_aura": {
+      "atlas": "/assets/reborn/entities/effects/advanced_science_aura.json",
+      "pages": ["/assets/reborn/entities/effects/advanced_science_aura.webp"],
+      "offset": [-152, -88.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["ADVANCED_SCIENCE_AURA"]
+    },
+    "basic_holy_aura": {
+      "atlas": "/assets/reborn/entities/effects/basic_holy_aura.json",
+      "pages": ["/assets/reborn/entities/effects/basic_holy_aura.webp"],
+      "offset": [-153.5, -91.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["BASIC_HOLY_AURA"]
+    },
+    "basic_killer_aura": {
+      "atlas": "/assets/reborn/entities/effects/basic_killer_aura.json",
+      "pages": ["/assets/reborn/entities/effects/basic_killer_aura.webp"],
+      "offset": [-135.5, -89.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["BASIC_KILLER_AURA"]
+    },
+    "basic_majestic_aura": {
+      "atlas": "/assets/reborn/entities/effects/basic_majestic_aura.json",
+      "pages": ["/assets/reborn/entities/effects/basic_majestic_aura.webp"],
+      "offset": [-142.5, -78],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["BASIC_MAJESTIC_AURA"]
+    },
+    "basic_plant_aura": {
+      "atlas": "/assets/reborn/entities/effects/basic_plant_aura.json",
+      "pages": ["/assets/reborn/entities/effects/basic_plant_aura.webp"],
+      "offset": [-135.5, -89.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["BASIC_PLANT_AURA"]
+    },
+    "basic_sage_aura": {
+      "atlas": "/assets/reborn/entities/effects/basic_sage_aura.json",
+      "pages": ["/assets/reborn/entities/effects/basic_sage_aura.webp"],
+      "offset": [-153.5, -89],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["BASIC_SAGE_AURA"]
+    },
+    "basic_science_aura": {
+      "atlas": "/assets/reborn/entities/effects/basic_science_aura.json",
+      "pages": ["/assets/reborn/entities/effects/basic_science_aura.webp"],
+      "offset": [-135.5, -89.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["BASIC_SCIENCE_AURA"]
+    },
+    "bless": {
+      "atlas": "/assets/reborn/entities/effects/bless.json",
+      "pages": ["/assets/reborn/entities/effects/bless.webp"],
+      "offset": [-74.2, -208.65],
+      "buffs": ["BLESS"]
+    },
+    "bloodboil": {
+      "atlas": "/assets/reborn/entities/effects/bloodboil.json",
+      "pages": ["/assets/reborn/entities/effects/bloodboil.webp"],
+      "offset": [-75.15, -63.9],
+      "buffs": ["BLOODBOIL"]
+    },
+    "burn": {
+      "atlas": "/assets/reborn/entities/effects/burn.json",
+      "pages": ["/assets/reborn/entities/effects/burn.webp"],
+      "offset": [-66.25, -161.05],
+      "buffs": ["BURN", "AMATERASU_BURN"]
+    },
+    "cloud": {
+      "atlas": "/assets/reborn/entities/effects/cloud.json",
+      "pages": ["/assets/reborn/entities/effects/cloud.webp"],
+      "offset": [-62.45, -192.4],
+      "buffs": ["CLOUD"]
+    },
+    "detonating_clay": {
+      "atlas": "/assets/reborn/entities/effects/detonating_clay.json",
+      "pages": ["/assets/reborn/entities/effects/detonating_clay.webp"],
+      "offset": [-25.7, -146.75],
+      "buffs": ["DETONATING_CLAY"]
+    },
+    "dizzy": {
+      "atlas": "/assets/reborn/entities/effects/dizzy.json",
+      "pages": ["/assets/reborn/entities/effects/dizzy.webp"],
+      "offset": [-64.65, -137.2],
+      "buffs": ["DIZZY"]
+    },
+    "door_one": {
+      "atlas": "/assets/reborn/entities/effects/door_one.json",
+      "pages": ["/assets/reborn/entities/effects/door_one.webp"],
+      "offset": [-129.5, -101.4],
+      "buffs": [
+        "DOOR_ONE",
+        "DOOR_TWO",
+        "DOOR_THREE",
+        "DOOR_FOUR",
+        "DOOR_FIVE",
+        "DOOR_SIX",
+        "DOOR_SEVEN",
+        "DOOR_EIGHT"
+      ]
+    },
+    "drain": {
+      "atlas": "/assets/reborn/entities/effects/drain.json",
+      "pages": ["/assets/reborn/entities/effects/drain.webp"],
+      "offset": [-25.1, -138],
+      "buffs": ["DRAIN"]
+    },
+    "elemental_seal": {
+      "atlas": "/assets/reborn/entities/effects/elemental_seal.json",
+      "pages": ["/assets/reborn/entities/effects/elemental_seal.webp"],
+      "offset": [-36.05, -58.85],
+      "buffs": ["ELEMENTAL_SEAL"]
+    },
+    "expert_holy_aura": {
+      "atlas": "/assets/reborn/entities/effects/expert_holy_aura.json",
+      "pages": ["/assets/reborn/entities/effects/expert_holy_aura.webp"],
+      "offset": [-163, -93.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["EXPERT_SACRED_AURA"]
+    },
+    "expert_killer_aura": {
+      "atlas": "/assets/reborn/entities/effects/expert_killer_aura.json",
+      "pages": ["/assets/reborn/entities/effects/expert_killer_aura.webp"],
+      "offset": [-161.5, -90.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["EXPERT_KILLER_AURA"]
+    },
+    "expert_majestic_aura": {
+      "atlas": "/assets/reborn/entities/effects/expert_majestic_aura.json",
+      "pages": ["/assets/reborn/entities/effects/expert_majestic_aura.page-1.webp"],
+      "offset": [-142.5, -78],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["EXPERT_MAJESTIC_AURA"]
+    },
+    "expert_plant_aura": {
+      "atlas": "/assets/reborn/entities/effects/expert_plant_aura.json",
+      "pages": ["/assets/reborn/entities/effects/expert_plant_aura.webp"],
+      "offset": [-160, -85],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["EXPERT_PLANT_AURA"]
+    },
+    "expert_sage_aura": {
+      "atlas": "/assets/reborn/entities/effects/expert_sage_aura.json",
+      "pages": ["/assets/reborn/entities/effects/expert_sage_aura.webp"],
+      "offset": [-163, -92.5],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["EXPERT_SAGE_AURA"]
+    },
+    "expert_science_aura": {
+      "atlas": "/assets/reborn/entities/effects/expert_science_aura.json",
+      "pages": ["/assets/reborn/entities/effects/expert_science_aura.webp"],
+      "offset": [-164.5, -92],
+      "depth": "behind",
+      "onPet": true,
+      "buffs": ["EXPERT_SCIENCE_AURA"]
+    },
+    "frozen": {
+      "atlas": "/assets/reborn/entities/effects/frozen.json",
+      "pages": ["/assets/reborn/entities/effects/frozen.webp"],
+      "offset": [-96, -152.45],
+      "buffs": ["FROZEN"]
+    },
+    "ghost": {
+      "atlas": "/assets/reborn/entities/effects/ghost.json",
+      "pages": ["/assets/reborn/entities/effects/ghost.webp"],
+      "offset": [-62.7, -89.1],
+      "buffs": ["GHOST"]
+    },
+    "heal": {
+      "atlas": "/assets/reborn/entities/effects/heal.json",
+      "pages": ["/assets/reborn/entities/effects/heal.webp"],
+      "offset": [-81.8, -109.15],
+      "buffs": ["HEAL"]
+    },
+    "liquor": {
+      "atlas": "/assets/reborn/entities/effects/liquor.json",
+      "pages": ["/assets/reborn/entities/effects/liquor.webp"],
+      "offset": [-44.5, -145.45],
+      "buffs": ["LIQUOR"]
+    },
+    "mark": {
+      "atlas": "/assets/reborn/entities/effects/mark.json",
+      "pages": ["/assets/reborn/entities/effects/mark.webp"],
+      "offset": [-68.85, -111.9],
+      "buffs": ["MARK"]
+    },
+    "mist": {
+      "atlas": "/assets/reborn/entities/effects/mist.json",
+      "pages": ["/assets/reborn/entities/effects/mist.webp"],
+      "offset": [-50, -50],
+      "global": true,
+      "buffs": ["MIST"]
+    },
+    "paralyze": {
+      "atlas": "/assets/reborn/entities/effects/paralyze.json",
+      "pages": ["/assets/reborn/entities/effects/paralyze.webp"],
+      "offset": [-48.1, -74.65],
+      "buffs": ["PARALYSIS"]
+    },
+    "poison": {
+      "atlas": "/assets/reborn/entities/effects/poison.json",
+      "pages": ["/assets/reborn/entities/effects/poison.webp"],
+      "offset": [-45.45, -96.3],
+      "buffs": ["POISON"]
+    },
+    "seduction": {
+      "atlas": "/assets/reborn/entities/effects/seduction.json",
+      "pages": ["/assets/reborn/entities/effects/seduction.webp"],
+      "offset": [-83.45, -100.25],
+      "buffs": ["CHARM"]
+    },
+    "slow": {
+      "atlas": "/assets/reborn/entities/effects/slow.json",
+      "pages": ["/assets/reborn/entities/effects/slow.webp"],
+      "offset": [-57, 13],
+      "depth": "behind",
+      "buffs": ["SLOW"]
+    },
+    "snared": {
+      "atlas": "/assets/reborn/entities/effects/snared.json",
+      "pages": ["/assets/reborn/entities/effects/snared.webp"],
+      "offset": [-93.25, -86.25],
+      "buffs": ["SNARED"]
+    },
+    "static": {
+      "atlas": "/assets/reborn/entities/effects/static.json",
+      "pages": ["/assets/reborn/entities/effects/static.webp"],
+      "offset": [-97.15, -117.1],
+      "buffs": ["STATIC"]
+    },
+    "sunset": {
+      "atlas": "/assets/reborn/entities/effects/sunset.json",
+      "pages": ["/assets/reborn/entities/effects/sunset.webp"],
+      "offset": [-50, -50],
+      "global": true,
+      "buffs": ["SUNSET"]
+    },
+    "vessel": {
+      "atlas": "/assets/reborn/entities/effects/vessel.json",
+      "pages": ["/assets/reborn/entities/effects/vessel.webp"],
+      "offset": [-34.6, -79.6],
+      "buffs": ["DOUBLE_MP"]
+    },
+    "weak": {
+      "atlas": "/assets/reborn/entities/effects/weak.json",
+      "pages": ["/assets/reborn/entities/effects/weak.webp"],
+      "offset": [-72.45, -89.65],
+      "buffs": ["WEAK", "PET_POLLEN"]
+    }
+  },
+  "numbers": {
+    "normal": {
+      "atlas": "/assets/reborn/entities/numbers/normal.json",
+      "pages": ["/assets/reborn/entities/numbers/normal.webp"]
+    },
+    "heal": {
+      "atlas": "/assets/reborn/entities/numbers/heal.json",
+      "pages": ["/assets/reborn/entities/numbers/heal.webp"]
+    }
+  },
+  "statusIcons": {
+    "atlas": "/assets/reborn/icons/effects.json",
+    "pages": ["/assets/reborn/icons/effects.webp"]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "ki_lightning": {
+    "item": 218200,
+    "icon": "/assets/reborn/icons/items/wings/aura2_ki_lightning.webp",
+    "atlas": "/assets/reborn/entities/auras/ki_lightning/aura.json",
+    "pages": ["/assets/reborn/entities/auras/ki_lightning/aura-0.webp"]
+  },
+  "lightning_armor": {
+    "item": 218201,
+    "icon": "/assets/reborn/icons/items/wings/aura2_lightning_armor.webp",
+    "atlas": "/assets/reborn/entities/auras/lightning_armor/aura.json",
+    "pages": ["/assets/reborn/entities/auras/lightning_armor/aura-0.webp"]
+  },
+  "chakra_flame_crimson": {
+    "item": 218202,
+    "icon": "/assets/reborn/icons/items/wings/aura2_chakra_flame_crimson.webp",
+    "atlas": "/assets/reborn/entities/auras/chakra_flame_crimson/aura.json",
+    "pages": ["/assets/reborn/entities/auras/chakra_flame_crimson/aura-0.webp"]
+  },
+  "chakra_flame_azure": {
+    "item": 218203,
+    "icon": "/assets/reborn/icons/items/wings/aura2_chakra_flame_azure.webp",
+    "atlas": "/assets/reborn/entities/auras/chakra_flame_azure/aura.json",
+    "pages": ["/assets/reborn/entities/auras/chakra_flame_azure/aura-0.webp"]
+  },
+  "chakra_flame_violet": {
+    "item": 218204,
+    "icon": "/assets/reborn/icons/items/wings/aura2_chakra_flame_violet.webp",
+    "atlas": "/assets/reborn/entities/auras/chakra_flame_violet/aura.json",
+    "pages": ["/assets/reborn/entities/auras/chakra_flame_violet/aura-0.webp"]
+  },
+  "chakra_flame_black": {
+    "item": 218205,
+    "icon": "/assets/reborn/icons/items/wings/aura2_chakra_flame_black.webp",
+    "atlas": "/assets/reborn/entities/auras/chakra_flame_black/aura.json",
+    "pages": ["/assets/reborn/entities/auras/chakra_flame_black/aura-0.webp"]
+  },
+  "tailed_beast": {
+    "item": 218206,
+    "icon": "/assets/reborn/icons/items/wings/aura2_tailed_beast.webp",
+    "atlas": "/assets/reborn/entities/auras/tailed_beast/aura.json",
+    "pages": ["/assets/reborn/entities/auras/tailed_beast/aura-0.webp"]
+  },
+  "eight_gates": {
+    "item": 218207,
+    "icon": "/assets/reborn/icons/items/wings/aura2_eight_gates.webp",
+    "atlas": "/assets/reborn/entities/auras/eight_gates/aura.json",
+    "pages": ["/assets/reborn/entities/auras/eight_gates/aura-0.webp"]
+  }
+}

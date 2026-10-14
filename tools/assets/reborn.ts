@@ -1,11 +1,11 @@
-// Run: REBORN_RAW_DIR=/path/to/data/reborn-raw node tools/assets/reborn.ts
-// Coordinator wiring: assets:reborn -> node tools/assets/reborn.ts (root package.json).
+// Run: pnpm assets:reborn (set REBORN_RAW_DIR when data/reborn-raw is elsewhere).
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, posix, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import sharp from 'sharp'
 import { createHash } from 'node:crypto'
 import { format } from 'prettier'
+import { isM6Asset, m6Categories, m6Manifests } from './reborn-m6.ts'
 
 sharp.concurrency(1)
 
@@ -59,7 +59,8 @@ export function selectAssets(manifest: Manifest): Entry[] {
       (e.category === 'event' &&
         (e.path.startsWith('scenes/tailedBeast/') ||
           e.path.startsWith('events/tailedBeast/') ||
-          e.path === 'ui/buttons/topui/tb.png')),
+          e.path === 'ui/buttons/topui/tb.png')) ||
+      isM6Asset(e),
   )
 }
 export async function exportReborn(raw: string, root: string) {
@@ -132,15 +133,16 @@ export async function exportReborn(raw: string, root: string) {
     }),
   )
   const techniques: Record<string, unknown> = {}
-  const layer = (clothing: number, name: string) => {
-    const file = `entities/avatars/${clothing}/${name}.json`
-    if (!selected.has(file)) throw new Error(`Missing technique atlas: ${file}`)
+  const atlasRef = (file: string) => {
+    if (!selected.has(file)) throw new Error(`Missing atlas: ${file}`)
     const atlas = read<Atlas>(`assets/${file}`)
     return {
       atlas: url(file),
       pages: atlas.textures.map((t) => url(posix.join(posix.dirname(file), webpName(t.image)))),
     }
   }
+  const layer = (clothing: number, name: string) =>
+    atlasRef(`entities/avatars/${clothing}/${name}.json`)
   const outfits = Object.keys(manifest.secretTechniques)
     .map(Number)
     .filter((n) => n <= 120)
@@ -167,9 +169,10 @@ export async function exportReborn(raw: string, root: string) {
     }
   }
   const items = read<Record<string, [string]>>('json_items.json')
-  const config = read<{ bloodline: { Limits: Record<string, { item: number }> } }>(
-    're/serverConfig.json',
-  )
+  const config = read<{
+    bloodline: { Limits: Record<string, { item: number }> }
+    petFamilies?: Record<string, number>
+  }>('re/serverConfig.json')
   const itemIds = [
     ...Array.from({ length: 12 }, (_, i) => 540001 + i),
     ...Array.from({ length: 12 }, (_, i) => 540101 + i),
@@ -187,10 +190,27 @@ export async function exportReborn(raw: string, root: string) {
     )
   await generated(
     'reborn-assets.json',
-    Object.fromEntries(Object.entries(assets).sort(([a], [b]) => a.localeCompare(b, 'en'))),
+    Object.fromEntries(
+      Object.entries(assets)
+        .filter(([, a]) => !m6Categories.has(a.category))
+        .sort(([a], [b]) => a.localeCompare(b, 'en')),
+    ),
   )
   await generated('reborn-secret-techniques.json', techniques)
+  const m6 = m6Manifests(raw, items, config.petFamilies ?? {}, {
+    atlasRef,
+    has: (file) => selected.has(file),
+    icon: (file) => {
+      if (!assets[file]) throw new Error(`Missing M6 image: ${file}`)
+      return assets[file].url
+    },
+  })
+  for (const [name, value] of Object.entries(m6)) await generated(`reborn-${name}.json`, value)
+  const groups: Record<string, number> = {}
+  for (const a of Object.values(assets))
+    if (m6Categories.has(a.category)) groups[a.category] = (groups[a.category] ?? 0) + a.bytes / 1e6
   return {
+    groups,
     outfits: outfits.length,
     techniques: Object.keys(techniques).length,
     files: entries.length,
