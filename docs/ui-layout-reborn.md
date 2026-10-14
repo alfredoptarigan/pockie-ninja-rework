@@ -46,6 +46,24 @@ gitignored `data/reborn-raw/` (`ui-spec/spec-*.txt`, `screenshots/r-*.png`).
   amulet 28x28, hat, armour, belt, shoes 55x55; `equip-backdrop` 239x256 at (70,79) with the
   character pose and the title plate 164x36 at (108,83); bag at (5,344) 369x200: tabs I-X
   27x22, grid 271x160 of slots (51px), side buttons 75x25 (Compose, Multi Sell, Sort…).
+  Re-measured 2026-10-14 (logged-in Reborn, DOM reads): the pose is `poses/<outfit>.png`
+  (191x320) drawn at 124x208 at (126,117), not a scaled sprite; the plate shows the title image
+  (`titles/<id>.gif`, "No title") at (110,85) 160x32; Talent and Blood Limit 45x42 at (74,239)
+  and (74,284) (Talent disabled below level 60); Wing slot 55x55 at (247,251), 70% opacity; Hide
+  box 20x20 at (253,309) ("Click to hide detailed stats"). The bag is 60 tiles of 27px, 10 per
+  row, at (15,376); an item covers its icon (24px one tile, 51px 2x2, weapons 51x78 2x3). Side
+  column at x 293 from y 362, 30 apart: Compose, Multi Sell, Collection, Wardrobe, Reroll, Sort.
+  Clicking or right-clicking an item opens `#context-menu` (Common/SmallBG2 5px frame, whitesmoke
+  12px Arial rows 14px high: Equip / Use, Sell, Lock, Link in Chat).
+- **Skills**: 456x470. Panels `BigBG1` (5,31) 446x311, (5,342) 446x85, (5,427) 446x36. Info 50x20
+  at (9,37), Scroll Skills 80x20 at (63,37); captions on `TextBG2` 104x20 at x 178 (Passive y 37,
+  Active y 114, "Equipped (n)" y 348), 12px monospace. Columns `SkillTree/BG` 37 wide every 44px
+  from x 12: passives (y 61, h 48), ninjutsu (y 136, h 201, four rows 48 apart). Each skill is a
+  26x26 `Icon/Grid_YellowBSD` cell with a 24px icon (grey when not learned or already equipped)
+  and a 26x12 `SkillTree/TextBG` strip under it. Equipped row `SkillTree/BG` 396x50 at (30,372):
+  ten cells 38px apart from x 46, past the sixth `SkillTree/Lock4`. "Presets:" 11px at (121,439),
+  buttons 1-5 28x20 every 34px from x 171 (active one at brightness .85). Hover shows the skill
+  tooltip (250px, name 14px bold `#f0d060`, labels `#00bfff`, numbers `#7fff7f`).
 - **NPC dialog** (`UI_NpcMenu_Xml`): 485x242, title = NPC name. Left 161x204 `npc-card` with the
   portrait 137x182 in `npc-frame` at (18,44); right top 309x65 cream panel with the line (12px
   monospace); right bottom 309x134 cream panel with option rows 299x23 (Arial 13px `#3d2914`,
