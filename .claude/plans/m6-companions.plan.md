@@ -533,7 +533,7 @@ adds one line each when merging:
   12 audio files, 713 pet files (448 probes absent, so 34 pets have no battle art), 85 wing, 24 aura,
   164 effect and 74 card files.
 
-### Task 2: Data import
+### Task 2: Data import (done, wired)
 - **Action**: extend `import-reborn.ts` to write `server/data/game/reborn/`:
 
   | File | Contents |
@@ -565,7 +565,7 @@ adds one line each when merging:
   - no overlay id collides with a 2011 item, skill or buff id.
 - **Validate**: `pnpm --filter @pockie/tools test -- import-reborn && pnpm --filter @pockie/server test -- data`
 
-### Task 3: Schema and migrations
+### Task 3: Schema and migrations (done, wired)
 - **Action**: Drizzle tables, checks and migrations 0029-0032 (table below). No feature logic.
 - **Mirror**: `server/src/db/schema.ts:257-300`, `server/drizzle/0022_bloodlines.sql`,
   `0024_daily_events.sql`, `server/src/db/m5-tables.test.ts`.
@@ -581,7 +581,7 @@ adds one line each when merging:
   - non-negative counts.
 - **Validate**: `pnpm db:reset && pnpm --filter @pockie/server test -- migrations m6-tables`
 
-### Task 4: Asset convert, manifests and audio
+### Task 4: Asset convert, manifests and audio (done, wired)
 - **Action**:
   1. Extend `selectAssets`/`exportReborn` for the M6 groups. Pets, wings, auras and effects are
      multiatlas JSON plus WebP pages; numbers and status icons are atlases; cards are WebP. Write
@@ -638,7 +638,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/game-core test`
 - **Depends on**: 2.
 
-### Task 6: Pet Help and Halo skill scripts
+### Task 6: Pet Help and Halo skill scripts (done, wired)
 - **Action**: port the remaining `ispet` 1-2 Rhino scripts from task 5's ledger (about 80). New
   fight buffs use 15101-15199. Register them in `SKILL_SCRIPTS`. Extend the `slice-skills.test.ts`
   guard so every pet skill row has a script or is a Pass data row.
@@ -647,7 +647,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/game-core test -- pet slice-skills`
 - **Depends on**: 5.
 
-### Task 7: Wings and auras feature
+### Task 7: Wings and auras feature (done, wired)
 - **Action**:
   - `game-core/src/wings/`: `wingStats(item, level)` (decision 23) and
     `enhance(level, stone, talismans, random)` (decision 24).
@@ -672,7 +672,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/game-core test -- wings && pnpm --filter @pockie/server test -- wings`
 - **Depends on**: 2, 3.
 
-### Task 8: Cards feature
+### Task 8: Cards feature (done, wired)
 - **Action**:
   - `game-core/src/cards/`: `openBox(rarity, random)` (decision 28) and
     `rollCardBox(source, random)` (decision 29).
@@ -733,7 +733,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/server test -- pets && pnpm --filter @pockie/client test -- pets`
 - **Depends on**: 2, 3, 5.
 
-### Task 10: Audio
+### Task 10: Audio (done, wired)
 - **Action**:
   - `client/src/game/audio/`: `AudioProvider` with one `<audio>`, `useSceneTrack(sceneId)` and
     `useBattleTrack(seed)` (decision 32), the 300 ms fade, and a gesture unlock.
@@ -749,7 +749,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/client test -- audio`
 - **Depends on**: 4.
 
-### Task 11: Pet Tracing and Kennel shop
+### Task 11: Pet Tracing and Kennel shop (done, wired)
 - **Action**:
   - `game-core/src/events/pet-tracing.ts`: `newBoard(random)`, `flip(board, cell)` with arrows,
     and payouts (decision 20).
@@ -774,7 +774,7 @@ adds one line each when merging:
 - **Validate**: `pnpm --filter @pockie/game-core test -- pet-tracing && pnpm --filter @pockie/server test -- kennel`
 - **Depends on**: 2, 3, 9.
 
-### Task 12: Battle and avatar visuals
+### Task 12: Battle and avatar visuals (done, wired)
 - **Action**:
   - `battle-scene.ts` preloads only the pet, wing, aura, effect and number atlases used by the
     replay.
@@ -799,7 +799,7 @@ adds one line each when merging:
   of an arena replay with a pet, a wing and an aura.
 - **Depends on**: 4, 5, 7.
 
-### Task 13: Quests EQUIP_PET and FEED_PET
+### Task 13: Quests EQUIP_PET and FEED_PET (done, wired)
 - **Action**: add COMMAND ids 82007 and 82008 to `quests.ts`, exported for the pets routes. Author
   the Reborn tutorial quests that use step types 7 and 8 (found in `quests.json`) in Task.ini
   shape. Quest text is ours.
