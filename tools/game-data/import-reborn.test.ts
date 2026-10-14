@@ -149,6 +149,7 @@ type Pet = {
   artAvatar: number | null
   nature: number
   food: number
+  requiredLevel: number
   parent: string | null
   link: string | null
   growth: number
@@ -191,6 +192,12 @@ describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
     const evolved = pets.filter((p) => p.parent)
     expect(evolved).toHaveLength(74)
     for (const pet of evolved) expect(items.has(pet.parent!)).toBe(true)
+  })
+
+  it('carries the Reborn required level (item field 1) of every species (11b)', () => {
+    const count = (level: number) => pets.filter((p) => p.requiredLevel === level).length
+    expect([count(30), count(40), count(50)]).toEqual([173, 16, 1])
+    expect(pets.find((p) => p.requiredLevel === 50)!.parent).toBeNull()
   })
 
   it('links Reborn 3200NN to 2011 i2830NN with the 2011 growth (decision 9)', () => {

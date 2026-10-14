@@ -51,8 +51,6 @@ export const cryptoRandom = () => createRandom(randomInt(2 ** 31))
 
 /** Feathers (2011 i150319) pay for evolution (decision 18). */
 export const FEATHER_ITEM = 'i150319'
-/** Ours: Reborn required level of every species until pets.json carries item field 1 (11b). */
-const REQUIRED_LEVEL = 30
 /** skill.ini has one row per pet skill (`GetSecondMaxLevel` 1), so a known skill cannot rise. */
 export const PET_SKILL_MAX_LEVEL = 1
 export {
@@ -266,6 +264,8 @@ export async function adoptPetItem(
 ) {
   const species = petSpecies(row.itemId)
   if (!species) return false
+  // requiredLevel only scales the bases (11b): Reborn's level-10 tutorial quest 820012 hands out
+  // i320002 (required level 30) to equip at once, so it is no adoption gate.
   const taken = await tx
     .select({ slot: characterPets.kennelSlot })
     .from(characterPets)
@@ -277,7 +277,7 @@ export async function adoptPetItem(
   if (free === undefined)
     throw bad('kennel_full', 'Your Pet Kennel is full. Unlock a slot or release a pet.')
   const bases = rollBases(
-    speciesBaseProps(species.nature, REQUIRED_LEVEL, species.parent !== null),
+    speciesBaseProps(species.nature, species.requiredLevel, species.parent !== null),
     random,
   )
   await tx.insert(characterPets).values({

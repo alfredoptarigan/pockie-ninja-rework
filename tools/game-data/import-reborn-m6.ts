@@ -161,6 +161,8 @@ function buildPets(input: M6Inputs) {
       icon: `reborn/${s.raw[0]}`,
       nature: s.nature,
       food: s.food,
+      /** 11b: the Reborn item's required level (field 1), 30/40/50; scales the base props. */
+      requiredLevel: level(s.raw),
       parent: s.parent ? `i${s.parent}` : null,
       link: s.link,
       ...(s.numbers ?? unlinkedNumbers(peers, growth)),

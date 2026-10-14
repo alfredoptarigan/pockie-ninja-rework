@@ -155,7 +155,8 @@ ours live in one `constants.ts` per feature so they can be tuned.
       High-growth natures get smaller sums because growth multiplies the bases (x51 to x91 at
       level 50).
     - **Scaling:** level 40 x1.1, level 50 x1.2, an evolved form x1.2. The required level is the
-      Reborn item field 1 (30/40/50), which `pets.json` does not carry yet.
+      Reborn item field 1 (30/40/50), `pets.json` `requiredLevel` (173/16/1 species). It is no
+      adoption gate: Reborn's level-10 tutorial quest 820012 hands out a level-30 pet.
     - **Fight use (ours):** the totals become master bonuses before `deriveStats`: Attack/420 on
       both weapon attack terms, Defence/27 on defense, Disturb/54 on hit, Active/66 on dodge,
       Savvy/108 on crit. This is the user's decision: the props add about 3%, and PET_ATTACK

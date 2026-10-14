@@ -89,6 +89,20 @@ describe('adopting from a pet item', () => {
     expect((await petRow(pets[0].id))!.baseAttack).toBe(11)
   })
 
+  it('rolls the base props of the required level band (11b)', async () => {
+    await setCharacter({ petSlots: 2 })
+    // Tailed Beast 9/8/7/7/7 x1.2 at level 50 = 10/9/8/8/8, rolled at 80%.
+    const legend = await newPet('i340710')
+    expect(legend).toMatchObject({ baseAttack: 8, baseDefence: 7, baseSavvy: 6 })
+    // Beast 14/8/10/10/8 x1.1 at level 40 = 15/8/11/11/8, rolled at 80%.
+    expect(await newPet('i320029')).toMatchObject({ baseAttack: 12, baseDisturb: 8 })
+  })
+
+  it('adopts a pet below its required level (Reborn tutorial quest 820012)', async () => {
+    await setCharacter({ level: 10 })
+    expect(await adopt('i340710')).toBe(true)
+  })
+
   it('ignores items that are not pets', async () => {
     const row = await give('i170117')
     const used = await db.transaction(async (tx) => adoptPetItem(tx, await character(), row))

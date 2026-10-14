@@ -764,6 +764,8 @@ const petSchema = z.object({
   nature: int.min(1).max(6),
   /** Food type that earns the like bonus (decision 13). */
   food: int.min(1).max(7),
+  /** Reborn item field 1 (11b): the master level needed to adopt; scales the base props. */
+  requiredLevel: z.union([z.literal(30), z.literal(40), z.literal(50)]),
   /** Base species of an evolved form (petFamilies). */
   parent: itemId.nullable(),
   /** 2011 species (decision 9); null = numbers are ours. */
