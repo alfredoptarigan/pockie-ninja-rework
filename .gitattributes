@@ -1,2 +1,4 @@
+# Generated files are compared byte for byte with the generators' LF output: check out LF everywhere.
+* text=auto eol=lf
 client/public/assets/reborn/** filter=lfs diff=lfs merge=lfs -text
 client/public/assets/game/audio/** filter=lfs diff=lfs merge=lfs -text
