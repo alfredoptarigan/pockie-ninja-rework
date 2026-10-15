@@ -10,6 +10,7 @@ import { GameText, plainText } from './text'
 import type { NpcMenu, SceneNpc } from './types'
 import { useOpenWindow, type WindowName } from './windows'
 import { restCost } from './world'
+import { ChangeVillageOption } from './ChangeVillage'
 
 /**
  * The menu row that opens an NPC's window, in Reborn's words: shops "Browse Wares" (Dungeon
@@ -207,6 +208,7 @@ export function NpcDialog({
                     </Option>
                   </li>
                 )}
+                <ChangeVillageOption npc={npc} character={character} onEnd={onClose} />
                 <li>
                   <Option onClick={onClose}>End Conversation</Option>
                 </li>

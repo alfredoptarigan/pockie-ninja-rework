@@ -1,8 +1,9 @@
-// Explore spots (OutSearch): a HUD button with today's searches and the rest countdown, the
-// Explore window listing the scene's spots, a confirmation, the battle replay for fight cards and
-// the result window. The scene picture opens the same window from the spot's tree.
+// Explore spots (OutSearch) laid out like Reborn's Outdoor Exploration: a HUD button with today's
+// searches and the rest countdown, the zone window, a confirmation for paid searches, Reborn's card
+// pick overlay, the battle replay for fight cards and the result window. The scene picture opens
+// the same window from the spot's tree.
 import type { Character } from '@pockie/shared'
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { errorMessage, useApplyResult, useExplore, useInventory } from './api'
 import {
   bagCount,
@@ -26,9 +27,10 @@ import {
   restText,
   starText,
 } from './explore'
-import { BagFullNote } from './FightSummary'
+import { bigBg } from './bloodlines/panels'
+import { BagFullNote, ResultWindow, rewardColumns } from './FightSummary'
 import { ItemIcon } from './ItemIcon'
-import { Dialog, GameButton, Notice } from './skin'
+import { Dialog, GameButton, Notice, Tabs } from './skin'
 import { BattleReplayMount } from './stage'
 import { plainText } from './text'
 import type {
@@ -81,6 +83,7 @@ export function ExploreWindow({
         <ExploreFlow
           character={character}
           sceneId={scene.sceneId}
+          zoneName={plainText(scene.nameKey, 'Field')}
           status={status}
           onClose={() => onOpenChange(false)}
         />
@@ -128,20 +131,21 @@ interface Outcome {
 function ExploreFlow({
   character,
   sceneId,
+  zoneName,
   status,
   onClose,
 }: {
   character: Character
   sceneId: number
+  zoneName: string
   status: ReturnType<typeof useExplore>
   onClose: () => void
 }) {
   const explore = useExploreCards()
   const peek = usePeekCard()
   const [pending, setPending] = useState<PendingExplore | null>(null)
-  const [mode, setMode] = useState<'normal' | 'senior'>('normal')
   const inventory = useInventory()
-  const [confirming, setConfirming] = useState<ExploreSpot | null>(null)
+  const [confirming, setConfirming] = useState<{ spot: ExploreSpot; mode: Mode } | null>(null)
   const [outcome, setOutcome] = useState<Outcome | null>(null)
   const applyResult = useApplyResult()
   const finishReplay = () => {
@@ -149,7 +153,7 @@ function ExploreFlow({
     setOutcome((o) => o && { ...o, replaying: false, applied: true })
   }
 
-  const start = async (spot: ExploreSpot) => {
+  const start = async (spot: ExploreSpot, mode: Mode) => {
     setConfirming(null)
     const weaponItemId = inventory.data?.find((item) => item.equippedSlot === 'Weapon')?.itemId
     try {
@@ -229,7 +233,7 @@ function ExploreFlow({
           }),
         )
       } catch {
-        // The mutation's error is shown in the card window.
+        // The mutation's error is shown with the cards.
       }
     }
     return (
@@ -247,43 +251,41 @@ function ExploreFlow({
   const data = status.data
   return (
     <>
-      <Dialog title="Exploration" onClose={onClose} className="w-[36rem]">
-        {status.isPending && <p>Looking around...</p>}
+      <Dialog title="Outdoor Exploration" onClose={onClose} className="game-window-bare w-[650px]">
+        {status.isPending && <p className="game-panel-1 p-2 font-game">Looking around...</p>}
         {status.isError && <Notice tone="error">{errorMessage(status.error)}</Notice>}
         {data && (
-          <SpotList
+          <ZoneWindow
             character={character}
+            zoneName={zoneName}
             status={data}
             bag={inventory.data}
             busy={explore.isPending}
-            onExplore={(spot, nextMode) => {
-              setMode(nextMode)
-              setConfirming(spot)
-            }}
+            error={explore.isError ? errorMessage(explore.error) : null}
+            onExplore={(spot, mode) =>
+              mode === 'normal' && costText(spot) === 'Free'
+                ? void start(spot, mode)
+                : setConfirming({ spot, mode })
+            }
           />
-        )}
-        {explore.isError && (
-          <div className="mt-2">
-            <Notice tone="error">{errorMessage(explore.error)}</Notice>
-          </div>
         )}
       </Dialog>
       {confirming && data && (
         <Dialog title="Start Exploring?" onClose={() => setConfirming(null)} className="w-[26rem]">
-          <p>Explore {spotName(confirming)}?</p>
+          <p>Explore {spotName(confirming.spot)}?</p>
           <p className="mt-1">
-            {mode === 'senior' ? (
+            {confirming.mode === 'senior' ? (
               'Uses one exploration key. Does not use today’s searches or start a cooldown. Five cards.'
             ) : (
               <>
-                This uses 1 of your {data.remaining} searches left today
-                {costText(confirming) === 'Free' ? '' : ` and ${costText(confirming)}`}. Afterwards
-                you rest {restText(data.cooldownSeconds)} before the next search.
+                This uses 1 of your {data.remaining} searches left today and{' '}
+                {costText(confirming.spot)}. Afterwards you rest {restText(data.cooldownSeconds)}{' '}
+                before the next search.
               </>
             )}
           </p>
           <div className="mt-3 flex gap-2">
-            <GameButton small onClick={() => void start(confirming)}>
+            <GameButton small onClick={() => void start(confirming.spot, confirming.mode)}>
               Explore
             </GameButton>
             <GameButton small onClick={() => setConfirming(null)}>
@@ -296,88 +298,173 @@ function ExploreFlow({
   )
 }
 
-function SpotList({
+type Mode = 'normal' | 'senior'
+const HELP_TEXT = 'Explore zones to discover items and fight monsters.'
+
+/**
+ * Reborn's Outdoor Exploration (reborn-windows-M-Z-hud.md): a 640x26 header with "<Scene>
+ * Exploration Zone" and remaining/max searches, then a 190x308 left panel (the card art, Explore
+ * 100x22, the N/10 progress bar 170x18, the help text 170x50) and the right panel (a 430 wide
+ * header over a 420x114 box, then the star header over the 420x108 Completion Rate box). Our
+ * fields can hold a free zone and a key zone: a tab per zone. Reborn's six "items found" icons
+ * are not in our data, so the first box lists the zone's level and cost instead, and the
+ * progress bar counts searches to the next star.
+ */
+function ZoneWindow({
   character,
+  zoneName,
   status,
   bag,
   busy,
+  error,
   onExplore,
 }: {
   character: Character
+  zoneName: string
   status: ExploreStatus & { spots: ExploreSpot[] }
   bag: InventoryItem[] | undefined
   busy: boolean
-  onExplore: (spot: ExploreSpot, mode: 'normal' | 'senior') => void
+  error: string | null
+  onExplore: (spot: ExploreSpot, mode: Mode) => void
 }) {
   const now = useNow(status.cooldownEndsAt)
   const left = cooldownLeft(status.cooldownEndsAt, now)
+  const panelId = useId()
+  const [selected, setSelected] = useState(status.spots[0]?.id ?? '')
+  const spot = status.spots.find((s) => s.id === selected) ?? status.spots[0]
   return (
-    <div className="flex flex-col gap-3">
-      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
-        <dt className="font-bold">Searches left today</dt>
-        <dd>
-          {status.remaining} / {status.total}
-        </dd>
-        <dt className="font-bold">Next search</dt>
-        <dd>{left > 0 ? `in ${formatCountdown(left)}` : 'Ready'}</dd>
-      </dl>
-      {busy && <p role="status">Exploring...</p>}
-      <ul className="flex flex-col gap-2">
-        {status.spots.map((spot) => (
-          <li key={spot.id}>
-            <SpotRow
-              spot={spot}
-              bag={bag}
-              stone={character.stone}
-              block={exploreBlock(spot, status, character, bag, now)}
-              secondsLeft={left}
-              busy={busy}
-              onExplore={() => onExplore(spot, 'normal')}
-              seniorDisabled={Boolean(seniorBlock(spot, character, bag))}
-              onSenior={() => onExplore(spot, 'senior')}
-            />
-          </li>
-        ))}
-      </ul>
+    <div className="flex w-[640px] flex-col gap-[5px] font-game text-[12px] text-black">
+      <header className="game-panel-1 flex h-[26px] items-center justify-between px-[5px]">
+        <span className="font-bold">{zoneName} Exploration Zone</span>
+        <span className="flex gap-2">
+          {left > 0 && <span>Rest {formatCountdown(left)}</span>}
+          <span>
+            {status.remaining}/{status.total}
+          </span>
+        </span>
+      </header>
+      {status.spots.length > 1 && (
+        <Tabs
+          label="Exploration zones"
+          panelId={panelId}
+          tabs={status.spots.map((s) => ({ id: s.id, title: spotName(s) }))}
+          active={spot?.id ?? ''}
+          onChange={setSelected}
+        />
+      )}
+      {spot && (
+        <ZonePanel
+          key={spot.id}
+          id={panelId}
+          spot={spot}
+          character={character}
+          bag={bag}
+          block={exploreBlock(spot, status, character, bag, now)}
+          secondsLeft={left}
+          busy={busy}
+          seniorDisabled={Boolean(seniorBlock(spot, character, bag))}
+          onExplore={(mode) => onExplore(spot, mode)}
+        />
+      )}
+      {error && <Notice tone="error">{error}</Notice>}
     </div>
   )
 }
 
-function SpotRow({
+/** Share of the five stars earned, as Reborn's Completion Rate: 20% a star plus the next one's part. */
+export const completionRate = (star: ExploreStar) =>
+  star.level >= MAX_STARS
+    ? 100
+    : 20 * star.level + (star.perStar > 0 ? (star.progress / star.perStar) * 20 : 0)
+
+function ZonePanel({
+  id,
   spot,
+  character,
   bag,
-  stone,
   block,
   secondsLeft,
   busy,
-  onExplore,
-  onSenior,
   seniorDisabled,
+  onExplore,
 }: {
+  id: string
   spot: SeniorExploreSpot
+  character: Character
   bag: InventoryItem[] | undefined
-  /** The ninja's Stone, shown next to a Stone cost. */
-  stone: number
   block: ReturnType<typeof exploreBlock>
   secondsLeft: number
   busy: boolean
-  onExplore: () => void
-  onSenior: () => void
   seniorDisabled: boolean
+  onExplore: (mode: Mode) => void
 }) {
-  const id = useId()
+  const reasonId = useId()
   const name = spotName(spot)
+  const { star } = spot
+  const maxed = star.level >= MAX_STARS
+  const progressText = maxed ? 'Max' : `${star.progress}/${star.perStar}`
+  const percent = maxed ? 100 : star.perStar > 0 ? (star.progress / star.perStar) * 100 : 0
   return (
-    <section
-      aria-labelledby={`${id}-name`}
-      className="flex items-center gap-3 rounded border border-wood-light bg-white/40 p-2"
-    >
-      <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <h3 id={`${id}-name`} className="font-bold">
-          {name}
-        </h3>
-        <Stars star={spot.star} />
-        <dl className="grid grid-cols-[auto_1fr] items-center gap-x-3 gap-y-0.5 text-xs">
+    <section id={id} aria-label={name} className="flex gap-[5px]">
+      <div className="game-panel-1 flex min-h-[308px] w-[190px] shrink-0 flex-col items-center gap-[6px] p-[5px]">
+        <div
+          aria-hidden="true"
+          className="h-[188px] w-[136px]"
+          style={{ background: 'var(--ui-card-face) center / 100% 100% no-repeat' }}
+        />
+        <GameButton
+          className="h-[22px] w-[100px]"
+          disabled={Boolean(block) || busy}
+          aria-label={`Explore ${name}`}
+          aria-describedby={block ? reasonId : undefined}
+          onClick={() => onExplore('normal')}
+        >
+          Explore
+        </GameButton>
+        {spot.requireItems.length > 0 && (
+          <GameButton
+            className="h-[22px] w-[100px]"
+            disabled={seniorDisabled || busy}
+            aria-label={`Senior Explore ${name}`}
+            onClick={() => onExplore('senior')}
+          >
+            Senior Explore
+          </GameButton>
+        )}
+        <div className="relative h-[18px] w-[170px]">
+          <div
+            role="meter"
+            aria-label="Star progress"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.round(percent)}
+            aria-valuetext={progressText}
+            className="game-progress size-full"
+            style={{ '--fill': `${percent}%` } as CSSProperties}
+          />
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 grid place-items-center text-[11px] font-bold text-white [text-shadow:var(--shadow-game-text)]"
+          >
+            {progressText}
+          </span>
+        </div>
+        {block ? (
+          <p id={reasonId} className="min-h-[50px] w-[170px] text-[11px] text-[#8a1610]">
+            {blockMessage(block, spot, secondsLeft)}
+          </p>
+        ) : (
+          <p className="min-h-[50px] w-[170px] text-[11px]">{HELP_TEXT}</p>
+        )}
+      </div>
+      <div className="game-panel-1 flex flex-1 flex-col items-center gap-[5px] p-[5px]">
+        <p className="flex h-[20px] w-[430px] items-center px-[5px] font-bold" style={bigBg(3)}>
+          What this zone asks of you.
+        </p>
+        <dl
+          className="grid min-h-[114px] w-[420px] grid-cols-[auto_1fr] content-start gap-x-3 gap-y-1 p-[8px]"
+          style={bigBg(2)}
+        >
           <dt className="font-bold">Level</dt>
           <dd>{spot.requireLevel}+</dd>
           {spot.senior && (
@@ -391,7 +478,7 @@ function SpotRow({
             {spot.requireStone === 0 && spot.requireItems.length === 0 && 'Free'}
             {spot.requireStone > 0 && (
               <span className="block">
-                {spot.requireStone} Stone (you have {stone})
+                {spot.requireStone} Stone (you have {character.stone})
               </span>
             )}
             {spot.requireItems.map((need) => (
@@ -403,35 +490,34 @@ function SpotRow({
             ))}
           </dd>
         </dl>
-        {block && (
-          <p id={`${id}-reason`} className="text-xs text-[#8a1610]">
-            {blockMessage(block, spot, secondsLeft)}
-          </p>
-        )}
-      </div>
-      <GameButton
-        small
-        disabled={Boolean(block) || busy}
-        aria-label={`Explore ${name}`}
-        aria-describedby={block ? `${id}-reason` : undefined}
-        onClick={onExplore}
-      >
-        Explore
-      </GameButton>
-      {spot.requireItems.length > 0 && (
-        <GameButton
-          small
-          disabled={seniorDisabled || busy}
-          aria-label={`Senior Explore ${name}`}
-          onClick={onSenior}
+        <p className="flex h-[32px] w-[430px] items-center px-[5px] font-bold" style={bigBg(3)}>
+          Stars indicate your exploration progress in this zone.
+        </p>
+        <div
+          className="flex min-h-[108px] w-[420px] flex-col items-center justify-center gap-2 p-[8px]"
+          style={bigBg(2)}
         >
-          Senior Explore
-        </GameButton>
-      )}
+          <p className="flex h-[20px] w-[280px] items-center gap-2 rounded bg-black/70 px-2 text-white">
+            <span className="font-[Arial] text-[10px] font-bold">Completion Rate:</span>
+            <Stars star={star} />
+            <span className="ml-auto text-[11px]">{completionRate(star).toFixed(2)}%</span>
+          </p>
+          <p className="text-[11px]">{starText(star)}</p>
+        </div>
+      </div>
     </section>
   )
 }
 
+const CARD_TEXT_OUTLINE = '[-webkit-text-stroke:1px_#5a3a00]'
+
+/**
+ * Reborn's card pick after a search (reborn-windows-M-Z-hud.md "Outdoor Exploration", `ly`): not a
+ * window but an overlay with "Click on a green card to get a free reward!" and "~Or pay for a sneak
+ * peek~" over the cards, "Buy Peek" (90x21) under each face-down card while peeks are left, after
+ * a confirm "Peek at this card for ...?". Clicking a card takes it: ours pays the card out at once,
+ * so there is no separate Claim. The second peek can be paid in Gold or Gift Coupons.
+ */
 function ExploreCardWindow({
   search,
   busy,
@@ -447,86 +533,125 @@ function ExploreCardWindow({
   onPeek: (index: number, currency: 'gold' | 'giftCoupon') => void
   onClose: () => void
 }) {
+  const ref = useRef<HTMLDialogElement>(null)
   const [currency, setCurrency] = useState<'gold' | 'giftCoupon'>('gold')
+  const [peeking, setPeeking] = useState<number | null>(null)
+  useEffect(() => {
+    if (!ref.current?.open) ref.current?.showModal()
+  }, [])
   const cost =
     search.peek.cost && search.peek.count === 1
       ? { ...search.peek.cost, currency }
       : search.peek.cost
   return (
-    <Dialog title="Choose an Exploration Card" onClose={onClose} className="w-[42rem]">
-      <p>Pick one card to collect its reward. You may pay to peek before choosing.</p>
-      <p className="mt-1">
-        {cost ? `Peek costs ${peekPriceText(cost)}.` : peekPriceText(null)} {search.peek.count} /{' '}
-        {search.peek.limit} peeks used.
-      </p>
-      {search.peek.count === 1 && search.peek.cost && (
-        <label className="mt-2 block">
-          Pay the second peek with{' '}
-          <select
-            aria-label="Peek currency"
-            value={currency}
-            onChange={(event) => setCurrency(event.target.value as 'gold' | 'giftCoupon')}
-          >
-            <option value="gold">Gold</option>
-            <option value="giftCoupon">Gift Coupons</option>
-          </select>
-        </label>
-      )}
-      <ol className="mt-3 grid grid-cols-5 gap-2">
-        {search.cards.map((card, index) => (
-          <li
-            key={index}
-            className="flex min-h-32 flex-col gap-2 rounded border border-wood-light bg-white/40 p-2 text-xs"
-          >
-            <p className="font-bold">Card {index + 1}</p>
-            <p className="flex-1">{card ? cardText(card) : 'Face down'}</p>
+    <dialog
+      ref={ref}
+      aria-label="Choose an Exploration Card"
+      onClose={onClose}
+      className="m-auto max-w-none overflow-visible bg-transparent p-0 font-game backdrop:bg-black/60"
+    >
+      <div className="flex flex-col items-center gap-3 text-center">
+        <p className={`text-[32px] font-black text-[#ffe14d] ${CARD_TEXT_OUTLINE}`}>
+          Click on a green card to get a free reward!
+        </p>
+        <p className={`text-[18px] font-bold text-[#ffe14d] ${CARD_TEXT_OUTLINE}`}>
+          ~Or pay for a sneak peek~
+        </p>
+        <ol className="flex gap-3">
+          {search.cards.map((card, index) => (
+            <li key={index} className="flex flex-col items-center gap-1">
+              <button
+                type="button"
+                disabled={busy}
+                aria-label={`Pick card ${index + 1}${card ? `: ${cardText(card)}` : ' (face down)'}`}
+                onClick={() => onPick(index)}
+                className="relative flex h-[150px] w-[108px] flex-col items-center justify-between px-[10px] pt-[30px] pb-[10px] text-[11px] font-bold text-white hover:brightness-110 focus-visible:outline-2 focus-visible:outline-[#ffe27a] disabled:cursor-not-allowed"
+                style={{ background: 'var(--ui-card-face) center / 100% 100% no-repeat' }}
+              >
+                <span className="grid size-[64px] place-items-center text-[28px]">
+                  {card && 'itemId' in card ? (
+                    <ItemIcon itemId={card.itemId} name="" className="size-10" />
+                  ) : card ? null : (
+                    '?'
+                  )}
+                </span>
+                <span className="w-full truncate">{card ? cardText(card) : ''}</span>
+              </button>
+              {!card && cost && (
+                <GameButton
+                  className="h-[21px] w-[90px]"
+                  aria-label={`Peek at card ${index + 1}`}
+                  disabled={busy}
+                  onClick={() => setPeeking(index)}
+                >
+                  Buy Peek
+                </GameButton>
+              )}
+            </li>
+          ))}
+        </ol>
+        <p className="text-[12px] font-bold text-white [text-shadow:var(--shadow-game-text)]">
+          Peeks used {search.peek.count} / {search.peek.limit}.{' '}
+          {cost ? `Next peek: ${peekPriceText(cost)}.` : `${peekPriceText(null)}.`}
+        </p>
+        {Boolean(error) && <Notice tone="error">{errorMessage(error)}</Notice>}
+        <GameButton small onClick={onClose}>
+          Close
+        </GameButton>
+      </div>
+      {peeking !== null && cost && (
+        <Dialog title="Buy Peek" onClose={() => setPeeking(null)} className="w-[260px]">
+          <p className="text-center">Peek at this card for {peekPriceText(cost)}?</p>
+          {search.peek.count === 1 && (
+            <label className="mt-2 block text-center">
+              Pay with{' '}
+              <select
+                aria-label="Peek currency"
+                value={currency}
+                onChange={(event) => setCurrency(event.target.value as 'gold' | 'giftCoupon')}
+              >
+                <option value="gold">Gold</option>
+                <option value="giftCoupon">Gift Coupons</option>
+              </select>
+            </label>
+          )}
+          <div className="mt-3 flex justify-center gap-2">
             <GameButton
-              small
-              aria-label={`Peek at card ${index + 1}`}
-              disabled={busy || Boolean(card) || !cost}
-              onClick={() => onPeek(index, currency)}
+              className="h-[25px] w-[75px]"
+              onClick={() => {
+                onPeek(peeking, currency)
+                setPeeking(null)
+              }}
             >
-              Peek
+              Accept
             </GameButton>
-            <GameButton
-              small
-              aria-label={`Pick card ${index + 1}`}
-              disabled={busy}
-              onClick={() => onPick(index)}
-            >
-              Pick
+            <GameButton className="h-[25px] w-[75px]" onClick={() => setPeeking(null)}>
+              Deny
             </GameButton>
-          </li>
-        ))}
-      </ol>
-      {Boolean(error) && (
-        <div className="mt-2">
-          <Notice tone="error">{errorMessage(error)}</Notice>
-        </div>
+          </div>
+        </Dialog>
       )}
-    </Dialog>
+    </dialog>
   )
 }
 
 const STAR_PATH = 'M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6-4.5-4.2 6.1-.7z'
 
+/** Five stars (12x11 in Reborn's Completion Rate bar), the earned ones gold. */
 function Stars({ star }: { star: ExploreStar }) {
   return (
-    <div className="flex items-center gap-2 text-xs">
-      <span role="img" aria-label={`${star.level} of ${MAX_STARS} stars`} className="flex">
-        {Array.from({ length: MAX_STARS }, (_, i) => (
-          <svg key={i} viewBox="0 0 20 20" className="size-4" aria-hidden="true">
-            <path
-              d={STAR_PATH}
-              fill={i < star.level ? '#f2b705' : 'none'}
-              stroke="#7a5c00"
-              strokeWidth="1.2"
-            />
-          </svg>
-        ))}
-      </span>
-      <span>{starText(star)}</span>
-    </div>
+    <span role="img" aria-label={`${star.level} of ${MAX_STARS} stars`} className="flex">
+      {Array.from({ length: MAX_STARS }, (_, i) => (
+        <svg key={i} viewBox="0 0 20 20" className="h-[11px] w-[12px]" aria-hidden="true">
+          <path
+            d={STAR_PATH}
+            fill={i < star.level ? '#f2b705' : 'none'}
+            stroke="#f2b705"
+            strokeWidth="1.2"
+          />
+        </svg>
+      ))}
+    </span>
   )
 }
 
@@ -543,71 +668,18 @@ function ExploreResultWindow({
 }) {
   const id = useId()
   const { rewards, starBonus, fight } = result
-  const gained = rewards.exp > 0 || rewards.stone > 0 || rewards.items.length > 0
   return (
-    <Dialog title="Exploration Result" onClose={onClose} className="w-[30rem]">
-      <div className="flex flex-col gap-2">
-        <p>{outcomeText(result)}</p>
-        {fight && !fight.won && <p>You got away with {result.character.hp} HP.</p>}
-        {starBonus && (
-          <p className="font-bold">
-            New star! Bonus:{' '}
-            {starBonus.type === 'exp' ? `${starBonus.exp} EXP` : itemName(starBonus.itemId)}.
-          </p>
-        )}
-        <Stars star={result.star} />
-        {gained ? (
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
-            {rewards.exp > 0 && (
-              <>
-                <dt className="font-bold">EXP</dt>
-                <dd>+{rewards.exp}</dd>
-              </>
-            )}
-            {rewards.stone > 0 && (
-              <>
-                <dt className="font-bold">Stone</dt>
-                <dd>+{rewards.stone}</dd>
-              </>
-            )}
-            {rewards.items.length > 0 && (
-              <>
-                <dt className="font-bold">Items</dt>
-                <dd>
-                  <ul className="flex flex-col gap-1">
-                    {rewards.items.map((item, i) => (
-                      <li key={`${item.itemId}-${i}`} className="flex items-center gap-2">
-                        <ItemIcon
-                          itemId={item.itemId}
-                          name={itemName(item.itemId)}
-                          className="size-8"
-                        />
-                        {itemName(item.itemId)}
-                      </li>
-                    ))}
-                  </ul>
-                </dd>
-              </>
-            )}
-          </dl>
-        ) : (
-          <p>Nothing gained this time.</p>
-        )}
-        {rewards.lost ? <BagFullNote lost={rewards.lost} /> : null}
-        {rewards.levelsGained > 0 && (
-          <p role="status" className="font-bold text-leaf">
-            Level up! You are now level {result.character.level}.
-          </p>
-        )}
-        <h3 id={`${id}-others`} className="font-bold">
-          The other cards held
-        </h3>
-        <ul aria-labelledby={`${id}-others`} className="list-inside list-disc text-xs">
-          {result.otherCards.map((card, i) => (
-            <li key={i}>{cardText(card)}</li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap gap-2">
+    <ResultWindow
+      title="Exploration Result"
+      story={outcomeText(result)}
+      note={fight && !fight.won ? `You got away with ${result.character.hp} HP.` : undefined}
+      columns={rewardColumns(rewards)}
+      findTitle="Found"
+      finds={rewards.items}
+      emptyFind="Nothing found this time."
+      onClose={onClose}
+      actions={
+        <>
           {onReplay && (
             <GameButton small onClick={onReplay}>
               Replay Battle
@@ -616,8 +688,33 @@ function ExploreResultWindow({
           <GameButton small onClick={onBack}>
             Back to Exploration
           </GameButton>
-        </div>
-      </div>
-    </Dialog>
+        </>
+      }
+    >
+      {starBonus && (
+        <p className="text-center font-bold">
+          New star! Bonus:{' '}
+          {starBonus.type === 'exp' ? `${starBonus.exp} EXP` : itemName(starBonus.itemId)}.
+        </p>
+      )}
+      <p className="flex items-center justify-center gap-2 text-[11px]">
+        <Stars star={result.star} />
+        {starText(result.star)}
+      </p>
+      {rewards.lost ? <BagFullNote lost={rewards.lost} /> : null}
+      {rewards.levelsGained > 0 && (
+        <p role="status" className="text-center font-bold text-leaf">
+          Level up! You are now level {result.character.level}.
+        </p>
+      )}
+      <h3 id={`${id}-others`} className="font-bold">
+        The other cards held
+      </h3>
+      <ul aria-labelledby={`${id}-others`} className="list-inside list-disc text-[11px]">
+        {result.otherCards.map((card, i) => (
+          <li key={i}>{cardText(card)}</li>
+        ))}
+      </ul>
+    </ResultWindow>
   )
 }

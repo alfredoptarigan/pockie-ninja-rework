@@ -124,16 +124,19 @@ const calls = (fetchMock: ReturnType<typeof mockApi>, key: string) =>
 
 async function openWindow() {
   await userEvent.click(await screen.findByRole('button', { name: 'Explore' }))
-  return screen.findByRole('dialog', { name: 'Exploration' })
+  return screen.findByRole('dialog', { name: 'Outdoor Exploration' })
+}
+
+/** Shows the zone's tab (the scene has a free and a key zone). */
+async function showZone(dialog: HTMLElement, name: string) {
+  await userEvent.click(within(dialog).getByRole('tab', { name }))
+  return within(dialog).getByRole('region', { name })
 }
 
 async function exploreFree() {
   const dialog = await openWindow()
-  // The bag has loaded (key counts are shown).
-  await within(dialog).findByText(/you have 0/)
+  // Reborn's Explore button searches at once (free zones ask nothing).
   await userEvent.click(within(dialog).getByRole('button', { name: `Explore ${FREE}` }))
-  const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
-  await userEvent.click(within(confirm).getByRole('button', { name: 'Explore' }))
 }
 
 describe('ExploreWindow', () => {
@@ -144,27 +147,42 @@ describe('ExploreWindow', () => {
     expect(calls(fetchMock, 'GET /api/game/explore')).toBe(0)
   })
 
-  it('lists the spots with level, cost, stars and the searches left today', async () => {
+  it("lays a zone out like Reborn's Outdoor Exploration: searches, progress and stars", async () => {
     api()
     renderWithProviders(<Harness />)
     expect(await screen.findByText('6 / 7 today')).toBeInTheDocument()
 
     const dialog = await openWindow()
-    expect(dialog).toHaveTextContent('Searches left today6 / 7')
-    expect(dialog).toHaveTextContent('Next searchReady')
+    // Header: "<Scene> Exploration Zone" and remaining/max.
+    // The header and the free zone's tab.
+    expect(within(dialog).getAllByText('Smelting Mountains Exploration Zone')).toHaveLength(2)
+    expect(within(dialog).getByText('6/7')).toBeVisible()
+    expect(within(dialog).getByRole('tab', { name: FREE })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
 
     const free = within(dialog).getByRole('region', { name: FREE })
+    expect(free).toHaveTextContent('Explore zones to discover items and fight monsters.')
+    expect(within(free).getByRole('meter', { name: 'Star progress' })).toHaveAttribute(
+      'aria-valuetext',
+      '1/2',
+    )
     expect(free).toHaveTextContent('Level1+')
     expect(free).toHaveTextContent('CostFree')
+    expect(free).toHaveTextContent('Stars indicate your exploration progress in this zone.')
     expect(within(free).getByRole('img', { name: '1 of 5 stars' })).toBeInTheDocument()
+    // 20% a star plus the share of the next one.
+    expect(free).toHaveTextContent('Completion Rate:30.00%')
     expect(free).toHaveTextContent('1 / 2 searches to the next star')
     expect(within(free).getByRole('button', { name: `Explore ${FREE}` })).toBeEnabled()
 
-    // The expert spot takes a key the bag does not hold.
-    const expert = within(dialog).getByRole('region', { name: EXPERT })
+    // The expert zone takes a key the bag does not hold.
+    const expert = await showZone(dialog, EXPERT)
     expect(
       within(expert).getByRole('img', { name: 'Smelting Mountains Secret Key' }),
     ).toBeInTheDocument()
+    expect(await within(expert).findByText(/you have 0/)).toBeVisible()
     expect(expert).toHaveTextContent('1 x Smelting Mountains Secret Key (you have 0)')
     const button = within(expert).getByRole('button', { name: `Explore ${EXPERT}` })
     expect(button).toBeDisabled()
@@ -173,9 +191,9 @@ describe('ExploreWindow', () => {
     )
   })
 
-  it('shows a Stone cost, the rest from the server and locks a spot the ninja cannot pay', async () => {
+  it('confirms a zone that costs Stone and locks a zone the ninja cannot pay', async () => {
     const [free, expert] = view.spots
-    api(
+    const fetchMock = api(
       {},
       {
         explore: {
@@ -200,39 +218,28 @@ describe('ExploreWindow', () => {
       'This uses 1 of your 6 searches left today and 50 Stone. Afterwards you rest 10 minutes',
     )
     await userEvent.click(within(confirm).getByRole('button', { name: 'Cancel' }))
+    expect(calls(fetchMock, 'POST /api/game/explore/21011')).toBe(0)
 
-    const costly = within(dialog).getByRole('region', { name: EXPERT })
+    const costly = await showZone(dialog, EXPERT)
     expect(costly).toHaveTextContent('500 Stone (you have 100)')
     expect(
       within(costly).getByRole('button', { name: `Explore ${EXPERT}` }),
     ).toHaveAccessibleDescription('You need 500 Stone to explore there.')
   })
 
-  it('explores after a confirmation, shows what was found and refreshes the game', async () => {
+  it('explores a free zone at once, shows what was found and refreshes the game', async () => {
     const fetchMock = api({ 'POST /api/game/explore/21011': () => json(found) })
     renderWithProviders(<Harness />)
 
-    // Cancelling sends nothing.
-    const dialog = await openWindow()
-    await userEvent.click(within(dialog).getByRole('button', { name: `Explore ${FREE}` }))
-    const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
-    expect(confirm).toHaveTextContent(`Explore ${FREE}?`)
-    expect(confirm).toHaveTextContent(
-      'This uses 1 of your 6 searches left today. Afterwards you rest 5 minutes before the next search.',
-    )
-    await userEvent.click(within(confirm).getByRole('button', { name: 'Cancel' }))
-    expect(calls(fetchMock, 'POST /api/game/explore/21011')).toBe(0)
-
-    await userEvent.click(within(dialog).getByRole('button', { name: `Explore ${FREE}` }))
-    const again = await screen.findByRole('dialog', { name: 'Start Exploring?' })
-    await userEvent.click(within(again).getByRole('button', { name: 'Explore' }))
+    await exploreFree()
 
     const result = await screen.findByRole('dialog', { name: 'Exploration Result' })
     expect(result).toHaveTextContent('You found Healing Powder.')
     expect(result).toHaveTextContent('New star! Bonus: 115 EXP.')
     expect(within(result).getByRole('img', { name: '2 of 5 stars' })).toBeInTheDocument()
     expect(result).toHaveTextContent('EXP+115')
-    expect(within(result).getByRole('img', { name: 'Healing Powder' })).toHaveAttribute(
+    const finds = within(result).getByRole('region', { name: 'Found' })
+    expect(within(finds).getByRole('img', { name: 'Healing Powder' })).toHaveAttribute(
       'src',
       '/assets/game/items/icon_resume6.webp',
     )
@@ -247,7 +254,16 @@ describe('ExploreWindow', () => {
     expect(calls(fetchMock, 'GET /api/game/inventory')).toBe(2)
 
     await userEvent.click(within(result).getByRole('button', { name: 'Back to Exploration' }))
-    expect(await screen.findByRole('dialog', { name: 'Exploration' })).toBeVisible()
+    expect(await screen.findByRole('dialog', { name: 'Outdoor Exploration' })).toBeVisible()
+  })
+
+  it('closes everything from the result with OK', async () => {
+    api({ 'POST /api/game/explore/21011': () => json(found) })
+    renderWithProviders(<Harness />)
+    await exploreFree()
+    const result = await screen.findByRole('dialog', { name: 'Exploration Result' })
+    await userEvent.click(within(result).getByRole('button', { name: 'OK' }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
   it('plays an explore fight in the battle replay before the result', async () => {
@@ -339,6 +355,7 @@ describe('ExploreWindow', () => {
     api({}, { explore: { ...view, remaining: 0 } })
     renderWithProviders(<Harness />)
     const dialog = await openWindow()
+    expect(within(dialog).getByText('0/7')).toBeVisible()
     expect(
       within(dialog).getByRole('button', { name: `Explore ${FREE}` }),
     ).toHaveAccessibleDescription('You cannot explore any more today.')
@@ -362,7 +379,7 @@ describe('ExploreWindow', () => {
 
     await exploreFree()
 
-    const dialog = await screen.findByRole('dialog', { name: 'Exploration' })
+    const dialog = await screen.findByRole('dialog', { name: 'Outdoor Exploration' })
     expect(await within(dialog).findByRole('alert')).toHaveTextContent(
       'You do not have enough Stone.',
     )
@@ -371,7 +388,7 @@ describe('ExploreWindow', () => {
 })
 
 describe('explore cards', () => {
-  it('shows five face-down cards, prices a Peek and picks a revealed card', async () => {
+  it('shows five green cards, buys a peek after a confirm and picks a revealed card', async () => {
     const pending = {
       searchId: 'cfa3523c-dc3b-4b75-bc03-22d985d52d66',
       spotId: '21011',
@@ -397,13 +414,21 @@ describe('explore cards', () => {
     renderWithProviders(<Harness />)
     await exploreFree()
     const cards = await screen.findByRole('dialog', { name: 'Choose an Exploration Card' })
-    expect(within(cards).getAllByText('Face down')).toHaveLength(5)
-    expect(cards).toHaveTextContent('Peek costs 83 Stone')
+    expect(cards).toHaveTextContent('Click on a green card to get a free reward!')
+    expect(cards).toHaveTextContent('~Or pay for a sneak peek~')
+    expect(within(cards).getAllByRole('button', { name: /^Pick card \d \(face down\)$/ })).toHaveLength(5)
+    expect(cards).toHaveTextContent('Peeks used 0 / 3. Next peek: 83 Stone.')
+
     await userEvent.click(within(cards).getByRole('button', { name: 'Peek at card 1' }))
+    const confirm = await screen.findByRole('dialog', { name: 'Buy Peek' })
+    expect(confirm).toHaveTextContent('Peek at this card for 83 Stone?')
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Accept' }))
+
     expect(await within(cards).findByText('Healing Powder')).toBeVisible()
-    expect(cards).toHaveTextContent('Peek costs 2 Gold')
-    expect(within(cards).getByRole('button', { name: 'Peek at card 1' })).toBeDisabled()
-    await userEvent.click(within(cards).getByRole('button', { name: 'Pick card 1' }))
+    expect(cards).toHaveTextContent('Peeks used 1 / 3. Next peek: 2 Gold.')
+    // A revealed card has no Buy Peek.
+    expect(within(cards).queryByRole('button', { name: 'Peek at card 1' })).not.toBeInTheDocument()
+    await userEvent.click(within(cards).getByRole('button', { name: 'Pick card 1: Healing Powder' }))
     expect(await screen.findByRole('dialog', { name: 'Exploration Result' })).toBeVisible()
     const postCalls = fetchMock.mock.calls.filter(
       ([input, init]) =>
@@ -427,8 +452,9 @@ describe('explore cards', () => {
     )
     renderWithProviders(<Harness />)
     const dialog = await openWindow()
-    const button = await within(dialog).findByRole('button', { name: `Senior Explore ${EXPERT}` })
-    expect(button).toBeEnabled()
+    const expert = await showZone(dialog, EXPERT)
+    const button = await within(expert).findByRole('button', { name: `Senior Explore ${EXPERT}` })
+    await waitFor(() => expect(button).toBeEnabled())
     await userEvent.click(button)
     const confirm = await screen.findByRole('dialog', { name: 'Start Exploring?' })
     expect(confirm).toHaveTextContent(

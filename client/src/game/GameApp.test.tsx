@@ -434,6 +434,11 @@ describe('defeat and revive', () => {
     expect(within(here).getByRole('button', { name: 'Revive here' })).toBeDisabled()
 
     await userEvent.click(within(home).getByRole('button', { name: 'Return to village' }))
+    // Reborn's "Confirm healing?" step comes first.
+    expect(requestBody(fetchMock, 'POST /api/game/revive')).toBeUndefined()
+    const confirm = screen.getByRole('dialog', { name: 'Confirm healing?' })
+    expect(confirm).toHaveTextContent('Return to your village with 1 HP? You lose 51 EXP.')
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Confirm' }))
     expect(requestBody(fetchMock, 'POST /api/game/revive')).toEqual({ mode: 'home' })
   })
 
@@ -448,6 +453,9 @@ describe('defeat and revive', () => {
     )
     const dialog = await screen.findByRole('dialog', { name: 'Defeated' })
     await userEvent.click(within(dialog).getByRole('button', { name: 'Revive here' }))
+    const confirm = screen.getByRole('dialog', { name: 'Confirm healing?' })
+    expect(confirm).toHaveTextContent('Revive here with full HP and chakra for 1 Gold?')
+    await userEvent.click(within(confirm).getByRole('button', { name: 'Confirm' }))
     expect(requestBody(fetchMock, 'POST /api/game/revive')).toEqual({ mode: 'gold' })
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
   })

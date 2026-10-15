@@ -57,6 +57,12 @@ function HudLevel() {
   return <p>HUD level {character.data?.level}</p>
 }
 
+/** The scene of the cached character, as GameApp renders it. */
+function LiveScene() {
+  const ninja = useCharacter().data
+  return ninja ? <SceneView character={ninja} onNpc={vi.fn()} /> : null
+}
+
 describe('SceneView', () => {
   it('opens NPCs from the keyboard list', async () => {
     mockApi({ ...armed, 'GET /api/game/scene': () => json(villageScene) })
@@ -119,12 +125,20 @@ describe('SceneView', () => {
       '/assets/game/items/icon_resume6.webp',
     )
     expect(dialog).toHaveTextContent('Level up! You are now level 2.')
+    // Reborn's result window ("Adventure Complete!"): reward columns, the find box and OK.
+    expect(dialog).toHaveTextContent('EXP+10')
+    expect(dialog).toHaveTextContent('Stone+3')
+    expect(within(dialog).getByRole('region', { name: 'Drops' })).toHaveTextContent(
+      'Healing Powder',
+    )
     expect(requestBody(fetchMock, 'POST /api/game/fight')).toEqual({ monsterId: 'n33017' })
     // The replay draws the weapon equipped when the fight started.
     expect(mountBattle).toHaveBeenLastCalledWith(
       expect.anything(),
       expect.objectContaining({ clothing: 3, weaponItemId: fists.itemId }),
     )
+    await userEvent.click(within(dialog).getByRole('button', { name: 'OK' }))
+    expect(screen.queryByRole('dialog', { name: 'Victory' })).not.toBeInTheDocument()
   })
 
   it('keeps the HUD at the pre-fight values until the replay is over', async () => {
@@ -237,14 +251,20 @@ describe('SceneView', () => {
     }
     mockApi({
       ...armed,
+      'GET /api/game/character': () => json({ character: { ...character, sceneId: 2101 } }),
       'GET /api/game/scene': () => json(field),
       'POST /api/game/fight': () => json(lost),
     })
-    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
+    renderWithProviders(<LiveScene />)
     await userEvent.click(await screen.findByRole('button', { name: 'Fight Sunflower' }))
     const dialog = await screen.findByRole('dialog', { name: 'Defeat' })
     expect(dialog).toHaveTextContent('Sunflower defeated you. Revive to keep playing')
+    expect(dialog).toHaveTextContent('No drops this time.')
     expect(within(dialog).queryByRole('button', { name: 'Fight Again' })).not.toBeInTheDocument()
+
+    // Reborn's healing dialog follows, titled after the winner.
+    await userEvent.click(within(dialog).getByRole('button', { name: 'OK' }))
+    expect(await screen.findByRole('dialog', { name: 'Defeated by Sunflower' })).toBeVisible()
   })
 
   it('locks fights while defeated', async () => {

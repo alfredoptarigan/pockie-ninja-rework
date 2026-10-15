@@ -63,6 +63,8 @@ export function SceneView({
   const pictureReady = !hasSpots || !explore.isPending
   const hudLayer = useContext(HudLayer)
   const [reviveOpen, setReviveOpen] = useState(true)
+  /** The monster that won the last fight, for the revive window's title. */
+  const [defeatedBy, setDefeatedBy] = useState<string>()
   /** A monster picked while no weapon is equipped, waiting for "Fight anyway". */
   const [unarmed, setUnarmed] = useState<SceneMonster | null>(null)
   const [unarmedOk, setUnarmedOk] = useState(false)
@@ -117,7 +119,10 @@ export function SceneView({
         applied: false,
       })
       setRefused(false)
-      if (!result.won) setReviveOpen(true)
+      if (!result.won) {
+        setReviveOpen(true)
+        setDefeatedBy(plainText(monster.nameKey, 'a monster'))
+      }
     } catch {
       // shown from fight.error below
     }
@@ -275,6 +280,7 @@ export function SceneView({
         <ReviveWindow
           character={character}
           terms={scene.data?.revive}
+          enemy={defeatedBy}
           onClose={() => setReviveOpen(false)}
         />
       )}

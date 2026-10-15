@@ -134,20 +134,17 @@ test('a fresh ninja searches an exploration spot and sees the result cards', asy
     .getByRole('region', { name: 'Exploration' })
     .getByRole('button', { name: 'Explore' })
     .click()
-  const explore = dialog(page, 'Exploration')
-  await expect(explore).toContainText('7 / 7')
+  const explore = dialog(page, 'Outdoor Exploration')
+  await expect(explore).toContainText('7/7')
 
-  // Act: confirm the first free spot; a randomly drawn fight may open a replay.
+  // Act: the first zone is free, so Explore searches at once; a fight may open a replay.
   await explore
     .getByRole('button', { name: /^Explore / })
     .first()
     .click()
-  await dialog(page, 'Start Exploring?')
-    .getByRole('button', { name: 'Explore', exact: true })
-    .click()
-  // Five face-down cards: pick the first without paying to peek.
+  // Five green face-down cards: pick the first without paying to peek.
   await dialog(page, 'Choose an Exploration Card')
-    .getByRole('button', { name: 'Pick card 1' })
+    .getByRole('button', { name: 'Pick card 1 (face down)' })
     .click()
   const result = dialog(page, 'Exploration Result')
   const skip = page
@@ -162,7 +159,7 @@ test('a fresh ninja searches an exploration spot and sees the result cards', asy
     result.getByRole('list', { name: 'The other cards held' }).getByRole('listitem'),
   ).toHaveCount(4)
   await result.getByRole('button', { name: 'Back to Exploration' }).click()
-  await expect(explore).toContainText('6 / 7')
+  await expect(explore).toContainText('6/7')
   await expect(explore.getByRole('button', { name: /^Explore / }).first()).toBeDisabled()
 })
 
@@ -182,9 +179,10 @@ test('a ninja defeated in a field fight returns to the village with one HP', asy
   const defeat = dialog(page, 'Defeat')
   await expect(defeat).toContainText(`${MONSTER} defeated you.`)
   await defeat.getByRole('button', { name: 'Close' }).click()
-  const revive = dialog(page, 'Defeated')
+  const revive = dialog(page, `Defeated by ${MONSTER}`)
   await expect(revive.getByRole('button', { name: 'Revive here', exact: true })).toBeDisabled()
   await revive.getByRole('button', { name: 'Return to village', exact: true }).click()
+  await dialog(page, 'Confirm healing?').getByRole('button', { name: 'Confirm' }).click()
 
   // Assert: the home revive from relive.ini restores one HP and allows travel again.
   await expect(revive).toBeHidden()
@@ -313,8 +311,8 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
 
   // Explore window: the field's spots (looked at, not searched: the cards are random).
   await exploration.getByRole('button', { name: 'Explore' }).click()
-  const explore = dialog(page, 'Exploration')
-  await expect(explore.getByText('Searches left today')).toBeVisible()
+  const explore = dialog(page, 'Outdoor Exploration')
+  await expect(explore.getByText(/Exploration Zone$/).first()).toBeVisible()
   const spots = explore.getByRole('button', { name: /^Explore / })
   await expect(spots.first()).toBeVisible()
   expect(await spots.count()).toBeGreaterThan(0)
