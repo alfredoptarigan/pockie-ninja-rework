@@ -1,14 +1,12 @@
 // Reborn's buff row under the HUD portrait (`.hud-portrait__buffs`, main.js `lm`): one 20x20 icon
 // per active buff in buff id order, 2px apart and wrapping; hover shows the buff name, a gold
 // rule, its effect line and the time left as [DDd]HH:MM:SS, ticking while shown. Icons and text
-// come from tools/assets/buffs.ts. Reborn has no way to remove a buff; ours keeps the original's
-// removable buffs (deltype) behind a right-click "Remove effect".
-import { useEffect, useId, useRef, useState } from 'react'
+// come from tools/assets/buffs.ts. Like Reborn, a buff cannot be removed.
+import { useId, useState } from 'react'
 import buffData from '../generated/buffs.json'
-import { errorMessage, useBuffs, useRemoveBuff, type BuffsView } from './api'
+import { useBuffs, type BuffsView } from './api'
 import { useNow } from './events/timer'
 import { plainText } from './text'
-import { showToast } from './toast'
 
 type Buff = BuffsView['buffs'][number]
 const BUFFS: Record<string, { icon?: string; name?: string; effect?: string }> = buffData
@@ -31,47 +29,25 @@ function TimeLeft({ expiresAt }: { expiresAt: string | null }) {
   )
 }
 
-function BuffIcon({ buff, icon, onRemove }: { buff: Buff; icon: string; onRemove: () => void }) {
+function BuffIcon({ buff, icon }: { buff: Buff; icon: string }) {
   const [shown, setShown] = useState(false)
-  const [menu, setMenu] = useState(false)
-  const root = useRef<HTMLDivElement>(null)
   const tipId = useId()
   const data = BUFFS[buff.buffId]
   const name = data?.name ?? plainText(buff.nameKey, 'Buff')
-  useEffect(() => {
-    if (!menu) return
-    const onPointer = (event: PointerEvent) => {
-      if (!root.current?.contains(event.target as Node)) setMenu(false)
-    }
-    document.addEventListener('pointerdown', onPointer)
-    return () => document.removeEventListener('pointerdown', onPointer)
-  }, [menu])
   return (
-    <div
-      ref={root}
-      className="relative"
-      onKeyDown={(event) => {
-        if (event.key === 'Escape') setMenu(false)
-      }}
-    >
+    <div className="relative">
       <button
         type="button"
         aria-describedby={shown ? tipId : undefined}
-        aria-haspopup={buff.removable ? 'menu' : undefined}
-        aria-expanded={buff.removable ? menu : undefined}
         onPointerEnter={() => setShown(true)}
         onPointerLeave={() => setShown(false)}
         onFocus={() => setShown(true)}
         onBlur={() => setShown(false)}
-        onContextMenu={(event) => {
-          event.preventDefault()
-          if (buff.removable) setMenu(true)
-        }}
         className="block size-[20px] focus-visible:outline-2 focus-visible:outline-[#ffe27a]"
       >
         <img src={icon} alt={name} width={20} height={20} className="block" />
       </button>
-      {shown && !menu && (
+      {shown && (
         <div
           id={tipId}
           role="tooltip"
@@ -86,26 +62,6 @@ function BuffIcon({ buff, icon, onRemove }: { buff: Buff; icon: string; onRemove
           <TimeLeft expiresAt={buff.expiresAt} />
         </div>
       )}
-      {menu && (
-        <div
-          role="menu"
-          aria-label={name}
-          className="game-hud absolute top-full left-0 z-30 mt-px !bg-[#1c1f21] p-1"
-        >
-          <button
-            type="button"
-            role="menuitem"
-            autoFocus
-            onClick={() => {
-              setMenu(false)
-              onRemove()
-            }}
-            className="rounded px-2 py-1 text-left text-xs whitespace-nowrap text-trim-soft hover:bg-white/10"
-          >
-            Remove effect
-          </button>
-        </div>
-      )}
     </div>
   )
 }
@@ -113,7 +69,6 @@ function BuffIcon({ buff, icon, onRemove }: { buff: Buff; icon: string; onRemove
 /** The active buffs that have an icon (title bonuses have none and show in the title plate). */
 export function HudBuffs() {
   const buffs = useBuffs().data?.buffs ?? []
-  const remove = useRemoveBuff()
   // Ticks so a buff leaves the row the second it runs out.
   const now = useNow()
   const shown = buffs
@@ -126,15 +81,7 @@ export function HudBuffs() {
     <div role="list" aria-label="Active effects" className="flex flex-wrap gap-[2px]">
       {shown.map((buff) => (
         <div role="listitem" key={buff.buffId}>
-          <BuffIcon
-            buff={buff}
-            icon={BUFFS[buff.buffId]!.icon!}
-            onRemove={() =>
-              remove
-                .mutateAsync(buff.buffId)
-                .catch((error: unknown) => showToast(errorMessage(error), 'failure'))
-            }
-          />
+          <BuffIcon buff={buff} icon={BUFFS[buff.buffId]!.icon!} />
         </div>
       ))}
     </div>

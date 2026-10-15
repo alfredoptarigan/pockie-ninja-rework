@@ -1,7 +1,5 @@
 import { fireEvent, screen, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { character } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
 import { HudBuffs, buffTimeLeft } from './HudBuffs'
 
@@ -29,12 +27,10 @@ describe('HudBuffs', () => {
   function renderBuffs(buffs: ReturnType<typeof buff>[]) {
     vi.useFakeTimers({ toFake: ['Date'] })
     vi.setSystemTime(NOW)
-    const fetchMock = mockApi({
+    mockApi({
       'GET /api/game/buffs': () => json({ buffs, titles: [] }),
-      'POST /api/game/buffs/50001/remove': () => json({ character, buffs: [], titles: [] }),
     })
     renderWithProviders(<HudBuffs />)
-    return fetchMock
   }
 
   it('lists the active buffs with an icon in buff id order, Reborn icons first', async () => {
@@ -65,18 +61,8 @@ describe('HudBuffs', () => {
     expect(screen.queryByRole('tooltip')).toBeNull()
   })
 
-  it('removes a removable buff from its right-click menu', async () => {
-    const fetchMock = renderBuffs([buff(50001, at(3_600_000))])
-    fireEvent.contextMenu(await screen.findByRole('button', { name: 'Exp Boost +100%' }))
-    await userEvent.click(screen.getByRole('menuitem', { name: 'Remove effect' }))
-    expect(fetchMock).toHaveBeenCalledWith(
-      '/api/game/buffs/50001/remove',
-      expect.objectContaining({ method: 'POST' }),
-    )
-  })
-
-  it('offers no menu for a buff that cannot be removed', async () => {
-    renderBuffs([buff(50001, at(3_600_000), false)])
+  it('offers no remove menu, like Reborn', async () => {
+    renderBuffs([buff(50001, at(3_600_000))])
     fireEvent.contextMenu(await screen.findByRole('button', { name: 'Exp Boost +100%' }))
     expect(screen.queryByRole('menu')).toBeNull()
   })

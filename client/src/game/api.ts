@@ -287,11 +287,6 @@ export function useActivateTitle() {
     post<BuffsView & { character: Character }>('/api/game/titles/activate', { titleId }),
   )
 }
-export function useRemoveBuff() {
-  return useGameAction((buffId: number) =>
-    post<BuffsView & { character: Character }>(`/api/game/buffs/${buffId}/remove`),
-  )
-}
 
 const skillsKey = ['game', 'skills'] as const
 export function useSkills() {
