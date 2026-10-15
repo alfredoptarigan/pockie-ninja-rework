@@ -224,6 +224,20 @@ describe('Synthesis: outfit stars', () => {
   })
 })
 
+describe('Synthesis: outfits from before the +32 star rule', () => {
+  it('refuses to upgrade a starred +31 (stars came at +31 before), so its stars are not lost', async () => {
+    const main = await giveItem('i2931010', { stars: 2 })
+    const [a, b] = [await giveItem('i290001'), await giveItem('i290001')]
+    const made = await client.post('/api/game/portable-function/synthesis', {
+      mainId: main.id,
+      catalystIds: [a.id, b.id],
+    })
+    expect(code(made)).toBe('starred')
+    const [row] = await db.select().from(inventoryItems).where(eq(inventoryItems.id, main.id))
+    expect(row).toMatchObject({ itemId: 'i2931010', stars: 2 })
+  })
+})
+
 describe('Recast', () => {
   const outfitRow = async () =>
     (
