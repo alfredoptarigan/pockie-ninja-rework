@@ -1,6 +1,6 @@
 import type { Character } from '@pockie/shared'
 import { isWorn } from './inventory/EquipmentSlots'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useContext, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import {
@@ -66,6 +66,7 @@ export function SceneView({
   const explore = useExplore(hasSpots)
   const pictureReady = !hasSpots || !explore.isPending
   const hudLayer = useContext(HudLayer)
+  const inHud = (node: ReactNode) => (hudLayer ? createPortal(node, hudLayer) : node)
   const [reviveOpen, setReviveOpen] = useState(true)
   /** The monster that won the last fight, for the revive window's title. */
   const [defeatedBy, setDefeatedBy] = useState<string>()
@@ -256,17 +257,20 @@ export function SceneView({
           </div>
         )}
       </div>
-      {fightState && (
-        <BattleReplayMount
-          key={fightState.run}
-          replay={fightState.result.replay}
-          clothing={lookOf(character)}
-          monsterIds={[fightState.monster.id]}
-          sceneId={character.sceneId}
-          weaponItemId={fightState.weaponItemId}
-          onFinished={finishReplay}
-        />
-      )}
+      {fightState &&
+        // In the HUD layer, not the picture's: the HUD paints over the picture, so the chat
+        // panel would cover the replay's Skip button in the arena's bottom-left corner.
+        inHud(
+          <BattleReplayMount
+            key={fightState.run}
+            replay={fightState.result.replay}
+            clothing={lookOf(character)}
+            monsterIds={[fightState.monster.id]}
+            sceneId={character.sceneId}
+            weaponItemId={fightState.weaponItemId}
+            onFinished={finishReplay}
+          />,
+        )}
       {fightState?.finished && (
         <FightSummary
           result={fightState.result}

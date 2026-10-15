@@ -161,7 +161,7 @@ export function BattleReplayMount({
 
   if (failed) return null
   return (
-    <div className="fixed inset-0 z-40 grid place-items-center bg-black/20 p-4 backdrop-blur-sm">
+    <div className="pointer-events-auto fixed inset-0 z-40 grid place-items-center bg-black/20 p-4 backdrop-blur-sm">
       <section
         aria-label="Battle replay"
         className="relative w-[min(1000px,100%,calc((100dvh-32px)*5/3))]"
