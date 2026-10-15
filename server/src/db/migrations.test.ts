@@ -14,7 +14,8 @@ import * as schema from './schema.js'
 // Runs the real migration files against a scratch database next to the test database.
 const migrationsFolder = fileURLToPath(new URL('../../drizzle', import.meta.url))
 const testUrl = new URL(loadEnv().DATABASE_URL)
-const scratchName = `${testUrl.pathname.slice(1)}_migrations`
+// Named like every test database, ending in _test (pockie_remastered_migrations_test).
+const scratchName = testUrl.pathname.slice(1).replace(/(_test)?$/, '_migrations_test')
 const scratchUrl = Object.assign(new URL(testUrl), { pathname: `/${scratchName}` }).toString()
 const admin = postgres(testUrl.toString(), { max: 1, onnotice: () => {} })
 // Each run builds a whole database; allow for a busy machine.
