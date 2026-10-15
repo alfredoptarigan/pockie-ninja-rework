@@ -26,7 +26,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists), Fire Village; level 1 max HP 220.
+  // Clothing 3: Ggio Vega (sharp in Reborn), Fire Village; level 1 max HP 220.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -56,7 +56,7 @@ const giveItem = async (itemId: string, extra: Partial<typeof inventoryItems.$in
 const useItem = (id: string) => client.post(`/api/game/items/${id}/use`)
 const inField = async () => {
   await update({ sceneId: 2101 })
-  await giveItem('i270100', { equippedSlot: 'Weapon' })
+  await giveItem('i260100', { equippedSlot: 'Weapon' })
 }
 
 describe('pouches', () => {
@@ -203,9 +203,9 @@ describe('GET /api/game/character stats', () => {
     })
     expect(before.atkTime).toBeGreaterThan(0)
 
-    await giveItem('i270100', { equippedSlot: 'Weapon' })
+    await giveItem('i260100', { equippedSlot: 'Weapon' })
     const after = (await client.get('/api/game/character')).json().stats
-    // Fists i270100: AttackMin 7, AttackMax 8.
+    // Sharp newbie weapon i260100: AttackMin 7, AttackMax 8.
     expect(after).toMatchObject({ minAttack: 8, maxAttack: 9 })
   })
 

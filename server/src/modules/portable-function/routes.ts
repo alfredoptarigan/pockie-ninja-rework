@@ -142,6 +142,9 @@ function synthesisSetup(level: number, rows: ItemRow[]) {
     }
   }
   checkSynthesisRows(rows, false)
+  // Stars live on the row and an upgrade makes a new one; only +31s starred before the rule moved
+  // to +32 can get here.
+  if (rows[0]!.stars > 0) throw bad('starred', 'Starred outfits cannot be upgraded.')
   const [main, ...rest] = rows.map(partOf) as [SynthesisPart, SynthesisPart, SynthesisPart]
   const catalysts = rest as [SynthesisPart, SynthesisPart]
   const plan = synthesisPlan(main, catalysts)

@@ -19,7 +19,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists), level 1, Stamina 1365.
+  // Clothing 3: Ggio Vega (sharp in Reborn), level 1, Stamina 1365.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -47,7 +47,7 @@ const stats = async () => (await client.get('/api/game/character')).json().stats
 
 describe('equipping', () => {
   it('refuses unappraised gear (EquipSystem.java:421)', async () => {
-    const fists = await giveItem('i270100', { canIdentify: true, identifyCount: 2 })
+    const fists = await giveItem('i260100', { canIdentify: true, identifyCount: 2 })
     const response = await client.post(`/api/game/items/${fists.id}/equip`)
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('unappraised')
@@ -55,13 +55,13 @@ describe('equipping', () => {
   })
 
   it('refuses a broken item (CheckEquipProp: Hardiness > 0)', async () => {
-    const fists = await giveItem('i270100', { durability: 0 })
+    const fists = await giveItem('i260100', { durability: 0 })
     const response = await client.post(`/api/game/items/${fists.id}/equip`)
     expect(response.json().error.code).toBe('broken')
   })
 
   it('wears appraised gear', async () => {
-    const fists = await giveItem('i270100', {
+    const fists = await giveItem('i260100', {
       canIdentify: true,
       identifyCount: 2,
       identifyTimes: 1,
@@ -90,7 +90,7 @@ async function fightSunflower() {
 
 describe('durability loss', () => {
   it('takes 1 from every worn item per enemy killed in a won fight', async () => {
-    const fists = await giveItem('i270100', { equippedSlot: 'Weapon' })
+    const fists = await giveItem('i260100', { equippedSlot: 'Weapon' })
     const ring = await giveItem('i300111', { equippedSlot: 'Ring' })
     const inBag = await giveItem('i220102')
 
@@ -103,7 +103,7 @@ describe('durability loss', () => {
   })
 
   it('takes nothing after a lost fight', async () => {
-    const fists = await giveItem('i270100', { equippedSlot: 'Weapon' })
+    const fists = await giveItem('i260100', { equippedSlot: 'Weapon' })
     await setCharacter({ sceneId: 2101 })
     // n32002 is a task boss: it can only be fought while one of its quests (10014) is held.
     await db.insert(characterQuests).values({ characterId, taskId: 10014, progress: [0], state: 0 })
@@ -130,7 +130,7 @@ describe('durability loss', () => {
 describe('set bonus in fights', () => {
   it('raises the fighter’s max HP in the replay with the 2-piece Oracle bonus', async () => {
     await setCharacter({ hp: 5000 })
-    await giveItem('i270100', { equippedSlot: 'Weapon' })
+    await giveItem('i260100', { equippedSlot: 'Weapon' })
     const cloth = await giveItem('i281601', { equippedSlot: 'Cloth' })
     const hat = await giveItem('i281602', { equippedSlot: 'Hat' })
     const withSet = (await fightSunflower()).replay.fighters[0].maxHp

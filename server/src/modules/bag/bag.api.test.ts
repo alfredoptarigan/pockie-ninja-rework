@@ -16,8 +16,9 @@ afterEach(() => ninja.app.close())
 afterAll(() => close())
 
 const POTION = 'i160006' // PharmacyItem hp.js, 1x1, stacks to 100, Price 16, CanTrade 1
-const FISTS = 'i270100' // fists weapon, 2x3, level 1, Price 1
-const FISTS_2 = 'i270101' // fists weapon, 2x3, level 1, Price 44
+// Sharp: the setUpNinja outfit (clothing 3) is Sharp in Reborn.
+const WEAPON = 'i260100' // sharp weapon, 2x3, level 1, Price 1
+const WEAPON_2 = 'i260101' // sharp weapon, 2x3, level 1, Price 44
 const DEBRIS = 'i150102' // DebrisItem 2x2, not usable
 const UNTRADABLE = 'i159104' // CanTrade 0
 
@@ -52,9 +53,9 @@ const fillPages = (pages: number) =>
 describe('GET /inventory placement', () => {
   it('places granted items first-fit, persists the positions and describes each item', async () => {
     const potion = await ninja.give(POTION, { count: 3 })
-    const fists = await ninja.give(FISTS_2)
+    const fists = await ninja.give(WEAPON_2)
     const debris = await ninja.give(DEBRIS)
-    const equipped = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
+    const equipped = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
 
     const items = await inventory()
     expect(find(items, potion.id)).toMatchObject({ page: 0, slot: 0, locked: false })
@@ -100,7 +101,7 @@ describe('GET /inventory placement', () => {
 describe('move and swap', () => {
   it('moves an item to a free spot and refuses bad targets', async () => {
     const potion = await ninja.give(POTION)
-    const fists = await ninja.give(FISTS_2)
+    const fists = await ninja.give(WEAPON_2)
     await inventory()
 
     const moved = await post(`${fists.id}/move`, { page: 1, slot: 4 })
@@ -126,7 +127,7 @@ describe('move and swap', () => {
   })
 
   it('swaps positions when both still fit and refuses otherwise', async () => {
-    const fists = await ninja.give(FISTS_2, { bagPage: 0, bagSlot: 0 })
+    const fists = await ninja.give(WEAPON_2, { bagPage: 0, bagSlot: 0 })
     const potion = await ninja.give(POTION, { bagPage: 1, bagSlot: 0 })
     const low = await ninja.give(POTION, { bagPage: 0, bagSlot: 50 })
 
@@ -181,7 +182,7 @@ describe('lock, split and sell', () => {
   it('sells whole stacks from anywhere for Price x count', async () => {
     await ninja.set({ sceneId: 2101, stone: 0 })
     const potion = await ninja.give(POTION, { count: 3 })
-    const fists = await ninja.give(FISTS_2)
+    const fists = await ninja.give(WEAPON_2)
     const sold = await post('sell', { inventoryIds: [potion.id, fists.id] })
     expect(sold.statusCode).toBe(200)
     expect(sold.json()).toMatchObject({ earned: 3 * 16 + 44, character: { stone: 92 } })
@@ -192,7 +193,7 @@ describe('lock, split and sell', () => {
   it('refuses the whole sale for locked, equipped or untradable items', async () => {
     const potion = await ninja.give(POTION, { count: 3 })
     const locked = await ninja.give(POTION, { locked: true })
-    const equipped = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
+    const equipped = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
     const untradable = await ninja.give(UNTRADABLE)
     for (const bad of [locked, equipped, untradable])
       expect(errorCode(await post('sell', { inventoryIds: [potion.id, bad.id] }))).toBe(
@@ -238,7 +239,7 @@ describe('sort', () => {
   it('merges stacks and re-places everything, equipment first', async () => {
     const a = await ninja.give(POTION, { count: 60, bagPage: 1, bagSlot: 9 })
     const b = await ninja.give(POTION, { count: 70, bagPage: 0, bagSlot: 0 })
-    const fists = await ninja.give(FISTS_2, { bagPage: 1, bagSlot: 0 })
+    const fists = await ninja.give(WEAPON_2, { bagPage: 1, bagSlot: 0 })
     const sorted = await post('sort', { scope: 'all', stack: true })
     expect(sorted.statusCode).toBe(200)
     const items: Row[] = sorted.json().items
@@ -265,8 +266,8 @@ describe('sort', () => {
 
 describe('equip and unequip positions', () => {
   it('puts the replaced item into the new item’s spot and unequips to a chosen spot', async () => {
-    const worn = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
-    const fresh = await ninja.give(FISTS_2, { bagPage: 1, bagSlot: 4 })
+    const worn = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
+    const fresh = await ninja.give(WEAPON_2, { bagPage: 1, bagSlot: 4 })
     const equipped = await post(`${fresh.id}/equip`)
     expect(equipped.statusCode).toBe(200)
     expect(find(equipped.json().items, worn.id)).toMatchObject({
@@ -287,7 +288,7 @@ describe('equip and unequip positions', () => {
 
   it('falls back to first-fit when the chosen spot is taken', async () => {
     await ninja.give(POTION, { bagPage: 0, bagSlot: 0 })
-    const worn = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
+    const worn = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
     const unequipped = await post(`${worn.id}/unequip`, { page: 0, slot: 0 })
     expect(find(unequipped.json().items, worn.id)).toMatchObject({ page: 0, slot: 1 })
   })

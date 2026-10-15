@@ -27,7 +27,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists), Fire Village; level 1 max HP 220.
+  // Clothing 3: Ggio Vega (sharp in Reborn), Fire Village; level 1 max HP 220.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -72,7 +72,7 @@ describe('skill learning persistence', () => {
       .where(eq(characters.id, characterId))
     await db
       .insert(inventoryItems)
-      .values({ characterId, itemId: 'i270100', equippedSlot: 'Weapon' })
+      .values({ characterId, itemId: 'i260100', equippedSlot: 'Weapon' })
     const fight = await client.post('/api/game/fight', { monsterId: 'n33017' })
     expect(fight.statusCode).toBe(200)
     expect(fight.json().won).toBe(true)

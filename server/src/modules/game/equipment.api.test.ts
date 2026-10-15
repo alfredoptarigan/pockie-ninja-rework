@@ -19,7 +19,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists), level 1 max HP 220, Stamina 1365, Strength 1365.
+  // Clothing 3: Ggio Vega (sharp in Reborn), level 1 max HP 220, Stamina 1365, Strength 1365.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -45,7 +45,7 @@ const stats = async () => (await client.get('/api/game/character')).json().stats
 
 describe('POST /api/game/items/:id/unequip', () => {
   it('moves the item back to the bag and drops its stats', async () => {
-    const fists = await giveItem('i270100', { equippedSlot: 'Weapon' })
+    const fists = await giveItem('i260100', { equippedSlot: 'Weapon' })
     expect(await stats()).toMatchObject({ minAttack: 8, maxAttack: 9 })
 
     const response = await unequip(fists.id)
@@ -57,14 +57,14 @@ describe('POST /api/game/items/:id/unequip', () => {
   })
 
   it('refuses an item that is not equipped', async () => {
-    const fists = await giveItem('i270100')
+    const fists = await giveItem('i260100')
     const response = await unequip(fists.id)
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('not_equipped')
   })
 
   it('refuses when the bag is full', async () => {
-    const fists = await giveItem('i270100', { equippedSlot: 'Weapon' })
+    const fists = await giveItem('i260100', { equippedSlot: 'Weapon' })
     await db
       .insert(inventoryItems)
       .values(Array.from({ length: BAG_SLOTS }, () => ({ characterId, itemId: 'i160006' })))
@@ -80,7 +80,7 @@ describe('POST /api/game/items/:id/unequip', () => {
   })
 
   it('requires a login', async () => {
-    const fists = await giveItem('i270100', { equippedSlot: 'Weapon' })
+    const fists = await giveItem('i260100', { equippedSlot: 'Weapon' })
     const anonymous = new Client(app)
     expect((await anonymous.post(`/api/game/items/${fists.id}/unequip`)).statusCode).toBe(401)
   })

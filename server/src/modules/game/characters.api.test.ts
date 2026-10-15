@@ -18,7 +18,7 @@ async function signedIn(username = 'Player_one') {
   return c
 }
 
-// Row 4 of the creation table: clothing 3 (Ggio Vega), male, fists.
+// Row 4 of the creation table: clothing 3 (Ggio Vega), male, sharp (Reborn).
 const ggio = { name: 'Ninja_01', gender: 0, clothing: 3, nation: 0 }
 
 beforeEach(async () => {
@@ -40,7 +40,8 @@ describe('GET /api/game/creation', () => {
     expect(response.statusCode).toBe(200)
     const body = response.json()
     expect(body.outfits).toHaveLength(10)
-    expect(body.outfits[0]).toEqual({ clothing: 39, gender: 1, weaponClass: 4, boost: 'stamina' })
+    // Weapon class 2: Reborn makes clothing 39 Sharp (2011: fists).
+    expect(body.outfits[0]).toEqual({ clothing: 39, gender: 1, weaponClass: 2, boost: 'stamina' })
     // CreatRoleBase.SetRoleSelectDes: the strictly highest base stat, else stamina (16 ties).
     const boost = (clothing: number) =>
       body.outfits.find((o: { clothing: number }) => o.clothing === clothing).boost

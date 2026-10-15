@@ -18,7 +18,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists).
+  // Clothing 3: Ggio Vega (sharp in Reborn).
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -145,8 +145,8 @@ describe('POST /api/game/forge/appraise', () => {
 describe('POST /api/game/forge/appraise-all', () => {
   it('appraises every hidden item on the page for the summed cost', async () => {
     const ring = await giveItem('i282607', hidden)
-    const fists = await giveItem('i270100', hidden)
-    const plain = await giveItem('i270100')
+    const fists = await giveItem('i260100', hidden)
+    const plain = await giveItem('i260100')
     await setMoney({ stone: 100 })
 
     const response = await client.post('/api/game/forge/appraise-all', {
@@ -162,7 +162,7 @@ describe('POST /api/game/forge/appraise-all', () => {
 
   it('refuses when the total is more than the Stone, appraising nothing', async () => {
     const ring = await giveItem('i282607', hidden)
-    const fists = await giveItem('i270100', hidden)
+    const fists = await giveItem('i260100', hidden)
     await setMoney({ stone: 30 })
     const response = await client.post('/api/game/forge/appraise-all', {
       itemIds: [ring.id, fists.id],
@@ -172,7 +172,7 @@ describe('POST /api/game/forge/appraise-all', () => {
   })
 
   it('says so when nothing needs appraising', async () => {
-    const plain = await giveItem('i270100')
+    const plain = await giveItem('i260100')
     const response = await client.post('/api/game/forge/appraise-all', { itemIds: [plain.id] })
     expect(errorCode(response)).toBe('nothing_to_appraise')
   })
@@ -279,7 +279,7 @@ describe('POST /api/game/forge/enhance', () => {
 
 describe('POST /api/game/forge/refine', () => {
   it('re-rolls the properties for 8 Gold', async () => {
-    const fists = await giveItem('i270100', { ...hidden, identifyTimes: 1 })
+    const fists = await giveItem('i260100', { ...hidden, identifyTimes: 1 })
     await setMoney({ gold: 8 })
     const response = await client.post('/api/game/forge/refine', {
       itemId: fists.id,
@@ -293,7 +293,7 @@ describe('POST /api/game/forge/refine', () => {
   })
 
   it('binds on Gift Coupons and spends a Refine Talisman', async () => {
-    const fists = await giveItem('i270100', { ...hidden, identifyTimes: 1 })
+    const fists = await giveItem('i260100', { ...hidden, identifyTimes: 1 })
     await setMoney({ giftCoupon: 8 })
     await client.post('/api/game/forge/refine', { itemId: fists.id, payment: 'giftCoupon' })
     expect(await itemRow(fists.id)).toMatchObject({ bound: true, identifyTimes: 2 })
@@ -309,14 +309,14 @@ describe('POST /api/game/forge/refine', () => {
 
   it('refuses unappraised gear, gear without properties and missing money', async () => {
     await setMoney({ gold: 100 })
-    const unappraised = await giveItem('i270100', hidden)
-    const white = await giveItem('i270100')
+    const unappraised = await giveItem('i260100', hidden)
+    const white = await giveItem('i260100')
     const refine = (id: string) =>
       client.post('/api/game/forge/refine', { itemId: id, payment: 'gold' })
     expect(errorCode(await refine(unappraised.id))).toBe('unappraised')
     expect(errorCode(await refine(white.id))).toBe('no_props')
     await setMoney({ gold: 7 })
-    const appraised = await giveItem('i270100', { ...hidden, identifyTimes: 1 })
+    const appraised = await giveItem('i260100', { ...hidden, identifyTimes: 1 })
     expect(errorCode(await refine(appraised.id))).toBe('no_money')
   })
 })
@@ -404,7 +404,7 @@ describe('POST /api/game/forge/inscribe', () => {
 
 describe('POST /api/game/forge/repair and /repair-all', () => {
   it('repairs a broken level 1 item (Max 100) for 123 Stone', async () => {
-    const fists = await giveItem('i270100', { durability: 0 })
+    const fists = await giveItem('i260100', { durability: 0 })
     await setMoney({ stone: 200 })
     expect((await gear(fists.id)).repairCost).toBe(123)
 
@@ -416,11 +416,11 @@ describe('POST /api/game/forge/repair and /repair-all', () => {
   })
 
   it('refuses an undamaged item and missing Stone', async () => {
-    const fists = await giveItem('i270100')
+    const fists = await giveItem('i260100')
     expect(errorCode(await client.post('/api/game/forge/repair', { itemId: fists.id }))).toBe(
       'not_damaged',
     )
-    const broken = await giveItem('i270100', { durability: 0 })
+    const broken = await giveItem('i260100', { durability: 0 })
     await setMoney({ stone: 122 })
     expect(errorCode(await client.post('/api/game/forge/repair', { itemId: broken.id }))).toBe(
       'no_money',
@@ -428,9 +428,9 @@ describe('POST /api/game/forge/repair and /repair-all', () => {
   })
 
   it('repairs every damaged equipped item and leaves the bag alone', async () => {
-    const fists = await giveItem('i270100', { durability: 0, equippedSlot: 'Weapon' })
+    const fists = await giveItem('i260100', { durability: 0, equippedSlot: 'Weapon' })
     const hat = await giveItem('i220102', { durability: 50, equippedSlot: 'Hat' })
-    const inBag = await giveItem('i270100', { durability: 0 })
+    const inBag = await giveItem('i260100', { durability: 0 })
     await setMoney({ stone: 1000 })
 
     const response = await client.post('/api/game/forge/repair-all')
@@ -444,7 +444,7 @@ describe('POST /api/game/forge/repair and /repair-all', () => {
   })
 
   it('says so when nothing worn is damaged', async () => {
-    await giveItem('i270100', { equippedSlot: 'Weapon' })
+    await giveItem('i260100', { equippedSlot: 'Weapon' })
     expect(errorCode(await client.post('/api/game/forge/repair-all'))).toBe('not_damaged')
   })
 })

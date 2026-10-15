@@ -17,7 +17,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3 (Ggio Vega) fights with fists; Fire Village tutorial starts with quest 90000.
+  // Clothing 3 (Ggio Vega) fights with sharp weapons (Reborn); Fire Village tutorial starts with quest 90000.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -52,16 +52,18 @@ describe('Fire Village tutorial', () => {
     const used = await client.post(`/api/game/items/${pack.id}/use`)
     expect(used.json().completed).toEqual([90001])
     expect(await itemRow('i159104')).toBeUndefined()
-    const fists = await itemRow('i270100')
-    expect(fists).toMatchObject({ fitsOutfit: true })
+    // The pack holds all three newbie weapons; only the sharp one fits.
+    expect(await itemRow('i270100')).toMatchObject({ fitsOutfit: false })
+    const sharp = await itemRow('i260100')
+    expect(sharp).toMatchObject({ fitsOutfit: true })
 
-    // 90002 is not auto-accepted: accept it at the Elder, then equip the fists.
+    // 90002 is not auto-accepted: accept it at the Elder, then equip the sharp weapon.
     expect((await client.post('/api/game/quests/90002/accept')).statusCode).toBe(200)
     const equipQuest = (await quests()).find((q: { taskId: number }) => q.taskId === 90002)
     expect(equipQuest.steps[0]).toMatchObject({ command: 'equip' })
-    const equipped = await client.post(`/api/game/items/${fists.id}/equip`)
+    const equipped = await client.post(`/api/game/items/${sharp.id}/equip`)
     expect(equipped.json().completed).toEqual([90002])
-    expect(await itemRow('i270100')).toMatchObject({ equippedSlot: 'Weapon' })
+    expect(await itemRow('i260100')).toMatchObject({ equippedSlot: 'Weapon' })
   })
 
   it('refuses quests whose previous quest is not done', async () => {
@@ -87,7 +89,7 @@ describe('items', () => {
   })
 
   it('refuses a weapon of another class', async () => {
-    // i250100 is a blunt weapon; Ggio Vega fights with fists.
+    // i250100 is a blunt weapon; Ggio Vega fights with sharp weapons.
     await db.insert(inventoryItems).values({ characterId, itemId: 'i250100' })
     const bat = await itemRow('i250100')
     expect(bat.fitsOutfit).toBe(false)

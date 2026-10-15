@@ -49,7 +49,7 @@ for (const location of ['market', 'warehouse'] as const) {
       const gear = await ninja.give('i250104', { location })
       const potion = await ninja.give('i160006', { location, count: 2 })
       const talisman = await ninja.give('i161003', { location, count: 2 })
-      const kept = await ninja.give('i270100')
+      const kept = await ninja.give('i260100')
       expect(
         (await ninja.client.get('/api/game/inventory'))
           .json()

@@ -17,7 +17,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3 (Ggio Vega) fights with fists.
+  // Clothing 3 (Ggio Vega) fights with sharp weapons (Reborn).
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -91,7 +91,7 @@ describe('boss quests with an item (SubTaskType 10)', () => {
   // 10056: defeat Demon Chuuji (n32011) in 2605 while holding the quest item i140040.
   beforeEach(async () => {
     await set({ sceneId: 2605, level: 80 })
-    await give('i270112', 1, 'Weapon')
+    await give('i260112', 1, 'Weapon')
     await accept(10056)
   })
 

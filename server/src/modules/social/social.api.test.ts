@@ -279,7 +279,7 @@ describe('players (Player List, View Character, Requests)', () => {
 
   it('shows another ninja: public fields, online state and equipped items only', async () => {
     await db.insert(inventoryItems).values([
-      { characterId: sasuke.id, itemId: 'i270100', equippedSlot: 'Weapon', enhanceLevel: 3 },
+      { characterId: sasuke.id, itemId: 'i260100', equippedSlot: 'Weapon', enhanceLevel: 3 },
       { characterId: sasuke.id, itemId: 'i160006', count: 2 },
     ])
     const response = await get(naruto, `players/${sasuke.id}`)
@@ -291,7 +291,7 @@ describe('players (Player List, View Character, Requests)', () => {
     expect(view.equipped).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ slot: 'Outfit' }),
-        { slot: 'Weapon', itemId: 'i270100', nameKey: expect.any(String), enhanceLevel: 3 },
+        { slot: 'Weapon', itemId: 'i260100', nameKey: expect.any(String), enhanceLevel: 3 },
       ]),
     )
     expect(view.equipped).toHaveLength(2)
@@ -347,7 +347,7 @@ describe('View Character stats (Inventory Hide)', () => {
 
   it("shows a visible ninja's stats and the active preset's skills, not the bag", async () => {
     await db.insert(inventoryItems).values([
-      { characterId: sasuke.id, itemId: 'i270100', equippedSlot: 'Weapon' },
+      { characterId: sasuke.id, itemId: 'i260100', equippedSlot: 'Weapon' },
       { characterId: sasuke.id, itemId: 'i160006', count: 2 },
     ])
     await db

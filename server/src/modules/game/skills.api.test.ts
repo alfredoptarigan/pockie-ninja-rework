@@ -38,7 +38,7 @@ beforeEach(async () => {
   })
   characterId = response.json().character.id
   await db.update(characters).set({ sceneId: 2101 }).where(eq(characters.id, characterId))
-  await db.insert(inventoryItems).values({ characterId, itemId: 'i270100', equippedSlot: 'Weapon' })
+  await db.insert(inventoryItems).values({ characterId, itemId: 'i260100', equippedSlot: 'Weapon' })
 })
 afterEach(() => app.close())
 afterAll(() => close())

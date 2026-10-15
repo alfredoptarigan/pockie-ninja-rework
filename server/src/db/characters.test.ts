@@ -83,7 +83,7 @@ describe('inventory and quests', () => {
     const characterId = await character()
     await db
       .insert(inventoryItems)
-      .values({ characterId, itemId: 'i270100', equippedSlot: 'Weapon' })
+      .values({ characterId, itemId: 'i260100', equippedSlot: 'Weapon' })
     await expect(
       db.insert(inventoryItems).values({ characterId, itemId: 'i250100', equippedSlot: 'Weapon' }),
     ).rejects.toThrow()

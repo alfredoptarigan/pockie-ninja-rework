@@ -181,8 +181,8 @@ describe('Synthesis', () => {
 })
 
 describe('Synthesis: outfit stars', () => {
-  // i2931010: Ichigo at our top +N (+31), where Reborn's star rule applies.
-  const TOP = 'i2931010'
+  // i2932010: Ichigo at Reborn's top +N (+32), where its star rule applies.
+  const TOP = 'i2932010'
   const synth = (mainId: string, a: string, b: string) =>
     client.post('/api/game/portable-function/synthesis', { mainId, catalystIds: [a, b] })
   const preview = (mainId: string, a: string, b: string) =>
@@ -217,10 +217,24 @@ describe('Synthesis: outfit stars', () => {
     const other = await giveItem(TOP)
     expect(code(await synth(full.id, plain.id, other.id))).toBe('max_stars')
 
-    const low = await giveItem('i2930010')
+    const low = await giveItem('i2931010')
     expect(code(await synth(low.id, plain.id, other.id))).toBe('cannot_synthesize')
     expect(await starsOf(main.id)).toBe(0)
     expect(await starsOf(plain.id)).toBe(0)
+  })
+})
+
+describe('Synthesis: outfits from before the +32 star rule', () => {
+  it('refuses to upgrade a starred +31 (stars came at +31 before), so its stars are not lost', async () => {
+    const main = await giveItem('i2931010', { stars: 2 })
+    const [a, b] = [await giveItem('i290001'), await giveItem('i290001')]
+    const made = await client.post('/api/game/portable-function/synthesis', {
+      mainId: main.id,
+      catalystIds: [a.id, b.id],
+    })
+    expect(code(made)).toBe('starred')
+    const [row] = await db.select().from(inventoryItems).where(eq(inventoryItems.id, main.id))
+    expect(row).toMatchObject({ itemId: 'i2931010', stars: 2 })
   })
 })
 

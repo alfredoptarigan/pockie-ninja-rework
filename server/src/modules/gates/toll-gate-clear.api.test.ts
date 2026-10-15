@@ -20,7 +20,7 @@ let ninja: Awaited<ReturnType<typeof setUpNinja>>
 beforeEach(async () => {
   await truncateAll(db)
   ninja = await setUpNinja(db)
-  await ninja.give('i270100', { equippedSlot: 'Weapon' })
+  await ninja.give('i260100', { equippedSlot: 'Weapon' })
   await ninja.ready(20)
 })
 afterEach(() => ninja.app.close())

@@ -19,6 +19,7 @@ import type {
 } from '@pockie/game-core'
 import type { OutfitBoost } from '@pockie/shared'
 import { z } from 'zod'
+import { topTierOutfits, topTierRecipes } from './outfit-top-tier.js'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -40,7 +41,8 @@ function load<T>(name: string): T {
 export function avatarStats(avatarId: number): AvatarStats {
   const key = `avatar:${avatarId}`
   if (cache.has(key)) return cache.get(key) as AvatarStats
-  const row = load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)]
+  const row =
+    load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)] ?? topTierStats(avatarId)
   if (!row) throw new Error(`Unknown avatar ${avatarId}`)
   const stats = rebornOutfitStats(avatarId, row)
   cache.set(key, stats)
@@ -59,7 +61,8 @@ export function creationOutfits() {
   return load<Row[]>('creation-outfits').map((row) => ({
     clothing: Number(row.Cloth),
     gender: Number(row.Sex) as 0 | 1,
-    weaponClass: Number(row.Pos),
+    // Reborn's Weapon Type where it ships the outfit (avatarStats), not creatrole.tab's Pos.
+    weaponClass: avatarStats(Number(row.AvatarID)).Popsinger,
     boost: outfitBoost(avatarStats(Number(row.AvatarID))),
   }))
 }
@@ -107,16 +110,16 @@ export const skillAddRow = (id: number) =>
   load<Record<string, Record<string, number>>>('skill-adds')[String(id)]
 
 /**
- * AvatarSkill.ini SkillID1-4 of an outfit (`i29NNNN`), 0 = empty slot. The imprint (SkillID4) is
- * Reborn's where Reborn ships the outfit; the Secret Technique, block and init stay ours.
+ * AvatarSkill.ini SkillID1-4 of an outfit (by its item id), 0 = empty slot. The imprint (SkillID4)
+ * is Reborn's where Reborn ships the outfit; the Secret Technique, block and init stay ours.
  */
 export function avatarSkillIds(avatarId: number) {
+  const outfit = outfitOfAvatar(avatarId)
   const row =
-    load<Record<string, Record<string, number>>>('avatar-skills')[
-      `i29${String(avatarId).padStart(4, '0')}`
-    ]
+    outfit &&
+    load<Record<string, Record<string, number>>>('avatar-skills')[tableItemId(outfit.itemId)]
   if (!row) return undefined
-  const reborn = outfitOfAvatar(avatarId)?.reborn
+  const reborn = outfit.reborn
   const imprint = reborn ? (reborn.imprint ?? 0) : row.SkillID4
   return [row.SkillID1, row.SkillID2, row.SkillID3, imprint].map(Number)
 }
@@ -133,7 +136,29 @@ export function npcSkillIds(npcId: string) {
 }
 
 /** item.ini row, including the Reborn scroll items. */
-export const item = (id: string) => withReborn<Row>('items')[id]
+export const item = (id: string) => allItems()[id]
+/** item.ini with the Reborn overlay and Reborn's +32 outfits. */
+function allItems() {
+  const key = 'items:all'
+  if (!cache.has(key)) cache.set(key, { ...withReborn<Row>('items'), ...topTier().rows })
+  return cache.get(key) as Record<string, Row>
+}
+/** Reborn's +32 outfits (outfit-top-tier.ts), built from 2011's +31 rows. */
+function topTier() {
+  const key = 'outfits:top-tier'
+  if (!cache.has(key)) cache.set(key, topTierOutfits(load<Record<string, Row>>('items')))
+  return cache.get(key) as ReturnType<typeof topTierOutfits>
+}
+/** The 2011 table key of an outfit item: a +32 reads its +31's skills and recast rows. */
+const tableItemId = (itemId: string) => topTier().sources.get(itemId) ?? itemId
+/** A +32's avatar row: its +31's (rebornOutfitStats sets Reborn's stats from the +N). */
+function topTierStats(avatarId: number) {
+  const outfit = outfitOfAvatar(avatarId)
+  const from = outfit && topTier().sources.get(outfit.itemId)
+  return from
+    ? load<Record<string, AvatarStats>>('avatar-stats')[String(item(from)!.AvatarID)]
+    : undefined
+}
 /** en.json key of an item's name (`lg_<Name>`), or `lg_<id>` for items without a row. */
 export const itemNameKey = (id: string) => `lg_${item(id)?.Name ?? id}`
 export const levels = () =>
@@ -269,7 +294,16 @@ export interface ComposeRecipe {
   Target: string | number
   Rate?: number
 }
-export const composeRecipes = () => load<Record<string, ComposeRecipe>>('compose-recipes')
+/** EquipCompose.ini with Reborn's +31 -> +32 step (topTierRecipes). */
+export function composeRecipes() {
+  const key = 'compose-recipes:top-tier'
+  if (!cache.has(key))
+    cache.set(
+      key,
+      topTierRecipes(load<Record<string, ComposeRecipe>>('compose-recipes'), topTier().sources),
+    )
+  return cache.get(key) as Record<string, ComposeRecipe>
+}
 export const composeRandom = () =>
   load<Record<string, { JudgeValueScore: number; class: string }>>('compose-random')
 export const composeBlocked = () => load<string[]>('compose-blocked')
@@ -282,7 +316,7 @@ export interface AvatarRecastRow {
   StaminaUnit: number
 }
 export const avatarRecast = (itemId: string) =>
-  load<{ outfits: Record<string, AvatarRecastRow> }>('avatar-recasts').outfits[itemId]
+  load<{ outfits: Record<string, AvatarRecastRow> }>('avatar-recasts').outfits[tableItemId(itemId)]
 export interface ImpressRateRow {
   MinLevel: number
   MaxLevel: number
@@ -993,31 +1027,45 @@ const rebornOutfitsSchema = z.object({
       isv: triple,
       bmv: triple,
       imprint: int.min(2000).max(2092).nullable(),
+      weaponType: z.enum(['Sharp', 'Blunt', 'Fists', 'Any']),
     }),
   ),
 })
 export const rebornOutfits = () => loadChecked('reborn/outfits', rebornOutfitsSchema)
 export type RebornOutfit = z.infer<typeof rebornOutfitsSchema>['outfits'][string]
 
-/** The outfit an AvatarID belongs to: its clothing, +N (AvatarLevel - 1) and Reborn data. */
+interface AvatarOutfit {
+  itemId: string
+  clothing: number
+  tier: number
+}
+
+/** The outfit an AvatarID belongs to: its item, clothing, +N (AvatarLevel - 1) and Reborn data. */
 export function outfitOfAvatar(avatarId: number) {
   const key = 'outfits-by-avatar'
   if (!cache.has(key)) {
-    const byAvatar = new Map<number, { clothing: number; tier: number }>()
-    for (const row of Object.values(load<Record<string, Row>>('items'))) {
+    const byAvatar = new Map<number, AvatarOutfit>()
+    for (const [itemId, row] of Object.entries(allItems())) {
       if (row.class !== 'AvatarItem') continue
       byAvatar.set(Number(row.AvatarID), {
+        itemId,
         clothing: Number(row.Clothing),
         tier: Number(row.AvatarLevel) - 1,
       })
     }
     cache.set(key, byAvatar)
   }
-  const outfit = (cache.get(key) as Map<number, { clothing: number; tier: number }>).get(avatarId)
+  const outfit = (cache.get(key) as Map<number, AvatarOutfit>).get(avatarId)
   return outfit && { ...outfit, reborn: rebornOutfits().outfits[String(outfit.clothing)] }
 }
 
-/** The avatar row with Reborn's ISV (Up and the +N base) and BMV, when Reborn has the outfit. */
+/** Reborn's Weapon Type as a UsePopsinger job mask (1 Blunt, 2 Sharp, 4 Fists; Any fits all). */
+const WEAPON_CLASS = { Blunt: 1, Sharp: 2, Fists: 4, Any: 7 } as const
+
+/**
+ * The avatar row with Reborn's ISV (Up and the +N base), BMV and Weapon Type, when Reborn has the
+ * outfit.
+ */
 function rebornOutfitStats(avatarId: number, row: AvatarStats): AvatarStats {
   const outfit = outfitOfAvatar(avatarId)
   if (!outfit?.reborn) return row
@@ -1038,5 +1086,6 @@ function rebornOutfitStats(avatarId: number, row: AvatarStats): AvatarStats {
     DodgeAdd: agiBmv!,
     MaxHPAdd: staBmv!,
     MaxMPAdd: staBmv!,
+    Popsinger: WEAPON_CLASS[outfit.reborn.weaponType],
   }
 }

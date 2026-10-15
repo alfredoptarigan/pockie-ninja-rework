@@ -161,7 +161,7 @@ describe.each([
   })
 
   it('toll gates', async () => {
-    await ninja.give('i270100', { equippedSlot: 'Weapon' })
+    await ninja.give('i260100', { equippedSlot: 'Weapon' })
     await ninja.ready(20)
     await post('/gates/enter', { gateId: 100001 })
     // The first sub gate (200011) has five points; its RewardExp is paid on the fifth win.

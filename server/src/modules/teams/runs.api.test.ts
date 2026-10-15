@@ -40,7 +40,7 @@ afterAll(() => close())
 
 const DEMON_CITY = 171
 const GATE = 100001
-const WEAPON = 'i270100'
+const WEAPON = 'i260100'
 
 /** A ninja at the Demon City Guard with a weapon and full HP. */
 async function ready(n: number, { sceneId = DEMON_CITY, level = 20 } = {}) {

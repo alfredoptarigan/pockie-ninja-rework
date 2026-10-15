@@ -99,10 +99,10 @@ describe('Fire main chain through the neutral zone', () => {
       .update(characters)
       .set({ level: 40, sceneId: 2101 })
       .where(eq(characters.id, characterId))
-    // A strong weapon (L56 gloves) so the bosses fall in a few tries: this tests the quest flow.
+    // A strong weapon (L56 sharp) so the bosses fall in a few tries: this tests the quest flow.
     await db
       .insert(inventoryItems)
-      .values({ characterId, itemId: 'i270112', equippedSlot: 'Weapon' })
+      .values({ characterId, itemId: 'i260112', equippedSlot: 'Weapon' })
     await db.insert(characterQuests).values({ characterId, taskId: 10025, progress: [0] })
 
     for (let taskId = 10025; taskId <= 10045; taskId++) {

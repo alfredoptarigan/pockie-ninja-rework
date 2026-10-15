@@ -1,6 +1,12 @@
 import { OUTFIT_STARS } from '@pockie/shared'
 import { describe, expect, it } from 'vitest'
-import { rebornOutfits } from './data.js'
+import {
+  avatarRecast,
+  avatarSkillIds,
+  avatarStats,
+  creationOutfits,
+  rebornOutfits,
+} from './data.js'
 import { outfitBonuses, outfitIsv, outfitOf, outfitRequiredLevel } from './outfit.js'
 
 it("shares Reborn's imported avatarStars with the client", () => {
@@ -83,5 +89,54 @@ describe('outfitBonuses', () => {
     expect(outfitBonuses({ ...ichigo, stars: 3 }, 10)).not.toHaveProperty('skillAdd0')
     // 4 stars: Fire Master 15% -> 20%.
     expect(outfitBonuses({ ...ichigo, stars: 4 }, 10)).toMatchObject({ skillAdd0: 500 })
+  })
+})
+
+describe("the outfit's Weapon Type (Reborn serverConfig.avatars weaponType)", () => {
+  const weaponClass = (avatarId: number) => avatarStats(avatarId).Popsinger
+
+  it("is Reborn's at every +N, as the UsePopsinger mask (1 Blunt, 2 Sharp, 4 Fists, 7 Any)", () => {
+    // Clothing 3 fought with Fists in 2011; Reborn makes it Sharp.
+    expect(weaponClass(3)).toBe(2)
+    expect(weaponClass(3003)).toBe(2)
+    // Clothing 65 has no weaponType in Reborn, which its client reads as Any.
+    expect(weaponClass(65)).toBe(7)
+  })
+
+  it('keeps the 2011 class of an outfit Reborn does not ship', () => {
+    expect(weaponClass(25)).toBe(2)
+  })
+
+  it('drives the creation screen and the Weapon Type line', () => {
+    expect(creationOutfits().find((o) => o.clothing === 39)?.weaponClass).toBe(2)
+    expect(creationOutfits().find((o) => o.clothing === 65)?.weaponClass).toBe(7)
+  })
+})
+
+describe('avatarSkillIds', () => {
+  it('reads the skills of every +N, including the i29<AvatarID>0 ids from +18 up', () => {
+    // i2931010: Ichigo +31 (AvatarID 3101); Reborn's imprint 2002.
+    expect(avatarSkillIds(3101)).toEqual([1901, 7777, 8888, 2002])
+    expect(avatarSkillIds(1)).toEqual([1901, 7777, 8888, 2002])
+  })
+})
+
+describe("Reborn's +32 (serverConfig synthesisLevelUpRates[0] has 32 steps; 2011 stops at +31)", () => {
+  it('adds a +32 to every outfit, numbered on from 2011 (EquipCompose.ini targets these ids)', () => {
+    expect(outfitOf('i2932010')).toEqual({
+      clothing: 1,
+      avatarId: 3201,
+      plus: 32,
+      value: 42,
+      level: 50,
+    })
+    expect(outfitOf('i2933000')).toMatchObject({ clothing: 100, avatarId: 3300, plus: 32 })
+    expect(outfitOf('i2946600')).toMatchObject({ clothing: 120, avatarId: 4660, plus: 32 })
+  })
+
+  it('has the +32 stats (20 + 8 * 32) * ISV and the +31 skills, recast and Weapon Type', () => {
+    expect(avatarStats(3201)).toMatchObject({ Strength: 276 * 120, StrengthUp: 120, Popsinger: 2 })
+    expect(avatarSkillIds(3201)).toEqual(avatarSkillIds(3101))
+    expect(avatarRecast('i2932010')).toEqual(avatarRecast('i2931010'))
   })
 })

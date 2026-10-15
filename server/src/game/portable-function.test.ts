@@ -161,3 +161,28 @@ describe('impress', () => {
     expect(impressOdds(40, 0, 5)).toEqual({ rate: 40, crystalsUsed: 0 })
   })
 })
+
+describe("outfits up to Reborn's +32", () => {
+  const PLUS_31 = 'i2931010'
+  const HIGH_PURIFY = 'i159046'
+
+  it('synthesizes +31 into +32 with two +0 copies at 17% (synthesisLevelUpRates[0][31])', () => {
+    expect(synthesisPartProblem(PLUS_31, false)).toBeNull()
+    expect(synthesisPlan(part(PLUS_31), [part(OUTFIT), part(OUTFIT)])).toEqual({
+      kind: 'recipe',
+      resultItemId: 'i2932010',
+      rate: 17,
+    })
+  })
+
+  it('keeps High Purify Stones to +21..+31 (their Reborn text) and +32 as the top', () => {
+    expect(synthesisPlan(part('i2930010'), [part(HIGH_PURIFY), part(HIGH_PURIFY)])).toMatchObject({
+      resultItemId: PLUS_31,
+      rate: 100,
+    })
+    expect(synthesisPlan(part(PLUS_31), [part(HIGH_PURIFY), part(HIGH_PURIFY)])).toHaveProperty(
+      'error',
+    )
+    expect(synthesisPartProblem('i2932010', false)).not.toBeNull()
+  })
+})

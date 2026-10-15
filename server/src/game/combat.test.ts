@@ -18,8 +18,11 @@ const freshNinja = {
   mp: 220,
   nation: 0,
 }
-/** The fists from the Fire Village newbie pack (i159104): AttackMin 7, AttackMax 8. */
-const NEWBIE_FISTS = 'i270100'
+/**
+ * The sharp weapon from the Fire Village newbie pack (i159104): AttackMin 7, AttackMax 8. Ggio
+ * Vega fought with fists in 2011; Reborn makes the outfit Sharp.
+ */
+const NEWBIE_WEAPON = 'i260100'
 /** n33017: HP 15, Def 71, Atk 9-10 (npc.ini). */
 const SUNFLOWER = 'n33017'
 
@@ -51,13 +54,13 @@ describe('a fresh ninja against the Sunflower', () => {
     expect(replays.filter((r) => r.winner === 'attackers')).toEqual([])
   })
 
-  it('hits for 7-8 with the newbie fists and wins every fight in 2-3 hits', () => {
+  it('hits for 7-8 with the newbie weapon and wins every fight in 2-3 hits', () => {
     // (1 + 7..8) * 1.000 = 8..9 attack; 8 → 7, 9 → 8 after Def 71. Sunflower HP 15.
-    const player = playerFighterFrom(freshNinja, gear([NEWBIE_FISTS]))
+    const player = playerFighterFrom(freshNinja, gear([NEWBIE_WEAPON]))
     expect(player).toMatchObject({ minAttack: 8, maxAttack: 9 })
     expect([applyDefense(8, 71, 0), applyDefense(9, 71, 0)]).toEqual([7, 8])
 
-    const replays = fights([NEWBIE_FISTS])
+    const replays = fights([NEWBIE_WEAPON])
     expect(replays.every((r) => r.winner === 'attackers')).toBe(true)
     for (const replay of replays) {
       const hits = normalHits(replay)
@@ -79,7 +82,7 @@ describe('worn wing look', () => {
     expect(playerFighterFrom(freshNinja, gear(['i218200']))).toMatchObject({
       aura: 'ki_lightning',
     })
-    const bare = playerFighterFrom(freshNinja, gear([NEWBIE_FISTS]))
+    const bare = playerFighterFrom(freshNinja, gear([NEWBIE_WEAPON]))
     expect(bare).not.toHaveProperty('wingSprite')
     expect(bare).not.toHaveProperty('aura')
   })
@@ -88,7 +91,7 @@ describe('worn wing look', () => {
 describe('worn outfit stars', () => {
   // i290003: clothing 3 +0 (Reborn imprint 2040 Wind Basic, SkillAdd4 +5%).
   const wearing = (stars: number) =>
-    playerFighterFrom(freshNinja, [{ itemId: 'i290003', stars }, { itemId: NEWBIE_FISTS }])
+    playerFighterFrom(freshNinja, [{ itemId: 'i290003', stars }, { itemId: NEWBIE_WEAPON }])
 
   it('raise the imprint at four stars and the Secret Technique threshold at five', () => {
     expect(wearing(3)).not.toHaveProperty('secretThreshold')
@@ -123,7 +126,11 @@ describe('equipment bonuses', () => {
     // (AvatarID 63: Stamina 1470, MaxHPAdd 1300) only. (int)((220 + 6654) * 1010 * 0.001).
     const sharp = { ...freshNinja, avatarId: 63 }
     expect(playerFighterFrom(sharp, gear(['i299901']))).toMatchObject({ maxHp: 6942, maxMp: 6942 })
-    expect(fighter(['i299901'])).toMatchObject({ maxHp: 220, maxMp: 220 })
+    // AvatarID 21 fights with Fists (Reborn): the weapon adds nothing.
+    const fists = { ...freshNinja, avatarId: 21 }
+    expect(playerFighterFrom(fists, gear(['i299901'])).maxHp).toBe(
+      playerFighterFrom(fists, []).maxHp,
+    )
     expect(fighter(['i299910'])).toMatchObject({ crit: 390, pierce: 390 })
   })
 

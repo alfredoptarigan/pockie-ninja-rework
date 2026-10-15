@@ -25,7 +25,8 @@
         1500,
         1100
       ],
-      "imprint": 2002
+      "imprint": 2002,
+      "weaponType": "Sharp"
     },
     "2": {
       "rebornItem": 290002,
@@ -40,7 +41,8 @@
         800,
         1200
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Sharp"
     },
     "3": {
       "rebornItem": 290003,
@@ -55,7 +57,8 @@
         1000,
         1400
       ],
-      "imprint": 2040
+      "imprint": 2040,
+      "weaponType": "Sharp"
     },
     "4": {
       "rebornItem": 290004,
@@ -70,7 +73,8 @@
         1400,
         1200
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Sharp"
     },
     "5": {
       "rebornItem": 290005,
@@ -85,7 +89,8 @@
         1300,
         1100
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Blunt"
     },
     "6": {
       "rebornItem": 290006,
@@ -100,7 +105,8 @@
         2200,
         800
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Sharp"
     },
     "7": {
       "rebornItem": 290007,
@@ -115,7 +121,8 @@
         2100,
         900
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Sharp"
     },
     "8": {
       "rebornItem": 290008,
@@ -130,7 +137,8 @@
         2100,
         900
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Sharp"
     },
     "9": {
       "rebornItem": 290009,
@@ -145,7 +153,8 @@
         2200,
         1000
       ],
-      "imprint": 2000
+      "imprint": 2000,
+      "weaponType": "Sharp"
     },
     "10": {
       "rebornItem": 290010,
@@ -160,7 +169,8 @@
         1300,
         1300
       ],
-      "imprint": 2051
+      "imprint": 2051,
+      "weaponType": "Sharp"
     },
     "11": {
       "rebornItem": 290011,
@@ -175,7 +185,8 @@
         1200,
         900
       ],
-      "imprint": 2011
+      "imprint": 2011,
+      "weaponType": "Sharp"
     },
     "12": {
       "rebornItem": 290012,
@@ -190,7 +201,8 @@
         1400,
         1200
       ],
-      "imprint": 2080
+      "imprint": 2080,
+      "weaponType": "Sharp"
     },
     "13": {
       "rebornItem": 290013,
@@ -205,7 +217,8 @@
         1400,
         1200
       ],
-      "imprint": 2081
+      "imprint": 2081,
+      "weaponType": "Sharp"
     },
     "14": {
       "rebornItem": 290014,
@@ -220,7 +233,8 @@
         2100,
         1200
       ],
-      "imprint": 2030
+      "imprint": 2030,
+      "weaponType": "Sharp"
     },
     "15": {
       "rebornItem": 290015,
@@ -235,7 +249,8 @@
         1200,
         1000
       ],
-      "imprint": 2081
+      "imprint": 2081,
+      "weaponType": "Sharp"
     },
     "16": {
       "rebornItem": 290016,
@@ -250,7 +265,8 @@
         12100,
         800
       ],
-      "imprint": 2050
+      "imprint": 2050,
+      "weaponType": "Sharp"
     },
     "17": {
       "rebornItem": 290017,
@@ -265,7 +281,8 @@
         1100,
         1800
       ],
-      "imprint": 2050
+      "imprint": 2050,
+      "weaponType": "Sharp"
     },
     "18": {
       "rebornItem": 290018,
@@ -280,7 +297,8 @@
         1100,
         1100
       ],
-      "imprint": 2070
+      "imprint": 2070,
+      "weaponType": "Sharp"
     },
     "19": {
       "rebornItem": 290019,
@@ -295,7 +313,8 @@
         1400,
         1200
       ],
-      "imprint": 2080
+      "imprint": 2080,
+      "weaponType": "Sharp"
     },
     "20": {
       "rebornItem": 290020,
@@ -310,7 +329,8 @@
         1400,
         1100
       ],
-      "imprint": 2000
+      "imprint": 2000,
+      "weaponType": "Sharp"
     },
     "21": {
       "rebornItem": 290021,
@@ -325,7 +345,8 @@
         1300,
         1300
       ],
-      "imprint": 2051
+      "imprint": 2051,
+      "weaponType": "Fists"
     },
     "22": {
       "rebornItem": 290022,
@@ -340,7 +361,8 @@
         1300,
         1300
       ],
-      "imprint": 2051
+      "imprint": 2051,
+      "weaponType": "Fists"
     },
     "23": {
       "rebornItem": 290023,
@@ -355,7 +377,8 @@
         2900,
         900
       ],
-      "imprint": 2071
+      "imprint": 2071,
+      "weaponType": "Sharp"
     },
     "24": {
       "rebornItem": 290024,
@@ -370,7 +393,8 @@
         1300,
         800
       ],
-      "imprint": 2022
+      "imprint": 2022,
+      "weaponType": "Fists"
     },
     "26": {
       "rebornItem": 290026,
@@ -385,7 +409,8 @@
         1600,
         1000
       ],
-      "imprint": 2050
+      "imprint": 2050,
+      "weaponType": "Sharp"
     },
     "27": {
       "rebornItem": 290027,
@@ -400,7 +425,8 @@
         1000,
         1800
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Fists"
     },
     "28": {
       "rebornItem": 290028,
@@ -415,7 +441,8 @@
         1100,
         1700
       ],
-      "imprint": 2061
+      "imprint": 2061,
+      "weaponType": "Fists"
     },
     "29": {
       "rebornItem": 290029,
@@ -430,7 +457,8 @@
         2000,
         1000
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Sharp"
     },
     "30": {
       "rebornItem": 290030,
@@ -445,7 +473,8 @@
         1300,
         800
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Blunt"
     },
     "31": {
       "rebornItem": 290031,
@@ -460,7 +489,8 @@
         1300,
         700
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Fists"
     },
     "32": {
       "rebornItem": 290032,
@@ -475,7 +505,8 @@
         2600,
         900
       ],
-      "imprint": 2010
+      "imprint": 2010,
+      "weaponType": "Sharp"
     },
     "33": {
       "rebornItem": 290033,
@@ -490,7 +521,8 @@
         1300,
         1200
       ],
-      "imprint": 2000
+      "imprint": 2000,
+      "weaponType": "Sharp"
     },
     "34": {
       "rebornItem": 290034,
@@ -505,7 +537,8 @@
         2100,
         1100
       ],
-      "imprint": 2040
+      "imprint": 2040,
+      "weaponType": "Sharp"
     },
     "35": {
       "rebornItem": 290035,
@@ -520,7 +553,8 @@
         1500,
         800
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Sharp"
     },
     "36": {
       "rebornItem": 290036,
@@ -535,7 +569,8 @@
         1100,
         1100
       ],
-      "imprint": 2080
+      "imprint": 2080,
+      "weaponType": "Sharp"
     },
     "37": {
       "rebornItem": 290037,
@@ -550,7 +585,8 @@
         1000,
         1400
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "39": {
       "rebornItem": 290039,
@@ -565,7 +601,8 @@
         1600,
         800
       ],
-      "imprint": 2090
+      "imprint": 2090,
+      "weaponType": "Sharp"
     },
     "40": {
       "rebornItem": 290040,
@@ -580,7 +617,8 @@
         700,
         1200
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Sharp"
     },
     "42": {
       "rebornItem": 290042,
@@ -595,7 +633,8 @@
         1200,
         800
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Sharp"
     },
     "44": {
       "rebornItem": 290044,
@@ -610,7 +649,8 @@
         1300,
         700
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Fists"
     },
     "45": {
       "rebornItem": 290045,
@@ -625,7 +665,8 @@
         1500,
         1200
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Fists"
     },
     "46": {
       "rebornItem": 290046,
@@ -640,7 +681,8 @@
         1800,
         800
       ],
-      "imprint": 2022
+      "imprint": 2022,
+      "weaponType": "Blunt"
     },
     "47": {
       "rebornItem": 290047,
@@ -655,7 +697,8 @@
         1200,
         1300
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Blunt"
     },
     "48": {
       "rebornItem": 290048,
@@ -670,7 +713,8 @@
         1100,
         1400
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Sharp"
     },
     "49": {
       "rebornItem": 290049,
@@ -685,7 +729,8 @@
         1000,
         1800
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Sharp"
     },
     "50": {
       "rebornItem": 290050,
@@ -700,7 +745,8 @@
         700,
         1300
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Sharp"
     },
     "51": {
       "rebornItem": 290051,
@@ -715,7 +761,8 @@
         1200,
         1100
       ],
-      "imprint": 2062
+      "imprint": 2062,
+      "weaponType": "Any"
     },
     "52": {
       "rebornItem": 290052,
@@ -730,7 +777,8 @@
         1900,
         1000
       ],
-      "imprint": 2071
+      "imprint": 2071,
+      "weaponType": "Sharp"
     },
     "53": {
       "rebornItem": 290053,
@@ -745,7 +793,8 @@
         1300,
         700
       ],
-      "imprint": 2062
+      "imprint": 2062,
+      "weaponType": "Sharp"
     },
     "54": {
       "rebornItem": 290054,
@@ -760,7 +809,8 @@
         1300,
         1300
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Sharp"
     },
     "55": {
       "rebornItem": 290055,
@@ -775,7 +825,8 @@
         1200,
         1200
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Sharp"
     },
     "56": {
       "rebornItem": 290056,
@@ -790,7 +841,8 @@
         1000,
         1800
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Fists"
     },
     "57": {
       "rebornItem": 290057,
@@ -805,7 +857,8 @@
         1200,
         1400
       ],
-      "imprint": 2062
+      "imprint": 2062,
+      "weaponType": "Blunt"
     },
     "58": {
       "rebornItem": 290058,
@@ -820,7 +873,8 @@
         1600,
         1100
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "59": {
       "rebornItem": 290059,
@@ -835,7 +889,8 @@
         0,
         0
       ],
-      "imprint": null
+      "imprint": null,
+      "weaponType": "Any"
     },
     "60": {
       "rebornItem": 290060,
@@ -850,7 +905,8 @@
         1700,
         1200
       ],
-      "imprint": 2081
+      "imprint": 2081,
+      "weaponType": "Sharp"
     },
     "61": {
       "rebornItem": 290061,
@@ -865,7 +921,8 @@
         1100,
         1500
       ],
-      "imprint": 2060
+      "imprint": 2060,
+      "weaponType": "Sharp"
     },
     "62": {
       "rebornItem": 290062,
@@ -880,7 +937,8 @@
         1300,
         1400
       ],
-      "imprint": 2041
+      "imprint": 2041,
+      "weaponType": "Sharp"
     },
     "63": {
       "rebornItem": 290063,
@@ -895,7 +953,8 @@
         1100,
         1300
       ],
-      "imprint": 2070
+      "imprint": 2070,
+      "weaponType": "Sharp"
     },
     "64": {
       "rebornItem": 290064,
@@ -910,7 +969,8 @@
         800,
         1300
       ],
-      "imprint": 2011
+      "imprint": 2011,
+      "weaponType": "Sharp"
     },
     "65": {
       "rebornItem": 290065,
@@ -925,7 +985,8 @@
         2900,
         600
       ],
-      "imprint": 2090
+      "imprint": 2090,
+      "weaponType": "Any"
     },
     "66": {
       "rebornItem": 290066,
@@ -940,7 +1001,8 @@
         1900,
         1100
       ],
-      "imprint": 2081
+      "imprint": 2081,
+      "weaponType": "Sharp"
     },
     "67": {
       "rebornItem": 290067,
@@ -955,7 +1017,8 @@
         800,
         700
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Sharp"
     },
     "68": {
       "rebornItem": 290068,
@@ -970,7 +1033,8 @@
         3300,
         3300
       ],
-      "imprint": null
+      "imprint": null,
+      "weaponType": "Any"
     },
     "69": {
       "rebornItem": 290069,
@@ -985,7 +1049,8 @@
         1200,
         1300
       ],
-      "imprint": 2051
+      "imprint": 2051,
+      "weaponType": "Blunt"
     },
     "70": {
       "rebornItem": 290070,
@@ -1000,7 +1065,8 @@
         700,
         1300
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Blunt"
     },
     "72": {
       "rebornItem": 290072,
@@ -1015,7 +1081,8 @@
         1700,
         1100
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "73": {
       "rebornItem": 290073,
@@ -1030,7 +1097,8 @@
         3300,
         3300
       ],
-      "imprint": null
+      "imprint": null,
+      "weaponType": "Any"
     },
     "74": {
       "rebornItem": 290074,
@@ -1045,7 +1113,8 @@
         1300,
         1100
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Any"
     },
     "75": {
       "rebornItem": 290075,
@@ -1060,7 +1129,8 @@
         700,
         700
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Blunt"
     },
     "76": {
       "rebornItem": 290076,
@@ -1075,7 +1145,8 @@
         1500,
         1200
       ],
-      "imprint": 2011
+      "imprint": 2011,
+      "weaponType": "Sharp"
     },
     "77": {
       "rebornItem": 290077,
@@ -1090,7 +1161,8 @@
         1000,
         1000
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Any"
     },
     "78": {
       "rebornItem": 290078,
@@ -1105,7 +1177,8 @@
         1200,
         800
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Any"
     },
     "79": {
       "rebornItem": 290079,
@@ -1120,7 +1193,8 @@
         800,
         1200
       ],
-      "imprint": 2002
+      "imprint": 2002,
+      "weaponType": "Any"
     },
     "80": {
       "rebornItem": 290080,
@@ -1135,7 +1209,8 @@
         1200,
         900
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Sharp"
     },
     "81": {
       "rebornItem": 290081,
@@ -1150,7 +1225,8 @@
         1200,
         600
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Any"
     },
     "82": {
       "rebornItem": 290082,
@@ -1165,7 +1241,8 @@
         700,
         1400
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Any"
     },
     "83": {
       "rebornItem": 290083,
@@ -1180,7 +1257,8 @@
         1300,
         800
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "84": {
       "rebornItem": 290084,
@@ -1195,7 +1273,8 @@
         1400,
         1200
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Sharp"
     },
     "85": {
       "rebornItem": 290085,
@@ -1210,7 +1289,8 @@
         1200,
         1100
       ],
-      "imprint": 2062
+      "imprint": 2062,
+      "weaponType": "Sharp"
     },
     "86": {
       "rebornItem": 290086,
@@ -1225,7 +1305,8 @@
         700,
         1300
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Any"
     },
     "87": {
       "rebornItem": 290087,
@@ -1240,7 +1321,8 @@
         700,
         1300
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "88": {
       "rebornItem": 290088,
@@ -1255,7 +1337,8 @@
         2100,
         1100
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Sharp"
     },
     "89": {
       "rebornItem": 290089,
@@ -1270,7 +1353,8 @@
         1300,
         1500
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Any"
     },
     "90": {
       "rebornItem": 290090,
@@ -1285,7 +1369,8 @@
         1700,
         900
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Any"
     },
     "91": {
       "rebornItem": 290091,
@@ -1300,7 +1385,8 @@
         1500,
         700
       ],
-      "imprint": 2062
+      "imprint": 2062,
+      "weaponType": "Any"
     },
     "92": {
       "rebornItem": 290092,
@@ -1315,7 +1401,8 @@
         700,
         1200
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "94": {
       "rebornItem": 290094,
@@ -1330,7 +1417,8 @@
         700,
         1200
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "95": {
       "rebornItem": 290095,
@@ -1345,7 +1433,8 @@
         1300,
         700
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Any"
     },
     "97": {
       "rebornItem": 290097,
@@ -1360,7 +1449,8 @@
         800,
         700
       ],
-      "imprint": 2022
+      "imprint": 2022,
+      "weaponType": "Any"
     },
     "98": {
       "rebornItem": 290098,
@@ -1375,7 +1465,8 @@
         1100,
         700
       ],
-      "imprint": 2002
+      "imprint": 2002,
+      "weaponType": "Fists"
     },
     "99": {
       "rebornItem": 290099,
@@ -1390,7 +1481,8 @@
         1000,
         1500
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "100": {
       "rebornItem": 290100,
@@ -1405,7 +1497,8 @@
         800,
         700
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Any"
     },
     "101": {
       "rebornItem": 290101,
@@ -1420,7 +1513,8 @@
         700,
         800
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Any"
     },
     "102": {
       "rebornItem": 290102,
@@ -1435,7 +1529,8 @@
         2000,
         1000
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Any"
     },
     "103": {
       "rebornItem": 290103,
@@ -1450,7 +1545,8 @@
         1300,
         800
       ],
-      "imprint": 2002
+      "imprint": 2002,
+      "weaponType": "Fists"
     },
     "104": {
       "rebornItem": 290104,
@@ -1465,7 +1561,8 @@
         800,
         700
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Sharp"
     },
     "105": {
       "rebornItem": 290105,
@@ -1480,7 +1577,8 @@
         1300,
         700
       ],
-      "imprint": 2022
+      "imprint": 2022,
+      "weaponType": "Fists"
     },
     "106": {
       "rebornItem": 290106,
@@ -1495,7 +1593,8 @@
         700,
         800
       ],
-      "imprint": 2082
+      "imprint": 2082,
+      "weaponType": "Sharp"
     },
     "107": {
       "rebornItem": 290107,
@@ -1510,7 +1609,8 @@
         1300,
         800
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Sharp"
     },
     "108": {
       "rebornItem": 290108,
@@ -1525,7 +1625,8 @@
         700,
         1300
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Sharp"
     },
     "109": {
       "rebornItem": 290109,
@@ -1540,7 +1641,8 @@
         800,
         1300
       ],
-      "imprint": 2042
+      "imprint": 2042,
+      "weaponType": "Fists"
     },
     "110": {
       "rebornItem": 290110,
@@ -1555,7 +1657,8 @@
         1000,
         1500
       ],
-      "imprint": 2002
+      "imprint": 2002,
+      "weaponType": "Any"
     },
     "111": {
       "rebornItem": 290111,
@@ -1570,7 +1673,8 @@
         700,
         1300
       ],
-      "imprint": 2032
+      "imprint": 2032,
+      "weaponType": "Sharp"
     },
     "112": {
       "rebornItem": 290112,
@@ -1585,7 +1689,8 @@
         700,
         800
       ],
-      "imprint": 2072
+      "imprint": 2072,
+      "weaponType": "Sharp"
     },
     "113": {
       "rebornItem": 290113,
@@ -1600,7 +1705,8 @@
         800,
         1300
       ],
-      "imprint": 2012
+      "imprint": 2012,
+      "weaponType": "Sharp"
     },
     "114": {
       "rebornItem": 290114,
@@ -1615,7 +1721,8 @@
         700,
         800
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Fists"
     },
     "116": {
       "rebornItem": 290116,
@@ -1630,7 +1737,8 @@
         1200,
         800
       ],
-      "imprint": 2052
+      "imprint": 2052,
+      "weaponType": "Any"
     },
     "117": {
       "rebornItem": 290117,
@@ -1645,7 +1753,8 @@
         700,
         2200
       ],
-      "imprint": 2092
+      "imprint": 2092,
+      "weaponType": "Sharp"
     },
     "118": {
       "rebornItem": 290118,
@@ -1660,7 +1769,8 @@
         1500,
         800
       ],
-      "imprint": 2070
+      "imprint": 2070,
+      "weaponType": "Sharp"
     },
     "120": {
       "rebornItem": 290120,
@@ -1675,7 +1785,8 @@
         800,
         1200
       ],
-      "imprint": 2002
+      "imprint": 2002,
+      "weaponType": "Any"
     }
   }
 }

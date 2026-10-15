@@ -15,8 +15,9 @@ beforeEach(async () => {
 afterEach(() => ninja.app.close())
 afterAll(() => close())
 
-const FISTS = 'i270100' // fists weapon, level 1
-const FISTS_2 = 'i270101' // fists weapon, level 1
+// Sharp: the setUpNinja outfit (clothing 3) is Sharp in Reborn.
+const WEAPON = 'i260100' // sharp weapon, level 1
+const WEAPON_2 = 'i260101' // sharp weapon, level 1
 
 interface Row {
   id: string
@@ -34,15 +35,15 @@ const dbRow = async (id: string) =>
 
 describe('equipment sets', () => {
   it('starts on set I and reports the set of each worn row', async () => {
-    const worn = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
-    const loose = await ninja.give(FISTS_2)
+    const worn = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
+    const loose = await ninja.give(WEAPON_2)
     expect((await ninja.client.get('/api/game/character')).json().character.activeSet).toBe(1)
     expect(await find(worn.id)).toMatchObject({ equippedSlot: 'Weapon', equippedSet: 1 })
     expect(await find(loose.id)).toMatchObject({ equippedSlot: null, equippedSet: null })
   })
 
   it('switches sets: the other set keeps its gear out of the bag and out of the fight', async () => {
-    const worn = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
+    const worn = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
     const armed = await stats()
 
     const switched = await switchTo(2)
@@ -60,8 +61,8 @@ describe('equipment sets', () => {
   })
 
   it('equips and unequips in the active set only', async () => {
-    const first = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
-    const second = await ninja.give(FISTS_2)
+    const first = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
+    const second = await ninja.give(WEAPON_2)
     await switchTo(2)
 
     const equipped = await ninja.client.post(`/api/game/items/${second.id}/equip`)
@@ -79,8 +80,8 @@ describe('equipment sets', () => {
   })
 
   it('moves an item worn in another set into the active one', async () => {
-    const weapon = await ninja.give(FISTS, { equippedSlot: 'Weapon' })
-    const spare = await ninja.give(FISTS_2, { equippedSlot: 'Weapon', equippedSet: 2 })
+    const weapon = await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
+    const spare = await ninja.give(WEAPON_2, { equippedSlot: 'Weapon', equippedSet: 2 })
     await switchTo(2)
 
     expect((await ninja.client.post(`/api/game/items/${weapon.id}/equip`)).statusCode).toBe(200)
@@ -120,12 +121,12 @@ describe('equipment sets', () => {
   })
 
   it('shows only the active set on View Character', async () => {
-    await ninja.give(FISTS, { equippedSlot: 'Weapon' })
+    await ninja.give(WEAPON, { equippedSlot: 'Weapon' })
     const view = async () =>
       (await ninja.client.get(`/api/game/social/players/${ninja.characterId}`)).json().equipped
     // The creation outfit is worn in set I and is the fallback outfit of the other sets.
     const outfit = expect.objectContaining({ slot: 'Outfit' })
-    const weapon = expect.objectContaining({ slot: 'Weapon', itemId: FISTS })
+    const weapon = expect.objectContaining({ slot: 'Weapon', itemId: WEAPON })
     expect(await view()).toEqual(expect.arrayContaining([outfit, weapon]))
     expect(await view()).toHaveLength(2)
     await switchTo(3)
