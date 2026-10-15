@@ -103,13 +103,6 @@ export interface TimelineOptions {
   secretArt?: (fighter: number, skillId: number) => SecretArt | undefined
 }
 
-/** Splits `total` into `count` strikes; the last strike gets the remainder. */
-export function splitDamage(total: number, count: number) {
-  const n = Math.max(1, Math.floor(count))
-  const base = Math.trunc(total / n)
-  return Array.from({ length: n }, (_, i) => (i === n - 1 ? total - base * (n - 1) : base))
-}
-
 const STRIKES = new Set([5, 7, 14])
 /** Event 3: the actor cannot move this turn. */
 const CANNOT_MOVE = 3
@@ -343,14 +336,12 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
       pose(actor, t, RUN, { to: contact, moveMs: RUN_MS })
       t += RUN_MS
     }
-    const parts = splitDamage(ev.damage ?? 0, ev.attackCount ?? 1)
-    let impact = t
-    parts.forEach((amount, k) => {
-      pose(actor, t, motion, { from: contact, to: contact, skillId })
-      impact = t + hitMs(actor, motion)
-      if (onTarget) react(target, impact, ev, amount, k === parts.length - 1)
-      t += motionMs(actor, motion)
-    })
+    // One strike with the whole damage, however many hits the engine rolled (attackCount): Reborn
+    // shows one total per turn, so a target killed by the first hit is not struck again.
+    pose(actor, t, motion, { from: contact, to: contact, skillId })
+    const impact = t + hitMs(actor, motion)
+    if (onTarget) react(target, impact, ev, ev.damage ?? 0, true)
+    t += motionMs(actor, motion)
     selfEffects(impact, ev)
     changeBuffs(impact, ev)
     if (onTarget) {

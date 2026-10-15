@@ -10,7 +10,6 @@ import {
   latestAt,
   poseX,
   poseScaleX,
-  splitDamage,
   type Timeline,
 } from './timeline'
 
@@ -153,19 +152,14 @@ describe('buildTimeline', () => {
     expect(timeline.poses[0]!.some((p) => p.motion === '64')).toBe(true)
   })
 
-  it('animates every strike of a multi-strike skill and splits its damage', () => {
-    expect(splitDamage(10, 3)).toEqual([3, 3, 4])
+  it('plays a multi-hit skill as one strike with the total damage', () => {
     const timeline = build(
       replayOf([
         { actor: 0, event: 14, target: 1, skillId: 1, damage: 10, hit: true, attackCount: 3 },
       ]),
     )
-    expect(timeline.poses[0]!.filter((p) => p.motion === '52')).toHaveLength(3)
-    expect(timeline.texts.filter((t) => t.kind === 'damage').map((t) => t.text)).toEqual([
-      '-3',
-      '-3',
-      '-4',
-    ])
+    expect(timeline.poses[0]!.filter((p) => p.motion === '52')).toHaveLength(1)
+    expect(timeline.texts.filter((t) => t.kind === 'damage').map((t) => t.text)).toEqual(['-10'])
   })
 
   it('spends MP, tracks buffs and plays buff ticks', () => {
