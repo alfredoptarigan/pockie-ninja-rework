@@ -3,25 +3,22 @@
 // come from the grant script (server/scripts/grant-zanpakuto.ts): no in-game source exists yet.
 import { expect, test } from '@playwright/test'
 import { execFileSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import { createSeededNinja, dialog, reloadGame, seedCharacter, sql } from './helpers'
 
 test.use({ viewport: { width: 1440, height: 900 } })
 test.setTimeout(90_000)
 
+// Runs tsx's CLI with this Node rather than through `pnpm exec`: on Windows pnpm is a .cmd shim,
+// which execFileSync cannot spawn without a shell.
+const serverDir = fileURLToPath(new URL('../server/', import.meta.url))
+const tsxCli = fileURLToPath(new URL('../server/node_modules/tsx/dist/cli.mjs', import.meta.url))
+
 const grant = (name: string, iid: number) =>
   execFileSync(
-    'pnpm',
-    [
-      '--filter',
-      '@pockie/server',
-      'exec',
-      'tsx',
-      '--env-file-if-exists=../.env',
-      'scripts/grant-zanpakuto.ts',
-      name,
-      String(iid),
-    ],
-    { encoding: 'utf8' },
+    process.execPath,
+    [tsxCli, '--env-file-if-exists=../.env', 'scripts/grant-zanpakuto.ts', name, String(iid)],
+    { cwd: serverDir, encoding: 'utf8' },
   )
 
 const zanpakutoValue = (name: string, column: string) =>
