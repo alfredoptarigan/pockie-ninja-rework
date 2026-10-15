@@ -1,69 +1,56 @@
-// Team window: the controls of the original party frame (UI_TeamRoleIcon, teams.md 6) in one
-// window. Members in fight order with level and captain mark; the captain reorders, kicks and
-// hands over the lead; anyone leaves. Invite by name, and the pending prompts with their timer.
+// Party window, laid out like Reborn's Select Your Squad (reborn-windows-M-Z-hud.md): the party's
+// fight order as pose cards with their order badge, "n/3 Members" and the sequence line. Invite
+// by name (the leader, or anyone to create a party) and leave. Kick, promote and reorder live on
+// the party portraits, as in Reborn; invitations arrive in the Party Invite popup.
 import { TEAM_MAX_SIZE, type TeamMemberView, type TeamView } from '@pockie/shared'
 import { useState, type FormEvent } from 'react'
 import { errorMessage } from '../api'
 import { Dialog, GameButton, Notice } from '../skin'
 import type { WindowProps } from '../windows'
 import { teamScene, useTeam, useTeamAction } from './api'
-import { TeamPromptList } from './TeamPrompts'
+import { leaveQuestion } from './PartyPortraits'
 
 export function TeamWindow({ character, onClose }: WindowProps) {
   const team = useTeam()
   const action = useTeamAction()
   const [inviting, setInviting] = useState(false)
   const view = team.data?.team ?? null
-  const captain = view?.captainId === character.id
-  const run = (path: string, body?: object) => action.mutate({ path, body })
 
   return (
-    <Dialog title="Team" onClose={onClose} className="w-[420px]">
+    <Dialog title="Party" onClose={onClose} className="w-[520px]">
       <div className="flex flex-col gap-2 text-[12px] text-black">
         {team.isError && <Notice tone="error">{errorMessage(team.error)}</Notice>}
         {action.isError && <Notice tone="error">{errorMessage(action.error)}</Notice>}
-        {team.data && <TeamPromptList prompts={team.data.prompts} />}
         {team.isSuccess && !view && (
           <>
-            <p>You are not in a team.</p>
+            <p>You are not in a party.</p>
             {!teamScene(character.sceneId) && (
-              <Notice>Teams can only be formed in the neutral fields and Valhalla.</Notice>
+              <Notice>Parties can only be formed in the neutral fields and Valhalla.</Notice>
             )}
             {inviting ? (
               <InviteForm />
             ) : (
               <GameButton small className="self-start" onClick={() => setInviting(true)}>
-                Create team
+                Create party
               </GameButton>
             )}
           </>
         )}
         {view && (
           <>
-            <ol aria-label="Members" className="flex flex-col gap-1">
-              {view.members.map((member, index) => (
-                <MemberRow
-                  key={member.characterId}
-                  member={member}
-                  self={member.characterId === character.id}
-                  captainView={captain}
-                  first={index === 0}
-                  last={index === view.members.length - 1}
-                  busy={action.isPending}
-                  run={run}
-                />
-              ))}
-            </ol>
-            {captain && view.members.length < TEAM_MAX_SIZE && <InviteForm />}
+            <Squad view={view} selfId={character.id} />
+            {view.captainId === character.id && view.members.length < TEAM_MAX_SIZE && (
+              <InviteForm />
+            )}
             <GameButton
               small
               className="self-start"
               disabled={action.isPending}
               onClick={() => {
-                if (window.confirm(leaveQuestion(view))) run('leave')
+                if (window.confirm(leaveQuestion(view))) action.mutate({ path: 'leave' })
               }}
             >
-              {view.members.length <= 2 ? 'Disband team' : 'Leave team'}
+              {view.members.length <= 2 ? 'Disband party' : 'Leave party'}
             </GameButton>
           </>
         )}
@@ -72,81 +59,67 @@ export function TeamWindow({ character, onClose }: WindowProps) {
   )
 }
 
-const leaveQuestion = (view: TeamView) =>
-  view.members.length <= 2 ? 'Leave the team? A team of two is disbanded.' : 'Leave the team?'
+/** Select Your Squad's body: title, rule, one card per slot, the count and the sequence. */
+function Squad({ view, selfId }: { view: TeamView; selfId: string }) {
+  const empty = TEAM_MAX_SIZE - view.members.length
+  return (
+    <section className="flex flex-col gap-2">
+      <h3 className="font-bold">Your Party&apos;s Fight Order</h3>
+      <p>
+        Your party fights in this order. The leader sets it with the arrows on the party portraits.
+      </p>
+      <ol aria-label="Fight order" className="flex justify-center gap-2">
+        {view.members.map((member) => (
+          <SquadCard
+            key={member.characterId}
+            member={member}
+            self={member.characterId === selfId}
+          />
+        ))}
+        {Array.from({ length: empty }, (_, index) => (
+          <li
+            key={`empty-${index}`}
+            aria-hidden="true"
+            className="game-card flex h-[150px] w-[140px] items-center justify-center text-[#5a4a3a]"
+          >
+            Empty
+          </li>
+        ))}
+      </ol>
+      <p className="text-center">
+        <span className="font-bold">
+          {view.members.length}/{TEAM_MAX_SIZE} Members
+        </span>{' '}
+        <span>
+          ({view.members.map((member, index) => `#${index + 1} ${member.name}`).join(' → ')})
+        </span>
+      </p>
+    </section>
+  )
+}
 
-function MemberRow({
-  member,
-  self,
-  captainView,
-  first,
-  last,
-  busy,
-  run,
-}: {
-  member: TeamMemberView
-  self: boolean
-  captainView: boolean
-  first: boolean
-  last: boolean
-  busy: boolean
-  run: (path: string, body?: object) => void
-}) {
-  const target = { characterId: member.characterId }
+function SquadCard({ member, self }: { member: TeamMemberView; self: boolean }) {
   return (
     <li
       aria-label={member.name}
-      className="flex items-center gap-1 bg-[url(/assets/game/ui/list-row.webp)] bg-size-[100%_100%] px-1 py-0.5"
+      className={`game-card relative flex h-[150px] w-[140px] flex-col items-center justify-end p-1 ${member.online ? '' : 'opacity-60'}`}
     >
-      <span className="w-4 text-center">{member.fightOrder + 1}.</span>
-      <span className="min-w-0 flex-1 truncate">
+      <span className="absolute top-1 left-1 rounded-full bg-[#5a3a1a] px-1.5 font-bold text-white">
+        #{member.fightOrder + 1}
+      </span>
+      {member.captain && (
+        <span className="absolute top-1 right-1 font-bold text-[#9a6a00]">Leader</span>
+      )}
+      <img
+        src={`/assets/reborn/poses/${member.clothing}.webp`}
+        alt=""
+        className="h-[100px] object-contain"
+      />
+      <span className="max-w-full truncate">
         <span className={self ? 'font-bold' : 'font-semibold'}>{member.name}</span> Lv.{' '}
         {member.level}
-        {member.captain && <span className="ml-1 font-bold text-[#9a6a00]">Captain</span>}
-        {!member.online && <span className="ml-1 text-[#8a1610]">Offline</span>}
       </span>
-      {captainView && (
-        <>
-          <GameButton
-            small
-            aria-label={`Move ${member.name} up`}
-            disabled={busy || first}
-            onClick={() => run('order', { ...target, direction: 'up' })}
-          >
-            Up
-          </GameButton>
-          <GameButton
-            small
-            aria-label={`Move ${member.name} down`}
-            disabled={busy || last}
-            onClick={() => run('order', { ...target, direction: 'down' })}
-          >
-            Down
-          </GameButton>
-          {!self && (
-            <>
-              <GameButton
-                small
-                aria-label={`Make ${member.name} captain`}
-                disabled={busy}
-                onClick={() => run('captain', target)}
-              >
-                Lead
-              </GameButton>
-              <GameButton
-                small
-                aria-label={`Kick ${member.name}`}
-                disabled={busy}
-                onClick={() => {
-                  if (window.confirm(`Kick ${member.name} out of the team?`)) run('kick', target)
-                }}
-              >
-                Kick
-              </GameButton>
-            </>
-          )}
-        </>
-      )}
+      {!member.online && <span className="text-[#8a1610]">Offline</span>}
     </li>
   )
 }

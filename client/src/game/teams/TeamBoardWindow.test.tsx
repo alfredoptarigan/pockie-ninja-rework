@@ -49,7 +49,7 @@ describe('Team board window', () => {
     })
     expect(row).toHaveTextContent('Rock_1 (Lv. 20, unranked)')
     await userEvent.click(within(row).getByRole('button', { name: 'Join' }))
-    expect(await screen.findByText(/You asked to join Sakura_1's team/)).toBeInTheDocument()
+    expect(await screen.findByText(/You asked to join Sakura_1's party/)).toBeInTheDocument()
     expect(requestBody(fetch, 'POST /api/game/team/apply')).toEqual({ characterId: CAPTAIN })
   })
 
@@ -62,7 +62,7 @@ describe('Team board window', () => {
       'POST /api/game/team/board/join': () => json({ ...board, listed: true }),
     })
     renderWithProviders(<TeamBoardWindow character={me} onClose={noop} />)
-    await userEvent.click(await screen.findByRole('tab', { name: 'Looking for a Team' }))
+    await userEvent.click(await screen.findByRole('tab', { name: 'Looking for a Party' }))
     const row = screen.getByRole('listitem', { name: /Neji_1/ })
     await userEvent.click(within(row).getByRole('button', { name: 'Invite' }))
     expect(await screen.findByRole('alert')).toHaveTextContent('That ninja is not in this area.')

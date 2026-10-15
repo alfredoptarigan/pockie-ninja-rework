@@ -1,4 +1,4 @@
-// M4 team journey: two ninjas in Demon City form a team (invite by name, accept the prompt), the
+// M4 team journey: two ninjas in Demon City form a party (invite by name, accept the popup), the
 // captain leads it into toll gate 100001 and fights, and both members get the rewards and cards.
 // Levels, the scene, a strong weapon and full HP are seeded; every team and gate action is UI.
 import { expect, test, type Page } from '@playwright/test'
@@ -47,27 +47,30 @@ test('a captain invites by name, leads the team through toll gate 100001 and bot
       await expectScene(page, DEMON_CITY.name)
     }
 
-    // Act: the captain creates a team and invites the mate by name.
-    await captain.page.getByRole('button', { name: 'Team', exact: true }).click()
-    const team = dialog(captain.page, 'Team')
-    await expect(team).toContainText('You are not in a team.')
-    await team.getByRole('button', { name: 'Create team' }).click()
+    // Act: the captain creates a party and invites the mate by name.
+    await captain.page.getByRole('button', { name: 'Party', exact: true }).click()
+    const team = dialog(captain.page, 'Party')
+    await expect(team).toContainText('You are not in a party.')
+    await team.getByRole('button', { name: 'Create party' }).click()
     await team.getByLabel('Ninja name').fill(mate.name)
     await team.getByRole('button', { name: 'Invite' }).click()
     await expect(team).toContainText('Invitation sent.')
 
-    // The mate accepts the prompt under the player card.
-    const prompt = mate.page
-      .getByText(`${captain.name} (Level 20) invites you to join a team.`)
-      .locator('..')
+    // The mate accepts in the Party Invite popup and sees both party portraits.
+    const prompt = dialog(mate.page, 'Party Invite')
+    await expect(prompt).toContainText(
+      `${captain.name} (Level 20) invites you to join their party.`,
+    )
     await prompt.getByRole('button', { name: 'Accept' }).click()
-    await expect(mate.page.getByRole('list', { name: 'Teammates' })).toContainText(captain.name)
+    const portraits = mate.page.getByRole('list', { name: 'Party members' })
+    await expect(portraits.getByRole('listitem')).toHaveCount(2)
+    await expect(portraits.getByRole('listitem').first()).toHaveAccessibleName(captain.name)
 
-    // Assert: the captain's Team window lists both, the captain first.
-    const members = team.getByRole('list', { name: 'Members' })
+    // Assert: the captain's Party window shows the fight order, the leader first.
+    const members = team.getByRole('list', { name: 'Fight order' })
     await expect(members.getByRole('listitem')).toHaveCount(2)
     await expect(members.getByRole('listitem').first()).toContainText(`${captain.name} Lv. 20`)
-    await expect(members.getByRole('listitem').first()).toContainText('Captain')
+    await expect(members.getByRole('listitem').first()).toContainText('Leader')
     await team.getByRole('button', { name: 'Close' }).click()
 
     // Act: the captain enters the gate for the team and fights the first point.

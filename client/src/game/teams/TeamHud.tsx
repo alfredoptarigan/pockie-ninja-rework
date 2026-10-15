@@ -1,40 +1,37 @@
-// HUD piece under the player card (the original party frame UI_TeamRoleIcon, teams.md 6): the
-// Team button, my teammates in fight order, and incoming invitations and applications. Only where
-// teams exist (neutral fields, Valhalla, the toll gate instance).
+// Party HUD (Reborn's `hi`/`fi`, reborn-windows-M-Z-hud.md "Team / party portraits"): the Party
+// button under the player card (our Party window: invite by name, the fight order), the party
+// portraits at the left middle of the HUD and the Party Invite popup. Only where teams exist
+// (neutral fields, Valhalla, Demon City and the toll gate instance).
 import type { Character } from '@pockie/shared'
-import { Panel, GameButton } from '../skin'
+import { useState } from 'react'
+import { ViewCharacter } from '../social/ViewCharacter'
+import { GameButton } from '../skin'
 import { useOpenWindow } from '../windows'
 import { teamHudScene, useTeam } from './api'
-import { TeamPromptList } from './TeamPrompts'
+import { PartyPortraits } from './PartyPortraits'
+import { PartyInvite } from './TeamPrompts'
 
 export function TeamHud({ character }: { character: Character }) {
   const shown = teamHudScene(character.sceneId)
   const team = useTeam(shown)
   const open = useOpenWindow()
+  const [viewing, setViewing] = useState<string | null>(null)
   if (!shown) return null
-  const members = team.data?.team?.members ?? []
+  const view = team.data?.team
   return (
-    <div className="pointer-events-auto absolute top-[86px] left-0 flex w-[220px] flex-col items-start gap-1 font-game text-[11px]">
+    <div className="pointer-events-auto absolute top-[86px] left-0 font-game text-[11px]">
       <GameButton small onClick={() => open('team')}>
-        Team
+        Party
       </GameButton>
-      {members.length > 0 && (
-        <ol aria-label="Teammates" className="game-hud flex w-full flex-col gap-px p-1 text-white">
-          {members.map((member) => (
-            <li key={member.characterId} className="flex justify-between gap-1 truncate">
-              <span className={member.online ? '' : 'opacity-60'}>
-                {member.name}
-                {member.captain && <span className="ml-1 font-bold text-[#ffd700]">Captain</span>}
-              </span>
-              <span>Lv. {member.level}</span>
-            </li>
-          ))}
-        </ol>
-      )}
-      {team.data && team.data.prompts.length > 0 && (
-        <Panel title="Team request" className="w-[360px]">
-          <TeamPromptList prompts={team.data.prompts} />
-        </Panel>
+      {view && <PartyPortraits view={view} selfId={character.id} onView={setViewing} />}
+      {team.data && <PartyInvite prompts={team.data.prompts} />}
+      {viewing && (
+        <ViewCharacter
+          characterId={viewing}
+          selfId={character.id}
+          onClose={() => setViewing(null)}
+          onWhisper={() => setViewing(null)}
+        />
       )}
     </div>
   )

@@ -11,8 +11,8 @@ import { useBoardListing, useTeam, useTeamAction, useTeamBoard } from './api'
 
 type Tab = 'teams' | 'solos'
 const TABS: { id: Tab; title: string }[] = [
-  { id: 'teams', title: 'Team List' },
-  { id: 'solos', title: 'Looking for a Team' },
+  { id: 'teams', title: 'Party List' },
+  { id: 'solos', title: 'Looking for a Party' },
 ]
 
 const tier = (player: BoardPlayer) =>
@@ -35,7 +35,7 @@ export function TeamBoardWindow({ character, onClose }: WindowProps) {
         onSuccess: () =>
           setSent(
             path === 'apply'
-              ? `You asked to join ${player.name}'s team.`
+              ? `You asked to join ${player.name}'s party.`
               : `You invited ${player.name}.`,
           ),
       },
@@ -57,7 +57,7 @@ export function TeamBoardWindow({ character, onClose }: WindowProps) {
                 disabled={listing.isPending}
                 onClick={() => listing.mutate(!data.listed)}
               >
-                {data.listed ? 'Remove my listing' : inTeam ? 'List my team' : 'List myself'}
+                {data.listed ? 'Remove my listing' : inTeam ? 'List my party' : 'List myself'}
               </GameButton>
               <GameButton small disabled={board.isFetching} onClick={() => board.refetch()}>
                 Refresh
@@ -67,7 +67,7 @@ export function TeamBoardWindow({ character, onClose }: WindowProps) {
             <ul id={panelId} role="tabpanel" aria-label={TABS.find((t) => t.id === tab)!.title}>
               {tab === 'teams' &&
                 (data.teams.length === 0 ? (
-                  <li>No teams are looking for members here.</li>
+                  <li>No parties are looking for members here.</li>
                 ) : (
                   data.teams.map((row) => (
                     <BoardRow
@@ -81,7 +81,7 @@ export function TeamBoardWindow({ character, onClose }: WindowProps) {
                 ))}
               {tab === 'solos' &&
                 (data.solos.length === 0 ? (
-                  <li>Nobody is looking for a team here.</li>
+                  <li>Nobody is looking for a party here.</li>
                 ) : (
                   data.solos.map((player) => (
                     <BoardRow

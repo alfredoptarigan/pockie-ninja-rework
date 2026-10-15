@@ -66,8 +66,8 @@ const renderWindow = () => renderWithProviders(<TeamWindow character={me} onClos
 
 afterEach(() => vi.restoreAllMocks())
 
-describe('Team window', () => {
-  it('creates a team by inviting a ninja by name', async () => {
+describe('Party window', () => {
+  it('creates a party by inviting a ninja by name', async () => {
     const fetch = mockApi({
       'GET /api/game/team': () => json(state(null)),
       'GET /api/game/social/friends': () => json(friends),
@@ -75,8 +75,8 @@ describe('Team window', () => {
         json({ prompt: { promptId: 'p', expiresAt: '' }, ...state(null) }),
     })
     renderWindow()
-    expect(await screen.findByText('You are not in a team.')).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Create team' }))
+    expect(await screen.findByText('You are not in a party.')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Create party' }))
     await userEvent.type(screen.getByLabelText('Ninja name'), 'sakura_1')
     await userEvent.click(screen.getByRole('button', { name: 'Invite' }))
     expect(await screen.findByText(/Invitation sent/)).toBeInTheDocument()
@@ -90,80 +90,57 @@ describe('Team window', () => {
         apiError(404, 'unknown_name', 'There is no ninja with that name.'),
     })
     renderWindow()
-    await userEvent.click(await screen.findByRole('button', { name: 'Create team' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Create party' }))
     await userEvent.type(screen.getByLabelText('Ninja name'), 'Nobody')
     await userEvent.click(screen.getByRole('button', { name: 'Invite' }))
     expect(await screen.findByText('There is no ninja with that name.')).toBeInTheDocument()
   })
 
-  it('accepts an invitation and shows the new team', async () => {
-    const expiresAt = new Date(Date.now() + 45_000).toISOString()
-    const prompt = {
-      id: '00000000-0000-4000-8000-0000000000bb',
-      kind: 'invite' as const,
-      from: { characterId: SAKURA, name: 'Sakura_1', level: 21 },
-      expiresAt,
-    }
-    const fetch = mockApi({
-      'GET /api/game/team': () => json(state(null, [prompt])),
-      [`POST /api/game/team/prompts/${prompt.id}/accept`]: () =>
+  it('shows the squad in fight order with its sequence', async () => {
+    mockApi({
+      'GET /api/game/team': () =>
+        json(state({ ...trio, members: trio.members.map((m, i) => ({ ...m, online: i < 2 })) })),
+    })
+    renderWindow()
+    const order = await screen.findByRole('list', { name: 'Fight order' })
+    const cards = within(order).getAllByRole('listitem')
+    expect(cards.map((li) => li.getAttribute('aria-label'))).toEqual([
+      'Ninja_01',
+      'Sakura_1',
+      'Rock_1',
+    ])
+    expect(cards[0]).toHaveTextContent('#1')
+    expect(cards[0]).toHaveTextContent('Ninja_01 Lv. 20')
+    expect(cards[0]).toHaveTextContent('Leader')
+    expect(cards[2]).toHaveTextContent('Offline')
+    expect(screen.getByText('3/3 Members')).toBeInTheDocument()
+    expect(screen.getByText('(#1 Ninja_01 → #2 Sakura_1 → #3 Rock_1)')).toBeInTheDocument()
+    // A full party: no invite form; the order is set on the party portraits.
+    expect(screen.queryByLabelText('Ninja name')).not.toBeInTheDocument()
+  })
+
+  it('lets the leader of two invite a third', async () => {
+    mockApi({
+      'GET /api/game/team': () =>
+        json(state(team(ME, member(ME, 'Ninja_01', 0), member(SAKURA, 'Sakura_1', 1)))),
+    })
+    renderWindow()
+    expect(await screen.findByText('2/3 Members')).toBeInTheDocument()
+    expect(screen.getByLabelText('Ninja name')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Disband party' })).toBeInTheDocument()
+  })
+
+  it('does not let a member invite', async () => {
+    mockApi({
+      'GET /api/game/team': () =>
         json(state(team(SAKURA, member(SAKURA, 'Sakura_1', 0), member(ME, 'Ninja_01', 1)))),
     })
     renderWindow()
-    expect(
-      await screen.findByText(/Sakura_1 \(Level 21\) invites you to join a team/),
-    ).toBeInTheDocument()
-    expect(screen.getByText(/^\(4\d s\)$/)).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Accept' }))
-    const members = await screen.findByRole('list', { name: 'Members' })
-    expect(within(members).getByRole('listitem', { name: 'Sakura_1' })).toHaveTextContent('Captain')
-    expect(fetch.mock.calls.some(([url]) => String(url).endsWith('/accept'))).toBe(true)
-    // Not the captain: no captain controls, and the last two leave by disbanding.
-    expect(screen.queryByRole('button', { name: /Kick/ })).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Disband team' })).toBeInTheDocument()
+    expect(await screen.findByText('2/3 Members')).toBeInTheDocument()
+    expect(screen.queryByLabelText('Ninja name')).not.toBeInTheDocument()
   })
 
-  it('hides prompts past their expiry', async () => {
-    mockApi({
-      'GET /api/game/team': () =>
-        json(
-          state(null, [
-            {
-              id: '00000000-0000-4000-8000-0000000000cc',
-              kind: 'apply',
-              from: { characterId: ROCK, name: 'Rock_1', level: 30 },
-              expiresAt: new Date(Date.now() - 1000).toISOString(),
-            },
-          ]),
-        ),
-    })
-    renderWindow()
-    expect(await screen.findByText('You are not in a team.')).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Accept' })).not.toBeInTheDocument()
-  })
-
-  it('lets the captain kick and reorder', async () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(true)
-    const fetch = mockApi({
-      'GET /api/game/team': () => json(state(trio)),
-      'POST /api/game/team/kick': () =>
-        json(state(team(ME, member(ME, 'Ninja_01', 0), member(SAKURA, 'Sakura_1', 1)))),
-      'POST /api/game/team/order': () => json(state(trio)),
-    })
-    renderWindow()
-    expect(await screen.findByRole('button', { name: 'Move Ninja_01 up' })).toBeDisabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Move Rock_1 up' }))
-    expect(requestBody(fetch, 'POST /api/game/team/order')).toEqual({
-      characterId: ROCK,
-      direction: 'up',
-    })
-    await userEvent.click(screen.getByRole('button', { name: 'Kick Rock_1' }))
-    expect(requestBody(fetch, 'POST /api/game/team/kick')).toEqual({ characterId: ROCK })
-    expect(await screen.findByRole('button', { name: 'Disband team' })).toBeInTheDocument()
-    expect(screen.queryByRole('listitem', { name: 'Rock_1' })).not.toBeInTheDocument()
-  })
-
-  it('leaves the team', async () => {
+  it('leaves the party', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     mockApi({
       'GET /api/game/team': () => json(state(trio)),
@@ -171,18 +148,18 @@ describe('Team window', () => {
       'GET /api/game/social/friends': () => json(friends),
     })
     renderWindow()
-    await userEvent.click(await screen.findByRole('button', { name: 'Leave team' }))
-    expect(await screen.findByText('You are not in a team.')).toBeInTheDocument()
+    await userEvent.click(await screen.findByRole('button', { name: 'Leave party' }))
+    expect(await screen.findByText('You are not in a party.')).toBeInTheDocument()
   })
 
   it('shows the server refusal as it is', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
     mockApi({
       'GET /api/game/team': () => json(state(trio)),
-      'POST /api/game/team/captain': () =>
-        apiError(400, 'target_offline', 'That ninja is offline.'),
+      'POST /api/game/team/leave': () => apiError(409, 'in_fight', 'Not during a fight.'),
     })
     renderWindow()
-    await userEvent.click(await screen.findByRole('button', { name: 'Make Sakura_1 captain' }))
-    expect(await screen.findByRole('alert')).toHaveTextContent('That ninja is offline.')
+    await userEvent.click(await screen.findByRole('button', { name: 'Leave party' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Not during a fight.')
   })
 })
