@@ -23,7 +23,7 @@ const blade = {
   enhanceLevel: 0,
   identifyCount: 0,
   props: [],
-  info: potion.info!,
+  info: { ...potion.info!, equipSlot: null },
 }
 const side = (player: typeof ME, extra: Partial<TradeView['me']> = {}): TradeView['me'] => ({
   ...player,
