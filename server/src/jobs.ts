@@ -33,10 +33,20 @@ import { CLAN_WAR_SETTLE_INTERVAL_MS, settleClanWarWeek } from './modules/clan-w
 /** "Run it every few seconds" (teams/routes.ts). */
 const TEAM_SWEEP_INTERVAL_MS = 5_000
 
-/** Starts the timers; returns the function that stops them. */
+/**
+ * Starts the timers; returns the function that stops them and resolves once the runs already
+ * started have finished, so the database is not closed (or truncated in tests) under them.
+ */
 export function startJobs(db: Db, onError: (error: unknown) => void) {
+  const running = new Set<Promise<void>>()
   const every = (ms: number, job: () => Promise<unknown>) =>
-    setInterval(() => void job().catch(onError), ms)
+    setInterval(() => {
+      const run = job()
+        .then(() => undefined)
+        .catch(onError)
+        .finally(() => running.delete(run))
+      running.add(run)
+    }, ms)
   const timers = [
     every(MARKET_EXPIRY_INTERVAL_MS, () => expireListings(db)),
     every(MAIL_PURGE_INTERVAL_MS, () => purgeExpiredMail(db)),
@@ -50,5 +60,8 @@ export function startJobs(db: Db, onError: (error: unknown) => void) {
     every(CLAN_WAR_SETTLE_INTERVAL_MS, () => settleClanWarWeek(db)),
     every(CLAN_MISSIONS_SETTLE_INTERVAL_MS, () => settleMissions(db)),
   ]
-  return () => timers.forEach(clearInterval)
+  return async () => {
+    timers.forEach(clearInterval)
+    await Promise.allSettled(running)
+  }
 }

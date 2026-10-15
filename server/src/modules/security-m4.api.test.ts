@@ -65,13 +65,16 @@ describe('periodic jobs', () => {
     })
 
     // Act: the server's job timers tick once.
+    // Every shorter job ticks too (the team sweep twelve times): wait for all of them, or they
+    // run on into the next test's truncate.
+    const errors: unknown[] = []
     vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] })
-    const stop = startJobs(db, (error) => {
-      throw error
-    })
+    const stop = startJobs(db, (error) => errors.push(error))
     vi.advanceTimersByTime(MARKET_EXPIRY_INTERVAL_MS)
-    stop()
+    const stopped = stop()
     vi.useRealTimers()
+    await stopped
+    expect(errors).toEqual([])
 
     // Assert
     await vi.waitFor(async () => expect(await db.select().from(marketListings)).toEqual([]), {
