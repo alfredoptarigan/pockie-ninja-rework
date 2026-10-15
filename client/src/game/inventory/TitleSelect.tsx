@@ -1,6 +1,8 @@
 // Reborn's Inventory title plate (main.js `vc`, @2579589): a BigBG7 plate holding the equipped
 // title's art (titles/<id>.gif) under a transparent <select> of the unlocked titles. Picking one
 // sends setTitle; hovering lists the title's stats and, for a timed title, the time left.
+// The options are the unlocked titles, and every character has unlocked title 0 ("No Title",
+// state default `titles.unlocked: [0]`), so picking it is how a title is unequipped.
 // Art: Reborn's titles/<id>.gif for our title ids 0-93, fetched from its CDN and converted with
 // gif2webp to client/public/assets/reborn/titles/. ponytail: fetched by hand (like
 // features/dungeons-bg.jpg); ids Reborn has no art for fall back to the name in title lettering.
@@ -16,8 +18,16 @@ const MINUTE_MS = 60_000
 const HOUR_MS = 3_600_000
 const DAY_MS = 86_400_000
 
-const titleName = (title?: Title) =>
-  title ? plainText(title.nameKey, `Title ${title.titleId}`) : 'No title'
+/** Reborn's title 0: always unlocked, no bonus; equipping it unequips the title. */
+const NO_TITLE_ENTRY: Title = {
+  titleId: NO_TITLE,
+  nameKey: 'lg_EffortTitle00',
+  active: false,
+  expiresAt: null,
+  stats: [],
+}
+
+const titleName = (title: Title) => plainText(title.nameKey, `Title ${title.titleId}`)
 
 /** Reborn's title stat line ("Speed +4%", "Strength +13"). */
 export function titleStatText({ name, value }: Title['stats'][number]) {
@@ -46,8 +56,8 @@ function useNow(active: boolean) {
   return now
 }
 
-function TitleArt({ title }: { title?: Title }) {
-  const id = title?.titleId ?? NO_TITLE
+function TitleArt({ title }: { title: Title }) {
+  const id = title.titleId
   const [missing, setMissing] = useState<number | null>(null)
   if (missing === id)
     return (
@@ -69,17 +79,17 @@ export function TitleSelect() {
   const titles = useBuffs().data?.titles ?? []
   const activate = useActivateTitle()
   const [hover, setHover] = useState(false)
-  const active = titles.find((title) => title.active)
-  const now = useNow(hover && !!active?.expiresAt)
-  const lines = active?.stats.map(titleStatText) ?? []
-  const left = active?.expiresAt ? timeLeft(active.expiresAt, now) : ''
+  const active = titles.find((title) => title.active) ?? NO_TITLE_ENTRY
+  const now = useNow(hover && !!active.expiresAt)
+  const lines = active.stats.map(titleStatText)
+  const left = active.expiresAt ? timeLeft(active.expiresAt, now) : ''
   return (
     <div className="game-title-plate absolute top-[52px] left-[103px] h-[36px] w-[164px]">
       <div className="absolute inset-[2px]">
-        <TitleArt key={active?.titleId ?? NO_TITLE} title={active} />
+        <TitleArt key={active.titleId} title={active} />
         <select
           aria-label="Title"
-          value={active?.titleId ?? NO_TITLE}
+          value={active.titleId}
           disabled={activate.isPending}
           onChange={(event) => void attempt(() => activate.mutateAsync(Number(event.target.value)))}
           onPointerEnter={() => setHover(true)}
@@ -87,10 +97,7 @@ export function TitleSelect() {
           onPointerDown={() => setHover(false)}
           className="absolute inset-0 size-full cursor-pointer appearance-none bg-transparent text-transparent outline-none disabled:cursor-wait"
         >
-          <option value={NO_TITLE} className="text-black">
-            No title
-          </option>
-          {titles.map((title) => (
+          {[NO_TITLE_ENTRY, ...titles].map((title) => (
             <option key={title.titleId} value={title.titleId} className="text-black">
               {titleName(title)}
             </option>

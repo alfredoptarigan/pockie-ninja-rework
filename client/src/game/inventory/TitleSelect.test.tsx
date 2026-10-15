@@ -39,8 +39,9 @@ describe('TitleSelect (Reborn title plate)', () => {
       'POST /api/game/titles/activate': () => json({ character, buffs: [], titles }),
     })
     expect(document.querySelector('img')).toHaveAttribute('src', '/assets/reborn/titles/10.webp')
+    // Reborn lists the unlocked titles, and every character has unlocked title 0, "No Title".
     expect(screen.getAllByRole('option').map((option) => option.textContent)).toEqual([
-      'No title',
+      'No Title',
       'Come Come Paradise',
       'Beginner Ninja',
     ])
@@ -48,6 +49,17 @@ describe('TitleSelect (Reborn title plate)', () => {
     await waitFor(() =>
       expect(requestBody(fetchMock, 'POST /api/game/titles/activate')).toEqual({ titleId: 1 }),
     )
+  })
+
+  it('shows title 0, No Title, on the plate when no title is equipped', async () => {
+    mockApi({
+      'GET /api/game/buffs': () =>
+        json({ buffs: [], titles: titles.map((title) => ({ ...title, active: false })) }),
+    })
+    renderWithProviders(<TitleSelect />)
+    expect(await screen.findByRole('combobox', { name: 'Title' })).toHaveValue('0')
+    expect(document.querySelector('img')).toHaveAttribute('src', '/assets/reborn/titles/0.webp')
+    expect(screen.getByText('Equipped title: No Title')).toBeInTheDocument()
   })
 
   it('lists the equipped title stats on hover', async () => {
