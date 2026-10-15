@@ -20,6 +20,7 @@ import { SettingsButton } from './settings'
 import { useOutfitPortrait } from './art'
 import { TwentyMinuteRewardButton } from './events'
 import { useHashiramaOpen } from './hashirama'
+import { HudBuffs } from './HudBuffs'
 import { GameButton } from './skin'
 import { MailButton } from './social'
 import { TeamHud } from './teams'
@@ -371,7 +372,7 @@ const VIP_NAME = 'text-[#ffd700] [text-shadow:0_0_3px_#b8860b,0_0_2px_#000]'
 
 /**
  * Reborn's portrait card (om, original theme): name, HP/MP in percent, VP cur/200, refill icons,
- * level, Battle Power, VIP badge and the CLAIM 20-minute reward. ponytail: no village icon (its
+ * level, Battle Power, VIP badge, the CLAIM 20-minute reward and the buff row. ponytail: no village icon (its
  * art is not exported).
  */
 export function PlayerCard({ character }: { character: Character }) {
@@ -464,7 +465,11 @@ export function PlayerCard({ character }: { character: Character }) {
        * portrait (its containing block): about (221, 39) on a 720px-high window.
        */}
       <TwentyMinuteRewardButton className="absolute top-[39px] left-[221px]" />
-      <TeamHud character={character} />
+      {/* Reborn's buff row at top 84; our Party button (TeamHud) follows under it. */}
+      <div className="absolute top-[84px] left-0 flex flex-col items-start gap-[2px]">
+        <HudBuffs />
+        <TeamHud character={character} />
+      </div>
       <TradeLayer character={character} />
       <ApprenticeLayer />
     </section>

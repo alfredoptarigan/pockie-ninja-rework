@@ -19,7 +19,7 @@ export function TeamHud({ character }: { character: Character }) {
   if (!shown) return null
   const view = team.data?.team
   return (
-    <div className="pointer-events-auto absolute top-[86px] left-0 font-game text-[11px]">
+    <div className="pointer-events-auto font-game text-[11px]">
       <GameButton small onClick={() => open('team')}>
         Party
       </GameButton>
