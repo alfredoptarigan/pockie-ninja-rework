@@ -165,7 +165,7 @@ export async function listClans(
   }
 }
 
-const weeklyOf = (member: Pick<MemberRow, 'week' | 'weeklyPoints'>, now: Date) =>
+export const weeklyOf = (member: Pick<MemberRow, 'week' | 'weeklyPoints'>, now: Date) =>
   member.week === weekStart(now) ? member.weeklyPoints : 0
 
 /** The caller's clan with its roster, or null. */

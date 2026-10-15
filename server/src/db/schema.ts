@@ -2345,3 +2345,88 @@ export const sanninPlayers = pgTable(
     ),
   ],
 )
+
+// Home (Reborn's scene 4101): the six farm fields, each null or { crop, readyAt (server ms) }.
+export const homeFarms = pgTable('home_farms', {
+  characterId: uuid('character_id')
+    .primaryKey()
+    .references(() => characters.id, { onDelete: 'cascade' }),
+  plots: jsonb('plots')
+    .$type<({ crop: string; readyAt: number } | null)[]>()
+    .notNull()
+    .default(sql`'[]'::jsonb`),
+})
+
+// Clan level progress (Events tab bar) and Picnic in Garden's weekly warehouse: `picnicPoints`
+// belong to the UTC Monday `picnicWeek`, `picnicLastPoints` to the week before it.
+export const clanProgress = pgTable(
+  'clan_progress',
+  {
+    clanId: uuid('clan_id')
+      .primaryKey()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    exp: bigint('exp', { mode: 'number' }).notNull().default(0),
+    picnicWeek: date('picnic_week'),
+    picnicPoints: integer('picnic_points').notNull().default(0),
+    picnicLastPoints: integer('picnic_last_points').notNull().default(0),
+  },
+  (t) => [
+    check(
+      'clan_progress_values',
+      sql`${t.exp} >= 0 and ${t.picnicPoints} >= 0 and ${t.picnicLastPoints} >= 0`,
+    ),
+  ],
+)
+
+// A ninja's Picnic contributions this `week` to `clanId` (the leaderboard) and the Monday of the
+// last week they claimed boxes.
+export const clanPicnicMembers = pgTable(
+  'clan_picnic_members',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    clanId: uuid('clan_id')
+      .notNull()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    week: date('week'),
+    points: integer('points').notNull().default(0),
+    claimedWeek: date('claimed_week'),
+  },
+  (t) => [
+    index('clan_picnic_members_clan_id_idx').on(t.clanId),
+    check('clan_picnic_members_points', sql`${t.points} >= 0`),
+  ],
+)
+
+// A clan member's Ninja Garden: nine plots ({ unlocked, tree, cooldownUntil }), scrolls (refilled
+// on the UTC Monday `scrollsWeek`), today's plants and the level the next tree is planted at.
+export const clanGardens = pgTable(
+  'clan_gardens',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    plots: jsonb('plots')
+      .$type<
+        {
+          unlocked: boolean
+          tree: { type: 'money' | 'zenpakuto'; level: number; readyAt: number } | null
+          cooldownUntil: number
+        }[]
+      >()
+      .notNull()
+      .default(sql`'[]'::jsonb`),
+    scrolls: smallint('scrolls').notNull().default(18),
+    scrollsWeek: date('scrolls_week'),
+    plantDay: date('plant_day'),
+    plants: smallint('plants').notNull().default(0),
+    pendingLevel: smallint('pending_level').notNull().default(1),
+  },
+  (t) => [
+    check(
+      'clan_gardens_values',
+      sql`${t.scrolls} between 0 and 18 and ${t.plants} >= 0 and ${t.pendingLevel} between 1 and 5`,
+    ),
+  ],
+)

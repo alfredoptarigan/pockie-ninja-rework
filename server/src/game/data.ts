@@ -872,7 +872,10 @@ const petFoodsSchema = z.object({
   slotCost: z.array(int),
 })
 export type RebornPetFoods = z.infer<typeof petFoodsSchema>
-/** Foods 170113-170127 and the 2011 pet tables (decisions 10, 13, 14, 17). */
+/**
+ * Foods 170113-170127, the Home crops 170001-170004 and the 2011 pet tables (decisions 10, 13,
+ * 14, 17).
+ */
 export const rebornPetFoods = () => loadChecked('reborn/pet-foods', petFoodsSchema)
 
 const wingItem = z.object({ item: itemId, icon: z.string(), line: int, bonus: int })

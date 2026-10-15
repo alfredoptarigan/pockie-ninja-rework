@@ -728,7 +728,7 @@ export function FeatureIcons({ character }: { character: Character }) {
       <FeatureIcon
         label="Home"
         icon={topIcon('home')}
-        reason="Home: not available yet"
+        onClick={() => openFeature('home')}
         style={{ top: 90, right: 10 }}
       />
     </nav>

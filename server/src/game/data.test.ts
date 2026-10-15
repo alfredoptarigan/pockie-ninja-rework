@@ -243,7 +243,7 @@ describe('Reborn overlay (M6 task 2)', () => {
     expect(rebornPets()).toHaveLength(190)
     expect(rebornPets().filter((pet) => pet.parent)).toHaveLength(74)
     expect(rebornPetSkills().books).toHaveLength(50)
-    expect(rebornPetFoods().foods).toHaveLength(15)
+    expect(rebornPetFoods().foods).toHaveLength(19)
     const wings = rebornWings()
     expect(wings.wings.length + wings.auras.length).toBe(26)
     expect(Object.keys(rebornWingLines())).toHaveLength(18)

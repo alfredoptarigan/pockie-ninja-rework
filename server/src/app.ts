@@ -106,6 +106,8 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/hashirama/routes.js'), { db, prefix: '/api/game/hashirama' })
   app.register(import('./modules/tsunade-pub/routes.js'), { db, prefix: '/api/game/tsunade-pub' })
   app.register(import('./modules/mall/routes.js'), { db, prefix: '/api/game/mall' })
+  app.register(import('./modules/home/routes.js'), { db, prefix: '/api/game/home' })
+  app.register(import('./modules/clan-events/routes.js'), { db, prefix: '/api/game/clan-events' })
   app.register(import('./modules/konoha-boutique/routes.js'), {
     db,
     prefix: '/api/game/konoha-boutique',

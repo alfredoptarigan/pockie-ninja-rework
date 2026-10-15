@@ -38,6 +38,7 @@ import { ShichibukaiWindow } from './shichibukai'
 import { SanninTestWindow } from './sannin-test'
 import { TsunadePubWindow } from './tsunade-pub'
 import { MallWindow } from './mall'
+import { HomeWindow } from './home'
 import { KonohaBoutiqueWindow } from './konoha-boutique'
 import { AkatsukiWindow } from './akatsuki'
 import { HashiramaWindow } from './hashirama'
@@ -81,6 +82,7 @@ export type WindowName =
   | 'sanninTest'
   | 'tsunadePub'
   | 'mall'
+  | 'home'
   | 'konohaBoutique'
   | 'akatsuki'
   | 'hashirama'
@@ -163,6 +165,7 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   ),
   tsunadePub: ({ onClose }) => <TsunadePubWindow onClose={onClose} />,
   mall: ({ character, onClose }) => <MallWindow character={character} onClose={onClose} />,
+  home: (props) => <HomeWindow {...props} />,
   konohaBoutique: ({ character, onClose }) => (
     <KonohaBoutiqueWindow character={character} onClose={onClose} />
   ),
