@@ -253,6 +253,27 @@
       "when": 1791994306705,
       "tag": "0035_bag_positions",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1792023512263,
+      "tag": "0036_equipment_sets",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1792024866875,
+      "tag": "0037_clans",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1792025369429,
+      "tag": "0038_bankai",
+      "breakpoints": true
     }
   ]
 }

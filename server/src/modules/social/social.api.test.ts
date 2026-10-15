@@ -4,6 +4,9 @@ import type { Notice } from '@pockie/shared'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import {
   blocks,
+  characterSkillSlots,
+  characterSkills,
+  characterSkillState,
   characters,
   friends,
   inventoryItems,
@@ -307,6 +310,76 @@ describe('players (Player List, View Character, Requests)', () => {
     } finally {
       presence.offline(naruto.id)
     }
+  })
+})
+
+describe('View Character stats (Inventory Hide)', () => {
+  const hide = (who: Ninja, hideStats: unknown) =>
+    who.client.post('/api/game/character/privacy', { hideStats })
+  const ownStats = async (who: Ninja) => (await who.client.get('/api/game/character')).json()
+
+  it('never sends the stats or skills of a ninja who hides them to anyone else', async () => {
+    await db.insert(characterSkills).values({ characterId: sasuke.id, skillId: 1803, level: 1 })
+    await db
+      .insert(characterSkillSlots)
+      .values({ characterId: sasuke.id, tree: 0, slot: 0, skillId: 1803, level: 1 })
+
+    const response = await hide(sasuke, true)
+    expect(response.statusCode).toBe(200)
+    expect(response.json().character.hideStats).toBe(true)
+
+    const view = (await get(naruto, `players/${sasuke.id}`)).json()
+    expect(view.hideStats).toBe(true)
+    expect(view).not.toHaveProperty('stats')
+    expect(view).not.toHaveProperty('skills')
+    expect(JSON.stringify(view)).not.toMatch(/minAttack|1803/)
+    // The ninja still sees their own.
+    const self = (await get(sasuke, `players/${sasuke.id}`)).json()
+    expect(self.stats).toEqual((await ownStats(sasuke)).stats)
+    expect(self.skills[0]).toEqual({ slot: 0, skillId: 1803, level: 1 })
+    expect((await ownStats(sasuke)).character.hideStats).toBe(true)
+  })
+
+  it("shows a visible ninja's stats and the active preset's skills, not the bag", async () => {
+    await db.insert(inventoryItems).values([
+      { characterId: sasuke.id, itemId: 'i270100', equippedSlot: 'Weapon' },
+      { characterId: sasuke.id, itemId: 'i160006', count: 2 },
+    ])
+    await db.insert(characterSkills).values(
+      [1803, 1807].map((skillId) => ({ characterId: sasuke.id, skillId, level: 1 })),
+    )
+    await db.insert(characterSkillSlots).values([
+      { characterId: sasuke.id, tree: 0, slot: 0, skillId: 1803, level: 1 },
+      { characterId: sasuke.id, tree: 1, slot: 2, skillId: 1807, level: 1 },
+    ])
+    await db
+      .insert(characterSkillState)
+      .values({ characterId: sasuke.id, activeTree: 1 })
+      .onConflictDoUpdate({ target: characterSkillState.characterId, set: { activeTree: 1 } })
+
+    const view = (await get(naruto, `players/${sasuke.id}`)).json()
+    expect(view.hideStats).toBe(false)
+    expect(view.stats).toEqual((await ownStats(sasuke)).stats)
+    expect(view.stats.minAttack).toBeGreaterThan(1)
+    expect(view.skills).toHaveLength(6)
+    expect(view.skills.filter((s: { skillId: number | null }) => s.skillId !== null)).toEqual([
+      { slot: 2, skillId: 1807, level: 1 },
+    ])
+    expect(JSON.stringify(view)).not.toContain('i160006')
+
+    // Unhiding again: back to visible.
+    await hide(sasuke, true)
+    await hide(sasuke, false)
+    expect((await get(naruto, `players/${sasuke.id}`)).json().stats).toBeDefined()
+  })
+
+  it('validates the privacy setting and requires a login', async () => {
+    expect((await hide(sasuke, 'yes')).statusCode).toBe(400)
+    expect((await sasuke.client.post('/api/game/character/privacy', {})).statusCode).toBe(400)
+    const anonymous = new Client(app)
+    const refused = await anonymous.post('/api/game/character/privacy', { hideStats: true })
+    expect(refused.statusCode).toBe(401)
+    expect((await ownStats(sasuke)).character.hideStats).toBe(false)
   })
 })
 

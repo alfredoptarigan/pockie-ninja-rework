@@ -3,10 +3,12 @@ import {
   bagItemsWhere,
   fitsOutfit,
   inventoryView,
+  isWornIn,
   placeAt,
   placeBag,
   requireBagRoom,
   spotOf,
+  wornItemsWhere,
 } from '../../game/bag.js'
 import { USABLE_PAGES } from '../../game/bag-grid.js'
 import { createRandom, deriveStats } from '@pockie/game-core'
@@ -75,7 +77,7 @@ import { buyPouches, pouchMax } from '../../game/pouch.js'
 import { HttpError } from '../../http.js'
 import type { Realtime } from '../realtime/realtime.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
-import { homeScene, travelRefusal } from './travel.js'
+import { CHANGE_VILLAGE_STONE, changeVillage, homeScene, travelRefusal } from './travel.js'
 import { recordSceneEntered } from './world.js'
 import { RATE_LIMITS } from './rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
@@ -89,6 +91,7 @@ const itemParams = itemActionParamsSchema
 const taskParams = z.object({ taskId: z.coerce.number().int().positive() })
 const npcParams = z.object({ npcId: z.string().regex(/^n\d+$/) })
 const reviveBody = z.object({ mode: z.enum(['home', 'gold']) })
+const changeVillageBody = z.object({ village: z.number().int() })
 
 type CharacterRow = typeof characters.$inferSelect
 
@@ -376,21 +379,27 @@ export async function actionRoutes(
       const refusal = equipRefusal(row)
       if (refusal) throw bad(refusal.code, refusal.message)
       const slot = String(def.EquipType)
-      const [replaced] = await tx
-        .update(inventoryItems)
-        .set({ equippedSlot: null })
-        .where(
-          and(eq(inventoryItems.characterId, character.id), eq(inventoryItems.equippedSlot, slot)),
-        )
-        .returning()
+      // Wears it in the active equipment set; an item worn in another set moves (Reborn).
+      const [worn] = await tx
+        .select()
+        .from(inventoryItems)
+        .where(and(wornItemsWhere(character.id), eq(inventoryItems.equippedSlot, slot)))
+      const replaced = worn && worn.id !== row.id ? worn : undefined
+      const freed = spotOf(row)
+      if (replaced) {
+        // Coming from another set, the item frees no tile for the piece it replaces.
+        if (!freed) await requireBagRoom(tx, character.id, [replaced], { separate: true })
+        await tx
+          .update(inventoryItems)
+          .set({ equippedSlot: null })
+          .where(eq(inventoryItems.id, replaced.id))
+      }
       await tx
         .update(inventoryItems)
-        .set({ equippedSlot: slot, bagPage: null, bagSlot: null })
+        .set({ equippedSlot: slot, equippedSet: character.activeSet, bagPage: null, bagSlot: null })
         .where(eq(inventoryItems.id, row.id))
       // The replaced item takes the new item's tile when it fits there, else any free one.
-      const freed = spotOf(row)
-      if (replaced && replaced.id !== row.id && freed)
-        await placeAt(tx, character.id, replaced, freed)
+      if (replaced && freed) await placeAt(tx, character.id, replaced, freed)
       // Wing stats are part of the arena defence (M6 decision 23).
       if (slot === WING_SLOT) await refreshArenaSnapshot(tx, character.id)
 
@@ -419,7 +428,8 @@ export async function actionRoutes(
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
       const row = await ownedItem(tx, character.id, id)
-      if (!row.equippedSlot) throw bad('not_equipped', 'That item is not equipped.')
+      if (!isWornIn(row, character.activeSet))
+        throw bad('not_equipped', 'That item is not equipped.')
       await requireBagRoom(tx, character.id, [row], { separate: true })
       await tx
         .update(inventoryItems)
@@ -457,6 +467,25 @@ export async function actionRoutes(
       return { character: await reload(tx, character.id) }
     })
     // After commit, so sockets never move to a scene the database rolled back.
+    realtime.moveCharacter(result.character)
+    return result
+  })
+
+  // Reborn's Village Elder "Change Village" (`changeVillage {village}`): Angel City, 50,000 Stone.
+  app.post('/change-village', { config: { rateLimit: RATE_LIMITS.travel } }, async (request) => {
+    const { village } = changeVillageBody.parse(request.body)
+    const userId = requireUser(request).id
+    const result = await db.transaction(async (tx) => {
+      const character = await lockCharacter(tx, userId)
+      const change = changeVillage(character, village)
+      if ('code' in change) throw bad(change.code, change.message)
+      await tx
+        .update(characters)
+        .set({ nation: change.nation, stone: character.stone - CHANGE_VILLAGE_STONE })
+        .where(eq(characters.id, character.id))
+      return { character: await reload(tx, character.id) }
+    })
+    // Online players see the new village (chat, player list).
     realtime.moveCharacter(result.character)
     return result
   })

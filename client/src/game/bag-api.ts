@@ -58,6 +58,9 @@ export const useUnequipTo = () =>
       input.page === undefined ? undefined : { page: input.page, slot: input.slot },
     ),
   )
+/** Wears equipment set 1-5 (Reborn's setActiveLoadout); answers with the character and the bag. */
+export const useSetActiveSet = () =>
+  useBagAction((set: number) => post<BagResult>('/api/game/sets/active', { set }))
 /** Equips (Reborn's click on a slot while holding the item); the server answers with the bag. */
 export const useEquipFromBag = () =>
   useBagAction((id: string) => post<BagResult>(`${item(id)}/equip`))

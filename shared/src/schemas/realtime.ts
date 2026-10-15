@@ -21,9 +21,10 @@ export const REALTIME_EVENTS = {
 export const CHAT_MAX_LENGTH = 250
 /**
  * `team`: the sender's team only (channel 4). `trade`: Reborn's Trade channel, sent to everyone
- * like `world`. `whisper`: one online player, by ninja name.
+ * like `world`. `clan`: the sender's clan only (Reborn's Clan tab). `whisper`: one online player,
+ * by ninja name.
  */
-export const CHAT_CHANNELS = ['world', 'scene', 'team', 'trade', 'whisper'] as const
+export const CHAT_CHANNELS = ['world', 'scene', 'team', 'trade', 'clan', 'whisper'] as const
 export type ChatChannel = (typeof CHAT_CHANNELS)[number]
 /** Level needed to whisper (decision: same gate as player mail). */
 export const WHISPER_MIN_LEVEL = 10
@@ -46,7 +47,7 @@ export const chatTextSchema = z
   )
 
 export const chatSendSchema = z.discriminatedUnion('channel', [
-  z.object({ channel: z.enum(['world', 'scene', 'team', 'trade']), text: chatTextSchema }),
+  z.object({ channel: z.enum(['world', 'scene', 'team', 'trade', 'clan']), text: chatTextSchema }),
   // Any string: an invalid or unknown name answers "The player is offline." like the original.
   z.object({ channel: z.literal('whisper'), to: z.string().trim().max(32), text: chatTextSchema }),
 ])
@@ -97,6 +98,7 @@ export type ChatErrorCode =
   | 'refused'
   | 'level_too_low'
   | 'not_in_team'
+  | 'not_in_clan'
 
 export type ChatAck =
   | { ok: true; message: ChatMessage }
@@ -167,6 +169,15 @@ export const noticeSchema = z.discriminatedUnion('kind', [
     kind: z.literal('marketSale'),
     itemId: z.number().int(),
     quantity: z.number().int().positive(),
+  }),
+  /**
+   * The player's clan changed (joined, removed, role, leader): refetch it. `clanId` null = no clan.
+   */
+  z.object({
+    kind: z.literal('clanChanged'),
+    clanId: z.uuid().nullable(),
+    /** Optional English line for the chat, e.g. "You joined the clan Konoha." */
+    message: z.string().max(CHAT_MAX_LENGTH).optional(),
   }),
   /** Someone added the player as a friend: the add-back prompt. */
   z.object({ kind: z.literal('friendAdded'), from: noticePlayerSchema }),

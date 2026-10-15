@@ -1,7 +1,7 @@
 // PackSystem: two initially active 60-cell pages. See docs/original-data/bag.md.
 import type { BagItemInfo, InventoryItemView } from '@pockie/shared'
-import { and, asc, eq, isNull, notInArray } from 'drizzle-orm'
-import { inventoryItems } from '../db/schema.js'
+import { and, asc, eq, isNotNull, isNull, notInArray, sql } from 'drizzle-orm'
+import { characters, inventoryItems } from '../db/schema.js'
 import { HttpError } from '../http.js'
 import {
   BAG_CELLS,
@@ -21,6 +21,22 @@ export const bagItemsWhere = (characterId: string) =>
   and(eq(inventoryItems.characterId, characterId), eq(inventoryItems.location, 'bag'))
 export const unequippedBagItemsWhere = (characterId: string) =>
   and(bagItemsWhere(characterId), isNull(inventoryItems.equippedSlot))
+/**
+ * What the character wears: the rows worn in its active equipment set (Reborn loadouts). Rows
+ * worn in the other sets stay out of the bag but count for nothing.
+ */
+export const wornItemsWhere = (characterId: string) =>
+  and(
+    bagItemsWhere(characterId),
+    isNotNull(inventoryItems.equippedSlot),
+    eq(
+      inventoryItems.equippedSet,
+      sql`(select ${characters.activeSet} from ${characters} where ${characters.id} = ${characterId})`,
+    ),
+  )
+/** wornItemsWhere for a row already loaded. */
+export const isWornIn = (row: Pick<ItemRow, 'equippedSlot' | 'equippedSet'>, activeSet: number) =>
+  row.equippedSlot !== null && row.equippedSet === activeSet
 
 export { BAG_CELLS }
 export const itemCells = (itemId: string) => Number(item(itemId)?.ItemShapeType ?? 1)
@@ -176,6 +192,7 @@ export async function inventoryView(
         count: row.count,
         bound: row.bound,
         equippedSlot: row.equippedSlot,
+        equippedSet: row.equippedSlot ? row.equippedSet : null,
         nameKey: itemNameKey(row.itemId),
         ...(def?.class === 'EquipItem' ? { fitsOutfit: fitsOutfit(def, character.avatarId) } : {}),
         page: row.bagPage,

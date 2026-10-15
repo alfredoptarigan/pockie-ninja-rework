@@ -157,10 +157,7 @@ describe('ExploreWindow', () => {
     // The header and the free zone's tab.
     expect(within(dialog).getAllByText('Smelting Mountains Exploration Zone')).toHaveLength(2)
     expect(within(dialog).getByText('6/7')).toBeVisible()
-    expect(within(dialog).getByRole('tab', { name: FREE })).toHaveAttribute(
-      'aria-selected',
-      'true',
-    )
+    expect(within(dialog).getByRole('tab', { name: FREE })).toHaveAttribute('aria-selected', 'true')
 
     const free = within(dialog).getByRole('region', { name: FREE })
     expect(free).toHaveTextContent('Explore zones to discover items and fight monsters.')
@@ -416,7 +413,9 @@ describe('explore cards', () => {
     const cards = await screen.findByRole('dialog', { name: 'Choose an Exploration Card' })
     expect(cards).toHaveTextContent('Click on a green card to get a free reward!')
     expect(cards).toHaveTextContent('~Or pay for a sneak peek~')
-    expect(within(cards).getAllByRole('button', { name: /^Pick card \d \(face down\)$/ })).toHaveLength(5)
+    expect(
+      within(cards).getAllByRole('button', { name: /^Pick card \d \(face down\)$/ }),
+    ).toHaveLength(5)
     expect(cards).toHaveTextContent('Peeks used 0 / 3. Next peek: 83 Stone.')
 
     await userEvent.click(within(cards).getByRole('button', { name: 'Peek at card 1' }))
@@ -428,7 +427,9 @@ describe('explore cards', () => {
     expect(cards).toHaveTextContent('Peeks used 1 / 3. Next peek: 2 Gold.')
     // A revealed card has no Buy Peek.
     expect(within(cards).queryByRole('button', { name: 'Peek at card 1' })).not.toBeInTheDocument()
-    await userEvent.click(within(cards).getByRole('button', { name: 'Pick card 1: Healing Powder' }))
+    await userEvent.click(
+      within(cards).getByRole('button', { name: 'Pick card 1: Healing Powder' }),
+    )
     expect(await screen.findByRole('dialog', { name: 'Exploration Result' })).toBeVisible()
     const postCalls = fetchMock.mock.calls.filter(
       ([input, init]) =>

@@ -181,6 +181,8 @@ export const characters = pgTable(
     pubFightPulledAt: timestamp('pub_fight_pulled_at', { withTimezone: true }),
     // VIP membership (decision 14) runs until this instant; null means none.
     vipUntil: timestamp('vip_until', { withTimezone: true }),
+    // Reborn equipment set (loadout) I-V the ninja wears; IV-V need VIP to switch to.
+    activeSet: smallint('active_set').notNull().default(1),
     createdAt: createdAt(),
     // Market wallet (MartCapital0 Stone, MartCapital1 Gold): sale proceeds after tax, moved to
     // stone/gold by an explicit claim.
@@ -241,6 +243,7 @@ export const characters = pgTable(
     ),
     check('characters_battle_coins', sql`${t.battleCoins} >= 0`),
     check('characters_pet_slots', sql`${t.petSlots} between 1 and 5`),
+    check('characters_active_set', sql`${t.activeSet} between 1 and 5`),
     // Rankings (decision 13), ties to the older ninja. `desc().nullsFirst()` matches a plain
     // `order by ... desc`, so the index serves it.
     index('characters_level_rank_idx').on(
@@ -268,6 +271,9 @@ export const inventoryItems = pgTable(
     count: integer('count').notNull().default(1),
     bound: boolean('bound').notNull().default(false),
     equippedSlot: text('equipped_slot'),
+    // Reborn equipment set (1-5) the row is worn in; read only while equippedSlot is set. What the
+    // character wears is the rows of characters.active_set (wornItemsWhere in game/bag.ts).
+    equippedSet: smallint('equipped_set').notNull().default(1),
     createdAt: createdAt(),
     // Item instance state (docs/original-data/blacksmith.md). The defaults describe a plain
     // M2 item: not enhanced, appraised, no properties.
@@ -302,9 +308,10 @@ export const inventoryItems = pgTable(
       'inventory_items_equipped_in_bag',
       sql`${t.equippedSlot} is null or ${t.location} = 'bag'`,
     ),
-    uniqueIndex('inventory_items_equipped_slot_key')
-      .on(t.characterId, t.equippedSlot)
+    uniqueIndex('inventory_items_equipped_set_slot_key')
+      .on(t.characterId, t.equippedSet, t.equippedSlot)
       .where(sql`${t.equippedSlot} is not null`),
+    check('inventory_items_equipped_set', sql`${t.equippedSet} between 1 and 5`),
     check('inventory_items_count', sql`${t.count} > 0`),
     check('inventory_items_enhance_level', sql`${t.enhanceLevel} between 0 and 30`),
     check('inventory_items_inscribe_level', sql`${t.inscribeLevel} between 0 and 12`),
@@ -1808,5 +1815,171 @@ export const characterCardPrizes = pgTable(
   (t) => [
     primaryKey({ columns: [t.characterId, t.collection] }),
     check('character_card_prizes_collection', sql`${t.collection} between 1 and 10`),
+  ],
+)
+
+// Clans (Reborn's Clan window; shared/src/schemas/clans.ts). A disbanded clan keeps its row
+// (`disbandedAt`) so "your first clan is free" still knows who founded one; its name is free again.
+export const clanRole = pgEnum('clan_role', ['leader', 'vice', 'officer', 'member'])
+
+export const clans = pgTable(
+  'clans',
+  {
+    id: id(),
+    name: text('name').notNull(),
+    nameLower: text('name_lower')
+      .notNull()
+      .generatedAlwaysAs(sql`lower(name)`),
+    founderId: uuid('founder_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    notice: text('notice').notNull().default(''),
+    level: smallint('level').notNull().default(1),
+    // Treasury: currencies members donated (clan storage "Donate Stones / Gold / Gift Certs").
+    stone: currency('stone'),
+    gold: currency('gold'),
+    giftCoupon: currency('gift_coupon'),
+    createdAt: createdAt(),
+    disbandedAt: timestamp('disbanded_at', { withTimezone: true }),
+  },
+  (t) => [
+    uniqueIndex('clans_name_lower_key')
+      .on(t.nameLower)
+      .where(sql`${t.disbandedAt} is null`),
+    index('clans_founder_id_idx').on(t.founderId),
+    check('clans_name_format', sql`${t.name} ~ '^[A-Za-z0-9]{4,10}$'`),
+    check('clans_notice_length', sql`char_length(${t.notice}) <= 120`),
+    check('clans_level', sql`${t.level} >= 1`),
+    check('clans_amounts', sql`${t.stone} >= 0 and ${t.gold} >= 0 and ${t.giftCoupon} >= 0`),
+  ],
+)
+
+// One clan per ninja; one leader and at most one vice-leader per clan (the officer limit of 3
+// is checked under the clan row lock).
+export const clanMembers = pgTable(
+  'clan_members',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    clanId: uuid('clan_id')
+      .notNull()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    role: clanRole('role').notNull().default('member'),
+    joinedAt: timestamp('joined_at', { withTimezone: true }).notNull().defaultNow(),
+    // Contribution points from donations: `weeklyPoints` belong to the UTC Monday `week`.
+    weeklyPoints: bigint('weekly_points', { mode: 'number' }).notNull().default(0),
+    week: date('week'),
+    totalPoints: bigint('total_points', { mode: 'number' }).notNull().default(0),
+  },
+  (t) => [
+    index('clan_members_clan_id_idx').on(t.clanId),
+    uniqueIndex('clan_members_leader_key')
+      .on(t.clanId)
+      .where(sql`${t.role} = 'leader'`),
+    uniqueIndex('clan_members_vice_key')
+      .on(t.clanId)
+      .where(sql`${t.role} = 'vice'`),
+    check('clan_members_points', sql`${t.weeklyPoints} >= 0 and ${t.totalPoints} >= 0`),
+  ],
+)
+
+// Pending applications (Clan Browser "Apply"); accepting one drops the ninja's others.
+export const clanApplications = pgTable(
+  'clan_applications',
+  {
+    clanId: uuid('clan_id')
+      .notNull()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.clanId, t.characterId] }),
+    index('clan_applications_character_id_idx').on(t.characterId),
+  ],
+)
+
+// Bankai (Reborn, level 30; game-core/src/bankai): the shared EXP pool, Bankai Coins, the active
+// weapon, the stat swaps and the crystal inventory cells bought (8-79). Every Bankai change locks
+// the character row first.
+const BANKAI_WEAPON_LIST = sql.raw(`('zangetsu', 'senbonzakura', 'iceRing')`)
+export const characterBankai = pgTable(
+  'character_bankai',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    expPool: bigint('exp_pool', { mode: 'number' }).notNull().default(0),
+    coins: bigint('coins', { mode: 'number' }).notNull().default(0),
+    activeWeapon: text('active_weapon'),
+    statSwaps: text('stat_swaps')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    unlockedSlots: smallint('unlocked_slots')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+  },
+  (t) => [
+    check('character_bankai_amounts', sql`${t.expPool} >= 0 and ${t.coins} >= 0`),
+    check('character_bankai_active_weapon', sql`${t.activeWeapon} in ${BANKAI_WEAPON_LIST}`),
+  ],
+)
+
+// One row per unlocked Bankai weapon; levels stop at 15 (the end of Reborn's EXP table).
+export const bankaiWeapons = pgTable(
+  'bankai_weapons',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    weapon: text('weapon').notNull(),
+    level: smallint('level').notNull().default(1),
+    exp: integer('exp').notNull().default(0),
+    form: smallint('form').notNull().default(1),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.weapon] }),
+    check('bankai_weapons_weapon', sql`${t.weapon} in ${BANKAI_WEAPON_LIST}`),
+    check(
+      'bankai_weapons_values',
+      sql`${t.level} between 1 and 15 and ${t.exp} >= 0 and ${t.form} between 1 and 3`,
+    ),
+  ],
+)
+
+// Crystals sit in a crystal inventory cell (0-79) or in a weapon's ring slot (0-7), never both.
+export const bankaiCrystals = pgTable(
+  'bankai_crystals',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    quality: text('quality').notNull(),
+    stat: text('stat').notNull(),
+    level: smallint('level').notNull().default(1),
+    exp: integer('exp').notNull().default(0),
+    inventorySlot: smallint('inventory_slot'),
+    weapon: text('weapon'),
+    ringSlot: smallint('ring_slot'),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex('bankai_crystals_inventory_key').on(t.characterId, t.inventorySlot),
+    uniqueIndex('bankai_crystals_ring_key').on(t.characterId, t.weapon, t.ringSlot),
+    check(
+      'bankai_crystals_quality',
+      sql`${t.quality} in ('green', 'blue', 'purple', 'gold', 'black', 'orange')`,
+    ),
+    check('bankai_crystals_values', sql`${t.level} between 1 and 20 and ${t.exp} >= 0`),
+    check(
+      'bankai_crystals_place',
+      sql`(${t.inventorySlot} between 0 and 79 and ${t.weapon} is null and ${t.ringSlot} is null) or (${t.inventorySlot} is null and ${t.weapon} in ${BANKAI_WEAPON_LIST} and ${t.ringSlot} between 0 and 7)`,
+    ),
   ],
 )

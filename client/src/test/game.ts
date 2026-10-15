@@ -24,6 +24,7 @@ export const character: Character = {
   pouchMax: 10000,
   sceneId: 111,
   vipUntil: null,
+  activeSet: 1,
 }
 
 export const stats: CharacterStats = {

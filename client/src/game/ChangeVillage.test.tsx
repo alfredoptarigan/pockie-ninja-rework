@@ -47,7 +47,9 @@ describe('ChangeVillageOption', () => {
       'Back',
       'End Conversation',
     ])
-    expect(within(dialog).getByRole('button', { name: 'Fire Village (your village)' })).toBeDisabled()
+    expect(
+      within(dialog).getByRole('button', { name: 'Fire Village (your village)' }),
+    ).toBeDisabled()
     expect(within(dialog).getByRole('button', { name: 'Water Village' })).toBeEnabled()
     await userEvent.click(within(dialog).getByRole('button', { name: 'Back' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()

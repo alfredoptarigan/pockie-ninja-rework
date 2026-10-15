@@ -47,6 +47,14 @@ export const bagSortSchema = z
     path: ['page'],
   })
 
+/** Reborn's equipment sets (loadouts) I-V; IV and V need VIP. */
+export const EQUIPMENT_SETS = 5
+export const FIRST_VIP_SET = 4
+/** POST /api/game/sets/active */
+export const activeSetSchema = z
+  .object({ set: z.number().int().min(1).max(EQUIPMENT_SETS) })
+  .strict()
+
 export type BagMoveInput = z.infer<typeof bagMoveSchema>
 export type BagSortInput = z.infer<typeof bagSortSchema>
 
@@ -74,6 +82,8 @@ export interface InventoryItemView {
   count: number
   bound: boolean
   equippedSlot: string | null
+  /** Equipment set (1-5) the row is worn in; null in the bag. */
+  equippedSet: number | null
   nameKey: string
   /** EquipItem only: whether the current outfit may use it. */
   fitsOutfit?: boolean

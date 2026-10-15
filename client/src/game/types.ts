@@ -107,6 +107,8 @@ export interface InventoryItem {
   count: number
   bound: boolean
   equippedSlot: string | null
+  /** Equipment set (1-5) a worn item is in; null (or absent) in the bag. */
+  equippedSet?: number | null
   nameKey: string
   /** Equipment only: whether this outfit's weapon class may wear it. */
   fitsOutfit?: boolean

@@ -19,8 +19,9 @@ import {
   type Random,
 } from '@pockie/game-core'
 import type { GearView } from '@pockie/shared'
-import { and, eq, isNotNull } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { inventoryItems } from '../db/schema.js'
+import { isWornIn, wornItemsWhere } from './bag.js'
 import {
   dropItems,
   dropLib,
@@ -82,11 +83,14 @@ function propTier(propId: number) {
 export const durabilityOf = (row: Pick<ItemRow, 'durability'>, config: EquipConfig) =>
   row.durability ?? Math.max(config.MaxHardiness ?? 0, 1)
 
-/** Active (unbroken) worn pieces per set id among a character's rows (GetEquipBoxSuitIDType). */
-export function wornSetCounts(rows: readonly ItemRow[]): Record<string, number> {
+/**
+ * Active (unbroken) worn pieces per set id among a character's rows (GetEquipBoxSuitIDType), in
+ * its active equipment set.
+ */
+export function wornSetCounts(rows: readonly ItemRow[], activeSet: number): Record<string, number> {
   return setCounts(
     rows.flatMap((row) => {
-      const config = row.equippedSlot ? equipConfigOf(row.itemId) : undefined
+      const config = isWornIn(row, activeSet) ? equipConfigOf(row.itemId) : undefined
       return config && durabilityOf(row, config) > 0 ? [config] : []
     }),
   )
@@ -240,7 +244,7 @@ export const reviveLoss = (config: EquipConfig) => reviveDurabilityLoss(config)
 export const KILL_LOSS = 1
 
 /**
- * DecEquipHardiness for every equipped item (HardinessSystem 170-182, ReliveSystem 77-95):
+ * DecEquipHardiness for every item of the active set (HardinessSystem 170-182, ReliveSystem 77-95):
  * `loss(config)` points each, through game-core's wear rules (UnDecHardiness, broken items and
  * IsDecHardEquip properties are skipped).
  */
@@ -249,10 +253,7 @@ export async function wearEquipped(
   characterId: string,
   loss: (config: EquipConfig) => number,
 ) {
-  const rows = await tx
-    .select()
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, characterId), isNotNull(inventoryItems.equippedSlot)))
+  const rows = await tx.select().from(inventoryItems).where(wornItemsWhere(characterId))
   const { identifyProps } = equipTables()
   for (const row of rows) {
     const config = equipConfigOf(row.itemId)

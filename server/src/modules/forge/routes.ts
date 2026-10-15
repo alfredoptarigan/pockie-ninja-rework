@@ -213,7 +213,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const rows = await tx.select().from(inventoryItems).where(bagItemsWhere(characterId))
     const forged = rows.find((r) => r.id === itemId)
     if (!forged) throw new HttpError(404, 'no_item', 'You do not have that item.')
-    return { character, item: itemView(forged, wornSetCounts(rows)) }
+    return { character, item: itemView(forged, wornSetCounts(rows, row!.activeSet)) }
   }
 
   app.get('/forge', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
@@ -226,7 +226,7 @@ export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
   app.get('/forge/gear', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const rows = await db.select().from(inventoryItems).where(bagItemsWhere(character.id))
-    const worn = wornSetCounts(rows)
+    const worn = wornSetCounts(rows, character.activeSet)
     return {
       gear: Object.fromEntries(
         rows.flatMap((row) => {

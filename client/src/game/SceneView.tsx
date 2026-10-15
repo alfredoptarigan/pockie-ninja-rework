@@ -1,4 +1,5 @@
 import type { Character } from '@pockie/shared'
+import { isWorn } from './inventory/EquipmentSlots'
 import { useCallback, useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useQueryClient } from '@tanstack/react-query'
@@ -94,7 +95,9 @@ export function SceneView({
     setFightState((s) => s && { ...s, finished: true, applied: true })
   }
 
-  const weapon = inventory.data?.find((item) => item.equippedSlot === 'Weapon')
+  const weapon = inventory.data?.find(
+    (item) => item.equippedSlot === 'Weapon' && isWorn(item, character.activeSet),
+  )
   const hasWeapon = !inventory.data || !!weapon
 
   const startFight = async (monster: SceneMonster, confirmed = unarmedOk) => {

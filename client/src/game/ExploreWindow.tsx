@@ -2,6 +2,7 @@
 // searches and the rest countdown, the zone window, a confirmation for paid searches, Reborn's card
 // pick overlay, the battle replay for fight cards and the result window. The scene picture opens
 // the same window from the spot's tree.
+import { isWorn } from './inventory/EquipmentSlots'
 import type { Character } from '@pockie/shared'
 import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { errorMessage, useApplyResult, useExplore, useInventory } from './api'
@@ -155,7 +156,9 @@ function ExploreFlow({
 
   const start = async (spot: ExploreSpot, mode: Mode) => {
     setConfirming(null)
-    const weaponItemId = inventory.data?.find((item) => item.equippedSlot === 'Weapon')?.itemId
+    const weaponItemId = inventory.data?.find(
+      (item) => item.equippedSlot === 'Weapon' && isWorn(item, character.activeSet),
+    )?.itemId
     try {
       const result = await explore.mutateAsync({ spotId: spot.id, action: 'start', mode })
       if ('searchId' in result) {
@@ -206,7 +209,9 @@ function ExploreFlow({
   const currentSearch = pending ?? (status.data as ExploreCardsView | undefined)?.pending
   if (currentSearch) {
     const choose = async (cardIndex: number) => {
-      const weaponItemId = inventory.data?.find((item) => item.equippedSlot === 'Weapon')?.itemId
+      const weaponItemId = inventory.data?.find(
+        (item) => item.equippedSlot === 'Weapon' && isWorn(item, character.activeSet),
+      )?.itemId
       try {
         const result = await explore.mutateAsync({
           spotId: currentSearch.spotId,

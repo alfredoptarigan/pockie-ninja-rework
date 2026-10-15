@@ -22,7 +22,7 @@ import {
   SortDialog,
   UseMultipleDialog,
 } from './inventory/dialogs'
-import { Equipment, OutfitTooltip, SetBar } from './inventory/EquipmentSlots'
+import { Equipment, isWorn, OutfitTooltip, SetBar } from './inventory/EquipmentSlots'
 import { attempt, useBagRequests } from './inventory/requests'
 import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
 import { ItemTooltip } from './ItemTooltip'
@@ -99,6 +99,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const marked = bag.find((item) => isHighlighted(item, highlight))
   const shownPage = page ?? marked?.page ?? 0
   const level = character?.level ?? 1
+  const activeSet = character?.activeSet ?? 1
   const run = (action: () => Promise<unknown>) => void attempt(action)
 
   function pickUp(item: InventoryItem) {
@@ -148,6 +149,12 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
       return showToast(INVALID_SWAP, 'failure')
     setHeldId(null)
     run(() => request.equip(held.id))
+  }
+
+  function switchSet(set: number) {
+    setHeldId(null)
+    setMenu(null)
+    run(() => request.switchSet(set))
   }
 
   function showTip(id: string | null, at?: Point) {
@@ -221,7 +228,9 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
     }
   const wornFor = (item: InventoryItem) => {
     if (item.equippedSlot || item.info?.kind !== 'equip') return undefined
-    const worn = items.find((other) => other.equippedSlot === item.info?.equipSlot)
+    const worn = items.find(
+      (other) => isWorn(other, activeSet) && other.equippedSlot === item.info?.equipSlot,
+    )
     return worn && { item: worn, gear: gear[worn.id] }
   }
   const useMultipleItem =
@@ -252,7 +261,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
       }}
     >
       <span ref={origin} aria-hidden="true" className="pointer-events-none fixed top-0 left-0" />
-      <SetBar />
+      <SetBar items={items} character={character} onSelect={switchSet} />
       <Equipment
         items={items}
         character={character}

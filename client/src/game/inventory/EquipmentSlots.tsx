@@ -1,5 +1,6 @@
 // The upper half of Reborn's Inventory: the equipment-set bar, the equipment columns around the
-// character pose (Talent, Blood Limit, Hide), the title plate and the slots with what is worn.
+// character pose (Talent, Blood Limit, Hide), the title plate and the slots with what the active
+// equipment set wears.
 // Positions are the measured ones, relative to the window content (Reborn's x - 5, y - 31).
 import type { Character, GearView } from '@pockie/shared'
 import { useState, type CSSProperties, type KeyboardEvent, type MouseEvent } from 'react'
@@ -49,25 +50,100 @@ export const outfitName = (clothing: number) =>
 export const outfitIcon = (clothing: number) =>
   `/assets/reborn/icons/items/avatars/${clothing}.webp`
 
-/** Reborn's equipment sets I-V: we have a single set, so only I is open. */
-export function SetBar() {
+/** Reborn's equipment sets I-V; IV and V need VIP. */
+const SET_COUNT = 5
+const FIRST_VIP_SET = 4
+const VIP_REQUIRED = 'VIP required for equipment sets'
+/** Reborn's set button looks: worn set brighter, empty sets and locked VIP sets greyed. */
+const SET_LOOK = {
+  active: { filter: 'brightness(1.2)' },
+  filled: {},
+  empty: { filter: 'grayscale(0.65)', opacity: 0.65 },
+  vip: { filter: 'grayscale(1)', opacity: 0.4 },
+} satisfies Record<string, CSSProperties>
+type SetState = keyof typeof SET_LOOK
+
+/** Whether the item is worn in the active equipment set (a worn row without a set is set I). */
+export const isWorn = (item: InventoryItem, activeSet = 1) =>
+  !!item.equippedSlot && (item.equippedSet ?? 1) === activeSet
+
+const isVip = (character: Character | null | undefined, now: number) =>
+  !!character?.vipUntil && Date.parse(character.vipUntil) > now
+
+/** The equipment-set bar: a click wears that set (nothing for the worn one or a locked VIP set). */
+export function SetBar({
+  items,
+  character,
+  onSelect,
+}: {
+  items: InventoryItem[]
+  character?: Character | null
+  onSelect: (set: number) => void
+}) {
+  const [now] = useState(Date.now)
+  const [tip, setTip] = useState<number | null>(null)
+  const activeSet = character?.activeSet ?? 1
+  const vip = isVip(character, now)
+  const filled = (set: number) => items.some((item) => isWorn(item, set))
+  const stateOf = (set: number): SetState => {
+    if (set >= FIRST_VIP_SET && !vip) return 'vip'
+    if (set === activeSet) return 'active'
+    return filled(set) ? 'filled' : 'empty'
+  }
   return (
     <div
       role="group"
-      aria-label="Bag pages"
-      className="game-panel-small absolute top-[6px] left-[32px] flex h-[32px] w-[305px] gap-[4px] pt-[3px] pl-[4px]"
+      aria-label="Equipment sets"
+      className="game-panel-small absolute top-[6px] left-[32px] z-[1] flex h-[32px] w-[305px] gap-[4px] pt-[3px] pl-[4px]"
     >
-      {ROMAN.slice(0, 5).map((label, index) => (
-        <GameButton
-          key={label}
-          small
-          aria-pressed={index === 0}
-          disabled={index > 0}
-          className="h-[24px] w-[56px]"
-        >
-          {label}
-        </GameButton>
-      ))}
+      {ROMAN.slice(0, SET_COUNT).map((label, index) => {
+        const set = index + 1
+        const state = stateOf(set)
+        return (
+          <GameButton
+            key={label}
+            small
+            data-state={state}
+            aria-pressed={set === activeSet}
+            aria-disabled={state === 'vip' || undefined}
+            onClick={() => state !== 'vip' && set !== activeSet && onSelect(set)}
+            onPointerEnter={() => setTip(set)}
+            onPointerLeave={() => setTip(null)}
+            onFocus={() => setTip(set)}
+            onBlur={() => setTip(null)}
+            className="h-[24px] w-[56px] text-[11px] font-bold uppercase"
+            style={SET_LOOK[state]}
+          >
+            {label}
+          </GameButton>
+        )
+      })}
+      {tip !== null && (
+        <SetTooltip set={tip} locked={stateOf(tip) === 'vip'} filled={filled(tip)} />
+      )}
+    </div>
+  )
+}
+
+function SetTooltip({ set, locked, filled }: { set: number; locked: boolean; filled: boolean }) {
+  return (
+    <div
+      role="tooltip"
+      className="pointer-events-none absolute top-[30px] w-[170px] p-2 font-sans text-xs text-white"
+      style={{
+        left: 4 + 60 * (set - 1),
+        borderStyle: 'solid',
+        borderImage: 'var(--ui-tooltip) var(--ui-tooltip-slice) fill / var(--ui-tooltip-border)',
+      }}
+    >
+      {locked ? (
+        <p>{VIP_REQUIRED}</p>
+      ) : (
+        <>
+          <p className="text-center font-bold">Set Status</p>
+          <p className="text-center">{filled ? 'Has Equipment' : 'Empty'}</p>
+        </>
+      )}
     </div>
   )
 }
@@ -145,7 +221,9 @@ export function Equipment({
       </button>
       <ul aria-label="Equipment">
         {SLOTS.map(({ slot, label, art, size, at }) => {
-          const worn = items.find((item) => item.equippedSlot === slot)
+          const worn = items.find(
+            (item) => isWorn(item, character?.activeSet) && item.equippedSlot === slot,
+          )
           const fit = fitOf(slot, held, level)
           const picture = art === 'weapon' ? weaponArt : art
           return (

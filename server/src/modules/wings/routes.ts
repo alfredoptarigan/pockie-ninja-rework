@@ -21,8 +21,8 @@ import {
   type WingsView,
 } from '../../../../shared/src/schemas/wings.js'
 import type { Db } from '../../db/client.js'
-import { characterWingCollection, inventoryItems } from '../../db/schema.js'
-import { bagItemsWhere, requireBagRoom, unequippedBagItemsWhere } from '../../game/bag.js'
+import { characters, characterWingCollection, inventoryItems } from '../../db/schema.js'
+import { bagItemsWhere, isWornIn, requireBagRoom, unequippedBagItemsWhere } from '../../game/bag.js'
 import { itemNameKey, rebornBloodlines, rebornWings } from '../../game/data.js'
 import { consumeOne, grantItems, type Tx } from '../../game/progress.js'
 import { WING_SLOT } from '../../game/wings.js'
@@ -58,13 +58,14 @@ const labelOf = (field: string) =>
 const statList = (bonuses: Partial<Bonuses>) =>
   Object.entries(bonuses).map(([field, value]) => ({ field, label: labelOf(field), value }))
 
-const ownedWing = (row: ItemRow): OwnedWing => ({
+/** `equipped`: worn in the active equipment set. */
+const ownedWing = (row: ItemRow, activeSet: number): OwnedWing => ({
   id: row.id,
   itemId: row.itemId,
   nameKey: itemNameKey(row.itemId),
   kind: kindOf(row.itemId)!,
   level: row.enhanceLevel,
-  equipped: row.equippedSlot === WING_SLOT,
+  equipped: isWornIn(row, activeSet) && row.equippedSlot === WING_SLOT,
   stats: statList(wingStats(row.itemId, row.enhanceLevel)),
   next:
     row.enhanceLevel < WING_MAX_LEVEL
@@ -74,6 +75,10 @@ const ownedWing = (row: ItemRow): OwnedWing => ({
 
 async function wingsView(tx: Tx | Db, characterId: string): Promise<WingsView> {
   const rows = await tx.select().from(inventoryItems).where(bagItemsWhere(characterId))
+  const [owner] = await tx
+    .select({ activeSet: characters.activeSet })
+    .from(characters)
+    .where(eq(characters.id, characterId))
   const registered = new Set(
     (
       await tx
@@ -87,7 +92,9 @@ async function wingsView(tx: Tx | Db, characterId: string): Promise<WingsView> {
     rows
       .filter((row) => row.itemId === itemId && !row.equippedSlot)
       .reduce((sum, row) => sum + row.count, 0)
-  const owned = rows.filter((row) => kindOf(row.itemId)).map(ownedWing)
+  const owned = rows
+    .filter((row) => kindOf(row.itemId))
+    .map((row) => ownedWing(row, owner!.activeSet))
   return {
     maxLevel: WING_MAX_LEVEL,
     equipped: owned.find((wing) => wing.equipped) ?? null,

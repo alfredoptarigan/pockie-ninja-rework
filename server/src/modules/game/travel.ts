@@ -66,6 +66,33 @@ export function travelRefusal(
   return undefined
 }
 
+/** Reborn's Village Elder "Change Village": only in Angel City, for 50,000 Stone. */
+export const ANGEL_CITY = 161
+export const CHANGE_VILLAGE_STONE = 50_000
+
+/**
+ * Why the ninja cannot move to the village of scene `village` (a nation's castle), or the nation
+ * it then belongs to.
+ */
+export function changeVillage(
+  character: Pick<Traveller, 'sceneId' | 'nation'> & { stone: number },
+  village: number,
+): { nation: number } | Refusal {
+  const entry = Object.entries(nationScenes()).find(([, scenes]) => scenes.castle === village)
+  if (!entry) return { code: 'no_village', message: 'There is no such village.' }
+  if (character.sceneId !== ANGEL_CITY) {
+    return { code: 'not_here', message: 'Only the Angel City Elder can change your village.' }
+  }
+  const nation = Number(entry[0])
+  if (nation === character.nation) {
+    return { code: 'same_village', message: 'You already belong to that village.' }
+  }
+  if (character.stone < CHANGE_VILLAGE_STONE) {
+    return { code: 'no_stone', message: 'You need 50,000 stones.' }
+  }
+  return { nation }
+}
+
 /** GoHome / go out: the scene's ToScene when set, else the village or its first field. */
 export function homeScene(character: Traveller, via: 'home' | 'out') {
   const toScene = Number(scene(character.sceneId)?.ToScene ?? 0)

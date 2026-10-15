@@ -7,6 +7,7 @@ import {
   useLockItem,
   useMoveItem,
   useSellItems,
+  useSetActiveSet,
   useSortBag,
   useSplitItem,
   useSwapItems,
@@ -60,6 +61,7 @@ export function useBagRequests() {
   const useMany = useUseMultiple()
   const sell = useSellItems()
   const sort = useSortBag()
+  const switchSet = useSetActiveSet()
   const appraise = useAppraise()
   const repair = useRepair()
   const pending = useIsMutating()
@@ -75,6 +77,7 @@ export function useBagRequests() {
     useMany: useMany.mutateAsync,
     sell: sell.mutateAsync,
     sort: sort.mutateAsync,
+    switchSet: switchSet.mutateAsync,
     appraise: appraise.mutateAsync,
     repair: repair.mutateAsync,
   }

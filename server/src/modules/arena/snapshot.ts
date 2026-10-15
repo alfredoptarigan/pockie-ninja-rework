@@ -1,7 +1,8 @@
 // The arena defence snapshot (decision 9): the fighter of live fights at full HP and MP, stored
 // on arena_players and refreshed on every gear, level or skill change.
-import { and, eq, isNotNull } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '../../db/schema.js'
+import { wornItemsWhere } from '../../game/bag.js'
 import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.js'
 import { talentFighterInput } from '../../game/talents.js'
 import { bloodlineBonuses } from '../../game/bloodlines.js'
@@ -31,12 +32,7 @@ export interface ArenaFighter {
 
 /** A ninja as an arena fighter: playerFighterFrom with the equipped rows, at full HP and MP. */
 export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<ArenaFighter> {
-  const equipped = await tx
-    .select()
-    .from(inventoryItems)
-    .where(
-      and(eq(inventoryItems.characterId, character.id), isNotNull(inventoryItems.equippedSlot)),
-    )
+  const equipped = await tx.select().from(inventoryItems).where(wornItemsWhere(character.id))
   const bloodlines = await bloodlineBonuses(tx, character.id)
   const wings = await wingBonuses(tx, character.id)
   const pet = await activePetFighterInput(tx, character.id)

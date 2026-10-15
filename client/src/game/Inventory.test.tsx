@@ -464,6 +464,73 @@ describe('Inventory tooltip', () => {
   })
 })
 
+describe('Inventory equipment sets', () => {
+  const setBar = () => screen.getByRole('group', { name: 'Equipment sets' })
+  const setButton = (name: string) => within(setBar()).getByRole('button', { name })
+  const wornClub = { ...club, equippedSlot: 'Weapon', equippedSet: 1, page: null, slot: null }
+
+  it('marks the worn set, empty sets and the VIP sets, with their status tooltips', async () => {
+    renderBag([wornClub])
+    await within(await screen.findByRole('list', { name: 'Equipment' })).findByText(/Dogsmasher/)
+    expect(setButton('I')).toHaveAttribute('aria-pressed', 'true')
+    expect(setButton('I')).toHaveAttribute('data-state', 'active')
+    expect(setButton('II')).toHaveAttribute('aria-pressed', 'false')
+    expect(setButton('II')).toHaveAttribute('data-state', 'empty')
+    for (const name of ['IV', 'V']) {
+      expect(setButton(name)).toHaveAttribute('aria-disabled', 'true')
+      expect(setButton(name)).toHaveAttribute('data-state', 'vip')
+    }
+
+    await userEvent.hover(setButton('I'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Set Status')
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Has Equipment')
+    await userEvent.hover(setButton('II'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Empty')
+    await userEvent.hover(setButton('IV'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('VIP required for equipment sets')
+    await userEvent.unhover(setButton('IV'))
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument()
+  })
+
+  it('switches sets through the server and shows the new set in the slots', async () => {
+    const sword = { ...fists, equippedSlot: 'Weapon', equippedSet: 2, page: null, slot: null }
+    const { fetchMock } = renderBag([wornClub, sword], (bag) => ({
+      'POST /api/game/sets/active': () => {
+        bag.items = [wornClub, sword]
+        return json({ character: { ...character, activeSet: 2 }, items: bag.items })
+      },
+    }))
+    expect(
+      await within(await screen.findByRole('list', { name: 'Equipment' })).findByText(/Weapon:/),
+    ).toHaveTextContent('Dogsmasher Equipped')
+
+    await userEvent.click(setButton('I'))
+    await userEvent.click(setButton('IV'))
+    expect(posted(fetchMock)).toHaveLength(0)
+
+    await userEvent.click(setButton('II'))
+    expect(requestBody(fetchMock, 'POST /api/game/sets/active')).toEqual({ set: 2 })
+    await waitFor(() => expect(setButton('II')).toHaveAttribute('aria-pressed', 'true'))
+    expect(within(equipment()).getByText(/Weapon:/)).toHaveTextContent(
+      'Newbie Swiping Fists Equipped',
+    )
+    // Items worn in another set stay out of the bag.
+    expect(screen.getByText('Your bag is empty.')).toBeVisible()
+  })
+
+  it('opens sets IV and V to VIPs', async () => {
+    renderBag([], undefined, { hero: { ...character, vipUntil: '2999-01-01T00:00:00Z' } })
+    await waitFor(() => expect(setButton('IV')).not.toHaveAttribute('aria-disabled'))
+    expect(setButton('V')).toHaveAttribute('data-state', 'empty')
+  })
+
+  it('compares a bag item only with what the worn set wears', async () => {
+    renderBag([fists, { ...wornClub, equippedSet: 2 }])
+    await userEvent.hover(await screen.findByRole('button', { name: 'Newbie Swiping Fists' }))
+    expect(screen.getByRole('tooltip')).not.toHaveTextContent('Equipped Item')
+  })
+})
+
 describe('Inventory equipment', () => {
   it('shows every equipment slot, the outfit as an item', async () => {
     const ring = {

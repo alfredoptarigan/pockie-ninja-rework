@@ -7,9 +7,9 @@ import {
   type EquipConfig,
   type EquippedItem,
 } from '@pockie/game-core'
-import { and, eq, isNotNull } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import { characters, inventoryItems } from '../db/schema.js'
+import { wornItemsWhere } from './bag.js'
 import { avatarStats, equipTables, item } from './data.js'
 import type { Tx } from './progress.js'
 
@@ -19,11 +19,9 @@ export type Gear = Pick<ItemRow, 'itemId'> &
   Partial<Pick<ItemRow, 'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props'>>
 type Wearer = Pick<typeof characters.$inferSelect, 'avatarId' | 'gender'>
 
+/** The rows of the active equipment set. */
 export async function equippedGear(tx: Tx | Db, characterId: string): Promise<Gear[]> {
-  return tx
-    .select()
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, characterId), isNotNull(inventoryItems.equippedSlot)))
+  return tx.select().from(inventoryItems).where(wornItemsWhere(characterId))
 }
 
 /** A null durability column means full (or an item without durability), so the item is active. */

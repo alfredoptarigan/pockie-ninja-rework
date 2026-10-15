@@ -1,7 +1,9 @@
 // Reborn bag actions (Inventory window): move, swap, lock, split, use multiple, Multi Sell and
 // Sort Inventory. Every action returns the character and the whole inventory list.
 import {
+  activeSetSchema,
   bagMoveSchema,
+  FIRST_VIP_SET,
   bagSellSchema,
   bagSortSchema,
   bagSplitSchema,
@@ -35,7 +37,9 @@ import {
 } from '../../game/bag-grid.js'
 import type { Tx } from '../../game/progress.js'
 import { canSell, sellRows } from '../../game/sell.js'
+import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
+import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { reloadCharacter, ownedItem, useItem } from '../game/actions.js'
 import { lockCharacter, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
@@ -107,6 +111,20 @@ export async function bagRoutes(app: FastifyInstance, { db }: { db: Db }) {
     })
   }
   const itemId = (request: FastifyRequest) => itemActionParamsSchema.parse(request.params).id
+
+  // Reborn's equipment-set bar (setActiveLoadout): wears set I-V, a no-op for the worn one. Rows of
+  // the other sets stay where they are; IV and V need VIP.
+  app.post('/sets/active', { config: { rateLimit: RATE_LIMITS.item } }, (request) => {
+    const { set } = activeSetSchema.parse(request.body)
+    return act(request, async (tx, c) => {
+      if (set === c.activeSet) return {}
+      if (set >= FIRST_VIP_SET && !isVip(c))
+        throw bad('vip_required', 'VIP required for equipment sets')
+      await tx.update(characters).set({ activeSet: set }).where(eq(characters.id, c.id))
+      await refreshArenaSnapshot(tx, c.id)
+      return {}
+    })
+  })
 
   app.post('/items/:id/move', { config: { rateLimit: RATE_LIMITS.bagMove } }, (request) => {
     const id = itemId(request)

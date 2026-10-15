@@ -74,6 +74,8 @@ export interface Character {
   sceneId: number
   /** VIP membership end (ISO instant); null without VIP (decision 14). */
   vipUntil: string | null
+  /** Worn equipment set (Reborn loadout) 1-5. */
+  activeSet: number
 }
 
 /**

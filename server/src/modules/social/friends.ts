@@ -1,7 +1,8 @@
 // Friends and the Blocked list (decisions 16 and 17, FriendSystem in friends-mail.md).
-import { and, count, desc, eq, gt, isNotNull, ne, or, sql } from 'drizzle-orm'
+import { and, count, desc, eq, gt, ne, or, sql } from 'drizzle-orm'
 import type { Db } from '../../db/client.js'
 import { blocks, characters, friends, inventoryItems, mails } from '../../db/schema.js'
+import { wornItemsWhere } from '../../game/bag.js'
 import { itemNameKey } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
 import { sendSystemMail } from '../../game/system-mail.js'
@@ -204,10 +205,7 @@ export async function scenePlayersView(db: Tx | Db, me: CharacterRow): Promise<S
 /** Reborn's View Character: public fields and the worn items, never stats or the bag. */
 export async function playerView(db: Tx | Db, characterId: string): Promise<PlayerView> {
   const row = await characterById(db, characterId)
-  const worn = await db
-    .select()
-    .from(inventoryItems)
-    .where(and(eq(inventoryItems.characterId, row.id), isNotNull(inventoryItems.equippedSlot)))
+  const worn = await db.select().from(inventoryItems).where(wornItemsWhere(row.id))
   return {
     player: toPlayer(row),
     online: isOnline(row.id),
