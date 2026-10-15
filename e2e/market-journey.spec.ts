@@ -1,6 +1,7 @@
-// M4 Market journey: one ninja lists an item, another buys it and claims it from the warehouse,
-// and the seller claims the proceeds (after the 10% tax) from the market wallet. Levels, Stone and
-// the item are seeded; listing, buying and claiming go through the Market window.
+// Market Board journey (Reborn's Market window): one ninja lists an item from Sell Items, another
+// finds it on the Market tab, buys it and collects it from Storage; the seller sees the sale in
+// History and collects the proceeds (after the 10% tax) from the Storage Vault. Levels, Stone and
+// the item are seeded; everything else goes through the window.
 import { expect, test, type Page } from '@playwright/test'
 import {
   createTwoNinjas,
@@ -34,7 +35,7 @@ async function openMarket(page: Page, tab: string) {
   return market
 }
 
-test('a ninja lists an item, another buys it and the seller claims the proceeds', async ({
+test('a ninja lists an item, another buys and collects it, the seller collects the proceeds', async ({
   browser,
 }) => {
   // Arrange: two level-25 ninjas (the Market level) with Stone; the seller has strawberries.
@@ -48,61 +49,64 @@ test('a ninja lists an item, another buys it and the seller claims the proceeds'
       await expectCurrency(page, 'Stone', 1000)
     }
 
-    // Act: the seller lists one strawberry for 200 Stone.
-    let market = await openMarket(seller.page, 'Sell')
-    await market
-      .getByRole('region', { name: 'Items you can sell' })
-      .getByRole('button')
-      .filter({ hasText: `${ITEM.name} x${ITEM.count}` })
+    // Act: the seller picks the strawberries and lists one for 200 Stones.
+    let market = await openMarket(seller.page, 'Sell Items')
+    await market.getByRole('button', { name: 'Select an item to sell' }).click()
+    await dialog(seller.page, 'Select an Item')
+      .getByRole('button', { name: `${ITEM.name} x${ITEM.count}` })
       .click()
-    await market.getByLabel('Quantity').fill('1')
-    await market.getByLabel('Stone per unit').fill(String(PRICE))
-    await market.getByRole('button', { name: 'List item' }).click()
+    const sell = dialog(seller.page, 'Sell Item')
+    await sell.getByLabel('Quantity').fill('1')
+    await sell.getByLabel('Unit Price').fill(String(PRICE))
+    await expect(sell).toContainText(new RegExp(`You receive:\\s*${PROCEEDS}`))
+    await sell.getByRole('button', { name: 'Sell', exact: true }).click()
 
-    // Assert: listed, the fee paid and the rest of the stack still in the bag.
-    await expect(market).toContainText(`${ITEM.name} is on the Market.`)
-    await expect(market).toContainText('Listings: 1 of')
+    // Assert: listed, the fee paid and the listing in Sell Items.
+    await expect(market.getByRole('status')).toHaveText(`${ITEM.name} is on the Market.`)
+    await expect(market).toContainText('Listings: 1/5')
+    await expect(market.getByRole('table', { name: 'Your listings' })).toContainText(ITEM.name)
     const afterFee = stoneOf(seller.name)
     expect(afterFee).toBeLessThan(1000)
     await expectCurrency(seller.page, 'Stone', afterFee)
     await market.getByRole('button', { name: 'Close' }).click()
 
-    // Act: the buyer finds the listing and buys it.
-    market = await openMarket(buyer.page, 'Browse')
-    await market.getByLabel('Name').fill(ITEM.name)
-    await market.getByRole('button', { name: 'Search' }).click()
-    const listing = market
-      .getByRole('list', { name: 'Listings' })
-      .getByRole('listitem')
-      .filter({ hasText: seller.name })
-    await listing.getByRole('button', { name: new RegExp(`^Buy ${ITEM.name}`) }).click()
-    await dialog(buyer.page, 'Buy').getByRole('button', { name: 'Confirm purchase' }).click()
+    // Act: the buyer searches the board, opens the strawberries and buys the cheapest.
+    market = await openMarket(buyer.page, 'Market')
+    await market.getByLabel('Search').fill(ITEM.name)
+    await market.getByRole('button', { name: `View ${ITEM.name}` }).click()
+    await expect(market).toContainText('1 Listings · Lowest:')
+    await market.getByRole('button', { name: 'Buy Cheapest' }).click()
+    await dialog(buyer.page, 'Confirm Purchase').getByRole('button', { name: 'Confirm' }).click()
 
-    // Assert: paid in Stone; the item waits in the warehouse until claimed into the bag.
-    await expect(market).toContainText('Purchase complete. Claim the item in the Warehouse tab.')
+    // Assert: paid in Stone; the item waits in Storage until collected into the bag.
+    await expect(market.getByRole('status')).toContainText('Claim it in Storage.')
     await expectCurrency(buyer.page, 'Stone', 1000 - PRICE)
-    await market.getByRole('tab', { name: 'Warehouse' }).click()
+    await market.getByRole('tab', { name: 'Recent' }).click()
+    await expect(market.getByRole('table', { name: 'Recent sales' })).toContainText(ITEM.name)
+    await market.getByRole('tab', { name: 'Storage' }).click()
     const tile = market.getByRole('button', { name: new RegExp(`^Claim ${ITEM.name}`) })
     await tile.click()
-    await expect(market).toContainText('Item claimed.')
+    await expect(market.getByRole('status')).toHaveText('Item claimed.')
     await expect(tile).toHaveCount(0)
     expect(
       sql(
         `select sum(i.count) from inventory_items i join characters c on c.id = i.character_id
-         where c.name = :'name' and i.item_id = :'item'`,
+         where c.name = :'name' and i.item_id = :'item' and i.location = 'bag'`,
         { name: buyer.name, item: ITEM.id },
       ),
     ).toBe('1')
 
-    // Act: the seller claims the sale from the market wallet.
-    market = await openMarket(seller.page, 'Warehouse')
+    // Act: the seller checks History and withdraws the sale from the Storage Vault.
+    market = await openMarket(seller.page, 'History')
+    await expect(market).toContainText(`Received: ${PROCEEDS}`)
+    await market.getByRole('tab', { name: 'Storage' }).click()
     await market.getByRole('button', { name: 'Vault', exact: true }).click()
     const vault = market.getByRole('dialog', { name: 'Vault' })
-    await expect(vault.getByRole('row', { name: 'Stones' })).toContainText(`${PROCEEDS} Stone`)
+    await expect(vault.getByRole('row', { name: 'Stones' })).toContainText(String(PROCEEDS))
     await vault.getByRole('button', { name: 'Withdraw' }).click()
 
     // Assert: the proceeds after tax reach the seller's Stone.
-    await expect(market).toContainText('Wallet claimed.')
+    await expect(market.getByRole('status')).toHaveText('Wallet claimed.')
     await expectCurrency(seller.page, 'Stone', afterFee + PROCEEDS)
   } finally {
     await Promise.all(players.map(({ context }) => context.close()))

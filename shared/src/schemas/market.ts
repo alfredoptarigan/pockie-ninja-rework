@@ -1,27 +1,10 @@
 // Market API (docs/original-data/trade-market.md). Rules live in game-core/src/economy/market.ts.
 import { z } from 'zod'
+import type { BagItemInfo } from './bag.js'
+import type { GearView } from './forge.js'
 
 const MAX_PRICE = 1_000_000
-const MAX_SEARCH_IDS = 500
 const price = z.number().int().min(1).max(MAX_PRICE).nullable().default(null)
-const itemIdList = z
-  .string()
-  .transform((value) => value.split(',').filter(Boolean))
-  .pipe(z.array(z.string().regex(/^i\d+$/)).max(MAX_SEARCH_IDS))
-
-/** Category key of the martsellshow tree ("0", "0_0", "0_0_7_1"); a prefix browses the subtree. */
-export const marketCategoryPattern = /^\d{1,3}(_\d{1,3}){0,4}$/
-
-export const marketBrowseSchema = z
-  .object({
-    category: z.string().regex(marketCategoryPattern).optional(),
-    /** Name search, resolved by the client to item ids (the server has no item names). */
-    itemIds: itemIdList.optional(),
-    sort: z.enum(['time', 'stone', 'gold']).default('time'),
-    order: z.enum(['asc', 'desc']).default('asc'),
-    page: z.coerce.number().int().min(1).max(10_000).default(1),
-  })
-  .strict()
 
 export const marketListSchema = z
   .object({
@@ -45,7 +28,6 @@ export const marketCancelSchema = z.object({ listingId: z.uuid() }).strict()
 export const marketClaimItemSchema = z.object({ inventoryId: z.uuid().optional() }).strict()
 export const marketClaimWalletSchema = z.object({}).strict()
 
-export type MarketBrowseInput = z.input<typeof marketBrowseSchema>
 export type MarketListInput = z.input<typeof marketListSchema>
 export type MarketBuyInput = z.infer<typeof marketBuySchema>
 
@@ -58,6 +40,10 @@ export interface MarketItem {
   enhanceLevel: number
   identifyCount: number
   props: { propId: number; value: number }[]
+  /** Item table facts (type, level) for the board filters and the tooltip. */
+  info: BagItemInfo
+  /** Equipment only: what the tooltip shows of the gear. */
+  gear?: GearView
 }
 
 export interface MarketListing extends MarketItem {
@@ -70,11 +56,33 @@ export interface MarketListing extends MarketItem {
   mine: boolean
 }
 
-export interface MarketBrowseView {
+/** Every live listing; the client groups, filters and sorts them (Reborn's Market tab). */
+export interface MarketBoardView {
   listings: MarketListing[]
-  page: number
-  pages: number
-  total: number
+}
+
+/** One completed buy (an audit row): totals the buyer paid and the tax kept from the seller. */
+export interface MarketSale {
+  id: string
+  itemId: string
+  count: number
+  stone: number
+  gold: number
+  taxStone: number
+  taxGold: number
+  at: string
+  info: BagItemInfo
+}
+
+/** Reborn's Recent tab: the last sales on the whole Market. */
+export interface MarketRecentView {
+  sales: MarketSale[]
+}
+
+/** Reborn's History tab: the caller's sales and purchases, newest first. */
+export interface MarketHistoryView {
+  sales: MarketSale[]
+  purchases: MarketSale[]
 }
 
 export interface MarketOwnListing extends MarketListing {

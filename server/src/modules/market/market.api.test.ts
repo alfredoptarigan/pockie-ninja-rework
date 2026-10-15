@@ -1,5 +1,5 @@
 import { CURRENCY_CAP } from '../../../../game-core/src/economy/market.js'
-import { and, eq, sql } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import {
@@ -151,9 +151,9 @@ async function list(
 
 describe('Market access', () => {
   it('requires login and level 25', async () => {
-    expect((await new Client(app).get(`${base}/browse`)).statusCode).toBe(401)
+    expect((await new Client(app).get(`${base}/board`)).statusCode).toBe(401)
     await update(buyer.id, { level: 24 })
-    const response = await get(buyer, 'browse')
+    const response = await get(buyer, 'board')
     expect(response.statusCode).toBe(403)
     expect(response.json().error.code).toBe('market_level')
   })
@@ -399,6 +399,19 @@ describe('buying', () => {
     expect((await char(seller.id)).marketStone).toBe(450)
   })
 
+  it('settles two ninjas buying from each other at once (stable lock order, no deadlock)', async () => {
+    for (let round = 0; round < 3; round++) {
+      const fromSeller = await list(seller, FOOD, { priceStone: 10 })
+      const fromBuyer = await list(buyer, FOOD, { priceStone: 20 })
+      const results = await Promise.all([
+        post(buyer, 'buy', { listingId: fromSeller.listingId, count: 1 }),
+        post(seller, 'buy', { listingId: fromBuyer.listingId, count: 1 }),
+      ])
+      expect(results.map((r) => r.statusCode)).toEqual([200, 200])
+      await db.execute(sql`truncate table market_listings, market_warehouse cascade`)
+    }
+  })
+
   it('refuses an expired listing, and a buy racing the sweep has one outcome', async () => {
     const { listingId } = await list(seller)
     await db
@@ -530,28 +543,81 @@ describe('warehouse and wallet claims', () => {
   })
 })
 
-describe('browsing', () => {
-  it('filters by category prefix and item ids, sorts by price and pages by 8', async () => {
-    for (let n = 0; n < 5; n++) await list(seller, FOOD, { priceStone: 100 + n })
-    for (let n = 0; n < 5; n++) await list(third, FOOD, { priceStone: 200 + n })
-    await list(buyer, BLADE, { priceStone: 50 })
+describe('board, recent sales and history', () => {
+  it('lists every live listing, soonest to end first, with item facts and gear', async () => {
+    const food = await list(seller, FOOD, { priceStone: 100, hours: 24 })
+    const blade = await list(third, BLADE, { priceStone: null, priceGold: 50 })
+    const gone = await list(third, FOOD, { priceStone: 7 })
     await db
       .update(marketListings)
       .set({ expiresAt: new Date(Date.now() - 1), createdAt: new Date(Date.now() - 1000) })
-      .where(and(eq(marketListings.sellerId, third.id), eq(marketListings.priceStone, 204)))
+      .where(eq(marketListings.id, gone.listingId))
 
-    const first = (await get(buyer, 'browse?category=1&sort=stone&order=desc')).json()
-    expect(first).toMatchObject({ total: 9, pages: 2, page: 1 })
-    expect(first.listings).toHaveLength(8)
-    expect(first.listings[0]).toMatchObject({ priceStone: 203, sellerName: 'Third', mine: false })
-    const second = (await get(buyer, 'browse?category=1&sort=stone&order=desc&page=2')).json()
-    expect(second.listings.map((l: { priceStone: number }) => l.priceStone)).toEqual([100])
+    const view = (await get(seller, 'board')).json()
+    expect(view.listings.map((l: { id: string }) => l.id)).toEqual([
+      blade.listingId,
+      food.listingId,
+    ])
+    expect(view.listings[0]).toMatchObject({
+      itemId: BLADE,
+      sellerName: 'Third',
+      priceGold: 50,
+      priceStone: null,
+      mine: false,
+      info: expect.objectContaining({ kind: 'equip', equipSlot: expect.any(String) }),
+      gear: expect.objectContaining({ identifyCount: 2 }),
+    })
+    expect(view.listings[1]).toMatchObject({ mine: true, info: { kind: expect.any(String) } })
+    expect(view.listings[1].gear).toBeUndefined()
+  })
 
-    const weapons = (await get(seller, `browse?category=0_0`)).json()
-    expect(weapons.listings).toEqual([expect.objectContaining({ itemId: BLADE })])
-    const search = (await get(seller, `browse?itemIds=${BLADE},i1`)).json()
-    expect(search.total).toBe(1)
-    expect((await get(seller, 'browse?category=1_0_')).statusCode).toBe(400)
+  it('shows the last sales newest first, without other Market moves', async () => {
+    const first = await list(seller, FOOD, { stack: 5, count: 5, priceStone: 100 })
+    await post(buyer, 'buy', { listingId: first.listingId, count: 2 })
+    const second = await list(third, BLADE, { priceStone: null, priceGold: 40 })
+    await post(buyer, 'buy', { listingId: second.listingId, count: 1 })
+    await post(seller, 'cancel', { listingId: first.listingId })
+
+    const { sales } = (await get(third, 'recent')).json()
+    expect(sales).toHaveLength(2)
+    expect(sales[0]).toMatchObject({ itemId: BLADE, count: 1, stone: 0, gold: 40 })
+    expect(sales[1]).toMatchObject({ itemId: FOOD, count: 2, stone: 200, gold: 0 })
+    expect(sales[1].info).toMatchObject({ kind: expect.any(String) })
+    expect(Date.parse(sales[0].at)).toBeGreaterThanOrEqual(Date.parse(sales[1].at))
+  })
+
+  it('keeps the recent list to the last 50 sales', async () => {
+    await db.insert(marketAudit).values(
+      Array.from({ length: 55 }, (_, n) => ({
+        action: 'buy' as const,
+        characterId: buyer.id,
+        counterpartyId: seller.id,
+        itemId: FOOD,
+        count: 1,
+        stone: n + 1,
+        createdAt: new Date(Date.now() - (55 - n) * 1000),
+      })),
+    )
+    const { sales } = (await get(buyer, 'recent')).json()
+    expect(sales).toHaveLength(50)
+    expect(sales[0].stone).toBe(55)
+  })
+
+  it("shows a ninja's own sales with the tax and own purchases, nobody else's", async () => {
+    const { listingId } = await list(seller, FOOD, { stack: 3, count: 3, priceStone: 100 })
+    await post(buyer, 'buy', { listingId, count: 3 })
+
+    const sold = (await get(seller, 'history')).json()
+    expect(sold.purchases).toEqual([])
+    expect(sold.sales).toEqual([
+      expect.objectContaining({ itemId: FOOD, count: 3, stone: 300, taxStone: 30, gold: 0 }),
+    ])
+    const bought = (await get(buyer, 'history')).json()
+    expect(bought.sales).toEqual([])
+    expect(bought.purchases).toEqual([
+      expect.objectContaining({ itemId: FOOD, count: 3, stone: 300 }),
+    ])
+    expect((await get(third, 'history')).json()).toEqual({ sales: [], purchases: [] })
   })
 
   it('shows my listings with fees and the sellable bag items', async () => {

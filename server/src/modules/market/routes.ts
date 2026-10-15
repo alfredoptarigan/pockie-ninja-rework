@@ -2,7 +2,6 @@
 import { eq } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import {
-  marketBrowseSchema,
   marketBuySchema,
   marketCancelSchema,
   marketClaimItemSchema,
@@ -11,7 +10,6 @@ import {
 } from '../../../../shared/src/schemas/market.js'
 import type { Db } from '../../db/client.js'
 import { characters } from '../../db/schema.js'
-import { marketCategories } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
 import { characterOf, lockCharacter, requireUser, toCharacter } from '../game/characters.js'
 import {
@@ -23,7 +21,7 @@ import {
   requireMarket,
 } from './market.js'
 import { MARKET_RATE_LIMITS as LIMITS } from './rate-limits.js'
-import { browse, mine, warehouseView } from './views.js'
+import { board, history, mine, recentSales, warehouseView } from './views.js'
 
 type Character = typeof characters.$inferSelect
 
@@ -59,14 +57,16 @@ export default async function marketRoutes(
       return { ...result, character: await reload(tx, c.id) }
     })
 
-  app.get('/categories', { config: { rateLimit: LIMITS.read } }, async (request) => {
-    requireUser(request)
-    return { categories: marketCategories() }
+  app.get('/board', { config: { rateLimit: LIMITS.read } }, async (request) =>
+    board(db, await reader(request), now()),
+  )
+  app.get('/recent', { config: { rateLimit: LIMITS.read } }, async (request) => {
+    await reader(request)
+    return recentSales(db)
   })
-  app.get('/browse', { config: { rateLimit: LIMITS.read } }, async (request) => {
-    const c = await reader(request)
-    return browse(db, c, marketBrowseSchema.parse(request.query), now())
-  })
+  app.get('/history', { config: { rateLimit: LIMITS.read } }, async (request) =>
+    history(db, await reader(request)),
+  )
   app.get('/mine', { config: { rateLimit: LIMITS.read } }, async (request) =>
     mine(db, await reader(request), now()),
   )

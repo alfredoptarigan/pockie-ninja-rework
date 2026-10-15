@@ -1,34 +1,58 @@
-// Market read views: browse, own listings (with the Sell tab's bag items) and the warehouse.
-import { and, asc, count, desc, eq, gt, inArray, isNull, sql, type SQL } from 'drizzle-orm'
+// Market read views: the board, own listings (with the Sell tab's bag items), the warehouse and the
+// sales (Recent and History tabs, read from the audit trail).
+import { and, asc, desc, eq, gt, isNull } from 'drizzle-orm'
 import {
   listingFee,
   MARKET_HOURS,
   MARKET_MAX_LISTINGS,
-  MARKET_PAGE_SIZE,
   MARKET_WAREHOUSE_ROWS,
 } from '../../../../game-core/src/economy/market.js'
 import type {
-  MarketBrowseView,
+  MarketBoardView,
+  MarketHistoryView,
   MarketItem,
   MarketMineView,
+  MarketRecentView,
+  MarketSale,
   MarketWarehouseView,
 } from '../../../../shared/src/schemas/market.js'
 import type { Db } from '../../db/client.js'
-import { characters, inventoryItems, marketListings, marketWarehouse } from '../../db/schema.js'
+import {
+  characters,
+  inventoryItems,
+  marketAudit,
+  marketListings,
+  marketWarehouse,
+} from '../../db/schema.js'
+import { itemInfo } from '../../game/bag.js'
+import { gearView } from '../../game/gear.js'
 import { sellability } from './market.js'
 
 type Character = typeof characters.$inferSelect
 type ItemRow = typeof inventoryItems.$inferSelect
 
-const itemView = (row: ItemRow): MarketItem => ({
-  inventoryId: row.id,
-  itemId: row.itemId,
-  count: row.count,
-  bound: row.bound,
-  enhanceLevel: row.enhanceLevel,
-  identifyCount: row.identifyCount,
-  props: row.props,
-})
+const itemView = (row: ItemRow): MarketItem => {
+  const gear = gearView(row)
+  return {
+    inventoryId: row.id,
+    itemId: row.itemId,
+    count: row.count,
+    bound: row.bound,
+    enhanceLevel: row.enhanceLevel,
+    identifyCount: row.identifyCount,
+    props: row.props,
+    info: itemInfo(row.itemId),
+    ...(gear && { gear }),
+  }
+}
+
+/**
+ * The board loads every live listing at once, as Reborn's Market tab does.
+ * ponytail: one capped read; page or filter on the server when the Market outgrows it.
+ */
+export const MARKET_BOARD_LIMIT = 1000
+/** Reborn's Recent tab: "Last 50 Sales". History keeps the same depth per side. */
+export const MARKET_RECENT_SALES = 50
 
 const listingQuery = (db: Db) =>
   db
@@ -49,55 +73,54 @@ const listingView = (viewerId: string) => (row: ListingRow) => ({
   mine: row.listing.sellerId === viewerId,
 })
 
-export interface BrowseQuery {
-  category?: string | undefined
-  itemIds?: string[] | undefined
-  sort: 'time' | 'stone' | 'gold'
-  order: 'asc' | 'desc'
-  page: number
+/** Every live listing, soonest to end first. */
+export async function board(db: Db, viewer: Character, now: Date): Promise<MarketBoardView> {
+  const rows = await listingQuery(db)
+    .where(gt(marketListings.expiresAt, now))
+    .orderBy(asc(marketListings.expiresAt), asc(marketListings.id))
+    .limit(MARKET_BOARD_LIMIT)
+  return { listings: rows.map(listingView(viewer.id)) }
 }
 
-/** Live listings of a category subtree, optionally limited to item ids (the name search). */
-export async function browse(
-  db: Db,
-  viewer: Character,
-  query: BrowseQuery,
-  now: Date,
-): Promise<MarketBrowseView> {
-  const where = and(
-    gt(marketListings.expiresAt, now),
-    query.category
-      ? sql`(${marketListings.category} = ${query.category} or starts_with(${marketListings.category}, ${`${query.category}_`}))`
-      : undefined,
-    query.itemIds ? inArray(inventoryItems.itemId, query.itemIds) : undefined,
-  )
-  const column = {
-    time: marketListings.expiresAt,
-    stone: marketListings.priceStone,
-    gold: marketListings.priceGold,
-  }[query.sort]
-  const direction = query.order === 'asc' ? asc : desc
-  const orderBy: SQL[] = [
-    sql`${column} is null`, // listings without that price go last
-    direction(column),
-    asc(marketListings.id),
-  ]
-  const [{ total }] = (await db
-    .select({ total: count() })
-    .from(marketListings)
-    .innerJoin(inventoryItems, eq(inventoryItems.id, marketListings.inventoryItemId))
-    .where(where)) as [{ total: number }]
-  const rows = await listingQuery(db)
-    .where(where)
-    .orderBy(...orderBy)
-    .limit(MARKET_PAGE_SIZE)
-    .offset((query.page - 1) * MARKET_PAGE_SIZE)
-  return {
-    listings: rows.map(listingView(viewer.id)),
-    page: query.page,
-    pages: Math.max(1, Math.ceil(total / MARKET_PAGE_SIZE)),
-    total,
-  }
+type AuditRow = typeof marketAudit.$inferSelect
+
+const saleView = (row: AuditRow): MarketSale => ({
+  id: row.id,
+  itemId: row.itemId!,
+  count: row.count!,
+  stone: row.stone,
+  gold: row.gold,
+  taxStone: row.taxStone,
+  taxGold: row.taxGold,
+  at: row.createdAt.toISOString(),
+  info: itemInfo(row.itemId!),
+})
+
+/** Buys from the audit trail, newest first. */
+const sales = (db: Db, where?: ReturnType<typeof eq>) =>
+  db
+    .select()
+    .from(marketAudit)
+    .where(and(eq(marketAudit.action, 'buy'), where))
+    .orderBy(desc(marketAudit.createdAt), desc(marketAudit.id))
+    .limit(MARKET_RECENT_SALES)
+
+/**
+ * The last sales on the whole Market.
+ * ponytail: no index on market_audit (action, created_at), so this scans the audit trail; add a
+ * partial index on created_at where action = 'buy' once the trail is large.
+ */
+export async function recentSales(db: Db): Promise<MarketRecentView> {
+  return { sales: (await sales(db)).map(saleView) }
+}
+
+/** The caller's sales (they were the seller) and purchases. */
+export async function history(db: Db, c: Character): Promise<MarketHistoryView> {
+  const [sold, bought] = await Promise.all([
+    sales(db, eq(marketAudit.counterpartyId, c.id)),
+    sales(db, eq(marketAudit.characterId, c.id)),
+  ])
+  return { sales: sold.map(saleView), purchases: bought.map(saleView) }
 }
 
 /** Own listings (live and expired-but-not-swept), fees and the bag items that can be listed. */

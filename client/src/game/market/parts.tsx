@@ -1,65 +1,218 @@
-// Small pieces shared by the Market tabs: prices with the currency icons, item cells, rows,
-// the category tree and the pager, drawn with the exported 2011 Market skin pieces.
-import { useState, type CSSProperties, type ReactNode } from 'react'
+// Row pieces shared by the Market Board tabs (reborn-lazy-features.md "Market Board"): the item
+// name cell (TextBG2, 18px icon, underlined name, tooltip on hover), 22px data cells, the column
+// header, prices with their currency icon, the 10-row paginator and the item type filter.
+import { useState, type ReactNode } from 'react'
+import { sellerPayout } from '../../../../game-core/src/economy/market'
 import type { MarketItem } from '../../../../shared/src/schemas/market'
-import { itemName } from '../explore'
-import { borderColor } from '../forge/gear'
-import { ItemIcon } from '../ItemIcon'
-import type { MarketCategory } from './api'
-import { STEP_LABELS, TOP_LABELS } from './labels'
+import { ItemPicture } from '../inventory/BagGrid'
+import { itemName } from '../inventory/outfits'
+import { ItemTooltip } from '../ItemTooltip'
+import type { BagItemInfo } from '@pockie/shared'
+import type { InventoryItem } from '../types'
+import { itemNameKey } from '../world'
 
-export const ROW_STYLE: CSSProperties = {
-  borderStyle: 'solid',
-  borderWidth: 'var(--ui-list-row-border)',
-  borderImage: 'var(--ui-list-row) var(--ui-list-row-slice) fill / var(--ui-list-row-border)',
-}
-
+export type Coin = 'stone' | 'gold'
 const ICONS = { stone: 'var(--ui-icon-stone)', gold: 'var(--ui-icon-gold)' } as const
-const NAMES = { stone: 'Stone', gold: 'Gold' } as const
+export const COIN_NAMES = { stone: 'Stones', gold: 'Gold' } as const
+/** Reborn orders a group's currency stones < gift certificates < gold. */
+const COIN_RANK = { stone: 0, gold: 1 } as const
 
-/** An amount with its currency icon; "--" when the currency is not offered. */
-export function Price({ value, currency }: { value: number | null; currency: 'stone' | 'gold' }) {
-  if (value === null) return <span aria-label={`No ${NAMES[currency]} price`}>--</span>
+/** Reborn's paginator: 10 rows a page. */
+export const ROWS_PER_PAGE = 10
+export const CELL = 'game-value-box flex h-[22px] items-center justify-center px-[3px] truncate'
+
+/** An amount with its currency icon. */
+export function PriceTag({
+  value,
+  currency,
+  className = '',
+}: {
+  value: number
+  currency: Coin
+  className?: string
+}) {
   return (
-    <span className="inline-flex items-center gap-1 whitespace-nowrap">
+    <span className={`inline-flex items-center gap-[2px] whitespace-nowrap ${className}`}>
+      <span className="tabular-nums">{value.toLocaleString('en-US')}</span>
       <span
-        aria-hidden
-        className="inline-block size-4 bg-contain bg-center bg-no-repeat"
+        role="img"
+        aria-label={COIN_NAMES[currency]}
+        className="inline-block size-[14px] shrink-0 bg-contain bg-center bg-no-repeat"
         style={{ backgroundImage: ICONS[currency] }}
       />
-      <span>
-        {value.toLocaleString('en-US')} <span className="sr-only">{NAMES[currency]}</span>
-      </span>
     </span>
   )
 }
 
-export const marketItemName = (item: Pick<MarketItem, 'itemId' | 'enhanceLevel'>) =>
-  `${itemName(item.itemId)}${item.enhanceLevel ? ` +${item.enhanceLevel}` : ''}`
+export interface Priced {
+  priceStone: number | null
+  priceGold: number | null
+}
 
-export function ItemCell({ item }: { item: MarketItem }) {
-  const name = marketItemName(item)
-  const color = item.props.length ? borderColor({ identifyCount: item.props.length }) : undefined
+/** The prices a listing sets (one in Reborn; a 2011 listing may set both, and both are paid). */
+export const pricesOf = ({ priceStone, priceGold }: Priced) =>
+  (
+    [
+      ['stone', priceStone],
+      ['gold', priceGold],
+    ] as const
+  ).flatMap(([currency, value]) => (value === null ? [] : [{ currency, value }]))
+
+/** The price that ranks a listing: its first currency in Reborn's order. */
+export const mainPrice = (listing: Priced) => pricesOf(listing)[0]!
+
+/** Cheaper first: by currency rank, then amount. */
+export const byPrice = (a: Priced, b: Priced) => {
+  const [x, y] = [mainPrice(a), mainPrice(b)]
+  return COIN_RANK[x.currency] - COIN_RANK[y.currency] || x.value - y.value
+}
+
+/** Every price of a listing times `count`. */
+export function Prices({ listing, count = 1 }: { listing: Priced; count?: number }) {
   return (
-    <span className="flex min-w-0 items-center gap-2">
-      <ItemIcon itemId={item.itemId} name={name} className="size-8">
-        {item.count > 1 && (
-          <span className="absolute right-0 bottom-0 text-[10px] font-bold text-white [text-shadow:var(--shadow-game-text)]">
-            {item.count}
-          </span>
-        )}
-      </ItemIcon>
-      <span className="truncate" style={color ? { color: darker(color) } : undefined}>
-        {name}
-        {item.count > 1 && ` x${item.count}`}
-      </span>
+    <span className="inline-flex gap-[4px]">
+      {pricesOf(listing).map(({ currency, value }) => (
+        <PriceTag key={currency} value={value * count} currency={currency} />
+      ))}
     </span>
   )
 }
 
-/** The bag border colours are for dark cells; on the cream panel they need darker shades. */
-const darker = (color: string) =>
-  ({ '#00aeff': '#0a5f93', '#ff8a00': '#9a4a00', '#ffc600': '#7a5c00' })[color] ?? undefined
+/** What the seller loses of a sale total: the 10% tax (as the server rounds it). */
+export const taxOf = (total: number) => total - sellerPayout(total)
+
+/** A Market item as a bag item, for the shared name, picture and tooltip helpers. */
+export function asInventoryItem(
+  item: Pick<MarketItem, 'itemId' | 'count' | 'bound' | 'info'> & { inventoryId?: string },
+): InventoryItem {
+  const { equipSlot, ...info } = item.info
+  return {
+    id: item.inventoryId ?? item.itemId,
+    itemId: item.itemId,
+    count: item.count,
+    bound: item.bound,
+    equippedSlot: null,
+    nameKey: itemNameKey(item.itemId),
+    info: equipSlot ? { ...info, equipSlot } : info,
+  }
+}
+
+export const marketItemName = (
+  item: Pick<MarketItem, 'itemId' | 'count' | 'bound' | 'info'> & { enhanceLevel?: number },
+) => `${itemName(asInventoryItem(item))}${item.enhanceLevel ? ` +${item.enhanceLevel}` : ''}`
+
+/** Reborn's type filter (ITEMS[iid][3]) over our item facts. */
+export const ITEM_TYPES = [
+  ['all', 'All Types'],
+  ['avatar', 'Avatar'],
+  ['weapon', 'Weapon'],
+  ['gloves', 'Gloves'],
+  ['pet', 'Pet'],
+  ['ring', 'Ring'],
+  ['amulet', 'Amulet'],
+  ['helm', 'Helm'],
+  ['body', 'Body'],
+  ['belt', 'Belt'],
+  ['shoes', 'Shoes'],
+  ['gem', 'Gem'],
+  ['box', 'Box'],
+  ['etc', 'Etc'],
+] as const
+export type ItemType = (typeof ITEM_TYPES)[number][0]
+const SLOT_TYPES: Record<string, ItemType> = {
+  Outfit: 'avatar',
+  Weapon: 'weapon',
+  Glove: 'gloves',
+  Ring: 'ring',
+  Amulet: 'amulet',
+  Hat: 'helm',
+  Cloth: 'body',
+  Girdle: 'belt',
+  Shoes: 'shoes',
+}
+const CLASS_TYPES: Record<string, ItemType> = {
+  PetItem: 'pet',
+  JewelItem: 'gem',
+  GiftBagItem: 'box',
+  CardBox: 'box',
+}
+export const typeOf = (info: BagItemInfo): ItemType =>
+  (info.equipSlot && SLOT_TYPES[info.equipSlot]) || CLASS_TYPES[info.class] || 'etc'
+
+export function TypeSelect({
+  value,
+  onChange,
+  className,
+}: {
+  value: ItemType
+  onChange: (value: ItemType) => void
+  className: string
+}) {
+  return (
+    <select
+      aria-label="Item type"
+      value={value}
+      onChange={(event) => onChange(event.target.value as ItemType)}
+      className={`game-field text-[11px] ${className}`}
+    >
+      {ITEM_TYPES.map(([id, label]) => (
+        <option key={id} value={id}>
+          {label}
+        </option>
+      ))}
+    </select>
+  )
+}
+
+/** The item name cell: TextBG2, an 18px picture and the underlined name; hover shows the tooltip. */
+export function NameCell({
+  item,
+  width,
+  children,
+}: {
+  item: Pick<MarketItem, 'itemId' | 'count' | 'bound' | 'info' | 'gear'> & {
+    inventoryId?: string
+    enhanceLevel?: number
+  }
+  width: number
+  children?: ReactNode
+}) {
+  const [tip, setTip] = useState<{ x: number; y: number } | null>(null)
+  const inventoryItem = asInventoryItem(item)
+  return (
+    <span
+      className="game-value-box flex h-[22px] items-center gap-[3px] p-[2px]"
+      style={{ width }}
+      onPointerMove={(event) => setTip({ x: event.clientX + 12, y: event.clientY + 12 })}
+      onPointerLeave={() => setTip(null)}
+    >
+      <span className="size-[18px] shrink-0">
+        <ItemPicture item={inventoryItem} gear={item.gear} decorative />
+      </span>
+      <span className="truncate underline">{marketItemName(item)}</span>
+      {children}
+      {tip && <ItemTooltip entry={{ item: inventoryItem, gear: item.gear }} at={tip} />}
+    </span>
+  )
+}
+
+/** Column headers (BigBG3 in Reborn), 20px high. */
+export function Header({ columns }: { columns: [label: string, width: number][] }) {
+  return (
+    <div role="row" className="flex gap-[2px]">
+      {columns.map(([label, width]) => (
+        <span
+          key={label}
+          role="columnheader"
+          className="game-panel-small flex h-[20px] shrink-0 items-center justify-center text-[11px] font-bold text-white"
+          style={{ width }}
+        >
+          {label}
+        </span>
+      ))}
+    </div>
+  )
+}
 
 /** "HH:MM" left, or "Expired". */
 export function timeLeft(expiresAt: string, now = Date.now()) {
@@ -68,84 +221,23 @@ export function timeLeft(expiresAt: string, now = Date.now()) {
   return `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`
 }
 
-export function categoryLabel(node: MarketCategory, depth: number) {
-  if (depth === 0) return TOP_LABELS[String(node.Name)] ?? String(node.Name)
-  const name = String(node.Name)
-  if (name.includes('—')) return `Level ${name.replace('—', '-')}`
-  return STEP_LABELS[name] ?? name
-}
-
-/** The martsellshow tree: folders expand, any node can be selected (it browses its subtree). */
-export function CategoryTree({
-  categories,
-  selected,
-  onSelect,
-}: {
-  categories: MarketCategory[]
-  selected: string | undefined
-  onSelect: (path: string | undefined) => void
-}) {
-  const [open, setOpen] = useState<Set<string>>(new Set())
-  const toggle = (path: string) =>
-    setOpen((current) => {
-      const next = new Set(current)
-      if (next.has(path)) next.delete(path)
-      else next.add(path)
-      return next
-    })
-  const node = (category: MarketCategory, depth: number): ReactNode => {
-    const leaf = category.children.length === 0
-    const expanded = open.has(category.Path)
-    const icon = leaf
-      ? 'var(--ui-tree-leaf)'
-      : expanded
-        ? 'var(--ui-tree-folder-open)'
-        : 'var(--ui-tree-folder-closed)'
-    return (
-      <li key={category.Path}>
-        <button
-          type="button"
-          aria-expanded={leaf ? undefined : expanded}
-          aria-current={selected === category.Path ? 'true' : undefined}
-          onClick={() => {
-            onSelect(category.Path)
-            if (!leaf) toggle(category.Path)
-          }}
-          className={`flex w-full items-center gap-1 rounded px-1 text-left hover:bg-white/50 ${
-            selected === category.Path ? 'bg-white/70 font-bold' : ''
-          }`}
-          style={{ paddingLeft: `${depth * 10 + 4}px` }}
-        >
-          <span
-            aria-hidden
-            className="inline-block size-3.5 shrink-0 bg-contain bg-center bg-no-repeat"
-            style={{ backgroundImage: icon }}
-          />
-          {categoryLabel(category, depth)}
-        </button>
-        {expanded && <ul>{category.children.map((child) => node(child, depth + 1))}</ul>}
-      </li>
-    )
+/** The rows of the current page and the pager under them (shown with more than one page). */
+export function usePages<T>(items: T[], resetKey: string) {
+  const [state, setState] = useState({ page: 1, key: resetKey })
+  const page = state.key === resetKey ? state.page : 1
+  const pages = Math.max(1, Math.ceil(items.length / ROWS_PER_PAGE))
+  const current = Math.min(page, pages)
+  return {
+    shown: items.slice((current - 1) * ROWS_PER_PAGE, current * ROWS_PER_PAGE),
+    pager:
+      pages > 1 ? (
+        <Pager
+          page={current}
+          pages={pages}
+          onPage={(next) => setState({ page: next, key: resetKey })}
+        />
+      ) : null,
   }
-  return (
-    <nav aria-label="Market categories" className="text-xs">
-      <ul>
-        <li>
-          <button
-            type="button"
-            aria-current={selected === undefined ? 'true' : undefined}
-            onClick={() => onSelect(undefined)}
-            className={`w-full rounded px-1 text-left hover:bg-white/50 ${
-              selected === undefined ? 'bg-white/70 font-bold' : ''
-            }`}
-          >
-            All items
-          </button>
-        </li>
-        {categories.map((category) => node(category, 0))}
-      </ul>
-    </nav>
-  )
 }
 
 const PAGE_BUTTONS = [

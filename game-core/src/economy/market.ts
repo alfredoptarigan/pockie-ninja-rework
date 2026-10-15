@@ -14,8 +14,6 @@ export type MarketHours = (typeof MARKET_HOURS)[number]
 export const MARKET_MAX_UNIT_PRICE = 1_000_000
 /** CapitalSystem cap per currency. */
 export const CURRENCY_CAP = 100_000_000
-/** Browse page size (MarcketBuyShowPage). */
-export const MARKET_PAGE_SIZE = 8
 
 /** `floor((12.5 + 0.25 × level) × hours)` Stone, in integer math: (50 + level) × hours / 4. */
 export const listingFee = (level: number, hours: number) => Math.floor(((50 + level) * hours) / 4)

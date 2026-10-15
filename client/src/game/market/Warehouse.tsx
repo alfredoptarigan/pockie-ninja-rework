@@ -1,5 +1,5 @@
-// The Warehouse tab laid out like Reborn's Storage window (reborn-windows-M-Z-hud.md "Storage"):
-// a 290x360 BigBG1 panel with 27px tiles ten to a row, a 290x30 bottom bar, and the Vault popup
+// The Storage tab laid out like Reborn's Storage window (reborn-windows-M-Z-hud.md "Storage"):
+// a 290x360 BigBG1 panel (cut to 286 to fit the Market tab body) with 27px tiles ten to a row, a 290x30 bottom bar, and the Vault popup
 // for the money. Ours only goes one way (items and sale money wait here until claimed into the
 // bag and purse), so a tile click claims the row and the Vault only withdraws.
 // ponytail: no roman tabs, Sort / Sort All, deposits or per-currency amounts; the warehouse has
@@ -11,7 +11,7 @@ import { ItemIcon } from '../ItemIcon'
 import { GameButton, Notice } from '../skin'
 import { showToast } from '../toast'
 import { useMarketAction, useMarketWarehouse } from './api'
-import { marketItemName, Price } from './parts'
+import { marketItemName, PriceTag } from './parts'
 
 const SOURCES = { 0: 'Bought', 1: 'Returned' } as const
 const BAR_BUTTON = 'h-[26px] min-w-0 px-0'
@@ -41,9 +41,9 @@ export function WarehouseTab({ character }: { character: Character }) {
     <div className="flex items-start gap-[10px]">
       <section
         aria-label="Warehouse"
-        className="flex h-[396px] w-[290px] shrink-0 flex-col gap-[2px] font-game text-[12px] text-black"
+        className="flex h-[318px] w-[290px] shrink-0 flex-col gap-[2px] font-game text-[12px] text-black"
       >
-        <div className="game-panel-1 relative h-[360px] w-[290px] p-[9px]">
+        <div className="game-panel-1 relative h-[286px] w-[290px] p-[9px]">
           <ul
             aria-label="Warehouse tiles"
             className="grid grid-cols-[repeat(10,27px)] content-start"
@@ -140,7 +140,7 @@ export function WarehouseTab({ character }: { character: Character }) {
                       {label}
                     </th>
                     <td>
-                      <Price value={wallet[currency]} currency={currency} />
+                      <PriceTag value={wallet[currency]} currency={currency} />
                     </td>
                     <td className="text-right">
                       Carried: {character[currency].toLocaleString('en-US')}
