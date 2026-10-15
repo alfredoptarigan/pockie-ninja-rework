@@ -76,6 +76,8 @@ export interface GearView {
   special: { name: string; value: number }[]
   /** Attack and defence with the enhance level applied. */
   attack: { min: number; max: number }
+  /** What the enhance level adds to `attack`: Reborn's ENHANCEMENTS Min / Max Attack. */
+  enhanceAttack: { min: number; max: number }
   defense: number
   /** Flat max HP from armour enhancement. */
   maxHp: number

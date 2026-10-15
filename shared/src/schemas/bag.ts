@@ -58,6 +58,30 @@ export const activeSetSchema = z
 export type BagMoveInput = z.infer<typeof bagMoveSchema>
 export type BagSortInput = z.infer<typeof bagSortSchema>
 
+type Triple = [number, number, number]
+
+/**
+ * An outfit's tooltip stats (Reborn's ISV, BMV and SKILL IMPRINTS), each triple Strength,
+ * Agility, Stamina in hundredths like avatar.ini. A stat at character level L is
+ * floor((base + L * isv) / 100), as deriveStats adds it.
+ */
+export interface OutfitInfo {
+  clothing: number
+  plus: number
+  /** The weapon class the outfit fights with (Popsinger). */
+  weaponType: 'Sharp' | 'Blunt' | 'Fists' | 'Any'
+  /** The stats at level 0 (avatar Strength..., with a recast's ISV over the outfit levels). */
+  base: Triple
+  /** ISV: per-level Up of each stat; the recast values when the row was recast. */
+  isv: Triple
+  /** The highest ISV a recast can reach (the ISV when the stat cannot recast). */
+  maxIsv: Triple
+  /** BMV: points of the stat per 1% attack, speed and HP (StrAtkAdd, AgiAtkAdd, MaxHPAdd). */
+  bmv: Triple
+  /** Skill imprints: the AvatarSkill ids without the basic attack and defence. */
+  skills: number[]
+}
+
 /** Item table facts the bag window needs (context menu, tooltip, footprint). */
 export interface BagItemInfo {
   /** equip = EquipItem or AvatarItem, use = CanUse 1 (not those), other = the rest. */
@@ -66,8 +90,12 @@ export interface BagItemInfo {
   equipSlot: string | null
   /** UseLevel; an outfit's Reborn requirement (ceil((AvatarLevel - 1) * r / 31)). */
   level: number
-  /** AvatarItem only: its clothing and Reborn's "+N" (AvatarLevel). */
-  outfit?: { clothing: number; plus: number }
+  /** AvatarItem only: its clothing, Reborn's "+N" (AvatarLevel) and its tooltip stats. */
+  outfit?: OutfitInfo
+  /** PetItem only: the species' nature (1 Plant ... 6 Spirits). */
+  pet?: { nature: number }
+  /** Reborn's Synthesis Value (JudgeValueScore) when the item has one. */
+  value?: number
   /** Price per item when the shop buys it (CanTrade bit 1), else null. */
   sellPrice: number | null
   /** Largest stack. */

@@ -204,8 +204,11 @@ const steps = (range: RecastRange, stat: number) =>
   range.unit[stat]! > 0
     ? Math.max(0, Math.trunc((range.max[stat]! - range.base[stat]!) / range.unit[stat]!))
     : 0
+/** The highest ISV a recast can roll for a stat. */
+export const recastCap = (range: RecastRange, stat: number) =>
+  range.base[stat]! + steps(range, stat) * range.unit[stat]!
 const atMax = (range: RecastRange, isv: readonly number[], stat: number) =>
-  isv[stat]! >= range.base[stat]! + steps(range, stat) * range.unit[stat]!
+  isv[stat]! >= recastCap(range, stat)
 
 /** A free stat can still move, and not every stat has reached its cap (RECAST_STATE_THREE). */
 export function canRecast(range: RecastRange, isv: readonly number[], locked: readonly number[]) {

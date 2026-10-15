@@ -11,7 +11,7 @@ import { and, asc, eq } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { characters, inventoryItems } from '../../db/schema.js'
-import { inventoryView, itemView, requireBagRoom } from '../../game/bag.js'
+import { inventoryView, itemView, recastsOf, requireBagRoom } from '../../game/bag.js'
 import { outfitOf } from '../../game/outfit.js'
 import type { Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
@@ -40,8 +40,9 @@ async function wardrobeOf(tx: Tx | Db, character: Pick<Character, 'id' | 'avatar
       and(eq(inventoryItems.characterId, character.id), eq(inventoryItems.location, 'wardrobe')),
     )
     .orderBy(asc(inventoryItems.wardrobeSlot))
+  const recasts = await recastsOf(tx, rows)
   return rows.map((row): WardrobeItemView => ({
-    ...itemView(row, character.avatarId),
+    ...itemView(row, character.avatarId, recasts.get(row.id)),
     wardrobeSlot: row.wardrobeSlot!,
   }))
 }

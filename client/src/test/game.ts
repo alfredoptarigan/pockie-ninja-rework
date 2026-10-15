@@ -1,4 +1,4 @@
-import type { Character, CharacterStats } from '@pockie/shared'
+import type { Character, CharacterStats, OutfitInfo } from '@pockie/shared'
 import type { InventoryItem, Quest, QuestOffer, SceneView } from '../game/types'
 
 export const character: Character = {
@@ -115,4 +115,14 @@ export const fists: InventoryItem = {
     h: 3,
     class: 'EquipItem',
   },
+}
+
+/** An outfit's tooltip stats (i290001's avatar row: ISV 1.2, BMV 13/15/11, Fire imprint). */
+export const outfitStats: Omit<OutfitInfo, 'clothing' | 'plus'> = {
+  weaponType: 'Sharp',
+  base: [2400, 2400, 2400],
+  isv: [120, 120, 120],
+  maxIsv: [150, 150, 150],
+  bmv: [1300, 1500, 1100],
+  skills: [1901, 2002],
 }

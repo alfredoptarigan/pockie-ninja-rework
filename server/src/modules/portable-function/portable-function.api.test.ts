@@ -1,6 +1,7 @@
 // Portable Function: Synthesis (ComposeSystem), Recast (AvatarSystem) and Impress
 // (IdentifySystem) over Reborn's Compose window.
 import { and, eq, isNull } from 'drizzle-orm'
+import type { InventoryItemView } from '@pockie/shared'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { characters, inventoryItems, outfitRecasts } from '../../db/schema.js'
@@ -85,7 +86,9 @@ describe('Synthesis', () => {
       kind: 'recipe',
       resultItemId: OUTFIT_2,
       resultNameKey: 'lg_avatar101',
-      resultInfo: expect.objectContaining({ outfit: { clothing: 1, plus: 2 } }),
+      resultInfo: expect.objectContaining({
+        outfit: expect.objectContaining({ clothing: 1, plus: 2 }),
+      }),
       rate: 100,
     })
     expect(made.statusCode).toBe(200)
@@ -220,6 +223,9 @@ describe('Recast', () => {
     const bonus = recastBonus(outfit.itemId, isv, 15)!
     expect(after.agility - before.agility).toBe(bonus.agility)
     expect(after.stamina - before.stamina).toBe(bonus.stamina)
+    // The bag tooltip reads the recast ISV too.
+    const items = (await client.get('/api/game/inventory')).json().items as InventoryItemView[]
+    expect(items.find((row) => row.id === outfit.id)!.info.outfit!.isv).toEqual(isv)
   })
 
   it('needs enough talismans, a recastable outfit and at most two locks', async () => {

@@ -44,7 +44,7 @@ export const equipConfigOf = (itemId: string) => {
 }
 
 /** UsePopsinger job mask (1 Blunt, 2 Sharp, 4 Fists, -1 any) as Reborn's Weapon Type. */
-function weaponType(mask = -1) {
+export function weaponType(mask = -1) {
   const jobs = (['Blunt', 'Sharp', 'Fists'] as const).filter((_, bit) => mask & (1 << bit))
   return mask === -1 || jobs.length !== 1 ? 'Any' : jobs[0]!
 }
@@ -118,6 +118,8 @@ export function gearView(
   if (!config) return undefined
   const tables = equipTables()
   const durability = durabilityOf(row, config)
+  const attack = enhancedAttack(config, row.enhanceLevel, tables.enhanceFactor)
+  const baseAttack = enhancedAttack(config, 0, tables.enhanceFactor)
   return {
     baseType: config.EquipBaseType ?? 0,
     enhanceLevel: row.enhanceLevel,
@@ -146,7 +148,11 @@ export function gearView(
     equipType: String(item(row.itemId)?.EquipType ?? ''),
     ...(config.EquipBaseType === 1 && { weaponType: weaponType(config.UsePopsinger) }),
     special: innateProps(config),
-    attack: enhancedAttack(config, row.enhanceLevel, tables.enhanceFactor),
+    attack,
+    enhanceAttack: {
+      min: attack.min - baseAttack.min,
+      max: attack.max - baseAttack.max,
+    },
     defense: config.Defense ?? 0,
     maxHp: enhancedMaxHp(config, row.enhanceLevel),
     inscription: inscriptionProps(config, row.inscribeLevel, tables.inscribeLevels),

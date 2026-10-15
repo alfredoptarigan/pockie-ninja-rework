@@ -72,6 +72,7 @@ describe('GET /inventory placement', () => {
       w: 1,
       h: 1,
       class: 'PharmacyItem',
+      value: 1,
     })
     expect(find(items, fists.id)).toMatchObject({ fitsOutfit: true })
     expect(find(items, fists.id).info).toEqual({
@@ -83,6 +84,7 @@ describe('GET /inventory placement', () => {
       w: 2,
       h: 3,
       class: 'EquipItem',
+      value: 1,
     })
     expect(find(items, debris.id).info).toMatchObject({ kind: 'other', w: 2, h: 2 })
     expect((await inventory()).map((row) => row.slot)).toEqual(items.map((row) => row.slot))

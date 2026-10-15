@@ -93,7 +93,7 @@ describe('the outfit item', () => {
 
   it('shows "+N" from AvatarLevel', async () => {
     const plus2 = await ninja.give(BLUNT_2)
-    expect((await inventory()).find((row) => row.id === plus2.id)!.info.outfit).toEqual({
+    expect((await inventory()).find((row) => row.id === plus2.id)!.info.outfit).toMatchObject({
       clothing: 17,
       plus: 2,
     })

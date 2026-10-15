@@ -1,7 +1,7 @@
 // PackSystem: two initially active 60-cell pages. See docs/original-data/bag.md.
-import type { BagItemInfo, InventoryItemView } from '@pockie/shared'
-import { and, asc, eq, isNotNull, isNull, notInArray, sql } from 'drizzle-orm'
-import { characters, inventoryItems } from '../db/schema.js'
+import type { BagItemInfo, InventoryItemView, OutfitInfo } from '@pockie/shared'
+import { and, asc, eq, inArray, isNotNull, isNull, notInArray, sql } from 'drizzle-orm'
+import { characters, inventoryItems, outfitRecasts } from '../db/schema.js'
 import { HttpError } from '../http.js'
 import {
   BAG_CELLS,
@@ -12,10 +12,13 @@ import {
   type Placed,
   type Spot,
 } from './bag-grid.js'
-import { avatarStats, item, itemNameKey } from './data.js'
-import type { GrantedItem } from './gear.js'
+import { avatarSkillIds, avatarStats, item, itemNameKey } from './data.js'
+import { weaponType, type GrantedItem } from './gear.js'
 import { gemOf, stoneOf } from './gems.js'
 import { OUTFIT_SLOT, outfitOf } from './outfit.js'
+import { petSpecies } from './pets.js'
+import { recastCap, recastRange } from './portable-function.js'
+import type { Db } from '../db/client.js'
 import type { Tx } from './progress.js'
 
 /** Inventory ownership includes market storage; bag reads must use these predicates. */
@@ -102,10 +105,46 @@ export function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: 
   return allowed === -1 || (allowed & avatarStats(avatarId).Popsinger) !== 0
 }
 
-export function itemInfo(itemId: string): BagItemInfo {
+type Triple = [number, number, number]
+/** AvatarSkill ids every outfit has: the basic attack and defence, not imprints. */
+const BASIC_SKILLS = new Set([0, 7777, 8888])
+
+/**
+ * Reborn's outfit tooltip stats from our avatar.ini row. A recast swaps the Up of every outfit
+ * level past +1 (recastBonus: 8 * (plus - 1) levels) and of each character level.
+ */
+function outfitInfo(itemId: string, recast?: readonly number[]): OutfitInfo | undefined {
+  const outfit = outfitOf(itemId)
+  if (!outfit) return undefined
+  const avatar = avatarStats(outfit.avatarId)
+  const up: Triple = [avatar.StrengthUp, avatar.AgilityUp, avatar.StaminaUp]
+  const isv = (recast ?? up).slice(0, 3) as Triple
+  const levels = 8 * (outfit.plus - 1)
+  const base = [avatar.Strength, avatar.Agility, avatar.Stamina].map(
+    (stat, i) => stat + levels * (isv[i]! - up[i]!),
+  ) as Triple
+  const range = recastRange(itemId)
+  const cap = (i: number) => (range ? recastCap(range, i) : isv[i]!)
+  return {
+    clothing: outfit.clothing,
+    plus: outfit.plus,
+    weaponType: weaponType(avatar.Popsinger),
+    base,
+    isv,
+    maxIsv: [cap(0), cap(1), cap(2)],
+    bmv: [avatar.StrAtkAdd, avatar.AgiAtkAdd, avatar.MaxHPAdd],
+    skills: (avatarSkillIds(outfit.avatarId) ?? []).filter((id) => !BASIC_SKILLS.has(id)),
+  }
+}
+
+/** Item table facts of an item id; `recast` is an outfit row's recast ISV (outfit_recasts). */
+export function itemInfo(itemId: string, recast?: readonly number[]): BagItemInfo {
   const def = item(itemId)
   const itemClass = String(def?.class ?? '')
   const outfit = outfitOf(itemId)
+  const outfitStats = outfitInfo(itemId, recast)
+  const species = petSpecies(itemId)
+  const value = Number(def?.JudgeValueScore ?? 0)
   const equip = itemClass === 'EquipItem'
   const gem = gemOf(itemId)
   const enchant = stoneOf(itemId)
@@ -115,7 +154,9 @@ export function itemInfo(itemId: string): BagItemInfo {
     kind: equip || outfit ? 'equip' : usable ? 'use' : 'other',
     equipSlot: outfit ? OUTFIT_SLOT : equip ? String(def!.EquipType) : null,
     level: outfit ? outfit.level : Number(def?.UseLevel ?? 0),
-    ...(outfit && { outfit: { clothing: outfit.clothing, plus: outfit.plus } }),
+    ...(outfitStats && { outfit: outfitStats }),
+    ...(species && { pet: { nature: species.nature } }),
+    ...(value > 0 && { value }),
     sellPrice: (Number(def?.CanTrade ?? 0) & 1) !== 0 ? Number(def?.Price ?? 0) : null,
     stack: itemStackSize(itemId),
     ...footprint(itemId),
@@ -192,11 +233,28 @@ export async function inventoryView(
     .from(inventoryItems)
     .where(bagItemsWhere(character.id))
     .orderBy(asc(inventoryItems.createdAt), asc(inventoryItems.id))
-  return { items: rows.map((row) => itemView(row, character.avatarId)) }
+  const recasts = await recastsOf(tx, rows)
+  return { items: rows.map((row) => itemView(row, character.avatarId, recasts.get(row.id))) }
 }
 
-/** One inventory row as the client sees it; `avatarId` is the wearer's (fitsOutfit). */
-export function itemView(row: ItemRow, avatarId: number): InventoryItemView {
+/** The recast ISV of the outfit rows among `rows`, by row id. */
+export async function recastsOf(tx: Tx | Db, rows: readonly ItemRow[]) {
+  const ids = rows.filter((row) => outfitOf(row.itemId)).map((row) => row.id)
+  const found = ids.length
+    ? await tx.select().from(outfitRecasts).where(inArray(outfitRecasts.itemId, ids))
+    : []
+  return new Map(found.map((r) => [r.itemId, [r.strength, r.agility, r.stamina]]))
+}
+
+/**
+ * One inventory row as the client sees it; `avatarId` is the wearer's (fitsOutfit), `recast` an
+ * outfit row's recast ISV.
+ */
+export function itemView(
+  row: ItemRow,
+  avatarId: number,
+  recast?: readonly number[],
+): InventoryItemView {
   const def = item(row.itemId)
   return {
     id: row.id,
@@ -210,6 +268,6 @@ export function itemView(row: ItemRow, avatarId: number): InventoryItemView {
     page: row.bagPage,
     slot: row.bagSlot,
     locked: row.locked,
-    info: itemInfo(row.itemId),
+    info: itemInfo(row.itemId, recast),
   }
 }

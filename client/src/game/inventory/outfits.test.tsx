@@ -3,7 +3,7 @@
 import { fireEvent, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { character } from '../../test/game'
+import { character, outfitStats } from '../../test/game'
 import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { Inventory } from '../Inventory'
 import { ToastHost } from '../toast'
@@ -18,7 +18,7 @@ const outfitInfo = (clothing: number, plus: number, level = 0) => ({
   w: 2,
   h: 2,
   class: 'AvatarItem',
-  outfit: { clothing, plus },
+  outfit: { ...outfitStats, clothing, plus },
 })
 /** The worn creation outfit (clothing 3, "Ggio Vega"). */
 const worn: InventoryItem = {
