@@ -15,7 +15,7 @@ import type {
 } from '../../../../shared/src/schemas/pets'
 import pets from '../../generated/reborn-pets.json'
 import { api } from '../../lib/api'
-import { errorMessage, useApplyResult } from '../api'
+import { errorMessage, gameKeys, useApplyResult } from '../api'
 import { bigBg } from '../bloodlines/panels'
 import { itemName } from '../explore'
 import { ItemIcon } from '../ItemIcon'
@@ -153,10 +153,12 @@ export function KennelWindow({ onClose }: { onClose: () => void }) {
   const action = useMutation({
     mutationFn: ({ path, body }: { path: string; body?: object; done: string }) =>
       api<PetActionResult>(`/api/game/pets${path}`, { method: 'POST', body }),
-    onSuccess: (result, { done }) => {
+    onSuccess: (result, { path, done }) => {
       showToast(done, 'success')
       queryClient.setQueryData(petsKey, result)
       apply(result)
+      if (path.endsWith('/store'))
+        void queryClient.invalidateQueries({ queryKey: gameKeys.inventory })
     },
   })
   const run: Run = (path, done, body) => action.mutate({ path, body, done })
@@ -345,6 +347,13 @@ function PetPanels({
           run('/active', pet.active ? `${name} is resting.` : `${name} joins your fights.`, {
             active: !pet.active,
           }),
+      },
+      {
+        // Reborn keeps pets as items: dragged out of the Kennel, one keeps its level and skills.
+        label: 'Move to bag',
+        disabled: busy || pet.active,
+        reason: pet.active ? 'Rest the pet first.' : undefined,
+        onSelect: () => run('/store', `${name} was moved to your bag.`),
       },
       {
         label: 'Release',

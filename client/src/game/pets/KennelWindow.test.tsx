@@ -95,6 +95,30 @@ describe('KennelWindow (Kennel)', () => {
     expect(screen.getByRole('menuitem', { name: 'Rest' })).toBeVisible()
   })
 
+  it('moves a resting pet to the bag from the pet slot menu', async () => {
+    let state = view()
+    const fetchMock = mockApi({
+      'GET /api/game/pets': () => json(state),
+      'GET /api/game/inventory': () => json({ items: [] }),
+      'POST /api/game/pets/pet-1/store': () => {
+        state = view([])
+        return json({ ...state, character })
+      },
+    })
+    renderWithProviders(<KennelWindow onClose={vi.fn()} />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Pet: Baby Vulture' }))
+    await userEvent.click(screen.getByRole('menuitem', { name: 'Move to bag' }))
+    await vi.waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.stringContaining('/api/game/pets/pet-1/store'),
+        expect.anything(),
+      ),
+    )
+    await vi.waitFor(() =>
+      expect(screen.queryByRole('button', { name: 'Pet: Baby Vulture' })).toBeNull(),
+    )
+  })
+
   it('locks a skill from its menu', async () => {
     const fetchMock = mockApi({
       'GET /api/game/pets': () => json(view()),

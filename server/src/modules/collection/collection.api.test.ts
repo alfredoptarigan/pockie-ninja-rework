@@ -86,9 +86,10 @@ describe('GET /api/game/collection', () => {
   })
 
   it('offers outfits at +2 or more in the bag, never +1, locked or worn copies', async () => {
-    const spare = await give('i290203')
-    await give('i290003')
-    await give('i290103', { locked: true })
+    // i290303 is Reborn's +3, i290103 its +1, i290203 its +2.
+    const spare = await give('i290303')
+    await give('i290103')
+    await give('i290203', { locked: true })
     const data = await view()
     const entry = data.outfits.rarities[0].entries.find(
       (e: { clothing: number }) => e.clothing === 3,
@@ -103,7 +104,7 @@ describe('GET /api/game/collection', () => {
 describe('POST /api/game/collection/submit', () => {
   it('collects an outfit once, destroys the copy and adds its stats to the fighter', async () => {
     const before = await strength()
-    const copy = await give('i290103')
+    const copy = await give('i290203')
     const response = await submit({ kind: 'outfit', id: copy.id })
     expect(response.statusCode).toBe(200)
     const data = response.json()
@@ -112,7 +113,7 @@ describe('POST /api/game/collection/submit', () => {
     expect(await exists(copy.id)).toBe(false)
     expect(await strength()).toBe(before + 100)
 
-    const again = await give('i290203')
+    const again = await give('i290303')
     const repeat = await submit({ kind: 'outfit', id: again.id })
     expect(repeat.statusCode).toBe(409)
     expect(repeat.json().error.code).toBe('already_collected')
@@ -120,10 +121,10 @@ describe('POST /api/game/collection/submit', () => {
   })
 
   it('refuses +1 outfits, locked, worn and foreign rows, and items of another kind', async () => {
-    expect((await submit({ kind: 'outfit', id: (await give('i290003')).id })).statusCode).toBe(400)
-    const locked = await give('i290103', { locked: true })
+    expect((await submit({ kind: 'outfit', id: (await give('i290103')).id })).statusCode).toBe(400)
+    const locked = await give('i290203', { locked: true })
     expect((await submit({ kind: 'outfit', id: locked.id })).statusCode).toBe(400)
-    const worn = await give('i290203', { equippedSlot: 'Outfit', equippedSet: 2 })
+    const worn = await give('i290303', { equippedSlot: 'Outfit', equippedSet: 2 })
     expect((await submit({ kind: 'outfit', id: worn.id })).statusCode).toBe(404)
     const gear = await give('i281602', { props: fourLines })
     expect((await submit({ kind: 'outfit', id: gear.id })).statusCode).toBe(400)

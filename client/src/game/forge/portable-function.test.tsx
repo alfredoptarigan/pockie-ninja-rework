@@ -123,6 +123,27 @@ describe('Synthesis tab', () => {
     expect(screen.queryByRole('button', { name: /^Take .* out of Main Item$/ })).toBeNull()
   })
 
+  it("shows a star Synthesis like Reborn: the outfit's name and its new stars", async () => {
+    portableApi({
+      'POST /api/game/portable-function/synthesis/preview': () =>
+        json({
+          kind: 'star',
+          resultItemId: 'i290001',
+          resultNameKey: 'lg_avatar1',
+          resultInfo: { ...outfitInfo(1), outfit: { ...outfitInfo(1).outfit, stars: 2 } },
+          rate: 100,
+          stars: 2,
+        }),
+    })
+    open()
+    const picker = await screen.findByRole('list', { name: 'Items to synthesize' })
+    for (const button of within(picker).getAllByRole('button', { name: 'Ichigo Kurosaki +1' }))
+      await userEvent.click(button)
+
+    expect(await screen.findByText('Ichigo Kurosaki +1 ★★')).toBeVisible()
+    expect(screen.getByText(/gains one guaranteed star, up to 5/)).toBeVisible()
+  })
+
   it('shows the server refusal in red and keeps Create disabled', async () => {
     portableApi({
       'POST /api/game/portable-function/synthesis/preview': () =>
@@ -165,8 +186,8 @@ describe('Recast tab', () => {
     await userEvent.click(within(picker).getAllByRole('button', { name: 'Ichigo Kurosaki +1' })[0]!)
 
     const values = await screen.findByRole('list', { name: 'Individual Stat Values' })
-    expect(values).toHaveTextContent('Strength: 1.20/1.50')
-    expect(values).toHaveTextContent('Stamina: 1.50/1.50')
+    expect(values).toHaveTextContent('Strength: 1.2/1.5')
+    expect(values).toHaveTextContent('Stamina: 1.5/1.5')
     expect(screen.getByText(/Recast Cost: 1 Recast Talisman \(you have 5\)/)).toBeVisible()
     await userEvent.click(screen.getByRole('button', { name: 'Lock Strength' }))
     expect(screen.getByText(/Recast Cost: 5 Recast Talismans/)).toBeVisible()

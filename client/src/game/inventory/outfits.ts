@@ -1,6 +1,6 @@
 // Outfits as items (Reborn's Outfit slot): names "<outfit> +N", icons by clothing, the worn outfit
 // and the clothing to draw (the Visual Outfit when one is set).
-import type { Character } from '@pockie/shared'
+import { starTier, type Character } from '@pockie/shared'
 import { outfitName, plainText } from '../text'
 import type { InventoryItem } from '../types'
 
@@ -10,7 +10,7 @@ export const outfitIcon = (clothing: number) =>
 /** An item's display name; outfits read "<name> +N" like Reborn's. */
 export const itemName = (item: InventoryItem, fallback = 'Unknown item') =>
   item.info?.outfit
-    ? `${outfitName(item.info.outfit.clothing)} +${item.info.outfit.plus}`
+    ? `${outfitName(item.info.outfit.clothing)} +${starTier(item.info.outfit.plus, item.info.outfit.stars)}`
     : plainText(item.nameKey, fallback)
 
 /** The outfit worn in `activeSet`, else set I's (Reborn's fallback). */

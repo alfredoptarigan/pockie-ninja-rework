@@ -3,6 +3,7 @@ import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { passRowFromTooltip } from './import-reborn-m6.ts'
 import {
+  buildOutfits,
   buildReborn,
   defaultPetIniDir,
   defaultRawDir,
@@ -181,6 +182,60 @@ type Cards = {
   }[]
 }
 
+describe('Reborn outfits (serverConfig.avatars, avatarStars)', () => {
+  const avatar = (art: number, skills: number[]) => ({
+    value: 42,
+    innate: { avatar: art, isv: [1.2, 0.65, 3.1], bmv: [13, 15, 11], skills },
+  })
+  const items = {
+    i290001: { class: 'AvatarItem', AvatarLevel: 1, Clothing: 1 },
+    i290093: { class: 'AvatarItem', AvatarLevel: 1, Clothing: 93 },
+  }
+
+  it('keys Reborn 29xxxx by our clothing when its art is that clothing, in hundredths', () => {
+    const config = {
+      avatarStars: { maxStars: 5 },
+      avatars: {
+        '290001': avatar(1, [10000, 7777, 2002]),
+        // Reborn reuses 290093 for another outfit's art: not our clothing 93.
+        '290093': avatar(10, [10000, 7777, 2052]),
+        '290121': avatar(121, [10000, 7777, 2012]),
+      },
+    } as unknown as Parameters<typeof buildOutfits>[0]
+    expect(buildOutfits(config, items)).toEqual({
+      stars: { maxStars: 5 },
+      outfits: {
+        '1': {
+          rebornItem: 290001,
+          value: 42,
+          isv: [120, 65, 310],
+          bmv: [1300, 1500, 1100],
+          imprint: 2002,
+        },
+      },
+    })
+  })
+
+  it('has the star rules and Ichigo as Reborn ships them', () => {
+    const data = reborn<{ stars: Record<string, number>; outfits: Record<string, unknown> }>(
+      'outfits',
+    )
+    expect(data.stars).toMatchObject({
+      maxStars: 5,
+      requiredEnhancement: 32,
+      oneStarIsvBonusPercent: 5,
+    })
+    expect(data.outfits['1']).toEqual({
+      rebornItem: 290001,
+      value: 42,
+      isv: [120, 120, 120],
+      bmv: [1300, 1500, 1100],
+      imprint: 2002,
+    })
+    expect(Object.keys(data.outfits)).toHaveLength(111)
+  })
+})
+
 describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
   const pets = reborn<Pet[]>('pets')
   const petSkills = reborn<PetSkills>('pet-skills')
@@ -198,6 +253,9 @@ describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
     const count = (level: number) => pets.filter((p) => p.requiredLevel === level).length
     expect([count(30), count(40), count(50)]).toEqual([173, 16, 1])
     expect(pets.find((p) => p.requiredLevel === 50)!.parent).toBeNull()
+    // The same field is the Synthesis Value Reborn's tooltip shows.
+    const rows = reborn<Record<string, { JudgeValueScore: number }>>('items')
+    for (const pet of pets) expect(rows[pet.item]!.JudgeValueScore).toBe(pet.requiredLevel)
   })
 
   it('links Reborn 3200NN to 2011 i2830NN with the 2011 growth (decision 9)', () => {

@@ -31,8 +31,12 @@ const ACTIVE_COLUMNS = [
   [1827, 3826, 3805, 3827],
   [1829, 3802, 1830, 3803],
 ]
-/** Equipped row: Reborn shows ten cells; the slots past the skill bar's six are locked. */
+/** Equipped row: Reborn shows ten cells; the slots past the open ones are locked. */
 export const EQUIPPED_CELLS = 10
+/** Reborn's ui__skill_slot_star_requirement: the 7th and 8th slots open with outfit stars. */
+const STAR_SLOTS: Record<number, number> = { 6: 2, 7: 5 }
+const lockReason = (cell: number) =>
+  STAR_SLOTS[cell] ? `Unlocks at ${STAR_SLOTS[cell]} stars` : 'Locked slot'
 const PRESETS = 5
 const COLUMN_STEP = 44
 const ROW_STEP = 48
@@ -124,7 +128,7 @@ function SkillBoard({ data, character }: { data: SkillView; character: Character
           label: 'Equip',
           name: `Equip ${name}`,
           disabled: busy || !empty,
-          reason: empty ? undefined : 'All six slots are full.',
+          reason: empty ? undefined : 'All slots are full.',
           onSelect: () => empty && save(empty.slot, id, `${name} equipped.`, level(id)),
         },
       ]
@@ -220,7 +224,8 @@ function SkillBoard({ data, character }: { data: SkillView; character: Character
               <span
                 key={cell}
                 role="img"
-                aria-label="Locked slot"
+                aria-label={lockReason(cell)}
+                title={lockReason(cell)}
                 className="game-skill-lock absolute top-[3px] size-[27px]"
                 style={{ left }}
               />

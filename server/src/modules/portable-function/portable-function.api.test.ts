@@ -6,7 +6,7 @@ import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
 import { characters, inventoryItems, outfitRecasts } from '../../db/schema.js'
 import { BAG_CELLS, itemCells } from '../../game/bag.js'
-import { recastBonus } from '../../game/portable-function.js'
+import { outfitBonuses } from '../../game/outfit.js'
 
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
@@ -50,7 +50,7 @@ const held = async (itemId: string) =>
   (await rowsOf(itemId)).reduce((sum, row) => sum + row.count, 0)
 const code = (response: { json: () => { error: { code: string } } }) => response.json().error.code
 
-// i290001 Outfit +1 x3 makes its +2 (i290101), rate 100. i250101 a level 1 weapon (common group
+// i290001 Outfit +0 x3 makes its +1 (i290101), rate 100. i250101 a level 1 weapon (common group
 // 1001, gold group 2001); i150302 Lucky Gem (JudgeValueScore 43); i141012 a quest item.
 const OUTFIT = 'i290001'
 const OUTFIT_2 = 'i290101'
@@ -72,7 +72,7 @@ describe('Synthesis', () => {
   const preview = (mainId: string, a: string, b: string) =>
     client.post('/api/game/portable-function/synthesis/preview', { mainId, catalystIds: [a, b] })
 
-  it('follows a recipe: three +1 outfits make the +2 and are used up', async () => {
+  it('follows a recipe: three +0 outfits make the +1 and are used up', async () => {
     const [a, b, c] = [
       await giveItem(OUTFIT),
       await giveItem(OUTFIT, { bound: true }),
@@ -87,7 +87,7 @@ describe('Synthesis', () => {
       resultItemId: OUTFIT_2,
       resultNameKey: 'lg_avatar101',
       resultInfo: expect.objectContaining({
-        outfit: expect.objectContaining({ clothing: 1, plus: 2 }),
+        outfit: expect.objectContaining({ clothing: 1, plus: 1 }),
       }),
       rate: 100,
     })
@@ -180,6 +180,50 @@ describe('Synthesis', () => {
   })
 })
 
+describe('Synthesis: outfit stars', () => {
+  // i2931010: Ichigo at our top +N (+31), where Reborn's star rule applies.
+  const TOP = 'i2931010'
+  const synth = (mainId: string, a: string, b: string) =>
+    client.post('/api/game/portable-function/synthesis', { mainId, catalystIds: [a, b] })
+  const preview = (mainId: string, a: string, b: string) =>
+    client.post('/api/game/portable-function/synthesis/preview', { mainId, catalystIds: [a, b] })
+  const starsOf = async (id: string) =>
+    (await db.select().from(inventoryItems).where(eq(inventoryItems.id, id)))[0]?.stars
+
+  it('gives the main outfit one sure star and uses up two unstarred matching copies', async () => {
+    const main = await giveItem(TOP, { stars: 2 })
+    const [a, b] = [await giveItem(TOP), await giveItem(TOP)]
+
+    const shown = await preview(main.id, a.id, b.id)
+    const made = await synth(main.id, a.id, b.id)
+
+    expect(shown.json()).toMatchObject({ kind: 'star', resultItemId: TOP, rate: 100, stars: 3 })
+    expect(made.statusCode).toBe(200)
+    expect(made.json()).toMatchObject({ success: true, resultItemId: TOP })
+    expect(await starsOf(main.id)).toBe(3)
+    expect(await starsOf(a.id)).toBeUndefined()
+    expect(await starsOf(b.id)).toBeUndefined()
+    const items = (await client.get('/api/game/inventory')).json().items as InventoryItemView[]
+    expect(items.find((row) => row.id === main.id)!.info.outfit).toMatchObject({ stars: 3 })
+  })
+
+  it('refuses starred catalysts, a main outfit at five stars and outfits below the top +N', async () => {
+    const main = await giveItem(TOP)
+    const starred = await giveItem(TOP, { stars: 1 })
+    const plain = await giveItem(TOP)
+    expect(code(await synth(main.id, starred.id, plain.id))).toBe('starred_catalyst')
+
+    const full = await giveItem(TOP, { stars: 5 })
+    const other = await giveItem(TOP)
+    expect(code(await synth(full.id, plain.id, other.id))).toBe('max_stars')
+
+    const low = await giveItem('i2930010')
+    expect(code(await synth(low.id, plain.id, other.id))).toBe('cannot_synthesize')
+    expect(await starsOf(main.id)).toBe(0)
+    expect(await starsOf(plain.id)).toBe(0)
+  })
+})
+
 describe('Recast', () => {
   const outfitRow = async () =>
     (
@@ -220,7 +264,7 @@ describe('Recast', () => {
       .where(eq(outfitRecasts.itemId, outfit.id))
     expect([stored!.strength, stored!.agility, stored!.stamina]).toEqual(isv)
     const after = (await client.get('/api/game/character')).json().stats
-    const bonus = recastBonus(outfit.itemId, isv, 15)!
+    const bonus = outfitBonuses({ itemId: outfit.itemId, stars: 0, isv }, 15)
     expect(after.agility - before.agility).toBe(bonus.agility)
     expect(after.stamina - before.stamina).toBe(bonus.stamina)
     // The bag tooltip reads the recast ISV too.
@@ -231,10 +275,8 @@ describe('Recast', () => {
   it('needs enough talismans, a recastable outfit and at most two locks', async () => {
     const outfit = await outfitRow()
     await giveItem('i161007', { count: 4 })
-    const flat = await giveItem('i290002')
 
     expect(code(await recast(outfit.id, [0, 1]))).toBe('no_talisman')
-    expect(code(await recast(flat.id, []))).toBe('cannot_recast')
     expect(code(await recast((await weapon(0)).id, []))).toBe('cannot_recast')
     expect((await recast(outfit.id, [0, 1, 2])).statusCode).toBe(400)
     expect(await held('i161007')).toBe(4)

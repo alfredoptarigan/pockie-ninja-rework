@@ -79,7 +79,8 @@ describe('pairFighters', () => {
         const player = playerFighterFrom(
           {
             name: 'P',
-            avatarId: outfitForClothing(3).avatarId,
+            // Itachi's own outfit: Reborn's ISV makes the bosses' outfits far above a gray one.
+            avatarId: outfitForClothing(105).avatarId,
             gender: 0,
             level,
             hp: 1e9,

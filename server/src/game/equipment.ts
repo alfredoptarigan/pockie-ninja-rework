@@ -14,8 +14,7 @@ import { characters, inventoryItems, outfitRecasts } from '../db/schema.js'
 import { wornItemsWhere } from './bag.js'
 import { avatarStats, equipTables, item } from './data.js'
 import { addedProps } from './gems.js'
-import { OUTFIT_SLOT } from './outfit.js'
-import { recastBonus } from './portable-function.js'
+import { OUTFIT_SLOT, outfitBonuses } from './outfit.js'
 import type { Tx } from './progress.js'
 
 type ItemRow = typeof inventoryItems.$inferSelect
@@ -24,7 +23,7 @@ export type Gear = Pick<ItemRow, 'itemId'> &
   Partial<
     Pick<
       ItemRow,
-      'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props' | 'gems' | 'enchantItemId'
+      'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props' | 'gems' | 'enchantItemId' | 'stars'
     >
   > & {
     /** A recast outfit's ISV (Strength, Agility, Stamina Up), from outfit_recasts. */
@@ -48,7 +47,10 @@ export async function equippedGear(tx: Tx | Db, characterId: string): Promise<Ge
 const durabilityOf = (gear: Gear, config: EquipConfig) =>
   gear.durability ?? Math.max(config.MaxHardiness ?? 0, 1)
 
-/** deriveStats bonuses from the equipped rows; outfits and unknown items are ignored. */
+/**
+ * deriveStats bonuses from the equipped rows; the worn outfit adds its recast ISV and star bonuses
+ * over its avatar row (outfitBonuses), unknown items nothing.
+ */
 export function equipmentBonuses(equipped: readonly Gear[], wearer: Wearer): Partial<Bonuses> {
   const items = equipped.flatMap((gear): EquippedItem[] => {
     // Outfits (AvatarItem) count through the avatar, not as gear.
@@ -74,13 +76,11 @@ export function equipmentBonuses(equipped: readonly Gear[], wearer: Wearer): Par
     equipTables(),
   )
   const bonuses = equipBonuses(totals)
-  const outfit = equipped.find((gear) => gear.isv)
-  const recast = outfit && recastBonus(outfit.itemId, outfit.isv!, wearer.level ?? 0)
-  if (!recast) return bonuses
-  return {
-    ...bonuses,
-    strength: (bonuses.strength ?? 0) + recast.strength,
-    agility: (bonuses.agility ?? 0) + recast.agility,
-    stamina: (bonuses.stamina ?? 0) + recast.stamina,
-  }
+  const outfit = equipped.find((gear) => item(gear.itemId)?.class === 'AvatarItem')
+  if (!outfit) return bonuses
+  const own = outfitBonuses({ ...outfit, stars: outfit.stars ?? 0 }, wearer.level ?? 0)
+  return Object.entries(own).reduce<Partial<Bonuses>>(
+    (sum, [key, value]) => ({ ...sum, [key]: (sum[key as keyof Bonuses] ?? 0) + value }),
+    bonuses,
+  )
 }

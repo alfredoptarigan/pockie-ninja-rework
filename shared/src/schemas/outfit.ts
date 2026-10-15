@@ -36,3 +36,47 @@ export interface WardrobeView {
 export interface WardrobeActionResult extends BagActionResult {
   wardrobe: WardrobeItemView[]
 }
+
+/**
+ * Reborn's avatarStars (serverConfig; its client ships the same defaults). The server reads
+ * reborn/outfits.json, which a test keeps equal to this. See docs/audit/reborn-outfit-pet-re.md.
+ */
+export const OUTFIT_STARS = {
+  maxStars: 5,
+  /** The +N the main outfit and both catalysts need to gain a star by Synthesis. */
+  requiredEnhancement: 32,
+  requireUnstarredCatalysts: true,
+  baseSkillSlots: 6,
+  oneStarIsvBonusPercent: 5,
+  twoStarSkillSlots: 1,
+  threeStarBonusEnhancements: 1,
+  fourStarImprintBonusPercent: 5,
+  fiveStarSecretTechniqueThresholdPercent: 20,
+  fiveStarSkillSlots: 1,
+} as const
+/** Our outfit tables stop at +31 (AvatarLevel 32), one below Reborn's +32 star requirement. */
+export const OUTFIT_MAX_TIER = 31
+/** The +N a star needs here: Reborn's requirement, capped at our highest outfit. */
+export const STAR_REQUIRED_TIER = Math.min(OUTFIT_STARS.requiredEnhancement, OUTFIT_MAX_TIER)
+/** Reborn's recastMaxIsv: 1.1 times the outfit's own ISV. */
+export const RECAST_MAX_MULTIPLIER = 1.1
+
+/** Reborn's star-adjusted ISV (nh): +5% from the first star. */
+export const starIsv = (isv: number, stars: number) =>
+  stars >= 1 ? isv * (1 + OUTFIT_STARS.oneStarIsvBonusPercent / 100) : isv
+/** Reborn's star-adjusted +N (hq): +1 from the third star. */
+export const starTier = (tier: number, stars: number) =>
+  tier + (stars >= 3 ? OUTFIT_STARS.threeStarBonusEnhancements : 0)
+/**
+ * Reborn's outfit stat (tooltip x()): 20 ISV + 8 ISV per +N + ISV per character level, ISV in
+ * points per level (1.2, not our 120). The tooltip floors it.
+ */
+export const outfitStat = (isv: number, tier: number, level: number) =>
+  20 * isv + 8 * isv * tier + isv * level
+/** The imprints the fourth star raises (Reborn ap(): the element passives 20x0-20x2). */
+export const isStarredImprint = (id: number) => id >= 2000 && id <= 2092 && id % 10 <= 2
+/** Skill bar slots: 6, a 7th from the second star, an 8th from the fifth. */
+export const skillSlotsFor = (stars: number) =>
+  OUTFIT_STARS.baseSkillSlots +
+  (stars >= 2 ? OUTFIT_STARS.twoStarSkillSlots : 0) +
+  (stars >= 5 ? OUTFIT_STARS.fiveStarSkillSlots : 0)

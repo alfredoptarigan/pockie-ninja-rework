@@ -2,17 +2,25 @@
 // in its refinement-tier colour, a gold rule, the overview (BOUND / UNBOUND, Synthesis Value, Item
 // Type, icon) and the sections of the item's kind: REQUIREMENTS, CORE ATTRIBUTES, INSCRIPTION,
 // SPECIAL ATTRIBUTES, REFINEMENT, ENHANCEMENTS, SOCKETED GEMS, SET BONUSES, ENCHANTMENTS (in
-// Reborn's order per kind). Gems and Enchanting Stones list their stats; outfits show ISV, BMV and
-// SKILL IMPRINTS; pets their nature and Aura / Aid / Passive skills. Hovering a bag item whose
+// Reborn's order per kind). Gems and Enchanting Stones list their stats; outfits show STAR BONUSES,
+// ISV, BMV and SKILL IMPRINTS (Reborn's formula and lines); pets their nature and Aura / Aid /
+// Passive skills, a pet item from the Kennel its level and skills too. Hovering a bag item whose
 // slot holds a different worn item shows both panels side by side (EQUIPPED ITEM, then INVENTORY
 // ITEM), each marked ▲ / ▼ / ● against the other.
-import type { GearView } from '@pockie/shared'
+import {
+  OUTFIT_STARS,
+  isStarredImprint,
+  outfitStat,
+  starIsv,
+  starTier,
+  type GearView,
+} from '@pockie/shared'
 import type { ReactNode } from 'react'
 import { statLine, TIER_COLORS } from './forge/gear'
 import { itemIcon } from './ItemIcon'
 import { itemName, outfitIcon } from './inventory/outfits'
 import { NATURES, petSkillIcon } from './pets/nature'
-import { plainText, rawText } from './text'
+import { plainText } from './text'
 import type { InventoryItem, ItemInfo } from './types'
 
 /** Reborn's Item Type names (item_type__*) for our EquipType values and item classes. */
@@ -125,6 +133,8 @@ export function ItemPanel({
   const lines = gear?.appraised ? gear.props.length : 0
   const outfit = item.info?.outfit
   const nature = item.info?.pet?.nature
+  const petLevel = pet?.level ?? item.info?.pet?.level ?? 0
+  const petSkills = pet?.skills ?? item.info?.pet?.skills ?? []
   const icon = outfit ? outfitIcon(outfit.clothing) : itemIcon(item.itemId)?.file
   const synthesis = gear ? SYNTHESIS[Math.min(lines, 4)] : item.info?.value
   return (
@@ -143,6 +153,14 @@ export function ItemPanel({
           {side === 'bag' ? 'Inventory Item' : 'Equipped Item'}
         </p>
       )}
+      {!!outfit?.stars && (
+        <p
+          className="text-center text-[#ffdf85]"
+          aria-label={`${outfit.stars} of ${OUTFIT_STARS.maxStars} stars`}
+        >
+          {'★'.repeat(outfit.stars)}
+        </p>
+      )}
       <p
         className="text-center text-sm font-bold"
         style={{ color: TIER_COLORS[Math.min(lines, 4)] }}
@@ -151,7 +169,7 @@ export function ItemPanel({
       </p>
       {nature !== undefined && (
         <p style={{ color: 'teal' }}>
-          {itemName(item)} + {pet?.level ?? 0}
+          {itemName(item)} + {petLevel}
         </p>
       )}
       <Rule />
@@ -188,7 +206,7 @@ export function ItemPanel({
       ) : outfit ? (
         <OutfitSections outfit={outfit} required={item.info!.level} level={level} />
       ) : nature !== undefined ? (
-        <PetSkills skills={pet?.skills ?? []} />
+        <PetSkills skills={petSkills} />
       ) : item.info?.gem || item.info?.enchant ? (
         <StoneSections info={item.info} level={level} />
       ) : (
@@ -413,26 +431,68 @@ const BMV = [
   (n: number) => `Every ${n} points of Agility increases dodge by 1 and speed by 1%`,
   (n: number) => `Every ${n} points of Stamina increases HP by 1% and chakra by 1%`,
 ]
-/** lg_SkillDes_19xx: the Secret Technique imprint has a name only in lg_Skill_19xx. */
-const SECRET_TECHNIQUE =
-  "When the enemy's HP is low, you have a chance to finish them with one hit of a Secret Technique."
-/** Reborn's ISV colour: yellow at the cap, green within 90% of it, else whitesmoke. */
+/** Reborn's ISV colour: yellow at the recast cap, green within 90% of it, else whitesmoke. */
 const isvColor = (isv: number, max: number) =>
   isv >= max ? '#ffff00' : isv >= 0.9 * max ? '#00ff00' : 'whitesmoke'
+/** Reborn's ISV number: at most two decimals. */
+const isvText = (isv: number) => (Number.isFinite(isv) ? String(Math.round(100 * isv) / 100) : '0')
 
-/** An imprint's lines: "<name>:" then its effect (lg_Skill_<id> is "<name><br><effect>"). */
-export function imprintLines(skillId: number) {
-  const [name = `Skill ${skillId}`, ...rest] = (rawText(`lg_Skill_${skillId}`) ?? '')
-    .split(/<br\s*\/?>/i)
-    .map((part) => part.replace(/<[^>]*>/g, '').trim())
-    .filter(Boolean)
-  const effect = rest.length ? rest : skillId >= 1900 && skillId < 2000 ? [SECRET_TECHNIQUE] : []
-  return [`${name}:`, ...effect]
+/** Reborn's ui__star_1_bonus .. ui__star_5_bonus with its avatarStars values. */
+const STAR_BONUSES = [
+  `ISV +${OUTFIT_STARS.oneStarIsvBonusPercent}%`,
+  `+${OUTFIT_STARS.twoStarSkillSlots} skill slot`,
+  `Outfit +${OUTFIT_STARS.threeStarBonusEnhancements}`,
+  `Skill Imprint +${OUTFIT_STARS.fourStarImprintBonusPercent} percentage points`,
+  `Secret Technique at ${OUTFIT_STARS.fiveStarSecretTechniqueThresholdPercent}% HP and +${OUTFIT_STARS.fiveStarSkillSlots} skill slot`,
+]
+
+/** Reborn's imprint elements (skill__20e0..20e2--name, tooltip__damage--*), element e = 0-9. */
+const IMPRINT_ELEMENTS = [
+  ['Fire', 'Fire Damage'],
+  ['Water', 'Water Damage'],
+  ['Earth', 'Earth Damage'],
+  ['Lightning', 'Lightning Damage'],
+  ['Wind', 'Wind Damage'],
+  ['Body', 'Body Damage'],
+  ['Sealing', 'Sealing Effects'],
+  ['Tool', 'Tool Damage'],
+  ['Illusion', 'Illusion Damage'],
+  ['Healing', 'Healing'],
+] as const
+const IMPRINT_TIERS = [
+  ['Basic', 5],
+  ['Expert', 10],
+  ['Master', 15],
+] as const
+/** Reborn's Secret Technique (outfit_skill__10000) and its 15% HP threshold. */
+const SECRET_TECHNIQUE = 10000
+const SECRET_THRESHOLD = 15
+const SECRET_CHANCE = 10
+
+/**
+ * Reborn's outfit_skill__<id> lines: "<name>:" then its effect, the fourth star adding 5 points
+ * to an element imprint and the fifth raising the Secret Technique threshold.
+ */
+export function imprintLines(skillId: number, stars = 0) {
+  if (skillId === SECRET_TECHNIQUE) {
+    const below =
+      stars >= 5 ? OUTFIT_STARS.fiveStarSecretTechniqueThresholdPercent : SECRET_THRESHOLD
+    return [
+      'Secret Technique:',
+      `${SECRET_CHANCE}% chance to unleash a powerful move when enemy below ${below}% health.`,
+    ]
+  }
+  const element = IMPRINT_ELEMENTS[Math.floor((skillId - 2000) / 10)]
+  const tier = IMPRINT_TIERS[skillId % 10]
+  if (skillId < 2000 || !element || !tier) return [`Skill ${skillId}:`]
+  const bonus =
+    stars >= 4 && isStarredImprint(skillId) ? OUTFIT_STARS.fourStarImprintBonusPercent : 0
+  return [`${element[0]} ${tier[0]}:`, `* Increase ${element[1]} by ${tier[1] + bonus}%.`]
 }
 
 /**
- * Reborn's outfit body: REQUIREMENTS, ISV (each stat at the viewer's level, its ISV and the recast
- * cap), BMV and SKILL IMPRINTS. Our outfits have no stars, so STAR BONUSES never shows.
+ * Reborn's outfit body: REQUIREMENTS, STAR BONUSES n/max, ISV (each stat at the viewer's level
+ * with the star bonuses, its ISV and the recast cap), BMV and SKILL IMPRINTS.
  */
 function OutfitSections({
   outfit,
@@ -444,23 +504,34 @@ function OutfitSections({
   level?: number
 }) {
   const at = Math.max(1, level ?? 1)
+  const { stars } = outfit
+  const tier = starTier(outfit.plus, stars)
   return (
     <>
       <Section title="Requirements">
         <Row label="Required Level:" value={required} warn={!!level && level < required} />
       </Section>
+      {stars > 0 && (
+        <Section title="Star Bonuses" subtitle={`${stars}/${OUTFIT_STARS.maxStars}`}>
+          {STAR_BONUSES.slice(0, stars).map((bonus, i) => (
+            <p key={bonus} className="flex gap-2 text-[#ffdf85]">
+              <span>★ {i + 1}</span>
+              <span>{bonus}</span>
+            </p>
+          ))}
+        </Section>
+      )}
       <Section title="ISV">
         {STATS.map((name, i) => {
-          const isv = outfit.isv[i]!
-          const max = outfit.maxIsv[i]!
-          const value = Math.floor((outfit.base[i]! + at * isv) / 100)
+          const isv = starIsv(outfit.isv[i]! / 100, stars)
+          const max = starIsv(outfit.maxIsv[i]! / 100, stars)
           return (
             <Row
               key={name}
               label={name}
               value={
                 <span style={{ color: isvColor(isv, max) }}>
-                  {value} ({isv / 100}) | Max ({max / 100})
+                  {Math.floor(outfitStat(isv, tier, at))} ({isvText(isv)}) | Max ({isvText(max)})
                 </span>
               }
             />
@@ -475,7 +546,7 @@ function OutfitSections({
       {outfit.skills.length > 0 && (
         <Section title="Skill Imprints">
           {outfit.skills.map((id) => (
-            <Lines key={id} lines={imprintLines(id)} />
+            <Lines key={id} lines={imprintLines(id, stars)} />
           ))}
         </Section>
       )}
@@ -532,10 +603,21 @@ function Rule() {
   return <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({
+  title,
+  subtitle,
+  children,
+}: {
+  title: string
+  subtitle?: string
+  children: ReactNode
+}) {
   return (
     <section className="mt-1.5">
-      <h4 className="text-[11px] font-bold text-[#ffdf85] uppercase">{title}</h4>
+      <h4 className="flex justify-between text-[11px] font-bold text-[#ffdf85] uppercase">
+        {title}
+        {subtitle && <span>{subtitle}</span>}
+      </h4>
       {children}
     </section>
   )

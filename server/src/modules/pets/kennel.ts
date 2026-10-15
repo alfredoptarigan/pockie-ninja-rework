@@ -31,8 +31,14 @@ import type {
   PetView,
 } from '../../../../shared/src/schemas/pets.js'
 import type { Db } from '../../db/client.js'
-import { characterPets, characterPetSkills, characters, inventoryItems } from '../../db/schema.js'
-import { unequippedBagItemsWhere } from '../../game/bag.js'
+import {
+  characterPets,
+  characterPetSkills,
+  characters,
+  inventoryItems,
+  type StoredPet,
+} from '../../db/schema.js'
+import { requireBagRoom, unequippedBagItemsWhere } from '../../game/bag.js'
 import { playerFighter } from '../../game/combat.js'
 import { itemNameKey, rebornPetFoods, rebornPets, rebornPetSkills } from '../../game/data.js'
 import { addPetExp, petAvatar, petBases, petSpecies } from '../../game/pets.js'
@@ -252,6 +258,11 @@ export async function adoptPetItem(
   )
   if (free === undefined)
     throw bad('kennel_full', 'Your Pet Kennel is full. Unlock a slot or release a pet.')
+  if (row.pet) {
+    await restorePet(tx, character.id, species.item, free, row.pet)
+    await consumeOne(tx, row)
+    return true
+  }
   const bases = rollBases(
     speciesBaseProps(species.nature, species.requiredLevel, species.parent !== null),
     random,
@@ -270,6 +281,57 @@ export async function adoptPetItem(
   })
   await consumeOne(tx, row)
   return true
+}
+
+/** A pet item from the bag back in the Kennel with the state it left with. */
+async function restorePet(
+  tx: Tx,
+  characterId: string,
+  species: string,
+  kennelSlot: number,
+  { skills, digestEndsAt, ...state }: StoredPet,
+) {
+  const [pet] = await tx
+    .insert(characterPets)
+    .values({
+      ...state,
+      characterId,
+      species,
+      kennelSlot,
+      digestEndsAt: digestEndsAt ? new Date(digestEndsAt) : null,
+    })
+    .returning({ id: characterPets.id })
+  await saveSkills(tx, pet!.id, skills)
+}
+
+/**
+ * Reborn keeps pets as items: one moved out of the Kennel becomes its pet item in the bag with its
+ * level, skills and the rest of its state (StoredPet), and adopting it brings all of that back.
+ * Bound, so a stored pet cannot be traded (adoption forgets whether its item was).
+ */
+export async function storePet(tx: Tx, characterId: string, pet: PetRow) {
+  if (pet.active) throw bad('active', 'Rest this pet before you move it to the bag.')
+  await requireBagRoom(tx, characterId, [{ itemId: pet.species, bound: true }], {
+    message: 'Your bag is full. Make room for the pet first.',
+  })
+  const {
+    id,
+    characterId: _owner,
+    species,
+    kennelSlot: _slot,
+    active: _active,
+    adoptedAt: _at,
+    digestEndsAt,
+    ...state
+  } = pet
+  const skills = await skillRows(tx, id)
+  await tx.insert(inventoryItems).values({
+    characterId,
+    itemId: species,
+    bound: true,
+    pet: { ...state, digestEndsAt: digestEndsAt?.toISOString() ?? null, skills },
+  })
+  await tx.delete(characterPets).where(eq(characterPets.id, id))
 }
 
 async function itemCounts(tx: Tx | Db, characterId: string) {

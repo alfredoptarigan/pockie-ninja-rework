@@ -66,6 +66,31 @@ async function seedSkills() {
     .values([1803, 1807, 2801].map((skillId) => ({ characterId, skillId, level: 1 })))
 }
 
+describe('outfit star skill slots (Reborn: a 7th at 2 stars, an 8th at 5)', () => {
+  const setStars = async (stars: number) =>
+    db.update(inventoryItems).set({ stars }).where(eq(inventoryItems.characterId, characterId))
+
+  it('opens slots 7 and 8 with the worn outfit stars and drops them from fights without', async () => {
+    await seedSkills()
+    expect(code(await setSlot(6, 1803))).toBe('slot_locked')
+    await setStars(2)
+    expect((await view()).trees[0]).toHaveLength(7)
+    expect((await setSlot(6, 1803)).statusCode).toBe(200)
+    expect(code(await setSlot(7, 1807))).toBe('slot_locked')
+    await setStars(5)
+    expect((await view()).trees[0]).toHaveLength(8)
+    expect((await setSlot(7, 1807)).statusCode).toBe(200)
+    const ids = async () =>
+      (await playerFighter(db, await row())).skills?.map((skill) => skill.secondid ?? skill.id)
+    expect(await ids()).toEqual(expect.arrayContaining([1803, 1807]))
+    await setStars(0)
+    expect(await ids()).not.toContain(1803)
+    expect((await view()).trees[0]).toHaveLength(6)
+  })
+})
+
+const code = (response: { json: () => { error?: { code: string } } }) => response.json().error?.code
+
 describe('skill trees', () => {
   it('has five six-slot trees (Reborn presets 1-5) and loads only the active tree plus learned passives', async () => {
     await seedSkills()

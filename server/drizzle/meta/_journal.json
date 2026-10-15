@@ -421,6 +421,13 @@
       "when": 1792230000000,
       "tag": "0059_energy",
       "breakpoints": true
+    },
+    {
+      "idx": 60,
+      "version": "7",
+      "when": 1792240000000,
+      "tag": "0060_outfit_stars",
+      "breakpoints": true
     }
   ]
 }
