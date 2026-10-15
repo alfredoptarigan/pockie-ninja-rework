@@ -727,6 +727,22 @@ export function mergeNames<T>(
   return merged
 }
 
+/**
+ * Generated names with the glossary's reviewed English kept: an entry whose source still matches
+ * the generated name keeps its `en` (e.g. "Son Gokū" reviewed to "Son Goku").
+ */
+export function applyReviews(
+  generated: Record<string, string>,
+  glossary: Record<string, { source?: string; en?: string }>,
+): Record<string, string> {
+  return Object.fromEntries(
+    Object.entries(generated).map(([key, name]) => {
+      const entry = glossary[key]
+      return [key, entry?.source === name && entry.en ? entry.en : name]
+    }),
+  )
+}
+
 const pretty = (data: unknown, indent = 2) => `${JSON.stringify(data, null, indent)}\n`
 const sortKeys = <T>(record: Record<string, T>) =>
   Object.fromEntries(Object.entries(record).sort(([a], [b]) => (a < b ? -1 : 1)))
@@ -741,16 +757,18 @@ if (import.meta.main) {
   }
   const readJson = (file: string) =>
     JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>
-  const namesFile = join(root, 'client/src/i18n/reborn.json')
-  const mergedNames = mergeNames(readJson(namesFile), names, m6Names)
-  writeFileSync(namesFile, pretty(mergedNames))
   const glossaryFile = join(root, 'tools/i18n/glossary.json')
+  const existingGlossary = readJson(glossaryFile)
+  const reviewed = applyReviews(
+    names,
+    existingGlossary as Record<string, { source?: string; en?: string }>,
+  )
+  const namesFile = join(root, 'client/src/i18n/reborn.json')
+  const mergedNames = mergeNames(readJson(namesFile), reviewed, m6Names)
+  writeFileSync(namesFile, pretty(mergedNames))
   const entries = Object.fromEntries(
-    glossary.map(({ key, kind, name }) => [key, { kind, source: name, en: name }]),
+    glossary.map(({ key, kind, name }) => [key, { kind, source: name, en: reviewed[key] ?? name }]),
   )
-  writeFileSync(
-    glossaryFile,
-    pretty(sortKeys(mergeNames(readJson(glossaryFile), entries, m6Names)), 1),
-  )
+  writeFileSync(glossaryFile, pretty(sortKeys(mergeNames(existingGlossary, entries, m6Names)), 1))
   console.log(`${Object.keys(mergedNames).length} names`)
 }
