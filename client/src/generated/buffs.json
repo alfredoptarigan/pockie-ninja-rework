@@ -1,0 +1,627 @@
+{
+  "42101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Taijutsu Meal I",
+    "effect": "+Taijutsu (Lv.21)"
+  },
+  "42102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Taijutsu Meal II",
+    "effect": "+Taijutsu (Lv.21)"
+  },
+  "42103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.21)"
+  },
+  "42111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Snack I",
+    "effect": "+Defense (Lv.21)"
+  },
+  "42112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.21)"
+  },
+  "42113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.21)"
+  },
+  "43101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Taijutsu Meal I",
+    "effect": "+Taijutsu (Lv.31)"
+  },
+  "43102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Taijutsu Meal II",
+    "effect": "+Taijutsu (Lv.31)"
+  },
+  "43103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.31)"
+  },
+  "43111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Snack I",
+    "effect": "+Defense (Lv.31)"
+  },
+  "43112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.31)"
+  },
+  "43113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.31)"
+  },
+  "44101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.41)"
+  },
+  "44102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Defense Meal II",
+    "effect": "+Defense (Lv.41)"
+  },
+  "44103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Meal I",
+    "effect": "+Ninjutsu (Lv.41)"
+  },
+  "44111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Snack I",
+    "effect": "+Defense (Lv.41)"
+  },
+  "44112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.41)"
+  },
+  "44113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.41)"
+  },
+  "45101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.51)"
+  },
+  "45102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Defense Meal II",
+    "effect": "+Defense (Lv.51)"
+  },
+  "45103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Meal I",
+    "effect": "+Ninjutsu (Lv.51)"
+  },
+  "45111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Snack I",
+    "effect": "+Defense (Lv.51)"
+  },
+  "45112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.51)"
+  },
+  "45113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.51)"
+  },
+  "46101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.61)"
+  },
+  "46102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Defense Meal II",
+    "effect": "+Defense (Lv.61)"
+  },
+  "46103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Meal I",
+    "effect": "+Ninjutsu (Lv.61)"
+  },
+  "46111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Snack I",
+    "effect": "+Defense (Lv.61)"
+  },
+  "46112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.61)"
+  },
+  "46113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.61)"
+  },
+  "47101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.71)"
+  },
+  "47102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Defense Meal II",
+    "effect": "+Defense (Lv.71)"
+  },
+  "47103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Meal I",
+    "effect": "+Ninjutsu (Lv.71)"
+  },
+  "47111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Defense Snack I",
+    "effect": "+Defense (Lv.71)"
+  },
+  "47112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.71)"
+  },
+  "47113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.71)"
+  },
+  "48101": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Attack Meal I",
+    "effect": "+Attack (Lv.81)"
+  },
+  "48102": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Ninjutsu Meal I",
+    "effect": "+Ninjutsu (Lv.81)"
+  },
+  "48103": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Defense Meal I",
+    "effect": "+Defense (Lv.81)"
+  },
+  "48111": {
+    "icon": "/assets/game/icons/buffs/1.webp",
+    "name": "Taijutsu Snack I",
+    "effect": "+Taijutsu (Lv.81)"
+  },
+  "48112": {
+    "icon": "/assets/game/icons/buffs/7.webp",
+    "name": "Genjutsu Snack I",
+    "effect": "+Genjutsu (Lv.81)"
+  },
+  "48113": {
+    "icon": "/assets/game/icons/buffs/13.webp",
+    "name": "Ninjutsu Snack I",
+    "effect": "+Ninjutsu (Lv.81)"
+  },
+  "50001": {
+    "icon": "/assets/reborn/icons/buffs/50001.webp",
+    "name": "Exp Boost +100%",
+    "effect": "+100% Experience"
+  },
+  "50002": {
+    "icon": "/assets/reborn/icons/buffs/50002.webp",
+    "name": "Exp Boost +50%",
+    "effect": "+50% Experience"
+  },
+  "50003": {
+    "icon": "/assets/reborn/icons/buffs/50003.webp",
+    "name": "Exp Boost +25%",
+    "effect": "+25% Experience"
+  },
+  "50004": {
+    "icon": "/assets/game/icons/buffs/55.webp",
+    "name": "Drop Rate Boost",
+    "effect": "+50% Drop Rate"
+  },
+  "50005": {
+    "icon": "/assets/game/icons/buffs/55.webp",
+    "name": "Gold Boost",
+    "effect": "+50% Gold from battles"
+  },
+  "50008": {
+    "icon": "/assets/reborn/icons/buffs/50008.webp",
+    "name": "Exp Boost +150%",
+    "effect": "+150% Experience"
+  },
+  "50009": {
+    "icon": "/assets/reborn/icons/buffs/50009.webp",
+    "name": "Exp Boost +200%",
+    "effect": "+200% Experience"
+  },
+  "53101": {
+    "icon": "/assets/game/icons/buffs/49.webp",
+    "name": "Feast I",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53102": {
+    "icon": "/assets/game/icons/buffs/25.webp",
+    "name": "Feast II",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53103": {
+    "icon": "/assets/game/icons/buffs/31.webp",
+    "name": "Feast III",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53104": {
+    "icon": "/assets/game/icons/buffs/43.webp",
+    "name": "Feast IV",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53105": {
+    "icon": "/assets/game/icons/buffs/68.webp",
+    "name": "Feast V",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53106": {
+    "icon": "/assets/game/icons/buffs/67.webp",
+    "name": "Feast VI",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53107": {
+    "icon": "/assets/game/icons/buffs/19.webp",
+    "name": "Feast VII",
+    "effect": "+Stats (Lv.31)"
+  },
+  "53108": {
+    "icon": "/assets/game/icons/buffs/37.webp",
+    "name": "Feast VIII",
+    "effect": "+Stats (Lv.31)"
+  },
+  "54101": {
+    "icon": "/assets/game/icons/buffs/49.webp",
+    "name": "Feast I",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54102": {
+    "icon": "/assets/game/icons/buffs/25.webp",
+    "name": "Feast II",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54103": {
+    "icon": "/assets/game/icons/buffs/31.webp",
+    "name": "Feast III",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54104": {
+    "icon": "/assets/game/icons/buffs/43.webp",
+    "name": "Feast IV",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54105": {
+    "icon": "/assets/game/icons/buffs/68.webp",
+    "name": "Feast V",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54106": {
+    "icon": "/assets/game/icons/buffs/67.webp",
+    "name": "Feast VI",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54107": {
+    "icon": "/assets/game/icons/buffs/19.webp",
+    "name": "Feast VII",
+    "effect": "+Stats (Lv.41)"
+  },
+  "54108": {
+    "icon": "/assets/game/icons/buffs/37.webp",
+    "name": "Feast VIII",
+    "effect": "+Stats (Lv.41)"
+  },
+  "55101": {
+    "icon": "/assets/game/icons/buffs/49.webp",
+    "name": "Feast I",
+    "effect": "+Stats (Lv.51)"
+  },
+  "55102": {
+    "icon": "/assets/game/icons/buffs/25.webp",
+    "name": "Feast II",
+    "effect": "+Stats (Lv.51)"
+  },
+  "55103": {
+    "icon": "/assets/game/icons/buffs/31.webp",
+    "name": "Feast III",
+    "effect": "+Stats (Lv.51)"
+  },
+  "55104": {
+    "icon": "/assets/game/icons/buffs/43.webp",
+    "name": "Feast IV",
+    "effect": "+Stats (Lv.51)"
+  },
+  "55105": {
+    "icon": "/assets/game/icons/buffs/68.webp",
+    "name": "Feast V",
+    "effect": "+Stats (Lv.51)"
+  },
+  "55106": {
+    "icon": "/assets/game/icons/buffs/67.webp"
+  },
+  "55107": {
+    "icon": "/assets/game/icons/buffs/19.webp"
+  },
+  "55108": {
+    "icon": "/assets/game/icons/buffs/37.webp"
+  },
+  "56101": {
+    "icon": "/assets/game/icons/buffs/49.webp"
+  },
+  "56102": {
+    "icon": "/assets/game/icons/buffs/25.webp"
+  },
+  "56103": {
+    "icon": "/assets/game/icons/buffs/31.webp"
+  },
+  "56104": {
+    "icon": "/assets/game/icons/buffs/43.webp"
+  },
+  "56105": {
+    "icon": "/assets/game/icons/buffs/68.webp"
+  },
+  "56106": {
+    "icon": "/assets/game/icons/buffs/67.webp"
+  },
+  "56107": {
+    "icon": "/assets/game/icons/buffs/19.webp"
+  },
+  "56108": {
+    "icon": "/assets/game/icons/buffs/37.webp"
+  },
+  "57101": {
+    "icon": "/assets/game/icons/buffs/49.webp"
+  },
+  "57102": {
+    "icon": "/assets/game/icons/buffs/25.webp"
+  },
+  "57103": {
+    "icon": "/assets/game/icons/buffs/31.webp"
+  },
+  "57104": {
+    "icon": "/assets/game/icons/buffs/43.webp"
+  },
+  "57105": {
+    "icon": "/assets/game/icons/buffs/68.webp"
+  },
+  "57106": {
+    "icon": "/assets/game/icons/buffs/67.webp"
+  },
+  "57107": {
+    "icon": "/assets/game/icons/buffs/19.webp"
+  },
+  "57108": {
+    "icon": "/assets/game/icons/buffs/37.webp"
+  },
+  "58101": {
+    "icon": "/assets/game/icons/buffs/49.webp"
+  },
+  "58102": {
+    "icon": "/assets/game/icons/buffs/25.webp"
+  },
+  "58103": {
+    "icon": "/assets/game/icons/buffs/31.webp"
+  },
+  "58104": {
+    "icon": "/assets/game/icons/buffs/43.webp"
+  },
+  "58105": {
+    "icon": "/assets/game/icons/buffs/68.webp"
+  },
+  "58106": {
+    "icon": "/assets/game/icons/buffs/67.webp"
+  },
+  "58107": {
+    "icon": "/assets/game/icons/buffs/19.webp"
+  },
+  "58108": {
+    "icon": "/assets/game/icons/buffs/37.webp"
+  },
+  "59101": {
+    "icon": "/assets/game/icons/buffs/59101.webp"
+  },
+  "59102": {
+    "icon": "/assets/game/icons/buffs/59102.webp"
+  },
+  "59103": {
+    "icon": "/assets/game/icons/buffs/59103.webp"
+  },
+  "60000": {
+    "icon": "/assets/game/icons/buffs/11114.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.1)"
+  },
+  "60001": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.1)"
+  },
+  "60002": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.11)"
+  },
+  "60003": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.21)"
+  },
+  "60004": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.31)"
+  },
+  "60005": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.41)"
+  },
+  "60006": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.51)"
+  },
+  "60007": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.61)"
+  },
+  "60008": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.1)"
+  },
+  "60009": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.11)"
+  },
+  "60010": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.21)"
+  },
+  "60011": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.31)"
+  },
+  "60012": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.41)"
+  },
+  "60013": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.51)"
+  },
+  "60014": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.61)"
+  },
+  "60015": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.1)"
+  },
+  "60016": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.11)"
+  },
+  "60017": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.21)"
+  },
+  "60018": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.31)"
+  },
+  "60019": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.41)"
+  },
+  "60020": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.51)"
+  },
+  "60021": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.61)"
+  },
+  "60022": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.1)"
+  },
+  "60023": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.11)"
+  },
+  "60024": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.21)"
+  },
+  "60025": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.31)"
+  },
+  "60026": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.41)"
+  },
+  "60027": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.51)"
+  },
+  "60028": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.61)"
+  },
+  "60029": {
+    "icon": "/assets/game/icons/buffs/11113.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.81)"
+  },
+  "60030": {
+    "icon": "/assets/game/icons/buffs/11110.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.81)"
+  },
+  "60031": {
+    "icon": "/assets/game/icons/buffs/11111.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.81)"
+  },
+  "60032": {
+    "icon": "/assets/game/icons/buffs/11112.webp",
+    "name": "Skill Food",
+    "effect": "+Skill Stats (Lv.81)"
+  },
+  "80101": {
+    "icon": "/assets/reborn/icons/buffs/80101.webp",
+    "name": "Minor Angel's Blessing",
+    "effect": "+211 Constitution; +163 Dodge, Block, Critical, Defense Break, Hit, Defense & Pierce"
+  },
+  "80102": {
+    "icon": "/assets/reborn/icons/buffs/80102.webp",
+    "name": "Angel's Blessing",
+    "effect": "+465 Constitution; +358 Dodge, Block, Critical, Defense Break, Hit, Defense & Pierce"
+  },
+  "80201": {
+    "icon": "/assets/reborn/icons/buffs/80201.webp",
+    "name": "Minor Demon's Mark",
+    "effect": "-455 Constitution; -350 Dodge, Block, Critical, Defense Break, Hit, Defense & Pierce"
+  },
+  "80202": {
+    "icon": "/assets/reborn/icons/buffs/80202.webp",
+    "name": "Demon's Mark",
+    "effect": "-802 Constitution; -620 Dodge, Block, Critical, Defense Break, Hit, Defense & Pierce"
+  }
+}
