@@ -92,6 +92,7 @@ describe('GET /api/game/bloodlines', () => {
       amityNeeded: 30,
       unlocked: false,
       active: false,
+      activeSlot: null,
     })
     // Reborn's Ninja House card: "Drops: SM Lv71+" for the last band.
     expect(
@@ -203,6 +204,16 @@ describe('POST /api/game/bloodlines/:id/active', () => {
         .map((l: { limitId: number }) => l.limitId),
     ).toEqual([1, 3, 4])
     expect((await activate(4)).statusCode).toBe(200)
+  })
+
+  it('reports the slot of each active limit, refilling the lowest free one', async () => {
+    for (const id of [1, 2, 3]) await unlock(id)
+    for (const id of [1, 2]) await activate(id)
+    await activate(1, false)
+    const view = (await activate(3)).json()
+    const slotOf = (id: number) =>
+      view.limits.find((l: { limitId: number }) => l.limitId === id).activeSlot
+    expect([slotOf(1), slotOf(2), slotOf(3)]).toEqual([null, 1, 0])
   })
 
   it('refreshes the arena snapshot', async () => {
