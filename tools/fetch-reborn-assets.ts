@@ -21,12 +21,19 @@
 // - Wings: WING.Line stat -> json_items wingSprite (@1392732), avatar.json @1353300.
 // - Aura profiles @1334500-1337089; effects table @1358810-1363000, loader @1431000.
 // - Fight backgrounds @1429435; card names/sets @3329200-3334500, prefix @3346083.
+// - World map (WorldMapScene, place table and dot centres) @2137861: ui/SmallMap/map/*.
 // The server answers missing files with 200 text/html (SPA fallback), so HTML means "absent".
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { enumerateM6, audioPaths } from './assets/reborn-fetch.ts'
 import { dirname, extname, join, posix, resolve } from 'node:path'
 
 const BASE = 'https://pockieninjareborn.com/assets/'
+// Reborn's world map places (WorldMapScene's place table); 211/311/411/511 are its village ids.
+const WORLD_MAP_PLACES = [
+  111, 161, 171, 211, 311, 411, 511, 2101, 2102, 2103, 2201, 2202, 2203, 2301, 2302, 2303, 2401,
+  2402, 2403, 2501, 2502, 2503, 2601, 2602, 2603, 2604, 2605, 2701, 2702, 2703, 2704, 2801, 2802,
+  2803, 2804, 2805, 2806, 2807, 2808, 4009,
+]
 const CONCURRENCY = 4
 const DELAY_MS = 100
 const root = resolve(import.meta.dirname, '..')
@@ -338,6 +345,20 @@ async function main() {
       'item-icon',
       `avatar-${i + 1}`,
       `icons/items/avatars/${i + 1}.png`,
+    ]),
+    // World map (WorldMapScene): the grey painting, one coloured piece per place, the pulsing
+    // "you are here" dot and the close button states.
+    ...[
+      'map/map.png',
+      'map/world_location.png',
+      'map/closeInactive.png',
+      'map/closeHover.png',
+      'map/closePressed.png',
+      ...WORLD_MAP_PLACES.map((id) => `map/locations/${id}.png`),
+    ].map((path): [string, string, string] => [
+      'world-map',
+      posix.basename(path, '.png'),
+      `ui/SmallMap/${path}`,
     ]),
     ['daily-login', 'reward', 'dailylogin/reward.png'],
     ['daily-login', '20min', 'dailylogin/20min.png'],

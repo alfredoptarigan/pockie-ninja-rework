@@ -292,7 +292,8 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   // An unvisited field keeps its tooltip but is blocked until the ninja has walked there.
   const field = map.getByRole('button', { name: `${FIELD} (not visited yet)`, exact: true })
   await expect(field).toHaveAttribute('aria-disabled', 'true')
-  await field.hover()
+  // The pointer hits the art's pixels; the place buttons are for the keyboard.
+  await field.focus()
   await expect(map.getByRole('tooltip')).toContainText('Entry level: Level 1')
   await shot(page, 'world-map')
   await map.getByRole('button', { name: 'Close' }).click()

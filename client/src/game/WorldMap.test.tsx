@@ -26,12 +26,14 @@ describe('WorldMap', () => {
   it('draws the places without labels and marks where the ninja is', () => {
     renderMap()
 
-    expect(document.querySelector('img[src="/assets/game/map/world.webp"]')).toBeInTheDocument()
+    expect(
+      document.querySelector('img[src="/assets/reborn/ui/SmallMap/map/map.webp"]'),
+    ).toBeInTheDocument()
     // Names are accessible names only: nothing is written over the painting.
     expect(screen.queryByText('Smelting Mountains')).not.toBeInTheDocument()
     expect(place('Smelting Mountains')).toHaveAttribute('aria-disabled', 'false')
     expect(place('Fire Village (You are here)')).toHaveAttribute('aria-disabled', 'true')
-    expect(document.querySelector('img[src="/assets/game/map/111-face.webp"]')).toBeInTheDocument()
+    expect(document.querySelector('img.world-map-here')).toBeInTheDocument()
     // Other nations' villages and fields are not on this ninja's roads.
     expect(place('Water Village')).toHaveAttribute('aria-disabled', 'true')
     expect(place('Verdant Alley')).toHaveAttribute('aria-disabled', 'true')
@@ -55,14 +57,13 @@ describe('WorldMap', () => {
     expect(screen.getByRole('tooltip')).toHaveTextContent('Entry level: Level 1')
   })
 
-  it('hides the art of locked places, like WorldMapFrame (alpha 0), with the level they need', () => {
+  it('darkens locked places like Reborn (tint 0x666666), with the level they need', () => {
     renderMap()
 
-    // The bare painting shows through; nothing is greyed out.
-    const water = place('Water Village')
-    expect(water.querySelector('.opacity-0')).not.toBeNull()
-    expect(water.querySelector('.grayscale')).toBeNull()
-    expect(place('Smelting Mountains').querySelector('.opacity-0')).toBeNull()
+    const art = (scene: number) =>
+      document.querySelector<HTMLElement>(`img[data-place="${scene}"]`)!
+    expect(art(121).style.filter).toBe('brightness(0.4)')
+    expect(art(2101).style.filter).toBe('')
     expect(place('Eventide Barrens Lv. 11')).toHaveTextContent('Lv. 11')
   })
 
@@ -99,22 +100,30 @@ describe('WorldMap', () => {
     expect(requestBody(fetchMock, 'POST /api/game/travel')).toBeUndefined()
   })
 
-  it('stacks overlapping places by their original depth', () => {
-    renderMap()
+  it('travels by pointer to the place under it, tinting it on hover', async () => {
+    const { fetchMock, onClose } = renderMap()
+    const painting = document.querySelector('img[src$="/map.webp"]')!.parentElement!
+    const art = document.querySelector<HTMLElement>('img[data-place="2101"]')!
 
-    // Fire Village (depth 4) covers part of Smelting Mountains (depth 2).
-    expect(Number(place('Fire Village (You are here)').style.zIndex)).toBeGreaterThan(
-      Number(place('Smelting Mountains').style.zIndex),
-    )
+    // (50, 310) lies on Smelting Mountains only.
+    fireEvent.pointerMove(painting, { clientX: 50, clientY: 310 })
+    expect(art.style.filter).toContain('#world-map-hover')
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Smelting Mountains')
+    fireEvent.pointerDown(painting, { clientX: 50, clientY: 310 })
+    fireEvent.pointerUp(painting, { clientX: 50, clientY: 310 })
+
+    await waitFor(() => expect(onClose).toHaveBeenCalled())
+    expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ sceneId: 2101, via: 'map' })
   })
 
-  it('lists the roads that are not on the painting and locks them by level', () => {
+  it('puts every road on the painting and keeps the places this game lacks locked', () => {
     renderMap()
 
-    // Every M3 field has a map button now; the Christmas House is closed (CLOSED_SCENES).
-    const others = screen.getByRole('region', { name: 'Other areas' })
-    expect(others).not.toHaveTextContent('Christmas House')
-    expect(screen.getByRole('button', { name: 'Hidden Rain Village Lv. 86' })).toBeDisabled()
+    // Reborn's painting has Hidden Rain Village too, so no road is listed under it.
+    expect(screen.queryByRole('region', { name: 'Other areas' })).not.toBeInTheDocument()
+    expect(place('Hidden Rain Village Lv. 86')).toHaveAttribute('aria-disabled', 'true')
+    fireEvent.mouseEnter(place('Konohagakure (unavailable)'))
+    expect(screen.getByRole('tooltip')).toHaveTextContent('This location is unavailable.')
     // Places on the painting carry their level lock in their name too.
     expect(place('Eventide Barrens Lv. 11')).toHaveAttribute('aria-disabled', 'true')
   })

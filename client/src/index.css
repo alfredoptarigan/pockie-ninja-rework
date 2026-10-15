@@ -488,3 +488,22 @@
 @utility game-equip-backdrop {
   background: var(--ui-equip-backdrop) -63px -61px / 364px 378px no-repeat;
 }
+
+/* World map "you are here" dot: Reborn fades it out and back in every second. */
+@keyframes world-map-here {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.world-map-here {
+  animation: world-map-here 1s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-map-here {
+    animation: none;
+  }
+}

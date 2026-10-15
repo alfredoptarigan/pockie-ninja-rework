@@ -20735,6 +20735,276 @@
     "id": "menu",
     "bytes": 2106
   },
+  "ui/SmallMap/map/closeHover.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/closeHover.webp",
+    "category": "world-map",
+    "id": "closeHover",
+    "bytes": 344
+  },
+  "ui/SmallMap/map/closeInactive.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/closeInactive.webp",
+    "category": "world-map",
+    "id": "closeInactive",
+    "bytes": 312
+  },
+  "ui/SmallMap/map/closePressed.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/closePressed.webp",
+    "category": "world-map",
+    "id": "closePressed",
+    "bytes": 466
+  },
+  "ui/SmallMap/map/locations/111.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/111.webp",
+    "category": "world-map",
+    "id": "111",
+    "bytes": 1854
+  },
+  "ui/SmallMap/map/locations/161.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/161.webp",
+    "category": "world-map",
+    "id": "161",
+    "bytes": 2340
+  },
+  "ui/SmallMap/map/locations/171.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/171.webp",
+    "category": "world-map",
+    "id": "171",
+    "bytes": 2536
+  },
+  "ui/SmallMap/map/locations/2101.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2101.webp",
+    "category": "world-map",
+    "id": "2101",
+    "bytes": 1600
+  },
+  "ui/SmallMap/map/locations/2102.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2102.webp",
+    "category": "world-map",
+    "id": "2102",
+    "bytes": 2994
+  },
+  "ui/SmallMap/map/locations/2103.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2103.webp",
+    "category": "world-map",
+    "id": "2103",
+    "bytes": 1182
+  },
+  "ui/SmallMap/map/locations/211.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/211.webp",
+    "category": "world-map",
+    "id": "211",
+    "bytes": 1688
+  },
+  "ui/SmallMap/map/locations/2201.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2201.webp",
+    "category": "world-map",
+    "id": "2201",
+    "bytes": 1170
+  },
+  "ui/SmallMap/map/locations/2202.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2202.webp",
+    "category": "world-map",
+    "id": "2202",
+    "bytes": 1526
+  },
+  "ui/SmallMap/map/locations/2203.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2203.webp",
+    "category": "world-map",
+    "id": "2203",
+    "bytes": 2028
+  },
+  "ui/SmallMap/map/locations/2301.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2301.webp",
+    "category": "world-map",
+    "id": "2301",
+    "bytes": 1262
+  },
+  "ui/SmallMap/map/locations/2302.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2302.webp",
+    "category": "world-map",
+    "id": "2302",
+    "bytes": 2120
+  },
+  "ui/SmallMap/map/locations/2303.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2303.webp",
+    "category": "world-map",
+    "id": "2303",
+    "bytes": 2884
+  },
+  "ui/SmallMap/map/locations/2401.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2401.webp",
+    "category": "world-map",
+    "id": "2401",
+    "bytes": 2504
+  },
+  "ui/SmallMap/map/locations/2402.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2402.webp",
+    "category": "world-map",
+    "id": "2402",
+    "bytes": 2486
+  },
+  "ui/SmallMap/map/locations/2403.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2403.webp",
+    "category": "world-map",
+    "id": "2403",
+    "bytes": 1618
+  },
+  "ui/SmallMap/map/locations/2501.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2501.webp",
+    "category": "world-map",
+    "id": "2501",
+    "bytes": 1668
+  },
+  "ui/SmallMap/map/locations/2502.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2502.webp",
+    "category": "world-map",
+    "id": "2502",
+    "bytes": 2934
+  },
+  "ui/SmallMap/map/locations/2503.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2503.webp",
+    "category": "world-map",
+    "id": "2503",
+    "bytes": 2624
+  },
+  "ui/SmallMap/map/locations/2601.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2601.webp",
+    "category": "world-map",
+    "id": "2601",
+    "bytes": 9022
+  },
+  "ui/SmallMap/map/locations/2602.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2602.webp",
+    "category": "world-map",
+    "id": "2602",
+    "bytes": 1526
+  },
+  "ui/SmallMap/map/locations/2603.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2603.webp",
+    "category": "world-map",
+    "id": "2603",
+    "bytes": 1330
+  },
+  "ui/SmallMap/map/locations/2604.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2604.webp",
+    "category": "world-map",
+    "id": "2604",
+    "bytes": 2536
+  },
+  "ui/SmallMap/map/locations/2605.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2605.webp",
+    "category": "world-map",
+    "id": "2605",
+    "bytes": 1840
+  },
+  "ui/SmallMap/map/locations/2701.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2701.webp",
+    "category": "world-map",
+    "id": "2701",
+    "bytes": 2506
+  },
+  "ui/SmallMap/map/locations/2702.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2702.webp",
+    "category": "world-map",
+    "id": "2702",
+    "bytes": 1350
+  },
+  "ui/SmallMap/map/locations/2703.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2703.webp",
+    "category": "world-map",
+    "id": "2703",
+    "bytes": 1438
+  },
+  "ui/SmallMap/map/locations/2704.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2704.webp",
+    "category": "world-map",
+    "id": "2704",
+    "bytes": 892
+  },
+  "ui/SmallMap/map/locations/2801.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2801.webp",
+    "category": "world-map",
+    "id": "2801",
+    "bytes": 2030
+  },
+  "ui/SmallMap/map/locations/2802.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2802.webp",
+    "category": "world-map",
+    "id": "2802",
+    "bytes": 978
+  },
+  "ui/SmallMap/map/locations/2803.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2803.webp",
+    "category": "world-map",
+    "id": "2803",
+    "bytes": 2088
+  },
+  "ui/SmallMap/map/locations/2804.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2804.webp",
+    "category": "world-map",
+    "id": "2804",
+    "bytes": 1924
+  },
+  "ui/SmallMap/map/locations/2805.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2805.webp",
+    "category": "world-map",
+    "id": "2805",
+    "bytes": 1202
+  },
+  "ui/SmallMap/map/locations/2806.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2806.webp",
+    "category": "world-map",
+    "id": "2806",
+    "bytes": 1950
+  },
+  "ui/SmallMap/map/locations/2807.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2807.webp",
+    "category": "world-map",
+    "id": "2807",
+    "bytes": 2484
+  },
+  "ui/SmallMap/map/locations/2808.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/2808.webp",
+    "category": "world-map",
+    "id": "2808",
+    "bytes": 1678
+  },
+  "ui/SmallMap/map/locations/311.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/311.webp",
+    "category": "world-map",
+    "id": "311",
+    "bytes": 1810
+  },
+  "ui/SmallMap/map/locations/4009.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/4009.webp",
+    "category": "world-map",
+    "id": "4009",
+    "bytes": 5534
+  },
+  "ui/SmallMap/map/locations/411.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/411.webp",
+    "category": "world-map",
+    "id": "411",
+    "bytes": 1380
+  },
+  "ui/SmallMap/map/locations/511.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/locations/511.webp",
+    "category": "world-map",
+    "id": "511",
+    "bytes": 2466
+  },
+  "ui/SmallMap/map/map.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/map.webp",
+    "category": "world-map",
+    "id": "map",
+    "bytes": 80284
+  },
+  "ui/SmallMap/map/world_location.png": {
+    "url": "/assets/reborn/ui/SmallMap/map/world_location.webp",
+    "category": "world-map",
+    "id": "world_location",
+    "bytes": 570
+  },
   "ui/UIResource/Talent/802.png": {
     "url": "/assets/reborn/ui/UIResource/Talent/802.webp",
     "category": "talent",
