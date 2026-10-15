@@ -86,7 +86,9 @@ describe('queue', () => {
 describe('attempts', () => {
   it('are spent only when the fight starts, not on queueing or leaving', async () => {
     const a = await ninja('Fighter')
-    await bots(5)
+    // Equal teams lose about 2% of fights, and a loss from 0 is clamped to a delta of 0: weaken
+    // every bot so the fight (and the delta checked below) is certain.
+    for (const n of await bots(5)) await n.weaken()
     await queue(a)
     expect((await state(a)).attemptsUsed).toBe(0)
     await a.client.post(`${BASE}/queue/leave`)
