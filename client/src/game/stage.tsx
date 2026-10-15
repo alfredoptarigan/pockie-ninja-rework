@@ -161,14 +161,17 @@ export function BattleReplayMount({
 
   if (failed) return null
   return (
-    <div className="fixed inset-0 z-40 grid place-items-center bg-black/75 p-4">
-      <section aria-label="Battle replay" className="flex w-[min(1000px,100%)] flex-col gap-2">
+    <div className="fixed inset-0 z-40 grid place-items-center bg-black/20 p-4 backdrop-blur-sm">
+      <section
+        aria-label="Battle replay"
+        className="relative w-[min(1000px,100%,calc((100dvh-32px)*5/3))]"
+      >
         <div
           ref={ref}
           data-testid="battle-stage"
-          className="aspect-[5/3] w-full overflow-hidden rounded bg-black"
+          className="aspect-[5/3] w-full overflow-hidden bg-black"
         />
-        <div className="flex justify-center gap-2">
+        <div className="absolute inset-x-2 bottom-2 flex justify-between gap-2">
           <GameButton small autoFocus disabled={!handle} onClick={() => handle?.skip()}>
             Skip
           </GameButton>

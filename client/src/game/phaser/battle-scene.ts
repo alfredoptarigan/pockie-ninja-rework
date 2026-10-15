@@ -5,7 +5,9 @@ import type { MotionSheet } from '../../generated/game-assets'
 import type { WeaponLayer } from '../../generated/game-extra'
 import type { VisualReplay as Replay, CompanionLook } from './companions'
 import { BattleVisuals, DEPTH } from './battle-visuals'
+import { petAsset, visualLook } from './companions'
 import { numberAssets } from './effects-map'
+import { replayTechniques, techniqueIcon } from './battle-hud'
 import { numberGlyphs, glyphLayout } from './numbers'
 import { createGame, LABEL_STYLE, loadSheet } from './game'
 import { frameAt, originOf, sheetOf, sheetTicks, type FighterArt } from './motion'
@@ -63,7 +65,7 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
   skill: { color: '#fff3c4', size: 26 },
   info: { color: '#e8f4ff', size: 24 },
 }
-const HUD = { margin: 12, portrait: 84, vsGap: 30, hpY: 22, hpH: 24, mpY: 52, mpH: 9 }
+const HUD = { margin: 12, portrait: 68, vsGap: 24, hpY: 28, hpH: 18, mpY: 48, mpH: 7 }
 /** Puts the weapon right above its body (body depths are pose start times in ms). */
 const WEAPON_ABOVE_BODY = 0.01
 
@@ -88,15 +90,18 @@ class BattleScene extends Phaser.Scene {
   private floating = new Map<number, Phaser.GameObjects.Text | Phaser.GameObjects.Container>()
   private visuals: BattleVisuals
   private slots: number[]
+  private techniques: number[][]
   private hud!: Phaser.GameObjects.Graphics
   private hudText: Phaser.GameObjects.Text[] = []
   private portraits: Partial<Record<'attackers' | 'defenders', Phaser.GameObjects.Image>> = {}
   private banner!: Phaser.GameObjects.Text
+  private panelIcons = new Map<string, Phaser.GameObjects.Image>()
 
   constructor(private readonly setup: BattleSetup) {
     super('battle')
     this.visuals = new BattleVisuals(this, setup.replay, setup.timeline, setup.looks)
     this.slots = textSlots(setup.timeline.texts)
+    this.techniques = setup.replay.fighters.map((_, i) => replayTechniques(setup.replay, i))
   }
 
   preload() {
@@ -106,6 +111,18 @@ class BattleScene extends Phaser.Scene {
     for (const fighterArt of art) {
       const portrait = fighterArt?.set.portrait
       if (portrait && !this.textures.exists(portrait)) this.load.image(portrait, portrait)
+    }
+    for (const fighter of this.setup.replay.fighters) {
+      const icon = petAsset(
+        visualLook(fighter, this.setup.looks?.[fighter.index]).pet?.avatar,
+      )?.icon
+      if (icon && !this.textures.exists(icon)) this.load.image(icon, icon)
+    }
+    for (const skills of this.techniques) {
+      for (const id of skills) {
+        const icon = techniqueIcon(id)
+        if (!this.textures.exists(icon)) this.load.image(icon, icon)
+      }
     }
     timeline.poses.forEach((poses, i) => {
       const weapon = weapons[i]
@@ -348,18 +365,19 @@ class BattleScene extends Phaser.Scene {
     const g = this.hud
     g.clear()
     let line = 0
+    for (const icon of this.panelIcons.values()) icon.setVisible(false)
     for (const side of ['attackers', 'defenders'] as const) {
       const fighter = this.onStage(side, t)
       const left = side === 'attackers'
       const portraitX = left ? HUD.margin : STAGE.width - HUD.margin - HUD.portrait
-      g.fillStyle(0x1c0f07, 0.85).fillRoundedRect(
+      g.fillStyle(0x080b08, 0.9).fillRoundedRect(
         portraitX,
         HUD.margin,
         HUD.portrait,
         HUD.portrait,
         8,
       )
-      g.lineStyle(3, 0xd9a441).strokeRoundedRect(
+      g.lineStyle(2, 0x272d27).strokeRoundedRect(
         portraitX,
         HUD.margin,
         HUD.portrait,
@@ -392,33 +410,87 @@ class BattleScene extends Phaser.Scene {
       // Remaining HP stays on the portrait side; the loss shows next to the emblem.
       const fill = (ratio: number) => barW * Math.min(1, Math.max(0, ratio))
       const hpW = fill(hp / Math.max(1, f.maxHp))
-      g.fillStyle(0x2a0e08, 0.9).fillRect(barX, HUD.hpY, barW, HUD.hpH)
-      g.fillGradientStyle(0xffb21c, 0xffb21c, 0xd8401a, 0xd8401a)
-      g.fillRect(left ? barX : barX + barW - hpW, HUD.hpY, hpW, HUD.hpH)
-      g.lineStyle(2, 0x1c0f07).strokeRect(barX, HUD.hpY, barW, HUD.hpH)
+      const bevel = (x: number, y: number, width: number, height: number) => [
+        new Phaser.Math.Vector2(x - 8, y),
+        new Phaser.Math.Vector2(x + width + 8, y),
+        new Phaser.Math.Vector2(x + width - 6, y + height),
+        new Phaser.Math.Vector2(x + 6, y + height),
+      ]
+      const frame = bevel(barX, HUD.hpY - 2, barW, HUD.hpH + 4)
+      g.fillStyle(0x121712, 0.95).fillPoints(frame, true)
+      g.fillGradientStyle(0xffc022, 0xc92b0b, 0xffa113, 0xa62208)
+      if (hpW > 0) g.fillPoints(bevel(left ? barX : barX + barW - hpW, HUD.hpY, hpW, HUD.hpH), true)
+      g.lineStyle(3, 0x5a655b).strokePoints(frame, true)
       if (f.maxMp) {
         const mpW = fill(mp / f.maxMp)
         g.fillStyle(0x0e1a2a, 0.9).fillRect(barX, HUD.mpY, barW, HUD.mpH)
         g.fillStyle(0x3a9ae8).fillRect(left ? barX : barX + barW - mpW, HUD.mpY, mpW, HUD.mpH)
       }
-      const edge = left ? barX + 4 : barX + barW - 4
-      const align = left ? 0 : 1
-      this.hudLine(line++, edge, HUD.hpY + 1, `HP ${hp}/${f.maxHp}`, 15, align)
+      const panelX = left ? 0 : STAGE.width - 156
+      g.fillStyle(0x080d05, 0.68).fillRect(panelX, 145, 156, 410)
+      g.lineStyle(1, 0x8d9167, 0.5).lineBetween(panelX, 198, panelX + 156, 198)
+      this.hudLine(line++, panelX + 7, 158, names[fighter]!, 12, 0)
+      this.hudLine(line++, panelX + 7, 180, `Lv. ${f.level}`, 12, 0)
+      this.hudLine(line++, panelX + 7, 204, `Hp:       ${hp} / ${f.maxHp}`, 12, 0, '#ed3e31')
+      this.hudLine(line++, panelX + 7, 220, `Chakra: ${mp} / ${f.maxMp ?? '—'}`, 12, 0, '#67c7e8')
       const buffs = (state?.buffs ?? []).map((id) => buffName(id)).filter(Boolean)
-      const status = `${names[fighter]}  Lv. ${f.level}${buffs.length ? `   ${buffs.join(', ')}` : ''}`
-      this.hudLine(line++, edge, HUD.mpY + HUD.mpH + 4, status, 17, align)
+      this.hudLine(line++, panelX + 7, 246, buffs.join('\n'), 11, 0)
+      const pet = petAsset(visualLook(f, this.setup.looks?.[fighter]).pet?.avatar)
+      g.fillStyle(0x050605, 0.8).fillRect(panelX + 7, 390, 48, 54)
+      if (pet?.icon) this.panelIcon(`pet:${side}`, pet.icon, panelX + 31, 417, 46)
+      this.hudLine(line++, panelX + 7, 453, 'Techniques used', 11, 0)
+      // Replay events contain cast skills, not the equipped loadout; empty cells stay empty.
+      const skills = this.techniques[fighter] ?? []
+      for (let slot = 0; slot < 15; slot++) {
+        const x = panelX + 7 + (slot % 5) * 29
+        const y = 470 + Math.floor(slot / 5) * 28
+        g.fillStyle(0x101513, 0.9).fillRect(x, y, 26, 26)
+        g.lineStyle(1, 0x686d63).strokeRect(x, y, 26, 26)
+        if (skills[slot])
+          this.panelIcon(`skill:${side}:${slot}`, techniqueIcon(skills[slot]!), x + 13, y + 13, 24)
+      }
     }
+    this.hudLine(line++, STAGE.width / 2, STAGE.height - 28, `${(t / 1000).toFixed(1)}s`, 16, 0.5)
     for (let i = line; i < this.hudText.length; i++) this.hudText[i]!.setVisible(false)
   }
 
-  private hudLine(i: number, x: number, y: number, text: string, size: number, align: number) {
+  private hudLine(
+    i: number,
+    x: number,
+    y: number,
+    text: string,
+    size: number,
+    align: number,
+    color = '#e1e4d8',
+  ) {
     this.hudText[i] ??= this.add
-      .text(0, 0, '', { ...LABEL_STYLE, strokeThickness: 4 })
+      .text(0, 0, '', {
+        ...LABEL_STYLE,
+        fontFamily: 'Arial, sans-serif',
+        fontStyle: 'normal',
+        strokeThickness: 1,
+      })
       .setDepth(DEPTH.ui + 101)
     this.hudText[i]!.setText(text)
       .setFontSize(size)
+      .setColor(color)
+      .setWordWrapWidth(142)
       .setOrigin(align, 0)
       .setPosition(x, y)
+      .setVisible(true)
+  }
+
+  private panelIcon(id: string, key: string, x: number, y: number, size: number) {
+    if (!this.textures.exists(key)) return
+    let icon = this.panelIcons.get(id)
+    if (!icon) {
+      icon = this.add.image(x, y, key).setDepth(DEPTH.ui + 101)
+      this.panelIcons.set(id, icon)
+    }
+    icon
+      .setTexture(key)
+      .setPosition(x, y)
+      .setScale(Math.min(1, size / Math.max(icon.width, icon.height)))
       .setVisible(true)
   }
 
