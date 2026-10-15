@@ -2,12 +2,13 @@
 // on arena_players and refreshed on every gear, level or skill change.
 import { eq } from 'drizzle-orm'
 import { arenaPlayers, characters, inventoryItems, type ArenaSnapshot } from '../../db/schema.js'
-import { wornItemsWhere } from '../../game/bag.js'
+import { equippedGear, type Gear } from '../../game/equipment.js'
 import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.js'
 import { talentFighterInput } from '../../game/talents.js'
 import { bloodlineBonuses } from '../../game/bloodlines.js'
 import { wingBonuses } from '../../game/wings.js'
 import { collectionBonuses } from '../../game/collection.js'
+import { sanninBonuses } from '../../game/sannin.js'
 import { activePetFighterInput } from '../../game/pets.js'
 import { activeBuffs, buffBonuses, sumBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, wingLook, type PlayerFighter } from '../../game/combat.js'
@@ -33,10 +34,14 @@ export interface ArenaFighter {
 
 /** A ninja as an arena fighter: playerFighterFrom with the equipped rows, at full HP and MP. */
 export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<ArenaFighter> {
-  const equipped = await tx.select().from(inventoryItems).where(wornItemsWhere(character.id))
+  // equippedGear returns the worn rows (the outfit with its recast ISV), so fights and the
+  // defence count the same Recast stats.
+  const equipped = (await equippedGear(tx, character.id)) as (typeof inventoryItems.$inferSelect &
+    Pick<Gear, 'isv'>)[]
   const bloodlines = await bloodlineBonuses(tx, character.id)
   const wings = await wingBonuses(tx, character.id)
   const collection = await collectionBonuses(tx, character.id)
+  const sannin = await sanninBonuses(tx, character.id)
   const pet = await activePetFighterInput(tx, character.id)
   const live = playerFighterFrom(
     character,
@@ -46,6 +51,7 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
       bloodlines,
       wings,
       collection,
+      sannin,
       pet?.bonuses ?? {},
     ),
     await characterSkillInputs(tx, character.id),
@@ -88,6 +94,7 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
       pet,
       // Only when set, so snapshots without a collection keep their source.
       ...(Object.keys(collection).length > 0 ? [collection] : []),
+      ...(Object.keys(sannin).length > 0 ? [sannin] : []),
     ]),
   }
 }

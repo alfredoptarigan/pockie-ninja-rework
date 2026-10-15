@@ -637,8 +637,20 @@ const FEATURES: {
     level: 25,
     feature: 'tailedBeast',
   },
-  { key: 'shichibukai', label: 'Shichibukai', icon: topIcon('shichibukai'), level: 30 },
-  { key: 'sannin', label: 'Sannin Test', icon: topIcon('sannin-test'), level: 60 },
+  {
+    key: 'shichibukai',
+    label: 'Shichibukai',
+    icon: topIcon('shichibukai'),
+    level: 30,
+    feature: 'shichibukai',
+  },
+  {
+    key: 'sannin',
+    label: 'Sannin Test',
+    icon: topIcon('sannin-test'),
+    level: 60,
+    feature: 'sanninTest',
+  },
 ]
 const ICON_STEP = 58
 const ICON_RIGHT = 160

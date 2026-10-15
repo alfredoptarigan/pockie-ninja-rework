@@ -2301,3 +2301,47 @@ export const hashiramaPlayers = pgTable(
     ),
   ],
 )
+
+// Shichibukai: today's expeditions, exchange points, best stars per "difficulty-floor" and the
+// saved run (validated by modules/shichibukai/rules.ts runSchema), or null between runs.
+export const shichibukaiPlayers = pgTable(
+  'shichibukai_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    attemptDay: date('attempt_day'),
+    attemptsUsed: smallint('attempts_used').notNull().default(0),
+    points: integer('points').notNull().default(0),
+    stars: jsonb('stars')
+      .$type<Record<string, number>>()
+      .notNull()
+      .default(sql`'{}'::jsonb`),
+    run: jsonb('run'),
+  },
+  (t) => [check('shichibukai_players_values', sql`${t.attemptsUsed} >= 0 and ${t.points} >= 0`)],
+)
+
+// Sannin Test: title rank, Growing Points, today's dice and free changes (UTC day), and the
+// unclaimed six dice (null when nothing is pending).
+export const sanninPlayers = pgTable(
+  'sannin_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    rank: smallint('rank').notNull().default(0),
+    growthPoints: integer('growth_points').notNull().default(0),
+    diceDay: date('dice_day'),
+    diceUsed: smallint('dice_used').notNull().default(0),
+    changesUsed: smallint('changes_used').notNull().default(0),
+    pending: smallint('pending').array(),
+    totalRolls: integer('total_rolls').notNull().default(0),
+  },
+  (t) => [
+    check(
+      'sannin_players_values',
+      sql`${t.rank} >= 0 and ${t.growthPoints} >= 0 and ${t.diceUsed} >= 0 and ${t.changesUsed} >= 0 and ${t.totalRolls} >= 0 and (${t.pending} is null or cardinality(${t.pending}) = 6)`,
+    ),
+  ],
+)

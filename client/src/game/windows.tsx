@@ -34,6 +34,8 @@ import { ClanBrowserWindow, ClanWindow } from './clans'
 import { DungeonsWindow } from './dungeons'
 import { ZanpakutoWindow } from './zanpakuto'
 import { ImpelDownWindow } from './impel-down'
+import { ShichibukaiWindow } from './shichibukai'
+import { SanninTestWindow } from './sannin-test'
 import { TsunadePubWindow } from './tsunade-pub'
 import { MallWindow } from './mall'
 import { KonohaBoutiqueWindow } from './konoha-boutique'
@@ -75,6 +77,8 @@ export type WindowName =
   | 'dungeons'
   | 'zanpakuto'
   | 'impelDown'
+  | 'shichibukai'
+  | 'sanninTest'
   | 'tsunadePub'
   | 'mall'
   | 'konohaBoutique'
@@ -150,6 +154,12 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   zanpakuto: ({ onClose }) => <ZanpakutoWindow onClose={onClose} />,
   impelDown: ({ character, onClose }) => (
     <ImpelDownWindow character={character} onClose={onClose} />
+  ),
+  shichibukai: ({ character, onClose }) => (
+    <ShichibukaiWindow character={character} onClose={onClose} />
+  ),
+  sanninTest: ({ character, onClose }) => (
+    <SanninTestWindow character={character} onClose={onClose} />
   ),
   tsunadePub: ({ onClose }) => <TsunadePubWindow onClose={onClose} />,
   mall: ({ character, onClose }) => <MallWindow character={character} onClose={onClose} />,
