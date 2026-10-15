@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
 
@@ -23,3 +24,6 @@ export const paths = {
 export function assetUrl(relative: string) {
   return `/assets/${relative}`
 }
+
+/** Whether the original game backup is on this machine; tests that read it skip without it. */
+export const hasBackup = existsSync(join(backup, 'apache/source/binary'))

@@ -19,42 +19,45 @@ import {
 } from './extra.ts'
 import { arenaNpcs } from './arena.ts'
 import tableGaps from './weapon-table-gaps.json'
-import { paths } from './paths.ts'
+import { hasBackup, paths } from './paths.ts'
 import { CITY_SCENES, FIELD_SCENES, VILLAGE_SCENES } from './sources.ts'
 
 const fileExists = (url: string) =>
   expect(existsSync(join(paths.root, 'client/public', url)), url).toBe(true)
 
 describe('M2 extra asset coverage', () => {
-  it('covers every item with an icon in the backup, the M2 slice included', () => {
-    const { withIcon } = itemIconIds()
-    expect(Object.keys(gameItems.items).sort()).toEqual(withIcon)
-    for (const id of sliceItemIds()) expect(gameItems.items[id], id).toBeDefined()
-    // Known gaps: 48 resource keys have no bitmap in the backup (home eggs and drops are SWFs,
-    // unnamed avatar clothes, blood souls), and the Chinese-text icons are left out.
-    expect(gameItems.gaps.missingIcons).toHaveLength(48)
-    expect(gameItems.gaps.textIcons.map((key) => key.toLowerCase()).sort()).toEqual(
-      [...ICONS_WITH_TEXT].sort(),
-    )
-    // M3 spot checks: forge talismans and Valhalla crystals.
-    for (const id of ['i161001', 'i161009', 'i152010', 'i152015'])
-      expect(gameItems.items[id], id).toBeDefined()
-    const world = JSON.parse(
-      readFileSync(join(paths.root, 'client/src/game/world-data.json'), 'utf8'),
-    )
-    // Named items with no icon in the 2011 backup nor in Reborn: the bag draws its "?" for them.
-    const withoutIcon = new Set(['i120007', 'i120008', 'i140045', 'i140060'])
-    for (const id of Object.keys(world.itemNames)) {
-      // M5 Reborn items carry their own icons (world.rebornItemIcons).
-      if (world.rebornItemIcons[id]) fileExists(world.rebornItemIcons[id])
-      else if (!withoutIcon.has(id)) expect(gameItems.items[id], id).toBeDefined()
-    }
-    for (const icon of Object.values(gameItems.items)) {
-      fileExists(icon.file)
-      expect(icon.width).toBeGreaterThan(0)
-      expect(icon.height).toBeGreaterThan(0)
-    }
-  })
+  it.skipIf(!hasBackup)(
+    'covers every item with an icon in the backup, the M2 slice included',
+    () => {
+      const { withIcon } = itemIconIds()
+      expect(Object.keys(gameItems.items).sort()).toEqual(withIcon)
+      for (const id of sliceItemIds()) expect(gameItems.items[id], id).toBeDefined()
+      // Known gaps: 48 resource keys have no bitmap in the backup (home eggs and drops are SWFs,
+      // unnamed avatar clothes, blood souls), and the Chinese-text icons are left out.
+      expect(gameItems.gaps.missingIcons).toHaveLength(48)
+      expect(gameItems.gaps.textIcons.map((key) => key.toLowerCase()).sort()).toEqual(
+        [...ICONS_WITH_TEXT].sort(),
+      )
+      // M3 spot checks: forge talismans and Valhalla crystals.
+      for (const id of ['i161001', 'i161009', 'i152010', 'i152015'])
+        expect(gameItems.items[id], id).toBeDefined()
+      const world = JSON.parse(
+        readFileSync(join(paths.root, 'client/src/game/world-data.json'), 'utf8'),
+      )
+      // Named items with no icon in the 2011 backup nor in Reborn: the bag draws its "?" for them.
+      const withoutIcon = new Set(['i120007', 'i120008', 'i140045', 'i140060'])
+      for (const id of Object.keys(world.itemNames)) {
+        // M5 Reborn items carry their own icons (world.rebornItemIcons).
+        if (world.rebornItemIcons[id]) fileExists(world.rebornItemIcons[id])
+        else if (!withoutIcon.has(id)) expect(gameItems.items[id], id).toBeDefined()
+      }
+      for (const icon of Object.values(gameItems.items)) {
+        fileExists(icon.file)
+        expect(icon.width).toBeGreaterThan(0)
+        expect(icon.height).toBeGreaterThan(0)
+      }
+    },
+  )
 
   it('covers every compatible weapon for every exported player outfit', () => {
     expect(gameWeapons.gaps.unmappedActions).toEqual(tableGaps.actions)
@@ -145,7 +148,7 @@ describe('M2 extra asset coverage', () => {
     }
   }, 30_000)
 
-  it('resolves every arena outfit/weapon pair to exported WebP layers', () => {
+  it.skipIf(!hasBackup)('resolves every arena outfit/weapon pair to exported WebP layers', () => {
     const arena = JSON.parse(readFileSync(join(paths.generated, 'game-arena.json'), 'utf8'))
     expect(arena.gaps.weaponsWithoutLayers).toEqual([])
     const pairs = new Set<string>()

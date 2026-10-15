@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { arenaNpcs } from './arena.ts'
-import { paths } from './paths.ts'
+import { hasBackup, paths } from './paths.ts'
 import {
   SCENES,
   monsterNpcs,
@@ -134,7 +134,7 @@ describe('game asset manifests', () => {
     expect(motions.monsters.n320157).toBe(motions.monsters.n320140)
   })
 
-  it('cover the fighters drawn like players with an exported outfit', () => {
+  it.skipIf(!hasBackup)('cover the fighters drawn like players with an exported outfit', () => {
     const people = peopleNpcs()
     expect(Object.keys(people).length).toBeGreaterThan(400)
     expect(motions.people).toEqual(people)
@@ -170,7 +170,7 @@ describe('game asset manifests', () => {
     }
   })
 
-  it('cover the 21 toll gates with their map and fight points', () => {
+  it.skipIf(!hasBackup)('cover the 21 toll gates with their map and fight points', () => {
     const ids = tollGateScenes().map((gate) => gate.id)
     expect(ids).toHaveLength(21)
     expect(Object.keys(tollGates).sort()).toEqual(ids)
@@ -206,7 +206,7 @@ describe('game-arena.json', () => {
     gaps: { facesNotInBackup: number[]; weaponsWithoutLayers: string[] }
   }
 
-  it('covers every arena NPC with a face and an outfit, or with mob art', () => {
+  it.skipIf(!hasBackup)('covers every arena NPC with a face and an outfit, or with mob art', () => {
     const npcs = arenaNpcs()
     expect(Object.keys(npcs)).toHaveLength(375)
     expect(arena.npcs).toEqual(npcs)
