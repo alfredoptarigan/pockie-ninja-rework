@@ -3,6 +3,7 @@ import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { passRowFromTooltip } from './import-reborn-m6.ts'
 import {
+  applyReviews,
   buildOutfits,
   buildReborn,
   defaultPetIniDir,
@@ -467,6 +468,20 @@ describe('mergeNames', () => {
   })
 })
 
+describe('applyReviews', () => {
+  it('keeps reviewed English while the source is unchanged, else takes the new name', () => {
+    const glossary = {
+      a: { source: 'Son Gokū', en: 'Son Goku' },
+      b: { source: 'Old', en: 'Reviewed Old' },
+    }
+    expect(applyReviews({ a: 'Son Gokū', b: 'Renamed', c: 'New' }, glossary)).toEqual({
+      a: 'Son Goku',
+      b: 'Renamed',
+      c: 'New',
+    })
+  })
+})
+
 describe('passRowFromTooltip (decision 16)', () => {
   it('reads flat, percent and attribute values', () => {
     expect(passRowFromTooltip(['x: Increase block bypass by 130.'])).toEqual({ PierceSkill: 130 })
@@ -523,7 +538,11 @@ describe.skipIf(!existsSync(defaultRawDir) || !existsSync(defaultPetIniDir))(
         if (!M5_REVIEWED.has(name)) expect(data, name).toEqual(reborn(name))
       }
       const names = json<Record<string, string>>('client/src/i18n/reborn.json')
-      for (const key of out.m6Names) expect(names[key], key).toBe(out.names[key])
+      const reviewed = applyReviews(
+        out.names,
+        json<Record<string, { source?: string; en?: string }>>('tools/i18n/glossary.json'),
+      )
+      for (const key of out.m6Names) expect(names[key], key).toBe(reviewed[key])
     })
 
     it('rejects a limit with an unknown bonus id', () => {
