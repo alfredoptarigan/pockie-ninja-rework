@@ -92,6 +92,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/pets/routes.js'), { db, prefix: '/api/game/pets' })
   app.register(import('./modules/kennel/routes.js'), { db, prefix: '/api/game/kennel' })
   app.register(import('./modules/bankai/routes.js'), { db, prefix: '/api/game/bankai' })
+  app.register(import('./modules/zanpakuto/routes.js'), { db, prefix: '/api/game/zanpakuto' })
   app.register(socialRoutes, { db, prefix: '/api/game/social' })
   app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
   app.register(arenaRoutes, { db, prefix: '/api/game/arena' })

@@ -2019,3 +2019,55 @@ export const dungeonPlayers = pgTable(
     check('dungeon_players_values', sql`${t.attemptsUsed} >= 0 and cardinality(${t.pity}) = 11`),
   ],
 )
+
+// Zanpakuto: Spirit Coins, today's refines and bought spirit slots (slots 0-3 are free).
+export const characterZanpakuto = pgTable(
+  'character_zanpakuto',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    coins: bigint('coins', { mode: 'number' }).notNull().default(0),
+    // Refines used on the UTC day `refineDay` (the first 3 a day are free).
+    refineDay: date('refine_day'),
+    refinesUsed: smallint('refines_used').notNull().default(0),
+    unlockedSlots: smallint('unlocked_slots')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+  },
+  (t) => [check('character_zanpakuto_values', sql`${t.coins} >= 0 and ${t.refinesUsed} >= 0`)],
+)
+
+const ZANPAKUTO_TAB_LIST = sql.raw(`('sharp', 'blunt', 'fist')`)
+
+// A crystal (item 480001-480086) sits in a spirit slot (0-15) or a weapon tab slot (0-5), never
+// both. `stats` are Reborn's [stat id, raw value] pairs; `bulkOptions` the open Bulk Refine sets.
+export const zanpakutoCrystals = pgTable(
+  'zanpakuto_crystals',
+  {
+    id: id(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    itemId: integer('item_id').notNull(),
+    stats: jsonb('stats').$type<[number, number][]>().notNull(),
+    bulkOptions: jsonb('bulk_options').$type<[number, number][][]>().notNull().default([]),
+    spiritSlot: smallint('spirit_slot'),
+    tab: text('tab'),
+    tabSlot: smallint('tab_slot'),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex('zanpakuto_crystals_spirit_key').on(t.characterId, t.spiritSlot),
+    uniqueIndex('zanpakuto_crystals_tab_key').on(t.characterId, t.tab, t.tabSlot),
+    check(
+      'zanpakuto_crystals_values',
+      sql`${t.itemId} between 480001 and 480086 and jsonb_array_length(${t.stats}) between 1 and 3`,
+    ),
+    check(
+      'zanpakuto_crystals_place',
+      sql`(${t.spiritSlot} between 0 and 15 and ${t.tab} is null and ${t.tabSlot} is null) or (${t.spiritSlot} is null and ${t.tab} in ${ZANPAKUTO_TAB_LIST} and ${t.tabSlot} between 0 and 5)`,
+    ),
+  ],
+)

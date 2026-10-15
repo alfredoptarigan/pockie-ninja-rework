@@ -295,6 +295,13 @@
       "when": 1792050000000,
       "tag": "0041_dungeons",
       "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1792060000000,
+      "tag": "0042_zanpakuto",
+      "breakpoints": true
     }
   ]
 }
