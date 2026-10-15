@@ -134,12 +134,15 @@ export function statGroups(
   ]
 }
 
-/** Bold label (50px) and the value box (100x20), as Reborn draws every Stats value. */
+/** Bold label (50px) and the value box (100x20), as Reborn draws every Stats value. Reborn's
+ * labels inherit its body colour, #333, which stays readable on the cream panel. */
 function Cell({ cell }: { cell: StatCell | null }) {
   if (!cell) return <div aria-hidden className="col-span-2" />
   return (
     <div className="contents">
-      <dt className="pr-px text-right font-mono text-[11px] leading-5 font-bold">{cell.label}</dt>
+      <dt className="pr-px text-right font-mono text-[#333] text-[11px] leading-5 font-bold">
+        {cell.label}
+      </dt>
       <dd
         title={cell.hint ?? String(cell.value)}
         className="game-value-box h-5 truncate px-1 text-center font-mono text-xs leading-5"
@@ -183,7 +186,9 @@ function ExpRow({ character }: { character: Character }) {
   if (next === undefined)
     return (
       <div className="flex h-[38px] items-center">
-        <span className="w-[50px] pr-px text-right font-mono text-[11px] font-bold">EXP</span>
+        <span className="w-[50px] pr-px text-right font-mono text-[#333] text-[11px] font-bold">
+          EXP
+        </span>
         <p className="flex-1 text-center text-[22px] font-black text-[darkgreen] italic [text-shadow:var(--shadow-game-text)]">
           MAX
         </p>
@@ -193,7 +198,7 @@ function ExpRow({ character }: { character: Character }) {
   const text = `${character.exp.toLocaleString('en-US')} / ${next.toLocaleString('en-US')} (${percent}%)`
   return (
     <div className="flex">
-      <span className="w-[50px] pt-px pr-px text-right font-mono text-[11px] leading-5 font-bold">
+      <span className="w-[50px] pt-px pr-px text-right font-mono text-[#333] text-[11px] leading-5 font-bold">
         EXP
       </span>
       <div className="w-[249px] pl-px">
@@ -246,7 +251,9 @@ export function CharacterWindow({
           <Divider />
           <dl className="grid grid-cols-[50px_100px_50px_100px] gap-y-1">
             <Cell cell={{ label: 'Village', value: village }} />
-            <dt className="pr-px text-right font-mono text-[11px] leading-5 font-bold">Rank</dt>
+            <dt className="pr-px text-right font-mono text-[#333] text-[11px] leading-5 font-bold">
+              Rank
+            </dt>
             <dd className="game-value-box h-5 truncate px-1 text-center text-sm leading-5 font-black text-[darkblue] italic">
               {rank}
             </dd>
@@ -258,7 +265,9 @@ export function CharacterWindow({
           {stats.isPending && <p className="p-2 text-xs">Loading stats...</p>}
           {stats.isError && <p className="p-2 text-xs">We could not load your stats.</p>}
           {stats.data && <StatGroups groups={statGroups(stats.data, character)} />}
-          <p className="mt-0.5 text-center text-[11px] font-bold">Hover over stats for details</p>
+          <p className="mt-0.5 text-center text-[11px] font-bold text-[#333]">
+            Hover over stats for details
+          </p>
         </section>
       </div>
     </Dialog>
