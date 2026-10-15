@@ -28,11 +28,11 @@ export const questName = (quest: { taskId: number; nameKey: string }) =>
   plainText(quest.nameKey, `Quest ${quest.taskId}`)
 
 /** Every step done means the quest only waits for its hand-in, which Reborn calls Completed. */
-export const questStatus = (quest: Quest) => (quest.state === 1 ? 'Completed' : 'In progress')
+export const questStatus = (quest: Quest) => (quest.state === 1 ? 'Completed' : 'Accepted')
 
 const STATUS_COLOR: Record<string, string> = {
   Completed: 'text-[#1b6e17]',
-  'In progress': 'text-[#9a4a00]',
+  Accepted: 'text-[#9a4a00]',
   Available: 'text-[#0a5f93]',
 }
 
@@ -89,7 +89,10 @@ export function OfferHint({ offer }: { offer: QuestOffer }) {
   )
 }
 
-/** A quest row like Reborn's navigation list: "Name|State", the target line, buttons on the right. */
+/**
+ * A quest row like Reborn's navigation list: 55px on TextBG1 with the notice icon, "Name|State",
+ * the target line, and the 45x18 buttons on the right.
+ */
 export function QuestRow({
   name,
   status,
@@ -102,20 +105,20 @@ export function QuestRow({
   children: ReactNode
 }) {
   return (
-    <li className="game-card flex items-start gap-[6px] py-[5px] pr-[5px] pl-[8px] font-game text-[12px] leading-[15px] text-black">
+    <li className="game-text-box flex h-[55px] shrink-0 items-start gap-[6px] overflow-hidden py-[5px] pr-[5px] pl-[8px] font-game text-[12px] leading-[15px] text-black">
       <span aria-hidden="true" className="game-icon-notice mt-[3px] size-4 shrink-0" />
       <div className="min-w-0 flex-1 pt-[2px]">
         <p>
           <span>{name}</span>|<span className={STATUS_COLOR[status]}>{status}</span>
         </p>
-        {hint && <p>{hint}</p>}
+        {hint && <p className="line-clamp-2">{hint}</p>}
       </div>
       <div className="flex shrink-0 flex-col gap-[3px]">{children}</div>
     </li>
   )
 }
 
-export const ROW_BUTTON = 'h-5 w-[46px] min-w-0 px-0'
+export const ROW_BUTTON = 'h-[18px] min-h-0 w-[45px] min-w-0 px-0'
 
 /** Details on a quest row: opens the quest window for that quest. */
 export function DetailsButton({

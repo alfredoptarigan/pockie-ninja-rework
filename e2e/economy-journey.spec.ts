@@ -39,28 +39,32 @@ test('a ninja buys a potion and sells loot at the Wholesale Boss', async ({ page
   })
   await expectCurrency(page, 'Stone', 1000)
 
-  // Act: buy one potion from the Wholesale tab.
-  await openNpcWindow(page, 'Wholesale Boss', 'Shop')
+  // Act: buy one potion from the Wholesale tab (Reborn's shop cards and Accept / Deny prompt).
+  await openNpcWindow(page, 'Wholesale Boss', 'Browse Wares')
   const shop = dialog(page, 'Shop')
   await shop.getByRole('tab', { name: 'Wholesale' }).click()
   await shop.getByRole('button', { name: `Buy ${POTION.name}` }).click()
-  const buy = dialog(page, `Buy ${POTION.name}`)
+  const buy = page.getByRole('alertdialog', { name: `Buy ${POTION.name}`, exact: true })
   await expect(buy.getByLabel('Quantity')).toHaveValue('1')
-  await buy.getByRole('button', { name: 'Confirm purchase' }).click()
+  await buy.getByRole('button', { name: 'Accept' }).click()
 
   // Assert: the potion costs its price and lands in the bag (sellable, bound).
-  await expect(shop.getByText('Purchase complete.')).toBeVisible()
+  await expect(page.getByText('Purchase successful!')).toBeVisible()
   await expectCurrency(page, 'Stone', 1000 - POTION.price)
 
-  // Act: sell the hat.
-  await shop.getByLabel('Item to sell').selectOption({ label: `${LOOT.name} x1` })
-  await shop.getByRole('button', { name: `Sell for ${LOOT.price} Stone` }).click()
+  // Act: sell the hat from the Sell tab.
+  await shop.getByRole('tab', { name: 'Sell' }).click()
+  const bagItems = shop.getByRole('list', { name: 'Bag items' })
+  await bagItems.getByRole('button', { name: `Sell ${LOOT.name}` }).click()
+  const sell = page.getByRole('alertdialog', { name: `Sell ${LOOT.name}`, exact: true })
+  await expect(sell).toContainText(`Sell 1 ${LOOT.name} for ${LOOT.price} Stone?`)
+  await sell.getByRole('button', { name: 'Accept' }).click()
 
   // Assert: Price x count Stone back, and the hat is gone from the sell list.
-  await expect(shop.getByText('Sale complete.')).toBeVisible()
+  await expect(page.getByText('Sale complete.')).toBeVisible()
   await expectCurrency(page, 'Stone', 1000 - POTION.price + LOOT.price)
-  await expect(shop.getByLabel('Item to sell').getByRole('option')).not.toContainText([LOOT.name])
-  await expect(shop.getByLabel('Item to sell')).toContainText(POTION.name)
+  await expect(bagItems).not.toContainText(LOOT.name)
+  await expect(bagItems).toContainText(POTION.name)
 })
 
 test('a ninja appraises a weapon in the bag and enhances it at the Blacksmith', async ({
@@ -92,18 +96,21 @@ test('a ninja appraises a weapon in the bag and enhances it at the Blacksmith', 
   await bag.getByRole('button', { name: 'Close' }).click()
 
   // Act: enhance at the Blacksmith with Gold (+1 never fails: FailRate 0).
-  await openNpcWindow(page, 'Blacksmith', 'Blacksmith')
+  await openNpcWindow(page, 'Blacksmith', 'Enter Armory')
   const forge = dialog(page, 'Forge')
   const panel = forge.getByRole('tabpanel', { name: 'Enhance' })
   await panel.getByRole('button', { name: WEAPON.name, exact: true }).click()
-  await expect(panel).toContainText('Next: +1, success rate 100%')
-  await panel.getByRole('radio', { name: /^8 Gold/ }).check()
-  await panel.getByRole('button', { name: 'Enhance', exact: true }).click()
+  await expect(panel).toContainText('Rate 100%')
+  await panel.getByRole('button', { name: 'Attempt', exact: true }).click()
+  const pay = forge.getByRole('dialog', { name: 'Enhancement', exact: true })
+  await pay.getByRole('radio', { name: 'Your Gold: 20', exact: true }).check()
+  await pay.getByRole('button', { name: 'OK', exact: true }).click()
 
-  // Assert
-  await expect(panel.getByText(`${WEAPON.name} is now +1.`)).toBeVisible()
+  // Assert: the Enhancement Result shows the new level and offers the next one.
+  const result = forge.getByRole('dialog', { name: 'Enhancement Result', exact: true })
+  await expect(result.getByText(`${WEAPON.name} is now +1.`)).toBeVisible()
   await expectCurrency(page, 'Gold', 12)
-  await expect(panel).toContainText('Next: +2')
+  await expect(result).toContainText('+2')
 })
 
 test('a ninja walks 111 -> 2101 -> 2601 and takes the map to Angel City 161', async ({ page }) => {

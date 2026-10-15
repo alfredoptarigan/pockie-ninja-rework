@@ -44,15 +44,17 @@ async function go(page: Page, tab: 'Accepted' | 'Available', quest: string) {
   await nav.getByRole('button', { name: `Go: ${quest}`, exact: true }).click()
 }
 
-const expMeter = (page: Page) =>
-  page.getByRole('region', { name: 'Experience' }).getByRole('meter', { name: 'EXP' })
+// Reborn's EXP strip: a native progress bar whose title reads "exp / next".
+const expBar = (page: Page) =>
+  page.getByRole('region', { name: 'Experience' }).getByRole('progressbar', { name: 'EXP' })
 
 async function expectLevel(page: Page, level: number) {
   await expect(page.getByRole('region', { name: 'Experience' })).toContainText(`Level: ${level}`)
 }
 
+/** EXP within the level, read from the bar's "exp / next" title. */
 async function expectExp(page: Page, exp: number) {
-  await expect(expMeter(page)).toHaveAttribute('aria-valuenow', String(exp))
+  await expect(expBar(page)).toHaveAttribute('title', new RegExp(`^${exp} / `))
 }
 
 /** Every <img> under `scope` has loaded real pixels (no broken or missing art). */
@@ -80,7 +82,8 @@ async function acceptFrom(page: Page, npc: string, quest: string) {
     .filter({ hasText: quest })
     .getByRole('button', { name: 'Accept quest' })
     .click()
-  await expect(talk.getByRole('status')).toContainText(`Quest accepted: ${quest}.`)
+  // By its text: a toast from the bag may still be showing in the dialog.
+  await expect(talk.getByText(`Quest accepted: ${quest}.`)).toBeVisible()
   await talk.getByRole('button', { name: 'Close' }).click()
   await expect(talk).toBeHidden()
 }
@@ -345,7 +348,7 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
 
   // 90004: accept at the scout, then beat a Sunflower with the weapon drawn.
   await acceptFrom(page, SCOUT, QUEST.combat)
-  const expBefore = Number(await expMeter(page).getAttribute('aria-valuenow'))
+  const expBefore = Number((await expBar(page).getAttribute('title'))!.split(' / ')[0])
   await (await sceneAction(page, `Fight ${MONSTER}`)).click()
   const replay = page.getByRole('region', { name: 'Battle replay' })
   await expect(replay.getByRole('button', { name: 'Skip' })).toBeEnabled()
@@ -353,7 +356,7 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await shot(page, 'battle')
   // The HUD keeps the pre-fight values while the replay plays.
   await expectLevel(page, 2)
-  expect(Number(await expMeter(page).getAttribute('aria-valuenow'))).toBe(expBefore)
+  expect(Number((await expBar(page).getAttribute('title'))!.split(' / ')[0])).toBe(expBefore)
   await replay.getByRole('button', { name: 'Skip' }).click()
 
   // A level-2 ninja with a weapon beats a Sunflower; the quest reward brings level 3.
@@ -362,5 +365,5 @@ test('a new ninja plays the Fire Village tutorial to the first fight and levels 
   await expect(summary).toContainText(/EXP\s*\+\d+/)
   await summary.getByRole('button', { name: 'Close' }).click()
   await expectLevel(page, 3)
-  expect(Number(await expMeter(page).getAttribute('aria-valuenow'))).not.toBe(expBefore)
+  expect(Number((await expBar(page).getAttribute('title'))!.split(' / ')[0])).not.toBe(expBefore)
 })

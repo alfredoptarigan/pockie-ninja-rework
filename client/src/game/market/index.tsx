@@ -5,7 +5,8 @@ import { Dialog, Notice, Tabs } from '../skin'
 import { MARKET_LEVEL } from './api'
 import { BrowseTab } from './BrowseTab'
 import { SellTab } from './SellTab'
-import { MineTab, WarehouseTab } from './StorageTabs'
+import { MineTab } from './StorageTabs'
+import { WarehouseTab } from './Warehouse'
 
 type Tab = 'browse' | 'sell' | 'mine' | 'warehouse'
 const TABS: { id: Tab; title: string }[] = [
@@ -42,7 +43,7 @@ export function MarketWindow({
         {tab === 'browse' && <BrowseTab character={character} />}
         {tab === 'sell' && <SellTab />}
         {tab === 'mine' && <MineTab />}
-        {tab === 'warehouse' && <WarehouseTab />}
+        {tab === 'warehouse' && <WarehouseTab character={character} />}
       </section>
     </Dialog>
   )

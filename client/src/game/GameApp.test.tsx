@@ -36,6 +36,17 @@ function renderGame(handlers: Parameters<typeof mockApi>[0] = {}, player = chara
     'GET /api/game/scene': () => json(player.sceneId === 111 ? villageScene : field),
     'GET /api/game/quests': () => json({ quests: [] }),
     'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
+    'GET /api/game/daily': () =>
+      json({
+        day: '2026-10-15',
+        resetAt: new Date(Date.now() + 3600_000).toISOString(),
+        refreshAt: new Date(Date.now() + 3600_000).toISOString(),
+        accepted: 0,
+        completed: 0,
+        limit: 10,
+        inProgressLimit: 10,
+        quests: [],
+      }),
     'GET /api/game/inventory': () => json({ items: [{ ...fists, equippedSlot: 'Weapon' }] }),
     'GET /api/health': () => json({ ok: true }),
     ...handlers,
@@ -205,7 +216,7 @@ describe('GameScreen', () => {
       }),
     )
     await userEvent.click(await screen.findByRole('button', { name: 'Collection' }))
-    expect(await screen.findByRole('dialog', { name: 'Wings' })).toBeVisible()
+    expect(await screen.findByRole('dialog', { name: 'Collection' })).toBeVisible()
   }, 15_000)
 
   it('opens the Pet Kennel and the Card Room from their village buildings', async () => {
@@ -343,7 +354,7 @@ describe('GameScreen', () => {
     const actions = await screen.findByRole('region', { name: 'Scene actions' })
     await userEvent.click(await within(actions).findByRole('button', { name: 'Blacksmith' }))
     const talk = await screen.findByRole('dialog', { name: 'Blacksmith' })
-    await userEvent.click(await within(talk).findByRole('button', { name: 'Blacksmith' }))
+    await userEvent.click(await within(talk).findByRole('button', { name: 'Enter Armory' }))
     await waitFor(() => expect(screen.getAllByRole('dialog')).toHaveLength(1))
     // The Blacksmith's menu opens the forge window registered in windows.tsx.
     expect(await screen.findByRole('dialog', { name: 'Forge' })).toBeInTheDocument()
@@ -563,8 +574,8 @@ describe('QuestNavigation', () => {
         json({ dialogKey: 'lg_Say_n11001', nameKey: 'lg_name_n11001', completed: [], character }),
     })
     const nav = await screen.findByRole('region', { name: 'Quest Navigation' })
-    expect(await within(nav).findByText('No quests yet. Look in Available.')).toBeVisible()
-    await userEvent.click(within(nav).getByRole('tab', { name: 'Available' }))
+    // Nothing accepted: Reborn opens the panel on Available.
+    expect(await within(nav).findByRole('tab', { name: 'Available', selected: true })).toBeVisible()
 
     const list = within(nav).getByRole('list', { name: 'Available quests' })
     expect(list).toHaveTextContent('Talk to Fire Village Elder in the Hall')

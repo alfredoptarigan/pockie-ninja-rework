@@ -82,9 +82,10 @@ test('a ninja lists an item, another buys it and the seller claims the proceeds'
     await expect(market).toContainText('Purchase complete. Claim the item in the Warehouse tab.')
     await expectCurrency(buyer.page, 'Stone', 1000 - PRICE)
     await market.getByRole('tab', { name: 'Warehouse' }).click()
-    await market.getByRole('button', { name: new RegExp(`^Claim ${ITEM.name}`) }).click()
+    const tile = market.getByRole('button', { name: new RegExp(`^Claim ${ITEM.name}`) })
+    await tile.click()
     await expect(market).toContainText('Item claimed.')
-    await expect(market).toContainText('Your warehouse is empty.')
+    await expect(tile).toHaveCount(0)
     expect(
       sql(
         `select sum(i.count) from inventory_items i join characters c on c.id = i.character_id
@@ -95,9 +96,10 @@ test('a ninja lists an item, another buys it and the seller claims the proceeds'
 
     // Act: the seller claims the sale from the market wallet.
     market = await openMarket(seller.page, 'Warehouse')
-    const wallet = market.getByRole('region', { name: 'Wallet' })
-    await expect(wallet).toContainText(`${PROCEEDS} Stone`)
-    await wallet.getByRole('button', { name: 'Claim wallet' }).click()
+    await market.getByRole('button', { name: 'Vault', exact: true }).click()
+    const vault = market.getByRole('dialog', { name: 'Vault' })
+    await expect(vault.getByRole('row', { name: 'Stones' })).toContainText(`${PROCEEDS} Stone`)
+    await vault.getByRole('button', { name: 'Withdraw' }).click()
 
     // Assert: the proceeds after tax reach the seller's Stone.
     await expect(market).toContainText('Wallet claimed.')

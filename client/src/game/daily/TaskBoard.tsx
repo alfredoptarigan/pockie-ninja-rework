@@ -28,7 +28,7 @@ const GRADES: Record<number, { letter: string; color: string }> = {
 
 const questName = (quest: Quest) => plainText(quest.nameKey, `Quest ${quest.taskId}`)
 
-function stepText(step: Step) {
+export function stepText(step: Step) {
   if (!step.kind || !step.targetNameKey) return plainText(step.descriptionKey, 'Objective')
   const verb = step.kind === 'kill' ? 'Defeat' : step.kind === 'talk' ? 'Talk to' : 'Collect'
   const where =

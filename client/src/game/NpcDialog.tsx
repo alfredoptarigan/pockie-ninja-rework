@@ -5,25 +5,33 @@ import { useNpcPhoto } from './art'
 import { completedNotice, questName } from './QuestLog'
 import { QuestRewardList } from './Rewards'
 import { Dialog, Notice } from './skin'
+import { showToast } from './toast'
 import { GameText, plainText } from './text'
 import type { NpcMenu, SceneNpc } from './types'
 import { useOpenWindow, type WindowName } from './windows'
 import { restCost } from './world'
 
-/** The menu row that opens an NPC's window (shops, blacksmith, gates, daily quests). */
+/**
+ * The menu row that opens an NPC's window, in Reborn's words: shops "Browse Wares" (Dungeon
+ * Shop NPC), the Blacksmith "Enter Armory", daily quests the Task Board.
+ */
 const WINDOW_OPTIONS: Record<Exclude<NpcMenu, 'rest'>, { window: WindowName; label: string }> = {
-  shop: { window: 'shop', label: 'Shop' },
-  merchant: { window: 'merchant', label: 'Shop' },
-  forge: { window: 'forge', label: 'Blacksmith' },
+  shop: { window: 'shop', label: 'Browse Wares' },
+  merchant: { window: 'merchant', label: 'Browse Wares' },
+  forge: { window: 'forge', label: 'Enter Armory' },
   gates: { window: 'gates', label: 'Enter' },
-  daily: { window: 'daily', label: 'Daily Quests' },
+  daily: { window: 'daily', label: 'Task Board' },
 }
 
+type Page = 'main' | 'quests' | 'recovery' | 'confirm' | 'healed'
+const stones = (amount: number) => amount.toLocaleString('en-US')
+
 /**
- * NPC conversation laid out like the original UI_NpcMenu_Xml (485x242): the photo card on the
- * left, the NPC's words on the right and the options under them. The first page offers Quests
- * (when the NPC has some) and End Conversation; Quests lists one row per quest, Back and End
- * Conversation.
+ * NPC menu laid out like Reborn's (reborn-windows-M-Z-hud.md "Village Elder", 475x204): the
+ * portrait card on the left (TottomBG1, EstopCircle), the NPC's words top right (309x65) and the
+ * clickable option lines under them (309x134), End Conversation always last. Quests lists one row
+ * per quest. The Stone Organization's rest follows the Elder's Recover HP & MP steps: Healing
+ * Service, Yes, Heal Me, Healing complete! (Free Healing heals at once while it costs nothing).
  */
 export function NpcDialog({
   npc,
@@ -41,12 +49,17 @@ export function NpcDialog({
   const photo = useNpcPhoto(npc.id)
   const openWindow = useOpenWindow()
   const rest = useRest()
-  const [page, setPage] = useState<'main' | 'quests' | 'rest'>('main')
+  const [page, setPage] = useState<Page>('main')
   const showQuests = page === 'quests'
   const setShowQuests = (show: boolean) => setPage(show ? 'quests' : 'main')
   const menu = npc.menu ?? null
   const windowOption = menu && menu !== 'rest' ? WINDOW_OPTIONS[menu] : undefined
   const cost = restCost(character.level)
+  const heal = () =>
+    rest.mutate(npc.id, {
+      onSuccess: () => setPage('healed'),
+      onError: (error) => showToast(errorMessage(error), 'failure'),
+    })
   const [accepted, setAccepted] = useState<number | null>(null)
   const offers = talk.isSuccess
     ? (available.data?.available ?? []).filter(
@@ -103,21 +116,7 @@ export function NpcDialog({
             {accept.isError && <Notice tone="error">{errorMessage(accept.error)}</Notice>}
           </div>
           <div className="game-inset h-[134px] overflow-auto px-[5px] py-[6px] font-game text-[13px]">
-            {page === 'rest' ? (
-              <section aria-label="Rest" className="flex flex-col gap-px">
-                <p className="px-[9px] py-[3px] text-[#3d2914]">
-                  {cost > 0
-                    ? `Rest here to restore all your HP and chakra for ${cost} Stone.`
-                    : 'Rest here to restore all your HP and chakra for free.'}
-                </p>
-                {rest.isSuccess && <Notice>You feel rested. HP and chakra are full again.</Notice>}
-                {rest.isError && <Notice tone="error">{errorMessage(rest.error)}</Notice>}
-                <Option disabled={rest.isPending} onClick={() => rest.mutate(npc.id)}>
-                  Rest ({cost} Stone)
-                </Option>
-                <Option onClick={() => setPage('main')}>Back</Option>
-              </section>
-            ) : showQuests ? (
+            {showQuests ? (
               <section aria-label="Quests offered" className="flex flex-col gap-px">
                 {offers.length === 0 && (
                   <p className="px-[9px] py-[3px] text-[#3d2914]">No quests for you right now.</p>
@@ -133,6 +132,55 @@ export function NpcDialog({
                 <Option onClick={() => setShowQuests(false)}>Back</Option>
                 <Option onClick={onClose}>End Conversation</Option>
               </section>
+            ) : page !== 'main' ? (
+              <ul aria-label="Options" className="flex flex-col gap-px">
+                {page === 'recovery' && (
+                  <>
+                    <li>
+                      {cost === 0 ? (
+                        <Option disabled={rest.isPending} onClick={heal}>
+                          Free Healing
+                        </Option>
+                      ) : (
+                        <Option
+                          disabled={character.stone < cost}
+                          onClick={() => setPage('confirm')}
+                        >
+                          {character.stone < cost
+                            ? `You need ${stones(cost)} stones`
+                            : `Healing Service (${stones(cost)} Stones)`}
+                        </Option>
+                      )}
+                    </li>
+                    <li>
+                      <Option onClick={() => setPage('main')}>Back</Option>
+                    </li>
+                  </>
+                )}
+                {page === 'confirm' && (
+                  <>
+                    <li>
+                      <Option disabled={rest.isPending} onClick={heal}>
+                        Yes, Heal Me ({stones(cost)} Stones)
+                      </Option>
+                    </li>
+                    <li>
+                      <Option onClick={() => setPage('recovery')}>Cancel</Option>
+                    </li>
+                  </>
+                )}
+                {page === 'healed' && (
+                  <>
+                    <li className="px-[9px] py-[3px] text-[#3d2914]">Healing complete!</li>
+                    <li>
+                      <Option onClick={onClose}>Thank you!</Option>
+                    </li>
+                  </>
+                )}
+                <li>
+                  <Option onClick={onClose}>End Conversation</Option>
+                </li>
+              </ul>
             ) : (
               <ul aria-label="Options" className="flex flex-col gap-px">
                 {offers.length > 0 && (
@@ -149,7 +197,7 @@ export function NpcDialog({
                 )}
                 {menu === 'rest' && (
                   <li>
-                    <Option onClick={() => setPage('rest')}>Rest</Option>
+                    <Option onClick={() => setPage('recovery')}>Recover HP &amp; MP</Option>
                   </li>
                 )}
                 {menu === 'rest' && (

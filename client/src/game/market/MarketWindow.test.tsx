@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character } from '../../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
+import { itemName } from '../explore'
+import { ToastHost } from '../toast'
 import { searchItemIds } from './api'
 import { MarketWindow } from './index'
 import { timeLeft } from './parts'
@@ -46,6 +48,8 @@ const warehouse = {
   capacity: 15,
   wallet: { stone: 90, gold: 0 },
 }
+/** A warehouse tile is a button that claims the row. */
+const CLAIM_TILE = new RegExp(`^Claim ${itemName('i120001')}`)
 const base = {
   'GET /api/game/market/categories': () => json({ categories }),
   'GET /api/game/market/browse': () => json(browse),
@@ -132,18 +136,80 @@ describe('Market window', () => {
         json({ character: ninja, claimed: 1, left: 0 }),
       'POST /api/game/market/wallet/claim': () => json({ character: ninja }),
     })
-    renderWithProviders(<MarketWindow character={ninja} onClose={vi.fn()} />)
+    renderWithProviders(
+      <>
+        <MarketWindow character={ninja} onClose={vi.fn()} />
+        <ToastHost />
+      </>,
+    )
     await userEvent.click(screen.getByRole('tab', { name: 'My Listings' }))
     await userEvent.click(await screen.findByRole('button', { name: /^Take down/ }))
     expect(await screen.findByText(/Listing taken down/)).toBeVisible()
     expect(requestBody(fetch, 'POST /api/game/market/cancel')).toEqual({ listingId: listing.id })
 
     await userEvent.click(screen.getByRole('tab', { name: 'Warehouse' }))
-    expect(await screen.findByText('Bought')).toBeVisible()
+    expect(await screen.findByRole('button', { name: CLAIM_TILE })).toBeVisible()
     await userEvent.click(screen.getByRole('button', { name: 'Claim all' }))
     expect(await screen.findByText('Claimed 1.')).toBeVisible()
-    await userEvent.click(screen.getByRole('button', { name: 'Claim wallet' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Vault' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Withdraw' }))
     expect(await screen.findByText('Wallet claimed.')).toBeVisible()
+  })
+})
+
+describe('Warehouse (Reborn Storage)', () => {
+  function renderWarehouse(routes = {}) {
+    const fetch = mockApi({ ...base, ...routes })
+    renderWithProviders(
+      <>
+        <MarketWindow character={ninja} onClose={vi.fn()} />
+        <ToastHost />
+      </>,
+    )
+    return fetch
+  }
+
+  it('draws the 290px storage with one 10-per-row tile per warehouse row', async () => {
+    renderWarehouse()
+    await userEvent.click(screen.getByRole('tab', { name: 'Warehouse' }))
+    const storage = await screen.findByRole('region', { name: 'Warehouse' })
+    expect(storage).toHaveClass('w-[290px]')
+    const tiles = within(storage).getByRole('list', { name: 'Warehouse tiles' })
+    expect(tiles).toHaveClass('grid-cols-[repeat(10,27px)]')
+    expect(within(tiles).getAllByRole('listitem')).toHaveLength(warehouse.capacity)
+    expect(storage).toHaveTextContent('1 / 15')
+  })
+
+  it('claims a tile into the bag and reports it as a toast', async () => {
+    const fetch = renderWarehouse({
+      'POST /api/game/market/warehouse/claim': () =>
+        json({ character: ninja, claimed: 5, left: 0 }),
+    })
+    await userEvent.click(screen.getByRole('tab', { name: 'Warehouse' }))
+    const tile = await screen.findByRole('button', { name: CLAIM_TILE })
+    expect(tile).toHaveAttribute('title', expect.stringContaining('Bought'))
+    await userEvent.click(tile)
+    expect(await screen.findByText('Item claimed.')).toHaveAttribute('role', 'status')
+    expect(requestBody(fetch, 'POST /api/game/market/warehouse/claim')).toEqual({
+      inventoryId: 'inv1',
+    })
+  })
+
+  it('opens the Vault with the wallet, what you carry and Withdraw', async () => {
+    const fetch = renderWarehouse({
+      'POST /api/game/market/wallet/claim': () => json({ character: ninja }),
+    })
+    await userEvent.click(screen.getByRole('tab', { name: 'Warehouse' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Vault' }))
+    const vault = screen.getByRole('dialog', { name: 'Vault' })
+    const stones = within(vault).getByRole('row', { name: /Stones/ })
+    expect(stones).toHaveTextContent('90')
+    expect(stones).toHaveTextContent('Carried: 5,000')
+    await userEvent.click(within(vault).getByRole('button', { name: 'Withdraw' }))
+    expect(await screen.findByText('Wallet claimed.')).toBeVisible()
+    expect(requestBody(fetch, 'POST /api/game/market/wallet/claim')).toEqual({})
+    await userEvent.click(within(vault).getByRole('button', { name: 'Close Vault' }))
+    expect(screen.queryByRole('dialog', { name: 'Vault' })).not.toBeInTheDocument()
   })
 })
 

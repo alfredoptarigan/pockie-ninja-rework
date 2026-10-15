@@ -28,7 +28,7 @@ describe('QuestLog', () => {
     renderLog([newbiePackQuest, equipQuest])
     const log = await screen.findByRole('list', { name: 'Quest log' })
     const [pack, equip] = within(log).getAllByRole('listitem')
-    expect(pack).toHaveTextContent('Newbie Pack|In progress')
+    expect(pack).toHaveTextContent('Newbie Pack|Accepted')
     expect(equip).toHaveTextContent('Weapon Equipment|Completed')
   })
 
