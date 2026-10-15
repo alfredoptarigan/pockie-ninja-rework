@@ -151,6 +151,21 @@ describe('POST /api/game/forge/gems/remove', () => {
   })
 })
 
+describe('selling socketed gear', () => {
+  it('refuses gear with gems and sells it once the sockets are empty', async () => {
+    const socketed = await giveItem(HELMET, { gems: [RUBY_1, null] })
+    const open = await giveItem(HELMET, { gems: [null, null] })
+
+    const refused = await client.post('/api/game/items/sell', { inventoryIds: [socketed.id] })
+    const sold = await client.post('/api/game/items/sell', { inventoryIds: [open.id] })
+
+    expect(code(refused)).toBe('cannot_sell')
+    expect(await itemRow(socketed.id)).toBeDefined()
+    expect(sold.statusCode).toBe(200)
+    expect(await itemRow(open.id)).toBeUndefined()
+  })
+})
+
 describe('POST /api/game/forge/gems/hole', () => {
   it('opens one more socket for a Slot Talisman, up to MaxHoleCount', async () => {
     const helmet = await giveItem(HELMET)

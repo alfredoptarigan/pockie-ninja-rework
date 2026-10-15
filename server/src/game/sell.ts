@@ -7,11 +7,15 @@ import type { Tx } from './progress.js'
 
 type ItemRow = typeof inventoryItems.$inferSelect
 
-/** Unequipped, unlocked bag items whose CanTrade allows selling to a shop (bit 1). */
+/**
+ * Unequipped, unlocked bag items without socketed gems (Reborn refuses those too) whose CanTrade
+ * allows selling to a shop (bit 1).
+ */
 export const canSell = (row: ItemRow) =>
   row.location === 'bag' &&
   !row.equippedSlot &&
   !row.locked &&
+  !row.gems.some(Boolean) &&
   (Number(item(row.itemId)?.CanTrade ?? 0) & 1) !== 0
 
 /** Takes `count` of each row and pays Price x count Stone; returns the Stone earned. */

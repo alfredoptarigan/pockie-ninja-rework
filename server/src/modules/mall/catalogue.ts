@@ -8,6 +8,8 @@
 //   and stay out, as in 2011.
 // - left out: the S/A/B/C Secret Technique Scrolls (i159000-i159003), withheld like the
 //   refresh shops do (shop/data.ts) while the skills-gap rollout is reviewed.
+// - left out: items with no icon in 2011 or in Reborn: Ham and Egg Cake (i120007), Skip Card
+//   (i152039) and the Mark / Seal / Stamp of Special Training (i150400-i150402).
 // - 2011 VIP prices equal the normal ones on the server, so there is no VIP discount.
 // - Gold buys unbound items, Gift Certificates bound ones (VirtualShopSystem, 2011).
 import type { MallGroupKey } from '../../../../shared/src/schemas/mall.js'
@@ -95,7 +97,6 @@ const ROWS: Row[] = [
   ['i150270', 28, false, 'hot,vip'], // 3 Day VIP
   ['i150271', 68, false, 'vip'], // 7 Day VIP
   ['i150272', 258, false, 'vip'], // 30 Day VIP
-  ['i152039', 118, false, 'hot,vip'], // Skip Card
   ['i150274', 80, true, 'hot,gem'], // Level 1 Ruby Bag
   ['i150279', 80, true, 'hot,gem'], // Level 1 Sapphire Bag
   ['i150284', 80, true, 'gem'], // Level 1 Topaz Bag
@@ -107,16 +108,12 @@ const ROWS: Row[] = [
   ['i150343', 3, true, 'hot,other'], // 1 Hour Talisman
   ['i150344', 18, true, 'hot,other'], // 4 Hours Talisman
   ['i150399', 45, true, 'hot,other'], // 8 Hours Talisman
-  ['i150400', 2, true, 'hot,other'], // Mark of Special Training
-  ['i150401', 6, true, 'hot,other'], // Seal of Special Training
-  ['i150402', 12, true, 'hot,other'], // Stamp of Special Training
   ['i150405', 35, true, 'hot,pet'], // Pet Egg
   ['i170112', 18, true, 'hot,pet'], // Little Beans
   ['i150406', 28, true, 'hot,pet'], // Pet Skill Lock
   ['i150407', 340, true, 'hot,pet'], // Pet Egg Gift Box
   ['i120005', 18, true, 'hot,food'], // French Steak
   ['i120006', 18, true, 'hot,food'], // Omelette Rice
-  ['i120007', 18, true, 'hot,food'], // Ham and Egg Cake
   ['i180002', 288, true, 'hot,pet'], // Leather Armor
   ['i180003', 288, true, 'hot,pet'], // Fence Sitter
   ['i180004', 288, true, 'hot,pet'], // Armor Corrosion
