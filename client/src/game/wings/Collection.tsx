@@ -1,7 +1,7 @@
 // Reborn's Collection window (reborn-windows-A-L.md "Collection"): tabs Avatars / Pets / Gear Sets /
-// Wings. Only Wings has a system here (our Wing Collection); the others stay visible but disabled.
-// Clicking a wing not yet collected opens Submit Wing (key `wingSelect`). Unlike Reborn, our
-// server keeps the wing: registering pays Plume Shards and the item stays in the bag.
+// Wings. The first three live in ../collection/tabs. Clicking a wing not yet collected opens Submit
+// Wing (key `wingSelect`). Unlike Reborn, our server keeps the wing: registering pays Plume Shards
+// and the item stays in the bag.
 import { useMutation } from '@tanstack/react-query'
 import { useId, useState } from 'react'
 import type {
@@ -11,6 +11,7 @@ import type {
 } from '../../../../shared/src/schemas/wings'
 import { api } from '../../lib/api'
 import { errorMessage } from '../api'
+import { CollectionTab } from '../collection/tabs'
 import { SubWindow, TabStrip } from '../forge'
 import { Dialog, GameButton, Notice } from '../skin'
 import { nameOf, useSettleWings, useWingsView, WingIcon } from './shared'
@@ -19,9 +20,9 @@ type CollectionTab = 'avatars' | 'pets' | 'gearSets' | 'wings'
 type Filter = 'all' | 'ready' | 'collected' | 'missing'
 
 const TABS = [
-  { id: 'avatars' as const, title: 'Avatars', disabled: true },
-  { id: 'pets' as const, title: 'Pets', disabled: true },
-  { id: 'gearSets' as const, title: 'Gear Sets', disabled: true },
+  { id: 'avatars' as const, title: 'Avatars' },
+  { id: 'pets' as const, title: 'Pets' },
+  { id: 'gearSets' as const, title: 'Gear Sets' },
   { id: 'wings' as const, title: 'Wings' },
 ]
 const FILTERS: { id: Filter; label: string }[] = [
@@ -38,7 +39,7 @@ const STATUS_TEXT = { collected: 'Collected', ready: 'Ready', missing: 'Missing'
 export function CollectionWindow({ onClose }: { onClose: () => void }) {
   const view = useWingsView()
   const settle = useSettleWings()
-  const [tab, setTab] = useState<CollectionTab>('wings')
+  const [tab, setTab] = useState<CollectionTab>('avatars')
   const [message, setMessage] = useState('')
   const [submitting, setSubmitting] = useState<WingCollectionEntry | null>(null)
   const panelId = useId()
@@ -63,13 +64,14 @@ export function CollectionWindow({ onClose }: { onClose: () => void }) {
       <div
         id={panelId}
         role="tabpanel"
-        aria-label="Wings"
+        aria-label={TABS.find((t) => t.id === tab)!.title}
         className="game-inset flex flex-col gap-2 p-[10px] font-game text-[12px] text-black"
       >
-        {view.isPending && <p>Loading wings...</p>}
-        {error && <Notice tone="error">{errorMessage(error)}</Notice>}
-        {message && <Notice tone="info">{message}</Notice>}
-        {view.data && (
+        {tab !== 'wings' && <CollectionTab key={tab} tab={tab} />}
+        {tab === 'wings' && view.isPending && <p>Loading wings...</p>}
+        {tab === 'wings' && error && <Notice tone="error">{errorMessage(error)}</Notice>}
+        {tab === 'wings' && message && <Notice tone="info">{message}</Notice>}
+        {tab === 'wings' && view.data && (
           <WingsTab
             data={view.data}
             onPick={(entry) => {

@@ -37,6 +37,7 @@ import { questItemDrops, recordCollect, recordKill, type QuestProgress } from '.
 import { talentFighterInput } from './talents.js'
 import { bloodlineBonuses } from './bloodlines.js'
 import { wingBonuses } from './wings.js'
+import { collectionBonuses } from './collection.js'
 import { cardBoxDrop } from './card-boxes.js'
 import { activePetFighterInput, grantPetExp } from './pets.js'
 import { characterSkillInputs } from './skill-bar.js'
@@ -103,7 +104,8 @@ type PetFighterInput = Awaited<ReturnType<typeof activePetFighterInput>>
 
 /**
  * Buffs, active bloodline limits (M5 decision 11), the worn wing (M6 decision 23) and the active
- * pet's bonuses (M6 decision 15). The pet's skills ride on `pet`, never in the learned skills.
+ * pet's bonuses (M6 decision 15), plus the Collection's STR / AGI / STA and percent bonuses.
+ * The pet's skills ride on `pet`, never in the learned skills.
  */
 export const fighterEffects = async (
   tx: Tx | Db,
@@ -114,6 +116,7 @@ export const fighterEffects = async (
     await buffBonuses(tx, characterId),
     await bloodlineBonuses(tx, characterId),
     await wingBonuses(tx, characterId),
+    await collectionBonuses(tx, characterId),
     pet?.bonuses ?? {},
   )
 

@@ -94,12 +94,10 @@ describe('WingsWindow', () => {
     })
     renderWithProviders(<CollectionWindow onClose={vi.fn()} />)
     for (const tab of ['Avatars', 'Pets', 'Gear Sets']) {
-      expect(screen.getByRole('tab', { name: tab })).toBeDisabled()
-      expect(screen.getByRole('tab', { name: tab })).toHaveAttribute(
-        'title',
-        `${tab}: not available yet`,
-      )
+      expect(screen.getByRole('tab', { name: tab })).toBeEnabled()
     }
+    expect(screen.getByRole('tab', { name: 'Avatars' })).toHaveAttribute('aria-selected', 'true')
+    await userEvent.click(screen.getByRole('tab', { name: 'Wings' }))
     expect(screen.getByRole('tab', { name: 'Wings' })).toHaveAttribute('aria-selected', 'true')
     const list = await screen.findByRole('list', { name: 'Wing Collection' })
     expect(list.querySelectorAll('li')).toHaveLength(26)

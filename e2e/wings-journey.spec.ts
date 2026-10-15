@@ -74,9 +74,10 @@ test('a ninja enhances, equips and registers a wing', async ({ browser }) => {
     // Assert: it sits in the Wing slot.
     await expect.poll(() => wingRow(name)).toBe(`${STONE.levelJump}|Wing`)
 
-    // Act: Collection (Wings tab), then submit it from Submit Wing.
+    // Act: Collection, Wings tab, then submit it from Submit Wing.
     await bag.getByRole('button', { name: 'Collection', exact: true }).click()
     const collection = dialog(page, 'Collection')
+    await collection.getByRole('tab', { name: 'Wings' }).click()
     await collection
       .getByRole('list', { name: 'Wing Collection' })
       .getByRole('button', { name: WING.name, exact: true })

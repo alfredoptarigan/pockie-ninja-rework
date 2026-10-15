@@ -2182,3 +2182,22 @@ export const characterMallPurchases = pgTable(
     check('character_mall_purchases_count', sql`${t.count} > 0`),
   ],
 )
+
+// Collection (Reborn's Avatars / Pets / Gear Sets tabs, migration 0048): each entry counts once.
+// `entry` is the outfit clothing ("23"), the pet family item id ("i320015") or the gear set piece
+// ("8160:Hat"); the submitted copy is destroyed.
+export const characterCollection = pgTable(
+  'character_collection',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    kind: text('kind').$type<'outfit' | 'pet' | 'gear'>().notNull(),
+    entry: text('entry').notNull(),
+    collectedAt: timestamp('collected_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.kind, t.entry] }),
+    check('character_collection_kind', sql`${t.kind} in ('outfit', 'pet', 'gear')`),
+  ],
+)

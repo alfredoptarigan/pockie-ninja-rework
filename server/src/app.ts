@@ -89,6 +89,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/dungeons/routes.js'), { db, prefix: '/api/game/dungeons' })
   app.register(import('./modules/team-stone/routes.js'), { db, prefix: '/api/game/team-stone' })
   app.register(import('./modules/wings/routes.js'), { db, prefix: '/api/game/wings' })
+  app.register(import('./modules/collection/routes.js'), { db, prefix: '/api/game/collection' })
   app.register(import('./modules/cards/routes.js'), { db, prefix: '/api/game/cards' })
   app.register(import('./modules/pets/routes.js'), { db, prefix: '/api/game/pets' })
   app.register(import('./modules/kennel/routes.js'), { db, prefix: '/api/game/kennel' })

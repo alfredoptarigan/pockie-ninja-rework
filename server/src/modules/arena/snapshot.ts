@@ -7,6 +7,7 @@ import { characterSkillInputs, scrollSkillExpiries } from '../../game/skill-bar.
 import { talentFighterInput } from '../../game/talents.js'
 import { bloodlineBonuses } from '../../game/bloodlines.js'
 import { wingBonuses } from '../../game/wings.js'
+import { collectionBonuses } from '../../game/collection.js'
 import { activePetFighterInput } from '../../game/pets.js'
 import { activeBuffs, buffBonuses, sumBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, wingLook, type PlayerFighter } from '../../game/combat.js'
@@ -35,11 +36,18 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
   const equipped = await tx.select().from(inventoryItems).where(wornItemsWhere(character.id))
   const bloodlines = await bloodlineBonuses(tx, character.id)
   const wings = await wingBonuses(tx, character.id)
+  const collection = await collectionBonuses(tx, character.id)
   const pet = await activePetFighterInput(tx, character.id)
   const live = playerFighterFrom(
     character,
     equipped,
-    sumBonuses(await buffBonuses(tx, character.id), bloodlines, wings, pet?.bonuses ?? {}),
+    sumBonuses(
+      await buffBonuses(tx, character.id),
+      bloodlines,
+      wings,
+      collection,
+      pet?.bonuses ?? {},
+    ),
     await characterSkillInputs(tx, character.id),
   )
   const expiries = [
@@ -78,6 +86,8 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
       bloodlines,
       wings,
       pet,
+      // Only when set, so snapshots without a collection keep their source.
+      ...(Object.keys(collection).length > 0 ? [collection] : []),
     ]),
   }
 }
