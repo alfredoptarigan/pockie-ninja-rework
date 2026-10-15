@@ -19,6 +19,8 @@ import {
   blocks,
   characterWeeklyRewards,
   characters,
+  clanMembers,
+  clans,
   friends,
   reports,
   sessions,
@@ -626,6 +628,39 @@ describe('team chat', () => {
     expect((await send(a, { channel: 'team', text: 'one' })).ok).toBe(true)
     expect(errorOf(await send(a, { channel: 'team', text: 'two' }))).toBe('rate_limited')
     expect((await send(b, { channel: 'team', text: 'mine' })).ok).toBe(true)
+  })
+})
+
+describe('clan chat', () => {
+  async function clan() {
+    const one = await player('Player_one', { name: 'Ninja_01', nation: 0 })
+    const two = await player('Player_two', { name: 'Ninja_02', nation: 1 })
+    const three = await player('Player_three', { name: 'Ninja_03', nation: 0 })
+    const [leader, member] = [await idOf('Ninja_01'), await idOf('Ninja_02')]
+    const [row] = await db.insert(clans).values({ name: 'Konoha', founderId: leader }).returning()
+    await db.insert(clanMembers).values([
+      { characterId: leader, clanId: row!.id, role: 'leader' },
+      { characterId: member, clanId: row!.id },
+    ])
+    return { a: await connect(one), b: await connect(two), c: await connect(three) }
+  }
+
+  it('reaches the clan members only, sender included, filtered', async () => {
+    const { a, b, c } = await clan()
+    const ack = await send(a, { channel: 'clan', text: 'rally, shit' })
+    expect(ack).toMatchObject({ ok: true, message: { channel: 'clan', text: 'rally, ****' } })
+    await vi.waitFor(() => expect(b.chat).toEqual([ack.ok && ack.message]))
+    await vi.waitFor(() => expect(a.chat).toHaveLength(1))
+    await send(c, { channel: 'world', text: 'done' })
+    await vi.waitFor(() => expect(c.chat.map((m) => m.text)).toEqual(['done']))
+  })
+
+  it('refuses a player without a clan', async () => {
+    const { c } = await clan()
+    expect(await send(c, { channel: 'clan', text: 'hello?' })).toEqual({
+      ok: false,
+      error: { code: 'not_in_clan', message: 'You are not in a clan.' },
+    })
   })
 })
 

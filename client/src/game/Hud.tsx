@@ -478,7 +478,8 @@ const MENU_GATE_LEVEL = 30
 /**
  * Reborn's bottom bar (docs/audit/reborn-ui-audit.md §3, original theme): `window` is a GameApp
  * window, `feature` a registered window (windows.tsx), `tasks` toggles Quest Navigation.
- * ponytail: Bankai and Clan are systems we do not have yet, so they stay disabled.
+ * `level` greys the icon below it ("Required level 30"); the Clan window opens the Clan Browser
+ * without a clan; Bankai opens the Bankai window.
  */
 const MENU: {
   icon: string
@@ -486,6 +487,7 @@ const MENU: {
   window?: MenuWindow
   feature?: WindowName
   tasks?: true
+  level?: number
 }[] = [
   { icon: '11-1', label: 'Inventory', window: 'bag' },
   { icon: '11-2', label: 'Character', window: 'character' },
@@ -494,8 +496,8 @@ const MENU: {
   { icon: 'ninjahouse', label: 'Ninja House', feature: 'ninjaHouse' },
   { icon: 'social', label: 'Social', feature: 'friends' },
   { icon: 'rank', label: 'Rankings', feature: 'rankings' },
-  { icon: 'bankai', label: 'Bankai' },
-  { icon: 'clan', label: 'Clan' },
+  { icon: 'bankai', label: 'Bankai', feature: 'bankai', level: MENU_GATE_LEVEL },
+  { icon: 'clan', label: 'Clan', feature: 'clan', level: MENU_GATE_LEVEL },
 ]
 
 /**
@@ -545,10 +547,10 @@ export function MenuBar({
         style={BAR_BACKING}
       />
       <nav aria-label="Menu">
-        {MENU.map(({ icon, label, window, feature, tasks }, index) => {
+        {MENU.map(({ icon, label, window, feature, tasks, level = 0 }, index) => {
           const onClick = window
             ? () => onOpen(window)
-            : feature
+            : feature && character.level >= level
               ? () => openFeature(feature)
               : tasks
                 ? onTasks

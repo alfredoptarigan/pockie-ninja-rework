@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { character } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
 import { AudioProvider } from './audio'
-import { PlayerCard, TopBar, shortNumber } from './Hud'
+import { MenuBar, PlayerCard, TopBar, shortNumber } from './Hud'
 import { OpenWindowProvider } from './windows'
 
 const card = () => screen.getByRole('region', { name: 'Character' })
@@ -216,5 +216,30 @@ describe('Settings button', () => {
     await userEvent.click(within(settings).getByRole('checkbox', { name: 'Mute Music' }))
     expect(within(settings).getByRole('checkbox', { name: 'Mute Music' })).toBeChecked()
     expect(within(settings).getByRole('slider', { name: 'Volume' })).toBeDisabled()
+  })
+})
+
+describe('MenuBar', () => {
+  function renderMenu(level: number) {
+    const open = vi.fn()
+    renderWithProviders(
+      <OpenWindowProvider value={open}>
+        <MenuBar character={{ ...character, level }} onOpen={vi.fn()} onTasks={vi.fn()} />
+      </OpenWindowProvider>,
+    )
+    return open
+  }
+
+  it('greys the Clan icon below level 30', () => {
+    renderMenu(29)
+    const clan = screen.getByRole('button', { name: 'Clan' })
+    expect(clan).toBeDisabled()
+    expect(clan).toHaveAttribute('title', 'Required level 30')
+  })
+
+  it('opens the Clan window from level 30', async () => {
+    const open = renderMenu(30)
+    await userEvent.click(screen.getByRole('button', { name: 'Clan' }))
+    expect(open).toHaveBeenCalledWith('clan')
   })
 })

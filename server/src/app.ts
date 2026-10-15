@@ -9,6 +9,7 @@ import { getDummyHash } from './modules/auth/password.js'
 import { authRoutes, sessionPlugin } from './modules/auth/routes.js'
 import { contentRoutes } from './modules/content/routes.js'
 import { characterRoutes } from './modules/game/characters.js'
+import { clanRoutes } from './modules/clans/routes.js'
 import { worldRoutes } from './modules/game/world.js'
 import { skillRoutes } from './modules/game/skills.js'
 import { nonfightBuffRoutes } from './modules/game/nonfight-buffs.js'
@@ -87,11 +88,13 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/cards/routes.js'), { db, prefix: '/api/game/cards' })
   app.register(import('./modules/pets/routes.js'), { db, prefix: '/api/game/pets' })
   app.register(import('./modules/kennel/routes.js'), { db, prefix: '/api/game/kennel' })
+  app.register(import('./modules/bankai/routes.js'), { db, prefix: '/api/game/bankai' })
   app.register(socialRoutes, { db, prefix: '/api/game/social' })
   app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
   app.register(arenaRoutes, { db, prefix: '/api/game/arena' })
   app.register(rankingRoutes, { db, prefix: '/api/game/rankings' })
   app.register(teamRoutes, { db, prefix: '/api/game/team' })
+  app.register(clanRoutes, { db, prefix: '/api/game/clans' })
 
   return app
 }

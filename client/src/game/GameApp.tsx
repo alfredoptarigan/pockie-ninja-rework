@@ -1,4 +1,4 @@
-import type { Character } from '@pockie/shared'
+import { CLAN_MIN_LEVEL, type Character } from '@pockie/shared'
 import { useCallback, useState, type CSSProperties } from 'react'
 import { Navigate } from 'react-router'
 import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
@@ -28,6 +28,7 @@ import { isDefeated, isVillage } from './world'
 import { FeatureWindow, OpenWindowProvider, type OpenWindow, type WindowName } from './windows'
 import { WorldMap } from './WorldMap'
 import { teamHudScene, useTeam } from './teams/api'
+import { useMyClan } from './clans'
 import { AudioProvider } from './audio'
 
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
@@ -79,6 +80,8 @@ function GameScreen({ character }: { character: Character }) {
   const talk = useTalk()
   const travel = useTravel()
   const team = useTeam(teamHudScene(character.sceneId))
+  // Clans open at level 30; below it no clan exists to chat in.
+  const clan = useMyClan(character.level >= CLAN_MIN_LEVEL)
   const [openWindow, setWindow] = useState<Window | null>(null)
   const [hudLayer, setHudLayer] = useState<HTMLDivElement | null>(null)
   const [npc, setNpc] = useState<SceneNpc | null>(null)
@@ -168,7 +171,11 @@ function GameScreen({ character }: { character: Character }) {
                 onNpc={openNpc}
                 onOpenBag={openBag}
               />
-              <RealtimePanels characterId={character.id} inTeam={Boolean(team.data?.team)} />
+              <RealtimePanels
+                characterId={character.id}
+                inTeam={Boolean(team.data?.team)}
+                inClan={Boolean(clan.data?.clan)}
+              />
               {!inVillage && <PlayerList character={character} />}
               <MenuBar
                 character={character}

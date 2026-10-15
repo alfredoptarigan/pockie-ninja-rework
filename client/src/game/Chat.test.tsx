@@ -372,6 +372,26 @@ describe('Chat whispers, team and reports', () => {
     expect(socket.sent).toEqual([{ channel: 'team', text: 'ready' }])
   })
 
+  it('has a Clan tab (green clan lines) after Trade only in a clan', async () => {
+    renderWithProviders(<RealtimePanels characterId="c1" inClan />)
+    act(() => socket.serverEmit('connect'))
+    expect(screen.getAllByRole('tab').map((tab) => tab.textContent)).toEqual([
+      'All',
+      'World',
+      'Village',
+      'Trade',
+      'Clan',
+      'System',
+    ])
+    socket.onSend = (input) => ({ ok: true, message: message({ text: input.text }) })
+    await userEvent.click(screen.getByRole('tab', { name: 'Clan' }))
+    await userEvent.type(screen.getByLabelText('Message to clan chat'), 'rally{Enter}')
+    expect(socket.sent).toEqual([{ channel: 'clan', text: 'rally' }])
+    act(() => socket.serverEmit('chat:message', message({ channel: 'clan', text: 'on my way' })))
+    const text = await screen.findByText('on my way')
+    expect(text.parentElement).toHaveStyle({ color: 'rgb(50, 205, 50)' })
+  })
+
   it('reports a line once with the text as shown', async () => {
     renderChat()
     act(() => socket.serverEmit('chat:message', message({ id: 'bad', text: 'rude ****' })))

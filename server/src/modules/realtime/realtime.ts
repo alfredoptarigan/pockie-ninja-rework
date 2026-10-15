@@ -1,4 +1,4 @@
-// Socket.IO presence (one room per scene, one per character), chat (world, scene, team,
+// Socket.IO presence (one room per scene, one per character), chat (world, scene, team, clan,
 // whispers), friend presence, push notices and chat reports, attached to the Fastify server.
 import { randomUUID } from 'node:crypto'
 import {
@@ -24,7 +24,7 @@ import type { FastifyInstance } from 'fastify'
 import { Server, type Socket } from 'socket.io'
 import type { ZodError } from 'zod'
 import type { Db } from '../../db/client.js'
-import { blocks, characters, friends, reports, teamMembers } from '../../db/schema.js'
+import { blocks, characters, clanMembers, friends, reports, teamMembers } from '../../db/schema.js'
 import type { Env } from '../../env.js'
 import { filterText } from '../../game/text-filter.js'
 import { cookieConfig } from '../auth/cookies.js'
@@ -256,6 +256,7 @@ export function attachRealtime(app: FastifyInstance, { db, env }: { db: Db; env:
     }
     if (input.channel === 'whisper') return whisper(message, input.to)
     if (input.channel === 'team') return sendTeam(message)
+    if (input.channel === 'clan') return sendClan(message)
     // World and Trade reach everyone; Village (scene) only the sender's scene.
     const target = input.channel === 'scene' ? io.to(sceneRoom(presence.sceneId)) : io
     target.emit(REALTIME_EVENTS.chatMessage, message)
@@ -319,6 +320,24 @@ export function attachRealtime(app: FastifyInstance, { db, env }: { db: Db; env:
     if (!teamChat.allow(senderId)) {
       return fail('rate_limited', 'Wait 5 seconds between team messages.')
     }
+    io.to(members.map((m) => characterRoom(m.characterId))).emit(
+      REALTIME_EVENTS.chatMessage,
+      message,
+    )
+    return { ok: true, message }
+  }
+
+  /** Clan channel: membership is read at send time, sender included (the world limit applies). */
+  async function sendClan(message: ChatMessage): Promise<ChatAck> {
+    const ownClan = db
+      .select({ clanId: clanMembers.clanId })
+      .from(clanMembers)
+      .where(eq(clanMembers.characterId, message.sender.characterId))
+    const members = await db
+      .select({ characterId: clanMembers.characterId })
+      .from(clanMembers)
+      .where(inArray(clanMembers.clanId, ownClan))
+    if (members.length === 0) return fail('not_in_clan', 'You are not in a clan.')
     io.to(members.map((m) => characterRoom(m.characterId))).emit(
       REALTIME_EVENTS.chatMessage,
       message,

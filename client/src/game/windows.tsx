@@ -25,10 +25,12 @@ import { NinjaHouseWindow } from './bloodlines/ninja-house'
 import { TeamStoneWindow } from './team-stone'
 import { TeamBoardWindow, TeamWindow } from './teams'
 import { CollectionWindow, WingEnhanceWindow } from './wings'
+import { BankaiWindow } from './bankai'
 import { CardRoomWindow } from './cards'
 import { KennelWindow } from './pets'
 import { KennelShopWindow, PetTracingWindow } from './kennel'
 import { CarrierBagWindow } from './CarrierBag'
+import { ClanBrowserWindow, ClanWindow } from './clans'
 
 export type WindowName =
   | 'shop'
@@ -54,11 +56,14 @@ export type WindowName =
   | 'teamStone'
   | 'wingEnhance'
   | 'collection'
+  | 'bankai'
   | 'cardRoom'
   | 'pets'
   | 'petTracing'
   | 'kennelShop'
   | 'carrierBag'
+  | 'clan'
+  | 'clanBrowser'
 
 export interface WindowProps {
   character: Character
@@ -115,6 +120,7 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   ),
   wingEnhance: ({ onClose }) => <WingEnhanceWindow onClose={onClose} />,
   collection: ({ onClose }) => <CollectionWindow onClose={onClose} />,
+  bankai: ({ onClose }) => <BankaiWindow onClose={onClose} />,
   cardRoom: ({ onClose }) => <CardRoomWindow onClose={onClose} />,
   pets: ({ onClose }) => <KennelWindow onClose={onClose} />,
   petTracing: ({ onClose }) => <PetTracingWindow onClose={onClose} />,
@@ -122,6 +128,8 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   carrierBag: ({ character, onClose }) => (
     <CarrierBagWindow character={character} onClose={onClose} />
   ),
+  clan: (props) => <ClanWindow {...props} />,
+  clanBrowser: (props) => <ClanBrowserWindow {...props} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(

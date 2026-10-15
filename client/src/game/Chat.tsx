@@ -75,6 +75,7 @@ function noticeText(notice: Notice): string | null {
         ? `${notice.from.name} (Level ${notice.from.level}) has invited you to join a team.`
         : `${notice.from.name} (Level ${notice.from.level}) has applied to join your team.`
     case 'teamChanged':
+    case 'clanChanged':
       return notice.message ?? null
     case 'marketSale':
       return 'One of your Market listings has sold.'
@@ -153,17 +154,19 @@ function useRealtime() {
 
 /**
  * Chat box at the bottom left of the stage; the scene's player list opens from its tab row.
- * `inTeam` shows the Team tab and channel.
+ * `inTeam` shows the Team tab and channel, `inClan` the Clan ones.
  */
 export function RealtimePanels({
   characterId,
   inTeam = false,
+  inClan = false,
 }: {
   characterId: string
   inTeam?: boolean
+  inClan?: boolean
 }) {
   const realtime = useRealtime()
-  return <ChatBox {...realtime} selfId={characterId} inTeam={inTeam} />
+  return <ChatBox {...realtime} selfId={characterId} inTeam={inTeam} inClan={inClan} />
 }
 
 function PlayerList({ players, selfId }: { players: ScenePlayer[]; selfId: string }) {
@@ -206,6 +209,7 @@ const CHANNEL_TITLES: Record<ChatChannel | 'system', string> = {
   scene: 'Village',
   team: 'Party',
   trade: 'Trade',
+  clan: 'Clan',
   whisper: 'Whisper',
   system: 'System',
 }
@@ -214,18 +218,23 @@ const TAG_COLORS: Partial<Record<ChatChannel | 'system', string>> = {
   world: '#ffffff',
   team: '#90ee90',
   trade: '#ffd700',
+  clan: '#32cd32',
   system: '#ffffff',
 }
 const isSendChannel = (tab: ChatTab): tab is SendChannel =>
-  tab === 'world' || tab === 'scene' || tab === 'team' || tab === 'trade'
+  tab === 'world' || tab === 'scene' || tab === 'team' || tab === 'trade' || tab === 'clan'
 
-/** Reborn's order: All, World, Village, Party (in a team), Trade, System, then the PM tabs. */
-const tabsFor = (inTeam: boolean, partners: string[]): TabSpec[] => [
+/**
+ * Reborn's order: All, World, Village, Party (in a team), Trade, Clan (in a clan), System, then
+ * the PM tabs.
+ */
+const tabsFor = (inTeam: boolean, inClan: boolean, partners: string[]): TabSpec[] => [
   { id: 'all', title: 'All' },
   { id: 'world', title: 'World' },
   { id: 'scene', title: 'Village' },
   ...(inTeam ? [{ id: 'team' as const, title: 'Party' }] : []),
   { id: 'trade', title: 'Trade' },
+  ...(inClan ? [{ id: 'clan' as const, title: 'Clan' }] : []),
   { id: 'system', title: 'System' },
   ...partners.map((name) => ({ id: `pm:${name}` as const, title: name, closable: true })),
 ]
@@ -421,6 +430,10 @@ function ChatLine({
       )}
       {line.channel === 'system' ? (
         <span>{line.text}</span>
+      ) : line.channel === 'clan' ? (
+        <span style={{ color: TAG_COLORS.clan }}>
+          <ChatText text={line.text} links={links} />
+        </span>
       ) : (
         <ChatText text={line.text} links={links} />
       )}{' '}
@@ -443,15 +456,23 @@ function ChannelSelect({
   id,
   value,
   inTeam,
+  inClan,
   onChange,
 }: {
   id: string
   value: SendChannel
   inTeam: boolean
+  inClan: boolean
   onChange: (channel: SendChannel) => void
 }) {
-  // Reborn's order: World, Village, Trade, then Party in a team.
-  const channels: SendChannel[] = ['world', 'scene', 'trade', ...(inTeam ? ['team' as const] : [])]
+  // Reborn's order: World, Village, Trade, then Party in a team and Clan in a clan.
+  const channels: SendChannel[] = [
+    'world',
+    'scene',
+    'trade',
+    ...(inTeam ? ['team' as const] : []),
+    ...(inClan ? ['clan' as const] : []),
+  ]
   return (
     <div className="relative">
       <label htmlFor={id} className="sr-only">
@@ -487,6 +508,7 @@ export function ChatBox({
   players,
   selfId,
   inTeam,
+  inClan = false,
   status,
   error,
 }: {
@@ -497,6 +519,7 @@ export function ChatBox({
   players: ScenePlayer[]
   selfId: string
   inTeam: boolean
+  inClan?: boolean
   status: Status
   error: string | null
 }) {
@@ -520,10 +543,13 @@ export function ChatBox({
     if (partner) latestPm.set(partner, line.id)
   }
   const partners = [...latestPm].filter(([name, id]) => closedPms[name] !== id).map(([n]) => n)
-  const tabs = tabsFor(inTeam, partners)
-  // Leaving the team (or a closed PM tab) falls back to World.
+  const tabs = tabsFor(inTeam, inClan, partners)
+  // Leaving the team or clan (or a closed PM tab) falls back to World.
   const tab = tabs.some((t) => t.id === chosenTab) ? chosenTab : 'world'
-  const channel = chosenChannel === 'team' && !inTeam ? 'world' : chosenChannel
+  const channel =
+    (chosenChannel === 'team' && !inTeam) || (chosenChannel === 'clan' && !inClan)
+      ? 'world'
+      : chosenChannel
   const pmPartner = tab.startsWith('pm:') ? tab.slice(3) : null
   const shown = lines.filter((line) => belongsOn(line, tab, selfId))
   const tabTitle = tabs.find((t) => t.id === tab)!.title
@@ -644,7 +670,13 @@ export function ChatBox({
         onSubmit={onSubmit}
         className="absolute inset-x-[5px] top-[270px] flex h-[26px] items-center gap-[5px]"
       >
-        <ChannelSelect id={`${ids}-channel`} value={channel} inTeam={inTeam} onChange={pickTab} />
+        <ChannelSelect
+          id={`${ids}-channel`}
+          value={channel}
+          inTeam={inTeam}
+          inClan={inClan}
+          onChange={pickTab}
+        />
         <div className="relative">
           <label htmlFor={`${ids}-input`} className="sr-only">
             {pmPartner
