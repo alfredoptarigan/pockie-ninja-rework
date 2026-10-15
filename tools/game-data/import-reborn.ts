@@ -99,7 +99,7 @@ type ServerConfig = {
 }
 type RebornAvatar = {
   value: number
-  weaponType?: string
+  weaponType?: 'Sharp' | 'Blunt' | 'Fists' | 'Any'
   innate: { avatar: number; isv: number[]; bmv: number[]; skills: number[] }
 }
 type ScrollSkill = {
@@ -403,7 +403,7 @@ const OUTFIT_TIERS_FROM = 1 // AvatarLevel of an outfit's +0 row
 
 /**
  * Reborn's outfit data (serverConfig.avatars) by our clothing id: ISV and BMV in our hundredths,
- * the imprint skill and the outfit value. Reborn item 29xxxx is our clothing xxxx when its art
+ * the imprint skill, the outfit value and its Weapon Type. Reborn item 29xxxx is our clothing xxxx when its art
  * (`innate.avatar`) is that clothing and we have the outfit; other Reborn outfits are skipped.
  */
 export function buildOutfits(config: ServerConfig, items: Record<string, Record<string, unknown>>) {
@@ -428,6 +428,8 @@ export function buildOutfits(config: ServerConfig, items: Record<string, Record<
           isv: hundredths(avatar.innate.isv),
           bmv: hundredths(avatar.innate.bmv),
           imprint: imprints[0] ?? null,
+          // Reborn's client reads a missing weaponType as Any (fits every weapon).
+          weaponType: avatar.weaponType ?? 'Any',
         },
       ],
     ]

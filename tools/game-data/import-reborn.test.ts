@@ -183,8 +183,9 @@ type Cards = {
 }
 
 describe('Reborn outfits (serverConfig.avatars, avatarStars)', () => {
-  const avatar = (art: number, skills: number[]) => ({
+  const avatar = (art: number, skills: number[], weaponType?: string) => ({
     value: 42,
+    ...(weaponType && { weaponType }),
     innate: { avatar: art, isv: [1.2, 0.65, 3.1], bmv: [13, 15, 11], skills },
   })
   const items = {
@@ -192,11 +193,13 @@ describe('Reborn outfits (serverConfig.avatars, avatarStars)', () => {
     i290093: { class: 'AvatarItem', AvatarLevel: 1, Clothing: 93 },
   }
 
+  const items3 = { ...items, i290003: { class: 'AvatarItem', AvatarLevel: 1, Clothing: 3 } }
+
   it('keys Reborn 29xxxx by our clothing when its art is that clothing, in hundredths', () => {
     const config = {
       avatarStars: { maxStars: 5 },
       avatars: {
-        '290001': avatar(1, [10000, 7777, 2002]),
+        '290001': avatar(1, [10000, 7777, 2002], 'Blunt'),
         // Reborn reuses 290093 for another outfit's art: not our clothing 93.
         '290093': avatar(10, [10000, 7777, 2052]),
         '290121': avatar(121, [10000, 7777, 2012]),
@@ -211,9 +214,18 @@ describe('Reborn outfits (serverConfig.avatars, avatarStars)', () => {
           isv: [120, 65, 310],
           bmv: [1300, 1500, 1100],
           imprint: 2002,
+          weaponType: 'Blunt',
         },
       },
     })
+  })
+
+  it("reads a missing weaponType as Any, like Reborn's client", () => {
+    const config = {
+      avatarStars: { maxStars: 5 },
+      avatars: { '290003': avatar(3, [10000, 7777, 2040]) },
+    } as unknown as Parameters<typeof buildOutfits>[0]
+    expect(buildOutfits(config, items3).outfits['3']?.weaponType).toBe('Any')
   })
 
   it('has the star rules and Ichigo as Reborn ships them', () => {
@@ -231,6 +243,7 @@ describe('Reborn outfits (serverConfig.avatars, avatarStars)', () => {
       isv: [120, 120, 120],
       bmv: [1300, 1500, 1100],
       imprint: 2002,
+      weaponType: 'Sharp',
     })
     expect(Object.keys(data.outfits)).toHaveLength(111)
   })
