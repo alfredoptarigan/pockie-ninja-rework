@@ -2,6 +2,7 @@
 // Catalysts make a recipe's result or a random item. Our bag is a separate window, so clicking an
 // item below puts it in the first free slot (Reborn's double-click from the bag) and clicking a
 // slot takes it out. The server checks every rule and rolls the result.
+import { OUTFIT_STARS, STAR_REQUIRED_TIER } from '@pockie/shared'
 import { useState } from 'react'
 import { errorMessage, useInventory } from '../api'
 import { GameButton } from '../skin'
@@ -14,12 +15,16 @@ import { BagPicker, SlotCell } from './items'
 
 const SLOT_LABELS = ['Main Item', 'Catalyst', 'Catalyst'] as const
 
-/** Reborn's hardcoded instructions (point 5, outfit stars, is Reborn-only and left out). */
+/**
+ * Reborn's hardcoded instructions. Point 5 names Reborn's +32; our outfits stop at +31, which is
+ * where the star rule applies here (STAR_REQUIRED_TIER).
+ */
 const INSTRUCTIONS = [
   'Set a main item and two catalysts to view the resulting item.',
   'If the result is equipment, its number of stat lines follows the value shown under the result: 0-21 = 0, 22-30 = 1, 31-38 = 2, 39-45 = 3, 46+ = 4.',
   'If the result is a pet or an outfit, the upgrade chance is shown.',
   'If the result is a random item, consult the Recipes chart.',
+  `A +${STAR_REQUIRED_TIER} outfit with two unstarred, matching +${STAR_REQUIRED_TIER} outfits gains one guaranteed star, up to ${OUTFIT_STARS.maxStars}.`,
 ]
 
 export function SynthesisTab() {
@@ -122,7 +127,12 @@ export function SynthesisTab() {
           {preview.isError ? (
             <span className="text-[#c62828]">{errorMessage(preview.error)}</span>
           ) : plan ? (
-            result ? (
+            plan.stars && result ? (
+              // Reborn's synthesisRecipeName: the outfit with its new stars, in gold.
+              <span className="font-bold text-[#b8860b]">
+                {itemName(result)} {'★'.repeat(plan.stars)}
+              </span>
+            ) : result ? (
               itemName(result)
             ) : (
               'Random item'

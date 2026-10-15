@@ -30,6 +30,7 @@ import {
   skillAddRow,
 } from './data.js'
 import { equipmentBonuses, equippedGear, type Gear } from './equipment.js'
+import { secretThreshold } from './outfit.js'
 import { KILL_LOSS, rollLibDrops, wearEquipped, type GrantedItem } from './gear.js'
 import { drawPouch } from './pouch.js'
 import { grantDrops, loadQuests, saveQuests, saveCharacterProgress, type Tx } from './progress.js'
@@ -195,6 +196,13 @@ export function wingLook(equipped: readonly Gear[]): { wingSprite?: string; aura
   return {}
 }
 
+/** Reborn's fifth outfit star: the worn outfit's Secret Technique threshold, when raised. */
+function secretThresholdOf(equipped: readonly Gear[]) {
+  const outfit = equipped.find((gear) => item(gear.itemId)?.class === 'AvatarItem')
+  const threshold = secretThreshold(outfit?.stars ?? 0)
+  return threshold === undefined ? {} : { secretThreshold: threshold }
+}
+
 /** A character's fighter from its equipped rows (RefreshSystem with the *Equip terms). */
 export function playerFighterFrom(
   character: FighterCharacter,
@@ -214,6 +222,7 @@ export function playerFighterFrom(
     hp: Math.min(character.hp, stats.maxHp),
     mp: Math.min(character.mp, stats.maxMp),
     avatarLevel: avatarLevelFromAvatarId(character.avatarId),
+    ...secretThresholdOf(equipped),
     // The engine only reads type 1 and 2; passives (type 3) stay listed, like the PassiveSkill rec.
     skills,
     ...wingLook(equipped),

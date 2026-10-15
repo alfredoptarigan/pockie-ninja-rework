@@ -1,7 +1,7 @@
 // Reborn's small Inventory windows (reborn-windows-A-L.md, "Inventory"): the confirm prompt,
 // Use Multiple Items, Sort Inventory, Multi Sell and Manage Outfit. They open inside the
 // Inventory window, so they stay in its modal top layer; Escape closes the top one.
-import { VISUAL_OUTFIT_GOLD, type BagSortInput, type GearView } from '@pockie/shared'
+import { VISUAL_OUTFIT_GOLD, starTier, type BagSortInput, type GearView } from '@pockie/shared'
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { GameButton } from '../skin'
 import { outfitName, plainText } from '../text'
@@ -399,7 +399,12 @@ export function ManageOutfitDialog({
             {outfits.slice(shown * PICK_PAGE, (shown + 1) * PICK_PAGE).map((item) => (
               <li key={item.id} className="relative size-[51px]">
                 <ItemPicture item={item} decorative />
-                {item.info?.outfit && <OutfitPlus plus={item.info.outfit.plus} under={false} />}
+                {item.info?.outfit && (
+                  <OutfitPlus
+                    plus={starTier(item.info.outfit.plus, item.info.outfit.stars)}
+                    under={false}
+                  />
+                )}
                 <button
                   type="button"
                   aria-label={itemName(item)}

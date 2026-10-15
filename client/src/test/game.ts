@@ -117,12 +117,12 @@ export const fists: InventoryItem = {
   },
 }
 
-/** An outfit's tooltip stats (i290001's avatar row: ISV 1.2, BMV 13/15/11, Fire imprint). */
+/** An outfit's tooltip facts (Reborn's Ichigo: ISV 1.2, cap 1.32, BMV 13/15/11, Fire Master). */
 export const outfitStats: Omit<OutfitInfo, 'clothing' | 'plus'> = {
+  stars: 0,
   weaponType: 'Sharp',
-  base: [2400, 2400, 2400],
   isv: [120, 120, 120],
-  maxIsv: [150, 150, 150],
+  maxIsv: [132, 132, 132],
   bmv: [1300, 1500, 1100],
-  skills: [1901, 2002],
+  skills: [10000, 2002],
 }

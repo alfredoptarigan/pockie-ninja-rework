@@ -32,10 +32,19 @@ function load<T>(name: string): T {
   return cache.get(name) as T
 }
 
+/**
+ * RoleInitProperty.ini row of an avatar. Outfit avatars Reborn ships take its ISV and BMV
+ * (rebornOutfitStats): base stats 20 ISV + 8 ISV per +N, ISV per level, BMV for every
+ * per-point divisor (docs/audit/reborn-outfit-pet-re.md).
+ */
 export function avatarStats(avatarId: number): AvatarStats {
+  const key = `avatar:${avatarId}`
+  if (cache.has(key)) return cache.get(key) as AvatarStats
   const row = load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)]
   if (!row) throw new Error(`Unknown avatar ${avatarId}`)
-  return row
+  const stats = rebornOutfitStats(avatarId, row)
+  cache.set(key, stats)
+  return stats
 }
 
 /** Stat the creation screen says an outfit boosts (CreatRoleBase.SetRoleSelectDes). */
@@ -97,13 +106,19 @@ export const skill = (id: number) => withReborn<Omit<SkillInput, 'id'>>('skills'
 export const skillAddRow = (id: number) =>
   load<Record<string, Record<string, number>>>('skill-adds')[String(id)]
 
-/** AvatarSkill.ini SkillID1-4 of an outfit (`i29NNNN`), 0 = empty slot. */
+/**
+ * AvatarSkill.ini SkillID1-4 of an outfit (`i29NNNN`), 0 = empty slot. The imprint (SkillID4) is
+ * Reborn's where Reborn ships the outfit; the Secret Technique, block and init stay ours.
+ */
 export function avatarSkillIds(avatarId: number) {
   const row =
     load<Record<string, Record<string, number>>>('avatar-skills')[
       `i29${String(avatarId).padStart(4, '0')}`
     ]
-  return row ? [row.SkillID1, row.SkillID2, row.SkillID3, row.SkillID4].map(Number) : undefined
+  if (!row) return undefined
+  const reborn = outfitOfAvatar(avatarId)?.reborn
+  const imprint = reborn ? (reborn.imprint ?? 0) : row.SkillID4
+  return [row.SkillID1, row.SkillID2, row.SkillID3, imprint].map(Number)
 }
 
 /** NpcRecord AttackSkill + TriggerSkill ids, resolved through the record values. */
@@ -945,3 +960,76 @@ export const rebornKennelShop = () =>
       ),
     }),
   )
+
+// --- Reborn outfits (serverConfig.avatars, avatarStars) ---
+
+const triple = z.tuple([int.min(0), int.min(0), int.min(0)])
+const rebornOutfitsSchema = z.object({
+  stars: z.object({
+    maxStars: int,
+    requiredEnhancement: int,
+    requireUnstarredCatalysts: z.boolean(),
+    baseSkillSlots: int,
+    oneStarIsvBonusPercent: int,
+    twoStarSkillSlots: int,
+    threeStarBonusEnhancements: int,
+    fourStarImprintBonusPercent: int,
+    fiveStarSecretTechniqueThresholdPercent: int,
+    fiveStarSkillSlots: int,
+  }),
+  /** By our clothing id; ISV and BMV in hundredths like RoleInitProperty.ini. */
+  outfits: z.record(
+    z.string(),
+    z.object({
+      rebornItem: int,
+      value: int,
+      isv: triple,
+      bmv: triple,
+      imprint: int.min(2000).max(2092).nullable(),
+    }),
+  ),
+})
+export const rebornOutfits = () => loadChecked('reborn/outfits', rebornOutfitsSchema)
+export type RebornOutfit = z.infer<typeof rebornOutfitsSchema>['outfits'][string]
+
+/** The outfit an AvatarID belongs to: its clothing, +N (AvatarLevel - 1) and Reborn data. */
+export function outfitOfAvatar(avatarId: number) {
+  const key = 'outfits-by-avatar'
+  if (!cache.has(key)) {
+    const byAvatar = new Map<number, { clothing: number; tier: number }>()
+    for (const row of Object.values(load<Record<string, Row>>('items'))) {
+      if (row.class !== 'AvatarItem') continue
+      byAvatar.set(Number(row.AvatarID), {
+        clothing: Number(row.Clothing),
+        tier: Number(row.AvatarLevel) - 1,
+      })
+    }
+    cache.set(key, byAvatar)
+  }
+  const outfit = (cache.get(key) as Map<number, { clothing: number; tier: number }>).get(avatarId)
+  return outfit && { ...outfit, reborn: rebornOutfits().outfits[String(outfit.clothing)] }
+}
+
+/** The avatar row with Reborn's ISV (Up and the +N base) and BMV, when Reborn has the outfit. */
+function rebornOutfitStats(avatarId: number, row: AvatarStats): AvatarStats {
+  const outfit = outfitOfAvatar(avatarId)
+  if (!outfit?.reborn) return row
+  const [str, agi, sta] = outfit.reborn.isv
+  const [strBmv, agiBmv, staBmv] = outfit.reborn.bmv
+  const base = 20 + 8 * outfit.tier
+  return {
+    ...row,
+    Strength: base * str!,
+    StrengthUp: str!,
+    Agility: base * agi!,
+    AgilityUp: agi!,
+    Stamina: base * sta!,
+    StaminaUp: sta!,
+    StrAtkAdd: strBmv!,
+    StrParryAdd: strBmv!,
+    AgiAtkAdd: agiBmv!,
+    DodgeAdd: agiBmv!,
+    MaxHPAdd: staBmv!,
+    MaxMPAdd: staBmv!,
+  }
+}

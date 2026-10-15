@@ -1,7 +1,7 @@
 // PackSystem: two initially active 60-cell pages. See docs/original-data/bag.md.
 import type { BagItemInfo, InventoryItemView, OutfitInfo } from '@pockie/shared'
 import { and, asc, eq, inArray, isNotNull, isNull, notInArray, sql } from 'drizzle-orm'
-import { characters, inventoryItems, outfitRecasts } from '../db/schema.js'
+import { characters, inventoryItems, outfitRecasts, type StoredPet } from '../db/schema.js'
 import { HttpError } from '../http.js'
 import {
   BAG_CELLS,
@@ -15,9 +15,8 @@ import {
 import { avatarSkillIds, avatarStats, item, itemNameKey } from './data.js'
 import { weaponType, type GrantedItem } from './gear.js'
 import { gemOf, stoneOf } from './gems.js'
-import { OUTFIT_SLOT, outfitOf } from './outfit.js'
+import { OUTFIT_SLOT, outfitIsv, outfitOf } from './outfit.js'
 import { petSpecies } from './pets.js'
-import { recastCap, recastRange } from './portable-function.js'
 import type { Db } from '../db/client.js'
 import type { Tx } from './progress.js'
 
@@ -105,46 +104,54 @@ export function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: 
   return allowed === -1 || (allowed & avatarStats(avatarId).Popsinger) !== 0
 }
 
-type Triple = [number, number, number]
-/** AvatarSkill ids every outfit has: the basic attack and defence, not imprints. */
-const BASIC_SKILLS = new Set([0, 7777, 8888])
+/** Reborn's Secret Technique imprint; ours are per outfit (AvatarSkill SkillID1, 19xx / 22xx). */
+const SECRET_TECHNIQUE = 10000
 
-/**
- * Reborn's outfit tooltip stats from our avatar.ini row. A recast swaps the Up of every outfit
- * level past +1 (recastBonus: 8 * (plus - 1) levels) and of each character level.
- */
-function outfitInfo(itemId: string, recast?: readonly number[]): OutfitInfo | undefined {
+/** Instance state an item's facts depend on: an outfit's recast ISV and stars, a stored pet. */
+export interface ItemState {
+  recast?: readonly number[]
+  stars?: number
+  pet?: StoredPet | null
+}
+
+/** Reborn's outfit tooltip facts (props.isv / recastMaxIsv / bmv / skills / stars). */
+function outfitInfo(itemId: string, { recast, stars = 0 }: ItemState): OutfitInfo | undefined {
   const outfit = outfitOf(itemId)
-  if (!outfit) return undefined
+  const own = outfitIsv(itemId, recast)
+  if (!outfit || !own) return undefined
   const avatar = avatarStats(outfit.avatarId)
-  const up: Triple = [avatar.StrengthUp, avatar.AgilityUp, avatar.StaminaUp]
-  const isv = (recast ?? up).slice(0, 3) as Triple
-  const levels = 8 * (outfit.plus - 1)
-  const base = [avatar.Strength, avatar.Agility, avatar.Stamina].map(
-    (stat, i) => stat + levels * (isv[i]! - up[i]!),
-  ) as Triple
-  const range = recastRange(itemId)
-  const cap = (i: number) => (range ? recastCap(range, i) : isv[i]!)
+  const imprint = avatarSkillIds(outfit.avatarId)?.[3] ?? 0
   return {
     clothing: outfit.clothing,
     plus: outfit.plus,
+    stars,
     weaponType: weaponType(avatar.Popsinger),
-    base,
-    isv,
-    maxIsv: [cap(0), cap(1), cap(2)],
+    isv: own.isv,
+    maxIsv: own.max,
     bmv: [avatar.StrAtkAdd, avatar.AgiAtkAdd, avatar.MaxHPAdd],
-    skills: (avatarSkillIds(outfit.avatarId) ?? []).filter((id) => !BASIC_SKILLS.has(id)),
+    skills: [SECRET_TECHNIQUE, ...(imprint ? [imprint] : [])],
   }
 }
 
-/** Item table facts of an item id; `recast` is an outfit row's recast ISV (outfit_recasts). */
-export function itemInfo(itemId: string, recast?: readonly number[]): BagItemInfo {
+/** A pet item's nature, and the level and slotted skills of a pet stored from the Kennel. */
+function petInfo(itemId: string, stored?: StoredPet | null) {
+  const species = petSpecies(itemId)
+  if (!species) return undefined
+  if (!stored) return { nature: species.nature }
+  const skills = stored.skills
+    .filter((skill) => skill.slot !== null)
+    .map((skill) => ({ skillId: skill.skillId, kind: skill.kind }))
+  return { nature: species.nature, level: stored.level, skills }
+}
+
+/** Item table facts of an item id, with the instance state of its row when there is one. */
+export function itemInfo(itemId: string, state: ItemState = {}): BagItemInfo {
   const def = item(itemId)
   const itemClass = String(def?.class ?? '')
   const outfit = outfitOf(itemId)
-  const outfitStats = outfitInfo(itemId, recast)
-  const species = petSpecies(itemId)
-  const value = Number(def?.JudgeValueScore ?? 0)
+  const outfitStats = outfitInfo(itemId, state)
+  const pet = petInfo(itemId, state.pet)
+  const value = outfit ? outfit.value : Number(def?.JudgeValueScore ?? 0)
   const equip = itemClass === 'EquipItem'
   const gem = gemOf(itemId)
   const enchant = stoneOf(itemId)
@@ -155,7 +162,7 @@ export function itemInfo(itemId: string, recast?: readonly number[]): BagItemInf
     equipSlot: outfit ? OUTFIT_SLOT : equip ? String(def!.EquipType) : null,
     level: outfit ? outfit.level : Number(def?.UseLevel ?? 0),
     ...(outfitStats && { outfit: outfitStats }),
-    ...(species && { pet: { nature: species.nature } }),
+    ...(pet && { pet }),
     ...(value > 0 && { value }),
     sellPrice: (Number(def?.CanTrade ?? 0) & 1) !== 0 ? Number(def?.Price ?? 0) : null,
     stack: itemStackSize(itemId),
@@ -246,6 +253,12 @@ export async function recastsOf(tx: Tx | Db, rows: readonly ItemRow[]) {
   return new Map(found.map((r) => [r.itemId, [r.strength, r.agility, r.stamina]]))
 }
 
+/** A row's instance state for itemInfo; `recast` is an outfit row's recast ISV. */
+export const stateOf = (
+  row: Pick<ItemRow, 'stars' | 'pet'>,
+  recast?: readonly number[],
+): ItemState => ({ recast, stars: row.stars, pet: row.pet })
+
 /**
  * One inventory row as the client sees it; `avatarId` is the wearer's (fitsOutfit), `recast` an
  * outfit row's recast ISV.
@@ -268,6 +281,6 @@ export function itemView(
     page: row.bagPage,
     slot: row.bagSlot,
     locked: row.locked,
-    info: itemInfo(row.itemId, recast),
+    info: itemInfo(row.itemId, stateOf(row, recast)),
   }
 }

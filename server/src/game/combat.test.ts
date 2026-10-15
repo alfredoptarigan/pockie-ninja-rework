@@ -85,6 +85,18 @@ describe('worn wing look', () => {
   })
 })
 
+describe('worn outfit stars', () => {
+  // i290003: clothing 3 +0 (Reborn imprint 2040 Wind Basic, SkillAdd4 +5%).
+  const wearing = (stars: number) =>
+    playerFighterFrom(freshNinja, [{ itemId: 'i290003', stars }, { itemId: NEWBIE_FISTS }])
+
+  it('raise the imprint at four stars and the Secret Technique threshold at five', () => {
+    expect(wearing(3)).not.toHaveProperty('secretThreshold')
+    expect(wearing(4).skillAdd[4]! - wearing(3).skillAdd[4]!).toBe(500)
+    expect(wearing(5)).toMatchObject({ secretThreshold: 20 })
+  })
+})
+
 describe('equipment bonuses', () => {
   const fighter = (equipped: string[]) => playerFighterFrom(freshNinja, gear(equipped))
 

@@ -6,7 +6,6 @@
 import type { Random } from '@pockie/game-core'
 import {
   avatarRecast,
-  avatarStats,
   composeBlocked,
   composeRandom,
   composeRecipes,
@@ -15,7 +14,7 @@ import {
   item,
   type ComposeRecipe,
 } from './data.js'
-import { outfitOf } from './outfit.js'
+import { outfitIsv } from './outfit.js'
 
 /**
  * PLACEHOLDERS, to be confirmed: Reborn decides these on its server and its Portable Function
@@ -180,48 +179,44 @@ export function rollSynthesis(
 export const RECAST_COSTS = [1, 5, 15] as const
 export const RECAST_TALISMAN = 'i161007'
 
-/** An outfit's ISV bounds per stat (Strength, Agility, Stamina): its avatar's Up to AddMax. */
+/** An outfit's ISV bounds per stat (Strength, Agility, Stamina), in hundredths. */
 export interface RecastRange {
   base: [number, number, number]
   max: [number, number, number]
   unit: [number, number, number]
 }
 
+/**
+ * Reborn's recast bounds: the outfit's ISV up to recastMaxIsv (1.1 times it). Reborn rolls on its
+ * server; the steps keep AvatarRecast.ini's unit (at least 0.01), the last one landing on the cap.
+ */
 export function recastRange(itemId: string): RecastRange | undefined {
-  const outfit = outfitOf(itemId)
+  const own = outfitIsv(itemId)
   const row = avatarRecast(itemId)
-  if (!outfit || !row) return undefined
-  const avatar = avatarStats(outfit.avatarId)
+  if (!own || !row) return undefined
+  const unit = (n: number) => Math.max(1, n)
   return {
-    base: [avatar.StrengthUp, avatar.AgilityUp, avatar.StaminaUp],
-    max: [row.StrengthAddMax, row.AgilityAddMax, row.StaminaAddMax],
-    unit: [row.StrengthUnit, row.AgilityUnit, row.StaminaUnit],
+    base: own.isv,
+    max: own.max,
+    unit: [unit(row.StrengthUnit), unit(row.AgilityUnit), unit(row.StaminaUnit)],
   }
 }
 
 /** Unit steps from the base to the cap; 0 = the stat never changes. */
 const steps = (range: RecastRange, stat: number) =>
-  range.unit[stat]! > 0
-    ? Math.max(0, Math.trunc((range.max[stat]! - range.base[stat]!) / range.unit[stat]!))
-    : 0
-/** The highest ISV a recast can roll for a stat. */
-export const recastCap = (range: RecastRange, stat: number) =>
-  range.base[stat]! + steps(range, stat) * range.unit[stat]!
+  Math.max(0, Math.ceil((range.max[stat]! - range.base[stat]!) / range.unit[stat]!))
 const atMax = (range: RecastRange, isv: readonly number[], stat: number) =>
-  isv[stat]! >= recastCap(range, stat)
+  isv[stat]! >= range.max[stat]!
 
 /** A free stat can still move, and not every stat has reached its cap (RECAST_STATE_THREE). */
 export function canRecast(range: RecastRange, isv: readonly number[], locked: readonly number[]) {
   const movable = [0, 1, 2].filter((stat) => steps(range, stat) > 0)
-  return (
-    movable.some((stat) => !locked.includes(stat)) &&
-    !movable.every((stat) => atMax(range, isv, stat))
-  )
+  return movable.some((stat) => !locked.includes(stat) && !atMax(range, isv, stat))
 }
 
 /**
- * Each free stat rolls RandInt(0, steps): 0 keeps it, n sets base + n units (2011). Locked stats
- * keep their value.
+ * Each free stat rolls RandInt(0, steps): 0 keeps it, n sets base + n units, at most the cap
+ * (2011's roll, Reborn's cap). Locked stats keep their value.
  */
 export function rollRecast(
   range: RecastRange,
@@ -231,26 +226,11 @@ export function rollRecast(
 ): [number, number, number] {
   const roll = (stat: number) => {
     const n = locked.includes(stat) ? 0 : random.between(0, steps(range, stat))
-    return n > 0 ? range.base[stat]! + n * range.unit[stat]! : isv[stat]!
+    return n > 0
+      ? Math.min(range.max[stat]!, range.base[stat]! + n * range.unit[stat]!)
+      : isv[stat]!
   }
   return [roll(0), roll(1), roll(2)]
-}
-
-/**
- * Strength / Agility / Stamina a recast outfit adds over its avatar's: the base and every level use
- * the ISV instead of the avatar's Up (ComputeRecastProp: base + 8 * (AvatarLevel - 1) * Up;
- * RefreshSystem 141-157: + level * Up).
- */
-export function recastBonus(itemId: string, isv: readonly number[], level: number) {
-  const outfit = outfitOf(itemId)
-  if (!outfit) return undefined
-  const avatar = avatarStats(outfit.avatarId)
-  const times = 8 * (outfit.plus - 1) + level
-  return {
-    strength: times * (isv[0]! - avatar.StrengthUp),
-    agility: times * (isv[1]! - avatar.AgilityUp),
-    stamina: times * (isv[2]! - avatar.StaminaUp),
-  }
 }
 
 // --- Impress (IdentifySystem.ImpressEquip; Reborn's Main Item + Blade + Crystals) ---

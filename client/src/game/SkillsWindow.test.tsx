@@ -73,7 +73,9 @@ describe('Skills window', () => {
     expect(within(grid).getByRole('button', { name: 'Crystal Blade, level 2' })).toBeVisible()
     const equipped = screen.getByRole('region', { name: 'Equipped skills, preset 1' })
     expect(within(equipped).getAllByRole('img', { name: /empty/ })).toHaveLength(6)
-    expect(within(equipped).getAllByRole('img', { name: 'Locked slot' })).toHaveLength(4)
+    expect(within(equipped).getAllByRole('img', { name: 'Locked slot' })).toHaveLength(2)
+    expect(within(equipped).getByRole('img', { name: 'Unlocks at 2 stars' })).toBeVisible()
+    expect(within(equipped).getByRole('img', { name: 'Unlocks at 5 stars' })).toBeVisible()
     expect(screen.getByRole('heading', { name: 'Equipped (0)' })).toBeVisible()
     for (const preset of [1, 2, 3, 4, 5])
       expect(screen.getByRole('button', { name: `Preset ${preset}` })).toBeVisible()
@@ -127,7 +129,7 @@ describe('Skills window', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Crystal Blade, level 2' }))
     const equip = screen.getByRole('menuitem', { name: 'Equip Crystal Blade' })
     expect(equip).toBeDisabled()
-    expect(equip).toHaveAccessibleDescription('All six slots are full.')
+    expect(equip).toHaveAccessibleDescription('All slots are full.')
   })
 
   it('lets a learned higher grade be lowered for a slot', async () => {

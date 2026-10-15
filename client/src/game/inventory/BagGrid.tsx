@@ -1,7 +1,13 @@
 // Reborn's bag (reborn-windows-A-L.md, "Inventory"): tabs I-X over a 10x6 grid of 27px tiles,
 // each item drawn at its server tile (page / slot of its top-left corner) over the tiles it
 // covers. While an item is held every tile is a button, so a click drops the item there.
-import { BAG_PAGE_COLUMNS, BAG_PAGE_COUNT, BAG_PAGE_SLOTS, type GearView } from '@pockie/shared'
+import {
+  BAG_PAGE_COLUMNS,
+  BAG_PAGE_COUNT,
+  BAG_PAGE_SLOTS,
+  starTier,
+  type GearView,
+} from '@pockie/shared'
 import { useRef, type KeyboardEvent, type MouseEvent } from 'react'
 import { itemIcon } from '../ItemIcon'
 import { GameButton } from '../skin'
@@ -234,7 +240,7 @@ function BagCell({
           x{item.count}
         </span>
       )}
-      {outfit && <OutfitPlus plus={outfit.plus} under={overLevel} />}
+      {outfit && <OutfitPlus plus={starTier(outfit.plus, outfit.stars)} under={overLevel} />}
       {overLevel && !outfit && (
         <span
           aria-hidden="true"

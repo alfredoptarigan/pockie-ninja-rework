@@ -8,6 +8,7 @@ import { and, eq, inArray } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { randomInt } from 'node:crypto'
 import { z } from 'zod'
+import { OUTFIT_STARS, STAR_REQUIRED_TIER } from '../../../../shared/src/schemas/outfit.js'
 import {
   RECAST_TALISMAN_COSTS,
   impressSchema,
@@ -45,6 +46,7 @@ import {
   type RecastRange,
   type SynthesisPart,
 } from '../../game/portable-function.js'
+import { outfitOf } from '../../game/outfit.js'
 import { grantItems, removeItems, type Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
@@ -96,7 +98,7 @@ const held = async (tx: Tx | Db, characterId: string, itemId: string) =>
  * several slots. Synthesis destroys what it uses, so worn, locked and socketed items are refused
  * like Reborn's Multi Sell refuses them.
  */
-function checkSynthesisRows(rows: ItemRow[]) {
+function checkSynthesisRows(rows: ItemRow[], star: boolean) {
   const uses = new Map<string, number>()
   rows.forEach((row, slot) => {
     if (row.equippedSlot) throw bad('worn', 'Take that item off first.')
@@ -104,7 +106,7 @@ function checkSynthesisRows(rows: ItemRow[]) {
     if (row.gems.some(Boolean)) throw bad('socketed', 'Remove the gems from that item first.')
     if (item(row.itemId)?.class === 'EquipItem' && !isAppraised(row))
       throw bad('unappraised', 'Appraise that item first.')
-    const problem = synthesisPartProblem(row.itemId, slot > 0)
+    const problem = !star && synthesisPartProblem(row.itemId, slot > 0)
     if (problem) throw bad('cannot_synthesize', problem)
     uses.set(row.id, (uses.get(row.id) ?? 0) + 1)
   })
@@ -114,11 +116,32 @@ function checkSynthesisRows(rows: ItemRow[]) {
 
 const partOf = (row: ItemRow): SynthesisPart => ({ itemId: row.itemId, lines: row.identifyCount })
 
+/**
+ * Reborn's star rule: a top +N outfit with two matching, unstarred copies of itself gains one
+ * sure star, up to five. Returns the stars it would reach, or undefined for any other trio.
+ */
+function starSynthesis([main, ...catalysts]: ItemRow[]) {
+  if (outfitOf(main!.itemId)?.plus !== STAR_REQUIRED_TIER) return undefined
+  if (catalysts.some((row) => row.itemId !== main!.itemId)) return undefined
+  if (OUTFIT_STARS.requireUnstarredCatalysts && catalysts.some((row) => row.stars > 0))
+    throw bad('starred_catalyst', 'The catalyst outfits must have no stars.')
+  if (main!.stars >= OUTFIT_STARS.maxStars)
+    throw bad('max_stars', `That outfit already has ${OUTFIT_STARS.maxStars} stars.`)
+  return main!.stars + 1
+}
+
 /** The level gate, the slot checks and the plan of a Synthesis request. */
 function synthesisSetup(level: number, rows: ItemRow[]) {
   if (level < SYNTHESIS_MIN_LEVEL)
     throw bad('too_low', `Synthesis opens at level ${SYNTHESIS_MIN_LEVEL}.`)
-  checkSynthesisRows(rows)
+  if (new Set(rows.map((row) => row.id)).size === rows.length) {
+    const stars = starSynthesis(rows)
+    if (stars !== undefined) {
+      checkSynthesisRows(rows, true)
+      return { stars }
+    }
+  }
+  checkSynthesisRows(rows, false)
   const [main, ...rest] = rows.map(partOf) as [SynthesisPart, SynthesisPart, SynthesisPart]
   const catalysts = rest as [SynthesisPart, SynthesisPart]
   const plan = synthesisPlan(main, catalysts)
@@ -144,6 +167,25 @@ async function grantResult(
     .values({ characterId, itemId, bound, ...newGearState(itemId, lines, rng) })
     .returning({ id: inventoryItems.id })
   return row!.id
+}
+
+/** Pays a star Synthesis: the catalysts are used up and the main outfit gains its star. */
+async function starSynthesize(
+  tx: Tx,
+  character: { id: string } & Parameters<typeof pay>[1],
+  rows: ItemRow[],
+  stars: number,
+) {
+  const [main, ...catalysts] = rows as [ItemRow, ItemRow, ItemRow]
+  await pay(tx, character, 'stone', PORTABLE_FUNCTION_PLACEHOLDERS.synthesisStone)
+  for (const row of catalysts) await useUp(tx, row, 1)
+  await tx.update(inventoryItems).set({ stars }).where(eq(inventoryItems.id, main.id))
+  return {
+    success: true,
+    resultItemId: main.itemId,
+    resultNameKey: itemNameKey(main.itemId),
+    ...(await respond(tx, character.id)),
+  }
 }
 
 // --- Recast ---
@@ -211,7 +253,19 @@ export default async function portableFunctionRoutes(app: FastifyInstance, { db 
       const { mainId, catalystIds } = synthesisSchema.parse(request.body)
       const character = await characterOf(db, requireUser(request).id)
       const rows = await rowsOf(db, character.id, [mainId, ...catalystIds], false)
-      const { plan } = synthesisSetup(character.level, rows)
+      const setup = synthesisSetup(character.level, rows)
+      if (setup.stars !== undefined) {
+        const [main] = rows as [ItemRow]
+        return {
+          kind: 'star',
+          resultItemId: main.itemId,
+          resultNameKey: itemNameKey(main.itemId),
+          resultInfo: itemInfo(main.itemId, { stars: setup.stars }),
+          rate: 100,
+          stars: setup.stars,
+        }
+      }
+      const { plan } = setup
       const resultItemId = plan.kind === 'recipe' ? plan.resultItemId : null
       return {
         kind: plan.kind,
@@ -232,7 +286,9 @@ export default async function portableFunctionRoutes(app: FastifyInstance, { db 
     return db.transaction(async (tx) => {
       const character = await lockCharacter(tx, userId)
       const rows = await rowsOf(tx, character.id, [mainId, ...catalystIds], true)
-      const { main, catalysts, plan } = synthesisSetup(character.level, rows)
+      const setup = synthesisSetup(character.level, rows)
+      if (setup.stars !== undefined) return starSynthesize(tx, character, rows, setup.stars)
+      const { main, catalysts, plan } = setup
       const rng = random()
       const roll = rollSynthesis(main, catalysts, plan, rng)
       const bound = rows.some((row) => row.bound)

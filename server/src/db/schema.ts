@@ -313,6 +313,11 @@ export const inventoryItems = pgTable(
     gems: jsonb('gems').$type<(string | null)[]>().notNull().default([]),
     // The Enchanting Stone (MagicItem id) applied to this gear, else null (migration 0047).
     enchantItemId: text('enchant_item_id'),
+    // Reborn outfit stars (props.stars, 0-5), gained by Synthesis at the top +N (migration 0060).
+    stars: smallint('stars').notNull().default(0),
+    // A pet moved from the Kennel to the bag keeps its state, like Reborn's pet item props
+    // (migration 0060). Null = a new pet item.
+    pet: jsonb('pet').$type<StoredPet>(),
   },
   (t) => [
     index('inventory_items_character_id_idx').on(t.characterId),
@@ -342,6 +347,7 @@ export const inventoryItems = pgTable(
     check('inventory_items_props', jsonbArray(t.props, 4)),
     check('inventory_items_gems', jsonbArray(t.gems, 3)),
     check('inventory_items_engraved_slot', sql`${t.engravedSlot} between 0 and 3`),
+    check('inventory_items_stars', sql`${t.stars} between 0 and 5`),
     check('inventory_items_bag_page', sql`${t.bagPage} between 0 and 9`),
     check('inventory_items_bag_slot', sql`${t.bagSlot} between 0 and 59`),
     // Only unequipped bag rows have a position, and always both halves of it.
@@ -1328,7 +1334,8 @@ export const characterSkillSlots = pgTable(
       foreignColumns: [characterSkills.characterId, characterSkills.skillId],
     }).onDelete('cascade'),
     check('character_skill_slots_tree', sql`${t.tree} between 0 and 4`),
-    check('character_skill_slots_slot', sql`${t.slot} between 0 and 5`),
+    // Slots 6 and 7 open with the worn outfit's second and fifth star (migration 0060).
+    check('character_skill_slots_slot', sql`${t.slot} between 0 and 7`),
     check('character_skill_slots_level', sql`${t.level} between 1 and 13`),
   ],
 )
@@ -1672,6 +1679,33 @@ export const teamStoneQueue = pgTable(
 // Pets (M6 decisions 8-19).
 
 /** One food slot of a pet (decision 13): `PetFeedLib` type 1-7, multiplier tier, food item fed. */
+/** A Kennel pet stored as an item: its character_pets columns and skill rows. */
+export interface StoredPet {
+  name: string | null
+  level: number
+  exp: number
+  growth: number
+  baseAttack: number
+  baseDefence: number
+  baseDisturb: number
+  baseActive: number
+  baseSavvy: number
+  appetite: number
+  digestEndsAt: string | null
+  foodSlots: PetFoodSlot[]
+  haloSlots: number
+  helpSlots: number
+  passSlots: number
+  skills: {
+    skillId: number
+    level: number
+    learnedOrder: number
+    locked: boolean
+    kind: number
+    slot: number | null
+  }[]
+}
+
 export interface PetFoodSlot {
   type: number
   mul: number

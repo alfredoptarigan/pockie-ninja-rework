@@ -8,20 +8,36 @@ import {
 import {
   SCROLL_SKILLS_PER_TREE,
   SKILL_RESET_COST,
-  SKILL_SLOTS_PER_TREE,
   SKILL_TREE_COUNT,
+  skillSlotsFor,
   type SkillSlot,
   type SkillSlotInput,
   type SkillView,
 } from '@pockie/shared'
-import { and, eq, gt, inArray, isNotNull, isNull, lte, ne, notInArray, or, sql } from 'drizzle-orm'
+import {
+  and,
+  eq,
+  gt,
+  inArray,
+  isNotNull,
+  isNull,
+  lt,
+  lte,
+  ne,
+  notInArray,
+  or,
+  sql,
+} from 'drizzle-orm'
 import type { Db } from '../db/client.js'
 import {
   characterSkills,
   characterSkillSlots,
   characterSkillState,
   characters,
+  inventoryItems,
 } from '../db/schema.js'
+import { wornItemsWhere } from './bag.js'
+import { OUTFIT_SLOT } from './outfit.js'
 import { HttpError } from '../http.js'
 import { item, rebornScrollSkills, skill } from './data.js'
 import { learningView, learnThroughLevel } from './learning.js'
@@ -33,6 +49,15 @@ const skillAt = (id: number, level: number): SkillInput | undefined => {
   const actualId = id + (level - 1) * 10000
   const row = skill(actualId)
   return row ? { id: actualId, ...row } : undefined
+}
+
+/** Open skill bar slots: Reborn's 6, plus the worn outfit's star slots. */
+async function slotCount(tx: Tx | Db, characterId: string) {
+  const [outfit] = await tx
+    .select({ stars: inventoryItems.stars })
+    .from(inventoryItems)
+    .where(and(wornItemsWhere(characterId), eq(inventoryItems.equippedSlot, OUTFIT_SLOT)))
+  return skillSlotsFor(outfit?.stars ?? 0)
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000
@@ -117,6 +142,7 @@ export async function skillView(tx: Tx, characterId: string): Promise<SkillView>
     .from(characterSkillState)
     .where(eq(characterSkillState.characterId, characterId))
   const rows = await tx.select().from(characterSkillSlots).where(owner(characterId))
+  const open = await slotCount(tx, characterId)
   return {
     ...learning,
     learned: learning.learned.filter((row) => !isScrollSkill(row.skillId)),
@@ -128,7 +154,7 @@ export async function skillView(tx: Tx, characterId: string): Promise<SkillView>
     freeResets: state!.freeResets,
     resetCost: SKILL_RESET_COST,
     trees: Array.from({ length: SKILL_TREE_COUNT }, (_, tree) =>
-      Array.from({ length: SKILL_SLOTS_PER_TREE }, (_, slot) => {
+      Array.from({ length: open }, (_, slot) => {
         const row = rows.find((row) => row.tree === tree && row.slot === slot)
         return { slot, skillId: row?.skillId ?? null, level: row?.level ?? 0 }
       }),
@@ -146,6 +172,8 @@ export async function setSkillSlot(tx: Tx, characterId: string, input: SkillSlot
     await tx.delete(characterSkillSlots).where(target)
     return
   }
+  if (input.slot >= (await slotCount(tx, characterId)))
+    throw bad('slot_locked', 'That slot opens with more stars on your outfit.')
   const scroll = isScrollSkill(input.skillId)
   if (!scroll && !LEARNABLE_NINJUTSU.includes(input.skillId))
     throw bad('not_slottable', 'Only learned ninjutsu and scroll skills can go in the skill bar.')
@@ -219,16 +247,17 @@ async function activeSlotRows(tx: Tx | Db, characterId: string) {
       and(
         owner(characterId),
         eq(characterSkillSlots.tree, state?.activeTree ?? 0),
+        lt(characterSkillSlots.slot, await slotCount(tx, characterId)),
         live(new Date()),
       ),
     )
     .orderBy(characterSkillSlots.slot)
 }
 
-/** The active preset's six slots (View Character's skills strip). */
+/** The active preset's open slots (View Character's skills strip). */
 export async function activeSkillSlots(tx: Tx | Db, characterId: string): Promise<SkillSlot[]> {
   const rows = await activeSlotRows(tx, characterId)
-  return Array.from({ length: SKILL_SLOTS_PER_TREE }, (_, slot) => {
+  return Array.from({ length: await slotCount(tx, characterId) }, (_, slot) => {
     const row = rows.find((row) => row.slot === slot)
     return { slot, skillId: row?.skillId ?? null, level: row?.level ?? 0 }
   })

@@ -19,6 +19,8 @@ export interface SkillLearningView {
 /** Skill bar trees: Reborn's Skills window presets 1-5. */
 export const SKILL_TREE_COUNT = 5
 export const SKILL_SLOTS_PER_TREE = 6
+/** Reborn's outfit stars open a 7th (2 stars) and an 8th (5 stars) slot. */
+export const MAX_SKILL_SLOTS = 8
 export const SKILL_RESET_COST = 8
 export interface SkillSlot {
   slot: number
@@ -33,6 +35,7 @@ export interface ScrollSkill {
   expiresAt: string | null
 }
 export interface SkillView extends SkillLearningView {
+  /** The open slots of each tree: 6, more with the worn outfit's stars. */
   trees: SkillSlot[][]
   /** Live scroll skills (not in `learned`). */
   scrolls: ScrollSkill[]
@@ -52,7 +55,7 @@ export const skillSlotSchema = z.object({
     .number()
     .int()
     .min(0)
-    .max(SKILL_SLOTS_PER_TREE - 1),
+    .max(MAX_SKILL_SLOTS - 1),
   skillId: z.number().int().positive().nullable(),
   level: z.number().int().min(1).max(13).optional(),
 })

@@ -47,34 +47,64 @@ describe('bag capacity', () => {
 })
 
 describe('itemInfo for the Reborn tooltip', () => {
-  it('gives an outfit its weapon type, ISV, recast cap, BMV and skill imprints', () => {
-    // i290404: 4th Hokage +5 (AvatarID 404: Popsinger 2, StrengthUp 125, StrAtkAdd 1200...).
+  it("gives an outfit Reborn's +N, value, weapon type, ISV, recast cap, BMV and imprints", () => {
+    // i290404: 4th Hokage AvatarLevel 5 = Reborn +4 (ISV 1.25, BMV 12 / 14 / 12, Wind Master).
     expect(itemInfo('i290404')).toMatchObject({
       value: 42,
       outfit: {
         clothing: 4,
-        plus: 5,
+        plus: 4,
+        stars: 0,
         weaponType: 'Sharp',
-        base: [6500, 6500, 6500],
         isv: [125, 125, 125],
-        maxIsv: [155, 155, 155],
+        maxIsv: [138, 138, 138],
         bmv: [1200, 1400, 1200],
-        skills: [1904, 2002],
+        skills: [10000, 2042],
       },
     })
   })
-  it('uses the recast ISV: the outfit levels past +1 count at the recast value', () => {
-    // 8 * (plus - 1) = 32 levels of the +5 outfit move to the recast Up.
-    expect(itemInfo('i290404', [135, 125, 155]).outfit).toMatchObject({
-      base: [6500 + 32 * 10, 6500, 6500 + 32 * 30],
-      isv: [135, 125, 155],
+  it('shows the recast ISV within its cap and the stars of the row', () => {
+    expect(itemInfo('i290404', { recast: [135, 125, 155], stars: 2 }).outfit).toMatchObject({
+      isv: [135, 125, 138],
+      stars: 2,
     })
   })
-  it('keeps the ISV as the cap of an outfit that cannot be recast', () => {
-    expect(itemInfo('i290002').outfit).toMatchObject({ isv: [0, 0, 0], maxIsv: [0, 0, 0] })
-    expect(itemInfo('i290002').value).toBeUndefined()
+  it("takes Reborn's ISV for an outfit 2011 left empty", () => {
+    expect(itemInfo('i290002').outfit).toMatchObject({
+      isv: [310, 290, 150],
+      skills: [10000, 2032],
+    })
+    expect(itemInfo('i290002').value).toBe(42)
   })
-  it("gives a pet item its species' nature", () => {
-    expect(itemInfo('i320002')).toMatchObject({ class: 'PetItem', pet: { nature: 2 } })
+  it("gives a pet item its species' nature and Synthesis Value", () => {
+    expect(itemInfo('i320002')).toMatchObject({ class: 'PetItem', value: 30, pet: { nature: 2 } })
+  })
+  it('gives a pet moved from the Kennel its level and slotted skills', () => {
+    const pet = {
+      name: null,
+      level: 12,
+      exp: 0,
+      growth: 120,
+      baseAttack: 1,
+      baseDefence: 1,
+      baseDisturb: 1,
+      baseActive: 1,
+      baseSavvy: 1,
+      appetite: 0,
+      digestEndsAt: null,
+      foodSlots: [],
+      haloSlots: 1,
+      helpSlots: 1,
+      passSlots: 0,
+      skills: [
+        { skillId: 40058, level: 1, learnedOrder: 0, locked: false, kind: 1, slot: 0 },
+        { skillId: 40001, level: 1, learnedOrder: 1, locked: false, kind: 2, slot: null },
+      ],
+    }
+    expect(itemInfo('i320002', { pet }).pet).toEqual({
+      nature: 2,
+      level: 12,
+      skills: [{ skillId: 40058, kind: 1 }],
+    })
   })
 })

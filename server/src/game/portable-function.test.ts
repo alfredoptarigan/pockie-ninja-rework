@@ -9,7 +9,6 @@ import {
   impressBaseRate,
   impressOdds,
   linesFor,
-  recastBonus,
   recastRange,
   rollRecast,
   rollSynthesis,
@@ -117,38 +116,33 @@ describe('rollSynthesis', () => {
 describe('recast', () => {
   const range = recastRange(OUTFIT)!
 
-  it('reads the ISV bounds: the avatar Up to AvatarRecast.ini AddMax', () => {
-    expect(range).toEqual({ base: [120, 120, 120], max: [150, 150, 150], unit: [2, 2, 1] })
+  it("reads Reborn's ISV bounds: the outfit's ISV up to 1.1 times it, on the 2011 unit grid", () => {
+    expect(range).toEqual({ base: [120, 120, 120], max: [132, 132, 132], unit: [2, 2, 1] })
+    // Witch has no 2011 stats; Reborn gives it ISV 3.1 / 2.9 / 1.5 (max 3.41 / 3.19 / 1.65).
+    expect(recastRange('i290002')).toMatchObject({ base: [310, 290, 150], max: [341, 319, 165] })
     expect(recastRange(WEAPON)).toBeUndefined()
   })
 
-  it('rerolls free stats on their unit grid and keeps locked ones', () => {
+  it('rerolls free stats on their unit grid up to the cap and keeps locked ones', () => {
     const isv = [130, 124, 121]
     for (let seed = 0; seed < 20; seed++) {
       const [strength, agility, stamina] = rollRecast(range, isv, [0], createRandom(seed))
       expect(strength).toBe(130)
-      expect((agility - 120) % 2).toBe(0)
-      expect(agility).toBeLessThanOrEqual(150)
+      expect(agility === 132 || (agility - 120) % 2 === 0).toBe(true)
+      expect(agility).toBeLessThanOrEqual(132)
       expect(stamina).toBeGreaterThanOrEqual(120)
     }
-    // RandInt 0 keeps the stat as it is.
+    // RandInt 0 keeps the stat as it is; the top roll lands on the cap even off the grid.
     expect(rollRecast(range, isv, [], fixed(0))).toEqual(isv)
+    const odd = recastRange('i290003')!
+    expect(odd.max).toEqual([72, 121, 72])
+    expect(rollRecast(odd, odd.base, [], fixed(99))).toEqual([72, 121, 72])
   })
 
   it('stops once every stat is at its cap or nothing free can move', () => {
     expect(canRecast(range, [120, 120, 120], [])).toBe(true)
-    expect(canRecast(range, [150, 150, 150], [])).toBe(false)
-    expect(canRecast(recastRange('i290002')!, [0, 0, 0], [])).toBe(false)
-  })
-
-  it('adds (8 * (plus - 1) + level) * (ISV - Up) to each stat', () => {
-    expect(recastBonus(OUTFIT, [150, 120, 121], 10)).toEqual({
-      strength: 300,
-      agility: 0,
-      stamina: 10,
-    })
-    // i290101 is +2: 8 more levels' worth.
-    expect(recastBonus('i290101', [150, 120, 120], 10)?.strength).toBe(18 * 30)
+    expect(canRecast(range, [132, 132, 132], [])).toBe(false)
+    expect(canRecast(range, [132, 120, 132], [1])).toBe(false)
   })
 })
 

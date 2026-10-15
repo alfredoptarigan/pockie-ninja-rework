@@ -5,7 +5,7 @@ import { fists, outfitStats } from '../test/game'
 import { imprintLines, ItemPanel } from './ItemTooltip'
 import type { InventoryItem } from './types'
 
-// 4th Hokage +5 (i290404): AvatarID 404, Strength 6500, ISV 1.25, recast cap 1.55.
+// 4th Hokage +4 (i290404): Reborn ISV 1.25, recast cap 1.38, BMV 12 / 14 / 12, Wind Master.
 const hokage: InventoryItem = {
   id: 'outfit-1',
   itemId: 'i290404',
@@ -16,7 +16,7 @@ const hokage: InventoryItem = {
   info: {
     kind: 'equip',
     equipSlot: 'Outfit',
-    level: 7,
+    level: 5,
     sellPrice: null,
     stack: 1,
     w: 2,
@@ -26,15 +26,18 @@ const hokage: InventoryItem = {
     outfit: {
       ...outfitStats,
       clothing: 4,
-      plus: 5,
-      base: [6500, 6500, 6500],
-      isv: [155, 140, 125],
-      maxIsv: [155, 155, 155],
+      plus: 4,
+      isv: [138, 130, 120],
+      maxIsv: [138, 138, 138],
       bmv: [1200, 1400, 1200],
-      skills: [1904, 2002],
+      skills: [10000, 2042],
     },
   },
 }
+const starred = (stars: number): InventoryItem => ({
+  ...hokage,
+  info: { ...hokage.info!, outfit: { ...hokage.info!.outfit!, stars } },
+})
 const panel = (item: InventoryItem, level = 21, gear?: GearView) =>
   render(<ItemPanel entry={{ item, gear }} level={level} />).container
 
@@ -44,16 +47,34 @@ describe("Reborn's outfit tooltip", () => {
     expect(tooltip).toHaveTextContent('Weapon Type:Sharp')
     expect(tooltip).toHaveTextContent('Synthesis Value:42')
     expect(tooltip).toHaveTextContent('Item Type:Outfit')
-    expect(tooltip).toHaveTextContent('Required Level:7')
+    expect(tooltip).toHaveTextContent('Required Level:5')
   })
 
-  it('shows each ISV stat at the viewer level, coloured against the recast cap', () => {
+  it("shows each ISV stat with Reborn's floor(20 ISV + 8 ISV * plus + ISV * level)", () => {
     panel(hokage)
-    // floor((6500 + 21 * 155) / 100) = 97, at the cap: yellow.
-    expect(screen.getByText('97 (1.55) | Max (1.55)')).toHaveStyle({ color: '#ffff00' })
-    // 1.4 is within 90% of 1.55: green.
-    expect(screen.getByText('94 (1.4) | Max (1.55)')).toHaveStyle({ color: '#00ff00' })
-    expect(screen.getByText('91 (1.25) | Max (1.55)')).toHaveStyle({ color: 'rgb(245, 245, 245)' })
+    // 20 * 1.38 + 8 * 1.38 * 4 + 1.38 * 21 = 100.74, at the cap: yellow.
+    expect(screen.getByText('100 (1.38) | Max (1.38)')).toHaveStyle({ color: '#ffff00' })
+    // 1.3 is within 90% of 1.38: green.
+    expect(screen.getByText('94 (1.3) | Max (1.38)')).toHaveStyle({ color: '#00ff00' })
+    expect(screen.getByText('87 (1.2) | Max (1.38)')).toHaveStyle({
+      color: 'rgb(245, 245, 245)',
+    })
+  })
+
+  it('applies the stars: +5% ISV from one, +1 to the plus from three', () => {
+    const tooltip = panel(starred(3))
+    // ISV 1.2 * 1.05 = 1.26 at +5: (20 + 40 + 21) * 1.26 = 102.06.
+    expect(screen.getByText('102 (1.26) | Max (1.45)')).toBeInTheDocument()
+    expect(tooltip).toHaveTextContent('Star Bonuses3/5')
+    expect(tooltip).toHaveTextContent('★ 1ISV +5%')
+    expect(tooltip).toHaveTextContent('★ 2+1 skill slot')
+    expect(tooltip).toHaveTextContent('★ 3Outfit +1')
+    expect(tooltip).not.toHaveTextContent('★ 4')
+    expect(screen.getByLabelText('3 of 5 stars')).toHaveTextContent('★★★')
+  })
+
+  it('hides STAR BONUSES without stars', () => {
+    expect(panel(hokage)).not.toHaveTextContent('Star Bonuses')
   })
 
   it('lists the BMV lines and the skill imprints', () => {
@@ -64,23 +85,44 @@ describe("Reborn's outfit tooltip", () => {
     expect(
       screen.getByText('Every 14 points of Agility increases dodge by 1 and speed by 1%'),
     ).toBeInTheDocument()
-    expect(tooltip).toHaveTextContent('Master Fire Techniques:')
-    expect(tooltip).toHaveTextContent('The effect of Fire techniques will increase by 15%.')
+    expect(tooltip).toHaveTextContent('Wind Master:')
+    expect(tooltip).toHaveTextContent('* Increase Wind Damage by 15%.')
+    expect(tooltip).toHaveTextContent('Secret Technique:')
   })
 
-  it('names imprints from lg_Skill_<id>; Secret Technique gets its 2011 effect', () => {
-    expect(imprintLines(2002)).toEqual([
-      'Master Fire Techniques:',
-      'The effect of Fire techniques will increase by 15%.',
-    ])
-    expect(imprintLines(1904)).toEqual([
+  it("writes Reborn's outfit_skill lines, raised by the fourth and fifth stars", () => {
+    expect(imprintLines(2002)).toEqual(['Fire Master:', '* Increase Fire Damage by 15%.'])
+    expect(imprintLines(2060)).toEqual(['Sealing Basic:', '* Increase Sealing Effects by 5%.'])
+    expect(imprintLines(2091, 4)).toEqual(['Healing Expert:', '* Increase Healing by 15%.'])
+    expect(imprintLines(10000)).toEqual([
       'Secret Technique:',
-      "When the enemy's HP is low, you have a chance to finish them with one hit of a Secret Technique.",
+      '10% chance to unleash a powerful move when enemy below 15% health.',
     ])
+    expect(imprintLines(10000, 5)[1]).toBe(
+      '10% chance to unleash a powerful move when enemy below 20% health.',
+    )
   })
 })
 
 describe("Reborn's pet item tooltip", () => {
+  it("shows a stored pet's level and skills from its item", () => {
+    const stored: InventoryItem = {
+      ...fists,
+      itemId: 'i320002',
+      nameKey: 'lg_reborn_item_320002',
+      info: {
+        ...fists.info!,
+        kind: 'use',
+        equipSlot: undefined,
+        class: 'PetItem',
+        pet: { nature: 2, level: 12, skills: [{ skillId: 40058, kind: 1 }] },
+      },
+    }
+    const tooltip = panel(stored)
+    expect(tooltip).toHaveTextContent('+ 12')
+    expect(within(tooltip).getByLabelText('Aura skills').querySelectorAll('img')).toHaveLength(1)
+  })
+
   it('shows "<name> + 0", the nature and empty skill rows for a bag pet', () => {
     const toad: InventoryItem = {
       ...fists,

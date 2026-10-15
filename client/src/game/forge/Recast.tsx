@@ -15,8 +15,8 @@ import { useRecast, useRecastInfo } from './api'
 import { BagPicker, SlotCell } from './items'
 
 const RECAST_TALISMAN = 'i161007'
-/** ISV values are per-level stat gains x100, shown like the Stats window's stats. */
-const isvText = (value: number) => (value / 100).toFixed(2)
+/** ISV values are per-level stat gains x100; Reborn's Recast tab shows one decimal. */
+const isvText = (value: number) => (value / 100).toFixed(1)
 
 export function RecastTab() {
   const outfits = (useInventory().data ?? []).filter((item) => item.info?.outfit)

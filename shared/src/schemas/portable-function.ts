@@ -36,8 +36,11 @@ export type ImpressInput = z.input<typeof impressSchema>
 
 /** What the Synthesis slots make; a refusal comes back as a 400 with its reason. */
 export interface SynthesisPreview {
-  /** A recipe (its result shown) or a random item (consult the Synthesis Value). */
-  kind: 'recipe' | 'random'
+  /**
+   * A recipe (its result shown), a random item (consult the Synthesis Value) or Reborn's outfit
+   * star: the main outfit itself with one more star.
+   */
+  kind: 'recipe' | 'random' | 'star'
   resultItemId: string | null
   resultNameKey: string | null
   /** The recipe result's item facts (an outfit's look and +N), for its cell. */
@@ -46,6 +49,8 @@ export interface SynthesisPreview {
   rate: number
   /** Random gear: the result's Synthesis Value range and the stat lines it gives. */
   value?: { min: number; max: number; lines: [number, number] }
+  /** A star Synthesis: the stars the main outfit will have (Reborn's synthesisRecipeName). */
+  stars?: number
 }
 
 /** An outfit's Individual Stat Values (per-level Up, Strength / Agility / Stamina). */

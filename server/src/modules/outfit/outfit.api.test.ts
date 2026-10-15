@@ -49,7 +49,7 @@ describe('the outfit item', () => {
       itemId: CREATION,
       equippedSlot: 'Outfit',
       equippedSet: 1,
-      info: { kind: 'equip', equipSlot: 'Outfit', level: 0, outfit: { clothing: 3, plus: 1 } },
+      info: { kind: 'equip', equipSlot: 'Outfit', level: 1, outfit: { clothing: 3, plus: 0 } },
     })
   })
 
@@ -74,12 +74,13 @@ describe('the outfit item', () => {
     expect((await switchTo(2)).json().character).toMatchObject({ clothing: 17, avatarId: 17 })
   })
 
-  it('refuses an outfit above the required level (ceil((level-1)*r/31))', async () => {
+  it('refuses an outfit above the required level (ceil((plus - 1) * r / 31))', async () => {
     const high = await ninja.give(HIGH)
     const refused = await equip(high.id)
     expect(errorCode(refused)).toBe('too_low')
-    expect((await inventory()).find((row) => row.id === high.id)!.info.level).toBe(50)
-    await ninja.set({ level: 50 })
+    // Our top outfit is Reborn's +31: ceil(30 * 50 / 31).
+    expect((await inventory()).find((row) => row.id === high.id)!.info.level).toBe(49)
+    await ninja.set({ level: 49 })
     expect((await equip(high.id)).statusCode).toBe(200)
   })
 
@@ -91,12 +92,32 @@ describe('the outfit item', () => {
     expect(errorCode(await equip(outfit!.id))).toBe('worn_elsewhere')
   })
 
-  it('shows "+N" from AvatarLevel', async () => {
+  it('shows Reborn\'s "+N": AvatarLevel - 1', async () => {
     const plus2 = await ninja.give(BLUNT_2)
     expect((await inventory()).find((row) => row.id === plus2.id)!.info.outfit).toMatchObject({
       clothing: 17,
-      plus: 2,
+      plus: 1,
     })
+  })
+})
+
+describe('outfit stars', () => {
+  const stats = async () => (await ninja.client.get('/api/game/character')).json().stats
+
+  it("count in the worn outfit's stats like Reborn's tooltip: +5% ISV, then +1 to +N", async () => {
+    const [outfit] = await inventory()
+    // Clothing 3 at +0 (ISV 0.65 / 1.1 / 0.65), character level 1 (setUpNinja).
+    const level = (await ninja.client.get('/api/game/character')).json().character.level
+    const shown = (isv: number, tier: number) => Math.floor(20 * isv + 8 * isv * tier + isv * level)
+    const plain = await stats()
+    await db.update(inventoryItems).set({ stars: 1 }).where(eq(inventoryItems.id, outfit!.id))
+    const one = await stats()
+    await db.update(inventoryItems).set({ stars: 3 }).where(eq(inventoryItems.id, outfit!.id))
+    const three = await stats()
+    expect(Math.floor(plain.agility / 100)).toBe(shown(1.1, 0))
+    expect(Math.floor(one.agility / 100)).toBe(shown(1.1 * 1.05, 0))
+    expect(Math.floor(three.agility / 100)).toBe(shown(1.1 * 1.05, 1))
+    expect(three.agility).toBeGreaterThan(one.agility)
   })
 })
 
