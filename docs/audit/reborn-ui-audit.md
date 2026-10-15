@@ -64,7 +64,7 @@ Missing windows that only need UI over systems we have: Carrier Bag, Energy Refi
 Inventory, Manage Outfit (visual outfit), Monster Information, Player List (Area / Friend / Apprentice),
 View Character, Notice / Warning / Success prompts, Use Multiple.
 
-Missing systems (not UI fixes; each is its own milestone): outfits as items and
+Missing systems, all built on 2026-10-15 except the parts listed in section 8: outfits as items and
 Wardrobe, gems / enchantments / Portable Function (Synthesis, Recast, Impress), Bankai, Clans (Clan,
 Browser, Wars, Protection, Applications, Contribution), Ninja House, Dungeons / Impel Down /
 Zanpakuto / Shichibukai / Sannin Test / Akatsuki / Hashirama, Ninja Mall / Konoha Boutique / Tsunade
@@ -105,3 +105,49 @@ Where Reborn keeps a number on its server or the spec leaves a rule open, these 
 - **Boss weapons**: Scroll Dungeons bosses and Impel Down enemies always carry at least a same-level
   weapon's attack (`BOSS_WEAPON_PER_LEVEL`), so taking off your weapon does not disarm them.
 - **Gems**: removing gems costs no Gold, as in Reborn (2011 charged 4-191 Gold by gem level).
+
+## 7. Values to confirm (Reborn keeps them on its server)
+
+Every feature built from this audit takes Reborn's numbers where its client, `serverConfig.json` or
+our 2011 data has them. Where Reborn's server decides, the value is ours and sits in one marked
+constant. Confirm or replace them here; each row names the file to change.
+
+| Feature                | Constant                          | File                                           | What is ours                                                          |
+| ---------------------- | --------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------- |
+| Scroll Dungeons        | `BUILDS`, `BOSS_WEAPON_PER_LEVEL` | `server/src/modules/dungeons/bosses.ts`        | boss builds and stats, 25 attempts a day                              |
+| Impel Down             | `IMPEL_DOWN_PLACEHOLDERS`         | `server/src/modules/impel-down/floors.ts`      | enemies, EXP, crystal drop chances                                    |
+| Zanpakuto              | `ZANPAKUTO_REFINE_RANGES`         | `game-core/src/zanpakuto/zanpakuto.ts`         | stat ranges per tier (crystals add nothing to combat until confirmed) |
+| Tsunade Pub            | `TSUNADE_PUB_PLACEHOLDERS`        | `server/src/modules/tsunade-pub/config.ts`     | tier weights, prize pool, sell values                                 |
+| Konoha Boutique        | `BOUTIQUE_PLACEHOLDERS`           | `server/src/modules/konoha-boutique/config.ts` | level table, symbol weights, line values, coin prices, rewards        |
+| Ninja Mall             | `MALL_DAILY_LIMIT_PLACEHOLDERS`   | `server/src/modules/mall/catalogue.ts`         | daily limits (catalogue is the 2011 Mall)                             |
+| Market Board           | 2011 values                       | `game-core/src/economy/market.ts`              | level 25, 5 listings, 8/12/24 h, listing fee, max price               |
+| Gems                   | `GEM_PLACEHOLDERS`                | `server/src/modules/forge/gems.ts`             | enchant Gold (removing gems is confirmed free)                        |
+| Portable Function      | `PORTABLE_FUNCTION_PLACEHOLDERS`  | `server/src/game/portable-function.ts`         | Synthesis Stone and Impress Gold fees, recast cap                     |
+| Akatsuki               | `AKATSUKI_PLACEHOLDERS`           | `server/src/modules/akatsuki/config.ts`        | hunt level, ambush chance, pair stats                                 |
+| Hashirama vs Madara    | `HASHIRAMA_PLACEHOLDERS`          | `server/src/modules/hashirama/config.ts`       | leader stats, cooldown, spins, Fortune Wheel pools                    |
+| Shichibukai            | `SHICHIBUKAI_PLACEHOLDERS`        | `server/src/modules/shichibukai/config.ts`     | attempts, tile odds, boss strength, rewards                           |
+| Sannin Test            | `SANNIN_PLACEHOLDERS`             | `server/src/modules/sannin-test/config.ts`     | dice, title ranks, examiners, Perfect cost                            |
+| Home, Garden, Picnic   | `HOME_PLACEHOLDERS`               | `shared/src/schemas/home.ts`                   | seeds, rest, Random Level odds, warehouse, boxes                      |
+| Hunt                   | `HUNT_PLACEHOLDERS`               | `shared/src/schemas/hunt.ts`                   | hunts a day, reward, level range                                      |
+| Adventure with Jiraiya | `ADVENTURE_PLACEHOLDERS`          | `shared/src/schemas/hunt.ts`                   | hourly rewards, special item                                          |
+| Trade                  | `TRADE_CONFIG`                    | `game-core/src/economy/trade.ts`               | tax rates, request expiry                                             |
+| Arena Weekly Rewards   | `WEEKLY_REWARD_PLACEHOLDERS`      | `server/src/modules/arena/config.ts`           | reward tables                                                         |
+| Squad Arena            | `SQUAD_ARENA_PLACEHOLDERS`        | `server/src/modules/arena/config.ts`           | free tickets, match format, Exchange                                  |
+| Championship           | `CHAMPIONSHIP_PLACEHOLDERS`       | `server/src/modules/arena/config.ts`           | schedule, shop                                                        |
+| Festival Shop          | `FESTIVAL_SHOP_PLACEHOLDERS`      | `server/src/modules/festival-shop/config.ts`   | offers, costs (no token source yet)                                   |
+| Pet Reroll             | `REROLL_CONFIG`                   | `game-core/src/pets/reroll.ts`                 | Stones per roll, odds                                                 |
+| Master and Apprentice  | `APPRENTICE_CONFIG`               | `game-core/src/social/apprentice.ts`           | all rules (Reborn has none in its client)                             |
+| Clan Protection        | `PROTECTION_PLACEHOLDERS`         | `shared/src/schemas/clan-activities.ts`        | rewards, boss level                                                   |
+| Clan Missions          | `CLAN_MISSION_PLACEHOLDERS`       | `shared/src/schemas/clan-activities.ts`        | costs, bosses, rewards                                                |
+| Clan Wars              | `CLAN_WAR_PLACEHOLDERS`           | `shared/src/schemas/clan-wars.ts`              | reward scaling outside +-10% BP                                       |
+| Energy, Battle Power   | `REBORN_SERVER_PLACEHOLDERS`      | `shared/src/schemas/energy.ts`                 | starting energy, Battle Power formula                                 |
+
+Days and weeks reset at 00:00 UTC (Monday for weeks) everywhere; Reborn uses Lisbon time.
+
+## 8. Left for a later milestone
+
+Reborn parts not built in this milestone, by feature: the Xmas event (the Festival Token source),
+Market Auction and Buy Orders, the Synthesis Recipes window and Auto Fill, outfit stars and Purify
+Stones, Reborn's Storage window, outfit titles and Red outfits (absent from our data), Clan Wars item
+packages (mail has no attachments), war replays, and the animations (Shichibukai and Sannin dice,
+Akatsuki holograms, Tsunade Pub glows).
