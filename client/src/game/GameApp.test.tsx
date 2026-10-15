@@ -362,11 +362,14 @@ describe('GameScreen', () => {
 })
 
 describe('character info', () => {
-  it('shows the VP bar empty with its refill disabled (no Energy system yet)', async () => {
-    renderGame()
+  it('shows the energy on the VP bar; its refill icon opens Energy Refill', async () => {
+    renderGame({}, { ...character, energy: { current: 120, max: 200, refillsToday: 0 } })
     const card = await screen.findByRole('region', { name: 'Character' })
-    expect(within(card).getByRole('meter', { name: 'VP' })).toHaveTextContent('0/200')
-    expect(within(card).getByRole('button', { name: 'Energy refill' })).toBeDisabled()
+    expect(within(card).getByRole('meter', { name: 'VP' })).toHaveTextContent('120/200')
+    await userEvent.click(within(card).getByRole('button', { name: 'Energy refill' }))
+    expect(screen.getByRole('dialog', { name: 'Energy Refill' })).toHaveTextContent(
+      'Energy to restore:+80',
+    )
   })
 
   it('shows the combat stats in the Character window and the pouches on the card', async () => {

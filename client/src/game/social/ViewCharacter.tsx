@@ -198,6 +198,14 @@ export function ViewCharacter({
               className="game-slot absolute block"
               style={box([4, 203, 55, 55])}
             />
+            {data.stats && (
+              <p
+                title={String(data.stats.battlePower)}
+                className="pointer-events-none absolute top-[232px] left-[67px] w-[199px] bg-linear-to-b from-[#ffee00] via-[#ff9500] to-[#ff5500] bg-clip-text text-center font-[KOMIKAK,Arial] text-[16px] leading-[18px] font-black text-transparent [-webkit-text-stroke:0.5px_#000]"
+              >
+                BP: {data.stats.battlePower.toLocaleString('en-US')}
+              </p>
+            )}
           </div>
           <div className="game-panel-small flex h-[32px] w-[332px] items-center justify-between px-[5px]">
             <GameButton

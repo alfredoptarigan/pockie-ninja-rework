@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import type { EnergyView } from './energy.js'
 
 export const characterNameSchema = z
   .string()
@@ -81,6 +82,8 @@ export interface Character {
   activeSet: number
   /** Inventory "Hide": other players' View Character gets no stats or skills. */
   hideStats: boolean
+  /** Energy (the portrait's VP bar) with today's daily restore applied (energy.ts). */
+  energy: EnergyView
 }
 
 /** POST /api/game/character/privacy (Reborn's setCharacterPrivacy). */
@@ -110,6 +113,8 @@ export interface CharacterStats {
   neglectDefense: number
   counter: number
   weaponClass: number
+  /** Battle Power (Reborn's `stats.bp`), a PLACEHOLDER formula over these totals (energy.ts). */
+  battlePower: number
 }
 
 const itemIdSchema = z.string().regex(/^i\d+$/)

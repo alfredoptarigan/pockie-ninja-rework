@@ -27,6 +27,7 @@ export const character: Character = {
   vipUntil: null,
   activeSet: 1,
   hideStats: false,
+  energy: { current: 200, max: 200, refillsToday: 0 },
 }
 
 export const stats: CharacterStats = {
@@ -49,6 +50,7 @@ export const stats: CharacterStats = {
   neglectDefense: 0,
   counter: 5,
   weaponClass: 4,
+  battlePower: 208,
 }
 
 /** Quest 90002 (equip the weapon), handed out by the Fire Village Elder. */

@@ -30,6 +30,7 @@ import { CardRoomWindow } from './cards'
 import { KennelWindow } from './pets'
 import { KennelShopWindow, PetTracingWindow } from './kennel'
 import { CarrierBagWindow } from './CarrierBag'
+import { EnergyRefillWindow } from './EnergyRefill'
 import { ClanBrowserWindow, ClanWindow } from './clans'
 import { DungeonsWindow } from './dungeons'
 import { ZanpakutoWindow } from './zanpakuto'
@@ -74,6 +75,7 @@ export type WindowName =
   | 'petTracing'
   | 'kennelShop'
   | 'carrierBag'
+  | 'energyRefill'
   | 'clan'
   | 'clanBrowser'
   | 'dungeons'
@@ -152,6 +154,9 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   kennelShop: ({ onClose }) => <KennelShopWindow onClose={onClose} />,
   carrierBag: ({ character, onClose }) => (
     <CarrierBagWindow character={character} onClose={onClose} />
+  ),
+  energyRefill: ({ character, onClose }) => (
+    <EnergyRefillWindow character={character} onClose={onClose} />
   ),
   clan: (props) => <ClanWindow {...props} />,
   clanBrowser: (props) => <ClanBrowserWindow {...props} />,

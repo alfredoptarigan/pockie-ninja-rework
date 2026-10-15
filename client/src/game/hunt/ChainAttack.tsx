@@ -11,7 +11,7 @@ import {
 } from '../../../../shared/src/schemas/hunt'
 import type { AkatsukiAmbush as Ambush } from '../../../../shared/src/schemas/akatsuki'
 import { AkatsukiAmbush } from '../akatsuki'
-import { errorMessage } from '../api'
+import { errorMessage, useCharacter } from '../api'
 import { useMonsterPortrait } from '../art'
 import { hms } from '../dungeons'
 import { rewardCountdown, useNow } from '../events/timer'
@@ -29,7 +29,6 @@ import {
 } from './api'
 
 const STEP_MS = CHAIN_ATTACK_RULES.secondsPerMonster * 1000
-const counts = Array.from({ length: CHAIN_ATTACK_RULES.maxMonsters }, (_, i) => i + 1)
 
 /** Reborn's `My` (420x280): how many monsters to chain, MAX, the estimated time, Begin / Cancel. */
 export function ChainAttackDialog({
@@ -41,7 +40,15 @@ export function ChainAttackDialog({
 }) {
   const [amount, setAmount] = useState(1)
   const start = useStartChain()
-  const begin = () =>
+  // Reborn: up to min(30, energy) monsters, 1 energy each (the server checks it too).
+  const energy = useCharacter().data?.energy.current ?? CHAIN_ATTACK_RULES.maxMonsters
+  const most = Math.max(1, Math.min(CHAIN_ATTACK_RULES.maxMonsters, energy))
+  const counts = Array.from({ length: most }, (_, i) => i + 1)
+  const begin = () => {
+    if (energy < amount) {
+      showToast(`Not enough energy. You need ${amount} energy but only have ${energy}.`, 'failure')
+      return
+    }
     start.mutate(
       { monsterId: monster.id, amount },
       {
@@ -52,6 +59,7 @@ export function ChainAttackDialog({
         onError: (error) => showToast(errorMessage(error), 'failure'),
       },
     )
+  }
   return (
     <Dialog title="Chain Attack" onClose={onClose} className="game-window-bare w-[420px]">
       <div className="game-panel-1 flex flex-col gap-[8px] p-[5px] font-game text-[12px] text-black">
@@ -76,10 +84,7 @@ export function ChainAttackDialog({
               </option>
             ))}
           </select>
-          <GameButton
-            className="h-[24px] w-[60px]"
-            onClick={() => setAmount(CHAIN_ATTACK_RULES.maxMonsters)}
-          >
+          <GameButton className="h-[24px] w-[60px]" onClick={() => setAmount(most)}>
             MAX
           </GameButton>
           <span>{amount} Monsters</span>

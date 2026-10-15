@@ -1,7 +1,8 @@
-import { screen, within } from '@testing-library/react'
+import { act, screen, within } from '@testing-library/react'
+import { focusManager } from '@tanstack/react-query'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { character } from '../test/game'
+import { character, stats } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
 import { AudioProvider } from './audio'
 import { MenuBar, PlayerCard, TopBar, shortNumber } from './Hud'
@@ -133,23 +134,56 @@ describe('TopBar', () => {
 })
 
 describe('PlayerCard', () => {
-  const renderCard = (player = character, events = {}) => {
-    mockApi(eventsApi(events))
-    renderWithProviders(<PlayerCard character={player} />)
+  const renderCard = (player = character, events = {}, open = vi.fn()) => {
+    mockApi({
+      ...eventsApi(events),
+      'GET /api/game/character': () => json({ character: player, stats }),
+    })
+    renderWithProviders(
+      <OpenWindowProvider value={open}>
+        <PlayerCard character={player} />
+      </OpenWindowProvider>,
+    )
+    return open
   }
 
-  it('shows HP and MP in percent, an empty VP bar of 200 and the level', () => {
-    renderCard()
+  it('shows HP and MP in percent, the energy of 200 and the level', async () => {
+    const open = renderCard({ ...character, energy: { current: 57, max: 200, refillsToday: 0 } })
     expect(within(card()).getByRole('meter', { name: 'HP' })).toHaveTextContent('75%')
     expect(within(card()).getByRole('meter', { name: 'MP' })).toHaveTextContent('75%')
     const vp = within(card()).getByRole('meter', { name: 'VP' })
-    expect(vp).toHaveAttribute('aria-valuenow', '0')
+    expect(vp).toHaveAttribute('aria-valuenow', '57')
     expect(vp).toHaveAttribute('aria-valuemax', '200')
-    expect(vp).toHaveTextContent('0/200')
-    const refill = within(card()).getByRole('button', { name: 'Energy refill' })
-    expect(refill).toBeDisabled()
-    expect(refill).toHaveAttribute('title', 'Energy: not available yet')
+    expect(vp).toHaveTextContent('57/200')
+    await userEvent.click(within(card()).getByRole('button', { name: 'Energy refill' }))
+    expect(open).toHaveBeenCalledWith('energyRefill')
     expect(within(card()).getByText('Lv. 1')).toBeVisible()
+  })
+
+  it('shows the Battle Power from the stats, its full value on hover', async () => {
+    renderCard()
+    expect(await within(card()).findByLabelText('Battle Power 208')).toHaveTextContent('208')
+    expect(within(card()).getByRole('tooltip', { hidden: true })).toHaveTextContent(
+      'Battle Power208Your overall combat strength',
+    )
+  })
+
+  it('flashes the Battle Power change when the stats change', async () => {
+    let power = 208
+    mockApi({
+      ...eventsApi(),
+      'GET /api/game/character': () => json({ character, stats: { ...stats, battlePower: power } }),
+    })
+    renderWithProviders(<PlayerCard character={character} />)
+    await within(card()).findByLabelText('Battle Power 208')
+    power = 250
+    act(() => {
+      focusManager.setFocused(false)
+      focusManager.setFocused(true)
+    })
+    expect(await within(card()).findByText('+42')).toHaveClass('text-[#22c55e]')
+    expect(within(card()).getByLabelText('Battle Power 250')).toBeVisible()
+    focusManager.setFocused(undefined)
   })
 
   it('claims the 20-minute reward from the CLAIM widget next to the card', async () => {

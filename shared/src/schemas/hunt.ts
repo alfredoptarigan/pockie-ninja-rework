@@ -8,8 +8,7 @@ import type { Character, MonsterDrop } from './game.js'
 
 /**
  * Reborn's client: at most 30 monsters, 3 minutes each, Instant Finish costs 5 Gift Certificates
- * per started 3 minutes left. Reborn also spends 1 energy per monster; we have no energy (M3
- * decision 1), so a chain costs nothing to start.
+ * per started 3 minutes left. Begin also spends 1 energy per monster (ENERGY_RULES, energy.ts).
  */
 export const CHAIN_ATTACK_RULES = {
   maxMonsters: 30,

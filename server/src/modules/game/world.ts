@@ -33,6 +33,8 @@ import { RATE_LIMITS } from './rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
 import { requireBattleFree } from '../hunt/guard.js'
 import { recordHuntKill } from '../hunt/hunt.js'
+import { spendEnergy } from '../energy/energy.js'
+import { ENERGY_RULES } from '../../../../shared/src/schemas/energy.js'
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
 const MAX_LISTED_MONSTERS = 6
@@ -208,6 +210,8 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       await requireNoTeam(tx, character.id, 'fight monsters')
       await requireBattleFree(tx, character.id)
       const opponent = await fightTarget(tx, character, monsterId)
+      // Reborn: a field fight needs energy ("No energy left").
+      await spendEnergy(tx, character, ENERGY_RULES.fieldFightCost)
 
       const result = await fightMonster(tx, character, opponent)
       if (result.won) await recordBossKill(tx, character.id, opponent, character.sceneId)

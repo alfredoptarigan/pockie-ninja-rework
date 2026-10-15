@@ -414,6 +414,13 @@
       "when": 1792220000000,
       "tag": "0058_clan_wars",
       "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "7",
+      "when": 1792230000000,
+      "tag": "0059_energy",
+      "breakpoints": true
     }
   ]
 }

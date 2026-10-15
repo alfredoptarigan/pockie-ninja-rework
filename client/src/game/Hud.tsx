@@ -26,6 +26,7 @@ import { TeamHud } from './teams'
 import { TradeLayer } from './trade'
 import { plainText } from './text'
 import { useOpenWindow, type WindowName } from './windows'
+import { useCharacterStats } from './api'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
 import { lookOf } from './inventory/outfits'
 
@@ -291,9 +292,56 @@ function CardBar({
   )
 }
 
-/** Reborn's energy cap; we have no Energy system yet, so the VP bar stays at 0 of it. */
-const VP_MAX = 200
 const DAY_MS = 86_400_000
+/** How long the Battle Power change (+N / -N) shows after equipping or unequipping. */
+const BP_FLASH_MS = 3000
+
+/**
+ * Reborn's Battle Power (`dm`, `stats.bp`) at (148,51): the short number, the full one on hover,
+ * and a green +N or red -N for 3 s when it changes.
+ */
+function BattlePower() {
+  const power = useCharacterStats().data?.battlePower
+  const [shown, setShown] = useState(power)
+  const [change, setChange] = useState<{ delta: number; id: number } | null>(null)
+  if (power !== shown) {
+    setShown(power)
+    if (power !== undefined && shown !== undefined && power !== shown)
+      setChange((last) => ({ delta: power - shown, id: (last?.id ?? 0) + 1 }))
+  }
+  useEffect(() => {
+    if (!change) return
+    const timer = window.setTimeout(() => setChange(null), BP_FLASH_MS)
+    return () => window.clearTimeout(timer)
+  }, [change])
+  if (power === undefined) return null
+  return (
+    <div className="group absolute top-[51px] left-[148px]">
+      <span
+        aria-label={`Battle Power ${number(power)}`}
+        className="bg-linear-to-b from-[#ffee00] via-[#ff9500] to-[#ff5500] bg-clip-text font-[KOMIKAK,Arial] text-[14px] font-black text-transparent [-webkit-text-stroke:0.5px_#000]"
+      >
+        {shortNumber(power)}
+      </span>
+      {change && (
+        <span
+          key={change.id}
+          className={`absolute top-0 left-[45px] text-[12px] font-bold ${SHADOW} ${change.delta > 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}
+        >
+          {change.delta > 0 ? `+${number(change.delta)}` : `-${number(-change.delta)}`}
+        </span>
+      )}
+      <span
+        role="tooltip"
+        className="absolute top-[18px] left-0 z-20 hidden w-[150px] border border-[#ff6600] bg-black/90 p-1.5 text-[11px] text-white group-hover:block"
+      >
+        Battle Power
+        <span className="block font-bold text-[#ffd700]">{number(power)}</span>
+        <span className="block text-[9px] text-[#999]">Your overall combat strength</span>
+      </span>
+    </div>
+  )
+}
 
 const vipDate = (iso: string) =>
   new Date(iso).toLocaleDateString('en-US', {
@@ -323,8 +371,8 @@ const VIP_NAME = 'text-[#ffd700] [text-shadow:0_0_3px_#b8860b,0_0_2px_#000]'
 
 /**
  * Reborn's portrait card (om, original theme): name, HP/MP in percent, VP cur/200, refill icons,
- * level, VIP badge and the CLAIM 20-minute reward. ponytail: no village icon (its art is not
- * exported) and no Battle Power (the server exposes no power rating for the player).
+ * level, Battle Power, VIP badge and the CLAIM 20-minute reward. ponytail: no village icon (its
+ * art is not exported).
  */
 export function PlayerCard({ character }: { character: Character }) {
   const portrait = useOutfitPortrait(lookOf(character))
@@ -368,13 +416,13 @@ export function PlayerCard({ character }: { character: Character }) {
       />
       <CardBar
         label="VP"
-        value={0}
-        max={VP_MAX}
+        value={character.energy.current}
+        max={character.energy.max}
         kind="vp"
         x={91}
         y={42}
         color="text-[#fffacd]"
-        text={`0/${VP_MAX}`}
+        text={`${character.energy.current}/${character.energy.max}`}
       />
       {/* Reborn: both refill icons open the Carrier Bag window. */}
       <button
@@ -391,13 +439,12 @@ export function PlayerCard({ character }: { character: Character }) {
         onClick={() => openWindow('carrierBag')}
         className="absolute top-[30px] left-[200px] h-[12px] w-[16px] cursor-pointer bg-[url(/assets/game/ui/refill-mp.webp)] bg-contain bg-no-repeat"
       />
-      {/* Reborn's opens Energy Refill; we have no Energy system yet. */}
       <button
         type="button"
         aria-label="Energy refill"
-        title="Energy: not available yet"
-        disabled
-        className="absolute top-[42px] left-[196px] h-[12px] w-[16px] cursor-not-allowed bg-[url(/assets/game/ui/refill-vp.webp)] bg-contain bg-no-repeat"
+        title="Energy Refill"
+        onClick={() => openWindow('energyRefill')}
+        className="absolute top-[42px] left-[196px] h-[12px] w-[16px] cursor-pointer bg-[url(/assets/game/ui/refill-vp.webp)] bg-contain bg-no-repeat"
       />
       <dl aria-label="Pouches" className="sr-only">
         <dt>HP pouch</dt>
@@ -410,6 +457,7 @@ export function PlayerCard({ character }: { character: Character }) {
       >
         Lv. {character.level}
       </span>
+      <BattlePower />
       {vipDays !== null && <VipBadge until={character.vipUntil!} days={vipDays} />}
       {/*
        * Reborn: fixed at top calc(30% + 2.125vh), left 50% + 167% of its 71px, inside the scaled

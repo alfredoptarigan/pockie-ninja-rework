@@ -24,6 +24,8 @@ import { playerFighter, type PlayerFighter } from '../../game/combat.js'
 import { pouchMax } from '../../game/pouch.js'
 import type { Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
+import { battlePower } from '../../../../shared/src/schemas/energy.js'
+import { energyView } from '../energy/energy.js'
 import { RATE_LIMITS } from './rate-limits.js'
 
 const NATIONS: Nation[] = [0, 1, 2, 3, 4]
@@ -66,6 +68,7 @@ export function toCharacter(
     vipUntil: row.vipUntil?.toISOString() ?? null,
     activeSet: row.activeSet,
     hideStats: row.hideStats,
+    energy: energyView(row),
   }
 }
 
@@ -92,6 +95,7 @@ export function statsOf(fighter: PlayerFighter): CharacterStats {
     neglectDefense: fighter.neglectDefense,
     counter: fighter.counter,
     weaponClass: fighter.weaponClass,
+    battlePower: battlePower(fighter),
   }
 }
 

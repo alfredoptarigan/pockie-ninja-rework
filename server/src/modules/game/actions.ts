@@ -71,6 +71,7 @@ import { playerFighter } from '../../game/combat.js'
 import { WING_SLOT } from '../../game/wings.js'
 import { OUTFIT_SLOT, outfitOf, syncOutfit } from '../../game/outfit.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
+import { drinkEnergyItem } from '../energy/energy.js'
 import { openCardBox } from '../cards/routes.js'
 import { adoptPetItem } from '../pets/kennel.js'
 import { equipRefusal, reviveLoss, rollLibDrops, wearEquipped } from '../../game/gear.js'
@@ -207,6 +208,10 @@ export async function useItem(
     await refreshBuffState(tx, character)
   } else if (restore) {
     await tx.update(characters).set(restore).where(eq(characters.id, character.id))
+  } else if (Number(def.SP ?? 0) > 0) {
+    // Energy drinks (Reborn json_items `energy`): energy back, 3 uses a day each.
+    await drinkEnergyItem(tx, character, row.itemId, Number(def.SP))
+    await consumeOne(tx, row)
   } else if (def.class === 'CardBox') {
     // M6 decision 28: one card into the Card Room; the box is used up there.
     card = (await openCardBox(tx, character.id, row)) ?? undefined

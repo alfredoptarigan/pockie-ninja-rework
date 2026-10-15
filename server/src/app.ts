@@ -126,6 +126,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(teamRoutes, { db, prefix: '/api/game/team' })
   app.register(clanRoutes, { db, prefix: '/api/game/clans' })
   app.register(import('./modules/hunt/routes.js'), { db, prefix: '/api/game' })
+  app.register(import('./modules/energy/routes.js'), { db, prefix: '/api/game/energy' })
 
   return app
 }

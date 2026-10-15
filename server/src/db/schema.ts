@@ -215,6 +215,7 @@ export const characters = pgTable(
     battleCoins: currency('battle_coins'),
     // Kennel slots owned (M6 decision 17): 1 free, up to 5.
     petSlots: smallint('pet_slots').notNull().default(1),
+    energy: jsonb('energy'), // Energy (VP) state, read through modules/energy; null = never used.
   },
   (t) => [
     uniqueIndex('characters_user_id_key').on(t.userId),

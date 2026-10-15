@@ -10,6 +10,7 @@ import {
   type ChainAttackClaimResult,
   type ChainAttackStartInput,
 } from '../../../../shared/src/schemas/hunt.js'
+import { ENERGY_RULES } from '../../../../shared/src/schemas/energy.js'
 import { chainAttacks, characters } from '../../db/schema.js'
 import { fightMonster, monsterDrops } from '../../game/combat.js'
 import { npc } from '../../game/data.js'
@@ -18,6 +19,7 @@ import { rollFieldAmbush } from '../akatsuki/routes.js'
 import { requireAlive } from '../game/characters.js'
 import { recordBossKill, sceneMonsters } from '../game/world.js'
 import { bad, characterView, type CharacterRow } from '../gates/common.js'
+import { spendEnergy } from '../energy/energy.js'
 import { requireNoTeam } from '../teams/index.js'
 import { requireBattleFree } from './guard.js'
 import { recordHuntKill } from './hunt.js'
@@ -56,6 +58,8 @@ export async function startChain(tx: Tx, character: CharacterRow, input: ChainAt
   )
   if (!monster) throw bad('not_here', 'That monster is not in this area.')
   if (monster.lock) throw bad('boss_locked', 'This monster cannot be chain attacked yet.')
+  // Reborn: 1 energy per monster, paid at Begin.
+  await spendEnergy(tx, character, input.amount * ENERGY_RULES.chainCostPerMonster)
   const now = new Date()
   const [row] = await tx
     .insert(chainAttacks)
@@ -68,7 +72,7 @@ export async function startChain(tx: Tx, character: CharacterRow, input: ChainAt
       endsAt: new Date(now.getTime() + input.amount * STEP_MS),
     })
     .returning()
-  return { chain: chainView(row) }
+  return { chain: chainView(row), character: await characterView(tx, character.id) }
 }
 
 /** Monsters whose 3 minutes have passed (all of them once the chain ended). */
