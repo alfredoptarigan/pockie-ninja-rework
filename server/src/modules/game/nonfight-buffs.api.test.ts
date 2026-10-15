@@ -172,6 +172,14 @@ describe('title items', () => {
     expect(await bag()).toHaveLength(1)
     expect((await client.post('/api/game/titles/activate', { titleId: 12 })).statusCode).toBe(200)
     expect(await buffBonuses(db, characterId)).toMatchObject({ capMul: 5 })
+    // The title selector's hover lists the title's buff properties as equipment terms.
+    expect((await view()).titles).toEqual([
+      expect.objectContaining({
+        titleId: 12,
+        active: true,
+        stats: [{ name: 'CapMulEquip', value: 5 }],
+      }),
+    ])
     expect((await client.post('/api/game/buffs/90010/remove')).statusCode).toBe(400)
     expect((await client.post('/api/game/titles/activate', { titleId: 0 })).statusCode).toBe(200)
     expect(await buffBonuses(db, characterId)).toEqual({})
