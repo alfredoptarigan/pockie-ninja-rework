@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createRandom } from '../random.js'
 import { IDENTIFY_PROPS, fixedRandom } from './fixtures.js'
 import {
+  addIdentifyProp,
   appraiseCost,
   canAppraise,
   canRefine,
@@ -203,5 +204,38 @@ describe('rollIdentify (FlushEquipIdentifyProp 350-380)', () => {
     expect(result.props[3]).toEqual(engravedGold)
     const common = Object.values(GROUPS['1001']!)
     expect(result.props.slice(0, 3).every((p) => common.includes(p.propId))).toBe(true)
+  })
+})
+
+describe('addIdentifyProp (Reborn Impress)', () => {
+  it('adds a common property whose name the item lacks', () => {
+    const props = [{ propId: 1, value: 3000 }]
+    for (let seed = 0; seed < 20; seed++) {
+      const added = addIdentifyProp({ props }, withGold, tables, createRandom(seed))!
+      expect(Object.values(GROUPS['1001']!)).toContain(added.propId)
+      expect(names([...props, added])).not.toContain(undefined)
+      expect(new Set(names([...props, added])).size).toBe(2)
+    }
+  })
+
+  it('adds the gold property as the fourth line, and nothing to a full item', () => {
+    const three = [1, 21, 41].map((propId) => ({ propId, value: 3000 }))
+    const gold = addIdentifyProp({ props: three }, withGold, tables, createRandom(3))!
+    expect(Object.values(GROUPS['2001']!)).toContain(gold.propId)
+    expect(addIdentifyProp({ props: [...three, gold] }, withGold, tables, createRandom(3))).toBe(
+      undefined,
+    )
+  })
+
+  it('finds nothing when every name is taken', () => {
+    const props = [{ propId: 1, value: 3000 }]
+    expect(
+      addIdentifyProp(
+        { props },
+        { CommonIdentifyID: 9002, SpecialIdentifyID: 0 },
+        tables,
+        createRandom(1),
+      ),
+    ).toBe(undefined)
   })
 })

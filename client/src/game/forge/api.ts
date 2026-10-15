@@ -11,6 +11,14 @@ import type {
   InscribeInput,
 } from '@pockie/shared'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import type {
+  ImpressInput,
+  ImpressPreview,
+  RecastInfo,
+  RecastInput,
+  SynthesisInput,
+  SynthesisPreview,
+} from '../../../../shared/src/schemas/portable-function'
 import { api } from '../../lib/api'
 import { useApplyResult } from '../api'
 import type { InventoryItem } from '../types'
@@ -64,3 +72,55 @@ export const useInsertGem = () => useForgeAction<GemInsertInput>('gems/insert')
 export const useRemoveGems = () => useForgeAction<{ itemId: string }>('gems/remove')
 export const useCreateHole = () => useForgeAction<GemHoleInput>('gems/hole')
 export const useEnchant = () => useForgeAction<EnchantInput>('enchant')
+
+// --- Portable Function (/api/game/portable-function/*) ---
+
+const PORTABLE = '/api/game/portable-function'
+const portableKeys = {
+  synthesis: (input: SynthesisInput | null) => ['game', 'portable', 'synthesis', input] as const,
+  recast: (itemId: string | null) => ['game', 'portable', 'recast', itemId] as const,
+  impress: (input: ImpressInput | null) => ['game', 'portable', 'impress', input] as const,
+}
+const post = <T>(path: string, body: unknown) =>
+  api<T>(`${PORTABLE}/${path}`, { method: 'POST', body })
+
+/** What the three Synthesis slots make; a refusal is the query's error. */
+export const useSynthesisPreview = (input: SynthesisInput | null) =>
+  useQuery({
+    enabled: input !== null,
+    retry: false,
+    queryKey: portableKeys.synthesis(input),
+    queryFn: () => post<SynthesisPreview>('synthesis/preview', input),
+  })
+
+export const useRecastInfo = (itemId: string | null) =>
+  useQuery({
+    enabled: itemId !== null,
+    retry: false,
+    queryKey: portableKeys.recast(itemId),
+    queryFn: () => api<RecastInfo>(`${PORTABLE}/recast/${itemId}`),
+  })
+
+export const useImpressPreview = (input: ImpressInput | null) =>
+  useQuery({
+    enabled: input !== null,
+    retry: false,
+    queryKey: portableKeys.impress(input),
+    queryFn: () => post<ImpressPreview>('impress/preview', input),
+  })
+
+function usePortableAction<TInput, TResult>(path: string) {
+  const apply = useApplyResult()
+  return useMutation({
+    mutationFn: (input: TInput) => post<TResult & ForgeResult>(path, input),
+    onSuccess: apply,
+  })
+}
+
+export const useSynthesize = () =>
+  usePortableAction<
+    SynthesisInput,
+    { success: boolean; resultItemId: string | null; resultNameKey: string | null }
+  >('synthesis')
+export const useRecast = () => usePortableAction<RecastInput, { isv: number[] }>('recast')
+export const useImpress = () => usePortableAction<ImpressInput, { success: boolean }>('impress')

@@ -294,6 +294,19 @@ if (import.meta.main) {
   write('identify-props', ini('Equip/IdentifyPropLib.ini'))
   write('magic-props', groupBy(ini('Equip/MagicPropLib.ini'), 'ID'))
 
+  // Portable Function: Synthesis (ComposeSystem), Recast (AvatarSystem), Impress (IdentifySystem)
+  write('compose-recipes', ini('Equip/EquipCompose.ini'))
+  write('compose-random', ini('Equip/EquipComposeRand.ini'))
+  write(
+    'compose-blocked',
+    Object.values(ini('Equip/CantComposerItem.ini')).map((row) => String(row.ConfigID)),
+  )
+  write('avatar-recasts', {
+    config: ini('Equip/AvatarRecastCfg.ini').AvatarRecastCfg,
+    outfits: ini('Equip/AvatarRecast.ini'),
+  })
+  write('impress-rates', ini('Equip/ImpressRate.ini'))
+
   // Sets
   write('equip-suits', groupBy(ini('Equip/SuitProp.ini'), 'ID'))
   write('tollgate-suits', tab('tollgoteequipsuit.s26644.tab'))

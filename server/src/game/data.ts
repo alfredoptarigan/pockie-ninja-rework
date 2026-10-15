@@ -244,6 +244,39 @@ export const identifyTables = (): IdentifyTables => ({
   props: load<IdentifyProps>('identify-props'),
 })
 
+// Portable Function tables (EquipCompose*.ini, CantComposerItem.ini, AvatarRecast*.ini,
+// ImpressRate.ini); the rules are in game/portable-function.ts.
+export interface ComposeRecipe {
+  Src1: string
+  Src2: string
+  Src3: string
+  /** 0 = the combination is refused. */
+  Target: string | number
+  Rate?: number
+}
+export const composeRecipes = () => load<Record<string, ComposeRecipe>>('compose-recipes')
+export const composeRandom = () =>
+  load<Record<string, { JudgeValueScore: number; class: string }>>('compose-random')
+export const composeBlocked = () => load<string[]>('compose-blocked')
+export interface AvatarRecastRow {
+  StrengthAddMax: number
+  StrengthUnit: number
+  AgilityAddMax: number
+  AgilityUnit: number
+  StaminaAddMax: number
+  StaminaUnit: number
+}
+export const avatarRecast = (itemId: string) =>
+  load<{ outfits: Record<string, AvatarRecastRow> }>('avatar-recasts').outfits[itemId]
+export interface ImpressRateRow {
+  MinLevel: number
+  MaxLevel: number
+  CommonIdentifyPropRate: number
+  GoldIdentifyPropRate: number
+}
+export const impressRates = () =>
+  Object.values(load<Record<string, ImpressRateRow>>('impress-rates'))
+
 // --- M4: arena, rankings, Market, mail, teams (zod-checked on first load) ---
 
 function loadChecked<T>(name: string, schema: z.ZodType<T>): T {

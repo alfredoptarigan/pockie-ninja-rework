@@ -1,23 +1,25 @@
-// Reborn's Portable Function (Inventory "Compose"; reborn-windows-M-Z-hud.md "Portable Function").
-// Only Inscribe has a server here (our Inscription); Synthesis, Recast and Impress stay visible but
-// disabled, so Synthesis Recipes (opened from the Synthesis tab) is unreachable too.
+// Reborn's Portable Function (Inventory "Compose"; reborn-windows-M-Z-hud.md "Portable Function"):
+// Synthesis, Recast, Inscribe (our Inscription) and Impress, Synthesis first like Reborn's default.
+// Synthesis Recipes (the Synthesis tab's Recipes window) is not built.
 import { INSCRIBE_MAX_SEALS } from '@pockie/shared'
 import { useId, useState } from 'react'
 import { errorMessage, useCharacter } from '../api'
 import { Dialog, GameButton, Notice } from '../skin'
 import { useForgeInfo, useInscribe } from './api'
 import { propText } from './gear'
+import { ImpressTab } from './Impress'
 import { anyGear, EquipmentSlot, ItemPicker, useForgeItems, type NoticeState } from './items'
 import { TabStrip } from './parts'
-
-type ComposeTab = 'synthesis' | 'recast' | 'inscribe' | 'impress'
+import { RecastTab } from './Recast'
+import { SynthesisTab } from './Synthesis'
 
 const TABS = [
-  { id: 'synthesis' as const, title: 'Synthesis', disabled: true },
-  { id: 'recast' as const, title: 'Recast', disabled: true },
-  { id: 'inscribe' as const, title: 'Inscribe' },
-  { id: 'impress' as const, title: 'Impress', disabled: true },
+  { id: 'synthesis' as const, title: 'Synthesis', body: SynthesisTab },
+  { id: 'recast' as const, title: 'Recast', body: RecastTab },
+  { id: 'inscribe' as const, title: 'Inscribe', body: InscribeTab },
+  { id: 'impress' as const, title: 'Impress', body: ImpressTab },
 ]
+type ComposeTab = (typeof TABS)[number]['id']
 
 const SEALS = {
   low: { label: 'Low Level', icon: '/assets/game/items/icon_lowseal.webp' },
@@ -25,8 +27,10 @@ const SEALS = {
 } as const
 
 export function PortableFunctionWindow({ onClose }: { onClose: () => void }) {
-  const [tab, setTab] = useState<ComposeTab>('inscribe')
+  const [tab, setTab] = useState<ComposeTab>('synthesis')
   const panelId = useId()
+  const active = TABS.find((spec) => spec.id === tab)!
+  const Body = active.body
   return (
     <Dialog title="Portable Function" onClose={onClose} className="w-[32rem]">
       <TabStrip
@@ -36,8 +40,8 @@ export function PortableFunctionWindow({ onClose }: { onClose: () => void }) {
         active={tab}
         onChange={setTab}
       />
-      <div id={panelId} role="tabpanel" aria-label="Inscribe">
-        <InscribeTab />
+      <div id={panelId} role="tabpanel" aria-label={active.title}>
+        <Body />
       </div>
     </Dialog>
   )

@@ -2201,3 +2201,24 @@ export const characterCollection = pgTable(
     check('character_collection_kind', sql`${t.kind} in ('outfit', 'pet', 'gear')`),
   ],
 )
+
+// Portable Function, Recast (migration 0049): an outfit row's recast ISV, the per-level
+// StrengthUp / AgilityUp / StaminaUp it uses instead of its avatar's (AvatarSystem
+// RecastStrengthUp...). No row = never recast. Leaves with the item.
+export const outfitRecasts = pgTable(
+  'outfit_recasts',
+  {
+    itemId: uuid('item_id')
+      .primaryKey()
+      .references(() => inventoryItems.id, { onDelete: 'cascade' }),
+    strength: smallint('strength').notNull(),
+    agility: smallint('agility').notNull(),
+    stamina: smallint('stamina').notNull(),
+  },
+  (t) => [
+    check(
+      'outfit_recasts_isv',
+      sql`${t.strength} >= 0 and ${t.agility} >= 0 and ${t.stamina} >= 0`,
+    ),
+  ],
+)

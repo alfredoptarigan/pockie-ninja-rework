@@ -140,6 +140,29 @@ function rollSpecial(
 }
 
 /**
+ * Reborn's Impress: one more property whose name the item lacks. The fourth line of an item with
+ * a gold group comes from that group, like rollIdentify's gold slot. Undefined when nothing fits.
+ */
+export function addIdentifyProp(
+  item: Pick<EquipInstance, 'props'>,
+  list: IdentifyList,
+  tables: IdentifyTables,
+  random: Random,
+): RolledProp | undefined {
+  if (item.props.length >= MAX_IDENTIFY_COUNT) return undefined
+  const names = item.props.map((prop) => tables.props[prop.propId]?.PropName)
+  const gold = item.props.length === GOLD_SLOT && list.SpecialIdentifyID > 0
+  const ids = groupIds(tables.groups, gold ? list.SpecialIdentifyID : list.CommonIdentifyID) ?? []
+  const fresh = ids.filter((id) => {
+    const prop = tables.props[id]
+    return prop && !names.includes(prop.PropName)
+  })
+  if (fresh.length === 0) return undefined
+  const id = fresh[random.between(0, fresh.length - 1)]!
+  return { propId: id, value: rollValue(tables.props[id]!, random) }
+}
+
+/**
  * FlushEquipIdentifyProp (350-380), shared by Appraise and Refine: keep the engraved row, roll the
  * common properties, add the gold one on a 4-property item with a special group (unless the
  * engraved row is the gold slot), put the engraved row back in place and count the roll.

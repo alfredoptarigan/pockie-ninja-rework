@@ -221,19 +221,17 @@ describe('ForgeWindow (Reborn Armory)', () => {
 })
 
 describe('PortableFunctionWindow', () => {
-  it('offers only Inscribe and inscribes with seals', async () => {
+  it('opens on Synthesis and inscribes with seals on the Inscribe tab', async () => {
     const fetchMock = forgeApi({
       'POST /api/game/forge/inscribe': () =>
         json({ success: false, character, item: { ...bat, gear: batGear } }),
     })
     renderWithProviders(<PortableFunctionWindow onClose={() => {}} />)
 
-    for (const tab of ['Synthesis', 'Recast', 'Impress']) {
-      const button = screen.getByRole('tab', { name: tab })
-      expect(button).toBeDisabled()
-      expect(button).toHaveAttribute('title', `${tab}: not available yet`)
-    }
-    expect(screen.getByRole('tab', { name: 'Inscribe' })).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tab', { name: 'Synthesis' })).toHaveAttribute('aria-selected', 'true')
+    for (const tab of ['Recast', 'Inscribe', 'Impress'])
+      expect(screen.getByRole('tab', { name: tab })).toBeEnabled()
+    await userEvent.click(screen.getByRole('tab', { name: 'Inscribe' }))
 
     await userEvent.click(await screen.findByRole('button', { name: 'Mythbeast Bat' }))
     expect(screen.getByText('Current Lv.0')).toBeVisible()

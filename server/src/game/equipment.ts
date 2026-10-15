@@ -8,11 +8,14 @@ import {
   type EquipConfig,
   type EquippedItem,
 } from '@pockie/game-core'
+import { eq } from 'drizzle-orm'
 import type { Db } from '../db/client.js'
-import { characters, inventoryItems } from '../db/schema.js'
+import { characters, inventoryItems, outfitRecasts } from '../db/schema.js'
 import { wornItemsWhere } from './bag.js'
 import { avatarStats, equipTables, item } from './data.js'
 import { addedProps } from './gems.js'
+import { OUTFIT_SLOT } from './outfit.js'
+import { recastBonus } from './portable-function.js'
 import type { Tx } from './progress.js'
 
 type ItemRow = typeof inventoryItems.$inferSelect
@@ -23,12 +26,22 @@ export type Gear = Pick<ItemRow, 'itemId'> &
       ItemRow,
       'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props' | 'gems' | 'enchantItemId'
     >
-  >
-type Wearer = Pick<typeof characters.$inferSelect, 'avatarId' | 'gender'>
+  > & {
+    /** A recast outfit's ISV (Strength, Agility, Stamina Up), from outfit_recasts. */
+    isv?: readonly number[]
+  }
+type Wearer = Pick<typeof characters.$inferSelect, 'avatarId' | 'gender'> & { level?: number }
 
-/** The rows of the active equipment set. */
+/** The rows of the active equipment set, the worn outfit with its recast ISV. */
 export async function equippedGear(tx: Tx | Db, characterId: string): Promise<Gear[]> {
-  return tx.select().from(inventoryItems).where(wornItemsWhere(characterId))
+  const rows = await tx.select().from(inventoryItems).where(wornItemsWhere(characterId))
+  const outfit = rows.find((row) => row.equippedSlot === OUTFIT_SLOT)
+  const [recast] = outfit
+    ? await tx.select().from(outfitRecasts).where(eq(outfitRecasts.itemId, outfit.id))
+    : []
+  if (!recast) return rows
+  const isv = [recast.strength, recast.agility, recast.stamina]
+  return rows.map((row) => (row === outfit ? { ...row, isv } : row))
 }
 
 /** A null durability column means full (or an item without durability), so the item is active. */
@@ -60,5 +73,14 @@ export function equipmentBonuses(equipped: readonly Gear[], wearer: Wearer): Par
     { popsinger: avatarStats(wearer.avatarId).Popsinger, sex: wearer.gender },
     equipTables(),
   )
-  return equipBonuses(totals)
+  const bonuses = equipBonuses(totals)
+  const outfit = equipped.find((gear) => gear.isv)
+  const recast = outfit && recastBonus(outfit.itemId, outfit.isv!, wearer.level ?? 0)
+  if (!recast) return bonuses
+  return {
+    ...bonuses,
+    strength: (bonuses.strength ?? 0) + recast.strength,
+    agility: (bonuses.agility ?? 0) + recast.agility,
+    stamina: (bonuses.stamina ?? 0) + recast.stamina,
+  }
 }
