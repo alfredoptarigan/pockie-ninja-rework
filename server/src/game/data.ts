@@ -742,6 +742,13 @@ export const rebornNonfightBuffs = () =>
     }),
   )
 
+/** Reborn's title bonuses by title id, as `<Name>Equip` lines (docs/audit/reborn-titles-re.md). */
+export const rebornTitles = () =>
+  loadChecked(
+    'reborn/titles',
+    z.record(z.string(), z.array(z.object({ name: z.string(), value: int }))),
+  )
+
 const itemReward = z.object({ item: itemId, amount: int.positive() })
 const eventsSchema = z.object({
   dailyLogin: z.object({ cycle: z.array(itemReward).length(7), bonus: itemReward }),

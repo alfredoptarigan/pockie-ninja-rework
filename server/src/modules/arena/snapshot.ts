@@ -10,7 +10,7 @@ import { wingBonuses } from '../../game/wings.js'
 import { collectionBonuses } from '../../game/collection.js'
 import { sanninBonuses } from '../../game/sannin.js'
 import { activePetFighterInput } from '../../game/pets.js'
-import { activeBuffs, buffBonuses, sumBonuses } from '../../game/nonfight-buffs.js'
+import { activeBuffs, activeTitles, buffBonuses, sumBonuses } from '../../game/nonfight-buffs.js'
 import { playerFighterFrom, wingLook, type PlayerFighter } from '../../game/combat.js'
 import type { Tx } from '../../game/progress.js'
 
@@ -59,6 +59,10 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
   const expiries = [
     ...(await activeBuffs(tx, character.id)).flatMap((row) =>
       row.expiresAt ? [row.expiresAt.getTime()] : [],
+    ),
+    // So does the equipped timed title.
+    ...(await activeTitles(tx, character.id)).flatMap((row) =>
+      row.active && row.expiresAt ? [row.expiresAt.getTime()] : [],
     ),
     // A 7-day scroll skill leaving the fighter also invalidates the stored defence.
     ...(await scrollSkillExpiries(tx, character.id)),

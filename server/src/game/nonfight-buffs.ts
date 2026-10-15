@@ -1,12 +1,12 @@
 // Non-fight buffs: BuffSystem.AddBuff and RefreshBuffProperty, FoodItem.js, RoleTitleSystem.
 import { readFileSync } from 'node:fs'
 import { equipBonuses, type Bonuses } from '@pockie/game-core'
-import { and, eq, gt, isNull, or } from 'drizzle-orm'
+import { and, eq, gt, isNull, ne, or } from 'drizzle-orm'
 import type { AnyPgColumn } from 'drizzle-orm/pg-core'
 import type { Db } from '../db/client.js'
 import { characterBuffs, characterTitles, characters } from '../db/schema.js'
 import { HttpError } from '../http.js'
-import { item, itemNameKey, rebornNonfightBuffs } from './data.js'
+import { item, itemNameKey, rebornNonfightBuffs, rebornTitles } from './data.js'
 import type { Tx } from './progress.js'
 import { isVip } from './vip.js'
 
@@ -27,32 +27,43 @@ const bad = (code: string, message: string) => new HttpError(400, code, message)
 export const buffDefinition = (id: number) => data.buffs[String(id)]
 export const titleDefinition = (id: number) => data.titles[String(id)]
 
+/** Food buffs. Titles no longer add buff rows; a 'title' row left by the 2011 rules is ignored. */
 export const activeBuffs = (tx: Tx | Db, characterId: string, now = new Date()) =>
   tx
     .select()
     .from(characterBuffs)
-    .where(and(eq(characterBuffs.characterId, characterId), live(characterBuffs.expiresAt, now)))
+    .where(
+      and(
+        eq(characterBuffs.characterId, characterId),
+        ne(characterBuffs.source, 'title'),
+        live(characterBuffs.expiresAt, now),
+      ),
+    )
 export const activeTitles = (tx: Tx | Db, characterId: string, now = new Date()) =>
   tx
     .select()
     .from(characterTitles)
     .where(and(eq(characterTitles.characterId, characterId), live(characterTitles.expiresAt, now)))
 
-/** The original sums properties, then uses the same RefreshSystem terms as equipment. */
+/**
+ * The original sums properties, then uses the same RefreshSystem terms as equipment. The equipped
+ * title adds its Reborn bonus (titleStats).
+ */
 export async function buffBonuses(
   tx: Tx | Db,
   characterId: string,
   now = new Date(),
 ): Promise<Partial<Bonuses>> {
   const totals: Record<string, number> = {}
+  const add = (name: string, value: number) => (totals[name] = (totals[name] ?? 0) + value)
   for (const row of await activeBuffs(tx, characterId, now)) {
     const def = buffDefinition(row.buffId)
     if (!def || (def.type & 1) === 0) continue
-    for (const [name, value] of Object.entries(data.properties[String(def.buffadd)] ?? {})) {
-      const term = name.replace(/Buff$/, 'Equip')
-      totals[term] = (totals[term] ?? 0) + value
-    }
+    for (const [name, value] of Object.entries(data.properties[String(def.buffadd)] ?? {}))
+      add(name.replace(/Buff$/, 'Equip'), value)
   }
+  const title = (await activeTitles(tx, characterId, now)).find((row) => row.active)
+  for (const { name, value } of title ? titleStats(title.titleId) : []) add(name, value)
   return equipBonuses(totals)
 }
 export function sumBonuses(...parts: Partial<Bonuses>[]): Partial<Bonuses> {
@@ -168,19 +179,13 @@ export async function activateTitle(
     .update(characterTitles)
     .set({ active: true })
     .where(and(eq(characterTitles.characterId, characterId), eq(characterTitles.titleId, titleId)))
-  const def = titleDefinition(titleId)!
-  if (def.BuffID > 0)
-    await addBuff(tx, characterId, def.BuffID, 'title', String(titleId), owned.expiresAt)
 }
 
 export async function buffView(tx: Tx | Db, characterId: string) {
   return {
     buffs: (await activeBuffs(tx, characterId)).map((row) => ({
       buffId: row.buffId,
-      nameKey:
-        row.source === 'title'
-          ? `lg_${titleDefinition(Number(row.sourceId))?.TitleName}`
-          : itemNameKey(row.sourceId),
+      nameKey: itemNameKey(row.sourceId),
       expiresAt: row.expiresAt?.toISOString() ?? null,
       removable: buffDefinition(row.buffId)?.deltype !== 0,
     })),
@@ -194,8 +199,13 @@ export async function buffView(tx: Tx | Db, characterId: string) {
   }
 }
 
-/** A title's buff properties as `<Name>Equip` terms (what its bonus adds), for the hover. */
+/**
+ * A title's bonus as `<Name>Equip` terms: Reborn's title table, or for the ids Reborn dropped
+ * (11, 12, 51-55, 57-60, 62, 78) the 2011 title buff's properties.
+ */
 function titleStats(titleId: number) {
+  const reborn = rebornTitles()[String(titleId)]
+  if (reborn) return reborn
   const buff = buffDefinition(titleDefinition(titleId)?.BuffID ?? 0)
   return Object.entries((buff && data.properties[String(buff.buffadd)]) ?? {}).map(
     ([name, value]) => ({ name: name.replace(/Buff$/, 'Equip'), value }),

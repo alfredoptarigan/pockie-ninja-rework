@@ -171,8 +171,9 @@ describe('title items', () => {
     expect((await use(duplicate.id)).json().error.code).toBe('title_owned')
     expect(await bag()).toHaveLength(1)
     expect((await client.post('/api/game/titles/activate', { titleId: 12 })).statusCode).toBe(200)
+    // Reborn has no title 12, so it keeps its 2011 buff properties.
     expect(await buffBonuses(db, characterId)).toMatchObject({ capMul: 5 })
-    // The title selector's hover lists the title's buff properties as equipment terms.
+    // The title selector's hover lists the title's bonus as equipment terms.
     expect((await view()).titles).toEqual([
       expect.objectContaining({
         titleId: 12,
@@ -180,7 +181,8 @@ describe('title items', () => {
         stats: [{ name: 'CapMulEquip', value: 5 }],
       }),
     ])
-    expect((await client.post('/api/game/buffs/90010/remove')).statusCode).toBe(400)
+    // The bonus rides on the equipped title, not on a removable effect.
+    expect((await view()).buffs).toEqual([])
     expect((await client.post('/api/game/titles/activate', { titleId: 0 })).statusCode).toBe(200)
     expect(await buffBonuses(db, characterId)).toEqual({})
   })
@@ -192,19 +194,49 @@ describe('title items', () => {
     expected.setUTCDate(expected.getUTCDate() + 14)
     expect(title!.expiresAt).toEqual(expected)
     expect((await client.post('/api/game/titles/activate', { titleId: 30 })).statusCode).toBe(200)
-    expect((await buffBonuses(db, characterId)).neglectDefense).toBe(54)
+    // Reborn's King of Login: Pierce 54, Critical 35, Dodge 38, Block 38.
+    expect(await buffBonuses(db, characterId)).toEqual({
+      pierce: 54,
+      crit: 35,
+      dodge: 38,
+      parry: 38,
+    })
     await db
       .update(characterTitles)
       .set({ expiresAt: new Date(Date.now() - 1) })
       .where(eq(characterTitles.characterId, characterId))
-    await db
-      .update(characterBuffs)
-      .set({ expiresAt: new Date(Date.now() - 1) })
-      .where(eq(characterBuffs.characterId, characterId))
     expect((await view()).titles).toEqual([])
     expect(await buffBonuses(db, characterId)).toEqual({})
     expect((await client.post('/api/game/titles/activate', { titleId: 30 })).statusCode).toBe(400)
     expect((await client.post('/api/game/titles/activate', { titleId: 999 })).statusCode).toBe(400)
+  })
+})
+
+describe("Reborn's title table", () => {
+  it('applies and lists the Reborn bonus of a title the 2011 data gives none', async () => {
+    await db.insert(characterTitles).values({ characterId, titleId: 13, expiresAt: null })
+    expect((await client.post('/api/game/titles/activate', { titleId: 13 })).statusCode).toBe(200)
+    // Reborn's Orange Gatherer: Strength 5, Agility 5, Critical 16, Pierce 25.
+    expect(await buffBonuses(db, characterId)).toEqual({
+      strength: 500,
+      agility: 500,
+      crit: 16,
+      pierce: 25,
+    })
+    expect((await view()).titles[0].stats).toEqual([
+      { name: 'StrengthEquip', value: 500 },
+      { name: 'AgilityEquip', value: 500 },
+      { name: 'CritMulEquip', value: 16 },
+      { name: 'PierceEquip', value: 25 },
+    ])
+  })
+  it('ignores a title buff row left by the 2011 rules', async () => {
+    await db.insert(characterTitles).values({ characterId, titleId: 13, active: true })
+    await db
+      .insert(characterBuffs)
+      .values({ characterId, buffId: 90010, group: 0, source: 'title', sourceId: '12' })
+    expect((await buffBonuses(db, characterId)).capMul).toBeUndefined()
+    expect((await view()).buffs).toEqual([])
   })
 })
 
