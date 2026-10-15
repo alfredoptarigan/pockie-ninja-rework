@@ -14,7 +14,6 @@ import {
   type PointerEvent,
 } from 'react'
 import { useCharacter, useInventory, usePendingTreasure } from './api'
-import { BuffsPanel } from './BuffsPanel'
 import { BagGrid, pictureOf, SideButtons, span, type Point } from './inventory/BagGrid'
 import {
   ConfirmDialog,
@@ -91,7 +90,6 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const [selected, setSelected] = useState<string[]>([])
   const [treasureBox, setTreasureBox] = useState<InventoryItem | null>(null)
   const [treasureVisible, setTreasureVisible] = useState(false)
-  const [buffsVisible, setBuffsVisible] = useState(false)
   const lastClick = useRef<{ id: string; time: number } | null>(null)
   /** A fixed probe: the origin of fixed tooltips (the window frame may be their containing block). */
   const origin = useRef<HTMLSpanElement>(null)
@@ -286,12 +284,10 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
         gear={gear}
         held={held}
         outfitMenuOpen={menu?.id === OUTFIT}
-        onEffects={() => setBuffsVisible(true)}
         onSlot={clickSlot}
         onOutfitMenu={(event) => openMenu(OUTFIT, event)}
         onTip={showTip}
       />
-      {buffsVisible && <BuffsPanel onClose={() => setBuffsVisible(false)} />}
       {pendingTreasure.data?.treasure && !treasureVisible && (
         <GameButton
           className="absolute top-[120px] left-[100px] z-10"

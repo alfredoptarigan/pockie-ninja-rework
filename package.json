@@ -26,6 +26,7 @@
     "assets:reborn": "node tools/assets/reborn.ts",
     "assets:skill-effects": "node tools/assets/reborn-skill-effects.ts",
     "assets:audio": "node tools/assets/audio.ts",
+    "assets:buffs": "node tools/assets/buffs.ts",
     "reborn:fetch": "tools/fetch-reborn-data.sh",
     "i18n:extract": "node tools/i18n/extract-source.ts",
     "i18n:candidates": "node tools/i18n/build-glossary-candidates.ts",
