@@ -70,6 +70,7 @@ import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
 import { WING_SLOT } from '../../game/wings.js'
 import { OUTFIT_SLOT, outfitOf, syncOutfit } from '../../game/outfit.js'
+import { unequipMisfitWeapons } from '../../game/weapon-fit.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { drinkEnergyItem } from '../energy/energy.js'
 import { openCardBox } from '../cards/routes.js'
@@ -410,8 +411,11 @@ export async function actionRoutes(
         .where(eq(inventoryItems.id, row.id))
       // The replaced item takes the new item's tile when it fits there, else any free one.
       if (replaced && freed) await placeAt(tx, character.id, replaced, freed)
-      // The outfit sets clothing and avatar (stats, weapon class).
-      if (outfit) await syncOutfit(tx, character.id, character.activeSet)
+      // The outfit sets clothing and avatar (stats, weapon class); weapons it cannot use come off.
+      if (outfit) {
+        await syncOutfit(tx, character.id, character.activeSet)
+        await unequipMisfitWeapons(tx, character.id, character.avatarId)
+      }
       // Wing and outfit stats are part of the arena defence (M6 decision 23).
       if (slot === WING_SLOT || outfit) await refreshArenaSnapshot(tx, character.id)
 

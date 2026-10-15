@@ -2,12 +2,17 @@ import { buildApp } from './app.js'
 import { createDb } from './db/client.js'
 import { loadEnv } from './env.js'
 import { startJobs } from './jobs.js'
+import { unequipMisfitWeaponsEverywhere } from './game/weapon-fit.js'
 
 const env = loadEnv()
 const { db, close } = createDb(env.DATABASE_URL)
 const app = buildApp({ env, db, logger: true })
 
 const stopJobs = startJobs(db, (error) => app.log.error(error))
+// Saves from before the Reborn Weapon Types: weapons their outfit cannot use go to the bag.
+unequipMisfitWeaponsEverywhere(db)
+  .then((taken) => taken && app.log.info(`Took off ${taken} weapons that no longer fit`))
+  .catch((error: unknown) => app.log.error(error))
 
 app.addHook('onClose', async () => stopJobs())
 app.addHook('onClose', close)

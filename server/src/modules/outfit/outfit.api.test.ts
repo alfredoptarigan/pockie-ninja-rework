@@ -4,6 +4,7 @@ import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createTestDb, truncateAll } from '../../../test/helpers.js'
 import { inventoryItems } from '../../db/schema.js'
+import { unequipMisfitWeaponsEverywhere } from '../../game/weapon-fit.js'
 import { errorCode, setUpNinja } from '../gates/test-setup.js'
 
 const { db, close } = createTestDb()
@@ -16,11 +17,11 @@ beforeEach(async () => {
 afterEach(() => ninja.app.close())
 afterAll(() => close())
 
-const CREATION = 'i290003' // clothing 3, AvatarLevel 1, the setUpNinja outfit (fists)
-const BLUNT = 'i290017' // clothing 17, AvatarLevel 1, value 27 (blunt)
+const CREATION = 'i290003' // clothing 3, AvatarLevel 1, the setUpNinja outfit (sharp)
+const BLUNT = 'i290017' // clothing 17, AvatarLevel 1, value 27 (blunt in 2011, sharp in Reborn)
 const BLUNT_2 = 'i290117' // clothing 17, AvatarLevel 2
 const HIGH = 'i2931010' // clothing 1, AvatarLevel 32, value 42: required level 50
-const FISTS = 'i270100' // not an outfit
+const FISTS = 'i260100' // not an outfit
 
 interface Row {
   id: string
@@ -55,11 +56,12 @@ describe('the outfit item', () => {
 
   it('equips a second outfit: clothing, avatar and weapon class follow it', async () => {
     const before = await character()
-    const second = await ninja.give(BLUNT)
+    // i290005: clothing 5, Blunt in Reborn.
+    const second = await ninja.give('i290005')
     const equipped = await equip(second.id)
     expect(equipped.statusCode).toBe(200)
-    expect(equipped.json().character).toMatchObject({ clothing: 17, avatarId: 17, weaponClass: 1 })
-    expect(before).toMatchObject({ clothing: 3, avatarId: 3, weaponClass: 4 })
+    expect(equipped.json().character).toMatchObject({ clothing: 5, avatarId: 5, weaponClass: 1 })
+    expect(before).toMatchObject({ clothing: 3, avatarId: 3, weaponClass: 2 })
     // The replaced outfit goes back to the bag.
     const old = (await inventory()).find((row) => row.itemId === CREATION)!
     expect(old).toMatchObject({ equippedSlot: null, page: 0 })
@@ -193,5 +195,59 @@ describe('the wardrobe', () => {
     expect(errorCode(await take(0))).toBe('bag_full')
     const [row] = await db.select().from(inventoryItems).where(eq(inventoryItems.id, spare.id))
     expect(row).toMatchObject({ location: 'wardrobe', wardrobeSlot: 0 })
+  })
+})
+
+describe('weapons that no longer fit the outfit (Reborn Weapon Type)', () => {
+  const SHARP = 'i260100' // sharp newbie weapon: fits the creation outfit (clothing 3, Sharp)
+  const FIST_OUTFIT = 'i290021' // clothing 21, Fists in Reborn
+  const ANY_OUTFIT = 'i290065' // clothing 65, Any in Reborn
+  const rowOf = async (id: string) =>
+    (await db.select().from(inventoryItems).where(eq(inventoryItems.id, id)))[0]!
+
+  it('takes a worn weapon off into the bag when the new outfit cannot use it', async () => {
+    const sword = await ninja.give(SHARP, { equippedSlot: 'Weapon', equippedSet: 1 })
+    // Set II wears no outfit, so it fights in set I's: its sword goes too.
+    const spare = await ninja.give(SHARP, { equippedSlot: 'Weapon', equippedSet: 2 })
+    const fists = await ninja.give(FIST_OUTFIT)
+    expect((await equip(fists.id)).statusCode).toBe(200)
+    for (const id of [sword.id, spare.id]) {
+      expect(await rowOf(id)).toMatchObject({ equippedSlot: null, location: 'bag' })
+      expect((await rowOf(id)).bagPage).not.toBeNull()
+    }
+  })
+
+  it('keeps a weapon the outfit can use, and any weapon under an Any outfit', async () => {
+    const sword = await ninja.give(SHARP, { equippedSlot: 'Weapon', equippedSet: 1 })
+    const any = await ninja.give(ANY_OUTFIT)
+    expect((await equip(any.id)).statusCode).toBe(200)
+    expect(await rowOf(sword.id)).toMatchObject({ equippedSlot: 'Weapon' })
+  })
+
+  it('never loses the weapon: with the usable pages full it lands on an overflow page', async () => {
+    const sword = await ninja.give(SHARP, { equippedSlot: 'Weapon', equippedSet: 1 })
+    // 30 2x2 outfits fill the 120 cells of the bag; the new outfit frees its own 4.
+    await db
+      .insert(inventoryItems)
+      .values(
+        Array.from({ length: 30 }, () => ({ characterId: ninja.characterId, itemId: BLUNT_2 })),
+      )
+    const fists = await ninja.give(FIST_OUTFIT)
+    await inventory()
+    expect((await equip(fists.id)).statusCode).toBe(200)
+    expect(await rowOf(sword.id)).toMatchObject({ equippedSlot: null, location: 'bag' })
+    expect((await rowOf(sword.id)).bagPage).toBeGreaterThanOrEqual(2)
+  })
+
+  it('fixes ninjas saved before the change once, idempotently', async () => {
+    const sword = await ninja.give(SHARP, { equippedSlot: 'Weapon', equippedSet: 1 })
+    // An old save: a fists outfit worn with a sharp weapon.
+    await db
+      .update(inventoryItems)
+      .set({ itemId: FIST_OUTFIT })
+      .where(eq(inventoryItems.itemId, CREATION))
+    expect(await unequipMisfitWeaponsEverywhere(db)).toBe(1)
+    expect(await rowOf(sword.id)).toMatchObject({ equippedSlot: null })
+    expect(await unequipMisfitWeaponsEverywhere(db)).toBe(0)
   })
 })
