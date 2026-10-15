@@ -54,9 +54,9 @@ export const OUTFIT_STARS = {
   fiveStarSecretTechniqueThresholdPercent: 20,
   fiveStarSkillSlots: 1,
 } as const
-/** Our outfit tables stop at +31 (AvatarLevel 32), one below Reborn's +32 star requirement. */
-export const OUTFIT_MAX_TIER = 31
-/** The +N a star needs here: Reborn's requirement, capped at our highest outfit. */
+/** Reborn's top +N (serverConfig synthesisLevelUpRates[0] has 32 steps); 2011 stopped at +31. */
+export const OUTFIT_MAX_TIER = 32
+/** The +N a star needs: Reborn's requirement, capped at the highest outfit. */
 export const STAR_REQUIRED_TIER = Math.min(OUTFIT_STARS.requiredEnhancement, OUTFIT_MAX_TIER)
 /** Reborn's recastMaxIsv: 1.1 times the outfit's own ISV. */
 export const RECAST_MAX_MULTIPLIER = 1.1

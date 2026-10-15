@@ -1,6 +1,12 @@
 import { OUTFIT_STARS } from '@pockie/shared'
 import { describe, expect, it } from 'vitest'
-import { avatarSkillIds, avatarStats, creationOutfits, rebornOutfits } from './data.js'
+import {
+  avatarRecast,
+  avatarSkillIds,
+  avatarStats,
+  creationOutfits,
+  rebornOutfits,
+} from './data.js'
 import { outfitBonuses, outfitIsv, outfitOf, outfitRequiredLevel } from './outfit.js'
 
 it("shares Reborn's imported avatarStars with the client", () => {
@@ -112,5 +118,25 @@ describe('avatarSkillIds', () => {
     // i2931010: Ichigo +31 (AvatarID 3101); Reborn's imprint 2002.
     expect(avatarSkillIds(3101)).toEqual([1901, 7777, 8888, 2002])
     expect(avatarSkillIds(1)).toEqual([1901, 7777, 8888, 2002])
+  })
+})
+
+describe("Reborn's +32 (serverConfig synthesisLevelUpRates[0] has 32 steps; 2011 stops at +31)", () => {
+  it('adds a +32 to every outfit, numbered on from 2011 (EquipCompose.ini targets these ids)', () => {
+    expect(outfitOf('i2932010')).toEqual({
+      clothing: 1,
+      avatarId: 3201,
+      plus: 32,
+      value: 42,
+      level: 50,
+    })
+    expect(outfitOf('i2933000')).toMatchObject({ clothing: 100, avatarId: 3300, plus: 32 })
+    expect(outfitOf('i2946600')).toMatchObject({ clothing: 120, avatarId: 4660, plus: 32 })
+  })
+
+  it('has the +32 stats (20 + 8 * 32) * ISV and the +31 skills, recast and Weapon Type', () => {
+    expect(avatarStats(3201)).toMatchObject({ Strength: 276 * 120, StrengthUp: 120, Popsinger: 2 })
+    expect(avatarSkillIds(3201)).toEqual(avatarSkillIds(3101))
+    expect(avatarRecast('i2932010')).toEqual(avatarRecast('i2931010'))
   })
 })

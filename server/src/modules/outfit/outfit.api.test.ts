@@ -20,7 +20,7 @@ afterAll(() => close())
 const CREATION = 'i290003' // clothing 3, AvatarLevel 1, the setUpNinja outfit (sharp)
 const BLUNT = 'i290017' // clothing 17, AvatarLevel 1, value 27 (blunt in 2011, sharp in Reborn)
 const BLUNT_2 = 'i290117' // clothing 17, AvatarLevel 2
-const HIGH = 'i2931010' // clothing 1, AvatarLevel 32, value 42: required level 50
+const HIGH = 'i2931010' // clothing 1, AvatarLevel 32 (+31), value 42: required level 49
 const FISTS = 'i260100' // not an outfit
 
 interface Row {

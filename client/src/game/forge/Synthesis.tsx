@@ -15,10 +15,7 @@ import { BagPicker, SlotCell } from './items'
 
 const SLOT_LABELS = ['Main Item', 'Catalyst', 'Catalyst'] as const
 
-/**
- * Reborn's hardcoded instructions. Point 5 names Reborn's +32; our outfits stop at +31, which is
- * where the star rule applies here (STAR_REQUIRED_TIER).
- */
+/** Reborn's hardcoded instructions; point 5 is its +32 star rule (STAR_REQUIRED_TIER). */
 const INSTRUCTIONS = [
   'Set a main item and two catalysts to view the resulting item.',
   'If the result is equipment, its number of stat lines follows the value shown under the result: 0-21 = 0, 22-30 = 1, 31-38 = 2, 39-45 = 3, 46+ = 4.',

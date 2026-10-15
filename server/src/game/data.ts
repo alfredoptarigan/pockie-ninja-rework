@@ -19,6 +19,7 @@ import type {
 } from '@pockie/game-core'
 import type { OutfitBoost } from '@pockie/shared'
 import { z } from 'zod'
+import { topTierOutfits, topTierRecipes } from './outfit-top-tier.js'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -40,7 +41,8 @@ function load<T>(name: string): T {
 export function avatarStats(avatarId: number): AvatarStats {
   const key = `avatar:${avatarId}`
   if (cache.has(key)) return cache.get(key) as AvatarStats
-  const row = load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)]
+  const row =
+    load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)] ?? topTierStats(avatarId)
   if (!row) throw new Error(`Unknown avatar ${avatarId}`)
   const stats = rebornOutfitStats(avatarId, row)
   cache.set(key, stats)
@@ -113,7 +115,9 @@ export const skillAddRow = (id: number) =>
  */
 export function avatarSkillIds(avatarId: number) {
   const outfit = outfitOfAvatar(avatarId)
-  const row = outfit && load<Record<string, Record<string, number>>>('avatar-skills')[outfit.itemId]
+  const row =
+    outfit &&
+    load<Record<string, Record<string, number>>>('avatar-skills')[tableItemId(outfit.itemId)]
   if (!row) return undefined
   const reborn = outfit.reborn
   const imprint = reborn ? (reborn.imprint ?? 0) : row.SkillID4
@@ -132,7 +136,29 @@ export function npcSkillIds(npcId: string) {
 }
 
 /** item.ini row, including the Reborn scroll items. */
-export const item = (id: string) => withReborn<Row>('items')[id]
+export const item = (id: string) => allItems()[id]
+/** item.ini with the Reborn overlay and Reborn's +32 outfits. */
+function allItems() {
+  const key = 'items:all'
+  if (!cache.has(key)) cache.set(key, { ...withReborn<Row>('items'), ...topTier().rows })
+  return cache.get(key) as Record<string, Row>
+}
+/** Reborn's +32 outfits (outfit-top-tier.ts), built from 2011's +31 rows. */
+function topTier() {
+  const key = 'outfits:top-tier'
+  if (!cache.has(key)) cache.set(key, topTierOutfits(load<Record<string, Row>>('items')))
+  return cache.get(key) as ReturnType<typeof topTierOutfits>
+}
+/** The 2011 table key of an outfit item: a +32 reads its +31's skills and recast rows. */
+const tableItemId = (itemId: string) => topTier().sources.get(itemId) ?? itemId
+/** A +32's avatar row: its +31's (rebornOutfitStats sets Reborn's stats from the +N). */
+function topTierStats(avatarId: number) {
+  const outfit = outfitOfAvatar(avatarId)
+  const from = outfit && topTier().sources.get(outfit.itemId)
+  return from
+    ? load<Record<string, AvatarStats>>('avatar-stats')[String(item(from)!.AvatarID)]
+    : undefined
+}
 /** en.json key of an item's name (`lg_<Name>`), or `lg_<id>` for items without a row. */
 export const itemNameKey = (id: string) => `lg_${item(id)?.Name ?? id}`
 export const levels = () =>
@@ -268,7 +294,16 @@ export interface ComposeRecipe {
   Target: string | number
   Rate?: number
 }
-export const composeRecipes = () => load<Record<string, ComposeRecipe>>('compose-recipes')
+/** EquipCompose.ini with Reborn's +31 -> +32 step (topTierRecipes). */
+export function composeRecipes() {
+  const key = 'compose-recipes:top-tier'
+  if (!cache.has(key))
+    cache.set(
+      key,
+      topTierRecipes(load<Record<string, ComposeRecipe>>('compose-recipes'), topTier().sources),
+    )
+  return cache.get(key) as Record<string, ComposeRecipe>
+}
 export const composeRandom = () =>
   load<Record<string, { JudgeValueScore: number; class: string }>>('compose-random')
 export const composeBlocked = () => load<string[]>('compose-blocked')
@@ -281,7 +316,7 @@ export interface AvatarRecastRow {
   StaminaUnit: number
 }
 export const avatarRecast = (itemId: string) =>
-  load<{ outfits: Record<string, AvatarRecastRow> }>('avatar-recasts').outfits[itemId]
+  load<{ outfits: Record<string, AvatarRecastRow> }>('avatar-recasts').outfits[tableItemId(itemId)]
 export interface ImpressRateRow {
   MinLevel: number
   MaxLevel: number
@@ -1003,7 +1038,7 @@ export function outfitOfAvatar(avatarId: number) {
   const key = 'outfits-by-avatar'
   if (!cache.has(key)) {
     const byAvatar = new Map<number, AvatarOutfit>()
-    for (const [itemId, row] of Object.entries(load<Record<string, Row>>('items'))) {
+    for (const [itemId, row] of Object.entries(allItems())) {
       if (row.class !== 'AvatarItem') continue
       byAvatar.set(Number(row.AvatarID), {
         itemId,
