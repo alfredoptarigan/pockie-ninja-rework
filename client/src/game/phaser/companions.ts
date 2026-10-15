@@ -61,7 +61,9 @@ export function petTiming(avatar: number | undefined) {
 }
 /** Reborn art faces left; the attacker is mirrored. */
 export const artSign = (side: 'attackers' | 'defenders') => (side === 'attackers' ? -1 : 1)
-export const petX = (x: number, side: 'attackers' | 'defenders') => x + 100 * artSign(side)
+/** The original's pets stand at (160, 505) and (840, 505): 140 px behind and 50 px below their fighter. */
+export const petX = (x: number, side: 'attackers' | 'defenders') => x + 140 * artSign(side)
+export const PET_DY = 50
 export function layerPosition(
   x: number,
   y: number,

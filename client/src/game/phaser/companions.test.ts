@@ -31,8 +31,8 @@ describe('Reborn replay companions', () => {
     expect(effectAsset(-1)).toBeUndefined()
   })
   it('mirrors pet positions and wing offsets', () => {
-    expect(petX(300, 'attackers')).toBe(200)
-    expect(petX(700, 'defenders')).toBe(800)
+    expect(petX(300, 'attackers')).toBe(160)
+    expect(petX(700, 'defenders')).toBe(840)
     expect(layerPosition(300, 455, 'attackers', [-38, -8])).toEqual({ x: 338, y: 447, scaleX: -1 })
     expect(layerPosition(700, 455, 'defenders', [-38, -8])).toEqual({ x: 662, y: 447, scaleX: 1 })
   })

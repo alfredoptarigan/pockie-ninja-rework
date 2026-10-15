@@ -15,6 +15,7 @@ import {
   FADE_MS,
   HOME,
   latestAt,
+  poseScaleX,
   poseX,
   secretLayers,
   STAGE,
@@ -238,7 +239,8 @@ class BattleScene extends Phaser.Scene {
         .setOrigin(origin.x, origin.y)
         .setPosition(poseX(pose, t) + (shift?.dx ?? 0), STAGE.groundY + (shift?.dy ?? 0))
         .setRotation(shift?.rotation ?? 0)
-        .setFlipX(replay.fighters[i]?.side === 'defenders')
+        // Scale, not flipX: flipX mirrors around the frame centre and moves the feet.
+        .setScale(poseScaleX(pose, replay.fighters[i]?.side ?? 'attackers'), 1)
         .setAlpha(alpha)
         .setDepth(pose.at)
         .setVisible(alpha > 0 && (shift?.visible ?? true))

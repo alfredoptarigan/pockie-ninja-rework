@@ -38,7 +38,7 @@ export const BATTLE_TICK_MS = tickMs(gameMotions.fps.battle)
 const INTRO_MS = 500
 const RUN_MS = 220
 /** Distance from the target at which a melee strike is played. */
-const CONTACT = 120
+const CONTACT = 60
 const GAP_MS = 180
 export const FADE_MS = 300
 const BUFF_EVENT_MS = 600
@@ -452,6 +452,15 @@ export function latestAt<T extends { at: number }>(list: T[], t: number) {
 }
 
 /** Where a pose puts its fighter at time t. */
+/**
+ * Horizontal scale of a fighter's body: the art faces left, so the left fighter is mirrored, and
+ * a fighter running back home turns around (the original's StandyDirect and CheckActionISRunBack).
+ */
+export function poseScaleX(pose: Pose, side: 'attackers' | 'defenders') {
+  if (pose.motion === RUN && pose.to !== pose.from) return pose.to > pose.from ? -1 : 1
+  return side === 'attackers' ? -1 : 1
+}
+
 export function poseX(pose: Pose, t: number) {
   if (pose.moveMs <= 0) return pose.to
   const k = Math.min(1, Math.max(0, (t - pose.at) / pose.moveMs))

@@ -5,6 +5,7 @@ import {
   layerPosition,
   petAsset,
   petX,
+  PET_DY,
   PET_FRAME_MS,
   visualLook,
   wingAsset,
@@ -140,7 +141,7 @@ export class BattleVisuals {
         this.sprite(`pet:${i}`, pet.icon)
           .setTexture(pet.icon)
           .setOrigin(0.5, 1)
-          .setPosition(petX(HOME[fighter.side], fighter.side), y)
+          .setPosition(petX(HOME[fighter.side], fighter.side), y + PET_DY)
           .setScale(sign, 1)
           .setDepth(pose.at - 0.3)
           .setVisible(true)
@@ -150,7 +151,7 @@ export class BattleVisuals {
         `${motion}/`,
         attacking ? t - action.at : t,
         petX(HOME[fighter.side], fighter.side),
-        y,
+        y + PET_DY,
         sign,
         pose.at - 0.3,
         pet?.animations?.[motion],
@@ -211,7 +212,7 @@ export class BattleVisuals {
             : effect?.onPet
               ? petX(HOME[fighter.side], fighter.side)
               : x,
-          effect?.global ? STAGE.height / 2 : y,
+          effect?.global ? STAGE.height / 2 : effect?.onPet ? y + PET_DY : y,
           sign,
           effect?.global || effect?.onPet
             ? effect.depth === 'behind'

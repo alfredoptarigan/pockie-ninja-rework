@@ -9,6 +9,7 @@ import {
   hpText,
   latestAt,
   poseX,
+  poseScaleX,
   splitDamage,
   type Timeline,
 } from './timeline'
@@ -123,7 +124,7 @@ describe('buildTimeline', () => {
     const attack = timeline.poses[0]!.find((p) => p.motion === '52')!
     expect(damage.at - attack.at).toBeCloseTo(6 * BATTLE_TICK_MS)
     // The attacker strikes next to the target and runs back home.
-    expect(attack.to).toBe(HOME.defenders - 120)
+    expect(attack.to).toBe(HOME.defenders - 60)
     const back = timeline.poses[0]!.filter((p) => p.motion === '55').at(-1)!
     expect(poseX(back, back.at + back.moveMs)).toBe(HOME.attackers)
     // HP drops when the hit lands, not before.
@@ -248,7 +249,7 @@ describe('buildTimeline', () => {
     expect(timeline.poses[2]![0]!.at).toBeGreaterThan(0)
     expect(timeline.poses[1]![0]!.at).toBe(0)
     const strike = timeline.poses[0]!.find((p) => p.motion === '52')!
-    expect(strike.to).toBe(HOME.defenders - 120)
+    expect(strike.to).toBe(HOME.defenders - 60)
   })
 })
 
@@ -380,5 +381,21 @@ describe('new replay data', () => {
     expect(barAt(timeline, 0, heal.at)!.hp).toBe(77)
     // A healing tick does not play the hurt motion.
     expect(timeline.poses[0]!.some((p) => p.at === heal.at && p.motion === '63')).toBe(false)
+  })
+})
+
+describe('poseScaleX', () => {
+  const pose = (motion: string, from: number, to: number) =>
+    ({ at: 0, motion, loop: true, from, to, moveMs: 220 }) as const
+
+  it('mirrors the left fighter so both face each other (the art faces left)', () => {
+    expect(poseScaleX(pose('1', 300, 300), 'attackers')).toBe(-1)
+    expect(poseScaleX(pose('1', 700, 700), 'defenders')).toBe(1)
+  })
+
+  it('turns a fighter around while it runs back home', () => {
+    expect(poseScaleX(pose('55', 640, 300), 'attackers')).toBe(1)
+    expect(poseScaleX(pose('55', 360, 700), 'defenders')).toBe(-1)
+    expect(poseScaleX(pose('55', 300, 640), 'attackers')).toBe(-1)
   })
 })

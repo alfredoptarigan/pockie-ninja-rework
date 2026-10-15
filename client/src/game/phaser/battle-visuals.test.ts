@@ -106,7 +106,7 @@ describe('battle cosmetic rendering', () => {
     visuals.render(0)
     expect(f.loaded).toEqual([icon])
     expect(f.sprites).toHaveLength(1)
-    expect(f.sprites[0]).toMatchObject({ key: icon, Position: [200, 455], Scale: [-1, 1] })
+    expect(f.sprites[0]).toMatchObject({ key: icon, Position: [160, 505], Scale: [-1, 1] })
   })
   it('puts global and pet effects in fixed depth bands, not at their master pose', () => {
     const f = fixture()
