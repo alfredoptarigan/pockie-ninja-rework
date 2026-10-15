@@ -1,15 +1,16 @@
 // Reborn's item tooltip (docs/audit/reborn-ui-audit.md §1): a 250px dark panel with the item name
 // in its refinement-tier colour, a gold rule, the overview (BOUND / UNBOUND, Synthesis Value, Item
 // Type, icon) and the sections of the item's kind: REQUIREMENTS, CORE ATTRIBUTES, INSCRIPTION,
-// SPECIAL ATTRIBUTES, REFINEMENT, ENHANCEMENTS, SET BONUSES. Hovering a bag item whose slot holds a
-// different worn item shows both panels side by side (EQUIPPED ITEM, then INVENTORY ITEM), each
-// marked ▲ / ▼ / ● against the other.
+// SPECIAL ATTRIBUTES, REFINEMENT, ENHANCEMENTS, SOCKETED GEMS, SET BONUSES, ENCHANTMENTS (in
+// Reborn's order per kind). Gems and Enchanting Stones list their stats. Hovering a bag item whose
+// slot holds a different worn item shows both panels side by side (EQUIPPED ITEM, then INVENTORY
+// ITEM), each marked ▲ / ▼ / ● against the other.
 import type { GearView } from '@pockie/shared'
 import type { ReactNode } from 'react'
 import { statLine, TIER_COLORS } from './forge/gear'
 import { itemIcon } from './ItemIcon'
 import { itemName, outfitIcon } from './inventory/outfits'
-import type { InventoryItem } from './types'
+import type { InventoryItem, ItemInfo } from './types'
 
 /** Reborn's Item Type names (item_type__*) for our EquipType values and item classes. */
 const EQUIP_TYPES: Record<string, string> = {
@@ -28,6 +29,7 @@ const CLASS_TYPES: Record<string, string> = {
   PharmacyItem: 'Aid',
   SustainItem: 'Aid',
   JewelItem: 'Gem',
+  MagicItem: 'Enchantment',
   DebrisItem: 'Material',
   CropItem: 'Material',
   PetItem: 'Pet',
@@ -160,6 +162,8 @@ export function ItemPanel({
       </div>
       {gear ? (
         <GearSections gear={gear} side={side} other={other?.gear} level={level} />
+      ) : item.info?.gem || item.info?.enchant ? (
+        <StoneSections info={item.info} level={level} />
       ) : (
         item.info &&
         item.info.level > 1 && (
@@ -190,13 +194,33 @@ function GearSections({
 }) {
   const weapon = gear.baseType === 1
   const core = (view: GearView) => (weapon ? view.attack.min + view.attack.max : view.defense)
-  /** A refinement line against the other item: the same stat compared, or one it lacks. */
-  const mark = (name: string, value: number): Mark | undefined => {
+  /** A refinement or enchant line against the other item's: the same stat, or one it lacks. */
+  const mark = (
+    name: string,
+    value: number,
+    theirLines: readonly { name: string; value: number }[] = other?.props ?? [],
+  ): Mark | undefined => {
     if (!side || !other) return undefined
-    const theirs = other.props.find((prop) => prop.name === name)
+    const theirs = theirLines.find((line) => line.name === name)
     if (theirs) return compare(value, theirs.value)
     return side === 'worn' ? 'up' : 'new'
   }
+  const enchantments = gear.enchant && gear.enchant.lines.length > 0 && (
+    <Section title="Enchantments">
+      {gear.enchant.lines.map((row) => {
+        const line = statLine(row.name, row.value)
+        return (
+          <Row
+            key={row.name}
+            label={line.label}
+            value={line.value}
+            mark={mark(row.name, row.value, other?.enchant?.lines ?? [])}
+            color="#388ee9"
+          />
+        )
+      })}
+    </Section>
+  )
   const range = (name: string, min: number, max: number) =>
     `(${statLine(name, min).value.replace('+', '')} - ${statLine(name, max).value.replace('+', '')})`
   return (
@@ -259,6 +283,16 @@ function GearSections({
           {gear.maxHp > 0 && <Row label="Max Health:" value={`+${gear.maxHp}`} />}
         </Section>
       )}
+      {weapon && enchantments}
+      {gear.sockets.length > 0 && (
+        <Section title="Socketed Gems">
+          <ul aria-label="Socketed Gems" className="flex flex-col gap-0.5">
+            {gear.sockets.map((gem, index) => (
+              <Socket key={`${gem?.itemId ?? 'open'}-${index}`} gem={gem} />
+            ))}
+          </ul>
+        </Section>
+      )}
       {gear.set && (
         <Section title="Set Bonuses">
           <p className="text-[#9fb0c1]">
@@ -277,10 +311,59 @@ function GearSections({
           })}
         </Section>
       )}
+      {!weapon && enchantments}
       <p className="mt-1 text-[#5df9ff]">
         Durability {gear.durability} / {gear.maxDurability}
         {gear.durability <= 0 && ' (broken: no stats)'}
       </p>
+    </>
+  )
+}
+
+/** One gem socket: Reborn's ring with the gem's icon and stat, or "Open Socket". */
+function Socket({ gem }: { gem: GearView['sockets'][number] }) {
+  const icon = gem && itemIcon(gem.itemId)?.file
+  const line = gem && statLine(gem.name, gem.value)
+  return (
+    <li className="flex items-center gap-2">
+      <span
+        aria-hidden="true"
+        className="grid size-[26px] shrink-0 place-items-center rounded-full border-2 border-[#8a7a5a] bg-black/40"
+      >
+        {icon && <img src={icon} alt="" className="size-[20px] object-contain" />}
+      </span>
+      {line ? (
+        <span className="flex flex-1 justify-between gap-2">
+          <span className="text-[#a4bfd4]">{line.label}</span>
+          <span className="text-[#7fcf6e]">{line.value}</span>
+        </span>
+      ) : (
+        <span className="text-[#9fb0c1]">Open Socket</span>
+      )}
+    </li>
+  )
+}
+
+/** A gem's or Enchanting Stone's tooltip body: REQUIREMENTS, then its stat lines in blue. */
+function StoneSections({ info, level }: { info: ItemInfo; level?: number }) {
+  const lines = info.gem ? [info.gem] : (info.enchant?.lines ?? [])
+  const required = info.gem?.level ?? info.enchant?.level ?? 1
+  return (
+    <>
+      <Section title="Requirements">
+        <Row label="Required Level:" value={required} warn={!!level && level < required} />
+        {info.enchant && (
+          <Row
+            label="Fits:"
+            value={info.enchant.slots.map((slot) => EQUIP_TYPES[slot] ?? slot).join(' / ')}
+          />
+        )}
+      </Section>
+      <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
+      {lines.map((row) => {
+        const line = statLine(row.name, row.value)
+        return <Row key={row.name} label={line.label} value={line.value} color="#388ee9" />
+      })}
     </>
   )
 }

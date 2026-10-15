@@ -176,6 +176,11 @@ for (const [id, row] of Object.entries(items)) {
 }
 for (const id of Object.keys(honorShop)) addItem(id)
 for (const { itemId } of MALL_CATALOGUE) addItem(itemId)
+// Armory: gems, Enchanting Stones and Slot Talismans (sockets, enchantments and their pickers).
+for (const [id, row] of Object.entries(items)) {
+  if (row.class === 'JewelItem' || row.class === 'MagicItem' || row.FreePropName === 'FreeAddHole')
+    addItem(id)
+}
 // M5 scroll skill items (server/data/game/reborn/items.json).
 for (const id of Object.keys(rebornItems)) addItem(id)
 for (const id of itemIds) keys.add(`lg_${items[id]!.Name}`)

@@ -451,6 +451,8 @@ describe('Inventory context menu', () => {
               maxHp: 0,
               durability: 5,
               maxDurability: 10,
+              sockets: [],
+              maxSockets: 0,
             },
           },
         }),
@@ -663,4 +665,101 @@ describe('Inventory equipment', () => {
     await userEvent.click(plate)
     expect(await screen.findByRole('dialog', { name: 'Buffs and titles' })).toBeVisible()
   }, 15_000)
+})
+
+describe('Inventory gems', () => {
+  const ruby: InventoryItem = {
+    ...potion,
+    id: '00000000-0000-7000-8000-0000000000b1',
+    itemId: 'i110101',
+    count: 1,
+    nameKey: 'lg_Gem121_itemname',
+    slot: 5,
+    info: {
+      kind: 'other',
+      level: 0,
+      sellPrice: 100,
+      stack: 1,
+      w: 1,
+      h: 1,
+      class: 'JewelItem',
+      gem: { name: 'StrengthEquip', value: 1400, level: 1 },
+    },
+  }
+  const socketedGear = (sockets: unknown[]) => ({
+    [fists.id]: {
+      appraised: true,
+      appraiseCost: 15,
+      repairCost: 0,
+      identifyCount: 0,
+      props: [],
+      inscription: [],
+      special: [],
+      enhanceLevel: 0,
+      enhanceMax: 12,
+      inscribeLevel: 0,
+      baseType: 1,
+      level: 1,
+      equipType: 'Weapon',
+      attack: { min: 1, max: 2 },
+      defense: 0,
+      maxHp: 0,
+      durability: 10,
+      maxDurability: 10,
+      sockets,
+      maxSockets: 3,
+    },
+  })
+
+  it('sockets a held gem into the clicked gear (Reborn gemInsert)', async () => {
+    const { fetchMock } = renderBag([fists, ruby], () => ({
+      'POST /api/game/forge/gems/insert': () => json({ character }),
+    }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Ruby Level 1' }))
+    await userEvent.click(bagItem('Newbie Swiping Fists'))
+    expect(requestBody(fetchMock, 'POST /api/game/forge/gems/insert')).toEqual({
+      itemId: fists.id,
+      gemId: ruby.id,
+    })
+  })
+
+  it('shows the gem’s stat in its tooltip and has no Use entry', async () => {
+    renderBag([ruby])
+    await userEvent.hover(await screen.findByRole('button', { name: 'Ruby Level 1' }))
+    const tooltip = screen.getByRole('tooltip')
+    expect(tooltip).toHaveTextContent('Item Type:Gem')
+    expect(tooltip).toHaveTextContent('Required Level:1')
+    expect(tooltip).toHaveTextContent('Strength+14')
+    await userEvent.unhover(bagItem('Ruby Level 1'))
+    const menu = await rightClickMenu('Ruby Level 1')
+    expect(within(menu).queryByRole('menuitem', { name: /^Use / })).not.toBeInTheDocument()
+  })
+
+  it('lists socketed gems in the tooltip and removes them from the menu', async () => {
+    const gem = { itemId: 'i110101', nameKey: 'lg_Gem121_itemname', name: 'StrengthEquip' }
+    const { fetchMock } = renderBag([fists], () => ({
+      'GET /api/game/forge/gear': () =>
+        json({ gear: socketedGear([{ ...gem, value: 1400 }, null]) }),
+      'POST /api/game/forge/gems/remove': () => json({ character }),
+    }))
+    const button = await screen.findByRole('button', { name: 'Newbie Swiping Fists' })
+    await waitFor(async () => {
+      await userEvent.hover(button)
+      expect(screen.getByRole('tooltip')).toHaveTextContent('Socketed Gems')
+    })
+    const sockets = within(screen.getByRole('tooltip')).getByRole('list', {
+      name: 'Socketed Gems',
+    })
+    expect(sockets).toHaveTextContent('Strength+14')
+    expect(sockets).toHaveTextContent('Open Socket')
+    await userEvent.unhover(button)
+
+    const menu = await rightClickMenu('Newbie Swiping Fists')
+    await userEvent.click(
+      within(menu).getByRole('menuitem', { name: 'Remove Gems Newbie Swiping Fists' }),
+    )
+    expect(requestBody(fetchMock, 'POST /api/game/forge/gems/remove')).toEqual({
+      itemId: fists.id,
+    })
+  })
 })

@@ -13,7 +13,10 @@ export type EquipSuits = Readonly<Record<string, readonly SuitRow[]>>
 /** An item in the EquipBox. */
 export interface EquippedItem {
   config: EquipConfig
-  item: Pick<EquipInstance, 'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props'>
+  item: Pick<EquipInstance, 'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props'> & {
+    /** Gem and enchant rows (resolved from the item tables by the caller). */
+    added?: readonly PropRow[]
+  }
 }
 
 /** Bonuses start at 2 pieces (the loop starts at 2; no row uses Index 1). */

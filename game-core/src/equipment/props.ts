@@ -55,12 +55,14 @@ function otherProps(config: EquipConfig, defines: EquipPropDefines): PropRow[] {
 
 /**
  * GetEquipTotalProp (294-300) for one item: base (GetEquipSelfProp 233-243, with the enhanced
- * weapon attack and armour HP), item.ini extras, identify rows, inscription rows. Gems and
- * enchants are not in M3.
+ * weapon attack and armour HP), item.ini extras, identify rows, inscription rows, then the gem
+ * (JewelItemRec 276-283) and enchant (GetEquipAddMagicProp 299) rows the caller resolved.
  */
 export function equipItemProps(
   config: EquipConfig,
-  item: Pick<EquipInstance, 'enhanceLevel' | 'inscribeLevel' | 'props'>,
+  item: Pick<EquipInstance, 'enhanceLevel' | 'inscribeLevel' | 'props'> & {
+    added?: readonly PropRow[]
+  },
   tables: EquipTables,
 ): PropRow[] {
   const attack =
@@ -79,6 +81,7 @@ export function equipItemProps(
     ...otherProps(config, tables.propDefines),
     ...identify,
     ...inscriptionProps(config, item.inscribeLevel, tables.inscribeLevels),
+    ...(item.added ?? []),
   ]
 }
 

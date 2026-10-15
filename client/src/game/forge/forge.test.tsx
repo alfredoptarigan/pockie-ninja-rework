@@ -35,6 +35,8 @@ const batGear: GearView = {
   defense: 0,
   maxHp: 0,
   inscription: [],
+  sockets: [],
+  maxSockets: 3,
   appraiseCost: 15,
   repairCost: 0,
 }

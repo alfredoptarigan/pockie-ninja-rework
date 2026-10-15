@@ -1,6 +1,6 @@
 // Response shapes of /api/game/* that @pockie/shared does not export yet (see
 // server/src/modules/game/*). Character, CreationOptions and the realtime types come from shared.
-import type { Character, MonsterDrop, QuestHandIn, QuestRewards } from '@pockie/shared'
+import type { BagItemInfo, Character, MonsterDrop, QuestHandIn, QuestRewards } from '@pockie/shared'
 
 export interface SceneMonster {
   id: string
@@ -137,6 +137,10 @@ export interface ItemInfo {
   class: string
   /** Outfits (AvatarItem): clothing and Reborn's "+N". */
   outfit?: { clothing: number; plus: number }
+  /** Gems (JewelItem): the stat a socket gets and the lowest gear level. */
+  gem?: BagItemInfo['gem']
+  /** Enchanting Stones (MagicItem): their lines, the slots they fit and the lowest gear level. */
+  enchant?: BagItemInfo['enchant']
 }
 
 export interface TalkResult {

@@ -14,6 +14,7 @@ import {
 } from './bag-grid.js'
 import { avatarStats, item, itemNameKey } from './data.js'
 import type { GrantedItem } from './gear.js'
+import { gemOf, stoneOf } from './gems.js'
 import { OUTFIT_SLOT, outfitOf } from './outfit.js'
 import type { Tx } from './progress.js'
 
@@ -106,7 +107,10 @@ export function itemInfo(itemId: string): BagItemInfo {
   const itemClass = String(def?.class ?? '')
   const outfit = outfitOf(itemId)
   const equip = itemClass === 'EquipItem'
-  const usable = Number(def?.CanUse) === 1 && !outfit
+  const gem = gemOf(itemId)
+  const enchant = stoneOf(itemId)
+  // Gems go into sockets, not through Use (Reborn's menu has no Use for them).
+  const usable = Number(def?.CanUse) === 1 && !outfit && !gem
   return {
     kind: equip || outfit ? 'equip' : usable ? 'use' : 'other',
     equipSlot: outfit ? OUTFIT_SLOT : equip ? String(def!.EquipType) : null,
@@ -116,6 +120,8 @@ export function itemInfo(itemId: string): BagItemInfo {
     stack: itemStackSize(itemId),
     ...footprint(itemId),
     class: itemClass,
+    ...(gem && { gem }),
+    ...(enchant && { enchant }),
   }
 }
 

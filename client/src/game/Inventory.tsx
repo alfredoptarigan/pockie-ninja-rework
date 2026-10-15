@@ -1,7 +1,8 @@
 // Inventory window as Pockie Ninja Reborn's (data/reborn-raw/audit-2026-10-14/reborn-windows-A-L.md,
 // "Inventory"; docs/audit/reborn-ui-audit.md §1). A click picks an item up (a ghost follows the
 // pointer; Escape or a right click puts it back); a click on a tile, item or slot then moves,
-// swaps, equips or unequips it. A double click or right click opens a bag item's menu. Menus,
+// swaps, equips or unequips it; a held gem clicked onto gear (bag or worn) goes into its first open
+// socket (Reborn's gemInsert). A double click or right click opens a bag item's menu. Menus,
 // tooltips and small windows render inside this window, so they stay in its modal top layer.
 import type { GearView } from '@pockie/shared'
 import {
@@ -130,6 +131,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
     if (last?.id === item.id && now - last.time < DOUBLE_CLICK_MS) return openMenu(item.id, event)
     if (!held) return pickUp(item)
     if (held.id === item.id) return setHeldId(null)
+    if (held.info?.gem && !item.info?.gem) return insertGem(held, item)
     if (held.equippedSlot) {
       // A worn item over a bag item: wear that one instead, when it fits the slot.
       if (item.info?.equipSlot !== held.equippedSlot) return showToast(INVALID_SWAP, 'failure')
@@ -150,10 +152,16 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   function clickSlot(slot: string, worn?: InventoryItem) {
     if (!held) return worn && pickUp(worn)
     if (held.id === worn?.id) return setHeldId(null)
+    if (held.info?.gem && worn) return insertGem(held, worn)
     if (held.equippedSlot || held.info?.equipSlot !== slot)
       return showToast(INVALID_SWAP, 'failure')
     setHeldId(null)
     run(() => request.equip(held.id))
+  }
+
+  function insertGem(gem: InventoryItem, target: InventoryItem) {
+    setHeldId(null)
+    run(() => request.insertGem({ itemId: target.id, gemId: gem.id }))
   }
 
   function switchSet(set: number) {
@@ -206,6 +214,8 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
     add(item.locked ? 'Unlock' : 'Lock', () => run(() => request.lock(item.id)))
     add('Link in Chat', () => requestItemLink(name), { name: `Link ${name} in chat` })
     const forged = gear[item.id]
+    if (forged?.sockets.some(Boolean))
+      add('Remove Gems', () => run(() => request.removeGems({ itemId: item.id })))
     const forge = (verb: 'Appraise' | 'Repair', cost: number) =>
       list.push({
         label: `${verb} (${cost} Stone)`,

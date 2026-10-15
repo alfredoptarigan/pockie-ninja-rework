@@ -29,8 +29,10 @@ import {
   identifyList,
   identifyTables,
   item,
+  itemNameKey,
   setPieceCount,
 } from './data.js'
+import { gemOf, stoneOf } from './gems.js'
 import type { Tx } from './progress.js'
 
 type ItemRow = typeof inventoryItems.$inferSelect
@@ -149,6 +151,20 @@ export function gearView(
     maxHp: enhancedMaxHp(config, row.enhanceLevel),
     inscription: inscriptionProps(config, row.inscribeLevel, tables.inscribeLevels),
     set: setProgress(config.SuitID ?? 0, worn),
+    sockets: row.gems.map((gemId) => {
+      const gem = gemId ? gemOf(gemId) : undefined
+      return gemId && gem
+        ? { itemId: gemId, nameKey: itemNameKey(gemId), name: gem.name, value: gem.value }
+        : null
+    }),
+    maxSockets: config.MaxHoleCount ?? 0,
+    ...(row.enchantItemId && {
+      enchant: {
+        itemId: row.enchantItemId,
+        nameKey: itemNameKey(row.enchantItemId),
+        lines: stoneOf(row.enchantItemId)?.lines ?? [],
+      },
+    }),
     appraiseCost: appraiseCost(config.UseLevel ?? 0),
     repairCost: repairCost(config, durability),
   }

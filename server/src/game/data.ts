@@ -224,6 +224,9 @@ export function setPieceCount(suitId: number) {
 /** equipPropConfig.ini costs and factors (blacksmith.md "Config"). */
 export const equipConfig = () =>
   load<{ config: Record<string, number | string> }>('equip-config').config
+/** MagicPropLib.ini grouped by AddMagicLibID: an Enchanting Stone's lines. */
+export const magicProps = () =>
+  load<Record<string, { Index: number; PropName: string; PropValue: number }[]>>('magic-props')
 /** ConsolidateFailRate.ini, section = target level. */
 export const enhanceFailRates = () => load<EnhanceFailRates>('enhance-fail-rates')
 /** SealOdds.ini with the seal item ids. */

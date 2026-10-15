@@ -27,7 +27,17 @@ export const inscribeSchema = z
   })
   .strict()
 
+/** POST /api/game/forge/gems/insert (Reborn's gemInsert): the gear row and the gem row. */
+export const gemInsertSchema = z.object({ itemId, gemId: itemId }).strict()
+/** POST /api/game/forge/gems/hole (gemCreateHole): the gear row and the Slot Talisman's item id. */
+export const gemHoleSchema = z.object({ itemId, talisman: z.string().regex(/^i\d{6}$/) }).strict()
+/** POST /api/game/forge/enchant (enchantAttempt): the gear row and the Enchanting Stone row. */
+export const enchantSchema = z.object({ itemId, stoneId: itemId }).strict()
+
 export type ForgePayment = z.infer<typeof forgePaymentSchema>
+export type GemInsertInput = z.input<typeof gemInsertSchema>
+export type GemHoleInput = z.input<typeof gemHoleSchema>
+export type EnchantInput = z.input<typeof enchantSchema>
 export type ForgePaidInput = z.input<typeof forgePaidSchema>
 export type InscribeInput = z.input<typeof inscribeSchema>
 
@@ -78,8 +88,25 @@ export interface GearView {
     worn: number
     bonuses: { pieces: number; name: string; value: number }[]
   }
+  /**
+   * Gem sockets (HoleCount, JewelItemRec): the socketed gem and the stat it adds, or null for an
+   * open socket. Reborn's SOCKETED GEMS.
+   */
+  sockets: (SocketedGem | null)[]
+  /** Most sockets Create Hole can open (MaxHoleCount). */
+  maxSockets: number
+  /** The Enchanting Stone applied (AddMagicID) and its lines: Reborn's ENCHANTMENTS. */
+  enchant?: { itemId: string; nameKey: string; lines: { name: string; value: number }[] }
   appraiseCost: number
   repairCost: number
+}
+
+export interface SocketedGem {
+  itemId: string
+  nameKey: string
+  /** The stat (`<Name>Equip`) and value it adds. */
+  name: string
+  value: number
 }
 
 /** Forge tables the window needs (GET /api/game/forge). */

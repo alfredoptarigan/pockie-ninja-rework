@@ -75,6 +75,10 @@ export interface BagItemInfo {
   w: number
   h: number
   class: string
+  /** JewelItem: the stat it adds in a socket and the lowest gear level that takes it. */
+  gem?: { name: string; value: number; level: number }
+  /** MagicItem (Enchanting Stone): its lines, the EquipTypes it fits and the lowest gear level. */
+  enchant?: { lines: { name: string; value: number }[]; slots: string[]; level: number }
 }
 
 /** One row of GET /api/game/inventory. */

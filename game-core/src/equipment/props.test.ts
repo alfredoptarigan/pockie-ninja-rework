@@ -59,6 +59,15 @@ describe('equipItemProps (EquipSystem.GetEquipTotalProp 294-300)', () => {
     ])
   })
 
+  it('appends the gem and enchant rows last', () => {
+    const added = [
+      { name: 'StrengthEquip', value: 1400 },
+      { name: 'CritMulEquip', value: 13 },
+    ]
+    const rows = equipItemProps(i250104, { ...plain, added }, tables)
+    expect(rows.slice(-2)).toEqual(added)
+  })
+
   it('gives enhanced armour flat HP and keeps its defence', () => {
     expect(equipItemProps(i220102, { ...plain, enhanceLevel: 3 }, tables)).toEqual([
       { name: 'MinAtkEquip', value: 0 },

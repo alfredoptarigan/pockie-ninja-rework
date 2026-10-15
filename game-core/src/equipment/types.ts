@@ -22,6 +22,8 @@ export interface EquipConfig {
   /** 2 = any. */
   Sex?: number
   SuitID?: number
+  /** Most gem sockets Create Hole can open (AddHoleSystem). */
+  MaxHoleCount?: number
   /** `;`-separated names and values (AddOtherProp). */
   OtherPropName?: string
   OtherPropValue?: string | number

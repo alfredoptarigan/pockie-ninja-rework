@@ -22,6 +22,8 @@ const gearWith = (lines: number) =>
     durability: 10,
     maxDurability: 10,
     appraised: true,
+    sockets: [],
+    maxSockets: 0,
     props: Array.from({ length: lines }, (_, index) => ({
       propId: index,
       name: 'Attack',

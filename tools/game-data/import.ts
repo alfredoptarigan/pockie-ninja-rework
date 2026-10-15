@@ -292,6 +292,7 @@ if (import.meta.main) {
   write('identify-lists', ini('Equip/EquipIdentifyIDList.ini'))
   write('identify-groups', ini('Equip/EquipIdentifyProp.ini'))
   write('identify-props', ini('Equip/IdentifyPropLib.ini'))
+  write('magic-props', groupBy(ini('Equip/MagicPropLib.ini'), 'ID'))
 
   // Sets
   write('equip-suits', groupBy(ini('Equip/SuitProp.ini'), 'ID'))

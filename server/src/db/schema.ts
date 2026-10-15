@@ -308,6 +308,10 @@ export const inventoryItems = pgTable(
     locked: boolean('locked').notNull().default(false),
     // Reborn's Wardrobe: slot 0-19 (4 pages of 5) of an outfit stored there, else null.
     wardrobeSlot: smallint('wardrobe_slot'),
+    // Gem sockets (HoleCount, max 3): gem item id per socket, null = open (migration 0047).
+    gems: jsonb('gems').$type<(string | null)[]>().notNull().default([]),
+    // The Enchanting Stone (MagicItem id) applied to this gear, else null (migration 0047).
+    enchantItemId: text('enchant_item_id'),
   },
   (t) => [
     index('inventory_items_character_id_idx').on(t.characterId),
@@ -335,6 +339,7 @@ export const inventoryItems = pgTable(
     check('inventory_items_identify_count', sql`${t.identifyCount} between 0 and 4`),
     check('inventory_items_identify_times', sql`${t.identifyTimes} >= 0`),
     check('inventory_items_props', jsonbArray(t.props, 4)),
+    check('inventory_items_gems', jsonbArray(t.gems, 3)),
     check('inventory_items_engraved_slot', sql`${t.engravedSlot} between 0 and 3`),
     check('inventory_items_bag_page', sql`${t.bagPage} between 0 and 9`),
     check('inventory_items_bag_slot', sql`${t.bagSlot} between 0 and 59`),

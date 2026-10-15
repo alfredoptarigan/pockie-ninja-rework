@@ -1,6 +1,15 @@
 // Forge queries and actions (/api/game/forge/*). Keys sit under gameKeys.all, so every game action
 // (fights wear gear, quests grant it) refetches them.
-import type { Character, ForgeInfo, ForgePaidInput, GearView, InscribeInput } from '@pockie/shared'
+import type {
+  Character,
+  EnchantInput,
+  ForgeInfo,
+  ForgePaidInput,
+  GearView,
+  GemHoleInput,
+  GemInsertInput,
+  InscribeInput,
+} from '@pockie/shared'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { api } from '../../lib/api'
 import { useApplyResult } from '../api'
@@ -51,3 +60,7 @@ export const useRepairAll = () => useForgeAction<void>('repair-all')
 export const useEnhance = () => useForgeAction<ForgePaidInput>('enhance')
 export const useRefine = () => useForgeAction<ForgePaidInput>('refine')
 export const useInscribe = () => useForgeAction<InscribeInput>('inscribe')
+export const useInsertGem = () => useForgeAction<GemInsertInput>('gems/insert')
+export const useRemoveGems = () => useForgeAction<{ itemId: string }>('gems/remove')
+export const useCreateHole = () => useForgeAction<GemHoleInput>('gems/hole')
+export const useEnchant = () => useForgeAction<EnchantInput>('enchant')

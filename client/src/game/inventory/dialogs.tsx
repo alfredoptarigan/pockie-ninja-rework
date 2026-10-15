@@ -187,7 +187,10 @@ export function SortDialog({
   )
 }
 
-/** Bag gear "Sell Equipment Below <grade>" picks: unlocked, sellable, few refinement lines. */
+/**
+ * Bag gear "Sell Equipment Below <grade>" picks: unlocked, sellable, few refinement lines, no
+ * socketed gems.
+ */
 const belowGrade = (items: InventoryItem[], gear: Record<string, GearView>, grade: number) =>
   items
     .filter(
@@ -196,6 +199,7 @@ const belowGrade = (items: InventoryItem[], gear: Record<string, GearView>, grad
         item.info.equipSlot !== 'Wing' &&
         item.info.sellPrice !== null &&
         !item.locked &&
+        !gear[item.id]?.sockets.some(Boolean) &&
         refineLines(gear[item.id]) < grade + 1,
     )
     .map((item) => item.id)

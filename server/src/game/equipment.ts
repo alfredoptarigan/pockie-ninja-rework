@@ -1,5 +1,6 @@
 // Equipped items as RefreshSystem bonuses (EquipSystem.RefreshEquipProperty + SuitEquipSystem),
-// through game-core/equipment: base, item.ini extras, identify and inscription rows, set bonuses.
+// through game-core/equipment: base, item.ini extras, identify, inscription, gem and enchant rows,
+// set bonuses.
 import {
   equipBonuses,
   equipmentTotals,
@@ -11,12 +12,18 @@ import type { Db } from '../db/client.js'
 import { characters, inventoryItems } from '../db/schema.js'
 import { wornItemsWhere } from './bag.js'
 import { avatarStats, equipTables, item } from './data.js'
+import { addedProps } from './gems.js'
 import type { Tx } from './progress.js'
 
 type ItemRow = typeof inventoryItems.$inferSelect
 /** What an equipped row contributes: its config id and the instance state the stats read. */
 export type Gear = Pick<ItemRow, 'itemId'> &
-  Partial<Pick<ItemRow, 'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props'>>
+  Partial<
+    Pick<
+      ItemRow,
+      'durability' | 'enhanceLevel' | 'inscribeLevel' | 'props' | 'gems' | 'enchantItemId'
+    >
+  >
 type Wearer = Pick<typeof characters.$inferSelect, 'avatarId' | 'gender'>
 
 /** The rows of the active equipment set. */
@@ -43,6 +50,7 @@ export function equipmentBonuses(equipped: readonly Gear[], wearer: Wearer): Par
           enhanceLevel: gear.enhanceLevel ?? 0,
           inscribeLevel: gear.inscribeLevel ?? 0,
           props: gear.props ?? [],
+          added: addedProps(gear),
         },
       },
     ]

@@ -15,7 +15,7 @@ import {
   useUseMultiple,
 } from '../bag-api'
 import { cardName } from '../cards'
-import { useAppraise, useRepair } from '../forge/api'
+import { useAppraise, useInsertGem, useRemoveGems, useRepair } from '../forge/api'
 import { completedNotice } from '../QuestLog'
 import { showToast } from '../toast'
 
@@ -64,6 +64,8 @@ export function useBagRequests() {
   const switchSet = useSetActiveSet()
   const appraise = useAppraise()
   const repair = useRepair()
+  const insertGem = useInsertGem()
+  const removeGems = useRemoveGems()
   const pending = useIsMutating()
   return {
     busy: pending > 0,
@@ -80,5 +82,7 @@ export function useBagRequests() {
     switchSet: switchSet.mutateAsync,
     appraise: appraise.mutateAsync,
     repair: repair.mutateAsync,
+    insertGem: insertGem.mutateAsync,
+    removeGems: removeGems.mutateAsync,
   }
 }

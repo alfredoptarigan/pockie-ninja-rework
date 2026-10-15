@@ -69,14 +69,14 @@ const MONEY_NAMES: Record<Money, string> = {
   giftCoupon: 'Gift Coupons',
 }
 
-const bad = (code: string, message: string) => new HttpError(400, code, message)
+export const bad = (code: string, message: string) => new HttpError(400, code, message)
 const random = () => createRandom(randomInt(2 ** 31))
 
 function requireMoney(character: CharacterRow, money: Money, cost: number) {
   if (character[money] < cost) throw bad('no_money', `You need ${cost} ${MONEY_NAMES[money]}.`)
 }
 
-async function pay(tx: Tx, character: CharacterRow, money: Money, cost: number) {
+export async function pay(tx: Tx, character: CharacterRow, money: Money, cost: number) {
   requireMoney(character, money, cost)
   if (cost > 0) {
     await tx
@@ -86,7 +86,7 @@ async function pay(tx: Tx, character: CharacterRow, money: Money, cost: number) 
   }
 }
 
-async function ownedItem(tx: Tx | Db, characterId: string, id: string) {
+export async function ownedItem(tx: Tx | Db, characterId: string, id: string) {
   const [row] = await tx
     .select()
     .from(inventoryItems)
@@ -95,7 +95,7 @@ async function ownedItem(tx: Tx | Db, characterId: string, id: string) {
   return row
 }
 
-function equipmentOf(row: ItemRow, action: string): EquipConfig {
+export function equipmentOf(row: ItemRow, action: string): EquipConfig {
   const config = equipConfigOf(row.itemId)
   // Wings and auras are enhanced in the Wing panel (M6 decision 24); forge rules give them nothing.
   if (!config || item(row.itemId)?.EquipType === WING_SLOT)
@@ -116,7 +116,12 @@ const countOf = (rows: ItemRow[]) => rows.reduce((sum, row) => sum + row.count, 
  * Spends one talisman whose FreeEquipMin/MaxLevel covers the item, unbound stacks first (a bound
  * talisman binds the item). Returns whether the talisman was bound.
  */
-async function spendTalisman(tx: Tx, characterId: string, talismanId: string, useLevel: number) {
+export async function spendTalisman(
+  tx: Tx,
+  characterId: string,
+  talismanId: string,
+  useLevel: number,
+) {
   const def = item(talismanId)
   const inRange =
     useLevel >= Number(def?.FreeEquipMinLevel ?? 0) &&
@@ -205,17 +210,18 @@ function appraiseRoll(row: ItemRow) {
   return rolled ?? { props: [], identifyTimes: row.identifyTimes + 1 }
 }
 
-export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
-  const respond = async (tx: Tx, characterId: string, itemId?: string) => {
-    const [row] = await tx.select().from(characters).where(eq(characters.id, characterId))
-    const character = toCharacter(row!, await playerFighter(tx, row!))
-    if (!itemId) return { character }
-    const rows = await tx.select().from(inventoryItems).where(bagItemsWhere(characterId))
-    const forged = rows.find((r) => r.id === itemId)
-    if (!forged) throw new HttpError(404, 'no_item', 'You do not have that item.')
-    return { character, item: itemView(forged, wornSetCounts(rows, row!.activeSet)) }
-  }
+/** A forge action's reply: the character, and the forged row for single-item actions. */
+export async function respond(tx: Tx, characterId: string, itemId?: string) {
+  const [row] = await tx.select().from(characters).where(eq(characters.id, characterId))
+  const character = toCharacter(row!, await playerFighter(tx, row!))
+  if (!itemId) return { character }
+  const rows = await tx.select().from(inventoryItems).where(bagItemsWhere(characterId))
+  const forged = rows.find((r) => r.id === itemId)
+  if (!forged) throw new HttpError(404, 'no_item', 'You do not have that item.')
+  return { character, item: itemView(forged, wornSetCounts(rows, row!.activeSet)) }
+}
 
+export async function forgeRoutes(app: FastifyInstance, { db }: { db: Db }) {
   app.get('/forge', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const character = await characterOf(db, requireUser(request).id)
     const bag = await db.select().from(inventoryItems).where(unequippedBagItemsWhere(character.id))

@@ -59,6 +59,8 @@ describe('gear view for the Reborn item tooltip', () => {
     identifyCount: props.length,
     identifyTimes: 1,
     props,
+    gems: [] as (string | null)[],
+    enchantItemId: null as string | null,
   })
   it('gives each refinement line its range and tier, like Reborn (Iron Wok Hat sample)', () => {
     const view = gearView(
@@ -74,6 +76,25 @@ describe('gear view for the Reborn item tooltip', () => {
       { propId: 161, name: 'MaxHPMulEquip', value: 24, min: 23, max: 29, tier: 1 },
     ])
     expect(view).toMatchObject({ level: 13, equipType: 'Hat', defense: 34, special: [] })
+  })
+  it('lists the gem sockets and the enchantment with their stats', () => {
+    const view = gearView({
+      ...row('i220102'),
+      gems: ['i110201', null],
+      enchantItemId: 'i412101',
+    } as never)!
+    expect(view).toMatchObject({
+      maxSockets: 2,
+      sockets: [
+        { itemId: 'i110201', nameKey: 'lg_Gem126_itemname', name: 'AgilityEquip', value: 1400 },
+        null,
+      ],
+      enchant: {
+        itemId: 'i412101',
+        nameKey: 'lg_MagicStone_Defence1_2101',
+        lines: [{ name: 'ParryMulEquip', value: 16 }],
+      },
+    })
   })
   it('names the weapon type from the job mask and lists innate lines', () => {
     expect(gearView(row('i250101') as never)).toMatchObject({
