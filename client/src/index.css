@@ -348,12 +348,27 @@
   animation: breathe 2.4s ease-in-out infinite;
 }
 
+/* Reborn's bloodlineRotateLarge: the active bloodline art behind the Inventory pose. */
+@keyframes bloodline-spin {
+  from {
+    transform: translateX(-50%) translateY(-25%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) translateY(-25%) rotate(360deg);
+  }
+}
+.bloodline-spin {
+  transform: translateX(-50%) translateY(-25%);
+  animation: bloodline-spin 9s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .chibi-sprite,
-  .breathe {
+  .breathe,
+  .bloodline-spin {
     animation: none;
   }
 }

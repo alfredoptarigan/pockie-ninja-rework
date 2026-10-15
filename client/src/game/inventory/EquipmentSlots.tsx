@@ -4,8 +4,10 @@
 // Positions are the measured ones, relative to the window content (Reborn's x - 5, y - 31).
 import type { Character, GearView } from '@pockie/shared'
 import { useState, type CSSProperties, type KeyboardEvent, type MouseEvent } from 'react'
+import { useCharacterStats } from '../api'
 import { useOutfitStand } from '../art'
-import { TitleText } from '../BuffsPanel'
+import { useBloodlines } from '../bloodlines/ninja-house'
+import { number, shortNumber } from '../Hud'
 import { PetSlot } from '../pets'
 import { GameButton } from '../skin'
 import { GameText, plainText } from '../text'
@@ -14,6 +16,7 @@ import { useOpenWindow } from '../windows'
 import { ItemPicture, OutfitPlus, pointOf, ROMAN, type Point } from './BagGrid'
 import { itemName, lookOf, wornOutfit } from './outfits'
 import { HideStats } from './HideStats'
+import { TitleSelect } from './TitleSelect'
 
 /**
  * Equipment slots: `slot` is the item's EquipType (server equippedSlot). The Pet slot shows the
@@ -157,7 +160,7 @@ export function Equipment({
   gear,
   held,
   outfitMenuOpen,
-  onTitle,
+  onEffects,
   onSlot,
   onOutfitMenu,
   onTip,
@@ -167,7 +170,8 @@ export function Equipment({
   gear: Record<string, GearView>
   held: InventoryItem | null
   outfitMenuOpen: boolean
-  onTitle: () => void
+  /** Opens the active effects panel. */
+  onEffects: () => void
   /** A click on a slot, with what it wears. */
   onSlot: (slot: string, worn?: InventoryItem) => void
   onOutfitMenu: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
@@ -182,7 +186,19 @@ export function Equipment({
       <div className="game-equip-column absolute top-[46px] left-0 h-[262px] w-[63px]" />
       <div className="game-equip-column absolute top-[46px] left-[306px] h-[262px] w-[63px]" />
       <div className="game-equip-backdrop absolute top-[48px] left-[65px] h-[256px] w-[239px]">
-        {character && <Pose clothing={lookOf(character)} />}
+        {character && (
+          <>
+            <BloodlineBackground />
+            <Pose clothing={lookOf(character)} />
+          </>
+        )}
+        <BattlePower />
+        <GameButton
+          onClick={onEffects}
+          className="absolute top-[115px] left-[4px] h-[42px] w-[45px] min-w-0! px-0!"
+        >
+          Effects
+        </GameButton>
         <GameButton
           onClick={() => openWindow('talents')}
           className="absolute top-[160px] left-[4px] h-[42px] w-[45px] min-w-0! px-0!"
@@ -197,14 +213,7 @@ export function Equipment({
         </GameButton>
         <HideStats character={character} />
       </div>
-      <button
-        type="button"
-        aria-label="Buffs and titles"
-        onClick={onTitle}
-        className="game-title-plate absolute top-[52px] left-[103px] grid h-[36px] w-[164px] cursor-pointer place-items-center"
-      >
-        <TitleText className="text-[15px]" />
-      </button>
+      <TitleSelect />
       <ul aria-label="Equipment">
         {SLOTS.map(({ slot, label, art, size, at }) => {
           // The Outfit slot falls back to set I's outfit (Reborn).
@@ -367,6 +376,57 @@ function OutfitSlot({
       />
       <span className="sr-only">Outfit: {name}</span>
     </>
+  )
+}
+
+/**
+ * Reborn's active bloodline art (main.js `xc`, @2579589): icons/bloodlines/bg/<active[0]>.png,
+ * 155px, rotating once every 9 s behind the pose (bloodline-spin in index.css). It sits in the
+ * pose box (14,11 208x240), bottom 5, centred, raised by a quarter of its height.
+ */
+function BloodlineBackground() {
+  const first = useBloodlines().data?.limits.find((limit) => limit.activeSlot === 0)
+  if (!first) return null
+  return (
+    <div aria-hidden="true" className="absolute top-[11px] left-[14px] h-[240px] w-[208px]">
+      <img
+        src={`/assets/reborn/icons/bloodlines/bg/${first.limitId}.webp`}
+        alt=""
+        data-testid="bloodline-background"
+        className="bloodline-spin absolute bottom-[5px] left-1/2 size-[155px] max-w-none"
+      />
+    </div>
+  )
+}
+
+/**
+ * Reborn's "BP: 31K" under the pose (its View Character `a.bp` block, @2228672): KOMIKAK 16px
+ * black, a 2px black outline under a yellow-to-orange gradient, 29px above the backdrop's foot;
+ * the full number on hover.
+ */
+function BattlePower() {
+  const power = useCharacterStats().data?.battlePower
+  if (power === undefined) return null
+  const text = `BP: ${shortNumber(power)}`
+  const font = 'font-[KOMIKAK,Arial] text-[16px] font-black'
+  return (
+    <div
+      title={number(power)}
+      className="pointer-events-none absolute top-[227px] left-0 h-[18px] w-full text-center"
+    >
+      <span
+        aria-hidden="true"
+        className={`absolute inset-x-0 top-0 text-black [-webkit-text-stroke:2px_#000] ${font}`}
+      >
+        {text}
+      </span>
+      <span
+        aria-label={`Battle Power ${number(power)}`}
+        className={`relative bg-linear-to-b from-[#ffee00] via-[#ff9500] to-[#ff5500] bg-clip-text text-transparent ${font}`}
+      >
+        {text}
+      </span>
+    </div>
   )
 }
 
