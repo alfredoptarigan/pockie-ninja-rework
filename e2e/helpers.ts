@@ -103,7 +103,16 @@ function databaseUrl() {
 export function sql(query: string, vars: Record<string, string | number> = {}) {
   const args = [databaseUrl(), '-X', '-q', '-A', '-t', '-v', 'ON_ERROR_STOP=1']
   for (const [key, value] of Object.entries(vars)) args.push('-v', `${key}=${value}`)
-  return execFileSync('psql', args, { input: query, encoding: 'utf8' }).trim()
+  try {
+    return execFileSync('psql', args, { input: query, encoding: 'utf8' }).trim()
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error('Seeding needs psql on PATH (the PostgreSQL client bin directory)', {
+        cause: error,
+      })
+    }
+    throw error
+  }
 }
 
 /** Updates the ninja's character row; `set` is a SQL assignment list that may use `:'var'`. */
