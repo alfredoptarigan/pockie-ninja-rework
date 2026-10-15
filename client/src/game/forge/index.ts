@@ -1,4 +1,6 @@
-export { ForgeWindow, useOpenForge, type ForgeView } from './ForgeWindow'
+export { ForgeWindow } from './ForgeWindow'
+export { PortableFunctionWindow } from './PortableFunction'
 export { GearDetails, GearIcon } from './GearItem'
 export { useGear } from './api'
 export { borderColor } from './gear'
+export { SubWindow, TabStrip } from './parts'

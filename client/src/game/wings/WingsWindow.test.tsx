@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import type { WingsView } from '../../../../shared/src/schemas/wings'
 import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
-import { WING_ICONS, WingsWindow } from './index'
+import { CollectionWindow, WING_ICONS, WingEnhanceWindow } from './index'
 
 const WING_IDS = [
   ...Array.from({ length: 16 }, (_, i) => `i${218000 + i}`),
@@ -56,47 +56,66 @@ describe('WingsWindow', () => {
     for (const itemId of WING_IDS) expect(WING_ICONS[itemId]).toMatch(/^\/assets\/reborn\//)
   })
 
-  it('shows the outcome odds, moves them with talismans and enhances', async () => {
+  it('enhances the chosen wing with a material and talismans', async () => {
     const fetch = mockApi({
       'GET /api/game/wings': () => json(view),
       [`POST /api/game/wings/${wing.id}/enhance`]: () =>
         json({ ...view, equipped: null, owned: [], outcome: 'destroy', level: null }),
     })
-    renderWithProviders(<WingsWindow onClose={vi.fn()} />)
-    expect(await screen.findByRole('button', { name: /Fallen Wings \+25/ })).toBeVisible()
-    expect(screen.getByText('Max HP +1360')).toBeVisible()
-    expect(screen.getByRole('button', { name: 'Enhance' })).toBeDisabled()
-    await userEvent.click(screen.getByRole('radio', { name: /Plume Shard \[First Grade\]/ }))
-    const odds = screen.getByRole('list', { name: 'Outcome odds' })
-    expect(within(odds).getByText('Success: 15%')).toBeVisible()
+    renderWithProviders(<WingEnhanceWindow onClose={vi.fn()} />)
+    const window = screen.getByRole('dialog', { name: 'Wing Enhancement' })
+    expect(await within(window).findByText('Level: +25')).toBeVisible()
+    expect(within(window).getByText('Max HP +1360')).toBeVisible()
+    expect(within(window).getByText('Next (+26): Max HP +1376')).toBeVisible()
+    expect(within(window).getByRole('button', { name: 'Enhance' })).toBeDisabled()
+
+    await userEvent.selectOptions(within(window).getByLabelText('Material'), 'i218021')
+    expect(within(window).getByText('Success Rate: 15%')).toBeVisible()
+    const odds = within(window).getByRole('list', { name: 'Outcome odds' })
     expect(within(odds).getByText('Destroyed: 4.25%')).toBeVisible()
-    await userEvent.selectOptions(screen.getByLabelText('Luck'), 'i218054')
-    expect(within(odds).getByText('Success: 30%')).toBeVisible()
-    await userEvent.selectOptions(screen.getByLabelText('Integrity'), 'i218034')
+    await userEvent.selectOptions(within(window).getByLabelText('Luck'), 'i218054')
+    expect(within(window).getByText('Success Rate: 30%')).toBeVisible()
+    await userEvent.selectOptions(within(window).getByLabelText('Integrity'), 'i218034')
     expect(within(odds).getByText('Destroyed: 0%')).toBeVisible()
-    await userEvent.click(screen.getByRole('button', { name: 'Enhance' }))
+    await userEvent.click(within(window).getByRole('button', { name: 'Enhance' }))
+
     expect(requestBody(fetch, `POST /api/game/wings/${wing.id}/enhance`)).toEqual({
       stone: 'i218021',
       luck: 'i218054',
       integrity: 'i218034',
     })
-    expect(await screen.findByText('Enhancement failed. It was destroyed.')).toBeVisible()
+    expect(await within(window).findByText('Wing Destroyed!')).toBeVisible()
   })
 
-  it('lists the 26 collection entries and registers an owned wing', async () => {
+  it('shows the Wings tab of the Collection and submits an owned wing', async () => {
     const fetch = mockApi({
       'GET /api/game/wings': () => json(view),
       'POST /api/game/wings/collection/i218000': () => json({ ...view, reward: 5 }),
     })
-    renderWithProviders(<WingsWindow onClose={vi.fn()} />)
-    await userEvent.click(await screen.findByRole('tab', { name: 'Collection' }))
-    const list = screen.getByRole('list', { name: 'Wing Collection' })
+    renderWithProviders(<CollectionWindow onClose={vi.fn()} />)
+    for (const tab of ['Avatars', 'Pets', 'Gear Sets']) {
+      expect(screen.getByRole('tab', { name: tab })).toBeDisabled()
+      expect(screen.getByRole('tab', { name: tab })).toHaveAttribute(
+        'title',
+        `${tab}: not available yet`,
+      )
+    }
+    expect(screen.getByRole('tab', { name: 'Wings' })).toHaveAttribute('aria-selected', 'true')
+    const list = await screen.findByRole('list', { name: 'Wing Collection' })
     expect(list.querySelectorAll('li')).toHaveLength(26)
-    expect(within(list).getAllByText('Registered')).toHaveLength(1)
-    await userEvent.click(screen.getByRole('button', { name: 'Register Fallen Wings' }))
+    expect(screen.getByText('Total Collected: 1/26')).toBeVisible()
+    expect(screen.getByText('Ready to Submit: 1')).toBeVisible()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Ready' }))
+    expect(list.querySelectorAll('li')).toHaveLength(1)
+    await userEvent.click(within(list).getByRole('button', { name: 'Fallen Wings' }))
+    const submit = screen.getByRole('dialog', { name: 'Submit Wing' })
+    await userEvent.click(within(submit).getByRole('button', { name: 'Submit' }))
+
     expect(requestBody(fetch, 'POST /api/game/wings/collection/i218000')).toEqual({})
     expect(
       await screen.findByText('Registered. You received Plume Shard [First Grade] x5.'),
     ).toBeVisible()
+    expect(screen.queryByRole('dialog', { name: 'Submit Wing' })).toBeNull()
   })
 })

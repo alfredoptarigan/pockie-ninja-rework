@@ -1,10 +1,11 @@
 import type { ForgeInfo, GearView } from '@pockie/shared'
-import { screen, within } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { character, fists } from '../../test/game'
 import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { ForgeWindow } from './ForgeWindow'
+import { PortableFunctionWindow } from './PortableFunction'
 import { borderColor, propText } from './gear'
 import { GearIcon } from './GearItem'
 
@@ -108,13 +109,18 @@ describe('gear presentation', () => {
   })
 })
 
-describe('ForgeWindow', () => {
-  it('enhances a weapon with Gold and reports the new level', async () => {
-    const fetchMock = mockApi({
-      'GET /api/game/character': () => json({ character: { ...character, gold: 10 } }),
-      'GET /api/game/inventory': () => json({ items: [bat] }),
-      'GET /api/game/forge/gear': () => json({ gear: { [bat.id]: batGear } }),
-      'GET /api/game/forge': () => json(info),
+const forgeApi = (extra: Record<string, () => Response> = {}, gold = 10) =>
+  mockApi({
+    'GET /api/game/character': () => json({ character: { ...character, gold } }),
+    'GET /api/game/inventory': () => json({ items: [bat] }),
+    'GET /api/game/forge/gear': () => json({ gear: { [bat.id]: batGear } }),
+    'GET /api/game/forge': () => json(info),
+    ...extra,
+  })
+
+describe('ForgeWindow (Reborn Armory)', () => {
+  it('pays in the Enhancement dialog, then shows the Enhancement Result', async () => {
+    const fetchMock = forgeApi({
       'POST /api/game/forge/enhance': () =>
         json({
           success: true,
@@ -122,62 +128,127 @@ describe('ForgeWindow', () => {
           item: { ...bat, gear: { ...batGear, enhanceLevel: 1 } },
         }),
     })
-    renderWithProviders(<ForgeWindow view="enhance" onClose={() => {}} />)
+    renderWithProviders(<ForgeWindow onClose={() => {}} />)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Mythbeast Bat' }))
-    expect(screen.getByText('Next: +1, success rate 100%')).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Enhance' }))
+    const panel = screen.getByRole('tabpanel', { name: 'Enhance' })
+    expect(within(panel).getByText('Rate 100%')).toBeVisible()
+    expect(within(panel).getByText('Min Atk: 34')).toBeVisible()
+    await userEvent.click(within(panel).getByRole('button', { name: 'Attempt' }))
 
-    expect(await screen.findByRole('status')).toHaveTextContent('Mythbeast Bat is now +1.')
+    const pay = screen.getByRole('dialog', { name: 'Enhancement' })
+    expect(pay).toHaveTextContent('Enhancement cost: 8 Gold / 8 Coupons')
+    // Reborn's default: a talisman if owned, else Coupons when affordable.
+    expect(within(pay).getByRole('radio', { name: 'Your Coupons: 10' })).toBeChecked()
+    expect(within(pay).getByRole('radio', { name: 'Use Strengthening Talisman' })).toBeDisabled()
+    await userEvent.click(within(pay).getByRole('radio', { name: 'Your Gold: 10' }))
+    await userEvent.click(within(pay).getByRole('button', { name: 'OK' }))
+
+    const result = await screen.findByRole('dialog', { name: 'Enhancement Result' })
+    expect(await within(result).findByRole('status')).toHaveTextContent('Mythbeast Bat is now +1.')
+    expect(within(result).getByText('If successful:')).toBeVisible()
     expect(requestBody(fetchMock, 'POST /api/game/forge/enhance')).toEqual({
       itemId: bat.id,
       payment: 'gold',
     })
   })
 
-  it('blocks the talisman payment when the bag has none, and refines on the Refine tab', async () => {
-    const fetchMock = mockApi({
-      'GET /api/game/character': () => json({ character }),
-      'GET /api/game/inventory': () => json({ items: [bat] }),
-      'GET /api/game/forge/gear': () => json({ gear: { [bat.id]: batGear } }),
-      'GET /api/game/forge': () => json(info),
-      'POST /api/game/forge/refine': () => json({ character }),
-    })
-    renderWithProviders(<ForgeWindow view="enhance" onClose={() => {}} />)
-
+  it('auto-enhances to the chosen level and stops there', async () => {
+    let level = 0
+    const fetchMock = forgeApi(
+      {
+        'POST /api/game/forge/enhance': () => {
+          level += 1
+          return json({
+            success: true,
+            character: { ...character, gold: 100 },
+            item: { ...bat, gear: { ...batGear, enhanceLevel: level } },
+          })
+        },
+      },
+      100,
+    )
+    renderWithProviders(<ForgeWindow onClose={() => {}} />)
     await userEvent.click(await screen.findByRole('button', { name: 'Mythbeast Bat' }))
-    await userEvent.click(screen.getByRole('radio', { name: /Talisman/ }))
-    expect(screen.getByRole('button', { name: 'Enhance' })).toBeDisabled()
-    expect(screen.getByText('You have no talisman for this.')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Attempt' }))
+    await userEvent.click(screen.getByRole('radio', { name: 'Your Gold: 100' }))
+    await userEvent.click(screen.getByRole('button', { name: 'OK' }))
+    const result = await screen.findByRole('dialog', { name: 'Enhancement Result' })
+    await within(result).findByText('Mythbeast Bat is now +1.')
 
-    await userEvent.click(screen.getByRole('tab', { name: 'Refine' }))
+    await userEvent.click(within(result).getByRole('button', { name: 'Auto' }))
+    const auto = screen.getByRole('dialog', { name: 'Auto Enhance' })
+    const target = within(auto).getByRole('spinbutton', { name: 'Enhance to Level' })
+    await userEvent.clear(target)
+    await userEvent.type(target, '3')
+    await userEvent.click(within(auto).getByRole('button', { name: 'Start' }))
+
+    await waitFor(
+      () => expect(within(result).getByText('Mythbeast Bat is now +3.')).toBeVisible(),
+      {
+        timeout: 3000,
+      },
+    )
+    expect(within(result).getByRole('button', { name: 'Auto' })).toBeEnabled()
+    const attempts = fetchMock.mock.calls.filter(([, init]) => init?.method === 'POST')
+    expect(attempts).toHaveLength(3)
+  })
+
+  it('lists the Refinement Info lines and refines with a talisman', async () => {
+    const fetchMock = forgeApi({ 'POST /api/game/forge/refine': () => json({ character }) })
+    renderWithProviders(<ForgeWindow onClose={() => {}} />)
+
+    await userEvent.click(await screen.findByRole('tab', { name: 'Refine' }))
     const panel = screen.getByRole('tabpanel', { name: 'Refine' })
+    expect(within(panel).getByText('No item selected')).toBeVisible()
     await userEvent.click(within(panel).getByRole('button', { name: 'Mythbeast Bat' }))
-    await userEvent.click(within(panel).getByRole('radio', { name: /Talisman \(1 in bag\)/ }))
-    await userEvent.click(within(panel).getByRole('button', { name: 'Refine' }))
-    expect(await screen.findByRole('status')).toHaveTextContent('Refined Mythbeast Bat.')
-    expect(requestBody(fetchMock, 'POST /api/game/forge/refine')).toMatchObject({
+    expect(within(panel).getByText('Strength: +28 (28 - 34) T1')).toBeVisible()
+    await userEvent.click(within(panel).getByRole('button', { name: 'Attempt' }))
+
+    const pay = screen.getByRole('dialog', { name: 'Refinement' })
+    expect(pay).toHaveTextContent('Refinement price depends on current level.')
+    expect(within(pay).getByRole('radio', { name: 'Refining Talismans: 1' })).toBeChecked()
+    await userEvent.click(within(pay).getByRole('button', { name: 'OK' }))
+
+    expect(await within(panel).findByRole('status')).toHaveTextContent('Refined Mythbeast Bat.')
+    expect(requestBody(fetchMock, 'POST /api/game/forge/refine')).toEqual({
+      itemId: bat.id,
       payment: 'talisman',
     })
   })
+})
 
-  it('inscribes with seals and shows a failure', async () => {
-    const fetchMock = mockApi({
-      'GET /api/game/character': () => json({ character }),
-      'GET /api/game/inventory': () => json({ items: [bat] }),
-      'GET /api/game/forge/gear': () => json({ gear: { [bat.id]: batGear } }),
-      'GET /api/game/forge': () => json(info),
+describe('PortableFunctionWindow', () => {
+  it('offers only Inscribe and inscribes with seals', async () => {
+    const fetchMock = forgeApi({
       'POST /api/game/forge/inscribe': () =>
         json({ success: false, character, item: { ...bat, gear: batGear } }),
     })
-    renderWithProviders(<ForgeWindow view="inscription" onClose={() => {}} />)
+    renderWithProviders(<PortableFunctionWindow onClose={() => {}} />)
+
+    for (const tab of ['Synthesis', 'Recast', 'Impress']) {
+      const button = screen.getByRole('tab', { name: tab })
+      expect(button).toBeDisabled()
+      expect(button).toHaveAttribute('title', `${tab}: not available yet`)
+    }
+    expect(screen.getByRole('tab', { name: 'Inscribe' })).toHaveAttribute('aria-selected', 'true')
 
     await userEvent.click(await screen.findByRole('button', { name: 'Mythbeast Bat' }))
-    await userEvent.selectOptions(screen.getByRole('combobox'), '2')
-    expect(screen.getByText(/success 100%/)).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Inscribe' }))
+    expect(screen.getByText('Current Lv.0')).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Advanced Talisman' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Low Level' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    expect(screen.getByText('Rate: 94%')).toBeVisible()
+    expect(screen.getByText('Stones: 60')).toBeVisible()
+    await userEvent.click(screen.getByRole('button', { name: 'More seals' }))
+    await userEvent.click(screen.getByRole('button', { name: 'More seals' }))
+    expect(screen.getByText('Rate: 100%')).toBeVisible()
+    await userEvent.click(screen.getByRole('button', { name: 'Attempt' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Inscription failed. It is now +0.')
+    expect(screen.getByText('Failure')).toBeVisible()
     expect(requestBody(fetchMock, 'POST /api/game/forge/inscribe')).toEqual({
       itemId: bat.id,
       seal: 'low',

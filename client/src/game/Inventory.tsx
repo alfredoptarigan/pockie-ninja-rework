@@ -176,7 +176,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
         reason: fits ? undefined : UNFIT_REASON,
       })
     }
-    if (info?.equipSlot === 'Wing') add('Enhance Wing', () => openWindow('wings'))
+    if (info?.equipSlot === 'Wing') add('Enhance Wing', () => openWindow('wingEnhance'))
     if (info?.kind === 'use') add('Use', () => consume(item))
     if (info?.kind === 'use' && item.count > 1)
       add('Use Multiple', () => setModal({ kind: 'useMultiple', id: item.id }))

@@ -283,8 +283,8 @@ function BagCell({
 }
 
 /**
- * Reborn's side column (x 288 from y 331, 30 apart). Compose opens our forge (Reborn's Portable
- * Function), Collection the wing collection. ponytail: Wardrobe and Reroll have no system behind
+ * Reborn's side column (x 288 from y 331, 30 apart). Compose opens the Portable Function,
+ * Collection the Collection window. ponytail: Wardrobe and Reroll have no system behind
  * them yet (outfits and pets are not items), so they stay disabled.
  */
 export function SideButtons({
@@ -296,9 +296,9 @@ export function SideButtons({
 }) {
   const openWindow = useOpenWindow()
   const buttons: { label: string; onClick?: () => void }[] = [
-    { label: 'Compose', onClick: () => openWindow('forge') },
+    { label: 'Compose', onClick: () => openWindow('compose') },
     { label: 'Multi Sell', onClick: onMultiSell },
-    { label: 'Collection', onClick: () => openWindow('wings') },
+    { label: 'Collection', onClick: () => openWindow('collection') },
     { label: 'Wardrobe' },
     { label: 'Reroll' },
     { label: 'Sort', onClick: onSort },

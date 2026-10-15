@@ -10,7 +10,7 @@
 import type { Character } from '@pockie/shared'
 import { createContext, useContext, type ComponentType } from 'react'
 import { ArenaWindow } from './arena'
-import { ForgeWindow } from './forge'
+import { ForgeWindow, PortableFunctionWindow } from './forge'
 import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { DailyQuestWindow } from './daily'
 import { DiceOfFateWindow, NinjaDiaryWindow } from './events'
@@ -24,7 +24,7 @@ import { BloodlinesWindow } from './bloodlines'
 import { NinjaHouseWindow } from './bloodlines/ninja-house'
 import { TeamStoneWindow } from './team-stone'
 import { TeamBoardWindow, TeamWindow } from './teams'
-import { WingsWindow } from './wings'
+import { CollectionWindow, WingEnhanceWindow } from './wings'
 import { CardRoomWindow } from './cards'
 import { KennelWindow } from './pets'
 import { KennelShopWindow, PetTracingWindow } from './kennel'
@@ -34,6 +34,7 @@ export type WindowName =
   | 'shop'
   | 'merchant'
   | 'forge'
+  | 'compose'
   | 'gates'
   | 'pubFight'
   | 'daily'
@@ -51,7 +52,8 @@ export type WindowName =
   | 'diceOfFate'
   | 'tailedBeast'
   | 'teamStone'
-  | 'wings'
+  | 'wingEnhance'
+  | 'collection'
   | 'cardRoom'
   | 'pets'
   | 'petTracing'
@@ -82,7 +84,8 @@ function GateWindow({ character, npcId, onClose }: WindowProps) {
 const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   shop: ({ character, onClose }) => <ShopWindow character={character} onClose={onClose} />,
   merchant: ({ character, onClose }) => <MerchantWindow character={character} onClose={onClose} />,
-  forge: ({ onClose }) => <ForgeWindow view="enhance" onClose={onClose} />,
+  forge: ({ onClose }) => <ForgeWindow onClose={onClose} />,
+  compose: ({ onClose }) => <PortableFunctionWindow onClose={onClose} />,
   gates: GateWindow,
   pubFight: ({ character, onClose }) => <PubFightWindow character={character} onClose={onClose} />,
   daily: ({ onClose }) => <DailyQuestWindow onClose={onClose} />,
@@ -110,7 +113,8 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   teamStone: ({ character, onClose }) => (
     <TeamStoneWindow character={character} onClose={onClose} />
   ),
-  wings: ({ onClose }) => <WingsWindow onClose={onClose} />,
+  wingEnhance: ({ onClose }) => <WingEnhanceWindow onClose={onClose} />,
+  collection: ({ onClose }) => <CollectionWindow onClose={onClose} />,
   cardRoom: ({ onClose }) => <CardRoomWindow onClose={onClose} />,
   pets: ({ onClose }) => <KennelWindow onClose={onClose} />,
   petTracing: ({ onClose }) => <PetTracingWindow onClose={onClose} />,

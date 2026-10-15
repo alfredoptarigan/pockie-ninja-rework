@@ -1,6 +1,5 @@
-// M6 wings journey: a ninja equips a wing, enhances it with a wing stone and registers it in the
-// Wing Collection. The wing and the stone are seeded; equipping, enhancing and registering use the
-// Wings window.
+// M6 wings journey: a ninja enhances a wing with a wing stone (bag menu "Enhance Wing"), equips it
+// and registers it in the Collection's Wings tab. The wing and the stone are seeded.
 import { expect, test } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import {
@@ -34,7 +33,7 @@ const wingRow = (name: string) =>
     { name, item: WING.itemId },
   )
 
-test('a ninja equips, enhances and registers a wing', async ({ browser }) => {
+test('a ninja enhances, equips and registers a wing', async ({ browser }) => {
   // Arrange: a level-51 ninja with a +0 wing and one +3 wing stone in the bag.
   const { context, page, name } = await createSeededNinja(browser, 'Wing')
   try {
@@ -43,47 +42,58 @@ test('a ninja equips, enhances and registers a wing', async ({ browser }) => {
     giveItem(name, STONE.itemId)
     await reloadGame(page)
 
-    // Act: Inventory, Collection (the wings window), then equip the wing.
+    // Act: the bag item menu's Enhance Wing opens Wing Enhancement; enhance with the stone.
     await openMenu(page, 'Inventory')
-    await dialog(page, 'Inventory').getByRole('button', { name: 'Collection', exact: true }).click()
-    const wings = dialog(page, 'Wings')
-    const equipped = page.waitForResponse(
-      (r) => /\/api\/game\/items\/.+\/equip$/.test(r.url()) && r.ok(),
-    )
-    await wings.getByRole('button', { name: 'Equip', exact: true }).click()
-    await equipped
-
-    // Assert: it sits in the Wing slot.
-    await expect(wings.getByRole('button', { name: 'Unequip', exact: true })).toBeVisible()
-    expect(wingRow(name)).toBe('0|Wing')
-
-    // Act: enhance it with the stone.
-    await wings
-      .getByRole('radio', { name: `${STONE.name} (+${STONE.levelJump}) x1`, exact: true })
-      .check()
-    await expect(wings.getByRole('list', { name: 'Outcome odds' })).toContainText('Success: 100%')
+    await dialog(page, 'Inventory')
+      .getByRole('button', { name: WING.name, exact: true })
+      .click({ button: 'right' })
+    await page.getByRole('menuitem', { name: `Enhance Wing ${WING.name}`, exact: true }).click()
+    const wings = dialog(page, 'Wing Enhancement')
+    await wings.getByLabel('Material', { exact: true }).selectOption(STONE.itemId)
+    await expect(wings).toContainText('Success Rate: 100%')
     const enhanced = page.waitForResponse((r) => r.url().endsWith('/enhance') && r.ok())
     await wings.getByRole('button', { name: 'Enhance', exact: true }).click()
     const result = await (await enhanced).json()
 
     // Assert: the level rose by the stone's jump and the stone is used up.
     expect(result).toMatchObject({ outcome: 'success', level: STONE.levelJump })
-    await expect(wings).toContainText(`It is now +${STONE.levelJump}.`)
-    expect(wingRow(name)).toBe(`${STONE.levelJump}|Wing`)
+    await expect(wings).toContainText('Enhancement Success!')
+    await expect(wings).toContainText(`Level: +${STONE.levelJump}`)
+    expect(wingRow(name)).toBe(`${STONE.levelJump}|`)
     expect(heldCount(name, STONE.itemId)).toBe('0')
+    await wings.getByRole('button', { name: 'Close' }).click()
 
-    // Act: register it in the Wing Collection.
-    await wings.getByRole('tab', { name: 'Collection', exact: true }).click()
+    // Act: equip it from the bag.
+    await openMenu(page, 'Inventory')
+    const bag = dialog(page, 'Inventory')
+    const equipped = page.waitForResponse((r) => r.url().endsWith('/equip') && r.ok())
+    await bag.getByRole('button', { name: WING.name, exact: true }).click({ button: 'right' })
+    await page.getByRole('menuitem', { name: `Equip ${WING.name}`, exact: true }).click()
+    await equipped
+
+    // Assert: it sits in the Wing slot.
+    await expect.poll(() => wingRow(name)).toBe(`${STONE.levelJump}|Wing`)
+
+    // Act: Collection (Wings tab), then submit it from Submit Wing.
+    await bag.getByRole('button', { name: 'Collection', exact: true }).click()
+    const collection = dialog(page, 'Collection')
+    await collection
+      .getByRole('list', { name: 'Wing Collection' })
+      .getByRole('button', { name: WING.name, exact: true })
+      .click()
     const registered = page.waitForResponse(
       (r) => r.url().endsWith(`/wings/collection/${WING.itemId}`) && r.ok(),
     )
-    await wings.getByRole('button', { name: `Register ${WING.name}`, exact: true }).click()
+    await collection
+      .getByRole('dialog', { name: 'Submit Wing' })
+      .getByRole('button', { name: 'Submit', exact: true })
+      .click()
     expect((await (await registered).json()).reward).toBe(REWARD)
 
-    // Assert: the entry is registered, the shards are paid and the wing is kept.
+    // Assert: the entry is collected, the shards are paid and the wing is kept.
     await expect(
-      wings.getByRole('list', { name: 'Wing Collection' }).getByRole('listitem').first(),
-    ).toContainText('Registered')
+      collection.getByRole('list', { name: 'Wing Collection' }).getByRole('listitem').first(),
+    ).toContainText('Collected')
     expect(heldCount(name, SHARD)).toBe(String(REWARD))
     expect(wingRow(name)).toBe(`${STONE.levelJump}|Wing`)
   } finally {
