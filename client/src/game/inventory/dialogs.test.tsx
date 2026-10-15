@@ -13,6 +13,7 @@ const gearWith = (lines: number) =>
     level: 1,
     equipType: 'Weapon',
     attack: { min: 1, max: 2 },
+    enhanceAttack: { min: 0, max: 0 },
     defense: 0,
     special: [],
     inscription: [],

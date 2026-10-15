@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { character, fists, potion } from '../test/game'
+import { character, fists, outfitStats, potion } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import { Inventory } from './Inventory'
 import { onItemLinkRequest } from './social'
@@ -37,7 +37,7 @@ const outfit: InventoryItem = {
     w: 2,
     h: 2,
     class: 'AvatarItem',
-    outfit: { clothing: 3, plus: 1 },
+    outfit: { ...outfitStats, clothing: 3, plus: 1 },
   },
 }
 
@@ -449,6 +449,7 @@ describe('Inventory context menu', () => {
               attack: { min: 1, max: 2 },
               defense: 0,
               maxHp: 0,
+              enhanceAttack: { min: 0, max: 0 },
               durability: 5,
               maxDurability: 10,
               sockets: [],
@@ -703,6 +704,7 @@ describe('Inventory gems', () => {
       attack: { min: 1, max: 2 },
       defense: 0,
       maxHp: 0,
+      enhanceAttack: { min: 0, max: 0 },
       durability: 10,
       maxDurability: 10,
       sockets,

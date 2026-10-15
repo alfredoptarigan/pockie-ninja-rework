@@ -34,6 +34,7 @@ const batGear: GearView = {
   attack: { min: 34, max: 41 },
   defense: 0,
   maxHp: 0,
+  enhanceAttack: { min: 0, max: 0 },
   inscription: [],
   sockets: [],
   maxSockets: 3,

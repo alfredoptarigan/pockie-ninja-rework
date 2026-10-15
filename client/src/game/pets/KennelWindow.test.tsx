@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react'
+import { fireEvent, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character } from '../../test/game'
@@ -151,6 +151,23 @@ describe('PetSlot', () => {
     const { container } = renderWithProviders(<PetSlot />)
     expect(await screen.findByText('Pet: Baby Vulture, level 12')).toBeInTheDocument()
     expect(container.querySelector(`img[src="${petIcon(10050)}"]`)).not.toBeNull()
+  })
+  it("shows Reborn's pet tooltip on hover: level, nature and the slotted skills", async () => {
+    mockApi({ 'GET /api/game/pets': () => json(view([pet({ active: true })])) })
+    renderWithProviders(<PetSlot />)
+    fireEvent.pointerEnter(
+      (await screen.findByText('Pet: Baby Vulture, level 12')).parentElement!,
+      {
+        clientX: 5,
+        clientY: 5,
+      },
+    )
+    const tooltip = screen.getByRole('tooltip')
+    expect(tooltip).toHaveTextContent('Baby Vulture + 12')
+    expect(tooltip).toHaveTextContent('Nature:Beast')
+    expect(tooltip).toHaveTextContent('Item Type:Pet')
+    const passive = within(tooltip).getByLabelText('Passive skills')
+    expect(passive.querySelector('img[src$="/skills/40043.webp"]')).not.toBeNull()
   })
 })
 

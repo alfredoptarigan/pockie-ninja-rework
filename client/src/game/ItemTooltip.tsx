@@ -2,7 +2,8 @@
 // in its refinement-tier colour, a gold rule, the overview (BOUND / UNBOUND, Synthesis Value, Item
 // Type, icon) and the sections of the item's kind: REQUIREMENTS, CORE ATTRIBUTES, INSCRIPTION,
 // SPECIAL ATTRIBUTES, REFINEMENT, ENHANCEMENTS, SOCKETED GEMS, SET BONUSES, ENCHANTMENTS (in
-// Reborn's order per kind). Gems and Enchanting Stones list their stats. Hovering a bag item whose
+// Reborn's order per kind). Gems and Enchanting Stones list their stats; outfits show ISV, BMV and
+// SKILL IMPRINTS; pets their nature and Aura / Aid / Passive skills. Hovering a bag item whose
 // slot holds a different worn item shows both panels side by side (EQUIPPED ITEM, then INVENTORY
 // ITEM), each marked ▲ / ▼ / ● against the other.
 import type { GearView } from '@pockie/shared'
@@ -10,6 +11,8 @@ import type { ReactNode } from 'react'
 import { statLine, TIER_COLORS } from './forge/gear'
 import { itemIcon } from './ItemIcon'
 import { itemName, outfitIcon } from './inventory/outfits'
+import { NATURES, petSkillIcon } from './pets/nature'
+import { plainText, rawText } from './text'
 import type { InventoryItem, ItemInfo } from './types'
 
 /** Reborn's Item Type names (item_type__*) for our EquipType values and item classes. */
@@ -48,6 +51,9 @@ const CLASS_TYPES: Record<string, string> = {
 const SYNTHESIS = [14, 22, 31, 39, 46]
 /** Reborn shows the enhance level out of 16. */
 const ENHANCE_CAP = 16
+/** Reborn's item-info__stat-value--positive. */
+const GREEN = '#7ef6a9'
+const signed = (n: number) => (n < 0 ? String(n) : `+${n}`)
 
 export const itemType = (item: InventoryItem) =>
   (item.info?.equipSlot && EQUIP_TYPES[item.info.equipSlot]) ||
@@ -67,6 +73,8 @@ const compare = (mine: number, theirs: number): Mark =>
 export interface TooltipEntry {
   item: InventoryItem
   gear?: GearView
+  /** A kennel pet's level and slotted skills (a pet item in the bag has none). */
+  pet?: { level: number; skills: { skillId: number; kind: number }[] }
 }
 type Side = 'worn' | 'bag'
 
@@ -104,7 +112,7 @@ export function ItemTooltip({
 
 /** One tooltip panel; `side` adds the compare label and marks against `other`. */
 export function ItemPanel({
-  entry: { item, gear },
+  entry: { item, gear, pet },
   side,
   other,
   level,
@@ -116,7 +124,9 @@ export function ItemPanel({
 }) {
   const lines = gear?.appraised ? gear.props.length : 0
   const outfit = item.info?.outfit
+  const nature = item.info?.pet?.nature
   const icon = outfit ? outfitIcon(outfit.clothing) : itemIcon(item.itemId)?.file
+  const synthesis = gear ? SYNTHESIS[Math.min(lines, 4)] : item.info?.value
   return (
     <div
       className="w-[250px] p-2"
@@ -139,7 +149,12 @@ export function ItemPanel({
       >
         {itemName(item)}
       </p>
-      <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
+      {nature !== undefined && (
+        <p style={{ color: 'teal' }}>
+          {itemName(item)} + {pet?.level ?? 0}
+        </p>
+      )}
+      <Rule />
       <div className="flex items-start justify-between gap-2">
         <div className="space-y-0.5">
           <span
@@ -149,7 +164,15 @@ export function ItemPanel({
           >
             {item.bound ? 'Bound' : 'Unbound'}
           </span>
-          {gear && <Row label="Synthesis Value:" value={SYNTHESIS[Math.min(lines, 4)]} />}
+          {outfit && <Row label="Weapon Type:" value={outfit.weaponType} />}
+          {nature !== undefined && (
+            <Row
+              label="Nature:"
+              value={<span style={{ color: '#4caf50' }}>{NATURES[nature] ?? 'Unknown'}</span>}
+              color="#888888"
+            />
+          )}
+          {synthesis !== undefined && <Row label="Synthesis Value:" value={synthesis} />}
           <Row label="Item Type:" value={itemType(item)} />
         </div>
         {icon && (
@@ -162,6 +185,10 @@ export function ItemPanel({
       </div>
       {gear ? (
         <GearSections gear={gear} side={side} other={other?.gear} level={level} />
+      ) : outfit ? (
+        <OutfitSections outfit={outfit} required={item.info!.level} level={level} />
+      ) : nature !== undefined ? (
+        <PetSkills skills={pet?.skills ?? []} />
       ) : item.info?.gem || item.info?.enchant ? (
         <StoneSections info={item.info} level={level} />
       ) : (
@@ -235,7 +262,11 @@ function GearSections({
         <Section title="Core Attributes">
           <Row
             label={weapon ? 'Attack Power' : 'Defense'}
-            value={weapon ? `${gear.attack.min} - ${gear.attack.max}` : gear.defense}
+            value={
+              weapon
+                ? `${gear.attack.min - gear.enhanceAttack.min} - ${gear.attack.max - gear.enhanceAttack.max}`
+                : gear.defense
+            }
             mark={side && other ? compare(core(gear), core(other)) : undefined}
           />
         </Section>
@@ -277,16 +308,23 @@ function GearSections({
           })
         )}
       </Section>
-      {gear.enhanceMax > 0 && (
+      {gear.enhanceLevel > 0 && (
         <Section title="Enhancements">
           <Row label="Enhanced Level:" value={`${gear.enhanceLevel} / ${ENHANCE_CAP}`} />
-          {gear.maxHp > 0 && <Row label="Max Health:" value={`+${gear.maxHp}`} />}
+          {weapon ? (
+            <>
+              <Row label="Min Attack" value={signed(gear.enhanceAttack.min)} color={GREEN} />
+              <Row label="Max Attack" value={signed(gear.enhanceAttack.max)} color={GREEN} />
+            </>
+          ) : (
+            gear.maxHp > 0 && <Row label="Max HP" value={signed(gear.maxHp)} color={GREEN} />
+          )}
         </Section>
       )}
       {weapon && enchantments}
       {gear.sockets.length > 0 && (
         <Section title="Socketed Gems">
-          <ul aria-label="Socketed Gems" className="flex flex-col gap-0.5">
+          <ul aria-label="Socketed Gems" className="flex flex-col gap-1.5">
             {gear.sockets.map((gem, index) => (
               <Socket key={`${gem?.itemId ?? 'open'}-${index}`} gem={gem} />
             ))}
@@ -333,9 +371,9 @@ function Socket({ gem }: { gem: GearView['sockets'][number] }) {
         {icon && <img src={icon} alt="" className="size-[20px] object-contain" />}
       </span>
       {line ? (
-        <span className="flex flex-1 justify-between gap-2">
+        <span className="flex flex-col">
           <span className="text-[#a4bfd4]">{line.label}</span>
-          <span className="text-[#7fcf6e]">{line.value}</span>
+          <span style={{ color: GREEN }}>{line.value}</span>
         </span>
       ) : (
         <span className="text-[#9fb0c1]">Open Socket</span>
@@ -359,13 +397,139 @@ function StoneSections({ info, level }: { info: ItemInfo; level?: number }) {
           />
         )}
       </Section>
-      <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
+      <Rule />
       {lines.map((row) => {
         const line = statLine(row.name, row.value)
         return <Row key={row.name} label={line.label} value={line.value} color="#388ee9" />
       })}
     </>
   )
+}
+
+const STATS = ['Strength', 'Agility', 'Stamina'] as const
+/** Reborn's BMV lines (tooltip__outfit--str-description, ui__bmv_agility_desc, _stamina_desc). */
+const BMV = [
+  (n: number) => `Every ${n} points of Strength increases attack by 1% and block by 1 point`,
+  (n: number) => `Every ${n} points of Agility increases dodge by 1 and speed by 1%`,
+  (n: number) => `Every ${n} points of Stamina increases HP by 1% and chakra by 1%`,
+]
+/** lg_SkillDes_19xx: the Secret Technique imprint has a name only in lg_Skill_19xx. */
+const SECRET_TECHNIQUE =
+  "When the enemy's HP is low, you have a chance to finish them with one hit of a Secret Technique."
+/** Reborn's ISV colour: yellow at the cap, green within 90% of it, else whitesmoke. */
+const isvColor = (isv: number, max: number) =>
+  isv >= max ? '#ffff00' : isv >= 0.9 * max ? '#00ff00' : 'whitesmoke'
+
+/** An imprint's lines: "<name>:" then its effect (lg_Skill_<id> is "<name><br><effect>"). */
+export function imprintLines(skillId: number) {
+  const [name = `Skill ${skillId}`, ...rest] = (rawText(`lg_Skill_${skillId}`) ?? '')
+    .split(/<br\s*\/?>/i)
+    .map((part) => part.replace(/<[^>]*>/g, '').trim())
+    .filter(Boolean)
+  const effect = rest.length ? rest : skillId >= 1900 && skillId < 2000 ? [SECRET_TECHNIQUE] : []
+  return [`${name}:`, ...effect]
+}
+
+/**
+ * Reborn's outfit body: REQUIREMENTS, ISV (each stat at the viewer's level, its ISV and the recast
+ * cap), BMV and SKILL IMPRINTS. Our outfits have no stars, so STAR BONUSES never shows.
+ */
+function OutfitSections({
+  outfit,
+  required,
+  level,
+}: {
+  outfit: NonNullable<ItemInfo['outfit']>
+  required: number
+  level?: number
+}) {
+  const at = Math.max(1, level ?? 1)
+  return (
+    <>
+      <Section title="Requirements">
+        <Row label="Required Level:" value={required} warn={!!level && level < required} />
+      </Section>
+      <Section title="ISV">
+        {STATS.map((name, i) => {
+          const isv = outfit.isv[i]!
+          const max = outfit.maxIsv[i]!
+          const value = Math.floor((outfit.base[i]! + at * isv) / 100)
+          return (
+            <Row
+              key={name}
+              label={name}
+              value={
+                <span style={{ color: isvColor(isv, max) }}>
+                  {value} ({isv / 100}) | Max ({max / 100})
+                </span>
+              }
+            />
+          )
+        })}
+      </Section>
+      {outfit.bmv.some((n) => n > 0) && (
+        <Section title="BMV">
+          <Lines lines={outfit.bmv.flatMap((n, i) => (n > 0 ? [BMV[i]!(n / 100)] : []))} />
+        </Section>
+      )}
+      {outfit.skills.length > 0 && (
+        <Section title="Skill Imprints">
+          {outfit.skills.map((id) => (
+            <Lines key={id} lines={imprintLines(id)} />
+          ))}
+        </Section>
+      )}
+    </>
+  )
+}
+
+/** Reborn's item-info__skill-line: light-blue italic lines. */
+function Lines({ lines }: { lines: string[] }) {
+  return (
+    <div className="mb-1 flex flex-col text-[11px] text-[#7ed7ff] italic">
+      {lines.map((line, i) => (
+        <p key={i}>{line}</p>
+      ))}
+    </div>
+  )
+}
+
+const PET_ROWS = [
+  { kind: 1, label: 'Aura' },
+  { kind: 2, label: 'Aid' },
+  { kind: 3, label: 'Passive' },
+] as const
+
+/** Reborn's pet body: a rule, then Aura, Aid and Passive with the skill icons of each. */
+function PetSkills({ skills }: { skills: { skillId: number; kind: number }[] }) {
+  return (
+    <>
+      <Rule />
+      {PET_ROWS.map(({ kind, label }) => (
+        <p
+          key={kind}
+          aria-label={`${label} skills`}
+          className="flex min-h-[26px] items-center gap-1"
+        >
+          {label}:
+          {skills
+            .filter((skill) => skill.kind === kind)
+            .map(({ skillId }) => (
+              <img
+                key={skillId}
+                src={petSkillIcon(skillId)}
+                alt={plainText(`lg_Skill_${skillId}`, `Skill ${skillId}`)}
+                className="mr-1 size-[24px]"
+              />
+            ))}
+        </p>
+      ))}
+    </>
+  )
+}
+
+function Rule() {
+  return <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
 }
 
 function Section({ title, children }: { title: string; children: ReactNode }) {

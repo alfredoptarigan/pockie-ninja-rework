@@ -105,4 +105,14 @@ describe('gear view for the Reborn item tooltip', () => {
       { name: 'AbsAddAtkMulEquip', value: 50 },
     ])
   })
+  it("splits what enhancement adds off the weapon's attack (Reborn's ENHANCEMENTS)", () => {
+    const base = gearView(row('i250101') as never)!
+    const enhanced = gearView({ ...row('i250101'), enhanceLevel: 6 } as never)!
+    expect(base.enhanceAttack).toEqual({ min: 0, max: 0 })
+    expect(enhanced.enhanceAttack).toEqual({
+      min: enhanced.attack.min - base.attack.min,
+      max: enhanced.attack.max - base.attack.max,
+    })
+    expect(enhanced.enhanceAttack.max).toBeGreaterThan(0)
+  })
 })

@@ -41,6 +41,7 @@ const helmetGear: GearView = {
   attack: { min: 0, max: 0 },
   defense: 40,
   maxHp: 0,
+  enhanceAttack: { min: 0, max: 0 },
   inscription: [],
   sockets: [ruby, null],
   maxSockets: 2,

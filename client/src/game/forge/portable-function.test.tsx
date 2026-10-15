@@ -3,7 +3,7 @@ import type { GearView } from '@pockie/shared'
 import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
-import { character } from '../../test/game'
+import { character, outfitStats } from '../../test/game'
 import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { ToastHost } from '../toast'
 import type { InventoryItem } from '../types'
@@ -27,7 +27,7 @@ const outfitInfo = (plus: number) => ({
   w: 2,
   h: 2,
   class: 'AvatarItem',
-  outfit: { clothing: 1, plus },
+  outfit: { ...outfitStats, clothing: 1, plus },
 })
 const other = (itemClass: string, stack = 1) => ({
   kind: 'other' as const,
@@ -62,6 +62,7 @@ const weaponGear: GearView = {
   attack: { min: 14, max: 16 },
   defense: 0,
   maxHp: 0,
+  enhanceAttack: { min: 0, max: 0 },
   inscription: [],
   sockets: [],
   maxSockets: 3,

@@ -136,8 +136,12 @@ export interface ItemInfo {
   h: number
   /** The item table class ("EquipItem", "FoodItem"...). */
   class: string
-  /** Outfits (AvatarItem): clothing and Reborn's "+N". */
-  outfit?: { clothing: number; plus: number }
+  /** Outfits (AvatarItem): clothing, Reborn's "+N", ISV, BMV and skill imprints. */
+  outfit?: BagItemInfo['outfit']
+  /** Pet items: the species' nature. */
+  pet?: BagItemInfo['pet']
+  /** Reborn's Synthesis Value when the item has one. */
+  value?: number
   /** Gems (JewelItem): the stat a socket gets and the lowest gear level. */
   gem?: BagItemInfo['gem']
   /** Enchanting Stones (MagicItem): their lines, the slots they fit and the lowest gear level. */
