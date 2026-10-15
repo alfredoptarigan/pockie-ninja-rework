@@ -160,7 +160,6 @@ export function Equipment({
   gear,
   held,
   outfitMenuOpen,
-  onEffects,
   onSlot,
   onOutfitMenu,
   onTip,
@@ -170,8 +169,6 @@ export function Equipment({
   gear: Record<string, GearView>
   held: InventoryItem | null
   outfitMenuOpen: boolean
-  /** Opens the active effects panel. */
-  onEffects: () => void
   /** A click on a slot, with what it wears. */
   onSlot: (slot: string, worn?: InventoryItem) => void
   onOutfitMenu: (event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void
@@ -193,12 +190,6 @@ export function Equipment({
           </>
         )}
         <BattlePower />
-        <GameButton
-          onClick={onEffects}
-          className="absolute top-[115px] left-[4px] h-[42px] w-[45px] min-w-0! px-0!"
-        >
-          Effects
-        </GameButton>
         <GameButton
           onClick={() => openWindow('talents')}
           className="absolute top-[160px] left-[4px] h-[42px] w-[45px] min-w-0! px-0!"

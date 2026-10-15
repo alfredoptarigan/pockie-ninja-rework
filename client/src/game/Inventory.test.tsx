@@ -659,14 +659,6 @@ describe('Inventory equipment', () => {
     expect(document.querySelector('img[src^="/assets/reborn/poses/"]')).toBeNull()
   })
 
-  it('opens the active effects in a solid panel from the Effects button', async () => {
-    renderBag([], () => ({ 'GET /api/game/buffs': () => json({ buffs: [], titles: [] }) }))
-    await userEvent.click(await screen.findByRole('button', { name: 'Effects' }))
-    const panel = await screen.findByRole('dialog', { name: 'Active effects' })
-    expect(panel).toHaveClass('game-panel-1')
-    expect(panel).toHaveTextContent('No active effects.')
-  }, 15_000)
-
   it('rotates the slot 1 bloodline art behind the pose', async () => {
     renderBag([], () => ({
       'GET /api/game/bloodlines': () =>
