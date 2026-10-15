@@ -63,7 +63,7 @@ describe('weekly activity hooks', () => {
   })
 
   it('a toll gate counts only when cleared', async () => {
-    await ninja.give('i270100', { equippedSlot: 'Weapon' })
+    await ninja.give('i260100', { equippedSlot: 'Weapon' })
     await ninja.ready(20)
     await ninja.client.post('/api/game/gates/enter', { gateId: 100001 })
     for (let point = 0; point < 9; point++)

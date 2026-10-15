@@ -38,7 +38,7 @@ const MINUTE = 60_000
 beforeEach(async () => {
   await truncateAll(db)
   ninja = await setUpNinja(db)
-  await ninja.give('i270100', { equippedSlot: 'Weapon' })
+  await ninja.give('i260100', { equippedSlot: 'Weapon' })
   await ninja.ready(30, FIELD)
 })
 afterEach(() => ninja.app.close())

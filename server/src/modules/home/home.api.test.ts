@@ -85,7 +85,7 @@ describe('Home farm', () => {
   it('keeps the crop in the field when the bag is full', async () => {
     await plant(0)
     await ripen()
-    const filler = 'i270100'
+    const filler = 'i260100'
     const rows = Math.floor(BAG_CELLS / itemCells(filler))
     await db
       .insert(inventoryItems)

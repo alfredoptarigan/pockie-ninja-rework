@@ -19,7 +19,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists), Fire Village; level 1 max HP 220.
+  // Clothing 3: Ggio Vega (sharp in Reborn), Fire Village; level 1 max HP 220.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,

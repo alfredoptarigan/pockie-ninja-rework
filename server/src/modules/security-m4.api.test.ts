@@ -28,7 +28,7 @@ describe('the arena defence snapshot', () => {
     const d = await setup.ninja('Defender')
     const [fists] = await db
       .insert(inventoryItems)
-      .values({ characterId: d.id, itemId: 'i270100' })
+      .values({ characterId: d.id, itemId: 'i260100' })
       .returning()
     expect((await d.client.post(`/api/game/items/${fists!.id}/equip`)).statusCode).toBe(200)
     await a.join({ tier: 2, score: 100000 })

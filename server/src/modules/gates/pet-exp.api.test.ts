@@ -23,7 +23,7 @@ vi.mock('@pockie/game-core', async (original) => ({
 vi.setConfig({ testTimeout: 60_000, hookTimeout: 60_000 })
 
 const { db, close } = createTestDb()
-const WEAPON = 'i270100'
+const WEAPON = 'i260100'
 const GATE = 100001
 const MASTER_LEVEL = 20
 

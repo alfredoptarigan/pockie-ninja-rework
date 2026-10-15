@@ -17,7 +17,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega, male, fists. Starts in the Fire Village (111).
+  // Clothing 3: Ggio Vega, male, sharp (Reborn). Starts in the Fire Village (111).
   const response = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -31,7 +31,7 @@ afterAll(() => close())
 
 async function goToForgeHighlandsWithFists() {
   await db.update(characters).set({ sceneId: 2101 }).where(eq(characters.id, characterId))
-  await db.insert(inventoryItems).values({ characterId, itemId: 'i270100', equippedSlot: 'Weapon' })
+  await db.insert(inventoryItems).values({ characterId, itemId: 'i260100', equippedSlot: 'Weapon' })
 }
 
 describe('GET /api/game/scene', () => {
@@ -130,14 +130,14 @@ describe('first fights after the Fire Village tutorial', () => {
   const FIGHTS = 20
   const MIN_WINS = 18
 
-  it('beats the Sunflower almost every time with the newbie fists', async () => {
-    // 90000-90003: talk to the Elder, open the newbie pack, equip the fists, talk again.
+  it('beats the Sunflower almost every time with the newbie sharp weapon', async () => {
+    // 90000-90003: talk to the Elder, open the newbie pack, equip the sharp weapon, talk again.
     await client.post('/api/game/npcs/n11001/talk')
     const bag = async () => (await client.get('/api/game/inventory')).json().items
     const pack = (await bag()).find((i: { itemId: string }) => i.itemId === 'i159104')
     await client.post(`/api/game/items/${pack.id}/use`)
     await client.post('/api/game/quests/90002/accept')
-    const fists = (await bag()).find((i: { itemId: string }) => i.itemId === 'i270100')
+    const fists = (await bag()).find((i: { itemId: string }) => i.itemId === 'i260100')
     expect((await client.post(`/api/game/items/${fists.id}/equip`)).statusCode).toBe(200)
     await client.post('/api/game/quests/90003/accept')
     await client.post('/api/game/npcs/n11001/talk')

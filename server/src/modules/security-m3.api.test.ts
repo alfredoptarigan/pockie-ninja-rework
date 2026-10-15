@@ -15,7 +15,7 @@ import { errorCode, setUpNinja } from './gates/test-setup.js'
 
 const { db, close } = createTestDb()
 let ninja: Awaited<ReturnType<typeof setUpNinja>>
-const WEAPON = 'i270100'
+const WEAPON = 'i260100'
 
 beforeEach(async () => {
   await truncateAll(db)

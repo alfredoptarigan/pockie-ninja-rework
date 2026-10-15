@@ -128,7 +128,7 @@ describe.each(villages)('$name Village tutorial', (v) => {
   it(
     `plays ${v.base} → ${v.base + 15} and unlocks main quest ${v.main}`,
     async () => {
-      // Clothing 3 (Ggio Vega) fights with fists.
+      // Clothing 3 (Ggio Vega) fights with sharp weapons (Reborn).
       const created = await client.post('/api/game/characters', {
         name: 'Ninja_01',
         gender: 0,
@@ -144,7 +144,7 @@ describe.each(villages)('$name Village tutorial', (v) => {
       done(await talk(v.hub), 0)
       done(await useItem('i159104'), 1)
       await accept(q(2))
-      done(await ok(`/api/game/items/${(await itemRow('i270100'))!.id}/equip`), 2)
+      done(await ok(`/api/game/items/${(await itemRow('i260100'))!.id}/equip`), 2)
       await accept(q(3))
       done(await talk(v.hub), 3)
 

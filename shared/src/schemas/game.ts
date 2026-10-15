@@ -59,7 +59,7 @@ export interface Character {
   /** Reborn's Visual Outfit: the clothing drawn instead of `clothing`; null = the worn one. */
   visualClothing: number | null
   avatarId: number
-  /** The outfit's weapon class (UsePopsinger bits: 1 Blunt, 2 Sharp, 4 Fists). */
+  /** The outfit's weapon class (UsePopsinger bits: 1 Blunt, 2 Sharp, 4 Fists, 7 Any; Reborn's Weapon Type). */
   weaponClass: number
   level: number
   exp: number

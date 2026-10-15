@@ -23,7 +23,7 @@ beforeEach(async () => {
     email: 'player@example.com',
     password: 'believe-it',
   })
-  // Clothing 3: Ggio Vega (fists), Fire Village (111), level 1 max HP 220.
+  // Clothing 3: Ggio Vega (sharp in Reborn), Fire Village (111), level 1 max HP 220.
   const created = await client.post('/api/game/characters', {
     name: 'Ninja_01',
     gender: 0,
@@ -121,7 +121,7 @@ async function race(requests: (() => Promise<LightMyRequestResponse>)[]) {
 
 async function inField(values: Partial<typeof characters.$inferInsert> = {}) {
   await update({ sceneId: 2101, ...values })
-  await giveItem('i270100', { equippedSlot: 'Weapon' })
+  await giveItem('i260100', { equippedSlot: 'Weapon' })
 }
 
 describe('concurrent actions on one character', () => {

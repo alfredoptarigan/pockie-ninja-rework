@@ -179,7 +179,7 @@ describe('DayTaskSystem daily board', () => {
       .where(eq(characters.id, id))
     await db
       .insert(inventoryItems)
-      .values({ characterId: id, itemId: 'i299902', equippedSlot: 'Weapon', durability: 1 })
+      .values({ characterId: id, itemId: 'i299901', equippedSlot: 'Weapon', durability: 1 })
     const fight = await client.post('/api/game/fight', { monsterId: 'n33016' })
     expect(fight.statusCode).toBe(200)
     const [q] = await db
@@ -220,7 +220,7 @@ describe('DayTaskSystem daily board', () => {
     await advance(2260102)
     await db
       .insert(inventoryItems)
-      .values(Array.from({ length: 150 }, () => ({ characterId: id, itemId: 'i270100' })))
+      .values(Array.from({ length: 150 }, () => ({ characterId: id, itemId: 'i260100' })))
     const response = await handIn(2260102)
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('bag_full')

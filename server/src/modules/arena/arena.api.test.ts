@@ -206,7 +206,7 @@ describe('promotion', () => {
     // Bare hands deal 1 damage and lose on the 60 action cap; fists win.
     await db
       .insert(inventoryItems)
-      .values({ characterId: a.id, itemId: 'i270100', equippedSlot: 'Weapon' })
+      .values({ characterId: a.id, itemId: 'i260100', equippedSlot: 'Weapon' })
     let body
     for (let i = 0; i < 10 && !body?.won; i++) {
       const response = await a.client.post('/api/game/arena/boss')
@@ -275,7 +275,7 @@ describe('the defence snapshot', () => {
     const before = (await a.arena()).snapshot as { fighter: { maxAttack: number } }
     const [fists] = await db
       .insert(inventoryItems)
-      .values({ characterId: a.id, itemId: 'i270100' })
+      .values({ characterId: a.id, itemId: 'i260100' })
       .returning()
     expect((await a.client.post(`/api/game/items/${fists!.id}/equip`)).statusCode).toBe(200)
     // The coordinator calls this from the equip route (decision 9).
@@ -285,7 +285,7 @@ describe('the defence snapshot', () => {
       look: { weaponItemId?: string }
     }
     expect(after.fighter.maxAttack).toBeGreaterThan(before.fighter.maxAttack)
-    expect(after.look.weaponItemId).toBe('i270100')
+    expect(after.look.weaponItemId).toBe('i260100')
   })
 
   it('is a no-op for a ninja who never opened the arena', async () => {

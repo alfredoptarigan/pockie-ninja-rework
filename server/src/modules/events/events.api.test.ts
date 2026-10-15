@@ -82,7 +82,7 @@ describe('events rewards', () => {
   it('refuses a full bag and preserves the login claim', async () => {
     await db
       .insert(inventoryItems)
-      .values(Array.from({ length: 150 }, () => ({ characterId: id, itemId: 'i270100' })))
+      .values(Array.from({ length: 150 }, () => ({ characterId: id, itemId: 'i260100' })))
     const response = await claim('login/claim')
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('bag_full')
@@ -182,7 +182,7 @@ describe('events rewards', () => {
     await activity('tollGate')
     await db
       .insert(inventoryItems)
-      .values(Array.from({ length: 150 }, () => ({ characterId: id, itemId: 'i270100' })))
+      .values(Array.from({ length: 150 }, () => ({ characterId: id, itemId: 'i260100' })))
     expect((await claim('weekly/milestone/50')).json().error.code).toBe('bag_full')
     const [weekly] = await db
       .select()

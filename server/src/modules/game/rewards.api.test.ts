@@ -142,7 +142,7 @@ describe('rewards of quests completed by other actions', () => {
     expect(questHandInSchema.array().parse(used.rewards)).toEqual([tutorialCoupons(90001, 5)])
 
     await client.post('/api/game/quests/90002/accept')
-    const fists = await bagItem('i270100')
+    const fists = await bagItem('i260100')
     const equipped = (await client.post(`/api/game/items/${fists.id}/equip`)).json()
     expect(questCompletionSchema.parse(equipped)).toEqual({
       completed: [90002],
@@ -159,7 +159,7 @@ describe('rewards of quests completed by other actions', () => {
     await db.update(characters).set({ sceneId: 2101 }).where(eq(characters.id, characterId))
     await db
       .insert(inventoryItems)
-      .values({ characterId, itemId: 'i270100', equippedSlot: 'Weapon' })
+      .values({ characterId, itemId: 'i260100', equippedSlot: 'Weapon' })
 
     const body = (await client.post('/api/game/fight', { monsterId: 'n33017' })).json()
     expect(body.won).toBe(true)

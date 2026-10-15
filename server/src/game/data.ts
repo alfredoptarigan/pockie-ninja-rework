@@ -59,7 +59,8 @@ export function creationOutfits() {
   return load<Row[]>('creation-outfits').map((row) => ({
     clothing: Number(row.Cloth),
     gender: Number(row.Sex) as 0 | 1,
-    weaponClass: Number(row.Pos),
+    // Reborn's Weapon Type where it ships the outfit (avatarStats), not creatrole.tab's Pos.
+    weaponClass: avatarStats(Number(row.AvatarID)).Popsinger,
     boost: outfitBoost(avatarStats(Number(row.AvatarID))),
   }))
 }
@@ -986,6 +987,7 @@ const rebornOutfitsSchema = z.object({
       isv: triple,
       bmv: triple,
       imprint: int.min(2000).max(2092).nullable(),
+      weaponType: z.enum(['Sharp', 'Blunt', 'Fists', 'Any']),
     }),
   ),
 })
@@ -1010,7 +1012,13 @@ export function outfitOfAvatar(avatarId: number) {
   return outfit && { ...outfit, reborn: rebornOutfits().outfits[String(outfit.clothing)] }
 }
 
-/** The avatar row with Reborn's ISV (Up and the +N base) and BMV, when Reborn has the outfit. */
+/** Reborn's Weapon Type as a UsePopsinger job mask (1 Blunt, 2 Sharp, 4 Fists; Any fits all). */
+const WEAPON_CLASS = { Blunt: 1, Sharp: 2, Fists: 4, Any: 7 } as const
+
+/**
+ * The avatar row with Reborn's ISV (Up and the +N base), BMV and Weapon Type, when Reborn has the
+ * outfit.
+ */
 function rebornOutfitStats(avatarId: number, row: AvatarStats): AvatarStats {
   const outfit = outfitOfAvatar(avatarId)
   if (!outfit?.reborn) return row
@@ -1031,5 +1039,6 @@ function rebornOutfitStats(avatarId: number, row: AvatarStats): AvatarStats {
     DodgeAdd: agiBmv!,
     MaxHPAdd: staBmv!,
     MaxMPAdd: staBmv!,
+    Popsinger: WEAPON_CLASS[outfit.reborn.weaponType],
   }
 }

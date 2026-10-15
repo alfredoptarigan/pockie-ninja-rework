@@ -1,6 +1,6 @@
 import { OUTFIT_STARS } from '@pockie/shared'
 import { describe, expect, it } from 'vitest'
-import { rebornOutfits } from './data.js'
+import { avatarStats, creationOutfits, rebornOutfits } from './data.js'
 import { outfitBonuses, outfitIsv, outfitOf, outfitRequiredLevel } from './outfit.js'
 
 it("shares Reborn's imported avatarStars with the client", () => {
@@ -83,5 +83,26 @@ describe('outfitBonuses', () => {
     expect(outfitBonuses({ ...ichigo, stars: 3 }, 10)).not.toHaveProperty('skillAdd0')
     // 4 stars: Fire Master 15% -> 20%.
     expect(outfitBonuses({ ...ichigo, stars: 4 }, 10)).toMatchObject({ skillAdd0: 500 })
+  })
+})
+
+describe("the outfit's Weapon Type (Reborn serverConfig.avatars weaponType)", () => {
+  const weaponClass = (avatarId: number) => avatarStats(avatarId).Popsinger
+
+  it("is Reborn's at every +N, as the UsePopsinger mask (1 Blunt, 2 Sharp, 4 Fists, 7 Any)", () => {
+    // Clothing 3 fought with Fists in 2011; Reborn makes it Sharp.
+    expect(weaponClass(3)).toBe(2)
+    expect(weaponClass(3003)).toBe(2)
+    // Clothing 65 has no weaponType in Reborn, which its client reads as Any.
+    expect(weaponClass(65)).toBe(7)
+  })
+
+  it('keeps the 2011 class of an outfit Reborn does not ship', () => {
+    expect(weaponClass(25)).toBe(2)
+  })
+
+  it('drives the creation screen and the Weapon Type line', () => {
+    expect(creationOutfits().find((o) => o.clothing === 39)?.weaponClass).toBe(2)
+    expect(creationOutfits().find((o) => o.clothing === 65)?.weaponClass).toBe(7)
   })
 })
