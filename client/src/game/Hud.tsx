@@ -13,6 +13,7 @@ import {
   type ReactNode,
 } from 'react'
 import { Link } from 'react-router'
+import { ApprenticeLayer } from './apprentice'
 import { ArenaButton } from './arena'
 import { SoundToggle } from './audio'
 import { SettingsButton } from './settings'
@@ -417,6 +418,7 @@ export function PlayerCard({ character }: { character: Character }) {
       <TwentyMinuteRewardButton className="absolute top-[39px] left-[221px]" />
       <TeamHud character={character} />
       <TradeLayer character={character} />
+      <ApprenticeLayer />
     </section>
   )
 }

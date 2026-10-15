@@ -1,8 +1,10 @@
 // Reborn's Player List (`vy`, 190x218, minimizable): shown in every field scene, not in villages.
 // Tabs Area / Friend / Apprentice; Area pages the scene's players by 7 (Lv., name, Invite). Friend
-// and Apprentice are empty panels in Reborn too. Invite is our team invite, where teams form.
+// is an empty panel in Reborn too; Apprentice (empty in Reborn) is our master / apprentice list.
+// Invite is our team invite, where teams form.
 import type { Character } from '@pockie/shared'
 import { useId, useState } from 'react'
+import { ApprenticeTab } from '../apprentice'
 import { errorMessage } from '../api'
 import { Tabs } from '../skin'
 import { teamScene, useTeamAction } from '../teams/api'
@@ -100,6 +102,7 @@ export function PlayerList({ character }: { character: Character }) {
             className="game-panel-1 flex h-[194px] w-[190px] flex-col items-center pt-[3px]"
           >
             {tab === 'area' && <AreaTab character={character} onView={setViewing} />}
+            {tab === 'apprentice' && <ApprenticeTab onView={setViewing} />}
           </div>
         </div>
       )}

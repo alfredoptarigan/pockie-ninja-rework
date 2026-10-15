@@ -620,11 +620,10 @@ describe('Inventory equipment', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
-  it('shows the Reborn side buttons, those without a feature disabled', async () => {
+  it('shows the Reborn side buttons', async () => {
     renderBag([])
-    for (const name of ['Compose', 'Multi Sell', 'Collection', 'Wardrobe', 'Sort'])
+    for (const name of ['Compose', 'Multi Sell', 'Collection', 'Wardrobe', 'Reroll', 'Sort'])
       expect(await screen.findByRole('button', { name })).toBeEnabled()
-    expect(screen.getByRole('button', { name: 'Reroll' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Talent' })).toBeEnabled()
     expect(screen.getByRole('button', { name: 'Blood Limit' })).toBeEnabled()
     const hide = screen.getByRole('checkbox', { name: 'Hide' })

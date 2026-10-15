@@ -77,6 +77,7 @@ function noticeText(notice: Notice): string | null {
     case 'teamChanged':
     case 'clanChanged':
     case 'trade':
+    case 'apprentice':
       return notice.message ?? null
     case 'marketSale':
       return 'One of your Market listings has sold.'

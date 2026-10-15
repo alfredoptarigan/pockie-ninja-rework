@@ -2731,3 +2731,22 @@ export const characterFestivalShop = pgTable(
   },
   (t) => [check('character_festival_shop_tokens', sql`${t.tokens} >= 0`)],
 )
+
+// Master and Apprentice (migration 0057): one row per apprentice, so an apprentice has one master.
+// Changes lock both character rows in id order first.
+export const apprenticeships = pgTable(
+  'apprenticeships',
+  {
+    apprenticeId: uuid('apprentice_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    masterId: uuid('master_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('apprenticeships_master_idx').on(t.masterId),
+    check('apprenticeships_not_self', sql`${t.apprenticeId} <> ${t.masterId}`),
+  ],
+)

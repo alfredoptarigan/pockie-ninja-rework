@@ -2,6 +2,7 @@
 // and the whole bag, which goes straight into the inventory cache.
 import type { BagSortInput, Character } from '@pockie/shared'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import type { PetRerollOutcome } from '../../../shared/src/schemas/pet-reroll'
 import { api } from '../lib/api'
 import { gameKeys, useApplyResult } from './api'
 import type { InventoryItem } from './types'
@@ -64,3 +65,8 @@ export const useSetActiveSet = () =>
 /** Equips (Reborn's click on a slot while holding the item); the server answers with the bag. */
 export const useEquipFromBag = () =>
   useBagAction((id: string) => post<BagResult>(`${item(id)}/equip`))
+/** Reborn's rerollPet: rolls a bag pet item toward `target` within `maxStones`. */
+export const usePetReroll = () =>
+  useBagAction((input: { inventoryId: string; target: string; maxStones: number }) =>
+    post<BagResult & { reroll: PetRerollOutcome }>('/api/game/pet-reroll', input),
+  )

@@ -400,6 +400,13 @@
       "when": 1792200000000,
       "tag": "0056_special_shops",
       "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "7",
+      "when": 1792210000000,
+      "tag": "0057_pet_reroll_apprentice",
+      "breakpoints": true
     }
   ]
 }

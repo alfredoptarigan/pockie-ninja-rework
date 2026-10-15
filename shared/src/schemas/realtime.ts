@@ -190,6 +190,15 @@ export const noticeSchema = z.discriminatedUnion('kind', [
     done: z.boolean().optional(),
     message: z.string().max(CHAT_MAX_LENGTH).optional(),
   }),
+  /**
+   * A master / apprentice request or bond of the player changed: refetch it. `rewarded` = a
+   * graduation paid out (the currencies changed). Optional English line for the chat.
+   */
+  z.object({
+    kind: z.literal('apprentice'),
+    rewarded: z.boolean().optional(),
+    message: z.string().max(CHAT_MAX_LENGTH).optional(),
+  }),
 ])
 export type Notice = z.infer<typeof noticeSchema>
 export type NoticeKind = Notice['kind']

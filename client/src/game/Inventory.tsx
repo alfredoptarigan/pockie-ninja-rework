@@ -26,6 +26,7 @@ import {
 import { Equipment, isWorn, SetBar } from './inventory/EquipmentSlots'
 import { useClearVisualOutfit, useSetVisualOutfit } from './inventory/outfit-api'
 import { itemName, wornOutfit } from './inventory/outfits'
+import { Reroll } from './inventory/Reroll'
 import { Wardrobe } from './inventory/Wardrobe'
 import { attempt, useBagRequests } from './inventory/requests'
 import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
@@ -84,6 +85,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const [modal, setModal] = useState<Modal | null>(null)
   const [multiSell, setMultiSell] = useState(false)
   const [wardrobeOpen, setWardrobeOpen] = useState(false)
+  const [rerollOpen, setRerollOpen] = useState(false)
   const setVisual = useSetVisualOutfit()
   const clearVisual = useClearVisualOutfit()
   const [selected, setSelected] = useState<string[]>([])
@@ -331,8 +333,18 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           setMultiSell(true)
         }}
         onWardrobe={() => setWardrobeOpen(true)}
+        onReroll={() => setRerollOpen(true)}
         onSort={() => setModal({ kind: 'sort' })}
       />
+      {rerollOpen && (
+        <Reroll
+          held={held}
+          items={items}
+          stones={character?.stone ?? 0}
+          onStored={() => setHeldId(null)}
+          onClose={() => setRerollOpen(false)}
+        />
+      )}
       {wardrobeOpen && (
         <Wardrobe
           held={held}

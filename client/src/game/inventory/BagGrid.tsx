@@ -302,16 +302,17 @@ export function OutfitPlus({ plus, under }: { plus: number; under: boolean }) {
 
 /**
  * Reborn's side column (x 288 from y 331, 30 apart). Compose opens the Portable Function,
- * Collection the Collection window, Wardrobe the Wardrobe panel. ponytail: Reroll has no system
- * behind it yet (pets are not items), so it stays disabled.
+ * Collection the Collection window, Wardrobe the Wardrobe panel, Reroll the pet Reroll panel.
  */
 export function SideButtons({
   onMultiSell,
   onWardrobe,
+  onReroll,
   onSort,
 }: {
   onMultiSell: () => void
   onWardrobe: () => void
+  onReroll: () => void
   onSort: () => void
 }) {
   const openWindow = useOpenWindow()
@@ -320,7 +321,7 @@ export function SideButtons({
     { label: 'Multi Sell', onClick: onMultiSell },
     { label: 'Collection', onClick: () => openWindow('collection') },
     { label: 'Wardrobe', onClick: onWardrobe },
-    { label: 'Reroll' },
+    { label: 'Reroll', onClick: onReroll },
     { label: 'Sort', onClick: onSort },
   ]
   return (
