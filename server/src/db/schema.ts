@@ -2508,3 +2508,212 @@ export const tradeLogs = pgTable(
     index('trade_logs_partner_idx').on(t.partnerId, t.createdAt),
   ],
 )
+
+// Arena extras (modules/arena, migration 0055): Reborn's Buy Tickets, Arena / Squad Arena Weekly
+// Rewards, Squad Arena 3v3 and the Championship. One row per ninja holds the new balances.
+export const arenaExtras = pgTable(
+  'arena_extras',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    // Bought tickets (Buy Arena / Squad Arena Tickets); they do not expire.
+    arenaTickets: integer('arena_tickets').notNull().default(0),
+    squadTickets: integer('squad_tickets').notNull().default(0),
+    // Squad Arena "Team Coins" and Championship "Hero Coins".
+    teamCoins: integer('team_coins').notNull().default(0),
+    heroCoins: integer('hero_coins').notNull().default(0),
+    // Championship record (Wins / Losses, Top 3 finishes).
+    championshipWins: integer('championship_wins').notNull().default(0),
+    championshipLosses: integer('championship_losses').notNull().default(0),
+    championshipTop3: integer('championship_top3').notNull().default(0),
+  },
+  (t) => [
+    check(
+      'arena_extras_amounts',
+      sql`${t.arenaTickets} >= 0 and ${t.squadTickets} >= 0 and ${t.teamCoins} >= 0 and ${t.heroCoins} >= 0 and ${t.championshipWins} >= 0 and ${t.championshipLosses} >= 0 and ${t.championshipTop3} >= 0`,
+    ),
+  ],
+)
+
+// Weekly Rewards points (arena or squad ladder) per UTC week; the hourly job adds them.
+export const arenaWeeklyPoints = pgTable(
+  'arena_weekly_points',
+  {
+    kind: text('kind').notNull(),
+    week: date('week').notNull(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    points: integer('points').notNull().default(0),
+  },
+  (t) => [
+    primaryKey({ columns: [t.kind, t.week, t.characterId] }),
+    index('arena_weekly_points_rank_idx').on(t.kind, t.week, t.points.desc().nullsFirst()),
+    index('arena_weekly_points_character_idx').on(t.characterId),
+    check('arena_weekly_points_kind', sql`${t.kind} in ('arena', 'squad')`),
+    check('arena_weekly_points_points', sql`${t.points} >= 0`),
+  ],
+)
+
+// Hours already paid (the job and the lazy settle insert the hour first: once per hour).
+export const arenaWeeklyHours = pgTable(
+  'arena_weekly_hours',
+  {
+    kind: text('kind').notNull(),
+    hour: timestamp('hour', { withTimezone: true }).notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.kind, t.hour] })],
+)
+
+// Weekly reward claims: one per ninja, ladder and week.
+export const arenaWeeklyClaims = pgTable(
+  'arena_weekly_claims',
+  {
+    kind: text('kind').notNull(),
+    week: date('week').notNull(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    claimedAt: createdAt(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.kind, t.week, t.characterId] }),
+    index('arena_weekly_claims_character_idx').on(t.characterId),
+  ],
+)
+
+/** One Squad Arena opponent of the rolled list and whether it was beaten. */
+export interface SquadOpponentRow {
+  characterId: string
+  won: boolean
+}
+/** A Squad Arena history line from this ninja's side. */
+export interface SquadHistoryRow {
+  name: string
+  scoreDelta: number
+  /** True when this ninja attacked. */
+  challenged: boolean
+  won: boolean
+  at: string
+}
+
+// Squad Arena 3v3: the squad (three equipment sets with different main stats), score, the free
+// tickets used on the UTC day `day`, the 18 rolled opponents and the last history lines.
+export const squadPlayers = pgTable(
+  'squad_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    loadouts: smallint('loadouts')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    score: integer('score').notNull().default(93500),
+    scoreAt: timestamp('score_at', { withTimezone: true }).notNull().defaultNow(),
+    fights: integer('fights').notNull().default(0),
+    wins: integer('wins').notNull().default(0),
+    day: date('day'),
+    ticketsUsed: smallint('tickets_used').notNull().default(0),
+    opponents: jsonb('opponents').$type<SquadOpponentRow[]>().notNull().default([]),
+    history: jsonb('history').$type<SquadHistoryRow[]>().notNull().default([]),
+  },
+  (t) => [
+    index('squad_players_rank_idx').on(t.score.desc().nullsFirst(), t.scoreAt, t.characterId),
+    check(
+      'squad_players_counts',
+      sql`${t.score} >= 0 and ${t.wins} between 0 and ${t.fights} and ${t.ticketsUsed} >= 0 and cardinality(${t.loadouts}) in (0, 3)`,
+    ),
+  ],
+)
+
+// Championship (Reborn scene 6002): one 16-slot bracket per UTC day. Registration, then one round
+// at each `roundsAt` time, settled once each by the first request (or the job) after it.
+export const championships = pgTable(
+  'championships',
+  {
+    id: id(),
+    day: date('day').notNull(),
+    registrationEndsAt: timestamp('registration_ends_at', { withTimezone: true }).notNull(),
+    battlingEndsAt: timestamp('battling_ends_at', { withTimezone: true }).notNull(),
+    cooldownEndsAt: timestamp('cooldown_ends_at', { withTimezone: true }).notNull(),
+    // Rounds already fought (0-4: Round of 16, Quarterfinals, Semifinals, Final).
+    roundsSettled: smallint('rounds_settled').notNull().default(0),
+    winnerId: uuid('winner_id').references(() => characters.id, { onDelete: 'set null' }),
+    winnerName: text('winner_name'),
+  },
+  (t) => [
+    uniqueIndex('championships_day_key').on(t.day),
+    check('championships_rounds', sql`${t.roundsSettled} between 0 and 4`),
+  ],
+)
+
+// A registered ninja and the fighter they entered with (kept for a ninja who is gone; fights use
+// the ninja as they are then).
+export const championshipSlots = pgTable(
+  'championship_slots',
+  {
+    championshipId: uuid('championship_id')
+      .notNull()
+      .references(() => championships.id, { onDelete: 'cascade' }),
+    slot: smallint('slot').notNull(),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    name: text('name').notNull(),
+    level: smallint('level').notNull(),
+    clothing: smallint('clothing').notNull(),
+    snapshot: jsonb('snapshot').$type<ArenaSnapshot>().notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.championshipId, t.slot] }),
+    uniqueIndex('championship_slots_character_key').on(t.championshipId, t.characterId),
+    index('championship_slots_character_idx').on(t.characterId),
+    check('championship_slots_slot', sql`${t.slot} between 0 and 15`),
+  ],
+)
+
+// Bracket matches: slots fighting (-1 = nobody, a bye), the winner and the replay.
+export const championshipMatches = pgTable(
+  'championship_matches',
+  {
+    championshipId: uuid('championship_id')
+      .notNull()
+      .references(() => championships.id, { onDelete: 'cascade' }),
+    round: smallint('round').notNull(),
+    matchIndex: smallint('match_index').notNull(),
+    slot1: smallint('slot1').notNull(),
+    slot2: smallint('slot2').notNull(),
+    // The winning slot (-1 when neither side had a ninja).
+    winnerSlot: smallint('winner_slot').notNull(),
+    replay: jsonb('replay').$type<unknown>(),
+    completedAt: timestamp('completed_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.championshipId, t.round, t.matchIndex] }),
+    check('championship_matches_round', sql`${t.round} between 1 and 4`),
+  ],
+)
+
+// Slot challenges during registration ("Win to steal their position!").
+export const championshipChallenges = pgTable(
+  'championship_challenges',
+  {
+    id: id(),
+    championshipId: uuid('championship_id')
+      .notNull()
+      .references(() => championships.id, { onDelete: 'cascade' }),
+    challengerId: uuid('challenger_id').references(() => characters.id, { onDelete: 'set null' }),
+    challengerName: text('challenger_name').notNull(),
+    defenderId: uuid('defender_id').references(() => characters.id, { onDelete: 'set null' }),
+    defenderName: text('defender_name').notNull(),
+    won: boolean('won').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('championship_challenges_championship_idx').on(t.championshipId, t.createdAt),
+    index('championship_challenges_challenger_idx').on(t.challengerId),
+    index('championship_challenges_defender_idx').on(t.defenderId),
+  ],
+)

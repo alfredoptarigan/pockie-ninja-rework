@@ -47,6 +47,7 @@ const view = (overrides: Partial<ArenaView> = {}): ArenaView => ({
   freeTriesLeft: 5,
   triesBought: 0,
   maxBought: 15,
+  tickets: 0,
   tryGold: 0,
   freeRefreshAt: null,
   refreshGold: 20,

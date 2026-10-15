@@ -10,6 +10,8 @@ export interface Playing {
   replay: LogReplay
   result?: { character: Character }
   message?: string
+  /** Played next (Squad Arena rounds); the last one carries the result and the message. */
+  next?: Playing
 }
 
 export function ArenaReplay({

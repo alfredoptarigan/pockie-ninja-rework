@@ -4,6 +4,7 @@
 import { simulateFight, type FighterInput } from '@pockie/game-core'
 import { and, eq } from 'drizzle-orm'
 import {
+  ARENA_COSTS,
   dailyCounters,
   eloDelta,
   fightHonor,
@@ -23,6 +24,7 @@ import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { REBORN_ARENA_FIGHT_COMMAND } from '../../game/quests.js'
 import { sendSystemMail } from '../../game/system-mail.js'
 import { bad, newSeed, saveCharacter, utcDay, type CharacterRow } from '../gates/common.js'
+import { lockExtras, saveExtras } from './extras.js'
 import { arenaFighter, fromSnapshot, toSnapshot, type ArenaFighter } from './snapshot.js'
 import { addLog, bossNpc, npcScore, rollSlots, tierOf, TOP_TIER, type ArenaRow } from './store.js'
 
@@ -125,9 +127,21 @@ export function fight(attacker: ArenaFighter, opponent: Opponent) {
   }
 }
 
-/** Takes one try (free, else 8 Gold) after every other check passed (fixes bug 5). */
-export function chargeTry(character: CharacterRow, me: ArenaRow, extraGold = 0) {
-  const { gold, counters } = takeTry(dailyCounters(me, utcDay()))
+/**
+ * Takes one try after every other check passed (fixes bug 5): a free one, else a bought ticket
+ * (Reborn's Buy Arena Tickets), else 8 Gold.
+ */
+export async function chargeTry(tx: Tx, character: CharacterRow, me: ArenaRow, extraGold = 0) {
+  const today = dailyCounters(me, utcDay())
+  if (today.triesUsed >= ARENA_COSTS.freeTries) {
+    const extras = await lockExtras(tx, character.id)
+    if (extras.arenaTickets > 0) {
+      if (character.gold < extraGold) throw bad('no_gold', 'You do not have enough Gold.')
+      await saveExtras(tx, character.id, { arenaTickets: extras.arenaTickets - 1 })
+      return { gold: extraGold, counters: today }
+    }
+  }
+  const { gold, counters } = takeTry(today)
   const total = gold + extraGold
   if (character.gold < total) throw bad('no_gold', 'You do not have enough Gold.')
   return { gold: total, counters }
@@ -300,5 +314,5 @@ export async function chargeRevenge(
   targetId: string,
 ) {
   const revenge = await revengeCost(tx, character.id, targetId)
-  return { ...chargeTry(character, me, revenge.gold), used: revenge.used }
+  return { ...(await chargeTry(tx, character, me, revenge.gold)), used: revenge.used }
 }

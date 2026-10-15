@@ -22,6 +22,7 @@ import { arenaLogs, arenaOpponents, arenaPlayers, characters } from '../../db/sc
 import { arenaConfig, arenaTier, npc } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
 import { newSeed, utcDay, type CharacterRow } from '../gates/common.js'
+import { readExtras } from './extras.js'
 import { arenaFighter, toSnapshot } from './snapshot.js'
 
 export type ArenaRow = typeof arenaPlayers.$inferSelect
@@ -203,6 +204,8 @@ export async function arenaView(tx: Tx, me: ArenaRow, character: CharacterRow): 
     me.tier >= PLAYER_TIER
       ? ((await placesOf(tx, [me.characterId])).get(me.characterId) ?? null)
       : null
+  const { arenaTickets: tickets } = await readExtras(tx, me.characterId)
+  const freeLeft = counters.triesUsed < ARENA_COSTS.freeTries
   return {
     tier: me.tier,
     score: me.score,
@@ -215,7 +218,8 @@ export async function arenaView(tx: Tx, me: ArenaRow, character: CharacterRow): 
     freeTriesLeft: Math.max(0, ARENA_COSTS.freeTries - counters.triesUsed),
     triesBought: counters.triesBought,
     maxBought: ARENA_COSTS.maxBought,
-    tryGold: nextTryGold(counters),
+    tickets,
+    tryGold: !freeLeft && tickets > 0 ? 0 : nextTryGold(counters),
     freeRefreshAt: refreshReady
       ? null
       : new Date(me.freeRefreshAt!.getTime() + ARENA_COSTS.refreshSeconds * 1000).toISOString(),

@@ -1,6 +1,6 @@
 // The arena under /api/game/arena (docs/original-data/pvp-rankings.md 2): view, slot fights, the
-// boss, revenge, list refresh and the fight log with replays. Duels and the Honor shop register
-// their own routes.
+// boss, revenge, list refresh, Buy Tickets and the fight log with replays. Duels, the Honor shop,
+// Weekly Rewards, Squad Arena and the Championship register their own routes.
 import { and, eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { freeRefreshReady, ARENA_COSTS } from '../../../../game-core/src/arena/index.js'
@@ -18,7 +18,11 @@ import type { Tx } from '../../game/progress.js'
 import { characterOf, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { bad, characterView, saveCharacter, withCharacter } from '../gates/common.js'
+import { buyTicketsSchema } from '../../../../shared/src/schemas/arena-extras.js'
+import { championshipRoutes } from './championship.js'
+import { ARENA_TICKETS } from './config.js'
 import { duelRoutes } from './duels.js'
+import { lockExtras, saveExtras } from './extras.js'
 import {
   arenaFight,
   bossFight,
@@ -34,7 +38,9 @@ import {
 import { withPair } from './pair.js'
 import { honorShopRoutes } from './shop.js'
 import { arenaFighter } from './snapshot.js'
+import { squadRoutes } from './squad.js'
 import { arenaView, joinArena, logViews, rollSlots, slotRow, type ArenaRow } from './store.js'
+import { weeklyRoutes } from './weekly.js'
 
 const notJoined = () => bad('not_joined', 'Open the arena first.')
 
@@ -54,6 +60,9 @@ export async function arenaRoutes(app: FastifyInstance, { db }: { db: Db }) {
   const options = { db }
   await app.register(duelRoutes, options)
   await app.register(honorShopRoutes, options)
+  await app.register(weeklyRoutes, options)
+  await app.register(squadRoutes, options)
+  await app.register(championshipRoutes, options)
 
   // Joins on the first look (initscore, snapshot, first list), so it runs locked like a write.
   app.get('/', { config: { rateLimit: RATE_LIMITS.read } }, async (request) =>
@@ -86,7 +95,7 @@ export async function arenaRoutes(app: FastifyInstance, { db }: { db: Db }) {
           if (!target || !theirs) throw bad('list_changed', 'That ninja left the arena.')
           opponent = await playerOpponent(tx, target, theirs)
         }
-        const { gold, counters } = chargeTry(character, me)
+        const { gold, counters } = await chargeTry(tx, character, me)
         const outcome = await arenaFight(tx, { character, arena: me }, opponent, {
           counters,
           gold,
@@ -169,6 +178,21 @@ export async function arenaRoutes(app: FastifyInstance, { db }: { db: Db }) {
       return reload(tx, character.id)
     }),
   )
+
+  // Buy Arena Tickets (spec: 100 Gift Certificates each, 1-20 at a time).
+  app.post('/tickets', { config: { rateLimit: RATE_LIMITS.shopBuy } }, async (request) => {
+    const { amount } = buyTicketsSchema.parse(request.body)
+    return withCharacter(db, request, async (tx, character): Promise<ArenaActionResult> => {
+      const cost = amount * ARENA_TICKETS.giftCoupons
+      if (character.giftCoupon < cost)
+        throw bad('no_coupons', 'You do not have enough Gift Certificates.')
+      await joinArena(tx, character)
+      const extras = await lockExtras(tx, character.id)
+      await saveCharacter(tx, character.id, { giftCoupon: character.giftCoupon - cost })
+      await saveExtras(tx, character.id, { arenaTickets: extras.arenaTickets + amount })
+      return reload(tx, character.id)
+    })
+  })
 
   app.get('/logs', { config: { rateLimit: RATE_LIMITS.read } }, async (request) => {
     const me = await characterOf(db, requireUser(request).id)

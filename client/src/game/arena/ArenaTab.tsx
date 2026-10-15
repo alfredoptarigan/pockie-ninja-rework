@@ -1,11 +1,14 @@
-// Arena tab (UI_ArenaTop): your rank, score, Honor, streak and tries on the left; the 18
-// opponents in 3 rows of 6 with Refresh and the boss in the centre.
-import type { ReactNode } from 'react'
+// Arena tab (UI_ArenaTop): your rank, score, Honor, streak, tries and tickets on the left; the 18
+// opponents in 3 rows of 6 with Refresh, the boss, Buy Tickets and Weekly Rewards in the centre.
+import type { Character } from '@pockie/shared'
+import { useState, type ReactNode } from 'react'
 import { errorMessage } from '../api'
 import { GameButton, Notice } from '../skin'
 import { useArena, useArenaPost } from './api'
 import { score, slotName, tierName } from './labels'
 import type { Playing } from './ArenaReplay'
+import { BuyTickets } from './BuyTickets'
+import { WeeklyRewards } from './WeeklyRewards'
 import { useArenaFight } from './useArenaFight'
 import type {
   ArenaActionResult,
@@ -17,10 +20,17 @@ const ROW = 6
 const time = (iso: string) =>
   new Date(iso).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
 
-export function ArenaTab({ play }: { play: (playing: Playing) => void }) {
+export function ArenaTab({
+  character,
+  play,
+}: {
+  character: Character
+  play: (playing: Playing) => void
+}) {
   const arena = useArena()
   const fight = useArenaFight(play)
   const refresh = useArenaPost<ArenaActionResult>()
+  const [open, setOpen] = useState<'tickets' | 'weekly' | null>(null)
   if (arena.isPending) return <p>Loading...</p>
   if (arena.isError) return <Notice tone="error">{errorMessage(arena.error)}</Notice>
   const view = arena.data
@@ -66,7 +76,24 @@ export function ArenaTab({ play }: { play: (playing: Playing) => void }) {
             disabled={busy}
             onFight={() => fight.start({ path: 'boss', label: 'Challenge the boss', free: true })}
           />
+          <GameButton small onClick={() => setOpen('tickets')}>
+            Buy Tickets
+          </GameButton>
+          <GameButton small onClick={() => setOpen('weekly')}>
+            Weekly Rewards
+          </GameButton>
         </div>
+        {open === 'tickets' && (
+          <BuyTickets
+            title="Buy Arena Tickets"
+            path="tickets"
+            price={100}
+            max={20}
+            character={character}
+            onClose={() => setOpen(null)}
+          />
+        )}
+        {open === 'weekly' && <WeeklyRewards kind="arena" onClose={() => setOpen(null)} />}
         {fight.prompt}
         {refresh.isError && <Notice tone="error">{errorMessage(refresh.error)}</Notice>}
       </div>
@@ -89,6 +116,7 @@ function Summary({ view }: { view: ArenaView }) {
     ['Streak', view.streak],
     ['Win rate', `${view.winRate}% (${view.wins} / ${view.fights})`],
     ['Free tries', view.freeTriesLeft],
+    ['Tickets', view.tickets],
     ['Bought tries', `${view.triesBought} / ${view.maxBought}`],
   ]
   return (

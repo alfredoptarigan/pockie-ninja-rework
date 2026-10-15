@@ -1,5 +1,6 @@
 // Periodic jobs: Market expiry, mail purge, the team grace sweep, the Tailed Beast week and Team
-// Stone matchmaking, weekly pay and monthly reset. Each one is idempotent
+// Stone matchmaking, weekly pay and monthly reset, the Arena Weekly Rewards hours and the
+// Championship rounds. Each one is idempotent
 // and keyed by time, so an overlapping or late run is harmless.
 // ponytail: timers in the one server process; move to a job queue with several instances.
 import type { Db } from './db/client.js'
@@ -17,6 +18,11 @@ import {
   TEAM_STONE_SETTLE_INTERVAL_MS,
 } from './modules/team-stone/routes.js'
 import { sweepTeams } from './modules/teams/index.js'
+import {
+  CHAMPIONSHIP_SETTLE_INTERVAL_MS,
+  settleChampionships,
+} from './modules/arena/championship.js'
+import { accrueWeekly, WEEKLY_ACCRUE_INTERVAL_MS } from './modules/arena/weekly.js'
 
 /** "Run it every few seconds" (teams/routes.ts). */
 const TEAM_SWEEP_INTERVAL_MS = 5_000
@@ -33,6 +39,8 @@ export function startJobs(db: Db, onError: (error: unknown) => void) {
     every(TEAM_STONE_MATCH_INTERVAL_MS, () => matchTeamStone(db)),
     every(TEAM_STONE_SETTLE_INTERVAL_MS, () => payTeamStoneWeek(db)),
     every(TEAM_STONE_SETTLE_INTERVAL_MS, () => resetTeamStoneMonth(db)),
+    every(WEEKLY_ACCRUE_INTERVAL_MS, () => accrueWeekly(db)),
+    every(CHAMPIONSHIP_SETTLE_INTERVAL_MS, () => settleChampionships(db)),
   ]
   return () => timers.forEach(clearInterval)
 }

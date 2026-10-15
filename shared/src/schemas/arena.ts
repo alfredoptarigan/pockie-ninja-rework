@@ -59,7 +59,9 @@ export interface ArenaView {
   freeTriesLeft: number
   triesBought: number
   maxBought: number
-  /** Gold for the next fight (0 free), null when no try is left today. */
+  /** Bought tickets (Buy Arena Tickets), used once the free tries are gone; they do not expire. */
+  tickets: number
+  /** Gold for the next fight (0 free or a ticket), null when no try is left today. */
   tryGold: number | null
   /** When the next free list refresh is ready; null = ready now. */
   freeRefreshAt: string | null

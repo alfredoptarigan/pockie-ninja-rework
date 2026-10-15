@@ -14,6 +14,14 @@ import type {
   DuelView,
   HonorShopView,
 } from '../../../../shared/src/schemas/arena'
+import type {
+  ChampionshipChallengeResult,
+  ChampionshipView,
+  Ladder,
+  SquadFightResult,
+  SquadView,
+  WeeklyView,
+} from '../../../../shared/src/schemas/arena-extras'
 
 export const ARENA = '/api/game/arena'
 
@@ -22,11 +30,16 @@ export const arenaKeys = {
   logs: ['game', 'arena', 'logs'] as const,
   duels: ['game', 'arena', 'duels'] as const,
   shop: ['game', 'arena', 'shop'] as const,
+  weekly: (kind: Ladder) => ['game', 'arena', 'weekly', kind] as const,
+  squad: ['game', 'arena', 'squad'] as const,
+  championship: ['game', 'arena', 'championship'] as const,
 }
 
 export type ArenaFight = ArenaFightResult<Replay>
 export type Duel = DuelResult<Replay>
 export type LogReplay = ArenaReplay<Replay>
+export type SquadFight = SquadFightResult<Replay>
+export type ChampionshipChallenge = ChampionshipChallengeResult<Replay>
 
 export const useArena = () =>
   useQuery({ queryKey: arenaKeys.view, queryFn: () => api<ArenaView>(ARENA) })
@@ -43,6 +56,27 @@ export const useDuels = () =>
 export const useHonorShop = () =>
   useQuery({ queryKey: arenaKeys.shop, queryFn: () => api<HonorShopView>(`${ARENA}/shop`) })
 
+export const useWeekly = (kind: Ladder) =>
+  useQuery({
+    queryKey: arenaKeys.weekly(kind),
+    queryFn: () => api<WeeklyView>(`${ARENA}/weekly?kind=${kind}`),
+  })
+
+export const useSquad = () =>
+  useQuery({ queryKey: arenaKeys.squad, queryFn: () => api<SquadView>(`${ARENA}/squad`) })
+
+/** The bracket moves on its own (rounds are fought on schedule): refetch every 30 s. */
+export const useChampionship = () =>
+  useQuery({
+    queryKey: arenaKeys.championship,
+    queryFn: () => api<ChampionshipView>(`${ARENA}/championship`),
+    refetchInterval: 30_000,
+  })
+
+/** A fought Championship match, to watch. */
+export const fetchMatchReplay = (round: number, match: number) =>
+  api<LogReplay>(`${ARENA}/championship/matches/${round}/${match}`)
+
 /** A saved fight from the log (yours or a duel), to watch again. */
 export const fetchLogReplay = (id: string) => api<LogReplay>(`${ARENA}/logs/${id}`)
 
@@ -57,9 +91,17 @@ export function useArenaPost<T extends { character: Character }>() {
     mutationFn: ({ path, body }: { path: string; body?: object }) =>
       api<T>(`${ARENA}/${path}`, { method: 'POST', body: body ?? {} }),
     onSuccess: (result) => {
-      if ('replay' in result) return
+      if ('squad' in result) queryClient.setQueryData(arenaKeys.squad, result.squad)
+      if ('championship' in result)
+        queryClient.setQueryData(arenaKeys.championship, result.championship)
+      // Fights (a replay, squad rounds, a slot challenge) are applied when the replay is over.
+      if ('replay' in result || 'rounds' in result || 'fight' in result) return
       if ('arena' in result) queryClient.setQueryData(arenaKeys.view, result.arena)
       if ('shop' in result) queryClient.setQueryData(arenaKeys.shop, result.shop)
+      if ('weekly' in result) {
+        const weekly = result.weekly as WeeklyView
+        queryClient.setQueryData(arenaKeys.weekly(weekly.kind), weekly)
+      }
       apply(result)
     },
   })
