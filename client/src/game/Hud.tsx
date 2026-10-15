@@ -608,7 +608,12 @@ const FEATURES: {
   },
   { key: 'dungeons', label: 'Dungeons', icon: topIcon('dungeons'), level: 45, feature: 'dungeons' },
   { key: 'mall', label: 'Ninja\nMall', icon: topIcon('mall') },
-  { key: 'boutique', label: 'Konoha\nBoutique', icon: topIcon('boutique') },
+  {
+    key: 'boutique',
+    label: 'Konoha\nBoutique',
+    icon: topIcon('boutique'),
+    feature: 'konohaBoutique',
+  },
   { key: 'akatsuki', label: 'Akatsuki', icon: topIcon('akatsuki') },
   { key: 'pub', label: 'Tsunade\nPub', icon: topIcon('pub'), feature: 'tsunadePub' },
   {

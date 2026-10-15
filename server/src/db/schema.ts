@@ -2127,3 +2127,35 @@ export const tsunadePub = pgTable(
     ),
   ],
 )
+
+// Konoha Boutique (Reborn's slot machine): coins, EXP (the level follows it), today's free coins
+// (UTC day), a waiting Bonus Round (the bet that started it and the chests opened) and a waiting
+// Double Chance (the coins at stake, the number and the operator).
+export const konohaBoutique = pgTable(
+  'konoha_boutique',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    coins: integer('coins').notNull().default(0),
+    exp: integer('exp').notNull().default(0),
+    lastWon: integer('last_won').notNull().default(0),
+    freeDay: date('free_day'),
+    freeClaimed: smallint('free_claimed').notNull().default(0),
+    nextFreeAt: timestamp('next_free_at', { withTimezone: true }),
+    bonusBet: integer('bonus_bet').notNull().default(0),
+    bonusPicks: jsonb('bonus_picks')
+      .$type<{ index: number; coins: number }[]>()
+      .notNull()
+      .default([]),
+    doubleCoins: integer('double_coins').notNull().default(0),
+    doubleNumber: smallint('double_number').notNull().default(0),
+    doubleOperator: text('double_operator').$type<'higher' | 'lower'>().notNull().default('higher'),
+  },
+  (t) => [
+    check(
+      'konoha_boutique_values',
+      sql`${t.coins} >= 0 and ${t.exp} >= 0 and ${t.lastWon} >= 0 and ${t.freeClaimed} >= 0 and ${t.bonusBet} >= 0 and ${t.doubleCoins} >= 0`,
+    ),
+  ],
+)

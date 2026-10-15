@@ -35,6 +35,7 @@ import { DungeonsWindow } from './dungeons'
 import { ZanpakutoWindow } from './zanpakuto'
 import { ImpelDownWindow } from './impel-down'
 import { TsunadePubWindow } from './tsunade-pub'
+import { KonohaBoutiqueWindow } from './konoha-boutique'
 
 export type WindowName =
   | 'shop'
@@ -72,6 +73,7 @@ export type WindowName =
   | 'zanpakuto'
   | 'impelDown'
   | 'tsunadePub'
+  | 'konohaBoutique'
 
 export interface WindowProps {
   character: Character
@@ -144,6 +146,9 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
     <ImpelDownWindow character={character} onClose={onClose} />
   ),
   tsunadePub: ({ onClose }) => <TsunadePubWindow onClose={onClose} />,
+  konohaBoutique: ({ character, onClose }) => (
+    <KonohaBoutiqueWindow character={character} onClose={onClose} />
+  ),
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
