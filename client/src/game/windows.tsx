@@ -31,6 +31,7 @@ import { KennelWindow } from './pets'
 import { KennelShopWindow, PetTracingWindow } from './kennel'
 import { CarrierBagWindow } from './CarrierBag'
 import { ClanBrowserWindow, ClanWindow } from './clans'
+import { DungeonsWindow } from './dungeons'
 
 export type WindowName =
   | 'shop'
@@ -64,6 +65,7 @@ export type WindowName =
   | 'carrierBag'
   | 'clan'
   | 'clanBrowser'
+  | 'dungeons'
 
 export interface WindowProps {
   character: Character
@@ -130,6 +132,7 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   ),
   clan: (props) => <ClanWindow {...props} />,
   clanBrowser: (props) => <ClanBrowserWindow {...props} />,
+  dungeons: ({ character, onClose }) => <DungeonsWindow character={character} onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(

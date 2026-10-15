@@ -30,6 +30,7 @@ describe('reborn asset import', () => {
       entry('npc', '81044', 'icons/npc/81044.png'),
       entry('event', 'tailedBeast', 'scenes/tailedBeast/beast-1.png'),
       entry('avatar-ui', '120', 'poses/120.png'),
+      entry('avatar-ui', '170', 'poses/170.png'),
       entry('skill-icon', '1808', 'icons/skills/1808.png'),
     ]
     const excluded = [

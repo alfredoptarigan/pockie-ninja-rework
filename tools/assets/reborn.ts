@@ -54,6 +54,9 @@ export function selectAssets(manifest: Manifest): Entry[] {
       e.category === 'skill-icon' ||
       // Inventory preview poses for the outfits we play (ids up to 120, like the ultimates).
       (e.category === 'avatar-ui' && /^poses\/\d+\.png$/.test(e.path) && Number(e.id) <= 120) ||
+      // Scroll Dungeons bosses past 120 (Madara Uchiha, Yamamoto Genryusai). The window's
+      // features/dungeons-bg.jpg is not in the manifest: fetched and converted by hand.
+      (e.category === 'avatar-ui' && /^poses\/(170|178)\.png$/.test(e.path)) ||
       e.category === 'talent' ||
       e.category === 'bloodline' ||
       e.category === 'item-icon' ||

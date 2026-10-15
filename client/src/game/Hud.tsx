@@ -594,7 +594,7 @@ const FEATURES: {
 }[] = [
   { key: 'impeldown', label: 'Impel\nDown', icon: topIcon('impeldown'), level: 61 },
   { key: 'zanpakuto', label: 'Zanpakuto', icon: topIcon('zanpakuto'), level: 61 },
-  { key: 'dungeons', label: 'Dungeons', icon: topIcon('dungeons'), level: 45 },
+  { key: 'dungeons', label: 'Dungeons', icon: topIcon('dungeons'), level: 45, feature: 'dungeons' },
   { key: 'mall', label: 'Ninja\nMall', icon: topIcon('mall') },
   { key: 'boutique', label: 'Konoha\nBoutique', icon: topIcon('boutique') },
   { key: 'akatsuki', label: 'Akatsuki', icon: topIcon('akatsuki') },
