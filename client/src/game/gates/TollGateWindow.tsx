@@ -1,5 +1,6 @@
 // Demon City Guard menu (EntryTollGateScene.js): gate select with today's tries, the run's
-// progress and fights, the card flip after a clear, and the crystal exchange.
+// progress and fights, the card flip after a clear, and the way to the crystal exchange (Reborn's
+// Dungeon Shop, DungeonShop.tsx).
 import type {
   CardTakeResult,
   Character,
@@ -11,10 +12,10 @@ import type {
 import { useState } from 'react'
 import { errorMessage } from '../api'
 import { itemName } from '../explore'
-import { ItemIcon } from '../ItemIcon'
-import { Dialog, GameButton, Notice, Tabs } from '../skin'
+import { Dialog, GameButton, Notice } from '../skin'
 import { plainText } from '../text'
 import type { Replay } from '../types'
+import { useOpenWindow } from '../windows'
 import { useGatePost, useGates } from './api'
 import { CardFlip, TakenCards } from './CardFlip'
 import { GateFight, rewardText } from './GateFight'
@@ -38,7 +39,7 @@ export function TollGateWindow({
   onClose: () => void
 }) {
   const gates = useGates()
-  const [tab, setTab] = useState<'gates' | 'exchange'>('gates')
+  const openWindow = useOpenWindow()
   const [fight, setFight] = useState<Fight | null>(null)
   const [last, setLast] = useState<Fight | null>(null)
   const [taken, setTaken] = useState<CardTakeResult | null>(null)
@@ -79,23 +80,14 @@ export function TollGateWindow({
       ) : (
         data && (
           <>
-            <Tabs
-              label="Guard menu"
-              panelId="toll-gate-panel"
-              tabs={[
-                { id: 'gates', title: 'Toll Gates' },
-                { id: 'exchange', title: 'Convert Tool' },
-              ]}
-              active={tab}
-              onChange={setTab}
-            />
-            <div id="toll-gate-panel" role="tabpanel" className="mt-2">
+            <div className="flex justify-end">
+              <GameButton small onClick={() => openWindow('dungeonShop')}>
+                Dungeon Shop
+              </GameButton>
+            </div>
+            <div className="mt-2">
               {last && !last.won && <Notice>You were defeated. The run is over.</Notice>}
-              {tab === 'gates' ? (
-                <GateSelect view={data} character={character} />
-              ) : (
-                <Exchange view={data} />
-              )}
+              <GateSelect view={data} character={character} />
             </div>
           </>
         )
@@ -192,40 +184,6 @@ function RunPanel({
       {(fight.error || leave.error) && (
         <Notice tone="error">{errorMessage(fight.error ?? leave.error)}</Notice>
       )}
-    </div>
-  )
-}
-
-function Exchange({ view }: { view: GatesView }) {
-  const convert = useGatePost<{ character: Character }>()
-  return (
-    <div className="flex flex-col gap-2">
-      <ul className="flex flex-col gap-1">
-        {view.exchanges.map((row) => (
-          <li
-            key={row.id}
-            className="flex items-center gap-2 rounded border border-wood-light bg-white/40 p-2 text-xs"
-          >
-            <ItemIcon itemId={row.srcItemId} name={itemName(row.srcItemId)} className="size-7" />
-            <span className="flex-1">
-              {row.srcCount} x {itemName(row.srcItemId)}
-              {row.commonItemId && ` (or ${itemName(row.commonItemId)})`} for {row.destCount} x{' '}
-              {itemName(row.destItemId)}
-            </span>
-            <ItemIcon itemId={row.destItemId} name={itemName(row.destItemId)} className="size-7" />
-            <GameButton
-              small
-              aria-label={`Convert for ${itemName(row.destItemId)}`}
-              disabled={convert.isPending}
-              onClick={() => convert.mutate({ path: 'exchange', body: { exchangeId: row.id } })}
-            >
-              Convert
-            </GameButton>
-          </li>
-        ))}
-      </ul>
-      {convert.isSuccess && <Notice>Converted.</Notice>}
-      {convert.error && <Notice tone="error">{errorMessage(convert.error)}</Notice>}
     </div>
   )
 }

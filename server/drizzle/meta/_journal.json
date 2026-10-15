@@ -393,6 +393,13 @@
       "when": 1792190000000,
       "tag": "0055_arena_extras",
       "breakpoints": true
+    },
+    {
+      "idx": 56,
+      "version": "7",
+      "when": 1792200000000,
+      "tag": "0056_special_shops",
+      "breakpoints": true
     }
   ]
 }

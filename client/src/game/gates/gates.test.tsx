@@ -20,7 +20,14 @@ const gate = {
   subGates: 2,
   itemId: null,
 }
-const menu: GatesView = { triesLeft: 2, maxTries: 3, gates: [gate], run: null, exchanges: [] }
+const menu: GatesView = {
+  triesLeft: 2,
+  maxTries: 3,
+  gates: [gate],
+  run: null,
+  exchanges: [],
+  crystals: {},
+}
 const cards: CardsView = {
   state: 1,
   cards: [null, null, null, null, null],

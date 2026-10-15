@@ -1,4 +1,5 @@
 export { TollGateWindow } from './TollGateWindow'
+export { DungeonShopWindow } from './DungeonShop'
 export { LasNochesWindow } from './LasNochesWindow'
 export { PubFightWindow } from './PubFightWindow'
 export { useOpenLasNoches, useOpenPubFight, useOpenTollGates } from './api'

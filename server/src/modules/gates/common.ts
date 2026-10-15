@@ -56,7 +56,7 @@ export async function characterView(tx: Tx | Db, characterId: string) {
   return toCharacter(row!, await playerFighter(tx, row!))
 }
 
-export async function countItem(tx: Tx, characterId: string, itemId: string) {
+export async function countItem(tx: Tx | Db, characterId: string, itemId: string) {
   const rows = await tx
     .select({ count: inventoryItems.count })
     .from(inventoryItems)

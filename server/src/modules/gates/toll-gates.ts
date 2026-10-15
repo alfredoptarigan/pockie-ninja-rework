@@ -33,6 +33,7 @@ import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { recordWeeklyActivity } from '../events/weekly-activity.js'
 import { tollGateRuns } from '../../db/schema.js'
+import { itemInfo } from '../../game/bag.js'
 import { playerFighter } from '../../game/combat.js'
 import { removeItems, type Tx } from '../../game/progress.js'
 import { rewardExp } from '../../game/nonfight-buffs.js'
@@ -235,6 +236,15 @@ export async function requireRun(tx: Tx, characterId: string) {
   return row
 }
 
+/** Common Valhalla Crystal, and the Level 56-96 crystals (i152010-i152014) it stands in for. */
+const COMMON_CRYSTAL = 'i152015'
+const CRYSTALS = ['i152010', 'i152011', 'i152012', 'i152013', 'i152014', COMMON_CRYSTAL]
+/**
+ * Reborn's Dungeon Shop tier (tabs Level 56-96, "Lv {tier}+" until reached): the level of the
+ * row's source crystal (Level 56 Valhalla Crystal = i152010, ten levels a step).
+ */
+const exchangeTier = (srcItemId: string) => 56 + 10 * (Number(srcItemId.slice(1)) - 152010)
+
 function exchangeList(): GateExchange[] {
   return Object.entries(gateExchanges()).map(([id, row]) => ({
     id: Number(id),
@@ -243,7 +253,14 @@ function exchangeList(): GateExchange[] {
     commonItemId: typeof row.CommonSrcItemCfg === 'string' ? row.CommonSrcItemCfg : null,
     destItemId: row.DestItemCfg,
     destCount: row.DestCount,
+    destInfo: itemInfo(row.DestItemCfg),
+    tier: exchangeTier(row.SrcItemCfg),
   }))
+}
+
+async function crystalCounts(db: Db, characterId: string) {
+  const counts = await Promise.all(CRYSTALS.map((id) => countItem(db, characterId, id)))
+  return Object.fromEntries(CRYSTALS.map((id, index) => [id, counts[index]!]))
 }
 
 function gateList() {
@@ -272,6 +289,7 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
       gates: gateList(),
       run: run ? runView(run) : null,
       exchanges: exchangeList(),
+      crystals: await crystalCounts(db, character.id),
     }
   })
 
@@ -363,7 +381,8 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
     }),
   )
 
-  // ExchangeMagicBox: SrcCount crystals (the common crystal fills any part) for the destination.
+  // ExchangeMagicBox, Reborn's Dungeon Shop (`valhallaShopBuy`): SrcCount crystals (the common
+  // crystal fills any part) for the destination, from the row's tier level on.
   app.post('/exchange', { config: { rateLimit: RATE_LIMITS.gates } }, async (request) => {
     const { exchangeId } = gateExchangeSchema.parse(request.body)
     const row = gateExchanges()[String(exchangeId)]
@@ -371,6 +390,8 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
     return withCharacter(db, request, async (tx, character) => {
       if (character.sceneId !== DEMON_CITY)
         throw bad('not_here', 'Talk to the Demon City Guard to convert crystals.')
+      const tier = exchangeTier(row.SrcItemCfg)
+      if (character.level < tier) throw bad('too_low', `Requires level ${tier}.`)
       const common = typeof row.CommonSrcItemCfg === 'string' ? row.CommonSrcItemCfg : null
       const own = await countItem(tx, character.id, row.SrcItemCfg)
       const commonOwned = common ? await countItem(tx, character.id, common) : 0

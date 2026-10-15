@@ -52,7 +52,13 @@ describe('GET /api/game/gates', () => {
       subGates: 2,
       itemId: null,
     })
-    expect(body.exchanges[0]).toMatchObject({ srcItemId: 'i152010', commonItemId: 'i152015' })
+    expect(body.exchanges[0]).toMatchObject({
+      srcItemId: 'i152010',
+      commonItemId: 'i152015',
+      tier: 56,
+    })
+    expect(body.exchanges.at(-1)).toMatchObject({ srcItemId: 'i152013', tier: 86 })
+    expect(body.crystals).toMatchObject({ i152010: 0, i152015: 0 })
   })
 
   it('requires a login', async () => {
@@ -203,6 +209,7 @@ describe('card flip', () => {
 
 describe('POST /api/game/gates/exchange', () => {
   it('converts 50 crystals, filling up with common crystals', async () => {
+    await ninja.set({ level: 56 })
     await db.insert(inventoryItems).values([
       ...Array.from({ length: 30 }, () => ({
         characterId: ninja.characterId,
@@ -221,8 +228,22 @@ describe('POST /api/game/gates/exchange', () => {
     expect(common.reduce((sum, r) => sum + r.count, 0)).toBe(5)
   })
 
+  it('shows the crystals held', async () => {
+    await ninja.give('i152015', { count: 7 })
+    const body = (await ninja.client.get('/api/game/gates')).json()
+    expect(body.crystals).toMatchObject({ i152015: 7, i152011: 0 })
+  })
+
   it('refuses without enough crystals', async () => {
+    await ninja.set({ level: 56 })
     const response = await ninja.client.post('/api/game/gates/exchange', { exchangeId: 1 })
     expect(errorCode(response)).toBe('missing_item')
+  })
+
+  it('refuses a row below its tier level, keeping the crystals', async () => {
+    await ninja.give('i152015', { count: 50 })
+    const response = await ninja.client.post('/api/game/gates/exchange', { exchangeId: 1 })
+    expect(errorCode(response)).toBe('too_low')
+    expect((await ninja.bag('i152015'))[0]!.count).toBe(50)
   })
 })

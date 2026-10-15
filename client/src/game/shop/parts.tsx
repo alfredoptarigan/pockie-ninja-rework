@@ -1,11 +1,12 @@
 // Pieces of Reborn's NPC shop windows (reborn-windows-A-L.md "Dungeon Shop", "Festival Shop"):
 // the TextBG1 balance box, 105x190 item cards and the eight-per-page grid with its pager.
-import type { Character } from '@pockie/shared'
+import type { BagItemInfo, Character } from '@pockie/shared'
 import { useEffect, useState, type ReactNode } from 'react'
 import { errorMessage } from '../api'
 import { itemName } from '../explore'
 import { ItemIcon } from '../ItemIcon'
-import { Pager } from '../market/parts'
+import { ItemTooltip } from '../ItemTooltip'
+import { asInventoryItem, Pager } from '../market/parts'
 import { GameButton } from '../skin'
 import { showToast } from '../toast'
 import type { Currency } from './api'
@@ -44,10 +45,14 @@ export function Balance({
   )
 }
 
-/** One 105x190 item card: name, icon, price lines and the 70x22 button. */
+/**
+ * One 105x190 item card: name, icon, price lines and the 70x22 button. With `info` the icon shows
+ * the item tooltip on hover (no compare), as Reborn's Dungeon and Festival shops do.
+ */
 export function ShopCard({
   itemId,
   count,
+  info,
   lines,
   button,
   buttonLabel,
@@ -56,6 +61,7 @@ export function ShopCard({
 }: {
   itemId: string
   count?: number
+  info?: BagItemInfo
   lines: ReactNode
   button: string
   buttonLabel: string
@@ -63,16 +69,26 @@ export function ShopCard({
   onClick: () => void
 }) {
   const name = itemName(itemId)
+  const [tip, setTip] = useState<{ x: number; y: number } | null>(null)
   return (
-    <li className="game-text-box flex h-[190px] w-[105px] flex-col items-center gap-[4px] px-[4px] py-[6px] text-center text-[11px] leading-[13px]">
+    <li
+      aria-label={name}
+      className="game-text-box flex h-[190px] w-[105px] flex-col items-center gap-[4px] px-[4px] py-[6px] text-center text-[11px] leading-[13px]"
+    >
       <span className="line-clamp-2 h-[26px] font-bold">{name}</span>
-      <ItemIcon itemId={itemId} name={name} className="size-[50px]">
-        {count !== undefined && count > 1 && (
-          <span className="absolute right-[2px] bottom-0 text-[10px] font-bold text-white [text-shadow:var(--shadow-game-text)]">
-            x{count}
-          </span>
-        )}
-      </ItemIcon>
+      <span
+        className="contents"
+        onMouseEnter={(event) => info && setTip({ x: event.clientX + 12, y: event.clientY + 12 })}
+        onMouseLeave={() => setTip(null)}
+      >
+        <ItemIcon itemId={itemId} name={name} className="size-[50px]">
+          {count !== undefined && count > 1 && (
+            <span className="absolute right-[2px] bottom-0 text-[10px] font-bold text-white [text-shadow:var(--shadow-game-text)]">
+              x{count}
+            </span>
+          )}
+        </ItemIcon>
+      </span>
       <div className="flex min-h-0 flex-1 flex-col justify-center gap-[2px]">{lines}</div>
       <GameButton
         small
@@ -83,6 +99,12 @@ export function ShopCard({
       >
         {button}
       </GameButton>
+      {info && tip && (
+        <ItemTooltip
+          entry={{ item: asInventoryItem({ itemId, count: count ?? 1, bound: false, info }) }}
+          at={tip}
+        />
+      )}
     </li>
   )
 }

@@ -2717,3 +2717,17 @@ export const championshipChallenges = pgTable(
     index('championship_challenges_defender_idx').on(t.defenderId),
   ],
 )
+
+// Festival Shop (Reborn's Xmas "Christmas Shop", migration 0056): the Festival Tokens balance and
+// the purchases per item (limits never reset). Locked after the character row.
+export const characterFestivalShop = pgTable(
+  'character_festival_shop',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    tokens: integer('tokens').notNull().default(0),
+    purchases: jsonb('purchases').$type<Record<string, number>>().notNull().default({}),
+  },
+  (t) => [check('character_festival_shop_tokens', sql`${t.tokens} >= 0`)],
+)

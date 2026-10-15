@@ -218,6 +218,8 @@ const EVENTS: { label: string; window: WindowName }[] = [
   { label: 'Card Room', window: 'cardRoom' },
   { label: 'Pet Tracing', window: 'petTracing' },
   { label: 'Pet Shop', window: 'kennelShop' },
+  // Reborn's Xmas "Christmas Shop"; our port has no Xmas event scene yet.
+  { label: 'Festival Shop', window: 'festivalShop' },
 ]
 
 /** Events button of the top strip, after Arena. */

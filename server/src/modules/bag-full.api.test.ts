@@ -88,7 +88,8 @@ describe('opening a box in a full bag', () => {
 })
 
 describe('toll gate exchange binding', () => {
-  beforeEach(() => ninja.set({ sceneId: DEMON_CITY }))
+  // Row 1 is a Level 56 ware (Reborn's Dungeon Shop tier).
+  beforeEach(() => ninja.set({ sceneId: DEMON_CITY, level: 56 }))
   const crystals = (itemId: string, count: number, bound: boolean) =>
     Array.from({ length: count }, () => ({ characterId: ninja.characterId, itemId, bound }))
 

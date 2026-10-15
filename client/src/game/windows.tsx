@@ -11,7 +11,7 @@ import type { Character } from '@pockie/shared'
 import { createContext, useContext, type ComponentType } from 'react'
 import { ArenaWindow } from './arena'
 import { ForgeWindow, PortableFunctionWindow } from './forge'
-import { LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
+import { DungeonShopWindow, LasNochesWindow, PubFightWindow, TollGateWindow } from './gates'
 import { DailyQuestWindow } from './daily'
 import { DiceOfFateWindow, NinjaDiaryWindow } from './events'
 import { MarketWindow } from './market'
@@ -42,6 +42,7 @@ import { HomeWindow } from './home'
 import { KonohaBoutiqueWindow } from './konoha-boutique'
 import { AkatsukiWindow } from './akatsuki'
 import { HashiramaWindow } from './hashirama'
+import { FestivalShopWindow } from './festival-shop'
 
 export type WindowName =
   | 'shop'
@@ -86,6 +87,8 @@ export type WindowName =
   | 'konohaBoutique'
   | 'akatsuki'
   | 'hashirama'
+  | 'dungeonShop'
+  | 'festivalShop'
 
 export interface WindowProps {
   character: Character
@@ -173,6 +176,8 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   hashirama: ({ character, onClose }) => (
     <HashiramaWindow character={character} onClose={onClose} />
   ),
+  dungeonShop: (props) => <DungeonShopWindow {...props} />,
+  festivalShop: ({ onClose }) => <FestivalShopWindow onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(

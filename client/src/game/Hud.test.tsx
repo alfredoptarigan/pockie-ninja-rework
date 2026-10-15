@@ -119,6 +119,7 @@ describe('TopBar', () => {
       'Card Room': 'cardRoom',
       'Pet Tracing': 'petTracing',
       'Pet Shop': 'kennelShop',
+      'Festival Shop': 'festivalShop',
     }
     for (const [label, name] of Object.entries(windows)) {
       await userEvent.click(screen.getByRole('button', { name: 'Events' }))

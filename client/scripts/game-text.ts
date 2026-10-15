@@ -9,6 +9,7 @@ import { join } from 'node:path'
 import { CLOSED_SCENES } from '../../shared/src/schemas/game.ts'
 import { MALL_CATALOGUE } from '../../server/src/modules/mall/catalogue.ts'
 import { TSUNADE_PUB_PLACEHOLDERS } from '../../server/src/modules/tsunade-pub/config.ts'
+import { FESTIVAL_SHOP_PLACEHOLDERS } from '../../server/src/modules/festival-shop/config.ts'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -178,6 +179,11 @@ for (const [id, row] of Object.entries(items)) {
 for (const id of Object.keys(honorShop)) addItem(id)
 for (const { itemId } of MALL_CATALOGUE) addItem(itemId)
 for (const { itemId } of Object.values(TSUNADE_PUB_PLACEHOLDERS.prizes).flat()) addItem(itemId)
+for (const { itemId } of FESTIVAL_SHOP_PLACEHOLDERS.offers) addItem(itemId)
+// Dungeon Shop (the toll gate crystal exchange): the Valhalla crystals and every ware.
+for (const row of Object.values(game<Record<string, Row>>('toll-gate-exchanges'))) {
+  for (const id of [row.SrcItemCfg, row.CommonSrcItemCfg, row.DestItemCfg]) addItem(String(id))
+}
 // Armory: gems, Enchanting Stones and Slot Talismans (sockets, enchantments and their pickers).
 for (const [id, row] of Object.entries(items)) {
   if (row.class === 'JewelItem' || row.class === 'MagicItem' || row.FreePropName === 'FreeAddHole')

@@ -1,6 +1,7 @@
 // Demon City instances (/api/game/gates/*): solo toll gates with the card flip, crystal exchange,
 // Las Noches manual mode and the neutral-field pub fights.
 import { z } from 'zod'
+import type { BagItemInfo } from './bag.js'
 import type { Character } from './game.js'
 
 const cardIndex = z.number().int().min(0).max(4)
@@ -76,6 +77,10 @@ export interface GateExchange {
   commonItemId: string | null
   destItemId: string
   destCount: number
+  /** The destination item's facts, for its tooltip. */
+  destInfo: BagItemInfo
+  /** Reborn's Dungeon Shop tab ("Level 56"): the source crystal's level, also the level needed. */
+  tier: number
 }
 
 export interface GatesView {
@@ -84,6 +89,8 @@ export interface GatesView {
   gates: GateSummary[]
   run: GateRunView | null
   exchanges: GateExchange[]
+  /** Valhalla crystals held (Common and Level 56-96), by item id: the Dungeon Shop's balance. */
+  crystals: Record<string, number>
 }
 
 export interface GateRewards {
