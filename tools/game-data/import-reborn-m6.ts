@@ -463,6 +463,9 @@ function buildItemRows(
       row(pet.item, {
         // Explore grants pets at low levels (decision 9), so adopting has no level gate.
         UseLevel: 1,
+        // Reborn's item field 1 is what its tooltip shows as Synthesis Value (item-info overview
+        // reads ITEMS[iid][1]); M6 also reads it as the species' required level band.
+        JudgeValueScore: pet.requiredLevel,
         CanUse: 1,
         ItemMaxFoldNum: 1,
         ItemShapeType: 4,

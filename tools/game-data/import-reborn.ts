@@ -94,6 +94,13 @@ type ServerConfig = {
   }
   petFamilies: Record<string, number>
   WING: { Line: Record<string, [number, number][][]> }
+  avatars: Record<string, RebornAvatar>
+  avatarStars: Record<string, number | boolean>
+}
+type RebornAvatar = {
+  value: number
+  weaponType?: string
+  innate: { avatar: number; isv: number[]; bmv: number[]; skills: number[] }
 }
 type ScrollSkill = {
   id: number
@@ -390,6 +397,44 @@ function buildItems(items: Record<string, JsonItem>) {
   )
 }
 
+/** Reborn's outfit imprint skills: 2000-2092, element * 10 + tier. */
+const IMPRINT = /^20\d\d$/
+const OUTFIT_TIERS_FROM = 1 // AvatarLevel of an outfit's +0 row
+
+/**
+ * Reborn's outfit data (serverConfig.avatars) by our clothing id: ISV and BMV in our hundredths,
+ * the imprint skill and the outfit value. Reborn item 29xxxx is our clothing xxxx when its art
+ * (`innate.avatar`) is that clothing and we have the outfit; other Reborn outfits are skipped.
+ */
+export function buildOutfits(config: ServerConfig, items: Record<string, Record<string, unknown>>) {
+  const ours = new Set(
+    Object.values(items)
+      .filter((row) => row.class === 'AvatarItem' && Number(row.AvatarLevel) === OUTFIT_TIERS_FROM)
+      .map((row) => Number(row.Clothing)),
+  )
+  const hundredths = (values: number[]) => values.map((n) => Math.round(n * 100))
+  const outfits = Object.entries(config.avatars).flatMap(([id, avatar]) => {
+    const clothing = Number(id) - 290000
+    if (avatar.innate.avatar !== clothing || !ours.has(clothing)) return []
+    const imprints = avatar.innate.skills.filter((skill) => IMPRINT.test(String(skill)))
+    // Three value-0 outfits (59, 68, 73) have no imprint.
+    if (imprints.length > 1) throw new Error(`Reborn outfit ${id} has ${imprints.length} imprints`)
+    return [
+      [
+        String(clothing),
+        {
+          rebornItem: Number(id),
+          value: avatar.value,
+          isv: hundredths(avatar.innate.isv),
+          bmv: hundredths(avatar.innate.bmv),
+          imprint: imprints[0] ?? null,
+        },
+      ],
+    ]
+  })
+  return { stars: config.avatarStars, outfits: Object.fromEntries(outfits) }
+}
+
 /** Decision 25: Con maps to `tough`, the other seven stats 1:1, as the original 80101-80202. */
 const DICE_STATS = [
   'DodgeMulBuff',
@@ -606,6 +651,7 @@ export function buildReborn(raw: RawInputs) {
   const dice = buildDiceBuffs(raw.events)
   const sevenDay = Object.keys(items).filter((id) => id.startsWith('i5400'))
   const events = buildEvents(raw.events, sevenDay, dice.durations)
+  const outfits = buildOutfits(raw.serverConfig, raw.original.items)
   const m6 = buildM6(
     {
       items: raw.items,
@@ -642,6 +688,7 @@ export function buildReborn(raw: RawInputs) {
       items: { ...items, ...m6.items },
       'nonfight-buffs': dice.buffs,
       events,
+      outfits,
       ...m6.files,
     } as Record<string, unknown>,
     names: Object.fromEntries(names.map(({ key, name }) => [key, name])),
