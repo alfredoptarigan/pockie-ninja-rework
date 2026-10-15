@@ -5,7 +5,7 @@
 // full appetite lets a row Discover (learn) a skill, Stone adds slots, the pet slot's menu sets
 // the pet active, releases or evolves it, and Digestion finishes digesting for Gold or Coupons.
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent, type PointerEvent } from 'react'
 import type {
   PetActionResult,
   PetSkillKind,
@@ -19,7 +19,10 @@ import { errorMessage, useApplyResult } from '../api'
 import { bigBg } from '../bloodlines/panels'
 import { itemName } from '../explore'
 import { ItemIcon } from '../ItemIcon'
+import type { Point } from '../inventory/BagGrid'
+import { ItemTooltip, type TooltipEntry } from '../ItemTooltip'
 import { ItemMenu, menuAt, type MenuEntry } from '../ItemMenu'
+import { NATURES, petSkillIcon } from './nature'
 import { Dialog, GameButton, Notice } from '../skin'
 import { plainText } from '../text'
 import { showToast } from '../toast'
@@ -28,16 +31,7 @@ export const petsKey = ['game', 'pets'] as const
 const ICONS = pets as Record<string, { icon: string }>
 /** The pet's Reborn icon (all 190 species have one; 34 have no battle art). */
 export const petIcon = (avatar: number) => ICONS[String(avatar)]?.icon
-const skillIcon = (id: number) => `/assets/reborn/icons/skills/${id}.webp`
-
-export const NATURES: Record<number, string> = {
-  1: 'Plant',
-  2: 'Beast',
-  3: 'Artificial',
-  4: 'Dragon',
-  5: 'Tailed Beast',
-  6: 'Spirit',
-}
+export { NATURES }
 /** Reborn's rows: vertical red labels, tooltips Aura / Aid / Passive. */
 const ROWS: { kind: PetSkillKind; label: string; title: string; group: string }[] = [
   { kind: 1, label: 'AURA', title: 'Aura', group: 'Aura skills' },
@@ -54,6 +48,8 @@ const PROPS = [
 const SLOTS_PER_ROW = 6
 const FOOD_SLOTS = 6
 const STORAGE_PAGE = 4
+/** Offset of the pet tooltip from the pointer. */
+const TIP_GAP = 12
 
 const nameOf = (nameKey: string, fallback = 'Unknown') => plainText(nameKey, fallback)
 // Food types as the 2011 pet room names them (lg_Common_PetWatchLoveFood1-7).
@@ -90,20 +86,55 @@ function useNow(active: boolean) {
 const usePets = () =>
   useQuery({ queryKey: petsKey, queryFn: () => api<PetsView>('/api/game/pets') })
 
-/** Inventory Pet slot content: the active pet's icon, drawn inside the slot cell. */
+/** The active pet as Reborn's pet item tooltip shows it: a bound Pet with its slotted skills. */
+export const petTooltipEntry = (pet: PetView): TooltipEntry => ({
+  item: {
+    id: pet.id,
+    itemId: pet.species,
+    count: 1,
+    // ponytail: kennel pets are no item rows; they cannot be traded, so the chip reads Bound.
+    bound: true,
+    equippedSlot: 'Pet',
+    nameKey: pet.nameKey,
+    info: {
+      kind: 'other',
+      level: 0,
+      sellPrice: null,
+      stack: 1,
+      w: 1,
+      h: 1,
+      class: 'PetItem',
+      pet: { nature: pet.nature },
+    },
+  },
+  pet: { level: pet.level, skills: pet.skills.filter((skill) => skill.slot !== null) },
+})
+
+/** Inventory Pet slot content: the active pet's icon, with Reborn's pet tooltip on hover. */
 export function PetSlot() {
   const active = usePets().data?.pets.find((pet) => pet.active)
+  const origin = useRef<HTMLSpanElement>(null)
+  const [tip, setTip] = useState<Point | null>(null)
   if (!active) return <span className="sr-only">Pet: empty</span>
   const name = nameOf(active.nameKey, 'Pet')
+  const show = (event: PointerEvent<HTMLElement>) => {
+    // Tooltips are fixed; the window frame may be their containing block (see Inventory).
+    const base = origin.current?.getBoundingClientRect() ?? { left: 0, top: 0 }
+    setTip({ x: event.clientX - base.left + TIP_GAP, y: event.clientY - base.top + TIP_GAP })
+  }
   return (
     <span
       className="absolute inset-0 grid place-items-center"
-      title={`${name} Lv. ${active.level}`}
+      onPointerEnter={show}
+      onPointerMove={show}
+      onPointerLeave={() => setTip(null)}
     >
+      <span ref={origin} aria-hidden="true" className="pointer-events-none fixed top-0 left-0" />
       <img src={petIcon(active.avatar)} alt="" className="size-full object-contain p-[2px]" />
       <span className="sr-only">
         Pet: {name}, level {active.level}
       </span>
+      {tip && <ItemTooltip entry={petTooltipEntry(active)} at={tip} />}
     </span>
   )
 }
@@ -516,7 +547,7 @@ function SkillCell({ skill, onClick }: { skill: PetSkillView; onClick: OpenMenuH
         <span className="px-px">{name}</span>
       ) : (
         <img
-          src={skillIcon(skill.skillId)}
+          src={petSkillIcon(skill.skillId)}
           alt=""
           className="size-[28px]"
           onError={() => setBroken(true)}
