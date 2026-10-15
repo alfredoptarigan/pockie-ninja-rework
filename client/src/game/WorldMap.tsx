@@ -51,8 +51,8 @@ function MapTip({ sceneId, nation }: { sceneId: number; nation: number }) {
  * focusing one shows the original tooltip (Tip_WorldMap_<scene>_<nation>), the place the ninja
  * stands in glows (face_<scene>). Buttons stack by their Flash depth, so overlaps go to the higher
  * one. Places the ninja cannot enter yet (level, village, or a place reached on foot that was
- * never entered) are drawn dimmed and do not travel; a level lock shows the level needed
- * (decision 7). Travel rules stay on the server: this only decides what to offer.
+ * never entered) hide their art like refreshMap's alpha 0, so the bare painting shows, and do not
+ * travel; a level lock shows the level needed (decision 7). Travel rules stay on the server: this only decides what to offer.
  */
 export function WorldMap({ character, onClose }: { character: Character; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null)
@@ -156,7 +156,7 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
               className={`group absolute focus-visible:outline-2 focus-visible:outline-[#ffe27a] ${open ? 'cursor-pointer' : 'cursor-not-allowed'}`}
               style={{ ...box(r), zIndex: r.depth }}
             >
-              <span className={dimmed ? 'opacity-45 grayscale' : undefined}>
+              <span className={dimmed ? 'opacity-0' : undefined}>
                 <img
                   src={r.states.up.file}
                   alt=""

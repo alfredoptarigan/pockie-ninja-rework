@@ -55,12 +55,14 @@ describe('WorldMap', () => {
     expect(screen.getByRole('tooltip')).toHaveTextContent('Entry level: Level 1')
   })
 
-  it('draws locked places dimmed with the level they need', () => {
+  it('hides the art of locked places, like WorldMapFrame (alpha 0), with the level they need', () => {
     renderMap()
 
+    // The bare painting shows through; nothing is greyed out.
     const water = place('Water Village')
-    expect(water.querySelector('.grayscale')).not.toBeNull()
-    expect(place('Smelting Mountains').querySelector('.grayscale')).toBeNull()
+    expect(water.querySelector('.opacity-0')).not.toBeNull()
+    expect(water.querySelector('.grayscale')).toBeNull()
+    expect(place('Smelting Mountains').querySelector('.opacity-0')).toBeNull()
     expect(place('Eventide Barrens Lv. 11')).toHaveTextContent('Lv. 11')
   })
 

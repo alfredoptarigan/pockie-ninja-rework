@@ -51,6 +51,7 @@ import { acceptQuest, type Tx } from '../src/game/progress.js'
 import { WING_SLOT } from '../src/game/wings.js'
 import { refreshArenaSnapshot } from '../src/modules/arena/snapshot.js'
 import { hashPassword } from '../src/modules/auth/password.js'
+import { visitRequiredScenes } from '../src/modules/game/field-data.js'
 import { learnPool } from '../src/modules/pets/kennel.js'
 
 const USERNAME = 'qapockieninja'
@@ -169,7 +170,8 @@ async function upsertCharacter(tx: Tx, userId: string) {
     hpPouch: pouchMax(LEVEL),
     mpPouch: pouchMax(LEVEL),
     sceneId: castle,
-    scenesEntered: [castle],
+    // A level-90 ninja has walked everywhere: the world map opens every place it can reach.
+    scenesEntered: [...new Set([castle, ...visitRequiredScenes()])],
     petSlots: KENNEL_MAX_SLOTS,
   }
   const [existing] = await tx
