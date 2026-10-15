@@ -19,18 +19,18 @@ Sources (gitignored): `data/reborn-raw/re/main.js`, `re/serverConfig.json`,
 
 ## Our mapping (tools/game-data/import-reborn-titles.ts)
 
-| Reborn stat | Equipment term | Scale |
-|---|---|---|
-| 1/2/3 Strength/Agility/Stamina | `StrengthEquip`/`AgilityEquip`/`StaminaEquip` | x100 (our attributes are x100) |
-| 4 Defense | `DefenseEquip` | 1 |
-| 5 Defense Break | `NeglectDefAttachEquip` | 1 |
-| 6 Dodge, 7 Hit | `DodgeMulEquip`, `HitMulEquip` | 1 |
-| 8 Max Health, 13 Max Chakra | `MaxHPEquip`, `MaxMPEquip` | 1 |
-| 9 Max Health %, 14 Max Chakra % | `MaxHPMulEquip`, `MaxMPMulEquip` | 1 (per-mille) |
-| 10 Max Attack, 20 Min Attack | `MaxAtkEquip`, `MinAtkEquip` | 1 |
-| 11 Attack %, 12 Speed % | `AbsAddAtkMulEquip`, `AtkTimeMulEquip` | 1 (per-mille) |
-| 15 Critical, 17 Constitution, 19 Pierce | `CritMulEquip`, `ToughEquip`, `PierceEquip` | 1 |
-| 105 Block | `ParryMulEquip` | 1 |
+| Reborn stat                             | Equipment term                                | Scale                          |
+| --------------------------------------- | --------------------------------------------- | ------------------------------ |
+| 1/2/3 Strength/Agility/Stamina          | `StrengthEquip`/`AgilityEquip`/`StaminaEquip` | x100 (our attributes are x100) |
+| 4 Defense                               | `DefenseEquip`                                | 1                              |
+| 5 Defense Break                         | `NeglectDefAttachEquip`                       | 1                              |
+| 6 Dodge, 7 Hit                          | `DodgeMulEquip`, `HitMulEquip`                | 1                              |
+| 8 Max Health, 13 Max Chakra             | `MaxHPEquip`, `MaxMPEquip`                    | 1                              |
+| 9 Max Health %, 14 Max Chakra %         | `MaxHPMulEquip`, `MaxMPMulEquip`              | 1 (per-mille)                  |
+| 10 Max Attack, 20 Min Attack            | `MaxAtkEquip`, `MinAtkEquip`                  | 1                              |
+| 11 Attack %, 12 Speed %                 | `AbsAddAtkMulEquip`, `AtkTimeMulEquip`        | 1 (per-mille)                  |
+| 15 Critical, 17 Constitution, 19 Pierce | `CritMulEquip`, `ToughEquip`, `PierceEquip`   | 1                              |
+| 105 Block                               | `ParryMulEquip`                               | 1                              |
 
 The import fails on any other stat id, so a new one in a future dump is noticed.
 
