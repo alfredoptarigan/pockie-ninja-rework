@@ -1,0 +1,1707 @@
+{
+  "0": [],
+  "1": [
+    {
+      "name": "StrengthEquip",
+      "value": 1300
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1300
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1300
+    }
+  ],
+  "2": [
+    {
+      "name": "StrengthEquip",
+      "value": 1500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1500
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1500
+    }
+  ],
+  "3": [
+    {
+      "name": "StrengthEquip",
+      "value": 1700
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1700
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1700
+    }
+  ],
+  "4": [
+    {
+      "name": "StrengthEquip",
+      "value": 1900
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1900
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1900
+    }
+  ],
+  "5": [
+    {
+      "name": "StrengthEquip",
+      "value": 2100
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2100
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2100
+    }
+  ],
+  "6": [
+    {
+      "name": "StrengthEquip",
+      "value": 2300
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2300
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2300
+    }
+  ],
+  "7": [
+    {
+      "name": "StrengthEquip",
+      "value": 1000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1000
+    },
+    {
+      "name": "MaxHPEquip",
+      "value": 100
+    }
+  ],
+  "8": [
+    {
+      "name": "MaxHPEquip",
+      "value": 50
+    }
+  ],
+  "9": [
+    {
+      "name": "HitMulEquip",
+      "value": 40
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 20
+    }
+  ],
+  "10": [
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 40
+    }
+  ],
+  "13": [
+    {
+      "name": "StrengthEquip",
+      "value": 500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 16
+    },
+    {
+      "name": "PierceEquip",
+      "value": 25
+    }
+  ],
+  "14": [
+    {
+      "name": "StrengthEquip",
+      "value": 1000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 22
+    },
+    {
+      "name": "PierceEquip",
+      "value": 35
+    }
+  ],
+  "15": [
+    {
+      "name": "StrengthEquip",
+      "value": 1500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 28
+    },
+    {
+      "name": "PierceEquip",
+      "value": 45
+    }
+  ],
+  "16": [
+    {
+      "name": "StrengthEquip",
+      "value": 2000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 34
+    },
+    {
+      "name": "PierceEquip",
+      "value": 55
+    }
+  ],
+  "17": [
+    {
+      "name": "StrengthEquip",
+      "value": 2500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 40
+    },
+    {
+      "name": "PierceEquip",
+      "value": 65
+    }
+  ],
+  "18": [
+    {
+      "name": "HitMulEquip",
+      "value": 25
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 15
+    }
+  ],
+  "19": [
+    {
+      "name": "HitMulEquip",
+      "value": 40
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 25
+    }
+  ],
+  "20": [
+    {
+      "name": "HitMulEquip",
+      "value": 55
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 35
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 20
+    }
+  ],
+  "21": [
+    {
+      "name": "HitMulEquip",
+      "value": 70
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 45
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 30
+    }
+  ],
+  "22": [
+    {
+      "name": "HitMulEquip",
+      "value": 90
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 60
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 40
+    }
+  ],
+  "23": [
+    {
+      "name": "DefenseEquip",
+      "value": 25
+    },
+    {
+      "name": "ToughEquip",
+      "value": 15
+    }
+  ],
+  "24": [
+    {
+      "name": "DefenseEquip",
+      "value": 40
+    },
+    {
+      "name": "ToughEquip",
+      "value": 25
+    }
+  ],
+  "25": [
+    {
+      "name": "DefenseEquip",
+      "value": 55
+    },
+    {
+      "name": "ToughEquip",
+      "value": 35
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 20
+    }
+  ],
+  "26": [
+    {
+      "name": "DefenseEquip",
+      "value": 70
+    },
+    {
+      "name": "ToughEquip",
+      "value": 45
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 30
+    }
+  ],
+  "27": [
+    {
+      "name": "DefenseEquip",
+      "value": 90
+    },
+    {
+      "name": "ToughEquip",
+      "value": 60
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 40
+    }
+  ],
+  "28": [
+    {
+      "name": "PierceEquip",
+      "value": 45
+    },
+    {
+      "name": "DefenseEquip",
+      "value": 51
+    }
+  ],
+  "29": [
+    {
+      "name": "PierceEquip",
+      "value": 52
+    },
+    {
+      "name": "DefenseEquip",
+      "value": 59
+    }
+  ],
+  "30": [
+    {
+      "name": "PierceEquip",
+      "value": 54
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 35
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 38
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 38
+    }
+  ],
+  "31": [
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 80
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 34
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 55
+    }
+  ],
+  "32": [
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 80
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 37
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 34
+    }
+  ],
+  "33": [
+    {
+      "name": "DefenseEquip",
+      "value": 118
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 40
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 55
+    }
+  ],
+  "34": [
+    {
+      "name": "DodgeMulEquip",
+      "value": 74
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 40
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 40
+    }
+  ],
+  "35": [
+    {
+      "name": "HitMulEquip",
+      "value": 111
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 34
+    },
+    {
+      "name": "PierceEquip",
+      "value": 52
+    }
+  ],
+  "36": [
+    {
+      "name": "CritMulEquip",
+      "value": 68
+    },
+    {
+      "name": "PierceEquip",
+      "value": 52
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 55
+    }
+  ],
+  "37": [
+    {
+      "name": "PierceEquip",
+      "value": 104
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 40
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 34
+    }
+  ],
+  "38": [
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 30
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 30
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 30
+    }
+  ],
+  "39": [
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 41
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 33
+    },
+    {
+      "name": "MinAtkEquip",
+      "value": 11
+    }
+  ],
+  "40": [
+    {
+      "name": "MaxHPMulEquip",
+      "value": 41
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 4700
+    },
+    {
+      "name": "ToughEquip",
+      "value": 49
+    }
+  ],
+  "41": [
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 41
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4700
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 36
+    }
+  ],
+  "42": [
+    {
+      "name": "ParryMulEquip",
+      "value": 36
+    },
+    {
+      "name": "MaxMPEquip",
+      "value": 43
+    },
+    {
+      "name": "MaxHPEquip",
+      "value": 43
+    }
+  ],
+  "43": [
+    {
+      "name": "CritMulEquip",
+      "value": 33
+    },
+    {
+      "name": "StrengthEquip",
+      "value": 4700
+    },
+    {
+      "name": "PierceEquip",
+      "value": 49
+    }
+  ],
+  "44": [
+    {
+      "name": "DefenseEquip",
+      "value": 55
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 33
+    },
+    {
+      "name": "MinAtkEquip",
+      "value": 11
+    }
+  ],
+  "45": [
+    {
+      "name": "DodgeMulEquip",
+      "value": 36
+    },
+    {
+      "name": "DefenseEquip",
+      "value": 55
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 36
+    }
+  ],
+  "46": [
+    {
+      "name": "NeglectDefAttachEquip",
+      "value": 54
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 54
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 36
+    }
+  ],
+  "47": [
+    {
+      "name": "HitMulEquip",
+      "value": 54
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 41
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 33
+    }
+  ],
+  "48": [
+    {
+      "name": "PierceEquip",
+      "value": 49
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 36
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 4700
+    }
+  ],
+  "49": [
+    {
+      "name": "NeglectDefAttachEquip",
+      "value": 54
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 36
+    },
+    {
+      "name": "MaxAtkEquip",
+      "value": 11
+    }
+  ],
+  "50": [
+    {
+      "name": "ParryMulEquip",
+      "value": 36
+    },
+    {
+      "name": "DefenseEquip",
+      "value": 55
+    },
+    {
+      "name": "MaxMPEquip",
+      "value": 43
+    }
+  ],
+  "56": [
+    {
+      "name": "StrengthEquip",
+      "value": 2000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 30
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 30
+    }
+  ],
+  "61": [
+    {
+      "name": "StrengthEquip",
+      "value": 3500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 45
+    },
+    {
+      "name": "PierceEquip",
+      "value": 30
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 50
+    }
+  ],
+  "63": [
+    {
+      "name": "StrengthEquip",
+      "value": 9800
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 58
+    },
+    {
+      "name": "PierceEquip",
+      "value": 55
+    }
+  ],
+  "64": [
+    {
+      "name": "AgilityEquip",
+      "value": 9800
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 40
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 40
+    }
+  ],
+  "65": [
+    {
+      "name": "DefenseEquip",
+      "value": 124
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 55
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 40
+    }
+  ],
+  "66": [
+    {
+      "name": "DodgeMulEquip",
+      "value": 78
+    },
+    {
+      "name": "NeglectDefAttachEquip",
+      "value": 58
+    },
+    {
+      "name": "PierceEquip",
+      "value": 55
+    }
+  ],
+  "67": [
+    {
+      "name": "HitMulEquip",
+      "value": 116
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 40
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 40
+    }
+  ],
+  "68": [
+    {
+      "name": "CritMulEquip",
+      "value": 71
+    },
+    {
+      "name": "PierceEquip",
+      "value": 55
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 40
+    }
+  ],
+  "69": [
+    {
+      "name": "PierceEquip",
+      "value": 109
+    },
+    {
+      "name": "ToughEquip",
+      "value": 58
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 58
+    }
+  ],
+  "70": [
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 50
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 50
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 50
+    }
+  ],
+  "71": [
+    {
+      "name": "DefenseEquip",
+      "value": 80
+    },
+    {
+      "name": "ToughEquip",
+      "value": 60
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 40
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 40
+    }
+  ],
+  "72": [
+    {
+      "name": "StrengthEquip",
+      "value": 4500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 40
+    },
+    {
+      "name": "PierceEquip",
+      "value": 40
+    }
+  ],
+  "73": [
+    {
+      "name": "DodgeMulEquip",
+      "value": 50
+    },
+    {
+      "name": "MaxHPEquip",
+      "value": 200
+    }
+  ],
+  "74": [
+    {
+      "name": "HitMulEquip",
+      "value": 55
+    },
+    {
+      "name": "PierceEquip",
+      "value": 55
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 50
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 50
+    }
+  ],
+  "75": [
+    {
+      "name": "StrengthEquip",
+      "value": 3000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 3000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 46
+    },
+    {
+      "name": "PierceEquip",
+      "value": 75
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 10
+    }
+  ],
+  "76": [
+    {
+      "name": "StrengthEquip",
+      "value": 3500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 3500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 52
+    },
+    {
+      "name": "PierceEquip",
+      "value": 85
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 20
+    }
+  ],
+  "77": [
+    {
+      "name": "HitMulEquip",
+      "value": 45
+    },
+    {
+      "name": "PierceEquip",
+      "value": 45
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 40
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 40
+    }
+  ],
+  "79": [
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 30
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 30
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 30
+    }
+  ],
+  "80": [
+    {
+      "name": "MaxHPMulEquip",
+      "value": 50
+    },
+    {
+      "name": "ToughEquip",
+      "value": 40
+    },
+    {
+      "name": "MaxMPEquip",
+      "value": 150
+    }
+  ],
+  "81": [
+    {
+      "name": "StrengthEquip",
+      "value": 2500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2500
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2500
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 30
+    }
+  ],
+  "82": [
+    {
+      "name": "StrengthEquip",
+      "value": 2000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 20
+    }
+  ],
+  "83": [
+    {
+      "name": "CritMulEquip",
+      "value": 50
+    },
+    {
+      "name": "PierceEquip",
+      "value": 50
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 30
+    }
+  ],
+  "84": [
+    {
+      "name": "DodgeMulEquip",
+      "value": 50
+    },
+    {
+      "name": "NeglectDefAttachEquip",
+      "value": 40
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 30
+    }
+  ],
+  "85": [
+    {
+      "name": "StrengthEquip",
+      "value": 4000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 4000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 50
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 50
+    }
+  ],
+  "86": [
+    {
+      "name": "StrengthEquip",
+      "value": 6000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 6000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 6000
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 60
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 60
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 60
+    }
+  ],
+  "87": [
+    {
+      "name": "CritMulEquip",
+      "value": 25
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 25
+    }
+  ],
+  "88": [
+    {
+      "name": "CritMulEquip",
+      "value": 45
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 45
+    },
+    {
+      "name": "PierceEquip",
+      "value": 30
+    }
+  ],
+  "89": [
+    {
+      "name": "CritMulEquip",
+      "value": 70
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 70
+    },
+    {
+      "name": "PierceEquip",
+      "value": 50
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 30
+    }
+  ],
+  "90": [
+    {
+      "name": "PierceEquip",
+      "value": 75
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 49
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 53
+    },
+    {
+      "name": "ParryMulEquip",
+      "value": 53
+    }
+  ],
+  "91": [
+    {
+      "name": "HitMulEquip",
+      "value": 40
+    },
+    {
+      "name": "PierceEquip",
+      "value": 40
+    },
+    {
+      "name": "ToughEquip",
+      "value": 40
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 30
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 30
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 30
+    }
+  ],
+  "92": [
+    {
+      "name": "CritMulEquip",
+      "value": 30
+    },
+    {
+      "name": "StrengthEquip",
+      "value": 4000
+    },
+    {
+      "name": "PierceEquip",
+      "value": 45
+    }
+  ],
+  "93": [
+    {
+      "name": "HitMulEquip",
+      "value": 27
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 20
+    },
+    {
+      "name": "MinAtkEquip",
+      "value": 17
+    }
+  ],
+  "94": [
+    {
+      "name": "StrengthEquip",
+      "value": 4000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 58
+    },
+    {
+      "name": "PierceEquip",
+      "value": 95
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 30
+    }
+  ],
+  "95": [
+    {
+      "name": "StrengthEquip",
+      "value": 4500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 64
+    },
+    {
+      "name": "PierceEquip",
+      "value": 105
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 40
+    }
+  ],
+  "96": [
+    {
+      "name": "StrengthEquip",
+      "value": 5000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 70
+    },
+    {
+      "name": "PierceEquip",
+      "value": 115
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 50
+    }
+  ],
+  "97": [
+    {
+      "name": "StrengthEquip",
+      "value": 5500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5500
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 76
+    },
+    {
+      "name": "PierceEquip",
+      "value": 125
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 60
+    }
+  ],
+  "98": [
+    {
+      "name": "StrengthEquip",
+      "value": 6000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 6000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 82
+    },
+    {
+      "name": "PierceEquip",
+      "value": 135
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 70
+    }
+  ],
+  "100": [
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 50
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 40
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 40
+    }
+  ],
+  "101": [
+    {
+      "name": "StrengthEquip",
+      "value": 500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 500
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 500
+    }
+  ],
+  "102": [
+    {
+      "name": "StrengthEquip",
+      "value": 800
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 800
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 800
+    }
+  ],
+  "103": [
+    {
+      "name": "StrengthEquip",
+      "value": 1100
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1100
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1100
+    }
+  ],
+  "104": [
+    {
+      "name": "StrengthEquip",
+      "value": 1400
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1400
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1400
+    }
+  ],
+  "105": [
+    {
+      "name": "StrengthEquip",
+      "value": 1700
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 1700
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 1700
+    }
+  ],
+  "106": [
+    {
+      "name": "StrengthEquip",
+      "value": 2000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2000
+    }
+  ],
+  "107": [
+    {
+      "name": "StrengthEquip",
+      "value": 2300
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2300
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2300
+    }
+  ],
+  "108": [
+    {
+      "name": "StrengthEquip",
+      "value": 2600
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2600
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2600
+    }
+  ],
+  "109": [
+    {
+      "name": "StrengthEquip",
+      "value": 2900
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 2900
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 2900
+    }
+  ],
+  "110": [
+    {
+      "name": "StrengthEquip",
+      "value": 3200
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 3200
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 3200
+    }
+  ],
+  "111": [
+    {
+      "name": "StrengthEquip",
+      "value": 3500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 3500
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 3500
+    }
+  ],
+  "112": [
+    {
+      "name": "StrengthEquip",
+      "value": 3800
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 3800
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 3800
+    }
+  ],
+  "113": [
+    {
+      "name": "StrengthEquip",
+      "value": 4100
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4100
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 4100
+    }
+  ],
+  "114": [
+    {
+      "name": "StrengthEquip",
+      "value": 4400
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4400
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 4400
+    }
+  ],
+  "115": [
+    {
+      "name": "StrengthEquip",
+      "value": 4700
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 4700
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 4700
+    }
+  ],
+  "116": [
+    {
+      "name": "StrengthEquip",
+      "value": 5000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 5000
+    }
+  ],
+  "117": [
+    {
+      "name": "StrengthEquip",
+      "value": 5300
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5300
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 5300
+    }
+  ],
+  "118": [
+    {
+      "name": "StrengthEquip",
+      "value": 5600
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5600
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 5600
+    }
+  ],
+  "119": [
+    {
+      "name": "StrengthEquip",
+      "value": 5900
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5900
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 5900
+    }
+  ],
+  "120": [
+    {
+      "name": "StrengthEquip",
+      "value": 6200
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 6200
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 6200
+    }
+  ],
+  "121": [
+    {
+      "name": "StrengthEquip",
+      "value": 6500
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 6500
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 6500
+    }
+  ],
+  "122": [],
+  "123": [],
+  "124": [
+    {
+      "name": "StrengthEquip",
+      "value": 5000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 5000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 5000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 50
+    },
+    {
+      "name": "PierceEquip",
+      "value": 50
+    }
+  ],
+  "125": [
+    {
+      "name": "StaminaEquip",
+      "value": 8000
+    },
+    {
+      "name": "DefenseEquip",
+      "value": 80
+    },
+    {
+      "name": "MaxHPMulEquip",
+      "value": 60
+    },
+    {
+      "name": "MaxMPMulEquip",
+      "value": 60
+    }
+  ],
+  "126": [
+    {
+      "name": "AgilityEquip",
+      "value": 7000
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 60
+    },
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 60
+    }
+  ],
+  "127": [
+    {
+      "name": "AtkTimeMulEquip",
+      "value": 100
+    },
+    {
+      "name": "DodgeMulEquip",
+      "value": 50
+    },
+    {
+      "name": "HitMulEquip",
+      "value": 50
+    }
+  ],
+  "128": [
+    {
+      "name": "StrengthEquip",
+      "value": 6000
+    },
+    {
+      "name": "AgilityEquip",
+      "value": 6000
+    },
+    {
+      "name": "StaminaEquip",
+      "value": 6000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 60
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 60
+    }
+  ],
+  "129": [
+    {
+      "name": "StrengthEquip",
+      "value": 7000
+    },
+    {
+      "name": "CritMulEquip",
+      "value": 70
+    },
+    {
+      "name": "PierceEquip",
+      "value": 80
+    },
+    {
+      "name": "AbsAddAtkMulEquip",
+      "value": 50
+    }
+  ]
+}

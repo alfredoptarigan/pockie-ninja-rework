@@ -12,6 +12,7 @@ import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { parseIni } from './ini.ts'
 import { buildM6, type M6Inputs } from './import-reborn-m6.ts'
+import { buildTitles } from './import-reborn-titles.ts'
 
 const root = resolve(import.meta.dirname, '../..')
 export const defaultRawDir = process.env.REBORN_RAW_DIR ?? join(root, 'data/reborn-raw')
@@ -96,6 +97,7 @@ type ServerConfig = {
   WING: { Line: Record<string, [number, number][][]> }
   avatars: Record<string, RebornAvatar>
   avatarStars: Record<string, number | boolean>
+  titles: Record<string, [number, number][]>
 }
 type RebornAvatar = {
   value: number
@@ -689,6 +691,7 @@ export function buildReborn(raw: RawInputs) {
       'nonfight-buffs': dice.buffs,
       events,
       outfits,
+      titles: buildTitles(raw.serverConfig.titles),
       ...m6.files,
     } as Record<string, unknown>,
     names: Object.fromEntries(names.map(({ key, name }) => [key, name])),
