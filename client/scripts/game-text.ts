@@ -1,6 +1,6 @@
 // Builds the client's slice of the game text and world data for milestone 2 from the imported
 // original data (server/data/game) and the English table (tools/i18n/en.json):
-//   client/src/i18n/en.json        strings the M2 slice can show (scenes 1x1 and 21xx-25xx)
+//   client/src/i18n/en.json        strings the M2 slice can show (scenes 1x1 and 21xx-28xx)
 //   client/src/game/world-data.json quest offers and travel routes the client needs for its UI
 // Run with `pnpm --filter @pockie/client game-text` after en.json or the game data change.
 import { execFileSync } from 'node:child_process'
@@ -34,7 +34,7 @@ const arenaTiers = game<Record<string, { npcs: string[] }>>('arena-tiers')
 const tollGates = game<Record<string, { TollGateName: string }>>('toll-gates')
 
 const VILLAGES = [111, 121, 131, 141, 151]
-const FIELD_ZONES = [21, 22, 23, 24, 25]
+const FIELD_ZONES = [21, 22, 23, 24, 25, 26, 27, 28]
 const sliceScenes = new Set([
   ...VILLAGES,
   ...Object.keys(scenes)
