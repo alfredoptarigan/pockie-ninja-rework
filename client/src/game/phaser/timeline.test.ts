@@ -10,8 +10,10 @@ import {
   latestAt,
   poseX,
   poseScaleX,
+  STAGE,
   type Timeline,
 } from './timeline'
+import { EFFECT_FRAME_MS, MOVE_DISTANCE, MOVE_MS, skillEffect } from './skill-effects'
 
 const sheet = (ticks: number[], attacking?: number): MotionSheet => ({
   file: 'x.webp',
@@ -150,6 +152,52 @@ describe('buildTimeline', () => {
     expect(timeline.poses[1]!.some((p) => p.motion === '68')).toBe(true)
     expect(timeline.poses[1]!.some((p) => p.motion === '18')).toBe(true)
     expect(timeline.poses[0]!.some((p) => p.motion === '64')).toBe(true)
+  })
+
+  it('plays a ninjutsu effect and kills the target on its Attack frame', () => {
+    // Lotus (1807): walk in 330 px, effect at the caster, damage on frame 2.
+    const timeline = build(
+      replayOf([
+        { actor: 0, event: 14, target: 1, skillId: 1807, damage: 500, hit: true, attackCount: 5 },
+        { actor: 1, event: 20 },
+      ]),
+    )
+    const lotus = skillEffect(1807)!
+    const start = 500 + MOVE_MS
+    expect(timeline.effects).toEqual([
+      {
+        at: start,
+        atlas: lotus.atlas,
+        frames: lotus.frames,
+        x: HOME.attackers + MOVE_DISTANCE + lotus.offset[0] * -1,
+        y: STAGE.groundY + lotus.offset[1],
+        scaleX: -1,
+        behind: false,
+      },
+    ])
+    expect(timeline.poses[0]!.find((p) => p.motion === '55')).toMatchObject({
+      to: HOME.attackers + MOVE_DISTANCE,
+    })
+    const impact = start + EFFECT_FRAME_MS
+    expect(timeline.texts.find((t) => t.kind === 'damage')).toMatchObject({
+      at: impact,
+      text: '-500',
+    })
+    // Dead on the killing blow; event 20 does not play the death again.
+    const deaths = timeline.poses[1]!.filter((p) => p.motion === '57')
+    expect(deaths.map((p) => p.at)).toEqual([impact])
+  })
+
+  it('places an onTarget effect at the target, mirrored for a defender caster', () => {
+    const timeline = build(
+      replayOf([{ actor: 1, event: 14, target: 0, skillId: 1802, damage: 5, hit: true }]),
+    )
+    const thunderfall = skillEffect(1802)!
+    expect(timeline.effects?.[0]).toMatchObject({
+      x: HOME.attackers + thunderfall.offset[0],
+      scaleX: 1,
+    })
+    expect(timeline.poses[1]!.some((p) => p.motion === '55')).toBe(false)
   })
 
   it('plays a multi-hit skill as one strike with the total damage', () => {

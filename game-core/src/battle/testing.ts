@@ -1,5 +1,5 @@
 // Test helpers: a fighter in its fight state and a scripted FightContext that records calls.
-import type { FightContext, Fighter, FighterInput, FightEvent } from './types.js'
+import type { FightContext, Fighter, FighterInput, FightEvent, Replay } from './types.js'
 
 export function makeFighter(overrides: Partial<Fighter> = {}): Fighter {
   const input: FighterInput = {
@@ -116,3 +116,9 @@ export function fakeContext({
   }
   return { ctx, calls }
 }
+
+/** A replay without its display-only side panels: what the golden engine hashes cover. */
+export const fightOnly = (replay: Replay): Replay => ({
+  ...replay,
+  fighters: replay.fighters.map(({ panel: _panel, ...fighter }) => fighter),
+})

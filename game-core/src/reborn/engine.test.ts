@@ -4,8 +4,8 @@ import { createHash } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
 import { simulateFight, type FighterInput } from '../battle/fight.js'
 import { execute } from '../battle/scripts/execute.js'
-import { fakeContext, makeFighter } from '../battle/testing.js'
-import { SKILL_LOSE, SKILL_SUCCESS } from '../battle/types.js'
+import { fakeContext, fightOnly, makeFighter } from '../battle/testing.js'
+import { SKILL_LOSE, SKILL_SUCCESS, type Replay } from '../battle/types.js'
 
 function fighter(overrides: Partial<FighterInput> = {}): FighterInput {
   return {
@@ -34,7 +34,11 @@ function fighter(overrides: Partial<FighterInput> = {}): FighterInput {
 }
 
 const GOLDEN = 'dc2f83058bbc7eaf1552bdede0fd4c96b9069a2f116a4e8230da984e2283a799'
-const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex')
+// The panel is display data; the golden hash covers the fight itself.
+const hash = (replays: Replay[]) =>
+  createHash('sha256')
+    .update(JSON.stringify(replays.map(fightOnly)))
+    .digest('hex')
 
 /** Both sides lead on some stats, so every talent would have something to narrow. */
 const golden = (talents?: FighterInput['talents']) =>

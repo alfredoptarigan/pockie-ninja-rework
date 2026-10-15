@@ -7,11 +7,19 @@ import type { VisualReplay as Replay, CompanionLook } from './companions'
 import { BattleVisuals, DEPTH } from './battle-visuals'
 import { petAsset, visualLook } from './companions'
 import { numberAssets } from './effects-map'
-import { replayTechniques, techniqueIcon } from './battle-hud'
+import {
+  panelPetSkills,
+  panelSkills,
+  panelStats,
+  PET_SKILL_SLOTS,
+  SKILL_SLOTS,
+  techniqueIcon,
+} from './battle-hud'
 import { numberGlyphs, glyphLayout } from './numbers'
 import { createGame, LABEL_STYLE, loadSheet } from './game'
 import { frameAt, originOf, sheetOf, sheetTicks, type FighterArt } from './motion'
 import { overlayFrame, shiftAt } from './secret-technique'
+import { effectFrameAt } from './skill-effects'
 import {
   BATTLE_TICK_MS,
   FADE_MS,
@@ -66,6 +74,13 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
   info: { color: '#e8f4ff', size: 24 },
 }
 const HUD = { margin: 12, portrait: 68, vsGap: 24, hpY: 28, hpH: 18, mpY: 48, mpH: 7 }
+/** Reborn's fight panel (fight__stat-row: 12 px #f5f5f5, Hp crimson, Chakra skyblue). */
+const PANEL = { y: 145, width: 165, text: '#f5f5f5', red: '#dc143c', blue: '#87ceeb' }
+const PANEL_ART = {
+  background: '/assets/reborn/ui/combat/stats.webp',
+  petFrame: '/assets/reborn/ui/combat/pet_icon.webp',
+  lock: '/assets/reborn/ui/UIResource/SkillTree/Lock4.webp',
+}
 /** Puts the weapon right above its body (body depths are pose start times in ms). */
 const WEAPON_ABOVE_BODY = 0.01
 
@@ -87,21 +102,25 @@ class BattleScene extends Phaser.Scene {
   private weaponSprites: (Phaser.GameObjects.Sprite | undefined)[] = []
   /** Secret-technique layers per fighter (main atlas and its concurrent layer). */
   private overlaySprites: Phaser.GameObjects.Sprite[][] = []
+  /** Ninjutsu effect sprites by timeline.effects index, made when first shown. */
+  private effectSprites = new Map<number, Phaser.GameObjects.Sprite>()
   private floating = new Map<number, Phaser.GameObjects.Text | Phaser.GameObjects.Container>()
   private visuals: BattleVisuals
   private slots: number[]
-  private techniques: number[][]
+  /** Skill grid per fighter (its loadout; cast techniques for replays without a panel). */
+  private skills: number[][]
   private hud!: Phaser.GameObjects.Graphics
   private hudText: Phaser.GameObjects.Text[] = []
   private portraits: Partial<Record<'attackers' | 'defenders', Phaser.GameObjects.Image>> = {}
   private banner!: Phaser.GameObjects.Text
   private panelIcons = new Map<string, Phaser.GameObjects.Image>()
+  private panelBg: Partial<Record<'attackers' | 'defenders', Phaser.GameObjects.Image>> = {}
 
   constructor(private readonly setup: BattleSetup) {
     super('battle')
     this.visuals = new BattleVisuals(this, setup.replay, setup.timeline, setup.looks)
     this.slots = textSlots(setup.timeline.texts)
-    this.techniques = setup.replay.fighters.map((_, i) => replayTechniques(setup.replay, i))
+    this.skills = setup.replay.fighters.map((_, i) => panelSkills(setup.replay, i))
   }
 
   preload() {
@@ -118,12 +137,15 @@ class BattleScene extends Phaser.Scene {
       )?.icon
       if (icon && !this.textures.exists(icon)) this.load.image(icon, icon)
     }
-    for (const skills of this.techniques) {
-      for (const id of skills) {
-        const icon = techniqueIcon(id)
-        if (!this.textures.exists(icon)) this.load.image(icon, icon)
-      }
-    }
+    const images = [
+      ...Object.values(PANEL_ART),
+      ...this.skills.flat().map(techniqueIcon),
+      ...this.setup.replay.fighters.flatMap((_, i) =>
+        panelPetSkills(this.setup.replay, i).map(techniqueIcon),
+      ),
+    ]
+    for (const image of new Set(images))
+      if (!this.textures.exists(image)) this.load.image(image, image)
     timeline.poses.forEach((poses, i) => {
       const weapon = weapons[i]
       for (const pose of poses) {
@@ -138,6 +160,11 @@ class BattleScene extends Phaser.Scene {
       if (this.textures.exists(layer.texture)) continue
       const dir = layer.atlas.slice(0, layer.atlas.lastIndexOf('/') + 1)
       this.load.multiatlas(layer.texture, layer.atlas, dir)
+    }
+    // Ninjutsu effects keyed by their atlas URL; a failed load only leaves the effect out.
+    for (const atlas of new Set((timeline.effects ?? []).map((e) => e.atlas))) {
+      if (this.textures.exists(atlas)) continue
+      this.load.multiatlas(atlas, atlas, atlas.slice(0, atlas.lastIndexOf('/') + 1))
     }
   }
 
@@ -165,6 +192,15 @@ class BattleScene extends Phaser.Scene {
         : [],
     )
     this.hud = this.add.graphics().setDepth(DEPTH.ui + 100)
+    for (const side of ['attackers', 'defenders'] as const) {
+      if (!this.textures.exists(PANEL_ART.background)) break
+      this.panelBg[side] = this.add
+        .image(0, 0, PANEL_ART.background)
+        .setOrigin(0)
+        .setFlipX(side === 'defenders')
+        .setDepth(DEPTH.ui + 99)
+        .setVisible(false)
+    }
     for (const side of ['attackers', 'defenders'] as const) {
       this.portraits[side] = this.add
         .image(0, 0, '__MISSING')
@@ -217,6 +253,7 @@ class BattleScene extends Phaser.Scene {
     if (!this.banner) return // not created yet; create() renders the current clock
     const t = this.clock
     this.renderFighters(t)
+    this.renderEffects(t)
     this.visuals.render(t)
     this.renderTexts(t)
     this.renderHud(t)
@@ -262,6 +299,31 @@ class BattleScene extends Phaser.Scene {
         .setDepth(pose.at)
         .setVisible(alpha > 0 && (shift?.visible ?? true))
       if (weapon) this.renderWeapon(weapon, i, pose, sheet, sprite)
+    })
+  }
+
+  /** Ninjutsu effect sprites: top-left origin, mirrored for the attackers, over the bodies. */
+  private renderEffects(t: number) {
+    ;(this.setup.timeline.effects ?? []).forEach((effect, i) => {
+      const index = effectFrameAt(effect, t - effect.at)
+      const frame = index === undefined ? undefined : effect.frames[index]
+      let sprite = this.effectSprites.get(i)
+      if (
+        frame === undefined ||
+        !this.textures.exists(effect.atlas) ||
+        !this.textures.get(effect.atlas).has(frame)
+      ) {
+        sprite?.setVisible(false)
+        return
+      }
+      sprite ??= this.add.sprite(0, 0, effect.atlas, frame).setOrigin(0)
+      this.effectSprites.set(i, sprite)
+      sprite
+        .setTexture(effect.atlas, frame)
+        .setPosition(effect.x, effect.y)
+        .setScale(effect.scaleX, 1)
+        .setDepth(effect.behind ? DEPTH.overlayBack : DEPTH.overlay - 1)
+        .setVisible(true)
     })
   }
 
@@ -361,11 +423,12 @@ class BattleScene extends Phaser.Scene {
 
   /** Portraits in the top corners, long HP bars meeting at the VS emblem, MP bars below. */
   private renderHud(t: number) {
-    const { replay, timeline, names, buffName, art } = this.setup
+    const { replay, timeline, art } = this.setup
     const g = this.hud
     g.clear()
     let line = 0
     for (const icon of this.panelIcons.values()) icon.setVisible(false)
+    for (const bg of Object.values(this.panelBg)) bg.setVisible(false)
     for (const side of ['attackers', 'defenders'] as const) {
       const fighter = this.onStage(side, t)
       const left = side === 'attackers'
@@ -426,32 +489,73 @@ class BattleScene extends Phaser.Scene {
         g.fillStyle(0x0e1a2a, 0.9).fillRect(barX, HUD.mpY, barW, HUD.mpH)
         g.fillStyle(0x3a9ae8).fillRect(left ? barX : barX + barW - mpW, HUD.mpY, mpW, HUD.mpH)
       }
-      const panelX = left ? 0 : STAGE.width - 156
-      g.fillStyle(0x080d05, 0.68).fillRect(panelX, 145, 156, 410)
-      g.lineStyle(1, 0x8d9167, 0.5).lineBetween(panelX, 198, panelX + 156, 198)
-      this.hudLine(line++, panelX + 7, 158, names[fighter]!, 12, 0)
-      this.hudLine(line++, panelX + 7, 180, `Lv. ${f.level}`, 12, 0)
-      this.hudLine(line++, panelX + 7, 204, `Hp:       ${hp} / ${f.maxHp}`, 12, 0, '#ed3e31')
-      this.hudLine(line++, panelX + 7, 220, `Chakra: ${mp} / ${f.maxMp ?? '—'}`, 12, 0, '#67c7e8')
-      const buffs = (state?.buffs ?? []).map((id) => buffName(id)).filter(Boolean)
-      this.hudLine(line++, panelX + 7, 246, buffs.join('\n'), 11, 0)
-      const pet = petAsset(visualLook(f, this.setup.looks?.[fighter]).pet?.avatar)
-      g.fillStyle(0x050605, 0.8).fillRect(panelX + 7, 390, 48, 54)
-      if (pet?.icon) this.panelIcon(`pet:${side}`, pet.icon, panelX + 31, 417, 46)
-      this.hudLine(line++, panelX + 7, 453, 'Techniques used', 11, 0)
-      // Replay events contain cast skills, not the equipped loadout; empty cells stay empty.
-      const skills = this.techniques[fighter] ?? []
-      for (let slot = 0; slot < 15; slot++) {
-        const x = panelX + 7 + (slot % 5) * 29
-        const y = 470 + Math.floor(slot / 5) * 28
-        g.fillStyle(0x101513, 0.9).fillRect(x, y, 26, 26)
-        g.lineStyle(1, 0x686d63).strokeRect(x, y, 26, 26)
-        if (skills[slot])
-          this.panelIcon(`skill:${side}:${slot}`, techniqueIcon(skills[slot]!), x + 13, y + 13, 24)
-      }
+      line = this.renderPanel(line, side, fighter, hp, mp)
     }
     this.hudLine(line++, STAGE.width / 2, STAGE.height - 28, `${(t / 1000).toFixed(1)}s`, 16, 0.5)
     for (let i = line; i < this.hudText.length; i++) this.hudText[i]!.setVisible(false)
+  }
+
+  /**
+   * Reborn's fight panel (165 x 413 at y 145, mirrored on the right): name and level, the Hp /
+   * Chakra / Shield rows, the stat rows, the pet with its skill grid and the 5 x 3 skill grid.
+   * Empty slots show the padlock. Returns the next free text line.
+   */
+  private renderPanel(
+    line: number,
+    side: 'attackers' | 'defenders',
+    fighter: number,
+    hp: number,
+    mp: number,
+  ) {
+    const { replay, names } = this.setup
+    const f = replay.fighters[fighter]!
+    const left = side === 'attackers'
+    const panelX = left ? 0 : STAGE.width - PANEL.width
+    this.panelBg[side]?.setPosition(panelX, PANEL.y).setVisible(true)
+    // Header, pet and skills sit 5 px in (10 on the right); the stat rows fill the 160 px row width.
+    const x = panelX + (left ? 5 : 10)
+    const stat = left ? 0 : -7
+    const text = (y: number, value: string, align: number, dx: number, color?: string) =>
+      this.hudLine(line++, x + dx, PANEL.y + y, value, 12, align, color ?? PANEL.text, 80)
+    text(15, names[fighter]!, 0, 0)
+    text(15, `LV: ${f.level}`, 0, 80)
+    // A single row: label right-aligned in 50 px, value centred in the next 110 px.
+    const single = (y: number, label: string, value: string, color?: string) => {
+      text(y, label, 1, stat + 50, color)
+      text(y, value, 0.5, stat + 105, color)
+    }
+    single(55, 'Hp:', `${hp} / ${f.maxHp}`, PANEL.red)
+    single(71, 'Chakra:', `${mp} / ${f.maxMp ?? 0}`, PANEL.blue)
+    single(87, 'Shield:', '0')
+    panelStats(f).forEach((row, r) => {
+      const y = 105 + r * 16
+      if (row.length === 1) return single(y, row[0]![0], row[0]![1])
+      // Two columns of 80 px: label right-aligned in 50 px, value centred in 30 px.
+      row.forEach(([label, value], c) => {
+        text(y, label, 1, stat + c * 80 + 50)
+        text(y, value, 0.5, stat + c * 80 + 65)
+      })
+    })
+    const petY = PANEL.y + 244
+    this.panelIcon(`petframe:${side}`, PANEL_ART.petFrame, x + 27, petY + 27, 54)
+    const pet = petAsset(visualLook(f, this.setup.looks?.[fighter]).pet?.avatar)
+    if (pet?.icon) this.panelIcon(`pet:${side}`, pet.icon, x + 27, petY + 27, 48)
+    const slot = (id: string, skill: number | undefined, sx: number, sy: number) => {
+      this.panelIcon(`lock:${id}`, PANEL_ART.lock, sx + 12.5, sy + 12.5, 27)
+      if (skill) this.panelIcon(`skill:${id}`, techniqueIcon(skill), sx + 13.5, sy + 13.5, 26)
+    }
+    const petSkills = panelPetSkills(replay, fighter)
+    for (let i = 0; i < PET_SKILL_SLOTS; i++)
+      slot(
+        `pet:${side}:${i}`,
+        petSkills[i],
+        x + 66 + (i % 3) * 30,
+        petY - 16 + Math.floor(i / 3) * 30,
+      )
+    const skills = this.skills[fighter] ?? []
+    for (let i = 0; i < SKILL_SLOTS; i++)
+      slot(`${side}:${i}`, skills[i], x + (i % 5) * 30, PANEL.y + 315 + Math.floor(i / 5) * 30)
+    return line
   }
 
   private hudLine(
@@ -462,6 +566,7 @@ class BattleScene extends Phaser.Scene {
     size: number,
     align: number,
     color = '#e1e4d8',
+    wrap = 142,
   ) {
     this.hudText[i] ??= this.add
       .text(0, 0, '', {
@@ -474,7 +579,7 @@ class BattleScene extends Phaser.Scene {
     this.hudText[i]!.setText(text)
       .setFontSize(size)
       .setColor(color)
-      .setWordWrapWidth(142)
+      .setWordWrapWidth(wrap)
       .setOrigin(align, 0)
       .setPosition(x, y)
       .setVisible(true)

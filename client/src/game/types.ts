@@ -217,6 +217,22 @@ export interface Replay {
     maxMp?: number
     startMp?: number
     mp?: number
+    /** Side panel stats and skills (game-core FighterPanel); older replays lack it. */
+    panel?: {
+      minAttack: number
+      maxAttack: number
+      atkTime: number
+      neglectDefense: number
+      defense: number
+      pierce: number
+      parry: number
+      hit: number
+      dodge: number
+      crit: number
+      tough: number
+      skills: number[]
+      petSkills: number[]
+    }
   }[]
   events: FightEvent[]
   winner: 'attackers' | 'defenders'

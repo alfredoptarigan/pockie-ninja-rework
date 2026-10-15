@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { simulateFight, type FighterInput, type SkillInput } from './fight.js'
 import { SKILL_SCRIPTS } from './skills.js'
+import { fightOnly } from './testing.js'
 
 function fighter(overrides: Partial<FighterInput> = {}): FighterInput {
   return {
@@ -54,6 +55,35 @@ describe('simulateFight', () => {
     expect(replay.fighters[0]).toMatchObject({ wingSprite: 'wing_duotian_3', aura: 'ki_lightning' })
     expect(replay.fighters[1]).not.toHaveProperty('wingSprite')
     expect(replay.fighters[1]).not.toHaveProperty('aura')
+  })
+
+  it('carries the side panel: input stats, skills without the generic ones, pet skills', () => {
+    const skill = (id: number): SkillInput => ({ id, type: 3 })
+    const replay = simulateFight({
+      attackers: [
+        fighter({
+          tough: 30,
+          atkTime: 1160,
+          skills: [skill(1), skill(1802), skill(7777), skill(2801), skill(8888)],
+          pet: {
+            species: 'i320037',
+            avatar: 34029,
+            level: 1,
+            totals: { attack: 0, defence: 0, disturb: 0, active: 0, savvy: 0 },
+            skills: [skill(40106)],
+          },
+        }),
+      ],
+      defenders: [fighter({ name: 'Sunflower' })],
+      seed: 1,
+    })
+    expect(replay.fighters[0]!.panel).toMatchObject({
+      atkTime: 1160,
+      tough: 30,
+      skills: [1802, 2801],
+      petSkills: [40106],
+    })
+    expect(replay.fighters[1]!.panel).toMatchObject({ skills: [], petSkills: [] })
   })
   it('gives a fighter with half the attack interval twice the actions', () => {
     const replay = simulateFight({
@@ -225,7 +255,10 @@ describe('replays without a pet (m6 task 5)', () => {
         seed,
       })
     })
-    const hash = createHash('sha256').update(JSON.stringify(replays)).digest('hex')
+    // The panel is display data; the hash covers the fight itself.
+    const hash = createHash('sha256')
+      .update(JSON.stringify(replays.map(fightOnly)))
+      .digest('hex')
     expect(scripted.length).toBe(784)
     expect(hash).toBe('dc9957dd4cd2ba5c524aeea1f8863cc83c47b7503ba3380ff1b9dfae384de373')
   })

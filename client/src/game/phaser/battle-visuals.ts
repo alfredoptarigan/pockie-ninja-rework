@@ -228,10 +228,12 @@ export class BattleVisuals {
         const key = statusAsset.atlas
         if (!this.scene.textures.exists(key) || !this.scene.textures.get(key).has(String(buff)))
           return
+        // Reborn's buff bar: outward from the stage centre, 25 px apart, under the HP bars.
+        const outward = fighter.side === 'attackers' ? -1 : 1
         this.sprite(`status:${i}:${k}`, key)
           .setTexture(key, String(buff))
-          .setOrigin(0)
-          .setPosition(HOME[fighter.side] + (k - 2) * 22, 91)
+          .setOrigin(0.5)
+          .setPosition(STAGE.width / 2 + outward * (80 + 25 * k), 70)
           .setDepth(DEPTH.ui + 102)
           .setVisible(true)
       })

@@ -27,6 +27,7 @@ import {
   type FightContext,
   type Fighter,
   type FighterInput,
+  type FighterPanel,
   type FightEvent,
   type Replay,
   type SkillInput,
@@ -803,6 +804,25 @@ export function simulateFight({
     }
   }
 
+  const inputs = [...attackers, ...defenders]
+  const panel = (input: FighterInput): FighterPanel => ({
+    minAttack: input.minAttack,
+    maxAttack: input.maxAttack,
+    atkTime: input.atkTime,
+    neglectDefense: input.neglectDefense,
+    defense: input.defense,
+    pierce: input.pierce,
+    parry: input.parry,
+    hit: input.hit,
+    dodge: input.dodge,
+    crit: input.crit,
+    tough: input.tough,
+    skills: (input.skills ?? [])
+      .map((s) => s.id)
+      .filter((id) => id !== NORMAL_ATTACK.id && !GENERIC_SKILLS.some((s) => s.id === id)),
+    petSkills: (input.pet?.skills ?? []).map((s) => s.id),
+  })
+
   return {
     seed,
     fighters: [...left, ...right].map((x) => ({
@@ -819,6 +839,7 @@ export function simulateFight({
       ...(x.pet && { pet: { species: x.pet.species, avatar: x.pet.avatar } }),
       ...(x.wingSprite && { wingSprite: x.wingSprite }),
       ...(x.aura && { aura: x.aura }),
+      panel: panel(inputs[x.index]!),
     })),
     events,
     winner: a >= left.length ? 'defenders' : 'attackers',

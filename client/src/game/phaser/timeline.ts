@@ -29,6 +29,15 @@ import {
   type SecretOverlay,
   type TargetShift,
 } from './secret-technique'
+import {
+  EFFECT_FRAME_MS,
+  effectMs,
+  JUTSU_EFFECT,
+  MOVE_DISTANCE,
+  MOVE_MS,
+  skillEffect,
+  type EffectPlay,
+} from './skill-effects'
 
 /** Original stage: 1000x600, fighters stand on y 455 at x 300 (left) and 700 (right). */
 export const STAGE = { width: 1000, height: 600, groundY: 455 }
@@ -87,6 +96,8 @@ export interface Timeline {
   /** By fighter index; a fighter is off stage before its first pose. */
   poses: Pose[][]
   pets?: { at: number; fighter: number; motion: string; end: number }[]
+  /** Ninjutsu effect sprites (Reborn's skill atlases). */
+  effects?: EffectPlay[]
   texts: FloatText[]
   bars: BarState[]
   /** When the last action and the victory pose are over (the result banner shows). */
@@ -127,6 +138,9 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   } = options
   const poses: Pose[][] = fighters.map(() => [])
   const petPoses: NonNullable<Timeline['pets']> = []
+  const effects: EffectPlay[] = []
+  /** When each fighter's death motion started (it dies on the killing blow, like Reborn). */
+  const diedAt: (number | undefined)[] = fighters.map(() => undefined)
   const texts: FloatText[] = []
   const bars: BarState[] = []
   const hp = fighters.map((f) => f.startHp)
@@ -171,7 +185,14 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   const changeHp = (at: number, i: number, change: number) => {
     const max = fighters[i]?.maxHp ?? Infinity
     hp[i] = Math.min(max, Math.max(0, hp[i]! + change))
+    if (hp[i]! > 0) diedAt[i] = undefined
     bar(at, i)
+  }
+  /** The death motion, once: on the killing blow or on event 20, whichever comes first. */
+  const die = (at: number, i: number) => {
+    if (diedAt[i] !== undefined) return
+    diedAt[i] = at
+    pose(i, at, DIE, { fade: 'out' })
   }
 
   /**
@@ -243,7 +264,9 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     }
     if (ev.targetShield && last) text(at, target, 'shield', `Absorbed ${ev.targetShield}`)
     if (ev.parry && last) text(at, target, 'info', 'Parry')
-    if (!hold && hp[target]! > 0) pose(target, at + motionMs(target, motion), STAND, { shift })
+    if (hold) return
+    if (hp[target]! > 0) pose(target, at + motionMs(target, motion), STAND, { shift })
+    else die(at, target)
   }
 
   /** Skill name and MP cost shown when a strike starts. */
@@ -309,6 +332,79 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     return end
   }
 
+  /**
+   * A ninjutsu with Reborn effect art: the caster may walk in, plays its skill motion, and the
+   * effect chain (`next`, `spawns`) plays beside it; the outcome lands on the first Attack frame.
+   */
+  function effectStrike(ev: FightEvent, start: number) {
+    const actor = ev.actor
+    const first = skillEffect(ev.skillId)!
+    const target = targetOf(ev)
+    // Reborn's offense side (our attackers) is the mirrored one.
+    const flip = sideOf(actor) === 'attackers' ? -1 : 1
+    announce(ev, start)
+    let t = start
+    let x = home(actor)
+    if (first.move && target !== undefined) {
+      x = home(actor) + facing(actor) * MOVE_DISTANCE
+      pose(actor, t, RUN, { to: x, moveMs: MOVE_MS })
+      t += MOVE_MS
+    }
+    const place = (skill: number, at: number) => {
+      const effect = skillEffect(skill)
+      if (!effect) return undefined
+      const [ox, oy] = effect.offset
+      const anchor = effect.onTarget && target !== undefined ? home(target) : effect.global ? 0 : x
+      const scale = effect.global ? 1 : flip
+      effects.push({
+        at,
+        atlas: effect.atlas,
+        frames: effect.frames,
+        x: anchor + ox * scale,
+        y: (effect.global ? 0 : STAGE.groundY) + oy,
+        scaleX: scale,
+        behind: effect.depth === 'behind',
+      })
+      return effect
+    }
+    if (first.jutsu) place(JUTSU_EFFECT, t)
+    const { motion, skillId } = skillMotion(art[actor], ev.skillId, skillMotions)
+    pose(actor, t, motion, { from: x, to: x, skillId })
+    let end = t + motionMs(actor, motion)
+    const impacts: number[] = []
+    const seen = new Set<number>()
+    let at = t
+    for (let id = ev.skillId; id !== undefined && !seen.has(id);) {
+      seen.add(id)
+      const effect = place(id, at)
+      if (!effect) break
+      if (effect.attackFrame) impacts.push(at + (effect.attackFrame - 1) * EFFECT_FRAME_MS)
+      for (const spawn of effect.spawns ?? []) {
+        const spawnAt = at + (spawn.frame - 1) * EFFECT_FRAME_MS
+        const spawned = place(spawn.skill, spawnAt)
+        if (!spawned) continue
+        if (spawned.attackFrame) impacts.push(spawnAt + (spawned.attackFrame - 1) * EFFECT_FRAME_MS)
+        end = Math.max(end, spawnAt + effectMs(spawned))
+      }
+      at += effectMs(effect)
+      end = Math.max(end, at)
+      id = effect.next
+    }
+    // Without an Attack frame Reborn applies the outcome when the effect is over.
+    const impact = impacts.length ? Math.min(...impacts) : end
+    if (target !== undefined) react(target, impact, ev, ev.damage ?? 0, true)
+    selfEffects(impact, ev)
+    changeBuffs(impact, ev)
+    end = Math.max(end, impact)
+    if (hp[actor]! > 0) pose(actor, t + motionMs(actor, motion), STAND, { from: x, to: x })
+    if (x !== home(actor)) {
+      pose(actor, end, RUN, { from: x, to: home(actor), moveMs: MOVE_MS })
+      end += MOVE_MS
+    }
+    if (hp[actor]! > 0) pose(actor, end, STAND)
+    return end
+  }
+
   function petStrike(ev: FightEvent, start: number) {
     const timing = petTiming(fighters[ev.actor]?.pet?.avatar)
     const impact = start + timing.impact
@@ -326,6 +422,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     const actor = ev.actor
     const secret = ev.skillId === undefined ? undefined : secretArt(actor, ev.skillId)
     if (secret) return secretStrike(ev, start, secret)
+    if (skillEffect(ev.skillId)) return effectStrike(ev, start)
     const { motion, skillId } = skillMotion(art[actor], ev.skillId, skillMotions)
     announce(ev, start)
     const target = targetOf(ev)
@@ -398,8 +495,8 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
     else if (ev.event === 20) {
       hp[ev.actor] = 0
       bar(t, ev.actor)
-      pose(ev.actor, t, DIE, { fade: 'out' })
-      t += motionMs(ev.actor, DIE) + FADE_MS
+      die(t, ev.actor)
+      t = Math.max(t, diedAt[ev.actor]! + motionMs(ev.actor, DIE) + FADE_MS)
     } else if (ev.event === 21) {
       onStage[sideOf(ev.actor)] = ev.actor
       pose(ev.actor, t, STAND, { fade: 'in' })
@@ -425,6 +522,7 @@ export function buildTimeline(replay: Replay, options: TimelineOptions): Timelin
   return {
     poses,
     ...(petPoses.length ? { pets: petPoses } : {}),
+    ...(effects.length ? { effects } : {}),
     texts: byTime(texts),
     bars: byTime(bars),
     endAt,

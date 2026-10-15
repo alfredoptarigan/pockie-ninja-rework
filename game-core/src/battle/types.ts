@@ -109,6 +109,26 @@ export interface FighterInput {
 
 export type Side = 'attackers' | 'defenders'
 
+/**
+ * Reborn's fight panel (Attack, Speed, Break / Def, Pierce / Block, Hit / Dodge, Crit / Con) from
+ * the fighter's input, plus its skills (the normal attack and generic 7777 / 8888 left out) and its pet's skills.
+ */
+export interface FighterPanel {
+  minAttack: number
+  maxAttack: number
+  atkTime: number
+  neglectDefense: number
+  defense: number
+  pierce: number
+  parry: number
+  hit: number
+  dodge: number
+  crit: number
+  tough: number
+  skills: number[]
+  petSkills: number[]
+}
+
 /** A buff added to or removed from a fighter (FightValue AddBuff / DelBuff with role index). */
 export interface BuffChange {
   role: number
@@ -176,6 +196,8 @@ export interface Replay {
     /** The fighter's worn wing or aura art. */
     wingSprite?: string
     aura?: string
+    /** The battle side panel's stats and skill grids, as the fight started. */
+    panel?: FighterPanel
   }[]
   events: FightEvent[]
   winner: Side
