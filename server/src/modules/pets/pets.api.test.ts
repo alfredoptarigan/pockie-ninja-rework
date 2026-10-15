@@ -384,6 +384,46 @@ describe('evolution and release', () => {
   })
 })
 
+describe('moving a pet to the bag (Reborn pet items keep their props)', () => {
+  it('makes it a bound pet item with its level and skills, and adoption brings them back', async () => {
+    const pet = await newPet()
+    await setPet(pet.id, { level: 12, exp: 34, haloSlots: 1 })
+    await db.insert(characterPetSkills).values({
+      petId: pet.id,
+      skillId: 40058,
+      learnedOrder: 0,
+      kind: 1,
+      slot: 0,
+    })
+
+    expect((await post(`/${pet.id}/store`)).json().pets).toEqual([])
+
+    const items = (await client.get('/api/game/inventory')).json().items as {
+      itemId: string
+      bound: boolean
+      id: string
+      info: { pet?: object; value?: number }
+    }[]
+    const stored = items.find((row) => row.itemId === 'i320002')!
+    expect(stored).toMatchObject({
+      bound: true,
+      info: { value: 30, pet: { nature: 2, level: 12, skills: [{ skillId: 40058, kind: 1 }] } },
+    })
+    const row = (await db.select().from(inventoryItems).where(eq(inventoryItems.id, stored.id)))[0]!
+    await db.transaction(async (tx) => adoptPetItem(tx, await character(), row, fixed()))
+    const [back] = (await view()).pets
+    expect(back).toMatchObject({ species: 'i320002', level: 12, exp: 34, slots: [1, 0, 0] })
+    expect(back.skills).toMatchObject([{ skillId: 40058, kind: 1, slot: 0 }])
+    expect((await petRow(back.id))!.baseAttack).toBe(pet.baseAttack)
+  })
+
+  it('refuses the active pet', async () => {
+    const pet = await newPet()
+    await post(`/${pet.id}/active`, { active: true })
+    expect((await post(`/${pet.id}/store`)).json().error.code).toBe('active')
+  })
+})
+
 describe('the active pet outside the kennel', () => {
   it('shares 50% of fight EXP and never passes the master level', async () => {
     const pet = await newPet()

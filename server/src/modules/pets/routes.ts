@@ -53,6 +53,7 @@ import {
   skillRows,
   spendCurrency,
   spendItems,
+  storePet,
   type PetRow,
   type SkillRow,
 } from './kennel.js'
@@ -305,6 +306,10 @@ export async function petRoutes(
     onPet(request, (ctx) => evolve(ctx, petEvolveBodySchema.parse(request.body ?? {}).into)),
   )
   app.post('/:id/release', item, (request) => onPet(request, release))
+  // Reborn's Kennel drag to the bag: the pet becomes its item, state and skills kept.
+  app.post('/:id/store', item, (request) =>
+    onPet(request, ({ tx, character, pet }) => storePet(tx, character.id, pet)),
+  )
 }
 
 export default petRoutes
