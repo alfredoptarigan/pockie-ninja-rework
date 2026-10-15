@@ -87,3 +87,16 @@ Adventure with Jiraiya, Kage Level Ninja, trading, Squad Arena, Tournament, pet 
    and item links.
 3. **Windows we share**: re-lay each one out against its raw spec.
 4. **Systems**: one milestone each, in an order to agree.
+
+## 6. Decisions agreed with the user
+
+Where Reborn keeps a number on its server or the spec leaves a rule open, these are the values we use:
+
+- **Repair all** repairs worn gear in every equipment set (I–V), not only the active one.
+- **Clans**: a second clan costs 500 Gift Certificates. Donation points: 15,000 Stone = 1 point,
+  1 Gift Certificate = 1.5 points, 1 Gold = 75 points. Only the leader can withdraw from clan storage.
+- **Bankai**: unlocking a weapon is free; one Upgrade press raises one level.
+- **Scroll Dungeons**: 25 shared attempts a day, reset at 00:00 UTC (Reborn: midnight Lisbon); boss
+  builds and stats are ours; drops are our 7-day and permanent scrolls (no 3-hour scrolls).
+- **Outfits**: a set without an outfit falls back to set I's outfit; set I's outfit cannot be
+  unequipped. The Wardrobe opens as a panel inside the Inventory.
