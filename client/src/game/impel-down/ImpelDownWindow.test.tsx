@@ -20,7 +20,7 @@ const view: ImpelDownView = {
   maxLives: 3,
   refreshes: 0,
   refreshCost: 1000,
-  nextGateLevel: 71,
+  nextGateLevel: 67,
   exp: 9000,
   drops: [
     [480001, 26.67],

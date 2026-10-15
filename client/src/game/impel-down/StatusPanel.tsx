@@ -6,9 +6,10 @@ import {
   TIER_COLORS,
   type CrystalInfo,
 } from '../../../../game-core/src/zanpakuto/zanpakuto'
-import type { ImpelDownView } from '../../../../shared/src/schemas/impel-down'
+import { IMPEL_DOWN_RULES, type ImpelDownView } from '../../../../shared/src/schemas/impel-down'
 import { Dialog, GameButton } from '../skin'
 
+const { gateLevels } = IMPEL_DOWN_RULES
 const TIER_NAMES = ['Blue', 'Purple', 'Orange']
 const TAB_NAMES = { sharp: 'Sharp', blunt: 'Blunt', fist: 'Fist' } as const
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI']
@@ -215,8 +216,8 @@ export function ImpelDownInfo({ onClose }: { onClose: () => void }) {
           Inventory.
         </p>
         <p>
-          <b>Gates:</b> Each gate requires a higher level (Gate 1: Lv61, Gate 2: Lv71, ... Gate 6:
-          Lv111).
+          <b>Gates:</b> Each gate requires a higher level (Gate 1: Lv{gateLevels[0]}, Gate 2: Lv
+          {gateLevels[1]}, ... Gate 6: Lv{gateLevels[5]}).
         </p>
         <p>
           <b>Intersection:</b> After clearing floor 25, choose to advance to the next gate or

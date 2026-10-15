@@ -4,7 +4,8 @@
 //   three our data lacks get the closest outfit we have (noted per row). The outfit gives the
 //   avatar stats, the ultimate, 7777/8888 and the passive, as for a player.
 // - Level: the challenger's, at least 45 (the unlock level).
-// - Gear: the challenger's own equipment bonuses, so the boss scales with the ninja facing it.
+// - Gear: the challenger's own equipment bonuses, so the boss scales with the ninja facing it,
+//   with at least a same-level weapon's attack (BOSS_WEAPON_PER_LEVEL).
 // - Skills: the scroll skills the boss drops (its "unique fighting style").
 // - Village passive: the canon village's element for Naruto bosses; none for Bleach and Pain.
 // - Build: Reborn names only; BUILDS reads each name as stat bonuses in our Bonuses terms.
@@ -210,14 +211,31 @@ export function bossDrops(boss: Boss): DungeonDrop[] {
   })
 }
 
-/** The boss as a fighter at `level` with the challenger's gear bonuses, at full HP and MP. */
+/**
+ * PLACEHOLDER, NOT REBORN'S: the boss's least weapon attack per level (about a same-level 2011
+ * weapon: 143-170 at 61), used when the challenger's own is lower, so a ninja who takes off their
+ * weapon does not face an unarmed boss.
+ */
+export const BOSS_WEAPON_PER_LEVEL = { minAttack: 2.3, maxAttack: 2.8 }
+
+/** The challenger's gear bonuses with at least BOSS_WEAPON_PER_LEVEL's weapon attack. */
+export const armedGear = (gear: Partial<Bonuses>, level: number): Partial<Bonuses> => ({
+  ...gear,
+  minAttack: Math.max(gear.minAttack ?? 0, Math.round(BOSS_WEAPON_PER_LEVEL.minAttack * level)),
+  maxAttack: Math.max(gear.maxAttack ?? 0, Math.round(BOSS_WEAPON_PER_LEVEL.maxAttack * level)),
+})
+
+/**
+ * The boss as a fighter at `level` with the challenger's gear bonuses (armed at least like a
+ * same-level weapon), at full HP and MP.
+ */
 export function bossFighter(boss: Boss, level: number, gear: Partial<Bonuses>): FighterInput {
   const build: Build = BUILDS[boss.build]
   const { avatarId } = outfitForClothing(boss.clothing)
   const fighter = playerFighterFrom(
     { name: boss.name, avatarId, gender: 0, level, hp: 0, mp: 0, nation: boss.nation },
     [],
-    sumBonuses(gear, build.bonuses),
+    sumBonuses(armedGear(gear, level), build.bonuses),
     skillRows(boss.drops.map((drop) => drop.skill)),
   )
   return {

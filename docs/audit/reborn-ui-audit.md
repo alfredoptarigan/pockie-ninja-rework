@@ -100,3 +100,7 @@ Where Reborn keeps a number on its server or the spec leaves a rule open, these 
   builds and stats are ours; drops are our 7-day and permanent scrolls (no 3-hour scrolls).
 - **Outfits**: a set without an outfit falls back to set I's outfit; set I's outfit cannot be
   unequipped. The Wardrobe opens as a panel inside the Inventory.
+- **Impel Down gates** open at levels 61, 67, 73, 79, 85 and 90 (Reborn: 61-111 in steps of 10),
+  because our level cap is 90. Raise them back when the cap rises.
+- **Boss weapons**: Scroll Dungeons bosses and Impel Down enemies always carry at least a same-level
+  weapon's attack (`BOSS_WEAPON_PER_LEVEL`), so taking off your weapon does not disarm them.

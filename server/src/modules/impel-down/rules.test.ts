@@ -85,7 +85,7 @@ describe('floors', () => {
   it('levels the enemy from the gate’s entry level and pays more EXP higher up', () => {
     expect(enemyLevel(0, 0)).toBe(61)
     expect(enemyLevel(0, 24)).toBe(70)
-    expect(enemyLevel(5, 0)).toBe(111)
+    expect(enemyLevel(5, 0)).toBe(90)
     expect(floorExp(0, 24)).toBeGreaterThan(floorExp(0, 0))
     expect(floorEnemy(0, 0, {})).toMatchObject({ level: 61 })
     // A challenger without a weapon still meets an armed enemy.

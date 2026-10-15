@@ -91,7 +91,7 @@ describe('GET /api/game/impel-down', () => {
       maxLives: 3,
       refreshes: 0,
       refreshCost: 1000,
-      nextGateLevel: 71,
+      nextGateLevel: 67,
       exp: floorExp(0, 0),
       drops: floorDrops(0, 0),
     })
@@ -184,7 +184,7 @@ describe('the intersection', () => {
     const low = await ninja.client.post(`${PATH}/next-gate`)
     expect(low.statusCode).toBe(403)
     expect(errorCode(low)).toBe('level_too_low')
-    await ninja.set({ level: 71 })
+    await ninja.set({ level: 67 })
     const response = await ninja.client.post(`${PATH}/next-gate`)
     expect(response.statusCode).toBe(200)
     expect(response.json()).toMatchObject({ gate: 1, floor: 0, maxFloor: 25 })

@@ -1,7 +1,8 @@
 // Impel Down floors: who guards each floor, its EXP and its crystal drops. Reborn sends these from
 // its server (reborn-lazy-features.md "Impel Down": per-floor enemies, EXP and drop chances are
 // UNKNOWN) and our 2011 data has no tower like it, so everything numeric here comes from
-// IMPEL_DOWN_PLACEHOLDERS. Reborn's own rules: 6 gates x 25 floors, gate levels 61-111, and a
+// IMPEL_DOWN_PLACEHOLDERS. Reborn's own rules: 6 gates x 25 floors, gate levels 61-111 (ours are lower, see
+// IMPEL_DOWN_RULES), and a
 // guaranteed crystal every 5th floor. The enemies reuse the Scroll Dungeons boss pool and builds.
 import type { Bonuses, FighterInput } from '@pockie/game-core'
 import { IMPEL_DOWN_RULES } from '../../../../shared/src/schemas/impel-down.js'
@@ -22,11 +23,6 @@ export const IMPEL_DOWN_PLACEHOLDERS = {
    * dungeon boss): `start` on floor 1, + `step` a floor.
    */
   statMul: { start: -200, step: 8 },
-  /**
-   * The enemy's least weapon attack per enemy level (about a same-level 2011 weapon: 143-170 at
-   * 61), used when the challenger's own is lower, so taking the weapon off does not disarm it.
-   */
-  weaponPerLevel: { minAttack: 2.3, maxAttack: 2.8 },
   /** EXP for a won floor: this x enemy level x (1 + floor index / 5). */
   expPerLevel: 100,
   /** Chance in percent that a floor without a guaranteed crystal drops one. */
@@ -61,15 +57,13 @@ export function floorBonuses(floor: number): Partial<Bonuses> {
   return { hpMul: mul, attackMul: mul }
 }
 
-/** The floor's enemy at full HP and MP, scaled on the challenger's gear bonuses. */
+/**
+ * The floor's enemy at full HP and MP, scaled on the challenger's gear bonuses (bossFighter arms it
+ * with at least a same-level weapon).
+ */
 export function floorEnemy(gate: number, floor: number, gear: Partial<Bonuses>): FighterInput {
   const level = enemyLevel(gate, floor)
-  const armed = {
-    ...gear,
-    minAttack: Math.max(gear.minAttack ?? 0, Math.round(P.weaponPerLevel.minAttack * level)),
-    maxAttack: Math.max(gear.maxAttack ?? 0, Math.round(P.weaponPerLevel.maxAttack * level)),
-  }
-  return bossFighter(floorBoss(gate, floor), level, sumBonuses(armed, floorBonuses(floor)))
+  return bossFighter(floorBoss(gate, floor), level, sumBonuses(gear, floorBonuses(floor)))
 }
 
 export const floorExp = (gate: number, floor: number) =>

@@ -5,14 +5,15 @@ import type { Character } from './game.js'
 
 /**
  * Reborn's rules (its Info text and client): 6 gates of 25 floors, gate levels 61-111 in steps of
- * 10 (the HUD icon needs 61), 3 lives a day, at most 5 refreshes costing 1000 * (1 + refreshes +
+ * 10 (the HUD icon needs 61). Our level cap is 90, so our gates open at 61-90 in steps of 6 until
+ * the cap rises (user decision, docs/audit/reborn-ui-audit.md section 6). Also 3 lives a day, at most 5 refreshes costing 1000 * (1 + refreshes +
  * gate index) coupons. Lives and refreshes reset at 00:00 UTC, our daily reset (Reborn's reset
  * times are server-side; the refresh count resetting daily is our choice).
  */
 export const IMPEL_DOWN_RULES = {
   gates: 6,
   floorsPerGate: 25,
-  gateLevels: [61, 71, 81, 91, 101, 111],
+  gateLevels: [61, 67, 73, 79, 85, 90],
   lives: 3,
   maxRefreshes: 5,
   refreshCoupons: 1000,
