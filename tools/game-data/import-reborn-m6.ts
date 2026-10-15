@@ -264,13 +264,26 @@ const iniTable = (section: Record<string, string | string[]> | undefined) =>
     .sort(([a], [b]) => Number(a) - Number(b))
     .map(([, value]) => Number(value))
 
+/** The Home farm's crops (Grass, Eggplant, Corn, Pepper): 2011 CropItem rows pets also eat. */
+const HOME_CROPS = [170001, 170002, 170003, 170004]
+
 function buildPetFoods(input: M6Inputs) {
   const { PetCfg, PetFeedLib, PetGrow, PetSkillCnt, PetActCapital } = input.pet2011
-  const foods = ids(input.items, (id) => id >= 170113 && id <= 170127).map((id) => {
+  const crops = HOME_CROPS.map((id) => {
+    const row = input.original.items[`i${id}`]!
+    return {
+      item: `i${id}`,
+      hunger: Number(row.AddPetHunger),
+      type: Number(row.PetFeedType),
+      level: Number(row.JudgeValueScore),
+    }
+  })
+  const reborn = ids(input.items, (id) => id >= 170113 && id <= 170127).map((id) => {
     const raw = input.items[String(id)]!
     const { hunger, type } = props(raw) as { hunger: number; type: number }
     return { item: `i${id}`, hunger, type, level: level(raw) }
   })
+  const foods = [...crops, ...reborn]
   const grow = Object.fromEntries(
     Object.entries(PetGrow!.PetGrow!).map(([key, value]) => [
       key,

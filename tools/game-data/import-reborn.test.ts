@@ -274,7 +274,7 @@ describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
     }
   })
 
-  it('has the 15 foods and the 2011 pet tables (decisions 10, 13, 14)', () => {
+  it('has the 15 foods, the 4 Home crops and the 2011 pet tables (decisions 10, 13, 14)', () => {
     const foods = reborn<{
       foods: { item: string; hunger: number; type: number }[]
       exp: number[]
@@ -285,7 +285,13 @@ describe('M6 overlay: pets, pet skills, foods (task 2)', () => {
       skillCount: number[]
       slotCost: number[]
     }>('pet-foods')
-    expect(foods.foods).toHaveLength(15)
+    expect(foods.foods).toHaveLength(19)
+    expect(foods.foods.slice(0, 4)).toEqual([
+      { item: 'i170001', hunger: 5, type: 7, level: 8 },
+      { item: 'i170002', hunger: 80, type: 4, level: 8 },
+      { item: 'i170003', hunger: 80, type: 4, level: 8 },
+      { item: 'i170004', hunger: 180, type: 4, level: 23 },
+    ])
     expect(foods.maxLevel).toBe(50)
     expect(foods.exp).toHaveLength(50)
     expect(foods.exp.slice(0, 3)).toEqual([5, 11, 25])
