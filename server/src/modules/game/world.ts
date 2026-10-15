@@ -17,6 +17,7 @@ import {
 import { loadQuests, removeItems, rookieHandIns, saveQuests, type Tx } from '../../game/progress.js'
 import type { QuestProgress } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
+import { rollFieldAmbush } from '../akatsuki/routes.js'
 import { reviveTerms } from './actions.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import {
@@ -202,6 +203,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
       const result = await fightMonster(tx, character, opponent)
       if (result.won) await recordBossKill(tx, character.id, opponent, character.sceneId)
+      const akatsukiAmbush = result.won ? await rollFieldAmbush(tx, character) : null
       // `rewards` already holds the fight's loot, so hand-ins go in `questRewards`.
       // A quest level-up counts as the fight's own, so the result shows it.
       const handIns = await rookieHandIns(tx, character.id)
@@ -215,6 +217,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
         rewards,
         completed: handIns.completed,
         questRewards: handIns.rewards,
+        ...(akatsukiAmbush && { akatsukiAmbush }),
         character: toCharacter(updated!),
       }
     })

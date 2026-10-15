@@ -12,6 +12,7 @@ import {
   useInventory,
   useScene,
 } from './api'
+import { AkatsukiAmbush } from './akatsuki'
 import { exploreClip } from './explore'
 import { ExploreWindow } from './ExploreWindow'
 import { FightSummary } from './FightSummary'
@@ -23,6 +24,7 @@ import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
 import { plainText } from './text'
 import type { BagHighlight, FightResult, SceneMonster, SceneNpc } from './types'
+import type { AkatsukiAmbush as Ambush } from '../../../shared/src/schemas/akatsuki'
 import { useOpenWindow } from './windows'
 import { DEFEATED_REASON, isDefeated, sceneBuildings } from './world'
 import { lookOf } from './inventory/outfits'
@@ -83,6 +85,8 @@ export function SceneView({
     /** The result reached the HUD (after the first replay). */
     applied: boolean
   } | null>(null)
+  /** An Akatsuki ambush sprung by the last won fight, shown once its result window closes. */
+  const [ambush, setAmbush] = useState<Ambush | null>(null)
   const applyResult = useApplyResult()
   const queryClient = useQueryClient()
   const refetchScene = useCallback(
@@ -266,7 +270,10 @@ export function SceneView({
       {fightState?.finished && (
         <FightSummary
           result={fightState.result}
-          onClose={() => setFightState(null)}
+          onClose={() => {
+            setAmbush(fightState.result.akatsukiAmbush ?? null)
+            setFightState(null)
+          }}
           onReplay={() => setFightState((s) => s && { ...s, run: s.run + 1, finished: false })}
           onFightAgain={
             defeated || fightState.result.character.hp <= 0
@@ -278,6 +285,9 @@ export function SceneView({
                 }
           }
         />
+      )}
+      {ambush && (
+        <AkatsukiAmbush ambush={ambush} character={character} onDone={() => setAmbush(null)} />
       )}
       {/* After the replay and its result window, so the defeat is seen first. */}
       {defeated && !fightState && reviveOpen && (

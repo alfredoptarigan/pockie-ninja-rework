@@ -18,6 +18,7 @@ import { SoundToggle } from './audio'
 import { SettingsButton } from './settings'
 import { useOutfitPortrait } from './art'
 import { TwentyMinuteRewardButton } from './events'
+import { useHashiramaOpen } from './hashirama'
 import { GameButton } from './skin'
 import { MailButton } from './social'
 import { TeamHud } from './teams'
@@ -582,8 +583,8 @@ export function MenuBar({
 const topIcon = (name: string) => `/assets/reborn/ui/buttons/topui/${name}.webp`
 /**
  * Reborn's village feature icons (docs/audit/reborn-ui-audit.md §3), in its order. `feature` is
- * the window we have for it; `level` its level gate. ponytail: the rest are systems we have not
- * built (Ninja Mall, Akatsuki...), shown locked like Reborn shows a locked icon.
+ * the window we have for it; `level` its level gate. ponytail: an entry without a window shows
+ * locked, like Reborn shows a locked icon.
  */
 const FEATURES: {
   key: string
@@ -614,7 +615,14 @@ const FEATURES: {
     icon: topIcon('boutique'),
     feature: 'konohaBoutique',
   },
-  { key: 'akatsuki', label: 'Akatsuki', icon: topIcon('akatsuki') },
+  { key: 'akatsuki', label: 'Akatsuki', icon: topIcon('akatsuki'), feature: 'akatsuki' },
+  // Shown only while a battle is open (FeatureIcons).
+  {
+    key: 'hashirama',
+    label: 'Hashirama\nvs Madara',
+    icon: topIcon('hashirama'),
+    feature: 'hashirama',
+  },
   { key: 'pub', label: 'Tsunade\nPub', icon: topIcon('pub'), feature: 'tsunadePub' },
   {
     key: 'ninjaDiary',
@@ -673,15 +681,18 @@ function FeatureIcon({
 /** The village icon rows, top right: features (locked first) at y 35, Market and Home at y 90. */
 export function FeatureIcons({ character }: { character: Character }) {
   const openFeature = useOpenWindow()
-  const icons = FEATURES.map((entry) => {
-    const low = entry.level !== undefined && character.level < entry.level
-    const reason = low
-      ? `Required level ${entry.level}`
-      : entry.feature
-        ? undefined
-        : `${entry.label.replace('\n', ' ')}: not available yet`
-    return { ...entry, reason, locked: low || !entry.feature }
-  })
+  const hashiramaOpen = useHashiramaOpen()
+  const icons = FEATURES.filter((entry) => entry.key !== 'hashirama' || hashiramaOpen).map(
+    (entry) => {
+      const low = entry.level !== undefined && character.level < entry.level
+      const reason = low
+        ? `Required level ${entry.level}`
+        : entry.feature
+          ? undefined
+          : `${entry.label.replace('\n', ' ')}: not available yet`
+      return { ...entry, reason, locked: low || !entry.feature }
+    },
+  )
   // Reborn stable-sorts locked icons to the left.
   const ordered = [...icons.filter((icon) => icon.locked), ...icons.filter((icon) => !icon.locked)]
   return (

@@ -2222,3 +2222,82 @@ export const outfitRecasts = pgTable(
     ),
   ],
 )
+
+// Akatsuki Invasion (Reborn scene 9400, migration 0050): pairs beaten in order, the sprung ambush
+// waiting to be fought, the red outfits claimed and today's bait.
+export const akatsukiHunters = pgTable(
+  'akatsuki_hunters',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    pairsDefeated: smallint('pairs_defeated').notNull().default(0),
+    pendingAmbush: boolean('pending_ambush').notNull().default(false),
+    claimed: text('claimed')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    baitDay: date('bait_day'),
+    baitUntil: timestamp('bait_until', { withTimezone: true }),
+  },
+  (t) => [check('akatsuki_hunters_pairs', sql`${t.pairsDefeated} between 0 and 4`)],
+)
+
+// Hashirama vs Madara (Reborn scene 9500, migration 0050): one admin-started battle at a time.
+// `settled` once the damage is counted and the spins paid out.
+export const hashiramaEvents = pgTable(
+  'hashirama_events',
+  {
+    id: id(),
+    startedAt: createdAt(),
+    endsAt: timestamp('ends_at', { withTimezone: true }).notNull(),
+    closesAt: timestamp('closes_at', { withTimezone: true }).notNull(),
+    settled: boolean('settled').notNull().default(false),
+    winner: text('winner').$type<'madara' | 'hashirama' | 'tie' | 'none'>(),
+  },
+  (t) => [
+    check('hashirama_events_winner', sql`${t.winner} in ('madara', 'hashirama', 'tie', 'none')`),
+    index('hashirama_events_closes_at_idx').on(t.closesAt),
+  ],
+)
+
+// A ninja in one battle: their side (null until chosen, e.g. a wheel-only visit), damage, last
+// attack, the spins paid out, and their Fortune Wheel (spins left, paid-spin bonus progress, the 3
+// chosen rewards, wins per reward, the spin token and the last result).
+export const hashiramaPlayers = pgTable(
+  'hashirama_players',
+  {
+    eventId: uuid('event_id')
+      .notNull()
+      .references(() => hashiramaEvents.id, { onDelete: 'cascade' }),
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    side: text('side').$type<'madara' | 'hashirama'>(),
+    damage: bigint('damage', { mode: 'number' }).notNull().default(0),
+    lastAttackAt: timestamp('last_attack_at', { withTimezone: true }),
+    payout: integer('payout').notNull().default(0),
+    spins: integer('spins').notNull().default(0),
+    paidSpins: integer('paid_spins').notNull().default(0),
+    bonusReady: boolean('bonus_ready').notNull().default(false),
+    selection: jsonb('selection')
+      .$type<(string | null)[]>()
+      .notNull()
+      .default(sql`'[null, null, null]'::jsonb`),
+    won: jsonb('won')
+      .$type<Record<string, number>>()
+      .notNull()
+      .default(sql`'{}'::jsonb`),
+    spinToken: integer('spin_token').notNull().default(0),
+    lastResult: jsonb('last_result'),
+  },
+  (t) => [
+    primaryKey({ columns: [t.eventId, t.characterId] }),
+    index('hashirama_players_board_idx').on(t.eventId, t.side, t.damage),
+    check('hashirama_players_side', sql`${t.side} in ('madara', 'hashirama')`),
+    check(
+      'hashirama_players_amounts',
+      sql`${t.damage} >= 0 and ${t.spins} >= 0 and ${t.paidSpins} >= 0`,
+    ),
+  ],
+)

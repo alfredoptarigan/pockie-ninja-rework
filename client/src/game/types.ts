@@ -1,6 +1,7 @@
 // Response shapes of /api/game/* that @pockie/shared does not export yet (see
 // server/src/modules/game/*). Character, CreationOptions and the realtime types come from shared.
 import type { BagItemInfo, Character, MonsterDrop, QuestHandIn, QuestRewards } from '@pockie/shared'
+import type { AkatsukiAmbush } from '../../../shared/src/schemas/akatsuki'
 
 export interface SceneMonster {
   id: string
@@ -235,6 +236,8 @@ export interface FightResult {
   completed?: number[]
   /** What each completed quest granted, in `completed` order. */
   questRewards?: QuestHandIn[]
+  /** The Akatsuki pair that springs its ambush after this won field fight. */
+  akatsukiAmbush?: AkatsukiAmbush
   character: Character
 }
 

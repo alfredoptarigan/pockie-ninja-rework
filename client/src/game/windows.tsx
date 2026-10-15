@@ -37,6 +37,8 @@ import { ImpelDownWindow } from './impel-down'
 import { TsunadePubWindow } from './tsunade-pub'
 import { MallWindow } from './mall'
 import { KonohaBoutiqueWindow } from './konoha-boutique'
+import { AkatsukiWindow } from './akatsuki'
+import { HashiramaWindow } from './hashirama'
 
 export type WindowName =
   | 'shop'
@@ -76,6 +78,8 @@ export type WindowName =
   | 'tsunadePub'
   | 'mall'
   | 'konohaBoutique'
+  | 'akatsuki'
+  | 'hashirama'
 
 export interface WindowProps {
   character: Character
@@ -151,6 +155,10 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   mall: ({ character, onClose }) => <MallWindow character={character} onClose={onClose} />,
   konohaBoutique: ({ character, onClose }) => (
     <KonohaBoutiqueWindow character={character} onClose={onClose} />
+  ),
+  akatsuki: ({ character, onClose }) => <AkatsukiWindow character={character} onClose={onClose} />,
+  hashirama: ({ character, onClose }) => (
+    <HashiramaWindow character={character} onClose={onClose} />
   ),
 }
 
