@@ -5,10 +5,11 @@ import { BAG_PAGE_COLUMNS, BAG_PAGE_COUNT, BAG_PAGE_SLOTS, type GearView } from 
 import { useRef, type KeyboardEvent, type MouseEvent } from 'react'
 import { itemIcon } from '../ItemIcon'
 import { GameButton } from '../skin'
-import { plainText, GameText } from '../text'
+import { GameText } from '../text'
 import type { InventoryItem } from '../types'
 import { useOpenWindow } from '../windows'
 import { WING_ICONS } from '../wings'
+import { itemName, outfitIcon } from './outfits'
 
 export const TILE = 27
 export const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
@@ -28,6 +29,9 @@ const tierOf = (item: InventoryItem, gear: GearView | undefined) =>
 export const span = (tiles = 2) => tiles * TILE - 3
 
 export const iconFile = (itemId: string) => itemIcon(itemId)?.file ?? WING_ICONS[itemId]
+/** An item's picture file; outfits use Reborn's icon by clothing. */
+export const pictureOf = (item: InventoryItem) =>
+  item.info?.outfit ? outfitIcon(item.info.outfit.clothing) : iconFile(item.itemId)
 
 /**
  * An item's picture with its tier glow, or a neutral "?" when it has none; named after the item
@@ -42,8 +46,8 @@ export function ItemPicture({
   gear?: GearView
   decorative?: boolean
 }) {
-  const name = decorative ? undefined : plainText(item.nameKey, 'Unknown item')
-  const file = iconFile(item.itemId)
+  const name = decorative ? undefined : itemName(item)
+  const file = pictureOf(item)
   if (!file)
     return (
       <span
@@ -211,7 +215,8 @@ function BagCell({
   gear?: GearView
   level: number
 }) {
-  const name = plainText(item.nameKey, 'Unknown item')
+  const name = itemName(item)
+  const outfit = item.info?.outfit
   const overLevel = item.info?.kind === 'equip' && item.info.level > level
   return (
     <li
@@ -229,7 +234,8 @@ function BagCell({
           x{item.count}
         </span>
       )}
-      {overLevel && (
+      {outfit && <OutfitPlus plus={outfit.plus} under={overLevel} />}
+      {overLevel && !outfit && (
         <span
           aria-hidden="true"
           className="absolute right-[1px] bottom-0 text-[9px] leading-none font-bold text-[#ff3030] [text-shadow:var(--shadow-game-text)]"
@@ -267,9 +273,7 @@ function BagCell({
         </button>
       )}
       <span className="sr-only">
-        <span>
-          <GameText k={item.nameKey} fallback="Unknown item" />
-        </span>
+        <span>{outfit ? name : <GameText k={item.nameKey} fallback="Unknown item" />}</span>
         {item.count > 1 && <span> x{item.count}</span>}
         {highlighted && (
           <>
@@ -282,16 +286,32 @@ function BagCell({
   )
 }
 
+/** Reborn's outfit "+N" (11px bold, bottom-right), red when you are below its level. */
+export function OutfitPlus({ plus, under }: { plus: number; under: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`absolute right-[2px] bottom-0 text-[11px] leading-none font-bold [text-shadow:var(--shadow-game-text)] ${
+        under ? 'text-[#ff1a1a]' : 'text-white'
+      }`}
+    >
+      +{plus}
+    </span>
+  )
+}
+
 /**
  * Reborn's side column (x 288 from y 331, 30 apart). Compose opens the Portable Function,
- * Collection the Collection window. ponytail: Wardrobe and Reroll have no system behind
- * them yet (outfits and pets are not items), so they stay disabled.
+ * Collection the Collection window, Wardrobe the Wardrobe panel. ponytail: Reroll has no system
+ * behind it yet (pets are not items), so it stays disabled.
  */
 export function SideButtons({
   onMultiSell,
+  onWardrobe,
   onSort,
 }: {
   onMultiSell: () => void
+  onWardrobe: () => void
   onSort: () => void
 }) {
   const openWindow = useOpenWindow()
@@ -299,7 +319,7 @@ export function SideButtons({
     { label: 'Compose', onClick: () => openWindow('compose') },
     { label: 'Multi Sell', onClick: onMultiSell },
     { label: 'Collection', onClick: () => openWindow('collection') },
-    { label: 'Wardrobe' },
+    { label: 'Wardrobe', onClick: onWardrobe },
     { label: 'Reroll' },
     { label: 'Sort', onClick: onSort },
   ]

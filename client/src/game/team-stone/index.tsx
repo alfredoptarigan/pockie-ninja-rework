@@ -20,6 +20,7 @@ import { ItemIcon } from '../ItemIcon'
 import { Dialog, GameButton, Notice, Tabs } from '../skin'
 import { BattleReplayMount } from '../stage'
 import type { Replay } from '../types'
+import { lookOf } from '../inventory/outfits'
 
 const BASE = '/api/game/team-stone'
 export const teamStoneKey = ['game', 'team-stone'] as const
@@ -69,7 +70,7 @@ export function TeamStoneWindow({
     return (
       <BattleReplayMount
         replay={watching.replay}
-        clothing={sideA && 'clothing' in sideA ? sideA.clothing : character.clothing}
+        clothing={sideA && 'clothing' in sideA ? sideA.clothing : lookOf(character)}
         weaponItemId={sideA && 'clothing' in sideA ? sideA.weaponItemId : undefined}
         look={sideA && 'clothing' in sideA ? sideA : undefined}
         monsterIds={[]}

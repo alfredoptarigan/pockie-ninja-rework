@@ -55,12 +55,16 @@ export function creationOutfits() {
   }))
 }
 
-/** Clothing (visual id) → AvatarID through avatarclothingmap.ini and the outfit item. */
-export function avatarIdForClothing(clothing: number) {
+/**
+ * Clothing (visual id) → its outfit item (avatarclothingmap.ini AvatarConfig, the AvatarLevel 1
+ * AvatarItem) and that item's AvatarID.
+ */
+export function outfitForClothing(clothing: number) {
   const map = load<Record<string, Row>>('avatar-clothing')[String(clothing)]
-  const item = map && load<Record<string, Row>>('items')[String(map.AvatarConfig)]
+  const itemId = map && String(map.AvatarConfig)
+  const item = itemId && load<Record<string, Row>>('items')[itemId]
   if (!item) throw new Error(`Unknown clothing ${clothing}`)
-  return Number(item.AvatarID)
+  return { itemId, avatarId: Number(item.AvatarID) }
 }
 
 /** Village (castle), first field and login scene per nation (nationscene.ini). */

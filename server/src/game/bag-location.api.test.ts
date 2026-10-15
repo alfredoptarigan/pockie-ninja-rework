@@ -53,7 +53,8 @@ for (const location of ['market', 'warehouse'] as const) {
       expect(
         (await ninja.client.get('/api/game/inventory'))
           .json()
-          .items.map((row: { id: string }) => row.id),
+          .items.filter((row: { equippedSlot: string | null }) => row.equippedSlot !== 'Outfit')
+          .map((row: { id: string }) => row.id),
       ).toEqual([kept.id])
       expect((await ninja.client.get('/api/game/forge/gear')).json().gear).not.toHaveProperty(
         gear.id,

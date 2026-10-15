@@ -2,7 +2,8 @@
 // decisions 3 and 16-19). Everything is addressed by character id or mail uuid; names are only
 // used to look a ninja up.
 import { z } from 'zod'
-import type { Nation } from './game.js'
+import type { CharacterStats, Nation } from './game.js'
+import type { SkillSlot } from './skills.js'
 
 /** Friend slots for everyone (decision 16; the original MaxFriendCount, no paid expansion). */
 export const MAX_FRIENDS = 100
@@ -123,11 +124,17 @@ export interface WornItem {
   enhanceLevel: number
 }
 
-/** Reborn's View Character: the public face of another ninja. */
+/**
+ * Reborn's View Character: the public face of another ninja. `stats` and `skills` (the active
+ * preset's six slots) are absent when the ninja hides them, unless you view yourself.
+ */
 export interface PlayerView {
   player: SocialPlayer
   online: boolean
   equipped: WornItem[]
+  hideStats: boolean
+  stats?: CharacterStats
+  skills?: SkillSlot[]
 }
 
 export interface BlockedView {

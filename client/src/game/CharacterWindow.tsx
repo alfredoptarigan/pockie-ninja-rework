@@ -24,19 +24,25 @@ const BASE_CRIT_DAMAGE = 200
 const TURN_SECONDS = 5
 
 /** One labelled value box; `hint` is its hover text (Reborn uses plain title attributes). */
-interface StatCell {
+export interface StatCell {
   label: string
   value: string | number
   hint?: string
 }
 /** A row of the two-column grid; null leaves that column empty. */
-type StatRow = [StatCell | null, StatCell | null]
+export type StatRow = [StatCell | null, StatCell | null]
 
 const pct = (value: number) => value.toFixed(2)
 const curve = (value: number) => pct((value / (value + DEFENSE_CURVE)) * 100)
 
-/** Combat groups laid out as Reborn's Stats window, split by dividers. */
-export function statGroups(stats: CharacterStats, character: Character): StatRow[][] {
+/**
+ * Combat groups laid out as Reborn's Stats window, split by dividers. Without `hp` (View
+ * Character) the HP box shows the maximum only, as Reborn's does.
+ */
+export function statGroups(
+  stats: CharacterStats,
+  vitals: Pick<Character, 'maxHp' | 'maxMp'> & { hp?: number },
+): StatRow[][] {
   const attribute = (value: number) => Math.round(value / ATTRIBUTE_SCALE)
   const minAttack = Math.min(stats.minAttack, stats.maxAttack)
   const speed = 1000 / stats.atkTime
@@ -80,9 +86,12 @@ export function statGroups(stats: CharacterStats, character: Character): StatRow
     [
       [
         { label: 'STA', value: attribute(stats.stamina) },
-        { label: 'HP', value: `${character.hp}/${character.maxHp}` },
+        {
+          label: 'HP',
+          value: vitals.hp === undefined ? vitals.maxHp : `${vitals.hp}/${vitals.maxHp}`,
+        },
       ],
-      [null, { label: 'Chakra', value: Math.round(character.maxMp) }],
+      [null, { label: 'Chakra', value: Math.round(vitals.maxMp) }],
     ],
     [
       [
@@ -141,11 +150,11 @@ function Cell({ cell }: { cell: StatCell | null }) {
   )
 }
 
-function Divider() {
+export function Divider() {
   return <div aria-hidden className="game-divider mx-2.5 my-[5px] h-0.5" />
 }
 
-function StatGrid({ rows }: { rows: StatRow[] }) {
+export function StatGrid({ rows }: { rows: StatRow[] }) {
   return (
     <dl className="grid grid-cols-[50px_100px_50px_100px] gap-y-1">
       {rows.map(([left, right], index) => (
@@ -156,6 +165,16 @@ function StatGrid({ rows }: { rows: StatRow[] }) {
       ))}
     </dl>
   )
+}
+
+/** The combat groups, a divider between each two. */
+export function StatGroups({ groups }: { groups: StatRow[][] }) {
+  return groups.map((rows, index) => (
+    <div key={index}>
+      {index > 0 && <Divider />}
+      <StatGrid rows={rows} />
+    </div>
+  ))
 }
 
 /** Reborn's EXP row: the 249x18 bar and "cur / next (pct%)" under it, or MAX at the cap. */
@@ -238,13 +257,7 @@ export function CharacterWindow({
         <section aria-label="Combat stats" className="game-panel-1 mt-[5px] h-[260px] pt-1.5">
           {stats.isPending && <p className="p-2 text-xs">Loading stats...</p>}
           {stats.isError && <p className="p-2 text-xs">We could not load your stats.</p>}
-          {stats.data &&
-            statGroups(stats.data, character).map((rows, index) => (
-              <div key={index}>
-                {index > 0 && <Divider />}
-                <StatGrid rows={rows} />
-              </div>
-            ))}
+          {stats.data && <StatGroups groups={statGroups(stats.data, character)} />}
           <p className="mt-0.5 text-center text-[11px] font-bold">Hover over stats for details</p>
         </section>
       </div>

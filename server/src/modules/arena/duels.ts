@@ -30,6 +30,7 @@ import {
   addLog,
   listSize,
   logViews,
+  lookColumn,
   placesOf,
   playersAt,
   PLAYER_TIER,
@@ -39,7 +40,7 @@ import {
 const candidateColumns = {
   name: characters.name,
   level: characters.level,
-  clothing: characters.clothing,
+  clothing: lookColumn,
   tier: arenaPlayers.tier,
   score: arenaPlayers.score,
 }

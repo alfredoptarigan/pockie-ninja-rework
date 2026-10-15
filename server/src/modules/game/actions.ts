@@ -69,6 +69,7 @@ import { useBuffItem } from '../../game/nonfight-buffs.js'
 import { refreshBuffState } from './nonfight-buffs.js'
 import { playerFighter } from '../../game/combat.js'
 import { WING_SLOT } from '../../game/wings.js'
+import { OUTFIT_SLOT, outfitOf, syncOutfit } from '../../game/outfit.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
 import { openCardBox } from '../cards/routes.js'
 import { adoptPetItem } from '../pets/kennel.js'
@@ -369,16 +370,20 @@ export async function actionRoutes(
       await placeBag(tx, character.id)
       const row = await ownedItem(tx, character.id, id)
       const def = item(row.itemId)
-      if (!def || def.class !== 'EquipItem')
+      const outfit = outfitOf(row.itemId)
+      if (!def || (def.class !== 'EquipItem' && !outfit))
         throw bad('cannot_equip', 'That item cannot be equipped.')
-      if (character.level < Number(def.UseLevel ?? 0))
+      if (character.level < (outfit?.level ?? Number(def.UseLevel ?? 0)))
         throw bad('too_low', 'Your level is too low.')
-      if (!fitsOutfit(def, character.avatarId)) {
+      if (!outfit && !fitsOutfit(def, character.avatarId)) {
         throw bad('wrong_class', 'Your outfit cannot use this kind of weapon.')
       }
+      // Set I always keeps an outfit: one worn in another set stays there.
+      if (outfit && row.equippedSlot && row.equippedSet !== character.activeSet)
+        throw bad('worn_elsewhere', 'That outfit is worn in another set.')
       const refusal = equipRefusal(row)
       if (refusal) throw bad(refusal.code, refusal.message)
-      const slot = String(def.EquipType)
+      const slot = outfit ? OUTFIT_SLOT : String(def.EquipType)
       // Wears it in the active equipment set; an item worn in another set moves (Reborn).
       const [worn] = await tx
         .select()
@@ -400,8 +405,10 @@ export async function actionRoutes(
         .where(eq(inventoryItems.id, row.id))
       // The replaced item takes the new item's tile when it fits there, else any free one.
       if (replaced && freed) await placeAt(tx, character.id, replaced, freed)
-      // Wing stats are part of the arena defence (M6 decision 23).
-      if (slot === WING_SLOT) await refreshArenaSnapshot(tx, character.id)
+      // The outfit sets clothing and avatar (stats, weapon class).
+      if (outfit) await syncOutfit(tx, character.id, character.activeSet)
+      // Wing and outfit stats are part of the arena defence (M6 decision 23).
+      if (slot === WING_SLOT || outfit) await refreshArenaSnapshot(tx, character.id)
 
       if (slot === 'Weapon') {
         const quests = await loadQuests(tx, character.id)
@@ -411,11 +418,9 @@ export async function actionRoutes(
           recordCommand(quests, EQUIP_WEAPON_COMMAND, character.sceneId),
         )
       }
-      return {
-        ...(await rookieHandIns(tx, character.id)),
-        character: await reload(tx, character.id),
-        ...(await inventoryView(tx, character)),
-      }
+      const handIns = await rookieHandIns(tx, character.id)
+      const updated = await reload(tx, character.id)
+      return { ...handIns, character: updated, ...(await inventoryView(tx, updated)) }
     })
   })
 
@@ -430,6 +435,8 @@ export async function actionRoutes(
       const row = await ownedItem(tx, character.id, id)
       if (!isWornIn(row, character.activeSet))
         throw bad('not_equipped', 'That item is not equipped.')
+      if (row.equippedSlot === OUTFIT_SLOT)
+        throw bad('cannot_unequip', 'Equip another outfit to replace this one.')
       await requireBagRoom(tx, character.id, [row], { separate: true })
       await tx
         .update(inventoryItems)

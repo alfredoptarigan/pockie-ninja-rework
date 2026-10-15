@@ -135,6 +135,8 @@ export interface ItemInfo {
   h: number
   /** The item table class ("EquipItem", "FoodItem"...). */
   class: string
+  /** Outfits (AvatarItem): clothing and Reborn's "+N". */
+  outfit?: { clothing: number; plus: number }
 }
 
 export interface TalkResult {

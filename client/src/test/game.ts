@@ -7,6 +7,7 @@ export const character: Character = {
   gender: 0,
   nation: 0,
   clothing: 3,
+  visualClothing: null,
   avatarId: 3,
   weaponClass: 4,
   level: 1,
@@ -25,6 +26,7 @@ export const character: Character = {
   sceneId: 111,
   vipUntil: null,
   activeSet: 1,
+  hideStats: false,
 }
 
 export const stats: CharacterStats = {

@@ -56,8 +56,13 @@ const scrollRow = async (skillId = IZANAGI) =>
         and(eq(characterSkills.characterId, characterId), eq(characterSkills.skillId, skillId)),
       )
   )[0]
+// The worn creation outfit (outfits are items) is not bag contents.
 const bag = () =>
-  db.select().from(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+  db
+    .select()
+    .from(inventoryItems)
+    .where(eq(inventoryItems.characterId, characterId))
+    .then((rows) => rows.filter((row) => row.equippedSlot !== 'Outfit'))
 const setSlot = (slot: number, skillId: number | null, tree = 0) =>
   client.post('/api/game/skills/slot', { tree, slot, skillId })
 const fighterSkillIds = async () =>

@@ -102,8 +102,7 @@ export async function socialRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
   app.get('/players/:characterId', { config: READ }, async (request) => {
     const { characterId } = characterRefSchema.parse(request.params)
-    await me(request)
-    return playerView(db, characterId)
+    return playerView(db, characterId, (await me(request)).id)
   })
 
   app.get('/blocks', { config: READ }, async (request) => blockedView(db, (await me(request)).id))

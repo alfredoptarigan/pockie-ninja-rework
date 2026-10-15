@@ -1,6 +1,7 @@
 // M4 social journey: a ninja sends a friend request from the Social window (the friend accepts it on
-// Requests), PMs them from View Character and mails them from the Mail tab; the friend reads the
-// mail and blocks the sender, whose next whisper and mail are refused.
+// Requests), views the friend's stats until the friend ticks the Inventory's Hide, PMs them from
+// View Character and mails them from the Mail tab; the friend reads the mail and blocks the sender,
+// whose next whisper and mail are refused.
 // Only the levels are seeded (whispers and mail need level 10); the rest is UI.
 import { expect, test, type Page } from '@playwright/test'
 import { createTwoNinjas, dialog, openMenu, reloadGame, seedCharacter } from './helpers'
@@ -56,9 +57,31 @@ test('friends whisper and mail, and a block refuses both', async ({ browser }) =
     ).toContainText(ami.name)
     await boSocial.getByRole('button', { name: 'Close' }).click()
 
-    // Act: Ami opens Bo's View Character from the name and sends a PM (it prefills /Name).
+    // Act: Ami opens Bo's View Character from the name.
+    // Assert: Bo's stats are there (level 25, an attack range) with Reborn's footer.
     await row.getByRole('button', { name: bo.name }).click()
-    await dialog(ami.page, 'View Character').getByRole('button', { name: 'PM' }).click()
+    const sheet = dialog(ami.page, 'View Character')
+    const stats = sheet.getByRole('region', { name: 'Stats' })
+    await expect(stats.getByTitle(bo.name)).toBeVisible()
+    await expect(stats.getByText(/^[1-9]\d* - [1-9]\d*$/)).toBeVisible()
+    await expect(stats).toContainText('Hover over stats to get detailed information.')
+    await sheet.getByRole('button', { name: 'Close' }).click()
+
+    // Act: Bo ticks Hide in the Inventory.
+    await openMenu(bo.page, 'Inventory')
+    const hide = dialog(bo.page, 'Inventory').getByRole('checkbox', { name: 'Hide' })
+    await hide.check()
+    await expect(hide).toBeChecked()
+    await dialog(bo.page, 'Inventory').getByRole('button', { name: 'Close' }).click()
+
+    // Assert: Ami now sees every one of Bo's stats as 0, as Reborn shows a hidden ninja.
+    await row.getByRole('button', { name: bo.name }).click()
+    await expect(stats.getByTitle(bo.name)).toBeVisible()
+    // Name, Level and the 15 combat values, all of them 0.
+    await expect(stats.getByRole('definition').filter({ hasText: /^0$/ })).toHaveCount(15)
+
+    // Act: Ami sends a PM from View Character (it prefills /Name).
+    await sheet.getByRole('button', { name: 'PM' }).click()
     await expect(social).toBeHidden()
     const input = chat(ami.page).getByLabel('Message to world chat')
     await expect(input).toHaveValue(`/${bo.name} `)

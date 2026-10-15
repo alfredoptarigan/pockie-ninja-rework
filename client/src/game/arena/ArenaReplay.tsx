@@ -3,6 +3,7 @@ import type { Character } from '@pockie/shared'
 import { useApplyResult } from '../api'
 import { BattleReplayMount } from '../stage'
 import type { LogReplay } from './api'
+import { lookOf } from '../inventory/outfits'
 
 /** What the arena window is playing: the replay, the result to apply after it, the message. */
 export interface Playing {
@@ -25,7 +26,7 @@ export function ArenaReplay({
   return (
     <BattleReplayMount
       replay={playing.replay.replay}
-      clothing={'clothing' in attacker ? attacker.clothing : character.clothing}
+      clothing={'clothing' in attacker ? attacker.clothing : lookOf(character)}
       weaponItemId={'clothing' in attacker ? attacker.weaponItemId : undefined}
       look={'clothing' in attacker ? attacker : undefined}
       monsterIds={[]}

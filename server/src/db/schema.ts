@@ -137,8 +137,11 @@ export const characters = pgTable(
       .generatedAlwaysAs(sql`lower(name)`),
     gender: smallint('gender').notNull(),
     nation: smallint('nation').notNull(),
+    // The worn outfit: the active set's Outfit item, else set I's (game/outfit.ts syncOutfit).
     clothing: smallint('clothing').notNull(),
     avatarId: integer('avatar_id').notNull(),
+    // Reborn's Visual Outfit: the clothing drawn instead of `clothing`; null = the worn one.
+    visualClothing: smallint('visual_clothing'),
     level: smallint('level').notNull().default(1),
     exp: bigint('exp', { mode: 'number' }).notNull().default(0),
     stone: currency('stone'),
@@ -183,6 +186,8 @@ export const characters = pgTable(
     vipUntil: timestamp('vip_until', { withTimezone: true }),
     // Reborn equipment set (loadout) I-V the ninja wears; IV-V need VIP to switch to.
     activeSet: smallint('active_set').notNull().default(1),
+    // Reborn's Inventory "Hide": View Character shows other players no stats or skills.
+    hideStats: boolean('hide_stats').notNull().default(false),
     createdAt: createdAt(),
     // Market wallet (MartCapital0 Stone, MartCapital1 Gold): sale proceeds after tax, moved to
     // stone/gold by an explicit claim.
@@ -257,8 +262,8 @@ export const characters = pgTable(
 )
 
 // Where an inventory item is: in the bag (or equipped), listed on the Market, or waiting in the
-// Market warehouse. Bag queries must filter `location = 'bag'`.
-export const itemLocation = pgEnum('item_location', ['bag', 'market', 'warehouse'])
+// Market warehouse, or stored in the Wardrobe (outfits). Bag queries must filter `location = 'bag'`.
+export const itemLocation = pgEnum('item_location', ['bag', 'market', 'warehouse', 'wardrobe'])
 
 export const inventoryItems = pgTable(
   'inventory_items',
@@ -301,9 +306,20 @@ export const inventoryItems = pgTable(
     bagSlot: smallint('bag_slot'),
     // A locked item cannot be sold or listed on the Market.
     locked: boolean('locked').notNull().default(false),
+    // Reborn's Wardrobe: slot 0-19 (4 pages of 5) of an outfit stored there, else null.
+    wardrobeSlot: smallint('wardrobe_slot'),
   },
   (t) => [
     index('inventory_items_character_id_idx').on(t.characterId),
+    check('inventory_items_wardrobe_slot', sql`${t.wardrobeSlot} between 0 and 19`),
+    // A text comparison: the migration adds the enum value in the same transaction.
+    check(
+      'inventory_items_wardrobe_location',
+      sql`(${t.wardrobeSlot} is null) = (${t.location}::text <> 'wardrobe')`,
+    ),
+    uniqueIndex('inventory_items_wardrobe_slot_key')
+      .on(t.characterId, t.wardrobeSlot)
+      .where(sql`${t.wardrobeSlot} is not null`),
     check(
       'inventory_items_equipped_in_bag',
       sql`${t.equippedSlot} is null or ${t.location} = 'bag'`,
@@ -1981,5 +1997,25 @@ export const bankaiCrystals = pgTable(
       'bankai_crystals_place',
       sql`(${t.inventorySlot} between 0 and 79 and ${t.weapon} is null and ${t.ringSlot} is null) or (${t.inventorySlot} is null and ${t.weapon} in ${BANKAI_WEAPON_LIST} and ${t.ringSlot} between 0 and 7)`,
     ),
+  ],
+)
+
+// Scroll Dungeons: a ninja's attempts on the UTC day `attemptDay` and the pity per boss.
+export const dungeonPlayers = pgTable(
+  'dungeon_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    attemptDay: date('attempt_day'),
+    attemptsUsed: smallint('attempts_used').notNull().default(0),
+    // Wins without a scroll per boss index 0-10 (+0.5% each on its timed scrolls).
+    pity: smallint('pity')
+      .array()
+      .notNull()
+      .default(sql`'{0,0,0,0,0,0,0,0,0,0,0}'`),
+  },
+  (t) => [
+    check('dungeon_players_values', sql`${t.attemptsUsed} >= 0 and cardinality(${t.pity}) = 11`),
   ],
 )

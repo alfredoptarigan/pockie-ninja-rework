@@ -18,6 +18,29 @@ const club: InventoryItem = {
   slot: 4,
 }
 
+/** The worn creation outfit (clothing 3, Ggio Vega), an item in set I's Outfit slot. */
+const outfit: InventoryItem = {
+  ...fists,
+  id: '00000000-0000-7000-8000-0000000000a1',
+  itemId: 'i290003',
+  nameKey: 'lg_avatar3',
+  equippedSlot: 'Outfit',
+  equippedSet: 1,
+  page: null,
+  slot: null,
+  info: {
+    kind: 'equip',
+    equipSlot: 'Outfit',
+    level: 0,
+    sellPrice: 1000,
+    stack: 1,
+    w: 2,
+    h: 2,
+    class: 'AvatarItem',
+    outfit: { clothing: 3, plus: 1 },
+  },
+}
+
 /** Renders the bag; `bag.items` is what GET /api/game/inventory answers (tests may replace it). */
 function renderBag(
   items: InventoryItem[],
@@ -540,14 +563,14 @@ describe('Inventory equipment', () => {
       nameKey: 'lg_ring',
       equippedSlot: 'Ring',
     }
-    renderBag([ring])
+    renderBag([outfit, ring])
     await within(await screen.findByRole('list', { name: 'Equipment' })).findByText(/Ggio Vega/)
     expect(
       within(equipment())
         .getAllByRole('listitem')
         .map((slot) => slot.textContent),
     ).toEqual([
-      'Outfit: Ggio Vega +0',
+      '+1Outfit: Ggio Vega +1',
       'Weapon: empty',
       'Gloves: empty',
       'Pet: empty',
@@ -572,42 +595,53 @@ describe('Inventory equipment', () => {
   })
 
   it('opens Manage Outfit from the outfit slot, whose click does nothing', async () => {
-    renderBag([potion])
-    const outfit = await within(await screen.findByRole('list', { name: 'Equipment' })).findByRole(
+    renderBag([potion, outfit])
+    const slot = await within(await screen.findByRole('list', { name: 'Equipment' })).findByRole(
       'button',
-      { name: 'Ggio Vega +0' },
+      { name: 'Ggio Vega +1' },
     )
-    await userEvent.click(outfit)
+    await userEvent.click(slot)
     expect(screen.queryByRole('button', { name: 'Tile 1' })).not.toBeInTheDocument()
-    await userEvent.hover(outfit)
-    expect(screen.getByRole('tooltip')).toHaveTextContent('Item Type: Outfit')
+    await userEvent.hover(slot)
+    expect(screen.getByRole('tooltip')).toHaveTextContent('Item Type:Outfit')
 
-    fireEvent.contextMenu(outfit)
-    const menu = screen.getByRole('menu', { name: 'Ggio Vega +0' })
+    fireEvent.contextMenu(slot)
+    const menu = screen.getByRole('menu', { name: 'Ggio Vega +1' })
     await userEvent.click(within(menu).getByRole('menuitem', { name: 'Manage' }))
     const dialog = screen.getByRole('dialog', { name: 'Manage Outfit' })
     expect(dialog).toHaveTextContent('Stat Outfit')
-    expect(dialog).toHaveTextContent('Ggio Vega +0')
+    expect(dialog).toHaveTextContent('Ggio Vega +1')
     expect(dialog).toHaveTextContent('Visual Outfit')
     expect(dialog).toHaveTextContent('Changing the visual outfit costs 250 gold.')
-    const choose = within(dialog).getByRole('button', { name: 'Choose' })
-    expect(choose).toBeDisabled()
-    expect(choose).toHaveAccessibleDescription('Outfits are not items yet.')
+    expect(within(dialog).getByRole('button', { name: 'Choose Visual Outfit' })).toBeEnabled()
     await userEvent.click(within(dialog).getByRole('button', { name: 'Close' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
   it('shows the Reborn side buttons, those without a feature disabled', async () => {
     renderBag([])
-    for (const name of ['Compose', 'Multi Sell', 'Collection', 'Sort'])
+    for (const name of ['Compose', 'Multi Sell', 'Collection', 'Wardrobe', 'Sort'])
       expect(await screen.findByRole('button', { name })).toBeEnabled()
-    for (const name of ['Wardrobe', 'Reroll'])
-      expect(screen.getByRole('button', { name })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Reroll' })).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Talent' })).toBeEnabled()
     expect(screen.getByRole('button', { name: 'Blood Limit' })).toBeEnabled()
     const hide = screen.getByRole('checkbox', { name: 'Hide' })
-    expect(hide).toBeDisabled()
     expect(hide.closest('label')).toHaveAttribute('title', 'Click to hide detailed stats')
+  })
+
+  it('Hide sets the stats privacy and shows it checked', async () => {
+    const { fetchMock } = renderBag([], () => ({
+      'POST /api/game/character/privacy': () =>
+        json({ character: { ...character, hideStats: true } }),
+    }))
+    const hide = await screen.findByRole('checkbox', { name: 'Hide' })
+    await waitFor(() => expect(hide).toBeEnabled())
+    expect(hide).not.toBeChecked()
+    await userEvent.click(hide)
+    expect(requestBody(fetchMock, 'POST /api/game/character/privacy')).toEqual({
+      hideStats: true,
+    })
+    await waitFor(() => expect(hide).toBeChecked())
   })
 
   it('draws the outfit pose, and drops it when the outfit has none', async () => {

@@ -92,6 +92,9 @@ const ranked = (tx: Tx) =>
     .where(gte(arenaPlayers.tier, PLAYER_TIER))
     .as('ranked')
 
+/** The clothing a ninja is drawn in: the Visual Outfit, else the worn outfit. */
+export const lookColumn = sql<number>`coalesce(${characters.visualClothing}, ${characters.clothing})`
+
 // ponytail: the list is ranked with a window function per query (O(n) rows); keep a cached
 // place column if the arena grows past tens of thousands of ninjas.
 export async function placesOf(tx: Tx, ids: string[]) {
@@ -162,7 +165,7 @@ async function slotViews(tx: Tx, me: ArenaRow): Promise<ArenaSlotView[]> {
           id: characters.id,
           name: characters.name,
           level: characters.level,
-          clothing: characters.clothing,
+          clothing: lookColumn,
           tier: arenaPlayers.tier,
           score: arenaPlayers.score,
         })

@@ -1,4 +1,5 @@
 // M4 security review (docs/security-review-m4.md): one regression test per finding.
+import { eq } from 'drizzle-orm'
 import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createTestDb, truncateAll } from '../../test/helpers.js'
 import { blocks, inventoryItems, marketListings } from '../db/schema.js'
@@ -76,7 +77,10 @@ describe('periodic jobs', () => {
     await vi.waitFor(async () => expect(await db.select().from(marketListings)).toEqual([]), {
       timeout: 10_000,
     })
-    const [item] = await db.select().from(inventoryItems)
+    const [item] = await db
+      .select()
+      .from(inventoryItems)
+      .where(eq(inventoryItems.location, 'warehouse'))
     expect(item).toMatchObject({ characterId: a.id, location: 'warehouse' })
   })
 })

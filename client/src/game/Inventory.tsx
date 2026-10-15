@@ -14,7 +14,7 @@ import {
 } from 'react'
 import { useCharacter, useInventory, usePendingTreasure } from './api'
 import { BuffsPanel } from './BuffsPanel'
-import { BagGrid, iconFile, SideButtons, span, type Point } from './inventory/BagGrid'
+import { BagGrid, pictureOf, SideButtons, span, type Point } from './inventory/BagGrid'
 import {
   ConfirmDialog,
   ManageOutfitDialog,
@@ -22,13 +22,15 @@ import {
   SortDialog,
   UseMultipleDialog,
 } from './inventory/dialogs'
-import { Equipment, isWorn, OutfitTooltip, SetBar } from './inventory/EquipmentSlots'
+import { Equipment, isWorn, SetBar } from './inventory/EquipmentSlots'
+import { useClearVisualOutfit, useSetVisualOutfit } from './inventory/outfit-api'
+import { itemName, wornOutfit } from './inventory/outfits'
+import { Wardrobe } from './inventory/Wardrobe'
 import { attempt, useBagRequests } from './inventory/requests'
 import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
 import { ItemTooltip } from './ItemTooltip'
 import { GameButton, Notice } from './skin'
 import { requestItemLink } from './social'
-import { plainText } from './text'
 import { showToast } from './toast'
 import { TreasurePanel } from './TreasurePanel'
 import type { BagHighlight, InventoryItem } from './types'
@@ -80,6 +82,9 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   const [tip, setTip] = useState<{ id: string; at: Point } | null>(null)
   const [modal, setModal] = useState<Modal | null>(null)
   const [multiSell, setMultiSell] = useState(false)
+  const [wardrobeOpen, setWardrobeOpen] = useState(false)
+  const setVisual = useSetVisualOutfit()
+  const clearVisual = useClearVisualOutfit()
   const [selected, setSelected] = useState<string[]>([])
   const [treasureBox, setTreasureBox] = useState<InventoryItem | null>(null)
   const [treasureVisible, setTreasureVisible] = useState(false)
@@ -171,7 +176,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
 
   /** The context menu of a bag item, in Reborn's order; Appraise / Repair (our forge) last. */
   function entries(item: InventoryItem): MenuEntry[] {
-    const name = plainText(item.nameKey, 'item')
+    const name = itemName(item, 'item')
     const info = item.info
     const list: MenuEntry[] = []
     const add = (label: string, onSelect: () => void, extra: Partial<MenuEntry> = {}) =>
@@ -235,7 +240,8 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
   }
   const useMultipleItem =
     modal?.kind === 'useMultiple' && items.find((item) => item.id === modal.id)
-  const ghost = held && iconFile(held.itemId)
+  const ghost = held && pictureOf(held)
+  const outfit = wornOutfit(items, activeSet)
 
   return (
     <div
@@ -314,8 +320,16 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           setHeldId(null)
           setMultiSell(true)
         }}
+        onWardrobe={() => setWardrobeOpen(true)}
         onSort={() => setModal({ kind: 'sort' })}
       />
+      {wardrobeOpen && (
+        <Wardrobe
+          held={held}
+          onStored={() => setHeldId(null)}
+          onClose={() => setWardrobeOpen(false)}
+        />
+      )}
       {ghost && pointer && (
         <img
           src={ghost}
@@ -337,20 +351,17 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
           characterLevel={level}
         />
       )}
-      {!held && tip?.id === OUTFIT && character && (
-        <OutfitTooltip clothing={character.clothing} at={tipAt()!} />
-      )}
       {menuItem && menu && (
         <ItemMenu
-          title={plainText(menuItem.nameKey, 'Unknown item')}
+          title={itemName(menuItem)}
           at={menu}
           entries={entries(menuItem)}
           onClose={closeMenu}
         />
       )}
-      {menu?.id === OUTFIT && character && (
+      {menu?.id === OUTFIT && outfit && (
         <ItemMenu
-          title={plainText(`lg_avatar${character.clothing}`, 'Outfit')}
+          title={itemName(outfit)}
           at={menu}
           entries={[{ label: 'Manage', onSelect: () => setModal({ kind: 'outfit' }) }]}
           onClose={closeMenu}
@@ -400,7 +411,15 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
         />
       )}
       {modal?.kind === 'outfit' && character && (
-        <ManageOutfitDialog clothing={character.clothing} onClose={closeModal} />
+        <ManageOutfitDialog
+          stat={outfit}
+          visualClothing={character.visualClothing}
+          outfits={bag.filter((item) => item.info?.outfit)}
+          busy={request.busy}
+          onChoose={(item) => run(() => setVisual.mutateAsync(item.id))}
+          onRemove={() => run(() => clearVisual.mutateAsync())}
+          onClose={closeModal}
+        />
       )}
       {modal?.kind === 'confirm' && (
         <ConfirmDialog text={modal.text} onAccept={modal.onAccept} onClose={closeModal} />

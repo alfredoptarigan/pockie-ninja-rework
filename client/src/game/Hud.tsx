@@ -24,6 +24,7 @@ import { TeamHud } from './teams'
 import { plainText } from './text'
 import { useOpenWindow, type WindowName } from './windows'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
+import { lookOf } from './inventory/outfits'
 
 const CURRENCIES = [
   {
@@ -321,7 +322,7 @@ const VIP_NAME = 'text-[#ffd700] [text-shadow:0_0_3px_#b8860b,0_0_2px_#000]'
  * exported) and no Battle Power (the server exposes no power rating for the player).
  */
 export function PlayerCard({ character }: { character: Character }) {
-  const portrait = useOutfitPortrait(character.clothing)
+  const portrait = useOutfitPortrait(lookOf(character))
   const pouch = (value: number) => `${number(value)} / ${number(character.pouchMax)}`
   const pouchTip = 'Pouches refill your HP and chakra after every won fight.'
   const openWindow = useOpenWindow()

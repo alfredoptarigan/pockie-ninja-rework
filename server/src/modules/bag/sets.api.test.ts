@@ -88,7 +88,8 @@ describe('equipment sets', () => {
     // The piece it replaced goes back to the bag; set I is left without a weapon.
     expect(await find(spare.id)).toMatchObject({ equippedSlot: null, page: 0 })
     await switchTo(1)
-    expect((await inventory()).filter((row) => row.equippedSet === 1)).toEqual([])
+    const setOne = (await inventory()).filter((row) => row.equippedSet === 1)
+    expect(setOne.map((row) => row.equippedSlot)).toEqual(['Outfit'])
   })
 
   it('refuses sets IV and V without VIP and allows them with it', async () => {
@@ -122,7 +123,11 @@ describe('equipment sets', () => {
     await ninja.give(FISTS, { equippedSlot: 'Weapon' })
     const view = async () =>
       (await ninja.client.get(`/api/game/social/players/${ninja.characterId}`)).json().equipped
-    expect(await view()).toEqual([expect.objectContaining({ slot: 'Weapon', itemId: FISTS })])
+    // The creation outfit is worn in set I and is the fallback outfit of the other sets.
+    const outfit = expect.objectContaining({ slot: 'Outfit' })
+    const weapon = expect.objectContaining({ slot: 'Weapon', itemId: FISTS })
+    expect(await view()).toEqual(expect.arrayContaining([outfit, weapon]))
+    expect(await view()).toHaveLength(2)
     await switchTo(3)
     expect(await view()).toEqual([])
   })

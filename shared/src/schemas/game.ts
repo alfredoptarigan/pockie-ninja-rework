@@ -53,7 +53,10 @@ export interface Character {
   name: string
   gender: 0 | 1
   nation: Nation
+  /** The worn outfit's clothing (stats, weapon class). */
   clothing: number
+  /** Reborn's Visual Outfit: the clothing drawn instead of `clothing`; null = the worn one. */
+  visualClothing: number | null
   avatarId: number
   /** The outfit's weapon class (UsePopsinger bits: 1 Blunt, 2 Sharp, 4 Fists). */
   weaponClass: number
@@ -76,7 +79,12 @@ export interface Character {
   vipUntil: string | null
   /** Worn equipment set (Reborn loadout) 1-5. */
   activeSet: number
+  /** Inventory "Hide": other players' View Character gets no stats or skills. */
+  hideStats: boolean
 }
+
+/** POST /api/game/character/privacy (Reborn's setCharacterPrivacy). */
+export const characterPrivacySchema = z.object({ hideStats: z.boolean() }).strict()
 
 /**
  * Combat stats with equipment, as fights use them (GET /api/game/character `stats`).

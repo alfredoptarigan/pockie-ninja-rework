@@ -46,8 +46,13 @@ const update = (values: Partial<typeof characters.$inferInsert>) =>
   db.update(characters).set(values).where(eq(characters.id, characterId))
 const row = async () =>
   (await db.select().from(characters).where(eq(characters.id, characterId)))[0]!
+// The worn creation outfit (outfits are items) is not bag contents.
 const bag = () =>
-  db.select().from(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+  db
+    .select()
+    .from(inventoryItems)
+    .where(eq(inventoryItems.characterId, characterId))
+    .then((rows) => rows.filter((row) => row.equippedSlot !== 'Outfit'))
 const post = (path: string, body: object) => client.post(`${base}/${path}`, body)
 const give = async (itemId: string, extra: Partial<typeof inventoryItems.$inferInsert> = {}) =>
   (

@@ -274,6 +274,27 @@
       "when": 1792025369429,
       "tag": "0038_bankai",
       "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1792030000000,
+      "tag": "0039_hide_stats",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1792040000000,
+      "tag": "0040_outfit_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1792050000000,
+      "tag": "0041_dungeons",
+      "breakpoints": true
     }
   ]
 }

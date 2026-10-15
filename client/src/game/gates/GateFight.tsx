@@ -3,6 +3,7 @@ import type { Character } from '@pockie/shared'
 import { useApplyResult } from '../api'
 import { BattleReplayMount } from '../stage'
 import type { Replay } from '../types'
+import { lookOf } from '../inventory/outfits'
 
 export function GateFight({
   result,
@@ -17,7 +18,7 @@ export function GateFight({
   return (
     <BattleReplayMount
       replay={result.replay}
-      clothing={character.clothing}
+      clothing={lookOf(character)}
       monsterIds={result.npcIds}
       sceneId={character.sceneId}
       onFinished={() => {

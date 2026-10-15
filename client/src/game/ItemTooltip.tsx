@@ -8,7 +8,7 @@ import type { GearView } from '@pockie/shared'
 import type { ReactNode } from 'react'
 import { statLine, TIER_COLORS } from './forge/gear'
 import { itemIcon } from './ItemIcon'
-import { plainText } from './text'
+import { itemName, outfitIcon } from './inventory/outfits'
 import type { InventoryItem } from './types'
 
 /** Reborn's Item Type names (item_type__*) for our EquipType values and item classes. */
@@ -113,7 +113,8 @@ export function ItemPanel({
   level?: number
 }) {
   const lines = gear?.appraised ? gear.props.length : 0
-  const icon = itemIcon(item.itemId)
+  const outfit = item.info?.outfit
+  const icon = outfit ? outfitIcon(outfit.clothing) : itemIcon(item.itemId)?.file
   return (
     <div
       className="w-[250px] p-2"
@@ -134,7 +135,7 @@ export function ItemPanel({
         className="text-center text-sm font-bold"
         style={{ color: TIER_COLORS[Math.min(lines, 4)] }}
       >
-        {plainText(item.nameKey, 'Unknown item')}
+        {itemName(item)}
       </p>
       <div className="my-1 h-px bg-linear-to-r from-transparent via-[#d8b060] to-transparent" />
       <div className="flex items-start justify-between gap-2">
@@ -151,7 +152,7 @@ export function ItemPanel({
         </div>
         {icon && (
           <img
-            src={icon.file}
+            src={icon}
             alt=""
             className="max-h-[51px] max-w-[51px] rounded-sm border border-white/20"
           />

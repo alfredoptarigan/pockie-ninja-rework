@@ -60,12 +60,14 @@ export type BagSortInput = z.infer<typeof bagSortSchema>
 
 /** Item table facts the bag window needs (context menu, tooltip, footprint). */
 export interface BagItemInfo {
-  /** equip = EquipItem, use = CanUse 1 (not EquipItem/AvatarItem), other = the rest. */
+  /** equip = EquipItem or AvatarItem, use = CanUse 1 (not those), other = the rest. */
   kind: 'equip' | 'use' | 'other'
-  /** EquipType of an EquipItem. */
+  /** EquipType of an EquipItem; 'Outfit' for an AvatarItem. */
   equipSlot: string | null
-  /** UseLevel. */
+  /** UseLevel; an outfit's Reborn requirement (ceil((AvatarLevel - 1) * r / 31)). */
   level: number
+  /** AvatarItem only: its clothing and Reborn's "+N" (AvatarLevel). */
+  outfit?: { clothing: number; plus: number }
   /** Price per item when the shop buys it (CanTrade bit 1), else null. */
   sellPrice: number | null
   /** Largest stack. */

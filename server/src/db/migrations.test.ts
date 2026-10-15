@@ -169,6 +169,15 @@ describe('migrations', { timeout: SLOW }, () => {
           durability: 100,
           ...plain,
         },
+        // 0040_outfit_items: the creation outfit (clothing 45) as an item worn in set I.
+        {
+          item_id: 'i290045',
+          count: 1,
+          bound: true,
+          equipped_slot: 'Outfit',
+          durability: null,
+          ...plain,
+        },
         {
           item_id: 'i300111',
           count: 1,
@@ -209,6 +218,7 @@ describe('migrations', { timeout: SLOW }, () => {
       expect(items).toEqual([
         { item_id: 'i160006', location: 'bag' },
         { item_id: 'i250101', location: 'bag' },
+        { item_id: 'i290045', location: 'bag' },
       ])
       const [character] = await sql`
         select level, stone, honor, market_stone, market_gold from characters`
@@ -283,6 +293,54 @@ describe('migrations', { timeout: SLOW }, () => {
       ])
       expect(
         await sql`select count(*)::int as n from character_pet_skills where skill_id <= 0`,
+      ).toEqual([{ n: 0 }])
+    })
+  })
+
+  describe('on a database before outfit items', () => {
+    const sql = scratch()
+
+    beforeAll(async () => {
+      await recreateScratch()
+      const journal = JSON.parse(
+        readFileSync(join(migrationsFolder, 'meta', '_journal.json'), 'utf8'),
+      ) as { entries: { tag: string }[] }
+      await migrateTo(journal.entries.findIndex((entry) => entry.tag.endsWith('_outfit_items')))
+      const users = await sql<{ id: string }[]>`
+        insert into users (username, email, password_hash) values
+          ('Gin', 'gin@example.com', 'x'), ('Kiba', 'kiba@example.com', 'x'),
+          ('Ino', 'ino@example.com', 'x')
+        returning id`
+      const [gin, kiba, ino] = users.map((user) => user.id)
+      const characters = await sql<{ id: string; name: string }[]>`
+        insert into characters (user_id, name, gender, nation, clothing, avatar_id, hp, mp, scene_id)
+        values (${gin!}, 'Gin', 0, 0, 3, 3, 200, 200, 2101),
+               (${kiba!}, 'Kiba', 0, 0, 118, 118, 200, 200, 2101),
+               (${ino!}, 'Ino', 1, 0, 17, 117, 200, 200, 2101)
+        returning id, name`
+      const inoCharacter = characters.find((row) => row.name === 'Ino')!.id
+      await sql`
+        insert into inventory_items (character_id, item_id, equipped_slot)
+        values (${inoCharacter}, 'i290117', 'Outfit')`
+      await migrateTo()
+    }, SLOW)
+
+    afterAll(() => sql.end())
+
+    it("wears each ninja's clothing as its lowest-level outfit item in set I, once", async () => {
+      const outfits = await sql`
+        select c.name, i.item_id, i.bound, i.equipped_set, i.location, i.wardrobe_slot
+        from inventory_items i join characters c on c.id = i.character_id
+        where i.equipped_slot = 'Outfit' order by c.name`
+      const worn = { equipped_set: 1, location: 'bag', wardrobe_slot: null }
+      expect(outfits).toEqual([
+        { name: 'Gin', item_id: 'i290003', bound: true, ...worn },
+        // Already wearing an outfit in set I: left alone.
+        { name: 'Ino', item_id: 'i290117', bound: false, ...worn },
+        { name: 'Kiba', item_id: 'i2940180', bound: true, ...worn },
+      ])
+      expect(
+        await sql`select count(*)::int as n from characters where visual_clothing is not null`,
       ).toEqual([{ n: 0 }])
     })
   })

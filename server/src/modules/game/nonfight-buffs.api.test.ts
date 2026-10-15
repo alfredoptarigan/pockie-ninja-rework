@@ -48,8 +48,13 @@ const row = async () =>
   (await db.select().from(characters).where(eq(characters.id, characterId)))[0]!
 const buffs = () =>
   db.select().from(characterBuffs).where(eq(characterBuffs.characterId, characterId))
+// The worn creation outfit (outfits are items) is not bag contents.
 const bag = () =>
-  db.select().from(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+  db
+    .select()
+    .from(inventoryItems)
+    .where(eq(inventoryItems.characterId, characterId))
+    .then((rows) => rows.filter((row) => row.equippedSlot !== 'Outfit'))
 const view = async () => (await client.get('/api/game/buffs')).json()
 
 describe('non-fight consumables', () => {

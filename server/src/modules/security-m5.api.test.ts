@@ -81,7 +81,9 @@ describe('the Team Stone weekly pay', () => {
     // Arrange: a Champion (3 x i159045) whose bag has no free cell.
     const a = await ninja('Full_bag')
     const held = await db.select().from(inventoryItems).where(eq(inventoryItems.characterId, a.id))
-    const free = BAG_CELLS - held.reduce((sum, row) => sum + itemCells(row.itemId), 0)
+    // Worn items (the creation outfit) take no bag cells.
+    const loose = held.filter((row) => !row.equippedSlot)
+    const free = BAG_CELLS - loose.reduce((sum, row) => sum + itemCells(row.itemId), 0)
     await db
       .insert(inventoryItems)
       .values(

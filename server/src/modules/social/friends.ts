@@ -3,9 +3,12 @@ import { and, count, desc, eq, gt, ne, or, sql } from 'drizzle-orm'
 import type { Db } from '../../db/client.js'
 import { blocks, characters, friends, inventoryItems, mails } from '../../db/schema.js'
 import { wornItemsWhere } from '../../game/bag.js'
+import { playerFighter } from '../../game/combat.js'
 import { itemNameKey } from '../../game/data.js'
 import type { Tx } from '../../game/progress.js'
+import { activeSkillSlots } from '../../game/skill-bar.js'
 import { sendSystemMail } from '../../game/system-mail.js'
+import { statsOf } from '../game/characters.js'
 import {
   MAX_BLOCKED,
   MAX_FRIENDS,
@@ -202,11 +205,18 @@ export async function scenePlayersView(db: Tx | Db, me: CharacterRow): Promise<S
   }
 }
 
-/** Reborn's View Character: public fields and the worn items, never stats or the bag. */
-export async function playerView(db: Tx | Db, characterId: string): Promise<PlayerView> {
+/**
+ * Reborn's View Character: public fields, the worn items and, unless the ninja hides them from
+ * others (Inventory "Hide"), the combat stats and the active preset's skills. Never the bag.
+ */
+export async function playerView(
+  db: Tx | Db,
+  characterId: string,
+  viewerId: string,
+): Promise<PlayerView> {
   const row = await characterById(db, characterId)
   const worn = await db.select().from(inventoryItems).where(wornItemsWhere(row.id))
-  return {
+  const view: PlayerView = {
     player: toPlayer(row),
     online: isOnline(row.id),
     equipped: worn.map((item) => ({
@@ -215,5 +225,12 @@ export async function playerView(db: Tx | Db, characterId: string): Promise<Play
       nameKey: itemNameKey(item.itemId),
       enhanceLevel: item.enhanceLevel,
     })),
+    hideStats: row.hideStats,
+  }
+  if (row.hideStats && row.id !== viewerId) return view
+  return {
+    ...view,
+    stats: statsOf(await playerFighter(db, row)),
+    skills: await activeSkillSlots(db, row.id),
   }
 }

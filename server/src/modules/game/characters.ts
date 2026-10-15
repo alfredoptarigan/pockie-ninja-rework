@@ -1,5 +1,6 @@
 import { deriveStats, type CombatStats } from '@pockie/game-core'
 import {
+  characterPrivacySchema,
   createCharacterSchema,
   type Character,
   type CharacterStats,
@@ -9,13 +10,14 @@ import {
 import { count, eq } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
 import type { Db } from '../../db/client.js'
-import { characterQuests, characters } from '../../db/schema.js'
+import { characterQuests, characters, inventoryItems } from '../../db/schema.js'
+import { OUTFIT_SLOT } from '../../game/outfit.js'
 import {
-  avatarIdForClothing,
   avatarStats,
   creationOutfits,
   FIRST_TUTORIAL_TASK,
   nationScenes,
+  outfitForClothing,
   subTasks,
 } from '../../game/data.js'
 import { playerFighter, type PlayerFighter } from '../../game/combat.js'
@@ -44,6 +46,7 @@ export function toCharacter(
     gender: row.gender as 0 | 1,
     nation: row.nation as Nation,
     clothing: row.clothing,
+    visualClothing: row.visualClothing,
     avatarId: row.avatarId,
     weaponClass: avatarStats(row.avatarId).Popsinger,
     level: row.level,
@@ -62,12 +65,13 @@ export function toCharacter(
     sceneId: row.sceneId,
     vipUntil: row.vipUntil?.toISOString() ?? null,
     activeSet: row.activeSet,
+    hideStats: row.hideStats,
   }
 }
 
 /** A defeated (0 HP, dead) ninja cannot fight, travel or explore until revived (StateSystem). */
 /** The fighter's stats without its fight state (name, HP/MP, skills). */
-function statsOf(fighter: PlayerFighter): CharacterStats {
+export function statsOf(fighter: PlayerFighter): CharacterStats {
   return {
     strength: fighter.strength,
     agility: fighter.agility,
@@ -158,6 +162,23 @@ export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) 
     return { character: toCharacter(row, fighter), stats: statsOf(fighter) }
   })
 
+  // Reborn's setCharacterPrivacy: the Inventory "Hide" checkbox.
+  app.post(
+    '/character/privacy',
+    { config: { rateLimit: RATE_LIMITS.privacy } },
+    async (request) => {
+      const user = requireUser(request)
+      const { hideStats } = characterPrivacySchema.parse(request.body)
+      const [row] = await db
+        .update(characters)
+        .set({ hideStats })
+        .where(eq(characters.userId, user.id))
+        .returning()
+      if (!row) throw new HttpError(404, 'no_character', 'Create your ninja first.')
+      return { character: toCharacter(row, await playerFighter(db, row)) }
+    },
+  )
+
   app.post(
     '/characters',
     { config: { rateLimit: RATE_LIMITS.createCharacter } },
@@ -172,7 +193,7 @@ export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) 
         })
       }
 
-      const avatarId = avatarIdForClothing(input.clothing)
+      const { itemId: outfitItem, avatarId } = outfitForClothing(input.clothing)
       const stats = deriveStats(avatarStats(avatarId), 1)
       const sceneId = nationScenes()[input.nation]!.login
       const firstTask = FIRST_TUTORIAL_TASK[input.nation]!
@@ -197,6 +218,14 @@ export async function characterRoutes(app: FastifyInstance, { db }: { db: Db }) 
             characterId: created!.id,
             taskId: firstTask,
             progress: subTasks(firstTask).map(() => 0),
+          })
+          // The creation outfit is an item, worn in set I (game/outfit.ts).
+          await tx.insert(inventoryItems).values({
+            characterId: created!.id,
+            itemId: outfitItem,
+            bound: true,
+            equippedSlot: OUTFIT_SLOT,
+            equippedSet: 1,
           })
           return created!
         })

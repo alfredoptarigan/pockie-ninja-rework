@@ -67,7 +67,8 @@ const toPlayer = (c: Character): ScenePlayer => ({
   characterId: c.id,
   name: c.name,
   level: c.level,
-  clothing: c.clothing,
+  // Others see the Visual Outfit when one is set.
+  clothing: c.visualClothing ?? c.clothing,
   gender: c.gender,
   nation: c.nation,
 })

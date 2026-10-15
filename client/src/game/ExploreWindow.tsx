@@ -42,6 +42,7 @@ import type {
   InventoryItem,
   SceneView,
 } from './types'
+import { lookOf } from './inventory/outfits'
 
 const TICK_MS = 1000
 
@@ -180,7 +181,7 @@ function ExploreFlow({
       <BattleReplayMount
         key={outcome.run}
         replay={fight.replay}
-        clothing={character.clothing}
+        clothing={lookOf(character)}
         monsterIds={card.type === 'fight' ? [exploreMonster(card.monsterId).id] : []}
         sceneId={sceneId}
         weaponItemId={outcome.weaponItemId}

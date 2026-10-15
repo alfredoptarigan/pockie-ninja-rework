@@ -134,6 +134,16 @@ function useGameAction<TInput, TResult extends { character: Character }>(
 
 const post = <T>(path: string, body?: unknown) => api<T>(path, { method: 'POST', body })
 
+/** Inventory "Hide" (Reborn's setCharacterPrivacy): keeps stats and skills from other players. */
+export function useSetCharacterPrivacy() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (hideStats: boolean) =>
+      post<{ character: Character }>('/api/game/character/privacy', { hideStats }),
+    onSuccess: ({ character }) => queryClient.setQueryData(gameKeys.character, character),
+  })
+}
+
 export function useCreateCharacter() {
   return useGameAction((input: CreateCharacterInput) =>
     post<{ character: Character }>('/api/game/characters', input),

@@ -1,13 +1,13 @@
 // Reborn's small Inventory windows (reborn-windows-A-L.md, "Inventory"): the confirm prompt,
 // Use Multiple Items, Sort Inventory, Multi Sell and Manage Outfit. They open inside the
 // Inventory window, so they stay in its modal top layer; Escape closes the top one.
-import type { BagSortInput, GearView } from '@pockie/shared'
+import { VISUAL_OUTFIT_GOLD, type BagSortInput, type GearView } from '@pockie/shared'
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { GameButton } from '../skin'
-import { plainText } from '../text'
+import { outfitName, plainText } from '../text'
 import type { InventoryItem } from '../types'
-import { ItemPicture, refineLines } from './BagGrid'
-import { outfitIcon, outfitName } from './EquipmentSlots'
+import { ItemPicture, OutfitPlus, refineLines } from './BagGrid'
+import { itemName, outfitIcon } from './outfits'
 
 /** Reborn caps Use Multiple at 1000 per request. */
 const USE_MULTIPLE_CAP = 1000
@@ -15,12 +15,15 @@ const USE_MULTIPLE_CAP = 1000
 const GRADES = ['Gray', 'Green', 'Blue', 'Purple', 'Orange']
 /** Selected items shown per Multi Sell page. */
 const SELL_PAGE = 8
+/** Outfits shown per page of Manage Outfit's picker. */
+const PICK_PAGE = 8
 const BUTTON = 'h-[26px] min-w-0! px-2!'
 
-function Panel({
+export function Panel({
   label,
   title,
   width,
+  top,
   alert = false,
   onClose,
   children,
@@ -29,6 +32,8 @@ function Panel({
   /** The title band; prompts have none. */
   title?: string
   width: number
+  /** Distance from the Inventory's top (70px by default). */
+  top?: number
   alert?: boolean
   onClose: () => void
   children: ReactNode
@@ -52,7 +57,7 @@ function Panel({
         onClose()
       }}
       className="game-frame absolute top-[70px] left-1/2 z-[55] -translate-x-1/2 px-2 pt-1 pb-2 font-game text-xs"
-      style={{ width }}
+      style={{ width, top }}
     >
       {title && (
         <div className="game-frame-title mb-1">
@@ -296,40 +301,180 @@ export function MultiSellDialog({
   )
 }
 
-export function ManageOutfitDialog({
+/** One Manage Outfit box: a 12px bold label over a 62x62 cell with the outfit, or "+". */
+function OutfitBox({
+  label,
   clothing,
+  onClick,
+}: {
+  label: string
+  clothing?: number | null
+  onClick?: () => void
+}) {
+  const content =
+    clothing == null ? (
+      <span className="text-[28px] leading-none opacity-50">+</span>
+    ) : (
+      <img
+        src={outfitIcon(clothing)}
+        alt={`${label}: ${outfitName(clothing)}`}
+        className="size-[56px] object-contain"
+      />
+    )
+  return (
+    <section className="flex flex-col items-center gap-1">
+      <h4 className="text-[12px] font-bold">{label}</h4>
+      {onClick ? (
+        <button
+          type="button"
+          aria-label={`${label}: empty, pick one`}
+          onClick={onClick}
+          className="game-slot grid size-[62px] cursor-pointer place-items-center"
+        >
+          {content}
+        </button>
+      ) : (
+        <div className="game-slot grid size-[62px] place-items-center">{content}</div>
+      )}
+    </section>
+  )
+}
+
+/**
+ * Reborn's Manage Outfit: the Stat Outfit (worn) and the Visual Outfit (drawn instead). Choose
+ * lists the bag's loose outfits; picking one asks to confirm the gold, Remove is free.
+ */
+export function ManageOutfitDialog({
+  stat,
+  visualClothing,
+  outfits,
+  busy,
+  onChoose,
+  onRemove,
   onClose,
 }: {
-  clothing: number
+  /** The worn outfit item. */
+  stat?: InventoryItem
+  visualClothing: number | null
+  /** Loose bag outfits. */
+  outfits: InventoryItem[]
+  busy: boolean
+  onChoose: (item: InventoryItem) => void
+  onRemove: () => void
   onClose: () => void
 }) {
-  const reasonId = useId()
-  const box = 'grid h-[96px] flex-1 place-items-center border border-[#8b7355]/50 p-1 text-center'
+  const [picking, setPicking] = useState(false)
+  const [page, setPage] = useState(0)
+  const [confirm, setConfirm] = useState<InventoryItem | null>(null)
+  if (confirm)
+    return (
+      <ConfirmDialog
+        text={`Adding a visual character into this box will visually show you this character as the equipped one, leaving the stats to the outfit equipped in "Stat Outfit". Cost: ${VISUAL_OUTFIT_GOLD} gold`}
+        onAccept={() => {
+          setPicking(false)
+          onChoose(confirm)
+        }}
+        onClose={() => setConfirm(null)}
+      />
+    )
+  if (picking) {
+    const pages = Math.max(1, Math.ceil(outfits.length / PICK_PAGE))
+    const shown = Math.min(page, pages - 1)
+    return (
+      <Panel
+        label="Choose an outfit to show visually"
+        title="Manage Outfit"
+        width={320}
+        onClose={() => setPicking(false)}
+      >
+        <p className="font-bold">Choose an outfit to show visually</p>
+        {outfits.length === 0 ? (
+          <p>No outfits available in your inventory.</p>
+        ) : (
+          <ul aria-label="Outfits" className="grid grid-cols-4 gap-1">
+            {outfits.slice(shown * PICK_PAGE, (shown + 1) * PICK_PAGE).map((item) => (
+              <li key={item.id} className="relative size-[51px]">
+                <ItemPicture item={item} decorative />
+                {item.info?.outfit && <OutfitPlus plus={item.info.outfit.plus} under={false} />}
+                <button
+                  type="button"
+                  aria-label={itemName(item)}
+                  disabled={busy}
+                  onClick={() => setConfirm(item)}
+                  className="absolute inset-0 cursor-pointer"
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className="flex items-center justify-center gap-2">
+          {pages > 1 && (
+            <>
+              <GameButton
+                small
+                aria-label="Previous page"
+                onClick={() => setPage(shown - 1)}
+                disabled={shown === 0}
+              >
+                {'<'}
+              </GameButton>
+              <span>
+                {shown + 1}/{pages}
+              </span>
+              <GameButton
+                small
+                aria-label="Next page"
+                onClick={() => setPage(shown + 1)}
+                disabled={shown === pages - 1}
+              >
+                {'>'}
+              </GameButton>
+            </>
+          )}
+          <GameButton onClick={() => setPicking(false)} className="h-[22px] w-[100px]">
+            Back
+          </GameButton>
+        </div>
+      </Panel>
+    )
+  }
+  const statClothing = stat?.info?.outfit?.clothing
   return (
     <Panel label="Manage Outfit" title="Manage Outfit" width={320} onClose={onClose}>
-      <div className="flex gap-2">
-        <section className={box}>
-          <h4 className="font-bold">Stat Outfit</h4>
-          <img src={outfitIcon(clothing)} alt="" className="size-[51px] object-contain" />
-          <p>{outfitName(clothing)}</p>
-        </section>
-        <section className={box}>
-          <h4 className="font-bold">Visual Outfit</h4>
-          <p>None</p>
-        </section>
-      </div>
-      <p>Changing the visual outfit costs 250 gold. Removing it is free.</p>
-      <p id={reasonId} className="text-[11px] text-[#c0392b]">
-        Outfits are not items yet.
+      <p className="text-center">
+        Your stats come from the Stat Outfit. Set a different Visual Outfit to change only how your
+        character looks.
       </p>
-      <div className="flex justify-end gap-2">
-        <GameButton disabled aria-describedby={reasonId} className={BUTTON}>
-          Choose
-        </GameButton>
+      <div className="flex justify-center gap-10">
+        <OutfitBox label="Stat Outfit" clothing={statClothing} />
+        <OutfitBox
+          label="Visual Outfit"
+          clothing={visualClothing}
+          onClick={visualClothing == null ? () => setPicking(true) : undefined}
+        />
+      </div>
+      {stat && <p className="text-center">{itemName(stat)}</p>}
+      <div className="flex justify-center gap-2">
+        {visualClothing == null ? (
+          <GameButton
+            disabled={busy}
+            onClick={() => setPicking(true)}
+            className="h-[24px] w-[160px]"
+          >
+            Choose Visual Outfit
+          </GameButton>
+        ) : (
+          <GameButton disabled={busy} onClick={onRemove} className="h-[24px] w-[120px]">
+            Remove
+          </GameButton>
+        )}
         <GameButton onClick={onClose} className={BUTTON}>
           Close
         </GameButton>
       </div>
+      <p className="text-center opacity-80">
+        Changing the visual outfit costs {VISUAL_OUTFIT_GOLD} gold. Removing it is free.
+      </p>
     </Panel>
   )
 }

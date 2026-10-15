@@ -14,6 +14,7 @@ import {
 } from './bag-grid.js'
 import { avatarStats, item, itemNameKey } from './data.js'
 import type { GrantedItem } from './gear.js'
+import { OUTFIT_SLOT, outfitOf } from './outfit.js'
 import type { Tx } from './progress.js'
 
 /** Inventory ownership includes market storage; bag reads must use these predicates. */
@@ -103,12 +104,14 @@ export function fitsOutfit(def: NonNullable<ReturnType<typeof item>>, avatarId: 
 export function itemInfo(itemId: string): BagItemInfo {
   const def = item(itemId)
   const itemClass = String(def?.class ?? '')
+  const outfit = outfitOf(itemId)
   const equip = itemClass === 'EquipItem'
-  const usable = Number(def?.CanUse) === 1 && itemClass !== 'AvatarItem'
+  const usable = Number(def?.CanUse) === 1 && !outfit
   return {
-    kind: equip ? 'equip' : usable ? 'use' : 'other',
-    equipSlot: equip ? String(def!.EquipType) : null,
-    level: Number(def?.UseLevel ?? 0),
+    kind: equip || outfit ? 'equip' : usable ? 'use' : 'other',
+    equipSlot: outfit ? OUTFIT_SLOT : equip ? String(def!.EquipType) : null,
+    level: outfit ? outfit.level : Number(def?.UseLevel ?? 0),
+    ...(outfit && { outfit: { clothing: outfit.clothing, plus: outfit.plus } }),
     sellPrice: (Number(def?.CanTrade ?? 0) & 1) !== 0 ? Number(def?.Price ?? 0) : null,
     stack: itemStackSize(itemId),
     ...footprint(itemId),
@@ -183,23 +186,24 @@ export async function inventoryView(
     .from(inventoryItems)
     .where(bagItemsWhere(character.id))
     .orderBy(asc(inventoryItems.createdAt), asc(inventoryItems.id))
+  return { items: rows.map((row) => itemView(row, character.avatarId)) }
+}
+
+/** One inventory row as the client sees it; `avatarId` is the wearer's (fitsOutfit). */
+export function itemView(row: ItemRow, avatarId: number): InventoryItemView {
+  const def = item(row.itemId)
   return {
-    items: rows.map((row) => {
-      const def = item(row.itemId)
-      return {
-        id: row.id,
-        itemId: row.itemId,
-        count: row.count,
-        bound: row.bound,
-        equippedSlot: row.equippedSlot,
-        equippedSet: row.equippedSlot ? row.equippedSet : null,
-        nameKey: itemNameKey(row.itemId),
-        ...(def?.class === 'EquipItem' ? { fitsOutfit: fitsOutfit(def, character.avatarId) } : {}),
-        page: row.bagPage,
-        slot: row.bagSlot,
-        locked: row.locked,
-        info: itemInfo(row.itemId),
-      }
-    }),
+    id: row.id,
+    itemId: row.itemId,
+    count: row.count,
+    bound: row.bound,
+    equippedSlot: row.equippedSlot,
+    equippedSet: row.equippedSlot ? row.equippedSet : null,
+    nameKey: itemNameKey(row.itemId),
+    ...(def?.class === 'EquipItem' ? { fitsOutfit: fitsOutfit(def, avatarId) } : {}),
+    page: row.bagPage,
+    slot: row.bagSlot,
+    locked: row.locked,
+    info: itemInfo(row.itemId),
   }
 }

@@ -10,6 +10,7 @@ import {
   SKILL_RESET_COST,
   SKILL_SLOTS_PER_TREE,
   SKILL_TREE_COUNT,
+  type SkillSlot,
   type SkillSlotInput,
   type SkillView,
 } from '@pockie/shared'
@@ -194,18 +195,18 @@ export async function setSkillSlot(tx: Tx, characterId: string, input: SkillSlot
     })
 }
 
-/** The active bar plus learned element passives; outfit/generic skills are added by combat. */
-export async function characterSkillInputs(
-  tx: Tx | Db,
-  characterId: string,
-): Promise<SkillInput[]> {
+/** The active tree's filled slots; expired scroll skills drop out at once (decision 18). */
+async function activeSlotRows(tx: Tx | Db, characterId: string) {
   const [state] = await tx
     .select()
     .from(characterSkillState)
     .where(eq(characterSkillState.characterId, characterId))
-  // Expired scroll skills drop out at once (decision 18), before the lazy delete.
-  const slots = await tx
-    .select({ skillId: characterSkillSlots.skillId, level: characterSkillSlots.level })
+  return tx
+    .select({
+      slot: characterSkillSlots.slot,
+      skillId: characterSkillSlots.skillId,
+      level: characterSkillSlots.level,
+    })
     .from(characterSkillSlots)
     .innerJoin(
       characterSkills,
@@ -222,6 +223,23 @@ export async function characterSkillInputs(
       ),
     )
     .orderBy(characterSkillSlots.slot)
+}
+
+/** The active preset's six slots (View Character's skills strip). */
+export async function activeSkillSlots(tx: Tx | Db, characterId: string): Promise<SkillSlot[]> {
+  const rows = await activeSlotRows(tx, characterId)
+  return Array.from({ length: SKILL_SLOTS_PER_TREE }, (_, slot) => {
+    const row = rows.find((row) => row.slot === slot)
+    return { slot, skillId: row?.skillId ?? null, level: row?.level ?? 0 }
+  })
+}
+
+/** The active bar plus learned element passives; outfit/generic skills are added by combat. */
+export async function characterSkillInputs(
+  tx: Tx | Db,
+  characterId: string,
+): Promise<SkillInput[]> {
+  const slots = await activeSlotRows(tx, characterId)
   const passives = await tx
     .select()
     .from(characterSkills)

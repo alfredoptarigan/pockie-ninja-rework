@@ -323,7 +323,7 @@ export async function teamView(ctx: TeamContext, locked: LockedTeam): Promise<Te
           characterId: row.id,
           name: row.name,
           level: row.level,
-          clothing: row.clothing,
+          clothing: row.visualClothing ?? row.clothing,
           gender: row.gender as 0 | 1,
           hp: row.hp,
           maxHp: fighter.maxHp,

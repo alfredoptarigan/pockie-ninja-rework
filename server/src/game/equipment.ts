@@ -28,11 +28,13 @@ export async function equippedGear(tx: Tx | Db, characterId: string): Promise<Ge
 const durabilityOf = (gear: Gear, config: EquipConfig) =>
   gear.durability ?? Math.max(config.MaxHardiness ?? 0, 1)
 
-/** deriveStats bonuses from the equipped rows; items without a config row are ignored. */
+/** deriveStats bonuses from the equipped rows; outfits and unknown items are ignored. */
 export function equipmentBonuses(equipped: readonly Gear[], wearer: Wearer): Partial<Bonuses> {
   const items = equipped.flatMap((gear): EquippedItem[] => {
-    const config = item(gear.itemId) as EquipConfig | undefined
-    if (!config) return []
+    // Outfits (AvatarItem) count through the avatar, not as gear.
+    const def = item(gear.itemId)
+    if (!def || def.class === 'AvatarItem') return []
+    const config = def as EquipConfig
     return [
       {
         config,

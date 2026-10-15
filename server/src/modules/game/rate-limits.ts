@@ -32,4 +32,5 @@ export const RATE_LIMITS = {
   forge: perMinute(60),
   gates: perMinute(60),
   gateFight: perMinute(30),
+  privacy: perMinute(30),
 }

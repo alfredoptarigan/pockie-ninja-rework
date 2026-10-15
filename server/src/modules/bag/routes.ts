@@ -37,6 +37,7 @@ import {
 } from '../../game/bag-grid.js'
 import type { Tx } from '../../game/progress.js'
 import { canSell, sellRows } from '../../game/sell.js'
+import { syncOutfit } from '../../game/outfit.js'
 import { isVip } from '../../game/vip.js'
 import { HttpError } from '../../http.js'
 import { refreshArenaSnapshot } from '../arena/snapshot.js'
@@ -103,11 +104,8 @@ export async function bagRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const c = await lockCharacter(tx, userId)
       await placeBag(tx, c.id)
       const extra = await fn(tx, c)
-      return {
-        ...extra,
-        character: await reloadCharacter(tx, c.id),
-        ...(await inventoryView(tx, c)),
-      }
+      const character = await reloadCharacter(tx, c.id)
+      return { ...extra, character, ...(await inventoryView(tx, character)) }
     })
   }
   const itemId = (request: FastifyRequest) => itemActionParamsSchema.parse(request.params).id
@@ -121,6 +119,7 @@ export async function bagRoutes(app: FastifyInstance, { db }: { db: Db }) {
       if (set >= FIRST_VIP_SET && !isVip(c))
         throw bad('vip_required', 'VIP required for equipment sets')
       await tx.update(characters).set({ activeSet: set }).where(eq(characters.id, c.id))
+      await syncOutfit(tx, c.id, set)
       await refreshArenaSnapshot(tx, c.id)
       return {}
     })

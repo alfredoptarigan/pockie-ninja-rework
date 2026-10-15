@@ -6,6 +6,12 @@ import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/h
 import { characterQuests, characters, inventoryItems } from '../../db/schema.js'
 import { EXPLORE_MIN_HP, fightMonster } from '../../game/combat.js'
 
+/** Items other than the worn creation outfit (outfits are items). */
+const looseItems = () =>
+  db
+    .select()
+    .from(inventoryItems)
+    .then((rows) => rows.filter((row) => row.equippedSlot !== 'Outfit'))
 const { db, close } = createTestDb()
 let app: ReturnType<typeof buildTestApp>
 let client: Client
@@ -106,7 +112,7 @@ describe('pouches', () => {
     const response = await useItem(pouch.id)
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('pouch_full')
-    expect(await db.select().from(inventoryItems)).toHaveLength(1)
+    expect(await looseItems()).toHaveLength(1)
   })
 })
 
@@ -170,7 +176,7 @@ describe('potions', () => {
     const response = await useItem(potion.id)
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('full')
-    expect(await db.select().from(inventoryItems)).toHaveLength(1)
+    expect(await looseItems()).toHaveLength(1)
   })
 
   it('restore chakra (mp.js)', async () => {
@@ -230,7 +236,7 @@ describe('GET /api/game/quests/available', () => {
 
   it('offers the next NPC quest once its previous quest is done, with its quest giver', async () => {
     await client.post('/api/game/npcs/n11001/talk')
-    const pack = (await db.select().from(inventoryItems))[0]!
+    const pack = (await looseItems())[0]!
     await useItem(pack.id)
 
     const body = await available()

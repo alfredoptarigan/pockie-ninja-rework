@@ -32,11 +32,11 @@ const ACTIVE_COLUMNS = [
   [1829, 3802, 1830, 3803],
 ]
 /** Equipped row: Reborn shows ten cells; the slots past the skill bar's six are locked. */
-const EQUIPPED_CELLS = 10
+export const EQUIPPED_CELLS = 10
 const PRESETS = 5
 const COLUMN_STEP = 44
 const ROW_STEP = 48
-const SLOT_STEP = 38
+export const SLOT_STEP = 38
 
 /**
  * Reborn's icon for one of our skill ids: it numbers the element passives from 2800 (ours from
@@ -320,7 +320,7 @@ function Label({ at, children }: { at: number; children: ReactNode }) {
  * One skill: the 24px icon in its 26px cell, the level strip under it, and the tooltip on hover
  * or focus. `onOpen` makes it a button that opens the skill's menu.
  */
-function SkillCell({
+export function SkillCell({
   id,
   left = 4,
   top = 3,

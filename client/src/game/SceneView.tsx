@@ -25,6 +25,7 @@ import { plainText } from './text'
 import type { BagHighlight, FightResult, SceneMonster, SceneNpc } from './types'
 import { useOpenWindow } from './windows'
 import { DEFEATED_REASON, isDefeated, sceneBuildings } from './world'
+import { lookOf } from './inventory/outfits'
 
 /** Scenes with a pub fight line-up (`pub-fights.json` scenes): the neutral fields 26xx-28xx. */
 const PUB_FIGHT_SCENES = [
@@ -255,7 +256,7 @@ export function SceneView({
         <BattleReplayMount
           key={fightState.run}
           replay={fightState.result.replay}
-          clothing={character.clothing}
+          clothing={lookOf(character)}
           monsterIds={[fightState.monster.id]}
           sceneId={character.sceneId}
           weaponItemId={fightState.weaponItemId}

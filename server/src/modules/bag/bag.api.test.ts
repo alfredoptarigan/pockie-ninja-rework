@@ -183,7 +183,8 @@ describe('lock, split and sell', () => {
     const sold = await post('sell', { inventoryIds: [potion.id, fists.id] })
     expect(sold.statusCode).toBe(200)
     expect(sold.json()).toMatchObject({ earned: 3 * 16 + 44, character: { stone: 92 } })
-    expect(sold.json().items).toEqual([])
+    // Only the worn creation outfit is left.
+    expect(sold.json().items).toEqual([expect.objectContaining({ equippedSlot: 'Outfit' })])
   })
 
   it('refuses the whole sale for locked, equipped or untradable items', async () => {

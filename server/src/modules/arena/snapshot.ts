@@ -51,7 +51,9 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
   ]
   const talents = await talentFighterInput(tx, character.id)
   const weapon = equipped.find((row) => row.equippedSlot === 'Weapon')
-  const { name, gender, level, avatarId, clothing, nation } = character
+  const { name, gender, level, avatarId, nation } = character
+  // Drawn in the Visual Outfit when one is set; stats come from avatarId.
+  const clothing = character.visualClothing ?? character.clothing
   const gear = [...equipped].sort((x, y) => x.id.localeCompare(y.id))
   return {
     ...(expiries.length > 0 && { buffExpiresAt: new Date(Math.min(...expiries)).toISOString() }),
@@ -68,6 +70,7 @@ export async function arenaFighter(tx: Tx, character: CharacterRow): Promise<Are
       gender,
       level,
       avatarId,
+      character.clothing,
       clothing,
       nation,
       gear,

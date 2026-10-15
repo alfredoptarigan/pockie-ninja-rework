@@ -32,7 +32,7 @@ import {
 import { loadEnv } from '../src/env.js'
 import { playerFighter } from '../src/game/combat.js'
 import {
-  avatarIdForClothing,
+  outfitForClothing,
   avatarStats,
   FIRST_TUTORIAL_TASK,
   item,
@@ -152,7 +152,7 @@ async function upsertUser(tx: Tx) {
 }
 
 async function upsertCharacter(tx: Tx, userId: string) {
-  const avatarId = avatarIdForClothing(CLOTHING)
+  const { avatarId } = outfitForClothing(CLOTHING)
   const stats = deriveStats(avatarStats(avatarId), LEVEL)
   const castle = nationScenes()[NATION]!.castle
   const values = {
@@ -359,6 +359,13 @@ async function seedItems(tx: Tx, characterId: string) {
       enhanceLevel: GEAR_ENHANCE,
     })),
     { characterId, itemId: WING, bound: true, equippedSlot: WING_SLOT, enhanceLevel: WING_ENHANCE },
+    // The outfit is an item in set I's Outfit slot (game/outfit.ts).
+    {
+      characterId,
+      itemId: outfitForClothing(CLOTHING).itemId,
+      bound: true,
+      equippedSlot: 'Outfit',
+    },
     ...BAG.map(([itemId, count]) => ({
       characterId,
       itemId,

@@ -33,8 +33,13 @@ afterAll(() => close())
 
 const give = async (itemId: string, count = 1) =>
   (await db.insert(inventoryItems).values({ characterId, itemId, count }).returning())[0]!
+// The worn creation outfit (outfits are items) is not bag contents.
 const bag = () =>
-  db.select().from(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+  db
+    .select()
+    .from(inventoryItems)
+    .where(eq(inventoryItems.characterId, characterId))
+    .then((rows) => rows.filter((row) => row.equippedSlot !== 'Outfit'))
 const row = async () =>
   (await db.select().from(characters).where(eq(characters.id, characterId)))[0]!
 const open = (id: string) => client.post(`/api/game/items/${id}/treasure`, { currency: 'gold' })

@@ -1,15 +1,18 @@
 // Reborn's View Character (`Us`, 333 wide): equipment columns around the pose, the name plate, the
-// action bar Add Friend / Duel / PM / Trade / Block. Opened from player names (Social, Player List).
-// Our server keeps stats and skills private, so the stats panel shows the public facts only; we
-// have no duels or trading, so those two buttons stay disabled.
+// action bar Add Friend / Duel / PM / Trade / Block, the Stats window's rows and the active skill
+// preset. Opened from player names (Social, Player List). A ninja who ticks the Inventory's Hide
+// sends no stats or skills (the server enforces it): Reborn then shows every stat as 0. We have no
+// duels or trading, so those two buttons stay disabled.
+import { SKILL_SLOTS_PER_TREE, type CharacterStats, type SkillSlot } from '@pockie/shared'
 import { useState, type CSSProperties } from 'react'
 import type { WornItem } from '../../../../shared/src/schemas/social'
 import { errorMessage } from '../api'
+import { Divider, StatGrid, StatGroups, statGroups, type StatRow } from '../CharacterWindow'
+import { EQUIPPED_CELLS, SkillCell, SLOT_STEP } from '../SkillsWindow'
 import { ItemIcon } from '../ItemIcon'
 import { Dialog, GameButton, Notice } from '../skin'
 import { outfitName, plainText } from '../text'
 import { useBlocked, useFriendAction, usePlayerView } from './api'
-import { village } from './PlayerTable'
 import { requestWhisper } from './requests'
 
 /** Slot boxes [left, top, size] of Reborn's columns: left at x 0, right at x 270. */
@@ -30,6 +33,77 @@ const box = ([left, top, width, height]: readonly number[]): CSSProperties => ({
   width,
   height,
 })
+
+/** Statless stand-in for a hidden ninja; every value is then shown as 0. */
+const NO_STATS = {} as CharacterStats
+const zeroed = (groups: StatRow[][]): StatRow[][] =>
+  groups.map((rows) =>
+    rows.map((row) => row.map((cell) => cell && { label: cell.label, value: 0 }) as StatRow),
+  )
+
+function StatsPanel({
+  name,
+  level,
+  stats,
+}: {
+  name: string
+  level: number
+  stats?: CharacterStats
+}) {
+  const groups = stats
+    ? statGroups(stats, { maxHp: stats.maxHp, maxMp: stats.maxMp })
+    : zeroed(statGroups(NO_STATS, { maxHp: 0, maxMp: 0 }))
+  return (
+    <section aria-label="Stats" className="game-panel-1 h-[290px] w-[332px] pt-1.5 text-black">
+      <StatGrid
+        rows={[
+          [
+            { label: 'Name', value: name },
+            { label: 'Level', value: level },
+          ],
+        ]}
+      />
+      <Divider />
+      <StatGroups groups={groups} />
+      <p className="mt-0.5 pl-[5px] text-[11px] font-bold">
+        Hover over stats to get detailed information.
+      </p>
+    </section>
+  )
+}
+
+/** Reborn's skills strip: the six slots of the active preset, then the locked cells. */
+function SkillsStrip({ skills = [] }: { skills?: SkillSlot[] }) {
+  return (
+    <section aria-label="Skills" className="game-skill-column relative h-[50px] w-[332px]">
+      {Array.from({ length: EQUIPPED_CELLS }, (_, cell) => {
+        const left = 6 + cell * SLOT_STEP
+        const slot = skills[cell]
+        if (cell >= SKILL_SLOTS_PER_TREE)
+          return (
+            <span
+              key={cell}
+              role="img"
+              aria-label="Locked slot"
+              className="game-skill-lock absolute top-[3px] size-[27px]"
+              style={{ left }}
+            />
+          )
+        return slot?.skillId ? (
+          <SkillCell key={cell} id={slot.skillId} left={left} learned={slot.level} />
+        ) : (
+          <span
+            key={cell}
+            role="img"
+            aria-label={`Slot ${cell + 1}: empty`}
+            className="game-skill-cell absolute top-[4px] size-[26px]"
+            style={{ left }}
+          />
+        )
+      })}
+    </section>
+  )
+}
 
 function Slot({ label, worn, at }: { label: string; worn?: WornItem; at: readonly number[] }) {
   const name = worn && plainText(worn.nameKey, worn.itemId)
@@ -164,16 +238,8 @@ export function ViewCharacter({
           </div>
           {action.isError && <Notice tone="error">{errorMessage(action.error)}</Notice>}
           {done && !action.isError && <Notice>{done}</Notice>}
-          <dl className="game-panel-1 grid grid-cols-2 gap-x-2 gap-y-1 p-[8px] text-[12px]">
-            <dt className="font-bold">Name</dt>
-            <dd>{player.name}</dd>
-            <dt className="font-bold">Level</dt>
-            <dd>Level {player.level}</dd>
-            <dt className="font-bold">Village</dt>
-            <dd>{village(player.nation)}</dd>
-            <dt className="font-bold">Status</dt>
-            <dd>{data.online ? 'Online' : 'Offline'}</dd>
-          </dl>
+          <StatsPanel name={player.name} level={player.level} stats={data.stats} />
+          <SkillsStrip skills={data.skills} />
         </div>
       )}
     </Dialog>

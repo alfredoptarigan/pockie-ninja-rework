@@ -287,9 +287,14 @@ describe('players (Player List, View Character, Requests)', () => {
     const view = response.json()
     expect(view.player).toMatchObject({ characterId: sasuke.id, name: 'Sasuke_01', level: 10 })
     expect(view.online).toBe(false)
-    expect(view.equipped).toEqual([
-      { slot: 'Weapon', itemId: 'i270100', nameKey: expect.any(String), enhanceLevel: 3 },
-    ])
+    // The worn creation outfit (outfits are items) is equipped too.
+    expect(view.equipped).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ slot: 'Outfit' }),
+        { slot: 'Weapon', itemId: 'i270100', nameKey: expect.any(String), enhanceLevel: 3 },
+      ]),
+    )
+    expect(view.equipped).toHaveLength(2)
     expect(view.player).not.toHaveProperty('userId')
     expect(view.player).not.toHaveProperty('gold')
   })
@@ -345,9 +350,9 @@ describe('View Character stats (Inventory Hide)', () => {
       { characterId: sasuke.id, itemId: 'i270100', equippedSlot: 'Weapon' },
       { characterId: sasuke.id, itemId: 'i160006', count: 2 },
     ])
-    await db.insert(characterSkills).values(
-      [1803, 1807].map((skillId) => ({ characterId: sasuke.id, skillId, level: 1 })),
-    )
+    await db
+      .insert(characterSkills)
+      .values([1803, 1807].map((skillId) => ({ characterId: sasuke.id, skillId, level: 1 })))
     await db.insert(characterSkillSlots).values([
       { characterId: sasuke.id, tree: 0, slot: 0, skillId: 1803, level: 1 },
       { characterId: sasuke.id, tree: 1, slot: 2, skillId: 1807, level: 1 },

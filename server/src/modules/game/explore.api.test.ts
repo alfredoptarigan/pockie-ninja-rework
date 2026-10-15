@@ -114,10 +114,9 @@ describe('POST /api/game/explore/:spotId', () => {
     if (body.card.type === 'stone') expect(body.rewards.stone).toBe(671)
     if (body.card.type === 'fight') expect(body.fight.won).toBeTypeOf('boolean')
     else expect(body.fight).toBeNull()
-    const bag = await db
-      .select()
-      .from(inventoryItems)
-      .where(eq(inventoryItems.characterId, characterId))
+    const bag = (
+      await db.select().from(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+    ).filter((row) => row.equippedSlot !== 'Outfit')
     expect(bag.reduce((sum, item) => sum + item.count, 0)).toBe(body.rewards.items.length)
     expect(after).toMatchObject({ exploreUsed: 1, exploreDay: today() })
   })
@@ -378,10 +377,9 @@ it('grants explore item-card equipment with the original plain identify defaults
     .where(eq(exploreSearches.characterId, characterId))
   const response = await pick(searchId, 0)
   expect(response.statusCode).toBe(200)
-  const [gear] = await db
-    .select()
-    .from(inventoryItems)
-    .where(eq(inventoryItems.characterId, characterId))
+  const [gear] = (
+    await db.select().from(inventoryItems).where(eq(inventoryItems.characterId, characterId))
+  ).filter((row) => row.equippedSlot !== 'Outfit')
   expect(gear).toMatchObject({
     itemId: 'i250101',
     bound: true,

@@ -186,12 +186,13 @@ describe('SocialWindow', () => {
           player: { ...friend('Bo'), online: undefined, mutual: undefined, level: 31 },
           online: true,
           equipped: [{ slot: 'Weapon', itemId: 'i270100', nameKey: 'lg_x', enhanceLevel: 2 }],
+          hideStats: true,
         }),
       'POST /api/game/social/blocks/add': () => json({ blocked: [], max: 100 }),
     })
     await userEvent.click(await screen.findByRole('button', { name: 'Bo' }))
     const sheet = await screen.findByRole('dialog', { name: 'View Character' })
-    expect(await within(sheet).findByText('Level 31')).toBeVisible()
+    expect(await within(sheet).findByTitle('31')).toBeVisible()
     expect(within(sheet).getByRole('img', { name: 'Weapon: i270100 +2' })).toBeVisible()
     expect(within(sheet).getByRole('button', { name: 'Duel' })).toBeDisabled()
     expect(within(sheet).getByRole('button', { name: 'Trade' })).toBeDisabled()
