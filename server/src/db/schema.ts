@@ -2096,3 +2096,34 @@ export const impelDownPlayers = pgTable(
     ),
   ],
 )
+
+// Tsunade Pub (Reborn's prize roulette): today's free spins (UTC day), bought and reward spins,
+// total spins (bonus every 5th, legendary every 100th), the wheel and the unclaimed prizes.
+export interface PubPrizeRow {
+  itemId: string
+  amount: number
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary'
+  bound?: boolean
+  valhalla?: boolean
+}
+export const tsunadePub = pgTable(
+  'tsunade_pub',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    freeDay: date('free_day'),
+    freeUsed: smallint('free_used').notNull().default(0),
+    rewardAttempts: integer('reward_attempts').notNull().default(0),
+    paidAttempts: integer('paid_attempts').notNull().default(0),
+    spins: integer('spins').notNull().default(0),
+    board: jsonb('board').$type<PubPrizeRow[]>().notNull().default([]),
+    won: jsonb('won').$type<PubPrizeRow[]>().notNull().default([]),
+  },
+  (t) => [
+    check(
+      'tsunade_pub_values',
+      sql`${t.freeUsed} >= 0 and ${t.rewardAttempts} >= 0 and ${t.paidAttempts} >= 0 and ${t.spins} >= 0`,
+    ),
+  ],
+)

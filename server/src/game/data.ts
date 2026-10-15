@@ -232,6 +232,9 @@ export const sealOdds = () =>
 /** EquipIdentifyIDList.ini row of an item; items without one never get properties. */
 export const identifyList = (itemId: string) =>
   load<Record<string, IdentifyList>>('identify-lists')[itemId]
+/** Items with an identify list (gear that can roll refinement lines). */
+export const identifiableItemIds = () =>
+  Object.keys(load<Record<string, IdentifyList>>('identify-lists'))
 /** EquipIdentifyProp.ini groups and IdentifyPropLib.ini props. */
 export const identifyTables = (): IdentifyTables => ({
   groups: load<IdentifyGroups>('identify-groups'),

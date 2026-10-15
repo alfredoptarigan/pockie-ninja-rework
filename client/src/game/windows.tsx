@@ -34,6 +34,7 @@ import { ClanBrowserWindow, ClanWindow } from './clans'
 import { DungeonsWindow } from './dungeons'
 import { ZanpakutoWindow } from './zanpakuto'
 import { ImpelDownWindow } from './impel-down'
+import { TsunadePubWindow } from './tsunade-pub'
 
 export type WindowName =
   | 'shop'
@@ -70,6 +71,7 @@ export type WindowName =
   | 'dungeons'
   | 'zanpakuto'
   | 'impelDown'
+  | 'tsunadePub'
 
 export interface WindowProps {
   character: Character
@@ -141,6 +143,7 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   impelDown: ({ character, onClose }) => (
     <ImpelDownWindow character={character} onClose={onClose} />
   ),
+  tsunadePub: ({ onClose }) => <TsunadePubWindow onClose={onClose} />,
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
