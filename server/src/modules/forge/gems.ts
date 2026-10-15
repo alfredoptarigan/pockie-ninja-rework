@@ -22,10 +22,11 @@ import { bad, equipmentOf, pay, respond, spendTalisman } from './routes.js'
 type ItemRow = typeof inventoryItems.$inferSelect
 
 /**
- * PLACEHOLDERS, to be confirmed: Reborn decides these on its server and its client shows no price.
- * - removeGemGold: Gold per gem taken out. Reborn's Remove tab and the menu's Remove Gems send no
- *   payment; 2011 charged DivideJewelLevel1..10 (4..191 Gold or Gift Coupons) by gem level.
- * - enchantGold: Gold per enchantment on top of the stone. Reborn's Enchantment tab takes only the
+ * Reborn decides these on its server and its client shows no price.
+ * - removeGemGold: Gold per gem taken out. Confirmed 0 (user decision, docs/audit section 6):
+ *   Reborn's Remove tab and the menu's Remove Gems send no payment; 2011 charged
+ *   DivideJewelLevel1..10 (4..191 Gold or Gift Coupons) by gem level.
+ * - enchantGold (PLACEHOLDER, to be confirmed): Gold per enchantment on top of the stone. Reborn's Enchantment tab takes only the
  *   stone; 2011 charged AddMagicCost (1 Gold or Gift Coupon) or a Level 8 Enchantment Talisman.
  * Create Hole needs a Slot Talisman as in Reborn (its Attempt is disabled without one), so 2011's
  * AddHoleCost (58 Gold) is not offered.

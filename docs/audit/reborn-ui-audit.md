@@ -104,3 +104,4 @@ Where Reborn keeps a number on its server or the spec leaves a rule open, these 
   because our level cap is 90. Raise them back when the cap rises.
 - **Boss weapons**: Scroll Dungeons bosses and Impel Down enemies always carry at least a same-level
   weapon's attack (`BOSS_WEAPON_PER_LEVEL`), so taking off your weapon does not disarm them.
+- **Gems**: removing gems costs no Gold, as in Reborn (2011 charged 4-191 Gold by gem level).
