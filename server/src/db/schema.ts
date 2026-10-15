@@ -2159,3 +2159,21 @@ export const konohaBoutique = pgTable(
     ),
   ],
 )
+
+// Ninja Mall daily limits: how many of a limited item the ninja bought on `day` (UTC); a new day
+// starts the count again.
+export const characterMallPurchases = pgTable(
+  'character_mall_purchases',
+  {
+    characterId: uuid('character_id')
+      .notNull()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    itemId: text('item_id').notNull(),
+    day: date('day').notNull(),
+    count: integer('count').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.characterId, t.itemId] }),
+    check('character_mall_purchases_count', sql`${t.count} > 0`),
+  ],
+)

@@ -95,6 +95,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   app.register(import('./modules/zanpakuto/routes.js'), { db, prefix: '/api/game/zanpakuto' })
   app.register(import('./modules/impel-down/routes.js'), { db, prefix: '/api/game/impel-down' })
   app.register(import('./modules/tsunade-pub/routes.js'), { db, prefix: '/api/game/tsunade-pub' })
+  app.register(import('./modules/mall/routes.js'), { db, prefix: '/api/game/mall' })
   app.register(import('./modules/konoha-boutique/routes.js'), {
     db,
     prefix: '/api/game/konoha-boutique',

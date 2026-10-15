@@ -607,7 +607,7 @@ const FEATURES: {
     feature: 'zanpakuto',
   },
   { key: 'dungeons', label: 'Dungeons', icon: topIcon('dungeons'), level: 45, feature: 'dungeons' },
-  { key: 'mall', label: 'Ninja\nMall', icon: topIcon('mall') },
+  { key: 'mall', label: 'Ninja\nMall', icon: topIcon('mall'), feature: 'mall' },
   {
     key: 'boutique',
     label: 'Konoha\nBoutique',

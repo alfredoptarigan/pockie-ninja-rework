@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { CLOSED_SCENES } from '../../shared/src/schemas/game.ts'
+import { MALL_CATALOGUE } from '../../server/src/modules/mall/catalogue.ts'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -174,6 +175,7 @@ for (const [id, row] of Object.entries(items)) {
   if (row.class === 'PharmacyItem' && Number(row.UseLevel ?? 0) <= 20) addItem(id)
 }
 for (const id of Object.keys(honorShop)) addItem(id)
+for (const { itemId } of MALL_CATALOGUE) addItem(itemId)
 // M5 scroll skill items (server/data/game/reborn/items.json).
 for (const id of Object.keys(rebornItems)) addItem(id)
 for (const id of itemIds) keys.add(`lg_${items[id]!.Name}`)
