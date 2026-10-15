@@ -270,7 +270,14 @@ export function usePickTreasure() {
 
 export interface BuffsView {
   buffs: { buffId: number; nameKey: string; expiresAt: string | null; removable: boolean }[]
-  titles: { titleId: number; nameKey: string; active: boolean; expiresAt: string | null }[]
+  titles: {
+    titleId: number
+    nameKey: string
+    active: boolean
+    expiresAt: string | null
+    /** The title's bonus as `<Name>Equip` terms (forge/gear.ts statLine). */
+    stats: { name: string; value: number }[]
+  }[]
 }
 export function useBuffs() {
   return useQuery({ queryKey: ['game', 'buffs'], queryFn: () => api<BuffsView>('/api/game/buffs') })

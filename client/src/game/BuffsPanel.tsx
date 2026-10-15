@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { errorMessage, useActivateTitle, useBuffs, useRemoveBuff } from './api'
+import { errorMessage, useBuffs, useRemoveBuff } from './api'
 import { GameButton, Notice } from './skin'
 import { GameText, plainText } from './text'
 
@@ -17,12 +17,16 @@ export function TitleText({ className = 'text-base' }: { className?: string }) {
 
 const expiry = (date: string | null) =>
   date ? `Expires ${new Date(date).toLocaleString('en-US')}` : 'Permanent'
+/**
+ * The timed effects (food, title bonuses) with Remove. Reborn lists them as icons under the HUD
+ * portrait; ours opens from the Inventory's Effects button. Titles are picked in the title plate
+ * (inventory/TitleSelect.tsx).
+ */
 export function BuffsPanel({ onClose }: { onClose: () => void }) {
   const query = useBuffs()
-  const activate = useActivateTitle()
   const remove = useRemoveBuff()
   const [error, setError] = useState('')
-  const busy = activate.isPending || remove.isPending
+  const busy = remove.isPending
   async function run(action: () => Promise<unknown>) {
     setError('')
     try {
@@ -34,17 +38,16 @@ export function BuffsPanel({ onClose }: { onClose: () => void }) {
   return (
     <section
       role="dialog"
-      aria-label="Buffs and titles"
-      className="game-panel absolute inset-x-[10px] top-[50px] z-20 max-h-[430px] space-y-3 overflow-y-auto p-3 text-ink-game"
+      aria-label="Active effects"
+      className="game-panel-1 absolute inset-x-[10px] top-[50px] z-20 max-h-[430px] space-y-3 overflow-y-auto p-3 text-ink-game"
     >
-      <h2 className="font-bold">Buffs and titles</h2>
+      <h2 className="font-bold">Active effects</h2>
       {query.isPending ? (
         <p>Loading effects...</p>
       ) : query.isError ? (
         <Notice tone="error">Could not load your effects.</Notice>
       ) : (
         <>
-          <h3 className="font-bold">Active effects</h3>
           {query.data.buffs.length === 0 && <p>No active effects.</p>}
           <ul className="space-y-2">
             {query.data.buffs.map((buff) => (
@@ -59,27 +62,6 @@ export function BuffsPanel({ onClose }: { onClose: () => void }) {
                     Remove effect
                   </GameButton>
                 )}
-              </li>
-            ))}
-          </ul>
-          <h3 className="font-bold">Owned titles</h3>
-          {query.data.titles.length === 0 && (
-            <p>No titles unlocked. Use a title item to unlock one.</p>
-          )}
-          <ul className="space-y-2">
-            {query.data.titles.map((title) => (
-              <li key={title.titleId}>
-                <GameText k={title.nameKey} fallback={`Title ${title.titleId}`} />{' '}
-                <span>{expiry(title.expiresAt)}</span>
-                <GameButton
-                  disabled={busy}
-                  aria-label={`${title.active ? 'Unequip' : 'Equip'} title ${title.titleId}`}
-                  onClick={() =>
-                    void run(() => activate.mutateAsync(title.active ? 0 : title.titleId))
-                  }
-                >
-                  {title.active ? 'Unequip' : 'Equip'}
-                </GameButton>
               </li>
             ))}
           </ul>

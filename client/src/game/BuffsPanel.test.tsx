@@ -6,7 +6,7 @@ import { json, mockApi, renderWithProviders } from '../test/utils'
 import { BuffsPanel } from './BuffsPanel'
 
 describe('buffs and titles', () => {
-  it('lists timed effects and lets an owned title be equipped', async () => {
+  it('lists timed effects in a solid panel and removes a removable one', async () => {
     const fetchMock = mockApi({
       'GET /api/game/buffs': () =>
         json({
@@ -18,16 +18,18 @@ describe('buffs and titles', () => {
               removable: true,
             },
           ],
-          titles: [{ titleId: 12, nameKey: 'lg_EffortTitle12', active: false, expiresAt: null }],
+          titles: [],
         }),
-      'POST /api/game/titles/activate': () => json({ character, buffs: [], titles: [] }),
+      'POST /api/game/buffs/50001/remove': () => json({ character, buffs: [], titles: [] }),
     })
     renderWithProviders(<BuffsPanel onClose={() => {}} />)
-    expect(await screen.findByText(/Active effects/)).toBeVisible()
-    await userEvent.click(await screen.findByRole('button', { name: /Equip title/ }))
+    expect(await screen.findByRole('dialog', { name: 'Active effects' })).toHaveClass(
+      'game-panel-1',
+    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Remove effect' }))
     expect(fetchMock).toHaveBeenCalledWith(
-      '/api/game/titles/activate',
-      expect.objectContaining({ method: 'POST', body: JSON.stringify({ titleId: 12 }) }),
+      '/api/game/buffs/50001/remove',
+      expect.objectContaining({ method: 'POST' }),
     )
   })
 })

@@ -1,8 +1,9 @@
 import { fireEvent, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { character, fists, outfitStats, potion } from '../test/game'
+import { character, fists, outfitStats, potion, stats } from '../test/game'
 import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
+import { bloodlinesView } from './bloodlines/test-data'
 import { Inventory } from './Inventory'
 import { onItemLinkRequest } from './social'
 import { ToastHost } from './toast'
@@ -658,13 +659,55 @@ describe('Inventory equipment', () => {
     expect(document.querySelector('img[src^="/assets/reborn/poses/"]')).toBeNull()
   })
 
-  it('shows the title on the plate, which opens buffs and titles', async () => {
+  it('opens the active effects in a solid panel from the Effects button', async () => {
     renderBag([], () => ({ 'GET /api/game/buffs': () => json({ buffs: [], titles: [] }) }))
-    const plate = await screen.findByRole('button', { name: 'Buffs and titles' })
-    expect(plate).toHaveTextContent('No title')
-    await userEvent.click(plate)
-    expect(await screen.findByRole('dialog', { name: 'Buffs and titles' })).toBeVisible()
+    await userEvent.click(await screen.findByRole('button', { name: 'Effects' }))
+    const panel = await screen.findByRole('dialog', { name: 'Active effects' })
+    expect(panel).toHaveClass('game-panel-1')
+    expect(panel).toHaveTextContent('No active effects.')
   }, 15_000)
+
+  it('rotates the slot 1 bloodline art behind the pose', async () => {
+    renderBag([], () => ({
+      'GET /api/game/bloodlines': () =>
+        json(
+          bloodlinesView({
+            3: { unlocked: true, active: true, activeSlot: 1 },
+            7: { unlocked: true, active: true, activeSlot: 0 },
+          }),
+        ),
+    }))
+    const art = await screen.findByTestId('bloodline-background')
+    expect(art).toHaveAttribute('src', '/assets/reborn/icons/bloodlines/bg/7.webp')
+    expect(art).toHaveClass('bloodline-spin')
+    // Drawn before (under) the pose.
+    const pose = document.querySelector('img[src^="/assets/reborn/poses/"]')!
+    expect(art.compareDocumentPosition(pose) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
+  it('draws no bloodline art while slot 1 is empty', async () => {
+    const { fetchMock } = renderBag([], () => ({
+      'GET /api/game/bloodlines': () =>
+        json(bloodlinesView({ 3: { unlocked: true, active: true, activeSlot: 1 } })),
+    }))
+    await waitFor(() =>
+      expect(document.querySelector('img[src^="/assets/reborn/poses/"]')).not.toBeNull(),
+    )
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith('/api/game/bloodlines', expect.anything()),
+    )
+    expect(screen.queryByTestId('bloodline-background')).not.toBeInTheDocument()
+  })
+
+  it('shows the Battle Power under the pose, short with the full number on hover', async () => {
+    renderBag([], () => ({
+      'GET /api/game/character': () =>
+        json({ character, stats: { ...stats, battlePower: 31_234 } }),
+    }))
+    const power = await screen.findByLabelText('Battle Power 31,234')
+    expect(power).toHaveTextContent('BP: 31.2K')
+    expect(power.parentElement).toHaveAttribute('title', '31,234')
+  })
 })
 
 describe('Inventory gems', () => {

@@ -51,7 +51,7 @@ const SHADOW = '[text-shadow:0_0_2px_#000,0_0_2px_#000,0_0_2px_#000]'
 
 /** The 1:1 HUD layer, for HUD pieces rendered by the scene (its monster cards) through a portal. */
 export const HudLayer = createContext<HTMLElement | null>(null)
-const number = (value: number) => value.toLocaleString('en-US')
+export const number = (value: number) => value.toLocaleString('en-US')
 const COMPACT = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 })
 /** Reborn's formatShort: en-US grouping under 10,000, else K/M/B/T with one decimal. */
 export const shortNumber = (value: number) =>

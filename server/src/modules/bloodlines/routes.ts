@@ -80,6 +80,7 @@ async function view(tx: Tx | Db, character: CharacterRow): Promise<BloodlinesVie
         amityNeeded: limit.amity,
         unlocked: row?.unlockedAt != null,
         active: row?.activeSlot != null,
+        activeSlot: row?.activeSlot ?? null,
         stats: [
           ...Object.entries(limit.base).map(([field, value]) => ({
             field,

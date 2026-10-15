@@ -15,6 +15,7 @@ export const limit = (id: number, extra: Partial<BloodlineLimit> = {}): Bloodlin
   amityNeeded: 30,
   unlocked: false,
   active: false,
+  activeSlot: null,
   stats: [
     { field: 'strength', label: 'Strength', value: 2300 },
     { field: 'skillAdd5', label: 'Body Skill Cast Chance %', value: 2 },

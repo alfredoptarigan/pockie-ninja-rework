@@ -51,7 +51,7 @@ export function TreasurePanel({
     <section
       role="dialog"
       aria-label="Treasure box"
-      className="game-panel absolute inset-x-[20px] top-[100px] z-20 space-y-3 p-4 text-ink-game"
+      className="game-panel-1 absolute inset-x-[20px] top-[100px] z-20 space-y-3 p-4 text-ink-game"
     >
       <h2 className="font-bold">Treasure box</h2>
       {message ? (

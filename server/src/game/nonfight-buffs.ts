@@ -189,6 +189,15 @@ export async function buffView(tx: Tx | Db, characterId: string) {
       nameKey: `lg_${titleDefinition(row.titleId)!.TitleName}`,
       active: row.active,
       expiresAt: row.expiresAt?.toISOString() ?? null,
+      stats: titleStats(row.titleId),
     })),
   }
+}
+
+/** A title's buff properties as `<Name>Equip` terms (what its bonus adds), for the hover. */
+function titleStats(titleId: number) {
+  const buff = buffDefinition(titleDefinition(titleId)?.BuffID ?? 0)
+  return Object.entries((buff && data.properties[String(buff.buffadd)]) ?? {}).map(
+    ([name, value]) => ({ name: name.replace(/Buff$/, 'Equip'), value }),
+  )
 }

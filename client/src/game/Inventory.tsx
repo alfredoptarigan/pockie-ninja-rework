@@ -286,7 +286,7 @@ export function Inventory({ highlight }: { highlight?: BagHighlight }) {
         gear={gear}
         held={held}
         outfitMenuOpen={menu?.id === OUTFIT}
-        onTitle={() => setBuffsVisible(true)}
+        onEffects={() => setBuffsVisible(true)}
         onSlot={clickSlot}
         onOutfitMenu={(event) => openMenu(OUTFIT, event)}
         onTip={showTip}

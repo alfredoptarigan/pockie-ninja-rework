@@ -28,6 +28,11 @@ export interface BloodlineLimit {
   amityNeeded: number
   unlocked: boolean
   active: boolean
+  /**
+   * Its active slot (0-2), null when inactive. Reborn's `bloodlines.active` is this 3-slot array;
+   * slot 0's limit draws its rotating background behind the Inventory pose.
+   */
+  activeSlot: number | null
   /** Base Str/Agi/Sta (x100 internal) followed by the three bonus stats. */
   stats: BloodlineStat[]
 }
