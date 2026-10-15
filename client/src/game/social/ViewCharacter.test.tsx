@@ -1,8 +1,9 @@
 import { screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { expect, it } from 'vitest'
 import type { PlayerView } from '../../../../shared/src/schemas/social'
 import { stats } from '../../test/game'
-import { json, mockApi, renderWithProviders } from '../../test/utils'
+import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { ViewCharacter } from './ViewCharacter'
 
 const base: PlayerView = {
@@ -61,4 +62,17 @@ it('shows every stat as 0 and no skills when the ninja hides them', async () => 
   expect(new Set(values)).toEqual(new Set(['0']))
   const strip = screen.getByRole('region', { name: 'Skills' })
   expect(within(strip).getAllByRole('img', { name: /: empty$/ })).toHaveLength(6)
+})
+
+it('asks the ninja to trade from the Trade button', async () => {
+  const fetch = mockApi({
+    'GET /api/game/social/players/id-Bo': () => json(base),
+    'GET /api/game/social/blocks': () => json({ blocked: [], max: 100 }),
+    'POST /api/game/trade/request': () => json({ trade: null, incoming: [], outgoing: null }),
+  })
+  renderWithProviders(
+    <ViewCharacter characterId="id-Bo" selfId="c1" onClose={() => {}} onWhisper={() => {}} />,
+  )
+  await userEvent.click(await screen.findByRole('button', { name: 'Trade' }))
+  expect(requestBody(fetch, 'POST /api/game/trade/request')).toEqual({ characterId: 'id-Bo' })
 })

@@ -114,6 +114,7 @@ export function buildApp({ env, db, logger = false }: AppOptions) {
   })
   app.register(socialRoutes, { db, prefix: '/api/game/social' })
   app.register(import('./modules/market/routes.js'), { db, prefix: '/api/game/market' })
+  app.register(import('./modules/trade/routes.js'), { db, prefix: '/api/game/trade' })
   app.register(arenaRoutes, { db, prefix: '/api/game/arena' })
   app.register(rankingRoutes, { db, prefix: '/api/game/rankings' })
   app.register(teamRoutes, { db, prefix: '/api/game/team' })

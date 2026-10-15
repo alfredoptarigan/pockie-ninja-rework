@@ -22,6 +22,7 @@ import { useHashiramaOpen } from './hashirama'
 import { GameButton } from './skin'
 import { MailButton } from './social'
 import { TeamHud } from './teams'
+import { TradeLayer } from './trade'
 import { plainText } from './text'
 import { useOpenWindow, type WindowName } from './windows'
 import { DEFEATED_REASON, expToNext, sceneNameKey } from './world'
@@ -413,6 +414,7 @@ export function PlayerCard({ character }: { character: Character }) {
        */}
       <TwentyMinuteRewardButton className="absolute top-[39px] left-[221px]" />
       <TeamHud character={character} />
+      <TradeLayer character={character} />
     </section>
   )
 }

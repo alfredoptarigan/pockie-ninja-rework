@@ -76,6 +76,7 @@ function noticeText(notice: Notice): string | null {
         : `${notice.from.name} (Level ${notice.from.level}) has applied to join your team.`
     case 'teamChanged':
     case 'clanChanged':
+    case 'trade':
       return notice.message ?? null
     case 'marketSale':
       return 'One of your Market listings has sold.'

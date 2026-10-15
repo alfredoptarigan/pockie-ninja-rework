@@ -31,7 +31,8 @@ import { sellability } from './market.js'
 type Character = typeof characters.$inferSelect
 type ItemRow = typeof inventoryItems.$inferSelect
 
-const itemView = (row: ItemRow): MarketItem => {
+/** A Market item view of a row (also what a Trade offer shows). */
+export const itemView = (row: ItemRow): MarketItem => {
   const gear = gearView(row)
   return {
     inventoryId: row.id,

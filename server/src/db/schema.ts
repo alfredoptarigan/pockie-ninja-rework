@@ -2483,3 +2483,28 @@ export const jiraiyaAdventures = pgTable('jiraiya_adventures', {
     .references(() => characters.id, { onDelete: 'cascade' }),
   startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
 })
+
+// Player-to-player Trade (modules/trade, migration 0054): one row per completed trade, what each
+// side gave. No foreign keys on the item ids: the trail outlives them.
+export interface TradeLogOffer {
+  items: { inventoryId: string; itemId: string; count: number }[]
+  /** Amounts the side paid, and the fee kept from them before the partner got the rest. */
+  currency: { stone: number; gold: number; giftCoupon: number }
+  fee: { stone: number; gold: number; giftCoupon: number }
+}
+
+export const tradeLogs = pgTable(
+  'trade_logs',
+  {
+    id: id(),
+    initiatorId: uuid('initiator_id').references(() => characters.id, { onDelete: 'set null' }),
+    partnerId: uuid('partner_id').references(() => characters.id, { onDelete: 'set null' }),
+    initiatorOffer: jsonb('initiator_offer').$type<TradeLogOffer>().notNull(),
+    partnerOffer: jsonb('partner_offer').$type<TradeLogOffer>().notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('trade_logs_initiator_idx').on(t.initiatorId, t.createdAt),
+    index('trade_logs_partner_idx').on(t.partnerId, t.createdAt),
+  ],
+)

@@ -379,6 +379,13 @@
       "when": 1792170000000,
       "tag": "0053_hunt",
       "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1792180000000,
+      "tag": "0054_trade",
+      "breakpoints": true
     }
   ]
 }

@@ -181,6 +181,15 @@ export const noticeSchema = z.discriminatedUnion('kind', [
   }),
   /** Someone added the player as a friend: the add-back prompt. */
   z.object({ kind: z.literal('friendAdded'), from: noticePlayerSchema }),
+  /**
+   * A trade request or trade of the player changed: refetch it. `done` = a trade completed (the
+   * bag and currencies changed). Optional English line for the chat.
+   */
+  z.object({
+    kind: z.literal('trade'),
+    done: z.boolean().optional(),
+    message: z.string().max(CHAT_MAX_LENGTH).optional(),
+  }),
 ])
 export type Notice = z.infer<typeof noticeSchema>
 export type NoticeKind = Notice['kind']

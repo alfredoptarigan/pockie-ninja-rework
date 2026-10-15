@@ -195,7 +195,7 @@ describe('SocialWindow', () => {
     expect(await within(sheet).findByTitle('31')).toBeVisible()
     expect(within(sheet).getByRole('img', { name: 'Weapon: i270100 +2' })).toBeVisible()
     expect(within(sheet).getByRole('button', { name: 'Duel' })).toBeDisabled()
-    expect(within(sheet).getByRole('button', { name: 'Trade' })).toBeDisabled()
+    expect(within(sheet).getByRole('button', { name: 'Trade' })).toBeEnabled()
 
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     await userEvent.click(within(sheet).getByRole('button', { name: 'Block' }))

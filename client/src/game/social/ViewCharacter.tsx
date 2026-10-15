@@ -1,8 +1,8 @@
 // Reborn's View Character (`Us`, 333 wide): equipment columns around the pose, the name plate, the
 // action bar Add Friend / Duel / PM / Trade / Block, the Stats window's rows and the active skill
 // preset. Opened from player names (Social, Player List). A ninja who ticks the Inventory's Hide
-// sends no stats or skills (the server enforces it): Reborn then shows every stat as 0. We have no
-// duels or trading, so those two buttons stay disabled.
+// sends no stats or skills (the server enforces it): Reborn then shows every stat as 0. Trade sends
+// a trade request (modules/trade); we have no duels, so Duel stays disabled.
 import { SKILL_SLOTS_PER_TREE, type CharacterStats, type SkillSlot } from '@pockie/shared'
 import { useState, type CSSProperties } from 'react'
 import type { WornItem } from '../../../../shared/src/schemas/social'
@@ -11,6 +11,8 @@ import { Divider, StatGrid, StatGroups, statGroups, type StatRow } from '../Char
 import { EQUIPPED_CELLS, SkillCell, SLOT_STEP } from '../SkillsWindow'
 import { ItemIcon } from '../ItemIcon'
 import { Dialog, GameButton, Notice } from '../skin'
+import { showToast } from '../toast'
+import { useTradeAction } from '../trade'
 import { outfitName, plainText } from '../text'
 import { useBlocked, useFriendAction, usePlayerView } from './api'
 import { requestWhisper } from './requests'
@@ -136,6 +138,7 @@ export function ViewCharacter({
   const view = usePlayerView(characterId)
   const blocked = useBlocked()
   const action = useFriendAction()
+  const trade = useTradeAction()
   const [done, setDone] = useState<string | null>(null)
   const run = (path: string, body: object, message: string) =>
     action.mutate({ path, body }, { onSuccess: () => setDone(message) })
@@ -222,8 +225,13 @@ export function ViewCharacter({
               PM
             </GameButton>
             <GameButton
-              disabled
-              title="Trading is not available yet."
+              disabled={self || trade.isPending}
+              onClick={() =>
+                trade.mutate(
+                  { path: 'request', body: { characterId: player.characterId } },
+                  { onError: (error) => showToast(errorMessage(error), 'failure') },
+                )
+              }
               className="h-[28px] w-[62px] min-w-0! px-0!"
             >
               Trade
