@@ -1,24 +1,28 @@
 // Reborn's Clan window Events tab (`Rh`, 840x340): the Clan Level bar (700x22 gold, "cur / next",
-// MAX at 20) and the row of 96px activity tiles. Garden, Picnic and Adventure (with Jiraiya) open
-// their windows; Training, Protection, Clan Wars and Clan Missions are not built and stay greyed.
+// MAX at 20) and the row of 96px activity tiles, each opening its window: Training, Garden,
+// Protection, Picnic, Clan Wars, Adventure (with Jiraiya) and Clan Missions.
 import { useState } from 'react'
 import { errorMessage } from '../api'
 import { AdventureWindow } from '../hunt'
 import { Notice } from '../skin'
+import { ClanMissionsWindow } from './ClanMissions'
+import { ClanWarsWindow } from './ClanWars'
 import { useClanLevel } from './events-api'
 import { NinjaGardenWindow } from './NinjaGarden'
 import { PicnicWindow } from './Picnic'
+import { ProtectionWindow } from './Protection'
+import { TrainingWindow } from './Training'
 
-type Activity = 'garden' | 'picnic' | 'adventure'
-const TILES: { key: string; label: string; opens?: Activity }[] = [
-  { key: 'training', label: 'Training' },
-  { key: 'garden', label: 'Garden', opens: 'garden' },
-  { key: 'protection', label: 'Protection' },
-  { key: 'picnic', label: 'Picnic', opens: 'picnic' },
-  { key: 'clanwars', label: 'Clan Wars' },
-  { key: 'Adventure', label: 'Adventure', opens: 'adventure' },
-  { key: 'clan_missions_icon', label: 'Clan Missions' },
-]
+const TILES = [
+  { key: 'training', label: 'Training', Window: TrainingWindow },
+  { key: 'garden', label: 'Garden', Window: NinjaGardenWindow },
+  { key: 'protection', label: 'Protection', Window: ProtectionWindow },
+  { key: 'picnic', label: 'Picnic', Window: PicnicWindow },
+  { key: 'clanwars', label: 'Clan Wars', Window: ClanWarsWindow },
+  { key: 'Adventure', label: 'Adventure', Window: AdventureWindow },
+  { key: 'clan_missions_icon', label: 'Clan Missions', Window: ClanMissionsWindow },
+] as const
+type Activity = (typeof TILES)[number]['key']
 
 export function EventsTab() {
   const level = useClanLevel()
@@ -26,6 +30,7 @@ export function EventsTab() {
   if (level.isError) return <Notice tone="error">{errorMessage(level.error)}</Notice>
   const bar = level.data
   const fill = bar ? (bar.next === null ? 1 : Math.min(1, bar.exp / bar.next)) : 0
+  const Open = TILES.find((tile) => tile.key === open)?.Window
   return (
     <div className="flex flex-col items-center gap-[20px] pt-[20px] text-black">
       <div className="game-panel-1 flex h-[90px] w-[756px] flex-col items-center justify-center gap-2">
@@ -55,10 +60,8 @@ export function EventsTab() {
           <li key={tile.key}>
             <button
               type="button"
-              disabled={!tile.opens}
-              title={tile.opens ? undefined : `${tile.label}: not available yet`}
-              onClick={() => tile.opens && setOpen(tile.opens)}
-              className="flex flex-col items-center disabled:cursor-not-allowed disabled:opacity-50 disabled:grayscale"
+              onClick={() => setOpen(tile.key)}
+              className="flex flex-col items-center"
             >
               <img
                 src={`/assets/reborn/clan/${tile.key}.webp`}
@@ -70,9 +73,7 @@ export function EventsTab() {
           </li>
         ))}
       </ul>
-      {open === 'garden' && <NinjaGardenWindow onClose={() => setOpen(null)} />}
-      {open === 'picnic' && <PicnicWindow onClose={() => setOpen(null)} />}
-      {open === 'adventure' && <AdventureWindow onClose={() => setOpen(null)} />}
+      {Open && <Open onClose={() => setOpen(null)} />}
     </div>
   )
 }

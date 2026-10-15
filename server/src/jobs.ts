@@ -1,6 +1,7 @@
 // Periodic jobs: Market expiry, mail purge, the team grace sweep, the Tailed Beast week and Team
 // Stone matchmaking, weekly pay and monthly reset, the Arena Weekly Rewards hours and the
-// Championship rounds. Each one is idempotent
+// Championship rounds, the Clan Wars weekly Top 3 and escaped Clan Mission bosses. Each one is
+// idempotent
 // and keyed by time, so an overlapping or late run is harmless.
 // ponytail: timers in the one server process; move to a job queue with several instances.
 import type { Db } from './db/client.js'
@@ -23,6 +24,11 @@ import {
   settleChampionships,
 } from './modules/arena/championship.js'
 import { accrueWeekly, WEEKLY_ACCRUE_INTERVAL_MS } from './modules/arena/weekly.js'
+import {
+  CLAN_MISSIONS_SETTLE_INTERVAL_MS,
+  settleMissions,
+} from './modules/clan-missions/missions.js'
+import { CLAN_WAR_SETTLE_INTERVAL_MS, settleClanWarWeek } from './modules/clan-wars/wars.js'
 
 /** "Run it every few seconds" (teams/routes.ts). */
 const TEAM_SWEEP_INTERVAL_MS = 5_000
@@ -41,6 +47,8 @@ export function startJobs(db: Db, onError: (error: unknown) => void) {
     every(TEAM_STONE_SETTLE_INTERVAL_MS, () => resetTeamStoneMonth(db)),
     every(WEEKLY_ACCRUE_INTERVAL_MS, () => accrueWeekly(db)),
     every(CHAMPIONSHIP_SETTLE_INTERVAL_MS, () => settleChampionships(db)),
+    every(CLAN_WAR_SETTLE_INTERVAL_MS, () => settleClanWarWeek(db)),
+    every(CLAN_MISSIONS_SETTLE_INTERVAL_MS, () => settleMissions(db)),
   ]
   return () => timers.forEach(clearInterval)
 }

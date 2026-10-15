@@ -1,8 +1,7 @@
 // Reborn's Clan window (`Ih`, 860 wide), opened by the bottom-bar Clan icon; without a clan the
 // same icon opens the Clan Browser. Tabs: Management (notice, info, Manage / Applications / Quit
-// and the member table), Events (clan level bar; the Garden and Picnic tiles, EventsTab.tsx),
-// Storage (treasury currencies) and Clans (read-only list). Reborn's Logs tab and the other
-// Events tiles (Training, Protection, Clan Wars, Adventure, Missions) are not built.
+// and the member table), Events (clan level bar and activity tiles, EventsTab.tsx), Storage
+// (treasury currencies), Logs (Clan Activity Log, LogsTab.tsx) and Clans (read-only list).
 import {
   CLAN_MAX_MEMBERS,
   CLAN_NOTICE_MAX,
@@ -18,14 +17,16 @@ import type { WindowProps } from '../windows'
 import { useClanAction, useMyClan } from './api'
 import { ClanBrowserWindow, ClanList } from './ClanBrowserWindow'
 import { EventsTab } from './EventsTab'
+import { LogsTab } from './LogsTab'
 import { ApplicationsWindow, ManageWindow } from './ManageWindow'
 import { StorageTab } from './StorageTab'
 
-type Tab = 'management' | 'events' | 'storage' | 'clans'
+type Tab = 'management' | 'events' | 'storage' | 'logs' | 'clans'
 const TABS: { id: Tab; title: string }[] = [
   { id: 'management', title: 'Management' },
   { id: 'events', title: 'Events' },
   { id: 'storage', title: 'Storage' },
+  { id: 'logs', title: 'Logs' },
   { id: 'clans', title: 'Clans' },
 ]
 const MEMBERS_PER_PAGE = 13
@@ -193,6 +194,7 @@ export function ClanWindow({ character, onClose }: WindowProps) {
         {tab === 'management' && <ManagementTab clan={clan} selfId={character.id} />}
         {tab === 'events' && <EventsTab />}
         {tab === 'storage' && <StorageTab clan={clan} selfId={character.id} />}
+        {tab === 'logs' && <LogsTab members={clan.members.map((m) => m.name)} />}
         {tab === 'clans' && <ClanList canApply={false} />}
       </div>
     </Dialog>

@@ -61,8 +61,13 @@ export async function addClanPoints(ctx: ClanContext, points: number, now: Date)
       totalPoints: member.totalPoints + points,
     })
     .where(eq(clanMembers.characterId, member.characterId))
+  return addClanExp(tx, clan, points)
+}
+
+/** Adds clan EXP (no member contribution); the caller holds the clan row lock. */
+export async function addClanExp(tx: Tx, clan: { id: string; level: number }, gained: number) {
   const progress = await lockProgress(tx, clan.id)
-  const after = gainClanExp(clan.level, progress.exp, points)
+  const after = gainClanExp(clan.level, progress.exp, gained)
   await tx.update(clanProgress).set({ exp: after.exp }).where(eq(clanProgress.clanId, clan.id))
   if (after.level !== clan.level)
     await tx.update(clans).set({ level: after.level }).where(eq(clans.id, clan.id))

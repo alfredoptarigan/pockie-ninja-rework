@@ -2750,3 +2750,147 @@ export const apprenticeships = pgTable(
     check('apprenticeships_not_self', sql`${t.apprenticeId} <> ${t.masterId}`),
   ],
 )
+
+// Clan Training and Protection (migration 0058): a ninja's donated courses (bits 1 / 2 / 4) and
+// Protection fights on their UTC day. Kept per ninja, so changing clans does not reset them.
+// Locked after the character row (and the clan row in clan events).
+export const clanMemberDaily = pgTable(
+  'clan_member_daily',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    trainingDay: date('training_day'),
+    trainingDone: smallint('training_done').notNull().default(0),
+    protectionDay: date('protection_day'),
+    protectionFights: smallint('protection_fights').notNull().default(0),
+  },
+  (t) => [
+    check(
+      'clan_member_daily_values',
+      sql`${t.trainingDone} between 0 and 7 and ${t.protectionFights} >= 0`,
+    ),
+  ],
+)
+
+// The Clan window's Logs tab: who did what in the clan (actor kept as text when they leave).
+export const clanLogs = pgTable(
+  'clan_logs',
+  {
+    id: id(),
+    clanId: uuid('clan_id')
+      .notNull()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    actor: text('actor').notNull(),
+    action: text('action').notNull(),
+    details: text('details').notNull().default(''),
+    createdAt: createdAt(),
+  },
+  (t) => [index('clan_logs_clan_created_idx').on(t.clanId, t.createdAt)],
+)
+
+// A ninja's saved Clan War fighter: an equipment set as an arena-style snapshot, with its power.
+// The roster of a clan is the saved fighters of its members.
+export const clanWarFighters = pgTable(
+  'clan_war_fighters',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    set: smallint('set').notNull(),
+    power: integer('power').notNull(),
+    name: text('name').notNull(),
+    level: smallint('level').notNull(),
+    clothing: smallint('clothing').notNull(),
+    snapshot: jsonb('snapshot').$type<ArenaSnapshot>().notNull(),
+    savedAt: timestamp('saved_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [check('clan_war_fighters_values', sql`${t.set} between 1 and 5 and ${t.power} >= 0`)],
+)
+
+/** One side of a fought war (shared/src/schemas/clan-wars.ts ClanWarSide). */
+export type ClanWarSideRow = {
+  clanId: string
+  clanName: string
+  knockouts: number
+  power: number
+  rewardPercent: number
+  gcReward: number
+  expReward: number
+  stoneBonus: number
+  giftCertificateBonus: number
+  /** BP of the enemy fighters this side knocked out (rankings). */
+  defeatedPower: number
+}
+export type ClanWarDuelRow = {
+  attacker: { name: string; power: number }
+  defender: { name: string; power: number }
+  winner: 'attacker' | 'defender' | 'none'
+}
+
+// Fought Clan Wars. One attack per attacker, rival and UTC day (the unique index).
+export const clanWars = pgTable(
+  'clan_wars',
+  {
+    id: id(),
+    day: date('day').notNull(),
+    attackerClanId: uuid('attacker_clan_id')
+      .notNull()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    defenderClanId: uuid('defender_clan_id')
+      .notNull()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    size: smallint('size').notNull(),
+    // null: a draw.
+    winnerClanId: uuid('winner_clan_id'),
+    attacker: jsonb('attacker').$type<ClanWarSideRow>().notNull(),
+    defender: jsonb('defender').$type<ClanWarSideRow>().notNull(),
+    duels: jsonb('duels').$type<ClanWarDuelRow[]>().notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    uniqueIndex('clan_wars_daily_key').on(t.attackerClanId, t.defenderClanId, t.day),
+    index('clan_wars_defender_idx').on(t.defenderClanId, t.createdAt),
+    index('clan_wars_created_idx').on(t.createdAt),
+  ],
+)
+
+// Weeks whose Clan Wars Top 3 rewards were paid (the settle's idempotency marker).
+export const clanWarWeeks = pgTable('clan_war_weeks', {
+  week: date('week').primaryKey(),
+  settledAt: timestamp('settled_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
+/** What starting a Clan Mission boss took from clan storage (refunded if nobody attacked). */
+export type ClanMissionPaid = { stones: number; giftCertificates: number; free: boolean }
+export type ClanMissionOutcome = { bossIndex: number; defeated: boolean; at: string }
+
+// Clan Missions per clan: progress, Free Entries, today's starts and the summoned boss (scheduled
+// while startAt is ahead, active until endsAt). Locked after the clan row.
+export const clanMissions = pgTable(
+  'clan_missions',
+  {
+    clanId: uuid('clan_id')
+      .primaryKey()
+      .references(() => clans.id, { onDelete: 'cascade' }),
+    unlockedBoss: smallint('unlocked_boss').notNull().default(0),
+    freeEntries: integer('free_entries').notNull().default(0),
+    battlesDay: date('battles_day'),
+    battlesUsed: smallint('battles_used').notNull().default(0),
+    bossIndex: smallint('boss_index'),
+    startAt: timestamp('start_at', { withTimezone: true }),
+    endsAt: timestamp('ends_at', { withTimezone: true }),
+    hp: integer('hp'),
+    maxHp: integer('max_hp'),
+    paid: jsonb('paid').$type<ClanMissionPaid>(),
+    // Attacks per character on the current boss.
+    attacks: jsonb('attacks').$type<Record<string, number>>().notNull().default({}),
+    lastOutcome: jsonb('last_outcome').$type<ClanMissionOutcome>(),
+  },
+  (t) => [
+    check(
+      'clan_missions_values',
+      sql`${t.unlockedBoss} between 0 and 14 and ${t.freeEntries} >= 0 and ${t.battlesUsed} >= 0`,
+    ),
+  ],
+)

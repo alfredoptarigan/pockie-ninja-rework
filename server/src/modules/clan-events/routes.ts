@@ -1,5 +1,6 @@
 // Clan Events (Reborn's Clan window Events tab) under /api/game/clan-events: the clan level bar,
-// Ninja Garden (garden.ts) and Picnic in Garden (picnic.ts). Every write runs in one transaction
+// Ninja Garden (garden.ts), Picnic in Garden (picnic.ts), Training and Protection (daily.ts), the
+// Logs tab (logs.ts), Clan Wars (/wars) and Clan Missions (/missions). Every write runs in one transaction
 // with lockClanOf's locks (character, then clan) and answers with the fresh view and character.
 import { eq } from 'drizzle-orm'
 import type { FastifyInstance, FastifyRequest } from 'fastify'
@@ -13,8 +14,13 @@ import {
   type GardenResult,
   type PicnicResult,
 } from '../../../../shared/src/schemas/home.js'
+import {
+  trainingDonateSchema,
+  type ProtectionFightResult,
+  type TrainingResult,
+} from '../../../../shared/src/schemas/clan-activities.js'
 import type { Db } from '../../db/client.js'
-import { clanMembers, clans } from '../../db/schema.js'
+import { characters, clanMembers, clans } from '../../db/schema.js'
 import type { Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { lockClanOf, type ClanContext } from '../clans/clans.js'
@@ -31,6 +37,8 @@ import {
   unlockPlot,
 } from './garden.js'
 import { clanLevelView, readProgress } from './level.js'
+import { donateTraining, fightProtection, protectionView, trainingView } from './daily.js'
+import { logsView } from './logs.js'
 import {
   claimReward,
   contributeGiftCertificates,
@@ -41,6 +49,7 @@ import {
 
 const READ = { config: { rateLimit: RATE_LIMITS.read } }
 const WRITE = { config: { rateLimit: RATE_LIMITS.item } }
+const FIGHT = { config: { rateLimit: RATE_LIMITS.fight } }
 
 /** The caller's clan id and level (as committed in `db`), or a 404 without a clan. */
 async function myClan(db: Tx | Db, characterId: string) {
@@ -141,6 +150,45 @@ export async function clanEventRoutes(app: FastifyInstance, { db }: { db: Db }) 
     return picnic(request, (ctx, now) => contributeOutfit(ctx, uid, now))
   })
   app.post('/picnic/claim', WRITE, (request) => picnic(request, claimReward))
+
+  // --- Training, Protection, Logs ---
+  const character = async (tx: Tx | Db, id: string) =>
+    (await tx.select().from(characters).where(eq(characters.id, id)))[0]!
+
+  app.get('/training', READ, async (request) => {
+    const mine = await me(request)
+    return trainingView(db, mine.characterId)
+  })
+  app.post('/training', WRITE, (request) => {
+    const { course } = trainingDonateSchema.parse(request.body)
+    return act(
+      request,
+      (ctx, now) => donateTraining(ctx, course, now),
+      async (tx, id, now, clan): Promise<TrainingResult> => ({
+        training: await trainingView(tx, id, now),
+        course,
+        clan,
+        character: await characterView(tx, id),
+      }),
+    )
+  })
+
+  app.get('/protection', READ, async (request) => {
+    const mine = await me(request)
+    return protectionView(db, await character(db, mine.characterId))
+  })
+  app.post('/protection/fight', FIGHT, (request) =>
+    act(request, fightProtection, async (tx, id, now, fight): Promise<ProtectionFightResult> => ({
+      ...fight,
+      protection: await protectionView(tx, await character(tx, id), now),
+      character: await characterView(tx, id),
+    })),
+  )
+
+  app.get('/logs', READ, async (request) => logsView(db, (await me(request)).clanId))
+
+  app.register(import('../clan-wars/routes.js'), { db, prefix: '/wars' })
+  app.register(import('../clan-missions/routes.js'), { db, prefix: '/missions' })
 }
 
 export default clanEventRoutes

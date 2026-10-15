@@ -42,7 +42,7 @@ const picnic = (patch: Partial<PicnicView> = {}): PicnicView => ({
 })
 
 describe('Clan Events tab', () => {
-  it('shows the clan level bar and opens Garden, Picnic and Adventure only', async () => {
+  it('shows the clan level bar and opens every activity tile', async () => {
     mockApi({
       'GET /api/game/clan-events': () => json({ level: 2, exp: 1_200, next: 70_000 }),
       'GET /api/game/clan-events/garden': () => json(garden()),
@@ -50,7 +50,8 @@ describe('Clan Events tab', () => {
     renderWithProviders(<EventsTab />)
     expect(await screen.findByText('1200 / 70000')).toBeVisible()
     const tiles = screen.getByRole('list', { name: 'Clan activities' })
-    expect(within(tiles).getByRole('button', { name: 'Training' })).toBeDisabled()
+    for (const tile of ['Training', 'Protection', 'Clan Wars', 'Clan Missions'])
+      expect(within(tiles).getByRole('button', { name: tile })).toBeEnabled()
     await userEvent.click(within(tiles).getByRole('button', { name: 'Garden' }))
     expect(await screen.findByRole('dialog', { name: 'Ninja Garden' })).toBeVisible()
   })

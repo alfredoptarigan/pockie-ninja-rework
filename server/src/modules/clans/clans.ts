@@ -10,6 +10,7 @@ import {
   CLAN_BROWSER_PAGE_SIZE,
   CLAN_MAX_MEMBERS,
   CLAN_MIN_LEVEL,
+  CLAN_ROLE_TITLES,
   canClanAction,
   contributionPoints,
   isClanOfficer,
@@ -30,6 +31,7 @@ import type { Tx } from '../../game/progress.js'
 import { HttpError } from '../../http.js'
 import { weekStart } from '../rankings/toll-gate-weekly.js'
 import { isOnline, type Outbox } from '../social/players.js'
+import { logClan } from '../clan-events/logs.js'
 
 type CharacterRow = typeof characters.$inferSelect
 type ClanRow = typeof clans.$inferSelect
@@ -66,6 +68,20 @@ async function lockCharacters(tx: Tx, ids: string[]) {
     .for('update')
   return new Map(rows.map((row) => [row.id, row]))
 }
+
+const CURRENCY_NAMES: Record<ClanCurrency, string> = {
+  stone: 'Stones',
+  gold: 'Gold',
+  giftCoupon: 'Gift Certificates',
+}
+
+const nameOf = async (db: Tx | Db, characterId: string) =>
+  (
+    await db
+      .select({ name: characters.name })
+      .from(characters)
+      .where(eq(characters.id, characterId))
+  )[0]?.name ?? ''
 
 const roster = (db: Tx | Db, clanId: string) =>
   db.select().from(clanMembers).where(eq(clanMembers.clanId, clanId))
@@ -267,6 +283,7 @@ export async function createClan(tx: Tx, me: CharacterRow, name: string) {
       throw error
     })
   await tx.insert(clanMembers).values({ characterId: me.id, clanId: clan!.id, role: 'leader' })
+  await logClan(tx, clan!.id, me.name, 'Founded the clan', name)
   await tx.delete(clanApplications).where(eq(clanApplications.characterId, me.id))
 }
 
@@ -302,6 +319,13 @@ export async function acceptApplication(ctx: ClanContext, applicantId: string) {
     throw fail(400, 'in_clan', 'That ninja already joined a clan.')
   if (ctx.members.length >= CLAN_MAX_MEMBERS) throw fail(400, 'clan_full', 'Your clan is full.')
   await ctx.tx.insert(clanMembers).values({ characterId: applicantId, clanId: ctx.clan.id })
+  await logClan(
+    ctx.tx,
+    ctx.clan.id,
+    ctx.chars.get(applicantId)!.name,
+    'Joined',
+    `Accepted by ${ctx.me.name}`,
+  )
   await ctx.tx.delete(clanApplications).where(eq(clanApplications.characterId, applicantId))
   tell(ctx, everyone(ctx), ctx.clan.id)
   tell(ctx, [applicantId], ctx.clan.id, `You joined the clan ${ctx.clan.name}.`)
@@ -338,6 +362,13 @@ export async function setRole(
   const vice = ctx.members.find((m) => m.role === 'vice')
   if (role === 'vice' && vice) await setRoleOf(ctx.tx, vice.characterId, 'member')
   await setRoleOf(ctx.tx, characterId, role)
+  await logClan(
+    ctx.tx,
+    ctx.clan.id,
+    ctx.me.name,
+    'Role changed',
+    `${await nameOf(ctx.tx, characterId)} is now ${CLAN_ROLE_TITLES[role]}`,
+  )
   tell(ctx, everyone(ctx), ctx.clan.id)
 }
 
@@ -345,6 +376,7 @@ export async function kick(ctx: ClanContext, characterId: string) {
   const row = target(ctx, characterId)
   if (!canClanAction(ctx.member.role, row.role, 'kick', 0)) throw forbidden()
   await ctx.tx.delete(clanMembers).where(eq(clanMembers.characterId, characterId))
+  await logClan(ctx.tx, ctx.clan.id, ctx.me.name, 'Kicked', await nameOf(ctx.tx, characterId))
   tell(
     ctx,
     everyone(ctx).filter((id) => id !== characterId),
@@ -360,6 +392,7 @@ export async function kick(ctx: ClanContext, characterId: string) {
 export async function leave(ctx: ClanContext) {
   const { tx, clan, me } = ctx
   await tx.delete(clanMembers).where(eq(clanMembers.characterId, me.id))
+  await logClan(tx, clan.id, me.name, 'Left the clan')
   const rest = ctx.members
     .filter((m) => m.characterId !== me.id)
     .sort(
@@ -401,6 +434,13 @@ export async function donate(ctx: ClanContext, currency: ClanCurrency, amount: n
     .set(setCurrency(currency, clan[currency] + amount))
     .where(eq(clans.id, clan.id))
   const points = contributionPoints(currency, amount)
+  await logClan(
+    tx,
+    clan.id,
+    me.name,
+    'Donated',
+    `${amount.toLocaleString('en-US')} ${CURRENCY_NAMES[currency]}`,
+  )
   const now = new Date()
   await tx
     .update(clanMembers)
@@ -446,6 +486,13 @@ export async function withdraw(ctx: ClanContext, input: ClanWithdrawInput) {
   }
   const total = each * payees.length
   if (clan[currency] < total) throw notEnough()
+  await logClan(
+    tx,
+    clan.id,
+    ctx.me.name,
+    'Withdrew',
+    `${total.toLocaleString('en-US')} ${CURRENCY_NAMES[currency]} (${input.mode === 'all' ? 'split among all' : input.mode === 'self' ? 'to self' : `to ${chars.get(payees[0]!)!.name}`})`,
+  )
   await tx
     .update(clans)
     .set(setCurrency(currency, clan[currency] - total))
