@@ -2,7 +2,7 @@
 // character pose (Talent, Blood Limit, Hide), the title plate and the slots with what the active
 // equipment set wears.
 // Positions are the measured ones, relative to the window content (Reborn's x - 5, y - 31).
-import type { Character, GearView } from '@pockie/shared'
+import { starTier, type Character, type GearView } from '@pockie/shared'
 import { useState, type CSSProperties, type KeyboardEvent, type MouseEvent } from 'react'
 import { useCharacterStats } from '../api'
 import { useOutfitStand } from '../art'
@@ -354,7 +354,12 @@ function OutfitSlot({
   const outfit = item.info?.outfit
   return (
     <>
-      {outfit && <OutfitPlus plus={outfit.plus} under={(item.info?.level ?? 0) > level} />}
+      {outfit && (
+        <OutfitPlus
+          plus={starTier(outfit.plus, outfit.stars)}
+          under={(item.info?.level ?? 0) > level}
+        />
+      )}
       <button
         type="button"
         aria-label={name}
