@@ -2071,3 +2071,28 @@ export const zanpakutoCrystals = pgTable(
     ),
   ],
 )
+
+// Impel Down: where the ninja stands (gate 0-5, floor 0-24, 25 = the intersection after floor 25),
+// its best floors cleared over all gates (opens Zanpakuto weapon slots), and today's lost lives
+// and refreshes (UTC days).
+export const impelDownPlayers = pgTable(
+  'impel_down_players',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    gate: smallint('gate').notNull().default(0),
+    floor: smallint('floor').notNull().default(0),
+    maxFloor: smallint('max_floor').notNull().default(0),
+    livesDay: date('lives_day'),
+    livesUsed: smallint('lives_used').notNull().default(0),
+    refreshDay: date('refresh_day'),
+    refreshes: smallint('refreshes').notNull().default(0),
+  },
+  (t) => [
+    check(
+      'impel_down_players_values',
+      sql`${t.gate} between 0 and 5 and ${t.floor} between 0 and 25 and ${t.maxFloor} between 0 and 150 and ${t.livesUsed} between 0 and 3 and ${t.refreshes} between 0 and 5`,
+    ),
+  ],
+)

@@ -38,7 +38,6 @@ import { characterOf, lockCharacter, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import {
   freeSpiritSlot,
-  IMPEL_DOWN_MAX_FLOOR,
   loadZanpakuto,
   refinesUsedToday,
   spiritSlotOpen,
@@ -158,7 +157,7 @@ export async function zanpakutoRoutes(app: FastifyInstance, { db }: { db: Db }) 
     act(zanpakutoCrystalBodySchema, async (ctx, { id }) => {
       const [row, info] = spiritCrystal(ctx, id)
       const tabSlot = info.position - 1
-      if (!weaponSlotOpen(tabSlot, IMPEL_DOWN_MAX_FLOOR))
+      if (!weaponSlotOpen(tabSlot, ctx.state.impelDownMaxFloor))
         throw bad('slot_locked', `Clear ${25 * tabSlot} Impel Down floors to open that slot.`)
       const worn = ctx.state.crystals.find((c) => c.tab === info.tab && c.tabSlot === tabSlot)
       const moves: [CrystalRow, Partial<CrystalRow>][] = [

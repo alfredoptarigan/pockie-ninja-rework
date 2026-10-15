@@ -583,7 +583,7 @@ const topIcon = (name: string) => `/assets/reborn/ui/buttons/topui/${name}.webp`
 /**
  * Reborn's village feature icons (docs/audit/reborn-ui-audit.md §3), in its order. `feature` is
  * the window we have for it; `level` its level gate. ponytail: the rest are systems we have not
- * built (Impel Down, Dungeons...), shown locked like Reborn shows a locked icon.
+ * built (Ninja Mall, Akatsuki...), shown locked like Reborn shows a locked icon.
  */
 const FEATURES: {
   key: string
@@ -592,7 +592,13 @@ const FEATURES: {
   level?: number
   feature?: WindowName
 }[] = [
-  { key: 'impeldown', label: 'Impel\nDown', icon: topIcon('impeldown'), level: 61 },
+  {
+    key: 'impeldown',
+    label: 'Impel\nDown',
+    icon: topIcon('impeldown'),
+    level: 61,
+    feature: 'impelDown',
+  },
   {
     key: 'zanpakuto',
     label: 'Zanpakuto',

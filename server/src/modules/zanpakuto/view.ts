@@ -1,7 +1,7 @@
 // Loads a ninja's Zanpakuto rows, turns them into the ZanpakutoView every route answers with, and
-// grants crystals (grantZanpakutoCrystal: the hook for drops once Impel Down exists).
+// grants crystals (grantZanpakutoCrystal: Impel Down's drops).
 import type { Random } from '@pockie/game-core'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import {
   crystalInfo,
   FREE_REFINES_PER_DAY,
@@ -15,7 +15,7 @@ import {
 } from '../../../../game-core/src/zanpakuto/zanpakuto.js'
 import type { ZanpakutoCrystal, ZanpakutoView } from '../../../../shared/src/schemas/zanpakuto.js'
 import type { Db } from '../../db/client.js'
-import { characterZanpakuto, zanpakutoCrystals } from '../../db/schema.js'
+import { characterZanpakuto, impelDownPlayers, zanpakutoCrystals } from '../../db/schema.js'
 import type { Tx } from '../../game/progress.js'
 import { utcDay } from '../gates/common.js'
 
@@ -27,13 +27,9 @@ export interface ZanpakutoState {
   refinesUsed: number
   unlockedSlots: number[]
   crystals: CrystalRow[]
+  /** Best Impel Down floors cleared; weapon slot idx opens at 25 * idx floors. */
+  impelDownMaxFloor: number
 }
-
-/**
- * Highest Impel Down floor cleared; weapon slot idx opens at 25 * idx floors. ponytail: Impel Down
- * is not built, so only slot 0 of each tab opens; read the ninja's floor here once it is.
- */
-export const IMPEL_DOWN_MAX_FLOOR = 0
 
 /** Outfit weapon class (1 Blunt, 2 Sharp, 4 Fists) to its tab; anything else is Sharp. */
 export const tabOfWeaponClass = (weaponClass: number): ZanpakutoTab =>
@@ -44,6 +40,10 @@ export async function loadZanpakuto(tx: Tx | Db, characterId: string): Promise<Z
     .select()
     .from(characterZanpakuto)
     .where(eq(characterZanpakuto.characterId, characterId))
+  const [impelDown] = await tx
+    .select({ maxFloor: impelDownPlayers.maxFloor })
+    .from(impelDownPlayers)
+    .where(eq(impelDownPlayers.characterId, characterId))
   return {
     coins: row?.coins ?? 0,
     refineDay: row?.refineDay ?? null,
@@ -53,6 +53,7 @@ export async function loadZanpakuto(tx: Tx | Db, characterId: string): Promise<Z
       .select()
       .from(zanpakutoCrystals)
       .where(eq(zanpakutoCrystals.characterId, characterId)),
+    impelDownMaxFloor: impelDown?.maxFloor ?? 0,
   }
 }
 
@@ -109,7 +110,7 @@ export function zanpakutoView(
       ZANPAKUTO_TABS.map((tab) => [tab, tabSlots(tab)]),
     ) as ZanpakutoView['tabs'],
     lockedWeaponSlots: Array.from({ length: WEAPON_SLOTS }, (_, i) => i).filter(
-      (i) => !weaponSlotOpen(i, IMPEL_DOWN_MAX_FLOOR),
+      (i) => !weaponSlotOpen(i, state.impelDownMaxFloor),
     ),
     activeTab: tabOfWeaponClass(weaponClass),
   }
@@ -118,7 +119,7 @@ export function zanpakutoView(
 /**
  * Puts a new crystal (item 480001-480086, one rolled stat) in the first free spirit slot. The
  * caller holds the character lock. Returns the row, or undefined when the spirit inventory is
- * full (Reborn's Impel Down auto-sells; that source does not exist here yet).
+ * full (Impel Down then sells it with addSpiritCoins).
  */
 export async function grantZanpakutoCrystal(
   tx: Tx,
@@ -140,4 +141,15 @@ export async function grantZanpakutoCrystal(
     })
     .returning()
   return row
+}
+
+/** Adds Spirit Coins (a sold crystal), creating the ninja's Zanpakuto row if needed. */
+export async function addSpiritCoins(tx: Tx, characterId: string, coins: number) {
+  await tx
+    .insert(characterZanpakuto)
+    .values({ characterId, coins })
+    .onConflictDoUpdate({
+      target: characterZanpakuto.characterId,
+      set: { coins: sql`${characterZanpakuto.coins} + ${coins}` },
+    })
 }

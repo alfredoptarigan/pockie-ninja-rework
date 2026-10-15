@@ -302,6 +302,13 @@
       "when": 1792060000000,
       "tag": "0042_zanpakuto",
       "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1792070000000,
+      "tag": "0043_impel_down",
+      "breakpoints": true
     }
   ]
 }

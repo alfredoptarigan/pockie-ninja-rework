@@ -5,7 +5,12 @@ import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { ZANPAKUTO_REFINE_RANGES } from '../../../../game-core/src/zanpakuto/zanpakuto.js'
 import type { ZanpakutoView } from '../../../../shared/src/schemas/zanpakuto.js'
 import { buildTestApp, Client, createTestDb, truncateAll } from '../../../test/helpers.js'
-import { characters, characterZanpakuto, zanpakutoCrystals } from '../../db/schema.js'
+import {
+  characters,
+  characterZanpakuto,
+  impelDownPlayers,
+  zanpakutoCrystals,
+} from '../../db/schema.js'
 import { grantZanpakutoCrystal } from './view.js'
 
 const { db, close } = createTestDb()
@@ -131,6 +136,15 @@ describe('equip and unequip', () => {
     const response = await post('/equip', { id: gem.id })
     expect(response.statusCode).toBe(400)
     expect(response.json().error.code).toBe('slot_locked')
+  })
+
+  it('opens weapon slot idx after 25 * idx Impel Down floors', async () => {
+    await db.insert(impelDownPlayers).values({ characterId, gate: 1, floor: 0, maxFloor: 25 })
+    const view: ZanpakutoView = (await client.get('/api/game/zanpakuto')).json()
+    expect(view.lockedWeaponSlots).toEqual([2, 3, 4, 5])
+    const gem = await giveCrystal({ itemId: 480002 })
+    expect((await post('/equip', { id: gem.id })).statusCode).toBe(200)
+    expect(await crystal(gem.id)).toMatchObject({ tab: 'sharp', tabSlot: 1 })
   })
 
   it('unequips into the first free spirit slot, and refuses when they are full', async () => {

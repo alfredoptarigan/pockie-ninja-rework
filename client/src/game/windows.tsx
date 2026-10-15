@@ -33,6 +33,7 @@ import { CarrierBagWindow } from './CarrierBag'
 import { ClanBrowserWindow, ClanWindow } from './clans'
 import { DungeonsWindow } from './dungeons'
 import { ZanpakutoWindow } from './zanpakuto'
+import { ImpelDownWindow } from './impel-down'
 
 export type WindowName =
   | 'shop'
@@ -68,6 +69,7 @@ export type WindowName =
   | 'clanBrowser'
   | 'dungeons'
   | 'zanpakuto'
+  | 'impelDown'
 
 export interface WindowProps {
   character: Character
@@ -136,6 +138,9 @@ const WINDOWS: Record<WindowName, ComponentType<WindowProps>> = {
   clanBrowser: (props) => <ClanBrowserWindow {...props} />,
   dungeons: ({ character, onClose }) => <DungeonsWindow character={character} onClose={onClose} />,
   zanpakuto: ({ onClose }) => <ZanpakutoWindow onClose={onClose} />,
+  impelDown: ({ character, onClose }) => (
+    <ImpelDownWindow character={character} onClose={onClose} />
+  ),
 }
 
 const OpenWindowContext = createContext<(name: WindowName, options?: { npcId?: string }) => void>(
