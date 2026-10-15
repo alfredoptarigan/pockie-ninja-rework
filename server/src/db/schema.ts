@@ -2430,3 +2430,56 @@ export const clanGardens = pgTable(
     ),
   ],
 )
+
+// Chain Attack (Reborn `fieldFightMulti`): one running chain per ninja against `monsterId` of
+// `sceneId`, `amount` monsters ending at `endsAt` (3 minutes each). The row goes when claimed.
+export const chainAttacks = pgTable(
+  'chain_attacks',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    monsterId: text('monster_id').notNull(),
+    sceneId: integer('scene_id').notNull(),
+    amount: smallint('amount').notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
+    endsAt: timestamp('ends_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [check('chain_attacks_amount', sql`${t.amount} between 1 and 30`)],
+)
+
+// Hunt (Reborn `huntBegin` / `huntComplete` at the Arena NPC): the monsters to kill (`targets`,
+// `targetScenes`, `killed` side by side; empty when no hunt runs) and the hunts finished on the
+// UTC day `day`.
+export const hunts = pgTable(
+  'hunts',
+  {
+    characterId: uuid('character_id')
+      .primaryKey()
+      .references(() => characters.id, { onDelete: 'cascade' }),
+    targets: text('targets')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    targetScenes: integer('target_scenes')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    killed: boolean('killed')
+      .array()
+      .notNull()
+      .default(sql`'{}'`),
+    day: date('day'),
+    huntsDone: smallint('hunts_done').notNull().default(0),
+  },
+  (t) => [check('hunts_done', sql`${t.huntsDone} >= 0`)],
+)
+
+// Adventure with Jiraiya (Reborn `clanAdventureStart` / `clanAdventureReturn`): the ninja is away
+// since `startedAt`; the row goes when they return.
+export const jiraiyaAdventures = pgTable('jiraiya_adventures', {
+  characterId: uuid('character_id')
+    .primaryKey()
+    .references(() => characters.id, { onDelete: 'cascade' }),
+  startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
+})

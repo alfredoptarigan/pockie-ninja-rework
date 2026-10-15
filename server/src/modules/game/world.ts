@@ -31,6 +31,8 @@ import {
 } from './field-data.js'
 import { RATE_LIMITS } from './rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
+import { requireBattleFree } from '../hunt/guard.js'
+import { recordHuntKill } from '../hunt/hunt.js'
 
 const MONSTER_CLASSES = new Set(['NormalNpc', 'TaskBossNpc', 'SnowNpc'])
 const MAX_LISTED_MONSTERS = 6
@@ -101,7 +103,12 @@ function ticketBossView(sceneId: number, level: number, tickets: (itemId: string
  * BossRule (SubTaskType 10): killing the step's monster in its scene counts while the quest item
  * is held; the item is used up when the step completes.
  */
-async function recordBossKill(tx: Tx, characterId: string, monsterId: string, sceneId: number) {
+export async function recordBossKill(
+  tx: Tx,
+  characterId: string,
+  monsterId: string,
+  sceneId: number,
+) {
   for (const quest of await loadQuests(tx, characterId)) {
     if (quest.state !== 0) continue
     const steps = subTasks(quest.taskId)
@@ -199,10 +206,12 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       const character = await lockCharacter(tx, userId)
       requireAlive(character, 'fight again')
       await requireNoTeam(tx, character.id, 'fight monsters')
+      await requireBattleFree(tx, character.id)
       const opponent = await fightTarget(tx, character, monsterId)
 
       const result = await fightMonster(tx, character, opponent)
       if (result.won) await recordBossKill(tx, character.id, opponent, character.sceneId)
+      if (result.won) await recordHuntKill(tx, character.id, opponent)
       const akatsukiAmbush = result.won ? await rollFieldAmbush(tx, character) : null
       // `rewards` already holds the fight's loot, so hand-ins go in `questRewards`.
       // A quest level-up counts as the fight's own, so the result shows it.

@@ -210,3 +210,41 @@ describe('NPC menus (Angel City, Demon City, Stone Organization)', () => {
     expect(screen.queryByRole('button', { name: 'Recover HP & MP' })).not.toBeInTheDocument()
   })
 })
+
+describe('NpcDialog: the Arena NPC', () => {
+  const arenaNpc: SceneNpc = { ...elder, id: 'n11002', nameKey: 'lg_name_n11002', menu: 'arena' }
+  function ArenaConversation() {
+    const talk = useTalk()
+    const { mutate } = talk
+    useEffect(() => mutate(arenaNpc.id), [mutate])
+    return <NpcDialog npc={arenaNpc} talk={talk} character={character} onClose={vi.fn()} />
+  }
+
+  it('enters the arena or begins a hunt from Hunt Monsters', async () => {
+    const fetchMock = mockApi({
+      'POST /api/game/npcs/n11002/talk': () =>
+        json({ dialogKey: 'lg_Say_n11002', nameKey: 'lg_name_n11002', completed: [], character }),
+      'GET /api/game/quests/available': () => json({ available: [], completed: [] }),
+      'POST /api/game/hunt/begin': () =>
+        json({ hunt: { monsters: [], huntsToday: 0, huntsPerDay: 3, arenaTries: 5 } }),
+    })
+    const open = vi.fn()
+    renderWithProviders(
+      <OpenWindowProvider value={open}>
+        <ArenaConversation />
+      </OpenWindowProvider>,
+    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Enter Arena' }))
+    expect(open).toHaveBeenCalledWith('arena', { npcId: 'n11002' })
+
+    await userEvent.click(screen.getByRole('button', { name: 'Hunt Monsters' }))
+    const options = screen.getByRole('list', { name: 'Options' })
+    expect(
+      within(options)
+        .getAllByRole('button')
+        .map((b) => b.textContent),
+    ).toEqual(['Begin Hunt', 'Finish Hunt', 'Back', 'End Conversation'])
+    await userEvent.click(within(options).getByRole('button', { name: 'Begin Hunt' }))
+    expect(fetchMock).toHaveBeenCalledWith('/api/game/hunt/begin', expect.anything())
+  })
+})

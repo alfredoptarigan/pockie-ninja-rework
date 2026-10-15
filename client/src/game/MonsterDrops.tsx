@@ -4,6 +4,7 @@
 import { useCallback, useId, useRef, useState } from 'react'
 import { ItemMenu, menuAt, type MenuEntry } from './ItemMenu'
 import { useMonsterPortrait } from './art'
+import { ChainAttackDialog, showChainProgress, useChainAttack } from './hunt'
 import { ItemList } from './Rewards'
 import { Dialog, GameButton } from './skin'
 import { plainText } from './text'
@@ -64,7 +65,6 @@ export function DropsMenu({
 const CARD_PITCH = 70
 const SHADOW = '[text-shadow:2px_2px_4px_#000,-2px_-2px_4px_#000]'
 const DESCRIPTION = 'A mysterious creature.'
-const CHAIN_ATTACK_SOON = 'Chain Attack: not available yet'
 
 /** Why a task boss cannot be fought yet (decision 8 keeps the never-attackable ones locked). */
 export const lockReason = (monster: SceneMonster) =>
@@ -90,6 +90,11 @@ export function MonsterRow({
   const [hovered, setHovered] = useState<string | null>(null)
   const [menu, setMenu] = useState<{ monster: SceneMonster; at: { x: number; y: number } }>()
   const [info, setInfo] = useState<{ monster: SceneMonster; drops: boolean }>()
+  const [chainOf, setChainOf] = useState<SceneMonster>()
+  const running = Boolean(useChainAttack().data?.chain)
+  // Reborn: with a chain running, Chain Attack shows its progress instead.
+  const chainAttack = (monster: SceneMonster) =>
+    running ? showChainProgress(true) : setChainOf(monster)
   const closeMenu = useCallback(() => setMenu(undefined), [])
   const portraitOf = useMonsterPortrait()
   const shown = monsters.flatMap((monster) => {
@@ -105,7 +110,12 @@ export function MonsterRow({
       reason: lockReason(monster),
       onSelect: () => onFight(monster),
     },
-    { label: 'Chain Attack', disabled: true, title: CHAIN_ATTACK_SOON, onSelect: () => {} },
+    {
+      label: 'Chain Attack',
+      disabled: Boolean(monster.lock),
+      reason: lockReason(monster),
+      onSelect: () => chainAttack(monster),
+    },
     { label: 'Drops', onSelect: () => setInfo({ monster, drops: true }) },
   ]
 
@@ -167,9 +177,14 @@ export function MonsterRow({
             setInfo(undefined)
             onFight(info.monster)
           }}
+          onChainAttack={() => {
+            setInfo(undefined)
+            chainAttack(info.monster)
+          }}
           onClose={() => setInfo(undefined)}
         />
       )}
+      {chainOf && <ChainAttackDialog monster={chainOf} onClose={() => setChainOf(undefined)} />}
     </div>
   )
 }
@@ -225,12 +240,14 @@ function MonsterInfo({
   portrait,
   dropsOpen,
   onFight,
+  onChainAttack,
   onClose,
 }: {
   monster: SceneMonster
   portrait?: string
   dropsOpen: boolean
   onFight: () => void
+  onChainAttack: () => void
   onClose: () => void
 }) {
   const name = plainText(monster.nameKey, 'Monster')
@@ -264,7 +281,12 @@ function MonsterInfo({
               >
                 Fight
               </GameButton>
-              <GameButton className="h-6 w-[72px] text-[10px]!" disabled title={CHAIN_ATTACK_SOON}>
+              <GameButton
+                className="h-6 w-[72px] text-[10px]!"
+                disabled={Boolean(monster.lock)}
+                title={lockReason(monster)}
+                onClick={onChainAttack}
+              >
                 Chain Attack
               </GameButton>
               <DropsMenu monster={monster} defaultOpen={dropsOpen} />

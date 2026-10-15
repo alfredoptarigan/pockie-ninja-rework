@@ -33,6 +33,7 @@ import {
   withExp,
   type CharacterRow,
 } from '../gates/common.js'
+import { requireBattleFree } from '../hunt/guard.js'
 import { addSpiritCoins, grantZanpakutoCrystal } from '../zanpakuto/view.js'
 import { floorBoss, floorDrops, floorEnemy, floorExp, gateLevel, guaranteed } from './floors.js'
 import { autoSells, floorsCleared, rollCrystal, usedToday } from './rules.js'
@@ -122,6 +123,7 @@ async function fight(tx: Tx, character: CharacterRow, autoSell: number) {
   const now = new Date()
   requireLevel(character)
   requireAlive(character, 'fight')
+  await requireBattleFree(tx, character.id)
   const me = await lockPlayer(tx, character.id)
   if (me.floor >= floorsPerGate)
     throw bad('intersection', 'Choose the next gate or refresh this one first.')

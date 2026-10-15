@@ -42,7 +42,7 @@ const picnic = (patch: Partial<PicnicView> = {}): PicnicView => ({
 })
 
 describe('Clan Events tab', () => {
-  it('shows the clan level bar and opens Garden and Picnic only', async () => {
+  it('shows the clan level bar and opens Garden, Picnic and Adventure only', async () => {
     mockApi({
       'GET /api/game/clan-events': () => json({ level: 2, exp: 1_200, next: 70_000 }),
       'GET /api/game/clan-events/garden': () => json(garden()),
@@ -53,6 +53,22 @@ describe('Clan Events tab', () => {
     expect(within(tiles).getByRole('button', { name: 'Training' })).toBeDisabled()
     await userEvent.click(within(tiles).getByRole('button', { name: 'Garden' }))
     expect(await screen.findByRole('dialog', { name: 'Ninja Garden' })).toBeVisible()
+  })
+  it('opens Adventure with Jiraiya from its tile', async () => {
+    mockApi({
+      'GET /api/game/clan-events': () => json({ level: 2, exp: 1_200, next: 70_000 }),
+      'GET /api/game/adventure': () =>
+        json({
+          active: false,
+          startedAt: null,
+          hours: 0,
+          rewards: { charExp: 0, bankaiExp: 0, clanExp: 0 },
+        }),
+    })
+    renderWithProviders(<EventsTab />)
+    const tiles = screen.getByRole('list', { name: 'Clan activities' })
+    await userEvent.click(within(tiles).getByRole('button', { name: 'Adventure' }))
+    expect(await screen.findByRole('dialog', { name: 'Adventure with Jiraiya' })).toBeVisible()
   })
 })
 

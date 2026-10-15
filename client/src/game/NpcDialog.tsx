@@ -11,6 +11,7 @@ import type { NpcMenu, SceneNpc } from './types'
 import { useOpenWindow, type WindowName } from './windows'
 import { restCost } from './world'
 import { ChangeVillageOption } from './ChangeVillage'
+import { useBeginHunt, useCompleteHunt } from './hunt'
 
 /**
  * The menu row that opens an NPC's window, in Reborn's words: shops "Browse Wares" (Dungeon
@@ -22,9 +23,10 @@ const WINDOW_OPTIONS: Record<Exclude<NpcMenu, 'rest'>, { window: WindowName; lab
   forge: { window: 'forge', label: 'Enter Armory' },
   gates: { window: 'gates', label: 'Enter' },
   daily: { window: 'daily', label: 'Task Board' },
+  arena: { window: 'arena', label: 'Enter Arena' },
 }
 
-type Page = 'main' | 'quests' | 'recovery' | 'confirm' | 'healed'
+type Page = 'main' | 'quests' | 'recovery' | 'confirm' | 'healed' | 'hunt'
 const stones = (amount: number) => amount.toLocaleString('en-US')
 
 /**
@@ -50,6 +52,9 @@ export function NpcDialog({
   const photo = useNpcPhoto(npc.id)
   const openWindow = useOpenWindow()
   const rest = useRest()
+  const beginHunt = useBeginHunt()
+  const completeHunt = useCompleteHunt()
+  const onHuntError = (error: Error) => showToast(errorMessage(error), 'failure')
   const [page, setPage] = useState<Page>('main')
   const showQuests = page === 'quests'
   const setShowQuests = (show: boolean) => setPage(show ? 'quests' : 'main')
@@ -170,6 +175,38 @@ export function NpcDialog({
                     </li>
                   </>
                 )}
+                {page === 'hunt' && (
+                  <>
+                    <li>
+                      <Option
+                        disabled={beginHunt.isPending}
+                        onClick={() => beginHunt.mutate(undefined, { onError: onHuntError })}
+                      >
+                        Begin Hunt
+                      </Option>
+                    </li>
+                    <li>
+                      <Option
+                        disabled={completeHunt.isPending}
+                        onClick={() =>
+                          completeHunt.mutate(undefined, {
+                            onError: onHuntError,
+                            onSuccess: ({ arenaTriesRestored }) =>
+                              showToast(
+                                `Hunt complete! ${arenaTriesRestored} arena ${arenaTriesRestored === 1 ? 'challenge' : 'challenges'} restored.`,
+                                'success',
+                              ),
+                          })
+                        }
+                      >
+                        Finish Hunt
+                      </Option>
+                    </li>
+                    <li>
+                      <Option onClick={() => setPage('main')}>Back</Option>
+                    </li>
+                  </>
+                )}
                 {page === 'healed' && (
                   <>
                     <li className="px-[9px] py-[3px] text-[#3d2914]">Healing complete!</li>
@@ -194,6 +231,11 @@ export function NpcDialog({
                     <Option onClick={() => openWindow(windowOption.window, { npcId: npc.id })}>
                       {windowOption.label}
                     </Option>
+                  </li>
+                )}
+                {menu === 'arena' && (
+                  <li>
+                    <Option onClick={() => setPage('hunt')}>Hunt Monsters</Option>
                   </li>
                 )}
                 {menu === 'rest' && (

@@ -28,6 +28,7 @@ import {
   withCharacter,
   type CharacterRow,
 } from '../gates/common.js'
+import { requireBattleFree } from '../hunt/guard.js'
 import { BOSSES, bossDrops, bossFighter, bossLevel } from './bosses.js'
 import { rollDrops, todaysBosses } from './rules.js'
 
@@ -84,6 +85,7 @@ async function fight(tx: Tx, character: CharacterRow, index: number) {
   if (!todaysBosses(utcDay(now)).includes(index))
     throw bad('not_today', 'That boss is not in today’s rotation.')
   requireAlive(character, 'fight')
+  await requireBattleFree(tx, character.id)
   const me = await lockPlayer(tx, character.id)
   const used = attemptsUsed(me, now)
   if (used >= DUNGEON_RULES.maxAttempts)

@@ -34,6 +34,7 @@ import { vipExp } from '../../game/vip.js'
 import { requireAlive } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { requireNoTeam } from '../teams/index.js'
+import { requireBattleFree } from '../hunt/guard.js'
 import {
   bad,
   characterView,
@@ -360,6 +361,7 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
   app.post('/las-noches/fight', { config: { rateLimit: RATE_LIMITS.gateFight } }, async (request) =>
     withCharacter(db, request, async (tx, character): Promise<LasNochesFightResult> => {
       requireAlive(character, 'fight')
+      await requireBattleFree(tx, character.id)
       const row = await loadRow(tx, character.id)
       const run = requireRun(row)
       const { config, floors } = singleGateData()

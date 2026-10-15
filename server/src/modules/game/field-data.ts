@@ -102,8 +102,10 @@ export function levelVariant(npcId: string, level: number) {
 }
 
 /** What an NPC's script opens (npc.ini `JavaScript`); null for talk-only NPCs. */
-export type NpcMenu = 'shop' | 'merchant' | 'forge' | 'gates' | 'daily' | 'rest'
+export type NpcMenu = 'shop' | 'merchant' | 'forge' | 'gates' | 'daily' | 'rest' | 'arena'
 const MENUS: Record<string, NpcMenu> = {
+  // Reborn's Arena NPC (11002): Enter Arena, and Hunt Monsters.
+  'npc/arenaNpc.js': 'arena',
   'npc/pharmacyNpc.js': 'shop',
   'npc/equipNpc.js': 'shop',
   'npc/magicNpc.js': 'shop',

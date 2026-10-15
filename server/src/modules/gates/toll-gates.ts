@@ -43,6 +43,7 @@ import { characterOf, requireAlive, requireUser } from '../game/characters.js'
 import { RATE_LIMITS } from '../game/rate-limits.js'
 import { recordTollGateProgress, tollGateProgress } from '../rankings/toll-gate-weekly.js'
 import { requireNoTeam } from '../teams/index.js'
+import { requireBattleFree } from '../hunt/guard.js'
 import {
   bad,
   bagFits,
@@ -298,6 +299,7 @@ export async function tollGateRoutes(app: FastifyInstance, { db }: { db: Db }) {
     withCharacter(db, request, async (tx, character): Promise<TollGateFightResult> => {
       // A lost duel leaves 1 HP: without this a defeated ninja would skip the revive cost.
       requireAlive(character, 'fight')
+      await requireBattleFree(tx, character.id)
       const row = await requireRun(tx, character.id)
       const tables = tollGateTables()
       const layout = gateLayout(row.gateId, tables)

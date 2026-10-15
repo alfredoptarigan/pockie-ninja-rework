@@ -109,9 +109,7 @@ describe('MonsterRow', () => {
     const info = screen.getByRole('dialog', { name: 'Monster Information' })
     expect(info).toHaveTextContent('Lv.2')
     expect(info).toHaveTextContent('Sunflower')
-    const chain = within(info).getByRole('button', { name: 'Chain Attack' })
-    expect(chain).toBeDisabled()
-    expect(chain).toHaveAttribute('title', 'Chain Attack: not available yet')
+    expect(within(info).getByRole('button', { name: 'Chain Attack' })).toBeEnabled()
 
     await userEvent.click(within(info).getByRole('button', { name: 'Drops: Sunflower' }))
     expect(within(info).getByRole('list', { name: 'Sunflower drops' })).toHaveTextContent(
@@ -123,17 +121,29 @@ describe('MonsterRow', () => {
     expect(screen.queryByRole('dialog', { name: 'Monster Information' })).toBeNull()
   })
 
-  it('right-click menu: Fight fights, Chain Attack is disabled, Drops opens the drops', async () => {
+  it('right-click menu: Fight fights, Chain Attack configures a chain, Drops opens the drops', async () => {
     const onFight = vi.fn()
     renderWithProviders(<MonsterRow monsters={[sunflower]} onFight={onFight} />)
     const card = await screen.findByTestId('monster-card')
 
     await userEvent.pointer({ keys: '[MouseRight]', target: card })
     const menu = screen.getByRole('menu', { name: 'Sunflower' })
-    const chain = within(menu).getByRole('menuitem', { name: 'Chain Attack' })
-    expect(chain).toBeDisabled()
-    expect(chain).toHaveAttribute('title', 'Chain Attack: not available yet')
-    await userEvent.click(within(menu).getByRole('menuitem', { name: 'Fight' }))
+    await userEvent.click(within(menu).getByRole('menuitem', { name: 'Chain Attack' }))
+    const config = screen.getByRole('dialog', { name: 'Chain Attack' })
+    expect(config).toHaveTextContent('Chain Attack Configuration')
+    expect(config).toHaveTextContent('00:03:00')
+    await userEvent.click(within(config).getByRole('button', { name: 'MAX' }))
+    expect(config).toHaveTextContent('30 Monsters')
+    expect(config).toHaveTextContent('01:30:00')
+    await userEvent.click(within(config).getByRole('button', { name: 'Cancel' }))
+    expect(screen.queryByRole('dialog', { name: 'Chain Attack' })).toBeNull()
+
+    await userEvent.pointer({ keys: '[MouseRight]', target: card })
+    await userEvent.click(
+      within(screen.getByRole('menu', { name: 'Sunflower' })).getByRole('menuitem', {
+        name: 'Fight',
+      }),
+    )
     expect(onFight).toHaveBeenCalledWith(sunflower)
     expect(screen.queryByRole('menu')).toBeNull()
 

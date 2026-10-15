@@ -30,6 +30,7 @@ import { WorldMap } from './WorldMap'
 import { teamHudScene, useTeam } from './teams/api'
 import { useMyClan } from './clans'
 import { AudioProvider } from './audio'
+import { HuntHud } from './hunt'
 
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
 export default function GameApp({ view }: { view: 'game' | 'create' }) {
@@ -142,6 +143,7 @@ function GameScreen({ character }: { character: Character }) {
             <div ref={setHudLayer} className="pointer-events-none absolute inset-0">
               <TopBar character={character} />
               <PlayerCard character={character} />
+              <HuntHud character={character} />
               {inVillage && <FeatureIcons character={character} />}
               <ScenePlaque
                 sceneId={scene.data?.sceneId}

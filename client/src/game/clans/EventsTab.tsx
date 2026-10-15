@@ -1,21 +1,22 @@
 // Reborn's Clan window Events tab (`Rh`, 840x340): the Clan Level bar (700x22 gold, "cur / next",
-// MAX at 20) and the row of 96px activity tiles. Garden and Picnic open their windows; Training,
-// Protection, Clan Wars, Adventure and Clan Missions are not built and stay greyed.
+// MAX at 20) and the row of 96px activity tiles. Garden, Picnic and Adventure (with Jiraiya) open
+// their windows; Training, Protection, Clan Wars and Clan Missions are not built and stay greyed.
 import { useState } from 'react'
 import { errorMessage } from '../api'
+import { AdventureWindow } from '../hunt'
 import { Notice } from '../skin'
 import { useClanLevel } from './events-api'
 import { NinjaGardenWindow } from './NinjaGarden'
 import { PicnicWindow } from './Picnic'
 
-type Activity = 'garden' | 'picnic'
+type Activity = 'garden' | 'picnic' | 'adventure'
 const TILES: { key: string; label: string; opens?: Activity }[] = [
   { key: 'training', label: 'Training' },
   { key: 'garden', label: 'Garden', opens: 'garden' },
   { key: 'protection', label: 'Protection' },
   { key: 'picnic', label: 'Picnic', opens: 'picnic' },
   { key: 'clanwars', label: 'Clan Wars' },
-  { key: 'Adventure', label: 'Adventure' },
+  { key: 'Adventure', label: 'Adventure', opens: 'adventure' },
   { key: 'clan_missions_icon', label: 'Clan Missions' },
 ]
 
@@ -71,6 +72,7 @@ export function EventsTab() {
       </ul>
       {open === 'garden' && <NinjaGardenWindow onClose={() => setOpen(null)} />}
       {open === 'picnic' && <PicnicWindow onClose={() => setOpen(null)} />}
+      {open === 'adventure' && <AdventureWindow onClose={() => setOpen(null)} />}
     </div>
   )
 }
