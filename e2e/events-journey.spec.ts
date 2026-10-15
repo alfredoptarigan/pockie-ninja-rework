@@ -1,5 +1,5 @@
-// M5 events journey: a level-51 ninja claims the daily login in the Ninja Diary and rolls the Dice
-// of Fate, both opened from the Events menu. Only the level is seeded.
+// M5 events journey: a level-51 ninja claims the daily login in the Ninja Diary and casts the Dice
+// of Fate (Attempt Cleromancy), both opened from the Events menu. Only the level is seeded.
 import { expect, test } from '@playwright/test'
 import { createSeededNinja, dialog, reloadGame, seedCharacter, sql } from './helpers'
 
@@ -20,10 +20,12 @@ test('a level-51 ninja claims the daily login and rolls the Dice of Fate', async
     seedCharacter(name, 'level = 51')
     await reloadGame(page)
     const events = page.getByRole('button', { name: 'Events', exact: true })
+    // The Events drop-down; the HUD's top-right icons carry the same names.
+    const eventList = page.getByRole('list', { name: 'Events' })
 
     // Act: Events menu, Ninja Diary, claim day 1.
     await events.click()
-    await page.getByRole('button', { name: 'Ninja Diary', exact: true }).click()
+    await eventList.getByRole('button', { name: 'Ninja Diary', exact: true }).click()
     const diary = dialog(page, 'Ninja Diary')
     const dayOne = diary.getByRole('list', { name: 'Login rewards' }).getByRole('listitem').first()
     const claimed = page.waitForResponse(
@@ -53,18 +55,20 @@ test('a level-51 ninja claims the daily login and rolls the Dice of Fate', async
 
     // Act: Events menu, Dice of Fate, roll once.
     await events.click()
-    await page.getByRole('button', { name: 'Dice of Fate', exact: true }).click()
+    await eventList.getByRole('button', { name: 'Dice of Fate', exact: true }).click()
     const dice = dialog(page, 'Dice of Fate')
-    await expect(dice).toContainText(`Rolls left today: ${ROLLS_PER_DAY}.`)
+    await expect(dice).toContainText(`Today's number of times for Cleromancy: ${ROLLS_PER_DAY}`)
     const rolled = page.waitForResponse(
       (r) => r.url().includes('/api/game/events/dice/roll') && r.ok(),
     )
-    await dice.getByRole('button', { name: 'Roll dice', exact: true }).click()
+    await dice.getByRole('button', { name: 'Attempt Cleromancy', exact: true }).click()
     await rolled
 
-    // Assert: the roll shows six dice, costs one roll and is stored.
-    await expect(dice.getByRole('status')).toContainText(/Dice: (\d, ){5}\d\./)
-    await expect(dice).toContainText(`Rolls left today: ${ROLLS_PER_DAY - 1}.`)
+    // Assert: the Cleromancy window logs six dice, the roll costs one attempt and is stored.
+    await expect(dialog(page, 'Cleromancy').getByRole('log')).toContainText(
+      /Results are (\d, ){5}\d totaling \d+ points\./,
+    )
+    await expect(dice).toContainText(`Today's number of times for Cleromancy: ${ROLLS_PER_DAY - 1}`)
     expect(sql(`select dice_used from characters where name = :'name'`, { name })).toBe('1')
   } finally {
     await context.close()

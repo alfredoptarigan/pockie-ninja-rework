@@ -103,9 +103,7 @@ describe('LasNochesWindow', () => {
       'POST /api/game/gates/las-noches/start': () => json({ lasNoches: view, character: ninja }),
     })
     renderWithProviders(<LasNochesWindow character={ninja} onClose={noop} />)
-    await userEvent.click(
-      await screen.findByRole('button', { name: 'Start at Floor 1 (1000 Stone)' }),
-    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Start (1k Stones)' }))
     expect(requestBody(fetchMock, 'POST /api/game/gates/las-noches/start')).toEqual({
       mode: 'first',
     })
@@ -128,7 +126,7 @@ describe('LasNochesWindow', () => {
     })
     renderWithProviders(<LasNochesWindow character={ninja} onClose={noop} />)
     expect(await screen.findByRole('button', { name: 'Fight Floor 7' })).toBeEnabled()
-    expect(screen.getByText('2400')).toBeInTheDocument()
+    expect(screen.getByText('EXP pot: 2,400')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Buy a Life (6 Gold)' })).toBeEnabled()
   })
 })

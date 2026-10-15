@@ -40,11 +40,12 @@ export interface TailedBeastView {
   resetAt: string
   beasts: { id: number; nameKey: string; pools: TailedBeastPool[] }[]
   tickets: { used: number; perDay: number }
-  me: { village: number; honor: number; essence: number; fights: number }
+  /** `place`: your place by Honor this week, null without Honor. */
+  me: { village: number; honor: number; essence: number; fights: number; place: number | null }
   boxes: { fights: number; itemId: string; claimed: boolean; ready: boolean }[]
   /** This week's Honor per village 0-4. */
   villages: { village: number; honor: number }[]
-  /** Top 10 by Honor this week. */
+  /** Top 100 by Honor this week. */
   leaderboard: { place: number; name: string; level: number; village: number; honor: number }[]
   /** Last week's Kage per village; `isMe` may pick one reward once. */
   kages: { village: number; name: string; isMe: boolean; claimedItemId: string | null }[]

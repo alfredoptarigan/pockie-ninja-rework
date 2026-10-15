@@ -1,84 +1,10 @@
 import { errorMessage } from '../api'
-import { Dialog, GameButton, Notice } from '../skin'
+import { Notice } from '../skin'
 import { useEventAction, useEvents } from './api'
 import { rewardCountdown, useNow } from './timer'
 
+export { DiceOfFateWindow } from './DiceOfFateWindow'
 export { NinjaDiaryWindow } from './NinjaDiaryWindow'
-
-const DICE_BUFFS: Record<number, string> = {
-  80101: 'Blessing',
-  80102: 'Great Blessing',
-  80201: 'Curse',
-  80202: 'Great Curse',
-}
-
-export function DiceOfFateWindow({ onClose }: { onClose: () => void }) {
-  const events = useEvents()
-  const action = useEventAction()
-  const error = events.error ?? action.error
-  const dice = events.data?.dice
-  return (
-    <Dialog title="Dice of Fate" onClose={onClose} className="game-window-bare w-[440px]">
-      <div className="flex flex-col gap-2 text-xs text-black">
-        {events.isPending && <p>Loading dice...</p>}
-        {error && <Notice tone="error">{errorMessage(error)}</Notice>}
-        {dice && (
-          <>
-            <p>Rolls left today: {dice.rollsLeft}. Resets daily at 00:00 UTC.</p>
-            <p>Six fair dice decide your fate. Lucky and unlucky dice cancel each other out.</p>
-            {dice.lastRoll && (
-              <div className="game-card p-2" role="status">
-                <p>
-                  Dice: {dice.lastRoll.dice.join(', ')}. Net lucky dice: {dice.lastRoll.net}.
-                </p>
-                <p>{dice.lastRoll.buffId ? DICE_BUFFS[dice.lastRoll.buffId] : 'Neutral fate'}</p>
-              </div>
-            )}
-            <ul aria-label="Fate effects">
-              {dice.buffs.map((buff) => (
-                <li key={buff.buffId}>
-                  {DICE_BUFFS[buff.buffId] ?? 'Fate effect'}
-                  {buff.expiresAt
-                    ? ` until ${new Date(buff.expiresAt).toLocaleString('en-US', { timeZone: 'UTC' })} UTC`
-                    : ''}
-                </li>
-              ))}
-            </ul>
-            <GameButton
-              disabled={action.isPending || dice.rollsLeft === 0}
-              onClick={() => action.mutate('dice/roll')}
-            >
-              Roll dice
-            </GameButton>
-            <GameButton
-              disabled={
-                action.isPending ||
-                dice.rollsLeft !== 0 ||
-                dice.bought >= dice.buyLimit ||
-                events.data!.character.stone < dice.replenishCost
-              }
-              onClick={() => action.mutate('dice/replenish')}
-            >
-              Replenish rolls ({dice.replenishCost.toLocaleString('en-US')} Stone)
-            </GameButton>
-            <p>
-              Replenishments today: {dice.bought}/{dice.buyLimit}. Available after all rolls are
-              used.
-            </p>
-            <GameButton
-              disabled={
-                action.isPending || !dice.curse || events.data!.character.stone < dice.clearCost
-              }
-              onClick={() => action.mutate('dice/clear')}
-            >
-              Clear curse ({dice.clearCost.toLocaleString('en-US')} Stone)
-            </GameButton>
-          </>
-        )}
-      </div>
-    </Dialog>
-  )
-}
 
 const CLAIM_TEXT =
   'font-bold leading-[12px] text-[#ffe27a] [text-shadow:0_0_2px_#000,0_0_2px_#000,0_0_2px_#000]'

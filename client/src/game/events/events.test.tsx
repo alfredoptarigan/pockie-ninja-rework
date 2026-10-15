@@ -5,7 +5,7 @@ import type { EventsView } from '../../../../shared/src/schemas/events'
 import { character } from '../../test/game'
 import { apiError, json, mockApi, renderWithProviders } from '../../test/utils'
 import { OpenWindowProvider } from '../windows'
-import { DiceOfFateWindow, NinjaDiaryWindow, TwentyMinuteRewardButton } from './index'
+import { NinjaDiaryWindow, TwentyMinuteRewardButton } from './index'
 import { rewardCountdown } from './timer'
 
 const reward = { exp: 0, stone: 0, gold: 0, giftCoupon: 10, honor: 0, items: [] }
@@ -159,21 +159,6 @@ describe('Daily events windows', () => {
     await userEvent.click(within(mission).getByRole('button', { name: 'Go' }))
     expect(screen.getByRole('tab', { name: 'Task Board' })).toHaveAttribute('aria-selected', 'true')
     expect(await screen.findByText('No tasks in progress')).toBeInTheDocument()
-  })
-
-  it('enables replenishment only with no rolls and remaining purchases', async () => {
-    mockApi({
-      'GET /api/game/events': () =>
-        json({
-          ...view,
-          character: { ...character, stone: 20000 },
-          dice: { ...view.dice, rollsLeft: 1, bought: 1 },
-        }),
-    })
-    renderWithProviders(<DiceOfFateWindow onClose={vi.fn()} />)
-    expect(await screen.findByRole('button', { name: 'Roll dice' })).toBeEnabled()
-    expect(screen.getByRole('button', { name: 'Replenish rolls (10,000 Stone)' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: 'Clear curse (5,000 Stone)' })).toBeEnabled()
   })
 
   it('disables the twenty-minute reward at the daily cap', async () => {

@@ -379,7 +379,7 @@ describe('Essence shop', () => {
 })
 
 describe('leaderboard and villages', () => {
-  it('ranks the top 10 by Honor and sums Honor per village', async () => {
+  it('ranks by Honor and sums Honor per village', async () => {
     const ids = await t.addNinjas(Array.from({ length: 11 }, (_, i) => ({ nation: i % 5 })))
     await db.insert(tailedBeastPlayers).values(
       ids.map((id, i) => ({
@@ -390,9 +390,9 @@ describe('leaderboard and villages', () => {
       })),
     )
     const data = await view()
-    expect(data.leaderboard).toHaveLength(10)
+    expect(data.leaderboard).toHaveLength(11)
     expect(data.leaderboard[0]).toMatchObject({ place: 1, name: 'Rank_10', honor: 110 })
-    expect(data.leaderboard[9]).toMatchObject({ place: 10, honor: 20 })
+    expect(data.leaderboard[10]).toMatchObject({ place: 11, honor: 10 })
     expect(data.villages).toEqual([
       { village: 0, honor: 10 + 60 + 110 },
       { village: 1, honor: 20 + 70 },
@@ -400,6 +400,21 @@ describe('leaderboard and villages', () => {
       { village: 3, honor: 40 + 90 },
       { village: 4, honor: 50 + 100 },
     ])
+  })
+
+  it('lists the top 100 for the leaderboard pages and places me among them', async () => {
+    const ids = await t.addNinjas(Array.from({ length: 101 }, (_, i) => ({ nation: i % 5 })))
+    await db
+      .insert(tailedBeastPlayers)
+      .values(ids.map((id, i) => ({ week: week(), characterId: id, village: i % 5, honor: i + 1 })))
+    expect((await view()).me.place).toBeNull()
+    await setPlayer({ honor: 50 })
+    const data = await view()
+    expect(data.leaderboard).toHaveLength(100)
+    expect(data.leaderboard[99]).toMatchObject({ place: 100 })
+    // 51 ninjas have more Honor (51-101); the tie at 50 goes to the lower character id.
+    const tiedFirst = [t.me, ids[49]!].sort()[0] === t.me
+    expect(data.me.place).toBe(tiedFirst ? 52 : 53)
   })
 })
 

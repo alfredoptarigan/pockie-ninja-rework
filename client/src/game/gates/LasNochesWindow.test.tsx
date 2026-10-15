@@ -1,7 +1,7 @@
 import type { LasNochesView } from '@pockie/shared'
-import { screen } from '@testing-library/react'
+import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { character } from '../../test/game'
 import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { LasNochesWindow } from './LasNochesWindow'
@@ -14,6 +14,70 @@ const view: LasNochesView = {
   run: null,
 }
 const noop = () => {}
+describe('Las Noches Tower lobby', () => {
+  it('welcomes, starts at floor 1 and leaves', async () => {
+    const onClose = vi.fn()
+    const fetch = mockApi({
+      'GET /api/game/gates/las-noches': () => json(view),
+      'POST /api/game/gates/las-noches/start': () => json({ lasNoches: view, character }),
+    })
+    renderWithProviders(<LasNochesWindow character={character} onClose={onClose} />)
+    const tower = await screen.findByRole('dialog', { name: 'Las Noches Tower' })
+    expect(await within(tower).findByText('Runs left today: 3/3')).toBeVisible()
+    expect(
+      within(tower).getByText('Welcome to Las Noches! Defeat enemies to climb higher floors.'),
+    ).toBeVisible()
+    expect(
+      within(tower).getByText('Challenge powerful enemies as you climb the tower.'),
+    ).toBeVisible()
+    expect(within(tower).getByText('Runs left today: 3/3')).toBeVisible()
+    const express = within(tower).getByRole('button', { name: /^Express/ })
+    expect(express).toBeDisabled()
+    expect(express).toHaveAttribute('title', 'Highest Floor: 0')
+    await userEvent.click(within(tower).getByRole('button', { name: 'Start (1k Stones)' }))
+    expect(requestBody(fetch, 'POST /api/game/gates/las-noches/start')).toEqual({ mode: 'first' })
+    await userEvent.click(within(tower).getByRole('button', { name: 'Leave' }))
+    expect(onClose).toHaveBeenCalled()
+  })
+
+  it('confirms the Express Route before starting halfway', async () => {
+    const best = {
+      ...view,
+      bestFloor: 60,
+      options: { ...view.options, half: { floor: 30, stone: 1783 } },
+    }
+    const fetch = mockApi({
+      'GET /api/game/gates/las-noches': () => json(best),
+      'POST /api/game/gates/las-noches/start': () => json({ lasNoches: best, character }),
+    })
+    renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
+    const express = await screen.findByRole('button', { name: 'Express (1.8k Stones) - Floor 30' })
+    expect(express).toHaveAttribute('title', 'Highest Floor: 60')
+    await userEvent.click(express)
+    const route = screen.getByRole('dialog', { name: 'Express Route' })
+    expect(within(route).getByText('Floor 30')).toBeVisible()
+    await userEvent.click(within(route).getByRole('button', { name: 'Cancel' }))
+    expect(screen.queryByRole('dialog', { name: 'Express Route' })).not.toBeInTheDocument()
+    await userEvent.click(express)
+    await userEvent.click(screen.getByRole('button', { name: 'Confirm' }))
+    expect(requestBody(fetch, 'POST /api/game/gates/las-noches/start')).toEqual({ mode: 'half' })
+  })
+
+  it('shows the floor, pot and lives with the run controls during a run', async () => {
+    const running = {
+      ...view,
+      run: { floor: 7, pot: 2400, lives: 1, livesBought: 0, nextNpcId: 'n900007', lifePrice: 6 },
+    }
+    mockApi({ 'GET /api/game/gates/las-noches': () => json(running) })
+    renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
+    expect(await screen.findByRole('button', { name: 'Fight Floor 7' })).toBeEnabled()
+    expect(screen.getByText('EXP pot: 2,400')).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Buy a Life (6 Gold)' })).toBeEnabled()
+    expect(screen.getByRole('button', { name: 'Claim EXP and End Current Run' })).toBeEnabled()
+    expect(screen.queryByRole('button', { name: /^Start/ })).not.toBeInTheDocument()
+  })
+})
+
 describe('Las Noches auto controls', () => {
   it('shows all prices and sends the chosen run count', async () => {
     const fetch = mockApi({

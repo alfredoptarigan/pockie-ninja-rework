@@ -24,7 +24,7 @@ import {
   type TailedBeastResult,
   type TailedBeastView,
 } from '@pockie/shared'
-import { and, asc, desc, eq, gt, lt, sql } from 'drizzle-orm'
+import { and, asc, desc, eq, gt, lt, or, sql } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { randomInt } from 'node:crypto'
 import type { Db } from '../../db/client.js'
@@ -56,7 +56,8 @@ type PlayerRow = typeof tailedBeastPlayers.$inferSelect
 
 const DAY_MS = 24 * 3600 * 1000
 const VILLAGES = [0, 1, 2, 3, 4]
-const LEADERBOARD_SIZE = 10
+/** Rows for the Leaderboard window's village tabs and 10-row pages. */
+const LEADERBOARD_SIZE = 100
 const CARD_BOX_FIGHTS = 10
 /** Rewards are bound, like the Honor shop: event currency never becomes tradable goods. */
 const BOUND = true
@@ -142,6 +143,27 @@ export async function tailedBeastWeeklyReset(db: Db, now = new Date()) {
   })
 }
 
+/** Your place by Honor this week (ties to the lower character id), null without Honor. */
+async function myPlace(tx: Tx | Db, week: string, me: PlayerRow | undefined) {
+  if (!me || me.honor <= 0) return null
+  const [row] = await tx
+    .select({ ahead: sql<number>`count(*)::int` })
+    .from(tailedBeastPlayers)
+    .where(
+      and(
+        eq(tailedBeastPlayers.week, week),
+        or(
+          gt(tailedBeastPlayers.honor, me.honor),
+          and(
+            eq(tailedBeastPlayers.honor, me.honor),
+            lt(tailedBeastPlayers.characterId, me.characterId),
+          ),
+        ),
+      ),
+    )
+  return row!.ahead + 1
+}
+
 async function view(tx: Tx | Db, character: CharacterRow, now = new Date()) {
   const data = config()
   const week = weekStart(now)
@@ -166,6 +188,7 @@ async function view(tx: Tx | Db, character: CharacterRow, now = new Date()) {
     .where(and(eq(tailedBeastPlayers.week, week), gt(tailedBeastPlayers.honor, 0)))
     .orderBy(desc(tailedBeastPlayers.honor), asc(tailedBeastPlayers.characterId))
     .limit(LEADERBOARD_SIZE)
+  const place = await myPlace(tx, week, me)
   const villageHonor = await tx
     .select({
       village: tailedBeastPlayers.village,
@@ -212,6 +235,7 @@ async function view(tx: Tx | Db, character: CharacterRow, now = new Date()) {
       honor: me?.honor ?? 0,
       essence: me?.essence ?? 0,
       fights,
+      place,
     },
     boxes: data.boxes
       .map((box) => ({
