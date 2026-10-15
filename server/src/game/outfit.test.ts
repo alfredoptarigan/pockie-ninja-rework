@@ -1,6 +1,6 @@
 import { OUTFIT_STARS } from '@pockie/shared'
 import { describe, expect, it } from 'vitest'
-import { avatarStats, creationOutfits, rebornOutfits } from './data.js'
+import { avatarSkillIds, avatarStats, creationOutfits, rebornOutfits } from './data.js'
 import { outfitBonuses, outfitIsv, outfitOf, outfitRequiredLevel } from './outfit.js'
 
 it("shares Reborn's imported avatarStars with the client", () => {
@@ -104,5 +104,13 @@ describe("the outfit's Weapon Type (Reborn serverConfig.avatars weaponType)", ()
   it('drives the creation screen and the Weapon Type line', () => {
     expect(creationOutfits().find((o) => o.clothing === 39)?.weaponClass).toBe(2)
     expect(creationOutfits().find((o) => o.clothing === 65)?.weaponClass).toBe(7)
+  })
+})
+
+describe('avatarSkillIds', () => {
+  it('reads the skills of every +N, including the i29<AvatarID>0 ids from +18 up', () => {
+    // i2931010: Ichigo +31 (AvatarID 3101); Reborn's imprint 2002.
+    expect(avatarSkillIds(3101)).toEqual([1901, 7777, 8888, 2002])
+    expect(avatarSkillIds(1)).toEqual([1901, 7777, 8888, 2002])
   })
 })

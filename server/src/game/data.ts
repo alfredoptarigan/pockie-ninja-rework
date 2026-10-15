@@ -108,16 +108,14 @@ export const skillAddRow = (id: number) =>
   load<Record<string, Record<string, number>>>('skill-adds')[String(id)]
 
 /**
- * AvatarSkill.ini SkillID1-4 of an outfit (`i29NNNN`), 0 = empty slot. The imprint (SkillID4) is
- * Reborn's where Reborn ships the outfit; the Secret Technique, block and init stay ours.
+ * AvatarSkill.ini SkillID1-4 of an outfit (by its item id), 0 = empty slot. The imprint (SkillID4)
+ * is Reborn's where Reborn ships the outfit; the Secret Technique, block and init stay ours.
  */
 export function avatarSkillIds(avatarId: number) {
-  const row =
-    load<Record<string, Record<string, number>>>('avatar-skills')[
-      `i29${String(avatarId).padStart(4, '0')}`
-    ]
+  const outfit = outfitOfAvatar(avatarId)
+  const row = outfit && load<Record<string, Record<string, number>>>('avatar-skills')[outfit.itemId]
   if (!row) return undefined
-  const reborn = outfitOfAvatar(avatarId)?.reborn
+  const reborn = outfit.reborn
   const imprint = reborn ? (reborn.imprint ?? 0) : row.SkillID4
   return [row.SkillID1, row.SkillID2, row.SkillID3, imprint].map(Number)
 }
@@ -994,21 +992,28 @@ const rebornOutfitsSchema = z.object({
 export const rebornOutfits = () => loadChecked('reborn/outfits', rebornOutfitsSchema)
 export type RebornOutfit = z.infer<typeof rebornOutfitsSchema>['outfits'][string]
 
-/** The outfit an AvatarID belongs to: its clothing, +N (AvatarLevel - 1) and Reborn data. */
+interface AvatarOutfit {
+  itemId: string
+  clothing: number
+  tier: number
+}
+
+/** The outfit an AvatarID belongs to: its item, clothing, +N (AvatarLevel - 1) and Reborn data. */
 export function outfitOfAvatar(avatarId: number) {
   const key = 'outfits-by-avatar'
   if (!cache.has(key)) {
-    const byAvatar = new Map<number, { clothing: number; tier: number }>()
-    for (const row of Object.values(load<Record<string, Row>>('items'))) {
+    const byAvatar = new Map<number, AvatarOutfit>()
+    for (const [itemId, row] of Object.entries(load<Record<string, Row>>('items'))) {
       if (row.class !== 'AvatarItem') continue
       byAvatar.set(Number(row.AvatarID), {
+        itemId,
         clothing: Number(row.Clothing),
         tier: Number(row.AvatarLevel) - 1,
       })
     }
     cache.set(key, byAvatar)
   }
-  const outfit = (cache.get(key) as Map<number, { clothing: number; tier: number }>).get(avatarId)
+  const outfit = (cache.get(key) as Map<number, AvatarOutfit>).get(avatarId)
   return outfit && { ...outfit, reborn: rebornOutfits().outfits[String(outfit.clothing)] }
 }
 
