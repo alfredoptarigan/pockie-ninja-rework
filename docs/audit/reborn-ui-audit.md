@@ -1,5 +1,8 @@
 # Reborn UI audit (2026-10-14)
 
+**Milestone closed 2026-10-15**, pending one final server test run on macOS: see
+[9. Closing checks](#9-closing-checks-2026-10-15).
+
 Static reverse engineering of Pockie Ninja Reborn's shipped bundle (`static/js/main.03c73510.js`,
 locale `locales/en/translation.json`), live DOM reads of the logged-in client, and an inventory of
 our client. The raw per-window specs (offsets into the bundle, layouts, labels, events) stay in the
@@ -151,3 +154,41 @@ Market Auction and Buy Orders, the Synthesis Recipes window and Auto Fill, outfi
 Stones, Reborn's Storage window, outfit titles and Red outfits (absent from our data), Clan Wars item
 packages (mail has no attachments), war replays, and the animations (Shichibukai and Sannin dice,
 Akatsuki holograms, Tsunade Pub glows).
+
+## 9. Closing checks (2026-10-15)
+
+Run on a Windows 11 laptop (PostgreSQL 18), migrations up to `0059_energy`.
+
+| Check             | Result                                                                                              |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| `pnpm db:migrate` | pass                                                                                                |
+| `pnpm typecheck`  | pass (committed code)                                                                               |
+| `pnpm lint`       | pass                                                                                                |
+| `pnpm test`       | client, shared, game-core pass; tools 420 pass, 15 skipped (no game backup on this machine)         |
+| server tests      | 1583 pass, 1 fail, 8 skipped of 1592; both causes fixed afterwards (below), final full run not done |
+| `pnpm e2e`        | 63 pass, 1 fail (clan journey: the API restarted under `tsx watch` mid-test; passes alone)          |
+
+Fixed while closing:
+
+- `aae27580` the battle replay's Skip button sat under the chat panel (field fights now mount in the
+  HUD layer).
+- `6c6d0da9` e2e draws WebGL with the GPU on Windows (Direct3D 11); SwiftShader starved clicks.
+- `9821e9d6` text files check out with LF on Windows too (byte-for-byte generator tests).
+- `482540f6` the importer builds the Home crops into `pet-foods.json` (it was edited by hand).
+- `f9c59340` asset tests that read the game backup skip when it is absent.
+- `ceba9767` the Zanpakuto journey runs its grant script without `pnpm` (a `.cmd` on Windows).
+- `768da64f` e2e seeding says psql must be on PATH.
+- `e6968198` server tests read the repository `.env` (a password in `TEST_DATABASE_URL`).
+- `c67927e6` the migrations scratch database is `pockie_remastered_migrations_test`.
+- `48630fe8` stopping the job timers waits for running jobs (they outlived a test into the next
+  truncate and deadlocked; on shutdown they raced the database close).
+- `161678a0` the Team Stone attempts test no longer depends on winning a random fight (about 2%).
+
+Still to do on macOS: one full `pnpm test` for the server to confirm 1592 green after `48630fe8`,
+`c67927e6` and `161678a0` (each was verified alone: security-m4 3/3, migrations 9/9, team-stone 5/5).
+The Windows run was stopped because PostgreSQL there fsyncs every truncated table at checkpoints
+(over 150,000 files per checkpoint), which makes a full run take about 45 minutes.
+
+Notes for Windows: e2e needs `psql` on PATH (`D:\PostgresSQL18\bin` here); set `E2E_PORT` /
+`E2E_API_PORT` when `pnpm dev` holds 5173 / 3000. `pnpm typecheck` currently also checks another
+session's untracked `tools/assets/reborn-skill-effects.ts`, which does not compile yet.
