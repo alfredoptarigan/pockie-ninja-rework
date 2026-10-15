@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { CLOSED_SCENES } from '../../shared/src/schemas/game.ts'
 import { MALL_CATALOGUE } from '../../server/src/modules/mall/catalogue.ts'
+import { TSUNADE_PUB_PLACEHOLDERS } from '../../server/src/modules/tsunade-pub/config.ts'
 
 type Row = Record<string, number | string | (number | string)[]>
 
@@ -176,6 +177,7 @@ for (const [id, row] of Object.entries(items)) {
 }
 for (const id of Object.keys(honorShop)) addItem(id)
 for (const { itemId } of MALL_CATALOGUE) addItem(itemId)
+for (const { itemId } of Object.values(TSUNADE_PUB_PLACEHOLDERS.prizes).flat()) addItem(itemId)
 // Armory: gems, Enchanting Stones and Slot Talismans (sockets, enchantments and their pickers).
 for (const [id, row] of Object.entries(items)) {
   if (row.class === 'JewelItem' || row.class === 'MagicItem' || row.FreePropName === 'FreeAddHole')
@@ -241,6 +243,12 @@ for (const [target, rule] of Object.entries(switchRules)) {
   }
 }
 
+// Recast Talisman (*3): no bitmap in the 2011 backup; Reborn's json_items icon paths.
+const REBORN_ICONS_FOR_2011_ITEMS: Record<string, string> = {
+  i159102: 'etc/268',
+  i161007: 'etc/recast',
+}
+
 const sorted = <T>(o: Record<string, T>) =>
   Object.fromEntries(Object.entries(o).sort(([a], [b]) => (a < b ? -1 : 1)))
 const strings = Object.fromEntries(
@@ -262,14 +270,19 @@ const outputs = {
       .filter((id) => items[id]!.class !== 'EquipItem' && Number(items[id]!.CanUse) === 1)
       .sort(),
     itemNames: sorted(Object.fromEntries([...itemIds].map((id) => [id, `lg_${items[id]!.Name}`]))),
-    // Reborn item icons (ResourceID "reborn/etc/360111" -> client/public/assets/reborn/icons/items).
+    // Reborn item icons (ResourceID "reborn/etc/360111" -> client/public/assets/reborn/icons/items),
+    // plus 2011 items the backup has no icon for but Reborn does.
     rebornItemIcons: sorted(
-      Object.fromEntries(
-        Object.entries(rebornItems).map(([id, row]) => [
+      Object.fromEntries([
+        ...Object.entries(rebornItems).map(([id, row]) => [
           id,
           `/assets/reborn/icons/items/${String(row.ResourceID).replace(/^reborn\//, '')}.webp`,
         ]),
-      ),
+        ...Object.entries(REBORN_ICONS_FOR_2011_ITEMS).map(([id, path]) => [
+          id,
+          `/assets/reborn/icons/items/${path}.webp`,
+        ]),
+      ]),
     ),
     marketItemNames: sorted(
       Object.fromEntries(nameOnlyItems.map((id) => [id, `lg_${items[id]!.Name}`])),

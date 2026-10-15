@@ -42,10 +42,12 @@ describe('M2 extra asset coverage', () => {
     const world = JSON.parse(
       readFileSync(join(paths.root, 'client/src/game/world-data.json'), 'utf8'),
     )
+    // Named items with no icon in the 2011 backup nor in Reborn: the bag draws its "?" for them.
+    const withoutIcon = new Set(['i120007', 'i120008', 'i140045', 'i140060'])
     for (const id of Object.keys(world.itemNames)) {
       // M5 Reborn items carry their own icons (world.rebornItemIcons).
       if (world.rebornItemIcons[id]) fileExists(world.rebornItemIcons[id])
-      else expect(gameItems.items[id], id).toBeDefined()
+      else if (!withoutIcon.has(id)) expect(gameItems.items[id], id).toBeDefined()
     }
     for (const icon of Object.values(gameItems.items)) {
       fileExists(icon.file)
