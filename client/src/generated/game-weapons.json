@@ -53,6 +53,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp11"
       ]
     },
@@ -69,7 +70,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "3": {
@@ -85,7 +87,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "4": {
@@ -102,6 +105,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp11"
       ]
     },
@@ -118,7 +122,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "6": {
@@ -135,6 +140,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp9",
         "sharp11"
       ]
@@ -153,6 +159,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp9"
       ]
     },
@@ -169,7 +176,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "9": {
@@ -185,7 +193,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "10": {
@@ -202,6 +211,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt9",
         "blunt11"
       ]
@@ -220,6 +230,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves9",
         "gloves11"
       ]
@@ -237,7 +248,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "13": {
@@ -254,6 +266,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves9",
         "gloves11"
       ]
@@ -272,6 +285,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt9",
         "blunt11"
       ]
@@ -289,7 +303,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "16": {
@@ -305,7 +320,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "17": {
@@ -321,7 +337,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "18": {
@@ -337,7 +354,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "19": {
@@ -353,7 +371,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "20": {
@@ -369,7 +388,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "21": {
@@ -385,7 +405,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "22": {
@@ -401,7 +422,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "23": {
@@ -417,7 +439,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "24": {
@@ -433,7 +456,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "26": {
@@ -450,6 +474,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt9"
       ]
     },
@@ -466,7 +491,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "28": {
@@ -482,7 +508,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "29": {
@@ -498,7 +525,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "30": {
@@ -514,7 +542,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "31": {
@@ -530,7 +559,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "32": {
@@ -547,6 +577,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt9",
         "blunt11"
       ]
@@ -565,6 +596,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp9",
         "sharp11"
       ]
@@ -582,7 +614,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "35": {
@@ -599,6 +632,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves11"
       ]
     },
@@ -615,7 +649,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "37": {
@@ -632,6 +667,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves9",
         "gloves11"
       ]
@@ -649,7 +685,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "40": {
@@ -665,7 +702,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "42": {
@@ -682,6 +720,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt9",
         "blunt11"
       ]
@@ -699,7 +738,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "44": {
@@ -715,7 +755,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "45": {
@@ -732,6 +773,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves9",
         "gloves11"
       ]
@@ -750,6 +792,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt9",
         "blunt11"
       ]
@@ -767,7 +810,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "48": {
@@ -783,7 +827,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "49": {
@@ -800,6 +845,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp9",
         "sharp11"
       ]
@@ -817,7 +863,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "51": {
@@ -833,7 +880,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "52": {
@@ -849,7 +897,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "53": {
@@ -865,7 +914,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "54": {
@@ -881,7 +931,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "55": {
@@ -897,7 +948,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "56": {
@@ -913,7 +965,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "57": {
@@ -929,7 +982,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "58": {
@@ -946,6 +1000,7 @@
         "blunt10",
         "blunt17",
         "blunt20",
+        "blunt19",
         "blunt11"
       ]
     },
@@ -962,7 +1017,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "60": {
@@ -978,7 +1034,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "61": {
@@ -994,7 +1051,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "62": {
@@ -1010,7 +1068,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "63": {
@@ -1026,7 +1085,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "64": {
@@ -1043,6 +1103,7 @@
         "sharp10",
         "sharp17",
         "sharp20",
+        "sharp19",
         "sharp9",
         "sharp11"
       ]
@@ -1061,6 +1122,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves9",
         "gloves11"
       ]
@@ -1078,7 +1140,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "67": {
@@ -1094,7 +1157,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "69": {
@@ -1110,7 +1174,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "70": {
@@ -1126,7 +1191,8 @@
         "blunt8",
         "blunt10",
         "blunt17",
-        "blunt20"
+        "blunt20",
+        "blunt19"
       ]
     },
     "72": {
@@ -1143,6 +1209,7 @@
         "gloves10",
         "gloves17",
         "gloves19",
+        "gloves20",
         "gloves9"
       ]
     },
@@ -1159,7 +1226,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "76": {
@@ -1175,7 +1243,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "84": {
@@ -1191,7 +1260,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "85": {
@@ -1207,7 +1277,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "86": {
@@ -1245,7 +1316,10 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20",
+        "blunt19",
+        "sharp19"
       ]
     },
     "87": {
@@ -1283,7 +1357,10 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20",
+        "blunt19",
+        "sharp19"
       ]
     },
     "88": {
@@ -1321,7 +1398,10 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20",
+        "blunt19",
+        "sharp19"
       ]
     },
     "89": {
@@ -1359,7 +1439,10 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20",
+        "blunt19",
+        "sharp19"
       ]
     },
     "90": {
@@ -1375,7 +1458,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "98": {
@@ -1391,7 +1475,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "103": {
@@ -1407,7 +1492,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "104": {
@@ -1423,7 +1509,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "105": {
@@ -1439,7 +1526,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "106": {
@@ -1455,7 +1543,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "107": {
@@ -1471,7 +1560,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "108": {
@@ -1487,7 +1577,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "109": {
@@ -1503,7 +1594,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     },
     "111": {
@@ -1519,7 +1611,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "113": {
@@ -1535,7 +1628,8 @@
         "sharp8",
         "sharp10",
         "sharp17",
-        "sharp20"
+        "sharp20",
+        "sharp19"
       ]
     },
     "114": {
@@ -1551,7 +1645,8 @@
         "gloves8",
         "gloves10",
         "gloves17",
-        "gloves19"
+        "gloves19",
+        "gloves20"
       ]
     }
   },

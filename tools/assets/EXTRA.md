@@ -10,7 +10,9 @@ recursive box drops, the newbie pack, class weapons, early HP items and explorat
 Six resources bake labels into their bitmaps: the exporter repaints the EXP/soul label areas
 and crops the promotional logo from the gift. Those icons carry `textRemoved: true`.
 
-Weapon coverage matches every outfit in the existing body manifest, with every compatible M2 weapon.
+Weapon coverage matches every outfit in the existing body manifest, with every compatible M2 weapon,
+plus the outfit's own-type skin of every weapon number (Reborn draws a weapon of another type as
+the outfit's own art of the same number; `loadWeaponLayer` does the same).
 Fetch `gameWeapons.outfits[outfitId].file` and parse it as `WeaponLayers` (one runtime file per
 outfit). Look up `gameWeapons.items[itemId]`, then `layers[weaponKey]`. The generated index stays
 small and does not bundle every weapon timeline with the client.
