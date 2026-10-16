@@ -1,5 +1,5 @@
 import { CLAN_MIN_LEVEL, type Character } from '@pockie/shared'
-import { useCallback, useState, type CSSProperties } from 'react'
+import { lazy, Suspense, useCallback, useState, type CSSProperties } from 'react'
 import { Navigate } from 'react-router'
 import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
 import { SkillsWindow } from './SkillsWindow'
@@ -32,11 +32,21 @@ import { useMyClan } from './clans'
 import { AudioProvider } from './audio'
 import { HuntHud } from './hunt'
 
+// Dev-only (/play/skill-showcase): every skill animation in one replay.
+const SkillShowcase = lazy(() => import('./skill-showcase/SkillShowcase'))
+
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
-export default function GameApp({ view }: { view: 'game' | 'create' }) {
+export default function GameApp({ view }: { view: 'game' | 'create' | 'skills' }) {
   const character = useCharacter()
   if (character.isSuccess && character.data && view === 'game') {
     return <GameScreen character={character.data} />
+  }
+  if (character.isSuccess && character.data && view === 'skills') {
+    return (
+      <Suspense fallback={<p className="p-6">Loading the showcase...</p>}>
+        <SkillShowcase character={character.data} />
+      </Suspense>
+    )
   }
   return (
     <div

@@ -13,6 +13,9 @@ export function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/play" element={<Play />} />
       <Route path="/play/create" element={<Play view="create" />} />
+      {import.meta.env.DEV && (
+        <Route path="/play/skill-showcase" element={<Play view="skills" />} />
+      )}
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

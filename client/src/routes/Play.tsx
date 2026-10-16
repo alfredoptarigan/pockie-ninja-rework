@@ -6,7 +6,9 @@ import { useMe } from '../lib/auth'
 // The game (and its text table) loads only for signed-in players.
 const GameApp = lazy(() => import('../game/GameApp'))
 
-export function Play({ view = 'game' }: { view?: 'game' | 'create' }) {
+const PATHS = { game: '/play', create: '/play/create', skills: '/play/skill-showcase' } as const
+
+export function Play({ view = 'game' }: { view?: keyof typeof PATHS }) {
   const me = useMe()
   // Logging out from here clears the user before the router commits the move to "/"; a player
   // who was signed in goes home instead of being bounced to the login page.
@@ -34,7 +36,7 @@ export function Play({ view = 'game' }: { view?: 'game' | 'create' }) {
       <Navigate
         to="/login"
         replace
-        state={{ from: view === 'create' ? '/play/create' : '/play' }}
+        state={{ from: PATHS[view] }}
       />
     )
   }
