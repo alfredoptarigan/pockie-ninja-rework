@@ -57,6 +57,21 @@ describe('pictureLayout', () => {
     expect(layout.hotspots.find((h) => h.clip === 'clip_foundry')?.npc?.id).toBe('n16003')
   })
 
+  it('uses the Reborn Demon City backdrop without the legacy decorative layers', () => {
+    const npc = {
+      id: 'n17003',
+      nameKey: 'lg_name_n17003',
+      x: 0,
+      y: 0,
+      scale: 100,
+      clip: 'clip_middle',
+    }
+    const layout = pictureLayout({ ...villageScene, sceneId: 171, npcs: [npc] })!
+    expect(layout.under).toEqual(['/assets/reborn/las-noches/demon-city.webp'])
+    expect(layout.skybox).toBeUndefined()
+    expect(layout.hotspots.find((h) => h.clip === 'clip_middle')?.npc).toBe(npc)
+  })
+
   it('places standing NPCs at their coordinates', () => {
     const layout = pictureLayout(field)!
     expect(layout.figures.map((f) => f.key)).toEqual(['npc:n21001', 'npc:n21002'])

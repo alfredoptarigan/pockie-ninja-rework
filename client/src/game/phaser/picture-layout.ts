@@ -106,11 +106,15 @@ export function pictureLayout(scene: SceneView, exploreClip?: string): PictureLa
   return {
     width: art.width,
     height: art.height,
-    under: [background, backgroundeffect, element].filter((l): l is string => Boolean(l)),
+    // Reborn's Demon City backdrop already includes the old element and skybox scenery.
+    under:
+      scene.sceneId === 171
+        ? ['/assets/reborn/las-noches/demon-city.webp']
+        : [background, backgroundeffect, element].filter((l): l is string => Boolean(l)),
     hotspots,
     // Lower figures stand in front.
     figures: npcs.sort((a, b) => a.y - b.y),
     explore: explore && { spot: explore, title: 'Explore', label: 'Explore this area' },
-    skybox,
+    skybox: scene.sceneId === 171 ? undefined : skybox,
   }
 }
