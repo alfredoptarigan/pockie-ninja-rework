@@ -40,7 +40,9 @@ export function rewriteAtlas(atlas: Atlas): Atlas {
 export const ultimateId = (clothing: number) =>
   clothing <= 100 ? 1900 + clothing : 2100 + clothing
 export function selectAssets(manifest: Manifest): Entry[] {
-  const outfits = new Set(Object.keys(manifest.secretTechniques).filter((id) => Number(id) <= 120))
+  const outfits = new Set(
+    Object.keys(manifest.secretTechniques).filter((id) => Number(id) <= 120 || Number(id) === 170),
+  )
   return manifest.assets.filter(
     (e) =>
       (e.category === 'avatar-secret-technique' && outfits.has(e.id)) ||
@@ -54,9 +56,10 @@ export function selectAssets(manifest: Manifest): Entry[] {
       e.category === 'skill-icon' ||
       // Inventory preview poses for the outfits we play (ids up to 120, like the ultimates).
       (e.category === 'avatar-ui' && /^poses\/\d+\.png$/.test(e.path) && Number(e.id) <= 120) ||
-      // Scroll Dungeons bosses past 120 (Madara Uchiha, Yamamoto Genryusai). The window's
+      // Outfits past 120: Madara Uchiha and Hashirama Senju (Reborn-only, also the Hashirama vs
+      // Madara leaders) and Yamamoto Genryusai (Scroll Dungeons boss). The dungeons window's
       // features/dungeons-bg.jpg is not in the manifest: fetched and converted by hand.
-      (e.category === 'avatar-ui' && /^poses\/(170|178)\.png$/.test(e.path)) ||
+      (e.category === 'avatar-ui' && /^poses\/(170|178|188)\.png$/.test(e.path)) ||
       e.category === 'talent' ||
       e.category === 'bloodline' ||
       e.category === 'item-icon' ||
@@ -153,13 +156,16 @@ export async function exportReborn(raw: string, root: string) {
     atlasRef(`entities/avatars/${clothing}/${name}.json`)
   const outfits = Object.keys(manifest.secretTechniques)
     .map(Number)
-    .filter((n) => n <= 120)
+    .filter((n) => n <= 120 || n === 170)
     .sort((a, b) => a - b)
-  if (outfits.length !== 100) throw new Error(`Expected 100 outfits; found ${outfits.length}`)
+  if (outfits.filter((id) => id <= 120).length !== 100)
+    throw new Error(`Expected 100 original outfits; found ${outfits.length}`)
   for (const clothing of outfits) {
-    const data = read<{ secretTechnique: Technique; secretTechniqueVariants?: Technique[] }>(
-      `assets/entities/avatars/${clothing}/data.json`,
-    )
+    const data = read<{
+      secretTechnique: Technique
+      secretTechniqueVariants?: Technique[]
+      animations?: Record<string, number[]>
+    }>(`assets/entities/avatars/${clothing}/data.json`)
     for (const st of [data.secretTechnique, ...(data.secretTechniqueVariants ?? [])]) {
       if (st.damageFrame <= 0 && !st.variantId) continue
       const skill = st.variantId
@@ -168,11 +174,19 @@ export async function exportReborn(raw: string, root: string) {
       if (!skill || techniques[skill])
         throw new Error(`Invalid or duplicate technique: ${clothing}: ${st.variantId}`)
       const { variantId: _variantId, concurrentAtlas, atlas, ...metadata } = st
+      // Reborn places the concurrent layer at concurrentOffset, else at the avatar's animation
+      // offset of that name, and skips the layer when it has neither.
+      const { concurrent, ...withoutConcurrent } = metadata
+      const concurrentOffset = concurrent
+        ? (st.concurrentOffset ?? data.animations?.[concurrent])
+        : undefined
       techniques[skill] = {
         clothing,
-        ...metadata,
+        ...(concurrentOffset ? metadata : withoutConcurrent),
         ...layer(clothing, atlas ?? 'secret_technique'),
-        ...(st.concurrent ? { concurrent: layer(clothing, concurrentAtlas ?? st.concurrent) } : {}),
+        ...(concurrent && concurrentOffset
+          ? { concurrent: layer(clothing, concurrentAtlas ?? concurrent), concurrentOffset }
+          : {}),
       }
     }
   }

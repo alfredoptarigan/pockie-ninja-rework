@@ -246,7 +246,7 @@ describe('Reborn outfits (serverConfig.avatars, avatarStars)', () => {
       imprint: 2002,
       weaponType: 'Sharp',
     })
-    expect(Object.keys(data.outfits)).toHaveLength(111)
+    expect(Object.keys(data.outfits)).toHaveLength(113)
   })
 })
 

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { villageScene } from '../test/game'
@@ -37,13 +37,20 @@ describe('ScenePictureMount', () => {
   it('starts the picture and forwards clicks to the callbacks', async () => {
     const onNpc = vi.fn()
     const onExplore = vi.fn()
+    const onReady = vi.fn()
     const { unmount } = render(
-      <ScenePictureMount scene={villageScene} onNpc={onNpc} onExplore={onExplore} />,
+      <ScenePictureMount
+        scene={villageScene}
+        onNpc={onNpc}
+        onExplore={onExplore}
+        onReady={onReady}
+      />,
     )
 
     expect(screen.getByTestId('scene-picture')).toHaveAttribute('aria-hidden', 'true')
     await waitFor(() => expect(mountPicture).toHaveBeenCalled())
     const [parent, scene, actions] = vi.mocked(mountPicture).mock.calls.at(-1)!
+    expect(onReady).toHaveBeenCalledTimes(1)
     expect(parent).toBe(screen.getByTestId('scene-picture'))
     expect(scene).toBe(villageScene)
     actions.onNpc(villageScene.npcs[0]!)
@@ -57,7 +64,15 @@ describe('ScenePictureMount', () => {
   })
 
   it('renders nothing for scenes without exported art', () => {
-    render(<ScenePictureMount scene={{ ...villageScene, sceneId: 5001 }} onNpc={vi.fn()} />)
+    const onReady = vi.fn()
+    render(
+      <ScenePictureMount
+        scene={{ ...villageScene, sceneId: 5001 }}
+        onNpc={vi.fn()}
+        onReady={onReady}
+      />,
+    )
+    expect(onReady).toHaveBeenCalledTimes(1)
     expect(screen.queryByTestId('scene-picture')).not.toBeInTheDocument()
   })
 })
@@ -106,6 +121,21 @@ describe('BattleReplayMount', () => {
     expect(handle.destroy).toHaveBeenCalled()
     // Several user events: allow for slow, busy machines.
   }, 15_000)
+
+  it("covers the frame with Reborn's loading screen until the stage has drawn", async () => {
+    let ready = () => {}
+    vi.mocked(mountBattle).mockImplementationOnce(async (_parent, options) => {
+      ready = () => options.onReady?.()
+      return fakeHandle()
+    })
+    renderBattle()
+    expect(screen.getByRole('status', { name: 'Loading area' })).toHaveTextContent(
+      'Contacting Server...',
+    )
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Skip' })).toBeEnabled())
+    act(() => ready())
+    expect(screen.queryByRole('status', { name: 'Loading area' })).toBeNull()
+  })
 
   it('reports the end of the replay', async () => {
     const onFinished = vi.fn()

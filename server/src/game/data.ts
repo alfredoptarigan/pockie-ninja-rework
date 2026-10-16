@@ -19,6 +19,14 @@ import type {
 } from '@pockie/game-core'
 import type { OutfitBoost } from '@pockie/shared'
 import { z } from 'zod'
+import {
+  rebornOnlyItemId,
+  rebornOnlyItems,
+  rebornOnlyOfAvatar,
+  rebornOnlyOfClothing,
+  rebornOnlyOfUltimate,
+  rebornOnlyUltimate,
+} from './madara.js'
 import { topTierOutfits, topTierRecipes } from './outfit-top-tier.js'
 
 type Row = Record<string, number | string | (number | string)[]>
@@ -42,7 +50,12 @@ export function avatarStats(avatarId: number): AvatarStats {
   const key = `avatar:${avatarId}`
   if (cache.has(key)) return cache.get(key) as AvatarStats
   const row =
-    load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)] ?? topTierStats(avatarId)
+    load<Record<string, AvatarStats>>('avatar-stats')[String(avatarId)] ??
+    (rebornOnlyOfAvatar(avatarId)
+      ? load<Record<string, AvatarStats>>('avatar-stats')[
+          String(rebornOnlyOfAvatar(avatarId)!.statsRow)
+        ]
+      : topTierStats(avatarId))
   if (!row) throw new Error(`Unknown avatar ${avatarId}`)
   const stats = rebornOutfitStats(avatarId, row)
   cache.set(key, stats)
@@ -72,6 +85,8 @@ export function creationOutfits() {
  * AvatarItem) and that item's AvatarID.
  */
 export function outfitForClothing(clothing: number) {
+  const rebornOnly = rebornOnlyOfClothing(clothing)
+  if (rebornOnly) return { itemId: rebornOnlyItemId(clothing, 0), avatarId: rebornOnly.avatar }
   const map = load<Record<string, Row>>('avatar-clothing')[String(clothing)]
   const itemId = map && String(map.AvatarConfig)
   const item = itemId && load<Record<string, Row>>('items')[itemId]
@@ -103,7 +118,10 @@ const list = (value: Row[string] | undefined) =>
 export const npc = (id: string) => load<Record<string, Row>>('npcs')[id]
 
 /** skill.ini row of one skill id (without the id), including the Reborn scroll skills. */
-export const skill = (id: number) => withReborn<Omit<SkillInput, 'id'>>('skills')[String(id)]
+export const skill = (id: number) =>
+  rebornOnlyOfUltimate(id)
+    ? rebornOnlyUltimate(id)
+    : withReborn<Omit<SkillInput, 'id'>>('skills')[String(id)]
 
 /** skilladd.ini: the properties a passive skill adds (`SkillAdd0Skill`, `MaxHP`, ...). */
 export const skillAddRow = (id: number) =>
@@ -114,6 +132,14 @@ export const skillAddRow = (id: number) =>
  * is Reborn's where Reborn ships the outfit; the Secret Technique, block and init stay ours.
  */
 export function avatarSkillIds(avatarId: number) {
+  const rebornOnly = rebornOnlyOfAvatar(avatarId)
+  if (rebornOnly)
+    return [
+      rebornOnly.ultimate,
+      7777,
+      8888,
+      rebornOutfits().outfits[String(rebornOnly.clothing)]?.imprint ?? 0,
+    ]
   const outfit = outfitOfAvatar(avatarId)
   const row =
     outfit &&
@@ -130,9 +156,12 @@ export function npcSkillIds(npcId: string) {
   if (record?.AttackSkill === undefined && record?.TriggerSkill === undefined) return undefined
   const values =
     load<Record<string, { r: number | string | (number | string)[] }>>('npc-record-values')
-  return [record.AttackSkill, record.TriggerSkill].flatMap((rec) =>
+  const legacy = [record.AttackSkill, record.TriggerSkill].flatMap((rec) =>
     rec === undefined ? [] : [values[String(rec)]?.r ?? []].flat().map(Number),
   )
+  // Live floors 1–20: keep internal initialization/block skills, replace exposed moves only.
+  const observed = load<Record<string, number[]>>('reborn/las-noches-skills')[npcId]
+  return observed ? [...observed, ...legacy.filter((id) => id === 7777 || id === 8888)] : legacy
 }
 
 /** item.ini row, including the Reborn scroll items. */
@@ -140,7 +169,8 @@ export const item = (id: string) => allItems()[id]
 /** item.ini with the Reborn overlay and Reborn's +32 outfits. */
 function allItems() {
   const key = 'items:all'
-  if (!cache.has(key)) cache.set(key, { ...withReborn<Row>('items'), ...topTier().rows })
+  if (!cache.has(key))
+    cache.set(key, { ...withReborn<Row>('items'), ...topTier().rows, ...rebornOnlyItems })
   return cache.get(key) as Record<string, Row>
 }
 /** Reborn's +32 outfits (outfit-top-tier.ts), built from 2011's +31 rows. */

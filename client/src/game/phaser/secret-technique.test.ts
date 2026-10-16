@@ -137,6 +137,16 @@ describe('overlay placement', () => {
     expect(left.layers[1]).toMatchObject({ x: 1000, y: 0, scaleX: -1 })
     expect(right.layers[1]).toMatchObject({ x: 0, y: 0, scaleX: 1 })
   })
+
+  it("puts a stage-origin layer without concurrentOffset at the avatar's animation offset", () => {
+    // Hollowified Ichigo: Reborn falls back to animations.secret_technique_1_1 = [100, 380],
+    // which keeps the caster drawn in that layer on the ground instead of at the top.
+    const { key, technique } = resolveSecretTechnique(5, 1905)!
+    expect(technique.concurrentOffset).toEqual([100, 380])
+    const art = { key, technique, frames: ['1'], concurrentFrames: ['1'] }
+    const left = secretOverlay(art, 'attackers', HOME.attackers, STAGE.groundY, STAGE.width)
+    expect(left.layers[1]).toMatchObject({ x: 900, y: 380, scaleX: -1 })
+  })
 })
 
 describe('secret technique timeline', () => {

@@ -1,0 +1,202 @@
+[
+  {
+    "floor": 1,
+    "localNpcId": "n900001",
+    "nameKey": "lg_name_n900001",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 2,
+    "localNpcId": "n900002",
+    "nameKey": "lg_name_n900002",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": null,
+    "observedEnemyEventSkills": null
+  },
+  {
+    "floor": 3,
+    "localNpcId": "n900003",
+    "nameKey": "lg_name_n900003",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 4,
+    "localNpcId": "n900004",
+    "nameKey": "lg_name_n900004",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 5,
+    "localNpcId": "n900005",
+    "nameKey": "lg_name_n900005",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 6,
+    "localNpcId": "n900006",
+    "nameKey": "lg_name_n900006",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 7,
+    "localNpcId": "n900007",
+    "nameKey": "lg_name_n900007",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 8,
+    "localNpcId": "n900008",
+    "nameKey": "lg_name_n900008",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [3, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 9,
+    "localNpcId": "n900009",
+    "nameKey": "lg_name_n900009",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 10,
+    "localNpcId": "n900010",
+    "nameKey": "lg_name_n900010",
+    "nameSource": "Gillian",
+    "rebornName": "Gillian",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 11,
+    "localNpcId": "n900011",
+    "nameKey": "lg_name_n900011",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 12,
+    "localNpcId": "n900012",
+    "nameKey": "lg_name_n900012",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": []
+  },
+  {
+    "floor": 13,
+    "localNpcId": "n900013",
+    "nameKey": "lg_name_n900013",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 14,
+    "localNpcId": "n900014",
+    "nameKey": "lg_name_n900014",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 15,
+    "localNpcId": "n900015",
+    "nameKey": "lg_name_n900015",
+    "nameSource": "Gillian",
+    "rebornName": "Gillian",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 16,
+    "localNpcId": "n900016",
+    "nameKey": "lg_name_n900016",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 17,
+    "localNpcId": "n900017",
+    "nameKey": "lg_name_n900017",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 18,
+    "localNpcId": "n900018",
+    "nameKey": "lg_name_n900018",
+    "nameSource": "Rudobon",
+    "rebornName": "Rudobon",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 19,
+    "localNpcId": "n900019",
+    "nameKey": "lg_name_n900019",
+    "nameSource": "Cannibal Hollow",
+    "rebornName": "Cannibal Hollow",
+    "localSkills": [2, 7777, 8888],
+    "observedRebornSkills": [],
+    "observedEnemyEventSkills": [1]
+  },
+  {
+    "floor": 20,
+    "localNpcId": "n900020",
+    "nameKey": "lg_name_n900020",
+    "nameSource": "Aaroniero",
+    "rebornName": "Aaroniero",
+    "localSkills": [1816, 7777, 8888, 3810],
+    "observedRebornSkills": [1816, 3810],
+    "observedEnemyEventSkills": [1, 1816, 3810]
+  }
+]

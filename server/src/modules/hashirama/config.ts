@@ -16,7 +16,7 @@ export interface Leader {
   name: string
   /** Reborn pose image (`/assets/reborn/poses/<pose>.webp`). */
   pose: number
-  /** Our outfit standing in for Reborn's (avatars 170 and 188 are not in our data). */
+  /** Playable clothing id. */
   clothing: number
   build: BuildName
   nation: number
@@ -52,17 +52,15 @@ export const HASHIRAMA_PLACEHOLDERS = {
     madara: {
       name: 'Madara Uchiha',
       pose: 170,
-      // Like Scroll Dungeons' Madara: Itachi Uchiha's outfit (Uchiha, same passive 2082).
-      clothing: 49,
+      clothing: 170,
       build: 'Bloodluster',
       nation: FIRE,
       skills: [IZANAGI, AMATERASU],
     },
     hashirama: {
       name: 'Hashirama Senju',
-      // Our 2nd Hokage (Tobirama Senju, his brother) stands in: pose and outfit.
-      pose: 50,
-      clothing: 50,
+      pose: 188,
+      clothing: 188,
       build: 'Fortress',
       nation: FIRE,
       skills: [],
@@ -77,14 +75,13 @@ export const HASHIRAMA_PLACEHOLDERS = {
     /** Chance in percent of a chosen reward's slice, by its rarity; mystery slices share the rest. */
     choiceChance: { common: 20, uncommon: 16, rare: 12, epic: 8, legendary: 4 },
     /**
-     * Grand prize per side (Reborn: the side's outfit; 290170 Madara / 290188 Hashirama are not in
-     * our data): Itachi Uchiha +0 for Madara, 2nd Hokage +0 for Hashirama. A ninja without a side
-     * gets Hashirama's.
+     * Grand prize per side: that leader's own outfit (Reborn's 290170 / 290188).
+     * A ninja without a side gets Hashirama's.
      */
     grand: {
       madara: {
         id: 'grand-madara',
-        itemId: 'i290049',
+        itemId: 'i290170',
         kind: 'item',
         amount: 1,
         rarity: 'legendary',
@@ -92,7 +89,7 @@ export const HASHIRAMA_PLACEHOLDERS = {
       },
       hashirama: {
         id: 'grand-hashirama',
-        itemId: 'i290050',
+        itemId: 'i290188',
         kind: 'item',
         amount: 1,
         rarity: 'legendary',

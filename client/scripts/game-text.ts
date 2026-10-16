@@ -72,6 +72,16 @@ function addItem(id: string, seen = new Set<number>()) {
 for (const id of Object.keys(scenes)) keys.add(`lg_Scene_BackGround_${id}`)
 for (const sceneId of sliceScenes) for (const id of spawns(sceneId)) npcIds.add(id)
 
+// Demon City's entry NPCs need their names as well as the tower's opponents.
+for (const id of spawns(171)) npcIds.add(id)
+
+// Las Noches opponents do not spawn in world scenes.
+for (const floor of Object.values(
+  game<{ floors: Record<string, { npc: string }> }>('single-gate').floors,
+)) {
+  npcIds.add(floor.npc)
+}
+
 // Quests: village tutorials and every quest given out in a slice scene.
 const sliceTasks = Object.entries(tasks).filter(
   ([id, row]) => isTutorial(Number(id)) || sliceScenes.has(Number(row.AcceptNpcSceneID)),

@@ -83,7 +83,7 @@ describe('HashiramaWindow', () => {
     expect(existsSync(file('/assets/reborn/features/hashirama/background.webp'))).toBe(true)
     expect(existsSync(file('/assets/reborn/ui/buttons/topui/hashirama.webp'))).toBe(true)
     expect(existsSync(file('/assets/reborn/poses/170.webp'))).toBe(true)
-    expect(existsSync(file('/assets/reborn/poses/50.webp'))).toBe(true)
+    expect(existsSync(file('/assets/reborn/poses/188.webp'))).toBe(true)
   })
 
   it('formats the timer like Reborn', () => {

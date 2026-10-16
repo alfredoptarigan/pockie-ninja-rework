@@ -6,7 +6,12 @@ import { useMe } from '../lib/auth'
 // The game (and its text table) loads only for signed-in players.
 const GameApp = lazy(() => import('../game/GameApp'))
 
-const PATHS = { game: '/play', create: '/play/create', skills: '/play/skill-showcase' } as const
+const PATHS = {
+  game: '/play',
+  create: '/play/create',
+  skills: '/play/skill-showcase',
+  outfits: '/play/outfit-showcase',
+} as const
 
 export function Play({ view = 'game' }: { view?: keyof typeof PATHS }) {
   const me = useMe()
@@ -33,11 +38,7 @@ export function Play({ view = 'game' }: { view?: keyof typeof PATHS }) {
     return wasSignedIn ? (
       <Navigate to="/" replace />
     ) : (
-      <Navigate
-        to="/login"
-        replace
-        state={{ from: PATHS[view] }}
-      />
+      <Navigate to="/login" replace state={{ from: PATHS[view] }} />
     )
   }
 

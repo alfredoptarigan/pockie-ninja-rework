@@ -34,6 +34,8 @@ export const gameKeys = {
   inventory: ['game', 'inventory'] as const,
 }
 
+export const travelKey = ['game', 'travel'] as const
+
 /** The player's ninja, or null when the account has none yet. */
 export function useCharacter() {
   return useQuery({
@@ -122,9 +124,11 @@ export function useApplyResult() {
 function useGameAction<TInput, TResult extends { character: Character }>(
   request: (input: TInput) => Promise<TResult>,
   defer: (result: TResult) => boolean = () => false,
+  mutationKey?: readonly string[],
 ) {
   const apply = useApplyResult()
   return useMutation({
+    mutationKey,
     mutationFn: request,
     onSuccess: (result) => {
       if (!defer(result)) apply(result)
@@ -152,11 +156,14 @@ export function useCreateCharacter() {
 
 /** A scene id is a world map trip; scene exits pass `via: 'link'`, Village / Go out `home` / `out`. */
 export function useTravel() {
-  return useGameAction((input: number | TravelInput) =>
-    post<{ character: Character }>(
-      '/api/game/travel',
-      typeof input === 'number' ? { sceneId: input } : input,
-    ),
+  return useGameAction(
+    (input: number | TravelInput) =>
+      post<{ character: Character }>(
+        '/api/game/travel',
+        typeof input === 'number' ? { sceneId: input } : input,
+      ),
+    undefined,
+    travelKey,
   )
 }
 

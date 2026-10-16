@@ -50,11 +50,13 @@ export function SceneView({
   character,
   onNpc,
   onOpenBag = () => {},
+  onReady,
 }: {
   character: Character
   onNpc: (npc: SceneNpc) => void
   /** Opens the bag (from the no-weapon warning) pointing at the weapons. */
   onOpenBag?: (highlight: BagHighlight) => void
+  onReady?: (sceneId: number) => void
 }) {
   const scene = useScene()
   const fight = useFight()
@@ -139,9 +141,10 @@ export function SceneView({
 
   return (
     <>
-      {scene.data && pictureReady && (
+      {scene.data?.sceneId === character.sceneId && pictureReady && (
         <ScenePictureMount
           scene={scene.data}
+          onReady={() => onReady?.(character.sceneId)}
           exploreClip={exploreClip(explore.data?.spots)}
           onNpc={onNpc}
           onExplore={() => setExploring(true)}

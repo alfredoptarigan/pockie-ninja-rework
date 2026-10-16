@@ -1,6 +1,6 @@
 // Usage: pnpm db:seed-qa
 // Creates (or refreshes) the local QA account `qapockieninja` / `password123`: a level-90 ninja in
-// the Itachi Uchiha outfit with max currencies, skills, talents, bloodlines, pets, a +12 level-90
+// the Madara Uchiha outfit with max currencies, skills, talents, bloodlines, pets, a +12 level-90
 // gear set, a +20 wing and a bag of test items. Idempotent: the user and character rows are
 // updated in place; the kit rows of that one character (bag, skills, talents, bloodlines, pets)
 // are replaced on every run. Refuses to run in production.
@@ -60,9 +60,7 @@ const PASSWORD = 'password123'
 const NINJA_NAME = 'QA_Madara'
 const NATION = 0 // Fire
 const GENDER = 0 // male
-// There is no Madara outfit in the 2011 data (Madara is only a Reborn card); Itachi Uchiha
-// (avatar-clothing 49, male, weapon class 2 Sharp) is the closest wearable, rendered Uchiha outfit.
-const CLOTHING = 49
+const CLOTHING = 170
 const LEVEL = levels().role.maxlevel
 
 const CURRENCY = {

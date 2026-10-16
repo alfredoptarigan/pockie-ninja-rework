@@ -142,8 +142,7 @@ export function secretOverlay(
     },
   ]
   if (technique.concurrent && art.concurrentFrames) {
-    // ponytail: Reborn falls back to the avatar's animation offset when concurrentOffset is
-    // absent; the manifest does not carry it yet, so those layers sit at [0, 0].
+    // The exporter fills concurrentOffset from the avatar's animation offset, like Reborn.
     const [dx, dy] = technique.concurrentOffset ?? [0, 0]
     const source = technique.concurrentOrigin === 'source'
     const originX = source ? x : side === 'attackers' ? stageWidth : 0

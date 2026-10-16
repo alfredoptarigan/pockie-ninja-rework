@@ -39,10 +39,10 @@ const OUTFIT: Record<HashiramaSide, string> = {
   madara: 'Madara Uchiha outfit',
   hashirama: 'Hashirama Senju outfit',
 }
-/** Leaders' feet (Reborn `Oj`), their pose (our stand-in for Hashirama) and facing. */
+/** Leaders' feet (Reborn `Oj`), their pose and facing. */
 const LEADERS: Record<HashiramaSide, { x: number; y: number; pose: number; flip: boolean }> = {
   madara: { x: 395, y: 784, pose: 170, flip: true },
-  hashirama: { x: 1497, y: 811, pose: 50, flip: false },
+  hashirama: { x: 1497, y: 811, pose: 188, flip: false },
 }
 const opponent = (side: HashiramaSide): HashiramaSide =>
   side === 'madara' ? 'hashirama' : 'madara'

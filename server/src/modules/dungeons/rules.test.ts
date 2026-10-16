@@ -107,8 +107,8 @@ describe('bossFighter', () => {
   })
   it('uses its outfit skills and the scroll skills it drops', () => {
     const ids = bossFighter(boss('Madara Uchiha'), 45, gear).skills!.map((s) => s.id)
-    // Itachi Uchiha's outfit (ultimate 1949, 7777, 8888, passive 2082), Fire passive, scrolls.
-    expect(ids).toEqual(expect.arrayContaining([1949, 7777, 8888, 2082, 1831, 18043]))
+    // Madara's own outfit and ultimate, Fire passive, scrolls.
+    expect(ids).toEqual(expect.arrayContaining([2270, 7777, 8888, 2082, 1831, 18043]))
   })
   it('applies its build', () => {
     const tank = bossFighter({ ...boss('Itachi Uchiha'), build: 'Tank' }, 45, gear)

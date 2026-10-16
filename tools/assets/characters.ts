@@ -1,10 +1,11 @@
 // Outfits (player characters), the field monsters and the scene NPCs: motion sheets, the
 // action-to-motion tables of the original client and portraits.
-import { mkdirSync, readdirSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync } from 'node:fs'
 import { basename, dirname, join } from 'node:path'
 import sharp from 'sharp'
 import { mapLimit } from './ffdec.ts'
 import { exportMotions, type Motion, type MotionFile } from './motions.ts'
+import { exportRebornOutfit, REBORN_ONLY_CLOTHING } from './reborn-outfits.ts'
 import { assetUrl, paths } from './paths.ts'
 import {
   backupPath,
@@ -137,6 +138,10 @@ export async function exportOutfits() {
     return [id, { sex: outfit.sex, portrait, ...set }] as const
   })
   const { entries, skillMotions } = splitSkills(results)
+  const raw = process.env.REBORN_RAW_DIR ?? join(paths.root, 'data/reborn-raw')
+  for (const clothing of REBORN_ONLY_CLOTHING)
+    if (existsSync(join(raw, `assets/entities/avatars/${clothing}/avatar.json`)))
+      entries[String(clothing)] = await exportRebornOutfit(raw, clothing)
   return { outfits: entries, missing, unnamed, skillMotions }
 }
 

@@ -32,16 +32,25 @@ describe('Las Noches', () => {
       maxRuns: 3,
       options: { first: { floor: 1, stone: 1000 }, half: null },
       run: null,
+      preview: {
+        npcId: 'n900001',
+        nameKey: 'lg_name_n900001',
+        hp: 124,
+        minAttack: 20,
+        maxAttack: 25,
+        exp: 355,
+        skills: [],
+      },
     })
   })
 
-  it('starts on floor 1 for 1000 Stone with one free life', async () => {
+  it('starts on floor 1 for 1000 Stone with two lives', async () => {
     const response = await post('/start', { mode: 'first' })
     expect(response.statusCode).toBe(200)
     expect(response.json().lasNoches.run).toMatchObject({
       floor: 1,
       pot: 0,
-      lives: 1,
+      lives: 2,
       nextNpcId: 'n900001',
       lifePrice: 6,
     })
@@ -72,21 +81,30 @@ describe('Las Noches', () => {
   })
 
   it('a loss with a life left uses it and refills HP', async () => {
-    await setRun({ currentFloor: 170, potExp: 501, lives: 1 })
+    await setRun({ currentFloor: 170, potExp: 501, lives: 2 })
     await ninja.set({ hp: 5 })
     const body = (await post('/fight')).json()
     expect(body.won).toBe(false)
     expect(body.potPaid).toBeNull()
-    expect(body.lasNoches.run).toMatchObject({ floor: 170, pot: 501, lives: 0 })
+    expect(body.lasNoches.run).toMatchObject({ floor: 170, pot: 250, lives: 1 })
     expect(body.character.hp).toBe(body.character.maxHp)
   })
 
-  it('a loss without lives halves the pot, pays it and ends the run', async () => {
-    await setRun({ currentFloor: 170, potExp: 501, lives: 0, bestFloor: 3 })
+  it('the final loss wipes the bank, blocks fighting and waits for Claim', async () => {
+    await setRun({ currentFloor: 170, potExp: 501, lives: 1, bestFloor: 3 })
+    const before = await ninja.row()
     const body = (await post('/fight')).json()
-    expect(body).toMatchObject({ won: false, potPaid: 250 })
-    expect(body.lasNoches).toMatchObject({ run: null, runsLeft: 2, bestFloor: 3 })
-    expect(await gateRow()).toMatchObject({ currentFloor: null, potExp: 0, runsToday: 1 })
+    expect(body).toMatchObject({ won: false, potPaid: null })
+    expect(body.lasNoches).toMatchObject({
+      run: { floor: 170, lives: 0, pot: 0 },
+      runsLeft: 3,
+      bestFloor: 3,
+    })
+    expect((await ninja.row()).exp).toBe(before.exp)
+    expect(errorCode(await post('/fight'))).toBe('no_lives')
+    const claim = (await post('/withdraw')).json()
+    expect(claim).toMatchObject({ potPaid: 0, lasNoches: { run: null, runsLeft: 2 } })
+    expect(errorCode(await post('/withdraw'))).toBe('no_run')
   })
 
   it('buys a life for 6 + 2n Gold', async () => {

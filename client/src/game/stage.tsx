@@ -13,6 +13,10 @@ import type { CompanionLook } from './phaser/companions'
 import type { FighterLook } from './phaser/motion'
 import type { PictureActions } from './phaser/picture-scene'
 import { GameButton } from './skin'
+import type { StatusHover } from './phaser/battle-visuals'
+import { plainText } from './text'
+import { LoadingCurtain } from './AreaLoading'
+import { BattleSkills } from './BattleSkills'
 import type { Replay, SceneNpc, SceneView } from './types'
 
 type Stage = typeof import('./phaser')
@@ -42,7 +46,7 @@ function useStage<H extends { destroy: () => void }>(
     let cancelled = false
     let started: H | null = null
     loadStage()
-      .then((stage) => run(stage, parent))
+      .then((stage) => (cancelled ? null : run(stage, parent)))
       .then(
         (h) => {
           if (cancelled) return h?.destroy()
@@ -79,6 +83,7 @@ export function ScenePictureMount({
   onExplore,
   onBuilding,
   exploreClip,
+  onReady,
 }: {
   scene: SceneView
   onNpc: (npc: SceneNpc) => void
@@ -88,8 +93,9 @@ export function ScenePictureMount({
   onBuilding?: PictureActions['onBuilding']
   /** Scene element of the explore tree (GET /explore `clipName`). */
   exploreClip?: string
+  onReady?: () => void
 }) {
-  const latest = useLatest({ onNpc, onExplore, onBuilding })
+  const latest = useLatest({ onNpc, onExplore, onBuilding, onReady })
   const key = useMemo(() => ({ scene, exploreClip }), [scene, exploreClip])
   const { ref, failed } = useStage(key, (stage, parent) =>
     stage.mountPicture(
@@ -97,12 +103,17 @@ export function ScenePictureMount({
       scene,
       {
         onNpc: (npc) => latest.current.onNpc(npc),
+        onReady: () => latest.current.onReady?.(),
         onExplore: () => latest.current.onExplore?.(),
         onBuilding: (clip) => latest.current.onBuilding?.(clip),
       },
       exploreClip,
     ),
   )
+  const reportReady = useEffectEvent(() => onReady?.())
+  useEffect(() => {
+    if (!hasPicture(scene.sceneId) || failed) reportReady()
+  }, [scene.sceneId, failed])
   if (!hasPicture(scene.sceneId) || failed) return null
   // The canvas has no keyboard access; SceneView's action list offers the same actions.
   // It fills the stage (same 16:9 ratio as the 1920x1080 pictures).
@@ -140,7 +151,11 @@ export function BattleReplayMount({
   look?: CompanionLook
   onFinished: () => void
 }) {
+  const [statusHover, setStatusHover] = useState<StatusHover>(null)
+  const [panelFighters, setPanelFighters] = useState<(number | undefined)[]>([])
   const [speed, setSpeed] = useState<(typeof SPEEDS)[number]>(1)
+  /** Replay whose stage has drawn; Reborn's loading screen covers the frame until then. */
+  const [drawn, setDrawn] = useState<Replay | null>(null)
   const latest = useLatest(onFinished)
   const { ref, handle, failed } = useStage(replay, (stage, parent) =>
     stage.mountBattle(parent, {
@@ -151,6 +166,9 @@ export function BattleReplayMount({
       sceneId,
       weaponItemId,
       look,
+      onPanelFighters: setPanelFighters,
+      onStatusHover: setStatusHover,
+      onReady: () => setDrawn(replay),
       onFinished: () => latest.current(),
     }),
   )
@@ -171,6 +189,26 @@ export function BattleReplayMount({
           data-testid="battle-stage"
           className="aspect-[5/3] w-full overflow-hidden bg-black"
         />
+        {drawn !== replay && (
+          <LoadingCurtain label="Contacting Server..." className="absolute inset-0 z-10" />
+        )}
+        <BattleSkills replay={replay} fighters={panelFighters} />
+        {statusHover && (
+          <div
+            role="tooltip"
+            className="pointer-events-none absolute z-50 w-[min(250px,65vw)] rounded border-2 border-[#777] bg-black/95 px-2 py-1 font-game text-xs text-white"
+            style={{
+              left: `${Math.min(72, Math.max(0, statusHover.x / 10))}%`,
+              top: `${Math.max(5, statusHover.y / 6)}%`,
+              transform: 'translateY(-100%)',
+            }}
+          >
+            <p className="font-bold text-[#f0d060]">
+              {plainText(`lg_Buffer_${statusHover.buff}`, `Status ${statusHover.buff}`)}
+            </p>
+          </div>
+        )}
+
         <div className="absolute inset-x-2 bottom-2 flex justify-between gap-2">
           <GameButton small autoFocus disabled={!handle} onClick={() => handle?.skip()}>
             Skip

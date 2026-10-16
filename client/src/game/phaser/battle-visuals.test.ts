@@ -43,11 +43,17 @@ function fixture() {
           'setScale',
           'setDepth',
           'setVisible',
+          'setInteractive',
         ]) {
           sprite[method] = (...args: unknown[]) => {
             sprite[method.slice(3)] = args
+            if (method === 'setVisible') sprite.visible = args[0]
             return sprite
           }
+        }
+        sprite.on = (event: string, handler: unknown) => {
+          sprite[event] = handler
+          return sprite
         }
         sprites.push(sprite)
         return sprite
@@ -121,4 +127,26 @@ describe('battle cosmetic rendering', () => {
     expect(depthOf(effectAsset(11821)!.atlas!)).toBe(DEPTH.overlay)
     expect(depthOf(effectAsset(11865)!.atlas!)).toBe(DEPTH.overlayBack)
   })
+})
+
+it('lets active status effects be hovered and clears the tooltip when they disappear', () => {
+  const f = fixture()
+  f.timeline.bars = [
+    { at: 0, fighter: 0, hp: 100, mp: 0, buffs: [11802] },
+    { at: 500, fighter: 0, hp: 100, mp: 0, buffs: [] },
+  ]
+  const hovered: unknown[] = []
+  const visuals = new BattleVisuals(f.scene, f.replay, f.timeline, [], (status) =>
+    hovered.push(status),
+  )
+  visuals.preload()
+  visuals.render(0)
+  const effect = f.sprites.find((s) => s.key === effectAsset(11802)!.atlas)!
+  expect(effect.Interactive).toEqual([])
+  ;(effect.pointerover as (pointer: { x: number; y: number }) => void)({ x: 700, y: 300 })
+  expect(hovered.at(-1)).toEqual({ buff: 11802, x: 700, y: 300 })
+  visuals.render(500)
+  expect(hovered.at(-1)).toBeNull()
+  ;(effect.pointerover as (pointer: { x: number; y: number }) => void)({ x: 700, y: 300 })
+  expect(hovered.at(-1)).toBeNull()
 })

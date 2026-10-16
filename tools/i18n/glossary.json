@@ -17219,6 +17219,11 @@
   "source": "Sharp Claws [S]",
   "en": "Sharp Claws [S]"
  },
+ "lg_Skill_50057": {
+  "kind": "skill",
+  "source": "Sharpness [S]",
+  "en": "Sharpness [S]"
+ },
  "lg_Skill_50058": {
   "kind": "skill",
   "source": "Vision [S]",
@@ -17283,6 +17288,11 @@
   "kind": "skill",
   "source": "Frenzied Sharp Claws",
   "en": "Frenzied Sharp Claws"
+ },
+ "lg_Skill_50071": {
+  "kind": "skill",
+  "source": "Frenzied Sharpness",
+  "en": "Frenzied Sharpness"
  },
  "lg_Skill_50072": {
   "kind": "skill",
@@ -35953,6 +35963,571 @@
   "kind": "npc",
   "source": "Furious Nine-Tailed",
   "en": "Furious Nine-Tailed"
+ },
+ "lg_outfit_1": {
+  "kind": "item",
+  "source": "Ichigo Kurosaki",
+  "en": "Ichigo Kurosaki"
+ },
+ "lg_outfit_10": {
+  "kind": "item",
+  "source": "Grimmjow Jaegerjaquez",
+  "en": "Grimmjow Jaegerjaquez"
+ },
+ "lg_outfit_100": {
+  "kind": "item",
+  "source": "Kujou Nozomi",
+  "en": "Kujou Nozomi"
+ },
+ "lg_outfit_101": {
+  "kind": "item",
+  "source": "Lord Aizen",
+  "en": "Lord Aizen"
+ },
+ "lg_outfit_102": {
+  "kind": "item",
+  "source": "Kushina Uzumaki",
+  "en": "Kushina Uzumaki"
+ },
+ "lg_outfit_103": {
+  "kind": "item",
+  "source": "Kakuzu",
+  "en": "Kakuzu"
+ },
+ "lg_outfit_104": {
+  "kind": "item",
+  "source": "Hidan",
+  "en": "Hidan"
+ },
+ "lg_outfit_105": {
+  "kind": "item",
+  "source": "Deidara",
+  "en": "Deidara"
+ },
+ "lg_outfit_106": {
+  "kind": "item",
+  "source": "Pain",
+  "en": "Pain"
+ },
+ "lg_outfit_107": {
+  "kind": "item",
+  "source": "Kisame Hoshigaki",
+  "en": "Kisame Hoshigaki"
+ },
+ "lg_outfit_108": {
+  "kind": "item",
+  "source": "Konan",
+  "en": "Konan"
+ },
+ "lg_outfit_109": {
+  "kind": "item",
+  "source": "Sage Naruto",
+  "en": "Sage Naruto"
+ },
+ "lg_outfit_11": {
+  "kind": "item",
+  "source": "Toshiro Hitsugaya",
+  "en": "Toshiro Hitsugaya"
+ },
+ "lg_outfit_110": {
+  "kind": "item",
+  "source": "Sage Jiraiya",
+  "en": "Sage Jiraiya"
+ },
+ "lg_outfit_111": {
+  "kind": "item",
+  "source": "Hebi Sasuke",
+  "en": "Hebi Sasuke"
+ },
+ "lg_outfit_112": {
+  "kind": "item",
+  "source": "Sai",
+  "en": "Sai"
+ },
+ "lg_outfit_113": {
+  "kind": "item",
+  "source": "Suigetsu Hozuki",
+  "en": "Suigetsu Hozuki"
+ },
+ "lg_outfit_114": {
+  "kind": "item",
+  "source": "Karin",
+  "en": "Karin"
+ },
+ "lg_outfit_116": {
+  "kind": "item",
+  "source": "Kaguya Kimimaro",
+  "en": "Kaguya Kimimaro"
+ },
+ "lg_outfit_117": {
+  "kind": "item",
+  "source": "Nelliel Reborn",
+  "en": "Nelliel Reborn"
+ },
+ "lg_outfit_118": {
+  "kind": "item",
+  "source": "Uryu Ishida",
+  "en": "Uryu Ishida"
+ },
+ "lg_outfit_12": {
+  "kind": "item",
+  "source": "Shinji Hirako",
+  "en": "Shinji Hirako"
+ },
+ "lg_outfit_120": {
+  "kind": "item",
+  "source": "Black Leg Sanji",
+  "en": "Black Leg Sanji"
+ },
+ "lg_outfit_13": {
+  "kind": "item",
+  "source": "Hollowified Shinji",
+  "en": "Hollowified Shinji"
+ },
+ "lg_outfit_14": {
+  "kind": "item",
+  "source": "Renji Abarai",
+  "en": "Renji Abarai"
+ },
+ "lg_outfit_15": {
+  "kind": "item",
+  "source": "Gin Ichimaru",
+  "en": "Gin Ichimaru"
+ },
+ "lg_outfit_16": {
+  "kind": "item",
+  "source": "Choji Akimichi",
+  "en": "Choji Akimichi"
+ },
+ "lg_outfit_17": {
+  "kind": "item",
+  "source": "Kiba Inuzuka",
+  "en": "Kiba Inuzuka"
+ },
+ "lg_outfit_170": {
+  "kind": "item",
+  "source": "Madara Uchiha",
+  "en": "Madara Uchiha"
+ },
+ "lg_outfit_18": {
+  "kind": "item",
+  "source": "Shino Aburame",
+  "en": "Shino Aburame"
+ },
+ "lg_outfit_188": {
+  "kind": "item",
+  "source": "Hashirama Senju",
+  "en": "Hashirama Senju"
+ },
+ "lg_outfit_19": {
+  "kind": "item",
+  "source": "Shikamaru Nara",
+  "en": "Shikamaru Nara"
+ },
+ "lg_outfit_2": {
+  "kind": "item",
+  "source": "Witch",
+  "en": "Witch"
+ },
+ "lg_outfit_20": {
+  "kind": "item",
+  "source": "Asuma Sarutobi",
+  "en": "Asuma Sarutobi"
+ },
+ "lg_outfit_21": {
+  "kind": "item",
+  "source": "Rock Lee",
+  "en": "Rock Lee"
+ },
+ "lg_outfit_22": {
+  "kind": "item",
+  "source": "Neji Hyuga",
+  "en": "Neji Hyuga"
+ },
+ "lg_outfit_23": {
+  "kind": "item",
+  "source": "Sasori",
+  "en": "Sasori"
+ },
+ "lg_outfit_24": {
+  "kind": "item",
+  "source": "Yamato",
+  "en": "Yamato"
+ },
+ "lg_outfit_26": {
+  "kind": "item",
+  "source": "Hiyori Sarugaki",
+  "en": "Hiyori Sarugaki"
+ },
+ "lg_outfit_27": {
+  "kind": "item",
+  "source": "Yoruichi Shihouin",
+  "en": "Yoruichi Shihouin"
+ },
+ "lg_outfit_28": {
+  "kind": "item",
+  "source": "Soifon",
+  "en": "Soifon"
+ },
+ "lg_outfit_29": {
+  "kind": "item",
+  "source": "Halibel",
+  "en": "Halibel"
+ },
+ "lg_outfit_3": {
+  "kind": "item",
+  "source": "Ggio Vega",
+  "en": "Ggio Vega"
+ },
+ "lg_outfit_30": {
+  "kind": "item",
+  "source": "Mashiro Kuna",
+  "en": "Mashiro Kuna"
+ },
+ "lg_outfit_31": {
+  "kind": "item",
+  "source": "Kukaku Shiba",
+  "en": "Kukaku Shiba"
+ },
+ "lg_outfit_32": {
+  "kind": "item",
+  "source": "Nanao Ise",
+  "en": "Nanao Ise"
+ },
+ "lg_outfit_33": {
+  "kind": "item",
+  "source": "Momo Hinamori",
+  "en": "Momo Hinamori"
+ },
+ "lg_outfit_34": {
+  "kind": "item",
+  "source": "Rangiku Matsumoto",
+  "en": "Rangiku Matsumoto"
+ },
+ "lg_outfit_35": {
+  "kind": "item",
+  "source": "Orihime Inoue",
+  "en": "Orihime Inoue"
+ },
+ "lg_outfit_36": {
+  "kind": "item",
+  "source": "Kurenai Yuhi",
+  "en": "Kurenai Yuhi"
+ },
+ "lg_outfit_37": {
+  "kind": "item",
+  "source": "Hinata Hyuga",
+  "en": "Hinata Hyuga"
+ },
+ "lg_outfit_39": {
+  "kind": "item",
+  "source": "Shizune",
+  "en": "Shizune"
+ },
+ "lg_outfit_4": {
+  "kind": "item",
+  "source": "White Ichigo",
+  "en": "White Ichigo"
+ },
+ "lg_outfit_40": {
+  "kind": "item",
+  "source": "Alice",
+  "en": "Alice"
+ },
+ "lg_outfit_42": {
+  "kind": "item",
+  "source": "Phantom Lady",
+  "en": "Phantom Lady"
+ },
+ "lg_outfit_44": {
+  "kind": "item",
+  "source": "5th Mizukage",
+  "en": "5th Mizukage"
+ },
+ "lg_outfit_45": {
+  "kind": "item",
+  "source": "Naruto Uzumaki",
+  "en": "Naruto Uzumaki"
+ },
+ "lg_outfit_46": {
+  "kind": "item",
+  "source": "Gaara",
+  "en": "Gaara"
+ },
+ "lg_outfit_47": {
+  "kind": "item",
+  "source": "Kakashi Hatake",
+  "en": "Kakashi Hatake"
+ },
+ "lg_outfit_48": {
+  "kind": "item",
+  "source": "Sasuke Uchiha",
+  "en": "Sasuke Uchiha"
+ },
+ "lg_outfit_49": {
+  "kind": "item",
+  "source": "Itachi Uchiha",
+  "en": "Itachi Uchiha"
+ },
+ "lg_outfit_5": {
+  "kind": "item",
+  "source": "Hollowified Ichigo",
+  "en": "Hollowified Ichigo"
+ },
+ "lg_outfit_50": {
+  "kind": "item",
+  "source": "2nd Hokage",
+  "en": "2nd Hokage"
+ },
+ "lg_outfit_51": {
+  "kind": "item",
+  "source": "Orochimaru",
+  "en": "Orochimaru"
+ },
+ "lg_outfit_52": {
+  "kind": "item",
+  "source": "Zangetsu",
+  "en": "Zangetsu"
+ },
+ "lg_outfit_53": {
+  "kind": "item",
+  "source": "3rd Hokage",
+  "en": "3rd Hokage"
+ },
+ "lg_outfit_54": {
+  "kind": "item",
+  "source": "Released Grimmjow",
+  "en": "Released Grimmjow"
+ },
+ "lg_outfit_55": {
+  "kind": "item",
+  "source": "Sosuke Aizen",
+  "en": "Sosuke Aizen"
+ },
+ "lg_outfit_56": {
+  "kind": "item",
+  "source": "4th Hokage",
+  "en": "4th Hokage"
+ },
+ "lg_outfit_57": {
+  "kind": "item",
+  "source": "Jiraiya",
+  "en": "Jiraiya"
+ },
+ "lg_outfit_58": {
+  "kind": "item",
+  "source": "Sakura Haruno",
+  "en": "Sakura Haruno"
+ },
+ "lg_outfit_59": {
+  "kind": "item",
+  "source": "Test Character",
+  "en": "Test Character"
+ },
+ "lg_outfit_6": {
+  "kind": "item",
+  "source": "2nd Release Ulquiorra",
+  "en": "2nd Release Ulquiorra"
+ },
+ "lg_outfit_60": {
+  "kind": "item",
+  "source": "Ino Yamanaka",
+  "en": "Ino Yamanaka"
+ },
+ "lg_outfit_61": {
+  "kind": "item",
+  "source": "Anko Mitarashi",
+  "en": "Anko Mitarashi"
+ },
+ "lg_outfit_62": {
+  "kind": "item",
+  "source": "Temari",
+  "en": "Temari"
+ },
+ "lg_outfit_63": {
+  "kind": "item",
+  "source": "Tenten",
+  "en": "Tenten"
+ },
+ "lg_outfit_64": {
+  "kind": "item",
+  "source": "Haku",
+  "en": "Haku"
+ },
+ "lg_outfit_65": {
+  "kind": "item",
+  "source": "Nemu Kurotsuchi",
+  "en": "Nemu Kurotsuchi"
+ },
+ "lg_outfit_66": {
+  "kind": "item",
+  "source": "Yachiru Kusajishi",
+  "en": "Yachiru Kusajishi"
+ },
+ "lg_outfit_67": {
+  "kind": "item",
+  "source": "Isane Kotetsu",
+  "en": "Isane Kotetsu"
+ },
+ "lg_outfit_68": {
+  "kind": "item",
+  "source": "Test Character",
+  "en": "Test Character"
+ },
+ "lg_outfit_69": {
+  "kind": "item",
+  "source": "Lisa Yadomaru",
+  "en": "Lisa Yadomaru"
+ },
+ "lg_outfit_7": {
+  "kind": "item",
+  "source": "Released Ulquiorra",
+  "en": "Released Ulquiorra"
+ },
+ "lg_outfit_70": {
+  "kind": "item",
+  "source": "Tatsuki Arisawa",
+  "en": "Tatsuki Arisawa"
+ },
+ "lg_outfit_72": {
+  "kind": "item",
+  "source": "Tsunade",
+  "en": "Tsunade"
+ },
+ "lg_outfit_73": {
+  "kind": "item",
+  "source": "Test Character",
+  "en": "Test Character"
+ },
+ "lg_outfit_74": {
+  "kind": "item",
+  "source": "Rukia Kuchiki",
+  "en": "Rukia Kuchiki"
+ },
+ "lg_outfit_75": {
+  "kind": "item",
+  "source": "3rd Form Aizen",
+  "en": "3rd Form Aizen"
+ },
+ "lg_outfit_76": {
+  "kind": "item",
+  "source": "Zabuza Momochi",
+  "en": "Zabuza Momochi"
+ },
+ "lg_outfit_77": {
+  "kind": "item",
+  "source": "Aaroniero Arruruerie",
+  "en": "Aaroniero Arruruerie"
+ },
+ "lg_outfit_78": {
+  "kind": "item",
+  "source": "Szayelaporro Granz",
+  "en": "Szayelaporro Granz"
+ },
+ "lg_outfit_79": {
+  "kind": "item",
+  "source": "Zommari Rureaux",
+  "en": "Zommari Rureaux"
+ },
+ "lg_outfit_8": {
+  "kind": "item",
+  "source": "Ulquiorra Cifer",
+  "en": "Ulquiorra Cifer"
+ },
+ "lg_outfit_80": {
+  "kind": "item",
+  "source": "Noitra Gilga",
+  "en": "Noitra Gilga"
+ },
+ "lg_outfit_81": {
+  "kind": "item",
+  "source": "Baraggan Louisenbairn",
+  "en": "Baraggan Louisenbairn"
+ },
+ "lg_outfit_82": {
+  "kind": "item",
+  "source": "Coyote Stark",
+  "en": "Coyote Stark"
+ },
+ "lg_outfit_83": {
+  "kind": "item",
+  "source": "Yammy Llargo",
+  "en": "Yammy Llargo"
+ },
+ "lg_outfit_84": {
+  "kind": "item",
+  "source": "Byakuya Kuchiki",
+  "en": "Byakuya Kuchiki"
+ },
+ "lg_outfit_85": {
+  "kind": "item",
+  "source": "Nelliel",
+  "en": "Nelliel"
+ },
+ "lg_outfit_86": {
+  "kind": "item",
+  "source": "Little Meng",
+  "en": "Little Meng"
+ },
+ "lg_outfit_87": {
+  "kind": "item",
+  "source": "Little Jun",
+  "en": "Little Jun"
+ },
+ "lg_outfit_88": {
+  "kind": "item",
+  "source": "Christmas (Male)",
+  "en": "Christmas (Male)"
+ },
+ "lg_outfit_89": {
+  "kind": "item",
+  "source": "Christmas (Female)",
+  "en": "Christmas (Female)"
+ },
+ "lg_outfit_9": {
+  "kind": "item",
+  "source": "Love Aikawa",
+  "en": "Love Aikawa"
+ },
+ "lg_outfit_90": {
+  "kind": "item",
+  "source": "Retsu Unohana",
+  "en": "Retsu Unohana"
+ },
+ "lg_outfit_91": {
+  "kind": "item",
+  "source": "Sage Kabuto",
+  "en": "Sage Kabuto"
+ },
+ "lg_outfit_92": {
+  "kind": "item",
+  "source": "Hime Hinata",
+  "en": "Hime Hinata"
+ },
+ "lg_outfit_94": {
+  "kind": "item",
+  "source": "Shunsui Kyōraku",
+  "en": "Shunsui Kyōraku"
+ },
+ "lg_outfit_95": {
+  "kind": "item",
+  "source": "Kisuke Urahara",
+  "en": "Kisuke Urahara"
+ },
+ "lg_outfit_97": {
+  "kind": "item",
+  "source": "Guren",
+  "en": "Guren"
+ },
+ "lg_outfit_98": {
+  "kind": "item",
+  "source": "Kyuubi Naruto",
+  "en": "Kyuubi Naruto"
+ },
+ "lg_outfit_99": {
+  "kind": "item",
+  "source": "Zaraki Kenpachi",
+  "en": "Zaraki Kenpachi"
  },
  "lg_reborn_item_171001": {
   "kind": "item",

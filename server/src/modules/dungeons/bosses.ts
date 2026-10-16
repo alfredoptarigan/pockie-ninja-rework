@@ -1,7 +1,7 @@
 // Reborn's Scroll Dungeons boss pool (chunk 54 `y`/`b`, reborn-lazy-features.md "Scroll Dungeons")
 // mapped onto our fighter model. Reborn's boss stats and skills are server-side (unknown), so:
 // - Outfit: the boss's Reborn outfit (its pose id is the clothing id) when our data has it; the
-//   three our data lacks get the closest outfit we have (noted per row). The outfit gives the
+//   two our data lacks get the closest outfit we have (noted per row). The outfit gives the
 //   avatar stats, the ultimate, 7777/8888 and the passive, as for a player.
 // - Level: the challenger's, at least 45 (the unlock level).
 // - Gear: the challenger's own equipment bonuses, so the boss scales with the ninja facing it,
@@ -97,8 +97,7 @@ const POOL: Omit<Boss, 'index'>[] = [
     name: 'Madara Uchiha',
     build: 'Bloodluster',
     pose: 170,
-    // Reborn's 290170 is not in our data: Itachi Uchiha (Uchiha, same passive 2082).
-    clothing: 49,
+    clothing: 170,
     nation: FIRE,
     drops: [
       { name: 'Izanagi', skill: IZANAGI },

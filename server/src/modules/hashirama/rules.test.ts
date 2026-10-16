@@ -129,8 +129,8 @@ describe('the Fortune Wheel', () => {
     ])
     expect(slices.reduce((sum, s) => sum + s.chance, 0)).toBeCloseTo(100)
     expect(slices[0]!.chance).toBe(P.wheel.choiceChance.common)
-    expect(slices[4]!.reward!.itemId).toBe('i290049')
-    expect(segments([null, null, null], null, won)[4]!.reward!.itemId).toBe('i290050')
+    expect(slices[4]!.reward!.itemId).toBe('i290170')
+    expect(segments([null, null, null], null, won)[4]!.reward!.itemId).toBe('i290188')
     expect(segments([null, null, null], 'madara', { 'grand-madara': 1 })[4]!.chance).toBe(0)
   })
   it('lands by chance and picks a mystery reward evenly', () => {

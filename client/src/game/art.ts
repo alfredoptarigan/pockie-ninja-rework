@@ -34,6 +34,8 @@ export function useMonsterPortrait() {
   const motions = useMotions().data
   return (npcId: string) => {
     const key = motions?.monsters[npcId]
-    return key ? motions.mobs[key]?.portrait : undefined
+    return key
+      ? motions.mobs[key]?.portrait
+      : motions?.outfits[motions.people[npcId]?.clothing ?? -1]?.portrait
   }
 }

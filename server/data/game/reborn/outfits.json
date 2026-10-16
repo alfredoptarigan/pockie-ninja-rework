@@ -1787,6 +1787,38 @@
       ],
       "imprint": 2002,
       "weaponType": "Any"
+    },
+    "170": {
+      "rebornItem": 290170,
+      "value": 42,
+      "isv": [
+        290,
+        310,
+        200
+      ],
+      "bmv": [
+        700,
+        700,
+        1300
+      ],
+      "imprint": 2082,
+      "weaponType": "Any"
+    },
+    "188": {
+      "rebornItem": 290188,
+      "value": 42,
+      "isv": [
+        335,
+        125,
+        340
+      ],
+      "bmv": [
+        700,
+        1300,
+        700
+      ],
+      "imprint": 2082,
+      "weaponType": "Sharp"
     }
   }
 }

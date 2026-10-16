@@ -17,6 +17,8 @@ import { effectAsset, numberAssets, statusAsset } from './effects-map'
 import { numberGlyphs } from './numbers'
 import { HOME, latestAt, poseX, STAGE, type Timeline } from './timeline'
 
+export type StatusHover = { buff: number; x: number; y: number } | null
+
 /**
  * Ultimate art, global and pet effects go over every body, their back layers behind them; texts
  * and HUD stay on top. Body depths are pose start times in ms.
@@ -33,6 +35,9 @@ export function loadAtlas(scene: Phaser.Scene, asset: AtlasAsset | undefined) {
 }
 /** A small reusable sprite pool, sampled by replay clock (including rewind). */
 export class BattleVisuals {
+  private activeHoverSprites = new Set<Phaser.GameObjects.Sprite>()
+  private hovered?: Phaser.GameObjects.Sprite
+  private hoverBuffs = new Map<Phaser.GameObjects.Sprite, number>()
   private frameCache = new Map<string, string[]>()
   private loaded = new Set<string>()
   private sprites = new Map<string, Phaser.GameObjects.Sprite>()
@@ -41,6 +46,7 @@ export class BattleVisuals {
     private replay: VisualReplay,
     private timeline: Timeline,
     private looks: CompanionLook[] = [],
+    private onStatusHover?: (status: StatusHover) => void,
   ) {}
   preload() {
     const scene = this.scene
@@ -75,6 +81,32 @@ export class BattleVisuals {
       this.sprites.set(id, sprite)
     }
     return sprite
+  }
+  private hover(id: string, buff: number) {
+    const sprite = this.sprites.get(id)
+    if (!sprite || !this.onStatusHover) return
+    this.activeHoverSprites.add(sprite)
+    if (!this.hoverBuffs.has(sprite)) {
+      sprite.setInteractive()
+      const show = (pointer: Phaser.Input.Pointer) => {
+        if (!sprite.visible || !this.activeHoverSprites.has(sprite)) return
+        this.hovered = sprite
+        this.onStatusHover?.({ buff: this.hoverBuffs.get(sprite)!, x: pointer.x, y: pointer.y })
+      }
+      sprite
+        .on('pointerover', show)
+        .on('pointermove', show)
+        .on('pointerout', () => {
+          if (this.hovered !== sprite) return
+          this.hovered = undefined
+          this.onStatusHover?.(null)
+        })
+    }
+    if (this.hovered === sprite && this.hoverBuffs.get(sprite) !== buff) {
+      this.hovered = undefined
+      this.onStatusHover(null)
+    }
+    this.hoverBuffs.set(sprite, buff)
   }
   private draw(
     id: string,
@@ -117,6 +149,7 @@ export class BattleVisuals {
       .setVisible(true)
   }
   render(t: number) {
+    this.activeHoverSprites.clear()
     for (const sprite of this.sprites.values()) sprite.setVisible(false)
     this.replay.fighters.forEach((fighter, i) => {
       const pose = latestAt(this.timeline.poses[i] ?? [], t)
@@ -223,6 +256,7 @@ export class BattleVisuals {
           1000 / PET_FRAME_MS,
           !transition.removed,
         )
+        if (!transition.removed && !effect?.global) this.hover(`effect:${i}:${buff}`, buff)
       }
       ;(bar?.buffs ?? []).forEach((buff, k) => {
         const key = statusAsset.atlas
@@ -236,7 +270,12 @@ export class BattleVisuals {
           .setPosition(STAGE.width / 2 + outward * (80 + 25 * k), 70)
           .setDepth(DEPTH.ui + 102)
           .setVisible(true)
+        this.hover(`status:${i}:${k}`, buff)
       })
     })
+    if (this.hovered && (!this.hovered.visible || !this.activeHoverSprites.has(this.hovered))) {
+      this.hovered = undefined
+      this.onStatusHover?.(null)
+    }
   }
 }

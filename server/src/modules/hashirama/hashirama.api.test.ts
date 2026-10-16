@@ -153,7 +153,7 @@ describe('the Fortune Wheel', () => {
     const response = await post('/wheel/configure', { selection: pick })
     expect(response.json().wheel.selection).toEqual(pick)
     expect((await get<FortuneWheelView>('/wheel')).selection).toEqual(pick)
-    expect(response.json().wheel.segments[4].reward.itemId).toBe('i290049')
+    expect(response.json().wheel.segments[4].reward.itemId).toBe('i290170')
   })
   it('spends a free spin and delivers the unbound reward', async () => {
     await post('/wheel/configure', { selection: pick })

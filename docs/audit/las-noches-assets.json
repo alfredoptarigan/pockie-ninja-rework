@@ -1,0 +1,95 @@
+[
+  {
+    "source": "https://pockieninjareborn.com/assets/scenes/backgrounds/61.png",
+    "sourceSha256": "cfcffcfc71f61b7d862fe64c14b3b09658a142c0c356fee0cb82bf37b6530cc0",
+    "path": "client/public/assets/reborn/las-noches/background.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 144750,
+    "sha256": "bea5656d2fc09f9c768b007a1bf8e5cada4525429944f7c3389b8110798e69b0"
+  },
+  {
+    "source": "https://pockieninjareborn.com/assets/scenes/backgrounds/61_fight.png",
+    "sourceSha256": "660c5e6b43e11e1aba0d219bdb098ab6c36e7f8d294307c7da15fa66882eaf55",
+    "path": "client/public/assets/reborn/las-noches/fight-background.webp",
+    "width": 1000,
+    "height": 600,
+    "bytes": 49884,
+    "sha256": "708364e11cdb0f2ba81997df7b7a611cdc64601ca41ea527a0335ddd3dd4b168"
+  },
+  {
+    "source": "https://pockieninjareborn.com/assets/scenes/village/demon/bg.png",
+    "sourceSha256": "cbf78c55b8332f77b718e42ed25493459c552738505564cad061ac443de8ad3a",
+    "path": "client/public/assets/reborn/las-noches/demon-city.webp",
+    "width": 1921,
+    "height": 1081,
+    "bytes": 190524,
+    "sha256": "4f6b8c623742e91181c320edaa63ffbdc3c3a738a954b673dd36dacb11a0f20b"
+  },
+  {
+    "source": "https://pockieninjareborn.com/assets/scenes/village/demon/lasNoches.png",
+    "sourceSha256": "8162e30a4397c0c99db408f377afd3e60dba8abe7536affd630d9e5511a8add6",
+    "path": "client/public/assets/reborn/las-noches/entrance.webp",
+    "width": 360,
+    "height": 298,
+    "bytes": 22632,
+    "sha256": "91bb38aedef2e7a8c9c9d11d1bb1d7be61ece8ecc5e6747b5f1799f000785faf"
+  },
+  {
+    "source": "https://pockieninjareborn.com/assets/icons/monsters/32051.png",
+    "sourceSha256": "bc972fc1846df4fcb82ff52174f8c2985ce61c91bc7896be23dee4fdba9a5b50",
+    "path": "client/public/assets/reborn/las-noches/enemy-32051.webp",
+    "width": 82,
+    "height": 82,
+    "bytes": 2970,
+    "sha256": "aab44533e32b5213ee3a99eba064b5ff534d56227be0c2d5e0d44fd601e4df62"
+  },
+  {
+    "source": "https://pockieninjareborn.com/assets/ui/UILookAndFeel/Button/InventoryButton.png",
+    "sourceSha256": "cc9a2af02ba237a0957a3a5369c81217886d4fd55d21b4ac371c908a914a981b",
+    "path": "client/public/assets/reborn/las-noches/lobby-button.webp",
+    "width": 70,
+    "height": 19,
+    "bytes": 250,
+    "sha256": "5cd993bfe641b7c2c3dc874cc46e112c405f08edfa77208c37dd4bb2b99bd85b"
+  },
+  {
+    "source": "https://pockieninjareborn.com/assets/ui/UIResource/Common/BigBG1.png",
+    "sourceSha256": "db750101947addc6003595eeba2751f88a464e9b0ad8cf8710cadfa484d16483",
+    "path": "client/public/assets/reborn/las-noches/lobby-panel.webp",
+    "width": 100,
+    "height": 53,
+    "bytes": 504,
+    "sha256": "22474dae0054b6f9e5ffd9720a572feb51834ea1f3aa061fa08408d70d3cd6fa"
+  },
+  {
+    "source": "live DOM .ln-stage SVG",
+    "path": "client/public/assets/reborn/las-noches/progress-rift.svg",
+    "bytes": 1880,
+    "sha256": "5a05ecc7d1099f1cd085dfc711a1a361c539696f572929b9cfd38050e84802f1"
+  },
+  {
+    "source": "live DOM .ln-stage SVG",
+    "path": "client/public/assets/reborn/las-noches/record-crown.svg",
+    "bytes": 182,
+    "sha256": "862a20f462121f26cf268879c3707dd81727642f93d2310a8c188acc774c9435"
+  },
+  {
+    "source": "live DOM .ln-stage SVG",
+    "path": "client/public/assets/reborn/las-noches/enemy-frame.svg",
+    "bytes": 4565,
+    "sha256": "1dd0aefc9e1051b2a512fc49e29a9369dc366c6d4a1d373c7faf53eef08b68c4"
+  },
+  {
+    "source": "live DOM .ln-stage SVG",
+    "path": "client/public/assets/reborn/las-noches/divider.svg",
+    "bytes": 889,
+    "sha256": "bb33c76886c3cae741ebfbf810bd75d70a83852384d30d31ee58071119e5fd3b"
+  },
+  {
+    "source": "live DOM .ln-stage SVG",
+    "path": "client/public/assets/reborn/las-noches/life-mask.svg",
+    "bytes": 866,
+    "sha256": "3b552d5e4599370885618f5181f2c784be8d812c334235b500b296e5b1836302"
+  }
+]

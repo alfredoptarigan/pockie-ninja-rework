@@ -14,6 +14,7 @@ import {
 } from '../../../../shared/src/schemas/dungeons'
 import { api } from '../../lib/api'
 import { errorMessage, useApplyResult } from '../api'
+import { AreaLoading } from '../AreaLoading'
 import { useNow } from '../events/timer'
 import { ResultWindow } from '../FightSummary'
 import { Dialog, GameButton, Notice } from '../skin'
@@ -51,6 +52,15 @@ export function DungeonsWindow({
   const queryClient = useQueryClient()
   const apply = useApplyResult()
   const view = useQuery({ queryKey: dungeonsKey, queryFn: () => api<DungeonsView>(PATH) })
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(() => new Set())
+  const imageReady = (url: string) => setLoadedImages((loaded) => new Set(loaded).add(url))
+  const loading =
+    view.isPending ||
+    (!!view.data &&
+      [
+        BACKGROUND,
+        ...view.data.activeBosses.map((index) => poseUrl(view.data!.bosses[index]!.pose)),
+      ].some((url) => !loadedImages.has(url)))
   const [info, setInfo] = useState(false)
   const [playing, setPlaying] = useState<Fight | null>(null)
   const [result, setResult] = useState<Fight | null>(null)
@@ -86,32 +96,45 @@ export function DungeonsWindow({
           style={{
             width: WIDTH,
             height: HEIGHT,
-            background: `url(${BACKGROUND}) center / cover`,
             textShadow: TEXT_SHADOW,
           }}
         >
-          {view.isPending && <p className="p-4">Loading the dungeons...</p>}
-          {view.error && <Notice tone="error">{errorMessage(view.error)}</Notice>}
-          {data && (
-            <>
-              <Timers view={data} />
-              <GameButton
-                className="!absolute top-[8px] right-[16px] h-[22px] w-[50px] !min-w-0 !px-0"
-                onClick={() => setInfo(true)}
-              >
-                Info
-              </GameButton>
-              <Bosses view={data} busy={fight.isPending} onFight={(index) => fight.mutate(index)} />
-              {fight.error && (
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
-                  <Notice tone="error">{errorMessage(fight.error)}</Notice>
-                </div>
-              )}
-              {info && (
-                <InfoOverlay maxAttempts={data.maxAttempts} onClose={() => setInfo(false)} />
-              )}
-            </>
-          )}
+          <img
+            src={BACKGROUND}
+            alt=""
+            className="absolute inset-0 size-full object-cover"
+            onLoad={() => imageReady(BACKGROUND)}
+            onError={() => imageReady(BACKGROUND)}
+          />
+          <div inert={loading} className="relative size-full">
+            {view.error && <Notice tone="error">{errorMessage(view.error)}</Notice>}
+            {data && (
+              <>
+                <Timers view={data} />
+                <GameButton
+                  className="!absolute top-[8px] right-[16px] h-[22px] w-[50px] !min-w-0 !px-0"
+                  onClick={() => setInfo(true)}
+                >
+                  Info
+                </GameButton>
+                <Bosses
+                  view={data}
+                  busy={fight.isPending}
+                  onFight={(index) => fight.mutate(index)}
+                  onImageReady={imageReady}
+                />
+                {fight.error && (
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                    <Notice tone="error">{errorMessage(fight.error)}</Notice>
+                  </div>
+                )}
+                {info && (
+                  <InfoOverlay maxAttempts={data.maxAttempts} onClose={() => setInfo(false)} />
+                )}
+              </>
+            )}
+          </div>
+          {loading && <AreaLoading />}
         </div>
       </Dialog>
       {result && <FightResult result={result} onClose={() => setResult(null)} />}
@@ -149,10 +172,12 @@ function Bosses({
   view,
   busy,
   onFight,
+  onImageReady,
 }: {
   view: DungeonsView
   busy: boolean
   onFight: (index: number) => void
+  onImageReady: (url: string) => void
 }) {
   const [hovered, setHovered] = useState<number | null>(null)
   const step = WIDTH / (view.activeBosses.length + 1)
@@ -201,6 +226,8 @@ function Bosses({
               onBlur={() => setHovered(null)}
             >
               <img
+                onLoad={() => onImageReady(poseUrl(boss.pose))}
+                onError={() => onImageReady(poseUrl(boss.pose))}
                 src={poseUrl(boss.pose)}
                 alt=""
                 className="h-full object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)]"

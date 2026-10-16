@@ -49,9 +49,13 @@ export function plainText(key: string, fallback = '', args: (string | number)[] 
     .trim()
 }
 
-/** Outfit names are stored with their tier ("Ggio Vega +0"); creation shows the bare name. */
+/**
+ * An outfit's bare name by clothing id: Reborn's (lg_outfit_<clothing>), else 2011's +0 item name
+ * (lg_avatar<n> is keyed by AvatarID, which only equals the clothing up to 99).
+ */
 export function outfitName(clothing: number) {
-  return plainText(`lg_avatar${clothing}`, `Outfit ${clothing}`).replace(/\s*\+0$/, '')
+  const fallback = clothing < 100 ? plainText(`lg_avatar${clothing}`).replace(/\s*\+0$/, '') : ''
+  return plainText(`lg_outfit_${clothing}`) || fallback || `Outfit ${clothing}`
 }
 
 interface Span {

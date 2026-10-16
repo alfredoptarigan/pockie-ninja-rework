@@ -3,6 +3,7 @@
 import { gameScenes } from '../../generated/game-assets'
 import { plainText } from '../text'
 import type { SceneView } from '../types'
+import type { StatusHover } from './battle-visuals'
 import { startBattle, type BattleHandle } from './battle-scene'
 import { fighterLooks, lookArt, loadSkillMotions, shownOutfit, type FighterLook } from './motion'
 import { pictureLayout } from './picture-layout'
@@ -43,6 +44,9 @@ export interface BattleOptions {
   sceneId: number
   /** Item id of the player's equipped weapon, drawn over the body (none: bare hands). */
   weaponItemId?: string
+  onStatusHover?: (status: StatusHover) => void
+  onPanelFighters?: (fighters: (number | undefined)[]) => void
+  onReady?: () => void
   onFinished: () => void
 }
 
@@ -93,6 +97,9 @@ export async function mountBattle(
     names: replay.fighters.map((f) => plainText(f.name, f.name)),
     background: gameScenes[String(sceneId)]?.fightBackground,
     buffName,
+    onPanelFighters: options.onPanelFighters,
+    onReady: options.onReady,
+    onStatusHover: options.onStatusHover,
     onFinished,
   })
 }

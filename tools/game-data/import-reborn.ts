@@ -399,6 +399,8 @@ function buildItems(items: Record<string, JsonItem>) {
   )
 }
 
+/** Reborn-only outfits we ship (server/src/game/madara.ts): Madara, Hashirama. */
+const REBORN_ONLY = [170, 188]
 /** Reborn's outfit imprint skills: 2000-2092, element * 10 + tier. */
 const IMPRINT = /^20\d\d$/
 const OUTFIT_TIERS_FROM = 1 // AvatarLevel of an outfit's +0 row
@@ -417,7 +419,11 @@ export function buildOutfits(config: ServerConfig, items: Record<string, Record<
   const hundredths = (values: number[]) => values.map((n) => Math.round(n * 100))
   const outfits = Object.entries(config.avatars).flatMap(([id, avatar]) => {
     const clothing = Number(id) - 290000
-    if (avatar.innate.avatar !== clothing || !ours.has(clothing)) return []
+    if (
+      avatar.innate.avatar !== clothing ||
+      (!ours.has(clothing) && !REBORN_ONLY.includes(clothing))
+    )
+      return []
     const imprints = avatar.innate.skills.filter((skill) => IMPRINT.test(String(skill)))
     // Three value-0 outfits (59, 68, 73) have no imprint.
     if (imprints.length > 1) throw new Error(`Reborn outfit ${id} has ${imprints.length} imprints`)
@@ -593,6 +599,8 @@ function buildNames(
     skillIds: string[]
     items: string[]
     events: ReturnType<typeof buildEvents>
+    /** Our clothing ids Reborn ships as outfit 290000 + clothing. */
+    outfits: string[]
   },
   label: (key: string) => string,
 ): Name[] {
@@ -622,6 +630,12 @@ function buildNames(
       key: `lg_Skill_${id}`,
       kind: 'skill' as const,
       name: label(`skill__${id}--name`),
+    })),
+    // By clothing: 2011's lg_avatar<n> is keyed by AvatarID, which is not the clothing past 99.
+    ...parts.outfits.map((clothing) => ({
+      key: `lg_outfit_${clothing}`,
+      kind: 'item' as const,
+      name: label(`item__${290000 + Number(clothing)}--name`),
     })),
     ...parts.items.map((id) => ({
       key: `lg_reborn_item_${id.slice(1)}`,
@@ -679,6 +693,7 @@ export function buildReborn(raw: RawInputs) {
       skillIds: Object.keys(scroll.rows),
       items: Object.keys(items),
       events,
+      outfits: Object.keys(outfits.outfits),
     },
     label,
   ).concat(m6.names)

@@ -13,6 +13,7 @@ import {
   marketCategories,
   marketCategoryKey,
   npc,
+  npcSkillIds,
   rankings,
   rebornBloodlines,
   rebornCards,
@@ -294,5 +295,18 @@ describe('Reborn overlay (M6 task 2)', () => {
     const lines = rebornWingLines()
     const { wings, auras } = rebornWings()
     for (const wing of [...wings, ...auras]) expect(lines[String(wing.line)]).toBeDefined()
+  })
+})
+
+// Live evidence: docs/audit/las-noches-monsters-re.md.
+describe('Las Noches observed skills', () => {
+  it('uses normal attacks on floors 1–19 and preserves Aaroniero’s two moves', () => {
+    for (let floor = 1; floor < 20; floor++) {
+      expect(npcSkillIds(`n${900000 + floor}`)?.filter((id) => ![7777, 8888].includes(id))).toEqual(
+        [],
+      )
+    }
+    expect(npcSkillIds('n900020')?.filter((id) => ![7777, 8888].includes(id))).toEqual([1816, 3810])
+    expect(npcSkillIds('n900020')).toEqual(expect.arrayContaining([7777, 8888]))
   })
 })

@@ -346,6 +346,8 @@ async function main() {
       `avatar-${i + 1}`,
       `icons/items/avatars/${i + 1}.png`,
     ]),
+    ['item-icon', 'avatar-170', 'icons/items/avatars/170.png'],
+    ['item-icon', 'avatar-188', 'icons/items/avatars/188.png'],
     // World map (WorldMapScene): the grey painting, one coloured piece per place, the pulsing
     // "you are here" dot and the close button states.
     ...[

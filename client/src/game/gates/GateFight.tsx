@@ -9,9 +9,11 @@ export function GateFight({
   result,
   character,
   onDone,
+  sceneId,
 }: {
   result: { replay: Replay; npcIds: string[]; character: Character }
   character: Character
+  sceneId?: number
   onDone: () => void
 }) {
   const apply = useApplyResult()
@@ -20,7 +22,7 @@ export function GateFight({
       replay={result.replay}
       clothing={lookOf(character)}
       monsterIds={result.npcIds}
-      sceneId={character.sceneId}
+      sceneId={sceneId ?? character.sceneId}
       onFinished={() => {
         apply(result)
         onDone()

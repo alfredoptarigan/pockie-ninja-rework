@@ -4,7 +4,7 @@ import Phaser from 'phaser'
 import type { MotionSheet } from '../../generated/game-assets'
 import type { WeaponLayer } from '../../generated/game-extra'
 import type { VisualReplay as Replay, CompanionLook } from './companions'
-import { BattleVisuals, DEPTH } from './battle-visuals'
+import { BattleVisuals, DEPTH, type StatusHover } from './battle-visuals'
 import { petAsset, visualLook } from './companions'
 import { numberAssets } from './effects-map'
 import {
@@ -47,6 +47,10 @@ export interface BattleSetup {
   background?: string
   /** Name shown with a buff id in the status line. */
   buffName: (buffId: number) => string | undefined
+  onStatusHover?: (status: StatusHover) => void
+  onPanelFighters?: (fighters: (number | undefined)[]) => void
+  /** The art has loaded and the stage is drawn: the loading screen can lift. */
+  onReady?: () => void
   onFinished: () => void
 }
 
@@ -73,7 +77,7 @@ const TEXT_STYLE: Record<TextKind, { color: string; size: number }> = {
   skill: { color: '#fff3c4', size: 26 },
   info: { color: '#e8f4ff', size: 24 },
 }
-const HUD = { margin: 12, portrait: 68, vsGap: 24, hpY: 28, hpH: 18, mpY: 48, mpH: 7 }
+const HUD = { margin: 6, portrait: 72, vsGap: 24, hpY: 28, hpH: 14, mpY: 45, mpH: 7 }
 /** Reborn's fight panel (fight__stat-row: 12 px #f5f5f5, Hp crimson, Chakra skyblue). */
 const PANEL = { y: 145, width: 165, text: '#f5f5f5', red: '#dc143c', blue: '#87ceeb' }
 const PANEL_ART = {
@@ -95,6 +99,7 @@ function textSlots(texts: FloatText[]) {
 }
 
 class BattleScene extends Phaser.Scene {
+  private panelFighters = ''
   private clock = 0
   private speed = 1
   private finished = false
@@ -118,7 +123,13 @@ class BattleScene extends Phaser.Scene {
 
   constructor(private readonly setup: BattleSetup) {
     super('battle')
-    this.visuals = new BattleVisuals(this, setup.replay, setup.timeline, setup.looks)
+    this.visuals = new BattleVisuals(
+      this,
+      setup.replay,
+      setup.timeline,
+      setup.looks,
+      setup.onStatusHover,
+    )
     this.slots = textSlots(setup.timeline.texts)
     this.skills = setup.replay.fighters.map((_, i) => panelSkills(setup.replay, i))
   }
@@ -170,6 +181,7 @@ class BattleScene extends Phaser.Scene {
 
   create() {
     const { background, replay } = this.setup
+    this.setup.onReady?.()
     if (background && this.textures.exists(background)) {
       this.add
         .image(0, 0, background)
@@ -424,6 +436,12 @@ class BattleScene extends Phaser.Scene {
   /** Portraits in the top corners, long HP bars meeting at the VS emblem, MP bars below. */
   private renderHud(t: number) {
     const { replay, timeline, art } = this.setup
+    const fighters = [this.onStage('attackers', t), this.onStage('defenders', t)]
+    const panelKey = fighters.join(':')
+    if (panelKey !== this.panelFighters) {
+      this.panelFighters = panelKey
+      this.setup.onPanelFighters?.(fighters)
+    }
     const g = this.hud
     g.clear()
     let line = 0
@@ -433,20 +451,14 @@ class BattleScene extends Phaser.Scene {
       const fighter = this.onStage(side, t)
       const left = side === 'attackers'
       const portraitX = left ? HUD.margin : STAGE.width - HUD.margin - HUD.portrait
-      g.fillStyle(0x080b08, 0.9).fillRoundedRect(
-        portraitX,
-        HUD.margin,
-        HUD.portrait,
-        HUD.portrait,
-        8,
-      )
-      g.lineStyle(2, 0x272d27).strokeRoundedRect(
-        portraitX,
-        HUD.margin,
-        HUD.portrait,
-        HUD.portrait,
-        8,
-      )
+      const portraitFrame = [
+        new Phaser.Math.Vector2(portraitX + (left ? 0 : 10), HUD.hpY),
+        new Phaser.Math.Vector2(portraitX + HUD.portrait - (left ? 10 : 0), HUD.hpY),
+        new Phaser.Math.Vector2(portraitX + HUD.portrait, HUD.hpY + HUD.portrait - 6),
+        new Phaser.Math.Vector2(portraitX, HUD.hpY + HUD.portrait - 6),
+      ]
+      g.fillStyle(0x050505, 0.98).fillPoints(portraitFrame, true)
+      g.lineStyle(1, 0x45463b).strokePoints(portraitFrame, true)
       const portrait = this.portraits[side]
       if (fighter === undefined) {
         portrait?.setVisible(false)
@@ -457,7 +469,7 @@ class BattleScene extends Phaser.Scene {
         portrait
           .setTexture(key)
           .setScale((HUD.portrait - 8) / Math.max(portrait.width, portrait.height))
-          .setPosition(portraitX + HUD.portrait / 2, HUD.margin + HUD.portrait / 2)
+          .setPosition(portraitX + HUD.portrait / 2, HUD.hpY + HUD.portrait / 2 - 3)
           .setVisible(true)
       } else portrait?.setVisible(false)
 
@@ -481,13 +493,25 @@ class BattleScene extends Phaser.Scene {
       ]
       const frame = bevel(barX, HUD.hpY - 2, barW, HUD.hpH + 4)
       g.fillStyle(0x121712, 0.95).fillPoints(frame, true)
-      g.fillGradientStyle(0xffc022, 0xc92b0b, 0xffa113, 0xa62208)
+      g.fillGradientStyle(
+        left ? 0xffc022 : 0xc92b0b,
+        left ? 0xc92b0b : 0xffc022,
+        left ? 0xffa113 : 0xa62208,
+        left ? 0xa62208 : 0xffa113,
+      )
       if (hpW > 0) g.fillPoints(bevel(left ? barX : barX + barW - hpW, HUD.hpY, hpW, HUD.hpH), true)
       g.lineStyle(3, 0x5a655b).strokePoints(frame, true)
       if (f.maxMp) {
-        const mpW = fill(mp / f.maxMp)
-        g.fillStyle(0x0e1a2a, 0.9).fillRect(barX, HUD.mpY, barW, HUD.mpH)
-        g.fillStyle(0x3a9ae8).fillRect(left ? barX : barX + barW - mpW, HUD.mpY, mpW, HUD.mpH)
+        const mpW = (barW - 16) * Math.min(1, Math.max(0, mp / f.maxMp))
+        g.fillStyle(0x13140e, 0.95).fillPoints(
+          bevel(barX + (left ? 16 : 0), HUD.mpY, barW - 16, HUD.mpH + 3),
+          true,
+        )
+        if (mpW > 0)
+          g.fillGradientStyle(0x126be8, 0x00d5f5, 0x126be8, 0x00b5e5).fillPoints(
+            bevel(left ? barX + barW - mpW : barX, HUD.mpY, mpW, HUD.mpH),
+            true,
+          )
       }
       line = this.renderPanel(line, side, fighter, hp, mp)
     }
@@ -621,7 +645,7 @@ class BattleScene extends Phaser.Scene {
       .text(x, y, 'VS', {
         ...LABEL_STYLE,
         fontStyle: 'bold italic',
-        fontSize: '30px',
+        fontSize: '38px',
         color: '#ffd23c',
         strokeThickness: 6,
       })

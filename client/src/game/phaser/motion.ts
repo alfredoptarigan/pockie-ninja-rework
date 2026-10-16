@@ -57,7 +57,12 @@ export function outfitArt(clothing: number): FighterArt | undefined {
 export function monsterArt(npcId: string): FighterArt | undefined {
   const key = gameMotions.monsters[npcId]
   const set = key ? gameMotions.mobs[key] : undefined
-  return set && key ? { set, skills: { group: 'mobs', key } } : undefined
+  const clothing = gameMotions.people[npcId]?.clothing
+  return set && key
+    ? { set, skills: { group: 'mobs', key } }
+    : clothing === undefined
+      ? undefined
+      : outfitArt(clothing)
 }
 
 /** How a fighter is drawn: an outfit (players, the Referee) or monster art by npc id. */

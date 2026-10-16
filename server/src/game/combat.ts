@@ -19,6 +19,7 @@ import { characters } from '../db/schema.js'
 import {
   avatarSkillIds,
   avatarStats,
+  outfitOfAvatar,
   dropItems,
   dropLib,
   item,
@@ -224,7 +225,8 @@ export function playerFighterFrom(
     name: character.name,
     hp: Math.min(character.hp, stats.maxHp),
     mp: Math.min(character.mp, stats.maxMp),
-    avatarLevel: avatarLevelFromAvatarId(character.avatarId),
+    avatarLevel:
+      outfitOfAvatar(character.avatarId)?.tier ?? avatarLevelFromAvatarId(character.avatarId),
     ...secretThresholdOf(equipped),
     // The engine only reads type 1 and 2; passives (type 3) stay listed, like the PassiveSkill rec.
     skills,

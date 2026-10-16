@@ -32,8 +32,8 @@ describe('startOptions (SingleGateSystem.OnCustomEntry)', () => {
 describe('a Las Noches run', () => {
   const run = startLasNoches('first', 0, config)
 
-  it('starts with one free life and an empty pot', () => {
-    expect(run).toEqual({ floor: 1, pot: 0, lives: 1, livesBought: 0 })
+  it('starts with two lives and an empty pot', () => {
+    expect(run).toEqual({ floor: 1, pot: 0, lives: 2, livesBought: 0 })
     expect(() => startLasNoches('half', 1, config)).toThrow()
   })
 
@@ -50,16 +50,16 @@ describe('a Las Noches run', () => {
     expect(outcome.best).toBe(170)
   })
 
-  it('a loss uses a life and keeps the pot', () => {
+  it('a loss uses a life and halves the pot', () => {
     expect(loseFloor({ ...run, pot: 501 })).toEqual({
-      run: { ...run, pot: 501, lives: 0 },
+      run: { ...run, pot: 250, lives: 1 },
       ended: false,
     })
   })
 
-  it('a loss without lives halves the pot and ends the run', () => {
-    expect(loseFloor({ ...run, pot: 501, lives: 0 })).toEqual({
-      run: { ...run, pot: 250, lives: 0 },
+  it('the last loss wipes the pot and ends combat', () => {
+    expect(loseFloor({ ...run, pot: 501, lives: 1 })).toEqual({
+      run: { ...run, pot: 0, lives: 0 },
       ended: true,
     })
   })

@@ -48,7 +48,7 @@ export const SLOT_STEP = 38
  */
 const skillIcon = (id: number) =>
   scrollSkillIcon(id >= 2801 && id <= 2810 ? id - 1 : id === 3809 ? 1809 : id)
-const skillName = (id: number) => plainText(`lg_Skill_${id}`, '') || scrollSkillName(id)
+export const skillName = (id: number) => plainText(`lg_Skill_${id}`, '') || scrollSkillName(id)
 /** The text the original client shows (the "_Fake" one leads with the damage), if any. */
 const descriptionKey = (id: number) =>
   rawText(`lg_SkillDes_${id}_Fake`) ? `lg_SkillDes_${id}_Fake` : `lg_SkillDes_${id}`
@@ -392,7 +392,7 @@ export function SkillCell({
         >
           <p className="text-sm font-bold text-[#f0d060]">{name}</p>
           <p className="text-[#8e8e8e]">{learned ? `Level ${learned}` : 'Not learned'}</p>
-          <GameText k={descriptionKey(id)} tone="dark" />
+          <SkillDescription id={id} />
         </div>
       )}
     </div>
@@ -467,5 +467,18 @@ function InfoPanel({ data, character }: { data: SkillView; character: Character 
         {notice && <Notice tone={notice.tone}>{notice.text}</Notice>}
       </section>
     </>
+  )
+}
+
+/** Shared rich description for the skill board and battle hover cards. */
+export function SkillDescription({ id }: { id: number }) {
+  // shortcut: level-specific chakra costs are unavailable here; fill them when replay data carries them.
+  return (
+    <GameText
+      k={descriptionKey(id)}
+      args={['—']}
+      tone="dark"
+      fallback="No skill description available."
+    />
   )
 }

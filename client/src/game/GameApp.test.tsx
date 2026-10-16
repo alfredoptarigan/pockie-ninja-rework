@@ -11,7 +11,7 @@ import {
   villageScene,
 } from '../test/game'
 import { createFakeSocket, type FakeSocket } from '../test/socket'
-import { json, mockApi, renderWithProviders, requestBody } from '../test/utils'
+import { apiError, json, mockApi, renderWithProviders, requestBody } from '../test/utils'
 import GameApp from './GameApp'
 import { mountPicture } from './phaser'
 import type { Quest } from './types'
@@ -70,6 +70,21 @@ const emptyKennel = {
 }
 
 describe('GameScreen', () => {
+  it('keeps the loading curtain until the destination picture is ready', async () => {
+    let ready: (() => void) | undefined
+    vi.mocked(mountPicture).mockImplementationOnce((_parent, _scene, actions) => {
+      ready = actions.onReady
+      return { destroy: vi.fn() }
+    })
+    renderGame()
+    await waitFor(() => expect(ready).toBeTypeOf('function'))
+    expect(screen.getByRole('status', { name: 'Loading area' })).toBeVisible()
+    expect(screen.getByRole('main', { name: 'Game' }).parentElement).toHaveAttribute('inert')
+    act(() => ready!())
+    expect(screen.queryByRole('status', { name: 'Loading area' })).not.toBeInTheDocument()
+    expect(screen.getByRole('main', { name: 'Game' }).parentElement).not.toHaveAttribute('inert')
+  })
+
   it('opens the Skills window from the HUD and closes it', async () => {
     renderGame({
       'GET /api/game/skills': () =>
@@ -315,6 +330,42 @@ describe('GameScreen', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Village' }))
     // SceneSystem.GoHome: the server picks the scene's ToScene or the home village.
     expect(requestBody(fetchMock, 'POST /api/game/travel')).toEqual({ via: 'home' })
+  })
+
+  it('shows loading during travel and waits for the new scene before revealing it', async () => {
+    let finishTravel!: (response: Response) => void
+    let finishScene!: (response: Response) => void
+    let moved = false
+    renderGame({
+      'POST /api/game/travel': () =>
+        new Promise<Response>((resolve) => {
+          finishTravel = resolve
+        }),
+      'GET /api/game/scene': () =>
+        moved
+          ? new Promise<Response>((resolve) => {
+              finishScene = resolve
+            })
+          : json(villageScene),
+    })
+    await waitFor(() => expect(screen.queryByRole('status', { name: 'Loading area' })).toBeNull())
+    await userEvent.click(await screen.findByRole('button', { name: 'Leave' }))
+    expect(screen.getByRole('status', { name: 'Loading area' })).toBeVisible()
+    moved = true
+    act(() => finishTravel(json({ character: { ...character, sceneId: 2101 } })))
+    await waitFor(() => expect(finishScene).toBeTypeOf('function'))
+    expect(screen.getByRole('status', { name: 'Loading area' })).toBeVisible()
+    act(() => finishScene(json(field)))
+    await waitFor(() => expect(screen.queryByRole('status', { name: 'Loading area' })).toBeNull())
+  })
+
+  it('releases loading when travel fails', async () => {
+    renderGame({
+      'POST /api/game/travel': () => apiError(400, 'TRAVEL_UNAVAILABLE', 'Travel unavailable'),
+    })
+    await userEvent.click(await screen.findByRole('button', { name: 'Leave' }))
+    expect(await screen.findByText('Travel unavailable')).toBeVisible()
+    expect(screen.queryByRole('status', { name: 'Loading area' })).toBeNull()
   })
 
   it('goes out to the first field with the Leave button in the village', async () => {

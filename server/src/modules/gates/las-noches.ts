@@ -23,7 +23,7 @@ import { eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import type { Db } from '../../db/client.js'
 import { singleGate } from '../../db/schema.js'
-import { playerFighter } from '../../game/combat.js'
+import { monsterFighter, playerFighter } from '../../game/combat.js'
 import { drawPouch } from '../../game/pouch.js'
 import { questCommand, type Tx } from '../../game/progress.js'
 import { cardBoxDrop } from '../../game/card-boxes.js'
@@ -88,7 +88,32 @@ type Broadcast = NonNullable<ReturnType<typeof lasNochesFloorBroadcast>>
 function view(row: Row, broadcasts: Broadcast[] = []): LasNochesView {
   const { config, floors } = singleGateData()
   const run = runOf(row)
+  const floor = floors[String((run?.floor ?? 1) - 1)]
+  const enemy = floor && monsterFighter(floor.npc)
   return {
+    preview:
+      enemy && floor
+        ? {
+            npcId: floor.npc,
+            nameKey: enemy.name,
+            level: enemy.level,
+            hp: enemy.maxHp,
+            chakra: enemy.maxMp,
+            minAttack: enemy.minAttack,
+            maxAttack: enemy.maxAttack,
+            defense: enemy.defense,
+            hit: enemy.hit,
+            pierce: enemy.pierce,
+            break: enemy.neglectDefense,
+            constitution: enemy.tough,
+            speed: enemy.atkTime,
+            block: enemy.dodge,
+            skills: (enemy.skills ?? [])
+              .filter((skill) => ![7777, 8888].includes(skill.id))
+              .map((skill) => skill.id),
+            exp: floor.exp,
+          }
+        : null,
     broadcasts,
     mode: row.mode,
     auto:
@@ -109,7 +134,7 @@ function view(row: Row, broadcasts: Broadcast[] = []): LasNochesView {
     options: startOptions(row.bestFloor, config),
     run: run && {
       ...run,
-      nextNpcId: floors[String(run.floor - 1)]!.npc,
+      nextNpcId: floor?.npc ?? '',
       lifePrice: lifePrice(run.livesBought, config),
     },
   }
@@ -365,14 +390,14 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
       const row = await loadRow(tx, character.id)
       const run = requireRun(row)
       const { config, floors } = singleGateData()
+      if (run.lives <= 0) throw bad('no_lives', 'No lives remain. Claim to end this run.')
+      if (run.floor > config.NewMaxGate)
+        throw bad('tower_cleared', 'The tower is cleared. Claim your EXP.')
       const npcId = floors[String(run.floor - 1)]!.npc
       const { replay, won, hp, mp, maxHp, maxMp } = await duel(tx, character, [npcId])
       const broadcasts: Broadcast[] = []
       let state: Partial<CharacterRow>
       let next: Row
-      let pot: number | null = null
-      let paid: number | null = null
-      let levelsGained = 0
       let boxes: Awaited<ReturnType<typeof grantDrops>> = []
       let lost = 0
       if (won) {
@@ -395,42 +420,32 @@ export async function lasNochesRoutes(app: FastifyInstance, { db }: { db: Db }) 
           bestFloor: outcome.best,
           floor50Broadcast: row.floor50Broadcast || run.floor === 50,
         }
-        if (outcome.ended) pot = outcome.run.pot
+        if (outcome.ended) next = { ...next, currentFloor: run.floor + 1 }
         await questCommand(tx, character, REBORN_LAS_NOCHES_FLOOR_COMMAND)
         await recordWeeklyActivity(tx, character.id, 'lasNoches')
         const dropped = tenthFloorBoxes(run.floor)
         boxes = await grantDrops(tx, character.id, dropped)
         lost = dropped.length - boxes.length
       } else {
-        // A loss refills HP and MP; without a life the pot is halved and the run ends.
+        // Keep the exhausted run for Claim; a loss never pays the bank automatically.
         state = { hp: maxHp, mp: maxMp }
         const outcome = loseFloor(run)
         next = withRun(row, outcome.run)
-        if (outcome.ended) pot = outcome.run.pot
-      }
-      if (pot !== null) {
-        const ending = endRun(next, character, state, pot + next.expBonus)
-        next = ending.ended
-        state = ending.update
-        paid = ending.paid
-        levelsGained = ending.levelsGained
       }
       await saveCharacter(tx, character.id, state)
-      // M6 decision 12: the active pet shares the pot EXP paid.
-      if (paid) await grantPetExp(tx, character.id, paid)
       const saved = await saveRow(tx, next)
       return {
         replay,
         won,
         npcIds: [npcId],
         rewards: {
-          exp: paid ?? 0,
+          exp: 0,
           stone: 0,
           items: boxes,
-          levelsGained,
+          levelsGained: 0,
           ...(lost > 0 && { lost }),
         },
-        potPaid: paid,
+        potPaid: null,
         lasNoches: view(saved, broadcasts),
         character: await characterView(tx, character.id),
       }

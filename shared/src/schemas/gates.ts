@@ -134,6 +134,25 @@ export interface LasNochesView {
     nextTickAt: string | null
   } | null
 
+  /** Server-owned next opponent, also available before starting a run. */
+  preview?: {
+    npcId: string
+    nameKey: string
+    level: number
+    hp: number
+    chakra: number
+    minAttack: number
+    maxAttack: number
+    defense: number
+    hit: number
+    pierce: number
+    break: number
+    constitution: number
+    speed: number
+    block: number
+    skills: number[]
+    exp: number
+  } | null
   bestFloor: number
   runsLeft: number
   maxRuns: number

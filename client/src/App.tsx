@@ -16,6 +16,9 @@ export function App() {
       {import.meta.env.DEV && (
         <Route path="/play/skill-showcase" element={<Play view="skills" />} />
       )}
+      {import.meta.env.DEV && (
+        <Route path="/play/outfit-showcase" element={<Play view="outfits" />} />
+      )}
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

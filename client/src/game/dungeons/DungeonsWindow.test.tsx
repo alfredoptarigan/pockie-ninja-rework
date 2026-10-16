@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react'
+import { fireEvent, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
@@ -105,10 +105,23 @@ const open = async (data = view) => {
   })
   renderWithProviders(<DungeonsWindow character={ninja} onClose={vi.fn()} />)
   await screen.findByRole('button', { name: 'Fight Gaara' })
+  for (const image of document.querySelectorAll('img')) fireEvent.load(image)
   return fetch
 }
 
 describe('DungeonsWindow', () => {
+  it('waits for the board images and releases loading on image errors', async () => {
+    mockApi({ 'GET /api/game/dungeons': () => json(view) })
+    renderWithProviders(<DungeonsWindow character={ninja} onClose={vi.fn()} />)
+    expect(screen.getByRole('status', { name: 'Loading area' })).toBeVisible()
+    await screen.findByRole('button', { name: 'Fight Gaara' })
+    const images = [...document.querySelectorAll('img')]
+    for (const image of images.slice(1)) fireEvent.load(image)
+    expect(screen.getByRole('status', { name: 'Loading area' })).toBeVisible()
+    fireEvent.error(images[0]!)
+    expect(screen.queryByRole('status', { name: 'Loading area' })).not.toBeInTheDocument()
+  })
+
   it('has every boss pose and the background exported', () => {
     const file = (url: string) => join(__dirname, '../../../public', url)
     for (const boss of bosses) expect(existsSync(file(poseUrl(boss.pose)))).toBe(true)

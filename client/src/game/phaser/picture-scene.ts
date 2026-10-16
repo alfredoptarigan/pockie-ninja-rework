@@ -9,6 +9,7 @@ import Phaser from 'phaser'
 
 export interface PictureActions {
   onNpc: (npc: SceneNpc) => void
+  onReady?: () => void
   onExplore?: () => void
   onBuilding?: (clip: 'clip_pet' | 'clip_CardLink') => void
 }
@@ -103,6 +104,7 @@ class PictureScene extends Phaser.Scene {
       .setOrigin(0.5, 1)
       .setDepth(1000)
       .setVisible(false)
+    this.actions.onReady?.()
   }
 
   /** Small building names floating over the village (and the field's explore tree). */

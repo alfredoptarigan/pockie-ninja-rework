@@ -1,3 +1,4 @@
+import { AreaLoading } from './AreaLoading'
 import type { Character } from '@pockie/shared'
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
 import { errorMessage, useScene, useTravel } from './api'
@@ -221,6 +222,7 @@ export function WorldMap({ character, onClose }: { character: Character; onClose
           draggable={false}
           className="pointer-events-none absolute inset-0 size-full"
         />
+        {travel.isPending && <AreaLoading />}
         {/* First in the DOM so showModal focuses it, not a place (and its tooltip). */}
         <button
           type="button"

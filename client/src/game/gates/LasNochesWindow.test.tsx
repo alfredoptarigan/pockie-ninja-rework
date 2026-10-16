@@ -1,121 +1,150 @@
 import type { LasNochesView } from '@pockie/shared'
-import { screen, within } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { character } from '../../test/game'
-import { json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
+import { apiError, json, mockApi, renderWithProviders, requestBody } from '../../test/utils'
 import { LasNochesWindow } from './LasNochesWindow'
+import { plainText } from '../text'
 
+vi.mock('../art', () => ({ useMonsterPortrait: () => () => '/monster.webp' }))
 const view: LasNochesView = {
   bestFloor: 0,
   runsLeft: 3,
   maxRuns: 3,
   options: { first: { floor: 1, stone: 1000 }, half: null },
   run: null,
+  preview: {
+    npcId: 'n900001',
+    nameKey: 'lg_name_n900001',
+    level: 1,
+    hp: 124,
+    chakra: 124,
+    minAttack: 20,
+    maxAttack: 25,
+    defense: 0,
+    hit: 0,
+    pierce: 0,
+    break: 0,
+    constitution: 0,
+    speed: 1257,
+    block: 0,
+    skills: [],
+    exp: 355,
+  },
+}
+const running: LasNochesView = {
+  ...view,
+  run: { floor: 7, pot: 2400, lives: 2, livesBought: 0, nextNpcId: 'n900007', lifePrice: 6 },
 }
 const noop = () => {}
-describe('Las Noches Tower lobby', () => {
-  it('welcomes, starts at floor 1 and leaves', async () => {
+function loadArt() {
+  for (const image of document.querySelectorAll('img')) fireEvent.load(image)
+}
+
+describe('Las Noches', () => {
+  it('exports all 170 opponent names, including boss names', () => {
+    for (let floor = 1; floor <= 170; floor++)
+      expect(plainText(`lg_name_n${900000 + floor}`)).not.toBe('')
+    expect(plainText('lg_name_n900001')).toBe('Rudobon')
+    expect(plainText('lg_name_n900020')).toBe('Aaroniero')
+  })
+  it('opens the tower without charging, then starts a run on Begin Challenge', async () => {
     const onClose = vi.fn()
     const fetch = mockApi({
       'GET /api/game/gates/las-noches': () => json(view),
-      'POST /api/game/gates/las-noches/start': () => json({ lasNoches: view, character }),
+      'POST /api/game/gates/las-noches/start': () => json({ lasNoches: running, character }),
     })
     renderWithProviders(<LasNochesWindow character={character} onClose={onClose} />)
-    const tower = await screen.findByRole('dialog', { name: 'Las Noches Tower' })
-    expect(await within(tower).findByText('Runs left today: 3/3')).toBeVisible()
-    expect(
-      within(tower).getByText('Welcome to Las Noches! Defeat enemies to climb higher floors.'),
-    ).toBeVisible()
-    expect(
-      within(tower).getByText('Challenge powerful enemies as you climb the tower.'),
-    ).toBeVisible()
-    expect(within(tower).getByText('Runs left today: 3/3')).toBeVisible()
-    const express = within(tower).getByRole('button', { name: /^Express/ })
-    expect(express).toBeDisabled()
-    expect(express).toHaveAttribute('title', 'Highest Floor: 0')
-    await userEvent.click(within(tower).getByRole('button', { name: 'Start (1k Stones)' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Start' }))
+    expect(fetch.mock.calls.some(([url]) => String(url).endsWith('/start'))).toBe(false)
+    expect(screen.getByRole('status', { name: 'Loading area' })).toBeVisible()
+    loadArt()
+    expect(screen.queryByRole('status', { name: 'Loading area' })).toBeNull()
+    expect(screen.getByRole('img', { name: 'Rudobon' })).toBeVisible()
+    expect(screen.getByText('Next Floor Enemy - Floor 1 - Lv.1')).toBeVisible()
+    expect(screen.getByTitle('HP: 124')).toBeVisible()
+    expect(screen.getByText('Ready to Begin')).toBeVisible()
+    await userEvent.click(screen.getByRole('button', { name: 'Begin Challenge' }))
     expect(requestBody(fetch, 'POST /api/game/gates/las-noches/start')).toEqual({ mode: 'first' })
-    await userEvent.click(within(tower).getByRole('button', { name: 'Leave' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Leave Tower' }))
     expect(onClose).toHaveBeenCalled()
   })
-
-  it('confirms the Express Route before starting halfway', async () => {
-    const best = {
-      ...view,
-      bestFloor: 60,
-      options: { ...view.options, half: { floor: 30, stone: 1783 } },
-    }
-    const fetch = mockApi({
-      'GET /api/game/gates/las-noches': () => json(best),
-      'POST /api/game/gates/las-noches/start': () => json({ lasNoches: best, character }),
-    })
-    renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
-    const express = await screen.findByRole('button', { name: 'Express (1.8k Stones) - Floor 30' })
-    expect(express).toHaveAttribute('title', 'Highest Floor: 60')
-    await userEvent.click(express)
-    const route = screen.getByRole('dialog', { name: 'Express Route' })
-    expect(within(route).getByText('Floor 30')).toBeVisible()
-    await userEvent.click(within(route).getByRole('button', { name: 'Cancel' }))
-    expect(screen.queryByRole('dialog', { name: 'Express Route' })).not.toBeInTheDocument()
-    await userEvent.click(express)
-    await userEvent.click(screen.getByRole('button', { name: 'Confirm' }))
-    expect(requestBody(fetch, 'POST /api/game/gates/las-noches/start')).toEqual({ mode: 'half' })
-  })
-
-  it('shows the floor, pot and lives with the run controls during a run', async () => {
-    const running = {
-      ...view,
-      run: { floor: 7, pot: 2400, lives: 1, livesBought: 0, nextNpcId: 'n900007', lifePrice: 6 },
-    }
+  it('shows the bank, lives and server-owned next enemy', async () => {
     mockApi({ 'GET /api/game/gates/las-noches': () => json(running) })
     renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
-    expect(await screen.findByRole('button', { name: 'Fight Floor 7' })).toBeEnabled()
-    expect(screen.getByText('EXP pot: 2,400')).toBeVisible()
-    expect(screen.getByRole('button', { name: 'Buy a Life (6 Gold)' })).toBeEnabled()
-    expect(screen.getByRole('button', { name: 'Claim EXP and End Current Run' })).toBeEnabled()
-    expect(screen.queryByRole('button', { name: /^Start/ })).not.toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Next Floor' })).toBeEnabled()
+    loadArt()
+    expect(screen.getByText('2,400')).toBeVisible()
+    expect(screen.getByText('Lives Remaining').nextElementSibling).toHaveTextContent('2')
+    expect(screen.getByRole('progressbar', { name: 'Floor 6 / Highest Floor None' })).toBeVisible()
+    expect(screen.getByRole('note')).toHaveTextContent(
+      'Losing this floor halves your EXP: 2,400 → 1,200',
+    )
+    expect(screen.getByRole('button', { name: 'Claim' })).toBeEnabled()
+    expect(screen.queryByRole('button', { name: /Buy a Life/ })).toBeNull()
   })
-})
-
-describe('Las Noches auto controls', () => {
-  it('shows all prices and sends the chosen run count', async () => {
+  it('blocks fighting and auto after the final loss but allows Claim', async () => {
     const fetch = mockApi({
-      'GET /api/game/gates/las-noches': () => json(view),
-      'POST /api/game/gates/las-noches/auto': () => json({ lasNoches: view, character }),
+      'GET /api/game/gates/las-noches': () =>
+        json({ ...running, run: { ...running.run, lives: 0, pot: 0 } }),
+      'POST /api/game/gates/las-noches/withdraw': () =>
+        json({ lasNoches: view, character, potPaid: 0 }),
     })
     renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
-    await userEvent.selectOptions(
-      await screen.findByRole('combobox', { name: 'Auto run count' }),
-      '3',
-    )
-    expect(screen.getByRole('option', { name: '1 run (28 Gold)' })).toBeInTheDocument()
-    expect(screen.getByRole('option', { name: '2 runs (58 Gold)' })).toBeInTheDocument()
-    expect(screen.getByRole('option', { name: '3 runs (91 Gold)' })).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Auto' }))
-    expect(requestBody(fetch, 'POST /api/game/gates/las-noches/auto')).toEqual({ runs: 3 })
+    expect(await screen.findByRole('button', { name: 'Next Floor' })).toBeDisabled()
+    loadArt()
+    expect(screen.getByRole('button', { name: 'Auto Battle' })).toBeDisabled()
+    await userEvent.click(screen.getByRole('button', { name: 'Claim' }))
+    expect(requestBody(fetch, 'POST /api/game/gates/las-noches/withdraw')).toEqual({})
   })
-  it('shows progress and a stop control while running', async () => {
-    const running = {
-      ...view,
-      mode: 1,
-      run: { floor: 7, pot: 2400, lives: 1, livesBought: 0, nextNpcId: 'n900007', lifePrice: 6 },
-      auto: {
-        runsLeft: 2,
-        runsBought: 3,
-        reachFloor: 50,
-        nextTickAt: new Date(Date.now() + 30000).toISOString(),
-      },
-    }
+  it('auto requests a real battle after three seconds and stops on an error', async () => {
     const fetch = mockApi({
       'GET /api/game/gates/las-noches': () => json(running),
-      'POST /api/game/gates/las-noches/auto-stop': () => json({ lasNoches: running, character }),
+      'POST /api/game/gates/las-noches/fight': () =>
+        apiError(400, 'fight_refused', 'Fight unavailable'),
     })
     renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
-    expect(await screen.findByText(/Auto runs left: 2/)).toHaveTextContent(
-      /Next floor in .* seconds/,
+    await screen.findByRole('button', { name: 'Auto Battle' })
+    loadArt()
+    await userEvent.click(screen.getByRole('button', { name: 'Auto Battle' }))
+    expect(screen.getByRole('button', { name: 'Auto Stop' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
     )
-    expect(screen.queryByRole('button', { name: 'Fight Floor 7' })).not.toBeInTheDocument()
+    expect(await screen.findByText('Fight unavailable', {}, { timeout: 4500 })).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Auto Battle' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    )
+    expect(requestBody(fetch, 'POST /api/game/gates/las-noches/fight')).toEqual({})
+    expect(fetch.mock.calls.some(([url]) => String(url).endsWith('/auto'))).toBe(false)
+  }, 8000)
+  it('tears the Garganta open before the floor fight starts', async () => {
+    mockApi({
+      'GET /api/game/gates/las-noches': () => json(running),
+      'POST /api/game/gates/las-noches/fight': () =>
+        apiError(400, 'fight_refused', 'Fight unavailable'),
+    })
+    renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Next Floor' }))
+    expect(screen.getByTestId('las-noches-garganta')).toBeInTheDocument()
+    expect(await screen.findByText('Fight unavailable')).toBeVisible()
+  })
+  it('retains a stop control for previously purchased auto runs', async () => {
+    const data = {
+      ...running,
+      mode: 1,
+      auto: { runsLeft: 2, runsBought: 3, reachFloor: 50, nextTickAt: null },
+    }
+    const fetch = mockApi({
+      'GET /api/game/gates/las-noches': () => json(data),
+      'POST /api/game/gates/las-noches/auto-stop': () =>
+        json({ lasNoches: { ...data, mode: 2 }, character }),
+    })
+    renderWithProviders(<LasNochesWindow character={character} onClose={noop} />)
+    await screen.findByRole('button', { name: 'Stop Auto' })
+    loadArt()
     await userEvent.click(screen.getByRole('button', { name: 'Stop Auto' }))
     expect(requestBody(fetch, 'POST /api/game/gates/las-noches/auto-stop')).toEqual({})
   })

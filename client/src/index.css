@@ -522,3 +522,31 @@
     animation: none;
   }
 }
+
+/* Reborn's loading bar: fast to a quarter, then easing towards 97% over 30 seconds. */
+@keyframes loading-fill {
+  0% {
+    width: 0%;
+  }
+  5% {
+    width: 25%;
+  }
+  15% {
+    width: 50%;
+  }
+  30% {
+    width: 70%;
+  }
+  50% {
+    width: 82%;
+  }
+  70% {
+    width: 90%;
+  }
+  85% {
+    width: 94%;
+  }
+  100% {
+    width: 97%;
+  }
+}

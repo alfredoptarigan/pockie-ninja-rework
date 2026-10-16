@@ -79,13 +79,15 @@ it('exports every outfit and variant, preserves concurrent metadata, and writes 
         offset: [0, 0],
         transforms: {},
         concurrent: 'back',
-        concurrentOffset: [-1000, 0],
+        // 2 falls back to its animation offset, 3 has none (no concurrent layer, like Reborn).
+        ...(clothing === 2 || clothing === 3 ? {} : { concurrentOffset: [-1000, 0] }),
         concurrentOrigin: 'source',
         targetAnimation: '250',
         holdDeathUntilReaction: true,
       }
       json(`assets/${dir}/data.json`, {
         secretTechnique: st,
+        ...(clothing === 2 ? { animations: { back: [100, 380] } } : {}),
         ...(clothing === 1 ? { secretTechniqueVariants: [{ ...st, variantId: 'ru-19010' }] } : {}),
       })
       secretTechniques[clothing] = ['secret_technique', 'back']
@@ -147,6 +149,9 @@ it('exports every outfit and variant, preserves concurrent metadata, and writes 
         pages: ['/assets/reborn/entities/avatars/1/back.webp'],
       },
     })
+    expect(techniques['1902'].concurrentOffset).toEqual([100, 380])
+    expect(techniques['1903'].concurrent).toBeUndefined()
+    expect(techniques['1903'].concurrentOffset).toBeUndefined()
     const generated = (name: string) =>
       JSON.parse(readFileSync(join(root, 'client/src/generated', name), 'utf8'))
     const pets = generated('reborn-pets.json')

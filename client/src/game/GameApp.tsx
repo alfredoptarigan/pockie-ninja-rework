@@ -1,7 +1,9 @@
 import { CLAN_MIN_LEVEL, type Character } from '@pockie/shared'
 import { lazy, Suspense, useCallback, useState, type CSSProperties } from 'react'
 import { Navigate } from 'react-router'
-import { errorMessage, useCharacter, useScene, useTalk, useTravel } from './api'
+import { useIsMutating } from '@tanstack/react-query'
+import { errorMessage, travelKey, useCharacter, useScene, useTalk, useTravel } from './api'
+import { AreaLoading } from './AreaLoading'
 import { SkillsWindow } from './SkillsWindow'
 import { CharacterWindow } from './CharacterWindow'
 import { RealtimePanels } from './Chat'
@@ -34,9 +36,11 @@ import { HuntHud } from './hunt'
 
 // Dev-only (/play/skill-showcase): every skill animation in one replay.
 const SkillShowcase = lazy(() => import('./skill-showcase/SkillShowcase'))
+// Dev-only (/play/outfit-showcase): every outfit's icon, portrait, pose and motions.
+const OutfitShowcase = lazy(() => import('./outfit-showcase/OutfitShowcase'))
 
 /** `/play` (the game) and `/play/create` (character creation); the account is already checked. */
-export default function GameApp({ view }: { view: 'game' | 'create' | 'skills' }) {
+export default function GameApp({ view }: { view: 'game' | 'create' | 'skills' | 'outfits' }) {
   const character = useCharacter()
   if (character.isSuccess && character.data && view === 'game') {
     return <GameScreen character={character.data} />
@@ -48,12 +52,19 @@ export default function GameApp({ view }: { view: 'game' | 'create' | 'skills' }
       </Suspense>
     )
   }
+  if (character.isSuccess && character.data && view === 'outfits') {
+    return (
+      <Suspense fallback={<p className="p-6">Loading the showcase...</p>}>
+        <OutfitShowcase character={character.data} />
+      </Suspense>
+    )
+  }
   return (
     <div
       data-game-ui
       className="min-h-[100dvh] bg-[radial-gradient(circle_at_top,#3a4044,#0c0e0f)] font-game text-parchment"
     >
-      {character.isPending && <p className="p-6">Entering the village...</p>}
+      {character.isPending && <AreaLoading />}
       {character.isError && (
         <div className="mx-auto max-w-md p-6">
           <Notice tone="error">{errorMessage(character.error)}</Notice>
@@ -90,6 +101,12 @@ function GameScreen({ character }: { character: Character }) {
   const scene = useScene()
   const talk = useTalk()
   const travel = useTravel()
+  const travelling = useIsMutating({ mutationKey: travelKey }) > 0
+  const [readyScene, setReadyScene] = useState<number | null>(null)
+  const loading =
+    travelling ||
+    (!scene.isError &&
+      (!scene.data || scene.data.sceneId !== character.sceneId || readyScene !== character.sceneId))
   const team = useTeam(teamHudScene(character.sceneId))
   // Clans open at level 30; below it no clan exists to chat in.
   const clan = useMyClan(character.level >= CLAN_MIN_LEVEL)
@@ -125,98 +142,113 @@ function GameScreen({ character }: { character: Character }) {
   const inVillage = isVillage(character.sceneId)
   // SceneSystem.GoHome: "Village" uses the scene's ToScene (Angel City lands in Crossroads, as in
   // the original), else the home village; "Leave" goes out to the village's first field.
-  const onVillage = () => travel.mutate({ via: inVillage ? 'out' : 'home' })
+  const inLasNoches = feature?.npcId === 'n17003'
+  const onVillage = () => {
+    if (inLasNoches) setFeature(null)
+    travel.mutate({ via: inVillage ? 'out' : 'home' })
+  }
 
   return (
-    <AudioProvider sceneId={character.sceneId}>
+    <AudioProvider sceneId={inLasNoches ? 3101 : character.sceneId}>
       <OpenWindowProvider value={openFeature}>
         <div
           data-game-ui
           className="h-[100dvh] w-screen overflow-hidden bg-black font-game text-parchment"
           style={{ '--hud-scale': scale } as CSSProperties}
         >
-          <main aria-label="Game" className="relative size-full overflow-hidden">
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
-            >
-              <HudLayer value={hudLayer}>
-                <SceneView
-                  key={character.sceneId}
+          <div inert={loading} className="size-full">
+            <main aria-label="Game" className="relative size-full overflow-hidden">
+              <div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                inert={inLasNoches}
+                style={{ width: STAGE.width * scale, height: STAGE.height * scale }}
+              >
+                <HudLayer value={hudLayer}>
+                  <SceneView
+                    key={character.sceneId}
+                    character={character}
+                    onNpc={openNpc}
+                    onOpenBag={openBag}
+                    onReady={setReadyScene}
+                  />
+                </HudLayer>
+              </div>
+              {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
+              <div ref={setHudLayer} className="pointer-events-none absolute inset-0 z-10">
+                <TopBar character={character} />
+                <PlayerCard character={character} />
+                <HuntHud character={character} />
+                {inVillage && <FeatureIcons character={character} />}
+                <ScenePlaque
+                  sceneId={scene.data?.sceneId}
+                  inVillage={inVillage}
+                  defeated={isDefeated(character)}
+                  onVillage={onVillage}
+                  onWorldMap={() => open('map')}
+                />
+                <div
+                  // In villages Reborn's Market / Home icons own y 90-140: the exits go under them.
+                  className={`pointer-events-none absolute ${inVillage ? 'top-[150px]' : 'top-[88px]'} right-[6px] flex w-[168px] flex-col items-end gap-1`}
+                >
+                  {scene.data && (
+                    <SceneExits character={character} links={scene.data.links} travel={travel} />
+                  )}
+                  {travel.isError && (
+                    <div className="pointer-events-auto w-[168px]">
+                      <Notice tone="error">{errorMessage(travel.error)}</Notice>
+                    </div>
+                  )}
+                </div>
+                <QuestNavigation
+                  open={questsOpen}
+                  onClose={() => setQuestsOpen(false)}
                   character={character}
+                  scene={scene.data}
                   onNpc={openNpc}
                   onOpenBag={openBag}
                 />
-              </HudLayer>
-            </div>
-            {/* HUD overlay: only its widgets take the pointer; the rest goes to the picture. */}
-            <div ref={setHudLayer} className="pointer-events-none absolute inset-0">
-              <TopBar character={character} />
-              <PlayerCard character={character} />
-              <HuntHud character={character} />
-              {inVillage && <FeatureIcons character={character} />}
-              <ScenePlaque
-                sceneId={scene.data?.sceneId}
-                inVillage={inVillage}
-                defeated={isDefeated(character)}
-                onVillage={onVillage}
-                onWorldMap={() => open('map')}
-              />
-              <div
-                // In villages Reborn's Market / Home icons own y 90-140: the exits go under them.
-                className={`pointer-events-none absolute ${inVillage ? 'top-[150px]' : 'top-[88px]'} right-[6px] flex w-[168px] flex-col items-end gap-1`}
-              >
-                {scene.data && (
-                  <SceneExits character={character} links={scene.data.links} travel={travel} />
-                )}
-                {travel.isError && (
-                  <div className="pointer-events-auto w-[168px]">
-                    <Notice tone="error">{errorMessage(travel.error)}</Notice>
-                  </div>
-                )}
+                <RealtimePanels
+                  characterId={character.id}
+                  inTeam={Boolean(team.data?.team)}
+                  inClan={Boolean(clan.data?.clan)}
+                />
+                {!inVillage && !inLasNoches && <PlayerList character={character} />}
+                <MenuBar
+                  character={character}
+                  onOpen={open}
+                  onTasks={() => setQuestsOpen((shown) => !shown)}
+                />
               </div>
-              <QuestNavigation
-                open={questsOpen}
-                onClose={() => setQuestsOpen(false)}
-                character={character}
-                scene={scene.data}
-                onNpc={openNpc}
-                onOpenBag={openBag}
-              />
-              <RealtimePanels
-                characterId={character.id}
-                inTeam={Boolean(team.data?.team)}
-                inClan={Boolean(clan.data?.clan)}
-              />
-              {!inVillage && <PlayerList character={character} />}
-              <MenuBar
-                character={character}
-                onOpen={open}
-                onTasks={() => setQuestsOpen((shown) => !shown)}
-              />
-            </div>
-          </main>
+            </main>
 
-          {openWindow === 'bag' && (
-            // Fixed 379x551 like Reborn's: no scrolling, and tooltips may reach past the frame.
-            <Dialog
-              title="Inventory"
-              onClose={close}
-              className="game-window-bare w-[379px] overflow-visible"
-            >
-              <Inventory highlight={bagHighlight} />
-            </Dialog>
-          )}
-          {openWindow === 'skills' && <SkillsWindow character={character} onClose={close} />}
-          {openWindow === 'character' && <CharacterWindow character={character} onClose={close} />}
-          {openWindow === 'map' && <WorldMap character={character} onClose={close} />}
-          {npc && (
-            <NpcDialog npc={npc} talk={talk} character={character} onClose={() => setNpc(null)} />
-          )}
-          {feature && (
-            <FeatureWindow open={feature} character={character} onClose={() => setFeature(null)} />
-          )}
-          <ToastHost />
+            {openWindow === 'bag' && (
+              // Fixed 379x551 like Reborn's: no scrolling, and tooltips may reach past the frame.
+              <Dialog
+                title="Inventory"
+                onClose={close}
+                className="game-window-bare w-[379px] overflow-visible"
+              >
+                <Inventory highlight={bagHighlight} />
+              </Dialog>
+            )}
+            {openWindow === 'skills' && <SkillsWindow character={character} onClose={close} />}
+            {openWindow === 'character' && (
+              <CharacterWindow character={character} onClose={close} />
+            )}
+            {openWindow === 'map' && <WorldMap character={character} onClose={close} />}
+            {npc && (
+              <NpcDialog npc={npc} talk={talk} character={character} onClose={() => setNpc(null)} />
+            )}
+            {feature && (
+              <FeatureWindow
+                open={feature}
+                character={character}
+                onClose={() => setFeature(null)}
+              />
+            )}
+            <ToastHost />
+          </div>
+          {loading && <AreaLoading />}
         </div>
       </OpenWindowProvider>
     </AudioProvider>

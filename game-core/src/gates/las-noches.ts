@@ -18,7 +18,7 @@ export const LAS_NOCHES_MIN_LEVEL = 13
 /** SingleFloorCfg [0]: floor 1 costs 1000 Stone. */
 export const FIRST_FLOOR_STONE = 1000
 const HALF_STONE_PER_FLOOR = 27.03
-const FREE_LIVES = 1
+const FREE_LIVES = 2
 
 export interface LasNochesRun {
   /** Floor to fight next (1-based). */
@@ -70,10 +70,13 @@ export function winFloor(
   }
 }
 
-/** A loss uses a life; without one the pot is halved and the run ends. */
+/** Lose one life and half the bank; the last life wipes the bank. Claim acknowledges the run. */
 export function loseFloor(run: LasNochesRun) {
-  if (run.lives > 0) return { run: { ...run, lives: run.lives - 1 }, ended: false }
-  return { run: { ...run, pot: Math.trunc(run.pot * 0.5) }, ended: true }
+  const lives = Math.max(0, run.lives - 1)
+  return {
+    run: { ...run, lives, pot: lives > 0 ? Math.trunc(run.pot / 2) : 0 },
+    ended: lives === 0,
+  }
 }
 
 export const lifePrice = (

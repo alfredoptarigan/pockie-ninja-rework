@@ -123,6 +123,10 @@ export const newUltimate: SkillScript = (ctx, _self, target, fv) => ultimateDama
 const script = (id: number) => `skill/skill_aoyi_${id}.js`
 
 export const AOYI_SCRIPTS: Record<string, SkillScript> = Object.fromEntries([
+  // shortcut: Madara and Hashirama use the shared execute rule until Reborn-only combat rules
+  // are imported.
+  [script(2270), execute],
+  [script(2288), execute],
   ...EXECUTE_SKILL_IDS.map((id) => [script(id), execute]),
   ...EXECUTE_PLUS9_SKILL_IDS.map((id) => [script(id), executeOrNewUltimate(id * 10)]),
   ...NEW_ULTIMATE_SKILL_IDS.map((id) => [script(id), newUltimate]),
