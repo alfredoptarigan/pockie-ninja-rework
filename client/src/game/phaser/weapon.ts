@@ -4,13 +4,23 @@ import { gameWeapons, type WeaponLayer, type WeaponLayers } from '../../generate
 import { fetchJsonOnce, frameAt, STAND, type FighterArt } from './motion'
 import type { Pose } from './timeline'
 
-/** The weapon layer of `itemId` for an outfit, or undefined when it has none. */
+/**
+ * The weapon layer of `itemId` for an outfit, or undefined when it has none. Like Reborn, which
+ * draws an avatar's own weapon art by number only (weaponId is the N of `weapons/<type>/N`), a
+ * weapon of another type shows as the outfit's own weapon of the same number (gloves19 -> sharp19).
+ */
 export async function loadWeaponLayer(outfitId: number, itemId: string) {
   const outfit = gameWeapons.outfits[String(outfitId)]
   const key = Object.hasOwn(gameWeapons.items, itemId) ? gameWeapons.items[itemId] : undefined
-  if (!outfit || !key || !outfit.keys.includes(key)) return undefined
-  return (await fetchJsonOnce<WeaponLayers>(outfit.file))?.[key]
+  if (!outfit || !key) return undefined
+  const shown = outfit.keys.includes(key)
+    ? key
+    : outfit.keys.find((own) => weaponNumber(own) === weaponNumber(key))
+  if (!shown) return undefined
+  return (await fetchJsonOnce<WeaponLayers>(outfit.file))?.[shown]
 }
+
+const weaponNumber = (key: string) => key.replace(/^\D+/, '')
 
 /**
  * Weapon sheet for a pose: the skill's sheet for strikes, the action's otherwise. null is an

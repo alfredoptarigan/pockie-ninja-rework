@@ -107,10 +107,19 @@ describe('loadWeaponLayer', () => {
     const fetchMock = vi.fn(async () => json(layers))
     vi.stubGlobal('fetch', fetchMock)
 
-    expect(await loadWeaponLayer(1, 'i270100')).toBeUndefined() // gloves on a sword outfit
     expect(await loadWeaponLayer(1, 'i160006')).toBeUndefined() // a potion
     expect(await loadWeaponLayer(99999, 'i260100')).toBeUndefined() // no such outfit
     expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it("draws a weapon of another type as the outfit's own weapon of the same number, like Reborn", async () => {
+    const own = { sharp1: layer, sharp19: { ...layer, skills: {} }, gloves20: layer }
+    const fetchMock = vi.fn(async () => json(own))
+    vi.stubGlobal('fetch', fetchMock)
+
+    expect(await loadWeaponLayer(1, 'i270100')).toEqual(own.sharp1) // gloves 1 on a sword outfit
+    expect(await loadWeaponLayer(1, 'i270118')).toEqual(own.sharp19) // gloves 19
+    expect(await loadWeaponLayer(8, 'i260118')).toEqual(own.gloves20) // sword 20 on a gloves outfit
   })
 
   it('tries again after a failed request', async () => {
