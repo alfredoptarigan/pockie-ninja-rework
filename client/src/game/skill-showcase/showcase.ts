@@ -71,7 +71,10 @@ export function showcaseReplay(
   const outfits = [
     ...new Set(skills.flatMap((s) => (s.kind === 'ultimate' && s.clothing ? [s.clothing] : []))),
   ]
-  const defenderOutfits = [...(ninjutsu.length || !outfits.length ? [DUMMY_OUTFIT] : []), ...outfits]
+  const defenderOutfits = [
+    ...(ninjutsu.length || !outfits.length ? [DUMMY_OUTFIT] : []),
+    ...outfits,
+  ]
   const fighters = [
     fighter(0, 'attackers', player.name, player.level),
     ...defenderOutfits.map((clothing, i) => fighter(i + 1, 'defenders', outfitName(clothing), 1)),

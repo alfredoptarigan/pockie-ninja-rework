@@ -43,9 +43,9 @@ export default function SkillShowcase({ character }: { character: Character }) {
     >
       <h1 className="text-xl">Skill showcase</h1>
       <p className="mt-1 text-sm">
-        {ninjutsu.length} ninjutsu and {ultimates.length} outfit ultimates, each cast once.
-        Ninjutsu are cast by {character.name} on a dummy; each ultimate is cast on{' '}
-        {character.name} by the outfit it belongs to.
+        {ninjutsu.length} ninjutsu and {ultimates.length} outfit ultimates, each cast once. Ninjutsu
+        are cast by {character.name} on a dummy; each ultimate is cast on {character.name} by the
+        outfit it belongs to.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <GameButton onClick={() => play('Everything', showcaseSkills)}>Play everything</GameButton>
