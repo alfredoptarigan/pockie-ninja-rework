@@ -276,8 +276,14 @@ export async function exportWeapons(arenaOnly = false) {
     const itemKeys = Object.entries(items)
       .filter(([id]) => (Number(rows[id]!.UsePopsinger) & outfit.Pos) !== 0)
       .map(([, key]) => key)
+    // Reborn draws any weapon as the outfit's own art of the same number (gloves19 -> sharp19 on
+    // a sword outfit), and every outfit SWF set has its own type's 1-32: export those numbers too.
+    const ownTypes = new Set(itemKeys.map((key) => key.replace(/\d+$/, '')))
+    const otherTypes = Object.values(items).flatMap((key) =>
+      [...ownTypes].map((type) => type + key.replace(/^\D+/, '')),
+    )
     const arenaSkins = [...(arenaKeys.get(outfit.Cloth) ?? [])]
-    const keys = [...new Set([...itemKeys, ...arenaSkins])]
+    const keys = [...new Set([...itemKeys, ...otherTypes, ...arenaSkins])]
     const sets: Record<
       string,
       {
@@ -287,11 +293,14 @@ export async function exportWeapons(arenaOnly = false) {
         missing: { actions: string[]; skills: string[] }
       }
     > = {}
-    // The arena pass only needs to regenerate outfits with additional NPC weapon skins.
+    // The arena pass only regenerates outfits missing a skin (NPC or other-type numbers).
     // Other outfits retain the existing item layers; `extra` regenerates those from source.
     const layerFile = join(paths.assets, `game/weapons/${outfit.Cloth}/layers.json`)
-    if (arenaOnly && arenaSkins.every((key) => itemKeys.includes(key)) && existsSync(layerFile))
-      return [outfit.Cloth, JSON.parse(readFileSync(layerFile, 'utf8')) as typeof sets] as const
+    const existing = existsSync(layerFile)
+      ? (JSON.parse(readFileSync(layerFile, 'utf8')) as typeof sets)
+      : undefined
+    if (arenaOnly && existing && keys.every((key) => Object.hasOwn(existing, key)))
+      return [outfit.Cloth, existing] as const
     const starting = creation.find((row) => row.Cloth === outfit.Cloth)
     const assigned = starting
       ? avatarSkills[`i29${String(starting.AvatarID).padStart(4, '0')}`]
