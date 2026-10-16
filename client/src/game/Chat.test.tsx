@@ -194,6 +194,22 @@ describe('Chat', () => {
     expect(within(list).getByText('Lv. 7')).toBeInTheDocument()
   })
 
+  it('minimizes to the tab and input rows like Reborn and remembers it', async () => {
+    localStorage.removeItem('chat-minimized')
+    renderChat()
+    const log = screen.getByRole('tabpanel')
+    expect(log).toBeVisible()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Minimize chat' }))
+    expect(log).not.toBeVisible()
+    expect(screen.getByRole('textbox', { name: /Message to/ })).toBeVisible()
+    expect(localStorage.getItem('chat-minimized')).toBe('true')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Expand chat' }))
+    expect(log).toBeVisible()
+    expect(localStorage.getItem('chat-minimized')).toBe('false')
+  })
+
   it('shows the connection state on the dark HUD plate so it reads over the scene', () => {
     renderChat()
     const state = screen.getByRole('status')

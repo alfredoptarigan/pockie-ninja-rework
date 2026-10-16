@@ -14,6 +14,8 @@ import {
 } from '@pockie/shared'
 import { useQueryClient, type QueryClient } from '@tanstack/react-query'
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react'
+import expandIcon from '../assets/reborn/chat/expand.png'
+import minimizeIcon from '../assets/reborn/chat/minimize.png'
 import { createGameSocket, type GameSocket } from '../lib/socket'
 import { gameKeys, useInventory } from './api'
 import { useGear } from './forge'
@@ -23,6 +25,8 @@ import { onItemLinkRequest, onWhisperRequest } from './social/requests'
 import { plainText } from './text'
 
 const MAX_MESSAGES = 100
+/** Reborn keeps the chat's minimized state across reloads under this key. */
+const MINIMIZED_KEY = 'chat-minimized'
 
 type Status = 'connecting' | 'online' | 'offline'
 /** Emits a chat message; false when there is no socket. */
@@ -526,6 +530,11 @@ export function ChatBox({
   error: string | null
 }) {
   const [showPlayers, setShowPlayers] = useState(false)
+  const [minimized, setMinimized] = useState(() => localStorage.getItem(MINIMIZED_KEY) === 'true')
+  const toggleMinimized = () => {
+    localStorage.setItem(MINIMIZED_KEY, String(!minimized))
+    setMinimized(!minimized)
+  }
   const [chosenTab, setTab] = useState<ChatTab>('world')
   const [chosenChannel, setChannel] = useState<SendChannel>('world')
   const [text, setText] = useState('')
@@ -622,7 +631,9 @@ export function ChatBox({
   return (
     <section
       aria-label="Chat"
-      className="pointer-events-auto absolute bottom-[2px] left-[10px] h-[300px] w-[500px] font-game"
+      className={`pointer-events-auto absolute bottom-[2px] left-[10px] w-[500px] font-game ${
+        minimized ? 'h-[32px]' : 'h-[300px]'
+      }`}
     >
       {showPlayers && <PlayerList players={players} selfId={selfId} />}
       <ChatTabs
@@ -632,7 +643,17 @@ export function ChatBox({
         onClose={closePm}
         panelId={`${ids}-log`}
       />
-      <div className="absolute top-[-22px] right-0 flex items-center gap-1">
+      <button
+        type="button"
+        aria-label={minimized ? 'Expand chat' : 'Minimize chat'}
+        aria-expanded={!minimized}
+        onClick={toggleMinimized}
+        className="absolute top-[-21px] right-0 h-[19px] w-[23px] bg-cover hover:brightness-125"
+        style={{
+          backgroundImage: `url(${minimized ? expandIcon : minimizeIcon})`,
+        }}
+      />
+      <div className="absolute top-[-22px] right-[27px] flex items-center gap-1">
         {/* On the skin's dark HUD plate: plain text was unreadable over bright scene pictures. */}
         <span
           role="status"
@@ -647,6 +668,7 @@ export function ChatBox({
       <div
         id={`${ids}-log`}
         role="tabpanel"
+        hidden={minimized}
         className="game-chat-panel absolute top-0 left-0 h-[264px] w-[500px] overflow-auto p-[5px] font-mono text-sm text-[#ddd]"
       >
         <ol ref={logRef} aria-live="polite" aria-label={`${tabTitle} messages`}>
@@ -670,7 +692,9 @@ export function ChatBox({
       )}
       <form
         onSubmit={onSubmit}
-        className="absolute inset-x-[5px] top-[270px] flex h-[26px] items-center gap-[5px]"
+        className={`absolute inset-x-[5px] flex h-[26px] items-center gap-[5px] ${
+          minimized ? 'top-[3px]' : 'top-[270px]'
+        }`}
       >
         <ChannelSelect
           id={`${ids}-channel`}
