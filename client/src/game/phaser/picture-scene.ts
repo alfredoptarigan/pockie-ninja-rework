@@ -65,7 +65,7 @@ class PictureScene extends Phaser.Scene {
       this.interactive(
         image,
         // These buildings open a window, not their NPC: name the building.
-        building ? hotspot.title : hotspot.label,
+        '', // drawTitles already shows the building label.
         () => {
           if (building && this.actions.onBuilding) this.actions.onBuilding(building)
           else if (npc) this.actions.onNpc(npc)
@@ -79,7 +79,7 @@ class PictureScene extends Phaser.Scene {
         .image(explore.spot.x, explore.spot.y, explore.spot.file)
         .setOrigin(0)
         .setAlpha(HIDDEN_ALPHA)
-      this.interactive(image, explore.label, () => this.actions.onExplore?.(), true)
+      this.interactive(image, '', () => this.actions.onExplore?.(), true)
     }
 
     for (const figure of figures) {
