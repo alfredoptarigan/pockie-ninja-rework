@@ -21,9 +21,13 @@ export const ELEMENT_PASSIVES = [2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808,
  */
 export const NATION_PASSIVES = [2801, 2802, 2803, 2805, 2804]
 
+/** Reborn caps the SkillAdd bonus to a cast chance at +30 (client tooltip, `clamp(add, 0, 30)`). */
+const SKILL_ADD_CHANCE_CAP = 30
+
 /**
- * SkillSystem.GetSkillProbability: the chance plus SkillAddN % 100 of the skill's element tree.
- * The passives add 500-3000 (whole hundreds) or 3, so most of it comes out as 0, as in the original.
+ * Reborn's cast chance: the chance plus SkillAddN of the skill's element tree, capped at +30. The
+ * 2011 server added SkillAddN % 100 instead, so an outfit's +1500 damage passive added nothing.
+ * Scroll skills keep the % 100 rule inside their own range (Reborn shows 3-40 %, past the cap).
  */
 export function skillChance(
   skill: { id?: number; javascript?: string; probability?: number; skilladdtype?: number },
@@ -31,9 +35,10 @@ export function skillChance(
 ) {
   const base = skill.probability ?? 0
   const tree = skill.skilladdtype ?? -1
-  const chance = tree < 0 ? base : base + ((skillAdd[tree] ?? 0) % 100)
+  if (tree < 0) return base
+  const add = skillAdd[tree] ?? 0
   const scroll = scrolls[String(skill.id) as keyof typeof scrolls]
   return scroll && skill.javascript === `skill/skill_scroll_${skill.id}.js`
-    ? Math.max(0, Math.min(scroll.castChance[1]!, chance))
-    : chance
+    ? Math.max(0, Math.min(scroll.castChance[1]!, base + (add % 100)))
+    : base + Math.max(0, Math.min(add, SKILL_ADD_CHANCE_CAP))
 }

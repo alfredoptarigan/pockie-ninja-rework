@@ -107,7 +107,7 @@ describe('simulateFight', () => {
     expect(tie.fighters[1]!.hp).toBe(0)
   })
 
-  it('raises an attack skill chance by SkillAdd % 100 of its tree (GetSkillProbability)', () => {
+  it('raises an attack skill chance by its tree SkillAdd, at most +30 (Reborn)', () => {
     // A plain attack skill (no script) with a 1 % chance in tree 2.
     const rare = { id: 4242, type: 1, quomodo: 2, probability: 1, skilladdtype: 2, effect: 1 }
     const uses = (skillAdd: number[]) =>
@@ -117,10 +117,12 @@ describe('simulateFight', () => {
         seed: 7,
       }).events.filter((e) => e.actor === 0 && e.skillId === 4242).length
     const attacks = 40 // 60 actions, two thirds of them by the faster side
-    expect(uses([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])).toBeLessThan(5)
-    // 1 + 199 % 100 = 100: every weighted pick lands on it. Whole hundreds still add nothing.
-    expect(uses([0, 0, 199, 0, 0, 0, 0, 0, 0, 0])).toBe(attacks)
-    expect(uses([0, 0, 3000, 0, 0, 0, 0, 0, 0, 0])).toBeLessThan(5)
+    const tree2 = (add: number) => uses([0, 0, add, 0, 0, 0, 0, 0, 0, 0])
+    expect(tree2(0)).toBeLessThan(5)
+    // 1 + 30 = 31 %: roughly a third of the attacks. An outfit's +3000 is capped at the same +30.
+    expect(tree2(30)).toBeGreaterThan(attacks / 6)
+    expect(tree2(30)).toBeLessThan(attacks / 2)
+    expect(tree2(3000)).toBe(tree2(30))
   })
 
   it('fights sequential duels and the survivor keeps its HP', () => {
@@ -214,7 +216,8 @@ describe('simulateFight', () => {
 describe('replays without a pet (m6 task 5)', () => {
   it('stay byte-identical to the pre-pet engine', () => {
     // Every ported non-pet attack and trigger script, spread over two players and 60 seeds. The
-    // hash was taken from main b6b301ce; a deliberate engine change must update it.
+    // hash was taken from main b6b301ce and updated for the Reborn +30 SkillAdd cast chance cap; a
+    // deliberate engine change must update it.
     const rows = JSON.parse(
       readFileSync(new URL('../../../server/data/game/skills.json', import.meta.url), 'utf8'),
     ) as Record<string, Omit<SkillInput, 'id'> & { ispet?: number }>
@@ -260,6 +263,6 @@ describe('replays without a pet (m6 task 5)', () => {
       .update(JSON.stringify(replays.map(fightOnly)))
       .digest('hex')
     expect(scripted.length).toBe(784)
-    expect(hash).toBe('dc9957dd4cd2ba5c524aeea1f8863cc83c47b7503ba3380ff1b9dfae384de373')
+    expect(hash).toBe('29e5c1d831b7c56174f52bb183cc0f1b9d7cadb88b29385d49b501e32d759372')
   })
 })

@@ -167,11 +167,12 @@ describe('passive skills', () => {
     expect(skillAdd({ ...freshNinja, nation: 4 })).toEqual([0, 0, 0, 3, 500, 0, 0, 0, 0, 0])
   })
 
-  it('adds learned element passives, once per skill', () => {
+  it('adds learned element passives, the nation one on top of the nation level', () => {
     const passive = (id: number) => ({ id, ...skill(id)! })
     expect(skillAdd(freshNinja, [passive(2806)])).toEqual([3, 0, 0, 0, 500, 3, 0, 0, 0, 0])
-    // The nation's own passive learned again stays one record row.
-    expect(skillAdd(freshNinja, [passive(2801)])[0]).toBe(3)
+    // Reborn stacks the nation's passive on a learned copy: a Fire Village character with Fire
+    // Release learned shows SkillAdd0 6 (captured loadData).
+    expect(skillAdd(freshNinja, [passive(2801)])[0]).toBe(6)
   })
 
   it('adds *Skill stat terms and ignores final properties (2100 MaxHP is overwritten)', () => {

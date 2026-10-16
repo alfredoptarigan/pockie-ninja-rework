@@ -29,15 +29,19 @@ describe('ninjutsu id lists (UpSkilCfg.ini)', () => {
   })
 })
 
-describe('skillChance (SkillSystem.GetSkillProbability)', () => {
-  const add = [0, 0, 0, 1003, 0, 0, 0, 0, 0, 3000]
+describe('skillChance (Reborn cast chance)', () => {
+  const add = [0, 0, 0, 3, 0, 0, 0, 0, 0, 1503]
 
-  it('adds SkillAddN % 100 of the skill element tree', () => {
+  it('adds SkillAddN of the skill element tree', () => {
     expect(skillChance({ probability: 24, skilladdtype: 3 }, add)).toBe(27)
   })
 
-  it('keeps the original quirk: whole hundreds add nothing', () => {
-    expect(skillChance({ probability: 31, skilladdtype: 9 }, add)).toBe(31)
+  it('caps the bonus at 30, so an outfit damage passive adds 30 (Reborn tooltip)', () => {
+    expect(skillChance({ probability: 31, skilladdtype: 9 }, add)).toBe(61)
+  })
+
+  it('never lets a negative SkillAdd lower the chance', () => {
+    expect(skillChance({ probability: 20, skilladdtype: 0 }, [-15])).toBe(20)
   })
 
   it('uses the plain probability without a tree', () => {
