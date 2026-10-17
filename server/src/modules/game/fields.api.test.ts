@@ -57,33 +57,24 @@ async function win(monsterId: string) {
   throw new Error(`Never beat ${monsterId}`)
 }
 
-describe('task bosses (TaskBossNpc TaskID)', () => {
-  beforeEach(() => set({ sceneId: 2601, level: 25 }))
+describe('listed Reborn monsters', () => {
+  it.each([
+    [2101, 'n32002'],
+    [2201, 'n32002'],
+    [2601, 'n32005'],
+    [2704, 'n32030'],
+  ])('allows scene %i monster %s without a quest', async (sceneId, monsterId) => {
+    await set({ sceneId, level: 90 })
+    const monster = (await scene()).monsters.find((m: { id: string }) => m.id === monsterId)
+    expect(monster).toMatchObject({ id: monsterId, lock: null })
+    expect((await fight(monsterId)).statusCode).toBe(200)
+  })
 
-  it('shows the boss locked until its quest is taken, and refuses the fight', async () => {
-    const boss = (await scene()).monsters.find((m: { id: string }) => m.id === 'n32005')
-    expect(boss).toMatchObject({ id: 'n32005', level: 25, lock: 'quest' })
-    const response = await fight('n32005')
+  it('still refuses monsters from another map', async () => {
+    await set({ sceneId: 2101, level: 90 })
+    const response = await fight('n32030')
     expect(response.statusCode).toBe(400)
-    expect(response.json().error.code).toBe('need_quest')
-  })
-
-  it('opens the fight while its quest is held or once it is completed', async () => {
-    await accept(10045)
-    expect((await scene()).monsters.find((m: { id: string }) => m.id === 'n32005').lock).toBe(null)
-    expect((await fight('n32005')).statusCode).toBe(200)
-
-    await db.delete(characterQuests).where(eq(characterQuests.characterId, characterId))
-    await accept(10045, 2)
-    await set({ hp: 500 })
-    expect((await fight('n32005')).statusCode).toBe(200)
-  })
-
-  it('shows the never-attackable bosses but keeps them locked (decision 8)', async () => {
-    await set({ sceneId: 2704, level: 70 })
-    const boss = (await scene()).monsters.find((m: { id: string }) => m.id === 'n32030')
-    expect(boss).toMatchObject({ lock: 'never' })
-    expect((await fight('n32030')).json().error.code).toBe('boss_locked')
+    expect(response.json().error.code).toBe('not_here')
   })
 })
 

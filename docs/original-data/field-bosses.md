@@ -38,3 +38,14 @@ Combat previously credited only the level variant, so a victory never advanced
 these quests above level 5. World fights now pass the challenged ID separately
 from the combat variant for quest kill/drop credit. Ready quests navigate to
 their submission NPC, rather than back to the defeated monster.
+
+## Monster cards and old quest locks
+
+The captured Reborn bundle's monster-card Fight callbacks (offsets 3548926 and
+3554593 in `re/field-boss-audit-2026-10-17/main.js`) send `fightMonster` with the
+selected ID after party, energy, and loadout checks. They do not check the old
+`TaskBossNpc.TaskID` list. The local server no longer uses that list to lock
+Warrior (32002) or other listed monsters, including those whose old quest IDs
+are absent. Map membership, character state, energy, and battle guards remain
+validated. Chain Attack uses the same eligible scene roster. Quest kill and
+quest-item progress rules remain separate from permission to begin a fight.

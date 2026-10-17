@@ -12,16 +12,13 @@ import {
   sceneLinks,
   sceneSpawns,
   subTasks,
-  task,
 } from '../../game/data.js'
 import { loadQuests, removeItems, rookieHandIns, saveQuests, type Tx } from '../../game/progress.js'
-import type { QuestProgress } from '../../game/quests.js'
 import { HttpError } from '../../http.js'
 import { rollFieldAmbush } from '../akatsuki/routes.js'
 import { reviveTerms } from './actions.js'
 import { characterOf, lockCharacter, requireAlive, requireUser, toCharacter } from './characters.js'
 import {
-  bossTaskIds,
   buildingClip,
   levelVariant,
   npcMenu,
@@ -45,26 +42,15 @@ const BOSS_STEP = 10
 const fightSchema = z.object({ monsterId: z.string().regex(/^n\d+$/, 'Unknown monster.') })
 const restSchema = z.object({ npcId: z.string().regex(/^n\d+$/) })
 
-/**
- * Why a task boss cannot be fought (TaskSystem / BossRule): `quest` until one of its TaskID quests
- * is held or completed, `never` when none of them exists (decision 8); null when it can.
- */
-export function bossLock(monsterId: string, quests: QuestProgress[]): 'quest' | 'never' | null {
-  if (npc(monsterId)?.class !== 'TaskBossNpc') return null
-  const ids = bossTaskIds(monsterId)
-  if (!ids.some((id) => task(id))) return 'never'
-  return quests.some((q) => ids.includes(q.taskId)) ? null : 'quest'
-}
-
 /** UI_GostList.as: up to 6 monsters, normal ones hidden when more than 5 levels above. */
-export function sceneMonsters(sceneId: number, playerLevel: number, quests: QuestProgress[] = []) {
+export function sceneMonsters(sceneId: number, playerLevel: number) {
   return sceneSpawns(sceneId)
     .flatMap(({ id }) => {
       const row = npc(id)
       if (!row || !MONSTER_CLASSES.has(String(row.class))) return []
       const level = Number(row.Level)
       if (row.class === 'NormalNpc' && level > playerLevel + MAX_LEVEL_ABOVE_PLAYER) return []
-      return [{ id, nameKey: `lg_${row.Name}`, level, lock: bossLock(id, quests) }]
+      return [{ id, nameKey: `lg_${row.Name}`, level, lock: null }]
     })
     .slice(0, MAX_LISTED_MONSTERS)
 }
@@ -161,11 +147,10 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const character = await characterOf(db, requireUser(request).id)
     const sceneId = character.sceneId
     const visitedScenes = await recordSceneEntered(db, character.id, sceneId)
-    const { quests, tickets } = await db.transaction(async (tx) => {
+    const { tickets } = await db.transaction(async (tx) => {
       const boss = ticketBoss(sceneId)
       const ticketItem = boss ? String(npc(boss.npcId)?.AttackItemConfig) : undefined
       return {
-        quests: await loadQuests(tx, character.id),
         tickets: ticketItem ? await heldCount(tx, character.id, ticketItem) : 0,
       }
     })
@@ -174,7 +159,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       visitedScenes,
       visitRequired: visitRequiredScenes(),
       nameKey: `lg_Scene_BackGround_${sceneId}`,
-      monsters: sceneMonsters(sceneId, character.level, quests).map((monster) => ({
+      monsters: sceneMonsters(sceneId, character.level).map((monster) => ({
         ...monster,
         drops: monsterDrops(monster.id),
       })),
@@ -265,9 +250,8 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
 }
 
 /**
- * Checks the monster can be fought here and returns the NPC to fight: a listed monster (task
- * bosses need their quest), or the scene's standing ticket boss, which takes one ticket and
- * sends the variant for the player's level (AttackSystem, LevelAttackRec).
+ * Validates scene membership. Standing ticket bosses spend one proof and use the backup
+ * level variant (AttackSystem, LevelAttackRec); listed monster cards need no quest.
  */
 async function fightTarget(tx: Tx, character: typeof characters.$inferSelect, monsterId: string) {
   const boss = ticketBoss(character.sceneId)
@@ -279,16 +263,7 @@ async function fightTarget(tx: Tx, character: typeof characters.$inferSelect, mo
     await removeItems(tx, character.id, ticket, 1)
     return levelVariant(monsterId, character.level)
   }
-  const quests = await loadQuests(tx, character.id)
-  const monster = sceneMonsters(character.sceneId, character.level, quests).find(
-    (m) => m.id === monsterId,
-  )
+  const monster = sceneMonsters(character.sceneId, character.level).find((m) => m.id === monsterId)
   if (!monster) throw new HttpError(400, 'not_here', 'That monster is not in this area.')
-  if (monster.lock === 'quest') {
-    throw new HttpError(400, 'need_quest', 'You need the quest for this boss before you fight it.')
-  }
-  if (monster.lock === 'never') {
-    throw new HttpError(400, 'boss_locked', 'This boss cannot be challenged.')
-  }
   return monsterId
 }

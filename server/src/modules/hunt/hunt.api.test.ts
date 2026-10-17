@@ -67,6 +67,11 @@ const ageChain = (minutes: number) =>
     .where(eq(chainAttacks.characterId, ninja.characterId))
 
 describe('Chain Attack', () => {
+  it('allows Warrior without holding its old backup quest', async () => {
+    const { chain } = await ok<ChainAttackView>('chain-attack', { monsterId: 'n32002', amount: 1 })
+    expect(chain).toMatchObject({ monsterId: 'n32002', amount: 1 })
+  })
+
   it('counts a monster for every 3 minutes passed, never more than the chain', () => {
     const startedAt = new Date(0)
     expect(dueMonsters({ amount: 3, startedAt }, new Date(179_999))).toBe(0)

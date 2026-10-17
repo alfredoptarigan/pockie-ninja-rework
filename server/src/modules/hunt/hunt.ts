@@ -72,7 +72,7 @@ export function huntCandidates(character: CharacterRow, quests: QuestProgress[])
   )
   const reachable = new Map<string, { sceneId: number; level: number }>()
   for (const sceneId of scenes) {
-    for (const monster of sceneMonsters(sceneId, character.level, quests)) {
+    for (const monster of sceneMonsters(sceneId, character.level)) {
       if (npc(monster.id)?.class !== 'NormalNpc' || monster.level > character.level) continue
       if (!reachable.has(monster.id)) reachable.set(monster.id, { sceneId, level: monster.level })
     }

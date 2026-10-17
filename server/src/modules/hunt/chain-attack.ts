@@ -14,7 +14,7 @@ import { ENERGY_RULES } from '../../../../shared/src/schemas/energy.js'
 import { chainAttacks, characters } from '../../db/schema.js'
 import { fightMonster, monsterDrops } from '../../game/combat.js'
 import { npc } from '../../game/data.js'
-import { loadQuests, rookieHandIns, type Tx } from '../../game/progress.js'
+import { rookieHandIns, type Tx } from '../../game/progress.js'
 import { rollFieldAmbush } from '../akatsuki/routes.js'
 import { requireAlive } from '../game/characters.js'
 import { recordBossKill, sceneMonsters } from '../game/world.js'
@@ -52,12 +52,10 @@ export async function startChain(tx: Tx, character: CharacterRow, input: ChainAt
   requireAlive(character, 'fight')
   await requireNoTeam(tx, character.id, 'start a chain attack')
   await requireBattleFree(tx, character.id)
-  const quests = await loadQuests(tx, character.id)
-  const monster = sceneMonsters(character.sceneId, character.level, quests).find(
+  const monster = sceneMonsters(character.sceneId, character.level).find(
     (m) => m.id === input.monsterId,
   )
   if (!monster) throw bad('not_here', 'That monster is not in this area.')
-  if (monster.lock) throw bad('boss_locked', 'This monster cannot be chain attacked yet.')
   // Reborn: 1 energy per monster, paid at Begin.
   await spendEnergy(tx, character, input.amount * ENERGY_RULES.chainCostPerMonster)
   const now = new Date()

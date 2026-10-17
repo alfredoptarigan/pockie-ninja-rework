@@ -23,12 +23,6 @@ export function exceptTaskIds(sceneId: number): number[] {
   return (rows ?? []).map((row) => row.TaskID)
 }
 
-/** Ids of an NPC's `TaskID` (`;`-separated) for task bosses. */
-export function bossTaskIds(npcId: string): number[] {
-  const raw = npc(npcId)?.TaskID
-  return raw === undefined ? [] : String(raw).split(';').map(Number).filter(Boolean)
-}
-
 export interface FieldBoss {
   npcId: string
   /** Canonical Reborn appearance; village quest IDs remain local. */
