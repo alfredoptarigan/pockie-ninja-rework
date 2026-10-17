@@ -4,32 +4,34 @@
 > [2026-10-17 client audit](reborn-field-boss-client-audit.md) corrects the roster
 > and distinguishes displayed player level from actual combat level.
 
-Reverse engineered from the captured Reborn client `data/reborn-raw/re/main.js`
-(`Jv`, `$v`, `Zv`), `assets/scenes/npcs.json`, and `assets/entities/npcs`.
-The server roster and spawn coordinates come from `scene-timed-npcs.json`
-(RefresHeartNpc.ini); level variants come from LevelAttackRec.
+The current placement roster follows `re/serverConfig.json` from Reborn: 21
+standing ticket bosses, across 2101–2503 (three per village), 2601–2605, and 2701. Maps 2702–2704 and 2801–2804 have no ticket boss. The separate
+`worldMapBoss` entries are outside this system. All five third village fields
+use Firebore Dragon's appearance and name.
 
-The 28 fields are 2101–2503 (three per village), 2601–2605, 2701–2704,
-and 2801–2804. Each shows its ticket boss as a standing, clickable figure,
-including while the existing server schedule blocks challenges. The dialog
-shows Demon Boss, the player's level variant, Demon Proofs, Fight, Auto,
-and Cancel. Auto repeats after the replay, and stops on defeat, a refused
-challenge, or Stop Auto. Each accepted fight spends one i150078 server-side.
+The dialog shows the player's exact level, Demon Proofs, Fight, Auto, and
+Cancel. Its level label does not establish combat scaling. Auto repeats after
+the replay and stops on defeat, a refused challenge, or Stop Auto. A proof is
+required. The old backup countdown and hourly challenge gate were removed to
+follow the observed Reborn client flow; this is a local policy choice because
+Reborn server schedule behavior has not been captured.
 
-Reborn uses outdoor NPC atlases at 12 fps, with separate registration and
-name offsets; battle stand sprites are smaller and must not substitute for them.
-`tools/assets/field-bosses.ts` exports the captured atlases where placement data
-exists and the backup's original NPC SWFs otherwise. All 28 placements are
-recorded in `client/src/generated/field-bosses.json`, with WebP sheets under
-`client/public/assets/game/field-bosses`. Regenerate with:
+Outdoor NPC atlases run at 12 fps with original registration and name offsets.
+`tools/assets/field-bosses.ts` exports the captured atlases, canonical names,
+placement roster in `server/data/game/reborn/field-bosses.json`, and animation
+metadata in `client/src/generated/field-bosses.json`. Regenerate with:
 
 ```sh
 node tools/assets/field-bosses.ts
 ```
 
-The exporter requires the original backup and captured Reborn assets, as the
-other asset tools do. Restart Vite after adding new public assets: its asset
-watcher is intentionally disabled.
+The exporter requires captured Reborn assets and the backup ID mapping.
+Restart Vite after adding new public assets: its asset watcher is disabled.
+
+Combat still uses backup LevelAttackRec variants. The existing local rule
+spends one i150078 per accepted fight and blocks team fights. These rules,
+combat stats, and proof acquisition are **not verified Reborn server behavior**.
+A captured `fieldBossFight` response is needed before claiming battle parity.
 
 Slay the Demon (50007/52007/54007/56007/58007) targets the base spawn ID.
 Combat previously credited only the level variant, so a victory never advanced

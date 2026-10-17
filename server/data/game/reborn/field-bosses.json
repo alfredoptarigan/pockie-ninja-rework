@@ -1,0 +1,170 @@
+{
+  "2101": {
+    "npcId": "n3201801",
+    "artId": "n3201801",
+    "nameKey": "lg_field_boss_10019",
+    "x": 1116,
+    "y": 920,
+    "scale": 100
+  },
+  "2102": {
+    "npcId": "n3202501",
+    "artId": "n3202501",
+    "nameKey": "lg_field_boss_10026",
+    "x": 566,
+    "y": 948,
+    "scale": 100
+  },
+  "2103": {
+    "npcId": "n310070",
+    "artId": "n310070",
+    "nameKey": "lg_field_boss_10039",
+    "x": 1146,
+    "y": 912,
+    "scale": 100
+  },
+  "2201": {
+    "npcId": "n3201821",
+    "artId": "n3201801",
+    "nameKey": "lg_field_boss_10019",
+    "x": 632,
+    "y": 634,
+    "scale": 100
+  },
+  "2202": {
+    "npcId": "n3202521",
+    "artId": "n3202501",
+    "nameKey": "lg_field_boss_10026",
+    "x": 572,
+    "y": 840,
+    "scale": 100
+  },
+  "2203": {
+    "npcId": "n310080",
+    "artId": "n310070",
+    "nameKey": "lg_field_boss_10039",
+    "x": 1116,
+    "y": 700,
+    "scale": 100
+  },
+  "2301": {
+    "npcId": "n3201841",
+    "artId": "n3201801",
+    "nameKey": "lg_field_boss_10019",
+    "x": 1090,
+    "y": 883,
+    "scale": 100
+  },
+  "2302": {
+    "npcId": "n3202541",
+    "artId": "n3202501",
+    "nameKey": "lg_field_boss_10026",
+    "x": 800,
+    "y": 944,
+    "scale": 100
+  },
+  "2303": {
+    "npcId": "n310110",
+    "artId": "n310070",
+    "nameKey": "lg_field_boss_10039",
+    "x": 564,
+    "y": 905,
+    "scale": 100
+  },
+  "2401": {
+    "npcId": "n3201861",
+    "artId": "n3201801",
+    "nameKey": "lg_field_boss_10019",
+    "x": 1136,
+    "y": 780,
+    "scale": 100
+  },
+  "2402": {
+    "npcId": "n3202561",
+    "artId": "n3202501",
+    "nameKey": "lg_field_boss_10026",
+    "x": 1492,
+    "y": 908,
+    "scale": 100
+  },
+  "2403": {
+    "npcId": "n310100",
+    "artId": "n310070",
+    "nameKey": "lg_field_boss_10039",
+    "x": 778,
+    "y": 866,
+    "scale": 100
+  },
+  "2501": {
+    "npcId": "n3201881",
+    "artId": "n3201801",
+    "nameKey": "lg_field_boss_10019",
+    "x": 1064,
+    "y": 884,
+    "scale": 100
+  },
+  "2502": {
+    "npcId": "n3202581",
+    "artId": "n3202501",
+    "nameKey": "lg_field_boss_10026",
+    "x": 550,
+    "y": 902,
+    "scale": 100
+  },
+  "2503": {
+    "npcId": "n310090",
+    "artId": "n310070",
+    "nameKey": "lg_field_boss_10039",
+    "x": 1272,
+    "y": 732,
+    "scale": 100
+  },
+  "2601": {
+    "npcId": "n320140",
+    "artId": "n320140",
+    "nameKey": "lg_field_boss_10015",
+    "x": 940,
+    "y": 894,
+    "scale": 100
+  },
+  "2602": {
+    "npcId": "n320310",
+    "artId": "n320310",
+    "nameKey": "lg_field_boss_10032",
+    "x": 1276,
+    "y": 772,
+    "scale": 100
+  },
+  "2603": {
+    "npcId": "n310030",
+    "artId": "n310030",
+    "nameKey": "lg_field_boss_10035",
+    "x": 1055,
+    "y": 512,
+    "scale": 100
+  },
+  "2604": {
+    "npcId": "n330040",
+    "artId": "n330040",
+    "nameKey": "lg_field_boss_10052",
+    "x": 872,
+    "y": 910,
+    "scale": 100
+  },
+  "2605": {
+    "npcId": "n310010",
+    "artId": "n310010",
+    "nameKey": "lg_field_boss_10034",
+    "x": 1048,
+    "y": 726,
+    "scale": 100
+  },
+  "2701": {
+    "npcId": "n320300",
+    "artId": "n320300",
+    "nameKey": "lg_field_boss_10031",
+    "x": 1082,
+    "y": 850,
+    "scale": 100
+  }
+}

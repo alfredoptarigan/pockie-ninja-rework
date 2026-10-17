@@ -110,30 +110,38 @@ describe('boss quests with an item (SubTaskType 10)', () => {
   })
 })
 
-describe('ticket bosses (RefresHeartNpc, AttackItemConfig i150078)', () => {
-  // 2601: Soulender (n320140) appears at :10 for 30 minutes every hour; dates are ignored.
+describe('standing Reborn ticket bosses (i150078)', () => {
+  // Keep a fixed clock to prove that the former backup spawn window no longer gates fights.
   const at = (iso: string) => {
     vi.useFakeTimers({ toFake: ['Date'] })
     vi.setSystemTime(new Date(iso))
   }
   beforeEach(() => set({ sceneId: 2601, level: 25 }))
 
-  it('tells when the boss is out and when it comes back', async () => {
-    at('2026-10-12T12:15:00Z')
+  it('shows the player level rather than the rounded combat variant level', async () => {
+    await set({ level: 22 })
+    expect((await scene()).ticketBoss).toMatchObject({ id: 'n320140', level: 22 })
+  })
+
+  it('lists only the 21 standing boss maps in Reborn', async () => {
+    for (const sceneId of [2702, 2703, 2704, 2801, 2802, 2803, 2804]) {
+      await set({ sceneId })
+      expect((await scene()).ticketBoss, `scene ${sceneId}`).toBeNull()
+    }
+    await set({ sceneId: 2203 })
     expect((await scene()).ticketBoss).toMatchObject({
-      id: 'n320140',
-      fightId: 'n320144',
-      level: 25,
-      active: true,
-      ticketItemId: 'i150078',
-      tickets: 0,
-      endsAt: '2026-10-12T12:40:00.000Z',
+      id: 'n310080',
+      artId: 'n310070',
+      nameKey: 'lg_field_boss_10039',
     })
+  })
+
+  it('accepts a proof outside the old backup spawn schedule', async () => {
     at('2026-10-12T12:45:00Z')
-    expect((await scene()).ticketBoss).toMatchObject({
-      active: false,
-      startsAt: '2026-10-12T13:10:00.000Z',
-    })
+    await give('i150078', 2)
+    expect((await scene()).ticketBoss).not.toHaveProperty('startsAt')
+    expect((await fight('n320140')).statusCode).toBe(200)
+    expect(await held('i150078')).toBe(1)
   })
 
   it('counts the level variant kill for Slay the Demon in every village', async () => {
@@ -177,13 +185,9 @@ describe('ticket bosses (RefresHeartNpc, AttackItemConfig i150078)', () => {
     expect(await held('i150078')).toBe(1)
   })
 
-  it('refuses without a ticket or while the boss is away', async () => {
-    at('2026-10-12T12:15:00Z')
-    expect((await fight('n320140')).json().error.code).toBe('no_ticket')
-    await give('i150078')
+  it('refuses without a proof, including outside the backup schedule', async () => {
     at('2026-10-12T12:45:00Z')
-    expect((await fight('n320140')).json().error.code).toBe('boss_away')
-    expect(await held('i150078')).toBe(1)
+    expect((await fight('n320140')).json().error.code).toBe('no_ticket')
   })
 })
 

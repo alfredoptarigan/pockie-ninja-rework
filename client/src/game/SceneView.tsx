@@ -1,17 +1,8 @@
 import type { Character } from '@pockie/shared'
 import { isWorn } from './inventory/EquipmentSlots'
-import { useCallback, useContext, useEffect, useEffectEvent, useState, type ReactNode } from 'react'
+import { useContext, useEffect, useEffectEvent, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { useQueryClient } from '@tanstack/react-query'
-import {
-  errorMessage,
-  gameKeys,
-  useApplyResult,
-  useExplore,
-  useFight,
-  useInventory,
-  useScene,
-} from './api'
+import { errorMessage, useApplyResult, useExplore, useFight, useInventory, useScene } from './api'
 import { AkatsukiAmbush } from './akatsuki'
 import { exploreClip } from './explore'
 import { ExploreWindow } from './ExploreWindow'
@@ -19,7 +10,7 @@ import { FightSummary } from './FightSummary'
 import { HudLayer } from './Hud'
 import { DropsMenu, lockReason, MonsterRow } from './MonsterDrops'
 import { ReviveWindow } from './ReviveWindow'
-import { TicketBossInfo, TicketBossPanel } from './TicketBoss'
+import { TicketBossInfo } from './TicketBoss'
 import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
 import { plainText } from './text'
@@ -91,11 +82,6 @@ export function SceneView({
   /** An Akatsuki ambush sprung by the last won fight, shown once its result window closes. */
   const [ambush, setAmbush] = useState<Ambush | null>(null)
   const applyResult = useApplyResult()
-  const queryClient = useQueryClient()
-  const refetchScene = useCallback(
-    () => void queryClient.invalidateQueries({ queryKey: gameKeys.scene }),
-    [queryClient],
-  )
   const ticketBoss = scene.data?.ticketBoss
   const [bossInfo, setBossInfo] = useState<TicketBoss | null>(null)
   const [autoBoss, setAutoBoss] = useState<SceneMonster | null>(null)
@@ -177,20 +163,6 @@ export function SceneView({
                 <GameButton small disabled={defeated} onClick={() => openWindow('pubFight')}>
                   Pub Fight
                 </GameButton>
-              )}
-              {ticketBoss && (
-                <TicketBossPanel
-                  boss={ticketBoss}
-                  disabled={fight.isPending || defeated}
-                  onExpire={refetchScene}
-                  onFight={() =>
-                    void startFight({
-                      id: ticketBoss.id,
-                      nameKey: ticketBoss.nameKey,
-                      level: ticketBoss.level,
-                    })
-                  }
-                />
               )}
             </div>
           </>,
@@ -313,7 +285,7 @@ export function SceneView({
             key={fightState.run}
             replay={fightState.result.replay}
             clothing={lookOf(character)}
-            monsterIds={[fightState.monster.id]}
+            monsterIds={[fightState.monster.artId ?? fightState.monster.id]}
             sceneId={character.sceneId}
             weaponItemId={fightState.weaponItemId}
             onFinished={finishReplay}

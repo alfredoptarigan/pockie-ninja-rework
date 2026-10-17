@@ -4,6 +4,8 @@ import type { BagItemInfo, Character, MonsterDrop, QuestHandIn, QuestRewards } f
 import type { AkatsukiAmbush } from '../../../shared/src/schemas/akatsuki'
 
 export interface SceneMonster {
+  /** Appearance shared by Reborn village bosses whose quest IDs differ. */
+  artId?: string
   id: string
   nameKey: string
   level: number
@@ -19,21 +21,19 @@ export interface SceneMonster {
 /** Which window an NPC's menu opens (npc.ini JavaScript); null for talk-only NPCs. */
 export type NpcMenu = 'shop' | 'merchant' | 'forge' | 'gates' | 'daily' | 'rest' | 'arena'
 
-/** The scene's timed boss (RefresHeartNpc.ini), fought for one ticket item. */
+/** Reborn's standing field boss, challenged with a Demon Proof. */
 export interface TicketBoss {
   /** The listed boss, sent to POST /fight. */
   id: string
   /** The variant fought at the player's level (LevelAttackRec). */
   fightId: string
   nameKey: string
+  /** Reborn displays the player level here, not the combat variant level. */
   level: number
   x: number
   y: number
   scale: number
-  /** Out now (until `endsAt`), else it next appears at `startsAt`. */
-  active: boolean
-  startsAt: string
-  endsAt: string
+  artId: string
   ticketItemId: string
   ticketNameKey: string
   /** Tickets in the bag. */

@@ -1,5 +1,5 @@
 // World rules on top of the imported data (server/data/game) that only travel and the fields use:
-// ExceptTaskScene.ini, RefresHeartNpc.ini (ticket bosses), LevelAttackRec and the NPC menus.
+// ExceptTaskScene.ini, Reborn field bosses, LevelAttackRec and the NPC menus.
 // server/src/game/data.ts belongs to the forge task, so these files are read here.
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -29,64 +29,19 @@ export function bossTaskIds(npcId: string): number[] {
   return raw === undefined ? [] : String(raw).split(';').map(Number).filter(Boolean)
 }
 
-export interface TicketBossSlot {
+export interface FieldBoss {
   npcId: string
-  hour: number
-  minute: number
-  liveMinutes: number
+  /** Canonical Reborn appearance; village quest IDs remain local. */
+  artId: string
+  nameKey: string
   x: number
   y: number
   scale: number
 }
 
-/**
- * RefresHeartNpc.ini rows of one scene: `npcId,start,end,H:MM,liveMinutes,x,y,scale`. The 2020
- * end dates are not applied (decision 2), so every row repeats daily.
- */
-export function ticketBossSlots(sceneId: number): TicketBossSlot[] {
-  const scene = load<Record<string, { r?: unknown }>>('scene-timed-npcs')[String(sceneId)]
-  return lines(scene?.r).map((line) => {
-    const [npcId = '', , , time = '0:00', live = '30', x = '0', y = '0', scale = '100'] =
-      line.split(',')
-    const [hour = '0', minute = '0'] = time.split(':')
-    return {
-      npcId,
-      hour: Number(hour),
-      minute: Number(minute),
-      liveMinutes: Number(live),
-      x: Number(x),
-      y: Number(y),
-      scale: Number(scale),
-    }
-  })
-}
-
-const MINUTE = 60_000
-const DAY = 24 * 60 * MINUTE
-
-/**
- * The scene's ticket boss and when it is (or next will be) out, in UTC: the slot alive at `now`,
- * otherwise the next one to start.
- */
-export function ticketBoss(sceneId: number, now: Date) {
-  const slots = ticketBossSlots(sceneId).filter((slot) => npc(slot.npcId))
-  if (slots.length === 0) return undefined
-  const dayStart = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
-  const windows = slots.flatMap((slot) =>
-    [-DAY, 0, DAY].map((offset) => {
-      const start = dayStart + offset + (slot.hour * 60 + slot.minute) * MINUTE
-      return { slot, start, end: start + slot.liveMinutes * MINUTE }
-    }),
-  )
-  const t = now.getTime()
-  const alive = windows.find((w) => w.start <= t && t < w.end)
-  const next = alive ?? windows.filter((w) => w.start > t).sort((a, b) => a.start - b.start)[0]!
-  return {
-    slot: next.slot,
-    active: Boolean(alive),
-    startsAt: new Date(next.start).toISOString(),
-    endsAt: new Date(next.end).toISOString(),
-  }
+/** Reborn serverConfig.scenes.boss: standing ticket bosses, without the 2011 spawn clock. */
+export function ticketBoss(sceneId: number): FieldBoss | undefined {
+  return load<Record<string, FieldBoss>>('reborn/field-bosses')[String(sceneId)]
 }
 
 /** LevelAttackRec (npcrecord.ini, values `min,max,npcId`): the variant fought at this level. */

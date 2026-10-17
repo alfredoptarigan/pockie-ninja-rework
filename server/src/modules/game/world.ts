@@ -79,22 +79,21 @@ async function heldCount(tx: Tx, characterId: string, itemId: string) {
 
 /** The scene's ticket boss for the API: the listed boss and the variant fought at this level. */
 function ticketBossView(sceneId: number, level: number, tickets: (itemId: string) => number) {
-  const boss = ticketBoss(sceneId, new Date())
+  const boss = ticketBoss(sceneId)
   if (!boss) return null
-  const { npcId, x, y, scale } = boss.slot
+  const { npcId, artId, nameKey, x, y, scale } = boss
+  // shortcut: combat uses backup level variants until a Reborn battle capture supplies stats.
   const fightId = levelVariant(npcId, level)
   const ticketItemId = String(npc(npcId)!.AttackItemConfig)
   return {
     id: npcId,
     fightId,
-    nameKey: `lg_${npc(npcId)!.Name}`,
-    level: Number(npc(fightId)!.Level),
+    artId,
+    nameKey,
+    level,
     x,
     y,
     scale,
-    active: boss.active,
-    startsAt: boss.startsAt,
-    endsAt: boss.endsAt,
     ticketItemId,
     ticketNameKey: itemNameKey(ticketItemId),
     tickets: tickets(ticketItemId),
@@ -163,8 +162,8 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
     const sceneId = character.sceneId
     const visitedScenes = await recordSceneEntered(db, character.id, sceneId)
     const { quests, tickets } = await db.transaction(async (tx) => {
-      const boss = ticketBoss(sceneId, new Date())
-      const ticketItem = boss ? String(npc(boss.slot.npcId)?.AttackItemConfig) : undefined
+      const boss = ticketBoss(sceneId)
+      const ticketItem = boss ? String(npc(boss.npcId)?.AttackItemConfig) : undefined
       return {
         quests: await loadQuests(tx, character.id),
         tickets: ticketItem ? await heldCount(tx, character.id, ticketItem) : 0,
@@ -267,13 +266,12 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
 
 /**
  * Checks the monster can be fought here and returns the NPC to fight: a listed monster (task
- * bosses need their quest), or the scene's ticket boss while it is out, which takes one ticket and
+ * bosses need their quest), or the scene's standing ticket boss, which takes one ticket and
  * sends the variant for the player's level (AttackSystem, LevelAttackRec).
  */
 async function fightTarget(tx: Tx, character: typeof characters.$inferSelect, monsterId: string) {
-  const boss = ticketBoss(character.sceneId, new Date())
-  if (boss?.slot.npcId === monsterId) {
-    if (!boss.active) throw new HttpError(400, 'boss_away', 'That boss is not here right now.')
+  const boss = ticketBoss(character.sceneId)
+  if (boss?.npcId === monsterId) {
     const ticket = String(npc(monsterId)!.AttackItemConfig)
     if ((await heldCount(tx, character.id, ticket)) < 1) {
       throw new HttpError(400, 'no_ticket', 'You need a Demon Proof of Suppression to fight it.')

@@ -1,19 +1,9 @@
 // Reborn's outdoor boss atlases are larger than their battle sprites; keep their scene offsets.
-import {
-  existsSync,
-  mkdirSync,
-  mkdtempSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import sharp from 'sharp'
 import { format } from 'prettier'
-import { exportMotions } from './motions.ts'
-import { iconSource } from './sources.ts'
 import { paths } from './paths.ts'
 import { writeSheet } from './sheet.ts'
 import type { MotionSheet } from '../../client/src/generated/game-assets.ts'
@@ -21,40 +11,44 @@ import type { MotionSheet } from '../../client/src/generated/game-assets.ts'
 const raw = resolve(process.env.REBORN_RAW_DIR ?? 'data/reborn-raw')
 const read = (file: string) => JSON.parse(readFileSync(file, 'utf8'))
 const timed = read(join(paths.gameData, 'scene-timed-npcs.json')) as Record<string, { r: string[] }>
-const npcs = read(join(paths.gameData, 'npcs.json')) as Record<string, { ResourceID: string }>
+const scenes = read(join(raw, 're/serverConfig.json')).scenes as Record<string, { boss?: number }>
+const locale = read(join(raw, 'locales_en_translation.json')) as Record<string, string>
 const config = read(join(raw, 'assets/scenes/npcs.json')) as Record<
   string,
-  Record<string, { offset: number[]; nameOffset?: number[]; size: number[] }>
+  Record<
+    string,
+    { position: [number, number]; offset: number[]; nameOffset?: number[]; size: number[] }
+  >
 >
-const npcFiles = readdirSync(join(paths.movieclips, 'npc'))
+const canonical = new Map<number, string>()
+const fieldBosses: Record<
+  string,
+  { npcId: string; artId: string; nameKey: string; x: number; y: number; scale: number }
+> = {}
+const names: Record<string, string> = {}
 const result: Record<string, { sheet: MotionSheet; nameOffset: { x: number; y: number } }> = {}
 const work = mkdtempSync(join(tmpdir(), 'pockie-field-boss-'))
 try {
-  for (const [sceneId, rows] of Object.entries(timed)) {
-    const id = rows.r[0]!.split(',')[0]!
-    const asset =
-      iconSource(npcs[id]!.ResourceID)?.match(/userface_n(\d+)/i)?.[1] ??
-      npcs[id]!.ResourceID.replace('OutUserFace_N', '')
-    const source = join(raw, `assets/entities/npcs/${asset}`)
-    const placement = config[sceneId]?.[asset ?? '']
-    if (!placement || !existsSync(`${source}.json`)) {
-      const swf = npcFiles.find((file) =>
-        new RegExp(`^n${asset}(\\.s\\d+)?\\.swf$`, 'i').test(file),
-      )
-      if (!swf) throw new Error(`Missing outdoor boss ${id} (${asset})`)
-      const sheet = (
-        await exportMotions(
-          [{ motion: 'stand', path: join(paths.movieclips, 'npc', swf) }],
-          `game/field-bosses/${asset}`,
-        )
-      ).motions.stand
-      if (!sheet) throw new Error(`Empty outdoor boss ${id}`)
-      result[id] = {
-        sheet,
-        nameOffset: { x: sheet.frameWidth / 2 - sheet.anchor.x, y: -sheet.anchor.y - 12 },
-      }
-      continue
+  for (const [sceneId, row] of Object.entries(scenes)) {
+    if (!row.boss) continue
+    const asset = row.boss
+    const id = timed[sceneId]?.r[0]?.split(',')[0]
+    const placement = config[sceneId]?.[String(asset)]
+    if (!id || !placement) throw new Error(`Missing field boss placement ${sceneId}/${asset}`)
+    if (!canonical.has(asset)) canonical.set(asset, id)
+    const nameKey = `lg_field_boss_${asset}`
+    const name = locale[`npc__${asset}--name`]
+    if (!name) throw new Error(`Missing field boss name ${asset}`)
+    names[nameKey] = name
+    fieldBosses[sceneId] = {
+      npcId: id,
+      artId: canonical.get(asset)!,
+      nameKey,
+      x: placement.position[0],
+      y: placement.position[1],
+      scale: 100,
     }
+    const source = join(raw, `assets/entities/npcs/${asset}`)
     const atlas = read(`${source}.json`) as {
       textures: {
         image: string
@@ -113,10 +107,14 @@ try {
       },
     }
   }
-  writeFileSync(
-    join(paths.generated, 'field-bosses.json'),
-    await format(JSON.stringify(result), { parser: 'json', printWidth: 100 }),
-  )
+  const namesFile = join(paths.root, 'client/src/i18n/reborn.json')
+  const outputs = [
+    [join(paths.generated, 'field-bosses.json'), result],
+    [join(paths.gameData, 'reborn/field-bosses.json'), fieldBosses],
+    [namesFile, { ...read(namesFile), ...names }],
+  ] as const
+  for (const [file, data] of outputs)
+    writeFileSync(file, await format(JSON.stringify(data), { parser: 'json', printWidth: 100 }))
   console.log(`Exported ${Object.keys(result).length} field boss placements`)
 } finally {
   rmSync(work, { recursive: true, force: true })
