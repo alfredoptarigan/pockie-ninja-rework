@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { newbiePackQuest, villageScene } from '../test/game'
 import { json, mockApi, renderWithProviders } from '../test/utils'
-import { completedNotice, QuestLog } from './QuestLog'
+import { completedNotice, QuestHint, QuestLog } from './QuestLog'
 
 const equipQuest = {
   ...newbiePackQuest,
@@ -58,5 +58,30 @@ describe('QuestLog', () => {
   it('names completed quests', () => {
     expect(completedNotice([90001])).toBe(' Quest complete: Newbie Pack.')
     expect(completedNotice([])).toBe('')
+  })
+})
+
+describe('QuestHint for Ninjutsu Training', () => {
+  const quest = {
+    ...equipQuest,
+    taskId: 10001,
+    nameKey: 'lg_Task_10001',
+    descriptionKey: 'lg_TaskDes_10001',
+    progress: [2],
+    steps: [{ descriptionKey: 'lg_SubTaskDes_1', target: 2 }],
+  }
+
+  it('never tells the player to talk to the defeated Sunflower while awaiting hand-in navigation', () => {
+    renderWithProviders(<QuestHint quest={quest} />)
+    expect(screen.getByText('Return to the quest giver to submit your report.')).toBeVisible()
+    expect(screen.queryByText(/Talk to/)).not.toBeInTheDocument()
+  })
+
+  it('shows the actual kill objective while the quest is active', () => {
+    renderWithProviders(<QuestHint quest={{ ...quest, state: 0, progress: [1] }} />)
+    expect(document.body).toHaveTextContent('Sunflower')
+    expect(document.body).toHaveTextContent('kill')
+    expect(document.body).toHaveTextContent('1∕2')
+    expect(document.body).not.toHaveTextContent('Talk to Sunflower')
   })
 })

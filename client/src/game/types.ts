@@ -77,6 +77,8 @@ export interface Quest {
   nameKey: string
   descriptionKey: string
   steps: QuestStep[]
+  /** Server-selected objective or submission NPC. */
+  navigation?: { sceneId?: number; npcId?: string }
   /** What the quest pays; optional so the UI copes with responses without it. */
   rewards?: QuestRewards
 }

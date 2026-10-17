@@ -19,6 +19,7 @@ const rewards: QuestRewards = {
 const elderQuest = {
   ...newbiePackQuest,
   taskId: 90000,
+  navigation: { sceneId: 111, npcId: 'n11001' },
   state: 1 as const,
   progress: [1],
   nameKey: 'lg_Task_90000',

@@ -48,35 +48,33 @@ function NpcName({ npcId, fallback }: { npcId: string; fallback: string }) {
   return <span className="text-[#1b6e17]">{plainText(`lg_name_${npcId}`, fallback)}</span>
 }
 
-/** Where a held quest sends the player: the bag for tutorial steps, else the NPC to talk to. */
+/** Ready quests name the submission NPC; active quests describe their actual objective. */
 export function QuestHint({ quest }: { quest: Quest }) {
+  if (quest.state === 1) {
+    const npcId = quest.navigation?.npcId
+    return npcId ? (
+      <>
+        Talk to <NpcName npcId={npcId} fallback="the quest giver" />
+      </>
+    ) : (
+      'Return to the quest giver to submit your report.'
+    )
+  }
   const bag = bagStep(quest)
   if (bag) {
     return 'itemId' in bag
       ? 'Open your bag and use the item.'
       : 'Open your bag and equip your weapon.'
   }
-  if (
-    (quest.taskId >= 820001 && quest.taskId <= 820022) ||
-    (quest.taskId >= 830001 && quest.taskId <= 830118)
-  ) {
-    if (quest.state === 1) return 'Return to the quest giver to submit your report.'
-    const step = quest.steps.find((s, i) => (quest.progress[i] ?? 0) < s.target)
-    return step ? (
-      <GameText
-        k={step.descriptionKey}
-        fallback="Open Details for your objective."
-        args={objectiveArgs(quest, quest.steps.indexOf(step), 0, step.target)}
-      />
-    ) : null
-  }
-  const { npcId } = questTarget(quest)
-  if (!npcId) return null
-  return (
-    <>
-      Talk to <NpcName npcId={npcId} fallback="them" />
-    </>
-  )
+  const index = quest.steps.findIndex((step, i) => (quest.progress[i] ?? 0) < step.target)
+  const step = quest.steps[index]
+  return step ? (
+    <GameText
+      k={step.descriptionKey}
+      fallback="Open Details for your objective."
+      args={objectiveArgs(quest, index, quest.progress[index] ?? 0, step.target)}
+    />
+  ) : null
 }
 
 /** "Talk to <NPC> in <area>" for a quest on offer. */

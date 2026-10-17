@@ -50,8 +50,7 @@ export const isVillage = (sceneId: number) => VILLAGES.includes(sceneId)
  * its last step once every step is done.
  */
 export function questTarget(quest: Quest): { sceneId?: number; npcId?: string } {
-  const navigation = (quest as Quest & { navigation?: { sceneId?: number; npcId?: string } })
-    .navigation
+  const navigation = quest.navigation
   if (navigation) return navigation
   const open = quest.steps.findIndex((step, i) => (quest.progress[i] ?? 0) < step.target)
   const args = stepArgs[quest.taskId]?.[open === -1 ? quest.steps.length - 1 : open] ?? []
