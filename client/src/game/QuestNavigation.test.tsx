@@ -85,6 +85,31 @@ function renderNavigation({
 }
 
 describe('QuestNavigation', () => {
+  it.each([0, 3, 6])('shows saved Scarlet kill progress %i/7', async (progress) => {
+    const { nav } = renderNavigation({
+      quests: [
+        {
+          ...newbiePackQuest,
+          taskId: 830004,
+          nameKey: 'lg_RebornQuest_830004_name',
+          state: 0,
+          progress: [progress],
+          steps: [
+            {
+              descriptionKey: 'lg_RebornQuest_830004_step_0',
+              descriptionArgs: ['lg_name_n32001'],
+              target: 7,
+            },
+          ],
+        },
+      ],
+    })
+    const list = await within(nav).findByRole('list', { name: 'Accepted quests' })
+    expect(await within(list).findByRole('listitem')).toHaveTextContent(
+      `Defeat 7 Scarlet. (${progress}/7)`,
+    )
+  })
+
   it("is Reborn's 340x160 panel with 55px rows", async () => {
     const { nav } = renderNavigation()
     expect(nav).toHaveClass('h-[160px]', 'w-[340px]', 'bottom-[80px]', 'right-[4px]')

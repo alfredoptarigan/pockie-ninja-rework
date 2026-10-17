@@ -85,6 +85,7 @@ export interface Quest {
 
 export interface QuestStep {
   descriptionKey: string
+  descriptionArgs?: string[]
   target: number
   /** Rookie command steps: use an item from the bag, or equip a weapon. */
   command?: 'use' | 'equip'

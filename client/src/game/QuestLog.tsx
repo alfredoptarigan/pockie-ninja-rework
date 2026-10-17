@@ -10,7 +10,7 @@ import { questStepArgs, questTarget, sceneNameKey } from './world'
 
 /** Reborn objectives receive local target keys with their quest response. */
 function objectiveArgs(quest: Quest, index: number, current: number, total: number) {
-  const step = quest.steps[index] as Quest['steps'][number] & { descriptionArgs?: string[] }
+  const step = quest.steps[index]!
   return (
     step.descriptionArgs?.map((key) => plainText(key, key)) ??
     questStepArgs(quest.taskId, index, current, total)
@@ -69,11 +69,15 @@ export function QuestHint({ quest }: { quest: Quest }) {
   const index = quest.steps.findIndex((step, i) => (quest.progress[i] ?? 0) < step.target)
   const step = quest.steps[index]
   return step ? (
-    <GameText
-      k={step.descriptionKey}
-      fallback="Open Details for your objective."
-      args={objectiveArgs(quest, index, quest.progress[index] ?? 0, step.target)}
-    />
+    <>
+      <GameText
+        k={step.descriptionKey}
+        fallback="Open Details for your objective."
+        args={objectiveArgs(quest, index, quest.progress[index] ?? 0, step.target)}
+      />
+      {/* Reborn descriptions contain target names; legacy templates already include progress. */}
+      {step.descriptionArgs && ` (${quest.progress[index] ?? 0}/${step.target})`}
+    </>
   ) : null
 }
 
