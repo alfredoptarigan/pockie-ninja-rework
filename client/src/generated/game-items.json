@@ -748,8 +748,7 @@
     "i150321": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i150322": { "file": "/assets/game/items/icon_debris91.webp", "width": 24, "height": 24 },
     "i150323": { "file": "/assets/game/items/icon_debris91.webp", "width": 24, "height": 24 },
@@ -1171,8 +1170,7 @@
     "i159086": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159087": { "file": "/assets/game/items/icon_debris24.webp", "width": 24, "height": 24 },
     "i159088": { "file": "/assets/game/items/icon_debris225.webp", "width": 24, "height": 24 },
@@ -1193,38 +1191,32 @@
     "i159104": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159105": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159106": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159107": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159108": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159109": {
       "file": "/assets/game/items/icon_debris114.webp",
       "width": 51,
-      "height": 51,
-      "textRemoved": true
+      "height": 51
     },
     "i159110": { "file": "/assets/game/items/icon_debris221.webp", "width": 50, "height": 50 },
     "i159111": { "file": "/assets/game/items/icon_debris324.webp", "width": 51, "height": 51 },

@@ -7,8 +7,12 @@ Import `gameItems`, `gameWeapons` and `gameWorldMap` from
 `client/src/generated/game-extra.ts`. Item icons are indexed by item ID and shared by resource
 when several items use the same image. Coverage includes the game-text quest/field scope,
 recursive box drops, the newbie pack, class weapons, early HP items and exploration factories.
-Six resources bake labels into their bitmaps: the exporter repaints the EXP/soul label areas
-and crops the promotional logo from the gift. Those icons carry `textRemoved: true`.
+Five resources bake labels into their bitmaps: the exporter repaints the EXP/soul label areas.
+Those icons carry `textRemoved: true`. The gift (`icon_debris114`) instead uses the complete
+English-branded Reborn asset from `/assets/icons/items/etc/114.png`, captured under
+`data/reborn-raw/assets/icons/items/etc/114.png` (or `REBORN_RAW_DIR`). Keep the full image:
+cropping its logo also cuts off the box. The output remains shared by the backup gift item IDs;
+Reborn's current item 159104 is a different item and must not replace our newbie pack mapping.
 
 Weapon coverage matches every outfit in the existing body manifest, with every compatible M2 weapon,
 plus the outfit's own-type skin of every weapon number (Reborn draws a weapon of another type as

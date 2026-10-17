@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import sharp from 'sharp'
 import { describe, expect, it } from 'vitest'
 import {
   gameItems,
@@ -26,6 +27,17 @@ const fileExists = (url: string) =>
   expect(existsSync(join(paths.root, 'client/public', url)), url).toBe(true)
 
 describe('M2 extra asset coverage', () => {
+  it('keeps the bottom of the Reborn newbie gift visible', async () => {
+    const icon = gameItems.items.i159104!
+    const { data } = await sharp(join(paths.root, 'client/public', icon.file))
+      .extract({ left: 0, top: 29, width: 51, height: 22 })
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true })
+    expect(data.some((value, index) => index % 4 === 3 && value > 0)).toBe(true)
+    expect(icon.textRemoved).toBeUndefined()
+  })
+
   it.skipIf(!hasBackup)(
     'covers every item with an icon in the backup, the M2 slice included',
     () => {

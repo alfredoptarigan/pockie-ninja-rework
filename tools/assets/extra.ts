@@ -4,7 +4,7 @@
 // anchors, at 14 fps.
 import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import sharp from 'sharp'
 import { decodeCompressedAmf3 } from '../game-data/amf3.ts'
 import { tableRows } from '../game-data/import.ts'
@@ -123,24 +123,23 @@ export function sliceItemIds() {
   return [...ids].sort()
 }
 
-// These six bitmap resources bake labels into the pixels. Keep the surrounding original art;
-// repaint only the label area (or crop the promotional logo off the gift). No text is exported.
+// These five bitmap resources bake labels into the pixels; repaint only their label areas.
 export const TEXT_FREE_ITEM_FIXES = [
   'icon_food82',
   'icon_food83',
   'icon_resume36',
   'icon_resume37',
   'icon_resume38',
-  'icon_debris114',
 ]
 async function textFreeItem(source: string, resource: string) {
   const key = resource.toLowerCase()
+  // Reborn's English-branded gift keeps the whole box; the backup has a Chinese logo.
+  if (key === 'icon_debris114')
+    return sharp(
+      resolve(process.env.REBORN_RAW_DIR ?? 'data/reborn-raw', 'assets/icons/items/etc/114.png'),
+    )
   const image = sharp(source)
   if (!TEXT_FREE_ITEM_FIXES.includes(key)) return image
-  if (key === 'icon_debris114')
-    return image
-      .extract({ left: 0, top: 0, width: 51, height: 29 })
-      .extend({ bottom: 22, background: '#0000' })
   const colors: Record<string, [string, string]> = {
     icon_food82: ['#d647ed', '#480b67'],
     icon_food83: ['#24b9f1', '#103777'],
