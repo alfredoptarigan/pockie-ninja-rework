@@ -1,5 +1,9 @@
 # Standing field bosses
 
+> Implementation history, not a verified Reborn rules specification. The
+> [2026-10-17 client audit](reborn-field-boss-client-audit.md) corrects the roster
+> and distinguishes displayed player level from actual combat level.
+
 Reverse engineered from the captured Reborn client `data/reborn-raw/re/main.js`
 (`Jv`, `$v`, `Zv`), `assets/scenes/npcs.json`, and `assets/entities/npcs`.
 The server roster and spawn coordinates come from `scene-timed-npcs.json`
