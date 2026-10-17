@@ -80,6 +80,31 @@ describe('pictureLayout', () => {
     expect(layout.figures.find((f) => f.key === 'npc:n21002')!.flip).toBe(true)
   })
 
+  it('draws the field boss at its spawn with a challenge action', () => {
+    const boss = {
+      id: 'n3201801',
+      fightId: 'n3201805',
+      nameKey: 'lg_name_n320180',
+      level: 25,
+      x: 1116,
+      y: 920,
+      scale: 100,
+      active: true,
+      startsAt: '2026-10-12T12:00:00Z',
+      endsAt: '2026-10-12T12:30:00Z',
+      ticketItemId: 'i150078',
+      ticketNameKey: 'lg_Debris78_itemname',
+      tickets: 0,
+    }
+    const layout = pictureLayout({ ...field, ticketBoss: boss })!
+    expect(layout.figures.find((figure) => figure.key === 'boss:n3201801')).toMatchObject({
+      x: 1116,
+      y: 920,
+      label: 'Demon Brute',
+      boss,
+    })
+  })
+
   it('opens the Explore window from the field’s explore tree', () => {
     const layout = pictureLayout({ ...field, exploreSpots: ['21011', '21012'] }, 'OutCity_1110')!
     expect(layout.explore).toMatchObject({

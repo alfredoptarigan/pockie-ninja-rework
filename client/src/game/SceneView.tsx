@@ -1,6 +1,6 @@
 import type { Character } from '@pockie/shared'
 import { isWorn } from './inventory/EquipmentSlots'
-import { useCallback, useContext, useState, type ReactNode } from 'react'
+import { useCallback, useContext, useEffect, useEffectEvent, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import {
@@ -19,11 +19,11 @@ import { FightSummary } from './FightSummary'
 import { HudLayer } from './Hud'
 import { DropsMenu, lockReason, MonsterRow } from './MonsterDrops'
 import { ReviveWindow } from './ReviveWindow'
-import { TicketBossPanel } from './TicketBoss'
+import { TicketBossInfo, TicketBossPanel } from './TicketBoss'
 import { Dialog, GameButton, Notice } from './skin'
 import { BattleReplayMount, ScenePictureMount } from './stage'
 import { plainText } from './text'
-import type { BagHighlight, FightResult, SceneMonster, SceneNpc } from './types'
+import type { BagHighlight, FightResult, SceneMonster, SceneNpc, TicketBoss } from './types'
 import type { AkatsukiAmbush as Ambush } from '../../../shared/src/schemas/akatsuki'
 import { useOpenWindow } from './windows'
 import { DEFEATED_REASON, isDefeated, sceneBuildings } from './world'
@@ -97,6 +97,8 @@ export function SceneView({
     [queryClient],
   )
   const ticketBoss = scene.data?.ticketBoss
+  const [bossInfo, setBossInfo] = useState<TicketBoss | null>(null)
+  const [autoBoss, setAutoBoss] = useState<SceneMonster | null>(null)
   // The HUD keeps its pre-fight values while the replay plays (or until it is skipped).
   const finishReplay = () => {
     if (fightState && !fightState.applied) applyResult(fightState.result)
@@ -135,9 +137,21 @@ export function SceneView({
         setDefeatedBy(plainText(monster.nameKey, 'a monster'))
       }
     } catch {
+      setAutoBoss(null)
       // shown from fight.error below
     }
   }
+
+  const repeatBoss = useEffectEvent(() => {
+    if (!autoBoss || defeated || ticketBoss?.id !== autoBoss.id) return setAutoBoss(null)
+    setFightState(null)
+    void startFight(autoBoss)
+  })
+  useEffect(() => {
+    if (!autoBoss || !fightState?.finished) return
+    const timer = setTimeout(repeatBoss, 800)
+    return () => clearTimeout(timer)
+  }, [autoBoss, fightState?.finished])
 
   return (
     <>
@@ -147,6 +161,7 @@ export function SceneView({
           onReady={() => onReady?.(character.sceneId)}
           exploreClip={exploreClip(explore.data?.spots)}
           onNpc={onNpc}
+          onBoss={setBossInfo}
           onExplore={() => setExploring(true)}
           onBuilding={(clip) => openWindow(clip === 'clip_pet' ? 'pets' : 'cardRoom')}
         />
@@ -181,6 +196,31 @@ export function SceneView({
           </>,
           hudLayer,
         )}
+      {autoBoss &&
+        inHud(
+          <GameButton
+            className="pointer-events-auto absolute top-[130px] left-1/2 z-50"
+            onClick={() => setAutoBoss(null)}
+          >
+            Stop Auto
+          </GameButton>,
+        )}
+      {bossInfo && ticketBoss?.id === bossInfo.id && (
+        <TicketBossInfo
+          boss={ticketBoss}
+          disabled={fight.isPending || defeated}
+          onClose={() => setBossInfo(null)}
+          onFight={() => {
+            setBossInfo(null)
+            void startFight(ticketBoss)
+          }}
+          onAuto={() => {
+            setBossInfo(null)
+            setAutoBoss(ticketBoss)
+            void startFight(ticketBoss)
+          }}
+        />
+      )}
       <ExploreWindow
         character={character}
         scene={scene.data}
@@ -204,6 +244,11 @@ export function SceneView({
                         {label}
                       </GameButton>
                     ),
+                  )}
+                  {ticketBoss && (
+                    <GameButton small onClick={() => setBossInfo(ticketBoss)}>
+                      Challenge {plainText(ticketBoss.nameKey, 'Demon Boss')}
+                    </GameButton>
                   )}
                   {scene.data.npcs.length === 0 ? (
                     <p>Nobody is around.</p>

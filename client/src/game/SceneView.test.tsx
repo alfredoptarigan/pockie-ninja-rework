@@ -141,6 +141,41 @@ describe('SceneView', () => {
     expect(screen.queryByRole('dialog', { name: 'Victory' })).not.toBeInTheDocument()
   })
 
+  it('opens a boss challenge and stops Auto when the last proof is spent', async () => {
+    const boss = {
+      id: 'n3201801',
+      fightId: 'n3201802',
+      nameKey: 'lg_name_n320180',
+      level: 10,
+      x: 1116,
+      y: 920,
+      scale: 100,
+      active: true,
+      startsAt: '2026-10-12T12:00:00Z',
+      endsAt: '2099-10-12T12:30:00Z',
+      ticketItemId: 'i150078',
+      ticketNameKey: 'lg_Debris78_itemname',
+      tickets: 1,
+    }
+    let attempts = 0
+    mockApi({
+      ...armed,
+      'GET /api/game/scene': () => json({ ...field, ticketBoss: boss }),
+      'POST /api/game/fight': () =>
+        ++attempts === 1
+          ? json(fightResult)
+          : apiError(400, 'no_ticket', 'You need a Demon Proof of Suppression to fight it.'),
+    })
+    renderWithProviders(<SceneView character={{ ...character, sceneId: 2101 }} onNpc={vi.fn()} />)
+    await userEvent.click(await screen.findByRole('button', { name: 'Challenge Demon Brute' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Auto' }))
+    await screen.findByRole('button', { name: 'Stop Auto' })
+    await waitFor(() => expect(attempts).toBe(2), { timeout: 2500 })
+    await waitFor(() =>
+      expect(screen.queryByRole('button', { name: 'Stop Auto' })).not.toBeInTheDocument(),
+    )
+  })
+
   it('keeps the HUD at the pre-fight values until the replay is over', async () => {
     mockApi({
       ...armed,

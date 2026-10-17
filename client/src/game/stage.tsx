@@ -80,6 +80,7 @@ function useLatest<T>(value: T) {
 export function ScenePictureMount({
   scene,
   onNpc,
+  onBoss,
   onExplore,
   onBuilding,
   exploreClip,
@@ -87,6 +88,7 @@ export function ScenePictureMount({
 }: {
   scene: SceneView
   onNpc: (npc: SceneNpc) => void
+  onBoss?: PictureActions['onBoss']
   /** The field's explore tree was clicked. */
   onExplore?: () => void
   /** A village building without its own NPC menu was clicked (the Pet Kennel, the Card Room). */
@@ -95,7 +97,7 @@ export function ScenePictureMount({
   exploreClip?: string
   onReady?: () => void
 }) {
-  const latest = useLatest({ onNpc, onExplore, onBuilding, onReady })
+  const latest = useLatest({ onNpc, onBoss, onExplore, onBuilding, onReady })
   const key = useMemo(() => ({ scene, exploreClip }), [scene, exploreClip])
   const { ref, failed } = useStage(key, (stage, parent) =>
     stage.mountPicture(
@@ -103,6 +105,7 @@ export function ScenePictureMount({
       scene,
       {
         onNpc: (npc) => latest.current.onNpc(npc),
+        onBoss: (boss) => latest.current.onBoss?.(boss),
         onReady: () => latest.current.onReady?.(),
         onExplore: () => latest.current.onExplore?.(),
         onBuilding: (clip) => latest.current.onBuilding?.(clip),

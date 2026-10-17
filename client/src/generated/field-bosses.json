@@ -1,0 +1,368 @@
+{
+  "n3201801": {
+    "sheet": {
+      "frameWidth": 366,
+      "frameHeight": 361,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 98, "y": 331 },
+      "file": "/assets/game/field-bosses/10019.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 35.125, "y": -384.65 }
+  },
+  "n3202501": {
+    "sheet": {
+      "frameWidth": 349,
+      "frameHeight": 408,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 95, "y": 382 },
+      "file": "/assets/game/field-bosses/10026.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 29.5, "y": -425.25 }
+  },
+  "n310070": {
+    "sheet": {
+      "frameWidth": 291,
+      "frameHeight": 457,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 154, "y": 428 },
+      "file": "/assets/game/field-bosses/10039.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": -8.5, "y": -466.5 }
+  },
+  "n3201821": {
+    "sheet": {
+      "frameWidth": 366,
+      "frameHeight": 361,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 98, "y": 331 },
+      "file": "/assets/game/field-bosses/10019.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 35.125, "y": -384.65 }
+  },
+  "n3202521": {
+    "sheet": {
+      "frameWidth": 349,
+      "frameHeight": 408,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 95, "y": 382 },
+      "file": "/assets/game/field-bosses/10026.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 29.5, "y": -425.25 }
+  },
+  "n310080": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10040/stand.webp",
+      "frameWidth": 273,
+      "frameHeight": 402,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 147, "y": 371 },
+      "labels": {}
+    },
+    "nameOffset": { "x": -10.5, "y": -383 }
+  },
+  "n3201841": {
+    "sheet": {
+      "frameWidth": 366,
+      "frameHeight": 361,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 98, "y": 331 },
+      "file": "/assets/game/field-bosses/10019.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 35.125, "y": -384.65 }
+  },
+  "n3202541": {
+    "sheet": {
+      "frameWidth": 349,
+      "frameHeight": 408,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 95, "y": 382 },
+      "file": "/assets/game/field-bosses/10026.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 29.5, "y": -425.25 }
+  },
+  "n310110": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10043/stand.webp",
+      "frameWidth": 248,
+      "frameHeight": 392,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 138, "y": 372 },
+      "labels": {}
+    },
+    "nameOffset": { "x": -14, "y": -384 }
+  },
+  "n3201861": {
+    "sheet": {
+      "frameWidth": 366,
+      "frameHeight": 361,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 98, "y": 331 },
+      "file": "/assets/game/field-bosses/10019.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 35.125, "y": -384.65 }
+  },
+  "n3202561": {
+    "sheet": {
+      "frameWidth": 349,
+      "frameHeight": 408,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 95, "y": 382 },
+      "file": "/assets/game/field-bosses/10026.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 29.5, "y": -425.25 }
+  },
+  "n310100": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10042/stand.webp",
+      "frameWidth": 252,
+      "frameHeight": 403,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 128, "y": 372 },
+      "labels": {}
+    },
+    "nameOffset": { "x": -2, "y": -384 }
+  },
+  "n3201881": {
+    "sheet": {
+      "frameWidth": 366,
+      "frameHeight": 361,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 98, "y": 331 },
+      "file": "/assets/game/field-bosses/10019.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 35.125, "y": -384.65 }
+  },
+  "n3202581": {
+    "sheet": {
+      "frameWidth": 349,
+      "frameHeight": 408,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 95, "y": 382 },
+      "file": "/assets/game/field-bosses/10026.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 29.5, "y": -425.25 }
+  },
+  "n310090": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10041/stand.webp",
+      "frameWidth": 275,
+      "frameHeight": 398,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 144, "y": 370 },
+      "labels": {}
+    },
+    "nameOffset": { "x": -6.5, "y": -382 }
+  },
+  "n320140": {
+    "sheet": {
+      "frameWidth": 477,
+      "frameHeight": 413,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 112, "y": 384 },
+      "file": "/assets/game/field-bosses/10015.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 25.77499999999999, "y": -426.15 }
+  },
+  "n320310": {
+    "sheet": {
+      "frameWidth": 353,
+      "frameHeight": 488,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 88, "y": 457 },
+      "file": "/assets/game/field-bosses/10032.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 23.77499999999999, "y": -510.5 }
+  },
+  "n310030": {
+    "sheet": {
+      "frameWidth": 429,
+      "frameHeight": 363,
+      "columns": 9,
+      "frames": 9,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 184, "y": 384 },
+      "file": "/assets/game/field-bosses/10035.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": -19.5, "y": -384 }
+  },
+  "n330040": {
+    "sheet": {
+      "frameWidth": 319,
+      "frameHeight": 475,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 165, "y": 449 },
+      "file": "/assets/game/field-bosses/10052.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": -5.5, "y": -487.3 }
+  },
+  "n310010": {
+    "sheet": {
+      "frameWidth": 292,
+      "frameHeight": 403,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 127, "y": 375 },
+      "file": "/assets/game/field-bosses/10034.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 19, "y": -417.8 }
+  },
+  "n320300": {
+    "sheet": {
+      "frameWidth": 365,
+      "frameHeight": 376,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 86, "y": 346 },
+      "file": "/assets/game/field-bosses/10031.webp",
+      "labels": {}
+    },
+    "nameOffset": { "x": 46.5, "y": -367.45 }
+  },
+  "n310020": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10003/stand.webp",
+      "frameWidth": 406,
+      "frameHeight": 424,
+      "columns": 9,
+      "frames": 9,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 178, "y": 393 },
+      "labels": { "MotionStart": 0, "MotionOver": 8 }
+    },
+    "nameOffset": { "x": 25, "y": -405 }
+  },
+  "n320190": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10020/stand.webp",
+      "frameWidth": 246,
+      "frameHeight": 442,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 101, "y": 415 },
+      "labels": { "MotionStart": 0, "MotionOver": 7 }
+    },
+    "nameOffset": { "x": 22, "y": -427 }
+  },
+  "n320170": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/10018/stand.webp",
+      "frameWidth": 345,
+      "frameHeight": 423,
+      "columns": 8,
+      "frames": 8,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 102, "y": 393 },
+      "labels": { "MotionStart": 0, "MotionOver": 7 }
+    },
+    "nameOffset": { "x": 70.5, "y": -405 }
+  },
+  "n3102100": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/31021/stand.webp",
+      "frameWidth": 450,
+      "frameHeight": 389,
+      "columns": 9,
+      "frames": 10,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 237, "y": 337 },
+      "labels": { "MotionStart": 0, "MotionOver": 9 }
+    },
+    "nameOffset": { "x": -12, "y": -349 }
+  },
+  "n3102200": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/31022/stand.webp",
+      "frameWidth": 375,
+      "frameHeight": 359,
+      "columns": 10,
+      "frames": 11,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 180, "y": 320 },
+      "labels": { "MotionStart": 0, "MotionOver": 10 }
+    },
+    "nameOffset": { "x": 7.5, "y": -332 }
+  },
+  "n3102120": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/3102120/stand.webp",
+      "frameWidth": 212,
+      "frameHeight": 409,
+      "columns": 19,
+      "frames": 27,
+      "durations": [
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1
+      ],
+      "anchor": { "x": 119, "y": 383 },
+      "labels": { "MotionStart": 0, "MotionOver": 27 }
+    },
+    "nameOffset": { "x": -13, "y": -395 }
+  },
+  "n3102140": {
+    "sheet": {
+      "file": "/assets/game/field-bosses/31032/stand.webp",
+      "frameWidth": 375,
+      "frameHeight": 359,
+      "columns": 10,
+      "frames": 11,
+      "durations": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "anchor": { "x": 180, "y": 320 },
+      "labels": { "MotionStart": 0, "MotionOver": 10 }
+    },
+    "nameOffset": { "x": 7.5, "y": -332 }
+  }
+}

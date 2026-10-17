@@ -213,7 +213,7 @@ export async function worldRoutes(app: FastifyInstance, { db }: { db: Db }) {
       // Reborn: a field fight needs energy ("No energy left").
       await spendEnergy(tx, character, ENERGY_RULES.fieldFightCost)
 
-      const result = await fightMonster(tx, character, opponent)
+      const result = await fightMonster(tx, character, opponent, undefined, monsterId)
       if (result.won) await recordBossKill(tx, character.id, opponent, character.sceneId)
       if (result.won) await recordHuntKill(tx, character.id, opponent)
       const akatsukiAmbush = result.won ? await rollFieldAmbush(tx, character) : null

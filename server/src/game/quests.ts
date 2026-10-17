@@ -64,10 +64,10 @@ export function questLocation(taskId: number, nation: number, phase: 'accept' | 
   )
 }
 
-/** Navigation sent with Reborn quests, independent of the original client's static step table. */
+/** Ready quests return to their giver; Reborn objectives use character-local navigation. */
 export function questNavigation(quest: QuestProgress, nation: number) {
-  if (!isRebornQuest(quest.taskId)) return undefined
   if (quest.state === READY) return questLocation(quest.taskId, nation, 'submit')
+  if (!isRebornQuest(quest.taskId)) return undefined
   const step = subTasks(quest.taskId).find(
     (step) => (quest.progress[Number(step.SetpSeq)] ?? 0) < stepTarget(step),
   )

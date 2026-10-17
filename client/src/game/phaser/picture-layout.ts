@@ -7,7 +7,8 @@ import {
   type MotionSheet,
 } from '../../generated/game-assets'
 import { plainText } from '../text'
-import type { SceneNpc, SceneView } from '../types'
+import bossArt from '../../generated/field-bosses.json'
+import type { TicketBoss, SceneNpc, SceneView } from '../types'
 import worldData from '../world-data.json'
 
 const buildings = worldData.buildings as Record<string, Record<string, string>>
@@ -31,7 +32,9 @@ export interface PictureFigure {
   scale: number
   flip: boolean
   label: string
-  npc: SceneNpc
+  npc?: SceneNpc
+  boss?: TicketBoss
+  nameOffset?: { x: number; y: number }
 }
 
 export interface PictureLayout {
@@ -99,6 +102,26 @@ export function pictureLayout(scene: SceneView, exploreClip?: string): PictureLa
       },
     ]
   })
+
+  const boss = scene.ticketBoss
+  if (boss) {
+    const outdoor = (
+      bossArt as Record<string, { sheet: MotionSheet; nameOffset: { x: number; y: number } }>
+    )[boss.id]
+    const sheet = outdoor?.sheet
+    if (sheet)
+      npcs.push({
+        key: `boss:${boss.id}`,
+        sheet,
+        x: boss.x,
+        y: boss.y,
+        scale: Math.abs(boss.scale || 100) / 100,
+        flip: boss.scale < 0,
+        label: plainText(boss.nameKey, 'Demon Boss'),
+        boss,
+        nameOffset: outdoor?.nameOffset,
+      })
+  }
 
   const explore = exploreClip ? art.hotspots[exploreClip] : undefined
 

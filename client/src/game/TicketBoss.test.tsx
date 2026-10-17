@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import { countdown, TicketBossPanel } from './TicketBoss'
+import { countdown, TicketBossInfo, TicketBossPanel } from './TicketBoss'
+import { renderWithProviders } from '../test/utils'
 import type { TicketBoss } from './types'
 
 const NOW = Date.parse('2026-10-12T12:15:00Z')
@@ -51,5 +52,36 @@ describe('TicketBossPanel', () => {
     renderPanel({ ...boss, active: false, startsAt: '2026-10-12T13:10:00.000Z', tickets: 0 })
     expect(screen.getByRole('timer')).toHaveTextContent('Appears in')
     expect(screen.getByRole('button', { name: 'Fight' })).toBeDisabled()
+  })
+})
+
+describe('TicketBossInfo', () => {
+  it('shows the proof count and supports Fight, Auto and Cancel', async () => {
+    const onFight = vi.fn(),
+      onAuto = vi.fn(),
+      onClose = vi.fn()
+    renderWithProviders(
+      <TicketBossInfo boss={boss} onFight={onFight} onAuto={onAuto} onClose={onClose} />,
+    )
+    expect(screen.getByText('Demon Proofs:')).toHaveTextContent('Demon Proofs: 1')
+    for (const label of ['Fight', 'Auto', 'Cancel'])
+      await userEvent.click(screen.getByRole('button', { name: label }))
+    expect(onFight).toHaveBeenCalledOnce()
+    expect(onAuto).toHaveBeenCalledOnce()
+    expect(onClose).toHaveBeenCalledOnce()
+  })
+
+  it.each([{ tickets: 0 }, { active: false }])('blocks challenge when %j', (change) => {
+    renderWithProviders(
+      <TicketBossInfo
+        boss={{ ...boss, ...change }}
+        onFight={vi.fn()}
+        onAuto={vi.fn()}
+        onClose={vi.fn()}
+      />,
+    )
+    expect(screen.getByRole('button', { name: 'Fight' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Auto' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeEnabled()
   })
 })

@@ -136,6 +136,38 @@ describe('ticket bosses (RefresHeartNpc, AttackItemConfig i150078)', () => {
     })
   })
 
+  it('counts the level variant kill for Slay the Demon in every village', async () => {
+    at('2026-10-12T12:15:00Z')
+    const villages = [
+      [2101, 50007, 'n3201801'],
+      [2201, 52007, 'n3201821'],
+      [2301, 54007, 'n3201841'],
+      [2401, 56007, 'n3201861'],
+      [2501, 58007, 'n3201881'],
+    ] as const
+    await give('i260112', 1, 'Weapon')
+    await give('i150078', villages.length * 20)
+    for (const [sceneId, taskId, monsterId] of villages) {
+      await set({ sceneId, level: 6 })
+      await accept(taskId)
+      await win(monsterId)
+      const [quest] = await db
+        .select()
+        .from(characterQuests)
+        .where(eq(characterQuests.taskId, taskId))
+      expect(quest, `quest ${taskId}`).toMatchObject({ progress: [1], state: 1 })
+      const giver = `n${(sceneId / 100) | 0}001`
+      const quests = (await client.get('/api/game/quests')).json().quests
+      expect(quests.find((q: { taskId: number }) => q.taskId === taskId).navigation).toEqual({
+        sceneId,
+        npcId: giver,
+      })
+      const submitted = await client.post(`/api/game/npcs/${giver}/talk`)
+      expect(submitted.statusCode).toBe(200)
+      expect(submitted.json().completed).toContain(taskId)
+    }
+  })
+
   it('uses up one ticket per fight against the level variant (LevelAttackRec)', async () => {
     at('2026-10-12T12:15:00Z')
     await give('i150078', 2)

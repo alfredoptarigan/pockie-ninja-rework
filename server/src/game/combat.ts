@@ -270,6 +270,8 @@ export async function fightMonster(
   character: CharacterRow,
   monsterId: string,
   minHp = DEFEATED_HP,
+  // Ticket bosses fight a level variant but quests target the standing boss.
+  questMonsterId = monsterId,
 ) {
   const seed = randomInt(2 ** 31)
   const equipped = await equippedGear(tx, character.id)
@@ -330,8 +332,8 @@ export async function fightMonster(
       for (const update of updates) changed.add(update.taskId)
       progress = progress.map((q) => updates.find((u) => u.taskId === q.taskId) ?? q)
     }
-    const questItems = questItemDrops(progress, monsterId, character.sceneId, random, dropMul)
-    apply(recordKill(progress, monsterId, character.sceneId))
+    const questItems = questItemDrops(progress, questMonsterId, character.sceneId, random, dropMul)
+    apply(recordKill(progress, questMonsterId, character.sceneId))
     // Quest items take the last bag rows first; a full bag loses the rest of the loot.
     const keptQuestItems = await grantDrops(
       tx,

@@ -1,7 +1,7 @@
 // Phaser scene picture: layers at original coordinates, hoverable and clickable buildings, NPCs
 // and monsters with English labels. Loaded lazily by ../stage.tsx.
 import { gameMotions } from '../../generated/game-assets'
-import type { SceneNpc } from '../types'
+import type { SceneNpc, TicketBoss } from '../types'
 import { createGame, LABEL_STYLE, loadSheet, setHighlight } from './game'
 import { frameAt, originOf, tickMs } from './motion'
 import type { PictureLayout } from './picture-layout'
@@ -9,6 +9,7 @@ import Phaser from 'phaser'
 
 export interface PictureActions {
   onNpc: (npc: SceneNpc) => void
+  onBoss?: (boss: TicketBoss) => void
   onReady?: () => void
   onExplore?: () => void
   onBuilding?: (clip: 'clip_pet' | 'clip_CardLink') => void
@@ -93,7 +94,20 @@ class PictureScene extends Phaser.Scene {
         .setFlipX(figure.flip)
       this.animated.push({ sprite, durations: figure.sheet.durations })
       const npc = figure.npc
-      this.interactive(sprite, figure.label, () => this.actions.onNpc(npc))
+      this.interactive(sprite, figure.boss ? '' : figure.label, () => {
+        if (figure.boss) this.actions.onBoss?.(figure.boss)
+        else if (npc) this.actions.onNpc(npc)
+      })
+      if (!figure.boss) continue
+      const bounds = sprite.getBounds()
+      this.add
+        .text(
+          figure.nameOffset ? figure.x + figure.nameOffset.x : bounds.centerX,
+          figure.nameOffset ? figure.y + figure.nameOffset.y : bounds.top - 12,
+          figure.label,
+          { ...LABEL_STYLE, fontSize: '40px', color: '#ffc678', strokeThickness: 6 },
+        )
+        .setOrigin(0.5, 1)
     }
 
     if (ready(skybox)) this.add.image(0, 0, skybox).setOrigin(0)
